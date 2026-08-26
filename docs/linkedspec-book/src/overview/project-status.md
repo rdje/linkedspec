@@ -109,12 +109,14 @@ emitted results from fresh host-only authority with no live state serialized. Th
 once in ordinary phase-0 and canonical CI, and only Perl rollout is complete. Generated format, function-body v1,
 public `parse_job(...)`, and outward behavior remain unchanged. Mandatory
 history segment `4991` remains finitely authorized by ADR `0089` at 22 files / 21 manifest records. Fresh
-Rust `.14.7.4.0-.1` now freeze one exact outer-cfg consumer and add only private declaration behavior. Ordinary
-Cargo discovery runs zero tests. The opt-in path keeps current function-body v1 GREEN, denies general `expr-v1`
-through the narrow registry, and lowers exact assignment-form `parse_job` to one inert detached marker with strict
-literal options, exact text, and typed direct/ordered-derived Unicode-scalar provenance. Native, reconstructed,
-generated-plan, and independently compiled emitted logical routes agree. Canonical CI has zero references, Rust
-rollout stays pending, and only `.14.7.4.2` caller-frozen authority remains RED. Focused proof found two unrelated
+Rust `.14.7.4.0-.2` now freeze one exact outer-cfg consumer and add private declaration plus current-depth
+authority. Ordinary Cargo discovery runs zero tests. The opt-in path keeps current function-body v1 GREEN, denies
+general `expr-v1` through the narrow registry, and lowers exact assignment-form `parse_job` to one inert detached
+marker with strict literal options, exact text, and typed direct/ordered-derived Unicode-scalar provenance. A
+separate caller-frozen already-compiled registry performs pure resolution, selected-top-before-job-id identity,
+plan-only run-local caching, isolated deterministic current-depth execution, detached atomic stitching, and all
+result/failure policies. Canonical CI has zero references, Rust rollout stays pending, and only `.14.7.4.3`
+recurrence/bounds/rebasing remains RED. Focused `.1` proof found two unrelated
 pre-existing Rust validation/trace defects. `TRACE-OBSERVABILITY.5.1` now restores ordinary/traced progressive
 static-validation equality with an exact diagnostic regression. `.5.2` now restores exactly one existing child-
 dispatch/result event pair on normal and gap-aware interpreted/generated entry; trace controls pass 11/11 with

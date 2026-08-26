@@ -1,13 +1,13 @@
 # MEMORY
 
-- activation_commit: `0411758f061a444d8d5f64cc7c5d3e5816937c35` — exact clean `.5.3` base for task-tree-first
-  corrective `TRACE-OBSERVABILITY.5.4`; brief cleared; no push.
-- latest_completed_leaf: intended `TRACE-OBSERVABILITY.5.4 - align staged admission proof`; Perl proof matches 79
-  mutations/Rust `dormant_red`, passes 143/143 plus canonical signoff, and closes corrective `.5`.
-- active_work_unit: none after the intended `.5.4` commit; corrective `.5` and the trace tree are done.
-- next_action: from the exact clean `.5.4` commit, activate staged Rust `FUTURE-PARITY-BACKLOG.14.7.4.2` and
-  implement only caller-frozen resolution/cache/result/failure authority.
-- in_flight_uncommitted: none after the intended `.5.4` commit; no background job remains.
+- activation_commit: `17177e40f223cba3b36f3a061cab0dab3ec4d520` — exact clean corrective-closeout base for
+  task-tree-first Rust staged `FUTURE-PARITY-BACKLOG.14.7.4.2`; brief cleared; no push.
+- latest_completed_leaf: intended `FUTURE-PARITY-BACKLOG.14.7.4.2 - add Rust staged current-depth authority`;
+  private pure resolution/cache, isolated one-depth execution, and all result/failure policies are complete.
+- active_work_unit: none after the intended `.14.7.4.2` commit; ordinary/canonical dormancy and pending rollout hold.
+- next_action: from the exact clean `.14.7.4.2` commit, activate `FUTURE-PARITY-BACKLOG.14.7.4.3` and implement
+  only recursive scheduling, decreasing-chain/cycle/resource bounds, and original-source diagnostic rebasing.
+- in_flight_uncommitted: none after the intended `.14.7.4.2` commit; no background job remains.
 - blockers: none.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -51,10 +51,8 @@
   9 rollout legs, 35 owners, and 79 mutations after Rust dormant marker/provenance. Perl `.14.7.3.1-.4` now provide the private marker/provenance,
   caller-frozen resolution/cache/policies, breadth-first recurrence, strict chains/shared resources, and source
   rebasing plus four fresh-authority carriers at 143/143. Only Perl is admitted; format/public/outward behavior is
-  unchanged. Rust `.14.7.4.0-.1` freeze zero ordinary tests and add only an inert detached marker, strict literal
-  options, live-span direct/ordered-derived provenance, malformed/transaction closure, and four equal logical
-  carrier observations. Only `.4.2` caller-frozen authority remains RED; Rust rollout remains pending. Focused
-  proof exposed two pre-existing trace defects; `.5.1` fixes traced progressive validation and `.5.2` fixes gap-
-  aware child-dispatch events. `.5.3` repairs the stale authority route; `.5.4` aligns the admitted Perl snapshot to
-  Rust dormant-RED truth and closes the corrective tree.
-- latest_bootstrap_read: 2026-08-26 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox are reviewed. `.5.4` changes only two Perl proof expectations to current neutral truth from `e37a8b77`; production/registry/format/rollout/public/other-backend behavior is fixed. Intended commit: `TRACE-OBSERVABILITY.5.4 - align staged admission proof`; staged Rust `.14.7.4.2` is next from clean handoff.
+  unchanged. Rust `.14.7.4.0-.2` retain zero ordinary tests and add an inert detached marker, strict literal
+  options, live-span direct/ordered-derived provenance, pure caller-frozen resolution/cache, isolated complete-
+  depth ordering, detached atomic stitching, and all four result/three failure policies. Only `.4.3` recurrence,
+  bounds, and rebasing remain RED; Rust rollout remains pending. Corrective `.5.1-.4` are closed.
+- latest_bootstrap_read: 2026-08-26 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox are reviewed. `.14.7.4.2` adds only private dormant current-depth authority from clean `17177e40`; v1/v2 formats, carrier/admission/rollout/public/other-backend behavior stay fixed. Intended commit: `FUTURE-PARITY-BACKLOG.14.7.4.2 - add Rust staged current-depth authority`; `.14.7.4.3` is next from clean handoff.

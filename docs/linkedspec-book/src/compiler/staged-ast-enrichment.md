@@ -3,9 +3,9 @@
 > Status: executable backend-neutral design. General `parse_job(...)` authoring is not yet public. Perl now has a
 > privately admitted marker, caller-frozen recursive authority, and four fresh-authority carriers with a
 > fully GREEN 143-check oracle;
-> Rust has one private dormant marker/provenance implementation whose current-v1 and four logical-carrier
-> observations pass before one exact missing caller-frozen-authority RED, but no Rust staged-v2 execution authority
-> or rollout;
+> Rust has one private dormant marker/provenance plus current-depth authority implementation whose current-v1,
+> logical-carrier, resolution/cache, isolation, and policy observations pass before one exact recurrence/bounds/
+> rebasing RED, but no Rust carrier admission or rollout;
 > the current shipped five-backend/six-runtime implementation still supports only the narrow function-body v1
 > adapter described below.
 
@@ -298,7 +298,8 @@ host handle.
 Perl is privately admitted, but the language ledger still classifies `parse_job` as non-public until the separately
 owned `.14.7.9` closeout. Function-body v1 and generated-source v2 remain unchanged.
 
-Rust `.14.7.4.0-.1` freeze the next backend boundary and implement only its private declaration carrier. Ordinary
+Rust `.14.7.4.0-.2` freeze the next backend boundary and implement its private declaration plus current-depth
+authority. Ordinary
 Cargo discovery sees the exact consumer but activates zero tests; canonical CI does not mention it. With its
 dedicated cfg enabled, current function-body v1 still proves deterministic queue order, built-in resolution/load/
 compile/execute/cache, exact `replace_field` / `body_ast` / `fail`, and complete wrong-top context. A general
@@ -332,8 +333,28 @@ Native execution, normalized JSON reconstruction, generated-plan execution, and 
 source preserve the same logical node and produce equal detached `STAGED_PARSE_JOB_MARKER` values with one
 `staged_parse_job_v2` record. That record contains exact text, normalized logical options, origin, and typed
 provenance—but no parser, registry, callback, source snapshot, scheduler, cache, path, cancellation, budget, queue,
-or host authority. It declares intent only. The final assertion therefore advances to missing caller-frozen
-resolution/cache/result/failure authority owned by `.14.7.4.2`; Rust rollout remains pending through admission
+or host authority. It declares intent only.
+
+An outer caller can now give Rust one immutable `FrozenStagedRegistry` whose candidate outcomes and opaque
+callbacks are already resolved and compiled. The post-AST resolver performs only pure alias, declaring-relative,
+ordered-search-root, and ordered-provider selection. It cannot load, query a provider, consult a path or the
+environment, compile, enumerate imports, or mutate the snapshot. Version, top, capabilities, policies, source
+detail, and ceilings can only narrow what the caller supplied.
+
+Default top selection occurs before `parse_job:v2:sha256:<digest>`. A run-local cache stores immutable prepared
+callback plans only, keyed by content/import digests, contract versions, selected top, and sorted effective
+capabilities. Child results and failures are never cached, so a retry still executes and a new invocation starts
+with no cache state.
+
+For one complete marker depth, Rust prepares every resolution and stitch target before running any callback. It
+orders jobs by typed parent path, typed provenance, and job id; array path indices compare numerically. Each child
+gets fresh cursor, marks, captures, and variables. Detached node-bounded plain results publish atomically through
+`replace_marker`, `replace_field`, `sibling_field`, or `append_child`; failures use `fail`, `keep_text`, or
+`diagnostic_node`. Missing, colliding, wrong-kind, stale-marker, and live-result cases fail with portable staged
+diagnostics. A newly returned marker remains inert and is not rescanned.
+
+The final assertion therefore advances to `.14.7.4.3`'s missing breadth-first recurrence, decreasing-chain/cycle/
+shared-resource authority, and original-source diagnostic rebasing. Rust rollout remains pending through admission
 leaf `.4`.
 
 Publishing this boundary crossed the bounded `CHANGES.md` rollover threshold. The repository archived one complete

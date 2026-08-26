@@ -9,6 +9,19 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-26 (`FUTURE-PARITY-BACKLOG.14.7.4.2` — Rust staged current-depth authority): exact clean activation is
+  corrective-closeout commit `17177e40`; the focused leaf owns only private caller-frozen resolution/cache,
+  current-depth execution/isolation, result/failure stitching, and the same consumer's `.3` RED.
+- `staged_ast_enrichment.rs` freezes caller-completed candidate outcomes and opaque compiled callbacks. It performs
+  pure alias/relative/ordered-root/provider selection, narrows authority, selects default top before the v2 digest,
+  and caches only immutable plans under the neutral eight-field identity for one invocation.
+- Every current-depth job and stitch target prepares before callbacks; typed paths order array indices numerically,
+  siblings receive fresh cursor/mark/capture/variable state, and detached node-bounded results publish atomically
+  through four result plus three failure policies. Failures/results/partial work never poison the plan cache.
+- The module is private until carrier leaf `.4`; ordinary builds therefore diagnose its test-only seams as dead.
+  The allowance is conditional on the dormant cfg, the manifest registers that cfg, and `.4` owns allowance removal
+  with the first production carrier. Ordinary/canonical dormancy, v1/v2 formats, rollout, and outward truth stay fixed.
+
 - 2026-08-26 (`TRACE-OBSERVABILITY.5.4`): Git proves Rust dormant-RED `e37a8b77` advanced neutral mutations 78→79 and Rust consumer `pending_absent`→`dormant_red`; aligning only the admitted Perl snapshot restores 143/143 and canonical closeout without production/registry/format/rollout/public movement, while mandatory notes segment `4990` and ADR `0090` advance only finite history capacity to 18 files / 17 manifest lines.
 
 - 2026-08-26 (`TRACE-OBSERVABILITY.5.3`): the cfg private authority remains unrouted/4-of-4 while its proof requires the separately admitted contract input/command once; ordinary targets stay 0/0, and `.5.4` owns the stale staged-admission snapshot exposed before canonical closeout.

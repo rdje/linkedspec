@@ -1,7 +1,7 @@
 #![allow(unexpected_cfgs)]
 #![cfg(linkedspec_staged_ast_enrichment_red)]
 
-//! FUTURE-PARITY-BACKLOG.14.7.4.1 — dormant Rust staged-AST marker/provenance contract.
+//! FUTURE-PARITY-BACKLOG.14.7.4.2 — dormant Rust staged-AST current-depth contract.
 //!
 //! Ordinary Cargo discovery compiles this target with zero active tests. Before admission, run
 //! the exact final-path RED with:
@@ -10,8 +10,8 @@
 //!
 //! This consumer freezes the neutral inventory, current function-body v1 compatibility, and all
 //! four final Rust observation surfaces without changing production behavior or canonical CI. Its
-//! sole intentional failure is the caller-frozen resolution/cache/result/failure authority owned
-//! by `.14.7.4.2`; the dedicated marker and typed v2 provenance are complete in this slice.
+//! sole intentional failure is recursive queue/resource/rebasing authority owned by `.14.7.4.3`;
+//! marker/provenance and caller-frozen current-depth authority are complete in this slice.
 
 use linkedspec_core::compiler::compile;
 use linkedspec_core::expr::Expr;
@@ -24,12 +24,17 @@ use linkedspec_runtime::source_emitter::{
 use linkedspec_runtime::source_location::SourceAuthority;
 use linkedspec_runtime::spec_parser::parse_spec_with_user_functions;
 use linkedspec_runtime::staged_parser_registry::{execute_parse_job, execute_parse_jobs};
-use linkedspec_runtime::validate_and_materialize_provenance;
+use linkedspec_runtime::{
+    CompiledStagedAuthority, FrozenStagedRegistry, StagedRuntimeContext, enrich_current_depth,
+    staged_cache_identity, staged_current_depth_order, staged_job_identity,
+    validate_and_materialize_provenance,
+};
 use serde_json::{Value, json};
 use std::collections::BTreeMap;
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::process::Command;
+use std::sync::{Arc, Mutex};
 use std::time::{SystemTime, UNIX_EPOCH};
 
 const CONTRACT_SOURCE: &str = include_str!(concat!(
@@ -88,6 +93,648 @@ fn occurrences(haystack: &str, needle: &str) -> usize {
     haystack.match_indices(needle).count()
 }
 
+fn frozen_registry(neutral: &Value, authority: CompiledStagedAuthority) -> FrozenStagedRegistry {
+    let compiled = neutral["resolution_snapshot"]["entries"]
+        .as_array()
+        .expect("frozen registry entries")
+        .iter()
+        .map(|entry| {
+            (
+                entry["compiled_authority"]
+                    .as_str()
+                    .expect("opaque authority identity")
+                    .to_owned(),
+                authority.clone(),
+            )
+        })
+        .collect::<BTreeMap<_, _>>();
+    FrozenStagedRegistry::from_value(&neutral["resolution_snapshot"], compiled)
+        .expect("freeze caller-prepared staged registry")
+}
+
+fn enrichment_options() -> Value {
+    json!({
+        "declaring_spec_id": "grammar/main.spec",
+        "caller_capabilities": [
+            "staged-parse-job-v2",
+            "structured-result-v1",
+            "typed-source-location-v1",
+            "xml-v1",
+            "yaml-v1",
+        ],
+        "caller_policy_modes": [
+            "append_child",
+            "diagnostic_node",
+            "fail",
+            "keep_text",
+            "replace_field",
+            "replace_marker",
+            "sibling_field",
+            "trace",
+        ],
+        "caller_ceilings": {
+            "source_detail": "text",
+            "max_steps": 200,
+            "max_result_nodes": 128,
+            "max_diagnostic_bytes": 8192,
+        },
+        "required_source_detail": "identity",
+        "required_versions": {
+            "spec_language_version": 2,
+            "helper_contract_version": "actionir-v3",
+            "staged_contract_version": 2,
+        },
+    })
+}
+
+fn staged_marker(
+    text: &str,
+    start: u64,
+    result_policy: &str,
+    into: Option<&str>,
+    failure_policy: &str,
+) -> Value {
+    let mut sidecar = json!({
+        "kind": "staged_parse_job_v2",
+        "version": 2,
+        "state": "declared",
+        "effect": "staged_parse_job_declaration",
+        "node_kind": "expression",
+        "payload_kind": "embedded_expression",
+        "parser_spec_id": "expr",
+        "top_rule": "Expr",
+        "result_policy": result_policy,
+        "failure_policy": failure_policy,
+        "required_capabilities": ["typed-source-location-v1"],
+        "text": text,
+        "provenance": {
+            "kind": "direct_span",
+            "source_id": "ascii",
+            "start": start,
+            "end": start + u64::try_from(text.chars().count()).expect("text length fits u64"),
+            "provenance": "capture",
+        },
+        "origin": "contract:parse_job",
+    });
+    if let Some(into) = into {
+        sidecar["into"] = json!(into);
+    }
+    json!({
+        "kind": "STAGED_PARSE_JOB_MARKER",
+        "version": 2,
+        "sidecar_kind": "staged_parse_job_v2",
+        "effect": "staged_parse_job_declaration",
+        "staged_parse_job_v2": sidecar,
+    })
+}
+
+fn prove_current_depth_authority(neutral: &Value) {
+    let inert =
+        CompiledStagedAuthority::new(|_request: &Value, _context: &mut StagedRuntimeContext| {
+            Ok(json!({"kind": "ok"}))
+        });
+    let registry = frozen_registry(neutral, inert);
+
+    for case in neutral["resolution_cases"]
+        .as_array()
+        .expect("resolution cases")
+    {
+        let result = registry.resolve_pre_registered(
+            case["declaring_spec_id"].as_str().expect("declaring id"),
+            case["parser_spec_id"].as_str().expect("parser id"),
+            "contract:resolution",
+        );
+        if case["diagnostic"].is_null() {
+            assert_eq!(
+                result.expect("frozen resolution succeeds"),
+                case["resolved_spec_id"],
+                "{}",
+                case["id"]
+            );
+        } else {
+            assert_eq!(
+                result.expect_err("frozen resolution rejects").as_record()["code"],
+                case["diagnostic"],
+                "{}",
+                case["id"]
+            );
+        }
+    }
+
+    for case in neutral["authority_cases"]
+        .as_array()
+        .expect("authority cases")
+    {
+        let result = registry.evaluate_authority_case(case, "contract:authority");
+        if case["accepted"].as_bool().expect("authority acceptance") {
+            assert_eq!(
+                result.expect("effective authority succeeds"),
+                case["effective"],
+                "{}",
+                case["id"]
+            );
+        } else {
+            assert_eq!(
+                result.expect_err("effective authority rejects").as_record()["code"],
+                case["diagnostic"],
+                "{}",
+                case["id"]
+            );
+        }
+    }
+    let mut forbidden_top = neutral["authority_cases"][0].clone();
+    forbidden_top["top_rule"] = json!("MissingTop");
+    assert_eq!(
+        registry
+            .evaluate_authority_case(&forbidden_top, "contract:forbidden-top")
+            .expect_err("unregistered top rule rejects")
+            .as_record()["code"],
+        "staged_top_rule_forbidden"
+    );
+
+    for case in neutral["job_id_cases"].as_array().expect("job id cases") {
+        let mut fields = case.clone();
+        fields
+            .as_object_mut()
+            .expect("job case object")
+            .remove("id");
+        let expected = fields
+            .as_object_mut()
+            .expect("job case object")
+            .remove("expected_job_id")
+            .expect("expected job id");
+        assert_eq!(
+            staged_job_identity(&fields).expect("deterministic job id"),
+            expected,
+            "{}",
+            case["id"]
+        );
+    }
+
+    let mut base_cache_key = None;
+    for case in neutral["cache_cases"].as_array().expect("cache cases") {
+        let key = staged_cache_identity(&case["fields"]).expect("valid cache identity");
+        if case["id"] == "base" {
+            base_cache_key = Some(key.clone());
+        }
+        assert_eq!(
+            key == *base_cache_key.as_ref().expect("base case ordered first"),
+            case["same_as_base"],
+            "{}",
+            case["id"]
+        );
+    }
+
+    for case in neutral["queue_cases"]
+        .as_array()
+        .expect("queue cases")
+        .iter()
+        .take(3)
+    {
+        assert_eq!(
+            json!(staged_current_depth_order(&case["jobs"]).expect("current-depth queue order")),
+            case["expected_order"],
+            "{}",
+            case["id"]
+        );
+    }
+    assert_eq!(
+        staged_current_depth_order(&neutral["queue_cases"][3]["jobs"])
+            .expect_err("mixed depths remain recursive-scheduler RED")
+            .as_record()["snapshot_component"],
+        "mixed_stage_depth_requires_recursive_scheduler"
+    );
+
+    for case in neutral["stitch_cases"].as_array().expect("stitch cases") {
+        let result = case["result"].clone();
+        let authority = CompiledStagedAuthority::new(
+            move |_request: &Value, _context: &mut StagedRuntimeContext| Ok(result.clone()),
+        );
+        let registry = frozen_registry(neutral, authority);
+        let mut parent = case["parent"].clone();
+        let marker_field = case["marker_field"].as_str().expect("marker field");
+        parent[marker_field] = staged_marker(
+            case["text"].as_str().expect("marker text"),
+            0,
+            case["result_policy"].as_str().expect("result policy"),
+            case["into"].as_str(),
+            "fail",
+        );
+        let outcome = enrich_current_depth(&registry, &parent, &enrichment_options())
+            .expect("result policy settles");
+        assert_eq!(outcome.ast, case["expected_parent"], "{}", case["id"]);
+        assert!(outcome.diagnostics.is_empty(), "{}", case["id"]);
+        assert_eq!(outcome.sidecars[0]["state"], "succeeded", "{}", case["id"]);
+    }
+
+    for case in neutral["failure_cases"].as_array().expect("failure cases") {
+        let authority = CompiledStagedAuthority::new(
+            |_request: &Value, _context: &mut StagedRuntimeContext| {
+                Err(json!({"code": "child_parse_error", "offset": 1}))
+            },
+        );
+        let registry = frozen_registry(neutral, authority);
+        let mut parent = case["parent"].clone();
+        let marker_field = case["marker_field"].as_str().expect("marker field");
+        parent[marker_field] = staged_marker(
+            case["text"].as_str().expect("marker text"),
+            0,
+            case["result_policy"].as_str().expect("result policy"),
+            case["into"].as_str(),
+            case["failure_policy"].as_str().expect("failure policy"),
+        );
+        let result = enrich_current_depth(&registry, &parent, &enrichment_options());
+        match case["failure_policy"].as_str().expect("failure policy") {
+            "fail" => {
+                let error = result.expect_err("fail policy aborts");
+                assert_eq!(error.as_record()["code"], "staged_child_failed");
+                assert_eq!(
+                    parent[marker_field]["kind"], "STAGED_PARSE_JOB_MARKER",
+                    "input AST remains unpublished"
+                );
+            }
+            "keep_text" => {
+                let outcome = result.expect("keep-text policy continues");
+                assert_eq!(outcome.ast[marker_field], case["text"]);
+                assert_eq!(outcome.ast["children"], json!([]));
+                assert_eq!(outcome.diagnostics.len(), 1);
+                assert_eq!(outcome.sidecars[0]["state"], "failed_keep_text");
+            }
+            "diagnostic_node" => {
+                let outcome = result.expect("diagnostic-node policy continues");
+                assert_eq!(outcome.ast[marker_field], case["text"]);
+                assert_eq!(outcome.ast["ast"]["kind"], "staged_parse_diagnostic");
+                assert_eq!(outcome.ast["ast"]["diagnostic"], outcome.diagnostics[0]);
+                assert_eq!(outcome.sidecars[0]["state"], "failed_diagnostic_node");
+                let required = neutral["diagnostics"]
+                    .as_array()
+                    .expect("diagnostics")
+                    .iter()
+                    .find(|row| row["code"] == "staged_child_failed")
+                    .expect("child-failure diagnostic")["required_context"]
+                    .as_array()
+                    .expect("required context");
+                for field in required {
+                    let field = field.as_str().expect("context field");
+                    assert!(
+                        outcome.diagnostics[0].get(field).is_some(),
+                        "missing staged_child_failed context {field}"
+                    );
+                }
+            }
+            policy => panic!("unexpected failure policy {policy}"),
+        }
+    }
+
+    let observed_contexts = Arc::new(Mutex::new(Vec::new()));
+    let observed_order = Arc::new(Mutex::new(Vec::new()));
+    let callback_count = Arc::new(Mutex::new(0_u64));
+    let authority = {
+        let observed_contexts = Arc::clone(&observed_contexts);
+        let observed_order = Arc::clone(&observed_order);
+        let callback_count = Arc::clone(&callback_count);
+        CompiledStagedAuthority::new(move |request: &Value, context: &mut StagedRuntimeContext| {
+            observed_contexts
+                .lock()
+                .expect("context observations")
+                .push(context.as_record());
+            observed_order
+                .lock()
+                .expect("order observations")
+                .push(request["text"].as_str().expect("request text").to_owned());
+            *callback_count.lock().expect("callback count") += 1;
+            context.set_cursor(9);
+            context.marks_mut().insert("child".to_owned(), json!(1));
+            context
+                .captures_mut()
+                .insert("capture".to_owned(), json!("local"));
+            context
+                .variables_mut()
+                .insert("variable".to_owned(), json!(true));
+            Ok(json!({"kind": "parsed", "text": request["text"]}))
+        })
+    };
+    let registry = frozen_registry(neutral, authority);
+    let ordered_ast = json!({
+        "nodes": [
+            {"payload": staged_marker("first", 4, "replace_marker", None, "fail")},
+            {"payload": staged_marker("second", 1, "replace_marker", None, "fail")},
+        ],
+    });
+    let first = enrich_current_depth(&registry, &ordered_ast, &enrichment_options())
+        .expect("first current-depth run");
+    assert_eq!(
+        *observed_order.lock().expect("order observations"),
+        ["first", "second"]
+    );
+    assert_eq!(
+        *observed_contexts.lock().expect("context observations"),
+        [
+            json!({"cursor": 0, "marks": {}, "captures": {}, "variables": {}}),
+            json!({"cursor": 0, "marks": {}, "captures": {}, "variables": {}}),
+        ]
+    );
+    assert_eq!(first.cache.entries, 1);
+    assert_eq!(first.cache.misses, 1);
+    assert_eq!(first.cache.hits, 1);
+    let second = enrich_current_depth(&registry, &ordered_ast, &enrichment_options())
+        .expect("second current-depth run");
+    assert_eq!(second.cache.entries, 1);
+    assert_eq!(second.cache.misses, 1);
+    assert_eq!(second.cache.hits, 3);
+    assert_eq!(*callback_count.lock().expect("callback count"), 4);
+    let isolated_registry = frozen_registry(
+        neutral,
+        CompiledStagedAuthority::new(|_request: &Value, _context: &mut StagedRuntimeContext| {
+            Ok(json!(null))
+        }),
+    );
+    assert_eq!(isolated_registry.cache_stats().entries, 0);
+    assert_eq!(isolated_registry.cache_stats().hits, 0);
+    assert_eq!(isolated_registry.cache_stats().misses, 0);
+
+    let default_top_registry = frozen_registry(
+        neutral,
+        CompiledStagedAuthority::new(|_request: &Value, _context: &mut StagedRuntimeContext| {
+            Ok(json!({"kind": "expr"}))
+        }),
+    );
+    let mut default_top_marker = staged_marker("x", 0, "replace_marker", None, "fail");
+    default_top_marker["staged_parse_job_v2"]
+        .as_object_mut()
+        .expect("marker sidecar")
+        .remove("top_rule");
+    let default_top = enrich_current_depth(
+        &default_top_registry,
+        &json!({"payload": default_top_marker}),
+        &enrichment_options(),
+    )
+    .expect("entry default top is selected");
+    assert_eq!(default_top.sidecars[0]["top_rule"], "Expr");
+    let identity_fields = json!({
+        "declaring_spec_id": "grammar/main.spec",
+        "parent_ast_path": ["payload"],
+        "node_kind": "expression",
+        "payload_kind": "embedded_expression",
+        "parser_spec_id": "expr",
+        "top_rule": "Expr",
+        "provenance": {
+            "kind": "direct_span",
+            "source_id": "ascii",
+            "start": 0,
+            "end": 1,
+            "provenance": "capture",
+        },
+    });
+    assert_eq!(
+        default_top.sidecars[0]["job_id"],
+        staged_job_identity(&identity_fields).expect("normalized-top job id")
+    );
+
+    let atomic_input = json!({
+        "nodes": [
+            {"payload": staged_marker("ok", 0, "replace_marker", None, "fail")},
+            {"payload": staged_marker("bad", 2, "replace_marker", None, "fail")},
+        ],
+    });
+    let atomic_registry = frozen_registry(
+        neutral,
+        CompiledStagedAuthority::new(|request: &Value, _context: &mut StagedRuntimeContext| {
+            if request["text"] == "bad" {
+                Err(json!({"code": "expected_failure"}))
+            } else {
+                Ok(json!({"kind": "first_result"}))
+            }
+        }),
+    );
+    assert_eq!(
+        enrich_current_depth(&atomic_registry, &atomic_input, &enrichment_options())
+            .expect_err("later fail policy aborts atomically")
+            .as_record()["code"],
+        "staged_child_failed"
+    );
+    assert_eq!(
+        atomic_input["nodes"][0]["payload"]["kind"],
+        "STAGED_PARSE_JOB_MARKER"
+    );
+
+    let invalid_callback_count = Arc::new(Mutex::new(0_u64));
+    let invalid_registry = {
+        let invalid_callback_count = Arc::clone(&invalid_callback_count);
+        frozen_registry(
+            neutral,
+            CompiledStagedAuthority::new(
+                move |_request: &Value, _context: &mut StagedRuntimeContext| {
+                    *invalid_callback_count
+                        .lock()
+                        .expect("invalid callback count") += 1;
+                    Ok(json!({"kind": "unexpected"}))
+                },
+            ),
+        )
+    };
+    let collision = json!({
+        "payload": staged_marker("x", 0, "sibling_field", Some("ast"), "fail"),
+        "ast": {"kind": "occupied"},
+    });
+    assert_eq!(
+        enrich_current_depth(&invalid_registry, &collision, &enrichment_options())
+            .expect_err("sibling collision rejects before execution")
+            .as_record()["code"],
+        "staged_stitch_target_collision"
+    );
+    let invalid_append = json!({
+        "payload": staged_marker("x", 0, "append_child", Some("children"), "fail"),
+        "children": {},
+    });
+    assert_eq!(
+        enrich_current_depth(&invalid_registry, &invalid_append, &enrichment_options())
+            .expect_err("non-array append target rejects")
+            .as_record()["code"],
+        "staged_append_target_invalid"
+    );
+    let missing_into = json!({
+        "payload": staged_marker("x", 0, "sibling_field", None, "fail"),
+    });
+    assert_eq!(
+        enrich_current_depth(&invalid_registry, &missing_into, &enrichment_options())
+            .expect_err("missing sibling target rejects")
+            .as_record()["code"],
+        "staged_stitch_target_missing"
+    );
+    let missing_replace_field = json!({
+        "payload": staged_marker("x", 0, "replace_field", Some("ast"), "fail"),
+    });
+    assert_eq!(
+        enrich_current_depth(
+            &invalid_registry,
+            &missing_replace_field,
+            &enrichment_options(),
+        )
+        .expect_err("missing replace target rejects")
+        .as_record()["code"],
+        "staged_stitch_target_missing"
+    );
+    assert_eq!(
+        *invalid_callback_count
+            .lock()
+            .expect("invalid callback count"),
+        0
+    );
+
+    let stale_count = Arc::new(Mutex::new(0_u64));
+    let stale_registry = {
+        let stale_count = Arc::clone(&stale_count);
+        frozen_registry(
+            neutral,
+            CompiledStagedAuthority::new(
+                move |_request: &Value, _context: &mut StagedRuntimeContext| {
+                    *stale_count.lock().expect("stale callback count") += 1;
+                    Ok(json!({"kind": "replacement"}))
+                },
+            ),
+        )
+    };
+    let stale = json!({
+        "control": staged_marker("first", 0, "replace_field", Some("payload"), "fail"),
+        "payload": staged_marker("second", 6, "replace_marker", None, "fail"),
+    });
+    assert_eq!(
+        enrich_current_depth(&stale_registry, &stale, &enrichment_options())
+            .expect_err("stale marker rejects")
+            .as_record()["code"],
+        "staged_marker_mismatch"
+    );
+    assert_eq!(*stale_count.lock().expect("stale callback count"), 1);
+
+    let live_registry = frozen_registry(
+        neutral,
+        CompiledStagedAuthority::new(|_request: &Value, _context: &mut StagedRuntimeContext| {
+            Ok(json!({"parser_handle": "live"}))
+        }),
+    );
+    assert_eq!(
+        enrich_current_depth(
+            &live_registry,
+            &json!({"payload": staged_marker("x", 0, "replace_marker", None, "fail")}),
+            &enrichment_options(),
+        )
+        .expect_err("live result rejects")
+        .as_record()["code"],
+        "staged_result_not_detached"
+    );
+    let node_registry = frozen_registry(
+        neutral,
+        CompiledStagedAuthority::new(|_request: &Value, _context: &mut StagedRuntimeContext| {
+            Ok(json!({"kind": "too_large", "children": [1, 2, 3]}))
+        }),
+    );
+    let mut tight_options = enrichment_options();
+    tight_options["caller_ceilings"]["max_result_nodes"] = json!(2);
+    assert_eq!(
+        enrich_current_depth(
+            &node_registry,
+            &json!({"payload": staged_marker("x", 0, "replace_marker", None, "fail")}),
+            &tight_options,
+        )
+        .expect_err("node bound rejects")
+        .as_record()["code"],
+        "staged_result_node_limit_exceeded"
+    );
+
+    let failure_calls = Arc::new(Mutex::new(0_u64));
+    let failure_registry = {
+        let failure_calls = Arc::clone(&failure_calls);
+        frozen_registry(
+            neutral,
+            CompiledStagedAuthority::new(
+                move |_request: &Value, _context: &mut StagedRuntimeContext| {
+                    *failure_calls.lock().expect("failure callback count") += 1;
+                    Err(json!({"code": "repeatable_failure"}))
+                },
+            ),
+        )
+    };
+    let failing_ast = json!({
+        "payload": staged_marker("bad", 0, "replace_marker", None, "fail"),
+    });
+    for _ in 0..2 {
+        assert!(
+            enrich_current_depth(&failure_registry, &failing_ast, &enrichment_options()).is_err()
+        );
+    }
+    assert_eq!(*failure_calls.lock().expect("failure callback count"), 2);
+    assert_eq!(failure_registry.cache_stats().entries, 1);
+    assert_eq!(failure_registry.cache_stats().misses, 1);
+    assert_eq!(failure_registry.cache_stats().hits, 1);
+
+    let partial_registry = frozen_registry(
+        neutral,
+        CompiledStagedAuthority::new(|_request: &Value, _context: &mut StagedRuntimeContext| {
+            Ok(json!({"kind": "unused"}))
+        }),
+    );
+    let mut unresolved = staged_marker("x", 0, "replace_marker", None, "fail");
+    unresolved["staged_parse_job_v2"]["parser_spec_id"] = json!("missing-v1");
+    assert!(
+        enrich_current_depth(
+            &partial_registry,
+            &json!({"payload": unresolved}),
+            &enrichment_options(),
+        )
+        .is_err()
+    );
+    assert_eq!(partial_registry.cache_stats().entries, 0);
+    assert_eq!(partial_registry.cache_stats().hits, 0);
+    assert_eq!(partial_registry.cache_stats().misses, 0);
+
+    let nested_calls = Arc::new(Mutex::new(0_u64));
+    let nested_marker = staged_marker("nested", 1, "replace_marker", None, "fail");
+    let nested_registry = {
+        let nested_calls = Arc::clone(&nested_calls);
+        frozen_registry(
+            neutral,
+            CompiledStagedAuthority::new(
+                move |_request: &Value, _context: &mut StagedRuntimeContext| {
+                    *nested_calls.lock().expect("nested callback count") += 1;
+                    Ok(nested_marker.clone())
+                },
+            ),
+        )
+    };
+    let nested = enrich_current_depth(
+        &nested_registry,
+        &json!({"payload": staged_marker("outer", 0, "replace_marker", None, "fail")}),
+        &enrichment_options(),
+    )
+    .expect("new marker remains inert at current depth");
+    assert_eq!(nested.ast["payload"]["kind"], "STAGED_PARSE_JOB_MARKER");
+    assert_eq!(*nested_calls.lock().expect("nested callback count"), 1);
+
+    let panic_registry = frozen_registry(
+        neutral,
+        CompiledStagedAuthority::new(
+            |_request: &Value, _context: &mut StagedRuntimeContext| -> Result<Value, Value> {
+                panic!("contained child panic")
+            },
+        ),
+    );
+    let prior_panic_hook = std::panic::take_hook();
+    std::panic::set_hook(Box::new(|_| {}));
+    let panic_result = enrich_current_depth(
+        &panic_registry,
+        &json!({"payload": staged_marker("panic", 0, "replace_marker", None, "keep_text")}),
+        &enrichment_options(),
+    );
+    std::panic::set_hook(prior_panic_hook);
+    let panic_outcome = panic_result.expect("contained panic obeys keep-text policy");
+    assert_eq!(panic_outcome.ast["payload"], "panic");
+    assert_eq!(
+        panic_outcome.diagnostics[0]["child_diagnostic"]["code"],
+        "staged_child_exception"
+    );
+}
+
 struct EmittedProject {
     root: PathBuf,
 }
@@ -116,7 +763,7 @@ impl Drop for EmittedProject {
 }
 
 #[test]
-fn final_path_reaches_only_the_missing_caller_frozen_authority() {
+fn final_path_reaches_only_the_missing_recursive_authority() {
     let neutral = contract();
     assert_eq!(neutral["contract_id"], CONTRACT_ID);
     assert_eq!(neutral["format"], 1);
@@ -797,6 +1444,8 @@ Child::
     let emitted_value: Value = serde_json::from_slice(&child.stdout).expect("emitted marker JSON");
     assert_eq!(emitted_value, expected);
 
+    prove_current_depth_authority(&neutral);
+
     assert!(
         !CI_DRIVER_SOURCE.contains("staged_ast_enrichment_contract.rs"),
         "the dormant Rust consumer must remain absent from canonical CI"
@@ -804,6 +1453,6 @@ Child::
 
     assert!(
         false,
-        "LINKEDSPEC_STAGED_AST_ENRICHMENT_RED: marker=[STAGED_PARSE_JOB_MARKER] and sidecar=[staged_parse_job_v2] complete; missing caller-frozen resolution/cache/result/failure authority owned by FUTURE-PARITY-BACKLOG.14.7.4.2"
+        "LINKEDSPEC_STAGED_AST_ENRICHMENT_RED: marker/provenance and caller-frozen current-depth authority complete; missing breadth-first recurrence, decreasing-chain/cycle/resource guards, and original-source diagnostic rebasing owned by FUTURE-PARITY-BACKLOG.14.7.4.3"
     );
 }

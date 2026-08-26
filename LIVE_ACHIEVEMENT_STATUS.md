@@ -2,23 +2,27 @@
 
 ## Current Activity
 
-- `TRACE-OBSERVABILITY.5.4` aligns the admitted Perl staged-AST proof with neutral Rust dormant-RED truth: 79
-  mutations and Rust `dormant_red`, both introduced by `.14.7.4.0` commit `e37a8b77`.
-- The exact Perl consumer is 143/143 and staged governance is green without production, registry, format, rollout,
-  public, or other-backend movement. Corrective `.5.1-.4` and the trace tree are canonically complete.
-- Staged Rust `.14.7.4.2` is the next clean-handoff frontier.
+- Rust staged `.14.7.4.2` adds private caller-frozen resolution/cache and complete current-depth result/failure
+  authority behind the unchanged outer-cfg dormant consumer.
+- Pure selection, exact identities, plan-only run-local caching, sibling isolation, detached atomic stitching, and
+  every result/failure policy are implemented without carrier, admission, rollout, format, or public movement.
+- Its sole final RED now names `.14.7.4.3` recursive scheduling, bounds, and source-rebased diagnostics.
 
 ## Latest Completed Slice
 
-- `.5.4` repairs only two stale Perl expectations, passes 143/143 plus canonical proof, and closes corrective `.5`
-  without staged runtime or rollout movement.
+- `.14.7.4.2` completes Rust's private one-depth staged authority while retaining ordinary zero-test and
+  zero-canonical-reference dormancy, unchanged function-body v1/generated v2, and pending Rust rollout.
 
 ## Next Action
 
-- Commit `.5.4`, clear the brief, verify the clean handoff, then activate staged Rust `.14.7.4.2` and implement only
-  its caller-frozen resolution/cache/result/failure authority slice.
+- Complete focused signoff and commit `.14.7.4.2`; from the clean handoff, activate `.14.7.4.3` and add only
+  breadth-first recurrence, decreasing-chain/cycle/resource guards, and original-source diagnostic rebasing.
 
 ## Recent Completions
+
+- `2026-08-26` — `.14.7.4.2` adds Rust's caller-frozen pure resolution/cache, deterministic current-depth
+  ordering/isolation, detached atomic stitching, and all result/failure policies; only `.3` recursive authority RED
+  remains, with discovery/rollout/format/public truth unchanged.
 
 - `2026-08-26` — `TRACE-OBSERVABILITY.5.4` aligns 79 mutations and Rust `dormant_red`, passes 143/143 plus
   canonical proof, and closes corrective `.5` without runtime or rollout movement.
@@ -64,9 +68,6 @@
 
 - `2026-08-25` — `.14.6.8` corrects the behavioral recurring projection, closes progressive at 9/9/116 plus
   public 6/12/10/60, and preserves every runtime, fixture, outward API, and typed 12/2/170 boundary.
-
-- `2026-08-25` — `.14.6.7` binds neutral plus six private runtime routes and four support ledgers, advances only
-  typed `progressive_span_dispatch` to 12/2/170, and keeps behavioral governance at 7/9/112.
 
 ## History
 

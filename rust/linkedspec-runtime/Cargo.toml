@@ -18,3 +18,6 @@ getrandom.workspace = true
 
 [dev-dependencies]
 serde_json.workspace = true
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ["cfg(linkedspec_staged_ast_enrichment_red)"] }

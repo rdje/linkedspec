@@ -10,6 +10,18 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-26 — FUTURE-PARITY-BACKLOG.14.7.4.2 — add Rust staged current-depth authority
+
+- Added one private Rust general-v2 authority over caller-frozen resolution outcomes and already-compiled opaque
+  callbacks. Pure alias/relative/ordered-root/provider selection, authority narrowing, selected-top-before-job-id,
+  and run-local plan-only cache behavior add no loader, provider query, path, environment, or registry mutation.
+- Added complete current-depth preparation, typed path/provenance/job ordering, fresh sibling contexts, detached
+  node-bounded results, atomic publication, all four result policies, all three failure policies, and exact stale/
+  missing/collision/wrong-kind/live-result denials. Newly returned markers remain inert and unrescanned.
+- Kept the same outer-cfg dormant consumer, ordinary discovery at zero tests, canonical references at zero,
+  function-body v1/generated format v2, 79-mutation governance, Rust rollout, and public/outward behavior unchanged.
+  Its sole RED now names `.14.7.4.3` recurrence, bounds, and original-source diagnostic rebasing.
+
 ## 2026-08-26 — TRACE-OBSERVABILITY.5.4 — align staged admission proof
 
 - Reproduced the exact admitted Perl staged-AST consumer at 141/143: only its frozen neutral mutation count and

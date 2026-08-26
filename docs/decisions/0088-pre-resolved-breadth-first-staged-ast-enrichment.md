@@ -238,6 +238,18 @@ the final RED advances only to `.14.7.4.2`'s caller-frozen resolution/cache/resu
 also found two pre-existing Rust compiler-trace defects outside this ADR's behavior; separate clean-pivot task-tree
 leaves must own them before staged authority work resumes.
 
+Rust current-depth leaf `FUTURE-PARITY-BACKLOG.14.7.4.2` adds a separate unexported general-v2 authority without
+widening the function-body-v1 adapter. `FrozenStagedRegistry` contains only caller-completed candidate outcomes and
+already-compiled opaque callbacks; post-AST resolution is pure alias/declaring-relative/ordered-root/provider
+selection plus narrowing validation. Default top selection precedes deterministic v2 identity. The run-local cache
+stores immutable prepared plans only, under the neutral content/import/version/top/effective-capability identity;
+failed work and child values never poison it. One complete marker depth prepares all jobs and targets before
+execution, sorts by typed path/provenance/job id, gives every sibling fresh parser state, detaches and node-bounds
+plain results, and publishes all four result or three failure policies atomically. Newly returned markers remain
+unrescanned. The unchanged dormant consumer now reaches only `.14.7.4.3` breadth-first recurrence, decreasing-
+chain/cycle/shared-resource authority, and original-source diagnostic rebasing. Ordinary/canonical discovery,
+Rust rollout, generated-source v2, function-body v1, public/outward behavior, and other backends do not move.
+
 ## Links
 
 - Owning task: `docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md`
@@ -247,4 +259,5 @@ leaves must own them before staged authority work resumes.
   `tools/check_staged_ast_enrichment_contract.py`
 - Knowledge: `docs/knowledge/general-staged-ast-enrichment-neutral-contract.md` and
   `docs/knowledge/perl-staged-ast-enrichment-recursive-authority.md` plus
-  `docs/knowledge/rust-staged-ast-enrichment-dormant-red.md`
+  `docs/knowledge/rust-staged-ast-enrichment-dormant-red.md` and
+  `docs/knowledge/rust-staged-ast-enrichment-current-depth-authority.md`
