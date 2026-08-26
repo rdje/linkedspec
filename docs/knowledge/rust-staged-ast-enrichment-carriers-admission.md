@@ -13,7 +13,7 @@ answers:
   - "is the Rust staged AST consumer in canonical CI"
   - "what follows FUTURE-PARITY-BACKLOG 14.7.4.4"
 date: 2026-08-26
-status: current private Rust carrier admission; Dart FUTURE-PARITY-BACKLOG.14.7.5.0 is next
+status: current private Rust carrier admission; Dart dormant RED is frozen and .14.7.5.1 is next
 tags: [rust, staged-parsing, carriers, generated-source, invocation-authority, admission, ci, private]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.4.4 adds opaque host-only StagedAstEnrichmentSeed to ExecutionOptions. Every native or generated top-level execution starts a new FrozenStagedRegistry with an empty PlanCache and a new StagedRecursiveAuthority before parent parsing, then calls enrich_recursively only after the complete parent value returns and after checking live recognition-transaction state. Native, serialized/reconstructed, validated generated-plan, and independently compiled emitted-source routes each execute twice through one seed; every run reports one miss/zero hits, one callback, fresh cancellation/clock checks, equal detached AST/sidecars/diagnostics/cache/resources, and no cross-result mutation. Compiled JSON, generated plans, and emitted source contain no callback, compiled parser, registry/source authority, cancellation/deadline/budget state, mutable queue/cache, path, or host handle. The outer cfg, manifest check-cfg, cfg-only exports, and dead-code allowance are removed after the first production caller. The exact ordinary consumer is GREEN and registered once in canonical CI; neutral governance advances only Rust to complete and 84 mutations. Function-body v1, generated-source v2, public/outward surfaces, later backends, recurrence, and combined no-drift remain unchanged or pending."
 root_cause: "Rust had complete dormant marker, frozen-registry, one-depth, and recursive authority, but no top-level host seam could inject nonserializable authority or run it after a completed parent parse. Consequently the module required a temporary dead-code allowance and the final consumer could not enter ordinary or canonical discovery."
@@ -46,9 +46,9 @@ The admitted consumer executes every route twice through one seed. Each result s
 one miss, proving that cache state was not reused. Callback, cancellation, and clock counters prove a new recursive
 run each time. All four routes return equal detached records, and mutating one returned AST cannot affect another.
 
-This is private backend behavior, not public `parse_job(...)` authoring. Rust rollout is complete, while Dart,
-Julia, Lua, six-runtime recurrence, public authoring, independent recomposition, and combined no-drift retain their
-existing owners.
+This is private backend behavior, not public `parse_job(...)` authoring. Rust rollout is complete. Dart now has a
+separate dormant generic-call RED with no production or rollout movement; Julia, Lua, six-runtime recurrence,
+public authoring, independent recomposition, and combined no-drift retain their existing owners.
 
 Related: [[rust-staged-ast-enrichment-recursive-authority]],
 [[rust-staged-ast-enrichment-current-depth-authority]], [[rust-staged-ast-enrichment-marker-provenance]],

@@ -1,13 +1,13 @@
 # MEMORY
 
-- activation_commit: `de6f5a6545ae8aeb66243b2596277793611b39fe` — exact clean recursive-authority base for
-  task-tree-first Rust staged `FUTURE-PARITY-BACKLOG.14.7.4.4`; brief cleared; no push.
-- latest_completed_leaf: intended `FUTURE-PARITY-BACKLOG.14.7.4.4 - admit Rust staged enrichment carriers`;
-  four fresh production routes, exact admission, Rust rollout, and backend-parent closure are complete.
-- active_work_unit: none after the intended `.14.7.4.4` commit; public/format/later-backend boundaries hold.
-- next_action: from the exact clean `.14.7.4.4` commit, activate Dart dormant-boundary leaf
-  `FUTURE-PARITY-BACKLOG.14.7.5.0` task-tree-first.
-- in_flight_uncommitted: none after the intended `.14.7.4.4` commit; no background job remains.
+- activation_commit: `94d20becf2c8a17438a2509538a9878ecd96c9b9` — exact clean Rust-carrier-admission base for
+  task-tree-first Dart staged `FUTURE-PARITY-BACKLOG.14.7.5.0`; brief cleared; no push.
+- latest_completed_leaf: intended `FUTURE-PARITY-BACKLOG.14.7.5.0 - freeze Dart staged-AST dormant RED`;
+  exact excluded consumer, current-v1 controls, four generic observation routes, and one marker/provenance RED are complete.
+- active_work_unit: none after the intended `.14.7.5.0` commit; production/rollout/format/public boundaries hold.
+- next_action: from the exact clean `.14.7.5.0` commit, activate Dart marker/provenance leaf
+  `FUTURE-PARITY-BACKLOG.14.7.5.1` task-tree-first.
+- in_flight_uncommitted: none after the intended `.14.7.5.0` commit; no background job remains.
 - blockers: none.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -30,12 +30,12 @@
 - current_readme_contract: README stays 106/5,197 under hard 128/6,144 caps; ADRs `0084`/`0085` implement one
   additional bounded future-task semantic member and a ten-line strict index without changing any collection,
   per-file, aggregate, member-byte, or 5,000-line semantic-member ceiling. ADR `0087` admits only the earlier
-  engineering-notes segment `4991` at 17 files / 16 manifest lines. ADR `0089` now admits only mandatory change-
-  history segment `4991`, advancing that separate route from 21/20 to 22 files / 21 manifest lines while retaining
+  engineering-notes segment `4991` at 17 files / 16 manifest lines. ADR `0091` now admits only mandatory change-
+  history segment `4990`, advancing that separate route from 22/21 to 23 files / 22 manifest lines while retaining
   every byte, root, segment, aggregate, owner, lifecycle, verifier, storage, and all other pressure controls.
 - current_verification_contract: ADR `0073` makes focused proof the ordinary per-leaf default and canonical proof
-  mandatory at admission/milestone/public/infrastructure and final clean push boundaries; staged Perl `.14.7.3.4`
-  and Rust `.14.7.4.4` admissions each land only with exact staged receipt-bound proof.
+  mandatory at admission/milestone/public/infrastructure/final-push boundaries; Perl `.14.7.3.4`, Rust `.14.7.4.4`,
+  and Dart dormant `.14.7.5.0` infrastructure rollover each land only with exact staged receipt-bound proof.
 - documentation_debt_owner: ADR `0066` composition-closes all stores; bounded live/history/task/Knowledge owners
   and their rollover/index gates remain current.
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
@@ -48,11 +48,13 @@
   parents `.3-.7`, recurrence `.8`, public authored closeout `.9`, and recomposition `.10` are frozen in order.
   Diagnostic `.14.7.1` is complete; neutral `.14.7.2` freezes 4 registry entries, 8 provenance, 8 resolution/6
   authority, 10 cache, 4 queue/3 isolation, 4 result/3 failure policies, 10 chain, 5 detachment, 37 diagnostics,
-  9 rollout legs, 35 owners, and 84 mutations after Rust admission. Perl `.14.7.3.1-.4` provide the private marker/provenance,
+  9 rollout legs, 35 owners, and 85 mutations after Dart dormant activation. Perl `.14.7.3.1-.4` provide the private marker/provenance,
   caller-frozen resolution/cache/policies, breadth-first recurrence, strict chains/shared resources, and source
   rebasing plus four fresh-authority carriers at 143/143. Rust `.14.7.4.0-.4` add an inert detached marker, strict literal
   options, live-span direct/ordered-derived provenance, pure caller-frozen resolution/cache, isolated complete-
   depth ordering, detached atomic stitching, all four result/three failure policies, breadth-first recurrence, exact
   cycle/decrease guards, shared resources, safe points, typed source rebasing, and four fresh-authority carriers.
-  Perl and Rust are privately admitted; v1/v2/public/outward truth is unchanged; Dart `.14.7.5.0` is next.
-- latest_bootstrap_read: 2026-08-26 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox are reviewed. `.14.7.4.4` admits fresh Rust native/reconstructed/generated/emitted carriers from clean `de6f5a65` without v1/v2/public/later-backend movement. Intended commit: `FUTURE-PARITY-BACKLOG.14.7.4.4 - admit Rust staged enrichment carriers`; Dart `.14.7.5.0` is next.
+  Perl and Rust are privately admitted and their full neutral projections are current at 85 (143/143 and 1/1).
+  Dart `.14.7.5.0` freezes a dormant generic-call/unknown-helper boundary: fatal analysis and four tests pass, one
+  marker/provenance assertion is RED, and production/discovery/rollout/v1/v2/public/outward truth is unchanged. `.14.7.5.1` is next.
+- latest_bootstrap_read: 2026-08-26 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox are reviewed. `.14.7.5.0` freezes Dart dormant RED without production/rollout/format/public movement; ADR `0091` owns mandatory history segment `4990` and upgrades proof to canonical. Intended commit: `FUTURE-PARITY-BACKLOG.14.7.5.0 - freeze Dart staged-AST dormant RED`; `.14.7.5.1` is next.

@@ -9,6 +9,23 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-26 (`FUTURE-PARITY-BACKLOG.14.7.5.0` — Dart staged dormant RED): exact clean activation is Rust
+  carrier-admission commit `94d20bec`; behavior scope owns only the excluded consumer, Dart lifecycle mutation,
+  current-v1 controls, four generic-carrier observations, and the first dedicated-marker/provenance RED.
+- Dart lowers the exact future assignment as `ActionAssignScalarExpr(ActionCallExpr)`. Native and normalized
+  reconstruction emit `unknown_helper`; generated-plan and independently analyzed/executed emitted source preserve
+  it under generated execution failure. The narrow v1 registry independently stays GREEN and denies `expr-v1`.
+- Fatal analysis passes. The focused consumer reports four passing tests and one intentional failure naming
+  `STAGED_PARSE_JOB_MARKER` plus `staged_parse_job_v2`. Neutral governance is 85 mutations and requires the exact
+  dormant path while proving final/ordinary/canonical paths absent. No production, rollout, format, public, or
+  later-backend boundary moves; `.14.7.5.1` is next.
+- The mandatory complete-record rollover creates immutable change-history segment `4990` from clean `94d20bec`
+  and leaves the synchronized hot root at 243/512 lines. The resulting store is 23 files / 22 manifest lines while
+  remaining 46,806/55,000 lines and 3,348,383/4,194,304 bytes. ADR `0091` changes only those two +1 finite controls, so the
+  leaf upgrades from focused behavior proof to receipt-bound canonical verification.
+- The first canonical attempt passes all doctrines, then exposes only stale neutral current projections in the
+  admitted Perl consumer; exact scan finds the same status/count/Dart-lifecycle literals in Rust. Updating those
+  projections changes no backend semantics: Perl returns to 143/143 and Rust's full fresh-carrier route passes 1/1.
 - 2026-08-26 (`FUTURE-PARITY-BACKLOG.14.7.4.4` — Rust staged carrier admission): exact clean activation is
   recursive-authority commit `de6f5a65`; the canonical leaf owns only fresh production carriers, dormancy removal,
   exact admission, Rust rollout, and backend-parent closure.

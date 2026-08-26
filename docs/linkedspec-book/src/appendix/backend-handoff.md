@@ -765,8 +765,13 @@ exports, check-cfg registration, and conditional dead-code allowance are gone. `
 validation and gap-aware child-dispatch parity are restored, while the private authority stays dormant beside the
 one admitted contract route. `.5.4` historically aligned the Perl snapshot to 79 mutations plus Rust
 `dormant_red`; Rust admission now advances the neutral oracle to 84 mutations and promotes only Rust. Dart/Julia/Lua consumers remain
-absent under `.14.7.5-.7`. Mandatory engineering-notes segment `4990` is finitely authorized at 18 files / 17
-manifest lines by ADR `0090`; no other pressure ceiling changes.
+pending under `.14.7.5-.7`. Dart `.14.7.5.0` now adds one exact `test_dormant/` consumer: neutral/v1 and all four
+generic-call observation routes are GREEN, execution preserves the structured `unknown_helper` rejection, and
+only the missing dedicated marker/typed provenance assertion is RED. Governance advances to 85 mutations while
+the final path, ordinary/canonical registration, Dart rollout, production, format, and public behavior remain
+unchanged; `.14.7.5.1` is next. Mandatory engineering-notes segment `4990` is finitely authorized at 18 files / 17
+manifest lines by ADR `0090`. Dart dormant closeout's mandatory change-history segment `4990` is finitely
+authorized at 23 files / 22 manifest lines by ADR `0091`; no other pressure ceiling changes.
 
 Progressive dispatch is a separate synchronous path under `FUTURE-PARITY-BACKLOG.14.6`. Audit `.14.6.0` proves
 that none of these registries can invoke a normal loaded spec while a parser is active. The portable design uses

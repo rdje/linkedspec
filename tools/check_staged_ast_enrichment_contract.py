@@ -46,8 +46,9 @@ AUTHORED_SURFACE = {
     ],
     "optional_options": ["top", "into", "required_capabilities"],
     "availability": (
-        "neutral executable authority with private Perl and Rust carriers complete; Dart, Julia, PUC Lua, "
-        "LuaJIT, recurring, and public authoring remain pending under FUTURE-PARITY-BACKLOG.14.7.5-.10"
+        "neutral executable authority with private Perl and Rust carriers complete; the Dart general carrier "
+        "contract is dormant RED; Julia, PUC Lua, LuaJIT, recurring, and public authoring remain pending under "
+        "FUTURE-PARITY-BACKLOG.14.7.5-.10"
     ),
 }
 
@@ -144,7 +145,8 @@ BACKEND_CONSUMERS = [
         "backend": "dart",
         "owner": "FUTURE-PARITY-BACKLOG.14.7.5.0",
         "path": "dart/test/staged_ast_enrichment_contract_test.dart",
-        "status": "pending_absent",
+        "dormant_path": "dart/test_dormant/staged_ast_enrichment_contract_test.dart",
+        "status": "dormant_red",
     },
     {
         "backend": "julia",
@@ -738,7 +740,17 @@ def validate_environment(contract: dict[str, Any]) -> None:
         if row["status"] == "pending_absent":
             require(not consumer_path.exists(), f"pending backend consumer unexpectedly exists: {row['path']}")
         elif row["status"] == "dormant_red":
-            raise ContractError("no staged backend consumer is currently dormant RED")
+            require(row["backend"] == "dart", f"unsupported dormant staged backend: {row['backend']}")
+            dormant_path_value = row.get("dormant_path")
+            require(safe_relative_path(dormant_path_value), "dormant backend consumer path is unsafe")
+            dormant_path = ROOT / dormant_path_value
+            require(not consumer_path.exists(), f"dormant backend final consumer unexpectedly exists: {row['path']}")
+            require(
+                dormant_path.is_file() and not dormant_path.is_symlink(),
+                f"dormant backend consumer is missing or symbolic: {dormant_path_value}",
+            )
+            require(ci_text.count(row["path"]) == 0, "dormant Dart final consumer entered canonical CI")
+            require(ci_text.count(dormant_path_value) == 0, "dormant Dart consumer entered canonical CI")
         elif row["status"] == "complete":
             require(
                 consumer_path.is_file() and not consumer_path.is_symlink(),
@@ -816,7 +828,11 @@ def validate_contract(contract: dict[str, Any], *, environment: bool = True) -> 
     require(contract["format"] == 1, "format must be 1")
     require(contract["contract_id"] == "linkedspec-staged-ast-enrichment-v1", "contract id mismatch")
     require(contract["task_owner"] == "FUTURE-PARITY-BACKLOG.14.7.2", "task owner mismatch")
-    require(contract["status"] == "neutral_perl_and_rust_complete_later_backends_pending", "contract status mismatch")
+    require(
+        contract["status"]
+        == "neutral_perl_and_rust_complete_dart_dormant_red_later_backends_pending",
+        "contract status mismatch",
+    )
     require(contract["authored_surface"] == AUTHORED_SURFACE, "authored surface mismatch")
     require(contract["policy"] == POLICY, "policy mismatch")
     require(contract["result_policies"] == RESULT_POLICIES, "result-policy inventory mismatch")
@@ -1024,6 +1040,7 @@ def mutation_inventory() -> list[Mutation]:
         ("consumer_path", set_value(["backend_consumers", 0, "path"], "/tmp/test.t"), "backend consumer inventory mismatch"),
         ("consumer_status", set_value(["backend_consumers", 0, "status"], "dormant_red"), "backend consumer inventory mismatch"),
         ("rust_consumer_status", set_value(["backend_consumers", 1, "status"], "dormant_red"), "backend consumer inventory mismatch"),
+        ("dart_consumer_status", set_value(["backend_consumers", 2, "status"], "pending_absent"), "backend consumer inventory mismatch"),
         ("runtime_route", set_value(["runtime_routes", 5, "runtime"], "lua"), "runtime route inventory mismatch"),
         ("outward_path", set_value(["outward_guard", "paths", 0], "README2.md"), "outward guard mismatch"),
         ("outward_token", set_value(["outward_guard", "forbidden_tokens"], []), "outward guard mismatch"),

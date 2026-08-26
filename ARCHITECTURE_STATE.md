@@ -17,8 +17,8 @@ resolution, immutable pre-registered parser/cache authority, breadth-first recur
 failure policies, strict decreasing/cycle/depth/call/cancellation/resource bounds, detached results, diagnostics,
 carrier obligations, dormant routes, rollout, exact ownership, and the unchanged function-body-v1 adapter. The
 checker passes 4 registry entries, 8 provenance, 8 resolution/6 authority, 10 cache, 4 queue/3 isolation,
-4 result plus 3 failure policies, 10 chain, 5 detachment, 37 diagnostics, 9 rollout legs, 35 owners, and 84
-reason-checked mutations after Rust carrier admission. It reuses ADR `0056`'s source algebra and progressive authority narrowing without
+4 result plus 3 failure policies, 10 chain, 5 detachment, 37 diagnostics, 9 rollout legs, 35 owners, and 85
+reason-checked mutations after Dart dormant-consumer activation. It reuses ADR `0056`'s source algebra and progressive authority narrowing without
 reusing `dispatch_span` syntax or elevating an authored parser id into filesystem authority.
 
 Perl leaves `FUTURE-PARITY-BACKLOG.14.7.3.1-.4` now implement and privately admit that same final path. `.1` makes exact assignment-form `parse_job(text_expr, literal_options)` one exclusive
@@ -75,6 +75,15 @@ logical-source authority absence are executable proof. The first production call
 cfg, cfg-only exports, manifest check-cfg registration, and conditional dead-code allowance. Rust alone is
 promoted; generated format v2, function-body v1, public/outward behavior, and later backends remain unchanged.
 
+Dart leaf `FUTURE-PARITY-BACKLOG.14.7.5.0` freezes the next backend boundary without changing production.
+`dart/test_dormant/staged_ast_enrichment_contract_test.dart` passes fatal analysis and four pre-boundary tests:
+neutral/v1 truth remains exact; assignment-form `parse_job(...)` is one generic `ActionCallExpr`; native and
+`SpecFile`-JSON-reconstructed execution emit structured `unknown_helper`; validated generated-plan and
+independently analyzed/executed emitted source preserve that rejection. The fifth and only RED names the missing
+`STAGED_PARSE_JOB_MARKER` and `staged_parse_job_v2`. The checker requires the dormant path, rejects mutation 85,
+and proves the eventual final path plus ordinary/canonical registration absent. Dart rollout, generated format,
+public/outward behavior, Julia/Lua, and function-body v1 do not move; `.14.7.5.1` owns marker/provenance.
+
 Focused `.14.7.4.1` proof also exposed two pre-existing Rust defects against its exact clean base. Corrective
 `TRACE-OBSERVABILITY.5.1` now repairs the first: `compile_with_events` runs the already-current progressive static
 validator at the same point as ordinary compilation, so traced/untraced malformed-program diagnostics are exact
@@ -87,7 +96,8 @@ contract input and cfg command exactly once. Cfg authority is 4/4 and ordinary d
 targets. `.5.4` historically aligned the stale Perl staged-admission snapshot with the 79-mutation / Rust-`dormant_red` truth
 introduced by `.14.7.4.0` commit `e37a8b77`; 143/143 plus canonical proof close corrective `.5`. `.14.7.4.2`
 then completes current-depth authority from that clean handoff, `.14.7.4.3` completes recursive authority, and
-`.14.7.4.4` admits four fresh carriers at 84 neutral mutations. Dart `.14.7.5.0` is next.
+`.14.7.4.4` admits four fresh carriers at 84 neutral mutations; `.14.7.5.0` advances only Dart dormancy to 85.
+The next frontier is Dart marker/provenance `.14.7.5.1`.
 
 This closeout's mandatory engineering-notes rollover publishes immutable segment `4990`. ADR `0090` advances
 only finite route controls from 17/16 to 18 files / 17 manifest lines; the measured collection remains
@@ -97,6 +107,10 @@ The same slice's mandatory complete-record rollover publishes immutable change-h
 advances only finite route controls from 21/20 to 22 files / 21 manifest lines; the measured collection remains
 46,587/55,000 lines and 3,328,651/4,194,304 bytes, and every other bounded-history control remains unchanged.
 
+Dart dormant leaf `.14.7.5.0` publishes the next mandatory immutable change-history segment `4990`. ADR `0091`
+advances only finite route controls from 22/21 to 23 files / 22 manifest lines; the measured collection remains
+46,806/55,000 lines and 3,348,383/4,194,304 bytes, and every other bounded-history control remains unchanged.
+
 Corrective `.14.7.1` closes the audit's one diagnostic parity defect before feature work. Perl, Rust, and Dart now
 pass the normalized job through compile instead of constructing placeholders; Julia and shared Lua retain their
 existing job propagation and add the missing payload kind. Every wrong-top error reports the original
@@ -105,7 +119,7 @@ diagnostics: success, resolution, execution, stitching, policies, queue depth, f
 surfaces stay fixed. Executable neutral contract `.2` and the Perl behavioral parent `.3` are complete; backend parents `.4-.7`, recurrence `.8`,
 public authoring/closeout `.9`, and independent recomposition `.10` remain dependency-frozen behind it. Every
 later runtime rollout leg and public/outward surface therefore remains pending except the now-admitted Rust
-carrier path `.4.4`; Dart dormant-boundary `.5.0` is the next clean frontier.
+carrier path `.4.4`; Dart dormant-boundary `.5.0` is complete and `.5.1` is the next clean frontier.
 
 ## Typed transaction safety now composes the complete recognition authority
 

@@ -4,8 +4,9 @@
 > privately admitted marker, caller-frozen recursive authority, and four fresh-authority carriers with a
 > fully GREEN 143-check oracle;
 > Rust now has the same private complete authority, four fresh native/reconstructed/generated/emitted production
-> carriers, and exact ordinary/canonical admission at 84 neutral mutations;
-> Dart, Julia, and Lua remain absent, and the only publicly authored five-backend/six-runtime surface is still the
+> carriers, and exact ordinary/canonical admission;
+> Dart now has an excluded dormant contract with four GREEN pre-boundary tests and one dedicated-marker/provenance
+> RED at 85 neutral mutations; Julia and Lua remain absent, and the only publicly authored five-backend/six-runtime surface is still the
 > narrow function-body v1 adapter described below.
 
 LinkedSpec's staged model lets one completed parse return bounded text islands for later parsers to refine. The
@@ -182,10 +183,11 @@ logical marker/sidecar and identity inputs. Each execution receives fresh caller
 generated data contains no callback, compiled parser, registry snapshot, source authority, cancellation token,
 deadline, budget, mutable queue, or host handle.
 
-Neutral and Perl rollout are complete. Five backend consumers map to six runtime routes because one shared Lua
-source must run independently on PUC Lua and LuaJIT. The exact Perl consumer runs once from ordinary phase-0 and
-once from canonical CI. Rust, Dart, Julia, both Lua routes, six-runtime recurrence, public authoring/no-drift, and
-final recomposition retain their `.14.7.4-.10` owners.
+Neutral, Perl, and Rust rollout are complete. Five backend consumers map to six runtime routes because one shared
+Lua source must run independently on PUC Lua and LuaJIT. The exact Perl and Rust consumers run once from ordinary
+and canonical proof. Dart's consumer is deliberately confined to `dart/test_dormant/`; its final path, ordinary
+discovery, canonical registration, and rollout remain pending. Julia, both Lua routes, six-runtime recurrence,
+public authoring/no-drift, and final recomposition retain their `.14.7.6-.10` owners.
 
 ## Current private Perl boundary
 
@@ -297,12 +299,12 @@ host handle.
 Perl is privately admitted, but the language ledger still classifies `parse_job` as non-public until the separately
 owned `.14.7.9` closeout. Function-body v1 and generated-source v2 remain unchanged.
 
-Rust `.14.7.4.0-.3` freeze the next backend boundary and implement its private declaration plus recursive
-authority. Ordinary
-Cargo discovery sees the exact consumer but activates zero tests; canonical CI does not mention it. With its
-dedicated cfg enabled, current function-body v1 still proves deterministic queue order, built-in resolution/load/
-compile/execute/cache, exact `replace_field` / `body_ast` / `fail`, and complete wrong-top context. A general
-`expr-v1` job remains rejected during v1 resolution.
+## Current private Rust boundary
+
+Rust `.14.7.4.0-.4` freeze, implement, and admit the next backend boundary. Ordinary Cargo and canonical CI now
+execute the exact GREEN consumer once. Current function-body v1 still proves deterministic queue order, built-in
+resolution/load/compile/execute/cache, exact `replace_field` / `body_ast` / `fail`, and complete wrong-top context.
+A general `expr-v1` job remains rejected during v1 resolution.
 
 The exact future annotation spelling is scalar assignment with a literal option hash. In Rust, that form now
 compiles exclusively to `Expr::StagedParseJobMarker`:
@@ -403,9 +405,42 @@ This is private Rust backend admission, not public `parse_job(...)` authoring. O
 consumer, canonical CI requires and invokes it exactly once, and only Rust rollout is promoted. Dart, Julia, Lua,
 six-runtime recurrence, public authoring, independent recomposition, and combined no-drift retain their owners.
 
+## Current dormant Dart boundary
+
+Dart `.14.7.5.0` adds no production behavior. Its exact consumer is
+`dart/test_dormant/staged_ast_enrichment_contract_test.dart`, which ordinary package-test discovery and canonical CI
+omit. Fatal analysis includes it successfully. An explicit focused run reports four passing tests and one
+deliberate failure.
+
+The GREEN groups freeze all neutral inventories and the unchanged function-body-v1 adapter, including stable
+resolve/load/compile/execute/cache/stitch records, complete wrong-top context, and resolve-time denial of general
+`expr-v1`. They then inspect compiled JSON: exact assignment-form `parse_job(...)` is still one `assign_scalar`
+containing one generic `call` named `parse_job`, with no dedicated marker or sidecar. Native and `SpecFile`-JSON-
+reconstructed execution both report:
+
+```text
+unknown_helper name="parse_job" rule_label="Top"
+```
+
+Validated generated-plan execution wraps that same diagnostic as `generated_execution_failed`. Independently
+emitted Dart source analyzes, loads, and executes successfully as a program while preserving the same generated-
+execution rejection. These are observation routes, not future carrier behavior.
+
+The fifth test fails only with `LINKEDSPEC_STAGED_AST_ENRICHMENT_DART_RED`, naming missing
+`STAGED_PARSE_JOB_MARKER` and `staged_parse_job_v2`. The neutral checker requires this exact dormant path, the
+eventual `dart/test/staged_ast_enrichment_contract_test.dart` path to remain absent, and both paths to have zero
+canonical references. Dart rollout stays pending. `.14.7.5.1` owns the dedicated declaration node and typed
+direct/ordered-derived provenance; `.2-.4` separately retain authority/policies, recurrence/bounds/rebasing, and
+fresh carriers/admission.
+
+The admitted Perl and Rust consumers each snapshot the complete neutral current projection before their backend-
+specific assertions. Dart's dormant transition therefore updates their aggregate status, mutation count, and Dart
+lifecycle expectation while leaving their runtime behavior unchanged. Focused proof remains Perl 143/143 and Rust
+1/1 across its fresh native, reconstructed, generated-plan, and emitted routes.
+
 Publishing this boundary crossed the bounded `CHANGES.md` rollover threshold. The repository archived one complete
-218-line record set as immutable segment `4991`; ADR `0089` advances only the finite change-history collection and
-manifest controls to 22 files / 21 records. No byte, per-file, aggregate, route, storage, or product boundary was
+224-line record set as immutable segment `4990`; ADR `0091` advances only the finite change-history collection and
+manifest controls to 23 files / 22 records. No byte, per-file, aggregate, route, storage, or product boundary was
 weakened.
 
 Run the neutral proof with:
@@ -416,6 +451,6 @@ bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract
 
 The checker currently reports 4 registry entries; 8 provenance, 8 resolution, 6 authority, 10 cache, 4 queue,
 3 isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases; 37 diagnostics; 5 backend
-consumers/6 routes; 4 carrier requirements; 10 outward guards; 9 rollout legs; 35 owners; and 84 reason-checked
-mutations. The neutral checker, Perl consumer, and Rust consumer are registered in canonical local CI; later
-backend consumers remain absent.
+consumers/6 routes; 4 carrier requirements; 10 outward guards; 9 rollout legs; 35 owners; and 85 reason-checked
+mutations. The neutral checker, Perl consumer, and Rust consumer are registered in canonical local CI; Dart is
+dormant and later backend consumers remain absent.

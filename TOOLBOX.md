@@ -328,7 +328,8 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   native, normalized-descriptor, validated generated-plan, and independently loaded emitted equality plus distinct
   callbacks/cancellation/clocks and serialized-authority absence. Then run
   `bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py` to prove neutral+Perl+Rust
-  lifecycle, three absent later consumers, 84 mutations, and exact single Perl/Rust ordinary+canonical admission.
+  lifecycle, Dart's exact dormant consumer, two absent later consumers, 85 mutations, and exact single Perl/Rust
+  ordinary+canonical admission with zero Dart registration.
   Public authoring remains `.14.7.9`.
 - **Rust general-staged admitted private boundary:** `FUTURE-PARITY-BACKLOG.14.7.4.0-.4` owns
   `rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs` as an ordinary and canonical consumer. Run it with
@@ -351,7 +352,18 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   derived rebasing, and adversarial denials. `StagedAstEnrichmentSeed::start` constructs a fresh registry/cache and
   recursive authority for every top-level native, reconstructed, generated-plan, or emitted execution; completion
   occurs only after the parent result and returns the detached neutral record. No outer cfg, cfg-only export,
-  check-cfg registration, or conditional dead-code allowance remains. Dart `.14.7.5.0` is next.
+  check-cfg registration, or conditional dead-code allowance remains. Dart `.14.7.5.0` now freezes the next
+  boundary without changing this Rust route.
+- **Dart general-staged dormant boundary:** `FUTURE-PARITY-BACKLOG.14.7.5.0` owns
+  `dart/test_dormant/staged_ast_enrichment_contract_test.dart`. Run fatal analysis and then the exact opt-in test
+  from `dart/` through `bash ../tools/run_dart_project_data.sh`. Four tests must pass and the fifth must fail only
+  with `LINKEDSPEC_STAGED_AST_ENRICHMENT_DART_RED`. Inspect compiled JSON through `ActionCallExpr`, not source
+  spelling: current assignment-form `parse_job(...)` is one generic call, native/reconstructed execution reports
+  `unknown_helper`, and generated-plan/emitted routes preserve the same rejection. The final
+  `dart/test/staged_ast_enrichment_contract_test.dart` path and both canonical references must remain absent until
+  `.14.7.5.4`; `.14.7.5.1` owns only the missing dedicated marker and typed provenance. Because every admitted
+  consumer snapshots the full neutral current projection, rerun both Perl and Rust consumers whenever any later
+  backend lifecycle or governed mutation count moves.
 - **Env knobs:** `LINKEDSPEC_TRACE_LEVEL` (level; `LINKEDSPEC_DUMP_VERBOSITY` is the fallback),
   `LINKEDSPEC_TRACE_FILE` (route to a file), `LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_EMOJI`,
   `LINKEDSPEC_TRACE_RESET_FILE`.
@@ -1171,10 +1183,11 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   unconditionally in canonical local CI.
 - **OUTPUT:** 4 registry entries; 8 provenance; 8 resolution/6 authority; 10 cache; 4 queue/3 isolation;
   4 result plus 3 failure policies; 10 recursive-chain and 5 detachment cases; five backend consumers over six
-  runtime routes; 37 diagnostics; 9 rollout legs; 35 exact owners; and 78 mutations.
-- **BOUNDARY:** neutral and Perl are complete. Rust, Dart, Julia, PUC Lua, LuaJIT, recurrence, and public no-drift
-  remain pending; outward facade/schema/semantic/MCP/CLI/README tokens remain absent. The existing function-body v1
-  adapter and generated-source v2 format stay current and unchanged.
+  runtime routes; 37 diagnostics; 9 rollout legs; 35 exact owners; and 85 mutations.
+- **BOUNDARY:** neutral, Perl, and Rust are complete. Dart is `dormant_red` at its exact excluded path; Julia,
+  PUC Lua, LuaJIT, recurrence, and public no-drift remain pending. Outward facade/schema/semantic/MCP/CLI/README
+  tokens remain absent. The existing function-body v1 adapter and generated-source v2 format stay current and
+  unchanged.
 
 ### 4.9.1.2 Lossless-gap handoff preflight
 

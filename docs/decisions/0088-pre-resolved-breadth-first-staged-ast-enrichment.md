@@ -2,7 +2,8 @@
 
 - Date: 2026-08-25
 - Status: accepted architecture; executable neutral authority complete under `FUTURE-PARITY-BACKLOG.14.7.2`;
-  Perl private behavior and admission complete through `.14.7.3.4`; later backends, recurrence, and public authoring remain pending
+  Perl and Rust private behavior/admission complete; Dart dormant RED complete under `.14.7.5.0`; later behavior,
+  recurrence, and public authoring remain pending
 - Tags: architecture, staged-parsing, parse-job, source-location, registry, queue, policies, diagnostics, portability
 
 ## Context
@@ -125,16 +126,16 @@ cancellation/deadline/budget state, mutable queues, or host handles.
 `capability_conformance/staged_ast_enrichment_contract.json` and independent checker
 `tools/check_staged_ast_enrichment_contract.py` govern the selected v1 contract. The current neutral boundary is
 4 registry entries; 2 sources; 8 provenance, 3 deterministic-id, 8 resolution, 6 authority, 10 cache, 4 queue,
-3 isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases; 37 diagnostics; 5 future backend
+3 isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases; 37 diagnostics; 5 backend
 consumers over 6 runtime routes; 4 carrier requirements; 10 outward guards; 9 rollout legs; 35 exact owners; and
-79 reason-checked mutations after Rust dormant-consumer activation.
+85 reason-checked mutations after Dart dormant-consumer activation.
 
-Neutral and Perl rollout are complete. Rust, Dart, Julia, PUC Lua, LuaJIT, six-runtime recurrence, and public
-authoring/no-drift remain pending under `.14.7.4-.9`; `.14.7.10` owns independent recomposition. The checker is an
-always-on canonical-CI input. It guards ten facades/schema/semantic/MCP/CLI/README paths against premature public
-exposure, requires the Perl consumer exactly once in ordinary and canonical discovery, requires the dormant Rust
-consumer at its predeclared path with zero canonical references, and keeps Dart/Julia/Lua consumers absent until
-their RED owners activate.
+Neutral, Perl, and Rust rollout are complete. Dart behavior/rollout, Julia, PUC Lua, LuaJIT, six-runtime recurrence,
+and public authoring/no-drift remain pending under `.14.7.5-.9`; `.14.7.10` owns independent recomposition. The
+checker is an always-on canonical-CI input. It guards ten facades/schema/semantic/MCP/CLI/README paths against
+premature public exposure, requires the Perl and Rust consumers exactly once in ordinary and canonical discovery,
+requires Dart's exact `test_dormant/` consumer while keeping its eventual final path and canonical references
+absent, and keeps Julia/Lua consumers absent until their RED owners activate.
 
 ## Consequences
 
@@ -277,6 +278,19 @@ the first production caller. The exact consumer is GREEN under ordinary Cargo an
 CI. Only Rust backend/rollout truth advances; the checker rejects 84 mutations. Function-body v1, generated-source
 v2, public/outward surfaces, later backends, recurrence, and combined no-drift remain unchanged or pending.
 
+Dart dormant-boundary leaf `FUTURE-PARITY-BACKLOG.14.7.5.0` adds exactly one
+`dart/test_dormant/staged_ast_enrichment_contract_test.dart` consumer and no production source. Fatal analysis is
+GREEN. Four tests freeze the complete neutral inventory at 85 mutations, unchanged function-body-v1
+resolve/load/compile/execute/cache/stitch and wrong-top context, current generic ActionIR structure, native and
+`SpecFile`-JSON-reconstructed rejection, validated generated-plan rejection, and independently analyzed/executed
+emitted-source rejection. Assignment-form `parse_job(...)` currently remains
+`ActionAssignScalarExpr(ActionCallExpr)`; native/reconstructed execution emits the structured
+`unknown_helper name="parse_job" rule_label="Top"` diagnostic, and generated routes preserve it under the existing
+generated-execution error boundary. The fifth and only failing test names the missing
+`STAGED_PARSE_JOB_MARKER`/`staged_parse_job_v2`. Ordinary Dart discovery, canonical CI, Dart rollout, generated
+format, public/outward behavior, other backends, and function-body v1 do not move. `.14.7.5.1` retains exclusive
+ownership of the private dedicated declaration node and typed direct/ordered-derived provenance.
+
 ## Links
 
 - Owning task: `docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md`
@@ -288,4 +302,5 @@ v2, public/outward surfaces, later backends, recurrence, and combined no-drift r
   `docs/knowledge/perl-staged-ast-enrichment-recursive-authority.md` plus
   `docs/knowledge/rust-staged-ast-enrichment-dormant-red.md` and
   `docs/knowledge/rust-staged-ast-enrichment-current-depth-authority.md` plus
-  `docs/knowledge/rust-staged-ast-enrichment-recursive-authority.md`
+  `docs/knowledge/rust-staged-ast-enrichment-recursive-authority.md` and
+  `docs/knowledge/dart-staged-ast-enrichment-dormant-red.md`

@@ -2,25 +2,32 @@
 
 ## Current Activity
 
-- Rust staged `.14.7.4.4` attaches the complete private authority to native, reconstructed, validated generated-
-  plan, and independently compiled emitted top-level execution.
-- A host-only seed constructs a fresh frozen registry/cache and recursive authority per run after the complete
-  parent result. Equal detached output, independent zero-hit/one-miss caches, distinct callbacks/cancellation/
-  clocks, cross-result isolation, and serialized-authority absence are executable proof.
-- The exact ordinary/canonical consumer is GREEN, temporary cfg/dead-code scaffolding is removed, neutral
-  governance advances to 84 mutations, and only Rust rollout moves.
+- Dart staged `.14.7.5.0` freezes one exact `test_dormant/` consumer without changing production behavior.
+- Fatal analysis is GREEN. Four tests preserve neutral/current-v1 truth and prove generic `parse_job` structure
+  plus native, reconstructed, generated-plan, and independently loaded emitted rejection; the fifth and only RED
+  names missing `STAGED_PARSE_JOB_MARKER` / `staged_parse_job_v2`.
+- Neutral governance advances only Dart to `dormant_red` at 85 mutations. The final path, ordinary/canonical
+  discovery, rollout, generated format, public/outward surfaces, and other backends do not move.
+- Mandatory change-history segment `4990` advances only finite route capacity to 23 files / 22 manifest lines
+  under ADR `0091`; this infrastructure boundary requires canonical signoff.
+- The first canonical attempt exposed only stale pre-Dart neutral projections in admitted Perl/Rust consumers;
+  their exact projection repair is focused-GREEN at Perl 143/143 and Rust 1/1 with backend behavior unchanged.
 
 ## Latest Completed Slice
 
-- `.14.7.4.4` implementation and focused proof are complete from clean base `de6f5a65`; canonical receipt and
-  atomic commit are the remaining closeout steps.
+- `.14.7.5.0` implementation, focused behavior proof, bounded rollover, and exact capacity decision are complete
+  from clean base `94d20bec`; canonical candidate proof and atomic commit remain.
 
 ## Next Action
 
-- Complete exact canonical signoff and commit `.14.7.4.4`; from the clean handoff, activate Dart dormant-boundary
-  leaf `.14.7.5.0` task-tree-first.
+- Complete receipt-bound canonical signoff and commit `.14.7.5.0`; from the clean handoff, activate Dart marker/provenance leaf
+  `.14.7.5.1` task-tree-first.
 
 ## Recent Completions
+
+- `2026-08-26` — `.14.7.5.0` adds one excluded Dart consumer, passes fatal analysis plus four pre-boundary tests,
+  freezes one exact dedicated-marker/provenance RED, advances only dormant lifecycle governance to 85, and
+  finitely admits mandatory change-history segment `4990` through ADR `0091`.
 
 - `2026-08-26` — `.14.7.4.4` proves four fresh Rust production carriers, admits the exact consumer once in
   ordinary/canonical topology, removes dormant cfg/dead-code scaffolding, promotes only Rust at 84 mutations, and
@@ -69,9 +76,6 @@
 
 - `2026-08-25` — `.14.7.2` freezes general staged-AST enrichment as executable neutral authority with 72
   mutations while retaining dormant backends, pending rollout, unchanged v1 behavior, and no outward API.
-
-- `2026-08-25` — `.14.7.1` closes wrong-top compile diagnostic parity across all six runtime routes while
-  preserving the narrow registry and every general/public boundary.
 
 ## History
 

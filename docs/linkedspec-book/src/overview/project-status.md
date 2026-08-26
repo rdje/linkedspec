@@ -120,15 +120,20 @@ expiring callback safe points, and direct/ordered-derived original-source rebasi
 validated generated-plan, and independently compiled emitted routes each construct fresh registry/cache and
 recursive authority from a host-only seed, run only after the complete parent result, return equal detached
 records, and serialize no live authority. The temporary cfg/dead-code scaffolding is removed, the neutral oracle
-rejects 84 mutations, and only Rust rollout advances. Dart `.14.7.5.0` is next. Focused `.1` proof found two unrelated
+rejects 84 mutations, and only Rust rollout advances. Dart `.14.7.5.0` now freezes an excluded consumer at the
+generic `ActionCallExpr` / structured `unknown_helper` boundary: four pre-boundary tests pass and one exact
+dedicated-marker/provenance RED remains. Neutral governance reaches 85 mutations without production, discovery,
+rollout, format, or public movement; `.14.7.5.1` is next. Focused `.1` proof found two unrelated
 pre-existing Rust validation/trace defects. `TRACE-OBSERVABILITY.5.1` now restores ordinary/traced progressive
 static-validation equality with an exact diagnostic regression. `.5.2` now restores exactly one existing child-
 dispatch/result event pair on normal and gap-aware interpreted/generated entry; trace controls pass 11/11 with
 unchanged results and Rust trace parity is current again. `.5.3` owns the stale private progressive-authority route
 assertion found by `.5.1`; it now keeps the authority target dormant while requiring the separate admitted contract
 input/command once. `.5.4` historically aligned the admitted Perl staged snapshot to 79 mutations plus Rust
-`dormant_red`; `.14.7.4.4` supersedes that lifecycle snapshot with Rust admission and 84 mutations. Mandatory engineering-notes segment
-`4990` is finitely authorized at 18 files / 17 manifest lines by ADR `0090`.
+`dormant_red`; `.14.7.4.4` supersedes that lifecycle snapshot with Rust admission and 84 mutations, and Dart
+`.14.7.5.0` subsequently advances only its dormant lifecycle to 85. Mandatory engineering-notes segment
+`4990` is finitely authorized at 18 files / 17 manifest lines by ADR `0090`. Its mandatory change-history rollover
+publishes segment `4990`; ADR `0091` advances only that store's finite controls to 23 files / 22 manifest lines.
 
 Rust's exact four-test consumer now runs under ordinary Cargo discovery and as a required canonical-CI leg. It
 proves the immutable value core and projection boundary across native, reconstructed, and generated-plan execution;
