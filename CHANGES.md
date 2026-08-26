@@ -10,6 +10,23 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-26 — FUTURE-PARITY-BACKLOG.14.7.3.4 — admit Perl staged-AST enrichment
+
+- Added private `LinkedSpec::StagedASTEnrichmentRuntime` and attached it to live and generated-v2 top-level
+  execution. Host invocation options construct a new caller-frozen scheduler/cache for each parse and enrich only
+  after the complete parent AST returns; typed staged failures stay inside the existing runtime error boundary.
+- Proved native, normalized-descriptor, validated generated-plan, and independently loaded emitted-source routes
+  produce equal detached AST, sidecar, diagnostic, cache, and resource results. Every route receives distinct
+  snapshot aggregates, already-compiled callbacks, cancellation identities/callbacks, and clock authority.
+- Proved normalized marker metadata, generated plans, and emitted source retain only logical declaration data and
+  serialize no callback, compiled parser, registry snapshot, source authority, cancellation/deadline/budget state,
+  mutable queue, filesystem path, or host handle. Generated-source v2 and function-body v1 remain unchanged.
+- Promoted only the Perl backend consumer and Perl rollout leg. The unchanged final-path oracle is fully GREEN at
+  143 top-level checks, executes once from ordinary phase-0 and once from canonical CI, while Rust/Dart/Julia/Lua,
+  recurrence, public authoring, language inventory, and every outward surface remain pending or unchanged.
+- Advanced the neutral checker to 78 reason-checked mutations and exact Perl admission topology. Focused direct
+  dependents plus exact staged receipt-bound canonical CI accompany behavioral-parent closure.
+
 ## 2026-08-26 — FUTURE-PARITY-BACKLOG.14.7.3.3 — add Perl staged recursive authority
 
 - Added private `enrich_recursively` over the existing caller-frozen resolution/cache/policy engine. Every complete

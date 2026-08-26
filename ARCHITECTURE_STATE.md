@@ -17,12 +17,11 @@ resolution, immutable pre-registered parser/cache authority, breadth-first recur
 failure policies, strict decreasing/cycle/depth/call/cancellation/resource bounds, detached results, diagnostics,
 carrier obligations, dormant routes, rollout, exact ownership, and the unchanged function-body-v1 adapter. The
 checker passes 4 registry entries, 8 provenance, 8 resolution/6 authority, 10 cache, 4 queue/3 isolation,
-4 result plus 3 failure policies, 10 chain, 5 detachment, 37 diagnostics, 9 rollout legs, 35 owners, and 72
-reason-checked mutations. It reuses ADR `0056`'s source algebra and progressive authority narrowing without
+4 result plus 3 failure policies, 10 chain, 5 detachment, 37 diagnostics, 9 rollout legs, 35 owners, and 78
+reason-checked mutations after Perl admission. It reuses ADR `0056`'s source algebra and progressive authority narrowing without
 reusing `dispatch_span` syntax or elevating an authored parser id into filesystem authority.
 
-Perl private leaves `FUTURE-PARITY-BACKLOG.14.7.3.1-.3` now advance that same dormant final path without
-admission. `.1` makes exact assignment-form `parse_job(text_expr, literal_options)` one exclusive
+Perl leaves `FUTURE-PARITY-BACKLOG.14.7.3.1-.4` now implement and privately admit that same final path. `.1` makes exact assignment-form `parse_job(text_expr, literal_options)` one exclusive
 `STAGED_PARSE_JOB_MARKER`; malformed, dynamic, transformed, literal-copied, and non-annotation forms remain
 fail-closed. The opaque marker owns a detached `staged_parse_job_v2` sidecar containing normalized literal options,
 exact materialized text, and either one typed Unicode-scalar direct span or a nonempty ordered-derived span list.
@@ -36,10 +35,16 @@ implements all four result plus three failure policies on an unpublished AST cop
 breadth-first recurrence, exact-text/full-provenance chain tuples, strict lineage decrease/cycle checks, shared
 cancellation/deadline/step/call/depth/result/diagnostic authority, expiring callback safe points, and direct or
 ordered-derived original-source diagnostic rebasing. Failures/results never poison the cache; missing/colliding/
-wrong-kind/stale targets and live/cyclic results reject. The final-path consumer now has 141 GREEN top-level checks
-and one `.14.7.3.4` RED for fresh carriers/admission/Perl rollout. It remains absent from ordinary/canonical
-discovery, and rollout, generated carriers/formats, language inventory, outward surfaces, and function-body v1
-remain unchanged.
+wrong-kind/stale targets and live/cyclic results reject. `.4` adds the private
+`LinkedSpec::StagedASTEnrichmentRuntime` invocation seam. Native, normalized-descriptor, validated generated-plan,
+and independently loaded generated-v2 routes each construct a new scheduler/cache from caller options before
+authored execution and invoke it only after the parent AST returns. All four produce equal detached
+AST/sidecar/diagnostic/resource results from distinct
+snapshot callback, cancellation, and clock identities; normalized/generated/emitted data retain only the logical
+marker and contain no callback, parser, registry, source, path, host, cancellation, deadline, budget, or queue
+authority. The final-path consumer is fully GREEN at 143 top-level checks, appears once in ordinary phase-0 and
+once in canonical CI, and promotes only Perl. Rust/Dart/Julia/Lua, recurrence, public authoring, language inventory,
+outward surfaces, generated format v2, and function-body v1 remain unchanged or pending.
 
 The same slice's mandatory complete-record rollover publishes immutable change-history segment `4991`. ADR `0089`
 advances only finite route controls from 21/20 to 22 files / 21 manifest lines; the measured collection remains
@@ -50,9 +55,9 @@ pass the normalized job through compile instead of constructing placeholders; Ju
 existing job propagation and add the missing payload kind. Every wrong-top error reports the original
 id/path/parser/top/payload/span/failure context plus resolved built-in identity. This changes only compile-failure
 diagnostics: success, resolution, execution, stitching, policies, queue depth, formats, capabilities, and outward
-surfaces stay fixed. Executable neutral contract `.2` is complete; backend parents `.3-.7`, recurrence `.8`,
+surfaces stay fixed. Executable neutral contract `.2` and the Perl behavioral parent `.3` are complete; backend parents `.4-.7`, recurrence `.8`,
 public authoring/closeout `.9`, and independent recomposition `.10` remain dependency-frozen behind it. Every
-runtime rollout leg and public/outward surface therefore remains pending; Perl carriers/admission `.3.4` are next.
+later runtime rollout leg and public/outward surface therefore remains pending; Rust dormant RED `.4.0` is next.
 
 ## Typed transaction safety now composes the complete recognition authority
 

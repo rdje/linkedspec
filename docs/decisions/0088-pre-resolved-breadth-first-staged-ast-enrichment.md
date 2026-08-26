@@ -2,8 +2,7 @@
 
 - Date: 2026-08-25
 - Status: accepted architecture; executable neutral authority complete under `FUTURE-PARITY-BACKLOG.14.7.2`;
-  Perl private recursive authority complete through `.14.7.3.3`; carriers/admission, later backends, and public
-  authoring remain pending
+  Perl private behavior and admission complete through `.14.7.3.4`; later backends, recurrence, and public authoring remain pending
 - Tags: architecture, staged-parsing, parse-job, source-location, registry, queue, policies, diagnostics, portability
 
 ## Context
@@ -128,12 +127,13 @@ cancellation/deadline/budget state, mutable queues, or host handles.
 4 registry entries; 2 sources; 8 provenance, 3 deterministic-id, 8 resolution, 6 authority, 10 cache, 4 queue,
 3 isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases; 37 diagnostics; 5 future backend
 consumers over 6 runtime routes; 4 carrier requirements; 10 outward guards; 9 rollout legs; 35 exact owners; and
-72 reason-checked mutations.
+78 reason-checked mutations after Perl admission.
 
-Only neutral rollout is complete. Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, six-runtime recurrence, and public
-authoring/no-drift remain pending under `.14.7.3-.9`; `.14.7.10` owns independent recomposition. The checker is an
+Neutral and Perl rollout are complete. Rust, Dart, Julia, PUC Lua, LuaJIT, six-runtime recurrence, and public
+authoring/no-drift remain pending under `.14.7.4-.9`; `.14.7.10` owns independent recomposition. The checker is an
 always-on canonical-CI input. It guards ten facades/schema/semantic/MCP/CLI/README paths against premature public
-exposure and requires all five planned backend consumer files to remain absent until their RED owners activate.
+exposure, requires the Perl consumer exactly once in ordinary and canonical discovery, and keeps all four later
+backend consumer files absent until their RED owners activate.
 
 ## Consequences
 
@@ -199,6 +199,22 @@ original-source position/span/diagnostic projection, then expire. Cross-segment 
 RED for native/reconstructed/generated-plan/emitted fresh-authority carriers, admission, and Perl rollout.
 Function-body v1, neutral lifecycle/rollout, ordinary/canonical discovery, generated format, public inventory,
 outward surfaces, and other backends remain unchanged.
+
+Perl carrier/admission leaf `FUTURE-PARITY-BACKLOG.14.7.3.4` adds the private
+`LinkedSpec::StagedASTEnrichmentRuntime` top-level seam. Live and generated-v2 wrappers construct a fresh
+`StagedASTEnrichment` scheduler/cache from caller invocation options, execute the complete parent parse, then call
+`enrich_recursively` inside the existing typed runtime error boundary. A normalized descriptor handler uses the
+same explicit wrapper; validated generated-plan and independently eval-loaded emitted packages use their ordinary
+`Execute` wrappers.
+
+The unchanged final-path oracle is fully GREEN at 143 top-level checks. It proves equal detached AST, sidecar,
+diagnostic, cache, and resource results across all four routes; distinct snapshot aggregates, sixteen compiled
+callback entries, cancellation identities/callbacks, and clocks; fresh zero-hit/one-miss caches; and cross-result
+detachment. Normalized ActionIR args, generated plans, and emitted source contain no callback, compiled parser,
+registry snapshot, source authority, cancellation/deadline/budget state, mutable queue, path, or host handle.
+Ordinary phase-0 and canonical CI each register the exact consumer once. Only the Perl backend/rollout row moves;
+the checker now rejects 78 mutations. Function-body v1, generated-source v2, language/public/outward surfaces,
+later backends, recurrence, and combined `.14.8` remain unchanged or pending.
 
 ## Links
 

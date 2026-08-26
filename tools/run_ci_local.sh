@@ -448,6 +448,7 @@ require_tracked_file t/recursive_observation_perl_contract.t
 require_tracked_file t/recognition_transaction_perl_authority.t
 require_tracked_file t/recognition_transaction_perl_contract.t
 require_tracked_file t/progressive_span_dispatch_perl_contract.t
+require_tracked_file t/staged_ast_enrichment_perl_contract.t
 require_tracked_file rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs
 require_tracked_file dart/test/progressive_span_dispatch_contract_test.dart
 require_tracked_file julia/test/progressive_span_dispatch_contract_test.jl
@@ -602,6 +603,7 @@ perl -c -Iperl t/recursive_observation_perl_contract.t
 perl -c -Iperl t/recognition_transaction_perl_authority.t
 perl -c -Iperl t/recognition_transaction_perl_contract.t
 perl -c -Iperl t/progressive_span_dispatch_perl_contract.t
+perl -c -Iperl t/staged_ast_enrichment_perl_contract.t
 perl -c -Iperl t/rule_local_cursor_perl_contract.t
 perl -c -Iperl t/duplicate_regex_slot_identity_perl_contract.t
 perl -c -Iperl t/sparse_and_action_slots_perl_regression.t
@@ -670,6 +672,9 @@ bash tools/run_python_project_data.sh tools/check_progressive_span_dispatch_cont
 
 log "checking backend-neutral staged-AST enrichment contract"
 bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py
+
+log "running exact Perl staged-AST enrichment admission consumer"
+PERL5LIB= prove -Iperl t/staged_ast_enrichment_perl_contract.t
 
 log "running exact Perl progressive span-dispatch admission consumer"
 PERL5LIB= prove -Iperl t/progressive_span_dispatch_perl_contract.t

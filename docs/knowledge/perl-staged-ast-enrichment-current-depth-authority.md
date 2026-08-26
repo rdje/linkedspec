@@ -17,15 +17,16 @@ answers:
   - "does Perl recursively schedule staged AST markers yet"
   - "what is FUTURE-PARITY-BACKLOG 14.7.3.2"
 date: 2026-08-26
-status: current private dormant current-depth building block; recursive authority complete; carriers and admission pending
+status: current private current-depth building block; recursive carriers and Perl admission complete
 tags: [perl, staged-parsing, registry, cache, result-policy, failure-policy, detachment, private, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.3.2 adds unexported LinkedSpec::StagedASTEnrichment over a caller-prepared immutable snapshot whose entries contain already-compiled CODE authority. Pure post-AST selection implements alias, declaring-relative, ordered-root, and ordered-provider priority plus exact missing/ambiguity/collision denial; top/version/capability/policy/source-detail authority narrows; default top precedes canonical v2 job identity; cache identity covers normalized parser/content/import/top/version/sorted-effective-capability fields and stores only immutable execution plans. One complete discovered depth sorts typed paths numerically, gives every callback fresh runtime state, and implements replace_marker, replace_field, sibling_field, append_child, fail, keep_text, and diagnostic_node over an unpublished AST copy. Results are node-bounded and detached, failures/results never enter the cache, stale/missing/colliding/wrong-kind targets reject, and nested inert markers remain untouched. The dormant consumer has 133 GREEN top-level checks and one RED for FUTURE-PARITY-BACKLOG.14.7.3.3 recursion, decreasing-chain/cancellation/resource bounds, and source-rebased diagnostics. V1, discovery, rollout, carriers, format, language/public/outward surfaces, and other backends do not move."
 evidence_update_2026_08_26_recursive: "FUTURE-PARITY-BACKLOG.14.7.3.3 preserves enrich_ast's exact one-depth behavior and adds enrich_recursively over the same preparation/cache/policy engine. The consumer advances to 141 GREEN top-level checks and one carriers/admission RED."
+evidence_update_2026_08_26_admission: "FUTURE-PARITY-BACKLOG.14.7.3.4 constructs a fresh instance of this authority for each of four top-level carrier routes. The consumer is 143/143 and admitted; function-body v1 and public authoring remain unchanged."
 reverify:
   - "perl -Iperl -c perl/LinkedSpec/StagedASTEnrichment.pm"
-  - "test \"$(PERL5LIB= prove -Iperl t/staged_ast_enrichment_perl_contract.t 2>&1 | rg -c 'Failed 1/142 subtests|expected RED: missing authority=\\[native_fresh_authority,reconstructed_fresh_authority,generated_plan_fresh_authority,emitted_module_fresh_authority,ordinary_canonical_admission,perl_rollout_promotion\\]')\" -eq 2"
+  - "PERL5LIB= prove -q -Iperl t/staged_ast_enrichment_perl_contract.t"
   - "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py"
-  - "test \"$(rg -c 'PERL5LIB= prove -Iperl t/staged_ast_enrichment_perl_contract[.]t' tools/run_ci_local.sh)\" -eq 0"
+  - "test \"$(rg -c 'PERL5LIB= prove -Iperl t/staged_ast_enrichment_perl_contract[.]t' tools/run_ci_local.sh)\" -eq 1"
 ---
 
 # Perl current-depth staged-AST authority
@@ -50,8 +51,8 @@ result, and result-node overflow fail with their portable codes.
 
 `enrich_ast` intentionally remains one depth: a child result may contain another inert marker, which this entrypoint
 leaves intact. `.14.7.3.3` adds the separate `enrich_recursively` entrypoint over the same preparation engine with
-breadth-first recurrence, active-chain guards, shared limits, and source rebasing. `.4` owns fresh reconstructed/
-generated/emitted carriers plus admission; `.9` owns public authoring.
+breadth-first recurrence, active-chain guards, shared limits, and source rebasing. `.14.7.3.4` now supplies fresh
+native/reconstructed/generated/emitted carriers plus admission; `.14.7.9` owns public authoring.
 
 Related: [[perl-staged-ast-enrichment-marker-provenance]], [[perl-staged-ast-enrichment-recursive-authority]],
 [[general-staged-ast-enrichment-neutral-contract]], [[general-staged-ast-current-boundary]], and ADR `0088`.

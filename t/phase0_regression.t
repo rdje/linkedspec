@@ -48342,6 +48342,16 @@ subtest 'spec_format_terse_2_3_4_2_perl_inline_value_control_lowering' => sub {
     );
 };
 
+subtest 'admitted Perl staged-AST enrichment contract' => sub {
+    my $relative_test_path = 't/staged_ast_enrichment_perl_contract.t';
+    my $test_path = File::Spec->catfile($Bin, basename($relative_test_path));
+    my ($exit_code, $out, $err) = run_perl_test_file_in_subprocess($test_path);
+    is($exit_code, 0, 'ordinary discovery executes the exact admitted staged-AST consumer')
+        or diag($err || $out);
+    like($out, qr/^1\.\.143$/m, 'the admitted staged-AST consumer completes its exact top-level plan');
+    unlike($out, qr/^not ok\b/m, 'the admitted staged-AST consumer has no failing assertion');
+};
+
 done_testing();
 
 sub discover_specs {
@@ -48584,6 +48594,28 @@ sub run_perl_snippet_in_subprocess {
         '-e',
         $snippet,
         @args,
+    );
+
+    $out .= $_ while <$out_fh>;
+    $err .= $_ while <$err_fh>;
+    waitpid($pid, 0);
+    my $exit_code = $? >> 8;
+
+    return ($exit_code, $out, $err);
+}
+
+sub run_perl_test_file_in_subprocess {
+    my ($test_path) = @_;
+    my ($out, $err) = ('', '');
+    my $err_fh = gensym();
+
+    my $pid = open3(
+        undef,
+        my $out_fh,
+        $err_fh,
+        $^X,
+        "-I$Bin/../perl",
+        $test_path,
     );
 
     $out .= $_ while <$out_fh>;

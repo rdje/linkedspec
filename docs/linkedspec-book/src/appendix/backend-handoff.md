@@ -740,16 +740,19 @@ That oracle is now executable. ADR `0088`, `capability_conformance/staged_ast_en
 authority, typed direct/ordered-derived provenance, deterministic v2 ids, breadth-first depth/path/provenance/id
 ordering, fresh sibling contexts, all four result and three failure policies, decreasing provenance chains,
 shared cancellation/resources, detached results, 37 portable diagnostics, explicit v1 compatibility, and four
-fresh-authority carrier routes. Perl `.14.7.3.1-.2` now provide the dormant declaration and current-depth boundary:
+fresh-authority carrier routes. Perl `.14.7.3.1-.4` now provide and privately admit the complete backend boundary:
 exact literal-option assignment annotations become one exclusive opaque marker with detached direct/ordered-
 derived typed provenance; one unexported authority accepts caller-frozen candidate outcomes and already-compiled
 callbacks, then performs pure resolution/cache, deterministic identity, isolated one-depth execution, every
 result/failure policy, detached stitching, breadth-first recurrence, exact-text/full-provenance chains, shared
 limits, callback safe points, and direct/ordered-derived source rebasing. Malformed, smuggled, residual,
 recognition-reachable, ambiguous, authority-elevating, stale-target, live-result, and over-limit forms fail closed.
-The final-path oracle has 141 GREEN top-level checks and fails only at `.14.7.3.4`'s fresh-carrier/admission/Perl-
-rollout boundary. All discovery, rollout, generated carriers/formats, public inventory, and other backend consumers
-remain pending under their `.14.7.3-.7` owners.
+`LinkedSpec::StagedASTEnrichmentRuntime` constructs a fresh scheduler/cache from host-only options for each
+top-level invocation and runs it only after the complete parent parse. Native, normalized-descriptor, validated generated-plan, and independently loaded
+emitted routes return equal detached output while serialized carrier data contains no live authority. The
+final-path oracle is 143/143 and appears once in phase-0 and once in canonical CI; only Perl rollout is promoted.
+Generated-source v2, function-body v1, public inventory, outward surfaces, and Rust/Dart/Julia/Lua consumers remain
+unchanged or pending under their `.14.7.4-.9` owners.
 
 Progressive dispatch is a separate synchronous path under `FUTURE-PARITY-BACKLOG.14.6`. Audit `.14.6.0` proves
 that none of these registries can invoke a normal loaded spec while a parser is active. The portable design uses

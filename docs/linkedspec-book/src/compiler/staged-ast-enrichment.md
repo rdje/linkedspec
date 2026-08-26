@@ -1,8 +1,8 @@
 # Staged AST Enrichment Contract
 
-> Status: executable backend-neutral design. General `parse_job(...)` authoring is not yet available in shipped
-> parsers. Perl now has a deliberately dormant private marker plus caller-frozen recursive authority with a
-> 141-pass/one-RED oracle;
+> Status: executable backend-neutral design. General `parse_job(...)` authoring is not yet public. Perl now has a
+> privately admitted marker, caller-frozen recursive authority, and four fresh-authority carriers with a
+> fully GREEN 143-check oracle;
 > the current shipped five-backend/six-runtime implementation still supports only the narrow function-body v1
 > adapter described below.
 
@@ -180,10 +180,10 @@ logical marker/sidecar and identity inputs. Each execution receives fresh caller
 generated data contains no callback, compiled parser, registry snapshot, source authority, cancellation token,
 deadline, budget, mutable queue, or host handle.
 
-Only the neutral rollout leg is complete. Five planned backend consumers map to six runtime routes because one
-shared Lua source must run independently on PUC Lua and LuaJIT. The exact Perl consumer now exists with lifecycle
-`dormant_red`, but it is not part of ordinary or canonical discovery. Perl, Rust, Dart, Julia, both Lua routes,
-six-runtime recurrence, public authoring/no-drift, and final recomposition retain their `.14.7.3-.10` owners.
+Neutral and Perl rollout are complete. Five backend consumers map to six runtime routes because one shared Lua
+source must run independently on PUC Lua and LuaJIT. The exact Perl consumer runs once from ordinary phase-0 and
+once from canonical CI. Rust, Dart, Julia, both Lua routes, six-runtime recurrence, public authoring/no-drift, and
+final recomposition retain their `.14.7.4-.10` owners.
 
 ## Current private Perl boundary
 
@@ -193,22 +193,14 @@ The direct Perl oracle is:
 PERL5LIB= prove -Iperl t/staged_ast_enrichment_perl_contract.t
 ```
 
-It intentionally does not return success yet. The first 141 top-level checks prove the complete neutral inventory,
+It returns success with 143 top-level checks. The established groups prove the complete neutral inventory,
 unchanged function-body-v1 resolution/cache/compile/execute behavior, original wrong-top diagnostic context,
 exclusive marker lowering, strict literal options, typed direct/ordered-derived provenance, detached opaque
 sidecars, malformed/smuggled-text rejection, residual-helper closure, recognition-transaction denial, frozen
 resolution, authority narrowing, v2 job/cache identity, complete-depth breadth-first ordering, sibling isolation,
 all seven policies, active-chain decrease/cycle checks, shared resources, child safe points, direct/derived source
-rebasing, and detached result/diagnostic behavior. The final check is the only failure:
-
-```text
-expected RED: missing authority=[native_fresh_authority,reconstructed_fresh_authority,
-generated_plan_fresh_authority,emitted_module_fresh_authority,ordinary_canonical_admission,
-perl_rollout_promotion]; recursive_queue=complete; chain_bounds=complete;
-resource_authority=complete; source_rebasing=complete
-```
-
-That is an implementation boundary, not a user-facing defect. Perl recognizes only exact assignment annotations
+rebasing, detached result/diagnostic behavior, all four fresh-authority carriers, and exact admission topology.
+Perl recognizes only exact assignment annotations
 with literal options. It lowers one exclusive `STAGED_PARSE_JOB_MARKER` and constructs an opaque
 `staged_parse_job_v2` declaration sidecar from current match/capture offsets through the existing source-location
 algebra. Direct text keeps one Unicode-scalar span; composed `cat(...)` text keeps nonempty ordered direct spans.
@@ -280,9 +272,28 @@ It never becomes the false contiguous span `[1,5)`. Oversized child diagnostics 
 `staged_diagnostic_truncated` sentinel under the remaining byte authority; callback results consume the cumulative
 node authority only after detachment succeeds.
 
-Fresh native/reconstructed/generated/emitted carrier authority and admission remain `.14.7.3.4`. The consumer
-stays outside ordinary and canonical discovery, Perl rollout remains pending, and the language ledger classifies
-`parse_job` as private until the separately owned public closeout.
+`LinkedSpec::StagedASTEnrichmentRuntime` binds this authority to top-level parser execution. Its host-only
+`staged_ast_enrichment` invocation option supplies the prepared snapshot, capabilities/policies/ceilings,
+cancellation identity/callback, clock/deadline, and recursive limits. Each call constructs a new scheduler/cache,
+runs the parent parser to completion, then enriches its returned AST inside the existing typed runtime-error
+boundary. With no such host option, a declaration remains inert.
+
+The same seam serves four Perl routes:
+
+1. the native live parser;
+2. a normalized descriptor handler reconstructed through `with_invocation`;
+3. a validated generated-v2 plan executed by its loaded `Execute` function; and
+4. a second independently loaded emitted package.
+
+All four return equal detached AST, sidecar, diagnostic, cache, and resource records. Each test route supplies a
+distinct snapshot, compiled callbacks, cancellation identity/callback, and clock. Every cache begins at zero hits,
+settles one miss/one entry, and spends one call from the same initial budget. Mutating one returned AST cannot alter
+another. The normalized marker record, generated `{label, family}` plan, and emitted source contain no callback,
+compiled parser, registry snapshot, source authority, cancellation/deadline/budget state, mutable queue, path, or
+host handle.
+
+Perl is privately admitted, but the language ledger still classifies `parse_job` as non-public until the separately
+owned `.14.7.9` closeout. Function-body v1 and generated-source v2 remain unchanged.
 
 Publishing this boundary crossed the bounded `CHANGES.md` rollover threshold. The repository archived one complete
 218-line record set as immutable segment `4991`; ADR `0089` advances only the finite change-history collection and
@@ -297,5 +308,5 @@ bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract
 
 The checker currently reports 4 registry entries; 8 provenance, 8 resolution, 6 authority, 10 cache, 4 queue,
 3 isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases; 37 diagnostics; 5 backend
-consumers/6 routes; 4 carrier requirements; 10 outward guards; 9 rollout legs; 35 owners; and 72 reason-checked
+consumers/6 routes; 4 carrier requirements; 10 outward guards; 9 rollout legs; 35 owners; and 78 reason-checked
 mutations. It is always registered in canonical local CI.

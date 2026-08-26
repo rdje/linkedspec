@@ -10,6 +10,23 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-26 (`FUTURE-PARITY-BACKLOG.14.7.3.4` — Perl staged carrier admission): exact clean activation is
+  recursive-authority commit `adcae405`; this canonical leaf owns only four fresh Perl carriers, exact discovery,
+  Perl rollout promotion, and behavioral-parent closure.
+- `StagedASTEnrichmentRuntime::begin_invocation` accepts host-only snapshot/resource options and constructs a new
+  private scheduler/cache before each top-level parse. `complete_invocation` runs only after the complete AST
+  returns and derives live transaction visibility from the current descriptor/input rather than caller claims.
+- Compiler-generated live and emitted-v2 wrappers use the same seam. A normalized descriptor handler re-enters it
+  explicitly; validated generated-plan and independently eval-loaded emitted packages re-enter it through their
+  ordinary `Execute` functions. All four results are byte-for-byte logical equals and detached.
+- The carrier oracle retains all four snapshots and proves 4 distinct aggregates, 16 distinct compiled callback
+  entries, 4 cancellation identities/callbacks, 4 clocks, four initial 0-hit/1-miss caches, and four independent
+  99-step/1-call resource outcomes. Mutating one route result cannot alter another.
+- Normalized ActionIR args, generated `{label,family}` plans, and emitted Perl source contain no serialized staged
+  authority. Function-body v1, generated-source v2, transaction closure, language 250/126, outward paths, and all
+  later backends remain exact. The consumer is 143/143; neutral governance is now neutral+Perl complete with 78
+  mutations and exact phase-0/canonical multiplicity. Receipt-bound canonical proof is mandatory before commit.
+
 - 2026-08-26 (`FUTURE-PARITY-BACKLOG.14.7.3.3` — Perl staged recursive authority): exact clean activation is
   current-depth commit `26809fe8`; this focused leaf owns only dormant native recurrence, bounds, and rebasing.
 - The existing preparation/stitch engine now serves unchanged `enrich_ast` and bounded `enrich_recursively`.

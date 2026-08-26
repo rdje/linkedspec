@@ -2,25 +2,27 @@
 
 ## Current Activity
 
-- Perl `.14.7.3.1-.3` implement the private dormant staged-parse declaration through recursive authority boundary.
-- One caller-frozen post-AST authority performs pure resolution/cache, breadth-first complete-depth execution, all
-  policies, decreasing chains, shared limits, callback safe points, source rebasing, and detachment.
-- The same final-path oracle has 141 GREEN top-level checks and one RED for fresh carriers, admission, and Perl
-  rollout. Every ordinary/canonical/generated/public route stays pending.
+- Perl `.14.7.3.1-.4` implement and privately admit staged-AST enrichment through four fresh-authority carriers.
+- Native, normalized-descriptor, generated-plan, and independently loaded emitted routes produce equal detached
+  results from fresh scheduler/cache, callback, cancellation, and clock authority after the complete parent AST.
+- The final-path oracle is 143/143 and is registered once in phase-0 and once in canonical CI. Only neutral and
+  Perl rollout are complete; later backends, recurrence, public authoring, and outward surfaces remain pending.
 
 ## Latest Completed Slice
 
-- `.14.7.3.3` adds breadth-first recursive scheduling, exact-text/full-provenance chains, shared cancellation and
-  resource bounds, expiring safe-point contexts, and direct/derived source rebasing. It advances the unrouted
-  consumer to 141-pass/one-RED while preserving function-body v1 and every carrier/route/rollout/format/public
-  boundary.
+- `.14.7.3.4` adds the host-only top-level invocation seam, proves four fresh-authority carrier routes and
+  serialized-authority absence, promotes only Perl, and closes the Perl behavioral parent at 143/143 plus 78
+  neutral mutations while preserving function-body v1, generated-v2 format, and every public/outward boundary.
 
 ## Next Action
 
-- Commit `.14.7.3.3` through the focused workflow, clear the brief, verify the clean handoff, then activate
-  `.14.7.3.4` task-tree-first for fresh carriers, ordinary/canonical admission, and Perl rollout promotion.
+- Complete focused synchronization, stage the exact candidate, run receipt-bound canonical CI, commit `.14.7.3.4`,
+  clear the brief, verify the clean handoff, then activate Rust dormant RED `.14.7.4.0` task-tree-first.
 
 ## Recent Completions
+
+- `2026-08-26` — `.14.7.3.4` proves four fresh Perl carrier routes, admits the 143-check consumer exactly once in
+  ordinary/canonical topology, promotes only Perl, and closes `.14.7.3` without public or format movement.
 
 - `2026-08-26` — `.14.7.3.3` adds Perl's private breadth-first recursive queue, decreasing chains, shared
   cancellation/resources, safe points, and source rebasing; 141 top-level checks pass and only `.4` remains RED.
@@ -66,9 +68,6 @@
 
 - `2026-08-25` — `.14.6.5.4` independently recomposes Julia carrier 62/62, authority 210/210, ordinary and direct
   dependents unchanged at 5/9/106, repairs bounded Knowledge projections, and closes `.14.6.5` without behavior.
-
-- `2026-08-24` — `.14.6.5.3` moves the exact Julia carrier into ordinary discovery and one canonical route,
-  promotes only Julia to progressive 5/9/106, and leaves authority, format, typed, and outward boundaries fixed.
 
 ## History
 

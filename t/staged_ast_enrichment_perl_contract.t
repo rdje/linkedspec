@@ -16,6 +16,7 @@ use LinkedSpec ();
 use LinkedSpec::ActionIR::StagedParseJob ();
 use LinkedSpec::SourceLocation ();
 use LinkedSpec::StagedASTEnrichment ();
+use LinkedSpec::StagedASTEnrichmentRuntime ();
 use LinkedSpec::StagedParseJob ();
 use LinkedSpec::StagedParserRegistry ();
 
@@ -90,7 +91,7 @@ my $contract_path = File::Spec->catfile(
 );
 my $contract = slurp_json($contract_path);
 
-sub build_enrichment_authority {
+sub build_enrichment_snapshot {
  my (%args) = @_;
  my $snapshot = clone_plain($contract->{resolution_snapshot});
  my $executor = $args{executor} // sub {
@@ -106,6 +107,12 @@ sub build_enrichment_authority {
    return $executor->($_[0], $resolved_spec_id, $_[1])
   };
  }
+ return $snapshot
+}
+
+sub build_enrichment_authority {
+ my (%args) = @_;
+ my $snapshot = build_enrichment_snapshot(%args);
  my $authority = LinkedSpec::StagedASTEnrichment->new(snapshot => $snapshot);
  return wantarray ? ($authority, $snapshot) : $authority
 }
@@ -185,6 +192,25 @@ sub recursive_args {
  return %args
 }
 
+sub staged_invocation_options {
+ my (%args) = @_;
+ my $snapshot = build_enrichment_snapshot(
+  exists($args{executor}) ? (executor => $args{executor}) : (),
+ );
+ my %config = (
+  snapshot => $snapshot,
+  recursive_args(),
+ );
+ my $fresh_callback_identity = {};
+ $config{cancelled} = sub { return $fresh_callback_identity ? 0 : 0 };
+ $config{clock} = sub { return $fresh_callback_identity ? 0 : 0 };
+ $config{cancellation_token} = $args{cancellation_token}
+  if exists $args{cancellation_token};
+ return wantarray
+  ? ({staged_ast_enrichment => \%config}, $snapshot)
+  : {staged_ast_enrichment => \%config}
+}
+
 sub make_derived_marker {
  my (%args) = @_;
  my $input = defined($args{input}) ? "$args{input}" : 'axb';
@@ -231,8 +257,8 @@ is(
 is($contract->{format}, 1, 'loads contract format 1');
 is(
  $contract->{status},
- 'neutral_complete_backends_pending',
- 'keeps backend behavior pending behind complete neutral authority',
+ 'neutral_and_perl_complete_later_backends_pending',
+ 'keeps neutral and Perl complete while later backends remain pending',
 );
 is(
  $contract->{task_owner},
@@ -357,15 +383,15 @@ is_deeply(
   diagnostics => 37,
   rollout_legs => 9,
   ownership_rows => 35,
-  mutations => 72,
+  mutations => 78,
  },
  'freezes every neutral inventory count',
 );
 is(scalar(@{$contract->{diagnostics}}), 37, 'freezes all thirty-seven diagnostic contracts');
 is_deeply(
  [map { $_->{status} } @{$contract->{backend_consumers}}],
- ['dormant_red', ('pending_absent') x 4],
- 'activates only the exact Perl consumer as a dormant RED',
+ ['complete', ('pending_absent') x 4],
+ 'promotes only the exact Perl consumer to complete',
 );
 is_deeply(
  $contract->{backend_consumers}[0],
@@ -373,14 +399,14 @@ is_deeply(
   backend => 'perl',
   owner => 'FUTURE-PARITY-BACKLOG.14.7.3.0',
   path => 't/staged_ast_enrichment_perl_contract.t',
-  status => 'dormant_red',
+  status => 'complete',
  },
- 'binds the dormant Perl consumer to its exact path and leaf owner',
+ 'binds the admitted Perl consumer to its exact path and original RED owner',
 );
 is_deeply(
  [map { $_->{status} } @{$contract->{rollout}}],
- ['complete', ('pending') x 8],
- 'keeps only neutral rollout complete',
+ ['complete', 'complete', ('pending') x 7],
+ 'promotes only neutral and Perl rollout',
 );
 is_deeply(
  [map { $_->{responsibility} } grep {
@@ -1844,19 +1870,237 @@ subtest 'callback execution contexts expire after the callback boundary' => sub 
  like($@, qr/invalid or expired/, 'expired context failure names the exact lifecycle boundary');
 };
 
+subtest 'four logical carriers receive fresh host-only recursive authority' => sub {
+ my $carrier_source = <<'SPEC';
+Top::
+ /([^;]+);/ -> Top { job_marker = parse_job(match_group(0), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr", "top", "Expr", "result_policy", "replace_marker", "on_error", "fail")); return(hash("carrier", "logical", "payload", job_marker)) }
+SPEC
+ my %live_ctx;
+ my $live_parser = LinkedSpec::Get(
+  \$carrier_source,
+  generated_source_identity => 'staged-ast-enrichment-perl-native.spec',
+  runtime_ctx_ref => \%live_ctx,
+ );
+ ok(ref($live_parser) eq 'CODE', 'native carrier compiles the logical staged declaration')
+  or diag($JSON->encode($live_ctx{last_error} // {}));
+
+ my %descriptor_ctx;
+ my $carrier_descriptor = LinkedSpec::Get(
+  \$carrier_source,
+  return_descriptor => 1,
+  generated_source_identity => 'staged-ast-enrichment-perl-normalized.spec',
+  runtime_ctx_ref => \%descriptor_ctx,
+ );
+ ok(ref($carrier_descriptor) eq 'HASH', 'normalized descriptor carrier compiles independently')
+  or diag($JSON->encode($descriptor_ctx{last_error} // {}));
+ my @normalized_markers = grep {
+  ($_->{kind} // '') eq 'STAGED_PARSE_JOB_MARKER'
+ } @{$carrier_descriptor->{spec}{Top}{meta}{action_rewriter}{canonical_action_ir_events} // []};
+ is(scalar(@normalized_markers), 1, 'normalized descriptor retains exactly one logical marker event');
+ is_deeply(
+  [forbidden_key_hits(
+   $normalized_markers[0]{args},
+   {map { ($_ => 1) } qw(
+    callback compiled_authority registry snapshot source_authority cancellation_token
+    deadline budget mutable_queue path host_handle
+   )},
+  )],
+  [],
+  'normalized marker data contains no parser, registry, source, resource, path, or host authority',
+ );
+
+ my $generated_source = LinkedSpec::emit_generated_source(
+  \$carrier_source,
+  source_identity => 'staged-ast-enrichment-perl-emitted.spec',
+ );
+ ok(defined($generated_source) && length($generated_source), 'logical carrier emits generated-v2 source');
+ is(
+  occurrences($generated_source, 'LinkedSpec::StagedParseJob::construct_marker'),
+  1,
+  'emitted source retains exactly one logical marker constructor',
+ );
+ unlike(
+  $generated_source,
+  qr/(?:compiled_authority|opaque:compiled|snapshot\s*=>|source_authority\s*=>|cancellation_token\s*=>|mutable_queue\s*=>)/,
+  'emitted source serializes no callback, parser, registry, source, cancellation, or queue authority',
+ );
+
+ my $load_generated = sub {
+  my ($package) = @_;
+  my $loaded = eval "package $package; $generated_source; 1";
+  my $error = $@;
+  ok($loaded, "$package independently loads emitted source") or diag($error);
+  no strict 'refs';
+  return {
+   execute => *{"${package}::Execute"}{CODE},
+   plan => *{"${package}::LinkedSpecGeneratedPlan"}{CODE},
+   validate_plan => *{"${package}::ValidateGeneratedPlan"}{CODE},
+  }
+ };
+ my $plan_carrier = $load_generated->('LinkedSpec::StagedASTEnrichmentPerlPlanGenerated');
+ my $generated_plan = $plan_carrier->{plan}->();
+ ok($plan_carrier->{validate_plan}->($generated_plan), 'generated-plan carrier validates its logical plan');
+ is_deeply(
+  [forbidden_key_hits(
+   $generated_plan,
+   {map { ($_ => 1) } qw(
+    callback compiled_authority registry snapshot source_authority cancellation_token
+    deadline budget mutable_queue path host_handle
+   )},
+  )],
+  [],
+  'generated plan contains no host-only staged authority',
+ );
+ my $emitted_carrier = $load_generated->('LinkedSpec::StagedASTEnrichmentPerlFreshGenerated');
+
+ my (@retained_options, @retained_snapshots, @retained_tokens);
+ my $fresh_options = sub {
+  my ($route) = @_;
+  my $token = bless {}, 'StagedASTEnrichmentTest::CarrierToken';
+  my ($options, $snapshot) = staged_invocation_options(
+   cancellation_token => $token,
+   executor => sub {
+    my ($request, $resolved_spec_id) = @_;
+    return {
+     kind => 'parsed_expression',
+     resolved_spec_id => $resolved_spec_id,
+     text => $request->{text},
+    }
+   },
+  );
+  push @retained_options, $options;
+  push @retained_snapshots, $snapshot;
+  push @retained_tokens, $token;
+  return $options
+ };
+
+ my @route_results;
+ my $native_input = 'abc;';
+ push @route_results, $live_parser->(
+  \$native_input,
+  $fresh_options->('native'),
+ );
+
+ my $reconstructed_input = 'abc;';
+ push @route_results, LinkedSpec::StagedASTEnrichmentRuntime::with_invocation(
+  $carrier_descriptor,
+  \$reconstructed_input,
+  $fresh_options->('normalized_reconstructed'),
+  sub {
+   return $carrier_descriptor->{spec}{Top}{handler}->(
+    $carrier_descriptor,
+    \$reconstructed_input,
+    {},
+   )
+  },
+ );
+
+ my $plan_input = 'abc;';
+ push @route_results, $plan_carrier->{execute}->(
+  \$plan_input,
+  $fresh_options->('generated_plan'),
+ );
+
+ my $emitted_input = 'abc;';
+ push @route_results, $emitted_carrier->{execute}->(
+  \$emitted_input,
+  $fresh_options->('independently_loaded_emitted'),
+ );
+
+ is_deeply(
+  [map { $_->{ast} } @route_results],
+  [({
+   carrier => 'logical',
+   payload => {
+    kind => 'parsed_expression',
+    resolved_spec_id => 'registry:expr-v2',
+    text => 'abc',
+   },
+  }) x 4],
+  'all four routes return the same detached enriched AST',
+ );
+ for my $index (1 .. $#route_results) {
+  is_deeply(
+   $route_results[$index],
+   $route_results[0],
+   "carrier $index preserves equal AST, sidecar, diagnostic, cache, and resource results",
+  );
+ }
+ is_deeply(
+  [map { scalar(@{$_->{sidecars}}) } @route_results],
+  [(1) x 4],
+  'each carrier settles exactly one logical staged sidecar',
+ );
+ is_deeply(
+  [map { $_->{sidecars}[0]{state} } @route_results],
+  [('succeeded') x 4],
+  'each carrier settles the logical sidecar successfully',
+ );
+ is_deeply(
+  [map { $_->{diagnostics} } @route_results],
+  [([]) x 4],
+  'each carrier returns the same empty detached diagnostic list',
+ );
+ is_deeply(
+  [map { [$_->{cache}{hits}, $_->{cache}{misses}, $_->{cache}{entries}] } @route_results],
+  [([0, 1, 1]) x 4],
+  'every top-level carrier starts with a fresh empty cache',
+ );
+ is_deeply(
+  [map { [$_->{resources}{remaining_steps}, $_->{resources}{total_calls}] } @route_results],
+  [([99, 1]) x 4],
+  'every top-level carrier starts and spends an independent recursive resource authority',
+ );
+
+ my @snapshot_addresses = map { refaddr($_) } @retained_snapshots;
+ is(
+  scalar(keys(%{{map { ($_ => 1) } @snapshot_addresses}})),
+  4,
+  'all four routes receive distinct caller-prepared snapshot aggregates',
+ );
+ my @callback_addresses = map {
+  map { refaddr($_->{compiled_authority}) } @{$_->{entries}}
+ } @retained_snapshots;
+ is(
+  scalar(keys(%{{map { ($_ => 1) } @callback_addresses}})),
+  16,
+  'all four routes receive distinct already-compiled callback authority entries',
+ );
+ is(
+  scalar(keys(%{{map { (refaddr($_) => 1) } @retained_tokens}})),
+  4,
+  'all four routes receive distinct cancellation identities',
+ );
+ is(
+  scalar(keys(%{{map {
+   (refaddr($_->{staged_ast_enrichment}{cancelled}) => 1)
+  } @retained_options}})),
+  4,
+  'all four routes receive distinct cancellation callbacks',
+ );
+ is(
+  scalar(keys(%{{map {
+   (refaddr($_->{staged_ast_enrichment}{clock}) => 1)
+  } @retained_options}})),
+  4,
+  'all four routes receive distinct clock/deadline authority',
+ );
+
+ $route_results[0]{ast}{payload}{text} = 'mutated';
+ is(
+  $route_results[1]{ast}{payload}{text},
+  'abc',
+  'one carrier result cannot mutate another carrier result',
+ );
+};
+
 my $perl_admitted = $contract->{backend_consumers}[0]{status} eq 'complete'
  && grep {
-  $_->{leg} eq 'perl_runtime' && $_->{status} eq 'complete'
+  $_->{leg} eq 'perl' && $_->{status} eq 'complete'
  } @{$contract->{rollout}};
 ok(
  $perl_admitted,
  'Perl native, reconstructed, generated-plan, and emitted carriers run through fresh admitted authority',
 );
-diag(
- 'expected RED: missing authority=[native_fresh_authority,reconstructed_fresh_authority,'
- .'generated_plan_fresh_authority,emitted_module_fresh_authority,ordinary_canonical_admission,'
- .'perl_rollout_promotion]'
- .'; recursive_queue=complete; chain_bounds=complete; resource_authority=complete; source_rebasing=complete',
-) unless $perl_admitted;
 
 done_testing();

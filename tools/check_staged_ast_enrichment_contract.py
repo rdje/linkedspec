@@ -132,7 +132,7 @@ BACKEND_CONSUMERS = [
         "backend": "perl",
         "owner": "FUTURE-PARITY-BACKLOG.14.7.3.0",
         "path": "t/staged_ast_enrichment_perl_contract.t",
-        "status": "dormant_red",
+        "status": "complete",
     },
     {
         "backend": "rust",
@@ -737,17 +737,19 @@ def validate_environment(contract: dict[str, Any]) -> None:
         consumer_path = ROOT / row["path"]
         if row["status"] == "pending_absent":
             require(not consumer_path.exists(), f"pending backend consumer unexpectedly exists: {row['path']}")
-        elif row["status"] == "dormant_red":
-            require(row["backend"] == "perl", "only the Perl dormant consumer is currently activated")
+        elif row["status"] == "complete":
+            require(row["backend"] == "perl", "only the Perl staged consumer is currently complete")
             require(
                 consumer_path.is_file() and not consumer_path.is_symlink(),
-                f"dormant backend consumer is missing or symbolic: {row['path']}",
+                f"complete backend consumer is missing or symbolic: {row['path']}",
             )
-            require(row["path"] not in ci_text, f"dormant backend consumer is registered in canonical CI: {row['path']}")
-            require(
-                row["path"] not in perl_ordinary_text,
-                f"dormant backend consumer is registered in ordinary Perl discovery: {row['path']}",
-            )
+            admission = contract["canonical_execution"]["perl_admission"]
+            require(admission["consumer_path"] == row["path"], "Perl admission consumer path drifted")
+            require(perl_ordinary_text.count(row["path"]) == 1, "ordinary Perl discovery must register the staged consumer exactly once")
+            require(ci_text.count(f"require_tracked_file {row['path']}") == 1, "canonical CI must require the Perl staged consumer exactly once")
+            require(ci_text.count(admission["syntax_invocation"]) == 1, "canonical CI must syntax-check the Perl staged consumer exactly once")
+            require(ci_text.count(f'log "{admission["registration_marker"]}"') == 1, "canonical Perl staged admission marker is missing or duplicated")
+            require(ci_text.count(admission["invocation"]) == 1, "canonical Perl staged admission invocation is missing or duplicated")
         else:
             raise ContractError(f"unsupported backend consumer status: {row['status']}")
     outward = contract["outward_guard"]
@@ -803,7 +805,7 @@ def validate_contract(contract: dict[str, Any], *, environment: bool = True) -> 
     require(contract["format"] == 1, "format must be 1")
     require(contract["contract_id"] == "linkedspec-staged-ast-enrichment-v1", "contract id mismatch")
     require(contract["task_owner"] == "FUTURE-PARITY-BACKLOG.14.7.2", "task owner mismatch")
-    require(contract["status"] == "neutral_complete_backends_pending", "contract status mismatch")
+    require(contract["status"] == "neutral_and_perl_complete_later_backends_pending", "contract status mismatch")
     require(contract["authored_surface"] == AUTHORED_SURFACE, "authored surface mismatch")
     require(contract["policy"] == POLICY, "policy mismatch")
     require(contract["result_policies"] == RESULT_POLICIES, "result-policy inventory mismatch")
@@ -896,7 +898,7 @@ def validate_contract(contract: dict[str, Any], *, environment: bool = True) -> 
 
     expected_rollout = [
         {"order": 1, "leg": "neutral", "owner": "FUTURE-PARITY-BACKLOG.14.7.2", "status": "complete", "paths": ["capability_conformance/staged_ast_enrichment_contract.json", "tools/check_staged_ast_enrichment_contract.py"]},
-        {"order": 2, "leg": "perl", "owner": "FUTURE-PARITY-BACKLOG.14.7.3", "status": "pending", "paths": [BACKEND_CONSUMERS[0]["path"]]},
+        {"order": 2, "leg": "perl", "owner": "FUTURE-PARITY-BACKLOG.14.7.3", "status": "complete", "paths": [BACKEND_CONSUMERS[0]["path"]]},
         {"order": 3, "leg": "rust", "owner": "FUTURE-PARITY-BACKLOG.14.7.4", "status": "pending", "paths": [BACKEND_CONSUMERS[1]["path"]]},
         {"order": 4, "leg": "dart", "owner": "FUTURE-PARITY-BACKLOG.14.7.5", "status": "pending", "paths": [BACKEND_CONSUMERS[2]["path"]]},
         {"order": 5, "leg": "julia", "owner": "FUTURE-PARITY-BACKLOG.14.7.6", "status": "pending", "paths": [BACKEND_CONSUMERS[3]["path"]]},
@@ -915,6 +917,13 @@ def validate_contract(contract: dict[str, Any], *, environment: bool = True) -> 
         "canonical_driver": "tools/run_ci_local.sh",
         "registration_marker": "checking backend-neutral staged-AST enrichment contract",
         "invocation": "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py",
+        "perl_admission": {
+            "consumer_path": "t/staged_ast_enrichment_perl_contract.t",
+            "ordinary_driver": "t/phase0_regression.t",
+            "syntax_invocation": "perl -c -Iperl t/staged_ast_enrichment_perl_contract.t",
+            "registration_marker": "running exact Perl staged-AST enrichment admission consumer",
+            "invocation": "PERL5LIB= prove -Iperl t/staged_ast_enrichment_perl_contract.t",
+        },
         "storage_policy": "all Python cache, temporary, and process data stays under repository-derived project storage",
         "tracked_required": True,
     }, "canonical execution mismatch")
@@ -996,18 +1005,24 @@ def mutation_inventory() -> list[Mutation]:
         ("compatibility_upgrade", set_value(["compatibility_v1", "upgrade_to_v2"], "implicit"), "compatibility boundary mismatch"),
         ("carrier_kind", set_value(["carrier_requirements", 0, "carrier"], "host_only"), "carrier requirement inventory mismatch"),
         ("consumer_path", set_value(["backend_consumers", 0, "path"], "/tmp/test.t"), "backend consumer inventory mismatch"),
+        ("consumer_status", set_value(["backend_consumers", 0, "status"], "dormant_red"), "backend consumer inventory mismatch"),
         ("runtime_route", set_value(["runtime_routes", 5, "runtime"], "lua"), "runtime route inventory mismatch"),
         ("outward_path", set_value(["outward_guard", "paths", 0], "README2.md"), "outward guard mismatch"),
         ("outward_token", set_value(["outward_guard", "forbidden_tokens"], []), "outward guard mismatch"),
         ("diagnostic_code", set_value(["diagnostics", 0, "code"], "wrong"), "diagnostic context inventory mismatch"),
         ("diagnostic_context", set_value(["diagnostics", 0, "required_context"], ["code"]), "diagnostic context inventory mismatch"),
         ("rollout_neutral", set_value(["rollout", 0, "status"], "pending"), "rollout inventory mismatch"),
-        ("rollout_backend", set_value(["rollout", 1, "status"], "complete"), "rollout inventory mismatch"),
+        ("rollout_backend", set_value(["rollout", 1, "status"], "pending"), "rollout inventory mismatch"),
         ("rollout_public", set_value(["rollout", 8, "status"], "complete"), "rollout inventory mismatch"),
         ("canonical_contract", set_value(["canonical_execution", "contract_path"], "/tmp/contract.json"), "canonical execution mismatch"),
         ("canonical_checker", set_value(["canonical_execution", "checker_path"], "tools/wrong.py"), "canonical execution mismatch"),
         ("canonical_runner", set_value(["canonical_execution", "project_data_runner"], "python3"), "canonical execution mismatch"),
         ("canonical_invocation", set_value(["canonical_execution", "invocation"], "python3 checker.py"), "canonical execution mismatch"),
+        ("perl_admission_consumer", set_value(["canonical_execution", "perl_admission", "consumer_path"], "t/wrong.t"), "canonical execution mismatch"),
+        ("perl_admission_ordinary", set_value(["canonical_execution", "perl_admission", "ordinary_driver"], "t/wrong.t"), "canonical execution mismatch"),
+        ("perl_admission_syntax", set_value(["canonical_execution", "perl_admission", "syntax_invocation"], "perl -c wrong.t"), "canonical execution mismatch"),
+        ("perl_admission_marker", set_value(["canonical_execution", "perl_admission", "registration_marker"], "wrong marker"), "canonical execution mismatch"),
+        ("perl_admission_invocation", set_value(["canonical_execution", "perl_admission", "invocation"], "prove wrong.t"), "canonical execution mismatch"),
         ("ownership", set_value(["ownership", 0, "owner"], "wrong"), "ownership inventory mismatch"),
     ]
     return mutations

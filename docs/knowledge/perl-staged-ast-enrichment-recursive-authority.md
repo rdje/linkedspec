@@ -16,12 +16,13 @@ answers:
   - "is Perl general staged AST enrichment admitted"
   - "what is FUTURE-PARITY-BACKLOG 14.7.3.3"
 date: 2026-08-26
-status: current private dormant recursive authority; carriers, admission, rollout, and public authoring pending
+status: current private recursive authority; Perl carriers/admission complete and public authoring pending
 tags: [perl, staged-parsing, recursive-queue, breadth-first, cancellation, budgets, diagnostics, source-location, private]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.3.3 extends unexported LinkedSpec::StagedASTEnrichment with enrich_recursively. Every complete depth is discovered, resolved, authority-checked, stitch-validated, and typed-sorted before callbacks; returned markers enter only the next depth. Callback requests receive fresh parser state and an active chain of exact normalized parser/top/exact-text-digest/full-provenance tuples. Exact repeats are staged_cycle; same parser/top recurrence requires every direct/ordered-derived segment be contained in the active provenance and total Unicode-scalar extent strictly decrease. One caller-owned cancellation identity/callback, clock/deadline, remaining steps, total calls, max depth/calls, cumulative result nodes, and diagnostic bytes narrow and spend without reset. Ephemeral callback contexts provide safe_point plus direct/ordered-derived position, span, and diagnostic rebasing; cross-segment spans remain concatenate_in_order provenance. The dormant oracle has 141 GREEN top-level checks and one carriers/admission RED. Function-body v1, neutral lifecycle/rollout, ordinary/canonical discovery, generated format, public/outward surfaces, and other backends remain unchanged."
+evidence_update_2026_08_26_admission: "FUTURE-PARITY-BACKLOG.14.7.3.4 invokes this unchanged recursive engine through four fresh-authority top-level routes. The oracle is 143/143, Perl is admitted exactly once in ordinary/canonical topology, and neutral governance advances to 78 mutations without public or format movement."
 reverify:
   - "perl -Iperl -c perl/LinkedSpec/StagedASTEnrichment.pm && perl -Iperl -c t/staged_ast_enrichment_perl_contract.t"
-  - "test \"$(PERL5LIB= prove -Iperl t/staged_ast_enrichment_perl_contract.t 2>&1 | rg -c 'Failed 1/142 subtests|expected RED: missing authority=\\[native_fresh_authority,reconstructed_fresh_authority,generated_plan_fresh_authority,emitted_module_fresh_authority,ordinary_canonical_admission,perl_rollout_promotion\\]')\" -eq 2"
+  - "PERL5LIB= prove -q -Iperl t/staged_ast_enrichment_perl_contract.t"
   - "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py"
 ---
 
@@ -47,9 +48,9 @@ A local range crossing derived segments becomes ordered `derived_text`; it is ne
 span. Portable child diagnostics use the same projection before scheduler retention, and oversized diagnostics
 become the exact `staged_diagnostic_truncated` sentinel.
 
-This is still private implementation evidence. `.14.7.3.4` alone owns native/reconstructed/generated-plan/emitted
-fresh-authority carriers, ordinary/canonical registration, Perl rollout promotion, and behavioral-parent closure.
-Public `parse_job(...)` authoring remains `.14.7.9`.
+This is still private implementation evidence. `.14.7.3.4` now owns and closes native/reconstructed/generated-plan/
+emitted fresh-authority carriers, ordinary/canonical registration, Perl rollout promotion, and behavioral-parent
+closure. Public `parse_job(...)` authoring remains `.14.7.9`.
 
 Related: [[perl-staged-ast-enrichment-current-depth-authority]],
 [[perl-staged-ast-enrichment-marker-provenance]], [[general-staged-ast-enrichment-neutral-contract]], and ADR `0088`.

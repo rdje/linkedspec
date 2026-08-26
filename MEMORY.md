@@ -1,14 +1,13 @@
 # MEMORY
 
-- activation_commit: `26809fe85337efca55fd2970cc4de2d1ca353232` — exact clean current-depth base for
-  task-tree-first Perl recursive authority `FUTURE-PARITY-BACKLOG.14.7.3.3`; brief cleared; no push.
-- latest_completed_leaf: intended `FUTURE-PARITY-BACKLOG.14.7.3.3 - add Perl staged recursive authority`;
-  141 top-level checks are GREEN and the sole intentional RED is fresh carriers/admission/Perl rollout.
-- active_work_unit: none after the intended `.14.7.3.3` commit; Perl carriers/admission `.14.7.3.4` follows the
-  clean handoff.
-- next_action: from the exact clean `.14.7.3.3` commit, activate `FUTURE-PARITY-BACKLOG.14.7.3.4` task-tree-first
-  and add only fresh carriers, ordinary/canonical admission, Perl rollout promotion, and parent closure.
-- in_flight_uncommitted: none after the intended `.14.7.3.3` commit; no background job remains.
+- activation_commit: `adcae40513fb8954cc22cae3941bccb108b9a5d8` — exact clean recursive-authority base for
+  task-tree-first Perl carrier admission `FUTURE-PARITY-BACKLOG.14.7.3.4`; brief cleared; no push.
+- latest_completed_leaf: intended `FUTURE-PARITY-BACKLOG.14.7.3.4 - admit Perl staged-AST enrichment`;
+  four fresh-authority routes and the exact 143-check ordinary/canonical consumer are GREEN.
+- active_work_unit: none after the intended `.14.7.3.4` commit; Perl behavioral parent `.14.7.3` is closed.
+- next_action: from the exact clean `.14.7.3.4` commit, activate Rust dormant RED
+  `FUTURE-PARITY-BACKLOG.14.7.4.0` task-tree-first without moving Perl or public behavior.
+- in_flight_uncommitted: none after the intended `.14.7.3.4` commit; no background job remains.
 - blockers: none.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
@@ -36,8 +35,8 @@
   history segment `4991`, advancing that separate route from 21/20 to 22 files / 21 manifest lines while retaining
   every byte, root, segment, aggregate, owner, lifecycle, verifier, storage, and all other pressure controls.
 - current_verification_contract: ADR `0073` makes focused proof the ordinary per-leaf default and canonical proof
-  mandatory at admission/milestone/public/infrastructure and final clean push boundaries; progressive public
-  closeout `.14.6.8` changes final executable governance and has exact staged receipt-bound proof.
+  mandatory at admission/milestone/public/infrastructure and final clean push boundaries; staged Perl admission
+  `.14.7.3.4` changes canonical topology and lands only with exact staged receipt-bound proof.
 - documentation_debt_owner: ADR `0066` composition-closes all stores; bounded live/history/task/Knowledge owners
   and their rollover/index gates remain current.
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
@@ -50,11 +49,10 @@
   parents `.3-.7`, recurrence `.8`, public authored closeout `.9`, and recomposition `.10` are frozen in order.
   Diagnostic `.14.7.1` is complete; neutral `.14.7.2` freezes 4 registry entries, 8 provenance, 8 resolution/6
   authority, 10 cache, 4 queue/3 isolation, 4 result/3 failure policies, 10 chain, 5 detachment, 37 diagnostics,
-  9 rollout legs, 35 owners, and 72 mutations. Perl `.14.7.3.1-.3` now provide the private marker/provenance,
+  9 rollout legs, 35 owners, and 78 mutations. Perl `.14.7.3.1-.4` now provide the private marker/provenance,
   caller-frozen resolution/cache/policies, breadth-first recurrence, strict chains/shared resources, and source
-  rebasing at 141 GREEN/one RED, with no carrier, route, format, rollout, or public movement; carriers/admission
-  `.3.4` are next.
+  rebasing plus four fresh-authority carriers at 143/143. Only Perl is admitted; format/public/outward behavior is
+  unchanged, and Rust dormant RED `.4.0` is next.
 - latest_bootstrap_read: 2026-08-26 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox are
-  reviewed. `.14.7.3.3` preserves v1 and adds only private recursive authority; carriers, formats, rollout, and
-  outward surfaces do not move. Intended commit: `FUTURE-PARITY-BACKLOG.14.7.3.3 - add Perl staged recursive
-  authority`; `.3.4` is next.
+  reviewed. `.14.7.3.4` preserves v1/v2 formats and public/outward surfaces while admitting only Perl. Intended
+  commit: `FUTURE-PARITY-BACKLOG.14.7.3.4 - admit Perl staged-AST enrichment`; Rust `.14.7.4.0` is next.

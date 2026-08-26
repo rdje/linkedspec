@@ -1,6 +1,6 @@
 ---
 id: general-staged-ast-enrichment-neutral-contract
-title: General staged-AST enrichment has one executable neutral contract before backend behavior
+title: General staged-AST enrichment has one executable neutral contract governing backend rollout
 answers:
   - "what is the general staged AST enrichment neutral contract"
   - "what does FUTURE-PARITY-BACKLOG 14.7.2 implement"
@@ -17,12 +17,13 @@ answers:
   - "which staged AST backend consumers are planned"
   - "is general parse_job authoring public"
 date: 2026-08-25
-status: executable neutral authority complete; Perl private recursive authority complete; carriers, admissions, and public authoring pending
+status: executable neutral and private Perl admission complete; later backends, recurrence, and public authoring pending
 tags: [staged-parsing, parse-job, source-location, registry, queue, policies, diagnostics, portability]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.2 adds capability_conformance/staged_ast_enrichment_contract.json plus tools/check_staged_ast_enrichment_contract.py and ADR 0088. The independent oracle executes 4 immutable registry entries; 2 sources; 8 provenance, 3 deterministic-id, 8 resolution, 6 authority, 10 cache, 4 breadth-first queue, 3 sibling-isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases; 37 diagnostics; five planned backend consumers over six routes; four carrier requirements; ten outward guards; nine rollout legs; 35 exact owners; and 72 reason-checked corruptions. FUTURE-PARITY-BACKLOG.14.7.3.1-.3 advance only the dormant Perl consumer through declaration/provenance, current-depth policies, breadth-first recurrence, bounded authority, and source-rebased diagnostics. It now has 141 GREEN top-level checks/one carrier-admission RED; four later consumers remain absent, only neutral rollout is complete, and outward surfaces remain absent."
+evidence_update_2026_08_26_perl_admission: "FUTURE-PARITY-BACKLOG.14.7.3.4 advances the executable boundary to neutral+Perl complete with 78 reason-checked mutations. The 143-check Perl consumer proves four fresh-authority carriers and exact ordinary/canonical admission; later consumers and outward surfaces remain absent."
 reverify:
   - "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py"
-  - "rg -n 'staged-AST enrichment|STAGED_PARSE_JOB_MARKER|staged_parse_job_v2|neutral_complete_backends_pending' docs/decisions/0088-pre-resolved-breadth-first-staged-ast-enrichment.md capability_conformance/staged_ast_enrichment_contract.json tools/check_staged_ast_enrichment_contract.py"
+  - "rg -n 'staged-AST enrichment|STAGED_PARSE_JOB_MARKER|staged_parse_job_v2|neutral_and_perl_complete' docs/decisions/0088-pre-resolved-breadth-first-staged-ast-enrichment.md capability_conformance/staged_ast_enrichment_contract.json tools/check_staged_ast_enrichment_contract.py"
   - "perl tools/read_task_tree.pl --tree FUTURE-PARITY-BACKLOG --id FUTURE-PARITY-BACKLOG.14.7.2"
 ---
 
@@ -52,14 +53,15 @@ are `fail`, `keep_text`, and `diagnostic_node`. Exact tuple repeats are cycles; 
 strictly contained provenance with smaller scalar extent. Depth, calls, work, cancellation, deadline, result
 nodes, and diagnostic bytes remain shared bounded authority. Results are detached plain data.
 
-The existing v1 function-body adapter remains unchanged and explicit. Perl's exact final-path consumer is present
-but dormant. Its private declaration carrier creates one exclusive opaque marker/sidecar with strict literal
+The existing v1 function-body adapter remains unchanged and explicit. Perl's exact final-path consumer is admitted.
+Its private declaration carrier creates one exclusive opaque marker/sidecar with strict literal
 options and typed direct/ordered-derived provenance. A separate private post-AST authority now consumes only a
 caller-frozen already-compiled registry, executes breadth-first complete depths with isolated sibling state, caches
 only immutable plans, enforces decreasing chains and shared limits, rebases diagnostics, and implements all four
-result plus three failure policies over detached data. The test has 141 GREEN top-level checks and fails only at
-the carrier/admission boundary. This is not backend admission. Perl `.14.7.3.4`, later backends, recurrence, and
-public closeout retain their exact owners.
+result plus three failure policies over detached data. A host-only runtime constructs fresh scheduler/cache
+authority for native, normalized-descriptor, generated-plan, and independently loaded emitted routes. The test is
+143/143 and appears once in phase-0/canonical CI. This is private Perl admission, not public authoring; later
+backends, recurrence, and public closeout retain their exact owners.
 
 Related: [[general-staged-ast-current-boundary]], [[perl-staged-ast-enrichment-current-depth-authority]], [[perl-staged-ast-enrichment-recursive-authority]], [[staged-parse-job-annotation-contract]],
 [[staged-parser-registry-dispatch-contract]], [[typed-source-location-cursor-algebra-direction]], and

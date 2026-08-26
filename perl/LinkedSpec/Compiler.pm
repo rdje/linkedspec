@@ -18,6 +18,7 @@ use LinkedSpec::RuntimeDiagnosticOutput ();
 use LinkedSpec::RuntimeSemanticObservation ();
 use LinkedSpec::EntryRuleSelection ();
 use LinkedSpec::ProgressiveSpanDispatchRuntime ();
+use LinkedSpec::StagedASTEnrichmentRuntime ();
 
 use constant {
  DUMP_NONE   => 0,
@@ -163,6 +164,7 @@ sub _generated_source_preamble {
   . "use LinkedSpec::RecognitionTransactionRuntime ();\n"
   . "use LinkedSpec::InterMatchGapRuntime ();\n"
   . "use LinkedSpec::ProgressiveSpanDispatchRuntime ();\n"
+  . "use LinkedSpec::StagedASTEnrichmentRuntime ();\n"
   . "sub _trace_runtime_mark_event { return LinkedSpec::GeneratedSource::trace_mark_event(\@_) }\n"
   . "our \$LINKEDSPEC_GENERATED_SOURCE_CONTRACT = 'linkedspec-generated-source-v2';\n"
   . "our \$LINKEDSPEC_GENERATED_SOURCE_FORMAT = 2;\n"
@@ -326,6 +328,10 @@ sub Execute {
   \$input_ref,
   \$invocation_options,
  );
+ my \$staged_enrichment_state = LinkedSpec::StagedASTEnrichmentRuntime::begin_invocation(
+  \$input_ref,
+  \$invocation_options,
+ );
  my \$explicit_entry_rule = \$LINKEDSPEC_GENERATED_CONFIGURED_ENTRY_RULE;
  if (ref(\$invocation_options) eq 'HASH'
   && defined(\$invocation_options->{top_rule})
@@ -396,6 +402,12 @@ sub Execute {
  my (\$result, \$execution_error);
  my \$ok = eval {
   \$result = &{\$descr->{spec}{\$entry_rule}}(\$descr, \$input_ref);
+  \$result = LinkedSpec::StagedASTEnrichmentRuntime::complete_invocation(
+   \$staged_enrichment_state,
+   \$descr,
+   \$input_ref,
+   \$result,
+  );
   1
  };
  \$execution_error = \$@;
@@ -423,6 +435,7 @@ sub Execute {
    || LinkedSpec::RecognitionTransactionRuntime::is_recursive_observation_error(\$execution_error)
    || LinkedSpec::InterMatchGapRuntime::is_error(\$execution_error)
    || LinkedSpec::ProgressiveSpanDispatchRuntime::is_error(\$execution_error)
+   || LinkedSpec::StagedASTEnrichmentRuntime::is_error(\$execution_error)
   );
  die LinkedSpec::GeneratedSource::new_error(
   stage => 'execute_generated',
@@ -1904,6 +1917,7 @@ if ($recognition_transaction_policy_error || ref($recognition_transaction_diagno
  my $diagnostic_sink = LinkedSpec::RuntimeDiagnosticOutput::validate_invocation_options($_[1]);
  my $semantic_observation_sink = LinkedSpec::RuntimeSemanticObservation::validate_invocation_options($_[1]);
  my $progressive_dispatch_state = LinkedSpec::ProgressiveSpanDispatchRuntime::begin_invocation($input_ref, $_[1]);
+ my $staged_enrichment_state = LinkedSpec::StagedASTEnrichmentRuntime::begin_invocation($input_ref, $_[1]);
  my $sink_slot = LinkedSpec::RuntimeDiagnosticOutput::sink_slot_name();
  my $control_error_slot = LinkedSpec::RuntimeDiagnosticOutput::control_error_slot_name();
  my $semantic_sink_slot = LinkedSpec::RuntimeSemanticObservation::sink_slot_name();
@@ -1921,6 +1935,12 @@ if ($recognition_transaction_policy_error || ref($recognition_transaction_diagno
  my $retv;
  my $eval_ok = eval {
   $retv = &$handler($final_descriptor, $input_ref);
+  $retv = LinkedSpec::StagedASTEnrichmentRuntime::complete_invocation(
+   $staged_enrichment_state,
+   $final_descriptor,
+   $input_ref,
+   $retv,
+  );
   1
  };
   my $eval_error = $@;

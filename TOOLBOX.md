@@ -299,10 +299,9 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   `FUTURE-PARITY-BACKLOG.14.7.1` repairs wrong-top compile context: all five source backends/six runtimes now
   preserve job id/path/parser/top/payload/span/failure plus the resolved built-in identity. Reverify with the exact
   five registry paths and focused tests in the fact card before touching general `.14.7.2+` behavior.
-- **Perl general-staged dormant boundary:** `FUTURE-PARITY-BACKLOG.14.7.3.1-.3` advance the deliberately unrouted
+- **Perl general-staged admitted boundary:** `FUTURE-PARITY-BACKLOG.14.7.3.1-.4` implement and privately admit
   `t/staged_ast_enrichment_perl_contract.t`. Run it directly with
-  `PERL5LIB= prove -Iperl t/staged_ast_enrichment_perl_contract.t`: 141 top-level checks pass and the sole expected
-  RED names missing fresh native/reconstructed/generated-plan/emitted carriers, admission, and Perl rollout. Use
+  `PERL5LIB= prove -Iperl t/staged_ast_enrichment_perl_contract.t`: all 143 top-level checks pass. Use
   `call_spec_handler_subst` to
   see the one private `LinkedSpec::StagedParseJob::construct_marker` lowering and `return_descriptor` to inspect
   its exclusive `STAGED_PARSE_JOB_MARKER`, normalized literal options, and typed text plan. Live direct/derived
@@ -312,10 +311,13 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   `job_identity`, `cache_identity`, `enrich_ast`, and `enrich_recursively` expose the private pure-selection,
   one-depth, and bounded breadth-first boundaries. Recursive callbacks receive an ephemeral second context for
   safe points and original-source position/span/diagnostic rebasing; never retain it after callback settlement.
-  Then run `bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py` to prove exact
-  dormancy, unchanged neutral inventories/mutations, four absent later consumers, and zero ordinary/canonical
-  registration. `.14.7.3.3` owns recursive scheduling, bounds, and rebased diagnostics; `.4` now owns only fresh
-  carriers/admission/Perl rollout.
+  `LinkedSpec::StagedASTEnrichmentRuntime` is the host-only top-level seam: live and generated-v2 wrappers create a
+  fresh scheduler/cache from invocation options and enrich only after the parent AST returns. The oracle proves
+  native, normalized-descriptor, validated generated-plan, and independently loaded emitted equality plus distinct
+  callbacks/cancellation/clocks and serialized-authority absence. Then run
+  `bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py` to prove neutral+Perl
+  lifecycle, four absent later consumers, 78 mutations, and exact single phase-0/canonical admission. Public
+  authoring remains `.14.7.9`; Rust dormant RED `.14.7.4.0` is next.
 - **Env knobs:** `LINKEDSPEC_TRACE_LEVEL` (level; `LINKEDSPEC_DUMP_VERBOSITY` is the fallback),
   `LINKEDSPEC_TRACE_FILE` (route to a file), `LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_EMOJI`,
   `LINKEDSPEC_TRACE_RESET_FILE`.
@@ -1134,11 +1136,11 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   is repository-routed, rejects reason-checked schema/behavior/topology mutations in memory, and is registered
   unconditionally in canonical local CI.
 - **OUTPUT:** 4 registry entries; 8 provenance; 8 resolution/6 authority; 10 cache; 4 queue/3 isolation;
-  4 result plus 3 failure policies; 10 recursive-chain and 5 detachment cases; five dormant backend consumers
-  over six runtime routes; 37 diagnostics; 9 rollout legs; 35 exact owners; and 72 mutations.
-- **BOUNDARY:** this is executable design authority, not shipped syntax or runtime behavior. All backend consumers
-  must remain dormant, every rollout leg remains pending, and outward facade/schema/semantic/MCP/CLI/README
-  tokens remain absent until their separately owned leaves. The existing function-body v1 adapter stays current.
+  4 result plus 3 failure policies; 10 recursive-chain and 5 detachment cases; five backend consumers over six
+  runtime routes; 37 diagnostics; 9 rollout legs; 35 exact owners; and 78 mutations.
+- **BOUNDARY:** neutral and Perl are complete. Rust, Dart, Julia, PUC Lua, LuaJIT, recurrence, and public no-drift
+  remain pending; outward facade/schema/semantic/MCP/CLI/README tokens remain absent. The existing function-body v1
+  adapter and generated-source v2 format stay current and unchanged.
 
 ### 4.9.1.2 Lossless-gap handoff preflight
 

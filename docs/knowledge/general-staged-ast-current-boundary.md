@@ -15,9 +15,10 @@ answers:
   - "what did FUTURE-PARITY-BACKLOG.14.7.0 audit"
   - "what must happen before general staged AST enrichment"
 date: 2026-08-25
-status: current runtime audit; neutral authority and Perl private recursive authority complete through .14.7.3.3; carriers through public implementation remain .14.7.3.4-.10
+status: current runtime audit; neutral and private Perl admission complete through .14.7.3.4; later backends through public implementation remain .14.7.4-.10
 tags: [staged-parsing, parse-job, diagnostics, registry, policies, recursive-queue, source-location, backend-parity]
 evidence: "Toolbox-first source/runtime proof establishes the shipped boundary: five source backends/six runtimes implement only actionir-body.spec/action_block, one-depth ordering, fixed cache identity, and function-specific replace_field/body_ast/fail. FUTURE-PARITY-BACKLOG.14.7.1 repairs wrong-top diagnostic parity. FUTURE-PARITY-BACKLOG.14.7.2 adds the separate executable neutral v2 authority. Perl .14.7.3.1-.3 now add a dormant private marker/provenance carrier, caller-frozen pure resolution/cache, all policies/detachment, breadth-first recurrence, chain/resource bounds, and source-rebased diagnostics. They add no reconstructed/generated/emitted carriers, admission, rollout, or public authoring. Those remain .14.7.3.4-.10-owned."
+evidence_update_2026_08_26_perl_admission: "FUTURE-PARITY-BACKLOG.14.7.3.4 adds four fresh-authority Perl routes, exact phase-0/canonical admission, and Perl-only rollout promotion. Public authoring, generated format, later backends, recurrence, and outward surfaces remain unchanged or pending."
 root_cause: "The first prototype deliberately separated a generic-looking registry record from a narrow trusted function-body integration. Compile helpers in Perl, Rust, and Dart were shaped around loaded parser identity plus top rule, so they synthesized a placeholder diagnostic record; Julia and Lua were implemented later with the complete job parameter but their formatter omitted payload_kind. Success-path and resolve-phase tests covered real context, but no cross-backend compile-phase assertion locked the ADR 0015 fields. Leaf .14.7.1 passes the normalized job through the three compile boundaries, adds payload_kind to the two later formatters, and locks all five source routes/six runtimes without expanding staged behavior."
 last_verified: 2026-08-25
 reverify:
@@ -58,14 +59,13 @@ Perl, Rust, and Dart constructed placeholder jobs while Julia and shared Lua omi
 real job context. `.14.7.1` now makes all five source backends/six runtimes report `phase=compile`, original
 `job_id`, parent path, parser and resolved identities, rejected top rule, payload kind, source span, and failure
 policy. This is diagnostic parity only. `.14.7.2` subsequently completes the separate executable neutral contract;
-runtime behavior still begins with the backend-owned `.14.7.3+` leaves. Perl `.14.7.3.0` froze the exact original
-missing-marker boundary. Perl `.14.7.3.1-.3` now advance that same dormant test to 141 GREEN top-level checks and
-one carrier/admission RED. The private exclusive marker, opaque sidecar, literal-option normalization, typed
+runtime behavior begins with the backend-owned `.14.7.3+` leaves. Perl `.14.7.3.0` froze the exact original
+missing-marker boundary. Perl `.14.7.3.1-.4` now advance that same test to 143/143. The private exclusive marker, opaque sidecar, literal-option normalization, typed
 direct/ordered-derived provenance, caller-frozen pure resolution, exact job/cache identity, breadth-first isolated
 execution, all result/failure policies, detachment, exact-text/full-provenance chains, shared resource bounds,
 diagnostic rebasing, malformed/smuggling rejection, and transaction closure exist. Native/reconstructed/generated/
-emitted fresh-authority carriers and admission remain `.4`. The consumer remains absent from ordinary and canonical
-discovery, so this is not admitted public behavior.
+emitted routes receive fresh host-only authority, and the consumer is admitted once in ordinary/canonical
+discovery. This remains private Perl behavior, not public authoring.
 
 The dependency plan then separates neutral contract, each backend, exact five-source/six-runtime recurrence,
 public `parse_job(...)` authoring, and independent recomposition. General staged dispatch reuses the typed source

@@ -2,7 +2,7 @@
   "format": 1,
   "contract_id": "linkedspec-staged-ast-enrichment-v1",
   "task_owner": "FUTURE-PARITY-BACKLOG.14.7.2",
-  "status": "neutral_complete_backends_pending",
+  "status": "neutral_and_perl_complete_later_backends_pending",
   "expected_counts": {
     "registry_entries": 4,
     "sources": 2,
@@ -24,7 +24,7 @@
     "diagnostics": 37,
     "rollout_legs": 9,
     "ownership_rows": 35,
-    "mutations": 72
+    "mutations": 78
   },
   "authored_surface": {
     "example": "job_marker = parse_job(text_expr, hash(\"node_kind\", \"expression\", \"payload_kind\", \"embedded_expression\", \"spec\", \"expr-v1\", \"top\", \"Expr\", \"result_policy\", \"sibling_field\", \"into\", \"expression_ast\", \"on_error\", \"fail\"))",
@@ -788,7 +788,7 @@
     {"order": 4, "carrier": "independently_loaded_emitted", "requirement": "preserve the logical marker/sidecar, typed provenance, deterministic identity, and cache inputs; obtain a fresh caller-supplied registry/runtime authority per execution; serialize no callback, compiled parser, registry snapshot, source authority, cancellation token, deadline, budget, mutable queue, or host handle"}
   ],
   "backend_consumers": [
-    {"backend": "perl", "owner": "FUTURE-PARITY-BACKLOG.14.7.3.0", "path": "t/staged_ast_enrichment_perl_contract.t", "status": "dormant_red"},
+    {"backend": "perl", "owner": "FUTURE-PARITY-BACKLOG.14.7.3.0", "path": "t/staged_ast_enrichment_perl_contract.t", "status": "complete"},
     {"backend": "rust", "owner": "FUTURE-PARITY-BACKLOG.14.7.4.0", "path": "rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs", "status": "pending_absent"},
     {"backend": "dart", "owner": "FUTURE-PARITY-BACKLOG.14.7.5.0", "path": "dart/test/staged_ast_enrichment_contract_test.dart", "status": "pending_absent"},
     {"backend": "julia", "owner": "FUTURE-PARITY-BACKLOG.14.7.6.0", "path": "julia/test/staged_ast_enrichment_contract_test.jl", "status": "pending_absent"},
@@ -864,7 +864,7 @@
   ],
   "rollout": [
     {"order": 1, "leg": "neutral", "owner": "FUTURE-PARITY-BACKLOG.14.7.2", "status": "complete", "paths": ["capability_conformance/staged_ast_enrichment_contract.json", "tools/check_staged_ast_enrichment_contract.py"]},
-    {"order": 2, "leg": "perl", "owner": "FUTURE-PARITY-BACKLOG.14.7.3", "status": "pending", "paths": ["t/staged_ast_enrichment_perl_contract.t"]},
+    {"order": 2, "leg": "perl", "owner": "FUTURE-PARITY-BACKLOG.14.7.3", "status": "complete", "paths": ["t/staged_ast_enrichment_perl_contract.t"]},
     {"order": 3, "leg": "rust", "owner": "FUTURE-PARITY-BACKLOG.14.7.4", "status": "pending", "paths": ["rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs"]},
     {"order": 4, "leg": "dart", "owner": "FUTURE-PARITY-BACKLOG.14.7.5", "status": "pending", "paths": ["dart/test/staged_ast_enrichment_contract_test.dart"]},
     {"order": 5, "leg": "julia", "owner": "FUTURE-PARITY-BACKLOG.14.7.6", "status": "pending", "paths": ["julia/test/staged_ast_enrichment_contract_test.jl"]},
@@ -880,6 +880,13 @@
     "canonical_driver": "tools/run_ci_local.sh",
     "registration_marker": "checking backend-neutral staged-AST enrichment contract",
     "invocation": "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py",
+    "perl_admission": {
+      "consumer_path": "t/staged_ast_enrichment_perl_contract.t",
+      "ordinary_driver": "t/phase0_regression.t",
+      "syntax_invocation": "perl -c -Iperl t/staged_ast_enrichment_perl_contract.t",
+      "registration_marker": "running exact Perl staged-AST enrichment admission consumer",
+      "invocation": "PERL5LIB= prove -Iperl t/staged_ast_enrichment_perl_contract.t"
+    },
     "storage_policy": "all Python cache, temporary, and process data stays under repository-derived project storage",
     "tracked_required": true
   },
@@ -980,6 +987,7 @@
     "compatibility_upgrade",
     "carrier_kind",
     "consumer_path",
+    "consumer_status",
     "runtime_route",
     "outward_path",
     "outward_token",
@@ -992,6 +1000,11 @@
     "canonical_checker",
     "canonical_runner",
     "canonical_invocation",
+    "perl_admission_consumer",
+    "perl_admission_ordinary",
+    "perl_admission_syntax",
+    "perl_admission_marker",
+    "perl_admission_invocation",
     "ownership"
   ]
 }

@@ -99,15 +99,17 @@ families, recursive scheduling, alternate policies, and public closeout remain p
 makes wrong-top compile diagnostics preserve the same original job context and resolved identity on all five
 source backends/six runtimes. Neutral `.14.7.2` now adds the executable general authority at 4 registry entries,
 8 provenance, 8 resolution/6 authority, 10 cache, 4 queue/3 isolation, all result/failure policies, 10 chain,
-5 detachment, 37 diagnostic, 35-owner, and 72-mutation proof. Perl private leaves `.14.7.3.1-.3` advance the same
-dormant oracle to 141 GREEN top-level checks and one carrier/admission RED. They prove one exclusive marker,
+5 detachment, 37 diagnostic, 35-owner, and 78-mutation proof after Perl admission. Perl leaves `.14.7.3.1-.4`
+advance the same oracle to 143/143. They prove one exclusive marker,
 opaque detached v2 sidecar, typed provenance, caller-frozen pure resolution/cache, default-top-before-job-id,
 breadth-first complete-depth execution, all four result plus three failure policies, decreasing chains, shared
 resources, source rebasing, detached results, malformed/smuggling rejection, unchanged v1, and transaction closure.
-They have zero ordinary/canonical registration and change no generated carrier/format, rollout, or public
-`parse_job(...)` behavior. Mandatory
+The private top-level seam proves equal native, normalized-descriptor, generated-plan, and independently loaded
+emitted results from fresh host-only authority with no live state serialized. The consumer is registered exactly
+once in ordinary phase-0 and canonical CI, and only Perl rollout is complete. Generated format, function-body v1,
+public `parse_job(...)`, and outward behavior remain unchanged. Mandatory
 history segment `4991` remains finitely authorized by ADR `0089` at 22 files / 21 manifest records. Fresh
-carrier/admission/Perl rollout authority `.14.7.3.4` is next.
+Rust dormant RED `.14.7.4.0` is next.
 
 Rust's exact four-test consumer now runs under ordinary Cargo discovery and as a required canonical-CI leg. It
 proves the immutable value core and projection boundary across native, reconstructed, and generated-plan execution;
