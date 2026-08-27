@@ -1,6 +1,7 @@
 local compiled_spec = require("linkedspec.compiled_spec")
 local json = require("linkedspec.json")
 local native = require("linkedspec_regex_pcre2")
+local staged_capture_provenance = require("linkedspec.staged_capture_provenance")
 
 local M = {}
 
@@ -196,7 +197,7 @@ function M.compile_runtime_regex_alternation(value)
 end
 
 local function runtime_regex_match(input, alternative, raw)
-  return setmetatable({
+  local match = setmetatable({
     input = input,
     alternative_index = alternative.index,
     pattern = alternative.pattern,
@@ -206,6 +207,7 @@ local function runtime_regex_match(input, alternative, raw)
     captures = raw.captures,
     named = raw.named,
   }, TYPE_MTS.RuntimeRegexMatch)
+  return staged_capture_provenance.record(match, raw.capture_spans)
 end
 
 function M.reindex_runtime_regex_match(match, alternative_index)
@@ -213,7 +215,7 @@ function M.reindex_runtime_regex_match(match, alternative_index)
   if type(alternative_index) ~= "number" or alternative_index % 1 ~= 0 or alternative_index < 0 then
     fail("reindexed alternative must be a non-negative integer")
   end
-  return setmetatable({
+  local reindexed = setmetatable({
     input = match.input,
     alternative_index = alternative_index,
     pattern = match.pattern,
@@ -223,6 +225,7 @@ function M.reindex_runtime_regex_match(match, alternative_index)
     captures = match.captures,
     named = match.named,
   }, TYPE_MTS.RuntimeRegexMatch)
+  return staged_capture_provenance.copy(match, reindexed)
 end
 
 local function native_match(alternative, input, byte_cursor, anchored)

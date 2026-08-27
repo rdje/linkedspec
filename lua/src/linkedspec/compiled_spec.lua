@@ -688,7 +688,7 @@ local function progressive_dispatch_effects(value, function_names)
   local function visit(node)
     if type(node) ~= "table" then return end
     local kind = node.kind
-    if kind == "progressive_dispatch_span" then
+    if kind == "progressive_dispatch_span" or kind == "staged_parse_job_marker" then
       effects.dispatches = true
     elseif kind == "recognize_once" then
       if type(node.rule) == "string" then effects.recognition_attempts[node.rule] = true end
@@ -712,6 +712,35 @@ local function progressive_dispatch_effects(value, function_names)
 
   visit(value)
   return effects
+end
+
+local function validate_staged_parse_job_contract(compiled)
+  local function reject_residual_calls(value)
+    local function visit(node)
+      if type(node) ~= "table" then return end
+      if (node.kind == "call" and node.name == "parse_job") or node.method == "parse_job" then
+        fail(
+          "LINKEDSPEC_STAGED_AST_ENRICHMENT_ERROR:staged_parse_job_options_required",
+          { code = "staged_parse_job_options_required" }
+        )
+      end
+      for _, child in pairs(node) do visit(child) end
+    end
+    visit(value)
+  end
+
+  for _, label in ipairs(compiled.compiled_rule_order) do
+    local projected = json.array()
+    for index, payload in ipairs(action_payloads_for_recursive_observation(compiled.rules_by_label[label])) do
+      projected[index] = action_ast.to_json(payload.action_ast)
+    end
+    reject_residual_calls(projected)
+  end
+  for _, entry in ipairs(compiled.function_registry.entries) do
+    reject_residual_calls(action_ast.to_json(
+      action_parser.parse_action_block(entry.definition.body_source)
+    ))
+  end
 end
 
 local function progressive_dispatch_inherits(effects, rule_dispatches, function_dispatches)
@@ -927,6 +956,7 @@ function M.compile_spec(spec, options)
       }, COMPILED_SPEC_MT)
       M.validate_compiled_regex_slot_identities(compiled)
       validate_no_removed_aggregate_selectors(compiled)
+      validate_staged_parse_job_contract(compiled)
       validate_recursive_observation_policy(compiled)
       validate_progressive_dispatch_policy(compiled)
       return compiled
@@ -1029,6 +1059,7 @@ function M.validate_progressive_dispatch_policy(compiled)
   if M.node_type(compiled) ~= "CompiledSpec" then
     fail("validate_progressive_dispatch_policy expects CompiledSpec")
   end
+  validate_staged_parse_job_contract(compiled)
   validate_progressive_dispatch_policy(compiled)
 end
 

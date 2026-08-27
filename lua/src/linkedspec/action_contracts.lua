@@ -497,10 +497,10 @@ local function resolver(function_registry)
     elseif kind == "recognition_checkpoint" or kind == "recognize_once" or
         kind == "observe_recognition" or
         kind == "recognition_commit" or kind == "recognition_rollback" or
-        kind == "progressive_dispatch_span" then
+        kind == "progressive_dispatch_span" or kind == "staged_parse_job_marker" then
       -- Grammar-owned recognition intrinsics are dedicated ActionIR nodes,
-      -- and progressive dispatch is a dedicated logical node, not an entry
-      -- in the ordinary callable-helper registry.
+      -- and staged/progressive dispatch declarations are dedicated logical
+      -- nodes, not entries in the ordinary callable-helper registry.
       return
     elseif kind == "fluent_chain" then
       visit_expr(expr.receiver)

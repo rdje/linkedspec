@@ -94,6 +94,16 @@ static void push_capture(
     lua_pushlstring(state, input + start, (size_t)(finish - start));
 }
 
+static void push_capture_span(
+    lua_State *state,
+    const PCRE2_SIZE *ovector,
+    uint32_t capture_index
+) {
+    lua_newtable(state);
+    set_integer_field(state, "start_byte", (lua_Integer)ovector[capture_index * 2]);
+    set_integer_field(state, "end_byte", (lua_Integer)ovector[capture_index * 2 + 1]);
+}
+
 static void push_named_captures(
     lua_State *state,
     linkedspec_regex *regex,
@@ -178,6 +188,17 @@ static int match_regex(lua_State *state) {
         lua_rawseti(state, -2, compact_index++);
     }
     lua_setfield(state, -2, "captures");
+
+    lua_newtable(state);
+    compact_index = 1;
+    for (uint32_t index = 1; index <= regex->capture_count; ++index) {
+        if (ovector[index * 2] == PCRE2_UNSET || ovector[index * 2 + 1] == PCRE2_UNSET) {
+            continue;
+        }
+        push_capture_span(state, ovector, index);
+        lua_rawseti(state, -2, compact_index++);
+    }
+    lua_setfield(state, -2, "capture_spans");
 
     push_named_captures(state, regex, input, ovector);
     lua_setfield(state, -2, "named");

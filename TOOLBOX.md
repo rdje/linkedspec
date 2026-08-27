@@ -333,7 +333,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   neutral+Perl+Rust+Dart+Julia admission, one shared Lua dual-ABI dormant RED, 98 mutations, and exact
   single Perl/Rust/Dart/Julia ordinary+canonical admission. Run the Lua boundary unchanged with
   `bash tools/run_lua_project_data.sh puc lua/test/staged_ast_enrichment_contract_test.lua` and then `luajit`;
-  each must report 153 GREEN assertions and only the labeled marker/provenance RED.
+  each must report 392 GREEN assertions and only the labeled `.14.7.7.2` caller-frozen authority RED.
   Public authoring remains `.14.7.9`.
 - **Rust general-staged admitted private boundary:** `FUTURE-PARITY-BACKLOG.14.7.4.0-.4` owns
   `rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs` as an ordinary and canonical consumer. Run it with
@@ -394,8 +394,20 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   inspect `StagedAstEnrichmentSeed`, `_start_staged_ast_enrichment`, and `_complete_staged_ast_enrichment!` for the
   opaque host recipe and one-use fresh registry/cache/recursive authority. `LinkedSpecRuntimeEngine`, reconstructed
   execution, generated plans, and emitted `execute` share the same optional seed and enrich only after the complete
-  parent result. Retrieve [[julia-staged-ast-enrichment-carriers-admission]] before changing this seam. Lua `.7`
-  remains next; public authoring stays `.9`.
+  parent result. Retrieve [[julia-staged-ast-enrichment-carriers-admission]] before changing this seam. Public
+  authoring stays `.9`.
+- **Lua general-staged private marker/provenance boundary:** retrieve
+  [[lua-staged-ast-enrichment-marker-provenance]] before inspecting source. Run the same stable consumer with
+  `bash tools/run_lua_project_data.sh puc lua/test/staged_ast_enrichment_contract_test.lua` and again with
+  `luajit`; each must report 392 GREEN assertions and only the exact `.14.7.7.2` resolution/cache/result/failure
+  RED. Inspect `action_parser.lua` / `action_ast.lua` for exclusive assignment lowering and normalized text plans,
+  `regex_pcre2.c` / `staged_capture_provenance.lua` / `matching.lua` for private compact PCRE2 capture byte ranges
+  absent from match fields, the outward module, and JSON, and
+  `staged_parse_job.lua` for conversion through the existing typed source authority into a detached inert marker.
+  Probe native, `SpecFile`-JSON reconstructed, generated-plan, and independently loaded emitted execution; all
+  four must agree on both ABIs. Do not infer capture positions from copied text or replay a regex. The consumer
+  remains absent from ordinary/canonical discovery, both Lua rollout rows remain pending, and `.14.7.7.2` owns all
+  parser resolution/cache and result/failure behavior.
 - **Env knobs:** `LINKEDSPEC_TRACE_LEVEL` (level; `LINKEDSPEC_DUMP_VERBOSITY` is the fallback),
   `LINKEDSPEC_TRACE_FILE` (route to a file), `LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_EMOJI`,
   `LINKEDSPEC_TRACE_RESET_FILE`.
@@ -1219,8 +1231,9 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
 - **BOUNDARY:** neutral, Perl, Rust, Dart, and Julia are complete. Julia's 491/491 consumer runs once in ordinary/
   canonical discovery and proves a fresh host-only seed across four production routes after its exclusive marker,
   live-proven typed provenance, caller-frozen policies, and breadth-first recursive authority. The one shared Lua
-  final-path consumer is dormant and runs independently at 153 GREEN/one marker-provenance RED on PUC Lua and
-  LuaJIT; both rollout rows, recurrence, and public no-drift remain pending. Outward facade/
+  final-path consumer is dormant and runs independently with its private marker/provenance carrier at 392
+  GREEN/one caller-frozen authority RED on PUC Lua and LuaJIT; both rollout rows, recurrence, and public no-drift
+  remain pending. Outward facade/
   schema/semantic/MCP/CLI/README tokens remain absent. The existing function-body v1 adapter and generated-source
   v2 format stay current and unchanged.
 

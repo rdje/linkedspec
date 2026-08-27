@@ -570,6 +570,193 @@ local function parser(root_source)
     })
   end
 
+  local function staged_parse_job_error(code)
+    error("LINKEDSPEC_STAGED_AST_ENRICHMENT_ERROR:" .. code, 0)
+  end
+
+  local function staged_literal_string(expression)
+    if expression.kind == "string" then return expression.value end
+    return nil
+  end
+
+  local function staged_parser_identity_is_valid(value)
+    return value:match("^[a-z][a-z0-9]*[a-z0-9._:-]*$") ~= nil and
+      value:match("[._:-][._:-]") == nil and value:match("[._:-]$") == nil
+  end
+
+  local function staged_parse_job_options(expression)
+    if expression.kind ~= "call" or expression.name ~= "hash" or
+        #expression.args == 0 or #expression.args % 2 ~= 0 then
+      staged_parse_job_error("staged_parse_job_options_required")
+    end
+
+    local allowed = {
+      node_kind = true,
+      payload_kind = true,
+      spec = true,
+      top = true,
+      result_policy = true,
+      into = true,
+      on_error = true,
+      required_capabilities = true,
+    }
+    local values = {}
+    for index = 1, #expression.args, 2 do
+      local key_argument = expression.args[index]
+      local value_argument = expression.args[index + 1]
+      local key = key_argument.argument_kind == "positional" and
+        staged_literal_string(key_argument.value) or nil
+      if key == nil or value_argument.argument_kind ~= "positional" or values[key] ~= nil then
+        staged_parse_job_error("staged_parse_job_options_required")
+      end
+      if not allowed[key] then staged_parse_job_error("staged_parse_job_option_unknown") end
+      values[key] = value_argument.value
+    end
+
+    local function required_string(name)
+      local expression_value = values[name]
+      local value = expression_value and staged_literal_string(expression_value) or nil
+      if value == nil then staged_parse_job_error("staged_parse_job_options_required") end
+      return value
+    end
+
+    local function optional_string(name)
+      local expression_value = values[name]
+      if expression_value == nil then return nil end
+      local value = staged_literal_string(expression_value)
+      if value == nil then staged_parse_job_error("staged_parse_job_options_required") end
+      return value
+    end
+
+    local node_kind = required_string("node_kind")
+    local payload_kind = required_string("payload_kind")
+    local parser_spec_id = required_string("spec")
+    local top_rule = optional_string("top")
+    local result_policy = required_string("result_policy")
+    local into = optional_string("into")
+    local failure_policy = required_string("on_error")
+    if not node_kind:match("^[a-z][a-z0-9_]*$") or
+        not payload_kind:match("^[a-z][a-z0-9_]*$") then
+      staged_parse_job_error("staged_parse_job_options_required")
+    end
+    if not staged_parser_identity_is_valid(parser_spec_id) then
+      staged_parse_job_error("staged_parser_identity_invalid")
+    end
+    if top_rule ~= nil and not top_rule:match("^[A-Za-z_][A-Za-z0-9_]*$") then
+      staged_parse_job_error("staged_top_rule_invalid")
+    end
+    if result_policy ~= "replace_marker" and result_policy ~= "replace_field" and
+        result_policy ~= "sibling_field" and result_policy ~= "append_child" then
+      staged_parse_job_error("staged_result_policy_invalid")
+    end
+    if failure_policy ~= "fail" and failure_policy ~= "keep_text" and
+        failure_policy ~= "diagnostic_node" then
+      staged_parse_job_error("staged_failure_policy_invalid")
+    end
+    local target_is_valid = into ~= nil and into:match("^[A-Za-z_][A-Za-z0-9_]*$") ~= nil
+    if (result_policy == "replace_marker" and into ~= nil) or
+        (result_policy ~= "replace_marker" and not target_is_valid) then
+      staged_parse_job_error("staged_result_target_invalid")
+    end
+
+    local required_capabilities = json.array()
+    local capability_expression = values.required_capabilities
+    if capability_expression ~= nil then
+      if capability_expression.kind ~= "call" or capability_expression.name ~= "array" then
+        staged_parse_job_error("staged_parse_job_options_required")
+      end
+      local seen = {}
+      local capabilities = {}
+      for _, argument in ipairs(capability_expression.args) do
+        local capability = argument.argument_kind == "positional" and
+          staged_literal_string(argument.value) or nil
+        if capability == nil or not staged_parser_identity_is_valid(capability) or seen[capability] then
+          staged_parse_job_error("staged_parse_job_options_required")
+        end
+        seen[capability] = true
+        capabilities[#capabilities + 1] = capability
+      end
+      table.sort(capabilities)
+      for index, capability in ipairs(capabilities) do
+        required_capabilities[index] = capability
+      end
+    end
+
+    return action_ast.staged_parse_job_options({
+      node_kind = node_kind,
+      payload_kind = payload_kind,
+      spec = parser_spec_id,
+      top = top_rule,
+      result_policy = result_policy,
+      into = into,
+      on_error = failure_policy,
+      required_capabilities = required_capabilities,
+    })
+  end
+
+  local function staged_direct_text_plan(expression)
+    if expression.kind ~= "call" then return nil end
+    if expression.name == "entry_text" or expression.name == "match_text" then
+      if #expression.args ~= 0 then staged_parse_job_error("staged_source_provenance_invalid") end
+      return action_ast.staged_parse_job_direct_text_plan(expression.name)
+    end
+    if expression.name == "entry_group" or expression.name == "match_group" then
+      if #expression.args ~= 1 or expression.args[1].argument_kind ~= "positional" then
+        staged_parse_job_error("staged_source_provenance_invalid")
+      end
+      local index_expression = expression.args[1].value
+      local index = index_expression.kind == "number" and index_expression.value or nil
+      if type(index) ~= "number" or index ~= math.floor(index) or index < 0 then
+        staged_parse_job_error("staged_source_provenance_invalid")
+      end
+      return action_ast.staged_parse_job_direct_text_plan(expression.name, index)
+    end
+    return nil
+  end
+
+  local function staged_parse_job_text_plan(expression)
+    local direct = staged_direct_text_plan(expression)
+    if direct ~= nil then return direct end
+    if expression.kind ~= "call" or expression.name ~= "cat" or #expression.args == 0 then
+      staged_parse_job_error("staged_source_provenance_invalid")
+    end
+    local segments = {}
+    for _, argument in ipairs(expression.args) do
+      if argument.argument_kind ~= "positional" then
+        staged_parse_job_error("staged_source_provenance_invalid")
+      end
+      local nested = staged_parse_job_text_plan(argument.value)
+      if nested.kind == "direct_span" then
+        segments[#segments + 1] = nested
+      else
+        for _, segment in ipairs(nested.segments) do segments[#segments + 1] = segment end
+      end
+    end
+    if #segments == 0 then staged_parse_job_error("staged_source_provenance_invalid") end
+    return action_ast.staged_parse_job_derived_text_plan(segments)
+  end
+
+  local function staged_parse_job_assignment(text, start_byte, target, value)
+    if value.kind ~= "call" or value.name ~= "parse_job" then return nil end
+    if #value.args ~= 2 or value.args[1].argument_kind ~= "positional" or
+        value.args[2].argument_kind ~= "positional" then
+      staged_parse_job_error("staged_parse_job_options_required")
+    end
+    return action_ast.expr(
+      "staged_parse_job_marker",
+      text,
+      span(start_byte, start_byte + #text),
+      {
+        target = target,
+        version = 2,
+        sidecar_kind = "staged_parse_job_v2",
+        effect = "staged_parse_job_declaration",
+        text_plan = staged_parse_job_text_plan(value.args[1].value),
+        options = staged_parse_job_options(value.args[2].value),
+      }
+    )
+  end
+
   local function parse_assignment(text, start_byte)
     local append_position = find_top_level_token(text, "+=")
     if append_position then
@@ -591,6 +778,8 @@ local function parser(root_source)
     local value = parse_expression(right, right_start)
     local name = left:match("^([A-Za-z_][A-Za-z0-9_]*)$")
     if name then
+      local staged = staged_parse_job_assignment(text, start_byte, name, value)
+      if staged ~= nil then return staged end
       if value.kind == "call" and value.name == "dispatch_span" then
         local function progressive_error(code)
           error("LINKEDSPEC_PROGRESSIVE_SPAN_DISPATCH_ERROR:" .. code, 0)
@@ -1007,6 +1196,14 @@ local function parser(root_source)
     return raw_expr(text, start_byte, "unsupported_expression")
   end
 
+  local function reject_residual_staged_call(value)
+    if type(value) ~= "table" then return end
+    if (value.kind == "call" and value.name == "parse_job") or value.method == "parse_job" then
+      staged_parse_job_error("staged_parse_job_options_required")
+    end
+    for _, child in pairs(value) do reject_residual_staged_call(child) end
+  end
+
   local function parse_statement(text, start_byte, end_byte)
     local expression
     if text == "next" then
@@ -1017,6 +1214,7 @@ local function parser(root_source)
     else
       expression = parse_expression(text, start_byte)
     end
+    reject_residual_staged_call(expression)
     return action_ast.statement(text, span(start_byte, end_byte), expression, true)
   end
 
@@ -1030,7 +1228,11 @@ local function parser(root_source)
   end
 
   return {
-    parse_expression = function(source) return parse_expression(source, 1) end,
+    parse_expression = function(source)
+      local expression = parse_expression(source, 1)
+      reject_residual_staged_call(expression)
+      return expression
+    end,
     parse_statement = function(source)
       local text, start_byte, end_byte = trim_offsets(source, 1)
       return parse_statement(text, start_byte, end_byte)

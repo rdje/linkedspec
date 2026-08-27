@@ -10,6 +10,32 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-27 — FUTURE-PARITY-BACKLOG.14.7.7.1 — implement Lua staged marker provenance
+
+- Lowered only exact scalar assignment-form `parse_job(text_expr, literal_hash_options)` to one private
+  `staged_parse_job_marker` with normalized options and a direct or flattened ordered-derived text plan; the
+  ordinary helper registry remains unchanged.
+- Added strict malformed/dynamic/residual-form and recognition-closure rejection. Missing/unknown/duplicate
+  options, invalid identities/policies/targets/capabilities, copied/transformed text, dynamic capture indices,
+  receiver/nested/append/indexed calls, and recognition-reachable declarations fail before execution.
+- Retained participating PCRE2 capture byte ranges in an unexported weak-key side table in compact capture order;
+  match objects, the outward matching module, and JSON expose no field/accessor. The existing typed source
+  authority converts live whole-match/capture ranges to Unicode-scalar direct or
+  nonempty ordered-derived provenance without copied-text search or regex replay.
+- Added a private inert detached `STAGED_PARSE_JOB_MARKER` / `staged_parse_job_v2` constructor containing only
+  normalized logical options, exact materialized text, typed provenance, and origin—never live source, match,
+  parser, registry, callback, cache, scheduler, path, or host authority.
+- Advanced the shared dormant consumer on PUC Lua and LuaJIT to 392 GREEN assertions and one identical
+  `.14.7.7.2` caller-frozen resolution/cache/result/failure-policy RED across native, reconstructed,
+  generated-plan, and independently loaded emitted routes.
+- Focused proof passes complete ordinary Lua on both ABIs at 178 suites each, 105/105 corpus, 66/66 dual-
+  environment CLI, and storage; neutral 98 mutations; Perl 143, Rust 1/1 in 343.17 seconds, Dart 19, Julia 491;
+  typed/recognition/progressive/semantic/capability/generated/language ledgers; Knowledge 902/7,665; and rendered
+  mdBook 80 files / 15,680 KiB.
+- Synchronized ADR `0088`, Knowledge, roadmaps, architecture, Toolbox, task/index, bounded live docs, memory, and
+  the sole-facing mdBook while preserving function-body v1, generated-source v2, ordinary/canonical discovery,
+  both Lua rollout rows, neutral governance, public/outward behavior, and other backends.
+
 ## 2026-08-27 — FUTURE-PARITY-BACKLOG.14.7.7.0 — freeze Lua staged-AST dormant RED
 
 - Added one Lua-5.1-compatible staged-enrichment contract at its predeclared stable final path and executed the

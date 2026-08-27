@@ -1,4 +1,4 @@
--- FUTURE-PARITY-BACKLOG.14.7.7.0 — dormant shared Lua staged-AST enrichment RED.
+-- FUTURE-PARITY-BACKLOG.14.7.7.1 — private Lua staged marker/provenance carrier.
 --
 -- This exact final-path consumer is intentionally omitted from ordinary Lua
 -- and canonical CI discovery. Its focused repository-local commands are:
@@ -6,14 +6,15 @@
 --   bash tools/run_lua_project_data.sh puc lua/test/staged_ast_enrichment_contract_test.lua
 --   bash tools/run_lua_project_data.sh luajit lua/test/staged_ast_enrichment_contract_test.lua
 --
--- Every pre-boundary assertion must remain GREEN on both Lua ABIs. The sole
--- intentional RED is the final missing dedicated `STAGED_PARSE_JOB_MARKER`
--- plus typed `staged_parse_job_v2` provenance assertion. The current generic
--- `parse_job(...)` call and unsupported-helper rejection are not an
--- implementation.
+-- Every marker/provenance/static-boundary assertion remains GREEN on both Lua
+-- ABIs. The sole intentional RED is the final caller-frozen resolution/cache
+-- boundary owned by FUTURE-PARITY-BACKLOG.14.7.7.2.
 
 local json = require("linkedspec.json")
 local linkedspec = require("linkedspec")
+local action_parser = require("linkedspec.action_parser")
+local source_location = require("linkedspec.source_location")
+local staged_parse_job = require("linkedspec.staged_parse_job")
 
 local CONTRACT_ID = "linkedspec-staged-ast-enrichment-v1"
 local CONSUMER_PATH = "lua/test/staged_ast_enrichment_contract_test.lua"
@@ -21,7 +22,7 @@ local SOURCE_IDENTITY = "staged-ast-enrichment/lua-red.spec"
 local EMITTED_IDENTITY = "staged-ast-enrichment/lua-red-emitted.spec"
 local AUTHORED_SOURCE = [[Top::
  /([^;]+);/
- I {
+ E {
   job_marker = parse_job(entry_group(0), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "top", "Expr", "result_policy", "sibling_field", "into", "expression_ast", "on_error", "fail"))
   return(job_marker)
  }
@@ -141,32 +142,55 @@ local function v1_job(top_rule)
   })
 end
 
-local function expect_native_failure(ok, failure, label)
-  check_equal(ok, false, label .. " rejects")
-  local typed = not ok and linkedspec.is_runtime_interpreter_error(failure)
-  check_equal(typed, true, label .. " remains a typed runtime failure")
-  local fields = typed and failure or {}
-  check_equal(fields.message, "unsupported runtime helper 'parse_job'", label .. " detail")
-  check_equal(fields.helper_name, "parse_job", label .. " helper identity")
-  local diagnostic = fields.diagnostic
-  check_equal(linkedspec.is_runtime_diagnostic(diagnostic), true, label .. " diagnostic type")
-  local projected = diagnostic and linkedspec.interpreter.to_json(diagnostic) or {}
-  check_equal(projected.stage, "runtime_execution", label .. " diagnostic stage")
-  check_equal(projected.rule_label, "Top", label .. " diagnostic rule")
-  check_equal(projected.detail, "unsupported runtime helper 'parse_job'", label .. " diagnostic detail")
+local function expect_marker(result, expected_text, expected_provenance, label)
+  local marker
+  if type(result) == "table" and result.kind == "STAGED_PARSE_JOB_MARKER" then
+    marker = result
+  else
+    local projected = linkedspec.interpreter.to_json(result)
+    check_equal(projected.matched, true, label .. " matched")
+    marker = projected.value or {}
+  end
+  check_equal(marker.kind, "STAGED_PARSE_JOB_MARKER", label .. " marker kind")
+  check_equal(marker.version, 2, label .. " marker version")
+  check_equal(marker.sidecar_kind, "staged_parse_job_v2", label .. " sidecar kind")
+  check_equal(marker.effect, "staged_parse_job_declaration", label .. " marker effect")
+  local sidecar = marker.staged_parse_job_v2 or {}
+  for field, expected in pairs({
+    kind = "staged_parse_job_v2",
+    version = 2,
+    state = "declared",
+    effect = "staged_parse_job_declaration",
+    node_kind = "expression",
+    payload_kind = "embedded_expression",
+    parser_spec_id = "expr-v1",
+    top_rule = "Expr",
+    result_policy = "sibling_field",
+    into = "expression_ast",
+    failure_policy = "fail",
+    origin = "Top:parse_job",
+    text = expected_text,
+  }) do
+    check_equal(sidecar[field], expected, label .. " sidecar " .. field)
+  end
+  check_equal(json.kind(sidecar.required_capabilities), "array", label .. " capability array")
+  check_equal(#(sidecar.required_capabilities or {}), 0, label .. " capability count")
+  check_same_json(sidecar.provenance, expected_provenance, label .. " typed provenance")
+  local encoded = json.encode(marker)
+  for _, forbidden in ipairs({ "capture_spans", "byte_start", "byte_end", "authority" }) do
+    check_equal(count_literal(encoded, forbidden), 0, label .. " detached token " .. forbidden)
+  end
+  return marker
 end
 
-local function expect_generated_failure(ok, failure, identity, label)
+local function expect_staged_parse_error(source, code, label)
+  local ok, failure = capture(function() return action_parser.parse_action_expression(source) end)
   check_equal(ok, false, label .. " rejects")
-  local typed = not ok and linkedspec.is_generated_source_error(failure)
-  check_equal(typed, true, label .. " remains a typed generated failure")
-  local fields = typed and failure or {}
-  check_equal(fields.stage, "execute_generated", label .. " stage")
-  check_equal(fields.code, "generated_execution_failed", label .. " code")
-  check_equal(fields.source_identity, identity, label .. " source identity")
-  check_equal(fields.rule_label, "Top", label .. " rule label")
-  check_equal(fields.handler_family, "default", label .. " handler family")
-  check_contains(fields.detail or "", "unsupported runtime helper 'parse_job'", label .. " detail")
+  check_contains(
+    failure,
+    "LINKEDSPEC_STAGED_AST_ENRICHMENT_ERROR:" .. code,
+    label .. " diagnostic"
+  )
 end
 
 local contract = json.decode(read_file(
@@ -419,53 +443,107 @@ for _, object in ipairs(objects_with_kind(top, "call")) do
 end
 local marker_nodes = objects_with_kind(top, "staged_parse_job_marker")
 
-check_equal(#generic_calls, 1, "generic parse_job call count")
-local generic_call = generic_calls[1] or {}
-check_equal(#(generic_call.args or {}), 2, "generic parse_job argument count")
-local first_argument = generic_call.args and generic_call.args[1] or {}
-local second_argument = generic_call.args and generic_call.args[2] or {}
-check_equal(first_argument.kind, "call", "generic text expression kind")
-check_equal(first_argument.name, "entry_group", "generic text helper")
-check_equal(second_argument.kind, "call", "generic options expression kind")
-check_equal(second_argument.name, "hash", "generic options helper")
-check_equal(#marker_nodes, 0, "dedicated staged marker absent")
+check_equal(#generic_calls, 0, "generic parse_job call count")
+check_equal(#marker_nodes, 1, "dedicated staged marker exact")
+local logical_marker = marker_nodes[1] or {}
+check_equal(logical_marker.target, "job_marker", "logical marker target")
+check_equal(logical_marker.version, 2, "logical marker version")
+check_equal(logical_marker.sidecar_kind, "staged_parse_job_v2", "logical marker sidecar kind")
+check_equal(logical_marker.effect, "staged_parse_job_declaration", "logical marker effect")
+check_same_json(logical_marker.text_plan, json.harray({
+  kind = "direct_span",
+  source = "entry_group",
+  index = 0,
+}), "logical direct provenance plan")
+check_same_json(logical_marker.options, json.harray({
+  node_kind = "expression",
+  payload_kind = "embedded_expression",
+  spec = "expr-v1",
+  top = "Expr",
+  result_policy = "sibling_field",
+  into = "expression_ast",
+  on_error = "fail",
+  required_capabilities = json.array(),
+}), "logical normalized options")
 local encoded_action = json.encode(top)
-check_equal(count_literal(encoded_action, '"name":"parse_job"'), 1, "serialized generic call exact")
+check_equal(count_literal(encoded_action, '"name":"parse_job"'), 0, "serialized generic call absent")
 check_equal(count_literal(encoded_action, "STAGED_PARSE_JOB_MARKER"), 0, "serialized neutral marker absent")
-check_equal(count_literal(encoded_action, "staged_parse_job_v2"), 0, "serialized typed sidecar absent")
+check_equal(count_literal(encoded_action, "staged_parse_job_v2"), 1, "serialized logical sidecar exact")
 local payload = top.lifecycle_action_payloads[1]
-check_equal(payload.contracts.ok, false, "generic parse_job remains contract-unknown")
-check_equal(#payload.contracts.diagnostics, 1, "generic parse_job diagnostic count")
-check_equal(payload.contracts.diagnostics[1].code, "unknown_helper", "generic parse_job diagnostic code")
+check_equal(payload.contracts.ok, true, "dedicated marker contract known")
+check_equal(#payload.contracts.diagnostics, 0, "dedicated marker diagnostic count")
 
-local native_ok, native_failure = capture(function()
-  return linkedspec.runtime_parse(linkedspec.runtime_engine(compiled), "1+2;")
-end)
-expect_native_failure(native_ok, native_failure, "native carrier")
+local direct_provenance = json.harray({
+  kind = "direct_span",
+  source_id = "input",
+  start = 0,
+  ["end"] = 3,
+  provenance = "entry_group",
+})
+local native_result = linkedspec.runtime_parse(linkedspec.runtime_engine(compiled), "1+2;")
+expect_marker(native_result, "1+2", direct_provenance, "native carrier")
+
+for _, row in ipairs({
+  { "entry_text()", "1+2;", 4, "entry_text" },
+  { "match_text()", "1+2;", 4, "match_text" },
+  { "match_group(0)", "1+2", 3, "match_group" },
+}) do
+  local source = AUTHORED_SOURCE:gsub("entry_group%(0%)", row[1], 1)
+  local _, direct_compiled = compile_source(source)
+  expect_marker(
+    linkedspec.runtime_parse(linkedspec.runtime_engine(direct_compiled), "1+2;"),
+    row[2],
+    json.harray({
+      kind = "direct_span",
+      source_id = "input",
+      start = 0,
+      ["end"] = row[3],
+      provenance = row[4],
+    }),
+    "direct " .. row[4] .. " carrier"
+  )
+end
+
+local capability_expr = action_parser.parse_action_expression(
+  'job = parse_job(entry_text(), hash("node_kind", "expression", ' ..
+    '"payload_kind", "embedded_expression", "spec", "expr-v1", "top", "Expr", ' ..
+    '"result_policy", "replace_marker", "on_error", "fail", ' ..
+    '"required_capabilities", array("z-cap", "a-cap")))'
+)
+check_equal(capability_expr.kind, "staged_parse_job_marker", "capability marker kind")
+check_string_list(
+  capability_expr.options.required_capabilities,
+  { "a-cap", "z-cap" },
+  "required capabilities normalize"
+)
 
 local normalized = json.decode(json.encode(linkedspec.spec_ast.to_json(parsed)))
 local reconstructed_spec = linkedspec.spec_ast.from_json("SpecFile", normalized)
 linkedspec.validate_spec(reconstructed_spec)
 check_same_json(linkedspec.spec_ast.to_json(reconstructed_spec), normalized, "normalized SpecFile reconstruction")
 local reconstructed = linkedspec.compile_spec(reconstructed_spec)
-local reconstructed_ok, reconstructed_failure = capture(function()
-  return linkedspec.runtime_parse(linkedspec.runtime_engine(reconstructed), "1+2;")
-end)
-expect_native_failure(reconstructed_ok, reconstructed_failure, "reconstructed carrier")
+expect_marker(
+  linkedspec.runtime_parse(linkedspec.runtime_engine(reconstructed), "1+2;"),
+  "1+2",
+  direct_provenance,
+  "reconstructed carrier"
+)
 
 local plan = linkedspec.build_generated_rule_plan(compiled)
 check_equal(#plan, 1, "generated plan row count")
 check_equal(plan[1].label, "Top", "generated plan label")
 check_equal(plan[1].family, "default", "generated plan family")
-local generated_ok, generated_failure = capture(function()
-  return linkedspec.execute_generated_parser_v2(
+expect_marker(
+  linkedspec.execute_generated_parser_v2(
     compiled,
     plan,
     "1+2;",
     SOURCE_IDENTITY
-  )
-end)
-expect_generated_failure(generated_ok, generated_failure, SOURCE_IDENTITY, "generated-plan carrier")
+  ),
+  "1+2",
+  direct_provenance,
+  "generated-plan carrier"
+)
 
 local emitted = linkedspec.emit_lua_source_v2(compiled, EMITTED_IDENTITY)
 local loader = loadstring or load
@@ -474,14 +552,127 @@ check(chunk ~= nil, "emitted module loads: " .. tostring(load_error))
 if chunk ~= nil then
   local generated_module = chunk()
   check_equal(generated_module.metadata().source_identity, EMITTED_IDENTITY, "emitted source identity")
-  local emitted_ok, emitted_failure = capture(function()
-    return generated_module.execute("1+2;")
-  end)
-  expect_generated_failure(emitted_ok, emitted_failure, EMITTED_IDENTITY, "emitted carrier")
+  expect_marker(generated_module.execute("1+2;"), "1+2", direct_provenance, "emitted carrier")
 end
-check_equal(count_literal(emitted, "STAGED_PARSE_JOB_MARKER"), 0, "emitted neutral marker absent")
-check_equal(count_literal(emitted, "staged_parse_job_v2"), 0, "emitted typed sidecar absent")
+check_equal(count_literal(emitted, "STAGED_PARSE_JOB_MARKER"), 0, "emitted runtime marker remains constructed")
+check_equal(count_literal(emitted, "staged_parse_job_v2"), 0, "emitted logical sidecar stays hex-opaque")
 check_equal(count_literal(emitted, CONTRACT_ID), 0, "emitted staged contract id absent")
+
+local authority_sources = json.harray()
+for _, source in ipairs(contract.sources) do authority_sources[source.source_id] = source.text end
+local authority = source_location.source_authority({ sources = authority_sources })
+for _, row in ipairs(contract.provenance_cases) do
+  local ok, value = capture(function()
+    return staged_parse_job.validate_and_materialize_provenance(
+      authority,
+      row.provenance,
+      "neutral:" .. row.id
+    )
+  end)
+  check_equal(ok, row.accepted, "neutral provenance " .. row.id .. " acceptance")
+  if ok then
+    check_equal(value.text, row.materialized_text, "neutral provenance " .. row.id .. " text")
+    check_same_json(value.provenance, row.provenance, "neutral provenance " .. row.id .. " record")
+  else
+    check_equal(staged_parse_job.is_error(value), true, "neutral provenance " .. row.id .. " typed error")
+    local projected = staged_parse_job.is_error(value) and staged_parse_job.to_json(value) or {}
+    check_equal(projected.code, row.diagnostic, "neutral provenance " .. row.id .. " diagnostic")
+  end
+end
+
+local alternation = linkedspec.compile_runtime_regex_alternation({ "(a)(a)(é)(🙂)" })
+local raw_match = linkedspec.runtime_match(alternation, "aaé🙂", 0, "consume")
+local public_match = linkedspec.matching.to_json(raw_match)
+check_equal(raw_match.capture_spans, nil, "private capture spans absent from match object")
+check_equal(
+  linkedspec.matching.staged_capture_byte_span,
+  nil,
+  "private capture span accessor absent from outward matching module"
+)
+check_equal(count_literal(json.encode(public_match), "capture_spans"), 0, "private capture spans absent from JSON")
+local derived_source = [[Top::
+ /(a)(a)(é)(🙂);/
+ E {
+  job_marker = parse_job(cat(entry_group(0), cat(entry_group(1), entry_group(2), entry_group(3))), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "top", "Expr", "result_policy", "sibling_field", "into", "expression_ast", "on_error", "fail"))
+  return(job_marker)
+ }
+]]
+local _, derived_compiled = compile_source(derived_source)
+local derived_segments = json.array({
+  json.harray({ kind = "direct_span", source_id = "input", start = 0, ["end"] = 1, provenance = "entry_group" }),
+  json.harray({ kind = "direct_span", source_id = "input", start = 1, ["end"] = 2, provenance = "entry_group" }),
+  json.harray({ kind = "direct_span", source_id = "input", start = 2, ["end"] = 3, provenance = "entry_group" }),
+  json.harray({ kind = "direct_span", source_id = "input", start = 3, ["end"] = 4, provenance = "entry_group" }),
+})
+expect_marker(
+  linkedspec.runtime_parse(linkedspec.runtime_engine(derived_compiled), "aaé🙂;"),
+  "aaé🙂",
+  json.harray({ kind = "derived_text", policy = "concatenate_in_order", segments = derived_segments }),
+  "derived repeated/Unicode carrier"
+)
+
+local options_text = 'hash("node_kind", "expression", "payload_kind", "embedded_expression", ' ..
+  '"spec", "expr-v1", "top", "Expr", "result_policy", "sibling_field", ' ..
+  '"into", "expression_ast", "on_error", "fail")'
+for _, row in ipairs({
+  { "job = parse_job(entry_text())", "staged_parse_job_options_required", "missing options" },
+  { "job = parse_job(entry_text(), options)", "staged_parse_job_options_required", "dynamic options" },
+  { "job = parse_job(entry_text(), hash(\"node_kind\", \"expression\", \"node_kind\", \"expression\"))", "staged_parse_job_options_required", "duplicate option" },
+  { "job = parse_job(entry_text(), hash(\"unknown\", \"value\"))", "staged_parse_job_option_unknown", "unknown option" },
+  { "job = parse_job(entry_text(), " .. options_text:gsub('%)$', ', \"required_capabilities\", array(\"same\", \"same\"))') .. ")", "staged_parse_job_options_required", "duplicate capability" },
+  { "job = parse_job(entry_text(), " .. options_text:gsub('expr%-v1', '-bad') .. ")", "staged_parser_identity_invalid", "invalid parser" },
+  { "job = parse_job(entry_text(), " .. options_text:gsub('Expr', 'Bad-Rule') .. ")", "staged_top_rule_invalid", "invalid top" },
+  { "job = parse_job(entry_text(), " .. options_text:gsub('sibling_field', 'bad_policy') .. ")", "staged_result_policy_invalid", "invalid result policy" },
+  { "job = parse_job(entry_text(), " .. options_text:gsub('on_error\", \"fail', 'on_error\", \"bad') .. ")", "staged_failure_policy_invalid", "invalid failure policy" },
+  { "job = parse_job(entry_text(), " .. options_text:gsub('expression_ast', 'bad-target') .. ")", "staged_result_target_invalid", "invalid target" },
+  { "job = parse_job(\"copied\", " .. options_text .. ")", "staged_source_provenance_invalid", "copied text" },
+  { "job = parse_job(trim(entry_text()), " .. options_text .. ")", "staged_source_provenance_invalid", "transformed text" },
+  { "job = parse_job(entry_group(index), " .. options_text .. ")", "staged_source_provenance_invalid", "dynamic capture index" },
+  { "job = parse_job(cat(), " .. options_text .. ")", "staged_source_provenance_invalid", "empty derived text" },
+}) do
+  expect_staged_parse_error(row[1], row[2], row[3])
+end
+for index, source in ipairs({
+  "parse_job(entry_text(), " .. options_text .. ")",
+  "return(parse_job(entry_text(), " .. options_text .. "))",
+  "value.parse_job(entry_text(), " .. options_text .. ")",
+  "jobs += parse_job(entry_text(), " .. options_text .. ")",
+  "jobs[0] = parse_job(entry_text(), " .. options_text .. ")",
+}) do
+  expect_staged_parse_error(source, "staged_parse_job_options_required", "residual parse_job form " .. index)
+end
+
+local _, forged_compiled = compile_source([[Top:: I { return(1) } /never/]])
+local forged_call = action_parser.parse_action_expression("future_helper()")
+forged_call.name = "parse_job"
+forged_compiled.rules_by_label.Top.lifecycle_action_payloads[1].action_ast.statements[1].expr = forged_call
+local forged_ok, forged_error = capture(function() return linkedspec.runtime_engine(forged_compiled) end)
+check_equal(forged_ok, false, "runtime reconstructed residual call rejects")
+check_contains(
+  forged_error,
+  "LINKEDSPEC_STAGED_AST_ENRICHMENT_ERROR:staged_parse_job_options_required",
+  "runtime reconstructed residual diagnostic"
+)
+
+local recognition_source = [[Top:: I { tx = recognition_checkpoint(); matched = recognize_once(tx, call(Child)); recognition_rollback(tx); return(matched) }
+Child:: I { job = parse_job(entry_text(), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "top", "Expr", "result_policy", "replace_marker", "on_error", "fail")); return(job) } /never/]]
+local recognition_ok, recognition_error = capture(function() return compile_source(recognition_source) end)
+check_equal(recognition_ok, false, "recognition-reachable declaration rejects")
+check_contains(
+  recognition_error,
+  "recognition_effect_forbidden:parser_registry_or_staged_dispatch",
+  "recognition-reachable declaration diagnostic"
+)
+local recognition_function_source = [[fn staged_child() { job = parse_job(entry_text(), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "top", "Expr", "result_policy", "replace_marker", "on_error", "fail")); return(job) }
+Top:: I { tx = recognition_checkpoint(); matched = recognize_once(tx, call(Child)); recognition_rollback(tx); return(matched) }
+Child:: I { return(staged_child()) } /never/]]
+local function_ok, function_error = capture(function() return compile_source(recognition_function_source) end)
+check_equal(function_ok, false, "transitive function declaration rejects")
+check_contains(
+  function_error,
+  "recognition_effect_forbidden:parser_registry_or_staged_dispatch",
+  "transitive function declaration diagnostic"
+)
 
 check(file_exists(CONSUMER_PATH), "stable final-path consumer exists")
 local ordinary = read_file("tools/run_lua_local.sh")
@@ -499,11 +690,11 @@ for _, private_token in ipairs({
   check_equal(count_literal(umbrella, private_token), 0, "outward token absent: " .. private_token)
 end
 
--- Intentional RED: owner .14.7.7.1 must replace only the reserved generic
--- assignment with one dedicated logical marker and typed provenance sidecar.
+-- Intentional RED: owner .14.7.7.2 must add caller-frozen resolution/cache and
+-- result/failure-policy execution without changing the marker/provenance seam.
 check(
-  #generic_calls == 0 and #marker_nodes == 1,
-  "LINKEDSPEC_STAGED_AST_ENRICHMENT_LUA_RED: missing dedicated marker and typed provenance"
+  type(staged_parse_job.enrich_current_depth) == "function",
+  "LINKEDSPEC_STAGED_AST_ENRICHMENT_LUA_RED: missing caller-frozen resolution cache and result failure policies"
 )
 
 if #failures == 0 then

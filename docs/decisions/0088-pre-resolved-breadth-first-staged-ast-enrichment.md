@@ -472,6 +472,26 @@ neutral governance advances only the shared Lua lifecycle to `dormant_red` at 98
 retains annotation/provenance. Lua production, generated format, public/outward behavior, and admitted backends do
 not move.
 
+Lua marker/provenance leaf `FUTURE-PARITY-BACKLOG.14.7.7.1` replaces only that exact missing-declaration
+boundary. Bare scalar assignment-form `parse_job(text_expr, hash(literal options))` lowers exclusively to a
+private `staged_parse_job_marker`; malformed/dynamic/residual direct, nested, receiver, append, and indexed forms
+reject before execution. Recognition closure classifies the declaration as
+`parser_registry_or_staged_dispatch`. The ActionIR node retains a direct or flattened nonempty ordered-derived
+text plan plus normalized literal options; it does not register `parse_job` as an ordinary helper.
+
+PCRE2's existing ovector is the provenance authority. The native Lua layer retains participating capture byte
+ranges in the same compact order as capture text, and an unexported weak-key side table keeps them absent from
+both `RuntimeRegexMatch` objects and JSON.
+Whole-match or capture ranges convert through the existing typed source authority to Unicode-scalar direct or
+`concatenate_in_order` spans; no copied-text search, regex replay, or ambient source lookup occurs. The returned
+`STAGED_PARSE_JOB_MARKER` / `staged_parse_job_v2` declaration is inert and detached, containing normalized
+logical options, exact materialized text, typed provenance, and origin but no match/source/parser/registry/path/
+callback/cache/scheduler/host authority. Native, normalized reconstructed, validated generated-plan, and
+independently loaded emitted-module routes agree on PUC Lua and LuaJIT. Each shared dormant run now reaches 392
+GREEN assertions and one exact `.14.7.7.2` caller-frozen resolution/cache/result/failure-policy RED. Neutral
+governance remains 98 mutations; discovery, rollout, function-body v1, generated format v2, public/outward
+behavior, and admitted backends do not move.
+
 ## Links
 
 - Owning task: `docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md`
@@ -493,4 +513,5 @@ not move.
   `docs/knowledge/julia-staged-ast-enrichment-current-depth-authority.md` plus
   `docs/knowledge/julia-staged-ast-enrichment-recursive-authority.md` plus
   `docs/knowledge/julia-staged-ast-enrichment-carriers-admission.md` plus
-  `docs/knowledge/lua-staged-ast-enrichment-dormant-red.md`
+  `docs/knowledge/lua-staged-ast-enrichment-dormant-red.md` and
+  `docs/knowledge/lua-staged-ast-enrichment-marker-provenance.md`

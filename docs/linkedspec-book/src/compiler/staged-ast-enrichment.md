@@ -8,8 +8,9 @@
 > Dart now has the same complete private authority, four fresh native/reconstructed/generated/emitted production
 > carriers, and exact 19/19 ordinary/canonical admission. Julia now also has the complete private authority, four
 > fresh production routes, and exact 491/491 ordinary/canonical admission. Shared Lua now has one dual-ABI dormant
-> oracle at 153 GREEN assertions plus one marker/provenance RED on each runtime; the neutral contract is 98
-> mutations. Lua production and admission remain absent, and
+> oracle with its private inert marker and live-range-proven typed provenance at 392 GREEN assertions plus one
+> caller-frozen authority RED on each runtime; the neutral contract is 98 mutations. Lua production and admission
+> remain absent, and
 > the only publicly authored five-backend/six-runtime surface is still the
 > narrow function-body v1 adapter described below.
 
@@ -191,12 +192,13 @@ Neutral, Perl, Rust, Dart, and Julia rollout are complete. Five backend consumer
 one shared Lua source runs independently on PUC Lua and LuaJIT. The exact Perl, Rust, Dart, and Julia consumers run
 once from ordinary and canonical proof. Julia's `.0` run historically froze the generic-call boundary at 86 GREEN
 assertions plus one intentional RED; `.1-.3` supplied marker/provenance, current-depth authority, and breadth-first
-recurrence, and `.4` now carries them through four fresh-authority production routes at 491/491. Lua `.7.0` now
-freezes its own exact shared boundary at 153 GREEN assertions and one marker/provenance RED per ABI while both
-ordinary/canonical routes and rollout rows stay pending. Lua `.1-.5`, six-runtime recurrence, public authoring/
-no-drift, and final recomposition retain their `.14.7.7-.10` owners.
+recurrence, and `.4` now carries them through four fresh-authority production routes at 491/491. Lua `.7.0-.1`
+now freeze the exact shared boundary and implement its marker/provenance carrier at 392 GREEN assertions and one
+caller-frozen authority RED per ABI while both ordinary/canonical routes and rollout rows stay pending. Lua
+`.2-.5`, six-runtime recurrence, public authoring/no-drift, and final recomposition retain their
+`.14.7.7-.10` owners.
 
-## Current shared Lua dormant boundary
+## Current shared Lua private marker/provenance boundary
 
 Run the same Lua-5.1-compatible source independently on both supported hosts:
 
@@ -208,26 +210,72 @@ bash tools/run_lua_project_data.sh luajit lua/test/staged_ast_enrichment_contrac
 Each command intentionally exits nonzero after reporting exactly one failed assertion:
 
 ```text
-LINKEDSPEC_STAGED_AST_ENRICHMENT_LUA_RED: missing dedicated marker and typed provenance
+LINKEDSPEC_STAGED_AST_ENRICHMENT_LUA_RED: missing caller-frozen resolution cache and result failure policies
 ```
 
-Before that sentinel, 153 assertions prove the complete neutral inventory, unchanged function-body-v1 phases and
-cache/stitch policy, original wrong-top context, and the narrow registry's `expr-v1` resolve denial. The reserved
-assignment still has this logical shape:
+Before that sentinel, 392 assertions prove the complete neutral inventory, unchanged function-body-v1 phases and
+cache/stitch policy, original wrong-top context, the narrow registry's `expr-v1` resolve denial, and the complete
+private marker/provenance boundary. The reserved assignment now has this logical ActionIR shape:
 
 ```text
-assign_scalar job_marker
-  value = call parse_job(
-    call entry_group(0),
-    call hash(...literal options...)
-  )
+staged_parse_job_marker
+  target = job_marker
+  text_plan = direct_span(entry_group, 0)
+  options = normalized literal staged_parse_job_v2 options
 ```
 
-There is no `staged_parse_job_marker` or `staged_parse_job_v2`. Native and normalized reconstructed routes return
-the same typed unsupported-helper failure. Validated generated-plan and independently loaded emitted-module routes
-wrap the same detail as `generated_execution_failed`; emitted source contains none of the staged marker, sidecar,
-or contract identity. The stable test path is deliberately absent from `tools/run_lua_local.sh`,
-`lua/test/run.lua`, and canonical CI until dual-ABI admission owner `.14.7.7.4` activates it.
+Only exact scalar assignment-form `parse_job(text_expr, hash(literal options))` lowers this way. Required and
+optional option names, parser/top identities, result/failure policies, result target, and sorted unique required
+capabilities are validated statically. Literal/transformed text, dynamic capture indices, malformed options,
+residual direct/nested/receiver/append/indexed calls, and recognition-reachable declarations reject before
+execution. `parse_job` is not added to the ordinary helper registry.
+
+The provenance path retains native evidence instead of trying to rediscover it. PCRE2's ovector supplies exact
+capture byte boundaries. An unexported weak-key side table stores participating ranges in the same compact order
+as `entry_group` and `match_group`; runtime match fields, the outward matching module, and ordinary matching JSON
+expose no range field or accessor and continue to expose only text and existing public coordinates.
+Whole-match or capture boundaries pass through the existing typed source authority, which converts UTF-8 bytes to
+Unicode-scalar half-open spans and materializes direct or nonempty `concatenate_in_order` text. Repeated captures
+such as `(a)(a)` remain two distinct spans, and Unicode captures retain correct scalar coordinates without
+substring search or regex replay.
+
+Native, normalized reconstructed, validated generated-plan, and independently loaded emitted-module execution
+return the same detached inert marker:
+
+```json
+{
+  "kind": "STAGED_PARSE_JOB_MARKER",
+  "version": 2,
+  "sidecar_kind": "staged_parse_job_v2",
+  "effect": "staged_parse_job_declaration",
+  "staged_parse_job_v2": {
+    "kind": "staged_parse_job_v2",
+    "version": 2,
+    "state": "declared",
+    "node_kind": "expression",
+    "payload_kind": "embedded_expression",
+    "parser_spec_id": "expr-v1",
+    "top_rule": "Expr",
+    "result_policy": "sibling_field",
+    "into": "expression_ast",
+    "failure_policy": "fail",
+    "text": "1+2",
+    "provenance": {
+      "kind": "direct_span",
+      "source_id": "input",
+      "start": 0,
+      "end": 3,
+      "provenance": "entry_group"
+    },
+    "origin": "Top:parse_job"
+  }
+}
+```
+
+The marker retains no match, source authority, parser, registry, callback, cache, scheduler, filesystem path, or
+host handle. Resolution and policy execution remain absent by design until `.14.7.7.2`. The stable test path also
+remains absent from `tools/run_lua_local.sh`, `lua/test/run.lua`, and canonical CI until dual-ABI admission owner
+`.14.7.7.4` activates it.
 
 ## Current private Perl boundary
 

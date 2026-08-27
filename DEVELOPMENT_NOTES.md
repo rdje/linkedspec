@@ -9,6 +9,24 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-27 (`FUTURE-PARITY-BACKLOG.14.7.7.1` — Lua staged marker/provenance): exact clean activation is the
+  shared dormant-boundary commit `a7293bac`; scope owns only the private logical annotation, strict static closure,
+  native-range-backed typed provenance, inert detached marker, and transition to one `.2` RED.
+- `action_parser.lua` recognizes only bare scalar assignment with exact `parse_job(text_expr, hash(...))` shape.
+  It normalizes literal options/capabilities and direct/flattened-derived text plans; every escaped generic form
+  and recognition-reachable declaration rejects before execution.
+- PCRE2's ovector now supplies a private compact capture-range array aligned one-to-one with participating capture
+  text. An unexported weak-key side table owns it; match objects, `matching.lua`'s outward module, and JSON expose
+  no field or accessor. This distinguishes repeated equal captures
+  and preserves Unicode source positions without searching strings or replaying regexes.
+- Private `staged_parse_job.lua` converts live whole/capture UTF-8 byte ranges through the existing source
+  authority and returns detached plain marker data. It owns no resolver, registry, cache, callback, scheduler,
+  recurrence, stitching, filesystem, provider, cancellation, or host authority; `.14.7.7.2-.3` retain those seams.
+- Native, reconstructed, generated-plan, and independently loaded emitted routes agree on both ABIs. The shared
+  consumer is 392 GREEN/one identical `.2` authority RED; complete ordinary dual-ABI Lua and all focused neutral/
+  admitted/direct-dependent checks pass without discovery, rollout, format, v1, public, or other-backend drift.
+- The durable fact card [[lua-staged-ast-enrichment-marker-provenance]] prevents future provenance archaeology;
+  Knowledge is 902 facts/7,665 keys and the sole-facing book renders 80 files / 15,680 KiB.
 - 2026-08-27 (`FUTURE-PARITY-BACKLOG.14.7.7.0` — shared Lua staged dormant RED): exact clean activation is the
   Julia-admission commit `199f585f`; scope owns only one stable shared consumer, the Lua lifecycle/checker
   mutation, current-v1 compatibility evidence, one exact general-v2 RED, and synchronized boundary truth.

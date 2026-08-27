@@ -2,21 +2,29 @@
 
 ## Current Activity
 
-- Shared Lua staged `.14.7.7.0` is focused-signoff-complete from clean Julia-admission commit `199f585f`.
-- One unchanged Lua-5.1-compatible consumer reaches 153 GREEN assertions and one exact dedicated-marker/typed-
-  provenance RED independently on PUC Lua and LuaJIT; it remains absent from ordinary and canonical discovery.
-- Neutral governance advances only Lua's lifecycle to `dormant_red` and 98 mutations; both Lua rollout rows,
-  production, generated format, public/outward behavior, recurrence, and combined ownership remain fixed.
+- Shared Lua staged marker/provenance `.14.7.7.1` is focused-signoff-complete from exact clean dormant-boundary
+  commit `a7293bac`.
+- One unchanged Lua-5.1-compatible consumer reaches 392 GREEN assertions and one exact `.14.7.7.2` caller-frozen
+  resolution/cache/result/failure-policy RED independently on PUC Lua and LuaJIT; ordinary/canonical discovery
+  remains absent.
+- Neutral governance stays at 98 mutations and `dormant_red`; both Lua rollout rows, function-body v1, generated
+  format, public/outward behavior, recurrence, and combined ownership remain fixed.
 
 ## Latest Completed Slice
 
-- `.14.7.7.0` is fully verified for its intended atomic handoff; Git will assign the commit identity.
+- `.14.7.7.1` is fully verified for its intended atomic handoff; Git will assign the commit identity.
 
 ## Next Action
 
-- Commit `.14.7.7.0`, clear and verify the brief/clean handoff, then activate Lua marker/provenance `.14.7.7.1`.
+- Commit `.14.7.7.1`, clear and verify the brief/clean handoff, then activate Lua caller-frozen authority
+  `.14.7.7.2`.
 
 ## Recent Completions
+
+- `2026-08-27` — `.14.7.7.1` adds Lua's exclusive private staged marker, strict static/recognition closure, and
+  weak-side-table native-range-backed Unicode-scalar direct/ordered-derived provenance across four equal logical
+  routes on both ABIs. Its consumer is 392 GREEN/one exact `.2` authority RED; discovery, rollout, formats, public
+  behavior, and neutral governance do not move.
 
 - `2026-08-27` — `.14.7.7.0` adds one shared stable Lua consumer at 153 GREEN/one exact marker/provenance RED per
   ABI, advances only its dormant lifecycle and neutral governance to 98, and leaves discovery and rollout pending.
@@ -71,9 +79,6 @@
 
 - `2026-08-26` — `TRACE-OBSERVABILITY.5.4` aligns 79 mutations and Rust `dormant_red`, passes 143/143 plus
   canonical proof, and closes corrective `.5` without runtime or rollout movement.
-
-- `2026-08-26` — `TRACE-OBSERVABILITY.5.3` keeps private authority dormant while requiring the admitted contract
-  route once and passes focused 4/4; its canonical attempt exposes the separately owned `.5.4` proof blocker.
 
 ## History
 

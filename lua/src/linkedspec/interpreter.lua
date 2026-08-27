@@ -16,6 +16,7 @@ local typed_source = {
   runtime = require("linkedspec.source_location_runtime"),
   recognition = require("linkedspec.recognition_transaction_runtime"),
   progressive = require("linkedspec.bounded_child_parse_authority"),
+  staged = require("linkedspec.staged_parse_job"),
 }
 
 local ERROR_MT = {
@@ -3092,6 +3093,16 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
       }
     )
     return bind_scalar(ctx, expr.target, copy_value(result))
+  end
+  if kind == "staged_parse_job_marker" then
+    local marker = typed_source.staged.construct_marker(
+      ctx.source_location,
+      ctx.registers,
+      (ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule) .. ":parse_job",
+      expr.text_plan,
+      expr.options
+    )
+    return bind_scalar(ctx, expr.target, marker)
   end
   if kind == "assign_scalar" then
     if expr.value.kind == "recognition_checkpoint" then

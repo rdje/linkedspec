@@ -152,7 +152,21 @@ dormancy to 85; `.14.7.5.4` admits Dart at 90; `.14.7.6.0` freezes Julia dormant
 admits four fresh production routes at 491/491 and 97 mutations. Shared Lua `.14.7.7.0` now freezes one exact
 Lua-5.1-compatible dormant path: PUC Lua and LuaJIT each pass 153 assertions and fail only the same missing
 marker/provenance assertion. Neutral governance is 98 mutations, both Lua rollout legs remain pending, and `.1`
-is the next frontier.
+is the next frontier historically.
+
+Lua leaf `FUTURE-PARITY-BACKLOG.14.7.7.1` now implements that exclusive private marker/provenance frontier on
+the shared Lua-5.1 source. Exact scalar assignment-form `parse_job(...)` lowers to `staged_parse_job_marker` with
+normalized literal options and a direct or flattened nonempty ordered-derived text plan. Residual generic forms,
+malformed options/identities/policies/targets/capabilities, copied or transformed text, dynamic capture indices,
+and recognition-reachable declarations reject statically. PCRE2 ovector capture byte ranges are retained in the
+same compact order as capture text, owned by an unexported weak-key side table, and omitted from match objects,
+the outward matching module, and matching JSON.
+The existing source authority converts live whole-match or capture byte boundaries to Unicode-scalar typed spans
+and materializes exact text without substring search or regex replay. The inert detached
+`STAGED_PARSE_JOB_MARKER` / `staged_parse_job_v2` data contains no live authority. Native, reconstructed,
+generated-plan, and independently loaded emitted-module routes agree on PUC Lua and LuaJIT; each dormant run is
+392 GREEN/one exact `.14.7.7.2` caller-frozen authority RED. Neutral 98-mutation governance, function-body v1,
+ordinary/canonical discovery, both rollout rows, generated format v2, and public/outward behavior do not move.
 
 This closeout's mandatory engineering-notes rollover publishes immutable segment `4990`. ADR `0090` advances
 only finite route controls from 17/16 to 18 files / 17 manifest lines; the measured collection remains
@@ -172,8 +186,9 @@ existing job propagation and add the missing payload kind. Every wrong-top error
 id/path/parser/top/payload/span/failure context plus resolved built-in identity. This changes only compile-failure
 diagnostics: success, resolution, execution, stitching, policies, queue depth, formats, capabilities, and outward
 surfaces stay fixed. Executable neutral contract `.2` and private Perl `.3`, Rust `.4`, Dart `.5`, and Julia `.6`
-backend parents are complete. Shared Lua `.7.0` owns only the stable dormant dual-ABI RED; `.1-.5` retain
-annotation/provenance, resolution/policies, recurrence/carriers, admission, and independent ABI recomposition.
+backend parents are complete. Shared Lua `.7.0` owns the stable dormant dual-ABI baseline and `.7.1` owns the
+completed private annotation/provenance carrier; `.2-.5` retain resolution/policies, recurrence/carriers,
+admission, and independent ABI recomposition.
 Recurrence `.8`, public authoring/closeout `.9`, and independent recomposition `.10` remain dependency-frozen
 behind it. Every Lua rollout leg and public/outward surface therefore remains pending.
 
@@ -1934,7 +1949,7 @@ This document is the current high-level technical reading of the project shape. 
   declarations and action/blind/bare targets bypass membership. The exact dependency split is Unicode `.1`,
   source/outcome `.2`, static `.3`, calls `.4`, query `.5`, observation `.6`, and byte-identical dual-ABI admission
   `.7`. Unchanged dual-ABI package `1..177`, PUC primary 66x2/corpus 105, full primary 5x2x66, ten Unicode legs,
-  every no-drift ledger, book/KM 697/5,388, doctrines, canonical Rust 77.58s + Dart 1/1 + Julia 416/27.2s +
+  every no-drift ledger, book/KM 697/5,392, doctrines, canonical Rust 77.58s + Dart 1/1 + Julia 416/27.2s +
   reference 66x2 + Phase 0 1,031/613s, and exact 1,555,508-KiB cleanup pass. Semantic state stays 6/20/89 at
   rollout 5/9 and admission 4/6; Unicode plan `.10.7.1.0` is next after the clean audit commit.
 - `2026-07-25` Julia semantic-admission refresh: `FUTURE-PARITY-BACKLOG.10.6.7` adds no second semantic owner.

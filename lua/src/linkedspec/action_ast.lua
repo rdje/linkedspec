@@ -56,6 +56,24 @@ function M.expr(kind, source, source_span, fields)
   return node("ActionExpr", fields)
 end
 
+function M.staged_parse_job_options(fields)
+  return node("ActionStagedParseJobOptions", fields)
+end
+
+function M.staged_parse_job_direct_text_plan(source, index)
+  local fields = { kind = "direct_span", source = source }
+  if index ~= nil then fields.index = index end
+  return node("ActionStagedParseJobDirectTextPlan", fields)
+end
+
+function M.staged_parse_job_derived_text_plan(segments)
+  return node("ActionStagedParseJobDerivedTextPlan", {
+    kind = "derived_text",
+    policy = "concatenate_in_order",
+    segments = segments,
+  })
+end
+
 function M.positional_argument(value)
   return node("ActionArgument", { argument_kind = "positional", value = value })
 end
@@ -184,7 +202,7 @@ find_removed_aggregate_selector = function(value)
   elseif kind == "recognition_checkpoint" or kind == "recognize_once" or
       kind == "observe_recognition" or
       kind == "recognition_commit" or kind == "recognition_rollback" or
-      kind == "progressive_dispatch_span" then
+      kind == "progressive_dispatch_span" or kind == "staged_parse_job_marker" then
     return nil
   elseif kind == "fluent_chain" then
     local selector = find_removed_aggregate_selector(value.receiver)
