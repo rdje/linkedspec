@@ -2,24 +2,25 @@
 
 ## Current Activity
 
-- Julia staged `.14.7.6.0` is focused-signoff-complete with one final-path consumer outside ordinary and canonical discovery.
-- Its explicit run is 86 GREEN/one intentional marker/provenance RED. Current function-body v1 stays GREEN;
-  generic `parse_job(...)` and typed unsupported-helper behavior remain exact across four observation routes.
-- Neutral governance advances to 92 mutations and only Julia lifecycle becomes `dormant_red`. Julia production,
-  rollout, generated format, public/outward behavior, admitted backends, and Lua do not move.
-- Two inherited Dart governance drifts are corrected: current availability truth and the package-CWD runtime route.
-- Julia's complete local gate, Perl 143/143, Rust 1/1, Dart 19/19, direct governance, and no-drift proof pass.
+- Julia staged `.14.7.6.1` is focused-signoff-complete from clean dormant-boundary commit `3b3d4eac`.
+- Its exclusive marker, strict literal/static closure, native-capture-proven direct/ordered-derived provenance,
+  and four equal detached logical routes are implemented; the dormant consumer is 131 GREEN/one `.2` RED.
+- Current function-body v1, private authority/policies/recurrence, ordinary/canonical discovery, rollout,
+  generated format, public/outward behavior, admitted backends, and Lua remain fixed.
 
 ## Latest Completed Slice
 
-- `.14.7.6.0` implementation, focused proof, and durable synchronization are complete from exact clean activation
-  commit `b38f819c`.
+- Intended atomic `.14.7.6.1` implements Julia's private marker/provenance at 131 GREEN/one `.2` RED.
 
 ## Next Action
 
-- Commit `.14.7.6.0` atomically, verify the clean handoff, then activate `.14.7.6.1` task-tree-first.
+- Commit `.14.7.6.1` atomically, clear/verify the brief and clean handoff, then activate `.14.7.6.2` task-tree-first.
 
 ## Recent Completions
+
+- `2026-08-27` — `.14.7.6.1` implements Julia's exclusive private staged marker and native-regex-offset-backed
+  Unicode-scalar direct/ordered-derived provenance across four equal dormant logical routes. Its consumer is 131
+  GREEN/one exact `.2` authority RED; discovery, rollout, formats, public behavior, and neutral count do not move.
 
 - `2026-08-27` — `.14.7.6.0` freezes Julia at 86 GREEN/one intentional marker/provenance RED outside ordinary/
   canonical discovery, advances neutral governance to 92, and repairs stale Dart availability/route governance.
@@ -71,9 +72,6 @@
 
 - `2026-08-26` — `.14.7.4.0` freezes Rust's zero-ordinary-test/one-opt-in-RED boundary across current v1 and four
   generic carrier observations; only dormant lifecycle governance moves, to 79 mutations.
-
-- `2026-08-26` — `.14.7.3.4` proves four fresh Perl carrier routes, admits the 143-check consumer exactly once in
-  ordinary/canonical topology, promotes only Perl, and closes `.14.7.3` without public or format movement.
 
 ## History
 

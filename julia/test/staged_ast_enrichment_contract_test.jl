@@ -1,4 +1,4 @@
-# FUTURE-PARITY-BACKLOG.14.7.6.0 — dormant Julia staged-AST enrichment RED.
+# FUTURE-PARITY-BACKLOG.14.7.6.1 — private Julia marker/provenance boundary.
 #
 # This exact final-path consumer is intentionally omitted from ordinary Julia
 # and canonical CI discovery. Its focused repository-local command is:
@@ -6,11 +6,9 @@
 #   bash tools/run_julia_project_data.sh --project=julia --startup-file=no \
 #     --history-file=no julia/test/staged_ast_enrichment_contract_test.jl
 #
-# Every pre-boundary assertion must remain GREEN. The sole intentional RED is
-# the final missing dedicated `STAGED_PARSE_JOB_MARKER` plus typed
-# `staged_parse_job_v2` provenance assertion; the current generic
-# `parse_job(...)` call and unsupported-helper rejection are not an
-# implementation.
+# Every marker/provenance assertion must remain GREEN. The sole intentional
+# RED is the final `.14.7.6.2` authority sentinel; this leaf owns no registry,
+# cache, result/failure stitching, recurrence, admission, or public surface.
 
 using JSON3
 using LinkedSpecJulia
@@ -38,8 +36,8 @@ const JULIA_STAGED_ENRICHMENT_EMITTED_IDENTITY =
     "staged-ast-enrichment/julia-red-emitted.spec"
 const JULIA_STAGED_ENRICHMENT_AUTHORED_SOURCE = raw"""Top::
  /([^;]+);/
- I {
-  job_marker = parse_job(entry_group(0), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "top", "Expr", "result_policy", "sibling_field", "into", "expression_ast", "on_error", "fail"))
+ E {
+  job_marker = parse_job(match_group(0), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "top", "Expr", "result_policy", "sibling_field", "into", "expression_ast", "on_error", "fail"))
   return(job_marker)
  }
 """
@@ -84,35 +82,7 @@ function _julia_staged_enrichment_compile(source::AbstractString)
     return parsed, compile_spec(parsed)
 end
 
-function _julia_staged_enrichment_expect_native_failure(error)
-    @test error isa RuntimeInterpreterException
-    error isa RuntimeInterpreterException || return
-    @test sprint(showerror, error) ==
-          "unsupported runtime helper 'parse_job' in rule Top"
-    @test error.diagnostic !== nothing
-    error.diagnostic === nothing && return
-    diagnostic = to_json(error.diagnostic)
-    @test diagnostic["stage"] == "runtime_execution"
-    @test diagnostic["rule_label"] == "Top"
-    @test diagnostic["detail"] ==
-          "unsupported runtime helper 'parse_job' in rule Top"
-end
-
-function _julia_staged_enrichment_expect_generated_failure(
-    error,
-    identity::AbstractString,
-)
-    @test error isa GeneratedSourceException
-    error isa GeneratedSourceException || return
-    @test error.stage == ExecuteGeneratedStage
-    @test error.code == GeneratedExecutionFailedCode
-    @test error.source_identity == identity
-    @test error.rule_label == "Top"
-    @test error.handler_family == "default"
-    @test error.detail == "unsupported runtime helper 'parse_job' in rule Top"
-end
-
-function _julia_staged_enrichment_execute_emitted_failure(
+function _julia_staged_enrichment_execute_emitted_marker(
     compiled::CompiledSpec,
     identity::AbstractString,
 )
@@ -122,11 +92,9 @@ function _julia_staged_enrichment_execute_emitted_failure(
     parser = Base.invokelatest(() -> getfield(host, :LinkedSpecGeneratedParser))
     execute = Base.invokelatest(() -> getfield(parser, :execute))
     metadata = Base.invokelatest(() -> getfield(parser, :metadata))
-    error = _julia_staged_enrichment_capture(
-        () -> Base.invokelatest(execute, "1+2;"),
-    )
+    value = Base.invokelatest(execute, "1+2;")
     source_identity = Base.invokelatest(metadata).source_identity
-    return error, emitted, source_identity
+    return value, emitted, source_identity
 end
 
 function _julia_staged_enrichment_v1_job(; top_rule = "action_block")
@@ -155,6 +123,72 @@ end
 
 function _julia_staged_enrichment_ids(contract, field::AbstractString)
     return String[String(row["id"]) for row in contract[field]]
+end
+
+function _julia_staged_enrichment_expected_marker()
+    return Dict{String,Any}(
+        "kind" => "STAGED_PARSE_JOB_MARKER",
+        "version" => 2,
+        "sidecar_kind" => "staged_parse_job_v2",
+        "effect" => "staged_parse_job_declaration",
+        "staged_parse_job_v2" => Dict{String,Any}(
+            "kind" => "staged_parse_job_v2",
+            "version" => 2,
+            "state" => "declared",
+            "effect" => "staged_parse_job_declaration",
+            "node_kind" => "expression",
+            "payload_kind" => "embedded_expression",
+            "parser_spec_id" => "expr-v1",
+            "top_rule" => "Expr",
+            "result_policy" => "sibling_field",
+            "into" => "expression_ast",
+            "failure_policy" => "fail",
+            "required_capabilities" => Any[],
+            "text" => "1+2",
+            "provenance" => Dict{String,Any}(
+                "kind" => "direct_span",
+                "source_id" => "input",
+                "start" => 0,
+                "end" => 3,
+                "provenance" => "match_group",
+            ),
+            "origin" => "Top:parse_job",
+        ),
+    )
+end
+
+function _julia_staged_enrichment_forbidden_key_hits(value)
+    forbidden = Set([
+        "path",
+        "spec_path",
+        "source_authority",
+        "match",
+        "match_object",
+        "parser",
+        "registry",
+        "compiled_authority",
+        "callback",
+        "host_handle",
+        "cancellation_token",
+        "deadline",
+        "mutable_queue",
+    ])
+    hits = String[]
+    function visit(current)
+        if current isa AbstractDict
+            for (key, child) in pairs(current)
+                key_string = String(key)
+                key_string in forbidden && push!(hits, key_string)
+                visit(child)
+            end
+        elseif current isa AbstractVector
+            foreach(visit, current)
+        end
+        return nothing
+    end
+    visit(value)
+    sort!(hits)
+    return hits
 end
 
 @testset "Dormant Julia staged-AST enrichment RED" begin
@@ -398,65 +432,312 @@ end
         "staged_parse_job_marker",
     )
 
-    @testset "authored syntax remains exactly one generic helper call" begin
-        @test length(generic_calls) == 1
-        call = only(generic_calls)
-        @test length(call["args"]) == 2
-        @test call["args"][1]["kind"] == "call"
-        @test call["args"][1]["name"] == "entry_group"
-        @test call["args"][2]["kind"] == "call"
-        @test call["args"][2]["name"] == "hash"
-        @test isempty(marker_nodes)
+    @testset "exclusive assignment lowers to one typed dedicated ActionIR node" begin
+        @test isempty(generic_calls)
+        @test length(marker_nodes) == 1
+        marker = only(marker_nodes)
+        @test marker["target"] == "job_marker"
+        @test marker["version"] == 2
+        @test marker["sidecar_kind"] == "staged_parse_job_v2"
+        @test marker["effect"] == "staged_parse_job_declaration"
+        @test marker["text_plan"] == Dict{String,Any}(
+            "kind" => "direct_span",
+            "source" => "match_group",
+            "index" => 0,
+        )
+        @test marker["options"] == Dict{String,Any}(
+            "node_kind" => "expression",
+            "payload_kind" => "embedded_expression",
+            "spec" => "expr-v1",
+            "top" => "Expr",
+            "result_policy" => "sibling_field",
+            "into" => "expression_ast",
+            "on_error" => "fail",
+            "required_capabilities" => Any[],
+        )
         encoded = JSON3.write(compiled_action)
-        @test count("\"name\":\"parse_job\"", encoded) == 1
+        @test count("\"name\":\"parse_job\"", encoded) == 0
         @test !occursin("STAGED_PARSE_JOB_MARKER", encoded)
-        @test !occursin("staged_parse_job_v2", encoded)
+        @test count("\"kind\":\"staged_parse_job_marker\"", encoded) == 1
+        @test occursin("staged_parse_job_v2", encoded)
     end
 
-    @testset "four carriers converge on the unsupported-helper boundary" begin
-        native_error = _julia_staged_enrichment_capture(
-            () -> runtime_parse(LinkedSpecRuntimeEngine(compiled), "1+2;"),
-        )
-        _julia_staged_enrichment_expect_native_failure(native_error)
+    @testset "four logical carriers preserve one detached marker" begin
+        expected = _julia_staged_enrichment_expected_marker()
+        native = runtime_parse(LinkedSpecRuntimeEngine(compiled), "1+2;").value
+        @test native == expected
 
         normalized = JSON3.read(JSON3.write(to_json(parsed)), Dict{String,Any})
         reconstructed = from_json(SpecFile, normalized)
         validate_spec(reconstructed)
         reconstructed_compiled = compile_spec(reconstructed)
-        reconstructed_error = _julia_staged_enrichment_capture(
-            () -> runtime_parse(
-                LinkedSpecRuntimeEngine(reconstructed_compiled),
-                "1+2;",
-            ),
-        )
-        _julia_staged_enrichment_expect_native_failure(reconstructed_error)
+        reconstructed_value = runtime_parse(
+            LinkedSpecRuntimeEngine(reconstructed_compiled),
+            "1+2;",
+        ).value
+        @test reconstructed_value == expected
 
-        generated_error = _julia_staged_enrichment_capture(
-            () -> execute_generated_parser_v2(
-                compiled,
-                build_generated_rule_plan(compiled),
-                "1+2;",
-                JULIA_STAGED_ENRICHMENT_SOURCE_IDENTITY,
-            ),
-        )
-        _julia_staged_enrichment_expect_generated_failure(
-            generated_error,
+        generated_value = execute_generated_parser_v2(
+            compiled,
+            build_generated_rule_plan(compiled),
+            "1+2;",
             JULIA_STAGED_ENRICHMENT_SOURCE_IDENTITY,
         )
+        @test generated_value == expected
 
-        emitted_error, emitted, emitted_identity =
-            _julia_staged_enrichment_execute_emitted_failure(
+        emitted_value, emitted, emitted_identity =
+            _julia_staged_enrichment_execute_emitted_marker(
                 compiled,
                 JULIA_STAGED_ENRICHMENT_EMITTED_IDENTITY,
             )
-        _julia_staged_enrichment_expect_generated_failure(
-            emitted_error,
-            JULIA_STAGED_ENRICHMENT_EMITTED_IDENTITY,
-        )
+        @test emitted_value == expected
         @test emitted_identity == JULIA_STAGED_ENRICHMENT_EMITTED_IDENTITY
         @test !occursin("STAGED_PARSE_JOB_MARKER", emitted)
         @test !occursin("staged_parse_job_v2", emitted)
         @test !occursin(JULIA_STAGED_ENRICHMENT_CONTRACT_ID, emitted)
+        @test isempty(_julia_staged_enrichment_forbidden_key_hits(native))
+    end
+
+    @testset "neutral provenance accepts exact records and rejects smuggling" begin
+        sources = Dict{String,String}(
+            String(row["source_id"]) => String(row["text"])
+            for row in JULIA_STAGED_ENRICHMENT_CONTRACT["sources"]
+        )
+        authority = LinkedSpecJulia.SourceLocation.SourceAuthority(
+            sources = sources,
+        )
+        for row in JULIA_STAGED_ENRICHMENT_CONTRACT["provenance_cases"]
+            if row["accepted"] == true
+                result = LinkedSpecJulia.validate_and_materialize_staged_provenance(
+                    authority = authority,
+                    record = row["provenance"],
+                    origin = "contract:parse_job",
+                )
+                @test result["text"] == row["materialized_text"]
+                @test result["provenance"] == row["provenance"]
+            else
+                error = _julia_staged_enrichment_capture(
+                    () -> LinkedSpecJulia.validate_and_materialize_staged_provenance(
+                        authority = authority,
+                        record = row["provenance"],
+                        origin = "contract:parse_job",
+                    ),
+                )
+                @test error isa LinkedSpecJulia.StagedParseJobDeclarationException
+                if error isa LinkedSpecJulia.StagedParseJobDeclarationException
+                    @test to_json(error)["code"] == row["diagnostic"]
+                end
+            end
+        end
+    end
+
+    @testset "runtime materializes Unicode direct and ordered-derived spans" begin
+        direct_source = raw"""Top::
+ /(é🙂)(B);/
+ E { marker = parse_job(match_group(0), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "top", "Expr", "result_policy", "sibling_field", "into", "expression_ast", "on_error", "fail")); return(marker) }
+"""
+        _, direct_compiled = _julia_staged_enrichment_compile(direct_source)
+        direct = runtime_parse(
+            LinkedSpecRuntimeEngine(direct_compiled),
+            "Aé🙂B;C",
+        ).value
+        direct_sidecar = direct["staged_parse_job_v2"]
+        @test direct_sidecar["text"] == "é🙂"
+        @test direct_sidecar["provenance"] == Dict{String,Any}(
+            "kind" => "direct_span",
+            "source_id" => "input",
+            "start" => 1,
+            "end" => 3,
+            "provenance" => "match_group",
+        )
+
+        derived_source = raw"""Top::
+ /(a)(a);/
+ E { marker = parse_job(cat(match_group(0), match_group(1)), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "result_policy", "replace_marker", "on_error", "keep_text", "required_capabilities", array("typed-source-location-v1", "actionir-v1"))); return(marker) }
+"""
+        _, derived_compiled = _julia_staged_enrichment_compile(derived_source)
+        derived = runtime_parse(
+            LinkedSpecRuntimeEngine(derived_compiled),
+            "aa;",
+        ).value
+        derived_sidecar = derived["staged_parse_job_v2"]
+        @test derived_sidecar["text"] == "aa"
+        @test derived_sidecar["required_capabilities"] == Any[
+            "actionir-v1",
+            "typed-source-location-v1",
+        ]
+        @test derived_sidecar["provenance"] == Dict{String,Any}(
+            "kind" => "derived_text",
+            "policy" => "concatenate_in_order",
+            "segments" => Any[
+                Dict{String,Any}(
+                    "kind" => "direct_span",
+                    "source_id" => "input",
+                    "start" => 0,
+                    "end" => 1,
+                    "provenance" => "match_group",
+                ),
+                Dict{String,Any}(
+                    "kind" => "direct_span",
+                    "source_id" => "input",
+                    "start" => 1,
+                    "end" => 2,
+                    "provenance" => "match_group",
+                ),
+            ],
+        )
+        @test isempty(_julia_staged_enrichment_forbidden_key_hits(derived))
+
+        out_of_range_source = raw"""Top::
+ /(x);/
+ E { marker = parse_job(match_group(1), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "result_policy", "replace_marker", "on_error", "fail")); return(marker) }
+"""
+        _, out_of_range_compiled =
+            _julia_staged_enrichment_compile(out_of_range_source)
+        error = _julia_staged_enrichment_capture(
+            () -> runtime_parse(
+                LinkedSpecRuntimeEngine(out_of_range_compiled),
+                "x;",
+            ),
+        )
+        @test error isa RuntimeInterpreterException
+        @test occursin(
+            "staged_source_provenance_invalid",
+            sprint(showerror, error),
+        )
+    end
+
+    @testset "invalid annotations and recognition-reachable markers fail closed" begin
+        valid_options =
+            "hash(\"node_kind\", \"expression\", \"payload_kind\", " *
+            "\"embedded_expression\", \"spec\", \"expr-v1\", " *
+            "\"result_policy\", \"replace_marker\", \"on_error\", \"fail\")"
+        invalid_forms = [
+            (
+                "parse_job(match_group(0), options)",
+                "staged_parse_job_options_required",
+            ),
+            (
+                "parse_job(match_group(0), hash(\"node_kind\", \"expression\", " *
+                "\"payload_kind\", \"embedded_expression\", \"spec\", \"expr-v1\", " *
+                "\"result_policy\", \"replace_marker\", \"on_error\", \"fail\", " *
+                "\"loader\", \"ambient\"))",
+                "staged_parse_job_option_unknown",
+            ),
+            (
+                "parse_job(match_group(0), hash(\"node_kind\", \"expression\", " *
+                "\"node_kind\", \"expression\", \"payload_kind\", " *
+                "\"embedded_expression\", \"spec\", \"expr-v1\", " *
+                "\"result_policy\", \"replace_marker\", \"on_error\", \"fail\"))",
+                "staged_parse_job_options_required",
+            ),
+            (
+                "parse_job(match_group(0), hash(\"node_kind\", \"expression\", " *
+                "\"payload_kind\", \"embedded_expression\", \"spec\", \"expr-v1\", " *
+                "\"result_policy\", \"replace_marker\"))",
+                "staged_parse_job_options_required",
+            ),
+            (
+                "parse_job(match_group(0), hash(\"node_kind\", node_kind, " *
+                "\"payload_kind\", \"embedded_expression\", \"spec\", \"expr-v1\", " *
+                "\"result_policy\", \"replace_marker\", \"on_error\", \"fail\"))",
+                "staged_parse_job_options_required",
+            ),
+            (
+                "parse_job(trim(match_group(0)), $valid_options)",
+                "staged_source_provenance_invalid",
+            ),
+            (
+                "parse_job(\"copied\", $valid_options)",
+                "staged_source_provenance_invalid",
+            ),
+            (
+                "parse_job(match_group(index), $valid_options)",
+                "staged_source_provenance_invalid",
+            ),
+            (
+                "parse_job(match_group(0), hash(\"node_kind\", \"expression\", " *
+                "\"payload_kind\", \"embedded_expression\", \"spec\", \"../expr\", " *
+                "\"result_policy\", \"replace_marker\", \"on_error\", \"fail\"))",
+                "staged_parser_identity_invalid",
+            ),
+            (
+                "parse_job(match_group(0), hash(\"node_kind\", \"expression\", " *
+                "\"payload_kind\", \"embedded_expression\", \"spec\", \"expr-v1\", " *
+                "\"top\", \"Expr/Bad\", \"result_policy\", \"replace_marker\", " *
+                "\"on_error\", \"fail\"))",
+                "staged_top_rule_invalid",
+            ),
+            (
+                "parse_job(match_group(0), hash(\"node_kind\", \"expression\", " *
+                "\"payload_kind\", \"embedded_expression\", \"spec\", \"expr-v1\", " *
+                "\"result_policy\", \"replace\", \"on_error\", \"fail\"))",
+                "staged_result_policy_invalid",
+            ),
+            (
+                "parse_job(match_group(0), hash(\"node_kind\", \"expression\", " *
+                "\"payload_kind\", \"embedded_expression\", \"spec\", \"expr-v1\", " *
+                "\"result_policy\", \"replace_marker\", \"on_error\", \"retry\"))",
+                "staged_failure_policy_invalid",
+            ),
+            (
+                "parse_job(match_group(0), hash(\"node_kind\", \"expression\", " *
+                "\"payload_kind\", \"embedded_expression\", \"spec\", \"expr-v1\", " *
+                "\"result_policy\", \"replace_marker\", \"into\", \"wrong\", " *
+                "\"on_error\", \"fail\"))",
+                "staged_result_target_invalid",
+            ),
+            (
+                "parse_job(match_group(0), hash(\"node_kind\", \"expression\", " *
+                "\"payload_kind\", \"embedded_expression\", \"spec\", \"expr-v1\", " *
+                "\"result_policy\", \"sibling_field\", \"on_error\", \"fail\"))",
+                "staged_result_target_invalid",
+            ),
+            (
+                "parse_job(match_group(0), hash(\"node_kind\", \"expression\", " *
+                "\"payload_kind\", \"embedded_expression\", \"spec\", \"expr-v1\", " *
+                "\"result_policy\", \"replace_marker\", \"on_error\", \"fail\", " *
+                "\"required_capabilities\", array(\"actionir-v1\", \"actionir-v1\")))",
+                "staged_parse_job_options_required",
+            ),
+        ]
+        for (call, code) in invalid_forms
+            source = "Top::\n /(x);/\n E { marker = $call; return(marker) }\n"
+            error = _julia_staged_enrichment_capture(
+                () -> _julia_staged_enrichment_compile(source),
+            )
+            @test error !== nothing
+            @test occursin(code, sprint(showerror, error))
+        end
+
+        residual_forms = [
+            "return(parse_job(match_group(0), $valid_options))",
+            "marker += parse_job(match_group(0), $valid_options)",
+            "markers[\"one\"] = parse_job(match_group(0), $valid_options)",
+            "marker = source.parse_job(match_group(0), $valid_options)",
+        ]
+        for residual in residual_forms
+            source = "Top::\n /(x);/\n E { $residual }\n"
+            residual_error = _julia_staged_enrichment_capture(
+                () -> _julia_staged_enrichment_compile(source),
+            )
+            @test residual_error !== nothing
+            @test occursin(
+                "staged_parse_job_options_required",
+                sprint(showerror, residual_error),
+            )
+        end
+
+        transaction_source = raw"""Top:: I { tx = recognition_checkpoint(); matched = recognize_once(tx, call(Child)); recognition_rollback(tx); return(matched) }
+Child:: I { marker = parse_job(entry_text(), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "result_policy", "replace_marker", "on_error", "fail")); return(marker) } /never/"""
+        transaction_error = _julia_staged_enrichment_capture(
+            () -> _julia_staged_enrichment_compile(transaction_source),
+        )
+        @test transaction_error !== nothing
+        @test occursin(
+            "recognition_effect_forbidden:parser_registry_or_staged_dispatch",
+            sprint(showerror, transaction_error),
+        )
     end
 
     @testset "consumer remains outside ordinary and canonical discovery" begin
@@ -501,9 +782,9 @@ end
         end
     end
 
-    @testset "LINKEDSPEC_STAGED_AST_ENRICHMENT_JULIA_RED: missing dedicated marker and typed provenance" begin
-        # Intentional RED: owner .14.7.6.1 must replace only the reserved
-        # generic assignment with one dedicated logical marker and sidecar.
-        @test isempty(generic_calls) && length(marker_nodes) == 1
+    @testset "LINKEDSPEC_STAGED_AST_ENRICHMENT_JULIA_RED: missing authority=[pre_registered_resolution,immutable_cache,result_failure_policies]; marker=[STAGED_PARSE_JOB_MARKER] and typed provenance=[staged_parse_job_v2] are available" begin
+        # Intentional RED: `.14.7.6.2` owns caller-frozen resolution/cache and
+        # all result/failure stitching. This leaf stops at inert declaration.
+        @test false
     end
 end

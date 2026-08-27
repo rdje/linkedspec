@@ -10,6 +10,31 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-27 — FUTURE-PARITY-BACKLOG.14.7.6.1 — implement Julia staged marker provenance
+
+- Replaced only exact scalar assignment-form `parse_job(text_expr, literal_hash_options)` with the dedicated
+  private `ActionStagedParseJobExpr`. Immutable direct/derived text plans and normalized options carry logical
+  declaration data without adding `parse_job` to the ordinary helper registry.
+- Added strict parse/compile closure for missing, unknown, duplicate, dynamic, malformed, residual generic,
+  receiver, append, indexed-target, and recognition-reachable declarations. Result/failure execution remains
+  wholly unimplemented and owned by `.14.7.6.2`.
+- Retained participating native `RegexMatch` capture ranges as private immutable code-unit tuples omitted from
+  JSON. Existing typed `SourceLocation` authority converts those exact live boundaries to Unicode-scalar direct
+  or nonempty ordered-derived provenance, distinguishing repeated equal captures without copied-text search.
+- Added detached inert `STAGED_PARSE_JOB_MARKER` / `staged_parse_job_v2` construction containing normalized
+  options, exact materialized text, typed provenance, and origin only—never match/source/parser/registry/callback/
+  scheduler/cache/path/host authority.
+- Advanced the same dormant consumer to 131 GREEN assertions and one exact `.14.7.6.2` pre-registered-resolution/
+  immutable-cache/result-failure-policy RED across native, normalized reconstructed, validated generated-plan,
+  and independently included emitted-module routes. Ordinary/canonical discovery and Julia rollout do not move.
+- Focused proof passes the complete ordinary Julia gate, typed source 127/127, recognition 207/207, progressive
+  62/62, generated-source direct dependents, neutral staged 92 mutations, semantic 6/20/128, typed 12/2/170,
+  recognition 138/250/58, progressive 9/9/116, generated/capability 80/0/0, language 250/105+1/126, admitted Perl
+  143/143, Rust 1/1 in 728.83 seconds, and Dart 19/19, Knowledge 896/7,601, and rendered mdBook 80 files/
+  15,612 KiB.
+- Synchronized task/index, Knowledge, ADR, roadmaps, architecture, Toolbox, live docs, memory, and sole-facing
+  mdBook while preserving function-body v1, generated-source v2, public/outward behavior, and other backends.
+
 ## 2026-08-27 — FUTURE-PARITY-BACKLOG.14.7.6.0 — freeze Julia staged-AST dormant RED
 
 - Added the predeclared final-path Julia consumer without ordinary or canonical registration. Its explicit routed

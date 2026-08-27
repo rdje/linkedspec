@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `b38f819c466ef11f50fa7792b6a345bb10c4c69e` — exact clean Dart carrier-admission base for task-tree-first `FUTURE-PARITY-BACKLOG.14.7.6.0`; brief cleared; no push.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.7.6.0 - freeze Julia staged-AST dormant RED` (intended atomic subject from activation commit `b38f819c466ef11f50fa7792b6a345bb10c4c69e`).
-- active_work_unit: none; Julia dormant boundary `.14.7.6.0` is focused-signoff-complete and `.14.7.6.1` is the next task-tree-first activation.
-- next_action: activate Julia marker/provenance `.14.7.6.1` task-tree-first from the clean dormant-boundary commit.
-- in_flight_uncommitted: none; `.14.7.6.0` is implemented, focused-signoff-complete, and intended for one atomic commit with a clean handoff.
+- activation_commit: `3b3d4eacc7f70f20bf689cdf9ab8f392198e45b3` — exact clean Julia dormant-boundary base for task-tree-first `FUTURE-PARITY-BACKLOG.14.7.6.1`; brief cleared; no push.
+- latest_completed_leaf: intended `FUTURE-PARITY-BACKLOG.14.7.6.1 - implement Julia staged marker provenance` from activation commit `3b3d4eacc7f70f20bf689cdf9ab8f392198e45b3`.
+- active_work_unit: none after intended atomic `.14.7.6.1`; `.14.7.6.2` remains pending task-tree-first activation.
+- next_action: commit `.14.7.6.1`, clear/verify the brief and exact clean handoff, then activate `.14.7.6.2` task-tree-first.
+- in_flight_uncommitted: none in the intended post-landing handoff; no background job.
 - blockers: none.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -55,5 +55,5 @@
   Dart `.14.7.5.0-.4` add the historical dormant boundary, exclusive live-proven marker, pure caller-frozen resolution/cache,
   isolated atomic policies, breadth-first recurrence, strict lineage/shared resources, expiring safe points, typed
   rebasing, complete-depth target reservation, and a fresh host-only post-parent seed across four production routes.
-  Dart is 19/19 and rollout-complete. Julia `.14.7.6.0` is 86 GREEN/one intentional marker/provenance RED outside ordinary/canonical discovery; production and rollout remain unchanged, and `.1` is next.
-- latest_bootstrap_read: 2026-08-27 — roadmap, codebase, mdBook, continuity, active task/tree, Knowledge, ADR, Toolbox, neutral contract, Julia registry/generated routes, and admitted precedents are reviewed; `.14.7.6.0` is focused-signoff-complete from clean `b38f819c` and `.1` is next.
+  Dart is 19/19 and rollout-complete. Julia `.14.7.6.0-.1` provide its dormant exclusive marker and native-capture-proven typed provenance at 131 GREEN/one `.2` authority RED; rollout, formats, public behavior, and governance stay unchanged, and `.14.7.6.2` is next.
+- latest_bootstrap_read: 2026-08-27 — roadmap, codebase, mdBook, continuity, task tree, Knowledge, ADR, Toolbox, neutral contract, Julia registry/generated routes, and admitted precedents are reviewed; `.14.7.6.1` is focused-signoff-complete from clean `3b3d4eac`, with `.2` next after landing.

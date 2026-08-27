@@ -387,6 +387,27 @@ runtime command requires the package cwd because `tools/run_dart_project_data.sh
 cwd and Dart resolves `pubspec.yaml` there. The runtime row now matches the already-proven canonical package-cwd
 form. Neutral governance is 92 mutations.
 
+Julia marker/provenance leaf `FUTURE-PARITY-BACKLOG.14.7.6.1` replaces only the exact scalar-assignment boundary.
+`name = parse_job(text_expr, hash(literal options))` becomes one dedicated `ActionStagedParseJobExpr`; malformed,
+dynamic, unknown/duplicate, invalid identity/policy/target/capability, transformed/literal, provenance-smuggling,
+generic residual/receiver/append/indexed, and recognition-reachable forms reject before execution. `parse_job`
+does not enter the ordinary helper registry.
+
+Julia's native `RegexMatch` already carries an exact absolute 1-based UTF-8 code-unit offset for each capture.
+`RuntimeRegexMatch` now retains participating capture ranges in one private immutable tuple, keeps them out of
+serialized match data, and grants no staged provenance to its compatibility constructor. This preserves repeated
+equal captures without substring search or regex reconstruction. Whole-match or capture boundaries pass through
+the existing `SourceLocation.position_from_codeunit` / direct-span / ordered-derived authority and become detached
+Unicode-scalar provenance.
+
+The resulting `STAGED_PARSE_JOB_MARKER` / `staged_parse_job_v2` declaration contains normalized immutable options,
+exact materialized text, typed direct or nonempty `concatenate_in_order` provenance, and origin only. It contains
+no source authority, match object, parser, registry, callback, scheduler, cache, path, or host handle. Native,
+normalized reconstructed, generated-plan, and independently included emitted-module routes return equal logical
+markers. The same dormant consumer is now 131 GREEN/one `.14.7.6.2` resolution/cache/result/failure authority RED.
+Function-body v1, neutral lifecycle and 92 mutations, ordinary/canonical discovery, Julia rollout, generated
+format, public/outward behavior, and other backends do not move.
+
 ## Links
 
 - Owning task: `docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md`
@@ -403,4 +424,5 @@ form. Neutral governance is 92 mutations.
   `docs/knowledge/dart-staged-ast-enrichment-current-depth-authority.md` plus
   `docs/knowledge/dart-staged-ast-enrichment-recursive-authority.md` and
   `docs/knowledge/dart-staged-ast-enrichment-carriers-admission.md` plus
-  `docs/knowledge/julia-staged-ast-enrichment-dormant-red.md`
+  `docs/knowledge/julia-staged-ast-enrichment-dormant-red.md` and
+  `docs/knowledge/julia-staged-ast-enrichment-marker-provenance.md`

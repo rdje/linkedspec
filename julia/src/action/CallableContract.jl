@@ -153,7 +153,8 @@ function _normalize_final_codeblock_expr!(expr::ActionExpr, registry::UserFuncti
            expr isa ActionObserveRecognitionExpr ||
            expr isa ActionRecognitionCommitExpr ||
            expr isa ActionRecognitionRollbackExpr ||
-           expr isa ActionProgressiveDispatchSpanExpr
+           expr isa ActionProgressiveDispatchSpanExpr ||
+           expr isa ActionStagedParseJobExpr
         return nothing
     elseif expr isa ActionFluentChainExpr
         _normalize_final_codeblock_expr!(expr.receiver, registry)

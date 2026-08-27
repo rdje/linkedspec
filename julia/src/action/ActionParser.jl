@@ -938,6 +938,216 @@ function _action_progressive_dispatch_assignment(
     )
 end
 
+_action_staged_parse_job_invalid(code::AbstractString) = throw(
+    ArgumentError("LINKEDSPEC_STAGED_AST_ENRICHMENT_ERROR:$(String(code))"),
+)
+
+function _action_staged_literal_string(expr::ActionExpr)
+    return expr isa ActionStringLiteralExpr ? expr.value : nothing
+end
+
+function _action_staged_parse_job_options(expr::ActionExpr)
+    if !(expr isa ActionCallExpr) ||
+            expr.name != "hash" ||
+            isempty(expr.args) ||
+            isodd(length(expr.args))
+        _action_staged_parse_job_invalid("staged_parse_job_options_required")
+    end
+
+    allowed = Set([
+        "node_kind",
+        "payload_kind",
+        "spec",
+        "top",
+        "result_policy",
+        "into",
+        "on_error",
+        "required_capabilities",
+    ])
+    values = Dict{String,ActionExpr}()
+    for index in 1:2:length(expr.args)
+        key_argument = expr.args[index]
+        value_argument = expr.args[index + 1]
+        key = key_argument isa ActionPositionalArgument ?
+            _action_staged_literal_string(key_argument.value) : nothing
+        key === nothing && _action_staged_parse_job_invalid(
+            "staged_parse_job_options_required",
+        )
+        key in allowed || _action_staged_parse_job_invalid(
+            "staged_parse_job_option_unknown",
+        )
+        if !(value_argument isa ActionPositionalArgument) || haskey(values, key)
+            _action_staged_parse_job_invalid("staged_parse_job_options_required")
+        end
+        values[key] = value_argument.value
+    end
+
+    function required_string(name::String)
+        value = get(values, name, nothing)
+        literal = value isa ActionExpr ? _action_staged_literal_string(value) : nothing
+        literal === nothing && _action_staged_parse_job_invalid(
+            "staged_parse_job_options_required",
+        )
+        return literal
+    end
+
+    function optional_string(name::String)
+        value = get(values, name, nothing)
+        value === nothing && return nothing
+        literal = _action_staged_literal_string(value)
+        literal === nothing && _action_staged_parse_job_invalid(
+            "staged_parse_job_options_required",
+        )
+        return literal
+    end
+
+    node_kind = required_string("node_kind")
+    payload_kind = required_string("payload_kind")
+    spec = required_string("spec")
+    top = optional_string("top")
+    result_policy = required_string("result_policy")
+    into = optional_string("into")
+    on_error = required_string("on_error")
+    identifier_pattern = r"^[a-z][a-z0-9_]*$"
+    parser_identity_pattern = r"^[a-z][a-z0-9]*(?:[._:-][a-z0-9]+)*$"
+    field_pattern = r"^[A-Za-z_][A-Za-z0-9_]*$"
+    if !occursin(identifier_pattern, node_kind) ||
+            !occursin(identifier_pattern, payload_kind)
+        _action_staged_parse_job_invalid("staged_parse_job_options_required")
+    end
+    occursin(parser_identity_pattern, spec) || _action_staged_parse_job_invalid(
+        "staged_parser_identity_invalid",
+    )
+    if top !== nothing && !occursin(field_pattern, top)
+        _action_staged_parse_job_invalid("staged_top_rule_invalid")
+    end
+    result_policy in (
+        "replace_marker",
+        "replace_field",
+        "sibling_field",
+        "append_child",
+    ) || _action_staged_parse_job_invalid("staged_result_policy_invalid")
+    on_error in ("fail", "keep_text", "diagnostic_node") ||
+        _action_staged_parse_job_invalid("staged_failure_policy_invalid")
+    target_is_valid = into !== nothing && occursin(field_pattern, into)
+    if (result_policy == "replace_marker" && into !== nothing) ||
+            (result_policy != "replace_marker" && !target_is_valid)
+        _action_staged_parse_job_invalid("staged_result_target_invalid")
+    end
+
+    required_capabilities = String[]
+    capability_expr = get(values, "required_capabilities", nothing)
+    if capability_expr !== nothing
+        if !(capability_expr isa ActionCallExpr) || capability_expr.name != "array"
+            _action_staged_parse_job_invalid("staged_parse_job_options_required")
+        end
+        seen = Set{String}()
+        for argument in capability_expr.args
+            capability = argument isa ActionPositionalArgument ?
+                _action_staged_literal_string(argument.value) : nothing
+            if capability === nothing ||
+                    !occursin(parser_identity_pattern, capability) ||
+                    capability in seen
+                _action_staged_parse_job_invalid("staged_parse_job_options_required")
+            end
+            push!(seen, capability)
+        end
+        append!(required_capabilities, sort!(collect(seen)))
+    end
+
+    return ActionStagedParseJobOptions(
+        node_kind = node_kind,
+        payload_kind = payload_kind,
+        spec = spec,
+        top = top,
+        result_policy = result_policy,
+        into = into,
+        on_error = on_error,
+        required_capabilities = required_capabilities,
+    )
+end
+
+function _action_staged_direct_text_plan(expr::ActionExpr)
+    expr isa ActionCallExpr || return nothing
+    if expr.name in ("entry_text", "match_text")
+        isempty(expr.args) || _action_staged_parse_job_invalid(
+            "staged_source_provenance_invalid",
+        )
+        return ActionStagedParseJobDirectTextPlan(source = expr.name)
+    elseif expr.name in ("entry_group", "match_group")
+        if length(expr.args) != 1 || !(only(expr.args) isa ActionPositionalArgument)
+            _action_staged_parse_job_invalid("staged_source_provenance_invalid")
+        end
+        index_expr = only(expr.args).value
+        if !(index_expr isa ActionNumberLiteralExpr) ||
+                !isfinite(index_expr.value) ||
+                index_expr.value < 0 ||
+                index_expr.value != trunc(index_expr.value)
+            _action_staged_parse_job_invalid("staged_source_provenance_invalid")
+        end
+        return ActionStagedParseJobDirectTextPlan(
+            source = expr.name,
+            index = Int(index_expr.value),
+        )
+    end
+    return nothing
+end
+
+function _action_staged_parse_job_text_plan(expr::ActionExpr)
+    direct = _action_staged_direct_text_plan(expr)
+    if direct !== nothing
+        return ActionStagedParseJobDirectSpanPlan(
+            source = direct.source,
+            index = direct.index,
+        )
+    end
+    if !(expr isa ActionCallExpr) || expr.name != "cat" || isempty(expr.args)
+        _action_staged_parse_job_invalid("staged_source_provenance_invalid")
+    end
+    segments = ActionStagedParseJobDirectTextPlan[]
+    for argument in expr.args
+        argument isa ActionPositionalArgument || _action_staged_parse_job_invalid(
+            "staged_source_provenance_invalid",
+        )
+        nested = _action_staged_parse_job_text_plan(argument.value)
+        if nested isa ActionStagedParseJobDirectSpanPlan
+            push!(
+                segments,
+                ActionStagedParseJobDirectTextPlan(
+                    source = nested.source,
+                    index = nested.index,
+                ),
+            )
+        else
+            append!(segments, nested.segments)
+        end
+    end
+    isempty(segments) && _action_staged_parse_job_invalid(
+        "staged_source_provenance_invalid",
+    )
+    return ActionStagedParseJobDerivedTextPlan(segments = segments)
+end
+
+function _action_staged_parse_job_assignment(
+    text::String,
+    start::Int,
+    target::String,
+    value::ActionExpr,
+)
+    value isa ActionCallExpr && value.name == "parse_job" || return nothing
+    if length(value.args) != 2 ||
+            !all(argument -> argument isa ActionPositionalArgument, value.args)
+        _action_staged_parse_job_invalid("staged_parse_job_options_required")
+    end
+    return ActionStagedParseJobExpr(
+        source = text,
+        source_span = ActionSourceSpan(start, start + _action_len(text)),
+        target = target,
+        text_plan = _action_staged_parse_job_text_plan(value.args[1].value),
+        options = _action_staged_parse_job_options(value.args[2].value),
+    )
+end
+
 function _action_parse_assignment(text::String, start::Int)
     append_index = _action_find_top_level_token(text, "+=")
     if append_index !== nothing
@@ -971,6 +1181,13 @@ function _action_parse_assignment(text::String, start::Int)
     )
     value = parse_action_expression(right.text, right.start)
     if _action_is_identifier(left.text)
+        staged = _action_staged_parse_job_assignment(
+            text,
+            start,
+            left.text,
+            value,
+        )
+        staged !== nothing && return staged
         progressive = _action_progressive_dispatch_assignment(
             text,
             start,

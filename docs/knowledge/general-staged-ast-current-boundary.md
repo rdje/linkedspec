@@ -15,7 +15,7 @@ answers:
   - "what did FUTURE-PARITY-BACKLOG.14.7.0 audit"
   - "what must happen before general staged AST enrichment"
 date: 2026-08-25
-status: current runtime audit; private Perl, Rust, and Dart admissions complete; Julia dormant RED; .14.7.6.1 is next
+status: current runtime audit; private Perl, Rust, and Dart admissions complete; Julia marker/provenance dormant; .14.7.6.2 is next
 tags: [staged-parsing, parse-job, diagnostics, registry, policies, recursive-queue, source-location, backend-parity]
 evidence: "Toolbox-first source/runtime proof establishes the shipped boundary: five source backends/six runtimes implement only actionir-body.spec/action_block, one-depth ordering, fixed cache identity, and function-specific replace_field/body_ast/fail. FUTURE-PARITY-BACKLOG.14.7.1 repairs wrong-top diagnostic parity. FUTURE-PARITY-BACKLOG.14.7.2 adds the separate executable neutral v2 authority. Perl .14.7.3.1-.3 now add a dormant private marker/provenance carrier, caller-frozen pure resolution/cache, all policies/detachment, breadth-first recurrence, chain/resource bounds, and source-rebased diagnostics. They add no reconstructed/generated/emitted carriers, admission, rollout, or public authoring. Those remain .14.7.3.4-.10-owned."
 evidence_update_2026_08_26_perl_admission: "FUTURE-PARITY-BACKLOG.14.7.3.4 adds four fresh-authority Perl routes, exact phase-0/canonical admission, and Perl-only rollout promotion. Public authoring, generated format, later backends, recurrence, and outward surfaces remain unchanged or pending."
@@ -30,6 +30,7 @@ evidence_update_2026_08_26_dart_current_depth_authority: "FUTURE-PARITY-BACKLOG.
 evidence_update_2026_08_27_dart_recursive_authority: "FUTURE-PARITY-BACKLOG.14.7.5.3 adds private enrichStagedRecursively breadth-first queues, strict chain/cycle checks, shared cancellation/deadline/resource authority, expiring safe points, and direct/ordered-derived source rebasing without widening the v1 adapter. Complete-depth target reservation closes a latent pre-callback conflict. Only .14.7.5.4 carriers/admission/rollout remain RED; discovery, formats, public, and outward truth do not move."
 evidence_update_2026_08_27_dart_admission: "FUTURE-PARITY-BACKLOG.14.7.5.4 attaches a fresh host-only staged seed to native, reconstructed, generated-plan, and emitted top-level execution after the parent AST. The consumer moves unchanged into ordinary discovery, passes 19/19, is registered exactly once canonically, and promotes only Dart. Generated format, function-body v1, public, and outward surfaces do not move."
 evidence_update_2026_08_27_julia_dormant_red: "FUTURE-PARITY-BACKLOG.14.7.6.0 preserves Julia's narrow v1 adapter and adds one explicitly invoked final-path consumer. Eighty-six assertions pass before the sole missing STAGED_PARSE_JOB_MARKER/staged_parse_job_v2 RED; native/reconstructed/generated/emitted routes all preserve the generic unsupported parse_job helper. Ordinary/canonical discovery and Julia rollout do not move."
+evidence_update_2026_08_27_julia_marker_provenance: "FUTURE-PARITY-BACKLOG.14.7.6.1 replaces only the exclusive Julia scalar-assignment boundary with ActionStagedParseJobExpr plus live native-capture-proven direct/ordered-derived Unicode-scalar provenance. Four logical routes agree at 131 GREEN/one .2 authority RED. Function-body v1, neutral governance, discovery, rollout, generated format, public, and outward surfaces do not move."
 root_cause: "The first prototype deliberately separated a generic-looking registry record from a narrow trusted function-body integration. Compile helpers in Perl, Rust, and Dart were shaped around loaded parser identity plus top rule, so they synthesized a placeholder diagnostic record; Julia and Lua were implemented later with the complete job parameter but their formatter omitted payload_kind. Success-path and resolve-phase tests covered real context, but no cross-backend compile-phase assertion locked the ADR 0015 fields. Leaf .14.7.1 passes the normalized job through the three compile boundaries, adds payload_kind to the two later formatters, and locks all five source routes/six runtimes without expanding staged behavior."
 last_verified: 2026-08-27
 reverify:
@@ -99,12 +100,13 @@ native, reconstructed, generated-plan, and independently executed emitted routes
 consumer passes 19/19 in ordinary discovery and is required once canonically; Dart rollout is complete while
 format, public, and outward surfaces do not move.
 
-Julia `.14.7.6.0` now freezes its equivalent pre-implementation boundary without production behavior. The exact
-final-path consumer remains outside `julia/test/runtests.jl` and canonical CI, preserves current function-body v1,
-and reports 86 GREEN assertions before one labeled missing-marker/typed-provenance RED. The authored assignment is
-still `ActionAssignScalarExpr(ActionCallExpr)`; native, `SpecFile`-JSON reconstructed, validated generated-plan,
-and independently included emitted-module routes all preserve the typed unsupported `parse_job` helper boundary.
-Julia rollout remains pending and `.14.7.6.1` alone owns private marker/provenance behavior.
+Julia `.14.7.6.0-.1` now freeze and implement its equivalent private declaration boundary. The exact final-path
+consumer remains outside `julia/test/runtests.jl` and canonical CI and preserves current function-body v1. Exact
+scalar assignment-form `parse_job(...)` becomes one dedicated inert node; Julia's native absolute UTF-8 capture
+offsets pass through the existing source authority to typed Unicode-scalar direct or nonempty ordered-derived
+provenance. Native, `SpecFile`-JSON reconstructed, validated generated-plan, and independently included emitted-
+module routes return the same detached marker at 131 GREEN assertions. The only RED now names `.14.7.6.2`'s
+missing caller-frozen resolution/cache/result/failure authority. Julia rollout remains pending.
 
 The dependency plan then separates neutral contract, each backend, exact five-source/six-runtime recurrence,
 public `parse_job(...)` authoring, and independent recomposition. General staged dispatch reuses the typed source

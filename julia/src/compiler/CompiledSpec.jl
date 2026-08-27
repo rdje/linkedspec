@@ -599,6 +599,42 @@ mutable struct _ProgressiveDispatchEffects
     recognition_attempts::Set{String}
 end
 
+"""Reject generic `parse_job` spellings outside the exclusive scalar assignment."""
+function validate_staged_parse_job_contract(compiled::CompiledSpec)
+    function validate(value)
+        if value isa AbstractVector
+            foreach(validate, value)
+            return nothing
+        elseif !(value isa AbstractDict)
+            return nothing
+        end
+        generic_call = get(value, "kind", nothing) == "call" &&
+            get(value, "name", nothing) == "parse_job"
+        receiver_call = get(value, "method", nothing) == "parse_job"
+        if generic_call || receiver_call
+            throw(CompiledSpecException(
+                "LINKEDSPEC_STAGED_AST_ENRICHMENT_ERROR:" *
+                "staged_parse_job_options_required",
+            ))
+        end
+        foreach(validate, values(value))
+        return nothing
+    end
+
+    for label in compiled.compiled_rule_order
+        rule = compiled.rules_by_label[label]
+        for payload in action_payloads(rule)
+            validate(to_json(payload.action_ast))
+        end
+    end
+    for entry in compiled.function_registry.entries
+        block = parse_action_block(entry.definition.body_source)
+        normalize_action_block_final_codeblocks!(block, compiled.function_registry)
+        validate(to_json(block))
+    end
+    return nothing
+end
+
 _ProgressiveDispatchEffects() = _ProgressiveDispatchEffects(
     false,
     Set{String}(),
@@ -617,7 +653,8 @@ function _progressive_dispatch_effects(value, function_names::Set{String})
             return nothing
         end
         kind = get(node, "kind", nothing)
-        if kind == "progressive_dispatch_span"
+        if kind == "progressive_dispatch_span" ||
+                kind == "staged_parse_job_marker"
             effects.dispatches = true
         elseif kind == "recognize_once"
             rule = get(node, "rule", nothing)
@@ -960,6 +997,7 @@ function _compile_spec(
     )
     validate_compiled_regex_slot_identities(compiled)
     validate_no_removed_aggregate_selectors(compiled)
+    validate_staged_parse_job_contract(compiled)
     validate_recursive_observation_policy(compiled)
     validate_progressive_dispatch_policy(compiled)
     return compiled

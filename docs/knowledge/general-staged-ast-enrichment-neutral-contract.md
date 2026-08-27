@@ -17,7 +17,7 @@ answers:
   - "which staged AST backend consumers are planned"
   - "is general parse_job authoring public"
 date: 2026-08-25
-status: executable neutral with private Perl, Rust, and Dart admissions complete; Julia dormant RED; Lua, recurrence admission, and public authoring pending
+status: executable neutral with private Perl, Rust, and Dart admissions complete; Julia private marker/provenance dormant; Lua, recurrence admission, and public authoring pending
 tags: [staged-parsing, parse-job, source-location, registry, queue, policies, diagnostics, portability]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.2 adds capability_conformance/staged_ast_enrichment_contract.json plus tools/check_staged_ast_enrichment_contract.py and ADR 0088. The independent oracle executes 4 immutable registry entries; 2 sources; 8 provenance, 3 deterministic-id, 8 resolution, 6 authority, 10 cache, 4 breadth-first queue, 3 sibling-isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases; 37 diagnostics; five planned backend consumers over six routes; four carrier requirements; ten outward guards; nine rollout legs; 35 exact owners; and 72 reason-checked corruptions. FUTURE-PARITY-BACKLOG.14.7.3.1-.3 advance only the dormant Perl consumer through declaration/provenance, current-depth policies, breadth-first recurrence, bounded authority, and source-rebased diagnostics. It now has 141 GREEN top-level checks/one carrier-admission RED; four later consumers remain absent, only neutral rollout is complete, and outward surfaces remain absent."
 evidence_update_2026_08_26_perl_admission: "FUTURE-PARITY-BACKLOG.14.7.3.4 advances the executable boundary to neutral+Perl complete with 78 reason-checked mutations. The 143-check Perl consumer proves four fresh-authority carriers and exact ordinary/canonical admission; later consumers and outward surfaces remain absent."
@@ -32,6 +32,7 @@ evidence_update_2026_08_26_dart_current_depth_authority: "FUTURE-PARITY-BACKLOG.
 evidence_update_2026_08_27_dart_recursive_authority: "FUTURE-PARITY-BACKLOG.14.7.5.3 completes private Dart breadth-first recurrence, exact-text/full-provenance cycle and strict-decrease guards, monotone cancellation/deadline/step/call/depth/result/diagnostic authority, expiring callback safe points, and direct/ordered-derived source rebasing. Complete-depth target reservation also closes a review-discovered preflight conflict before callback one. The same dormant consumer is +18/-1 and only .14.7.5.4 carriers/production seam/admission/rollout remain RED; lifecycle, 85 mutations, discovery, formats, public, and outward truth do not move."
 evidence_update_2026_08_27_dart_admission: "FUTURE-PARITY-BACKLOG.14.7.5.4 adds a host-only fresh-invocation seed, four equal native/reconstructed/generated/emitted production carriers, ordinary/canonical admission, and Dart-only rollout. The final-path consumer passes 19/19, ordinary Dart passes 435/435, and the checker rejects 90 mutations with Perl, Rust, and Dart complete. Julia/Lua, recurrence, public authoring, formats, and outward surfaces remain pending or unchanged."
 evidence_update_2026_08_27_julia_dormant_red: "FUTURE-PARITY-BACKLOG.14.7.6.0 advances only Julia's consumer lifecycle to dormant_red. Its explicit final-path run passes 86 assertions over neutral/current-v1 and four generic observation routes, then fails only the dedicated-marker/typed-provenance assertion; ordinary Julia and canonical CI omit it, Julia rollout remains pending, and no Julia production source moves. The checker now rejects 92 mutations, including an authored-availability guard, and corrects two inherited Dart-admission governance drifts: stale availability prose and a runtime command missing its required package cwd."
+evidence_update_2026_08_27_julia_marker_provenance: "FUTURE-PARITY-BACKLOG.14.7.6.1 adds Julia's exclusive private declaration node, immutable literal options/text plan, exact native RegexMatch capture-offset retention, Unicode-scalar direct/ordered-derived SourceLocation projection, detached authority-free marker, malformed/residual/recognition denials, and four equal logical routes. The same dormant consumer is 131 GREEN/one .14.7.6.2 authority RED; lifecycle, 92 mutations, discovery, rollout, v1/v2 formats, public, and outward truth do not move."
 reverify:
   - "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py"
   - "rg -n 'staged-AST enrichment|STAGED_PARSE_JOB_MARKER|staged_parse_job_v2|neutral_perl_rust_and_dart_complete_julia_dormant_red' docs/decisions/0088-pre-resolved-breadth-first-staged-ast-enrichment.md capability_conformance/staged_ast_enrichment_contract.json tools/check_staged_ast_enrichment_contract.py"
@@ -79,10 +80,10 @@ canonical discovery run one GREEN consumer, and Rust rollout is complete. Dart n
 semantics through a host-only seed across native, reconstructed, generated-plan, and independently analyzed/
 executed emitted routes. Every top-level call starts a fresh registry/cache/recursive authority after the parent
 AST, the final-path consumer passes 19/19 in ordinary and canonical discovery, and Dart rollout is complete. Julia
-`.14.7.6.0` now freezes the next boundary at 86 GREEN/one dedicated-marker/provenance RED across native,
-reconstructed, generated-plan, and independently included emitted-module observations. Its final path exists but
-ordinary/canonical discovery omit it, and Julia rollout remains pending. Neutral governance is 92 mutations;
-`.14.7.6.1` owns the private marker/provenance implementation.
+`.14.7.6.0-.1` now freeze and implement the next private declaration boundary: exact scalar assignment lowers to
+one inert marker, live native capture offsets become typed Unicode-scalar direct/ordered-derived provenance, and
+four logical routes return equal detached data. Its final path is 131 GREEN/one `.2` authority RED but remains
+outside ordinary/canonical discovery; Julia rollout remains pending. Neutral governance stays at 92 mutations.
 
 Related: [[general-staged-ast-current-boundary]], [[perl-staged-ast-enrichment-current-depth-authority]], [[perl-staged-ast-enrichment-recursive-authority]], [[staged-parse-job-annotation-contract]],
 [[staged-parser-registry-dispatch-contract]], [[typed-source-location-cursor-algebra-direction]], and
@@ -94,4 +95,4 @@ Related: [[general-staged-ast-current-boundary]], [[perl-staged-ast-enrichment-c
 [[dart-staged-ast-enrichment-current-depth-authority]], and
 [[dart-staged-ast-enrichment-recursive-authority]], and
 [[dart-staged-ast-enrichment-carriers-admission]], and
-[[julia-staged-ast-enrichment-dormant-red]].
+[[julia-staged-ast-enrichment-dormant-red]], and [[julia-staged-ast-enrichment-marker-provenance]].

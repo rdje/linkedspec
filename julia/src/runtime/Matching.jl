@@ -63,11 +63,63 @@ struct RuntimeRegexMatch
     codeunit_end::Int
     groups::Vector{String}
     captures::Vector{String}
+    _staged_capture_codeunit_spans::Tuple{Vararg{Tuple{Int,Int}}}
     named::Dict{String,String}
+
+    function RuntimeRegexMatch(
+        ::Val{:internal},
+        input::String,
+        alternative_index::Int,
+        pattern::String,
+        codeunit_start::Int,
+        codeunit_end::Int,
+        groups::Vector{String},
+        captures::Vector{String},
+        staged_capture_codeunit_spans::Tuple{Vararg{Tuple{Int,Int}}},
+        named::Dict{String,String},
+    )
+        return new(
+            input,
+            alternative_index,
+            pattern,
+            codeunit_start,
+            codeunit_end,
+            groups,
+            captures,
+            staged_capture_codeunit_spans,
+            named,
+        )
+    end
+end
+
+"""Compatibility constructor without staged capture provenance authority."""
+function RuntimeRegexMatch(
+    input::String,
+    alternative_index::Int,
+    pattern::String,
+    codeunit_start::Int,
+    codeunit_end::Int,
+    groups::Vector{String},
+    captures::Vector{String},
+    named::Dict{String,String},
+)
+    return RuntimeRegexMatch(
+        Val(:internal),
+        input,
+        alternative_index,
+        pattern,
+        codeunit_start,
+        codeunit_end,
+        groups,
+        captures,
+        (),
+        named,
+    )
 end
 
 function reindex_runtime_regex_match(match::RuntimeRegexMatch, alternative_index::Int)
     return RuntimeRegexMatch(
+        Val(:internal),
         match.input,
         alternative_index,
         match.pattern,
@@ -75,6 +127,7 @@ function reindex_runtime_regex_match(match::RuntimeRegexMatch, alternative_index
         match.codeunit_end,
         match.groups,
         match.captures,
+        match._staged_capture_codeunit_spans,
         match.named,
     )
 end
@@ -86,6 +139,18 @@ char_end(match::RuntimeRegexMatch) = codeunit_offset_to_char_offset(match.input,
 char_length(match::RuntimeRegexMatch) = char_end(match) - char_start(match)
 is_zero_width(match::RuntimeRegexMatch) = match.codeunit_start == match.codeunit_end
 named_capture(match::RuntimeRegexMatch, name::AbstractString) = get(match.named, String(name), nothing)
+
+"""Return one live-regex-proven participating-capture range for staged provenance."""
+function staged_capture_codeunit_span(
+    match::RuntimeRegexMatch,
+    compact_capture_index::Int,
+)
+    if compact_capture_index < 0 ||
+            compact_capture_index >= length(match._staged_capture_codeunit_spans)
+        return nothing
+    end
+    return match._staged_capture_codeunit_spans[compact_capture_index + 1]
+end
 
 function made_progress_from(match::RuntimeRegexMatch, codeunit_cursor::Int)
     return match.codeunit_end > _checked_codeunit_offset(match.input, codeunit_cursor)
@@ -369,13 +434,23 @@ function _runtime_regex_match(
 )
     groups = String[String(raw_match.match)]
     captures = String[]
-    for capture in raw_match.captures
+    capture_codeunit_spans = Tuple{Int,Int}[]
+    for (index, capture) in enumerate(raw_match.captures)
         if capture === nothing
             push!(groups, "")
         else
             value = String(capture)
             push!(groups, value)
             push!(captures, value)
+            one_based_start = raw_match.offsets[index]
+            one_based_start > 0 || throw(RuntimeRegexException(
+                "participating capture $index has no source offset",
+            ))
+            codeunit_start = one_based_start - 1
+            push!(
+                capture_codeunit_spans,
+                (codeunit_start, codeunit_start + ncodeunits(value)),
+            )
         end
     end
 
@@ -393,6 +468,7 @@ function _runtime_regex_match(
     codeunit_start = raw_match.offset - 1
     codeunit_end = codeunit_start + ncodeunits(raw_match.match)
     return RuntimeRegexMatch(
+        Val(:internal),
         input,
         alternative.index,
         alternative.pattern,
@@ -400,6 +476,7 @@ function _runtime_regex_match(
         codeunit_end,
         groups,
         captures,
+        Tuple(capture_codeunit_spans),
         named,
     )
 end

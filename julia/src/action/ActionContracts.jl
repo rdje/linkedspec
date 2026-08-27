@@ -734,9 +734,11 @@ function _visit_expr!(resolver::_ActionContractResolver, expr::ActionExpr)
            expr isa ActionObserveRecognitionExpr ||
            expr isa ActionRecognitionCommitExpr ||
            expr isa ActionRecognitionRollbackExpr ||
-           expr isa ActionProgressiveDispatchSpanExpr
+           expr isa ActionProgressiveDispatchSpanExpr ||
+           expr isa ActionStagedParseJobExpr
         # Grammar-owned recognition intrinsics are dedicated ActionIR nodes,
-        # not entries in the ordinary callable-helper registry.
+        # not entries in the ordinary callable-helper registry. The private
+        # staged declaration is likewise a dedicated logical node.
         return nothing
     elseif expr isa ActionFluentChainExpr
         _visit_expr!(resolver, expr.receiver)

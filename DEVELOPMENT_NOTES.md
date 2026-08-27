@@ -9,6 +9,35 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-27 (`FUTURE-PARITY-BACKLOG.14.7.6.1` — Julia staged marker/provenance): exact clean activation is
+  dormant-boundary commit `3b3d4eac`; scope owns only the exclusive declaration node, static closure, live typed
+  provenance, inert detached marker, same consumer's `.2` RED, and synchronized truth.
+- Parser root cause was one generic `ActionAssignScalarExpr(ActionCallExpr)` with no reserved declaration
+  identity. Exact scalar assignment now lowers to `ActionStagedParseJobExpr`; malformed and residual generic/
+  receiver/append/indexed forms reject before execution, and recognition effect closure reuses the existing
+  `parser_registry_or_staged_dispatch` denial.
+- Native probes established that Julia `RegexMatch.offsets` gives absolute 1-based UTF-8 code-unit starts for
+  participating captures and zero for absent captures. `(a)(a)` therefore yields distinct source positions without
+  copied-text search or regex replay; `(é🙂)(B)` confirms exact multibyte boundaries.
+- `RuntimeRegexMatch` retains only participating `(start,end)` ranges in a private immutable tuple omitted from
+  JSON. The public compatibility constructor supplies an empty tuple, so copied or reconstructed match values
+  cannot acquire staged capture authority.
+- `StagedParseJobDeclaration` converts live whole/capture ranges through `SourceLocation.position_from_codeunit`,
+  `direct_span`, `derived_text`, and `materialize`. The detached sidecar retains only normalized options, exact
+  text, typed provenance, and origin; no source authority, match, parser, registry, callback, scheduler, cache,
+  filesystem path, cancellation state, or host handle survives.
+- The explicit dormant consumer is 131 GREEN/one intentional `.2` RED. Four logical routes return equal detached
+  markers; Unicode, repeated-equal capture, eight neutral provenance, copied-text smuggling, malformed/static,
+  residual, recognition, serialization, dormancy, and v1 compatibility checks pass.
+- Complete ordinary Julia passes package discovery, project-data locality at 20 owners/5 packages, primary CLI,
+  and corpus 105/105 while omitting the dormant consumer. Julia direct dependents pass typed 127, recognition 207,
+  progressive 62, and source-emitter groups 13+32+20. Neutral and cross-project governance remain exactly staged
+  92, semantic 6/20/128, typed 12/2/170, recognition 138/250/58, progressive 9/9/116 plus public 60, generated/
+  capability 80/0/0, and language 250/105+1/126.
+- Admitted Perl remains 143/143, Rust 1/1 including its independently compiled emitted carrier in 728.83 seconds,
+  and Dart 19/19. Knowledge regenerates at 896 facts/7,601 question keys; the mdBook renders 80 files/15,612 KiB
+  and is removed. Julia rollout, ordinary/canonical topology, v1/v2 formats, public/outward behavior, later
+  backends, and combined `.14.8` remain unchanged; `.14.7.6.2` is next.
 - 2026-08-27 (`FUTURE-PARITY-BACKLOG.14.7.6.0` — Julia staged dormant RED): exact clean activation is Dart-
   admission commit `b38f819c`; scope owns only the final-path dormant consumer, Julia lifecycle/current projection,
   two inherited executable-governance corrections, and boundary documentation. Julia production remains untouched.

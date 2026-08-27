@@ -765,8 +765,9 @@ exports, check-cfg registration, and conditional dead-code allowance are gone. `
 validation and gap-aware child-dispatch parity are restored, while the private authority stays dormant beside the
 one admitted contract route. `.5.4` historically aligned the Perl snapshot to 79 mutations plus Rust
 `dormant_red`; Rust admission now advances the neutral oracle to 84 mutations and promotes only Rust. Dart has
-since reached the same private admission boundary; Julia's exact final-path consumer is now dormant under
-`.14.7.6.0`, while Julia implementation/admission and the Lua consumer remain pending under `.14.7.6.1-.7`. Dart
+since reached the same private admission boundary; Julia's exact final-path consumer is now dormant with its
+private declaration implemented under `.14.7.6.0-.1`, while Julia authority/admission and the Lua consumer remain
+pending under `.14.7.6.2-.7`. Dart
 `.14.7.5.0-.4` freeze one exact historical `test_dormant/` boundary, lower exact
 assignment-form `parse_job` to a live-proven private marker, and add a separate caller-frozen pure resolver/cache/
 recursive policy engine. It selects default top before identity, caches plans only, prepares complete depths,
@@ -774,10 +775,12 @@ reserves cross-plan targets, isolates sibling state, detaches results, implement
 markers breadth-first, enforces strict lineage/shared resources, expires safe points, and rebases direct/derived
 source locations. A host-only seed starts fresh registry/cache/recursive authority after the parent AST through
 native, reconstructed, generated-plan, and independently executed emitted routes. The final-path consumer passes
-19/19 in ordinary/canonical admission. Julia's explicit consumer preserves the unchanged function-body-v1 path,
-generic `parse_job` call, four-route unsupported-helper boundary, and absent marker/provenance at 86 GREEN plus one
-intentional RED. Governance now rejects 92 mutations while only Julia lifecycle advances to `dormant_red`.
-Generated format and public behavior remain unchanged; Julia `.14.7.6.1` is next.
+19/19 in ordinary/canonical admission. Julia `.14.7.6.0-.1` preserves the unchanged function-body-v1 path while
+lowering only exact scalar assignment-form `parse_job` to an inert dedicated node. Native Julia capture offsets
+feed the typed source authority directly, so Unicode-scalar direct/ordered-derived provenance requires no copied-
+text search; four logical routes return the same detached marker. The explicit consumer is 131 GREEN plus one
+`.14.7.6.2` authority RED. Governance stays at 92 mutations with Julia `dormant_red`; generated format and public
+behavior remain unchanged, and `.14.7.6.2` is next.
 Mandatory engineering-notes segment `4990` is finitely authorized at 18 files / 17
 manifest lines by ADR `0090`. Dart dormant closeout's mandatory change-history segment `4990` is finitely
 authorized at 23 files / 22 manifest lines by ADR `0091`; no other pressure ceiling changes.

@@ -193,6 +193,122 @@ function ActionProgressiveDispatchSpanExpr(;
     )
 end
 
+"""One direct live-match projection in a staged parse-job text plan."""
+struct ActionStagedParseJobDirectTextPlan
+    source::String
+    index::Union{Nothing,Int}
+end
+
+function ActionStagedParseJobDirectTextPlan(; source, index = nothing)
+    return ActionStagedParseJobDirectTextPlan(
+        String(source),
+        index === nothing ? nothing : Int(index),
+    )
+end
+
+"""Closed source-provenance plan for one inert staged parse-job declaration."""
+abstract type ActionStagedParseJobTextPlan end
+
+struct ActionStagedParseJobDirectSpanPlan <: ActionStagedParseJobTextPlan
+    kind::String
+    source::String
+    index::Union{Nothing,Int}
+end
+
+function ActionStagedParseJobDirectSpanPlan(; source, index = nothing)
+    return ActionStagedParseJobDirectSpanPlan(
+        "direct_span",
+        String(source),
+        index === nothing ? nothing : Int(index),
+    )
+end
+
+struct ActionStagedParseJobDerivedTextPlan <: ActionStagedParseJobTextPlan
+    kind::String
+    policy::String
+    segments::Tuple{Vararg{ActionStagedParseJobDirectTextPlan}}
+end
+
+function ActionStagedParseJobDerivedTextPlan(; segments)
+    return ActionStagedParseJobDerivedTextPlan(
+        "derived_text",
+        "concatenate_in_order",
+        Tuple(ActionStagedParseJobDirectTextPlan[segments...]),
+    )
+end
+
+"""Normalized literal-only options retained by a staged declaration."""
+struct ActionStagedParseJobOptions
+    node_kind::String
+    payload_kind::String
+    spec::String
+    top::Union{Nothing,String}
+    result_policy::String
+    into::Union{Nothing,String}
+    on_error::String
+    required_capabilities::Tuple{Vararg{String}}
+end
+
+function ActionStagedParseJobOptions(;
+    node_kind,
+    payload_kind,
+    spec,
+    top = nothing,
+    result_policy,
+    into = nothing,
+    on_error,
+    required_capabilities,
+)
+    return ActionStagedParseJobOptions(
+        String(node_kind),
+        String(payload_kind),
+        String(spec),
+        top === nothing ? nothing : String(top),
+        String(result_policy),
+        into === nothing ? nothing : String(into),
+        String(on_error),
+        Tuple(String[String(capability) for capability in required_capabilities]),
+    )
+end
+
+"""
+Declare one inert general staged parse job with typed source provenance.
+
+This node owns the complete scalar assignment. It retains logical data only:
+no parser, registry, callback, path, scheduler, or host authority.
+"""
+struct ActionStagedParseJobExpr <: ActionExpr
+    kind::String
+    source::String
+    source_span::ActionSourceSpan
+    target::String
+    version::Int
+    sidecar_kind::String
+    effect::String
+    text_plan::ActionStagedParseJobTextPlan
+    options::ActionStagedParseJobOptions
+end
+
+function ActionStagedParseJobExpr(;
+    source,
+    source_span,
+    target,
+    text_plan,
+    options,
+)
+    return ActionStagedParseJobExpr(
+        "staged_parse_job_marker",
+        String(source),
+        source_span,
+        String(target),
+        2,
+        "staged_parse_job_v2",
+        "staged_parse_job_declaration",
+        text_plan,
+        options,
+    )
+end
+
 struct ActionVariableExpr <: ActionExpr
     kind::String
     source::String
@@ -875,7 +991,8 @@ function find_removed_aggregate_selector(expr::ActionExpr)
            expr isa ActionObserveRecognitionExpr ||
            expr isa ActionRecognitionCommitExpr ||
            expr isa ActionRecognitionRollbackExpr ||
-           expr isa ActionProgressiveDispatchSpanExpr
+           expr isa ActionProgressiveDispatchSpanExpr ||
+           expr isa ActionStagedParseJobExpr
         return nothing
     elseif expr isa ActionFluentChainExpr
         selector = find_removed_aggregate_selector(expr.receiver)
@@ -1042,6 +1159,54 @@ function to_json(expr::ActionProgressiveDispatchSpanExpr)
     result["parser_id"] = expr.parser_id
     result["top_rule"] = expr.top_rule
     result["span"] = expr.span
+    return result
+end
+
+function to_json(plan::ActionStagedParseJobDirectTextPlan)
+    result = Dict{String,Any}("source" => plan.source)
+    _put_if_present!(result, "index", plan.index)
+    return result
+end
+
+function to_json(plan::ActionStagedParseJobDirectSpanPlan)
+    result = Dict{String,Any}(
+        "kind" => plan.kind,
+        "source" => plan.source,
+    )
+    _put_if_present!(result, "index", plan.index)
+    return result
+end
+
+function to_json(plan::ActionStagedParseJobDerivedTextPlan)
+    return Dict{String,Any}(
+        "kind" => plan.kind,
+        "policy" => plan.policy,
+        "segments" => Any[to_json(segment) for segment in plan.segments],
+    )
+end
+
+function to_json(options::ActionStagedParseJobOptions)
+    result = Dict{String,Any}(
+        "node_kind" => options.node_kind,
+        "payload_kind" => options.payload_kind,
+        "spec" => options.spec,
+        "result_policy" => options.result_policy,
+        "on_error" => options.on_error,
+        "required_capabilities" => Any[options.required_capabilities...],
+    )
+    _put_if_present!(result, "top", options.top)
+    _put_if_present!(result, "into", options.into)
+    return result
+end
+
+function to_json(expr::ActionStagedParseJobExpr)
+    result = _action_base_json(expr)
+    result["target"] = expr.target
+    result["version"] = expr.version
+    result["sidecar_kind"] = expr.sidecar_kind
+    result["effect"] = expr.effect
+    result["text_plan"] = to_json(expr.text_plan)
+    result["options"] = to_json(expr.options)
     return result
 end
 

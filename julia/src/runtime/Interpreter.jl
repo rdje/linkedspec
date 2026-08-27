@@ -2632,6 +2632,11 @@ function _execute_runtime_lifecycle!(
                         context,
                         statement.expr.target,
                     )
+                elseif statement.expr isa ActionStagedParseJobExpr
+                    _record_runtime_rule_local_binding!(
+                        context,
+                        statement.expr.target,
+                    )
                 elseif statement.expr isa ActionCallExpr &&
                         statement.expr.name == "set" &&
                         !isempty(statement.expr.args)
@@ -3492,6 +3497,19 @@ function _evaluate_runtime_action_expr!(
             ))
         end
         return result
+    elseif expr isa ActionStagedParseJobExpr
+        marker = construct_staged_parse_job_marker(
+            authority = context.source_authority,
+            registers = context.registers,
+            origin = "$rule_label:parse_job",
+            text_plan = expr.text_plan,
+            options = expr.options,
+        )
+        return _store_runtime_bare_binding!(
+            context,
+            expr.target,
+            _runtime_copy(marker),
+        )
     elseif expr isa ActionProgressiveDispatchSpanExpr
         state = context.progressive_dispatch_state
         state === nothing && throw(

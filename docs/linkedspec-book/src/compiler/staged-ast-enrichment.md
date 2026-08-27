@@ -7,7 +7,8 @@
 > carriers, and exact ordinary/canonical admission;
 > Dart now has the same complete private authority, four fresh native/reconstructed/generated/emitted production
 > carriers, and exact 19/19 ordinary/canonical admission. Julia now has an exact dormant final-path consumer at
-> 86 GREEN assertions plus one intentionally labeled marker/provenance RED; the neutral contract is at 92
+> 131 GREEN assertions plus one intentionally labeled `.2` authority RED after implementing its private marker
+> and live-proven typed provenance; the neutral contract remains at 92
 > mutations. Lua remains absent, and
 > the only publicly authored five-backend/six-runtime surface is still the
 > narrow function-body v1 adapter described below.
@@ -189,9 +190,11 @@ deadline, budget, mutable queue, or host handle.
 Neutral, Perl, Rust, and Dart rollout are complete. Five backend consumers map to six runtime routes because one
 shared Lua source must run independently on PUC Lua and LuaJIT. The exact Perl, Rust, and Dart consumers run once
 from ordinary and canonical proof. Julia's final-path consumer is present but deliberately omitted from both
-proof routes: its explicit run freezes the generic-call boundary at 86 GREEN assertions plus one intentional RED.
-Julia implementation/admission, both Lua routes, six-runtime recurrence, public authoring/no-drift, and final
-recomposition retain their `.14.7.6.1-.10` owners.
+proof routes. Its `.0` run froze the generic-call boundary at 86 GREEN assertions plus one intentional RED; the
+same consumer's
+private marker/provenance boundary is now implemented at 131 GREEN/one `.2` authority RED. Julia authority/
+admission, both Lua routes, six-runtime recurrence, public authoring/no-drift, and final recomposition retain their
+`.14.7.6.2-.10` owners.
 
 ## Current private Perl boundary
 
@@ -603,9 +606,9 @@ Publishing this boundary crossed the bounded `CHANGES.md` rollover threshold. Th
 manifest controls to 23 files / 22 records. No byte, per-file, aggregate, route, storage, or product boundary was
 weakened.
 
-## Current dormant Julia boundary
+## Current private Julia marker/provenance boundary
 
-Julia `.14.7.6.0` adds the predeclared final-path consumer at
+Julia `.14.7.6.0-.1` freeze and implement the predeclared final-path consumer at
 `julia/test/staged_ast_enrichment_contract_test.jl` without including it from `julia/test/runtests.jl` or
 canonical CI. Run it explicitly from the repository root:
 
@@ -614,17 +617,30 @@ bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history
   julia/test/staged_ast_enrichment_contract_test.jl
 ```
 
-The result is exactly 86 passing assertions and one intentional failure named
+The result is exactly 131 passing assertions and one intentional failure named
 `LINKEDSPEC_STAGED_AST_ENRICHMENT_JULIA_RED`. The GREEN prefix snapshots the complete 92-mutation neutral inventory,
-unchanged function-body-v1 resolve/load/compile/execute/cache/stitch behavior, complete wrong-top context, and the
-narrow registry's resolve-time denial of `expr-v1`.
+unchanged function-body-v1 resolve/load/compile/execute/cache/stitch behavior, complete wrong-top context, the
+narrow registry's resolve-time denial of `expr-v1`, static annotation closure, typed provenance, and four logical
+carrier routes. The sole RED now belongs to `.14.7.6.2` and names missing caller-frozen resolution/cache plus
+result/failure policy authority.
 
-Exact assignment-form `parse_job(...)` still compiles as an ordinary scalar assignment whose value is a generic
-`ActionCallExpr`. Native and normalized `SpecFile`-JSON reconstructed execution therefore raise
-`unsupported runtime helper 'parse_job' in rule Top`. Validated generated-plan execution and an independently
-included emitted module preserve the same generated failure detail. All four routes contain no dedicated
-`STAGED_PARSE_JOB_MARKER`, typed `staged_parse_job_v2` sidecar, or live-proven provenance. The sole RED requires
-that missing marker/provenance boundary; `.14.7.6.1` owns implementing it.
+Exact scalar assignment-form `name = parse_job(text_expr, hash(literal options))` compiles as one dedicated
+`ActionStagedParseJobExpr`, never an ordinary helper call. Required/optional keys, parser/top identities, result/
+failure policies, targets, capability identities, assignment-only placement, and recognition reachability are
+validated before execution. Transformed text, copied literals, dynamic capture indices, unknown/duplicate keys,
+and generic residual receiver/return/append/indexed forms fail closed.
+
+Julia does not search copied capture text to recover provenance. Native `RegexMatch.offsets` supplies each
+capture's exact absolute 1-based UTF-8 code-unit start. The runtime retains participating start/end ranges in a
+private immutable tuple that is absent from match JSON, so repeated equal captures remain distinct. The existing
+typed source authority converts those live boundaries into Unicode-scalar direct spans or nonempty ordered
+`concatenate_in_order` provenance and materializes exact text.
+
+Native, normalized `SpecFile`-JSON reconstructed, validated generated-plan, and independently included emitted-
+module routes return the same detached `STAGED_PARSE_JOB_MARKER` / `staged_parse_job_v2` declaration. The sidecar
+contains normalized logical options, exact text, typed provenance, and origin only—no source authority, match,
+parser, registry, callback, scheduler, cache, path, or host handle. This is still private dormant behavior, not
+general public authoring or parser execution.
 
 This audit also corrected two inherited governance drifts without changing Dart behavior. The duplicated authored
 availability sentence now agrees with Dart's already-complete structured backend and rollout rows, guarded by a
