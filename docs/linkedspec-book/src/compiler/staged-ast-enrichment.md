@@ -6,10 +6,9 @@
 > Rust now has the same private complete authority, four fresh native/reconstructed/generated/emitted production
 > carriers, and exact ordinary/canonical admission;
 > Dart now has the same complete private authority, four fresh native/reconstructed/generated/emitted production
-> carriers, and exact 19/19 ordinary/canonical admission. Julia now has an exact dormant final-path consumer at
-> 386 GREEN assertions plus one intentionally labeled `.4` carrier/admission RED after implementing its private
-> marker/provenance, caller-frozen current-depth engine, and separate breadth-first recursive authority; the neutral contract remains at 92
-> mutations. Lua remains absent, and
+> carriers, and exact 19/19 ordinary/canonical admission. Julia now also has the complete private authority, four
+> fresh production routes, and exact 491/491 ordinary/canonical admission; the neutral contract is 97 mutations.
+> Lua remains absent, and
 > the only publicly authored five-backend/six-runtime surface is still the
 > narrow function-body v1 adapter described below.
 
@@ -187,15 +186,13 @@ logical marker/sidecar and identity inputs. Each execution receives fresh caller
 generated data contains no callback, compiled parser, registry snapshot, source authority, cancellation token,
 deadline, budget, mutable queue, or host handle.
 
-Neutral, Perl, Rust, and Dart rollout are complete. Five backend consumers map to six runtime routes because one
-shared Lua source must run independently on PUC Lua and LuaJIT. The exact Perl, Rust, and Dart consumers run once
-from ordinary and canonical proof. Julia's final-path consumer is present but deliberately omitted from both
-proof routes. Its `.0` run froze the generic-call boundary at 86 GREEN assertions plus one intentional RED; the
-same consumer's
-private marker/provenance, current-depth resolution/cache/policies, and separate breadth-first recursive authority
-are now implemented at 386 GREEN/one `.4` carrier/admission RED. Julia fresh carrier integration/admission, both
-Lua routes, six-runtime recurrence, public authoring/no-drift, and final recomposition retain their
-`.14.7.6.4-.10` owners.
+Neutral, Perl, Rust, Dart, and Julia rollout are complete. Five backend consumers map to six runtime routes because
+one shared Lua source must run independently on PUC Lua and LuaJIT. The exact Perl, Rust, Dart, and Julia consumers
+run once from ordinary and canonical proof. Julia's `.0` run historically froze the generic-call boundary at 86
+GREEN assertions plus one intentional RED; `.1-.3` supplied marker/provenance, current-depth authority, and
+breadth-first recurrence, and `.4` now carries them through four fresh-authority production routes at 491/491.
+Both Lua routes, six-runtime recurrence, public authoring/no-drift, and final recomposition retain their
+`.14.7.7-.10` owners.
 
 ## Current private Perl boundary
 
@@ -607,27 +604,25 @@ Publishing this boundary crossed the bounded `CHANGES.md` rollover threshold. Th
 manifest controls to 23 files / 22 records. No byte, per-file, aggregate, route, storage, or product boundary was
 weakened.
 
-## Current private Julia recursive boundary
+## Current private Julia production boundary
 
-Julia `.14.7.6.0-.3` freeze and implement the predeclared final-path consumer at
-`julia/test/staged_ast_enrichment_contract_test.jl` without including it from `julia/test/runtests.jl` or
-canonical CI. Run it explicitly from the repository root:
+Julia `.14.7.6.0-.4` implement and admit the predeclared final-path consumer at
+`julia/test/staged_ast_enrichment_contract_test.jl`. Ordinary `Pkg.test()` includes it once and canonical CI
+requires, logs, and invokes this same path once. Run it explicitly from the repository root:
 
 ```bash
 bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no \
   julia/test/staged_ast_enrichment_contract_test.jl
 ```
 
-The result is exactly 386 passing assertions and one intentional failure named
-`LINKEDSPEC_STAGED_AST_ENRICHMENT_JULIA_RED`. The GREEN prefix snapshots the complete 92-mutation neutral inventory,
+The result is exactly 491 passing assertions. The suite snapshots the complete 97-mutation neutral inventory,
 unchanged function-body-v1 resolve/load/compile/execute/cache/stitch behavior, complete wrong-top context, the
 narrow registry's resolve-time denial of `expr-v1`, static annotation closure, typed provenance, and four logical
 carrier routes. It also executes every neutral resolution/authority/job/cache/order/result/failure/detachment
 case, malformed frozen snapshots, complete-depth target reservation, sibling isolation, cache lifecycle,
 atomicity, returned-marker inertness on the one-depth API, breadth-first recurrence, exact lineage, shared
-resources, context expiry, safe points, source rebasing, and diagnostic truncation. The sole RED now belongs to
-`.14.7.6.4` and names only fresh native/reconstructed/generated/emitted authority, production integration,
-ordinary/canonical admission, rollout, and backend-parent closure.
+resources, context expiry, safe points, source rebasing, diagnostic truncation, fresh production authority, and
+exact admission topology.
 
 Exact scalar assignment-form `name = parse_job(text_expr, hash(literal options))` compiles as one dedicated
 `ActionStagedParseJobExpr`, never an ordinary helper call. Required/optional keys, parser/top identities, result/
@@ -644,8 +639,8 @@ typed source authority converts those live boundaries into Unicode-scalar direct
 Native, normalized `SpecFile`-JSON reconstructed, validated generated-plan, and independently included emitted-
 module routes return the same detached `STAGED_PARSE_JOB_MARKER` / `staged_parse_job_v2` declaration. The sidecar
 contains normalized logical options, exact text, typed provenance, and origin only—no source authority, match,
-parser, registry, callback, scheduler, cache, path, or host handle. This is still private dormant behavior, not
-general public authoring or parser execution.
+parser, registry, callback, scheduler, cache, path, or host handle. This is private admitted behavior, not general
+public authoring.
 
 `runtime/StagedAstEnrichment.jl` is separate from the narrow function-body-v1 registry. Its unexported frozen
 registry accepts only caller-completed alias, declaring-relative, ordered search-root/provider outcomes and the
@@ -710,6 +705,26 @@ not consume the budget meant for parsed AST nodes. Atomic counting is not an aut
 marker is still copied as finite acyclic plain data and recursively checked for callback, parser, registry, path,
 source, transaction, cancellation, host, and other live keys.
 
+`StagedAstEnrichmentSeed` is the private host-only production recipe. It deeply copies and validates the logical
+registry snapshot and options, then retains one opaque factory without invoking it. Every top-level execution
+invokes that factory and requires exactly a compiled-callback map, recursive authority, cancellation probe, and
+clock. It builds a new `_FrozenStagedRegistry` with an empty plan cache and a new recursive invocation, so reusing
+one seed never reuses cache entries, lineage, counters, resource budgets, or callback contexts.
+
+`LinkedSpecRuntimeEngine` completes parent execution before invoking the recipe or creating staged execution
+state. Parent failure therefore consumes no staged callback, cache, cancellation, clock, lineage, or budget
+authority. A live recognition transaction then fails with `staged_transaction_forbidden`; completion is one-use
+and returns a detached neutral outcome. With no seed, native and generated execution preserve their previous
+result. Generated execution rethrows `StagedAstEnrichmentException` unchanged so the primary staged diagnostic
+identity is not hidden by a generic generated-execution wrapper.
+
+The same optional seed crosses native execution, normalized `SpecFile`-JSON reconstruction, validated generated
+plans, and generated-source-v2 `execute` / `execute_with_trace`. An independently included emitted module accepts
+the host seed but serializes none of its factory, callbacks, registry/source authority, cancellation, clock,
+resource, cache, queue, path, or host state. The consumer runs all four routes twice through one seed and proves
+eight fresh run identities and cancellation tokens, 32 distinct callback closures, callback/cancellation/clock
+observation on every run, one cache miss and zero hits per result, equality, and mutation isolation.
+
 This audit also corrected two inherited governance drifts without changing Dart behavior. The duplicated authored
 availability sentence now agrees with Dart's already-complete structured backend and rollout rows, guarded by a
 dedicated mutation. The recorded ordinary Dart command now enters `dart/` before invoking the repository-local
@@ -723,6 +738,6 @@ bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract
 
 The checker currently reports 4 registry entries; 8 provenance, 8 resolution, 6 authority, 10 cache, 4 queue,
 3 isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases; 37 diagnostics; 5 backend
-consumers/6 routes; 4 carrier requirements; 10 outward guards; 9 rollout legs; 35 owners; and 92 reason-checked
-mutations. The neutral checker plus Perl, Rust, and Dart consumers are registered in canonical local CI. Julia's
-consumer remains dormant outside ordinary/canonical discovery, and the Lua consumer remains absent.
+consumers/6 routes; 4 carrier requirements; 10 outward guards; 9 rollout legs; 35 owners; and 97 reason-checked
+mutations. The neutral checker plus Perl, Rust, Dart, and Julia consumers are registered in canonical local CI.
+The Lua consumer remains absent.

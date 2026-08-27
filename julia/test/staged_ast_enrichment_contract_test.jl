@@ -1,14 +1,14 @@
-# FUTURE-PARITY-BACKLOG.14.7.6.3 — private Julia recursive authority.
+# FUTURE-PARITY-BACKLOG.14.7.6.0-.4 — admitted Julia staged-AST enrichment.
 #
-# This exact final-path consumer is intentionally omitted from ordinary Julia
-# and canonical CI discovery. Its focused repository-local command is:
+# Ordinary Julia discovery and canonical CI run this exact final-path consumer.
+# Its focused repository-local command is:
 #
 #   bash tools/run_julia_project_data.sh --project=julia --startup-file=no \
 #     --history-file=no julia/test/staged_ast_enrichment_contract_test.jl
 #
-# Every marker/provenance/current-depth/recursive assertion must remain GREEN.
-# The sole intentional RED is the final `.14.7.6.4` carrier/admission sentinel;
-# this leaf owns no production carrier, admission, rollout, or public surface.
+# It freezes the neutral contract, private marker/provenance/recursive authority,
+# and four fresh top-level production routes without making general parse_job
+# authoring public.
 
 using JSON3
 using LinkedSpecJulia
@@ -38,6 +38,13 @@ const JULIA_STAGED_ENRICHMENT_AUTHORED_SOURCE = raw"""Top::
  /([^;]+);/
  E {
   job_marker = parse_job(match_group(0), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "top", "Expr", "result_policy", "sibling_field", "into", "expression_ast", "on_error", "fail"))
+  return(job_marker)
+ }
+"""
+const JULIA_STAGED_ENRICHMENT_PRODUCTION_SOURCE = raw"""Top::
+ /([^;]+);/
+ E {
+  job_marker = parse_job(match_group(0), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr", "top", "Expr", "result_policy", "replace_marker", "on_error", "fail"))
   return(job_marker)
  }
 """
@@ -95,6 +102,28 @@ function _julia_staged_enrichment_execute_emitted_marker(
     value = Base.invokelatest(execute, "1+2;")
     source_identity = Base.invokelatest(metadata).source_identity
     return value, emitted, source_identity
+end
+
+function _julia_staged_enrichment_execute_emitted_production(
+    compiled::CompiledSpec,
+    identity::AbstractString,
+    seed,
+)
+    emitted = emit_julia_source_v2(compiled, identity)
+    host = Module(gensym(:JuliaStagedAstEnrichmentCarrierHost))
+    Base.include_string(host, emitted, "staged_ast_enrichment_production.jl")
+    parser = Base.invokelatest(() -> getfield(host, :LinkedSpecGeneratedParser))
+    execute = Base.invokelatest(() -> getfield(parser, :execute))
+    metadata = Base.invokelatest(() -> getfield(parser, :metadata))
+    values = Any[
+        Base.invokelatest(
+            execute,
+            "1+2;";
+            staged_ast_enrichment_seed = seed,
+        ) for _ in 1:2
+    ]
+    source_identity = Base.invokelatest(metadata).source_identity
+    return values, emitted, source_identity
 end
 
 function _julia_staged_enrichment_v1_job(; top_rule = "action_block")
@@ -270,6 +299,80 @@ function _julia_staged_enrichment_recursive_authority(;
     )
 end
 
+function _julia_staged_enrichment_production_seed(observations; failure::Bool = false)
+    run_counter = Ref(0)
+    factory = function()
+        run_counter[] += 1
+        run_id = run_counter[]
+        token = Dict{String,Any}("run_id" => run_id)
+        callback_bindings = Dict{String,Function}()
+        for entry in JULIA_STAGED_ENRICHMENT_CONTRACT["resolution_snapshot"]["entries"]
+            callback_name = String(entry["compiled_authority"])
+            callback = let callback_name = callback_name, run_id = run_id
+                function(request, context)
+                    push!(observations["callbacks"], Dict{String,Any}(
+                        "run_id" => run_id,
+                        "callback_name" => callback_name,
+                        "text" => request["text"],
+                        "token" => LinkedSpecJulia._staged_cancellation_token(context),
+                    ))
+                    LinkedSpecJulia._staged_safe_point(context, 0)
+                    return failure ?
+                        LinkedSpecJulia._staged_child_failure(Dict{String,Any}(
+                            "code" => "fixture_child_failure",
+                        )) :
+                        LinkedSpecJulia._staged_child_success(Dict{String,Any}(
+                            "kind" => "expression",
+                            "text" => request["text"],
+                            "top_rule" => request["top_rule"],
+                        ))
+                end
+            end
+            callback_bindings[callback_name] = callback
+        end
+        cancelled = let run_id = run_id
+            function(actual_token)
+                push!(observations["cancellation_checks"], Dict{String,Any}(
+                    "run_id" => run_id,
+                    "token" => deepcopy(actual_token),
+                ))
+                return false
+            end
+        end
+        clock = let run_id = run_id
+            function()
+                push!(observations["clock_checks"], run_id)
+                return 1
+            end
+        end
+        push!(observations["starts"], Dict{String,Any}(
+            "run_id" => run_id,
+            "token" => deepcopy(token),
+            "callbacks" => Any[values(callback_bindings)...],
+            "cancelled" => cancelled,
+            "clock" => clock,
+        ))
+        return Dict{String,Any}(
+            "compiled_authorities" => callback_bindings,
+            "recursive_authority" => Dict{String,Any}(
+                "cancellation_token" => token,
+                "deadline" => 100,
+                "remaining_steps" => 20,
+                "required_steps" => 1,
+                "max_depth" => 4,
+                "max_calls" => 10,
+            ),
+            "cancelled" => cancelled,
+            "clock" => clock,
+        )
+    end
+    return LinkedSpecJulia.StagedAstEnrichmentSeed(
+        snapshot = JULIA_STAGED_ENRICHMENT_CONTRACT["resolution_snapshot"],
+        options = _julia_staged_enrichment_options(),
+        authority_factory = factory,
+    )
+end
+
 function _julia_staged_enrichment_error_code(error)
     error isa LinkedSpecJulia.StagedAstEnrichmentException || return nothing
     return to_json(error)["code"]
@@ -321,13 +424,13 @@ function _julia_staged_enrichment_forbidden_key_hits(value)
     return hits
 end
 
-@testset "Dormant Julia staged-AST enrichment RED" begin
+@testset "Admitted Julia staged-AST enrichment" begin
     @testset "neutral authority and function-body v1 stay exact" begin
         contract = JULIA_STAGED_ENRICHMENT_CONTRACT
         @test contract["contract_id"] == JULIA_STAGED_ENRICHMENT_CONTRACT_ID
         @test contract["format"] == 1
         @test contract["status"] ==
-              "neutral_perl_rust_and_dart_complete_julia_dormant_red_lua_pending"
+              "neutral_perl_rust_dart_and_julia_complete_lua_pending"
         @test contract["expected_counts"] == Dict{String,Any}(
             "registry_entries" => 4,
             "sources" => 2,
@@ -349,7 +452,7 @@ end
             "diagnostics" => 37,
             "rollout_legs" => 9,
             "ownership_rows" => 35,
-            "mutations" => 92,
+            "mutations" => 97,
         )
         expected_ids = Dict(
             "provenance_cases" => [
@@ -447,7 +550,7 @@ end
             "complete",
             "complete",
             "complete",
-            "dormant_red",
+            "complete",
             "pending_absent",
         ]
         julia_consumer = contract["backend_consumers"][4]
@@ -455,23 +558,23 @@ end
             "backend" => "julia",
             "owner" => "FUTURE-PARITY-BACKLOG.14.7.6.0",
             "path" => JULIA_STAGED_ENRICHMENT_CONSUMER,
-            "status" => "dormant_red",
+            "status" => "complete",
         )
         @test [row["status"] for row in contract["rollout"]] == [
             "complete",
             "complete",
             "complete",
             "complete",
-            "pending",
+            "complete",
             "pending",
             "pending",
             "pending",
             "pending",
         ]
         @test contract["authored_surface"]["availability"] ==
-              "neutral executable authority with private Perl, Rust, and Dart carriers complete; " *
-              "the Julia general carrier contract is dormant RED; PUC Lua, LuaJIT, recurring, " *
-              "and public authoring remain pending under FUTURE-PARITY-BACKLOG.14.7.6-.10"
+              "neutral executable authority with private Perl, Rust, Dart, and Julia carriers complete; " *
+              "PUC Lua, LuaJIT, recurring, and public authoring remain pending under " *
+              "FUTURE-PARITY-BACKLOG.14.7.7-.10"
         @test contract["compatibility_v1"] == Dict{String,Any}(
             "status" => "current_unchanged",
             "record_version" => 1,
@@ -626,6 +729,203 @@ end
         @test !occursin("staged_parse_job_v2", emitted)
         @test !occursin(JULIA_STAGED_ENRICHMENT_CONTRACT_ID, emitted)
         @test isempty(_julia_staged_enrichment_forbidden_key_hits(native))
+    end
+
+    @testset "four production routes start fresh opaque staged authority" begin
+        production_parsed, production_compiled =
+            _julia_staged_enrichment_compile(
+                JULIA_STAGED_ENRICHMENT_PRODUCTION_SOURCE,
+            )
+        raw_marker = runtime_parse(
+            LinkedSpecRuntimeEngine(production_compiled),
+            "1+2;",
+        ).value
+        @test raw_marker["kind"] == "STAGED_PARSE_JOB_MARKER"
+
+        observations = Dict{String,Any}(
+            "starts" => Any[],
+            "callbacks" => Any[],
+            "cancellation_checks" => Any[],
+            "clock_checks" => Any[],
+        )
+        seed = _julia_staged_enrichment_production_seed(observations)
+        @test sprint(show, seed) == "StagedAstEnrichmentSeed(<opaque>)"
+        @test_throws ArgumentError LinkedSpecRuntimeEngine(
+            production_compiled;
+            staged_ast_enrichment_seed = "not-a-seed",
+        )
+
+        native_engine = LinkedSpecRuntimeEngine(
+            production_compiled;
+            staged_ast_enrichment_seed = seed,
+        )
+        native_values = Any[
+            runtime_parse(native_engine, "1+2;").value for _ in 1:2
+        ]
+
+        normalized = JSON3.read(
+            JSON3.write(to_json(production_parsed)),
+            Dict{String,Any},
+        )
+        reconstructed = from_json(SpecFile, normalized)
+        validate_spec(reconstructed)
+        reconstructed_compiled = compile_spec(reconstructed)
+        reconstructed_engine = LinkedSpecRuntimeEngine(
+            reconstructed_compiled;
+            staged_ast_enrichment_seed = seed,
+        )
+        reconstructed_values = Any[
+            runtime_parse(reconstructed_engine, "1+2;").value for _ in 1:2
+        ]
+
+        generated_plan = build_generated_rule_plan(production_compiled)
+        generated_values = Any[
+            execute_generated_parser_v2(
+                production_compiled,
+                generated_plan,
+                "1+2;",
+                JULIA_STAGED_ENRICHMENT_SOURCE_IDENTITY;
+                staged_ast_enrichment_seed = seed,
+            ) for _ in 1:2
+        ]
+
+        emitted_values, production_emitted, production_emitted_identity =
+            _julia_staged_enrichment_execute_emitted_production(
+                production_compiled,
+                JULIA_STAGED_ENRICHMENT_EMITTED_IDENTITY,
+                seed,
+            )
+        @test production_emitted_identity ==
+              JULIA_STAGED_ENRICHMENT_EMITTED_IDENTITY
+
+        # Host authority must not start until the complete parent value exists.
+        parent_failure_source = raw"""Top::
+ /(x);/
+ E { marker = parse_job(match_group(1), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "result_policy", "replace_marker", "on_error", "fail")); return(marker) }
+"""
+        _, parent_failure_compiled =
+            _julia_staged_enrichment_compile(parent_failure_source)
+        _julia_staged_enrichment_capture(() -> runtime_parse(
+            LinkedSpecRuntimeEngine(
+                parent_failure_compiled;
+                staged_ast_enrichment_seed = seed,
+            ),
+            "x;",
+        ))
+
+        all_values = Any[
+            native_values...,
+            reconstructed_values...,
+            generated_values...,
+            emitted_values...,
+        ]
+        @test length(all_values) == 8
+        @test all(value == first(all_values) for value in all_values)
+        for value in all_values
+            @test value["ast"] == Dict{String,Any}(
+                "kind" => "expression",
+                "text" => "1+2",
+                "top_rule" => "Expr",
+            )
+            @test isempty(value["diagnostics"])
+            @test length(value["sidecars"]) == 1
+            @test only(value["sidecars"])["state"] == "succeeded"
+            @test value["cache"]["entries"] == 1
+            @test value["cache"]["hits"] == 0
+            @test value["cache"]["misses"] == 1
+            @test value["resources"]["total_calls"] == 1
+        end
+
+        @test length(observations["starts"]) == 8
+        @test [row["run_id"] for row in observations["starts"]] == collect(1:8)
+        @test [row["token"] for row in observations["starts"]] ==
+              Any[Dict{String,Any}("run_id" => run_id) for run_id in 1:8]
+        callback_binding_ids = Any[
+            objectid(callback)
+            for row in observations["starts"]
+            for callback in row["callbacks"]
+        ]
+        @test length(callback_binding_ids) == 32
+        @test length(unique(callback_binding_ids)) == 32
+        @test length(observations["callbacks"]) == 8
+        @test [row["run_id"] for row in observations["callbacks"]] == collect(1:8)
+        @test all(row["text"] == "1+2" for row in observations["callbacks"])
+        @test Set(row["run_id"] for row in observations["cancellation_checks"]) ==
+              Set(1:8)
+        @test Set(observations["clock_checks"]) == Set(1:8)
+
+        detached_probe = deepcopy(first(all_values))
+        detached_probe["ast"]["kind"] = "mutated"
+        @test all(value["ast"]["kind"] == "expression" for value in all_values)
+
+        logical_artifacts = String[
+            JSON3.write(to_json(production_parsed)),
+            JSON3.write(Any[
+                Dict{String,Any}("label" => row.label, "family" => row.family)
+                for row in generated_plan
+            ]),
+            production_emitted,
+        ]
+        for artifact in logical_artifacts
+            for forbidden in [
+                "authority_factory",
+                "compiled_authorities",
+                "recursive_authority",
+                "cancellation_token",
+                "mutable_queue",
+                "run_id",
+            ]
+                @test !occursin(forbidden, artifact)
+            end
+        end
+
+        failure_observations = Dict{String,Any}(
+            "starts" => Any[],
+            "callbacks" => Any[],
+            "cancellation_checks" => Any[],
+            "clock_checks" => Any[],
+        )
+        failure_seed = _julia_staged_enrichment_production_seed(
+            failure_observations;
+            failure = true,
+        )
+        native_failure = _julia_staged_enrichment_capture(() -> runtime_parse(
+            LinkedSpecRuntimeEngine(
+                production_compiled;
+                staged_ast_enrichment_seed = failure_seed,
+            ),
+            "1+2;",
+        ))
+        generated_failure = _julia_staged_enrichment_capture(() ->
+            execute_generated_parser_v2(
+                production_compiled,
+                generated_plan,
+                "1+2;",
+                JULIA_STAGED_ENRICHMENT_SOURCE_IDENTITY;
+                staged_ast_enrichment_seed = failure_seed,
+            ))
+        @test _julia_staged_enrichment_error_code(native_failure) ==
+              "staged_child_failed"
+        @test _julia_staged_enrichment_error_code(generated_failure) ==
+              "staged_child_failed"
+
+        state = LinkedSpecJulia._start_staged_ast_enrichment(seed)
+        transaction_error = _julia_staged_enrichment_capture(() ->
+            LinkedSpecJulia._complete_staged_ast_enrichment!(
+                state,
+                raw_marker;
+                transaction_active = true,
+            ))
+        @test _julia_staged_enrichment_error_code(transaction_error) ==
+              "staged_transaction_forbidden"
+        @test _julia_staged_enrichment_error_code(
+            _julia_staged_enrichment_capture(() ->
+                LinkedSpecJulia._complete_staged_ast_enrichment!(
+                    state,
+                    raw_marker;
+                    transaction_active = false,
+                )),
+        ) == "staged_registry_snapshot_invalid"
     end
 
     @testset "neutral provenance accepts exact records and rejects smuggling" begin
@@ -1651,7 +1951,7 @@ Child:: I { marker = parse_job(entry_text(), hash("node_kind", "expression", "pa
               "staged_child_exception"
     end
 
-    @testset "consumer remains outside ordinary and canonical discovery" begin
+    @testset "consumer is admitted exactly once without outward leakage" begin
         ordinary = read(
             joinpath(
                 JULIA_STAGED_ENRICHMENT_REPO_ROOT,
@@ -1673,8 +1973,23 @@ Child:: I { marker = parse_job(entry_text(), hash("node_kind", "expression", "pa
             JULIA_STAGED_ENRICHMENT_REPO_ROOT,
             JULIA_STAGED_ENRICHMENT_CONSUMER,
         ))
-        @test !occursin("staged_ast_enrichment_contract_test.jl", ordinary)
-        @test !occursin(JULIA_STAGED_ENRICHMENT_CONSUMER, canonical)
+        @test count(
+            "include(\"staged_ast_enrichment_contract_test.jl\")",
+            ordinary,
+        ) == 1
+        @test count(
+            "require_tracked_file " * JULIA_STAGED_ENRICHMENT_CONSUMER,
+            canonical,
+        ) == 1
+        @test count(
+            "running exact Julia staged-AST enrichment admission consumer",
+            canonical,
+        ) == 1
+        @test count(
+            "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no " *
+            JULIA_STAGED_ENRICHMENT_CONSUMER,
+            canonical,
+        ) == 1
         umbrella = read(
             joinpath(
                 JULIA_STAGED_ENRICHMENT_REPO_ROOT,
@@ -2248,9 +2563,4 @@ Child:: I { marker = parse_job(entry_text(), hash("node_kind", "expression", "pa
               "staged_deadline_exceeded"
     end
 
-    @testset "LINKEDSPEC_STAGED_AST_ENRICHMENT_JULIA_RED: missing fresh_carriers=[native,reconstructed,generated_plan,emitted_module],production_seam,ordinary_canonical_admission,rollout_parent_closure; recursive_authority=[breadth_first,decreasing_chain,cycle,depth_calls,cancellation_resources,safe_points,source_rebasing] is available" begin
-        # Intentional RED: `.14.7.6.4` owns fresh production carriers,
-        # integration, admission, rollout promotion, and parent closure.
-        @test false
-    end
 end

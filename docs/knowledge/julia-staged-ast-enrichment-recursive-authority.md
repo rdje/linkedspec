@@ -15,13 +15,14 @@ answers:
   - "how are returned markers mapped through staged result policies"
   - "what does FUTURE-PARITY-BACKLOG 14.7.6.3 implement"
 date: 2026-08-27
-status: current private recursive API; dormant and not publicly admitted
+status: current private recursive API; production-carried and privately admitted, but not publicly authored
 tags: [julia, staged-parsing, parse-job, recursion, breadth-first, cancellation, budgets, source-location, private]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.6.3 preserves _enrich_staged_current_depth and adds the separate unexported _enrich_staged_recursively path in julia/src/runtime/StagedAstEnrichment.jl. One invocation copies the parent AST, carries the same frozen registry/plan cache, and processes a queue one complete depth at a time. Every depth resolves, authority-checks, reserves targets, and typed-sorts all jobs before callback one. Only valid marker values inside a successful detached callback result enter the next queue; their paths are derived from the exact replace_marker, replace_field, sibling_field, or append_child stitch destination, so old inert markers are never rediscovered. Each lineage frame contains normalized resolved parser id, selected top, exact UTF-8 payload SHA-256, and full direct or ordered-derived provenance. An exact tuple repeat is staged_cycle. Same parser/top recurrence is accepted only when every child segment is contained by an active segment and total Unicode-scalar extent strictly decreases. Immutable caller authority plus mutable invocation state share one cancellation identity/probe, clock/absolute deadline, remaining steps, seeded total calls, depth/call maxima, cumulative result-node allowance, and UTF-8 diagnostic-byte allowance across every depth. Each callback receives fresh cursor/mark/capture/variable dictionaries and one ephemeral authority view; dispatch and safe points observe cancellation/deadline and spend the stricter invocation/job budget, then the view expires on return or throw. Direct and ordered-derived provenance project child-local positions, half-open spans, and nested diagnostics back to original source; cross-segment spans remain derived_text/concatenate_in_order, invalid local ranges fail closed, and oversized diagnostics become staged_diagnostic_truncated. Marker-shaped results count atomically for the cumulative result-node budget but still undergo deep plain-data and live-key validation. The dormant consumer is 386 GREEN/one .14.7.6.4 fresh-carrier/production/admission/rollout RED. Complete ordinary Julia, 105/105 corpus, neutral 92-mutation governance, Perl 143/143, Rust 1/1 including its independently compiled emitted carrier, Dart 19/19, and all direct governance ledgers pass; Julia remains dormant and ordinary/canonical discovery remains absent."
 root_cause: "Leaf .14.7.6.2 deliberately stopped after one complete marker depth and left returned markers inert. Julia therefore had no lineage-bearing next-depth queue, non-resetting invocation state, callback-lifetime authority, safe-point resource seam, or child-local source projection. Rescanning the stitched AST would have been incorrect because it could reactivate pre-existing inert markers and lose the producing callback's active lineage. The recursive path instead records only marker paths found in each successful detached result and maps them through the exact stitch destination before the next depth is prepared."
+evidence_update_2026_08_27_carrier_admission: "FUTURE-PARITY-BACKLOG.14.7.6.4 preserves the recursive scheduler and exposes it only through a host-only seed on four top-level production routes. Each run receives fresh registry/cache/resource state; the exact consumer is 491/491 and admitted once in ordinary/canonical discovery."
 last_verified: 2026-08-27
 reverify:
-  - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no julia/test/staged_ast_enrichment_contract_test.jl 2>&1 | rg '386 passed, 1 failed|missing fresh_carriers=\[native,reconstructed,generated_plan,emitted_module\]'"
+  - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no julia/test/staged_ast_enrichment_contract_test.jl"
   - "rg -n '_StagedRecursiveAuthority|_evaluate_staged_chain_case|_staged_safe_point|_staged_rebase_(position|span|diagnostic)|_enrich_staged_recursively' julia/src/runtime/StagedAstEnrichment.jl julia/test/staged_ast_enrichment_contract_test.jl"
   - "rg -n 'staged_ast_enrichment_contract_test.jl' julia/test/runtests.jl tools/run_ci_local.sh"
 ---
@@ -69,12 +70,12 @@ ordered source segments remains `derived_text` with
 location, and oversized retained diagnostics become the governed truncation
 sentinel.
 
-This remains dormant private behavior. Leaf `.14.7.6.4` retains fresh native,
-reconstructed, generated-plan, and emitted-module execution authority,
-production integration, ordinary/canonical admission, Julia rollout, and
-backend-parent closure.
+This remains private behavior, but `.14.7.6.4` now carries it through fresh
+native, reconstructed, generated-plan, and emitted-module execution authority
+and admits the exact consumer. Public authoring remains separately owned.
 
 Related: [[julia-staged-ast-enrichment-current-depth-authority]],
 [[julia-staged-ast-enrichment-marker-provenance]],
+[[julia-staged-ast-enrichment-carriers-admission]],
 [[general-staged-ast-enrichment-neutral-contract]],
 [[general-staged-ast-current-boundary]].

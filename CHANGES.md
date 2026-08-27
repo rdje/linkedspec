@@ -10,6 +10,24 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-27 — FUTURE-PARITY-BACKLOG.14.7.6.4 — admit Julia staged enrichment carriers
+
+- Added one private opaque Julia staged-enrichment seed that owns copied logical registry/options and a host
+  factory while creating a fresh callback set, cancellation/clock authority, registry/cache, lineage, and shared
+  resource budget for every top-level execution.
+- Integrated post-parent enrichment into native and reconstructed engines, validated generated-plan execution,
+  and independently included emitted modules. The same seed executes each route twice with eight equal detached
+  results, 32 distinct callback closures, fresh tokens, one cache miss/no hits, and one child call per run.
+- Preserved no-seed markers, current function-body v1, generated-source format, primary staged diagnostics, and
+  live-transaction denial; compiled JSON, generated plans, and emitted logical source retain no host authority.
+- Admitted the stable Julia consumer exactly once in ordinary discovery and canonical CI. It passes 491/491,
+  advances only Julia's rollout to 5/9 and neutral governance to 97 mutations, and leaves Lua, recurrence, public
+  authoring, outward surfaces, other backend behavior, and combined `.14.8` pending.
+- Synchronized neutral snapshots, ADR `0088`, Knowledge, roadmaps, Toolbox, task/index, bounded live records,
+  memory, and the sole-facing mdBook; complete Julia plus admitted Perl/Rust/Dart direct dependents pass.
+- The required notes rollover publishes immutable segment `4989`. ADR `0092` advances only its finite controls
+  from 18/17 to 19 files/18 manifest lines; every byte, aggregate, per-file, routing, and storage rule is unchanged.
+
 ## 2026-08-27 — FUTURE-PARITY-BACKLOG.14.7.6.3 — implement Julia staged recursive authority
 
 - Preserved the private one-depth entrypoint and added a separate breadth-first Julia scheduler that queues only

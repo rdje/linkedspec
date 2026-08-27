@@ -136,17 +136,21 @@ assertion found by `.5.1`; it now keeps the authority target dormant while requi
 input/command once. `.5.4` historically aligned the admitted Perl staged snapshot to 79 mutations plus Rust
 `dormant_red`; `.14.7.4.4` supersedes that lifecycle snapshot with Rust admission and 84 mutations, Dart
 `.14.7.5.0` historically advances only dormant lifecycle to 85, and `.14.7.5.4` admits Dart at 90. Julia
-`.14.7.6.0-.3` now freeze and implement its private declaration, current-depth boundary, and recursive authority. Exact scalar assignment
+`.14.7.6.0-.4` now implement and privately admit its declaration, current-depth boundary, recursive authority,
+and fresh production carriers. Exact scalar assignment
 lowers to one dedicated inert marker; native capture offsets become Unicode-scalar direct/ordered-derived
 provenance; and native, reconstructed, generated-plan, and independently included emitted routes agree. A separate
 caller-frozen pure resolver/cache reserves and orders one complete depth, isolates sibling state, detaches results,
 and applies every result/failure policy. A separate private breadth-first entrypoint now queues only successfully
 detached returned markers by exact stitch path, enforces active lineage and non-resetting resources, expires safe
-points, and projects direct/ordered-derived child locations. The consumer is 386 GREEN plus one `.14.7.6.4`
-fresh-carrier/production/admission/rollout RED and stays outside ordinary/canonical discovery. Governance remains 92
-mutations with `julia=dormant_red`; rollout, formats, and public/outward behavior do not move. Mandatory engineering-notes segment
-`4990` is finitely authorized at 18 files / 17 manifest lines by ADR `0090`. Its mandatory change-history rollover
-publishes segment `4990`; ADR `0091` advances only that store's finite controls to 23 files / 22 manifest lines.
+points, and projects direct/ordered-derived child locations. An opaque host-only seed starts a new registry/cache/
+recursive authority per native, reconstructed, generated-plan, or independently included emitted execution and
+enriches only after the complete parent value. The consumer is 491/491 and runs once in ordinary/canonical
+discovery. Governance is 97 mutations with Julia complete at rollout 5/9; formats and public/outward behavior do
+not move, and Lua `.14.7.7` is next. Mandatory engineering-notes segment
+`4989` is finitely authorized at 19 files / 18 manifest lines by ADR `0092`; every byte, aggregate, per-file,
+routing, and storage control remains unchanged. The earlier mandatory change-history rollover publishes segment
+`4990`; ADR `0091` advances only that separate store's finite controls to 23 files / 22 manifest lines.
 
 Rust's exact four-test consumer now runs under ordinary Cargo discovery and as a required canonical-CI leg. It
 proves the immutable value core and projection boundary across native, reconstructed, and generated-plan execution;

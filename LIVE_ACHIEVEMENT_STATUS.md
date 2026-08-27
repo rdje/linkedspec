@@ -2,21 +2,23 @@
 
 ## Current Activity
 
-- Julia staged `.14.7.6.3` is focused-signoff-complete from clean current-depth commit `8af7f14b`.
-- Its private breadth-first recurrence, strict lineage, shared resources, expiring callback safe points, and
-  typed source rebasing leave the dormant consumer at 386 GREEN/one exact `.4` RED.
-- Current function-body v1, production carriers, ordinary/canonical discovery, rollout,
-  generated format, public/outward behavior, admitted backends, and Lua remain fixed.
+- Julia staged `.14.7.6.4` is canonical-signoff-complete from clean recursive-authority commit `108003ee`.
+- Its fresh authority executes native/reconstructed/generated-plan/emitted routes twice, the stable consumer is
+  admitted at 491/491, and Julia rollout is complete at 5/9 with 97 neutral mutations.
+- Current function-body v1, generated format, public/outward behavior, other backends, and Lua remain fixed.
 
 ## Latest Completed Slice
 
-- `.14.7.6.3` is fully verified for its intended atomic handoff; Git will assign the commit identity.
+- `.14.7.6.4` is fully verified for its intended atomic handoff; Git will assign the commit identity.
 
 ## Next Action
 
-- Commit `.14.7.6.3`, clear and verify the brief/clean handoff, then activate carrier/admission closeout `.14.7.6.4`.
+- Commit `.14.7.6.4`, clear and verify the brief/clean handoff, then activate shared Lua dormant RED `.14.7.7.0`.
 
 ## Recent Completions
+
+- `2026-08-27` — `.14.7.6.4` adds fresh Julia staged authority across four production routes, admits the stable
+  491/491 consumer once, advances only Julia rollout to 5/9 and governance to 97, and closes backend parent `.6`.
 
 - `2026-08-27` — `.14.7.6.3` adds Julia private breadth-first recursion, exact lineage/decrease, shared resources,
   expiring safe points, and typed source rebasing at 386 GREEN/one `.4` RED without carrier or rollout movement.
@@ -71,9 +73,6 @@
 
 - `2026-08-26` — `TRACE-OBSERVABILITY.5.2` restores one existing child dispatch/result pair for normal and gap-
   aware interpreted/generated entry; trace controls pass 11/11 with unchanged results.
-
-- `2026-08-26` — `TRACE-OBSERVABILITY.5.1` restores exact ordinary/traced progressive static-validation equality
-  with one existing-validator call and a diagnostic-equality regression; valid trace results remain unchanged.
 
 ## History
 

@@ -764,10 +764,9 @@ and detached; emitted logical source serializes none of the live authority. The 
 exports, check-cfg registration, and conditional dead-code allowance are gone. `TRACE-OBSERVABILITY.5.1-.4` are complete: traced progressive
 validation and gap-aware child-dispatch parity are restored, while the private authority stays dormant beside the
 one admitted contract route. `.5.4` historically aligned the Perl snapshot to 79 mutations plus Rust
-`dormant_red`; Rust admission now advances the neutral oracle to 84 mutations and promotes only Rust. Dart has
-since reached the same private admission boundary; Julia's exact final-path consumer is dormant with private
-declaration, current-depth, and recursive authority implemented under `.14.7.6.0-.3`, while Julia carrier/
-admission and the Lua consumer remain pending under `.14.7.6.4-.7`. Dart
+`dormant_red`; Rust admission now advances the neutral oracle to 84 mutations and promotes only Rust. Dart and
+Julia have since reached the same private admission boundary; the Lua consumer remains pending under `.14.7.7`.
+Dart
 `.14.7.5.0-.4` freeze one exact historical `test_dormant/` boundary, lower exact
 assignment-form `parse_job` to a live-proven private marker, and add a separate caller-frozen pure resolver/cache/
 recursive policy engine. It selects default top before identity, caches plans only, prepares complete depths,
@@ -775,17 +774,19 @@ reserves cross-plan targets, isolates sibling state, detaches results, implement
 markers breadth-first, enforces strict lineage/shared resources, expires safe points, and rebases direct/derived
 source locations. A host-only seed starts fresh registry/cache/recursive authority after the parent AST through
 native, reconstructed, generated-plan, and independently executed emitted routes. The final-path consumer passes
-19/19 in ordinary/canonical admission. Julia `.14.7.6.0-.3` preserves the unchanged function-body-v1 path while
+19/19 in ordinary/canonical admission. Julia `.14.7.6.0-.4` preserves the unchanged function-body-v1 path while
 lowering only exact scalar assignment-form `parse_job` to an inert dedicated node. Native Julia capture offsets
 feed the typed source authority directly, so Unicode-scalar direct/ordered-derived provenance requires no copied-
 text search; four logical routes return the same detached marker. A separate tuple-frozen caller-prepared registry
 then performs pure selected-top-before-id resolution, plan-only caching, complete-depth target reservation and
 typed order, sibling isolation, detachment, and every result/failure policy. A separate recursive path now performs
 complete breadth-first depths with exact lineage, non-resetting bounds, expiring safe points, and source projection.
-The explicit consumer is 386 GREEN plus one `.14.7.6.4` carrier/admission RED. Governance stays at 92 mutations
-with Julia `dormant_red`; generated format and public behavior remain unchanged, and `.14.7.6.4` is next.
-Mandatory engineering-notes segment `4990` is finitely authorized at 18 files / 17
-manifest lines by ADR `0090`. Dart dormant closeout's mandatory change-history segment `4990` is finitely
+An opaque host-only seed starts a fresh registry/cache/recursive authority for every native, reconstructed,
+generated-plan, and independently included emitted execution, then enriches only after the complete parent value.
+The explicit consumer is 491/491 and admitted once in ordinary/canonical topology. Governance is 97 mutations
+with Julia complete; generated format and public behavior remain unchanged, and Lua `.14.7.7` is next.
+Mandatory engineering-notes segment `4989` is finitely authorized at 19 files / 18
+manifest lines by ADR `0092`. Dart dormant closeout's mandatory change-history segment `4990` is finitely
 authorized at 23 files / 22 manifest lines by ADR `0091`; no other pressure ceiling changes.
 
 Progressive dispatch is a separate synchronous path under `FUTURE-PARITY-BACKLOG.14.6`. Audit `.14.6.0` proves

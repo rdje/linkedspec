@@ -272,6 +272,7 @@ function execute_generated_parser_v2(
     semantic_observation_sink::Union{Nothing,RuntimeSemanticObservationSink} = nothing,
     actual_contract::AbstractString = GENERATED_SOURCE_CONTRACT,
     bounded_child_parse_authority = nothing,
+    staged_ast_enrichment_seed = nothing,
 )
     families = validate_generated_rule_plan_v2(
         compiled,
@@ -286,6 +287,7 @@ function execute_generated_parser_v2(
             LinkedSpecRuntimeEngine(
                 compiled;
                 bounded_child_parse_authority = bounded_child_parse_authority,
+                staged_ast_enrichment_seed = staged_ast_enrichment_seed,
             ),
             input;
             top_rule = top_rule,
@@ -305,6 +307,7 @@ function execute_generated_parser_v2(
             rethrow()
         end
         error isa GeneratedSourceException && rethrow()
+        error isa StagedAstEnrichmentException && rethrow()
         error isa _GeneratedDiagnosticOutputSinkFailure && throw(error.error)
         error isa RuntimeExitNow && rethrow()
         if error isa RuntimeInterpreterException && error.diagnostic !== nothing &&
@@ -335,6 +338,7 @@ function execute_generated_parser_with_trace_v2(
     semantic_observation_sink::Union{Nothing,RuntimeSemanticObservationSink} = nothing,
     actual_contract::AbstractString = GENERATED_SOURCE_CONTRACT,
     bounded_child_parse_authority = nothing,
+    staged_ast_enrichment_seed = nothing,
 )
     return execute_generated_parser_v2(
         compiled,
@@ -347,6 +351,7 @@ function execute_generated_parser_with_trace_v2(
         semantic_observation_sink = semantic_observation_sink,
         actual_contract = actual_contract,
         bounded_child_parse_authority = bounded_child_parse_authority,
+        staged_ast_enrichment_seed = staged_ast_enrichment_seed,
     )
 end
 
@@ -695,6 +700,7 @@ function execute(
     diagnostic_output_sink = nothing,
     semantic_observation_sink = nothing,
     bounded_child_parse_authority = nothing,
+    staged_ast_enrichment_seed = nothing,
 )
     return LinkedSpecJulia.execute_generated_parser_v2(
         _COMPILED_SPEC,
@@ -706,6 +712,7 @@ function execute(
         semantic_observation_sink = semantic_observation_sink,
         actual_contract = LINKEDSPEC_GENERATED_SOURCE_CONTRACT,
         bounded_child_parse_authority = bounded_child_parse_authority,
+        staged_ast_enrichment_seed = staged_ast_enrichment_seed,
     )
 end
 
@@ -717,6 +724,7 @@ function execute_with_trace(
     diagnostic_output_sink = nothing,
     semantic_observation_sink = nothing,
     bounded_child_parse_authority = nothing,
+    staged_ast_enrichment_seed = nothing,
 )
     return LinkedSpecJulia.execute_generated_parser_with_trace_v2(
         _COMPILED_SPEC,
@@ -730,6 +738,7 @@ function execute_with_trace(
         semantic_observation_sink = semantic_observation_sink,
         actual_contract = LINKEDSPEC_GENERATED_SOURCE_CONTRACT,
         bounded_child_parse_authority = bounded_child_parse_authority,
+        staged_ast_enrichment_seed = staged_ast_enrichment_seed,
     )
 end
 

@@ -6,9 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-27` (progressive `.14.6`, staged neutral `.14.7.0-.2`, complete Perl `.14.7.3.0-.4`,
-  Rust `.14.7.4.0-.4`, and Dart `.14.7.5.0-.4` are closed; Julia dormant through recursive authority
-  `.14.7.6.0-.3` is complete and carrier/admission closeout `.14.7.6.4` is next after atomic `.3`)
+- Last updated: `2026-08-27` (progressive `.14.6`, staged neutral `.14.7.0-.2`, and complete Perl `.14.7.3`,
+  Rust `.14.7.4`, Dart `.14.7.5`, and Julia `.14.7.6` parents are closed; shared Lua `.14.7.7` is next)
 - Owner: repo-local workflow
 
 ## Goal
@@ -109,14 +108,14 @@ perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG
 recurrence, and public no-drift. Staged audit/diagnostic/neutral `.14.7.0-.2` are committed; Perl `.3`, Rust `.4`,
 and Dart `.5` each privately implement and admit the complete marker/provenance, caller-frozen authority,
 breadth-first recursion, fresh native/reconstructed/generated/emitted carriers, and exact ordinary/canonical
-consumer. Neutral governance is now 92 mutations with those three backends complete. Julia `.14.7.6.0-.3` freeze
-and implement its still-dormant private declaration, current-depth, and recursive boundaries: an exclusive live-
+consumer. Julia `.14.7.6.0-.4` now implement and admit the same boundary: an exclusive live-
 proven marker, caller-frozen pure resolution/cache, complete-depth breadth-first execution, exact active lineage,
 non-resetting shared resources, expiring safe points, typed source rebasing, detached atomic stitching, and every
-result/failure policy. The consumer is 386 GREEN/one exact `.4` carrier/admission RED and remains absent from
-ordinary/canonical discovery. Julia rollout, v1/v2 formats, public/outward behavior, and the neutral 92-mutation
-count do not move. `.14.7.6.4` is next after atomic `.3`; shared Lua `.7`, recurrence `.8`,
-public `.9`, recomposition `.10`, and combined program-wide `.14.8` retain their frozen owners.
+result/failure policy. One opaque host seed creates fresh authority across native/reconstructed/generated-plan/
+emitted production routes after the parent value. The consumer is 491/491 and registered once in ordinary/
+canonical discovery. Julia rollout is complete at 5/9 and neutral governance is 97 mutations. Function-body v1,
+generated v2, and public/outward behavior do not move. Shared Lua `.7` is next; recurrence `.8`, public `.9`,
+recomposition `.10`, and combined program-wide `.14.8` retain their frozen owners.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private

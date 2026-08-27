@@ -2,7 +2,7 @@
   "format": 1,
   "contract_id": "linkedspec-staged-ast-enrichment-v1",
   "task_owner": "FUTURE-PARITY-BACKLOG.14.7.2",
-  "status": "neutral_perl_rust_and_dart_complete_julia_dormant_red_lua_pending",
+  "status": "neutral_perl_rust_dart_and_julia_complete_lua_pending",
   "expected_counts": {
     "registry_entries": 4,
     "sources": 2,
@@ -24,7 +24,7 @@
     "diagnostics": 37,
     "rollout_legs": 9,
     "ownership_rows": 35,
-    "mutations": 92
+    "mutations": 97
   },
   "authored_surface": {
     "example": "job_marker = parse_job(text_expr, hash(\"node_kind\", \"expression\", \"payload_kind\", \"embedded_expression\", \"spec\", \"expr-v1\", \"top\", \"Expr\", \"result_policy\", \"sibling_field\", \"into\", \"expression_ast\", \"on_error\", \"fail\"))",
@@ -45,7 +45,7 @@
       "into",
       "required_capabilities"
     ],
-    "availability": "neutral executable authority with private Perl, Rust, and Dart carriers complete; the Julia general carrier contract is dormant RED; PUC Lua, LuaJIT, recurring, and public authoring remain pending under FUTURE-PARITY-BACKLOG.14.7.6-.10"
+    "availability": "neutral executable authority with private Perl, Rust, Dart, and Julia carriers complete; PUC Lua, LuaJIT, recurring, and public authoring remain pending under FUTURE-PARITY-BACKLOG.14.7.7-.10"
   },
   "policy": {
     "authority": "the caller freezes aliases, declaring-spec-relative candidates, ordered search-root candidates, ordered provider candidates, resolves every statically declared selector, and freezes immutable already-compiled registry entries before authored execution",
@@ -791,7 +791,7 @@
     {"backend": "perl", "owner": "FUTURE-PARITY-BACKLOG.14.7.3.0", "path": "t/staged_ast_enrichment_perl_contract.t", "status": "complete"},
     {"backend": "rust", "owner": "FUTURE-PARITY-BACKLOG.14.7.4.0", "path": "rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs", "status": "complete"},
     {"backend": "dart", "owner": "FUTURE-PARITY-BACKLOG.14.7.5.0", "path": "dart/test/staged_ast_enrichment_contract_test.dart", "dormant_path": "dart/test_dormant/staged_ast_enrichment_contract_test.dart", "status": "complete"},
-    {"backend": "julia", "owner": "FUTURE-PARITY-BACKLOG.14.7.6.0", "path": "julia/test/staged_ast_enrichment_contract_test.jl", "status": "dormant_red"},
+    {"backend": "julia", "owner": "FUTURE-PARITY-BACKLOG.14.7.6.0", "path": "julia/test/staged_ast_enrichment_contract_test.jl", "status": "complete"},
     {"backend": "lua", "owner": "FUTURE-PARITY-BACKLOG.14.7.7.0", "path": "lua/test/staged_ast_enrichment_contract_test.lua", "status": "pending_absent"}
   ],
   "runtime_routes": [
@@ -867,7 +867,7 @@
     {"order": 2, "leg": "perl", "owner": "FUTURE-PARITY-BACKLOG.14.7.3", "status": "complete", "paths": ["t/staged_ast_enrichment_perl_contract.t"]},
     {"order": 3, "leg": "rust", "owner": "FUTURE-PARITY-BACKLOG.14.7.4", "status": "complete", "paths": ["rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs"]},
     {"order": 4, "leg": "dart", "owner": "FUTURE-PARITY-BACKLOG.14.7.5", "status": "complete", "paths": ["dart/test/staged_ast_enrichment_contract_test.dart"]},
-    {"order": 5, "leg": "julia", "owner": "FUTURE-PARITY-BACKLOG.14.7.6", "status": "pending", "paths": ["julia/test/staged_ast_enrichment_contract_test.jl"]},
+    {"order": 5, "leg": "julia", "owner": "FUTURE-PARITY-BACKLOG.14.7.6", "status": "complete", "paths": ["julia/test/staged_ast_enrichment_contract_test.jl"]},
     {"order": 6, "leg": "puc_lua", "owner": "FUTURE-PARITY-BACKLOG.14.7.7", "status": "pending", "paths": ["lua/test/staged_ast_enrichment_contract_test.lua"]},
     {"order": 7, "leg": "luajit", "owner": "FUTURE-PARITY-BACKLOG.14.7.7", "status": "pending", "paths": ["lua/test/staged_ast_enrichment_contract_test.lua"]},
     {"order": 8, "leg": "recurring", "owner": "FUTURE-PARITY-BACKLOG.14.7.8", "status": "pending", "paths": ["tools/check_staged_ast_enrichment_six_runtime.sh"]},
@@ -898,6 +898,12 @@
       "ordinary_invocation": "(cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/staged_ast_enrichment_contract_test.dart)",
       "registration_marker": "running exact Dart staged-AST enrichment admission consumer",
       "invocation": "(cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/staged_ast_enrichment_contract_test.dart)"
+    },
+    "julia_admission": {
+      "consumer_path": "julia/test/staged_ast_enrichment_contract_test.jl",
+      "ordinary_invocation": "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no julia/test/staged_ast_enrichment_contract_test.jl",
+      "registration_marker": "running exact Julia staged-AST enrichment admission consumer",
+      "invocation": "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no julia/test/staged_ast_enrichment_contract_test.jl"
     },
     "storage_policy": "all Python cache, temporary, and process data stays under repository-derived project storage",
     "tracked_required": true
@@ -1013,6 +1019,7 @@
     "rollout_backend",
     "rollout_rust",
     "rollout_dart",
+    "rollout_julia",
     "rollout_public",
     "canonical_contract",
     "canonical_checker",
@@ -1031,6 +1038,10 @@
     "dart_admission_ordinary",
     "dart_admission_marker",
     "dart_admission_invocation",
+    "julia_admission_consumer",
+    "julia_admission_ordinary",
+    "julia_admission_marker",
+    "julia_admission_invocation",
     "ownership"
   ]
 }

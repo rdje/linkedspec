@@ -389,6 +389,127 @@ struct _StagedRecursiveOutcome
     resources::_StagedRecursiveResources
 end
 
+"""Opaque host-only recipe for one fresh staged authority per execution."""
+struct StagedAstEnrichmentSeed
+    _snapshot::Dict{String,Any}
+    _options::Dict{String,Any}
+    _authority_factory::Function
+end
+
+function _staged_seed_callback_names(snapshot)
+    object = _staged_snapshot_object(snapshot, "shape")
+    names = String[]
+    for raw in _staged_snapshot_list(get(object, "entries", nothing), "entries")
+        row = _staged_snapshot_object(raw, "entries")
+        name = _staged_required_string(row, "compiled_authority")
+        name in names && throw(_staged_snapshot_exception("compiled_authority"))
+        push!(names, name)
+    end
+    isempty(names) && throw(_staged_snapshot_exception("compiled_authority"))
+    return names
+end
+
+function StagedAstEnrichmentSeed(;
+    snapshot,
+    options,
+    authority_factory::Function,
+)
+    owned_snapshot = _staged_copy_plain(snapshot)
+    owned_options = _staged_copy_plain(options)
+
+    # Validate all logical registry and option bytes eagerly without invoking
+    # the host factory or retaining the temporary callbacks/cache.
+    placeholder = (_request, _context) -> _staged_child_success(nothing)
+    callback_names = _staged_seed_callback_names(owned_snapshot)
+    _freeze_staged_registry(
+        owned_snapshot,
+        Dict{String,Function}(name => placeholder for name in callback_names),
+    )
+    _parse_staged_enrichment_options(owned_options)
+
+    return StagedAstEnrichmentSeed(
+        owned_snapshot,
+        owned_options,
+        authority_factory,
+    )
+end
+
+Base.show(io::IO, ::StagedAstEnrichmentSeed) =
+    print(io, "StagedAstEnrichmentSeed(<opaque>)")
+
+mutable struct _StagedAstEnrichmentExecutionState
+    registry::_FrozenStagedRegistry
+    options::Dict{String,Any}
+    authority::_StagedRecursiveAuthority
+    active::Bool
+end
+
+Base.show(io::IO, ::_StagedAstEnrichmentExecutionState) =
+    print(io, "StagedAstEnrichmentExecutionState(<opaque>)")
+
+function _start_staged_ast_enrichment(seed::StagedAstEnrichmentSeed)
+    authority = try
+        seed._authority_factory()
+    catch error
+        error isa StagedAstEnrichmentException && rethrow()
+        throw(_staged_snapshot_exception("authority_factory"))
+    end
+    authority isa AbstractDict ||
+        throw(_staged_snapshot_exception("authority_factory"))
+    all(key isa AbstractString for key in keys(authority)) ||
+        throw(_staged_snapshot_exception("authority_factory"))
+    actual = Set(String(key) for key in keys(authority))
+    actual == Set([
+        "compiled_authorities",
+        "recursive_authority",
+        "cancelled",
+        "clock",
+    ]) || throw(_staged_snapshot_exception("authority_factory"))
+    compiled_authorities = authority["compiled_authorities"]
+    compiled_authorities isa AbstractDict ||
+        throw(_staged_snapshot_exception("compiled_authority"))
+    cancelled = authority["cancelled"]
+    clock = authority["clock"]
+    cancelled isa Function ||
+        throw(_staged_snapshot_exception("cancelled_callback"))
+    clock isa Function || throw(_staged_snapshot_exception("clock_callback"))
+
+    return _StagedAstEnrichmentExecutionState(
+        _freeze_staged_registry(seed._snapshot, compiled_authorities),
+        _staged_copy_plain(seed._options),
+        _StagedRecursiveAuthority(
+            _staged_copy_plain(authority["recursive_authority"]),
+            cancelled,
+            clock,
+        ),
+        true,
+    )
+end
+
+function _complete_staged_ast_enrichment!(
+    state::_StagedAstEnrichmentExecutionState,
+    ast;
+    transaction_active::Bool,
+)
+    state.active ||
+        throw(_staged_snapshot_exception("expired_execution_state"))
+    state.active = false
+    transaction_active && throw(_staged_enrichment_exception(
+        "staged_transaction_forbidden",
+        "execute";
+        fields = Pair{String,Any}[
+            "origin" => "julia_runtime:post_ast",
+            "effect" => "staged_parse_job_declaration",
+        ],
+    ))
+    return to_json(_enrich_staged_recursively(
+        state.registry,
+        ast,
+        state.options,
+        state.authority,
+    ))
+end
+
 function to_json(outcome::_StagedRecursiveOutcome)
     return Dict{String,Any}(
         "ast" => _staged_copy_plain(outcome.ast),

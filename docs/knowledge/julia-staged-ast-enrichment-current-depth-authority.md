@@ -17,14 +17,15 @@ answers:
   - "does Julia recursively execute returned staged markers"
   - "what does FUTURE-PARITY-BACKLOG 14.7.6.2 implement"
 date: 2026-08-27
-status: current private one-depth API; recursive sibling API current; dormant and not publicly admitted
+status: current private one-depth API; recursive sibling is production-carried and privately admitted
 tags: [julia, staged-parsing, parse-job, registry, cache, result-policy, failure-policy, detachment, private]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.6.2 adds the unexported runtime/StagedAstEnrichment.jl authority and extends the same dormant consumer. _FrozenStagedRegistry accepts only deeply owned caller-completed candidate outcomes plus an exact set of already-compiled opaque callbacks; its logical entries, rule/capability/policy sets, and candidate groups are immutable tuples. Resolution is pure alias/declaring-relative/ordered-root/provider selection with exact narrowing diagnostics and no ambient loading. Default top precedes canonical v2 job identity. The registry-local cache stores immutable callback plans only under the exact neutral eight-field identity. One complete depth prepares every job and reserves every stitch target before callbacks, orders typed paths/provenance/job ids, gives siblings fresh cursor/mark/capture/variable state, detaches finite acyclic node-bounded results, denies live-authority keys even inside marker-shaped callback results, and atomically applies all four result plus three failure policies. Child failures and results are never cached; valid returned markers remain inert. The consumer is 309 GREEN/one .14.7.6.3 recurrence/bounds/safe-point/source-rebasing RED. Function-body v1, marker/provenance bytes, four logical routes, discovery, rollout, neutral 92-mutation governance, formats, public, and outward truth remain unchanged."
 evidence_update_2026_08_27_recursive_authority: "FUTURE-PARITY-BACKLOG.14.7.6.3 preserves _enrich_staged_current_depth and adds a separate recursive sibling API. Returned markers remain inert when the one-depth entrypoint is selected; only _enrich_staged_recursively records successfully detached returned-marker paths with active lineage and prepares later depths. The same consumer is now 386 GREEN/one .14.7.6.4 carrier/production/admission/rollout RED."
+evidence_update_2026_08_27_carrier_admission: "FUTURE-PARITY-BACKLOG.14.7.6.4 preserves the one-depth API and starts the recursive sibling only through a fresh host-only production seed after the parent result. The exact consumer is 491/491 and admitted once in ordinary/canonical discovery."
 root_cause: "FUTURE-PARITY-BACKLOG.14.7.6.1 intentionally stopped after inert marker construction. Julia had no private general-v2 frozen snapshot, pure selector, selected-top-before-id function, immutable-plan cache, complete-depth preflight/order seam, fresh sibling context, detachment boundary, or policy stitcher. The existing parser/StagedParserRegistry.jl is the deliberately narrow function-body-v1 adapter and cannot safely be widened into this authority."
 last_verified: 2026-08-27
 reverify:
-  - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no julia/test/staged_ast_enrichment_contract_test.jl 2>&1 | rg '386 passed, 1 failed|missing fresh_carriers=\\[native,reconstructed,generated_plan,emitted_module\\]'"
+  - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no julia/test/staged_ast_enrichment_contract_test.jl"
   - "rg -n '_freeze_staged_registry|_resolve_staged_pre_registered|_staged_job_identity|_staged_cache_identity|_staged_current_depth_order|_enrich_staged_current_depth' julia/src/runtime/StagedAstEnrichment.jl julia/test/staged_ast_enrichment_contract_test.jl"
   - "rg -n 'staged_ast_enrichment_contract_test.jl' julia/test/runtests.jl tools/run_ci_local.sh"
 ---
@@ -73,11 +74,12 @@ an inert marker could become an authority-smuggling envelope.
 Returned markers deliberately remain inert on this one-depth API. Leaf
 `.14.7.6.3` adds a separate breadth-first recursive sibling API with active
 lineage, shared resources, callback safe points/expiry, and source rebasing;
-it does not alter this entrypoint. Leaf `.4` retains fresh native,
-reconstructed, generated, and emitted carrier authority plus admission.
+it does not alter this entrypoint. Leaf `.4` now carries that sibling through
+fresh native, reconstructed, generated, and emitted authority plus admission.
 
 Related: [[julia-staged-ast-enrichment-marker-provenance]],
 [[julia-staged-ast-enrichment-recursive-authority]],
+[[julia-staged-ast-enrichment-carriers-admission]],
 [[julia-staged-ast-enrichment-dormant-red]],
 [[general-staged-ast-enrichment-neutral-contract]],
 [[general-staged-ast-current-boundary]],

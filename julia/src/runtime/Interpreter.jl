@@ -178,6 +178,7 @@ struct LinkedSpecRuntimeEngine
         Nothing,
         BoundedChildParseAuthority.ProgressiveExecutionSeed,
     }
+    staged_ast_enrichment_seed::Union{Nothing,StagedAstEnrichmentSeed}
 end
 
 """Return a fresh detached catalog for all 92 source-boundary projections."""
@@ -229,6 +230,7 @@ function LinkedSpecRuntimeEngine(
     spec_name = nothing,
     spec_path = nothing,
     bounded_child_parse_authority = nothing,
+    staged_ast_enrichment_seed = nothing,
     kwargs...,
 )
     _reject_removed_runtime_options(kwargs; spec_name = spec_name, spec_path = spec_path)
@@ -240,6 +242,12 @@ function LinkedSpecRuntimeEngine(
               BoundedChildParseAuthority.ProgressiveExecutionSeed)
         throw(ArgumentError(
             "bounded_child_parse_authority must be a private progressive execution seed",
+        ))
+    end
+    if staged_ast_enrichment_seed !== nothing &&
+            !(staged_ast_enrichment_seed isa StagedAstEnrichmentSeed)
+        throw(ArgumentError(
+            "staged_ast_enrichment_seed must be a private staged execution seed",
         ))
     end
     try
@@ -273,6 +281,7 @@ function LinkedSpecRuntimeEngine(
         spec_name === nothing ? nothing : String(spec_name),
         spec_path === nothing ? nothing : String(spec_path),
         bounded_child_parse_authority,
+        staged_ast_enrichment_seed,
     )
 end
 
@@ -1532,11 +1541,26 @@ function runtime_parse(
     trace_exit_details = "error=unknown"
     try
         result = _execute_runtime_rule!(engine, label, 0, context)
+        parent_value = _runtime_copy(result.value)
+        final_value = if engine.staged_ast_enrichment_seed === nothing
+            parent_value
+        else
+            staged_ast_enrichment_state = _start_staged_ast_enrichment(
+                engine.staged_ast_enrichment_seed,
+            )
+            _complete_staged_ast_enrichment!(
+                staged_ast_enrichment_state,
+                parent_value;
+                transaction_active = any(
+                    !isempty(frame.tokens) for frame in context.recognition_frames
+                ),
+            )
+        end
         parse_result = RuntimeParseResult(
             result.matched,
-            _runtime_copy(result.value),
+            _runtime_copy(final_value),
             # Backend-neutral parser output wraps the top-rule value exactly once.
-            Any[_runtime_copy(result.value)],
+            Any[_runtime_copy(final_value)],
             context.cursor_codeunit,
             codeunit_offset_to_char_offset(context.input, context.cursor_codeunit),
             RuntimeLifecycleEvent[context.lifecycle_events...],

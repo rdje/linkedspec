@@ -8,12 +8,15 @@ answers:
   - "how do admitted staged consumers prevent stale backend lifecycle projections"
 date: 2026-08-26
 status: current
-tags: [staged-parsing, conformance, tests, lifecycle, mutations, drift, perl, rust, dart]
+tags: [staged-parsing, conformance, tests, lifecycle, mutations, drift, perl, rust, dart, julia]
 evidence: "The first exact FUTURE-PARITY-BACKLOG.14.7.5.0 canonical candidate passed the independent 85-mutation neutral checker, then the admitted Perl consumer failed only its three pre-Dart current-projection values: status, mutation count, and Dart pending_absent lifecycle. Exact scan found the same values in the admitted Rust consumer. Both consumers intentionally snapshot the entire neutral contract, so backend lifecycle movement requires their projection literals to move even when their own runtime behavior is unchanged. The task-owned repair changes only those six literals/messages; production, carriers, policies, rollout, generated format, and outward behavior remain unchanged."
+evidence_update_2026_08_27_julia_admission: "Julia admission .14.7.6.4 applies the same rule: the neutral contract advances Julia to complete, rollout to 5/9, and governance to 97 mutations, so the admitted Perl, Rust, and Dart snapshot literals move together with the Julia consumer. Their production behavior is unchanged and all four admitted consumers pass."
 reverify:
   - "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py"
   - "prove -Iperl -It/lib t/staged_ast_enrichment_perl_contract.t"
   - "bash tools/run_cargo_local.sh test --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test staged_ast_enrichment_contract"
+  - "cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/staged_ast_enrichment_contract_test.dart"
+  - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no julia/test/staged_ast_enrichment_contract_test.jl"
 ---
 
 # Staged consumer current-projection lockstep
@@ -24,9 +27,9 @@ therefore changes three cross-consumer projection values: the aggregate status s
 count, and that backend's lifecycle row.
 
 This is an intentional cross-check, not backend behavior coupling. Perl and Rust runtime semantics do not change
-when Dart enters dormant RED; only their current neutral snapshot must stop claiming Dart is absent. Any future
-backend lifecycle transition must run every already-admitted staged consumer, not only the independent checker and
-the backend currently moving.
+when another backend lifecycle moves; only their current neutral snapshot changes. Julia admission repeats the
+same cross-check over Perl, Rust, and Dart. Any future backend lifecycle transition must run every already-admitted
+staged consumer, not only the independent checker and the backend currently moving.
 
 Related: [[general-staged-ast-enrichment-neutral-contract]], [[dart-staged-ast-enrichment-dormant-red]], and ADR
 `0088`. Owner: [[FUTURE-PARITY-BACKLOG]] `.14.7.5.0`.

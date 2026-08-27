@@ -2,8 +2,8 @@
 
 - Date: 2026-08-25
 - Status: accepted architecture; executable neutral authority complete under `FUTURE-PARITY-BACKLOG.14.7.2`;
-  Perl, Rust, and Dart private behavior/admission complete; Julia marker/provenance and current-depth authority are
-  dormant under `.14.7.6.0-.2`, with `.3` recursion next; later admission/public authoring remain pending
+  Perl, Rust, Dart, and Julia private behavior/admission complete; Lua, recurrence, public authoring, and final
+  recomposition remain pending
 - Tags: architecture, staged-parsing, parse-job, source-location, registry, queue, policies, diagnostics, portability
 
 ## Context
@@ -128,15 +128,14 @@ cancellation/deadline/budget state, mutable queues, or host handles.
 4 registry entries; 2 sources; 8 provenance, 3 deterministic-id, 8 resolution, 6 authority, 10 cache, 4 queue,
 3 isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases; 37 diagnostics; 5 backend
 consumers over 6 runtime routes; 4 carrier requirements; 10 outward guards; 9 rollout legs; 35 exact owners; and
-92 reason-checked mutations after Julia dormant-boundary activation.
+97 reason-checked mutations after Julia carrier admission.
 
-Neutral, Perl, Rust, and Dart rollout are complete. Julia is `dormant_red` with rollout pending; PUC Lua, LuaJIT,
-six-runtime recurrence, and public authoring/no-drift remain pending under `.14.7.6-.9`; `.14.7.10` owns independent
+Neutral, Perl, Rust, Dart, and Julia rollout are complete. PUC Lua, LuaJIT, six-runtime recurrence, and public
+authoring/no-drift remain pending under `.14.7.7-.9`; `.14.7.10` owns independent
 recomposition. The checker is an always-on canonical-CI input. It guards ten facades/schema/semantic/MCP/CLI/
-README paths against premature public exposure, requires the Perl, Rust, and Dart consumers exactly once in
-ordinary and canonical discovery, rejects the former Dart dormant path, requires Julia's final-path dormant file
-while proving it absent from ordinary/canonical discovery, and keeps the Lua consumer absent until its RED owner
-activates.
+README paths against premature public exposure, requires the Perl, Rust, Dart, and Julia consumers exactly once
+in ordinary and canonical discovery, rejects the former Dart dormant path, and keeps the Lua consumer absent
+until its RED owner activates.
 
 ## Consequences
 
@@ -445,6 +444,22 @@ carrier, production-integration, ordinary/canonical-admission, rollout, and pare
 Julia including 105/105 corpus, neutral 92-mutation governance, and admitted Perl/Rust/Dart projections remain
 GREEN without moving function-body v1, generated format, public/outward truth, or another backend.
 
+Julia carrier/admission leaf `FUTURE-PARITY-BACKLOG.14.7.6.4` adds opaque host-only
+`StagedAstEnrichmentSeed` to `LinkedSpecRuntimeEngine` and generated-v2 execution. The seed deeply owns only the
+logical registry/options and one factory. After each top-level run has produced its complete parent value, it
+invokes that factory and starts a new `_FrozenStagedRegistry` with an empty cache plus a new
+`_StagedRecursiveAuthority`; parent failure therefore consumes no staged authority. Live recognition state is
+then rejected and recursive enrichment runs. With no seed, existing behavior is unchanged.
+
+Native, `SpecFile`-JSON reconstructed, validated generated-plan, and independently included emitted-module routes
+each run twice through one seed. All eight results are equal and detached, each has one miss/zero hits/one call,
+all eight cancellation identities are fresh, and all 32 compiled callback closures are distinct. Compiled JSON,
+generated plans, and emitted source retain no callback, parser, registry/source snapshot, cancellation/deadline/
+budget authority, mutable queue/cache, durable absolute path, or host handle. The stable consumer passes 491/491,
+is included once in ordinary discovery, and is required/logged/invoked exactly once by canonical CI. Only Julia
+rollout advances; the checker rejects 97 mutations. Function-body v1, generated-source v2, public/outward behavior,
+other backend behavior, Lua, recurrence, and recomposition remain unchanged or pending.
+
 ## Links
 
 - Owning task: `docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md`
@@ -464,4 +479,5 @@ GREEN without moving function-body v1, generated format, public/outward truth, o
   `docs/knowledge/julia-staged-ast-enrichment-dormant-red.md` and
   `docs/knowledge/julia-staged-ast-enrichment-marker-provenance.md` plus
   `docs/knowledge/julia-staged-ast-enrichment-current-depth-authority.md` plus
-  `docs/knowledge/julia-staged-ast-enrichment-recursive-authority.md`
+  `docs/knowledge/julia-staged-ast-enrichment-recursive-authority.md` plus
+  `docs/knowledge/julia-staged-ast-enrichment-carriers-admission.md`

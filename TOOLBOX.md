@@ -302,7 +302,9 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   a 4/4 target absent from canonical CI while requiring the separate tracked/cfg admitted contract consumer once.
   `.5.4` aligns the admitted Perl snapshot with 79 mutations and Rust `dormant_red`; 143/143 plus canonical proof
   close the corrective tree without production, rollout, registry, format, or public movement. Mandatory notes
-  segment `4990` and ADR `0090` retain exact bounded-history pressure controls at 18 files / 17 manifest lines.
+  segment `4990` and ADR `0090` historically retained exact bounded-history pressure controls at 18 files / 17
+  manifest lines. Julia staged admission later publishes mandatory segment `4989`; ADR `0092` advances only the
+  exact finite controls to 19 files / 18 manifest lines.
 - **Staged-registry boundary audit:** before changing general staged AST behavior, retrieve
   [[general-staged-ast-current-boundary]] and probe the registry rather than inferring policy semantics from its
   JSON fields. The five current registries execute only the one-depth
@@ -328,8 +330,8 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   native, normalized-descriptor, validated generated-plan, and independently loaded emitted equality plus distinct
   callbacks/cancellation/clocks and serialized-authority absence. Then run
   `bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py` to prove
-  neutral+Perl+Rust+Dart admission plus Julia dormant lifecycle, one absent later consumer, 92 mutations, and exact
-  single Perl/Rust/Dart ordinary+canonical admission.
+  neutral+Perl+Rust+Dart+Julia admission, one absent later consumer, 97 mutations, and exact
+  single Perl/Rust/Dart/Julia ordinary+canonical admission.
   Public authoring remains `.14.7.9`.
 - **Rust general-staged admitted private boundary:** `FUTURE-PARITY-BACKLOG.14.7.4.0-.4` owns
   `rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs` as an ordinary and canonical consumer. Run it with
@@ -371,11 +373,11 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   Canonical CI requires, logs, and invokes the exact final path once; Dart rollout is complete. Because every
   admitted consumer snapshots the full neutral current projection, rerun Perl, Rust, and Dart consumers whenever
   any later backend lifecycle or governed mutation count moves.
-- **Julia general-staged private recursive boundary:** `FUTURE-PARITY-BACKLOG.14.7.6.0-.3` owns
+- **Julia general-staged admitted private boundary:** `FUTURE-PARITY-BACKLOG.14.7.6.0-.4` owns
   `julia/test/staged_ast_enrichment_contract_test.jl`. Run it explicitly with
   `bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no
-  julia/test/staged_ast_enrichment_contract_test.jl`; require exactly 386 passes and one labeled `.14.7.6.4`
-  fresh-carrier/production/admission/rollout RED. Do not add the path to `julia/test/runtests.jl` or canonical CI.
+  julia/test/staged_ast_enrichment_contract_test.jl`; require exactly 491 passes. The path occurs once in
+  `julia/test/runtests.jl` and once in canonical tracked/log/invocation topology.
   Inspect `to_json(payload.action_ast)` for one `ActionStagedParseJobExpr` and zero generic `parse_job` calls.
   `runtime/Matching.jl` retains native participating capture ranges privately and nonserially;
   `runtime/StagedParseJobDeclaration.jl` converts them through `SourceLocation` into exact Unicode-scalar direct/
@@ -387,7 +389,11 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   atomic stitching, and all policies. Inspect `_enrich_staged_recursively`, `_StagedRecursiveAuthority`, exact
   returned-marker stitch paths, active frames, shared resource checks, expiring `_staged_safe_point`, and direct/
   ordered-derived rebase helpers. Retrieve [[julia-staged-ast-enrichment-recursive-authority]] before archaeology;
-  `.14.7.6.4` alone owns fresh production carriers, integration, admission, rollout, and parent closure.
+  inspect `StagedAstEnrichmentSeed`, `_start_staged_ast_enrichment`, and `_complete_staged_ast_enrichment!` for the
+  opaque host recipe and one-use fresh registry/cache/recursive authority. `LinkedSpecRuntimeEngine`, reconstructed
+  execution, generated plans, and emitted `execute` share the same optional seed and enrich only after the complete
+  parent result. Retrieve [[julia-staged-ast-enrichment-carriers-admission]] before changing this seam. Lua `.7`
+  remains next; public authoring stays `.9`.
 - **Env knobs:** `LINKEDSPEC_TRACE_LEVEL` (level; `LINKEDSPEC_DUMP_VERBOSITY` is the fallback),
   `LINKEDSPEC_TRACE_FILE` (route to a file), `LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_EMOJI`,
   `LINKEDSPEC_TRACE_RESET_FILE`.
@@ -1207,11 +1213,11 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   unconditionally in canonical local CI.
 - **OUTPUT:** 4 registry entries; 8 provenance; 8 resolution/6 authority; 10 cache; 4 queue/3 isolation;
   4 result plus 3 failure policies; 10 recursive-chain and 5 detachment cases; five backend consumers over six
-  runtime routes; 37 diagnostics; 9 rollout legs; 35 exact owners; and 92 mutations.
-- **BOUNDARY:** neutral, Perl, Rust, and Dart are complete. Julia remains `dormant_red`, now at 386 GREEN/one
-  intentional carrier/admission RED after its exclusive marker, live-proven typed provenance, caller-frozen
-  current-depth policies, and separate breadth-first recursive authority were implemented; it remains outside
-  ordinary/canonical discovery with rollout pending. PUC Lua, LuaJIT, recurrence, and public no-drift remain pending. Outward facade/
+  runtime routes; 37 diagnostics; 9 rollout legs; 35 exact owners; and 97 mutations.
+- **BOUNDARY:** neutral, Perl, Rust, Dart, and Julia are complete. Julia's 491/491 consumer runs once in ordinary/
+  canonical discovery and proves a fresh host-only seed across four production routes after its exclusive marker,
+  live-proven typed provenance, caller-frozen policies, and breadth-first recursive authority. PUC Lua, LuaJIT,
+  recurrence, and public no-drift remain pending. Outward facade/
   schema/semantic/MCP/CLI/README tokens remain absent. The existing function-body v1 adapter and generated-source
   v2 format stay current and unchanged.
 

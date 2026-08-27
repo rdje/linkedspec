@@ -351,13 +351,12 @@ bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract
 
 The independent checker executes 4 registry entries, 8 provenance, 8 resolution/6 authority, 10 cache,
 4 queue/3 isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases. It locks five backend
-consumers over six runtime routes, 37 diagnostics, 9 rollout legs, and 35 exact owners, then rejects 92
-reason-checked mutations. Neutral, Perl, Rust, and Dart rollout are complete. Each admitted consumer is registered
+consumers over six runtime routes, 37 diagnostics, 9 rollout legs, and 35 exact owners, then rejects 97
+reason-checked mutations. Neutral, Perl, Rust, Dart, and Julia rollout are complete. Each admitted consumer is registered
 exactly once in ordinary/canonical proof and proves native, reconstructed, validated generated-plan, and
 independently loaded emitted execution through fresh host-only authority without serializing live state. Julia's
-final-path consumer is now `dormant_red`: its explicit run preserves function-body v1 and four generic
-unsupported-helper observations, passes 86 assertions, and fails only the dedicated marker/provenance assertion.
-Ordinary Julia and canonical CI omit it, Julia rollout remains pending, and Lua remains absent. Generated format,
+491/491 consumer now runs once in ordinary and canonical proof across the same four production routes; each run
+starts a fresh registry/cache/recursive authority after the parent result. Lua remains absent. Generated format,
 capability, facade/schema/semantic/MCP/CLI/README, and public behavior have not moved.
 
 `inter_match_gap_capture_contract.json` is the neutral authority for named regex slots and lossless

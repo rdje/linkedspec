@@ -15,7 +15,7 @@ answers:
   - "what did FUTURE-PARITY-BACKLOG.14.7.0 audit"
   - "what must happen before general staged AST enrichment"
 date: 2026-08-25
-status: current runtime audit; private Perl, Rust, and Dart admissions complete; Julia recursive authority dormant; .14.7.6.4 is next
+status: current runtime audit; private Perl, Rust, Dart, and Julia admissions complete; Lua .14.7.7 is next
 tags: [staged-parsing, parse-job, diagnostics, registry, policies, recursive-queue, source-location, backend-parity]
 evidence: "Toolbox-first source/runtime proof establishes the shipped boundary: five source backends/six runtimes implement only actionir-body.spec/action_block, one-depth ordering, fixed cache identity, and function-specific replace_field/body_ast/fail. FUTURE-PARITY-BACKLOG.14.7.1 repairs wrong-top diagnostic parity. FUTURE-PARITY-BACKLOG.14.7.2 adds the separate executable neutral v2 authority. Perl .14.7.3.1-.3 now add a dormant private marker/provenance carrier, caller-frozen pure resolution/cache, all policies/detachment, breadth-first recurrence, chain/resource bounds, and source-rebased diagnostics. They add no reconstructed/generated/emitted carriers, admission, rollout, or public authoring. Those remain .14.7.3.4-.10-owned."
 evidence_update_2026_08_26_perl_admission: "FUTURE-PARITY-BACKLOG.14.7.3.4 adds four fresh-authority Perl routes, exact phase-0/canonical admission, and Perl-only rollout promotion. Public authoring, generated format, later backends, recurrence, and outward surfaces remain unchanged or pending."
@@ -33,6 +33,7 @@ evidence_update_2026_08_27_julia_dormant_red: "FUTURE-PARITY-BACKLOG.14.7.6.0 pr
 evidence_update_2026_08_27_julia_marker_provenance: "FUTURE-PARITY-BACKLOG.14.7.6.1 replaces only the exclusive Julia scalar-assignment boundary with ActionStagedParseJobExpr plus live native-capture-proven direct/ordered-derived Unicode-scalar provenance. Four logical routes agree at 131 GREEN/one .2 authority RED. Function-body v1, neutral governance, discovery, rollout, generated format, public, and outward surfaces do not move."
 evidence_update_2026_08_27_julia_current_depth_authority: "FUTURE-PARITY-BACKLOG.14.7.6.2 adds a separate private Julia general-v2 frozen registry and one-depth enrichment path without widening StagedParserRegistry.jl. Pure caller-frozen selection, exact identities, plan-only caching, complete-depth target reservation and typed ordering, fresh sibling state, detached atomic stitching, and all policies pass. Only .14.7.6.3 recurrence/bounds/safe-points/rebasing is RED; discovery, rollout, formats, v1, public, and outward truth do not move."
 evidence_update_2026_08_27_julia_recursive_authority: "FUTURE-PARITY-BACKLOG.14.7.6.3 adds a separate private Julia breadth-first entrypoint over exact returned-marker stitch paths and active lineage, strict cycle/decrease predicates, one shared cancellation/deadline/step/call/depth/result/diagnostic state, expiring callback safe points, and direct/ordered-derived source projection. The consumer is 386 GREEN/one .14.7.6.4 carrier/production/admission/rollout RED; discovery, neutral 92 mutations, formats, v1, public, and outward truth do not move."
+evidence_update_2026_08_27_julia_admission: "FUTURE-PARITY-BACKLOG.14.7.6.4 adds Julia's host-only fresh-execution seed to the native and generated-v2 engine seams, runs recursive enrichment only after the complete parent value, admits the 491/491 consumer once in ordinary/canonical topology, and advances only Julia rollout plus exact topology governance to 97 mutations. Lua .14.7.7 is next."
 root_cause: "The first prototype deliberately separated a generic-looking registry record from a narrow trusted function-body integration. Compile helpers in Perl, Rust, and Dart were shaped around loaded parser identity plus top rule, so they synthesized a placeholder diagnostic record; Julia and Lua were implemented later with the complete job parameter but their formatter omitted payload_kind. Success-path and resolve-phase tests covered real context, but no cross-backend compile-phase assertion locked the ADR 0015 fields. Leaf .14.7.1 passes the normalized job through the three compile boundaries, adds payload_kind to the two later formatters, and locks all five source routes/six runtimes without expanding staged behavior."
 last_verified: 2026-08-27
 reverify:
@@ -102,8 +103,9 @@ native, reconstructed, generated-plan, and independently executed emitted routes
 consumer passes 19/19 in ordinary discovery and is required once canonically; Dart rollout is complete while
 format, public, and outward surfaces do not move.
 
-Julia `.14.7.6.0-.3` now freeze and implement its equivalent private declaration, current-depth, and recursive boundary. The exact final-path
-consumer remains outside `julia/test/runtests.jl` and canonical CI and preserves current function-body v1. Exact
+Julia `.14.7.6.0-.4` now implement and admit its equivalent private declaration, current-depth, recursive, and
+fresh-carrier boundary. The exact final-path consumer is included once by `julia/test/runtests.jl` and canonical
+CI and preserves current function-body v1. Exact
 scalar assignment-form `parse_job(...)` becomes one dedicated inert node; Julia's native absolute UTF-8 capture
 offsets pass through the existing source authority to typed Unicode-scalar direct or nonempty ordered-derived
 provenance. Native, `SpecFile`-JSON reconstructed, validated generated-plan, and independently included emitted-
@@ -112,8 +114,9 @@ selected-top-before-id identity, plan-only caching, complete-depth target reserv
 sibling execution, detached results, and all four result/three failure policies. Its separate recursive entrypoint
 queues only successfully detached returned markers by exact stitch path, carries full active lineage, enforces
 cycle/decrease and non-resetting resources, expires callback safe points, and rebases direct/ordered-derived child
-locations. The consumer is 386 GREEN; the only RED now names `.14.7.6.4` fresh carriers, production integration,
-admission, rollout, and parent closure. Julia rollout remains pending.
+locations. One opaque host seed starts a new registry/cache/recursive authority on each native, reconstructed,
+generated-plan, or independently included emitted execution and enriches only after the complete parent value.
+The consumer is 491/491 GREEN and Julia rollout is complete; Lua remains next.
 
 The dependency plan then separates neutral contract, each backend, exact five-source/six-runtime recurrence,
 public `parse_job(...)` authoring, and independent recomposition. General staged dispatch reuses the typed source

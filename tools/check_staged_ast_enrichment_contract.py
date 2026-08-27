@@ -46,9 +46,8 @@ AUTHORED_SURFACE = {
     ],
     "optional_options": ["top", "into", "required_capabilities"],
     "availability": (
-        "neutral executable authority with private Perl, Rust, and Dart carriers complete; the Julia general "
-        "carrier contract is dormant RED; PUC Lua, LuaJIT, recurring, and public authoring remain pending under "
-        "FUTURE-PARITY-BACKLOG.14.7.6-.10"
+        "neutral executable authority with private Perl, Rust, Dart, and Julia carriers complete; PUC Lua, "
+        "LuaJIT, recurring, and public authoring remain pending under FUTURE-PARITY-BACKLOG.14.7.7-.10"
     ),
 }
 
@@ -152,7 +151,7 @@ BACKEND_CONSUMERS = [
         "backend": "julia",
         "owner": "FUTURE-PARITY-BACKLOG.14.7.6.0",
         "path": "julia/test/staged_ast_enrichment_contract_test.jl",
-        "status": "dormant_red",
+        "status": "complete",
     },
     {
         "backend": "lua",
@@ -793,6 +792,14 @@ def validate_environment(contract: dict[str, Any]) -> None:
                 require(ci_text.count(f"require_tracked_file {row['path']}") == 1, "canonical CI must require the Dart staged consumer exactly once")
                 require(ci_text.count(f'log "{admission["registration_marker"]}"') == 1, "canonical Dart staged admission marker is missing or duplicated")
                 require(ci_text.count(admission["invocation"]) == 1, "canonical Dart staged admission invocation is missing or duplicated")
+            elif row["backend"] == "julia":
+                admission = contract["canonical_execution"]["julia_admission"]
+                require(admission["consumer_path"] == row["path"], "Julia admission consumer path drifted")
+                require(admission["ordinary_invocation"] == RUNTIME_ROUTES[3]["command"], "ordinary Julia staged invocation drifted")
+                require(julia_ordinary_text.count(consumer_path.name) == 1, "ordinary Julia discovery must register the staged consumer exactly once")
+                require(ci_text.count(f"require_tracked_file {row['path']}") == 1, "canonical CI must require the Julia staged consumer exactly once")
+                require(ci_text.count(f'log "{admission["registration_marker"]}"') == 1, "canonical Julia staged admission marker is missing or duplicated")
+                require(ci_text.count(admission["invocation"]) == 1, "canonical Julia staged admission invocation is missing or duplicated")
             else:
                 raise ContractError(f"unsupported complete staged backend: {row['backend']}")
         else:
@@ -852,7 +859,7 @@ def validate_contract(contract: dict[str, Any], *, environment: bool = True) -> 
     require(contract["task_owner"] == "FUTURE-PARITY-BACKLOG.14.7.2", "task owner mismatch")
     require(
         contract["status"]
-        == "neutral_perl_rust_and_dart_complete_julia_dormant_red_lua_pending",
+        == "neutral_perl_rust_dart_and_julia_complete_lua_pending",
         "contract status mismatch",
     )
     require(contract["authored_surface"] == AUTHORED_SURFACE, "authored surface mismatch")
@@ -950,7 +957,7 @@ def validate_contract(contract: dict[str, Any], *, environment: bool = True) -> 
         {"order": 2, "leg": "perl", "owner": "FUTURE-PARITY-BACKLOG.14.7.3", "status": "complete", "paths": [BACKEND_CONSUMERS[0]["path"]]},
         {"order": 3, "leg": "rust", "owner": "FUTURE-PARITY-BACKLOG.14.7.4", "status": "complete", "paths": [BACKEND_CONSUMERS[1]["path"]]},
         {"order": 4, "leg": "dart", "owner": "FUTURE-PARITY-BACKLOG.14.7.5", "status": "complete", "paths": [BACKEND_CONSUMERS[2]["path"]]},
-        {"order": 5, "leg": "julia", "owner": "FUTURE-PARITY-BACKLOG.14.7.6", "status": "pending", "paths": [BACKEND_CONSUMERS[3]["path"]]},
+        {"order": 5, "leg": "julia", "owner": "FUTURE-PARITY-BACKLOG.14.7.6", "status": "complete", "paths": [BACKEND_CONSUMERS[3]["path"]]},
         {"order": 6, "leg": "puc_lua", "owner": "FUTURE-PARITY-BACKLOG.14.7.7", "status": "pending", "paths": [BACKEND_CONSUMERS[4]["path"]]},
         {"order": 7, "leg": "luajit", "owner": "FUTURE-PARITY-BACKLOG.14.7.7", "status": "pending", "paths": [BACKEND_CONSUMERS[4]["path"]]},
         {"order": 8, "leg": "recurring", "owner": "FUTURE-PARITY-BACKLOG.14.7.8", "status": "pending", "paths": ["tools/check_staged_ast_enrichment_six_runtime.sh"]},
@@ -984,6 +991,12 @@ def validate_contract(contract: dict[str, Any], *, environment: bool = True) -> 
             "ordinary_invocation": "(cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/staged_ast_enrichment_contract_test.dart)",
             "registration_marker": "running exact Dart staged-AST enrichment admission consumer",
             "invocation": "(cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/staged_ast_enrichment_contract_test.dart)",
+        },
+        "julia_admission": {
+            "consumer_path": "julia/test/staged_ast_enrichment_contract_test.jl",
+            "ordinary_invocation": "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no julia/test/staged_ast_enrichment_contract_test.jl",
+            "registration_marker": "running exact Julia staged-AST enrichment admission consumer",
+            "invocation": "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no julia/test/staged_ast_enrichment_contract_test.jl",
         },
         "storage_policy": "all Python cache, temporary, and process data stays under repository-derived project storage",
         "tracked_required": True,
@@ -1080,6 +1093,7 @@ def mutation_inventory() -> list[Mutation]:
         ("rollout_backend", set_value(["rollout", 1, "status"], "pending"), "rollout inventory mismatch"),
         ("rollout_rust", set_value(["rollout", 2, "status"], "pending"), "rollout inventory mismatch"),
         ("rollout_dart", set_value(["rollout", 3, "status"], "pending"), "rollout inventory mismatch"),
+        ("rollout_julia", set_value(["rollout", 4, "status"], "pending"), "rollout inventory mismatch"),
         ("rollout_public", set_value(["rollout", 8, "status"], "complete"), "rollout inventory mismatch"),
         ("canonical_contract", set_value(["canonical_execution", "contract_path"], "/tmp/contract.json"), "canonical execution mismatch"),
         ("canonical_checker", set_value(["canonical_execution", "checker_path"], "tools/wrong.py"), "canonical execution mismatch"),
@@ -1098,6 +1112,10 @@ def mutation_inventory() -> list[Mutation]:
         ("dart_admission_ordinary", set_value(["canonical_execution", "dart_admission", "ordinary_invocation"], "dart test wrong"), "canonical execution mismatch"),
         ("dart_admission_marker", set_value(["canonical_execution", "dart_admission", "registration_marker"], "wrong marker"), "canonical execution mismatch"),
         ("dart_admission_invocation", set_value(["canonical_execution", "dart_admission", "invocation"], "dart test wrong"), "canonical execution mismatch"),
+        ("julia_admission_consumer", set_value(["canonical_execution", "julia_admission", "consumer_path"], "julia/test/wrong.jl"), "canonical execution mismatch"),
+        ("julia_admission_ordinary", set_value(["canonical_execution", "julia_admission", "ordinary_invocation"], "julia wrong.jl"), "canonical execution mismatch"),
+        ("julia_admission_marker", set_value(["canonical_execution", "julia_admission", "registration_marker"], "wrong marker"), "canonical execution mismatch"),
+        ("julia_admission_invocation", set_value(["canonical_execution", "julia_admission", "invocation"], "julia wrong.jl"), "canonical execution mismatch"),
         ("ownership", set_value(["ownership", 0, "owner"], "wrong"), "ownership inventory mismatch"),
     ]
     return mutations
