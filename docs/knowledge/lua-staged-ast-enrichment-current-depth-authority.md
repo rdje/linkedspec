@@ -17,10 +17,11 @@ answers:
   - "does Lua recursively execute returned staged markers"
   - "what does FUTURE-PARITY-BACKLOG 14.7.7.2 implement"
 date: 2026-08-27
-status: current private dual-ABI one-depth API; recursive scheduling and production carriers remain dormant RED
+status: current private dual-ABI one-depth API preserved beside the recursive production carrier
 tags: [lua, PUC-Lua, LuaJIT, staged-parsing, parse-job, registry, cache, policies, detachment, private]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.7.2 adds private Lua-5.1-compatible staged_ast_enrichment.lua beside, not inside, the narrow function-body-v1 registry. FrozenStagedRegistry deeply owns caller-completed alias/declaring-relative/ordered-root/provider outcomes and an exact already-compiled opaque callback set. Resolution is pure and cannot discover, load, query, compile, access a path, or mutate the registry. Default top precedes exact v2 job identity; the registry-local cache stores immutable callback plans only under the neutral eight-field identity and never retains child results, failures, contexts, or partial AST state. One complete marker depth resolves every job and reserves every target before callback one, rejects cross-plan conflicts, sorts typed paths/provenance/job ids, gives siblings fresh cursor/mark/capture/variable contexts, detaches finite acyclic node-bounded plain results, and applies all four result plus three failure policies on an unpublished parent copy. Live keys and marker-shaped authority smuggling reject; failed child values do not poison later execution; valid returned markers stay inert. The same consumer reports 597 GREEN/one exact .14.7.7.3 recurrence/bounds/rebasing/fresh-carrier RED on both PUC Lua and LuaJIT. Ordinary/canonical discovery, both rollout rows, function-body v1, generated format v2, public/outward behavior, neutral 98 mutations, and other backends remain unchanged."
 root_cause: "FUTURE-PARITY-BACKLOG.14.7.7.1 intentionally stopped at detached marker construction. Lua had no separate general-v2 frozen snapshot, pure resolver, selected-top-before-id function, immutable-plan cache, complete-depth target reservation/order seam, fresh sibling context, detachment boundary, or policy stitcher. lua/src/linkedspec/staged_parser_registry.lua is the deliberately narrow function-body-v1 adapter and must not be widened into this authority."
+evidence_update_2026_08_27_recursive_carriers: "FUTURE-PARITY-BACKLOG.14.7.7.3 preserves enrich_current_depth and layers a separate breadth-first recursive scheduler plus fresh host-only native/reconstructed/generated/emitted authority. The stable consumer is 888/888 on both ABIs and remains dormant from ordinary/canonical discovery until .4."
 last_verified: 2026-08-27
 reverify:
   - "bash tools/run_lua_project_data.sh puc lua/test/staged_ast_enrichment_contract_test.lua"
@@ -67,13 +68,13 @@ the deterministic job order, while incompatible shared targets reject before
 execution.
 
 Returned authority-free markers remain inert on this one-depth API. Leaf
-`.14.7.7.3` owns a separate breadth-first recursive entrypoint, strict lineage,
-shared cancellation/resource limits, safe points, source rebasing, and fresh
-native/reconstructed/generated/emitted carriers. It must preserve this
-current-depth boundary unchanged.
+`.14.7.7.3` preserves that behavior and adds a separate breadth-first entrypoint
+plus fresh production carriers; see
+[[lua-staged-ast-enrichment-recursive-carriers]].
 
 Related: [[lua-staged-ast-enrichment-marker-provenance]],
 [[lua-staged-ast-enrichment-dormant-red]],
+[[lua-staged-ast-enrichment-recursive-carriers]],
 [[general-staged-ast-enrichment-neutral-contract]],
 [[general-staged-ast-current-boundary]],
 [[julia-staged-ast-enrichment-current-depth-authority]],

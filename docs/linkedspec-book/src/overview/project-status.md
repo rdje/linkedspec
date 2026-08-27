@@ -146,12 +146,13 @@ detached returned markers by exact stitch path, enforces active lineage and non-
 points, and projects direct/ordered-derived child locations. An opaque host-only seed starts a new registry/cache/
 recursive authority per native, reconstructed, generated-plan, or independently included emitted execution and
 enriches only after the complete parent value. The consumer is 491/491 and runs once in ordinary/canonical
-discovery. Shared Lua `.14.7.7.0-.2` now freeze one stable Lua-5.1 source and its exclusive inert marker,
+discovery. Shared Lua `.14.7.7.0-.3` now freeze one stable Lua-5.1 source and its exclusive inert marker,
 live-range-proven typed provenance, caller-frozen pure resolver/cache, complete-depth target reservation/order/
-isolation, detached stitching, and every policy at 597 GREEN assertions plus one identical `.14.7.7.3` recursive-
-carrier RED on both PUC Lua and LuaJIT. Governance is 98 mutations with Julia complete at rollout 5/9; Lua
+isolation, detached stitching, every policy, breadth-first recurrence, strict lineage/shared resources, expiring
+safe points, typed rebasing, and four fresh post-parent carriers at 888/888 on both PUC Lua and LuaJIT. Governance
+is 98 mutations with Julia complete at rollout 5/9; Lua
 ordinary/canonical discovery and both rollout legs remain pending, formats and public/outward behavior do not
-move, and Lua recurrence/bounds/rebasing/fresh carriers `.14.7.7.3` are next. Mandatory engineering-notes segment
+move, and dual-ABI admission/rollout `.14.7.7.4` is next. Mandatory engineering-notes segment
 `4989` is finitely authorized at 19 files / 18 manifest lines by ADR `0092`; every byte, aggregate, per-file,
 routing, and storage control remains unchanged. The current mandatory change-history rollover publishes segment
 `4989`; ADR `0093` advances only that separate store's finite controls to 24 files / 23 manifest lines.

@@ -512,6 +512,31 @@ dual-ABI Lua, admitted Perl 143/143, Rust 1/1, Dart 19/19, Julia 491/491, and ev
 Neutral 98-mutation lifecycle, ordinary/canonical discovery, both rollout rows, function-body v1, generated format
 v2, public/outward behavior, and other backends do not move.
 
+Lua recursive-carrier leaf `FUTURE-PARITY-BACKLOG.14.7.7.3` preserves `enrich_current_depth` and adds a separate
+private Lua-5.1-compatible breadth-first scheduler. It prepares and reserves each complete depth, then records only
+marker paths inside successful detached callback results and maps them through the exact result-policy destination;
+the complete stitched AST is never rescanned. Active frames contain resolved parser, selected top, exact-text
+SHA-256, and full direct or ordered-derived provenance. Exact repeats reject as cycles; same-parser/top lineage
+must be segment-contained with a strictly smaller total Unicode-scalar extent.
+
+One invocation shares cancellation identity/probe, caller clock/absolute deadline, remaining steps, seeded calls,
+depth/call maxima, cumulative result nodes, and canonical UTF-8 diagnostic bytes. Marker-shaped detached results
+count atomically but still undergo recursive live-key validation. Fresh callback contexts expose safe-point work
+spending and direct/ordered-derived position/span/nested-diagnostic projection, then expire after return or throw.
+Cross-segment spans remain `derived_text` / `concatenate_in_order`; invalid local ranges fail closed and oversized
+retained diagnostics use the governed truncation sentinel.
+
+`StagedAstEnrichmentSeed` is an opaque host-only logical recipe. Every successful parent execution invokes its
+factory and creates a new callback map, frozen registry with an empty plan cache, recursive authority, lineage,
+budget, and mutable queue. Native, `SpecFile`-JSON reconstructed, validated generated-plan, and independently
+loaded emitted-module routes forward that optional seed without serializing it. All four routes execute twice with
+eight equal detached results, fresh run/token/probe/clock observations, one miss/no hits/one call per run, no-seed
+inert-marker compatibility, no authority consumption on parent failure, live-transaction denial, and primary
+staged-error preservation. The shared consumer is 888/888 on PUC Lua and LuaJIT but remains absent from ordinary
+and canonical discovery. Neutral lifecycle stays at 98 mutations; both rollout rows, function-body v1, generated
+format v2, public/outward behavior, other backends, and later recurrence owners remain unchanged. Leaf `.4` alone
+owns dual-ABI admission and rollout promotion.
+
 ## Links
 
 - Owning task: `docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md`

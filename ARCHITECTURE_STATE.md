@@ -183,6 +183,21 @@ markers remain inert. The shared consumer is 597 GREEN/one exact `.14.7.7.3` rec
 carrier RED per ABI. Neutral governance, discovery, rollout, v1, formats, public/outward behavior, and other
 backends remain unchanged.
 
+Lua leaf `FUTURE-PARITY-BACKLOG.14.7.7.3` preserves that one-depth API and adds a separate private breadth-first
+scheduler. It prepares complete depths and records only marker paths in successful detached child results, mapped
+through exact stitch destinations; it never rescans old AST markers. Active frames bind resolved parser, selected
+top, exact-text digest, and full provenance. Exact repeats cycle, while same-parser/top recurrence requires segment
+containment and a smaller total Unicode-scalar extent.
+
+Cancellation identity/probe, clock/absolute deadline, steps, seeded calls, depth/call maxima, cumulative atomic-
+marker result nodes, and canonical UTF-8 diagnostic bytes share one invocation. Fresh callback contexts expose
+safe points and direct/ordered-derived source projection, then expire after return or throw. An opaque host-only
+seed starts a new callback map, frozen registry/cache, recursive authority, and scheduler only after the complete
+parent result. Native, `SpecFile`-JSON reconstructed, validated generated-plan, and independently loaded emitted
+routes each execute twice with fresh state and equal detached outcomes. Both ABIs pass 888/888 while the stable
+consumer remains absent from ordinary/canonical discovery; rollout, neutral 98 mutations, v1, generated format,
+public/outward behavior, and other backends stay fixed for admission owner `.14.7.7.4`.
+
 The required complete change record crosses the bounded hot shard's exact predeclared controls and creates
 content-addressed immutable change-history segment `4989` from activation commit `43b33922`. ADR `0093` advances
 only the finite collection/manifest controls from 23/22 to 24 files / 23 lines. Root, per-segment, aggregate, and

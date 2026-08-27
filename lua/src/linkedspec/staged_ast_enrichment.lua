@@ -1,10 +1,13 @@
--- Private caller-frozen authority for one complete staged-AST marker depth.
+-- Private caller-frozen authority for one-depth and recursive staged-AST
+-- enrichment.
 --
 -- Trusted host code supplies a completed logical resolution snapshot and the
 -- exact already-compiled callbacks named by that snapshot.  Dispatch performs
 -- no discovery, loading, compilation, provider query, filesystem access, or
 -- registry mutation.  Child values are detached before an unpublished AST
--- copy is stitched and returned.
+-- copy is stitched and returned. Recursive dispatch queues only markers from
+-- successful detached results breadth-first under one non-resetting resource
+-- authority and exact active lineage.
 
 local json = require("linkedspec.json")
 local sha256 = require("linkedspec.sha256")
@@ -908,7 +911,9 @@ local function path_json(path)
   return result
 end
 
-local function prepare_plan(registry, discovered, options)
+local function prepare_plan(registry, discovered, options, stage_depth, active_frames)
+  stage_depth = stage_depth or 1
+  active_frames = active_frames or {}
   local state = registry_state(registry)
   local sidecar = marker_sidecar(discovered.marker)
   local parser_spec_id = sidecar_string(sidecar, "parser_spec_id")
@@ -968,11 +973,20 @@ local function prepare_plan(registry, discovered, options)
   sidecar.top_rule = top_rule
   sidecar.job_id = job_id
   sidecar.cache_key = cache_key
-  sidecar.stage_depth = 1
+  sidecar.stage_depth = stage_depth
   sidecar.stage_chain = json.array()
+  for index, frame in ipairs(active_frames) do
+    sidecar.stage_chain[index] = copy_plain(frame.tuple)
+  end
   sidecar.payload_digest = "sha256:" .. sha256.hex(sidecar_string(sidecar, "text"))
   sidecar.effective = copy_plain(effective)
-  return {
+  local active_tuple = json.array({
+    resolved,
+    top_rule,
+    sidecar.payload_digest,
+    copy_plain(sidecar.provenance),
+  })
+  local plan = {
     path = discovered.path,
     marker = discovered.marker,
     sidecar = sidecar,
@@ -981,7 +995,10 @@ local function prepare_plan(registry, discovered, options)
     cache_key = cache_key,
     effective = effective,
     provenance_order = provenance_order(sidecar.provenance),
+    active_tuple = active_tuple,
+    active_frames = active_frames,
   }
+  return plan
 end
 
 local function plan_less(left, right)
@@ -1165,6 +1182,28 @@ local function detach_plain(value, maximum)
     if current_type ~= "table" or private_state[current] ~= nil or getmetatable(current) == CONTEXT_MT then
       return failure(path)
     end
+    if current.kind == MARKER_KIND and current.version == 2 and
+        current.sidecar_kind == SIDECAR_KIND and type(current[SIDECAR_KIND]) == "table" then
+      local function reject_live_keys(value, current_path)
+        if type(value) ~= "table" then return true end
+        local kind = plain_table_kind(value)
+        if kind == nil then return false, current_path end
+        for key, child in pairs(value) do
+          local name = tostring(key)
+          if type(key) == "string" and LIVE_RESULT_KEYS[key] then
+            return false, current_path .. "/" .. name
+          end
+          local accepted, reason = reject_live_keys(child, current_path .. "/" .. name)
+          if not accepted then return false, reason end
+        end
+        return true
+      end
+      local accepted, reason = reject_live_keys(current, path)
+      if not accepted then return failure(reason) end
+      local ok, owned = pcall(copy_plain, current)
+      if not ok then return failure(path) end
+      return owned
+    end
     if active[current] then return failure(path) end
     local kind = plain_table_kind(current)
     if kind == nil then return failure(path) end
@@ -1221,7 +1260,7 @@ local function runtime_context()
     captures = json.harray(),
     variables = json.harray(),
   }, CONTEXT_MT)
-  private_state[context] = { node_type = "StagedRuntimeContext" }
+  private_state[context] = { node_type = "StagedRuntimeContext", runtime_authority = nil }
   return context
 end
 
@@ -1233,6 +1272,310 @@ function M.runtime_context_to_json(value)
     captures = copy_plain(value.captures),
     variables = copy_plain(value.variables),
   })
+end
+
+local function provenance_segments(value)
+  if type(value) ~= "table" then snapshot_error("provenance") end
+  local rows
+  if value.kind == "direct_span" then
+    rows = { value }
+  elseif value.kind == "derived_text" and value.policy == "concatenate_in_order" and
+      type(value.segments) == "table" and dense_array(value.segments) and #value.segments > 0 then
+    rows = value.segments
+  else
+    snapshot_error("provenance")
+  end
+  local result = {}
+  for index, row in ipairs(rows) do
+    if type(row) ~= "table" or row.kind ~= "direct_span" or
+        type(row.source_id) ~= "string" or row.source_id == "" or
+        not is_integer(row.start) or row.start < 0 or
+        not is_integer(row["end"]) or row["end"] < row.start or
+        type(row.provenance) ~= "string" or row.provenance == "" then
+      snapshot_error("provenance_segment")
+    end
+    result[index] = {
+      source_id = row.source_id,
+      start = row.start,
+      stop = row["end"],
+      provenance = row.provenance,
+    }
+  end
+  return result
+end
+
+local function provenance_extent(segments)
+  local result = 0
+  for _, segment in ipairs(segments) do
+    local extent = segment.stop - segment.start
+    if extent > MAX_EXACT_INTEGER - result then snapshot_error("provenance_extent") end
+    result = result + extent
+  end
+  return result
+end
+
+local function strictly_decreases(parent, child)
+  local parent_segments = provenance_segments(parent)
+  local child_segments = provenance_segments(child)
+  if provenance_extent(child_segments) >= provenance_extent(parent_segments) then return false end
+  for _, candidate in ipairs(child_segments) do
+    local contained = false
+    for _, active in ipairs(parent_segments) do
+      if active.source_id == candidate.source_id and active.start <= candidate.start and
+          candidate.stop <= active.stop then
+        contained = true
+        break
+      end
+    end
+    if not contained then return false end
+  end
+  return true
+end
+
+local function rebase_position(provenance, offset)
+  if not is_integer(offset) or offset < 0 then snapshot_error("local_source_offset") end
+  local segments = provenance_segments(provenance)
+  local total = provenance_extent(segments)
+  if offset > total then snapshot_error("local_source_offset_out_of_bounds") end
+  if #segments == 1 then
+    return json.harray({ source_id = segments[1].source_id, offset = segments[1].start + offset })
+  end
+  local cursor = 0
+  for _, segment in ipairs(segments) do
+    local length = segment.stop - segment.start
+    if offset < cursor + length then
+      return json.harray({
+        source_id = segment.source_id,
+        offset = segment.start + offset - cursor,
+      })
+    end
+    cursor = cursor + length
+  end
+  local last = segments[#segments]
+  return json.harray({ source_id = last.source_id, offset = last.stop })
+end
+
+local function rebase_span(provenance, span)
+  if type(span) ~= "table" then snapshot_error("local_source_span") end
+  local start = span.start
+  local stop = span["end"]
+  if not is_integer(start) or start < 0 or not is_integer(stop) or stop < 0 then
+    snapshot_error("local_source_span")
+  end
+  if start > stop then snapshot_error("local_source_span_reversed") end
+  local segments = provenance_segments(provenance)
+  if stop > provenance_extent(segments) then snapshot_error("local_source_span_out_of_bounds") end
+  if start == stop then
+    local position = rebase_position(provenance, start)
+    return json.harray({
+      kind = "direct_span",
+      source_id = position.source_id,
+      start = position.offset,
+      ["end"] = position.offset,
+      provenance = "staged_child_diagnostic",
+    })
+  end
+  local rebased = json.array()
+  local cursor = 0
+  for _, segment in ipairs(segments) do
+    local local_stop = cursor + segment.stop - segment.start
+    local overlap_start = math.max(start, cursor)
+    local overlap_stop = math.min(stop, local_stop)
+    if overlap_start < overlap_stop then
+      rebased[#rebased + 1] = json.harray({
+        kind = "direct_span",
+        source_id = segment.source_id,
+        start = segment.start + overlap_start - cursor,
+        ["end"] = segment.start + overlap_stop - cursor,
+        provenance = segment.provenance,
+      })
+    end
+    cursor = local_stop
+  end
+  if #rebased == 1 then return rebased[1] end
+  return json.harray({ kind = "derived_text", policy = "concatenate_in_order", segments = rebased })
+end
+
+local function rebase_diagnostic(provenance, diagnostic)
+  if type(diagnostic) ~= "table" or plain_table_kind(diagnostic) ~= "harray" then
+    snapshot_error("child_diagnostic")
+  end
+  if (diagnostic.source_id ~= nil and diagnostic.offset ~= nil) or
+      diagnostic.kind == "direct_span" or diagnostic.kind == "derived_text" then
+    return copy_plain(diagnostic)
+  end
+  local result = json.harray()
+  for key, value in pairs(diagnostic) do
+    if key == "span" and type(value) == "table" and value.kind == nil and
+        value.start ~= nil and value["end"] ~= nil then
+      result[key] = rebase_span(provenance, value)
+    elseif key == "position" and type(value) == "table" and value.source_id == nil and
+        value.offset ~= nil then
+      result[key] = rebase_position(provenance, value.offset)
+    elseif (key == "offset" or key:sub(-7) == "_offset") and is_integer(value) and value >= 0 then
+      result[key] = rebase_position(provenance, value)
+    elseif type(value) == "table" and plain_table_kind(value) == "harray" then
+      result[key] = rebase_diagnostic(provenance, value)
+    elseif type(value) == "table" and plain_table_kind(value) == "array" then
+      local array = json.array()
+      for index, child in ipairs(value) do
+        array[index] = type(child) == "table" and plain_table_kind(child) == "harray" and
+          rebase_diagnostic(provenance, child) or copy_plain(child)
+      end
+      result[key] = array
+    else
+      result[key] = copy_plain(value)
+    end
+  end
+  return result
+end
+
+local function recursive_authority_state(value)
+  return state_of(value, "StagedRecursiveAuthority")
+end
+
+function M.recursive_authority(config, cancelled, clock)
+  if type(cancelled) ~= "function" then snapshot_error("cancelled_callback") end
+  if type(clock) ~= "function" then snapshot_error("clock_callback") end
+  local required = {
+    cancellation_token = true,
+    deadline = true,
+    remaining_steps = true,
+    required_steps = true,
+    max_depth = true,
+    max_calls = true,
+  }
+  if type(config) ~= "table" then snapshot_error("recursive_authority") end
+  for key in pairs(config) do
+    if not required[key] and key ~= "total_calls" then snapshot_error("recursive_authority") end
+  end
+  for key in pairs(required) do if config[key] == nil then snapshot_error("recursive_authority") end end
+  if config.cancellation_token == nil or config.cancellation_token == json.null then
+    snapshot_error("recursive_authority")
+  end
+  for _, field in ipairs({ "deadline", "remaining_steps", "required_steps" }) do
+    if not is_integer(config[field]) or config[field] < 0 then snapshot_error(field) end
+  end
+  for _, field in ipairs({ "max_depth", "max_calls" }) do
+    if not is_integer(config[field]) or config[field] <= 0 then snapshot_error(field) end
+  end
+  local total_calls = config.total_calls or 0
+  if not is_integer(total_calls) or total_calls < 0 then snapshot_error("total_calls") end
+  return new_token("StagedRecursiveAuthority", {
+    cancellation_token = copy_plain(config.cancellation_token),
+    cancelled = cancelled,
+    clock = clock,
+    deadline = config.deadline,
+    remaining_steps = config.remaining_steps,
+    required_steps = config.required_steps,
+    max_depth = config.max_depth,
+    max_calls = config.max_calls,
+    total_calls = total_calls,
+  })
+end
+
+local function authority_cancelled(authority)
+  local ok, value = pcall(authority.cancelled, authority.cancellation_token)
+  if not ok and M.is_error(value) then error(value, 0) end
+  if not ok or type(value) ~= "boolean" then snapshot_error("cancelled_callback") end
+  return value
+end
+
+local function authority_now(authority)
+  local ok, value = pcall(authority.clock)
+  if not ok and M.is_error(value) then error(value, 0) end
+  if not ok or not is_integer(value) or value < 0 then snapshot_error("clock_callback") end
+  return value
+end
+
+local function runtime_authority(context)
+  local state = state_of(context, "StagedRuntimeContext")
+  local authority = state.runtime_authority
+  if type(authority) ~= "table" then snapshot_error("recursive_execution_context") end
+  if not authority.active then snapshot_error("expired_recursive_execution_context") end
+  return authority
+end
+
+function M.remaining_steps(context)
+  local authority = runtime_authority(context)
+  return math.min(authority.invocation.remaining_steps, authority.job_remaining_steps)
+end
+
+function M.cancellation_token(context)
+  return copy_plain(runtime_authority(context).cancellation_token)
+end
+
+function M.deadline(context)
+  return runtime_authority(context).deadline
+end
+
+function M.safe_point(context, cost)
+  if not is_integer(cost) or cost < 0 then snapshot_error("safe_point_cost") end
+  local authority = runtime_authority(context)
+  local base = {
+    stage_chain = authority.stage_chain,
+    job_id = authority.job_id,
+  }
+  if authority_cancelled(authority) then
+    base.resolved_spec_id = authority.resolved_spec_id
+    raise("staged_cancelled", "execute", base)
+  end
+  if authority_now(authority) > authority.deadline then
+    base.deadline = authority.deadline
+    raise("staged_deadline_exceeded", "execute", base)
+  end
+  local remaining = M.remaining_steps(context)
+  if remaining < cost then
+    base.remaining = remaining
+    raise("staged_budget_exhausted", "execute", base)
+  end
+  authority.invocation.remaining_steps = authority.invocation.remaining_steps - cost
+  authority.job_remaining_steps = authority.job_remaining_steps - cost
+  return M.remaining_steps(context)
+end
+
+function M.rebase_position(context, offset)
+  return rebase_position(runtime_authority(context).provenance, offset)
+end
+
+function M.rebase_span(context, span)
+  return rebase_span(runtime_authority(context).provenance, span)
+end
+
+function M.rebase_diagnostic(context, diagnostic)
+  return rebase_diagnostic(runtime_authority(context).provenance, diagnostic)
+end
+
+function M.evaluate_chain_case(value)
+  if type(value) ~= "table" then snapshot_error("chain_case") end
+  local diagnostic
+  if type(value.cancelled) ~= "boolean" then snapshot_error("cancelled") end
+  for _, field in ipairs({ "now", "deadline", "remaining_steps", "required_steps" }) do
+    if not is_integer(value[field]) or value[field] < 0 then snapshot_error(field) end
+  end
+  for _, field in ipairs({ "depth", "max_depth", "calls", "max_calls" }) do
+    if not is_integer(value[field]) or value[field] <= 0 then snapshot_error(field) end
+  end
+  if type(value.same_parser_top_lineage) ~= "boolean" then
+    snapshot_error("same_parser_top_lineage")
+  end
+  if value.cancelled then
+    diagnostic = "staged_cancelled"
+  elseif value.now > value.deadline then
+    diagnostic = "staged_deadline_exceeded"
+  elseif value.remaining_steps < value.required_steps then
+    diagnostic = "staged_budget_exhausted"
+  elseif value.depth > value.max_depth then
+    diagnostic = "staged_depth_exceeded"
+  elseif value.calls > value.max_calls then
+    diagnostic = "staged_call_limit_exceeded"
+  elseif json.encode(value.active_tuple) == json.encode(value.candidate_tuple) then
+    diagnostic = "staged_cycle"
+  elseif value.same_parser_top_lineage and
+      not strictly_decreases(value.active_provenance, value.candidate_provenance) then
+    diagnostic = "staged_chain_non_decreasing"
+  end
+  return json.harray({ accepted = diagnostic == nil, diagnostic = diagnostic or json.null })
 end
 
 local function cached_plan(registry, plan)
@@ -1339,6 +1682,451 @@ local function child_request(plan)
     failure_policy = plan.sidecar.failure_policy,
     effective = copy_plain(plan.sidecar.effective),
   })
+end
+
+local function static_chain_diagnostic(plan)
+  for _, active in ipairs(plan.active_frames) do
+    if json.encode(active.tuple) == json.encode(plan.active_tuple) then
+      return json.harray({
+        code = "staged_cycle",
+        phase = "execute",
+        stage_chain = copy_plain(plan.sidecar.stage_chain),
+        job_id = plan.sidecar.job_id,
+        active_tuple = copy_plain(active.tuple),
+      })
+    end
+  end
+  for _, active in ipairs(plan.active_frames) do
+    if active.resolved_spec_id == plan.resolved_spec_id and active.top_rule == plan.top_rule and
+        not strictly_decreases(active.provenance, plan.sidecar.provenance) then
+      return json.harray({
+        code = "staged_chain_non_decreasing",
+        phase = "execute",
+        stage_chain = copy_plain(plan.sidecar.stage_chain),
+        job_id = plan.sidecar.job_id,
+        provenance = copy_plain(plan.sidecar.provenance),
+        active_provenance = copy_plain(active.provenance),
+      })
+    end
+  end
+  return nil
+end
+
+local function recursive_runtime_context(authority, invocation, plan, job_remaining_steps)
+  local context = runtime_context()
+  private_state[context].runtime_authority = {
+    invocation = invocation,
+    cancellation_token = authority.cancellation_token,
+    cancelled = authority.cancelled,
+    clock = authority.clock,
+    deadline = authority.deadline,
+    job_remaining_steps = job_remaining_steps,
+    provenance = copy_plain(plan.sidecar.provenance),
+    stage_chain = copy_plain(plan.sidecar.stage_chain),
+    job_id = plan.sidecar.job_id,
+    resolved_spec_id = plan.resolved_spec_id,
+    active = true,
+  }
+  return context
+end
+
+local function expire_runtime_context(context)
+  local state = private_state[context]
+  if state ~= nil and type(state.runtime_authority) == "table" then
+    state.runtime_authority.active = false
+  end
+end
+
+local function recursive_child_request(plan, authority, context)
+  local request = child_request(plan)
+  request.stage_chain[#request.stage_chain + 1] = copy_plain(plan.active_tuple)
+  request.cancellation_token = copy_plain(authority.cancellation_token)
+  request.deadline = authority.deadline
+  request.remaining_steps = M.remaining_steps(context)
+  return request
+end
+
+local function dispatch_resource_check(authority, invocation, plan, spend)
+  local base = json.harray({
+    phase = "execute",
+    stage_chain = copy_plain(plan.sidecar.stage_chain),
+    job_id = plan.sidecar.job_id,
+  })
+  if authority_cancelled(authority) then
+    base.code = "staged_cancelled"
+    base.resolved_spec_id = plan.resolved_spec_id
+    return base
+  end
+  if authority_now(authority) > authority.deadline then
+    base.code = "staged_deadline_exceeded"
+    base.deadline = authority.deadline
+    return base
+  end
+  if not spend then return nil end
+  local effective_remaining = math.min(invocation.remaining_steps, plan.effective.max_steps)
+  if effective_remaining < authority.required_steps then
+    base.code = "staged_budget_exhausted"
+    base.remaining = effective_remaining
+    return base
+  end
+  local depth = plan.sidecar.stage_depth
+  if depth > authority.max_depth then
+    base.code = "staged_depth_exceeded"
+    base.depth = depth
+    base.maximum = authority.max_depth
+    return base
+  end
+  if invocation.total_calls >= authority.max_calls then
+    base.code = "staged_call_limit_exceeded"
+    base.calls = math.min(MAX_EXACT_INTEGER, invocation.total_calls + 1)
+    base.maximum = authority.max_calls
+    return base
+  end
+  invocation.remaining_steps = invocation.remaining_steps - authority.required_steps
+  invocation.total_calls = invocation.total_calls + 1
+  return nil, effective_remaining - authority.required_steps
+end
+
+local function bounded_diagnostic(invocation, plan, diagnostic)
+  local maximum = math.min(plan.effective.max_diagnostic_bytes, invocation.remaining_diagnostic_bytes)
+  local owned = copy_plain(diagnostic)
+  local bytes = #json.encode(owned)
+  if bytes > maximum then
+    owned = json.harray({
+      code = "staged_diagnostic_truncated",
+      phase = "execute",
+      stage_chain = copy_plain(plan.sidecar.stage_chain),
+      job_id = plan.sidecar.job_id,
+      maximum_bytes = maximum,
+    })
+    bytes = #json.encode(owned)
+  end
+  invocation.remaining_diagnostic_bytes = math.max(0, invocation.remaining_diagnostic_bytes - bytes)
+  return owned
+end
+
+local function portable_recursive_diagnostic(value, provenance)
+  local detached = detach_plain(value, 256)
+  if detached == nil or plain_table_kind(detached) ~= "harray" then
+    return json.harray({ code = "staged_child_exception" })
+  end
+  local ok, rebased = pcall(rebase_diagnostic, provenance, detached)
+  if ok then return rebased end
+  return json.harray({
+    code = type(detached.code) == "string" and detached.code or "staged_child_exception",
+    source_projection = "invalid_local_range",
+  })
+end
+
+local function recursive_callback_diagnostic(plan, child)
+  local portable = portable_recursive_diagnostic(child, plan.sidecar.provenance)
+  if portable.phase == "execute" and portable.job_id == plan.sidecar.job_id then return portable end
+  return json.harray({
+    code = "staged_child_failed",
+    phase = "execute",
+    stage_chain = copy_plain(plan.sidecar.stage_chain),
+    job_id = plan.sidecar.job_id,
+    parent_ast_path = copy_plain(plan.sidecar.parent_ast_path),
+    node_kind = plan.sidecar.node_kind,
+    payload_kind = plan.sidecar.payload_kind,
+    parser_spec_id = plan.sidecar.parser_spec_id,
+    resolved_spec_id = plan.sidecar.resolved_spec_id,
+    top_rule = plan.sidecar.top_rule,
+    cache_key = plan.sidecar.cache_key,
+    source_provenance = copy_plain(plan.sidecar.provenance),
+    result_policy = plan.sidecar.result_policy,
+    failure_policy = plan.sidecar.failure_policy,
+    child_diagnostic = portable,
+  })
+end
+
+local function recursive_detachment(plan, value, maximum)
+  local detached, record = detach_plain(value, maximum)
+  if detached ~= nil then return detached, record.nodes end
+  if record.reason == "node_limit" then
+    return nil, nil, json.harray({
+      code = "staged_result_node_limit_exceeded",
+      phase = "execute",
+      stage_chain = copy_plain(plan.sidecar.stage_chain),
+      job_id = plan.sidecar.job_id,
+      nodes = record.nodes,
+      maximum = maximum,
+    })
+  end
+  return nil, nil, json.harray({
+    code = "staged_result_not_detached",
+    phase = "execute",
+    stage_chain = copy_plain(plan.sidecar.stage_chain),
+    job_id = plan.sidecar.job_id,
+    field = record.reason,
+  })
+end
+
+local function result_base_path(ast, plan)
+  if plan.sidecar.result_policy == "replace_marker" then return path_json(plan.path) end
+  local result = json.array()
+  for index = 1, #plan.path - 1 do result[index] = plan.path[index] end
+  local into = plan.sidecar.into
+  if type(into) ~= "string" then
+    stitch_error(plan, "staged_stitch_target_missing", { into = "<missing>" })
+  end
+  result[#result + 1] = into
+  if plan.sidecar.result_policy == "append_child" then
+    local found, parent = parent_at(ast, plan.path)
+    local target = found and type(parent) == "table" and parent[into] or nil
+    if plain_table_kind(target) ~= "array" then
+      stitch_error(plan, "staged_append_target_invalid", { into = into })
+    end
+    result[#result + 1] = #target
+  end
+  return result
+end
+
+local function collect_queued_markers(value, path, active_frames, result)
+  if is_marker(value) then
+    result[#result + 1] = {
+      discovered = { path = path, marker = copy_plain(value) },
+      active_frames = active_frames,
+    }
+    return
+  end
+  if type(value) ~= "table" then return end
+  local kind = plain_table_kind(value)
+  if kind == "array" then
+    for index, child in ipairs(value) do
+      local child_path = path_json(path)
+      child_path[#child_path + 1] = index - 1
+      collect_queued_markers(child, child_path, active_frames, result)
+    end
+  elseif kind == "harray" then
+    for key, child in pairs(value) do
+      local child_path = path_json(path)
+      child_path[#child_path + 1] = key
+      collect_queued_markers(child, child_path, active_frames, result)
+    end
+  end
+end
+
+local function execute_recursive_depth(registry, working, plans, authority, invocation)
+  local next_depth = {}
+  local diagnostics = json.array()
+  for _, plan in ipairs(plans) do
+    validate_stitch_target(working, plan)
+    local diagnostic = plan.preflight_diagnostic
+    local detached_result
+    local detached_nodes = 0
+    if diagnostic == nil then
+      local job_remaining_steps
+      diagnostic, job_remaining_steps = dispatch_resource_check(authority, invocation, plan, true)
+      if diagnostic == nil then
+        local cached = cached_plan(registry, plan)
+        if cached.resolved_spec_id ~= plan.resolved_spec_id or cached.top_rule ~= plan.top_rule or
+            json.encode(cached.effective_capabilities) ~= json.encode(plan.effective.capabilities) then
+          snapshot_error("plan_cache")
+        end
+        local context = recursive_runtime_context(authority, invocation, plan, job_remaining_steps)
+        local ok, execution = pcall(
+          cached.callback,
+          recursive_child_request(plan, authority, context),
+          context
+        )
+        expire_runtime_context(context)
+        local execution_state = ok and type(execution) == "table" and private_state[execution] or nil
+        if not ok then
+          execution_state = {
+            succeeded = false,
+            value = M.is_error(execution) and M.to_json(execution) or
+              json.harray({ code = "staged_child_exception" }),
+          }
+        elseif execution_state == nil or execution_state.node_type ~= "StagedChildExecution" then
+          execution_state = {
+            succeeded = false,
+            value = json.harray({ code = "staged_child_exception" }),
+          }
+        end
+        if execution_state.succeeded then
+          diagnostic = dispatch_resource_check(authority, invocation, plan, false)
+          if diagnostic == nil then
+            local maximum = math.min(plan.effective.max_result_nodes, invocation.remaining_result_nodes)
+            detached_result, detached_nodes, diagnostic =
+              recursive_detachment(plan, execution_state.value, maximum)
+          end
+        else
+          diagnostic = recursive_callback_diagnostic(plan, execution_state.value)
+        end
+      end
+    end
+    if diagnostic ~= nil then
+      local bounded = bounded_diagnostic(invocation, plan, diagnostic)
+      working = settle_failure(working, plan, bounded, diagnostics)
+    else
+      invocation.remaining_result_nodes = math.max(
+        0,
+        invocation.remaining_result_nodes - detached_nodes
+      )
+      local base_path = result_base_path(working, plan)
+      local child_frames = {}
+      for index, frame in ipairs(plan.active_frames) do child_frames[index] = frame end
+      child_frames[#child_frames + 1] = {
+        tuple = copy_plain(plan.active_tuple),
+        resolved_spec_id = plan.resolved_spec_id,
+        top_rule = plan.top_rule,
+        provenance = copy_plain(plan.sidecar.provenance),
+        job_id = plan.sidecar.job_id,
+      }
+      collect_queued_markers(detached_result, base_path, child_frames, next_depth)
+      working = stitch_value(working, plan, detached_result)
+      plan.sidecar.state = "succeeded"
+    end
+  end
+  return working, next_depth, diagnostics
+end
+
+function M.enrich_recursively(registry, ast, options, authority_token)
+  registry_state(registry)
+  local authority = recursive_authority_state(authority_token)
+  local parsed_options = parse_options(options)
+  local invocation = {
+    remaining_steps = math.min(authority.remaining_steps, parsed_options.caller_ceilings.max_steps),
+    total_calls = authority.total_calls,
+    remaining_result_nodes = parsed_options.caller_ceilings.max_result_nodes,
+    remaining_diagnostic_bytes = parsed_options.caller_ceilings.max_diagnostic_bytes,
+  }
+  local working, copy_record = detach_plain(ast, MAX_EXACT_INTEGER)
+  if working == nil then snapshot_error("parent_ast:" .. tostring(copy_record.reason)) end
+  local discovered = {}
+  discover_markers(working, {}, discovered)
+  local queue = {}
+  for index, marker in ipairs(discovered) do
+    queue[index] = { discovered = marker, active_frames = {} }
+  end
+  local sidecars = json.array()
+  local diagnostics = json.array()
+  local depth = 1
+  while #queue > 0 do
+    local plans = {}
+    for index, queued in ipairs(queue) do
+      local plan = prepare_plan(
+        registry,
+        queued.discovered,
+        parsed_options,
+        depth,
+        queued.active_frames
+      )
+      plan.preflight_diagnostic = static_chain_diagnostic(plan)
+      plans[index] = plan
+    end
+    table.sort(plans, plan_less)
+    validate_prepared_depth(working, plans)
+    for _, plan in ipairs(plans) do
+      if plan.sidecar.failure_policy == "fail" and plan.preflight_diagnostic ~= nil then
+        raise_record(bounded_diagnostic(invocation, plan, plan.preflight_diagnostic))
+      end
+    end
+    local depth_diagnostics
+    working, queue, depth_diagnostics = execute_recursive_depth(
+      registry,
+      working,
+      plans,
+      authority,
+      invocation
+    )
+    for _, plan in ipairs(plans) do sidecars[#sidecars + 1] = copy_plain(plan.sidecar) end
+    for _, diagnostic in ipairs(depth_diagnostics) do
+      diagnostics[#diagnostics + 1] = copy_plain(diagnostic)
+    end
+    depth = depth + 1
+  end
+  return json.harray({
+    ast = copy_plain(working),
+    sidecars = sidecars,
+    diagnostics = diagnostics,
+    cache = M.cache_stats(registry),
+    resources = json.harray({
+      remaining_steps = invocation.remaining_steps,
+      total_calls = invocation.total_calls,
+      remaining_result_nodes = invocation.remaining_result_nodes,
+      remaining_diagnostic_bytes = invocation.remaining_diagnostic_bytes,
+    }),
+  })
+end
+
+local function callback_names(snapshot)
+  if type(snapshot) ~= "table" or type(snapshot.entries) ~= "table" or
+      not dense_array(snapshot.entries) or #snapshot.entries == 0 then
+    snapshot_error("compiled_authority")
+  end
+  local result = {}
+  local seen = {}
+  for index, row in ipairs(snapshot.entries) do
+    local name = required_string(row, "compiled_authority", "compiled_authority")
+    if seen[name] then snapshot_error("compiled_authority") end
+    seen[name] = true
+    result[index] = name
+  end
+  return result
+end
+
+function M.execution_seed(snapshot, options, authority_factory)
+  if type(authority_factory) ~= "function" then snapshot_error("authority_factory") end
+  local owned_snapshot = copy_plain(snapshot)
+  local owned_options = copy_plain(options)
+  local placeholders = {}
+  for _, name in ipairs(callback_names(owned_snapshot)) do
+    placeholders[name] = function() return M.child_success(json.null) end
+  end
+  M.freeze_registry(owned_snapshot, placeholders)
+  parse_options(owned_options)
+  return new_token("StagedAstEnrichmentSeed", {
+    snapshot = owned_snapshot,
+    options = owned_options,
+    authority_factory = authority_factory,
+  })
+end
+
+function M.is_execution_seed(value)
+  return M.node_type(value) == "StagedAstEnrichmentSeed"
+end
+
+function M.start_execution(seed)
+  local seed_state = state_of(seed, "StagedAstEnrichmentSeed")
+  local ok, authority = pcall(seed_state.authority_factory)
+  if not ok then
+    if M.is_error(authority) then error(authority, 0) end
+    snapshot_error("authority_factory")
+  end
+  if not exact_keys(authority, {
+        compiled_authorities = true,
+        recursive_authority = true,
+        cancelled = true,
+        clock = true,
+      }) then snapshot_error("authority_factory") end
+  local registry = M.freeze_registry(seed_state.snapshot, authority.compiled_authorities)
+  local recursive = M.recursive_authority(
+    authority.recursive_authority,
+    authority.cancelled,
+    authority.clock
+  )
+  return new_token("StagedAstEnrichmentExecutionState", {
+    registry = registry,
+    options = copy_plain(seed_state.options),
+    authority = recursive,
+    active = true,
+  })
+end
+
+function M.complete_execution(execution, ast, transaction_active)
+  local state = state_of(execution, "StagedAstEnrichmentExecutionState")
+  if not state.active then snapshot_error("expired_execution_state") end
+  state.active = false
+  if type(transaction_active) ~= "boolean" then snapshot_error("transaction_active") end
+  if transaction_active then
+    raise("staged_transaction_forbidden", "execute", {
+      origin = "lua_runtime:post_ast",
+      effect = "staged_parse_job_declaration",
+    })
+  end
+  return M.enrich_recursively(state.registry, ast, state.options, state.authority)
 end
 
 function M.enrich_current_depth(registry, ast, options)

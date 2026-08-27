@@ -2,6 +2,7 @@ local compiled_spec = require("linkedspec.compiled_spec")
 local interpreter = require("linkedspec.interpreter")
 local json = require("linkedspec.json")
 local spec_ast = require("linkedspec.spec_ast")
+local staged_ast_enrichment = require("linkedspec.staged_ast_enrichment")
 
 local M = {}
 
@@ -513,11 +514,14 @@ local function execute_generated(compiled, plan, input, source_identity, options
   runtime_options._generated_source_identity = identity
   local bounded_child_parse_authority = runtime_options.bounded_child_parse_authority
   runtime_options.bounded_child_parse_authority = nil
+  local staged_ast_enrichment_seed = runtime_options.staged_ast_enrichment_seed
+  runtime_options.staged_ast_enrichment_seed = nil
   local operation
   if trace_config == nil then
     operation = function()
       return interpreter.runtime_parse(interpreter.runtime_engine(compiled, {
         bounded_child_parse_authority = bounded_child_parse_authority,
+        staged_ast_enrichment_seed = staged_ast_enrichment_seed,
       }), input, runtime_options)
     end
   else
@@ -525,6 +529,7 @@ local function execute_generated(compiled, plan, input, source_identity, options
       return interpreter.runtime_parse_with_trace(
         interpreter.runtime_engine(compiled, {
           bounded_child_parse_authority = bounded_child_parse_authority,
+          staged_ast_enrichment_seed = staged_ast_enrichment_seed,
         }),
         input,
         trace_config,
@@ -536,6 +541,7 @@ local function execute_generated(compiled, plan, input, source_identity, options
   local ok, result = pcall(operation)
   if ok then return result.value end
   if M.is_generated_source_error(result) then raise(result) end
+  if staged_ast_enrichment.is_error(result) then raise(result) end
   if getmetatable(result) == GENERATED_DIAGNOSTIC_SINK_FAILURE_MT then
     raise(result.failure)
   end

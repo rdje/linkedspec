@@ -330,10 +330,10 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   native, normalized-descriptor, validated generated-plan, and independently loaded emitted equality plus distinct
   callbacks/cancellation/clocks and serialized-authority absence. Then run
   `bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py` to prove
-  neutral+Perl+Rust+Dart+Julia admission, one shared Lua dual-ABI dormant RED, 98 mutations, and exact
+  neutral+Perl+Rust+Dart+Julia admission, one shared Lua dual-ABI dormant GREEN consumer, 98 mutations, and exact
   single Perl/Rust/Dart/Julia ordinary+canonical admission. Run the Lua boundary unchanged with
   `bash tools/run_lua_project_data.sh puc lua/test/staged_ast_enrichment_contract_test.lua` and then `luajit`;
-  each must report 597 GREEN assertions and only the labeled `.14.7.7.3` recurrence/bounds/rebasing/carrier RED.
+  each must report 888/888 while remaining outside ordinary/canonical discovery until `.14.7.7.4`.
   Public authoring remains `.14.7.9`.
 - **Rust general-staged admitted private boundary:** `FUTURE-PARITY-BACKLOG.14.7.4.0-.4` owns
   `rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs` as an ordinary and canonical consumer. Run it with
@@ -396,12 +396,12 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   execution, generated plans, and emitted `execute` share the same optional seed and enrich only after the complete
   parent result. Retrieve [[julia-staged-ast-enrichment-carriers-admission]] before changing this seam. Public
   authoring stays `.9`.
-- **Lua general-staged private current-depth boundary:** retrieve
-  [[lua-staged-ast-enrichment-marker-provenance]] and [[lua-staged-ast-enrichment-current-depth-authority]] before
+- **Lua general-staged private recursive-carrier boundary:** retrieve
+  [[lua-staged-ast-enrichment-marker-provenance]], [[lua-staged-ast-enrichment-current-depth-authority]], and
+  [[lua-staged-ast-enrichment-recursive-carriers]] before
   inspecting source. Run the same stable consumer with
   `bash tools/run_lua_project_data.sh puc lua/test/staged_ast_enrichment_contract_test.lua` and again with
-  `luajit`; each must report 597 GREEN assertions and only the exact `.14.7.7.3` recurrence/bounds/rebasing/fresh-
-  carrier RED. Inspect `action_parser.lua` / `action_ast.lua` for exclusive assignment lowering and normalized text plans,
+  `luajit`; each must report 888/888. Inspect `action_parser.lua` / `action_ast.lua` for exclusive assignment lowering and normalized text plans,
   `regex_pcre2.c` / `staged_capture_provenance.lua` / `matching.lua` for private compact PCRE2 capture byte ranges
   absent from match fields, the outward module, and JSON, and
   `staged_parse_job.lua` for conversion through the existing typed source authority into a detached inert marker.
@@ -411,9 +411,12 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   The frozen snapshot must already contain every candidate outcome and exact compiled callback set; dispatch may
   not discover, load, compile, query a provider, or access a path. Require complete-depth target reservation before
   callback one, fresh sibling contexts, plan-only caching, detached atomic stitching, every result/failure policy,
-  cross-plan conflict denial, and inert returned markers. Do not infer capture positions from copied text or replay
-  a regex. The consumer remains absent from ordinary/canonical discovery, both Lua rollout rows remain pending,
-  and `.14.7.7.3` owns recurrence, shared bounds, source rebasing, and fresh dormant production carriers.
+  and cross-plan conflict denial. Probe `enrich_recursively`, `recursive_authority`, `safe_point`, the rebase helpers,
+  and the opaque execution seed for returned-marker-only breadth-first queues, exact cycle/decrease lineage,
+  non-resetting resources, expired contexts, typed direct/ordered-derived projection, post-parent startup, and a
+  fresh registry/cache/callback/resource set on every native/reconstructed/generated/emitted run. Do not infer
+  capture positions from copied text or replay a regex. The consumer remains absent from ordinary/canonical
+  discovery, both Lua rollout rows remain pending, and `.14.7.7.4` owns only admission and promotion.
 - **Env knobs:** `LINKEDSPEC_TRACE_LEVEL` (level; `LINKEDSPEC_DUMP_VERBOSITY` is the fallback),
   `LINKEDSPEC_TRACE_FILE` (route to a file), `LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_EMOJI`,
   `LINKEDSPEC_TRACE_RESET_FILE`.
@@ -1237,9 +1240,9 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
 - **BOUNDARY:** neutral, Perl, Rust, Dart, and Julia are complete. Julia's 491/491 consumer runs once in ordinary/
   canonical discovery and proves a fresh host-only seed across four production routes after its exclusive marker,
   live-proven typed provenance, caller-frozen policies, and breadth-first recursive authority. The one shared Lua
-  final-path consumer is dormant and runs independently with private marker/provenance plus caller-frozen
-  current-depth authority at 597 GREEN/one recurrence/bounds/rebasing/fresh-carrier RED on PUC Lua and LuaJIT;
-  both rollout rows, recurrence, and public no-drift remain pending. Outward facade/
+  final-path consumer is dormant and runs independently with private marker/provenance, caller-frozen policies,
+  bounded recurrence, source rebasing, and four fresh production carriers at 888/888 on PUC Lua and LuaJIT;
+  both rollout rows, admission, and public no-drift remain pending. Outward facade/
   schema/semantic/MCP/CLI/README tokens remain absent. The existing function-body v1 adapter and generated-source
   v2 format stay current and unchanged.
 

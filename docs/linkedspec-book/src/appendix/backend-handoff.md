@@ -765,10 +765,10 @@ exports, check-cfg registration, and conditional dead-code allowance are gone. `
 validation and gap-aware child-dispatch parity are restored, while the private authority stays dormant beside the
 one admitted contract route. `.5.4` historically aligned the Perl snapshot to 79 mutations plus Rust
 `dormant_red`; Rust admission now advances the neutral oracle to 84 mutations and promotes only Rust. Dart and
-Julia have since reached the same private admission boundary. Lua `.14.7.7.0-.2` now own one shared stable dormant
-consumer, its marker/provenance carrier, and a separate caller-frozen current-depth resolver/cache/policy engine:
-PUC Lua and LuaJIT each pass 597 assertions and fail only the same `.14.7.7.3` recurrence/bounds/rebasing/fresh-
-carrier sentinel; ordinary/canonical discovery and both rollout legs remain pending.
+Julia have since reached the same private admission boundary. Lua `.14.7.7.0-.3` now own one shared stable dormant
+consumer, its marker/provenance carrier, caller-frozen current-depth resolver/cache/policy engine, bounded
+breadth-first recurrence, source rebasing, and a fresh host-only seed across four production routes. PUC Lua and
+LuaJIT each pass 888 assertions; ordinary/canonical discovery and both rollout legs remain pending for `.4`.
 Dart
 `.14.7.5.0-.4` freeze one exact historical `test_dormant/` boundary, lower exact
 assignment-form `parse_job` to a live-proven private marker, and add a separate caller-frozen pure resolver/cache/
@@ -792,7 +792,11 @@ inert detached marker and converts private native capture ranges through typed s
 text search. `.14.7.7.2` adds pure pre-registered resolution, selected-top-before-id identity, plan-only caching,
 complete-depth target reservation and typed order, fresh sibling contexts, detached unpublished-copy stitching,
 all four result plus three failure policies, and live/target/conflict denials without widening function-body v1.
-Generated format and public behavior remain unchanged; `.14.7.7.3` owns recursion, bounds, rebasing, and carriers.
+`.14.7.7.3` adds complete breadth-first depths, exact cycle/decrease lineage, non-resetting cancellation/deadline/
+steps/calls/depth/result/diagnostic bounds, expiring callback safe points, and direct/ordered-derived source
+projection. `StagedAstEnrichmentSeed` starts fresh callback/registry/cache/recursive authority only after the
+parent AST completes through native, reconstructed, generated-plan, and independently loaded emitted routes.
+Generated format and public behavior remain unchanged; `.14.7.7.4` owns admission and rollout only.
 Mandatory engineering-notes segment `4989` is finitely authorized at 19 files / 18
 manifest lines by ADR `0092`. Lua current-depth closeout's mandatory change-history segment `4989` is finitely
 authorized at 24 files / 23 manifest lines by ADR `0093`; no other pressure ceiling changes.

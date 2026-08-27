@@ -1,4 +1,4 @@
--- FUTURE-PARITY-BACKLOG.14.7.7.1 — private Lua staged marker/provenance carrier.
+-- FUTURE-PARITY-BACKLOG.14.7.7.3 — private Lua recursive staged-AST carrier.
 --
 -- This exact final-path consumer is intentionally omitted from ordinary Lua
 -- and canonical CI discovery. Its focused repository-local commands are:
@@ -6,9 +6,8 @@
 --   bash tools/run_lua_project_data.sh puc lua/test/staged_ast_enrichment_contract_test.lua
 --   bash tools/run_lua_project_data.sh luajit lua/test/staged_ast_enrichment_contract_test.lua
 --
--- Every marker/provenance/static-boundary assertion remains GREEN on both Lua
--- ABIs. The sole intentional RED is the final caller-frozen resolution/cache
--- boundary owned by FUTURE-PARITY-BACKLOG.14.7.7.2.
+-- The consumer remains absent from ordinary and canonical discovery until the
+-- admission slice owned by FUTURE-PARITY-BACKLOG.14.7.7.4.
 
 local json = require("linkedspec.json")
 local linkedspec = require("linkedspec")
@@ -25,6 +24,13 @@ local AUTHORED_SOURCE = [[Top::
  /([^;]+);/
  E {
   job_marker = parse_job(entry_group(0), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "top", "Expr", "result_policy", "sibling_field", "into", "expression_ast", "on_error", "fail"))
+  return(job_marker)
+ }
+]]
+local PRODUCTION_SOURCE = [[Top::
+ /([^;]+);/
+ E {
+  job_marker = parse_job(entry_group(0), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr", "top", "Expr", "result_policy", "replace_marker", "on_error", "fail", "required_capabilities", array("typed-source-location-v1")))
   return(job_marker)
  }
 ]]
@@ -298,6 +304,92 @@ local function enrichment_registry(callback, snapshot, callbacks)
   return staged_ast_enrichment.freeze_registry(
     snapshot,
     callbacks or enrichment_callbacks(callback, snapshot)
+  )
+end
+
+local function recursive_authority(options)
+  options = options or {}
+  local config = json.harray({
+    cancellation_token = options.token or "cancel:open",
+    deadline = options.deadline or 100,
+    remaining_steps = options.remaining_steps == nil and 20 or options.remaining_steps,
+    required_steps = options.required_steps == nil and 1 or options.required_steps,
+    max_depth = options.max_depth or 4,
+    max_calls = options.max_calls or 10,
+  })
+  if options.total_calls ~= nil then config.total_calls = options.total_calls end
+  return staged_ast_enrichment.recursive_authority(
+    config,
+    options.cancelled or function() return false end,
+    options.clock or function() return 1 end
+  )
+end
+
+local function production_seed(observations, failure)
+  local run_counter = 0
+  return staged_ast_enrichment.execution_seed(
+    contract.resolution_snapshot,
+    enrichment_options(),
+    function()
+      run_counter = run_counter + 1
+      local run_id = run_counter
+      local token = json.harray({ run_id = run_id })
+      local callbacks = {}
+      local callback_identities = {}
+      for _, entry in ipairs(contract.resolution_snapshot.entries) do
+        local callback_name = entry.compiled_authority
+        local callback = function(request, context)
+          observations.callbacks[#observations.callbacks + 1] = json.harray({
+            run_id = run_id,
+            callback_name = callback_name,
+            text = request.text,
+            token = staged_ast_enrichment.cancellation_token(context),
+          })
+          staged_ast_enrichment.safe_point(context, 0)
+          if failure then
+            return staged_ast_enrichment.child_failure(json.harray({ code = "fixture_child_failure" }))
+          end
+          return staged_ast_enrichment.child_success(json.harray({
+            kind = "expression",
+            text = request.text,
+            top_rule = request.top_rule,
+          }))
+        end
+        callbacks[callback_name] = callback
+        callback_identities[#callback_identities + 1] = tostring(callback)
+      end
+      local cancelled = function(actual_token)
+        observations.cancellation_checks[#observations.cancellation_checks + 1] = json.harray({
+          run_id = run_id,
+          token = actual_token,
+        })
+        return false
+      end
+      local clock = function()
+        observations.clock_checks[#observations.clock_checks + 1] = run_id
+        return 1
+      end
+      observations.starts[#observations.starts + 1] = json.harray({
+        run_id = run_id,
+        token = token,
+        callback_identities = callback_identities,
+        cancelled = tostring(cancelled),
+        clock = tostring(clock),
+      })
+      return {
+        compiled_authorities = callbacks,
+        recursive_authority = json.harray({
+          cancellation_token = token,
+          deadline = 100,
+          remaining_steps = 20,
+          required_steps = 1,
+          max_depth = 4,
+          max_calls = 10,
+        }),
+        cancelled = cancelled,
+        clock = clock,
+      }
+    end
   )
 end
 
@@ -1382,6 +1474,579 @@ local thrown = staged_ast_enrichment.enrich_current_depth(
 check_equal(thrown.ast.payload, "panic", "callback exception keeps exact text")
 check_equal(thrown.diagnostics[1].child_diagnostic.code, "staged_child_exception", "callback exception contained")
 
+;(function()
+for _, row in ipairs(contract.chain_cases) do
+  local actual = staged_ast_enrichment.evaluate_chain_case(row)
+  check_equal(actual.accepted, row.accepted, "recursive chain " .. row.id .. " acceptance")
+  check_equal(actual.diagnostic, row.diagnostic, "recursive chain " .. row.id .. " diagnostic")
+end
+
+local recursive_observed = {}
+local recursive_tokens = {}
+local retained_context
+local recursive_registry = enrichment_registry(function(request, context)
+  recursive_observed[#recursive_observed + 1] = json.harray({
+    depth = request.stage_depth,
+    text = request.text,
+    stage_chain_length = #request.stage_chain,
+    context = staged_ast_enrichment.runtime_context_to_json(context),
+    token = staged_ast_enrichment.cancellation_token(context),
+    deadline = staged_ast_enrichment.deadline(context),
+    remaining_before = staged_ast_enrichment.remaining_steps(context),
+  })
+  retained_context = retained_context or context
+  staged_ast_enrichment.safe_point(context, 1)
+  context.cursor = request.stage_depth
+  context.marks.child = request.text
+  if request.text == "abcdef" then
+    return staged_ast_enrichment.child_success(json.harray({
+      kind = "branch",
+      child = enrichment_marker("bc", 1, "replace_marker", nil, "fail"),
+    }))
+  elseif request.text == "ghijkl" then
+    return staged_ast_enrichment.child_success(json.harray({
+      kind = "branch",
+      child = enrichment_marker("hi", 7, "replace_marker", nil, "fail"),
+    }))
+  end
+  return staged_ast_enrichment.child_success(json.harray({ kind = "leaf", text = request.text }))
+end)
+local recursive = staged_ast_enrichment.enrich_recursively(
+  recursive_registry,
+  json.harray({
+    nodes = json.array({
+      json.harray({ payload = enrichment_marker("abcdef", 0, "replace_marker", nil, "fail") }),
+      json.harray({ payload = enrichment_marker("ghijkl", 6, "replace_marker", nil, "fail") }),
+    }),
+  }),
+  enrichment_options(),
+  recursive_authority({
+    token = "cancel:shared",
+    cancelled = function(token)
+      recursive_tokens[#recursive_tokens + 1] = token
+      return false
+    end,
+  })
+)
+check_equal(#recursive_observed, 4, "recursive callback count")
+check_same_json(
+  json.array({
+    recursive_observed[1].text,
+    recursive_observed[2].text,
+    recursive_observed[3].text,
+    recursive_observed[4].text,
+  }),
+  json.array({ "abcdef", "ghijkl", "bc", "hi" }),
+  "recursive breadth-first order"
+)
+for index, expected_depth in ipairs({ 1, 1, 2, 2 }) do
+  check_equal(recursive_observed[index].depth, expected_depth, "recursive depth " .. index)
+  check_equal(
+    recursive_observed[index].stage_chain_length,
+    expected_depth,
+    "recursive request chain length " .. index
+  )
+  check_equal(recursive_observed[index].context.cursor, 0, "fresh recursive cursor " .. index)
+  check_equal(next(recursive_observed[index].context.marks), nil, "fresh recursive marks " .. index)
+  check_equal(recursive_observed[index].token, "cancel:shared", "shared recursive token " .. index)
+  check_equal(recursive_observed[index].deadline, 100, "shared recursive deadline " .. index)
+end
+for index, expected in ipairs({ 19, 17, 15, 13 }) do
+  check_equal(recursive_observed[index].remaining_before, expected, "shared recursive budget " .. index)
+end
+for _, token in ipairs(recursive_tokens) do
+  check_equal(token, "cancel:shared", "recursive cancellation token identity")
+end
+for index, expected_depth in ipairs({ 1, 1, 2, 2 }) do
+  check_equal(recursive.sidecars[index].stage_depth, expected_depth, "recursive sidecar depth " .. index)
+  check_equal(#recursive.sidecars[index].stage_chain, expected_depth - 1, "recursive sidecar chain " .. index)
+end
+check_equal(recursive.ast.nodes[1].payload.child.kind, "leaf", "first recursive leaf")
+check_equal(recursive.ast.nodes[2].payload.child.text, "hi", "second recursive leaf")
+check_equal(recursive.resources.remaining_steps, 12, "recursive cumulative steps")
+check_equal(recursive.resources.total_calls, 4, "recursive cumulative calls")
+check_equal(recursive.resources.remaining_result_nodes, 116, "recursive cumulative result nodes")
+check_equal(#recursive.diagnostics, 0, "recursive diagnostics empty")
+local expired_ok, expired = capture(function()
+  return staged_ast_enrichment.safe_point(retained_context, 0)
+end)
+check_equal(expired_ok, false, "recursive context expires")
+check_equal(enrichment_error_code(expired), "staged_registry_snapshot_invalid", "expired context diagnostic")
+
+local routed_registry = enrichment_registry(function(request)
+  local starts = { abcd = 0, efgh = 10, ijkl = 20 }
+  if starts[request.text] ~= nil then
+    return staged_ast_enrichment.child_success(enrichment_marker(
+      request.text:sub(2, 3),
+      starts[request.text] + 1,
+      "replace_marker",
+      nil,
+      "fail"
+    ))
+  end
+  return staged_ast_enrichment.child_success(json.harray({ kind = "routed_leaf" }))
+end)
+local routed = staged_ast_enrichment.enrich_recursively(
+  routed_registry,
+  json.harray({
+    replace = json.harray({
+      control = enrichment_marker("abcd", 0, "replace_field", "ast", "fail"),
+      ast = json.null,
+    }),
+    sibling = json.harray({
+      control = enrichment_marker("efgh", 10, "sibling_field", "ast", "fail"),
+    }),
+    append = json.harray({
+      control = enrichment_marker("ijkl", 20, "append_child", "children", "fail"),
+      children = json.array(),
+    }),
+  }),
+  enrichment_options(),
+  recursive_authority()
+)
+check_equal(routed.ast.replace.ast.kind, "routed_leaf", "recursive replace-field rebase")
+check_equal(routed.ast.sibling.ast.kind, "routed_leaf", "recursive sibling-field rebase")
+check_equal(routed.ast.append.children[1].kind, "routed_leaf", "recursive append-child rebase")
+local routed_depths = { 0, 0 }
+for _, sidecar in ipairs(routed.sidecars) do routed_depths[sidecar.stage_depth] = routed_depths[sidecar.stage_depth] + 1 end
+check_equal(routed_depths[1], 3, "routed first depth count")
+check_equal(routed_depths[2], 3, "routed second depth count")
+
+local cycle_calls = 0
+local cycle_marker = enrichment_marker("abcdef", 0, "replace_marker", nil, "fail")
+local cycle_registry = enrichment_registry(function()
+  cycle_calls = cycle_calls + 1
+  return staged_ast_enrichment.child_success(cycle_marker)
+end)
+local cycle_ok, cycle_error = capture(function()
+  return staged_ast_enrichment.enrich_recursively(
+    cycle_registry,
+    json.harray({ payload = cycle_marker }),
+    enrichment_options(),
+    recursive_authority()
+  )
+end)
+check_equal(cycle_ok, false, "recursive exact cycle rejects")
+check_equal(enrichment_error_code(cycle_error), "staged_cycle", "recursive exact cycle diagnostic")
+check(enrichment_diagnostic_is_complete(cycle_error), "recursive exact cycle context complete")
+check_equal(cycle_calls, 1, "recursive exact cycle preflight")
+
+local nondecreasing_ok, nondecreasing = capture(function()
+  return staged_ast_enrichment.enrich_recursively(
+    enrichment_registry(function()
+      return staged_ast_enrichment.child_success(
+        enrichment_marker("uvwxyz", 0, "replace_marker", nil, "fail")
+      )
+    end),
+    json.harray({ payload = cycle_marker }),
+    enrichment_options(),
+    recursive_authority()
+  )
+end)
+check_equal(nondecreasing_ok, false, "recursive nondecreasing lineage rejects")
+check_equal(
+  enrichment_error_code(nondecreasing),
+  "staged_chain_non_decreasing",
+  "recursive nondecreasing lineage diagnostic"
+)
+check(enrichment_diagnostic_is_complete(nondecreasing), "recursive nondecreasing context complete")
+
+for _, denial in ipairs({
+  { "staged_depth_exceeded", { max_depth = 1 } },
+  { "staged_call_limit_exceeded", { max_calls = 1 } },
+}) do
+  local ok, value = capture(function()
+    return staged_ast_enrichment.enrich_recursively(
+      enrichment_registry(function()
+        return staged_ast_enrichment.child_success(
+          enrichment_marker("bc", 1, "replace_marker", nil, "fail")
+        )
+      end),
+      json.harray({ payload = cycle_marker }),
+      enrichment_options(),
+      recursive_authority(denial[2])
+    )
+  end)
+  check_equal(ok, false, denial[1] .. " rejects")
+  check_equal(enrichment_error_code(value), denial[1], denial[1] .. " diagnostic")
+  check(enrichment_diagnostic_is_complete(value), denial[1] .. " context complete")
+end
+
+for _, denial in ipairs({
+  { "staged_budget_exhausted", { remaining_steps = 0 } },
+  { "staged_cancelled", { cancelled = function() return true end } },
+  { "staged_deadline_exceeded", { deadline = 10, clock = function() return 11 end } },
+}) do
+  local calls = 0
+  local ok, value = capture(function()
+    return staged_ast_enrichment.enrich_recursively(
+      enrichment_registry(function()
+        calls = calls + 1
+        return staged_ast_enrichment.child_success(json.null)
+      end),
+      json.harray({ payload = enrichment_marker("x", 0, "replace_marker", nil, "fail") }),
+      enrichment_options(),
+      recursive_authority(denial[2])
+    )
+  end)
+  check_equal(ok, false, denial[1] .. " dispatch rejects")
+  check_equal(enrichment_error_code(value), denial[1], denial[1] .. " dispatch diagnostic")
+  check(enrichment_diagnostic_is_complete(value), denial[1] .. " dispatch context complete")
+  check_equal(calls, 0, denial[1] .. " callback remains uncalled")
+end
+
+local narrowed = staged_ast_enrichment.enrich_recursively(
+  enrichment_registry(function() return staged_ast_enrichment.child_success(json.null) end),
+  json.harray({ payload = enrichment_marker("x", 0, "replace_marker", nil, "fail") }),
+  enrichment_options(),
+  recursive_authority({ remaining_steps = 500, required_steps = 0 })
+)
+check_equal(narrowed.resources.remaining_steps, 200, "caller step ceiling narrows authority")
+
+local node_options = enrichment_options()
+node_options.caller_ceilings.max_result_nodes = 5
+local node_calls = 0
+local node_limit_ok, node_limit = capture(function()
+  return staged_ast_enrichment.enrich_recursively(
+    enrichment_registry(function()
+      node_calls = node_calls + 1
+      return staged_ast_enrichment.child_success(json.harray({ kind = "leaf", value = 1 }))
+    end),
+    json.harray({
+      nodes = json.array({
+        json.harray({ payload = enrichment_marker("a", 0, "replace_marker", nil, "fail") }),
+        json.harray({ payload = enrichment_marker("b", 1, "replace_marker", nil, "fail") }),
+      }),
+    }),
+    node_options,
+    recursive_authority()
+  )
+end)
+check_equal(node_limit_ok, false, "cumulative result-node limit rejects")
+check_equal(
+  enrichment_error_code(node_limit),
+  "staged_result_node_limit_exceeded",
+  "cumulative result-node diagnostic"
+)
+check(enrichment_diagnostic_is_complete(node_limit), "cumulative result-node context complete")
+check_equal(node_calls, 2, "cumulative result-node limit spans siblings")
+
+local direct_rebased = staged_ast_enrichment.enrich_recursively(
+  enrichment_registry(function(_, context)
+    check_same_json(
+      staged_ast_enrichment.rebase_position(context, 1),
+      json.harray({ source_id = "ascii", offset = 2 }),
+      "direct position rebasing"
+    )
+    check_same_json(
+      staged_ast_enrichment.rebase_span(context, json.harray({ start = 1, ["end"] = 3 })),
+      json.harray({
+        kind = "direct_span",
+        source_id = "ascii",
+        start = 2,
+        ["end"] = 4,
+        provenance = "capture",
+      }),
+      "direct span rebasing"
+    )
+    return staged_ast_enrichment.child_failure(json.harray({
+      code = "child_parse_error",
+      position = json.harray({ offset = 1 }),
+      span = json.harray({ start = 1, ["end"] = 3 }),
+      end_offset = 3,
+    }))
+  end),
+  json.harray({ payload = enrichment_marker("abcd", 1, "replace_marker", nil, "keep_text") }),
+  enrichment_options(),
+  recursive_authority()
+)
+local direct_child = direct_rebased.diagnostics[1].child_diagnostic
+check_same_json(direct_child.position, json.harray({ source_id = "ascii", offset = 2 }), "direct diagnostic position")
+check_equal(direct_child.span.kind, "direct_span", "direct diagnostic span kind")
+check_equal(direct_child.span.start, 2, "direct diagnostic span start")
+check_equal(direct_child.span["end"], 4, "direct diagnostic span end")
+check_same_json(direct_child.end_offset, json.harray({ source_id = "ascii", offset = 4 }), "direct diagnostic offset")
+
+local derived_marker = enrichment_marker("abcd", 0, "replace_marker", nil, "keep_text")
+derived_marker.staged_parse_job_v2.provenance = json.harray({
+  kind = "derived_text",
+  policy = "concatenate_in_order",
+  segments = json.array({
+    json.harray({ kind = "direct_span", source_id = "ascii", start = 0, ["end"] = 2, provenance = "capture" }),
+    json.harray({ kind = "direct_span", source_id = "unicode", start = 1, ["end"] = 3, provenance = "capture" }),
+  }),
+})
+local derived = staged_ast_enrichment.enrich_recursively(
+  enrichment_registry(function(_, context)
+    check_same_json(
+      staged_ast_enrichment.rebase_position(context, 2),
+      json.harray({ source_id = "unicode", offset = 1 }),
+      "derived position rebasing"
+    )
+    local span = staged_ast_enrichment.rebase_span(
+      context,
+      json.harray({ start = 1, ["end"] = 3 })
+    )
+    check_equal(span.kind, "derived_text", "derived span kind")
+    check_equal(#span.segments, 2, "derived span segment count")
+    return staged_ast_enrichment.child_failure(json.harray({
+      code = "child_parse_error",
+      span = json.harray({ start = 1, ["end"] = 3 }),
+    }))
+  end),
+  json.harray({ payload = derived_marker }),
+  enrichment_options(),
+  recursive_authority()
+)
+check_equal(derived.diagnostics[1].child_diagnostic.span.kind, "derived_text", "derived diagnostic span")
+check_equal(#derived.diagnostics[1].child_diagnostic.span.segments, 2, "derived diagnostic segments")
+
+local invalid_range = staged_ast_enrichment.enrich_recursively(
+  enrichment_registry(function()
+    return staged_ast_enrichment.child_failure(json.harray({
+      code = "child_parse_error",
+      span = json.harray({ start = 1, ["end"] = 99 }),
+    }))
+  end),
+  json.harray({ payload = enrichment_marker("abcd", 0, "replace_marker", nil, "keep_text") }),
+  enrichment_options(),
+  recursive_authority()
+)
+check_same_json(
+  invalid_range.diagnostics[1].child_diagnostic,
+  json.harray({ code = "child_parse_error", source_projection = "invalid_local_range" }),
+  "invalid local diagnostic range"
+)
+
+local diagnostic_options = enrichment_options()
+diagnostic_options.caller_ceilings.max_diagnostic_bytes = 64
+local truncated = staged_ast_enrichment.enrich_recursively(
+  enrichment_registry(function()
+    return staged_ast_enrichment.child_failure(json.harray({
+      code = "child_parse_error",
+      detail = string.rep("x", 1024),
+    }))
+  end),
+  json.harray({ payload = enrichment_marker("bad", 0, "replace_marker", nil, "keep_text") }),
+  diagnostic_options,
+  recursive_authority()
+)
+check_equal(truncated.diagnostics[1].code, "staged_diagnostic_truncated", "diagnostic truncation")
+check_equal(truncated.resources.remaining_diagnostic_bytes, 0, "diagnostic bytes are cumulative")
+
+local safe_cancel_checks = 0
+local safe_cancel_ok, safe_cancel = capture(function()
+  return staged_ast_enrichment.enrich_recursively(
+    enrichment_registry(function(_, context)
+      staged_ast_enrichment.safe_point(context, 0)
+      return staged_ast_enrichment.child_success(json.null)
+    end),
+    json.harray({ payload = enrichment_marker("x", 0, "replace_marker", nil, "fail") }),
+    enrichment_options(),
+    recursive_authority({
+      cancelled = function()
+        safe_cancel_checks = safe_cancel_checks + 1
+        return safe_cancel_checks >= 2
+      end,
+    })
+  )
+end)
+check_equal(safe_cancel_ok, false, "safe-point cancellation rejects")
+check_equal(enrichment_error_code(safe_cancel), "staged_cancelled", "safe-point cancellation diagnostic")
+check(enrichment_diagnostic_is_complete(safe_cancel), "safe-point cancellation context complete")
+
+local safe_clock_checks = 0
+local safe_deadline_ok, safe_deadline = capture(function()
+  return staged_ast_enrichment.enrich_recursively(
+    enrichment_registry(function(_, context)
+      staged_ast_enrichment.safe_point(context, 0)
+      return staged_ast_enrichment.child_success(json.null)
+    end),
+    json.harray({ payload = enrichment_marker("x", 0, "replace_marker", nil, "fail") }),
+    enrichment_options(),
+    recursive_authority({
+      deadline = 10,
+      clock = function()
+        safe_clock_checks = safe_clock_checks + 1
+        return safe_clock_checks == 1 and 1 or 11
+      end,
+    })
+  )
+end)
+check_equal(safe_deadline_ok, false, "safe-point deadline rejects")
+check_equal(enrichment_error_code(safe_deadline), "staged_deadline_exceeded", "safe-point deadline diagnostic")
+check(enrichment_diagnostic_is_complete(safe_deadline), "safe-point deadline context complete")
+
+local production_parsed, production_compiled = compile_source(PRODUCTION_SOURCE)
+local raw_production = linkedspec.runtime_parse(linkedspec.runtime_engine(production_compiled), "1+2;").value
+check_equal(raw_production.kind, "STAGED_PARSE_JOB_MARKER", "dormant route stays raw without seed")
+local observations = { starts = {}, callbacks = {}, cancellation_checks = {}, clock_checks = {} }
+local seed = production_seed(observations, false)
+check_equal(tostring(seed), "StagedAstEnrichmentSeed(<opaque>)", "production seed stays opaque")
+local invalid_engine_ok = capture(function()
+  return linkedspec.runtime_engine(production_compiled, { staged_ast_enrichment_seed = "not-a-seed" })
+end)
+check_equal(invalid_engine_ok, false, "production engine rejects non-seed")
+
+local native_engine = linkedspec.runtime_engine(production_compiled, { staged_ast_enrichment_seed = seed })
+local production_values = json.array()
+for _ = 1, 2 do
+  production_values[#production_values + 1] = linkedspec.runtime_parse(native_engine, "1+2;").value
+end
+local production_normalized = json.decode(json.encode(linkedspec.spec_ast.to_json(production_parsed)))
+local production_reconstructed_ast = linkedspec.spec_ast.from_json("SpecFile", production_normalized)
+linkedspec.validate_spec(production_reconstructed_ast)
+local production_reconstructed = linkedspec.compile_spec(production_reconstructed_ast)
+local reconstructed_engine = linkedspec.runtime_engine(
+  production_reconstructed,
+  { staged_ast_enrichment_seed = seed }
+)
+for _ = 1, 2 do
+  production_values[#production_values + 1] = linkedspec.runtime_parse(reconstructed_engine, "1+2;").value
+end
+local production_plan = linkedspec.build_generated_rule_plan(production_compiled)
+for _ = 1, 2 do
+  production_values[#production_values + 1] = linkedspec.execute_generated_parser_v2(
+    production_compiled,
+    production_plan,
+    "1+2;",
+    SOURCE_IDENTITY,
+    { staged_ast_enrichment_seed = seed }
+  )
+end
+local production_emitted = linkedspec.emit_lua_source_v2(production_compiled, EMITTED_IDENTITY)
+local production_chunk, production_load_error = loader(
+  production_emitted,
+  "@staged_ast_enrichment_production_generated.lua"
+)
+check(production_chunk ~= nil, "production emitted module loads: " .. tostring(production_load_error))
+if production_chunk ~= nil then
+  local production_module = production_chunk()
+  for _ = 1, 2 do
+    production_values[#production_values + 1] = production_module.execute(
+      "1+2;",
+      { staged_ast_enrichment_seed = seed }
+    )
+  end
+end
+check_equal(#production_values, 8, "all production carrier executions")
+for index, value in ipairs(production_values) do
+  check_same_json(value.ast, json.harray({ kind = "expression", text = "1+2", top_rule = "Expr" }), "production AST " .. index)
+  check_equal(#value.diagnostics, 0, "production diagnostics " .. index)
+  check_equal(#value.sidecars, 1, "production sidecar count " .. index)
+  check_equal(value.sidecars[1].state, "succeeded", "production sidecar state " .. index)
+  check_equal(value.cache.entries, 1, "production cache entry " .. index)
+  check_equal(value.cache.hits, 0, "production cache hit " .. index)
+  check_equal(value.cache.misses, 1, "production cache miss " .. index)
+  check_equal(value.resources.total_calls, 1, "production call count " .. index)
+  if index > 1 then check_same_json(value, production_values[1], "production route parity " .. index) end
+end
+check_equal(#observations.starts, 8, "fresh production starts")
+check_equal(#observations.callbacks, 8, "fresh production callbacks")
+for index, row in ipairs(observations.starts) do
+  check_equal(row.run_id, index, "fresh production run id " .. index)
+  check_equal(row.token.run_id, index, "fresh production token " .. index)
+end
+for index, row in ipairs(observations.callbacks) do
+  check_equal(row.run_id, index, "callback run id " .. index)
+  check_equal(row.token.run_id, index, "callback token " .. index)
+  check_equal(row.text, "1+2", "callback text " .. index)
+end
+
+local parent_failure_observations = {
+  starts = {}, callbacks = {}, cancellation_checks = {}, clock_checks = {},
+}
+local parent_failure_seed = production_seed(parent_failure_observations, false)
+local _, parent_failure_compiled = compile_source([[Top::
+ /([^;]+);/
+ E {
+  job_marker = parse_job(entry_group(0), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr", "top", "Expr", "result_policy", "replace_marker", "on_error", "fail", "required_capabilities", array("typed-source-location-v1")))
+  fail("parent failed")
+  return(job_marker)
+ }
+]])
+local parent_failure_ok = capture(function()
+  return linkedspec.runtime_parse(
+    linkedspec.runtime_engine(parent_failure_compiled, {
+      staged_ast_enrichment_seed = parent_failure_seed,
+    }),
+    "1+2;"
+  )
+end)
+check_equal(parent_failure_ok, false, "parent failure rejects before staged execution")
+check_equal(#parent_failure_observations.starts, 0, "parent failure consumes no staged authority")
+
+local transaction_observations = {
+  starts = {}, callbacks = {}, cancellation_checks = {}, clock_checks = {},
+}
+local transaction_seed = production_seed(transaction_observations, false)
+local transaction_execution = staged_ast_enrichment.start_execution(transaction_seed)
+local transaction_ok, transaction_error = capture(function()
+  return staged_ast_enrichment.complete_execution(transaction_execution, raw_production, true)
+end)
+check_equal(transaction_ok, false, "live recognition transaction rejects staged execution")
+check_equal(
+  enrichment_error_code(transaction_error),
+  "staged_transaction_forbidden",
+  "live recognition transaction diagnostic"
+)
+check(enrichment_diagnostic_is_complete(transaction_error), "live transaction context complete")
+local reused_ok, reused = capture(function()
+  return staged_ast_enrichment.complete_execution(transaction_execution, raw_production, false)
+end)
+check_equal(reused_ok, false, "staged execution state expires after denial")
+check_equal(enrichment_error_code(reused), "staged_registry_snapshot_invalid", "expired execution diagnostic")
+local detached_probe = production_values[1]
+detached_probe.ast.kind = "mutated"
+for index = 2, #production_values do
+  check_equal(production_values[index].ast.kind, "expression", "production outputs detached " .. index)
+end
+local portable_production_plan = json.array()
+for index, row in ipairs(production_plan) do
+  portable_production_plan[index] = json.harray({ label = row.label, family = row.family })
+end
+for _, artifact in ipairs({
+  json.encode(linkedspec.spec_ast.to_json(production_parsed)),
+  json.encode(portable_production_plan),
+  production_emitted,
+}) do
+  for _, forbidden in ipairs({
+    "authority_factory",
+    "compiled_authorities",
+    "recursive_authority",
+    "cancellation_token",
+    "mutable_queue",
+    "run_id",
+  }) do
+    check_equal(count_literal(artifact, forbidden), 0, "logical artifact excludes " .. forbidden)
+  end
+end
+
+local failure_observations = { starts = {}, callbacks = {}, cancellation_checks = {}, clock_checks = {} }
+local failure_seed = production_seed(failure_observations, true)
+local native_failure_ok, native_failure = capture(function()
+  return linkedspec.runtime_parse(
+    linkedspec.runtime_engine(production_compiled, { staged_ast_enrichment_seed = failure_seed }),
+    "1+2;"
+  )
+end)
+local generated_failure_ok, generated_failure = capture(function()
+  return linkedspec.execute_generated_parser_v2(
+    production_compiled,
+    production_plan,
+    "1+2;",
+    SOURCE_IDENTITY,
+    { staged_ast_enrichment_seed = failure_seed }
+  )
+end)
+check_equal(native_failure_ok, false, "native staged failure preserved")
+check_equal(generated_failure_ok, false, "generated staged failure preserved")
+check_equal(enrichment_error_code(native_failure), "staged_child_failed", "native staged failure identity")
+check_equal(enrichment_error_code(generated_failure), "staged_child_failed", "generated staged failure identity")
+check(enrichment_diagnostic_is_complete(native_failure), "native staged failure context complete")
+check(enrichment_diagnostic_is_complete(generated_failure), "generated staged failure context complete")
+end)()
+
 check(file_exists(CONSUMER_PATH), "stable final-path consumer exists")
 local ordinary = read_file("tools/run_lua_local.sh")
 local inline_ordinary = read_file("lua/test/run.lua")
@@ -1399,12 +2064,9 @@ for _, private_token in ipairs({
   check_equal(count_literal(umbrella, private_token), 0, "outward token absent: " .. private_token)
 end
 
--- Intentional RED: owner .14.7.7.3 must add breadth-first recurrence, shared
--- bounds, source rebasing, and fresh dormant production carriers without
--- changing the committed one-depth authority.
 check(
   type(staged_ast_enrichment.enrich_recursively) == "function",
-  "LINKEDSPEC_STAGED_AST_ENRICHMENT_LUA_RED: missing breadth-first recurrence bounds rebasing and fresh dormant carriers"
+  "recursive enrichment implementation remains present"
 )
 
 if #failures == 0 then

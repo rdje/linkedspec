@@ -17,6 +17,7 @@ local typed_source = {
   recognition = require("linkedspec.recognition_transaction_runtime"),
   progressive = require("linkedspec.bounded_child_parse_authority"),
   staged = require("linkedspec.staged_parse_job"),
+  staged_enrichment = require("linkedspec.staged_ast_enrichment"),
 }
 
 local ERROR_MT = {
@@ -161,6 +162,10 @@ function M.runtime_engine(compiled, options)
       not typed_source.progressive.is_execution_seed(options.bounded_child_parse_authority) then
     fail("bounded_child_parse_authority must be a private progressive execution seed")
   end
+  if options.staged_ast_enrichment_seed ~= nil and
+      not typed_source.staged_enrichment.is_execution_seed(options.staged_ast_enrichment_seed) then
+    fail("staged_ast_enrichment_seed must be a private staged execution seed")
+  end
   return trace_support.run(
     options.trace,
     "lua_runtime:create_engine",
@@ -192,6 +197,7 @@ function M.runtime_engine(compiled, options)
         spec_name = options.spec_name,
         spec_path = options.spec_path,
         bounded_child_parse_authority = options.bounded_child_parse_authority,
+        staged_ast_enrichment_seed = options.staged_ast_enrichment_seed,
         regex_cache = {},
         boundary_regex_cache = {},
         helper_regex_cache = {},
@@ -4933,10 +4939,30 @@ function M.runtime_parse(engine, input, options)
     if semantic_sink_failed then error(observation.sink_failure_value(result), 0) end
     error(result, 0)
   end
-  local output = json.array({ copy_value(result.value) })
+  local final_value = copy_value(result.value)
+  if engine.staged_ast_enrichment_seed ~= nil then
+    local staged_ok, staged_result = pcall(function()
+      local execution = typed_source.staged_enrichment.start_execution(
+        engine.staged_ast_enrichment_seed
+      )
+      return typed_source.staged_enrichment.complete_execution(
+        execution,
+        final_value,
+        typed_source.recognition.has_live_tokens(ctx)
+      )
+    end)
+    if not staged_ok then
+      if trace_scope ~= nil then
+        trace.exit_trace_scope(options.trace, trace_scope, "error=" .. tostring(staged_result))
+      end
+      error(staged_result, 0)
+    end
+    final_value = staged_result
+  end
+  local output = json.array({ copy_value(final_value) })
   local parse_result = setmetatable({
     matched = result.matched,
-    value = copy_value(result.value),
+    value = copy_value(final_value),
     output = output,
     cursor_code_unit = ctx.cursor_byte,
     cursor_char_offset = matching.byte_offset_to_char_offset(input, ctx.cursor_byte),

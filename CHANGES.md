@@ -10,6 +10,33 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-27 — FUTURE-PARITY-BACKLOG.14.7.7.3 — implement Lua staged recursive carriers
+
+- Preserved the private one-depth API and added a separate Lua-5.1-compatible breadth-first scheduler that
+  prepares complete depths and queues only markers found in successful detached child results at their exact
+  replace/field/sibling/append destinations.
+- Added exact parser/top/payload-digest/full-provenance active frames, exact-cycle denial, and same-parser/top
+  recurrence only under segment containment plus strictly smaller total Unicode-scalar extent.
+- Added one non-resetting invocation authority for cancellation, caller clock/absolute deadline, steps, seeded
+  calls, depth/call maxima, cumulative atomic-marker result nodes, and canonical UTF-8 diagnostic bytes. Fresh
+  callback contexts expose safe points and direct/ordered-derived source projection, then expire after settlement.
+- Added an opaque host-only execution seed after complete parent execution. Native, `SpecFile`-JSON reconstructed,
+  validated generated-plan, and independently loaded emitted routes build fresh callback/registry/cache/resource/
+  queue state per run while preserving no-seed behavior and primary staged exceptions.
+- Advanced the stable dormant consumer to 888/888 independently on PUC Lua and LuaJIT. Four routes execute twice
+  with eight equal detached results, fresh authority observations, one miss/no hits/one call per execution,
+  parent-failure and transaction boundaries, cumulative resource adversaries, rebasing, and authority absence.
+- Kept the consumer absent from ordinary and canonical discovery. Neutral governance remains 98 mutations; both
+  Lua rollout rows, function-body v1, generated-source-v2 format, public/outward behavior, other backends, and
+  later recurrence remain unchanged for `.14.7.7.4+`.
+- Added [[lua-staged-ast-enrichment-recursive-carriers]] and synchronized ADR `0088`, roadmaps, architecture,
+  Toolbox, task/index, bounded live records, memory, and the sole-facing mdBook.
+- Complete ordinary Lua passes 178/178 suites per ABI plus 105/105 corpus, both CLI environments, and the 19-
+  owner/three-native-module storage proof. Neutral staged and all admitted backend projections pass; typed,
+  recognition, progressive, semantic, generated, capability, language, and public-boundary ledgers remain exact.
+- Knowledge regenerates at 905 facts / 7,699 keys and the book renders 80 files / 15,724 KiB. Bounded histories,
+  README/memory/task invariants, nine doctrines, exact scope guards/diff, and receipt-bound canonical CI pass.
+
 ## 2026-08-27 — FUTURE-PARITY-BACKLOG.14.7.7.2 — implement Lua staged current-depth authority
 
 - Added separate private Lua-5.1-compatible `staged_ast_enrichment.lua`. Its opaque frozen registry deeply owns

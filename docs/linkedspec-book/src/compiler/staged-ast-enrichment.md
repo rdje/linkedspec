@@ -8,10 +8,10 @@
 > Dart now has the same complete private authority, four fresh native/reconstructed/generated/emitted production
 > carriers, and exact 19/19 ordinary/canonical admission. Julia now also has the complete private authority, four
 > fresh production routes, and exact 491/491 ordinary/canonical admission. Shared Lua now has one dual-ABI dormant
-> oracle with its private inert marker, live-range-proven typed provenance, and caller-frozen current-depth
-> resolution/cache/policies at 597 GREEN assertions plus one recursive-carrier RED on each runtime; the neutral
-> contract is 98 mutations. Lua production and admission
-> remain absent, and
+> oracle with its private inert marker, live-range-proven typed provenance, caller-frozen policies, bounded
+> breadth-first recurrence, and four fresh post-parent production carriers at 888/888 on each runtime; the neutral
+> contract is 98 mutations. Lua admission and rollout
+> remain pending, and
 > the only publicly authored five-backend/six-runtime surface is still the
 > narrow function-body v1 adapter described below.
 
@@ -193,13 +193,13 @@ Neutral, Perl, Rust, Dart, and Julia rollout are complete. Five backend consumer
 one shared Lua source runs independently on PUC Lua and LuaJIT. The exact Perl, Rust, Dart, and Julia consumers run
 once from ordinary and canonical proof. Julia's `.0` run historically froze the generic-call boundary at 86 GREEN
 assertions plus one intentional RED; `.1-.3` supplied marker/provenance, current-depth authority, and breadth-first
-recurrence, and `.4` now carries them through four fresh-authority production routes at 491/491. Lua `.7.0-.2`
-now freeze the exact shared boundary and implement marker/provenance plus current-depth authority at 597 GREEN
-assertions and one recursive-carrier RED per ABI while both ordinary/canonical routes and rollout rows stay
-pending. Lua `.3-.5`, six-runtime recurrence, public authoring/no-drift, and final recomposition retain their
+recurrence, and `.4` now carries them through four fresh-authority production routes at 491/491. Lua `.7.0-.3`
+now freeze the exact shared boundary and implement marker/provenance, current-depth authority, bounded recurrence,
+source rebasing, and four fresh host-only production carriers at 888/888 per ABI while both ordinary/canonical
+routes and rollout rows stay pending. Lua `.4-.5`, six-runtime recurrence, public authoring/no-drift, and final recomposition retain their
 `.14.7.7-.10` owners.
 
-## Current shared Lua private current-depth boundary
+## Current shared Lua private recursive-carrier boundary
 
 Run the same Lua-5.1-compatible source independently on both supported hosts:
 
@@ -208,15 +208,15 @@ bash tools/run_lua_project_data.sh puc lua/test/staged_ast_enrichment_contract_t
 bash tools/run_lua_project_data.sh luajit lua/test/staged_ast_enrichment_contract_test.lua
 ```
 
-Each command intentionally exits nonzero after reporting exactly one failed assertion:
+Each command exits successfully with the same result:
 
 ```text
-LINKEDSPEC_STAGED_AST_ENRICHMENT_LUA_RED: missing breadth-first recurrence bounds rebasing and fresh dormant carriers
+Lua staged-AST enrichment contract: 888 assertions passed
 ```
 
-Before that sentinel, 597 assertions prove the complete neutral inventory, unchanged function-body-v1 phases and
-cache/stitch policy, original wrong-top context, the narrow registry's `expr-v1` resolve denial, the complete
-private marker/provenance boundary, and the separate caller-frozen current-depth authority. The reserved
+Those assertions prove the complete neutral inventory, unchanged function-body-v1 phases and cache/stitch policy,
+original wrong-top context, the narrow registry's `expr-v1` resolve denial, the complete private marker/provenance
+boundary, caller-frozen current-depth authority, recursive scheduler, and production carriers. The reserved
 assignment has this logical ActionIR shape:
 
 ```text
@@ -326,10 +326,24 @@ must be finite acyclic node-bounded plain data; parser/registry/source/frame/tra
 host/path/reference keys reject, including when hidden in an otherwise valid marker shape. Callback throws are
 contained, failed results never poison a later attempt, and valid returned markers remain inert.
 
-Leaf `.14.7.7.3` owns the separate breadth-first entrypoint, active lineage, cancellation and shared resource
-bounds, callback safe points, original-source diagnostic rebasing, and fresh native/reconstructed/generated/
-emitted production carriers. This `.2` boundary deliberately performs no recursive rescan and attaches to no
-production carrier.
+The separate `enrich_recursively(...)` entrypoint processes one complete depth at a time. It records markers only
+inside successful detached child results and maps their paths through the exact stitch destination; it never
+rescans the complete AST. Every active frame contains resolved parser, selected top, exact-text SHA-256, and full
+typed provenance. Exact repeats are cycles. Reusing a parser/top requires segment containment and a smaller total
+Unicode-scalar extent.
+
+One invocation shares cancellation, absolute deadline, remaining steps, seeded calls, depth/call maxima,
+cumulative result nodes, and canonical UTF-8 diagnostic bytes. Callback contexts expose a bounded safe point plus
+local-to-original position/span/diagnostic projection and expire immediately after settlement. A span crossing
+ordered provenance segments stays `derived_text` / `concatenate_in_order`; no synthetic contiguous location is
+invented.
+
+An opaque host-only seed is accepted by native, reconstructed, generated-plan, and independently loaded emitted
+execution. It starts only after the parent value completes and creates a new callback set, frozen registry, empty
+plan cache, recursive authority, and mutable queue for every run. No seed preserves the inert marker. Serialized
+logical artifacts contain no concrete callback, registry/source authority, cancellation/deadline/budget state,
+queue/cache, absolute checkout path, or host handle. Leaf `.14.7.7.4` alone owns ordinary/canonical dual-ABI
+admission and rollout promotion.
 
 Publishing the complete `.2` record crosses the bounded change-history rollover threshold. The repository archives
 231 complete historical lines as immutable content-addressed segment `4989`; ADR `0093` advances only the finite

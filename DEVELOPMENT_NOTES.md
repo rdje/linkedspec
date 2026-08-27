@@ -9,6 +9,34 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-27 (`FUTURE-PARITY-BACKLOG.14.7.7.3` — Lua staged recursive carriers): exact clean activation is
+  current-depth commit `9a2778aa`; scope owns only private breadth-first recurrence, shared bounds, source
+  projection, four fresh post-parent carriers, the stable consumer's dormant GREEN, and synchronized truth.
+- `enrich_recursively` preserves `enrich_current_depth`. It prepares/reserves a complete depth before callbacks,
+  collects only markers in successful detached child results, and rebases their paths through the exact stitch
+  destination. This avoids reactivating old inert markers and preserves producer lineage.
+- Active frames bind normalized resolved parser, selected top, exact-text SHA-256, and full typed provenance.
+  Exact repeats cycle; same-parser/top recurrence requires every child segment to be contained in an active segment
+  and total Unicode-scalar extent to shrink.
+- Cancellation identity/probe, clock/deadline, steps, seeded calls, depth/calls, result nodes, and diagnostic bytes
+  are invocation-wide. Marker-shaped results count atomically after deep live-key validation. Callback contexts
+  expose safe points and source projection only while active, then expire on return or throw.
+- Direct and ordered-derived local positions, spans, and nested diagnostics map to original source. Cross-segment
+  spans stay `concatenate_in_order`; invalid local ranges fail closed and byte overflow produces the governed
+  truncation record.
+- `StagedAstEnrichmentSeed` validates copied logical registry/options but invokes its host factory only after the
+  parent result completes. Every native, reconstructed, generated-plan, or emitted execution gets a new callback
+  set, registry/cache, cancellation/clock authority, lineage, budgets, and queue; none is serialized.
+- The stable consumer passes 888/888 per ABI with four routes twice, no-seed compatibility, parent-failure no-start,
+  live-transaction denial/state expiry, exact staged-error identity, cross-result detachment, fresh authority, and
+  serialized-authority absence. It remains outside ordinary/canonical discovery; `.4` retains admission/rollout.
+- [[lua-staged-ast-enrichment-recursive-carriers]] is the canonical retrieval point. Neutral 98 mutations,
+  function-body v1, generated format, public/outward behavior, other backends, and later recurrence stay fixed.
+- Focused proof passes ordinary Lua 178/178 per ABI and 105/105 corpus; staged Perl 143/143, Rust 1/1 in 320.17
+  seconds, Dart 19/19, and Julia 491/491; all typed/recognition/progressive/semantic/generated/capability/language/
+  public ledgers; Knowledge 905/7,699; mdBook 80 files/15,724 KiB; bounded histories; and exact scope guards.
+- The exact staged candidate also clears memory/task/README invariants, all nine doctrines, `git diff --check`,
+  and receipt-bound canonical CI before the atomic `.3` commit; `.4` remains the sole admission/rollout owner.
 - 2026-08-27 (`FUTURE-PARITY-BACKLOG.14.7.7.2` — Lua staged current-depth authority): exact clean activation is
   marker/provenance commit `43b33922`; the leaf owns only a separate private frozen registry/cache, one complete
   current-depth scheduler, detached result/failure policies, the next `.3` RED, and its mandatory change-history
