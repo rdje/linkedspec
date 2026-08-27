@@ -10,6 +10,23 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-27 — FUTURE-PARITY-BACKLOG.14.7.5.4 — admit Dart staged enrichment carriers
+
+- Added opaque host-only `StagedAstEnrichmentSeed` and one-use state. Every top-level execution constructs a fresh
+  frozen registry/cache and recursive authority, completes the parent parse, checks live recognition-transaction
+  state, and only then enriches the returned AST inside the existing structured runtime-error boundary.
+- Routed the same optional seed through native, `SpecFile`-JSON reconstructed, validated generated-plan, and
+  generated-source-v2 execution without serializing concrete callbacks, compiled parsers, registry/source
+  authority, cancellation/deadline/budget state, mutable cache/queue, paths, or host handles.
+- Moved the stable consumer from `dart/test_dormant/` to `dart/test/`. Its four routes each execute twice through
+  one seed and prove equal detached AST/sidecar/diagnostic/cache/resource records, fresh callbacks/cancellation/
+  clocks, one miss/zero hits per run, mutation isolation, and logical generated/emitted authority absence.
+- The final consumer passes 19/19, fatal analysis and 102 direct dependents pass, and ordinary Dart is 435/435.
+  Canonical CI requires/logs/invokes the exact consumer once. Neutral governance rejects 90 mutations and promotes
+  only Dart; function-body v1, generated-source v2, public/outward behavior, and later backends do not move.
+- The exact staged candidate passes receipt-bound canonical CI, including all nine doctrines, both 66/66 primary-
+  CLI option environments, and phase 0 at 1,032/1,032; the Dart backend parent closes with Julia `.14.7.6.0` next.
+
 ## 2026-08-27 — FUTURE-PARITY-BACKLOG.14.7.5.3 — add Dart staged recursive authority
 
 - Preserved `enrichStagedCurrentDepth` and added private `enrichStagedRecursively` over the same caller-frozen

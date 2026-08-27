@@ -1,11 +1,10 @@
 # MEMORY
 
-- activation_commit: `7355445cdf9f10287f712f93553cfe4b5c169906` — exact clean Dart current-depth base for task-tree-first `FUTURE-PARITY-BACKLOG.14.7.5.3`; brief cleared; no push.
-- latest_completed_leaf: intended `FUTURE-PARITY-BACKLOG.14.7.5.3 - add Dart staged recursive authority`; breadth-first recurrence, strict lineage, shared bounds, safe points, rebasing, and target reservation are complete.
-- active_work_unit: none after the intended `.14.7.5.3` commit; carrier/admission boundaries hold.
-- next_action: from the exact clean `.14.7.5.3` commit, activate Dart carrier/admission leaf
-  `FUTURE-PARITY-BACKLOG.14.7.5.4` task-tree-first.
-- in_flight_uncommitted: none after the intended `.14.7.5.3` commit; no background job remains.
+- activation_commit: `053178b81bc095810fcc4ef8f0c8a8f7463a2458` — exact clean Dart recursive-authority base for task-tree-first `FUTURE-PARITY-BACKLOG.14.7.5.4`; brief cleared; no push.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.7.5.4 - admit Dart staged enrichment carriers` (intended atomic subject from activation commit `053178b81bc095810fcc4ef8f0c8a8f7463a2458`).
+- active_work_unit: none; Dart backend parent `.14.7.5` is closed and Julia dormant-boundary `.14.7.6.0` is the next task-tree-first activation.
+- next_action: activate Julia `.14.7.6.0` task-tree-first from the clean Dart carrier-admission commit.
+- in_flight_uncommitted: none; `.14.7.5.4` is implemented, focused- and canonical-signoff-complete, and intended for one atomic commit with a clean promoted-receipt handoff.
 - blockers: none.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -33,7 +32,7 @@
   every byte, root, segment, aggregate, owner, lifecycle, verifier, storage, and all other pressure controls.
 - current_verification_contract: ADR `0073` makes focused proof the ordinary per-leaf default and canonical proof
   mandatory at admission/milestone/public/infrastructure/final-push boundaries; Perl `.14.7.3.4`, Rust `.14.7.4.4`,
-  and Dart dormant `.14.7.5.0` infrastructure rollover each land only with exact staged receipt-bound proof.
+  Dart dormant `.14.7.5.0`, and Dart admission `.14.7.5.4` require exact staged receipt-bound proof.
 - documentation_debt_owner: ADR `0066` composition-closes all stores; bounded live/history/task/Knowledge owners
   and their rollover/index gates remain current.
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
@@ -46,14 +45,15 @@
   parents `.3-.7`, recurrence `.8`, public authored closeout `.9`, and recomposition `.10` are frozen in order.
   Diagnostic `.14.7.1` is complete; neutral `.14.7.2` freezes 4 registry entries, 8 provenance, 8 resolution/6
   authority, 10 cache, 4 queue/3 isolation, 4 result/3 failure policies, 10 chain, 5 detachment, 37 diagnostics,
-  9 rollout legs, 35 owners, and 85 mutations after Dart dormant activation. Perl `.14.7.3.1-.4` provide the private marker/provenance,
+  9 rollout legs, 35 owners, and 90 mutations after Dart admission. Perl `.14.7.3.1-.4` provide the private marker/provenance,
   caller-frozen resolution/cache/policies, breadth-first recurrence, strict chains/shared resources, and source
   rebasing plus four fresh-authority carriers at 143/143. Rust `.14.7.4.0-.4` add an inert detached marker, strict literal
   options, live-span direct/ordered-derived provenance, pure caller-frozen resolution/cache, isolated complete-
   depth ordering, detached atomic stitching, all four result/three failure policies, breadth-first recurrence, exact
   cycle/decrease guards, shared resources, safe points, typed source rebasing, and four fresh-authority carriers.
-  Perl and Rust are privately admitted and their full neutral projections are current at 85 (143/143 and 1/1).
-  Dart `.14.7.5.0-.3` add the dormant boundary, exclusive live-proven marker, pure caller-frozen resolution/cache,
+  Perl and Rust are privately admitted and their full neutral projections are current at 90 (143/143 and 1/1).
+  Dart `.14.7.5.0-.4` add the historical dormant boundary, exclusive live-proven marker, pure caller-frozen resolution/cache,
   isolated atomic policies, breadth-first recurrence, strict lineage/shared resources, expiring safe points, typed
-  rebasing, and complete-depth target reservation. Eighteen groups pass; only `.4` carrier/admission/rollout is RED.
-- latest_bootstrap_read: 2026-08-27 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, Toolbox, neutral recurrence, Dart source/runtime authority, and Perl/Rust precedents are reviewed. `.14.7.5.3` is focused-complete from clean `7355445c`; intended commit: `FUTURE-PARITY-BACKLOG.14.7.5.3 - add Dart staged recursive authority`; `.14.7.5.4` is next.
+  rebasing, complete-depth target reservation, and a fresh host-only post-parent seed across four production routes.
+  The final-path consumer is 19/19, ordinary Dart 435/435, Dart rollout complete, and Julia `.14.7.6.0` is next.
+- latest_bootstrap_read: 2026-08-27 — roadmap, codebase, mdBook, continuity, active task, Knowledge, ADR, Toolbox, neutral contract, Dart source/runtime authority, and Perl/Rust precedents are reviewed. `.14.7.5.4` is canonical-signoff-complete from clean `053178b8`; Julia `.14.7.6.0` is next after the atomic clean handoff.

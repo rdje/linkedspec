@@ -14,11 +14,12 @@ answers:
   - "how many Perl staged AST enrichment checks pass"
   - "what staged AST enrichment backend is next after Perl"
 date: 2026-08-26
-status: current private Perl admission; Rust is also admitted; Dart, Julia, Lua, recurrence, and public authoring pending
+status: current private Perl admission; Rust and Dart are also admitted; Julia, Lua, recurrence, and public authoring pending
 tags: [perl, staged-parsing, carriers, generated-source, admission, ci, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.3.4 adds private LinkedSpec::StagedASTEnrichmentRuntime and attaches begin/complete invocation to live and generated-v2 top-level execution. A host-only staged_ast_enrichment option supplies the caller-prepared snapshot and recursive authority; every call constructs a new StagedASTEnrichment scheduler/cache and enriches only after the complete parent AST returns. Native, normalized-descriptor, validated generated-plan, and independently loaded emitted packages return equal detached AST/sidecar/diagnostic/cache/resource records. The oracle retains four distinct snapshots, sixteen distinct compiled callback entries, four cancellation identities/callbacks, four clocks, and four independent zero-hit/one-miss caches. Normalized ActionIR args, generated plans, and emitted source contain no callback, compiled parser, registry snapshot, source authority, cancellation/deadline/budget state, mutable queue, path, or host handle. The exact consumer passes 143 top-level checks, appears once in phase-0 and once in canonical CI, and advances only Perl plus neutral governance to 78 mutations. Function-body v1, generated-source v2, language/public/outward surfaces, later backends, recurrence, and combined no-drift remain unchanged or pending."
 evidence_update_2026_08_26_rust_dormant_snapshot: "FUTURE-PARITY-BACKLOG.14.7.4.0 commit e37a8b77 advances the neutral mutation inventory from 78 to 79 and the Rust backend consumer from pending_absent to dormant_red while keeping Rust ordinary/canonical discovery and rollout pending. TRACE-OBSERVABILITY.5.4 aligns the already-admitted Perl consumer's immutable topology snapshot with those two neutral truth changes; no Perl carrier, production behavior, registry, format, rollout, public surface, or other backend changes."
 evidence_update_2026_08_26_rust_admission: "FUTURE-PARITY-BACKLOG.14.7.4.4 admits Rust's fresh four-route carrier without changing the Perl path. Neutral governance now reports 84 mutations with Perl and Rust complete; Dart FUTURE-PARITY-BACKLOG.14.7.5.0 is next."
+evidence_update_2026_08_27_dart_admission: "FUTURE-PARITY-BACKLOG.14.7.5.4 admits Dart's fresh four-route carrier without changing the Perl path. Neutral governance now reports 90 mutations with Perl, Rust, and Dart complete; Julia FUTURE-PARITY-BACKLOG.14.7.6.0 is next."
 reverify:
   - "PERL5LIB= prove -q -Iperl t/staged_ast_enrichment_perl_contract.t"
   - "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py"
@@ -42,9 +43,9 @@ marker declaration and ordinary `{label, family}` plan; live callbacks and resou
 through host invocation options.
 
 The exact consumer is admitted once through ordinary phase-0 and once through canonical CI. The Perl backend and
-rollout row remain complete; Rust has since reached the same private admission boundary. This is private
-implementation evidence, not public `parse_job(...)` authoring. Public closeout remains `.14.7.9`, and Dart
-dormant-boundary `.14.7.5.0` is the next backend leaf.
+rollout row remain complete; Rust and Dart have since reached the same private admission boundary. This is private
+implementation evidence, not public `parse_job(...)` authoring. Public closeout remains `.14.7.9`, and Julia
+`.14.7.6.0` is the next backend leaf.
 
 ## Links
 

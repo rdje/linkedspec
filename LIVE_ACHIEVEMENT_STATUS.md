@@ -2,26 +2,28 @@
 
 ## Current Activity
 
-- Dart staged `.14.7.5.3` preserves one-depth compatibility and adds private breadth-first recursive scheduling
-  over the same caller-frozen registry and invocation-local plan cache.
-- Exact tuple cycles and non-decreasing provenance lineage reject. Cancellation/deadline/steps/calls/depth/result/
-  diagnostic authority stays shared; callback safe points and direct/ordered-derived source projection expire.
-- Complete-depth target reservation fixes a latent `.2` gap: conflicting replace/append claims and queued-marker
-  overwrite now reject before callback one, while deterministic multiple appends remain valid.
-- The dormant consumer is `+18 -1`; only `.4` fresh carriers, production integration, admission, and Dart rollout
-  remain RED. Fatal analysis, 102 direct dependents, and ordinary Dart 416/416 are GREEN; neutral 85 mutations,
-  v1, logical routes, discovery, formats, public/outward truth, and other backends do not move.
+- Dart staged `.14.7.5.4` attaches one opaque host seed to native, reconstructed, generated-plan, and emitted
+  execution. Every top-level call starts a fresh registry/cache/recursive authority and enriches after the parent AST.
+- The stable consumer moves from `test_dormant/` to its final ordinary path and passes 19/19; ordinary Dart is
+  435/435. Canonical CI requires, logs, and invokes the exact path once.
+- Neutral governance rejects 90 mutations and promotes only Dart. Function-body v1, generated-source v2,
+  public/outward behavior, later backends, recurrence, and combined no-drift do not move.
+- Focused proof, durable synchronization, and receipt-bound canonical CI are complete; the atomic clean handoff closes the slice.
 
 ## Latest Completed Slice
 
-- `.14.7.5.3` implementation and focused behavior proof are complete from clean activation commit `7355445c`;
-  atomic commit and clean handoff remain.
+- `.14.7.5.4` implementation, focused behavior proof, durable projections, and receipt-bound canonical signoff are
+  complete from clean activation commit `053178b8`.
 
 ## Next Action
 
-- Commit `.14.7.5.3`; from the clean handoff, activate Dart carrier/admission leaf `.14.7.5.4` task-tree-first.
+- Activate Julia `.14.7.6.0` task-tree-first from the clean Dart carrier-admission handoff.
 
 ## Recent Completions
+
+- `2026-08-27` — `.14.7.5.4` adds a fresh host-only Dart staged seed across four post-parent production routes,
+  moves the stable consumer to ordinary/canonical admission at 19/19, passes Dart 435/435, and advances only Dart
+  rollout plus neutral governance to 90 mutations; receipt-bound canonical CI and phase 0 at 1,032/1,032 pass.
 
 - `2026-08-27` — `.14.7.5.3` adds Dart breadth-first recursion, strict lineage, shared resources, expiring safe
   points, typed rebasing, and complete-depth target reservation; only `.4` carrier/admission authority remains RED.
@@ -72,9 +74,6 @@
 
 - `2026-08-26` — `.14.7.3.3` adds Perl's private breadth-first recursive queue, decreasing chains, shared
   cancellation/resources, safe points, and source rebasing; 141 top-level checks pass and only `.4` remains RED.
-
-- `2026-08-26` — `.14.7.3.2` adds Perl's private caller-frozen resolution/cache and all current-depth result/
-  failure policies; 133 top-level checks pass and only `.3` recursive authority remains RED.
 
 ## History
 

@@ -450,6 +450,7 @@ require_tracked_file t/recognition_transaction_perl_contract.t
 require_tracked_file t/progressive_span_dispatch_perl_contract.t
 require_tracked_file t/staged_ast_enrichment_perl_contract.t
 require_tracked_file rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs
+require_tracked_file dart/test/staged_ast_enrichment_contract_test.dart
 require_tracked_file rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs
 require_tracked_file dart/test/progressive_span_dispatch_contract_test.dart
 require_tracked_file julia/test/progressive_span_dispatch_contract_test.jl
@@ -679,6 +680,9 @@ PERL5LIB= prove -Iperl t/staged_ast_enrichment_perl_contract.t
 
 log "running exact Rust staged-AST enrichment admission consumer"
 cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test staged_ast_enrichment_contract
+
+log "running exact Dart staged-AST enrichment admission consumer"
+(cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/staged_ast_enrichment_contract_test.dart)
 
 log "running exact Perl progressive span-dispatch admission consumer"
 PERL5LIB= prove -Iperl t/progressive_span_dispatch_perl_contract.t

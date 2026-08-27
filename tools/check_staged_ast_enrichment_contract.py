@@ -146,7 +146,7 @@ BACKEND_CONSUMERS = [
         "owner": "FUTURE-PARITY-BACKLOG.14.7.5.0",
         "path": "dart/test/staged_ast_enrichment_contract_test.dart",
         "dormant_path": "dart/test_dormant/staged_ast_enrichment_contract_test.dart",
-        "status": "dormant_red",
+        "status": "complete",
     },
     {
         "backend": "julia",
@@ -771,6 +771,15 @@ def validate_environment(contract: dict[str, Any]) -> None:
                 require(ci_text.count(f"require_tracked_file {row['path']}") == 1, "canonical CI must require the Rust staged consumer exactly once")
                 require(ci_text.count(f'log "{admission["registration_marker"]}"') == 1, "canonical Rust staged admission marker is missing or duplicated")
                 require(ci_text.count(admission["invocation"]) == 1, "canonical Rust staged admission invocation is missing or duplicated")
+            elif row["backend"] == "dart":
+                admission = contract["canonical_execution"]["dart_admission"]
+                dormant_path = ROOT / row["dormant_path"]
+                require(not dormant_path.exists(), "admitted Dart staged consumer retains a dormant duplicate")
+                require(admission["consumer_path"] == row["path"], "Dart admission consumer path drifted")
+                require(admission["ordinary_invocation"] == RUNTIME_ROUTES[2]["command"], "ordinary Dart staged invocation drifted")
+                require(ci_text.count(f"require_tracked_file {row['path']}") == 1, "canonical CI must require the Dart staged consumer exactly once")
+                require(ci_text.count(f'log "{admission["registration_marker"]}"') == 1, "canonical Dart staged admission marker is missing or duplicated")
+                require(ci_text.count(admission["invocation"]) == 1, "canonical Dart staged admission invocation is missing or duplicated")
             else:
                 raise ContractError(f"unsupported complete staged backend: {row['backend']}")
         else:
@@ -830,7 +839,7 @@ def validate_contract(contract: dict[str, Any], *, environment: bool = True) -> 
     require(contract["task_owner"] == "FUTURE-PARITY-BACKLOG.14.7.2", "task owner mismatch")
     require(
         contract["status"]
-        == "neutral_perl_and_rust_complete_dart_dormant_red_later_backends_pending",
+        == "neutral_perl_rust_and_dart_complete_later_backends_pending",
         "contract status mismatch",
     )
     require(contract["authored_surface"] == AUTHORED_SURFACE, "authored surface mismatch")
@@ -927,7 +936,7 @@ def validate_contract(contract: dict[str, Any], *, environment: bool = True) -> 
         {"order": 1, "leg": "neutral", "owner": "FUTURE-PARITY-BACKLOG.14.7.2", "status": "complete", "paths": ["capability_conformance/staged_ast_enrichment_contract.json", "tools/check_staged_ast_enrichment_contract.py"]},
         {"order": 2, "leg": "perl", "owner": "FUTURE-PARITY-BACKLOG.14.7.3", "status": "complete", "paths": [BACKEND_CONSUMERS[0]["path"]]},
         {"order": 3, "leg": "rust", "owner": "FUTURE-PARITY-BACKLOG.14.7.4", "status": "complete", "paths": [BACKEND_CONSUMERS[1]["path"]]},
-        {"order": 4, "leg": "dart", "owner": "FUTURE-PARITY-BACKLOG.14.7.5", "status": "pending", "paths": [BACKEND_CONSUMERS[2]["path"]]},
+        {"order": 4, "leg": "dart", "owner": "FUTURE-PARITY-BACKLOG.14.7.5", "status": "complete", "paths": [BACKEND_CONSUMERS[2]["path"]]},
         {"order": 5, "leg": "julia", "owner": "FUTURE-PARITY-BACKLOG.14.7.6", "status": "pending", "paths": [BACKEND_CONSUMERS[3]["path"]]},
         {"order": 6, "leg": "puc_lua", "owner": "FUTURE-PARITY-BACKLOG.14.7.7", "status": "pending", "paths": [BACKEND_CONSUMERS[4]["path"]]},
         {"order": 7, "leg": "luajit", "owner": "FUTURE-PARITY-BACKLOG.14.7.7", "status": "pending", "paths": [BACKEND_CONSUMERS[4]["path"]]},
@@ -956,6 +965,12 @@ def validate_contract(contract: dict[str, Any], *, environment: bool = True) -> 
             "ordinary_invocation": "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test staged_ast_enrichment_contract",
             "registration_marker": "running exact Rust staged-AST enrichment admission consumer",
             "invocation": "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test staged_ast_enrichment_contract",
+        },
+        "dart_admission": {
+            "consumer_path": "dart/test/staged_ast_enrichment_contract_test.dart",
+            "ordinary_invocation": "bash tools/run_dart_project_data.sh test --reporter failures-only dart/test/staged_ast_enrichment_contract_test.dart",
+            "registration_marker": "running exact Dart staged-AST enrichment admission consumer",
+            "invocation": "(cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/staged_ast_enrichment_contract_test.dart)",
         },
         "storage_policy": "all Python cache, temporary, and process data stays under repository-derived project storage",
         "tracked_required": True,
@@ -1049,6 +1064,7 @@ def mutation_inventory() -> list[Mutation]:
         ("rollout_neutral", set_value(["rollout", 0, "status"], "pending"), "rollout inventory mismatch"),
         ("rollout_backend", set_value(["rollout", 1, "status"], "pending"), "rollout inventory mismatch"),
         ("rollout_rust", set_value(["rollout", 2, "status"], "pending"), "rollout inventory mismatch"),
+        ("rollout_dart", set_value(["rollout", 3, "status"], "pending"), "rollout inventory mismatch"),
         ("rollout_public", set_value(["rollout", 8, "status"], "complete"), "rollout inventory mismatch"),
         ("canonical_contract", set_value(["canonical_execution", "contract_path"], "/tmp/contract.json"), "canonical execution mismatch"),
         ("canonical_checker", set_value(["canonical_execution", "checker_path"], "tools/wrong.py"), "canonical execution mismatch"),
@@ -1063,6 +1079,10 @@ def mutation_inventory() -> list[Mutation]:
         ("rust_admission_ordinary", set_value(["canonical_execution", "rust_admission", "ordinary_invocation"], "cargo test wrong"), "canonical execution mismatch"),
         ("rust_admission_marker", set_value(["canonical_execution", "rust_admission", "registration_marker"], "wrong marker"), "canonical execution mismatch"),
         ("rust_admission_invocation", set_value(["canonical_execution", "rust_admission", "invocation"], "cargo test wrong"), "canonical execution mismatch"),
+        ("dart_admission_consumer", set_value(["canonical_execution", "dart_admission", "consumer_path"], "dart/test/wrong.dart"), "canonical execution mismatch"),
+        ("dart_admission_ordinary", set_value(["canonical_execution", "dart_admission", "ordinary_invocation"], "dart test wrong"), "canonical execution mismatch"),
+        ("dart_admission_marker", set_value(["canonical_execution", "dart_admission", "registration_marker"], "wrong marker"), "canonical execution mismatch"),
+        ("dart_admission_invocation", set_value(["canonical_execution", "dart_admission", "invocation"], "dart test wrong"), "canonical execution mismatch"),
         ("ownership", set_value(["ownership", 0, "owner"], "wrong"), "ownership inventory mismatch"),
     ]
     return mutations

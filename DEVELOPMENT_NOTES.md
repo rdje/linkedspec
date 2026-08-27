@@ -9,6 +9,23 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-27 (`FUTURE-PARITY-BACKLOG.14.7.5.4` — Dart staged carrier admission): exact clean activation is
+  recursive-authority commit `053178b8`; scope owns fresh host-only production carriers, the stable consumer move,
+  exact ordinary/canonical topology, Dart rollout, backend-parent closure, and no unrelated surface.
+- `StagedAstEnrichmentSeed` eagerly snapshots logical registry/options/callback bindings. Each `start()` creates a
+  new `FrozenStagedRegistry` with empty cache and a new `StagedRecursiveAuthority`; one-use state completes only
+  after the parent AST and rejects any active recognition transaction.
+- `LinkedSpecRuntimeEngine`, `executeGeneratedParserV2`, and emitted generated-v2 `execute` carry the optional seed.
+  No seed preserves existing behavior. Compiled/emitted logical data contains no concrete callback, registry,
+  source, cancellation, clock, resource, path, mutable queue/cache, or host authority.
+- Native, reconstructed, generated-plan, and independently analyzed/executed emitted routes each run twice through
+  one seed. Equal detached records, fresh callback/cancellation/clock observations, one miss/zero hits, and mutation
+  isolation pass. The final-path consumer is 19/19, direct dependents 102/102, and ordinary Dart 435/435.
+- Neutral governance advances from 85 to 90 mutations and only Dart rollout becomes complete. Perl 143/143, Rust
+  1/1, generated-source v2, function-body v1, public/outward guards, and later-backend absence remain exact.
+- Receipt-bound canonical CI passes the exact staged candidate: all nine doctrines, required backend/governance
+  matrices, both 66/66 primary-CLI environments, and phase 0 at 1,032/1,032 are GREEN. Parent `.14.7.5` closes;
+  Julia dormant-boundary `.14.7.6.0` is the clean-handoff frontier.
 - 2026-08-27 (`FUTURE-PARITY-BACKLOG.14.7.5.3` — Dart staged recursive authority): exact clean activation is
   current-depth commit `7355445c`; scope owns only private recurrence, lineage/shared bounds, callback lifetime,
   source projection, the review-discovered complete-depth target conflict, and the same consumer's `.4` RED.

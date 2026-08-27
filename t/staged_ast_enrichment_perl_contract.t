@@ -257,8 +257,8 @@ is(
 is($contract->{format}, 1, 'loads contract format 1');
 is(
  $contract->{status},
- 'neutral_perl_and_rust_complete_dart_dormant_red_later_backends_pending',
- 'keeps neutral, Perl, and Rust complete while Dart is dormant RED and later backends remain pending',
+ 'neutral_perl_rust_and_dart_complete_later_backends_pending',
+ 'keeps neutral, Perl, Rust, and Dart complete while later backends remain pending',
 );
 is(
  $contract->{task_owner},
@@ -383,15 +383,15 @@ is_deeply(
   diagnostics => 37,
   rollout_legs => 9,
   ownership_rows => 35,
-  mutations => 85,
+  mutations => 90,
  },
  'freezes every neutral inventory count',
 );
 is(scalar(@{$contract->{diagnostics}}), 37, 'freezes all thirty-seven diagnostic contracts');
 is_deeply(
  [map { $_->{status} } @{$contract->{backend_consumers}}],
- [('complete') x 2, 'dormant_red', ('pending_absent') x 2],
- 'keeps Perl and Rust complete, advances only Dart to dormant RED, and leaves later backends absent',
+ [('complete') x 3, ('pending_absent') x 2],
+ 'keeps Perl, Rust, and Dart complete while later backends remain absent',
 );
 is_deeply(
  $contract->{backend_consumers}[0],
@@ -405,8 +405,8 @@ is_deeply(
 );
 is_deeply(
  [map { $_->{status} } @{$contract->{rollout}}],
- [('complete') x 3, ('pending') x 6],
- 'promotes neutral, Perl, and Rust rollout',
+ [('complete') x 4, ('pending') x 5],
+ 'promotes neutral, Perl, Rust, and Dart rollout',
 );
 is_deeply(
  [map { $_->{responsibility} } grep {

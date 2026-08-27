@@ -199,6 +199,148 @@ final class StagedRecursiveAuthority {
   final int totalCalls;
 }
 
+/// Produces one fresh recursive authority for a top-level execution.
+typedef StagedRecursiveAuthorityFactory = StagedRecursiveAuthority Function();
+
+/// Receives one detached recursive outcome after successful enrichment.
+typedef StagedEnrichmentOutcomeSink =
+    void Function(Map<String, Object?> outcome);
+
+/// Opaque host-only recipe for fresh staged enrichment per execution.
+///
+/// The recipe retains only a caller-frozen logical snapshot, opaque compiled
+/// callbacks, immutable options, and factories/sinks supplied by the host. It
+/// is never serialized into a specification, generated plan, or emitted
+/// logical payload.
+final class StagedAstEnrichmentSeed {
+  factory StagedAstEnrichmentSeed({
+    required Object? registrySnapshot,
+    required Map<String, StagedCompiledAuthority> compiledAuthorities,
+    required Object? options,
+    required StagedRecursiveAuthorityFactory recursiveAuthority,
+    StagedEnrichmentOutcomeSink? outcomeSink,
+  }) {
+    final ownedSnapshot = _snapshotObject(
+      registrySnapshot,
+      'seed_registry_snapshot',
+    );
+    final ownedOptions = _snapshotObject(options, 'seed_options');
+    final ownedAuthorities = Map<String, StagedCompiledAuthority>.unmodifiable(
+      <String, StagedCompiledAuthority>{...compiledAuthorities},
+    );
+
+    // Validate the complete recipe eagerly without retaining invocation state.
+    _EnrichmentOptions.parse(ownedOptions);
+    FrozenStagedRegistry.fromSnapshot(
+      snapshot: ownedSnapshot,
+      compiledAuthorities: ownedAuthorities,
+    );
+    return StagedAstEnrichmentSeed._(
+      registrySnapshot: _copyRecord(ownedSnapshot),
+      compiledAuthorities: ownedAuthorities,
+      options: _copyRecord(ownedOptions),
+      recursiveAuthority: recursiveAuthority,
+      outcomeSink: outcomeSink,
+    );
+  }
+
+  const StagedAstEnrichmentSeed._({
+    required Map<String, Object?> registrySnapshot,
+    required Map<String, StagedCompiledAuthority> compiledAuthorities,
+    required Map<String, Object?> options,
+    required StagedRecursiveAuthorityFactory recursiveAuthority,
+    required StagedEnrichmentOutcomeSink? outcomeSink,
+  }) : _registrySnapshot = registrySnapshot,
+       _compiledAuthorities = compiledAuthorities,
+       _options = options,
+       _recursiveAuthority = recursiveAuthority,
+       _outcomeSink = outcomeSink;
+
+  final Map<String, Object?> _registrySnapshot;
+  final Map<String, StagedCompiledAuthority> _compiledAuthorities;
+  final Map<String, Object?> _options;
+  final StagedRecursiveAuthorityFactory _recursiveAuthority;
+  final StagedEnrichmentOutcomeSink? _outcomeSink;
+
+  /// Starts one execution with a new registry/cache and recursive authority.
+  StagedAstEnrichmentState start() {
+    late final StagedRecursiveAuthority authority;
+    try {
+      authority = _recursiveAuthority();
+    } on Object {
+      throw StagedAstEnrichmentException.snapshot(
+        'recursive_authority_factory',
+      );
+    }
+    return StagedAstEnrichmentState._(
+      registry: FrozenStagedRegistry.fromSnapshot(
+        snapshot: _registrySnapshot,
+        compiledAuthorities: _compiledAuthorities,
+      ),
+      options: _copyRecord(_options),
+      authority: authority,
+      outcomeSink: _outcomeSink,
+    );
+  }
+
+  @override
+  String toString() => 'StagedAstEnrichmentSeed(<opaque>)';
+}
+
+/// One execution-local staged authority, consumed after the parent settles.
+final class StagedAstEnrichmentState {
+  StagedAstEnrichmentState._({
+    required FrozenStagedRegistry registry,
+    required Map<String, Object?> options,
+    required StagedRecursiveAuthority authority,
+    required StagedEnrichmentOutcomeSink? outcomeSink,
+  }) : _registry = registry,
+       _options = options,
+       _authority = authority,
+       _outcomeSink = outcomeSink;
+
+  final FrozenStagedRegistry _registry;
+  final Map<String, Object?> _options;
+  final StagedRecursiveAuthority _authority;
+  final StagedEnrichmentOutcomeSink? _outcomeSink;
+  bool _completed = false;
+
+  /// Enriches one complete parent value exactly once.
+  StagedRecursiveOutcome complete(
+    Object? ast, {
+    required bool hasActiveRecognitionTransaction,
+  }) {
+    if (_completed) {
+      throw StagedAstEnrichmentException.snapshot(
+        'staged_execution_state_reused',
+      );
+    }
+    _completed = true;
+    if (hasActiveRecognitionTransaction) {
+      throw StagedAstEnrichmentException._(
+        'staged_transaction_forbidden',
+        'dispatch',
+        <String, Object?>{
+          'origin': 'post_ast',
+          'effect': 'staged_parse_job_declaration',
+        },
+      );
+    }
+    final outcome = enrichStagedRecursively(
+      registry: _registry,
+      ast: ast,
+      options: _options,
+      authority: _authority,
+    );
+    try {
+      _outcomeSink?.call(outcome.toJson());
+    } on Object {
+      throw StagedAstEnrichmentException.snapshot('outcome_sink');
+    }
+    return outcome;
+  }
+}
+
 final class _StagedInvocationState {
   _StagedInvocationState({
     required this.remainingSteps,

@@ -18,16 +18,17 @@ answers:
   - "is Dart general staged AST enrichment admitted"
   - "what does FUTURE-PARITY-BACKLOG 14.7.5.3 implement"
 date: 2026-08-27
-status: current private recursive authority; fresh carriers, admission, and Dart rollout remain dormant RED for FUTURE-PARITY-BACKLOG.14.7.5.4
+status: current private recursive authority; fresh carriers, admission, and Dart rollout complete under FUTURE-PARITY-BACKLOG.14.7.5.4
 tags: [dart, staged-parsing, recursive-queue, breadth-first, cancellation, budgets, diagnostics, source-location, preflight, private]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.5.3 extends private staged_ast_enrichment.dart with enrichStagedRecursively while preserving enrichStagedCurrentDepth. Each complete depth resolves, authority-checks, target-validates, and typed-sorts before callbacks; returned markers enter only the next depth. Active tuples bind normalized parser, selected top, the SHA-256 of exact UTF-8 payload text, and full provenance. Exact repeats are staged_cycle; repeated parser/top lineage requires strict segment containment and smaller total Unicode-scalar extent. One caller cancellation identity/probe, clock/deadline, remaining steps, total calls, depth, cumulative result nodes, and diagnostic bytes spend monotonically. Callback contexts expose safePoint plus direct/ordered-derived position, span, and diagnostic rebasing, then expire. Review also found that one-depth preflight validated targets only against the initial AST; the shared depth validator now rejects duplicate non-append target claims, mixed replace/append claims, and targets that overwrite queued markers before callback one, while ordered multiple appends remain valid. The dormant consumer is +18/-1 and only .14.7.5.4 fresh carriers/production seam/admission/rollout remain RED. Fatal analysis, 102 direct dependents, and all 416 ordinary Dart tests pass while discovery, canonical references, rollout, formats, v1, public, and outward truth remain unchanged."
+evidence_update_2026_08_27_admission: "FUTURE-PARITY-BACKLOG.14.7.5.4 adds StagedAstEnrichmentSeed and starts this recursive authority fresh after each complete parent parse across native, reconstructed, generated-plan, and emitted routes. The final-path consumer is 19/19, ordinary Dart is 435/435, canonical topology requires/invokes it exactly once, and only Dart rollout advances under 90 neutral mutations."
 root_cause: "The current-depth API deliberately fixed stage_depth to one, emitted an empty stage_chain, and never rescanned returned markers. StagedRuntimeContext had only sibling-local registers, so no invocation-wide lineage, cancellation/clock/counters, callback lifetime, or provenance projector existed. Separately, its per-plan target check could not see conflicts between two prepared plans because every target was checked against the unchanged initial AST."
 last_verified: 2026-08-27
 reverify:
   - "cd dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings"
-  - "cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test_dormant/staged_ast_enrichment_contract_test.dart"
+  - "cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/staged_ast_enrichment_contract_test.dart"
   - "cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/staged_parser_registry_test.dart test/progressive_span_dispatch_contract_test.dart test/typed_source_location_contract_test.dart test/runtime_matching_test.dart test/compiled_spec_test.dart test/source_emitter_test.dart test/runtime_interpreter_test.dart test/action_contracts_test.dart"
-  - "rg -n 'enrichStagedRecursively|StagedRecursiveAuthority|safePoint|evaluateStagedChainCase|_validatePreparedDepth|_rebaseDiagnostic' dart/lib/src/runtime/staged_ast_enrichment.dart dart/test_dormant/staged_ast_enrichment_contract_test.dart"
+  - "rg -n 'enrichStagedRecursively|StagedRecursiveAuthority|safePoint|evaluateStagedChainCase|_validatePreparedDepth|_rebaseDiagnostic' dart/lib/src/runtime/staged_ast_enrichment.dart dart/test/staged_ast_enrichment_contract_test.dart"
 ---
 
 # Dart recursive staged-AST authority
@@ -60,11 +61,12 @@ not invalidate each other. Duplicate replace/sibling claims, mixed append and
 replacement claims, and a replacement target containing another queued marker
 are `staged_stitch_target_collision` before callback one.
 
-This remains private dormant evidence. `.14.7.5.4` owns fresh native,
+This remains private backend behavior. `.14.7.5.4` now supplies fresh native,
 reconstructed, generated-plan, and emitted authority, production integration,
 ordinary/canonical admission, and Dart rollout promotion.
 
 Related: [[dart-staged-ast-enrichment-current-depth-authority]],
 [[dart-staged-ast-enrichment-marker-provenance]],
 [[general-staged-ast-enrichment-neutral-contract]],
-[[typed-source-location-cursor-algebra-direction]], and ADR `0088`.
+[[typed-source-location-cursor-algebra-direction]],
+[[dart-staged-ast-enrichment-carriers-admission]], and ADR `0088`.

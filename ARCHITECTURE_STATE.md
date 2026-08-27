@@ -17,8 +17,8 @@ resolution, immutable pre-registered parser/cache authority, breadth-first recur
 failure policies, strict decreasing/cycle/depth/call/cancellation/resource bounds, detached results, diagnostics,
 carrier obligations, dormant routes, rollout, exact ownership, and the unchanged function-body-v1 adapter. The
 checker passes 4 registry entries, 8 provenance, 8 resolution/6 authority, 10 cache, 4 queue/3 isolation,
-4 result plus 3 failure policies, 10 chain, 5 detachment, 37 diagnostics, 9 rollout legs, 35 owners, and 85
-reason-checked mutations after Dart dormant-consumer activation. It reuses ADR `0056`'s source algebra and progressive authority narrowing without
+4 result plus 3 failure policies, 10 chain, 5 detachment, 37 diagnostics, 9 rollout legs, 35 owners, and 90
+reason-checked mutations after Dart admission. It reuses ADR `0056`'s source algebra and progressive authority narrowing without
 reusing `dispatch_span` syntax or elevating an authored parser id into filesystem authority.
 
 Perl leaves `FUTURE-PARITY-BACKLOG.14.7.3.1-.4` now implement and privately admit that same final path. `.1` makes exact assignment-form `parse_job(text_expr, literal_options)` one exclusive
@@ -75,7 +75,7 @@ logical-source authority absence are executable proof. The first production call
 cfg, cfg-only exports, manifest check-cfg registration, and conditional dead-code allowance. Rust alone is
 promoted; generated format v2, function-body v1, public/outward behavior, and later backends remain unchanged.
 
-Dart leaf `FUTURE-PARITY-BACKLOG.14.7.5.0` freezes the next backend boundary without changing production.
+Dart leaf `FUTURE-PARITY-BACKLOG.14.7.5.0` historically froze the next backend boundary without changing production.
 `dart/test_dormant/staged_ast_enrichment_contract_test.dart` passes fatal analysis and four pre-boundary tests:
 neutral/v1 truth remains exact; assignment-form `parse_job(...)` is one generic `ActionCallExpr`; native and
 `SpecFile`-JSON-reconstructed execution emit structured `unknown_helper`; validated generated-plan and
@@ -84,7 +84,7 @@ independently analyzed/executed emitted source preserve that rejection. The fift
 and proves the eventual final path plus ordinary/canonical registration absent. Dart rollout, generated format,
 public/outward behavior, Julia/Lua, and function-body v1 do not move; `.14.7.5.1` owns marker/provenance.
 
-Dart leaves `.14.7.5.1-.3` now advance that same excluded consumer through its complete private recursive
+Dart leaves `.14.7.5.1-.4` now advance that same stable consumer through complete private recursive
 authority. `.1` makes only exact assignment-form `parse_job(...)` one dedicated node, closes malformed/residual/
 recognition-reachable forms, and constructs an inert detached sidecar from live-regex-proven Unicode-scalar direct
 or ordered-derived provenance. `.2` adds separate `staged_ast_enrichment.dart`: one caller-frozen snapshot of
@@ -97,10 +97,11 @@ provenance tuples, exact cycle and strict-decrease checks, one non-resetting can
 result/diagnostic authority, expiring callback safe points, and direct/ordered-derived original-source rebasing.
 Review also closes a latent complete-depth gap: duplicate non-append or mixed append/replace target claims and any
 target overwriting a queued marker now reject before callback one, while ordered multiple appends remain valid.
-The dormant consumer is `+18 -1`; only `.14.7.5.4` fresh carriers, production seam, admission, and Dart rollout are
-RED. Fatal analysis, 102 direct dependents, and all 416 ordinary Dart tests pass. Neutral governance remains 85
-mutations; discovery/canonical topology, rollout, v1/v2 formats, carriers/admission, public/outward behavior, and
-other backends do not move.
+`.4` adds an opaque host-only seed that starts a fresh registry/cache/recursive authority on every native,
+reconstructed, generated-plan, or emitted top-level execution and enriches only after the complete parent AST.
+The final-path consumer is 19/19, ordinary Dart is 435/435, and canonical CI requires and invokes it exactly once.
+Neutral governance advances to 90 mutations and only Dart rollout moves; v1/v2 formats, public/outward behavior,
+and other backends do not move.
 
 Focused `.14.7.4.1` proof also exposed two pre-existing Rust defects against its exact clean base. Corrective
 `TRACE-OBSERVABILITY.5.1` now repairs the first: `compile_with_events` runs the already-current progressive static
@@ -114,8 +115,8 @@ contract input and cfg command exactly once. Cfg authority is 4/4 and ordinary d
 targets. `.5.4` historically aligned the stale Perl staged-admission snapshot with the 79-mutation / Rust-`dormant_red` truth
 introduced by `.14.7.4.0` commit `e37a8b77`; 143/143 plus canonical proof close corrective `.5`. `.14.7.4.2`
 then completes current-depth authority from that clean handoff, `.14.7.4.3` completes recursive authority, and
-`.14.7.4.4` admits four fresh carriers at 84 neutral mutations; `.14.7.5.0` advances only Dart dormancy to 85.
-The next frontier is Dart fresh carriers and admission `.14.7.5.4`.
+`.14.7.4.4` admits four fresh carriers at 84 neutral mutations; `.14.7.5.0` historically advances only Dart
+dormancy to 85; `.14.7.5.4` admits Dart at 90. The next frontier is Julia `.14.7.6.0`.
 
 This closeout's mandatory engineering-notes rollover publishes immutable segment `4990`. ADR `0090` advances
 only finite route controls from 17/16 to 18 files / 17 manifest lines; the measured collection remains
@@ -136,9 +137,10 @@ id/path/parser/top/payload/span/failure context plus resolved built-in identity.
 diagnostics: success, resolution, execution, stitching, policies, queue depth, formats, capabilities, and outward
 surfaces stay fixed. Executable neutral contract `.2` and the Perl behavioral parent `.3` are complete; backend parents `.4-.7`, recurrence `.8`,
 public authoring/closeout `.9`, and independent recomposition `.10` remain dependency-frozen behind it. Every
-later runtime rollout leg and public/outward surface therefore remains pending except the now-admitted Rust
-carrier path `.4.4`; Dart dormant boundary `.5.0`, marker/provenance `.5.1`, current-depth authority `.5.2`, and
-recursive bounded authority `.5.3` are complete, with fresh carriers/admission `.5.4` the next clean frontier.
+later runtime rollout leg and public/outward surface therefore remains pending except the admitted Rust and Dart
+carrier paths `.4.4` and `.5.4`; Dart dormant boundary `.5.0`, marker/provenance `.5.1`, current-depth authority
+`.5.2`, recursive bounded authority `.5.3`, and fresh carriers/admission `.5.4` are complete. Julia `.6.0` is the
+next clean frontier.
 
 ## Typed transaction safety now composes the complete recognition authority
 

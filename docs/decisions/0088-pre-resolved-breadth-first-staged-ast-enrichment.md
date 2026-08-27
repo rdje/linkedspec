@@ -2,8 +2,8 @@
 
 - Date: 2026-08-25
 - Status: accepted architecture; executable neutral authority complete under `FUTURE-PARITY-BACKLOG.14.7.2`;
-  Perl and Rust private behavior/admission complete; Dart private recursive authority complete under
-  `.14.7.5.3`; later carriers/admission and public authoring remain pending
+  Perl, Rust, and Dart private behavior/admission complete; Julia `.14.7.6.0` is next; later backend admission and
+  public authoring remain pending
 - Tags: architecture, staged-parsing, parse-job, source-location, registry, queue, policies, diagnostics, portability
 
 ## Context
@@ -128,14 +128,13 @@ cancellation/deadline/budget state, mutable queues, or host handles.
 4 registry entries; 2 sources; 8 provenance, 3 deterministic-id, 8 resolution, 6 authority, 10 cache, 4 queue,
 3 isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases; 37 diagnostics; 5 backend
 consumers over 6 runtime routes; 4 carrier requirements; 10 outward guards; 9 rollout legs; 35 exact owners; and
-85 reason-checked mutations after Dart dormant-consumer activation.
+90 reason-checked mutations after Dart admission.
 
-Neutral, Perl, and Rust rollout are complete. Dart behavior/rollout, Julia, PUC Lua, LuaJIT, six-runtime recurrence,
-and public authoring/no-drift remain pending under `.14.7.5-.9`; `.14.7.10` owns independent recomposition. The
-checker is an always-on canonical-CI input. It guards ten facades/schema/semantic/MCP/CLI/README paths against
-premature public exposure, requires the Perl and Rust consumers exactly once in ordinary and canonical discovery,
-requires Dart's exact `test_dormant/` consumer while keeping its eventual final path and canonical references
-absent, and keeps Julia/Lua consumers absent until their RED owners activate.
+Neutral, Perl, Rust, and Dart rollout are complete. Julia, PUC Lua, LuaJIT, six-runtime recurrence, and public
+authoring/no-drift remain pending under `.14.7.6-.9`; `.14.7.10` owns independent recomposition. The checker is an
+always-on canonical-CI input. It guards ten facades/schema/semantic/MCP/CLI/README paths against premature public
+exposure, requires the Perl, Rust, and Dart consumers exactly once in ordinary and canonical discovery, rejects
+the former Dart dormant path, and keeps Julia/Lua consumers absent until their RED owners activate.
 
 ## Consequences
 
@@ -354,6 +353,21 @@ Dart rollout. Fatal analysis, 102 direct dependents, and all 416 ordinary Dart t
 generated format, neutral lifecycle/mutations, public/outward behavior, canonical topology, and other backends do
 not move.
 
+Dart carrier/admission leaf `FUTURE-PARITY-BACKLOG.14.7.5.4` adds opaque host-only
+`StagedAstEnrichmentSeed` to `LinkedSpecRuntimeEngine` and generated-v2 execution. Each top-level run starts a new
+`FrozenStagedRegistry` with an empty plan cache and a new `StagedRecursiveAuthority`, completes the parent parse,
+checks that no recognition transaction remains live, and then calls the recursive scheduler inside the existing
+structured runtime-error boundary. With no seed, existing execution behavior is unchanged.
+
+Native, `SpecFile`-JSON reconstructed, validated generated-plan, and independently analyzed/executed emitted
+routes each run twice through one seed. They return equal detached AST/sidecar/diagnostic/cache/resource records,
+one miss/zero hits per run, fresh callback/cancellation/clock observations, and no cross-result mutation. Compiled
+JSON and emitted source retain no callback, parser, registry/source authority, cancellation/deadline/budget state,
+mutable queue/cache, path, or host handle. The same consumer moves from `test_dormant/` to the final ordinary path,
+passes 19/19, and is required/invoked exactly once by canonical CI. Only Dart rollout advances; the checker rejects
+90 mutations. Function-body v1, generated-source v2, public/outward behavior, later backends, recurrence, and
+combined no-drift remain unchanged or pending.
+
 ## Links
 
 - Owning task: `docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md`
@@ -368,4 +382,5 @@ not move.
   `docs/knowledge/rust-staged-ast-enrichment-recursive-authority.md` and
   `docs/knowledge/dart-staged-ast-enrichment-dormant-red.md` plus
   `docs/knowledge/dart-staged-ast-enrichment-current-depth-authority.md` plus
-  `docs/knowledge/dart-staged-ast-enrichment-recursive-authority.md`
+  `docs/knowledge/dart-staged-ast-enrichment-recursive-authority.md` and
+  `docs/knowledge/dart-staged-ast-enrichment-carriers-admission.md`

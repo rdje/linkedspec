@@ -5,9 +5,9 @@
 > fully GREEN 143-check oracle;
 > Rust now has the same private complete authority, four fresh native/reconstructed/generated/emitted production
 > carriers, and exact ordinary/canonical admission;
-> Dart now has the same private inert marker/provenance declaration boundary across four dormant logical routes;
-> seven groups are GREEN and only caller-frozen resolution/cache/result/failure authority remains RED at 85 neutral
-> mutations. Julia and Lua remain absent, and the only publicly authored five-backend/six-runtime surface is still the
+> Dart now has the same complete private authority, four fresh native/reconstructed/generated/emitted production
+> carriers, and exact 19/19 ordinary/canonical admission at 90 neutral mutations. Julia and Lua remain absent, and
+> the only publicly authored five-backend/six-runtime surface is still the
 > narrow function-body v1 adapter described below.
 
 LinkedSpec's staged model lets one completed parse return bounded text islands for later parsers to refine. The
@@ -184,10 +184,9 @@ logical marker/sidecar and identity inputs. Each execution receives fresh caller
 generated data contains no callback, compiled parser, registry snapshot, source authority, cancellation token,
 deadline, budget, mutable queue, or host handle.
 
-Neutral, Perl, and Rust rollout are complete. Five backend consumers map to six runtime routes because one shared
-Lua source must run independently on PUC Lua and LuaJIT. The exact Perl and Rust consumers run once from ordinary
-and canonical proof. Dart's consumer is deliberately confined to `dart/test_dormant/`; its final path, ordinary
-discovery, canonical registration, and rollout remain pending. Julia, both Lua routes, six-runtime recurrence,
+Neutral, Perl, Rust, and Dart rollout are complete. Five backend consumers map to six runtime routes because one
+shared Lua source must run independently on PUC Lua and LuaJIT. The exact Perl, Rust, and Dart consumers run once
+from ordinary and canonical proof. Julia, both Lua routes, six-runtime recurrence,
 public authoring/no-drift, and final recomposition retain their `.14.7.6-.10` owners.
 
 ## Current private Perl boundary
@@ -403,17 +402,17 @@ outer cfg, custom manifest check-cfg, cfg-only exports, and conditional `dead_co
 production engine is now the real caller.
 
 This is private Rust backend admission, not public `parse_job(...)` authoring. Ordinary Cargo discovers the GREEN
-consumer, canonical CI requires and invokes it exactly once, and only Rust rollout is promoted. Dart, Julia, Lua,
+consumer, canonical CI requires and invokes it exactly once, and only Rust rollout is promoted. Dart has since
+reached the same private boundary; Julia, Lua,
 six-runtime recurrence, public authoring, independent recomposition, and combined no-drift retain their owners.
 
-## Current private, dormant Dart recursive authority
+## Current private Dart carrier admission
 
 Dart `.14.7.5.0` established the no-production generic-call RED. `.14.7.5.1` replaced only that exact assignment
-boundary, `.14.7.5.2` added a separate private one-depth authority, and `.14.7.5.3` adds bounded breadth-first
-recurrence while retaining the same excluded consumer,
-`dart/test_dormant/staged_ast_enrichment_contract_test.dart`, which ordinary package-test discovery and canonical CI
-omit. Fatal analysis includes it successfully. An explicit focused run reports eighteen passing tests and one
-deliberate `.4` carrier/admission failure.
+boundary, `.14.7.5.2` added a separate private one-depth authority, and `.14.7.5.3` added bounded breadth-first
+recurrence. `.14.7.5.4` moves the same stable consumer to
+`dart/test/staged_ast_enrichment_contract_test.dart`; ordinary discovery runs all nineteen GREEN groups and
+canonical CI requires and invokes the exact path once.
 
 The GREEN groups freeze all neutral inventories and the unchanged function-body-v1 adapter, including stable
 resolve/load/compile/execute/cache/stitch records, complete wrong-top context, and resolve-time denial of general
@@ -473,8 +472,8 @@ The detached logical marker contains only version/effect identities plus the `st
 normalized options, exact materialized text, typed provenance, and origin. It contains no regex, source authority,
 match object, parser, registry, callback, scheduler, cache, path, or host handle. Native, `SpecFile`-JSON
 reconstructed, generated-plan, and independently analyzed/executed emitted routes return equal marker data
-without changing generated format v2. Those routes still preserve logical marker data only; `.2` does not attach
-host callbacks to a top-level production execution.
+without changing generated format v2. Logical carrier data remains authority-free; `.4` supplies the opaque
+host-only seed separately at top-level execution.
 
 The private `FrozenStagedRegistry` accepts one caller-completed snapshot and a one-for-one map from opaque logical
 authority names to already-compiled Dart callbacks. It deeply owns aliases, declaring-relative candidates,
@@ -583,15 +582,17 @@ and a replacement target may not overwrite or contain another queued marker. The
 `staged_stitch_target_collision` before callback one. This closes a latent one-depth defect found during `.3`
 review, where individually valid targets could otherwise conflict only after callback work began.
 
-The nineteenth test fails only with `LINKEDSPEC_STAGED_AST_ENRICHMENT_DART_RED`, naming missing fresh native,
-reconstructed, generated-plan, and emitted authority, the production seam, ordinary/canonical admission, and Dart
-rollout. The neutral checker requires this exact dormant path, the eventual
-`dart/test/staged_ast_enrichment_contract_test.dart` path to remain absent, and both paths to have zero canonical
-references. `.14.7.5.4` owns that final private-backend admission boundary.
+`StagedAstEnrichmentSeed` deeply owns the caller-frozen logical snapshot and opaque callbacks. `start()` creates a
+fresh `FrozenStagedRegistry` with an empty plan cache and a fresh `StagedRecursiveAuthority` for every top-level
+run. `LinkedSpecRuntimeEngine` completes the parent parse, checks that no recognition transaction remains live,
+and only then invokes recursive enrichment inside the existing structured error boundary. Native, reconstructed,
+generated-plan, and emitted routes each run twice through one seed and return equal detached AST/sidecar/
+diagnostic/cache/resource records with one miss/zero hits plus fresh callback/cancellation/clock observations.
+Compiled JSON and emitted source retain no concrete callback, parser, registry/source authority, cancellation,
+clock, resource, mutable cache/queue, path, or host handle.
 
-The admitted Perl and Rust consumers each snapshot the complete neutral current projection before their backend-
-specific assertions. Marker/provenance/current-depth authority does not change the neutral mutation count or Dart
-dormant lifecycle.
+The admitted Perl, Rust, and Dart consumers each snapshot the complete neutral current projection before their
+backend-specific assertions. Dart admission advances only its lifecycle/rollout and five topology mutations.
 
 Publishing this boundary crossed the bounded `CHANGES.md` rollover threshold. The repository archived one complete
 224-line record set as immutable segment `4990`; ADR `0091` advances only the finite change-history collection and
@@ -606,6 +607,6 @@ bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract
 
 The checker currently reports 4 registry entries; 8 provenance, 8 resolution, 6 authority, 10 cache, 4 queue,
 3 isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases; 37 diagnostics; 5 backend
-consumers/6 routes; 4 carrier requirements; 10 outward guards; 9 rollout legs; 35 owners; and 85 reason-checked
-mutations. The neutral checker, Perl consumer, and Rust consumer are registered in canonical local CI; Dart is
-dormant and later backend consumers remain absent.
+consumers/6 routes; 4 carrier requirements; 10 outward guards; 9 rollout legs; 35 owners; and 90 reason-checked
+mutations. The neutral checker plus Perl, Rust, and Dart consumers are registered in canonical local CI; later
+backend consumers remain absent.

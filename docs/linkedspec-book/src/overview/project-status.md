@@ -120,21 +120,22 @@ expiring callback safe points, and direct/ordered-derived original-source rebasi
 validated generated-plan, and independently compiled emitted routes each construct fresh registry/cache and
 recursive authority from a host-only seed, run only after the complete parent result, return equal detached
 records, and serialize no live authority. The temporary cfg/dead-code scaffolding is removed, the neutral oracle
-rejects 84 mutations, and only Rust rollout advances. Dart `.14.7.5.0-.3` now freeze an excluded generic-call
+rejects 84 mutations, and only Rust rollout advances. Dart `.14.7.5.0-.4` freeze the historical generic-call
 boundary, add the exact inert live-proven marker, and implement separate caller-frozen pure resolution, selected-
 top-before-id identity, plan-only caching, complete-depth typed order/isolation and target reservation, detached
 atomic policies, breadth-first recurrence, strict lineage, shared cancellation/resources, expiring safe points,
-and direct/ordered-derived source rebasing. Eighteen dormant groups pass and only `.14.7.5.4` fresh carriers,
-production integration, admission, and rollout remain RED. Neutral governance stays 85 mutations without
-discovery, rollout, format, or public movement. Focused `.1` proof found two unrelated
+and direct/ordered-derived source rebasing. A host-only seed starts fresh registry/cache/recursive authority after
+the parent AST across native, reconstructed, generated-plan, and independently executed emitted routes. The final
+consumer passes 19/19 in ordinary/canonical admission, ordinary Dart is 435/435, and neutral governance rejects 90
+mutations while only Dart rollout advances. Generated format and public/outward behavior do not move. Focused `.1` proof found two unrelated
 pre-existing Rust validation/trace defects. `TRACE-OBSERVABILITY.5.1` now restores ordinary/traced progressive
 static-validation equality with an exact diagnostic regression. `.5.2` now restores exactly one existing child-
 dispatch/result event pair on normal and gap-aware interpreted/generated entry; trace controls pass 11/11 with
 unchanged results and Rust trace parity is current again. `.5.3` owns the stale private progressive-authority route
 assertion found by `.5.1`; it now keeps the authority target dormant while requiring the separate admitted contract
 input/command once. `.5.4` historically aligned the admitted Perl staged snapshot to 79 mutations plus Rust
-`dormant_red`; `.14.7.4.4` supersedes that lifecycle snapshot with Rust admission and 84 mutations, and Dart
-`.14.7.5.0` subsequently advances only its dormant lifecycle to 85. Mandatory engineering-notes segment
+`dormant_red`; `.14.7.4.4` supersedes that lifecycle snapshot with Rust admission and 84 mutations, Dart
+`.14.7.5.0` historically advances only dormant lifecycle to 85, and `.14.7.5.4` admits Dart at 90. Mandatory engineering-notes segment
 `4990` is finitely authorized at 18 files / 17 manifest lines by ADR `0090`. Its mandatory change-history rollover
 publishes segment `4990`; ADR `0091` advances only that store's finite controls to 23 files / 22 manifest lines.
 

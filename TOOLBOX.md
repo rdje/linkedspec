@@ -327,9 +327,9 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   fresh scheduler/cache from invocation options and enrich only after the parent AST returns. The oracle proves
   native, normalized-descriptor, validated generated-plan, and independently loaded emitted equality plus distinct
   callbacks/cancellation/clocks and serialized-authority absence. Then run
-  `bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py` to prove neutral+Perl+Rust
-  lifecycle, Dart's exact dormant consumer, two absent later consumers, 85 mutations, and exact single Perl/Rust
-  ordinary+canonical admission with zero Dart registration.
+  `bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py` to prove
+  neutral+Perl+Rust+Dart lifecycle, two absent later consumers, 90 mutations, and exact single Perl/Rust/Dart
+  ordinary+canonical admission.
   Public authoring remains `.14.7.9`.
 - **Rust general-staged admitted private boundary:** `FUTURE-PARITY-BACKLOG.14.7.4.0-.4` owns
   `rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs` as an ordinary and canonical consumer. Run it with
@@ -352,13 +352,12 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   derived rebasing, and adversarial denials. `StagedAstEnrichmentSeed::start` constructs a fresh registry/cache and
   recursive authority for every top-level native, reconstructed, generated-plan, or emitted execution; completion
   occurs only after the parent result and returns the detached neutral record. No outer cfg, cfg-only export,
-  check-cfg registration, or conditional dead-code allowance remains. Dart `.14.7.5.0` now freezes the next
+  check-cfg registration, or conditional dead-code allowance remains. Dart has since reached the same admission
   boundary without changing this Rust route.
-- **Dart general-staged dormant boundary:** `FUTURE-PARITY-BACKLOG.14.7.5.0-.3` own
-  `dart/test_dormant/staged_ast_enrichment_contract_test.dart`. Run fatal analysis and then the exact opt-in test
-  from `dart/` through `bash ../tools/run_dart_project_data.sh`. Eighteen tests must pass and the nineteenth must
-  fail only with `.4`'s `LINKEDSPEC_STAGED_AST_ENRICHMENT_DART_RED` fresh-carrier/production/admission/rollout
-  list. Inspect compiled JSON: exact assignment-
+- **Dart general-staged admitted private boundary:** `FUTURE-PARITY-BACKLOG.14.7.5.0-.4` owns
+  `dart/test/staged_ast_enrichment_contract_test.dart`. From `dart/`, run
+  `bash ../tools/run_dart_project_data.sh test --reporter failures-only
+  test/staged_ast_enrichment_contract_test.dart`; all nineteen tests must pass. Inspect compiled JSON: exact assignment-
   form `parse_job(...)` is one `ActionStagedParseJobExpr`, while residual generic calls reject. Inspect
   `runtime/staged_parse_job.dart` for detached marker materialization and `runtime/matching.dart` for lazy zero-
   width suffix instrumentation that proves capture boundaries before `SourceAuthority` converts them to Unicode-
@@ -366,11 +365,12 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   identities, complete-depth target reservation/order, fresh sibling contexts, detachment, atomic policy stitching,
   `enrichStagedRecursively`, `StagedRecursiveAuthority`, strict lineage, shared resources, expiring `safePoint`,
   and direct/ordered-derived source rebasing.
-  Native/reconstructed/generated-plan/emitted routes still preserve logical marker data only. The final
-  `dart/test/staged_ast_enrichment_contract_test.dart` path and both canonical references must remain absent until
-  `.14.7.5.4`; that leaf next owns only fresh carrier authority, the production seam, admission, and rollout. Because every admitted
-  consumer snapshots the full neutral current projection, rerun both Perl and Rust consumers whenever any later
-  backend lifecycle or governed mutation count moves.
+  `StagedAstEnrichmentSeed` is the host-only top-level recipe: `LinkedSpecRuntimeEngine`, reconstructed engines,
+  validated generated plans, and generated-v2 `execute` each start a fresh registry/cache/recursive authority and
+  enrich only after the parent AST. Generated source retains no concrete callback/registry/resource authority.
+  Canonical CI requires, logs, and invokes the exact final path once; Dart rollout is complete. Because every
+  admitted consumer snapshots the full neutral current projection, rerun Perl, Rust, and Dart consumers whenever
+  any later backend lifecycle or governed mutation count moves.
 - **Env knobs:** `LINKEDSPEC_TRACE_LEVEL` (level; `LINKEDSPEC_DUMP_VERBOSITY` is the fallback),
   `LINKEDSPEC_TRACE_FILE` (route to a file), `LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_EMOJI`,
   `LINKEDSPEC_TRACE_RESET_FILE`.
@@ -1190,8 +1190,8 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   unconditionally in canonical local CI.
 - **OUTPUT:** 4 registry entries; 8 provenance; 8 resolution/6 authority; 10 cache; 4 queue/3 isolation;
   4 result plus 3 failure policies; 10 recursive-chain and 5 detachment cases; five backend consumers over six
-  runtime routes; 37 diagnostics; 9 rollout legs; 35 exact owners; and 85 mutations.
-- **BOUNDARY:** neutral, Perl, and Rust are complete. Dart is `dormant_red` at its exact excluded path; Julia,
+  runtime routes; 37 diagnostics; 9 rollout legs; 35 exact owners; and 90 mutations.
+- **BOUNDARY:** neutral, Perl, Rust, and Dart are complete. Julia,
   PUC Lua, LuaJIT, recurrence, and public no-drift remain pending. Outward facade/schema/semantic/MCP/CLI/README
   tokens remain absent. The existing function-body v1 adapter and generated-source v2 format stay current and
   unchanged.

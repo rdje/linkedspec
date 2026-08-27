@@ -6,6 +6,7 @@ import 'runtime/bounded_child_parse_authority.dart';
 import 'runtime/generated_plan.dart';
 import 'runtime/interpreter.dart';
 import 'runtime/semantic_observation.dart';
+import 'runtime/staged_ast_enrichment.dart';
 import 'trace/trace.dart';
 import 'validation/spec_validator.dart';
 
@@ -324,6 +325,7 @@ Object? executeGeneratedParserV2(
   RuntimeDiagnosticOutputSink? diagnosticOutputSink,
   RuntimeSemanticObservationSink? semanticObservationSink,
   ProgressiveExecutionSeed? boundedChildParseAuthority,
+  StagedAstEnrichmentSeed? stagedAstEnrichmentSeed,
 }) {
   validateGeneratedSourceContractV2(actualContract, sourceIdentity);
   final validated = _validatedGeneratedRulePlanV2(
@@ -335,6 +337,7 @@ Object? executeGeneratedParserV2(
     final engine = LinkedSpecRuntimeEngine(
       compiled,
       boundedChildParseAuthority: boundedChildParseAuthority,
+      stagedAstEnrichmentSeed: stagedAstEnrichmentSeed,
     );
     return engine
         .executeGeneratedWithPlan(
@@ -510,6 +513,7 @@ import 'dart:convert';
 
 import 'package:linkedspec_dart/linkedspec_dart.dart';
 import 'package:linkedspec_dart/src/runtime/bounded_child_parse_authority.dart';
+import 'package:linkedspec_dart/src/runtime/staged_ast_enrichment.dart';
 
 const linkedspecGeneratedSourceContract =
     'linkedspec-generated-source-v2';
@@ -576,6 +580,7 @@ Object? execute(
   RuntimeDiagnosticOutputSink? diagnosticOutputSink,
   RuntimeSemanticObservationSink? semanticObservationSink,
   ProgressiveExecutionSeed? boundedChildParseAuthority,
+  StagedAstEnrichmentSeed? stagedAstEnrichmentSeed,
 }) {
   validateGeneratedSourceContractV2(
     linkedspecGeneratedSourceContract,
@@ -591,6 +596,7 @@ Object? execute(
     diagnosticOutputSink: diagnosticOutputSink,
     semanticObservationSink: semanticObservationSink,
     boundedChildParseAuthority: boundedChildParseAuthority,
+    stagedAstEnrichmentSeed: stagedAstEnrichmentSeed,
   );
 }
 

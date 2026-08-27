@@ -15,6 +15,7 @@ import 'matching.dart';
 import 'recognition_transaction.dart';
 import 'semantic_observation.dart';
 import 'source_location.dart';
+import 'staged_ast_enrichment.dart';
 import 'staged_parse_job.dart';
 import 'unicode_case_mapping.dart';
 
@@ -223,6 +224,7 @@ final class LinkedSpecRuntimeEngine {
     this.specName,
     this.specPath,
     this.boundedChildParseAuthority,
+    this.stagedAstEnrichmentSeed,
   });
 
   final CompiledSpec compiledSpec;
@@ -230,6 +232,7 @@ final class LinkedSpecRuntimeEngine {
   final String? specName;
   final String? specPath;
   final ProgressiveExecutionSeed? boundedChildParseAuthority;
+  final StagedAstEnrichmentSeed? stagedAstEnrichmentSeed;
   final Map<int, ActionBlock> _userFunctionBodyCache = <int, ActionBlock>{};
   final Map<String, ActionBlock> _codeblockBodyCache = <String, ActionBlock>{};
 
@@ -360,10 +363,35 @@ final class LinkedSpecRuntimeEngine {
     );
     try {
       final result = _executeRule(label, 0, context);
+      Object? completedValue = result.value;
+      final stagedExecution = context.stagedAstEnrichment;
+      if (stagedExecution != null) {
+        try {
+          completedValue = stagedExecution
+              .complete(
+                completedValue,
+                hasActiveRecognitionTransaction:
+                    context.hasActiveRecognitionTransaction,
+              )
+              .ast;
+        } on StagedAstEnrichmentException catch (error) {
+          final diagnostic = error.toJson();
+          throw RuntimeInterpreterException(
+            error.toString(),
+            diagnostic: _diagnostic(
+              stage: diagnostic['phase']! as String,
+              code: diagnostic['code']! as String,
+              summary: 'Dart staged-AST enrichment failed',
+              detail: error.toString(),
+              ruleLabel: context.currentRuleLabel ?? label,
+            ),
+          );
+        }
+      }
       final parseResult = RuntimeParseResult(
         matched: result.matched,
-        value: result.value,
-        output: List<Object?>.unmodifiable([_copyValue(result.value)]),
+        value: completedValue,
+        output: List<Object?>.unmodifiable([_copyValue(completedValue)]),
         cursorCodeUnit: context.cursorCodeUnit,
         cursorCharOffset: codeUnitOffsetToCharOffset(
           input,
@@ -7438,7 +7466,8 @@ final class _RuntimeExecutionContext {
     this.generatedSourceIdentity,
   }) : registers = RuntimeMatchRegisters.empty(input),
        sourceAuthority = SourceAuthority(sources: {'input': input}),
-       progressiveExecution = engine.boundedChildParseAuthority?.start() {
+       progressiveExecution = engine.boundedChildParseAuthority?.start(),
+       stagedAstEnrichment = engine.stagedAstEnrichmentSeed?.start() {
     recognitionAuthority = RecognitionTransactionAuthority(
       sourceAuthority: sourceAuthority,
       sourceIdentity: 'input',
@@ -7456,6 +7485,7 @@ final class _RuntimeExecutionContext {
   final String? generatedSourceIdentity;
   final SourceAuthority sourceAuthority;
   final ProgressiveExecutionState? progressiveExecution;
+  final StagedAstEnrichmentState? stagedAstEnrichment;
   late final RecognitionTransactionAuthority recognitionAuthority;
   final Map<String, Object?> variables = <String, Object?>{};
   final Map<String, List<Object?>> arrays = <String, List<Object?>>{};

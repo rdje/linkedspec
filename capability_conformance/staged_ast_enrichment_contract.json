@@ -2,7 +2,7 @@
   "format": 1,
   "contract_id": "linkedspec-staged-ast-enrichment-v1",
   "task_owner": "FUTURE-PARITY-BACKLOG.14.7.2",
-  "status": "neutral_perl_and_rust_complete_dart_dormant_red_later_backends_pending",
+  "status": "neutral_perl_rust_and_dart_complete_later_backends_pending",
   "expected_counts": {
     "registry_entries": 4,
     "sources": 2,
@@ -24,7 +24,7 @@
     "diagnostics": 37,
     "rollout_legs": 9,
     "ownership_rows": 35,
-    "mutations": 85
+    "mutations": 90
   },
   "authored_surface": {
     "example": "job_marker = parse_job(text_expr, hash(\"node_kind\", \"expression\", \"payload_kind\", \"embedded_expression\", \"spec\", \"expr-v1\", \"top\", \"Expr\", \"result_policy\", \"sibling_field\", \"into\", \"expression_ast\", \"on_error\", \"fail\"))",
@@ -790,7 +790,7 @@
   "backend_consumers": [
     {"backend": "perl", "owner": "FUTURE-PARITY-BACKLOG.14.7.3.0", "path": "t/staged_ast_enrichment_perl_contract.t", "status": "complete"},
     {"backend": "rust", "owner": "FUTURE-PARITY-BACKLOG.14.7.4.0", "path": "rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs", "status": "complete"},
-    {"backend": "dart", "owner": "FUTURE-PARITY-BACKLOG.14.7.5.0", "path": "dart/test/staged_ast_enrichment_contract_test.dart", "dormant_path": "dart/test_dormant/staged_ast_enrichment_contract_test.dart", "status": "dormant_red"},
+    {"backend": "dart", "owner": "FUTURE-PARITY-BACKLOG.14.7.5.0", "path": "dart/test/staged_ast_enrichment_contract_test.dart", "dormant_path": "dart/test_dormant/staged_ast_enrichment_contract_test.dart", "status": "complete"},
     {"backend": "julia", "owner": "FUTURE-PARITY-BACKLOG.14.7.6.0", "path": "julia/test/staged_ast_enrichment_contract_test.jl", "status": "pending_absent"},
     {"backend": "lua", "owner": "FUTURE-PARITY-BACKLOG.14.7.7.0", "path": "lua/test/staged_ast_enrichment_contract_test.lua", "status": "pending_absent"}
   ],
@@ -866,7 +866,7 @@
     {"order": 1, "leg": "neutral", "owner": "FUTURE-PARITY-BACKLOG.14.7.2", "status": "complete", "paths": ["capability_conformance/staged_ast_enrichment_contract.json", "tools/check_staged_ast_enrichment_contract.py"]},
     {"order": 2, "leg": "perl", "owner": "FUTURE-PARITY-BACKLOG.14.7.3", "status": "complete", "paths": ["t/staged_ast_enrichment_perl_contract.t"]},
     {"order": 3, "leg": "rust", "owner": "FUTURE-PARITY-BACKLOG.14.7.4", "status": "complete", "paths": ["rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs"]},
-    {"order": 4, "leg": "dart", "owner": "FUTURE-PARITY-BACKLOG.14.7.5", "status": "pending", "paths": ["dart/test/staged_ast_enrichment_contract_test.dart"]},
+    {"order": 4, "leg": "dart", "owner": "FUTURE-PARITY-BACKLOG.14.7.5", "status": "complete", "paths": ["dart/test/staged_ast_enrichment_contract_test.dart"]},
     {"order": 5, "leg": "julia", "owner": "FUTURE-PARITY-BACKLOG.14.7.6", "status": "pending", "paths": ["julia/test/staged_ast_enrichment_contract_test.jl"]},
     {"order": 6, "leg": "puc_lua", "owner": "FUTURE-PARITY-BACKLOG.14.7.7", "status": "pending", "paths": ["lua/test/staged_ast_enrichment_contract_test.lua"]},
     {"order": 7, "leg": "luajit", "owner": "FUTURE-PARITY-BACKLOG.14.7.7", "status": "pending", "paths": ["lua/test/staged_ast_enrichment_contract_test.lua"]},
@@ -892,6 +892,12 @@
       "ordinary_invocation": "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test staged_ast_enrichment_contract",
       "registration_marker": "running exact Rust staged-AST enrichment admission consumer",
       "invocation": "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test staged_ast_enrichment_contract"
+    },
+    "dart_admission": {
+      "consumer_path": "dart/test/staged_ast_enrichment_contract_test.dart",
+      "ordinary_invocation": "bash tools/run_dart_project_data.sh test --reporter failures-only dart/test/staged_ast_enrichment_contract_test.dart",
+      "registration_marker": "running exact Dart staged-AST enrichment admission consumer",
+      "invocation": "(cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/staged_ast_enrichment_contract_test.dart)"
     },
     "storage_policy": "all Python cache, temporary, and process data stays under repository-derived project storage",
     "tracked_required": true
@@ -1004,6 +1010,7 @@
     "rollout_neutral",
     "rollout_backend",
     "rollout_rust",
+    "rollout_dart",
     "rollout_public",
     "canonical_contract",
     "canonical_checker",
@@ -1018,6 +1025,10 @@
     "rust_admission_ordinary",
     "rust_admission_marker",
     "rust_admission_invocation",
+    "dart_admission_consumer",
+    "dart_admission_ordinary",
+    "dart_admission_marker",
+    "dart_admission_invocation",
     "ownership"
   ]
 }

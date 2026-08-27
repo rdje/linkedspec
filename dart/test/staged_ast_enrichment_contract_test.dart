@@ -1,17 +1,14 @@
-// FUTURE-PARITY-BACKLOG.14.7.5.0 — dormant Dart staged-AST enrichment RED.
+// FUTURE-PARITY-BACKLOG.14.7.5.0-.4 — admitted Dart staged-AST enrichment.
 //
-// Ordinary `dart test` discovery and canonical CI omit test_dormant/. Before
-// admission, run this exact repository-local consumer from dart/:
+// Ordinary `dart test` discovery and canonical CI run this exact consumer.
+// Focused execution from dart/ is:
 //
 //   bash ../tools/run_dart_project_data.sh test --reporter failures-only \
-//     test_dormant/staged_ast_enrichment_contract_test.dart
+//     test/staged_ast_enrichment_contract_test.dart
 //
-// The contract freezes the neutral inventory, unchanged function-body v1
-// compatibility, and all four current Dart observation routes without changing
-// production behavior. Its sole intentional failure is the missing dedicated
-// `STAGED_PARSE_JOB_MARKER` plus typed `staged_parse_job_v2` provenance; the
-// current generic `parse_job(...)` call and `unknown_helper` rejection are not
-// an implementation.
+// The contract freezes the neutral inventory, unchanged function-body v1,
+// private marker/provenance/recursive authority, and four fresh top-level
+// production routes without making general parse_job authoring public.
 
 import 'dart:convert';
 import 'dart:io';
@@ -37,6 +34,10 @@ const _authoredSource = r'''
 Top::
  /([^;]+);/ -> Top { job_marker = parse_job(match_group(0), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "top", "Expr", "result_policy", "sibling_field", "into", "expression_ast", "on_error", "fail")); return(job_marker) }
 ''';
+const _carrierSource = r'''
+Top::
+ /([^;]+);/ -> Top { job_marker = parse_job(match_group(0), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "top", "Expr", "result_policy", "sibling_field", "into", "expression_ast", "on_error", "fail")); return(hash("job_marker", job_marker)) }
+''';
 
 void main() {
   final contract = _object(jsonDecode(File(_contractPath).readAsStringSync()));
@@ -46,8 +47,7 @@ void main() {
     expect(contract['format'], 1);
     expect(
       contract['status'],
-      'neutral_perl_and_rust_complete_dart_dormant_red_'
-      'later_backends_pending',
+      'neutral_perl_rust_and_dart_complete_later_backends_pending',
     );
     expect(contract['expected_counts'], <String, Object?>{
       'registry_entries': 4,
@@ -70,7 +70,7 @@ void main() {
       'diagnostics': 37,
       'rollout_legs': 9,
       'ownership_rows': 35,
-      'mutations': 85,
+      'mutations': 90,
     });
 
     final expectedIds = <String, List<String>>{
@@ -171,7 +171,7 @@ void main() {
     expect(consumers.map((row) => row['status']), <String>[
       'complete',
       'complete',
-      'dormant_red',
+      'complete',
       'pending_absent',
       'pending_absent',
     ]);
@@ -180,7 +180,7 @@ void main() {
       'owner': 'FUTURE-PARITY-BACKLOG.14.7.5.0',
       'path': 'dart/$_finalConsumerPath',
       'dormant_path': 'dart/$_dormantConsumerPath',
-      'status': 'dormant_red',
+      'status': 'complete',
     });
     expect(
       _list(contract['rollout']).map((row) => _object(row)['status']),
@@ -188,7 +188,7 @@ void main() {
         'complete',
         'complete',
         'complete',
-        'pending',
+        'complete',
         'pending',
         'pending',
         'pending',
@@ -1687,30 +1687,268 @@ Child::
     });
   });
 
-  test('RED advances exclusively to fresh carriers and Dart admission', () {
-    expect(File(_dormantConsumerPath).existsSync(), isTrue);
-    expect(File(_finalConsumerPath).existsSync(), isFalse);
-    final ci = File(_ciDriverPath).readAsStringSync();
-    expect(ci, isNot(contains('dart/$_dormantConsumerPath')));
-    expect(ci, isNot(contains('dart/$_finalConsumerPath')));
-    final umbrella = File('lib/linkedspec_dart.dart').readAsStringSync();
-    for (final privateToken in <String>[
-      'parse_job(text_expr',
-      'STAGED_PARSE_JOB_MARKER',
-      _contractId,
-    ]) {
-      expect(umbrella, isNot(contains(privateToken)));
-    }
+  test(
+    'fresh authority carries and admits all four production routes',
+    () async {
+      expect(File(_dormantConsumerPath).existsSync(), isFalse);
+      expect(File(_finalConsumerPath).existsSync(), isTrue);
+      final ci = File(_ciDriverPath).readAsStringSync();
+      expect(ci, isNot(contains('dart/$_dormantConsumerPath')));
+      expect(
+        _occurrences(ci, 'require_tracked_file dart/$_finalConsumerPath'),
+        1,
+      );
+      expect(
+        _occurrences(
+          ci,
+          'running exact Dart staged-AST enrichment admission consumer',
+        ),
+        1,
+      );
+      expect(
+        _occurrences(ci, 'test --reporter failures-only $_finalConsumerPath'),
+        1,
+      );
+      final umbrella = File('lib/linkedspec_dart.dart').readAsStringSync();
+      for (final privateToken in <String>[
+        'parse_job(text_expr',
+        'STAGED_PARSE_JOB_MARKER',
+        _contractId,
+      ]) {
+        expect(umbrella, isNot(contains(privateToken)));
+      }
 
-    fail(
-      'LINKEDSPEC_STAGED_AST_ENRICHMENT_DART_RED: missing '
-      'authority=[fresh_native_reconstructed_generated_emitted_authority,'
-      'production_seam,ordinary_canonical_admission,dart_rollout]; '
-      'recursive=[breadth_first_recursion,decreasing_chain_cycle_guards,'
-      'shared_resource_bounds,source_rebased_diagnostics] is available',
-    );
-  });
+      final parsed = parseSpecWithStagedUserFunctionDefinitions(_carrierSource);
+      final compiled = compileSpec(parsed);
+      final compiledJson = compiled.toJson();
+      expect(_forbiddenKeyHits(compiledJson), isEmpty);
+
+      final nativeProbe = _CarrierProbe(contract);
+      final nativeEngine = LinkedSpecRuntimeEngine(
+        compiled,
+        stagedAstEnrichmentSeed: nativeProbe.seed(),
+      );
+      final native = nativeProbe.record(<Object?>[
+        nativeEngine.parse('1+2;').value,
+        nativeEngine.parse('1+2;').value,
+      ]);
+
+      final reconstructedSpec = SpecFile.fromJson(
+        _object(jsonDecode(jsonEncode(parsed.toJson()))),
+      );
+      validateSpec(reconstructedSpec);
+      final reconstructedProbe = _CarrierProbe(contract);
+      final reconstructedEngine = LinkedSpecRuntimeEngine(
+        compileSpec(reconstructedSpec),
+        stagedAstEnrichmentSeed: reconstructedProbe.seed(),
+      );
+      final reconstructed = reconstructedProbe.record(<Object?>[
+        reconstructedEngine.parse('1+2;').value,
+        reconstructedEngine.parse('1+2;').value,
+      ]);
+
+      final generatedProbe = _CarrierProbe(contract);
+      final generatedSeed = generatedProbe.seed();
+      final generated = generatedProbe.record(<Object?>[
+        executeGeneratedParserV2(
+          compiled,
+          buildGeneratedRulePlan(compiled),
+          '1+2;',
+          _sourceIdentity,
+          stagedAstEnrichmentSeed: generatedSeed,
+        ),
+        executeGeneratedParserV2(
+          compiled,
+          buildGeneratedRulePlan(compiled),
+          '1+2;',
+          _sourceIdentity,
+          stagedAstEnrichmentSeed: generatedSeed,
+        ),
+      ]);
+
+      expect(reconstructed, native);
+      expect(generated, native);
+      expect(native['values'], <Object?>[
+        _expectedEnrichedAst(),
+        _expectedEnrichedAst(),
+      ]);
+
+      final emitted = emitDartSourceV2(compiled, _sourceIdentity);
+      expect(
+        emitted,
+        contains('StagedAstEnrichmentSeed? stagedAstEnrichmentSeed'),
+      );
+      for (final forbidden in <String>[
+        'opaque:compiled:expr-v2',
+        'registry:expr-v2',
+        'StagedRecursiveAuthority(',
+        'FrozenStagedRegistry.fromSnapshot',
+        'cancellationToken:',
+        'remainingSteps:',
+      ]) {
+        expect(emitted, isNot(contains(forbidden)), reason: forbidden);
+      }
+
+      final packageRoot = Directory.current.absolute;
+      final scratch = Directory(
+        '${packageRoot.path}/.dart_tool/linkedspec-dart-staged-ast-carrier-'
+        '$pid-${DateTime.now().microsecondsSinceEpoch}',
+      )..createSync(recursive: true);
+      try {
+        final generatedPath = '${scratch.path}/generated.dart';
+        final mainPath = '${scratch.path}/main.dart';
+        File(generatedPath).writeAsStringSync(emitted);
+        File(mainPath).writeAsStringSync(_emittedCarrierMain);
+        await _expectProcessSuccess(packageRoot, <String>[
+          'analyze',
+          '--fatal-infos',
+          '--fatal-warnings',
+          generatedPath,
+          mainPath,
+        ]);
+        final run = await Process.run(
+          Platform.resolvedExecutable,
+          <String>['run', mainPath],
+          workingDirectory: packageRoot.path,
+          environment: Platform.environment,
+        );
+        expect(
+          run.exitCode,
+          0,
+          reason: 'emitted staged-AST carrier failed:\n${run.stderr}',
+        );
+        expect(_object(jsonDecode('${run.stdout}'.trim())), native);
+      } finally {
+        if (scratch.existsSync()) {
+          scratch.deleteSync(recursive: true);
+        }
+      }
+
+      expect(
+        contract['status'],
+        'neutral_perl_rust_and_dart_complete_later_backends_pending',
+      );
+      expect(
+        _object(_list(contract['backend_consumers'])[2])['status'],
+        'complete',
+      );
+      expect(_object(_list(contract['rollout'])[3])['status'], 'complete');
+      expect(_object(contract['expected_counts'])['mutations'], 90);
+    },
+  );
 }
+
+final class _CarrierProbe {
+  _CarrierProbe(this.contract);
+
+  final _JsonObject contract;
+  final List<_JsonObject> outcomes = <_JsonObject>[];
+  final List<Object> cancellationTokens = <Object>[];
+  final List<Object> cancellationCallbacks = <Object>[];
+  final List<Object> clocks = <Object>[];
+  int authorityStarts = 0;
+  int callbackInvocations = 0;
+  int cancellationChecks = 0;
+  int clockChecks = 0;
+
+  StagedAstEnrichmentSeed seed() {
+    final snapshot = _cloneObject(contract['resolution_snapshot']);
+    _list(snapshot['aliases']).add(<String, Object?>{
+      'declaring_spec_id': 'grammar/main.spec',
+      'authored_id': 'expr-v1',
+      'resolved_spec_id': 'registry:expr-v2',
+    });
+    final callback =
+        (Map<String, Object?> request, StagedRuntimeContext context) {
+          callbackInvocations += 1;
+          expect(request['text'], '1+2');
+          expect(request['resolved_spec_id'], 'registry:expr-v2');
+          expect(request['top_rule'], 'Expr');
+          expect(
+            identical(context.cancellationToken, cancellationTokens.last),
+            isTrue,
+          );
+          context.safePoint(0);
+          return StagedChildExecution.success(_expectedChildAst());
+        };
+    return StagedAstEnrichmentSeed(
+      registrySnapshot: snapshot,
+      compiledAuthorities: _compiledAuthorities(snapshot, callback),
+      options: _enrichmentOptions(),
+      recursiveAuthority: () {
+        authorityStarts += 1;
+        final token = Object();
+        bool cancelled(Object observed) {
+          cancellationChecks += 1;
+          expect(identical(observed, token), isTrue);
+          return false;
+        }
+
+        int clock() {
+          clockChecks += 1;
+          return 0;
+        }
+
+        cancellationTokens.add(token);
+        cancellationCallbacks.add(cancelled);
+        clocks.add(clock);
+        return StagedRecursiveAuthority(
+          cancellationToken: token,
+          cancelled: cancelled,
+          clock: clock,
+          deadline: 100,
+          remainingSteps: 100,
+          requiredSteps: 1,
+          maxDepth: 8,
+          maxCalls: 32,
+        );
+      },
+      outcomeSink: (outcome) => outcomes.add(_cloneObject(outcome)),
+    );
+  }
+
+  _JsonObject record(List<Object?> values) {
+    expect(values, <Object?>[_expectedEnrichedAst(), _expectedEnrichedAst()]);
+    expect(authorityStarts, 2);
+    expect(callbackInvocations, 2);
+    expect(outcomes, hasLength(2));
+    expect(outcomes[1], outcomes[0]);
+    for (final outcome in outcomes) {
+      expect(_object(outcome['cache']), containsPair('entries', 1));
+      expect(_object(outcome['cache']), containsPair('hits', 0));
+      expect(_object(outcome['cache']), containsPair('misses', 1));
+      expect(_object(outcome['resources']), containsPair('total_calls', 1));
+    }
+    return <String, Object?>{
+      'values': _copyPlainForTest(values),
+      'outcomes': _copyPlainForTest(outcomes),
+      'authority_starts': authorityStarts,
+      'callback_invocations': callbackInvocations,
+      'cancellation_checks': cancellationChecks,
+      'clock_checks': clockChecks,
+      'tokens_distinct': !identical(
+        cancellationTokens.first,
+        cancellationTokens.last,
+      ),
+      'cancellation_callbacks_distinct': !identical(
+        cancellationCallbacks.first,
+        cancellationCallbacks.last,
+      ),
+      'clocks_distinct': !identical(clocks.first, clocks.last),
+    };
+  }
+}
+
+_JsonObject _expectedChildAst() => <String, Object?>{
+  'kind': 'expression_ast',
+  'text': '1+2',
+  'top_rule': 'Expr',
+};
+
+_JsonObject _expectedEnrichedAst() => <String, Object?>{
+  'job_marker': '1+2',
+  'expression_ast': _expectedChildAst(),
+};
 
 StagedParseJob _v1Job({String topRule = actionIrBodyTopRule}) {
   const bodySource = 'return(trim(value))';
@@ -2005,5 +2243,155 @@ import 'generated.dart' as generated;
 
 void main() {
   print(jsonEncode(generated.execute('1+2;')));
+}
+''';
+
+const _emittedCarrierMain = r'''
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:linkedspec_dart/src/runtime/staged_ast_enrichment.dart';
+
+import 'generated.dart' as generated;
+
+void main() {
+  final contract = jsonDecode(
+    File('../capability_conformance/staged_ast_enrichment_contract.json')
+        .readAsStringSync(),
+  ) as Map<String, Object?>;
+  final snapshot = jsonDecode(
+    jsonEncode(contract['resolution_snapshot']),
+  ) as Map<String, Object?>;
+  (snapshot['aliases']! as List<Object?>).add(<String, Object?>{
+    'declaring_spec_id': 'grammar/main.spec',
+    'authored_id': 'expr-v1',
+    'resolved_spec_id': 'registry:expr-v2',
+  });
+
+  final outcomes = <Map<String, Object?>>[];
+  final cancellationTokens = <Object>[];
+  final cancellationCallbacks = <Object>[];
+  final clocks = <Object>[];
+  var authorityStarts = 0;
+  var callbackInvocations = 0;
+  var cancellationChecks = 0;
+  var clockChecks = 0;
+
+  StagedChildExecution callback(
+    Map<String, Object?> request,
+    StagedRuntimeContext context,
+  ) {
+    callbackInvocations += 1;
+    if (request['text'] != '1+2' ||
+        request['resolved_spec_id'] != 'registry:expr-v2' ||
+        request['top_rule'] != 'Expr' ||
+        !identical(context.cancellationToken, cancellationTokens.last)) {
+      throw StateError('emitted staged callback received invalid authority');
+    }
+    context.safePoint(0);
+    return StagedChildExecution.success(<String, Object?>{
+      'kind': 'expression_ast',
+      'text': '1+2',
+      'top_rule': 'Expr',
+    });
+  }
+
+  final authorities = <String, StagedCompiledAuthority>{
+    for (final entry in (snapshot['entries']! as List<Object?>))
+      (entry! as Map<String, Object?>)['compiled_authority']! as String:
+          callback,
+  };
+  final seed = StagedAstEnrichmentSeed(
+    registrySnapshot: snapshot,
+    compiledAuthorities: authorities,
+    options: <String, Object?>{
+      'declaring_spec_id': 'grammar/main.spec',
+      'caller_capabilities': <String>[
+        'caller-only',
+        'staged-parse-job-v2',
+        'structured-result-v1',
+        'typed-source-location-v1',
+        'xml-v1',
+        'yaml-v1',
+      ],
+      'caller_policy_modes': <String>[
+        'append_child',
+        'diagnostic_node',
+        'fail',
+        'keep_text',
+        'replace_field',
+        'replace_marker',
+        'sibling_field',
+        'trace',
+      ],
+      'caller_ceilings': <String, Object?>{
+        'source_detail': 'text',
+        'max_steps': 1000,
+        'max_result_nodes': 128,
+        'max_diagnostic_bytes': 4096,
+      },
+      'required_source_detail': 'span',
+      'required_versions': <String, Object?>{
+        'spec_language_version': 2,
+        'helper_contract_version': 'actionir-v3',
+        'staged_contract_version': 2,
+      },
+    },
+    recursiveAuthority: () {
+      authorityStarts += 1;
+      final token = Object();
+      bool cancelled(Object observed) {
+        cancellationChecks += 1;
+        if (!identical(observed, token)) {
+          throw StateError('emitted staged cancellation identity drifted');
+        }
+        return false;
+      }
+
+      int clock() {
+        clockChecks += 1;
+        return 0;
+      }
+
+      cancellationTokens.add(token);
+      cancellationCallbacks.add(cancelled);
+      clocks.add(clock);
+      return StagedRecursiveAuthority(
+        cancellationToken: token,
+        cancelled: cancelled,
+        clock: clock,
+        deadline: 100,
+        remainingSteps: 100,
+        requiredSteps: 1,
+        maxDepth: 8,
+        maxCalls: 32,
+      );
+    },
+    outcomeSink: (outcome) => outcomes.add(
+      jsonDecode(jsonEncode(outcome)) as Map<String, Object?>,
+    ),
+  );
+
+  final values = <Object?>[
+    generated.execute('1+2;', stagedAstEnrichmentSeed: seed),
+    generated.execute('1+2;', stagedAstEnrichmentSeed: seed),
+  ];
+  print(jsonEncode(<String, Object?>{
+    'values': values,
+    'outcomes': outcomes,
+    'authority_starts': authorityStarts,
+    'callback_invocations': callbackInvocations,
+    'cancellation_checks': cancellationChecks,
+    'clock_checks': clockChecks,
+    'tokens_distinct': !identical(
+      cancellationTokens.first,
+      cancellationTokens.last,
+    ),
+    'cancellation_callbacks_distinct': !identical(
+      cancellationCallbacks.first,
+      cancellationCallbacks.last,
+    ),
+    'clocks_distinct': !identical(clocks.first, clocks.last),
+  }));
 }
 ''';
