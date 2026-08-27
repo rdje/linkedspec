@@ -14,7 +14,7 @@ answers:
   - "how many Perl staged AST enrichment checks pass"
   - "what staged AST enrichment backend is next after Perl"
 date: 2026-08-26
-status: current private Perl admission; Rust and Dart also admitted; Julia marker/provenance dormant; Lua, recurrence, and public authoring pending
+status: current private Perl admission; Rust and Dart also admitted; Julia current-depth authority dormant; Lua, recurrence, and public authoring pending
 tags: [perl, staged-parsing, carriers, generated-source, admission, ci, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.3.4 adds private LinkedSpec::StagedASTEnrichmentRuntime and attaches begin/complete invocation to live and generated-v2 top-level execution. A host-only staged_ast_enrichment option supplies the caller-prepared snapshot and recursive authority; every call constructs a new StagedASTEnrichment scheduler/cache and enriches only after the complete parent AST returns. Native, normalized-descriptor, validated generated-plan, and independently loaded emitted packages return equal detached AST/sidecar/diagnostic/cache/resource records. The oracle retains four distinct snapshots, sixteen distinct compiled callback entries, four cancellation identities/callbacks, four clocks, and four independent zero-hit/one-miss caches. Normalized ActionIR args, generated plans, and emitted source contain no callback, compiled parser, registry snapshot, source authority, cancellation/deadline/budget state, mutable queue, path, or host handle. The exact consumer passes 143 top-level checks, appears once in phase-0 and once in canonical CI, and advances only Perl plus neutral governance to 78 mutations. Function-body v1, generated-source v2, language/public/outward surfaces, later backends, recurrence, and combined no-drift remain unchanged or pending."
 evidence_update_2026_08_26_rust_dormant_snapshot: "FUTURE-PARITY-BACKLOG.14.7.4.0 commit e37a8b77 advances the neutral mutation inventory from 78 to 79 and the Rust backend consumer from pending_absent to dormant_red while keeping Rust ordinary/canonical discovery and rollout pending. TRACE-OBSERVABILITY.5.4 aligns the already-admitted Perl consumer's immutable topology snapshot with those two neutral truth changes; no Perl carrier, production behavior, registry, format, rollout, public surface, or other backend changes."
@@ -22,6 +22,7 @@ evidence_update_2026_08_26_rust_admission: "FUTURE-PARITY-BACKLOG.14.7.4.4 admit
 evidence_update_2026_08_27_dart_admission: "FUTURE-PARITY-BACKLOG.14.7.5.4 admits Dart's fresh four-route carrier without changing the Perl path. Neutral governance now reports 90 mutations with Perl, Rust, and Dart complete; Julia FUTURE-PARITY-BACKLOG.14.7.6.0 is next."
 evidence_update_2026_08_27_julia_dormant_red: "FUTURE-PARITY-BACKLOG.14.7.6.0 leaves the Perl carrier unchanged while advancing Julia to one 86-GREEN/one-RED dormant consumer and neutral governance to 92 mutations. Julia .14.7.6.1 is next."
 evidence_update_2026_08_27_julia_marker_provenance: "FUTURE-PARITY-BACKLOG.14.7.6.1 leaves the Perl carrier unchanged while implementing Julia's exclusive inert marker and live-proven typed direct/ordered-derived provenance. Julia's dormant consumer is 131 GREEN/one authority RED and .14.7.6.2 is next."
+evidence_update_2026_08_27_julia_current_depth_authority: "FUTURE-PARITY-BACKLOG.14.7.6.2 leaves the Perl carrier unchanged while adding Julia's private caller-frozen resolver/cache, isolated complete marker depth, detachment, target reservation, and every result/failure policy. Julia's dormant consumer is 309 GREEN/one recursive-authority RED and .14.7.6.3 is next."
 reverify:
   - "PERL5LIB= prove -q -Iperl t/staged_ast_enrichment_perl_contract.t"
   - "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py"
@@ -46,9 +47,9 @@ through host invocation options.
 
 The exact consumer is admitted once through ordinary phase-0 and once through canonical CI. The Perl backend and
 rollout row remain complete; Rust and Dart have since reached the same private admission boundary. This is private
-implementation evidence, not public `parse_job(...)` authoring. Julia's private marker/provenance boundary is now
-implemented; `.14.7.6.2` next owns only its pre-registered resolution/cache and stitching policies. Public
-closeout remains `.14.7.9`.
+implementation evidence, not public `parse_job(...)` authoring. Julia's private marker/provenance and current-depth
+resolution/cache/policy boundaries are now implemented; `.14.7.6.3` next owns only its recursive authority,
+shared bounds/safe points, and source rebasing. Public closeout remains `.14.7.9`.
 
 ## Links
 

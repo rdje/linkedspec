@@ -1,4 +1,4 @@
-# FUTURE-PARITY-BACKLOG.14.7.6.1 — private Julia marker/provenance boundary.
+# FUTURE-PARITY-BACKLOG.14.7.6.2 — private Julia current-depth authority.
 #
 # This exact final-path consumer is intentionally omitted from ordinary Julia
 # and canonical CI discovery. Its focused repository-local command is:
@@ -6,9 +6,9 @@
 #   bash tools/run_julia_project_data.sh --project=julia --startup-file=no \
 #     --history-file=no julia/test/staged_ast_enrichment_contract_test.jl
 #
-# Every marker/provenance assertion must remain GREEN. The sole intentional
-# RED is the final `.14.7.6.2` authority sentinel; this leaf owns no registry,
-# cache, result/failure stitching, recurrence, admission, or public surface.
+# Every marker/provenance/current-depth assertion must remain GREEN. The sole
+# intentional RED is the final `.14.7.6.3` recursive-authority sentinel; this
+# leaf owns no recurrence, carrier authority, admission, or public surface.
 
 using JSON3
 using LinkedSpecJulia
@@ -155,6 +155,109 @@ function _julia_staged_enrichment_expected_marker()
             "origin" => "Top:parse_job",
         ),
     )
+end
+
+function _julia_staged_enrichment_options()
+    return Dict{String,Any}(
+        "declaring_spec_id" => "grammar/main.spec",
+        "caller_capabilities" => Any[
+            "staged-parse-job-v2",
+            "structured-result-v1",
+            "typed-source-location-v1",
+            "xml-v1",
+            "yaml-v1",
+        ],
+        "caller_policy_modes" => Any[
+            "append_child",
+            "diagnostic_node",
+            "fail",
+            "keep_text",
+            "replace_field",
+            "replace_marker",
+            "sibling_field",
+            "trace",
+        ],
+        "caller_ceilings" => Dict{String,Any}(
+            "source_detail" => "text",
+            "max_steps" => 200,
+            "max_result_nodes" => 128,
+            "max_diagnostic_bytes" => 8192,
+        ),
+        "required_source_detail" => "identity",
+        "required_versions" => Dict{String,Any}(
+            "spec_language_version" => 2,
+            "helper_contract_version" => "actionir-v3",
+            "staged_contract_version" => 2,
+        ),
+    )
+end
+
+function _julia_staged_enrichment_marker(
+    text::AbstractString,
+    start::Int,
+    result_policy::AbstractString,
+    into::Union{Nothing,AbstractString},
+    failure_policy::AbstractString;
+    top_rule::Union{Nothing,AbstractString} = "Expr",
+)
+    sidecar = Dict{String,Any}(
+        "kind" => "staged_parse_job_v2",
+        "version" => 2,
+        "state" => "declared",
+        "effect" => "staged_parse_job_declaration",
+        "node_kind" => "expression",
+        "payload_kind" => "embedded_expression",
+        "parser_spec_id" => "expr",
+        "result_policy" => String(result_policy),
+        "failure_policy" => String(failure_policy),
+        "required_capabilities" => Any["typed-source-location-v1"],
+        "text" => String(text),
+        "provenance" => Dict{String,Any}(
+            "kind" => "direct_span",
+            "source_id" => "ascii",
+            "start" => start,
+            "end" => start + length(text),
+            "provenance" => "capture",
+        ),
+        "origin" => "contract:parse_job",
+    )
+    top_rule === nothing || (sidecar["top_rule"] = String(top_rule))
+    into === nothing || (sidecar["into"] = String(into))
+    return Dict{String,Any}(
+        "kind" => "STAGED_PARSE_JOB_MARKER",
+        "version" => 2,
+        "sidecar_kind" => "staged_parse_job_v2",
+        "effect" => "staged_parse_job_declaration",
+        "staged_parse_job_v2" => sidecar,
+    )
+end
+
+function _julia_staged_enrichment_registry(callback::Function)
+    callbacks = Dict{String,Function}(
+        String(entry["compiled_authority"]) => callback
+        for entry in JULIA_STAGED_ENRICHMENT_CONTRACT["resolution_snapshot"]["entries"]
+    )
+    return LinkedSpecJulia._freeze_staged_registry(
+        JULIA_STAGED_ENRICHMENT_CONTRACT["resolution_snapshot"],
+        callbacks,
+    )
+end
+
+function _julia_staged_enrichment_error_code(error)
+    error isa LinkedSpecJulia.StagedAstEnrichmentException || return nothing
+    return to_json(error)["code"]
+end
+
+function _julia_staged_enrichment_diagnostic_is_complete(error)
+    code = _julia_staged_enrichment_error_code(error)
+    code === nothing && return false
+    rows = [
+        row for row in JULIA_STAGED_ENRICHMENT_CONTRACT["diagnostics"]
+        if row["code"] == code
+    ]
+    length(rows) == 1 || return false
+    record = to_json(error)
+    return all(haskey(record, field) for field in only(rows)["required_context"])
 end
 
 function _julia_staged_enrichment_forbidden_key_hits(value)
@@ -740,6 +843,787 @@ Child:: I { marker = parse_job(entry_text(), hash("node_kind", "expression", "pa
         )
     end
 
+    @testset "caller-frozen registry resolves and narrows without ambient authority" begin
+        inert = (_request, _context) ->
+            LinkedSpecJulia._staged_child_success(Dict{String,Any}("kind" => "ok"))
+        registry = _julia_staged_enrichment_registry(inert)
+
+        @test fieldnames(typeof(registry)) == (
+            :aliases,
+            :declaring_relative,
+            :search_roots,
+            :providers,
+            :entries,
+            :snapshot_id,
+            :cache,
+        )
+        @test startswith(registry.snapshot_id, "registry-snapshot:sha256:")
+        @test registry.entries isa Tuple
+        @test all(entry.allowed_top_rules isa Tuple for entry in registry.entries)
+        @test all(entry.capabilities isa Tuple for entry in registry.entries)
+        @test all(entry.policy_modes isa Tuple for entry in registry.entries)
+        @test LinkedSpecJulia._staged_cache_stats(registry) == Dict{String,Any}(
+            "snapshot_id" => registry.snapshot_id,
+            "entries" => 0,
+            "hits" => 0,
+            "misses" => 0,
+        )
+
+        for row in JULIA_STAGED_ENRICHMENT_CONTRACT["resolution_cases"]
+            result = _julia_staged_enrichment_capture(() ->
+                LinkedSpecJulia._resolve_staged_pre_registered(
+                    registry;
+                    declaring_spec_id = row["declaring_spec_id"],
+                    parser_spec_id = row["parser_spec_id"],
+                    job_id = "contract:resolution",
+                ))
+            if row["diagnostic"] === nothing
+                @test result === nothing
+                @test LinkedSpecJulia._resolve_staged_pre_registered(
+                    registry;
+                    declaring_spec_id = row["declaring_spec_id"],
+                    parser_spec_id = row["parser_spec_id"],
+                    job_id = "contract:resolution",
+                ) == row["resolved_spec_id"]
+            else
+                @test _julia_staged_enrichment_error_code(result) == row["diagnostic"]
+                @test _julia_staged_enrichment_diagnostic_is_complete(result)
+            end
+        end
+
+        for row in JULIA_STAGED_ENRICHMENT_CONTRACT["authority_cases"]
+            result = try
+                LinkedSpecJulia._evaluate_staged_authority_case(
+                    registry,
+                    row;
+                    job_id = "contract:authority",
+                )
+            catch error
+                error
+            end
+            if row["accepted"] == true
+                @test result == row["effective"]
+            else
+                @test _julia_staged_enrichment_error_code(result) == row["diagnostic"]
+                @test _julia_staged_enrichment_diagnostic_is_complete(result)
+            end
+        end
+        forbidden_top = deepcopy(JULIA_STAGED_ENRICHMENT_CONTRACT["authority_cases"][1])
+        forbidden_top["top_rule"] = "MissingTop"
+        top_error = _julia_staged_enrichment_capture(() ->
+            LinkedSpecJulia._evaluate_staged_authority_case(
+                registry,
+                forbidden_top;
+                job_id = "contract:forbidden-top",
+            ))
+        @test _julia_staged_enrichment_error_code(top_error) ==
+              "staged_top_rule_forbidden"
+        @test _julia_staged_enrichment_diagnostic_is_complete(top_error)
+
+        snapshot_copy = deepcopy(
+            JULIA_STAGED_ENRICHMENT_CONTRACT["resolution_snapshot"],
+        )
+        callbacks = Dict{String,Function}(
+            String(entry["compiled_authority"]) => inert
+            for entry in snapshot_copy["entries"]
+        )
+        isolated = LinkedSpecJulia._freeze_staged_registry(snapshot_copy, callbacks)
+        snapshot_copy["aliases"][1]["resolved_spec_id"] = "registry:yaml-v1"
+        @test LinkedSpecJulia._resolve_staged_pre_registered(
+            isolated;
+            declaring_spec_id = "grammar/main.spec",
+            parser_spec_id = "expr",
+            job_id = "contract:immutable",
+        ) == "registry:expr-v2"
+
+        malformed_snapshots = Any[]
+        for (field, value) in [
+            ("immutable", false),
+            ("prepared_before_authored_execution", false),
+            ("filesystem_access_during_dispatch", true),
+        ]
+            malformed = deepcopy(
+                JULIA_STAGED_ENRICHMENT_CONTRACT["resolution_snapshot"],
+            )
+            malformed[field] = value
+            push!(malformed_snapshots, malformed)
+        end
+        bad_digest = deepcopy(
+            JULIA_STAGED_ENRICHMENT_CONTRACT["resolution_snapshot"],
+        )
+        bad_digest["entries"][1]["content_digest"] = "sha256:not-a-digest"
+        push!(malformed_snapshots, bad_digest)
+        bad_default = deepcopy(
+            JULIA_STAGED_ENRICHMENT_CONTRACT["resolution_snapshot"],
+        )
+        bad_default["entries"][1]["default_top_rule"] = "MissingTop"
+        push!(malformed_snapshots, bad_default)
+        duplicate_order = deepcopy(
+            JULIA_STAGED_ENRICHMENT_CONTRACT["resolution_snapshot"],
+        )
+        duplicate_order["search_roots"][2]["order"] = 1
+        push!(malformed_snapshots, duplicate_order)
+        for malformed in malformed_snapshots
+            error = _julia_staged_enrichment_capture(() ->
+                LinkedSpecJulia._freeze_staged_registry(malformed, callbacks))
+            @test _julia_staged_enrichment_error_code(error) ==
+                  "staged_registry_snapshot_invalid"
+        end
+        missing_callback = copy(callbacks)
+        delete!(missing_callback, first(keys(missing_callback)))
+        missing_callback_error = _julia_staged_enrichment_capture(() ->
+            LinkedSpecJulia._freeze_staged_registry(
+                JULIA_STAGED_ENRICHMENT_CONTRACT["resolution_snapshot"],
+                missing_callback,
+            ))
+        @test _julia_staged_enrichment_error_code(missing_callback_error) ==
+              "staged_registry_snapshot_invalid"
+        extra_callback = copy(callbacks)
+        extra_callback["opaque:compiled:extra"] = inert
+        extra_callback_error = _julia_staged_enrichment_capture(() ->
+            LinkedSpecJulia._freeze_staged_registry(
+                JULIA_STAGED_ENRICHMENT_CONTRACT["resolution_snapshot"],
+                extra_callback,
+            ))
+        @test _julia_staged_enrichment_error_code(extra_callback_error) ==
+              "staged_registry_snapshot_invalid"
+    end
+
+    @testset "job, cache, and typed current-depth order identities are exact" begin
+        for row in JULIA_STAGED_ENRICHMENT_CONTRACT["job_id_cases"]
+            fields = deepcopy(row)
+            delete!(fields, "id")
+            expected = pop!(fields, "expected_job_id")
+            @test LinkedSpecJulia._staged_job_identity(fields) == expected
+        end
+
+        base_key = nothing
+        for row in JULIA_STAGED_ENRICHMENT_CONTRACT["cache_cases"]
+            key = LinkedSpecJulia._staged_cache_identity(row["fields"])
+            row["id"] == "base" && (base_key = key)
+            @test (key == base_key) == row["same_as_base"]
+        end
+        @test base_key isa String
+        @test startswith(base_key, "sha256:")
+        malformed_cache = deepcopy(
+            JULIA_STAGED_ENRICHMENT_CONTRACT["cache_cases"][1]["fields"],
+        )
+        malformed_cache["ambient_loader"] = true
+        cache_error = _julia_staged_enrichment_capture(() ->
+            LinkedSpecJulia._staged_cache_identity(malformed_cache))
+        @test _julia_staged_enrichment_error_code(cache_error) ==
+              "staged_cache_identity_invalid"
+        @test _julia_staged_enrichment_diagnostic_is_complete(cache_error)
+
+        for row in JULIA_STAGED_ENRICHMENT_CONTRACT["queue_cases"]
+            @test LinkedSpecJulia._staged_current_depth_order(row["jobs"]) ==
+                  row["expected_order"]
+        end
+    end
+
+    @testset "all result and failure policies stitch detached values atomically" begin
+        for row in JULIA_STAGED_ENRICHMENT_CONTRACT["stitch_cases"]
+            result = deepcopy(row["result"])
+            callback = (_request, _context) ->
+                LinkedSpecJulia._staged_child_success(deepcopy(result))
+            registry = _julia_staged_enrichment_registry(callback)
+            parent = deepcopy(row["parent"])
+            parent[row["marker_field"]] = _julia_staged_enrichment_marker(
+                row["text"],
+                0,
+                row["result_policy"],
+                row["into"],
+                "fail",
+            )
+            outcome = LinkedSpecJulia._enrich_staged_current_depth(
+                registry,
+                parent,
+                _julia_staged_enrichment_options(),
+            )
+            @test outcome.ast == row["expected_parent"]
+            @test isempty(outcome.diagnostics)
+            @test only(outcome.sidecars)["state"] == "succeeded"
+        end
+
+        for row in JULIA_STAGED_ENRICHMENT_CONTRACT["failure_cases"]
+            callback = (_request, _context) ->
+                LinkedSpecJulia._staged_child_failure(Dict{String,Any}(
+                    "code" => "child_parse_error",
+                    "offset" => 1,
+                ))
+            registry = _julia_staged_enrichment_registry(callback)
+            parent = deepcopy(row["parent"])
+            parent[row["marker_field"]] = _julia_staged_enrichment_marker(
+                row["text"],
+                0,
+                row["result_policy"],
+                row["into"],
+                row["failure_policy"],
+            )
+            result = try
+                LinkedSpecJulia._enrich_staged_current_depth(
+                    registry,
+                    parent,
+                    _julia_staged_enrichment_options(),
+                )
+            catch error
+                error
+            end
+            if row["failure_policy"] == "fail"
+                @test _julia_staged_enrichment_error_code(result) ==
+                      "staged_child_failed"
+                @test _julia_staged_enrichment_diagnostic_is_complete(result)
+                @test parent[row["marker_field"]]["kind"] ==
+                      "STAGED_PARSE_JOB_MARKER"
+            elseif row["failure_policy"] == "keep_text"
+                @test result.ast[row["marker_field"]] == row["text"]
+                @test result.ast["children"] == Any[]
+                @test length(result.diagnostics) == 1
+                @test only(result.sidecars)["state"] == "failed_keep_text"
+            else
+                @test result.ast[row["marker_field"]] == row["text"]
+                @test result.ast["ast"]["kind"] == "staged_parse_diagnostic"
+                @test result.ast["ast"]["diagnostic"] ==
+                      only(result.diagnostics)
+                @test only(result.sidecars)["state"] ==
+                      "failed_diagnostic_node"
+                required = only([
+                    diagnostic["required_context"]
+                    for diagnostic in JULIA_STAGED_ENRICHMENT_CONTRACT["diagnostics"]
+                    if diagnostic["code"] == "staged_child_failed"
+                ])
+                for field in required
+                    @test haskey(only(result.diagnostics), field)
+                end
+            end
+        end
+    end
+
+    @testset "complete-depth preflight, sibling isolation, and cache lifecycle are exact" begin
+        contexts = Dict{String,Any}[]
+        order = String[]
+        callback_count = Ref(0)
+        callback = function(request, context)
+            push!(contexts, LinkedSpecJulia._staged_runtime_context_record(context))
+            push!(order, String(request["text"]))
+            callback_count[] += 1
+            context.cursor = 9
+            context.marks["child"] = 1
+            context.captures["capture"] = "local"
+            context.variables["variable"] = true
+            return LinkedSpecJulia._staged_child_success(Dict{String,Any}(
+                "kind" => "parsed",
+                "text" => request["text"],
+            ))
+        end
+        registry = _julia_staged_enrichment_registry(callback)
+        ordered_ast = Dict{String,Any}(
+            "nodes" => Any[
+                Dict{String,Any}(
+                    "payload" => _julia_staged_enrichment_marker(
+                        "first",
+                        4,
+                        "replace_marker",
+                        nothing,
+                        "fail",
+                    ),
+                ),
+                Dict{String,Any}(
+                    "payload" => _julia_staged_enrichment_marker(
+                        "second",
+                        1,
+                        "replace_marker",
+                        nothing,
+                        "fail",
+                    ),
+                ),
+            ],
+        )
+        first = LinkedSpecJulia._enrich_staged_current_depth(
+            registry,
+            ordered_ast,
+            _julia_staged_enrichment_options(),
+        )
+        @test order == ["first", "second"]
+        @test contexts == [
+            Dict{String,Any}(
+                "cursor" => 0,
+                "marks" => Dict{String,Any}(),
+                "captures" => Dict{String,Any}(),
+                "variables" => Dict{String,Any}(),
+            ),
+            Dict{String,Any}(
+                "cursor" => 0,
+                "marks" => Dict{String,Any}(),
+                "captures" => Dict{String,Any}(),
+                "variables" => Dict{String,Any}(),
+            ),
+        ]
+        @test first.cache["entries"] == 1
+        @test first.cache["misses"] == 1
+        @test first.cache["hits"] == 1
+        second = LinkedSpecJulia._enrich_staged_current_depth(
+            registry,
+            ordered_ast,
+            _julia_staged_enrichment_options(),
+        )
+        @test second.cache["entries"] == 1
+        @test second.cache["misses"] == 1
+        @test second.cache["hits"] == 3
+        @test callback_count[] == 4
+        @test ordered_ast["nodes"][1]["payload"]["kind"] ==
+              "STAGED_PARSE_JOB_MARKER"
+
+        isolated_registry = _julia_staged_enrichment_registry(callback)
+        @test LinkedSpecJulia._staged_cache_stats(isolated_registry)["entries"] == 0
+        @test LinkedSpecJulia._staged_cache_stats(isolated_registry)["hits"] == 0
+        @test LinkedSpecJulia._staged_cache_stats(isolated_registry)["misses"] == 0
+        @test fieldnames(LinkedSpecJulia._StagedCachedPlan) == (
+            :compiled_authority,
+            :resolved_spec_id,
+            :top_rule,
+            :effective_capabilities,
+        )
+
+        default_registry = _julia_staged_enrichment_registry(
+            (_request, _context) -> LinkedSpecJulia._staged_child_success(
+                Dict{String,Any}("kind" => "expr"),
+            ),
+        )
+        default_marker = _julia_staged_enrichment_marker(
+            "x",
+            0,
+            "replace_marker",
+            nothing,
+            "fail";
+            top_rule = nothing,
+        )
+        default_outcome = LinkedSpecJulia._enrich_staged_current_depth(
+            default_registry,
+            Dict{String,Any}("payload" => default_marker),
+            _julia_staged_enrichment_options(),
+        )
+        @test only(default_outcome.sidecars)["top_rule"] == "Expr"
+        @test only(default_outcome.sidecars)["job_id"] ==
+              LinkedSpecJulia._staged_job_identity(Dict{String,Any}(
+                  "declaring_spec_id" => "grammar/main.spec",
+                  "parent_ast_path" => Any["payload"],
+                  "node_kind" => "expression",
+                  "payload_kind" => "embedded_expression",
+                  "parser_spec_id" => "expr",
+                  "top_rule" => "Expr",
+                  "provenance" => Dict{String,Any}(
+                      "kind" => "direct_span",
+                      "source_id" => "ascii",
+                      "start" => 0,
+                      "end" => 1,
+                      "provenance" => "capture",
+                  ),
+              ))
+    end
+
+    @testset "invalid depths reject before publication and returned markers stay inert" begin
+        invalid_callback_count = Ref(0)
+        invalid_registry = _julia_staged_enrichment_registry(
+            function(_request, _context)
+                invalid_callback_count[] += 1
+                return LinkedSpecJulia._staged_child_success(
+                    Dict{String,Any}("kind" => "unexpected"),
+                )
+            end,
+        )
+        invalid_asts = [
+            Dict{String,Any}(
+                "payload" => _julia_staged_enrichment_marker(
+                    "x",
+                    0,
+                    "sibling_field",
+                    "ast",
+                    "fail",
+                ),
+                "ast" => Dict{String,Any}("kind" => "occupied"),
+            ) => "staged_stitch_target_collision",
+            Dict{String,Any}(
+                "payload" => _julia_staged_enrichment_marker(
+                    "x",
+                    0,
+                    "append_child",
+                    "children",
+                    "fail",
+                ),
+                "children" => Dict{String,Any}(),
+            ) => "staged_append_target_invalid",
+            Dict{String,Any}(
+                "payload" => _julia_staged_enrichment_marker(
+                    "x",
+                    0,
+                    "sibling_field",
+                    nothing,
+                    "fail",
+                ),
+            ) => "staged_stitch_target_missing",
+            Dict{String,Any}(
+                "payload" => _julia_staged_enrichment_marker(
+                    "x",
+                    0,
+                    "replace_field",
+                    "ast",
+                    "fail",
+                ),
+            ) => "staged_stitch_target_missing",
+        ]
+        for (ast, code) in invalid_asts
+            error = _julia_staged_enrichment_capture(() ->
+                LinkedSpecJulia._enrich_staged_current_depth(
+                    invalid_registry,
+                    ast,
+                    _julia_staged_enrichment_options(),
+                ))
+            @test _julia_staged_enrichment_error_code(error) == code
+            @test _julia_staged_enrichment_diagnostic_is_complete(error)
+        end
+        @test invalid_callback_count[] == 0
+
+        unresolved = _julia_staged_enrichment_marker(
+            "x",
+            0,
+            "replace_marker",
+            nothing,
+            "fail",
+        )
+        unresolved["staged_parse_job_v2"]["parser_spec_id"] = "missing-v1"
+        unresolved_error = _julia_staged_enrichment_capture(() ->
+            LinkedSpecJulia._enrich_staged_current_depth(
+                invalid_registry,
+                Dict{String,Any}("payload" => unresolved),
+                _julia_staged_enrichment_options(),
+            ))
+        @test _julia_staged_enrichment_error_code(unresolved_error) ==
+              "staged_registry_missing"
+        @test _julia_staged_enrichment_diagnostic_is_complete(unresolved_error)
+        @test LinkedSpecJulia._staged_cache_stats(invalid_registry)["entries"] == 0
+        @test invalid_callback_count[] == 0
+
+        atomic_input = Dict{String,Any}(
+            "nodes" => Any[
+                Dict{String,Any}(
+                    "payload" => _julia_staged_enrichment_marker(
+                        "ok",
+                        0,
+                        "replace_marker",
+                        nothing,
+                        "fail",
+                    ),
+                ),
+                Dict{String,Any}(
+                    "payload" => _julia_staged_enrichment_marker(
+                        "bad",
+                        2,
+                        "replace_marker",
+                        nothing,
+                        "fail",
+                    ),
+                ),
+            ],
+        )
+        atomic_registry = _julia_staged_enrichment_registry(
+            (request, _context) -> request["text"] == "bad" ?
+                LinkedSpecJulia._staged_child_failure(
+                    Dict{String,Any}("code" => "expected_failure"),
+                ) : LinkedSpecJulia._staged_child_success(
+                    Dict{String,Any}("kind" => "first_result"),
+                ),
+        )
+        atomic_error = _julia_staged_enrichment_capture(() ->
+            LinkedSpecJulia._enrich_staged_current_depth(
+                atomic_registry,
+                atomic_input,
+                _julia_staged_enrichment_options(),
+            ))
+        @test _julia_staged_enrichment_error_code(atomic_error) ==
+              "staged_child_failed"
+        @test _julia_staged_enrichment_diagnostic_is_complete(atomic_error)
+        @test atomic_input["nodes"][1]["payload"]["kind"] ==
+              "STAGED_PARSE_JOB_MARKER"
+
+        stale_count = Ref(0)
+        stale_registry = _julia_staged_enrichment_registry(
+            function(_request, _context)
+                stale_count[] += 1
+                return LinkedSpecJulia._staged_child_success(
+                    Dict{String,Any}("kind" => "replacement"),
+                )
+            end,
+        )
+        stale = Dict{String,Any}(
+            "control" => _julia_staged_enrichment_marker(
+                "first",
+                0,
+                "replace_field",
+                "payload",
+                "fail",
+            ),
+            "payload" => _julia_staged_enrichment_marker(
+                "second",
+                6,
+                "replace_marker",
+                nothing,
+                "fail",
+            ),
+        )
+        stale_error = _julia_staged_enrichment_capture(() ->
+            LinkedSpecJulia._enrich_staged_current_depth(
+                stale_registry,
+                stale,
+                _julia_staged_enrichment_options(),
+            ))
+        @test _julia_staged_enrichment_error_code(stale_error) ==
+              "staged_stitch_target_collision"
+        @test _julia_staged_enrichment_diagnostic_is_complete(stale_error)
+        @test stale_count[] == 0
+        @test stale["control"]["kind"] == "STAGED_PARSE_JOB_MARKER"
+
+        stale_working = LinkedSpecJulia._staged_copy_ast(Dict{String,Any}(
+            "payload" => _julia_staged_enrichment_marker(
+                "stale",
+                0,
+                "replace_marker",
+                nothing,
+                "fail",
+            ),
+        ))
+        stale_discovered = LinkedSpecJulia._StagedDiscoveredMarker[]
+        LinkedSpecJulia._staged_discover_markers!(
+            stale_working,
+            Any[],
+            stale_discovered,
+        )
+        stale_plan = LinkedSpecJulia._staged_prepare_plan(
+            stale_registry,
+            only(stale_discovered),
+            LinkedSpecJulia._parse_staged_enrichment_options(
+                _julia_staged_enrichment_options(),
+            ),
+        )
+        stale_working["payload"] = "already-changed"
+        marker_error = _julia_staged_enrichment_capture(() ->
+            LinkedSpecJulia._staged_validate_stitch_target(
+                stale_working,
+                stale_plan,
+            ))
+        @test _julia_staged_enrichment_error_code(marker_error) ==
+              "staged_marker_mismatch"
+        @test haskey(to_json(marker_error), "actual_marker")
+        @test _julia_staged_enrichment_diagnostic_is_complete(marker_error)
+
+        nested_calls = Ref(0)
+        nested_marker = _julia_staged_enrichment_marker(
+            "nested",
+            1,
+            "replace_marker",
+            nothing,
+            "fail",
+        )
+        nested_registry = _julia_staged_enrichment_registry(
+            function(_request, _context)
+                nested_calls[] += 1
+                return LinkedSpecJulia._staged_child_success(deepcopy(nested_marker))
+            end,
+        )
+        nested = LinkedSpecJulia._enrich_staged_current_depth(
+            nested_registry,
+            Dict{String,Any}(
+                "payload" => _julia_staged_enrichment_marker(
+                    "outer",
+                    0,
+                    "replace_marker",
+                    nothing,
+                    "fail",
+                ),
+            ),
+            _julia_staged_enrichment_options(),
+        )
+        @test nested.ast["payload"]["kind"] == "STAGED_PARSE_JOB_MARKER"
+        nested_marker["callback"] = "opaque:live"
+        smuggled_marker = try
+            LinkedSpecJulia._enrich_staged_current_depth(
+                nested_registry,
+                Dict{String,Any}(
+                    "payload" => _julia_staged_enrichment_marker(
+                        "outer-smuggled",
+                        0,
+                        "replace_marker",
+                        nothing,
+                        "fail",
+                    ),
+                ),
+                _julia_staged_enrichment_options(),
+            )
+        catch error
+            error
+        end
+        @test nested_calls[] == 2 &&
+              _julia_staged_enrichment_error_code(smuggled_marker) ==
+              "staged_result_not_detached"
+    end
+
+    @testset "plain-result detachment is finite, acyclic, and node-bounded" begin
+        for row in JULIA_STAGED_ENRICHMENT_CONTRACT["detachment_cases"]
+            callback = (_request, _context) ->
+                LinkedSpecJulia._staged_child_success(deepcopy(row["value"]))
+            registry = _julia_staged_enrichment_registry(callback)
+            options = _julia_staged_enrichment_options()
+            options["caller_ceilings"]["max_result_nodes"] = row["max_nodes"]
+            result = try
+                LinkedSpecJulia._enrich_staged_current_depth(
+                    registry,
+                    Dict{String,Any}(
+                        "payload" => _julia_staged_enrichment_marker(
+                            "x",
+                            0,
+                            "replace_marker",
+                            nothing,
+                            "fail",
+                        ),
+                    ),
+                    options,
+                )
+            catch error
+                error
+            end
+            if row["accepted"] == true
+                @test result.ast["payload"] == row["value"]
+            else
+                @test _julia_staged_enrichment_error_code(result) == row["diagnostic"]
+                @test _julia_staged_enrichment_diagnostic_is_complete(result)
+            end
+
+            direct = try
+                LinkedSpecJulia._staged_detach_plain(
+                    deepcopy(row["value"]);
+                    maximum = row["max_nodes"],
+                )
+            catch error
+                error
+            end
+            if row["accepted"] == true
+                @test direct.nodes == row["visited_nodes"]
+                @test direct.value == row["value"]
+            else
+                @test direct isa LinkedSpecJulia._StagedDetachFailure
+                direct isa LinkedSpecJulia._StagedDetachFailure || continue
+                @test direct.nodes == row["visited_nodes"]
+            end
+        end
+
+        cyclic = Any[]
+        push!(cyclic, cyclic)
+        cycle_registry = _julia_staged_enrichment_registry(
+            (_request, _context) -> LinkedSpecJulia._staged_child_success(cyclic),
+        )
+        cycle_error = _julia_staged_enrichment_capture(() ->
+            LinkedSpecJulia._enrich_staged_current_depth(
+                cycle_registry,
+                Dict{String,Any}(
+                    "payload" => _julia_staged_enrichment_marker(
+                        "x",
+                        0,
+                        "replace_marker",
+                        nothing,
+                        "fail",
+                    ),
+                ),
+                _julia_staged_enrichment_options(),
+            ))
+        @test _julia_staged_enrichment_error_code(cycle_error) ==
+              "staged_result_not_detached"
+        @test _julia_staged_enrichment_diagnostic_is_complete(cycle_error)
+
+        failure_calls = Ref(0)
+        failure_registry = _julia_staged_enrichment_registry(
+            function(_request, _context)
+                failure_calls[] += 1
+                return LinkedSpecJulia._staged_child_failure(
+                    Dict{String,Any}("code" => "repeatable_failure"),
+                )
+            end,
+        )
+        failing_ast = Dict{String,Any}(
+            "payload" => _julia_staged_enrichment_marker(
+                "bad",
+                0,
+                "replace_marker",
+                nothing,
+                "fail",
+            ),
+        )
+        for _ in 1:2
+            @test _julia_staged_enrichment_capture(() ->
+                LinkedSpecJulia._enrich_staged_current_depth(
+                    failure_registry,
+                    failing_ast,
+                    _julia_staged_enrichment_options(),
+                )) isa LinkedSpecJulia.StagedAstEnrichmentException
+        end
+        @test failure_calls[] == 2
+        @test LinkedSpecJulia._staged_cache_stats(failure_registry)["entries"] == 1
+        @test LinkedSpecJulia._staged_cache_stats(failure_registry)["misses"] == 1
+        @test LinkedSpecJulia._staged_cache_stats(failure_registry)["hits"] == 1
+
+        fail_first = Ref(true)
+        recovery_calls = Ref(0)
+        recovery_registry = _julia_staged_enrichment_registry(
+            function(_request, _context)
+                recovery_calls[] += 1
+                if fail_first[]
+                    fail_first[] = false
+                    return LinkedSpecJulia._staged_child_failure(
+                        Dict{String,Any}("code" => "first_attempt_failed"),
+                    )
+                end
+                return LinkedSpecJulia._staged_child_success(
+                    Dict{String,Any}("kind" => "fresh"),
+                )
+            end,
+        )
+        @test _julia_staged_enrichment_capture(() ->
+            LinkedSpecJulia._enrich_staged_current_depth(
+                recovery_registry,
+                failing_ast,
+                _julia_staged_enrichment_options(),
+            )) isa LinkedSpecJulia.StagedAstEnrichmentException
+        recovered = LinkedSpecJulia._enrich_staged_current_depth(
+            recovery_registry,
+            failing_ast,
+            _julia_staged_enrichment_options(),
+        )
+        @test recovered.ast["payload"] == Dict{String,Any}("kind" => "fresh")
+        @test recovery_calls[] == 2
+        @test recovered.cache["entries"] == 1
+        @test recovered.cache["misses"] == 1
+        @test recovered.cache["hits"] == 1
+
+        thrown_registry = _julia_staged_enrichment_registry(
+            (_request, _context) -> error("contained child exception"),
+        )
+        thrown = LinkedSpecJulia._enrich_staged_current_depth(
+            thrown_registry,
+            Dict{String,Any}(
+                "payload" => _julia_staged_enrichment_marker(
+                    "panic",
+                    0,
+                    "replace_marker",
+                    nothing,
+                    "keep_text",
+                ),
+            ),
+            _julia_staged_enrichment_options(),
+        )
+        @test thrown.ast["payload"] == "panic"
+        @test only(thrown.diagnostics)["child_diagnostic"]["code"] ==
+              "staged_child_exception"
+    end
+
     @testset "consumer remains outside ordinary and canonical discovery" begin
         ordinary = read(
             joinpath(
@@ -782,9 +1666,9 @@ Child:: I { marker = parse_job(entry_text(), hash("node_kind", "expression", "pa
         end
     end
 
-    @testset "LINKEDSPEC_STAGED_AST_ENRICHMENT_JULIA_RED: missing authority=[pre_registered_resolution,immutable_cache,result_failure_policies]; marker=[STAGED_PARSE_JOB_MARKER] and typed provenance=[staged_parse_job_v2] are available" begin
-        # Intentional RED: `.14.7.6.2` owns caller-frozen resolution/cache and
-        # all result/failure stitching. This leaf stops at inert declaration.
+    @testset "LINKEDSPEC_STAGED_AST_ENRICHMENT_JULIA_RED: missing recursive_authority=[breadth_first,decreasing_chain,cycle,depth_calls,cancellation_resources,safe_points,source_rebasing]; current_depth=[pre_registered_resolution,immutable_cache,result_failure_policies] is available" begin
+        # Intentional RED: `.14.7.6.3` owns recursion, shared bounds, callback
+        # safe points, and original-source diagnostic rebasing.
         @test false
     end
 end

@@ -9,6 +9,33 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-27 (`FUTURE-PARITY-BACKLOG.14.7.6.2` — Julia staged current-depth authority): exact clean activation
+  is marker/provenance commit `13c8a611`; scope owns only private general-v2 resolution/cache, one complete marker
+  depth, sibling isolation, detached atomic policies, the same consumer's `.3` RED, and synchronized truth.
+- Root cause was an intentional missing boundary: `.1` produced inert live-proven markers, while Julia's existing
+  `StagedParserRegistry` is function-body-v1-only and must not acquire general-v2 ambient authority. The new
+  `_FrozenStagedRegistry` accepts deeply owned caller-completed outcomes and exact already-compiled callbacks.
+- Registry entries, aliases, candidate groups, and logical capability/policy sets are immutable tuples. Selection
+  is pure over alias, declaring-relative, ordered root, and ordered provider outcomes; missing/ambiguous/version/
+  top/capability/policy/source-detail diagnostics reject without loading or querying anything.
+- Default top is selected before canonical job identity. The registry-local exact eight-field cache stores only
+  immutable callback plans; hits never reuse a child result, failure, execution context, callback state, or
+  partially stitched AST, and fail-then-success behavior proves non-poisoning.
+- `_enrich_staged_current_depth` deeply copies the parent, discovers only the current marker depth, prepares every
+  resolution and stitch reservation before callback one, applies numeric/string typed order, and gives each
+  sibling fresh cursor/marks/captures/variables. Returned markers stay inert until `.14.7.6.3` owns recurrence.
+- Callback results must be finite acyclic node-bounded plain values with no live-authority keys. All four result
+  policies and three failure policies stitch only the unpublished copy; fail, stale-marker, collision, absent/
+  wrong-kind target, cycle, node-limit, and thrown-callback cases publish no partial AST.
+- Review found that the first detacher draft exempted marker-shaped dictionaries from live-key rejection. That
+  would let an otherwise inert returned marker smuggle `callback` or another host authority. Marker shape now
+  grants no exemption, and the existing count-neutral inert-marker assertion proves both valid and smuggled cases.
+- The explicit consumer is 309 GREEN/one intentional `.3` RED. Complete ordinary Julia and 105/105 corpus pass
+  while omitting it; neutral staged remains 92 mutations, semantic 6/20/128, typed 12/2/170, recognition
+  138/250/58, progressive 9/9/116 plus public 60, generated/capability 80/0/0, and language 250/105+1/126.
+- Admitted Perl remains 143/143, Rust 1/1, and Dart 19/19. Knowledge regenerates at 897 facts/7,615 question
+  keys; the mdBook renders and is removed. Julia rollout, ordinary/canonical topology, v1/v2 formats, public/
+  outward behavior, carriers/admission, other backends, and combined `.14.8` remain unchanged; `.14.7.6.3` is next.
 - 2026-08-27 (`FUTURE-PARITY-BACKLOG.14.7.6.1` — Julia staged marker/provenance): exact clean activation is
   dormant-boundary commit `3b3d4eac`; scope owns only the exclusive declaration node, static closure, live typed
   provenance, inert detached marker, same consumer's `.2` RED, and synchronized truth.

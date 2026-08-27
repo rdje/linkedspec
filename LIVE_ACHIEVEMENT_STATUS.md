@@ -2,21 +2,26 @@
 
 ## Current Activity
 
-- Julia staged `.14.7.6.1` is focused-signoff-complete from clean dormant-boundary commit `3b3d4eac`.
-- Its exclusive marker, strict literal/static closure, native-capture-proven direct/ordered-derived provenance,
-  and four equal detached logical routes are implemented; the dormant consumer is 131 GREEN/one `.2` RED.
-- Current function-body v1, private authority/policies/recurrence, ordinary/canonical discovery, rollout,
+- Julia staged `.14.7.6.2` is focused-signoff-complete from clean marker/provenance commit `13c8a611`.
+- Its caller-frozen pure resolution/cache, complete typed marker depth, fresh sibling state, detached atomic
+  stitching, and every result/failure policy are implemented; the dormant consumer is 309 GREEN/one `.3` RED.
+- Current function-body v1, recursive authority, production carriers, ordinary/canonical discovery, rollout,
   generated format, public/outward behavior, admitted backends, and Lua remain fixed.
 
 ## Latest Completed Slice
 
-- Intended atomic `.14.7.6.1` implements Julia's private marker/provenance at 131 GREEN/one `.2` RED.
+- Intended atomic `.14.7.6.2` implements Julia's private current-depth authority at 309 GREEN/one `.3` RED.
 
 ## Next Action
 
-- Commit `.14.7.6.1` atomically, clear/verify the brief and clean handoff, then activate `.14.7.6.2` task-tree-first.
+- Commit `.14.7.6.2` atomically, clear/verify the brief and clean handoff, then activate `.14.7.6.3` task-tree-first.
 
 ## Recent Completions
+
+- `2026-08-27` — `.14.7.6.2` adds Julia's private caller-frozen pure resolver/cache, complete-depth target
+  reservation and typed order, fresh sibling contexts, detached atomic stitching, and all policies. Its dormant
+  consumer is 309 GREEN/one exact `.3` recursive-authority RED; discovery, rollout, formats, and public behavior
+  do not move.
 
 - `2026-08-27` — `.14.7.6.1` implements Julia's exclusive private staged marker and native-regex-offset-backed
   Unicode-scalar direct/ordered-derived provenance across four equal dormant logical routes. Its consumer is 131
@@ -69,9 +74,6 @@
 
 - `2026-08-26` — `.14.7.4.1` adds Rust's inert detached marker, strict static annotation contract, live-span typed
   provenance, and four equal dormant logical carriers; only `.2` authority remains RED.
-
-- `2026-08-26` — `.14.7.4.0` freezes Rust's zero-ordinary-test/one-opt-in-RED boundary across current v1 and four
-  generic carrier observations; only dormant lifecycle governance moves, to 79 mutations.
 
 ## History
 

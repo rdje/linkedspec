@@ -775,12 +775,14 @@ reserves cross-plan targets, isolates sibling state, detaches results, implement
 markers breadth-first, enforces strict lineage/shared resources, expires safe points, and rebases direct/derived
 source locations. A host-only seed starts fresh registry/cache/recursive authority after the parent AST through
 native, reconstructed, generated-plan, and independently executed emitted routes. The final-path consumer passes
-19/19 in ordinary/canonical admission. Julia `.14.7.6.0-.1` preserves the unchanged function-body-v1 path while
+19/19 in ordinary/canonical admission. Julia `.14.7.6.0-.2` preserves the unchanged function-body-v1 path while
 lowering only exact scalar assignment-form `parse_job` to an inert dedicated node. Native Julia capture offsets
 feed the typed source authority directly, so Unicode-scalar direct/ordered-derived provenance requires no copied-
-text search; four logical routes return the same detached marker. The explicit consumer is 131 GREEN plus one
-`.14.7.6.2` authority RED. Governance stays at 92 mutations with Julia `dormant_red`; generated format and public
-behavior remain unchanged, and `.14.7.6.2` is next.
+text search; four logical routes return the same detached marker. A separate tuple-frozen caller-prepared registry
+then performs pure selected-top-before-id resolution, plan-only caching, complete-depth target reservation and
+typed order, sibling isolation, detachment, and every result/failure policy. The explicit consumer is 309 GREEN
+plus one `.14.7.6.3` recursive-authority RED. Governance stays at 92 mutations with Julia `dormant_red`; generated
+format and public behavior remain unchanged, and `.14.7.6.3` is next.
 Mandatory engineering-notes segment `4990` is finitely authorized at 18 files / 17
 manifest lines by ADR `0090`. Dart dormant closeout's mandatory change-history segment `4990` is finitely
 authorized at 23 files / 22 manifest lines by ADR `0091`; no other pressure ceiling changes.

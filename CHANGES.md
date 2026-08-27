@@ -10,6 +10,28 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-27 — FUTURE-PARITY-BACKLOG.14.7.6.2 — implement Julia staged current-depth authority
+
+- Added a separate private caller-frozen Julia general-v2 registry containing owned normalized logical outcomes
+  and an exact set of already-compiled callbacks. Pure alias/declaring-relative/ordered-root/provider resolution
+  has no filesystem, loading, provider-query, import, environment, network, or compilation authority.
+- Added default-top-before-job-id selection, canonical UTF-8 JSON/SHA-256 job identity, and the exact neutral
+  eight-field cache identity. The invocation-local cache retains immutable callback plans only—never child
+  results, failures, execution contexts, mutable callback state, or partial publication.
+- Added one complete current marker-depth coordinator: all jobs resolve and all targets reserve before callback
+  one, typed parent paths/provenance/job ids order deterministically, and siblings receive fresh cursor, marks,
+  captures, variables, and runtime inputs. Markers returned by callbacks remain inert for `.3` recursion.
+- Added finite acyclic node-bounded plain-result detachment and atomic unpublished stitching for all four result
+  policies and all three failure policies, including exact stale marker, target collision/absence/kind, live-
+  authority, cycle, node-limit, callback-throw, and failure-non-poisoning diagnostics.
+- Closed a review-discovered authority-smuggling edge: marker-shaped callback results now receive the same live-
+  key denial as every other result, while valid authority-free returned markers remain inert for `.3`.
+- Advanced the same dormant consumer to 309 GREEN assertions and one exact `.14.7.6.3` recursive-authority RED.
+  Complete ordinary Julia, neutral 92-mutation governance, direct ledgers, Perl 143, Rust 1, and Dart 19 pass;
+  ordinary/canonical discovery, Julia rollout, generated format, public behavior, and other backends do not move.
+- Added the Julia current-depth Knowledge card and synchronized related Knowledge, ADR `0088`, roadmaps,
+  architecture, Toolbox, task/index, bounded live/change/engineering docs, memory, and the sole-facing mdBook.
+
 ## 2026-08-27 — FUTURE-PARITY-BACKLOG.14.7.6.1 — implement Julia staged marker provenance
 
 - Replaced only exact scalar assignment-form `parse_job(text_expr, literal_hash_options)` with the dedicated

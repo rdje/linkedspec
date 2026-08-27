@@ -7,8 +7,8 @@
 > carriers, and exact ordinary/canonical admission;
 > Dart now has the same complete private authority, four fresh native/reconstructed/generated/emitted production
 > carriers, and exact 19/19 ordinary/canonical admission. Julia now has an exact dormant final-path consumer at
-> 131 GREEN assertions plus one intentionally labeled `.2` authority RED after implementing its private marker
-> and live-proven typed provenance; the neutral contract remains at 92
+> 309 GREEN assertions plus one intentionally labeled `.3` recursive-authority RED after implementing its private
+> marker/provenance and caller-frozen current-depth policy engine; the neutral contract remains at 92
 > mutations. Lua remains absent, and
 > the only publicly authored five-backend/six-runtime surface is still the
 > narrow function-body v1 adapter described below.
@@ -192,9 +192,9 @@ shared Lua source must run independently on PUC Lua and LuaJIT. The exact Perl, 
 from ordinary and canonical proof. Julia's final-path consumer is present but deliberately omitted from both
 proof routes. Its `.0` run froze the generic-call boundary at 86 GREEN assertions plus one intentional RED; the
 same consumer's
-private marker/provenance boundary is now implemented at 131 GREEN/one `.2` authority RED. Julia authority/
-admission, both Lua routes, six-runtime recurrence, public authoring/no-drift, and final recomposition retain their
-`.14.7.6.2-.10` owners.
+private marker/provenance and current-depth resolution/cache/policy boundaries are now implemented at 309 GREEN/
+one `.3` recursive-authority RED. Julia recursion/carrier admission, both Lua routes, six-runtime recurrence,
+public authoring/no-drift, and final recomposition retain their `.14.7.6.3-.10` owners.
 
 ## Current private Perl boundary
 
@@ -606,9 +606,9 @@ Publishing this boundary crossed the bounded `CHANGES.md` rollover threshold. Th
 manifest controls to 23 files / 22 records. No byte, per-file, aggregate, route, storage, or product boundary was
 weakened.
 
-## Current private Julia marker/provenance boundary
+## Current private Julia current-depth boundary
 
-Julia `.14.7.6.0-.1` freeze and implement the predeclared final-path consumer at
+Julia `.14.7.6.0-.2` freeze and implement the predeclared final-path consumer at
 `julia/test/staged_ast_enrichment_contract_test.jl` without including it from `julia/test/runtests.jl` or
 canonical CI. Run it explicitly from the repository root:
 
@@ -617,12 +617,14 @@ bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history
   julia/test/staged_ast_enrichment_contract_test.jl
 ```
 
-The result is exactly 131 passing assertions and one intentional failure named
+The result is exactly 309 passing assertions and one intentional failure named
 `LINKEDSPEC_STAGED_AST_ENRICHMENT_JULIA_RED`. The GREEN prefix snapshots the complete 92-mutation neutral inventory,
 unchanged function-body-v1 resolve/load/compile/execute/cache/stitch behavior, complete wrong-top context, the
 narrow registry's resolve-time denial of `expr-v1`, static annotation closure, typed provenance, and four logical
-carrier routes. The sole RED now belongs to `.14.7.6.2` and names missing caller-frozen resolution/cache plus
-result/failure policy authority.
+carrier routes. It also executes every neutral resolution/authority/job/cache/order/result/failure/detachment
+case, malformed frozen snapshots, complete-depth target reservation, sibling isolation, cache lifecycle,
+atomicity, and returned-marker inertness. The sole RED now belongs to `.14.7.6.3` and names only recurrence,
+shared bounds and safe points, and original-source diagnostic rebasing.
 
 Exact scalar assignment-form `name = parse_job(text_expr, hash(literal options))` compiles as one dedicated
 `ActionStagedParseJobExpr`, never an ordinary helper call. Required/optional keys, parser/top identities, result/
@@ -641,6 +643,21 @@ module routes return the same detached `STAGED_PARSE_JOB_MARKER` / `staged_parse
 contains normalized logical options, exact text, typed provenance, and origin only—no source authority, match,
 parser, registry, callback, scheduler, cache, path, or host handle. This is still private dormant behavior, not
 general public authoring or parser execution.
+
+`runtime/StagedAstEnrichment.jl` is separate from the narrow function-body-v1 registry. Its unexported frozen
+registry accepts only caller-completed alias, declaring-relative, ordered search-root/provider outcomes and the
+exact already-compiled callback set. Logical entries and candidate groups become immutable tuples; dispatch has
+no loader, compiler, provider query, filesystem, network, environment, import-enumeration, or mutation route.
+Pure selection narrows top/version/capability/policy/source-detail/resource authority and selects an omitted
+default top before constructing the canonical v2 job id.
+
+The registry-local cache uses the exact normalized parser/content/import/top/spec/helper/staged/effective-
+capability identity and retains only immutable callback plans. It never retains a result, failure, runtime context,
+or callback execution state. One-depth enrichment copies the parent, prepares every job and reserves every target
+before callback one, sorts typed paths and provenance before job id, and supplies fresh cursor/mark/capture/
+variable state to every sibling. Results must be finite acyclic node-bounded plain data without live authority.
+All four result and three failure policies settle only into the unpublished copy. A fail publishes nothing;
+continuing failures retain detached diagnostics; returned markers stay inert for `.3`'s recursive scheduler.
 
 This audit also corrected two inherited governance drifts without changing Dart behavior. The duplicated authored
 availability sentence now agrees with Dart's already-complete structured backend and rollout rows, guarded by a

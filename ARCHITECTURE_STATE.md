@@ -103,7 +103,8 @@ The final-path consumer is 19/19, ordinary Dart is 435/435, and canonical CI req
 Neutral governance advances to 90 mutations and only Dart rollout moves; v1/v2 formats, public/outward behavior,
 and other backends do not move.
 
-Julia leaves `FUTURE-PARITY-BACKLOG.14.7.6.0-.1` now freeze and implement the same private declaration boundary.
+Julia leaves `FUTURE-PARITY-BACKLOG.14.7.6.0-.2` now freeze and implement the same private declaration and
+current-depth boundary.
 The predeclared final path `julia/test/staged_ast_enrichment_contract_test.jl` remains deliberately omitted from
 `julia/test/runtests.jl` and canonical CI and preserves the complete neutral inventory, current function-body-v1
 phases/cache/stitch/wrong-top context, and narrow `expr-v1` registry denial. `.1` makes only exact scalar assignment-
@@ -116,15 +117,18 @@ distinct without text search or regex reconstruction. The existing `SourceLocati
 match/capture boundaries to Unicode-scalar direct or nonempty ordered-derived provenance and materializes exact
 text. The detached marker retains only normalized options, text, provenance, and origin—never match/source/parser/
 registry/callback/scheduler/cache/path/host authority. Native, normalized reconstructed, generated-plan, and
-independently included emitted-module routes agree. The run is 131 GREEN/one exact `.14.7.6.2` resolution/cache/
-result/failure authority RED. Julia stays `dormant_red`; neutral governance remains 92 mutations, and rollout,
-generated format, public/outward behavior, and other backends stay unchanged.
+independently included emitted-module routes agree. A separate unexported authority owns tuple-frozen caller-
+completed candidates and already-compiled callbacks, pure selected-top-before-id resolution, an immutable-plan
+cache, complete-depth target reservation and typed order, fresh sibling state, detached results, and all four
+result/three failure policies. The run is 309 GREEN/one exact `.14.7.6.3` recurrence/bounds/safe-point/rebasing
+RED. Julia stays `dormant_red`; neutral governance remains 92 mutations, and rollout, generated format, public/
+outward behavior, and other backends stay unchanged.
 
 That audit also closes two inherited neutral-governance defects. Dart admission updated structured status/backend/
 rollout rows but missed the duplicated human-readable availability constant; a new mutation now locks exact Dart-
 complete/Julia-dormant wording. Its ordinary Dart runtime command also omitted the package cwd required for
 `pubspec.yaml` discovery; the row now matches the already-proven canonical package-cwd form. The executable oracle
-is therefore 92 mutations and `.14.7.6.2` is the next frontier.
+is therefore 92 mutations and `.14.7.6.3` is the next frontier.
 
 Focused `.14.7.4.1` proof also exposed two pre-existing Rust defects against its exact clean base. Corrective
 `TRACE-OBSERVABILITY.5.1` now repairs the first: `compile_with_events` runs the already-current progressive static
@@ -140,7 +144,8 @@ introduced by `.14.7.4.0` commit `e37a8b77`; 143/143 plus canonical proof close 
 then completes current-depth authority from that clean handoff, `.14.7.4.3` completes recursive authority, and
 `.14.7.4.4` admits four fresh carriers at 84 neutral mutations; `.14.7.5.0` historically advances only Dart
 dormancy to 85; `.14.7.5.4` admits Dart at 90; `.14.7.6.0` freezes Julia dormant RED and repairs governance at 92;
-`.14.7.6.1` implements Julia marker/provenance without changing that count. The next frontier is Julia `.14.7.6.2`.
+`.14.7.6.1` implements Julia marker/provenance and `.2` current-depth authority without changing that count. The
+next frontier is Julia `.14.7.6.3`.
 
 This closeout's mandatory engineering-notes rollover publishes immutable segment `4990`. ADR `0090` advances
 only finite route controls from 17/16 to 18 files / 17 manifest lines; the measured collection remains

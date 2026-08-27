@@ -2,8 +2,8 @@
 
 - Date: 2026-08-25
 - Status: accepted architecture; executable neutral authority complete under `FUTURE-PARITY-BACKLOG.14.7.2`;
-  Perl, Rust, and Dart private behavior/admission complete; Julia dormant RED complete under `.14.7.6.0` and `.1`
-  is next; later backend admission and public authoring remain pending
+  Perl, Rust, and Dart private behavior/admission complete; Julia marker/provenance and current-depth authority are
+  dormant under `.14.7.6.0-.2`, with `.3` recursion next; later admission/public authoring remain pending
 - Tags: architecture, staged-parsing, parse-job, source-location, registry, queue, policies, diagnostics, portability
 
 ## Context
@@ -408,6 +408,21 @@ markers. The same dormant consumer is now 131 GREEN/one `.14.7.6.2` resolution/c
 Function-body v1, neutral lifecycle and 92 mutations, ordinary/canonical discovery, Julia rollout, generated
 format, public/outward behavior, and other backends do not move.
 
+Julia current-depth leaf `FUTURE-PARITY-BACKLOG.14.7.6.2` adds the separate unexported
+`runtime/StagedAstEnrichment.jl` authority without widening `parser/StagedParserRegistry.jl`'s function-body-v1
+adapter. `_FrozenStagedRegistry` deeply owns caller-completed alias, declaring-relative, ordered-root/provider, and
+already-compiled callback outcomes as immutable tuples. Post-AST resolution is pure; top/version/capability/
+policy/source-detail/resource authority only narrows, default top precedes canonical v2 identity, and the exact
+eight-field cache stores immutable callback plans without child results, failures, contexts, or execution state.
+
+The one-depth engine prepares every job and reserves every stitch target before callbacks, sorts typed paths/
+provenance/job ids, gives siblings fresh cursor/mark/capture/variable state, and accepts only finite acyclic node-
+bounded detached plain results. All four result and three failure policies operate on an unpublished AST copy;
+continuing failures retain detached sidecar diagnostics, target conflicts reject before execution, and returned
+markers remain inert. The same consumer is 309 GREEN/one `.14.7.6.3` breadth-first recurrence, lineage/bounds,
+safe-point, and source-rebasing RED. Function-body v1, marker/provenance and four logical routes, neutral 92-
+mutation governance, discovery, rollout, generated format, public/outward behavior, and other backends do not move.
+
 ## Links
 
 - Owning task: `docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md`
@@ -425,4 +440,5 @@ format, public/outward behavior, and other backends do not move.
   `docs/knowledge/dart-staged-ast-enrichment-recursive-authority.md` and
   `docs/knowledge/dart-staged-ast-enrichment-carriers-admission.md` plus
   `docs/knowledge/julia-staged-ast-enrichment-dormant-red.md` and
-  `docs/knowledge/julia-staged-ast-enrichment-marker-provenance.md`
+  `docs/knowledge/julia-staged-ast-enrichment-marker-provenance.md` plus
+  `docs/knowledge/julia-staged-ast-enrichment-current-depth-authority.md`

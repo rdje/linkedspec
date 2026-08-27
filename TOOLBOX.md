@@ -371,19 +371,21 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   Canonical CI requires, logs, and invokes the exact final path once; Dart rollout is complete. Because every
   admitted consumer snapshots the full neutral current projection, rerun Perl, Rust, and Dart consumers whenever
   any later backend lifecycle or governed mutation count moves.
-- **Julia general-staged private marker/provenance boundary:** `FUTURE-PARITY-BACKLOG.14.7.6.0-.1` owns
+- **Julia general-staged private current-depth boundary:** `FUTURE-PARITY-BACKLOG.14.7.6.0-.2` owns
   `julia/test/staged_ast_enrichment_contract_test.jl`. Run it explicitly with
   `bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no
-  julia/test/staged_ast_enrichment_contract_test.jl`; require exactly 131 passes and one labeled `.14.7.6.2`
-  resolution/cache/result/failure authority RED. Do not add the path to `julia/test/runtests.jl` or canonical CI.
+  julia/test/staged_ast_enrichment_contract_test.jl`; require exactly 309 passes and one labeled `.14.7.6.3`
+  recursive-authority RED. Do not add the path to `julia/test/runtests.jl` or canonical CI.
   Inspect `to_json(payload.action_ast)` for one `ActionStagedParseJobExpr` and zero generic `parse_job` calls.
   `runtime/Matching.jl` retains native participating capture ranges privately and nonserially;
   `runtime/StagedParseJobDeclaration.jl` converts them through `SourceLocation` into exact Unicode-scalar direct/
   ordered-derived provenance. Probe native, `SpecFile`-JSON reconstructed, `execute_generated_parser_v2`, and an
   independently `Base.include_string`-loaded emitted module; all four must return the same detached marker while
   the narrow `StagedParserRegistry.jl` still rejects `expr-v1` at resolve and function-body v1 remains GREEN.
-  Retrieve [[julia-staged-ast-enrichment-marker-provenance]] before archaeology; `.14.7.6.2` alone owns the next
-  resolution/cache/result/failure authority.
+  Inspect `runtime/StagedAstEnrichment.jl` for `_FrozenStagedRegistry`, pure pre-registered selection, canonical
+  job/cache identities, complete-depth target reservation and typed order, fresh sibling contexts, detachment,
+  atomic stitching, and all policies. Retrieve [[julia-staged-ast-enrichment-current-depth-authority]] before
+  archaeology; `.14.7.6.3` alone owns recursion, shared bounds/safe points, and source rebasing.
 - **Env knobs:** `LINKEDSPEC_TRACE_LEVEL` (level; `LINKEDSPEC_DUMP_VERBOSITY` is the fallback),
   `LINKEDSPEC_TRACE_FILE` (route to a file), `LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_EMOJI`,
   `LINKEDSPEC_TRACE_RESET_FILE`.
@@ -1204,11 +1206,12 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
 - **OUTPUT:** 4 registry entries; 8 provenance; 8 resolution/6 authority; 10 cache; 4 queue/3 isolation;
   4 result plus 3 failure policies; 10 recursive-chain and 5 detachment cases; five backend consumers over six
   runtime routes; 37 diagnostics; 9 rollout legs; 35 exact owners; and 92 mutations.
-- **BOUNDARY:** neutral, Perl, Rust, and Dart are complete. Julia remains `dormant_red`, now at 131 GREEN/one
-  intentional private-authority RED after its exclusive marker and live-proven typed provenance were implemented;
-  it remains outside ordinary/canonical discovery with rollout pending. PUC Lua, LuaJIT, recurrence, and public
-  no-drift remain pending. Outward facade/schema/semantic/MCP/CLI/README tokens remain absent. The existing
-  function-body v1 adapter and generated-source v2 format stay current and unchanged.
+- **BOUNDARY:** neutral, Perl, Rust, and Dart are complete. Julia remains `dormant_red`, now at 309 GREEN/one
+  intentional recursive-authority RED after its exclusive marker, live-proven typed provenance, caller-frozen
+  resolver/cache, and complete current-depth policies were implemented; it remains outside ordinary/canonical
+  discovery with rollout pending. PUC Lua, LuaJIT, recurrence, and public no-drift remain pending. Outward facade/
+  schema/semantic/MCP/CLI/README tokens remain absent. The existing function-body v1 adapter and generated-source
+  v2 format stay current and unchanged.
 
 ### 4.9.1.2 Lossless-gap handoff preflight
 
