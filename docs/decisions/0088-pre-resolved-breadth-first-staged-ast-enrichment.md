@@ -2,7 +2,7 @@
 
 - Date: 2026-08-25
 - Status: accepted architecture; executable neutral authority complete under `FUTURE-PARITY-BACKLOG.14.7.2`;
-  Perl, Rust, Dart, and Julia private behavior/admission complete; shared Lua dual-ABI dormant RED active;
+  Perl, Rust, Dart, and Julia private behavior/admission complete; shared Lua dual-ABI current-depth authority dormant;
   recurrence, public authoring, and final recomposition remain pending
 - Tags: architecture, staged-parsing, parse-job, source-location, registry, queue, policies, diagnostics, portability
 
@@ -492,6 +492,26 @@ GREEN assertions and one exact `.14.7.7.2` caller-frozen resolution/cache/result
 governance remains 98 mutations; discovery, rollout, function-body v1, generated format v2, public/outward
 behavior, and admitted backends do not move.
 
+Lua current-depth leaf `FUTURE-PARITY-BACKLOG.14.7.7.2` adds separate private Lua-5.1-compatible
+`staged_ast_enrichment.lua` without widening the narrow function-body-v1 adapter. Its opaque frozen registry
+deeply owns caller-completed alias/declaring-relative/ordered-root/provider outcomes plus an exact already-
+compiled callback binding set. Resolution is pure; version/top/capability/policy/source-detail authority only
+narrows, default top precedes canonical v2 identity, and the exact eight-field cache retains immutable callback
+plans without child values, failures, contexts, or partial AST state.
+
+The one-depth engine copies the parent, prepares every job, and reserves every stitch target plus cross-plan
+conflict before callback one. Typed path/provenance/job-id ordering is deterministic on both ABIs; siblings receive
+fresh cursor/mark/capture/variable state. Finite acyclic node-bounded plain results are deeply detached, live keys
+and marker-shaped authority smuggling reject, and all four result plus three failure policies operate only on the
+unpublished copy. Shared appends follow job order, incompatible targets reject pre-callback, failed results do not
+poison later execution, callback throws are contained, and valid returned markers remain inert.
+
+The same shared consumer now reaches 597 GREEN assertions and one exact `.14.7.7.3` breadth-first recurrence,
+lineage/resource, source-rebasing, and fresh-carrier RED independently on PUC Lua and LuaJIT. Complete ordinary
+dual-ABI Lua, admitted Perl 143/143, Rust 1/1, Dart 19/19, Julia 491/491, and every direct governance ledger pass.
+Neutral 98-mutation lifecycle, ordinary/canonical discovery, both rollout rows, function-body v1, generated format
+v2, public/outward behavior, and other backends do not move.
+
 ## Links
 
 - Owning task: `docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md`
@@ -514,4 +534,5 @@ behavior, and admitted backends do not move.
   `docs/knowledge/julia-staged-ast-enrichment-recursive-authority.md` plus
   `docs/knowledge/julia-staged-ast-enrichment-carriers-admission.md` plus
   `docs/knowledge/lua-staged-ast-enrichment-dormant-red.md` and
-  `docs/knowledge/lua-staged-ast-enrichment-marker-provenance.md`
+  `docs/knowledge/lua-staged-ast-enrichment-marker-provenance.md` plus
+  `docs/knowledge/lua-staged-ast-enrichment-current-depth-authority.md`

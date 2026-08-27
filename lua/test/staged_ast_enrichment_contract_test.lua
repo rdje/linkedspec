@@ -14,6 +14,7 @@ local json = require("linkedspec.json")
 local linkedspec = require("linkedspec")
 local action_parser = require("linkedspec.action_parser")
 local source_location = require("linkedspec.source_location")
+local staged_ast_enrichment = require("linkedspec.staged_ast_enrichment")
 local staged_parse_job = require("linkedspec.staged_parse_job")
 
 local CONTRACT_ID = "linkedspec-staged-ast-enrichment-v1"
@@ -196,6 +197,109 @@ end
 local contract = json.decode(read_file(
   "capability_conformance/staged_ast_enrichment_contract.json"
 ))
+
+local function enrichment_error_code(value)
+  if not staged_ast_enrichment.is_error(value) then return nil end
+  return staged_ast_enrichment.diagnostic_code(value)
+end
+
+local function enrichment_diagnostic_is_complete(value)
+  local code = enrichment_error_code(value)
+  if code == nil then return false end
+  local required
+  for _, row in ipairs(contract.diagnostics) do
+    if row.code == code then required = row.required_context break end
+  end
+  if required == nil then return false end
+  local record = staged_ast_enrichment.to_json(value)
+  for _, field in ipairs(required) do
+    if record[field] == nil then return false end
+  end
+  return true
+end
+
+local function enrichment_options()
+  return json.harray({
+    declaring_spec_id = "grammar/main.spec",
+    caller_capabilities = json.array({
+      "staged-parse-job-v2",
+      "structured-result-v1",
+      "typed-source-location-v1",
+      "xml-v1",
+      "yaml-v1",
+    }),
+    caller_policy_modes = json.array({
+      "append_child",
+      "diagnostic_node",
+      "fail",
+      "keep_text",
+      "replace_field",
+      "replace_marker",
+      "sibling_field",
+      "trace",
+    }),
+    caller_ceilings = json.harray({
+      source_detail = "text",
+      max_steps = 200,
+      max_result_nodes = 128,
+      max_diagnostic_bytes = 8192,
+    }),
+    required_source_detail = "identity",
+    required_versions = json.harray({
+      spec_language_version = 2,
+      helper_contract_version = "actionir-v3",
+      staged_contract_version = 2,
+    }),
+  })
+end
+
+local function enrichment_marker(text, start_offset, result_policy, into, failure_policy, top_rule)
+  local sidecar = json.harray({
+    kind = "staged_parse_job_v2",
+    version = 2,
+    state = "declared",
+    effect = "staged_parse_job_declaration",
+    node_kind = "expression",
+    payload_kind = "embedded_expression",
+    parser_spec_id = "expr",
+    result_policy = result_policy,
+    failure_policy = failure_policy,
+    required_capabilities = json.array({ "typed-source-location-v1" }),
+    text = text,
+    provenance = json.harray({
+      kind = "direct_span",
+      source_id = "ascii",
+      start = start_offset,
+      ["end"] = start_offset + #text,
+      provenance = "capture",
+    }),
+    origin = "contract:parse_job",
+  })
+  if top_rule ~= false then sidecar.top_rule = top_rule or "Expr" end
+  if into ~= nil and into ~= json.null then sidecar.into = into end
+  return json.harray({
+    kind = "STAGED_PARSE_JOB_MARKER",
+    version = 2,
+    sidecar_kind = "staged_parse_job_v2",
+    effect = "staged_parse_job_declaration",
+    staged_parse_job_v2 = sidecar,
+  })
+end
+
+local function enrichment_callbacks(callback, snapshot)
+  snapshot = snapshot or contract.resolution_snapshot
+  local result = {}
+  for _, entry in ipairs(snapshot.entries) do result[entry.compiled_authority] = callback end
+  return result
+end
+
+local function enrichment_registry(callback, snapshot, callbacks)
+  snapshot = snapshot or contract.resolution_snapshot
+  return staged_ast_enrichment.freeze_registry(
+    snapshot,
+    callbacks or enrichment_callbacks(callback, snapshot)
+  )
+end
 
 check_equal(contract.contract_id, CONTRACT_ID, "neutral contract id")
 check_equal(contract.format, 1, "neutral contract format")
@@ -674,6 +778,610 @@ check_contains(
   "transitive function declaration diagnostic"
 )
 
+local inert_callback = function()
+  return staged_ast_enrichment.child_success(json.null)
+end
+local frozen_registry = enrichment_registry(inert_callback)
+check_equal(
+  staged_ast_enrichment.node_type(frozen_registry),
+  "FrozenStagedRegistry",
+  "caller-frozen registry is opaque"
+)
+check_contains(
+  staged_ast_enrichment.snapshot_id(frozen_registry),
+  "registry-snapshot:sha256:",
+  "caller-frozen snapshot identity"
+)
+check_same_json(staged_ast_enrichment.cache_stats(frozen_registry), json.harray({
+  snapshot_id = staged_ast_enrichment.snapshot_id(frozen_registry),
+  entries = 0,
+  hits = 0,
+  misses = 0,
+}), "caller-frozen cache starts empty")
+
+for _, row in ipairs(contract.resolution_cases) do
+  local ok, value = capture(function()
+    return staged_ast_enrichment.resolve_pre_registered(frozen_registry, {
+      declaring_spec_id = row.declaring_spec_id,
+      parser_spec_id = row.parser_spec_id,
+      job_id = "contract:resolution",
+    })
+  end)
+  if row.diagnostic == json.null then
+    check_equal(ok, true, "neutral resolution " .. row.id .. " accepts")
+    check_equal(value, row.resolved_spec_id, "neutral resolution " .. row.id .. " identity")
+  else
+    check_equal(ok, false, "neutral resolution " .. row.id .. " rejects")
+    check_equal(enrichment_error_code(value), row.diagnostic, "neutral resolution " .. row.id .. " diagnostic")
+    check_equal(enrichment_diagnostic_is_complete(value), true, "neutral resolution " .. row.id .. " context")
+  end
+end
+
+for _, row in ipairs(contract.authority_cases) do
+  local ok, value = capture(function()
+    return staged_ast_enrichment.evaluate_authority_case(
+      frozen_registry,
+      row,
+      "contract:authority"
+    )
+  end)
+  if row.accepted then
+    check_equal(ok, true, "neutral authority " .. row.id .. " accepts")
+    check_same_json(value, row.effective, "neutral authority " .. row.id .. " effective")
+  else
+    check_equal(ok, false, "neutral authority " .. row.id .. " rejects")
+    check_equal(enrichment_error_code(value), row.diagnostic, "neutral authority " .. row.id .. " diagnostic")
+    check_equal(enrichment_diagnostic_is_complete(value), true, "neutral authority " .. row.id .. " context")
+  end
+end
+
+local forbidden_top = json.decode(json.encode(contract.authority_cases[1]))
+forbidden_top.top_rule = "MissingTop"
+local forbidden_top_ok, forbidden_top_error = capture(function()
+  return staged_ast_enrichment.evaluate_authority_case(
+    frozen_registry,
+    forbidden_top,
+    "contract:forbidden-top"
+  )
+end)
+check_equal(forbidden_top_ok, false, "forbidden top rejects")
+check_equal(enrichment_error_code(forbidden_top_error), "staged_top_rule_forbidden", "forbidden top diagnostic")
+check_equal(enrichment_diagnostic_is_complete(forbidden_top_error), true, "forbidden top context")
+
+local isolated_snapshot = json.decode(json.encode(contract.resolution_snapshot))
+local isolated_callbacks = enrichment_callbacks(inert_callback, isolated_snapshot)
+local isolated_registry = enrichment_registry(inert_callback, isolated_snapshot, isolated_callbacks)
+isolated_snapshot.aliases[1].resolved_spec_id = "registry:yaml-v1"
+isolated_callbacks["opaque:compiled:expr-v2"] = function()
+  return staged_ast_enrichment.child_failure(json.harray({ code = "mutated" }))
+end
+check_equal(
+  staged_ast_enrichment.resolve_pre_registered(isolated_registry, {
+    declaring_spec_id = "grammar/main.spec",
+    parser_spec_id = "expr",
+    job_id = "contract:immutable",
+  }),
+  "registry:expr-v2",
+  "snapshot mutation cannot change frozen resolution"
+)
+
+local malformed_snapshots = {}
+for _, field_and_value in ipairs({
+  { "immutable", false },
+  { "prepared_before_authored_execution", false },
+  { "filesystem_access_during_dispatch", true },
+}) do
+  local malformed = json.decode(json.encode(contract.resolution_snapshot))
+  malformed[field_and_value[1]] = field_and_value[2]
+  malformed_snapshots[#malformed_snapshots + 1] = malformed
+end
+local bad_digest = json.decode(json.encode(contract.resolution_snapshot))
+bad_digest.entries[1].content_digest = "sha256:not-a-digest"
+malformed_snapshots[#malformed_snapshots + 1] = bad_digest
+local bad_default = json.decode(json.encode(contract.resolution_snapshot))
+bad_default.entries[1].default_top_rule = "MissingTop"
+malformed_snapshots[#malformed_snapshots + 1] = bad_default
+local duplicate_order = json.decode(json.encode(contract.resolution_snapshot))
+duplicate_order.search_roots[2].order = 1
+malformed_snapshots[#malformed_snapshots + 1] = duplicate_order
+for index, malformed in ipairs(malformed_snapshots) do
+  local ok, value = capture(function()
+    return enrichment_registry(inert_callback, malformed)
+  end)
+  check_equal(ok, false, "malformed snapshot " .. index .. " rejects")
+  check_equal(enrichment_error_code(value), "staged_registry_snapshot_invalid", "malformed snapshot " .. index .. " diagnostic")
+end
+
+local missing_callbacks = enrichment_callbacks(inert_callback)
+missing_callbacks[contract.resolution_snapshot.entries[1].compiled_authority] = nil
+local missing_callback_ok, missing_callback_error = capture(function()
+  return enrichment_registry(inert_callback, contract.resolution_snapshot, missing_callbacks)
+end)
+check_equal(missing_callback_ok, false, "missing compiled callback rejects")
+check_equal(enrichment_error_code(missing_callback_error), "staged_registry_snapshot_invalid", "missing callback diagnostic")
+local extra_callbacks = enrichment_callbacks(inert_callback)
+extra_callbacks["opaque:compiled:extra"] = inert_callback
+local extra_callback_ok, extra_callback_error = capture(function()
+  return enrichment_registry(inert_callback, contract.resolution_snapshot, extra_callbacks)
+end)
+check_equal(extra_callback_ok, false, "extra compiled callback rejects")
+check_equal(enrichment_error_code(extra_callback_error), "staged_registry_snapshot_invalid", "extra callback diagnostic")
+
+for _, row in ipairs({
+  { "register", "staged_registry_mutation_forbidden" },
+  { "load", "staged_implicit_load_forbidden" },
+}) do
+  local ok, value = capture(function()
+    return staged_ast_enrichment[row[1]](frozen_registry, {
+      job_id = "contract:authority-denial",
+      parser_spec_id = "expr",
+    })
+  end)
+  check_equal(ok, false, row[1] .. " authority rejects")
+  check_equal(enrichment_error_code(value), row[2], row[1] .. " authority diagnostic")
+  check_equal(enrichment_diagnostic_is_complete(value), true, row[1] .. " authority context")
+end
+
+for _, row in ipairs(contract.job_id_cases) do
+  local fields = json.decode(json.encode(row))
+  fields.id = nil
+  fields.expected_job_id = nil
+  check_equal(
+    staged_ast_enrichment.job_identity(fields),
+    row.expected_job_id,
+    "neutral job identity " .. row.id
+  )
+end
+
+local base_cache_key
+for _, row in ipairs(contract.cache_cases) do
+  local key = staged_ast_enrichment.cache_identity(row.fields)
+  if row.id == "base" then base_cache_key = key end
+  check_equal(
+    key == base_cache_key,
+    row.same_as_base,
+    "neutral cache identity " .. row.id
+  )
+end
+check_contains(base_cache_key, "sha256:", "cache identity digest prefix")
+local malformed_cache = json.decode(json.encode(contract.cache_cases[1].fields))
+malformed_cache.ambient_loader = true
+local malformed_cache_ok, malformed_cache_error = capture(function()
+  return staged_ast_enrichment.cache_identity(malformed_cache)
+end)
+check_equal(malformed_cache_ok, false, "ambient cache authority rejects")
+check_equal(enrichment_error_code(malformed_cache_error), "staged_cache_identity_invalid", "ambient cache diagnostic")
+check_equal(enrichment_diagnostic_is_complete(malformed_cache_error), true, "ambient cache context")
+
+for _, row in ipairs(contract.queue_cases) do
+  check_same_json(
+    staged_ast_enrichment.current_depth_order(row.jobs),
+    row.expected_order,
+    "neutral typed order " .. row.id
+  )
+end
+
+for _, row in ipairs(contract.stitch_cases) do
+  local expected_result = json.decode(json.encode(row.result))
+  local registry = enrichment_registry(function()
+    return staged_ast_enrichment.child_success(json.decode(json.encode(expected_result)))
+  end)
+  local parent = json.decode(json.encode(row.parent))
+  parent[row.marker_field] = enrichment_marker(
+    row.text,
+    0,
+    row.result_policy,
+    row.into,
+    "fail"
+  )
+  local outcome = staged_ast_enrichment.enrich_current_depth(
+    registry,
+    parent,
+    enrichment_options()
+  )
+  check_same_json(outcome.ast, row.expected_parent, "neutral stitch " .. row.id)
+  check_equal(#outcome.diagnostics, 0, "neutral stitch " .. row.id .. " diagnostics")
+  check_equal(outcome.sidecars[1].state, "succeeded", "neutral stitch " .. row.id .. " state")
+end
+
+for _, row in ipairs(contract.failure_cases) do
+  local registry = enrichment_registry(function()
+    return staged_ast_enrichment.child_failure(json.harray({
+      code = "child_parse_error",
+      offset = 1,
+    }))
+  end)
+  local parent = json.decode(json.encode(row.parent))
+  parent[row.marker_field] = enrichment_marker(
+    row.text,
+    0,
+    row.result_policy,
+    row.into,
+    row.failure_policy
+  )
+  local ok, value = capture(function()
+    return staged_ast_enrichment.enrich_current_depth(
+      registry,
+      parent,
+      enrichment_options()
+    )
+  end)
+  if row.failure_policy == "fail" then
+    check_equal(ok, false, "neutral failure fail aborts")
+    check_equal(enrichment_error_code(value), "staged_child_failed", "neutral failure fail diagnostic")
+    check_equal(enrichment_diagnostic_is_complete(value), true, "neutral failure fail context")
+    check_equal(parent[row.marker_field].kind, "STAGED_PARSE_JOB_MARKER", "neutral failure parent unpublished")
+  elseif row.failure_policy == "keep_text" then
+    check_equal(ok, true, "neutral keep-text continues")
+    check_same_json(value.ast, row.expected.parent, "neutral keep-text parent")
+    check_equal(#value.diagnostics, 1, "neutral keep-text diagnostic count")
+    check_equal(value.sidecars[1].state, "failed_keep_text", "neutral keep-text state")
+  else
+    check_equal(ok, true, "neutral diagnostic-node continues")
+    check_equal(value.ast[row.marker_field], row.text, "neutral diagnostic-node text")
+    check_equal(value.ast.ast.kind, "staged_parse_diagnostic", "neutral diagnostic-node kind")
+    check_same_json(value.ast.ast.diagnostic, value.diagnostics[1], "neutral diagnostic-node retained diagnostic")
+    check_equal(value.sidecars[1].state, "failed_diagnostic_node", "neutral diagnostic-node state")
+  end
+end
+
+local observed_contexts = json.array()
+local observed_order = json.array()
+local callback_count = 0
+local ordered_registry = enrichment_registry(function(request, context)
+  observed_contexts[#observed_contexts + 1] = staged_ast_enrichment.runtime_context_to_json(context)
+  observed_order[#observed_order + 1] = request.text
+  callback_count = callback_count + 1
+  context.cursor = 9
+  context.marks.child = 1
+  context.captures.capture = "local"
+  context.variables.variable = true
+  return staged_ast_enrichment.child_success(json.harray({
+    kind = "parsed",
+    text = request.text,
+  }))
+end)
+local ordered_ast = json.harray({
+  nodes = json.array({
+    json.harray({ payload = enrichment_marker("first", 4, "replace_marker", nil, "fail") }),
+    json.harray({ payload = enrichment_marker("second", 1, "replace_marker", nil, "fail") }),
+  }),
+})
+local first_ordered = staged_ast_enrichment.enrich_current_depth(
+  ordered_registry,
+  ordered_ast,
+  enrichment_options()
+)
+check_string_list(observed_order, { "first", "second" }, "complete-depth typed callback order")
+for index, context in ipairs(observed_contexts) do
+  check_same_json(context, json.harray({
+    cursor = 0,
+    marks = json.harray(),
+    captures = json.harray(),
+    variables = json.harray(),
+  }), "fresh sibling context " .. index)
+end
+check_equal(first_ordered.cache.entries, 1, "first depth plan-cache entries")
+check_equal(first_ordered.cache.misses, 1, "first depth plan-cache misses")
+check_equal(first_ordered.cache.hits, 1, "first depth plan-cache hits")
+local second_ordered = staged_ast_enrichment.enrich_current_depth(
+  ordered_registry,
+  ordered_ast,
+  enrichment_options()
+)
+check_equal(second_ordered.cache.entries, 1, "second depth plan-cache entries")
+check_equal(second_ordered.cache.misses, 1, "second depth plan-cache misses")
+check_equal(second_ordered.cache.hits, 3, "second depth plan-cache hits")
+check_equal(callback_count, 4, "child results always execute")
+check_equal(ordered_ast.nodes[1].payload.kind, "STAGED_PARSE_JOB_MARKER", "parent AST remains unpublished")
+local fresh_registry = enrichment_registry(inert_callback)
+check_equal(staged_ast_enrichment.cache_stats(fresh_registry).entries, 0, "fresh registry has isolated cache")
+
+local default_registry = enrichment_registry(function()
+  return staged_ast_enrichment.child_success(json.harray({ kind = "expr" }))
+end)
+local default_outcome = staged_ast_enrichment.enrich_current_depth(
+  default_registry,
+  json.harray({ payload = enrichment_marker("x", 0, "replace_marker", nil, "fail", false) }),
+  enrichment_options()
+)
+check_equal(default_outcome.sidecars[1].top_rule, "Expr", "default top selected before identity")
+check_equal(
+  default_outcome.sidecars[1].job_id,
+  staged_ast_enrichment.job_identity(json.harray({
+    declaring_spec_id = "grammar/main.spec",
+    parent_ast_path = json.array({ "payload" }),
+    node_kind = "expression",
+    payload_kind = "embedded_expression",
+    parser_spec_id = "expr",
+    top_rule = "Expr",
+    provenance = json.harray({
+      kind = "direct_span",
+      source_id = "ascii",
+      start = 0,
+      ["end"] = 1,
+      provenance = "capture",
+    }),
+  })),
+  "default top canonical job identity"
+)
+
+local invalid_callback_count = 0
+local invalid_registry = enrichment_registry(function()
+  invalid_callback_count = invalid_callback_count + 1
+  return staged_ast_enrichment.child_success(json.harray({ kind = "unexpected" }))
+end)
+local invalid_asts = {
+  {
+    ast = json.harray({
+      payload = enrichment_marker("x", 0, "sibling_field", "ast", "fail"),
+      ast = json.harray({ kind = "occupied" }),
+    }),
+    code = "staged_stitch_target_collision",
+  },
+  {
+    ast = json.harray({
+      payload = enrichment_marker("x", 0, "append_child", "children", "fail"),
+      children = json.harray(),
+    }),
+    code = "staged_append_target_invalid",
+  },
+  {
+    ast = json.harray({ payload = enrichment_marker("x", 0, "sibling_field", nil, "fail") }),
+    code = "staged_stitch_target_missing",
+  },
+  {
+    ast = json.harray({ payload = enrichment_marker("x", 0, "replace_field", "ast", "fail") }),
+    code = "staged_stitch_target_missing",
+  },
+}
+for index, row in ipairs(invalid_asts) do
+  local ok, value = capture(function()
+    return staged_ast_enrichment.enrich_current_depth(
+      invalid_registry,
+      row.ast,
+      enrichment_options()
+    )
+  end)
+  check_equal(ok, false, "invalid depth " .. index .. " rejects")
+  check_equal(enrichment_error_code(value), row.code, "invalid depth " .. index .. " diagnostic")
+  check_equal(enrichment_diagnostic_is_complete(value), true, "invalid depth " .. index .. " context")
+end
+check_equal(invalid_callback_count, 0, "invalid depths reject before callback one")
+check_equal(staged_ast_enrichment.cache_stats(invalid_registry).entries, 0, "invalid depths do not populate cache")
+
+local unresolved = enrichment_marker("x", 0, "replace_marker", nil, "fail")
+unresolved.staged_parse_job_v2.parser_spec_id = "missing-v1"
+local unresolved_ok, unresolved_error = capture(function()
+  return staged_ast_enrichment.enrich_current_depth(
+    invalid_registry,
+    json.harray({ payload = unresolved }),
+    enrichment_options()
+  )
+end)
+check_equal(unresolved_ok, false, "unresolved depth rejects")
+check_equal(enrichment_error_code(unresolved_error), "staged_registry_missing", "unresolved depth diagnostic")
+check_equal(enrichment_diagnostic_is_complete(unresolved_error), true, "unresolved depth context")
+check_equal(invalid_callback_count, 0, "unresolved depth invokes no callback")
+
+local atomic_input = json.harray({
+  nodes = json.array({
+    json.harray({ payload = enrichment_marker("ok", 0, "replace_marker", nil, "fail") }),
+    json.harray({ payload = enrichment_marker("bad", 2, "replace_marker", nil, "fail") }),
+  }),
+})
+local atomic_registry = enrichment_registry(function(request)
+  if request.text == "bad" then
+    return staged_ast_enrichment.child_failure(json.harray({ code = "expected_failure" }))
+  end
+  return staged_ast_enrichment.child_success(json.harray({ kind = "first_result" }))
+end)
+local atomic_ok, atomic_error = capture(function()
+  return staged_ast_enrichment.enrich_current_depth(
+    atomic_registry,
+    atomic_input,
+    enrichment_options()
+  )
+end)
+check_equal(atomic_ok, false, "atomic fail aborts complete depth")
+check_equal(enrichment_error_code(atomic_error), "staged_child_failed", "atomic fail diagnostic")
+check_equal(atomic_input.nodes[1].payload.kind, "STAGED_PARSE_JOB_MARKER", "atomic fail publishes no sibling")
+
+local conflict_calls = 0
+local conflict_registry = enrichment_registry(function()
+  conflict_calls = conflict_calls + 1
+  return staged_ast_enrichment.child_success(json.harray({ kind = "replacement" }))
+end)
+local conflicting = json.harray({
+  control = enrichment_marker("first", 0, "replace_field", "payload", "fail"),
+  payload = enrichment_marker("second", 6, "replace_marker", nil, "fail"),
+})
+local conflict_ok, conflict_error = capture(function()
+  return staged_ast_enrichment.enrich_current_depth(
+    conflict_registry,
+    conflicting,
+    enrichment_options()
+  )
+end)
+check_equal(conflict_ok, false, "cross-plan target conflict rejects")
+check_equal(enrichment_error_code(conflict_error), "staged_stitch_target_collision", "cross-plan conflict diagnostic")
+check_equal(enrichment_diagnostic_is_complete(conflict_error), true, "cross-plan conflict context")
+check_equal(conflict_calls, 0, "cross-plan conflict rejects before callback one")
+
+local duplicate_target = json.harray({
+  first = enrichment_marker("first", 0, "sibling_field", "ast", "fail"),
+  second = enrichment_marker("second", 6, "sibling_field", "ast", "fail"),
+})
+local duplicate_target_ok, duplicate_target_error = capture(function()
+  return staged_ast_enrichment.enrich_current_depth(
+    conflict_registry,
+    duplicate_target,
+    enrichment_options()
+  )
+end)
+check_equal(duplicate_target_ok, false, "duplicate sibling target rejects")
+check_equal(enrichment_error_code(duplicate_target_error), "staged_stitch_target_collision", "duplicate target diagnostic")
+check_equal(conflict_calls, 0, "duplicate target rejects before callback one")
+
+local append_order = json.array()
+local append_registry = enrichment_registry(function(request)
+  append_order[#append_order + 1] = request.text
+  return staged_ast_enrichment.child_success(json.harray({ text = request.text }))
+end)
+local append_outcome = staged_ast_enrichment.enrich_current_depth(
+  append_registry,
+  json.harray({
+    first = enrichment_marker("first", 0, "append_child", "children", "fail"),
+    second = enrichment_marker("second", 6, "append_child", "children", "fail"),
+    children = json.array(),
+  }),
+  enrichment_options()
+)
+check_string_list(append_order, { "first", "second" }, "multiple append target order")
+check_equal(append_outcome.ast.first, "first", "first append marker materialized")
+check_equal(append_outcome.ast.second, "second", "second append marker materialized")
+check_same_json(append_outcome.ast.children, json.array({
+  json.harray({ text = "first" }),
+  json.harray({ text = "second" }),
+}), "multiple appends share one deterministic target")
+
+local nested_calls = 0
+local nested_marker = enrichment_marker("nested", 1, "replace_marker", nil, "fail")
+local nested_registry = enrichment_registry(function()
+  nested_calls = nested_calls + 1
+  return staged_ast_enrichment.child_success(nested_marker)
+end)
+local nested_outcome = staged_ast_enrichment.enrich_current_depth(
+  nested_registry,
+  json.harray({ payload = enrichment_marker("outer", 0, "replace_marker", nil, "fail") }),
+  enrichment_options()
+)
+check_equal(nested_outcome.ast.payload.kind, "STAGED_PARSE_JOB_MARKER", "returned marker remains inert")
+check_equal(nested_calls, 1, "returned marker is not rescanned")
+nested_marker.callback = "opaque:live"
+local smuggled_ok, smuggled_error = capture(function()
+  return staged_ast_enrichment.enrich_current_depth(
+    nested_registry,
+    json.harray({ payload = enrichment_marker("outer-smuggled", 0, "replace_marker", nil, "fail") }),
+    enrichment_options()
+  )
+end)
+check_equal(smuggled_ok, false, "marker-shaped live authority rejects")
+check_equal(enrichment_error_code(smuggled_error), "staged_result_not_detached", "marker-shaped live diagnostic")
+check_equal(enrichment_diagnostic_is_complete(smuggled_error), true, "marker-shaped live context")
+
+for _, row in ipairs(contract.detachment_cases) do
+  local direct = staged_ast_enrichment.detach_plain(
+    json.decode(json.encode(row.value)),
+    row.max_nodes
+  )
+  check_equal(direct.accepted, row.accepted, "neutral detachment " .. row.id .. " acceptance")
+  check_equal(direct.nodes, row.visited_nodes, "neutral detachment " .. row.id .. " visited nodes")
+  if row.accepted then
+    check_same_json(direct.value, row.value, "neutral detachment " .. row.id .. " value")
+  end
+
+  local options = enrichment_options()
+  options.caller_ceilings.max_result_nodes = row.max_nodes
+  local registry = enrichment_registry(function()
+    return staged_ast_enrichment.child_success(json.decode(json.encode(row.value)))
+  end)
+  local ok, value = capture(function()
+    return staged_ast_enrichment.enrich_current_depth(
+      registry,
+      json.harray({ payload = enrichment_marker("x", 0, "replace_marker", nil, "fail") }),
+      options
+    )
+  end)
+  if row.accepted then
+    check_equal(ok, true, "neutral detached result " .. row.id .. " accepts")
+    check_same_json(value.ast.payload, row.value, "neutral detached result " .. row.id .. " value")
+  else
+    check_equal(ok, false, "neutral detached result " .. row.id .. " rejects")
+    check_equal(enrichment_error_code(value), row.diagnostic, "neutral detached result " .. row.id .. " diagnostic")
+    check_equal(enrichment_diagnostic_is_complete(value), true, "neutral detached result " .. row.id .. " context")
+  end
+end
+
+local cyclic = {}
+cyclic[1] = cyclic
+local cyclic_registry = enrichment_registry(function()
+  return staged_ast_enrichment.child_success(cyclic)
+end)
+local cyclic_ok, cyclic_error = capture(function()
+  return staged_ast_enrichment.enrich_current_depth(
+    cyclic_registry,
+    json.harray({ payload = enrichment_marker("x", 0, "replace_marker", nil, "fail") }),
+    enrichment_options()
+  )
+end)
+check_equal(cyclic_ok, false, "actual cyclic child result rejects")
+check_equal(enrichment_error_code(cyclic_error), "staged_result_not_detached", "actual cyclic diagnostic")
+
+local repeated_failure_calls = 0
+local repeated_failure_registry = enrichment_registry(function()
+  repeated_failure_calls = repeated_failure_calls + 1
+  return staged_ast_enrichment.child_failure(json.harray({ code = "repeatable_failure" }))
+end)
+local failing_ast = json.harray({
+  payload = enrichment_marker("bad", 0, "replace_marker", nil, "fail"),
+})
+for attempt = 1, 2 do
+  local ok, value = capture(function()
+    return staged_ast_enrichment.enrich_current_depth(
+      repeated_failure_registry,
+      failing_ast,
+      enrichment_options()
+    )
+  end)
+  check_equal(ok, false, "repeated child failure " .. attempt .. " rejects")
+  check_equal(enrichment_error_code(value), "staged_child_failed", "repeated child failure " .. attempt .. " diagnostic")
+end
+local repeated_failure_cache = staged_ast_enrichment.cache_stats(repeated_failure_registry)
+check_equal(repeated_failure_calls, 2, "failed child results never cache")
+check_equal(repeated_failure_cache.entries, 1, "failed child plan cache entries")
+check_equal(repeated_failure_cache.misses, 1, "failed child plan cache misses")
+check_equal(repeated_failure_cache.hits, 1, "failed child plan cache hits")
+
+local fail_first = true
+local recovery_calls = 0
+local recovery_registry = enrichment_registry(function()
+  recovery_calls = recovery_calls + 1
+  if fail_first then
+    fail_first = false
+    return staged_ast_enrichment.child_failure(json.harray({ code = "first_attempt_failed" }))
+  end
+  return staged_ast_enrichment.child_success(json.harray({ kind = "fresh" }))
+end)
+local recovery_first_ok = capture(function()
+  return staged_ast_enrichment.enrich_current_depth(
+    recovery_registry,
+    failing_ast,
+    enrichment_options()
+  )
+end)
+check_equal(recovery_first_ok, false, "failed first result is not cached")
+local recovered = staged_ast_enrichment.enrich_current_depth(
+  recovery_registry,
+  failing_ast,
+  enrichment_options()
+)
+check_same_json(recovered.ast.payload, json.harray({ kind = "fresh" }), "fresh result after failure")
+check_equal(recovery_calls, 2, "recovery callback executes twice")
+check_equal(recovered.cache.misses, 1, "recovery plan miss count")
+check_equal(recovered.cache.hits, 1, "recovery plan hit count")
+
+local thrown_registry = enrichment_registry(function()
+  error("contained child exception", 0)
+end)
+local thrown = staged_ast_enrichment.enrich_current_depth(
+  thrown_registry,
+  json.harray({ payload = enrichment_marker("panic", 0, "replace_marker", nil, "keep_text") }),
+  enrichment_options()
+)
+check_equal(thrown.ast.payload, "panic", "callback exception keeps exact text")
+check_equal(thrown.diagnostics[1].child_diagnostic.code, "staged_child_exception", "callback exception contained")
+
 check(file_exists(CONSUMER_PATH), "stable final-path consumer exists")
 local ordinary = read_file("tools/run_lua_local.sh")
 local inline_ordinary = read_file("lua/test/run.lua")
@@ -685,16 +1393,18 @@ local umbrella = read_file("lua/src/linkedspec/init.lua")
 for _, private_token in ipairs({
   "parse_job(text_expr",
   "STAGED_PARSE_JOB_MARKER",
+  "staged_ast_enrichment",
   CONTRACT_ID,
 }) do
   check_equal(count_literal(umbrella, private_token), 0, "outward token absent: " .. private_token)
 end
 
--- Intentional RED: owner .14.7.7.2 must add caller-frozen resolution/cache and
--- result/failure-policy execution without changing the marker/provenance seam.
+-- Intentional RED: owner .14.7.7.3 must add breadth-first recurrence, shared
+-- bounds, source rebasing, and fresh dormant production carriers without
+-- changing the committed one-depth authority.
 check(
-  type(staged_parse_job.enrich_current_depth) == "function",
-  "LINKEDSPEC_STAGED_AST_ENRICHMENT_LUA_RED: missing caller-frozen resolution cache and result failure policies"
+  type(staged_ast_enrichment.enrich_recursively) == "function",
+  "LINKEDSPEC_STAGED_AST_ENRICHMENT_LUA_RED: missing breadth-first recurrence bounds rebasing and fresh dormant carriers"
 )
 
 if #failures == 0 then

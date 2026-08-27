@@ -2,24 +2,30 @@
 
 ## Current Activity
 
-- Shared Lua staged marker/provenance `.14.7.7.1` is focused-signoff-complete from exact clean dormant-boundary
-  commit `a7293bac`.
-- One unchanged Lua-5.1-compatible consumer reaches 392 GREEN assertions and one exact `.14.7.7.2` caller-frozen
-  resolution/cache/result/failure-policy RED independently on PUC Lua and LuaJIT; ordinary/canonical discovery
-  remains absent.
+- Shared Lua staged current-depth authority `.14.7.7.2` is implementation-complete from exact clean marker/
+  provenance commit `43b33922` and is undergoing its mandatory capacity-triggered canonical closeout.
+- One unchanged Lua-5.1-compatible consumer reaches 597 GREEN assertions and one exact `.14.7.7.3` recurrence/
+  bounds/rebasing/fresh-carrier RED independently on PUC Lua and LuaJIT; ordinary/canonical discovery remains
+  absent.
 - Neutral governance stays at 98 mutations and `dormant_red`; both Lua rollout rows, function-body v1, generated
-  format, public/outward behavior, recurrence, and combined ownership remain fixed.
+  format, public/outward behavior, recurrence/carriers, and combined ownership remain fixed.
 
 ## Latest Completed Slice
 
-- `.14.7.7.1` is fully verified for its intended atomic handoff; Git will assign the commit identity.
+- `.14.7.7.2` is fully focused-verified; its exact staged candidate must clear canonical CI because the mandatory
+  change-record rollover crosses finite history capacity.
 
 ## Next Action
 
-- Commit `.14.7.7.1`, clear and verify the brief/clean handoff, then activate Lua caller-frozen authority
-  `.14.7.7.2`.
+- Complete receipt-bound canonical proof, commit `.14.7.7.2`, clear and verify the brief/clean handoff, then
+  activate Lua recurrence/bounds/rebasing/fresh carriers `.14.7.7.3` task-tree-first.
 
 ## Recent Completions
+
+- `2026-08-27` — `.14.7.7.2` adds Lua's private caller-frozen resolver/cache, complete-depth target reservation
+  and typed order, fresh sibling contexts, detached atomic stitching, and all result/failure policies. Its shared
+  consumer is 597 GREEN/one exact `.3` recursive-carrier RED per ABI; discovery, rollout, formats, public behavior,
+  and neutral governance do not move. Mandatory change segment `4989` is finitely authorized by ADR `0093`.
 
 - `2026-08-27` — `.14.7.7.1` adds Lua's exclusive private staged marker, strict static/recognition closure, and
   weak-side-table native-range-backed Unicode-scalar direct/ordered-derived provenance across four equal logical
@@ -76,9 +82,6 @@
 - `2026-08-26` — `.14.7.4.2` adds Rust's caller-frozen pure resolution/cache, deterministic current-depth
   ordering/isolation, detached atomic stitching, and all result/failure policies; only `.3` recursive authority RED
   remains, with discovery/rollout/format/public truth unchanged.
-
-- `2026-08-26` — `TRACE-OBSERVABILITY.5.4` aligns 79 mutations and Rust `dormant_red`, passes 143/143 plus
-  canonical proof, and closes corrective `.5` without runtime or rollout movement.
 
 ## History
 

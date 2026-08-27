@@ -8,8 +8,9 @@
 > Dart now has the same complete private authority, four fresh native/reconstructed/generated/emitted production
 > carriers, and exact 19/19 ordinary/canonical admission. Julia now also has the complete private authority, four
 > fresh production routes, and exact 491/491 ordinary/canonical admission. Shared Lua now has one dual-ABI dormant
-> oracle with its private inert marker and live-range-proven typed provenance at 392 GREEN assertions plus one
-> caller-frozen authority RED on each runtime; the neutral contract is 98 mutations. Lua production and admission
+> oracle with its private inert marker, live-range-proven typed provenance, and caller-frozen current-depth
+> resolution/cache/policies at 597 GREEN assertions plus one recursive-carrier RED on each runtime; the neutral
+> contract is 98 mutations. Lua production and admission
 > remain absent, and
 > the only publicly authored five-backend/six-runtime surface is still the
 > narrow function-body v1 adapter described below.
@@ -192,13 +193,13 @@ Neutral, Perl, Rust, Dart, and Julia rollout are complete. Five backend consumer
 one shared Lua source runs independently on PUC Lua and LuaJIT. The exact Perl, Rust, Dart, and Julia consumers run
 once from ordinary and canonical proof. Julia's `.0` run historically froze the generic-call boundary at 86 GREEN
 assertions plus one intentional RED; `.1-.3` supplied marker/provenance, current-depth authority, and breadth-first
-recurrence, and `.4` now carries them through four fresh-authority production routes at 491/491. Lua `.7.0-.1`
-now freeze the exact shared boundary and implement its marker/provenance carrier at 392 GREEN assertions and one
-caller-frozen authority RED per ABI while both ordinary/canonical routes and rollout rows stay pending. Lua
-`.2-.5`, six-runtime recurrence, public authoring/no-drift, and final recomposition retain their
+recurrence, and `.4` now carries them through four fresh-authority production routes at 491/491. Lua `.7.0-.2`
+now freeze the exact shared boundary and implement marker/provenance plus current-depth authority at 597 GREEN
+assertions and one recursive-carrier RED per ABI while both ordinary/canonical routes and rollout rows stay
+pending. Lua `.3-.5`, six-runtime recurrence, public authoring/no-drift, and final recomposition retain their
 `.14.7.7-.10` owners.
 
-## Current shared Lua private marker/provenance boundary
+## Current shared Lua private current-depth boundary
 
 Run the same Lua-5.1-compatible source independently on both supported hosts:
 
@@ -210,12 +211,13 @@ bash tools/run_lua_project_data.sh luajit lua/test/staged_ast_enrichment_contrac
 Each command intentionally exits nonzero after reporting exactly one failed assertion:
 
 ```text
-LINKEDSPEC_STAGED_AST_ENRICHMENT_LUA_RED: missing caller-frozen resolution cache and result failure policies
+LINKEDSPEC_STAGED_AST_ENRICHMENT_LUA_RED: missing breadth-first recurrence bounds rebasing and fresh dormant carriers
 ```
 
-Before that sentinel, 392 assertions prove the complete neutral inventory, unchanged function-body-v1 phases and
-cache/stitch policy, original wrong-top context, the narrow registry's `expr-v1` resolve denial, and the complete
-private marker/provenance boundary. The reserved assignment now has this logical ActionIR shape:
+Before that sentinel, 597 assertions prove the complete neutral inventory, unchanged function-body-v1 phases and
+cache/stitch policy, original wrong-top context, the narrow registry's `expr-v1` resolve denial, the complete
+private marker/provenance boundary, and the separate caller-frozen current-depth authority. The reserved
+assignment has this logical ActionIR shape:
 
 ```text
 staged_parse_job_marker
@@ -272,10 +274,68 @@ return the same detached inert marker:
 }
 ```
 
-The marker retains no match, source authority, parser, registry, callback, cache, scheduler, filesystem path, or
-host handle. Resolution and policy execution remain absent by design until `.14.7.7.2`. The stable test path also
-remains absent from `tools/run_lua_local.sh`, `lua/test/run.lua`, and canonical CI until dual-ABI admission owner
-`.14.7.7.4` activates it.
+The marker itself retains no match, source authority, parser, registry, callback, cache, scheduler, filesystem
+path, or host handle. Authority stays in a separate private `staged_ast_enrichment.lua` module. The stable test
+path remains absent from `tools/run_lua_local.sh`, `lua/test/run.lua`, and canonical CI until dual-ABI admission
+owner `.14.7.7.4` activates it.
+
+### Frozen resolution and plan-only caching
+
+Trusted host code supplies a complete snapshot before authored execution:
+
+```text
+aliases + declaring-relative outcomes
+ordered search-root + provider outcomes
+logical entry metadata
+exact already-compiled callback bindings
+```
+
+`freeze_registry(...)` deeply owns the logical snapshot and requires exactly the callback names referenced by its
+entries. Later `register(...)` and `load(...)` calls are typed denials. `resolve_pre_registered(...)` performs only
+alias, declaring-relative, ordered-root, then ordered-provider selection. It cannot discover a file, query a live
+provider, compile, import, read the environment, use the network, or mutate the registry.
+
+The entry's default top rule is selected before `parse_job:v2:sha256:<digest>` is computed. Cache keys cover
+exactly normalized parser identity, content digest, import-graph fingerprint, selected top, spec-language version,
+helper-contract version, staged-contract version, and sorted effective capabilities. The cache retains only an
+immutable compiled callback plan. It never stores child results, failures, sibling contexts, or partial AST state.
+
+### One complete depth is prepared before callback one
+
+`enrich_current_depth(...)` works on a detached unpublished parent copy:
+
+```text
+discover current markers only
+  -> resolve every marker and narrow authority
+  -> validate every marker and stitch target
+  -> reserve cross-plan targets and reject conflicts
+  -> sort typed parent path, typed provenance, job id
+  -> execute each callback with fresh cursor/marks/captures/variables
+  -> detach and node-bound the result
+  -> stitch success or apply the selected failure policy
+```
+
+String path components use UTF-8 ordering compatible with Unicode scalar order; indices stay numeric, so index 2
+precedes 10. Multiple `append_child` jobs may share one list and append in deterministic job order. Two replacement
+claims, an append plus replacement claim, or a target that would overwrite another queued marker reject before any
+callback runs.
+
+All four result policies and all three failure policies are executable on both ABIs. `fail` publishes none of the
+unpublished sibling work. `keep_text` and `diagnostic_node` retain detached portable diagnostics. Child results
+must be finite acyclic node-bounded plain data; parser/registry/source/frame/transaction/cancellation/callback/
+host/path/reference keys reject, including when hidden in an otherwise valid marker shape. Callback throws are
+contained, failed results never poison a later attempt, and valid returned markers remain inert.
+
+Leaf `.14.7.7.3` owns the separate breadth-first entrypoint, active lineage, cancellation and shared resource
+bounds, callback safe points, original-source diagnostic rebasing, and fresh native/reconstructed/generated/
+emitted production carriers. This `.2` boundary deliberately performs no recursive rescan and attaches to no
+production carrier.
+
+Publishing the complete `.2` record crosses the bounded change-history rollover threshold. The repository archives
+231 complete historical lines as immutable content-addressed segment `4989`; ADR `0093` advances only the finite
+collection and manifest controls to 24 files / 23 records. Root, segment, aggregate, byte, route, owner, lifecycle,
+verifier, and repository-local storage controls remain unchanged. This infrastructure movement requires canonical
+proof even though staged behavior stays private and dormant.
 
 ## Current private Perl boundary
 

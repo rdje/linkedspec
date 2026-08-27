@@ -17,7 +17,7 @@ answers:
   - "which staged AST backend consumers are planned"
   - "is general parse_job authoring public"
 date: 2026-08-25
-status: executable neutral with private Perl, Rust, Dart, and Julia admissions complete; Lua marker/provenance dormant at current-depth authority; recurrence admission and public authoring pending
+status: executable neutral with private Perl, Rust, Dart, and Julia admissions complete; Lua current-depth authority dormant at recursive/carrier boundary; recurrence admission and public authoring pending
 tags: [staged-parsing, parse-job, source-location, registry, queue, policies, diagnostics, portability]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.2 adds capability_conformance/staged_ast_enrichment_contract.json plus tools/check_staged_ast_enrichment_contract.py and ADR 0088. The independent oracle executes 4 immutable registry entries; 2 sources; 8 provenance, 3 deterministic-id, 8 resolution, 6 authority, 10 cache, 4 breadth-first queue, 3 sibling-isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases; 37 diagnostics; five planned backend consumers over six routes; four carrier requirements; ten outward guards; nine rollout legs; 35 exact owners; and 72 reason-checked corruptions. FUTURE-PARITY-BACKLOG.14.7.3.1-.3 advance only the dormant Perl consumer through declaration/provenance, current-depth policies, breadth-first recurrence, bounded authority, and source-rebased diagnostics. It now has 141 GREEN top-level checks/one carrier-admission RED; four later consumers remain absent, only neutral rollout is complete, and outward surfaces remain absent."
 evidence_update_2026_08_26_perl_admission: "FUTURE-PARITY-BACKLOG.14.7.3.4 advances the executable boundary to neutral+Perl complete with 78 reason-checked mutations. The 143-check Perl consumer proves four fresh-authority carriers and exact ordinary/canonical admission; later consumers and outward surfaces remain absent."
@@ -38,6 +38,7 @@ evidence_update_2026_08_27_julia_recursive_authority: "FUTURE-PARITY-BACKLOG.14.
 evidence_update_2026_08_27_julia_admission: "FUTURE-PARITY-BACKLOG.14.7.6.4 adds Julia's opaque host-only seed and fresh registry/cache/recursive authority across native, reconstructed, generated-plan, and independently included emitted routes. The consumer passes 491/491 and enters ordinary/canonical discovery exactly once. Only Julia lifecycle/rollout advances; the checker now rejects 97 mutations. Lua, recurrence, public authoring, recomposition, formats, and outward surfaces remain pending or unchanged."
 evidence_update_2026_08_27_lua_dormant_red: "FUTURE-PARITY-BACKLOG.14.7.7.0 advances only the shared Lua consumer lifecycle to dormant_red and the checker to 98 mutations. The same Lua-5.1 source runs on PUC Lua and LuaJIT; each route passes 153 assertions over neutral/current-v1 and four generic observation carriers, then fails only the dedicated-marker/typed-provenance assertion. Ordinary dual-ABI and canonical drivers omit the stable final path, both Lua rollout rows remain pending, and no Lua production source moves."
 evidence_update_2026_08_27_lua_marker_provenance: "FUTURE-PARITY-BACKLOG.14.7.7.1 implements the Lua-only private declaration carrier without changing neutral lifecycle or mutation count: exact assignment-only lowering, normalized literal options, private PCRE2 live-range-backed Unicode-scalar direct/ordered-derived provenance, detached authority-free marker data, malformed/residual/recognition denial, and four equal logical routes on both ABIs. Each shared dormant run is 392 GREEN/one .14.7.7.2 authority RED; discovery, rollout, function-body v1, generated format, public, and outward truth remain unchanged."
+evidence_update_2026_08_27_lua_current_depth_authority: "FUTURE-PARITY-BACKLOG.14.7.7.2 adds Lua's separate private caller-frozen registry, pure resolver, selected-top-before-id identity, plan-only cache, complete-depth target reservation/order/isolation, detached atomic stitching, and all four result/three failure policies. The shared Lua-5.1 consumer is 597 GREEN/one .14.7.7.3 recurrence/bounds/rebasing/fresh-carrier RED independently on PUC Lua and LuaJIT; neutral lifecycle/98 mutations, discovery, rollout, formats, v1, public, and outward truth do not move."
 reverify:
   - "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py"
   - "rg -n 'staged-AST enrichment|STAGED_PARSE_JOB_MARKER|staged_parse_job_v2|neutral_perl_rust_dart_and_julia_complete_lua_dormant_red' docs/decisions/0088-pre-resolved-breadth-first-staged-ast-enrichment.md capability_conformance/staged_ast_enrichment_contract.json tools/check_staged_ast_enrichment_contract.py"
@@ -88,9 +89,10 @@ AST, the final-path consumer passes 19/19 in ordinary and canonical discovery, a
 now admits the same private architecture. Its opaque seed starts a fresh registry/cache/recursive authority for
 every native, reconstructed, generated-plan, or independently included emitted execution; enrichment begins only
 after the parent value, and the consumer passes 491/491 in ordinary and canonical discovery. Julia rollout is
-complete. Neutral governance is 98 mutations. Lua now has one shared 153-GREEN/one-RED consumer executed
-independently on PUC Lua and LuaJIT but absent from ordinary/canonical discovery; annotation/provenance, later
-private authority, dual-ABI admission, recurrence, public authoring, and recomposition remain pending.
+complete. Neutral governance is 98 mutations. Lua now has one shared 597-GREEN/one-RED consumer executed
+independently on PUC Lua and LuaJIT but absent from ordinary/canonical discovery; marker/provenance and one-depth
+caller-frozen authority are private and current, while recursion/carriers, dual-ABI admission, public authoring,
+and recomposition remain pending.
 
 Related: [[general-staged-ast-current-boundary]], [[perl-staged-ast-enrichment-current-depth-authority]], [[perl-staged-ast-enrichment-recursive-authority]], [[staged-parse-job-annotation-contract]],
 [[staged-parser-registry-dispatch-contract]], [[typed-source-location-cursor-algebra-direction]], and
@@ -105,4 +107,5 @@ Related: [[general-staged-ast-current-boundary]], [[perl-staged-ast-enrichment-c
 [[julia-staged-ast-enrichment-dormant-red]], [[julia-staged-ast-enrichment-marker-provenance]],
 [[julia-staged-ast-enrichment-current-depth-authority]], and
 [[julia-staged-ast-enrichment-recursive-authority]], and
-[[julia-staged-ast-enrichment-carriers-admission]], and [[lua-staged-ast-enrichment-dormant-red]].
+[[julia-staged-ast-enrichment-carriers-admission]], [[lua-staged-ast-enrichment-dormant-red]], and
+[[lua-staged-ast-enrichment-current-depth-authority]].

@@ -765,10 +765,10 @@ exports, check-cfg registration, and conditional dead-code allowance are gone. `
 validation and gap-aware child-dispatch parity are restored, while the private authority stays dormant beside the
 one admitted contract route. `.5.4` historically aligned the Perl snapshot to 79 mutations plus Rust
 `dormant_red`; Rust admission now advances the neutral oracle to 84 mutations and promotes only Rust. Dart and
-Julia have since reached the same private admission boundary. Lua `.14.7.7.0-.1` now own one shared stable dormant
-consumer and its private marker/provenance carrier: PUC Lua and LuaJIT each pass 392 assertions and fail only the
-same `.14.7.7.2` caller-frozen authority sentinel; ordinary/canonical discovery and both rollout legs remain
-pending.
+Julia have since reached the same private admission boundary. Lua `.14.7.7.0-.2` now own one shared stable dormant
+consumer, its marker/provenance carrier, and a separate caller-frozen current-depth resolver/cache/policy engine:
+PUC Lua and LuaJIT each pass 597 assertions and fail only the same `.14.7.7.3` recurrence/bounds/rebasing/fresh-
+carrier sentinel; ordinary/canonical discovery and both rollout legs remain pending.
 Dart
 `.14.7.5.0-.4` freeze one exact historical `test_dormant/` boundary, lower exact
 assignment-form `parse_job` to a live-proven private marker, and add a separate caller-frozen pure resolver/cache/
@@ -787,13 +787,15 @@ complete breadth-first depths with exact lineage, non-resetting bounds, expiring
 An opaque host-only seed starts a fresh registry/cache/recursive authority for every native, reconstructed,
 generated-plan, and independently included emitted execution, then enriches only after the complete parent value.
 The explicit consumer is 491/491 and admitted once in ordinary/canonical topology. Governance is 98 mutations
-after shared Lua dormant activation. Lua `.14.7.7.1` now lowers only exact scalar assignment-form `parse_job` to
-an inert detached marker and converts private native capture ranges through typed source authority without copied-
-text search. Generated format and public behavior remain unchanged, and `.14.7.7.2` owns the next caller-frozen
-resolution/cache/result/failure-policy step.
+after shared Lua dormant activation. Lua `.14.7.7.1` lowers only exact scalar assignment-form `parse_job` to an
+inert detached marker and converts private native capture ranges through typed source authority without copied-
+text search. `.14.7.7.2` adds pure pre-registered resolution, selected-top-before-id identity, plan-only caching,
+complete-depth target reservation and typed order, fresh sibling contexts, detached unpublished-copy stitching,
+all four result plus three failure policies, and live/target/conflict denials without widening function-body v1.
+Generated format and public behavior remain unchanged; `.14.7.7.3` owns recursion, bounds, rebasing, and carriers.
 Mandatory engineering-notes segment `4989` is finitely authorized at 19 files / 18
-manifest lines by ADR `0092`. Dart dormant closeout's mandatory change-history segment `4990` is finitely
-authorized at 23 files / 22 manifest lines by ADR `0091`; no other pressure ceiling changes.
+manifest lines by ADR `0092`. Lua current-depth closeout's mandatory change-history segment `4989` is finitely
+authorized at 24 files / 23 manifest lines by ADR `0093`; no other pressure ceiling changes.
 
 Progressive dispatch is a separate synchronous path under `FUTURE-PARITY-BACKLOG.14.6`. Audit `.14.6.0` proves
 that none of these registries can invoke a normal loaded spec while a parser is active. The portable design uses

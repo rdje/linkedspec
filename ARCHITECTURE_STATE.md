@@ -168,6 +168,26 @@ generated-plan, and independently loaded emitted-module routes agree on PUC Lua 
 392 GREEN/one exact `.14.7.7.2` caller-frozen authority RED. Neutral 98-mutation governance, function-body v1,
 ordinary/canonical discovery, both rollout rows, generated format v2, and public/outward behavior do not move.
 
+Lua leaf `FUTURE-PARITY-BACKLOG.14.7.7.2` now adds a separate private Lua-5.1-compatible current-depth engine.
+Its opaque registry deeply owns caller-completed alias, declaring-relative, ordered-root/provider outcomes and
+the exact already-compiled callbacks named by those entries. Resolution performs no ambient discovery, load,
+provider query, compilation, filesystem, network, or mutation work. Default top is selected before canonical v2
+job identity; the exact eight-field cache retains immutable callback plans only.
+
+One complete marker depth resolves every job and reserves every stitch target before callback one, rejects
+cross-plan conflicts, orders typed paths/provenance/job ids consistently on PUC Lua and LuaJIT, and creates fresh
+sibling cursor/mark/capture/variable contexts. Detached finite acyclic node-bounded results pass through all four
+result and three failure policies on an unpublished AST copy. Live keys, authority-smuggling marker shapes,
+stale/colliding/wrong-kind targets, callback throws, and cyclic/nonfinite results fail closed; returned valid
+markers remain inert. The shared consumer is 597 GREEN/one exact `.14.7.7.3` recurrence/bounds/rebasing/fresh-
+carrier RED per ABI. Neutral governance, discovery, rollout, v1, formats, public/outward behavior, and other
+backends remain unchanged.
+
+The required complete change record crosses the bounded hot shard's exact predeclared controls and creates
+content-addressed immutable change-history segment `4989` from activation commit `43b33922`. ADR `0093` advances
+only the finite collection/manifest controls from 23/22 to 24 files / 23 lines. Root, per-segment, aggregate, and
+every byte limit plus owner, lifecycle, verifier, route patterns, and ADR `0069` storage authority are unchanged.
+
 This closeout's mandatory engineering-notes rollover publishes immutable segment `4990`. ADR `0090` advances
 only finite route controls from 17/16 to 18 files / 17 manifest lines; the measured collection remains
 23,799/27,000 lines and 2,540,090/3,145,728 bytes, and every other bounded-history control remains unchanged.

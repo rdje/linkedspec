@@ -9,6 +9,28 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-27 (`FUTURE-PARITY-BACKLOG.14.7.7.2` — Lua staged current-depth authority): exact clean activation is
+  marker/provenance commit `43b33922`; the leaf owns only a separate private frozen registry/cache, one complete
+  current-depth scheduler, detached result/failure policies, the next `.3` RED, and its mandatory change-history
+  rollover/capacity step.
+- `staged_ast_enrichment.lua` is Lua-5.1-compatible and private. The caller supplies completed candidate outcomes
+  plus the exact compiled callback map before authored execution; resolution is pure and has no loader, provider,
+  compiler, filesystem, network, environment, import, or mutation authority.
+- Default top selection precedes canonical v2 job identity. Plan-cache keys cover normalized parser, content/import
+  digests, selected top, spec/helper/staged versions, and sorted effective capabilities; only immutable callback
+  plans persist, never child results, failures, contexts, or partial AST state.
+- One complete marker depth resolves every job and reserves every target before callback one. Typed path/
+  provenance/job ordering is dual-ABI exact, siblings receive fresh runtime tables, cross-plan conflicts reject,
+  and multiple shared appends remain deterministic.
+- All four result and three failure policies operate on an unpublished parent copy after finite acyclic node-
+  bounded detachment. Live keys, marker-shaped authority smuggling, cycles, nonfinite values, stale targets, and
+  callback throws fail closed; valid returned markers remain inert until `.3`'s separate recursive scheduler.
+- The consumer reports 597 GREEN/one exact `.3` recurrence/bounds/rebasing/fresh-carrier RED on PUC Lua and LuaJIT.
+  Complete ordinary dual-ABI Lua, neutral 98, admitted Perl/Rust/Dart/Julia, and every direct ledger pass.
+- The required change record crosses the exact 23-file/22-line history controls. One immutable segment and ADR
+  `0093` own only the reviewed 24-file/23-line step; this upgrades the leaf to receipt-bound canonical proof.
+- [[lua-staged-ast-enrichment-current-depth-authority]] is the retrieval point; function-body v1, recursion/
+  carriers, discovery, rollout, formats, public/outward behavior, and other backends remain unchanged.
 - 2026-08-27 (`FUTURE-PARITY-BACKLOG.14.7.7.1` — Lua staged marker/provenance): exact clean activation is the
   shared dormant-boundary commit `a7293bac`; scope owns only the private logical annotation, strict static closure,
   native-range-backed typed provenance, inert detached marker, and transition to one `.2` RED.

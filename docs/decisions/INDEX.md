@@ -103,6 +103,7 @@ changed* lives in git (layer D), not here.
 | [0090](0090-engineering-notes-eighteenth-member-capacity.md) | Engineering-notes history admits its eighteenth bounded member | 2026-08-26 | accepted under `TRACE-OBSERVABILITY.5.4` | documentation, history, rollover, routing, pressure, continuity, doctrine |
 | [0091](0091-change-history-twenty-third-member-capacity.md) | Change history admits its twenty-third bounded member | 2026-08-26 | accepted under `FUTURE-PARITY-BACKLOG.14.7.5.0` | documentation, history, rollover, routing, pressure, continuity, doctrine |
 | [0092](0092-engineering-notes-nineteenth-member-capacity.md) | Engineering-notes history admits its nineteenth bounded member | 2026-08-27 | accepted under `FUTURE-PARITY-BACKLOG.14.7.6.4` | documentation, history, rollover, routing, pressure, continuity, doctrine |
+| [0093](0093-change-history-twenty-fourth-member-capacity.md) | Change history admits its twenty-fourth bounded member | 2026-08-27 | accepted under `FUTURE-PARITY-BACKLOG.14.7.7.2` | documentation, history, rollover, routing, pressure, continuity, doctrine |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /
