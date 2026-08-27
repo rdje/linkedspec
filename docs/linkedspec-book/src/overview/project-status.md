@@ -136,12 +136,14 @@ assertion found by `.5.1`; it now keeps the authority target dormant while requi
 input/command once. `.5.4` historically aligned the admitted Perl staged snapshot to 79 mutations plus Rust
 `dormant_red`; `.14.7.4.4` supersedes that lifecycle snapshot with Rust admission and 84 mutations, Dart
 `.14.7.5.0` historically advances only dormant lifecycle to 85, and `.14.7.5.4` admits Dart at 90. Julia
-`.14.7.6.0-.2` now freeze and implement its private declaration and current-depth boundary. Exact scalar assignment
+`.14.7.6.0-.3` now freeze and implement its private declaration, current-depth boundary, and recursive authority. Exact scalar assignment
 lowers to one dedicated inert marker; native capture offsets become Unicode-scalar direct/ordered-derived
 provenance; and native, reconstructed, generated-plan, and independently included emitted routes agree. A separate
 caller-frozen pure resolver/cache reserves and orders one complete depth, isolates sibling state, detaches results,
-and applies every result/failure policy. The consumer is 309 GREEN plus one `.14.7.6.3` recursive-authority RED and
-stays outside ordinary/canonical discovery. Governance remains 92
+and applies every result/failure policy. A separate private breadth-first entrypoint now queues only successfully
+detached returned markers by exact stitch path, enforces active lineage and non-resetting resources, expires safe
+points, and projects direct/ordered-derived child locations. The consumer is 386 GREEN plus one `.14.7.6.4`
+fresh-carrier/production/admission/rollout RED and stays outside ordinary/canonical discovery. Governance remains 92
 mutations with `julia=dormant_red`; rollout, formats, and public/outward behavior do not move. Mandatory engineering-notes segment
 `4990` is finitely authorized at 18 files / 17 manifest lines by ADR `0090`. Its mandatory change-history rollover
 publishes segment `4990`; ADR `0091` advances only that store's finite controls to 23 files / 22 manifest lines.

@@ -2,21 +2,24 @@
 
 ## Current Activity
 
-- Julia staged `.14.7.6.2` is focused-signoff-complete from clean marker/provenance commit `13c8a611`.
-- Its caller-frozen pure resolution/cache, complete typed marker depth, fresh sibling state, detached atomic
-  stitching, and every result/failure policy are implemented; the dormant consumer is 309 GREEN/one `.3` RED.
-- Current function-body v1, recursive authority, production carriers, ordinary/canonical discovery, rollout,
+- Julia staged `.14.7.6.3` is focused-signoff-complete from clean current-depth commit `8af7f14b`.
+- Its private breadth-first recurrence, strict lineage, shared resources, expiring callback safe points, and
+  typed source rebasing leave the dormant consumer at 386 GREEN/one exact `.4` RED.
+- Current function-body v1, production carriers, ordinary/canonical discovery, rollout,
   generated format, public/outward behavior, admitted backends, and Lua remain fixed.
 
 ## Latest Completed Slice
 
-- Intended atomic `.14.7.6.2` implements Julia's private current-depth authority at 309 GREEN/one `.3` RED.
+- `.14.7.6.3` is fully verified for its intended atomic handoff; Git will assign the commit identity.
 
 ## Next Action
 
-- Commit `.14.7.6.2` atomically, clear/verify the brief and clean handoff, then activate `.14.7.6.3` task-tree-first.
+- Commit `.14.7.6.3`, clear and verify the brief/clean handoff, then activate carrier/admission closeout `.14.7.6.4`.
 
 ## Recent Completions
+
+- `2026-08-27` — `.14.7.6.3` adds Julia private breadth-first recursion, exact lineage/decrease, shared resources,
+  expiring safe points, and typed source rebasing at 386 GREEN/one `.4` RED without carrier or rollout movement.
 
 - `2026-08-27` — `.14.7.6.2` adds Julia's private caller-frozen pure resolver/cache, complete-depth target
   reservation and typed order, fresh sibling contexts, detached atomic stitching, and all policies. Its dormant
@@ -71,9 +74,6 @@
 
 - `2026-08-26` — `TRACE-OBSERVABILITY.5.1` restores exact ordinary/traced progressive static-validation equality
   with one existing-validator call and a diagnostic-equality regression; valid trace results remain unchanged.
-
-- `2026-08-26` — `.14.7.4.1` adds Rust's inert detached marker, strict static annotation contract, live-span typed
-  provenance, and four equal dormant logical carriers; only `.2` authority remains RED.
 
 ## History
 

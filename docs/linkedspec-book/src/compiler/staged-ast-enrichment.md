@@ -7,8 +7,8 @@
 > carriers, and exact ordinary/canonical admission;
 > Dart now has the same complete private authority, four fresh native/reconstructed/generated/emitted production
 > carriers, and exact 19/19 ordinary/canonical admission. Julia now has an exact dormant final-path consumer at
-> 309 GREEN assertions plus one intentionally labeled `.3` recursive-authority RED after implementing its private
-> marker/provenance and caller-frozen current-depth policy engine; the neutral contract remains at 92
+> 386 GREEN assertions plus one intentionally labeled `.4` carrier/admission RED after implementing its private
+> marker/provenance, caller-frozen current-depth engine, and separate breadth-first recursive authority; the neutral contract remains at 92
 > mutations. Lua remains absent, and
 > the only publicly authored five-backend/six-runtime surface is still the
 > narrow function-body v1 adapter described below.
@@ -192,9 +192,10 @@ shared Lua source must run independently on PUC Lua and LuaJIT. The exact Perl, 
 from ordinary and canonical proof. Julia's final-path consumer is present but deliberately omitted from both
 proof routes. Its `.0` run froze the generic-call boundary at 86 GREEN assertions plus one intentional RED; the
 same consumer's
-private marker/provenance and current-depth resolution/cache/policy boundaries are now implemented at 309 GREEN/
-one `.3` recursive-authority RED. Julia recursion/carrier admission, both Lua routes, six-runtime recurrence,
-public authoring/no-drift, and final recomposition retain their `.14.7.6.3-.10` owners.
+private marker/provenance, current-depth resolution/cache/policies, and separate breadth-first recursive authority
+are now implemented at 386 GREEN/one `.4` carrier/admission RED. Julia fresh carrier integration/admission, both
+Lua routes, six-runtime recurrence, public authoring/no-drift, and final recomposition retain their
+`.14.7.6.4-.10` owners.
 
 ## Current private Perl boundary
 
@@ -606,9 +607,9 @@ Publishing this boundary crossed the bounded `CHANGES.md` rollover threshold. Th
 manifest controls to 23 files / 22 records. No byte, per-file, aggregate, route, storage, or product boundary was
 weakened.
 
-## Current private Julia current-depth boundary
+## Current private Julia recursive boundary
 
-Julia `.14.7.6.0-.2` freeze and implement the predeclared final-path consumer at
+Julia `.14.7.6.0-.3` freeze and implement the predeclared final-path consumer at
 `julia/test/staged_ast_enrichment_contract_test.jl` without including it from `julia/test/runtests.jl` or
 canonical CI. Run it explicitly from the repository root:
 
@@ -617,14 +618,16 @@ bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history
   julia/test/staged_ast_enrichment_contract_test.jl
 ```
 
-The result is exactly 309 passing assertions and one intentional failure named
+The result is exactly 386 passing assertions and one intentional failure named
 `LINKEDSPEC_STAGED_AST_ENRICHMENT_JULIA_RED`. The GREEN prefix snapshots the complete 92-mutation neutral inventory,
 unchanged function-body-v1 resolve/load/compile/execute/cache/stitch behavior, complete wrong-top context, the
 narrow registry's resolve-time denial of `expr-v1`, static annotation closure, typed provenance, and four logical
 carrier routes. It also executes every neutral resolution/authority/job/cache/order/result/failure/detachment
 case, malformed frozen snapshots, complete-depth target reservation, sibling isolation, cache lifecycle,
-atomicity, and returned-marker inertness. The sole RED now belongs to `.14.7.6.3` and names only recurrence,
-shared bounds and safe points, and original-source diagnostic rebasing.
+atomicity, returned-marker inertness on the one-depth API, breadth-first recurrence, exact lineage, shared
+resources, context expiry, safe points, source rebasing, and diagnostic truncation. The sole RED now belongs to
+`.14.7.6.4` and names only fresh native/reconstructed/generated/emitted authority, production integration,
+ordinary/canonical admission, rollout, and backend-parent closure.
 
 Exact scalar assignment-form `name = parse_job(text_expr, hash(literal options))` compiles as one dedicated
 `ActionStagedParseJobExpr`, never an ordinary helper call. Required/optional keys, parser/top identities, result/
@@ -657,7 +660,55 @@ or callback execution state. One-depth enrichment copies the parent, prepares ev
 before callback one, sorts typed paths and provenance before job id, and supplies fresh cursor/mark/capture/
 variable state to every sibling. Results must be finite acyclic node-bounded plain data without live authority.
 All four result and three failure policies settle only into the unpublished copy. A fail publishes nothing;
-continuing failures retain detached diagnostics; returned markers stay inert for `.3`'s recursive scheduler.
+continuing failures retain detached diagnostics. Returned markers stay inert when this one-depth entrypoint is
+chosen.
+
+The separate `_enrich_staged_recursively` entrypoint uses the same frozen registry and cache but adds one queue and
+one non-resetting invocation state. It never rescans the working AST. Instead, after a successful callback result
+is detached, the scheduler records only markers contained in that result and maps their paths through the exact
+stitch destination:
+
+| Result policy | Base path inherited by a returned marker |
+| --- | --- |
+| `replace_marker` | The producing marker's path |
+| `replace_field` | The named replacement field |
+| `sibling_field` | The new sibling field |
+| `append_child` | The exact newly appended list index |
+
+This matters because rescanning would reactivate unrelated markers that were deliberately inert before the
+recursive invocation. Each queued marker instead inherits its producing callback's active frames. A frame's
+portable tuple is:
+
+```text
+[resolved_spec_id, selected_top_rule, sha256(exact UTF-8 payload), full typed provenance]
+```
+
+An exact tuple repeat is `staged_cycle`. Reusing only the parser and top is legal when every child direct segment
+is contained in an active direct segment and total Unicode-scalar extent is strictly smaller. The rule applies to
+both one direct span and nonempty `concatenate_in_order` provenance.
+
+The queue is breadth-first. For example, if two depth-one callbacks return markers, both original depth-one jobs
+finish before either returned marker is prepared. The next depth is then completely resolved, target-reserved,
+and sorted by typed path, typed provenance, and job id before its first callback. Sibling callbacks always receive
+fresh cursor, mark, capture, and variable dictionaries.
+
+One caller authority spans every depth. Cancellation identity/probe, caller clock and absolute deadline,
+remaining steps, seeded total calls, depth/call maxima, cumulative result nodes, and canonical UTF-8 diagnostic
+bytes never reset. Dispatch spends the configured per-call work only after admission. Callback
+`_staged_safe_point` checks the same cancellation/deadline and spends both the invocation-wide and current-job
+allowances. Its private authority view expires after callback return or throw, so retaining the context grants no
+later spending or source access.
+
+Source projection uses Unicode-scalar offsets. With direct provenance `[10,14)`, child-local span `[1,3)` becomes
+direct source span `[11,13)`. With ordered segments `[ascii:0,2)` and `[unicode:7,9)`, child-local `[1,3)` crosses
+the boundary and remains `derived_text` with ordered segments `[ascii:1,2)` then `[unicode:7,8)`. Nested portable
+diagnostics receive the same projection. Invalid local ranges do not invent a location; oversized retained
+diagnostics become only the governed `staged_diagnostic_truncated` record.
+
+Marker-shaped callback results count atomically toward the cumulative result-node allowance so the sidecar does
+not consume the budget meant for parsed AST nodes. Atomic counting is not an authority exemption: the complete
+marker is still copied as finite acyclic plain data and recursively checked for callback, parser, registry, path,
+source, transaction, cancellation, host, and other live keys.
 
 This audit also corrected two inherited governance drifts without changing Dart behavior. The duplicated authored
 availability sentence now agrees with Dart's already-complete structured backend and rollout rows, guarded by a

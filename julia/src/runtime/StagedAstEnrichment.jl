@@ -1,10 +1,12 @@
 """
-Private caller-frozen authority for one-depth staged-AST enrichment.
+Private caller-frozen authority for one-depth and recursive staged-AST enrichment.
 
 The trusted caller supplies a completed immutable resolution snapshot and
 already-compiled callbacks. Dispatch performs no loading, compilation,
 provider query, filesystem access, or registry mutation. Returned values are
-detached before they are stitched into a detached parent-AST copy.
+detached before they are stitched into a detached parent-AST copy. Recursive
+dispatch queues only successfully returned markers breadth-first under one
+non-resetting resource authority and exact active lineage.
 """
 
 const _STAGED_AST_ENRICHMENT_ERROR_PREFIX =
@@ -68,11 +70,45 @@ end
 _staged_child_success(value) = _StagedChildExecution(true, value)
 _staged_child_failure(diagnostic) = _StagedChildExecution(false, diagnostic)
 
+mutable struct _StagedInvocationState
+    remaining_steps::Int
+    total_calls::Int
+    remaining_result_nodes::Int
+    remaining_diagnostic_bytes::Int
+end
+
+struct _StagedRecursiveAuthority
+    cancellation_token::Any
+    cancelled::Function
+    clock::Function
+    deadline::Int
+    remaining_steps::Int
+    required_steps::Int
+    max_depth::Int
+    max_calls::Int
+    total_calls::Int
+end
+
+mutable struct _StagedRuntimeAuthorityView
+    invocation::_StagedInvocationState
+    cancellation_token::Any
+    cancelled::Function
+    clock::Function
+    deadline::Int
+    job_remaining_steps::Int
+    provenance::Dict{String,Any}
+    stage_chain::Vector{Any}
+    job_id::String
+    resolved_spec_id::String
+    active::Bool
+end
+
 mutable struct _StagedRuntimeContext
     cursor::Int
     marks::Dict{String,Any}
     captures::Dict{String,Any}
     variables::Dict{String,Any}
+    runtime_authority::Union{Nothing,_StagedRuntimeAuthorityView}
 end
 
 _StagedRuntimeContext() = _StagedRuntimeContext(
@@ -80,6 +116,7 @@ _StagedRuntimeContext() = _StagedRuntimeContext(
     Dict{String,Any}(),
     Dict{String,Any}(),
     Dict{String,Any}(),
+    nothing,
 )
 
 function _staged_runtime_context_record(context::_StagedRuntimeContext)
@@ -88,6 +125,129 @@ function _staged_runtime_context_record(context::_StagedRuntimeContext)
         "marks" => _staged_copy_plain(context.marks),
         "captures" => _staged_copy_plain(context.captures),
         "variables" => _staged_copy_plain(context.variables),
+    )
+end
+
+function _staged_runtime_authority(context::_StagedRuntimeContext)
+    authority = context.runtime_authority
+    authority isa _StagedRuntimeAuthorityView ||
+        throw(_staged_snapshot_exception("recursive_execution_context"))
+    authority.active ||
+        throw(_staged_snapshot_exception("expired_recursive_execution_context"))
+    return authority
+end
+
+function _staged_authority_cancelled(authority)
+    return try
+        value = authority.cancelled(authority.cancellation_token)
+        value isa Bool || throw(_staged_snapshot_exception("cancelled_callback"))
+        value
+    catch error
+        error isa StagedAstEnrichmentException && rethrow()
+        throw(_staged_snapshot_exception("cancelled_callback"))
+    end
+end
+
+function _staged_authority_now(authority)
+    return try
+        value = authority.clock()
+        value isa Integer && !(value isa Bool) && value >= 0 ||
+            throw(_staged_snapshot_exception("clock_callback"))
+        Int(value)
+    catch error
+        error isa StagedAstEnrichmentException && rethrow()
+        throw(_staged_snapshot_exception("clock_callback"))
+    end
+end
+
+function _staged_remaining_steps(context::_StagedRuntimeContext)
+    authority = _staged_runtime_authority(context)
+    return min(
+        authority.invocation.remaining_steps,
+        authority.job_remaining_steps,
+    )
+end
+
+function _staged_cancellation_token(context::_StagedRuntimeContext)
+    return _staged_copy_plain(_staged_runtime_authority(context).cancellation_token)
+end
+
+_staged_deadline(context::_StagedRuntimeContext) =
+    _staged_runtime_authority(context).deadline
+
+function _staged_safe_point(context::_StagedRuntimeContext, cost::Integer)
+    cost isa Bool && throw(_staged_snapshot_exception("safe_point_cost"))
+    cost >= 0 || throw(_staged_snapshot_exception("safe_point_cost"))
+    owned_cost = try
+        Int(cost)
+    catch
+        throw(_staged_snapshot_exception("safe_point_cost"))
+    end
+    authority = _staged_runtime_authority(context)
+    base = Pair{String,Any}[
+        "stage_chain" => _staged_copy_plain(authority.stage_chain),
+        "job_id" => authority.job_id,
+    ]
+    if _staged_authority_cancelled(authority)
+        throw(_staged_enrichment_exception(
+            "staged_cancelled",
+            "execute";
+            fields = Pair{String,Any}[
+                base...,
+                "resolved_spec_id" => authority.resolved_spec_id,
+            ],
+        ))
+    end
+    if _staged_authority_now(authority) > authority.deadline
+        throw(_staged_enrichment_exception(
+            "staged_deadline_exceeded",
+            "execute";
+            fields = Pair{String,Any}[
+                base...,
+                "deadline" => authority.deadline,
+            ],
+        ))
+    end
+    effective = _staged_remaining_steps(context)
+    if effective < owned_cost
+        throw(_staged_enrichment_exception(
+            "staged_budget_exhausted",
+            "execute";
+            fields = Pair{String,Any}[
+                base...,
+                "remaining" => effective,
+            ],
+        ))
+    end
+    authority.invocation.remaining_steps -= owned_cost
+    authority.job_remaining_steps -= owned_cost
+    return _staged_remaining_steps(context)
+end
+
+function _staged_rebase_position(context::_StagedRuntimeContext, offset::Integer)
+    offset isa Bool && throw(_staged_snapshot_exception("local_source_offset"))
+    owned_offset = try
+        Int(offset)
+    catch
+        throw(_staged_snapshot_exception("local_source_offset"))
+    end
+    return _staged_rebase_position(
+        _staged_runtime_authority(context).provenance,
+        owned_offset,
+    )
+end
+
+function _staged_rebase_span(context::_StagedRuntimeContext, span)
+    return _staged_rebase_span(
+        _staged_runtime_authority(context).provenance,
+        span,
+    )
+end
+
+function _staged_rebase_diagnostic(context::_StagedRuntimeContext, diagnostic)
+    return _staged_rebase_diagnostic(
+        _staged_runtime_authority(context).provenance,
+        diagnostic,
     )
 end
 
@@ -171,6 +331,19 @@ struct _StagedDiscoveredMarker
     marker::Dict{String,Any}
 end
 
+struct _StagedStageFrame
+    tuple::Any
+    resolved_spec_id::String
+    top_rule::String
+    provenance::Dict{String,Any}
+    job_id::String
+end
+
+struct _StagedQueuedMarker
+    discovered::_StagedDiscoveredMarker
+    active_frames::Vector{_StagedStageFrame}
+end
+
 mutable struct _StagedPreparedPlan
     path::Vector{Any}
     marker::Dict{String,Any}
@@ -180,6 +353,9 @@ mutable struct _StagedPreparedPlan
     cache_key::String
     effective::Dict{String,Any}
     provenance_order::Vector{Any}
+    active_tuple::Any
+    active_frames::Vector{_StagedStageFrame}
+    preflight_diagnostic::Union{Nothing,Dict{String,Any}}
 end
 
 struct _StagedEnrichmentOutcome
@@ -187,6 +363,42 @@ struct _StagedEnrichmentOutcome
     sidecars::Vector{Dict{String,Any}}
     diagnostics::Vector{Dict{String,Any}}
     cache::Dict{String,Any}
+end
+
+struct _StagedRecursiveResources
+    remaining_steps::Int
+    total_calls::Int
+    remaining_result_nodes::Int
+    remaining_diagnostic_bytes::Int
+end
+
+function to_json(resources::_StagedRecursiveResources)
+    return Dict{String,Any}(
+        "remaining_steps" => resources.remaining_steps,
+        "total_calls" => resources.total_calls,
+        "remaining_result_nodes" => resources.remaining_result_nodes,
+        "remaining_diagnostic_bytes" => resources.remaining_diagnostic_bytes,
+    )
+end
+
+struct _StagedRecursiveOutcome
+    ast::Any
+    sidecars::Vector{Dict{String,Any}}
+    diagnostics::Vector{Dict{String,Any}}
+    cache::Dict{String,Any}
+    resources::_StagedRecursiveResources
+end
+
+function to_json(outcome::_StagedRecursiveOutcome)
+    return Dict{String,Any}(
+        "ast" => _staged_copy_plain(outcome.ast),
+        "sidecars" => Any[_staged_copy_plain(value) for value in outcome.sidecars],
+        "diagnostics" => Any[
+            _staged_copy_plain(value) for value in outcome.diagnostics
+        ],
+        "cache" => _staged_copy_plain(outcome.cache),
+        "resources" => to_json(outcome.resources),
+    )
 end
 
 function to_json(outcome::_StagedEnrichmentOutcome)
@@ -225,6 +437,17 @@ end
 function _staged_positive_int(object::AbstractDict, field::AbstractString)
     value = get(object, field, nothing)
     value isa Integer && !(value isa Bool) && value > 0 ||
+        throw(_staged_snapshot_exception(field))
+    return try
+        Int(value)
+    catch
+        throw(_staged_snapshot_exception(field))
+    end
+end
+
+function _staged_nonnegative_int(object::AbstractDict, field::AbstractString)
+    value = get(object, field, nothing)
+    value isa Integer && !(value isa Bool) && value >= 0 ||
         throw(_staged_snapshot_exception(field))
     return try
         Int(value)
@@ -328,6 +551,40 @@ function _staged_copy_plain(value)
         throw(_staged_snapshot_exception("plain_data"))
     end
     return walk(value)
+end
+
+"""Bind one immutable caller authority to a recursive staged invocation."""
+function _StagedRecursiveAuthority(
+    config,
+    cancelled::Function,
+    clock::Function,
+)
+    object = _staged_snapshot_object(config, "recursive_authority")
+    required = Set([
+        "cancellation_token",
+        "deadline",
+        "remaining_steps",
+        "required_steps",
+        "max_depth",
+        "max_calls",
+    ])
+    actual = Set(String(key) for key in keys(object))
+    valid = actual == required || actual == union(required, Set(["total_calls"]))
+    valid || throw(_staged_snapshot_exception("recursive_authority"))
+    object["cancellation_token"] === nothing &&
+        throw(_staged_snapshot_exception("recursive_authority"))
+    return _StagedRecursiveAuthority(
+        _staged_copy_plain(object["cancellation_token"]),
+        cancelled,
+        clock,
+        _staged_nonnegative_int(object, "deadline"),
+        _staged_nonnegative_int(object, "remaining_steps"),
+        _staged_nonnegative_int(object, "required_steps"),
+        _staged_positive_int(object, "max_depth"),
+        _staged_positive_int(object, "max_calls"),
+        haskey(object, "total_calls") ?
+            _staged_nonnegative_int(object, "total_calls") : 0,
+    )
 end
 
 function _staged_canonical_json(value)
@@ -1089,10 +1346,271 @@ function _staged_provenance_order(value)
     return order
 end
 
+function _staged_provenance_segments(value)
+    object = _staged_snapshot_object(value, "provenance")
+    rows = if get(object, "kind", nothing) == "direct_span"
+        Any[object]
+    elseif get(object, "kind", nothing) == "derived_text" &&
+            get(object, "policy", nothing) == "concatenate_in_order"
+        segments = _staged_snapshot_list(
+            get(object, "segments", nothing),
+            "provenance_segments",
+        )
+        isempty(segments) && throw(_staged_snapshot_exception("provenance_segments"))
+        segments
+    else
+        throw(_staged_snapshot_exception("provenance"))
+    end
+    return [begin
+        row = _staged_snapshot_object(raw, "provenance_segment")
+        get(row, "kind", nothing) == "direct_span" ||
+            throw(_staged_snapshot_exception("provenance_segment"))
+        source_id = _staged_required_string(row, "source_id")
+        start = _staged_nonnegative_int(row, "start")
+        stop = _staged_nonnegative_int(row, "end")
+        stop >= start || throw(_staged_snapshot_exception("provenance_end"))
+        provenance = _staged_required_string(row, "provenance")
+        (
+            source_id = source_id,
+            start = start,
+            stop = stop,
+            provenance = provenance,
+        )
+    end for raw in rows]
+end
+
+function _staged_strictly_decreases(parent, child)
+    parent_segments = _staged_provenance_segments(parent)
+    child_segments = _staged_provenance_segments(child)
+    parent_extent = _staged_provenance_extent(parent_segments)
+    child_extent = _staged_provenance_extent(child_segments)
+    return child_extent < parent_extent && all(
+        any(
+            active.source_id == candidate.source_id &&
+                active.start <= candidate.start &&
+                candidate.stop <= active.stop
+            for active in parent_segments
+        ) for candidate in child_segments
+    )
+end
+
+function _staged_provenance_extent(segments)
+    extent = 0
+    for segment in segments
+        segment_extent = segment.stop - segment.start
+        segment_extent <= typemax(Int) - extent ||
+            throw(_staged_snapshot_exception("provenance_extent"))
+        extent += segment_extent
+    end
+    return extent
+end
+
+function _staged_rebase_position(provenance::AbstractDict, offset::Int)
+    offset >= 0 || throw(_staged_snapshot_exception("local_source_offset"))
+    segments = _staged_provenance_segments(provenance)
+    total = _staged_provenance_extent(segments)
+    offset <= total ||
+        throw(_staged_snapshot_exception("local_source_offset_out_of_bounds"))
+    if length(segments) == 1
+        segment = only(segments)
+        return Dict{String,Any}(
+            "source_id" => segment.source_id,
+            "offset" => segment.start + offset,
+        )
+    end
+    cursor = 0
+    for segment in segments
+        segment_length = segment.stop - segment.start
+        if offset < cursor + segment_length
+            return Dict{String,Any}(
+                "source_id" => segment.source_id,
+                "offset" => segment.start + offset - cursor,
+            )
+        end
+        cursor += segment_length
+    end
+    last = segments[end]
+    return Dict{String,Any}(
+        "source_id" => last.source_id,
+        "offset" => last.stop,
+    )
+end
+
+function _staged_rebase_span(provenance, span)
+    object = _staged_snapshot_object(span, "local_source_span")
+    start = _staged_nonnegative_int(object, "start")
+    stop = _staged_nonnegative_int(object, "end")
+    start <= stop || throw(_staged_snapshot_exception("local_source_span_reversed"))
+    segments = _staged_provenance_segments(provenance)
+    total = _staged_provenance_extent(segments)
+    stop <= total ||
+        throw(_staged_snapshot_exception("local_source_span_out_of_bounds"))
+    if start == stop
+        position = _staged_rebase_position(provenance, start)
+        return Dict{String,Any}(
+            "kind" => "direct_span",
+            "source_id" => position["source_id"],
+            "start" => position["offset"],
+            "end" => position["offset"],
+            "provenance" => "staged_child_diagnostic",
+        )
+    end
+    rebased = Dict{String,Any}[]
+    cursor = 0
+    for segment in segments
+        segment_length = segment.stop - segment.start
+        local_stop = cursor + segment_length
+        overlap_start = max(start, cursor)
+        overlap_stop = min(stop, local_stop)
+        if overlap_start < overlap_stop
+            push!(rebased, Dict{String,Any}(
+                "kind" => "direct_span",
+                "source_id" => segment.source_id,
+                "start" => segment.start + overlap_start - cursor,
+                "end" => segment.start + overlap_stop - cursor,
+                "provenance" => segment.provenance,
+            ))
+        end
+        cursor = local_stop
+    end
+    length(rebased) == 1 && return only(rebased)
+    return Dict{String,Any}(
+        "kind" => "derived_text",
+        "policy" => "concatenate_in_order",
+        "segments" => Any[rebased...],
+    )
+end
+
+function _staged_rebase_diagnostic(provenance, diagnostic)
+    object = _staged_snapshot_object(diagnostic, "child_diagnostic")
+    if (haskey(object, "source_id") && haskey(object, "offset")) ||
+            get(object, "kind", nothing) in ("direct_span", "derived_text")
+        return _staged_copy_plain(object)
+    end
+    rebased = Dict{String,Any}()
+    for (key, value) in pairs(object)
+        projected = if key == "span" && value isa AbstractDict &&
+                !haskey(value, "kind") && haskey(value, "start") &&
+                haskey(value, "end")
+            _staged_rebase_span(provenance, value)
+        elseif key == "position" && value isa AbstractDict &&
+                !haskey(value, "source_id") && haskey(value, "offset")
+            position = _staged_snapshot_object(value, "local_position")
+            _staged_rebase_position(
+                provenance,
+                _staged_nonnegative_int(position, "offset"),
+            )
+        elseif (key == "offset" || endswith(key, "_offset")) &&
+                value isa Integer && !(value isa Bool) && value >= 0
+            _staged_rebase_position(
+                provenance,
+                _staged_nonnegative_int(
+                    Dict{String,Any}("offset" => value),
+                    "offset",
+                ),
+            )
+        elseif value isa AbstractDict
+            _staged_rebase_diagnostic(provenance, value)
+        elseif value isa AbstractVector
+            Any[
+                child isa AbstractDict ?
+                    _staged_rebase_diagnostic(provenance, child) :
+                    _staged_copy_plain(child)
+                for child in value
+            ]
+        else
+            _staged_copy_plain(value)
+        end
+        rebased[String(key)] = projected
+    end
+    return rebased
+end
+
+"""Evaluate one neutral chain/resource row through the runtime predicates."""
+function _evaluate_staged_chain_case(value)
+    object = _staged_snapshot_object(value, "chain_case")
+    cancelled = get(object, "cancelled", nothing)
+    cancelled isa Bool || throw(_staged_snapshot_exception("cancelled"))
+    now = _staged_nonnegative_int(object, "now")
+    deadline = _staged_nonnegative_int(object, "deadline")
+    remaining_steps = _staged_nonnegative_int(object, "remaining_steps")
+    required_steps = _staged_nonnegative_int(object, "required_steps")
+    depth = _staged_positive_int(object, "depth")
+    max_depth = _staged_positive_int(object, "max_depth")
+    calls = _staged_positive_int(object, "calls")
+    max_calls = _staged_positive_int(object, "max_calls")
+    same_lineage = get(object, "same_parser_top_lineage", nothing)
+    same_lineage isa Bool ||
+        throw(_staged_snapshot_exception("same_parser_top_lineage"))
+    diagnostic = if cancelled
+        "staged_cancelled"
+    elseif now > deadline
+        "staged_deadline_exceeded"
+    elseif remaining_steps < required_steps
+        "staged_budget_exhausted"
+    elseif depth > max_depth
+        "staged_depth_exceeded"
+    elseif calls > max_calls
+        "staged_call_limit_exceeded"
+    elseif get(object, "active_tuple", nothing) ==
+            get(object, "candidate_tuple", nothing)
+        "staged_cycle"
+    elseif same_lineage && !_staged_strictly_decreases(
+        get(object, "active_provenance", nothing),
+        get(object, "candidate_provenance", nothing),
+    )
+        "staged_chain_non_decreasing"
+    else
+        nothing
+    end
+    return Dict{String,Any}(
+        "accepted" => diagnostic === nothing,
+        "diagnostic" => diagnostic,
+    )
+end
+
+function _staged_static_chain_diagnostic(
+    sidecar,
+    active_tuple,
+    active_frames,
+)
+    for active in active_frames
+        if active.tuple == active_tuple
+            return Dict{String,Any}(
+                "code" => "staged_cycle",
+                "phase" => "execute",
+                "stage_chain" => _staged_copy_plain(sidecar["stage_chain"]),
+                "job_id" => sidecar["job_id"],
+                "active_tuple" => _staged_copy_plain(active.tuple),
+            )
+        end
+    end
+    for active in active_frames
+        if active.resolved_spec_id == sidecar["resolved_spec_id"] &&
+                active.top_rule == sidecar["top_rule"] &&
+                !_staged_strictly_decreases(
+                    active.provenance,
+                    sidecar["provenance"],
+                )
+            return Dict{String,Any}(
+                "code" => "staged_chain_non_decreasing",
+                "phase" => "execute",
+                "stage_chain" => _staged_copy_plain(sidecar["stage_chain"]),
+                "job_id" => sidecar["job_id"],
+                "provenance" => _staged_copy_plain(sidecar["provenance"]),
+                "active_provenance" => _staged_copy_plain(active.provenance),
+            )
+        end
+    end
+    return nothing
+end
+
 function _staged_prepare_plan(
     registry::_FrozenStagedRegistry,
     discovered::_StagedDiscoveredMarker,
     options::_StagedEnrichmentOptions,
+    stage_depth::Int = 1,
+    active_frames::Vector{_StagedStageFrame} = _StagedStageFrame[],
 )
     sidecar = _staged_marker_sidecar(discovered.marker)
     parser_spec_id = _staged_required_sidecar_string(sidecar, "parser_spec_id")
@@ -1162,11 +1680,19 @@ function _staged_prepare_plan(
         "top_rule" => top_rule,
         "job_id" => job_id,
         "cache_key" => cache_key,
-        "stage_depth" => 1,
-        "stage_chain" => Any[],
+        "stage_depth" => stage_depth,
+        "stage_chain" => Any[
+            _staged_copy_plain(frame.tuple) for frame in active_frames
+        ],
         "payload_digest" => _staged_payload_digest(text),
         "effective" => _staged_copy_plain(effective),
     ))
+    active_tuple = Any[
+        resolved_spec_id,
+        top_rule,
+        prepared["payload_digest"],
+        _staged_copy_plain(prepared["provenance"]),
+    ]
     return _StagedPreparedPlan(
         Any[discovered.path...],
         _staged_copy_plain(discovered.marker),
@@ -1176,6 +1702,13 @@ function _staged_prepare_plan(
         cache_key,
         effective,
         _staged_provenance_order(provenance),
+        active_tuple,
+        copy(active_frames),
+        _staged_static_chain_diagnostic(
+            prepared,
+            active_tuple,
+            active_frames,
+        ),
     )
 end
 
@@ -1420,10 +1953,36 @@ function _staged_detach_plain(value; maximum::Int)
     maximum >= 0 || throw(_staged_snapshot_exception("node_limit"))
     active = IdDict{Any,Nothing}()
     nodes = Ref(0)
+    function detached_marker(current, path::String)
+        owned = try
+            _staged_copy_plain(current)
+        catch
+            throw(_StagedDetachFailure(nodes[], path))
+        end
+        function reject_live_keys(value, current_path::String)
+            if value isa AbstractDict
+                for (key, child) in pairs(value)
+                    name = String(key)
+                    name in _STAGED_LIVE_RESULT_KEYS &&
+                        throw(_StagedDetachFailure(nodes[], "$current_path/$name"))
+                    reject_live_keys(child, "$current_path/$name")
+                end
+            elseif value isa AbstractVector
+                for (index, child) in enumerate(value)
+                    reject_live_keys(child, "$current_path/$(index - 1)")
+                end
+            end
+            return nothing
+        end
+        reject_live_keys(owned, path)
+        return owned
+    end
     function walk(current, path::String)
         nodes[] += 1
         nodes[] <= maximum || throw(_StagedDetachFailure(nodes[], "node_limit"))
-        if current === nothing || current isa Bool || current isa AbstractString
+        if _staged_is_marker(current)
+            return detached_marker(current, path)
+        elseif current === nothing || current isa Bool || current isa AbstractString
             return current isa AbstractString ? String(current) : current
         elseif current isa Integer && !(current isa Bool)
             return try
@@ -1480,8 +2039,11 @@ function _staged_copy_ast(value)
     end
 end
 
-function _staged_detach_result(value, plan::_StagedPreparedPlan)
-    maximum = Int(plan.effective["max_result_nodes"])
+function _staged_detach_result(
+    value,
+    plan::_StagedPreparedPlan;
+    maximum::Int = Int(plan.effective["max_result_nodes"]),
+)
     try
         detached = _staged_detach_plain(
             value;
@@ -1510,20 +2072,45 @@ function _staged_detach_result(value, plan::_StagedPreparedPlan)
     end
 end
 
-function _staged_portable_child_diagnostic(value)
+function _staged_portable_child_diagnostic(
+    value,
+    provenance = nothing;
+    rebase::Bool = false,
+)
     try
         detached = _staged_detach_plain(
             value;
             maximum = 256,
         ).value
-        detached isa AbstractDict && return _staged_copy_plain(detached)
+        if detached isa AbstractDict
+            portable = _staged_copy_plain(detached)
+            if rebase
+                return try
+                    _staged_rebase_diagnostic(provenance, portable)
+                catch
+                    Dict{String,Any}(
+                        "code" => get(
+                            portable,
+                            "code",
+                            "staged_child_exception",
+                        ),
+                        "source_projection" => "invalid_local_range",
+                    )
+                end
+            end
+            return portable
+        end
     catch error
         error isa _StagedDetachFailure || rethrow()
     end
     return Dict{String,Any}("code" => "staged_child_exception")
 end
 
-function _staged_child_failure_diagnostic(plan::_StagedPreparedPlan, child)
+function _staged_child_failure_diagnostic(
+    plan::_StagedPreparedPlan,
+    child;
+    rebase::Bool = false,
+)
     return Dict{String,Any}(
         "code" => "staged_child_failed",
         "phase" => "execute",
@@ -1539,8 +2126,25 @@ function _staged_child_failure_diagnostic(plan::_StagedPreparedPlan, child)
         "source_provenance" => _staged_copy_plain(plan.sidecar["provenance"]),
         "result_policy" => plan.sidecar["result_policy"],
         "failure_policy" => plan.sidecar["failure_policy"],
-        "child_diagnostic" => _staged_portable_child_diagnostic(child),
+        "child_diagnostic" => _staged_portable_child_diagnostic(
+            child,
+            plan.sidecar["provenance"];
+            rebase = rebase,
+        ),
     )
+end
+
+function _staged_recursive_callback_diagnostic(plan, child)
+    portable = _staged_portable_child_diagnostic(
+        child,
+        plan.sidecar["provenance"];
+        rebase = true,
+    )
+    if get(portable, "phase", nothing) == "execute" &&
+            get(portable, "job_id", nothing) == plan.sidecar["job_id"]
+        return portable
+    end
+    return _staged_child_failure_diagnostic(plan, child; rebase = true)
 end
 
 function _staged_exception_from_diagnostic(diagnostic)
@@ -1597,6 +2201,419 @@ function _staged_child_request(plan::_StagedPreparedPlan)
         "failure_policy" => sidecar["failure_policy"],
         "effective" => sidecar["effective"],
     ))
+end
+
+function _staged_recursive_child_request(
+    plan::_StagedPreparedPlan,
+    authority::_StagedRecursiveAuthority,
+    context::_StagedRuntimeContext,
+)
+    request = _staged_child_request(plan)
+    push!(request["stage_chain"], _staged_copy_plain(plan.active_tuple))
+    request["cancellation_token"] = _staged_copy_plain(
+        authority.cancellation_token,
+    )
+    request["deadline"] = authority.deadline
+    request["remaining_steps"] = _staged_remaining_steps(context)
+    return request
+end
+
+function _staged_recursive_runtime_context(
+    authority::_StagedRecursiveAuthority,
+    invocation::_StagedInvocationState,
+    plan::_StagedPreparedPlan,
+    job_remaining_steps::Int,
+)
+    return _StagedRuntimeContext(
+        0,
+        Dict{String,Any}(),
+        Dict{String,Any}(),
+        Dict{String,Any}(),
+        _StagedRuntimeAuthorityView(
+            invocation,
+            authority.cancellation_token,
+            authority.cancelled,
+            authority.clock,
+            authority.deadline,
+            job_remaining_steps,
+            _staged_copy_plain(plan.sidecar["provenance"]),
+            _staged_copy_plain(plan.sidecar["stage_chain"]),
+            String(plan.sidecar["job_id"]),
+            plan.resolved_spec_id,
+            true,
+        ),
+    )
+end
+
+function _staged_expire_runtime_context!(context::_StagedRuntimeContext)
+    authority = context.runtime_authority
+    authority isa _StagedRuntimeAuthorityView && (authority.active = false)
+    return nothing
+end
+
+function _staged_dispatch_resource_check(
+    authority::_StagedRecursiveAuthority,
+    invocation::_StagedInvocationState,
+    plan::_StagedPreparedPlan;
+    spend::Bool,
+)
+    base = Dict{String,Any}(
+        "phase" => "execute",
+        "stage_chain" => _staged_copy_plain(plan.sidecar["stage_chain"]),
+        "job_id" => plan.sidecar["job_id"],
+    )
+    if _staged_authority_cancelled(authority)
+        diagnostic = copy(base)
+        diagnostic["code"] = "staged_cancelled"
+        diagnostic["resolved_spec_id"] = plan.resolved_spec_id
+        return (diagnostic = diagnostic, job_remaining_steps = nothing)
+    end
+    if _staged_authority_now(authority) > authority.deadline
+        diagnostic = copy(base)
+        diagnostic["code"] = "staged_deadline_exceeded"
+        diagnostic["deadline"] = authority.deadline
+        return (diagnostic = diagnostic, job_remaining_steps = nothing)
+    end
+    spend || return (diagnostic = nothing, job_remaining_steps = nothing)
+
+    effective_remaining = min(
+        invocation.remaining_steps,
+        Int(plan.effective["max_steps"]),
+    )
+    if effective_remaining < authority.required_steps
+        diagnostic = copy(base)
+        diagnostic["code"] = "staged_budget_exhausted"
+        diagnostic["remaining"] = effective_remaining
+        return (diagnostic = diagnostic, job_remaining_steps = nothing)
+    end
+    depth = Int(plan.sidecar["stage_depth"])
+    if depth > authority.max_depth
+        diagnostic = copy(base)
+        diagnostic["code"] = "staged_depth_exceeded"
+        diagnostic["depth"] = depth
+        diagnostic["maximum"] = authority.max_depth
+        return (diagnostic = diagnostic, job_remaining_steps = nothing)
+    end
+    if invocation.total_calls >= authority.max_calls
+        diagnostic = copy(base)
+        diagnostic["code"] = "staged_call_limit_exceeded"
+        diagnostic["calls"] = invocation.total_calls == typemax(Int) ?
+            typemax(Int) : invocation.total_calls + 1
+        diagnostic["maximum"] = authority.max_calls
+        return (diagnostic = diagnostic, job_remaining_steps = nothing)
+    end
+    candidate_calls = invocation.total_calls + 1
+    invocation.remaining_steps -= authority.required_steps
+    invocation.total_calls = candidate_calls
+    return (
+        diagnostic = nothing,
+        job_remaining_steps = effective_remaining - authority.required_steps,
+    )
+end
+
+function _staged_bounded_diagnostic!(
+    invocation::_StagedInvocationState,
+    plan::_StagedPreparedPlan,
+    diagnostic,
+)
+    maximum = min(
+        Int(plan.effective["max_diagnostic_bytes"]),
+        invocation.remaining_diagnostic_bytes,
+    )
+    owned = _staged_copy_plain(diagnostic)
+    bytes = ncodeunits(_staged_canonical_json(owned))
+    if bytes > maximum
+        owned = Dict{String,Any}(
+            "code" => "staged_diagnostic_truncated",
+            "phase" => "execute",
+            "stage_chain" => _staged_copy_plain(plan.sidecar["stage_chain"]),
+            "job_id" => plan.sidecar["job_id"],
+            "maximum_bytes" => maximum,
+        )
+        bytes = ncodeunits(_staged_canonical_json(owned))
+    end
+    invocation.remaining_diagnostic_bytes = max(
+        0,
+        invocation.remaining_diagnostic_bytes - bytes,
+    )
+    return owned
+end
+
+function _staged_result_base_path(ast, plan::_StagedPreparedPlan)
+    if plan.sidecar["result_policy"] == "replace_marker"
+        return Any[plan.path...]
+    end
+    base = Any[plan.path[1:(end - 1)]...]
+    into = get(plan.sidecar, "into", nothing)
+    into isa AbstractString || throw(_staged_stitch_error(
+        plan,
+        "staged_stitch_target_missing";
+        fields = ["into" => "<missing>"],
+    ))
+    push!(base, String(into))
+    if plan.sidecar["result_policy"] == "append_child"
+        parent = _staged_parent_at(ast, plan.path)
+        target = parent.found && parent.value isa AbstractDict ?
+            get(parent.value, into, nothing) : nothing
+        target isa AbstractVector || throw(_staged_stitch_error(
+            plan,
+            "staged_append_target_invalid";
+            fields = ["into" => String(into)],
+        ))
+        push!(base, length(target))
+    end
+    return base
+end
+
+function _staged_collect_queued_markers!(
+    value,
+    path,
+    active_frames,
+    found,
+)
+    if _staged_is_marker(value)
+        push!(found, _StagedQueuedMarker(
+            _StagedDiscoveredMarker(
+                Any[path...],
+                _staged_copy_plain(value),
+            ),
+            copy(active_frames),
+        ))
+        return nothing
+    elseif value isa AbstractDict
+        for (key, child) in pairs(value)
+            key isa AbstractString || throw(_staged_snapshot_exception("child_result"))
+            _staged_collect_queued_markers!(
+                child,
+                Any[path..., String(key)],
+                active_frames,
+                found,
+            )
+        end
+    elseif value isa AbstractVector
+        for (index, child) in enumerate(value)
+            _staged_collect_queued_markers!(
+                child,
+                Any[path..., index - 1],
+                active_frames,
+                found,
+            )
+        end
+    end
+    return nothing
+end
+
+function _staged_execute_recursive_depth!(
+    registry::_FrozenStagedRegistry,
+    working,
+    plans,
+    authority::_StagedRecursiveAuthority,
+    invocation::_StagedInvocationState,
+)
+    next_depth = _StagedQueuedMarker[]
+    diagnostics = Dict{String,Any}[]
+    for plan in plans
+        _staged_validate_stitch_target(working, plan)
+        diagnostic = plan.preflight_diagnostic
+        detached_result = nothing
+        detached_nodes = 0
+
+        if diagnostic === nothing
+            dispatch = _staged_dispatch_resource_check(
+                authority,
+                invocation,
+                plan;
+                spend = true,
+            )
+            diagnostic = dispatch.diagnostic
+            if diagnostic === nothing
+                cached = _staged_cached_plan(registry, plan)
+                expected_capabilities = Tuple(
+                    String(value) for value in plan.effective["capabilities"]
+                )
+                if cached.resolved_spec_id != plan.resolved_spec_id ||
+                        cached.top_rule != plan.top_rule ||
+                        cached.effective_capabilities != expected_capabilities
+                    throw(_staged_snapshot_exception("plan_cache"))
+                end
+                context = _staged_recursive_runtime_context(
+                    authority,
+                    invocation,
+                    plan,
+                    dispatch.job_remaining_steps,
+                )
+                execution = try
+                    value = cached.compiled_authority(
+                        _staged_recursive_child_request(plan, authority, context),
+                        context,
+                    )
+                    value isa _StagedChildExecution ? value :
+                        _staged_child_failure(Dict{String,Any}(
+                            "code" => "staged_child_exception",
+                        ))
+                catch error
+                    error isa StagedAstEnrichmentException ?
+                        _staged_child_failure(to_json(error)) :
+                        _staged_child_failure(Dict{String,Any}(
+                            "code" => "staged_child_exception",
+                        ))
+                finally
+                    _staged_expire_runtime_context!(context)
+                end
+                if execution.succeeded
+                    post = _staged_dispatch_resource_check(
+                        authority,
+                        invocation,
+                        plan;
+                        spend = false,
+                    )
+                    diagnostic = post.diagnostic
+                    if diagnostic === nothing
+                        maximum = min(
+                            Int(plan.effective["max_result_nodes"]),
+                            invocation.remaining_result_nodes,
+                        )
+                        detached = _staged_detach_result(
+                            execution.value,
+                            plan;
+                            maximum = maximum,
+                        )
+                        if detached.succeeded
+                            detached_result = detached.value
+                            detached_nodes = _staged_detach_plain(
+                                detached_result;
+                                maximum = maximum,
+                            ).nodes
+                        else
+                            diagnostic = detached.value
+                        end
+                    end
+                else
+                    diagnostic = _staged_recursive_callback_diagnostic(
+                        plan,
+                        execution.value,
+                    )
+                end
+            end
+        end
+
+        if diagnostic !== nothing
+            bounded = _staged_bounded_diagnostic!(invocation, plan, diagnostic)
+            working = _staged_settle_failure!(
+                working,
+                plan,
+                bounded,
+                diagnostics,
+            )
+            continue
+        end
+
+        invocation.remaining_result_nodes = max(
+            0,
+            invocation.remaining_result_nodes - detached_nodes,
+        )
+        base_path = _staged_result_base_path(working, plan)
+        child_frames = copy(plan.active_frames)
+        push!(child_frames, _StagedStageFrame(
+            _staged_copy_plain(plan.active_tuple),
+            plan.resolved_spec_id,
+            plan.top_rule,
+            _staged_copy_plain(plan.sidecar["provenance"]),
+            String(plan.sidecar["job_id"]),
+        ))
+        _staged_collect_queued_markers!(
+            detached_result,
+            base_path,
+            child_frames,
+            next_depth,
+        )
+        working = _staged_stitch_value(working, plan, detached_result)
+        plan.sidecar["state"] = "succeeded"
+    end
+    return (
+        working = working,
+        next_depth = next_depth,
+        diagnostics = diagnostics,
+    )
+end
+
+"""Execute every callback-returned marker breadth-first under shared bounds."""
+function _enrich_staged_recursively(
+    registry::_FrozenStagedRegistry,
+    ast,
+    options,
+    authority::_StagedRecursiveAuthority,
+)
+    parsed_options = _parse_staged_enrichment_options(options)
+    invocation = _StagedInvocationState(
+        min(authority.remaining_steps, parsed_options.caller_ceilings.max_steps),
+        authority.total_calls,
+        parsed_options.caller_ceilings.max_result_nodes,
+        parsed_options.caller_ceilings.max_diagnostic_bytes,
+    )
+    working = _staged_copy_ast(ast)
+    discovered = _StagedDiscoveredMarker[]
+    _staged_discover_markers!(working, Any[], discovered)
+    queue = _StagedQueuedMarker[
+        _StagedQueuedMarker(marker, _StagedStageFrame[]) for marker in discovered
+    ]
+    sidecars = Dict{String,Any}[]
+    diagnostics = Dict{String,Any}[]
+    depth = 1
+
+    while !isempty(queue)
+        plans = _StagedPreparedPlan[
+            _staged_prepare_plan(
+                registry,
+                queued.discovered,
+                parsed_options,
+                depth,
+                queued.active_frames,
+            ) for queued in queue
+        ]
+        sort!(plans; lt = _staged_plan_lt)
+        _staged_validate_prepared_depth(working, plans)
+        for plan in plans
+            if plan.sidecar["failure_policy"] == "fail" &&
+                    plan.preflight_diagnostic !== nothing
+                bounded = _staged_bounded_diagnostic!(
+                    invocation,
+                    plan,
+                    plan.preflight_diagnostic,
+                )
+                throw(_staged_exception_from_diagnostic(bounded))
+            end
+        end
+        settled = _staged_execute_recursive_depth!(
+            registry,
+            working,
+            plans,
+            authority,
+            invocation,
+        )
+        working = settled.working
+        append!(sidecars, Dict{String,Any}[
+            _staged_copy_plain(plan.sidecar) for plan in plans
+        ])
+        append!(diagnostics, Dict{String,Any}[
+            _staged_copy_plain(value) for value in settled.diagnostics
+        ])
+        queue = settled.next_depth
+        depth += 1
+    end
+
+    return _StagedRecursiveOutcome(
+        _staged_copy_plain(working),
+        sidecars,
+        diagnostics,
+        _staged_cache_stats(registry),
+        _StagedRecursiveResources(
+            invocation.remaining_steps,
+            invocation.total_calls,
+            invocation.remaining_result_nodes,
+            invocation.remaining_diagnostic_bytes,
+        ),
+    )
 end
 
 """Execute exactly one complete marker depth through caller-frozen authority."""

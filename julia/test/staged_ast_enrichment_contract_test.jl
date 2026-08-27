@@ -1,4 +1,4 @@
-# FUTURE-PARITY-BACKLOG.14.7.6.2 — private Julia current-depth authority.
+# FUTURE-PARITY-BACKLOG.14.7.6.3 — private Julia recursive authority.
 #
 # This exact final-path consumer is intentionally omitted from ordinary Julia
 # and canonical CI discovery. Its focused repository-local command is:
@@ -6,9 +6,9 @@
 #   bash tools/run_julia_project_data.sh --project=julia --startup-file=no \
 #     --history-file=no julia/test/staged_ast_enrichment_contract_test.jl
 #
-# Every marker/provenance/current-depth assertion must remain GREEN. The sole
-# intentional RED is the final `.14.7.6.3` recursive-authority sentinel; this
-# leaf owns no recurrence, carrier authority, admission, or public surface.
+# Every marker/provenance/current-depth/recursive assertion must remain GREEN.
+# The sole intentional RED is the final `.14.7.6.4` carrier/admission sentinel;
+# this leaf owns no production carrier, admission, rollout, or public surface.
 
 using JSON3
 using LinkedSpecJulia
@@ -240,6 +240,33 @@ function _julia_staged_enrichment_registry(callback::Function)
     return LinkedSpecJulia._freeze_staged_registry(
         JULIA_STAGED_ENRICHMENT_CONTRACT["resolution_snapshot"],
         callbacks,
+    )
+end
+
+function _julia_staged_enrichment_recursive_authority(;
+    token = "cancel:open",
+    deadline = 100,
+    remaining_steps = 20,
+    required_steps = 1,
+    max_depth = 4,
+    max_calls = 10,
+    total_calls = nothing,
+    cancelled = _token -> false,
+    clock = () -> 1,
+)
+    config = Dict{String,Any}(
+        "cancellation_token" => token,
+        "deadline" => deadline,
+        "remaining_steps" => remaining_steps,
+        "required_steps" => required_steps,
+        "max_depth" => max_depth,
+        "max_calls" => max_calls,
+    )
+    total_calls === nothing || (config["total_calls"] = total_calls)
+    return LinkedSpecJulia._StagedRecursiveAuthority(
+        config,
+        cancelled,
+        clock,
     )
 end
 
@@ -1666,9 +1693,564 @@ Child:: I { marker = parse_job(entry_text(), hash("node_kind", "expression", "pa
         end
     end
 
-    @testset "LINKEDSPEC_STAGED_AST_ENRICHMENT_JULIA_RED: missing recursive_authority=[breadth_first,decreasing_chain,cycle,depth_calls,cancellation_resources,safe_points,source_rebasing]; current_depth=[pre_registered_resolution,immutable_cache,result_failure_policies] is available" begin
-        # Intentional RED: `.14.7.6.3` owns recursion, shared bounds, callback
-        # safe points, and original-source diagnostic rebasing.
+    @testset "recursive breadth-first authority shares exact lineage and resources" begin
+        for row in JULIA_STAGED_ENRICHMENT_CONTRACT["chain_cases"]
+            actual = LinkedSpecJulia._evaluate_staged_chain_case(row)
+            @test actual["accepted"] == row["accepted"]
+            @test actual["diagnostic"] == row["diagnostic"]
+        end
+
+        observed = Dict{String,Any}[]
+        cancellation_tokens = Any[]
+        retained_context = Ref{Any}(nothing)
+        recursive_registry = _julia_staged_enrichment_registry(
+            function(request, context)
+                push!(observed, Dict{String,Any}(
+                    "depth" => request["stage_depth"],
+                    "text" => request["text"],
+                    "stage_chain_length" => length(request["stage_chain"]),
+                    "context" => LinkedSpecJulia._staged_runtime_context_record(context),
+                    "token" => LinkedSpecJulia._staged_cancellation_token(context),
+                    "deadline" => LinkedSpecJulia._staged_deadline(context),
+                    "remaining_before" => LinkedSpecJulia._staged_remaining_steps(context),
+                ))
+                retained_context[] === nothing && (retained_context[] = context)
+                LinkedSpecJulia._staged_safe_point(context, 1)
+                context.cursor = request["stage_depth"]
+                context.marks["child"] = request["text"]
+                result = if request["text"] == "abcdef"
+                    Dict{String,Any}(
+                        "kind" => "branch",
+                        "child" => _julia_staged_enrichment_marker(
+                            "bc", 1, "replace_marker", nothing, "fail",
+                        ),
+                    )
+                elseif request["text"] == "ghijkl"
+                    Dict{String,Any}(
+                        "kind" => "branch",
+                        "child" => _julia_staged_enrichment_marker(
+                            "hi", 7, "replace_marker", nothing, "fail",
+                        ),
+                    )
+                else
+                    Dict{String,Any}(
+                        "kind" => "leaf",
+                        "text" => request["text"],
+                    )
+                end
+                return LinkedSpecJulia._staged_child_success(result)
+            end,
+        )
+        recursive_authority = _julia_staged_enrichment_recursive_authority(
+            token = "cancel:shared",
+            cancelled = token -> begin
+                push!(cancellation_tokens, deepcopy(token))
+                false
+            end,
+        )
+        recursive_input = Dict{String,Any}(
+            "nodes" => Any[
+                Dict{String,Any}(
+                    "payload" => _julia_staged_enrichment_marker(
+                        "abcdef", 0, "replace_marker", nothing, "fail",
+                    ),
+                ),
+                Dict{String,Any}(
+                    "payload" => _julia_staged_enrichment_marker(
+                        "ghijkl", 6, "replace_marker", nothing, "fail",
+                    ),
+                ),
+            ],
+        )
+        recursive = LinkedSpecJulia._enrich_staged_recursively(
+            recursive_registry,
+            recursive_input,
+            _julia_staged_enrichment_options(),
+            recursive_authority,
+        )
+        @test observed == Dict{String,Any}[
+            Dict(
+                "depth" => 1,
+                "text" => "abcdef",
+                "stage_chain_length" => 1,
+                "context" => Dict(
+                    "cursor" => 0,
+                    "marks" => Dict{String,Any}(),
+                    "captures" => Dict{String,Any}(),
+                    "variables" => Dict{String,Any}(),
+                ),
+                "token" => "cancel:shared",
+                "deadline" => 100,
+                "remaining_before" => 19,
+            ),
+            Dict(
+                "depth" => 1,
+                "text" => "ghijkl",
+                "stage_chain_length" => 1,
+                "context" => Dict(
+                    "cursor" => 0,
+                    "marks" => Dict{String,Any}(),
+                    "captures" => Dict{String,Any}(),
+                    "variables" => Dict{String,Any}(),
+                ),
+                "token" => "cancel:shared",
+                "deadline" => 100,
+                "remaining_before" => 17,
+            ),
+            Dict(
+                "depth" => 2,
+                "text" => "bc",
+                "stage_chain_length" => 2,
+                "context" => Dict(
+                    "cursor" => 0,
+                    "marks" => Dict{String,Any}(),
+                    "captures" => Dict{String,Any}(),
+                    "variables" => Dict{String,Any}(),
+                ),
+                "token" => "cancel:shared",
+                "deadline" => 100,
+                "remaining_before" => 15,
+            ),
+            Dict(
+                "depth" => 2,
+                "text" => "hi",
+                "stage_chain_length" => 2,
+                "context" => Dict(
+                    "cursor" => 0,
+                    "marks" => Dict{String,Any}(),
+                    "captures" => Dict{String,Any}(),
+                    "variables" => Dict{String,Any}(),
+                ),
+                "token" => "cancel:shared",
+                "deadline" => 100,
+                "remaining_before" => 13,
+            ),
+        ]
+        @test all(token == "cancel:shared" for token in cancellation_tokens)
+        @test [row["stage_depth"] for row in recursive.sidecars] == [1, 1, 2, 2]
+        @test [length(row["stage_chain"]) for row in recursive.sidecars] == [0, 0, 1, 1]
+        @test recursive.ast["nodes"][1]["payload"]["child"]["kind"] == "leaf"
+        @test recursive.ast["nodes"][2]["payload"]["child"]["text"] == "hi"
+        @test recursive.resources.remaining_steps == 12
+        @test recursive.resources.total_calls == 4
+        @test recursive.resources.remaining_result_nodes == 116
+        @test recursive.diagnostics == Dict{String,Any}[]
+        @test _julia_staged_enrichment_capture(() ->
+            LinkedSpecJulia._staged_safe_point(retained_context[], 0)) isa
+              LinkedSpecJulia.StagedAstEnrichmentException
+
+        routed_registry = _julia_staged_enrichment_registry(
+            function(request, _context)
+                start = Dict("abcd" => 0, "efgh" => 10, "ijkl" => 20)
+                result = haskey(start, request["text"]) ?
+                    _julia_staged_enrichment_marker(
+                        request["text"][2:3],
+                        start[request["text"]] + 1,
+                        "replace_marker",
+                        nothing,
+                        "fail",
+                    ) :
+                    Dict{String,Any}("kind" => "routed_leaf")
+                return LinkedSpecJulia._staged_child_success(result)
+            end,
+        )
+        routed = LinkedSpecJulia._enrich_staged_recursively(
+            routed_registry,
+            Dict{String,Any}(
+                "replace" => Dict{String,Any}(
+                    "control" => _julia_staged_enrichment_marker(
+                        "abcd", 0, "replace_field", "ast", "fail",
+                    ),
+                    "ast" => nothing,
+                ),
+                "sibling" => Dict{String,Any}(
+                    "control" => _julia_staged_enrichment_marker(
+                        "efgh", 10, "sibling_field", "ast", "fail",
+                    ),
+                ),
+                "append" => Dict{String,Any}(
+                    "control" => _julia_staged_enrichment_marker(
+                        "ijkl", 20, "append_child", "children", "fail",
+                    ),
+                    "children" => Any[],
+                ),
+            ),
+            _julia_staged_enrichment_options(),
+            _julia_staged_enrichment_recursive_authority(),
+        )
+        @test routed.ast["replace"]["ast"]["kind"] == "routed_leaf"
+        @test routed.ast["sibling"]["ast"]["kind"] == "routed_leaf"
+        @test routed.ast["append"]["children"][1]["kind"] == "routed_leaf"
+        @test count(row -> row["stage_depth"] == 1, routed.sidecars) == 3
+        @test count(row -> row["stage_depth"] == 2, routed.sidecars) == 3
+    end
+
+    @testset "recursive denials never reset lineage or cumulative ceilings" begin
+        cycle_calls = Ref(0)
+        cycle_marker = _julia_staged_enrichment_marker(
+            "abcdef", 0, "replace_marker", nothing, "fail",
+        )
+        cycle_registry = _julia_staged_enrichment_registry(
+            function(_request, _context)
+                cycle_calls[] += 1
+                return LinkedSpecJulia._staged_child_success(deepcopy(cycle_marker))
+            end,
+        )
+        cycle_error = _julia_staged_enrichment_capture(() ->
+            LinkedSpecJulia._enrich_staged_recursively(
+                cycle_registry,
+                Dict{String,Any}("payload" => cycle_marker),
+                _julia_staged_enrichment_options(),
+                _julia_staged_enrichment_recursive_authority(),
+            ))
+        @test _julia_staged_enrichment_error_code(cycle_error) == "staged_cycle"
+        @test _julia_staged_enrichment_diagnostic_is_complete(cycle_error)
+        @test cycle_calls[] == 1
+
+        nondecreasing_registry = _julia_staged_enrichment_registry(
+            (_request, _context) -> LinkedSpecJulia._staged_child_success(
+                _julia_staged_enrichment_marker(
+                    "uvwxyz", 0, "replace_marker", nothing, "fail",
+                ),
+            ),
+        )
+        nondecreasing = _julia_staged_enrichment_capture(() ->
+            LinkedSpecJulia._enrich_staged_recursively(
+                nondecreasing_registry,
+                Dict{String,Any}("payload" => cycle_marker),
+                _julia_staged_enrichment_options(),
+                _julia_staged_enrichment_recursive_authority(),
+            ))
+        @test _julia_staged_enrichment_error_code(nondecreasing) ==
+              "staged_chain_non_decreasing"
+        @test _julia_staged_enrichment_diagnostic_is_complete(nondecreasing)
+
+        nested_marker = _julia_staged_enrichment_marker(
+            "bc", 1, "replace_marker", nothing, "fail",
+        )
+        for (authority, expected) in [
+            (
+                _julia_staged_enrichment_recursive_authority(max_depth = 1),
+                "staged_depth_exceeded",
+            ),
+            (
+                _julia_staged_enrichment_recursive_authority(max_calls = 1),
+                "staged_call_limit_exceeded",
+            ),
+        ]
+            registry = _julia_staged_enrichment_registry(
+                (_request, _context) ->
+                    LinkedSpecJulia._staged_child_success(deepcopy(nested_marker)),
+            )
+            error = _julia_staged_enrichment_capture(() ->
+                LinkedSpecJulia._enrich_staged_recursively(
+                    registry,
+                    Dict{String,Any}("payload" => cycle_marker),
+                    _julia_staged_enrichment_options(),
+                    authority,
+                ))
+            @test _julia_staged_enrichment_error_code(error) == expected
+            @test _julia_staged_enrichment_diagnostic_is_complete(error)
+        end
+
+        for (authority, expected) in [
+            (
+                _julia_staged_enrichment_recursive_authority(
+                    remaining_steps = 0,
+                ),
+                "staged_budget_exhausted",
+            ),
+            (
+                _julia_staged_enrichment_recursive_authority(
+                    cancelled = _token -> true,
+                ),
+                "staged_cancelled",
+            ),
+            (
+                _julia_staged_enrichment_recursive_authority(
+                    deadline = 10,
+                    clock = () -> 11,
+                ),
+                "staged_deadline_exceeded",
+            ),
+        ]
+            calls = Ref(0)
+            registry = _julia_staged_enrichment_registry(
+                function(_request, _context)
+                    calls[] += 1
+                    return LinkedSpecJulia._staged_child_success(nothing)
+                end,
+            )
+            error = _julia_staged_enrichment_capture(() ->
+                LinkedSpecJulia._enrich_staged_recursively(
+                    registry,
+                    Dict{String,Any}(
+                        "payload" => _julia_staged_enrichment_marker(
+                            "x", 0, "replace_marker", nothing, "fail",
+                        ),
+                    ),
+                    _julia_staged_enrichment_options(),
+                    authority,
+                ))
+            @test _julia_staged_enrichment_error_code(error) == expected
+            @test _julia_staged_enrichment_diagnostic_is_complete(error)
+            @test calls[] == 0
+        end
+
+        node_calls = Ref(0)
+        node_registry = _julia_staged_enrichment_registry(
+            function(_request, _context)
+                node_calls[] += 1
+                return LinkedSpecJulia._staged_child_success(
+                    Dict{String,Any}("kind" => "leaf", "value" => 1),
+                )
+            end,
+        )
+        node_options = _julia_staged_enrichment_options()
+        node_options["caller_ceilings"]["max_result_nodes"] = 5
+        node_error = _julia_staged_enrichment_capture(() ->
+            LinkedSpecJulia._enrich_staged_recursively(
+                node_registry,
+                Dict{String,Any}(
+                    "nodes" => Any[
+                        Dict{String,Any}(
+                            "payload" => _julia_staged_enrichment_marker(
+                                "a", 0, "replace_marker", nothing, "fail",
+                            ),
+                        ),
+                        Dict{String,Any}(
+                            "payload" => _julia_staged_enrichment_marker(
+                                "b", 1, "replace_marker", nothing, "fail",
+                            ),
+                        ),
+                    ],
+                ),
+                node_options,
+                _julia_staged_enrichment_recursive_authority(),
+            ))
+        @test _julia_staged_enrichment_error_code(node_error) ==
+              "staged_result_node_limit_exceeded"
+        @test _julia_staged_enrichment_diagnostic_is_complete(node_error)
+        @test node_calls[] == 2
+
+        narrowed = LinkedSpecJulia._enrich_staged_recursively(
+            _julia_staged_enrichment_registry(
+                (_request, _context) -> LinkedSpecJulia._staged_child_success(nothing),
+            ),
+            Dict{String,Any}(
+                "payload" => _julia_staged_enrichment_marker(
+                    "x", 0, "replace_marker", nothing, "fail",
+                ),
+            ),
+            _julia_staged_enrichment_options(),
+            _julia_staged_enrichment_recursive_authority(
+                remaining_steps = 500,
+                required_steps = 0,
+            ),
+        )
+        @test narrowed.resources.remaining_steps == 200
+    end
+
+    @testset "recursive safe points and source projection stay ephemeral and bounded" begin
+        direct_registry = _julia_staged_enrichment_registry(
+            function(_request, context)
+                @test LinkedSpecJulia._staged_rebase_position(context, 1) ==
+                      Dict{String,Any}("source_id" => "ascii", "offset" => 2)
+                @test LinkedSpecJulia._staged_rebase_span(
+                    context,
+                    Dict{String,Any}("start" => 1, "end" => 3),
+                ) == Dict{String,Any}(
+                    "kind" => "direct_span",
+                    "source_id" => "ascii",
+                    "start" => 2,
+                    "end" => 4,
+                    "provenance" => "capture",
+                )
+                return LinkedSpecJulia._staged_child_failure(Dict{String,Any}(
+                    "code" => "child_parse_error",
+                    "position" => Dict{String,Any}("offset" => 1),
+                    "span" => Dict{String,Any}("start" => 1, "end" => 3),
+                    "end_offset" => 3,
+                ))
+            end,
+        )
+        direct = LinkedSpecJulia._enrich_staged_recursively(
+            direct_registry,
+            Dict{String,Any}(
+                "payload" => _julia_staged_enrichment_marker(
+                    "abcd", 1, "replace_marker", nothing, "keep_text",
+                ),
+            ),
+            _julia_staged_enrichment_options(),
+            _julia_staged_enrichment_recursive_authority(),
+        )
+        child = only(direct.diagnostics)["child_diagnostic"]
+        @test child["position"] == Dict{String,Any}(
+            "source_id" => "ascii", "offset" => 2,
+        )
+        @test child["span"]["kind"] == "direct_span"
+        @test child["span"]["start"] == 2
+        @test child["span"]["end"] == 4
+        @test child["end_offset"] == Dict{String,Any}(
+            "source_id" => "ascii", "offset" => 4,
+        )
+
+        derived_marker = _julia_staged_enrichment_marker(
+            "abcd", 0, "replace_marker", nothing, "keep_text",
+        )
+        derived_marker["staged_parse_job_v2"]["provenance"] = Dict{String,Any}(
+            "kind" => "derived_text",
+            "policy" => "concatenate_in_order",
+            "segments" => Any[
+                Dict{String,Any}(
+                    "kind" => "direct_span",
+                    "source_id" => "ascii",
+                    "start" => 0,
+                    "end" => 2,
+                    "provenance" => "capture",
+                ),
+                Dict{String,Any}(
+                    "kind" => "direct_span",
+                    "source_id" => "unicode",
+                    "start" => 1,
+                    "end" => 3,
+                    "provenance" => "capture",
+                ),
+            ],
+        )
+        derived_registry = _julia_staged_enrichment_registry(
+            function(_request, context)
+                @test LinkedSpecJulia._staged_rebase_position(context, 2) ==
+                      Dict{String,Any}("source_id" => "unicode", "offset" => 1)
+                span = LinkedSpecJulia._staged_rebase_span(
+                    context,
+                    Dict{String,Any}("start" => 1, "end" => 3),
+                )
+                @test span["kind"] == "derived_text"
+                @test span["policy"] == "concatenate_in_order"
+                @test length(span["segments"]) == 2
+                @test LinkedSpecJulia._staged_rebase_diagnostic(
+                    context,
+                    Dict{String,Any}(
+                        "code" => "child",
+                        "span" => Dict{String,Any}("start" => 1, "end" => 3),
+                    ),
+                )["span"] == span
+                return LinkedSpecJulia._staged_child_failure(Dict{String,Any}(
+                    "code" => "child_parse_error",
+                    "span" => Dict{String,Any}("start" => 1, "end" => 3),
+                ))
+            end,
+        )
+        derived = LinkedSpecJulia._enrich_staged_recursively(
+            derived_registry,
+            Dict{String,Any}("payload" => derived_marker),
+            _julia_staged_enrichment_options(),
+            _julia_staged_enrichment_recursive_authority(),
+        )
+        derived_span = only(derived.diagnostics)["child_diagnostic"]["span"]
+        @test derived_span["policy"] == "concatenate_in_order"
+        @test length(derived_span["segments"]) == 2
+
+        invalid_range = LinkedSpecJulia._enrich_staged_recursively(
+            _julia_staged_enrichment_registry(
+                (_request, _context) -> LinkedSpecJulia._staged_child_failure(
+                    Dict{String,Any}(
+                        "code" => "child_parse_error",
+                        "span" => Dict{String,Any}("start" => 1, "end" => 99),
+                    ),
+                ),
+            ),
+            Dict{String,Any}(
+                "payload" => _julia_staged_enrichment_marker(
+                    "abcd", 0, "replace_marker", nothing, "keep_text",
+                ),
+            ),
+            _julia_staged_enrichment_options(),
+            _julia_staged_enrichment_recursive_authority(),
+        )
+        @test only(invalid_range.diagnostics)["child_diagnostic"] ==
+              Dict{String,Any}(
+                  "code" => "child_parse_error",
+                  "source_projection" => "invalid_local_range",
+              )
+
+        diagnostic_options = _julia_staged_enrichment_options()
+        diagnostic_options["caller_ceilings"]["max_diagnostic_bytes"] = 64
+        truncated = LinkedSpecJulia._enrich_staged_recursively(
+            _julia_staged_enrichment_registry(
+                (_request, _context) -> LinkedSpecJulia._staged_child_failure(
+                    Dict{String,Any}(
+                        "code" => "child_parse_error",
+                        "detail" => repeat("x", 1024),
+                    ),
+                ),
+            ),
+            Dict{String,Any}(
+                "payload" => _julia_staged_enrichment_marker(
+                    "bad", 0, "replace_marker", nothing, "keep_text",
+                ),
+            ),
+            diagnostic_options,
+            _julia_staged_enrichment_recursive_authority(),
+        )
+        @test only(truncated.diagnostics)["code"] ==
+              "staged_diagnostic_truncated"
+        @test truncated.resources.remaining_diagnostic_bytes == 0
+
+        cancel_checks = Ref(0)
+        safe_cancel_authority = _julia_staged_enrichment_recursive_authority(
+            cancelled = _token -> begin
+                cancel_checks[] += 1
+                cancel_checks[] >= 2
+            end,
+        )
+        safe_registry = _julia_staged_enrichment_registry(
+            function(_request, context)
+                LinkedSpecJulia._staged_safe_point(context, 0)
+                return LinkedSpecJulia._staged_child_success(nothing)
+            end,
+        )
+        safe_cancelled = _julia_staged_enrichment_capture(() ->
+            LinkedSpecJulia._enrich_staged_recursively(
+                safe_registry,
+                Dict{String,Any}(
+                    "payload" => _julia_staged_enrichment_marker(
+                        "x", 0, "replace_marker", nothing, "fail",
+                    ),
+                ),
+                _julia_staged_enrichment_options(),
+                safe_cancel_authority,
+            ))
+        @test _julia_staged_enrichment_error_code(safe_cancelled) ==
+              "staged_cancelled"
+
+        clock_checks = Ref(0)
+        safe_deadline_authority = _julia_staged_enrichment_recursive_authority(
+            deadline = 10,
+            clock = () -> begin
+                clock_checks[] += 1
+                clock_checks[] == 1 ? 1 : 11
+            end,
+        )
+        safe_deadline = _julia_staged_enrichment_capture(() ->
+            LinkedSpecJulia._enrich_staged_recursively(
+                safe_registry,
+                Dict{String,Any}(
+                    "payload" => _julia_staged_enrichment_marker(
+                        "x", 0, "replace_marker", nothing, "fail",
+                    ),
+                ),
+                _julia_staged_enrichment_options(),
+                safe_deadline_authority,
+            ))
+        @test _julia_staged_enrichment_error_code(safe_deadline) ==
+              "staged_deadline_exceeded"
+    end
+
+    @testset "LINKEDSPEC_STAGED_AST_ENRICHMENT_JULIA_RED: missing fresh_carriers=[native,reconstructed,generated_plan,emitted_module],production_seam,ordinary_canonical_admission,rollout_parent_closure; recursive_authority=[breadth_first,decreasing_chain,cycle,depth_calls,cancellation_resources,safe_points,source_rebasing] is available" begin
+        # Intentional RED: `.14.7.6.4` owns fresh production carriers,
+        # integration, admission, rollout promotion, and parent closure.
         @test false
     end
 end

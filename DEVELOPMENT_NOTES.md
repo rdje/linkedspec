@@ -9,6 +9,24 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-27 (`FUTURE-PARITY-BACKLOG.14.7.6.3` — Julia staged recursive authority): exact clean activation is
+  current-depth commit `8af7f14b`; scope owns only private breadth-first recurrence, exact lineage, shared bounds,
+  callback safe points/expiry, source projection, the same consumer's `.4` RED, and synchronized truth.
+- `_enrich_staged_recursively` preserves the one-depth API and queues only successfully detached returned markers
+  by their exact replace/field/sibling/append stitch paths. Every depth fully prepares, reserves, and typed-sorts
+  before callbacks; old inert markers are never rescanned.
+- Frames carry resolved parser/top, exact UTF-8 payload digest, and full provenance. Exact repeats cycle; same-
+  parser/top lineage requires contained segments and strictly smaller total Unicode-scalar extent.
+- Cancellation identity/probe, clock/absolute deadline, steps, seeded calls, depth/calls, cumulative result nodes,
+  and canonical diagnostic bytes share one non-resetting invocation. Fresh callback registers and authority views
+  expire after return/throw; safe points spend both invocation and job ceilings.
+- Direct/ordered-derived positions, spans, and nested diagnostics rebase to original source. Cross-segment spans
+  stay ordered derived text, invalid local ranges fail closed, and byte overflow uses the truncation sentinel.
+- The explicit consumer is 386 GREEN/one `.4` RED. Complete Julia including 105/105 corpus, neutral 92 mutations,
+  all direct ledgers, Perl 143, Rust 1/1 including its independently compiled emitted carrier in 1,418.54 seconds,
+  and Dart 19 pass; Julia remains dormant with discovery, rollout, formats, public/outward behavior, carriers/
+  admission, Lua, and other backends unchanged. Knowledge is 898 facts/7,627 keys; the sole-facing book renders
+  with the private recursive examples.
 - 2026-08-27 (`FUTURE-PARITY-BACKLOG.14.7.6.2` — Julia staged current-depth authority): exact clean activation
   is marker/provenance commit `13c8a611`; scope owns only private general-v2 resolution/cache, one complete marker
   depth, sibling isolation, detached atomic policies, the same consumer's `.3` RED, and synchronized truth.

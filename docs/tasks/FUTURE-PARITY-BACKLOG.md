@@ -7,8 +7,8 @@
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
 - Last updated: `2026-08-27` (progressive `.14.6`, staged neutral `.14.7.0-.2`, complete Perl `.14.7.3.0-.4`,
-  Rust `.14.7.4.0-.4`, and Dart `.14.7.5.0-.4` are closed; Julia dormant/marker `.14.7.6.0-.1` are committed,
-  current-depth authority `.14.7.6.2` is focused-signoff-complete, and `.3` is next after its atomic commit)
+  Rust `.14.7.4.0-.4`, and Dart `.14.7.5.0-.4` are closed; Julia dormant through recursive authority
+  `.14.7.6.0-.3` is complete and carrier/admission closeout `.14.7.6.4` is next after atomic `.3`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -109,13 +109,13 @@ perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG
 recurrence, and public no-drift. Staged audit/diagnostic/neutral `.14.7.0-.2` are committed; Perl `.3`, Rust `.4`,
 and Dart `.5` each privately implement and admit the complete marker/provenance, caller-frozen authority,
 breadth-first recursion, fresh native/reconstructed/generated/emitted carriers, and exact ordinary/canonical
-consumer. Neutral governance is now 92 mutations with those three backends complete. Julia `.14.7.6.0-.2` freeze
-and implement its still-dormant private declaration and current-depth boundaries: an exclusive live-proven marker,
-caller-frozen pure resolution/cache, complete-depth target reservation and typed order, fresh sibling state,
-detached atomic stitching, and every result/failure policy. The consumer is 309 GREEN/one exact `.3` recurrence/
-bounds/safe-point/rebasing RED and remains absent from ordinary/canonical discovery. Julia rollout, v1/v2 formats,
-public/outward behavior, and the neutral 92-mutation count do not move. `.14.7.6.3` is next after atomic `.2`;
-shared Lua `.7`, recurrence `.8`,
+consumer. Neutral governance is now 92 mutations with those three backends complete. Julia `.14.7.6.0-.3` freeze
+and implement its still-dormant private declaration, current-depth, and recursive boundaries: an exclusive live-
+proven marker, caller-frozen pure resolution/cache, complete-depth breadth-first execution, exact active lineage,
+non-resetting shared resources, expiring safe points, typed source rebasing, detached atomic stitching, and every
+result/failure policy. The consumer is 386 GREEN/one exact `.4` carrier/admission RED and remains absent from
+ordinary/canonical discovery. Julia rollout, v1/v2 formats, public/outward behavior, and the neutral 92-mutation
+count do not move. `.14.7.6.4` is next after atomic `.3`; shared Lua `.7`, recurrence `.8`,
 public `.9`, recomposition `.10`, and combined program-wide `.14.8` retain their frozen owners.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent

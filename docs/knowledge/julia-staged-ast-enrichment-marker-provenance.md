@@ -19,8 +19,9 @@ status: current private marker/provenance boundary; dormant and not publicly adm
 tags: [julia, staged-parsing, parse-job, actionir, provenance, source-location, regex]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.6.1 lowers only exact scalar assignment-form name = parse_job(text_expr, literal_hash_options) to ActionStagedParseJobExpr. The node stores immutable direct/derived text plans and normalized literal options; residual generic/receiver/append/indexed forms, malformed identities/policies/targets/capabilities, transformed or copied text, and recognition-reachable declarations reject before execution. Julia RegexMatch already supplies exact absolute 1-based UTF-8 code-unit offsets for each capture. RuntimeRegexMatch retains participating capture ranges as a private immutable tuple, omitted from JSON; repeated equal captures therefore remain distinct without substring search or regex reconstruction. StagedParseJobDeclaration converts those live boundaries through the existing SourceLocation.position_from_codeunit/direct_span/derived_text authority, materializes exact text, and returns a detached STAGED_PARSE_JOB_MARKER with a staged_parse_job_v2 sidecar containing only normalized logical options, exact text, typed direct or nonempty concatenate_in_order provenance, and origin. Native, SpecFile-JSON reconstructed, generated-plan, and independently included emitted-module routes return the same marker. The explicit dormant consumer is 131 GREEN/one intentional .14.7.6.2 resolution/cache/result/failure authority RED; ordinary/canonical discovery, Julia rollout, function-body v1, generated format, public/outward surfaces, and neutral lifecycle/mutation count remain unchanged."
 evidence_update_2026_08_27_current_depth_authority: "FUTURE-PARITY-BACKLOG.14.7.6.2 consumes this unchanged inert carrier only after the complete AST returns. Private caller-frozen resolution/cache, one complete deterministic marker depth, fresh sibling state, detachment, target reservation, and all four result/three failure policies are now present. The same consumer is 309 GREEN/one .14.7.6.3 recurrence/bounds/safe-point/rebased-diagnostic RED; marker construction, four logical routes, v1, discovery, rollout, format, neutral governance, and public/outward truth remain unchanged."
+evidence_update_2026_08_27_recursive_authority: "FUTURE-PARITY-BACKLOG.14.7.6.3 consumes callback-returned markers only through the new recursive entrypoint. Successful detached markers inherit exact producing lineage and are mapped through their stitch destination; the one-depth API still leaves them inert. The consumer is 386 GREEN/one .14.7.6.4 carrier/admission RED, while marker construction and its four logical carrier observations remain unchanged."
 reverify:
-  - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no julia/test/staged_ast_enrichment_contract_test.jl 2>&1 | rg '309 passed, 1 failed|missing recursive_authority=\\[breadth_first,decreasing_chain,cycle,depth_calls,cancellation_resources,safe_points,source_rebasing\\]'"
+  - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no julia/test/staged_ast_enrichment_contract_test.jl 2>&1 | rg '386 passed, 1 failed|missing fresh_carriers=\\[native,reconstructed,generated_plan,emitted_module\\]'"
   - "rg -n 'ActionStagedParseJobExpr|_action_staged_parse_job_assignment|staged_capture_codeunit_span|construct_staged_parse_job_marker|validate_staged_parse_job_contract' julia/src"
   - "rg -n 'staged_ast_enrichment_contract_test.jl' julia/test/runtests.jl tools/run_ci_local.sh"
 ---
@@ -50,10 +51,11 @@ Neutral direct/reversed/out-of-range/empty-derived/source-mismatch/copied-text-s
 `staged_source_provenance_invalid` diagnostic family.
 
 The final-path consumer remains deliberately dormant. Its native, normalized reconstructed, generated-plan, and
-independently included emitted-module routes still agree on the logical marker. The same consumer is now 309
-GREEN assertions; its only failure is the `.14.7.6.3` sentinel for recursive scheduling, shared bounds and safe
-points, and source-rebased diagnostics.
+independently included emitted-module routes still agree on the logical marker. The same consumer is now 386
+GREEN assertions; its only failure is the `.14.7.6.4` sentinel for fresh production carriers, integration,
+admission, rollout, and parent closure.
 
 Related: [[julia-staged-ast-enrichment-dormant-red]], [[general-staged-ast-enrichment-neutral-contract]],
-[[julia-staged-ast-enrichment-current-depth-authority]], [[typed-source-location-runtime-rollout-plan]], and
+[[julia-staged-ast-enrichment-current-depth-authority]],
+[[julia-staged-ast-enrichment-recursive-authority]], [[typed-source-location-runtime-rollout-plan]], and
 [[julia-progressive-span-dispatch-carriers]].

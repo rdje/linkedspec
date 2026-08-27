@@ -10,6 +10,30 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-27 — FUTURE-PARITY-BACKLOG.14.7.6.3 — implement Julia staged recursive authority
+
+- Preserved the private one-depth entrypoint and added a separate breadth-first Julia scheduler that queues only
+  markers found in successful detached callback results. Returned paths map through each exact stitch policy, so
+  old inert AST markers are never rescanned or granted a new lineage.
+- Added active frames over normalized resolved parser, selected top, exact UTF-8 payload digest, and full typed
+  provenance. Exact tuples reject as cycles; same-parser/top recursion requires every child segment to be
+  contained in an active segment and the total Unicode-scalar extent to be strictly smaller.
+- Added one non-resetting invocation authority for cancellation identity/probe, caller clock/absolute deadline,
+  steps, seeded calls, depth/call maxima, cumulative result nodes, and canonical diagnostic bytes. Fresh callback
+  contexts expose safe-point spending and expire after return or throw.
+- Added direct and ordered-derived child-local position/span/diagnostic projection. Cross-segment spans remain
+  `derived_text` / `concatenate_in_order`, invalid local ranges fail closed, and oversized retained diagnostics
+  use the governed truncation sentinel.
+- Made valid marker-shaped results atomic for cumulative node accounting while retaining deep plain-data and live-
+  key denial. Added exact next-depth path proofs for replace-marker, replace-field, sibling-field, and append-child.
+- Advanced the same dormant consumer to 386 GREEN assertions and one exact `.14.7.6.4` carrier/admission RED.
+  Complete ordinary Julia including 105/105 corpus, neutral 92 mutations, direct ledgers, Perl 143, Rust 1/1
+  including its emitted carrier, and Dart 19 pass; discovery, rollout, formats, public behavior, and other
+  backends do not move.
+- Added the Julia recursive-authority Knowledge card, regenerating 898 facts/7,627 question keys, and synchronized
+  ADR `0088`, related facts, roadmaps, architecture, Toolbox, task/index, bounded live/change/engineering docs,
+  memory, and the sole-facing mdBook.
+
 ## 2026-08-27 — FUTURE-PARITY-BACKLOG.14.7.6.2 — implement Julia staged current-depth authority
 
 - Added a separate private caller-frozen Julia general-v2 registry containing owned normalized logical outcomes

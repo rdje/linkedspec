@@ -423,6 +423,28 @@ markers remain inert. The same consumer is 309 GREEN/one `.14.7.6.3` breadth-fir
 safe-point, and source-rebasing RED. Function-body v1, marker/provenance and four logical routes, neutral 92-
 mutation governance, discovery, rollout, generated format, public/outward behavior, and other backends do not move.
 
+Julia recursive leaf `FUTURE-PARITY-BACKLOG.14.7.6.3` preserves that one-depth API and adds the separate private
+`_enrich_staged_recursively` scheduler. It records only marker paths found inside successful detached callback
+results, maps each through its exact result-policy stitch destination, and carries the producer's active frames;
+it never rescans the complete AST or reactivates old inert markers. Every next depth is completely resolved,
+target-reserved, and typed-sorted before callback one. Frames contain normalized resolved parser, selected top,
+exact UTF-8 payload digest, and full direct/ordered-derived provenance. Exact repeats reject as cycles, while
+same-parser/top recurrence requires segment containment plus strictly smaller total Unicode-scalar extent.
+
+One immutable caller authority and mutable invocation record span every depth: cancellation identity/probe,
+caller clock and absolute deadline, steps, seeded calls, depth/call maxima, cumulative result nodes, and canonical
+UTF-8 diagnostic bytes never reset. Each callback gets fresh parser-local registers and an ephemeral authority
+view; dispatch and safe points check cancellation/deadline and spend the stricter invocation/job work allowance,
+then the view expires after return or throw. Child-local direct and ordered-derived positions, spans, and nested
+diagnostics project to original source; cross-segment spans remain `derived_text` / `concatenate_in_order`, invalid
+local ranges fail closed, and oversized retained diagnostics use only the governed truncation sentinel. Valid
+marker-shaped results count atomically toward cumulative result nodes but remain deeply plain/live-key validated.
+
+The same explicitly unrouted consumer is 386 GREEN/one `.14.7.6.4` fresh-native/reconstructed/generated/emitted
+carrier, production-integration, ordinary/canonical-admission, rollout, and parent-closure RED. Complete ordinary
+Julia including 105/105 corpus, neutral 92-mutation governance, and admitted Perl/Rust/Dart projections remain
+GREEN without moving function-body v1, generated format, public/outward truth, or another backend.
+
 ## Links
 
 - Owning task: `docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md`
@@ -441,4 +463,5 @@ mutation governance, discovery, rollout, generated format, public/outward behavi
   `docs/knowledge/dart-staged-ast-enrichment-carriers-admission.md` plus
   `docs/knowledge/julia-staged-ast-enrichment-dormant-red.md` and
   `docs/knowledge/julia-staged-ast-enrichment-marker-provenance.md` plus
-  `docs/knowledge/julia-staged-ast-enrichment-current-depth-authority.md`
+  `docs/knowledge/julia-staged-ast-enrichment-current-depth-authority.md` plus
+  `docs/knowledge/julia-staged-ast-enrichment-recursive-authority.md`

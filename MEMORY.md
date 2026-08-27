@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `13c8a611d2ded06b098ff16fb3128e5f57082ce7` — exact clean Julia marker/provenance base for task-tree-first `FUTURE-PARITY-BACKLOG.14.7.6.2`; brief cleared; no push.
-- latest_completed_leaf: intended `FUTURE-PARITY-BACKLOG.14.7.6.2 - implement Julia staged current-depth authority` from activation commit `13c8a611d2ded06b098ff16fb3128e5f57082ce7`.
-- active_work_unit: none after intended atomic `.14.7.6.2`; `.14.7.6.3` remains pending task-tree-first activation.
-- next_action: commit `.14.7.6.2`, clear/verify the brief and exact clean handoff, then activate `.14.7.6.3` task-tree-first.
-- in_flight_uncommitted: none in the intended post-landing handoff; no background job.
+- activation_commit: `8af7f14b4aad64439e8e2320e0f89f813d182131` — exact clean Julia current-depth base for task-tree-first `FUTURE-PARITY-BACKLOG.14.7.6.3`; brief cleared; no push.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.7.6.3 - implement Julia staged recursive authority` (intended atomic handoff from activation commit `8af7f14b4aad64439e8e2320e0f89f813d182131`; commit identity assigned by Git).
+- active_work_unit: none after intended atomic `.14.7.6.3` handoff; `.14.7.6.4` must activate task-tree-first only from the verified clean commit.
+- next_action: commit `.14.7.6.3`, clear the brief, verify the exact clean handoff and post-commit pointer, then activate `.14.7.6.4` for fresh Julia carriers, production integration, ordinary/canonical admission, rollout, and parent closure.
+- in_flight_uncommitted: none in the intended post-landing state; the completed `.14.7.6.3` candidate is fully verified and owned by its atomic commit.
 - blockers: none.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -55,5 +55,5 @@
   Dart `.14.7.5.0-.4` add the historical dormant boundary, exclusive live-proven marker, pure caller-frozen resolution/cache,
   isolated atomic policies, breadth-first recurrence, strict lineage/shared resources, expiring safe points, typed
   rebasing, complete-depth target reservation, and a fresh host-only post-parent seed across four production routes.
-  Dart is 19/19 and rollout-complete. Julia `.14.7.6.0-.2` provide its dormant exclusive marker, native-capture-proven typed provenance, caller-frozen pure resolution/cache, isolated current-depth execution, detached atomic stitching, and all policies at 309 GREEN/one `.3` recursive-authority RED. Rollout, formats, public behavior, and governance stay unchanged, and `.14.7.6.3` is next after atomic `.2`.
-- latest_bootstrap_read: 2026-08-27 — roadmap, codebase, mdBook, continuity, task tree, Knowledge, ADR, Toolbox, neutral contract, Julia marker/provenance, registry/generated routes, and admitted current-depth precedents are reviewed; `.14.7.6.2` is focused-signoff-complete from clean `13c8a611`, with `.3` next after landing.
+  Dart is 19/19 and rollout-complete. Julia `.14.7.6.0-.3` provide its dormant exclusive marker, native-capture-proven typed provenance, caller-frozen pure resolution/cache, isolated current-depth execution, detached atomic policies, breadth-first recurrence, strict lineage, shared resources, expiring safe points, and typed rebasing at 386 GREEN/one `.4` carrier/admission RED. Rollout, formats, public behavior, and governance stay unchanged, and `.14.7.6.4` is next after atomic `.3`.
+- latest_bootstrap_read: 2026-08-27 — roadmap, codebase, mdBook, continuity, task tree, Knowledge, ADR, Toolbox, neutral contract, Julia current-depth authority, and admitted recursive precedents are reviewed; `.14.7.6.3` is focused-signoff-complete from clean `8af7f14b` and `.4` is next after landing.
