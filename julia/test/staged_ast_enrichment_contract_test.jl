@@ -430,7 +430,7 @@ end
         @test contract["contract_id"] == JULIA_STAGED_ENRICHMENT_CONTRACT_ID
         @test contract["format"] == 1
         @test contract["status"] ==
-              "neutral_perl_rust_dart_and_julia_complete_lua_pending"
+              "neutral_perl_rust_dart_and_julia_complete_lua_dormant_red"
         @test contract["expected_counts"] == Dict{String,Any}(
             "registry_entries" => 4,
             "sources" => 2,
@@ -452,7 +452,7 @@ end
             "diagnostics" => 37,
             "rollout_legs" => 9,
             "ownership_rows" => 35,
-            "mutations" => 97,
+            "mutations" => 98,
         )
         expected_ids = Dict(
             "provenance_cases" => [
@@ -551,7 +551,7 @@ end
             "complete",
             "complete",
             "complete",
-            "pending_absent",
+            "dormant_red",
         ]
         julia_consumer = contract["backend_consumers"][4]
         @test julia_consumer == Dict{String,Any}(
@@ -573,8 +573,8 @@ end
         ]
         @test contract["authored_surface"]["availability"] ==
               "neutral executable authority with private Perl, Rust, Dart, and Julia carriers complete; " *
-              "PUC Lua, LuaJIT, recurring, and public authoring remain pending under " *
-              "FUTURE-PARITY-BACKLOG.14.7.7-.10"
+              "the shared PUC Lua and LuaJIT general carrier contract is dormant RED; recurring and " *
+              "public authoring remain pending under FUTURE-PARITY-BACKLOG.14.7.7-.10"
         @test contract["compatibility_v1"] == Dict{String,Any}(
             "status" => "current_unchanged",
             "record_version" => 1,

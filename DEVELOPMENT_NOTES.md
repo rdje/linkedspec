@@ -9,6 +9,26 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-27 (`FUTURE-PARITY-BACKLOG.14.7.7.0` — shared Lua staged dormant RED): exact clean activation is the
+  Julia-admission commit `199f585f`; scope owns only one stable shared consumer, the Lua lifecycle/checker
+  mutation, current-v1 compatibility evidence, one exact general-v2 RED, and synchronized boundary truth.
+- One Lua-5.1-compatible source runs unchanged through the project-data wrapper on PUC Lua and LuaJIT. Each run
+  passes 153 assertions, then intentionally fails one exact assertion with
+  `LINKEDSPEC_STAGED_AST_ENRICHMENT_LUA_RED: missing dedicated marker and typed provenance`.
+- The GREEN boundary proves current function-body-v1 job normalization, deterministic resolve/load/compile/
+  execute/cache records, `replace_field` / `body_ast` / `fail` stitching, and wrong-top diagnostic context. The
+  general authored assignment still lowers generically to `assign_scalar` calling helper `parse_job`; helper
+  contracts report one unknown helper, and neither the AST nor reconstructed/generated observations contain a
+  `STAGED_PARSE_JOB_MARKER`, `staged_parse_job_v2` sidecar, or typed provenance.
+- Native and `SpecFile`-JSON reconstructed execution therefore fail at the same unknown-helper runtime boundary;
+  validated generated-plan and independently loaded emitted-module routes fail equivalently and contain no
+  callback, registry, cache, scheduler, cancellation, source-snapshot, or host authority.
+- The neutral checker now requires the exact stable Lua file while proving it absent from `lua/test/run.lua`,
+  `tools/run_lua_local.sh`, and canonical CI. Only shared Lua lifecycle plus one mutation moves: governance is
+  98, both ABI rollout legs remain pending, and Lua production/generated/public/outward behavior does not move.
+- The new Lua boundary fact plus refreshed neutral and admitted-backend facts prevent future archaeology. ADR
+  `0088`, roadmaps, architecture, Toolbox, task/index, capability guidance, bounded continuity, memory, and the
+  sole-facing mdBook agree that `.14.7.7.1` alone owns the dedicated private marker and typed provenance.
 - 2026-08-27 (`FUTURE-PARITY-BACKLOG.14.7.6.4` — Julia staged carrier admission): exact clean activation is
   recursive-authority commit `108003ee`; scope owns fresh top-level authority, four production seams, stable
   consumer admission, Julia-only rollout promotion, parent closure, and synchronized truth.

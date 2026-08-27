@@ -1425,7 +1425,7 @@ fn final_path_admits_fresh_production_carriers() {
     assert_eq!(neutral["format"], 1);
     assert_eq!(
         neutral["status"],
-        "neutral_perl_rust_dart_and_julia_complete_lua_pending"
+        "neutral_perl_rust_dart_and_julia_complete_lua_dormant_red"
     );
     assert_eq!(
         neutral["expected_counts"],
@@ -1450,7 +1450,7 @@ fn final_path_admits_fresh_production_carriers() {
             "diagnostics": 37,
             "rollout_legs": 9,
             "ownership_rows": 35,
-            "mutations": 97,
+            "mutations": 98,
         })
     );
     assert_eq!(
@@ -1631,7 +1631,7 @@ fn final_path_admits_fresh_production_carriers() {
             "complete",
             "complete",
             "complete",
-            "pending_absent",
+            "dormant_red",
         ]
     );
     assert_eq!(

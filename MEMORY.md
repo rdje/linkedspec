@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `108003eeef6125674fecd3fa72d9c660915d6ef8` — exact clean Julia recursive-authority base for task-tree-first `FUTURE-PARITY-BACKLOG.14.7.6.4`; brief cleared; no push.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.7.6.4 - admit Julia staged enrichment carriers` (intended atomic handoff from activation commit `108003eeef6125674fecd3fa72d9c660915d6ef8`; commit identity assigned by Git).
-- active_work_unit: none after intended atomic `.14.7.6.4` handoff; Lua `.14.7.7.0` must activate task-tree-first only from the verified clean commit.
-- next_action: commit `.14.7.6.4`, clear the brief, verify the exact clean handoff and post-commit pointer, then activate shared PUC-Lua/LuaJIT dormant boundary `.14.7.7.0`.
-- in_flight_uncommitted: none in the intended post-landing state; the completed `.14.7.6.4` candidate is fully verified and owned by its atomic commit.
+- activation_commit: `199f585f13d6aec2c72aa91e988c1e385de2c46a` — exact clean Julia-admission base for task-tree-first `FUTURE-PARITY-BACKLOG.14.7.7.0`; brief cleared; no push.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.7.7.0 - freeze Lua staged-AST dormant RED` (intended atomic handoff from activation commit `199f585f13d6aec2c72aa91e988c1e385de2c46a`; commit identity assigned by Git).
+- active_work_unit: none after intended atomic `.14.7.7.0` handoff; Lua `.14.7.7.1` must activate task-tree-first only from the verified clean commit.
+- next_action: commit `.14.7.7.0`, clear the brief, verify the exact clean handoff and post-commit pointer, then activate Lua dedicated-marker/typed-provenance `.14.7.7.1`.
+- in_flight_uncommitted: none in the intended post-landing state; the completed `.14.7.7.0` candidate is fully verified and owned by its atomic commit.
 - blockers: none.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -51,9 +51,9 @@
   options, live-span direct/ordered-derived provenance, pure caller-frozen resolution/cache, isolated complete-
   depth ordering, detached atomic stitching, all four result/three failure policies, breadth-first recurrence, exact
   cycle/decrease guards, shared resources, safe points, typed source rebasing, and four fresh-authority carriers.
-  Perl, Rust, and Dart are privately admitted and their full neutral projections are current at 92.
+  Perl, Rust, and Dart are privately admitted and their full neutral projections are current.
   Dart `.14.7.5.0-.4` add the historical dormant boundary, exclusive live-proven marker, pure caller-frozen resolution/cache,
   isolated atomic policies, breadth-first recurrence, strict lineage/shared resources, expiring safe points, typed
   rebasing, complete-depth target reservation, and a fresh host-only post-parent seed across four production routes.
-  Dart is 19/19 and rollout-complete. Julia `.14.7.6.0-.4` provide its exclusive marker, native-capture-proven typed provenance, caller-frozen resolution/cache, isolated policies, breadth-first recurrence, strict lineage/shared resources, typed rebasing, and four fresh-authority production routes. Its admitted consumer is 491/491; Julia rollout is complete at 5/9 and neutral governance is 97 mutations. Formats and public behavior remain unchanged; Lua `.14.7.7.0` is next after atomic `.4`.
-- latest_bootstrap_read: 2026-08-27 — roadmap, codebase, mdBook, continuity, task tree, Knowledge, ADR, Toolbox, neutral contract, Julia recursive authority, and admitted carrier precedents are reviewed; `.14.7.6.4` is signoff-complete from clean `108003ee` and Lua `.14.7.7.0` is next after landing.
+  Dart is 19/19 and rollout-complete. Julia `.14.7.6.0-.4` provide its exclusive marker, native-capture-proven typed provenance, caller-frozen resolution/cache, isolated policies, breadth-first recurrence, strict lineage/shared resources, typed rebasing, and four fresh-authority production routes. Its admitted consumer is 491/491; Julia rollout is complete at 5/9. Shared Lua `.14.7.7.0` now freezes the unchanged dual-ABI path at 153 GREEN/one exact marker/provenance RED per ABI outside ordinary/canonical discovery; neutral governance is 98 mutations, both Lua rollout rows remain pending, and `.14.7.7.1` owns the dedicated marker and typed provenance. Formats and public behavior remain unchanged.
+- latest_bootstrap_read: 2026-08-27 — roadmap, codebase, mdBook, continuity, task tree, Knowledge, ADR `0088`, Toolbox, neutral/current-boundary facts, admitted backend precedents, and Lua progressive/function-body authorities are reviewed; `.14.7.7.0` is focused-signoff-complete from clean `199f585f` and `.14.7.7.1` is next after landing.

@@ -330,8 +330,10 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   native, normalized-descriptor, validated generated-plan, and independently loaded emitted equality plus distinct
   callbacks/cancellation/clocks and serialized-authority absence. Then run
   `bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py` to prove
-  neutral+Perl+Rust+Dart+Julia admission, one absent later consumer, 97 mutations, and exact
-  single Perl/Rust/Dart/Julia ordinary+canonical admission.
+  neutral+Perl+Rust+Dart+Julia admission, one shared Lua dual-ABI dormant RED, 98 mutations, and exact
+  single Perl/Rust/Dart/Julia ordinary+canonical admission. Run the Lua boundary unchanged with
+  `bash tools/run_lua_project_data.sh puc lua/test/staged_ast_enrichment_contract_test.lua` and then `luajit`;
+  each must report 153 GREEN assertions and only the labeled marker/provenance RED.
   Public authoring remains `.14.7.9`.
 - **Rust general-staged admitted private boundary:** `FUTURE-PARITY-BACKLOG.14.7.4.0-.4` owns
   `rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs` as an ordinary and canonical consumer. Run it with
@@ -1213,11 +1215,12 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   unconditionally in canonical local CI.
 - **OUTPUT:** 4 registry entries; 8 provenance; 8 resolution/6 authority; 10 cache; 4 queue/3 isolation;
   4 result plus 3 failure policies; 10 recursive-chain and 5 detachment cases; five backend consumers over six
-  runtime routes; 37 diagnostics; 9 rollout legs; 35 exact owners; and 97 mutations.
+  runtime routes; 37 diagnostics; 9 rollout legs; 35 exact owners; and 98 mutations.
 - **BOUNDARY:** neutral, Perl, Rust, Dart, and Julia are complete. Julia's 491/491 consumer runs once in ordinary/
   canonical discovery and proves a fresh host-only seed across four production routes after its exclusive marker,
-  live-proven typed provenance, caller-frozen policies, and breadth-first recursive authority. PUC Lua, LuaJIT,
-  recurrence, and public no-drift remain pending. Outward facade/
+  live-proven typed provenance, caller-frozen policies, and breadth-first recursive authority. The one shared Lua
+  final-path consumer is dormant and runs independently at 153 GREEN/one marker-provenance RED on PUC Lua and
+  LuaJIT; both rollout rows, recurrence, and public no-drift remain pending. Outward facade/
   schema/semantic/MCP/CLI/README tokens remain absent. The existing function-body v1 adapter and generated-source
   v2 format stay current and unchanged.
 

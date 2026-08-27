@@ -351,13 +351,15 @@ bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract
 
 The independent checker executes 4 registry entries, 8 provenance, 8 resolution/6 authority, 10 cache,
 4 queue/3 isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases. It locks five backend
-consumers over six runtime routes, 37 diagnostics, 9 rollout legs, and 35 exact owners, then rejects 97
+consumers over six runtime routes, 37 diagnostics, 9 rollout legs, and 35 exact owners, then rejects 98
 reason-checked mutations. Neutral, Perl, Rust, Dart, and Julia rollout are complete. Each admitted consumer is registered
 exactly once in ordinary/canonical proof and proves native, reconstructed, validated generated-plan, and
 independently loaded emitted execution through fresh host-only authority without serializing live state. Julia's
 491/491 consumer now runs once in ordinary and canonical proof across the same four production routes; each run
-starts a fresh registry/cache/recursive authority after the parent result. Lua remains absent. Generated format,
-capability, facade/schema/semantic/MCP/CLI/README, and public behavior have not moved.
+starts a fresh registry/cache/recursive authority after the parent result. One shared Lua-5.1-compatible consumer
+now runs explicitly on PUC Lua and LuaJIT at 153 GREEN assertions plus one identical marker/provenance RED per ABI;
+ordinary/canonical discovery and both Lua rollout rows remain pending. Generated format, capability,
+facade/schema/semantic/MCP/CLI/README, and public behavior have not moved.
 
 `inter_match_gap_capture_contract.json` is the neutral authority for named regex slots and lossless
 prefix/interstitial/tail context. Inter-match gap public admission is current with four shared calls and unchanged outward facade, descriptor, semantic, MCP, CLI, and README surfaces. Julia `.5.1-.5.5` and shared Lua `.6.1-.6.5` implement and admit their exact nine-role paths without widening those guarded surfaces.

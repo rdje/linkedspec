@@ -10,6 +10,22 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-27 — FUTURE-PARITY-BACKLOG.14.7.7.0 — freeze Lua staged-AST dormant RED
+
+- Added one Lua-5.1-compatible staged-enrichment contract at its predeclared stable final path and executed the
+  unchanged source independently on PUC Lua and LuaJIT outside ordinary and canonical discovery.
+- Each ABI passes 153 assertions covering the neutral inventory, current function-body-v1 registry/cache/stitch
+  compatibility, generic assignment lowering, helper rejection, serialized/generated observation routes, and
+  authority absence, then fails only the exact dedicated-marker/typed-provenance boundary.
+- Advanced only Lua's shared backend-consumer lifecycle from `pending_absent` to `dormant_red`, with a new
+  reason-checked mutation; neutral governance is now 98 mutations while both Lua rollout rows remain pending.
+- Updated the four admitted backend snapshots without changing their behavior, recorded the durable Lua root
+  cause and reverify route, and synchronized ADR `0088`, roadmaps, architecture, Toolbox, task/index, bounded
+  continuity, and the sole-facing mdBook.
+- Changed no Lua production source, ordinary/canonical registration, generated format, public/outward surface,
+  other backend behavior, rollout, recurrence, or combined program-wide ownership; `.14.7.7.1` retains the first
+  implementation step for the dedicated private marker and typed provenance.
+
 ## 2026-08-27 — FUTURE-PARITY-BACKLOG.14.7.6.4 — admit Julia staged enrichment carriers
 
 - Added one private opaque Julia staged-enrichment seed that owns copied logical registry/options and a host

@@ -7,8 +7,9 @@
 > carriers, and exact ordinary/canonical admission;
 > Dart now has the same complete private authority, four fresh native/reconstructed/generated/emitted production
 > carriers, and exact 19/19 ordinary/canonical admission. Julia now also has the complete private authority, four
-> fresh production routes, and exact 491/491 ordinary/canonical admission; the neutral contract is 97 mutations.
-> Lua remains absent, and
+> fresh production routes, and exact 491/491 ordinary/canonical admission. Shared Lua now has one dual-ABI dormant
+> oracle at 153 GREEN assertions plus one marker/provenance RED on each runtime; the neutral contract is 98
+> mutations. Lua production and admission remain absent, and
 > the only publicly authored five-backend/six-runtime surface is still the
 > narrow function-body v1 adapter described below.
 
@@ -187,12 +188,46 @@ generated data contains no callback, compiled parser, registry snapshot, source 
 deadline, budget, mutable queue, or host handle.
 
 Neutral, Perl, Rust, Dart, and Julia rollout are complete. Five backend consumers map to six runtime routes because
-one shared Lua source must run independently on PUC Lua and LuaJIT. The exact Perl, Rust, Dart, and Julia consumers
-run once from ordinary and canonical proof. Julia's `.0` run historically froze the generic-call boundary at 86
-GREEN assertions plus one intentional RED; `.1-.3` supplied marker/provenance, current-depth authority, and
-breadth-first recurrence, and `.4` now carries them through four fresh-authority production routes at 491/491.
-Both Lua routes, six-runtime recurrence, public authoring/no-drift, and final recomposition retain their
-`.14.7.7-.10` owners.
+one shared Lua source runs independently on PUC Lua and LuaJIT. The exact Perl, Rust, Dart, and Julia consumers run
+once from ordinary and canonical proof. Julia's `.0` run historically froze the generic-call boundary at 86 GREEN
+assertions plus one intentional RED; `.1-.3` supplied marker/provenance, current-depth authority, and breadth-first
+recurrence, and `.4` now carries them through four fresh-authority production routes at 491/491. Lua `.7.0` now
+freezes its own exact shared boundary at 153 GREEN assertions and one marker/provenance RED per ABI while both
+ordinary/canonical routes and rollout rows stay pending. Lua `.1-.5`, six-runtime recurrence, public authoring/
+no-drift, and final recomposition retain their `.14.7.7-.10` owners.
+
+## Current shared Lua dormant boundary
+
+Run the same Lua-5.1-compatible source independently on both supported hosts:
+
+```bash
+bash tools/run_lua_project_data.sh puc lua/test/staged_ast_enrichment_contract_test.lua
+bash tools/run_lua_project_data.sh luajit lua/test/staged_ast_enrichment_contract_test.lua
+```
+
+Each command intentionally exits nonzero after reporting exactly one failed assertion:
+
+```text
+LINKEDSPEC_STAGED_AST_ENRICHMENT_LUA_RED: missing dedicated marker and typed provenance
+```
+
+Before that sentinel, 153 assertions prove the complete neutral inventory, unchanged function-body-v1 phases and
+cache/stitch policy, original wrong-top context, and the narrow registry's `expr-v1` resolve denial. The reserved
+assignment still has this logical shape:
+
+```text
+assign_scalar job_marker
+  value = call parse_job(
+    call entry_group(0),
+    call hash(...literal options...)
+  )
+```
+
+There is no `staged_parse_job_marker` or `staged_parse_job_v2`. Native and normalized reconstructed routes return
+the same typed unsupported-helper failure. Validated generated-plan and independently loaded emitted-module routes
+wrap the same detail as `generated_execution_failed`; emitted source contains none of the staged marker, sidecar,
+or contract identity. The stable test path is deliberately absent from `tools/run_lua_local.sh`,
+`lua/test/run.lua`, and canonical CI until dual-ABI admission owner `.14.7.7.4` activates it.
 
 ## Current private Perl boundary
 

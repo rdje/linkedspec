@@ -2,20 +2,24 @@
 
 ## Current Activity
 
-- Julia staged `.14.7.6.4` is canonical-signoff-complete from clean recursive-authority commit `108003ee`.
-- Its fresh authority executes native/reconstructed/generated-plan/emitted routes twice, the stable consumer is
-  admitted at 491/491, and Julia rollout is complete at 5/9 with 97 neutral mutations.
-- Current function-body v1, generated format, public/outward behavior, other backends, and Lua remain fixed.
+- Shared Lua staged `.14.7.7.0` is focused-signoff-complete from clean Julia-admission commit `199f585f`.
+- One unchanged Lua-5.1-compatible consumer reaches 153 GREEN assertions and one exact dedicated-marker/typed-
+  provenance RED independently on PUC Lua and LuaJIT; it remains absent from ordinary and canonical discovery.
+- Neutral governance advances only Lua's lifecycle to `dormant_red` and 98 mutations; both Lua rollout rows,
+  production, generated format, public/outward behavior, recurrence, and combined ownership remain fixed.
 
 ## Latest Completed Slice
 
-- `.14.7.6.4` is fully verified for its intended atomic handoff; Git will assign the commit identity.
+- `.14.7.7.0` is fully verified for its intended atomic handoff; Git will assign the commit identity.
 
 ## Next Action
 
-- Commit `.14.7.6.4`, clear and verify the brief/clean handoff, then activate shared Lua dormant RED `.14.7.7.0`.
+- Commit `.14.7.7.0`, clear and verify the brief/clean handoff, then activate Lua marker/provenance `.14.7.7.1`.
 
 ## Recent Completions
+
+- `2026-08-27` — `.14.7.7.0` adds one shared stable Lua consumer at 153 GREEN/one exact marker/provenance RED per
+  ABI, advances only its dormant lifecycle and neutral governance to 98, and leaves discovery and rollout pending.
 
 - `2026-08-27` — `.14.7.6.4` adds fresh Julia staged authority across four production routes, admits the stable
   491/491 consumer once, advances only Julia rollout to 5/9 and governance to 97, and closes backend parent `.6`.
@@ -70,9 +74,6 @@
 
 - `2026-08-26` — `TRACE-OBSERVABILITY.5.3` keeps private authority dormant while requiring the admitted contract
   route once and passes focused 4/4; its canonical attempt exposes the separately owned `.5.4` proof blocker.
-
-- `2026-08-26` — `TRACE-OBSERVABILITY.5.2` restores one existing child dispatch/result pair for normal and gap-
-  aware interpreted/generated entry; trace controls pass 11/11 with unchanged results.
 
 ## History
 

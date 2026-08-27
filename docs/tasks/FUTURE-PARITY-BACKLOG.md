@@ -7,7 +7,8 @@
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
 - Last updated: `2026-08-27` (progressive `.14.6`, staged neutral `.14.7.0-.2`, and complete Perl `.14.7.3`,
-  Rust `.14.7.4`, Dart `.14.7.5`, and Julia `.14.7.6` parents are closed; shared Lua `.14.7.7` is next)
+  Rust `.14.7.4`, Dart `.14.7.5`, and Julia `.14.7.6` parents are closed; shared Lua dormant leaf `.14.7.7.0`
+  is focused-signoff-complete and `.1` is next after its clean handoff)
 - Owner: repo-local workflow
 
 ## Goal
@@ -113,8 +114,10 @@ proven marker, caller-frozen pure resolution/cache, complete-depth breadth-first
 non-resetting shared resources, expiring safe points, typed source rebasing, detached atomic stitching, and every
 result/failure policy. One opaque host seed creates fresh authority across native/reconstructed/generated-plan/
 emitted production routes after the parent value. The consumer is 491/491 and registered once in ordinary/
-canonical discovery. Julia rollout is complete at 5/9 and neutral governance is 97 mutations. Function-body v1,
-generated v2, and public/outward behavior do not move. Shared Lua `.7` is next; recurrence `.8`, public `.9`,
+canonical discovery. Julia rollout is complete at 5/9. Shared Lua `.7.0` now freezes one stable Lua-5.1-compatible
+dormant source: PUC Lua and LuaJIT each pass 153 assertions and fail only the same marker/provenance assertion.
+Neutral governance is 98 mutations; ordinary/canonical Lua discovery and both rollout legs remain pending.
+Function-body v1, generated v2, and public/outward behavior do not move. Lua `.7.1` is next; recurrence `.8`, public `.9`,
 recomposition `.10`, and combined program-wide `.14.8` retain their frozen owners.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent

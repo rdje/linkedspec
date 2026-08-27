@@ -2,8 +2,8 @@
 
 - Date: 2026-08-25
 - Status: accepted architecture; executable neutral authority complete under `FUTURE-PARITY-BACKLOG.14.7.2`;
-  Perl, Rust, Dart, and Julia private behavior/admission complete; Lua, recurrence, public authoring, and final
-  recomposition remain pending
+  Perl, Rust, Dart, and Julia private behavior/admission complete; shared Lua dual-ABI dormant RED active;
+  recurrence, public authoring, and final recomposition remain pending
 - Tags: architecture, staged-parsing, parse-job, source-location, registry, queue, policies, diagnostics, portability
 
 ## Context
@@ -128,14 +128,14 @@ cancellation/deadline/budget state, mutable queues, or host handles.
 4 registry entries; 2 sources; 8 provenance, 3 deterministic-id, 8 resolution, 6 authority, 10 cache, 4 queue,
 3 isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases; 37 diagnostics; 5 backend
 consumers over 6 runtime routes; 4 carrier requirements; 10 outward guards; 9 rollout legs; 35 exact owners; and
-97 reason-checked mutations after Julia carrier admission.
+98 reason-checked mutations after shared Lua dormant activation.
 
-Neutral, Perl, Rust, Dart, and Julia rollout are complete. PUC Lua, LuaJIT, six-runtime recurrence, and public
-authoring/no-drift remain pending under `.14.7.7-.9`; `.14.7.10` owns independent
-recomposition. The checker is an always-on canonical-CI input. It guards ten facades/schema/semantic/MCP/CLI/
-README paths against premature public exposure, requires the Perl, Rust, Dart, and Julia consumers exactly once
-in ordinary and canonical discovery, rejects the former Dart dormant path, and keeps the Lua consumer absent
-until its RED owner activates.
+Neutral, Perl, Rust, Dart, and Julia rollout are complete. PUC Lua and LuaJIT rollout, six-runtime recurrence, and
+public authoring/no-drift remain pending under `.14.7.7-.9`; `.14.7.10` owns independent recomposition. The checker
+is an always-on canonical-CI input. It guards ten facades/schema/semantic/MCP/CLI/README paths against premature
+public exposure, requires the Perl, Rust, Dart, and Julia consumers exactly once in ordinary and canonical
+discovery, rejects the former Dart dormant path, and requires the one stable Lua consumer while proving it absent
+from ordinary dual-ABI and canonical discovery.
 
 ## Consequences
 
@@ -460,6 +460,18 @@ is included once in ordinary discovery, and is required/logged/invoked exactly o
 rollout advances; the checker rejects 97 mutations. Function-body v1, generated-source v2, public/outward behavior,
 other backend behavior, Lua, recurrence, and recomposition remain unchanged or pending.
 
+Lua dormant-boundary leaf `FUTURE-PARITY-BACKLOG.14.7.7.0` adds one shared Lua-5.1-compatible consumer at its
+predeclared stable final path. The exact source runs independently on PUC Lua and LuaJIT; each execution preserves
+the complete neutral inventory and unchanged function-body-v1 resolve/load/compile/execute/cache/stitch behavior
+plus wrong-top context. Assignment-form `parse_job(...)` remains `assign_scalar(call name=parse_job)`, the narrow
+v1 registry rejects `expr-v1`, and native, normalized `SpecFile`-JSON reconstructed, validated generated-plan,
+and independently loaded emitted-module routes preserve the typed unsupported-helper boundary. Each ABI passes
+153 assertions; the only failure names missing `STAGED_PARSE_JOB_MARKER` / `staged_parse_job_v2`. The file is
+omitted from `tools/run_lua_local.sh`, `lua/test/run.lua`, and canonical CI. Both Lua rollout legs remain pending,
+neutral governance advances only the shared Lua lifecycle to `dormant_red` at 98 mutations, and `.14.7.7.1`
+retains annotation/provenance. Lua production, generated format, public/outward behavior, and admitted backends do
+not move.
+
 ## Links
 
 - Owning task: `docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md`
@@ -480,4 +492,5 @@ other backend behavior, Lua, recurrence, and recomposition remain unchanged or p
   `docs/knowledge/julia-staged-ast-enrichment-marker-provenance.md` plus
   `docs/knowledge/julia-staged-ast-enrichment-current-depth-authority.md` plus
   `docs/knowledge/julia-staged-ast-enrichment-recursive-authority.md` plus
-  `docs/knowledge/julia-staged-ast-enrichment-carriers-admission.md`
+  `docs/knowledge/julia-staged-ast-enrichment-carriers-admission.md` plus
+  `docs/knowledge/lua-staged-ast-enrichment-dormant-red.md`

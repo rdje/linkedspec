@@ -765,7 +765,9 @@ exports, check-cfg registration, and conditional dead-code allowance are gone. `
 validation and gap-aware child-dispatch parity are restored, while the private authority stays dormant beside the
 one admitted contract route. `.5.4` historically aligned the Perl snapshot to 79 mutations plus Rust
 `dormant_red`; Rust admission now advances the neutral oracle to 84 mutations and promotes only Rust. Dart and
-Julia have since reached the same private admission boundary; the Lua consumer remains pending under `.14.7.7`.
+Julia have since reached the same private admission boundary. Lua `.14.7.7.0` now owns one shared stable dormant
+consumer: PUC Lua and LuaJIT each pass 153 assertions and fail only the same marker/provenance sentinel; ordinary/
+canonical discovery and both rollout legs remain pending.
 Dart
 `.14.7.5.0-.4` freeze one exact historical `test_dormant/` boundary, lower exact
 assignment-form `parse_job` to a live-proven private marker, and add a separate caller-frozen pure resolver/cache/
@@ -783,8 +785,9 @@ typed order, sibling isolation, detachment, and every result/failure policy. A s
 complete breadth-first depths with exact lineage, non-resetting bounds, expiring safe points, and source projection.
 An opaque host-only seed starts a fresh registry/cache/recursive authority for every native, reconstructed,
 generated-plan, and independently included emitted execution, then enriches only after the complete parent value.
-The explicit consumer is 491/491 and admitted once in ordinary/canonical topology. Governance is 97 mutations
-with Julia complete; generated format and public behavior remain unchanged, and Lua `.14.7.7` is next.
+The explicit consumer is 491/491 and admitted once in ordinary/canonical topology. Governance is 98 mutations
+after shared Lua dormant activation; generated format and public behavior remain unchanged, and Lua `.14.7.7.1`
+owns the next annotation/provenance step.
 Mandatory engineering-notes segment `4989` is finitely authorized at 19 files / 18
 manifest lines by ADR `0092`. Dart dormant closeout's mandatory change-history segment `4990` is finitely
 authorized at 23 files / 22 manifest lines by ADR `0091`; no other pressure ceiling changes.

@@ -17,8 +17,8 @@ resolution, immutable pre-registered parser/cache authority, breadth-first recur
 failure policies, strict decreasing/cycle/depth/call/cancellation/resource bounds, detached results, diagnostics,
 carrier obligations, dormant routes, rollout, exact ownership, and the unchanged function-body-v1 adapter. The
 checker passes 4 registry entries, 8 provenance, 8 resolution/6 authority, 10 cache, 4 queue/3 isolation,
-4 result plus 3 failure policies, 10 chain, 5 detachment, 37 diagnostics, 9 rollout legs, 35 owners, and 92
-reason-checked mutations after Julia dormant-boundary activation. It reuses ADR `0056`'s source algebra and progressive authority narrowing without
+4 result plus 3 failure policies, 10 chain, 5 detachment, 37 diagnostics, 9 rollout legs, 35 owners, and 98
+reason-checked mutations after shared Lua dormant activation. It reuses ADR `0056`'s source algebra and progressive authority narrowing without
 reusing `dispatch_span` syntax or elevating an authored parser id into filesystem authority.
 
 Perl leaves `FUTURE-PARITY-BACKLOG.14.7.3.1-.4` now implement and privately admit that same final path. `.1` makes exact assignment-form `parse_job(text_expr, literal_options)` one exclusive
@@ -148,8 +148,11 @@ introduced by `.14.7.4.0` commit `e37a8b77`; 143/143 plus canonical proof close 
 then completes current-depth authority from that clean handoff, `.14.7.4.3` completes recursive authority, and
 `.14.7.4.4` admits four fresh carriers at 84 neutral mutations; `.14.7.5.0` historically advances only Dart
 dormancy to 85; `.14.7.5.4` admits Dart at 90; `.14.7.6.0` freezes Julia dormant RED and repairs governance at 92;
-`.14.7.6.1` implements Julia marker/provenance, `.2` current-depth authority, and `.3` recursive authority without
-changing that count. The next frontier is Julia `.14.7.6.4`.
+`.14.7.6.1` implements Julia marker/provenance, `.2` current-depth authority, `.3` recursive authority, and `.4`
+admits four fresh production routes at 491/491 and 97 mutations. Shared Lua `.14.7.7.0` now freezes one exact
+Lua-5.1-compatible dormant path: PUC Lua and LuaJIT each pass 153 assertions and fail only the same missing
+marker/provenance assertion. Neutral governance is 98 mutations, both Lua rollout legs remain pending, and `.1`
+is the next frontier.
 
 This closeout's mandatory engineering-notes rollover publishes immutable segment `4990`. ADR `0090` advances
 only finite route controls from 17/16 to 18 files / 17 manifest lines; the measured collection remains
@@ -168,12 +171,11 @@ pass the normalized job through compile instead of constructing placeholders; Ju
 existing job propagation and add the missing payload kind. Every wrong-top error reports the original
 id/path/parser/top/payload/span/failure context plus resolved built-in identity. This changes only compile-failure
 diagnostics: success, resolution, execution, stitching, policies, queue depth, formats, capabilities, and outward
-surfaces stay fixed. Executable neutral contract `.2` and the Perl behavioral parent `.3` are complete; backend parents `.4-.7`, recurrence `.8`,
-public authoring/closeout `.9`, and independent recomposition `.10` remain dependency-frozen behind it. Every
-later runtime rollout leg and public/outward surface therefore remains pending except the admitted Rust and Dart
-carrier paths `.4.4` and `.5.4`; Dart dormant boundary `.5.0`, marker/provenance `.5.1`, current-depth authority
-`.5.2`, recursive bounded authority `.5.3`, and fresh carriers/admission `.5.4` are complete. Julia `.6.0` is the
-next clean frontier.
+surfaces stay fixed. Executable neutral contract `.2` and private Perl `.3`, Rust `.4`, Dart `.5`, and Julia `.6`
+backend parents are complete. Shared Lua `.7.0` owns only the stable dormant dual-ABI RED; `.1-.5` retain
+annotation/provenance, resolution/policies, recurrence/carriers, admission, and independent ABI recomposition.
+Recurrence `.8`, public authoring/closeout `.9`, and independent recomposition `.10` remain dependency-frozen
+behind it. Every Lua rollout leg and public/outward surface therefore remains pending.
 
 ## Typed transaction safety now composes the complete recognition authority
 
