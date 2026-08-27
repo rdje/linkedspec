@@ -6,7 +6,9 @@
 > Rust now has the same private complete authority, four fresh native/reconstructed/generated/emitted production
 > carriers, and exact ordinary/canonical admission;
 > Dart now has the same complete private authority, four fresh native/reconstructed/generated/emitted production
-> carriers, and exact 19/19 ordinary/canonical admission at 90 neutral mutations. Julia and Lua remain absent, and
+> carriers, and exact 19/19 ordinary/canonical admission. Julia now has an exact dormant final-path consumer at
+> 86 GREEN assertions plus one intentionally labeled marker/provenance RED; the neutral contract is at 92
+> mutations. Lua remains absent, and
 > the only publicly authored five-backend/six-runtime surface is still the
 > narrow function-body v1 adapter described below.
 
@@ -186,8 +188,10 @@ deadline, budget, mutable queue, or host handle.
 
 Neutral, Perl, Rust, and Dart rollout are complete. Five backend consumers map to six runtime routes because one
 shared Lua source must run independently on PUC Lua and LuaJIT. The exact Perl, Rust, and Dart consumers run once
-from ordinary and canonical proof. Julia, both Lua routes, six-runtime recurrence,
-public authoring/no-drift, and final recomposition retain their `.14.7.6-.10` owners.
+from ordinary and canonical proof. Julia's final-path consumer is present but deliberately omitted from both
+proof routes: its explicit run freezes the generic-call boundary at 86 GREEN assertions plus one intentional RED.
+Julia implementation/admission, both Lua routes, six-runtime recurrence, public authoring/no-drift, and final
+recomposition retain their `.14.7.6.1-.10` owners.
 
 ## Current private Perl boundary
 
@@ -599,6 +603,34 @@ Publishing this boundary crossed the bounded `CHANGES.md` rollover threshold. Th
 manifest controls to 23 files / 22 records. No byte, per-file, aggregate, route, storage, or product boundary was
 weakened.
 
+## Current dormant Julia boundary
+
+Julia `.14.7.6.0` adds the predeclared final-path consumer at
+`julia/test/staged_ast_enrichment_contract_test.jl` without including it from `julia/test/runtests.jl` or
+canonical CI. Run it explicitly from the repository root:
+
+```bash
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no \
+  julia/test/staged_ast_enrichment_contract_test.jl
+```
+
+The result is exactly 86 passing assertions and one intentional failure named
+`LINKEDSPEC_STAGED_AST_ENRICHMENT_JULIA_RED`. The GREEN prefix snapshots the complete 92-mutation neutral inventory,
+unchanged function-body-v1 resolve/load/compile/execute/cache/stitch behavior, complete wrong-top context, and the
+narrow registry's resolve-time denial of `expr-v1`.
+
+Exact assignment-form `parse_job(...)` still compiles as an ordinary scalar assignment whose value is a generic
+`ActionCallExpr`. Native and normalized `SpecFile`-JSON reconstructed execution therefore raise
+`unsupported runtime helper 'parse_job' in rule Top`. Validated generated-plan execution and an independently
+included emitted module preserve the same generated failure detail. All four routes contain no dedicated
+`STAGED_PARSE_JOB_MARKER`, typed `staged_parse_job_v2` sidecar, or live-proven provenance. The sole RED requires
+that missing marker/provenance boundary; `.14.7.6.1` owns implementing it.
+
+This audit also corrected two inherited governance drifts without changing Dart behavior. The duplicated authored
+availability sentence now agrees with Dart's already-complete structured backend and rollout rows, guarded by a
+dedicated mutation. The recorded ordinary Dart command now enters `dart/` before invoking the repository-local
+storage wrapper, so pubspec discovery succeeds from the repository root.
+
 Run the neutral proof with:
 
 ```bash
@@ -607,6 +639,6 @@ bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract
 
 The checker currently reports 4 registry entries; 8 provenance, 8 resolution, 6 authority, 10 cache, 4 queue,
 3 isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases; 37 diagnostics; 5 backend
-consumers/6 routes; 4 carrier requirements; 10 outward guards; 9 rollout legs; 35 owners; and 90 reason-checked
-mutations. The neutral checker plus Perl, Rust, and Dart consumers are registered in canonical local CI; later
-backend consumers remain absent.
+consumers/6 routes; 4 carrier requirements; 10 outward guards; 9 rollout legs; 35 owners; and 92 reason-checked
+mutations. The neutral checker plus Perl, Rust, and Dart consumers are registered in canonical local CI. Julia's
+consumer remains dormant outside ordinary/canonical discovery, and the Lua consumer remains absent.

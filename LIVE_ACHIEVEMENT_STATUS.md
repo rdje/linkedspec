@@ -2,24 +2,27 @@
 
 ## Current Activity
 
-- Dart staged `.14.7.5.4` attaches one opaque host seed to native, reconstructed, generated-plan, and emitted
-  execution. Every top-level call starts a fresh registry/cache/recursive authority and enriches after the parent AST.
-- The stable consumer moves from `test_dormant/` to its final ordinary path and passes 19/19; ordinary Dart is
-  435/435. Canonical CI requires, logs, and invokes the exact path once.
-- Neutral governance rejects 90 mutations and promotes only Dart. Function-body v1, generated-source v2,
-  public/outward behavior, later backends, recurrence, and combined no-drift do not move.
-- Focused proof, durable synchronization, and receipt-bound canonical CI are complete; the atomic clean handoff closes the slice.
+- Julia staged `.14.7.6.0` is focused-signoff-complete with one final-path consumer outside ordinary and canonical discovery.
+- Its explicit run is 86 GREEN/one intentional marker/provenance RED. Current function-body v1 stays GREEN;
+  generic `parse_job(...)` and typed unsupported-helper behavior remain exact across four observation routes.
+- Neutral governance advances to 92 mutations and only Julia lifecycle becomes `dormant_red`. Julia production,
+  rollout, generated format, public/outward behavior, admitted backends, and Lua do not move.
+- Two inherited Dart governance drifts are corrected: current availability truth and the package-CWD runtime route.
+- Julia's complete local gate, Perl 143/143, Rust 1/1, Dart 19/19, direct governance, and no-drift proof pass.
 
 ## Latest Completed Slice
 
-- `.14.7.5.4` implementation, focused behavior proof, durable projections, and receipt-bound canonical signoff are
-  complete from clean activation commit `053178b8`.
+- `.14.7.6.0` implementation, focused proof, and durable synchronization are complete from exact clean activation
+  commit `b38f819c`.
 
 ## Next Action
 
-- Activate Julia `.14.7.6.0` task-tree-first from the clean Dart carrier-admission handoff.
+- Commit `.14.7.6.0` atomically, verify the clean handoff, then activate `.14.7.6.1` task-tree-first.
 
 ## Recent Completions
+
+- `2026-08-27` — `.14.7.6.0` freezes Julia at 86 GREEN/one intentional marker/provenance RED outside ordinary/
+  canonical discovery, advances neutral governance to 92, and repairs stale Dart availability/route governance.
 
 - `2026-08-27` — `.14.7.5.4` adds a fresh host-only Dart staged seed across four post-parent production routes,
   moves the stable consumer to ordinary/canonical admission at 19/19, passes Dart 435/435, and advances only Dart
@@ -71,9 +74,6 @@
 
 - `2026-08-26` — `.14.7.3.4` proves four fresh Perl carrier routes, admits the 143-check consumer exactly once in
   ordinary/canonical topology, promotes only Perl, and closes `.14.7.3` without public or format movement.
-
-- `2026-08-26` — `.14.7.3.3` adds Perl's private breadth-first recursive queue, decreasing chains, shared
-  cancellation/resources, safe points, and source rebasing; 141 top-level checks pass and only `.4` remains RED.
 
 ## History
 

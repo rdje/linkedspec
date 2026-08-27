@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `053178b81bc095810fcc4ef8f0c8a8f7463a2458` — exact clean Dart recursive-authority base for task-tree-first `FUTURE-PARITY-BACKLOG.14.7.5.4`; brief cleared; no push.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.7.5.4 - admit Dart staged enrichment carriers` (intended atomic subject from activation commit `053178b81bc095810fcc4ef8f0c8a8f7463a2458`).
-- active_work_unit: none; Dart backend parent `.14.7.5` is closed and Julia dormant-boundary `.14.7.6.0` is the next task-tree-first activation.
-- next_action: activate Julia `.14.7.6.0` task-tree-first from the clean Dart carrier-admission commit.
-- in_flight_uncommitted: none; `.14.7.5.4` is implemented, focused- and canonical-signoff-complete, and intended for one atomic commit with a clean promoted-receipt handoff.
+- activation_commit: `b38f819c466ef11f50fa7792b6a345bb10c4c69e` — exact clean Dart carrier-admission base for task-tree-first `FUTURE-PARITY-BACKLOG.14.7.6.0`; brief cleared; no push.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.7.6.0 - freeze Julia staged-AST dormant RED` (intended atomic subject from activation commit `b38f819c466ef11f50fa7792b6a345bb10c4c69e`).
+- active_work_unit: none; Julia dormant boundary `.14.7.6.0` is focused-signoff-complete and `.14.7.6.1` is the next task-tree-first activation.
+- next_action: activate Julia marker/provenance `.14.7.6.1` task-tree-first from the clean dormant-boundary commit.
+- in_flight_uncommitted: none; `.14.7.6.0` is implemented, focused-signoff-complete, and intended for one atomic commit with a clean handoff.
 - blockers: none.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -45,15 +45,15 @@
   parents `.3-.7`, recurrence `.8`, public authored closeout `.9`, and recomposition `.10` are frozen in order.
   Diagnostic `.14.7.1` is complete; neutral `.14.7.2` freezes 4 registry entries, 8 provenance, 8 resolution/6
   authority, 10 cache, 4 queue/3 isolation, 4 result/3 failure policies, 10 chain, 5 detachment, 37 diagnostics,
-  9 rollout legs, 35 owners, and 90 mutations after Dart admission. Perl `.14.7.3.1-.4` provide the private marker/provenance,
+  9 rollout legs, 35 owners, and 92 mutations after Julia dormant activation plus an availability lockstep guard. Perl `.14.7.3.1-.4` provide the private marker/provenance,
   caller-frozen resolution/cache/policies, breadth-first recurrence, strict chains/shared resources, and source
   rebasing plus four fresh-authority carriers at 143/143. Rust `.14.7.4.0-.4` add an inert detached marker, strict literal
   options, live-span direct/ordered-derived provenance, pure caller-frozen resolution/cache, isolated complete-
   depth ordering, detached atomic stitching, all four result/three failure policies, breadth-first recurrence, exact
   cycle/decrease guards, shared resources, safe points, typed source rebasing, and four fresh-authority carriers.
-  Perl and Rust are privately admitted and their full neutral projections are current at 90 (143/143 and 1/1).
+  Perl, Rust, and Dart are privately admitted and their full neutral projections are current at 92.
   Dart `.14.7.5.0-.4` add the historical dormant boundary, exclusive live-proven marker, pure caller-frozen resolution/cache,
   isolated atomic policies, breadth-first recurrence, strict lineage/shared resources, expiring safe points, typed
   rebasing, complete-depth target reservation, and a fresh host-only post-parent seed across four production routes.
-  The final-path consumer is 19/19, ordinary Dart 435/435, Dart rollout complete, and Julia `.14.7.6.0` is next.
-- latest_bootstrap_read: 2026-08-27 — roadmap, codebase, mdBook, continuity, active task, Knowledge, ADR, Toolbox, neutral contract, Dart source/runtime authority, and Perl/Rust precedents are reviewed. `.14.7.5.4` is canonical-signoff-complete from clean `053178b8`; Julia `.14.7.6.0` is next after the atomic clean handoff.
+  Dart is 19/19 and rollout-complete. Julia `.14.7.6.0` is 86 GREEN/one intentional marker/provenance RED outside ordinary/canonical discovery; production and rollout remain unchanged, and `.1` is next.
+- latest_bootstrap_read: 2026-08-27 — roadmap, codebase, mdBook, continuity, active task/tree, Knowledge, ADR, Toolbox, neutral contract, Julia registry/generated routes, and admitted precedents are reviewed; `.14.7.6.0` is focused-signoff-complete from clean `b38f819c` and `.1` is next.

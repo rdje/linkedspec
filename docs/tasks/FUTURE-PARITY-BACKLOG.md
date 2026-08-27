@@ -6,8 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-26` (progressive `.14.6`, staged neutral `.14.7.0-.2`, complete Perl `.14.7.3.0-.4`,
-  and Rust dormant current-depth authority `.14.7.4.0-.2` are closed; `.14.7.4.3` is next)
+- Last updated: `2026-08-27` (progressive `.14.6`, staged neutral `.14.7.0-.2`, complete Perl `.14.7.3.0-.4`,
+  Rust `.14.7.4.0-.4`, and Dart `.14.7.5.0-.4` are closed; Julia dormant `.14.7.6.0` is focused-signoff-complete
+  and marker/provenance `.14.7.6.1` is next)
 - Owner: repo-local workflow
 
 ## Goal
@@ -104,27 +105,17 @@ perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-26):** progressive neutral `.14.6.1` and private Perl `.2`, Rust `.3`, Dart
-`.4`, Julia `.5`, PUC Lua `.6`, and LuaJIT `.6` behavioral admissions are current at rollout 7/9/112. Capacity tree `FUTURE-PARITY-PARTITION-CAPACITY.0-.2` adds and
-independently recomposes the bounded `.14.6.5-.14.8` owner without changing behavior. Julia `.14.6.5.0` splits
-the parent into historical dormant RED `.0`, private authority/core `.1`, dormant carriers `.2`, canonical
-admission `.3`, and independent recomposition `.4`; `.1` supplies the private immutable authority, and `.2` makes
-the unchanged consumer GREEN at 62/62 through all four fresh-authority routes while discovery and rollout stay
-dormant under canonical signoff. `.14.6.5.3` then admits the same carrier through one ordinary and one exact
-canonical route, promoting only Julia while the 210-assertion authority proof stays dormant. Independent
-recomposition `.14.6.5.4` proves those committed owners unchanged and closes the Julia parent. Shared Lua `.6.0`
-preserves its historical 85-pass/one-RED boundary, `.1` supplies private authority at 273/273 per ABI, `.2` makes
-four dormant carriers GREEN at 178/178 per ABI, and `.3` admits that same consumer once per ABI through ordinary
-and exact canonical routes without production, format, typed, or outward movement. Recomposition `.6.4`, recurrence
-`.7`, and public no-drift `.8` are committed. Staged `.14.7.0-.2` are committed through neutral executable
-authority at `ab8802c9`; Perl dormant-boundary `.14.7.3.0` and private dedicated annotation/typed-provenance
-`.14.7.3.1-.4` close private recursive authority, four fresh-authority carriers, and exact Perl admission at
-143/143 plus 78 mutations. Rust `.14.7.4.0-.2` now freeze the dormant boundary, implement one private inert marker
-with strict literals plus typed direct/ordered-derived provenance across four logical carrier observations, and
-complete caller-frozen pure resolution/cache, isolated current-depth ordering, detached atomic stitching, and all
-four result/three failure policies. The only remaining consumer RED is `.14.7.4.3` recurrence, bounds, and source-
-rebased diagnostics; combined program-wide `.14.8` remains a separate owner. Mandatory segment `4992` is finitely authorized by ADR `0086` at
-21 change-history files / 20 manifest lines and makes `.14.6.5.2` a canonical boundary.
+**Authoritative frontier (2026-08-27):** progressive `.14.6` is closed at six-runtime private behavior,
+recurrence, and public no-drift. Staged audit/diagnostic/neutral `.14.7.0-.2` are committed; Perl `.3`, Rust `.4`,
+and Dart `.5` each privately implement and admit the complete marker/provenance, caller-frozen authority,
+breadth-first recursion, fresh native/reconstructed/generated/emitted carriers, and exact ordinary/canonical
+consumer. Neutral governance is now 92 mutations with those three backends complete. Julia `.14.7.6.0` is
+focused-signoff-complete: its final-path consumer is deliberately omitted from ordinary/canonical discovery, passes 86
+pre-boundary assertions, and fails only the exact missing `STAGED_PARSE_JOB_MARKER` / `staged_parse_job_v2`
+assertion while production and rollout remain unchanged. It also owns correction of two inherited executable
+governance drifts: stale Dart-dormant availability prose and a Dart runtime command missing its package cwd.
+Julia `.14.7.6.1` is the clean-handoff next leaf; shared Lua `.7`, recurrence `.8`, public `.9`,
+recomposition `.10`, and combined program-wide `.14.8` retain their frozen owners.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private

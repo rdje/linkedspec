@@ -46,9 +46,9 @@ AUTHORED_SURFACE = {
     ],
     "optional_options": ["top", "into", "required_capabilities"],
     "availability": (
-        "neutral executable authority with private Perl and Rust carriers complete; the Dart general carrier "
-        "contract is dormant RED; Julia, PUC Lua, LuaJIT, recurring, and public authoring remain pending under "
-        "FUTURE-PARITY-BACKLOG.14.7.5-.10"
+        "neutral executable authority with private Perl, Rust, and Dart carriers complete; the Julia general "
+        "carrier contract is dormant RED; PUC Lua, LuaJIT, recurring, and public authoring remain pending under "
+        "FUTURE-PARITY-BACKLOG.14.7.6-.10"
     ),
 }
 
@@ -152,7 +152,7 @@ BACKEND_CONSUMERS = [
         "backend": "julia",
         "owner": "FUTURE-PARITY-BACKLOG.14.7.6.0",
         "path": "julia/test/staged_ast_enrichment_contract_test.jl",
-        "status": "pending_absent",
+        "status": "dormant_red",
     },
     {
         "backend": "lua",
@@ -183,8 +183,8 @@ RUNTIME_ROUTES = [
         "runtime": "dart",
         "consumer_backend": "dart",
         "command": (
-            "bash tools/run_dart_project_data.sh test --reporter failures-only "
-            "dart/test/staged_ast_enrichment_contract_test.dart"
+            "(cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only "
+            "test/staged_ast_enrichment_contract_test.dart)"
         ),
     },
     {
@@ -734,23 +734,36 @@ def validate_semantic_cases(contract: dict[str, Any]) -> None:
 def validate_environment(contract: dict[str, Any]) -> None:
     ci_text = CI_PATH.read_text(encoding="utf-8")
     perl_ordinary_text = (ROOT / "t/phase0_regression.t").read_text(encoding="utf-8")
+    julia_ordinary_text = (ROOT / "julia/test/runtests.jl").read_text(encoding="utf-8")
     for row in contract["backend_consumers"]:
         require(safe_relative_path(row["path"]), "backend consumer path is unsafe")
         consumer_path = ROOT / row["path"]
         if row["status"] == "pending_absent":
             require(not consumer_path.exists(), f"pending backend consumer unexpectedly exists: {row['path']}")
         elif row["status"] == "dormant_red":
-            require(row["backend"] == "dart", f"unsupported dormant staged backend: {row['backend']}")
-            dormant_path_value = row.get("dormant_path")
-            require(safe_relative_path(dormant_path_value), "dormant backend consumer path is unsafe")
-            dormant_path = ROOT / dormant_path_value
-            require(not consumer_path.exists(), f"dormant backend final consumer unexpectedly exists: {row['path']}")
-            require(
-                dormant_path.is_file() and not dormant_path.is_symlink(),
-                f"dormant backend consumer is missing or symbolic: {dormant_path_value}",
-            )
-            require(ci_text.count(row["path"]) == 0, "dormant Dart final consumer entered canonical CI")
-            require(ci_text.count(dormant_path_value) == 0, "dormant Dart consumer entered canonical CI")
+            if row["backend"] == "dart":
+                dormant_path_value = row.get("dormant_path")
+                require(safe_relative_path(dormant_path_value), "dormant backend consumer path is unsafe")
+                dormant_path = ROOT / dormant_path_value
+                require(not consumer_path.exists(), f"dormant backend final consumer unexpectedly exists: {row['path']}")
+                require(
+                    dormant_path.is_file() and not dormant_path.is_symlink(),
+                    f"dormant backend consumer is missing or symbolic: {dormant_path_value}",
+                )
+                require(ci_text.count(row["path"]) == 0, "dormant Dart final consumer entered canonical CI")
+                require(ci_text.count(dormant_path_value) == 0, "dormant Dart consumer entered canonical CI")
+            elif row["backend"] == "julia":
+                require(
+                    consumer_path.is_file() and not consumer_path.is_symlink(),
+                    f"dormant Julia consumer is missing or symbolic: {row['path']}",
+                )
+                require(
+                    julia_ordinary_text.count(consumer_path.name) == 0,
+                    "dormant Julia consumer entered ordinary discovery",
+                )
+                require(ci_text.count(row["path"]) == 0, "dormant Julia consumer entered canonical CI")
+            else:
+                raise ContractError(f"unsupported dormant staged backend: {row['backend']}")
         elif row["status"] == "complete":
             require(
                 consumer_path.is_file() and not consumer_path.is_symlink(),
@@ -839,7 +852,7 @@ def validate_contract(contract: dict[str, Any], *, environment: bool = True) -> 
     require(contract["task_owner"] == "FUTURE-PARITY-BACKLOG.14.7.2", "task owner mismatch")
     require(
         contract["status"]
-        == "neutral_perl_rust_and_dart_complete_later_backends_pending",
+        == "neutral_perl_rust_and_dart_complete_julia_dormant_red_lua_pending",
         "contract status mismatch",
     )
     require(contract["authored_surface"] == AUTHORED_SURFACE, "authored surface mismatch")
@@ -968,7 +981,7 @@ def validate_contract(contract: dict[str, Any], *, environment: bool = True) -> 
         },
         "dart_admission": {
             "consumer_path": "dart/test/staged_ast_enrichment_contract_test.dart",
-            "ordinary_invocation": "bash tools/run_dart_project_data.sh test --reporter failures-only dart/test/staged_ast_enrichment_contract_test.dart",
+            "ordinary_invocation": "(cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/staged_ast_enrichment_contract_test.dart)",
             "registration_marker": "running exact Dart staged-AST enrichment admission consumer",
             "invocation": "(cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/staged_ast_enrichment_contract_test.dart)",
         },
@@ -1006,6 +1019,7 @@ def mutation_inventory() -> list[Mutation]:
         ("authored_effect", set_value(["authored_surface", "effect"], "pure_value"), "authored surface mismatch"),
         ("authored_timing", set_value(["authored_surface", "evaluation"], "execute immediately"), "authored surface mismatch"),
         ("authored_options", set_value(["authored_surface", "required_options"], []), "authored surface mismatch"),
+        ("authored_availability", set_value(["authored_surface", "availability"], "stale"), "authored surface mismatch"),
         ("policy_authority", set_value(["policy", "authority"], "load during execution"), "policy mismatch"),
         ("policy_resolution", set_value(["policy", "resolution"], "host dependent"), "policy mismatch"),
         ("policy_loading", set_value(["policy", "loading"], "paths allowed"), "policy mismatch"),
@@ -1056,6 +1070,7 @@ def mutation_inventory() -> list[Mutation]:
         ("consumer_status", set_value(["backend_consumers", 0, "status"], "dormant_red"), "backend consumer inventory mismatch"),
         ("rust_consumer_status", set_value(["backend_consumers", 1, "status"], "dormant_red"), "backend consumer inventory mismatch"),
         ("dart_consumer_status", set_value(["backend_consumers", 2, "status"], "pending_absent"), "backend consumer inventory mismatch"),
+        ("julia_consumer_status", set_value(["backend_consumers", 3, "status"], "pending_absent"), "backend consumer inventory mismatch"),
         ("runtime_route", set_value(["runtime_routes", 5, "runtime"], "lua"), "runtime route inventory mismatch"),
         ("outward_path", set_value(["outward_guard", "paths", 0], "README2.md"), "outward guard mismatch"),
         ("outward_token", set_value(["outward_guard", "forbidden_tokens"], []), "outward guard mismatch"),

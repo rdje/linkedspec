@@ -9,6 +9,24 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-27 (`FUTURE-PARITY-BACKLOG.14.7.6.0` — Julia staged dormant RED): exact clean activation is Dart-
+  admission commit `b38f819c`; scope owns only the final-path dormant consumer, Julia lifecycle/current projection,
+  two inherited executable-governance corrections, and boundary documentation. Julia production remains untouched.
+- The explicit consumer is 86 GREEN/one intentional RED. It snapshots 92 neutral mutations, function-body-v1
+  phases/result/cache/wrong-top context, generic assignment-form `parse_job`, `expr-v1` denial, and equal typed
+  unsupported-helper detail across native, reconstructed, generated-plan, and independently included emitted code.
+- `julia/test/runtests.jl` and canonical CI contain no consumer reference. Compiled JSON and emitted source contain
+  no dedicated marker, typed sidecar, contract identity, callback, registry/source authority, or scheduler state.
+- Git blame localized stale authored availability to the original dormant Dart leaf: `.14.7.5.4` promoted the
+  structured Dart rows but missed the duplicate sentence. A reason-checked `authored_availability` mutation now
+  rejects recurrence while neutral governance advances to 92 only for Julia lifecycle plus this lockstep guard.
+- Literal execution localized the stale Dart route to caller CWD: the storage wrapper correctly preserves it, but
+  Dart requires `dart/pubspec.yaml`. The neutral route now enters `dart/`; the exact command passes all 19 groups.
+- `.14.7.6.1` owns the dedicated Julia marker/provenance implementation. This leaf does not change v1, rollout,
+  generated format, public/outward behavior, admitted backend behavior, Lua, recurrence, or combined no-drift.
+- Focused signoff passes the complete Julia local gate including 105/105 corpus, Perl 143/143, Rust's independently
+  compiled emitted carrier 1/1 in 757.60 seconds, Dart 19/19, all direct governance ledgers, Knowledge 895/7,589,
+  rendered mdBook, bounded histories, doctrines, and exact base-relative no-production/no-route guards.
 - 2026-08-27 (`FUTURE-PARITY-BACKLOG.14.7.5.4` — Dart staged carrier admission): exact clean activation is
   recursive-authority commit `053178b8`; scope owns fresh host-only production carriers, the stable consumer move,
   exact ordinary/canonical topology, Dart rollout, backend-parent closure, and no unrelated surface.

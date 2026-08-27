@@ -17,8 +17,8 @@ resolution, immutable pre-registered parser/cache authority, breadth-first recur
 failure policies, strict decreasing/cycle/depth/call/cancellation/resource bounds, detached results, diagnostics,
 carrier obligations, dormant routes, rollout, exact ownership, and the unchanged function-body-v1 adapter. The
 checker passes 4 registry entries, 8 provenance, 8 resolution/6 authority, 10 cache, 4 queue/3 isolation,
-4 result plus 3 failure policies, 10 chain, 5 detachment, 37 diagnostics, 9 rollout legs, 35 owners, and 90
-reason-checked mutations after Dart admission. It reuses ADR `0056`'s source algebra and progressive authority narrowing without
+4 result plus 3 failure policies, 10 chain, 5 detachment, 37 diagnostics, 9 rollout legs, 35 owners, and 92
+reason-checked mutations after Julia dormant-boundary activation. It reuses ADR `0056`'s source algebra and progressive authority narrowing without
 reusing `dispatch_span` syntax or elevating an authored parser id into filesystem authority.
 
 Perl leaves `FUTURE-PARITY-BACKLOG.14.7.3.1-.4` now implement and privately admit that same final path. `.1` makes exact assignment-form `parse_job(text_expr, literal_options)` one exclusive
@@ -103,6 +103,21 @@ The final-path consumer is 19/19, ordinary Dart is 435/435, and canonical CI req
 Neutral governance advances to 90 mutations and only Dart rollout moves; v1/v2 formats, public/outward behavior,
 and other backends do not move.
 
+Julia leaf `FUTURE-PARITY-BACKLOG.14.7.6.0` now freezes the same exact boundary without production behavior. The
+predeclared final path `julia/test/staged_ast_enrichment_contract_test.jl` is deliberately omitted from
+`julia/test/runtests.jl` and canonical CI. Its explicit run preserves the complete neutral inventory, current
+function-body-v1 phases/cache/stitch/wrong-top context, and narrow `expr-v1` registry denial. Assignment-form
+`parse_job(...)` remains one generic `ActionCallExpr`; native, `SpecFile`-JSON reconstructed, validated generated-
+plan, and independently included emitted-module routes all preserve the typed unsupported-helper result. The run
+is 86 GREEN/one exact missing-`STAGED_PARSE_JOB_MARKER`/`staged_parse_job_v2` RED. Only Julia's consumer lifecycle
+moves to `dormant_red`; rollout, generated format, public/outward behavior, and Julia production stay unchanged.
+
+That audit also closes two inherited neutral-governance defects. Dart admission updated structured status/backend/
+rollout rows but missed the duplicated human-readable availability constant; a new mutation now locks exact Dart-
+complete/Julia-dormant wording. Its ordinary Dart runtime command also omitted the package cwd required for
+`pubspec.yaml` discovery; the row now matches the already-proven canonical package-cwd form. The executable oracle
+is therefore 92 mutations and `.14.7.6.1` is the next frontier.
+
 Focused `.14.7.4.1` proof also exposed two pre-existing Rust defects against its exact clean base. Corrective
 `TRACE-OBSERVABILITY.5.1` now repairs the first: `compile_with_events` runs the already-current progressive static
 validator at the same point as ordinary compilation, so traced/untraced malformed-program diagnostics are exact
@@ -116,7 +131,8 @@ targets. `.5.4` historically aligned the stale Perl staged-admission snapshot wi
 introduced by `.14.7.4.0` commit `e37a8b77`; 143/143 plus canonical proof close corrective `.5`. `.14.7.4.2`
 then completes current-depth authority from that clean handoff, `.14.7.4.3` completes recursive authority, and
 `.14.7.4.4` admits four fresh carriers at 84 neutral mutations; `.14.7.5.0` historically advances only Dart
-dormancy to 85; `.14.7.5.4` admits Dart at 90. The next frontier is Julia `.14.7.6.0`.
+dormancy to 85; `.14.7.5.4` admits Dart at 90; `.14.7.6.0` freezes Julia dormant RED and repairs governance at 92.
+The next frontier is Julia `.14.7.6.1`.
 
 This closeout's mandatory engineering-notes rollover publishes immutable segment `4990`. ADR `0090` advances
 only finite route controls from 17/16 to 18 files / 17 manifest lines; the measured collection remains

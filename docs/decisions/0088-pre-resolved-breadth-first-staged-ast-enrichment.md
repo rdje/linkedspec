@@ -2,8 +2,8 @@
 
 - Date: 2026-08-25
 - Status: accepted architecture; executable neutral authority complete under `FUTURE-PARITY-BACKLOG.14.7.2`;
-  Perl, Rust, and Dart private behavior/admission complete; Julia `.14.7.6.0` is next; later backend admission and
-  public authoring remain pending
+  Perl, Rust, and Dart private behavior/admission complete; Julia dormant RED complete under `.14.7.6.0` and `.1`
+  is next; later backend admission and public authoring remain pending
 - Tags: architecture, staged-parsing, parse-job, source-location, registry, queue, policies, diagnostics, portability
 
 ## Context
@@ -128,13 +128,15 @@ cancellation/deadline/budget state, mutable queues, or host handles.
 4 registry entries; 2 sources; 8 provenance, 3 deterministic-id, 8 resolution, 6 authority, 10 cache, 4 queue,
 3 isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases; 37 diagnostics; 5 backend
 consumers over 6 runtime routes; 4 carrier requirements; 10 outward guards; 9 rollout legs; 35 exact owners; and
-90 reason-checked mutations after Dart admission.
+92 reason-checked mutations after Julia dormant-boundary activation.
 
-Neutral, Perl, Rust, and Dart rollout are complete. Julia, PUC Lua, LuaJIT, six-runtime recurrence, and public
-authoring/no-drift remain pending under `.14.7.6-.9`; `.14.7.10` owns independent recomposition. The checker is an
-always-on canonical-CI input. It guards ten facades/schema/semantic/MCP/CLI/README paths against premature public
-exposure, requires the Perl, Rust, and Dart consumers exactly once in ordinary and canonical discovery, rejects
-the former Dart dormant path, and keeps Julia/Lua consumers absent until their RED owners activate.
+Neutral, Perl, Rust, and Dart rollout are complete. Julia is `dormant_red` with rollout pending; PUC Lua, LuaJIT,
+six-runtime recurrence, and public authoring/no-drift remain pending under `.14.7.6-.9`; `.14.7.10` owns independent
+recomposition. The checker is an always-on canonical-CI input. It guards ten facades/schema/semantic/MCP/CLI/
+README paths against premature public exposure, requires the Perl, Rust, and Dart consumers exactly once in
+ordinary and canonical discovery, rejects the former Dart dormant path, requires Julia's final-path dormant file
+while proving it absent from ordinary/canonical discovery, and keeps the Lua consumer absent until its RED owner
+activates.
 
 ## Consequences
 
@@ -368,6 +370,23 @@ passes 19/19, and is required/invoked exactly once by canonical CI. Only Dart ro
 90 mutations. Function-body v1, generated-source v2, public/outward behavior, later backends, recurrence, and
 combined no-drift remain unchanged or pending.
 
+Julia dormant-boundary leaf `FUTURE-PARITY-BACKLOG.14.7.6.0` adds exactly one
+`julia/test/staged_ast_enrichment_contract_test.jl` consumer and no production source. Its explicit run preserves
+the complete neutral inventory and function-body-v1 resolve/load/compile/execute/cache/stitch behavior plus
+wrong-top context. Assignment-form `parse_job(...)` remains `ActionAssignScalarExpr(ActionCallExpr)`; the narrow v1
+registry rejects `expr-v1`, and native, `SpecFile`-JSON reconstructed, validated generated-plan, and independently
+included emitted-module routes preserve the typed unsupported-helper boundary. Eighty-six assertions pass; the
+only failure names missing `STAGED_PARSE_JOB_MARKER` / `staged_parse_job_v2`. The file is omitted from
+`julia/test/runtests.jl` and canonical CI, Julia rollout remains pending, and `.14.7.6.1` retains marker/provenance.
+
+The same leaf closes two inherited executable-governance defects from Dart admission without changing Dart
+behavior. Git blame proves the structured status/backend/rollout rows moved while the duplicated authored-surface
+availability constant did not; both JSON and checker now state Dart complete/Julia dormant, and an
+`authored_availability` mutation prevents recurrence. Literal execution also proves the recorded Dart ordinary
+runtime command requires the package cwd because `tools/run_dart_project_data.sh` intentionally preserves caller
+cwd and Dart resolves `pubspec.yaml` there. The runtime row now matches the already-proven canonical package-cwd
+form. Neutral governance is 92 mutations.
+
 ## Links
 
 - Owning task: `docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md`
@@ -383,4 +402,5 @@ combined no-drift remain unchanged or pending.
   `docs/knowledge/dart-staged-ast-enrichment-dormant-red.md` plus
   `docs/knowledge/dart-staged-ast-enrichment-current-depth-authority.md` plus
   `docs/knowledge/dart-staged-ast-enrichment-recursive-authority.md` and
-  `docs/knowledge/dart-staged-ast-enrichment-carriers-admission.md`
+  `docs/knowledge/dart-staged-ast-enrichment-carriers-admission.md` plus
+  `docs/knowledge/julia-staged-ast-enrichment-dormant-red.md`

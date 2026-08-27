@@ -135,7 +135,11 @@ unchanged results and Rust trace parity is current again. `.5.3` owns the stale 
 assertion found by `.5.1`; it now keeps the authority target dormant while requiring the separate admitted contract
 input/command once. `.5.4` historically aligned the admitted Perl staged snapshot to 79 mutations plus Rust
 `dormant_red`; `.14.7.4.4` supersedes that lifecycle snapshot with Rust admission and 84 mutations, Dart
-`.14.7.5.0` historically advances only dormant lifecycle to 85, and `.14.7.5.4` admits Dart at 90. Mandatory engineering-notes segment
+`.14.7.5.0` historically advances only dormant lifecycle to 85, and `.14.7.5.4` admits Dart at 90. Julia
+`.14.7.6.0` now freezes its exact final-path boundary at 86 GREEN plus one intentional missing-marker/provenance
+RED. The consumer stays outside ordinary and canonical discovery; current generic `parse_job` compilation and all
+four carrier failures remain unchanged while governance advances to 92 mutations and `julia=dormant_red`.
+`.14.7.6.1` exclusively owns the dedicated marker and live-proven provenance implementation. Mandatory engineering-notes segment
 `4990` is finitely authorized at 18 files / 17 manifest lines by ADR `0090`. Its mandatory change-history rollover
 publishes segment `4990`; ADR `0091` advances only that store's finite controls to 23 files / 22 manifest lines.
 

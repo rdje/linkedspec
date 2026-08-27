@@ -328,8 +328,8 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   native, normalized-descriptor, validated generated-plan, and independently loaded emitted equality plus distinct
   callbacks/cancellation/clocks and serialized-authority absence. Then run
   `bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py` to prove
-  neutral+Perl+Rust+Dart lifecycle, two absent later consumers, 90 mutations, and exact single Perl/Rust/Dart
-  ordinary+canonical admission.
+  neutral+Perl+Rust+Dart admission plus Julia dormant lifecycle, one absent later consumer, 92 mutations, and exact
+  single Perl/Rust/Dart ordinary+canonical admission.
   Public authoring remains `.14.7.9`.
 - **Rust general-staged admitted private boundary:** `FUTURE-PARITY-BACKLOG.14.7.4.0-.4` owns
   `rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs` as an ordinary and canonical consumer. Run it with
@@ -371,6 +371,17 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   Canonical CI requires, logs, and invokes the exact final path once; Dart rollout is complete. Because every
   admitted consumer snapshots the full neutral current projection, rerun Perl, Rust, and Dart consumers whenever
   any later backend lifecycle or governed mutation count moves.
+- **Julia general-staged dormant boundary:** `FUTURE-PARITY-BACKLOG.14.7.6.0` owns
+  `julia/test/staged_ast_enrichment_contract_test.jl`. Run it explicitly with
+  `bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no
+  julia/test/staged_ast_enrichment_contract_test.jl`; require exactly 86 passes and one labeled missing-marker/
+  typed-provenance RED. Do not add the path to `julia/test/runtests.jl` or canonical CI. Inspect
+  `to_json(payload.action_ast)` for exactly one generic `ActionCallExpr` named `parse_job`, then probe native,
+  `SpecFile`-JSON reconstructed, `execute_generated_parser_v2`, and an independently `Base.include_string`-loaded
+  emitted module. All four must preserve the typed unsupported-helper boundary while the narrow
+  `StagedParserRegistry.jl` continues to reject `expr-v1` at resolve and function-body v1 remains GREEN. Retrieve
+  [[julia-staged-ast-enrichment-dormant-red]] before production archaeology; `.14.7.6.1` alone owns the dedicated
+  marker/provenance implementation.
 - **Env knobs:** `LINKEDSPEC_TRACE_LEVEL` (level; `LINKEDSPEC_DUMP_VERBOSITY` is the fallback),
   `LINKEDSPEC_TRACE_FILE` (route to a file), `LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_EMOJI`,
   `LINKEDSPEC_TRACE_RESET_FILE`.
@@ -1190,11 +1201,11 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   unconditionally in canonical local CI.
 - **OUTPUT:** 4 registry entries; 8 provenance; 8 resolution/6 authority; 10 cache; 4 queue/3 isolation;
   4 result plus 3 failure policies; 10 recursive-chain and 5 detachment cases; five backend consumers over six
-  runtime routes; 37 diagnostics; 9 rollout legs; 35 exact owners; and 90 mutations.
-- **BOUNDARY:** neutral, Perl, Rust, and Dart are complete. Julia,
-  PUC Lua, LuaJIT, recurrence, and public no-drift remain pending. Outward facade/schema/semantic/MCP/CLI/README
-  tokens remain absent. The existing function-body v1 adapter and generated-source v2 format stay current and
-  unchanged.
+  runtime routes; 37 diagnostics; 9 rollout legs; 35 exact owners; and 92 mutations.
+- **BOUNDARY:** neutral, Perl, Rust, and Dart are complete. Julia is `dormant_red` at 86 GREEN/one intentional RED
+  and remains outside ordinary/canonical discovery with rollout pending. PUC Lua, LuaJIT, recurrence, and public
+  no-drift remain pending. Outward facade/schema/semantic/MCP/CLI/README tokens remain absent. The existing
+  function-body v1 adapter and generated-source v2 format stay current and unchanged.
 
 ### 4.9.1.2 Lossless-gap handoff preflight
 

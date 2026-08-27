@@ -10,6 +10,25 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-27 — FUTURE-PARITY-BACKLOG.14.7.6.0 — freeze Julia staged-AST dormant RED
+
+- Added the predeclared final-path Julia consumer without ordinary or canonical registration. Its explicit routed
+  run keeps 86 neutral/function-body-v1/generic-carrier assertions GREEN and fails only the labeled missing
+  `STAGED_PARSE_JOB_MARKER` / typed `staged_parse_job_v2` provenance assertion.
+- Froze current Julia behavior across native, normalized `SpecFile`-JSON reconstructed, validated generated-plan,
+  and independently included emitted-module routes: assignment-form `parse_job(...)` remains a generic call and
+  every route preserves the typed unsupported-helper boundary. No Julia production or generated format changes.
+- Advanced only Julia's neutral consumer lifecycle to `dormant_red` and mutation governance to 92; rollout,
+  function-body v1, public/outward surfaces, admitted backends, and Lua remain unchanged.
+- Corrected two inherited Dart-admission governance defects: duplicated availability prose still said Dart was
+  dormant, and its recorded ordinary runtime command omitted the package working directory required for pubspec
+  discovery. The exact corrected command passes 19/19, and a new availability mutation locks current truth.
+- Focused signoff passes the complete Julia local gate and 105/105 corpus, Perl 143/143, Rust 1/1 in 757.60
+  seconds, Dart 19/19, all direct governance ledgers, Knowledge generation, mdBook rendering, histories, doctrines,
+  and exact no-production/no-registration/no-format/no-public diff guards.
+- Synchronized task/index, Knowledge, ADR, roadmaps, architecture, Toolbox, live docs, memory, and mdBook;
+  `.14.7.6.1` retains exclusive ownership of Julia's private dedicated marker and live-proven provenance.
+
 ## 2026-08-27 — FUTURE-PARITY-BACKLOG.14.7.5.4 — admit Dart staged enrichment carriers
 
 - Added opaque host-only `StagedAstEnrichmentSeed` and one-use state. Every top-level execution constructs a fresh
