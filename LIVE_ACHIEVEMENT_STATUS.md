@@ -2,24 +2,27 @@
 
 ## Current Activity
 
-- Shared Lua staged recomposition `.14.7.7.5` independently reruns the committed 888/888 carrier on PUC Lua and
-  LuaJIT from exact clean admission commit `97bfbac6`.
-- Complete ordinary Lua, every admitted peer, exact once-per-ABI topology, neutral 106-mutation governance, and
-  all direct-dependent ledgers pass without an executable byte change.
-- Parent `.14.7.7` closes unchanged. Function-body v1, generated format, public/outward behavior, later
-  recurrence, dependencies/toolchains/storage/doctrines, and other backend behavior remain fixed.
+- Staged recurrence `.14.7.8` binds five immutable source groups to six ordered runtime routes from exact clean
+  Lua-recomposition commit `84396911`.
+- Neutral recurrence is current at 8/9/123, typed staged dispatch at 13/1/187, and capability truth at 85/0/0;
+  the exact composed driver passes every runtime and support ledger.
+- Only aggregate consumer governance snapshots move. Runtime behavior, function-body v1, generated format,
+  public `parse_job(...)` authoring/outward truth, dependencies, toolchains, storage, and doctrines remain fixed.
 
 ## Latest Completed Slice
 
-- `.14.7.7.5` independently recomposes all committed dual-ABI/peer/governance owners, closes the shared Lua
-  parent without behavior change, and clears focused plus receipt-bound canonical proof.
+- `.14.7.8` binds the recurring six-runtime driver, promotes only neutral recurrence plus typed staged dispatch
+  and its capability row, and clears focused plus receipt-bound canonical proof.
 
 ## Next Action
 
-- Commit the exact `.14.7.7.5` candidate, clear and verify the brief/clean handoff, then activate recurring
-  five-source/six-runtime proof `.14.7.8` task-tree-first.
+- Commit the exact `.14.7.8` candidate, clear and verify the brief/clean handoff, then activate public staged
+  authoring/no-drift `.14.7.9` task-tree-first.
 
 ## Recent Completions
+
+- `2026-08-28` — `.14.7.8` binds five staged sources/six routes, completes neutral recurrence at 123 mutations,
+  promotes typed staged dispatch to 13/1/187 and capability truth to 85/0/0, and hands off public authoring `.9`.
 
 - `2026-08-28` — `.14.7.7.5` reruns Lua 888/888 per ABI, admitted peers, exact topology, and 106-mutation
   governance unchanged, adds the durable recomposition fact, closes `.14.7.7`, and hands off `.14.7.8`.
@@ -75,10 +78,6 @@
 - `2026-08-26` — `.14.7.5.1` adds Dart's exclusive private staged declaration node, strict static closure, live-
   regex-proven typed provenance, and equal detached logical markers across four dormant routes; only `.2`
   authority remains RED.
-
-- `2026-08-26` — `.14.7.5.0` adds one excluded Dart consumer, passes fatal analysis plus four pre-boundary tests,
-  freezes one exact dedicated-marker/provenance RED, advances only dormant lifecycle governance to 85, and
-  finitely admits mandatory change-history segment `4990` through ADR `0091`.
 
 ## History
 

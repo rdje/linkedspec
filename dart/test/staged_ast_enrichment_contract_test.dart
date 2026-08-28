@@ -47,7 +47,7 @@ void main() {
     expect(contract['format'], 1);
     expect(
       contract['status'],
-      'all_private_backends_complete_recurring_and_public_pending',
+      'all_private_backends_complete_recurring_current_public_pending',
     );
     expect(contract['expected_counts'], <String, Object?>{
       'registry_entries': 4,
@@ -66,11 +66,13 @@ void main() {
       'carrier_requirements': 4,
       'backend_consumers': 5,
       'runtime_routes': 6,
+      'recurring_source_groups': 5,
+      'recurring_runtime_routes': 6,
       'outward_guard_paths': 10,
       'diagnostics': 37,
       'rollout_legs': 9,
       'ownership_rows': 35,
-      'mutations': 106,
+      'mutations': 123,
     });
 
     final expectedIds = <String, List<String>>{
@@ -192,7 +194,7 @@ void main() {
         'complete',
         'complete',
         'complete',
-        'pending',
+        'complete',
         'pending',
       ],
     );
@@ -1826,14 +1828,14 @@ Child::
 
       expect(
         contract['status'],
-        'all_private_backends_complete_recurring_and_public_pending',
+        'all_private_backends_complete_recurring_current_public_pending',
       );
       expect(
         _object(_list(contract['backend_consumers'])[2])['status'],
         'complete',
       );
       expect(_object(_list(contract['rollout'])[3])['status'], 'complete');
-      expect(_object(contract['expected_counts'])['mutations'], 106);
+      expect(_object(contract['expected_counts'])['mutations'], 123);
     },
   );
 }

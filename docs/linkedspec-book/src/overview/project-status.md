@@ -82,15 +82,15 @@ general style. This documentation-only slice changes no parser or runtime behavi
 The backend-neutral typed source-location contract is complete under `FUTURE-PARITY-BACKLOG.14.1.1`. Its
 independent checker passes 3 sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation,
 8 transaction, and 33 recursive-observation transitions, 6 detached recursive observations, 4 structural cases,
-92 current helper projections, 33 diagnostics, and 170 rejected mutations.
+92 current helper projections, 33 diagnostics, and 187 rejected mutations.
 
-Twelve of 14 rollout legs are complete and 2 remain pending. The neutral contract, public linked-rule structure,
+Thirteen of 14 rollout legs are complete and 1 remains pending. The neutral contract, public linked-rule structure,
 unchanged neutral/public recomposition, and all six runtime targets are complete. Their internal authorities and
 all 92 helper projections plus 7 aliases are admitted without changing public results or their established scalar,
 byte, or code-unit mark and cursor behavior. Exact transaction safety, recursive observation, lossless-gap
-composition, and progressive recurrence are complete.
+composition, progressive recurrence, and staged-AST recurrence are complete.
 
-Typed transaction composition and progressive span dispatch are now current at 12 complete / 2 pending; staged dispatch and combined program-wide no-drift remain pending.
+Typed transaction composition, progressive span dispatch, and staged-AST dispatch are now current at 13 complete / 1 pending; combined program-wide no-drift remains pending.
 
 Staged audit `.14.7.0` is behavior-free and now owns the exact handoff. The current five-backend/six-runtime path
 is one stable function-body queue depth through `actionir-body.spec` / `action_block`; function-specific stitching
@@ -153,7 +153,10 @@ safe points, typed rebasing, and four fresh post-parent carriers at 888/888 on b
 and canonical proof execute the same source once per ABI; all private backend lifecycle/rollout rows are complete
 and governance rejects 106 mutations. Independent dual-ABI recomposition `.14.7.7.5` reruns the committed source,
 all peer projections, exact topology, and direct dependents without executable movement, then closes shared Lua.
-Formats and public/outward behavior do not move; recurrence `.8` is next. Mandatory engineering-notes segment
+Formats and public/outward behavior do not move. Recurrence `.8` now binds those five immutable backend sources
+to six ordered runtime routes, promotes only typed `staged_span_dispatch`, and advances neutral/typed/capability
+truth to 123 mutations, 13/1/187, and 17 capabilities / 85 pass states. Public authoring/no-drift `.9` remains
+next. Mandatory engineering-notes segment
 `4989` is finitely authorized at 19 files / 18 manifest lines by ADR `0092`; every byte, aggregate, per-file,
 routing, and storage control remains unchanged. The current mandatory change-history rollover publishes segment
 `4989`; ADR `0093` advances only that separate store's finite controls to 24 files / 23 manifest lines.

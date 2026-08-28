@@ -37,9 +37,9 @@
 > and LuaJIT in exact order, then generated-source, capability, and language-coverage ledgers. Run
 > `bash tools/check_typed_source_location_six_runtime.sh`; canonical CI exposes the same all-toolchain proof behind
 > `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1`. Five backend source groups map to six runtime routes because the shared
-> Lua source executes on both ABIs. Governance is now 12 complete / 2 pending with 170 drift mutations after the
+> Lua source executes on both ABIs. Governance is now 13 complete / 1 pending with 187 drift mutations after the
 > independently governed transaction-safety projection, recursive-observation public projection/no-drift, and
-> lossless-gap plus progressive-recurrence closeouts.
+> lossless-gap, progressive-recurrence, and staged-AST-recurrence closeouts.
 >
 > No-change recomposition `.14.2.7` reruns that exact authority and closes the internal value/helper implementation
 > parent `.14.2`. It adds no replacement backend surface and does not promote the combined final `.14.8` row.
@@ -1888,7 +1888,8 @@ broader current census lives in `capability_conformance/manifest.json` and is ch
 perl tools/check_capability_conformance.pl
 ```
 
-The current audit contains 16 capabilities x five admitted backends. All 80 states pass. Earlier non-pass
+The current audit contains 17 capabilities x five admitted backends. All 85 states pass. The seventeenth row
+records already-admitted private staged-AST enrichment while retaining the public-authoring exclusion. Earlier non-pass
 boundaries remain below as rollout history, not as live gaps:
 
 | Residual mechanism | Current classification | Owner |
@@ -1896,10 +1897,10 @@ boundaries remain below as rollout history, not as live gaps:
 | Native named/file resolution | ADR `0026` and the 14/9/4 fixture fix portable names, exact paths, ordered roots, strict UTF-8, and typed stages. Perl, Rust, Dart, and Julia consume the contract directly; exact admission is closed. | closed `.1.6.4` |
 | Full native pipeline trace | Perl, Rust, Dart, and Julia propagate a caller-owned emitter through frontend/compiler/function/staged/runtime phases. Dart's direct routed/quiet/failure proof and recurring gates are admitted. | closed `.1.6.5` |
 | Generated parser source | Perl, Rust, Dart, Julia, and Lua pass contract v1. Rust compiles/runs 105/105. Dart, Julia, and Lua pass deterministic emission, ten-family direct dispatch/four rejections/trace roles, and exact contract-sourced interpreter-first 8/105 host admission; Lua uses fresh PUC Lua/LuaJIT hosts and exact v1/v2/v3 callable state. | closed `.3.5`; Lua admission `.8.4` |
-| Punctuation-light zero-argument aliases | Six standalone markers and a terminal zero-argument receiver segment preserve their parenthesized typed twins without widening conditions or general calls. | closed `.16.7`; live census 80/0/0 after Lua `.8.4` |
+| Punctuation-light zero-argument aliases | Six standalone markers and a terminal zero-argument receiver segment preserve their parenthesized typed twins without widening conditions or general calls. | closed `.16.7`; five-backend baseline 80/0/0 after Lua `.8.4`; current census 85/0/0 after staged recurrence `.14.7.8` |
 
-Deprecated Perl plugins, general future `parse_job(...)` authoring, and complete generic first-class/dynamic
-callable-codeblock equivalence are explicit exclusions/future owners rather than silent gaps. Rust now admits
+Deprecated Perl plugins and general future `parse_job(...)` authoring are the two explicit exclusions/future
+owners rather than silent gaps. Generic first-class/dynamic callable-codeblock equivalence is already admitted. Rust now admits
 typed callable-literal construction/state, exact dynamic invocation, and metadata-governed generic contextual
 equivalence across native, serialized, generated-plan, and emitted-source execution. Dart `.11.5.1-.2` admit the
 same inert explicit-literal construction/state plus dynamic invocation, copied/restored caller-context bindings,

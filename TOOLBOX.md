@@ -330,10 +330,11 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   native, normalized-descriptor, validated generated-plan, and independently loaded emitted equality plus distinct
   callbacks/cancellation/clocks and serialized-authority absence. Then run
   `bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py` to prove
-  neutral plus all five admitted private backends/six runtime routes, 106 mutations, and exact single-source Lua
-  dual-ABI ordinary/canonical admission. Run the Lua boundary unchanged with
+  neutral plus all five admitted private backends/six runtime routes, 123 mutations, exact single-source Lua
+  dual-ABI ordinary/canonical admission, and the completed recurring topology. Run the composed proof with
+  `bash tools/check_staged_ast_enrichment_six_runtime.sh`. To isolate the Lua boundary, run
   `bash tools/run_lua_project_data.sh puc lua/test/staged_ast_enrichment_contract_test.lua` and then `luajit`;
-  each must report 888/888; ordinary/canonical topology must execute that same path once per ABI.
+  each must report 890/890; ordinary/canonical topology must execute that same path once per ABI.
   Public authoring remains `.14.7.9`.
 - **Rust general-staged admitted private boundary:** `FUTURE-PARITY-BACKLOG.14.7.4.0-.4` owns
   `rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs` as an ordinary and canonical consumer. Run it with
@@ -1134,7 +1135,7 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   canonical gate.
 - **OUTPUT:** neutral governance reports 3 sources, 7 positions, 6 direct spans, 3 derived texts, 8+8+33 state
   transitions, 6 recursive observations, 4 structural cases, 92 helper projections + 7 aliases + 2 internal ids,
-  33 diagnostics, 12 complete / 2 pending rollout, and 170 rejected drift mutations. The driver then reports each
+  33 diagnostics, 13 complete / 1 pending rollout, and 187 rejected drift mutations. The driver then reports each
   of the six ordered runtime routes and three support ledgers before its exact success marker.
 - **BOUNDARY:** this is orchestration over existing internal consumers, not a new public typed-value surface. The
   combined recurring/public no-drift row remains pending for `FUTURE-PARITY-BACKLOG.14.8`. Retrieve
@@ -1163,7 +1164,7 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   `LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX=1 bash tools/run_ci_local.sh` for its all-toolchain route.
 - **OUTPUT:** Perl 7, Rust 7, Dart 7, Julia 30, PUC Lua 43, and LuaJIT 43 pass before the three support ledgers and
   exact success marker. Current neutral truth, including lossless-gap, transaction-safety, and progressive
-  recurrence composition, is 12 complete / 2 pending / 170 mutations.
+  recurrence composition, is 13 complete / 1 pending / 187 mutations.
 - **BOUNDARY:** five backend sources form six routes because one shared Lua source executes independently on both
   ABIs. Twelve regressions lock topology/storage and recurrence-only promotion; 27 more lock six public documents,
   six stale-claim denials, and ten surface guards without changing the 14-row rollout. Recursive-observation public projection/no-drift is current without moving any public or runtime surface.
@@ -1175,7 +1176,8 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
 
 - **WHAT:** `transaction_safety` in the typed ledger is a projection of the separately owned current recognition
   authority, not a second transaction implementation. It produced 11/3/152 at its boundary; progressive
-  recurrence subsequently makes current typed truth 12/2/170. Recognition remains 9/9/58 over five backend
+  recurrence subsequently produced 12/2/170, and staged-AST recurrence now makes current typed truth 13/1/187.
+  Recognition remains 9/9/58 over five backend
   sources and six runtime routes.
 - **WHEN:** changing typed transaction status/runtimes, transaction effect or progress language, recognition
   contract/checker/driver identity, stale Knowledge/book claims, or the progressive-dispatch transaction fence.
@@ -1183,8 +1185,8 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   `bash tools/check_recognition_transaction_six_runtime.sh`. The typed checker cross-checks upstream identity,
   rollout, topology, 9/11 effect counts, eight progress cases, public 3/26/45, and guide 1/14/18.
 - **BOUNDARY:** this leaf completed only `transaction_safety`. `parser_registry_or_staged_dispatch` remains
-  rejected inside uncommitted recognition. Progressive typed recurrence is now current; staged dispatch and
-  combined program-wide no-drift remain pending, and no parser/runtime/facade/schema/semantic/MCP/CLI/README
+  rejected inside uncommitted recognition. Progressive and staged typed recurrence are now current; only
+  combined program-wide no-drift remains pending, and no parser/runtime/facade/schema/semantic/MCP/CLI/README
   behavior changes.
 
 ### 4.9.1.1.2 `tools/check_progressive_span_dispatch_contract.py` — neutral progressive oracle
@@ -1239,15 +1241,35 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   unconditionally in canonical local CI.
 - **OUTPUT:** 4 registry entries; 8 provenance; 8 resolution/6 authority; 10 cache; 4 queue/3 isolation;
   4 result plus 3 failure policies; 10 recursive-chain and 5 detachment cases; five backend consumers over six
-  runtime routes; 37 diagnostics; 9 rollout legs; 35 exact owners; and 106 mutations.
+  runtime routes; 37 diagnostics; 9 rollout legs; 35 exact owners; and 123 mutations.
 - **BOUNDARY:** neutral, Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT are complete. Julia's 491/491 consumer runs once in ordinary/
   canonical discovery and proves a fresh host-only seed across four production routes after its exclusive marker,
   live-proven typed provenance, caller-frozen policies, and breadth-first recursive authority. The one shared Lua
   final-path consumer runs independently with private marker/provenance, caller-frozen policies, bounded recurrence,
   source rebasing, and four fresh production carriers at 888/888 on PUC Lua and LuaJIT; the same source is admitted
-  exactly once per ABI and both rollout rows are complete. Recurrence and public no-drift remain pending. Outward facade/
+  exactly once per ABI and both rollout rows are complete. Exact five-source/six-route recurrence is current;
+  public no-drift remains pending. Outward facade/
   schema/semantic/MCP/CLI/README tokens remain absent. The existing function-body v1 adapter and generated-source
   v2 format stay current and unchanged.
+
+### 4.9.1.1.5 `tools/check_staged_ast_enrichment_six_runtime.sh` — exact staged recurrence proof
+
+- **WHAT:** one repository-routed fail-fast composition of the staged neutral checker; exact Perl, Rust, Dart,
+  Julia, PUC Lua, and LuaJIT consumers; and typed-source, generated-source, capability, and language ledgers.
+- **WHEN:** changing staged source groups, route mapping/order, commands, support checks, project-data routing,
+  typed rollout, private capability truth, canonical registration, or current projection claims.
+- **HOW:** run `bash tools/check_staged_ast_enrichment_six_runtime.sh`. Canonical CI always requires,
+  machine-path-audits, syntax-checks, and outside-CWD routes the driver; use
+  `LINKEDSPEC_RUN_STAGED_AST_ENRICHMENT_MATRIX=1 bash tools/run_ci_local.sh` for its all-toolchain route.
+- **OUTPUT:** five immutable backend source groups form six runtime routes because shared Lua executes once on PUC
+  Lua and once on LuaJIT. Seventeen reason-checked topology/status/storage/rollout/capability regressions promote
+  only typed `staged_span_dispatch`, making typed truth 13 complete / 1 pending / 187 mutations. Neutral staged
+  governance is 9 legs / 123 mutations, and the capability census is 17 capabilities / 85 pass states.
+- **BOUNDARY:** the neutral checker locks unchanged function-body v1. The new all-pass
+  `language.private_staged_ast_enrichment` row describes only already-admitted private behavior;
+  `future.general_parse_job_authoring` stays present for `.14.7.9`. No consumer/runtime byte, generated format,
+  facade, schema, semantic/MCP, CLI, README, or public behavior moves. Retrieve
+  [[staged-ast-enrichment-recurring-gate]] before changing this proof.
 
 ### 4.9.1.2 Lossless-gap handoff preflight
 
@@ -1296,9 +1318,9 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
 - **HOW:** run `bash tools/check_typed_gap_composition_six_runtime.sh`. Canonical CI inventories, machine-path
   audits, syntax-checks, and outside-CWD routes the driver; use
   `LINKEDSPEC_RUN_TYPED_GAP_COMPOSITION_MATRIX=1 bash tools/run_ci_local.sh` for its full all-toolchain route.
-- **OUTPUT:** typed governance reports 12 complete / 2 pending / 170 mutations; gap governance reports 9/0/63
+- **OUTPUT:** typed governance reports 13 complete / 1 pending / 187 mutations; gap governance reports 9/0/63
   plus public 6/12/10/29; then Perl 124, Rust 1, Dart 5, Julia 319, PUC Lua 392, LuaJIT 392, recognition
-  137/250/58, strict generated Rust 105/105, capability 80/0/0, and language 250/105+1/126 pass before exact
+  137/250/58, strict generated Rust 105/105, capability 85/0/0, and language 250/105+1/126 pass before exact
   `[typed-gap-composition] PASS: typed lossless-gap composition, all six gap runtimes, and support ledgers complete`.
 - **BOUNDARY:** `gap_span` was already the detached typed same-source half-open Unicode-scalar carrier on all six
   runtimes. This route promotes only composition; it does not own or change grammar, lifecycle, implementation,

@@ -1425,7 +1425,7 @@ fn final_path_admits_fresh_production_carriers() {
     assert_eq!(neutral["format"], 1);
     assert_eq!(
         neutral["status"],
-        "all_private_backends_complete_recurring_and_public_pending"
+        "all_private_backends_complete_recurring_current_public_pending"
     );
     assert_eq!(
         neutral["expected_counts"],
@@ -1446,11 +1446,13 @@ fn final_path_admits_fresh_production_carriers() {
             "carrier_requirements": 4,
             "backend_consumers": 5,
             "runtime_routes": 6,
+            "recurring_source_groups": 5,
+            "recurring_runtime_routes": 6,
             "outward_guard_paths": 10,
             "diagnostics": 37,
             "rollout_legs": 9,
             "ownership_rows": 35,
-            "mutations": 106,
+            "mutations": 123,
         })
     );
     assert_eq!(
@@ -1637,7 +1639,7 @@ fn final_path_admits_fresh_production_carriers() {
             .collect::<Vec<_>>(),
         [
             "complete", "complete", "complete", "complete", "complete", "complete", "complete",
-            "pending", "pending",
+            "complete", "pending",
         ]
     );
     assert_eq!(

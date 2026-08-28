@@ -394,7 +394,7 @@ check_equal(contract.contract_id, CONTRACT_ID, "neutral contract id")
 check_equal(contract.format, 1, "neutral contract format")
 check_equal(
   contract.status,
-  "all_private_backends_complete_recurring_and_public_pending",
+  "all_private_backends_complete_recurring_current_public_pending",
   "neutral lifecycle status"
 )
 
@@ -415,11 +415,13 @@ for name, expected in pairs({
   carrier_requirements = 4,
   backend_consumers = 5,
   runtime_routes = 6,
+  recurring_source_groups = 5,
+  recurring_runtime_routes = 6,
   outward_guard_paths = 10,
   diagnostics = 37,
   rollout_legs = 9,
   ownership_rows = 35,
-  mutations = 106,
+  mutations = 123,
 }) do
   check_equal(contract.expected_counts[name], expected, "neutral count " .. name)
 end
@@ -531,18 +533,16 @@ check_equal(lua_consumer.owner, "FUTURE-PARITY-BACKLOG.14.7.7.0", "Lua consumer 
 check_equal(lua_consumer.path, CONSUMER_PATH, "Lua consumer stable path")
 check_equal(lua_consumer.status, "complete", "Lua consumer admitted status")
 check_equal(#contract.rollout, 9, "rollout row count")
-for index = 1, 7 do
+for index = 1, 8 do
   check_equal(contract.rollout[index].status, "complete", "complete rollout " .. index)
 end
-for index = 8, 9 do
-  check_equal(contract.rollout[index].status, "pending", "pending rollout " .. index)
-end
+check_equal(contract.rollout[9].status, "pending", "pending rollout 9")
 check_equal(contract.rollout[6].owner, "FUTURE-PARITY-BACKLOG.14.7.7", "PUC Lua rollout owner")
 check_equal(contract.rollout[7].owner, "FUTURE-PARITY-BACKLOG.14.7.7", "LuaJIT rollout owner")
 check_equal(
   contract.authored_surface.availability,
-  "private Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT staged-AST carriers admitted; " ..
-    "recurring and public authoring remain pending under FUTURE-PARITY-BACKLOG.14.7.8-.10",
+  "private Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT staged-AST carriers plus exact " ..
+    "six-runtime recurrence admitted; public authoring remains pending under FUTURE-PARITY-BACKLOG.14.7.9-.10",
   "authored availability"
 )
 

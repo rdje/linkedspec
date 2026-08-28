@@ -55,8 +55,9 @@ Eleven mutations independently reject missing consumer groups or paths, missing/
 routes, command drift, incorrect source binding, missing support checks, driver or CI-switch drift, and premature
 completion of the combined final row. That original recurring proof advanced governance from 42 to 53 without
 promoting a row. Later lineage, observation, public closeout, gap, and transaction composition reached 11/3/152.
-The dedicated progressive recurrence now brings the executable typed ledger to 12 complete / 2 pending and 170
-mutations while `FUTURE-PARITY-BACKLOG.14.8` still owns final public no-drift.
+Progressive recurrence first brought the executable typed ledger to 12 complete / 2 pending and 170 mutations.
+The staged-AST recurrence now advances only `staged_span_dispatch`, so current typed truth is 13 complete / 1
+pending with 187 mutations while `FUTURE-PARITY-BACKLOG.14.8` still owns final public no-drift.
 
-Related: [[recursive-observation-recurring-gate]], [[typed-source-location-runtime-rollout-plan]],
+Related: [[recursive-observation-recurring-gate]], [[staged-ast-enrichment-recurring-gate]], [[typed-source-location-runtime-rollout-plan]],
 [[typed-source-location-neutral-contract-plan]], and [[rule-local-cursor-five-backend-admission]].

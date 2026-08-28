@@ -2,7 +2,7 @@
   "format": 1,
   "contract_id": "linkedspec-typed-source-location-v1",
   "task_owner": "FUTURE-PARITY-BACKLOG.14.1.1",
-  "status": "neutral_contract_with_transaction_safety_recursive_observation_public_no_drift_lossless_gap_and_progressive_dispatch_composition",
+  "status": "neutral_contract_with_transaction_safety_recursive_observation_public_no_drift_lossless_gap_progressive_and_staged_dispatch_composition",
   "expected_counts": {
     "sources": 3,
     "position_conversions": 7,
@@ -24,10 +24,12 @@
     "recursive_observation_recurring_runtime_routes": 6,
     "progressive_span_dispatch_recurring_source_groups": 5,
     "progressive_span_dispatch_recurring_runtime_routes": 6,
+    "staged_ast_enrichment_recurring_source_groups": 5,
+    "staged_ast_enrichment_recurring_runtime_routes": 6,
     "recursive_observation_public_documents": 6,
     "recursive_observation_public_forbidden_claims": 6,
     "recursive_observation_public_surface_guard_paths": 10,
-    "mutations": 170
+    "mutations": 187
   },
   "policy": {
     "source_identity": "caller-authorized decoded input identity; never a path, backend object, or implicit read authority",
@@ -43,7 +45,7 @@
     "progress": "repetition, recursion, and staged queues must advance the cursor or prove a well-founded decreasing measure",
     "dispatch_authority": "a span conveys data and provenance only; source, registry, capability, and policy authority remain independently required",
     "source_spelling": "observe_recognition(observation, call(Child)) and private value = dispatch_span(\"expr-v1\", \"Expr\", span) are current in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; Position and Span remain private architectural values projected as detached records",
-    "implementation_boundary": "recognition transaction safety, recursive-observation spelling, dedicated private nodes, detached carriers, parser behavior, exact recursive-observation and progressive-span six-runtime recurring composition, public recursive-observation projection/no-drift proof, and lossless-gap typed composition are current; this is not a second transaction, gap, or progressive syntax, lifecycle, implementation, compatibility, or migration owner, staged dispatch and combined program-wide public-no-drift remain pending, and no public helper, descriptor/schema version, or semantic/MCP projection is admitted"
+    "implementation_boundary": "recognition transaction safety, recursive-observation spelling, dedicated private nodes, detached carriers, parser behavior, exact recursive-observation, progressive-span, and staged-AST six-runtime recurring composition, public recursive-observation projection/no-drift proof, and lossless-gap typed composition are current; this is not a second transaction, gap, progressive, or staged syntax, lifecycle, implementation, compatibility, or migration owner, combined program-wide public-no-drift remains pending, and no public helper, descriptor/schema version, or semantic/MCP projection is admitted"
   },
   "canonical_execution": {
     "contract_path": "capability_conformance/typed_source_location_contract.json",
@@ -374,8 +376,61 @@
     "rollout_assertions": {
       "row_count": 14,
       "progressive_span_dispatch": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.6"},
-      "staged_span_dispatch": {"status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.7"},
+      "staged_span_dispatch": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.7"},
       "recurring_public_no_drift": {"status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.8"}
+    }
+  },
+  "staged_ast_enrichment_recurring_gate": {
+    "driver": "tools/check_staged_ast_enrichment_six_runtime.sh",
+    "neutral_check": "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py",
+    "source_schema": {
+      "fields": ["backend", "paths"],
+      "policy": "five admitted staged-AST enrichment source groups are immutable; one shared Lua source executes independently on both ABIs"
+    },
+    "consumer_sources": [
+      {"backend": "perl", "paths": ["t/staged_ast_enrichment_perl_contract.t"]},
+      {"backend": "rust", "paths": ["rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs"]},
+      {"backend": "dart", "paths": ["dart/test/staged_ast_enrichment_contract_test.dart"]},
+      {"backend": "julia", "paths": ["julia/test/staged_ast_enrichment_contract_test.jl"]},
+      {"backend": "lua", "paths": ["lua/test/staged_ast_enrichment_contract_test.lua"]}
+    ],
+    "route_schema": {
+      "fields": ["runtime", "source_backend", "command"],
+      "policy": "neutral runs first; Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT then run exactly once in order"
+    },
+    "runtime_routes": [
+      {"runtime": "perl", "source_backend": "perl", "command": "PERL5LIB= prove -Iperl t/staged_ast_enrichment_perl_contract.t"},
+      {"runtime": "rust", "source_backend": "rust", "command": "\"$CARGO_CMD\" test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test staged_ast_enrichment_contract"},
+      {"runtime": "dart", "source_backend": "dart", "command": "cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/staged_ast_enrichment_contract_test.dart"},
+      {"runtime": "julia", "source_backend": "julia", "command": "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no julia/test/staged_ast_enrichment_contract_test.jl"},
+      {"runtime": "puc_lua", "source_backend": "lua", "command": "bash tools/run_lua_project_data.sh puc lua/test/staged_ast_enrichment_contract_test.lua"},
+      {"runtime": "luajit", "source_backend": "lua", "command": "bash tools/run_lua_project_data.sh luajit lua/test/staged_ast_enrichment_contract_test.lua"}
+    ],
+    "support_checks": [
+      "bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py",
+      "perl tools/check_generated_source_contract.pl",
+      "perl tools/check_capability_conformance.pl",
+      "perl tools/check_language_capability_coverage.pl"
+    ],
+    "storage": {
+      "initializer": "tools/project_data_env.sh",
+      "managed_entrypoint": "tools/check_staged_ast_enrichment_six_runtime.sh",
+      "policy": "all temporary, cache, build, native, and test data stays under repository-derived storage"
+    },
+    "local_ci": {
+      "driver": "tools/run_ci_local.sh",
+      "switch": "LINKEDSPEC_RUN_STAGED_AST_ENRICHMENT_MATRIX"
+    },
+    "rollout_assertions": {
+      "row_count": 14,
+      "staged_span_dispatch": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.7"},
+      "recurring_public_no_drift": {"status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.8"}
+    },
+    "capability_projection": {
+      "manifest": "capability_conformance/manifest.json",
+      "capability_id": "language.private_staged_ast_enrichment",
+      "backend_status": "pass",
+      "retained_public_exclusion": "future.general_parse_job_authoring"
     }
   },
   "recursive_observation_public_no_drift": {
@@ -524,19 +579,19 @@
         {
           "path": "docs/knowledge/typed-source-location-cursor-algebra-direction.md",
           "required_markers": [
-            "Typed transaction composition is current at six runtimes and the typed rollout is 12 complete / 2 pending."
+            "Typed transaction, progressive span-dispatch, and staged-AST composition are current at six runtimes and the typed rollout is 13 complete / 1 pending."
           ]
         },
         {
           "path": "docs/linkedspec-book/src/overview/project-status.md",
           "required_markers": [
-            "Typed transaction composition and progressive span dispatch are now current at 12 complete / 2 pending; staged dispatch and combined program-wide no-drift remain pending."
+            "Typed transaction composition, progressive span dispatch, and staged-AST dispatch are now current at 13 complete / 1 pending; combined program-wide no-drift remains pending."
           ]
         },
         {
           "path": "capability_conformance/README.md",
           "required_markers": [
-            "Typed transaction composition and progressive span dispatch are current; the typed rollout is 12 complete / 2 pending."
+            "Typed transaction composition, progressive span dispatch, and staged-AST dispatch are current; the typed rollout is 13 complete / 1 pending."
           ]
         }
       ],
@@ -560,7 +615,7 @@
       "row_count": 14,
       "transaction_safety": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.3"},
       "progressive_span_dispatch": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.6"},
-      "staged_span_dispatch": {"status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.7"},
+      "staged_span_dispatch": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.7"},
       "recurring_public_no_drift": {"status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.8"}
     }
   },
@@ -623,7 +678,7 @@
     {"leg": "recursive_observation", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.4", "runtimes": ["perl", "rust", "dart", "julia", "puc_lua", "luajit"]},
     {"leg": "lossless_gap_composition", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.5", "runtimes": ["perl", "rust", "dart", "julia", "puc_lua", "luajit"]},
     {"leg": "progressive_span_dispatch", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.6", "runtimes": ["perl", "rust", "dart", "julia", "puc_lua", "luajit"]},
-    {"leg": "staged_span_dispatch", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.7", "runtimes": []},
+    {"leg": "staged_span_dispatch", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.7", "runtimes": ["perl", "rust", "dart", "julia", "puc_lua", "luajit"]},
     {"leg": "recurring_public_no_drift", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.8", "runtimes": ["perl", "rust", "dart", "julia", "puc_lua", "luajit"]}
   ]
 }

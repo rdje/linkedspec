@@ -10,6 +10,30 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-28 — FUTURE-PARITY-BACKLOG.14.7.8 — bind staged enrichment recurring proof
+
+- Added `tools/check_staged_ast_enrichment_six_runtime.sh`, one repository-routed fail-fast composition of the
+  neutral oracle, Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, typed source, generated source, capability, language,
+  and exact function-body-v1 compatibility proof.
+- Registered the driver in project-data routing and behind the sole explicit canonical opt-in
+  `LINKEDSPEC_RUN_STAGED_AST_ENRICHMENT_MATRIX=1`; tracked-path, syntax, path, switch, and invocation topology is
+  reason-checked.
+- Completed only the neutral `recurring` rollout row and bound five immutable backend source groups to six ordered
+  routes. Seventeen topology/status/storage/rollout mutations advance neutral governance from 106 to 123.
+- Updated the five consumers only in lockstep aggregate governance snapshots. Behavioral assertions, fixtures,
+  parser/compiler/runtime code, function-body v1, generated format, public authoring/inventory, and outward
+  surfaces do not move.
+- Promoted only typed `staged_dispatch`, advancing typed governance from 12/2/170 to 13/1/187, and added the
+  corresponding all-pass `language.private_staged_ast_enrichment` capability row, advancing 80 to 85 pass cells.
+- The exact driver passes Perl 143/143, Rust 1/1 with a fresh emitted carrier, Dart 19/19, Julia 491/491, and Lua
+  890/890 per ABI. Progressive 9/9/116, recognition 138/250/58, semantic 6/20/128, generated 85/0/0, capability
+  85/0/0, language coverage, outside-CWD routing, README pressure, memory, Knowledge, mdBook, and all nine
+  doctrines pass.
+- Added [[staged-ast-enrichment-recurring-gate]] and synchronized roadmaps, architecture, Toolbox, capability
+  guidance, typed facts, task/index, bounded continuity, and the sole-facing mdBook. Public `parse_job(...)`
+  authoring remains owned by `.14.7.9`; combined typed public no-drift remains owned by `.14.8`.
+- Exact staged receipt-bound canonical CI passes before the atomic commit and clean handoff to `.14.7.9`.
+
 ## 2026-08-28 — FUTURE-PARITY-BACKLOG.14.7.7.5 — close shared Lua staged enrichment
 
 - Independently reran the unchanged shared staged carrier at 888/888 on PUC Lua and 888/888 on LuaJIT from exact

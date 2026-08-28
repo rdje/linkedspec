@@ -9,6 +9,30 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-28 (`FUTURE-PARITY-BACKLOG.14.7.8` — staged enrichment recurring proof): exact clean activation is
+  shared-Lua recomposition commit `84396911`; scope owns only recurring proof topology, neutral/typed/capability
+  governance, aggregate consumer snapshots, and synchronized current projections.
+- Five immutable backend source groups produce six ordered routes because the shared Lua consumer executes once
+  on PUC Lua and once on LuaJIT. The recurring driver runs neutral, Perl, Rust, Dart, Julia, both Lua ABIs, then
+  typed/generated/capability/language ledgers in one fail-fast repository-routed command.
+- Completing neutral `recurring` requires its fixed-contract consumers to advance status, two recurrence counts,
+  mutation total, rollout row eight, and applicable availability text. No behavioral case, fixture, parser,
+  compiler, runtime, carrier, generated-format, function-body-v1, public, or outward assertion changes.
+- During activation the agent mistakenly strengthened concise “immutable source groups” into byte-identical
+  consumers. The first Perl run exposed that overconstraint; the task and Knowledge record now preserve the
+  intended behavioral immutability while permitting the progressive-precedent aggregate snapshot updates.
+- Seventeen exact topology/status/storage/rollout mutations move neutral governance 106→123. The same 17 guarded
+  mutations promote only typed `staged_dispatch`, moving typed governance 12/2/170→13/1/187.
+- `language.private_staged_ast_enrichment` is the corresponding current all-pass capability row. It contributes
+  five backend cells, moving generated/capability census truth from 80/0/0 to 85/0/0 while the public
+  `parse_job` future exclusion remains exact.
+- Focused proof passes the complete driver: Perl 143, Rust 1 fresh emitted carrier, Dart 19, Julia 491, and Lua
+  890 per ABI; progressive, recognition, semantic, function-v1, generated, capability, language, routing,
+  README/memory/Knowledge, rendered book, and nine doctrines also pass.
+- [[staged-ast-enrichment-recurring-gate]] is the retrieval point. `.14.7.9` alone owns public authoring and
+  staged public no-drift; `.14.8` retains combined program-wide typed public no-drift.
+- This is a canonical milestone because executable CI topology and cross-backend recurring truth move together.
+  The exact staged candidate must clear receipt-bound canonical CI before its atomic commit.
 - 2026-08-28 (`FUTURE-PARITY-BACKLOG.14.7.7.5` — independent Lua staged recomposition): exact clean activation
   is dual-ABI admission commit `97bfbac6`; the leaf owns only closure/current projections and no executable file.
 - One shared source remains the sole Lua behavior oracle: 888/888 per ABI explicitly and once per ABI through the

@@ -53,6 +53,9 @@ RECURSIVE_OBSERVATION_RECURRING_DRIVER_PATH = (
 PROGRESSIVE_SPAN_DISPATCH_RECURRING_DRIVER_PATH = (
     ROOT / "tools" / "check_progressive_span_dispatch_six_runtime.sh"
 )
+STAGED_AST_ENRICHMENT_RECURRING_DRIVER_PATH = (
+    ROOT / "tools" / "check_staged_ast_enrichment_six_runtime.sh"
+)
 LOSSLESS_GAP_CONTRACT_PATH = (
     ROOT / "capability_conformance" / "inter_match_gap_capture_contract.json"
 )
@@ -93,10 +96,12 @@ EXPECTED_COUNTS = {
     "recursive_observation_recurring_runtime_routes": 6,
     "progressive_span_dispatch_recurring_source_groups": 5,
     "progressive_span_dispatch_recurring_runtime_routes": 6,
+    "staged_ast_enrichment_recurring_source_groups": 5,
+    "staged_ast_enrichment_recurring_runtime_routes": 6,
     "recursive_observation_public_documents": 6,
     "recursive_observation_public_forbidden_claims": 6,
     "recursive_observation_public_surface_guard_paths": 10,
-    "mutations": 170,
+    "mutations": 187,
 }
 
 POLICY = {
@@ -113,7 +118,7 @@ POLICY = {
     "progress": "repetition, recursion, and staged queues must advance the cursor or prove a well-founded decreasing measure",
     "dispatch_authority": "a span conveys data and provenance only; source, registry, capability, and policy authority remain independently required",
     "source_spelling": "observe_recognition(observation, call(Child)) and private value = dispatch_span(\"expr-v1\", \"Expr\", span) are current in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; Position and Span remain private architectural values projected as detached records",
-    "implementation_boundary": "recognition transaction safety, recursive-observation spelling, dedicated private nodes, detached carriers, parser behavior, exact recursive-observation and progressive-span six-runtime recurring composition, public recursive-observation projection/no-drift proof, and lossless-gap typed composition are current; this is not a second transaction, gap, or progressive syntax, lifecycle, implementation, compatibility, or migration owner, staged dispatch and combined program-wide public-no-drift remain pending, and no public helper, descriptor/schema version, or semantic/MCP projection is admitted",
+    "implementation_boundary": "recognition transaction safety, recursive-observation spelling, dedicated private nodes, detached carriers, parser behavior, exact recursive-observation, progressive-span, and staged-AST six-runtime recurring composition, public recursive-observation projection/no-drift proof, and lossless-gap typed composition are current; this is not a second transaction, gap, progressive, or staged syntax, lifecycle, implementation, compatibility, or migration owner, combined program-wide public-no-drift remains pending, and no public helper, descriptor/schema version, or semantic/MCP projection is admitted",
 }
 
 CANONICAL_EXECUTION = {
@@ -381,13 +386,109 @@ PROGRESSIVE_SPAN_DISPATCH_RECURRING_GATE = {
             "owner": "FUTURE-PARITY-BACKLOG.14.6",
         },
         "staged_span_dispatch": {
-            "status": "pending",
+            "status": "complete",
             "owner": "FUTURE-PARITY-BACKLOG.14.7",
         },
         "recurring_public_no_drift": {
             "status": "pending",
             "owner": "FUTURE-PARITY-BACKLOG.14.8",
         },
+    },
+}
+
+STAGED_AST_ENRICHMENT_RECURRING_GATE = {
+    "driver": "tools/check_staged_ast_enrichment_six_runtime.sh",
+    "neutral_check": "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py",
+    "source_schema": {
+        "fields": ["backend", "paths"],
+        "policy": "five admitted staged-AST enrichment source groups are immutable; one shared Lua source executes independently on both ABIs",
+    },
+    "consumer_sources": [
+        {"backend": "perl", "paths": ["t/staged_ast_enrichment_perl_contract.t"]},
+        {
+            "backend": "rust",
+            "paths": ["rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs"],
+        },
+        {
+            "backend": "dart",
+            "paths": ["dart/test/staged_ast_enrichment_contract_test.dart"],
+        },
+        {
+            "backend": "julia",
+            "paths": ["julia/test/staged_ast_enrichment_contract_test.jl"],
+        },
+        {
+            "backend": "lua",
+            "paths": ["lua/test/staged_ast_enrichment_contract_test.lua"],
+        },
+    ],
+    "route_schema": {
+        "fields": ["runtime", "source_backend", "command"],
+        "policy": "neutral runs first; Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT then run exactly once in order",
+    },
+    "runtime_routes": [
+        {
+            "runtime": "perl",
+            "source_backend": "perl",
+            "command": "PERL5LIB= prove -Iperl t/staged_ast_enrichment_perl_contract.t",
+        },
+        {
+            "runtime": "rust",
+            "source_backend": "rust",
+            "command": '"$CARGO_CMD" test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test staged_ast_enrichment_contract',
+        },
+        {
+            "runtime": "dart",
+            "source_backend": "dart",
+            "command": "cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/staged_ast_enrichment_contract_test.dart",
+        },
+        {
+            "runtime": "julia",
+            "source_backend": "julia",
+            "command": "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no julia/test/staged_ast_enrichment_contract_test.jl",
+        },
+        {
+            "runtime": "puc_lua",
+            "source_backend": "lua",
+            "command": "bash tools/run_lua_project_data.sh puc lua/test/staged_ast_enrichment_contract_test.lua",
+        },
+        {
+            "runtime": "luajit",
+            "source_backend": "lua",
+            "command": "bash tools/run_lua_project_data.sh luajit lua/test/staged_ast_enrichment_contract_test.lua",
+        },
+    ],
+    "support_checks": [
+        "bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py",
+        "perl tools/check_generated_source_contract.pl",
+        "perl tools/check_capability_conformance.pl",
+        "perl tools/check_language_capability_coverage.pl",
+    ],
+    "storage": {
+        "initializer": "tools/project_data_env.sh",
+        "managed_entrypoint": "tools/check_staged_ast_enrichment_six_runtime.sh",
+        "policy": "all temporary, cache, build, native, and test data stays under repository-derived storage",
+    },
+    "local_ci": {
+        "driver": "tools/run_ci_local.sh",
+        "switch": "LINKEDSPEC_RUN_STAGED_AST_ENRICHMENT_MATRIX",
+    },
+    "rollout_assertions": {
+        "row_count": 14,
+        "staged_span_dispatch": {
+            "status": "complete",
+            "owner": "FUTURE-PARITY-BACKLOG.14.7",
+        },
+        "recurring_public_no_drift": {
+            "status": "pending",
+            "owner": "FUTURE-PARITY-BACKLOG.14.8",
+        },
+    },
+    "capability_projection": {
+        "manifest": "capability_conformance/manifest.json",
+        "capability_id": "language.private_staged_ast_enrichment",
+        "backend_status": "pass",
+        "retained_public_exclusion": "future.general_parse_job_authoring",
     },
 }
 
@@ -544,19 +645,19 @@ TRANSACTION_SAFETY_COMPOSITION = {
             {
                 "path": "docs/knowledge/typed-source-location-cursor-algebra-direction.md",
                 "required_markers": [
-                    "Typed transaction composition is current at six runtimes and the typed rollout is 12 complete / 2 pending."
+                    "Typed transaction, progressive span-dispatch, and staged-AST composition are current at six runtimes and the typed rollout is 13 complete / 1 pending."
                 ],
             },
             {
                 "path": "docs/linkedspec-book/src/overview/project-status.md",
                 "required_markers": [
-                    "Typed transaction composition and progressive span dispatch are now current at 12 complete / 2 pending; staged dispatch and combined program-wide no-drift remain pending."
+                    "Typed transaction composition, progressive span dispatch, and staged-AST dispatch are now current at 13 complete / 1 pending; combined program-wide no-drift remains pending."
                 ],
             },
             {
                 "path": "capability_conformance/README.md",
                 "required_markers": [
-                    "Typed transaction composition and progressive span dispatch are current; the typed rollout is 12 complete / 2 pending."
+                    "Typed transaction composition, progressive span dispatch, and staged-AST dispatch are current; the typed rollout is 13 complete / 1 pending."
                 ],
             },
         ],
@@ -580,7 +681,7 @@ TRANSACTION_SAFETY_COMPOSITION = {
         "row_count": 14,
         "transaction_safety": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.3"},
         "progressive_span_dispatch": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.6"},
-        "staged_span_dispatch": {"status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.7"},
+        "staged_span_dispatch": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.7"},
         "recurring_public_no_drift": {"status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.8"},
     },
 }
@@ -1101,7 +1202,12 @@ ROLLOUT = [
         "FUTURE-PARITY-BACKLOG.14.6",
         ["perl", "rust", "dart", "julia", "puc_lua", "luajit"],
     ),
-    ("staged_span_dispatch", "pending", "FUTURE-PARITY-BACKLOG.14.7", []),
+    (
+        "staged_span_dispatch",
+        "complete",
+        "FUTURE-PARITY-BACKLOG.14.7",
+        ["perl", "rust", "dart", "julia", "puc_lua", "luajit"],
+    ),
     (
         "recurring_public_no_drift",
         "pending",
@@ -1830,6 +1936,8 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         fail("recursive-observation recurring gate is missing")
     if "progressive_span_dispatch_recurring_gate" not in contract:
         fail("progressive span-dispatch recurring gate is missing")
+    if "staged_ast_enrichment_recurring_gate" not in contract:
+        fail("staged-AST enrichment recurring gate is missing")
     if "recursive_observation_public_no_drift" not in contract:
         fail("recursive-observation public no-drift contract is missing")
     top_fields = [
@@ -1858,6 +1966,7 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         "recurring_gate",
         "recursive_observation_recurring_gate",
         "progressive_span_dispatch_recurring_gate",
+        "staged_ast_enrichment_recurring_gate",
         "recursive_observation_public_no_drift",
         "transaction_safety_composition",
         "lossless_gap_composition",
@@ -1870,7 +1979,7 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         fail("contract id drifted")
     if contract["task_owner"] != "FUTURE-PARITY-BACKLOG.14.1.1":
         fail("task owner drifted")
-    if contract["status"] != "neutral_contract_with_transaction_safety_recursive_observation_public_no_drift_lossless_gap_and_progressive_dispatch_composition":
+    if contract["status"] != "neutral_contract_with_transaction_safety_recursive_observation_public_no_drift_lossless_gap_progressive_and_staged_dispatch_composition":
         fail("typed source-location status drifted")
     if contract["expected_counts"] != EXPECTED_COUNTS:
         fail("expected counts drifted")
@@ -2511,6 +2620,28 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             "progressive span-dispatch recurring neutral, source, route, command, support, storage, rollout, or canonical topology drifted"
         )
 
+    staged_ast_enrichment_recurring = require_fields(
+        contract["staged_ast_enrichment_recurring_gate"],
+        [
+            "driver",
+            "neutral_check",
+            "source_schema",
+            "consumer_sources",
+            "route_schema",
+            "runtime_routes",
+            "support_checks",
+            "storage",
+            "local_ci",
+            "rollout_assertions",
+            "capability_projection",
+        ],
+        "staged-AST enrichment recurring gate",
+    )
+    if staged_ast_enrichment_recurring != STAGED_AST_ENRICHMENT_RECURRING_GATE:
+        fail(
+            "staged-AST enrichment recurring neutral, source, route, command, support, storage, rollout, capability, or canonical topology drifted"
+        )
+
     rollout = require_list(contract["rollout"], "rollout", EXPECTED_COUNTS["rollout_legs"])
     observed_rollout: list[tuple[Any, ...]] = []
     for leg in rollout:
@@ -2566,6 +2697,18 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         } != expected:
             fail(f"progressive span-dispatch rollout assertion drifted: {leg}")
 
+    staged_assertions = staged_ast_enrichment_recurring["rollout_assertions"]
+    if staged_assertions["row_count"] != len(rollout):
+        fail("staged-AST enrichment recurrence changed rollout cardinality")
+    for leg in ("staged_span_dispatch", "recurring_public_no_drift"):
+        actual = rollout_by_leg.get(leg)
+        expected = staged_assertions[leg]
+        if actual is None or {
+            "status": actual["status"],
+            "owner": actual["owner"],
+        } != expected:
+            fail(f"staged-AST enrichment rollout assertion drifted: {leg}")
+
     actual_counts = {
         "sources": len(sources),
         "position_conversions": len(positions),
@@ -2594,6 +2737,12 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         ),
         "progressive_span_dispatch_recurring_runtime_routes": len(
             progressive_span_dispatch_recurring["runtime_routes"]
+        ),
+        "staged_ast_enrichment_recurring_source_groups": len(
+            staged_ast_enrichment_recurring["consumer_sources"]
+        ),
+        "staged_ast_enrichment_recurring_runtime_routes": len(
+            staged_ast_enrichment_recurring["runtime_routes"]
         ),
         "recursive_observation_public_documents": len(
             recursive_observation_public["documents"]
@@ -2630,6 +2779,7 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             RECURRING_DRIVER_PATH,
             RECURSIVE_OBSERVATION_RECURRING_DRIVER_PATH,
             PROGRESSIVE_SPAN_DISPATCH_RECURRING_DRIVER_PATH,
+            STAGED_AST_ENRICHMENT_RECURRING_DRIVER_PATH,
             LOSSLESS_GAP_CONTRACT_PATH,
             LOSSLESS_GAP_CHECKER_PATH,
             LOSSLESS_GAP_DRIVER_PATH,
@@ -2959,6 +3109,97 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             fail(
                 "progressive span-dispatch recurring project-data routing registration drifted"
             )
+        staged_driver_text = STAGED_AST_ENRICHMENT_RECURRING_DRIVER_PATH.read_text(
+            encoding="utf-8"
+        )
+        if not STAGED_AST_ENRICHMENT_RECURRING_DRIVER_PATH.stat().st_mode & 0o111:
+            fail("staged-AST enrichment recurring driver is not executable")
+        staged_storage = STAGED_AST_ENRICHMENT_RECURRING_GATE["storage"]
+        for marker in (
+            f'source "$REPO_ROOT/{staged_storage["initializer"]}"',
+            f'linkedspec_project_data_enter_run "$REPO_ROOT/{staged_storage["managed_entrypoint"]}" "$@"',
+        ):
+            if staged_driver_text.count(marker) != 1:
+                fail(
+                    "staged-AST enrichment recurring driver is not repository-routed: "
+                    f"{marker}"
+                )
+        staged_markers = [
+            STAGED_AST_ENRICHMENT_RECURRING_GATE["neutral_check"],
+            *[
+                route["command"]
+                for route in STAGED_AST_ENRICHMENT_RECURRING_GATE["runtime_routes"]
+            ],
+            *STAGED_AST_ENRICHMENT_RECURRING_GATE["support_checks"],
+        ]
+        staged_positions: list[int] = []
+        for marker in staged_markers:
+            if staged_driver_text.count(marker) != 1:
+                fail(
+                    "staged-AST enrichment recurring driver marker must appear exactly once: "
+                    f"{marker}"
+                )
+            staged_positions.append(staged_driver_text.index(marker))
+        if staged_positions != sorted(staged_positions):
+            fail("staged-AST enrichment recurring neutral/runtime/support order drifted")
+        staged_sources = STAGED_AST_ENRICHMENT_RECURRING_GATE["consumer_sources"]
+        staged_source_paths = [
+            relative_path
+            for source in staged_sources
+            for relative_path in source["paths"]
+        ]
+        if len(staged_source_paths) != len(set(staged_source_paths)):
+            fail("staged-AST enrichment recurring consumer source duplication drifted")
+        for relative_path in staged_source_paths:
+            if not (ROOT / relative_path).is_file():
+                fail(
+                    "staged-AST enrichment recurring consumer source is missing: "
+                    f"{relative_path}"
+                )
+        if {
+            row["source_backend"]
+            for row in STAGED_AST_ENRICHMENT_RECURRING_GATE["runtime_routes"]
+        } != {row["backend"] for row in staged_sources}:
+            fail("staged-AST enrichment recurring route/source binding drifted")
+        staged_ci = STAGED_AST_ENRICHMENT_RECURRING_GATE["local_ci"]
+        if staged_ci["driver"] != CI_PATH.relative_to(ROOT).as_posix():
+            fail("staged-AST enrichment recurring canonical driver identity drifted")
+        staged_ci_markers = (
+            f"require_tracked_file {STAGED_AST_ENRICHMENT_RECURRING_GATE['driver']}",
+            f'if [[ "${{{staged_ci["switch"]}:-0}}" == "1" ]]; then',
+            f'bash "$REPO_ROOT/{STAGED_AST_ENRICHMENT_RECURRING_GATE["driver"]}"',
+        )
+        for marker, expected_count in zip(staged_ci_markers, (2, 1, 1), strict=True):
+            if ci_text.count(marker) != expected_count:
+                fail(
+                    "staged-AST enrichment recurring canonical registration marker count drifted: "
+                    f"{marker} expected {expected_count}"
+                )
+        if workflow_routing_text.count(
+            STAGED_AST_ENRICHMENT_RECURRING_GATE["driver"]
+        ) != 2:
+            fail("staged-AST enrichment recurring project-data routing registration drifted")
+        capability_projection = STAGED_AST_ENRICHMENT_RECURRING_GATE[
+            "capability_projection"
+        ]
+        capability_manifest = json.loads(
+            (ROOT / capability_projection["manifest"]).read_text(encoding="utf-8")
+        )
+        capability_rows = [
+            row
+            for row in capability_manifest["capabilities"]
+            if row["id"] == capability_projection["capability_id"]
+        ]
+        if len(capability_rows) != 1 or any(
+            backend["status"] != capability_projection["backend_status"]
+            for backend in capability_rows[0]["backends"].values()
+        ):
+            fail("staged-AST enrichment capability projection drifted")
+        if sum(
+            row["id"] == capability_projection["retained_public_exclusion"]
+            for row in capability_manifest["excluded_or_future"]
+        ) != 1:
+            fail("staged-AST public-authoring exclusion projection drifted")
         composition_gate = lossless_gap_composition["recurring_gate"]
         composition_driver_text = TYPED_GAP_COMPOSITION_DRIVER_PATH.read_text(
             encoding="utf-8"
@@ -3110,6 +3351,14 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         candidate: dict[str, Any],
     ) -> None:
         routes = candidate["progressive_span_dispatch_recurring_gate"][
+            "runtime_routes"
+        ]
+        routes[0], routes[1] = routes[1], routes[0]
+
+    def swap_staged_ast_enrichment_recurring_routes(
+        candidate: dict[str, Any],
+    ) -> None:
+        routes = candidate["staged_ast_enrichment_recurring_gate"][
             "runtime_routes"
         ]
         routes[0], routes[1] = routes[1], routes[0]
@@ -3441,6 +3690,108 @@ def mutation_checks(contract: dict[str, Any]) -> int:
             lambda c: c["progressive_span_dispatch_recurring_gate"][
                 "local_ci"
             ].__setitem__("switch", "LINKEDSPEC_RUN_WRONG_MATRIX"),
+        ),
+        (
+            "staged-AST enrichment recurring source group omitted",
+            lambda c: c["staged_ast_enrichment_recurring_gate"][
+                "consumer_sources"
+            ].pop(),
+        ),
+        (
+            "staged-AST enrichment recurring source path omitted",
+            lambda c: c["staged_ast_enrichment_recurring_gate"][
+                "consumer_sources"
+            ][0]["paths"].pop(),
+        ),
+        (
+            "staged-AST enrichment recurring runtime route omitted",
+            lambda c: c["staged_ast_enrichment_recurring_gate"][
+                "runtime_routes"
+            ].pop(),
+        ),
+        (
+            "staged-AST enrichment recurring runtime route order",
+            swap_staged_ast_enrichment_recurring_routes,
+        ),
+        (
+            "staged-AST enrichment recurring runtime route duplicated",
+            lambda c: c["staged_ast_enrichment_recurring_gate"][
+                "runtime_routes"
+            ].append(
+                copy.deepcopy(
+                    c["staged_ast_enrichment_recurring_gate"]["runtime_routes"][0]
+                )
+            ),
+        ),
+        (
+            "staged-AST enrichment recurring runtime command",
+            lambda c: c["staged_ast_enrichment_recurring_gate"][
+                "runtime_routes"
+            ][1].__setitem__("command", "cargo test --wrong"),
+        ),
+        (
+            "staged-AST enrichment recurring runtime source binding",
+            lambda c: c["staged_ast_enrichment_recurring_gate"][
+                "runtime_routes"
+            ][5].__setitem__("source_backend", "rust"),
+        ),
+        (
+            "staged-AST enrichment recurring neutral check",
+            lambda c: c["staged_ast_enrichment_recurring_gate"].__setitem__(
+                "neutral_check", "bash tools/run_python_project_data.sh tools/wrong.py"
+            ),
+        ),
+        (
+            "staged-AST enrichment recurring support check omitted",
+            lambda c: c["staged_ast_enrichment_recurring_gate"][
+                "support_checks"
+            ].pop(),
+        ),
+        (
+            "staged-AST enrichment recurring storage initializer",
+            lambda c: c["staged_ast_enrichment_recurring_gate"]["storage"].__setitem__(
+                "initializer", "/tmp/project_data_env.sh"
+            ),
+        ),
+        (
+            "staged-AST enrichment recurring storage entrypoint",
+            lambda c: c["staged_ast_enrichment_recurring_gate"]["storage"].__setitem__(
+                "managed_entrypoint", "tools/wrong.sh"
+            ),
+        ),
+        (
+            "staged-AST enrichment recurring driver",
+            lambda c: c["staged_ast_enrichment_recurring_gate"].__setitem__(
+                "driver", "tools/missing.sh"
+            ),
+        ),
+        (
+            "staged-AST enrichment recurring canonical switch",
+            lambda c: c["staged_ast_enrichment_recurring_gate"][
+                "local_ci"
+            ].__setitem__("switch", "LINKEDSPEC_RUN_WRONG_MATRIX"),
+        ),
+        (
+            "staged-AST enrichment recurring rollout assertion",
+            lambda c: c["staged_ast_enrichment_recurring_gate"][
+                "rollout_assertions"
+            ]["staged_span_dispatch"].__setitem__("status", "pending"),
+        ),
+        (
+            "staged-AST enrichment recurring capability id",
+            lambda c: c["staged_ast_enrichment_recurring_gate"][
+                "capability_projection"
+            ].__setitem__("capability_id", "language.wrong"),
+        ),
+        (
+            "staged-AST enrichment recurring capability status",
+            lambda c: c["staged_ast_enrichment_recurring_gate"][
+                "capability_projection"
+            ].__setitem__("backend_status", "partial"),
+        ),
+        (
+            "staged span-dispatch rollout regressed",
+            lambda c: c["rollout"][12].update({"status": "pending", "runtimes": []}),
         ),
         (
             "recursive-observation public owner",

@@ -1,6 +1,20 @@
 # ARCHITECTURE STATE
 
-## General staged-AST enrichment now has executable neutral authority
+## General staged-AST enrichment now has exact private six-runtime recurrence
+
+`FUTURE-PARITY-BACKLOG.14.7.8` composes the already-admitted Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT
+behavior through one repository-routed fail-fast authority. Five immutable backend source groups form six ordered
+runtime routes because one shared Lua source executes independently on both ABIs. Neutral runs first, then every
+runtime, typed-source, generated-source, capability, and language ledgers. Canonical CI always requires,
+machine-path-audits, syntax-checks, and outside-CWD routes the driver; exact all-toolchain execution is opt-in via
+`LINKEDSPEC_RUN_STAGED_AST_ENRICHMENT_MATRIX=1`.
+
+Seventeen reason-checked topology/status/storage/rollout/capability mutations advance staged neutral governance
+from 106 to 123. Only typed `staged_span_dispatch` moves, producing 13 complete / 1 pending / 187 mutations. The
+corresponding all-pass private capability row advances the census from 16/80 to 17/85, while
+`future.general_parse_job_authoring` remains the exact `.14.7.9` public boundary. Function-body v1, generated
+format v2, every consumer/runtime byte, facade/schema/semantic/MCP/CLI/README surface, and public behavior remain
+unchanged.
 
 Behavior-free audit `FUTURE-PARITY-BACKLOG.14.7.0` starts from exact clean progressive-closeout commit
 `fbcdedb6`. Toolbox-first descriptor, runtime, registry, source, and focused-test probes establish one precise
@@ -240,8 +254,9 @@ surfaces stay fixed. Executable neutral contract `.2` and private Perl `.3`, Rus
 backend parents are complete. Shared Lua `.7.0` owns the stable dormant dual-ABI baseline and `.7.1` owns the
 completed private annotation/provenance carrier; `.2-.5` retain resolution/policies, recurrence/carriers,
 admission, and independent ABI recomposition.
-Recurrence `.8`, public authoring/closeout `.9`, and independent recomposition `.10` remain dependency-frozen
-behind it. Every Lua rollout leg and public/outward surface therefore remains pending.
+Shared Lua `.7.2-.5` subsequently completed resolution/policies, recurrence/carriers, admission, and independent
+ABI recomposition. Recurrence `.8` is now complete; public authoring/closeout `.9` and independent recomposition
+`.10` remain. Public/outward surfaces therefore remain pending even though every private runtime row is current.
 
 ## Typed transaction safety now composes the complete recognition authority
 
@@ -253,9 +268,10 @@ eight progress fixtures, public no-drift 3/26/45, and capability-guide no-drift 
 The typed contract now binds that committed authority instead of duplicating transaction behavior. One opaque
 linear token snapshots only the owning invocation cursor, anonymous boundary, and named marks. Uncommitted
 recognition rejects `parser_registry_or_staged_dispatch`; rolled-back work cannot establish progress. The
-`transaction_safety` becomes complete on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Later progressive
-recurrence promotes only `progressive_span_dispatch`; staged dispatch and combined program-wide no-drift remain
-pending under `.14.7` and `.14.8`. Typed governance is now 12 complete / 2 pending / 170 mutations with no parser,
+`transaction_safety` becomes complete on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Progressive recurrence
+later promotes only `progressive_span_dispatch`; staged-AST recurrence then promotes only
+`staged_span_dispatch`. Combined program-wide no-drift remains pending under `.14.8`. Typed governance is now
+13 complete / 1 pending / 187 mutations with no parser,
 compiler, runtime, facade, schema, semantic/MCP, CLI, README, storage, or public behavior change.
 
 ## Progressive span dispatch has six private runtimes and exact typed recurrence

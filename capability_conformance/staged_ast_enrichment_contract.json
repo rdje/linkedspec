@@ -2,7 +2,7 @@
   "format": 1,
   "contract_id": "linkedspec-staged-ast-enrichment-v1",
   "task_owner": "FUTURE-PARITY-BACKLOG.14.7.2",
-  "status": "all_private_backends_complete_recurring_and_public_pending",
+  "status": "all_private_backends_complete_recurring_current_public_pending",
   "expected_counts": {
     "registry_entries": 4,
     "sources": 2,
@@ -20,11 +20,13 @@
     "carrier_requirements": 4,
     "backend_consumers": 5,
     "runtime_routes": 6,
+    "recurring_source_groups": 5,
+    "recurring_runtime_routes": 6,
     "outward_guard_paths": 10,
     "diagnostics": 37,
     "rollout_legs": 9,
     "ownership_rows": 35,
-    "mutations": 106
+    "mutations": 123
   },
   "authored_surface": {
     "example": "job_marker = parse_job(text_expr, hash(\"node_kind\", \"expression\", \"payload_kind\", \"embedded_expression\", \"spec\", \"expr-v1\", \"top\", \"Expr\", \"result_policy\", \"sibling_field\", \"into\", \"expression_ast\", \"on_error\", \"fail\"))",
@@ -45,7 +47,7 @@
       "into",
       "required_capabilities"
     ],
-    "availability": "private Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT staged-AST carriers admitted; recurring and public authoring remain pending under FUTURE-PARITY-BACKLOG.14.7.8-.10"
+    "availability": "private Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT staged-AST carriers plus exact six-runtime recurrence admitted; public authoring remains pending under FUTURE-PARITY-BACKLOG.14.7.9-.10"
   },
   "policy": {
     "authority": "the caller freezes aliases, declaring-spec-relative candidates, ordered search-root candidates, ordered provider candidates, resolves every statically declared selector, and freezes immutable already-compiled registry entries before authored execution",
@@ -802,6 +804,59 @@
     {"order": 5, "runtime": "puc_lua", "consumer_backend": "lua", "command": "bash tools/run_lua_project_data.sh puc lua/test/staged_ast_enrichment_contract_test.lua"},
     {"order": 6, "runtime": "luajit", "consumer_backend": "lua", "command": "bash tools/run_lua_project_data.sh luajit lua/test/staged_ast_enrichment_contract_test.lua"}
   ],
+  "recurring_gate": {
+    "driver": "tools/check_staged_ast_enrichment_six_runtime.sh",
+    "neutral_check": "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py",
+    "source_schema": {
+      "fields": ["backend", "paths"],
+      "policy": "five admitted staged-AST enrichment source groups are immutable; one shared Lua source executes independently on both ABIs"
+    },
+    "consumer_sources": [
+      {"backend": "perl", "paths": ["t/staged_ast_enrichment_perl_contract.t"]},
+      {"backend": "rust", "paths": ["rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs"]},
+      {"backend": "dart", "paths": ["dart/test/staged_ast_enrichment_contract_test.dart"]},
+      {"backend": "julia", "paths": ["julia/test/staged_ast_enrichment_contract_test.jl"]},
+      {"backend": "lua", "paths": ["lua/test/staged_ast_enrichment_contract_test.lua"]}
+    ],
+    "route_schema": {
+      "fields": ["runtime", "source_backend", "command"],
+      "policy": "neutral runs first; Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT then run exactly once in order"
+    },
+    "runtime_routes": [
+      {"runtime": "perl", "source_backend": "perl", "command": "PERL5LIB= prove -Iperl t/staged_ast_enrichment_perl_contract.t"},
+      {"runtime": "rust", "source_backend": "rust", "command": "\"$CARGO_CMD\" test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test staged_ast_enrichment_contract"},
+      {"runtime": "dart", "source_backend": "dart", "command": "cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/staged_ast_enrichment_contract_test.dart"},
+      {"runtime": "julia", "source_backend": "julia", "command": "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no julia/test/staged_ast_enrichment_contract_test.jl"},
+      {"runtime": "puc_lua", "source_backend": "lua", "command": "bash tools/run_lua_project_data.sh puc lua/test/staged_ast_enrichment_contract_test.lua"},
+      {"runtime": "luajit", "source_backend": "lua", "command": "bash tools/run_lua_project_data.sh luajit lua/test/staged_ast_enrichment_contract_test.lua"}
+    ],
+    "support_checks": [
+      "bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py",
+      "perl tools/check_generated_source_contract.pl",
+      "perl tools/check_capability_conformance.pl",
+      "perl tools/check_language_capability_coverage.pl"
+    ],
+    "storage": {
+      "initializer": "tools/project_data_env.sh",
+      "managed_entrypoint": "tools/check_staged_ast_enrichment_six_runtime.sh",
+      "policy": "all temporary, cache, build, native, and test data stays under repository-derived storage"
+    },
+    "local_ci": {
+      "driver": "tools/run_ci_local.sh",
+      "switch": "LINKEDSPEC_RUN_STAGED_AST_ENRICHMENT_MATRIX"
+    },
+    "rollout_assertions": {
+      "row_count": 9,
+      "recurring": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.7.8"},
+      "public_no_drift": {"status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.7.9"}
+    },
+    "capability_projection": {
+      "manifest": "capability_conformance/manifest.json",
+      "capability_id": "language.private_staged_ast_enrichment",
+      "backend_status": "pass",
+      "retained_public_exclusion": "future.general_parse_job_authoring"
+    }
+  },
   "outward_guard": {
     "paths": [
       "perl/LinkedSpec.pm",
@@ -870,7 +925,7 @@
     {"order": 5, "leg": "julia", "owner": "FUTURE-PARITY-BACKLOG.14.7.6", "status": "complete", "paths": ["julia/test/staged_ast_enrichment_contract_test.jl"]},
     {"order": 6, "leg": "puc_lua", "owner": "FUTURE-PARITY-BACKLOG.14.7.7", "status": "complete", "paths": ["lua/test/staged_ast_enrichment_contract_test.lua"]},
     {"order": 7, "leg": "luajit", "owner": "FUTURE-PARITY-BACKLOG.14.7.7", "status": "complete", "paths": ["lua/test/staged_ast_enrichment_contract_test.lua"]},
-    {"order": 8, "leg": "recurring", "owner": "FUTURE-PARITY-BACKLOG.14.7.8", "status": "pending", "paths": ["tools/check_staged_ast_enrichment_six_runtime.sh"]},
+    {"order": 8, "leg": "recurring", "owner": "FUTURE-PARITY-BACKLOG.14.7.8", "status": "complete", "paths": ["tools/check_staged_ast_enrichment_six_runtime.sh"]},
     {"order": 9, "leg": "public_no_drift", "owner": "FUTURE-PARITY-BACKLOG.14.7.9", "status": "pending", "paths": ["docs/linkedspec-book/src/dsl/staged-ast-enrichment.md", "docs/linkedspec-book/src/appendix/backend-handoff.md", "docs/linkedspec-book/src/overview/project-status.md", "capability_conformance/README.md", "TOOLBOX.md", "ROADMAP.md"]}
   ],
   "canonical_execution": {
@@ -1020,6 +1075,22 @@
     "julia_consumer_status",
     "lua_consumer_status",
     "runtime_route",
+    "recurring_source_group",
+    "recurring_source_path",
+    "recurring_runtime_route",
+    "recurring_runtime_order",
+    "recurring_runtime_duplicate",
+    "recurring_runtime_command",
+    "recurring_runtime_source",
+    "recurring_neutral_check",
+    "recurring_support_check",
+    "recurring_storage_initializer",
+    "recurring_storage_entrypoint",
+    "recurring_driver",
+    "recurring_ci_switch",
+    "recurring_rollout_assertion",
+    "recurring_capability_id",
+    "recurring_capability_status",
     "outward_path",
     "outward_token",
     "diagnostic_code",
@@ -1031,6 +1102,7 @@
     "rollout_julia",
     "rollout_puc_lua",
     "rollout_luajit",
+    "rollout_recurring",
     "rollout_public",
     "canonical_contract",
     "canonical_checker",

@@ -97,6 +97,19 @@
       }
     },
     {
+      "id": "language.private_staged_ast_enrichment",
+      "category": "language-runtime",
+      "contract": "Caller-authorized private parse-job carriers use frozen pre-resolved authority, deterministic breadth-first recursive queues, fresh child contexts, bounded diagnostics, and atomic stitching across five backend sources and six runtime routes; public parse_job authoring remains excluded.",
+      "sources": ["docs/decisions/0088-pre-resolved-breadth-first-staged-ast-enrichment.md", "capability_conformance/staged_ast_enrichment_contract.json"],
+      "backends": {
+        "perl": {"status": "pass", "references": ["perl/LinkedSpec/StagedASTEnrichment.pm", "perl/LinkedSpec/StagedASTEnrichmentRuntime.pm", "t/staged_ast_enrichment_perl_contract.t"]},
+        "rust": {"status": "pass", "references": ["rust/linkedspec-runtime/src/staged_ast_enrichment.rs", "rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs"]},
+        "dart": {"status": "pass", "references": ["dart/lib/src/runtime/staged_ast_enrichment.dart", "dart/test/staged_ast_enrichment_contract_test.dart"]},
+        "julia": {"status": "pass", "references": ["julia/src/runtime/StagedAstEnrichment.jl", "julia/test/staged_ast_enrichment_contract_test.jl"]},
+        "lua": {"status": "pass", "references": ["lua/src/linkedspec/staged_ast_enrichment.lua", "lua/test/staged_ast_enrichment_contract_test.lua"]}
+      }
+    },
+    {
       "id": "runtime.rule_modes_lifecycle_edges",
       "category": "language-runtime",
       "contract": "Default/OR/AND/repetition modes, action/blind edges, recursion guards, and all lifecycle phases preserve the reference behavior.",

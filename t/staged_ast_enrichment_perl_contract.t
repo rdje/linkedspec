@@ -257,8 +257,8 @@ is(
 is($contract->{format}, 1, 'loads contract format 1');
 is(
  $contract->{status},
- 'all_private_backends_complete_recurring_and_public_pending',
- 'keeps every private backend complete while recurring and public rows remain pending',
+ 'all_private_backends_complete_recurring_current_public_pending',
+ 'keeps every private backend and recurring proof complete while public projection remains pending',
 );
 is(
  $contract->{task_owner},
@@ -379,11 +379,13 @@ is_deeply(
   carrier_requirements => 4,
   backend_consumers => 5,
   runtime_routes => 6,
+  recurring_source_groups => 5,
+  recurring_runtime_routes => 6,
   outward_guard_paths => 10,
   diagnostics => 37,
   rollout_legs => 9,
   ownership_rows => 35,
-  mutations => 106,
+  mutations => 123,
  },
  'freezes every neutral inventory count',
 );
@@ -405,8 +407,8 @@ is_deeply(
 );
 is_deeply(
  [map { $_->{status} } @{$contract->{rollout}}],
- [('complete') x 7, ('pending') x 2],
- 'promotes every private runtime while recurring and public remain pending',
+ [('complete') x 8, 'pending'],
+ 'promotes every private runtime and recurring proof while public projection remains pending',
 );
 is_deeply(
  [map { $_->{responsibility} } grep {

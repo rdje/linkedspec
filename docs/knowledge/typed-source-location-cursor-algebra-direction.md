@@ -57,7 +57,7 @@ gap syntax and runtime admission remain exclusively owned by `INTER-MATCH-GAP-CA
 composition and progressive span-dispatch recurrence are current, while progressive public no-drift, staged
 dispatch, and final typed-source no-drift continue under `FUTURE-PARITY-BACKLOG.14.6.8-.14.8`.
 
-Typed transaction composition is current at six runtimes and the typed rollout is 12 complete / 2 pending.
+Typed transaction, progressive span-dispatch, and staged-AST composition are current at six runtimes and the typed rollout is 13 complete / 1 pending.
 
 Related records: [[cursor-transaction-safety-audit-plan]], [[recursive-source-observation-audit]],
 [[lossless-gap-cross-tree-handoff]].

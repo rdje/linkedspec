@@ -430,7 +430,7 @@ end
         @test contract["contract_id"] == JULIA_STAGED_ENRICHMENT_CONTRACT_ID
         @test contract["format"] == 1
         @test contract["status"] ==
-              "all_private_backends_complete_recurring_and_public_pending"
+              "all_private_backends_complete_recurring_current_public_pending"
         @test contract["expected_counts"] == Dict{String,Any}(
             "registry_entries" => 4,
             "sources" => 2,
@@ -448,11 +448,13 @@ end
             "carrier_requirements" => 4,
             "backend_consumers" => 5,
             "runtime_routes" => 6,
+            "recurring_source_groups" => 5,
+            "recurring_runtime_routes" => 6,
             "outward_guard_paths" => 10,
             "diagnostics" => 37,
             "rollout_legs" => 9,
             "ownership_rows" => 35,
-            "mutations" => 106,
+            "mutations" => 123,
         )
         expected_ids = Dict(
             "provenance_cases" => [
@@ -568,12 +570,13 @@ end
             "complete",
             "complete",
             "complete",
-            "pending",
+            "complete",
             "pending",
         ]
         @test contract["authored_surface"]["availability"] ==
-              "private Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT staged-AST carriers admitted; " *
-              "recurring and public authoring remain pending under FUTURE-PARITY-BACKLOG.14.7.8-.10"
+              "private Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT staged-AST carriers plus " *
+              "exact six-runtime recurrence admitted; public authoring remains pending under " *
+              "FUTURE-PARITY-BACKLOG.14.7.9-.10"
         @test contract["compatibility_v1"] == Dict{String,Any}(
             "status" => "current_unchanged",
             "record_version" => 1,

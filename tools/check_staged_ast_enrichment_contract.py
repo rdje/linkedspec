@@ -14,7 +14,10 @@ from typing import Any, Callable
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_PATH = ROOT / "capability_conformance" / "staged_ast_enrichment_contract.json"
+CAPABILITY_MANIFEST_PATH = ROOT / "capability_conformance" / "manifest.json"
 CI_PATH = ROOT / "tools" / "run_ci_local.sh"
+RECURRING_DRIVER_PATH = ROOT / "tools" / "check_staged_ast_enrichment_six_runtime.sh"
+PROJECT_DATA_WORKFLOW_ROUTING_PATH = ROOT / "tools" / "test_project_data_workflow_routing.sh"
 
 PARSER_ID_PATTERN = re.compile(r"^[a-z][a-z0-9]*(?:[._:/-][a-z0-9]+)*$")
 TOP_RULE_PATTERN = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
@@ -46,8 +49,8 @@ AUTHORED_SURFACE = {
     ],
     "optional_options": ["top", "into", "required_capabilities"],
     "availability": (
-        "private Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT staged-AST carriers admitted; recurring and "
-        "public authoring remain pending under FUTURE-PARITY-BACKLOG.14.7.8-.10"
+        "private Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT staged-AST carriers plus exact six-runtime "
+        "recurrence admitted; public authoring remains pending under FUTURE-PARITY-BACKLOG.14.7.9-.10"
     ),
 }
 
@@ -208,6 +211,154 @@ RUNTIME_ROUTES = [
         "command": "bash tools/run_lua_project_data.sh luajit lua/test/staged_ast_enrichment_contract_test.lua",
     },
 ]
+
+CAPABILITY_ROW = {
+    "id": "language.private_staged_ast_enrichment",
+    "category": "language-runtime",
+    "contract": (
+        "Caller-authorized private parse-job carriers use frozen pre-resolved authority, deterministic "
+        "breadth-first recursive queues, fresh child contexts, bounded diagnostics, and atomic stitching "
+        "across five backend sources and six runtime routes; public parse_job authoring remains excluded."
+    ),
+    "sources": [
+        "docs/decisions/0088-pre-resolved-breadth-first-staged-ast-enrichment.md",
+        "capability_conformance/staged_ast_enrichment_contract.json",
+    ],
+    "backends": {
+        "perl": {
+            "status": "pass",
+            "references": [
+                "perl/LinkedSpec/StagedASTEnrichment.pm",
+                "perl/LinkedSpec/StagedASTEnrichmentRuntime.pm",
+                "t/staged_ast_enrichment_perl_contract.t",
+            ],
+        },
+        "rust": {
+            "status": "pass",
+            "references": [
+                "rust/linkedspec-runtime/src/staged_ast_enrichment.rs",
+                "rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs",
+            ],
+        },
+        "dart": {
+            "status": "pass",
+            "references": [
+                "dart/lib/src/runtime/staged_ast_enrichment.dart",
+                "dart/test/staged_ast_enrichment_contract_test.dart",
+            ],
+        },
+        "julia": {
+            "status": "pass",
+            "references": [
+                "julia/src/runtime/StagedAstEnrichment.jl",
+                "julia/test/staged_ast_enrichment_contract_test.jl",
+            ],
+        },
+        "lua": {
+            "status": "pass",
+            "references": [
+                "lua/src/linkedspec/staged_ast_enrichment.lua",
+                "lua/test/staged_ast_enrichment_contract_test.lua",
+            ],
+        },
+    },
+}
+
+RECURRING_GATE = {
+    "driver": "tools/check_staged_ast_enrichment_six_runtime.sh",
+    "neutral_check": "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py",
+    "source_schema": {
+        "fields": ["backend", "paths"],
+        "policy": "five admitted staged-AST enrichment source groups are immutable; one shared Lua source executes independently on both ABIs",
+    },
+    "consumer_sources": [
+        {"backend": "perl", "paths": ["t/staged_ast_enrichment_perl_contract.t"]},
+        {
+            "backend": "rust",
+            "paths": ["rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs"],
+        },
+        {
+            "backend": "dart",
+            "paths": ["dart/test/staged_ast_enrichment_contract_test.dart"],
+        },
+        {
+            "backend": "julia",
+            "paths": ["julia/test/staged_ast_enrichment_contract_test.jl"],
+        },
+        {
+            "backend": "lua",
+            "paths": ["lua/test/staged_ast_enrichment_contract_test.lua"],
+        },
+    ],
+    "route_schema": {
+        "fields": ["runtime", "source_backend", "command"],
+        "policy": "neutral runs first; Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT then run exactly once in order",
+    },
+    "runtime_routes": [
+        {
+            "runtime": "perl",
+            "source_backend": "perl",
+            "command": "PERL5LIB= prove -Iperl t/staged_ast_enrichment_perl_contract.t",
+        },
+        {
+            "runtime": "rust",
+            "source_backend": "rust",
+            "command": '"$CARGO_CMD" test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test staged_ast_enrichment_contract',
+        },
+        {
+            "runtime": "dart",
+            "source_backend": "dart",
+            "command": "cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/staged_ast_enrichment_contract_test.dart",
+        },
+        {
+            "runtime": "julia",
+            "source_backend": "julia",
+            "command": "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no julia/test/staged_ast_enrichment_contract_test.jl",
+        },
+        {
+            "runtime": "puc_lua",
+            "source_backend": "lua",
+            "command": "bash tools/run_lua_project_data.sh puc lua/test/staged_ast_enrichment_contract_test.lua",
+        },
+        {
+            "runtime": "luajit",
+            "source_backend": "lua",
+            "command": "bash tools/run_lua_project_data.sh luajit lua/test/staged_ast_enrichment_contract_test.lua",
+        },
+    ],
+    "support_checks": [
+        "bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py",
+        "perl tools/check_generated_source_contract.pl",
+        "perl tools/check_capability_conformance.pl",
+        "perl tools/check_language_capability_coverage.pl",
+    ],
+    "storage": {
+        "initializer": "tools/project_data_env.sh",
+        "managed_entrypoint": "tools/check_staged_ast_enrichment_six_runtime.sh",
+        "policy": "all temporary, cache, build, native, and test data stays under repository-derived storage",
+    },
+    "local_ci": {
+        "driver": "tools/run_ci_local.sh",
+        "switch": "LINKEDSPEC_RUN_STAGED_AST_ENRICHMENT_MATRIX",
+    },
+    "rollout_assertions": {
+        "row_count": 9,
+        "recurring": {
+            "status": "complete",
+            "owner": "FUTURE-PARITY-BACKLOG.14.7.8",
+        },
+        "public_no_drift": {
+            "status": "pending",
+            "owner": "FUTURE-PARITY-BACKLOG.14.7.9",
+        },
+    },
+    "capability_projection": {
+        "manifest": "capability_conformance/manifest.json",
+        "capability_id": "language.private_staged_ast_enrichment",
+        "backend_status": "pass",
+        "retained_public_exclusion": "future.general_parse_job_authoring",
+    },
+}
 
 OUTWARD_PATHS = [
     "perl/LinkedSpec.pm",
@@ -845,6 +996,92 @@ def validate_environment(contract: dict[str, Any]) -> None:
     require(canonical["invocation"] in ci_text, "canonical checker invocation is missing")
     require(f"require_tracked_file {canonical['checker_path']}" in ci_text, "canonical tracked-checker requirement is missing")
 
+    recurring = contract["recurring_gate"]
+    require(
+        RECURRING_DRIVER_PATH.is_file() and not RECURRING_DRIVER_PATH.is_symlink(),
+        "staged-AST recurring driver is missing or symbolic",
+    )
+    require(
+        RECURRING_DRIVER_PATH.stat().st_mode & 0o111,
+        "staged-AST recurring driver is not executable",
+    )
+    recurring_text = RECURRING_DRIVER_PATH.read_text(encoding="utf-8")
+    for marker in (
+        'source "$REPO_ROOT/tools/project_data_env.sh"',
+        'linkedspec_project_data_enter_run "$REPO_ROOT/tools/check_staged_ast_enrichment_six_runtime.sh" "$@"',
+    ):
+        require(
+            recurring_text.count(marker) == 1,
+            f"staged-AST recurring driver is not repository-routed: {marker}",
+        )
+    recurring_markers = [
+        recurring["neutral_check"],
+        *[row["command"] for row in recurring["runtime_routes"]],
+        *recurring["support_checks"],
+    ]
+    positions: list[int] = []
+    for marker in recurring_markers:
+        require(
+            recurring_text.count(marker) == 1,
+            f"staged-AST recurring driver marker must appear exactly once: {marker}",
+        )
+        positions.append(recurring_text.index(marker))
+    require(positions == sorted(positions), "staged-AST recurring neutral/runtime/support order drifted")
+
+    source_paths = [
+        relative
+        for source in recurring["consumer_sources"]
+        for relative in source["paths"]
+    ]
+    require(
+        len(source_paths) == len(set(source_paths)),
+        "staged-AST recurring consumer source duplication drifted",
+    )
+    for relative in source_paths:
+        require(safe_relative_path(relative), "staged-AST recurring consumer source path is unsafe")
+        require((ROOT / relative).is_file(), f"staged-AST recurring consumer source is missing: {relative}")
+    require(
+        {row["source_backend"] for row in recurring["runtime_routes"]}
+        == {row["backend"] for row in recurring["consumer_sources"]},
+        "staged-AST recurring route/source binding drifted",
+    )
+
+    local_ci = recurring["local_ci"]
+    require(local_ci["driver"] == CI_PATH.relative_to(ROOT).as_posix(), "staged-AST recurring canonical driver identity drifted")
+    ci_markers = (
+        f"require_tracked_file {recurring['driver']}",
+        f'if [[ "${{{local_ci["switch"]}:-0}}" == "1" ]]; then',
+        f'bash "$REPO_ROOT/{recurring["driver"]}"',
+    )
+    for marker, expected_count in zip(ci_markers, (2, 1, 1), strict=True):
+        require(
+            ci_text.count(marker) == expected_count,
+            f"staged-AST recurring canonical registration marker count drifted: {marker}",
+        )
+    workflow_text = PROJECT_DATA_WORKFLOW_ROUTING_PATH.read_text(encoding="utf-8")
+    require(
+        workflow_text.count(recurring["driver"]) == 2,
+        "staged-AST recurring project-data routing registration drifted",
+    )
+
+    capability_manifest = read_json(CAPABILITY_MANIFEST_PATH)
+    capability_rows = [
+        row
+        for row in capability_manifest.get("capabilities", [])
+        if row.get("id") == recurring["capability_projection"]["capability_id"]
+    ]
+    require(len(capability_rows) == 1, "staged-AST capability projection row is missing or duplicated")
+    require(capability_rows[0] == CAPABILITY_ROW, "staged-AST capability projection row drifted")
+    exclusions = capability_manifest.get("excluded_or_future", [])
+    require(
+        sum(
+            row.get("id") == recurring["capability_projection"]["retained_public_exclusion"]
+            for row in exclusions
+        )
+        == 1,
+        "staged-AST public-authoring exclusion is missing or duplicated",
+    )
+
 
 def validate_contract(contract: dict[str, Any], *, environment: bool = True) -> None:
     top_keys = [
@@ -874,6 +1111,7 @@ def validate_contract(contract: dict[str, Any], *, environment: bool = True) -> 
         "carrier_requirements",
         "backend_consumers",
         "runtime_routes",
+        "recurring_gate",
         "outward_guard",
         "diagnostics",
         "rollout",
@@ -887,7 +1125,7 @@ def validate_contract(contract: dict[str, Any], *, environment: bool = True) -> 
     require(contract["task_owner"] == "FUTURE-PARITY-BACKLOG.14.7.2", "task owner mismatch")
     require(
         contract["status"]
-        == "all_private_backends_complete_recurring_and_public_pending",
+        == "all_private_backends_complete_recurring_current_public_pending",
         "contract status mismatch",
     )
     require(contract["authored_surface"] == AUTHORED_SURFACE, "authored surface mismatch")
@@ -896,6 +1134,7 @@ def validate_contract(contract: dict[str, Any], *, environment: bool = True) -> 
     require(contract["failure_policies"] == FAILURE_POLICIES, "failure-policy inventory mismatch")
     require(contract["backend_consumers"] == BACKEND_CONSUMERS, "backend consumer inventory mismatch")
     require(contract["runtime_routes"] == RUNTIME_ROUTES, "runtime route inventory mismatch")
+    require(contract["recurring_gate"] == RECURRING_GATE, "recurring gate topology mismatch")
     require(contract["ownership"] == OWNERSHIP, "ownership inventory mismatch")
 
     expected_counts = {
@@ -915,6 +1154,8 @@ def validate_contract(contract: dict[str, Any], *, environment: bool = True) -> 
         "carrier_requirements": len(contract["carrier_requirements"]),
         "backend_consumers": len(contract["backend_consumers"]),
         "runtime_routes": len(contract["runtime_routes"]),
+        "recurring_source_groups": len(contract["recurring_gate"].get("consumer_sources", [])),
+        "recurring_runtime_routes": len(contract["recurring_gate"].get("runtime_routes", [])),
         "outward_guard_paths": len(contract["outward_guard"].get("paths", [])),
         "diagnostics": len(contract["diagnostics"]),
         "rollout_legs": len(contract["rollout"]),
@@ -938,6 +1179,8 @@ def validate_contract(contract: dict[str, Any], *, environment: bool = True) -> 
     require(expected_counts["carrier_requirements"] == 4, "carrier-requirement count mismatch")
     require(expected_counts["backend_consumers"] == 5, "backend-consumer count mismatch")
     require(expected_counts["runtime_routes"] == 6, "runtime-route count mismatch")
+    require(expected_counts["recurring_source_groups"] == 5, "recurring source-group count mismatch")
+    require(expected_counts["recurring_runtime_routes"] == 6, "recurring runtime-route count mismatch")
     require(expected_counts["outward_guard_paths"] == 10, "outward-guard count mismatch")
     require(expected_counts["diagnostics"] == len(DIAGNOSTIC_CONTEXTS), "diagnostic count mismatch")
     require(expected_counts["rollout_legs"] == 9, "rollout count mismatch")
@@ -988,10 +1231,24 @@ def validate_contract(contract: dict[str, Any], *, environment: bool = True) -> 
         {"order": 5, "leg": "julia", "owner": "FUTURE-PARITY-BACKLOG.14.7.6", "status": "complete", "paths": [BACKEND_CONSUMERS[3]["path"]]},
         {"order": 6, "leg": "puc_lua", "owner": "FUTURE-PARITY-BACKLOG.14.7.7", "status": "complete", "paths": [BACKEND_CONSUMERS[4]["path"]]},
         {"order": 7, "leg": "luajit", "owner": "FUTURE-PARITY-BACKLOG.14.7.7", "status": "complete", "paths": [BACKEND_CONSUMERS[4]["path"]]},
-        {"order": 8, "leg": "recurring", "owner": "FUTURE-PARITY-BACKLOG.14.7.8", "status": "pending", "paths": ["tools/check_staged_ast_enrichment_six_runtime.sh"]},
+        {"order": 8, "leg": "recurring", "owner": "FUTURE-PARITY-BACKLOG.14.7.8", "status": "complete", "paths": ["tools/check_staged_ast_enrichment_six_runtime.sh"]},
         {"order": 9, "leg": "public_no_drift", "owner": "FUTURE-PARITY-BACKLOG.14.7.9", "status": "pending", "paths": ["docs/linkedspec-book/src/dsl/staged-ast-enrichment.md", "docs/linkedspec-book/src/appendix/backend-handoff.md", "docs/linkedspec-book/src/overview/project-status.md", "capability_conformance/README.md", "TOOLBOX.md", "ROADMAP.md"]},
     ]
     require(contract["rollout"] == expected_rollout, "rollout inventory mismatch")
+    rollout_by_leg = {row["leg"]: row for row in contract["rollout"]}
+    recurring_assertions = contract["recurring_gate"]["rollout_assertions"]
+    require(
+        recurring_assertions["row_count"] == len(contract["rollout"]),
+        "recurring gate rollout cardinality mismatch",
+    )
+    for leg in ("recurring", "public_no_drift"):
+        actual = rollout_by_leg.get(leg)
+        expected = recurring_assertions[leg]
+        require(
+            actual is not None
+            and {"status": actual["status"], "owner": actual["owner"]} == expected,
+            f"recurring gate rollout assertion drifted: {leg}",
+        )
 
     canonical = contract["canonical_execution"]
     require(canonical == {
@@ -1055,6 +1312,10 @@ def set_value(path: list[Any], value: Any) -> Callable[[dict[str, Any]], None]:
 
 
 def mutation_inventory() -> list[Mutation]:
+    def swap_recurring_routes(contract: dict[str, Any]) -> None:
+        routes = contract["recurring_gate"]["runtime_routes"]
+        routes[0], routes[1] = routes[1], routes[0]
+
     mutations: list[Mutation] = [
         ("format", set_value(["format"], 2), "format must be 1"),
         ("contract_id", set_value(["contract_id"], "wrong"), "contract id mismatch"),
@@ -1122,6 +1383,22 @@ def mutation_inventory() -> list[Mutation]:
         ("julia_consumer_status", set_value(["backend_consumers", 3, "status"], "pending_absent"), "backend consumer inventory mismatch"),
         ("lua_consumer_status", set_value(["backend_consumers", 4, "status"], "pending_absent"), "backend consumer inventory mismatch"),
         ("runtime_route", set_value(["runtime_routes", 5, "runtime"], "lua"), "runtime route inventory mismatch"),
+        ("recurring_source_group", lambda c: c["recurring_gate"]["consumer_sources"].pop(), "recurring gate topology mismatch"),
+        ("recurring_source_path", lambda c: c["recurring_gate"]["consumer_sources"][0]["paths"].pop(), "recurring gate topology mismatch"),
+        ("recurring_runtime_route", lambda c: c["recurring_gate"]["runtime_routes"].pop(), "recurring gate topology mismatch"),
+        ("recurring_runtime_order", swap_recurring_routes, "recurring gate topology mismatch"),
+        ("recurring_runtime_duplicate", lambda c: c["recurring_gate"]["runtime_routes"].append(copy.deepcopy(c["recurring_gate"]["runtime_routes"][0])), "recurring gate topology mismatch"),
+        ("recurring_runtime_command", set_value(["recurring_gate", "runtime_routes", 1, "command"], "cargo test --wrong"), "recurring gate topology mismatch"),
+        ("recurring_runtime_source", set_value(["recurring_gate", "runtime_routes", 5, "source_backend"], "rust"), "recurring gate topology mismatch"),
+        ("recurring_neutral_check", set_value(["recurring_gate", "neutral_check"], "python3 wrong.py"), "recurring gate topology mismatch"),
+        ("recurring_support_check", lambda c: c["recurring_gate"]["support_checks"].pop(), "recurring gate topology mismatch"),
+        ("recurring_storage_initializer", set_value(["recurring_gate", "storage", "initializer"], "/tmp/project_data_env.sh"), "recurring gate topology mismatch"),
+        ("recurring_storage_entrypoint", set_value(["recurring_gate", "storage", "managed_entrypoint"], "tools/wrong.sh"), "recurring gate topology mismatch"),
+        ("recurring_driver", set_value(["recurring_gate", "driver"], "tools/wrong.sh"), "recurring gate topology mismatch"),
+        ("recurring_ci_switch", set_value(["recurring_gate", "local_ci", "switch"], "LINKEDSPEC_RUN_WRONG_MATRIX"), "recurring gate topology mismatch"),
+        ("recurring_rollout_assertion", set_value(["recurring_gate", "rollout_assertions", "recurring", "status"], "pending"), "recurring gate topology mismatch"),
+        ("recurring_capability_id", set_value(["recurring_gate", "capability_projection", "capability_id"], "language.wrong"), "recurring gate topology mismatch"),
+        ("recurring_capability_status", set_value(["recurring_gate", "capability_projection", "backend_status"], "partial"), "recurring gate topology mismatch"),
         ("outward_path", set_value(["outward_guard", "paths", 0], "README2.md"), "outward guard mismatch"),
         ("outward_token", set_value(["outward_guard", "forbidden_tokens"], []), "outward guard mismatch"),
         ("diagnostic_code", set_value(["diagnostics", 0, "code"], "wrong"), "diagnostic context inventory mismatch"),
@@ -1133,6 +1410,7 @@ def mutation_inventory() -> list[Mutation]:
         ("rollout_julia", set_value(["rollout", 4, "status"], "pending"), "rollout inventory mismatch"),
         ("rollout_puc_lua", set_value(["rollout", 5, "status"], "pending"), "rollout inventory mismatch"),
         ("rollout_luajit", set_value(["rollout", 6, "status"], "pending"), "rollout inventory mismatch"),
+        ("rollout_recurring", set_value(["rollout", 7, "status"], "pending"), "rollout inventory mismatch"),
         ("rollout_public", set_value(["rollout", 8, "status"], "complete"), "rollout inventory mismatch"),
         ("canonical_contract", set_value(["canonical_execution", "contract_path"], "/tmp/contract.json"), "canonical execution mismatch"),
         ("canonical_checker", set_value(["canonical_execution", "checker_path"], "tools/wrong.py"), "canonical execution mismatch"),

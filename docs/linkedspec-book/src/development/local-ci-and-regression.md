@@ -149,7 +149,7 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 
 The check is unconditional. It independently derives Unicode-scalar, line/column, and UTF-8 coordinates;
 materializes direct and derived spans; executes invocation and bounded-transaction state transitions; validates
-recursive and zero/one/two-regex structural cases; and rejects all 170 registered mutations.
+recursive and zero/one/two-regex structural cases; and rejects all 187 registered mutations.
 
 In the test-first workflow used here, **RED** means writing the exact contract or consumer first and proving that
 it fails for the intended missing capability. **GREEN** means implementing the smallest owned change that makes
@@ -179,10 +179,11 @@ The final command is the typed recurrence authority: five backend sources form s
 `progressive_span_dispatch`; public closeout separately binds the committed driver to the behavioral recurring row and completes public no-drift. Rejected effect `parser_registry_or_staged_dispatch` retains exactly current node
 `PROGRESSIVE_DISPATCH_SPAN`, no call row, and ten facade/schema/semantic/MCP/CLI/README exposure denials.
 
+**Staged-AST recurring proof:** `bash tools/check_staged_ast_enrichment_six_runtime.sh` binds five immutable backend sources to six ordered routes (shared Lua runs once per ABI), then typed/generated/capability/language ledgers; neutral locks nine legs, 123 mutations, and function-body v1, while canonical CI always audits/routes it and `LINKEDSPEC_RUN_STAGED_AST_ENRICHMENT_MATRIX=1 bash tools/run_ci_local.sh` opts into the matrix. Current typed truth is 13/1/187 and private capability truth is 17/85; public `parse_job(...)` remains excluded.
+
 Perl carrier integration and admission prove one exclusive dedicated node, static operands, fresh invocation authority, live/reconstructed/generated-plan/independently loaded emitted execution, logical-only serialization, typed missing-authority failure, and transaction rejection in 129 assertions. `tools/run_ci_local.sh` requires, syntax-checks, and executes that exact consumer once; the neutral checker rejects regression of the Perl row and premature later-backend promotion. Its transaction-state query loads the recognition runtime only when a dispatch executes, preserving the require-only Compiler guarantee that `LinkedRE` stays lazy until the parser pipeline actually needs it.
 
-Rust's ordinary target intentionally compiles with zero tests. Canonical CI preserves the historical RED cfg as
-the stable identity that activates the exact GREEN four-route consumer:
+Rust's ordinary target intentionally compiles with zero tests. Canonical CI preserves the historical RED cfg as the stable identity that activates the exact GREEN four-route consumer:
 
 ```bash
 bash tools/run_cargo_local.sh test --offline --manifest-path rust/Cargo.toml \
@@ -192,10 +193,7 @@ RUSTFLAGS='--cfg linkedspec_progressive_span_dispatch_red' \
   -p linkedspec-runtime --test progressive_span_dispatch_contract -- --nocapture
 ```
 
-The cfg-enabled command passes the neutral inventory, narrow staged-registry rejection, exact static-operand and
-recognition-effect denials, defensive live-transaction rejection, and native/reconstructed/generated-plan/
-independently compiled emitted-carrier equality. Serialized/generated data carries only the dedicated node's
-logical operands. Canonical CI requires and executes that exact target once; ordinary discovery remains dormant.
+The cfg-enabled command passes the neutral inventory, narrow staged-registry rejection, exact static-operand and recognition-effect denials, defensive live-transaction rejection, and native/reconstructed/generated-plan/independently compiled emitted-carrier equality. Serialized/generated data carries only the dedicated node's logical operands. Canonical CI requires and executes that exact target once; ordinary discovery remains dormant.
 
 Rust authority/core has a separate focused proof, also intentionally outside ordinary and canonical discovery:
 
@@ -284,7 +282,7 @@ bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contrac
 bash tools/run_lua_project_data.sh luajit lua/test/recursive_observation_contract_test.lua
 ```
 
-Its current rollout result is 12 complete / 2 pending with 170 registered mutations. Passing this gate proves the
+Its current rollout result is 13 complete / 1 pending with 187 registered mutations. Passing this gate proves the
 neutral contract, both completed public-structure rows, and all six internal runtime targets across their exact
 value/helper carriers. Rust and Lua retain UTF-8-byte registers, Dart retains UTF-16 code-unit registers, and Julia
 retains zero-based UTF-8 code-unit registers while each converts at its immutable typed boundary. Transaction
@@ -927,7 +925,7 @@ Validate the machine-readable broader census with:
 perl tools/check_capability_conformance.pl
 ```
 
-`capability_conformance/manifest.json` currently contains 16 capabilities and 80 backend states: all 80 pass.
+`capability_conformance/manifest.json` currently contains 17 capabilities and 85 backend states: all 85 pass.
 Every evidence path must exist. The separate exclusion ledger is now schema v2 with exactly two ordered records:
 deprecated Perl plugin machinery is `legacy` under pending `.6`, and general provider search/recursive staged
 queues remain `future` under active structural/progressive/staged parent `.14`. Each record explicitly carries
@@ -937,8 +935,9 @@ requires an existing repository-relative durable retention authority.
 The checker derives unique task ids and leading status enums from tracked task sources, admits only
 proposed/pending/active future owners, locks exact exclusion content/order, and rejects 24 in-memory schema,
 classification, retention, task-status, content, and satisfied-record mutations. Completed semantic/MCP and
-rule-local cursor narratives are absent rather than mislabeled as future. The 16 capability rows remain 80/0/0,
-so this governance correction changes no runtime behavior. The canonical local gate runs this check before
+rule-local cursor narratives are absent rather than mislabeled as future. At that exclusion-governance boundary,
+the 16 capability rows remained 80/0/0 and no runtime behavior changed. Staged-AST recurrence later added the
+all-pass private row that produces the current 17/85 census. The canonical local gate runs this check before
 focused suites. The 60/0/0 generated-source milestone is historical; punctuation-light admission `.16.7` added
 four states, and Lua `.8.4` adds 16 all-pass states in one final admission.
 
