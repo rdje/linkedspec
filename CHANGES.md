@@ -10,6 +10,27 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-27 — FUTURE-PARITY-BACKLOG.14.7.7.4 — admit Lua staged enrichment carriers
+
+- Preserved every Lua production/carrier byte and all 888 behavioral assertions in the one shared Lua-5.1-
+  compatible consumer.
+- Registered that stable path exactly once through ordinary PUC Lua and exactly once through ordinary LuaJIT;
+  the inline TAP suite omits it, preventing duplicate discovery.
+- Added one canonical tracked-path requirement plus one exact repository-routed marker/invocation per ABI.
+- Promoted only the shared Lua backend lifecycle and rollout rows six/seven. Eight exact topology mutations raise
+  neutral governance from 98 to 106; recurrence and public rows remain pending.
+- Updated admitted Perl/Rust/Dart/Julia current snapshots without changing their behavior. Focused proof passes
+  Perl 143/143, Rust 1/1 in 323.52 seconds, Dart 19/19, Julia 491/491, and Lua 888/888 per ABI.
+- Complete ordinary Lua passes 178/178 on both ABIs and visibly executes the staged consumer once per host. Typed,
+  recognition, progressive, semantic, generated, capability, and language direct-dependent ledgers remain exact.
+- Added [[lua-staged-ast-enrichment-carriers-admission]] and synchronized ADR `0088`, neutral/current/admitted
+  facts, roadmaps, architecture, Toolbox, task/index, bounded continuity, and the sole-facing mdBook.
+- Knowledge regenerates at 906 facts / 7,707 keys. The book renders 80 files / 15,728 KiB with the admitted
+  topology, and generated output is removed. Production, function-body v1, generated-source v2, capability,
+  public/outward behavior, other backends, dependencies/toolchains/storage/doctrines, and later recurrence do not
+  move.
+- The exact fully staged candidate clears receipt-bound canonical CI and its nine-doctrine pre-commit validation.
+
 ## 2026-08-27 — FUTURE-PARITY-BACKLOG.14.7.7.3 — implement Lua staged recursive carriers
 
 - Preserved the private one-depth API and added a separate Lua-5.1-compatible breadth-first scheduler that

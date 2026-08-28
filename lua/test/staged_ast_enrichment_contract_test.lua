@@ -1,14 +1,11 @@
--- FUTURE-PARITY-BACKLOG.14.7.7.3 — private Lua recursive staged-AST carrier.
+-- FUTURE-PARITY-BACKLOG.14.7.7.4 — admitted shared Lua staged-AST carrier.
 --
--- This exact final-path consumer is intentionally omitted from ordinary Lua
--- and canonical CI discovery. Its focused repository-local commands are:
+-- Ordinary Lua discovery and canonical CI run this exact Lua-5.1-compatible
+-- final-path consumer once on each admitted host:
 --
 --   bash tools/run_lua_project_data.sh puc lua/test/staged_ast_enrichment_contract_test.lua
 --   bash tools/run_lua_project_data.sh luajit lua/test/staged_ast_enrichment_contract_test.lua
 --
--- The consumer remains absent from ordinary and canonical discovery until the
--- admission slice owned by FUTURE-PARITY-BACKLOG.14.7.7.4.
-
 local json = require("linkedspec.json")
 local linkedspec = require("linkedspec")
 local action_parser = require("linkedspec.action_parser")
@@ -397,7 +394,7 @@ check_equal(contract.contract_id, CONTRACT_ID, "neutral contract id")
 check_equal(contract.format, 1, "neutral contract format")
 check_equal(
   contract.status,
-  "neutral_perl_rust_dart_and_julia_complete_lua_dormant_red",
+  "all_private_backends_complete_recurring_and_public_pending",
   "neutral lifecycle status"
 )
 
@@ -422,7 +419,7 @@ for name, expected in pairs({
   diagnostics = 37,
   rollout_legs = 9,
   ownership_rows = 35,
-  mutations = 98,
+  mutations = 106,
 }) do
   check_equal(contract.expected_counts[name], expected, "neutral count " .. name)
 end
@@ -524,7 +521,7 @@ for index, expected in ipairs({
   "complete",
   "complete",
   "complete",
-  "dormant_red",
+  "complete",
 }) do
   check_equal(contract.backend_consumers[index].status, expected, "consumer lifecycle " .. index)
 end
@@ -532,21 +529,20 @@ local lua_consumer = contract.backend_consumers[5]
 check_equal(lua_consumer.backend, "lua", "Lua consumer backend")
 check_equal(lua_consumer.owner, "FUTURE-PARITY-BACKLOG.14.7.7.0", "Lua consumer owner")
 check_equal(lua_consumer.path, CONSUMER_PATH, "Lua consumer stable path")
-check_equal(lua_consumer.status, "dormant_red", "Lua consumer dormant status")
+check_equal(lua_consumer.status, "complete", "Lua consumer admitted status")
 check_equal(#contract.rollout, 9, "rollout row count")
-for index = 1, 5 do
+for index = 1, 7 do
   check_equal(contract.rollout[index].status, "complete", "complete rollout " .. index)
 end
-for index = 6, 9 do
+for index = 8, 9 do
   check_equal(contract.rollout[index].status, "pending", "pending rollout " .. index)
 end
 check_equal(contract.rollout[6].owner, "FUTURE-PARITY-BACKLOG.14.7.7", "PUC Lua rollout owner")
 check_equal(contract.rollout[7].owner, "FUTURE-PARITY-BACKLOG.14.7.7", "LuaJIT rollout owner")
 check_equal(
   contract.authored_surface.availability,
-  "neutral executable authority with private Perl, Rust, Dart, and Julia carriers complete; " ..
-    "the shared PUC Lua and LuaJIT general carrier contract is dormant RED; recurring and " ..
-    "public authoring remain pending under FUTURE-PARITY-BACKLOG.14.7.7-.10",
+  "private Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT staged-AST carriers admitted; " ..
+    "recurring and public authoring remain pending under FUTURE-PARITY-BACKLOG.14.7.8-.10",
   "authored availability"
 )
 
@@ -2051,9 +2047,22 @@ check(file_exists(CONSUMER_PATH), "stable final-path consumer exists")
 local ordinary = read_file("tools/run_lua_local.sh")
 local inline_ordinary = read_file("lua/test/run.lua")
 local canonical = read_file("tools/run_ci_local.sh")
-check_equal(count_literal(ordinary, CONSUMER_PATH), 0, "consumer absent from ordinary Lua driver")
+local lua_admission = contract.canonical_execution.lua_admission
+check(
+  count_literal(ordinary, CONSUMER_PATH) == 2 and
+    count_literal(ordinary, '"$LUA_CMD" ' .. CONSUMER_PATH) == 1 and
+    count_literal(ordinary, '"$LUAJIT_CMD" ' .. CONSUMER_PATH) == 1,
+  "ordinary discovery runs the consumer exactly once per ABI"
+)
 check_equal(count_literal(inline_ordinary, "staged_ast_enrichment_contract_test.lua"), 0, "consumer absent from inline suite")
-check_equal(count_literal(canonical, CONSUMER_PATH), 0, "consumer absent from canonical CI")
+check(
+  count_literal(canonical, "require_tracked_file " .. CONSUMER_PATH) == 1 and
+    count_literal(canonical, lua_admission.puc_registration_marker) == 1 and
+    count_literal(canonical, lua_admission.puc_invocation) == 1 and
+    count_literal(canonical, lua_admission.luajit_registration_marker) == 1 and
+    count_literal(canonical, lua_admission.luajit_invocation) == 1,
+  "canonical discovery requires and runs one exact route per ABI"
+)
 local umbrella = read_file("lua/src/linkedspec/init.lua")
 for _, private_token in ipairs({
   "parse_job(text_expr",

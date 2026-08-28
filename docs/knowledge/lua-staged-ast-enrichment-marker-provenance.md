@@ -15,9 +15,10 @@ answers:
   - "what remains RED after FUTURE-PARITY-BACKLOG 14.7.7.1"
   - "what does FUTURE-PARITY-BACKLOG 14.7.7.1 own"
 date: 2026-08-27
-status: current private dual-ABI marker/provenance boundary; current-depth authority implemented while recursion/carriers remain dormant RED
+status: current private dual-ABI marker/provenance boundary; complete carriers admitted unchanged
 tags: [lua, PUC-Lua, LuaJIT, staged-parsing, parse-job, actionir, provenance, source-location, PCRE2]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.7.1 lowers only exact scalar assignment-form name = parse_job(text_expr, hash(literal options)) to staged_parse_job_marker. The node stores a direct or flattened nonempty ordered-derived text plan plus normalized literal options; residual direct/nested/receiver/append/indexed forms, malformed identities/policies/targets/capabilities, transformed or copied text, and recognition-reachable declarations reject before execution. The native PCRE2 layer already owns the exact ovector and now retains participating compact capture start/end byte pairs beside the matching compact capture text. An unexported weak-key side table owns those ranges; RuntimeRegexMatch objects, the outward matching module, and matching JSON expose no field or accessor, so repeated equal captures remain distinct without substring search or regex replay. Private staged_parse_job.lua converts live whole-match/capture UTF-8 byte boundaries through the existing source-location authority into Unicode-scalar direct or ordered-derived provenance, materializes exact text, and returns a detached inert STAGED_PARSE_JOB_MARKER whose staged_parse_job_v2 sidecar contains only normalized options, text, provenance, and origin. Native, SpecFile-JSON reconstructed, generated-plan, and independently loaded emitted-module routes agree on PUC Lua and LuaJIT. The shared dormant consumer is 392 GREEN/one exact FUTURE-PARITY-BACKLOG.14.7.7.2 caller-frozen resolution/cache/result/failure authority RED per ABI; ordinary/canonical discovery, rollout, function-body v1, generated format v2, public/outward surfaces, neutral lifecycle, and 98-mutation governance remain unchanged."
+evidence_update_2026_08_27_admission: "FUTURE-PARITY-BACKLOG.14.7.7.2-.3 complete authority and carriers at 888/888 per ABI; .4 admits that exact consumer once per ABI without changing marker/provenance or production bytes. Lua lifecycle/rollout become complete and neutral topology governance advances to 106 mutations."
 evidence_update_2026_08_27_current_depth: "FUTURE-PARITY-BACKLOG.14.7.7.2 consumes this inert marker through a separate private frozen registry/cache and current-depth policy engine without altering marker bytes or the v1 adapter. The same consumer advances to 597 GREEN/one .14.7.7.3 recurrence/bounds/rebasing/fresh-carrier RED per ABI."
 evidence_update_2026_08_27_recursive_carriers: "FUTURE-PARITY-BACKLOG.14.7.7.3 preserves marker/provenance bytes and queues only live-proven markers from successful detached child results under exact lineage. Four fresh post-parent carriers make the same stable consumer 888/888 per ABI without admission, rollout, format, v1, or public movement."
 reverify:
@@ -49,13 +50,13 @@ contains no source authority, match object, parser, registry, callback, schedule
 handle. All eight neutral accepted/rejected provenance rows use the exact `staged_source_provenance_invalid`
 diagnostic family.
 
-The final-path consumer remains deliberately dormant. Its native, normalized reconstructed, generated-plan, and
+The final-path consumer is admitted unchanged. Its native, normalized reconstructed, generated-plan, and
 independently loaded emitted-module marker routes agree on both Lua ABIs. Separate current-depth and recursive
-authorities now consume those markers, advancing the run to 888/888 per ABI while `.14.7.7.4` retains admission.
-Function-body v1 and all admitted/public routes remain unchanged.
+authorities consume those markers at 888/888 per ABI; ordinary and canonical routes run the stable source once per
+ABI. Function-body v1 and public routes remain unchanged.
 
 Related: [[lua-staged-ast-enrichment-dormant-red]], [[lua-staged-ast-enrichment-current-depth-authority]],
-[[lua-staged-ast-enrichment-recursive-carriers]],
+[[lua-staged-ast-enrichment-recursive-carriers]], [[lua-staged-ast-enrichment-carriers-admission]],
 [[general-staged-ast-enrichment-neutral-contract]],
 [[general-staged-ast-current-boundary]], [[lua-progressive-span-dispatch-private-authority]],
 [[typed-source-location-runtime-rollout-plan]], and [[function-body-staged-registry-dispatch]].

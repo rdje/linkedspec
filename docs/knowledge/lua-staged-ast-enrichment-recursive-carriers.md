@@ -18,9 +18,10 @@ answers:
   - "how many Lua staged AST enrichment assertions pass"
   - "what does FUTURE-PARITY-BACKLOG 14.7.7.3 implement"
 date: 2026-08-27
-status: current private dual-ABI recursive carrier; dormant from ordinary and canonical discovery until FUTURE-PARITY-BACKLOG.14.7.7.4
+status: current private dual-ABI recursive carrier; admitted unchanged by FUTURE-PARITY-BACKLOG.14.7.7.4
 tags: [lua, PUC-Lua, LuaJIT, staged-parsing, recursion, breadth-first, carriers, cancellation, budgets, source-location, private]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.7.3 preserves enrich_current_depth and adds private Lua-5.1-compatible enrich_recursively, StagedRecursiveAuthority, ephemeral callback authority views, and an opaque StagedAstEnrichmentSeed. The scheduler prepares and reserves a complete depth before callback one, queues only markers found inside successful detached callback results, and maps those markers through the exact replace_marker/replace_field/sibling_field/append_child destination; it never rescans the stitched AST. Active frames carry resolved parser, selected top, exact-text SHA-256, and full direct or ordered-derived provenance. Exact repeats reject as staged_cycle; same parser/top recurrence requires segment containment and a strictly smaller total Unicode-scalar extent. One invocation shares cancellation identity/probe, caller clock and absolute deadline, remaining steps, seeded calls, depth/call maxima, cumulative atomic-marker result nodes, and canonical UTF-8 diagnostic bytes. Fresh callback contexts expose safe_point plus direct/derived position/span/diagnostic rebasing, then expire on return or throw. A host-only execution seed starts only after the complete parent result and creates a new callback map, frozen registry, empty plan cache, cancellation/clock authority, lineage, budget, and queue for every native, SpecFile-JSON reconstructed, validated generated-plan, or independently loaded emitted-module execution. Each route runs twice with eight equal detached outcomes, one miss/no hit/one call per run, fresh run/token observations, no-seed inert-marker compatibility, no authority consumption on parent failure, live-transaction denial, and primary staged-error preservation. Compiled JSON, generated plans, and emitted source contain no callback, registry/source authority, cancellation/deadline/budget state, queue/cache, absolute checkout path, or host handle. The unchanged stable consumer passes 888 assertions independently on PUC Lua and LuaJIT while remaining absent from ordinary and canonical discovery; both Lua rollout rows, neutral 98-mutation lifecycle, function-body v1, generated-source-v2 format, public/outward behavior, other backends, and later recurrence remain unchanged."
+evidence_update_2026_08_27_admission: "FUTURE-PARITY-BACKLOG.14.7.7.4 changes no recursive or production byte. It registers this exact 888/888 consumer once per ABI in ordinary/canonical proof, promotes only Lua lifecycle and rollout, and advances neutral topology governance to 106 mutations."
 root_cause: "The committed .14.7.7.2 engine deliberately discovered and settled one marker depth, hard-coded stage_depth=1 with an empty chain, and returned without recording marker paths from child results. LinkedSpecRuntimeEngine returned the completed parent value directly, while generated-plan and emitted wrappers forwarded only progressive authority. Lua therefore lacked producer-bound lineage, non-resetting recursive resources, callback-lifetime safe points/source projection, and a fresh post-parent host recipe across the four carriers."
 last_verified: 2026-08-27
 reverify:
@@ -66,11 +67,13 @@ reconstructed, generated-plan, and independently loaded emitted-module routes
 all forward the same optional host seed without serializing it. With no seed,
 the existing inert marker result is unchanged.
 
-This is private production behavior. Leaf `.14.7.7.4` alone owns ordinary and
-canonical dual-ABI admission plus Lua rollout promotion.
+This is private production behavior. Leaf `.14.7.7.4` admits the unchanged
+consumer once per ABI and promotes Lua rollout; `.5` retains independent
+recomposition without behavior change.
 
 Related: [[lua-staged-ast-enrichment-current-depth-authority]],
 [[lua-staged-ast-enrichment-marker-provenance]],
 [[lua-staged-ast-enrichment-dormant-red]],
+[[lua-staged-ast-enrichment-carriers-admission]],
 [[general-staged-ast-enrichment-neutral-contract]],
 [[general-staged-ast-current-boundary]], and ADR `0088`.

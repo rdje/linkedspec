@@ -452,6 +452,7 @@ require_tracked_file t/staged_ast_enrichment_perl_contract.t
 require_tracked_file rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs
 require_tracked_file dart/test/staged_ast_enrichment_contract_test.dart
 require_tracked_file julia/test/staged_ast_enrichment_contract_test.jl
+require_tracked_file lua/test/staged_ast_enrichment_contract_test.lua
 require_tracked_file rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs
 require_tracked_file dart/test/progressive_span_dispatch_contract_test.dart
 require_tracked_file julia/test/progressive_span_dispatch_contract_test.jl
@@ -687,6 +688,12 @@ log "running exact Dart staged-AST enrichment admission consumer"
 
 log "running exact Julia staged-AST enrichment admission consumer"
 bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no julia/test/staged_ast_enrichment_contract_test.jl
+
+log "running exact Lua staged-AST enrichment admission consumer on PUC Lua"
+bash tools/run_lua_project_data.sh puc lua/test/staged_ast_enrichment_contract_test.lua
+
+log "running exact Lua staged-AST enrichment admission consumer on LuaJIT"
+bash tools/run_lua_project_data.sh luajit lua/test/staged_ast_enrichment_contract_test.lua
 
 log "running exact Perl progressive span-dispatch admission consumer"
 PERL5LIB= prove -Iperl t/progressive_span_dispatch_perl_contract.t

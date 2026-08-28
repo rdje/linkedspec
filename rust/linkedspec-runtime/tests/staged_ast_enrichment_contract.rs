@@ -1425,7 +1425,7 @@ fn final_path_admits_fresh_production_carriers() {
     assert_eq!(neutral["format"], 1);
     assert_eq!(
         neutral["status"],
-        "neutral_perl_rust_dart_and_julia_complete_lua_dormant_red"
+        "all_private_backends_complete_recurring_and_public_pending"
     );
     assert_eq!(
         neutral["expected_counts"],
@@ -1450,7 +1450,7 @@ fn final_path_admits_fresh_production_carriers() {
             "diagnostics": 37,
             "rollout_legs": 9,
             "ownership_rows": 35,
-            "mutations": 98,
+            "mutations": 106,
         })
     );
     assert_eq!(
@@ -1626,13 +1626,7 @@ fn final_path_admits_fresh_production_carriers() {
             .iter()
             .map(|row| row["status"].as_str().expect("consumer status"))
             .collect::<Vec<_>>(),
-        [
-            "complete",
-            "complete",
-            "complete",
-            "complete",
-            "dormant_red",
-        ]
+        ["complete", "complete", "complete", "complete", "complete",]
     );
     assert_eq!(
         neutral["rollout"]
@@ -1642,7 +1636,7 @@ fn final_path_admits_fresh_production_carriers() {
             .map(|row| row["status"].as_str().expect("rollout status"))
             .collect::<Vec<_>>(),
         [
-            "complete", "complete", "complete", "complete", "complete", "pending", "pending",
+            "complete", "complete", "complete", "complete", "complete", "complete", "complete",
             "pending", "pending",
         ]
     );

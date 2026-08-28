@@ -13,7 +13,7 @@ answers:
   - "how many Dart staged AST enrichment tests pass"
   - "what follows FUTURE-PARITY-BACKLOG 14.7.5.4"
 date: 2026-08-27
-status: current private Dart carrier admission; Julia is also admitted and Lua marker/provenance is dormant
+status: current private Dart carrier admission; all private backends are admitted
 tags: [dart, staged-parsing, carriers, generated-source, invocation-authority, admission, ci, private]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.5.4 adds opaque host-only StagedAstEnrichmentSeed to LinkedSpecRuntimeEngine and the generated-v2 execution wrappers. Every top-level execution starts a new FrozenStagedRegistry with an empty plan cache and a new StagedRecursiveAuthority, completes the parent parse, rejects any live recognition transaction, and only then calls enrichStagedRecursively. Native, SpecFile-JSON reconstructed, validated generated-plan, and independently analyzed/executed emitted-source routes each execute twice through one seed; every run reports one miss/zero hits, one callback, fresh cancellation and clock observations, equal detached AST/sidecar/diagnostic/cache/resource records, and no cross-result mutation. Compiled JSON and emitted source contain no callback, compiled parser, registry/source authority, cancellation/deadline/budget state, mutable queue/cache, path, or host handle. The former dormant consumer moves to dart/test/staged_ast_enrichment_contract_test.dart, passes 19/19, runs once in ordinary discovery, and is required/invoked exactly once by canonical CI. Neutral governance advances only Dart to complete and rejects 90 mutations. Function-body v1, generated-source v2, public/outward surfaces, later backends, recurrence, and combined no-drift remain unchanged or pending."
 evidence_update_2026_08_27_julia_dormant_red: "FUTURE-PARITY-BACKLOG.14.7.6.0 preserves all Dart carrier behavior while advancing Julia to one 86-GREEN/one-RED dormant consumer and neutral governance to 92 mutations. It also corrects the contract's stale Dart-dormant availability duplicate and aligns the Dart ordinary runtime command with the already-proven package cwd."
@@ -23,6 +23,7 @@ evidence_update_2026_08_27_julia_recursive_authority: "FUTURE-PARITY-BACKLOG.14.
 evidence_update_2026_08_27_julia_admission: "FUTURE-PARITY-BACKLOG.14.7.6.4 preserves Dart behavior while admitting Julia's equivalent fresh four-route seed. The synchronized Dart projection remains 19/19 against neutral governance at 97 mutations; Lua .14.7.7 is next."
 evidence_update_2026_08_27_lua_dormant_red: "FUTURE-PARITY-BACKLOG.14.7.7.0 preserves Dart behavior while advancing only the shared Lua consumer lifecycle to dormant_red. The synchronized Dart projection remains 19/19 against neutral governance at 98 mutations; Lua marker/provenance .14.7.7.1 is next."
 evidence_update_2026_08_27_lua_marker_provenance: "FUTURE-PARITY-BACKLOG.14.7.7.1 preserves Dart behavior while implementing Lua's exclusive inert marker and private-native-range-backed typed direct/ordered-derived provenance. The synchronized Dart projection remains 19/19 against unchanged 98-mutation governance; Lua .14.7.7.2 is next."
+evidence_update_2026_08_27_lua_admission: "FUTURE-PARITY-BACKLOG.14.7.7.4 preserves Dart behavior while promoting the shared Lua lifecycle and two rollout rows. The synchronized Dart projection remains 19/19 against the all-private-complete 106-mutation neutral contract."
 root_cause: "Dart had complete private marker, frozen-registry, one-depth, and recursive authority, but LinkedSpecRuntimeEngine returned the raw parent value and the generated execution wrappers accepted only progressive authority. No top-level host seam could inject nonserializable staged authority or start a fresh scheduler after the completed parent parse, so the final consumer had to remain outside ordinary and canonical discovery."
 last_verified: 2026-08-27
 reverify:
@@ -53,9 +54,9 @@ The admitted consumer executes every route twice through one seed. Each result r
 hits, and one miss. Callback, cancellation, and clock observations prove a new recursive invocation on every run.
 All four routes return equal detached records, and mutating one result cannot affect another.
 
-This is private backend behavior, not public `parse_job(...)` authoring. Dart rollout is complete. Julia has since
-reached the same private admission boundary; Lua, six-runtime recurrence, public authoring, independent
-recomposition, and combined no-drift retain their existing owners.
+This is private backend behavior, not public `parse_job(...)` authoring. Dart rollout is complete. Julia, PUC Lua,
+and LuaJIT have since reached the same private admission boundary; six-runtime recurrence, public authoring,
+independent recomposition, and combined no-drift retain their existing owners.
 
 Related: [[dart-staged-ast-enrichment-recursive-authority]],
 [[dart-staged-ast-enrichment-current-depth-authority]], [[dart-staged-ast-enrichment-marker-provenance]],

@@ -330,10 +330,10 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   native, normalized-descriptor, validated generated-plan, and independently loaded emitted equality plus distinct
   callbacks/cancellation/clocks and serialized-authority absence. Then run
   `bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py` to prove
-  neutral+Perl+Rust+Dart+Julia admission, one shared Lua dual-ABI dormant GREEN consumer, 98 mutations, and exact
-  single Perl/Rust/Dart/Julia ordinary+canonical admission. Run the Lua boundary unchanged with
+  neutral plus all five admitted private backends/six runtime routes, 106 mutations, and exact single-source Lua
+  dual-ABI ordinary/canonical admission. Run the Lua boundary unchanged with
   `bash tools/run_lua_project_data.sh puc lua/test/staged_ast_enrichment_contract_test.lua` and then `luajit`;
-  each must report 888/888 while remaining outside ordinary/canonical discovery until `.14.7.7.4`.
+  each must report 888/888; ordinary/canonical topology must execute that same path once per ABI.
   Public authoring remains `.14.7.9`.
 - **Rust general-staged admitted private boundary:** `FUTURE-PARITY-BACKLOG.14.7.4.0-.4` owns
   `rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs` as an ordinary and canonical consumer. Run it with
@@ -396,7 +396,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   execution, generated plans, and emitted `execute` share the same optional seed and enrich only after the complete
   parent result. Retrieve [[julia-staged-ast-enrichment-carriers-admission]] before changing this seam. Public
   authoring stays `.9`.
-- **Lua general-staged private recursive-carrier boundary:** retrieve
+- **Lua general-staged admitted recursive-carrier boundary:** retrieve
   [[lua-staged-ast-enrichment-marker-provenance]], [[lua-staged-ast-enrichment-current-depth-authority]], and
   [[lua-staged-ast-enrichment-recursive-carriers]] before
   inspecting source. Run the same stable consumer with
@@ -415,8 +415,10 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   and the opaque execution seed for returned-marker-only breadth-first queues, exact cycle/decrease lineage,
   non-resetting resources, expired contexts, typed direct/ordered-derived projection, post-parent startup, and a
   fresh registry/cache/callback/resource set on every native/reconstructed/generated/emitted run. Do not infer
-  capture positions from copied text or replay a regex. The consumer remains absent from ordinary/canonical
-  discovery, both Lua rollout rows remain pending, and `.14.7.7.4` owns only admission and promotion.
+  capture positions from copied text or replay a regex. The same consumer is admitted once per ABI through
+  ordinary and canonical discovery, both Lua rollout rows are complete, and `.14.7.7.5` owns independent
+  recomposition without behavior change. Retrieve [[lua-staged-ast-enrichment-carriers-admission]] before
+  changing this topology.
 - **Env knobs:** `LINKEDSPEC_TRACE_LEVEL` (level; `LINKEDSPEC_DUMP_VERBOSITY` is the fallback),
   `LINKEDSPEC_TRACE_FILE` (route to a file), `LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_EMOJI`,
   `LINKEDSPEC_TRACE_RESET_FILE`.
@@ -1236,13 +1238,13 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   unconditionally in canonical local CI.
 - **OUTPUT:** 4 registry entries; 8 provenance; 8 resolution/6 authority; 10 cache; 4 queue/3 isolation;
   4 result plus 3 failure policies; 10 recursive-chain and 5 detachment cases; five backend consumers over six
-  runtime routes; 37 diagnostics; 9 rollout legs; 35 exact owners; and 98 mutations.
-- **BOUNDARY:** neutral, Perl, Rust, Dart, and Julia are complete. Julia's 491/491 consumer runs once in ordinary/
+  runtime routes; 37 diagnostics; 9 rollout legs; 35 exact owners; and 106 mutations.
+- **BOUNDARY:** neutral, Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT are complete. Julia's 491/491 consumer runs once in ordinary/
   canonical discovery and proves a fresh host-only seed across four production routes after its exclusive marker,
   live-proven typed provenance, caller-frozen policies, and breadth-first recursive authority. The one shared Lua
-  final-path consumer is dormant and runs independently with private marker/provenance, caller-frozen policies,
-  bounded recurrence, source rebasing, and four fresh production carriers at 888/888 on PUC Lua and LuaJIT;
-  both rollout rows, admission, and public no-drift remain pending. Outward facade/
+  final-path consumer runs independently with private marker/provenance, caller-frozen policies, bounded recurrence,
+  source rebasing, and four fresh production carriers at 888/888 on PUC Lua and LuaJIT; the same source is admitted
+  exactly once per ABI and both rollout rows are complete. Recurrence and public no-drift remain pending. Outward facade/
   schema/semantic/MCP/CLI/README tokens remain absent. The existing function-body v1 adapter and generated-source
   v2 format stay current and unchanged.
 

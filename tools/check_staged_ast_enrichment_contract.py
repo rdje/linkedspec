@@ -46,9 +46,8 @@ AUTHORED_SURFACE = {
     ],
     "optional_options": ["top", "into", "required_capabilities"],
     "availability": (
-        "neutral executable authority with private Perl, Rust, Dart, and Julia carriers complete; the shared "
-        "PUC Lua and LuaJIT general carrier contract is dormant RED; recurring and public authoring remain "
-        "pending under FUTURE-PARITY-BACKLOG.14.7.7-.10"
+        "private Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT staged-AST carriers admitted; recurring and "
+        "public authoring remain pending under FUTURE-PARITY-BACKLOG.14.7.8-.10"
     ),
 }
 
@@ -158,7 +157,7 @@ BACKEND_CONSUMERS = [
         "backend": "lua",
         "owner": "FUTURE-PARITY-BACKLOG.14.7.7.0",
         "path": "lua/test/staged_ast_enrichment_contract_test.lua",
-        "status": "dormant_red",
+        "status": "complete",
     },
 ]
 
@@ -817,6 +816,18 @@ def validate_environment(contract: dict[str, Any]) -> None:
                 require(ci_text.count(f"require_tracked_file {row['path']}") == 1, "canonical CI must require the Julia staged consumer exactly once")
                 require(ci_text.count(f'log "{admission["registration_marker"]}"') == 1, "canonical Julia staged admission marker is missing or duplicated")
                 require(ci_text.count(admission["invocation"]) == 1, "canonical Julia staged admission invocation is missing or duplicated")
+            elif row["backend"] == "lua":
+                admission = contract["canonical_execution"]["lua_admission"]
+                require(admission["consumer_path"] == row["path"], "Lua admission consumer path drifted")
+                require(admission["ordinary_driver"] == "tools/run_lua_local.sh", "ordinary Lua staged driver drifted")
+                require(lua_ordinary_text.count(row["path"]) == 2, "ordinary Lua discovery must register the staged consumer exactly once per ABI")
+                require(lua_ordinary_text.count(f'"$LUA_CMD" {row["path"]}') == 1, "ordinary Lua discovery must register the staged consumer once on PUC Lua")
+                require(lua_ordinary_text.count(f'"$LUAJIT_CMD" {row["path"]}') == 1, "ordinary Lua discovery must register the staged consumer once on LuaJIT")
+                require(lua_inline_text.count(consumer_path.name) == 0, "admitted Lua staged consumer must not duplicate through the inline suite")
+                require(ci_text.count(f"require_tracked_file {row['path']}") == 1, "canonical CI must require the Lua staged consumer exactly once")
+                for runtime in ("puc", "luajit"):
+                    require(ci_text.count(f'log "{admission[f"{runtime}_registration_marker"]}"') == 1, f"canonical {runtime} Lua staged admission marker is missing or duplicated")
+                    require(ci_text.count(admission[f"{runtime}_invocation"]) == 1, f"canonical {runtime} Lua staged admission invocation is missing or duplicated")
             else:
                 raise ContractError(f"unsupported complete staged backend: {row['backend']}")
         else:
@@ -876,7 +887,7 @@ def validate_contract(contract: dict[str, Any], *, environment: bool = True) -> 
     require(contract["task_owner"] == "FUTURE-PARITY-BACKLOG.14.7.2", "task owner mismatch")
     require(
         contract["status"]
-        == "neutral_perl_rust_dart_and_julia_complete_lua_dormant_red",
+        == "all_private_backends_complete_recurring_and_public_pending",
         "contract status mismatch",
     )
     require(contract["authored_surface"] == AUTHORED_SURFACE, "authored surface mismatch")
@@ -975,8 +986,8 @@ def validate_contract(contract: dict[str, Any], *, environment: bool = True) -> 
         {"order": 3, "leg": "rust", "owner": "FUTURE-PARITY-BACKLOG.14.7.4", "status": "complete", "paths": [BACKEND_CONSUMERS[1]["path"]]},
         {"order": 4, "leg": "dart", "owner": "FUTURE-PARITY-BACKLOG.14.7.5", "status": "complete", "paths": [BACKEND_CONSUMERS[2]["path"]]},
         {"order": 5, "leg": "julia", "owner": "FUTURE-PARITY-BACKLOG.14.7.6", "status": "complete", "paths": [BACKEND_CONSUMERS[3]["path"]]},
-        {"order": 6, "leg": "puc_lua", "owner": "FUTURE-PARITY-BACKLOG.14.7.7", "status": "pending", "paths": [BACKEND_CONSUMERS[4]["path"]]},
-        {"order": 7, "leg": "luajit", "owner": "FUTURE-PARITY-BACKLOG.14.7.7", "status": "pending", "paths": [BACKEND_CONSUMERS[4]["path"]]},
+        {"order": 6, "leg": "puc_lua", "owner": "FUTURE-PARITY-BACKLOG.14.7.7", "status": "complete", "paths": [BACKEND_CONSUMERS[4]["path"]]},
+        {"order": 7, "leg": "luajit", "owner": "FUTURE-PARITY-BACKLOG.14.7.7", "status": "complete", "paths": [BACKEND_CONSUMERS[4]["path"]]},
         {"order": 8, "leg": "recurring", "owner": "FUTURE-PARITY-BACKLOG.14.7.8", "status": "pending", "paths": ["tools/check_staged_ast_enrichment_six_runtime.sh"]},
         {"order": 9, "leg": "public_no_drift", "owner": "FUTURE-PARITY-BACKLOG.14.7.9", "status": "pending", "paths": ["docs/linkedspec-book/src/dsl/staged-ast-enrichment.md", "docs/linkedspec-book/src/appendix/backend-handoff.md", "docs/linkedspec-book/src/overview/project-status.md", "capability_conformance/README.md", "TOOLBOX.md", "ROADMAP.md"]},
     ]
@@ -1014,6 +1025,14 @@ def validate_contract(contract: dict[str, Any], *, environment: bool = True) -> 
             "ordinary_invocation": "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no julia/test/staged_ast_enrichment_contract_test.jl",
             "registration_marker": "running exact Julia staged-AST enrichment admission consumer",
             "invocation": "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no julia/test/staged_ast_enrichment_contract_test.jl",
+        },
+        "lua_admission": {
+            "consumer_path": "lua/test/staged_ast_enrichment_contract_test.lua",
+            "ordinary_driver": "tools/run_lua_local.sh",
+            "puc_registration_marker": "running exact Lua staged-AST enrichment admission consumer on PUC Lua",
+            "puc_invocation": "bash tools/run_lua_project_data.sh puc lua/test/staged_ast_enrichment_contract_test.lua",
+            "luajit_registration_marker": "running exact Lua staged-AST enrichment admission consumer on LuaJIT",
+            "luajit_invocation": "bash tools/run_lua_project_data.sh luajit lua/test/staged_ast_enrichment_contract_test.lua",
         },
         "storage_policy": "all Python cache, temporary, and process data stays under repository-derived project storage",
         "tracked_required": True,
@@ -1112,6 +1131,8 @@ def mutation_inventory() -> list[Mutation]:
         ("rollout_rust", set_value(["rollout", 2, "status"], "pending"), "rollout inventory mismatch"),
         ("rollout_dart", set_value(["rollout", 3, "status"], "pending"), "rollout inventory mismatch"),
         ("rollout_julia", set_value(["rollout", 4, "status"], "pending"), "rollout inventory mismatch"),
+        ("rollout_puc_lua", set_value(["rollout", 5, "status"], "pending"), "rollout inventory mismatch"),
+        ("rollout_luajit", set_value(["rollout", 6, "status"], "pending"), "rollout inventory mismatch"),
         ("rollout_public", set_value(["rollout", 8, "status"], "complete"), "rollout inventory mismatch"),
         ("canonical_contract", set_value(["canonical_execution", "contract_path"], "/tmp/contract.json"), "canonical execution mismatch"),
         ("canonical_checker", set_value(["canonical_execution", "checker_path"], "tools/wrong.py"), "canonical execution mismatch"),
@@ -1134,6 +1155,12 @@ def mutation_inventory() -> list[Mutation]:
         ("julia_admission_ordinary", set_value(["canonical_execution", "julia_admission", "ordinary_invocation"], "julia wrong.jl"), "canonical execution mismatch"),
         ("julia_admission_marker", set_value(["canonical_execution", "julia_admission", "registration_marker"], "wrong marker"), "canonical execution mismatch"),
         ("julia_admission_invocation", set_value(["canonical_execution", "julia_admission", "invocation"], "julia wrong.jl"), "canonical execution mismatch"),
+        ("lua_admission_consumer", set_value(["canonical_execution", "lua_admission", "consumer_path"], "lua/test/wrong.lua"), "canonical execution mismatch"),
+        ("lua_admission_ordinary", set_value(["canonical_execution", "lua_admission", "ordinary_driver"], "lua/test/run.lua"), "canonical execution mismatch"),
+        ("lua_admission_puc_marker", set_value(["canonical_execution", "lua_admission", "puc_registration_marker"], "wrong marker"), "canonical execution mismatch"),
+        ("lua_admission_puc_invocation", set_value(["canonical_execution", "lua_admission", "puc_invocation"], "lua wrong.lua"), "canonical execution mismatch"),
+        ("lua_admission_luajit_marker", set_value(["canonical_execution", "lua_admission", "luajit_registration_marker"], "wrong marker"), "canonical execution mismatch"),
+        ("lua_admission_luajit_invocation", set_value(["canonical_execution", "lua_admission", "luajit_invocation"], "luajit wrong.lua"), "canonical execution mismatch"),
         ("ownership", set_value(["ownership", 0, "owner"], "wrong"), "ownership inventory mismatch"),
     ]
     return mutations

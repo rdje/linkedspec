@@ -7,11 +7,11 @@
 > carriers, and exact ordinary/canonical admission;
 > Dart now has the same complete private authority, four fresh native/reconstructed/generated/emitted production
 > carriers, and exact 19/19 ordinary/canonical admission. Julia now also has the complete private authority, four
-> fresh production routes, and exact 491/491 ordinary/canonical admission. Shared Lua now has one dual-ABI dormant
-> oracle with its private inert marker, live-range-proven typed provenance, caller-frozen policies, bounded
-> breadth-first recurrence, and four fresh post-parent production carriers at 888/888 on each runtime; the neutral
-> contract is 98 mutations. Lua admission and rollout
-> remain pending, and
+> fresh production routes, and exact 491/491 ordinary/canonical admission. Shared Lua now has one admitted
+> dual-ABI oracle with its private inert marker, live-range-proven typed provenance, caller-frozen policies,
+> bounded breadth-first recurrence, and four fresh post-parent production carriers at 888/888 on each runtime;
+> the neutral contract is 106 mutations and the same stable source runs exactly once per ABI in ordinary and
+> canonical proof. Independent Lua recomposition and six-runtime recurrence remain pending, and
 > the only publicly authored five-backend/six-runtime surface is still the
 > narrow function-body v1 adapter described below.
 
@@ -189,17 +189,18 @@ logical marker/sidecar and identity inputs. Each execution receives fresh caller
 generated data contains no callback, compiled parser, registry snapshot, source authority, cancellation token,
 deadline, budget, mutable queue, or host handle.
 
-Neutral, Perl, Rust, Dart, and Julia rollout are complete. Five backend consumers map to six runtime routes because
+Neutral, Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT rollout are complete. Five backend consumers map to six runtime routes because
 one shared Lua source runs independently on PUC Lua and LuaJIT. The exact Perl, Rust, Dart, and Julia consumers run
 once from ordinary and canonical proof. Julia's `.0` run historically froze the generic-call boundary at 86 GREEN
 assertions plus one intentional RED; `.1-.3` supplied marker/provenance, current-depth authority, and breadth-first
-recurrence, and `.4` now carries them through four fresh-authority production routes at 491/491. Lua `.7.0-.3`
-now freeze the exact shared boundary and implement marker/provenance, current-depth authority, bounded recurrence,
-source rebasing, and four fresh host-only production carriers at 888/888 per ABI while both ordinary/canonical
-routes and rollout rows stay pending. Lua `.4-.5`, six-runtime recurrence, public authoring/no-drift, and final recomposition retain their
+recurrence, and `.4` now carries them through four fresh-authority production routes at 491/491. Lua `.7.0-.4`
+now freeze, implement, and admit the exact shared boundary with marker/provenance, current-depth authority, bounded
+recurrence, source rebasing, and four fresh host-only production carriers at 888/888 per ABI. Ordinary and
+canonical proof execute that stable path once per ABI, and both Lua rollout rows are complete. Independent Lua
+recomposition `.5`, six-runtime recurrence, public authoring/no-drift, and final recomposition retain their
 `.14.7.7-.10` owners.
 
-## Current shared Lua private recursive-carrier boundary
+## Current shared Lua admitted recursive-carrier boundary
 
 Run the same Lua-5.1-compatible source independently on both supported hosts:
 
@@ -276,8 +277,8 @@ return the same detached inert marker:
 
 The marker itself retains no match, source authority, parser, registry, callback, cache, scheduler, filesystem
 path, or host handle. Authority stays in a separate private `staged_ast_enrichment.lua` module. The stable test
-path remains absent from `tools/run_lua_local.sh`, `lua/test/run.lua`, and canonical CI until dual-ABI admission
-owner `.14.7.7.4` activates it.
+path runs exactly once per ABI from `tools/run_lua_local.sh` and canonical CI; `lua/test/run.lua` omits it to
+prevent duplicate discovery.
 
 ### Frozen resolution and plan-only caching
 
@@ -342,8 +343,8 @@ An opaque host-only seed is accepted by native, reconstructed, generated-plan, a
 execution. It starts only after the parent value completes and creates a new callback set, frozen registry, empty
 plan cache, recursive authority, and mutable queue for every run. No seed preserves the inert marker. Serialized
 logical artifacts contain no concrete callback, registry/source authority, cancellation/deadline/budget state,
-queue/cache, absolute checkout path, or host handle. Leaf `.14.7.7.4` alone owns ordinary/canonical dual-ABI
-admission and rollout promotion.
+queue/cache, absolute checkout path, or host handle. Leaf `.14.7.7.4` admits this exact source once per ABI and
+promotes both Lua rollout rows; `.5` independently recomposes the admitted topology without behavior changes.
 
 Publishing the complete `.2` record crosses the bounded change-history rollover threshold. The repository archives
 231 complete historical lines as immutable content-addressed segment `4989`; ADR `0093` advances only the finite

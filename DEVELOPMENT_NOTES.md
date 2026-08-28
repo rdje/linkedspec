@@ -9,6 +9,25 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-27 (`FUTURE-PARITY-BACKLOG.14.7.7.4` — Lua staged carrier admission): exact clean activation is
+  recursive-carrier commit `0f33564b`; scope owns lifecycle/projection/topology only and changes no production.
+- The neutral contract is now `all_private_backends_complete_recurring_and_public_pending`. Lua becomes complete,
+  rollout rows six/seven become complete, and eight independent rollout/ordinary/canonical guards produce 106
+  mutations. Recurring and public rows remain pending.
+- `tools/run_lua_local.sh` invokes the same stable consumer once with `$LUA_CMD` and once with `$LUAJIT_CMD`.
+  `lua/test/run.lua` omits it. Canonical CI requires the path once and logs/invokes one repository-routed command
+  per ABI, so there is no duplicated behavioral owner.
+- The consumer remains 888/888 per ABI. Complete ordinary Lua passes 178/178 per host and 105/105 corpus;
+  admitted Perl 143/143, Rust 1/1 in 323.52 seconds, Dart 19/19, and Julia 491/491 agree on the current projection.
+- Typed 12/2/170, recognition 138/250/58, progressive 9/9/116 plus public 60, semantic 6/20/128,
+  generated/capability 80/0/0, and language 250/105+1/126 remain exact.
+- [[lua-staged-ast-enrichment-carriers-admission]] is the topology retrieval point. Knowledge is 906 facts /
+  7,707 keys; the sole-facing book renders 80 files / 15,728 KiB and generated output is removed.
+- Base-relative guards keep Lua production/private authority, function-body v1, generated format, other-backend
+  production, public/outward surfaces, dependencies/toolchains/storage/doctrines, and `.14.7.8+` unchanged.
+- The leaf is a mandatory canonical boundary because ordinary/canonical topology and executable lifecycle/rollout
+  truth move together. The exact staged candidate and nine-doctrine pre-commit validation pass; `.14.7.7.5`
+  retains independent admitted-route recomposition and final parent closure.
 - 2026-08-27 (`FUTURE-PARITY-BACKLOG.14.7.7.3` — Lua staged recursive carriers): exact clean activation is
   current-depth commit `9a2778aa`; scope owns only private breadth-first recurrence, shared bounds, source
   projection, four fresh post-parent carriers, the stable consumer's dormant GREEN, and synchronized truth.

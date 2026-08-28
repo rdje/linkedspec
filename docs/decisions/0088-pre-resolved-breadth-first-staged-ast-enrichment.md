@@ -2,8 +2,7 @@
 
 - Date: 2026-08-25
 - Status: accepted architecture; executable neutral authority complete under `FUTURE-PARITY-BACKLOG.14.7.2`;
-  Perl, Rust, Dart, and Julia private behavior/admission complete; shared Lua dual-ABI current-depth authority dormant;
-  recurrence, public authoring, and final recomposition remain pending
+  all five private backends/six runtime routes admitted; recurrence, public authoring, and final recomposition pending
 - Tags: architecture, staged-parsing, parse-job, source-location, registry, queue, policies, diagnostics, portability
 
 ## Context
@@ -128,14 +127,14 @@ cancellation/deadline/budget state, mutable queues, or host handles.
 4 registry entries; 2 sources; 8 provenance, 3 deterministic-id, 8 resolution, 6 authority, 10 cache, 4 queue,
 3 isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases; 37 diagnostics; 5 backend
 consumers over 6 runtime routes; 4 carrier requirements; 10 outward guards; 9 rollout legs; 35 exact owners; and
-98 reason-checked mutations after shared Lua dormant activation.
+106 reason-checked mutations after shared Lua admission.
 
-Neutral, Perl, Rust, Dart, and Julia rollout are complete. PUC Lua and LuaJIT rollout, six-runtime recurrence, and
-public authoring/no-drift remain pending under `.14.7.7-.9`; `.14.7.10` owns independent recomposition. The checker
+Neutral, Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT rollout are complete. Six-runtime recurrence and public
+authoring/no-drift remain pending under `.14.7.8-.9`; `.14.7.10` owns final independent recomposition. The checker
 is an always-on canonical-CI input. It guards ten facades/schema/semantic/MCP/CLI/README paths against premature
 public exposure, requires the Perl, Rust, Dart, and Julia consumers exactly once in ordinary and canonical
-discovery, rejects the former Dart dormant path, and requires the one stable Lua consumer while proving it absent
-from ordinary dual-ABI and canonical discovery.
+discovery, rejects the former Dart dormant path, and requires the one stable Lua consumer exactly once per ABI in
+ordinary and canonical proof while denying inline-suite duplication.
 
 ## Consequences
 
@@ -537,6 +536,15 @@ and canonical discovery. Neutral lifecycle stays at 98 mutations; both rollout r
 format v2, public/outward behavior, other backends, and later recurrence owners remain unchanged. Leaf `.4` alone
 owns dual-ABI admission and rollout promotion.
 
+Lua admission leaf `FUTURE-PARITY-BACKLOG.14.7.7.4` preserves the exact consumer behavior and every Lua
+production/carrier byte. Ordinary discovery runs the stable path once through PUC Lua and once through LuaJIT,
+while the inline TAP suite contains no duplicate. Canonical CI requires the path once and registers one exact
+repository-routed marker/invocation per ABI. Only the shared Lua consumer lifecycle and rollout rows six/seven
+advance; eight exact admission/topology mutations raise the neutral inventory from 98 to 106. All five private
+backend implementations and six runtime routes are now admitted, while function-body v1, generated-source v2,
+capability/public/outward surfaces, recurrence `.8`, public authoring `.9`, and final recomposition remain
+unchanged or pending. Leaf `.14.7.7.5` retains independent admitted-route recomposition and parent closure.
+
 ## Links
 
 - Owning task: `docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md`
@@ -561,3 +569,5 @@ owns dual-ABI admission and rollout promotion.
   `docs/knowledge/lua-staged-ast-enrichment-dormant-red.md` and
   `docs/knowledge/lua-staged-ast-enrichment-marker-provenance.md` plus
   `docs/knowledge/lua-staged-ast-enrichment-current-depth-authority.md`
+  plus `docs/knowledge/lua-staged-ast-enrichment-recursive-carriers.md` and
+  `docs/knowledge/lua-staged-ast-enrichment-carriers-admission.md`

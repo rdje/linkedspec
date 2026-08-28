@@ -17,8 +17,8 @@ resolution, immutable pre-registered parser/cache authority, breadth-first recur
 failure policies, strict decreasing/cycle/depth/call/cancellation/resource bounds, detached results, diagnostics,
 carrier obligations, dormant routes, rollout, exact ownership, and the unchanged function-body-v1 adapter. The
 checker passes 4 registry entries, 8 provenance, 8 resolution/6 authority, 10 cache, 4 queue/3 isolation,
-4 result plus 3 failure policies, 10 chain, 5 detachment, 37 diagnostics, 9 rollout legs, 35 owners, and 98
-reason-checked mutations after shared Lua dormant activation. It reuses ADR `0056`'s source algebra and progressive authority narrowing without
+4 result plus 3 failure policies, 10 chain, 5 detachment, 37 diagnostics, 9 rollout legs, 35 owners, and 106
+reason-checked mutations after shared Lua admission. It reuses ADR `0056`'s source algebra and progressive authority narrowing without
 reusing `dispatch_span` syntax or elevating an authored parser id into filesystem authority.
 
 Perl leaves `FUTURE-PARITY-BACKLOG.14.7.3.1-.4` now implement and privately admit that same final path. `.1` makes exact assignment-form `parse_job(text_expr, literal_options)` one exclusive
@@ -197,6 +197,14 @@ parent result. Native, `SpecFile`-JSON reconstructed, validated generated-plan, 
 routes each execute twice with fresh state and equal detached outcomes. Both ABIs pass 888/888 while the stable
 consumer remains absent from ordinary/canonical discovery; rollout, neutral 98 mutations, v1, generated format,
 public/outward behavior, and other backends stay fixed for admission owner `.14.7.7.4`.
+
+Lua admission leaf `FUTURE-PARITY-BACKLOG.14.7.7.4` changes only proof topology and executable lifecycle truth.
+The same stable Lua-5.1 source remains 888/888 on PUC Lua and LuaJIT; `tools/run_lua_local.sh` executes it exactly
+once per ABI, the inline TAP suite omits it, and canonical CI owns one tracked requirement plus one exact marker/
+repository-routed invocation per ABI. All five private backend consumers are complete, rollout rows six and seven
+advance, and eight exact topology mutations make neutral governance 106. Lua production, private authority,
+generated-source v2, function-body v1, capability state, public/outward surfaces, other backend behavior, and
+later recurrence remain unchanged. Independent `.14.7.7.5` retains admitted-route recomposition and parent close.
 
 The required complete change record crosses the bounded hot shard's exact predeclared controls and creates
 content-addressed immutable change-history segment `4989` from activation commit `43b33922`. ADR `0093` advances
