@@ -9,6 +9,23 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-28 (`FUTURE-PARITY-BACKLOG.14.7.7.5` — independent Lua staged recomposition): exact clean activation
+  is dual-ABI admission commit `97bfbac6`; the leaf owns only closure/current projections and no executable file.
+- One shared source remains the sole Lua behavior oracle: 888/888 per ABI explicitly and once per ABI through the
+  complete ordinary route. Canonical topology retains one tracked path and one exact invocation per host.
+- The consumer itself is the recomposition proof: four carrier routes remain equal and detached, every run gets
+  fresh callback/registry/cache/resource authority, and logical generated/emitted artifacts contain none of it.
+- Admitted peers remain Perl 143/143, Rust 1/1 in 268.47 seconds, Dart 19/19, and Julia 491/491. Neutral governance
+  remains five source consumers/six runtime routes/106 mutations; every direct-dependent ledger is unchanged.
+- Exact base-relative comparison is the negative contract for this leaf. Production, tests, fixtures, executable
+  checkers/contracts, discovery topology, formats, public/outward surfaces, dependencies/toolchains/storage/
+  doctrines, and other backend behavior have no diff.
+- [[lua-staged-ast-enrichment-recomposition]] is the durable retrieval point. Current Knowledge/ADR/roadmap/book
+  prose now distinguishes complete private recomposition from still-pending recurrence and public authoring.
+- Parent `.14.7.7` closes unchanged. `.14.7.8` next owns one recurring five-source/six-runtime driver and only its
+  typed staged row; `.9` retains public `parse_job(...)`, and `.10` retains final whole-program recomposition.
+- This designated parent closeout is canonical-tier. The exact staged documentation-only candidate and all nine
+  doctrines pass receipt-bound proof before the atomic commit.
 - 2026-08-27 (`FUTURE-PARITY-BACKLOG.14.7.7.4` — Lua staged carrier admission): exact clean activation is
   recursive-carrier commit `0f33564b`; scope owns lifecycle/projection/topology only and changes no production.
 - The neutral contract is now `all_private_backends_complete_recurring_and_public_pending`. Lua becomes complete,

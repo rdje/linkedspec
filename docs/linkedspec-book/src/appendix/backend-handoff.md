@@ -769,7 +769,8 @@ Julia have since reached the same private admission boundary. Lua `.14.7.7.0-.4`
 consumer, its marker/provenance carrier, caller-frozen current-depth resolver/cache/policy engine, bounded
 breadth-first recurrence, source rebasing, and a fresh host-only seed across four production routes. PUC Lua and
 LuaJIT each pass 888 assertions; ordinary/canonical discovery executes that source exactly once per ABI and both
-rollout legs are complete. Independent recomposition remains `.5`-owned.
+rollout legs are complete. Independent `.5` recomposes every committed route unchanged and closes shared Lua;
+recurring five-source/six-route proof `.14.7.8` is next.
 Dart
 `.14.7.5.0-.4` freeze one exact historical `test_dormant/` boundary, lower exact
 assignment-form `parse_job` to a live-proven private marker, and add a separate caller-frozen pure resolver/cache/
@@ -798,7 +799,8 @@ steps/calls/depth/result/diagnostic bounds, expiring callback safe points, and d
 projection. `StagedAstEnrichmentSeed` starts fresh callback/registry/cache/recursive authority only after the
 parent AST completes through native, reconstructed, generated-plan, and independently loaded emitted routes.
 Generated format and public behavior remain unchanged; `.14.7.7.4` admits the unchanged 888/888 source once per
-ABI and completes both rollout rows, while `.5` retains independent recomposition.
+ABI and completes both rollout rows. Independent `.5` reruns both ABIs, all admitted peers, exact topology, and
+106-mutation governance without executable movement before parent closure.
 Mandatory engineering-notes segment `4989` is finitely authorized at 19 files / 18
 manifest lines by ADR `0092`. Lua current-depth closeout's mandatory change-history segment `4989` is finitely
 authorized at 24 files / 23 manifest lines by ADR `0093`; no other pressure ceiling changes.

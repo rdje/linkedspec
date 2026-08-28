@@ -151,8 +151,9 @@ live-range-proven typed provenance, caller-frozen pure resolver/cache, complete-
 isolation, detached stitching, every policy, breadth-first recurrence, strict lineage/shared resources, expiring
 safe points, typed rebasing, and four fresh post-parent carriers at 888/888 on both PUC Lua and LuaJIT. Ordinary
 and canonical proof execute the same source once per ABI; all private backend lifecycle/rollout rows are complete
-and governance rejects 106 mutations. Formats and public/outward behavior do not move; independent dual-ABI
-recomposition `.14.7.7.5` is next before recurrence `.8`. Mandatory engineering-notes segment
+and governance rejects 106 mutations. Independent dual-ABI recomposition `.14.7.7.5` reruns the committed source,
+all peer projections, exact topology, and direct dependents without executable movement, then closes shared Lua.
+Formats and public/outward behavior do not move; recurrence `.8` is next. Mandatory engineering-notes segment
 `4989` is finitely authorized at 19 files / 18 manifest lines by ADR `0092`; every byte, aggregate, per-file,
 routing, and storage control remains unchanged. The current mandatory change-history rollover publishes segment
 `4989`; ADR `0093` advances only that separate store's finite controls to 24 files / 23 manifest lines.

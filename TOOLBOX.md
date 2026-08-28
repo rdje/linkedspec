@@ -416,9 +416,10 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   non-resetting resources, expired contexts, typed direct/ordered-derived projection, post-parent startup, and a
   fresh registry/cache/callback/resource set on every native/reconstructed/generated/emitted run. Do not infer
   capture positions from copied text or replay a regex. The same consumer is admitted once per ABI through
-  ordinary and canonical discovery, both Lua rollout rows are complete, and `.14.7.7.5` owns independent
-  recomposition without behavior change. Retrieve [[lua-staged-ast-enrichment-carriers-admission]] before
-  changing this topology.
+  ordinary and canonical discovery, both Lua rollout rows are complete, and `.14.7.7.5` independently recomposes
+  those committed owners without behavior change before closing the shared backend parent. Retrieve
+  [[lua-staged-ast-enrichment-carriers-admission]] and [[lua-staged-ast-enrichment-recomposition]] before changing
+  this topology; recurring five-source/six-route proof remains `.14.7.8`-owned.
 - **Env knobs:** `LINKEDSPEC_TRACE_LEVEL` (level; `LINKEDSPEC_DUMP_VERBOSITY` is the fallback),
   `LINKEDSPEC_TRACE_FILE` (route to a file), `LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_EMOJI`,
   `LINKEDSPEC_TRACE_RESET_FILE`.

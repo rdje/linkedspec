@@ -6,9 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-27` (progressive `.14.6`, staged neutral `.14.7.0-.2`, and complete Perl `.14.7.3`,
-  Rust `.14.7.4`, Dart `.14.7.5`, and Julia `.14.7.6` parents are closed; shared Lua `.14.7.7.0-.4`
-  implement and admit the complete dual-ABI behavior, with independent recomposition `.5` next)
+- Last updated: `2026-08-28` (progressive `.14.6`, staged neutral `.14.7.0-.2`, and complete Perl `.14.7.3`,
+  Rust `.14.7.4`, Dart `.14.7.5`, Julia `.14.7.6`, and shared Lua `.14.7.7` parents are closed; Lua `.0-.5`
+  implement, admit, and independently recompose the complete dual-ABI behavior; recurrence `.14.7.8` is next)
 - Owner: repo-local workflow
 
 ## Goal

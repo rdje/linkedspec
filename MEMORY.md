@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `0f33564b1d263f50816f1aa9427c3f7c8d415395` — exact clean Lua recursive-carrier base for task-tree-first `FUTURE-PARITY-BACKLOG.14.7.7.4`; brief cleared; no push.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.7.7.4 - admit Lua staged enrichment carriers` is canonical-signoff-complete on activation base `0f33564b1d263f50816f1aa9427c3f7c8d415395`; atomic commit remains.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.14.7.7.4` — atomic landing of the exact receipt-bound admission candidate.
-- next_action: commit with the leaf id, clear/verify the brief and clean handoff, then activate independent recomposition `.14.7.7.5` task-tree-first.
-- in_flight_uncommitted: `.14.7.7.4` admission candidate is fully implemented and canonical-verified; no production byte changed; atomic commit remains.
+- activation_commit: `97bfbac6e2b111c3f18610470b41bb743e5e63ed` — exact clean Lua-admission base for task-tree-first canonical recomposition `FUTURE-PARITY-BACKLOG.14.7.7.5`; brief cleared; no push.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.7.7.5 - close shared Lua staged enrichment` is canonical-signoff-complete on activation base `97bfbac6e2b111c3f18610470b41bb743e5e63ed`; atomic commit remains.
+- active_work_unit: none after the intended `.14.7.7.5` commit; recurring proof `.14.7.8` is pending.
+- next_action: from the clean `.14.7.7.5` commit, retrieve and activate `FUTURE-PARITY-BACKLOG.14.7.8` task-tree-first; bind the exact five-source/six-runtime recurring proof before promoting only the typed staged row.
+- in_flight_uncommitted: none after the intended `.14.7.7.5` commit; no background job remains.
 - blockers: none.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -33,6 +33,7 @@
 - current_verification_contract: ADR `0073` makes focused proof the ordinary per-leaf default and canonical proof
   mandatory at admission/milestone/public/infrastructure/final-push boundaries; Perl `.14.7.3.4`, Rust `.14.7.4.4`,
   Dart `.14.7.5.4`, Julia `.14.7.6.4`, capacity-triggered Lua `.14.7.7.2`, private-carrier Lua `.14.7.7.3`, and dual-ABI admission Lua `.14.7.7.4` require exact staged receipt-bound proof.
+  Designated independent recomposition/parent closeout `.14.7.7.5` also requires exact staged receipt-bound proof.
 - documentation_debt_owner: ADR `0066` composition-closes all stores; bounded live/history/task/Knowledge owners
   and their rollover/index gates remain current.
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
@@ -55,5 +56,5 @@
   Dart `.14.7.5.0-.4` add the historical dormant boundary, exclusive live-proven marker, pure caller-frozen resolution/cache,
   isolated atomic policies, breadth-first recurrence, strict lineage/shared resources, expiring safe points, typed
   rebasing, complete-depth target reservation, and a fresh host-only post-parent seed across four production routes.
-  Dart is 19/19 and rollout-complete. Julia `.14.7.6.0-.4` provide its exclusive marker, native-capture-proven typed provenance, caller-frozen resolution/cache, isolated policies, breadth-first recurrence, strict lineage/shared resources, typed rebasing, and four fresh-authority production routes. Its admitted consumer is 491/491. Shared Lua `.14.7.7.0-.4` now freeze, implement, and admit the same complete private architecture at 888/888 per ABI. Ordinary/canonical topology runs the one stable source exactly once per ABI; all private lifecycle/rollout rows are complete and neutral governance is 106 mutations. Formats, function-body v1, capability state, and public behavior remain unchanged; `.5` retains independent Lua recomposition.
-- latest_bootstrap_read: 2026-08-27 — roadmap, codebase, mdBook, continuity, active task tree, Knowledge, ADR `0088`, Toolbox, neutral/current-boundary facts, admitted backend and shared Lua progressive precedents, and Lua dormant/current-depth/recursive-carrier authorities are reviewed; `.14.7.7.4` activated from exact clean `0f33564b`.
+  Dart is 19/19 and rollout-complete. Julia `.14.7.6.0-.4` provide its exclusive marker, native-capture-proven typed provenance, caller-frozen resolution/cache, isolated policies, breadth-first recurrence, strict lineage/shared resources, typed rebasing, and four fresh-authority production routes. Its admitted consumer is 491/491. Shared Lua `.14.7.7.0-.4` freeze, implement, and admit the same complete private architecture at 888/888 per ABI. Ordinary/canonical topology runs the one stable source exactly once per ABI; all private lifecycle/rollout rows are complete and neutral governance is 106 mutations. Independent `.5` reruns every committed ABI/peer/governance owner unchanged, closes `.14.7.7`, and hands off recurring proof `.14.7.8`. Formats, function-body v1, capability state, and public behavior remain unchanged.
+- latest_bootstrap_read: 2026-08-28 — roadmap, codebase, mdBook, continuity, active task tree, Knowledge, ADR `0088`, Toolbox, Lua staged admission/recomposition facts, staged neutral/current-boundary/lockstep facts, and the committed shared-Lua progressive recomposition precedent are reviewed; `.14.7.7.5` activated from exact clean `97bfbac6`.

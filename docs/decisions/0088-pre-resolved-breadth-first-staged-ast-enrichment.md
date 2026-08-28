@@ -2,7 +2,7 @@
 
 - Date: 2026-08-25
 - Status: accepted architecture; executable neutral authority complete under `FUTURE-PARITY-BACKLOG.14.7.2`;
-  all five private backends/six runtime routes admitted; recurrence, public authoring, and final recomposition pending
+  all five private backends/six runtime routes independently recomposed; recurrence, public authoring, and final recomposition pending
 - Tags: architecture, staged-parsing, parse-job, source-location, registry, queue, policies, diagnostics, portability
 
 ## Context
@@ -543,7 +543,16 @@ repository-routed marker/invocation per ABI. Only the shared Lua consumer lifecy
 advance; eight exact admission/topology mutations raise the neutral inventory from 98 to 106. All five private
 backend implementations and six runtime routes are now admitted, while function-body v1, generated-source v2,
 capability/public/outward surfaces, recurrence `.8`, public authoring `.9`, and final recomposition remain
-unchanged or pending. Leaf `.14.7.7.5` retains independent admitted-route recomposition and parent closure.
+unchanged or pending. That admission boundary deliberately left independent admitted-route recomposition and
+parent closure to `.14.7.7.5`; the closeout below completes that owner.
+
+Lua closeout leaf `FUTURE-PARITY-BACKLOG.14.7.7.5` independently reruns the committed shared consumer at 888/888
+on PUC Lua and LuaJIT, complete ordinary dual-ABI Lua, every admitted peer, 106-mutation neutral governance, exact
+once-per-ABI discovery topology, and all direct-dependent ledgers. The carrier itself re-proves four-route
+equality, fresh authority, detached results, and generated/emitted authority absence. Git proves no production,
+test, fixture, executable-contract/checker, ordinary/canonical route, generated-format, public/outward,
+dependency/toolchain/storage/doctrine, or other-backend behavior movement. Parent `.14.7.7` closes unchanged;
+five-source/six-runtime recurrence `.14.7.8` is next.
 
 ## Links
 
@@ -570,4 +579,5 @@ unchanged or pending. Leaf `.14.7.7.5` retains independent admitted-route recomp
   `docs/knowledge/lua-staged-ast-enrichment-marker-provenance.md` plus
   `docs/knowledge/lua-staged-ast-enrichment-current-depth-authority.md`
   plus `docs/knowledge/lua-staged-ast-enrichment-recursive-carriers.md` and
-  `docs/knowledge/lua-staged-ast-enrichment-carriers-admission.md`
+  `docs/knowledge/lua-staged-ast-enrichment-carriers-admission.md` plus
+  `docs/knowledge/lua-staged-ast-enrichment-recomposition.md`

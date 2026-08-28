@@ -11,7 +11,7 @@
 > dual-ABI oracle with its private inert marker, live-range-proven typed provenance, caller-frozen policies,
 > bounded breadth-first recurrence, and four fresh post-parent production carriers at 888/888 on each runtime;
 > the neutral contract is 106 mutations and the same stable source runs exactly once per ABI in ordinary and
-> canonical proof. Independent Lua recomposition and six-runtime recurrence remain pending, and
+> canonical proof. Independent Lua recomposition is complete without executable movement; six-runtime recurrence remains pending, and
 > the only publicly authored five-backend/six-runtime surface is still the
 > narrow function-body v1 adapter described below.
 
@@ -344,7 +344,8 @@ execution. It starts only after the parent value completes and creates a new cal
 plan cache, recursive authority, and mutable queue for every run. No seed preserves the inert marker. Serialized
 logical artifacts contain no concrete callback, registry/source authority, cancellation/deadline/budget state,
 queue/cache, absolute checkout path, or host handle. Leaf `.14.7.7.4` admits this exact source once per ABI and
-promotes both Lua rollout rows; `.5` independently recomposes the admitted topology without behavior changes.
+promotes both Lua rollout rows. Leaf `.5` independently reruns both ABIs, all peer projections, exact topology,
+and neutral governance without behavior changes, closes shared Lua, and hands off recurrence `.14.7.8`.
 
 Publishing the complete `.2` record crosses the bounded change-history rollover threshold. The repository archives
 231 complete historical lines as immutable content-addressed segment `4989`; ADR `0093` advances only the finite
@@ -566,8 +567,8 @@ production engine is now the real caller.
 
 This is private Rust backend admission, not public `parse_job(...)` authoring. Ordinary Cargo discovers the GREEN
 consumer, canonical CI requires and invokes it exactly once, and only Rust rollout is promoted. Dart has since
-reached the same private boundary; Julia, Lua,
-six-runtime recurrence, public authoring, independent recomposition, and combined no-drift retain their owners.
+reached the same private boundary; Julia and Lua have since completed and independently recomposed theirs.
+Six-runtime recurrence, public authoring, and combined no-drift retain their owners.
 
 ## Current private Dart carrier admission
 

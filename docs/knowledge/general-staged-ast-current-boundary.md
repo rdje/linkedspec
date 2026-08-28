@@ -15,7 +15,7 @@ answers:
   - "what did FUTURE-PARITY-BACKLOG.14.7.0 audit"
   - "what must happen before general staged AST enrichment"
 date: 2026-08-25
-status: current runtime audit; private Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT admissions complete; public authoring remains pending
+status: current runtime audit; private Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT admissions independently recomposed; public authoring remains pending
 tags: [staged-parsing, parse-job, diagnostics, registry, policies, recursive-queue, source-location, backend-parity]
 evidence: "Toolbox-first source/runtime proof establishes the shipped boundary: five source backends/six runtimes implement only actionir-body.spec/action_block, one-depth ordering, fixed cache identity, and function-specific replace_field/body_ast/fail. FUTURE-PARITY-BACKLOG.14.7.1 repairs wrong-top diagnostic parity. FUTURE-PARITY-BACKLOG.14.7.2 adds the separate executable neutral v2 authority. Perl .14.7.3.1-.3 now add a dormant private marker/provenance carrier, caller-frozen pure resolution/cache, all policies/detachment, breadth-first recurrence, chain/resource bounds, and source-rebased diagnostics. They add no reconstructed/generated/emitted carriers, admission, rollout, or public authoring. Those remain .14.7.3.4-.10-owned."
 evidence_update_2026_08_26_perl_admission: "FUTURE-PARITY-BACKLOG.14.7.3.4 adds four fresh-authority Perl routes, exact phase-0/canonical admission, and Perl-only rollout promotion. Public authoring, generated format, later backends, recurrence, and outward surfaces remain unchanged or pending."
@@ -39,6 +39,7 @@ evidence_update_2026_08_27_lua_marker_provenance: "FUTURE-PARITY-BACKLOG.14.7.7.
 evidence_update_2026_08_27_lua_current_depth_authority: "FUTURE-PARITY-BACKLOG.14.7.7.2 adds a separate private Lua-5.1 general-v2 FrozenStagedRegistry and enrich_current_depth path without widening staged_parser_registry.lua. Pure caller-frozen selection, exact identities, plan-only caching, complete-depth target reservation and typed order, fresh sibling state, detached atomic stitching, all policies, and adversarial denials pass on both ABIs. Only .14.7.7.3 recurrence/bounds/rebasing/fresh carriers are RED; discovery, rollout, formats, v1, public, and outward truth do not move."
 evidence_update_2026_08_27_lua_recursive_carriers: "FUTURE-PARITY-BACKLOG.14.7.7.3 preserves the current-depth API and adds separate private enrich_recursively plus one opaque post-parent execution seed. Both ABIs pass 888 assertions over complete breadth-first recurrence, shared monotone authority, source rebasing, and four fresh production carriers while discovery, rollout, formats, v1, public, and outward truth stay fixed for .4."
 evidence_update_2026_08_27_lua_admission: "FUTURE-PARITY-BACKLOG.14.7.7.4 moves only the unchanged shared consumer into exact ordinary/canonical dual-ABI discovery and promotes the two Lua rollout rows. Both hosts remain 888/888; production, function-body v1, generated format, public authoring, and outward surfaces do not move."
+evidence_update_2026_08_28_lua_recomposition: "FUTURE-PARITY-BACKLOG.14.7.7.5 independently recomposes the committed shared Lua 888/888 carriers on both ABIs, every admitted peer/current projection, neutral 106-mutation governance, and exact topology without executable movement. Parent .14.7.7 closes and recurring proof .14.7.8 is next."
 root_cause: "The first prototype deliberately separated a generic-looking registry record from a narrow trusted function-body integration. Compile helpers in Perl, Rust, and Dart were shaped around loaded parser identity plus top rule, so they synthesized a placeholder diagnostic record; Julia and Lua were implemented later with the complete job parameter but their formatter omitted payload_kind. Success-path and resolve-phase tests covered real context, but no cross-backend compile-phase assertion locked the ADR 0015 fields. Leaf .14.7.1 passes the normalized job through the three compile boundaries, adds payload_kind to the two later formatters, and locks all five source routes/six runtimes without expanding staged behavior."
 last_verified: 2026-08-27
 reverify:
@@ -124,10 +125,11 @@ generated-plan, or independently included emitted execution and enriches only af
 The Julia consumer is 491/491 GREEN and admitted. Lua now has one shared 888/888 admitted consumer on both ABIs
 with private marker/provenance, current-depth authority, bounded recursive scheduling, source rebasing, and four
 fresh production carriers complete. Its function-body-v1 path remains unchanged; ordinary and canonical drivers
-run the stable source exactly once per ABI, while `.14.7.7.5` retains independent recomposition.
+run the stable source exactly once per ABI. Independent `.14.7.7.5` recomposes both committed ABI routes unchanged
+and closes the shared backend parent.
 
 The dependency plan then separates neutral contract, each backend, exact five-source/six-runtime recurrence,
-public `parse_job(...)` authoring, and independent recomposition. General staged dispatch reuses the typed source
+public `parse_job(...)` authoring, and final whole-program recomposition. General staged dispatch reuses the typed source
 algebra and authority-narrowing principles already established for progressive dispatch. ADR `0088` now fixes it
 as a post-AST breadth-first deterministic queue: it does not reuse progressive `dispatch_span` syntax, expose host
 callbacks, or interpret an authored parser id as permission to read a filesystem path.

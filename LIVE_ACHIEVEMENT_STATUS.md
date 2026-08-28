@@ -2,24 +2,27 @@
 
 ## Current Activity
 
-- Shared Lua staged carrier admission `.14.7.7.4` is canonical-signoff-complete from exact clean recursive-carrier
-  commit `0f33564b` and awaits only atomic commit/clean handoff.
-- One stable Lua-5.1-compatible consumer remains 888/888 on PUC Lua and LuaJIT and now runs exactly once per ABI
-  through ordinary/canonical topology without an inline duplicate.
-- Neutral governance is 106 mutations with all private backend lifecycle/rollout rows complete. Function-body v1,
-  generated format, public/outward behavior, later recurrence, and other backend behavior remain fixed.
+- Shared Lua staged recomposition `.14.7.7.5` independently reruns the committed 888/888 carrier on PUC Lua and
+  LuaJIT from exact clean admission commit `97bfbac6`.
+- Complete ordinary Lua, every admitted peer, exact once-per-ABI topology, neutral 106-mutation governance, and
+  all direct-dependent ledgers pass without an executable byte change.
+- Parent `.14.7.7` closes unchanged. Function-body v1, generated format, public/outward behavior, later
+  recurrence, dependencies/toolchains/storage/doctrines, and other backend behavior remain fixed.
 
 ## Latest Completed Slice
 
-- `.14.7.7.4` preserves the exact dual-ABI behavior, adds exact-once ordinary/canonical admission, and clears all
-  focused direct dependents plus receipt-bound canonical CI.
+- `.14.7.7.5` independently recomposes all committed dual-ABI/peer/governance owners, closes the shared Lua
+  parent without behavior change, and clears focused plus receipt-bound canonical proof.
 
 ## Next Action
 
-- Commit the exact `.14.7.7.4` candidate, clear and verify the brief/clean handoff, then activate independent
-  dual-ABI recomposition `.14.7.7.5` task-tree-first.
+- Commit the exact `.14.7.7.5` candidate, clear and verify the brief/clean handoff, then activate recurring
+  five-source/six-runtime proof `.14.7.8` task-tree-first.
 
 ## Recent Completions
+
+- `2026-08-28` — `.14.7.7.5` reruns Lua 888/888 per ABI, admitted peers, exact topology, and 106-mutation
+  governance unchanged, adds the durable recomposition fact, closes `.14.7.7`, and hands off `.14.7.8`.
 
 - `2026-08-27` — `.14.7.7.4` preserves the shared 888/888 behavior, registers the same source once per ABI in
   ordinary/canonical proof, completes both Lua rollout rows, and advances exact topology governance to 106.
@@ -76,10 +79,6 @@
 - `2026-08-26` — `.14.7.5.0` adds one excluded Dart consumer, passes fatal analysis plus four pre-boundary tests,
   freezes one exact dedicated-marker/provenance RED, advances only dormant lifecycle governance to 85, and
   finitely admits mandatory change-history segment `4990` through ADR `0091`.
-
-- `2026-08-26` — `.14.7.4.4` proves four fresh Rust production carriers, admits the exact consumer once in
-  ordinary/canonical topology, removes dormant cfg/dead-code scaffolding, promotes only Rust at 84 mutations, and
-  closes backend parent `.14.7.4` without public, format, or later-backend movement.
 
 ## History
 

@@ -10,6 +10,27 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-28 — FUTURE-PARITY-BACKLOG.14.7.7.5 — close shared Lua staged enrichment
+
+- Independently reran the unchanged shared staged carrier at 888/888 on PUC Lua and 888/888 on LuaJIT from exact
+  clean admission commit `97bfbac6`.
+- Reproved complete ordinary Lua at 178/178 per ABI, both 66/66 CLI environments, the 105-case corpus, and
+  repository-local 19-owner/three-native-module storage with exactly one staged-consumer execution per host.
+- Reproved native, reconstructed, generated-plan, and independently loaded emitted equality, fresh authority,
+  detached results, and generated/emitted authority absence. Exact topology remains one tracked canonical path,
+  one route per ABI, two ordinary references total, and no inline duplicate.
+- Reran admitted Perl 143/143, Rust 1/1 with its emitted carrier in 268.47 seconds, Dart 19/19, and Julia 491/491.
+  Neutral staged governance remains five source consumers/six routes/106 mutations.
+- Kept typed 12/2/170, recognition 138/250/58, progressive 9/9/116 plus public 60, semantic 6/20/128,
+  generated/capability 80/0/0, language 250/105+1/126, and public aggregate-selector no-drift exact.
+- Added [[lua-staged-ast-enrichment-recomposition]] and synchronized current admission/neutral/lockstep facts,
+  ADR `0088`, roadmaps, architecture, Toolbox, task/index, bounded continuity, and the sole-facing mdBook.
+- Closed parent `.14.7.7` unchanged and handed the frontier to recurring proof `.14.7.8`. Exact base-relative
+  guards prove no production, test, fixture, executable contract/checker, ordinary/canonical topology, generated
+  format, public/outward, dependency/toolchain/storage/doctrine, or other-backend behavior byte moved.
+- Knowledge regeneration, mdBook rendering/removal, bounded-history checks, all nine doctrines, and exact staged
+  receipt-bound canonical CI pass for the documentation-only closeout.
+
 ## 2026-08-27 — FUTURE-PARITY-BACKLOG.14.7.7.4 — admit Lua staged enrichment carriers
 
 - Preserved every Lua production/carrier byte and all 888 behavioral assertions in the one shared Lua-5.1-

@@ -204,7 +204,15 @@ once per ABI, the inline TAP suite omits it, and canonical CI owns one tracked r
 repository-routed invocation per ABI. All five private backend consumers are complete, rollout rows six and seven
 advance, and eight exact topology mutations make neutral governance 106. Lua production, private authority,
 generated-source v2, function-body v1, capability state, public/outward surfaces, other backend behavior, and
-later recurrence remain unchanged. Independent `.14.7.7.5` retains admitted-route recomposition and parent close.
+later recurrence remain unchanged.
+
+Lua closeout `FUTURE-PARITY-BACKLOG.14.7.7.5` independently reruns the committed shared carrier at 888/888 on
+PUC Lua and LuaJIT, complete ordinary Lua, admitted Perl/Rust/Dart/Julia consumers, exact 106-mutation neutral
+governance, once-per-ABI topology, and every direct-dependent ledger. The carrier re-proves native,
+reconstructed, generated-plan, and emitted equality, fresh authority, detached results, and absence of serialized
+authority. Git proves no production, test, fixture, executable contract/checker, CI topology, generated format,
+public/outward, dependency/toolchain/storage/doctrine, or other-backend behavior movement. Parent `.14.7.7`
+closes unchanged and hands off recurring proof `.14.7.8`.
 
 The required complete change record crosses the bounded hot shard's exact predeclared controls and creates
 content-addressed immutable change-history segment `4989` from activation commit `43b33922`. ADR `0093` advances

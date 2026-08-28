@@ -14,7 +14,7 @@ answers:
   - "how many Perl staged AST enrichment checks pass"
   - "what staged AST enrichment backend is next after Perl"
 date: 2026-08-26
-status: current private Perl admission; all private backends admitted; recurrence and public authoring pending
+status: current private Perl admission; all private backends independently recomposed; recurrence and public authoring pending
 tags: [perl, staged-parsing, carriers, generated-source, admission, ci, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.3.4 adds private LinkedSpec::StagedASTEnrichmentRuntime and attaches begin/complete invocation to live and generated-v2 top-level execution. A host-only staged_ast_enrichment option supplies the caller-prepared snapshot and recursive authority; every call constructs a new StagedASTEnrichment scheduler/cache and enriches only after the complete parent AST returns. Native, normalized-descriptor, validated generated-plan, and independently loaded emitted packages return equal detached AST/sidecar/diagnostic/cache/resource records. The oracle retains four distinct snapshots, sixteen distinct compiled callback entries, four cancellation identities/callbacks, four clocks, and four independent zero-hit/one-miss caches. Normalized ActionIR args, generated plans, and emitted source contain no callback, compiled parser, registry snapshot, source authority, cancellation/deadline/budget state, mutable queue, path, or host handle. The exact consumer passes 143 top-level checks, appears once in phase-0 and once in canonical CI, and advances only Perl plus neutral governance to 78 mutations. Function-body v1, generated-source v2, language/public/outward surfaces, later backends, recurrence, and combined no-drift remain unchanged or pending."
 evidence_update_2026_08_26_rust_dormant_snapshot: "FUTURE-PARITY-BACKLOG.14.7.4.0 commit e37a8b77 advances the neutral mutation inventory from 78 to 79 and the Rust backend consumer from pending_absent to dormant_red while keeping Rust ordinary/canonical discovery and rollout pending. TRACE-OBSERVABILITY.5.4 aligns the already-admitted Perl consumer's immutable topology snapshot with those two neutral truth changes; no Perl carrier, production behavior, registry, format, rollout, public surface, or other backend changes."
@@ -28,6 +28,7 @@ evidence_update_2026_08_27_julia_admission: "FUTURE-PARITY-BACKLOG.14.7.6.4 leav
 evidence_update_2026_08_27_lua_dormant_red: "FUTURE-PARITY-BACKLOG.14.7.7.0 leaves Perl behavior unchanged and moves only the shared Lua consumer lifecycle to dormant_red. The synchronized Perl projection remains 143/143 against neutral governance at 98 mutations; Lua marker/provenance .14.7.7.1 is next."
 evidence_update_2026_08_27_lua_marker_provenance: "FUTURE-PARITY-BACKLOG.14.7.7.1 leaves Perl behavior unchanged while implementing Lua's exclusive inert marker and private-native-range-backed typed direct/ordered-derived provenance. The synchronized Perl projection remains 143/143 against unchanged 98-mutation governance; Lua .14.7.7.2 is next."
 evidence_update_2026_08_27_lua_admission: "FUTURE-PARITY-BACKLOG.14.7.7.4 leaves Perl behavior unchanged while promoting the shared Lua lifecycle and two rollout rows. The synchronized Perl projection remains 143/143 against the all-private-complete 106-mutation neutral contract."
+evidence_update_2026_08_28_lua_recomposition: "FUTURE-PARITY-BACKLOG.14.7.7.5 reruns Perl 143/143 unchanged while independently recomposing the committed shared Lua 888/888 dual-ABI carriers, exact topology, and 106-mutation governance. All private backend sources/six runtime routes are independently recomposed; recurrence .14.7.8 is next."
 reverify:
   - "PERL5LIB= prove -q -Iperl t/staged_ast_enrichment_perl_contract.t"
   - "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py"
@@ -52,8 +53,8 @@ through host invocation options.
 
 The exact consumer is admitted once through ordinary phase-0 and once through canonical CI. The Perl backend and
 rollout row remain complete; Rust, Dart, Julia, PUC Lua, and LuaJIT have since reached the same private admission
-boundary. This is private implementation evidence, not public `parse_job(...)` authoring. Recurrence and public
-closeout remain `.14.7.8-.9`.
+boundary and independently recomposed unchanged. This is private implementation evidence, not public
+`parse_job(...)` authoring. Recurrence and public closeout remain `.14.7.8-.9`.
 
 ## Links
 
