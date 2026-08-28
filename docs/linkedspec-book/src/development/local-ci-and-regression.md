@@ -179,9 +179,9 @@ The final command is the typed recurrence authority: five backend sources form s
 `progressive_span_dispatch`; public closeout separately binds the committed driver to the behavioral recurring row and completes public no-drift. Rejected effect `parser_registry_or_staged_dispatch` retains exactly current node
 `PROGRESSIVE_DISPATCH_SPAN`, no call row, and ten facade/schema/semantic/MCP/CLI/README exposure denials.
 
-**Staged-AST recurring proof:** `bash tools/check_staged_ast_enrichment_six_runtime.sh` binds five immutable backend sources to six ordered routes (shared Lua runs once per ABI), then typed/generated/capability/language ledgers; neutral locks nine legs, 123 mutations, and function-body v1, while canonical CI always audits/routes it and `LINKEDSPEC_RUN_STAGED_AST_ENRICHMENT_MATRIX=1 bash tools/run_ci_local.sh` opts into the matrix. Current typed truth is 13/1/189 and capability truth is 17/85. Exact-assignment `parse_job(...)` authoring and staged public no-drift are current at 9/9 under 129 reason-checked public mutations; the combined typed row remains pending.
-Final `.14.7.10` recomposition reruns this driver without changing its source, consumers, topology, or support ledgers
-and closes the staged parent; `.14.8` alone owns the remaining combined typed public-no-drift row.
+**Staged-AST recurring proof:** `bash tools/check_staged_ast_enrichment_six_runtime.sh` binds five immutable backend sources to six ordered routes (shared Lua runs once per ABI), then typed/generated/capability/language ledgers; neutral locks nine legs, 123 mutations, and function-body v1, while canonical CI always audits/routes it and `LINKEDSPEC_RUN_STAGED_AST_ENRICHMENT_MATRIX=1 bash tools/run_ci_local.sh` opts into the matrix. Exact-assignment `parse_job(...)` authoring and staged public no-drift are current at 9/9 under 129 reason-checked public mutations.
+Final `.14.7.10` recomposition closes the unchanged staged parent; `.14.8` composes all six existing authorities and closes typed governance at 14/14 without a replacement oracle. `bash tools/check_typed_authoring_model_six_runtime.sh` is the composed authoring-model proof; canonical CI opts into it with `LINKEDSPEC_RUN_TYPED_AUTHORING_MODEL_MATRIX=1`.
+The repository-routed fail-fast driver runs typed-source values/projections, recognition transactions, recursive observation, typed gaps, progressive span dispatch, and staged-AST enrichment in order; each constituent retains its exact sources, runtime routes, and support ledgers.
 
 Perl carrier integration and admission prove one exclusive dedicated node, static operands, fresh invocation authority, live/reconstructed/generated-plan/independently loaded emitted execution, logical-only serialization, typed missing-authority failure, and transaction rejection in 129 assertions. `tools/run_ci_local.sh` requires, syntax-checks, and executes that exact consumer once; the neutral checker rejects regression of the Perl row and premature later-backend promotion. Its transaction-state query loads the recognition runtime only when a dispatch executes, preserving the require-only Compiler guarantee that `LinkedRE` stays lazy until the parser pipeline actually needs it.
 
@@ -284,7 +284,7 @@ bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contrac
 bash tools/run_lua_project_data.sh luajit lua/test/recursive_observation_contract_test.lua
 ```
 
-Its current rollout result is 13 complete / 1 pending with 189 registered mutations. Passing this gate proves the
+Its current rollout result is 14 complete / 0 pending with 231 registered mutations. Passing this gate proves the
 neutral contract, both completed public-structure rows, and all six internal runtime targets across their exact
 value/helper carriers. Rust and Lua retain UTF-8-byte registers, Dart retains UTF-16 code-unit registers, and Julia
 retains zero-based UTF-8 code-unit registers while each converts at its immutable typed boundary. Transaction

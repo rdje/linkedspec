@@ -2,23 +2,27 @@
 
 ## Current Activity
 
-- Final staged recomposition `.14.7.10` is canonical-signoff-complete from exact clean public-admission base
-  `692cd896`; parent `.14.7` is closed without executable movement.
-- Exact scalar-assignment `parse_job(...)` authoring remains current on all six routes at staged 9/9/123 plus 129
-  public mutations, typed 13/1/189, and capability 17 rows / 85 pass states / one legacy exclusion.
-- Runtime behavior, function-body v1, generated format, and unrelated facade/schema/semantic/MCP/CLI/root-README
-  surfaces remain fixed; combined typed public no-drift `.14.8` is the next task-tree-first owner.
+- Combined typed authoring-model closeout `.14.8` is canonical-signoff-complete from exact clean staged-
+  recomposition base `4046e23f`; the accepted ledger is 14/0/231 and parent `.14` is closed.
+- One repository-routed driver composes the six existing recurring authorities without replacing any behavior
+  oracle or changing parser/compiler/runtime/value/helper/carrier/outward/capability/CLI/storage behavior.
+- Public no-drift locks eight current documents, eight stale claims, six helper/cursor safety denials, and ten
+  outward surfaces; exact scalar-assignment `parse_job(...)` remains staged 9/9/123 plus 129 public mutations.
 
 ## Latest Completed Slice
 
-- `.14.7.10` reruns neutral/public governance, all five source groups/six runtime routes, and every support ledger
-  unchanged, corrects ADR `0088`'s stale live count, and closes `.14.7` without executable movement.
+- `.14.8` promotes only the accepted final typed row, composes the six existing recurring authorities, and closes
+  public no-drift plus parent `.14` without production, format, capability, or outward behavior movement.
 
 ## Next Action
 
-- From the clean `.14.7.10` commit, activate combined typed public no-drift `.14.8` task-tree-first.
+- From exact clean `.14.8`, activate `.15.0` task-tree-first and audit/ratify standalone rule-level `{ ... }`
+  normalization before any behavior code.
 
 ## Recent Completions
+
+- `2026-08-28` — `.14.8` completes typed governance at 14/0/231, locks program-wide authoring safety and public
+  no-drift, recomposes all six existing runtime authorities unchanged, and closes parent `.14`.
 
 - `2026-08-28` — `.14.7.10` independently recomposes staged 9/9/123 plus public 129, all six runtime routes,
   typed 13/1/189, generated/capability 85/0/0, and language coverage unchanged, then closes parent `.14.7`.
@@ -73,9 +77,6 @@
 - `2026-08-27` — `.14.7.5.4` adds a fresh host-only Dart staged seed across four post-parent production routes,
   moves the stable consumer to ordinary/canonical admission at 19/19, passes Dart 435/435, and advances only Dart
   rollout plus neutral governance to 90 mutations; receipt-bound canonical CI and phase 0 at 1,032/1,032 pass.
-
-- `2026-08-27` — `.14.7.5.3` adds Dart breadth-first recursion, strict lineage, shared resources, expiring safe
-  points, typed rebasing, and complete-depth target reservation; only `.4` carrier/admission authority remains RED.
 
 ## History
 

@@ -9,6 +9,22 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-28 (`FUTURE-PARITY-BACKLOG.14.8` — complete authoring model): final closeout is orchestration and
+  governance only. `tools/check_typed_authoring_model_six_runtime.sh` calls the six existing recurring drivers in
+  fixed order; it is not a replacement behavior oracle.
+- The exact contract remains 14 rows and promotes only `recurring_public_no_drift`, reaching 14/0/231. Program-
+  wide public proof is 8 current documents / 8 stale denials / 6 authoring-safety denials / 10 outward guards.
+- Stale internal ids `capture_take_slice` / `capture_take_slice_len` cannot surface as authored calls; canonical
+  helpers remain `capture_take()` / `capture_take_len()`. `save_cursor()` / `restore_cursor()` remain cursor-only
+  compatibility controls and cannot roll back marks/boundaries or non-recognition effects.
+- Canonical CI inventories, path-audits, syntax-checks, and project-data-routes the composed driver; exact full
+  execution is opt-in through `LINKEDSPEC_RUN_TYPED_AUTHORING_MODEL_MATRIX=1`.
+- The first canonical traversal root-caused one lockstep defect before runtime execution: staged public governance
+  still required the sole-facing book's pre-closeout “`.14.8` pending” marker. Its required literal now names
+  aggregate 14/0/231; the existing marker-deletion mutation continues to prove that current projection.
+- No parser/compiler/runtime/value/helper/carrier/format/outward/capability/CLI/storage behavior moves. ADR,
+  Knowledge, roadmaps, architecture, capability/Toolbox, mdBook, live continuity, task/index, and memory move in
+  lockstep.
 - 2026-08-28 (`FUTURE-PARITY-BACKLOG.14.7.10` — final staged recomposition): the closeout adds no umbrella
   oracle. It reruns the existing repository-routed six-runtime driver and support ledgers, then changes only
   durable current projections and parent/frontier state.

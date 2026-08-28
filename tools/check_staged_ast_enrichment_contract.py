@@ -483,7 +483,7 @@ PUBLIC_AUTHORING_CONTRACT = {
             "path": PUBLIC_NO_DRIFT_PATHS[2],
             "marker": (
                 "Staged `parse_job(...)` authoring and its public no-drift proof are current at 9/9 under "
-                "`.14.7.9`; the combined typed `.14.8` row remains pending."
+                "`.14.7.9`; combined typed `.14.8` is complete at aggregate 14/0/231."
             ),
         },
         {

@@ -37,9 +37,13 @@
 > and LuaJIT in exact order, then generated-source, capability, and language-coverage ledgers. Run
 > `bash tools/check_typed_source_location_six_runtime.sh`; canonical CI exposes the same all-toolchain proof behind
 > `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1`. Five backend source groups map to six runtime routes because the shared
-> Lua source executes on both ABIs. Governance is now 13 complete / 1 pending with 187 drift mutations after the
+> Lua source executes on both ABIs. At the staged-recurrence boundary, governance was 13 complete / 1 pending with 187 drift mutations after the
 > independently governed transaction-safety projection, recursive-observation public projection/no-drift, and
 > lossless-gap, progressive-recurrence, and staged-AST-recurrence closeouts.
+>
+> Combined typed authoring-model public no-drift is current with 14/14 rollout legs complete and no new runtime or public API.
+> `bash tools/check_typed_authoring_model_six_runtime.sh` composes the six existing recurring drivers in order;
+> each constituent driver remains the sole behavior/runtime authority for its lane.
 >
 > No-change recomposition `.14.2.7` reruns that exact authority and closes the internal value/helper implementation
 > parent `.14.2`. It adds no replacement backend surface and does not promote the combined final `.14.8` row.
@@ -103,9 +107,9 @@
 > lifecycle ownership. The neutral contract and all six internal value/projection runtime targets are admitted.
 > Existing helpers retain their public results and established scalar, byte, or code-unit mark/cursor behavior.
 >
-> Public authored typed values, recursive-observation public no-drift, and span-native dispatch remain owned by later leaves. The combined
-> recurring/public no-drift row stays pending for final program-wide owner `FUTURE-PARITY-BACKLOG.14.8`; the
-> transaction closeout does not promote that separate typed-source row early.
+> Public authored typed values remain intentionally absent. Recursive-observation and span-native dispatch retain
+> their already-complete owners, while final program-wide owner `FUTURE-PARITY-BACKLOG.14.8` now closes the combined
+> recurring/public no-drift row without changing transaction behavior.
 >
 > Recursive-observation audit `.14.4.0` is behavior-free and now fixes the handoff boundary. Extend each backend's
 > existing private monotonic recognition-invocation authority; do not add another stack or completed-history log.

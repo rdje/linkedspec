@@ -10,6 +10,23 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-28 — FUTURE-PARITY-BACKLOG.14.8 — close typed authoring-model public no-drift
+
+- Completed only the existing `recurring_public_no_drift` row, preserving the accepted 14-row ledger and moving
+  typed governance from 13/1/189 to 14/0/231.
+- Added one repository-routed composed driver over the six existing typed-source, recognition-transaction,
+  recursive-observation, typed-gap, progressive-span, and staged-AST recurring authorities. Each remains its
+  lane's sole behavior/runtime oracle.
+- Locked eight current projections, eight stale-current denials, six helper/cursor safety denials, and ten outward
+  guards. Internal `capture_take_slice*` ids remain non-authored; compatibility cursor controls remain non-
+  transactional.
+- Added canonical opt-in `LINKEDSPEC_RUN_TYPED_AUTHORING_MODEL_MATRIX=1` and synchronized ADR `0056`, Knowledge,
+  both roadmaps, architecture, Toolbox, capability guidance, bounded continuity, and the sole-facing mdBook.
+- Canonical doctrine/contract traversal exposed the staged-public checker's one pre-closeout book marker. Updated
+  only that required current-projection literal to 14/0/231; its 129 mutations and behavior authority stay exact.
+- Parser/compiler/runtime/value/helper/carrier/generated-format/facade/schema/semantic/MCP/capability/CLI/storage
+  behavior and the root README remain unchanged.
+
 ## 2026-08-28 — FUTURE-PARITY-BACKLOG.14.7.10 — close general staged AST recomposition
 
 - Independently reran the committed staged authority unchanged: neutral/public 9/9/123 plus 6/17/10/129,

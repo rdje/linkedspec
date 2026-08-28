@@ -1,10 +1,8 @@
 # ADR 0056: Typed source-location algebra governs cursor, spans, and parser composition
 
 - Date: 2026-07-29
-- Status: accepted; neutral/public contract and six-runtime internal value/projection implementation complete;
-  transaction syntax/effect/progress plus Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurring, and public no-drift
-  proof are current; transaction activity `FUTURE-PARITY-BACKLOG.14.3` is closed; recursive-observation audit
-  `.14.4.0` freezes the next behavior boundary and `.14.4.0.1` makes its neutral lineage contract fail-closed
+- Status: accepted and complete; all 14 typed authoring-model rollout legs, six recurring authorities, and combined
+  program-wide public no-drift are current without outward API admission
 - Tags: architecture, cursor, source-location, spans, capture, recursion, parser-composition, diagnostics, portability
 
 ## Context
@@ -598,6 +596,13 @@ behavior becomes current in this neutral leaf.
 - Only `lossless_gap_composition` advances, making typed truth 10/4/126. CI opt-in is
   `LINKEDSPEC_RUN_TYPED_GAP_COMPOSITION_MATRIX=1`; combined `.14.8` no-drift remains pending.
 
+### 31. Close the complete authoring model by composing existing authorities
+
+- `.14.8` adds one repository-routed fail-fast driver over the existing typed-source, recognition-transaction, recursive-observation, typed-gap, progressive-span, and staged-AST recurring drivers. Each remains its lane's sole behavior/runtime oracle; `LINKEDSPEC_RUN_TYPED_AUTHORING_MODEL_MATRIX=1` opts into the composed proof.
+- The ledger stays exactly 14 rows; only `recurring_public_no_drift` advances, producing 14/0/231 without parser/compiler/runtime/value/helper/carrier/format/facade/schema/semantic/MCP/capability/CLI/storage behavior changes.
+- Eight current documents, eight stale denials, six authoring-safety denials, and ten outward guards lock the public projection. Internal `capture_take_slice*` ids remain non-authored; canonical calls are `capture_take()` / `capture_take_len()`.
+- `save_cursor()` / `restore_cursor()` remain cursor-only compatibility controls, cannot roll back boundary/marks or non-recognition effects, and do not weaken child-owned cursor policy or the progress contract.
+
 ## Consequences
 
 - Cursor control, capture, recursion, segmentation, and parser composition share one precise model instead of accumulating pairwise helper semantics.
@@ -606,17 +611,11 @@ behavior becomes current in this neutral leaf.
 - Progress becomes a portable contract rather than a backend timeout/stack-overflow convention.
 - Current helper APIs and intrinsic rule-local cursor policy remain valid. The separately owned `.14.3` migration from execution-wide rule-label mark buckets to invocation frames is explicit, versioned, and mechanically checked.
 - The accepted `recognition_*` spellings are deliberately verbose enough to distinguish bounded recognition from compatibility cursor stacks, host exception handling, and systemic backtracking. Their neutral authority is executable, and the spellings plus exact recurring proof are current on independently admitted Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT runtimes.
-- The accepted private recursive-observation spelling, detached carrier, and exact recurrence are current on those
-  same six runtimes. Its public documentation/no-drift projection is current without a public API admission.
-- Lossless gap capture uses the common typed representation it anticipated while retaining its separate owner;
-  the composed proof is current on all six runtimes.
-- Stable named and compatible numeric slot selection share a structural target without collapsing identity into
-  position or overloading the fluent dot namespace.
-- This decision and its `.14.3.0` audit amendment change no grammar, helper, parser/compiler/runtime, descriptor,
-  generated format, semantic/MCP response, primary CLI, rollout, admission, or current public feature-completeness
-  claim.
-- The `.14.2.0` planning amendment changes no behavior itself; its exact backend module/test seams and rollout
-  correction are durable in the owning task-tree and Knowledge card.
+- The accepted private recursive-observation spelling, detached carrier, and exact recurrence are current on those same six runtimes. Its public documentation/no-drift projection is current without a public API admission.
+- Lossless gap capture uses the common typed representation it anticipated while retaining its separate owner; the composed proof is current on all six runtimes.
+- Stable named and compatible numeric slot selection share a structural target without collapsing identity into position or overloading the fluent dot namespace.
+- This decision and its `.14.3.0` audit amendment change no grammar, helper, parser/compiler/runtime, descriptor, generated format, semantic/MCP response, primary CLI, rollout, admission, or current public feature-completeness claim.
+- The `.14.2.0` planning amendment changes no behavior itself; its exact backend module/test seams and rollout correction are durable in the owning task-tree and Knowledge card.
 - The `.14.3.1.0` amendment selects syntax and static semantics only. `.14.3.1.1` adds the executable neutral
   authority without adding current authored capability or backend behavior. `.14.3.1.2.0` separately governs the
   public milestone sequence without changing that semantic authority. Subsequent independent backend admissions
@@ -627,7 +626,8 @@ behavior becomes current in this neutral leaf.
 - Amendments `.14.4.2-.6` admit every runtime in order; `.14.4.7` promotes only recurrence; `.14.4.8` closes the
   observation public projection without changing the 14-row rollout; `.14.5.1` promotes only lossless-gap typed
   composition. `.14.6.0.1` corrects transaction composition, and `.14.6.1` selects `dispatch_span("logical-parser-id", "Top", span)` plus its executable neutral authority without backend or typed
-  progressive-row admission. The combined program-wide `.14.8` row remains pending.
+  progressive-row admission. Subsequent `.14.6-.7` recurring/public owners complete progressive and staged
+  dispatch; `.14.8` closes the unchanged 14-row model at 14/0/231 through composed recurrence and public no-drift.
 
 ## Links
 

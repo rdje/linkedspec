@@ -45,7 +45,8 @@ remain part of ordinary/canonical proof. The driver creates no storage authority
 Eleven new topology/storage mutations reject source, route, command, order, duplication, support, initializer,
 driver, and CI-switch drift. A twelfth mutation rejects a recurring complete-to-RED regression. Together they move
 the contract suite to 58 while promoting only rollout row eight. `FUTURE-PARITY-BACKLOG.14.3.8` now closes the
-unchanged public projection at 9/9; `.14.8` still retains the broader program-wide source-location closeout.
+unchanged public projection at 9/9; `.14.8` subsequently composes this unchanged authority into the complete
+program-wide source-location closeout.
 
 Related: [[recognition-transaction-neutral-contract]], [[lua-recognition-transaction-admission]],
 [[typed-source-location-recurring-gate]], and [[semantic-introspection-recurring-gate]].

@@ -1137,10 +1137,10 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   canonical gate.
 - **OUTPUT:** neutral governance reports 3 sources, 7 positions, 6 direct spans, 3 derived texts, 8+8+33 state
   transitions, 6 recursive observations, 4 structural cases, 92 helper projections + 7 aliases + 2 internal ids,
-  33 diagnostics, 13 complete / 1 pending rollout, and 187 rejected drift mutations. The driver then reports each
+  33 diagnostics, 14 complete / 0 pending rollout, and 231 rejected drift mutations. The driver then reports each
   of the six ordered runtime routes and three support ledgers before its exact success marker.
-- **BOUNDARY:** this is orchestration over existing internal consumers, not a new public typed-value surface. The
-  combined recurring/public no-drift row remains pending for `FUTURE-PARITY-BACKLOG.14.8`. Retrieve
+- **BOUNDARY:** this is orchestration over existing internal consumers, not a new public typed-value surface.
+  Combined typed authoring-model public no-drift is current at 14 complete / 0 pending. Retrieve
   [[typed-source-location-recurring-gate]] before changing the source/runtime cardinality or rollout ownership.
 - **RECURSIVE-OBSERVATION PREFLIGHT:** retrieve [[recursive-source-observation-audit]] before changing recursive
   entry/match/exit state or provenance. First use `call_spec_handler_subst` to prove child-call lowering,
@@ -1166,11 +1166,11 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   `LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX=1 bash tools/run_ci_local.sh` for its all-toolchain route.
 - **OUTPUT:** Perl 7, Rust 7, Dart 7, Julia 30, PUC Lua 43, and LuaJIT 43 pass before the three support ledgers and
   exact success marker. Current neutral truth, including lossless-gap, transaction-safety, and progressive
-  recurrence composition plus the staged public-authoring projection, is 13 complete / 1 pending / 189 mutations.
+  recurrence composition plus the staged public-authoring projection and final combined closeout, is 14 complete / 0 pending / 231 mutations.
 - **BOUNDARY:** five backend sources form six routes because one shared Lua source executes independently on both
   ABIs. Twelve regressions lock topology/storage and recurrence-only promotion; 27 more lock six public documents,
   six stale-claim denials, and ten surface guards without changing the 14-row rollout. Recursive-observation public projection/no-drift is current without moving any public or runtime surface.
-  The combined program-wide `.14.8` row remains pending; no parser, runtime, facade, schema, semantic/MCP, CLI,
+  Final combined `.14.8` is current; no parser, runtime, facade, schema, semantic/MCP, CLI,
   README, or storage-root behavior changes. Retrieve
   [[recursive-observation-recurring-gate]] before changing this proof.
 
@@ -1179,7 +1179,7 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
 - **WHAT:** `transaction_safety` in the typed ledger is a projection of the separately owned current recognition
   authority, not a second transaction implementation. It produced 11/3/152 at its boundary; progressive
   recurrence subsequently produced 12/2/170, staged-AST recurrence produced 13/1/187, and its public-authoring
-  projection now makes current typed truth 13/1/189 without promoting the combined row.
+  projection made typed truth 13/1/189 before final `.14.8` completed the unchanged composition at 14/0/231.
   Recognition remains 9/9/58 over five backend
   sources and six runtime routes.
 - **WHEN:** changing typed transaction status/runtimes, transaction effect or progress language, recognition
@@ -1188,8 +1188,8 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   `bash tools/check_recognition_transaction_six_runtime.sh`. The typed checker cross-checks upstream identity,
   rollout, topology, 9/11 effect counts, eight progress cases, public 3/26/45, and guide 1/14/18.
 - **BOUNDARY:** this leaf completed only `transaction_safety`. `parser_registry_or_staged_dispatch` remains
-  rejected inside uncommitted recognition. Progressive and staged typed recurrence are now current; only
-  combined program-wide no-drift remains pending, and no parser/runtime/facade/schema/semantic/MCP/CLI/README
+  rejected inside uncommitted recognition. Progressive and staged typed recurrence plus final combined
+  program-wide no-drift are now current, and no parser/runtime/facade/schema/semantic/MCP/CLI/README
   behavior changes.
 
 ### 4.9.1.1.2 `tools/check_progressive_span_dispatch_contract.py` — neutral progressive oracle
@@ -1276,7 +1276,19 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   schema, semantic/MCP, CLI, README, or unrelated outward behavior moves. Retrieve
   [[staged-ast-enrichment-recurring-gate]] and [[general-staged-ast-enrichment-recomposition]] before changing this
   proof. Final `.14.7.10` recomposition reruns the driver unchanged and closes the parent at neutral/public
-  9/9/123 plus 129 mutations while leaving combined typed `.14.8` pending.
+  9/9/123 plus 129 mutations; `.14.8` subsequently composes that unchanged authority into the complete model.
+
+### 4.9.1.1.6 `tools/check_typed_authoring_model_six_runtime.sh` — final composed authoring-model proof
+
+- **WHAT:** repository-routed, fail-fast orchestration of the six existing typed-source, recognition-transaction,
+  recursive-observation, typed-gap, progressive-span, and staged-AST recurring authorities.
+- **WHEN:** verifying the complete 14-row typed authoring model or changing final public no-drift, recurring
+  composition order, canonical registration, or project-data routing.
+- **HOW:** run `bash tools/check_typed_authoring_model_six_runtime.sh`; use
+  `LINKEDSPEC_RUN_TYPED_AUTHORING_MODEL_MATRIX=1 bash tools/run_ci_local.sh` at the canonical boundary.
+- **OUTPUT:** all six constituent drivers pass in order and typed governance reports 14/0/231.
+- **BOUNDARY:** it adds no behavior oracle, rollout row, public helper/value, facade/schema/semantic/MCP/CLI
+  surface, or storage root. Each constituent driver remains authoritative for its own behavior and runtime routes.
 
 Staged rollout is neutral + Perl + Rust + Dart + Julia + PUC Lua + LuaJIT + recurring + public no-drift: 9/9 complete, with `parse_job(...)` still a dedicated annotation rather than a generic helper or outward API.
 
@@ -1327,7 +1339,7 @@ Staged rollout is neutral + Perl + Rust + Dart + Julia + PUC Lua + LuaJIT + recu
 - **HOW:** run `bash tools/check_typed_gap_composition_six_runtime.sh`. Canonical CI inventories, machine-path
   audits, syntax-checks, and outside-CWD routes the driver; use
   `LINKEDSPEC_RUN_TYPED_GAP_COMPOSITION_MATRIX=1 bash tools/run_ci_local.sh` for its full all-toolchain route.
-- **OUTPUT:** typed governance reports 13 complete / 1 pending / 189 mutations; gap governance reports 9/0/63
+- **OUTPUT:** typed governance reports 14 complete / 0 pending / 231 mutations; gap governance reports 9/0/63
   plus public 6/12/10/29; then Perl 124, Rust 1, Dart 5, Julia 319, PUC Lua 392, LuaJIT 392, recognition
   137/250/58, strict generated Rust 105/105, capability 85/0/0, and language 250/105+1/126 pass before exact
   `[typed-gap-composition] PASS: typed lossless-gap composition, all six gap runtimes, and support ledgers complete`.

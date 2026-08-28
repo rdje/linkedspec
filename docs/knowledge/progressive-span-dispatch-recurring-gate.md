@@ -37,7 +37,7 @@ tracked driver. Project-data initialization keeps every cache, build, and test a
 The original recurrence leaf promoted only typed `progressive_span_dispatch`. Public closeout `.14.6.8` then
 corrected the committed driver's stale behavioral recurring row and completed progressive public no-drift,
 producing 9/9/116 plus public 6/12/10/60 without runtime or outward movement. Staged dispatch stays `.14.7`-owned,
-and combined program-wide public no-drift stays `.14.8`-owned.
+and combined program-wide public no-drift is subsequently complete under `.14.8`.
 
 Related: [[progressive-span-dispatch-audit-plan]], [[typed-source-location-recurring-gate]],
 [[typed-source-location-cursor-algebra-direction]], and ADR `0080`.

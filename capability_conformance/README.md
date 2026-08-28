@@ -277,13 +277,13 @@ bash tools/check_typed_source_location_six_runtime.sh
 ```
 
 Canonical local CI requires and syntax-checks that driver; `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1` opts into its
-all-toolchain execution. Current governance is 189 mutations and rollout is 13 complete / 1 pending across 14 legs:
+all-toolchain execution. Current governance is 231 mutations and rollout is 14 complete / 0 pending across 14 legs:
 the neutral contract, public structure, unchanged neutral/public recomposition, and the Perl, Rust, Dart, Julia,
 PUC Lua, and LuaJIT internal
 runtime admissions are complete. Transaction safety projects the separately owned complete recognition authority;
 the two Lua ABIs share one rollout leg because they execute the same consumer
-source independently through distinct runtimes. The combined `recurring_public_no_drift` row remains pending for
-final program-wide owner `FUTURE-PARITY-BACKLOG.14.8`; recurring composition does not promote it early.
+source independently through distinct runtimes. Final program-wide owner `FUTURE-PARITY-BACKLOG.14.8` composes
+all six existing recurring authorities and completes `recurring_public_no_drift` without adding another row.
 
 Executable neutral observation selected
 `value = observe_recognition(observation, call(Child))`: one bare rule-local harray target and one unevaluated
@@ -305,9 +305,13 @@ Canonical CI exposes the same route behind `LINKEDSPEC_RUN_RECURSIVE_OBSERVATION
 regressions plus one recurrence regression promote only `recursive_observation`. The public closeout then binds
 six current projections, rejects six stale claims, and guards ten facade/API/schema surfaces through 27 further
 mutations. Recursive-observation public projection/no-drift is current without a new public API; its own rollout row remains complete.
-Typed transaction composition, progressive span dispatch, and staged-AST dispatch are current; the typed rollout is 13 complete / 1 pending.
-Governance is 189, and only combined program-wide public no-drift stays pending under `.14.8`. No public
+Combined typed authoring-model governance is complete at 14/14 under the composed six-runtime proof.
+Governance is 231. No public
 helper/value, descriptor/generated schema, semantic/MCP field, CLI, or README behavior moved.
+
+Run `bash tools/check_typed_authoring_model_six_runtime.sh` for the fail-fast composition of typed-source values,
+recognition transactions, recursive observation, typed gaps, progressive dispatch, and staged-AST enrichment.
+Canonical CI exposes the same route through `LINKEDSPEC_RUN_TYPED_AUTHORING_MODEL_MATRIX=1`.
 
 `progressive_span_dispatch_contract.json` (`linkedspec-progressive-span-dispatch-v1`) is the executable neutral
 authority for the reserved private expression
@@ -369,7 +373,7 @@ exclusion is absent. The staged-AST contract is 9/9 complete: portable exact-ass
 Generated format, facade/schema/semantic/MCP/CLI/README, and unrelated outward behavior have not moved.
 Independent closeout `.14.7.10` reruns that exact recurring program and its support ledgers unchanged, corrects
 only bounded current prose, and closes the staged parent. Capability truth remains 17 rows / 85 pass states / one
-legacy exclusion; typed truth remains 13/1/189 because combined public no-drift stays owned by `.14.8`.
+legacy exclusion; final `.14.8` now makes typed truth 14/0/231 without changing staged behavior.
 
 `inter_match_gap_capture_contract.json` is the neutral authority for named regex slots and lossless
 prefix/interstitial/tail context. Inter-match gap public admission is current with four shared calls and unchanged outward facade, descriptor, semantic, MCP, CLI, and README surfaces. Julia `.5.1-.5.5` and shared Lua `.6.1-.6.5` implement and admit their exact nine-role paths without widening those guarded surfaces.

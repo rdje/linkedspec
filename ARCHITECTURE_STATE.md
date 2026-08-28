@@ -1,5 +1,14 @@
 # ARCHITECTURE STATE
 
+## Complete typed authoring model is current across six recurring authorities
+
+`FUTURE-PARITY-BACKLOG.14.8` completes the accepted 14-row typed source-location model at 14/0/231. One
+repository-routed fail-fast driver composes the existing typed-source value/projection, recognition-transaction,
+recursive-observation, typed-gap, progressive-span, and staged-AST recurring authorities in order. Each remains
+the sole behavior/runtime oracle for its lane; no parser, compiler, runtime value/helper, carrier, generated
+format, facade/schema/semantic/MCP/capability/CLI, or storage behavior moves. Eight current documents, eight stale
+denials, six authoring-safety denials, and ten outward guards lock combined public no-drift.
+
 ## General staged-AST enrichment is current and independently recomposed across six runtime routes
 
 `FUTURE-PARITY-BACKLOG.14.7.9` makes only exact scalar-assignment
@@ -17,7 +26,7 @@ syntax-checks, and outside-CWD routes the driver; exact all-toolchain execution 
 `LINKEDSPEC_RUN_STAGED_AST_ENRICHMENT_MATRIX=1`.
 
 Staged rollout is 9/9 with 123 neutral and 129 reason-checked public mutations. Typed governance is
-13 complete / 1 pending / 189 mutations; `.14.8` still owns the combined row. The all-pass
+14 complete / 0 pending / 231 mutations after `.14.8` composed the unchanged recurring authorities. The all-pass
 `language.staged_ast_enrichment` capability keeps the census at 17/85, and the satisfied general-authoring
 exclusion is absent. Function-body v1, generated format v2, runtime/carrier behavior, and every unrelated
 facade/schema/semantic/MCP/CLI/root-README surface remain unchanged.
@@ -26,7 +35,7 @@ Final `.14.7.10` recomposition reruns that exact committed program unchanged: ne
 6/17/10/129, Perl 143, Rust 1 with a fresh emitted carrier, Dart 19, Julia 491, shared Lua 890 per ABI, typed
 13/1/189, generated/capability 85/0/0, and language 250/105+1/126. It adds no replacement oracle and changes no
 executable owner; the bounded current-projection audit corrects only ADR `0088`'s stale live count from 128 to 129.
-Parent `.14.7` is closed, and combined typed public no-drift `.14.8` is the next owner.
+Parent `.14.7` is closed, and combined typed public no-drift `.14.8` is now complete.
 
 Behavior-free audit `FUTURE-PARITY-BACKLOG.14.7.0` starts from exact clean progressive-closeout commit
 `fbcdedb6`. Toolbox-first descriptor, runtime, registry, source, and focused-test probes establish one precise
@@ -283,8 +292,8 @@ recognition rejects `parser_registry_or_staged_dispatch`; rolled-back work canno
 `transaction_safety` becomes complete on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Progressive recurrence
 later promotes only `progressive_span_dispatch`; staged-AST recurrence then promotes only
 `staged_span_dispatch`; staged public authoring adds two projection mutations without promoting another row.
-Combined program-wide no-drift remains pending under `.14.8`. Typed governance is now
-13 complete / 1 pending / 189 mutations with no parser,
+Combined program-wide no-drift is now complete under `.14.8`. Typed governance is
+14 complete / 0 pending / 231 mutations with no parser,
 compiler, runtime, facade, schema, semantic/MCP, CLI, README, storage, or public behavior change.
 
 ## Progressive span dispatch has six private runtimes and exact typed recurrence
@@ -467,16 +476,17 @@ topology/storage regressions plus one recurrence regression promote only `recurs
 source rollout to 9 complete / 5 pending. Public closeout `.14.4.8` governs six current projections, denies six
 stale claims, and scans ten public surfaces through 27 additional mutations, advancing governance to 114 without
 changing the 14-row rollout. Later lossless-gap typed composition adds twelve regressions and promotes only its
-row. Corrective transaction composition later made aggregate truth 11/3/152; progressive recurrence now makes
-current aggregate truth 12/2/170. The combined final `.14.8` row remains pending. No public helper/value, facade,
+row. Corrective transaction composition later made aggregate truth 11/3/152; progressive recurrence then made
+that boundary 12/2/170. Staged work reached 13/1/189, and final `.14.8` now completes aggregate truth at
+14/0/231. No public helper/value, facade,
 descriptor/generated schema, result schema, semantic/MCP projection, CLI, README, parser, compiler, or runtime
 behavior becomes current.
 
 The dedicated recurrence proof passes Perl/Rust/Dart 7 each, Julia 30, and the shared 43-assertion Lua consumer
 independently on PUC Lua and LuaJIT, followed by strict generated Rust 105/105, capability 80/0/0, and language
 coverage 246/105+1/122. Public closeout renders 78 book files / 14,576 KiB, passes Knowledge at 828 facts / 6,919
-question keys, and passes all eight doctrines. Observation public closeout is current under `.14.4.8`; only the
-combined final `.14.8` row remains pending.
+question keys, and passes all eight doctrines. Observation public closeout is current under `.14.4.8`; final
+combined `.14.8` is now complete without changing that proof.
 
 Definitive public-closeout signoff passes repository containment and relocation, primary CLI 66/66 in both option
 environments, RAM 57%, canonical Phase 0 1,031/1,031 in 713 seconds, and the complete opt-in observation matrix

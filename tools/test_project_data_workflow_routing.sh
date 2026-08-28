@@ -71,6 +71,7 @@ routed_entrypoints=(
  tools/check_recursive_observation_six_runtime.sh
  tools/check_progressive_span_dispatch_six_runtime.sh
  tools/check_staged_ast_enrichment_six_runtime.sh
+ tools/check_typed_authoring_model_six_runtime.sh
  tools/check_inter_match_gap_capture_six_runtime.sh
  tools/check_typed_gap_composition_six_runtime.sh
  tools/check_recognition_transaction_six_runtime.sh
@@ -226,6 +227,8 @@ run_routed_case typed-source-six failure "$REPO_ROOT/tools/check_typed_source_lo
 run_routed_case progressive-span-dispatch-six failure "$REPO_ROOT/tools/check_progressive_span_dispatch_six_runtime.sh" \
  LINKEDSPEC_JULIA_CMD=linkedspec-routing-test-missing-julia
 run_routed_case staged-ast-enrichment-six failure "$REPO_ROOT/tools/check_staged_ast_enrichment_six_runtime.sh" \
+ LINKEDSPEC_JULIA_CMD=linkedspec-routing-test-missing-julia
+run_routed_case typed-authoring-model-six failure "$REPO_ROOT/tools/check_typed_authoring_model_six_runtime.sh" \
  LINKEDSPEC_JULIA_CMD=linkedspec-routing-test-missing-julia
 run_routed_case inter-match-gap-six failure "$REPO_ROOT/tools/check_inter_match_gap_capture_six_runtime.sh" \
  LINKEDSPEC_PYTHON_CMD=linkedspec-routing-test-missing-python

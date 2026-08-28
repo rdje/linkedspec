@@ -12,9 +12,10 @@ answers:
   - "which recursive observation public surfaces are guarded"
   - "what did FUTURE-PARITY-BACKLOG.14.4.8 close"
 date: 2026-08-12
-status: current public projection/no-drift; no public API admission; combined FUTURE-PARITY-BACKLOG.14.8 row pending
+status: current public projection/no-drift; no public API admission; final combined row complete
 tags: [source-location, recursion, observation, public-no-drift, documentation, rollout, api-boundary]
 evidence: "FUTURE-PARITY-BACKLOG.14.4.8 adds an independent recursive_observation_public_no_drift section to the typed-source contract. It requires six current projections, rejects six exact stale claims, and scans ten public/API/schema surfaces for five private observation tokens. Nine contract mutations plus eighteen in-memory document/surface mutations advance typed-source governance from 87 to 114. The accepted 14-row rollout remains 9 complete / 5 pending: recursive_observation stays complete under .14.4, while recurring_public_no_drift stays pending for final program-wide .14.8. The exact five-source/six-runtime recurrence and support ledgers recompose unchanged. No parser, compiler, runtime, storage root, public helper, authored Position/Span value, facade export, descriptor/generated or result schema, semantic/MCP field, CLI option, or README behavior moves."
+evidence_update_2026_08_28_program_wide_closeout: "Final .14.8 leaves this six-document observation proof and its private API boundary unchanged while completing the separate combined row through the six existing recurring authorities. Aggregate typed truth is now 14/0/231."
 last_verified: 2026-08-12
 reverify:
   - "bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py"
@@ -38,8 +39,8 @@ MCP schema, CLI manifest, and bounded root README.
 
 This proof is intentionally independent of the rollout ledger. The original accepted contract has fourteen rows,
 not fifteen. Recursive observation became complete when `.14.4.7` established recurrence; `.14.4.8` closes that
-activity's public projection without consuming the final combined `recurring_public_no_drift` row owned by
-`.14.8`. Current truth therefore remains 9 complete / 5 pending while governance advances to 114 mutations.
+activity's public projection without consuming the final combined `recurring_public_no_drift` row then owned by
+`.14.8`. Final `.14.8` now completes that separate row while this observation-specific proof remains unchanged.
 
 Definitive canonical evidence passes all eight doctrines, repository containment and relocation, CLI 66/66 in
 both option environments, RAM 57%, Phase 0 1,031/1,031 in 713 seconds, and the full opt-in observation matrix

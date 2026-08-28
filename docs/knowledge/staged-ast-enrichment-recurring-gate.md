@@ -37,7 +37,7 @@ The recurrence leaf moved only typed `staged_span_dispatch` and its all-pass cap
 `.14.7.9` subsequently makes only exact scalar assignment-form `parse_job(...)` current and completes staged
 public no-drift. Generated format, outward schemas, semantic/MCP, CLI, and root-README behavior remain unchanged.
 Independent recomposition `.14.7.10` reruns this complete composition and closes `.14.7` without executable
-movement; `.14.8` retains combined typed public no-drift.
+movement; `.14.8` subsequently composes the unchanged driver and completes combined typed public no-drift.
 
 Related: [[general-staged-ast-enrichment-neutral-contract]], [[general-staged-ast-enrichment-recomposition]],
 [[staged-consumer-current-projection-lockstep]],

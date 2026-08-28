@@ -2,7 +2,7 @@
   "format": 1,
   "contract_id": "linkedspec-typed-source-location-v1",
   "task_owner": "FUTURE-PARITY-BACKLOG.14.1.1",
-  "status": "neutral_contract_with_transaction_safety_recursive_observation_public_no_drift_lossless_gap_progressive_and_staged_dispatch_composition",
+  "status": "complete_authoring_model_with_combined_recurring_and_public_no_drift",
   "expected_counts": {
     "sources": 3,
     "position_conversions": 7,
@@ -29,7 +29,12 @@
     "recursive_observation_public_documents": 6,
     "recursive_observation_public_forbidden_claims": 6,
     "recursive_observation_public_surface_guard_paths": 10,
-    "mutations": 189
+    "program_wide_recurring_drivers": 6,
+    "program_wide_public_documents": 8,
+    "program_wide_public_forbidden_claims": 8,
+    "program_wide_authoring_safety_claims": 6,
+    "program_wide_public_surface_guard_paths": 10,
+    "mutations": 231
   },
   "policy": {
     "source_identity": "caller-authorized decoded input identity; never a path, backend object, or implicit read authority",
@@ -45,7 +50,7 @@
     "progress": "repetition, recursion, and staged queues must advance the cursor or prove a well-founded decreasing measure",
     "dispatch_authority": "a span conveys data and provenance only; source, registry, capability, and policy authority remain independently required",
     "source_spelling": "observe_recognition(observation, call(Child)) and private value = dispatch_span(\"expr-v1\", \"Expr\", span) are current in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; Position and Span remain private architectural values projected as detached records",
-    "implementation_boundary": "recognition transaction safety, recursive-observation spelling, dedicated private nodes, detached carriers, parser behavior, exact recursive-observation, progressive-span, and staged-AST six-runtime recurring composition, public recursive-observation projection/no-drift proof, and lossless-gap typed composition are current; this is not a second transaction, gap, progressive, or staged syntax, lifecycle, implementation, compatibility, or migration owner, combined program-wide public-no-drift remains pending, and no public helper, descriptor/schema version, or semantic/MCP projection is admitted"
+    "implementation_boundary": "recognition transaction safety, recursive-observation spelling, dedicated private nodes, detached carriers, parser behavior, exact typed-source, transaction, recursive-observation, lossless-gap, progressive-span, and staged-AST six-runtime recurring composition, and combined program-wide public no-drift are current; this is not a second transaction, gap, progressive, or staged syntax, lifecycle, implementation, compatibility, or migration owner, and no public helper, descriptor/schema version, or semantic/MCP projection is admitted"
   },
   "canonical_execution": {
     "contract_path": "capability_conformance/typed_source_location_contract.json",
@@ -377,7 +382,7 @@
       "row_count": 14,
       "progressive_span_dispatch": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.6"},
       "staged_span_dispatch": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.7"},
-      "recurring_public_no_drift": {"status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.8"}
+      "recurring_public_no_drift": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.8"}
     }
   },
   "staged_ast_enrichment_recurring_gate": {
@@ -424,7 +429,7 @@
     "rollout_assertions": {
       "row_count": 14,
       "staged_span_dispatch": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.7"},
-      "recurring_public_no_drift": {"status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.8"}
+      "recurring_public_no_drift": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.8"}
     },
     "capability_projection": {
       "manifest": "capability_conformance/manifest.json",
@@ -445,7 +450,7 @@
         "owner": "FUTURE-PARITY-BACKLOG.14.4"
       },
       "recurring_public_no_drift": {
-        "status": "pending",
+        "status": "complete",
         "owner": "FUTURE-PARITY-BACKLOG.14.8"
       }
     },
@@ -465,7 +470,7 @@
       {
         "path": "docs/linkedspec-book/src/overview/project-status.md",
         "required_markers": [
-          "Recursive-observation public no-drift is current under `.14.4.8`, while the combined program-wide `.14.8` row remains pending."
+          "Recursive-observation public no-drift remains current under `.14.4.8`; final combined `.14.8` is now complete."
         ]
       },
       {
@@ -580,19 +585,19 @@
         {
           "path": "docs/knowledge/typed-source-location-cursor-algebra-direction.md",
           "required_markers": [
-            "Typed transaction, progressive span-dispatch, and staged-AST composition are current at six runtimes and the typed rollout is 13 complete / 1 pending."
+            "Typed transaction, progressive span-dispatch, staged-AST composition, and combined public no-drift are current at six runtimes and the typed rollout is 14 complete / 0 pending."
           ]
         },
         {
           "path": "docs/linkedspec-book/src/overview/project-status.md",
           "required_markers": [
-            "Typed transaction composition, progressive span dispatch, and staged-AST dispatch are now current at 13 complete / 1 pending; combined program-wide no-drift remains pending."
+            "All 14 typed source-location rollout legs are complete; combined program-wide public no-drift is current."
           ]
         },
         {
           "path": "capability_conformance/README.md",
           "required_markers": [
-            "Typed transaction composition, progressive span dispatch, and staged-AST dispatch are current; the typed rollout is 13 complete / 1 pending."
+            "Combined typed authoring-model governance is complete at 14/14 under the composed six-runtime proof."
           ]
         }
       ],
@@ -617,7 +622,7 @@
       "transaction_safety": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.3"},
       "progressive_span_dispatch": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.6"},
       "staged_span_dispatch": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.7"},
-      "recurring_public_no_drift": {"status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.8"}
+      "recurring_public_no_drift": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.8"}
     }
   },
   "lossless_gap_composition": {
@@ -663,7 +668,131 @@
     "rollout_assertions": {
       "row_count": 14,
       "lossless_gap_composition": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.5"},
-      "recurring_public_no_drift": {"status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.8"}
+      "recurring_public_no_drift": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.8"}
+    }
+  },
+  "program_wide_public_no_drift": {
+    "owner": "FUTURE-PARITY-BACKLOG.14.8",
+    "status": "complete",
+    "policy": "compose the six existing recurring authorities and lock the complete authoring-model projection without adding a rollout row, behavior oracle, parser/compiler/runtime/value/helper/carrier/outward/capability/CLI/storage change, or public authored Position/Span type",
+    "recurring_composition": {
+      "driver": "tools/check_typed_authoring_model_six_runtime.sh",
+      "ordered_drivers": [
+        "tools/check_typed_source_location_six_runtime.sh",
+        "tools/check_recognition_transaction_six_runtime.sh",
+        "tools/check_recursive_observation_six_runtime.sh",
+        "tools/check_typed_gap_composition_six_runtime.sh",
+        "tools/check_progressive_span_dispatch_six_runtime.sh",
+        "tools/check_staged_ast_enrichment_six_runtime.sh"
+      ],
+      "execution_policy": "run the six existing fail-fast authorities in order; each remains the sole oracle for its owned behavior and runtime topology",
+      "storage": {
+        "initializer": "tools/project_data_env.sh",
+        "managed_entrypoint": "tools/check_typed_authoring_model_six_runtime.sh",
+        "policy": "all temporary, cache, build, native, and test data stays under repository-derived storage"
+      },
+      "local_ci": {
+        "driver": "tools/run_ci_local.sh",
+        "switch": "LINKEDSPEC_RUN_TYPED_AUTHORING_MODEL_MATRIX"
+      }
+    },
+    "rollout_assertions": {
+      "row_count": 14,
+      "complete": 14,
+      "pending": 0,
+      "recurring_public_no_drift": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.8"}
+    },
+    "documents": [
+      {
+        "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+        "required_markers": [
+          "Combined typed authoring-model public no-drift is current: all 14 rollout legs are complete under the composed six-runtime recurring proof."
+        ]
+      },
+      {
+        "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+        "required_markers": [
+          "Combined typed authoring-model public no-drift is current with 14/14 rollout legs complete and no new runtime or public API."
+        ]
+      },
+      {
+        "path": "docs/linkedspec-book/src/overview/project-status.md",
+        "required_markers": [
+          "All 14 typed source-location rollout legs are complete; combined program-wide public no-drift is current."
+        ]
+      },
+      {
+        "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+        "required_markers": [
+          "`bash tools/check_typed_authoring_model_six_runtime.sh` is the composed authoring-model proof; canonical CI opts into it with `LINKEDSPEC_RUN_TYPED_AUTHORING_MODEL_MATRIX=1`."
+        ]
+      },
+      {
+        "path": "capability_conformance/README.md",
+        "required_markers": [
+          "Combined typed authoring-model governance is complete at 14/14 under the composed six-runtime proof."
+        ]
+      },
+      {
+        "path": "TOOLBOX.md",
+        "required_markers": [
+          "Combined typed authoring-model public no-drift is current at 14 complete / 0 pending."
+        ]
+      },
+      {
+        "path": "docs/knowledge/typed-source-location-runtime-rollout-plan.md",
+        "required_markers": [
+          "Combined program-wide public no-drift is current at 14 complete / 0 pending under `FUTURE-PARITY-BACKLOG.14.8`."
+        ]
+      },
+      {
+        "path": "docs/knowledge/typed-authoring-model-public-no-drift.md",
+        "required_markers": [
+          "The final combined authoring-model row is current: 14 complete / 0 pending under one composed six-runtime proof."
+        ]
+      }
+    ],
+    "forbidden_claims": [
+      {"path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md", "text": "Only combined program-wide no-drift remains pending."},
+      {"path": "docs/linkedspec-book/src/appendix/backend-handoff.md", "text": "recurring/public no-drift row stays pending for final program-wide owner"},
+      {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "combined program-wide no-drift remains pending."},
+      {"path": "docs/linkedspec-book/src/development/local-ci-and-regression.md", "text": "the combined typed row remains pending."},
+      {"path": "capability_conformance/README.md", "text": "The combined `recurring_public_no_drift` row remains pending"},
+      {"path": "TOOLBOX.md", "text": "The combined program-wide `.14.8` row remains pending"},
+      {"path": "docs/knowledge/typed-source-location-runtime-rollout-plan.md", "text": "status: six internal value/projection and recursive-observation runtimes admitted; recurrence and recursive-observation public projection current; combined program-wide closeout pending"},
+      {"path": "docs/knowledge/typed-authoring-model-public-no-drift.md", "text": "combined program-wide public no-drift remains pending"}
+    ],
+    "authoring_safety": {
+      "forbidden_claims": [
+        {"path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md", "text": "capture_take_slice("},
+        {"path": "docs/linkedspec-book/src/dsl/source-boundary-helper-reference.md", "text": "capture_take_slice_len("},
+        {"path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md", "text": "save_cursor() and restore_cursor() provide transactional rollback"},
+        {"path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md", "text": "restore_cursor() can roll back AST, output, diagnostics, or registry effects"},
+        {"path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md", "text": "a parent may reset the cursor before calling a child"},
+        {"path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md", "text": "mark or variable changes satisfy recursive progress without cursor advance"}
+      ]
+    },
+    "surface_guard": {
+      "paths": [
+        "perl/LinkedSpec.pm",
+        "rust/linkedspec-runtime/src/lib.rs",
+        "dart/lib/linkedspec_dart.dart",
+        "julia/src/LinkedSpecJulia.jl",
+        "lua/src/linkedspec/init.lua",
+        "capability_conformance/outward_descriptor_contract.json",
+        "capability_conformance/semantic_introspection_model.json",
+        "capability_conformance/mcp_semantic_transport/schema.json",
+        "cli_conformance/manifest.json",
+        "README.md"
+      ],
+      "forbidden_tokens": [
+        "capture_take_slice",
+        "capture_take_slice_len",
+        "ObserveRecognition",
+        "ActionObserveRecognitionExpr",
+        "PROGRESSIVE_DISPATCH_SPAN",
+        "STAGED_PARSE_JOB"
+      ]
     }
   },
   "rollout": [
@@ -680,6 +809,6 @@
     {"leg": "lossless_gap_composition", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.5", "runtimes": ["perl", "rust", "dart", "julia", "puc_lua", "luajit"]},
     {"leg": "progressive_span_dispatch", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.6", "runtimes": ["perl", "rust", "dart", "julia", "puc_lua", "luajit"]},
     {"leg": "staged_span_dispatch", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.7", "runtimes": ["perl", "rust", "dart", "julia", "puc_lua", "luajit"]},
-    {"leg": "recurring_public_no_drift", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.8", "runtimes": ["perl", "rust", "dart", "julia", "puc_lua", "luajit"]}
+    {"leg": "recurring_public_no_drift", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.8", "runtimes": ["perl", "rust", "dart", "julia", "puc_lua", "luajit"]}
   ]
 }

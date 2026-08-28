@@ -56,6 +56,9 @@ PROGRESSIVE_SPAN_DISPATCH_RECURRING_DRIVER_PATH = (
 STAGED_AST_ENRICHMENT_RECURRING_DRIVER_PATH = (
     ROOT / "tools" / "check_staged_ast_enrichment_six_runtime.sh"
 )
+TYPED_AUTHORING_MODEL_RECURRING_DRIVER_PATH = (
+    ROOT / "tools" / "check_typed_authoring_model_six_runtime.sh"
+)
 STAGED_AST_ENRICHMENT_CONTRACT_PATH = (
     ROOT / "capability_conformance" / "staged_ast_enrichment_contract.json"
 )
@@ -104,7 +107,12 @@ EXPECTED_COUNTS = {
     "recursive_observation_public_documents": 6,
     "recursive_observation_public_forbidden_claims": 6,
     "recursive_observation_public_surface_guard_paths": 10,
-    "mutations": 189,
+    "program_wide_recurring_drivers": 6,
+    "program_wide_public_documents": 8,
+    "program_wide_public_forbidden_claims": 8,
+    "program_wide_authoring_safety_claims": 6,
+    "program_wide_public_surface_guard_paths": 10,
+    "mutations": 231,
 }
 
 POLICY = {
@@ -121,7 +129,7 @@ POLICY = {
     "progress": "repetition, recursion, and staged queues must advance the cursor or prove a well-founded decreasing measure",
     "dispatch_authority": "a span conveys data and provenance only; source, registry, capability, and policy authority remain independently required",
     "source_spelling": "observe_recognition(observation, call(Child)) and private value = dispatch_span(\"expr-v1\", \"Expr\", span) are current in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; Position and Span remain private architectural values projected as detached records",
-    "implementation_boundary": "recognition transaction safety, recursive-observation spelling, dedicated private nodes, detached carriers, parser behavior, exact recursive-observation, progressive-span, and staged-AST six-runtime recurring composition, public recursive-observation projection/no-drift proof, and lossless-gap typed composition are current; this is not a second transaction, gap, progressive, or staged syntax, lifecycle, implementation, compatibility, or migration owner, combined program-wide public-no-drift remains pending, and no public helper, descriptor/schema version, or semantic/MCP projection is admitted",
+    "implementation_boundary": "recognition transaction safety, recursive-observation spelling, dedicated private nodes, detached carriers, parser behavior, exact typed-source, transaction, recursive-observation, lossless-gap, progressive-span, and staged-AST six-runtime recurring composition, and combined program-wide public no-drift are current; this is not a second transaction, gap, progressive, or staged syntax, lifecycle, implementation, compatibility, or migration owner, and no public helper, descriptor/schema version, or semantic/MCP projection is admitted",
 }
 
 CANONICAL_EXECUTION = {
@@ -393,7 +401,7 @@ PROGRESSIVE_SPAN_DISPATCH_RECURRING_GATE = {
             "owner": "FUTURE-PARITY-BACKLOG.14.7",
         },
         "recurring_public_no_drift": {
-            "status": "pending",
+            "status": "complete",
             "owner": "FUTURE-PARITY-BACKLOG.14.8",
         },
     },
@@ -483,7 +491,7 @@ STAGED_AST_ENRICHMENT_RECURRING_GATE = {
             "owner": "FUTURE-PARITY-BACKLOG.14.7",
         },
         "recurring_public_no_drift": {
-            "status": "pending",
+            "status": "complete",
             "owner": "FUTURE-PARITY-BACKLOG.14.8",
         },
     },
@@ -507,7 +515,7 @@ RECURSIVE_OBSERVATION_PUBLIC_NO_DRIFT = {
             "owner": "FUTURE-PARITY-BACKLOG.14.4",
         },
         "recurring_public_no_drift": {
-            "status": "pending",
+            "status": "complete",
             "owner": "FUTURE-PARITY-BACKLOG.14.8",
         },
     },
@@ -527,7 +535,7 @@ RECURSIVE_OBSERVATION_PUBLIC_NO_DRIFT = {
         {
             "path": "docs/linkedspec-book/src/overview/project-status.md",
             "required_markers": [
-                "Recursive-observation public no-drift is current under `.14.4.8`, while the combined program-wide `.14.8` row remains pending."
+                "Recursive-observation public no-drift remains current under `.14.4.8`; final combined `.14.8` is now complete."
             ],
         },
         {
@@ -649,19 +657,19 @@ TRANSACTION_SAFETY_COMPOSITION = {
             {
                 "path": "docs/knowledge/typed-source-location-cursor-algebra-direction.md",
                 "required_markers": [
-                    "Typed transaction, progressive span-dispatch, and staged-AST composition are current at six runtimes and the typed rollout is 13 complete / 1 pending."
+                    "Typed transaction, progressive span-dispatch, staged-AST composition, and combined public no-drift are current at six runtimes and the typed rollout is 14 complete / 0 pending."
                 ],
             },
             {
                 "path": "docs/linkedspec-book/src/overview/project-status.md",
                 "required_markers": [
-                    "Typed transaction composition, progressive span dispatch, and staged-AST dispatch are now current at 13 complete / 1 pending; combined program-wide no-drift remains pending."
+                    "All 14 typed source-location rollout legs are complete; combined program-wide public no-drift is current."
                 ],
             },
             {
                 "path": "capability_conformance/README.md",
                 "required_markers": [
-                    "Typed transaction composition, progressive span dispatch, and staged-AST dispatch are current; the typed rollout is 13 complete / 1 pending."
+                    "Combined typed authoring-model governance is complete at 14/14 under the composed six-runtime proof."
                 ],
             },
         ],
@@ -686,7 +694,7 @@ TRANSACTION_SAFETY_COMPOSITION = {
         "transaction_safety": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.3"},
         "progressive_span_dispatch": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.6"},
         "staged_span_dispatch": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.7"},
-        "recurring_public_no_drift": {"status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.8"},
+        "recurring_public_no_drift": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.8"},
     },
 }
 
@@ -744,11 +752,141 @@ LOSSLESS_GAP_COMPOSITION = {
             "owner": "FUTURE-PARITY-BACKLOG.14.5",
         },
         "recurring_public_no_drift": {
-            "status": "pending",
+            "status": "complete",
             "owner": "FUTURE-PARITY-BACKLOG.14.8",
         },
     },
 }
+
+PROGRAM_WIDE_PUBLIC_NO_DRIFT = {
+    "owner": "FUTURE-PARITY-BACKLOG.14.8",
+    "status": "complete",
+    "policy": "compose the six existing recurring authorities and lock the complete authoring-model projection without adding a rollout row, behavior oracle, parser/compiler/runtime/value/helper/carrier/outward/capability/CLI/storage change, or public authored Position/Span type",
+    "recurring_composition": {
+        "driver": "tools/check_typed_authoring_model_six_runtime.sh",
+        "ordered_drivers": [
+            "tools/check_typed_source_location_six_runtime.sh",
+            "tools/check_recognition_transaction_six_runtime.sh",
+            "tools/check_recursive_observation_six_runtime.sh",
+            "tools/check_typed_gap_composition_six_runtime.sh",
+            "tools/check_progressive_span_dispatch_six_runtime.sh",
+            "tools/check_staged_ast_enrichment_six_runtime.sh",
+        ],
+        "execution_policy": "run the six existing fail-fast authorities in order; each remains the sole oracle for its owned behavior and runtime topology",
+        "storage": {
+            "initializer": "tools/project_data_env.sh",
+            "managed_entrypoint": "tools/check_typed_authoring_model_six_runtime.sh",
+            "policy": "all temporary, cache, build, native, and test data stays under repository-derived storage",
+        },
+        "local_ci": {
+            "driver": "tools/run_ci_local.sh",
+            "switch": "LINKEDSPEC_RUN_TYPED_AUTHORING_MODEL_MATRIX",
+        },
+    },
+    "rollout_assertions": {
+        "row_count": 14,
+        "complete": 14,
+        "pending": 0,
+        "recurring_public_no_drift": {
+            "status": "complete",
+            "owner": "FUTURE-PARITY-BACKLOG.14.8",
+        },
+    },
+    "documents": [
+        {
+            "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+            "required_markers": [
+                "Combined typed authoring-model public no-drift is current: all 14 rollout legs are complete under the composed six-runtime recurring proof."
+            ],
+        },
+        {
+            "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+            "required_markers": [
+                "Combined typed authoring-model public no-drift is current with 14/14 rollout legs complete and no new runtime or public API."
+            ],
+        },
+        {
+            "path": "docs/linkedspec-book/src/overview/project-status.md",
+            "required_markers": [
+                "All 14 typed source-location rollout legs are complete; combined program-wide public no-drift is current."
+            ],
+        },
+        {
+            "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+            "required_markers": [
+                "`bash tools/check_typed_authoring_model_six_runtime.sh` is the composed authoring-model proof; canonical CI opts into it with `LINKEDSPEC_RUN_TYPED_AUTHORING_MODEL_MATRIX=1`."
+            ],
+        },
+        {
+            "path": "capability_conformance/README.md",
+            "required_markers": [
+                "Combined typed authoring-model governance is complete at 14/14 under the composed six-runtime proof."
+            ],
+        },
+        {
+            "path": "TOOLBOX.md",
+            "required_markers": [
+                "Combined typed authoring-model public no-drift is current at 14 complete / 0 pending."
+            ],
+        },
+        {
+            "path": "docs/knowledge/typed-source-location-runtime-rollout-plan.md",
+            "required_markers": [
+                "Combined program-wide public no-drift is current at 14 complete / 0 pending under `FUTURE-PARITY-BACKLOG.14.8`."
+            ],
+        },
+        {
+            "path": "docs/knowledge/typed-authoring-model-public-no-drift.md",
+            "required_markers": [
+                "The final combined authoring-model row is current: 14 complete / 0 pending under one composed six-runtime proof."
+            ],
+        },
+    ],
+    "forbidden_claims": [
+        {"path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md", "text": "Only combined program-wide no-drift remains pending."},
+        {"path": "docs/linkedspec-book/src/appendix/backend-handoff.md", "text": "recurring/public no-drift row stays pending for final program-wide owner"},
+        {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "combined program-wide no-drift remains pending."},
+        {"path": "docs/linkedspec-book/src/development/local-ci-and-regression.md", "text": "the combined typed row remains pending."},
+        {"path": "capability_conformance/README.md", "text": "The combined `recurring_public_no_drift` row remains pending"},
+        {"path": "TOOLBOX.md", "text": "The combined program-wide `.14.8` row remains pending"},
+        {"path": "docs/knowledge/typed-source-location-runtime-rollout-plan.md", "text": "status: six internal value/projection and recursive-observation runtimes admitted; recurrence and recursive-observation public projection current; combined program-wide closeout pending"},
+        {"path": "docs/knowledge/typed-authoring-model-public-no-drift.md", "text": "combined program-wide public no-drift remains pending"},
+    ],
+    "authoring_safety": {
+        "forbidden_claims": [
+            {"path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md", "text": "capture_take_slice("},
+            {"path": "docs/linkedspec-book/src/dsl/source-boundary-helper-reference.md", "text": "capture_take_slice_len("},
+            {"path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md", "text": "save_cursor() and restore_cursor() provide transactional rollback"},
+            {"path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md", "text": "restore_cursor() can roll back AST, output, diagnostics, or registry effects"},
+            {"path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md", "text": "a parent may reset the cursor before calling a child"},
+            {"path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md", "text": "mark or variable changes satisfy recursive progress without cursor advance"},
+        ],
+    },
+    "surface_guard": {
+        "paths": [
+            "perl/LinkedSpec.pm",
+            "rust/linkedspec-runtime/src/lib.rs",
+            "dart/lib/linkedspec_dart.dart",
+            "julia/src/LinkedSpecJulia.jl",
+            "lua/src/linkedspec/init.lua",
+            "capability_conformance/outward_descriptor_contract.json",
+            "capability_conformance/semantic_introspection_model.json",
+            "capability_conformance/mcp_semantic_transport/schema.json",
+            "cli_conformance/manifest.json",
+            "README.md",
+        ],
+        "forbidden_tokens": [
+            "capture_take_slice",
+            "capture_take_slice_len",
+            "ObserveRecognition",
+            "ActionObserveRecognitionExpr",
+            "PROGRESSIVE_DISPATCH_SPAN",
+            "STAGED_PARSE_JOB",
+        ],
+    },
+}
+
+PROGRAM_WIDE_PUBLIC_MUTATION_COUNT = 26
 
 HELPER_GROUPS = {
     "capture_mark": "CAPTURE_MARK_HELPERS",
@@ -1214,7 +1352,7 @@ ROLLOUT = [
     ),
     (
         "recurring_public_no_drift",
-        "pending",
+        "complete",
         "FUTURE-PARITY-BACKLOG.14.8",
         ["perl", "rust", "dart", "julia", "puc_lua", "luajit"],
     ),
@@ -1423,6 +1561,152 @@ def validate_recursive_observation_public_no_drift(
                     "recursive-observation public surface widened: "
                     f"{path}: {token}"
                 )
+
+
+def program_wide_public_texts(
+    public_contract: dict[str, Any],
+) -> tuple[dict[str, str], dict[str, str], dict[str, str]]:
+    document_texts: dict[str, str] = {}
+    for row in public_contract["documents"]:
+        path = row["path"]
+        source = ROOT / path
+        if not source.is_file():
+            fail(f"program-wide public document is missing: {path}")
+        document_texts[path] = source.read_text(encoding="utf-8")
+
+    safety_texts: dict[str, str] = {}
+    for row in public_contract["authoring_safety"]["forbidden_claims"]:
+        path = row["path"]
+        source = ROOT / path
+        if not source.is_file():
+            fail(f"program-wide authoring-safety document is missing: {path}")
+        safety_texts[path] = source.read_text(encoding="utf-8")
+
+    surface_texts: dict[str, str] = {}
+    for path in public_contract["surface_guard"]["paths"]:
+        source = ROOT / path
+        if not source.is_file():
+            fail(f"program-wide public surface guard is missing: {path}")
+        surface_texts[path] = source.read_text(encoding="utf-8")
+    return document_texts, safety_texts, surface_texts
+
+
+def validate_program_wide_public_no_drift(
+    public_contract: dict[str, Any],
+    rollout: list[dict[str, Any]],
+    document_texts: dict[str, str] | None = None,
+    safety_texts: dict[str, str] | None = None,
+    surface_texts: dict[str, str] | None = None,
+) -> None:
+    if public_contract != PROGRAM_WIDE_PUBLIC_NO_DRIFT:
+        fail("program-wide public no-drift contract drifted")
+
+    composition = public_contract["recurring_composition"]
+    ordered_drivers = composition["ordered_drivers"]
+    if (
+        len(ordered_drivers) != len(set(ordered_drivers))
+        or len(ordered_drivers) != EXPECTED_COUNTS["program_wide_recurring_drivers"]
+    ):
+        fail("program-wide recurring driver inventory drifted")
+
+    documents = public_contract["documents"]
+    document_paths = [row["path"] for row in documents]
+    if (
+        len(document_paths) != len(set(document_paths))
+        or len(document_paths) != EXPECTED_COUNTS["program_wide_public_documents"]
+    ):
+        fail("program-wide public document inventory drifted")
+    forbidden_claims = public_contract["forbidden_claims"]
+    forbidden_pairs = [(row["path"], row["text"]) for row in forbidden_claims]
+    if (
+        len(forbidden_pairs) != len(set(forbidden_pairs))
+        or len(forbidden_pairs)
+        != EXPECTED_COUNTS["program_wide_public_forbidden_claims"]
+    ):
+        fail("program-wide public forbidden-claim inventory drifted")
+    if any(path not in document_paths for path, _text in forbidden_pairs):
+        fail("program-wide forbidden claim has an unmanaged document path")
+
+    safety_claims = public_contract["authoring_safety"]["forbidden_claims"]
+    safety_pairs = [(row["path"], row["text"]) for row in safety_claims]
+    if (
+        len(safety_pairs) != len(set(safety_pairs))
+        or len(safety_pairs)
+        != EXPECTED_COUNTS["program_wide_authoring_safety_claims"]
+    ):
+        fail("program-wide authoring-safety inventory drifted")
+
+    surface_guard = public_contract["surface_guard"]
+    guard_paths = surface_guard["paths"]
+    guard_tokens = surface_guard["forbidden_tokens"]
+    if (
+        len(guard_paths) != len(set(guard_paths))
+        or len(guard_paths)
+        != EXPECTED_COUNTS["program_wide_public_surface_guard_paths"]
+    ):
+        fail("program-wide public surface-guard inventory drifted")
+    if not guard_tokens or len(guard_tokens) != len(set(guard_tokens)):
+        fail("program-wide public surface-guard token inventory drifted")
+
+    assertions = public_contract["rollout_assertions"]
+    complete = sum(row["status"] == "complete" for row in rollout)
+    pending = sum(row["status"] == "pending" for row in rollout)
+    if {
+        "row_count": len(rollout),
+        "complete": complete,
+        "pending": pending,
+    } != {
+        "row_count": assertions["row_count"],
+        "complete": assertions["complete"],
+        "pending": assertions["pending"],
+    }:
+        fail("program-wide public rollout counts drifted")
+    final_row = next(
+        (row for row in rollout if row["leg"] == "recurring_public_no_drift"),
+        None,
+    )
+    if final_row is None or {
+        "status": final_row["status"],
+        "owner": final_row["owner"],
+    } != assertions["recurring_public_no_drift"]:
+        fail("program-wide public final rollout assertion drifted")
+
+    supplied = (document_texts, safety_texts, surface_texts)
+    if all(texts is None for texts in supplied):
+        return
+    if any(texts is None for texts in supplied):
+        fail("program-wide public text inventories must be provided together")
+    assert document_texts is not None
+    assert safety_texts is not None
+    assert surface_texts is not None
+    if set(document_texts) != set(document_paths):
+        fail("program-wide public document text inventory drifted")
+    if set(safety_texts) != {path for path, _text in safety_pairs}:
+        fail("program-wide authoring-safety text inventory drifted")
+    if set(surface_texts) != set(guard_paths):
+        fail("program-wide public surface text inventory drifted")
+
+    for row in documents:
+        path = row["path"]
+        markers = row["required_markers"]
+        if not markers or len(markers) != len(set(markers)):
+            fail(f"program-wide public marker inventory drifted: {path}")
+        for marker in markers:
+            if document_texts[path].count(marker) != 1:
+                fail(
+                    "program-wide public marker missing or duplicated: "
+                    f"{path}: {marker}"
+                )
+    for path, claim in forbidden_pairs:
+        if claim in document_texts[path]:
+            fail(f"stale program-wide public claim remains: {path}: {claim}")
+    for path, claim in safety_pairs:
+        if claim in safety_texts[path]:
+            fail(f"unsafe public authoring claim remains: {path}: {claim}")
+    for path in guard_paths:
+        for token in guard_tokens:
+            if token in surface_texts[path]:
+                fail(f"program-wide public surface widened: {path}: {token}")
 
 
 def position_coordinates(text: str, offset: int) -> tuple[int, int, int]:
@@ -1932,6 +2216,8 @@ def apply_recursive_observation_transition(
 
 
 def validate_contract(contract: dict[str, Any], *, check_registration: bool = True) -> None:
+    if "program_wide_public_no_drift" not in contract:
+        fail("program-wide public no-drift contract is missing")
     if "transaction_safety_composition" not in contract:
         fail("transaction-safety composition contract is missing")
     if "lossless_gap_composition" not in contract:
@@ -1974,6 +2260,7 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         "recursive_observation_public_no_drift",
         "transaction_safety_composition",
         "lossless_gap_composition",
+        "program_wide_public_no_drift",
         "rollout",
     ]
     require_fields(contract, top_fields, "contract")
@@ -1983,7 +2270,7 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         fail("contract id drifted")
     if contract["task_owner"] != "FUTURE-PARITY-BACKLOG.14.1.1":
         fail("task owner drifted")
-    if contract["status"] != "neutral_contract_with_transaction_safety_recursive_observation_public_no_drift_lossless_gap_progressive_and_staged_dispatch_composition":
+    if contract["status"] != "complete_authoring_model_with_combined_recurring_and_public_no_drift":
         fail("typed source-location status drifted")
     if contract["expected_counts"] != EXPECTED_COUNTS:
         fail("expected counts drifted")
@@ -2713,6 +3000,9 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         } != expected:
             fail(f"staged-AST enrichment rollout assertion drifted: {leg}")
 
+    program_wide_public = contract["program_wide_public_no_drift"]
+    validate_program_wide_public_no_drift(program_wide_public, rollout)
+
     actual_counts = {
         "sources": len(sources),
         "position_conversions": len(positions),
@@ -2757,6 +3047,19 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         "recursive_observation_public_surface_guard_paths": len(
             recursive_observation_public["surface_guard"]["paths"]
         ),
+        "program_wide_recurring_drivers": len(
+            program_wide_public["recurring_composition"]["ordered_drivers"]
+        ),
+        "program_wide_public_documents": len(program_wide_public["documents"]),
+        "program_wide_public_forbidden_claims": len(
+            program_wide_public["forbidden_claims"]
+        ),
+        "program_wide_authoring_safety_claims": len(
+            program_wide_public["authoring_safety"]["forbidden_claims"]
+        ),
+        "program_wide_public_surface_guard_paths": len(
+            program_wide_public["surface_guard"]["paths"]
+        ),
         "mutations": EXPECTED_COUNTS["mutations"],
     }
     if actual_counts != EXPECTED_COUNTS:
@@ -2784,6 +3087,7 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             RECURSIVE_OBSERVATION_RECURRING_DRIVER_PATH,
             PROGRESSIVE_SPAN_DISPATCH_RECURRING_DRIVER_PATH,
             STAGED_AST_ENRICHMENT_RECURRING_DRIVER_PATH,
+            TYPED_AUTHORING_MODEL_RECURRING_DRIVER_PATH,
             LOSSLESS_GAP_CONTRACT_PATH,
             LOSSLESS_GAP_CHECKER_PATH,
             LOSSLESS_GAP_DRIVER_PATH,
@@ -2811,6 +3115,18 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             transaction_safety_composition,
             rollout,
             transaction_document_texts,
+        )
+        (
+            program_document_texts,
+            program_safety_texts,
+            program_surface_texts,
+        ) = program_wide_public_texts(program_wide_public)
+        validate_program_wide_public_no_drift(
+            program_wide_public,
+            rollout,
+            program_document_texts,
+            program_safety_texts,
+            program_surface_texts,
         )
         recognition_contract = json.loads(
             RECOGNITION_TRANSACTION_CONTRACT_PATH.read_text(encoding="utf-8")
@@ -3183,6 +3499,51 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             STAGED_AST_ENRICHMENT_RECURRING_GATE["driver"]
         ) != 2:
             fail("staged-AST enrichment recurring project-data routing registration drifted")
+        program_composition = program_wide_public["recurring_composition"]
+        program_driver_text = TYPED_AUTHORING_MODEL_RECURRING_DRIVER_PATH.read_text(
+            encoding="utf-8"
+        )
+        if not TYPED_AUTHORING_MODEL_RECURRING_DRIVER_PATH.stat().st_mode & 0o111:
+            fail("typed authoring-model recurring driver is not executable")
+        program_storage = program_composition["storage"]
+        for marker in (
+            f'source "$REPO_ROOT/{program_storage["initializer"]}"',
+            f'linkedspec_project_data_enter_run "$REPO_ROOT/{program_storage["managed_entrypoint"]}" "$@"',
+        ):
+            if program_driver_text.count(marker) != 1:
+                fail(
+                    "typed authoring-model recurring driver is not repository-routed: "
+                    f"{marker}"
+                )
+        program_positions: list[int] = []
+        for driver in program_composition["ordered_drivers"]:
+            marker = f'bash "$REPO_ROOT/{driver}"'
+            if program_driver_text.count(marker) != 1:
+                fail(
+                    "typed authoring-model recurring driver marker must appear exactly once: "
+                    f"{marker}"
+                )
+            program_positions.append(program_driver_text.index(marker))
+        if program_positions != sorted(program_positions):
+            fail("typed authoring-model recurring driver order drifted")
+        program_ci = program_composition["local_ci"]
+        if program_ci["driver"] != CI_PATH.relative_to(ROOT).as_posix():
+            fail("typed authoring-model canonical driver identity drifted")
+        program_ci_markers = (
+            f"require_tracked_file {program_composition['driver']}",
+            f'if [[ "${{{program_ci["switch"]}:-0}}" == "1" ]]; then',
+            f'bash "$REPO_ROOT/{program_composition["driver"]}"',
+        )
+        for marker, expected_count in zip(
+            program_ci_markers, (2, 1, 1), strict=True
+        ):
+            if ci_text.count(marker) != expected_count:
+                fail(
+                    "typed authoring-model canonical registration marker count drifted: "
+                    f"{marker} expected {expected_count}"
+                )
+        if workflow_routing_text.count(program_composition["driver"]) != 2:
+            fail("typed authoring-model project-data routing registration drifted")
         capability_projection = STAGED_AST_ENRICHMENT_RECURRING_GATE[
             "capability_projection"
         ]
@@ -3563,8 +3924,8 @@ def mutation_checks(contract: dict[str, Any]) -> int:
             ),
         ),
         (
-            "combined public no-drift promoted prematurely",
-            lambda c: c["rollout"][13].__setitem__("status", "complete"),
+            "combined public no-drift regressed to pending",
+            lambda c: c["rollout"][13].__setitem__("status", "pending"),
         ),
         (
             "recursive-observation recurring source group omitted",
@@ -3825,6 +4186,98 @@ def mutation_checks(contract: dict[str, Any]) -> int:
             lambda c: c["rollout"][12].update({"status": "pending", "runtimes": []}),
         ),
         (
+            "program-wide public owner",
+            lambda c: c["program_wide_public_no_drift"].__setitem__(
+                "owner", "FUTURE-PARITY-BACKLOG.14.7"
+            ),
+        ),
+        (
+            "program-wide public status",
+            lambda c: c["program_wide_public_no_drift"].__setitem__(
+                "status", "pending"
+            ),
+        ),
+        (
+            "program-wide public policy",
+            lambda c: c["program_wide_public_no_drift"].__setitem__(
+                "policy", "replacement behavior oracle"
+            ),
+        ),
+        (
+            "program-wide recurring driver",
+            lambda c: c["program_wide_public_no_drift"][
+                "recurring_composition"
+            ].__setitem__("driver", "tools/wrong.sh"),
+        ),
+        (
+            "program-wide recurring driver omitted",
+            lambda c: c["program_wide_public_no_drift"]["recurring_composition"][
+                "ordered_drivers"
+            ].pop(),
+        ),
+        (
+            "program-wide recurring driver order",
+            lambda c: c["program_wide_public_no_drift"]["recurring_composition"][
+                "ordered_drivers"
+            ].reverse(),
+        ),
+        (
+            "program-wide storage initializer",
+            lambda c: c["program_wide_public_no_drift"]["recurring_composition"][
+                "storage"
+            ].__setitem__("initializer", "/tmp/project_data_env.sh"),
+        ),
+        (
+            "program-wide canonical switch",
+            lambda c: c["program_wide_public_no_drift"]["recurring_composition"][
+                "local_ci"
+            ].__setitem__("switch", "LINKEDSPEC_RUN_WRONG_MATRIX"),
+        ),
+        (
+            "program-wide rollout count",
+            lambda c: c["program_wide_public_no_drift"]["rollout_assertions"].__setitem__(
+                "complete", 13
+            ),
+        ),
+        (
+            "program-wide final rollout assertion",
+            lambda c: c["program_wide_public_no_drift"]["rollout_assertions"][
+                "recurring_public_no_drift"
+            ].__setitem__("status", "pending"),
+        ),
+        (
+            "program-wide public document omitted",
+            lambda c: c["program_wide_public_no_drift"]["documents"].pop(),
+        ),
+        (
+            "program-wide public forbidden claim omitted",
+            lambda c: c["program_wide_public_no_drift"]["forbidden_claims"].pop(),
+        ),
+        (
+            "program-wide authoring-safety claim omitted",
+            lambda c: c["program_wide_public_no_drift"]["authoring_safety"][
+                "forbidden_claims"
+            ].pop(),
+        ),
+        (
+            "program-wide public surface path omitted",
+            lambda c: c["program_wide_public_no_drift"]["surface_guard"][
+                "paths"
+            ].pop(),
+        ),
+        (
+            "program-wide public surface token omitted",
+            lambda c: c["program_wide_public_no_drift"]["surface_guard"][
+                "forbidden_tokens"
+            ].pop(),
+        ),
+        (
+            "program-wide recurring execution policy",
+            lambda c: c["program_wide_public_no_drift"]["recurring_composition"].__setitem__(
+                "execution_policy", "replace all six authorities"
+            ),
+        ),
+        (
             "recursive-observation public owner",
             lambda c: c["recursive_observation_public_no_drift"].__setitem__(
                 "owner", "FUTURE-PARITY-BACKLOG.14.8"
@@ -3871,10 +4324,10 @@ def mutation_checks(contract: dict[str, Any]) -> int:
             ].pop(),
         ),
         (
-            "recursive-observation public combined row promoted",
+            "recursive-observation public combined row regressed",
             lambda c: c["recursive_observation_public_no_drift"][
                 "rollout_assertions"
-            ]["recurring_public_no_drift"].__setitem__("status", "complete"),
+            ]["recurring_public_no_drift"].__setitem__("status", "pending"),
         ),
         (
             "transaction-safety composition owner",
@@ -4168,6 +4621,7 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         != EXPECTED_COUNTS["mutations"]
         - RECURSIVE_OBSERVATION_PUBLIC_MUTATION_COUNT
         - TRANSACTION_SAFETY_COMPOSITION_PUBLIC_MUTATION_COUNT
+        - PROGRAM_WIDE_PUBLIC_MUTATION_COUNT
     ):
         fail("checker mutation inventory count drifted")
     for name, mutate in mutations:
@@ -4296,12 +4750,105 @@ def transaction_safety_composition_public_mutation_checks(
     return len(mutations)
 
 
+def program_wide_public_mutation_checks(contract: dict[str, Any]) -> int:
+    public_contract = contract["program_wide_public_no_drift"]
+    document_texts, safety_texts, surface_texts = program_wide_public_texts(
+        public_contract
+    )
+    first_document = public_contract["documents"][0]
+    first_path = first_document["path"]
+    first_marker = first_document["required_markers"][0]
+    mutations: list[tuple[str, str, str, str, str]] = [
+        (
+            "required marker deleted",
+            "replace_document",
+            first_path,
+            first_marker,
+            "program-wide public marker",
+        ),
+        (
+            "required marker duplicated",
+            "append_document",
+            first_path,
+            first_marker,
+            "program-wide public marker",
+        ),
+    ]
+    mutations.extend(
+        (
+            f"stale claim {index}",
+            "append_document",
+            row["path"],
+            row["text"],
+            "stale program-wide public claim",
+        )
+        for index, row in enumerate(public_contract["forbidden_claims"], 1)
+    )
+    mutations.extend(
+        (
+            f"unsafe authoring claim {index}",
+            "append_safety",
+            row["path"],
+            row["text"],
+            "unsafe public authoring claim",
+        )
+        for index, row in enumerate(
+            public_contract["authoring_safety"]["forbidden_claims"], 1
+        )
+    )
+    guard_token = public_contract["surface_guard"]["forbidden_tokens"][0]
+    mutations.extend(
+        (
+            f"surface widening {index}",
+            "append_surface",
+            path,
+            guard_token,
+            "program-wide public surface widened",
+        )
+        for index, path in enumerate(public_contract["surface_guard"]["paths"], 1)
+    )
+    if len(mutations) != PROGRAM_WIDE_PUBLIC_MUTATION_COUNT:
+        fail("program-wide public mutation inventory count drifted")
+
+    for name, operation, path, value, expected_error in mutations:
+        candidate_documents = dict(document_texts)
+        candidate_safety = dict(safety_texts)
+        candidate_surfaces = dict(surface_texts)
+        if operation == "replace_document":
+            candidate_documents[path] = candidate_documents[path].replace(
+                value, "", 1
+            )
+        elif operation == "append_document":
+            candidate_documents[path] += "\n" + value
+        elif operation == "append_safety":
+            candidate_safety[path] += "\n" + value
+        elif operation == "append_surface":
+            candidate_surfaces[path] += "\n" + value
+        else:
+            fail(f"unknown program-wide public mutation operation: {operation}")
+        try:
+            validate_program_wide_public_no_drift(
+                public_contract,
+                contract["rollout"],
+                candidate_documents,
+                candidate_safety,
+                candidate_surfaces,
+            )
+        except ContractError as error:
+            if expected_error not in str(error):
+                fail(f"program-wide public mutation {name!r} failed for the wrong reason: {error}")
+        else:
+            fail(f"program-wide public mutation {name!r} was not rejected")
+    return len(mutations)
+
+
 def main() -> int:
     contract = json.loads(CONTRACT_PATH.read_text(encoding="utf-8"))
     validate_contract(contract)
     mutation_count = mutation_checks(contract)
     mutation_count += recursive_observation_public_mutation_checks(contract)
     mutation_count += transaction_safety_composition_public_mutation_checks(contract)
+    mutation_count += program_wide_public_mutation_checks(contract)
     complete = sum(leg["status"] == "complete" for leg in contract["rollout"])
     pending = len(contract["rollout"]) - complete
     print(
@@ -4321,6 +4868,10 @@ def main() -> int:
         f"{EXPECTED_COUNTS['recursive_observation_public_documents']} documents/"
         f"{EXPECTED_COUNTS['recursive_observation_public_forbidden_claims']} forbidden/"
         f"{EXPECTED_COUNTS['recursive_observation_public_surface_guard_paths']} surface guards; "
+        f"program-wide public {EXPECTED_COUNTS['program_wide_public_documents']} documents/"
+        f"{EXPECTED_COUNTS['program_wide_public_forbidden_claims']} forbidden/"
+        f"{EXPECTED_COUNTS['program_wide_authoring_safety_claims']} safety/"
+        f"{EXPECTED_COUNTS['program_wide_public_surface_guard_paths']} surface guards; "
         f"{complete} complete / {pending} pending rollout; {mutation_count} drift mutations)"
     )
     return 0

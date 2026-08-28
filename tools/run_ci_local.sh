@@ -130,6 +130,12 @@ check_no_untracked_ci_inputs() {
   found=1
  fi
 
+ status_line=$(git status --short --untracked-files=all -- tools/check_typed_authoring_model_six_runtime.sh)
+ if [[ "$status_line" == '?? '* ]]; then
+  printf '[ci] ERROR: untracked CI input: %s\n' "${status_line#?? }" >&2
+  found=1
+ fi
+
  status_line=$(git status --short --untracked-files=all -- tools/check_inter_match_gap_capture_six_runtime.sh)
  if [[ "$status_line" == '?? '* ]]; then
   printf '[ci] ERROR: untracked CI input: %s\n' "${status_line#?? }" >&2
@@ -279,6 +285,7 @@ require_tracked_file tools/check_typed_source_location_six_runtime.sh
 require_tracked_file tools/check_recursive_observation_six_runtime.sh
 require_tracked_file tools/check_progressive_span_dispatch_six_runtime.sh
 require_tracked_file tools/check_staged_ast_enrichment_six_runtime.sh
+require_tracked_file tools/check_typed_authoring_model_six_runtime.sh
 require_tracked_file tools/check_inter_match_gap_capture_contract.py
 require_tracked_file tools/check_inter_match_gap_capture_six_runtime.sh
 require_tracked_file tools/check_typed_gap_composition_six_runtime.sh
@@ -557,6 +564,9 @@ $progressive_span_dispatch_driver_matches"
 staged_ast_enrichment_driver_matches=$(grep -nE '/(Users|home)/[^[:space:]]*|[[:alpha:]]:\\\\' tools/check_staged_ast_enrichment_six_runtime.sh || true)
 [[ -z "$staged_ast_enrichment_driver_matches" ]] || fail "machine-specific absolute path(s) in staged-AST enrichment recurring driver:
 $staged_ast_enrichment_driver_matches"
+typed_authoring_model_driver_matches=$(grep -nE '/(Users|home)/[^[:space:]]*|[[:alpha:]]:\\\\' tools/check_typed_authoring_model_six_runtime.sh || true)
+[[ -z "$typed_authoring_model_driver_matches" ]] || fail "machine-specific absolute path(s) in typed authoring-model recurring driver:
+$typed_authoring_model_driver_matches"
 inter_match_gap_driver_matches=$(grep -nE '/(Users|home)/[^[:space:]]*|[[:alpha:]]:\\\\' tools/check_inter_match_gap_capture_six_runtime.sh || true)
 [[ -z "$inter_match_gap_driver_matches" ]] || fail "machine-specific absolute path(s) in inter-match gap-capture recurring driver:
 $inter_match_gap_driver_matches"
@@ -588,6 +598,7 @@ bash -n tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh \
  tools/check_recursive_observation_six_runtime.sh \
  tools/check_progressive_span_dispatch_six_runtime.sh \
  tools/check_staged_ast_enrichment_six_runtime.sh \
+ tools/check_typed_authoring_model_six_runtime.sh \
  tools/check_inter_match_gap_capture_six_runtime.sh \
  tools/check_typed_gap_composition_six_runtime.sh \
  tools/check_recognition_transaction_six_runtime.sh \
@@ -1112,6 +1123,14 @@ if [[ "${LINKEDSPEC_RUN_STAGED_AST_ENRICHMENT_MATRIX:-0}" == "1" ]]; then
  bash "$REPO_ROOT/tools/check_staged_ast_enrichment_six_runtime.sh"
 else
  log "skipping optional six-runtime staged-AST enrichment matrix (set LINKEDSPEC_RUN_STAGED_AST_ENRICHMENT_MATRIX=1 when all backend toolchains are available)"
+fi
+
+if [[ "${LINKEDSPEC_RUN_TYPED_AUTHORING_MODEL_MATRIX:-0}" == "1" ]]; then
+ log "running optional composed typed authoring-model matrix (LINKEDSPEC_RUN_TYPED_AUTHORING_MODEL_MATRIX=1)"
+ require_tracked_file tools/check_typed_authoring_model_six_runtime.sh
+ bash "$REPO_ROOT/tools/check_typed_authoring_model_six_runtime.sh"
+else
+ log "skipping optional composed typed authoring-model matrix (set LINKEDSPEC_RUN_TYPED_AUTHORING_MODEL_MATRIX=1 to run all six existing recurring authorities)"
 fi
 
 if [[ "${LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX:-0}" == "1" ]]; then

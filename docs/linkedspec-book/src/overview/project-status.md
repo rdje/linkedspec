@@ -82,15 +82,15 @@ general style. This documentation-only slice changes no parser or runtime behavi
 The backend-neutral typed source-location contract is complete under `FUTURE-PARITY-BACKLOG.14.1.1`. Its
 independent checker passes 3 sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation,
 8 transaction, and 33 recursive-observation transitions, 6 detached recursive observations, 4 structural cases,
-92 current helper projections, 33 diagnostics, and 187 rejected mutations.
+92 current helper projections, 33 diagnostics, and 231 rejected mutations.
 
-Thirteen of 14 rollout legs are complete and 1 remains pending. The neutral contract, public linked-rule structure,
+All 14 rollout legs are complete. The neutral contract, public linked-rule structure,
 unchanged neutral/public recomposition, and all six runtime targets are complete. Their internal authorities and
 all 92 helper projections plus 7 aliases are admitted without changing public results or their established scalar,
 byte, or code-unit mark and cursor behavior. Exact transaction safety, recursive observation, lossless-gap
 composition, progressive recurrence, and staged-AST recurrence are complete.
 
-Typed transaction composition, progressive span dispatch, and staged-AST dispatch are now current at 13 complete / 1 pending; combined program-wide no-drift remains pending.
+All 14 typed source-location rollout legs are complete; combined program-wide public no-drift is current.
 
 Staged audit `.14.7.0` is behavior-free and now owns the exact handoff. The current five-backend/six-runtime path
 is one stable function-body queue depth through `actionir-body.spec` / `action_block`; function-specific stitching
@@ -156,9 +156,10 @@ all peer projections, exact topology, and direct dependents without executable m
 Formats and public/outward behavior do not move. Recurrence `.8` now binds those five immutable backend sources
 to six ordered runtime routes, promotes only typed `staged_span_dispatch`, and advances neutral/typed/capability
 truth to 123 mutations, 13/1/187, and 17 capabilities / 85 pass states. Public authoring/no-drift `.9` followed
-and is now current at staged 9/9 plus 129 public mutations and typed 13/1/189. Final `.14.7.10` recomposition
+and is now current at staged 9/9 plus 129 public mutations. Final `.14.7.10` recomposition
 reruns all five backend sources/six runtime routes and support ledgers unchanged, corrects ADR `0088`'s sole stale
-live count from 128 to 129, and closes the staged parent while `.14.8` retains combined typed public no-drift.
+live count from 128 to 129 and closes the staged parent; `.14.8` subsequently completes aggregate typed
+governance at 14/0/231.
 Mandatory engineering-notes segment
 `4989` is finitely authorized at 19 files / 18 manifest lines by ADR `0092`; every byte, aggregate, per-file,
 routing, and storage control remains unchanged. The current mandatory change-history rollover publishes segment
@@ -271,7 +272,7 @@ effects and cursor-progress proof—into `transaction_safety` for 11/3/152 truth
 recurrence `.14.6.7` now binds five sources to six routes plus four support ledgers, promotes only
 `progressive_span_dispatch`, and makes current typed truth 12/2/170 without behavior or public-surface movement.
 Progressive span dispatch is closed at 9/9 as private six-runtime behavior with exact recurring and public no-drift proof; it adds no public facade, schema, semantic/MCP, CLI, or README behavior.
-Recursive-observation public no-drift is current under `.14.4.8`, while the combined program-wide `.14.8` row remains pending.
+Recursive-observation public no-drift remains current under `.14.4.8`; final combined `.14.8` is now complete.
 No public helper, facade, descriptor/generated version, result schema, semantic/MCP field, CLI, or README behavior
 is current. Canonical `.14.5.1` signoff passes nine doctrines, repository containment and relocation, both
 66-case CLI environments, RAM at 51%, Phase 0 at 1,031/1,031 in 729 seconds, and the exact six-runtime opt-in;
@@ -458,7 +459,7 @@ pending `.6`. Completed semantic/MCP, rule-local cursor, and portable parse-job 
 ledger rather than mislabeled as future. The checker derives owner status and locks exact content/order,
 classification, retention, and satisfied-exclusion absence without changing runtime behavior.
 
-Staged `parse_job(...)` authoring and its public no-drift proof are current at 9/9 under `.14.7.9`; the combined typed `.14.8` row remains pending.
+Staged `parse_job(...)` authoring and its public no-drift proof are current at 9/9 under `.14.7.9`; combined typed `.14.8` is complete at aggregate 14/0/231.
 
 Capability exclusion freshness is public-closed under `FUTURE-PARITY-BACKLOG.24`. Twelve governed projections
 and ten path-scoped stale-current denials now reject six public mutations, including a rendered-book schema/record-
@@ -1104,8 +1105,9 @@ Three backbone items tracked major structural modernization — all done:
   LuaJIT and composition-closed under `.14.2`. Behavior-free `.14.3.0` audited the separate transaction baseline:
   cursor save/restore is cursor-only compatibility state, ordinary same-label recursive marks are not invocation-
   local, and ordinary recursion/repetition retain their compatibility termination. `.14.3.1` froze exact syntax,
-  effects, and neutral proof; Perl `.14.3.2.3` now admits that implementation through exact canonical proof. Broader
-  runtime rollout, observation, and dispatch work remains future through `.14.8`. ADR `0045` separately retains
+  effects, and neutral proof; Perl `.14.3.2.3` now admits that implementation through exact canonical proof. The
+  six-runtime authoring model, observation, progressive/staged dispatch, and final combined no-drift are now
+  complete through `.14.8`. ADR `0045` separately retains
   gap syntax and lifecycle ownership. The EBNF recursive-regex and portmap complex-regex walkthroughs preserve
   those shipped facts as compatibility descriptions, not the target general authoring idiom.
 - **Semantic introspection / MCP direction** - ADRs `0049`/`0050` and completed neutral leaf `.10.2` make

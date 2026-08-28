@@ -10,9 +10,10 @@ answers:
   - "does final staged recomposition add an umbrella oracle"
   - "does staged recomposition change runtime behavior"
 date: 2026-08-28
-status: current final staged parent closeout; combined typed public no-drift remains FUTURE-PARITY-BACKLOG.14.8
+status: current final staged parent closeout; combined typed public no-drift subsequently complete
 tags: [staged-parsing, parse-job, recomposition, conformance, knowledge-map, task-tree, verification]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.10 starts from exact clean public-authoring commit 692cd896 and reruns the committed repository-routed authority unchanged: neutral/public governance is 9/9/123 plus 6 documents/17 forbidden claims/10 outward guards/129 mutations; Perl is 143/143; Rust is 1/1 with a freshly compiled emitted carrier in 389.37 seconds; Dart is 19/19; Julia is 491/491; shared Lua is 890/890 independently on PUC Lua and LuaJIT; typed source is 13/1/189; generated and capability truth are 85/0/0 with one legacy exclusion; and language coverage is 250 calls/105 corpus plus one exact fixture/126 public Perl contracts. The driver also proves all 37 diagnostics, exact self-hosted grammar-copy and generic-helper boundaries, and unchanged function-body v1 compatibility. Git changes no production, consumer test, fixture, executable contract/checker, ordinary/canonical topology, generated format, capability manifest, dependency/toolchain, storage/doctrine, public behavior, or unrelated outward owner. The current-projection audit finds one factual drift: ADR 0088's live inventory retained 128 public mutations after .14.7.9 canonical CI added mutation 129 for classified non-generic reverse-scan subtraction; the same ADR's dated closeout note and executable owners already said 129. This leaf corrects the live summary, preserves dated evidence, adds no replacement oracle, closes parent .14.7, and hands off only combined typed recurring_public_no_drift to .14.8."
+evidence_update_2026_08_28_program_wide_closeout: "FUTURE-PARITY-BACKLOG.14.8 composes this unchanged staged driver with five other recurring authorities and completes the final typed row at 14/0/231 without changing staged behavior, governance, or public authoring."
 last_verified: 2026-08-28
 reverify:
   - "bash tools/check_staged_ast_enrichment_six_runtime.sh"
@@ -30,8 +31,8 @@ checker, all five backend sources over six runtime routes, and the typed, genera
 diagnostic, carrier, and function-body-v1 owners through the existing recurring driver.
 
 The executable boundary remains exact: portable scalar-assignment `parse_job(...)` authoring is current at
-9/9/123 plus 129 public mutations; typed governance remains 13/1/189 because `.14.8` still owns the single combined
-program-wide public-no-drift row. All runtime, carrier, format, manifest, topology, and unrelated outward bytes are
+9/9/123 plus 129 public mutations. Final `.14.8` subsequently composes this unchanged driver into aggregate typed
+governance 14/0/231. All runtime, carrier, format, manifest, topology, and unrelated outward behavior stays
 unchanged from the public-admission commit.
 
 The audit also demonstrates why final recomposition must inspect bounded current prose. The executable checker and

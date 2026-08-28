@@ -143,9 +143,9 @@ capability, and language-coverage ledgers. Canonical CI exposes the same route b
 canonical registration, and recurrence-only promotion. Twenty-seven public-contract, document, stale-claim, and
 surface-guard mutations close the observation projection without changing that row. The recursive-observation
 row remains complete; lossless-gap, transaction-safety, progressive recurrence, and staged-AST recurrence now make
-overall typed-source rollout 13 complete / 1 pending with 189 mutations. There is still no public helper, authored
+overall typed-source rollout 14 complete / 0 pending with 231 mutations. There is still no public helper, authored
 `Position`/`Span` value, descriptor/generated version, result-schema field, semantic/MCP projection, CLI option,
-or README behavior; the combined program-wide public-no-drift row remains pending for `.14.8`. Definitive local CI passes containment/relocation, CLI
+or README behavior. Combined typed authoring-model public no-drift is current: all 14 rollout legs are complete under the composed six-runtime recurring proof. Definitive local CI passes containment/relocation, CLI
 66/66 twice, RAM 62%, Phase 0 1,031/1,031 in 723 seconds, and the complete observation matrix.
 
 ### Bounded cursor transactions do not mean general backtracking
@@ -359,13 +359,13 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 
 The checker covers 3 decoded sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation,
 8 transaction, and 33 recursive-observation transitions, 6 detached observations, 4 structural cases,
-33 diagnostics, and 189 mutations.
+33 diagnostics, and 231 mutations.
 It also proves that all 92 current source-boundary helpers project onto the algebra.
 
-This is rollout status, not authored-value status. Thirteen of 14 rollout legs are complete: the neutral contract,
+This is rollout status, not authored-value status. All 14 rollout legs are complete: the neutral contract,
 public linked-rule structure, unchanged neutral/public recomposition, and the Perl, Rust, Dart, Julia, PUC Lua,
 and LuaJIT runtime targets, plus transaction safety, recursive-observation recurrence, and lossless-gap composition.
-Progressive recurrence and staged dispatch are also complete. Only combined program-wide no-drift remains pending.
+Progressive recurrence, staged dispatch, and combined program-wide no-drift are also complete.
 
 Perl now uses an internal decoded-source authority plus immutable position/span values beneath every governed
 helper projection. Exact Unicode execution is admitted on live and independently emitted/loaded generated routes.
@@ -398,6 +398,16 @@ language-coverage ledgers. Canonical CI exposes the same all-toolchain proof beh
 `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1`. Five backend consumer groups become six routes because one shared Lua
 source executes independently on both ABIs. The extra 11 mutations reject topology drift, not authored behavior.
 
+For the final authoring-model proof, run the composed driver:
+
+```bash
+bash tools/check_typed_authoring_model_six_runtime.sh
+```
+
+It calls the existing typed-source, recognition-transaction, recursive-observation, typed-gap, progressive-span,
+and staged-AST recurring drivers in that order. Those six drivers remain the behavior authorities; the composed
+route adds no parser, runtime, helper, carrier, facade, schema, capability, CLI, or storage behavior.
+
 Recursive observation has a narrower recurring gate over its five exact consumer sources and the same six runtime
 routes:
 
@@ -419,9 +429,9 @@ Dart, Julia, PUC Lua, and LuaJIT. Lua's shared
 private authority passes 187 assertions per ABI, and its admitted consumer passes 246 per ABI across four dedicated
 nodes, recursive effect/progress policy, and all four runtime carriers after recurring/public metadata closeout. The modules remain unexported
 while the consumer is ordinarily and canonically discovered once per ABI. Transaction rollout is complete at
-9/9 under `.14.3.8`; the unchanged recurring authority and all six admissions remain exact. The separate typed-source combined
-recurring/public-no-drift row remains pending for final program-wide closeout `FUTURE-PARITY-BACKLOG.14.8`, so
-typed-source composition is 13 complete / 1 pending with 189 mutations. The transaction row is an authority
+9/9 under `.14.3.8`; the unchanged recurring authority and all six admissions remain exact. Final program-wide
+closeout `FUTURE-PARITY-BACKLOG.14.8` now composes every existing recurring authority, so typed-source composition
+is 14 complete / 0 pending with 231 mutations. The transaction row is an authority
 projection of the separately complete 9/9 recognition program: it changes no syntax, runtime, or public API.
 
 Progressive span dispatch is current as one private intrinsic on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; its exact recurring proof and public no-drift contract are complete at 9/9 without exporting a public facade, schema, semantic/MCP, CLI, or README surface.

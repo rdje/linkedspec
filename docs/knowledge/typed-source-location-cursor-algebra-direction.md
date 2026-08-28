@@ -18,7 +18,7 @@ answers:
   - "which diagnostics protect cursor and span safety"
   - "what owns the typed cursor span implementation program"
 date: 2026-08-12
-status: accepted architecture; internal values, transaction composition, recursive observation, lossless-gap composition, and progressive dispatch recurrence complete
+status: accepted architecture; complete six-runtime authoring model and combined public no-drift
 tags: [architecture, cursor, source-location, spans, capture, recursion, parser-composition, diagnostics, portability]
 evidence: "Director approval on 2026-07-29 plus ADR 0056. FUTURE-PARITY-BACKLOG.14.1 completed the executable base model and structural teaching; .14.2 completed the internal immutable value/projection layer on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; .14.3 closed exact six-runtime recognition transactions at rollout 9/9; .14.4 closed recursive-observation recurrence and public projection; .14.5.1 composed the complete separate lossless-gap authority; .14.6.0.1 corrected the typed transaction projection to 11 complete / 3 pending / 152 mutations; and .14.6.7 binds exact progressive recurrence, promoting only progressive_span_dispatch for current 12 / 2 / 170 truth."
 reverify: "rg -n 'source-location algebra|Cursor transactions|Progressive and staged parsing consume spans|Lossless segmentation|FUTURE-PARITY-BACKLOG[.]14[.]0[.]1' docs/decisions/0056-typed-source-location-and-cursor-algebra.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
@@ -57,7 +57,7 @@ gap syntax and runtime admission remain exclusively owned by `INTER-MATCH-GAP-CA
 composition and progressive span-dispatch recurrence are current, while progressive public no-drift, staged
 dispatch, and final typed-source no-drift continue under `FUTURE-PARITY-BACKLOG.14.6.8-.14.8`.
 
-Typed transaction, progressive span-dispatch, and staged-AST composition are current at six runtimes and the typed rollout is 13 complete / 1 pending.
+Typed transaction, progressive span-dispatch, staged-AST composition, and combined public no-drift are current at six runtimes and the typed rollout is 14 complete / 0 pending.
 
 Related records: [[cursor-transaction-safety-audit-plan]], [[recursive-source-observation-audit]],
 [[lossless-gap-cross-tree-handoff]].
