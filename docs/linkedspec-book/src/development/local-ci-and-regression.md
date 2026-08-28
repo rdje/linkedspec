@@ -180,6 +180,8 @@ The final command is the typed recurrence authority: five backend sources form s
 `PROGRESSIVE_DISPATCH_SPAN`, no call row, and ten facade/schema/semantic/MCP/CLI/README exposure denials.
 
 **Staged-AST recurring proof:** `bash tools/check_staged_ast_enrichment_six_runtime.sh` binds five immutable backend sources to six ordered routes (shared Lua runs once per ABI), then typed/generated/capability/language ledgers; neutral locks nine legs, 123 mutations, and function-body v1, while canonical CI always audits/routes it and `LINKEDSPEC_RUN_STAGED_AST_ENRICHMENT_MATRIX=1 bash tools/run_ci_local.sh` opts into the matrix. Current typed truth is 13/1/189 and capability truth is 17/85. Exact-assignment `parse_job(...)` authoring and staged public no-drift are current at 9/9 under 129 reason-checked public mutations; the combined typed row remains pending.
+Final `.14.7.10` recomposition reruns this driver without changing its source, consumers, topology, or support ledgers
+and closes the staged parent; `.14.8` alone owns the remaining combined typed public-no-drift row.
 
 Perl carrier integration and admission prove one exclusive dedicated node, static operands, fresh invocation authority, live/reconstructed/generated-plan/independently loaded emitted execution, logical-only serialization, typed missing-authority failure, and transaction rejection in 129 assertions. `tools/run_ci_local.sh` requires, syntax-checks, and executes that exact consumer once; the neutral checker rejects regression of the Perl row and premature later-backend promotion. Its transaction-state query loads the recognition runtime only when a dispatch executes, preserving the require-only Compiler guarantee that `LinkedRE` stays lazy until the parser pipeline actually needs it.
 

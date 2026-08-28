@@ -367,6 +367,9 @@ per ABI in ordinary/canonical proof. The capability census includes the all-pass
 `language.staged_ast_enrichment` row at 17 capabilities / 85 pass states, and the satisfied general-authoring
 exclusion is absent. The staged-AST contract is 9/9 complete: portable exact-assignment `parse_job(...)` authoring is current while all ten unrelated outward surfaces remain absent.
 Generated format, facade/schema/semantic/MCP/CLI/README, and unrelated outward behavior have not moved.
+Independent closeout `.14.7.10` reruns that exact recurring program and its support ledgers unchanged, corrects
+only bounded current prose, and closes the staged parent. Capability truth remains 17 rows / 85 pass states / one
+legacy exclusion; typed truth remains 13/1/189 because combined public no-drift stays owned by `.14.8`.
 
 `inter_match_gap_capture_contract.json` is the neutral authority for named regex slots and lossless
 prefix/interstitial/tail context. Inter-match gap public admission is current with four shared calls and unchanged outward facade, descriptor, semantic, MCP, CLI, and README surfaces. Julia `.5.1-.5.5` and shared Lua `.6.1-.6.5` implement and admit their exact nine-role paths without widening those guarded surfaces.

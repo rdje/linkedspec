@@ -1,6 +1,6 @@
 # ARCHITECTURE STATE
 
-## General staged-AST enrichment has current portable authoring and exact six-runtime recurrence
+## General staged-AST enrichment is current and independently recomposed across six runtime routes
 
 `FUTURE-PARITY-BACKLOG.14.7.9` makes only exact scalar-assignment
 `target = parse_job(source_bound_text, hash(literal options))` a current portable `.spec` annotation. It remains a
@@ -21,6 +21,12 @@ Staged rollout is 9/9 with 123 neutral and 129 reason-checked public mutations. 
 `language.staged_ast_enrichment` capability keeps the census at 17/85, and the satisfied general-authoring
 exclusion is absent. Function-body v1, generated format v2, runtime/carrier behavior, and every unrelated
 facade/schema/semantic/MCP/CLI/root-README surface remain unchanged.
+
+Final `.14.7.10` recomposition reruns that exact committed program unchanged: neutral/public 9/9/123 plus
+6/17/10/129, Perl 143, Rust 1 with a fresh emitted carrier, Dart 19, Julia 491, shared Lua 890 per ABI, typed
+13/1/189, generated/capability 85/0/0, and language 250/105+1/126. It adds no replacement oracle and changes no
+executable owner; the bounded current-projection audit corrects only ADR `0088`'s stale live count from 128 to 129.
+Parent `.14.7` is closed, and combined typed public no-drift `.14.8` is the next owner.
 
 Behavior-free audit `FUTURE-PARITY-BACKLOG.14.7.0` starts from exact clean progressive-closeout commit
 `fbcdedb6`. Toolbox-first descriptor, runtime, registry, source, and focused-test probes establish one precise

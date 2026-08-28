@@ -2,22 +2,26 @@
 
 ## Current Activity
 
-- Public staged closeout `.14.7.9` is canonical-signoff-complete from exact clean recurrence base `c76c721c`.
-- Exact scalar-assignment `parse_job(...)` authoring is current on all six routes at staged 9/9/123 plus 129
+- Final staged recomposition `.14.7.10` is canonical-signoff-complete from exact clean public-admission base
+  `692cd896`; parent `.14.7` is closed without executable movement.
+- Exact scalar-assignment `parse_job(...)` authoring remains current on all six routes at staged 9/9/123 plus 129
   public mutations, typed 13/1/189, and capability 17 rows / 85 pass states / one legacy exclusion.
 - Runtime behavior, function-body v1, generated format, and unrelated facade/schema/semantic/MCP/CLI/root-README
-  surfaces remain fixed; independent staged recomposition `.14.7.10` is the next task-tree-first owner.
+  surfaces remain fixed; combined typed public no-drift `.14.8` is the next task-tree-first owner.
 
 ## Latest Completed Slice
 
-- `.14.7.9` admits exact scalar-assignment `parse_job(...)` authoring on all six routes, completes staged public
-  no-drift at 129 mutations, and retires the satisfied future exclusion without runtime movement.
+- `.14.7.10` reruns neutral/public governance, all five source groups/six runtime routes, and every support ledger
+  unchanged, corrects ADR `0088`'s stale live count, and closes `.14.7` without executable movement.
 
 ## Next Action
 
-- From the clean `.14.7.9` commit, activate independent staged recomposition `.14.7.10` task-tree-first.
+- From the clean `.14.7.10` commit, activate combined typed public no-drift `.14.8` task-tree-first.
 
 ## Recent Completions
+
+- `2026-08-28` — `.14.7.10` independently recomposes staged 9/9/123 plus public 129, all six runtime routes,
+  typed 13/1/189, generated/capability 85/0/0, and language coverage unchanged, then closes parent `.14.7`.
 
 - `2026-08-28` — `.14.7.9` makes exact assignment-form `parse_job(...)` public at staged 9/9/123 plus 129 public
   mutations, keeps typed at 13/1/189, and removes the satisfied future exclusion without runtime movement.
@@ -72,9 +76,6 @@
 
 - `2026-08-27` — `.14.7.5.3` adds Dart breadth-first recursion, strict lineage, shared resources, expiring safe
   points, typed rebasing, and complete-depth target reservation; only `.4` carrier/admission authority remains RED.
-
-- `2026-08-26` — `.14.7.5.2` adds Dart's caller-frozen pure resolver, selected-top identities, plan-only cache,
-  isolated current-depth execution, detached atomic stitching, and all policies; only `.3` recurrence remains RED.
 
 ## History
 

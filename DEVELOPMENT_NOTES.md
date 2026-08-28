@@ -9,6 +9,19 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-28 (`FUTURE-PARITY-BACKLOG.14.7.10` — final staged recomposition): the closeout adds no umbrella
+  oracle. It reruns the existing repository-routed six-runtime driver and support ledgers, then changes only
+  durable current projections and parent/frontier state.
+- Focused proof remains exact at neutral/public 9/9/123 plus 129, Perl 143, Rust 1 in 389.37 seconds, Dart 19,
+  Julia 491, Lua 890 per ABI, typed 13/1/189, generated/capability 85/0/0, and language 250/105+1/126.
+- The sole factual current-projection drift was ADR `0088`'s live 128 count. Canonical public admission added
+  mutation 129 for classified non-generic reverse-scan subtraction and refreshed the dated closeout note, but
+  not the earlier live inventory. Historical evidence remains untouched.
+- [[general-staged-ast-enrichment-recomposition]] is the retrieval point. Exact base-relative review proves no
+  runtime, consumer, fixture, executable governance, topology, format, manifest, dependency, storage, doctrine,
+  public, or unrelated outward change.
+- Parent `.14.7` closes after receipt-bound canonical proof; `.14.8` remains the only owner of combined typed
+  `recurring_public_no_drift` and full-authoring-model final no-drift.
 - 2026-08-28 (`FUTURE-PARITY-BACKLOG.14.7.9` — portable staged authoring): public admission does not add a new
   runtime path. All six routes already implemented the exact dedicated assignment annotation; the slice makes
   that boundary explicit, executable, documented, and mutation-closed.

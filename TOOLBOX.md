@@ -420,7 +420,9 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   ordinary and canonical discovery, both Lua rollout rows are complete, and `.14.7.7.5` independently recomposes
   those committed owners without behavior change before closing the shared backend parent. Retrieve
   [[lua-staged-ast-enrichment-carriers-admission]] and [[lua-staged-ast-enrichment-recomposition]] before changing
-  this topology; recurring five-source/six-route proof remains `.14.7.8`-owned.
+  this topology. Recurring five-source/six-route proof `.14.7.8`, public authoring `.9`, and final unchanged-owner
+  recomposition `.10` are complete; retrieve [[general-staged-ast-enrichment-recomposition]] before changing the
+  closed parent topology.
 - **Env knobs:** `LINKEDSPEC_TRACE_LEVEL` (level; `LINKEDSPEC_DUMP_VERBOSITY` is the fallback),
   `LINKEDSPEC_TRACE_FILE` (route to a file), `LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_EMOJI`,
   `LINKEDSPEC_TRACE_RESET_FILE`.
@@ -1272,7 +1274,9 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   `language.staged_ast_enrichment` row describes the current dedicated annotation and its internal carriers; the
   satisfied general-authoring exclusion is absent. No consumer/runtime behavior, generated format, facade,
   schema, semantic/MCP, CLI, README, or unrelated outward behavior moves. Retrieve
-  [[staged-ast-enrichment-recurring-gate]] before changing this proof.
+  [[staged-ast-enrichment-recurring-gate]] and [[general-staged-ast-enrichment-recomposition]] before changing this
+  proof. Final `.14.7.10` recomposition reruns the driver unchanged and closes the parent at neutral/public
+  9/9/123 plus 129 mutations while leaving combined typed `.14.8` pending.
 
 Staged rollout is neutral + Perl + Rust + Dart + Julia + PUC Lua + LuaJIT + recurring + public no-drift: 9/9 complete, with `parse_job(...)` still a dedicated annotation rather than a generic helper or outward API.
 

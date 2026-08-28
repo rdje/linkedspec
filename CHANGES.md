@@ -10,6 +10,22 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-28 — FUTURE-PARITY-BACKLOG.14.7.10 — close general staged AST recomposition
+
+- Independently reran the committed staged authority unchanged: neutral/public 9/9/123 plus 6/17/10/129,
+  Perl 143, Rust 1 with a fresh emitted carrier, Dart 19, Julia 491, Lua 890 per ABI, typed 13/1/189,
+  generated/capability 85/0/0, and language 250/105+1/126 all pass.
+- Audited every current ADR/Knowledge/roadmap/architecture/Toolbox/capability/book/live projection. ADR `0088`'s
+  live inventory alone retained 128 public mutations after public-admission canonical CI added mutation 129; its
+  dated closeout evidence and executable checker were already exact. Corrected the live count without rewriting
+  historical evidence.
+- Added [[general-staged-ast-enrichment-recomposition]] and synchronized current projections, parent/frontier,
+  bounded continuity, and the sole-facing mdBook. Parent `.14.7` is closed; `.14.8` retains the single combined
+  typed public-no-drift row.
+- Exact comparison from public-admission commit `692cd896` proves no production, consumer test, fixture,
+  executable governance, CI topology, generated format, capability manifest, dependency/toolchain,
+  storage/doctrine, public behavior, or unrelated outward owner moves.
+
 ## 2026-08-28 — FUTURE-PARITY-BACKLOG.14.7.9 — admit portable parse_job authoring
 
 - Made only exact scalar assignment-form `target = parse_job(source_bound_text, hash(literal options))` public

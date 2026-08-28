@@ -249,9 +249,9 @@ recurrence, and `.4` now carries them through four fresh-authority production ro
 now freeze, implement, and admit the exact shared boundary with marker/provenance, current-depth authority, bounded
 recurrence, source rebasing, and four fresh host-only production carriers at 888/888 per ABI. Ordinary and
 canonical proof execute that stable path once per ABI, and both Lua rollout rows are complete. Independent Lua
-recomposition `.5`, exact five-source/six-runtime recurrence `.14.7.8`, and portable authoring/public no-drift
-`.14.7.9` are complete. Final independent recomposition remains owned by `.14.7.10`; combined typed public
-no-drift remains owned by `.14.8`.
+recomposition `.5`, exact five-source/six-runtime recurrence `.14.7.8`, portable authoring/public no-drift
+`.14.7.9`, and final unchanged-owner recomposition `.14.7.10` are complete. The staged parent is closed; combined
+typed public no-drift remains owned by `.14.8`.
 
 ## Current shared Lua admitted recursive-carrier boundary
 

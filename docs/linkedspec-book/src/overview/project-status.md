@@ -156,7 +156,10 @@ all peer projections, exact topology, and direct dependents without executable m
 Formats and public/outward behavior do not move. Recurrence `.8` now binds those five immutable backend sources
 to six ordered runtime routes, promotes only typed `staged_span_dispatch`, and advances neutral/typed/capability
 truth to 123 mutations, 13/1/187, and 17 capabilities / 85 pass states. Public authoring/no-drift `.9` followed
-and is now current at staged 9/9 plus 129 public mutations and typed 13/1/189. Mandatory engineering-notes segment
+and is now current at staged 9/9 plus 129 public mutations and typed 13/1/189. Final `.14.7.10` recomposition
+reruns all five backend sources/six runtime routes and support ledgers unchanged, corrects ADR `0088`'s sole stale
+live count from 128 to 129, and closes the staged parent while `.14.8` retains combined typed public no-drift.
+Mandatory engineering-notes segment
 `4989` is finitely authorized at 19 files / 18 manifest lines by ADR `0092`; every byte, aggregate, per-file,
 routing, and storage control remains unchanged. The current mandatory change-history rollover publishes segment
 `4989`; ADR `0093` advances only that separate store's finite controls to 24 files / 23 manifest lines.

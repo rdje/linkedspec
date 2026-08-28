@@ -18,6 +18,7 @@ date: 2026-08-28
 status: current portable authored surface on five backend sources and six runtime routes
 tags: [staged-parsing, parse-job, public-authoring, grammar, capability, diagnostics, no-drift]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.9 promotes only the already-implemented exact scalar assignment target = parse_job(source_bound_text, hash(literal options)). specs/spec.spec declares the dedicated extension; the four exact canonical spec_spec_* corpus copies mirror that comment-only declaration under the existing Unicode rule-label contract. tools/check_language_capability_coverage.pl keeps parse_job outside the 250-name generic helper inventory and subtracts every explicitly classified non-generic form from its raw-corpus reverse scan, so the canonical comments cannot masquerade as ordinary calls. capability_conformance/staged_ast_enrichment_contract.json is 9/9 at 123 neutral mutations; its checker binds six documents, 17 stale-claim denials, ten outward paths, the complete 37-code diagnostic guide, and 129 reason-checked public mutations. The manifest row is language.staged_ast_enrichment at 85/0/0 and the satisfied future.general_parse_job_authoring exclusion is absent. Typed projection governance is 13/1/189 while combined public no-drift remains owned by .14.8. No parser/compiler/runtime/carrier behavior or unrelated facade/schema/semantic/MCP/CLI/root-README surface changes."
+evidence_update_2026_08_28_final_recomposition: "FUTURE-PARITY-BACKLOG.14.7.10 independently reruns all six committed runtime routes and support ledgers, preserving this exact public surface, 129 public mutations, one legacy exclusion, and typed 13/1/189. Parent .14.7 closes without public or executable movement."
 last_verified: 2026-08-28
 reverify:
   - "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py"
@@ -64,4 +65,5 @@ set after finding identifier-shaped tokens: comments that document `parse_job(` 
 annotation look like a shared generic helper. A separate staged mutation removes that subtraction and must fail.
 
 Related: [[staged-parse-job-annotation-contract]], [[general-staged-ast-enrichment-neutral-contract]],
+[[general-staged-ast-enrichment-recomposition]],
 [[staged-ast-enrichment-recurring-gate]], [[capability-exclusion-freshness-model]], and ADR `0088`.

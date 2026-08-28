@@ -11,10 +11,11 @@ answers:
   - "what capability row represents private staged AST enrichment"
   - "does staged recurrence make parse_job public"
 date: 2026-08-28
-status: current six-runtime recurrence with exact public assignment authoring
+status: current six-runtime recurrence with exact public assignment authoring and final recomposition
 tags: [staged-parsing, recurring-gate, source-location, perl, rust, dart, julia, lua, luajit, conformance, local-ci]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.8 adds tools/check_staged_ast_enrichment_six_runtime.sh and its one explicit canonical opt-in. The composed driver passes neutral 123, Perl 143, Rust 1 with a fresh emitted carrier, Dart 19, Julia 491, PUC Lua 890, LuaJIT 890, typed 13/1/187, generated/capability 85/0/0, and language coverage. Outside-CWD routing, README pressure, Knowledge, rendered mdBook, and all nine doctrines also pass. Public parse_job authoring remains excluded."
 evidence_update_2026_08_28_public_authoring: "FUTURE-PARITY-BACKLOG.14.7.9 preserves the recurring topology and every behavioral assertion while completing staged rollout row nine. Exact assignment-form parse_job authoring is current through six governed documents and 129 public mutations; neutral remains 9/9/123, typed becomes 13/1/189, capability remains 17 rows/85 pass, and only the legacy plugin exclusion remains."
+evidence_update_2026_08_28_final_recomposition: "FUTURE-PARITY-BACKLOG.14.7.10 reruns this exact driver unchanged: Perl 143, Rust 1 with a fresh emitted carrier, Dart 19, Julia 491, and shared Lua 890 on each ABI pass before typed 13/1/189, generated/capability 85/0/0, and language 250/105+1/126. Parent .14.7 closes without changing executable topology."
 root_cause: "The concise committed leaf requires immutable source groups, which preserves their behavior while governance snapshots advance. During activation the agent incorrectly expanded that into byte-identical consumers, contradicting the retrieved progressive recurring precedent. The first driver run exposed the mistake at three aggregate Perl assertions shared by all source groups. The corrected scope changes only lifecycle status, two recurrence counts, mutation total, rollout row eight, and applicable availability text; behavioral assertions and runtime code remain immutable."
 last_verified: 2026-08-28
 reverify:
@@ -34,8 +35,10 @@ scratch, cache, build, and test data remains under repository-derived storage.
 
 The recurrence leaf moved only typed `staged_span_dispatch` and its all-pass capability row. Public closeout
 `.14.7.9` subsequently makes only exact scalar assignment-form `parse_job(...)` current and completes staged
-public no-drift. Generated format, outward schemas, semantic/MCP, CLI, and root-README behavior remain unchanged;
-`.14.7.10` owns independent staged recomposition and `.14.8` owns combined typed public no-drift.
+public no-drift. Generated format, outward schemas, semantic/MCP, CLI, and root-README behavior remain unchanged.
+Independent recomposition `.14.7.10` reruns this complete composition and closes `.14.7` without executable
+movement; `.14.8` retains combined typed public no-drift.
 
-Related: [[general-staged-ast-enrichment-neutral-contract]], [[staged-consumer-current-projection-lockstep]],
+Related: [[general-staged-ast-enrichment-neutral-contract]], [[general-staged-ast-enrichment-recomposition]],
+[[staged-consumer-current-projection-lockstep]],
 [[typed-source-location-recurring-gate]], and ADR `0088`.

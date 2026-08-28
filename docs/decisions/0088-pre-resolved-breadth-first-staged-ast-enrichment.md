@@ -2,7 +2,7 @@
 
 - Date: 2026-08-25
 - Status: accepted and current; executable neutral authority, five backend sources/six runtime routes, recurrence,
-  and exact public assignment authoring complete; final independent recomposition pending `.14.7.10`
+  exact public assignment authoring, and final independent recomposition complete under `.14.7.10`
 - Tags: architecture, staged-parsing, parse-job, source-location, registry, queue, policies, diagnostics, portability
 
 ## Context
@@ -128,10 +128,10 @@ cancellation/deadline/budget state, mutable queues, or host handles.
 4 registry entries; 2 sources; 8 provenance, 3 deterministic-id, 8 resolution, 6 authority, 10 cache, 4 queue,
 3 isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases; 37 diagnostics; 5 backend
 consumers over 6 runtime routes; 4 carrier requirements; 10 outward guards; 9 rollout legs; 35 exact owners; and
-123 reason-checked neutral mutations after six-runtime recurrence, plus 128 reason-checked public mutations.
+123 reason-checked neutral mutations after six-runtime recurrence, plus 129 reason-checked public mutations.
 
 Neutral, Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurrence, and staged public no-drift rollout are complete.
-Exact assignment-form public authoring is current; `.14.7.10` owns final independent recomposition. The checker
+Exact assignment-form public authoring and final independent recomposition are current. The checker
 is an always-on canonical-CI input. It guards ten facades/schema/semantic/MCP/CLI/README paths against unrelated
 exposure, requires the Perl, Rust, Dart, and Julia consumers exactly once in ordinary and canonical
 discovery, rejects the former Dart dormant path, and requires the one stable Lua consumer exactly once per ABI in
@@ -572,6 +572,20 @@ and 129 public mutations lock that boundary. The satisfied `future.general_parse
 removed, leaving 17 capability rows at 85/0/0 and one legacy exclusion. Typed projection governance is 13/1/189;
 the sole combined typed public-no-drift row remains owned by `.14.8`. Function-body v1, generated formats, and
 unrelated facade/descriptor/schema/semantic/MCP/CLI/root-README surfaces do not move.
+
+## Final independent recomposition (2026-08-28)
+
+`FUTURE-PARITY-BACKLOG.14.7.10` reruns the committed neutral/public checker, all five backend sources over six
+runtime routes, typed/generated/capability/language ledgers, all 37 diagnostics, self-hosted grammar-copy and
+generic-helper boundaries, carrier invariants, and function-body-v1 compatibility through the existing recurring
+driver. Exact truth remains 9/9/123 plus 129 public mutations, Perl 143, Rust 1, Dart 19, Julia 491, Lua 890 per ABI,
+typed 13/1/189, generated/capability 85/0/0 with one legacy exclusion, and language 250/105+1/126.
+
+No umbrella oracle or replacement implementation is added, and no production, consumer, fixture, executable
+governance, discovery topology, generated format, manifest, public behavior, or unrelated outward owner moves.
+The current-inventory count above is corrected from 128 to 129 because public-admission canonical CI added the
+classified non-generic reverse-scan mutation; the dated public-closeout evidence already carried the executable
+129 truth. Parent `.14.7` closes, while `.14.8` retains combined typed public no-drift.
 
 ## Links
 

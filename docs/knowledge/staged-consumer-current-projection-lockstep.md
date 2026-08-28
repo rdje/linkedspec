@@ -15,6 +15,7 @@ evidence_update_2026_08_27_lua_current_depth: "Lua .14.7.7.2 does not move lifec
 evidence_update_2026_08_27_lua_recursive_carriers: "Lua .14.7.7.3 does not move lifecycle, rollout, or the 98-mutation snapshot. The stable dormant consumer reaches 888/888 on both ABIs; admitted Perl/Rust/Dart/Julia projections must still pass unchanged before landing."
 evidence_update_2026_08_27_lua_admission: "Lua .14.7.7.4 exercises the lockstep rule directly: aggregate status, mutation count 98→106, Lua lifecycle, and rollout rows 6/7 move in the neutral contract and in all five admitted consumers. Perl 143/143, Rust 1/1, Dart 19/19, Julia 491/491, and Lua 888/888 per ABI pass without production behavior changes."
 evidence_update_2026_08_28_lua_recomposition: "Lua .14.7.7.5 changes no lifecycle or projection literal, then independently reruns neutral 106-mutation governance, Perl 143/143, Rust 1/1, Dart 19/19, Julia 491/491, and Lua 888/888 per ABI. That unchanged recomposition closes the shared Lua parent and proves the current snapshots remain in lockstep."
+evidence_update_2026_08_28_final_recomposition: "FUTURE-PARITY-BACKLOG.14.7.10 independently reruns the final snapshots unchanged at neutral 9/9/123 plus 129 public mutations, Perl 143, Rust 1, Dart 19, Julia 491, and Lua 890 per ABI. No consumer or executable-governance file moves; parent .14.7 closes from the proved current projection."
 reverify:
   - "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py"
   - "prove -Iperl -It/lib t/staged_ast_enrichment_perl_contract.t"
@@ -35,8 +36,10 @@ when another backend lifecycle moves; only their current neutral snapshot change
 same cross-check over Perl, Rust, and Dart. Any future backend lifecycle transition must run every already-admitted
 staged consumer, not only the independent checker and the backend currently moving. Lua admission applies that
 rule to all five sources/six routes and leaves a 106-mutation all-private-complete projection. Independent Lua
-recomposition reruns that complete projection unchanged before parent closure.
+recomposition reruns that complete projection unchanged before its backend-parent closure. Final general
+recomposition then reruns the public 9/9/123 plus 129 projection unchanged before closing `.14.7`.
 
-Related: [[general-staged-ast-enrichment-neutral-contract]], [[dart-staged-ast-enrichment-dormant-red]],
+Related: [[general-staged-ast-enrichment-neutral-contract]], [[general-staged-ast-enrichment-recomposition]],
+[[dart-staged-ast-enrichment-dormant-red]],
 [[lua-staged-ast-enrichment-carriers-admission]], [[lua-staged-ast-enrichment-recomposition]], and ADR
 `0088`. Owner: [[FUTURE-PARITY-BACKLOG]] `.14.7.5.0`.
