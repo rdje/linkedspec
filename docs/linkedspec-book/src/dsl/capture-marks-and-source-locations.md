@@ -143,7 +143,7 @@ capability, and language-coverage ledgers. Canonical CI exposes the same route b
 canonical registration, and recurrence-only promotion. Twenty-seven public-contract, document, stale-claim, and
 surface-guard mutations close the observation projection without changing that row. The recursive-observation
 row remains complete; lossless-gap, transaction-safety, progressive recurrence, and staged-AST recurrence now make
-overall typed-source rollout 13 complete / 1 pending with 187 mutations. There is still no public helper, authored
+overall typed-source rollout 13 complete / 1 pending with 189 mutations. There is still no public helper, authored
 `Position`/`Span` value, descriptor/generated version, result-schema field, semantic/MCP projection, CLI option,
 or README behavior; the combined program-wide public-no-drift row remains pending for `.14.8`. Definitive local CI passes containment/relocation, CLI
 66/66 twice, RAM 62%, Phase 0 1,031/1,031 in 723 seconds, and the complete observation matrix.
@@ -359,13 +359,13 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 
 The checker covers 3 decoded sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation,
 8 transaction, and 33 recursive-observation transitions, 6 detached observations, 4 structural cases,
-33 diagnostics, and 187 mutations.
+33 diagnostics, and 189 mutations.
 It also proves that all 92 current source-boundary helpers project onto the algebra.
 
-This is rollout status, not authored-value status. Twelve of 14 rollout legs are complete: the neutral contract,
+This is rollout status, not authored-value status. Thirteen of 14 rollout legs are complete: the neutral contract,
 public linked-rule structure, unchanged neutral/public recomposition, and the Perl, Rust, Dart, Julia, PUC Lua,
 and LuaJIT runtime targets, plus transaction safety, recursive-observation recurrence, and lossless-gap composition.
-Progressive recurrence is also complete. Staged dispatch and combined program-wide no-drift remain pending.
+Progressive recurrence and staged dispatch are also complete. Only combined program-wide no-drift remains pending.
 
 Perl now uses an internal decoded-source authority plus immutable position/span values beneath every governed
 helper projection. Exact Unicode execution is admitted on live and independently emitted/loaded generated routes.
@@ -421,7 +421,7 @@ nodes, recursive effect/progress policy, and all four runtime carriers after rec
 while the consumer is ordinarily and canonically discovered once per ABI. Transaction rollout is complete at
 9/9 under `.14.3.8`; the unchanged recurring authority and all six admissions remain exact. The separate typed-source combined
 recurring/public-no-drift row remains pending for final program-wide closeout `FUTURE-PARITY-BACKLOG.14.8`, so
-typed-source composition is 13 complete / 1 pending with 187 mutations. The transaction row is an authority
+typed-source composition is 13 complete / 1 pending with 189 mutations. The transaction row is an authority
 projection of the separately complete 9/9 recognition program: it changes no syntax, runtime, or public API.
 
 Progressive span dispatch is current as one private intrinsic on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; its exact recurring proof and public no-drift contract are complete at 9/9 without exporting a public facade, schema, semantic/MCP, CLI, or README surface.
@@ -1252,7 +1252,8 @@ count, projection, ordering, storage route, canonical switch, or completion regr
 truth after this gap slice was 10 complete / 4 pending / 126 mutations; only `lossless_gap_composition` moved.
 Corrective `.14.6.0.1` subsequently projects the complete recognition authority into `transaction_safety`, making
 typed truth 11/3/152 at that boundary. Progressive recurrence `.14.6.7` then produced 12/2/170; staged-AST
-recurrence `.14.7.8` now makes current typed truth 13 complete / 1 pending / 187 mutations. Final combined public
+recurrence `.14.7.8` makes typed truth 13 complete / 1 pending / 187 mutations; public authoring `.14.7.9`
+mechanically advances projection governance to 189 without promoting a row. Final combined public
 no-drift remains owned by `.14.8`.
 
 This composition creates no new grammar, lifecycle, runtime state, compatibility rule, migration, facade,

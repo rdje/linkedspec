@@ -1,21 +1,21 @@
 # MEMORY
 
-- activation_commit: `84396911c36e0f476b372d455c1fa92f49f3a455` — exact clean Lua-recomposition base for task-tree-first canonical recurrence `FUTURE-PARITY-BACKLOG.14.7.8`; brief cleared; no push.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.7.8 - bind staged enrichment recurring proof` is canonical-signoff-complete on activation base `84396911c36e0f476b372d455c1fa92f49f3a455`; atomic commit remains.
-- active_work_unit: none after the intended `.14.7.8` commit; public staged authoring/no-drift `.14.7.9` is pending.
-- next_action: from the clean `.14.7.8` commit, retrieve and activate `FUTURE-PARITY-BACKLOG.14.7.9` task-tree-first; admit only the governed portable `parse_job(...)` authored surface and its public no-drift truth.
-- in_flight_uncommitted: none after the intended `.14.7.8` commit; no background job remains.
+- activation_commit: `c76c721c678639d72135a642c7bcd329e55a77de` — exact clean staged-recurrence base for task-tree-first public authoring/no-drift `FUTURE-PARITY-BACKLOG.14.7.9`; brief cleared; no push.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.7.9 - admit portable parse_job authoring` is canonical-signoff-complete on activation base `c76c721c678639d72135a642c7bcd329e55a77de`; atomic commit remains.
+- active_work_unit: none after the intended `.14.7.9` commit; independent staged recomposition `.14.7.10` is pending.
+- next_action: from the clean `.14.7.9` commit, retrieve and activate `FUTURE-PARITY-BACKLOG.14.7.10` task-tree-first; recompose the admitted staged owners without replacement behavior and close `.14.7`.
+- in_flight_uncommitted: none after the intended `.14.7.9` commit; no background job remains.
 - blockers: none.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
   `FUTURE-PARITY-BACKLOG.22` moves that immutable closeout fact out of bounded current memory.
 - current_typed_source: neutral/public structure, all six internal runtimes, transaction safety, recursive
-  observation, lossless-gap composition, progressive recurrence, and staged dispatch are admitted at 13/1/187;
+  observation, lossless-gap composition, progressive recurrence, and staged dispatch are admitted at 13/1/189;
   no public typed value is admitted and combined program-wide public no-drift remains future. Recognition is current
   on all six runtimes at 138/250/58; recurrence and public no-drift are current at 9/9.
 - recurring_rollout_fact: the original roadmap combines final program-wide recurrence/public no-drift in `.14.8`.
-  Progressive completes `recurring` plus `public_no_drift` at 9/9/116; staged enrichment completes only recurring
-  at 8/9/123, leaving its public row to `.14.7.9` and combined `.14.8` ownership unchanged.
+  Progressive completes `recurring` plus `public_no_drift` at 9/9/116; staged enrichment now completes both at
+  9/9/123 plus public 6/17/10/129, while combined `.14.8` ownership remains unchanged.
 - backend_audit_fact: Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT typed-source authorities and private transactions are
   admitted without facade exports; exact carriers/registers/ABIs live in their Knowledge cards.
 - current_storage_contract: ADR `0053` keeps all project data on the repository filesystem; use routed wrappers,
@@ -33,7 +33,7 @@
 - current_verification_contract: ADR `0073` makes focused proof the ordinary per-leaf default and canonical proof
   mandatory at admission/milestone/public/infrastructure/final-push boundaries; Perl `.14.7.3.4`, Rust `.14.7.4.4`,
   Dart `.14.7.5.4`, Julia `.14.7.6.4`, capacity-triggered Lua `.14.7.7.2`, private-carrier Lua `.14.7.7.3`, and dual-ABI admission Lua `.14.7.7.4` require exact staged receipt-bound proof.
-  Designated recomposition `.14.7.7.5` and staged recurrence/capability milestone `.14.7.8` also require exact proof.
+  Designated recomposition `.14.7.7.5`, staged recurrence `.14.7.8`, and public admission `.14.7.9` also require exact proof.
 - documentation_debt_owner: ADR `0066` composition-closes all stores; bounded live/history/task/Knowledge owners
   and their rollover/index gates remain current.
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
@@ -42,7 +42,7 @@
 - current_future_direction: progressive neutral `.14.6.1`, Perl `.2`, Rust `.3`, Dart `.4`, Julia `.5.0-.4`,
   shared Lua `.6.0-.4`, typed recurrence `.7`, and public closeout `.8` are complete. Behavioral governance is
   9/9/116 and public is 6/12/10/60 without outward admission. Staged `.14.7.0-.8` is complete through recurrence
-  at typed 13/1/187; public `.9`, recomposition `.10`, and combined `.14.8` remain later. Staged audit `.14.7.0` is complete: diagnostic `.1`, neutral `.2`, backend
+  at typed 13/1/189; public `.9` is canonical-signoff-complete, while recomposition `.10` and combined `.14.8` remain later. Staged audit `.14.7.0` is complete: diagnostic `.1`, neutral `.2`, backend
   parents `.3-.7`, recurrence `.8`, public authored closeout `.9`, and recomposition `.10` are frozen in order.
   Diagnostic `.14.7.1` is complete; neutral `.14.7.2` freezes 4 registry entries, 8 provenance, 8 resolution/6
   authority, 10 cache, 4 queue/3 isolation, 4 result/3 failure policies, 10 chain, 5 detachment, 37 diagnostics,
@@ -56,5 +56,5 @@
   Dart `.14.7.5.0-.4` add the historical dormant boundary, exclusive live-proven marker, pure caller-frozen resolution/cache,
   isolated atomic policies, breadth-first recurrence, strict lineage/shared resources, expiring safe points, typed
   rebasing, complete-depth target reservation, and a fresh host-only post-parent seed across four production routes.
-  Dart is 19/19 and rollout-complete. Julia `.14.7.6.0-.4` provide its exclusive marker, native-capture-proven typed provenance, caller-frozen resolution/cache, isolated policies, breadth-first recurrence, strict lineage/shared resources, typed rebasing, and four fresh-authority production routes. Its admitted consumer is 491/491. Shared Lua `.14.7.7.0-.4` freeze, implement, and admit the same complete private architecture at 888/888 per ABI. Ordinary/canonical topology runs the one stable source exactly once per ABI. Independent `.5` closes `.14.7.7`; recurring `.8` then binds all five sources/six routes, completes neutral row eight at 123 mutations, promotes typed staged dispatch to 13/1/187, and advances capability truth to 85/0/0. Formats, function-body v1, public authoring, and outward behavior remain unchanged for `.9`.
-- latest_bootstrap_read: 2026-08-28 — roadmap, codebase, mdBook, continuity, active task tree, Knowledge, ADR `0088`, Toolbox, staged neutral/current-boundary/lockstep facts, typed recurrence authority, and the committed progressive recurring precedent are reviewed; `.14.7.8` activated from exact clean `84396911`.
+  Dart is 19/19 and rollout-complete. Julia `.14.7.6.0-.4` provide its exclusive marker, native-capture-proven typed provenance, caller-frozen resolution/cache, isolated policies, breadth-first recurrence, strict lineage/shared resources, typed rebasing, and four fresh-authority production routes. Its admitted consumer is 491/491. Shared Lua `.14.7.7.0-.4` freeze, implement, and admit the same complete private architecture at 888/888 per ABI. Ordinary/canonical topology runs the one stable source exactly once per ABI. Independent `.5` closes `.14.7.7`; recurring `.8` binds all five sources/six routes at 123 neutral mutations. Public `.9` makes only exact assignment-form authoring current at 129 public mutations, typed 13/1/189, capability 85/0/0, and one exclusion; formats, v1, and unrelated outward behavior remain unchanged.
+- latest_bootstrap_read: 2026-08-28 — roadmap, codebase, mdBook, continuity, `.14.7.9` task tree, Knowledge, ADRs `0014`/`0088`, Toolbox, staged neutral/recurrence/lockstep facts, capability exclusion freshness, self-hosted grammar/current-call inventories, and progressive public-closeout precedent are reviewed; `.14.7.9` activated from exact clean `c76c721c`.

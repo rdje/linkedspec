@@ -386,7 +386,9 @@ function name, params, arity, and `payload_kind = function_body`. The `body_pars
 sidecar for the same text island: it records the deterministic job id, parent AST path, parser spec identity,
 top rule, result/failure policies, exact text, and source span. Current shipped parsers dispatch this one job
 through the minimal staged registry provider for `actionir-body.spec` / `action_block` and stitch the result into
-`body_ast`; general public `parse_job(...)` authoring and provider search remain future work. The definition
+`body_ast`. The separate exact-assignment v2 `parse_job(...)` annotation is current, but it still grants no
+provider search or path-loading authority: callers freeze already-compiled logical entries before authored
+execution. The definition
 parser uses linked body-island rules for nested braces, strings, comments, and regex literals, so normal
 nested function-body constructs do not depend on a host-language scanner.
 

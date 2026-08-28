@@ -14,11 +14,12 @@ date: 2026-08-01
 status: public-closed under FUTURE-PARITY-BACKLOG.24
 tags: [capability, exclusions, governance, status-freshness, supersession, task-tree, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.24.0 audits all four manifest excluded_or_future records against task status, ADRs, recurring gates, public no-drift cards, Git history, and the sole-facing mdBook. FUTURE-PARITY-BACKLOG.24.1 implements schema v2 with exactly two ordered records: legacy.perl_plugin_registry remains under pending .6 with legacy disposition/null retention; future.general_parse_job_authoring moves from superseded .2 to active .14 with future disposition/null retention. Satisfied semantic/MCP and rule-local cursor records are absent. The checker derives unique task ids/leading statuses, preserves 16 capabilities at 80/0/0, and rejects 24 in-memory manifest mutations. FUTURE-PARITY-BACKLOG.24.2 adds 12 governed projections, ten stale-current denials, and six public mutations after reproducing an accepted rendered-book contradiction, then closes parent .24 without manifest or runtime movement. Final canonical proof passes CLI 66x2, RAM 52%, and Phase 0 1,031/1,031 in 651 seconds."
-reverify: "perl tools/check_capability_conformance.pl && rg -n 'legacy.perl_plugin_registry|future.general_parse_job_authoring|disposition|retention_authority' capability_conformance/manifest.json && ! rg -n 'future.semantic_introspection_mcp|future.rule_local_cursor_and_bare_edges' capability_conformance/manifest.json && rg -n -A4 'FUTURE-PARITY-BACKLOG\\.(2|6|9|10|14)`' docs/tasks/FUTURE-PARITY-BACKLOG.md"
+evidence_update_2026_08_28_parse_job_admission: "FUTURE-PARITY-BACKLOG.14.7.9 satisfies and removes future.general_parse_job_authoring in the same public-admission slice. The manifest is now 17 capability rows at 85/0/0 with exactly one exclusion, legacy.perl_plugin_registry. Capability governance rejects 19 current mutations across 12 projections plus six public mutations; staged public authoring has its own 129-mutation authority."
+reverify: "perl tools/check_capability_conformance.pl && rg -n 'legacy.perl_plugin_registry|disposition|retention_authority' capability_conformance/manifest.json && ! rg -n 'future.general_parse_job_authoring|future.semantic_introspection_mcp|future.rule_local_cursor_and_bare_edges' capability_conformance/manifest.json"
 ---
 
-The capability-row census and the exclusion narrative are different ledgers. The 16 rows remain exactly
-80 pass / 0 partial / 0 gap while the exclusion list is corrected.
+The capability-row census and the exclusion narrative are different ledgers. The current 17 rows are exactly
+85 pass / 0 partial / 0 gap while the exclusion list contains one retained legacy record.
 
 Capability exclusion freshness is public-closed under `FUTURE-PARITY-BACKLOG.24`. Twelve governed projections
 now carry the same current truth, and six public mutations protect their inventory, markers, denials, and rendered-
@@ -27,7 +28,7 @@ book status independently of the 24 manifest-semantic mutations.
 | Audited record | Classification | Current authority | Implemented state |
 | --- | --- | --- | --- |
 | `legacy.perl_plugin_registry` | retained legacy compatibility | pending `.6`; plugin transition card and mdBook legacy chapter | retained as `legacy`, null retention |
-| `future.general_parse_job_authoring` | valid future direction with superseded owner | active parent `.14`, especially progressive `.14.6` and staged `.14.7` | re-owned to `.14` as `future`, null retention |
+| `future.general_parse_job_authoring` | satisfied direction | completed public admission `.14.7.9` | removed in the delivery slice |
 | `future.semantic_introspection_mcp` | satisfied stale future narrative | completed `.10`; ADR `0049`; public 9/9, native 6/6, MCP 5/5 + 6/6 | removed |
 | `future.rule_local_cursor_and_bare_edges` | satisfied stale future narrative | completed `.9`; ADR `0044`; rollout 8/0 and six-runtime recurrence | removed |
 
@@ -38,9 +39,9 @@ open owner without retention authority; a completed owner is permitted only when
 authority explicitly retains that legacy exclusion. Thus a completed owner is not blindly rejected, but it is
 never silently accepted either.
 
-The checker parses unique task ids and their leading status enum from the tracked task sources, removes the three
-redundant hard-coded owner insertions, requires the exact two retained records and order, and rejects all
-satisfied ids. Any completed future direction is removed when delivered/abandoned, or rewritten to a precise live
+The checker parses unique task ids and their leading status enum from the tracked task sources, removes redundant
+hard-coded owner insertions, requires the exact current exclusion set and order, and rejects all satisfied ids.
+Any completed future direction is removed when delivered/abandoned, or rewritten to a precise live
 owner if a narrower direction genuinely remains. Supersession removes the old owner/id relationship in the same
 slice; it never leaves parallel old/new records.
 

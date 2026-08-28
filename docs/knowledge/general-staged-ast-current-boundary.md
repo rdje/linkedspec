@@ -1,6 +1,6 @@
 ---
 id: general-staged-ast-current-boundary
-title: Current staged dispatch is a one-depth function-body path, not the general staged-AST contract
+title: Current staged dispatch keeps narrow function-body v1 separate from public general v2
 answers:
   - "what staged parsing behavior is implemented today"
   - "is general parse_job authoring implemented"
@@ -15,7 +15,7 @@ answers:
   - "what did FUTURE-PARITY-BACKLOG.14.7.0 audit"
   - "what must happen before general staged AST enrichment"
 date: 2026-08-25
-status: current runtime audit; private Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT admissions independently recomposed; public authoring remains pending
+status: narrow function-body v1 and exact public general-v2 assignment authoring are current and separate
 tags: [staged-parsing, parse-job, diagnostics, registry, policies, recursive-queue, source-location, backend-parity]
 evidence: "Toolbox-first source/runtime proof establishes the shipped boundary: five source backends/six runtimes implement only actionir-body.spec/action_block, one-depth ordering, fixed cache identity, and function-specific replace_field/body_ast/fail. FUTURE-PARITY-BACKLOG.14.7.1 repairs wrong-top diagnostic parity. FUTURE-PARITY-BACKLOG.14.7.2 adds the separate executable neutral v2 authority. Perl .14.7.3.1-.3 now add a dormant private marker/provenance carrier, caller-frozen pure resolution/cache, all policies/detachment, breadth-first recurrence, chain/resource bounds, and source-rebased diagnostics. They add no reconstructed/generated/emitted carriers, admission, rollout, or public authoring. Those remain .14.7.3.4-.10-owned."
 evidence_update_2026_08_26_perl_admission: "FUTURE-PARITY-BACKLOG.14.7.3.4 adds four fresh-authority Perl routes, exact phase-0/canonical admission, and Perl-only rollout promotion. Public authoring, generated format, later backends, recurrence, and outward surfaces remain unchanged or pending."
@@ -40,6 +40,7 @@ evidence_update_2026_08_27_lua_current_depth_authority: "FUTURE-PARITY-BACKLOG.1
 evidence_update_2026_08_27_lua_recursive_carriers: "FUTURE-PARITY-BACKLOG.14.7.7.3 preserves the current-depth API and adds separate private enrich_recursively plus one opaque post-parent execution seed. Both ABIs pass 888 assertions over complete breadth-first recurrence, shared monotone authority, source rebasing, and four fresh production carriers while discovery, rollout, formats, v1, public, and outward truth stay fixed for .4."
 evidence_update_2026_08_27_lua_admission: "FUTURE-PARITY-BACKLOG.14.7.7.4 moves only the unchanged shared consumer into exact ordinary/canonical dual-ABI discovery and promotes the two Lua rollout rows. Both hosts remain 888/888; production, function-body v1, generated format, public authoring, and outward surfaces do not move."
 evidence_update_2026_08_28_lua_recomposition: "FUTURE-PARITY-BACKLOG.14.7.7.5 independently recomposes the committed shared Lua 888/888 carriers on both ABIs, every admitted peer/current projection, neutral 106-mutation governance, and exact topology without executable movement. Parent .14.7.7 closes and recurring proof .14.7.8 is next."
+evidence_update_2026_08_28_recurring_and_public: "FUTURE-PARITY-BACKLOG.14.7.8 binds recurring proof across five sources/six runtimes at neutral 9/9/123. FUTURE-PARITY-BACKLOG.14.7.9 then makes only exact scalar assignment-form target = parse_job(source_bound_text, hash(literal options)) public through the already-admitted dedicated node and caller-frozen authority. The narrow function-body-v1 adapter and generated formats do not change; general v2 remains absent from unrelated facade/schema/semantic/MCP/CLI/README surfaces."
 root_cause: "The first prototype deliberately separated a generic-looking registry record from a narrow trusted function-body integration. Compile helpers in Perl, Rust, and Dart were shaped around loaded parser identity plus top rule, so they synthesized a placeholder diagnostic record; Julia and Lua were implemented later with the complete job parameter but their formatter omitted payload_kind. Success-path and resolve-phase tests covered real context, but no cross-backend compile-phase assertion locked the ADR 0015 fields. Leaf .14.7.1 passes the normalized job through the three compile boundaries, adds payload_kind to the two later formatters, and locks all five source routes/six runtimes without expanding staged behavior."
 last_verified: 2026-08-27
 reverify:
@@ -52,7 +53,21 @@ reverify:
 
 # General staged-AST current boundary
 
-The current product implements one narrow staged family on five backend sources and six runtime routes:
+The product has two deliberately separate staged families. The narrow function-body-v1 adapter remains unchanged.
+General v2 is current only through exact scalar assignment-form
+`target = parse_job(source_bound_text, hash(literal options))`, which lowers to the dedicated marker/sidecar and is
+consumed after the parent AST under caller-frozen already-compiled authority. All four result policies, all three
+failure policies, breadth-first recurrence, typed provenance, resource bounds, and 37 diagnostics are current on
+Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Generic-helper, residual/nested/dynamic, callback, path/URI/provider,
+compilation, registry-mutation, and unrelated outward interpretations remain denied.
+
+## Historical v1 audit snapshot
+
+The remainder of this section records the pre-general-v2 audit and the ordered backend delivery history. Its
+present-tense boundary descriptions apply to the narrow v1 adapter or to the dated delivery point, not to current
+general-v2 availability.
+
+The pre-general-v2 product implemented one narrow staged family on five backend sources and six runtime routes:
 
 | Boundary | Current behavior |
 | --- | --- |

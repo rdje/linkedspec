@@ -1,20 +1,26 @@
 # ARCHITECTURE STATE
 
-## General staged-AST enrichment now has exact private six-runtime recurrence
+## General staged-AST enrichment has current portable authoring and exact six-runtime recurrence
 
-`FUTURE-PARITY-BACKLOG.14.7.8` composes the already-admitted Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT
-behavior through one repository-routed fail-fast authority. Five immutable backend source groups form six ordered
-runtime routes because one shared Lua source executes independently on both ABIs. Neutral runs first, then every
-runtime, typed-source, generated-source, capability, and language ledgers. Canonical CI always requires,
-machine-path-audits, syntax-checks, and outside-CWD routes the driver; exact all-toolchain execution is opt-in via
+`FUTURE-PARITY-BACKLOG.14.7.9` makes only exact scalar-assignment
+`target = parse_job(source_bound_text, hash(literal options))` a current portable `.spec` annotation. It remains a
+dedicated node outside the ordinary generic helper inventory, constructs an inert `STAGED_PARSE_JOB_MARKER` /
+`staged_parse_job_v2` record, and can select only caller-frozen already-compiled authority after the complete
+parent AST returns. Authored identities grant no path, provider, loading, compilation, callback, or ambient host
+authority. All four result and three failure policies plus 37 portable diagnostics are documented and governed.
+
+The preceding `.14.7.8` recurrence owner composes Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT through one
+repository-routed fail-fast authority. Five immutable backend source groups form six ordered runtime routes because
+one shared Lua source executes independently on both ABIs. Neutral runs first, then every runtime, typed-source,
+generated-source, capability, and language ledger. Canonical CI always requires, machine-path-audits,
+syntax-checks, and outside-CWD routes the driver; exact all-toolchain execution is opt-in via
 `LINKEDSPEC_RUN_STAGED_AST_ENRICHMENT_MATRIX=1`.
 
-Seventeen reason-checked topology/status/storage/rollout/capability mutations advance staged neutral governance
-from 106 to 123. Only typed `staged_span_dispatch` moves, producing 13 complete / 1 pending / 187 mutations. The
-corresponding all-pass private capability row advances the census from 16/80 to 17/85, while
-`future.general_parse_job_authoring` remains the exact `.14.7.9` public boundary. Function-body v1, generated
-format v2, every consumer/runtime byte, facade/schema/semantic/MCP/CLI/README surface, and public behavior remain
-unchanged.
+Staged rollout is 9/9 with 123 neutral and 129 reason-checked public mutations. Typed governance is
+13 complete / 1 pending / 189 mutations; `.14.8` still owns the combined row. The all-pass
+`language.staged_ast_enrichment` capability keeps the census at 17/85, and the satisfied general-authoring
+exclusion is absent. Function-body v1, generated format v2, runtime/carrier behavior, and every unrelated
+facade/schema/semantic/MCP/CLI/root-README surface remain unchanged.
 
 Behavior-free audit `FUTURE-PARITY-BACKLOG.14.7.0` starts from exact clean progressive-closeout commit
 `fbcdedb6`. Toolbox-first descriptor, runtime, registry, source, and focused-test probes establish one precise
@@ -24,8 +30,8 @@ current boundary across five backend sources/six runtime routes. The spec-return
 `body_ast`. Function-specific validation implements only `replace_field` / `body_ast` / `fail`; the raw registry
 merely transports other policy strings.
 
-Neutral `FUTURE-PARITY-BACKLOG.14.7.2` now makes the complete future behavior design executable without shipping
-it. `linkedspec-staged-ast-enrichment-v1` freezes authored `parse_job(text_expr, options)`, one inert
+Neutral `FUTURE-PARITY-BACKLOG.14.7.2` established the complete behavior design as an executable contract before
+backend admission. `linkedspec-staged-ast-enrichment-v1` freezes authored `parse_job(text_expr, options)`, one inert
 `STAGED_PARSE_JOB_MARKER` plus sidecar, typed direct and ordered-derived provenance, caller-completed deterministic
 resolution, immutable pre-registered parser/cache authority, breadth-first recursive scheduling, all result and
 failure policies, strict decreasing/cycle/depth/call/cancellation/resource bounds, detached results, diagnostics,
@@ -270,8 +276,9 @@ linear token snapshots only the owning invocation cursor, anonymous boundary, an
 recognition rejects `parser_registry_or_staged_dispatch`; rolled-back work cannot establish progress. The
 `transaction_safety` becomes complete on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Progressive recurrence
 later promotes only `progressive_span_dispatch`; staged-AST recurrence then promotes only
-`staged_span_dispatch`. Combined program-wide no-drift remains pending under `.14.8`. Typed governance is now
-13 complete / 1 pending / 187 mutations with no parser,
+`staged_span_dispatch`; staged public authoring adds two projection mutations without promoting another row.
+Combined program-wide no-drift remains pending under `.14.8`. Typed governance is now
+13 complete / 1 pending / 189 mutations with no parser,
 compiler, runtime, facade, schema, semantic/MCP, CLI, README, storage, or public behavior change.
 
 ## Progressive span dispatch has six private runtimes and exact typed recurrence

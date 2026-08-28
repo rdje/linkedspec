@@ -11,10 +11,11 @@ answers:
   - "does Lua staged AST admission change production behavior"
   - "what does FUTURE-PARITY-BACKLOG 14.7.7.4 implement"
 date: 2026-08-27
-status: current private dual-ABI admission independently recomposed; six-runtime recurrence and public authoring remain pending
+status: current dual-ABI admission, recurrence, and exact public assignment authoring
 tags: [lua, PUC-Lua, LuaJIT, staged-parsing, carriers, admission, ci, rollout, private]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.7.4 preserves the exact 888-assertion shared Lua-5.1 consumer and every production/carrier byte. tools/run_lua_local.sh invokes that path exactly once through PUC Lua and once through LuaJIT; lua/test/run.lua contains no duplicate. Canonical CI requires the tracked path exactly once and has one exact repository-routed marker/invocation per ABI. The consumer remains 888/888 on both hosts, and complete ordinary Lua passes 178/178 on both ABIs. Neutral governance promotes only the shared Lua backend lifecycle and rollout rows 6/7, adds eight exact topology mutations for 106 total, and leaves recurrence/public rows pending. Admitted Perl 143/143, Rust 1/1, Dart 19/19, and Julia 491/491 current projections move in lockstep without backend behavior changes. Function-body v1, generated-source v2, production, public/outward surfaces, capability state, and later recurrence remain unchanged."
 evidence_update_2026_08_28_recomposition: "FUTURE-PARITY-BACKLOG.14.7.7.5 reruns the committed source at 888/888 per ABI, complete ordinary Lua 178/178 per ABI, every admitted peer, neutral 106-mutation governance, and all direct-dependent ledgers without changing executable bytes or topology. It closes shared parent .14.7.7 and hands off recurring proof .14.7.8."
+evidence_update_2026_08_28_recurring_and_public: "FUTURE-PARITY-BACKLOG.14.7.8 composes the shared source once on each ABI in the five-source/six-runtime driver and advances neutral governance to 9/9/123. FUTURE-PARITY-BACKLOG.14.7.9 changes only aggregate current snapshots in this consumer while admitting the exact assignment annotation publicly through the already-implemented dedicated node/frozen authority; behavioral and runtime bytes remain unchanged."
 last_verified: 2026-08-28
 reverify:
   - "bash tools/run_lua_project_data.sh puc lua/test/staged_ast_enrichment_contract_test.lua"
@@ -38,10 +39,9 @@ plan cache, complete-depth policies, breadth-first recursion, source rebasing, a
 generated-plan/emitted carriers remain byte-for-byte unchanged. Each explicit and discovered route reports
 888/888.
 
-The neutral contract now records every private backend complete, promotes rollout rows six and seven, and rejects
-106 mutations. Recurring six-runtime proof and public `parse_job(...)` authoring remain pending under `.14.7.8-.9`;
-independent dual-ABI recomposition is complete without executable movement, while final program recomposition
-retains `.14.7.10`.
+The neutral contract records every backend complete, all nine rollout rows current, and 123 neutral mutations.
+The shared Lua source participates once per ABI in recurring proof, and exact assignment-form public
+`parse_job(...)` authoring is current without executable movement. Final program recomposition remains `.14.7.10`.
 
 Related: [[lua-staged-ast-enrichment-recursive-carriers]],
 [[lua-staged-ast-enrichment-dormant-red]], [[staged-consumer-current-projection-lockstep]],

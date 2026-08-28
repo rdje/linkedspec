@@ -394,7 +394,7 @@ check_equal(contract.contract_id, CONTRACT_ID, "neutral contract id")
 check_equal(contract.format, 1, "neutral contract format")
 check_equal(
   contract.status,
-  "all_private_backends_complete_recurring_current_public_pending",
+  "all_backends_complete_recurring_and_public_current",
   "neutral lifecycle status"
 )
 
@@ -536,13 +536,13 @@ check_equal(#contract.rollout, 9, "rollout row count")
 for index = 1, 8 do
   check_equal(contract.rollout[index].status, "complete", "complete rollout " .. index)
 end
-check_equal(contract.rollout[9].status, "pending", "pending rollout 9")
+check_equal(contract.rollout[9].status, "complete", "complete rollout 9")
 check_equal(contract.rollout[6].owner, "FUTURE-PARITY-BACKLOG.14.7.7", "PUC Lua rollout owner")
 check_equal(contract.rollout[7].owner, "FUTURE-PARITY-BACKLOG.14.7.7", "LuaJIT rollout owner")
 check_equal(
   contract.authored_surface.availability,
-  "private Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT staged-AST carriers plus exact " ..
-    "six-runtime recurrence admitted; public authoring remains pending under FUTURE-PARITY-BACKLOG.14.7.9-.10",
+  "portable exact-assignment parse_job authoring is current on Perl, Rust, Dart, Julia, " ..
+    "PUC Lua, and LuaJIT through the dedicated staged marker and caller-frozen already-compiled authority",
   "authored availability"
 )
 

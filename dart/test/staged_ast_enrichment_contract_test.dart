@@ -47,7 +47,7 @@ void main() {
     expect(contract['format'], 1);
     expect(
       contract['status'],
-      'all_private_backends_complete_recurring_current_public_pending',
+      'all_backends_complete_recurring_and_public_current',
     );
     expect(contract['expected_counts'], <String, Object?>{
       'registry_entries': 4,
@@ -195,7 +195,7 @@ void main() {
         'complete',
         'complete',
         'complete',
-        'pending',
+        'complete',
       ],
     );
     expect(contract['compatibility_v1'], <String, Object?>{
@@ -1828,7 +1828,7 @@ Child::
 
       expect(
         contract['status'],
-        'all_private_backends_complete_recurring_current_public_pending',
+        'all_backends_complete_recurring_and_public_current',
       );
       expect(
         _object(_list(contract['backend_consumers'])[2])['status'],

@@ -68,6 +68,18 @@
 #   accepted permanent grammar owner is this self-hosted grammar. The hardcoded
 #   bootstrap parser must not become the lasting owner; the Perl reference
 #   currently uses a temporary pre-bootstrap registry bridge for this surface.
+#
+# DEDICATED ACTION-EXPRESSION EXTENSION: portable staged parse-job authoring
+#   target = parse_job(source_bound_text, hash(literal options))
+#   source_bound_text = entry_text() | entry_group(nonnegative_literal) |
+#                       match_text() | match_group(nonnegative_literal) |
+#                       cat(one_or_more_source_bound_text_values)
+#   Exact scalar assignment alone lowers to STAGED_PARSE_JOB_MARKER plus the
+#   staged_parse_job_v2 sidecar. Options and parser/top/policy/target identities
+#   are static literals; the caller supplies frozen already-compiled authority.
+#   Residual, nested, receiver, append, indexed, dynamic, callback, path-loading,
+#   provider-query, and recognition-reachable interpretations fail closed.
+#   parse_job remains outside the ordinary generic helper-call inventory.
 # =============================================================================
 
 spec_file::

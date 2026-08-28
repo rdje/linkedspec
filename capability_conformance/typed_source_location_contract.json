@@ -29,7 +29,7 @@
     "recursive_observation_public_documents": 6,
     "recursive_observation_public_forbidden_claims": 6,
     "recursive_observation_public_surface_guard_paths": 10,
-    "mutations": 187
+    "mutations": 189
   },
   "policy": {
     "source_identity": "caller-authorized decoded input identity; never a path, backend object, or implicit read authority",
@@ -428,9 +428,10 @@
     },
     "capability_projection": {
       "manifest": "capability_conformance/manifest.json",
-      "capability_id": "language.private_staged_ast_enrichment",
+      "capability_id": "language.staged_ast_enrichment",
       "backend_status": "pass",
-      "retained_public_exclusion": "future.general_parse_job_authoring"
+      "public_authoring_contract": "capability_conformance/staged_ast_enrichment_contract.json",
+      "public_authoring_status": "current"
     }
   },
   "recursive_observation_public_no_drift": {

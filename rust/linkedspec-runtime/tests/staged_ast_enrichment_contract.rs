@@ -1425,7 +1425,7 @@ fn final_path_admits_fresh_production_carriers() {
     assert_eq!(neutral["format"], 1);
     assert_eq!(
         neutral["status"],
-        "all_private_backends_complete_recurring_current_public_pending"
+        "all_backends_complete_recurring_and_public_current"
     );
     assert_eq!(
         neutral["expected_counts"],
@@ -1639,7 +1639,7 @@ fn final_path_admits_fresh_production_carriers() {
             .collect::<Vec<_>>(),
         [
             "complete", "complete", "complete", "complete", "complete", "complete", "complete",
-            "complete", "pending",
+            "complete", "complete",
         ]
     );
     assert_eq!(

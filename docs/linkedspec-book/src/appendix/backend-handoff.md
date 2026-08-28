@@ -770,7 +770,7 @@ consumer, its marker/provenance carrier, caller-frozen current-depth resolver/ca
 breadth-first recurrence, source rebasing, and a fresh host-only seed across four production routes. PUC Lua and
 LuaJIT each pass 888 assertions; ordinary/canonical discovery executes that source exactly once per ABI and both
 rollout legs are complete. Independent `.5` recomposes every committed route unchanged and closes shared Lua;
-recurring five-source/six-route proof `.14.7.8` is next.
+recurring five-source/six-route proof `.14.7.8` and public authoring/no-drift `.14.7.9` are now complete.
 Dart
 `.14.7.5.0-.4` freeze one exact historical `test_dormant/` boundary, lower exact
 assignment-form `parse_job` to a live-proven private marker, and add a separate caller-frozen pure resolver/cache/
@@ -1888,9 +1888,11 @@ broader current census lives in `capability_conformance/manifest.json` and is ch
 perl tools/check_capability_conformance.pl
 ```
 
-The current audit contains 17 capabilities x five admitted backends. All 85 states pass. The seventeenth row
-records already-admitted private staged-AST enrichment while retaining the public-authoring exclusion. Earlier non-pass
-boundaries remain below as rollout history, not as live gaps:
+The current audit contains 17 capabilities x five admitted backends. All 85 states pass. The
+`language.staged_ast_enrichment` row records the current portable annotation and its caller-authorized internal
+carriers. Earlier non-pass boundaries remain below as rollout history, not as live gaps.
+
+Portable `parse_job(...)` authoring is current across five backend sources and six runtime routes without adding an outward facade, schema, semantic/MCP, CLI, or README surface.
 
 | Residual mechanism | Current classification | Owner |
 | --- | --- | --- |
@@ -1899,8 +1901,9 @@ boundaries remain below as rollout history, not as live gaps:
 | Generated parser source | Perl, Rust, Dart, Julia, and Lua pass contract v1. Rust compiles/runs 105/105. Dart, Julia, and Lua pass deterministic emission, ten-family direct dispatch/four rejections/trace roles, and exact contract-sourced interpreter-first 8/105 host admission; Lua uses fresh PUC Lua/LuaJIT hosts and exact v1/v2/v3 callable state. | closed `.3.5`; Lua admission `.8.4` |
 | Punctuation-light zero-argument aliases | Six standalone markers and a terminal zero-argument receiver segment preserve their parenthesized typed twins without widening conditions or general calls. | closed `.16.7`; five-backend baseline 80/0/0 after Lua `.8.4`; current census 85/0/0 after staged recurrence `.14.7.8` |
 
-Deprecated Perl plugins and general future `parse_job(...)` authoring are the two explicit exclusions/future
-owners rather than silent gaps. Generic first-class/dynamic callable-codeblock equivalence is already admitted. Rust now admits
+Deprecated Perl plugin machinery is the sole explicit exclusion rather than a silent gap. Portable dedicated
+`parse_job(...)` authoring is current; ambient provider/path loading remains forbidden, not deferred. Generic
+first-class/dynamic callable-codeblock equivalence is already admitted. Rust now admits
 typed callable-literal construction/state, exact dynamic invocation, and metadata-governed generic contextual
 equivalence across native, serialized, generated-plan, and emitted-source execution. Dart `.11.5.1-.2` admit the
 same inert explicit-literal construction/state plus dynamic invocation, copied/restored caller-context bindings,
@@ -2808,9 +2811,9 @@ It provides:
    behavior. Parser resolution must be deterministic and diagnostics must report both the
    selected next-stage parser and the original parent source span.
 
-   Once implemented, the portable authoring marker is `parse_job(text_expr, options)`.
-   It creates a marker value plus sidecar metadata rather than executing the next parser
-   inline.
+   The current portable authoring marker is exact scalar assignment-form
+   `target = parse_job(source_bound_text, hash(literal options))`. It creates a marker value plus sidecar metadata
+   rather than executing the next parser inline, and it can select only caller-frozen already-compiled authority.
 
 3. **Staged parser registry and queue** — resolves parser spec ids deterministically,
    caches compiled next-stage parsers by content/version/capability fingerprints,

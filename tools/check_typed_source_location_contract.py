@@ -56,6 +56,9 @@ PROGRESSIVE_SPAN_DISPATCH_RECURRING_DRIVER_PATH = (
 STAGED_AST_ENRICHMENT_RECURRING_DRIVER_PATH = (
     ROOT / "tools" / "check_staged_ast_enrichment_six_runtime.sh"
 )
+STAGED_AST_ENRICHMENT_CONTRACT_PATH = (
+    ROOT / "capability_conformance" / "staged_ast_enrichment_contract.json"
+)
 LOSSLESS_GAP_CONTRACT_PATH = (
     ROOT / "capability_conformance" / "inter_match_gap_capture_contract.json"
 )
@@ -101,7 +104,7 @@ EXPECTED_COUNTS = {
     "recursive_observation_public_documents": 6,
     "recursive_observation_public_forbidden_claims": 6,
     "recursive_observation_public_surface_guard_paths": 10,
-    "mutations": 187,
+    "mutations": 189,
 }
 
 POLICY = {
@@ -486,9 +489,10 @@ STAGED_AST_ENRICHMENT_RECURRING_GATE = {
     },
     "capability_projection": {
         "manifest": "capability_conformance/manifest.json",
-        "capability_id": "language.private_staged_ast_enrichment",
+        "capability_id": "language.staged_ast_enrichment",
         "backend_status": "pass",
-        "retained_public_exclusion": "future.general_parse_job_authoring",
+        "public_authoring_contract": "capability_conformance/staged_ast_enrichment_contract.json",
+        "public_authoring_status": "current",
     },
 }
 
@@ -3195,11 +3199,26 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             for backend in capability_rows[0]["backends"].values()
         ):
             fail("staged-AST enrichment capability projection drifted")
-        if sum(
-            row["id"] == capability_projection["retained_public_exclusion"]
+        if any(
+            row["id"] == "future.general_parse_job_authoring"
             for row in capability_manifest["excluded_or_future"]
-        ) != 1:
-            fail("staged-AST public-authoring exclusion projection drifted")
+        ):
+            fail("satisfied staged-AST public-authoring exclusion remains present")
+        if (
+            capability_projection["public_authoring_contract"]
+            != STAGED_AST_ENRICHMENT_CONTRACT_PATH.relative_to(ROOT).as_posix()
+            or capability_projection["public_authoring_status"] != "current"
+        ):
+            fail("staged-AST public-authoring projection drifted")
+        staged_contract = json.loads(
+            STAGED_AST_ENRICHMENT_CONTRACT_PATH.read_text(encoding="utf-8")
+        )
+        if (
+            staged_contract.get("status")
+            != "all_backends_complete_recurring_and_public_current"
+            or staged_contract.get("rollout", [{}])[-1].get("status") != "complete"
+        ):
+            fail("staged-AST public-authoring contract is not current")
         composition_gate = lossless_gap_composition["recurring_gate"]
         composition_driver_text = TYPED_GAP_COMPOSITION_DRIVER_PATH.read_text(
             encoding="utf-8"
@@ -3788,6 +3807,18 @@ def mutation_checks(contract: dict[str, Any]) -> int:
             lambda c: c["staged_ast_enrichment_recurring_gate"][
                 "capability_projection"
             ].__setitem__("backend_status", "partial"),
+        ),
+        (
+            "staged-AST enrichment public-authoring contract",
+            lambda c: c["staged_ast_enrichment_recurring_gate"][
+                "capability_projection"
+            ].__setitem__("public_authoring_contract", "capability_conformance/wrong.json"),
+        ),
+        (
+            "staged-AST enrichment public-authoring status",
+            lambda c: c["staged_ast_enrichment_recurring_gate"][
+                "capability_projection"
+            ].__setitem__("public_authoring_status", "pending"),
         ),
         (
             "staged span-dispatch rollout regressed",

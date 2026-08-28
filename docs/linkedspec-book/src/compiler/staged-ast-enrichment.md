@@ -1,23 +1,17 @@
 # Staged AST Enrichment Contract
 
-> Status: executable backend-neutral design. General `parse_job(...)` authoring is not yet public. Perl now has a
-> privately admitted marker, caller-frozen recursive authority, and four fresh-authority carriers with a
-> fully GREEN 143-check oracle;
-> Rust now has the same private complete authority, four fresh native/reconstructed/generated/emitted production
-> carriers, and exact ordinary/canonical admission;
-> Dart now has the same complete private authority, four fresh native/reconstructed/generated/emitted production
-> carriers, and exact 19/19 ordinary/canonical admission. Julia now also has the complete private authority, four
-> fresh production routes, and exact 491/491 ordinary/canonical admission. Shared Lua now has one admitted
-> dual-ABI oracle with its private inert marker, live-range-proven typed provenance, caller-frozen policies,
-> bounded breadth-first recurrence, and four fresh post-parent production carriers at 888/888 on each runtime;
-> the neutral contract is 106 mutations and the same stable source runs exactly once per ABI in ordinary and
-> canonical proof. Independent Lua recomposition is complete without executable movement; six-runtime recurrence remains pending, and
-> the only publicly authored five-backend/six-runtime surface is still the
-> narrow function-body v1 adapter described below.
+> Status: current portable authored language surface and executable backend-neutral contract. Portable
+> `parse_job(...)` authoring is current as one dedicated exact-assignment annotation on Perl, Rust, Dart, Julia,
+> PUC Lua, and LuaJIT. Five backend sources execute through six runtime routes under exact recurring proof; the
+> public no-drift row is complete at 9/9. The annotation constructs only an inert marker and uses caller-frozen,
+> already-compiled authority after the parent AST returns. It does not add a generic helper, outward facade,
+> descriptor/result schema, semantic/MCP field, CLI option, or root-README behavior.
+
+Portable `parse_job(...)` authoring is current as one dedicated exact-assignment annotation on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT.
 
 LinkedSpec's staged model lets one completed parse return bounded text islands for later parsers to refine. The
-neutral general contract is now executable and mutation-checked before any backend implements it. Its artifact
-contract is v1; the future marker/sidecar record and deterministic job identity are v2. This keeps syntax,
+neutral general contract is executable and mutation-checked across every admitted backend. Its artifact
+contract is v1; the marker/sidecar record and deterministic job identity are v2. This keeps syntax,
 source attribution, resolution, ordering, policies, resource limits, diagnostics, and generated carriers aligned
 across Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT.
 
@@ -26,7 +20,7 @@ The authority is `capability_conformance/staged_ast_enrichment_contract.json`; i
 
 ## A parse job is a marker, not an immediate parser call
 
-The selected future authored shape is:
+The current authored shape is exact scalar assignment:
 
 ```text
 job_marker = parse_job(text_expr, hash(
@@ -48,6 +42,38 @@ Required options are `node_kind`, `payload_kind`, `spec`, `result_policy`, and `
 `required_capabilities` are optional. The scheduler adds declaring-spec identity, parent AST path, typed
 provenance, exact materialized text, selected top rule, and deterministic job id. Unknown options and invalid
 policy/target combinations fail closed.
+
+The first operand must be source-bound. These are the four direct forms:
+
+```text
+entry_text()
+entry_group(0)
+match_text()
+match_group(0)
+```
+
+`entry_group(n)` and `match_group(n)` require a literal nonnegative index. Derived text uses one or more direct
+forms under `cat(...)`; nested calls flatten in authored order:
+
+```text
+combined = parse_job(
+  cat(entry_group(0), match_group(1)),
+  hash(
+    "node_kind", "expression",
+    "payload_kind", "embedded_expression",
+    "spec", "expr-v1",
+    "result_policy", "replace_marker",
+    "on_error", "fail"
+  )
+)
+```
+
+Literal strings, copied or transformed variables, dynamic group indices, an empty `cat()`, named call arguments,
+and any other expression are not source authority and diagnose before execution. The complete statement must be
+`target = parse_job(source_bound_text, hash(literal options))`. A direct return, nested call, receiver chain,
+append/indexed target, callback interpretation, or recognition-reachable declaration is rejected. `parse_job`
+therefore remains outside the ordinary generic helper-call inventory even though this dedicated annotation is a
+public `.spec` language surface.
 
 ## Source provenance is typed
 
@@ -150,6 +176,32 @@ For example, `sibling_field` plus `diagnostic_node` preserves `payload: "bad"` a
 the requested sibling. A missing replacement field, existing sibling collision, non-list append target, or stale
 marker job id is a stitch diagnostic rather than backend-dependent mutation.
 
+## Portable diagnostics
+
+Every diagnostic has a stable `code`, `phase`, and the context named by the executable contract. Handle the code,
+not backend exception text. The complete current inventory is:
+
+- Authored declaration and provenance: `staged_parse_job_options_required`,
+  `staged_parse_job_option_unknown`, `staged_parser_identity_invalid`, `staged_top_rule_invalid`,
+  `staged_result_policy_invalid`, `staged_failure_policy_invalid`, `staged_result_target_invalid`, and
+  `staged_source_provenance_invalid`.
+- Identity and frozen registry: `staged_job_id_mismatch`, `staged_duplicate_job_id`, `staged_registry_missing`,
+  `staged_registry_ambiguous`, `staged_registry_collision`, `staged_implicit_load_forbidden`,
+  `staged_registry_mutation_forbidden`, `staged_top_rule_forbidden`, `staged_capability_denied`,
+  `staged_policy_denied`, `staged_source_detail_denied`, `staged_version_mismatch`, and
+  `staged_cache_identity_invalid`.
+- Shared execution authority: `staged_cancelled`, `staged_deadline_exceeded`, `staged_budget_exhausted`,
+  `staged_cycle`, `staged_chain_non_decreasing`, `staged_depth_exceeded`, `staged_call_limit_exceeded`, and
+  `staged_child_failed`.
+- Stitching and detachment: `staged_stitch_target_missing`, `staged_stitch_target_collision`,
+  `staged_append_target_invalid`, `staged_marker_mismatch`, `staged_result_not_detached`,
+  `staged_result_node_limit_exceeded`, `staged_transaction_forbidden`, and `staged_diagnostic_truncated`.
+
+Compile-time declaration failures carry the authored origin and bad operand/option. Dispatch failures also carry
+the job id, resolved identity when available, and stage chain. Child failure adds parser/top, path, provenance,
+policy, cache, and nested-diagnostic context. If the shared UTF-8 diagnostic budget is exhausted, only the bounded
+truncation record is retained.
+
 ## Recursion, cancellation, and detachment
 
 The active chain records normalized parser identity, top rule, payload digest, and full typed provenance. An exact
@@ -197,8 +249,9 @@ recurrence, and `.4` now carries them through four fresh-authority production ro
 now freeze, implement, and admit the exact shared boundary with marker/provenance, current-depth authority, bounded
 recurrence, source rebasing, and four fresh host-only production carriers at 888/888 per ABI. Ordinary and
 canonical proof execute that stable path once per ABI, and both Lua rollout rows are complete. Independent Lua
-recomposition `.5`, six-runtime recurrence, public authoring/no-drift, and final recomposition retain their
-`.14.7.7-.10` owners.
+recomposition `.5`, exact five-source/six-runtime recurrence `.14.7.8`, and portable authoring/public no-drift
+`.14.7.9` are complete. Final independent recomposition remains owned by `.14.7.10`; combined typed public
+no-drift remains owned by `.14.8`.
 
 ## Current shared Lua admitted recursive-carrier boundary
 
@@ -345,13 +398,14 @@ plan cache, recursive authority, and mutable queue for every run. No seed preser
 logical artifacts contain no concrete callback, registry/source authority, cancellation/deadline/budget state,
 queue/cache, absolute checkout path, or host handle. Leaf `.14.7.7.4` admits this exact source once per ABI and
 promotes both Lua rollout rows. Leaf `.5` independently reruns both ABIs, all peer projections, exact topology,
-and neutral governance without behavior changes, closes shared Lua, and hands off recurrence `.14.7.8`.
+and neutral governance without behavior changes, closes shared Lua, and historically handed off recurrence
+`.14.7.8`; recurrence and public authoring are now current.
 
 Publishing the complete `.2` record crosses the bounded change-history rollover threshold. The repository archives
 231 complete historical lines as immutable content-addressed segment `4989`; ADR `0093` advances only the finite
 collection and manifest controls to 24 files / 23 records. Root, segment, aggregate, byte, route, owner, lifecycle,
 verifier, and repository-local storage controls remain unchanged. This infrastructure movement requires canonical
-proof even though staged behavior stays private and dormant.
+proof even though that historical slice did not move staged behavior.
 
 ## Current private Perl boundary
 
@@ -460,8 +514,9 @@ another. The normalized marker record, generated `{label, family}` plan, and emi
 compiled parser, registry snapshot, source authority, cancellation/deadline/budget state, mutable queue, path, or
 host handle.
 
-Perl is privately admitted, but the language ledger still classifies `parse_job` as non-public until the separately
-owned `.14.7.9` closeout. Function-body v1 and generated-source v2 remain unchanged.
+Perl's implementation carrier remains internal. The language ledger classifies `parse_job` as a public dedicated
+assignment annotation and deliberately keeps it out of the generic helper-call inventory. Function-body v1 and
+generated-source v2 remain unchanged.
 
 ## Current private Rust boundary
 
@@ -470,7 +525,7 @@ execute the exact GREEN consumer once. Current function-body v1 still proves det
 resolution/load/compile/execute/cache, exact `replace_field` / `body_ast` / `fail`, and complete wrong-top context.
 A general `expr-v1` job remains rejected during v1 resolution.
 
-The exact future annotation spelling is scalar assignment with a literal option hash. In Rust, that form now
+The exact current annotation spelling is scalar assignment with a literal option hash. In Rust, that form
 compiles exclusively to `Expr::StagedParseJobMarker`:
 
 ```text
@@ -565,10 +620,10 @@ AST/sidecar/diagnostic/cache/resource records, and mutating one returned result 
 outer cfg, custom manifest check-cfg, cfg-only exports, and conditional `dead_code` allowance are gone because the
 production engine is now the real caller.
 
-This is private Rust backend admission, not public `parse_job(...)` authoring. Ordinary Cargo discovers the GREEN
-consumer, canonical CI requires and invokes it exactly once, and only Rust rollout is promoted. Dart has since
-reached the same private boundary; Julia and Lua have since completed and independently recomposed theirs.
-Six-runtime recurrence, public authoring, and combined no-drift retain their owners.
+The Rust carrier and host authority remain internal, while the exact annotation they implement is now public.
+Ordinary Cargo discovers the GREEN consumer and canonical CI requires and invokes it exactly once. Dart, Julia,
+and Lua have the same admitted boundary; six-runtime recurrence and staged public no-drift are complete. Combined
+typed no-drift remains separately owned by `.14.8`.
 
 ## Current private Dart carrier admission
 
@@ -798,8 +853,8 @@ typed source authority converts those live boundaries into Unicode-scalar direct
 Native, normalized `SpecFile`-JSON reconstructed, validated generated-plan, and independently included emitted-
 module routes return the same detached `STAGED_PARSE_JOB_MARKER` / `staged_parse_job_v2` declaration. The sidecar
 contains normalized logical options, exact text, typed provenance, and origin only—no source authority, match,
-parser, registry, callback, scheduler, cache, path, or host handle. This is private admitted behavior, not general
-public authoring.
+parser, registry, callback, scheduler, cache, path, or host handle. The Julia carrier remains internal while its
+exact assignment annotation is part of the current portable authored surface.
 
 `runtime/StagedAstEnrichment.jl` is separate from the narrow function-body-v1 registry. Its unexported frozen
 registry accepts only caller-completed alias, declaring-relative, ordered search-root/provider outcomes and the
@@ -895,8 +950,9 @@ Run the neutral proof with:
 bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py
 ```
 
-The checker currently reports 4 registry entries; 8 provenance, 8 resolution, 6 authority, 10 cache, 4 queue,
-3 isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases; 37 diagnostics; 5 backend
-consumers/6 routes; 4 carrier requirements; 10 outward guards; 9 rollout legs; 35 owners; and 97 reason-checked
-mutations. The neutral checker plus Perl, Rust, Dart, and Julia consumers are registered in canonical local CI.
-The Lua consumer remains absent.
+The checker reports 4 registry entries; 8 provenance, 8 resolution, 6 authority, 10 cache, 4 queue, 3 isolation,
+4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases; 37 diagnostics; 5 backend consumers over
+6 runtime routes; 4 carrier requirements; 10 outward guards; 9/9 rollout legs; 35 owners; 123 neutral mutations;
+and 129 reason-checked public-authoring/no-drift mutations. The neutral checker and exact Perl, Rust, Dart, Julia,
+PUC Lua, and LuaJIT consumers are registered in the recurring driver; receipt-bound canonical CI runs that matrix
+through `LINKEDSPEC_RUN_STAGED_AST_ENRICHMENT_MATRIX=1`.

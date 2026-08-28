@@ -181,23 +181,23 @@ for my $contract (@{$perl_contracts}) {
 }
 
 # These sixteen identifier-shaped diagnostics are deliberately not ordinary
-# public current calls. Keeping the classification next to the independent
+# generic helper calls. Keeping the classification next to the independent
 # reverse check means a newly added Perl current contract cannot disappear
 # symmetrically from every backend inventory merely because no corpus fixture
-# happens to call it. The five recognition forms and Perl-only progressive
-# dispatch are dedicated intrinsics with ActionIR nodes, not members of the
-# shared helper-call surface.
-my %classified_non_public_perl_contract = (
+# happens to call it. The recognition forms, progressive dispatch, and public
+# parse-job assignment annotation are dedicated ActionIR extensions, not members
+# of the shared helper-call surface.
+my %classified_non_generic_perl_contract = (
  array_append_operator => 'internal lowering operation',
  array_end_mutation_method => 'internal lowering operation',
  capture => 'legacy capture surface',
  capture_macro => 'legacy capture surface',
- dispatch_span => 'Perl-only dedicated intrinsic pending shared backend recurrence',
+ dispatch_span => 'cross-backend dedicated private intrinsic, not an ordinary generic helper call',
  entry_named_map => 'documented compatibility alias',
  hash_index_assignment_operator => 'internal lowering operation',
  match_named_map => 'documented compatibility alias',
  observe_recognition => 'grammar-owned dedicated intrinsic',
- parse_job => 'Perl-only private staged annotation pending shared backend recurrence and public admission',
+ parse_job => 'public dedicated assignment annotation, not an ordinary generic helper call',
  recognition_checkpoint => 'grammar-owned dedicated intrinsic',
  recognition_commit => 'grammar-owned dedicated intrinsic',
  recognition_rollback => 'grammar-owned dedicated intrinsic',
@@ -205,14 +205,14 @@ my %classified_non_public_perl_contract = (
  scalar_assignment_operator => 'internal lowering operation',
  value_drop => 'internal lowering operation',
 );
-my @classified_name_missing_from_perl = grep {
+my @classified_non_generic_missing_from_perl = grep {
  !$perl_current_contract{$_}
-} sort keys %classified_non_public_perl_contract;
-my @classified_name_admitted = grep {
+} sort keys %classified_non_generic_perl_contract;
+my @classified_non_generic_admitted = grep {
  $seen{$_}
-} sort keys %classified_non_public_perl_contract;
+} sort keys %classified_non_generic_perl_contract;
 my @public_perl_contract = grep {
- !$classified_non_public_perl_contract{$_}
+ !$classified_non_generic_perl_contract{$_}
 } sort keys %perl_current_contract;
 my @missing_public_perl_contract = grep { !$seen{$_} } @public_perl_contract;
 my @complete_mark_missing_from_perl = grep {
@@ -276,7 +276,9 @@ for my $name (@dart) {
 my %neutral_perl_contract_call;
 while ($corpus_source =~ /\b([A-Za-z_]\w*)\s*\(/g) {
  my $name = $1;
- $neutral_perl_contract_call{$name} = 1 if $perl_current_contract{$name};
+ $neutral_perl_contract_call{$name} = 1
+  if $perl_current_contract{$name}
+   && !$classified_non_generic_perl_contract{$name};
 }
 my @missing_reference_contract = grep { !$seen{$_} } sort keys %neutral_perl_contract_call;
 
@@ -293,10 +295,10 @@ if ($report_only) {
  printf "  independently derived public Perl contracts missing from backend inventories: %d/%d%s\n",
   scalar(@missing_public_perl_contract), scalar(@public_perl_contract),
   @missing_public_perl_contract ? ' (' . join(', ', @missing_public_perl_contract) . ')' : '';
- printf "  classified non-public Perl names admitted by backend inventories: %d%s\n",
-  scalar(@classified_name_admitted),
-  @classified_name_admitted ? ' (' . join(', ', @classified_name_admitted) . ')' : '';
- printf "  neutral Perl contract calls missing from backend inventories: %d%s\n",
+ printf "  classified non-generic Perl names admitted by backend inventories: %d%s\n",
+  scalar(@classified_non_generic_admitted),
+  @classified_non_generic_admitted ? ' (' . join(', ', @classified_non_generic_admitted) . ')' : '';
+ printf "  ordinary generic neutral Perl contract calls missing from backend inventories: %d%s\n",
   scalar(@missing_reference_contract),
   @missing_reference_contract ? ' (' . join(', ', @missing_reference_contract) . ')' : '';
  exit 0;
@@ -306,16 +308,16 @@ fail('complete named-mark calls missing from backend inventories: ' . join(', ',
  if @missing_complete_mark;
 fail('complete named-mark calls missing from Perl current contracts: ' .
  join(', ', @complete_mark_missing_from_perl)) if @complete_mark_missing_from_perl;
-fail('classified non-public names missing from Perl current contracts: ' .
- join(', ', @classified_name_missing_from_perl)) if @classified_name_missing_from_perl;
-fail('classified non-public Perl names admitted by backend inventories: ' .
- join(', ', @classified_name_admitted)) if @classified_name_admitted;
+fail('classified non-generic names missing from Perl current contracts: ' .
+ join(', ', @classified_non_generic_missing_from_perl)) if @classified_non_generic_missing_from_perl;
+fail('classified non-generic Perl names admitted by backend inventories: ' .
+ join(', ', @classified_non_generic_admitted)) if @classified_non_generic_admitted;
 fail('independently derived public Perl contracts missing from backend inventories: ' .
  join(', ', @missing_public_perl_contract)) if @missing_public_perl_contract;
 fail('current call names missing from the mdBook: ' . join(', ', @missing_book)) if @missing_book;
 fail('current call names missing from governed fixture sources: ' .
  join(', ', @missing_governed_fixture)) if @missing_governed_fixture;
-fail('neutral current Perl contract calls missing from Dart/Julia inventories: ' .
+fail('ordinary generic neutral Perl contract calls missing from Dart/Julia inventories: ' .
  join(', ', @missing_reference_contract)) if @missing_reference_contract;
 
 printf "language-capability-coverage: OK (%d current call names; %d corpus + 1 exact named-mark fixture; %d public Perl contracts independently covered)\n",

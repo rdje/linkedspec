@@ -15,6 +15,7 @@ date: 2026-07-09
 status: current
 tags: [staged-parsing, parser-registry, parse-jobs, user-functions, rust, perl, dart, julia, lua]
 evidence: "STAGED-LINKED-PARSING.5.5 adds Perl/Rust dispatch; DART-BACKEND-PARITY.5.1 adds Dart dispatch; JULIA-BACKEND-PARITY.5.1 adds Julia dispatch; LUA-BACKEND-PARITY.5.1.1 adds Lua dispatch. Evidence lives in the five staged registry owners and their focused tests."
+evidence_update_2026_08_28_general_v2_separation: "FUTURE-PARITY-BACKLOG.14.7.2-.9 add a separate general-v2 dedicated marker, caller-frozen scheduler, six-runtime recurrence, and exact public assignment authoring without widening or replacing this function-body-v1 registry path."
 reverify: "rg -n 'StagedParserRegistry|staged_parser_registry|builtin:actionir-body.spec|staged_parser_cache_key|body_ast|dispatchFunctionBodyParseJobs|executeStagedParseJobs|dispatch_function_body_parse_jobs|execute_staged_parse_jobs' perl/LinkedSpec/StagedParserRegistry.pm rust/linkedspec-runtime/src/staged_parser_registry.rs dart/lib/src/parser/staged_parser_registry.dart julia/src/parser/StagedParserRegistry.jl lua/src/linkedspec/staged_parser_registry.lua t/phase0_regression.t rust/linkedspec-runtime/tests/integration_test.rs dart/test/staged_parser_registry_test.dart julia/test/runtests.jl lua/test/run.lua"
 ---
 
@@ -47,9 +48,10 @@ Julia exposes the snake-case equivalents from
 `lua/src/linkedspec/staged_parser_registry.lua`, adds duplicate-job rejection,
 and preserves source `SpecFile` and staged-result isolation during stitching.
 
-This does not implement the full future surface. Public `parse_job(...)` authoring,
-filesystem/import/provider search roots, multiple next-stage parser families, recursive
-staged queues, and cycle diagnostics remain future leaves. Dart user-function runtime
+This narrow v1 adapter does not itself implement the general surface. A separate general-v2 path now provides
+exact public assignment-form `parse_job(...)` authoring, already-compiled registry selection, recursive staged
+queues, and cycle diagnostics. Filesystem/URI loading, provider queries, callbacks, compilation, and registry
+mutation remain deliberately denied. Dart user-function runtime
 execution has since landed under `DART-BACKEND-PARITY.5.2`; Lua fixed-v1 runtime execution lands under
 `LUA-BACKEND-PARITY.5.1.2`, variadic/contextual runtime follows through `.5.1.4.2`, and no-drift `.5.1.5` closes
 the Lua staged-function parent.

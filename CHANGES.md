@@ -10,6 +10,39 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-28 — FUTURE-PARITY-BACKLOG.14.7.9 — admit portable parse_job authoring
+
+- Made only exact scalar assignment-form `target = parse_job(source_bound_text, hash(literal options))` public
+  through the already-admitted dedicated `STAGED_PARSE_JOB_MARKER` / `staged_parse_job_v2` carrier and
+  caller-frozen already-compiled authority.
+- Declared the dedicated extension in `specs/spec.spec` while keeping `parse_job` outside the 250-name ordinary
+  generic-helper inventory. Residual, nested, dynamic, callback, path/URI, provider, compilation, and registry-
+  mutation interpretations remain fail-closed.
+- Mirrored that comment-only declaration into the four existing exact canonical `spec_spec_*` corpus copies after
+  canonical CI correctly rejected the first stale hash; corpus behavior and every other fixture byte remain
+  unchanged.
+- Added executable public governance over six documents, 17 stale-claim denials, ten unrelated outward paths, all
+  37 portable diagnostic codes, and 129 reason-checked mutations; neutral governance remains 123 mutations and
+  staged rollout becomes 9/9.
+- Corrected the language inventory's raw-corpus reverse scan after canonical CI proved that the four required
+  comment mirrors made it misread `parse_job(` as an ordinary helper call. Explicitly classified dedicated,
+  internal, legacy, and compatibility forms are now excluded from that ordinary-generic reverse inventory, and
+  the staged mutation oracle independently deletes the exclusion guard.
+- Renamed the capability to current `language.staged_ast_enrichment`, retained 17 rows / 85 pass states, and
+  removed the satisfied `future.general_parse_job_authoring` exclusion. Only the legacy Perl plugin exclusion
+  remains; capability governance is 19 mutations plus six public mutations.
+- Advanced typed projection governance from 187 to 189 mutations while preserving 13 complete / one pending;
+  `.14.8` still owns the single combined typed public-no-drift row.
+- Updated the five staged consumers only in aggregate status/rollout/availability snapshots. Every behavioral
+  assertion and parser/compiler/runtime/carrier byte, function-body v1, generated format, unrelated facade/schema/
+  semantic/MCP/CLI/root-README surface, dependency/toolchain, and storage/doctrine owner remains unchanged.
+- Added [[portable-parse-job-public-authoring]] and synchronized ADR `0088`, Knowledge, roadmaps, architecture,
+  Toolbox, capability guidance, bounded continuity, task/index, memory, and the sole-facing mdBook with syntax,
+  options, policies, diagnostics, and authority examples.
+- Focused proof passes the exact six-runtime driver: Perl 143, Rust 1 in 339.15 seconds, Dart 19, Julia 491, and
+  Lua 890 per ABI; typed 13/1/189, progressive 9/9/116 plus public 60, recognition 138/250/58, semantic 6/20/128,
+  generated/capability 85/0/0, language coverage, routing, README/memory, Knowledge 909/7,733, and mdBook pass.
+
 ## 2026-08-28 — FUTURE-PARITY-BACKLOG.14.7.8 — bind staged enrichment recurring proof
 
 - Added `tools/check_staged_ast_enrichment_six_runtime.sh`, one repository-routed fail-fast composition of the

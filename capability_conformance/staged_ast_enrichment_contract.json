@@ -2,7 +2,7 @@
   "format": 1,
   "contract_id": "linkedspec-staged-ast-enrichment-v1",
   "task_owner": "FUTURE-PARITY-BACKLOG.14.7.2",
-  "status": "all_private_backends_complete_recurring_current_public_pending",
+  "status": "all_backends_complete_recurring_and_public_current",
   "expected_counts": {
     "registry_entries": 4,
     "sources": 2,
@@ -47,7 +47,7 @@
       "into",
       "required_capabilities"
     ],
-    "availability": "private Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT staged-AST carriers plus exact six-runtime recurrence admitted; public authoring remains pending under FUTURE-PARITY-BACKLOG.14.7.9-.10"
+    "availability": "portable exact-assignment parse_job authoring is current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT through the dedicated staged marker and caller-frozen already-compiled authority"
   },
   "policy": {
     "authority": "the caller freezes aliases, declaring-spec-relative candidates, ordered search-root candidates, ordered provider candidates, resolves every statically declared selector, and freezes immutable already-compiled registry entries before authored execution",
@@ -848,13 +848,13 @@
     "rollout_assertions": {
       "row_count": 9,
       "recurring": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.7.8"},
-      "public_no_drift": {"status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.7.9"}
+      "public_no_drift": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.7.9"}
     },
     "capability_projection": {
       "manifest": "capability_conformance/manifest.json",
-      "capability_id": "language.private_staged_ast_enrichment",
+      "capability_id": "language.staged_ast_enrichment",
       "backend_status": "pass",
-      "retained_public_exclusion": "future.general_parse_job_authoring"
+      "public_authoring_status": "current"
     }
   },
   "outward_guard": {
@@ -875,7 +875,7 @@
       "STAGED_PARSE_JOB_MARKER",
       "linkedspec-staged-ast-enrichment-v1"
     ],
-    "status": "no_public_or_outward_admission",
+    "status": "no_unrelated_outward_admission",
     "owner": "FUTURE-PARITY-BACKLOG.14.7.9"
   },
   "diagnostics": [
@@ -926,7 +926,7 @@
     {"order": 6, "leg": "puc_lua", "owner": "FUTURE-PARITY-BACKLOG.14.7.7", "status": "complete", "paths": ["lua/test/staged_ast_enrichment_contract_test.lua"]},
     {"order": 7, "leg": "luajit", "owner": "FUTURE-PARITY-BACKLOG.14.7.7", "status": "complete", "paths": ["lua/test/staged_ast_enrichment_contract_test.lua"]},
     {"order": 8, "leg": "recurring", "owner": "FUTURE-PARITY-BACKLOG.14.7.8", "status": "complete", "paths": ["tools/check_staged_ast_enrichment_six_runtime.sh"]},
-    {"order": 9, "leg": "public_no_drift", "owner": "FUTURE-PARITY-BACKLOG.14.7.9", "status": "pending", "paths": ["docs/linkedspec-book/src/dsl/staged-ast-enrichment.md", "docs/linkedspec-book/src/appendix/backend-handoff.md", "docs/linkedspec-book/src/overview/project-status.md", "capability_conformance/README.md", "TOOLBOX.md", "ROADMAP.md"]}
+    {"order": 9, "leg": "public_no_drift", "owner": "FUTURE-PARITY-BACKLOG.14.7.9", "status": "complete", "paths": ["docs/linkedspec-book/src/compiler/staged-ast-enrichment.md", "docs/linkedspec-book/src/appendix/backend-handoff.md", "docs/linkedspec-book/src/overview/project-status.md", "capability_conformance/README.md", "TOOLBOX.md", "ROADMAP.md"]}
   ],
   "canonical_execution": {
     "contract_path": "capability_conformance/staged_ast_enrichment_contract.json",

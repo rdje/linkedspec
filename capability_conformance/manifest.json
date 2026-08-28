@@ -97,9 +97,9 @@
       }
     },
     {
-      "id": "language.private_staged_ast_enrichment",
+      "id": "language.staged_ast_enrichment",
       "category": "language-runtime",
-      "contract": "Caller-authorized private parse-job carriers use frozen pre-resolved authority, deterministic breadth-first recursive queues, fresh child contexts, bounded diagnostics, and atomic stitching across five backend sources and six runtime routes; public parse_job authoring remains excluded.",
+      "contract": "Caller-authorized staged parse-job carriers use frozen pre-resolved authority, deterministic breadth-first recursive queues, fresh child contexts, bounded diagnostics, and atomic stitching across five backend sources and six runtime routes; exact public assignment-form parse_job authoring is current without an outward facade or ambient loading authority.",
       "sources": ["docs/decisions/0088-pre-resolved-breadth-first-staged-ast-enrichment.md", "capability_conformance/staged_ast_enrichment_contract.json"],
       "backends": {
         "perl": {"status": "pass", "references": ["perl/LinkedSpec/StagedASTEnrichment.pm", "perl/LinkedSpec/StagedASTEnrichmentRuntime.pm", "t/staged_ast_enrichment_perl_contract.t"]},
@@ -233,13 +233,6 @@
       "reason": "Deprecated Perl-only compatibility surface, explicitly outside the backend-neutral product contract.",
       "owner": "FUTURE-PARITY-BACKLOG.6",
       "disposition": "legacy",
-      "retention_authority": null
-    },
-    {
-      "id": "future.general_parse_job_authoring",
-      "reason": "General provider search and recursive staged queues are a future language/API extension.",
-      "owner": "FUTURE-PARITY-BACKLOG.14",
-      "disposition": "future",
       "retention_authority": null
     }
   ]

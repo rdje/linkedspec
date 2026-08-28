@@ -1,13 +1,13 @@
 # ADR 0088: General staged-AST enrichment uses pre-resolved immutable authority and breadth-first typed jobs
 
 - Date: 2026-08-25
-- Status: accepted architecture; executable neutral authority complete under `FUTURE-PARITY-BACKLOG.14.7.2`;
-  all five private backends/six runtime routes independently recomposed; recurrence, public authoring, and final recomposition pending
+- Status: accepted and current; executable neutral authority, five backend sources/six runtime routes, recurrence,
+  and exact public assignment authoring complete; final independent recomposition pending `.14.7.10`
 - Tags: architecture, staged-parsing, parse-job, source-location, registry, queue, policies, diagnostics, portability
 
 ## Context
 
-ADRs `0012`, `0014`, `0015`, and `0016` accept language-neutral staged parsing, the future
+ADRs `0012`, `0014`, `0015`, and `0016` originally accepted language-neutral staged parsing, the then-future
 `parse_job(text_expr, options)` marker/sidecar, deterministic registry dispatch, and portable artifacts. ADR `0056`
 later makes source identity, Unicode-scalar direct spans, and ordered derived provenance mandatory. ADR `0080`
 proves that parser composition must use caller-pre-registered already-compiled authority rather than turning an
@@ -23,7 +23,8 @@ stitch, recursion, carrier, or diagnostic behavior independently.
 
 ### 1. `parse_job(...)` constructs an inert neutral marker and sidecar
 
-The future authored form is `parse_job(text_expr, hash(...))`. It lowers to dedicated neutral marker kind
+The current authored form is exact scalar assignment `target = parse_job(source_bound_text, hash(literal options))`.
+It lowers to dedicated neutral marker kind
 `STAGED_PARSE_JOB_MARKER` and scheduler-owned sidecar kind `staged_parse_job_v2`, with effect
 `staged_parse_job_declaration`. It does not resolve, load, compile, or execute a parser during stage-N authored
 execution. The scheduler begins only after the complete stage-N AST returns.
@@ -123,16 +124,16 @@ cancellation/deadline/budget state, mutable queues, or host handles.
 ### 8. One executable neutral artifact governs rollout and ownership
 
 `capability_conformance/staged_ast_enrichment_contract.json` and independent checker
-`tools/check_staged_ast_enrichment_contract.py` govern the selected v1 contract. The current neutral boundary is
+`tools/check_staged_ast_enrichment_contract.py` govern the selected general-v2 contract. The current neutral boundary is
 4 registry entries; 2 sources; 8 provenance, 3 deterministic-id, 8 resolution, 6 authority, 10 cache, 4 queue,
 3 isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases; 37 diagnostics; 5 backend
 consumers over 6 runtime routes; 4 carrier requirements; 10 outward guards; 9 rollout legs; 35 exact owners; and
-106 reason-checked mutations after shared Lua admission.
+123 reason-checked neutral mutations after six-runtime recurrence, plus 128 reason-checked public mutations.
 
-Neutral, Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT rollout are complete. Six-runtime recurrence and public
-authoring/no-drift remain pending under `.14.7.8-.9`; `.14.7.10` owns final independent recomposition. The checker
-is an always-on canonical-CI input. It guards ten facades/schema/semantic/MCP/CLI/README paths against premature
-public exposure, requires the Perl, Rust, Dart, and Julia consumers exactly once in ordinary and canonical
+Neutral, Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurrence, and staged public no-drift rollout are complete.
+Exact assignment-form public authoring is current; `.14.7.10` owns final independent recomposition. The checker
+is an always-on canonical-CI input. It guards ten facades/schema/semantic/MCP/CLI/README paths against unrelated
+exposure, requires the Perl, Rust, Dart, and Julia consumers exactly once in ordinary and canonical
 discovery, rejects the former Dart dormant path, and requires the one stable Lua consumer exactly once per ABI in
 ordinary and canonical proof while denying inline-suite duplication.
 
@@ -553,6 +554,24 @@ equality, fresh authority, detached results, and generated/emitted authority abs
 test, fixture, executable-contract/checker, ordinary/canonical route, generated-format, public/outward,
 dependency/toolchain/storage/doctrine, or other-backend behavior movement. Parent `.14.7.7` closes unchanged;
 five-source/six-runtime recurrence `.14.7.8` is next.
+
+## Public authoring closeout (2026-08-28)
+
+`FUTURE-PARITY-BACKLOG.14.7.8` adds one exact repository-routed recurring driver over the neutral checker, Perl,
+Rust, Dart, Julia, PUC Lua, LuaJIT, typed source, generated source, capability, and language ledgers. It changes
+only aggregate governance snapshots in the five consumer sources, advances rollout row eight, and raises neutral
+governance from 106 to 123 mutations without changing behavioral assertions or runtime bytes.
+
+`FUTURE-PARITY-BACKLOG.14.7.9` makes only the already-admitted scalar assignment
+`target = parse_job(source_bound_text, hash(literal options))` public. `specs/spec.spec` declares the dedicated
+extension; `parse_job` remains outside the 250-name ordinary generic helper inventory. Static literal options,
+direct or ordered-derived source-bound text, all four result policies, all three failure policies, and all 37
+diagnostic codes are documented. Residual, nested, dynamic, callback, filesystem/URI, provider, compilation, and
+registry-mutation interpretations fail closed. Six governed documents, 17 stale-claim denials, ten outward paths,
+and 129 public mutations lock that boundary. The satisfied `future.general_parse_job_authoring` exclusion is
+removed, leaving 17 capability rows at 85/0/0 and one legacy exclusion. Typed projection governance is 13/1/189;
+the sole combined typed public-no-drift row remains owned by `.14.8`. Function-body v1, generated formats, and
+unrelated facade/descriptor/schema/semantic/MCP/CLI/root-README surfaces do not move.
 
 ## Links
 

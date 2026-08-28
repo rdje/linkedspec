@@ -13,7 +13,7 @@ answers:
   - "is the Rust staged AST consumer in canonical CI"
   - "what follows FUTURE-PARITY-BACKLOG 14.7.4.4"
 date: 2026-08-26
-status: current private Rust carrier admission; all private backends independently recomposed; recurrence and public authoring pending
+status: current Rust carrier admission with six-runtime recurrence and exact public assignment authoring
 tags: [rust, staged-parsing, carriers, generated-source, invocation-authority, admission, ci, private]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.4.4 adds opaque host-only StagedAstEnrichmentSeed to ExecutionOptions. Every native or generated top-level execution starts a new FrozenStagedRegistry with an empty PlanCache and a new StagedRecursiveAuthority before parent parsing, then calls enrich_recursively only after the complete parent value returns and after checking live recognition-transaction state. Native, serialized/reconstructed, validated generated-plan, and independently compiled emitted-source routes each execute twice through one seed; every run reports one miss/zero hits, one callback, fresh cancellation/clock checks, equal detached AST/sidecars/diagnostics/cache/resources, and no cross-result mutation. Compiled JSON, generated plans, and emitted source contain no callback, compiled parser, registry/source authority, cancellation/deadline/budget state, mutable queue/cache, path, or host handle. The outer cfg, manifest check-cfg, cfg-only exports, and dead-code allowance are removed after the first production caller. The exact ordinary consumer is GREEN and registered once in canonical CI; neutral governance advances only Rust to complete and 84 mutations. Function-body v1, generated-source v2, public/outward surfaces, later backends, recurrence, and combined no-drift remain unchanged or pending."
 evidence_update_2026_08_27_dart_admission: "FUTURE-PARITY-BACKLOG.14.7.5.4 admits Dart's equivalent fresh four-route seed and advances the neutral oracle to 90 mutations with Perl, Rust, and Dart complete. The Rust path remains unchanged; Julia .14.7.6.0 is next."
@@ -26,6 +26,7 @@ evidence_update_2026_08_27_lua_dormant_red: "FUTURE-PARITY-BACKLOG.14.7.7.0 pres
 evidence_update_2026_08_27_lua_marker_provenance: "FUTURE-PARITY-BACKLOG.14.7.7.1 preserves Rust behavior while implementing Lua's exclusive inert marker and private-native-range-backed typed direct/ordered-derived provenance. The synchronized Rust projection remains 1/1 against unchanged 98-mutation governance; Lua .14.7.7.2 is next."
 evidence_update_2026_08_27_lua_admission: "FUTURE-PARITY-BACKLOG.14.7.7.4 preserves Rust behavior while promoting the shared Lua lifecycle and two rollout rows. The synchronized Rust projection remains 1/1 against the all-private-complete 106-mutation neutral contract."
 evidence_update_2026_08_28_lua_recomposition: "FUTURE-PARITY-BACKLOG.14.7.7.5 reruns Rust 1/1 unchanged, including the independently compiled emitted carrier in 268.47 seconds, while recomposing the committed shared Lua 888/888 dual-ABI carriers and 106-mutation governance. All private backend routes are independently recomposed; recurrence .14.7.8 is next."
+evidence_update_2026_08_28_recurring_and_public: "FUTURE-PARITY-BACKLOG.14.7.8 composes the unchanged Rust carrier in six-runtime recurrence; .14.7.9 admits exact assignment-form parse_job publicly through that dedicated carrier/frozen authority and changes only aggregate governance snapshots in this consumer."
 root_cause: "Rust had complete dormant marker, frozen-registry, one-depth, and recursive authority, but no top-level host seam could inject nonserializable authority or run it after a completed parent parse. Consequently the module required a temporary dead-code allowance and the final consumer could not enter ordinary or canonical discovery."
 reverify:
   - "bash tools/run_cargo_local.sh test --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test staged_ast_enrichment_contract"
@@ -56,9 +57,9 @@ The admitted consumer executes every route twice through one seed. Each result s
 one miss, proving that cache state was not reused. Callback, cancellation, and clock counters prove a new recursive
 run each time. All four routes return equal detached records, and mutating one returned AST cannot affect another.
 
-This is private backend behavior, not public `parse_job(...)` authoring. Rust rollout is complete. Dart, Julia,
-PUC Lua, and LuaJIT have since reached the same private admission boundary, and all committed routes independently
-recompose unchanged. Six-runtime recurrence, public authoring, and combined no-drift retain their existing owners.
+Rust rollout and six-runtime recurrence are complete. Exact scalar assignment-form `parse_job(...)` authoring is
+public through this unchanged backend behavior; unrelated outward surfaces and host authority remain denied.
+Combined typed public no-drift retains `.14.8`.
 
 Related: [[rust-staged-ast-enrichment-recursive-authority]],
 [[rust-staged-ast-enrichment-current-depth-authority]], [[rust-staged-ast-enrichment-marker-provenance]],

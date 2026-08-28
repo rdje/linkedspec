@@ -430,7 +430,7 @@ end
         @test contract["contract_id"] == JULIA_STAGED_ENRICHMENT_CONTRACT_ID
         @test contract["format"] == 1
         @test contract["status"] ==
-              "all_private_backends_complete_recurring_current_public_pending"
+              "all_backends_complete_recurring_and_public_current"
         @test contract["expected_counts"] == Dict{String,Any}(
             "registry_entries" => 4,
             "sources" => 2,
@@ -571,12 +571,12 @@ end
             "complete",
             "complete",
             "complete",
-            "pending",
+            "complete",
         ]
         @test contract["authored_surface"]["availability"] ==
-              "private Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT staged-AST carriers plus " *
-              "exact six-runtime recurrence admitted; public authoring remains pending under " *
-              "FUTURE-PARITY-BACKLOG.14.7.9-.10"
+              "portable exact-assignment parse_job authoring is current on Perl, Rust, Dart, " *
+              "Julia, PUC Lua, and LuaJIT through the dedicated staged marker and " *
+              "caller-frozen already-compiled authority"
         @test contract["compatibility_v1"] == Dict{String,Any}(
             "status" => "current_unchanged",
             "record_version" => 1,

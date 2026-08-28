@@ -9,6 +9,35 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-28 (`FUTURE-PARITY-BACKLOG.14.7.9` — portable staged authoring): public admission does not add a new
+  runtime path. All six routes already implemented the exact dedicated assignment annotation; the slice makes
+  that boundary explicit, executable, documented, and mutation-closed.
+- The public grammar is one complete scalar assignment. Source text is direct `entry_text()` / `match_text()` or
+  a literal-index group, or a nonempty `cat(...)` over those forms. Options are statically validated literals.
+- The authority boundary is unchanged: authored syntax constructs an inert marker and sidecar; only after the
+  parent AST returns may the scheduler select from the caller's immutable already-compiled snapshot. Parser text
+  or identity never grants path, URI, provider, callback, compilation, registry mutation, or ambient authority.
+- Public governance is deliberately separate from the 123 neutral mutations: six documents, 17 forbidden stale
+  claims, ten outward paths, all 37 diagnostic codes, and 129 reason-checked mutations can fail independently.
+- `parse_job` remains outside the 250-name ordinary generic helper inventory. This prevents a generic-call parser
+  or helper registry from accidentally becoming public authority for residual, nested, dynamic, or callback use.
+- Canonical CI exposed an implicit self-hosted lockstep owner: four `spec_spec_*` inputs are byte-for-byte
+  `specs/spec.spec`, and the Unicode rule-label contract pins that equality. The required declaration therefore
+  moves as an identical comment snapshot in all five paths; this is fixture governance, not fixture behavior.
+- The corrected canonical retry then exposed a raw-text coverage false positive: the ordinary-helper reverse scan
+  saw `parse_job(` inside those comments despite the same checker classifying `parse_job` as a dedicated form.
+  The scan now subtracts the exact classified non-generic set, and mutation 129 removes that guard to lock the fix.
+- Capability exclusion freshness closes in the same slice: `future.general_parse_job_authoring` is removed when
+  satisfied, leaving one legacy exclusion and 17 capability rows / 85 pass states under 19 current mutations.
+- Typed source gains only two current-public projection guards, moving 13/1/187 to 13/1/189. The one pending row
+  is still the combined `recurring_public_no_drift` owner under `.14.8`, so staged public closeout does not consume
+  program-wide closure early.
+- Snapshot-only consumer edits are required current projections, not behavior changes: status, rollout row nine,
+  and applicable authored-availability strings move; assertions, production/runtime carriers, fixtures, formats,
+  v1 behavior, and unrelated outward surfaces do not.
+- [[portable-parse-job-public-authoring]] is the retrieval point. Exact focused proof passes all six staged routes
+  and every direct-dependent contract; this public boundary still requires staged receipt-bound canonical CI
+  before its atomic commit and handoff to `.14.7.10`.
 - 2026-08-28 (`FUTURE-PARITY-BACKLOG.14.7.8` — staged enrichment recurring proof): exact clean activation is
   shared-Lua recomposition commit `84396911`; scope owns only recurring proof topology, neutral/typed/capability
   governance, aggregate consumer snapshots, and synchronized current projections.

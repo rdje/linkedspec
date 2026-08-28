@@ -25,7 +25,8 @@ evidence_update_2026_08_12_runtime_observation_admissions: "Perl .14.4.2, Rust .
 evidence_update_2026_08_12_all_runtime_observation_admissions: "Julia .14.4.5 and shared Lua .14.4.6 add their exact recursive-observation consumers to the established backend groups and commands. The shared Lua source executes once per ABI, preserving the five-group/six-route topology. Two omission regressions advance current truth to 8 complete / 6 pending / 75 while recurrence and the combined .14.8 owner remain unchanged."
 evidence_update_2026_08_12_observation_recurrence: "FUTURE-PARITY-BACKLOG.14.4.7 adds a dedicated observation-only five-source/six-route driver and canonical opt-in without replacing this broader typed-source driver. Eleven topology/storage regressions plus one recurrence regression advance current truth to 9 complete / 5 pending / 87 and promote only recursive_observation. The combined recurring_public_no_drift row remains pending for final .14.8."
 evidence_update_2026_08_25_progressive_recurrence: "FUTURE-PARITY-BACKLOG.14.6.7 adds a dedicated progressive-only five-source/six-route driver and explicit canonical opt-in without replacing the broader typed-source or observation drivers. Twelve topology/storage/rollout regressions bind neutral plus Perl, cfg-enabled Rust, Dart, Julia, PUC Lua, and LuaJIT followed by typed/generated/capability/language ledgers. Two additional stale-guide denials lock the current projection. Only progressive_span_dispatch moves, making typed truth 12/2/170; the combined recurring_public_no_drift row stays pending for .14.8."
-last_verified: 2026-08-25
+evidence_update_2026_08_28_staged_recurrence: "FUTURE-PARITY-BACKLOG.14.7.8 binds staged-AST recurrence and advances only staged_span_dispatch, making typed truth 13/1/187. FUTURE-PARITY-BACKLOG.14.7.9 adds two public-authoring projection mutations, making it 13/1/189 while leaving the sole recurring_public_no_drift row pending for .14.8."
+last_verified: 2026-08-28
 reverify:
   - "bash tools/check_typed_source_location_six_runtime.sh"
   - "bash tools/check_progressive_span_dispatch_six_runtime.sh"
@@ -56,8 +57,9 @@ routes, command drift, incorrect source binding, missing support checks, driver 
 completion of the combined final row. That original recurring proof advanced governance from 42 to 53 without
 promoting a row. Later lineage, observation, public closeout, gap, and transaction composition reached 11/3/152.
 Progressive recurrence first brought the executable typed ledger to 12 complete / 2 pending and 170 mutations.
-The staged-AST recurrence now advances only `staged_span_dispatch`, so current typed truth is 13 complete / 1
-pending with 187 mutations while `FUTURE-PARITY-BACKLOG.14.8` still owns final public no-drift.
+The staged-AST recurrence advances only `staged_span_dispatch`; public authoring then adds two projection guards.
+Current typed truth is 13 complete / 1 pending with 189 mutations while `FUTURE-PARITY-BACKLOG.14.8` still owns
+final combined public no-drift.
 
 Related: [[recursive-observation-recurring-gate]], [[staged-ast-enrichment-recurring-gate]], [[typed-source-location-runtime-rollout-plan]],
 [[typed-source-location-neutral-contract-plan]], and [[rule-local-cursor-five-backend-admission]].

@@ -74,17 +74,11 @@ my @expected_exclusions = (
   disposition         => 'legacy',
   retention_authority => undef,
  },
- {
-  id                  => 'future.general_parse_job_authoring',
-  reason              => 'General provider search and recursive staged queues are a future language/API extension.',
-  owner               => 'FUTURE-PARITY-BACKLOG.14',
-  disposition         => 'future',
-  retention_authority => undef,
- },
 );
 my %satisfied_exclusion_ids = map { $_ => 1 } qw(
  future.semantic_introspection_mcp
  future.rule_local_cursor_and_bare_edges
+ future.general_parse_job_authoring
 );
 my %task_status_values = map { $_ => 1 } qw(
  proposed active pending in_progress blocked done deferred superseded
@@ -98,7 +92,7 @@ my @expected_public_projections = (
  {
   path => 'capability_conformance/README.md',
   required_markers => [
-   "The manifest's exclusion ledger is schema v2 and currently contains exactly two ordered records.",
+   "The manifest's exclusion ledger is schema v2 and currently contains exactly one governed record.",
    $public_close_marker,
   ],
  },
@@ -117,13 +111,13 @@ my @expected_public_projections = (
  {
   path => 'docs/linkedspec-book/src/development/local-ci-and-regression.md',
   required_markers => [
-   'The separate exclusion ledger is now schema v2 with exactly two ordered records:',
+   'The separate exclusion ledger is now schema v2 with exactly one governed record:',
    $public_close_marker,
   ],
  },
  {
   path => 'docs/linkedspec-book/src/overview/project-status.md',
-  required_markers => ['schema v2 with exactly two status-fresh records:', $public_close_marker],
+  required_markers => ['schema v2 with exactly one status-fresh record:', $public_close_marker],
  },
  {
   path => 'docs/decisions/0067-live-achievement-status-history.md',
@@ -373,7 +367,7 @@ sub validate_manifest {
   }
  }
 
- fail('manifest.excluded_or_future must contain exactly the two governed records')
+ fail('manifest.excluded_or_future must contain exactly the one governed record')
   unless @{$manifest->{excluded_or_future}} == @expected_exclusions;
  for my $index (0 .. $#expected_exclusions) {
   my $actual = $manifest->{excluded_or_future}[$index];
@@ -431,19 +425,11 @@ sub governance_mutation_checks {
  $add_manifest_mutation->('missing_disposition', sub { delete $_[0]{excluded_or_future}[0]{disposition} });
  $add_manifest_mutation->('unknown_disposition', sub { $_[0]{excluded_or_future}[0]{disposition} = 'parked' });
  $add_manifest_mutation->('legacy_id_future_disposition', sub { $_[0]{excluded_or_future}[0]{disposition} = 'future' });
- $add_manifest_mutation->('future_id_legacy_disposition', sub { $_[0]{excluded_or_future}[1]{disposition} = 'legacy' });
- $add_manifest_mutation->('future_retention_authority', sub {
-  $_[0]{excluded_or_future}[1]{retention_authority} = 'docs/decisions/0056-typed-source-location-and-cursor-algebra.md';
- });
  $add_manifest_mutation->('open_legacy_retention_authority', sub {
   $_[0]{excluded_or_future}[0]{retention_authority} = 'docs/knowledge/pplugin-pluginbridge-transition-machinery.md';
  });
  $add_manifest_mutation->('completed_legacy_without_retention', sub {
   $_[0]{excluded_or_future}[0]{owner} = 'FUTURE-PARITY-BACKLOG.1.6';
- });
- $add_manifest_mutation->('completed_future_even_with_retention', sub {
-  $_[0]{excluded_or_future}[1]{owner} = 'FUTURE-PARITY-BACKLOG.1.6';
-  $_[0]{excluded_or_future}[1]{retention_authority} = 'docs/decisions/0056-typed-source-location-and-cursor-algebra.md';
  });
  $add_manifest_mutation->('missing_owner_task', sub {
   $_[0]{excluded_or_future}[0]{owner} = 'FUTURE-PARITY-BACKLOG.missing';
@@ -481,14 +467,9 @@ sub governance_mutation_checks {
  $add_manifest_mutation->('duplicated_exclusion', sub {
   push @{$_[0]{excluded_or_future}}, clone_value($_[0]{excluded_or_future}[0]);
  });
- $add_manifest_mutation->('reordered_exclusions', sub {
-  $_[0]{excluded_or_future} = [reverse @{$_[0]{excluded_or_future}}];
- });
  $add_manifest_mutation->('legacy_reason_drift', sub { $_[0]{excluded_or_future}[0]{reason} .= ' drift' });
- $add_manifest_mutation->('future_reason_drift', sub { $_[0]{excluded_or_future}[1]{reason} .= ' drift' });
  $add_manifest_mutation->('legacy_owner_drift', sub { $_[0]{excluded_or_future}[0]{owner} = 'FUTURE-PARITY-BACKLOG.14' });
- $add_manifest_mutation->('future_owner_drift', sub { $_[0]{excluded_or_future}[1]{owner} = 'FUTURE-PARITY-BACKLOG.6' });
- for my $id (qw(future.semantic_introspection_mcp future.rule_local_cursor_and_bare_edges)) {
+ for my $id (qw(future.semantic_introspection_mcp future.rule_local_cursor_and_bare_edges future.general_parse_job_authoring)) {
   $add_manifest_mutation->("satisfied_${id}_resurrection", sub {
    push @{$_[0]{excluded_or_future}}, {
     id                  => $id,
@@ -531,7 +512,7 @@ sub public_projection_mutation_checks {
  push @mutations, ['rendered_book_marker_drift', sub {
   my $candidate_sources = clone_value($sources);
   my $path = 'docs/linkedspec-book/src/overview/project-status.md';
-  my $marker = 'schema v2 with exactly two status-fresh records:';
+  my $marker = 'schema v2 with exactly one status-fresh record:';
   my $position = index($candidate_sources->{$path}, $marker);
   die "mutation setup could not find rendered-book marker exactly once\n"
    unless $position >= 0 && index($candidate_sources->{$path}, $marker, $position + 1) < 0;

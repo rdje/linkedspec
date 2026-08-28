@@ -17,7 +17,7 @@ answers:
   - "which staged AST backend consumers are planned"
   - "is general parse_job authoring public"
 date: 2026-08-25
-status: executable neutral with all five private backends and six runtime routes independently recomposed; recurrence and public authoring pending
+status: executable neutral, five-source/six-runtime recurrence, and exact public assignment authoring current
 tags: [staged-parsing, parse-job, source-location, registry, queue, policies, diagnostics, portability]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.2 adds capability_conformance/staged_ast_enrichment_contract.json plus tools/check_staged_ast_enrichment_contract.py and ADR 0088. The independent oracle executes 4 immutable registry entries; 2 sources; 8 provenance, 3 deterministic-id, 8 resolution, 6 authority, 10 cache, 4 breadth-first queue, 3 sibling-isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases; 37 diagnostics; five planned backend consumers over six routes; four carrier requirements; ten outward guards; nine rollout legs; 35 exact owners; and 72 reason-checked corruptions. FUTURE-PARITY-BACKLOG.14.7.3.1-.3 advance only the dormant Perl consumer through declaration/provenance, current-depth policies, breadth-first recurrence, bounded authority, and source-rebased diagnostics. It now has 141 GREEN top-level checks/one carrier-admission RED; four later consumers remain absent, only neutral rollout is complete, and outward surfaces remain absent."
 evidence_update_2026_08_26_perl_admission: "FUTURE-PARITY-BACKLOG.14.7.3.4 advances the executable boundary to neutral+Perl complete with 78 reason-checked mutations. The 143-check Perl consumer proves four fresh-authority carriers and exact ordinary/canonical admission; later consumers and outward surfaces remain absent."
@@ -42,16 +42,17 @@ evidence_update_2026_08_27_lua_current_depth_authority: "FUTURE-PARITY-BACKLOG.1
 evidence_update_2026_08_27_lua_recursive_carriers: "FUTURE-PARITY-BACKLOG.14.7.7.3 completes private Lua breadth-first recurrence, lineage/resource/source authority, and fresh host-only native/reconstructed/generated/emitted carriers. The shared stable consumer is 888/888 independently on PUC Lua and LuaJIT but remains absent from ordinary/canonical discovery; neutral lifecycle/98 mutations, rollout, formats, v1, public, and outward truth do not move."
 evidence_update_2026_08_27_lua_admission: "FUTURE-PARITY-BACKLOG.14.7.7.4 preserves all 888 behavioral assertions and production bytes while registering the shared consumer exactly once per ABI in ordinary and canonical proof. Only Lua lifecycle plus rollout rows 6/7 advance; eight topology mutations raise neutral governance to 106. Every private backend is complete, while recurring and public rows remain pending."
 evidence_update_2026_08_28_lua_recomposition: "FUTURE-PARITY-BACKLOG.14.7.7.5 independently reruns all five admitted source consumers/six runtime routes, exact topology, and every direct-dependent ledger without executable movement. Neutral governance remains 106 mutations; .14.7.7 closes and recurring proof .14.7.8 is next."
+evidence_update_2026_08_28_recurring_and_public: "FUTURE-PARITY-BACKLOG.14.7.8 binds one exact five-source/six-runtime recurring driver and advances neutral governance to 9/9 at 123 mutations. FUTURE-PARITY-BACKLOG.14.7.9 makes only target = parse_job(source_bound_text, hash(literal options)) public through the already-admitted dedicated node and caller-frozen authority, binds six current documents plus 129 public mutations, removes the satisfied future exclusion, and leaves combined typed public no-drift at 13/1/189 for .14.8."
 reverify:
   - "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py"
-  - "rg -n 'staged-AST enrichment|STAGED_PARSE_JOB_MARKER|staged_parse_job_v2|all_private_backends_complete_recurring_and_public_pending' docs/decisions/0088-pre-resolved-breadth-first-staged-ast-enrichment.md capability_conformance/staged_ast_enrichment_contract.json tools/check_staged_ast_enrichment_contract.py"
+  - "rg -n 'staged-AST enrichment|STAGED_PARSE_JOB_MARKER|staged_parse_job_v2|all_backends_complete_recurring_and_public_current' docs/decisions/0088-pre-resolved-breadth-first-staged-ast-enrichment.md capability_conformance/staged_ast_enrichment_contract.json tools/check_staged_ast_enrichment_contract.py"
   - "perl tools/read_task_tree.pl --tree FUTURE-PARITY-BACKLOG --id FUTURE-PARITY-BACKLOG.14.7.2"
 ---
 
 # General staged-AST enrichment neutral contract
 
-`parse_job(text_expr, options)` is selected as a dedicated future marker/sidecar operation, not an ordinary
-callback and not immediate parser execution. Stage-N authored code constructs `STAGED_PARSE_JOB_MARKER` plus one
+`parse_job(text_expr, options)` is a dedicated current marker/sidecar operation, not an ordinary callback and not
+immediate parser execution. Exact scalar assignment-form authored code constructs `STAGED_PARSE_JOB_MARKER` plus one
 scheduler-owned `staged_parse_job_v2` record. Scheduling starts only after the complete stage-N AST returns.
 
 The caller resolves all statically declared aliases, declaring-spec-relative identities, search roots, and
@@ -74,28 +75,14 @@ are `fail`, `keep_text`, and `diagnostic_node`. Exact tuple repeats are cycles; 
 strictly contained provenance with smaller scalar extent. Depth, calls, work, cancellation, deadline, result
 nodes, and diagnostic bytes remain shared bounded authority. Results are detached plain data.
 
-The existing v1 function-body adapter remains unchanged and explicit. Perl's exact final-path consumer is admitted.
-Its private declaration carrier creates one exclusive opaque marker/sidecar with strict literal
-options and typed direct/ordered-derived provenance. A separate private post-AST authority now consumes only a
-caller-frozen already-compiled registry, executes breadth-first complete depths with isolated sibling state, caches
-only immutable plans, enforces decreasing chains and shared limits, rebases diagnostics, and implements all four
-result plus three failure policies over detached data. A host-only runtime constructs fresh scheduler/cache
-authority for native, normalized-descriptor, generated-plan, and independently loaded emitted routes. The test is
-143/143 and appears once in phase-0/canonical CI. This is private Perl admission, not public authoring; later
-backends, recurrence, and public closeout retain their exact owners. Rust now admits the same private semantics
-through a host-only fresh-invocation seed across native, reconstructed, generated-plan, and independently compiled
-emitted routes. Each run starts an empty cache and fresh recursive authority after the parent AST; ordinary and
-canonical discovery run one GREEN consumer, and Rust rollout is complete. Dart now admits the same private
-semantics through a host-only seed across native, reconstructed, generated-plan, and independently analyzed/
-executed emitted routes. Every top-level call starts a fresh registry/cache/recursive authority after the parent
-AST, the final-path consumer passes 19/19 in ordinary and canonical discovery, and Dart rollout is complete. Julia
-now admits the same private architecture. Its opaque seed starts a fresh registry/cache/recursive authority for
-every native, reconstructed, generated-plan, or independently included emitted execution; enrichment begins only
-after the parent value, and the consumer passes 491/491 in ordinary and canonical discovery. Julia rollout is
-complete. Lua now admits the same private architecture through one shared 888/888 consumer executed exactly once
-per ABI in ordinary and canonical proof. Neutral governance is 106 mutations with all private backend lifecycle
-and rollout rows complete. Independent dual-ABI recomposition closes all committed private backend routes without
-executable movement; six-runtime recurrence and public authoring remain pending.
+The existing v1 function-body adapter remains unchanged and explicit. The separate general-v2 implementation is
+admitted on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT across native, reconstructed, generated-plan, and emitted
+carriers with fresh host-only authority. One recurring driver composes those routes after the neutral checker and
+support ledgers. Public authoring is exactly `target = parse_job(source_bound_text, hash(literal options))`; the
+dedicated node, typed provenance, static literal options, all four result policies, all three failure policies,
+breadth-first recurrence, bounded resources, detached data, and 37 diagnostics are current. Generic helper,
+residual/nested/dynamic, callback, filesystem, URI, provider, compilation, and registry-mutation interpretations
+remain denied.
 
 Related: [[general-staged-ast-current-boundary]], [[perl-staged-ast-enrichment-current-depth-authority]], [[perl-staged-ast-enrichment-recursive-authority]], [[staged-parse-job-annotation-contract]],
 [[staged-parser-registry-dispatch-contract]], [[typed-source-location-cursor-algebra-direction]], and

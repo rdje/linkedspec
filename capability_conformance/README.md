@@ -182,25 +182,24 @@ fields/statuses/backends, duplicate ids, missing evidence paths, unowned partial
 ids, absolute paths, and stale or unowned exclusions. Current language behavior belongs in `capabilities`;
 deprecated or genuinely not-yet-adopted directions belong in `excluded_or_future`.
 
-The manifest's exclusion ledger is schema v2 and currently contains exactly two ordered records. Deprecated
-Perl-only plugin machinery is explicit `legacy` under pending `FUTURE-PARITY-BACKLOG.6`; general provider search
-and recursive staged queues remain `future` under active structural/progressive/staged parent
-`FUTURE-PARITY-BACKLOG.14`. Both carry an explicit null `retention_authority`: future records never use one, and
-an open legacy owner does not need one. A legacy record whose owner is completed is legal only when a tracked,
-repository-relative durable authority explicitly retains it.
+The manifest's exclusion ledger is schema v2 and currently contains exactly one governed record. Deprecated
+Perl-only plugin machinery is explicit `legacy` under pending `FUTURE-PARITY-BACKLOG.6` with null
+`retention_authority`; an open legacy owner does not need one. A legacy record whose owner is completed is legal
+only when a tracked, repository-relative durable authority explicitly retains it. Portable parse-job authoring is
+current and therefore absent from this ledger.
 
-Behavior-free audit `.14.7.0` leaves that exclusion and the 80/0/0 census unchanged. It separates the current
+Behavior-free audit `.14.7.0` historically left the then-current exclusions and 80/0/0 census unchanged. It separates the current
 one-depth function-body adapter from general authoring, typed provenance, several parser families, policy
-semantics, and recursive queues, then assigns those exact capabilities to `.14.7.1-.10`. The exclusion remains
-truthful until public authored closeout `.14.7.9`; backend implementation or typed recurrence alone must not remove
-it early.
+semantics, and recursive queues, then assigns those exact capabilities to `.14.7.1-.10`. Public authored closeout
+`.14.7.9` now supplies the required proof and removes the satisfied parse-job exclusion.
 
-The checker derives unique task ids and leading status enums from tracked task sources, requires future owners to
-be proposed/pending/active, locks the exact two records and order, and rejects schema/classification/retention/
-status/content/resurrection drift through 24 in-memory mutations. Completed semantic-introspection/MCP and
-rule-local cursor work are deliberately absent rather than preserved as stale future narratives. At that
-exclusion-correction boundary, the 16 capability rows and their 80/0/0 backend-state census did not change.
-Staged-AST recurrence later adds one all-pass private row, making the current census 17/85.
+The checker derives unique task ids and leading status enums from tracked task sources, locks the exact record and
+order, and rejects schema/classification/retention/status/content/resurrection drift through 19 in-memory
+mutations. Completed semantic-introspection/MCP, rule-local cursor, and parse-job authoring work are deliberately
+absent rather than preserved as stale future narratives. At the original exclusion-correction boundary, the 16
+capability rows and their 80/0/0 backend-state census did not change. Staged-AST recurrence later added the
+seventeenth all-pass row, making the current census 17/85; public admission renamed that row without changing its
+85 pass cells.
 
 Capability exclusion freshness is public-closed under `FUTURE-PARITY-BACKLOG.24`. The same checker binds 12
 governed public/continuity/retrieval projections plus ten path-scoped stale-current denials and rejects six public
@@ -278,7 +277,7 @@ bash tools/check_typed_source_location_six_runtime.sh
 ```
 
 Canonical local CI requires and syntax-checks that driver; `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1` opts into its
-all-toolchain execution. Current governance is 187 mutations and rollout is 13 complete / 1 pending across 14 legs:
+all-toolchain execution. Current governance is 189 mutations and rollout is 13 complete / 1 pending across 14 legs:
 the neutral contract, public structure, unchanged neutral/public recomposition, and the Perl, Rust, Dart, Julia,
 PUC Lua, and LuaJIT internal
 runtime admissions are complete. Transaction safety projects the separately owned complete recognition authority;
@@ -307,7 +306,7 @@ regressions plus one recurrence regression promote only `recursive_observation`.
 six current projections, rejects six stale claims, and guards ten facade/API/schema surfaces through 27 further
 mutations. Recursive-observation public projection/no-drift is current without a new public API; its own rollout row remains complete.
 Typed transaction composition, progressive span dispatch, and staged-AST dispatch are current; the typed rollout is 13 complete / 1 pending.
-Governance is 187, and only combined program-wide public no-drift stays pending under `.14.8`. No public
+Governance is 189, and only combined program-wide public no-drift stays pending under `.14.8`. No public
 helper/value, descriptor/generated schema, semantic/MCP field, CLI, or README behavior moved.
 
 `progressive_span_dispatch_contract.json` (`linkedspec-progressive-span-dispatch-v1`) is the executable neutral
@@ -338,7 +337,8 @@ rejected recognition effect retains current node `PROGRESSIVE_DISPATCH_SPAN` and
 facade/schema/semantic/MCP/CLI/README paths continue to deny outward exposure.
 
 `staged_ast_enrichment_contract.json` (`linkedspec-staged-ast-enrichment-v1`) is the executable neutral authority
-for future returned-AST enrichment through authored `parse_job(text_expr, options)`. It freezes one inert
+for current returned-AST enrichment through exact authored
+`target = parse_job(source_bound_text, hash(literal options))`. It freezes one inert
 `STAGED_PARSE_JOB_MARKER` plus `staged_parse_job_v2` sidecar, typed direct and ordered-derived source provenance,
 caller-completed alias/provider/search-root resolution, immutable pre-registered parser/cache authority,
 deterministic breadth-first recursive scheduling, four result policies, three failure policies, strict
@@ -352,8 +352,9 @@ bash tools/check_staged_ast_enrichment_six_runtime.sh
 
 The independent checker executes 4 registry entries, 8 provenance, 8 resolution/6 authority, 10 cache,
 4 queue/3 isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases. It locks five backend
-consumers over six runtime routes, 37 diagnostics, 9 rollout legs, and 35 exact owners, then rejects 123
-reason-checked mutations. Neutral, Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, and recurrence rollout are complete.
+consumers over six runtime routes, 37 diagnostics, 9 rollout legs, and 35 exact owners, then rejects 123 neutral
+mutations plus 129 reason-checked public omission/stale/injection mutations. Neutral, Perl, Rust, Dart, Julia, PUC
+Lua, LuaJIT, recurrence, and public no-drift rollout are all complete.
 The recurring driver binds five immutable backend source groups to six ordered runtime routes, then runs typed,
 generated-source, capability, and language ledgers; canonical CI exposes it only through
 `LINKEDSPEC_RUN_STAGED_AST_ENRICHMENT_MATRIX=1`. Each admitted consumer is registered
@@ -362,10 +363,10 @@ independently loaded emitted execution through fresh host-only authority without
 491/491 consumer now runs once in ordinary and canonical proof across the same four production routes; each run
 starts a fresh registry/cache/recursive authority after the parent result. One shared Lua-5.1-compatible consumer
 runs at 888/888 on PUC Lua and LuaJIT through the same four fresh-authority carriers and is registered exactly once
-per ABI in ordinary/canonical proof. The capability census now includes the all-pass private
-`language.private_staged_ast_enrichment` row at 17 capabilities / 85 pass states, while
-`future.general_parse_job_authoring` remains the exact public boundary. Generated format,
-facade/schema/semantic/MCP/CLI/README, and public behavior have not moved.
+per ABI in ordinary/canonical proof. The capability census includes the all-pass
+`language.staged_ast_enrichment` row at 17 capabilities / 85 pass states, and the satisfied general-authoring
+exclusion is absent. The staged-AST contract is 9/9 complete: portable exact-assignment `parse_job(...)` authoring is current while all ten unrelated outward surfaces remain absent.
+Generated format, facade/schema/semantic/MCP/CLI/README, and unrelated outward behavior have not moved.
 
 `inter_match_gap_capture_contract.json` is the neutral authority for named regex slots and lossless
 prefix/interstitial/tail context. Inter-match gap public admission is current with four shared calls and unchanged outward facade, descriptor, semantic, MCP, CLI, and README surfaces. Julia `.5.1-.5.5` and shared Lua `.6.1-.6.5` implement and admit their exact nine-role paths without widening those guarded surfaces.

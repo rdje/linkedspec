@@ -155,8 +155,8 @@ and governance rejects 106 mutations. Independent dual-ABI recomposition `.14.7.
 all peer projections, exact topology, and direct dependents without executable movement, then closes shared Lua.
 Formats and public/outward behavior do not move. Recurrence `.8` now binds those five immutable backend sources
 to six ordered runtime routes, promotes only typed `staged_span_dispatch`, and advances neutral/typed/capability
-truth to 123 mutations, 13/1/187, and 17 capabilities / 85 pass states. Public authoring/no-drift `.9` remains
-next. Mandatory engineering-notes segment
+truth to 123 mutations, 13/1/187, and 17 capabilities / 85 pass states. Public authoring/no-drift `.9` followed
+and is now current at staged 9/9 plus 129 public mutations and typed 13/1/189. Mandatory engineering-notes segment
 `4989` is finitely authorized at 19 files / 18 manifest lines by ADR `0092`; every byte, aggregate, per-file,
 routing, and storage control remains unchanged. The current mandatory change-history rollover publishes segment
 `4989`; ADR `0093` advances only that separate store's finite controls to 24 files / 23 manifest lines.
@@ -317,12 +317,12 @@ The Lua closeout applies the same audit: bounded current status/body text in the
 Julia-closeout cards still called shared Lua pending or next after the executable admission was current. Their
 current projections now name all six private rows as admitted and recomposed, while dated evidence remains intact.
 
-Behavior-free audit `.14.6.0` and ADR `0080` fix that boundary exactly. `parse_job(...)` remains unavailable and
-`dispatch_span(...)` is admitted as a private intrinsic on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT—not as a
-shared helper. Each backend's current staged registry accepts
-only the built-in `actionir-body.spec` / `action_block` function-body adapter; a normal `.spec` path is rejected,
-and the legacy job span carries neither typed source authority nor cancellation/policy ceilings. Progressive work
-therefore starts with an immutable host-seeded entry for an already compiled parser, never an in-parse loader.
+Behavior-free audit `.14.6.0` and ADR `0080` fixed the original boundary. `dispatch_span(...)` is a private
+intrinsic, while exact scalar-assignment `parse_job(...)` is now a public dedicated annotation on Perl, Rust,
+Dart, Julia, PUC Lua, and LuaJIT; neither is a shared generic helper. The legacy function-body-v1 registry remains
+narrowly fixed to `actionir-body.spec` / `action_block`. General v2 staged enrichment uses a separate caller-frozen
+registry of already-compiled logical entries and never treats an authored parser identity as path/provider/loading
+authority.
 
 Neutral `.14.6.1` reserved `value = dispatch_span("expr-v1", "Expr", span)` as one dedicated fail-only expression;
 Perl `.14.6.2`, Rust `.14.6.3`, Dart `.14.6.4`, Julia `.14.6.5`, PUC Lua, and LuaJIT `.14.6.6` admit it privately. The child runs synchronously over one contiguous direct span. Its internal registers are view-local, but typed
@@ -449,12 +449,13 @@ checker locks exact roles, paths, order, route multiplicity, canonical registrat
 and 25 public documents through 23 governance mutations. The existing 16-capability census remains 80/0/0,
 lexical capture remains outside v1, and callable parents `.11.8`/`.11` close with signoff.
 
-Capability conformance remains 16 capabilities and 80/0/0 backend states. Its separate exclusion ledger is now
-schema v2 with exactly two status-fresh records: deprecated Perl plugin machinery remains explicit legacy under
-pending `.6`, and general provider search/recursive staged queues remain future under active parent `.14`.
-Completed semantic/MCP and rule-local cursor work are no longer mislabeled as future. The checker derives owner
-status, locks exact content/order, and rejects 24 schema/classification/retention/status mutations without changing
-language or runtime behavior.
+Capability conformance now contains 17 capabilities and 85/0/0 backend states. Its separate exclusion ledger is
+schema v2 with exactly one status-fresh record: deprecated Perl plugin machinery remains explicit legacy under
+pending `.6`. Completed semantic/MCP, rule-local cursor, and portable parse-job authoring work are absent from the
+ledger rather than mislabeled as future. The checker derives owner status and locks exact content/order,
+classification, retention, and satisfied-exclusion absence without changing runtime behavior.
+
+Staged `parse_job(...)` authoring and its public no-drift proof are current at 9/9 under `.14.7.9`; the combined typed `.14.8` row remains pending.
 
 Capability exclusion freshness is public-closed under `FUTURE-PARITY-BACKLOG.24`. Twelve governed projections
 and ten path-scoped stale-current denials now reject six public mutations, including a rendered-book schema/record-
@@ -816,7 +817,7 @@ pass. Bounded structural matchers handle the exact shipped recursive/DEFINE/`\K`
 `push(child, index)` preserves EBNF logging payloads. Dart full-corpus parity is now 105/105 green, and the focused
 Dart local gate is available through `tools/run_dart_local.sh` or opt-in `LINKEDSPEC_RUN_DART=1` local CI.
 
-The Method-like DSL migration track is also complete: all 21 shipped specs are at zero compatibility-surface rules, 100+ helpers across 10 families are regression-locked, current helper names are the only documented helper surface, and fluent/block equivalence is verified. Current setup and read forms use direct assignments, `set(...)`, bare scalar reads, `array(...)`, `hash(...)`, `push(...)`, `copy(...)`, and `return(...)`. Unknown typed calls in return/value positions diagnose through the generic unknown-helper path instead of emitting generated host-language calls, while unregistered standalone function-shaped statements remain explicit raw compatibility debt. Top-level `fn name(args) { ... }` definition shells are parsed by `specs/user_function_definition.spec` and projected through the active user-function registry, with versioned signature data, source/body spans, body source, neutral `body_payload`, neutral `body_parse_job`, and body AST recorded. The parse-job sidecar now dispatches through the minimal staged registry provider for `actionir-body.spec` / `action_block`, and the returned `action_block` AST is stitched into `body_ast`; general public `parse_job(...)` authoring remains future work. On Perl, Rust, Dart, Julia, and Lua, registered exact-v1 and final-rest-v2 user-function calls execute in value positions, compatible receiver chains, and standalone discard statements: positional arguments evaluate eagerly in the caller, fixed params and a fresh rest array bind in a fresh function-local scope, and the result is the final expression or `return(expr)` payload. Lua additionally executes declared final contextual codeblock slots in the current isolated function frame with cleanup-safe caller restoration and typed arity/keyword/recursion/staging/callback failures. Recursive and unsupported function-body forms remain fenced as diagnostics. The accepted definition surface is explicit-paren, braced `fn` with optional final `...rest`; alternate spellings, omitted zero-arg parentheses, brace-less bodies, caller-state-mutating functions, recursion support, closures/lambdas/currying, and function namespaces remain deferred extension topics.
+The Method-like DSL migration track is also complete: all 21 shipped specs are at zero compatibility-surface rules, 100+ helpers across 10 families are regression-locked, current helper names are the only documented helper surface, and fluent/block equivalence is verified. Current setup and read forms use direct assignments, `set(...)`, bare scalar reads, `array(...)`, `hash(...)`, `push(...)`, `copy(...)`, and `return(...)`. Unknown typed calls in return/value positions diagnose through the generic unknown-helper path instead of emitting generated host-language calls, while unregistered standalone function-shaped statements remain explicit raw compatibility debt. Top-level `fn name(args) { ... }` definition shells are parsed by `specs/user_function_definition.spec` and projected through the active user-function registry, with versioned signature data, source/body spans, body source, neutral `body_payload`, neutral `body_parse_job`, and body AST recorded. The legacy parse-job sidecar dispatches through the minimal `actionir-body.spec` / `action_block` provider and stitches the returned `action_block` AST into `body_ast`; the separately governed exact-assignment v2 `parse_job(...)` annotation is also current across all five backends. On Perl, Rust, Dart, Julia, and Lua, registered exact-v1 and final-rest-v2 user-function calls execute in value positions, compatible receiver chains, and standalone discard statements: positional arguments evaluate eagerly in the caller, fixed params and a fresh rest array bind in a fresh function-local scope, and the result is the final expression or `return(expr)` payload. Lua additionally executes declared final contextual codeblock slots in the current isolated function frame with cleanup-safe caller restoration and typed arity/keyword/recursion/staging/callback failures. Recursive and unsupported function-body forms remain fenced as diagnostics. The accepted definition surface is explicit-paren, braced `fn` with optional final `...rest`; alternate spellings, omitted zero-arg parentheses, brace-less bodies, caller-state-mutating functions, recursion support, closures/lambdas/currying, and function namespaces remain deferred extension topics.
 
 ## Backbone items
 

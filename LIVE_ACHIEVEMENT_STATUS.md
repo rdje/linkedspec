@@ -2,24 +2,25 @@
 
 ## Current Activity
 
-- Staged recurrence `.14.7.8` binds five immutable source groups to six ordered runtime routes from exact clean
-  Lua-recomposition commit `84396911`.
-- Neutral recurrence is current at 8/9/123, typed staged dispatch at 13/1/187, and capability truth at 85/0/0;
-  the exact composed driver passes every runtime and support ledger.
-- Only aggregate consumer governance snapshots move. Runtime behavior, function-body v1, generated format,
-  public `parse_job(...)` authoring/outward truth, dependencies, toolchains, storage, and doctrines remain fixed.
+- Public staged closeout `.14.7.9` is canonical-signoff-complete from exact clean recurrence base `c76c721c`.
+- Exact scalar-assignment `parse_job(...)` authoring is current on all six routes at staged 9/9/123 plus 129
+  public mutations, typed 13/1/189, and capability 17 rows / 85 pass states / one legacy exclusion.
+- Runtime behavior, function-body v1, generated format, and unrelated facade/schema/semantic/MCP/CLI/root-README
+  surfaces remain fixed; independent staged recomposition `.14.7.10` is the next task-tree-first owner.
 
 ## Latest Completed Slice
 
-- `.14.7.8` binds the recurring six-runtime driver, promotes only neutral recurrence plus typed staged dispatch
-  and its capability row, and clears focused plus receipt-bound canonical proof.
+- `.14.7.9` admits exact scalar-assignment `parse_job(...)` authoring on all six routes, completes staged public
+  no-drift at 129 mutations, and retires the satisfied future exclusion without runtime movement.
 
 ## Next Action
 
-- Commit the exact `.14.7.8` candidate, clear and verify the brief/clean handoff, then activate public staged
-  authoring/no-drift `.14.7.9` task-tree-first.
+- From the clean `.14.7.9` commit, activate independent staged recomposition `.14.7.10` task-tree-first.
 
 ## Recent Completions
+
+- `2026-08-28` — `.14.7.9` makes exact assignment-form `parse_job(...)` public at staged 9/9/123 plus 129 public
+  mutations, keeps typed at 13/1/189, and removes the satisfied future exclusion without runtime movement.
 
 - `2026-08-28` — `.14.7.8` binds five staged sources/six routes, completes neutral recurrence at 123 mutations,
   promotes typed staged dispatch to 13/1/187 and capability truth to 85/0/0, and hands off public authoring `.9`.
@@ -74,10 +75,6 @@
 
 - `2026-08-26` — `.14.7.5.2` adds Dart's caller-frozen pure resolver, selected-top identities, plan-only cache,
   isolated current-depth execution, detached atomic stitching, and all policies; only `.3` recurrence remains RED.
-
-- `2026-08-26` — `.14.7.5.1` adds Dart's exclusive private staged declaration node, strict static closure, live-
-  regex-proven typed provenance, and equal detached logical markers across four dormant routes; only `.2`
-  authority remains RED.
 
 ## History
 

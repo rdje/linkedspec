@@ -8,6 +8,7 @@ import hashlib
 import json
 import math
 import re
+import subprocess
 from pathlib import Path
 from typing import Any, Callable
 
@@ -49,8 +50,8 @@ AUTHORED_SURFACE = {
     ],
     "optional_options": ["top", "into", "required_capabilities"],
     "availability": (
-        "private Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT staged-AST carriers plus exact six-runtime "
-        "recurrence admitted; public authoring remains pending under FUTURE-PARITY-BACKLOG.14.7.9-.10"
+        "portable exact-assignment parse_job authoring is current on Perl, Rust, Dart, Julia, PUC Lua, and "
+        "LuaJIT through the dedicated staged marker and caller-frozen already-compiled authority"
     ),
 }
 
@@ -213,12 +214,13 @@ RUNTIME_ROUTES = [
 ]
 
 CAPABILITY_ROW = {
-    "id": "language.private_staged_ast_enrichment",
+    "id": "language.staged_ast_enrichment",
     "category": "language-runtime",
     "contract": (
-        "Caller-authorized private parse-job carriers use frozen pre-resolved authority, deterministic "
+        "Caller-authorized staged parse-job carriers use frozen pre-resolved authority, deterministic "
         "breadth-first recursive queues, fresh child contexts, bounded diagnostics, and atomic stitching "
-        "across five backend sources and six runtime routes; public parse_job authoring remains excluded."
+        "across five backend sources and six runtime routes; exact public assignment-form parse_job authoring "
+        "is current without an outward facade or ambient loading authority."
     ),
     "sources": [
         "docs/decisions/0088-pre-resolved-breadth-first-staged-ast-enrichment.md",
@@ -348,15 +350,15 @@ RECURRING_GATE = {
             "owner": "FUTURE-PARITY-BACKLOG.14.7.8",
         },
         "public_no_drift": {
-            "status": "pending",
+            "status": "complete",
             "owner": "FUTURE-PARITY-BACKLOG.14.7.9",
         },
     },
     "capability_projection": {
         "manifest": "capability_conformance/manifest.json",
-        "capability_id": "language.private_staged_ast_enrichment",
+        "capability_id": "language.staged_ast_enrichment",
         "backend_status": "pass",
-        "retained_public_exclusion": "future.general_parse_job_authoring",
+        "public_authoring_status": "current",
     },
 }
 
@@ -411,6 +413,138 @@ DIAGNOSTIC_CONTEXTS = {
     "staged_result_node_limit_exceeded": ["code", "phase", "stage_chain", "job_id", "nodes", "maximum"],
     "staged_transaction_forbidden": ["code", "phase", "origin", "effect"],
     "staged_diagnostic_truncated": ["code", "phase", "stage_chain", "job_id", "maximum_bytes"],
+}
+
+PUBLIC_NO_DRIFT_PATHS = [
+    "docs/linkedspec-book/src/compiler/staged-ast-enrichment.md",
+    "docs/linkedspec-book/src/appendix/backend-handoff.md",
+    "docs/linkedspec-book/src/overview/project-status.md",
+    "capability_conformance/README.md",
+    "TOOLBOX.md",
+    "ROADMAP.md",
+]
+
+PUBLIC_AUTHORING_CONTRACT = {
+    "owner": "FUTURE-PARITY-BACKLOG.14.7.9",
+    "status": "current",
+    "grammar": {
+        "path": "specs/spec.spec",
+        "required_markers": [
+            "# DEDICATED ACTION-EXPRESSION EXTENSION: portable staged parse-job authoring",
+            "#   target = parse_job(source_bound_text, hash(literal options))",
+            "#   source_bound_text = entry_text() | entry_group(nonnegative_literal) |",
+            "#   parse_job remains outside the ordinary generic helper-call inventory.",
+        ],
+    },
+    "generic_helper_boundary": {
+        "path": "tools/check_language_capability_coverage.pl",
+        "required_markers": [
+            "parse_job => 'public dedicated assignment annotation, not an ordinary generic helper call'",
+            "&& !$classified_non_generic_perl_contract{$name}",
+        ],
+    },
+    "guide": {
+        "path": PUBLIC_NO_DRIFT_PATHS[0],
+        "required_tokens": [
+            "entry_text()",
+            "entry_group(0)",
+            "match_text()",
+            "match_group(0)",
+            "cat(entry_group(0), match_group(1))",
+            "node_kind",
+            "payload_kind",
+            "spec",
+            "result_policy",
+            "on_error",
+            "top",
+            "into",
+            "required_capabilities",
+            *RESULT_POLICIES,
+            *FAILURE_POLICIES,
+        ],
+        "diagnostic_codes": list(DIAGNOSTIC_CONTEXTS),
+    },
+    "documents": [
+        {
+            "path": PUBLIC_NO_DRIFT_PATHS[0],
+            "marker": (
+                "Portable `parse_job(...)` authoring is current as one dedicated exact-assignment annotation "
+                "on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT."
+            ),
+        },
+        {
+            "path": PUBLIC_NO_DRIFT_PATHS[1],
+            "marker": (
+                "Portable `parse_job(...)` authoring is current across five backend sources and six runtime "
+                "routes without adding an outward facade, schema, semantic/MCP, CLI, or README surface."
+            ),
+        },
+        {
+            "path": PUBLIC_NO_DRIFT_PATHS[2],
+            "marker": (
+                "Staged `parse_job(...)` authoring and its public no-drift proof are current at 9/9 under "
+                "`.14.7.9`; the combined typed `.14.8` row remains pending."
+            ),
+        },
+        {
+            "path": PUBLIC_NO_DRIFT_PATHS[3],
+            "marker": (
+                "The staged-AST contract is 9/9 complete: portable exact-assignment `parse_job(...)` authoring "
+                "is current while all ten unrelated outward surfaces remain absent."
+            ),
+        },
+        {
+            "path": PUBLIC_NO_DRIFT_PATHS[4],
+            "marker": (
+                "Staged rollout is neutral + Perl + Rust + Dart + Julia + PUC Lua + LuaJIT + recurring + "
+                "public no-drift: 9/9 complete, with `parse_job(...)` still a dedicated annotation rather than "
+                "a generic helper or outward API."
+            ),
+        },
+        {
+            "path": PUBLIC_NO_DRIFT_PATHS[5],
+            "marker": (
+                "General staged-AST governance is 9/9 complete: exact portable `parse_job(...)` authoring, "
+                "six-runtime recurrence, and public no-drift are current without unrelated outward movement."
+            ),
+        },
+    ],
+    "forbidden_claims": [
+        {"path": PUBLIC_NO_DRIFT_PATHS[0], "text": "General `parse_job(...)` authoring is not yet public."},
+        {"path": PUBLIC_NO_DRIFT_PATHS[0], "text": "The selected future authored shape is:"},
+        {"path": PUBLIC_NO_DRIFT_PATHS[0], "text": "six-runtime recurrence remains pending"},
+        {"path": PUBLIC_NO_DRIFT_PATHS[1], "text": "general future `parse_job(...)` authoring"},
+        {"path": PUBLIC_NO_DRIFT_PATHS[1], "text": "retaining the public-authoring exclusion"},
+        {"path": PUBLIC_NO_DRIFT_PATHS[2], "text": "`parse_job(...)` remains unavailable"},
+        {"path": PUBLIC_NO_DRIFT_PATHS[2], "text": "general public `parse_job(...)` authoring remains future work."},
+        {"path": PUBLIC_NO_DRIFT_PATHS[2], "text": "schema v2 with exactly two status-fresh records:"},
+        {"path": PUBLIC_NO_DRIFT_PATHS[3], "text": "currently contains exactly two ordered records"},
+        {"path": PUBLIC_NO_DRIFT_PATHS[3], "text": "`future.general_parse_job_authoring` remains the exact public boundary."},
+        {"path": PUBLIC_NO_DRIFT_PATHS[4], "text": "future authored `parse_job(text_expr, options)`"},
+        {"path": PUBLIC_NO_DRIFT_PATHS[4], "text": "`future.general_parse_job_authoring` stays present for `.14.7.9`."},
+        {"path": PUBLIC_NO_DRIFT_PATHS[5], "text": "`parse_job(...)` authoring/no-drift `.9`, final recomposition"},
+        {"path": PUBLIC_NO_DRIFT_PATHS[5], "text": "Public `parse_job(...)` authoring, import/provider search roots, multiple"},
+        {
+            "path": "docs/linkedspec-book/src/public-api/descriptor-introspection.md",
+            "text": "general public `parse_job(...)` authoring and provider search remain future work.",
+        },
+        {
+            "path": "ARCHITECTURE_STATE.md",
+            "text": "`future.general_parse_job_authoring` remains the exact `.14.7.9` public boundary.",
+        },
+        {
+            "path": "LIVE_ACHIEVEMENT_STATUS.md",
+            "text": "public `parse_job(...)` authoring/outward truth, dependencies, toolchains, storage, and doctrines remain fixed.",
+        },
+    ],
+    "outward_guard": {
+        "paths": OUTWARD_PATHS,
+        "forbidden_tokens": [
+            "parse_job(text_expr",
+            "STAGED_PARSE_JOB_MARKER",
+            "linkedspec-staged-ast-enrichment-v1",
+        ],
+    },
 }
 
 OWNERSHIP = [
@@ -1072,14 +1206,16 @@ def validate_environment(contract: dict[str, Any]) -> None:
     ]
     require(len(capability_rows) == 1, "staged-AST capability projection row is missing or duplicated")
     require(capability_rows[0] == CAPABILITY_ROW, "staged-AST capability projection row drifted")
-    exclusions = capability_manifest.get("excluded_or_future", [])
     require(
-        sum(
-            row.get("id") == recurring["capability_projection"]["retained_public_exclusion"]
-            for row in exclusions
-        )
-        == 1,
-        "staged-AST public-authoring exclusion is missing or duplicated",
+        recurring["capability_projection"]["public_authoring_status"] == "current",
+        "staged-AST public-authoring capability projection drifted",
+    )
+    require(
+        all(
+            row.get("id") != "future.general_parse_job_authoring"
+            for row in capability_manifest.get("excluded_or_future", [])
+        ),
+        "satisfied staged-AST public-authoring exclusion remains present",
     )
 
 
@@ -1125,7 +1261,7 @@ def validate_contract(contract: dict[str, Any], *, environment: bool = True) -> 
     require(contract["task_owner"] == "FUTURE-PARITY-BACKLOG.14.7.2", "task owner mismatch")
     require(
         contract["status"]
-        == "all_private_backends_complete_recurring_current_public_pending",
+        == "all_backends_complete_recurring_and_public_current",
         "contract status mismatch",
     )
     require(contract["authored_surface"] == AUTHORED_SURFACE, "authored surface mismatch")
@@ -1219,7 +1355,7 @@ def validate_contract(contract: dict[str, Any], *, environment: bool = True) -> 
     require(outward == {
         "paths": OUTWARD_PATHS,
         "forbidden_tokens": ["parse_job(text_expr", "STAGED_PARSE_JOB_MARKER", "linkedspec-staged-ast-enrichment-v1"],
-        "status": "no_public_or_outward_admission",
+        "status": "no_unrelated_outward_admission",
         "owner": "FUTURE-PARITY-BACKLOG.14.7.9",
     }, "outward guard mismatch")
 
@@ -1232,7 +1368,7 @@ def validate_contract(contract: dict[str, Any], *, environment: bool = True) -> 
         {"order": 6, "leg": "puc_lua", "owner": "FUTURE-PARITY-BACKLOG.14.7.7", "status": "complete", "paths": [BACKEND_CONSUMERS[4]["path"]]},
         {"order": 7, "leg": "luajit", "owner": "FUTURE-PARITY-BACKLOG.14.7.7", "status": "complete", "paths": [BACKEND_CONSUMERS[4]["path"]]},
         {"order": 8, "leg": "recurring", "owner": "FUTURE-PARITY-BACKLOG.14.7.8", "status": "complete", "paths": ["tools/check_staged_ast_enrichment_six_runtime.sh"]},
-        {"order": 9, "leg": "public_no_drift", "owner": "FUTURE-PARITY-BACKLOG.14.7.9", "status": "pending", "paths": ["docs/linkedspec-book/src/dsl/staged-ast-enrichment.md", "docs/linkedspec-book/src/appendix/backend-handoff.md", "docs/linkedspec-book/src/overview/project-status.md", "capability_conformance/README.md", "TOOLBOX.md", "ROADMAP.md"]},
+        {"order": 9, "leg": "public_no_drift", "owner": "FUTURE-PARITY-BACKLOG.14.7.9", "status": "complete", "paths": PUBLIC_NO_DRIFT_PATHS},
     ]
     require(contract["rollout"] == expected_rollout, "rollout inventory mismatch")
     rollout_by_leg = {row["leg"]: row for row in contract["rollout"]}
@@ -1297,6 +1433,369 @@ def validate_contract(contract: dict[str, Any], *, environment: bool = True) -> 
 
     if environment:
         validate_environment(contract)
+
+
+def read_public_authoring_texts(contract: dict[str, Any]) -> dict[str, str]:
+    paths = {
+        contract["grammar"]["path"],
+        contract["generic_helper_boundary"]["path"],
+        contract["guide"]["path"],
+        *(row["path"] for row in contract["documents"]),
+        *(row["path"] for row in contract["forbidden_claims"]),
+        *contract["outward_guard"]["paths"],
+    }
+    return {path: (ROOT / path).read_text(encoding="utf-8") for path in paths}
+
+
+def validate_public_authoring(
+    document: dict[str, Any],
+    contract: dict[str, Any],
+    capability_manifest: dict[str, Any],
+    texts: dict[str, str],
+    *,
+    check_tracked: bool,
+) -> None:
+    exact_keys(
+        contract,
+        [
+            "owner",
+            "status",
+            "grammar",
+            "generic_helper_boundary",
+            "guide",
+            "documents",
+            "forbidden_claims",
+            "outward_guard",
+        ],
+        "public authoring contract",
+    )
+    require(contract["owner"] == "FUTURE-PARITY-BACKLOG.14.7.9", "public authoring owner drifted")
+    require(contract["status"] == "current", "public authoring status drifted")
+    require(
+        contract["grammar"] == PUBLIC_AUTHORING_CONTRACT["grammar"],
+        "public grammar declaration contract drifted",
+    )
+    require(
+        contract["generic_helper_boundary"]
+        == PUBLIC_AUTHORING_CONTRACT["generic_helper_boundary"],
+        "public generic-helper boundary contract drifted",
+    )
+    require(contract["guide"] == PUBLIC_AUTHORING_CONTRACT["guide"], "public authoring guide contract drifted")
+
+    documents = contract["documents"]
+    require(isinstance(documents, list), "public document inventory is not an array")
+    document_paths = [row.get("path") for row in documents]
+    require(document_paths == PUBLIC_NO_DRIFT_PATHS, "public document order/path inventory drifted")
+    require(len(document_paths) == len(set(document_paths)) == 6, "public document inventory is not six unique paths")
+    require(
+        documents == PUBLIC_AUTHORING_CONTRACT["documents"],
+        "public document marker contract drifted",
+    )
+
+    forbidden_claims = contract["forbidden_claims"]
+    require(
+        forbidden_claims == PUBLIC_AUTHORING_CONTRACT["forbidden_claims"],
+        "public forbidden-claim inventory drifted",
+    )
+    require(
+        contract["outward_guard"] == PUBLIC_AUTHORING_CONTRACT["outward_guard"],
+        "public outward guard contract drifted",
+    )
+
+    expected_paths = {
+        contract["grammar"]["path"],
+        contract["generic_helper_boundary"]["path"],
+        contract["guide"]["path"],
+        *document_paths,
+        *(row["path"] for row in forbidden_claims),
+        *contract["outward_guard"]["paths"],
+    }
+    require(set(texts) == expected_paths, "public authoring text inventory drifted")
+
+    rollout = document.get("rollout")
+    require(isinstance(rollout, list) and len(rollout) == 9, "public authoring requires nine rollout rows")
+    require(
+        all(row.get("status") == "complete" for row in rollout),
+        "public authoring requires all nine staged rollout legs complete",
+    )
+    require(
+        rollout[7].get("paths") == ["tools/check_staged_ast_enrichment_six_runtime.sh"]
+        and rollout[8].get("paths") == PUBLIC_NO_DRIFT_PATHS,
+        "public authoring rollout paths drifted",
+    )
+    require(
+        document.get("status") == "all_backends_complete_recurring_and_public_current"
+        and document.get("authored_surface", {}).get("availability") == AUTHORED_SURFACE["availability"],
+        "public authored-surface status drifted",
+    )
+
+    grammar = contract["grammar"]
+    grammar_text = texts[grammar["path"]]
+    for marker in grammar["required_markers"]:
+        require(
+            grammar_text.count(marker) == 1,
+            f"public grammar declaration missing or duplicated: {marker}",
+        )
+
+    helper_boundary = contract["generic_helper_boundary"]
+    for marker in helper_boundary["required_markers"]:
+        require(
+            texts[helper_boundary["path"]].count(marker) == 1,
+            f"public generic-helper boundary marker is missing or duplicated: {marker}",
+        )
+
+    guide = contract["guide"]
+    guide_text = texts[guide["path"]]
+    for token in guide["required_tokens"]:
+        require(token in guide_text, f"public authoring guide token is missing: {token}")
+    for code in guide["diagnostic_codes"]:
+        require(
+            code in guide_text,
+            f"public diagnostic code is missing: {code}",
+        )
+
+    for row in documents:
+        marker = row["marker"]
+        require(
+            texts[row["path"]].count(marker) == 1,
+            f"public marker missing or duplicated in {row['path']}: {marker}",
+        )
+    for row in forbidden_claims:
+        require(
+            row["text"] not in texts[row["path"]],
+            f"stale public claim remains in {row['path']}: {row['text']}",
+        )
+
+    outward = contract["outward_guard"]
+    for path in outward["paths"]:
+        for token in outward["forbidden_tokens"]:
+            require(
+                token not in texts[path],
+                f"staged private/outward token escaped into {path}: {token}",
+            )
+    require(
+        document.get("outward_guard")
+        == {
+            "paths": OUTWARD_PATHS,
+            "forbidden_tokens": outward["forbidden_tokens"],
+            "status": "no_unrelated_outward_admission",
+            "owner": "FUTURE-PARITY-BACKLOG.14.7.9",
+        },
+        "public outward document guard drifted",
+    )
+
+    capability_rows = [
+        row
+        for row in capability_manifest.get("capabilities", [])
+        if row.get("id") == CAPABILITY_ROW["id"]
+    ]
+    require(capability_rows == [CAPABILITY_ROW], "public staged-AST capability projection drifted")
+    require(
+        all(
+            row.get("id") != "future.general_parse_job_authoring"
+            for row in capability_manifest.get("excluded_or_future", [])
+        ),
+        "satisfied public parse-job exclusion remains present",
+    )
+
+    if check_tracked:
+        for path in sorted(expected_paths):
+            tracked = subprocess.run(
+                ["git", "ls-files", "--error-unmatch", "--", path],
+                cwd=ROOT,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                check=False,
+            )
+            require(tracked.returncode == 0, f"governed public/outward path is not tracked: {path}")
+
+
+def public_authoring_mutation_checks(document: dict[str, Any]) -> int:
+    manifest = read_json(CAPABILITY_MANIFEST_PATH)
+    texts = read_public_authoring_texts(PUBLIC_AUTHORING_CONTRACT)
+    mutations: list[
+        tuple[
+            str,
+            Callable[[dict[str, Any], dict[str, Any], dict[str, Any], dict[str, str]], None],
+            str,
+        ]
+    ] = [
+        (
+            "public owner drift",
+            lambda _doc, contract, _manifest, _texts: contract.__setitem__("owner", "wrong"),
+            "public authoring owner drifted",
+        ),
+        (
+            "public status drift",
+            lambda _doc, contract, _manifest, _texts: contract.__setitem__("status", "pending"),
+            "public authoring status drifted",
+        ),
+        (
+            "grammar marker contract omission",
+            lambda _doc, contract, _manifest, _texts: contract["grammar"]["required_markers"].pop(),
+            "public grammar declaration contract drifted",
+        ),
+        (
+            "generic-helper marker contract drift",
+            lambda _doc, contract, _manifest, _texts: contract["generic_helper_boundary"]["required_markers"].pop(),
+            "public generic-helper boundary contract drifted",
+        ),
+        (
+            "guide diagnostic contract omission",
+            lambda _doc, contract, _manifest, _texts: contract["guide"]["diagnostic_codes"].pop(),
+            "public authoring guide contract drifted",
+        ),
+        (
+            "public document omission",
+            lambda _doc, contract, _manifest, _texts: contract["documents"].pop(),
+            "public document order/path inventory drifted",
+        ),
+        (
+            "forbidden claim omission",
+            lambda _doc, contract, _manifest, _texts: contract["forbidden_claims"].pop(),
+            "public forbidden-claim inventory drifted",
+        ),
+        (
+            "outward path omission",
+            lambda _doc, contract, _manifest, _texts: contract["outward_guard"]["paths"].pop(),
+            "public outward guard contract drifted",
+        ),
+        (
+            "outward token omission",
+            lambda _doc, contract, _manifest, _texts: contract["outward_guard"]["forbidden_tokens"].pop(),
+            "public outward guard contract drifted",
+        ),
+        (
+            "public rollout regression",
+            lambda candidate, _contract, _manifest, _texts: candidate["rollout"][8].__setitem__("status", "pending"),
+            "public authoring requires all nine staged rollout legs complete",
+        ),
+        (
+            "authored availability drift",
+            lambda candidate, _contract, _manifest, _texts: candidate["authored_surface"].__setitem__("availability", "stale"),
+            "public authored-surface status drifted",
+        ),
+        (
+            "public capability id drift",
+            lambda _doc, _contract, candidate, _texts: next(
+                row for row in candidate["capabilities"] if row["id"] == CAPABILITY_ROW["id"]
+            ).__setitem__("id", "language.wrong"),
+            "public staged-AST capability projection drifted",
+        ),
+        (
+            "satisfied public exclusion resurrection",
+            lambda _doc, _contract, candidate, _texts: candidate["excluded_or_future"].append(
+                {
+                    "id": "future.general_parse_job_authoring",
+                    "reason": "Satisfied exclusion must stay absent.",
+                    "owner": "FUTURE-PARITY-BACKLOG.14",
+                    "disposition": "future",
+                    "retention_authority": None,
+                }
+            ),
+            "satisfied public parse-job exclusion remains present",
+        ),
+    ]
+
+    for index, row in enumerate(PUBLIC_AUTHORING_CONTRACT["documents"], 1):
+        mutations.append(
+            (
+                f"required public marker deletion {index}",
+                lambda _doc, _contract, _manifest, candidate_texts, row=row: candidate_texts.__setitem__(
+                    row["path"], candidate_texts[row["path"]].replace(row["marker"], "", 1)
+                ),
+                "public marker missing or duplicated",
+            )
+        )
+    for index, row in enumerate(PUBLIC_AUTHORING_CONTRACT["forbidden_claims"], 1):
+        mutations.append(
+            (
+                f"stale public claim injection {index}",
+                lambda _doc, _contract, _manifest, candidate_texts, row=row: candidate_texts.__setitem__(
+                    row["path"], candidate_texts[row["path"]] + "\n" + row["text"]
+                ),
+                "stale public claim remains",
+            )
+        )
+    for index, marker in enumerate(PUBLIC_AUTHORING_CONTRACT["grammar"]["required_markers"], 1):
+        path = PUBLIC_AUTHORING_CONTRACT["grammar"]["path"]
+        mutations.append(
+            (
+                f"grammar declaration deletion {index}",
+                lambda _doc, _contract, _manifest, candidate_texts, path=path, marker=marker: candidate_texts.__setitem__(
+                    path, candidate_texts[path].replace(marker, "", 1)
+                ),
+                "public grammar declaration missing or duplicated",
+            )
+        )
+    helper = PUBLIC_AUTHORING_CONTRACT["generic_helper_boundary"]
+    for index, marker in enumerate(helper["required_markers"], 1):
+        mutations.append(
+            (
+                f"generic-helper boundary marker deletion {index}",
+                lambda _doc, _contract, _manifest, candidate_texts, marker=marker: candidate_texts.__setitem__(
+                    helper["path"], candidate_texts[helper["path"]].replace(marker, "", 1)
+                ),
+                "public generic-helper boundary marker is missing or duplicated",
+            )
+        )
+    guide = PUBLIC_AUTHORING_CONTRACT["guide"]
+    for index, token in enumerate(guide["required_tokens"], 1):
+        mutations.append(
+            (
+                f"guide token deletion {index}",
+                lambda _doc, _contract, _manifest, candidate_texts, token=token: candidate_texts.__setitem__(
+                    guide["path"], candidate_texts[guide["path"]].replace(token, "")
+                ),
+                "public authoring guide token is missing",
+            )
+        )
+    for index, code in enumerate(guide["diagnostic_codes"], 1):
+        mutations.append(
+            (
+                f"diagnostic guide deletion {index}",
+                lambda _doc, _contract, _manifest, candidate_texts, code=code: candidate_texts.__setitem__(
+                    guide["path"], candidate_texts[guide["path"]].replace(code, "")
+                ),
+                "public diagnostic code is missing",
+            )
+        )
+    outward = PUBLIC_AUTHORING_CONTRACT["outward_guard"]
+    for path in outward["paths"]:
+        for token in outward["forbidden_tokens"]:
+            mutations.append(
+                (
+                    f"outward token injection {path} {token}",
+                    lambda _doc, _contract, _manifest, candidate_texts, path=path, token=token: candidate_texts.__setitem__(
+                        path, candidate_texts[path] + "\n" + token
+                    ),
+                    "staged private/outward token escaped",
+                )
+            )
+
+    require(len(mutations) == 129, "public authoring mutation count drifted")
+    for name, mutate, expected_reason in mutations:
+        candidate_document = copy.deepcopy(document)
+        candidate_contract = copy.deepcopy(PUBLIC_AUTHORING_CONTRACT)
+        candidate_manifest = copy.deepcopy(manifest)
+        candidate_texts = dict(texts)
+        mutate(candidate_document, candidate_contract, candidate_manifest, candidate_texts)
+        try:
+            validate_public_authoring(
+                candidate_document,
+                candidate_contract,
+                candidate_manifest,
+                candidate_texts,
+                check_tracked=False,
+            )
+        except ContractError as exc:
+            require(
+                expected_reason in str(exc),
+                f"public mutation {name} failed for the wrong reason: {exc}",
+            )
+        else:
+            raise ContractError(f"public mutation unexpectedly passed: {name}")
+    return len(mutations)
 
 
 Mutation = tuple[str, Callable[[dict[str, Any]], None], str]
@@ -1411,7 +1910,7 @@ def mutation_inventory() -> list[Mutation]:
         ("rollout_puc_lua", set_value(["rollout", 5, "status"], "pending"), "rollout inventory mismatch"),
         ("rollout_luajit", set_value(["rollout", 6, "status"], "pending"), "rollout inventory mismatch"),
         ("rollout_recurring", set_value(["rollout", 7, "status"], "pending"), "rollout inventory mismatch"),
-        ("rollout_public", set_value(["rollout", 8, "status"], "complete"), "rollout inventory mismatch"),
+        ("rollout_public", set_value(["rollout", 8, "status"], "pending"), "rollout inventory mismatch"),
         ("canonical_contract", set_value(["canonical_execution", "contract_path"], "/tmp/contract.json"), "canonical execution mismatch"),
         ("canonical_checker", set_value(["canonical_execution", "checker_path"], "tools/wrong.py"), "canonical execution mismatch"),
         ("canonical_runner", set_value(["canonical_execution", "project_data_runner"], "python3"), "canonical execution mismatch"),
@@ -1465,6 +1964,16 @@ def main() -> int:
         contract = read_json(CONTRACT_PATH)
         validate_contract(contract)
         validate_mutations(contract)
+        capability_manifest = read_json(CAPABILITY_MANIFEST_PATH)
+        public_texts = read_public_authoring_texts(PUBLIC_AUTHORING_CONTRACT)
+        validate_public_authoring(
+            contract,
+            PUBLIC_AUTHORING_CONTRACT,
+            capability_manifest,
+            public_texts,
+            check_tracked=True,
+        )
+        public_mutations = public_authoring_mutation_checks(contract)
     except ContractError as exc:
         print(f"ContractError: {exc}")
         return 1
@@ -1479,7 +1988,11 @@ def main() -> int:
         f"{counts['detachment_cases']} detachment, {counts['backend_consumers']} backend consumers/"
         f"{counts['runtime_routes']} runtime routes, {counts['diagnostics']} diagnostics, "
         f"{counts['rollout_legs']} rollout legs, {counts['ownership_rows']} owners, "
-        f"{counts['mutations']} mutations"
+        f"{counts['mutations']} mutations; public "
+        f"{len(PUBLIC_AUTHORING_CONTRACT['documents'])} documents/"
+        f"{len(PUBLIC_AUTHORING_CONTRACT['forbidden_claims'])} forbidden/"
+        f"{len(PUBLIC_AUTHORING_CONTRACT['outward_guard']['paths'])} outward/"
+        f"{public_mutations} mutations"
     )
     return 0
 
