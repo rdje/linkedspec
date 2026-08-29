@@ -17,6 +17,7 @@ date: 2026-07-12
 status: current
 tags: [language, bindings, array, harray, compatibility, retirement, FUTURE-PARITY-BACKLOG]
 evidence: "Director clarification 2026-07-12 settles removal. The corrected baseline is 600 exact selector-shaped calls across 82 tracked .spec files, including 210 across 15 shipped specs; earlier 651/227 figures included 51/17 flat_array(name) suffixes. Leaves .12.1.2-.6 enable bare behavior on every backend, .12.1.7.1 removes 210 shipped occurrences, .12.1.7.2 removes the remaining 390 from 67 file-backed fixtures/corpora, and .12.1.7.3 removes 1,356 positive occurrences from 25 embedded test/tool/backend source owners. FUTURE-PARITY-BACKLOG.12.1.8.1-.5 hard-reject exact selector nodes on Perl, Rust, Dart, Julia, and Lua; .12.1.8.6 adds the canonical five-backend no-drift checker. Final admission .12.1.9 adds the 47-file public-surface checker and removes the capability future exclusion. The composed gate reports zero current public examples, zero runtime compatibility, zero executable positives, and 19 classified rejection-test/implementation occurrences."
+evidence_update_2026_07_26_lua_semantic_outcome_fixture: "FUTURE-PARITY-BACKLOG.10.7.2.2 commit c8501d3a adds a Lua semantic-index compilation-failure fixture carrying one intentionally rejected selector form and simultaneously classifies that exact path/marker in the executable scanner. The current scan is therefore zero-positive/20-classified; the original 19 count remains accurate for its 2026-07-12 evidence boundary."
 reverify: "bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py"
 ---
 
@@ -34,7 +35,7 @@ The current tracked surface is large enough to require ordered migration rather 
 - 390 occurrences across 67 file-backed fixture/corpus specs, all removed by `.12.1.7.2`;
 - every tracked `.spec` file and executable embedded source now scans at zero;
 - the embedded baseline was 1,356 positive occurrences across 25 source owners; the strengthened whitespace-aware
-  scanner reports zero positives and 19 classified implementation, diagnostic, and rejection-test occurrences;
+  scanner reports zero positives and 20 classified implementation, diagnostic, and rejection-test occurrences;
 - the original 651/227 counts were 51/17 too high because their regex also matched the `array(name)` suffix inside
   ordinary `flat_array(name)` calls;
 - common direct parents are `copy` (172), `push` (158), `set` (72), `is_nonempty` (50), and `split` (13);

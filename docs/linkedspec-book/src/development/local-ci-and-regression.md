@@ -18,7 +18,7 @@ Run:
 bash tools/run_ci_local.sh
 ```
 
-This is the canonical regression gate for local development.
+This is the canonical regression gate for local development. For snippet-level lowering evidence, see [Inspecting `.spec` Code Generation](codegen-inspector.md).
 
 ## Verification tiers
 

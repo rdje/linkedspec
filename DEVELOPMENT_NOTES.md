@@ -9,6 +9,23 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-29 (`FUTURE-PARITY-BACKLOG.13.1` — codegen-inspector owner repair): five independent pre-change probes
+  reproduced exact `PPlugin::exec_plugin_name` failures. Raw, lifecycle block, and action-edge block paths named
+  `_rewrite_action_code_with_diagnostics`; lifecycle/action-edge chains named `_render_method_call_chain`.
+- Git/source correlation confirms the inspector arrived in `2984fb50`; Phase 1A `e964d9a4` removed the dead
+  facade wrappers but did not update the tool. The live functions remained in `RuleIR::EmitContext` and
+  `BootstrapSpec::Core`, and existing focused tests already treat those packages as explicit internal owners.
+- The repair keeps `LinkedSpec` initialization but directly loads/calls only those two owners. It does not restore
+  a facade wrapper, expose an unrelated public API, duplicate parsing/lowering, or alter generated runtime code.
+- The recurring smoke inspects all five raw/block/chain variants in one child invocation and also source-locks the
+  two owner calls. Focused syntax, smoke, ActionIR parser, and trace-pipeline tests pass.
+- The first exact staged canonical attempt reached public aggregate-selector admission and correctly rejected its
+  stale 60-file cardinality after the new inspector chapter became file 61. The checker and its three canonical
+  Knowledge owners now lock 61/25/0 without weakening discovery, classification, or selector retirement.
+- The composed executable scanner simultaneously reported 20 classified occurrences rather than the durable
+  19-count prose. `git blame` plus `git show c8501d3a` locate the delta: `.10.7.2.2` added one intentionally rejected
+  Lua semantic-index compilation-failure fixture and its exact scanner classification on 2026-07-26. Current
+  Knowledge now says zero positive / 20 classified while retaining 19 as the accurate July 12 historical result.
 - 2026-08-29 (`FUTURE-PARITY-BACKLOG.15.2` — complete standalone lifecycle parity): Dart, Julia, and Lua parser
   branches now lower bare blocks into their existing ordered lifecycle-`I` node shape instead of `PlainBlock`.
   Exact source includes the marker only when authored; code continues to use the explicit parser's normalized

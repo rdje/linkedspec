@@ -13,6 +13,7 @@ date: 2026-07-12
 status: current
 tags: [lua, luajit, actionir, compiler, runtime, bindings, retirement, diagnostics, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.12.1.8.5 adds recursive ActionIR detection in lua/src/linkedspec/action_ast.lua and whole-compiled-state validation in lua/src/linkedspec/compiled_spec.lua. Normal compilation, dead control bodies, valid deferred fluent calls, unused function bodies, and caller-mutated compiled payloads at runtime-engine admission reject exact selectors with typed fields. Selector-specific runtime reads, set/push/receiver targets, split/transform wrappers, and descriptor branches are deleted. All six neutral invalid cases and all eight retained constructor/literal classes pass. PUC Lua and LuaJIT each pass 88/88; the exact 105-manifest/CLI scaffold passes and the executable scan is zero-positive/19 classified."
+evidence_update_2026_07_26_semantic_compilation_outcome: "FUTURE-PARITY-BACKLOG.10.7.2.2 commit c8501d3a adds a semantic-index compile-failure route using one intentionally rejected selector fixture and classifies that exact source marker in the executable scanner. The current cross-repository scan is zero-positive/20-classified; this extends rather than weakens Lua rejection coverage."
 reverify: "bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_executable_aggregate_selector_sources.py"
 ---
 

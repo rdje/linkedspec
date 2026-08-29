@@ -1005,6 +1005,9 @@ perl tools/check_language_capability_coverage.pl
 log "running ActionIR AST parser focused suite"
 prove -Iperl t/actionir_ast_parser.t
 
+log "running codegen-inspector explicit-owner smoke suite"
+PERL5LIB= prove -Iperl t/inspect_spec_codegen.t
+
 log "running primary CLI runner and focused trace suites"
 PERL5LIB= prove -Iperl t/cli_conformance_runner.t t/trace_cli.t
 

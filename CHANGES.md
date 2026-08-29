@@ -10,6 +10,21 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-29 — FUTURE-PARITY-BACKLOG.13.1 — restore the codegen inspector
+
+- Reproduced the raw/lifecycle/action inspector failure: stale private calls on the thin `LinkedSpec` facade fell
+  through plugin AUTOLOAD as unknown `_rewrite_action_code_with_diagnostics` or `_render_method_call_chain` names.
+- Routed fluent-chain rendering directly through `LinkedSpec::BootstrapSpec::Core` and lowering/diagnostics through
+  `LinkedSpec::RuleIR::EmitContext`, matching current ownership without widening the public facade.
+- Added `t/inspect_spec_codegen.t` and canonical registration. The smoke locks explicit owner source calls and runs
+  raw helper, lifecycle block/chain, and action-edge block/chain inputs, requiring generated Perl, canonical IR,
+  zero raw fallback, zero unresolved helpers, and no plugin dispatch.
+- Updated Toolbox, roadmap/live/Knowledge continuity, and the mdBook with repeatable inspection examples.
+- The exact staged canonical gate admitted the new mdBook page into the governed aggregate-selector public census;
+  its exact inventory is now 61 files with the same 25 classified historical references and zero current examples.
+  The composed executable scan also reconciles its durable census to zero positives / 20 classified occurrences;
+  the added occurrence is the already-governed Lua semantic compilation-failure fixture from commit `c8501d3a`.
+
 ## 2026-08-29 — FUTURE-PARITY-BACKLOG.15.2 — close standalone lifecycle-block parity
 
 - Dart, Julia, and shared Lua now parse a rule-item-leading `{ ... }` directly as lifecycle `I`, preserving actual

@@ -4,7 +4,9 @@ use warnings;
 use Getopt::Long qw(GetOptions);
 use FindBin;
 use lib "$FindBin::Bin/../perl";
-use LinkedSpec;
+use LinkedSpec ();
+use LinkedSpec::BootstrapSpec::Core ();
+use LinkedSpec::RuleIR::EmitContext ();
 
 sub _trim {
  my ($v) = @_;
@@ -73,7 +75,7 @@ sub _extract_code_from_spec_snippet {
    };
   }
   if ($tail =~ /^(?<chain>\..+)$/s) {
-   my $helper_code = LinkedSpec::_render_method_call_chain($label, $+{chain});
+   my $helper_code = LinkedSpec::BootstrapSpec::Core::_render_method_call_chain($label, $+{chain});
    return undef unless defined $helper_code;
    return {
     kind           => 'edge_chain',
@@ -93,7 +95,7 @@ sub _extract_code_from_spec_snippet {
 
  # Lifecycle chain form (I./E./EX./IT./LX./LS./LE.).
  if ($s =~ /^(?<life>I|E|EX|IT|LX|LS|LE)\s*(?<chain>\..+)$/s) {
-  my $helper_code = LinkedSpec::_render_method_call_chain($default_label, $+{chain});
+  my $helper_code = LinkedSpec::BootstrapSpec::Core::_render_method_call_chain($default_label, $+{chain});
   return undef unless defined $helper_code;
   return {
    kind           => 'lifecycle_chain',
@@ -171,7 +173,7 @@ foreach my $snippet (@snippets) {
   next;
  }
 
- my ($lowered, $diag) = LinkedSpec::_rewrite_action_code_with_diagnostics(
+ my ($lowered, $diag) = LinkedSpec::RuleIR::EmitContext::_rewrite_action_code_with_diagnostics(
   $parsed->{label},
   $parsed->{source_code},
  );

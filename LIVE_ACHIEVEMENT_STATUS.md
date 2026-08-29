@@ -2,24 +2,25 @@
 
 ## Current Activity
 
-- Standalone lifecycle-block `.15` is complete across Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Bare rule-item
-  blocks normalize directly to lifecycle `I`; exact provenance, order, ownership, malformed twins, generated
-  carriers, inert legacy plain data, and self-hosted reserved-marker precedence are locked by one neutral contract.
-- The recurring six-route gate passes Perl 7, self-hosted 25, Rust 8, Dart 6, Julia 103, and Lua 109 assertions per
-  ABI plus generated-source, capability 90/0/0, and language 250/105+1/126 ledgers.
-- Public guides, ADR `0094`, Knowledge, roadmaps, architecture, capability truth, and the sole-facing mdBook agree.
+- Codegen-inspector repair `.13.1` routes fluent rendering through `BootstrapSpec::Core` and ActionIR lowering plus
+  diagnostics through `RuleIR::EmitContext`, avoiding the Phase 1A-thinned facade and plugin AUTOLOAD.
+- One recurring smoke source-locks both owners and executes raw helper, lifecycle block/chain, and action-edge
+  block/chain forms with generated Perl, canonical diagnostics, and zero fallback/unresolved counts.
 
 ## Latest Completed Slice
 
-- `.15.2` aligns the remaining backends, both Lua ABIs, self-hosted grammar, reconstructed/generated paths,
-  recurring/public admission, and final no-drift; parent `.15` closes.
+- `.13.1` restores the documented inspector toolbox without adding a public facade seam or changing parser,
+  compiler, runtime, `.spec`, or generated-format behavior.
 
 ## Next Action
 
-- From the exact clean `.15.2` closeout, select and activate the next roadmap-aligned pending task-tree leaf before
-  any new change.
+- Finish `.13.1` focused/canonical signoff, commit and push the clean leaf, then select the next roadmap-aligned
+  pending frontier.
 
 ## Recent Completions
+
+- `2026-08-29` — `.13.1` restores five-form codegen inspection through explicit current owner packages and adds a
+  recurring source/runtime smoke against facade plugin-AUTOLOAD regression.
 
 - `2026-08-29` — `.15.2` closes standalone lifecycle-block parity across five backends/six routes, self-hosted
   grammar, generated carriers, capability 90/0/0, public teaching, and exact recurring no-drift.
@@ -71,11 +72,6 @@
 
 - `2026-08-27` — `.14.7.6.3` adds Julia private breadth-first recursion, exact lineage/decrease, shared resources,
   expiring safe points, and typed source rebasing at 386 GREEN/one `.4` RED without carrier or rollout movement.
-
-- `2026-08-27` — `.14.7.6.2` adds Julia's private caller-frozen pure resolver/cache, complete-depth target
-  reservation and typed order, fresh sibling contexts, detached atomic stitching, and all policies. Its dormant
-  consumer is 309 GREEN/one exact `.3` recursive-authority RED; discovery, rollout, formats, and public behavior
-  do not move.
 
 ## History
 

@@ -1880,18 +1880,32 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 
 ### `FUTURE-PARITY-BACKLOG.13.1` Acceptance Checklist
 
-- [ ] **REPRODUCE / ISSUE** — Preserve exact raw-expression and lifecycle/action-chain inspector failures showing
+- [x] **REPRODUCE / ISSUE** — Preserve exact raw-expression and lifecycle/action-chain inspector failures showing
   plugin AUTOLOAD receives `_rewrite_action_code_with_diagnostics` and `_render_method_call_chain`.
-- [ ] **ROOT CAUSE (WHY + WHERE)** — Confirm current implementations/ownership, thin-facade history, tool callers,
+- [x] **ROOT CAUSE (WHY + WHERE)** — Confirm current implementations/ownership, thin-facade history, tool callers,
   and whether any supported public probe seam should replace direct private-owner calls.
-- [ ] **FIX** — Route all four documented snippet forms through explicit current owners or one deliberate stable
+- [x] **FIX** — Route all four documented snippet forms through explicit current owners or one deliberate stable
   inspection API; do not expose unrelated internals through the public facade.
-- [ ] **ADDRESSED (verified)** — Raw helper, lifecycle block, lifecycle chain, and action-edge block/chain examples
+- [x] **ADDRESSED (verified)** — Raw helper, lifecycle block, lifecycle chain, and action-edge block/chain examples
   print generated Perl plus canonical diagnostics without plugin dispatch.
-- [ ] **NO REGRESSION** — Add a recurring smoke test and pass focused tool/ActionIR, Phase-0, doctrine/KM/mdBook,
+- [x] **NO REGRESSION** — Add a recurring smoke test and pass focused tool/ActionIR, Phase-0, doctrine/KM/mdBook,
   whitespace, and canonical local gates.
-- [ ] **LOCKSTEP** — Task/index, TOOLBOX/README, Knowledge Map, changes/notes/live, and memory identify the restored
+- [x] **LOCKSTEP** — Task/index, TOOLBOX/README, Knowledge Map, changes/notes/live, and memory identify the restored
   inspector contract and next PNT frontier.
+
+Activation/implementation evidence 2026-08-29: from exact clean pushed `82d0b85f`, five separate documented-form
+probes reproduce status 2 and the two exact unknown-plugin names. Git `2984fb50` introduced the tool; Phase 1A
+`e964d9a4` removed dead facade wrappers while leaving the implementations in `BootstrapSpec::Core` and
+`RuleIR::EmitContext`. Existing focused tests directly call those internal owner packages, so the repair uses that
+established seam rather than widening `LinkedSpec`. One five-case smoke requires generated Perl, canonical nodes,
+zero fallback/unresolved counts, explicit owner call sites, and no stale facade call. Syntax, smoke, ActionIR AST,
+and trace-pipeline focused proof passes; complete documentation and canonical proof remain before closeout.
+
+Closeout candidate 2026-08-29: focused tool/ActionIR, project-storage, memory/task/Knowledge/history/README-routing,
+nine-doctrine, rendered-book/cleanup, and whitespace proof passes. TOOLBOX and the dedicated sole-facing mdBook
+page teach exact invocations; root README stays unchanged under its stable-landing policy. ADR `0073` requires the
+fully staged canonical gate because `tools/run_ci_local.sh` changes; its receipt, commit, clean-tree check, and push
+are the remaining mechanical boundary, not additional source work.
 
 ### `FUTURE-PARITY-BACKLOG.12.0` Acceptance Checklist
 

@@ -13,6 +13,7 @@ evidence: "FUTURE-PARITY-BACKLOG.12.1.9 adds tools/check_public_aggregate_select
 evidence_update_2026_07_12_lua_array_closeout: "LUA-BACKEND-PARITY.4.3.4.6 reworded four formal-grammar array end-mutation comments from `named working array (statement)` to explicit updated-snapshot semantics. The public check's code-block recognizer had counted each prose fragment `array (statement)` as an exact selector shape, so the corrected inventory is 27 genuine removed/history references, not 31. The expected count and capability guide now lock 27; all 27 retain explicit negative context and current examples remain zero."
 evidence_update_2026_07_29_readme_routing: "README-STABILITY-POLICY.1 removes two duplicate historical selector mentions from root README while keeping README in the discovered 59-file public scan. The exact current classified count becomes 25 with zero current examples; canonical migration history remains in the guide/mdBook/Knowledge owners."
 evidence_update_2026_08_25_staged_ast_enrichment_page: "FUTURE-PARITY-BACKLOG.14.7.2 adds compiler/staged-ast-enrichment.md to the discovered mdBook surface. The public selector checker reviews the new chapter, advances the exact inventory to 60 files, and keeps classified/current selector counts at 25/0."
+evidence_update_2026_08_29_codegen_inspector_page: "FUTURE-PARITY-BACKLOG.13.1 adds development/codegen-inspector.md to the discovered mdBook surface. The exact staged canonical gate catches the resulting cardinality change; the checker now locks 61 public files while classified/current selector counts remain 25/0."
 reverify: "bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py"
 ---
 
@@ -27,7 +28,7 @@ Public documentation may retain the removed spelling only to state a boundary, e
 clearly historical milestone. It may not present the spelling as an accepted example, a remaining compatibility
 surface, or future work. `tools/check_public_aggregate_selector_surface.py` enforces that distinction across the
 root README/roadmaps/architecture state, capability guide, and every mdBook source page. Its exact current inventory
-is 60 public files. It composes the runtime/
+is 61 public files. It composes the runtime/
 source retirement checker so public and executable admission cannot diverge. Its current inventory is 25 genuine
 removed/history references; four earlier counted occurrences were prose false positives and two later duplicate
 root-README history mentions were routed to canonical owners.

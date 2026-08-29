@@ -2001,17 +2001,41 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   Commit: `FUTURE-PARITY-BACKLOG.12.1.11 - align array end mutation results`
 
 - ID: `FUTURE-PARITY-BACKLOG.13`
-  Status: `pending`
+  Status: `done`
   Goal: Restore the codegen-inspector toolbox to the current thin-facade owner architecture.
   Children: `.13.1`
   Dependencies: `.12.1`
   Acceptance: `tools/inspect_spec_codegen.pl` invokes explicit owner APIs rather than facade AUTOLOAD/plugin
     fallback, all four documented snippet forms execute, and a recurring smoke test prevents owner extraction from
     silently breaking the inspector again.
+  Verification: Completion is composed by `.13.1`; focused owner-routing, five-form execution, documentation,
+    storage, doctrine, and rendered-book proof passes, while the exact staged canonical boundary is required before
+    commit/push.
+  Commit: `FUTURE-PARITY-BACKLOG.13.1 - restore codegen inspector`
 
 - ID: `FUTURE-PARITY-BACKLOG.13.1`
-  Status: `pending`
+  Status: `done`
   Goal: Rewire and regression-lock `tools/inspect_spec_codegen.pl` after the Phase 1A facade extraction.
   Dependencies: `.12.1`
+  Activation: `2026-08-29` from exact clean pushed commit
+    `82d0b85f25448489a1459b1eb563bcbf87d663c1`; five independent documented-form probes reproduce the two
+    plugin-AUTOLOAD failures, and source/history locate the explicit current owners without requiring a public
+    facade expansion.
+  Verification tier: `canonical`
+  Focused checks: Perl syntax; `t/inspect_spec_codegen.t`, `t/actionir_ast_parser.t`, and
+    `t/trace_actionir_pipeline.t`; tool project-data storage; memory/task/Knowledge/document/README routing;
+    doctrines; mdBook render/cleanup; diff hygiene.
+  Canonical trigger: `tools/run_ci_local.sh` changes to admit the recurring smoke, so ADR `0073` requires one exact
+    staged canonical receipt before commit and push.
+  Verification: **FOCUSED PASS 2026-08-29.** The recurring smoke, ActionIR AST parser, trace pipeline, tool storage,
+    memory/task/Knowledge/document/README routing, nine doctrines, mdBook render/cleanup, and diff hygiene pass.
+    The first exact staged canonical attempt correctly catches the new mdBook page as public aggregate-selector
+    inventory file 61 rather than the stale expected 60; the checker and all three canonical Knowledge owners now
+    lock 61 files / 25 classified historical references / zero current examples. The composed executable scan also
+    exposes stale 19-count prose: audit of commit `c8501d3a` proves `.10.7.2.2` intentionally added the 20th
+    classified Lua semantic-compilation rejection fixture, so current evidence is zero positive / 20 classified.
+    ADR `0073` designates the changed canonical-CI topology as an infrastructure boundary; commit/push require a
+    corrected exact staged canonical receipt for this complete candidate.
+  Commit: `FUTURE-PARITY-BACKLOG.13.1 - restore codegen inspector`
 
 <!-- Source ranges and their immutable migration digest are recorded in docs/tasks/FUTURE-PARITY-BACKLOG.index.jsonl. -->

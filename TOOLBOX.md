@@ -442,8 +442,23 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 
 ### 4.1 `tools/inspect_spec_codegen.pl` — codegen inspection
 - **WHAT:** inspect the compiled codegen / handler shapes a `.spec` produces, without hand-reading the
-  emitter. **WHEN:** "what does this rule compile to?". **HOW:** `perl -Iperl tools/inspect_spec_codegen.pl`
-  (run with no args for usage).
+  emitter. It accepts raw helper expressions, lifecycle blocks/chains, and action-edge blocks/chains, then prints
+  normalized helper code, generated Perl, canonical IR nodes, raw-fallback count, and unresolved-helper count.
+- **WHEN:** "what does this rule compile to?" or "which lowering boundary owns this snippet?".
+- **HOW:** run one or repeat `--snippet` for a comparable batch:
+  ```bash
+  perl tools/inspect_spec_codegen.pl --label Top --snippet 'return(copy(items))'
+  perl tools/inspect_spec_codegen.pl --label Top \
+    --snippet 'I { x = 1; return(x) }' \
+    --snippet 'I.lowercase_each(parts).filter_match(uniq(uppercase_each(parts)), /^[A-Z_]+$/)' \
+    --snippet '/a/ -> Top { return(retv) }'
+  ```
+  Run with no arguments for every accepted form and the `--snippet-file` interface.
+- **OWNER ROUTING:** the inspector deliberately calls
+  `LinkedSpec::BootstrapSpec::Core::_render_method_call_chain` and
+  `LinkedSpec::RuleIR::EmitContext::_rewrite_action_code_with_diagnostics` directly. These are the current thin-
+  facade owners; routing them back through `LinkedSpec::_...` would enter plugin AUTOLOAD. The recurring
+  `t/inspect_spec_codegen.t` smoke locks both source ownership and all five block/chain executions.
 
 ### 4.2 `tools/cross_check_spec_parsers.pl` / `tools/gen_oracle_corpus.pl`
 - **WHAT:** `cross_check_spec_parsers.pl` compares the oracle (bootstrap) parser vs the candidate
