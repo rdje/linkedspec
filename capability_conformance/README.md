@@ -4,6 +4,15 @@
 admitted backends. It complements, rather than replaces, the executable 105-fixture interpreter corpus and the
 66-case primary CLI manifest.
 
+## Standalone lifecycle block
+
+`standalone_lifecycle_block_contract.json` closes the exact shorthand from ADR `0094`: a standalone rule-body
+`{ ... }` normalizes to lifecycle `I`, preserves actual source/opening line and explicit-twin ActionIR semantics,
+orders duplicates, keeps earlier brace owners, rejects malformed twins, and leaves legacy plain carriers inert.
+Its six runtime routes plus the permanent self-hosted grammar run through
+`bash tools/check_standalone_lifecycle_block_five_backend.sh`. The resulting 18-row capability census is
+90 pass / 0 partial / 0 gap.
+
 `mcp_semantic_transport_contract.json` (`linkedspec-mcp-transport-v1`) is the single backend-neutral machine
 contract for LinkedSpec's modern MCP `2026-07-28` stdio projection. Its root-relative artifact inventory pins the
 closed JSON Schema 2020-12 envelope/tool definitions, four semantic payloads, 35 canonical LF-framed JSON-RPC

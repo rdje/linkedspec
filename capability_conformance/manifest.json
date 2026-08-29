@@ -84,6 +84,19 @@
       }
     },
     {
+      "id": "language.standalone_lifecycle_block",
+      "category": "language-runtime",
+      "contract": "A balanced standalone rule-body block is exact lifecycle-I shorthand, preserves authored provenance and order, never steals an earlier brace owner, and leaves legacy plain carriers inert.",
+      "sources": ["docs/decisions/0094-standalone-rule-block-normalizes-to-lifecycle-i.md", "capability_conformance/standalone_lifecycle_block_contract.json", "docs/linkedspec-book/src/appendix/formal-grammar.md"],
+      "backends": {
+        "perl": {"status": "pass", "references": ["perl/LinkedSpec/BootstrapSpec.pm", "t/standalone_lifecycle_block_perl_contract.t", "t/standalone_lifecycle_block_self_hosted_contract.t"]},
+        "rust": {"status": "pass", "references": ["rust/linkedspec-runtime/src/spec_parser.rs", "rust/linkedspec-core/src/compiler.rs", "rust/linkedspec-runtime/tests/standalone_lifecycle_block_contract.rs"]},
+        "dart": {"status": "pass", "references": ["dart/lib/src/parser/spec_parser.dart", "dart/lib/src/validation/spec_validator.dart", "dart/test/standalone_lifecycle_block_contract_test.dart"]},
+        "julia": {"status": "pass", "references": ["julia/src/spec/Parser.jl", "julia/src/spec/Validator.jl", "julia/test/standalone_lifecycle_block_contract_test.jl"]},
+        "lua": {"status": "pass", "references": ["lua/src/linkedspec/spec_parser.lua", "lua/src/linkedspec/spec_validator.lua", "lua/test/standalone_lifecycle_block_contract_test.lua"]}
+      }
+    },
+    {
       "id": "language.user_functions_staged_bodies",
       "category": "language-runtime",
       "contract": "Top-level exact-arity functions use the neutral definition shell, staged body job, ActionIR body AST, and runtime registry behavior.",

@@ -82,6 +82,9 @@ function validate_spec(
         _trace_validation_check!(trace, "malformed_raw_body_lines") do
             _check_malformed_raw_body_lines(spec)
         end
+        _trace_validation_check!(trace, "balanced_lifecycle_blocks") do
+            _check_balanced_lifecycle_blocks(spec)
+        end
         _trace_validation_check!(trace, "edge_structure") do
             _check_edge_structure(spec)
         end
@@ -128,6 +131,7 @@ function _validate_spec(spec::SpecFile, strict_syntax::Bool)
     _check_duplicate_function_names(spec)
     _check_function_registry(spec)
     _check_malformed_raw_body_lines(spec)
+    _check_balanced_lifecycle_blocks(spec)
     _check_edge_structure(spec)
     _check_edge_targets(spec)
     _check_capture_gaps_directives(spec)
@@ -402,6 +406,58 @@ function _check_malformed_raw_body_lines(spec::SpecFile)
         end
     end
     return nothing
+end
+
+function _check_balanced_lifecycle_blocks(spec::SpecFile)
+    for rule in spec.rules
+        depth = 0
+        for element in rule.body
+            kind = element.kind
+            if kind isa CodeBlockBodyElementKind
+                source = lstrip(element.source)
+                marker_remainder = ""
+                marker_bytes = ncodeunits(kind.lifecycle)
+                if startswith(source, kind.lifecycle) && ncodeunits(source) > marker_bytes
+                    marker_remainder = lstrip(String(SubString(source, marker_bytes + 1)))
+                end
+                authored_outer_block = startswith(source, "{") || startswith(marker_remainder, "{")
+                depth += _brace_depth_delta(authored_outer_block ? source : kind.code)
+            end
+        end
+        if depth != 0
+            side = depth > 0 ? "open" : "close"
+            throw(SpecValidationException(
+                "rule '$(rule.header.label)' has unbalanced braces: $(abs(depth)) unmatched $side",
+            ))
+        end
+    end
+    return nothing
+end
+
+function _brace_depth_delta(text::AbstractString)
+    depth = 0
+    quote_delimiter = nothing
+    escaped = false
+    for character in text
+        if quote_delimiter !== nothing
+            if escaped
+                escaped = false
+            elseif character == '\\'
+                escaped = true
+            elseif character == quote_delimiter
+                quote_delimiter = nothing
+            end
+            continue
+        end
+        if character == '\'' || character == '"'
+            quote_delimiter = character
+        elseif character == '{'
+            depth += 1
+        elseif character == '}'
+            depth -= 1
+        end
+    end
+    return depth
 end
 
 function _portable_validation_exception(; code, stage, message, fields)

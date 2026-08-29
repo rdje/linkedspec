@@ -1,7 +1,7 @@
 # ADR 0094: Standalone rule blocks normalize directly to lifecycle `I`
 
 - Date: 2026-08-29
-- Status: accepted; Perl/Rust implemented under `.15.1`; remaining rollout pending under `.15.2`
+- Status: accepted; rollout complete under `.15.1-.2`
 - Tags: architecture, grammar, lifecycle, codeblock, parser, source-provenance, portability, parity
 
 ## Context
@@ -86,12 +86,12 @@ the shorthand through the existing lifecycle `I` path.
 
 - `.15.1` implements the Perl/Rust normalization and Rust duplicate-order repair with explicit/bare twin tests.
 - `.15.2` aligns Dart, Julia, shared Lua on both ABIs, the self-hosted grammar, available generated carriers,
-  capability/public docs, and final no-drift.
+  capability/public docs, and final no-drift. The closed recurring proof is
+  `tools/check_standalone_lifecycle_block_five_backend.sh`.
 - The language gains syntactic economy without a second runtime phase or a new public semantic AST kind.
 - Action/blind ownership, callable blocks, nested block semantics, explicit `I`, and historical Perl lifecycle
   placement remain unchanged.
-- Perl and Rust accept the shorthand after `.15.1`; authors targeting every backend must continue to write
-  `I { ... }` until `.15.2` aligns Dart, Julia, Lua, and the self-hosted grammar.
+- All five admitted backends accept the shorthand; PUC Lua and LuaJIT independently prove the shared Lua source.
 
 ## Links
 

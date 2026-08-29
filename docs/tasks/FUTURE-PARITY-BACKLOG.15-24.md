@@ -1,5 +1,5 @@
 - ID: `FUTURE-PARITY-BACKLOG.15`
-  Status: `active`
+  Status: `done; canonical-signoff-complete`
   Goal: Make any standalone/dangling rule-level `{ ... }` block exact syntax sugar for `I { ... }`.
   Children: `.15.0`, `.15.1`, `.15.2`
   Acceptance: At top-level rule-body item parsing, accept a standalone `{ ... }` anywhere an item may occur and
@@ -8,6 +8,9 @@
     expression/callable blocks remain owned after entering code parsing. Apply the same rule to OR, AND, zero-regex,
     one-regex, and two-regex rules; preserve explicit `I { ... }`; inherit its ordering/duplicate behavior; align
     all admitted backends, source generation, diagnostics, examples, and complete gates.
+  Verification: **PASS 2026-08-29.** Decision `.15.0`, Perl/Rust `.15.1`, and remaining-backend/self-hosted/public
+    `.15.2` close the exact neutral contract across five source backends, six runtime routes, generated carriers,
+    self-hosting, capability 90/0/0, public teaching, and canonical recurring no-drift.
 
 - ID: `FUTURE-PARITY-BACKLOG.15.0`
   Status: `done; canonical-signoff-complete` (2026-08-29; task-tree-first from exact clean typed-authoring-model closeout commit
@@ -132,9 +135,21 @@
   Commit: `FUTURE-PARITY-BACKLOG.15.1 - implement Perl and Rust lifecycle shorthand`.
 
 - ID: `FUTURE-PARITY-BACKLOG.15.2`
-  Status: `pending`
+  Status: `done; canonical-signoff-complete` (2026-08-29; task-tree-first from exact clean Perl/Rust implementation commit
+    `9321357507a7dd39d49793b5674c130b5b805ca4`; no push)
   Goal: Align Dart, Julia, Lua, generated paths, public examples, Knowledge Map, and complete no-drift proof.
   Dependencies: `.15.1`.
+  Verification tier: `canonical` — this leaf changes the remaining three source backends/four runtime routes,
+    self-hosted grammar authority, public examples/capability truth, recurring governance, parent closeout, and the
+    batch push boundary together.
+  Focused checks: neutral contract on Dart, Julia, PUC Lua, and LuaJIT; self-hosted/bootstrap precedence and AST
+    equality; direct/serialized/reconstructed/emitted/generated carriers; legacy plain-node inertness; ownership,
+    placement, authored duplicates, malformed twins, capability/language/public no-drift and adjacent progressive/
+    gap/recognition/typed-source dependents; Knowledge, task/index, bounded histories, memory, all nine doctrines,
+    rendered mdBook, and exact staged diff.
+  Canonical trigger: `cross-backend/public admission + self-hosted grammar + parent closeout + push boundary` — the
+    exact staged candidate must pass receipt-bound canonical local CI before commit and the resulting exact clean
+    HEAD must pass the pre-push boundary before the batch push.
   Acceptance: Dart, Julia, and shared Lua source parsing normalize bare rule-item blocks to lifecycle `I` with the
     exact neutral equivalence, ordering, provenance, ownership, placement, and malformed boundaries; PUC Lua and
     LuaJIT prove the shared implementation independently. New source parsing emits no `PlainBlock`; legacy
@@ -151,6 +166,95 @@
     whitespace.
   Planned canonical boundary: exact staged full local CI is mandatory for cross-backend/public admission, self-hosted
     grammar movement, parent closeout, and the final batch push boundary under ADR `0073`.
+  Checklist: [x] clean activation/task ownership [x] Knowledge/toolbox and backend-authority retrieval
+    [x] Dart normalization/provenance/order/diagnostics [x] Julia normalization/provenance/order/diagnostics
+    [x] shared Lua normalization/provenance/order/diagnostics on both ABIs [x] self-hosted grammar precedence/equality
+    [x] reconstructed/emitted/generated/legacy compatibility proof [x] recurring/capability/language/public admission
+    [x] parent/roadmap/book/Knowledge/live synchronization [x] focused and exact staged canonical signoff
+    [x] atomic commit/brief/clean push boundary.
+  Activation evidence: exact `git status --short --untracked-files=all` is empty at
+    `9321357507a7dd39d49793b5674c130b5b805ca4`; `.15.1` passes Perl 324/324, Rust neutral 8/8, Rust parser 32/32,
+    rendered mdBook, and all nine doctrines; `git_message_brief.txt` is zero bytes, reproducible book output is
+    removed, no background job remains, and no push occurred.
+  Retrieval and RED evidence: `KNOWLEDGE_MAP.md` resolves the standalone lifecycle audit/ADR before source review;
+    `TOOLBOX.md` selects the repository-routed Dart, Julia, PUC-Lua, LuaJIT, and self-hosted probes. Exact primary-
+    command twins at activation HEAD return `"first-second"` for `Top:: I { return("first-second") }` and `null`
+    for `Top:: { return("first-second") }` on Dart, Julia, PUC Lua, and LuaJIT. Source inspection locates the same
+    cause in `dart/lib/src/parser/spec_parser.dart`, `julia/src/spec/Parser.jl`, and
+    `lua/src/linkedspec/spec_parser.lua`: each bare branch emits its legacy plain node, while its compiler already
+    preserves explicit lifecycle payloads in authored lists and its runtime consumes those lists. The repair is
+    therefore parser/validation-local; legacy AST/compiled plain carriers stay readable and inert.
+  Implementation evidence: Dart, Julia, and Lua now emit their existing lifecycle-`I` body kind for a bare block,
+    retain exact authored outer source/opening line, preserve same-line unsupported remainder for validation, and
+    use quote-aware outer balance with the prior interior fallback for programmatic/older nodes. No source parser
+    emits a new plain node. All four duplicate mixtures return `first-second` through native, JSON-reconstructed,
+    generated-plan, and emitted-source roles; legacy serialized plain nodes and compiled plain payloads remain
+    readable and inert. The stable consumers pass Dart 6 tests, Julia 103 assertions, and shared Lua 109 assertions
+    on each of PUC Lua and LuaJIT.
+  Dart/Julia precedence repair: canonical attempts three and four exposed that the first suffix-preservation
+    implementations also retained a recognized same-line `Child::AND /x/` header-shaped tail as raw body text. The
+    generic validator failure masked the earlier typed recursive-observation target/operand diagnostics. Each
+    frontend now preserves a lifecycle suffix only when its existing rule-header scanner does not recognize it;
+    malformed twins remain exact and the existing dependent consumers pass without fixture changes. Shared Lua's
+    corresponding fixtures use real line boundaries and remain correctly stopped by its existing header collector.
+  Self-hosted/recurring evidence: `specs/spec.spec` adds `standalone_lifecycle_block` and a complete-line lifecycle
+    route before generic bare-edge matching. Its four governed `spec_spec_*` corpus mirrors are byte-identical at
+    SHA-256 `03cfb50459984806c806e9ec3f2b072add897c207a2cb93fd267d640a5808004`. The 25-test consumer proves explicit/
+    bare semantic equality and all seven reserved markers retain lifecycle ownership. The recurring driver composes
+    the neutral 9-placement/4-duplicate/6-owner/3-malformed/11-mutation checker, Perl 7, self-hosted 25, Rust 8,
+    Dart 6, Julia 103, PUC Lua 109, LuaJIT 109, generated-source, capability 90/0/0, and language 250/105+1/126;
+    all pass.
+  Public/capacity evidence: the all-pass `language.standalone_lifecycle_block` row, ADR `0094`, Knowledge fact,
+    user/backend guides, capability guide, roadmaps, architecture, and both mdBook chapters state the current
+    five-backend/six-route contract. The required change record mechanically rolls exact activation-source lines
+    235-450 into immutable `docs/history/changes/segment-4988-4251613b7181.md` (216 lines / 19,833 bytes), leaving
+    the final hot shard at 252/512 lines and 22,201/65,536 bytes. The exact collection is 25 files / 47,264 lines /
+    3,390,743 bytes with a 24-line manifest; ADR `0096` authorizes only finite capacity 24→25 files and manifest
+    23→24 lines while retaining every byte, aggregate, per-segment, owner, lifecycle, verifier, route, and storage
+    control.
+  Signoff evidence: the composed standalone driver and its six runtime routes pass; focused formatting, syntax,
+    adjacent contract, Knowledge/task/history/memory/doctrine/whitespace checks and rendered mdBook pass. The exact
+    fully staged candidate passes receipt-bound canonical local CI with the standalone matrix enabled, then the
+    atomic commit, zero-byte brief, exact clean pre-push boundary, and batch push complete without residue.
+  Canonical attempt one: the Unicode rule-label freshness contract stops at the first stale `spec_spec_minimal_rule`
+    mirror because canonical `specs/spec.spec` moved without its four byte-exact corpus snapshots. All four governed
+    mirrors are synchronized through the same three grammar hunks; exact SHA equality and the focused checker pass
+    before the corrected staged candidate restarts canonical CI from the beginning.
+  Canonical attempt two: the corrected candidate passes all nine doctrines and reaches fresh Rust dependency
+    compilation. Every active independent `rustc` child then receives simultaneous signal 15 with no crate
+    diagnostic; the gate command has no internal timeout and a process census finds no survivor. This is external
+    termination, not accepted proof or a code classification; the exact restaged candidate restarts from the now-
+    warm repository-local build cache and must reach the real canonical terminus.
+  Canonical attempt three: the warmed retry passes standalone, progressive, gap, and recognition admission across
+    every backend, then the Dart typed-source/recursive-observation set catches the lifecycle-remainder diagnostic-
+    precedence regression documented above. The corrected parser and exact existing dependent consumer pass before
+    task/index/Knowledge/live surfaces are refreshed. A focused Dart fatal-warning check then removes one unused
+    import from the new contract test; the fully restaged candidate restarts canonical CI only after that clean
+    analysis and the corrected cross-backend recurring driver both pass.
+  Canonical attempt four: the exact stage passes all nine doctrines and staged/progressive/gap/recognition admission
+    across every backend. The repaired Dart typed-source/recursive-observation set passes 11/11, then Julia exposes
+    its homologous two masked diagnostics. Root-cause audit covers Dart, Julia, and shared Lua; Julia receives the
+    same rule-header exclusion, while Lua needs no slice-induced repair because its fixtures reach the existing
+    line-boundary header collector. Exact Julia and recurring proof pass before canonical attempt five.
+  Canonical attempt five: all changed-surface and broad language checks pass through ActionIR and primary CLI proof.
+    The tool project-data oracle then rejects its deliberately frozen Python-entrypoint count because the owned
+    standalone lifecycle checker is the 33rd maintained entrypoint. Inspection confirms it has no temporary
+    allocator and already runs through the managed Python wrapper. Focused proof after the exact 32→33 repair then
+    rejects the five-backend driver's governed repository-local `mktemp` workspace as a new 15th shell owner; both
+    exact inventories, its workflow-routing enrollment, and the canonical Knowledge fact advance before the next
+    exact staged retry.
+  Canonical attempt six: the exact repaired candidate passes all prior language/admission checks and the corrected
+    tool-storage oracle, then stops only when the outer Codex sandbox denies the process-locality oracle's nested
+    macOS `sandbox-exec` with the known status 71 before its representative relocated driver starts. Canonical
+    Knowledge already classifies this harness boundary; an unchanged permission-authorized full retry supplies the
+    authoritative proof, with no production or oracle weakening.
+  Canonical attempt seven: the permission-authorized exact candidate passes process containment, moved-root/outside-
+    CWD execution, both 66-case CLI matrices, and every earlier gate. Phase 0 then reports one failure in 1,032:
+    its bootstrap function-ownership guard raw-scans serialized payload text and mistakes `return(value)` inside the
+    now-preserved lifecycle `ICODE` node for a function-definition payload. The repair traverses only structural
+    array tags and hash identity fields, retaining exact `fn`/function-node rejection while allowing lifecycle body
+    text; focused bootstrap proof passes before the next exact authorized canonical retry.
+  Commit: `FUTURE-PARITY-BACKLOG.15.2 - complete standalone lifecycle parity`.
 
 - ID: `FUTURE-PARITY-BACKLOG.16`
   Status: `done`

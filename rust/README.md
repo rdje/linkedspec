@@ -2,6 +2,13 @@
 
 A Rust implementation of the [LinkedSpec](https://github.com/rdje/linkedspec) progressive-extraction parser DSL.
 
+## Standalone lifecycle block
+
+A rule-item-leading `{ ... }` is exact shorthand for `I { ... }`. Source parsing emits lifecycle `I` directly,
+preserves the authored block source and line, and appends duplicate explicit/shorthand blocks in authored order.
+Legacy serialized `PlainBlock` data remains readable and inert. Run the complete five-backend/six-runtime contract
+with `bash tools/check_standalone_lifecycle_block_five_backend.sh` from the repository root.
+
 ## What This Is
 
 The `rust/` directory contains a Cargo workspace with two crates:

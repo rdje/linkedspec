@@ -5,6 +5,24 @@ This guide explains LinkedSpec in two layers:
 
 For current LinkedSpec work, the second layer matters the most. If you want `.spec` files that stay backend-neutral and portable across future non-Perl backends, you should understand the lowering surface and keep `.spec` authoring on the canonical method-like DSL rather than on raw Perl fragments.
 
+## Standalone lifecycle block
+
+A balanced block that begins a rule-body item is exact shorthand for lifecycle initialization:
+
+```text
+Top::
+ { set(prefix, "ready-") }
+ /x/ -> Done { return(cat(prefix, "x")) }
+Done:
+ /()/
+```
+
+The leading `{ ... }` is semantically identical to `I { ... }`. It stays at the same authored position, and
+multiple explicit or shorthand `I` blocks execute in authored order. Blocks already attached to action, blind, or
+bare edges—and function, callable, nested control/value, and quoted braces—keep their existing owners. All five
+backends and both Lua ABIs consume the recurring proof in
+`tools/check_standalone_lifecycle_block_five_backend.sh`.
+
 ## Internal Compiler Model Note
 For advanced compiler/descriptor work, one naming point is now explicit:
 - returned descriptors now expose `dependency_regex_map`,

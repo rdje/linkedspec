@@ -276,6 +276,8 @@ require_tracked_file tools/check_punctuation_light_zero_arg_contract.py
 require_tracked_file tools/check_punctuation_light_five_backend.sh
 require_tracked_file tools/check_repeated_action_result_contract.py
 require_tracked_file tools/check_repeated_action_result_five_backend.sh
+require_tracked_file tools/check_standalone_lifecycle_block_contract.py
+require_tracked_file tools/check_standalone_lifecycle_block_five_backend.sh
 require_tracked_file tools/check_root_rule_selection_contract.py
 require_tracked_file tools/check_root_rule_selection_five_backend.sh
 require_tracked_file tools/check_rule_local_cursor_contract.py
@@ -354,11 +356,15 @@ require_tracked_file t/rule_local_cursor_perl_contract.t
 require_tracked_file t/duplicate_regex_slot_identity_perl_contract.t
 require_tracked_file t/sparse_and_action_slots_perl_regression.t
 require_tracked_file t/repeated_action_result_perl_contract.t
+require_tracked_file t/standalone_lifecycle_block_perl_contract.t
+require_tracked_file t/standalone_lifecycle_block_self_hosted_contract.t
 require_tracked_file rust/linkedspec-runtime/tests/duplicate_regex_slot_identity_contract.rs
 require_tracked_file rust/linkedspec-runtime/tests/repeated_action_result_contract.rs
+require_tracked_file rust/linkedspec-runtime/tests/standalone_lifecycle_block_contract.rs
 require_tracked_file rust/linkedspec-core/tests/unicode_rule_label_contract.rs
 require_tracked_file rust/linkedspec-runtime/tests/unicode_rule_label_routes.rs
 require_tracked_file dart/test/repeated_action_result_contract_test.dart
+require_tracked_file dart/test/standalone_lifecycle_block_contract_test.dart
 require_tracked_file dart/test/self_hosted_unicode_rule_label_test.dart
 require_tracked_file dart/lib/src/parser/unicode_rule_label.dart
 require_tracked_file dart/test/unicode_rule_label_classifier_test.dart
@@ -371,6 +377,7 @@ require_tracked_file julia/test/unicode_rule_label_routes_test.jl
 require_tracked_file julia/test/unicode_rule_label_identity_routes_test.jl
 require_tracked_file julia/test/unicode_rule_label_negative_isolation_test.jl
 require_tracked_file julia/test/repeated_action_result_contract_test.jl
+require_tracked_file julia/test/standalone_lifecycle_block_contract_test.jl
 require_tracked_file lua/src/linkedspec/unicode_rule_label.lua
 require_tracked_file lua/src/linkedspec/semantic_index.lua
 require_tracked_file lua/src/linkedspec/semantic_compilation_outcome.lua
@@ -389,6 +396,7 @@ require_tracked_file lua/test/unicode_rule_label_identity_routes_test.lua
 require_tracked_file lua/test/body_fluent_whole_token_test.lua
 require_tracked_file lua/test/unicode_rule_label_negative_isolation_test.lua
 require_tracked_file lua/test/repeated_action_result_contract_test.lua
+require_tracked_file lua/test/standalone_lifecycle_block_contract_test.lua
 require_tracked_file dart/test/duplicate_regex_slot_identity_contract_test.dart
 require_tracked_file julia/test/duplicate_regex_slot_identity_contract_test.jl
 require_tracked_file lua/test/duplicate_regex_slot_identity_contract_test.lua
@@ -412,6 +420,7 @@ require_tracked_file capability_conformance/duplicate_regex_slot_identity_contra
 require_tracked_file capability_conformance/logical_helper_contract.json
 require_tracked_file capability_conformance/punctuation_light_zero_arg_contract.json
 require_tracked_file capability_conformance/repeated_action_result_contract.json
+require_tracked_file capability_conformance/standalone_lifecycle_block_contract.json
 require_tracked_file capability_conformance/repeated_action_result/explicit_or_distinct.spec
 require_tracked_file capability_conformance/repeated_action_result/explicit_or_distinct.input
 require_tracked_file capability_conformance/repeated_action_result/explicit_or_distinct.expected.json
@@ -576,6 +585,9 @@ $typed_gap_composition_driver_matches"
 recognition_driver_matches=$(grep -nE '/(Users|home)/[^[:space:]]*|[[:alpha:]]:\\\\' tools/check_recognition_transaction_six_runtime.sh || true)
 [[ -z "$recognition_driver_matches" ]] || fail "machine-specific absolute path(s) in recognition-transaction recurring driver:
 $recognition_driver_matches"
+standalone_lifecycle_driver_matches=$(grep -nE '/(Users|home)/[^[:space:]]*|[[:alpha:]]:\\\\' tools/check_standalone_lifecycle_block_five_backend.sh || true)
+[[ -z "$standalone_lifecycle_driver_matches" ]] || fail "machine-specific absolute path(s) in standalone lifecycle-block recurring driver:
+$standalone_lifecycle_driver_matches"
 
 log "running syntax checks"
 bash -n tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh \
@@ -590,6 +602,7 @@ bash -n tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh \
  tools/check_callable_codeblock_five_backend.sh \
  tools/check_diagnostic_output_five_backend.sh tools/check_logical_helper_five_backend.sh \
  tools/check_duplicate_regex_slot_identity_five_backend.sh tools/check_repeated_action_result_five_backend.sh \
+ tools/check_standalone_lifecycle_block_five_backend.sh \
  tools/check_root_rule_selection_five_backend.sh \
  tools/check_rule_local_cursor_five_backend.sh \
  tools/check_semantic_introspection_six_runtime.sh \
@@ -911,6 +924,12 @@ bash tools/run_python_project_data.sh tools/check_repeated_action_result_contrac
 log "running composed Perl explicit-repetition action-result consumer"
 PERL5LIB= prove -Iperl t/repeated_action_result_perl_contract.t
 
+log "checking backend-neutral standalone lifecycle-block contract"
+bash tools/run_python_project_data.sh tools/check_standalone_lifecycle_block_contract.py
+
+log "running permanent self-hosted standalone lifecycle-block consumer"
+PERL5LIB= prove -Iperl t/standalone_lifecycle_block_self_hosted_contract.t
+
 log "running focused Perl root-rule selection core consumer"
 PERL5LIB= prove -Iperl t/root_rule_selection_perl_core.t
 
@@ -1211,6 +1230,14 @@ if [[ "${LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX:-0}" == "1" ]]; then
  bash "$REPO_ROOT/tools/check_repeated_action_result_five_backend.sh"
 else
  log "skipping optional five-backend repeated action-result matrix (set LINKEDSPEC_RUN_REPEATED_ACTION_RESULT_MATRIX=1 when all backend toolchains are available)"
+fi
+
+if [[ "${LINKEDSPEC_RUN_STANDALONE_LIFECYCLE_BLOCK_MATRIX:-0}" == "1" ]]; then
+ log "running optional five-backend standalone lifecycle-block matrix (LINKEDSPEC_RUN_STANDALONE_LIFECYCLE_BLOCK_MATRIX=1)"
+ require_tracked_file tools/check_standalone_lifecycle_block_five_backend.sh
+ bash "$REPO_ROOT/tools/check_standalone_lifecycle_block_five_backend.sh"
+else
+ log "skipping optional five-backend standalone lifecycle-block matrix (set LINKEDSPEC_RUN_STANDALONE_LIFECYCLE_BLOCK_MATRIX=1 when all backend toolchains are available)"
 fi
 
 if [[ "${LINKEDSPEC_RUN_PUNCTUATION_MATRIX:-0}" == "1" ]]; then

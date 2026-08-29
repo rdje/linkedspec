@@ -1,5 +1,12 @@
 # Backend Handoff
 
+> **Standalone lifecycle-block parity is complete:** ADR `0094` requires a rule-item-leading `{ ... }` to
+> normalize directly to lifecycle `I`, preserve authored source/line and explicit-twin ActionIR semantics, append
+> duplicates in order, retain every earlier brace owner, and leave legacy plain carriers inert. Perl, Rust, Dart,
+> Julia, PUC Lua, and LuaJIT are admitted, and `specs/spec.spec` preserves reserved lifecycle precedence. Run
+> `bash tools/check_standalone_lifecycle_block_five_backend.sh` for the closed recurring proof.
+>
+
 > **Accepted cursor/generated migration:** ADR `0044` requires every backend to
 > derive cursor policy from authored family, preserve child ownership, remove
 > public/global overrides with portable diagnostics, project per-rule

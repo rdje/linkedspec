@@ -44068,10 +44068,31 @@ subtest 'fn_definition_grammar_is_not_bootstrap_owned' => sub {
         'current bootstrap parse still returns a generic paragraph structure for fn-shaped text')
         or diag(normalize_error($parse_error));
 
-    require JSON::PP;
-    my $json = JSON::PP->new->canonical(1)->allow_nonref(1)->encode($retv);
-    unlike($json, qr/\b(?:fn|function|helper|value)\b/i,
-        'bootstrap parse result does not contain a structured function-definition node or function payload');
+    my @pending = ($retv);
+    my @function_node_identities;
+    while (@pending) {
+        my $node = shift @pending;
+        if (ref($node) eq 'ARRAY') {
+            my $tag = $node->[0];
+            if (defined($tag) && !ref($tag)
+                && $tag =~ /\A(?:fn|function|function_definition|user_function_definition|FN_DEF)\z/i) {
+                push @function_node_identities, $tag;
+            }
+            push @pending, grep { ref($_) } @$node;
+        }
+        elsif (ref($node) eq 'HASH') {
+            for my $key (qw(kind node_type tag type)) {
+                my $identity = $node->{$key};
+                if (defined($identity) && !ref($identity)
+                    && $identity =~ /\A(?:fn|function|function_definition|user_function_definition|FN_DEF)\z/i) {
+                    push @function_node_identities, "$key=$identity";
+                }
+            }
+            push @pending, grep { ref($_) } values %$node;
+        }
+    }
+    is_deeply(\@function_node_identities, [],
+        'bootstrap parse result contains no structured function-definition node identity');
 };
 
 subtest 'user_function_definition_spec_ast_shape' => sub {

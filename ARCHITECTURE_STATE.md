@@ -1,9 +1,9 @@
 # ARCHITECTURE STATE
 
-## Standalone rule-item blocks are lifecycle `I` shorthand on Perl and Rust
+## The standalone lifecycle-block parity is complete across five backends
 
-ADR `0094` / `FUTURE-PARITY-BACKLOG.15.0` freezes the portable boundary; `.15.1` implements it on Perl and Rust.
-A balanced `{ ... }` beginning a rule-body item normalizes during those source parses to the existing lifecycle
+ADR `0094` / `FUTURE-PARITY-BACKLOG.15.0-.2` freezes and completes the portable boundary. A balanced `{ ... }`
+beginning a rule-body item normalizes during every admitted source parse to the existing lifecycle
 `I` semantic node at that exact authored position, preserving block source/opening line and explicit-twin ActionIR
 interior spans. It adds no phase and never enters the legacy plain-action runtime path. Edge-attached blocks,
 function/callable bodies, nested code/value/control blocks, and quoted braces retain their existing owners;
@@ -11,14 +11,12 @@ malformed syntax follows the explicit twin's diagnostic boundary.
 
 Perl emits metadata-bearing `ICODE` and preserves its established placement-sensitive RuleIR lowering. Rust emits
 `CodeBlock(I)` directly, keeps the existing compiled preamble ABI, and appends repeated `I` statements instead of
-overwriting the earlier block. Native, serialized, emitted/generated, exact provenance, OR/AND zero/one/two-regex,
-same-line successor, all duplicate mixtures, ownership, and malformed-twin paths consume one neutral contract.
-Legacy Rust programmatic/serialized `PlainBlock` stays readable and inert.
-
-This is not portable current behavior yet. Dart, Julia, and Lua still parse an inert `PlainBlock`/
-`plain_action_payloads`, and the self-hosted grammar still lacks the production and reserved-label precedence.
-`.15.2` owns those remaining backends, both Lua ABIs, self-hosting, public admission, and final no-drift. Until it
-lands, cross-backend specifications should continue to write `I { ... }`.
+overwriting the earlier block. Dart, Julia, and shared Lua now emit their lifecycle code-block nodes directly;
+PUC Lua and LuaJIT prove the shared route independently. Native, reconstructed, emitted/generated, provenance,
+OR/AND zero/one/two-regex, same-line successor, duplicate, ownership, malformed, and legacy-inert paths consume
+one neutral contract. `specs/spec.spec` owns a standalone production and complete-line lifecycle precedence, so
+reserved lifecycle labels no longer project as bare edges. The canonical recurring authority is
+`tools/check_standalone_lifecycle_block_five_backend.sh`; capability truth is 90/0/0.
 
 ## Complete typed authoring model is current across six recurring authorities
 

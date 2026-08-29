@@ -78,6 +78,7 @@ void validateSpec(
     _checkDuplicateFunctionNames(spec);
     _checkFunctionRegistry(spec);
     _checkMalformedRawBodyLines(spec);
+    _checkBalancedLifecycleBlocks(spec);
     _checkEdgeStructure(spec);
     _checkEdgeTargets(spec);
     _checkCaptureGapsDirectives(spec);
@@ -327,6 +328,55 @@ void _checkMalformedRawBodyLines(SpecFile spec) {
       }
     }
   }
+}
+
+void _checkBalancedLifecycleBlocks(SpecFile spec) {
+  for (final rule in spec.rules) {
+    var depth = 0;
+    for (final element in rule.body) {
+      if (element.kind case final CodeBlockBodyElementKind block) {
+        final source = element.source.trimLeft();
+        final markerRemainder = source.startsWith(block.lifecycle)
+            ? source.substring(block.lifecycle.length).trimLeft()
+            : '';
+        final authoredOuterBlock =
+            source.startsWith('{') || markerRemainder.startsWith('{');
+        depth += _braceDepthDelta(authoredOuterBlock ? source : block.code);
+      }
+    }
+    if (depth != 0) {
+      throw SpecValidationException(
+        "rule '${rule.header.label}' has unbalanced braces: "
+        '${depth.abs()} unmatched ${depth > 0 ? 'open' : 'close'}',
+      );
+    }
+  }
+}
+
+int _braceDepthDelta(String text) {
+  var depth = 0;
+  int? quote;
+  var escaped = false;
+  for (final codeUnit in text.codeUnits) {
+    if (quote != null) {
+      if (escaped) {
+        escaped = false;
+      } else if (codeUnit == 0x5c) {
+        escaped = true;
+      } else if (codeUnit == quote) {
+        quote = null;
+      }
+      continue;
+    }
+    if (codeUnit == 0x27 || codeUnit == 0x22) {
+      quote = codeUnit;
+    } else if (codeUnit == 0x7b) {
+      depth += 1;
+    } else if (codeUnit == 0x7d) {
+      depth -= 1;
+    }
+  }
+  return depth;
 }
 
 bool _stringListsEqual(List<String> left, List<String> right) {

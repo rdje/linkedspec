@@ -124,10 +124,15 @@ final class _ParsedElement {
 }
 
 final class _ConsumedBlock {
-  const _ConsumedBlock({required this.code, required this.remainder});
+  const _ConsumedBlock({
+    required this.code,
+    required this.remainder,
+    required this.source,
+  });
 
   final String code;
   final String remainder;
+  final String source;
 }
 
 final class _AttachedCode {
@@ -359,7 +364,9 @@ List<BodyElement>? _parseInlineBody(
       allowBareEdge: elements.isEmpty,
     );
     if (parsed == null) {
-      if (elements.isEmpty || _startsWithEdgeToken(trimmed)) {
+      if (elements.isEmpty ||
+          _startsWithEdgeToken(trimmed) ||
+          _isUnsupportedLifecycleRemainder(elements, trimmed)) {
         elements.add(
           BodyElement(
             kind: RawBodyElementKind(text: trimmed),
@@ -471,7 +478,9 @@ List<BodyElement> _parseBodyElements(List<String> lines, _LineCursor cursor) {
       allowBareEdge: elements.isEmpty,
     );
     if (parsed == null) {
-      if (elements.isEmpty || _startsWithEdgeToken(trimmed)) {
+      if (elements.isEmpty ||
+          _startsWithEdgeToken(trimmed) ||
+          _isUnsupportedLifecycleRemainder(elements, trimmed)) {
         elements.add(
           BodyElement(
             kind: RawBodyElementKind(text: trimmed),
@@ -498,6 +507,19 @@ List<BodyElement> _parseBodyElements(List<String> lines, _LineCursor cursor) {
   }
 
   return elements;
+}
+
+bool _isUnsupportedLifecycleRemainder(
+  List<BodyElement> elements,
+  String remainder,
+) {
+  if (elements.isEmpty) {
+    return false;
+  }
+  final kind = elements.last.kind;
+  return kind is CodeBlockBodyElementKind &&
+      kind.lifecycle == 'I' &&
+      _parseRuleHeaderFields(remainder) == null;
 }
 
 _ParsedElement? _parseSingleElement(
@@ -661,10 +683,13 @@ _ParsedElement? _parseSingleElement(
       if (block == null) {
         return null;
       }
+      final suffix = trimmed.substring(fullMatch.length);
+      final braceOffset = suffix.indexOf('{');
       return _ParsedElement(
         element: BodyElement(
           kind: CodeBlockBodyElementKind(lifecycle: marker, code: block.code),
-          source: fullMatch,
+          source:
+              '$fullMatch${suffix.substring(0, braceOffset)}${block.source}',
           line: lineNumber,
         ),
         remainder: block.remainder,
@@ -762,8 +787,8 @@ _ParsedElement? _parseSingleElement(
     }
     return _ParsedElement(
       element: BodyElement(
-        kind: PlainBlockBodyElementKind(code: block.code),
-        source: trimmed,
+        kind: CodeBlockBodyElementKind(lifecycle: 'I', code: block.code),
+        source: block.source,
         line: lineNumber,
       ),
       remainder: block.remainder,
@@ -1077,6 +1102,7 @@ _ConsumedBlock? _consumeBlockFromRest(
   final remainder = rest.substring(startBrace + 1);
   var depth = 1;
   var content = '';
+  var source = rest.substring(startBrace);
   final firstScan = _scanLineForBraces(remainder, depth);
   depth = firstScan.depth;
 
@@ -1087,6 +1113,7 @@ _ConsumedBlock? _consumeBlockFromRest(
     return _ConsumedBlock(
       code: blockContent,
       remainder: remainder.substring(firstScan.text.length).trim(),
+      source: source.substring(0, firstScan.text.length + 1),
     );
   }
 
@@ -1099,6 +1126,7 @@ _ConsumedBlock? _consumeBlockFromRest(
     final line = lines[cursor.index];
     final scanned = _scanLineForBraces(line, depth);
     depth = scanned.depth;
+    source += '\n${scanned.text}';
 
     if (depth == 0) {
       final withoutClose = scanned.text.endsWith('}')
@@ -1114,6 +1142,7 @@ _ConsumedBlock? _consumeBlockFromRest(
       return _ConsumedBlock(
         code: content.trim(),
         remainder: line.substring(scanned.text.length).trim(),
+        source: source,
       );
     }
 
@@ -1124,7 +1153,7 @@ _ConsumedBlock? _consumeBlockFromRest(
     cursor.index += 1;
   }
 
-  return _ConsumedBlock(code: content.trim(), remainder: '');
+  return _ConsumedBlock(code: content.trim(), remainder: '', source: source);
 }
 
 _AttachedCode? _parseAttachedFluentWhenChain(

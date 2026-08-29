@@ -1,5 +1,12 @@
 # linkedspec_dart
 
+## Standalone lifecycle block
+
+A rule-item-leading `{ ... }` is exact shorthand for `I { ... }`. The parser emits the existing lifecycle `I`
+node with exact authored source/line provenance; duplicates execute in authored order, while old serialized
+`PlainBlock` and compiled plain-payload data remain readable and inert. Run the shared admission with
+`bash tools/check_standalone_lifecycle_block_five_backend.sh` from the repository root.
+
 Repository-owned Dart backend package for LinkedSpec parity work.
 
 This package is intentionally staged. It establishes the Dart package boundary,

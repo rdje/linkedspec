@@ -71,8 +71,8 @@ expected_python_temp_owners=(
 mapfile -t python_tool_entrypoints < <(
  rg -l '^#!/usr/bin/env python3$' "$REPO_ROOT"/tools/*.py | sed "s|^$REPO_ROOT/||" | sort
 )
-(( ${#python_tool_entrypoints[@]} == 32 )) ||
- fail "Python tool entrypoint inventory drifted from 32 to ${#python_tool_entrypoints[@]}"
+(( ${#python_tool_entrypoints[@]} == 33 )) ||
+ fail "Python tool entrypoint inventory drifted from 33 to ${#python_tool_entrypoints[@]}"
 
 allocator_name='mk''temp'
 mapfile -t shell_temp_owners < <(
@@ -90,6 +90,7 @@ expected_shell_temp_owners=(
  tools/check_root_rule_selection_five_backend.sh
  tools/check_rule_local_cursor_five_backend.sh
  tools/check_semantic_introspection_six_runtime.sh
+ tools/check_standalone_lifecycle_block_five_backend.sh
  tools/project_data_run.sh
  tools/run_lua_local.sh
  tools/run_lua_project_data.sh

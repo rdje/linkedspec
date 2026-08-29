@@ -511,6 +511,55 @@ local function check_raw_body_lines(spec)
   end
 end
 
+local function brace_depth_delta(text)
+  local depth = 0
+  local quote = nil
+  local escaped = false
+  for position = 1, #text do
+    local byte = text:byte(position)
+    if quote then
+      if escaped then
+        escaped = false
+      elseif byte == 0x5C then
+        escaped = true
+      elseif byte == quote then
+        quote = nil
+      end
+    elseif byte == 0x27 or byte == 0x22 then
+      quote = byte
+    elseif byte == 0x7B then
+      depth = depth + 1
+    elseif byte == 0x7D then
+      depth = depth - 1
+    end
+  end
+  return depth
+end
+
+local function check_balanced_lifecycle_blocks(spec)
+  for _, rule in ipairs(spec.rules) do
+    local depth = 0
+    for _, element in ipairs(rule.body) do
+      local kind = element.kind
+      if ast.node_type(kind) == "CodeBlockBodyElementKind" then
+        local source = element.source:gsub("^%s+", "")
+        local marker_remainder = ""
+        if source:sub(1, #kind.lifecycle) == kind.lifecycle then
+          marker_remainder = source:sub(#kind.lifecycle + 1):gsub("^%s+", "")
+        end
+        local authored_outer_block = source:sub(1, 1) == "{" or marker_remainder:sub(1, 1) == "{"
+        depth = depth + brace_depth_delta(authored_outer_block and source or kind.code)
+      end
+    end
+    if depth ~= 0 then
+      validation_fail(
+        "rule '" .. rule.header.label .. "' has unbalanced braces: " .. math.abs(depth) ..
+          " unmatched " .. (depth > 0 and "open" or "close")
+      )
+    end
+  end
+end
+
 local function target_labels(targets)
   local result = json.array()
   for index, target in ipairs(targets) do result[index] = target.label end
@@ -794,6 +843,7 @@ function M.validate_spec(spec, options)
       check_duplicate_function_names(spec)
       check_function_registry(spec)
       check_raw_body_lines(spec)
+      check_balanced_lifecycle_blocks(spec)
       check_and_resolve_selectors(spec)
       check_capture_gaps_directives(spec)
       check_edge_structure(spec)

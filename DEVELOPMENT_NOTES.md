@@ -9,6 +9,60 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-29 (`FUTURE-PARITY-BACKLOG.15.2` — complete standalone lifecycle parity): Dart, Julia, and Lua parser
+  branches now lower bare blocks into their existing ordered lifecycle-`I` node shape instead of `PlainBlock`.
+  Exact source includes the marker only when authored; code continues to use the explicit parser's normalized
+  interior, so ActionIR AST/spans match while provenance remains distinguishable.
+- Each remaining validator uses quote-aware brace depth over authored outer source, with an interior-code fallback
+  for programmatic/older nodes whose source is empty or descriptive. This preserves compatibility while exposing
+  missing closes that the prior interior-only representation hid.
+- Dart's six tests, Julia's 103 assertions, and the shared Lua consumer's 109 assertions on each ABI cover all
+  neutral placements, nested/quoted provenance, four duplicate combinations, ownership, malformed twins,
+  serialized reconstruction, generated plan/emitted source, and readable/inert legacy plain carriers.
+- `specs/spec.spec` gains `standalone_lifecycle_block` plus a complete-line lifecycle production before the generic
+  bare-edge route. This fixes the audited self-hosted `I { ... }` misclassification and proves all seven reserved
+  markers with a 25-test permanent grammar consumer.
+- The first canonical attempt correctly rejected four stale `spec_spec_*` corpus snapshots at the pinned Unicode
+  grammar-freshness boundary. Updating only their exact canonical grammar bytes makes all five copies identical at
+  SHA-256 `03cfb50459984806c806e9ec3f2b072add897c207a2cb93fd267d640a5808004`; the freshness checker passes.
+- The corrected canonical attempt reached fresh Rust dependency compilation, where every active `rustc` process
+  received simultaneous signal 15 without a crate diagnostic. Process census found no survivor and the gate has no
+  internal timeout at that command; the exact staged candidate retries from the repository-local warmed cache.
+- Canonical retries exposed the same Dart/Julia precedence regression in existing recursive-observation negative
+  fixtures: preserving every suffix after lifecycle `I` turned a same-line `Child::AND /x/` header-shaped tail into
+  a raw body node, masking the expected typed observation target/operand diagnostic. Both frontends now preserve a
+  lifecycle remainder only when their existing rule-header scanner does not recognize it; the standalone malformed
+  twins and exact recursive-observation consumers retain their original diagnostic boundaries. Shared Lua was
+  audited too: its affected observation fixtures place child headers at real line boundaries, where the existing
+  collector stops before body parsing, so no corresponding slice-induced change is required. Focused Dart fatal-
+  warning analysis also removed one unused import from the new contract test before exact restaging.
+- One project-routed recurring driver composes the neutral 11-mutation checker, Perl 7 subtests, self-hosted 25,
+  Rust 8, Dart 6, Julia 103, PUC Lua 109, LuaJIT 109, and generated/capability/language ledgers. It passes at
+  capability 90/0/0 and language coverage 250/105+1/126.
+- Canonical attempt five reaches the tool project-data oracle after all changed-surface and broad language checks
+  pass. Its frozen Python-entrypoint census correctly reports the new repository-routed neutral checker as a 33rd
+  entrypoint. The checker owns no temporary allocator; advancing that exact census to 33 exposes the companion
+  five-backend driver's managed `mktemp` workspace as the 15th shell owner. The driver creates and removes that
+  workspace beneath validated repository-local `TMPDIR` and is enrolled in the governed workflow-routing oracle;
+  the three Python temporary owners stay unchanged, and focused storage proof passes before the next exact staged
+  canonical retry.
+- Canonical attempt six passes the repaired tool-storage oracle at the former failure point, then the outer Codex
+  sandbox denies the process-locality oracle's required nested macOS `sandbox-exec` with status 71 before any
+  representative driver runs. The existing [[project-data-process-locality-proof]] classifies this exact harness
+  boundary: authoritative signoff is an unchanged permission-authorized canonical rerun, not a source workaround.
+- The permission-authorized canonical attempt seven passes six-family process containment, relocated execution,
+  both 66-case CLI matrices, and every earlier gate, then Phase 0 reports one failure in 1,032 tests. Its bootstrap
+  function-ownership guard raw-scanned serialized payload text and mistook `return(value)` inside the newly correct
+  lifecycle `ICODE` node for a function-definition payload. The repair recursively checks only structural array
+  tags and hash identity fields, keeping exact function-node identities forbidden without rejecting lifecycle code.
+- Public teaching now states the shorthand is current on all five backends. Legacy plain AST and compiled payload
+  carriers remain readable and inert; their removal or execution is still a separate versioned migration.
+- The required `.15.2` change record crossed the bounded hot-shard threshold. Mechanical rollover archived exact
+  lines 235-450 as immutable change-history segment `4988` (216 lines / 19,833 bytes, SHA-256 prefix
+  `4251613b7181`) from activation source `93213575`, leaving `CHANGES.md` at 251/512 lines and 21,972/65,536
+  bytes before final whitespace normalization. The resulting collection is 25 files / 47,264 lines / 3,390,743
+  bytes with a 24-line manifest. ADR `0096` advances only file capacity 24→25 and manifest-line capacity 23→24;
+  every root, byte, per-segment, aggregate, owner, lifecycle, verifier, routing, and storage control remains fixed.
 - 2026-08-29 (`FUTURE-PARITY-BACKLOG.15.1` — Perl/Rust standalone lifecycle implementation): one neutral contract
   fixes semantic normalization to `I`, authored source/opening line, interior ActionIR spans, OR/AND and zero/one/
   two-regex positions, a valid same-line successor, all four duplicate mixtures, ownership, malformed twins,

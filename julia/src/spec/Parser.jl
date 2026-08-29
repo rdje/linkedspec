@@ -28,6 +28,7 @@ end
 struct _ConsumedBlock
     code::String
     remainder::String
+    source::String
 end
 
 struct _AttachedCode
@@ -552,7 +553,8 @@ function _parse_inline_body(rest::AbstractString, line_number::Int, lines, curso
             allow_bare_edge = isempty(elements),
         )
         if parsed === nothing
-            if isempty(elements) || _starts_with_edge_token(trimmed)
+            if isempty(elements) || _starts_with_edge_token(trimmed) ||
+               _is_unsupported_lifecycle_remainder(elements, trimmed)
                 push!(elements, BodyElement(RawBodyElementKind(trimmed), trimmed, line_number))
             end
             break
@@ -646,7 +648,8 @@ function _parse_body_elements(lines, cursor::_LineCursor)
             allow_bare_edge = isempty(elements),
         )
         if parsed === nothing
-            if isempty(elements) || _starts_with_edge_token(trimmed)
+            if isempty(elements) || _starts_with_edge_token(trimmed) ||
+               _is_unsupported_lifecycle_remainder(elements, trimmed)
                 push!(elements, BodyElement(RawBodyElementKind(trimmed), trimmed, line_number))
             end
             break
@@ -667,6 +670,17 @@ function _parse_body_elements(lines, cursor::_LineCursor)
     end
 
     return elements
+end
+
+function _is_unsupported_lifecycle_remainder(
+    elements::Vector{BodyElement},
+    remainder::AbstractString,
+)
+    isempty(elements) && return false
+    kind = elements[end].kind
+    return kind isa CodeBlockBodyElementKind &&
+           kind.lifecycle == "I" &&
+           _parse_rule_header_fields(remainder) === nothing
 end
 
 function _parse_single_element(
@@ -799,8 +813,14 @@ function _parse_single_element(
             if block === nothing
                 return nothing
             end
+            suffix = _drop_prefix(trimmed, full_match)
+            brace_index = findfirst(==('{'), suffix)
             return _ParsedElement(
-                BodyElement(CodeBlockBodyElementKind(marker, block.code), full_match, line_number),
+                BodyElement(
+                    CodeBlockBodyElementKind(marker, block.code),
+                    full_match * _substring_before(String(suffix), brace_index) * block.source,
+                    line_number,
+                ),
                 block.remainder,
                 cursor.index > saved_index,
             )
@@ -865,7 +885,7 @@ function _parse_single_element(
             return nothing
         end
         return _ParsedElement(
-            BodyElement(PlainBlockBodyElementKind(block.code), String(trimmed), line_number),
+            BodyElement(CodeBlockBodyElementKind("I", block.code), block.source, line_number),
             block.remainder,
             cursor.index > saved_index,
         )
@@ -947,10 +967,11 @@ function _consume_block_from_rest(lines, cursor::_LineCursor, rest::AbstractStri
     content = ""
     first_scan = _scan_line_for_braces(remainder, depth)
     depth = first_scan.depth
+    source = "{" * first_scan.text
 
     if depth == 0
         block_content = endswith(first_scan.text, "}") ? strip(_drop_last_char(first_scan.text)) : strip(first_scan.text)
-        return _ConsumedBlock(block_content, strip(_drop_prefix(remainder, first_scan.text)))
+        return _ConsumedBlock(block_content, strip(_drop_prefix(remainder, first_scan.text)), source)
     end
 
     if !isempty(strip(first_scan.text))
@@ -962,6 +983,7 @@ function _consume_block_from_rest(lines, cursor::_LineCursor, rest::AbstractStri
         line = String(lines[cursor.index])
         scanned = _scan_line_for_braces(line, depth)
         depth = scanned.depth
+        source *= "\n" * scanned.text
 
         if depth == 0
             without_close = endswith(scanned.text, "}") ? _drop_last_char(scanned.text) : scanned.text
@@ -972,7 +994,7 @@ function _consume_block_from_rest(lines, cursor::_LineCursor, rest::AbstractStri
                 content *= strip(without_close)
             end
             cursor.index += 1
-            return _ConsumedBlock(strip(content), strip(_drop_prefix(line, scanned.text)))
+            return _ConsumedBlock(strip(content), strip(_drop_prefix(line, scanned.text)), source)
         end
 
         if !isempty(content)
@@ -982,7 +1004,7 @@ function _consume_block_from_rest(lines, cursor::_LineCursor, rest::AbstractStri
         cursor.index += 1
     end
 
-    return _ConsumedBlock(strip(content), "")
+    return _ConsumedBlock(strip(content), "", source)
 end
 
 function _parse_attached_fluent_when_chain(lines, cursor::_LineCursor, rest::AbstractString)

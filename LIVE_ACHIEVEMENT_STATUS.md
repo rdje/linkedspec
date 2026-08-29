@@ -2,24 +2,27 @@
 
 ## Current Activity
 
-- Perl/Rust implementation `.15.1` is complete from exact clean contract commit `836c351e`. One neutral
-  explicit/bare twin contract governs placement, provenance, order, ownership, malformed syntax, and carriers.
-- Perl emits standalone blocks as provenance-bearing `ICODE`; Rust emits `CodeBlock(I)` and appends repeated
-  preamble statements instead of overwriting. Direct/serialized/emitted/generated fixtures return `first-second`.
-- Parent `.15` remains active: `.15.2` next owns Dart/Julia/Lua, both Lua ABIs, self-hosted reserved lifecycle
-  precedence, capability/public admission, examples, recurrence, and final no-drift.
+- Standalone lifecycle-block `.15` is complete across Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Bare rule-item
+  blocks normalize directly to lifecycle `I`; exact provenance, order, ownership, malformed twins, generated
+  carriers, inert legacy plain data, and self-hosted reserved-marker precedence are locked by one neutral contract.
+- The recurring six-route gate passes Perl 7, self-hosted 25, Rust 8, Dart 6, Julia 103, and Lua 109 assertions per
+  ABI plus generated-source, capability 90/0/0, and language 250/105+1/126 ledgers.
+- Public guides, ADR `0094`, Knowledge, roadmaps, architecture, capability truth, and the sole-facing mdBook agree.
 
 ## Latest Completed Slice
 
-- `.15.1` implements the ratified shorthand on Perl/Rust and repairs the pre-existing Rust duplicate-`I` ordering
-  defect without changing compiled ABI; Perl 324, Rust neutral 8 and parser 32, book, and all doctrines pass.
+- `.15.2` aligns the remaining backends, both Lua ABIs, self-hosted grammar, reconstructed/generated paths,
+  recurring/public admission, and final no-drift; parent `.15` closes.
 
 ## Next Action
 
-- From the resulting clean `.15.1` commit, activate `.15.2` task-tree-first for remaining-backend/self-hosted/public
-  alignment and the designated canonical closeout/push boundary.
+- From the exact clean `.15.2` closeout, select and activate the next roadmap-aligned pending task-tree leaf before
+  any new change.
 
 ## Recent Completions
+
+- `2026-08-29` — `.15.2` closes standalone lifecycle-block parity across five backends/six routes, self-hosted
+  grammar, generated carriers, capability 90/0/0, public teaching, and exact recurring no-drift.
 
 - `2026-08-29` — `.15.1` makes bare rule-item blocks exact lifecycle `I` shorthand on Perl/Rust, preserves source,
   spans, position and owners, orders all duplicate mixtures, fixes Rust last-slot-wins, and locks malformed twins.
@@ -73,10 +76,6 @@
   reservation and typed order, fresh sibling contexts, detached atomic stitching, and all policies. Its dormant
   consumer is 309 GREEN/one exact `.3` recursive-authority RED; discovery, rollout, formats, and public behavior
   do not move.
-
-- `2026-08-27` — `.14.7.6.1` implements Julia's exclusive private staged marker and native-regex-offset-backed
-  Unicode-scalar direct/ordered-derived provenance across four equal dormant logical routes. Its consumer is 131
-  GREEN/one exact `.2` authority RED; discovery, rollout, formats, public behavior, and neutral count do not move.
 
 ## History
 

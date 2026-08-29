@@ -66,6 +66,7 @@ routed_entrypoints=(
  tools/check_rule_local_cursor_five_backend.sh
  tools/check_scalar_numeric_six_runtime.sh
  tools/check_semantic_introspection_six_runtime.sh
+ tools/check_standalone_lifecycle_block_five_backend.sh
  tools/check_mcp_six_runtime.sh
  tools/check_typed_source_location_six_runtime.sh
  tools/check_recursive_observation_six_runtime.sh

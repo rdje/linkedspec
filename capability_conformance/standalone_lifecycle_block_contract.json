@@ -161,5 +161,78 @@
       "opening_line": 2
     }
   ],
-  "generated_fixture_case": "explicit_shorthand"
+  "generated_fixture_case": "explicit_shorthand",
+  "admissions": {
+    "perl": {
+      "status": "complete",
+      "consumer": "t/standalone_lifecycle_block_perl_contract.t",
+      "roles": ["neutral_contract", "placement", "provenance", "duplicates", "ownership", "malformed", "emitted_generated"]
+    },
+    "rust": {
+      "status": "complete",
+      "consumer": "rust/linkedspec-runtime/tests/standalone_lifecycle_block_contract.rs",
+      "roles": ["neutral_contract", "placement", "provenance", "duplicates", "ownership", "malformed", "reconstructed", "emitted_generated", "legacy_plain"]
+    },
+    "dart": {
+      "status": "complete",
+      "consumer": "dart/test/standalone_lifecycle_block_contract_test.dart",
+      "roles": ["neutral_contract", "placement", "provenance", "duplicates", "ownership", "malformed", "reconstructed", "emitted_generated", "legacy_plain"]
+    },
+    "julia": {
+      "status": "complete",
+      "consumer": "julia/test/standalone_lifecycle_block_contract_test.jl",
+      "roles": ["neutral_contract", "placement", "provenance", "duplicates", "ownership", "malformed", "reconstructed", "emitted_generated", "legacy_plain"]
+    },
+    "lua_dual_abi": {
+      "status": "complete",
+      "consumer": "lua/test/standalone_lifecycle_block_contract_test.lua",
+      "runtimes": ["puc_lua", "luajit"],
+      "roles": ["neutral_contract", "placement", "provenance", "duplicates", "ownership", "malformed", "reconstructed", "emitted_generated", "legacy_plain"]
+    },
+    "self_hosted": {
+      "status": "complete",
+      "consumer": "t/standalone_lifecycle_block_self_hosted_contract.t",
+      "roles": ["standalone_production", "reserved_lifecycle_precedence", "semantic_twin"]
+    }
+  },
+  "recurring_gate": {
+    "driver": "tools/check_standalone_lifecycle_block_five_backend.sh",
+    "neutral_checker": "tools/check_standalone_lifecycle_block_contract.py",
+    "backend_count": 5,
+    "runtime_routes": ["perl", "rust", "dart", "julia", "puc_lua", "luajit"],
+    "self_hosted_consumer": "t/standalone_lifecycle_block_self_hosted_contract.t",
+    "support_checks": [
+      "tools/check_generated_source_contract.pl",
+      "tools/check_capability_conformance.pl",
+      "tools/check_language_capability_coverage.pl"
+    ],
+    "local_ci_switch": "LINKEDSPEC_RUN_STANDALONE_LIFECYCLE_BLOCK_MATRIX"
+  },
+  "public_contract": {
+    "capability_id": "language.standalone_lifecycle_block",
+    "documents": [
+      {"path": "USER_GUIDE.md", "required_markers": ["Standalone lifecycle block", "tools/check_standalone_lifecycle_block_five_backend.sh"]},
+      {"path": "rust/README.md", "required_markers": ["Standalone lifecycle block", "tools/check_standalone_lifecycle_block_five_backend.sh"]},
+      {"path": "dart/README.md", "required_markers": ["Standalone lifecycle block", "tools/check_standalone_lifecycle_block_five_backend.sh"]},
+      {"path": "julia/README.md", "required_markers": ["Standalone lifecycle block", "tools/check_standalone_lifecycle_block_five_backend.sh"]},
+      {"path": "lua/README.md", "required_markers": ["Standalone lifecycle block", "tools/check_standalone_lifecycle_block_five_backend.sh"]},
+      {"path": "capability_conformance/README.md", "required_markers": ["Standalone lifecycle block", "90 pass / 0 partial / 0 gap"]},
+      {"path": "ROADMAP.md", "required_markers": ["Standalone lifecycle-block rollout is complete", "tools/check_standalone_lifecycle_block_five_backend.sh"]},
+      {"path": "ROADMAP_V2.md", "required_markers": ["Standalone lifecycle-block rollout is complete", "tools/check_standalone_lifecycle_block_five_backend.sh"]},
+      {"path": "ARCHITECTURE_STATE.md", "required_markers": ["standalone lifecycle-block parity is complete", "tools/check_standalone_lifecycle_block_five_backend.sh"]},
+      {"path": "docs/linkedspec-book/src/appendix/formal-grammar.md", "required_markers": ["Standalone lifecycle block", "exact shorthand for `I { ... }`"]},
+      {"path": "docs/linkedspec-book/src/appendix/backend-handoff.md", "required_markers": ["Standalone lifecycle-block parity is complete", "tools/check_standalone_lifecycle_block_five_backend.sh"]},
+      {"path": "docs/decisions/0094-standalone-rule-block-normalizes-to-lifecycle-i.md", "required_markers": ["Status: accepted; rollout complete", "tools/check_standalone_lifecycle_block_five_backend.sh"]},
+      {"path": "docs/knowledge/standalone-lifecycle-block-audit.md", "required_markers": ["status: implemented on all five backends", "tools/check_standalone_lifecycle_block_five_backend.sh"]}
+    ]
+  },
+  "rollout": [
+    {"lane": "decision", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.15.0"},
+    {"lane": "perl_rust", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.15.1"},
+    {"lane": "dart", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.15.2"},
+    {"lane": "julia", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.15.2"},
+    {"lane": "lua_dual_abi", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.15.2"},
+    {"lane": "self_hosted_recurring", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.15.2"},
+    {"lane": "public_no_drift", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.15.2"}
+  ]
 }

@@ -580,12 +580,10 @@ determines how the code is interpreted:
 - **After a blind-call edge** (`=> rule { ... }`): deprecated but accepted as
   compatibility syntax. Prefer lifecycle blocks for blind-call rules.
 
-- **As a standalone block**: Perl and Rust normalize this directly to `I { ... }` at
-  the same authored position. They preserve the authored block source/opening line,
-  explicit-twin ActionIR interior spans, and ordered duplicates; Rust source parsing
-  no longer emits `PlainBlock`. Dart, Julia, and Lua still retain inert legacy plain-
-  block behavior, so portable specifications must keep the `I` marker until
-  `FUTURE-PARITY-BACKLOG.15.2` completes the remaining rollout.
+- **Standalone lifecycle block**: on all five backends, this is exact shorthand for `I { ... }` at the same
+  authored position. Parsing preserves the authored block source/opening line and gives its interior the explicit
+  twin's ActionIR semantics and spans. Multiple explicit/shorthand blocks execute in authored order. New source
+  parsing never emits `PlainBlock`; legacy programmatic/serialized plain carriers remain readable and inert.
 
 Blocks nest: `{ ... { ... } ... }`. Opening brackets `{`, `(`, `[` inside a block
 must be balanced by their closing counterparts. A rule paragraph with an unclosed

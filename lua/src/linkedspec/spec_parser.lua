@@ -398,11 +398,13 @@ local function consume_block(lines, cursor, rest)
   local content = ""
   local scanned = scan_braces(after_open, depth)
   depth = scanned.depth
+  local source = "{" .. scanned.text
   if depth == 0 then
     local block_text = scanned.text:sub(1, -2)
     return {
       code = trim(block_text),
       remainder = trim(after_open:sub(#scanned.text + 1)),
+      source = source,
     }
   end
   if trim(scanned.text) ~= "" then
@@ -414,6 +416,7 @@ local function consume_block(lines, cursor, rest)
     local line = lines[cursor.index]
     scanned = scan_braces(line, depth)
     depth = scanned.depth
+    source = source .. "\n" .. scanned.text
     if depth == 0 then
       local before_close = scanned.text:sub(1, -2)
       if trim(before_close) ~= "" then
@@ -426,6 +429,7 @@ local function consume_block(lines, cursor, rest)
       return {
         code = trim(content),
         remainder = trim(line:sub(#scanned.text + 1)),
+        source = source,
       }
     end
     if content ~= "" then
@@ -434,7 +438,7 @@ local function consume_block(lines, cursor, rest)
     content = content .. trim(line)
     cursor.index = cursor.index + 1
   end
-  return { code = trim(content), remainder = "" }
+  return { code = trim(content), remainder = "", source = source }
 end
 
 local function strip_keyword(text, keyword, require_dot)
@@ -889,10 +893,12 @@ local function parse_single_element(text, lines, cursor, line_number, allow_bare
       if not block then
         return nil
       end
+      local suffix = text:sub(#full_match + 1)
+      local brace_position = assert(suffix:find("{", 1, true))
       return {
         element = ast.body_element({
           kind = ast.code_block_body_kind({ lifecycle = marker, code = block.code }),
-          source = full_match,
+          source = full_match .. suffix:sub(1, brace_position - 1) .. block.source,
           line = line_number,
         }),
         remainder = block.remainder,
@@ -993,8 +999,8 @@ local function parse_single_element(text, lines, cursor, line_number, allow_bare
     end
     return {
       element = ast.body_element({
-        kind = ast.plain_block_body_kind({ code = block.code }),
-        source = text,
+        kind = ast.code_block_body_kind({ lifecycle = "I", code = block.code }),
+        source = block.source,
         line = line_number,
       }),
       remainder = block.remainder,

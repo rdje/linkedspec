@@ -1,5 +1,12 @@
 # LinkedSpec Julia Backend
 
+## Standalone lifecycle block
+
+A rule-item-leading `{ ... }` is exact shorthand for `I { ... }`. The parser emits lifecycle `I` with exact
+authored source/line provenance; explicit/shorthand duplicates execute in authored order, while legacy serialized
+plain nodes and compiled plain payloads remain readable and inert. Run the shared admission with
+`bash tools/check_standalone_lifecycle_block_five_backend.sh` from the repository root.
+
 This directory is the repository-owned Julia backend. Its current `runtime-corpus-primary-cli` status covers the
 package/command surface, manifest validation, source and ActionIR frontends, staged user-function projection/body
 parsing, compiled descriptor state, runtime matching and rule/lifecycle dispatch, value/helper/control/callback

@@ -1,5 +1,12 @@
 # LinkedSpec Lua Backend
 
+## Standalone lifecycle block
+
+A rule-item-leading `{ ... }` is exact shorthand for `I { ... }`. The shared parser emits lifecycle `I` with
+exact authored source/line provenance on PUC Lua and LuaJIT; duplicate forms execute in order, while legacy plain
+nodes/payloads remain readable and inert. Run both ABI routes with
+`bash tools/check_standalone_lifecycle_block_five_backend.sh` from the repository root.
+
 This directory contains the native Lua backend. PUC Lua 5.4 is the primary
 conformance runtime; LuaJIT is a secondary compatibility leg.
 
