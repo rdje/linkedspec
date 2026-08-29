@@ -67,6 +67,7 @@ pub fn validate_with_options(spec: &SpecFile, strict_syntax: bool) -> Result<()>
     check_capture_gaps_directives(spec)?;
     check_edge_structure(spec)?;
     check_mixed_edges(spec)?;
+    check_raw_body_elements(spec)?;
     check_balanced_braces(spec)?;
     check_edge_targets(spec)?;
     check_regex_syntax(spec)?;
@@ -118,6 +119,7 @@ pub fn validate_with_options_with_trace_emitter(
         })?;
         trace_validation_pass(trace, "edge_structure", || check_edge_structure(spec))?;
         trace_validation_pass(trace, "mixed_edges", || check_mixed_edges(spec))?;
+        trace_validation_pass(trace, "raw_body_elements", || check_raw_body_elements(spec))?;
         trace_validation_pass(trace, "balanced_braces", || check_balanced_braces(spec))?;
         trace_validation_pass(trace, "edge_targets", || check_edge_targets(spec))?;
         trace_validation_pass(trace, "regex_syntax", || check_regex_syntax(spec))?;
@@ -1051,61 +1053,101 @@ fn check_mixed_edges(spec: &SpecFile) -> Result<()> {
     Ok(())
 }
 
+/// Reject the Raw carrier emitted for an unsupported same-line remainder after
+/// lifecycle `I`. Unrelated legacy Raw elements retain compatibility behavior.
+fn check_raw_body_elements(spec: &SpecFile) -> Result<()> {
+    for rule in &spec.rules {
+        for pair in rule.body.windows(2) {
+            let [previous, element] = pair else {
+                continue;
+            };
+            if previous.line == element.line
+                && matches!(
+                    &previous.kind,
+                    BodyElementKind::CodeBlock { lifecycle, .. } if lifecycle == "I"
+                )
+                && let BodyElementKind::Raw { text } = &element.kind
+            {
+                return Err(LinkedSpecError::Validation(format!(
+                    "rule '{}' has unsupported body content at line {}: {}",
+                    rule.header.label, element.line, text
+                )));
+            }
+        }
+    }
+    Ok(())
+}
+
+fn brace_depth_delta(text: &str) -> i32 {
+    let mut depth = 0_i32;
+    let mut quote = None;
+    let mut escaped = false;
+
+    for ch in text.chars() {
+        if let Some(delimiter) = quote {
+            if escaped {
+                escaped = false;
+            } else if ch == '\\' {
+                escaped = true;
+            } else if ch == delimiter {
+                quote = None;
+            }
+            continue;
+        }
+
+        match ch {
+            '\'' | '"' => quote = Some(ch),
+            '{' => depth += 1,
+            '}' => depth -= 1,
+            _ => {}
+        }
+    }
+    depth
+}
+
+fn lifecycle_brace_depth_delta(source: &str, lifecycle: &str, code: &str) -> i32 {
+    let source = source.trim_start();
+    let has_authored_outer_block = source.starts_with('{')
+        || source
+            .strip_prefix(lifecycle)
+            .is_some_and(|remainder| remainder.trim_start().starts_with('{'));
+
+    if has_authored_outer_block {
+        brace_depth_delta(source)
+    } else {
+        // Programmatic and older serialized ASTs may carry a descriptive or
+        // empty source field. Preserve their prior interior-code validation.
+        brace_depth_delta(code)
+    }
+}
+
 /// Every opening `{` must have a matching closing `}` within the same rule.
-/// Counts braces only in code block content (not the delimiters in source text).
+/// Lifecycle elements retain their exact outer block source so a missing close
+/// remains visible here. Programmatic/older lifecycle nodes without authored
+/// block source and other legacy carriers retain their interior checks.
 fn check_balanced_braces(spec: &SpecFile) -> Result<()> {
     for rule in &spec.rules {
         let mut depth: i32 = 0;
         for element in &rule.body {
             match &element.kind {
-                BodyElementKind::CodeBlock { code, .. } => {
-                    for ch in code.chars() {
-                        match ch {
-                            '{' => depth += 1,
-                            '}' => depth -= 1,
-                            _ => {}
-                        }
-                    }
+                BodyElementKind::CodeBlock { lifecycle, code } => {
+                    depth += lifecycle_brace_depth_delta(&element.source, lifecycle, code);
                 }
                 BodyElementKind::ActionEdge { code, .. } => {
                     if let Some(c) = code {
-                        for ch in c.chars() {
-                            match ch {
-                                '{' => depth += 1,
-                                '}' => depth -= 1,
-                                _ => {}
-                            }
-                        }
+                        depth += brace_depth_delta(c);
                     }
                 }
                 BodyElementKind::BlindEdge { code, .. } => {
                     if let Some(c) = code {
-                        for ch in c.chars() {
-                            match ch {
-                                '{' => depth += 1,
-                                '}' => depth -= 1,
-                                _ => {}
-                            }
-                        }
+                        depth += brace_depth_delta(c);
                     }
                 }
                 BodyElementKind::BareEdge { code: Some(c), .. } => {
-                    for ch in c.chars() {
-                        match ch {
-                            '{' => depth += 1,
-                            '}' => depth -= 1,
-                            _ => {}
-                        }
-                    }
+                    depth += brace_depth_delta(c);
                 }
                 BodyElementKind::PlainBlock { code } => {
-                    for ch in code.chars() {
-                        match ch {
-                            '{' => depth += 1,
-                            '}' => depth -= 1,
-                            _ => {}
-                        }
-                    }
+                    depth += brace_depth_delta(code);
                 }
                 _ => {}
             }

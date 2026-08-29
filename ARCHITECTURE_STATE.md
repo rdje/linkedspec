@@ -1,20 +1,24 @@
 # ARCHITECTURE STATE
 
-## Standalone rule-item blocks are ratified lifecycle `I` shorthand, not yet implemented
+## Standalone rule-item blocks are lifecycle `I` shorthand on Perl and Rust
 
-ADR `0094` / `FUTURE-PARITY-BACKLOG.15.0` freezes the portable boundary before behavior code. A balanced
-`{ ... }` beginning a rule-body item will normalize during source parsing to the existing lifecycle `I` semantic
-node at that exact authored position, preserving the block's source text/opening line and explicit-twin ActionIR
+ADR `0094` / `FUTURE-PARITY-BACKLOG.15.0` freezes the portable boundary; `.15.1` implements it on Perl and Rust.
+A balanced `{ ... }` beginning a rule-body item normalizes during those source parses to the existing lifecycle
+`I` semantic node at that exact authored position, preserving block source/opening line and explicit-twin ActionIR
 interior spans. It adds no phase and never enters the legacy plain-action runtime path. Edge-attached blocks,
 function/callable bodies, nested code/value/control blocks, and quoted braces retain their existing owners;
 malformed syntax follows the explicit twin's diagnostic boundary.
 
-This is a planned boundary, not current behavior. Perl rejects the bare item. Rust, Dart, Julia, and Lua parse a
-`PlainBlock`, but Rust drops it during compilation and the other three retain only inert `plain_action_payloads`.
-New source parsing will stop emitting that compatibility shape, while old serialized/programmatic plain nodes
-remain inert. Multiple explicit/shorthand `I` blocks preserve authored order; `.15.1` also repairs Rust's current
-last-explicit-`I`-wins defect. `.15.2` aligns the remaining backends and fixes the self-hosted grammar's generic
-bare-edge match so reserved lifecycle labels keep precedence. Until those leaves land, write `I { ... }`.
+Perl emits metadata-bearing `ICODE` and preserves its established placement-sensitive RuleIR lowering. Rust emits
+`CodeBlock(I)` directly, keeps the existing compiled preamble ABI, and appends repeated `I` statements instead of
+overwriting the earlier block. Native, serialized, emitted/generated, exact provenance, OR/AND zero/one/two-regex,
+same-line successor, all duplicate mixtures, ownership, and malformed-twin paths consume one neutral contract.
+Legacy Rust programmatic/serialized `PlainBlock` stays readable and inert.
+
+This is not portable current behavior yet. Dart, Julia, and Lua still parse an inert `PlainBlock`/
+`plain_action_payloads`, and the self-hosted grammar still lacks the production and reserved-label precedence.
+`.15.2` owns those remaining backends, both Lua ABIs, self-hosting, public admission, and final no-drift. Until it
+lands, cross-backend specifications should continue to write `I { ... }`.
 
 ## Complete typed authoring model is current across six recurring authorities
 

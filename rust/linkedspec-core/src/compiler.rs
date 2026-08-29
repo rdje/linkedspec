@@ -702,6 +702,14 @@ fn is_fail_closed_actionir_error(error: &str) -> bool {
         || error.contains("LINKEDSPEC_STAGED_AST_ENRICHMENT_ERROR:")
 }
 
+fn append_lifecycle_block(slot: &mut Option<CodeBlock>, mut block: CodeBlock) {
+    if let Some(existing) = slot {
+        existing.statements.append(&mut block.statements);
+    } else {
+        *slot = Some(block);
+    }
+}
+
 fn compile_rule(rule: &Rule, source_id: &str) -> Result<CompiledRule> {
     let mut regex_patterns: Vec<String> = Vec::new();
     let mut regex_slots: Vec<RegexSlot> = Vec::new();
@@ -904,7 +912,7 @@ fn compile_rule(rule: &Rule, source_id: &str) -> Result<CompiledRule> {
                 )?;
                 if let Some(block) = parsed {
                     match lifecycle.as_str() {
-                        "I" => preamble = Some(block),
+                        "I" => append_lifecycle_block(&mut preamble, block),
                         "LS" => lscode = Some(block),
                         "LE" => lecode = Some(block),
                         "E" => ecode = Some(block),

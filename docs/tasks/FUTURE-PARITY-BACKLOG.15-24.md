@@ -69,9 +69,20 @@
     `FUTURE-PARITY-BACKLOG.15.0 - ratify standalone lifecycle blocks`.
 
 - ID: `FUTURE-PARITY-BACKLOG.15.1`
-  Status: `pending`
+  Status: `done; focused-signoff-complete` (2026-08-29; task-tree-first from exact clean standalone-block contract commit
+    `836c351e7261a49d3d31166047269c09881eefb2`; no push)
   Goal: Implement the ratified bare rule-level lifecycle shorthand on the Perl reference and Rust backend.
   Dependencies: `.15.0`.
+  Verification tier: `focused` — this leaf changes only the already-ratified Perl reference and Rust private
+    implementation plus their direct neutral consumers; cross-backend admission, self-hosted grammar, public
+    examples, capability state, parent closeout, and the push boundary remain owned by `.15.2`.
+  Focused checks: neutral Perl/Rust contract consumers; Perl bootstrap/validation, ActionIR, generated-source, and
+    cursor dependents; Rust parser/compiler/runtime/serialized/emitted/generated paths and parser unit suite;
+    exact ownership and malformed twins; formatting, whitespace, Knowledge, task/index, bounded histories, memory,
+    all nine doctrines, and rendered mdBook.
+  Canonical trigger: `none` — escalate only if verification requires cross-backend/public admission, self-hosted
+    grammar or generated-format movement, infrastructure/storage/doctrine changes, or a mandatory history rollover;
+    otherwise `.15.2` retains the designated exact staged canonical boundary.
   Acceptance: The Perl bootstrap/validation path and Rust source parser normalize a rule-item-leading balanced
     `{ ... }` directly to the same `I` lifecycle entry/node as an explicit marker at that exact body position.
     Preserve the authored block text/opening line while giving its interior the same ActionIR spans as the explicit
@@ -79,6 +90,38 @@
     explicit equivalence across OR/AND and zero/one/two regex placements, including mixed explicit/bare duplicates
     in authored order. Repair Rust's existing last-`I`-wins compiler defect so duplicate explicit and shorthand
     blocks preserve that order without changing Perl's established placement-sensitive lifecycle lowering.
+  Checklist: [x] clean activation/task ownership [x] Knowledge/toolbox retrieval [x] neutral twin fixture
+    [x] Perl normalization/order/provenance/diagnostics [x] Rust normalization/order repair/provenance/diagnostics
+    [x] direct/generated dependent proof [x] durable docs/memory/task/index synchronization [x] focused signoff
+    [x] atomic commit/brief/clean handoff.
+  Activation evidence: exact `git status --short --untracked-files=all` is empty at
+    `836c351e7261a49d3d31166047269c09881eefb2`; `git_message_brief.txt` is zero bytes; the committed canonical
+    receipt matches that HEAD; the reproducible mdBook output is removed and no background job remains. `.15.0`
+    is committed complete with ADR `0094` fixing direct lifecycle normalization and `.15.1` ownership.
+  Pre-implementation finding: Rust's block consumer returns an interior string even when the outer close is
+    missing, after which brace validation cannot see the removed opening delimiter. Its body-line loop also drops
+    an unsupported remainder after a recognized element. This is the exact malformed-twin surface already owned
+    here: retain exact consumed block source for balance proof and preserve unsupported remainder as invalid input,
+    with explicit and shorthand lifecycle forms locked to the same failure.
+  Implementation evidence: the neutral `linkedspec-standalone-lifecycle-block-v1` contract now owns nine OR/AND
+    placement twins across zero/one/two regex slots, exact multiline/nested/quoted source, four authored-order
+    duplicate mixes, the action/blind/callable/nested/function ownership boundary, three malformed twins, generated
+    Perl/Rust carriers, and the legacy inert-node policy. Perl bootstrap metadata records explicit versus bare form,
+    exact marker/block source, and opening line while lowering both forms to `ICODE`; validation scans nested and
+    quoted delimiters and accepts a recognized same-line successor without swallowing an unsupported suffix. Rust
+    retains exact outer source in `ConsumedBlock`, parses the bare form directly as lifecycle `I`, preserves only a
+    same-line unsupported remainder for validation, and appends repeated `I` statements so the compiled ABI remains
+    unchanged. A deliberately broad first Rust remainder check exposed a shipped function-body raw node and was
+    narrowed to the lifecycle-`I` same-line boundary. Final review also preserves the prior interior-brace fallback
+    for programmatic/older serialized lifecycle nodes whose source is empty or descriptive, while authored block
+    nodes use exact outer source to expose a missing close; both compatibility repairs have dedicated proof and are
+    recorded in `DEVELOPMENT_NOTES.md`.
+  Focused signoff evidence: Perl syntax checks pass; the standalone Perl contract passes seven top-level
+    tests, and the combined ActionIR/generated/cursor/standalone set passes 324 tests. Rust's 32 parser unit tests
+    and the eight standalone parser/compiler/runtime/serialized/emitted/generated tests pass. `cargo fmt --check`,
+    `git diff --check`, Knowledge Map 912/7,758, task partition/index, both bounded-history checks, the 16-row live
+    view, exact repo/storage/readme/memory/acceptance/cadence invariants, rendered sole-facing mdBook, and all nine
+    doctrines pass; the reproducible render is removed and no background job remains.
   Planned verification: focused — bounded Perl/Rust parser/compiler behavior with direct backend and generated-
     carrier dependents; no public/capability admission or infrastructure movement.
   Planned checks: neutral twin fixtures; Perl bootstrap/validation/live/generated probes and focused regressions;
@@ -86,6 +129,7 @@
     action/blind/callable ownership and malformed diagnostics; doctrines, histories, memory, Knowledge, task/index,
     mdBook if behavior teaching moves, and whitespace.
   Planned canonical boundary: none; `.15.2` owns cross-backend/public admission and the next push boundary.
+  Commit: `FUTURE-PARITY-BACKLOG.15.1 - implement Perl and Rust lifecycle shorthand`.
 
 - ID: `FUTURE-PARITY-BACKLOG.15.2`
   Status: `pending`

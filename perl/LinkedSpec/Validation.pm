@@ -888,12 +888,32 @@ sub validate_dsl_syntax {
     return _report_edge_target_syntax_error($spec_content, $position, $edge_scan->{error}, $option, $rule_name);
    }
    my ($acode_count, $bcode_count) = _count_rule_edge_kinds_in_fragment($rule_label->{rhs}, $edge_scan);
+   my $lifecycle_item_open = 0;
+   if ($rule_label->{rhs} =~ /^\s*(?:I\s*)?\{/o) {
+    my $close_offset = _lifecycle_block_close_offset($rule_label->{rhs}, 0);
+    if (defined $close_offset) {
+     my $remainder = substr($rule_label->{rhs}, $close_offset + 1);
+     if ($remainder !~ /^\s*(?:#.*)?$/o
+         && !_looks_like_supported_rule_paragraph_member_line($remainder)) {
+      return _report_unsupported_lifecycle_block_remainder(
+       $spec_content,
+       $line,
+       index($line, $rule_label->{rhs}) + $close_offset,
+       $option,
+       $rule_name,
+      );
+     }
+    } else {
+     $lifecycle_item_open = 1;
+    }
+   }
    push @used_rules, map { $_->{label} } @{$edge_scan->{edges} || []};
    $current_rule = {
     label => $rule_name,
     acode_count => $acode_count,
     bcode_count => $bcode_count,
     edge_scan_depth => $edge_scan->{depth} // 0,
+    lifecycle_item_open => $lifecycle_item_open,
    };
   } elsif ($at_rule_top_level && _looks_like_malformed_rule_label_line($line)) {
    my $position = index($$spec_content, $line);
@@ -915,6 +935,8 @@ sub validate_dsl_syntax {
    return 0;
   } elsif ($current_rule) {
    my $start_depth = $current_rule->{edge_scan_depth} // 0;
+   my $continuing_lifecycle_item = $current_rule->{lifecycle_item_open} ? 1 : 0;
+   my $starting_lifecycle_item = $start_depth == 0 && $line =~ /^\s*(?:I\s*)?\{/o ? 1 : 0;
    if ($start_depth > 0 && _parse_rule_label_line($line)) {
     my $position = index($$spec_content, $line);
     _report_dsl_validation_failure($spec_content, $position,
@@ -955,6 +977,25 @@ sub validate_dsl_syntax {
    $current_rule->{acode_count} += $acode_count;
    $current_rule->{bcode_count} += $bcode_count;
    $current_rule->{edge_scan_depth} = $edge_scan->{depth} // 0;
+   if ($continuing_lifecycle_item || $starting_lifecycle_item) {
+    my $close_offset = _lifecycle_block_close_offset($line, $start_depth);
+    if (defined $close_offset) {
+     my $remainder = substr($line, $close_offset + 1);
+     if ($remainder !~ /^\s*(?:#.*)?$/o
+         && !_looks_like_supported_rule_paragraph_member_line($remainder)) {
+      return _report_unsupported_lifecycle_block_remainder(
+       $spec_content,
+       $line,
+       $close_offset,
+       $option,
+       $current_rule->{label},
+      );
+     }
+     $current_rule->{lifecycle_item_open} = 0;
+    } else {
+     $current_rule->{lifecycle_item_open} = 1;
+    }
+   }
    push @used_rules, map { $_->{label} } @{$edge_scan->{edges} || []};
    if ($current_rule->{acode_count} && $current_rule->{bcode_count}) {
     return _report_mixed_rule_action_modes(
@@ -1067,12 +1108,94 @@ sub _looks_like_supported_rule_paragraph_member_line {
  return 1 if $line =~ /^\s*@\s*(?:(?:capture_gaps|capture_slice|capture_from_here|move_pos)\b|mark\s*\(\s*\w+\s*\))/o;
  return 1 if $line =~ /^\s*-\?\s+\w+\b/o;
  return 1 if $line =~ /^\s*\.\s*\w/o;
+ return 1 if $line =~ /^\s*\{/o;
  return 1 if $line =~ /^\s*\w+\s*\(/o;
  return 1 if $line =~ /^\s*\w+\s*\{/o;
  return 1 if $line =~ /^\s*\w+\s*\./o;
  return 1 if $line =~ /^\s*\w+(?:\s*\[\s*[^\]\s]+\s*\])?\s*$/o;
  return 1 if $line =~ /^\s*\w+(?:\s*\[\s*[^\]\s]+\s*\])?(?:\s*\|\s*\w+(?:\s*\[\s*[^\]\s]+\s*\])?)+(?:\s*\{|\s*$)/o;
  return 0;
+}
+
+sub _lifecycle_block_close_offset {
+ my ($fragment, $start_depth) = @_;
+ return undef unless defined $fragment;
+
+ my $depth = $start_depth // 0;
+ my $entered_block = $depth > 0 ? 1 : 0;
+ my $length = length($fragment);
+ my $cursor = 0;
+
+ while ($cursor < $length) {
+  my $char = substr($fragment, $cursor, 1);
+
+  if ($char eq q{'}) {
+   ++$cursor;
+   while ($cursor < $length) {
+    my $inner = substr($fragment, $cursor, 1);
+    if ($inner eq "\\") {
+     $cursor += 2;
+     next;
+    }
+    ++$cursor;
+    last if $inner eq q{'};
+   }
+   next;
+  }
+
+  if ($char eq q{"}) {
+   ++$cursor;
+   while ($cursor < $length) {
+    my $inner = substr($fragment, $cursor, 1);
+    if ($inner eq "\\") {
+     $cursor += 2;
+     next;
+    }
+    ++$cursor;
+    last if $inner eq q{"};
+   }
+   next;
+  }
+
+  if ($char eq q{/}) {
+   my $slash_cursor = _consume_slash_construct($fragment, $cursor, $length);
+   if (defined $slash_cursor) {
+    $cursor = $slash_cursor;
+    next;
+   }
+  }
+
+  if ($char eq '{' || $char eq '(' || $char eq '[') {
+   ++$depth;
+   $entered_block = 1;
+   ++$cursor;
+   next;
+  }
+
+  if ($char eq '}' || $char eq ')' || $char eq ']') {
+   --$depth if $depth > 0;
+   return $cursor if $entered_block && $depth == 0;
+  }
+
+  ++$cursor;
+ }
+
+ return undef;
+}
+
+sub _report_unsupported_lifecycle_block_remainder {
+ my ($spec_content, $line, $close_offset, $option, $rule_label) = @_;
+ my $position = index($$spec_content, $line);
+ $position += $close_offset + 1 if $position >= 0;
+ return _report_dsl_validation_failure(
+  $spec_content,
+  $position,
+  'Unsupported lifecycle block remainder',
+  'Remove the unsupported text or follow the block with a recognized rule-body item',
+  $option,
+  summary => 'Unsupported lifecycle block remainder',
+  rule_label => $rule_label,
+ );
 }
 
 sub _bare_group_targets_without_block {

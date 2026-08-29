@@ -740,15 +740,67 @@ sub _build_non_action_code_block_rule {
   handler=> sub {
    my ($info, $rule_descriptors, $string, $dispatch_state) = @_;
 
+   my $line = _line_number_for_match($string, $info);
+   my $match_end = pos($$string);
    my $ipos = pos($$string);
    my ($type) = $$info{match} =~ /(\w+)/o;
+   my $match_start = $match_end - length($$info{match}) + index($$info{match}, $type);
 
    while (1) {
     my $minfo = _linkedre_or($string, $dispatch_state->{brace_scanner_re});
     return undef unless $minfo;
 
     if ($$minfo{index} == 1) {
-     return ["${type}CODE", substr($$string, $ipos, pos($$string) - $ipos - 1)]
+     my $source_end = pos($$string);
+     return [
+      "${type}CODE",
+      substr($$string, $ipos, $source_end - $ipos - 1),
+      {
+       marker => $type,
+       source_form => 'explicit',
+       source => substr($$string, $match_start, $source_end - $match_start),
+       line => $line,
+      },
+     ]
+    } elsif ($$minfo{index} == 0) {
+     _dispatch_curly_brace_handler($ctx, $minfo, $rule_descriptors, $string, $dispatch_state);
+    } else {
+    }
+   }
+ },
+}
+}
+
+sub _build_standalone_i_code_block_rule {
+ my ($ctx) = @_;
+ return {
+  id => 'STANDALONE_I_CODE_BLOCK',
+  tags => { start_token => 1 },
+  re => [qr/\{/o, qr/\}/o],
+  handler => sub {
+   my ($info, $rule_descriptors, $string, $dispatch_state) = @_;
+
+   my $line = _line_number_for_match($string, $info);
+   my $match_end = pos($$string);
+   my $match_start = $match_end - length($$info{match});
+   my $ipos = $match_end;
+
+   while (1) {
+    my $minfo = _linkedre_or($string, $dispatch_state->{brace_scanner_re});
+    return undef unless $minfo;
+
+    if ($$minfo{index} == 1) {
+     my $source_end = pos($$string);
+     return [
+      'ICODE',
+      substr($$string, $ipos, $source_end - $ipos - 1),
+      {
+       marker => 'I',
+       source_form => 'bare',
+       source => substr($$string, $match_start, $source_end - $match_start),
+       line => $line,
+      },
+     ]
     } elsif ($$minfo{index} == 0) {
      _dispatch_curly_brace_handler($ctx, $minfo, $rule_descriptors, $string, $dispatch_state);
     } else {
@@ -1072,6 +1124,7 @@ sub _build_bootstrap_rule_descriptors {
   _build_capture_gaps_rule(),
   _build_split_like_code_rule(),
   _build_empty_blind_code_block_rule(),
+  _build_standalone_i_code_block_rule($ctx),
   _build_curly_brace_rule($ctx),
  ]
 }

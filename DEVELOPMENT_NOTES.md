@@ -9,6 +9,33 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-29 (`FUTURE-PARITY-BACKLOG.15.1` — Perl/Rust standalone lifecycle implementation): one neutral contract
+  fixes semantic normalization to `I`, authored source/opening line, interior ActionIR spans, OR/AND and zero/one/
+  two-regex positions, a valid same-line successor, all four duplicate mixtures, ownership, malformed twins,
+  generated paths, and inert legacy plain data.
+- Perl's supported-member check admits `{`; a new bootstrap descriptor precedes only the generic brace sentinel
+  and reuses the same nested/string-aware scanner as explicit lifecycle blocks. Both forms emit `ICODE`, with an
+  optional third provenance record deliberately ignored by existing RuleIR's stable two-field semantic reader.
+- Explicit Perl lifecycle entries now carry the same source metadata, beginning at the marker rather than line
+  indentation. Existing RuleIR joins repeated entry chunks in authored order, so no handler/runtime ABI changes.
+- Validation tracks a lifecycle item's cross-line delimiter depth and rejects only an unmistakably unsupported
+  remainder after its balanced close. Recognized same-line successors remain valid. Missing and stray closes keep
+  the established `validate_dsl_syntax` summaries, stage, rule, and opening line for explicit/bare twins.
+- Rust's block consumer now returns normalized interior, exact outer source, and remainder. Standalone source
+  blocks become `CodeBlock(I)` immediately; explicit lifecycle source is no longer synthesized. Outer source
+  balance exposes the previously hidden missing-close defect while quote-aware scanning ignores literal braces.
+- Programmatic and older serialized lifecycle nodes may have an empty or descriptive `source`. Final review caught
+  that using exact source unconditionally would stop validating their interior braces; the validator now selects
+  exact outer source only for authored block-shaped source and otherwise retains the prior interior-code check.
+- The first Rust remainder fix made every historical `Raw` carrier fatal and broke validation of the shipped user-
+  function-definition grammar. The corrected scope retains/rejects `Raw` only after same-line lifecycle `I`,
+  preserving unrelated compatibility data. The neutral malformed fixture uses `???`, not ambiguous bare-edge text.
+- Rust compilation appends `I` statements into the one existing preamble `Option`; this preserves serialized ABI
+  and each separately parsed interior span while repairing explicit and mixed last-slot-wins behavior.
+- Focused proof passes Perl 324/324, Rust parser 32/32, and the Rust neutral consumer 8/8 across native,
+  serialized, emitted/generated, source/provenance, ownership, duplicate, malformed, and legacy-inert routes.
+- `.15.1` changes no Dart/Julia/Lua, self-hosted grammar, capability/public admission, generated-source format,
+  dependency, storage, or outward API. `.15.2` retains those remaining rollout and final no-drift responsibilities.
 - 2026-08-29 (`FUTURE-PARITY-BACKLOG.15.0` — standalone lifecycle-block contract): tool-first audit disproves
   the book's former current-tense shorthand claim. Perl validation rejects the bare item as unsupported; the
   bootstrap brace scanner balances it only to an integer sentinel. Rust parses `PlainBlock` then compiles nothing;

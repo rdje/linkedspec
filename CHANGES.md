@@ -10,6 +10,29 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-29 — FUTURE-PARITY-BACKLOG.15.1 — implement Perl/Rust standalone lifecycle blocks
+
+- Added neutral contract `linkedspec-standalone-lifecycle-block-v1` for OR/AND, zero/one/two-regex and same-line
+  placement, exact source/opening-line provenance, ActionIR span equality, all explicit/bare duplicate mixtures,
+  brace ownership, malformed twins, generated carriers, and inert legacy plain data.
+- Perl validation now admits rule-item-leading `{ ... }`; the bootstrap uses its existing nested/string-aware brace
+  scanner to emit `ICODE` with semantic marker `I`, actual `bare`/`explicit` provenance, source, and opening line.
+  RuleIR/runtime ABI and placement-sensitive lowering remain unchanged.
+- Rust source parsing now emits lifecycle `CodeBlock(I)` directly instead of `PlainBlock`, retains exact outer
+  block source so missing closes remain visible, and preserves only a same-line unsupported lifecycle remainder
+  for typed rejection. Unrelated legacy `Raw` carriers retain their existing compatibility behavior.
+- Rust compilation now appends repeated `I` statements into the existing preamble option. This fixes the audited
+  last-`I`-wins defect without changing `CompiledSpec` shape or the spans parsed inside each authored block.
+- Perl and Rust execute explicit/explicit, explicit/bare, bare/explicit, and bare/bare fixtures in authored order
+  as `first-second`; Perl standalone generated source and Rust native/serialized/emitted/generated paths agree.
+- Locked action, blind, resolved bare-edge, function, contextual callable, nested, and quoted-brace ownership.
+  Missing close, stray close, and unmistakably unsupported `???` remainder reject as explicit/bare twins; valid
+  same-line body successors remain accepted.
+- Focused Perl proof passes 324 tests across ActionIR, generated source, rule-local cursor, and the new contract.
+  Rust passes 32 parser unit tests plus all eight new contract tests; formatting and whitespace checks are clean.
+- Updated ADR `0094`, [[standalone-lifecycle-block-audit]], roadmaps, architecture, task/index, bounded continuity,
+  and the sole-facing mdBook to say Perl/Rust are current while Dart/Julia/Lua/self-hosted/public `.15.2` remains.
+
 ## 2026-08-29 — FUTURE-PARITY-BACKLOG.15.0 — ratify standalone lifecycle-block normalization
 
 - Audited the Perl reference, Rust, Dart, Julia, shared Lua on PUC Lua/LuaJIT, and the self-hosted grammar before

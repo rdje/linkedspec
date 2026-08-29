@@ -13,27 +13,34 @@ answers:
   - "why does Rust keep only the last I block"
   - "does spec.spec classify I blocks correctly"
 date: 2026-08-29
-status: audited and ratified; implementation pending under FUTURE-PARITY-BACKLOG.15.1-.2
+status: Perl and Rust implemented under FUTURE-PARITY-BACKLOG.15.1; remaining rollout pending under .15.2
 tags: [dsl, lifecycle, codeblock, parser, perl, rust, dart, julia, lua, parity, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.15.0 toolbox/source audit: Perl validation rejects rule-item-leading `{ ... }`, while its bootstrap CURLY_BRACE scanner returns only a balance sentinel; Rust parses PlainBlock then drops it in compilation; Dart, Julia, and Lua parse PlainBlock and compile inert plain_action_payloads that their runtimes never execute. Direct Julia, PUC Lua, and LuaJIT probes return null for a bare return block but `first-second` for two ordered explicit I blocks. Perl returns `first-second` for the explicit pair. Rust compiler source assigns each lifecycle to one Option and overwrites the earlier I. Direct self-hosted specs/spec.spec output omits a bare block and misclassifies line-start explicit I as a bare edge to target I. ADR 0094 selects direct source-parse normalization to I, exact authored source/line provenance, explicit-twin malformed behavior, ordered duplicates, and unchanged edge/callable/nested ownership."
-reverify: "perl -Iperl -MLinkedSpec -MLinkedSpec::BootstrapSpec -MJSON::PP -e 'my $bare=qq{Top::\\n { return(\\\"bare\\\") }\\n}; my ($ok,$ast)=LinkedSpec::BootstrapSpec::run_bootstrap_parse(\\$bare); my %ctx; LinkedSpec::Get(\\$bare,runtime_ctx_ref=>\\%ctx); print JSON::PP->new->canonical(1)->encode({bootstrap_ok=>$ok?1:0,bootstrap=>$ast,last_error=>$ctx{last_error}}),qq{\\n};' && rg -n 'PlainBlock|plain_action_payloads|preamble = Some' rust/linkedspec-core/src dart/lib julia/src lua/src"
+evidence: "FUTURE-PARITY-BACKLOG.15.0 ratified ADR 0094 from the five-backend audit. FUTURE-PARITY-BACKLOG.15.1 adds one neutral explicit/bare twin contract consumed by Perl and Rust: Perl bootstrap emits metadata-bearing ICODE, Rust emits lifecycle CodeBlock(I), both preserve exact source/opening line and ActionIR interior spans, all explicit/bare duplicate combinations return first-second in authored order, and edge/function/callable/nested braces retain their owners. Perl validation and Rust typed validation now reject missing close, unmatched close, and unmistakably unsupported same-line remainder as explicit/bare twins. Rust appends repeated I statements instead of overwriting the earlier preamble. Rust source parsing no longer emits PlainBlock, while legacy programmatic/serialized PlainBlock remains inert. Dart, Julia, Lua, and specs/spec.spec retain the audited pre-.15.2 boundary."
+reverify: "prove -Iperl t/standalone_lifecycle_block_perl_contract.t && cargo test --manifest-path rust/linkedspec-runtime/Cargo.toml --test standalone_lifecycle_block_contract --no-fail-fast"
 ---
 
 ## Current implementation truth
 
-There is no executable cross-backend standalone lifecycle block today:
+Perl and Rust now implement the ratified shorthand:
 
-- Perl's validation whitelist has no item beginning with `{`. The later bootstrap brace rule balances nested text
-  but returns `1`, not `ICODE`; compilation is rejected first with `Unsupported top-level rule paragraph content`.
-- Rust's source parser creates `BodyElementKind::PlainBlock`, but its compiler groups that node with raw text and
-  emits no code.
+- Perl validation admits a rule-item-leading `{`, and the bootstrap emits `ICODE` with marker `I`, exact authored
+  block source, opening line, and `bare` provenance. The existing RuleIR joins repeated entry blocks in authored
+  order, so explicit/bare mixtures execute identically and survive standalone generated Perl source.
+- Rust source parsing emits `BodyElementKind::CodeBlock { lifecycle: "I", ... }` directly, retains exact outer
+  source for provenance and malformed balance checks, and no longer emits `PlainBlock`. Compilation appends every
+  `I` block's typed statements into the existing preamble slot, preserving the compiled ABI and per-interior spans.
+- One neutral contract covers OR/AND, zero/one/two regex placements, same-line successors, multiline/nested/quoted
+  braces, all four duplicate combinations, earlier brace owners, malformed twins, native/serialized/generated
+  execution, and the inert legacy Rust plain carrier.
+
+The remaining `.15.2` boundary is still not portable:
+
 - Dart, Julia, and Lua create their corresponding plain-block AST nodes and compile `plain_action_payloads` with
   role `plain_block`. Runtime lifecycle loops read only `lifecycle_action_payloads`; plain payloads affect only an
   inert/passive-rule shape check.
 - PUC Lua and LuaJIT share the same implementation and independently return null for `Top:: { return("bare") }`.
   Julia does the same. Two explicit `I` blocks execute in order and return `first-second` on all three routes.
-- Rust's compiled lifecycle representation is singular and assigns `preamble = Some(block)` for every `I`, so a
-  later block replaces an earlier one. Perl joins code chunks in order; Dart, Julia, and Lua keep ordered lists.
+- Dart, Julia, and Lua keep ordered explicit lifecycle payload lists; their bare forms remain inert until `.15.2`.
 
 The permanent self-hosted grammar has no standalone production. Its generic line-level bare-edge block can match
 the reserved label `I`; a direct `spec_file` probe currently reports explicit `I { ... }` as `{type: bare_edge,

@@ -2,24 +2,27 @@
 
 ## Current Activity
 
-- Standalone lifecycle-block audit `.15.0` is in canonical signoff from exact clean typed-authoring closeout
-  `bc35ada0`; ADR `0094` ratifies `{ ... }` at a rule-item boundary as future exact shorthand for `I { ... }`.
-- Current behavior remains explicit-marker-only: Perl rejects the bare form; Rust drops its `PlainBlock`; Dart,
-  Julia, and Lua retain inert plain payloads. No parser/compiler/runtime behavior changes in this audit leaf.
-- `.15.1` owns Perl/Rust implementation and Rust duplicate-`I` order repair; `.15.2` owns remaining backends,
-  self-hosted grammar precedence, public/generated alignment, and final no-drift.
+- Perl/Rust implementation `.15.1` is complete from exact clean contract commit `836c351e`. One neutral
+  explicit/bare twin contract governs placement, provenance, order, ownership, malformed syntax, and carriers.
+- Perl emits standalone blocks as provenance-bearing `ICODE`; Rust emits `CodeBlock(I)` and appends repeated
+  preamble statements instead of overwriting. Direct/serialized/emitted/generated fixtures return `first-second`.
+- Parent `.15` remains active: `.15.2` next owns Dart/Julia/Lua, both Lua ABIs, self-hosted reserved lifecycle
+  precedence, capability/public admission, examples, recurrence, and final no-drift.
 
 ## Latest Completed Slice
 
-- `.15.0` records the five-backend/six-runtime current boundary, exact normalization/ownership/provenance/order/
-  malformed contract, dormant-carrier compatibility, and downstream ownership without behavior movement.
+- `.15.1` implements the ratified shorthand on Perl/Rust and repairs the pre-existing Rust duplicate-`I` ordering
+  defect without changing compiled ABI; Perl 324, Rust neutral 8 and parser 32, book, and all doctrines pass.
 
 ## Next Action
 
-- Complete exact staged canonical signoff and commit `.15.0`, then activate `.15.1` task-tree-first from clean
-  HEAD and implement the ratified Perl/Rust normalization plus the existing Rust duplicate-order repair.
+- From the resulting clean `.15.1` commit, activate `.15.2` task-tree-first for remaining-backend/self-hosted/public
+  alignment and the designated canonical closeout/push boundary.
 
 ## Recent Completions
+
+- `2026-08-29` — `.15.1` makes bare rule-item blocks exact lifecycle `I` shorthand on Perl/Rust, preserves source,
+  spans, position and owners, orders all duplicate mixtures, fixes Rust last-slot-wins, and locks malformed twins.
 
 - `2026-08-29` — `.15.0` ratifies bare rule-item blocks as future direct lifecycle-`I` normalization, preserves
   every existing brace owner and legacy inert carrier, corrects premature book teaching, and splits implementation
@@ -74,9 +77,6 @@
 - `2026-08-27` — `.14.7.6.1` implements Julia's exclusive private staged marker and native-regex-offset-backed
   Unicode-scalar direct/ordered-derived provenance across four equal dormant logical routes. Its consumer is 131
   GREEN/one exact `.2` authority RED; discovery, rollout, formats, public behavior, and neutral count do not move.
-
-- `2026-08-27` — `.14.7.6.0` freezes Julia at 86 GREEN/one intentional marker/provenance RED outside ordinary/
-  canonical discovery, advances neutral governance to 92, and repairs stale Dart availability/route governance.
 
 ## History
 

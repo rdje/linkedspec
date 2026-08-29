@@ -402,9 +402,20 @@ fn parse_body_elements(lines: &[&str], i: &mut usize) -> Vec<BodyElement> {
                 break;
             }
         } else {
-            // Can't parse — leave remaining as raw
-            if !elements.is_empty() {
-                // We already parsed something, so just skip the rest
+            // Preserve an unsupported suffix after lifecycle I so validation
+            // can reject explicit and shorthand twins equivalently. Other Raw
+            // compatibility carriers retain their established behavior.
+            if matches!(
+                elements.last().map(|element| &element.kind),
+                Some(BodyElementKind::CodeBlock { lifecycle, .. }) if lifecycle == "I"
+            ) {
+                elements.push(BodyElement::new(
+                    BodyElementKind::Raw {
+                        text: trimmed.clone(),
+                    },
+                    &trimmed,
+                    line_num,
+                ));
             }
             break;
         }
@@ -492,18 +503,18 @@ fn parse_single_element(
         } else if rest.starts_with('{') {
             // Block may span multiple lines — consume_block_from_rest advances `i`.
             let saved_i = *i;
-            let (code, remainder) = consume_block_from_rest(lines, i, &rest)?;
+            let block = consume_block_from_rest(lines, i, &rest)?;
             let elem = BodyElement::new(
                 BodyElementKind::ActionEdge {
                     targets,
-                    code: Some(code),
+                    code: Some(block.code),
                     fluent_chain: Vec::new(),
                 },
                 full_match,
                 line_num,
             );
             let advanced = *i > saved_i;
-            return Some((elem, remainder, advanced));
+            return Some((elem, block.remainder, advanced));
         } else {
             let (fluent_chain, remainder) = parse_fluent_chain_with_remainder(&rest);
             let elem = BodyElement::new(
@@ -526,8 +537,8 @@ fn parse_single_element(
 
         let (code, fluent_chain, advanced, remainder) = if rest.starts_with('{') {
             let saved_i = *i;
-            let (c, rem) = consume_block_from_rest(lines, i, &rest)?;
-            (Some(c), Vec::new(), *i > saved_i, rem)
+            let block = consume_block_from_rest(lines, i, &rest)?;
+            (Some(block.code), Vec::new(), *i > saved_i, block.remainder)
         } else {
             let (chain, rem) = parse_fluent_chain_with_remainder(&rest);
             (None, chain, false, rem)
@@ -566,17 +577,25 @@ fn parse_single_element(
             return Some((elem, remainder, advanced));
         } else if rest.starts_with('{') {
             let saved_i = *i;
-            let (code, remainder) = consume_block_from_rest(lines, i, &rest)?;
+            let block = consume_block_from_rest(lines, i, &rest)?;
+            let suffix = &trimmed[full_match.end()..];
+            let brace_offset = suffix.find('{')?;
+            let source = format!(
+                "{}{}{}",
+                full_match.as_str(),
+                &suffix[..brace_offset],
+                block.source
+            );
             let elem = BodyElement::new(
                 BodyElementKind::CodeBlock {
                     lifecycle: marker.clone(),
-                    code,
+                    code: block.code,
                 },
-                &format!("{} {{ {} }}", marker, trimmed),
+                &source,
                 line_num,
             );
             let advanced = *i > saved_i;
-            return Some((elem, remainder, advanced));
+            return Some((elem, block.remainder, advanced));
         } else if let Some((code, remainder, advanced)) =
             parse_lifecycle_fluent_chain_statement_code(lines, i, &rest)
         {
@@ -657,13 +676,22 @@ fn parse_single_element(
         return Some((elem, remainder, false));
     }
 
-    // 10. Plain code block: `{ ... }`
+    // 10. Standalone rule-item block: direct syntax sugar for lifecycle `I`.
+    // The dormant PlainBlock variant remains readable for compatibility, but
+    // source parsing no longer emits it.
     if trimmed.starts_with('{') {
         let saved_i = *i;
-        let (code, remainder) = consume_block_from_rest(lines, i, trimmed)?;
-        let elem = BodyElement::new(BodyElementKind::PlainBlock { code }, trimmed, line_num);
+        let block = consume_block_from_rest(lines, i, trimmed)?;
+        let elem = BodyElement::new(
+            BodyElementKind::CodeBlock {
+                lifecycle: "I".to_string(),
+                code: block.code,
+            },
+            &block.source,
+            line_num,
+        );
         let advanced = *i > saved_i;
-        return Some((elem, remainder, advanced));
+        return Some((elem, block.remainder, advanced));
     }
 
     // 11. Bare rule edge. It is deliberately admitted only for the first
@@ -722,9 +750,9 @@ fn parse_bare_edge(
     }
 
     if rest.starts_with('{') {
-        let (block, remainder) = consume_block_from_rest(lines, i, &rest)?;
-        code = Some(block);
-        rest = remainder.trim_start().to_string();
+        let block = consume_block_from_rest(lines, i, &rest)?;
+        code = Some(block.code);
+        rest = block.remainder.trim_start().to_string();
     }
 
     if !rest.is_empty() && !rest.starts_with('#') {
@@ -908,15 +936,22 @@ fn skip_horizontal_space(input: &str, mut offset: usize) -> usize {
     offset
 }
 
+struct ConsumedBlock {
+    code: String,
+    remainder: String,
+    source: String,
+}
+
 /// Consume a `{ ... }` block that starts in `rest` and may continue on subsequent lines.
 /// `i` is the CURRENT line index (the line containing the opening `{`).
-/// Returns `(block_content, rest_after_block_on_same_line)`.
+/// Returns the normalized interior, same-line remainder, and exact block source.
 /// Advances `i` past any lines consumed.
-fn consume_block_from_rest(lines: &[&str], i: &mut usize, rest: &str) -> Option<(String, String)> {
+fn consume_block_from_rest(lines: &[&str], i: &mut usize, rest: &str) -> Option<ConsumedBlock> {
     let start_brace = rest.find('{')?;
     let remainder = &rest[start_brace + 1..]; // everything after opening `{`
     let mut depth: i32 = 1;
     let mut content = String::new();
+    let mut source = rest[start_brace..].to_string();
 
     // Scan the remainder of the current line
     let remainder_scan = scan_line_for_braces_chars(remainder, &mut depth);
@@ -931,7 +966,12 @@ fn consume_block_from_rest(lines: &[&str], i: &mut usize, rest: &str) -> Option<
         };
         // Everything after the closing `}` on the same line
         let after_block = remainder[remainder_scan.len()..].trim().to_string();
-        return Some((block_content, after_block));
+        source.truncate(1 + remainder_scan.len());
+        return Some(ConsumedBlock {
+            code: block_content,
+            remainder: after_block,
+            source,
+        });
     }
     // Block continues past this line — include the remainder
     if !remainder_scan.trim().is_empty() {
@@ -943,6 +983,8 @@ fn consume_block_from_rest(lines: &[&str], i: &mut usize, rest: &str) -> Option<
     while *i < lines.len() && depth > 0 {
         let line = lines[*i];
         let line_scan = scan_line_for_braces_chars(line, &mut depth);
+        source.push('\n');
+        source.push_str(line_scan);
         if depth == 0 {
             // Closing brace found on this line
             let strip_close = if line_scan.ends_with('}') {
@@ -958,7 +1000,11 @@ fn consume_block_from_rest(lines: &[&str], i: &mut usize, rest: &str) -> Option<
             }
             *i += 1;
             let after_block = line[line_scan.len()..].trim().to_string();
-            return Some((content.trim().to_string(), after_block));
+            return Some(ConsumedBlock {
+                code: content.trim().to_string(),
+                remainder: after_block,
+                source,
+            });
         }
         // Include the whole line
         if !content.is_empty() {
@@ -968,7 +1014,11 @@ fn consume_block_from_rest(lines: &[&str], i: &mut usize, rest: &str) -> Option<
         *i += 1;
     }
     // Unclosed block (validator catches this)
-    Some((content.trim().to_string(), String::new()))
+    Some(ConsumedBlock {
+        code: content.trim().to_string(),
+        remainder: String::new(),
+        source,
+    })
 }
 
 /// Parse attached fluent branch syntax after a receiver-like body element:
@@ -997,9 +1047,13 @@ fn parse_attached_fluent_when_chain(
     }
 
     let when_start_i = *i;
-    let (when_body, remainder) = consume_block_from_rest(lines, i, &remaining)?;
-    let mut code = format!("when({}) {{ {} }}", condition.trim(), when_body.trim());
-    remaining = remainder;
+    let when_block = consume_block_from_rest(lines, i, &remaining)?;
+    let mut code = format!(
+        "when({}) {{ {} }}",
+        condition.trim(),
+        when_block.code.trim()
+    );
+    remaining = when_block.remainder;
     let mut remaining_origin_i = block_remainder_origin(when_start_i, *i, &remaining);
 
     while let Some(after_keyword) = strip_optional_dot_keyword(&remaining, "otherwise") {
@@ -1011,11 +1065,11 @@ fn parse_attached_fluent_when_chain(
         let block_origin_i = remaining_origin_i;
         let current_floor_i = *i;
         let mut block_i = block_origin_i;
-        let (otherwise_body, remainder) = consume_block_from_rest(lines, &mut block_i, tail)?;
+        let otherwise_block = consume_block_from_rest(lines, &mut block_i, tail)?;
         code.push_str(" otherwise { ");
-        code.push_str(otherwise_body.trim());
+        code.push_str(otherwise_block.code.trim());
         code.push_str(" }");
-        remaining = remainder;
+        remaining = otherwise_block.remainder;
         *i = block_i.max(current_floor_i);
         remaining_origin_i = if remaining.trim().is_empty() {
             *i

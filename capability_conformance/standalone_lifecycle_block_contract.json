@@ -1,0 +1,165 @@
+{
+  "contract_id": "linkedspec-standalone-lifecycle-block-v1",
+  "task_owner": "FUTURE-PARITY-BACKLOG.15.1",
+  "decision": "docs/decisions/0094-standalone-rule-block-normalizes-to-lifecycle-i.md",
+  "normalization": {
+    "semantic_kind": "code_block",
+    "lifecycle": "I",
+    "shorthand_source_form": "bare",
+    "explicit_source_form": "explicit",
+    "source_parser_emits_plain_block": false,
+    "legacy_plain_block_policy": "readable_inert_compatibility",
+    "duplicate_policy": "append_statements_in_authored_order"
+  },
+  "placement_twins": [
+    {
+      "id": "default_zero_regex",
+      "explicit": "Top::\n I { set(out, \"placed\") }\n",
+      "shorthand": "Top::\n { set(out, \"placed\") }\n",
+      "opening_line": 2,
+      "interior": " set(out, \"placed\") "
+    },
+    {
+      "id": "or_one_regex_before",
+      "explicit": "Top::OR\n I { set(out, \"placed\") }\n /x/\n",
+      "shorthand": "Top::OR\n { set(out, \"placed\") }\n /x/\n",
+      "opening_line": 2,
+      "interior": " set(out, \"placed\") "
+    },
+    {
+      "id": "or_one_regex_after",
+      "explicit": "Top::OR\n /x/\n I { set(out, \"placed\") }\n",
+      "shorthand": "Top::OR\n /x/\n { set(out, \"placed\") }\n",
+      "opening_line": 3,
+      "interior": " set(out, \"placed\") "
+    },
+    {
+      "id": "or_two_regex_between",
+      "explicit": "Top::OR\n /x/\n I { set(out, \"placed\") }\n /y/\n",
+      "shorthand": "Top::OR\n /x/\n { set(out, \"placed\") }\n /y/\n",
+      "opening_line": 3,
+      "interior": " set(out, \"placed\") "
+    },
+    {
+      "id": "and_zero_regex",
+      "explicit": "Top::AND\n I { set(out, \"placed\") }\n",
+      "shorthand": "Top::AND\n { set(out, \"placed\") }\n",
+      "opening_line": 2,
+      "interior": " set(out, \"placed\") "
+    },
+    {
+      "id": "and_one_regex_after",
+      "explicit": "Top::AND\n /x/\n I { set(out, \"placed\") }\n",
+      "shorthand": "Top::AND\n /x/\n { set(out, \"placed\") }\n",
+      "opening_line": 3,
+      "interior": " set(out, \"placed\") "
+    },
+    {
+      "id": "and_two_regex_between",
+      "explicit": "Top::AND\n /x/\n I { set(out, \"placed\") }\n /y/\n",
+      "shorthand": "Top::AND\n /x/\n { set(out, \"placed\") }\n /y/\n",
+      "opening_line": 3,
+      "interior": " set(out, \"placed\") "
+    },
+    {
+      "id": "default_header_rest",
+      "explicit": "Top:: I { set(out, \"placed\") }\n /x/\n",
+      "shorthand": "Top:: { set(out, \"placed\") }\n /x/\n",
+      "opening_line": 1,
+      "interior": " set(out, \"placed\") "
+    },
+    {
+      "id": "or_same_line_successor",
+      "explicit": "Top::OR\n I { set(out, \"placed\") } /x/\n",
+      "shorthand": "Top::OR\n { set(out, \"placed\") } /x/\n",
+      "opening_line": 2,
+      "interior": " set(out, \"placed\") "
+    }
+  ],
+  "provenance_twin": {
+    "explicit": "Top::\n I {\n  set(out, \"{quoted}\")\n  if(true) { return(out) }\n }\n /x/\n",
+    "shorthand": "Top::\n {\n  set(out, \"{quoted}\")\n  if(true) { return(out) }\n }\n /x/\n",
+    "explicit_block_source": "I {\n  set(out, \"{quoted}\")\n  if(true) { return(out) }\n }",
+    "shorthand_block_source": "{\n  set(out, \"{quoted}\")\n  if(true) { return(out) }\n }",
+    "opening_line": 2
+  },
+  "duplicate_cases": [
+    {
+      "id": "explicit_explicit",
+      "source": "Top::\n I { set(out, \"first\") }\n I { return(cat(out, \"-second\")) }\n /x/ -> Done\nDone:\n /()/\n"
+    },
+    {
+      "id": "explicit_shorthand",
+      "source": "Top::\n I { set(out, \"first\") }\n { return(cat(out, \"-second\")) }\n /x/ -> Done\nDone:\n /()/\n"
+    },
+    {
+      "id": "shorthand_explicit",
+      "source": "Top::\n { set(out, \"first\") }\n I { return(cat(out, \"-second\")) }\n /x/ -> Done\nDone:\n /()/\n"
+    },
+    {
+      "id": "shorthand_shorthand",
+      "source": "Top::\n { set(out, \"first\") }\n { return(cat(out, \"-second\")) }\n /x/ -> Done\nDone:\n /()/\n"
+    }
+  ],
+  "duplicate_input": "x",
+  "duplicate_expected": "first-second",
+  "ownership_cases": [
+    {
+      "id": "action_edge_block",
+      "source": "Top::\n /x/ -> Done { return(\"edge\") }\nDone:\n /()/\n",
+      "expected_kind": "action_edge"
+    },
+    {
+      "id": "blind_edge_block",
+      "source": "Top::AND\n => Done { return(\"edge\") }\nDone:\n /x/\n",
+      "expected_kind": "blind_edge"
+    },
+    {
+      "id": "bare_edge_block",
+      "source": "Top::\n Done { return(\"edge\") }\nDone:\n /x/\n",
+      "expected_kind": "bare_edge"
+    },
+    {
+      "id": "callable_block",
+      "source": "Top::\n /x/ -> Done { return(with(\"value\") { return(value) }) }\nDone:\n /()/\n",
+      "expected_kind": "action_edge"
+    },
+    {
+      "id": "nested_lifecycle_block",
+      "source": "Top::\n I { if(true) { return(\"nested\") } }\n /x/\n",
+      "expected_kind": "code_block"
+    },
+    {
+      "id": "function_body",
+      "source": "fn helper() { return(\"function\") }\nTop::\n /x/ -> Top { return(helper()) }\n",
+      "expected_kind": "action_edge"
+    }
+  ],
+  "malformed_twins": [
+    {
+      "id": "missing_close",
+      "explicit": "Top::\n I { return(\"x\")\n",
+      "shorthand": "Top::\n { return(\"x\")\n",
+      "perl_summary": "Unclosed rule block before end of file",
+      "rust_error_fragment": "unbalanced braces",
+      "opening_line": 2
+    },
+    {
+      "id": "unsupported_remainder",
+      "explicit": "Top::\n I { return(\"x\") } ???\n",
+      "shorthand": "Top::\n { return(\"x\") } ???\n",
+      "perl_summary": "Unsupported lifecycle block remainder",
+      "rust_error_fragment": "unsupported body content",
+      "opening_line": 2
+    },
+    {
+      "id": "unmatched_close",
+      "explicit": "Top::\n I { return(\"x\") }}\n",
+      "shorthand": "Top::\n { return(\"x\") }}\n",
+      "perl_summary": "Unexpected closing delimiter '}' in rule paragraph",
+      "rust_error_fragment": "unsupported body content",
+      "opening_line": 2
+    }
+  ],
+  "generated_fixture_case": "explicit_shorthand"
+}

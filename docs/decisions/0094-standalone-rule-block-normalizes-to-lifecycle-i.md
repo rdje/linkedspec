@@ -1,7 +1,7 @@
 # ADR 0094: Standalone rule blocks normalize directly to lifecycle `I`
 
 - Date: 2026-08-29
-- Status: accepted direction; backend rollout pending under `FUTURE-PARITY-BACKLOG.15.1-.2`
+- Status: accepted; Perl/Rust implemented under `.15.1`; remaining rollout pending under `.15.2`
 - Tags: architecture, grammar, lifecycle, codeblock, parser, source-provenance, portability, parity
 
 ## Context
@@ -90,7 +90,8 @@ the shorthand through the existing lifecycle `I` path.
 - The language gains syntactic economy without a second runtime phase or a new public semantic AST kind.
 - Action/blind ownership, callable blocks, nested block semantics, explicit `I`, and historical Perl lifecycle
   placement remain unchanged.
-- Until `.15.1-.2` land, authors must continue to write `I { ... }`; the mdBook states this current boundary.
+- Perl and Rust accept the shorthand after `.15.1`; authors targeting every backend must continue to write
+  `I { ... }` until `.15.2` aligns Dart, Julia, Lua, and the self-hosted grammar.
 
 ## Links
 

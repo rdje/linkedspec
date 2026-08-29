@@ -14,9 +14,9 @@ Read [Declaration Helper Reference](declaration-helper-reference.md) first if yo
 
 The short version:
 
-- `I { ... }` is the normal rule-entry setup location.
-- Write the `I` marker today. A rule-item-leading `{ ... }` is ratified as future exact shorthand for `I`, but
-  the portable implementation is still pending under `FUTURE-PARITY-BACKLOG.15.1-.2`.
+- `I { ... }` is the portable rule-entry setup location.
+- Perl and Rust also accept a rule-item-leading `{ ... }` as exact shorthand for `I` at that position. Continue
+  writing the marker in specifications that must run on Dart, Julia, or Lua until `.15.2` completes the rollout.
 - `-> Rule[selector] { ... }` is the normal action attached to a matched local slot.
 - `LS { ... }` and `LE { ... }` are advanced local-slot hooks around local-match/action processing in regex-driven handler shapes.
 - `LX { ... }` is the local no-match/failure path hook.
@@ -43,6 +43,7 @@ A rule paragraph can contain several kinds of members:
 | Empty action edge | `-> Token` | dispatch to the target rule with default call behavior. |
 | Blind-call edge | `=> Child` / `=> Child { ... }` | call another rule as part of the rule body without tying the body to one regex slot action. |
 | Lifecycle block | `I { ... }` | run placement-specific setup or hook code. |
+| Standalone entry block | `{ ... }` | Perl/Rust shorthand for `I { ... }`; not yet portable to Dart/Julia/Lua. |
 | Split/mark marker | `@capture_slice` / `@mark(body_start)` | request a backend-specific compatibility update; see the scope caveat below. |
 
 Example:
@@ -64,12 +65,51 @@ The structure is:
 - `/\s*=/` and `/[A-Za-z_]+/` are later local slots
 - `-> Name[1] { ... }` and `-> Name[2] { ... }` run when those local slots are the current match
 
-## `I { ... }`: rule-entry setup
+## `I { ... }`: rule-entry setup and its Perl/Rust shorthand
 
-The marker is currently required. The planned markerless twin preserves the exact authored position and code,
-so it will not create a second lifecycle phase or take ownership from an edge-attached, callable, or nested
-block. Multiple explicit and shorthand entry blocks will retain authored order. Until that rollout is complete,
-do not rely on a bare rule-item block: Perl rejects it, and other backends' legacy plain-block nodes are inert.
+`I { ... }` remains the portable spelling. On Perl and Rust, a block that begins a rule-body item now normalizes
+directly to the same lifecycle `I` node:
+
+```text
+Token:
+ { set(meta, { "kind" : "token" }) }
+ /[A-Za-z_]+/
+ -> Token[0] { return(set_key(meta, "text", match_text())) }
+```
+
+For those two backends, the standalone block above has the same semantics as:
+
+```text
+Token:
+ I { set(meta, { "kind" : "token" }) }
+ /[A-Za-z_]+/
+ -> Token[0] { return(set_key(meta, "text", match_text())) }
+```
+
+Normalization happens at the authored position and does not create a second lifecycle phase. It preserves the
+block text, opening line, and the explicit twin's ActionIR interior spans. Action-edge, blind-call, resolved bare-
+edge, function, callable, and nested blocks keep their earlier owners.
+
+Repeated explicit and standalone entry blocks execute in authored order. For example, current Perl and Rust run
+both blocks below as one ordered `I` preamble rather than letting the second overwrite the first:
+
+```text
+Top::
+ I { set(out, "first") }
+ { return(cat(out, "-second")) }
+ /x/ -> Done
+
+Done:
+ /()/
+```
+
+That fixture returns `"first-second"`. The shorthand works in OR/default and AND families, before, between, or
+after zero, one, or two regex declarations, and beside another recognized same-line body item. A missing close,
+stray close, or genuinely unsupported remainder diagnoses like the explicit twin. Existing serialized Rust
+`PlainBlock` values remain readable but inert; new Rust source parsing no longer emits them.
+
+Dart, Julia, Lua, and the self-hosted grammar still have the pre-rollout behavior, so use the explicit marker for
+cross-backend specifications until `FUTURE-PARITY-BACKLOG.15.2` completes.
 
 Use `I { ... }` for state that belongs to one invocation of the rule.
 
