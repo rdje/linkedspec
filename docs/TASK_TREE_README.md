@@ -175,6 +175,11 @@ Customize these parts:
 - Commit-message policy if the project does not use `git_message_brief.txt`.
 - Any project-specific default rule for workstream ownership.
 
+If a contract checker reads an immutable completion marker from the task index, keep that marker in an explicitly
+delimited stable section after the mutable active-tree table. Do not make a current-frontier row carry unrelated
+closed-state evidence. Govern both the marker inventory and its consumers, and include a mutation that rewrites
+the active row without copying any closed marker.
+
 Remove project-specific sections that do not apply to the new project.
 
 ## Creating The First Task Tree

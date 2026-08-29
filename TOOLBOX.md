@@ -1598,9 +1598,13 @@ trap 'rm -rf -- "$diagnostic_root"' EXIT
 - **WHAT:** `tools/read_task_tree.pl` resolves a stable ID through the strict task-tree JSONL index and prints its
   one bounded semantic owner. `scripts/check_task_tree_partitions.pl`, invoked by the existing metadata doctrine,
   proves clean-source coverage, current counts/digests, immutable history, unique stable IDs, bounded lookup, and
-  collection/member ceilings.
+  collection/member ceilings. The same doctrine runs `tools/check_task_tree_closed_capability_markers.py`, which
+  keeps all 8 checker-owned closed-capability families (12 exact markers / 15 consumers) inside the delimited
+  stable index section and proves that an arbitrary active-row rewrite cannot erase them.
 - **WHEN:** retrieve an active or historical `FUTURE-PARITY-BACKLOG.*` node without scanning the task collection.
   Put new evidence in the returned mutable semantic part; never append to the bounded root or immutable history.
+  Put immutable checker-owned completion facts in the stable closed-capability section, never in an active-row
+  summary or overwrite-only `MEMORY.md`.
 - **HOW:** `perl tools/read_task_tree.pl --tree FUTURE-PARITY-BACKLOG --id FUTURE-PARITY-BACKLOG.14.3.1.1`.
   After an owning-part edit, run `perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG`, then
   `bash scripts/check_task_tree_metadata.sh`.

@@ -9,6 +9,26 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-29 (`FUTURE-PARITY-BACKLOG.22` — stable task-index closeout ownership): consumer discovery finds 15
+  code/JSON owners across logical-helper, root-selection, duplicate-slot, rule-local-cursor, repeated-action,
+  callable-codeblock, capability-exclusion, and semantic-introspection contracts. Together they require 12 exact
+  `docs/TASK_TREE.md` marker fragments.
+- The active task table is intentionally overwrite-style. Several markers already had an ad-hoc stable section,
+  but no sentinel/location/census invariant existed; semantic introspection still succeeded only through later
+  chronology, and repeated-action separately searched bounded `MEMORY.md` for an immutable historical handoff.
+- `tools/check_task_tree_closed_capability_markers.py` makes the section explicit, rejects any registered marker in
+  the mutable active surface, exact-compares discovered and declared consumers, and requires each consumer to
+  retain all family markers. Its mutation proof permits a synthetic active-row rewrite without copied history and
+  rejects repeated-action deletion/relocation plus an independent callable deletion.
+- The repeated-action contract continues to validate next owner `FUTURE-PARITY-BACKLOG.10.1` in immutable
+  `docs/tasks/FUTURE-PARITY-BACKLOG.10.0-6.md`; deleting the redundant `MEMORY.md` lookup restores layer-A memory
+  to current resume state without weakening closure evidence or the JSON mutation.
+- The checker runs through `tools/run_python_project_data.sh` under the existing task metadata doctrine and owns
+  no temporary allocation. Tool-storage truth is therefore 34 Python entrypoints, three Python temporary owners,
+  and 15 shell allocation owners.
+- Focused signoff passes every affected contract family at unchanged closure counts, all nine doctrines, and an
+  81-file / 15,860-KiB mdBook render whose new HTML paragraph was inspected before exact generated-output removal.
+  The exact staged canonical candidate then passes as the required governance/doctrine and push boundary.
 - 2026-08-29 (`FUTURE-PARITY-BACKLOG.13.1` — codegen-inspector owner repair): five independent pre-change probes
   reproduced exact `PPlugin::exec_plugin_name` failures. Raw, lifecycle block, and action-edge block paths named
   `_rewrite_action_code_with_diagnostics`; lifecycle/action-edge chains named `_render_method_call_chain`.

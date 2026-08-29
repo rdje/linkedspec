@@ -699,9 +699,8 @@ def validate_filesystem(contract: dict[str, Any]) -> None:
         "repeated-action parent closeout checklist drifted",
     )
     require(
-        CLOSURE["next_owner"] in handoff_task_text
-        and CLOSURE["next_owner"] in (ROOT / "MEMORY.md").read_text(encoding="utf-8"),
-        "repeated-action next-owner handoff drifted",
+        CLOSURE["next_owner"] in handoff_task_text,
+        "repeated-action durable task-tree next-owner handoff drifted",
     )
 
 

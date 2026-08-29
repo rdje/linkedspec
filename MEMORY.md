@@ -1,19 +1,17 @@
 # MEMORY
 
-- activation_commit: `82d0b85f25448489a1459b1eb563bcbf87d663c1` — exact clean pushed standalone-parity closeout from which
-  `FUTURE-PARITY-BACKLOG.13.1` is activated.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.13.1 - restore the codegen inspector`; explicit-owner five-form
-  smoke and synchronized public/developer truth are complete, with the atomic closeout commit as the next layer.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.13.1` exact staged canonical signoff and atomic commit/push boundary.
-- next_action: refresh and stage the corrected `.13.1` public-inventory evidence, rerun exact canonical CI, commit,
-  clear the brief, prove clean, and push before selecting another leaf.
-- in_flight_uncommitted: the fully implemented and focused-verified `.13.1` candidate remains uncommitted; its
-  first canonical attempt caught and corrected the governed mdBook inventory from 60 to 61 and reconciled the
-  already-classified 2026-07-26 Lua semantic fixture as executable occurrence 20; no background job or generated
-  mdBook output is active before exact restaging.
+- activation_commit: `65eb4aa46fcdec0ad50c6e0dfc048df70d7999ec` — exact clean pushed codegen-inspector closeout from which
+  `FUTURE-PARITY-BACKLOG.22` is activated.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.22 - govern stable task-index markers`; focused signoff is complete
+  at 8 families / 12 markers / 15 consumers / 4 mutations, with exact canonical proof as the commit boundary.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.22` exact staged canonical signoff and atomic commit/push boundary.
+- next_action: stage the exact `.22` candidate, run canonical CI, commit, clear the brief, prove clean, and push
+  before selecting another leaf.
+- in_flight_uncommitted: the fully implemented and focused-verified `.22` candidate remains uncommitted; no
+  background job or generated mdBook output is active before exact staging.
 - blockers: none.
-- historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
-  `FUTURE-PARITY-BACKLOG.22` moves that immutable closeout fact out of bounded current memory.
+- current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
+  active table; the task metadata doctrine inventories all consumers and permits arbitrary frontier-row rewrites.
 - current_standalone_block_contract: all five backends normalize rule-item-leading `{ ... }` directly to lifecycle
   `I` with exact authored source/opening line, explicit-twin ActionIR semantics/diagnostics, unchanged brace owners,
   and authored duplicates. Source emits no new `PlainBlock`; legacy plain data remains readable and inert. The
@@ -26,4 +24,4 @@
   README remains bounded; ordinary leaves use focused proof and designated infrastructure/public/push boundaries
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
 - latest_bootstrap_read: 2026-08-29 — README, roadmaps, codebase, mdBook, memory architecture, task-tree doctrine,
-  active `.13.1`, codegen-inspector Knowledge/history/owners, Toolbox, commit workflow, and current Git state read.
+  active `.22`, marker-anchor Knowledge/history/consumers, Toolbox, commit workflow, and current Git state read.

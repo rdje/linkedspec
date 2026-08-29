@@ -1925,10 +1925,10 @@ a smaller leaf. The check is intentionally narrow: it does not audit historical 
 commands copied into Markdown. The actual proof remains the focused validation recorded in the task leaf plus
 the local CI gate.
 
-The separate `TASK-TREE-METADATA` doctrine is also deliberately narrow. It rejects a completed tree with a live
-frontier and two status/evidence contradictions proven by repository history: a pending node cannot say it was
-activated task-tree-first, and its `Commit:` field cannot name a different node in the same tree. It does not turn
-legacy prose or missing historical commit backfills into unrelated cleanup work. Run it directly with:
+The separate `TASK-TREE-METADATA` doctrine rejects completed trees with live frontiers and pending-node activation
+or foreign-commit contradictions. It also inventories 8 checker-owned closed-capability families: all 12 exact
+markers must stay between the stable-section sentinels, outside mutable active rows, and all 15 consumers must stay
+known. Built-in mutations prove a frontier rewrite is harmless and marker deletion or relocation fails. Run:
 
 ```bash
 bash scripts/check_task_tree_metadata.sh

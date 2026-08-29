@@ -900,18 +900,66 @@
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.22`
-  Status: `pending`
+  Status: `done; canonical-signoff-complete` (2026-08-29; task-tree-first from exact clean pushed codegen-inspector
+    closeout commit `65eb4aa46fcdec0ad50c6e0dfc048df70d7999ec`)
   Goal: Make immutable cross-contract status markers survive mutable task-index frontier rewrites by construction.
+  Activation: `2026-08-29` from exact clean pushed commit
+    `65eb4aa46fcdec0ad50c6e0dfc048df70d7999ec`; the committed canonical receipt matches HEAD, the worktree and
+    brief are clean, and the Knowledge Map names this leaf as the structural owner of the then-retained MEMORY
+    handoff.
+  Verification tier: `canonical`
+  Focused checks: exact checker-to-marker inventory; repeated-action plus every discovered dependent checker;
+    active-row rewrite mutation proof; task-tree metadata/index, Knowledge Map, memory, document history, README
+    routing, mdBook render/cleanup, doctrines, project-data storage, and diff hygiene.
+  Canonical trigger: the leaf changes cross-contract governance/checker ownership and the canonical task index;
+    ADR `0073` therefore requires an exact staged canonical receipt before commit and push.
   Acceptance: Inventory every contract checker that anchors an unrelated closed-state marker inside a mutable
     `docs/TASK_TREE.md` active-row summary; move or derive those markers through one stable governed status section
     without weakening current public claims; prove an active-row rewrite cannot erase repeated-action or another
     closed contract; update checker diagnostics, task-tree guidance, Knowledge Map, roadmaps, and mdBook together.
   Finding: `.10.2`, `.10.3.0`, `.10.3.2.0`, `.10.4.0.1`, and `.10.4.1` canonical runs independently lost the
     exact repeated-action closeout sentence when the same active row was refreshed. The existing checker prevents
-    a bad commit, but the mutable anchor repeatedly burns a full canonical restart. This task owns the structural
-    repair after the current dirty semantic leaf is committed; it is not active and does not authorize a pivot.
-  Verification: `pending`
-  Commit: `pending`
+    a bad commit, but the mutable anchor repeatedly burns a full canonical restart. A complete tracked-consumer
+    census finds 8 affected families, 12 exact marker fragments, and 15 code/JSON consumers. Several facts already
+    occupied an ad-hoc stable section, semantic-introspection markers survived only in later chronology, and the
+    repeated-action checker separately required immutable next-owner history in overwrite-only `MEMORY.md`.
+  Implementation evidence: `tools/check_task_tree_closed_capability_markers.py` governs one sentinel-delimited
+    stable section after the active table, forbids its registered markers in the mutable active surface, exact-
+    compares discovered consumers, and verifies every family marker remains in every declared consumer. Four
+    mutations permit arbitrary `FUTURE-PARITY-BACKLOG` row replacement while rejecting repeated-action deletion,
+    repeated-action relocation into that row, and independent callable deletion. The repeated-action checker now
+    validates next owner `.10.1` only in immutable task-tree evidence, not current memory. The guard composes through
+    the existing `TASK-TREE-METADATA` doctrine; no runtime, parser, compiler, `.spec`, format, or public API changes.
+  Focused signoff evidence: the registry reports 8 families / 12 markers / 15 consumers / 4 mutations; all eight
+    dependent contract checkers pass at their unchanged closed counts, and the project-data oracle accepts 34
+    Python entrypoints with three Python and 15 shell temporary owners. Task partitions, Knowledge Map 913/7,767,
+    memory, document history, README routing, repo-root portability, rendered 81-file mdBook inspection/cleanup,
+    `git diff --check`, and all nine doctrines pass.
+  Canonical signoff evidence: the exact staged candidate passes receipt-bound canonical local CI, including the
+    strengthened task metadata doctrine, broad backend/contract dependents, and Phase 0; the resulting commit is
+    the designated clean pre-push boundary.
+  Checklist: [x] clean activation/task ownership [x] Knowledge/toolbox retrieval [x] complete checker/marker census
+    [x] stable governed owner [x] active-row rewrite mutation proof [x] dependent focused proof
+    [x] docs/Knowledge/memory/task/index lockstep [x] canonical signoff [x] atomic commit/brief/clean push.
+
+  ### FUTURE-PARITY-BACKLOG.22 Acceptance Checklist
+
+  - [x] **REPRODUCE / ISSUE** — `rg -n` consumer census plus repeated-action canonical history showed immutable
+    marker and handoff assertions coupled to mutable `docs/TASK_TREE.md` frontier prose and bounded `MEMORY.md`.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — tool-backed inspection located 12 exact checker markers across 15 consumers;
+    no location/census invariant guarded `docs/TASK_TREE.md`, and `tools/check_repeated_action_result_contract.py`
+    read the immutable next owner from overwrite-only layer-A memory.
+  - [x] **FIX** — add the stable sentinel section registry and four mutations to the existing task metadata doctrine;
+    retain repeated-action next-owner proof only in its immutable task tree.
+  - [x] **ADDRESSED (verified)** — focused registry and all eight dependent contract families pass at 8 families /
+    12 markers / 15 consumers / 4 mutations; active-row replacement is PASS and all three destructive cases reject.
+  - [x] **NO REGRESSION** — project-data storage, `bash scripts/check_doctrines.sh`, exact staged canonical CI,
+    `git diff --check`, mdBook render/inspection, and clean generated-output cleanup pass.
+  - [x] **LOCKSTEP** — task/index, roadmaps, doctrine architecture/registry, Toolbox, Knowledge Map, `MEMORY.md`,
+    bounded histories/status, changes/notes, and sole-facing mdBook all describe the governed stable boundary.
+  Verification: **PASS 2026-08-29.** The immutable status boundary is mechanically governed without changing any
+    parser, compiler, runtime, `.spec`, serialized/generated format, backend capability, or public API behavior.
+  Commit: `FUTURE-PARITY-BACKLOG.22 - govern stable task-index markers`
 
 - ID: `FUTURE-PARITY-BACKLOG.23`
   Status: `pending`

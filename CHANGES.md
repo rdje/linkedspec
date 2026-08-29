@@ -10,6 +10,22 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-29 — FUTURE-PARITY-BACKLOG.22 — govern stable task-index closeout markers
+
+- Added one registry-backed task-index guard covering 8 closed-capability families, 12 exact markers, and all 15
+  discovered code/contract consumers. Every marker must remain inside one sentinel-delimited stable section and
+  outside the mutable active-tree surface.
+- Added four built-in mutations: arbitrary `FUTURE-PARITY-BACKLOG` frontier-row replacement remains valid, while
+  repeated-action deletion, repeated-action relocation into the active row, and callable-marker deletion fail.
+- Composed the guard through the existing `TASK-TREE-METADATA` doctrine and synchronized its registry,
+  enforcement architecture, task-tree guide, Toolbox, roadmaps, Knowledge Map, and sole-facing mdBook teaching.
+- Removed repeated-action's historical `FUTURE-PARITY-BACKLOG.10.1` assertion from overwrite-only `MEMORY.md`;
+  the checker still validates that handoff in its immutable task-tree owner.
+- Advanced the project-data oracle only from 33 to 34 Python tool entrypoints; temporary ownership remains three
+  Python allocators and 15 shell allocators.
+- Focused dependent proof, an inspected 81-file mdBook render, all nine doctrines, and the exact staged canonical
+  boundary pass; the reproducible book output is removed before commit.
+
 ## 2026-08-29 — FUTURE-PARITY-BACKLOG.13.1 — restore the codegen inspector
 
 - Reproduced the raw/lifecycle/action inspector failure: stale private calls on the thin `LinkedSpec` facade fell

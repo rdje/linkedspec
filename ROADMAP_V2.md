@@ -62,6 +62,10 @@ repairs Rust duplicate order; `.15.2` aligns Dart/Julia/Lua, both Lua ABIs, self
 carriers, and public no-drift. Legacy plain carriers remain readable and inert. The recurring authority is
 `tools/check_standalone_lifecycle_block_five_backend.sh`.
 
+Task-index governance repair `.22` is complete across all 8 closed-capability marker families (12 exact markers / 15
+consumers), keeps them in one stable sentinel-delimited section outside mutable frontier rows, proves active-row
+rewrites cannot erase them, and removes repeated-action's historical handoff dependency on bounded `MEMORY.md`.
+
 Accepted long-horizon direction: ADR `0064` plus `SPEC-LANGUAGE-SELF-CONTAINMENT` define portable `.spec`
 problem-domain closure without ambient effects and an optional honest EBNF-like frontend over the same canonical
 AST/HandlerIR/runtime. Lossless authored source maps, explicit semantic differences/extensions, realistic trials,

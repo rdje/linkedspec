@@ -37,7 +37,7 @@ cd "$ROOT"
 DOCTRINES=(
   "MEMORY-ARCH|durable 4-layer memory architecture invariants (MEMORY_ARCHITECTURE.md §9)|scripts/check_memory_architecture.sh"
   "KNOWLEDGE-MAP|the derived Knowledge Map is in sync with its fact sources|knowledge-map/scripts/check_knowledge_map.sh"
-  "TASK-TREE-METADATA|completed frontiers and pending-node activation/commit evidence stay status-consistent|scripts/check_task_tree_metadata.sh"
+  "TASK-TREE-METADATA|task metadata, partitions, and stable closed-capability anchors stay consistent|scripts/check_task_tree_metadata.sh"
   "TASK-ACCEPTANCE|staged governed changes carry a task-tree acceptance checklist with LinkedSpec-tool evidence|scripts/check_diagnosis_evidence.sh"
   "REPO-ROOT-PATHS|tracked repository paths and all five primary-command roots are relocation-safe|scripts/check_repo_root_path_portability.sh"
   "PROJECT-DATA-STORAGE|tracked project-storage defaults and documented outputs stay repository-filesystem rooted|scripts/check_project_data_storage_locality.sh"

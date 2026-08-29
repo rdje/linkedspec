@@ -7,43 +7,31 @@ answers:
   - "why does canonical CI keep losing the repeated-action closeout marker"
   - "where is the task-index marker-anchor repair tracked"
   - "why did Dart calls canonical CI fail on repeated-action governance"
-  - "which repeated-action handoff must remain in bounded MEMORY"
+  - "does repeated-action still require a historical handoff in bounded MEMORY"
   - "why did Julia recursive observation canonical CI fail on repeated-action governance"
 date: 2026-07-21
 status: current
 tags: [task-tree, doctrine, governance, repeated-action, local-ci, no-drift]
-evidence: docs/TASK_TREE.md; MEMORY.md; capability_conformance/repeated_action_result_contract.json; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.2, .10.3.0, .10.3.2.0, .10.4.0.1, .10.4.1, .10.5.2.3, and .10.5.3.1
+evidence: docs/TASK_TREE.md; tools/check_task_tree_closed_capability_markers.py; tools/check_repeated_action_result_contract.py; capability_conformance/repeated_action_result_contract.json; docs/tasks/FUTURE-PARITY-BACKLOG.09.md; docs/tasks/FUTURE-PARITY-BACKLOG.15-24.md leaf .22
 evidence_update_2026_08_12: "FUTURE-PARITY-BACKLOG.14.4.5 repeated the bounded-memory half of this known coupling: its first fully staged canonical run passed every earlier contract, then rejected MEMORY.md because the current rewrite omitted historical next owner FUTURE-PARITY-BACKLOG.10.1. Restoring one compact marker within the unchanged 60-line cap returned the exact repeated-action checker to 8 complete / 0 pending / 54 mutations. The unchanged canonical restart passed that checkpoint; no checker, runtime, public surface, or task-tree ownership changed."
 evidence_update_2026_08_13: "INTER-MATCH-GAP-CAPTURE.2.1 repeated the same bounded-memory omission: its first fully staged gap-opt-in canonical run passed all earlier gates through composed semantic-introspection, then the repeated-action checker rejected the missing historical next owner FUTURE-PARITY-BACKLOG.10.1. The active leaf restored one compact marker within the existing 60-line cap and reruns the unchanged gate; no product behavior, rollout, checker, or ownership boundary changes."
-reverify: "bash tools/run_python_project_data.sh tools/check_repeated_action_result_contract.py; rg -n 'repeated-action recurring/public no-drift is closed' docs/TASK_TREE.md capability_conformance/repeated_action_result_contract.json"
+evidence_update_2026_08_29: "FUTURE-PARITY-BACKLOG.22 inventories all 8 closed-capability families, 12 exact task-index markers, and 15 consumers. The TASK-TREE-METADATA doctrine now requires those markers between stable sentinels outside the active table and proves arbitrary frontier-row replacement succeeds while repeated-action deletion/relocation and callable deletion fail. Repeated-action retains its durable next-owner assertion in the immutable task tree but no longer requires overwrite-only MEMORY.md to carry that historical fact."
+reverify: "bash scripts/check_task_tree_metadata.sh; bash tools/run_python_project_data.sh tools/check_repeated_action_result_contract.py; rg -n 'BEGIN CANONICAL CLOSED-CAPABILITY MARKERS|repeated-action recurring/public no-drift is closed|END CANONICAL CLOSED-CAPABILITY MARKERS' docs/TASK_TREE.md"
 ---
 
-The repeated-action public no-drift contract currently requires the exact sentence
-`repeated-action recurring/public no-drift is closed` in `docs/TASK_TREE.md`. That true immutable closeout marker
-has repeatedly lived inside the `FUTURE-PARITY-BACKLOG` active-row summary, which is rewritten whenever the
-frontier advances. Semantic leaves `.10.2`, `.10.3.0`, `.10.3.2.0`, `.10.4.0.1`, and `.10.4.1` each displaced it;
-the checker correctly prevented every bad commit, but only after canonical work had begun.
+The repeated-action public no-drift contract requires the exact sentence
+`repeated-action recurring/public no-drift is closed` in `docs/TASK_TREE.md`. That immutable fact repeatedly lived
+inside the `FUTURE-PARITY-BACKLOG` active-row summary, which is rewritten whenever the frontier advances. Semantic
+leaves `.10.2`, `.10.3.0`, `.10.3.2.0`, `.10.4.0.1`, and `.10.4.1` each displaced it; the checker prevented every
+bad commit, but only after canonical work had begun.
 
-Restore the exact marker before rerunning the focused checker. Do not weaken or delete its public claim. The
-structural defect is the marker's mutable home, not the checker. Pending task `FUTURE-PARITY-BACKLOG.22` owns an
-inventory of similarly coupled markers and a stable governed/derived home plus a test proving that active-row
-rewrites cannot erase unrelated closed-contract state. Until that task lands, every active-row rewrite must retain
-the exact repeated-action sentence. See the task's acceptance criteria rather than re-deriving this history.
+The structural repair is complete under `FUTURE-PARITY-BACKLOG.22`. The exact marker now lives between the
+canonical closed-capability sentinels, and `tools/check_task_tree_closed_capability_markers.py` enforces its
+location, the complete checker/marker consumer census, and mutation behavior. A current-frontier rewrite may now
+replace the active row without copying any unrelated closeout sentence. Deleting the stable marker or relocating
+it into the active row is rejected.
 
-The `.10.5.2.3` active-row rewrite repeated the failure: it removed the old row marker while the new canonical
-closed-capability section retained only the near-match `repeated-action public closeout has since completed it`.
-The `.10.5.3.1` canonical gate correctly rejected that wording, then exposed the paired handoff coupling after the
-exact task-index marker was restored: overwrite-only `MEMORY.md` must also retain the historical next owner
-`FUTURE-PARITY-BACKLOG.10.1`. The bounded repair is to keep the exact closeout sentence in the stable marker section
-and the compact handoff fact in current memory until `.22` moves both requirements to a governed home. Do not
-weaken the checker, and do not pivot from an already dirty semantic leaf merely to perform the structural repair.
-
-Julia recursive-observation leaf `.14.4.5` reproduced only the paired `MEMORY.md` failure after its bounded pointer
-was rewritten for atomic 213. The focused checker proved the root cause, and the same compact historical owner was
-restored without exceeding the 60-line cap. This recurrence reinforces `.22` as the structural owner; it does not
-justify copying more history into layer-A memory or weakening the exact handoff assertion.
-
-Perl authored gap-metadata leaf `INTER-MATCH-GAP-CAPTURE.2.1` reproduced that identical bounded-memory failure on
-2026-08-13 after every earlier canonical family—including composed semantic-introspection—had passed. Restoring
-only the exact compact next-owner fact keeps the current layer within its cap and leaves implementation, rollout,
-and checker semantics untouched; `.22` remains the structural repair owner.
+The paired historical handoff coupling is also removed from bounded memory. The repeated-action checker still
+validates `FUTURE-PARITY-BACKLOG.10.1` as the durable next owner in its immutable task-tree evidence, but it no
+longer searches overwrite-only `MEMORY.md`. Earlier failures in `.10.5.3.1`, Julia `.14.4.5`, and
+`INTER-MATCH-GAP-CAPTURE.2.1` remain useful root-cause history; they no longer prescribe a current-memory guard.

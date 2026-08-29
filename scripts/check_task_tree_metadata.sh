@@ -2,10 +2,12 @@
 # scripts/check_task_tree_metadata.sh — narrow task-tree metadata consistency gate.
 #
 # This check intentionally avoids broad historical prose and leaf commit backfill.
-# It enforces two low-noise invariants:
+# It enforces three low-noise invariant groups:
 #   1. a completed task file must not advertise a live Current Frontier row; and
 #   2. a pending node must not claim task-tree-first activation or name another
-#      node from the same tree as its own Commit evidence.
+#      node from the same tree as its own Commit evidence; and
+#   3. checker-owned closed-capability facts stay in their stable task-index
+#      section, outside mutable current-frontier rows.
 set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 source "$ROOT/tools/project_data_env.sh"
@@ -132,3 +134,5 @@ if (@bad) {
 
 print "task-tree-metadata: OK (completed frontiers and pending-node evidence are consistent)\n";
 PERL
+
+bash tools/run_python_project_data.sh tools/check_task_tree_closed_capability_markers.py

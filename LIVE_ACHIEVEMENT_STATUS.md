@@ -2,22 +2,25 @@
 
 ## Current Activity
 
-- Codegen-inspector repair `.13.1` routes fluent rendering through `BootstrapSpec::Core` and ActionIR lowering plus
-  diagnostics through `RuleIR::EmitContext`, avoiding the Phase 1A-thinned facade and plugin AUTOLOAD.
-- One recurring smoke source-locks both owners and executes raw helper, lifecycle block/chain, and action-edge
-  block/chain forms with generated Perl, canonical diagnostics, and zero fallback/unresolved counts.
+- Task-index governance repair `.22` inventories 8 checker-owned closed-capability families, 12 exact markers, and
+  15 consumers in one sentinel-delimited stable section outside mutable active-frontier rows.
+- The existing task metadata doctrine runs four mutations proving arbitrary active-row replacement is safe while
+  stable-marker deletion or relocation fails; repeated-action history no longer burdens bounded `MEMORY.md`.
 
 ## Latest Completed Slice
 
-- `.13.1` restores the documented inspector toolbox without adding a public facade seam or changing parser,
-  compiler, runtime, `.spec`, or generated-format behavior.
+- `.22` governs stable task-index closeout markers and removes historical handoff coupling from overwrite-only
+  memory without changing parser, compiler, runtime, `.spec`, generated-format, capability, or public behavior.
 
 ## Next Action
 
-- Finish `.13.1` focused/canonical signoff, commit and push the clean leaf, then select the next roadmap-aligned
+- Run `.22` exact staged canonical signoff, commit and push the clean leaf, then select the next roadmap-aligned
   pending frontier.
 
 ## Recent Completions
+
+- `2026-08-29` — `.22` governs 8 closed-state families / 12 markers / 15 consumers in one stable task-index
+  section, proves four frontier/deletion mutations, and removes repeated-action's bounded-memory handoff coupling.
 
 - `2026-08-29` — `.13.1` restores five-form codegen inspection through explicit current owner packages and adds a
   recurring source/runtime smoke against facade plugin-AUTOLOAD regression.
@@ -69,9 +72,6 @@
 
 - `2026-08-27` — `.14.7.6.4` adds fresh Julia staged authority across four production routes, admits the stable
   491/491 consumer once, advances only Julia rollout to 5/9 and governance to 97, and closes backend parent `.6`.
-
-- `2026-08-27` — `.14.7.6.3` adds Julia private breadth-first recursion, exact lineage/decrease, shared resources,
-  expiring safe points, and typed source rebasing at 386 GREEN/one `.4` RED without carrier or rollout movement.
 
 ## History
 
