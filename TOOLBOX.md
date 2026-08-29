@@ -94,10 +94,17 @@ check, not proof that the cited commands were run.
 | "Where is an older live-status completion or exact chronology?" | [§5.3 document-history query](#53-document-history-query-and-doctrine) |
 | "Which bounded part owns a stable future-task ID?" | [§5.4 task-tree partition lookup](#54-task-tree-partition-lookup-and-metadata) |
 | "Where should this workflow put temporary/package/build data, and how do I recover a run?" | [§4.4.1 project-data environment](#441-toolsproject_data_envsh--repo-filesystem-project-state) + [§4.4.2 run lifecycle](#442-toolsproject_data_runsh--per-run-scratch-lifecycle) |
+| "Does a rule-item `{ ... }` execute, or who owns this brace?" | `LinkedSpec::Get` plus [[standalone-lifecycle-block-audit]]; compare the explicit `I` twin before source inspection. |
 
 ---
 
 ## 1. LinkedSpec's facade probe entrypoints (the ground-truth tools)
+
+For a rule-item-leading brace question, probe both the authored form and its explicit lifecycle twin. Current
+Perl must reject `{ ... }`; Rust/Dart/Julia/Lua may expose dormant `PlainBlock` state but must not be interpreted
+as executable lifecycle behavior. ADR `0094` assigns future direct normalization to `I` while preserving attached
+edge, function/callable, and nested brace ownership. The durable audit and exact reverify command live in
+[[standalone-lifecycle-block-audit]].
 
 ### 1.1 `LinkedSpec::Get` — inline build + run (THE ground-truth probe)
 - **WHAT:** build a parser from an inline `.spec` and run it — the canonical way to observe the engine's

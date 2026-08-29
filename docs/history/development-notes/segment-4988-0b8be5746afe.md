@@ -1,0 +1,243 @@
+- 2026-08-27 (`FUTURE-PARITY-BACKLOG.14.7.6.4` — Julia staged carrier admission): exact clean activation is
+  recursive-authority commit `108003ee`; scope owns fresh top-level authority, four production seams, stable
+  consumer admission, Julia-only rollout promotion, parent closure, and synchronized truth.
+- `StagedAstEnrichmentSeed` validates and copies logical snapshot/options without invoking the host factory. After
+  `runtime_parse` has a complete parent value, it invokes that factory and freezes a new registry/cache plus
+  recursive authority, so parent failure consumes no staged state and no callback closure, cancellation identity,
+  clock, lineage, plan cache, or mutable budget crosses executions.
+- Enrichment begins only after the parent value is complete. Native and reconstructed engines share that seam;
+  generated-plan and emitted-module entrypoints forward the same private seed. Completion expires its state,
+  rejects live recognition transactions, detaches output, and preserves primary staged exceptions unchanged.
+- The stable consumer passes 491/491: four routes twice yield eight equal detached results, 32 distinct callback
+  bindings, eight fresh tokens/probes/clocks, and one miss/no hits/one call per run. No-seed output stays an inert
+  marker and logical serialized/generated artifacts contain no host authority.
+- Julia is now admitted exactly once in ordinary/canonical topology. Neutral governance is 5/9 rollout and 97
+  mutations; current v1, generated format, public/outward behavior, other backends, Lua, recurrence, and combined
+  `.14.8` remain unchanged.
+- The mandatory complete-record rollover creates content-addressed segment `4989` from clean `108003ee` and then
+  reproduces only the finite 19/18 versus 18/17 routing denial. ADR `0092` advances those two controls alone;
+  aggregate 24,041/27,000 lines and 2,574,480/3,145,728 bytes plus every other pressure rule remain unchanged.
+- 2026-08-27 (`FUTURE-PARITY-BACKLOG.14.7.6.3` — Julia staged recursive authority): exact clean activation is
+  current-depth commit `8af7f14b`; scope owns only private breadth-first recurrence, exact lineage, shared bounds,
+  callback safe points/expiry, source projection, the same consumer's `.4` RED, and synchronized truth.
+- `_enrich_staged_recursively` preserves the one-depth API and queues only successfully detached returned markers
+  by their exact replace/field/sibling/append stitch paths. Every depth fully prepares, reserves, and typed-sorts
+  before callbacks; old inert markers are never rescanned.
+- Frames carry resolved parser/top, exact UTF-8 payload digest, and full provenance. Exact repeats cycle; same-
+  parser/top lineage requires contained segments and strictly smaller total Unicode-scalar extent.
+- Cancellation identity/probe, clock/absolute deadline, steps, seeded calls, depth/calls, cumulative result nodes,
+  and canonical diagnostic bytes share one non-resetting invocation. Fresh callback registers and authority views
+  expire after return/throw; safe points spend both invocation and job ceilings.
+- Direct/ordered-derived positions, spans, and nested diagnostics rebase to original source. Cross-segment spans
+  stay ordered derived text, invalid local ranges fail closed, and byte overflow uses the truncation sentinel.
+- The explicit consumer is 386 GREEN/one `.4` RED. Complete Julia including 105/105 corpus, neutral 92 mutations,
+  all direct ledgers, Perl 143, Rust 1/1 including its independently compiled emitted carrier in 1,418.54 seconds,
+  and Dart 19 pass; Julia remains dormant with discovery, rollout, formats, public/outward behavior, carriers/
+  admission, Lua, and other backends unchanged. Knowledge is 898 facts/7,627 keys; the sole-facing book renders
+  with the private recursive examples.
+- 2026-08-27 (`FUTURE-PARITY-BACKLOG.14.7.6.2` — Julia staged current-depth authority): exact clean activation
+  is marker/provenance commit `13c8a611`; scope owns only private general-v2 resolution/cache, one complete marker
+  depth, sibling isolation, detached atomic policies, the same consumer's `.3` RED, and synchronized truth.
+- Root cause was an intentional missing boundary: `.1` produced inert live-proven markers, while Julia's existing
+  `StagedParserRegistry` is function-body-v1-only and must not acquire general-v2 ambient authority. The new
+  `_FrozenStagedRegistry` accepts deeply owned caller-completed outcomes and exact already-compiled callbacks.
+- Registry entries, aliases, candidate groups, and logical capability/policy sets are immutable tuples. Selection
+  is pure over alias, declaring-relative, ordered root, and ordered provider outcomes; missing/ambiguous/version/
+  top/capability/policy/source-detail diagnostics reject without loading or querying anything.
+- Default top is selected before canonical job identity. The registry-local exact eight-field cache stores only
+  immutable callback plans; hits never reuse a child result, failure, execution context, callback state, or
+  partially stitched AST, and fail-then-success behavior proves non-poisoning.
+- `_enrich_staged_current_depth` deeply copies the parent, discovers only the current marker depth, prepares every
+  resolution and stitch reservation before callback one, applies numeric/string typed order, and gives each
+  sibling fresh cursor/marks/captures/variables. Returned markers stay inert until `.14.7.6.3` owns recurrence.
+- Callback results must be finite acyclic node-bounded plain values with no live-authority keys. All four result
+  policies and three failure policies stitch only the unpublished copy; fail, stale-marker, collision, absent/
+  wrong-kind target, cycle, node-limit, and thrown-callback cases publish no partial AST.
+- Review found that the first detacher draft exempted marker-shaped dictionaries from live-key rejection. That
+  would let an otherwise inert returned marker smuggle `callback` or another host authority. Marker shape now
+  grants no exemption, and the existing count-neutral inert-marker assertion proves both valid and smuggled cases.
+- The explicit consumer is 309 GREEN/one intentional `.3` RED. Complete ordinary Julia and 105/105 corpus pass
+  while omitting it; neutral staged remains 92 mutations, semantic 6/20/128, typed 12/2/170, recognition
+  138/250/58, progressive 9/9/116 plus public 60, generated/capability 80/0/0, and language 250/105+1/126.
+- Admitted Perl remains 143/143, Rust 1/1, and Dart 19/19. Knowledge regenerates at 897 facts/7,615 question
+  keys; the mdBook renders and is removed. Julia rollout, ordinary/canonical topology, v1/v2 formats, public/
+  outward behavior, carriers/admission, other backends, and combined `.14.8` remain unchanged; `.14.7.6.3` is next.
+- 2026-08-27 (`FUTURE-PARITY-BACKLOG.14.7.6.1` — Julia staged marker/provenance): exact clean activation is
+  dormant-boundary commit `3b3d4eac`; scope owns only the exclusive declaration node, static closure, live typed
+  provenance, inert detached marker, same consumer's `.2` RED, and synchronized truth.
+- Parser root cause was one generic `ActionAssignScalarExpr(ActionCallExpr)` with no reserved declaration
+  identity. Exact scalar assignment now lowers to `ActionStagedParseJobExpr`; malformed and residual generic/
+  receiver/append/indexed forms reject before execution, and recognition effect closure reuses the existing
+  `parser_registry_or_staged_dispatch` denial.
+- Native probes established that Julia `RegexMatch.offsets` gives absolute 1-based UTF-8 code-unit starts for
+  participating captures and zero for absent captures. `(a)(a)` therefore yields distinct source positions without
+  copied-text search or regex replay; `(é🙂)(B)` confirms exact multibyte boundaries.
+- `RuntimeRegexMatch` retains only participating `(start,end)` ranges in a private immutable tuple omitted from
+  JSON. The public compatibility constructor supplies an empty tuple, so copied or reconstructed match values
+  cannot acquire staged capture authority.
+- `StagedParseJobDeclaration` converts live whole/capture ranges through `SourceLocation.position_from_codeunit`,
+  `direct_span`, `derived_text`, and `materialize`. The detached sidecar retains only normalized options, exact
+  text, typed provenance, and origin; no source authority, match, parser, registry, callback, scheduler, cache,
+  filesystem path, cancellation state, or host handle survives.
+- The explicit dormant consumer is 131 GREEN/one intentional `.2` RED. Four logical routes return equal detached
+  markers; Unicode, repeated-equal capture, eight neutral provenance, copied-text smuggling, malformed/static,
+  residual, recognition, serialization, dormancy, and v1 compatibility checks pass.
+- Complete ordinary Julia passes package discovery, project-data locality at 20 owners/5 packages, primary CLI,
+  and corpus 105/105 while omitting the dormant consumer. Julia direct dependents pass typed 127, recognition 207,
+  progressive 62, and source-emitter groups 13+32+20. Neutral and cross-project governance remain exactly staged
+  92, semantic 6/20/128, typed 12/2/170, recognition 138/250/58, progressive 9/9/116 plus public 60, generated/
+  capability 80/0/0, and language 250/105+1/126.
+- Admitted Perl remains 143/143, Rust 1/1 including its independently compiled emitted carrier in 728.83 seconds,
+  and Dart 19/19. Knowledge regenerates at 896 facts/7,601 question keys; the mdBook renders 80 files/15,612 KiB
+  and is removed. Julia rollout, ordinary/canonical topology, v1/v2 formats, public/outward behavior, later
+  backends, and combined `.14.8` remain unchanged; `.14.7.6.2` is next.
+- 2026-08-27 (`FUTURE-PARITY-BACKLOG.14.7.6.0` — Julia staged dormant RED): exact clean activation is Dart-
+  admission commit `b38f819c`; scope owns only the final-path dormant consumer, Julia lifecycle/current projection,
+  two inherited executable-governance corrections, and boundary documentation. Julia production remains untouched.
+- The explicit consumer is 86 GREEN/one intentional RED. It snapshots 92 neutral mutations, function-body-v1
+  phases/result/cache/wrong-top context, generic assignment-form `parse_job`, `expr-v1` denial, and equal typed
+  unsupported-helper detail across native, reconstructed, generated-plan, and independently included emitted code.
+- `julia/test/runtests.jl` and canonical CI contain no consumer reference. Compiled JSON and emitted source contain
+  no dedicated marker, typed sidecar, contract identity, callback, registry/source authority, or scheduler state.
+- Git blame localized stale authored availability to the original dormant Dart leaf: `.14.7.5.4` promoted the
+  structured Dart rows but missed the duplicate sentence. A reason-checked `authored_availability` mutation now
+  rejects recurrence while neutral governance advances to 92 only for Julia lifecycle plus this lockstep guard.
+- Literal execution localized the stale Dart route to caller CWD: the storage wrapper correctly preserves it, but
+  Dart requires `dart/pubspec.yaml`. The neutral route now enters `dart/`; the exact command passes all 19 groups.
+- `.14.7.6.1` owns the dedicated Julia marker/provenance implementation. This leaf does not change v1, rollout,
+  generated format, public/outward behavior, admitted backend behavior, Lua, recurrence, or combined no-drift.
+- Focused signoff passes the complete Julia local gate including 105/105 corpus, Perl 143/143, Rust's independently
+  compiled emitted carrier 1/1 in 757.60 seconds, Dart 19/19, all direct governance ledgers, Knowledge 895/7,589,
+  rendered mdBook, bounded histories, doctrines, and exact base-relative no-production/no-route guards.
+- 2026-08-27 (`FUTURE-PARITY-BACKLOG.14.7.5.4` — Dart staged carrier admission): exact clean activation is
+  recursive-authority commit `053178b8`; scope owns fresh host-only production carriers, the stable consumer move,
+  exact ordinary/canonical topology, Dart rollout, backend-parent closure, and no unrelated surface.
+- `StagedAstEnrichmentSeed` eagerly snapshots logical registry/options/callback bindings. Each `start()` creates a
+  new `FrozenStagedRegistry` with empty cache and a new `StagedRecursiveAuthority`; one-use state completes only
+  after the parent AST and rejects any active recognition transaction.
+- `LinkedSpecRuntimeEngine`, `executeGeneratedParserV2`, and emitted generated-v2 `execute` carry the optional seed.
+  No seed preserves existing behavior. Compiled/emitted logical data contains no concrete callback, registry,
+  source, cancellation, clock, resource, path, mutable queue/cache, or host authority.
+- Native, reconstructed, generated-plan, and independently analyzed/executed emitted routes each run twice through
+  one seed. Equal detached records, fresh callback/cancellation/clock observations, one miss/zero hits, and mutation
+  isolation pass. The final-path consumer is 19/19, direct dependents 102/102, and ordinary Dart 435/435.
+- Neutral governance advances from 85 to 90 mutations and only Dart rollout becomes complete. Perl 143/143, Rust
+  1/1, generated-source v2, function-body v1, public/outward guards, and later-backend absence remain exact.
+- Receipt-bound canonical CI passes the exact staged candidate: all nine doctrines, required backend/governance
+  matrices, both 66/66 primary-CLI environments, and phase 0 at 1,032/1,032 are GREEN. Parent `.14.7.5` closes;
+  Julia dormant-boundary `.14.7.6.0` is the clean-handoff frontier.
+- 2026-08-27 (`FUTURE-PARITY-BACKLOG.14.7.5.3` — Dart staged recursive authority): exact clean activation is
+  current-depth commit `7355445c`; scope owns only private recurrence, lineage/shared bounds, callback lifetime,
+  source projection, the review-discovered complete-depth target conflict, and the same consumer's `.4` RED.
+- `enrichStagedRecursively` carries one frozen registry/cache and invocation state across complete breadth-first
+  depths. Active frames use resolved parser/top plus SHA-256 of exact UTF-8 payload and full provenance; exact
+  repeats and non-contained/non-smaller same-parser/top lineage reject during next-depth preflight.
+- Dispatch entry and callback `safePoint` share cancellation identity/probe, caller clock/absolute deadline,
+  steps, calls, depth, cumulative result nodes, and diagnostic bytes. Context authority and direct/ordered-derived
+  rebase methods expire on callback return or throw; derived cross-segment spans remain `concatenate_in_order`.
+- Root-cause review showed `.2` validated each target only against the unchanged initial AST. One shared depth
+  validator now reserves result slots and queued-marker structure before callbacks, rejects destructive/duplicate
+  claims, and explicitly preserves same-list multiple append semantics.
+- The exact dormant path is `+18 -1`, fatal analysis passes, 102 direct dependents pass, and ordinary Dart remains
+  416/416. Only `.4` fresh carriers/production/admission/rollout remain RED; v1, logical marker routes, governance,
+  discovery, formats, public/outward truth, and other backends do not move.
+- 2026-08-26 (`FUTURE-PARITY-BACKLOG.14.7.5.2` — Dart staged current-depth authority): exact clean activation is
+  marker/provenance commit `16f9769a`; scope owns only private frozen resolution/cache, one complete marker depth,
+  result/failure policies, and the same consumer's `.3` recurrence RED.
+- `FrozenStagedRegistry` copies only completed candidate outcomes and logical entry metadata, then consumes an
+  exact one-for-one opaque callback map. Default top selection precedes canonical v2 identity. Cache keys cover
+  normalized identity/content/import/top/spec/helper/staged/effective-capability fields and store plans only.
+- The engine copies the complete AST, discovers current markers, resolves and validates all jobs/targets before
+  callbacks, and sorts typed paths/provenance/id with Unicode-scalar strings and numeric indices. Each callback
+  receives fresh cursor/mark/capture/variable/request aggregates; returned markers are deliberately not rescanned.
+- Results are finite/cycle-free/node-bounded plain data. All four stitch and three failure policies mutate only the
+  unpublished copy; `fail` exposes no partial sibling work, while continuing policies retain one detached
+  diagnostic. Runtime load/register are typed denials and no ambient discovery or compilation seam exists.
+- The exact dormant path is `+12 -1`, fatal analysis passes, 102 direct dependents pass, and ordinary Dart remains
+  416/416. Only `.3` recurrence, chain/resource limits, safe points, and original-source rebasing remain RED; v1,
+  marker/provenance/logical routes, governance, discovery, rollout, formats, public/outward truth do not move.
+- 2026-08-26 (`FUTURE-PARITY-BACKLOG.14.7.5.1` — Dart staged marker/provenance): exact clean activation is dormant-
+  boundary commit `93b035c3`; scope owns only the exclusive private node, literal/static closure, typed declaration
+  provenance, four logical marker routes, and the same consumer's `.2` authority RED.
+- `ActionStagedParseJobExpr` owns the complete assignment. The parser recursively flattens nonempty `cat(...)`
+  plans, normalizes sorted literal capabilities, and rejects dynamic/unknown/duplicate/invalid/residual forms.
+  Compiled and emitted boundaries re-run residual validation; recognition reachability classifies the node with the
+  existing `parser_registry_or_staged_dispatch` effect.
+- Dart exposes capture text but no capture ranges. `RuntimeRegexMatch` therefore keeps compact participating-group
+  identity and regex option bits only. On staged access, bounded zero-width suffix probes are inserted at the exact
+  capture boundaries, the regex is re-run at the original start, and whole start/end/text plus live capture text
+  must remain exact before UTF-16 boundaries enter `SourceAuthority`. No probe work occurs on ordinary matching.
+- The detached sidecar contains normalized declaration options, exact materialized text, typed direct or nonempty
+  ordered-derived Unicode-scalar provenance, and origin only. Seven dormant groups pass, including `(a)(a)` as
+  distinct `[0,1)` / `[1,2)` spans; the sole RED now names `.2` resolution/cache/result/failure authority.
+- Fatal analysis, 132 direct dependents, ordinary Dart 416/416, and neutral 85-mutation governance pass. V1,
+  recurrence, admission/rollout, format, public/outward behavior, canonical topology, and other backends do not move.
+- 2026-08-26 (`FUTURE-PARITY-BACKLOG.14.7.5.0` — Dart staged dormant RED): exact clean activation is Rust
+  carrier-admission commit `94d20bec`; behavior scope owns only the excluded consumer, Dart lifecycle mutation,
+  current-v1 controls, four generic-carrier observations, and the first dedicated-marker/provenance RED.
+- Dart lowers the exact future assignment as `ActionAssignScalarExpr(ActionCallExpr)`. Native and normalized
+  reconstruction emit `unknown_helper`; generated-plan and independently analyzed/executed emitted source preserve
+  it under generated execution failure. The narrow v1 registry independently stays GREEN and denies `expr-v1`.
+- Fatal analysis passes. The focused consumer reports four passing tests and one intentional failure naming
+  `STAGED_PARSE_JOB_MARKER` plus `staged_parse_job_v2`. Neutral governance is 85 mutations and requires the exact
+  dormant path while proving final/ordinary/canonical paths absent. No production, rollout, format, public, or
+  later-backend boundary moves; `.14.7.5.1` is next.
+- The mandatory complete-record rollover creates immutable change-history segment `4990` from clean `94d20bec`
+  and leaves the synchronized hot root at 243/512 lines. The resulting store is 23 files / 22 manifest lines while
+  remaining 46,806/55,000 lines and 3,348,383/4,194,304 bytes. ADR `0091` changes only those two +1 finite controls, so the
+  leaf upgrades from focused behavior proof to receipt-bound canonical verification.
+- The first canonical attempt passes all doctrines, then exposes only stale neutral current projections in the
+  admitted Perl consumer; exact scan finds the same status/count/Dart-lifecycle literals in Rust. Updating those
+  projections changes no backend semantics: Perl returns to 143/143 and Rust's full fresh-carrier route passes 1/1.
+- 2026-08-26 (`FUTURE-PARITY-BACKLOG.14.7.4.4` — Rust staged carrier admission): exact clean activation is
+  recursive-authority commit `de6f5a65`; the canonical leaf owns only fresh production carriers, dormancy removal,
+  exact admission, Rust rollout, and backend-parent closure.
+- `StagedAstEnrichmentSeed` retains caller-prepared logical authority privately and creates a new
+  `FrozenStagedRegistry`/plan cache plus `StagedRecursiveAuthority` for every top-level run. Completion receives the
+  full parent value and remains inside the existing diagnostic-returning execution boundary.
+- Native, reconstructed, generated-plan, and independently compiled emitted routes execute twice through one seed.
+  Equal detached records, one miss/zero hits on every run, distinct callbacks/cancellation/clocks, mutation
+  isolation, and logical-source authority-absence prove fresh rather than reused state.
+- The ordinary consumer is GREEN, canonical CI requires its exact path once, neutral governance rejects 84
+  mutations, and the outer cfg/cfg-only exports/check-cfg/dead-code allowance are removed. Function-body v1,
+  generated-source v2, public/outward surfaces, and later backends are unchanged; Dart `.14.7.5.0` is next.
+- 2026-08-26 (`FUTURE-PARITY-BACKLOG.14.7.4.3` — Rust staged recursive authority): exact clean activation is
+  current-depth commit `e2e752f5`; this focused leaf owns only dormant recurrence, bounds, safe points, rebasing,
+  and the same consumer's `.4` carrier/admission RED.
+- `enrich_recursively` validates a complete depth before executing it, sorts depth/path/provenance/job id, and
+  discovers only successfully stitched markers for the next depth while retaining one immutable registry/cache.
+- Active lineage uses normalized parser, selected top, exact UTF-8 payload SHA-256, and full typed provenance.
+  Exact repeats are cycles; same-parser/top recurrence requires segment containment and smaller scalar extent.
+- Cancellation identity/callback, caller clock/deadline, steps, calls, depth, result nodes, and diagnostic bytes
+  spend monotonically across the invocation. Callback contexts expose safe points/rebasing and expire at settlement.
+- Direct projections remain direct; ordered-derived cross-segment spans retain `concatenate_in_order`. Focused cfg,
+  ordinary zero-test, runtime 197/197, recognition 12/12, trace 11/11, typed 4/4, and all ledgers pass. `.4` retains
+  fresh carriers, first production caller/dead-code allowance removal, admission, rollout, and parent closure.
+- 2026-08-26 (`FUTURE-PARITY-BACKLOG.14.7.4.2` — Rust staged current-depth authority): exact clean activation is
+  corrective-closeout commit `17177e40`; the focused leaf owns only private caller-frozen resolution/cache,
+  current-depth execution/isolation, result/failure stitching, and the same consumer's `.3` RED.
+- `staged_ast_enrichment.rs` freezes caller-completed candidate outcomes and opaque compiled callbacks. It performs
+  pure alias/relative/ordered-root/provider selection, narrows authority, selects default top before the v2 digest,
+  and caches only immutable plans under the neutral eight-field identity for one invocation.
+- Every current-depth job and stitch target prepares before callbacks; typed paths order array indices numerically,
+  siblings receive fresh cursor/mark/capture/variable state, and detached node-bounded results publish atomically
+  through four result plus three failure policies. Failures/results/partial work never poison the plan cache.
+- The module is private until carrier leaf `.4`; ordinary builds therefore diagnose its test-only seams as dead.
+  The allowance is conditional on the dormant cfg, the manifest registers that cfg, and `.4` owns allowance removal
+  with the first production carrier. Ordinary/canonical dormancy, v1/v2 formats, rollout, and outward truth stay fixed.
+
+- 2026-08-26 (`TRACE-OBSERVABILITY.5.4`): Git proves Rust dormant-RED `e37a8b77` advanced neutral mutations 78→79 and Rust consumer `pending_absent`→`dormant_red`; aligning only the admitted Perl snapshot restores 143/143 and canonical closeout without production/registry/format/rollout/public movement, while mandatory notes segment `4990` and ADR `0090` advance only finite history capacity to 18 files / 17 manifest lines.
+
+- 2026-08-26 (`TRACE-OBSERVABILITY.5.3`): the cfg private authority remains unrouted/4-of-4 while its proof requires the separately admitted contract input/command once; ordinary targets stay 0/0, and `.5.4` owns the stale staged-admission snapshot exposed before canonical closeout.
+
+- 2026-08-26 (`TRACE-OBSERVABILITY.5.2`): normal and typed-gap child entry now share one traced local seam per Rust executor, restoring exactly one existing dispatch/result pair; complete trace 11/11, generated 6/6, gap 1/1, and governance pass with unchanged results/schema/format.
+
+- 2026-08-26 (`TRACE-OBSERVABILITY.5.1` — traced progressive validation): clean activation is staged-marker
+  commit `3d509616`; the exact RED proved `compile_with_events` alone omitted
+  `validate_progressive_span_dispatch_contract` while retaining the other three current post-compile validators.
+- One existing-call insertion restores ordinary/traced rejection equality; valid trace results, event namespaces,
+  runtime/generated paths, formats, rollout, public surfaces, and other backends remain unchanged. The new focused
+  regression, core trace controls, dormant/admitted progressive routes, and three governance checkers pass.
+- The cfg private-authority direct dependent is 3/4 because its 2026-08-17 pre-admission route assertion was not
+  updated when commit `5c4d4218` intentionally registered the contract consumer. `.5.3` owns that exact stale proof;
+  `.5.2` first owns the independently known gap-aware child-dispatch trace defect.

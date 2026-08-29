@@ -2,24 +2,28 @@
 
 ## Current Activity
 
-- Combined typed authoring-model closeout `.14.8` is canonical-signoff-complete from exact clean staged-
-  recomposition base `4046e23f`; the accepted ledger is 14/0/231 and parent `.14` is closed.
-- One repository-routed driver composes the six existing recurring authorities without replacing any behavior
-  oracle or changing parser/compiler/runtime/value/helper/carrier/outward/capability/CLI/storage behavior.
-- Public no-drift locks eight current documents, eight stale claims, six helper/cursor safety denials, and ten
-  outward surfaces; exact scalar-assignment `parse_job(...)` remains staged 9/9/123 plus 129 public mutations.
+- Standalone lifecycle-block audit `.15.0` is in canonical signoff from exact clean typed-authoring closeout
+  `bc35ada0`; ADR `0094` ratifies `{ ... }` at a rule-item boundary as future exact shorthand for `I { ... }`.
+- Current behavior remains explicit-marker-only: Perl rejects the bare form; Rust drops its `PlainBlock`; Dart,
+  Julia, and Lua retain inert plain payloads. No parser/compiler/runtime behavior changes in this audit leaf.
+- `.15.1` owns Perl/Rust implementation and Rust duplicate-`I` order repair; `.15.2` owns remaining backends,
+  self-hosted grammar precedence, public/generated alignment, and final no-drift.
 
 ## Latest Completed Slice
 
-- `.14.8` promotes only the accepted final typed row, composes the six existing recurring authorities, and closes
-  public no-drift plus parent `.14` without production, format, capability, or outward behavior movement.
+- `.15.0` records the five-backend/six-runtime current boundary, exact normalization/ownership/provenance/order/
+  malformed contract, dormant-carrier compatibility, and downstream ownership without behavior movement.
 
 ## Next Action
 
-- From exact clean `.14.8`, activate `.15.0` task-tree-first and audit/ratify standalone rule-level `{ ... }`
-  normalization before any behavior code.
+- Complete exact staged canonical signoff and commit `.15.0`, then activate `.15.1` task-tree-first from clean
+  HEAD and implement the ratified Perl/Rust normalization plus the existing Rust duplicate-order repair.
 
 ## Recent Completions
+
+- `2026-08-29` — `.15.0` ratifies bare rule-item blocks as future direct lifecycle-`I` normalization, preserves
+  every existing brace owner and legacy inert carrier, corrects premature book teaching, and splits implementation
+  into Perl/Rust `.15.1` and remaining-backend/self-hosted/public `.15.2`.
 
 - `2026-08-28` — `.14.8` completes typed governance at 14/0/231, locks program-wide authoring safety and public
   no-drift, recomposes all six existing runtime authorities unchanged, and closes parent `.14`.
@@ -73,10 +77,6 @@
 
 - `2026-08-27` — `.14.7.6.0` freezes Julia at 86 GREEN/one intentional marker/provenance RED outside ordinary/
   canonical discovery, advances neutral governance to 92, and repairs stale Dart availability/route governance.
-
-- `2026-08-27` — `.14.7.5.4` adds a fresh host-only Dart staged seed across four post-parent production routes,
-  moves the stable consumer to ordinary/canonical admission at 19/19, passes Dart 435/435, and advances only Dart
-  rollout plus neutral governance to 90 mutations; receipt-bound canonical CI and phase 0 at 1,032/1,032 pass.
 
 ## History
 

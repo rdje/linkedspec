@@ -1,5 +1,21 @@
 # ARCHITECTURE STATE
 
+## Standalone rule-item blocks are ratified lifecycle `I` shorthand, not yet implemented
+
+ADR `0094` / `FUTURE-PARITY-BACKLOG.15.0` freezes the portable boundary before behavior code. A balanced
+`{ ... }` beginning a rule-body item will normalize during source parsing to the existing lifecycle `I` semantic
+node at that exact authored position, preserving the block's source text/opening line and explicit-twin ActionIR
+interior spans. It adds no phase and never enters the legacy plain-action runtime path. Edge-attached blocks,
+function/callable bodies, nested code/value/control blocks, and quoted braces retain their existing owners;
+malformed syntax follows the explicit twin's diagnostic boundary.
+
+This is a planned boundary, not current behavior. Perl rejects the bare item. Rust, Dart, Julia, and Lua parse a
+`PlainBlock`, but Rust drops it during compilation and the other three retain only inert `plain_action_payloads`.
+New source parsing will stop emitting that compatibility shape, while old serialized/programmatic plain nodes
+remain inert. Multiple explicit/shorthand `I` blocks preserve authored order; `.15.1` also repairs Rust's current
+last-explicit-`I`-wins defect. `.15.2` aligns the remaining backends and fixes the self-hosted grammar's generic
+bare-edge match so reserved lifecycle labels keep precedence. Until those leaves land, write `I { ... }`.
+
 ## Complete typed authoring model is current across six recurring authorities
 
 `FUTURE-PARITY-BACKLOG.14.8` completes the accepted 14-row typed source-location model at 14/0/231. One

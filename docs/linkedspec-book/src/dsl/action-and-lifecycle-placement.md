@@ -15,6 +15,8 @@ Read [Declaration Helper Reference](declaration-helper-reference.md) first if yo
 The short version:
 
 - `I { ... }` is the normal rule-entry setup location.
+- Write the `I` marker today. A rule-item-leading `{ ... }` is ratified as future exact shorthand for `I`, but
+  the portable implementation is still pending under `FUTURE-PARITY-BACKLOG.15.1-.2`.
 - `-> Rule[selector] { ... }` is the normal action attached to a matched local slot.
 - `LS { ... }` and `LE { ... }` are advanced local-slot hooks around local-match/action processing in regex-driven handler shapes.
 - `LX { ... }` is the local no-match/failure path hook.
@@ -63,6 +65,11 @@ The structure is:
 - `-> Name[1] { ... }` and `-> Name[2] { ... }` run when those local slots are the current match
 
 ## `I { ... }`: rule-entry setup
+
+The marker is currently required. The planned markerless twin preserves the exact authored position and code,
+so it will not create a second lifecycle phase or take ownership from an edge-attached, callable, or nested
+block. Multiple explicit and shorthand entry blocks will retain authored order. Until that rollout is complete,
+do not rely on a bare rule-item block: Perl rejects it, and other backends' legacy plain-block nodes are inert.
 
 Use `I { ... }` for state that belongs to one invocation of the rule.
 

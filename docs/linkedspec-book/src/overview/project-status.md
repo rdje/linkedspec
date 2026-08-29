@@ -1,5 +1,13 @@
 # Project Status
 
+## Standalone lifecycle-block direction
+
+ADR `0094` and `FUTURE-PARITY-BACKLOG.15.0` ratify a rule-item-leading `{ ... }` as future exact shorthand for
+`I { ... }`, with the same authored position, code, ordering, and diagnostics. This is not portable current
+behavior: Perl rejects the bare form, and Rust/Dart/Julia/Lua plain-block carriers do not execute it. Authors must
+keep the `I` marker until Perl/Rust `.15.1` and the remaining-backend/self-hosted closeout `.15.2` land. Attached
+edge blocks and function/callable/nested braces remain unchanged.
+
 ## Documentation pressure containment
 
 README routing-pressure enforcement is closed at `0bcb5a36`, and the behavior-free store architecture landed at

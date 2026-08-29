@@ -1,5 +1,5 @@
 - ID: `FUTURE-PARITY-BACKLOG.15`
-  Status: `pending`
+  Status: `active`
   Goal: Make any standalone/dangling rule-level `{ ... }` block exact syntax sugar for `I { ... }`.
   Children: `.15.0`, `.15.1`, `.15.2`
   Acceptance: At top-level rule-body item parsing, accept a standalone `{ ... }` anywhere an item may occur and
@@ -10,19 +10,103 @@
     all admitted backends, source generation, diagnostics, examples, and complete gates.
 
 - ID: `FUTURE-PARITY-BACKLOG.15.0`
-  Status: `pending`
+  Status: `done; canonical-signoff-complete` (2026-08-29; task-tree-first from exact clean typed-authoring-model closeout commit
+    `bc35ada0444f94eed2eb23d6c931b9c65734dc09`; no push)
   Goal: Audit and ratify the anywhere-in-rule standalone-block normalization contract before behavior code.
-  Acceptance: Use parser/toolbox evidence to confirm there is currently no dangling `{ ... }` rule-body form and
-    enumerate the non-dangling brace owners: action-edge/blind-call suffix blocks and nested code/callable blocks.
-    Record direct normalization to `I`, inherited duplicate/order behavior, source spans, and malformed forms.
+  Acceptance: Use parser/toolbox evidence to distinguish the Perl reference's rejected/non-semantic dangling
+    brace from the four native source parsers' dormant `PlainBlock` nodes, and enumerate every non-dangling brace
+    owner: action-edge/blind-call suffixes, function/callable bodies, and nested code/control/value blocks. Ratify
+    direct source-parse normalization to lifecycle `I`, authored-order duplicates, exact source/line provenance,
+    compatibility treatment of old plain nodes, and explicit-twin malformed diagnostics before behavior code.
+  Dependencies: `.14.8`.
+  Verification tier: `canonical` — behavior remains unchanged, but the mandatory engineering-notes rollover moves
+    bounded-history collection infrastructure and its exact finite capacity authorization.
+  Focused checks: exact clean activation and tool-first Perl parser probes; source-backed inventories of the Perl,
+    Rust, Dart, Julia, and Lua rule-body dispatch plus self-hosted grammar ownership; explicit `I` equivalence,
+    action-edge/blind-call and nested code/callable exclusions, OR/AND/zero-/one-/two-regex placement, ordering,
+    duplicate, span, and malformed-form evidence; Knowledge Map, ADR, roadmap, mdBook, task/index, bounded-live,
+    memory, doctrine, history-pressure, render, and exact no-behavior-movement checks.
+  Canonical trigger: `DEVELOPMENT_NOTES.md` crosses rollover pressure when this required design record is added;
+    the resulting immutable segment, manifest member, route limits, and indexed capacity ADR are infrastructure
+    changes that require an exact staged receipt-bound local CI run under ADR `0073`.
+  Ownership: `.15.0` owns only the evidence-backed neutral decision and downstream leaf split. `.15.1` exclusively
+    owns Perl/Rust behavior; `.15.2` exclusively owns Dart/Julia/Lua, generated paths, examples, and final no-drift.
+  Checklist: [x] clean activation/task ownership [x] Knowledge/decision/toolbox retrieval [x] current parser probes
+    [x] five-backend/self-hosted source inventory [x] normalization/exclusion/order/span/malformed decision
+    [x] downstream acceptance refinement [x] durable Knowledge/ADR/book/live synchronization [x] canonical signoff
+    [x] atomic commit/brief/clean handoff.
+  Activation evidence: exact `git status --short --untracked-files=all` is empty at
+    `bc35ada0444f94eed2eb23d6c931b9c65734dc09`; `git_message_brief.txt` is zero bytes; the committed canonical
+    receipt matches that HEAD; no generated mdBook output or background job remains. `.14.8` and parent `.14` are
+    committed complete at typed 14/0/231 with all six recurring authorities and public no-drift green.
+  Audit evidence: `LinkedSpec::Get` rejects `Top::` followed by `{ return("bare") }` at
+    `compiler_pipeline:validate_dsl_syntax` with exact summary `Unsupported top-level rule paragraph content`; its
+    bootstrap `CURLY_BRACE` scanner returns a balance sentinel rather than `ICODE`. Two explicit `I` blocks return
+    `first-second`, and Perl RuleIR joins authored chunks while retaining its existing placement-sensitive regex
+    lowering. Rust parses `PlainBlock` then drops it and assigns repeated explicit `I` to one `Option`, last wins.
+    Dart, Julia, and Lua parse/compile plain metadata but execute only lifecycle payloads; direct Julia, PUC Lua,
+    and LuaJIT probes return null for the bare form and `first-second` for the explicit pair. Direct self-hosted
+    output omits the bare form and misclassifies line-start `I { ... }` through generic bare-edge ownership.
+  Decision evidence: ADR `0094` and [[standalone-lifecycle-block-audit]] freeze direct lifecycle-`I`
+    normalization, actual-source/opening-line provenance, explicit-twin interior spans/diagnostics, exact brace
+    ownership, authored duplicates, Rust repair ownership, and inert legacy plain carriers. The roadmaps,
+    architecture, Toolbox, task/index, bounded live surfaces, and sole-facing mdBook now state the current marker-
+    required boundary and the `.15.1-.2` rollout without claiming behavior early.
+  Capacity evidence: the required complete-record notes rollover creates immutable segment
+    `docs/history/development-notes/segment-4988-0b8be5746afe.md` from activation commit `bc35ada0` and leaves the
+    current root at 242/512 lines and 24,556/65,536 bytes. ADR `0095` authorizes only collection 19→20 files and
+    manifest 18→19 lines; the collection remains 24,276/27,000 lines and 2,599,177/3,145,728 bytes, with every
+    other root/member/aggregate/owner/lifecycle/verifier/storage control unchanged.
+  Canonical attempt one: all nine doctrines, five-source/six-route staged, progressive, gap, recognition, typed-
+    source, MCP, semantic-introspection, duplicate-slot, and sparse-AND proof pass. The repeated-action contract
+    then rejects only the compacted `MEMORY.md` because its separately owned next-owner handoff to
+    `FUTURE-PARITY-BACKLOG.10.1` was omitted. The required pointer is restored without changing `.15.0` scope;
+    the exact corrected staged candidate reruns from the beginning.
+  Signoff evidence: the exact bare rejection and explicit `first-second` reference probes pass; source ownership
+    inventory, `git diff --check`, Knowledge Map 912/7,758, task partition/index, both bounded-history checks,
+    16-row live status, README/memory, rendered sole-facing mdBook, all nine doctrines, exact no-behavior-file
+    movement, and receipt-bound staged canonical CI pass. Commit:
+    `FUTURE-PARITY-BACKLOG.15.0 - ratify standalone lifecycle blocks`.
 
 - ID: `FUTURE-PARITY-BACKLOG.15.1`
   Status: `pending`
   Goal: Implement the ratified bare rule-level lifecycle shorthand on the Perl reference and Rust backend.
+  Dependencies: `.15.0`.
+  Acceptance: The Perl bootstrap/validation path and Rust source parser normalize a rule-item-leading balanced
+    `{ ... }` directly to the same `I` lifecycle entry/node as an explicit marker at that exact body position.
+    Preserve the authored block text/opening line while giving its interior the same ActionIR spans as the explicit
+    twin; keep edge/function/callable/nested braces owned; make malformed twins diagnose equivalently. Lock bare/
+    explicit equivalence across OR/AND and zero/one/two regex placements, including mixed explicit/bare duplicates
+    in authored order. Repair Rust's existing last-`I`-wins compiler defect so duplicate explicit and shorthand
+    blocks preserve that order without changing Perl's established placement-sensitive lifecycle lowering.
+  Planned verification: focused — bounded Perl/Rust parser/compiler behavior with direct backend and generated-
+    carrier dependents; no public/capability admission or infrastructure movement.
+  Planned checks: neutral twin fixtures; Perl bootstrap/validation/live/generated probes and focused regressions;
+    Rust parser/compiler/runtime/serialized/emitted/generated tests; explicit duplicate-order regression; existing
+    action/blind/callable ownership and malformed diagnostics; doctrines, histories, memory, Knowledge, task/index,
+    mdBook if behavior teaching moves, and whitespace.
+  Planned canonical boundary: none; `.15.2` owns cross-backend/public admission and the next push boundary.
 
 - ID: `FUTURE-PARITY-BACKLOG.15.2`
   Status: `pending`
   Goal: Align Dart, Julia, Lua, generated paths, public examples, Knowledge Map, and complete no-drift proof.
+  Dependencies: `.15.1`.
+  Acceptance: Dart, Julia, and shared Lua source parsing normalize bare rule-item blocks to lifecycle `I` with the
+    exact neutral equivalence, ordering, provenance, ownership, placement, and malformed boundaries; PUC Lua and
+    LuaJIT prove the shared implementation independently. New source parsing emits no `PlainBlock`; legacy
+    programmatic/serialized plain nodes and compiled `plain_action_payloads` remain inert compatibility data until
+    a separately versioned retirement. `specs/spec.spec` gains the standalone production and can no longer
+    misclassify reserved explicit lifecycle blocks as bare edges. All available reconstructed/emitted/generated,
+    corpus, capability, diagnostics, examples, mdBook, Knowledge, roadmap, and no-drift projections agree; parent
+    `.15` closes.
+  Planned verification: canonical — cross-backend language admission, self-hosted grammar, public/capability state,
+    generated carriers, parent closeout, and push boundary move together.
+  Planned checks: all five source backends/six runtimes consume the neutral twin contract; self-hosted/bootstrap
+    AST equality and reserved lifecycle precedence; available generated/reconstructed/emitted roles; capability,
+    language coverage, public no-drift, mdBook render, doctrines, histories, task/index, Knowledge, memory, and
+    whitespace.
+  Planned canonical boundary: exact staged full local CI is mandatory for cross-backend/public admission, self-hosted
+    grammar movement, parent closeout, and the final batch push boundary under ADR `0073`.
 
 - ID: `FUTURE-PARITY-BACKLOG.16`
   Status: `done`

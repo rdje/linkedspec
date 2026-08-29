@@ -10,6 +10,22 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-29 — FUTURE-PARITY-BACKLOG.15.0 — ratify standalone lifecycle-block normalization
+
+- Audited the Perl reference, Rust, Dart, Julia, shared Lua on PUC Lua/LuaJIT, and the self-hosted grammar before
+  behavior code. Perl rejects a rule-item-leading `{ ... }`; Rust drops its parsed `PlainBlock`; Dart/Julia/Lua
+  keep only inert plain payload metadata. Two explicit `I` blocks execute in authored order except for an existing
+  Rust compiler last-slot-wins defect.
+- Accepted ADR `0094`: a bare rule-item block will normalize during source parsing directly to lifecycle `I` at
+  the same position, preserve actual source/opening-line provenance and explicit-twin ActionIR spans/diagnostics,
+  add no runtime phase, and leave attached edge, function/callable, nested, and quoted braces with their owners.
+- Kept legacy programmatic/serialized plain nodes inert during rollout. `.15.1` exclusively owns Perl/Rust plus
+  Rust duplicate-order repair; `.15.2` owns Dart/Julia/Lua, both Lua ABIs, self-hosted reserved-label precedence,
+  generated/public teaching, and final no-drift.
+- Corrected the mdBook's premature current-tense claim: authors must write `I { ... }` until implementation lands.
+  Added [[standalone-lifecycle-block-audit]] and synchronized roadmaps, architecture, Toolbox, task/index, and
+  bounded continuity without changing parser/compiler/runtime/test/fixture/generated-format or public behavior.
+
 ## 2026-08-28 — FUTURE-PARITY-BACKLOG.14.8 — close typed authoring-model public no-drift
 
 - Completed only the existing `recurring_public_no_drift` row, preserving the accepted 14-row ledger and moving

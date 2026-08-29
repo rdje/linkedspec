@@ -580,9 +580,12 @@ determines how the code is interpreted:
 - **After a blind-call edge** (`=> rule { ... }`): deprecated but accepted as
   compatibility syntax. Prefer lifecycle blocks for blind-call rules.
 
-- **As a standalone block**: the block is **lifecycle code** for the rule itself (or
-  for a blind-call rule body). Lifecycle blocks use lifecycle markers to control
-  execution order (see §4).
+- **As a standalone block**: this is a ratified shorthand for `I { ... }`, but it is
+  not implemented portably yet. Current specifications must write the `I` marker.
+  Perl rejects the markerless form; the other source parsers' legacy plain-block
+  carriers are inert and do not establish executable behavior. The shorthand will
+  normalize to lifecycle `I` at the same authored position under
+  `FUTURE-PARITY-BACKLOG.15.1-.2`.
 
 Blocks nest: `{ ... { ... } ... }`. Opening brackets `{`, `(`, `[` inside a block
 must be balanced by their closing counterparts. A rule paragraph with an unclosed
