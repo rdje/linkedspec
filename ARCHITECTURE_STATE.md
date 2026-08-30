@@ -413,8 +413,8 @@ typed status, carriers, generated contract, and outward surfaces stay unchanged 
 
 `INTER-MATCH-GAP-CAPTURE.7.2` landed public admission as atomic 254 at `bb0c3768`. The shared language inventory
 is 250 calls with 126 independently derived public Perl contracts; recognition is 137 ActionIR rows / 250 calls /
-58 mutations; gap governance is 9 complete / 0 pending / 63 mutations plus public 6 documents / 12 stale-current
-denials / 10 outward guards / 29 mutations. Legacy gap markers remain divergent, named marks and explicit helpers
+58 mutations; gap governance is 9 complete / 0 pending / 63 mutations plus public 8 documents / 15 stale-current
+denials / 10 outward guards / 34 mutations. Legacy gap markers remain divergent, named marks and explicit helpers
 remain independent, and `@emit_gaps` remains absent.
 
 No-change `.7.3` independently recomposed neutral, all six runtimes, recurrence, public language, compatibility,
@@ -427,7 +427,7 @@ The `.7.0` audit caught a marker-only governance defect: exact status sentences 
 and 3/6 prose. `.7.2` replaces that blind spot with omission-sensitive document and surface mutations. Capability
 remains 80/0/0; README, facades, outward schemas, semantic/MCP, CLI, storage, and runtime behavior stay unchanged.
 
-`.14.5.1` binds the current gap contract/checker/driver and exact 9/0/63 plus public 6/12/10/29 authority into
+`.14.5.1` binds the current gap contract/checker/driver and exact 9/0/63 plus public 8/15/10/34 authority into
 the typed contract. The representation is the already-current detached `gap_span`: one source identity, half-open
 Unicode-scalar offsets, and gap provenance. Prefix/interstitial/tail are segment positions; `gap_text` materializes
 on demand and `entry_slot` independently retains named/positional provenance. Twelve new drift mutations and one

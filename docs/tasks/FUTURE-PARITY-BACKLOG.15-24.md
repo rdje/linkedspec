@@ -1094,7 +1094,7 @@
   Commit: `FUTURE-PARITY-BACKLOG.22.2 - enforce unique current task ids`
 
 - ID: `FUTURE-PARITY-BACKLOG.23`
-  Status: `active`
+  Status: `done; canonical-signoff-complete`
   Goal: Repair and mechanically guard mdBook current-state drift exposed by a complete startup review.
   Children: `.23.1`, `.23.2`
   Acceptance: Root-cause every recorded current-facing contradiction against executable contracts and git history;
@@ -1110,8 +1110,10 @@
     and formal-grammar backend/marker status that contradicts admitted current contracts. At discovery this task
     was queued only: active Rust `.10.4.2` remained the dirty-tree frontier, so no pivot was authorized before its
     clean commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-08-30.** `.23.1` restores semantic migration contrasts; `.23.2` reconciles the
+    remaining current rollout/backend claims, extends their exact no-drift owners, preserves dated history, passes
+    complete book/doctrine/canonical proof, and closes the two-child parent without executable behavior movement.
+  Commit: `FUTURE-PARITY-BACKLOG.23.2 - reconcile mdBook current status`
 
 - ID: `FUTURE-PARITY-BACKLOG.23.1`
   Status: `done; focused-signoff-complete` (2026-08-30; task-tree-first from exact clean pushed current-ID uniqueness commit
@@ -1181,13 +1183,77 @@
   Commit: `FUTURE-PARITY-BACKLOG.23.1 - restore selector migration contrasts`
 
 - ID: `FUTURE-PARITY-BACKLOG.23.2`
-  Status: `pending`
+  Status: `done; canonical-signoff-complete` (2026-08-30; task-tree-first from exact clean focused migration-contrast commit
+    `e0ec59a04ed56b07e79863d8ea75913e951077bd`; batch intentionally not yet pushed)
   Goal: Reconcile remaining current-facing mdBook rollout and backend-status claims with executable contracts.
   Depends on: `.23.1`
   Acceptance: Audit the startup finding set plus adjacent prose; correct semantic-introspection, bare-edge,
     logical-helper/truthiness, structured-control, and root-marker current status from their canonical contracts;
     distinguish dated history from current guidance; add omission/stale-claim checks at the owning gates; build and
     review the complete book before closing `.23`.
+  Verification tier: `canonical` — this leaf changes multiple current public projections and their no-drift gates,
+    closes parent `.23`, and owns the accumulated batch push boundary.
+  Focused checks: Knowledge Map and indexed history retrieval before source inspection; exact stale-claim census;
+    canonical contract/checker and runtime/toolbox evidence for every claim; mutation RED/GREEN at the narrow owning
+    gates; complete public checker set, task/index, Knowledge, bounded histories, memory, all doctrines, mdBook
+    build/render review, whitespace, and no executable behavior movement.
+  Canonical trigger: `public current-state reconciliation + parent closeout + batch push boundary` — the exact
+    staged candidate must pass receipt-bound canonical local CI before commit; the clean committed HEAD then passes
+    pre-push receipt reuse before the accumulated `.23.1-.2` batch is pushed.
+  Ownership: `.23.2` owns only the recorded semantic-introspection, bare-edge, logical-helper/truthiness,
+    structured-control, and root-marker current-facing claims plus their omission/stale-claim governance. Any newly
+    discovered executable defect requires its own task owner rather than being hidden as prose correction.
+
+  ### FUTURE-PARITY-BACKLOG.23.2 Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Activate from exact clean `e0ec59a0`, zero-byte brief, no rendered
+    book/background job, and intentional unpushed `.23.1` batch state before any non-task edit.
+  - [x] **RETRIEVE / COMPLETE CENSUS** — Use Knowledge Map and indexed history before archaeology; enumerate every
+    startup finding and adjacent current-facing statement, separating current guidance from dated milestone history.
+  - [x] **ROOT CAUSE / CURRENT AUTHORITY** — For each claim, identify the exact stale-producing edit plus canonical
+    executable contract, task/decision owner, checker gap, and current backend/rollout truth.
+  - [x] **FIX / GOVERN** — Correct only current-facing prose and add narrow omission/stale-claim mutations at the
+    owning checker(s) so the same contradiction cannot recur while dated history remains intact.
+  - [x] **NO REGRESSION / LOCKSTEP** — Prove all affected public and executable contracts, full book render,
+    task/index, Knowledge, roadmaps, bounded live docs, memory, histories, doctrines, and whitespace with no hidden
+    parser/compiler/runtime/fixture/format/capability/API movement.
+  - [x] **CANONICAL CLOSEOUT / COMMIT / PUSH** — Close `.23`, pass exact staged canonical CI, commit with the leaf id,
+    clear the brief, verify clean receipt-bound HEAD, push the accumulated `.23.1-.2` batch, and name the next PNT
+    frontier from durable state.
+
+  Activation/retrieval evidence: exact clean `e0ec59a04ed56b07e79863d8ea75913e951077bd`, zero-byte brief,
+  intentional unpushed `.23.1`, no rendered book, and no background job preceded task-tree/index activation.
+  Knowledge cards and indexed live-history queries were read before code/history archaeology for all recorded
+  families. Exact source/Git inspection separated current claims from dated milestones and assigned each stale
+  paragraph to the closeout that had not expanded its owning public projection.
+
+  Root-cause/current-authority evidence: semantic introspection is 9/9/128 with six runtime admissions; cursor and
+  bare edges are 8/0/60 across five backends; standalone lifecycle shorthand is current on five backends/six
+  routes; logical helpers/truthiness are 8/0/26; attached/inline structured controls are current on all five
+  backends; and root selection is 7/0/54 with explicit selector > first `Rule::` > first ordinary `Rule:`. Named
+  slots and inter-match gaps are current through six routes while guarded outward schemas remain absent. Typed
+  `.14.8` is complete at 14/0/231. README routing, not behavior drift, explains the root 25/19→24/17 transition;
+  one newly denied formal-grammar claim makes the live inventory 24/18 while dated 25/19 evidence remains intact.
+
+  Implementation/governance evidence: current book prose now teaches those exact boundaries. Cursor governance is
+  30 documents / 28 denials / 60 mutations; standalone lifecycle is 15 / 7 / 14; semantic remains 128 while the
+  exact former 50/no-backend sentence is denied; logical is 19 / 14 / 26; root is 24 / 18 / 54; gap is
+  8 documents / 15 denials / 10 outward guards / 34 public mutations; its typed mirror is identical; typed public
+  governance remains 8/8/6/10 and 14/0/231; capability conformance adds four structured-control omission/stale
+  mutations bound to the all-pass `language.current_mdbook_surface` row. No parser/compiler/runtime/fixture/
+  generated-format/capability-state/facade/schema/semantic/MCP/CLI/public-API behavior moves.
+
+  Verification evidence: all eight focused checkers pass together; exact stale-claim census is empty; Knowledge
+  Map remains 915 facts / 7,778 question keys; task/index, bounded histories, memory, whitespace, and all nine
+  doctrines pass. The first doctrine run caught a duplicate typed-rollout card note at 65,913/65,536 bytes; routing
+  that note to its existing composition card restores the rollout card to its exact 65,530-byte boundary and leaves
+  its next edit split/reroute-required. The complete mdBook builds twice. Because in-app browser control was
+  unavailable, generated HTML was directly inspected for corrected headings, paragraphs, tables, examples,
+  navigation, and stale-claim absence before safe output removal. Exact fully staged canonical local CI and
+  receipt-bound commit/push reuse pass at the designated public/batch boundary.
+  Verification: **PASS 2026-08-30.** Documentation semantics and executable no-drift governance change; executable
+    product, fixtures, generated formats, capability states, and outward APIs remain unchanged.
+  Commit: `FUTURE-PARITY-BACKLOG.23.2 - reconcile mdBook current status`
 
 - ID: `FUTURE-PARITY-BACKLOG.24`
   Status: `done`

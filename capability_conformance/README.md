@@ -390,9 +390,9 @@ Run `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_c
 neutral proof or `bash tools/check_inter_match_gap_capture_six_runtime.sh` for the repository-routed ordered
 governance route. The latter executes the complete neutral, Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT rows;
 the nine-leg rollout is 9 complete / 0 pending and the checker rejects 63 semantic/topology corruptions plus ten
-Rust, ten Dart, ten Julia, and sixteen Lua admission/regression mutations. Public no-drift binds exactly six
-documents, twelve stale-current denials, ten outward guards, and 29 reason-checked text/surface mutations.
-`FUTURE-PARITY-BACKLOG.14.5.1` binds that unchanged 9/0/63 plus 6/12/10/29 authority to the existing detached
+  Rust, ten Dart, ten Julia, and sixteen Lua admission/regression mutations. Public no-drift binds exactly eight
+  documents, fifteen stale-current denials, ten outward guards, and 34 reason-checked text/surface mutations.
+`FUTURE-PARITY-BACKLOG.14.5.1` binds that unchanged 9/0/63 plus 8/15/10/34 authority to the existing detached
 same-source half-open `gap_span` representation. Run `bash tools/check_typed_gap_composition_six_runtime.sh` to
 check the typed contract, the complete six-runtime gap route, recognition ownership, and generated/capability/
 language ledgers in order. Canonical CI exposes the exact route behind
@@ -465,7 +465,7 @@ three strict-unused graph cases, authored `is_top` identity, native/loaded/recon
 primary projections, and the exact five-backend audit. The checker topology-locks the Perl core/routes consumers,
 the exact 15-role Rust, Dart, Julia, and Lua admission consumers, configured CI/backend execution, first-marker/
 markerless/explicit/unknown primary cases, and default/explicit request trace. Final admission adds the composed
-six-runtime recurring gate, a 25-document public contract, and both roadmap projections as required current-state
+six-runtime recurring gate, a 24-document public contract, and both roadmap projections as required current-state
 inputs while rejecting 54 semantic, topology, recurring, public, and rollout drift mutations. Rollout is 7
 complete / 0 pending: neutral decision, composed Perl, Rust, Dart, Julia, dual-ABI Lua, and final recurring/public
 no-drift are admitted. Perl records marker-

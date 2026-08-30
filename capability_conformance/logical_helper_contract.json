@@ -285,7 +285,9 @@
       {"path": "docs/linkedspec-book/src/appendix/backend-handoff.md", "text": "ledger is 7 complete / 1 pending"},
       {"path": "docs/linkedspec-book/src/appendix/helper-contract-catalog.md", "text": "Only public no-drift `.5.2.9` remains"},
       {"path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md", "text": "Rollout is 7 complete / 1 pending"},
-      {"path": "ARCHITECTURE_STATE.md", "text": "rollout is 7 complete / 1 pending"}
+      {"path": "ARCHITECTURE_STATE.md", "text": "rollout is 7 complete / 1 pending"},
+      {"path": "docs/linkedspec-book/src/appendix/backend-handoff.md", "text": "`and`/`or` keyword lowering and five-backend logical truthiness/arity remain separately owned by `.5.2`"},
+      {"path": "docs/linkedspec-book/src/appendix/backend-handoff.md", "text": "Neutral/backend/generated/gate/public leaves `.5.2.1-.9` are\ntherefore dependency-ordered before any behavior claim changes."}
     ]
   },
   "rollout": [

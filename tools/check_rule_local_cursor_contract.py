@@ -383,6 +383,16 @@ PUBLIC_CONTRACT = {
             "Rule Modes and Cursor Policy",
             "linkedspec-rule-local-cursor-v1",
         ),
+        public_document(
+            "docs/linkedspec-book/src/dsl/action-and-lifecycle-placement.md",
+            "All five backends implement this line-level normalization",
+            "rollout is closed at 8 complete / 0 pending",
+        ),
+        public_document(
+            "docs/linkedspec-book/src/appendix/formal-grammar.md",
+            "All five backends implement this family-derived cursor policy",
+            "Bare-edge normalization is complete at 8 complete / 0 pending",
+        ),
     ],
     "forbidden_current_claims": [
         forbidden_claim(
@@ -466,6 +476,18 @@ PUBLIC_CONTRACT = {
         forbidden_claim(
             "docs/linkedspec-book/src/user-model/rule-modes-and-parse-modes.md",
             "75 migration files, 7 complete / 1 pending",
+        ),
+        forbidden_claim(
+            "docs/linkedspec-book/src/dsl/action-and-lifecycle-placement.md",
+            "Perl `.9.1.3.1` implements this line-level normalization before\nhandler emission; other backends remain in the dependency-ordered rollout.",
+        ),
+        forbidden_claim(
+            "docs/linkedspec-book/src/appendix/formal-grammar.md",
+            "Perl and Rust are current through public override\nremoval; remaining backend rollout does not change this authored contract.",
+        ),
+        forbidden_claim(
+            "docs/linkedspec-book/src/appendix/formal-grammar.md",
+            "implemented by the Perl\nreference in `.9.1.3.1` and pending in the later backends",
         ),
     ],
 }

@@ -1348,7 +1348,7 @@ Staged rollout is neutral + Perl + Rust + Dart + Julia + PUC Lua + LuaJIT + recu
 
 - **WHAT:** the format-1 neutral JSON authority for `linkedspec-inter-match-gap-capture-v1`. It executes exact
   Unicode/empty/child/transaction state and rejects 63 semantic/topology corruptions at rollout 9 complete + 0
-  pending. Inter-match gap public no-drift is current: six documents, twelve stale-current denials, ten outward guards, and twenty-nine reason-checked mutations.
+  pending. Inter-match gap public no-drift is current: eight documents, fifteen stale-current denials, ten outward guards, and thirty-four reason-checked mutations.
 - **WHEN:** implementing `.1.3`, named regex declarations/selectors, `entry_slot()`, `@capture_gaps`, the three
   gap accessors, or any backend/runtime/recurring leg.
 - **HOW:** run `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py`, retrieve
@@ -1375,7 +1375,7 @@ Staged rollout is neutral + Perl + Rust + Dart + Julia + PUC Lua + LuaJIT + recu
   audits, syntax-checks, and outside-CWD routes the driver; use
   `LINKEDSPEC_RUN_TYPED_GAP_COMPOSITION_MATRIX=1 bash tools/run_ci_local.sh` for its full all-toolchain route.
 - **OUTPUT:** typed governance reports 14 complete / 0 pending / 231 mutations; gap governance reports 9/0/63
-  plus public 6/12/10/29; then Perl 124, Rust 1, Dart 5, Julia 319, PUC Lua 392, LuaJIT 392, recognition
+  plus public 8/15/10/34; then Perl 124, Rust 1, Dart 5, Julia 319, PUC Lua 392, LuaJIT 392, recognition
   137/250/58, strict generated Rust 105/105, capability 85/0/0, and language 250/105+1/126 pass before exact
   `[typed-gap-composition] PASS: typed lossless-gap composition, all six gap runtimes, and support ledgers complete`.
 - **BOUNDARY:** `gap_span` was already the detached typed same-source half-open Unicode-scalar carrier on all six

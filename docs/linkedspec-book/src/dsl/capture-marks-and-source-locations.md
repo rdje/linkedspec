@@ -748,8 +748,8 @@ the latter additionally proves neutral-first Perl-then-Rust-then-Dart-then-Julia
 The neutral artifact locks 8 positive and 10 negative authored fixtures, 3 source fixtures, 8 internal gap fields,
 16 main-machine transitions, 10 segmentation cases, 3 terminal routes, 7 transaction/recursion/return-channel
 cases, 6 compatibility rows, 9 diagnostics, and 9 rollout legs. The neutral checker rejects 63 semantic/topology
-mutations. Public no-drift separately requires exactly six documents, twelve stale-current denials, ten outward
-guards, and 29 reason-checked omission/injection mutations. Ten Rust, ten Dart, ten Julia, and sixteen shared-Lua
+mutations. Public no-drift separately requires exactly eight documents, fifteen stale-current denials, ten outward
+guards, and 34 reason-checked omission/injection mutations. Ten Rust, ten Dart, ten Julia, and sixteen shared-Lua
 role/registration mutations remain separate.
 
 ### Current lossless-segmentation example

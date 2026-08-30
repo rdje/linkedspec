@@ -163,13 +163,13 @@
 > LuaJIT; then generated-source, capability, and language-coverage ledgers. Canonical CI exposes it behind
 > `LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX=1`. Twelve topology/storage/rollout regressions promote only the
 > observation row. Twenty-seven further public-projection mutations reject stale prose and premature surface
-> widening without adding a rollout row, producing 9/5/114 while the combined program-wide `.14.8` row remains pending.
-> Lossless-gap composition subsequently binds the unchanged 9/0/63 plus public 6/12/10/29 gap authority through
+> widening without adding a rollout row, producing 9/5/114. At that boundary the combined `.14.8` row was pending;
+> it is now complete at aggregate 14/0/231. Lossless-gap composition subsequently binds the unchanged 9/0/63 plus public 8/15/10/34 gap authority through
 > existing `gap_span`, adds twelve drift mutations, and promotes only its row. Corrective transaction composition
 > then binds the independently complete 9/9 recognition authority into `transaction_safety`, producing 11/3/152
 > at that boundary without behavior or outward-surface movement. Progressive recurrence now runs
 > `bash tools/check_progressive_span_dispatch_six_runtime.sh`, binds five sources to six runtime routes, and
-> promotes only its typed row for current 12/2/170 truth. Run
+> promoted only its typed row for 12/2/170 truth at that boundary; current aggregate truth is 14/0/231. Run
 > `bash tools/check_typed_gap_composition_six_runtime.sh`; no second gap behavior owner or outward surface exists.
 >
 > Progressive span dispatch is private and current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; recurring proof and public no-drift are complete at 9/9, while every guarded outward surface remains absent.
@@ -1406,17 +1406,17 @@ Lua truthiness. Permanent `.4.3.9.2` drives all 246 names through parse/compile/
 owners and the exact thirteen documented structural/receiver-only forms remain intentionally unsupported as
 functions. Direct `call(rule)` result/`retv`/cursor behavior is focused, public status is
 `runtime-helper-value-control`, both ABIs pass 125/125, and parent `.4.3` is closed. A source-history recheck also
-corrects the audit's unreproducible duplicate-`or` note: every inspected revision has one inventory row. The audit
-also records
+corrects the audit's unreproducible duplicate-`or` note: every inspected revision has one inventory row. At that
+historical handoff, the audit also recorded
 pre-existing diagnostic transport/format differences under `FUTURE-PARITY-BACKLOG.5.1`, while Perl
-`and`/`or` keyword lowering and five-backend logical truthiness/arity remain separately owned by `.5.2`; Lua
-`.8.4` has satisfied their backend-parity prerequisite, but neither Lua-local closure is a false five-backend
+`and`/`or` keyword lowering and five-backend logical truthiness/arity remained separately owned by `.5.2`; Lua
+`.8.4` had satisfied their backend-parity prerequisite, but neither Lua-local closure was a false five-backend
 normalization claim. Planning audit `.5.2.0` proved this was not one simple mismatch. At that audit boundary Perl
 conditions used lazy host `&&`/`||` while direct logical values remained raw/broken; Dart short-circuited; Rust,
 Julia, and Lua were eager. Truthiness had three profiles: Perl/Lua (`"0"` false, empty aggregates true),
 Dart/Julia (all nonempty strings true, empty aggregates false), and Rust (`"0"` plus `"false"` false, empty
-aggregates false). Native/generated execution agreed within each backend. Neutral/backend/generated/gate/public leaves `.5.2.1-.9` are
-therefore dependency-ordered before any behavior claim changes. Neutral `.5.2.1` now adopts ADR `0043` and the
+aggregates false). Native/generated execution agreed within each backend. Neutral/backend/generated/gate/public leaves `.5.2.1-.9` were
+therefore dependency-ordered before implementation. Neutral `.5.2.1` now adopts ADR `0043` and the
 executable `linkedspec-logical-helper-v1` contract: valid `and`/`or` take one or more operands, `not` takes exactly
 one, all valid operands evaluate once left-to-right,
 all results are booleans, and invalid arity fails before effects. Typed truth makes only null, false, numeric zero,

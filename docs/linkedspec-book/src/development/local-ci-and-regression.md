@@ -307,7 +307,7 @@ It additionally requires six current projections, rejects six stale claims, and 
 surfaces through 27 mutations. Definitive local CI passes repository
 containment and relocation, CLI 66/66 in both option environments, RAM 62%, Phase 0 1,031/1,031 in 723 seconds,
 and this complete matrix through its exact success marker. The combined program-wide `.14.8` public-no-drift row
-remains pending.
+is now complete at aggregate typed truth 14/0/231.
 
 The typed lossless-gap composition has one narrower rooted route over already-admitted authorities:
 
@@ -319,10 +319,10 @@ It runs the typed checker, the complete neutral plus six-runtime gap driver, rec
 generated-source, capability, and language ledgers in that exact order. The driver is inventoried, machine-path
 audited, syntax-checked, and outside-CWD routed by default; set
 `LINKEDSPEC_RUN_TYPED_GAP_COMPOSITION_MATRIX=1` to include the full route in canonical CI. Twelve new mutations
-lock upstream gap 9/0/63, public 6/12/10/29, the detached same-source half-open `gap_span` projection, storage,
+lock upstream gap 9/0/63, public 8/15/10/34, the detached same-source half-open `gap_span` projection, storage,
 registration, and completion of only `lossless_gap_composition`. The gap slice completed at typed source 10/4/126;
-corrective transaction composition subsequently made typed truth 11/3/152; progressive recurrence now makes
-current typed truth 12/2/170. No gap implementation or
+corrective transaction composition subsequently made typed truth 11/3/152; progressive recurrence then made
+typed truth 12/2/170, and final `.14.8` now makes current aggregate truth 14/0/231. No gap implementation or
 outward surface is duplicated. Its canonical signoff passes nine doctrines,
 repository containment/relocation, CLI 66/66 in both option environments, RAM 51%, Phase 0 1,031/1,031 in 729
 seconds, and the exact typed-gap success marker.
@@ -333,7 +333,7 @@ Perl `.2.1-.2.3` established metadata, private live behavior, and independently 
 and once in the rooted recurring route, promotes only `perl_runtime`, and retires the obsolete dormancy fence.
 The neutral checker now rejects 63 semantic/topology mutations: all six runtime regressions, recurring
 composition, current accessor status, and final public no-drift are locked. Its separate public suite requires
-six documents, twelve stale-current denials, ten outward guards, and 29 reason-checked mutations; facade,
+eight documents, fifteen stale-current denials, ten outward guards, and 34 reason-checked mutations; facade,
 descriptor, semantic, MCP, CLI, README, and result-schema surfaces remain unchanged.
 Behavior-free Dart `.4.0` froze `.4.1-.4.5` across authored/static metadata, same-authority native execution,
 reconstructed/descriptor/generated carriers, independently analyzed emitted source, and primary/nine-role
@@ -749,8 +749,8 @@ result, while the fixed shared request-trace fixture retains its canonical sourc
 
 Final root-selection admission adds `bash tools/check_root_rule_selection_five_backend.sh`. It reruns Perl core
 and routes, each exact Rust/Dart/Julia admission, the same Lua source on PUC Lua and LuaJIT, the 5x2x6 selected
-root-rule matrix, and generated/capability/corpus-proof ledgers. The public contract requires both roadmaps and 23
-other current surfaces, forbids 19 stale current claims, and raises drift coverage to 54 mutations. Canonical CI
+root-rule matrix, and generated/capability/corpus-proof ledgers. The public contract requires both roadmaps and 22
+other current surfaces, forbids 18 stale current claims, and raises drift coverage to 54 mutations. Canonical CI
 keeps this all-toolchain composition optional: run
 `LINKEDSPEC_RUN_ROOT_RULE_MATRIX=1 bash tools/run_ci_local.sh`.
 This is the 5x2x6 selected root-rule matrix.

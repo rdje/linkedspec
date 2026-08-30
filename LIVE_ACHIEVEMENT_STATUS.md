@@ -2,22 +2,23 @@
 
 ## Current Activity
 
-- mdBook drift parent `.23` remains active after focused `.23.1` restores seven aggregate-selector migration
-  examples and guards its unique bounded section at 61 public files / 32 historical references / zero current.
-- `.23.2` owns the separate semantic-introspection, bare-edge, logical/truthiness, structured-control, and root-
-  marker current-status reconciliation plus canonical parent closeout.
+- No leaf is active after mdBook drift `.23.2` closes parent `.23` at its designated canonical boundary. The
+  repository is ready to activate the next roadmap-aligned implementation leaf, `.19.1.1`, task-tree-first.
 
 ## Latest Completed Slice
 
-- `.23.1` restores two exact rejected selector examples plus five ordered mappings and rejects eleven semantic
-  collapse/omission/replacement/reorder mutations without executable product behavior changes.
+- `.23.2` reconciles current rollout/backend guidance with executable contracts, expands exact stale-claim and
+  omission governance, preserves dated history, and closes `.23` without executable product behavior movement.
 
 ## Next Action
 
-- From exact clean `.23.1`, activate `.23.2` task-tree-first and reconcile its separately owned current-facing
-  claims before the designated canonical parent-closeout boundary.
+- From the clean pushed `.23.2` handoff, activate `FUTURE-PARITY-BACKLOG.19.1.1` task-tree-first and implement its
+  neutral detection contract as the next roadmap-aligned frontier.
 
 ## Recent Completions
+
+- `2026-08-30` — `.23.2` aligns current book guidance, guards every corrected claim at its narrow owner, preserves
+  dated evidence, closes `.23`, and passes the exact staged canonical batch boundary without runtime movement.
 
 - `2026-08-30` — `.23.1` restores seven mechanically collapsed selector migration examples, requires five ordered
   non-identity contrasts, and closes focused public no-drift at 61/32/0 plus eleven semantic mutations.
@@ -65,11 +66,6 @@
 - `2026-08-27` — `.14.7.7.3` adds Lua breadth-first returned-marker scheduling, strict lineage/shared resources,
   expiring safe points, typed rebasing, and a fresh host-only seed across four production routes. Its stable
   consumer is 888/888 per ABI while discovery, rollout, formats, public behavior, and neutral governance stay fixed.
-
-- `2026-08-27` — `.14.7.7.2` adds Lua's private caller-frozen resolver/cache, complete-depth target reservation
-  and typed order, fresh sibling contexts, detached atomic stitching, and all result/failure policies. Its shared
-  consumer is 597 GREEN/one exact `.3` recursive-carrier RED per ABI; discovery, rollout, formats, public behavior,
-  and neutral governance do not move. Mandatory change segment `4989` is finitely authorized by ADR `0093`.
 
 ## History
 

@@ -63,6 +63,23 @@ def ids(rows: Any, field: str) -> list[str]:
     return values
 
 
+def public_texts(contract: dict[str, Any]) -> dict[str, str]:
+    return {
+        row["path"]: (ROOT / row["path"]).read_text()
+        for row in contract["public_contract"]["documents"]
+    }
+
+
+def validate_public_texts(contract: dict[str, Any], texts: dict[str, str]) -> None:
+    public = contract["public_contract"]
+    require(set(texts) == {row["path"] for row in public["documents"]}, "public document inventory drifted")
+    for document in public["documents"]:
+        for marker in document["required_markers"]:
+            require(marker in texts[document["path"]], f"{document['path']} is missing public marker: {marker}")
+    for forbidden in public["forbidden_current_claims"]:
+        require(forbidden["text"] not in texts[forbidden["path"]], f"stale current standalone claim remains: {forbidden['path']}")
+
+
 def validate_contract(contract: dict[str, Any], *, check_files: bool) -> None:
     require(contract.get("contract_id") == CONTRACT_ID, "contract identity drifted")
     require(contract.get("task_owner") == "FUTURE-PARITY-BACKLOG.15.1", "contract owner drifted")
@@ -127,6 +144,24 @@ def validate_contract(contract: dict[str, Any], *, check_files: bool) -> None:
     require(isinstance(rollout, list) and len(rollout) == 7, "rollout must retain seven closed lanes")
     require(all(row.get("status") == "complete" for row in rollout), "every rollout lane must be complete")
 
+    public = contract.get("public_contract", {})
+    require(set(public) == {"capability_id", "documents", "forbidden_current_claims"}, "public contract fields drifted")
+    documents = public["documents"]
+    require(isinstance(documents, list) and len(documents) == 15, "public contract must retain 15 documents")
+    document_paths = [row.get("path") for row in documents]
+    require(len(document_paths) == len(set(document_paths)), "public document paths repeat")
+    for document in documents:
+        require(set(document) == {"path", "required_markers"}, "public document fields drifted")
+        require(isinstance(document["path"], str) and document["path"], "public document path is invalid")
+        require(isinstance(document["required_markers"], list) and document["required_markers"], "public markers are empty")
+        require(all(isinstance(marker, str) and marker for marker in document["required_markers"]), "public marker is invalid")
+        require(len(document["required_markers"]) == len(set(document["required_markers"])), "public markers repeat")
+    forbidden = public["forbidden_current_claims"]
+    require(isinstance(forbidden, list) and len(forbidden) == 7, "public contract must retain seven stale-claim denials")
+    require(all(set(row) == {"path", "text"} for row in forbidden), "forbidden-claim fields drifted")
+    require(all(row["path"] in document_paths and isinstance(row["text"], str) and row["text"] for row in forbidden), "forbidden claim is invalid")
+    require(len({(row["path"], row["text"]) for row in forbidden}) == len(forbidden), "forbidden claims repeat")
+
     if check_files:
         manifest = json.loads((ROOT / "capability_conformance/manifest.json").read_text())
         capability_id = contract["public_contract"]["capability_id"]
@@ -137,11 +172,9 @@ def validate_contract(contract: dict[str, Any], *, check_files: bool) -> None:
             == {name: "pass" for name in ["perl", "rust", "dart", "julia", "lua"]},
             "standalone lifecycle capability must be five-backend pass",
         )
-        for document in contract["public_contract"]["documents"]:
+        for document in documents:
             require_file(document["path"])
-            text = (ROOT / document["path"]).read_text()
-            for marker in document["required_markers"]:
-                require(marker in text, f"{document['path']} is missing public marker: {marker}")
+        validate_public_texts(contract, public_texts(contract))
 
         self_hosted = (ROOT / "specs/spec.spec").read_text()
         require("standalone_lifecycle_block:" in self_hosted, "self-hosted standalone production is missing")
@@ -161,6 +194,14 @@ def expect_mutation_failure(contract: dict[str, Any], mutate: Any, label: str) -
     raise ContractError(f"drift mutation was not rejected: {label}")
 
 
+def expect_public_text_failure(contract: dict[str, Any], texts: dict[str, str], label: str) -> None:
+    try:
+        validate_public_texts(contract, texts)
+    except ContractError:
+        return
+    raise ContractError(f"public text mutation was not rejected: {label}")
+
+
 def main() -> None:
     contract = json.loads(CONTRACT_PATH.read_text())
     validate_contract(contract, check_files=True)
@@ -176,14 +217,26 @@ def main() -> None:
         (lambda value: value["recurring_gate"].update(backend_count=4), "backend count"),
         (lambda value: value["recurring_gate"]["runtime_routes"].pop(), "runtime route removal"),
         (lambda value: value["rollout"][0].update(status="pending"), "rollout reopening"),
+        (lambda value: value["public_contract"]["documents"].pop(), "public document removal"),
     ]
     for mutate, label in mutations:
         expect_mutation_failure(contract, mutate, label)
+    texts = public_texts(contract)
+    first_document = contract["public_contract"]["documents"][13]
+    marker_omission = copy.deepcopy(texts)
+    marker_omission[first_document["path"]] = marker_omission[first_document["path"]].replace(first_document["required_markers"][0], "", 1)
+    expect_public_text_failure(contract, marker_omission, "public marker omission")
+    first_forbidden = contract["public_contract"]["forbidden_current_claims"][0]
+    stale_injection = copy.deepcopy(texts)
+    stale_injection[first_forbidden["path"]] += f"\n{first_forbidden['text']}\n"
+    expect_public_text_failure(contract, stale_injection, "stale current claim injection")
+    mutation_count = len(mutations) + 2
     print(
         "standalone lifecycle-block contract: "
         f"{len(PLACEMENT_IDS)} placements, {len(DUPLICATE_IDS)} duplicate forms, "
         f"{len(OWNERSHIP_IDS)} ownership cases, {len(MALFORMED_IDS)} malformed twins, "
-        f"{len(RUNTIME_ROUTES)} runtime routes, {len(mutations)} drift mutations"
+        f"{len(RUNTIME_ROUTES)} runtime routes, {len(contract['public_contract']['documents'])} public documents, "
+        f"{len(contract['public_contract']['forbidden_current_claims'])} stale-claim denials, {mutation_count} drift mutations"
     )
 
 

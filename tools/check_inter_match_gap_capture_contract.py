@@ -267,6 +267,8 @@ PUBLIC_CONTRACT_MUTATION_IDS = (
     "document_marker_capability_readme",
     "document_marker_toolbox",
     "document_marker_user_guide",
+    "document_marker_action_placement",
+    "document_marker_formal_grammar",
     "stale_current_claim_01",
     "stale_current_claim_02",
     "stale_current_claim_03",
@@ -279,6 +281,9 @@ PUBLIC_CONTRACT_MUTATION_IDS = (
     "stale_current_claim_10",
     "stale_current_claim_11",
     "stale_current_claim_12",
+    "stale_current_claim_13",
+    "stale_current_claim_14",
+    "stale_current_claim_15",
     "outward_guard_perl",
     "outward_guard_rust",
     "outward_guard_dart",
@@ -979,11 +984,19 @@ def validate_public_contract(
             },
             {
                 "path": "TOOLBOX.md",
-                "required_marker": "Inter-match gap public no-drift is current: six documents, twelve stale-current denials, ten outward guards, and twenty-nine reason-checked mutations.",
+                "required_marker": "Inter-match gap public no-drift is current: eight documents, fifteen stale-current denials, ten outward guards, and thirty-four reason-checked mutations.",
             },
             {
                 "path": "USER_GUIDE.md",
                 "required_marker": "Lossless inter-match segmentation is current through @capture_gaps, entry_slot(), gap_span(), gap_text(), and gap_kind().",
+            },
+            {
+                "path": "docs/linkedspec-book/src/dsl/action-and-lifecycle-placement.md",
+                "required_marker": "The current `@capture_gaps` directive provides separate,",
+            },
+            {
+                "path": "docs/linkedspec-book/src/appendix/formal-grammar.md",
+                "required_marker": "The named-slot and inter-match-gap language/runtime contract is current through Perl, Rust, Dart, Julia, PUC Lua,",
             },
         ],
         "forbidden_current_claims": [
@@ -1005,7 +1018,7 @@ def validate_public_contract(
             },
             {
                 "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
-                "text": "Inter-match gap-capture recurring governance is current across the complete neutral and six private runtime rows; no runtime route remains an explicit skip and public no-drift remains pending.",
+                "text": "lock upstream gap 9/0/63, public 6/12/10/29",
             },
             {
                 "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
@@ -1017,7 +1030,7 @@ def validate_public_contract(
             },
             {
                 "path": "docs/linkedspec-book/src/overview/project-status.md",
-                "text": "Inter-match gap-capture governance is current at 8 complete / 1 pending: all six runtime rows and recurring proof are complete, while public no-drift remains pending.",
+                "text": "plus public 6/12/10/29\ngap authority",
             },
             {
                 "path": "docs/linkedspec-book/src/overview/project-status.md",
@@ -1033,7 +1046,19 @@ def validate_public_contract(
             },
             {
                 "path": "TOOLBOX.md",
-                "text": "Inter-match gap-capture recurring governance is current across its complete neutral plus six private runtime rows while public no-drift remains pending.",
+                "text": "plus public 6/12/10/29;",
+            },
+            {
+                "path": "docs/linkedspec-book/src/dsl/action-and-lifecycle-placement.md",
+                "text": "Both retain their authored selector kind in private Perl metadata. Other backends and public schema admission remain\npending.",
+            },
+            {
+                "path": "docs/linkedspec-book/src/dsl/action-and-lifecycle-placement.md",
+                "text": "the behavior-free `INTER-MATCH-GAP-CAPTURE.1.0`\nplan keeps their current scope and forbids combining an anonymous marker member with future\n`@capture_gaps`.",
+            },
+            {
+                "path": "docs/linkedspec-book/src/appendix/formal-grammar.md",
+                "text": "Perl, Rust, Dart, and Julia privately admit the complete gap runtime. Shared PUC Lua/LuaJIT currently carry\nauthored/static/compiled metadata, private native gap execution, normalized reconstruction, compatible descriptor\nprojections, same-engine direct/traced generated-v2 execution, and independently loaded emitted-source proof\nbehind one dormant final consumer; this is not yet a portable public admission.",
             },
         ],
         "surface_guard": {
@@ -1121,7 +1146,7 @@ def validate_public_contract_mutations(document: dict[str, Any]) -> int:
         surface_texts,
     )
 
-    marker_ids = PUBLIC_CONTRACT_MUTATION_IDS[1:7]
+    marker_ids = PUBLIC_CONTRACT_MUTATION_IDS[1:9]
     for mutation_id, row in zip(marker_ids, public_contract["documents"], strict=True):
         candidate_texts = copy.deepcopy(document_texts)
         candidate_texts[row["path"]] = candidate_texts[row["path"]].replace(
@@ -1135,7 +1160,7 @@ def validate_public_contract_mutations(document: dict[str, Any]) -> int:
             surface_texts,
         )
 
-    stale_ids = PUBLIC_CONTRACT_MUTATION_IDS[7:19]
+    stale_ids = PUBLIC_CONTRACT_MUTATION_IDS[9:24]
     for mutation_id, row in zip(stale_ids, public_contract["forbidden_current_claims"], strict=True):
         candidate_texts = copy.deepcopy(document_texts)
         candidate_texts[row["path"]] += f"\n{row['text']}\n"
@@ -1147,7 +1172,7 @@ def validate_public_contract_mutations(document: dict[str, Any]) -> int:
             surface_texts,
         )
 
-    guard_ids = PUBLIC_CONTRACT_MUTATION_IDS[19:]
+    guard_ids = PUBLIC_CONTRACT_MUTATION_IDS[24:]
     tokens = public_contract["surface_guard"]["forbidden_tokens"]
     for index, (mutation_id, path) in enumerate(
         zip(guard_ids, public_contract["surface_guard"]["paths"], strict=True)
@@ -2390,7 +2415,9 @@ def main() -> int:
         f"(8 positive + 10 negative fixtures; 3 sources; 16 transitions; "
         f"10 segmentation cases; 9 diagnostics; {complete} complete + {pending} pending rollout; "
         f"{mutation_count} rejected semantic mutations; "
-        f"6 public documents; 12 stale-current denials; 10 outward guards; "
+        f"{len(document['public_contract']['documents'])} public documents; "
+        f"{len(document['public_contract']['forbidden_current_claims'])} stale-current denials; "
+        f"{len(document['public_contract']['surface_guard']['paths'])} outward guards; "
         f"{public_contract_mutation_count} rejected public mutations; "
         f"{rust_admission_mutation_count} rejected Rust admission mutations; "
         f"{dart_admission_mutation_count} rejected Dart admission mutations; "

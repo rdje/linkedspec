@@ -16,6 +16,7 @@ date: 2026-07-30
 status: current; public rollout and semantic parent complete
 tags: [semantic-introspection, mcp, public-api, documentation, no-drift, conformance, mdbook]
 evidence: "FUTURE-PARITY-BACKLOG.10.10 extends the independent semantic contract checker with a public contract over 28 current surfaces, nine worked example families, both recurring drivers, and the separately task-owned companion-book boundary. The checker rejects 128 mutations and closes semantic rollout at 9/9 with native admission 6/6; MCP remains 5/5 implementations + 6/6 runtimes complete/141."
+evidence_update_2026_08_30_mdbook_reconciliation: "FUTURE-PARITY-BACKLOG.23.2 adds the exact former descriptor-introspection statement that advertised the 50-mutation/no-backend `.10.2` boundary to the forbidden-current-claim set. The page already carries the correct 128-mutation, 9/9, 6/6, and descriptor-versus-semantic boundary; no semantic model, evaluator, transport, runtime, or mutation total changes."
 reverify:
   - bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py
   - bash tools/check_semantic_introspection_six_runtime.sh

@@ -1,12 +1,12 @@
 # Action and Lifecycle Placement
 
-> **Perl reference edge default:** ADR `0044` keeps the explicit `->` and `=>`
+> **Rule-local edge default:** ADR `0044` keeps the explicit `->` and `=>`
 > meanings documented in this chapter and adds mode-sensitive bare rule-edge
-> lines during `.9.1.2-.9`: a bare child member resolves to blind-call ownership
+> lines: a bare child member resolves to blind-call ownership
 > in AND-family rules and action-edge ownership in OR/default-family rules.
 > Explicit cross-family markers remain legal; resolved ownership still cannot
-> be mixed. Perl `.9.1.3.1` implements this line-level normalization before
-> handler emission; other backends remain in the dependency-ordered rollout.
+> be mixed. All five backends implement this line-level normalization before
+> handler emission, and rollout is closed at 8 complete / 0 pending.
 
 This chapter explains where action blocks and lifecycle blocks sit in a LinkedSpec rule.
 
@@ -14,9 +14,8 @@ Read [Declaration Helper Reference](declaration-helper-reference.md) first if yo
 
 The short version:
 
-- `I { ... }` is the portable rule-entry setup location.
-- Perl and Rust also accept a rule-item-leading `{ ... }` as exact shorthand for `I` at that position. Continue
-  writing the marker in specifications that must run on Dart, Julia, or Lua until `.15.2` completes the rollout.
+- `I { ... }` is the explicit rule-entry setup spelling.
+- All five backends also accept a rule-item-leading `{ ... }` as exact shorthand for `I` at that position.
 - `-> Rule[selector] { ... }` is the normal action attached to a matched local slot.
 - `LS { ... }` and `LE { ... }` are advanced local-slot hooks around local-match/action processing in regex-driven handler shapes.
 - `LX { ... }` is the local no-match/failure path hook.
@@ -43,7 +42,7 @@ A rule paragraph can contain several kinds of members:
 | Empty action edge | `-> Token` | dispatch to the target rule with default call behavior. |
 | Blind-call edge | `=> Child` / `=> Child { ... }` | call another rule as part of the rule body without tying the body to one regex slot action. |
 | Lifecycle block | `I { ... }` | run placement-specific setup or hook code. |
-| Standalone entry block | `{ ... }` | Perl/Rust shorthand for `I { ... }`; not yet portable to Dart/Julia/Lua. |
+| Standalone entry block | `{ ... }` | Portable shorthand for `I { ... }` on all five backends. |
 | Split/mark marker | `@capture_slice` / `@mark(body_start)` | request a backend-specific compatibility update; see the scope caveat below. |
 
 Example:
@@ -65,10 +64,10 @@ The structure is:
 - `/\s*=/` and `/[A-Za-z_]+/` are later local slots
 - `-> Name[1] { ... }` and `-> Name[2] { ... }` run when those local slots are the current match
 
-## `I { ... }`: rule-entry setup and its Perl/Rust shorthand
+## `I { ... }`: rule-entry setup and its portable shorthand
 
-`I { ... }` remains the portable spelling. On Perl and Rust, a block that begins a rule-body item now normalizes
-directly to the same lifecycle `I` node:
+`I { ... }` remains the clearest explicit spelling. On all five backends, a block that begins a rule-body item
+normalizes directly to the same lifecycle `I` node:
 
 ```text
 Token:
@@ -77,7 +76,7 @@ Token:
  -> Token[0] { return(set_key(meta, "text", match_text())) }
 ```
 
-For those two backends, the standalone block above has the same semantics as:
+The standalone block above has the same semantics as:
 
 ```text
 Token:
@@ -90,7 +89,7 @@ Normalization happens at the authored position and does not create a second life
 block text, opening line, and the explicit twin's ActionIR interior spans. Action-edge, blind-call, resolved bare-
 edge, function, callable, and nested blocks keep their earlier owners.
 
-Repeated explicit and standalone entry blocks execute in authored order. For example, current Perl and Rust run
+Repeated explicit and standalone entry blocks execute in authored order. Every current backend runs
 both blocks below as one ordered `I` preamble rather than letting the second overwrite the first:
 
 ```text
@@ -108,8 +107,9 @@ after zero, one, or two regex declarations, and beside another recognized same-l
 stray close, or genuinely unsupported remainder diagnoses like the explicit twin. Existing serialized Rust
 `PlainBlock` values remain readable but inert; new Rust source parsing no longer emits them.
 
-Dart, Julia, Lua, and the self-hosted grammar still have the pre-rollout behavior, so use the explicit marker for
-cross-backend specifications until `FUTURE-PARITY-BACKLOG.15.2` completes.
+The shorthand rollout is closed on Perl, Rust, Dart, Julia, Lua, and the self-hosted grammar. The recurring
+contract executes the five backends through six runtime routes; `I` remains useful when explicit lifecycle intent
+is clearer to a reader.
 
 Use `I { ... }` for state that belongs to one invocation of the rule.
 
@@ -164,8 +164,9 @@ Name:AND
 ```
 
 `Name[2]` follows authored position; `Name[value]` follows stable exact identity if declarations are reordered.
-Both retain their authored selector kind in private Perl metadata. Other backends and public schema admission remain
-pending. The dot before a fluent method chain remains mandatory after every selector form.
+Both retain their authored selector kind across all five backends and six runtime routes. This language/runtime
+contract is current; outward descriptor, semantic, MCP, and CLI schemas remain intentionally unchanged and do not
+expose the selector syntax. The dot before a fluent method chain remains mandatory after every selector form.
 
 Use an action edge when:
 
@@ -547,10 +548,9 @@ before `LE`, matching the timing above. Malformed marker names and trailing mark
 fragments are rejected rather than silently ignored.
 
 Use explicit helper calls such as `start_capture_slice()` and `mark_here(name)` when portable timing
-matters. Marker members remain compatibility surfaces; the behavior-free `INTER-MATCH-GAP-CAPTURE.1.0`
-plan keeps their current scope and forbids combining an anonymous marker member with future
-`@capture_gaps`. Historical automatic rule-level gap rolling has its own typed, invocation-local
-contract plan and does not redefine these markers.
+matters. Marker members remain compatibility surfaces. The current `@capture_gaps` directive provides separate,
+typed, invocation-local automatic gap capture and does not redefine these markers; combining it with an anonymous
+marker member remains a diagnosed conflict.
 
 ## Choosing the right placement
 

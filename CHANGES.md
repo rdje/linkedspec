@@ -10,6 +10,22 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-30 — FUTURE-PARITY-BACKLOG.23.2 — reconcile mdBook current status
+
+- Reconciled current mdBook guidance with already-admitted executable contracts: semantic introspection 9/9/128
+  and six runtimes; cursor/bare-edge 8/0; standalone lifecycle shorthand across five backends/six routes; logical
+  helpers 8/0; all-five-backend attached/inline controls; root selection 7/0; and current named-slot/gap behavior.
+- Preserved dated rollout evidence while removing present-tense Perl-only, pending-backend, dormant-Lua, required-
+  root-marker, 50-mutation/no-backend, and pre-`.14.8` statements. Root governance now accurately reflects README
+  routing at 24 documents / 18 denials rather than the dated 25/19 closeout boundary.
+- Extended the narrow owners: cursor is 30 documents / 28 denials / 60 mutations; standalone lifecycle is
+  15 / 7 / 14; logical helper is 19 / 14 / 26; root is 24 / 18 / 54; inter-match gap is 8 / 15 / 10 / 34; typed
+  source remains 14/0/231; and capability conformance adds four structured-control projection mutations.
+- Updated the typed gap mirror, roadmaps, architecture, task/index, Knowledge cards/map, live memory/status, and
+  sole-facing book. Complete focused contracts, exact stale census, rendered-book review, all doctrines, and exact
+  staged canonical CI pass without parser, compiler, runtime, fixture, generated-format, capability-state, facade,
+  schema, semantic/MCP, CLI, or public API movement.
+
 ## 2026-08-30 — FUTURE-PARITY-BACKLOG.23.1 — restore selector migration contrasts
 
 - Audited commit `ac217f6c` and the complete current public surface. Its broad selector migration correctly updated

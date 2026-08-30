@@ -1,6 +1,6 @@
 ---
 id: standalone-lifecycle-block-audit
-title: "Standalone rule blocks have no current portable behavior and must normalize to lifecycle I"
+title: "Standalone rule blocks portably normalize to lifecycle I on all five backends"
 answers:
   - "does a standalone brace block run as lifecycle I"
   - "what does a bare rule-level block mean"
@@ -20,6 +20,7 @@ date: 2026-08-29
 status: implemented on all five backends and six runtime routes under FUTURE-PARITY-BACKLOG.15.1-.2
 tags: [dsl, lifecycle, codeblock, parser, perl, rust, dart, julia, lua, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.15.0 ratified ADR 0094 from the five-backend audit. `.15.1` adds one neutral explicit/bare twin contract to Perl/Rust and repairs Rust duplicate-I order. `.15.2` makes Dart, Julia, PUC Lua, and LuaJIT emit lifecycle I directly; preserves exact source/opening line and explicit-twin ActionIR semantics; proves native, reconstructed, emitted/generated, ownership, malformed, and inert legacy-plain paths; and gives specs/spec.spec a standalone production plus reserved lifecycle precedence. Dart and Julia retain a post-lifecycle raw suffix only when it is not a recognized rule header, preserving established typed action-diagnostic precedence. All explicit/bare duplicate combinations return first-second in authored order. The exact recurring gate covers five backends, six runtime routes, self-hosting, generated/capability/language ledgers, and public no-drift."
+evidence_update_2026_08_30_mdbook_reconciliation: "FUTURE-PARITY-BACKLOG.23.2 repairs the action-placement and project-status pages that still described the completed `.15.2` rows as pending. The executable public projection now requires 15 documents, denies seven exact stale current claims, and rejects 14 contract/document mutations without changing parser, compiler, runtime, generated-format, or outward behavior."
 reverify: "bash tools/check_standalone_lifecycle_block_five_backend.sh"
 ---
 

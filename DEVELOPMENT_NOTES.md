@@ -9,6 +9,32 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-30 (`FUTURE-PARITY-BACKLOG.23.2` — mdBook current-state reconciliation): Knowledge Map and indexed
+  live-history retrieval preceded source archaeology for semantic introspection, rule-local cursor/bare edges,
+  standalone lifecycle shorthand, logical helpers/truthiness, structured controls, root selection, and adjacent
+  named-slot/gap/typed-source prose.
+- Git provenance showed the stale pages were accurate at their creation boundaries but escaped later closeout
+  sweeps: cursor text stopped at Perl or Perl/Rust, standalone pages stopped at `.15.1`, named slots/gaps stopped
+  before Lua/public language admission, structured controls stopped at Round 2 Perl/Rust, and root constraints
+  stopped before Lua topology/final admission. The descriptor page's exact former 50-mutation/no-backend sentence
+  was recovered from pre-closeout history; current semantic teaching was already correct.
+- Root's apparent 25/19 mismatch was not a runtime defect. README-STABILITY-POLICY.1 intentionally removed root
+  README and two denials, making the live projection 24/17. The formal-grammar stale-marker denial makes current
+  truth 24/18; original 25/19 evidence remains dated. A similar audit corrected logical public metadata to 19/14.
+- Exact owner expansion is omission-sensitive: cursor adds two pages/three denials; standalone adds two pages,
+  seven denials, and three public-text mutations; gap adds two pages/three denials/five mutations and updates the
+  typed upstream mirror; semantic and logical append exact stale denials without changing 128/26 totals; typed
+  public denials replace nonmatching variants while preserving 14/0/231; capability conformance adds four
+  `language.current_mdbook_surface` mutations tied to five all-pass backend states.
+- The first whole-book build renders the corrected headings, tables, paragraphs, examples, and navigation. The
+  in-app browser control surface was unavailable, so rendered HTML was inspected directly for exact current
+  markers and stale-claim absence. No production/runtime/fixture/generated-format/outward files move.
+- The first doctrine run exposed that `docs/knowledge/typed-source-location-runtime-rollout-plan.md` already sat at
+  65,530/65,536 bytes. Its duplicate gap-mirror note was removed and retained in the smaller canonical composition
+  card; the hard pressure gate is green, but any future edit to that rollout-plan card must split or reroute it.
+- Focused owners, Knowledge Map, task metadata/index, bounded histories, memory architecture, all nine doctrines,
+  whitespace, final book build/render, and receipt-bound canonical local CI form the closeout proof. Parent `.23`
+  closes; `.19.1.1` is the next clean roadmap-aligned implementation frontier.
 - 2026-08-30 (`FUTURE-PARITY-BACKLOG.23.1` — aggregate-selector migration-contrast repair): the pre-change public
   checker passed 61 files / 25 classified references / zero current examples while the sole migration paragraph
   taught two “retired” bare forms and five identity rewrites. Count/context validation could not express meaning.

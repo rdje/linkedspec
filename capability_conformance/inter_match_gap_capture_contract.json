@@ -1062,11 +1062,19 @@
       },
       {
         "path": "TOOLBOX.md",
-        "required_marker": "Inter-match gap public no-drift is current: six documents, twelve stale-current denials, ten outward guards, and twenty-nine reason-checked mutations."
+        "required_marker": "Inter-match gap public no-drift is current: eight documents, fifteen stale-current denials, ten outward guards, and thirty-four reason-checked mutations."
       },
       {
         "path": "USER_GUIDE.md",
         "required_marker": "Lossless inter-match segmentation is current through @capture_gaps, entry_slot(), gap_span(), gap_text(), and gap_kind()."
+      },
+      {
+        "path": "docs/linkedspec-book/src/dsl/action-and-lifecycle-placement.md",
+        "required_marker": "The current `@capture_gaps` directive provides separate,"
+      },
+      {
+        "path": "docs/linkedspec-book/src/appendix/formal-grammar.md",
+        "required_marker": "The named-slot and inter-match-gap language/runtime contract is current through Perl, Rust, Dart, Julia, PUC Lua,"
       }
     ],
     "forbidden_current_claims": [
@@ -1088,7 +1096,7 @@
       },
       {
         "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
-        "text": "Inter-match gap-capture recurring governance is current across the complete neutral and six private runtime rows; no runtime route remains an explicit skip and public no-drift remains pending."
+        "text": "lock upstream gap 9/0/63, public 6/12/10/29"
       },
       {
         "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
@@ -1100,7 +1108,7 @@
       },
       {
         "path": "docs/linkedspec-book/src/overview/project-status.md",
-        "text": "Inter-match gap-capture governance is current at 8 complete / 1 pending: all six runtime rows and recurring proof are complete, while public no-drift remains pending."
+        "text": "plus public 6/12/10/29\ngap authority"
       },
       {
         "path": "docs/linkedspec-book/src/overview/project-status.md",
@@ -1116,7 +1124,19 @@
       },
       {
         "path": "TOOLBOX.md",
-        "text": "Inter-match gap-capture recurring governance is current across its complete neutral plus six private runtime rows while public no-drift remains pending."
+        "text": "plus public 6/12/10/29;"
+      },
+      {
+        "path": "docs/linkedspec-book/src/dsl/action-and-lifecycle-placement.md",
+        "text": "Both retain their authored selector kind in private Perl metadata. Other backends and public schema admission remain\npending."
+      },
+      {
+        "path": "docs/linkedspec-book/src/dsl/action-and-lifecycle-placement.md",
+        "text": "the behavior-free `INTER-MATCH-GAP-CAPTURE.1.0`\nplan keeps their current scope and forbids combining an anonymous marker member with future\n`@capture_gaps`."
+      },
+      {
+        "path": "docs/linkedspec-book/src/appendix/formal-grammar.md",
+        "text": "Perl, Rust, Dart, and Julia privately admit the complete gap runtime. Shared PUC Lua/LuaJIT currently carry\nauthored/static/compiled metadata, private native gap execution, normalized reconstruction, compatible descriptor\nprojections, same-engine direct/traced generated-v2 execution, and independently loaded emitted-source proof\nbehind one dormant final consumer; this is not yet a portable public admission."
       }
     ],
     "surface_guard": {

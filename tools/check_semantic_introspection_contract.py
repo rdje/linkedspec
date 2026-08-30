@@ -357,6 +357,7 @@ PUBLIC_CONTRACT = {
         {"path": "docs/linkedspec-book/src/public-api/semantic-introspection.md", "text": "Semantic rollout remains 8/9 because public no-drift"},
         {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "with recurring rollout pending"},
         {"path": "docs/knowledge/mcp-native-server-topology.md", "text": "Public no-drift remains separately owned by `.10.10`."},
+        {"path": "docs/linkedspec-book/src/public-api/descriptor-introspection.md", "text": "The neutral schema, fixtures, exact evaluator, and 50-mutation gate are executable under\n`FUTURE-PARITY-BACKLOG.10.2`, but no backend is admitted yet."},
     ],
 }
 TOOLBOX_REQUIRED_CLAIMS = [

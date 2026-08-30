@@ -543,6 +543,10 @@ PUBLIC_CONTRACT = {
             "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
             "text": "A green 5x2x65 run is the\nfinal rollout target rather than a current cross-backend claim.",
         },
+        {
+            "path": "docs/linkedspec-book/src/appendix/formal-grammar.md",
+            "text": "topology\n   admission remains `.5.3`; use a marker until the remaining rollout closes",
+        },
     ],
 }
 

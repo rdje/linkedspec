@@ -223,7 +223,18 @@
       {"path": "docs/linkedspec-book/src/appendix/formal-grammar.md", "required_markers": ["Standalone lifecycle block", "exact shorthand for `I { ... }`"]},
       {"path": "docs/linkedspec-book/src/appendix/backend-handoff.md", "required_markers": ["Standalone lifecycle-block parity is complete", "tools/check_standalone_lifecycle_block_five_backend.sh"]},
       {"path": "docs/decisions/0094-standalone-rule-block-normalizes-to-lifecycle-i.md", "required_markers": ["Status: accepted; rollout complete", "tools/check_standalone_lifecycle_block_five_backend.sh"]},
-      {"path": "docs/knowledge/standalone-lifecycle-block-audit.md", "required_markers": ["status: implemented on all five backends", "tools/check_standalone_lifecycle_block_five_backend.sh"]}
+      {"path": "docs/knowledge/standalone-lifecycle-block-audit.md", "required_markers": ["status: implemented on all five backends", "tools/check_standalone_lifecycle_block_five_backend.sh"]},
+      {"path": "docs/linkedspec-book/src/dsl/action-and-lifecycle-placement.md", "required_markers": ["On all five backends", "The shorthand rollout is closed on Perl, Rust, Dart, Julia, Lua, and the self-hosted grammar"]},
+      {"path": "docs/linkedspec-book/src/overview/project-status.md", "required_markers": ["Standalone lifecycle-block parity is complete", "The explicit `I` marker remains a\nclear spelling, not a portability requirement"]}
+    ],
+    "forbidden_current_claims": [
+      {"path": "docs/linkedspec-book/src/dsl/action-and-lifecycle-placement.md", "text": "Perl and Rust also accept a rule-item-leading `{ ... }` as exact shorthand for `I` at that position."},
+      {"path": "docs/linkedspec-book/src/dsl/action-and-lifecycle-placement.md", "text": "Perl/Rust shorthand for `I { ... }`; not yet portable to Dart/Julia/Lua."},
+      {"path": "docs/linkedspec-book/src/dsl/action-and-lifecycle-placement.md", "text": "For those two backends, the standalone block above has the same semantics as:"},
+      {"path": "docs/linkedspec-book/src/dsl/action-and-lifecycle-placement.md", "text": "current Perl and Rust run"},
+      {"path": "docs/linkedspec-book/src/dsl/action-and-lifecycle-placement.md", "text": "Dart, Julia, Lua, and the self-hosted grammar still have the pre-rollout behavior"},
+      {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "It is not portable current behavior yet"},
+      {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "Dart,\nJulia, Lua, and the self-hosted grammar remain pending under `.15.2`"}
     ]
   },
   "rollout": [

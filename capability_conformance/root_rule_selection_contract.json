@@ -579,7 +579,8 @@
       {"path": "docs/linkedspec-book/src/public-api/get-and-get-parser.md", "text": "That contract is at 6 complete / 1 pending."},
       {"path": "docs/linkedspec-book/src/user-model/spec-files-and-rule-paragraphs.md", "text": "backend-admitted at rollout 6/7; final recurring/public no-drift"},
       {"path": "docs/linkedspec-book/src/user-model/rule-modes-and-parse-modes.md", "text": "Lua implements the selection core and composed routes, while its topology admission\nand final no-drift remain staged."},
-      {"path": "docs/linkedspec-book/src/development/local-ci-and-regression.md", "text": "A green 5x2x65 run is the\nfinal rollout target rather than a current cross-backend claim."}
+      {"path": "docs/linkedspec-book/src/development/local-ci-and-regression.md", "text": "A green 5x2x65 run is the\nfinal rollout target rather than a current cross-backend claim."},
+      {"path": "docs/linkedspec-book/src/appendix/formal-grammar.md", "text": "topology\n   admission remains `.5.3`; use a marker until the remaining rollout closes"}
     ]
   },
   "rollout": [

@@ -711,10 +711,10 @@ LOSSLESS_GAP_COMPOSITION = {
         "driver_path": "tools/check_inter_match_gap_capture_six_runtime.sh",
         "rollout": {"complete": 9, "pending": 0, "semantic_mutations": 63},
         "public": {
-            "documents": 6,
-            "forbidden_current_claims": 12,
+            "documents": 8,
+            "forbidden_current_claims": 15,
             "surface_guard_paths": 10,
-            "mutations": 29,
+            "mutations": 34,
         },
     },
     "typed_projection": {
@@ -844,9 +844,9 @@ PROGRAM_WIDE_PUBLIC_NO_DRIFT = {
     ],
     "forbidden_claims": [
         {"path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md", "text": "Only combined program-wide no-drift remains pending."},
-        {"path": "docs/linkedspec-book/src/appendix/backend-handoff.md", "text": "recurring/public no-drift row stays pending for final program-wide owner"},
-        {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "combined program-wide no-drift remains pending."},
-        {"path": "docs/linkedspec-book/src/development/local-ci-and-regression.md", "text": "the combined typed row remains pending."},
+        {"path": "docs/linkedspec-book/src/appendix/backend-handoff.md", "text": "while the combined program-wide `.14.8` row remains pending."},
+        {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "makes current typed truth 12/2/170"},
+        {"path": "docs/linkedspec-book/src/development/local-ci-and-regression.md", "text": "The combined program-wide `.14.8` public-no-drift row\nremains pending."},
         {"path": "capability_conformance/README.md", "text": "The combined `recurring_public_no_drift` row remains pending"},
         {"path": "TOOLBOX.md", "text": "The combined program-wide `.14.8` row remains pending"},
         {"path": "docs/knowledge/typed-source-location-runtime-rollout-plan.md", "text": "status: six internal value/projection and recursive-observation runtimes admitted; recurrence and recursive-observation public projection current; combined program-wide closeout pending"},

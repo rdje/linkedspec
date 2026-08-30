@@ -173,6 +173,15 @@ my @expected_forbidden_current_claims = (
   text => 'final public closeout pending',
  },
 );
+my $language_surface_path = 'docs/linkedspec-book/src/appendix/formal-grammar.md';
+my @expected_language_surface_markers = (
+ 'Attached and inline structured controls are current on all five backends.',
+ 'Inline value-form `if(...)` and `switch(...)` are portable on all five backends',
+);
+my @expected_language_surface_forbidden_claims = (
+ 'Round 2 is extending this surface. Perl and Rust now accept attached-block',
+ 'Inline value-form `if(...)` and `switch(...)` are portable on Perl and Rust',
+);
 
 sub clone_value {
  my ($value) = @_;
@@ -244,6 +253,52 @@ sub validate_public_contract {
   fail("public projection source is missing: $actual->{path}") unless exists $sources->{$actual->{path}};
   fail("$actual->{path} retains forbidden current claim: $actual->{text}")
    if index(normalize_space($sources->{$actual->{path}}), normalize_space($actual->{text})) >= 0;
+ }
+}
+
+sub expected_language_surface_contract {
+ return {
+  capability_id            => 'language.current_mdbook_surface',
+  path                     => $language_surface_path,
+  required_markers         => clone_value(\@expected_language_surface_markers),
+  forbidden_current_claims => clone_value(\@expected_language_surface_forbidden_claims),
+ };
+}
+
+sub validate_language_surface_contract {
+ my ($contract, $manifest, $source) = @_;
+ require_hash_keys(
+  'language_surface_contract', $contract,
+  qw(capability_id path required_markers forbidden_current_claims)
+ );
+ fail('language-surface capability id drifted')
+  unless $contract->{capability_id} eq 'language.current_mdbook_surface';
+ fail('language-surface path drifted') unless $contract->{path} eq $language_surface_path;
+ fail('language-surface markers drifted')
+  unless ref($contract->{required_markers}) eq 'ARRAY'
+  && join("\0", @{$contract->{required_markers}}) eq join("\0", @expected_language_surface_markers);
+ fail('language-surface stale-claim denials drifted')
+  unless ref($contract->{forbidden_current_claims}) eq 'ARRAY'
+  && join("\0", @{$contract->{forbidden_current_claims}}) eq join("\0", @expected_language_surface_forbidden_claims);
+
+ my @capabilities = grep { $_->{id} eq $contract->{capability_id} } @{$manifest->{capabilities}};
+ fail('language-surface capability row must exist exactly once') unless @capabilities == 1;
+ my $capability = $capabilities[0];
+ fail('language-surface formal grammar source is not capability-owned')
+  unless grep { $_ eq $contract->{path} } @{$capability->{sources}};
+ for my $backend (@expected_backends) {
+  fail("language-surface backend is not admitted: $backend")
+   unless $capability->{backends}{$backend}{status} eq 'pass';
+ }
+
+ my $normalized_source = normalize_space($source);
+ for my $marker (@{$contract->{required_markers}}) {
+  fail("language surface is missing current marker: $marker")
+   unless index($normalized_source, normalize_space($marker)) >= 0;
+ }
+ for my $forbidden (@{$contract->{forbidden_current_claims}}) {
+  fail("language surface retains stale claim: $forbidden")
+   if index($normalized_source, normalize_space($forbidden)) >= 0;
  }
 }
 
@@ -530,6 +585,34 @@ sub public_projection_mutation_checks {
  return scalar @mutations;
 }
 
+sub language_surface_mutation_checks {
+ my ($contract, $manifest, $source) = @_;
+ my @mutations;
+ push @mutations, ['language_surface_capability_drift', sub {
+  my $candidate = clone_value($contract);
+  $candidate->{capability_id} = 'language.missing';
+  validate_language_surface_contract($candidate, $manifest, $source);
+ }];
+ push @mutations, ['language_surface_marker_omission', sub {
+  my $candidate = clone_value($contract);
+  pop @{$candidate->{required_markers}};
+  validate_language_surface_contract($candidate, $manifest, $source);
+ }];
+ push @mutations, ['language_surface_source_omission', sub {
+  my $candidate_source = $source;
+  my $marker = $expected_language_surface_markers[0];
+  my $changed = ($candidate_source =~ s/\Q$marker\E//);
+  die "mutation setup could not find the language-surface marker\n" unless $changed == 1;
+  validate_language_surface_contract($contract, $manifest, $candidate_source);
+ }];
+ push @mutations, ['language_surface_stale_claim_injection', sub {
+  my $candidate_source = $source . "\n$expected_language_surface_forbidden_claims[0]\n";
+  validate_language_surface_contract($contract, $manifest, $candidate_source);
+ }];
+ expect_mutation_failure(@$_) for @mutations;
+ return scalar @mutations;
+}
+
 my $manifest = eval { decode_json(read_text($manifest_path)) };
 fail("invalid JSON in capability_conformance/manifest.json: $@") if $@;
 my $sources = task_sources();
@@ -539,7 +622,13 @@ my $public_contract = expected_public_contract();
 my $public_sources = public_projection_sources();
 validate_public_contract($public_contract, $public_sources);
 my $public_mutation_count = public_projection_mutation_checks($public_contract, $public_sources);
+my $language_surface_contract = expected_language_surface_contract();
+my $language_surface_source = read_text(File::Spec->catfile($repo_root, split m{/}, $language_surface_path));
+validate_language_surface_contract($language_surface_contract, $manifest, $language_surface_source);
+my $language_surface_mutation_count = language_surface_mutation_checks(
+ $language_surface_contract, $manifest, $language_surface_source
+);
 
-printf "capability-conformance: OK (schema v2; %d capabilities; backend states pass=%d partial=%d gap=%d; %d exclusions; %d governance mutations; %d governed projections; %d public mutations)\n",
+printf "capability-conformance: OK (schema v2; %d capabilities; backend states pass=%d partial=%d gap=%d; %d exclusions; %d governance mutations; %d governed projections; %d public mutations; %d language-surface mutations)\n",
  scalar(@{$manifest->{capabilities}}), @{$counts}{qw(pass partial gap)}, scalar(@{$manifest->{excluded_or_future}}),
- $mutation_count, scalar(@expected_public_projections), $public_mutation_count;
+ $mutation_count, scalar(@expected_public_projections), $public_mutation_count, $language_surface_mutation_count;

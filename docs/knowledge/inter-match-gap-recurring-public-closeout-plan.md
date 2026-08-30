@@ -17,6 +17,7 @@ evidence: "Clean c33f6664 plus the neutral checker proves 7/2/60. The rooted dri
 evidence_update_2026_08_16_recurring_admission: "INTER-MATCH-GAP-CAPTURE.7.1 promotes only recurring after an expected-count RED. Neutral governance is 8/1/61; the rooted neutral/Perl-124/Rust-1/Dart-5/Julia-319/PUC-Lua-392/LuaJIT-392 order and all implementation/carrier commands remain exact. Five governed markers now say recurring current/public pending. Shared language remains 246 calls and 122 public Perl contracts for .7.2."
 evidence_update_2026_08_16_public_admission: "INTER-MATCH-GAP-CAPTURE.7.2 promotes exactly entry_slot, gap_kind, gap_span, and gap_text into equal Dart/Julia/Lua current-call inventories and the independently derived Perl public projection. Language is 250 current / 105 corpus + 1 exact named-mark fixture / 126 public Perl contracts. Recognition remains 137 ActionIR rows and 58 mutations while canonical call effects become 250 with all four calls classified source_read. Gap governance is 9/0/63 and its final public contract requires six documents, twelve stale-current denials, ten outward guards, and 29 reason-checked mutations. Legacy gap markers remain divergent non-aliases, named marks and explicit helpers remain independent, @emit_gaps remains absent, and guarded facades/schemas/CLI/README stay unchanged."
 evidence_update_2026_08_16_no_change_closeout: "INTER-MATCH-GAP-CAPTURE.7.3 activates from clean public atomic 254 bb0c3768, inventories committed blobs, and independently recomposes neutral 9/0/63 plus public 6/12/10/29, the rooted neutral plus six runtime route, language 250/105+1/126, recognition 137/250/58, and adjacent generated/capability/typed-source/semantic/MCP/CLI/storage/book authorities. Base-relative proof keeps every admitted executable contract and implementation/outward surface byte-identical. The gap tree closes and hands only typed-source gap_composition to FUTURE-PARITY-BACKLOG.14.5.1 after receipt/brief/clean proof."
+evidence_update_2026_08_30_mdbook_reconciliation: "FUTURE-PARITY-BACKLOG.23.2 preserves the dated `.7.2-.7.3` 6/12/10/29 evidence and expands only the live public projection to 8/15/10/34. The two added mdBook pages now require current all-five-backend/six-runtime language markers and reject three exact stale rollout claims; the typed gap-composition mirror advances in lockstep."
 reverify: "bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py && perl tools/check_language_capability_coverage.pl && bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py && bash tools/check_inter_match_gap_capture_six_runtime.sh"
 ---
 
@@ -44,9 +45,10 @@ ten outward facade/schema/CLI/README surfaces. It did not reject obsolete claims
 Consequently the correct “all six routes” marker coexisted with prose saying the route still skipped Lua, and a
 local-CI passage still presented the earlier 3/6 boundary as current.
 
-The planning leaf corrected those already-stale facts without admitting anything. Public closeout now replaces
-the marker-only scheme with six required current documents, twelve exact stale-current denials, the same ten
-outward guards, and 29 reason-checked in-memory omission/injection mutations.
+The planning leaf corrected those already-stale facts without admitting anything. The current projection now
+requires eight current documents, fifteen exact stale-current denials, the same ten outward guards, and 34
+reason-checked in-memory omission/injection mutations. The original `.7.2` closeout was 6/12/10/29; `.23.2`
+expanded governance only after finding two adjacent mdBook pages that had escaped that boundary.
 
 ## Compatibility boundary
 

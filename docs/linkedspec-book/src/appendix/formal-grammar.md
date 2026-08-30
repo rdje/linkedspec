@@ -463,15 +463,15 @@ layer adds no flag system of its own beyond what the host regex engine supports.
 In `consume` mode (`\G`-anchored), the regex must match contiguously from the
 current position. In `seek` mode (ungrounded `//gcp`), the regex may match
 anywhere. ADR `0044` fixes one semantic authority: AND-family rules consume and
-OR/default-family rules seek. Perl and Rust are current through public override
-removal; remaining backend rollout does not change this authored contract.
+OR/default-family rules seek. All five backends implement this family-derived cursor policy, reject the retired
+caller-global override, and close rollout at 8 complete / 0 pending.
 
 Multiple regex clusters in a row form an ordered sequence for AND-mode rules
 or a set of alternatives for OR-mode rules. When clusters are combined as
 alternatives, the engine records **which** alternative matched (0-based) and uses
 that to drive dispatch.
 
-Perl, Rust, Dart, and Julia accept a stable rule-local name on a regex member:
+All five backends accept a stable rule-local name on a regex member:
 
 ```text
 name=/pattern/
@@ -481,10 +481,10 @@ name = /pattern/
 Only horizontal spacing around `=` is insignificant. Every name scalar uses the repository-pinned Unicode 17
 `XID_Continue` class; identity is exact, case-sensitive, and normalization-sensitive. ASCII digit-only names are
 reserved for positional selectors. Named and anonymous regex members may mix in one authored zero-based sequence.
-Perl, Rust, Dart, and Julia privately admit the complete gap runtime. Shared PUC Lua/LuaJIT currently carry
-authored/static/compiled metadata, private native gap execution, normalized reconstruction, compatible descriptor
-projections, same-engine direct/traced generated-v2 execution, and independently loaded emitted-source proof
-behind one dormant final consumer; this is not yet a portable public admission.
+The named-slot and inter-match-gap language/runtime contract is current through Perl, Rust, Dart, Julia, PUC Lua,
+and LuaJIT. All routes preserve authored/static/compiled metadata, invocation-local gap execution, normalized
+reconstruction, compatible descriptor projections, generated-v2 execution, and independently loaded emitted
+source. Outward facade and schema surfaces remain intentionally unchanged.
 
 **Capture groups**: A `(...)` group is a **numbered** capture; a `(?<name>...)`
 group is a **named** capture. Action code reads them with `entry_group(N)` /
@@ -514,8 +514,8 @@ its associated action code.
   `Top::->Rule.push` are valid spellings.
 - **Target indexing**: `-> rule` means entry slot `[0]`. `-> rule[N]` selects a
   positional regex slot; `-> rule[name]` selects stable rule-local identity. A numeric selector may resolve a
-  named declaration, but it remains positional provenance. Named selection is implemented by the private Perl,
-  Rust, Dart, and Julia runtimes and by Lua's current shared authored/static/compiled path.
+  named declaration, but it remains positional provenance. Named selection is current on all five backends and
+  six runtime routes.
 - **Grouped targets**: `-> RuleA | RuleB { ... }` binds one shared action code
   block to multiple target rules.
 - **Grouped-target boundary**: the shared block is mandatory. `-> RuleA | RuleB`
@@ -541,8 +541,8 @@ Blind-call behavior follows the **rule label mode**, not the edge alone. Explici
 
 #### 3.3.1 Bare-edge normalization
 
-ADR `0044` defines this line-level source grammar, implemented by the Perl
-reference in `.9.1.3.1` and pending in the later backends:
+ADR `0044` defines this line-level source grammar. Bare-edge normalization is complete at 8 complete / 0 pending,
+and all five backends implement it before typed validation:
 
 ```text
 BareEdgeLine ::= TargetRule BareSuffix?
@@ -1193,27 +1193,25 @@ E {
 }
 ```
 
-Round 2 is extending this surface. Perl and Rust now accept attached-block
+Attached and inline structured controls are current on all five backends. Perl, Rust, Dart, Julia, and Lua accept attached-block
 `if(...) { ... } elseif(...) { ... } else { ... }`, including compact same-line continuations;
 attached-block `when(...) { ... } otherwise { ... }` as aliases for `if(...) { ... } else { ... }`;
 and attached-block `switch(...) { case(...) { ... } default { ... } }` with first-match/default semantics.
-Rust normalizes attached branch forms where that matches its statement-control runtime. Perl and Rust now
-accept attached `while(...) { ... }` with condition re-evaluation and a deterministic 10000-iteration
-loop-safety guard.
-Inline value-form `if(...)` and `switch(...)` are portable on Perl and Rust in supported value-consuming slots:
+Each backend normalizes attached branch forms through its statement-control runtime and accepts attached
+`while(...) { ... }` with condition re-evaluation and a deterministic 10000-iteration loop-safety guard.
+Inline value-form `if(...)` and `switch(...)` are portable on all five backends in supported value-consuming slots:
 `return(...)`, assignment RHS, and fluent `.return(...)`.
 Zero-argument markers that are already implemented, such as `else`/`endif`,
 accept bare-keyword form in addition to parenthesized form.
 
 ## 10. Constraints and Validation
 
-A valid `.spec` file must satisfy the following current portable checks. Item 1 distinguishes implemented core
-behavior from composed admission while `.9.1.1.2.4-.6` roll out:
+A valid `.spec` file must satisfy the following current portable checks:
 
-1. At least one rule exists. Perl, Rust, Dart, Julia, and Lua validation accept a markerless file. Lua core `.5.1`
-   and composed routes `.5.2` expose the same selection and validation rule on PUC Lua and LuaJIT, while topology
-   admission remains `.5.3`; use a marker until the remaining rollout closes when uniformly admitted portable
-   execution matters. A zero-rule executable spec is always invalid. Implemented loader/generated routes report portable
+1. At least one rule exists. Perl, Rust, Dart, Julia, and Lua validation accept a markerless file. Root selection
+   is current at 7 complete / 0 pending across Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT: an explicit selector
+   wins, otherwise the first authored `Rule::` wins, otherwise the first authored ordinary `Rule:` wins. A
+   zero-rule executable spec is always invalid. Implemented loader/generated routes report portable
    `no_rules_defined` / `validate_spec` before considering either default or explicit selection.
 2. Every rule declaration and edge target satisfies the Unicode rule-label contract in §2.1.
 3. Every rule label is unique. Duplicate labels are rejected by exact scalar-sequence identity.

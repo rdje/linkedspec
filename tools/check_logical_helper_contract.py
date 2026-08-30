@@ -374,6 +374,14 @@ PUBLIC_CONTRACT = {
             "text": "Rollout is 7 complete / 1 pending",
         },
         {"path": "ARCHITECTURE_STATE.md", "text": "rollout is 7 complete / 1 pending"},
+        {
+            "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+            "text": "`and`/`or` keyword lowering and five-backend logical truthiness/arity remain separately owned by `.5.2`",
+        },
+        {
+            "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+            "text": "Neutral/backend/generated/gate/public leaves `.5.2.1-.9` are\ntherefore dependency-ordered before any behavior claim changes.",
+        },
     ],
 }
 GATE_CONSUMER_MARKERS = {
