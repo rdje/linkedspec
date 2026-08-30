@@ -2,21 +2,23 @@
 
 ## Current Activity
 
-- No leaf is active after future-neutral nested-write contract `.19.1.1` closes at focused signoff. Current backend
-  behavior remains non-vivifying; the separately queued Lua fixture defect `.15.3` is the next clean activation.
+- No leaf is active after `.15.3` closes the stale Lua fixture repair and required engineering-notes rollover at
+  exact canonical signoff. Current lifecycle/runtime behavior and the future-only `.19.1.1` contract are unchanged.
 
 ## Latest Completed Slice
 
-- `.19.1.1` freezes one evaluated-typed-segment AST, dense atomic creation, expression/structural ordering,
-  detached results, exact Unicode-scalar diagnostics, and read exclusions through 105 rejected mutations without
-  admitting any backend.
+- `.15.3` assigns the old `next()` fixture to its intended action edge, passes complete Lua 178x2 plus standalone
+  109x2, and finitely admits engineering-notes segment `4987` through ADR `0097` without behavior movement.
 
 ## Next Action
 
-- From the clean `.19.1.1` handoff, activate `FUTURE-PARITY-BACKLOG.15.3` task-tree-first and repair the stale Lua
-  `next()` fixture exposed by executable bare lifecycle normalization; then resume neutral bang contract `.19.1.2`.
+- From the clean `.15.3` handoff, activate `FUTURE-PARITY-BACKLOG.19.1.2` task-tree-first and freeze the future-
+  neutral `map_leaves!` parser, receiver, traversal, atomicity, re-entrancy, result, and exclusion contract.
 
 ## Recent Completions
+
+- `2026-08-30` — `.15.3` replaces one false-positive Lua `next()` fixture with exact action-edge ownership,
+  passes 178/178 and 109/109 on both ABIs, and admits notes segment `4987` at finite capacity 21/20 via ADR `0097`.
 
 - `2026-08-30` — `.19.1.1` freezes future write vivification at 5 AST / 7 syntax / 11 success / 16 structural /
   3 expression-failure / 3 read-exclusion cases plus detachment and 105 mutations; all six current runtime routes
@@ -65,8 +67,6 @@
 - `2026-08-28` — `.14.7.7.5` reruns Lua 888/888 per ABI, admitted peers, exact topology, and 106-mutation
   governance unchanged, adds the durable recomposition fact, closes `.14.7.7`, and hands off `.14.7.8`.
 
-- `2026-08-27` — `.14.7.7.4` preserves the shared 888/888 behavior, registers the same source once per ABI in
-  ordinary/canonical proof, completes both Lua rollout rows, and advances exact topology governance to 106.
 
 ## History
 

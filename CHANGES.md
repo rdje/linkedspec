@@ -10,6 +10,25 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-30 — FUTURE-PARITY-BACKLOG.15.3 — repair Lua next fixture ownership
+
+- Replaced the stale Lua runtime-control source `/skip/ { next() }` with action-edge-owned
+  `-> Skip { next() }` plus `Skip: /skip/`. The old bare block now correctly means lifecycle `I`; before `.15.2`
+  it was inert, so the test passed without exercising `next()`.
+- The repaired fixture consumes `skip`, advances the enclosing rule iteration, and returns `keep` at cursor 8.
+  Complete `lua/test/run.lua` passes 178/178 on PUC Lua and LuaJIT. The neutral standalone contract remains
+  9 placements / 4 duplicate forms / 6 owners / 3 malformed twins / 6 routes / 14 mutations, and its shared Lua
+  consumer passes 109 assertions on each ABI.
+- No parser, compiler, runtime, neutral/public contract, generated format, capability, facade/schema/MCP, CLI, or
+  mdBook behavior changes. The standalone lifecycle Knowledge owner now records the former false-positive cause.
+- The mandatory engineering-notes record triggers content-addressed segment `4987`. ADR `0097` raises only finite
+  collection capacity 20→21 files and manifest capacity 19→20 lines; all byte, root, segment, aggregate, owner,
+  lifecycle, verifier, storage, and path controls remain unchanged.
+- Canonical attempt one catches the committed `.19.1.1` write-vivification checker as Python tool entrypoint 36
+  while the exact storage census still expected 35. The checker already uses the repository-routed wrapper and
+  allocates no temporary workspace; the census and canonical Knowledge owner advance to 36 with the unchanged
+  three Python temporary owners and 15 shell allocator owners.
+
 ## 2026-08-30 — FUTURE-PARITY-BACKLOG.19.1.1 — lock neutral write vivification
 
 - Added future-only `linkedspec-write-vivification-v1` and an independent checker. One

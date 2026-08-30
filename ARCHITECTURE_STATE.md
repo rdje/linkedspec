@@ -1,5 +1,20 @@
 # ARCHITECTURE STATE
 
+## Lua next fixture ownership is explicit and behavior is unchanged
+
+`FUTURE-PARITY-BACKLOG.15.3` repairs a false-positive test exposed by the correct `.15.2` lifecycle normalization.
+The old `/skip/ { next() }` fixture passed before `.15.2` only because its bare block was inert. Once bare blocks
+correctly normalize to entry lifecycle `I`, `next()` runs before regex iteration and returns null at cursor zero.
+The fixture now expresses its intended control site as `-> Skip { next() }` with child rule `Skip: /skip/`, yielding
+`keep` at cursor 8. Complete PUC Lua and LuaJIT harnesses pass 178/178, and the shared standalone consumer passes
+109/109 on each ABI. No parser, compiler, runtime, contract, capability, or user-visible semantics change.
+
+The mandatory engineering-notes record triggers official content-addressed segment `4987`. ADR `0097` authorizes
+only the finite engineering-notes collection step from 20 to 21 files and manifest step from 19 to 20 lines. The
+bounded store remains at 24,502/27,000 aggregate lines and 2,623,818/3,145,728 aggregate bytes; every other root,
+member, aggregate, owner, lifecycle, verifier, storage, and path control remains unchanged. Neutral `map_leaves!`
+contract leaf `.19.1.2` is next.
+
 ## Public migration examples preserve old-to-new semantic contrast
 
 `FUTURE-PARITY-BACKLOG.23.1` repairs a documentation-contract defect introduced by broad migration commit

@@ -5672,9 +5672,12 @@ end)
 test("runtime control and local stores match the cross-backend rule contract", function()
   local next_engine = linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec([[
 Top::
- /skip/ { next() }
+ -> Skip { next() }
  /keep/
  E { return(match_text()) }
+
+Skip:
+ /skip/
 ]])))
   local next_result = linkedspec.runtime_parse(next_engine, "skipkeep")
   assert_equal(next_result.value, "keep", "next advances to the next rule iteration")

@@ -1,5 +1,5 @@
 - ID: `FUTURE-PARITY-BACKLOG.15`
-  Status: `in progress; .15.3 queued defect repair`
+  Status: `done; canonical-signoff-complete`
   Goal: Make any standalone/dangling rule-level `{ ... }` block exact syntax sugar for `I { ... }`.
   Children: `.15.0`, `.15.1`, `.15.2`, `.15.3`
   Acceptance: At top-level rule-body item parsing, accept a standalone `{ ... }` anywhere an item may occur and
@@ -10,7 +10,9 @@
     all admitted backends, source generation, diagnostics, examples, and complete gates.
   Verification: **PASS 2026-08-29.** Decision `.15.0`, Perl/Rust `.15.1`, and remaining-backend/self-hosted/public
     `.15.2` close the exact neutral contract across five source backends, six runtime routes, generated carriers,
-    self-hosting, capability 90/0/0, public teaching, and canonical recurring no-drift.
+    self-hosting, capability 90/0/0, public teaching, and canonical recurring no-drift. Post-closeout repair `.15.3`
+    replaces one stale false-positive Lua fixture with its intended action-edge ownership and recomposes the complete
+    dual-ABI boundary without changing admitted lifecycle or runtime behavior.
 
 - ID: `FUTURE-PARITY-BACKLOG.15.0`
   Status: `done; canonical-signoff-complete` (2026-08-29; task-tree-first from exact clean typed-authoring-model closeout commit
@@ -257,25 +259,67 @@
   Commit: `FUTURE-PARITY-BACKLOG.15.2 - complete standalone lifecycle parity`.
 
 - ID: `FUTURE-PARITY-BACKLOG.15.3`
-  Status: `queued; defect reproduced during .19.1.1 verification` (2026-08-30)
+  Status: `done; canonical-signoff-complete` (2026-08-30; activated from exact clean focused write-vivification contract
+    commit `81d0e863d59396e62159d3fe46bebed4a2988b8a`)
   Goal: Repair the stale Lua runtime-control fixture exposed by completed standalone lifecycle normalization.
   Dependencies: `.15.2`; `.19.1.1` clean commit boundary
-  Planned proof: `focused` — the ratified/runtime lifecycle behavior is already correct; this leaf will change the
-    stale test source so its `next()` control is owned by an action edge, then prove the complete shared harness on
-    PUC Lua and LuaJIT without changing parser, compiler, runtime, capability, or public behavior.
+  Verification tier: `canonical` — the runtime/test repair is narrow, but its mandatory complete engineering-notes
+    record crosses the 90% hot-shard line threshold. The resulting official rollover, new immutable member,
+    manifest update, finite route-capacity authorization, and final batch push boundary require exact staged
+    receipt-bound local CI under ADR `0073`.
   Acceptance: Replace the accidental `/skip/ { next() }` fixture, whose bare block now correctly normalizes to
     lifecycle `I`, with an exact action-edge-owned skip case. Preserve the asserted consumed cursor and `keep`
     result; run the complete `lua/test/run.lua` harness on both ABIs; record the false-positive history and root
     cause in the standalone-lifecycle Knowledge owner. Do not weaken ADR `0094`, the neutral shorthand contract,
-    or the runtime-control assertion.
+    or the runtime-control assertion. Repair any exact canonical census made stale by the already-committed
+    `.19.1.1` checker only after the gate identifies it, preserving all project-data locality controls.
   Discovery evidence: exact PUC runs deterministically report only test 115 as failed: expected `keep`, got
     `json.null`. Direct AST/compiled projection shows `{ next() }` as the ratified lifecycle-`I` payload, and a
     minimal runtime probe returns matched/null at cursor 0 because entry lifecycle executes before regex
     iteration. The test was introduced with the original Lua interpreter while bare blocks were inert, so it
     passed without ever exercising `next()`; `.15.2` made the intended bare-block semantics executable and exposed
-    the stale ownership. This is unrelated to write vivification and is queued here before any repair edit.
-  Verification: `pending`
-  Commit: `pending`
+    the stale ownership. This is unrelated to write vivification and was queued here before any repair edit.
+  Focused checks: complete `lua/test/run.lua` on PUC Lua and LuaJIT through the project-data wrapper; exact
+    runtime-control assertion/result/cursor; standalone lifecycle contract and Knowledge owner; task/index,
+    bounded histories, memory, tool project-data storage, rendered mdBook only if public teaching changes, all nine
+    doctrines, and whitespace.
+  Canonical trigger: `mandatory engineering-notes rollover + final batch push boundary` — the pre-record shard is
+    already 460/512 lines. Add the complete `.15.3` record, apply the official content-addressed rollover, authorize
+    only the exact finite collection/manifest capacity delta if required, and run canonical CI on the exact staged
+    candidate. Parser/compiler/runtime behavior, neutral/public lifecycle contracts, generated formats, and
+    capability state remain unchanged.
+  Checklist: [x] exact clean activation/task ownership [x] Knowledge/ADR/toolbox/root-cause retrieval
+    [x] action-edge fixture correction [x] complete PUC Lua harness [x] complete LuaJIT harness
+    [x] standalone lifecycle no-drift [x] required notes rollover/capacity authorization
+    [x] durable Knowledge/live-memory/task-index synchronization [x] exact staged canonical signoff
+    [x] atomic commit/brief/clean push handoff.
+  Activation evidence: `git status --short --untracked-files=all` is empty at exact `81d0e863`; the preceding
+    `.19.1.1` hook passes all nine doctrines and its post-commit activation boundary; `git_message_brief.txt` is
+    zero bytes; reproducible mdBook output is absent; no background verification remains. The clean commit queues
+    this exact defect before `.19.1.2`, satisfying the pivot rule.
+  Repair evidence: the fixture now uses `-> Skip { next() }` and child rule `Skip: /skip/`; direct execution returns
+    `keep` at cursor 8. Complete `lua/test/run.lua` passes 178/178 independently on PUC Lua and LuaJIT. The neutral
+    standalone checker remains 9 placements / 4 duplicate forms / 6 ownership cases / 3 malformed twins / 6 runtime
+    routes / 15 public documents / 7 stale denials / 14 mutations, and its shared Lua consumer passes 109 assertions
+    on each ABI. No production parser/compiler/runtime or public contract byte changes.
+  Capacity evidence: the mandatory complete engineering-notes record triggers official content-addressed segment
+    `docs/history/development-notes/segment-4987-d0f32351bfe7.md`, retaining a 236/512-line current root. ADR `0097`
+    authorizes only collection 20→21 files and manifest 19→20 lines; the resulting store is 24,502/27,000 lines and
+    2,623,818/3,145,728 bytes, with all root, member, aggregate, owner, lifecycle, verifier, storage, and path controls
+    unchanged. No mdBook source moves because current user-visible semantics were already correct.
+  Canonical attempt one: every preceding doctrine, contract, backend, MCP, semantic, fixture, and storage check
+    passes through the Perl project-data oracle. The tool-storage oracle then rejects only its exact 35-entrypoint
+    census because committed `.19.1.1` added repository-routed `tools/check_write_vivification_contract.py` as the
+    36th Python tool. The checker allocates no temporary workspace and already runs through
+    `tools/run_python_project_data.sh`; this leaf owns the stale census/KM repair before rerunning the exact staged
+    canonical candidate from the beginning.
+  Signoff evidence: direct result/cursor proof, both complete Lua harnesses, both standalone consumers, neutral
+    contract/no-drift, Knowledge Map, task partition/index, both bounded histories, rendered sole-facing mdBook,
+    all nine doctrines, whitespace, and the exact staged receipt-bound canonical local CI pass. The commit hook and
+    final clean pre-push boundary reuse that proof before the accumulated batch is pushed.
+  Verification: **PASS 2026-08-30.** Exact staged canonical signoff completes the fixture repair and notes-capacity
+    transition without behavior movement; `.19.1.2` is the next clean roadmap-aligned leaf.
+  Commit: `FUTURE-PARITY-BACKLOG.15.3 - repair Lua next fixture ownership`
 
 - ID: `FUTURE-PARITY-BACKLOG.16`
   Status: `done`
@@ -677,7 +721,7 @@
   Commit: `FUTURE-PARITY-BACKLOG.18.3 - plan optional native parser acceleration`
 
 - ID: `FUTURE-PARITY-BACKLOG.19`
-  Status: `in progress; .19.1.1 complete; .15.3 defect repair next, then .19.1.2`
+  Status: `in progress; .19.1.1 complete; .15.3 repair complete; .19.1.2 next`
   Goal: Add portable explicit nested-write vivification and receiver-mutating method semantics without hidden
     reads, host-language aliasing, or backend drift.
   Children: `.19.0`, `.19.1`, `.19.2`, `.19.3`, `.19.4`, `.19.5`, `.19.6`, `.19.7`
@@ -707,7 +751,7 @@
   Commit: `FUTURE-PARITY-BACKLOG.19.0 - plan write vivification and bang mutation`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.1`
-  Status: `in progress; .19.1.1 complete; .19.1.2 next after queued .15.3 repair`
+  Status: `in progress; .19.1.1 complete; .15.3 repair complete; .19.1.2 next`
   Goal: Lock an executable backend-neutral v1 contract for nested write-vivification and approved `!` mutation.
   Children: `.19.1.1`, `.19.1.2`, `.19.1.3`
   Dependencies: `.19.0`; complete current Perl/Rust/Dart/Julia/Lua parity (satisfied by

@@ -16,11 +16,14 @@ answers:
   - "how does Dart keep standalone lifecycle validation from masking action diagnostics"
   - "why does Julia not preserve a rule-header-shaped lifecycle remainder as raw body text"
   - "how does Julia keep standalone lifecycle validation from masking action diagnostics"
+  - "why did the Lua next control fixture fail after standalone lifecycle normalization"
+  - "how must a Lua next action block be owned after bare blocks became lifecycle I"
 date: 2026-08-29
 status: implemented on all five backends and six runtime routes under FUTURE-PARITY-BACKLOG.15.1-.2
 tags: [dsl, lifecycle, codeblock, parser, perl, rust, dart, julia, lua, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.15.0 ratified ADR 0094 from the five-backend audit. `.15.1` adds one neutral explicit/bare twin contract to Perl/Rust and repairs Rust duplicate-I order. `.15.2` makes Dart, Julia, PUC Lua, and LuaJIT emit lifecycle I directly; preserves exact source/opening line and explicit-twin ActionIR semantics; proves native, reconstructed, emitted/generated, ownership, malformed, and inert legacy-plain paths; and gives specs/spec.spec a standalone production plus reserved lifecycle precedence. Dart and Julia retain a post-lifecycle raw suffix only when it is not a recognized rule header, preserving established typed action-diagnostic precedence. All explicit/bare duplicate combinations return first-second in authored order. The exact recurring gate covers five backends, six runtime routes, self-hosting, generated/capability/language ledgers, and public no-drift."
 evidence_update_2026_08_30_mdbook_reconciliation: "FUTURE-PARITY-BACKLOG.23.2 repairs the action-placement and project-status pages that still described the completed `.15.2` rows as pending. The executable public projection now requires 15 documents, denies seven exact stale current claims, and rejects 14 contract/document mutations without changing parser, compiler, runtime, generated-format, or outward behavior."
+evidence_update_2026_08_30_lua_next_fixture: "FUTURE-PARITY-BACKLOG.15.3 repairs one stale test, not lifecycle/runtime behavior. The original Lua interpreter fixture used /skip/ { next() }; before .15.2 the bare block was inert, so the test passed without exercising next. Correct normalization makes that block entry lifecycle I, where next exits before regex iteration with null/cursor 0. The repaired fixture uses -> Skip { next() } plus Skip: /skip/, assigning the block to the action edge and returning keep/cursor 8. Complete 178-test PUC Lua and LuaJIT harnesses, the 14-mutation neutral contract, and 109 assertions per ABI pass."
 reverify: "bash tools/check_standalone_lifecycle_block_five_backend.sh"
 ---
 
@@ -68,6 +71,18 @@ payload fields remain inert compatibility data; executing or removing them needs
 Malformed shorthand follows its explicit twin's block scanner and diagnostics. Mixed explicit/shorthand duplicates
 execute in authored order; `.15.1` repairs Rust's existing last-`I`-wins defect without reopening the separate Perl
 lifecycle handler-shape caveat.
+
+## Lua runtime-control fixture ownership repair
+
+The original Lua runtime-control test wrote `/skip/ { next() }`. That source contains two rule items: `/skip/`
+and a rule-item-leading bare block. Before standalone lifecycle admission, the block was inert compatibility data,
+so the test happened to reach `/keep/` and pass without executing `next()`. After `.15.2`, the same block correctly
+normalizes to entry lifecycle `I`; `next()` therefore runs before regex iteration and returns null at cursor zero.
+
+The valid control fixture is `-> Skip { next() }` with `Skip: /skip/`. Here the braces are owned by the action edge,
+the skip regex is consumed, `next()` advances the enclosing rule iteration, and `/keep/` produces `keep` at cursor
+eight. `.15.3` changes only this test ownership and preserves ADR `0094`, the neutral shorthand contract, and the
+runtime interpreter.
 
 Related: [[rule-local-cursor-and-bare-edge-contract]], [[spec-lifecycle-retv-order]],
 [[terse-lifecycle-value-drop-return-channel]], and [[FUTURE-PARITY-BACKLOG]].
