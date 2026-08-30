@@ -141,7 +141,8 @@ continuity, and PNT-style execution.
      task-tree-managed work.
    - Require one commit per completed leaf before selecting another leaf.
 10. Update continuity/history docs:
-    - `MEMORY.md`: record the current active tree and frontier for recovery.
+    - `MEMORY.md`: record the current active tree and frontier for recovery. Before a completed leaf lands, write
+      its intended clean handoff: completed status, the next task, and no remaining uncommitted work for that leaf.
     - `CHANGES.md`: log creation of the workflow and any task-tree status
       transition that changes project state.
     - `DEVELOPMENT_NOTES.md`: record rationale and policy decisions.

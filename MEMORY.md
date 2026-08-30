@@ -1,14 +1,13 @@
 # MEMORY
 
-- activation_commit: `65eb4aa46fcdec0ad50c6e0dfc048df70d7999ec` — exact clean pushed codegen-inspector closeout from which
-  `FUTURE-PARITY-BACKLOG.22` is activated.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.22 - govern stable task-index markers`; focused signoff is complete
-  at 8 families / 12 markers / 15 consumers / 4 mutations, with exact canonical proof as the commit boundary.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.22` exact staged canonical signoff and atomic commit/push boundary.
-- next_action: stage the exact `.22` candidate, run canonical CI, commit, clear the brief, prove clean, and push
-  before selecting another leaf.
-- in_flight_uncommitted: the fully implemented and focused-verified `.22` candidate remains uncommitted; no
-  background job or generated mdBook output is active before exact staging.
+- activation_commit: `b024ea3ee45b30938979cc280f78cee18b1746f7` — exact clean pushed stable-marker closeout from which
+  `FUTURE-PARITY-BACKLOG.22.1` is activated.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.22.1 - enforce clean memory handoffs`; four-field task-status
+  consistency passes three valid cases / six rejected mutations through exact canonical proof.
+- active_work_unit: none after the atomic `.22.1` closeout commit/push boundary.
+- next_action: from exact clean `.22.1`, activate queued `FUTURE-PARITY-BACKLOG.22.2` before any new code or
+  documentation edit; audit and repair global duplicate current task definitions before resuming `.23.1`.
+- in_flight_uncommitted: none after the atomic `.22.1` commit; no background job or generated mdBook output remains.
 - blockers: none.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers and permits arbitrary frontier-row rewrites.

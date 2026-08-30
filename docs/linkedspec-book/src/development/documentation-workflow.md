@@ -112,7 +112,8 @@ ADR `0065` adopts a satisfiable boundary for `MEMORY.md`. The bounded pointer na
 `activation_commit` from which a leaf started. That value equals `HEAD` while the leaf is being prepared and
 equals `HEAD^1` after its normal commit lands. The leaf ID in the commit subject is the durable join key from the
 activation boundary to the landing commit. Before committing, the rest of `MEMORY.md` is written as the intended
-clean post-landing handoff: completed leaf, next action, and no uncommitted work.
+clean post-landing handoff: the latest leaf has completed task-tree status; an idle pointer has no uncommitted work;
+and a completed active leaf is not still described as staged/uncommitted or scheduled for another commit/push.
 
 `MEMORY-COMMIT-POINTER-ENFORCEMENT.0` ratifies this contract, and `.1` implements it through one
 read-only phase-aware checker. The pre-commit hook is a hard gate over staged `MEMORY.md` and current
@@ -120,6 +121,8 @@ read-only phase-aware checker. The pre-commit hook is a hard gate over staged `M
 and `HEAD^1`. The canonical local gate uses an automatic mode that selects a worktree, staged, or clean
 committed view and rejects ambiguous staged-plus-unstaged pointer edits. Hermetic tests cover the initial
 `root` sentinel, ordinary success, malformed/duplicate fields, genuine drift, and phase ambiguity.
+The composed memory doctrine also runs `tools/check_memory_handoff_state.py`: three active/clean/idle twins pass,
+while six mutations reject task-status and post-landing contradictions that commit ancestry alone cannot detect.
 Closeout `.2` independently recomposed the committed checker, both hook views, all eleven cases, and the current
 and historical documentation owners without implementation change; it found no current contradiction and made
 the only two unqualified historical task statements point explicitly to ADR `0065`.

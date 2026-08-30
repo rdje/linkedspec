@@ -237,7 +237,7 @@ Enforced by [`scripts/check_doctrines.sh`](scripts/check_doctrines.sh) via
 
 | Doctrine | Archetype | Check | Proves |
 |---|---|---|---|
-| `MEMORY-ARCH` | structural | `scripts/check_memory_architecture.sh` | the durable 4-layer memory architecture invariants (`MEMORY_ARCHITECTURE.md` §9) |
+| `MEMORY-ARCH` | structural | `scripts/check_memory_architecture.sh` | the durable 4-layer memory architecture, activation-boundary, and task-status-consistent clean-handoff invariants (`MEMORY_ARCHITECTURE.md` §9) |
 | `KNOWLEDGE-MAP` | structural | `knowledge-map/scripts/check_knowledge_map.sh` | the derived Knowledge Map is in sync with its fact sources |
 | `TASK-TREE-METADATA` | structural | `scripts/check_task_tree_metadata.sh` | completed task trees do not advertise live `Current Frontier` rows; pending nodes do not claim false activation; partitioned trees preserve exact source coverage, immutable history, current digests, unique stable IDs, bounded lookup, and collection/member ceilings; checker-owned closed-capability markers remain in the stable task-index section with a complete consumer census and frontier-rewrite mutation proof |
 | `TASK-ACCEPTANCE` | evidence | `scripts/check_diagnosis_evidence.sh` | staged governed code/spec/test/tooling changes carry a task-tree acceptance checklist with LinkedSpec-tool evidence signatures |

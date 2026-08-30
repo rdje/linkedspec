@@ -2,22 +2,25 @@
 
 ## Current Activity
 
-- Task-index governance repair `.22` inventories 8 checker-owned closed-capability families, 12 exact markers, and
-  15 consumers in one sentinel-delimited stable section outside mutable active-frontier rows.
-- The existing task metadata doctrine runs four mutations proving arbitrary active-row replacement is safe while
-  stable-marker deletion or relocation fails; repeated-action history no longer burdens bounded `MEMORY.md`.
+- Continuity correction `.22.1` closes the clean pushed `.22` resume-pointer contradiction with one task-status
+  checker composed through the existing memory doctrine and canonical gate.
+- Three active/completed/idle handoff twins pass; six mutations reject stale landing state, status contradiction,
+  idle in-flight work, and a referenced ambiguous task definition.
 
 ## Latest Completed Slice
 
-- `.22` governs stable task-index closeout markers and removes historical handoff coupling from overwrite-only
-  memory without changing parser, compiler, runtime, `.spec`, generated-format, capability, or public behavior.
+- `.22.1` repairs the bounded clean handoff, advances tool-storage truth to 35 Python entrypoints, and changes no
+  parser, compiler, runtime, `.spec`, generated format, capability, or public API behavior.
 
 ## Next Action
 
-- Run `.22` exact staged canonical signoff, commit and push the clean leaf, then select the next roadmap-aligned
-  pending frontier.
+- From exact clean pushed `.22.1`, activate queued global task-definition audit `.22.2` before any new edit; repair
+  and guard duplicate current task IDs before resuming pending mdBook drift leaf `.23.1`.
 
 ## Recent Completions
+
+- `2026-08-29` — `.22.1` enforces task-status-consistent clean memory handoffs across four fields, three valid
+  active/clean/idle cases, and six rejected mutations; conflicting global task definitions are queued under `.22.2`.
 
 - `2026-08-29` — `.22` governs 8 closed-state families / 12 markers / 15 consumers in one stable task-index
   section, proves four frontier/deletion mutations, and removes repeated-action's bounded-memory handoff coupling.
@@ -69,9 +72,6 @@
 
 - `2026-08-27` — `.14.7.7.0` adds one shared stable Lua consumer at 153 GREEN/one exact marker/provenance RED per
   ABI, advances only its dormant lifecycle and neutral governance to 98, and leaves discovery and rollout pending.
-
-- `2026-08-27` — `.14.7.6.4` adds fresh Julia staged authority across four production routes, admits the stable
-  491/491 consumer once, advances only Julia rollout to 5/9 and governance to 97, and closes backend parent `.6`.
 
 ## History
 

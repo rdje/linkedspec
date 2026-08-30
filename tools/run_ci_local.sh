@@ -533,6 +533,7 @@ require_tracked_file t/phase0_regression.t
 require_tracked_file scripts/check_memory_architecture.sh
 require_tracked_file scripts/check_memory_commit_pointer.sh
 require_tracked_file tools/test_memory_commit_pointer.sh
+require_tracked_file tools/check_memory_handoff_state.py
 require_tracked_file scripts/check_doctrines.sh
 require_tracked_file scripts/check_diagnosis_evidence.sh
 require_tracked_file scripts/check_readme_stability.sh

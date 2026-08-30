@@ -9,6 +9,27 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-29 (`FUTURE-PARITY-BACKLOG.22.1` — clean handoff semantic enforcement): immediate post-push inspection
+  of `b024ea3e` found that activation ancestry was exact while all three operational fields were stale: `.22` was
+  still called staged, `next_action` still scheduled its commit/push, and `in_flight_uncommitted` still described
+  its candidate as uncommitted. The same shape existed in the preceding `.13.1` commit.
+- `COMMIT.md` already required the staged pointer to describe the intended clean post-landing state. The actual
+  gap was mechanical: `scripts/check_memory_architecture.sh` enforced only line capacity, activation ancestry, and
+  layer/bootstrap presence, so correct parent identity masked incorrect operational meaning.
+- `tools/check_memory_handoff_state.py` parses the four required operational fields and resolves their backticked
+  leaf IDs against current `docs/tasks/*.md` definitions. `latest_completed_leaf` must be complete. An idle pointer
+  must have no in-flight work. A completed active leaf may not retain pre-landing wording, nonempty in-flight work,
+  or a same-leaf next action that schedules staging, committing, landing, or pushing.
+- Three valid fixtures preserve legitimate in-progress, completed-clean-awaiting-selection, and idle-clean states.
+  Six mutations reject a completed staged description, repeated landing action, completed in-flight work, a non-
+  done latest completion, idle in-flight work, and a referenced ambiguous status. The checker runs via repository-
+  routed Python inside the existing memory doctrine, owns no temporary allocation, and advances only the Python
+  entrypoint census from 34 to 35.
+- Repository-wide status discovery deliberately tolerates unrelated duplicate definitions but marks conflicting
+  statuses ambiguous; validation fails if a pointer references such an ID. This boundary was required because
+  calibration exposed two current `RUST-FUNCTIONAL-PARITY.7` definitions (`active` then `done`) in one legacy
+  unpartitioned task file. `.22.2` now durably owns the global definition census/repair and metadata guard rather
+  than widening `.22.1` or silently classifying the contradiction away.
 - 2026-08-29 (`FUTURE-PARITY-BACKLOG.22` — stable task-index closeout ownership): consumer discovery finds 15
   code/JSON owners across logical-helper, root-selection, duplicate-slot, rule-local-cursor, repeated-action,
   callable-codeblock, capability-exclusion, and semantic-introspection contracts. Together they require 12 exact

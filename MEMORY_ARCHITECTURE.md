@@ -159,6 +159,11 @@ lazily — when a durable fact is established or archaeology is caught.
 - **Stable activation boundary** — `activation_commit` names the clean `HEAD` from
   which the leaf started. It equals `HEAD` before the leaf commit and `HEAD^1`
   afterward. The initial repository commit uses the explicit `root` sentinel.
+- **Task-state-consistent handoff** — `latest_completed_leaf` must resolve to a completed
+  task-tree leaf. If `active_work_unit` is `none`, no uncommitted work may remain; if it
+  names a completed leaf, the pointer may not describe that leaf as staged/uncommitted or
+  schedule its stage/commit/push again. The staged pointer describes the intended clean
+  post-landing state, not the preparation state that existed before staging.
 
 Existing bloat is **not deleted** — it is already preserved in git history. You simply
 stop carrying it forward.
@@ -243,12 +248,15 @@ first read routes the agent here. Keep each to one line + a pointer so they can'
 
 **E2 — One composed self-check (a single source of truth for the invariants).** The tracked
 `scripts/check_memory_architecture.sh` exits **nonzero** on any
-violation: `MEMORY.md` missing or over the line cap; a bootstrap file missing or not
+violation: `MEMORY.md` missing or over the line cap; its completed/active/in-flight/next-action
+fields contradicting current task-tree status; a bootstrap file missing or not
 pointing at `MEMORY_ARCHITECTURE.md` + `README.md`; `docs/decisions/` missing or its
 index out of sync with the record files. It composes the pure phase-aware
 `scripts/check_memory_commit_pointer.sh` owner: dirty preparation validates the worktree
 or index against current `HEAD`; clean committed state validates `HEAD:MEMORY.md`
-against `HEAD^1`. Everything below calls the composed check, so the rules cannot fork.
+against `HEAD^1`. `tools/check_memory_handoff_state.py` separately validates task-status
+semantics and runs active/clean twins plus six destructive mutations. Everything below calls
+the composed check, so the rules cannot fork.
 
 **E3 — Git hooks (fast local gate).** Tracked hooks under `.githooks/`, activated by
 `git config core.hooksPath .githooks` (ship a one-line installer and name it in the
@@ -287,6 +295,7 @@ if [ -f MEMORY.md ]; then
   n=$(wc -l < MEMORY.md)
   [ "$n" -le "$CAP" ] || note "MEMORY.md is $n lines (> cap $CAP) — demote content to task-trees/decisions"
 fi
+bash tools/run_python_project_data.sh tools/check_memory_handoff_state.py || fail=1
 for f in AGENTS.md CLAUDE.md; do
   [ -f "$f" ] || { note "$f bootstrap pointer is missing"; continue; }
   grep -q "MEMORY_ARCHITECTURE.md" "$f" || note "$f does not point at MEMORY_ARCHITECTURE.md"
@@ -340,6 +349,8 @@ three commands:
 - `MEMORY_ARCHITECTURE.md` — this standard.
 - `scripts/check_memory_architecture.sh` — the single source of truth for the invariants.
 - `scripts/check_memory_commit_pointer.sh` — the pure phase-aware commit-boundary owner.
+- `tools/check_memory_handoff_state.py` — task-status and clean-handoff semantic consistency.
+- `tools/run_python_project_data.sh` — repository-local Python runtime-data routing.
 - `.githooks/pre-commit`, `.githooks/post-commit`, `.githooks/commit-msg` — the local gate.
 
 **Add these one-line pointer files** (one per harness you might use; each just points at

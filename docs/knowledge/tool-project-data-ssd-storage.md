@@ -25,6 +25,7 @@ evidence_update_2026_08_17: "FUTURE-PARITY-BACKLOG.14.6.1 adds the repository-ro
 evidence_update_2026_08_25: "FUTURE-PARITY-BACKLOG.14.7.2 adds the repository-routed staged-AST enrichment checker. Canonical tool-storage proof freezes the resulting 32 Python tool entrypoints together with the unchanged three Python temporary owners and 14 shell allocator owners."
 evidence_update_2026_08_29: "FUTURE-PARITY-BACKLOG.15.2 adds the repository-routed standalone lifecycle-block checker and five-backend driver. Canonical attempt five catches the deliberately stale entrypoint census; focused proof then catches the new driver's managed mktemp owner. The Python checker owns no temporary allocator, while the shell driver is enrolled in the project-data routing oracle and allocates/removes its backend fixture workspace beneath validated repository-local TMPDIR. The storage oracle freezes 33 Python tool entrypoints, the unchanged three Python temporary owners, and 15 shell allocator owners."
 evidence_update_2026_08_29_task_index_markers: "FUTURE-PARITY-BACKLOG.22 adds tools/check_task_tree_closed_capability_markers.py through the repository-routed Python wrapper and existing TASK-TREE-METADATA doctrine. The checker allocates no temporary workspace. The storage oracle therefore advances only the Python tool-entrypoint census from 33 to 34; Python temporary owners remain three and shell allocator owners remain 15."
+evidence_update_2026_08_29_memory_handoff: "FUTURE-PARITY-BACKLOG.22.1 adds tools/check_memory_handoff_state.py through the same repository-routed wrapper and existing MEMORY-ARCH doctrine. Its mutation proof is in-memory and allocates no temporary workspace. The storage oracle therefore advances only the Python tool-entrypoint census from 34 to 35; Python temporary owners remain three and shell allocator owners remain 15."
 reverify: "bash tools/test_tool_project_data_storage.sh; bash knowledge-map/scripts/check_knowledge_map.sh; bash tools/run_mdbook_local.sh"
 ---
 
@@ -43,7 +44,7 @@ same root and verifies created output. Relative split, equals, and compact CLI f
 path that validation approved, independently of the caller's current working directory.
 
 `tools/test_tool_project_data_storage.sh` freezes three Python temporary owners, 15 actual shell allocator owners,
-and 34 Python checker entrypoints. It proves real bytecode, map, HTML, CLI workspace, TAP, and oracle capture paths
+and 35 Python checker entrypoints. It proves real bytecode, map, HTML, CLI workspace, TAP, and oracle capture paths
 use the repository device and hostile external destinations remain absent. Its deliberate cross-volume reads are
 limited to device and exact-path absence checks required for that rejection proof.
 

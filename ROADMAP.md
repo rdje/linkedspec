@@ -27,7 +27,9 @@ grammar, generated carriers, and public no-drift. The closed recurring authority
 `tools/check_standalone_lifecycle_block_five_backend.sh`.
 Task-index governance repair `.22` is complete across all 8 closed-capability marker families (12 exact markers / 15
 consumers), keeps them in one stable sentinel-delimited section outside mutable frontier rows, proves active-row
-rewrites cannot erase them, and removes repeated-action's historical handoff dependency on bounded `MEMORY.md`.
+rewrites cannot erase them, and removes repeated-action's historical handoff dependency on bounded `MEMORY.md`;
+post-closeout `.22.1` repairs and rejects completed pointers that still claim pre-landing work, while `.22.2`
+queues the independently exposed unpartitioned duplicate-task-definition audit before unrelated roadmap work.
 Capacity `.0` freezes, canonical `.1` implements,
 and focused `.2` independently recomposes one bounded `.14.6.5-.14.8` task member with every pressure ceiling and
 stable ID preserved. The storage prerequisite is composition-closed. Julia `.14.6.5` is split into historical

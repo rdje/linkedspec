@@ -902,6 +902,7 @@
 - ID: `FUTURE-PARITY-BACKLOG.22`
   Status: `done; canonical-signoff-complete` (2026-08-29; task-tree-first from exact clean pushed codegen-inspector
     closeout commit `65eb4aa46fcdec0ad50c6e0dfc048df70d7999ec`)
+  Children: `.22.1`, `.22.2`; `.22.1` complete and `.22.2` pending
   Goal: Make immutable cross-contract status markers survive mutable task-index frontier rewrites by construction.
   Activation: `2026-08-29` from exact clean pushed commit
     `65eb4aa46fcdec0ad50c6e0dfc048df70d7999ec`; the committed canonical receipt matches HEAD, the worktree and
@@ -960,6 +961,81 @@
   Verification: **PASS 2026-08-29.** The immutable status boundary is mechanically governed without changing any
     parser, compiler, runtime, `.spec`, serialized/generated format, backend capability, or public API behavior.
   Commit: `FUTURE-PARITY-BACKLOG.22 - govern stable task-index markers`
+
+- ID: `FUTURE-PARITY-BACKLOG.22.1`
+  Status: `done; canonical-signoff-complete` (2026-08-29; task-tree-first from exact clean pushed `.22` commit
+    `b024ea3ee45b30938979cc280f78cee18b1746f7`)
+  Goal: Repair and mechanically reject a completed clean handoff whose bounded resume pointer still claims that
+    the completed leaf is staged, uncommitted, or awaiting commit/push.
+  Depends on: `.22`
+  Verification tier: `canonical`
+  Focused checks: exact committed `MEMORY.md`/live-status reproduction; current memory-architecture and commit-
+    pointer authorities; post-landing consistency mutations; task/index, Knowledge Map, bounded histories, README,
+    doctrines, rendered mdBook if public continuity teaching moves, and `git diff --check`.
+  Canonical trigger: this defect changes the mechanically enforced layer-A memory architecture and commit/handoff
+    integrity boundary, so ADR `0073` requires an exact staged canonical receipt before commit and push.
+  Acceptance: Correct the `.22` post-landing `MEMORY.md` and live-status fields from exact Git truth; extend the
+    existing memory architecture owner so a task-tree leaf marked done cannot coexist with a same-leaf
+    `in_flight_uncommitted` claim or a next action that still says to stage/commit/push that leaf; lock valid active-
+    work and clean-handoff twins plus destructive mutations; synchronize task/index, Knowledge Map, continuity
+    docs, and verification evidence without changing parser/compiler/runtime/public behavior. Queue the separately
+    discovered global task-definition ambiguity for `.22.2` rather than widening this handoff leaf.
+  Finding: The immediate clean pushed audit of `b024ea3e` found `MEMORY.md` still naming `.22` as the active staged
+    canonical boundary, instructing the next session to commit/push it, and claiming its implemented candidate was
+    uncommitted. Git, the task owner, `LIVE_ACHIEVEMENT_STATUS.md`, and the promoted canonical receipt all prove the
+    leaf is already committed and pushed. Existing gates validate activation-commit ancestry and pointer shape but
+    not post-landing semantic consistency.
+  RED evidence: after the checker parser was calibrated against current task formatting, the unchanged pushed
+    pointer failed exactly with `completed active_work_unit 'FUTURE-PARITY-BACKLOG.22' still describes pre-landing
+    state`. The prior `.13.1` committed pointer independently carries the same staged/uncommitted/commit-push shape.
+  Implementation evidence: `tools/check_memory_handoff_state.py` parses four required fields, resolves only the
+    referenced current task statuses, requires the latest completion to be done, couples idle state to no in-flight
+    work, and rejects pre-landing active text, nonempty in-flight work, or same-leaf landing actions after completion.
+    Three active/completed/idle twins pass and six destructive mutations reject. It composes through `MEMORY-ARCH`,
+    canonical required-file discovery, and repository-routed Python; storage advances 34→35 entrypoints with three
+    Python and 15 shell temporary owners unchanged.
+  Calibration finding: global discovery exposed conflicting `active`/`done` definitions of
+    `RUST-FUNCTIONAL-PARITY.7` in one legacy unpartitioned task file. `.22.1` treats a referenced ambiguity as an
+    error but does not widen into global metadata repair; queued `.22.2` owns census, correction, and prevention.
+  Focused signoff evidence: the real repository and internal proof pass at four fields / three active-completed-idle
+    cases / six rejected mutations; the composed memory architecture, 11 activation-boundary fixtures, task
+    metadata, tool-storage census 35/3/15, Knowledge Map 914/7,772, both bounded histories, `git diff --check`,
+    all nine doctrines, and the inspected 15,864-KiB sole-facing mdBook render pass. Generated book output is removed.
+  Canonical signoff evidence: the exact staged candidate passes receipt-bound canonical local CI; the promoted
+    receipt and clean pre-push boundary own the atomic commit/push proof without any post-receipt tracked edit.
+
+  ### FUTURE-PARITY-BACKLOG.22.1 Acceptance Checklist
+
+  - [x] **REPRODUCE / ISSUE** — exact committed `b024ea3e` Git/task/receipt truth contradicts its three pre-landing
+    `MEMORY.md` operational fields; the checker produces the expected completed-active RED.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — `scripts/check_memory_architecture.sh` enforced size, ancestry, and layer
+    presence but never compared operational fields with current task status, despite the existing `COMMIT.md` rule.
+  - [x] **FIX** — add the four-field task-status checker, three valid twins, six rejection mutations, doctrine and
+    canonical required-file composition, exact live-pointer repair, and project-data census update.
+  - [x] **SEPARATE FINDING OWNED** — queue global duplicate task-definition audit `.22.2`; do not silently repair or
+    widen `.22.1` around the conflicting legacy `RUST-FUNCTIONAL-PARITY.7` definitions.
+  - [x] **ADDRESSED / NO REGRESSION** — focused checker/memory/pointer/task/storage/Knowledge/history/doctrine/book
+    proof and exact staged canonical CI pass.
+  - [x] **LOCKSTEP / HANDOFF** — task/index, roadmaps, architecture, workflow, Toolbox, Knowledge, bounded live docs,
+    changes/notes, and sole-facing mdBook agree; atomic commit/push is clean and `.22.2` is the next action.
+  Verification: **PASS 2026-08-29.** The layer-A pointer is task-status-consistent without changing parser,
+    compiler, runtime, `.spec`, serialized/generated format, backend capability, or public API behavior.
+  Commit: `FUTURE-PARITY-BACKLOG.22.1 - enforce clean memory handoffs`
+
+- ID: `FUTURE-PARITY-BACKLOG.22.2`
+  Status: `pending`
+  Goal: Audit and mechanically enforce unique current task definitions across partitioned and unpartitioned task
+    files after `.22.1` exposed a conflicting legacy duplicate outside the partition checker.
+  Depends on: `.22.1`
+  Acceptance: Use the current task metadata tools to census every exact `- ID:` definition; root-cause and repair
+    the two conflicting `RUST-FUNCTIONAL-PARITY.7` statuses without rewriting genuine history; extend the owning
+    metadata doctrine so future duplicate current definitions fail regardless of task storage form; synchronize
+    task/index, Knowledge Map, continuity docs, and focused/canonical evidence before resuming `.23.1`.
+  Finding: `docs/tasks/RUST-FUNCTIONAL-PARITY.md` currently defines `RUST-FUNCTIONAL-PARITY.7` twice, first as
+    `active` and then as `done`. `scripts/check_task_tree_partitions.pl` proves unique IDs only inside the
+    partitioned `FUTURE-PARITY-BACKLOG` collection, so the broader task metadata doctrine remains green.
+  Verification: `pending`
+  Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.23`
   Status: `pending`

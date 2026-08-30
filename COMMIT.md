@@ -159,7 +159,8 @@ so a bypass is visible workflow non-compliance, not an enforcement impossibility
 4. **Stage intended files only**
    - Stage source/test/docs for the slice.
    - Do not stage swap/temp files.
-   - Ensure the staged `MEMORY.md` is the exact handoff state; staged and unstaged pointer variants are rejected.
+   - Ensure the staged `MEMORY.md` is the exact clean handoff state; staged and unstaged pointer variants are
+     rejected, as are completed-leaf fields that still claim uncommitted work or schedule that leaf's landing.
    - For a canonical-tier leaf, stage the complete candidate with no unstaged tracked or untracked non-ignored
      slice inputs, then run `bash tools/run_ci_local.sh` so its receipt binds the exact staged candidate.
 

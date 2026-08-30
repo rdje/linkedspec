@@ -64,7 +64,9 @@ carriers, and public no-drift. Legacy plain carriers remain readable and inert. 
 
 Task-index governance repair `.22` is complete across all 8 closed-capability marker families (12 exact markers / 15
 consumers), keeps them in one stable sentinel-delimited section outside mutable frontier rows, proves active-row
-rewrites cannot erase them, and removes repeated-action's historical handoff dependency on bounded `MEMORY.md`.
+rewrites cannot erase them, and removes repeated-action's historical handoff dependency on bounded `MEMORY.md`;
+post-closeout `.22.1` repairs and rejects completed pointers that still claim pre-landing work, while `.22.2`
+queues the independently exposed unpartitioned duplicate-task-definition audit before unrelated roadmap work.
 
 Accepted long-horizon direction: ADR `0064` plus `SPEC-LANGUAGE-SELF-CONTAINMENT` define portable `.spec`
 problem-domain closure without ambient effects and an optional honest EBNF-like frontend over the same canonical

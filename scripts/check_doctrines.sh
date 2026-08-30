@@ -35,7 +35,7 @@ cd "$ROOT"
 # Each entry: "ID|what it proves|relative/path/to/check.sh"
 # Add a doctrine here AND a row in DOCTRINE_ENFORCEMENT.md §10.
 DOCTRINES=(
-  "MEMORY-ARCH|durable 4-layer memory architecture invariants (MEMORY_ARCHITECTURE.md §9)|scripts/check_memory_architecture.sh"
+  "MEMORY-ARCH|durable 4-layer memory, activation-boundary, and clean-handoff invariants (MEMORY_ARCHITECTURE.md §9)|scripts/check_memory_architecture.sh"
   "KNOWLEDGE-MAP|the derived Knowledge Map is in sync with its fact sources|knowledge-map/scripts/check_knowledge_map.sh"
   "TASK-TREE-METADATA|task metadata, partitions, and stable closed-capability anchors stay consistent|scripts/check_task_tree_metadata.sh"
   "TASK-ACCEPTANCE|staged governed changes carry a task-tree acceptance checklist with LinkedSpec-tool evidence|scripts/check_diagnosis_evidence.sh"

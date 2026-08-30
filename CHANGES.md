@@ -10,6 +10,25 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-29 — FUTURE-PARITY-BACKLOG.22.1 — enforce clean resume-pointer handoffs
+
+- Reproduced a committed-state contradiction at pushed commit `b024ea3e`: `MEMORY.md` had the correct activation
+  parent but still called completed `.22` staged/uncommitted and scheduled its commit/push again. The preceding
+  `.13.1` commit retained the same defect class.
+- Added `tools/check_memory_handoff_state.py` to resolve current `latest_completed_leaf` and `active_work_unit`
+  task-tree statuses, reject completed/idle in-flight contradictions, and reject future landing actions for a
+  completed active leaf.
+- Added three valid active/completed/idle handoff fixtures and six destructive mutations; composed them through
+  the existing `MEMORY-ARCH` doctrine and canonical gate required-file census.
+- Updated the memory architecture, commit workflow, task-tree guide, doctrine catalog, Toolbox, roadmaps, live
+  pointer/status, Knowledge Map, and sole-facing mdBook. The tool-storage census advances from 34 to 35 Python
+  entrypoints with temporary ownership unchanged at three Python and 15 shell allocators.
+- Checker calibration exposed conflicting current definitions of `RUST-FUNCTIONAL-PARITY.7` outside partitioned-
+  tree uniqueness coverage. That separate metadata defect is queued under `.22.2`; this leaf only rejects an
+  ambiguous status when a handoff pointer actually references it.
+- Focused proof, all nine doctrines, an inspected/removed 15,864-KiB mdBook render, and exact staged canonical CI
+  pass; the resulting clean pushed handoff names `.22.2` without retaining `.22.1` landing work.
+
 ## 2026-08-29 — FUTURE-PARITY-BACKLOG.22 — govern stable task-index closeout markers
 
 - Added one registry-backed task-index guard covering 8 closed-capability families, 12 exact markers, and all 15

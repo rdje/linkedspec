@@ -48,6 +48,17 @@ else
   note "scripts/check_memory_commit_pointer.sh is missing or not executable"
 fi
 
+# 2c) Completed task-tree state must not retain a pre-landing handoff narrative.
+if [[ -f tools/check_memory_handoff_state.py ]]; then
+  if bash tools/run_python_project_data.sh tools/check_memory_handoff_state.py; then
+    ok "MEMORY.md handoff semantics agree with current task-tree status"
+  else
+    fail=1
+  fi
+else
+  note "tools/check_memory_handoff_state.py is missing"
+fi
+
 # 3) Tool-neutral bootstrap pointers must exist and route to the standard (E1).
 for f in "${BOOTSTRAP_FILES[@]}"; do
   if [[ -f "${f}" ]]; then

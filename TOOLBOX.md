@@ -1614,6 +1614,9 @@ trap 'rm -rf -- "$diagnostic_root"' EXIT
   `bash scripts/check_memory_architecture.sh` · `bash knowledge-map/scripts/check_knowledge_map.sh` ·
   `bash scripts/check_document_history.sh` ·
   `bash scripts/check_diagnosis_evidence.sh` (staged task-acceptance evidence gate).
+- `bash tools/run_python_project_data.sh tools/check_memory_handoff_state.py` compares the bounded resume pointer
+  with current task-tree statuses. It accepts active and clean-handoff twins, rejects a non-done latest-completed
+  leaf, and prevents a completed/idle pointer from retaining staged, uncommitted, or future landing claims.
 - `bash scripts/check_project_data_storage_locality.sh` directly runs the `PROJECT-DATA-STORAGE` structural
   doctrine. It scans current code/config/test/tool and command-guidance surfaces, including Knowledge `reverify:`
   lines, including list-form reverification commands, with 28 embedded reject/accept cases. It rejects off-
