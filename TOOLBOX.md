@@ -669,6 +669,19 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
 - **PERL ADAPTER:** `PERL5LIB= prove -Iperl t/variadic_user_function_contract.t` consumes the same fixture through
   the spec-owned shell, staged/outward records, generated source, eager/fresh binding, diagnostics, and execution.
 
+### 4.8.1 `tools/check_public_aggregate_selector_surface.py` — selector-retirement public no-drift
+
+- **WHAT:** scans every root/component/mdBook public Markdown owner, classifies removed-selector mentions, rejects
+  current selector examples and stale rollout claims, and composes executable-source, five-backend retirement, and
+  capability admission authorities.
+- **WHEN:** changing aggregate-selector migration teaching, public Markdown inventory, bare-binding examples,
+  selector-retirement status, or the bounded historical-reference census.
+- **HOW:** `bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py`.
+- **OUTPUT:** 61 public files / 32 classified historical references / zero current examples, five exact ordered
+  migration contrasts, eleven rejected contrast mutations, zero executable positives, and capability admission.
+- **BOUNDARY:** the seven concrete retired spellings are allowed only inside the uniquely bounded mdBook migration
+  section. Executable `.spec` inputs and current examples remain selector-free.
+
 ### 4.9 `tools/check_semantic_introspection_contract.py` — neutral model/query oracle
 
 - **WHAT:** validates `linkedspec-semantic-model-v1`, `linkedspec-semantic-query-v1`, the owned backend-admission

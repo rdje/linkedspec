@@ -1,5 +1,20 @@
 # ARCHITECTURE STATE
 
+## Public migration examples preserve old-to-new semantic contrast
+
+`FUTURE-PARITY-BACKLOG.23.1` repairs a documentation-contract defect introduced by broad migration commit
+`ac217f6c`. Seven examples in one explicit aggregate-selector migration section had lost their historical side:
+two rejected-source examples displayed current bare syntax, and five mappings became identity rewrites. Current
+authoring examples elsewhere remain correctly selector-free.
+
+`tools/check_public_aggregate_selector_surface.py` now validates a uniquely bounded migration section, its exact
+two rejected examples, and five ordered non-identity mappings whose old side contains a removed one-identifier
+selector and whose replacement does not. Eleven in-memory mutations prove collapse, omission, wrong replacement,
+selector retention, and reordering fail independently of the public occurrence census. Current proof is 61 public
+files / 32 classified historical references / zero current examples, with zero executable selector positives.
+No parser, compiler, runtime, `.spec`, generated format, capability, or public API behavior changes; `.23.2` owns
+the remaining current-status reconciliation and parent closeout.
+
 ## Current task definitions are globally unique across every storage form
 
 `FUTURE-PARITY-BACKLOG.22.2` closes the metadata gap exposed by the clean-handoff checker. Exact current

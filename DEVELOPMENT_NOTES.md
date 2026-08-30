@@ -9,6 +9,20 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-30 (`FUTURE-PARITY-BACKLOG.23.1` — aggregate-selector migration-contrast repair): the pre-change public
+  checker passed 61 files / 25 classified references / zero current examples while the sole migration paragraph
+  taught two “retired” bare forms and five identity rewrites. Count/context validation could not express meaning.
+- `git show ac217f6c^:docs/linkedspec-book/src/dsl/values-containers-and-flow-helpers.md` recovers the exact seven
+  intended historical forms. The rest of that commit's selector replacements are legitimate current authoring and
+  remain bare; no broad revert is warranted.
+- The repair bounds the one migration section by unique start/end anchors, requires its exact two-form rejected
+  block and five ordered old-selector-to-bare-binding pairs, and separately rejects identity, selector-free old
+  sides, selector-retaining replacements, omission, wrong replacement, and reordering through eleven mutations.
+- Retired fixture spellings are assembled from split tokens inside the Python checker so the unchanged executable-
+  source scanner cannot mistake negative contract data for runnable `.spec` source. The final composed proof is
+  61/32/0 public, zero-positive/20-classified executable, five-backend rejection, and capability 90/0/0.
+- `.23.1` changes documentation semantics and governance only. `.23.2` retains every broader current-status claim
+  found by the startup review and the canonical parent-closeout boundary.
 - 2026-08-30 (`FUTURE-PARITY-BACKLOG.22.2` — repository-wide current task-ID uniqueness): the `.22.1` memory
   checker deliberately treated conflicting task statuses as ambiguous and queued the broader defect. The initial
   exact census found 1,719 definition lines / 1,718 unique IDs; only `RUST-FUNCTIONAL-PARITY.7` was duplicated.

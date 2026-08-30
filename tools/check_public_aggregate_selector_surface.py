@@ -12,9 +12,38 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_PUBLIC_FILE_COUNT = 61
-EXPECTED_CLASSIFIED_REFERENCE_COUNT = 25
+EXPECTED_CLASSIFIED_REFERENCE_COUNT = 32
+MIGRATION_GUIDE = "docs/linkedspec-book/src/dsl/values-containers-and-flow-helpers.md"
+MIGRATION_SECTION_START = (
+    "The retired aggregate-selector spellings are not current authoring:"
+)
+MIGRATION_SECTION_END = "source is already selector-free."
+# Construct retired spellings from fragments so the executable-source scanner does
+# not mistake this checker's negative fixtures for runnable positive `.spec` source.
+OLD_ARRAY_ITEMS = "array" + "(items)"
+OLD_HASH_META = "hash" + "(meta)"
+OLD_ARRAY_PARTS = "array" + "(parts)"
+RETIRED_ARRAY_EXAMPLE = f"set({OLD_ARRAY_ITEMS}, [value]);"
+RETIRED_HASH_EXAMPLE = f"set({OLD_HASH_META}, {{ field : value }});"
+EXPECTED_RETIRED_EXAMPLES = f"""```text
+{RETIRED_ARRAY_EXAMPLE}
+{RETIRED_HASH_EXAMPLE}
+```"""
+EXPECTED_MIGRATION_CONTRASTS = (
+    (OLD_ARRAY_ITEMS, "items"),
+    (f"copy({OLD_ARRAY_ITEMS})", "copy(items)"),
+    (f"set({OLD_ARRAY_ITEMS}, [])", "set(items, [])"),
+    (f"push({OLD_ARRAY_ITEMS}, value)", "push(items, value)"),
+    (
+        f"split({OLD_ARRAY_PARTS}, source, delimiter)",
+        "split(parts, source, delimiter)",
+    ),
+)
 EXACT_SELECTOR = re.compile(
     r"(?<![A-Za-z0-9_])(?:array|hash)\([ \t]*[A-Za-z_][A-Za-z0-9_]*[ \t]*\)"
+)
+MIGRATION_CONTRAST = re.compile(
+    r"`([^`\n]+)`[ \t]+becomes(?:[ \t]+|[ \t]*\n>[ \t]*)`([^`\n]+)`"
 )
 CODE_SELECTOR = re.compile(
     r"(?<![A-Za-z0-9_])(?:array|hash)[ \t]*\([ \t]*[A-Za-z_][A-Za-z0-9_]*[ \t]*\)"
@@ -35,6 +64,132 @@ def read(relative: str) -> str:
     if not path.is_file():
         fail(f"required file is missing: {relative}")
     return path.read_text(encoding="utf-8")
+
+
+class MigrationContrastError(ValueError):
+    """Raised when the public old-to-new selector migration contract drifts."""
+
+
+def migration_section_bounds(source: str) -> tuple[int, int]:
+    if source.count(MIGRATION_SECTION_START) != 1:
+        raise MigrationContrastError("migration section start is missing or duplicated")
+    if source.count(MIGRATION_SECTION_END) != 1:
+        raise MigrationContrastError("migration section end is missing or duplicated")
+    start = source.find(MIGRATION_SECTION_START)
+    end = source.find(MIGRATION_SECTION_END, start)
+    return start, end + len(MIGRATION_SECTION_END)
+
+
+def migration_section(source: str) -> str:
+    start, end = migration_section_bounds(source)
+    return source[start:end]
+
+
+def validate_migration_contrasts(source: str) -> None:
+    section = migration_section(source)
+    if section.count(EXPECTED_RETIRED_EXAMPLES) != 1:
+        raise MigrationContrastError(
+            "retired array/hash selector example block is missing, duplicated, or altered"
+        )
+
+    contrasts = tuple(MIGRATION_CONTRAST.findall(section))
+    if contrasts != EXPECTED_MIGRATION_CONTRASTS:
+        raise MigrationContrastError(
+            "ordered old-selector-to-bare-binding contrasts do not match the public contract: "
+            f"observed {contrasts!r}"
+        )
+    for old, new in contrasts:
+        if old == new:
+            raise MigrationContrastError(f"migration contrast collapsed to identity: {old!r}")
+        if not EXACT_SELECTOR.search(old):
+            raise MigrationContrastError(
+                f"migration old side has no removed aggregate selector: {old!r}"
+            )
+        if EXACT_SELECTOR.search(new):
+            raise MigrationContrastError(
+                f"migration replacement still contains an aggregate selector: {new!r}"
+            )
+
+
+def replace_once(source: str, old: str, new: str, mutation: str) -> str:
+    if source.count(old) != 1:
+        fail(f"invalid {mutation} self-test fixture: expected one {old!r}")
+    return source.replace(old, new, 1)
+
+
+def check_migration_contrast_mutations(source: str) -> int:
+    validate_migration_contrasts(source)
+    mutations = (
+        (
+            "collapse retired array example",
+            f"{RETIRED_ARRAY_EXAMPLE}\n{RETIRED_HASH_EXAMPLE}",
+            f"set(items, [value]);\n{RETIRED_HASH_EXAMPLE}",
+        ),
+        (
+            "collapse retired hash example",
+            f"{RETIRED_ARRAY_EXAMPLE}\n{RETIRED_HASH_EXAMPLE}",
+            f"{RETIRED_ARRAY_EXAMPLE}\nset(meta, {{ field : value }});",
+        ),
+        (
+            "collapse bare-read contrast",
+            f"`{OLD_ARRAY_ITEMS}` becomes `items`",
+            "`items` becomes `items`",
+        ),
+        (
+            "collapse copy contrast",
+            f"`copy({OLD_ARRAY_ITEMS})` becomes `copy(items)`",
+            "`copy(items)` becomes `copy(items)`",
+        ),
+        (
+            "collapse set contrast",
+            f"`set({OLD_ARRAY_ITEMS}, [])` becomes\n> `set(items, [])`",
+            "`set(items, [])` becomes\n> `set(items, [])`",
+        ),
+        (
+            "collapse push contrast",
+            f"`push({OLD_ARRAY_ITEMS}, value)` becomes `push(items, value)`",
+            "`push(items, value)` becomes `push(items, value)`",
+        ),
+        (
+            "collapse split contrast",
+            f"`split({OLD_ARRAY_PARTS}, source, delimiter)` becomes `split(parts, source, delimiter)`",
+            "`split(parts, source, delimiter)` becomes `split(parts, source, delimiter)`",
+        ),
+        (
+            "retain selector in replacement",
+            f"`{OLD_ARRAY_ITEMS}` becomes `items`",
+            f"`{OLD_ARRAY_ITEMS}` becomes `{OLD_ARRAY_ITEMS}`",
+        ),
+        (
+            "alter replacement binding",
+            f"`copy({OLD_ARRAY_ITEMS})` becomes `copy(items)`",
+            f"`copy({OLD_ARRAY_ITEMS})` becomes `copy(meta)`",
+        ),
+        (
+            "reorder contrasts",
+            (
+                f"`{OLD_ARRAY_ITEMS}` becomes `items`, "
+                f"`copy({OLD_ARRAY_ITEMS})` becomes `copy(items)`"
+            ),
+            (
+                f"`copy({OLD_ARRAY_ITEMS})` becomes `copy(items)`, "
+                f"`{OLD_ARRAY_ITEMS}` becomes `items`"
+            ),
+        ),
+        (
+            "omit split contrast",
+            f", and\n> `split({OLD_ARRAY_PARTS}, source, delimiter)` becomes `split(parts, source, delimiter)`",
+            "",
+        ),
+    )
+    for name, old, new in mutations:
+        mutated = replace_once(source, old, new, name)
+        try:
+            validate_migration_contrasts(mutated)
+        except MigrationContrastError:
+            continue
+        fail(f"migration contrast mutation unexpectedly passed: {name}")
+    return len(mutations)
 
 
 def public_markdown_paths() -> list[Path]:
@@ -74,6 +229,11 @@ def check_exact_references(paths: list[Path]) -> int:
     for path in paths:
         source = path.read_text(encoding="utf-8")
         relative = path.relative_to(ROOT)
+        explicit_migration_bounds = (
+            migration_section_bounds(source)
+            if relative.as_posix() == MIGRATION_GUIDE
+            else None
+        )
         locations = {(match.start(), match.end()) for match in EXACT_SELECTOR.finditer(source)}
         for code in re.finditer(r"`([^`\n]+)`", source):
             locations.update(
@@ -88,7 +248,11 @@ def check_exact_references(paths: list[Path]) -> int:
         for start, end in sorted(locations):
             reference_count += 1
             sentence = sentence_at(source, start, end)
-            if not NEGATIVE_CONTEXT.search(sentence):
+            explicit_migration_context = bool(
+                explicit_migration_bounds
+                and explicit_migration_bounds[0] <= start < explicit_migration_bounds[1]
+            )
+            if not NEGATIVE_CONTEXT.search(sentence) and not explicit_migration_context:
                 line = source.count("\n", 0, start) + 1
                 fail(
                     f"{relative}:{line} presents {source[start:end]!r} without explicit "
@@ -171,6 +335,13 @@ def run_check(command: list[str], label: str) -> str:
 
 
 def main() -> int:
+    migration_source = read(MIGRATION_GUIDE)
+    try:
+        validate_migration_contrasts(migration_source)
+    except MigrationContrastError as error:
+        fail(f"{MIGRATION_GUIDE}: {error}")
+    mutation_count = check_migration_contrast_mutations(migration_source)
+
     paths = public_markdown_paths()
     if len(paths) != EXPECTED_PUBLIC_FILE_COUNT:
         fail(
@@ -211,7 +382,8 @@ def main() -> int:
     print(
         "public-aggregate-selector-surface: OK "
         f"({len(paths)} public files; {reference_count} classified removed/history references; "
-        "0 current examples; capability admitted)"
+        f"0 current examples; {len(EXPECTED_MIGRATION_CONTRASTS)} migration contrasts; "
+        f"{mutation_count} contrast mutations; capability admitted)"
     )
     return 0
 

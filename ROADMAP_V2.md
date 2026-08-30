@@ -68,7 +68,9 @@ rewrites cannot erase them, and removes repeated-action's historical handoff dep
 post-closeout `.22.1` repairs and rejects completed pointers that still claim pre-landing work. `.22.2` repairs the
 sole conflicting legacy definition and makes all 1,718 exact current task IDs unique across partitioned and
 unpartitioned storage through ten mutations; only tracked-index-registered immutable history is excluded. The
-clean frontier resumes mdBook drift repair `.23.1`.
+mdBook drift lane `.23.1` restores seven mechanically collapsed aggregate-selector migration examples and guards
+the exact two rejected forms plus five ordered contrasts through eleven mutations at public census 61/32/0.
+Broader current-status reconciliation and parent closeout remain next under `.23.2`.
 
 Accepted long-horizon direction: ADR `0064` plus `SPEC-LANGUAGE-SELF-CONTAINMENT` define portable `.spec`
 problem-domain closure without ambient effects and an optional honest EBNF-like frontend over the same canonical

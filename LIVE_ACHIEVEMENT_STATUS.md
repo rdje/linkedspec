@@ -2,22 +2,25 @@
 
 ## Current Activity
 
-- Metadata correction `.22.2` closes the duplicate-current-definition gap across partitioned and unpartitioned task
-  storage through one all-current census composed with the existing task metadata doctrine.
-- The repaired repository has 1,718 definitions / 1,718 unique IDs across 96 current files; ten mutations guard
-  same-file, cross-file, cross-storage, exact-line, index-registry, and registered-history boundaries.
+- mdBook drift parent `.23` remains active after focused `.23.1` restores seven aggregate-selector migration
+  examples and guards its unique bounded section at 61 public files / 32 historical references / zero current.
+- `.23.2` owns the separate semantic-introspection, bare-edge, logical/truthiness, structured-control, and root-
+  marker current-status reconciliation plus canonical parent closeout.
 
 ## Latest Completed Slice
 
-- `.22.2` collapses the adjacent `RUST-FUNCTIONAL-PARITY.7` pair into one authoritative `done` parent and changes
-  no parser, compiler, runtime, `.spec`, generated format, capability, or API.
+- `.23.1` restores two exact rejected selector examples plus five ordered mappings and rejects eleven semantic
+  collapse/omission/replacement/reorder mutations without executable product behavior changes.
 
 ## Next Action
 
-- From exact clean pushed `.22.2`, activate queued mdBook contrast-repair leaf `.23.1` task-tree-first before any
-  new edit.
+- From exact clean `.23.1`, activate `.23.2` task-tree-first and reconcile its separately owned current-facing
+  claims before the designated canonical parent-closeout boundary.
 
 ## Recent Completions
+
+- `2026-08-30` — `.23.1` restores seven mechanically collapsed selector migration examples, requires five ordered
+  non-identity contrasts, and closes focused public no-drift at 61/32/0 plus eleven semantic mutations.
 
 - `2026-08-30` — `.22.2` makes 1,718 exact current task definitions globally unique across 96 files, repairs the
   sole legacy duplicate, and guards the boundary with ten mutations plus exact canonical proof.
@@ -67,11 +70,6 @@
   and typed order, fresh sibling contexts, detached atomic stitching, and all result/failure policies. Its shared
   consumer is 597 GREEN/one exact `.3` recursive-carrier RED per ABI; discovery, rollout, formats, public behavior,
   and neutral governance do not move. Mandatory change segment `4989` is finitely authorized by ADR `0093`.
-
-- `2026-08-27` — `.14.7.7.1` adds Lua's exclusive private staged marker, strict static/recognition closure, and
-  weak-side-table native-range-backed Unicode-scalar direct/ordered-derived provenance across four equal logical
-  routes on both ABIs. Its consumer is 392 GREEN/one exact `.2` authority RED; discovery, rollout, formats, public
-  behavior, and neutral governance do not move.
 
 ## History
 

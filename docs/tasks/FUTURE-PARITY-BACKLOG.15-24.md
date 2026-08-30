@@ -1094,7 +1094,7 @@
   Commit: `FUTURE-PARITY-BACKLOG.22.2 - enforce unique current task ids`
 
 - ID: `FUTURE-PARITY-BACKLOG.23`
-  Status: `pending`
+  Status: `active`
   Goal: Repair and mechanically guard mdBook current-state drift exposed by a complete startup review.
   Children: `.23.1`, `.23.2`
   Acceptance: Root-cause every recorded current-facing contradiction against executable contracts and git history;
@@ -1114,13 +1114,71 @@
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.23.1`
-  Status: `pending`
+  Status: `done; focused-signoff-complete` (2026-08-30; task-tree-first from exact clean pushed current-ID uniqueness commit
+    `be36e3dbda8e13b6aaa968735b2ac1ff04ed0be2`)
   Goal: Restore meaningful aggregate-selector migration examples and guard their semantic contrast.
   Depends on: `.23`
   Acceptance: Inventory every mechanically collapsed old-to-new selector example, restore exact rejected
     `array(IDENTIFIER)` / `hash(IDENTIFIER)` source only in explicit migration context, and extend the public
     checker with exact contrast mutations so another broad replacement cannot produce identity guidance while
     retaining the expected file/reference counts.
+  Verification tier: `focused` — this leaf repairs one already-rejected public migration teaching surface and its
+    direct no-drift checker; `.23.2` retains the broader current-status audit, parent closeout, and canonical boundary.
+  Focused checks: Knowledge Map and history retrieval; exact current example census and `ac217f6c` provenance;
+    checker RED mutations for lost old-selector/new-binding contrast; checker positive path; documentation-history,
+    README-routing, Knowledge Map, task/index, memory, all doctrines, mdBook build/render review, and whitespace.
+  Canonical trigger: `none` — escalate only if the repair changes executable parser/compiler/runtime behavior,
+    capability admission, shared infrastructure, or mandatory bounded-history capacity; otherwise `.23.2` owns the
+    designated exact staged canonical closeout.
+  Ownership: `.23.1` owns aggregate-selector migration examples and semantic-contrast governance only. `.23.2`
+    exclusively owns semantic-introspection, bare-edge, logical-helper/truthiness, structured-control, and root-
+    marker current-status reconciliation plus parent closure.
+
+  ### FUTURE-PARITY-BACKLOG.23.1 Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Activate from exact clean pushed `be36e3db`, zero-byte brief,
+    matching local/upstream HEAD, valid canonical receipt, no rendered-book output, and no background job.
+  - [x] **RETRIEVE / REPRODUCE** — Use Knowledge Map and indexed history before code archaeology; inventory every
+    collapsed migration contrast and reproduce why the current checker accepts identity guidance.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Prove the mechanical replacement and checker blind spot from exact source,
+    history, and mutation evidence; distinguish explicit rejected-syntax teaching from executable positive examples.
+  - [x] **FIX / GUARD** — Restore every intended old-selector-to-bare-binding contrast and make exact mutations fail
+    if old syntax, replacement syntax, pairing, classification, or expected public counts drift.
+  - [x] **NO REGRESSION / LOCKSTEP** — Pass focused checker/docs/book/doctrine proof; synchronize task/index,
+    Knowledge, bounded live docs, memory, and sole-facing mdBook without changing executable product behavior.
+  - [x] **COMMIT / CLEAN HANDOFF** — Commit with the leaf id, clear the brief, verify the exact receipt requirement,
+    leave the repository clean, and hand `.23.2` the next frontier without pushing before its canonical closeout.
+
+  Activation evidence: exact `git status --short --untracked-files=all` was empty at pushed
+  `be36e3dbda8e13b6aaa968735b2ac1ff04ed0be2`; local and upstream HEAD matched, `git_message_brief.txt` was zero
+  bytes, the committed canonical receipt matched, and no rendered book or background job remained. Parent `.23`
+  and `.23.1` were activated before implementation; the mutable partition index was refreshed immediately.
+
+  Audit/RED evidence: [[mdbook-mechanical-migration-contrast-drift]] was retrieved before code inspection, and
+  indexed live-history query preserved the earlier aggregate-selector census. Exact `git show`/parent-source
+  evidence assigns the collapse to `ac217f6c`: only one explicit migration section lost seven historical forms,
+  while the commit's other replacements correctly migrated current examples. The unchanged public checker then
+  passed the broken section at 61 files / 25 classified references / zero current examples, proving its count-and-
+  context model could not express semantic contrast.
+
+  Implementation evidence: the mdBook again shows exact rejected `set(array(items), ...)` /
+  `set(hash(meta), ...)` source and five ordered selector-to-bare mappings. The checker bounds that section by
+  unique anchors, exact-compares the rejected block and ordered pair tuple, requires distinct sides with a removed
+  selector only on the old side, and runs eleven collapse/omission/wrong-replacement/reorder mutations. Negative
+  fixture strings are constructed from split tokens so the unchanged executable-source scanner sees no positive
+  `.spec` source. The composed checker passes at public 61/32/0, executable 0/20, five-backend rejection, and
+  capability 90/0/0.
+
+  Focused signoff evidence: public selector proof, task metadata 596 stable IDs plus 1,718/1,718 globally unique
+  current IDs, Knowledge Map 915/7,778, memory architecture, both bounded-history controls, and whitespace pass.
+  The complete mdBook builds; rendered HTML inspection confirms both rejected examples, all five mappings, the
+  project-status section, and normal navigation/content markup before generated output removal. The first doctrine
+  run correctly rejected a redundant three-line CI-page addition at 2,051/2,048 lines; removing that duplicated
+  teaching restores the exact 2,048-line pressure boundary, after which all nine doctrines pass. No canonical
+  trigger is present under ADR `0073`; `.23.2` retains the designated parent-closeout boundary.
+  Verification: **PASS 2026-08-30.** Documentation semantics and no-drift governance change; executable product,
+  fixture, format, capability, and API bytes remain unchanged.
+  Commit: `FUTURE-PARITY-BACKLOG.23.1 - restore selector migration contrasts`
 
 - ID: `FUTURE-PARITY-BACKLOG.23.2`
   Status: `pending`

@@ -1,13 +1,13 @@
 # MEMORY
 
-- activation_commit: `e6cf4ba1b2bd84fc15edfd2d888c9c1a8c2a59d1` — exact clean pushed clean-handoff closeout from which
-  `FUTURE-PARITY-BACKLOG.22.2` is activated.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.22.2 - enforce unique current task ids`; 1,718 definitions are
-  globally unique across 96 current task files through ten mutations and exact canonical proof.
-- active_work_unit: none after the atomic `.22.2` closeout commit/push boundary.
-- next_action: from exact clean `.22.2`, activate queued mdBook contrast-repair leaf
-  `FUTURE-PARITY-BACKLOG.23.1` task-tree-first before any new code or documentation edit.
-- in_flight_uncommitted: none after the atomic `.22.2` commit; no background job or generated mdBook output remains.
+- activation_commit: `be36e3dbda8e13b6aaa968735b2ac1ff04ed0be2` — exact clean pushed current-ID uniqueness closeout from which
+  `FUTURE-PARITY-BACKLOG.23.1` is activated task-tree-first.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.23.1 - restore selector migration contrasts`; seven historical
+  examples and five-pair/eleven-mutation public governance are focused-signoff-complete at census 61/32/0.
+- active_work_unit: none after the atomic `.23.1` focused closeout commit; parent `.23` remains active.
+- next_action: from exact clean `.23.1`, activate `FUTURE-PARITY-BACKLOG.23.2` task-tree-first, reconcile the
+  separately owned current-status claims, and close parent `.23` at its designated canonical boundary.
+- in_flight_uncommitted: none after the atomic `.23.1` commit; no background job or generated mdBook output remains.
 - blockers: none.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -24,4 +24,4 @@
   README remains bounded; ordinary leaves use focused proof and designated infrastructure/public/push boundaries
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
 - latest_bootstrap_read: 2026-08-30 — README, roadmaps, codebase, mdBook, memory architecture, task-tree doctrine,
-  active `.22.2`, relevant Knowledge/decisions/history, Toolbox, commit workflow, and current Git state read.
+  active `.23.1`, relevant Knowledge/indexed history, Toolbox, commit workflow, and current Git state read.

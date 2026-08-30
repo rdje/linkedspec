@@ -10,6 +10,20 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-30 — FUTURE-PARITY-BACKLOG.23.1 — restore selector migration contrasts
+
+- Audited commit `ac217f6c` and the complete current public surface. Its broad selector migration correctly updated
+  current examples but also collapsed seven deliberately historical examples in one mdBook migration section: two
+  rejected source forms and five ordered old-to-new mappings.
+- Restored exact `array(items)` / `hash(meta)` rejected examples and the five selector-to-bare-binding contrasts;
+  all retired forms remain confined to explicit migration context and executable `.spec` inputs stay selector-free.
+- Extended `tools/check_public_aggregate_selector_surface.py` with a unique bounded migration section, exact
+  rejected-example block, five ordered non-identity pairs, selector-bearing old/selector-free new validation, and
+  eleven in-memory omission, collapse, replacement, and reorder mutations.
+- The composed authority passes at 61 public files / 32 classified historical references / zero current examples,
+  zero executable positives / 20 classified implementation sites, five backend rejection routes, and capability
+  90/0/0. No parser, compiler, runtime, fixture, generated format, capability row, or public API changes.
+
 ## 2026-08-30 — FUTURE-PARITY-BACKLOG.22.2 — enforce unique current task IDs
 
 - Added `scripts/check_task_tree_current_ids.pl`, which inventories every exact current task definition across

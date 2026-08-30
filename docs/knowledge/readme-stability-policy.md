@@ -57,8 +57,10 @@ Capability governance no longer requires changing status, counts, driver switche
 Six neutral public-contract checkers use their guide, capability, backend, roadmap, mdBook, ADR, and Knowledge
 owners instead. The aggregate-selector and uniform-binding public scanners still include README in broad
 forbidden-syntax discovery, but their required current anchors live elsewhere. Removing the routed tokens changes
-only exact documentation inventories: cursor is 74 files / 8 complete + 0 pending / 60 mutations and aggregate
-selector public proof is 59 files / 25 classified historical references / zero current examples.
+only exact documentation inventories: at that closeout, cursor was 74 files / 8 complete + 0 pending / 60
+mutations and aggregate-selector public proof was 59 files / 25 classified historical references / zero current
+examples. Later routed pages and `.23.1` migration-contrast repair advance only that selector inventory to
+61 files / 32 historical references / zero current examples.
 
 The repository currently has licenses for nested/vendor components but no declared project-level root license.
 Those component terms do not authorize an inferred LinkedSpec license. Proposed leaf

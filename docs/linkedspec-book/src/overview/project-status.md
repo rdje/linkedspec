@@ -1,5 +1,18 @@
 # Project Status
 
+## Aggregate-selector migration teaching is meaningful and guarded
+
+`FUTURE-PARITY-BACKLOG.23.1` repairs seven examples that commit `ac217f6c` mechanically collapsed while migrating
+current syntax. The explicit migration section again shows two rejected selector forms and five real old-to-new
+contrasts. Every executable `.spec` input and every current authoring example remains selector-free.
+
+The public no-drift checker now requires that unique bounded section, the exact rejected examples, and five ordered
+non-identity mappings whose old side contains a removed one-identifier selector and whose replacement does not.
+Eleven in-memory mutations cover collapse, omission, wrong replacements, selector retention, and reordering. The
+composed proof reports 61 public files / 32 classified historical references / zero current examples, zero
+executable positives, five backend rejection routes, and capability 90/0/0. This is documentation/governance only;
+the broader current-status audit and parent closeout remain owned by `.23.2`.
+
 ## Task metadata is globally unambiguous
 
 `FUTURE-PARITY-BACKLOG.22.2` closes a continuity defect in the repository's task records. The task metadata

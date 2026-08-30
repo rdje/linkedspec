@@ -151,8 +151,8 @@ set(meta, {});                      # replaces meta with an empty hash value
 The retired aggregate-selector spellings are not current authoring:
 
 ```text
-set(items, [value]);
-set(meta, { field : value });
+set(array(items), [value]);
+set(hash(meta), { field : value });
 ```
 
 No tracked `.spec` or executable embedded source uses those shapes. New source uses a bare binding for reads,
@@ -168,9 +168,9 @@ return(payload);
 > `aggregate_selector_removed`; one canonical no-drift gate locks all five boundaries, zero runtime selector
 > compatibility, and the admitted public surface. The
 > replacement is the bare typed binding:
-> `items` becomes `items`, `copy(items)` becomes `copy(items)`, `set(items, [])` becomes
-> `set(items, [])`, `push(items, value)` becomes `push(items, value)`, and
-> `split(parts, source, delimiter)` becomes `split(parts, source, delimiter)`. `set(name, value)` yields the
+> `array(items)` becomes `items`, `copy(array(items))` becomes `copy(items)`, `set(array(items), [])` becomes
+> `set(items, [])`, `push(array(items), value)` becomes `push(items, value)`, and
+> `split(array(parts), source, delimiter)` becomes `split(parts, source, delimiter)`. `set(name, value)` yields the
 > post-assignment typed value of `name`, so receiver methods can chain from it. If `value` was intended to
 > construct a one-element array rather than select storage, write `[value]`. Zero/multi/quoted/computed
 > `array(...)` and valid key/value `hash(...)` calls remain ordinary constructors in contract version 1. The old
