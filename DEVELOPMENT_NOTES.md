@@ -9,6 +9,21 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-30 (`FUTURE-PARITY-BACKLOG.19.1.1` — future nested-write contract): ADR/Knowledge retrieval and
+  `LinkedSpec::call_spec_handler_subst` preceded implementation. Perl proves quoted segments currently lower as
+  keys while every computed segment lowers through integer-index coercion; Rust/Dart/Julia/Lua retain the same
+  authored key/index split. Evaluated dynamic strings therefore require the future unified segment model.
+- Contract review caught two draft inconsistencies before claims landed: declared AST `source`/`expression` fields
+  were absent from fixtures, and syntax diagnostics had codes but no exact spans. The final checker requires the
+  complete nested expression nodes, assignment source, typed parser diagnostics, and non-ASCII scalar offsets.
+- Segments evaluate once left-to-right, then RHS once. The structural operation snapshots afterward, so completed
+  same-binding expression effects compose on success and survive later structural failure; only partial path
+  building is atomic/isolated. Bound null is present, arrays remain dense, and all aggregate values detach.
+- Exact current proof stays non-vivifying: Perl direct toolbox projection/runtime, Rust 3/3, Dart 1/1, Julia 1/1,
+  and direct nested-write scenarios on both Lua ABIs pass without backend source changes.
+- The monolithic PUC harness separately fails only its old `/skip/ { next() }` fixture. AST/runtime probes show the
+  now-ratified bare block executes as entry lifecycle `I` at cursor zero; before `.15.2` it was inert, so the test
+  never exercised `next()`. Queued `.15.3` owns a valid action-edge rewrite and both complete ABI harnesses.
 - 2026-08-30 (`FUTURE-PARITY-BACKLOG.23.2` — mdBook current-state reconciliation): Knowledge Map and indexed
   live-history retrieval preceded source archaeology for semantic introspection, rule-local cursor/bare edges,
   standalone lifecycle shorthand, logical helpers/truthiness, structured controls, root selection, and adjacent

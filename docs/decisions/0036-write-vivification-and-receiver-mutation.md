@@ -66,8 +66,30 @@ Julia, and Lua use identifier-only callees; Rust's `parse_name` stops before `!`
     names, return contracts, callback fields, root-kind recursion, and scoped-value semantics. No short aliases are
     introduced.
 11. **Implement only through the universal contract.** Neutral executable contracts land first, followed by
-    Perl, Rust, Dart, Julia, and Lua/two-ABI slices and one final public/capability/no-drift admission. Behavior
-    implementation waits for complete current-backend parity so the active Lua parity target does not move.
+   Perl, Rust, Dart, Julia, and Lua/two-ABI slices and one final public/capability/no-drift admission. Behavior
+   implementation waits for complete current-backend parity so the active Lua parity target does not move.
+
+## Neutral nested-write contract freeze (2026-08-30)
+
+Leaf `.19.1.1` resolves the nested-write details delegated by decision item 5 without admitting a backend:
+
+- every one-or-more-segment authored assignment uses one neutral `assign_nested_access` node; each
+  `path_segment` contains the ordinary typed expression rather than a parser-selected key/index tag;
+- an evaluated string selects harray and an evaluated nonnegative integer selects array, including for dynamic
+  expressions; quoted numeric strings remain harray keys;
+- segments evaluate once left to right, then the RHS evaluates once. Expression failures propagate unchanged.
+  Structural validation begins only afterward and diagnoses the first invalid selector before the first
+  kind-conflict or dense-array gap;
+- a same-binding side effect completed by a segment or RHS is ordinary expression state, not a partial path
+  commit. The outer operation snapshots that post-evaluation binding, composes on it after success, and leaves it
+  intact after a later structural failure. The isolated structural build itself still commits only once;
+- syntax and structural diagnostics carry exact authored half-open Unicode-scalar spans. Structural identities are
+  `nested_write_segment_invalid`, `nested_write_kind_conflict`, and `nested_write_array_gap`; and
+- the committed binding, returned updated root, initial aggregate, and aggregate RHS remain detached values.
+
+The executable owner is `capability_conformance/write_vivification_contract.json`, checked by
+`tools/check_write_vivification_contract.py`. Current Perl/Rust/Dart/Julia/Lua lowering remains unchanged and
+non-vivifying; backend implementation begins only in `.19.2` after `.19.1.2-.3` complete the neutral parent.
 
 ## Consequences
 
@@ -87,6 +109,7 @@ Julia, and Lua use identifier-only callees; Rust's `parse_name` stops before `!`
 ## Links
 
 - Owning tree: `docs/tasks/FUTURE-PARITY-BACKLOG.md` `.19`
+- Frozen nested-write contract: `docs/knowledge/write-vivification-neutral-contract.md`
 - Planning leaf: `FUTURE-PARITY-BACKLOG.19.0`
 - Authoring quality: ADR `0035`
 - Uniform binding: `docs/knowledge/uniform-binding-neutral-contract.md`

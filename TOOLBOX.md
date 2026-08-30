@@ -682,6 +682,21 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
 - **BOUNDARY:** the seven concrete retired spellings are allowed only inside the uniquely bounded mdBook migration
   section. Executable `.spec` inputs and current examples remain selector-free.
 
+### 4.8.2 `tools/check_write_vivification_contract.py` — future neutral nested-write oracle
+
+- **WHAT:** validates `linkedspec-write-vivification-v1`: one unified expression-segment AST, exact syntax and
+  Unicode-scalar spans, evaluated string/integer kind selection, write-only missing-container creation, dense
+  arrays, segment/RHS order, expression-failure propagation, post-evaluation same-binding snapshots, isolated
+  atomic commit, detached results, structural diagnostics, and non-creating reads.
+- **WHEN:** designing or implementing nested assignment/vivification in any backend. This checker freezes future
+  semantics only; never infer current backend admission from its success. Before changing lowering, directly probe
+  a quoted segment and a computed string segment: current implementations statically split key versus index and
+  therefore cannot yet satisfy the evaluated-kind contract.
+- **HOW:** `bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py`.
+- **OUTPUT:** `write-vivification contract: 5 valid syntax, 7 invalid syntax, 11 success, 16 structural failures, 3 evaluation failures, 3 read exclusions, 105 rejected mutations; future behavior remains unadmitted`.
+- **CURRENT BOUNDARY:** use the existing `terse_11_4` backend tests/corpus case for unchanged non-vivification;
+  Perl's `LinkedSpec::call_spec_handler_subst` and `return_descriptor` show the current static segment split.
+
 ### 4.9 `tools/check_semantic_introspection_contract.py` — neutral model/query oracle
 
 - **WHAT:** validates `linkedspec-semantic-model-v1`, `linkedspec-semantic-query-v1`, the owned backend-admission

@@ -13,6 +13,24 @@ Its six runtime routes plus the permanent self-hosted grammar run through
 `bash tools/check_standalone_lifecycle_block_five_backend.sh`. The resulting 18-row capability census is
 90 pass / 0 partial / 0 gap.
 
+## Future write vivification
+
+`write_vivification_contract.json` freezes the backend-neutral nested-write direction from ADR `0036` without
+admitting current behavior. Ordinary `IDENTIFIER[SEGMENT]... = VALUE` syntax lowers to one future
+`assign_nested_access` shape whose segment kind comes from the evaluated expression: string selects harray and
+nonnegative integer selects dense array. The fixture fixes missing-container creation, absent-versus-null,
+left-to-right segments then RHS, same-binding side effects before the isolated snapshot, copy-on-write commit,
+detached results, read exclusions, and exact Unicode-scalar syntax/structural diagnostics. Run:
+
+```bash
+bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py
+```
+
+The checker validates five AST cases, seven syntax failures, 11 successful writes, 16 structural failures, three
+expression failures, three non-creating reads, detachment, and 105 rejected mutations. Perl, Rust, Dart, Julia,
+PUC Lua, and LuaJIT remain non-vivifying until their separately owned implementation/admission leaves; this
+artifact does not change the capability census.
+
 `mcp_semantic_transport_contract.json` (`linkedspec-mcp-transport-v1`) is the single backend-neutral machine
 contract for LinkedSpec's modern MCP `2026-07-28` stdio projection. Its root-relative artifact inventory pins the
 closed JSON Schema 2020-12 envelope/tool definitions, four semantic payloads, 35 canonical LF-framed JSON-RPC

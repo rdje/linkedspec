@@ -61,11 +61,36 @@ But concision must not hide what is happening. The project direction is toward:
 The same principle governs two planned mutation extensions. They are accepted directions, not current syntax or
 runtime behavior.
 
-First, nested assignment may eventually create missing path containers, but only on the write path. Reads will
-remain free of side effects. The next evaluated path segment determines the missing kind: a nonnegative integer
-selects an array and a string selects a harray. Existing wrong-kind values will never be coerced, and arrays remain
-dense—an out-of-range gap will not invent null leaves. Validation and the right-hand side complete before an
-isolated updated root commits.
+First, the future-neutral nested-write contract now fixes how assignment may eventually create missing path
+containers, but it does not enable that behavior on a backend. The authored form stays ordinary assignment:
+
+```text
+document["sections"][0]["title"] = title
+document[segment_name][position] = make_value()
+```
+
+Every bracket remains an ordinary typed expression. Its evaluated value—not whether the source was a literal or
+variable—selects the path kind: string means harray and nonnegative integer means zero-based array. Thus a dynamic
+string can select an harray, a dynamic integer can select an array, and quoted `"0"` remains an harray key. A
+boolean, null, negative/fractional number, aggregate, or codeblock cannot select a path kind.
+
+One and many segments share one future `assign_nested_access` ActionIR shape; every segment retains its exact
+expression and authored half-open Unicode-scalar span. Segments evaluate once from left to right, then the RHS
+evaluates once. Only afterward does isolated structural validation begin. An absent root is chosen by the first
+segment; a missing intermediate is chosen by the next one. Existing wrong-kind values are never coerced, and arrays
+remain dense: an existing index may be replaced and index `length` may append, while a larger gap fails without
+inventing null leaves.
+
+Expression failures propagate unchanged. Completed expression side effects are ordinary state: if a segment or
+RHS updates the same root binding, the outer write snapshots that post-evaluation value. Success composes the path
+write onto it; a later structural failure preserves the completed expression side effect but cannot leave a
+partial path build. Successful binding/result/RHS/initial aggregates are detached. Exact syntax and structural
+diagnostics identify the authored segment; structural codes distinguish invalid selector, kind conflict, and
+dense-array gap.
+
+Reads remain pure and never create a root, child, cache, or other state. Temporary/literal/helper/property roots,
+an invented `vivify(...)` helper, and an invented `:=` operator are excluded. Current backends still require every
+intermediate container to exist; the neutral contract is implementation input, not a current-feature claim.
 
 Second, LinkedSpec reserves a Ruby-style trailing `!` for a method that genuinely updates its receiver. The only
 version-1 candidate is:

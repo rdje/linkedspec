@@ -2855,6 +2855,15 @@ This document is the current high-level technical reading of the project shape. 
   paths, and does not make `value` a writable alias. No other bang methods/identifiers are adopted. Current source
   and focused Perl/Rust/Dart/Julia/Lua proof confirm intermediate non-vivification and bang-invalid grammar;
   `.19.1-.19.7` are dependency-gated behind complete current parity; Lua `.4.3.7.6` was the then-active frontier.
+- `2026-08-30` refresh: `.19.1.1` freezes the future-only `linkedspec-write-vivification-v1` semantic authority.
+  One `assign_nested_access` node owns every one-or-more-segment write; each `path_segment` retains its typed
+  expression and authored Unicode-scalar span, and runtime string/integer values select harray/array. Segments then
+  RHS evaluate before isolated validation; expression failures propagate unchanged; completed same-binding side
+  effects settle before the structural snapshot; success commits one dense copy and returns a detached root;
+  invalid selector/kind conflict/array gap are distinct typed diagnostics; reads never create. The independent
+  checker validates 5/7/11/16/3/3 cases plus detachment and rejects 105 mutations. Exact Perl/Rust/Dart/Julia/PUC-
+  Lua/LuaJIT boundary probes remain non-vivifying, so no current parser/compiler/runtime/capability state moves.
+  `.19.1.2` owns the separate `map_leaves!` neutral contract before backend work.
 - `2026-07-15` refresh: ADR `0035` makes terse, readable, and highly expressive authoring a hard constraint on
   future universal `.spec` evolution. Terseness removes redundant ceremony rather than semantic signal;
   readability keeps structure, value flow, mutation, scope, recovery, and typed diagnostics locally predictable;

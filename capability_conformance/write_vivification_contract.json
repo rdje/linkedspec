@@ -1,0 +1,551 @@
+{
+  "format": 1,
+  "contract_id": "linkedspec-write-vivification-v1",
+  "status": "future-neutral-contract; no backend behavior admitted",
+  "policy": {
+    "write_only": "only an authored assignment lvalue may request path creation; reads and other value observations never create state",
+    "addressable_root": "the root is one bare non-reserved uniform-binding identifier, not a literal, temporary, helper result, nested receiver, property, rule, or runtime pseudo-binding",
+    "root_creation": "an absent binding is created as the container selected by the first evaluated segment; a present null or other scalar is not absence",
+    "intermediate_creation": "a missing nonfinal child is created as the container selected by the next evaluated segment",
+    "segment_selection": "an evaluated string selects an harray key and an evaluated nonnegative integer selects a zero-based array index; spelling does not select the kind and a quoted numeric string remains a key",
+    "invalid_segments": "boolean, null, negative integer, fractional number, array, harray, and codeblock segment values are invalid typed path selectors",
+    "existing_values": "existing values are never coerced or overwritten to manufacture a required container kind",
+    "dense_arrays": "an array write replaces an existing index or appends at exactly length; an index greater than length is a typed gap failure and no filler values are invented",
+    "evaluation_order": "segment expressions evaluate left to right exactly once, then the RHS evaluates exactly once, then segment-kind and structural validation begin",
+    "evaluation_failure": "an expression evaluation failure stops later evaluation and propagates its original diagnostic without a nested-write wrapper",
+    "post_evaluation_snapshot": "the isolated structural write snapshots the root after segment and RHS evaluation, so completed same-binding expression side effects are visible and are not rolled back by a later structural failure",
+    "atomic_commit": "validation and building mutate only an isolated root copy; structural success commits once while structural failure preserves the post-evaluation binding state",
+    "result": "success returns a detached updated-root value; structural failure returns the typed diagnostic and no partial root",
+    "detachment": "the committed binding, returned result, initial input tree, and aggregate RHS are mutually detached values rather than host-language aliases",
+    "single_segment": "one-segment and multi-segment bracket assignments use the same neutral AST and runtime contract",
+    "current_boundary": "this contract does not admit current backend behavior; Perl, Rust, Dart, Julia, and Lua remain non-vivifying until their separately owned implementation leaves"
+  },
+  "syntax": {
+    "identifier_pattern": "[A-Za-z_][A-Za-z0-9_]*",
+    "assignment": "IDENTIFIER[SEGMENT]... = VALUE",
+    "minimum_segments": 1,
+    "segment": "one existing ActionIR value expression between balanced square brackets",
+    "root": "one bare addressable uniform-binding identifier",
+    "reserved_root_names": ["CAPTURE", "IINDEX", "IMATCH", "IMATCH_HASH", "IMATCH_LIST", "IPOS", "LINDEX", "LMATCH", "LMATCH_HASH", "LMATCH_LIST", "LSPOS", "STRING", "descr", "false", "info", "minfo", "null", "retv", "true", "undef"],
+    "insignificant_whitespace": "whitespace may surround the root, brackets, segment expressions, assignment token, and RHS without changing ownership or spans",
+    "no_wrapper": "no vivify helper or alternate assignment token exists",
+    "excluded_roots": ["literal", "temporary", "helper_result", "nested_access", "property", "rule", "runtime_pseudo_binding"]
+  },
+  "ast": {
+    "node_kind": "assign_nested_access",
+    "fields": ["kind", "source", "source_span", "base", "segments", "value"],
+    "base": "the bare binding identifier string",
+    "segment_node_kind": "path_segment",
+    "segment_fields": ["kind", "source", "source_span", "expression"],
+    "segment_kind": "expression",
+    "segment_semantics": "all segment expressions retain their ordinary typed ActionIR; no parser-time key/index tag decides runtime behavior",
+    "value": "one ordinary typed ActionIR value expression",
+    "source_span": "half-open Unicode-scalar offsets over authored source; the assignment span covers the complete lvalue and RHS while each segment span excludes its brackets",
+    "one_segment_node": "assign_nested_access",
+    "forbidden_authored_assignment_nodes": ["assign_hash_index", "host_lvalue", "indexed_var_assignment"]
+  },
+  "diagnostics": {
+    "syntax": {
+      "stage": "action_parse",
+      "codes": ["nested_write_root_not_addressable", "nested_write_root_reserved", "nested_write_segment_empty", "nested_write_segment_unclosed", "nested_write_segment_expression_invalid"],
+      "fields": ["code", "stage", "source_span", "message"]
+    },
+    "invalid_segment": {
+      "code": "nested_write_segment_invalid",
+      "fields": ["code", "operation", "binding", "segment_index", "path", "actual_kind", "reason", "source_span", "message"]
+    },
+    "kind_conflict": {
+      "code": "nested_write_kind_conflict",
+      "fields": ["code", "operation", "binding", "segment_index", "path", "expected_kind", "actual_kind", "source_span", "message"]
+    },
+    "array_gap": {
+      "code": "nested_write_array_gap",
+      "fields": ["code", "operation", "binding", "segment_index", "path", "index", "length", "source_span", "message"]
+    },
+    "operation": "nested_write_vivification",
+    "path": "the detached evaluated valid-segment prefix before the failing segment",
+    "source_span": "the authored offending segment expression span as a half-open Unicode-scalar typed span",
+    "precedence": ["expression_evaluation_failure", "first_invalid_segment", "first_structural_kind_conflict_or_gap"]
+  },
+  "valid_syntax_cases": [
+    {
+      "id": "single_quoted_key_uses_unified_node",
+      "source": "document[\"title\"] = title",
+      "expected_ast": {
+        "kind": "assign_nested_access",
+        "source": "document[\"title\"] = title",
+        "source_span": {"start": 0, "end": 25},
+        "base": "document",
+        "segments": [
+          {"kind": "path_segment", "source": "\"title\"", "source_span": {"start": 9, "end": 16}, "expression": {"kind": "string_literal", "source": "\"title\"", "source_span": {"start": 9, "end": 16}}}
+        ],
+        "value": {"kind": "identifier", "source": "title", "source_span": {"start": 20, "end": 25}}
+      }
+    },
+    {
+      "id": "mixed_literal_path",
+      "source": "document[\"sections\"][0][\"title\"] = title",
+      "expected_ast": {
+        "kind": "assign_nested_access",
+        "source": "document[\"sections\"][0][\"title\"] = title",
+        "source_span": {"start": 0, "end": 40},
+        "base": "document",
+        "segments": [
+          {"kind": "path_segment", "source": "\"sections\"", "source_span": {"start": 9, "end": 19}, "expression": {"kind": "string_literal", "source": "\"sections\"", "source_span": {"start": 9, "end": 19}}},
+          {"kind": "path_segment", "source": "0", "source_span": {"start": 21, "end": 22}, "expression": {"kind": "integer_literal", "source": "0", "source_span": {"start": 21, "end": 22}}},
+          {"kind": "path_segment", "source": "\"title\"", "source_span": {"start": 24, "end": 31}, "expression": {"kind": "string_literal", "source": "\"title\"", "source_span": {"start": 24, "end": 31}}}
+        ],
+        "value": {"kind": "identifier", "source": "title", "source_span": {"start": 35, "end": 40}}
+      }
+    },
+    {
+      "id": "dynamic_segments_preserve_expressions",
+      "source": "document[segment_name][position] = make_value()",
+      "expected_ast": {
+        "kind": "assign_nested_access",
+        "source": "document[segment_name][position] = make_value()",
+        "source_span": {"start": 0, "end": 47},
+        "base": "document",
+        "segments": [
+          {"kind": "path_segment", "source": "segment_name", "source_span": {"start": 9, "end": 21}, "expression": {"kind": "identifier", "source": "segment_name", "source_span": {"start": 9, "end": 21}}},
+          {"kind": "path_segment", "source": "position", "source_span": {"start": 23, "end": 31}, "expression": {"kind": "identifier", "source": "position", "source_span": {"start": 23, "end": 31}}}
+        ],
+        "value": {"kind": "call", "source": "make_value()", "source_span": {"start": 35, "end": 47}}
+      }
+    },
+    {
+      "id": "quoted_numeric_string_is_expression",
+      "source": "document[\"0\"] = value",
+      "expected_ast": {
+        "kind": "assign_nested_access",
+        "source": "document[\"0\"] = value",
+        "source_span": {"start": 0, "end": 21},
+        "base": "document",
+        "segments": [
+          {"kind": "path_segment", "source": "\"0\"", "source_span": {"start": 9, "end": 12}, "expression": {"kind": "string_literal", "source": "\"0\"", "source_span": {"start": 9, "end": 12}}}
+        ],
+        "value": {"kind": "identifier", "source": "value", "source_span": {"start": 16, "end": 21}}
+      }
+    },
+    {
+      "id": "unicode_scalar_ast_spans",
+      "source": "document[\"é\"] = \"值\"",
+      "expected_ast": {
+        "kind": "assign_nested_access",
+        "source": "document[\"é\"] = \"值\"",
+        "source_span": {"start": 0, "end": 19},
+        "base": "document",
+        "segments": [
+          {"kind": "path_segment", "source": "\"é\"", "source_span": {"start": 9, "end": 12}, "expression": {"kind": "string_literal", "source": "\"é\"", "source_span": {"start": 9, "end": 12}}}
+        ],
+        "value": {"kind": "string_literal", "source": "\"值\"", "source_span": {"start": 16, "end": 19}}
+      }
+    }
+  ],
+  "invalid_syntax_cases": [
+    {"id": "temporary_root", "source": "make_document()[\"x\"] = value", "diagnostic": {"code": "nested_write_root_not_addressable", "stage": "action_parse", "source_span": {"source_id": "contract:temporary_root", "start": 0, "end": 15, "unit": "unicode_scalar", "provenance": "authored"}, "message": "nested write root must remain a bare identifier"}},
+    {"id": "literal_root", "source": "{}[\"x\"] = value", "diagnostic": {"code": "nested_write_root_not_addressable", "stage": "action_parse", "source_span": {"source_id": "contract:literal_root", "start": 0, "end": 2, "unit": "unicode_scalar", "provenance": "authored"}, "message": "nested write root must be a bare identifier"}},
+    {"id": "empty_segment", "source": "document[] = value", "diagnostic": {"code": "nested_write_segment_empty", "stage": "action_parse", "source_span": {"source_id": "contract:empty_segment", "start": 8, "end": 10, "unit": "unicode_scalar", "provenance": "authored"}, "message": "nested write segment may not be empty"}},
+    {"id": "unclosed_segment", "source": "document[\"x\" = value", "diagnostic": {"code": "nested_write_segment_unclosed", "stage": "action_parse", "source_span": {"source_id": "contract:unclosed_segment", "start": 8, "end": 12, "unit": "unicode_scalar", "provenance": "authored"}, "message": "nested write segment is missing its closing bracket"}},
+    {"id": "invalid_segment_expression", "source": "document[0:1] = value", "diagnostic": {"code": "nested_write_segment_expression_invalid", "stage": "action_parse", "source_span": {"source_id": "contract:invalid_segment_expression", "start": 9, "end": 12, "unit": "unicode_scalar", "provenance": "authored"}, "message": "segment must be one balanced ActionIR value expression"}},
+    {"id": "property_root", "source": "document.value[\"x\"] = value", "diagnostic": {"code": "nested_write_root_not_addressable", "stage": "action_parse", "source_span": {"source_id": "contract:property_root", "start": 0, "end": 14, "unit": "unicode_scalar", "provenance": "authored"}, "message": "nested write root must remain a bare identifier"}},
+    {"id": "reserved_root", "source": "retv[\"x\"] = value", "diagnostic": {"code": "nested_write_root_reserved", "stage": "action_parse", "source_span": {"source_id": "contract:reserved_root", "start": 0, "end": 4, "unit": "unicode_scalar", "provenance": "authored"}, "message": "nested write root 'retv' is reserved"}}
+  ],
+  "excluded_syntax_cases": [
+    {"id": "ordinary_scalar_assignment", "source": "document = value", "classification": "not_nested_write"},
+    {"id": "read_expression", "source": "document[\"x\"]", "classification": "read_only"},
+    {"id": "invented_wrapper", "source": "vivify(document, \"x\", value)", "classification": "unsupported_helper"},
+    {"id": "invented_operator", "source": "document[\"x\"] := value", "classification": "unsupported_operator"}
+  ],
+  "success_cases": [
+    {
+      "id": "absent_harray_array_harray_chain",
+      "source": "document[\"sections\"][0][\"title\"] = \"Intro\"",
+      "binding": "document",
+      "initial_binding": {"present": false},
+      "segments": [
+        {"source": "\"sections\"", "kind": "string", "value": "sections"},
+        {"source": "0", "kind": "integer", "value": 0},
+        {"source": "\"title\"", "kind": "string", "value": "title"}
+      ],
+      "rhs": {"source": "\"Intro\"", "value": "Intro"},
+      "expected_effects": ["segment:0", "segment:1", "segment:2", "rhs"],
+      "expected_binding": {"sections": [{"title": "Intro"}]},
+      "expected_result": {"sections": [{"title": "Intro"}]}
+    },
+    {
+      "id": "absent_array_root",
+      "source": "document[0][\"name\"] = \"first\"",
+      "binding": "document",
+      "initial_binding": {"present": false},
+      "segments": [
+        {"source": "0", "kind": "integer", "value": 0},
+        {"source": "\"name\"", "kind": "string", "value": "name"}
+      ],
+      "rhs": {"source": "\"first\"", "value": "first"},
+      "expected_effects": ["segment:0", "segment:1", "rhs"],
+      "expected_binding": [{"name": "first"}],
+      "expected_result": [{"name": "first"}]
+    },
+    {
+      "id": "dynamic_string_selects_harray",
+      "source": "document[key_name] = \"value\"",
+      "binding": "document",
+      "initial_binding": {"present": false},
+      "segments": [{"source": "key_name", "kind": "string", "value": "key"}],
+      "rhs": {"source": "\"value\"", "value": "value"},
+      "expected_effects": ["segment:0", "rhs"],
+      "expected_binding": {"key": "value"},
+      "expected_result": {"key": "value"}
+    },
+    {
+      "id": "dynamic_integer_selects_array",
+      "source": "document[position] = \"zero\"",
+      "binding": "document",
+      "initial_binding": {"present": false},
+      "segments": [{"source": "position", "kind": "integer", "value": 0}],
+      "rhs": {"source": "\"zero\"", "value": "zero"},
+      "expected_effects": ["segment:0", "rhs"],
+      "expected_binding": ["zero"],
+      "expected_result": ["zero"]
+    },
+    {
+      "id": "quoted_numeric_string_selects_harray",
+      "source": "document[\"0\"] = \"zero\"",
+      "binding": "document",
+      "initial_binding": {"present": false},
+      "segments": [{"source": "\"0\"", "kind": "string", "value": "0"}],
+      "rhs": {"source": "\"zero\"", "value": "zero"},
+      "expected_effects": ["segment:0", "rhs"],
+      "expected_binding": {"0": "zero"},
+      "expected_result": {"0": "zero"}
+    },
+    {
+      "id": "missing_intermediate_exact_append",
+      "source": "document[\"items\"][0][\"name\"] = \"new\"",
+      "binding": "document",
+      "initial_binding": {"present": true, "value": {"items": []}},
+      "segments": [
+        {"source": "\"items\"", "kind": "string", "value": "items"},
+        {"source": "0", "kind": "integer", "value": 0},
+        {"source": "\"name\"", "kind": "string", "value": "name"}
+      ],
+      "rhs": {"source": "\"new\"", "value": "new"},
+      "expected_effects": ["segment:0", "segment:1", "segment:2", "rhs"],
+      "expected_binding": {"items": [{"name": "new"}]},
+      "expected_result": {"items": [{"name": "new"}]}
+    },
+    {
+      "id": "replace_existing_leaf",
+      "source": "document[\"items\"][0][\"name\"] = \"new\"",
+      "binding": "document",
+      "initial_binding": {"present": true, "value": {"items": [{"name": "old"}]}},
+      "segments": [
+        {"source": "\"items\"", "kind": "string", "value": "items"},
+        {"source": "0", "kind": "integer", "value": 0},
+        {"source": "\"name\"", "kind": "string", "value": "name"}
+      ],
+      "rhs": {"source": "\"new\"", "value": "new"},
+      "expected_effects": ["segment:0", "segment:1", "segment:2", "rhs"],
+      "expected_binding": {"items": [{"name": "new"}]},
+      "expected_result": {"items": [{"name": "new"}]}
+    },
+    {
+      "id": "final_exact_array_append",
+      "source": "document[1] = \"b\"",
+      "binding": "document",
+      "initial_binding": {"present": true, "value": ["a"]},
+      "segments": [{"source": "1", "kind": "integer", "value": 1}],
+      "rhs": {"source": "\"b\"", "value": "b"},
+      "expected_effects": ["segment:0", "rhs"],
+      "expected_binding": ["a", "b"],
+      "expected_result": ["a", "b"]
+    },
+    {
+      "id": "empty_string_key",
+      "source": "document[\"\"] = \"empty\"",
+      "binding": "document",
+      "initial_binding": {"present": false},
+      "segments": [{"source": "\"\"", "kind": "string", "value": ""}],
+      "rhs": {"source": "\"empty\"", "value": "empty"},
+      "expected_effects": ["segment:0", "rhs"],
+      "expected_binding": {"": "empty"},
+      "expected_result": {"": "empty"}
+    },
+    {
+      "id": "rhs_same_binding_side_effect_composes",
+      "source": "document[\"value\"] = mutate_document_then_value()",
+      "binding": "document",
+      "initial_binding": {"present": true, "value": {"audit": []}},
+      "segments": [{"source": "\"value\"", "kind": "string", "value": "value"}],
+      "rhs": {"source": "mutate_document_then_value()", "value": "done", "same_binding_after": {"audit": ["rhs"]}},
+      "expected_effects": ["segment:0", "rhs"],
+      "expected_binding": {"audit": ["rhs"], "value": "done"},
+      "expected_result": {"audit": ["rhs"], "value": "done"}
+    },
+    {
+      "id": "segment_same_binding_side_effect_composes",
+      "source": "document[mutate_document_then_key()] = \"done\"",
+      "binding": "document",
+      "initial_binding": {"present": false},
+      "segments": [{"source": "mutate_document_then_key()", "kind": "string", "value": "value", "same_binding_after": {"seed": 1}}],
+      "rhs": {"source": "\"done\"", "value": "done"},
+      "expected_effects": ["segment:0", "rhs"],
+      "expected_binding": {"seed": 1, "value": "done"},
+      "expected_result": {"seed": 1, "value": "done"}
+    }
+  ],
+  "failure_cases": [
+    {
+      "id": "boolean_segment",
+      "source": "document[true] = rhs",
+      "binding": "document",
+      "initial_binding": {"present": false},
+      "segments": [{"source": "true", "kind": "boolean", "value": true}],
+      "rhs": {"source": "rhs", "value": "value"},
+      "expected_effects": ["segment:0", "rhs"],
+      "expected_binding": {"present": false},
+      "expected_error": {"code": "nested_write_segment_invalid", "segment_index": 0, "path": [], "actual_kind": "boolean", "reason": "kind_not_path_selector", "source_target": "segment:0"}
+    },
+    {
+      "id": "negative_integer_segment",
+      "source": "document[-1] = rhs",
+      "binding": "document",
+      "initial_binding": {"present": false},
+      "segments": [{"source": "-1", "kind": "integer", "value": -1}],
+      "rhs": {"source": "rhs", "value": "value"},
+      "expected_effects": ["segment:0", "rhs"],
+      "expected_binding": {"present": false},
+      "expected_error": {"code": "nested_write_segment_invalid", "segment_index": 0, "path": [], "actual_kind": "integer", "reason": "negative_integer", "source_target": "segment:0"}
+    },
+    {
+      "id": "fractional_segment",
+      "source": "document[1.5] = rhs",
+      "binding": "document",
+      "initial_binding": {"present": false},
+      "segments": [{"source": "1.5", "kind": "number", "value": 1.5}],
+      "rhs": {"source": "rhs", "value": "value"},
+      "expected_effects": ["segment:0", "rhs"],
+      "expected_binding": {"present": false},
+      "expected_error": {"code": "nested_write_segment_invalid", "segment_index": 0, "path": [], "actual_kind": "number", "reason": "fractional_number", "source_target": "segment:0"}
+    },
+    {
+      "id": "null_segment",
+      "source": "document[null] = rhs",
+      "binding": "document",
+      "initial_binding": {"present": false},
+      "segments": [{"source": "null", "kind": "null", "value": null}],
+      "rhs": {"source": "rhs", "value": "value"},
+      "expected_effects": ["segment:0", "rhs"],
+      "expected_binding": {"present": false},
+      "expected_error": {"code": "nested_write_segment_invalid", "segment_index": 0, "path": [], "actual_kind": "null", "reason": "kind_not_path_selector", "source_target": "segment:0"}
+    },
+    {
+      "id": "array_segment",
+      "source": "document[segment] = rhs",
+      "binding": "document",
+      "initial_binding": {"present": false},
+      "segments": [{"source": "segment", "kind": "array", "value": []}],
+      "rhs": {"source": "rhs", "value": "value"},
+      "expected_effects": ["segment:0", "rhs"],
+      "expected_binding": {"present": false},
+      "expected_error": {"code": "nested_write_segment_invalid", "segment_index": 0, "path": [], "actual_kind": "array", "reason": "kind_not_path_selector", "source_target": "segment:0"}
+    },
+    {
+      "id": "harray_segment",
+      "source": "document[segment] = rhs",
+      "binding": "document",
+      "initial_binding": {"present": false},
+      "segments": [{"source": "segment", "kind": "harray", "value": {}}],
+      "rhs": {"source": "rhs", "value": "value"},
+      "expected_effects": ["segment:0", "rhs"],
+      "expected_binding": {"present": false},
+      "expected_error": {"code": "nested_write_segment_invalid", "segment_index": 0, "path": [], "actual_kind": "harray", "reason": "kind_not_path_selector", "source_target": "segment:0"}
+    },
+    {
+      "id": "codeblock_segment",
+      "source": "document[segment] = rhs",
+      "binding": "document",
+      "initial_binding": {"present": false},
+      "segments": [{"source": "segment", "kind": "codeblock", "value": {"$codeblock": "opaque"}}],
+      "rhs": {"source": "rhs", "value": "value"},
+      "expected_effects": ["segment:0", "rhs"],
+      "expected_binding": {"present": false},
+      "expected_error": {"code": "nested_write_segment_invalid", "segment_index": 0, "path": [], "actual_kind": "codeblock", "reason": "kind_not_path_selector", "source_target": "segment:0"}
+    },
+    {
+      "id": "bound_null_is_not_absent",
+      "source": "document[\"key\"] = rhs",
+      "binding": "document",
+      "initial_binding": {"present": true, "value": null},
+      "segments": [{"source": "\"key\"", "kind": "string", "value": "key"}],
+      "rhs": {"source": "rhs", "value": "value"},
+      "expected_effects": ["segment:0", "rhs"],
+      "expected_binding": {"present": true, "value": null},
+      "expected_error": {"code": "nested_write_kind_conflict", "segment_index": 0, "path": [], "expected_kind": "harray", "actual_kind": "null", "source_target": "segment:0"}
+    },
+    {
+      "id": "scalar_root_conflict",
+      "source": "document[\"key\"] = rhs",
+      "binding": "document",
+      "initial_binding": {"present": true, "value": "text"},
+      "segments": [{"source": "\"key\"", "kind": "string", "value": "key"}],
+      "rhs": {"source": "rhs", "value": "value"},
+      "expected_effects": ["segment:0", "rhs"],
+      "expected_binding": {"present": true, "value": "text"},
+      "expected_error": {"code": "nested_write_kind_conflict", "segment_index": 0, "path": [], "expected_kind": "harray", "actual_kind": "string", "source_target": "segment:0"}
+    },
+    {
+      "id": "harray_root_rejects_integer",
+      "source": "document[0] = rhs",
+      "binding": "document",
+      "initial_binding": {"present": true, "value": {}},
+      "segments": [{"source": "0", "kind": "integer", "value": 0}],
+      "rhs": {"source": "rhs", "value": "value"},
+      "expected_effects": ["segment:0", "rhs"],
+      "expected_binding": {"present": true, "value": {}},
+      "expected_error": {"code": "nested_write_kind_conflict", "segment_index": 0, "path": [], "expected_kind": "array", "actual_kind": "harray", "source_target": "segment:0"}
+    },
+    {
+      "id": "array_root_rejects_string",
+      "source": "document[\"key\"] = rhs",
+      "binding": "document",
+      "initial_binding": {"present": true, "value": []},
+      "segments": [{"source": "\"key\"", "kind": "string", "value": "key"}],
+      "rhs": {"source": "rhs", "value": "value"},
+      "expected_effects": ["segment:0", "rhs"],
+      "expected_binding": {"present": true, "value": []},
+      "expected_error": {"code": "nested_write_kind_conflict", "segment_index": 0, "path": [], "expected_kind": "harray", "actual_kind": "array", "source_target": "segment:0"}
+    },
+    {
+      "id": "intermediate_scalar_conflict",
+      "source": "document[\"item\"][\"name\"] = rhs",
+      "binding": "document",
+      "initial_binding": {"present": true, "value": {"item": "scalar"}},
+      "segments": [
+        {"source": "\"item\"", "kind": "string", "value": "item"},
+        {"source": "\"name\"", "kind": "string", "value": "name"}
+      ],
+      "rhs": {"source": "rhs", "value": "value"},
+      "expected_effects": ["segment:0", "segment:1", "rhs"],
+      "expected_binding": {"present": true, "value": {"item": "scalar"}},
+      "expected_error": {"code": "nested_write_kind_conflict", "segment_index": 1, "path": ["item"], "expected_kind": "harray", "actual_kind": "string", "source_target": "segment:1"}
+    },
+    {
+      "id": "final_array_gap",
+      "source": "document[2] = rhs",
+      "binding": "document",
+      "initial_binding": {"present": true, "value": ["a"]},
+      "segments": [{"source": "2", "kind": "integer", "value": 2}],
+      "rhs": {"source": "rhs", "value": "value"},
+      "expected_effects": ["segment:0", "rhs"],
+      "expected_binding": {"present": true, "value": ["a"]},
+      "expected_error": {"code": "nested_write_array_gap", "segment_index": 0, "path": [], "index": 2, "length": 1, "source_target": "segment:0"}
+    },
+    {
+      "id": "intermediate_array_gap",
+      "source": "document[2][\"name\"] = rhs",
+      "binding": "document",
+      "initial_binding": {"present": true, "value": []},
+      "segments": [
+        {"source": "2", "kind": "integer", "value": 2},
+        {"source": "\"name\"", "kind": "string", "value": "name"}
+      ],
+      "rhs": {"source": "rhs", "value": "value"},
+      "expected_effects": ["segment:0", "segment:1", "rhs"],
+      "expected_binding": {"present": true, "value": []},
+      "expected_error": {"code": "nested_write_array_gap", "segment_index": 0, "path": [], "index": 2, "length": 0, "source_target": "segment:0"}
+    },
+    {
+      "id": "rhs_side_effect_survives_outer_gap",
+      "source": "document[2] = mutate_document_then_value()",
+      "binding": "document",
+      "initial_binding": {"present": true, "value": []},
+      "segments": [{"source": "2", "kind": "integer", "value": 2}],
+      "rhs": {"source": "mutate_document_then_value()", "value": "outer", "same_binding_after": ["rhs"]},
+      "expected_effects": ["segment:0", "rhs"],
+      "expected_binding": {"present": true, "value": ["rhs"]},
+      "expected_error": {"code": "nested_write_array_gap", "segment_index": 0, "path": [], "index": 2, "length": 1, "source_target": "segment:0"}
+    },
+    {
+      "id": "unicode_scalar_diagnostic_span",
+      "source": "document[\"é\"][true] = rhs",
+      "binding": "document",
+      "initial_binding": {"present": false},
+      "segments": [
+        {"source": "\"é\"", "kind": "string", "value": "é"},
+        {"source": "true", "kind": "boolean", "value": true}
+      ],
+      "rhs": {"source": "rhs", "value": "value"},
+      "expected_effects": ["segment:0", "segment:1", "rhs"],
+      "expected_binding": {"present": false},
+      "expected_error": {"code": "nested_write_segment_invalid", "segment_index": 1, "path": ["é"], "actual_kind": "boolean", "reason": "kind_not_path_selector", "source_target": "segment:1"}
+    }
+  ],
+  "evaluation_failure_cases": [
+    {
+      "id": "first_segment_failure_stops_rhs",
+      "source": "document[failing_segment()][later_segment()] = rhs()",
+      "binding": "document",
+      "initial_binding": {"present": true, "value": {}},
+      "segments": [
+        {"source": "failing_segment()", "evaluation_error": {"code": "user_function_failed", "message": "segment failed"}},
+        {"source": "later_segment()", "kind": "string", "value": "later"}
+      ],
+      "rhs": {"source": "rhs()", "value": "value"},
+      "expected_effects": ["segment:0"],
+      "expected_binding": {"present": true, "value": {}},
+      "expected_error": {"code": "user_function_failed", "message": "segment failed"}
+    },
+    {
+      "id": "second_segment_failure_stops_rhs",
+      "source": "document[first_segment()][failing_segment()] = rhs()",
+      "binding": "document",
+      "initial_binding": {"present": true, "value": {}},
+      "segments": [
+        {"source": "first_segment()", "kind": "string", "value": "first"},
+        {"source": "failing_segment()", "evaluation_error": {"code": "user_function_failed", "message": "second segment failed"}}
+      ],
+      "rhs": {"source": "rhs()", "value": "value"},
+      "expected_effects": ["segment:0", "segment:1"],
+      "expected_binding": {"present": true, "value": {}},
+      "expected_error": {"code": "user_function_failed", "message": "second segment failed"}
+    },
+    {
+      "id": "rhs_failure_preserves_original_diagnostic",
+      "source": "document[key()] = failing_rhs()",
+      "binding": "document",
+      "initial_binding": {"present": true, "value": {}},
+      "segments": [{"source": "key()", "kind": "string", "value": "key"}],
+      "rhs": {"source": "failing_rhs()", "evaluation_error": {"code": "user_function_failed", "message": "rhs failed"}},
+      "expected_effects": ["segment:0", "rhs"],
+      "expected_binding": {"present": true, "value": {}},
+      "expected_error": {"code": "user_function_failed", "message": "rhs failed"}
+    }
+  ],
+  "read_exclusion_cases": [
+    {"id": "absent_root_read", "initial_binding": {"present": false}, "segments": [{"kind": "string", "value": "key"}], "expected_binding": {"present": false}, "expected_result": null},
+    {"id": "missing_intermediate_read", "initial_binding": {"present": true, "value": {}}, "segments": [{"kind": "string", "value": "key"}, {"kind": "integer", "value": 0}], "expected_binding": {"present": true, "value": {}}, "expected_result": null},
+    {"id": "wrong_kind_read", "initial_binding": {"present": true, "value": {"key": "scalar"}}, "segments": [{"kind": "string", "value": "key"}, {"kind": "string", "value": "nested"}], "expected_binding": {"present": true, "value": {"key": "scalar"}}, "expected_result": null}
+  ],
+  "detachment_case": {
+    "id": "binding_result_initial_and_rhs_are_detached",
+    "source": "document[\"payload\"] = rhs",
+    "binding": "document",
+    "initial_binding": {"present": true, "value": {"existing": ["keep"]}},
+    "segments": [{"source": "\"payload\"", "kind": "string", "value": "payload"}],
+    "rhs": {"source": "rhs", "value": ["a"]},
+    "mutations": [
+      {"target": "rhs", "path": [0], "value": "rhs-mutated"},
+      {"target": "result", "path": ["payload", 0], "value": "result-mutated"},
+      {"target": "binding", "path": ["existing", 0], "value": "binding-mutated"},
+      {"target": "initial", "path": ["existing", 0], "value": "initial-mutated"}
+    ],
+    "expected": {
+      "initial": {"existing": ["initial-mutated"]},
+      "rhs": ["rhs-mutated"],
+      "binding": {"existing": ["binding-mutated"], "payload": ["a"]},
+      "result": {"existing": ["keep"], "payload": ["result-mutated"]}
+    }
+  }
+}

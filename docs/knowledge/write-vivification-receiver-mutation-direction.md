@@ -16,9 +16,10 @@ answers:
   - does map_leaves bang traverse replacement subtrees immediately
   - when will write vivification and map_leaves bang be implemented
 date: 2026-07-15
-status: accepted direction; implementation pending
+status: accepted direction; nested-write neutral contract frozen, backend implementation and bang contract pending
 tags: [dsl, mutation, autovivification, receiver-methods, traversal, paths, portability, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.19.0; ADR 0036; Knowledge Map cards for nested writes/uniform binding/five-backend traversal; source audit of Perl MethodExpr/AST Parser, Rust expr parser, Dart/Julia/Lua ActionIR parsers; Perl direct nested-write probe, Rust terse_11_4 (3/3), Dart exact no-autovivification test, Julia complete local tests with a writable depot stacked before installed packages, and Lua 121/121 on PUC Lua/LuaJIT. The first Julia empty-depot-only attempt failed on blocked registry resolution; the stacked-depot rerun passed. No behavior changed."
+evidence_update_2026_08_30_neutral_write_contract: "FUTURE-PARITY-BACKLOG.19.1.1 freezes linkedspec-write-vivification-v1 before backend code. One assign_nested_access node owns every one-or-more-segment write; evaluated strings select harrays and nonnegative integers select arrays; syntax and structural diagnostics carry authored Unicode-scalar spans; segments then RHS evaluate before isolated validation; completed same-binding expression side effects settle before the snapshot; dense creation, atomic commit, and detached results are executable through an independent 105-mutation checker. Current Perl/Rust/Dart/Julia/Lua behavior stays non-vivifying."
 reverify: "rg -n '0036|FUTURE-PARITY-BACKLOG\\.19|map_leaves!|write-only|arrays remain dense' docs/decisions/0036-write-vivification-and-receiver-mutation.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src/overview/design-rationale.md && rg -n 'parse_method_function_expr|parse_name|_isIdentifier|_action_is_identifier|A-Za-z_.*A-Za-z0-9_' perl/LinkedSpec/ActionIR/MethodExpr.pm rust/linkedspec-core/src/expr.rs dart/lib/src/action/action_parser.dart julia/src/action/ActionParser.jl lua/src/linkedspec/action_parser.lua"
 ---
 
@@ -31,7 +32,8 @@ Missing/wrong intermediates and gaps leave the root unchanged. Current ActionIR 
 
 ADR `0036` accepts two future mechanisms after complete current-backend parity:
 
-1. A nested **write** may create a missing root or intermediate. Reads never create state. The next evaluated
+1. A nested **write** may create a missing root or intermediate. The frozen future-neutral contract is
+   [[write-vivification-neutral-contract]]; no backend is admitted by that contract leaf. Reads never create state. The next evaluated
    segment determines the container: exact nonnegative integer means array, string means harray. Existing
    wrong-kind values are never coerced. Arrays remain dense, so indexes greater than `length` fail instead of
    inventing null filler leaves. Path/RHS evaluation precedes isolated copy-on-write validation and commit.

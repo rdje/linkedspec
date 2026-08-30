@@ -10,6 +10,22 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-30 — FUTURE-PARITY-BACKLOG.19.1.1 — lock neutral write vivification
+
+- Added future-only `linkedspec-write-vivification-v1` and an independent checker. One
+  `assign_nested_access` AST now owns one/many expression-valued segments; five exact AST cases include authored
+  Unicode-scalar spans, while seven syntax failures carry exact typed parser diagnostics.
+- Frozen evaluated string/integer harray/array selection, absent-root/intermediate creation, bound-null and wrong-
+  kind conflicts, dense replace/append/no-gap arrays, left-to-right segments then RHS, unchanged expression
+  failures, post-evaluation same-binding snapshots, isolated commit, detached values, and pure reads.
+- Proof covers 11 successes, 16 structural failures, three expression failures, three read exclusions, detachment,
+  and 105 rejected mutations. Exact Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT probes preserve current non-vivification;
+  no parser, compiler, runtime, capability, generated-format, facade, schema, CLI, or public-current state moved.
+- Focused Lua proof exposed a stale `/skip/ { next() }` test that became lifecycle `I` under admitted `.15.2`.
+  The correct runtime semantics remain unchanged; queued `.15.3` owns an action-edge fixture repair on both ABIs.
+- Synchronized ADR `0036`, Knowledge, roadmaps, architecture, task/index, Toolbox, capability guidance, live
+  continuity, and the sole-facing mdBook. `.19.1.2` remains the next mutation-contract leaf after `.15.3`.
+
 ## 2026-08-30 — FUTURE-PARITY-BACKLOG.23.2 — reconcile mdBook current status
 
 - Reconciled current mdBook guidance with already-admitted executable contracts: semantic introspection 9/9/128

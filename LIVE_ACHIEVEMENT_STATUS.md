@@ -2,20 +2,25 @@
 
 ## Current Activity
 
-- No leaf is active after mdBook drift `.23.2` closes parent `.23` at its designated canonical boundary. The
-  repository is ready to activate the next roadmap-aligned implementation leaf, `.19.1.1`, task-tree-first.
+- No leaf is active after future-neutral nested-write contract `.19.1.1` closes at focused signoff. Current backend
+  behavior remains non-vivifying; the separately queued Lua fixture defect `.15.3` is the next clean activation.
 
 ## Latest Completed Slice
 
-- `.23.2` reconciles current rollout/backend guidance with executable contracts, expands exact stale-claim and
-  omission governance, preserves dated history, and closes `.23` without executable product behavior movement.
+- `.19.1.1` freezes one evaluated-typed-segment AST, dense atomic creation, expression/structural ordering,
+  detached results, exact Unicode-scalar diagnostics, and read exclusions through 105 rejected mutations without
+  admitting any backend.
 
 ## Next Action
 
-- From the clean pushed `.23.2` handoff, activate `FUTURE-PARITY-BACKLOG.19.1.1` task-tree-first and implement its
-  neutral detection contract as the next roadmap-aligned frontier.
+- From the clean `.19.1.1` handoff, activate `FUTURE-PARITY-BACKLOG.15.3` task-tree-first and repair the stale Lua
+  `next()` fixture exposed by executable bare lifecycle normalization; then resume neutral bang contract `.19.1.2`.
 
 ## Recent Completions
+
+- `2026-08-30` — `.19.1.1` freezes future write vivification at 5 AST / 7 syntax / 11 success / 16 structural /
+  3 expression-failure / 3 read-exclusion cases plus detachment and 105 mutations; all six current runtime routes
+  remain non-vivifying. Focused Lua proof also identifies and queues one unrelated stale fixture under `.15.3`.
 
 - `2026-08-30` — `.23.2` aligns current book guidance, guards every corrected claim at its narrow owner, preserves
   dated evidence, closes `.23`, and passes the exact staged canonical batch boundary without runtime movement.
@@ -62,10 +67,6 @@
 
 - `2026-08-27` — `.14.7.7.4` preserves the shared 888/888 behavior, registers the same source once per ABI in
   ordinary/canonical proof, completes both Lua rollout rows, and advances exact topology governance to 106.
-
-- `2026-08-27` — `.14.7.7.3` adds Lua breadth-first returned-marker scheduling, strict lineage/shared resources,
-  expiring safe points, typed rebasing, and a fresh host-only seed across four production routes. Its stable
-  consumer is 888/888 per ABI while discovery, rollout, formats, public behavior, and neutral governance stay fixed.
 
 ## History
 

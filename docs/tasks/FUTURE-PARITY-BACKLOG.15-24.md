@@ -1,7 +1,7 @@
 - ID: `FUTURE-PARITY-BACKLOG.15`
-  Status: `done; canonical-signoff-complete`
+  Status: `in progress; .15.3 queued defect repair`
   Goal: Make any standalone/dangling rule-level `{ ... }` block exact syntax sugar for `I { ... }`.
-  Children: `.15.0`, `.15.1`, `.15.2`
+  Children: `.15.0`, `.15.1`, `.15.2`, `.15.3`
   Acceptance: At top-level rule-body item parsing, accept a standalone `{ ... }` anywhere an item may occur and
     normalize it to the existing `I` lifecycle AST rather than adding runtime semantics. Action-edge and blind-call
     blocks remain owned by their preceding edge productions and therefore are not standalone/dangling; nested
@@ -255,6 +255,27 @@
     array tags and hash identity fields, retaining exact `fn`/function-node rejection while allowing lifecycle body
     text; focused bootstrap proof passes before the next exact authorized canonical retry.
   Commit: `FUTURE-PARITY-BACKLOG.15.2 - complete standalone lifecycle parity`.
+
+- ID: `FUTURE-PARITY-BACKLOG.15.3`
+  Status: `queued; defect reproduced during .19.1.1 verification` (2026-08-30)
+  Goal: Repair the stale Lua runtime-control fixture exposed by completed standalone lifecycle normalization.
+  Dependencies: `.15.2`; `.19.1.1` clean commit boundary
+  Planned proof: `focused` — the ratified/runtime lifecycle behavior is already correct; this leaf will change the
+    stale test source so its `next()` control is owned by an action edge, then prove the complete shared harness on
+    PUC Lua and LuaJIT without changing parser, compiler, runtime, capability, or public behavior.
+  Acceptance: Replace the accidental `/skip/ { next() }` fixture, whose bare block now correctly normalizes to
+    lifecycle `I`, with an exact action-edge-owned skip case. Preserve the asserted consumed cursor and `keep`
+    result; run the complete `lua/test/run.lua` harness on both ABIs; record the false-positive history and root
+    cause in the standalone-lifecycle Knowledge owner. Do not weaken ADR `0094`, the neutral shorthand contract,
+    or the runtime-control assertion.
+  Discovery evidence: exact PUC runs deterministically report only test 115 as failed: expected `keep`, got
+    `json.null`. Direct AST/compiled projection shows `{ next() }` as the ratified lifecycle-`I` payload, and a
+    minimal runtime probe returns matched/null at cursor 0 because entry lifecycle executes before regex
+    iteration. The test was introduced with the original Lua interpreter while bare blocks were inert, so it
+    passed without ever exercising `next()`; `.15.2` made the intended bare-block semantics executable and exposed
+    the stale ownership. This is unrelated to write vivification and is queued here before any repair edit.
+  Verification: `pending`
+  Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.16`
   Status: `done`
@@ -656,7 +677,7 @@
   Commit: `FUTURE-PARITY-BACKLOG.18.3 - plan optional native parser acceleration`
 
 - ID: `FUTURE-PARITY-BACKLOG.19`
-  Status: `proposed`
+  Status: `in progress; .19.1.1 complete; .15.3 defect repair next, then .19.1.2`
   Goal: Add portable explicit nested-write vivification and receiver-mutating method semantics without hidden
     reads, host-language aliasing, or backend drift.
   Children: `.19.0`, `.19.1`, `.19.2`, `.19.3`, `.19.4`, `.19.5`, `.19.6`, `.19.7`
@@ -686,7 +707,7 @@
   Commit: `FUTURE-PARITY-BACKLOG.19.0 - plan write vivification and bang mutation`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.1`
-  Status: `pending`
+  Status: `in progress; .19.1.1 complete; .19.1.2 next after queued .15.3 repair`
   Goal: Lock an executable backend-neutral v1 contract for nested write-vivification and approved `!` mutation.
   Children: `.19.1.1`, `.19.1.2`, `.19.1.3`
   Dependencies: `.19.0`; complete current Perl/Rust/Dart/Julia/Lua parity (satisfied by
@@ -698,12 +719,58 @@
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.1.1`
-  Status: `pending`
+  Status: `done; focused-signoff-complete` (2026-08-30; activated from exact clean pushed mdBook-drift closeout commit
+    `b108cd692893dde1258a0c425d574e7633ccfd62`)
   Goal: Lock the neutral nested write-vivification syntax, AST, evaluation, creation, conflict, dense-array, result,
     and diagnostic contract.
   Dependencies: `.19.0`; complete current-backend parity
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused` — this leaf changes only the future neutral contract fixture/checker and its exact
+    design documentation; current parsers, compilers, runtimes, public behavior, and capability state remain
+    non-vivifying until the separately owned backend/admission leaves.
+  Focused checks: contract schema/fixture validation and rejected-mutation corpus; current five-backend nested-write
+    boundary probes and direct ActionIR dependents; ADR/Knowledge/task/index/roadmap/book/live-memory alignment;
+    both bounded histories, all nine doctrines, rendered mdBook, and whitespace.
+  Canonical trigger: `none` — escalate before landing only if the slice moves executable backend behavior,
+    capability/public-current admission, generated formats, doctrine/storage infrastructure, or requires a bounded-
+    history rollover; final cross-backend/public admission remains owned by `.19.7`.
+  Acceptance: Freeze ordinary-assignment syntax and one dedicated neutral AST shape; left-to-right single path-
+    segment evaluation followed by single RHS evaluation; missing-root and missing-intermediate creation chosen
+    only by the next evaluated segment; quoted-numeric string keys distinct from integer indexes; no partial
+    structural root change on invalid segment kinds, existing-kind conflicts, negative/fractional indexes, or
+    dense-array gaps while completed expression side effects retain normal semantics; replace-or-exact-append
+    array behavior; detached updated-root results; exact typed diagnostic identities,
+    paths, and source locations; and explicit read/non-write exclusions. No backend behavior is enabled here.
+  Checklist: [x] exact clean activation and task ownership [x] prerequisite ADR/Knowledge retrieval
+    [x] current five-backend boundary/toolbox probes [x] neutral fixture/schema and mutation corpus
+    [x] syntax/AST/evaluation/creation/conflict/gap/result/diagnostic acceptance proof
+    [x] durable docs/Knowledge/live-memory/task-index alignment [x] focused signoff
+    [x] atomic commit/brief/clean handoff.
+  Activation evidence: `git status --short --untracked-files=all` is empty at the exact pushed activation commit;
+    local HEAD equals upstream; `git_message_brief.txt` is zero bytes; the committed canonical receipt matches
+    HEAD; generated mdBook output is absent; no background job remains. `.19.0` is committed complete, current
+    five-backend parity is satisfied, and ADR `0036` remains the sole accepted direction.
+  Contract evidence: `linkedspec-write-vivification-v1` keeps ordinary bare-binding bracket assignment but gives
+    every one-or-more-segment write one `assign_nested_access` node. Each segment contains its ordinary typed
+    expression and exact authored half-open Unicode-scalar span; evaluated string/nonnegative integer selects
+    harray/array, quoted numeric string remains a key, and invalid kinds diagnose exactly. Root/intermediate
+    creation uses current/next selectors; bound null/wrong kind never coerce; dense arrays replace or exact-append.
+    Segments then RHS evaluate once before isolated validation, expression failures propagate unchanged, completed
+    same-binding effects settle before the snapshot, structural commit is atomic, values detach, and reads remain
+    non-creating. Five AST, seven syntax, 11 success, 16 structural-failure, three expression-failure, three read-
+    exclusion cases plus detachment pass; all 105 independent mutations are rejected.
+  Current-boundary evidence: Perl toolbox lowering/runtime proves quoted key versus computed integer-index static
+    ownership and unchanged missing-intermediate failure. Rust exact `terse_11_4` integration is 3/3; Dart's exact
+    no-autovivification test is 1/1; Julia's exact corpus case is 1/1; direct byte-identical current nested-write
+    scenarios pass on PUC Lua and LuaJIT. No backend source or current capability moves. The unfiltered Lua harness
+    exposed an unrelated stale `next()` fixture after `.15.2`; exact AST/runtime/root-cause evidence is durably
+    queued before repair as `.15.3`, preserving this leaf's clean ownership and the correct lifecycle contract.
+  Focused signoff evidence: the neutral checker, Knowledge Map 916/7,792, task partition/index, both bounded
+    histories, rendered sole-facing mdBook, all nine doctrines, and `git diff --check` pass. Review confirms only
+    future contract/checker and synchronized design/continuity surfaces move; current parsers, compilers, runtimes,
+    fixtures, generated formats, capability/public-current state, facades, schemas, MCP, and CLI remain unchanged.
+  Verification: **PASS 2026-08-30.** Focused signoff complete; no canonical trigger fired. `.15.3` repairs the
+    discovered stale Lua test from the clean commit boundary, then `.19.1.2` resumes the neutral parent.
+  Commit: `FUTURE-PARITY-BACKLOG.19.1.1 - lock neutral write vivification`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.1.2`
   Status: `pending`
