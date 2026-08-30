@@ -2,11 +2,13 @@
 # scripts/check_task_tree_metadata.sh — narrow task-tree metadata consistency gate.
 #
 # This check intentionally avoids broad historical prose and leaf commit backfill.
-# It enforces three low-noise invariant groups:
+# It enforces four low-noise invariant groups:
 #   1. a completed task file must not advertise a live Current Frontier row; and
 #   2. a pending node must not claim task-tree-first activation or name another
 #      node from the same tree as its own Commit evidence; and
-#   3. checker-owned closed-capability facts stay in their stable task-index
+#   3. every exact current task ID is repository-wide unique across partitioned
+#      and unpartitioned storage, excluding only index-registered immutable history; and
+#   4. checker-owned closed-capability facts stay in their stable task-index
 #      section, outside mutable current-frontier rows.
 set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -15,6 +17,7 @@ linkedspec_project_data_enter_run "$ROOT/scripts/check_task_tree_metadata.sh" "$
 cd "$ROOT"
 
 perl scripts/check_task_tree_partitions.pl
+perl scripts/check_task_tree_current_ids.pl
 
 perl - <<'PERL' docs/tasks/*.md
 use strict;

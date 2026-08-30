@@ -1,5 +1,21 @@
 # ARCHITECTURE STATE
 
+## Current task definitions are globally unique across every storage form
+
+`FUTURE-PARITY-BACKLOG.22.2` closes the metadata gap exposed by the clean-handoff checker. Exact current
+task-definition lines are now censused across every `docs/tasks/*.md` file, whether a tree uses one file or bounded
+semantic partitions. Only a path named by a tracked task-tree index and owned there by an immutable part is
+excluded; a filename that merely ends in `.history.md` remains current. The resulting authority is 1,718
+definitions / 1,718 unique IDs across 96 current task files, with one registered immutable history file excluded.
+
+Git history assigns the sole defect to `0e43f4ae`: finalization of `RUST-FUNCTIONAL-PARITY.7` inserted a second
+`done` parent block instead of changing the original `active` block. The adjacent pair is now one authoritative
+`done` parent at the same container position; Git preserves the historical event. The composed
+`TASK-TREE-METADATA` doctrine runs `scripts/check_task_tree_current_ids.pl`, whose ten in-memory mutations cover
+same-file, cross-file, partitioned/unpartitioned, exact-line, closed-index-registry, and registered/unregistered-
+history boundaries.
+No parser, compiler, runtime, `.spec`, generated format, backend capability, or public API behavior changes.
+
 ## The standalone lifecycle-block parity is complete across five backends
 
 ADR `0094` / `FUTURE-PARITY-BACKLOG.15.0-.2` freezes and completes the portable boundary. A balanced `{ ... }`

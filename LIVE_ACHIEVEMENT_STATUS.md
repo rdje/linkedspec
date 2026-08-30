@@ -2,22 +2,25 @@
 
 ## Current Activity
 
-- Continuity correction `.22.1` closes the clean pushed `.22` resume-pointer contradiction with one task-status
-  checker composed through the existing memory doctrine and canonical gate.
-- Three active/completed/idle handoff twins pass; six mutations reject stale landing state, status contradiction,
-  idle in-flight work, and a referenced ambiguous task definition.
+- Metadata correction `.22.2` closes the duplicate-current-definition gap across partitioned and unpartitioned task
+  storage through one all-current census composed with the existing task metadata doctrine.
+- The repaired repository has 1,718 definitions / 1,718 unique IDs across 96 current files; ten mutations guard
+  same-file, cross-file, cross-storage, exact-line, index-registry, and registered-history boundaries.
 
 ## Latest Completed Slice
 
-- `.22.1` repairs the bounded clean handoff, advances tool-storage truth to 35 Python entrypoints, and changes no
-  parser, compiler, runtime, `.spec`, generated format, capability, or public API behavior.
+- `.22.2` collapses the adjacent `RUST-FUNCTIONAL-PARITY.7` pair into one authoritative `done` parent and changes
+  no parser, compiler, runtime, `.spec`, generated format, capability, or API.
 
 ## Next Action
 
-- From exact clean pushed `.22.1`, activate queued global task-definition audit `.22.2` before any new edit; repair
-  and guard duplicate current task IDs before resuming pending mdBook drift leaf `.23.1`.
+- From exact clean pushed `.22.2`, activate queued mdBook contrast-repair leaf `.23.1` task-tree-first before any
+  new edit.
 
 ## Recent Completions
+
+- `2026-08-30` — `.22.2` makes 1,718 exact current task definitions globally unique across 96 files, repairs the
+  sole legacy duplicate, and guards the boundary with ten mutations plus exact canonical proof.
 
 - `2026-08-29` — `.22.1` enforces task-status-consistent clean memory handoffs across four fields, three valid
   active/clean/idle cases, and six rejected mutations; conflicting global task definitions are queued under `.22.2`.
@@ -69,9 +72,6 @@
   weak-side-table native-range-backed Unicode-scalar direct/ordered-derived provenance across four equal logical
   routes on both ABIs. Its consumer is 392 GREEN/one exact `.2` authority RED; discovery, rollout, formats, public
   behavior, and neutral governance do not move.
-
-- `2026-08-27` — `.14.7.7.0` adds one shared stable Lua consumer at 153 GREEN/one exact marker/provenance RED per
-  ABI, advances only its dormant lifecycle and neutral governance to 98, and leaves discovery and rollout pending.
 
 ## History
 

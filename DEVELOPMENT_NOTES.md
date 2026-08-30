@@ -9,6 +9,30 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-30 (`FUTURE-PARITY-BACKLOG.22.2` — repository-wide current task-ID uniqueness): the `.22.1` memory
+  checker deliberately treated conflicting task statuses as ambiguous and queued the broader defect. The initial
+  exact census found 1,719 definition lines / 1,718 unique IDs; only `RUST-FUNCTIONAL-PARITY.7` was duplicated.
+- `git log -S` narrows the event to creation commit `662b642c` and finalization commit `0e43f4ae`. Exact before/after
+  inspection shows `.7` already existed as `active`; finalization inserted a second identical parent as `done`
+  immediately below it instead of updating the original status.
+- The repair collapses the adjacent pair into one `done` parent at the same container position. This does not erase
+  history: Git remains the event store, while the task file is the one current authoritative tree.
+- `scripts/check_task_tree_current_ids.pl` scans all regular nonsymbolic `docs/tasks/*.md` files and exact
+  definition lines. It derives exclusions from tracked `*.index.jsonl` metadata and requires the matching
+  `task_tree_part` record to carry JSON boolean `mutable: false`; suffix naming alone grants no exemption.
+- This classification matters because partitioned `FUTURE-PARITY-BACKLOG` has an immutable positive-evidence
+  archive that legitimately repeats historical IDs. Counting that archive as current would be wrong; excluding
+  every `.history.md` by name would create a hiding place. Index-backed immutability is the narrow stable boundary.
+- Ten in-memory mutations cover unique fixtures, same-file duplicates, cross-unpartitioned duplicates,
+  partitioned/unpartitioned duplicates, multiple IDs, exact-line recognition, safe history-path shape, the closed
+  tracked-index registry, registered-history exclusion, and unregistered-history inclusion. The current result is
+  1,718/1,718 across 96 files plus one registered immutable history exclusion.
+- The existing `scripts/check_task_tree_partitions.pl` remains the deeper owner for FUTURE source ranges, digests,
+  lookup, immutability, and in-partition uniqueness. The new checker composes after it and supplies only the missing
+  repository-wide current-definition relation; no second doctrine registry row is needed.
+- No LinkedSpec parser/compiler/runtime, `.spec`, fixture, generated format, backend capability, or outward API
+  changes. Durable synchronization covers task/index, Knowledge, doctrine catalog, task guide, Toolbox, roadmaps,
+  architecture, bounded live memory/status, and sole-facing development/status book teaching.
 - 2026-08-29 (`FUTURE-PARITY-BACKLOG.22.1` — clean handoff semantic enforcement): immediate post-push inspection
   of `b024ea3e` found that activation ancestry was exact while all three operational fields were stale: `.22` was
   still called staged, `next_action` still scheduled its commit/push, and `in_flight_uncommitted` still described

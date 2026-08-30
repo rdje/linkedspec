@@ -1,16 +1,17 @@
 # MEMORY
 
-- activation_commit: `b024ea3ee45b30938979cc280f78cee18b1746f7` — exact clean pushed stable-marker closeout from which
-  `FUTURE-PARITY-BACKLOG.22.1` is activated.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.22.1 - enforce clean memory handoffs`; four-field task-status
-  consistency passes three valid cases / six rejected mutations through exact canonical proof.
-- active_work_unit: none after the atomic `.22.1` closeout commit/push boundary.
-- next_action: from exact clean `.22.1`, activate queued `FUTURE-PARITY-BACKLOG.22.2` before any new code or
-  documentation edit; audit and repair global duplicate current task definitions before resuming `.23.1`.
-- in_flight_uncommitted: none after the atomic `.22.1` commit; no background job or generated mdBook output remains.
+- activation_commit: `e6cf4ba1b2bd84fc15edfd2d888c9c1a8c2a59d1` — exact clean pushed clean-handoff closeout from which
+  `FUTURE-PARITY-BACKLOG.22.2` is activated.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.22.2 - enforce unique current task ids`; 1,718 definitions are
+  globally unique across 96 current task files through ten mutations and exact canonical proof.
+- active_work_unit: none after the atomic `.22.2` closeout commit/push boundary.
+- next_action: from exact clean `.22.2`, activate queued mdBook contrast-repair leaf
+  `FUTURE-PARITY-BACKLOG.23.1` task-tree-first before any new code or documentation edit.
+- in_flight_uncommitted: none after the atomic `.22.2` commit; no background job or generated mdBook output remains.
 - blockers: none.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
-  active table; the task metadata doctrine inventories all consumers and permits arbitrary frontier-row rewrites.
+  active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
+  and requires every exact current task ID to be unique across partitioned and unpartitioned storage.
 - current_standalone_block_contract: all five backends normalize rule-item-leading `{ ... }` directly to lifecycle
   `I` with exact authored source/opening line, explicit-twin ActionIR semantics/diagnostics, unchanged brace owners,
   and authored duplicates. Source emits no new `PlainBlock`; legacy plain data remains readable and inert. The
@@ -22,5 +23,5 @@
 - standing_contracts: all durable paths are repo-relative; all project data stays on the repository filesystem;
   README remains bounded; ordinary leaves use focused proof and designated infrastructure/public/push boundaries
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
-- latest_bootstrap_read: 2026-08-29 — README, roadmaps, codebase, mdBook, memory architecture, task-tree doctrine,
-  active `.22`, marker-anchor Knowledge/history/consumers, Toolbox, commit workflow, and current Git state read.
+- latest_bootstrap_read: 2026-08-30 — README, roadmaps, codebase, mdBook, memory architecture, task-tree doctrine,
+  active `.22.2`, relevant Knowledge/decisions/history, Toolbox, commit workflow, and current Git state read.

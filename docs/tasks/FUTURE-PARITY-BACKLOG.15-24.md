@@ -1023,7 +1023,8 @@
   Commit: `FUTURE-PARITY-BACKLOG.22.1 - enforce clean memory handoffs`
 
 - ID: `FUTURE-PARITY-BACKLOG.22.2`
-  Status: `pending`
+  Status: `done; canonical-signoff-complete` (2026-08-30; task-tree-first from exact clean pushed clean-handoff commit
+    `e6cf4ba1b2bd84fc15edfd2d888c9c1a8c2a59d1`)
   Goal: Audit and mechanically enforce unique current task definitions across partitioned and unpartitioned task
     files after `.22.1` exposed a conflicting legacy duplicate outside the partition checker.
   Depends on: `.22.1`
@@ -1031,11 +1032,66 @@
     the two conflicting `RUST-FUNCTIONAL-PARITY.7` statuses without rewriting genuine history; extend the owning
     metadata doctrine so future duplicate current definitions fail regardless of task storage form; synchronize
     task/index, Knowledge Map, continuity docs, and focused/canonical evidence before resuming `.23.1`.
-  Finding: `docs/tasks/RUST-FUNCTIONAL-PARITY.md` currently defines `RUST-FUNCTIONAL-PARITY.7` twice, first as
+  Activation finding: `docs/tasks/RUST-FUNCTIONAL-PARITY.md` defined `RUST-FUNCTIONAL-PARITY.7` twice, first as
     `active` and then as `done`. `scripts/check_task_tree_partitions.pl` proves unique IDs only inside the
     partitioned `FUTURE-PARITY-BACKLOG` collection, so the broader task metadata doctrine remains green.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `canonical` — this leaf changes the repository-wide TASK-TREE-METADATA doctrine, its current
+    task census, mutation proof, canonical registry wiring, and continuity surfaces.
+  Focused checks: exact all-current-task definition/status census; duplicate-ID RED and repaired GREEN; partitioned
+    FUTURE compatibility; adversarial duplicate mutations across partitioned and unpartitioned storage; task/index,
+    memory, Knowledge Map, bounded histories, doctrines, rendered mdBook, whitespace, and exact staged diff.
+  Canonical trigger: this leaf changes the repository-wide `TASK-TREE-METADATA` doctrine and canonical CI behavior,
+    so ADR `0073` requires an exact staged canonical receipt before commit and push.
+  Checklist: [x] clean activation/task ownership [x] Knowledge/decision retrieval [x] all-task census and root cause
+    [x] conflicting legacy definition repair without history rewrite [x] repository-wide uniqueness enforcement
+    [x] adversarial mutation proof [x] durable docs/memory/task/index synchronization [x] canonical signoff
+    [x] atomic commit/brief/clean handoff.
+  Activation evidence: exact `git status --short --untracked-files=all` is empty at pushed
+    `e6cf4ba1b2bd84fc15edfd2d888c9c1a8c2a59d1`; HEAD equals upstream, `git_message_brief.txt` is zero bytes, the
+    committed canonical receipt matches HEAD, no generated mdBook output remains, and `.22.1` is committed complete.
+  Retrieval/root-cause evidence: [[task-tree-metadata-gate-boundary]], [[future-parity-task-partition-contract]],
+    ADRs `0001`/`0068`, and exact current metadata tooling establish the intended boundary before editing. The first
+    all-current census reports 1,719 definitions / 1,718 unique IDs and only
+    `RUST-FUNCTIONAL-PARITY.7` duplicated at lines 182/187. `git log -S` and `git show` identify `0e43f4ae` as the
+    finalization commit that inserted a second `done` parent block instead of changing the existing `active` block.
+  Checker-first and repair evidence: `scripts/check_task_tree_current_ids.pl` first fails exactly on the two source
+    locations while the pre-existing composed metadata doctrine remains green. The repair changes the original
+    `active`/inserted `done` pair into one authoritative `done` parent at the same container position; genuine
+    historical evidence remains in Git. The checker then passes 1,718 definitions / 1,718 unique IDs across 96
+    current files while excluding one tracked-index-registered immutable history file.
+  Enforcement evidence: `scripts/check_task_tree_metadata.sh` composes the global current-ID checker after exact
+    partition validation. History exclusions are derived only from tracked JSONL indexes whose matching part is
+    explicitly immutable; unregistered history-named files remain current. Ten in-memory mutations cover unique
+    definitions, same-file duplicates, cross-unpartitioned duplicates, partitioned/unpartitioned duplicates,
+    multiple duplicates, exact-line recognition, safe registered-history paths, closed-index-registry drift,
+    registered exclusion, and unregistered-history inclusion.
+  Focused and lockstep evidence: Perl syntax, the standalone current-ID checker, composed task metadata, all nine
+    doctrines, Knowledge Map, task/index consistency, both bounded-history pressure checks, `git diff --check`, and
+    the rendered sole-facing mdBook pass. `DOCTRINE_ENFORCEMENT.md`, task-tree guidance, Toolbox, both roadmaps,
+    architecture, Knowledge, bounded continuity, memory, and public development/status teaching agree. No parser,
+    compiler, runtime, `.spec`, fixture, serialized/generated format, backend capability, or public API byte moves.
+  Canonical completion and handoff evidence: the exact fully staged candidate clears receipt-bound
+    `bash tools/run_ci_local.sh`; pre-commit revalidates that receipt and the fast doctrines. Intended atomic subject:
+    `FUTURE-PARITY-BACKLOG.22.2 - enforce unique current task ids`; clear the brief after commit, verify the promoted
+    receipt and clean pushed handoff, then activate mdBook contrast repair `.23.1` task-tree-first.
+
+  ### FUTURE-PARITY-BACKLOG.22.2 Acceptance Checklist
+
+  - [x] **REPRODUCE / ISSUE** — `perl scripts/check_task_tree_current_ids.pl` produces the exact two-location RED
+    after the pre-existing task metadata doctrine had accepted the conflicting current definitions.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — `git show 0e43f4ae -- docs/tasks/RUST-FUNCTIONAL-PARITY.md` proves the
+    finalization patch inserted a second `.7` block at the container boundary instead of updating the original.
+  - [x] **FIX** — collapse the adjacent `.7` pair into one authoritative `done` parent at the same container
+    position and compose one all-current-ID checker through the existing task metadata doctrine.
+  - [x] **ADDRESSED (verified)** — the repository passes at 1,718 definitions / 1,718 unique current IDs across 96
+    files, with one registered immutable history file excluded and all ten mutations green.
+  - [x] **NO REGRESSION** — partition proof remains 596/596 stable IDs; task status/evidence and all 8 marker
+    families / 12 markers / 15 consumers remain green; no product, fixture, format, capability, or API byte moves.
+  - [x] **LOCKSTEP** — task/index, Knowledge, doctrine catalog, Toolbox, task guide, roadmaps, architecture, bounded
+    live docs, memory, and sole-facing mdBook agree; exact staged canonical CI owns the clean commit/push handoff.
+  Verification: **PASS 2026-08-30.** Repository-wide current task-ID uniqueness is mechanically enforced without
+    changing LinkedSpec parser, compiler, runtime, `.spec`, generated format, backend, capability, or public API behavior.
+  Commit: `FUTURE-PARITY-BACKLOG.22.2 - enforce unique current task ids`
 
 - ID: `FUTURE-PARITY-BACKLOG.23`
   Status: `pending`

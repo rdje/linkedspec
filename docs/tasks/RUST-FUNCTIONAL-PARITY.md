@@ -180,11 +180,6 @@ by a small interpreter. No Rust source generation, no eval.
 ### Container: Helper Implementations (.7)
 
 - ID: `RUST-FUNCTIONAL-PARITY.7`
-  Status: `active`
-  Goal: `Implement all helper functions used by the 20 shipped specs.`
-  Children: `.7.1, .7.2, .7.3`
-
-- ID: `RUST-FUNCTIONAL-PARITY.7`
   Status: `done`
   Goal: `Implement all helper functions used by the 20 shipped specs.`
   Children: `.7.1, .7.2, .7.3`

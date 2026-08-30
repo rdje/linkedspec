@@ -13,6 +13,7 @@ date: 2026-07-08
 status: current
 tags: [task-trees, doctrine-enforcement, metadata-hygiene]
 evidence: "TASK-TREE-METADATA-HYGIENE.3 originally adopted the completed-tree Current Frontier invariant. FUTURE-PARITY-BACKLOG.24.0.1 later proves two cross-slice patches contaminated pending .2 with an activation claim and a foreign same-tree commit id. scripts/check_task_tree_metadata.sh now retains the original invariant and adds only those two pending-node contradictions, with four in-memory self-test fixtures. scripts/check_doctrines.sh and DOCTRINE_ENFORCEMENT.md §10 remain the registry and human mirror."
+evidence_update_2026_08_30: "FUTURE-PARITY-BACKLOG.22.2 composes scripts/check_task_tree_current_ids.pl after the strict partition checker. The repository now has 1,718 exact definitions / 1,718 unique current IDs across 96 current task files; only one tracked-index-registered immutable history path is excluded. Ten mutations reject same-file, cross-file, and partitioned/unpartitioned duplicates and guard exact-line, closed-index-registry, plus history-registration boundaries."
 reverify: "bash scripts/check_task_tree_metadata.sh && rg -n 'TASK-TREE-METADATA|check_task_tree_metadata' scripts/check_doctrines.sh DOCTRINE_ENFORCEMENT.md docs/tasks/TASK-TREE-METADATA-HYGIENE.md"
 ---
 
@@ -37,3 +38,8 @@ same tree, because that field cannot be another slice's completion identity. The
 verification prose, ordinary dependency references, missing legacy fields, explicit supersession/replacement, and
 all other previously excluded historical debt. Four in-memory fixtures prove ordinary pending and superseded forms
 pass while each exact contradiction fails.
+
+`FUTURE-PARITY-BACKLOG.22.2` adds one independent low-noise invariant to the same doctrine: every exact current
+task ID is repository-wide unique across partitioned and unpartitioned storage. Only history paths registered by a
+tracked task-tree index as immutable parts are outside the current census; unregistered history-named files remain
+current. See [[current-task-id-uniqueness]] for the Git-proven duplicate root cause and mutation boundary.

@@ -1,5 +1,20 @@
 # Project Status
 
+## Task metadata is globally unambiguous
+
+`FUTURE-PARITY-BACKLOG.22.2` closes a continuity defect in the repository's task records. The task metadata
+doctrine now inventories every exact current task definition across both single-file and partitioned task trees.
+It reports 1,718 definitions / 1,718 unique IDs across 96 current task files. Only one history path is excluded,
+and only because a tracked partition index declares its matching part immutable; naming an arbitrary file
+`.history.md` does not bypass the census.
+
+The repaired legacy record had defined `RUST-FUNCTIONAL-PARITY.7` twice, first as `active` and then as `done`.
+Git showed that finalization commit `0e43f4ae` inserted the second block instead of completing the original one.
+The current record now has one `done` definition, while Git retains the historical evidence. Ten built-in
+mutations cover same-file, cross-file, partitioned/unpartitioned, exact-line, closed-index-registry, and
+history-registration cases.
+This is workflow integrity only; no parser, runtime, `.spec`, generated format, capability, or public API changes.
+
 ## Standalone lifecycle-block direction
 
 ADR `0094` and `FUTURE-PARITY-BACKLOG.15.0` ratify a rule-item-leading `{ ... }` as exact shorthand for
@@ -26,7 +41,7 @@ part. After Dart progressive closeout, ADRs `0084` and `0085` add one equally bo
 the exact pending boundary. The schema-v1 index has ten records; capacity preserved the then-current 547 IDs,
 and Julia's five committed `.14.6.5.0-.4` children brought the total to 552 without changing any stable ID or
 aggregate/member ceiling. Lua's five owned `.14.6.6.0-.4` children brought that total to 557. Staged audit
-`.14.7.0` freezes 37 further diagnostic/neutral/backend/recurrence/public/recomposition owners, making the current
+`.14.7.0` freezes 37 further diagnostic/neutral/backend/recurrence/public/recomposition owners, making the then-
 authoritative partition-checker total 594 without changing a partition or pressure ceiling.
 Independent recomposition proves exact committed Julia agreement.
 Julia `.14.6.5` is split into historical dormant RED, private authority/core, dormant carriers, canonical
@@ -53,7 +68,7 @@ engineering-notes collection/manifest capacity to 17 files / 16 lines without we
 This is consumer-aware work. The six live JSON projections and seven executable checkers now use stable decision
 authority ADR `0067`, and the chronology root contains no capability marker authority. Nine executable checkers
 and two contract projections now read their bounded task owners instead of the future monolith. Strict metadata
-preserves all 594 current stable IDs, clean-source coverage, current digests, immutable history, bounded lookup,
+preserves all 596 current stable IDs, clean-source coverage, current digests, immutable history, bounded lookup,
 and 27/27 rejected mutation classes. The changes/notes migration preserves the clean 44,270-line and 21,308-line
 sources in eleven and six immutable segments, respectively. Both roots are capped at 512 lines / 64 KiB, and the
 commit workflow now requires both rollover checks. Closeout independently passes history 34/34 across three

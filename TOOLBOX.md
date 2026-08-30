@@ -1598,7 +1598,10 @@ trap 'rm -rf -- "$diagnostic_root"' EXIT
 - **WHAT:** `tools/read_task_tree.pl` resolves a stable ID through the strict task-tree JSONL index and prints its
   one bounded semantic owner. `scripts/check_task_tree_partitions.pl`, invoked by the existing metadata doctrine,
   proves clean-source coverage, current counts/digests, immutable history, unique stable IDs, bounded lookup, and
-  collection/member ceilings. The same doctrine runs `tools/check_task_tree_closed_capability_markers.py`, which
+  collection/member ceilings. `scripts/check_task_tree_current_ids.pl` then inventories every exact current
+  `- ID:` definition across both partitioned and unpartitioned task files and rejects duplicates; only a history
+  path registered as an immutable part by a tracked partition index is excluded. The same doctrine runs
+  `tools/check_task_tree_closed_capability_markers.py`, which
   keeps all 8 checker-owned closed-capability families (12 exact markers / 15 consumers) inside the delimited
   stable index section and proves that an arbitrary active-row rewrite cannot erase them.
 - **WHEN:** retrieve an active or historical `FUTURE-PARITY-BACKLOG.*` node without scanning the task collection.
@@ -1607,7 +1610,9 @@ trap 'rm -rf -- "$diagnostic_root"' EXIT
   summary or overwrite-only `MEMORY.md`.
 - **HOW:** `perl tools/read_task_tree.pl --tree FUTURE-PARITY-BACKLOG --id FUTURE-PARITY-BACKLOG.14.3.1.1`.
   After an owning-part edit, run `perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG`, then
-  `bash scripts/check_task_tree_metadata.sh`.
+  `bash scripts/check_task_tree_metadata.sh`. For a focused repository-wide current-ID census, run
+  `perl scripts/check_task_tree_current_ids.pl`; its failure reports every duplicate definition with both source
+  locations.
 
 ### 5.5 Doctrine / memory gates
 - `bash scripts/check_doctrines.sh` (driver — runs every registered check) ·

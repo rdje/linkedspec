@@ -1256,8 +1256,8 @@ To re-enable hosted CI later, restore the `push` and `pull_request` triggers in 
 - runs `scripts/check_memory_architecture.sh` to verify layer integrity, activation freshness, bounded shape, and task-status-consistent clean handoffs with active/clean twins plus destructive mutations,
 - runs `knowledge-map/scripts/check_knowledge_map.sh` to verify Knowledge Map integrity (derived map matches source cards, no stale entries),
 - runs `scripts/check_task_tree_metadata.sh` through the doctrine driver; completed trees cannot advertise live
-  frontier rows, while a pending node cannot claim task-tree-first activation or name another node from its tree as
-  its own commit; four in-memory fixtures lock the exact low-noise boundary,
+  frontier rows; pending nodes cannot claim activation/foreign commits; exact current IDs are globally unique
+  except in registered immutable history; ten current-ID mutations and four status/evidence fixtures lock it,
 - runs `scripts/check_diagnosis_evidence.sh` through the doctrine driver; in a pre-commit context this requires
   staged code/spec/test/tooling changes to carry a task-tree acceptance checklist with LinkedSpec-tool evidence
   signatures,
@@ -1925,10 +1925,10 @@ a smaller leaf. The check is intentionally narrow: it does not audit historical 
 commands copied into Markdown. The actual proof remains the focused validation recorded in the task leaf plus
 the local CI gate.
 
-The separate `TASK-TREE-METADATA` doctrine rejects completed trees with live frontiers and pending-node activation
-or foreign-commit contradictions. It also inventories 8 checker-owned closed-capability families: all 12 exact
-markers must stay between the stable-section sentinels, outside mutable active rows, and all 15 consumers must stay
-known. Built-in mutations prove a frontier rewrite is harmless and marker deletion or relocation fails. Run:
+The separate `TASK-TREE-METADATA` doctrine rejects completed-tree live frontiers, pending-node activation,
+foreign-commit contradictions, and duplicate exact current IDs across storage. Only registered immutable history
+is excluded; arbitrary `.history.md` names remain current. It also inventories 8 closed-capability families / 12
+markers / 15 consumers outside mutable rows; mutations prove both boundaries. Run:
 
 ```bash
 bash scripts/check_task_tree_metadata.sh

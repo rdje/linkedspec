@@ -181,6 +181,11 @@ delimited stable section after the mutable active-tree table. Do not make a curr
 closed-state evidence. Govern both the marker inventory and its consumers, and include a mutation that rewrites
 the active row without copying any closed marker.
 
+Treat every exact task-definition line beginning with `- ID:` outside registered immutable history as current. IDs must
+be repository-wide unique even when one tree is partitioned and another is stored in a single file. A history
+filename is not sufficient for exclusion: derive the exception from a tracked partition index whose matching part
+is explicitly immutable, then run one global current-definition census through the task metadata doctrine.
+
 Remove project-specific sections that do not apply to the new project.
 
 ## Creating The First Task Tree
@@ -232,6 +237,7 @@ Use these rules once the workflow is installed:
 - Do not implement container nodes.
 - If a leaf is too large, split it into child leaves before implementation.
 - Keep node IDs stable forever.
+- Keep each current node ID unique across the complete task collection, not merely within its owning file.
 - Do not renumber closed nodes.
 - Record blockers with unblock conditions.
 - Record decisions where they are made.

@@ -10,6 +10,24 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-30 — FUTURE-PARITY-BACKLOG.22.2 — enforce unique current task IDs
+
+- Added `scripts/check_task_tree_current_ids.pl`, which inventories every exact current task definition across
+  partitioned and unpartitioned `docs/tasks/*.md` storage. Only paths owned as immutable parts by tracked task-tree
+  indexes are excluded; an arbitrary history filename remains current.
+- Checker-first proof reproduced the sole conflict at `docs/tasks/RUST-FUNCTIONAL-PARITY.md:182/187`. Git assigns
+  it to finalization commit `0e43f4ae`, which inserted a second completed `.7` parent instead of updating the
+  original active parent.
+- Collapsed the adjacent `.7` pair into one authoritative `done` definition at the same container position. Git
+  retains the original event; no genuine historical task evidence was rewritten.
+- Composed the new census through `TASK-TREE-METADATA`. Ten mutations cover same-file, cross-unpartitioned,
+  partitioned/unpartitioned, multiple-duplicate, exact-line, safe-path, closed-index-registry, registered-history,
+  and unregistered-history boundaries. Current proof is 1,718 definitions / 1,718 unique IDs across 96 files, with
+  one registered immutable history file excluded; partition proof remains 596 stable IDs.
+- Synchronized doctrine architecture, task workflow, Toolbox, Knowledge Map, roadmaps, current architecture,
+  bounded continuity, task/index, and the sole-facing mdBook. Focused proof, all nine doctrines, rendered-book
+  inspection, and exact staged canonical CI pass without product, fixture, format, capability, or public API change.
+
 ## 2026-08-29 — FUTURE-PARITY-BACKLOG.22.1 — enforce clean resume-pointer handoffs
 
 - Reproduced a committed-state contradiction at pushed commit `b024ea3e`: `MEMORY.md` had the correct activation
