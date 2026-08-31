@@ -932,7 +932,7 @@
   Commit: `FUTURE-PARITY-BACKLOG.19.1.3 - compose neutral future mutations`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.2`
-  Status: `in progress; .19.2.1 complete, .19.2.2 next`
+  Status: `in progress; .19.2.1 complete, .19.2.2 decision-blocked`
   Goal: Implement the unchanged v1 contract on the Perl reference backend.
   Children: `.19.2.1`, `.19.2.2`
   Dependencies: `.19.1`
@@ -993,9 +993,52 @@
   Commit: `FUTURE-PARITY-BACKLOG.19.2.1 - implement Perl write vivification`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.2.2`
-  Status: `pending`
+  Status: `in progress; decision-blocked on neutral/user-function scope conflict` (2026-08-31; task-tree-first from exact clean Perl write-vivification commit
+    `6b960624ead7be7ac55d835253e2013d7a514a6a`; no push)
   Goal: Implement Perl reference `map_leaves!` parsing, lowering, atomic receiver rebinding, and typed boundaries.
   Dependencies: `.19.2.1`
+  Verification tier: `focused` — this leaf implements only the unchanged, already frozen `map_leaves!` v1 and
+    write-composition contracts on the Perl reference path. It does not change another backend, admit a portable
+    capability/public-current claim, move generated formats, add an executable/storage owner, or alter doctrine
+    infrastructure.
+  Focused checks: exact Perl ActionIR AST/source-span and syntax diagnostics; bare receiver resolution and root-kind
+    traversal over a detached original-shape snapshot; copied callback frames, replacement/non-revisit, receiver-
+    identity guard and shadow boundary; atomic receiver rebind, detachment, guard release, callback/continuation
+    failures, and nested-write composition; direct lowering/source inspection, focused plus appropriate broad Perl
+    regression, both neutral/composition checkers, Knowledge/task/index, bounded histories, memory, all nine
+    doctrines, rendered mdBook, and whitespace.
+  Canonical trigger: `none planned` — escalate if implementation changes generated/public/capability formats,
+    current non-Perl behavior, tool/storage/doctrine infrastructure, or forces a bounded-history rollover. Final
+    five-backend admission and recurring/public proof remain owned by `.19.7-.9`.
+  Ownership: `.19.2.2` owns only Perl parsing/lowering/runtime behavior for
+    `linkedspec-map-leaves-mutation-v1`, its frozen nested-write composition, and exact Perl-focused tests/docs.
+    Rust/Dart/Julia/Lua remain `.19.3-.6`; no cross-backend/public admission occurs here.
+  Checklist: [x] clean activation/task ownership [x] Knowledge/decision/toolbox retrieval [x] exact current Perl
+    AST/lowering/traversal seam audit [ ] director resolves neutral/user-function scope conflict
+    [ ] bang parser and dedicated typed AST [ ] isolated traversal, receiver guard,
+    atomic rebind, and typed diagnostics [ ] nested-write composition and focused regression proof
+    [ ] durable docs/Knowledge/live sync [ ] focused signoff [ ] atomic commit/brief/clean handoff.
+  Activation evidence: exact `git status --short --untracked-files=all` is empty at
+    `6b960624ead7be7ac55d835253e2013d7a514a6a`; `.19.2.1` is committed focused-signoff-complete after all nine
+    doctrine hooks and a fresh 1,032-test Phase 0 pass; `git_message_brief.txt` is zero bytes; generated mdBook and
+    runtime-probe output are absent; no background job remains; and no push occurred.
+  Blocking conflict evidence: the frozen helper-mediated and post-commit composition cases label unparameterized
+    user-function `tree`/`audit` names as caller identities. The already-admitted portable function contract instead
+    gives every parameter and working variable a fresh function-local scope and explicitly defers implicit caller-
+    state capture/mutation. An exact Perl probe returns caller `[{"a":"A"},[]]` unchanged while the helper
+    returns its own `[{},["entered"]]`, confirming this is semantic, not parser wording. Implementing the fixture
+    literally would silently widen user functions on Perl and later all backends beyond this leaf's ownership.
+  Decision required: **A (recommended)** preserves pure functions and corrects only the future-neutral fixtures:
+    use existing explicit-target `set(tree, ...)` for helper-mediated callback rejection and a caller-scoped
+    `.with() { tree[...] = ...; return(value) }` continuation for post-commit write proof; exact Perl controls prove
+    both constructs already reach the caller binding. **B** opens a separately ratified five-backend program for
+    implicit caller-binding capture before resuming bang implementation. No behavior or contract bytes change
+    until the director chooses.
+  Blocker-record verification: both unchanged neutral checkers pass at 105 write / 167 map / 593 composition
+    mutations; the exact no-capture and two caller-scope alternative probes produce the recorded values; Knowledge
+    Map 921/7,834, task partition/index, bounded histories, rendered sole-facing mdBook, whitespace, and all nine
+    doctrines pass. The reproducible book output is removed. No production/test/fixture/capability/generated/
+    facade/schema/MCP/CLI file moves, no canonical trigger fires, and no background job remains.
   Verification: `pending`
   Commit: `pending`
 

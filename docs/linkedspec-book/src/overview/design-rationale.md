@@ -134,6 +134,13 @@ First every callback succeeds, then `tree` is rebound once, then a detached copy
 Without a continuation, the detached updated tree is the expression result; statement-position use may discard
 the result while retaining the receiver update.
 
+Implementation is currently paused on one contract-carrier conflict, not on these traversal semantics. Two
+future-only fixtures used unparameterized user functions as if their `tree`/`audit` names captured caller
+bindings, but LinkedSpec functions deliberately have fresh local working-variable scope. The recommended repair
+keeps that pure function model and expresses the same guard/ordering proof with existing caller-scope constructs:
+an explicit-target `set(tree, ...)` in the callback and a trailing `.with()` block after the bang result. No bang
+syntax is current until that choice is resolved and the owned backend leaves land.
+
 ### Composing nested writes with `map_leaves!`
 
 The third future-neutral contract composes the two mechanisms rather than inventing another mutation rule. A

@@ -10,6 +10,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-31 — FUTURE-PARITY-BACKLOG.19.2.2 — record function-scope contract blocker
+
+- Activated the Perl `map_leaves!` leaf from clean `6b960624` and confirmed two future helper carriers assume
+  caller binding capture forbidden by the admitted fresh function-local contract. Exact Perl proof keeps caller
+  `tree`/`audit` unchanged; existing explicit-target `set` and caller-scoped `.with` can carry the intended proof.
+- Recorded the unresolved director choice across task/index, ADR, Knowledge, roadmap, architecture, Toolbox,
+  continuity docs, and mdBook. No contract fixture, parser, runtime, backend, capability, or public behavior moves.
+
 ## 2026-08-31 — FUTURE-PARITY-BACKLOG.19.2.1 — implement Perl write vivification
 
 - Unified one- and many-segment bracket assignments on the Perl reference as expression-bearing

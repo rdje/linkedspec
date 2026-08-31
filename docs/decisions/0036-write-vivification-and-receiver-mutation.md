@@ -170,6 +170,20 @@ The permanent Perl contract projects all frozen AST, syntax, success, structural
 bound-null, and user-function cases. This leaf does not implement `map_leaves!`, alter Rust/Dart/Julia/Lua, or
 admit a portable/public capability. Those boundaries remain owned by `.19.2.2-.19.9`.
 
+## Unresolved implementation carrier conflict (2026-08-31)
+
+The `.19.2.2` Perl implementation audit found that two frozen composition examples use unparameterized user
+functions while labeling their `tree`/`audit` spellings as caller bindings. That conflicts with the admitted
+portable function contract: parameters and working variables have fresh function-local scope, implicit caller
+capture is forbidden, and caller-state-mutating functions remain deferred. An exact Perl probe confirms the
+helper mutates only its local bindings.
+
+No decision or behavior changes here. The recommended correction preserves pure functions and the receiver-
+mutation semantics while replacing only those carriers with existing caller-scope constructs: explicit-target
+`set(tree, ...)` for helper-mediated callback rejection and a trailing `.with()` block for post-commit receiver
+write proof. Adopting implicit function capture instead requires a separate five-backend language decision.
+`.19.2.2` is blocked pending director choice; see [[map-leaves-function-scope-contract-conflict]].
+
 ## Consequences
 
 - The terse deep-write form remains ordinary assignment, for example

@@ -1,5 +1,17 @@
 # ARCHITECTURE STATE
 
+## Perl `map_leaves!` implementation is decision-blocked on function scope
+
+The task-tree-first `.19.2.2` audit finds no runtime blocker in traversal itself, but two frozen composition
+carriers contradict LinkedSpec's admitted function architecture. An unparameterized `fn` owns fresh local
+`tree`/`audit` bindings and cannot implicitly reach caller state; exact Perl execution confirms the caller remains
+unchanged. Treating those names as caller identities would expand the portable function model beyond this leaf.
+
+Existing caller-scope mechanisms can express the intended proof without that expansion: `set(tree, ...)` supplies
+a helper-mediated callback write, and a trailing `.with()` block can attempt a receiver write after the bang
+result. The recommended contract repair is pending director choice. No parser, lowering, runtime, fixture,
+backend, capability, or public behavior changes in this audit.
+
 ## Perl nested writes now implement the frozen typed vivification contract
 
 `FUTURE-PARITY-BACKLOG.19.2.1` advances only the Perl reference to

@@ -18,6 +18,7 @@ status: accepted future-neutral composition; backend implementation pending
 tags: [dsl, mutation, vivification, map-leaves, composition, identity, atomicity, diagnostics, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.19.1.3 adds capability_conformance/write_map_leaves_composition_contract.json without a new executable entrypoint. The existing write checker validates eight embedded nested writes; the existing mutation checker executes six callback compositions and one post-commit continuation, retains 167 base mutations, and rejects 593 composition scalar/container-shape mutations. Exact primary-command probes return the non-bang control {\"leaf\":[]} on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. The bang source stops before callback nested-write lowering: Perl returns null; Rust warns at the stopped map_leaves identifier then returns null; Dart, Julia, and both Lua ABIs exit 1 with the generic parser-invocation boundary. No backend or capability is admitted."
 evidence_update_2026_08_31_perl_write_boundary: "FUTURE-PARITY-BACKLOG.19.2.1 makes the nested-write half executable on Perl but leaves map_leaves! parsing/runtime untouched. The composed callback/continuation cases therefore remain neutral-only on every backend until .19.2.2 and later backend/admission leaves."
+evidence_update_2026_08_31_scope_conflict: "The .19.2.2 audit proves the helper-mediated and post-commit fn carriers cannot reach caller tree/audit under the admitted fresh function-local contract. Existing explicit-target set and caller-scoped with blocks can express the same identity/ordering proof without implicit capture. Director decision is required before fixture or behavior change."
 reverify: "bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py && bash tools/run_python_project_data.sh tools/check_map_leaves_mutation_contract.py && rg -n 'write-map-leaves-composition|callback compositions|post-commit|593 composition|action_parse_before_callback_nested_write_lowering' capability_conformance/README.md capability_conformance/write_map_leaves_composition_contract.json TOOLBOX.md docs/decisions/0036-write-vivification-and-receiver-mutation.md docs/tasks/FUTURE-PARITY-BACKLOG.15-24.md"
 ---
 
@@ -55,4 +56,5 @@ all six runtime routes. Every bang route stops before callback nested-write lowe
 Perl/Rust boundary and generic nonzero Dart/Julia/Lua boundary. Implementation starts at `.19.2.1`.
 
 Related: ADR `0036`, [[write-vivification-receiver-mutation-direction]], and
-[[tool-project-data-ssd-storage]].
+[[tool-project-data-ssd-storage]]. The unresolved carrier conflict is
+[[map-leaves-function-scope-contract-conflict]].

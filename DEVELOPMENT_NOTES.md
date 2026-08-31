@@ -9,6 +9,15 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-31 (`FUTURE-PARITY-BACKLOG.19.2.2` — implementation blocker): Knowledge retrieval exposed a real
+  incompatibility before bang code. The neutral helper-mediated and post-commit examples label unparameterized
+  function `tree`/`audit` names as caller identities, while the admitted function MVP makes all working variables
+  fresh locals and explicitly defers implicit caller capture/mutation.
+- Exact Perl execution returns outer `[{"a":"A"},[]]` unchanged and helper-local `[{},["entered"]]`, proving this
+  is runtime scope rather than wording. Separate controls show `set(tree, ...)` in an inline traversal callback
+  reaches the outer binding and a trailing `.with()` block can reach it after the preceding chain result.
+- Recommended option A corrects only those future carriers and preserves pure functions. Option B requires a
+  separately ratified five-backend implicit-capture program. Implementation stops before behavior/fixture changes.
 - 2026-08-31 (`FUTURE-PARITY-BACKLOG.19.2.1` — Perl write vivification): one `assign_nested_access` path now owns
   one and many bracket segments. Keeping each segment as a typed expression plus authored span avoids the former
   quoted-key/computed-index parser guess and lets a runtime string or integer select harray or array correctly.

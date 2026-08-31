@@ -713,6 +713,9 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   non-bang control. Its minimal bang twin currently becomes null on Perl/Rust (with a Rust parser warning) and a
   generic nonzero parser-invocation failure on Dart/Julia/Lua. Perl's action AST classifies the bang chain as
   `raw_perl/invalid_fluent_chain`; every current parser restricts fluent method names to identifier characters.
+  The `.19.2.2` audit also proves that unparameterized user functions cannot carry caller-binding mutation under
+  the admitted fresh-local function contract. Do not implement those two fixture carriers literally until the
+  director resolves [[map-leaves-function-scope-contract-conflict]].
 
 ### 4.8.4 Shared write/`map_leaves!` composition fixture
 

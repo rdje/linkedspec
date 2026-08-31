@@ -1115,6 +1115,9 @@ Three backbone items tracked major structural modernization — all done:
   absent-versus-null presence, dense isolated creation, exact diagnostics, and detached commit/results. Rust,
   Dart, Julia, and Lua retain the prior no-autovivification boundary; no parser accepts bang methods yet.
   Perl `map_leaves!`, remaining backends, public admission, and recurring proof remain pending under `.19.2.2-.9`.
+  The active Perl bang leaf is decision-blocked because two future helper fixtures assume implicit caller capture,
+  conflicting with the admitted fresh function-local scope. Existing explicit-target `set` and caller-scoped
+  `.with` carriers can retain the intended semantics without widening functions; no behavior changed in the audit.
   All 13 ordinary harray names close at 103/103 through `.4.3.5.5` on both Lua ABIs. Sorted arrays continue
   through array receivers, count/membership are terminal, and mutation-result/pure-receiver prose is guarded.
   Eager blocks, lazy inline controls, attached/marker if and switch, and attached while close through

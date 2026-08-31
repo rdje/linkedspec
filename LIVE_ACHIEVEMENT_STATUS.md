@@ -2,8 +2,8 @@
 
 ## Current Activity
 
-- No leaf is active after `.19.2.1` implements the frozen nested-write contract on the Perl reference at focused
-  signoff. Rust, Dart, Julia, and Lua remain non-vivifying; `map_leaves!` remains unsupported everywhere.
+- `.19.2.2` is task-tree active but decision-blocked before behavior code. Two future bang-composition helper
+  carriers assume implicit caller binding capture that the admitted pure function-local contract forbids.
 
 ## Latest Completed Slice
 
@@ -12,10 +12,13 @@
 
 ## Next Action
 
-- From the clean `.19.2.1` handoff, activate `FUTURE-PARITY-BACKLOG.19.2.2` task-tree-first and implement the
-  unchanged `map_leaves!` v1 contract on the Perl reference backend.
+- Director chooses: recommended A preserves pure functions and corrects the carriers to explicit-target `set` and
+  caller-scoped `.with`; B opens a separate five-backend implicit-capture decision before bang implementation.
 
 ## Recent Completions
+
+- `2026-08-31` — `.19.2.2` audit proves the frozen function carriers conflict with fresh local scope and records
+  the exact no-capture probe plus a viable no-language-expansion repair; no behavior or fixture bytes change.
 
 - `2026-08-31` — `.19.2.1` implements Perl write vivification from the frozen 5/7/11/16 fixture with typed
   evaluated paths, presence-aware rules/functions, isolated dense commit, detachment, and no non-Perl admission.
@@ -61,8 +64,6 @@
   every existing brace owner and legacy inert carrier, corrects premature book teaching, and splits implementation
   into Perl/Rust `.15.1` and remaining-backend/self-hosted/public `.15.2`.
 
-- `2026-08-28` — `.14.8` completes typed governance at 14/0/231, locks program-wide authoring safety and public
-  no-drift, recomposes all six existing runtime authorities unchanged, and closes parent `.14`.
 
 - `2026-08-28` — `.14.7.10` independently recomposes staged 9/9/123 plus public 129, all six runtime routes,
   typed 13/1/189, generated/capability 85/0/0, and language coverage unchanged, then closes parent `.14.7`.
