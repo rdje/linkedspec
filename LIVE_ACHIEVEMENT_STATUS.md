@@ -2,20 +2,23 @@
 
 ## Current Activity
 
-- No leaf is active after `.15.3` closes the stale Lua fixture repair and required engineering-notes rollover at
-  exact canonical signoff. Current lifecycle/runtime behavior and the future-only `.19.1.1` contract are unchanged.
+- No leaf is active after `.19.1.2` freezes the future-only `map_leaves!` receiver-mutation contract at exact
+  canonical signoff. Current parser/runtime behavior remains bang-invalid on every backend.
 
 ## Latest Completed Slice
 
-- `.15.3` assigns the old `next()` fixture to its intended action edge, passes complete Lua 178x2 plus standalone
-  109x2, and finitely admits engineering-notes segment `4987` through ADR `0097` without behavior movement.
+- `.19.1.2` freezes one mutation AST, resolved-binding guard, original-shape traversal, copied callback frame,
+  atomic commit, detached result, post-commit continuation, and exact diagnostics/exclusions at 167 mutations.
 
 ## Next Action
 
-- From the clean `.15.3` handoff, activate `FUTURE-PARITY-BACKLOG.19.1.2` task-tree-first and freeze the future-
-  neutral `map_leaves!` parser, receiver, traversal, atomicity, re-entrancy, result, and exclusion contract.
+- From the clean `.19.1.2` handoff, activate `FUTURE-PARITY-BACKLOG.19.1.3` task-tree-first and compose both future-
+  neutral mutation contracts against their unchanged current-backend pre-implementation boundaries.
 
 ## Recent Completions
+
+- `2026-08-31` — `.19.1.2` freezes future `map_leaves!` at 4/14/5 syntax, 10 success, 8 pre-commit failure, five
+  special state proofs, 167 mutations, and a 37-entrypoint canonical storage boundary; no backend is admitted.
 
 - `2026-08-30` — `.15.3` replaces one false-positive Lua `next()` fixture with exact action-edge ownership,
   passes 178/178 and 109/109 on both ABIs, and admits notes segment `4987` at finite capacity 21/20 via ADR `0097`.
@@ -63,10 +66,6 @@
 
 - `2026-08-28` — `.14.7.8` binds five staged sources/six routes, completes neutral recurrence at 123 mutations,
   promotes typed staged dispatch to 13/1/187 and capability truth to 85/0/0, and hands off public authoring `.9`.
-
-- `2026-08-28` — `.14.7.7.5` reruns Lua 888/888 per ABI, admitted peers, exact topology, and 106-mutation
-  governance unchanged, adds the durable recomposition fact, closes `.14.7.7`, and hands off `.14.7.8`.
-
 
 ## History
 

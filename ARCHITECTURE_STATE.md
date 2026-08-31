@@ -1,5 +1,26 @@
 # ARCHITECTURE STATE
 
+## Future `map_leaves!` receiver mutation has one executable neutral authority
+
+`FUTURE-PARITY-BACKLOG.19.1.2` freezes `linkedspec-map-leaves-mutation-v1` without enabling backend syntax. The
+only v1 bang token is `map_leaves!` on one bare resolved uniform-binding identity. A dedicated
+`receiver_mutation_chain` owns its method, callback, exact authored Unicode-scalar spans, and ordinary non-bang
+continuation. Literal/helper/nested receivers, function form, other bang names, and bang continuation are rejected.
+
+The state machine snapshots an existing harray/array, preserves the current sorted-key or zero-based-index root-
+kind traversal rule, gives every callback detached `value`/`path`/`depth`/`key|index`, and builds only the original
+shape. Callback aggregate results are detached replacements and are not revisited. The receiver binding identity
+is write-guarded during callbacks: direct, nested-write, nested-bang, and helper-mediated writes fail before the
+attempt, while same-spelling shadows and unrelated identities remain legal. Complete callback success commits
+once and returns a detached root; continuation begins after commit and cannot roll that update back.
+
+The independent checker passes 4 valid syntax / 14 invalid / 5 exclusion / 10 success / 8 pre-commit failure cases,
+five special state proofs, and 167 rejected mutations. Exact non-bang control output matches on all five backends.
+The one-token bang twin remains unsupported: Perl/Rust yield null (Rust warns), while Dart/Julia/Lua expose their
+generic parser-invocation failure. Source audit traces every result to identifier-only fluent grammar; no parser,
+compiler, runtime, fixture, capability, generated format, facade, schema, MCP, CLI, or current public behavior
+moves. Composition `.19.1.3` is next.
+
 ## Lua next fixture ownership is explicit and behavior is unchanged
 
 `FUTURE-PARITY-BACKLOG.15.3` repairs a false-positive test exposed by the correct `.15.2` lifecycle normalization.
@@ -13,7 +34,7 @@ The mandatory engineering-notes record triggers official content-addressed segme
 only the finite engineering-notes collection step from 20 to 21 files and manifest step from 19 to 20 lines. The
 bounded store remains at 24,502/27,000 aggregate lines and 2,623,818/3,145,728 aggregate bytes; every other root,
 member, aggregate, owner, lifecycle, verifier, storage, and path control remains unchanged. Neutral `map_leaves!`
-contract leaf `.19.1.2` is next.
+contract leaf `.19.1.2` has since completed as described above.
 
 ## Public migration examples preserve old-to-new semantic contrast
 

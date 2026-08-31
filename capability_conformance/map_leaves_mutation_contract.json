@@ -1,0 +1,461 @@
+{
+  "format": 1,
+  "contract_id": "linkedspec-map-leaves-mutation-v1",
+  "status": "future-neutral-contract; no backend behavior admitted",
+  "policy": {
+    "sole_bang_method": "map_leaves! is the only v1 bang-suffixed method and the suffix is syntax on that receiver method token, not an identifier character or a general bang permission",
+    "addressable_receiver": "the receiver is one resolved bare non-reserved uniform-binding identity; literals, temporaries, helper results, properties, nested access, rules, and runtime pseudo-bindings are not addressable receivers",
+    "snapshot": "receiver lookup validates an existing harray or array and deep-copies it before callbacks; traversal and rebuilding use only that isolated original-shape snapshot",
+    "traversal": "the starting root kind selects recursion for the whole call: harray roots recurse only through harrays in ascending key order and array roots recurse only through arrays in zero-based index order",
+    "callback_frame": "each leaf callback receives detached scoped value, path, depth, and root-kind selector key or index; path is a fresh complete receiver-root-relative copy for every callback",
+    "callback_result": "the callback result is detached into the rebuilt leaf; assigning or mutating scoped value does not update the receiver, and a replacement aggregate is not revisited during the same call",
+    "atomic_commit": "callback traversal and rebuilding never mutate the receiver; complete callback success commits the rebuilt root to the receiver binding exactly once",
+    "reentrancy": "while callbacks execute, every direct or helper-mediated write through the same resolved receiver binding identity is rejected before that attempted write; a shadow binding with the same spelling and unrelated binding identities remain independent",
+    "failure_effects": "receiver validation, callback, or re-entrant failure leaves the receiver unchanged while already-completed ordinary effects on unrelated bindings retain normal semantics",
+    "result": "successful commit returns a detached updated-root value; statement-position use may discard that value without suppressing the receiver update",
+    "continuation": "ordinary fluent continuation starts only after the bang call commits and consumes the detached returned value; a later continuation failure does not roll back the completed bang commit",
+    "detachment": "the invocation snapshot, committed receiver, returned root, callback values and paths, callback aggregate results, and authored initial aggregates do not share writable host aliases",
+    "nonbang": "map_leaves remains the unchanged non-mutating twin and cannot obtain receiver mutation through callback value or result aliases",
+    "current_boundary": "this contract admits no current backend behavior; Perl, Rust, Dart, Julia, and Lua remain bang-syntax-invalid until separately owned implementation leaves"
+  },
+  "syntax": {
+    "identifier_pattern": "[A-Za-z_][A-Za-z0-9_]*",
+    "surface": "IDENTIFIER.map_leaves!() { ACTION_BLOCK } CONTINUATION*",
+    "method_token": "map_leaves!",
+    "method_identity": "map_leaves",
+    "bang_count": 1,
+    "parenthesized_arguments": 0,
+    "callback": "one immediate trailing ActionIR block is required",
+    "receiver": "one bare addressable uniform-binding identifier resolved at runtime",
+    "continuation": "zero or more existing non-bang fluent calls parsed as ordinary ActionIR after the mutation call",
+    "suffix_spacing": "the exclamation mark immediately follows map_leaves; ordinary insignificant whitespace remains allowed around the dot, empty parentheses, callback block, and continuation",
+    "reserved_receiver_names": ["CAPTURE", "IINDEX", "IMATCH", "IMATCH_HASH", "IMATCH_LIST", "IPOS", "LINDEX", "LMATCH", "LMATCH_HASH", "LMATCH_LIST", "LSPOS", "STRING", "descr", "false", "info", "minfo", "null", "retv", "true", "undef"],
+    "excluded_methods": ["walk_leaves!", "reduce_leaves!", "map!"],
+    "excluded_forms": ["function_form", "literal_receiver", "temporary_receiver", "helper_result_receiver", "property_receiver", "nested_access_receiver", "rule_receiver", "runtime_pseudo_binding", "arbitrary_bang_identifier", "bang_continuation"]
+  },
+  "ast": {
+    "node_kind": "receiver_mutation_chain",
+    "fields": ["kind", "source", "source_span", "receiver", "mutation", "continuation"],
+    "receiver_kind": "binding_reference",
+    "receiver_fields": ["kind", "name", "source", "source_span"],
+    "mutation_kind": "receiver_mutation_call",
+    "mutation_fields": ["kind", "method", "source_method", "source", "source_span", "method_span", "args_span", "callback"],
+    "method": "map_leaves",
+    "source_method": "map_leaves!",
+    "callback_kind": "block_value",
+    "callback_fields": ["kind", "source", "source_span", "body"],
+    "body_kind": "action_block",
+    "body_fields": ["kind", "source", "source_span"],
+    "continuation_kind": "fluent_call",
+    "continuation_fields": ["kind", "method", "source_method", "source", "source_span", "args_source", "args_span"],
+    "source_span": "half-open Unicode-scalar offsets over authored source; the chain spans the complete expression and every child span retains authored coordinates",
+    "callback_body": "the body is parsed by the existing typed ActionIR block parser without a bang-specific sublanguage"
+  },
+  "diagnostics": {
+    "syntax": {
+      "stage": "action_parse",
+      "codes": ["bang_method_function_form_invalid", "bang_method_unknown", "bang_method_suffix_invalid", "receiver_mutation_receiver_not_addressable", "receiver_mutation_receiver_reserved", "map_leaves_mutation_arguments_invalid", "map_leaves_mutation_callback_missing", "receiver_mutation_continuation_bang_invalid"],
+      "fields": ["code", "stage", "source_span", "message"]
+    },
+    "receiver_missing": {
+      "code": "map_leaves_mutation_receiver_missing",
+      "fields": ["code", "operation", "binding", "method", "source_span", "message"]
+    },
+    "receiver_kind": {
+      "code": "map_leaves_mutation_receiver_kind_mismatch",
+      "fields": ["code", "operation", "binding", "method", "expected_kinds", "actual_kind", "source_span", "message"]
+    },
+    "reentrant": {
+      "code": "receiver_mutation_reentrant",
+      "fields": ["code", "operation", "binding", "method", "attempt", "source_span", "message"]
+    },
+    "callback_failure": "propagate the callback diagnostic unchanged and without a map_leaves_mutation wrapper",
+    "continuation_failure": "propagate the continuation diagnostic unchanged after preserving the completed receiver commit",
+    "operation": "map_leaves_mutation",
+    "method": "map_leaves",
+    "expected_receiver_kinds": ["harray", "array"],
+    "source_span": "a typed authored half-open Unicode-scalar span; receiver failures point to the receiver and re-entrant failures point to the attempted mutation target or helper call",
+    "precedence": ["syntax_validation", "receiver_resolution", "receiver_kind_validation", "callback_or_reentrant_failure", "commit", "continuation"]
+  },
+  "valid_syntax_cases": [
+    {
+      "id": "bare_receiver_no_continuation",
+      "source": "tree.map_leaves!() { return(value) }",
+      "expected_ast": {
+        "kind": "receiver_mutation_chain",
+        "source": "tree.map_leaves!() { return(value) }",
+        "source_span": {"start": 0, "end": 36},
+        "receiver": {"kind": "binding_reference", "name": "tree", "source": "tree", "source_span": {"start": 0, "end": 4}},
+        "mutation": {
+          "kind": "receiver_mutation_call",
+          "method": "map_leaves",
+          "source_method": "map_leaves!",
+          "source": "map_leaves!() { return(value) }",
+          "source_span": {"start": 5, "end": 36},
+          "method_span": {"start": 5, "end": 16},
+          "args_span": {"start": 16, "end": 18},
+          "callback": {
+            "kind": "block_value",
+            "source": "{ return(value) }",
+            "source_span": {"start": 19, "end": 36},
+            "body": {"kind": "action_block", "source": " return(value) ", "source_span": {"start": 20, "end": 35}}
+          }
+        },
+        "continuation": []
+      }
+    },
+    {
+      "id": "array_count_continuation",
+      "source": "items.map_leaves!() { return(cat(index, \"=\", value)) }.count()",
+      "expected_ast": {
+        "kind": "receiver_mutation_chain",
+        "source": "items.map_leaves!() { return(cat(index, \"=\", value)) }.count()",
+        "source_span": {"start": 0, "end": 62},
+        "receiver": {"kind": "binding_reference", "name": "items", "source": "items", "source_span": {"start": 0, "end": 5}},
+        "mutation": {
+          "kind": "receiver_mutation_call",
+          "method": "map_leaves",
+          "source_method": "map_leaves!",
+          "source": "map_leaves!() { return(cat(index, \"=\", value)) }",
+          "source_span": {"start": 6, "end": 54},
+          "method_span": {"start": 6, "end": 17},
+          "args_span": {"start": 17, "end": 19},
+          "callback": {
+            "kind": "block_value",
+            "source": "{ return(cat(index, \"=\", value)) }",
+            "source_span": {"start": 20, "end": 54},
+            "body": {"kind": "action_block", "source": " return(cat(index, \"=\", value)) ", "source_span": {"start": 21, "end": 53}}
+          }
+        },
+        "continuation": [
+          {"kind": "fluent_call", "method": "count", "source_method": "count", "source": "count()", "source_span": {"start": 55, "end": 62}, "args_source": "", "args_span": {"start": 61, "end": 61}}
+        ]
+      }
+    },
+    {
+      "id": "insignificant_whitespace",
+      "source": "  tree . map_leaves! ( ) { return(value) } . count_keys()  ",
+      "expected_receiver": "tree",
+      "expected_continuation": ["count_keys"]
+    },
+    {
+      "id": "nested_callback_braces",
+      "source": "tree.map_leaves!() { return(if(depth, { \"d\" : value }, else(value))) }",
+      "expected_receiver": "tree",
+      "expected_continuation": []
+    }
+  ],
+  "invalid_syntax_cases": [
+    {"id": "function_form", "source": "map_leaves!(tree) { return(value) }", "diagnostic": {"code": "bang_method_function_form_invalid", "stage": "action_parse", "source_span": {"source_id": "contract:function_form", "start": 0, "end": 11, "unit": "unicode_scalar", "provenance": "authored"}, "message": "map_leaves! is receiver-only; use binding.map_leaves!() { ... }"}},
+    {"id": "literal_receiver", "source": "{}.map_leaves!() { return(value) }", "diagnostic": {"code": "receiver_mutation_receiver_not_addressable", "stage": "action_parse", "source_span": {"source_id": "contract:literal_receiver", "start": 0, "end": 2, "unit": "unicode_scalar", "provenance": "authored"}, "message": "receiver mutation requires one bare uniform-binding identifier"}},
+    {"id": "helper_result_receiver", "source": "make_tree().map_leaves!() { return(value) }", "diagnostic": {"code": "receiver_mutation_receiver_not_addressable", "stage": "action_parse", "source_span": {"source_id": "contract:helper_result_receiver", "start": 0, "end": 11, "unit": "unicode_scalar", "provenance": "authored"}, "message": "receiver mutation requires one bare uniform-binding identifier"}},
+    {"id": "nested_receiver", "source": "document[\"tree\"].map_leaves!() { return(value) }", "diagnostic": {"code": "receiver_mutation_receiver_not_addressable", "stage": "action_parse", "source_span": {"source_id": "contract:nested_receiver", "start": 0, "end": 16, "unit": "unicode_scalar", "provenance": "authored"}, "message": "receiver mutation requires one bare uniform-binding identifier"}},
+    {"id": "property_receiver", "source": "document.tree.map_leaves!() { return(value) }", "diagnostic": {"code": "receiver_mutation_receiver_not_addressable", "stage": "action_parse", "source_span": {"source_id": "contract:property_receiver", "start": 0, "end": 13, "unit": "unicode_scalar", "provenance": "authored"}, "message": "receiver mutation requires one bare uniform-binding identifier"}},
+    {"id": "reserved_receiver", "source": "retv.map_leaves!() { return(value) }", "diagnostic": {"code": "receiver_mutation_receiver_reserved", "stage": "action_parse", "source_span": {"source_id": "contract:reserved_receiver", "start": 0, "end": 4, "unit": "unicode_scalar", "provenance": "authored"}, "message": "receiver mutation cannot target reserved binding 'retv'"}},
+    {"id": "walk_bang", "source": "tree.walk_leaves!() { return(value) }", "diagnostic": {"code": "bang_method_unknown", "stage": "action_parse", "source_span": {"source_id": "contract:walk_bang", "start": 5, "end": 17, "unit": "unicode_scalar", "provenance": "authored"}, "message": "unsupported bang method 'walk_leaves!'"}},
+    {"id": "reduce_bang", "source": "tree.reduce_leaves!(\"\") { return(acc) }", "diagnostic": {"code": "bang_method_unknown", "stage": "action_parse", "source_span": {"source_id": "contract:reduce_bang", "start": 5, "end": 19, "unit": "unicode_scalar", "provenance": "authored"}, "message": "unsupported bang method 'reduce_leaves!'"}},
+    {"id": "arbitrary_bang", "source": "tree.sort!()", "diagnostic": {"code": "bang_method_unknown", "stage": "action_parse", "source_span": {"source_id": "contract:arbitrary_bang", "start": 5, "end": 10, "unit": "unicode_scalar", "provenance": "authored"}, "message": "unsupported bang method 'sort!'"}},
+    {"id": "separated_suffix", "source": "tree.map_leaves !() { return(value) }", "diagnostic": {"code": "bang_method_suffix_invalid", "stage": "action_parse", "source_span": {"source_id": "contract:separated_suffix", "start": 5, "end": 17, "unit": "unicode_scalar", "provenance": "authored"}, "message": "the bang suffix must immediately follow map_leaves"}},
+    {"id": "double_bang", "source": "tree.map_leaves!!() { return(value) }", "diagnostic": {"code": "bang_method_suffix_invalid", "stage": "action_parse", "source_span": {"source_id": "contract:double_bang", "start": 5, "end": 17, "unit": "unicode_scalar", "provenance": "authored"}, "message": "map_leaves! accepts exactly one bang suffix"}},
+    {"id": "arguments_not_empty", "source": "tree.map_leaves!(seed) { return(value) }", "diagnostic": {"code": "map_leaves_mutation_arguments_invalid", "stage": "action_parse", "source_span": {"source_id": "contract:arguments_not_empty", "start": 16, "end": 22, "unit": "unicode_scalar", "provenance": "authored"}, "message": "map_leaves! expects empty parentheses before its callback"}},
+    {"id": "callback_missing", "source": "tree.map_leaves!()", "diagnostic": {"code": "map_leaves_mutation_callback_missing", "stage": "action_parse", "source_span": {"source_id": "contract:callback_missing", "start": 5, "end": 18, "unit": "unicode_scalar", "provenance": "authored"}, "message": "map_leaves! requires one immediate trailing callback block"}},
+    {"id": "bang_continuation", "source": "tree.map_leaves!() { return(value) }.sort!()", "diagnostic": {"code": "receiver_mutation_continuation_bang_invalid", "stage": "action_parse", "source_span": {"source_id": "contract:bang_continuation", "start": 37, "end": 42, "unit": "unicode_scalar", "provenance": "authored"}, "message": "a receiver-mutation chain continuation must use an existing non-bang fluent call"}}
+  ],
+  "excluded_syntax_cases": [
+    {"id": "nonbang_twin", "source": "tree.map_leaves() { return(value) }", "classification": "ordinary_nonmutating_fluent_chain"},
+    {"id": "walk_nonbang", "source": "tree.walk_leaves() { return(value) }", "classification": "ordinary_nonmutating_fluent_chain"},
+    {"id": "reduce_nonbang", "source": "tree.reduce_leaves(0) { return(acc) }", "classification": "ordinary_nonmutating_fluent_chain"},
+    {"id": "bang_word_alias", "source": "tree.map_leaves_bang() { return(value) }", "classification": "ordinary_unknown_method"},
+    {"id": "bang_variable", "source": "map_leaves! = tree", "classification": "invalid_identifier_not_receiver_mutation"}
+  ],
+  "success_cases": [
+    {
+      "id": "hash_sorted_frames_and_cross_kind_leaf",
+      "source": "tree.map_leaves!() { return(value) }",
+      "binding": "tree",
+      "initial_bindings": {"tree": {"b": {"z": "B"}, "a": "A", "arr": [1, 2]}},
+      "callback_steps": [
+        {"frame": {"value": "A", "key": "a", "path": ["a"], "depth": 1}, "result": "a@1=A"},
+        {"frame": {"value": [1, 2], "key": "arr", "path": ["arr"], "depth": 1}, "result": ["array-leaf"]},
+        {"frame": {"value": "B", "key": "z", "path": ["b", "z"], "depth": 2}, "result": "z@2=B"}
+      ],
+      "expected_bindings": {"tree": {"a": "a@1=A", "arr": ["array-leaf"], "b": {"z": "z@2=B"}}},
+      "expected_result": {"a": "a@1=A", "arr": ["array-leaf"], "b": {"z": "z@2=B"}},
+      "expected_effects": ["callback:a", "callback:arr", "callback:b/z", "commit:tree"]
+    },
+    {
+      "id": "array_index_frames_and_cross_kind_leaf",
+      "source": "items.map_leaves!() { return(value) }",
+      "binding": "items",
+      "initial_bindings": {"items": ["A", ["B", "C"], {"h": "H"}]},
+      "callback_steps": [
+        {"frame": {"value": "A", "index": 0, "path": [0], "depth": 1}, "result": "0=A"},
+        {"frame": {"value": "B", "index": 0, "path": [1, 0], "depth": 2}, "result": "1/0=B"},
+        {"frame": {"value": "C", "index": 1, "path": [1, 1], "depth": 2}, "result": "1/1=C"},
+        {"frame": {"value": {"h": "H"}, "index": 2, "path": [2], "depth": 1}, "result": {"kept": "hash-leaf"}}
+      ],
+      "expected_bindings": {"items": ["0=A", ["1/0=B", "1/1=C"], {"kept": "hash-leaf"}]},
+      "expected_result": ["0=A", ["1/0=B", "1/1=C"], {"kept": "hash-leaf"}],
+      "expected_effects": ["callback:0", "callback:1/0", "callback:1/1", "callback:2", "commit:items"]
+    },
+    {
+      "id": "replacement_root_kind_not_revisited",
+      "source": "tree.map_leaves!() { return(value) }",
+      "binding": "tree",
+      "initial_bindings": {"tree": {"leaf": "A"}},
+      "callback_steps": [
+        {"frame": {"value": "A", "key": "leaf", "path": ["leaf"], "depth": 1}, "result": {"new": {"deep": "X"}}}
+      ],
+      "expected_bindings": {"tree": {"leaf": {"new": {"deep": "X"}}}},
+      "expected_result": {"leaf": {"new": {"deep": "X"}}},
+      "expected_effects": ["callback:leaf", "commit:tree"]
+    },
+    {
+      "id": "callback_path_and_value_are_copied",
+      "source": "items.map_leaves!() { return(value) }",
+      "binding": "items",
+      "initial_bindings": {"items": [["A"], "B"]},
+      "callback_steps": [
+        {"frame": {"value": "A", "index": 0, "path": [0, 0], "depth": 2}, "mutate_frame": {"value": "local-A", "path": [99]}, "result": "A*"},
+        {"frame": {"value": "B", "index": 1, "path": [1], "depth": 1}, "mutate_frame": {"value": "local-B", "path": [88]}, "result": "B*"}
+      ],
+      "expected_bindings": {"items": [["A*"], "B*"]},
+      "expected_result": [["A*"], "B*"],
+      "expected_effects": ["callback:0/0", "callback:1", "commit:items"]
+    },
+    {
+      "id": "unrelated_side_effects_persist",
+      "source": "tree.map_leaves!() { audit += path; return(value) }",
+      "binding": "tree",
+      "initial_bindings": {"tree": {"b": "B", "a": "A"}, "audit": []},
+      "callback_steps": [
+        {"frame": {"value": "A", "key": "a", "path": ["a"], "depth": 1}, "effects": [{"operation": "append", "binding": "audit", "value": ["a"]}], "result": "A!"},
+        {"frame": {"value": "B", "key": "b", "path": ["b"], "depth": 1}, "effects": [{"operation": "append", "binding": "audit", "value": ["b"]}], "result": "B!"}
+      ],
+      "expected_bindings": {"tree": {"a": "A!", "b": "B!"}, "audit": [["a"], ["b"]]},
+      "expected_result": {"a": "A!", "b": "B!"},
+      "expected_effects": ["effect:audit", "callback:a", "effect:audit", "callback:b", "commit:tree"]
+    },
+    {
+      "id": "unrelated_receiver_mutation_allowed",
+      "source": "tree.map_leaves!() { other = [value]; return(value) }",
+      "binding": "tree",
+      "initial_bindings": {"tree": {"a": "A"}, "other": []},
+      "callback_steps": [
+        {"frame": {"value": "A", "key": "a", "path": ["a"], "depth": 1}, "effects": [{"operation": "set", "binding": "other", "value": ["A"]}], "result": "A!"}
+      ],
+      "expected_bindings": {"tree": {"a": "A!"}, "other": ["A"]},
+      "expected_result": {"a": "A!"},
+      "expected_effects": ["effect:other", "callback:a", "commit:tree"]
+    },
+    {
+      "id": "empty_hash_commits_without_callback",
+      "source": "tree.map_leaves!() { return(value) }",
+      "binding": "tree",
+      "initial_bindings": {"tree": {}},
+      "callback_steps": [],
+      "expected_bindings": {"tree": {}},
+      "expected_result": {},
+      "expected_effects": ["commit:tree"]
+    },
+    {
+      "id": "empty_array_commits_without_callback",
+      "source": "items.map_leaves!() { return(value) }",
+      "binding": "items",
+      "initial_bindings": {"items": []},
+      "callback_steps": [],
+      "expected_bindings": {"items": []},
+      "expected_result": [],
+      "expected_effects": ["commit:items"]
+    },
+    {
+      "id": "hash_continuation_runs_after_commit",
+      "source": "tree.map_leaves!() { return(value) }.count_keys()",
+      "binding": "tree",
+      "initial_bindings": {"tree": {"b": "B", "a": "A"}},
+      "callback_steps": [
+        {"frame": {"value": "A", "key": "a", "path": ["a"], "depth": 1}, "result": "A!"},
+        {"frame": {"value": "B", "key": "b", "path": ["b"], "depth": 1}, "result": "B!"}
+      ],
+      "continuation": [{"method": "count_keys", "expected_input": {"a": "A!", "b": "B!"}, "result": 2}],
+      "expected_bindings": {"tree": {"a": "A!", "b": "B!"}},
+      "expected_result": 2,
+      "expected_effects": ["callback:a", "callback:b", "commit:tree", "continuation:count_keys"]
+    },
+    {
+      "id": "array_continuation_runs_after_commit",
+      "source": "items.map_leaves!() { return(value) }.count()",
+      "binding": "items",
+      "initial_bindings": {"items": ["A", "B"]},
+      "callback_steps": [
+        {"frame": {"value": "A", "index": 0, "path": [0], "depth": 1}, "result": "A!"},
+        {"frame": {"value": "B", "index": 1, "path": [1], "depth": 1}, "result": "B!"}
+      ],
+      "continuation": [{"method": "count", "expected_input": ["A!", "B!"], "result": 2}],
+      "expected_bindings": {"items": ["A!", "B!"]},
+      "expected_result": 2,
+      "expected_effects": ["callback:0", "callback:1", "commit:items", "continuation:count"]
+    }
+  ],
+  "failure_cases": [
+    {
+      "id": "receiver_absent",
+      "source": "tree.map_leaves!() { return(value) }",
+      "binding": "tree",
+      "initial_bindings": {},
+      "callback_steps": [],
+      "expected_bindings": {},
+      "expected_effects": [],
+      "expected_diagnostic": {"code": "map_leaves_mutation_receiver_missing", "operation": "map_leaves_mutation", "binding": "tree", "method": "map_leaves", "source_span": {"source_id": "contract:receiver_absent", "start": 0, "end": 4, "unit": "unicode_scalar", "provenance": "authored"}, "message": "map_leaves! receiver binding 'tree' does not exist"}
+    },
+    {
+      "id": "receiver_null",
+      "source": "tree.map_leaves!() { return(value) }",
+      "binding": "tree",
+      "initial_bindings": {"tree": null},
+      "callback_steps": [],
+      "expected_bindings": {"tree": null},
+      "expected_effects": [],
+      "expected_diagnostic": {"code": "map_leaves_mutation_receiver_kind_mismatch", "operation": "map_leaves_mutation", "binding": "tree", "method": "map_leaves", "expected_kinds": ["harray", "array"], "actual_kind": "null", "source_span": {"source_id": "contract:receiver_null", "start": 0, "end": 4, "unit": "unicode_scalar", "provenance": "authored"}, "message": "map_leaves! receiver 'tree' must hold an harray or array, got null"}
+    },
+    {
+      "id": "receiver_scalar",
+      "source": "tree.map_leaves!() { return(value) }",
+      "binding": "tree",
+      "initial_bindings": {"tree": "scalar"},
+      "callback_steps": [],
+      "expected_bindings": {"tree": "scalar"},
+      "expected_effects": [],
+      "expected_diagnostic": {"code": "map_leaves_mutation_receiver_kind_mismatch", "operation": "map_leaves_mutation", "binding": "tree", "method": "map_leaves", "expected_kinds": ["harray", "array"], "actual_kind": "string", "source_span": {"source_id": "contract:receiver_scalar", "start": 0, "end": 4, "unit": "unicode_scalar", "provenance": "authored"}, "message": "map_leaves! receiver 'tree' must hold an harray or array, got string"}
+    },
+    {
+      "id": "callback_failure_is_atomic",
+      "source": "tree.map_leaves!() { audit += path; return(fail_on_b()) }",
+      "binding": "tree",
+      "initial_bindings": {"tree": {"a": "A", "b": "B"}, "audit": []},
+      "callback_steps": [
+        {"frame": {"value": "A", "key": "a", "path": ["a"], "depth": 1}, "effects": [{"operation": "append", "binding": "audit", "value": ["a"]}], "result": "A!"},
+        {"frame": {"value": "B", "key": "b", "path": ["b"], "depth": 1}, "effects": [{"operation": "append", "binding": "audit", "value": ["b"]}], "error": {"code": "callback_failed", "stage": "action_runtime", "source_span": {"source_id": "contract:callback_failure_is_atomic", "start": 49, "end": 60, "unit": "unicode_scalar", "provenance": "authored"}, "message": "callback requested failure"}}
+      ],
+      "expected_bindings": {"tree": {"a": "A", "b": "B"}, "audit": [["a"], ["b"]]},
+      "expected_effects": ["effect:audit", "callback:a", "effect:audit"],
+      "expected_diagnostic": {"code": "callback_failed", "stage": "action_runtime", "source_span": {"source_id": "contract:callback_failure_is_atomic", "start": 49, "end": 60, "unit": "unicode_scalar", "provenance": "authored"}, "message": "callback requested failure"}
+    },
+    {
+      "id": "direct_assignment_reentrant",
+      "source": "tree.map_leaves!() { tree = {}; return(value) }",
+      "binding": "tree",
+      "initial_bindings": {"tree": {"a": "A"}},
+      "callback_steps": [
+        {"frame": {"value": "A", "key": "a", "path": ["a"], "depth": 1}, "mutation_attempt": {"binding": "tree", "attempt": "assign", "source_span": {"source_id": "contract:direct_assignment_reentrant", "start": 21, "end": 25, "unit": "unicode_scalar", "provenance": "authored"}}}
+      ],
+      "expected_bindings": {"tree": {"a": "A"}},
+      "expected_effects": [],
+      "expected_diagnostic": {"code": "receiver_mutation_reentrant", "operation": "map_leaves_mutation", "binding": "tree", "method": "map_leaves", "attempt": "assign", "source_span": {"source_id": "contract:direct_assignment_reentrant", "start": 21, "end": 25, "unit": "unicode_scalar", "provenance": "authored"}, "message": "cannot write active map_leaves! receiver binding 'tree' from its callback"}
+    },
+    {
+      "id": "nested_bang_reentrant",
+      "source": "tree.map_leaves!() { return(tree.map_leaves!() { return(value) }) }",
+      "binding": "tree",
+      "initial_bindings": {"tree": {"a": "A"}},
+      "callback_steps": [
+        {"frame": {"value": "A", "key": "a", "path": ["a"], "depth": 1}, "mutation_attempt": {"binding": "tree", "attempt": "map_leaves!", "source_span": {"source_id": "contract:nested_bang_reentrant", "start": 28, "end": 32, "unit": "unicode_scalar", "provenance": "authored"}}}
+      ],
+      "expected_bindings": {"tree": {"a": "A"}},
+      "expected_effects": [],
+      "expected_diagnostic": {"code": "receiver_mutation_reentrant", "operation": "map_leaves_mutation", "binding": "tree", "method": "map_leaves", "attempt": "map_leaves!", "source_span": {"source_id": "contract:nested_bang_reentrant", "start": 28, "end": 32, "unit": "unicode_scalar", "provenance": "authored"}, "message": "cannot write active map_leaves! receiver binding 'tree' from its callback"}
+    },
+    {
+      "id": "nested_write_reentrant",
+      "source": "tree.map_leaves!() { tree[\"x\"] = value; return(value) }",
+      "binding": "tree",
+      "initial_bindings": {"tree": {"a": "A"}},
+      "callback_steps": [
+        {"frame": {"value": "A", "key": "a", "path": ["a"], "depth": 1}, "mutation_attempt": {"binding": "tree", "attempt": "nested_write", "source_span": {"source_id": "contract:nested_write_reentrant", "start": 21, "end": 25, "unit": "unicode_scalar", "provenance": "authored"}}}
+      ],
+      "expected_bindings": {"tree": {"a": "A"}},
+      "expected_effects": [],
+      "expected_diagnostic": {"code": "receiver_mutation_reentrant", "operation": "map_leaves_mutation", "binding": "tree", "method": "map_leaves", "attempt": "nested_write", "source_span": {"source_id": "contract:nested_write_reentrant", "start": 21, "end": 25, "unit": "unicode_scalar", "provenance": "authored"}, "message": "cannot write active map_leaves! receiver binding 'tree' from its callback"}
+    },
+    {
+      "id": "helper_mediated_reentrant",
+      "source": "tree.map_leaves!() { mutate_tree(); return(value) }",
+      "binding": "tree",
+      "initial_bindings": {"tree": {"a": "A"}, "audit": []},
+      "callback_steps": [
+        {"frame": {"value": "A", "key": "a", "path": ["a"], "depth": 1}, "effects": [{"operation": "append", "binding": "audit", "value": "entered"}], "mutation_attempt": {"binding": "tree", "attempt": "helper:mutate_tree", "source_span": {"source_id": "contract:helper_mediated_reentrant", "start": 21, "end": 34, "unit": "unicode_scalar", "provenance": "authored"}}}
+      ],
+      "expected_bindings": {"tree": {"a": "A"}, "audit": ["entered"]},
+      "expected_effects": ["effect:audit"],
+      "expected_diagnostic": {"code": "receiver_mutation_reentrant", "operation": "map_leaves_mutation", "binding": "tree", "method": "map_leaves", "attempt": "helper:mutate_tree", "source_span": {"source_id": "contract:helper_mediated_reentrant", "start": 21, "end": 34, "unit": "unicode_scalar", "provenance": "authored"}, "message": "cannot write active map_leaves! receiver binding 'tree' from its callback"}
+    }
+  ],
+  "continuation_failure_case": {
+    "id": "continuation_failure_preserves_commit",
+    "source": "tree.map_leaves!() { return(value) }.require_missing()",
+    "binding": "tree",
+    "initial_bindings": {"tree": {"a": "A"}},
+    "callback_steps": [
+      {"frame": {"value": "A", "key": "a", "path": ["a"], "depth": 1}, "result": "A!"}
+    ],
+    "continuation": [{"method": "require_missing", "expected_input": {"a": "A!"}, "error": {"code": "continuation_failed", "stage": "action_runtime", "source_span": {"source_id": "contract:continuation_failure_preserves_commit", "start": 37, "end": 54, "unit": "unicode_scalar", "provenance": "authored"}, "message": "continuation requested failure"}}],
+    "expected_bindings": {"tree": {"a": "A!"}},
+    "expected_effects": ["callback:a", "commit:tree"],
+    "expected_diagnostic": {"code": "continuation_failed", "stage": "action_runtime", "source_span": {"source_id": "contract:continuation_failure_preserves_commit", "start": 37, "end": 54, "unit": "unicode_scalar", "provenance": "authored"}, "message": "continuation requested failure"}
+  },
+  "shadow_binding_case": {
+    "id": "same_spelling_shadow_is_distinct_identity",
+    "source": "tree.map_leaves!() { return(call_shadow(value)) }",
+    "binding": "tree",
+    "initial_bindings": {"tree": {"a": "A"}},
+    "callback_steps": [
+      {"frame": {"value": "A", "key": "a", "path": ["a"], "depth": 1}, "shadow_mutation": {"spelling": "tree", "identity": "call_shadow:param:tree", "value": ["local"]}, "result": "A!"}
+    ],
+    "expected_bindings": {"tree": {"a": "A!"}},
+    "expected_result": {"a": "A!"},
+    "expected_effects": ["shadow:call_shadow:param:tree", "callback:a", "commit:tree"]
+  },
+  "guard_release_case": {
+    "id": "guard_releases_after_failure",
+    "binding": "tree",
+    "initial_bindings": {"tree": {"a": "A"}},
+    "first_invocation": {
+      "source": "tree.map_leaves!() { tree = {}; return(value) }",
+      "callback_steps": [
+        {"frame": {"value": "A", "key": "a", "path": ["a"], "depth": 1}, "mutation_attempt": {"binding": "tree", "attempt": "assign", "source_span": {"source_id": "contract:guard_releases_after_failure:first", "start": 21, "end": 25, "unit": "unicode_scalar", "provenance": "authored"}}}
+      ],
+      "expected_diagnostic": {"code": "receiver_mutation_reentrant", "operation": "map_leaves_mutation", "binding": "tree", "method": "map_leaves", "attempt": "assign", "source_span": {"source_id": "contract:guard_releases_after_failure:first", "start": 21, "end": 25, "unit": "unicode_scalar", "provenance": "authored"}, "message": "cannot write active map_leaves! receiver binding 'tree' from its callback"}
+    },
+    "second_invocation": {
+      "source": "tree.map_leaves!() { return(value) }",
+      "callback_steps": [
+        {"frame": {"value": "A", "key": "a", "path": ["a"], "depth": 1}, "result": "A!"}
+      ]
+    },
+    "expected_bindings": {"tree": {"a": "A!"}},
+    "expected_result": {"a": "A!"},
+    "expected_effects": ["callback:a", "commit:tree"]
+  },
+  "nonbang_isolation_case": {
+    "id": "nonbang_callback_cannot_mutate_receiver_by_alias",
+    "source": "tree.map_leaves() { value[\"x\"] = \"changed\"; return(value) }",
+    "binding": "tree",
+    "initial_bindings": {"tree": {"leaf": {"x": "original"}}},
+    "callback_value_after_local_mutation": {"x": "changed"},
+    "expected_binding": {"leaf": {"x": "original"}},
+    "expected_result": {"leaf": {"x": "changed"}}
+  },
+  "detachment_case": {
+    "id": "all_aggregate_boundaries_are_detached",
+    "source": "tree.map_leaves!() { return(value) }",
+    "binding": "tree",
+    "initial_bindings": {"tree": {"leaf": ["A"]}},
+    "callback_steps": [
+      {"frame": {"value": ["A"], "key": "leaf", "path": ["leaf"], "depth": 1}, "result": ["A", {"nested": ["B"]}]}
+    ],
+    "expected_binding": {"leaf": ["A", {"nested": ["B"]}]},
+    "expected_result": {"leaf": ["A", {"nested": ["B"]}]},
+    "mutations": ["initial", "callback_value", "callback_path", "callback_result", "returned_result", "committed_binding"],
+    "expected_each_other_boundary_unchanged": true
+  }
+}

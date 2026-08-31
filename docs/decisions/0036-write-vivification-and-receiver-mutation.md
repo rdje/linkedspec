@@ -91,6 +91,35 @@ The executable owner is `capability_conformance/write_vivification_contract.json
 `tools/check_write_vivification_contract.py`. Current Perl/Rust/Dart/Julia/Lua lowering remains unchanged and
 non-vivifying; backend implementation begins only in `.19.2` after `.19.1.2-.3` complete the neutral parent.
 
+## Neutral `map_leaves!` contract freeze (2026-08-31)
+
+Leaf `.19.1.2` resolves the receiver-mutation details delegated by decision item 9 without admitting a backend:
+
+- the sole v1 surface is `IDENTIFIER.map_leaves!() { ACTION_BLOCK }`, represented by a dedicated
+  `receiver_mutation_chain` containing one `receiver_mutation_call`; the bang is method syntax, never a general
+  identifier character;
+- the receiver must resolve to one existing bare non-reserved uniform-binding identity holding an harray or array.
+  Root kind fixes sorted-key or zero-based-index depth-first recursion across a detached original-shape snapshot;
+- every callback receives copied `value`, complete `path`, `depth`, and `key` or `index`. Its detached result
+  replaces the leaf; local changes to `value`/`path` cannot write the receiver, and replacement aggregates are not
+  revisited;
+- the resolved receiver binding identity is guarded while callbacks run. Any direct assignment, nested write,
+  nested bang invocation, or helper-mediated write through that identity fails before the attempted write with
+  `receiver_mutation_reentrant`. A lexical/scoped shadow identity with the same spelling and unrelated bindings
+  remain legal;
+- complete callback success commits the rebuilt root once and produces a detached returned root. Ordinary fluent
+  continuation starts after that commit against the returned value, so later continuation failure preserves the
+  already-completed receiver update; and
+- absent/wrong-kind receivers, syntax exclusions, re-entrancy, callback failure, and continuation failure have
+  exact typed boundaries and authored half-open Unicode-scalar spans. Callback diagnostics propagate unchanged.
+
+The executable owner is `capability_conformance/map_leaves_mutation_contract.json`, checked by
+`tools/check_map_leaves_mutation_contract.py`. It covers four valid syntax forms, fourteen syntax failures, five
+exclusions, ten successes, eight pre-commit failures, the continuation/shadow/guard-release/non-bang/detachment
+boundaries, and 167 rejected mutations. A verified five-backend control accepts the unchanged non-bang call; its
+one-token bang twin remains unsupported on every backend. Implementation still begins only in `.19.2` after the
+composition leaf `.19.1.3` passes.
+
 ## Consequences
 
 - The terse deep-write form remains ordinary assignment, for example

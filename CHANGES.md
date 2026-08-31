@@ -10,6 +10,26 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-31 — FUTURE-PARITY-BACKLOG.19.1.2 — lock neutral map_leaves mutation
+
+- Added future-only `linkedspec-map-leaves-mutation-v1` and an independent backend-neutral parser/state-machine
+  checker. The sole v1 bang token has a dedicated `receiver_mutation_chain` AST, exact authored Unicode-scalar
+  spans, one bare resolved receiver binding, and explicit function/receiver/method/continuation exclusions.
+- Frozen current root-kind traversal over a detached original-shape snapshot; copied callback `value`, `path`,
+  `depth`, and `key|index`; callback-result replacement and subtree non-revisit; atomic rebind; detached result;
+  and commit-before-continuation ordering.
+- The active receiver identity rejects direct, nested-write, nested-bang, and helper-mediated writes before the
+  attempt while allowing unrelated bindings and distinct same-spelling shadows. Callback/re-entrant failures
+  preserve the receiver and prior unrelated effects; guard cleanup is explicit on every exit.
+- Proof covers 4 valid syntax / 14 invalid / 5 exclusions / 10 successes / 8 pre-commit failures, continuation,
+  shadow, guard release, non-bang isolation, detachment, and 167 rejected mutations. A valid action-edge control
+  agrees on all five backends; its one-token bang twin remains unsupported at identifier-only parser boundaries.
+- Added the checker to the project-routed tool census at 37 entrypoints with unchanged three Python temporary and
+  15 shell allocator owners. This storage-governance movement fires the leaf's canonical verification tier.
+- Synchronized ADR `0036`, Knowledge, roadmaps, architecture, capability/Toolbox guidance, task/index, live
+  continuity, and the sole-facing mdBook. No backend parser/compiler/runtime, fixture, capability, generated
+  format, facade, schema, MCP, CLI, or current public behavior is admitted; composition `.19.1.3` follows.
+
 ## 2026-08-30 — FUTURE-PARITY-BACKLOG.15.3 — repair Lua next fixture ownership
 
 - Replaced the stale Lua runtime-control source `/skip/ { next() }` with action-edge-owned

@@ -9,6 +9,23 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-31 (`FUTURE-PARITY-BACKLOG.19.1.2` — future `map_leaves!` contract): a checked-in action-edge fixture is
+  the trustworthy parser control. Its non-bang form returns the same nested value on Perl/Rust/Dart/Julia/Lua;
+  replacing only the method spelling yields null on Perl/Rust (Rust warns) and generic invocation failure on the
+  other three. The earlier lifecycle-style probe was discarded because its non-bang twin also returned null.
+- Perl ActionIR classifies the bang chain as `raw_perl` / `invalid_fluent_chain`; Rust's `parse_name` stops before
+  `!`; Dart/Julia/Lua callee recognizers require identifiers. The gap is therefore syntax/AST ownership before
+  runtime dispatch, and the neutral contract supplies one future typed boundary without blessing current errors.
+- The receiver guard is keyed to the resolved binding identity, not its spelling. This rejects every direct or
+  helper-mediated same-binding write during callbacks while allowing unrelated bindings and scoped shadows. The
+  guard releases after both success and failure, preventing a failed call from poisoning later invocations.
+- Mapping consumes an isolated original-shape snapshot. Callback frames and aggregate results are copied; root-kind
+  replacements are not revisited. Complete callback success commits once and returns another detached copy.
+  Ordinary fluent continuation runs only after commit, so its later failure cannot retroactively roll back the
+  completed bang operation.
+- The independent checker freezes 4/14/5 syntax cases, 10 success and 8 pre-commit failure cases, five special
+  state boundaries, and 167 mutations. Adding it through `tools/run_python_project_data.sh` advances the exact
+  tool-entrypoint inventory 36→37 with no new temporary allocator, firing canonical storage proof for this leaf.
 - 2026-08-30 (`FUTURE-PARITY-BACKLOG.15.3` — stale Lua `next()` fixture repair): `.19.1.1` boundary proof made
   `lua/test/run.lua` fail only test 115 on PUC Lua. The fixture's `/skip/ { next() }` now correctly parses as two
   rule items: a regex plus a bare lifecycle-`I` block. Entry lifecycle throws `next` before iteration, yielding

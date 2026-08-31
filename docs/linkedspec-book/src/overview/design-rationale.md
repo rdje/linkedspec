@@ -107,10 +107,44 @@ rebuilt tree only after complete success, rebind `tree`, and return the updated 
 a complete copied root-to-leaf path; `value` stays a scoped value rather than a writable reference. Replacements
 are based on the original tree shape and are not recursively revisited in the same call.
 
+The future-neutral contract now makes those details executable without making the feature current. Hash roots
+recurse only through hashes in sorted-key depth-first order; arrays inside them are leaves. Array roots recurse
+only through arrays in zero-based depth-first order; hashes inside them are leaves. Every callback gets its own
+detached `value` and complete `path`, plus `depth` and the root-kind selector `key` or `index`. The callback's
+returned value replaces that leaf. For example, a returned hash beneath a hash root is still a replacement—it is
+not traversed again during the same call.
+
+The receiver is protected by binding identity while callbacks run. A callback may update unrelated bindings, and
+a function parameter or other scoped binding that happens to use the same spelling is a distinct identity. A
+direct assignment, nested write, nested `map_leaves!`, or helper-mediated write to the active receiver itself is a
+typed `receiver_mutation_reentrant` failure before the attempted write. Earlier unrelated callback effects remain,
+but the receiver does not receive a partial mapped tree. Callback failures likewise propagate unchanged.
+
+Commit and chaining have an explicit order:
+
+```text
+count = tree.map_leaves!() {
+    return(normalize(value))
+}.count_keys()
+```
+
+First every callback succeeds, then `tree` is rebound once, then a detached copy of that updated root feeds
+`count_keys()`. If that later continuation fails, the already-completed `map_leaves!` commit is not rolled back.
+Without a continuation, the detached updated tree is the expression result; statement-position use may discard
+the result while retaining the receiver update.
+
+This contract also distinguishes existence from addressability. The authored receiver must be a bare non-reserved
+uniform-binding name, and at runtime it must already hold an harray or array. An absent, null, or scalar receiver
+gets an exact typed diagnostic rather than implicit creation or a silent `undef`. All syntax, receiver, and
+re-entrancy diagnostics retain authored half-open Unicode-scalar spans.
+
 `walk_leaves!`, `reduce_leaves!`, function-form bang calls, and arbitrary `!`-suffixed identifiers are not part of
 that direction. They would save no meaningful ceremony or would advertise mutation without a distinct coherent
 contract. Current nested writes still require every intermediate container to exist, and current parsers do not
-accept `map_leaves!`; ADR `0036` and backlog `.19.1-.19.7` own the future neutral and five-backend work.
+accept `map_leaves!`. The verified non-bang control produces the same value on Perl, Rust, Dart, Julia, and Lua;
+changing only the method token to `map_leaves!` remains rejected on all five because their fluent grammars still
+accept identifier characters only. ADR `0036`, the two neutral contracts under `capability_conformance/`, and
+backlog `.19.1-.19.7` own the future composition and five-backend work.
 
 ## 3. Actions are moving toward backend-neutral semantics
 

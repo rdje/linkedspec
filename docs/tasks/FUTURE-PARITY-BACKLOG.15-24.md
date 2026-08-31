@@ -721,7 +721,7 @@
   Commit: `FUTURE-PARITY-BACKLOG.18.3 - plan optional native parser acceleration`
 
 - ID: `FUTURE-PARITY-BACKLOG.19`
-  Status: `in progress; .19.1.1 complete; .15.3 repair complete; .19.1.2 next`
+  Status: `in progress; .19.1.2 active`
   Goal: Add portable explicit nested-write vivification and receiver-mutating method semantics without hidden
     reads, host-language aliasing, or backend drift.
   Children: `.19.0`, `.19.1`, `.19.2`, `.19.3`, `.19.4`, `.19.5`, `.19.6`, `.19.7`
@@ -751,7 +751,7 @@
   Commit: `FUTURE-PARITY-BACKLOG.19.0 - plan write vivification and bang mutation`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.1`
-  Status: `in progress; .19.1.1 complete; .15.3 repair complete; .19.1.2 next`
+  Status: `in progress; .19.1.2 complete, .19.1.3 pending`
   Goal: Lock an executable backend-neutral v1 contract for nested write-vivification and approved `!` mutation.
   Children: `.19.1.1`, `.19.1.2`, `.19.1.3`
   Dependencies: `.19.0`; complete current Perl/Rust/Dart/Julia/Lua parity (satisfied by
@@ -817,12 +817,66 @@
   Commit: `FUTURE-PARITY-BACKLOG.19.1.1 - lock neutral write vivification`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.1.2`
-  Status: `pending`
+  Status: `done; canonical-signoff-complete` (2026-08-31; activated from exact clean pushed standalone-fixture repair commit
+    `c013f3d58480deeee2bc47f7609f3d395a7857bb`)
   Goal: Lock the neutral `map_leaves!` parser, addressable receiver, callback, stable path, original-shape,
     atomic-commit, re-entrancy, result, continuation, and exclusion contract.
   Dependencies: `.19.0`; complete current-backend parity
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `canonical` — the future-neutral contract itself changes no backend behavior, but its new
+    maintained Python checker advances the exact tool-project-data entrypoint census from 36 to 37; ADR `0073`
+    therefore requires one receipt-bound canonical proof for the staged storage-governance candidate.
+  Focused checks: exact current five-backend bang-syntax rejection and non-mutating traversal behavior; source-
+    backed parser/receiver/callback/continuation audit; strict fixture/schema validation and rejected-mutation
+    corpus; ADR/Knowledge/task/index/roadmap/book/live-memory alignment; both bounded histories, all nine doctrines,
+    rendered mdBook, and whitespace.
+  Canonical trigger: `tool-project-data storage census 36→37` — exact staged candidate must pass canonical local
+    CI. Final cross-backend/public admission remains separately owned by `.19.7`.
+  Acceptance: Freeze exact receiver-method syntax and a dedicated neutral AST shape for the sole v1 bang method;
+    require one bare named uniform binding as the addressable receiver; preserve existing root-kind traversal over
+    an isolated original-shape snapshot; define callback value/path/key/index/depth scope, copied stable paths,
+    callback-result replacement, replacement-subtree non-revisit, atomic receiver rebinding, detached returned
+    updated value, continuation behavior, same-receiver/re-entrant mutation rejection, typed diagnostics and source
+    spans; and reject function form, temporary/literal/helper/nested receivers, arbitrary bang names,
+    `walk_leaves!`, `reduce_leaves!`, aliases, writable callback references, and hidden receiver mutation through
+    the non-bang twin. No backend behavior is enabled here.
+  Checklist: [x] exact clean activation and task ownership [x] prerequisite ADR/Knowledge retrieval
+    [x] current five-backend boundary/toolbox probes [x] parser/AST/receiver/continuation source audit
+    [x] neutral fixture/schema and mutation corpus [x] callback/path/original-shape/atomicity/re-entrancy proof
+    [x] durable docs/Knowledge/live-memory/task-index alignment [x] focused and exact staged canonical signoff
+    [x] atomic commit/brief/clean handoff.
+  Activation evidence: `git status --short --untracked-files=all` is empty at exact pushed commit `c013f3d5`;
+    local HEAD equals upstream; `git_message_brief.txt` is zero bytes; pre-push reuses the committed canonical
+    receipt; generated mdBook output is absent; no background job remains. `.19.1.1` and intervening `.15.3` are
+    committed complete, current five-backend parity is satisfied, and ADR `0036` remains the sole accepted
+    direction.
+  Current-boundary evidence: the checked-in `terse_13_3_array_tree_traversal_receiver_blocks` action-edge fixture
+    returns its exact expected nested value on Perl/Rust/Dart/Julia/Lua. A minimal action-edge control using only
+    `items.map_leaves()` likewise returns `['a',['b','c'],{'h':'H'}]` on all five. Replacing only that method token
+    with `map_leaves!` yields null on Perl/Rust, with Rust's exact stopped-identifier warning, and nonzero generic
+    parser-invocation failure on Dart/Julia/Lua. The discarded initial lifecycle probe is not evidence because its
+    non-bang twin also returned null.
+  Parser/toolbox evidence: Perl `call_spec_handler_subst` fully lowers the non-bang chain but leaves the bang chain
+    raw; direct ActionIR parsing identifies `raw_perl` / `invalid_fluent_chain`. Perl `_parse_method_function_expr`,
+    Rust `parse_name`, Dart `_parseCallee`, Julia `_action_parse_callee`, and Lua `parse_callee` all restrict current
+    fluent method names to identifier characters. Existing receiver dispatch, callback-frame copies, binding
+    snapshots/restoration, and chain loops provide the audited implementation seams; no backend source moves.
+  Contract evidence: `linkedspec-map-leaves-mutation-v1` reserves only
+    `IDENTIFIER.map_leaves!() { ACTION_BLOCK }`, owns one dedicated `receiver_mutation_chain`, resolves one existing
+    bare harray/array binding identity, traverses a detached original-shape root-kind snapshot, and copies callback
+    `value`/`path`/`depth`/`key|index`. Callback results replace but are not revisited. The active identity rejects
+    direct/nested/helper-mediated writes before mutation; unrelated bindings and same-spelling shadow identities
+    remain legal. Success commits once, returns a detached root, and precedes ordinary continuation. Four valid
+    syntax, fourteen syntax-failure, five exclusion, ten success, eight pre-commit-failure, continuation/shadow/
+    guard-release/non-bang/detachment cases pass; all 167 independent mutations are rejected.
+  Focused/canonical evidence: both future contract checkers, Python syntax, Knowledge 918/7,810, exact task
+    partition/index, both bounded-history pressure checks, rendered 81-file/15,920-KiB sole-facing mdBook, all nine
+    doctrines, memory architecture, whitespace, and exact no-backend/no-fixture/no-capability/no-format scope pass.
+    The new repository-routed checker owns no temporary allocator; tool storage passes at 37 Python entrypoints,
+    three Python temporary owners, and fifteen shell allocator owners. That exact census movement fires the
+    canonical tier; the complete staged candidate and receipt-bound local CI pass before commit.
+  Verification: **PASS 2026-08-31.** Canonical signoff complete; no future syntax/runtime behavior is admitted.
+    `.19.1.3` is the next clean-boundary composition leaf.
+  Commit: `FUTURE-PARITY-BACKLOG.19.1.2 - lock neutral map_leaves mutation`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.1.3`
   Status: `pending`

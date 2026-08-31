@@ -697,6 +697,22 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
 - **CURRENT BOUNDARY:** use the existing `terse_11_4` backend tests/corpus case for unchanged non-vivification;
   Perl's `LinkedSpec::call_spec_handler_subst` and `return_descriptor` show the current static segment split.
 
+### 4.8.3 `tools/check_map_leaves_mutation_contract.py` — future neutral receiver-mutation oracle
+
+- **WHAT:** validates `linkedspec-map-leaves-mutation-v1`: the sole v1 bang token, dedicated
+  `receiver_mutation_chain` AST/spans, bare resolved receiver identity, current root-kind traversal over a detached
+  original-shape snapshot, copied callback fields and paths, result replacement/non-revisit, atomic rebind,
+  detached return, post-commit continuation, and same-receiver write guard.
+- **WHEN:** designing or implementing `map_leaves!` parsing/runtime behavior in any backend. Use the checker before
+  touching backend code; do not generalize its one accepted bang token to identifiers, functions, other methods,
+  temporary/nested receivers, or callback aliases.
+- **HOW:** `bash tools/run_python_project_data.sh tools/check_map_leaves_mutation_contract.py`.
+- **OUTPUT:** `map_leaves! mutation contract: 4 valid syntax, 14 invalid syntax, 5 exclusions, 10 success, 8 pre-commit failures, continuation/shadow/guard/nonbang/detachment proof, 167 rejected mutations; future behavior remains unadmitted`.
+- **CURRENT BOUNDARY:** use the exact `terse_13_3_array_tree_traversal_receiver_blocks` fixture as the five-backend
+  non-bang control. Its minimal bang twin currently becomes null on Perl/Rust (with a Rust parser warning) and a
+  generic nonzero parser-invocation failure on Dart/Julia/Lua. Perl's action AST classifies the bang chain as
+  `raw_perl/invalid_fluent_chain`; every current parser restricts fluent method names to identifier characters.
+
 ### 4.9 `tools/check_semantic_introspection_contract.py` — neutral model/query oracle
 
 - **WHAT:** validates `linkedspec-semantic-model-v1`, `linkedspec-semantic-query-v1`, the owned backend-admission

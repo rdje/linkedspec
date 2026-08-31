@@ -31,6 +31,30 @@ expression failures, three non-creating reads, detachment, and 105 rejected muta
 PUC Lua, and LuaJIT remain non-vivifying until their separately owned implementation/admission leaves; this
 artifact does not change the capability census.
 
+## Future `map_leaves!` receiver mutation
+
+`map_leaves_mutation_contract.json` freezes the other backend-neutral half of ADR `0036` without admitting current
+syntax or behavior. It reserves exactly `IDENTIFIER.map_leaves!() { ... }`, gives that surface a dedicated
+`receiver_mutation_chain` AST, and requires the receiver to resolve to one existing harray/array uniform-binding
+identity. Mapping traverses a detached original-shape snapshot with the current root-kind recursion rule, copied
+callback fields and stable paths, result replacement, and replacement-subtree non-revisit. Complete success commits
+once and returns a detached root; callback failure leaves the receiver unchanged.
+
+The active receiver identity is write-protected while callbacks run. Direct, nested-write, nested-bang, and helper-
+mediated writes to it receive one typed `receiver_mutation_reentrant` diagnostic before the attempted write. A
+same-spelling shadow binding and unrelated bindings remain independent. Ordinary fluent continuation begins after
+commit against the detached return, so a continuation failure does not roll back the completed bang call. Run:
+
+```bash
+bash tools/run_python_project_data.sh tools/check_map_leaves_mutation_contract.py
+```
+
+The checker validates four syntax forms, fourteen exact syntax failures, five exclusions, ten successful state-
+machine cases, eight pre-commit failures, continuation/shadow/guard-release/non-bang/detachment proof, and 167
+rejected mutations. Current Perl and Rust soft-fail the bang twin to null (Rust also warns), while the Dart, Julia,
+and Lua primary CLIs return a generic parser-invocation failure; all five accept the byte-identical non-bang control.
+Those current rejection differences are evidence only, not behavior admitted by this future contract.
+
 `mcp_semantic_transport_contract.json` (`linkedspec-mcp-transport-v1`) is the single backend-neutral machine
 contract for LinkedSpec's modern MCP `2026-07-28` stdio projection. Its root-relative artifact inventory pins the
 closed JSON Schema 2020-12 envelope/tool definitions, four semantic payloads, 35 canonical LF-framed JSON-RPC
