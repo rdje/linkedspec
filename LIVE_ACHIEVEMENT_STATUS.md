@@ -2,20 +2,23 @@
 
 ## Current Activity
 
-- No leaf is active after `.19.1.3` freezes the future-only write/`map_leaves!` composition at focused signoff.
-  Neutral parent `.19.1` is closed; current parser/runtime behavior remains unchanged on every backend.
+- No leaf is active after `.19.2.1` implements the frozen nested-write contract on the Perl reference at focused
+  signoff. Rust, Dart, Julia, and Lua remain non-vivifying; `map_leaves!` remains unsupported everywhere.
 
 ## Latest Completed Slice
 
-- `.19.1.3` digest-binds both unchanged mechanism contracts and proves eight writes, six callback compositions,
-  one post-commit continuation, and 593 composition mutations without backend admission.
+- `.19.2.1` unifies Perl nested-write AST/lowering/runtime behavior, creates absent/unambiguous typed paths,
+  preserves bound-null and dense atomic boundaries, and locks exact diagnostics, detachment, and function state.
 
 ## Next Action
 
-- From the clean `.19.1.3` handoff, activate `FUTURE-PARITY-BACKLOG.19.2.1` task-tree-first and implement the
-  unchanged nested write-vivification v1 contract on the Perl reference backend.
+- From the clean `.19.2.1` handoff, activate `FUTURE-PARITY-BACKLOG.19.2.2` task-tree-first and implement the
+  unchanged `map_leaves!` v1 contract on the Perl reference backend.
 
 ## Recent Completions
+
+- `2026-08-31` — `.19.2.1` implements Perl write vivification from the frozen 5/7/11/16 fixture with typed
+  evaluated paths, presence-aware rules/functions, isolated dense commit, detachment, and no non-Perl admission.
 
 - `2026-08-31` — `.19.1.3` composes both future mutations at 8 writes / 6 callbacks / 1 continuation / 593
   mutations; all six current routes stop before callback write lowering and no backend is admitted.
@@ -63,9 +66,6 @@
 
 - `2026-08-28` — `.14.7.10` independently recomposes staged 9/9/123 plus public 129, all six runtime routes,
   typed 13/1/189, generated/capability 85/0/0, and language coverage unchanged, then closes parent `.14.7`.
-
-- `2026-08-28` — `.14.7.9` makes exact assignment-form `parse_job(...)` public at staged 9/9/123 plus 129 public
-  mutations, keeps typed at 13/1/189, and removes the satisfied future exclusion without runtime movement.
 
 ## History
 

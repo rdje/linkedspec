@@ -1,7 +1,7 @@
 # 0036 - Nested creation is write-only and `!` denotes explicit receiver mutation
 
 - Date: 2026-07-15
-- Status: accepted direction; neutral contracts complete, backend implementation pending
+- Status: accepted direction; neutral contracts complete, Perl nested writes implemented, remaining backends/mutation/admission pending
 - Tags: dsl, language-evolution, mutation, autovivification, receiver-methods, traversal, paths, portability
 
 ## Context
@@ -11,7 +11,7 @@ containers do not yet exist. Ruby uses a trailing `!` convention to warn that a 
 Both ideas fit LinkedSpec's terse/expressive direction if their observable semantics are explicit rather than
 inherited from a host language.
 
-The current five-backend contract is narrower. Uniform binding auto-creates an absent top-level array or harray
+At the decision boundary, the five-backend contract was narrower. Uniform binding auto-created an absent top-level array or harray
 for an explicit mutation of that kind. Nested value-path assignment is copy-on-write, but every intermediate
 container must already exist with the required kind; only the final harray key may be created and only an array
 index at the exact current length may append. Missing/wrong intermediates and array gaps do not mutate the root.
@@ -149,6 +149,27 @@ returns null on Perl/Rust (with Rust's stopped-identifier warning) and the gener
 Dart/Julia/both Lua ABIs. Backend implementation begins with `.19.2.1`; current capability/public claims remain
 unchanged until the later admission leaves.
 
+## Perl nested-write implementation (2026-08-31)
+
+Leaf `.19.2.1` implements the unchanged `linkedspec-write-vivification-v1` contract on the Perl reference only:
+
+- one- and many-segment bracket assignments parse as one `assign_nested_access` node containing ordered
+  expression-bearing `path_segment` records and authored Unicode-scalar spans;
+- lowering evaluates every segment once left-to-right, then the RHS once, and calls
+  `LinkedSpec::BindingRuntime::nested_write` only after those expressions complete;
+- an invocation-local presence map distinguishes an absent Perl lexical from explicitly bound `undef`. Rule
+  assignments mark tracked roots present, user-function parameters begin present, and fresh function locals reset
+  to absent on every call;
+- the runtime chooses harray/array from evaluated string/nonnegative-integer kinds, clones before structural work,
+  creates only unambiguous missing values, keeps arrays dense, and throws exact typed selector/kind/gap objects;
+  and
+- successful bindings/results and aggregate inputs remain detached; structural failure commits no partial path,
+  while completed same-binding segment/RHS effects retain the frozen post-evaluation snapshot semantics.
+
+The permanent Perl contract projects all frozen AST, syntax, success, structural-failure, evaluation, detachment,
+bound-null, and user-function cases. This leaf does not implement `map_leaves!`, alter Rust/Dart/Julia/Lua, or
+admit a portable/public capability. Those boundaries remain owned by `.19.2.2-.19.9`.
+
 ## Consequences
 
 - The terse deep-write form remains ordinary assignment, for example
@@ -161,8 +182,9 @@ unchanged until the later admission leaves.
   be added; they are excluded because no distinct coherent mutation contract has been accepted.
 - “Absolute path” means complete root-to-leaf path inside the traversal receiver. The variable name is receiver
   identity, not an extra path element. Hash-root paths contain keys; array-root paths contain zero-based indexes.
-- Until `.19.1-.19.7` land, every current public guide and runtime statement about non-vivifying nested writes
-  remains true, and `map_leaves!` remains unsupported syntax.
+- During `.19.2-.19.6`, public guidance must name the backend transition explicitly: Perl implements nested-write
+  vivification; Rust, Dart, Julia, and Lua retain the checked non-vivifying boundary. `map_leaves!` remains
+  unsupported syntax until its owned backend and admission leaves land.
 
 ## Links
 

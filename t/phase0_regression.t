@@ -45219,8 +45219,8 @@ subtest 'spec_format_terse_1_2_3_3_1_scalar_source_slot_bare_reads_auto_exist' =
         'prefix identifier undefine is not a literal and now follows scalar bare-read semantics');
     like($L->('items += value'), qr/BindingRuntime::push_value\(\$items, "items", \$value\)/,
         'array append bare RHS is handled by the later mutation key/RHS scalar-read leaf');
-    like($L->('meta["stage"] = value'), qr/BindingRuntime::index_set\(\$meta, "meta", "stage", \$value\)/,
-        'hash-index bare RHS is handled by the later mutation key/RHS scalar-read leaf');
+    like($L->('meta["stage"] = value'), qr/\$__ls_path_segment_0 = "stage";.*\$__ls_path_value = \$value;.*BindingRuntime::nested_write\(\$meta, .*"meta"/s,
+        'one-segment nested-write RHS keeps its scalar read');
     is($L->('return(foo["a"][z])'), 'return $foo->{"a"}->[$z]',
         'direct-access bare path atom is handled by the later direct path-atom leaf');
     like($L->('push(A,B)'), qr/__ls_push_handler.*BindingRuntime::push_value/s,
@@ -45292,12 +45292,12 @@ subtest 'spec_format_terse_1_2_3_3_2_mutation_slot_bare_reads_auto_exist' => sub
         'set_key(meta, key, value) lowers bare key and value as scalar reads');
     like($L->('set_key(meta,"stage",value)'), qr/BindingRuntime::index_set\(\$meta, "meta", "stage", \$value\)/,
         'set_key(meta, "stage", value) lowers a bare value as a scalar read');
-    like($L->('meta[key] = value'), qr/BindingRuntime::index_set\(\$meta, "meta", \$key, \$value\)/,
-        'hash-index operator lowers bare key and value as scalar reads');
-    like($L->('meta["stage"] = value'), qr/BindingRuntime::index_set\(\$meta, "meta", "stage", \$value\)/,
-        'hash-index operator lowers a bare value with a literal key');
-    like($L->('meta[key] = "v"'), qr/BindingRuntime::index_set\(\$meta, "meta", \$key, "v"\)/,
-        'hash-index operator lowers a bare key with a literal value');
+    like($L->('meta[key] = value'), qr/\$__ls_path_segment_0 = \$key;.*\$__ls_path_value = \$value;.*BindingRuntime::nested_write\(\$meta, .*"meta"/s,
+        'one-segment nested write lowers bare key and value as typed expressions');
+    like($L->('meta["stage"] = value'), qr/\$__ls_path_segment_0 = "stage";.*\$__ls_path_value = \$value;.*BindingRuntime::nested_write\(\$meta, .*kind_hint => "string"/s,
+        'one-segment nested write lowers a bare value with a literal string selector');
+    like($L->('meta[key] = "v"'), qr/\$__ls_path_segment_0 = \$key;.*\$__ls_path_value = "v";.*BindingRuntime::nested_write\(\$meta, .*kind_hint => "dynamic"/s,
+        'one-segment nested write lowers a dynamic selector with a literal value');
     is($L->('return(foo["a"][z])'), 'return $foo->{"a"}->[$z]',
         'direct-access bare path atom is handled by the later direct path-atom leaf');
     like($L->('push(A,B)'), qr/__ls_push_handler.*BindingRuntime::push_value/s,
@@ -45376,8 +45376,8 @@ subtest 'spec_format_terse_1_2_3_3_3_direct_access_bare_path_atoms_auto_exist' =
         'assignment source direct access lowers a bare path atom');
     like($L->('items += foo["a"][z]'), qr/BindingRuntime::push_value\(\$items, "items", \$foo->\{"a"\}->\[\$z\]\)/,
         'array append RHS direct access lowers a bare path atom');
-    like($L->('meta[key] = foo["a"][z]'), qr/BindingRuntime::index_set\(\$meta, "meta", \$key, \$foo->\{"a"\}->\[\$z\]\)/,
-        'hash mutation RHS direct access lowers a bare path atom');
+    like($L->('meta[key] = foo["a"][z]'), qr/\$__ls_path_value = \$foo->\{"a"\}->\[\$z\];.*BindingRuntime::nested_write\(\$meta,/s,
+        'nested-write RHS direct access lowers a bare path atom');
     is($L->('return(foo["a"][true])'), 'return foo["a"][true]',
         'reserved primitive literal true is not claimed as a direct-access path scalar read');
     is($L->('return(foo["a"][CAPTURE])'), 'return foo["a"][CAPTURE]',
@@ -45608,8 +45608,8 @@ subtest 'spec_format_terse_1_3_4_1_scalar_assignment_operator_matches_set' => su
         'equality-like spelling is not claimed by the scalar assignment operator');
     is($L->('items ++'), 'items ++',
         'increment-like spelling is not claimed by the scalar assignment operator');
-    like($L->('name["k"] = "v"'), qr/BindingRuntime::index_set\(\$name, "name", "k", "v"\)/,
-        'hash-index assignment is handled by its own operator contract');
+    like($L->('name["k"] = "v"'), qr/\$__ls_path_segment_0 = "k";.*\$__ls_path_value = "v";.*BindingRuntime::nested_write\(\$name, .*"name"/s,
+        'one-segment assignment is handled by the unified nested-write contract');
 
     my $d = LinkedSpec::Get(\("top:: /(\\w+)\\s*/ -> top[0] { name = cat(\"o\", \"k\"); return(name) }\n"), return_descriptor => 1);
     my $meta = $d->{spec}{top}{meta}{action_rewriter};
@@ -45671,8 +45671,8 @@ subtest 'spec_format_terse_1_3_4_2_array_append_operator_matches_push' => sub {
         'increment-like spelling is not claimed by the array append operator');
     is($L->('name = "ok"'), '$name = "ok"',
         'scalar assignment operator remains separate');
-    like($L->('name["k"] = "v"'), qr/BindingRuntime::index_set\(\$name, "name", "k", "v"\)/,
-        'hash-index assignment is handled by its own operator contract');
+    like($L->('name["k"] = "v"'), qr/\$__ls_path_segment_0 = "k";.*\$__ls_path_value = "v";.*BindingRuntime::nested_write\(\$name, .*"name"/s,
+        'one-segment assignment is handled by the unified nested-write contract');
 
     my $d = LinkedSpec::Get(\("top:: /(\\w+)\\s*/ -> top[0] { items += cat(\"a\", \"b\"); return(copy(items)) }\n"), return_descriptor => 1);
     my $meta = $d->{spec}{top}{meta}{action_rewriter};
@@ -45719,16 +45719,16 @@ subtest 'spec_format_terse_1_3_4_3_hash_index_assignment_operator_matches_set_ke
         return $src;
     };
 
-    like($L->('meta["stage"] = "v"'), qr/BindingRuntime::index_set\(\$meta, "meta", "stage", "v"\)/,
-        'top-level hash-index assignment operator lowers to a uniform typed-binding update');
-    is($L->('meta[cat("s", "tage")] = cat("v", "!")'), $L->('set_key(meta, cat("s", "tage"), cat("v", "!"))'),
-        'hash-index assignment operator lowers identically to set_key(target, key, value)');
-    is($L->('meta[key] = value'), $L->('set_key(meta, key, value)'),
-        'hash-index assignment operator lowers identically for explicit scalar key/value reads');
-    like($L->('meta[key] = "v"'), qr/BindingRuntime::index_set\(\$meta, "meta", \$key, "v"\)/,
-        'bare key now follows the Channel 2 mutation-slot scalar-read rule');
-    like($L->('meta["stage"] = value'), qr/BindingRuntime::index_set\(\$meta, "meta", "stage", \$value\)/,
-        'bare RHS now follows the Channel 2 mutation-slot scalar-read rule');
+    like($L->('meta["stage"] = "v"'), qr/\$__ls_path_segment_0 = "stage";.*\$__ls_path_value = "v";.*BindingRuntime::nested_write\(\$meta, .*kind_hint => "string"/s,
+        'top-level bracket assignment lowers to the unified typed-path update');
+    isnt($L->('meta[cat("s", "tage")] = cat("v", "!")'), $L->('set_key(meta, cat("s", "tage"), cat("v", "!"))'),
+        'bracket assignment now retains runtime selector typing instead of set_key compatibility lowering');
+    isnt($L->('meta[key] = value'), $L->('set_key(meta, key, value)'),
+        'dynamic bracket assignment is distinct from explicit harray-only set_key');
+    like($L->('meta[key] = "v"'), qr/\$__ls_path_segment_0 = \$key;.*\$__ls_path_value = "v";.*BindingRuntime::nested_write\(\$meta, .*kind_hint => "dynamic"/s,
+        'bare selector now follows typed runtime selection');
+    like($L->('meta["stage"] = value'), qr/\$__ls_path_segment_0 = "stage";.*\$__ls_path_value = \$value;.*BindingRuntime::nested_write\(\$meta, .*kind_hint => "string"/s,
+        'bare RHS remains a scalar expression under the unified nested write');
     is($L->('name = "ok"'), '$name = "ok"',
         'scalar assignment operator remains separate');
     like($L->('items += "a"'), qr/BindingRuntime::push_value\(\$items, "items", "a"\)/,
@@ -45788,10 +45788,10 @@ subtest 'spec_format_terse_1_5_2_primitive_literal_parity' => sub {
         'items += false lowers false as an explicit append value');
     like($L->('push(items, false)'), qr/BindingRuntime::push_value\(\$items, "items", do \{ require JSON::PP; JSON::PP::false \}\)/,
         'push(items,false) uses the value-push contract, not legacy child-call routing');
-    like($L->('meta["enabled"] = true'), qr/BindingRuntime::index_set\(\$meta, "meta", "enabled", do \{ require JSON::PP; JSON::PP::true \}\)/,
-        'hash-index assignment accepts true as an explicit RHS value');
-    like($L->('meta[true] = false'), qr/BindingRuntime::index_set\(\$meta, "meta", do \{ require JSON::PP; JSON::PP::true \}, do \{ require JSON::PP; JSON::PP::false \}\)/,
-        'hash-index assignment accepts primitive literals in both key and value positions');
+    like($L->('meta["enabled"] = true'), qr/\$__ls_path_value = do \{ require JSON::PP; JSON::PP::true \};.*BindingRuntime::nested_write\(\$meta, .*kind_hint => "string"/s,
+        'nested-write assignment accepts true as an explicit RHS value');
+    like($L->('meta[true] = false'), qr/\$__ls_path_segment_0 = do \{ require JSON::PP; JSON::PP::true \};.*\$__ls_path_value = do \{ require JSON::PP; JSON::PP::false \};.*BindingRuntime::nested_write\(\$meta, .*kind_hint => "boolean"/s,
+        'boolean selector typing is retained for runtime invalid-segment diagnosis');
     like($L->('push(items, trueword)'), qr/__ls_push_handler.*BindingRuntime::push_value/s,
         'prefix identifier trueword participates in representation-neutral static-rule precedence');
 
@@ -45848,7 +45848,12 @@ subtest 'spec_format_terse_1_5_3_call_spacing_and_parentheses_locks' => sub {
         ['meta[cat ("s","tage")] = cat ("v","!")', 'meta[cat("s","tage")] = cat("v","!")', 'hash-index key/RHS calls accept whitespace before parentheses'],
         ['return (array (true, false, undef))', 'return(array(true, false, undef))', 'nested constructor/literal calls accept whitespace before parentheses'],
     ) {
-        is($L->($case->[0]), $L->($case->[1]), $case->[2]);
+        my $spaced = $L->($case->[0]);
+        my $tight = $L->($case->[1]);
+        for my $lowered ($spaced, $tight) {
+            $lowered =~ s/source_span => \{[^{}]*\}/source_span => { <authored> }/g;
+        }
+        is($spaced, $tight, $case->[2]);
     }
 
     is($L->('return(cat "a","b")'), 'return(cat "a","b")',
@@ -46205,8 +46210,8 @@ subtest 'spec_format_terse_9_2_perl_colon_hash_literal_support' => sub {
         'colon hash literal lowers quoted keys and nested shape values');
     is($L->('name = { key : value }'), '$name = {$key => $value}',
         'direct assignment RHS accepts colon hash literals');
-    like($L->('meta[key] = { "inner" : value }'), qr/BindingRuntime::index_set\(\$meta, "meta", \$key, \{"inner" => \$value\}\)/,
-        'hash-index mutation RHS accepts colon hash literals');
+    like($L->('meta[key] = { "inner" : value }'), qr/\$__ls_path_value = \{"inner" => \$value\};.*BindingRuntime::nested_write\(\$meta,/s,
+        'nested-write RHS accepts colon hash literals');
     is($L->('return(set(meta, { key : value }))'), 'return do { $meta = {$key => $value}; $meta }',
         'expression-valued set accepts colon hash literals');
     is($L->('return(=(meta, { key : value }))'), 'return do { $meta = {$key => $value}; $meta }',
@@ -46306,14 +46311,14 @@ subtest 'spec_format_terse_1_2_3_5_1_shape_literal_value_expressions' => sub {
         'explicit scalar assignment source shape literals compose with helper value expressions');
     like($L->('items += [value]'), qr/BindingRuntime::push_value\(\$items, "items", \[\$value\]\)/,
         'array append RHS accepts a shape literal value expression');
-    like($L->('meta[key] = { key : value }'), qr/BindingRuntime::index_set\(\$meta, "meta", \$key, \{\$key => \$value\}\)/,
-        'hash-index assignment RHS accepts a hash shape literal');
+    like($L->('meta[key] = { key : value }'), qr/\$__ls_path_value = \{\$key => \$value\};.*BindingRuntime::nested_write\(\$meta,/s,
+        'nested-write assignment RHS accepts a hash shape literal');
     like($L->('push(items, [value])'), qr/BindingRuntime::push_value\(\$items, "items", \[\$value\]\)/,
         'push(target, shape) is explicit append, not all-bare child-call routing');
     is($L->('return(foo["a"][z])'), 'return $foo->{"a"}->[$z]',
         'direct-access brackets still route through direct-access lowering');
-    like($L->('meta[key] = [value]'), qr/BindingRuntime::index_set\(\$meta, "meta", \$key, \[\$value\]\)/,
-        'hash-index assignment brackets stay statement syntax while RHS brackets are a value literal');
+    like($L->('meta[key] = [value]'), qr/\$__ls_path_value = \[\$value\];.*BindingRuntime::nested_write\(\$meta,/s,
+        'nested-write brackets stay statement syntax while RHS brackets are a value literal');
 
     my $shape_spec = "Top::\n"
                    . " /x/ -> Done { set(value,\"ok\"); set(key,\"stage\"); return(array([value, cat(\"a\",\"b\"), true, []], { key : value, \"fixed\" : [value] })) }\n"
@@ -47396,14 +47401,14 @@ subtest 'spec_format_terse_3_3_3_mutation_assignment_expression_values' => sub {
         qr/^return do \{.*BindingRuntime::push_value\(\$items, "items", \$value\)/,
         'array append expression returns the updated typed binding');
     like($L->('return(meta[key] = value)'),
-        qr/^return do \{.*BindingRuntime::index_set\(\$meta, "meta", \$key, \$value\)/,
-        'hash-index assignment expression returns the updated typed binding');
+        qr/^return do \{.*\$__ls_path_value = \$value;.*BindingRuntime::nested_write\(\$meta,/s,
+        'nested-write assignment expression returns the updated typed binding');
     like($L->('return((items += value).count())'),
         qr/^return do \{ my \$__ls_count = do \{.*BindingRuntime::push_value/s,
         'array append expression can feed an array receiver chain');
     like($L->('return((meta[key] = value).count_keys())'),
-        qr/^return do \{ my \$__ls_count_keys = do \{.*BindingRuntime::index_set/s,
-        'hash-index assignment expression can feed a hash receiver chain');
+        qr/^return do \{ my \$__ls_count_keys = do \{.*BindingRuntime::nested_write/s,
+        'nested-write assignment expression can feed a hash receiver chain');
 
     my $spec = "Top::\n"
              . " /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); return(array(items += value, copy(items), meta[key] = value, copy(meta), (items += \"x\").count(), (meta[\"last\"] = value).count_keys())) }\n"
@@ -47435,7 +47440,7 @@ subtest 'spec_format_terse_3_3_3_mutation_assignment_expression_values' => sub {
     my $src = $gen->($spec);
     like($src, qr/my \$items;.*my \$meta;.*my \$value;.*my \$key;/s,
         'generated source auto-declares mutation expression targets and scalar key/RHS reads');
-    like($src, qr/BindingRuntime::push_value\(\$items.*BindingRuntime::index_set\(\$meta.*__ls_count.*__ls_count_keys/s,
+    like($src, qr/BindingRuntime::push_value\(\$items.*BindingRuntime::nested_write\(\$meta.*__ls_count.*__ls_count_keys/s,
         'generated source contains typed-binding mutation values and receiver-chain lowering');
     unlike($src, qr/items\s*\+=|meta\[key\]\s*=/,
         'generated source has no raw append/hash-index expression residue');
@@ -47485,7 +47490,7 @@ subtest 'spec_format_terse_3_3_4_assignment_expression_closure' => sub {
     my $src = $gen->($spec);
     like($src, qr/\$name = \$value.*\$other = .*__ls_cat_parts.*\$third = .*__ls_user_fn_arg_0 = "fn".*\$current = "surface"/s,
         'generated source contains scalar, operator-call, set, and current assignment values');
-    like($src, qr/(?=.*\$items = \[\$value\])(?=.*\$meta = \{\$key => \$value\})(?=.*\$items_mut = \[\$value\])(?=.*BindingRuntime::push_value\(\$items_mut, "items_mut", "tail"\))(?=.*\$meta_mut = \{\$key => \$value\})(?=.*BindingRuntime::index_set\(\$meta_mut, "meta_mut", "extra", \$other\))/s,
+    like($src, qr/(?=.*\$items = \[\$value\])(?=.*\$meta = \{\$key => \$value\})(?=.*\$items_mut = \[\$value\])(?=.*BindingRuntime::push_value\(\$items_mut, "items_mut", "tail"\))(?=.*\$meta_mut = \{\$key => \$value\})(?=.*\$__ls_path_value = \$other;.*BindingRuntime::nested_write\(\$meta_mut, .*"meta_mut")/s,
         'generated source contains uniform typed values and mutation updates');
     unlike($src, qr/\bassign\s*\(|=\s*\(\s*other\b|items_mut\s*\+=|meta_mut\["extra"\]\s*=/,
         'generated source has no raw legacy/operator/mutation residue');
@@ -47501,10 +47506,9 @@ subtest 'spec_format_terse_3_3_4_assignment_expression_closure' => sub {
 };
 
 subtest 'spec_format_terse_11_4_nested_mixed_value_path_assignment' => sub {
-    # SPEC-FORMAT-TERSE.11.4: multi-segment direct-access lvalues mutate
-    # scalar-held array/hash value trees explicitly. Intermediate containers
-    # must already exist with the required shape; final hash keys may be
-    # created and final array indexes may replace an element or append at len.
+    # SPEC-FORMAT-TERSE.11.4 plus FUTURE-PARITY-BACKLOG.19.2.1: one- and
+    # multi-segment direct-access lvalues use one typed path model. Missing
+    # roots/intermediates vivify, while existing wrong kinds and array gaps fail.
     plan tests => 13;
     require JSON::PP;
     my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
@@ -47523,32 +47527,32 @@ subtest 'spec_format_terse_11_4_nested_mixed_value_path_assignment' => sub {
     };
 
     like($L->('return(payload["items"][0]["name"] = value)'),
-        qr/return do \{ .*__ls_path_key_0.*__ls_path_idx_1.*__ls_path_key_2.*__ls_path_ok.*\?\s*\$payload\s*:\s*undef/s,
-        'nested assignment expression lowers to an explicit guarded value block');
+        qr/return do \{ .*__ls_path_segment_0.*__ls_path_segment_1.*__ls_path_segment_2.*BindingRuntime::nested_write.*\$__ls_path_result/s,
+        'nested assignment expression lowers to the isolated typed-path runtime');
     my $stmt_lowered = LinkedSpec::RuleIR::EmitContext::_lower_hash_index_assignment_operator_statement('payload["items"][1] = value');
-    like($stmt_lowered, qr/__ls_path_idx_1.*push \@\{\$__ls_path_cursor\}.*\$__ls_path_ok \? \$payload : undef/s,
-        'nested statement assignment lowers through the guarded path helper');
+    like($stmt_lowered, qr/__ls_path_segment_1.*BindingRuntime::nested_write.*\$payload = \$__ls_path_updated/s,
+        'nested statement assignment lowers through the typed path helper');
     unlike($stmt_lowered, qr/payload\["items"\]\[1\]\s*=/,
         'nested statement lowering leaves no raw direct-access assignment residue');
 
     my $stmt_spec = "Top::\n"
-                  . " /x/ -> Done { set(value, \"new\"); payload = { \"items\" : [{ \"name\" : \"old\" }] }; payload[\"items\"][0][\"name\"] = value; payload[\"items\"][1] = \"tail\"; missing_result = payload[\"missing\"][0] = \"bad\"; wrong_result = payload[\"items\"][0][0] = \"bad\"; return(array(payload, missing_result, wrong_result)) }\n"
+                  . " /x/ -> Done { set(value, \"new\"); payload = { \"items\" : [{ \"name\" : \"old\" }] }; payload[\"items\"][0][\"name\"] = value; payload[\"items\"][1] = \"tail\"; missing_result = payload[\"missing\"][0] = \"bad\"; return(array(payload, missing_result)) }\n"
                   . "\nDone::\n /[a-z]+/\n";
     my $stmt_parser = eval { LinkedSpec::Get(\$stmt_spec) };
     ok(ref($stmt_parser) eq 'CODE', 'nested statement assignment spec compiles to a parser')
         or diag(normalize_error($@));
-    is($run->($stmt_parser, 'xhello'), '[{"items":[{"name":"new"},"tail"]},null,null]',
-        'nested statement assignment mutates existing paths, appends at len, and returns undef for missing/wrong paths');
+    is($run->($stmt_parser, 'xhello'), '[{"items":[{"name":"new"},"tail"],"missing":["bad"]},{"items":[{"name":"new"},"tail"],"missing":["bad"]}]',
+        'nested statement assignment mutates existing paths, appends at len, and vivifies missing intermediates');
 
     my $expr_spec = "Top::\n"
-                  . " /x/ -> Done { payload = { \"items\" : [{ \"name\" : \"old\" }] }; return(array((payload[\"items\"][0][\"name\"] = \"new\").count_keys(), payload[\"items\"][1] = \"tail\", payload, payload[\"items\"][3] = \"gap\", payload)) }\n"
+                  . " /x/ -> Done { payload = { \"items\" : [{ \"name\" : \"old\" }] }; return(array((payload[\"items\"][0][\"name\"] = \"new\").count_keys(), payload[\"items\"][1] = \"tail\", payload)) }\n"
                   . "\nDone::\n /[a-z]+/\n";
     my $expr_parser = eval { LinkedSpec::Get(\$expr_spec) };
     ok(ref($expr_parser) eq 'CODE', 'nested assignment expression spec compiles to a parser')
         or diag(normalize_error($@));
     is($run->($expr_parser, 'xhello'),
-        '[1,{"items":[{"name":"new"},"tail"]},{"items":[{"name":"new"},"tail"]},null,{"items":[{"name":"new"},"tail"]}]',
-        'nested assignment expressions return the updated root on success and undef for out-of-range extension');
+        '[1,{"items":[{"name":"new"},"tail"]},{"items":[{"name":"new"},"tail"]}]',
+        'nested assignment expressions return detached updated roots on success');
 
     my $src = $gen->($stmt_spec);
     like($src, qr/my \$payload;/,
@@ -47557,8 +47561,8 @@ subtest 'spec_format_terse_11_4_nested_mixed_value_path_assignment' => sub {
         'generated source declares the scalar RHS');
     unlike($src, qr/my \@payload;|my %payload;/,
         'generated source does not infer aggregate storage declarations for nested scalar-held paths');
-    like($src, qr/__ls_path_ok.*__ls_path_cursor/s,
-        'generated source contains explicit guarded nested-path machinery');
+    like($src, qr/my %__ls_binding_presence;.*BindingRuntime::nested_write/s,
+        'generated source contains presence tracking and isolated typed-path machinery');
 
     my $d = LinkedSpec::Get(\$stmt_spec, return_descriptor => 1);
     my $meta = $d->{spec}{Top}{meta}{action_rewriter};

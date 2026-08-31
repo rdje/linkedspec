@@ -240,16 +240,20 @@ labels and a value expression such as `case(cat(foo, ""), body)` when the case v
 > array append operator `items += expr` is equivalent to the explicit
 > append form `push(items, expr)`; when the value is a working variable,
 > `items += value` reads that typed value, and in value positions the expression yields the updated array snapshot.
-> The hash-index operator `meta["key"] = expr` is equivalent to `set_key(meta, "key", expr)` when
-> the key and value are scalar-valued expressions; `meta[key] = value` reads working values `key` and `value`, and in value
-> positions the expression yields the updated hash snapshot.
+> The typed-path operator `meta["key"] = expr` has the same field-update effect as
+> `set_key(meta, "key", expr)` on Perl, but it is not the same runtime contract: its evaluated string selector
+> chooses harray, while a nonnegative integer chooses array. `meta[key] = value` reads working values `key` and
+> `value`, and in value positions yields the updated root snapshot. Remaining backends retain the earlier
+> hash-index interpretation until cross-backend admission.
 > Direct nested access `payload["children"][0]["name"]` is accepted for mixed path segments.
-> Quoted string segments are hash keys; numeric segments and helper/value expressions such as
-> `[i]` are array indexes. Non-reserved bare path atoms such as `[i]` read scalar working variables as indexes.
+> Reads retain their existing direct-access interpretation and never create state. For assignment on Perl, every
+> bracket is an ordinary expression whose evaluated value selects the path kind: string means harray and
+> nonnegative integer means array. Non-reserved bare path atoms such as `[i]` read scalar working variables.
 > The same path can be an assignment target: `payload["children"][0]["name"] = value` mutates the
-> scalar-held array/hash value. Intermediate containers must already exist with the required shape; final hash
-> keys may be created; final array indexes may replace an element or append exactly at the current length.
-> Missing paths, wrong intermediate shapes, and array gaps yield `undef` and do not mutate the root.
+> scalar-held array/harray value. The Perl reference creates an absent root and missing intermediates when the
+> selector kind determines their shape; bound null and wrong kinds are conflicts, and arrays remain dense.
+> Structural failures throw typed diagnostics and commit no partial path. Rust, Dart, Julia, and Lua retain the
+> prior existing-intermediate/null-result behavior until their backend and admission leaves land.
 > Direct shape literals `[]` and `{ key : value }` are accepted as value expressions on the Perl reference and
 > Rust backend. Bare elements/keys/values inside the shape read scalar working variables, and fixed hash field
 > names should be quoted. Direct shape literals bind as typed values for bare assignment targets on both variants:
@@ -348,7 +352,7 @@ These helpers mutate or dispatch rule state. The assignment forms also have the 
 | `name = expr` | replace the named typed value | a working variable should hold the expression result, whether scalar, array, or hash. |
 | `set(name, expr)` | replace the named typed value | a working variable should visibly hold the expression result, including direct shape payloads such as `[value]`. |
 | `items += expr` | append one value and yield the updated array snapshot when used as an expression | a named array should grow by one explicit value expression; equivalent to `push(items, expr)` for accepted RHS shapes. |
-| `meta[key_expr] = expr` | set one hash field and yield the updated hash snapshot when used as an expression | a named working hash should update one explicit key; equivalent to `set_key(meta, key_expr, expr)` for accepted key/value shapes. |
+| `meta[key_expr] = expr` | update one typed path and yield the updated root snapshot when used as an expression | on Perl, an evaluated string selects harray and a nonnegative integer selects array; use `set_key` when harray-only intent must be explicit. Remaining backends retain their earlier hash-index boundary until admission. |
 | `call(rule)` | dispatch to another rule | a child rule should run and optionally provide a value. |
 | `retv = call(rule)` | capture a child result | later helper logic needs the child payload. |
 | `push(rule)` | call one rule and append its result | the shortest spelling is desired for appending a child result into the current rule accumulator. |
@@ -914,9 +918,10 @@ hash helpers, and `sorted_keys()` / `sorted_values()` can continue through array
 `join_values(...)`, `drop_front(...)`, and `first()`. For field reads from hash-returning receiver chains, assign
 the chain result to a named hash and use `name.pick_keys(key).sorted_values().first()`. Direct bracket reads such as `retv["key"]`
 are for scalar hashref payloads, not named working-hash value reads. Named mutation forms remain separate from receiver-dot pure composition:
-`set_key(meta, key, value)` and `meta[key] = value` mutate the named working hash, and the hash-index assignment
-form yields the updated hash snapshot in value positions. Receiver-dot `meta.set_key(key, value)` is a pure
-derived value unless assigned back. A hash-yielding expression-valued block can enter the same family, for example
+`set_key(meta, key, value)` explicitly mutates the named harray. On Perl, `meta[key] = value` instead uses typed
+path selection and yields the updated root snapshot; a string selector has the same field-update effect, while an
+integer selector selects array. Receiver-dot `meta.set_key(key, value)` is a pure derived value unless assigned
+back. A hash-yielding expression-valued block can enter the same family, for example
 `{ { "b" : 2, "a" : 1 } }.sorted_keys().join_values(",")`.
 
 Hash-tree traversal receiver blocks are the non-pure block-bearing part of the hash receiver family:

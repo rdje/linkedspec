@@ -10,6 +10,25 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-31 — FUTURE-PARITY-BACKLOG.19.2.1 — implement Perl write vivification
+
+- Unified one- and many-segment bracket assignments on the Perl reference as expression-bearing
+  `assign_nested_access` nodes. Every `path_segment` retains exact authored Unicode-scalar source/span; seven
+  invalid forms now throw the frozen typed `action_parse` diagnostics.
+- Added `LinkedSpec::BindingRuntime::nested_write`: evaluated strings select harrays, nonnegative integers select
+  arrays, absent roots/intermediates are created only from those kinds, bound null/wrong kinds are conflicts, and
+  dense arrays replace or append at length but reject gaps. Structural work is isolated and returned trees detach.
+- Lowering evaluates all segments left-to-right and RHS once before snapshot/validation. Invocation-local presence
+  state distinguishes absent Perl lexicals from explicit null in rules and user functions; parameters begin
+  present and fresh function locals reset on every call. Same-binding expression effects retain frozen ordering.
+- Added a fixture-driven permanent Perl contract covering all 5 AST / 7 syntax / 11 success / 16 structural
+  failure cases plus detachment, dynamic scalar-kind fidelity, evaluation failure, same-binding composition, live
+  bound-null, and function-local state. Focused suites, exact 1,032-subtest Phase 0, both neutral checkers, and
+  signoff governance pass.
+- Synchronized ADR `0036`, Knowledge, task/index, bounded live docs, and the sole-facing mdBook with an explicit
+  transition boundary. Rust, Dart, Julia, and Lua remain non-vivifying; `map_leaves!`, capability/public admission,
+  generated formats, facades, schemas, MCP, CLI, and non-Perl behavior do not move. Perl `.19.2.2` follows.
+
 ## 2026-08-31 — FUTURE-PARITY-BACKLOG.19.1.3 — compose neutral future mutations
 
 - Added future-only `linkedspec-write-map-leaves-composition-v1`, digest-binding the unchanged write-vivification

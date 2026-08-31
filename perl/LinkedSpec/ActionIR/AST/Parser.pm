@@ -75,6 +75,21 @@ sub _raw_node {
  return _node('raw_perl', $source, $start, $end, reason => $reason)
 }
 
+sub _throw_action_parse_diagnostic {
+ my ($code, $message, $start, $end) = @_;
+ die bless({
+  code => $code,
+  stage => 'action_parse',
+  source_span => {
+   start => 0 + $start,
+   end => 0 + $end,
+   unit => 'unicode_scalar',
+   provenance => 'authored',
+  },
+  message => $message,
+ }, 'LinkedSpec::ActionIR::AST::Parser::Diagnostic')
+}
+
 sub _require_method_expr_pkg {
  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::MethodExpr');
  return 'LinkedSpec::ActionIR::MethodExpr'
@@ -857,6 +872,9 @@ sub _parse_assignment_expr {
   )
  }
 
+ my $nested_write = _parse_nested_write_assignment_expr($trimmed, $start, $end);
+ return $nested_write if $nested_write;
+
  my $eq_idx = _find_top_level_assignment_eq($trimmed);
  return undef unless defined $eq_idx;
  my $left_text = substr($trimmed, 0, $eq_idx);
@@ -911,6 +929,156 @@ sub _parse_assignment_expr {
  }
 
  return undef
+}
+
+sub _find_nested_write_assignment_eq {
+ my ($text) = @_;
+ my $eq_idx = _find_top_level_assignment_eq($text);
+ return $eq_idx if defined($eq_idx) && index(substr($text, 0, $eq_idx), '[') >= 0;
+ return undef unless index($text, '[') >= 0;
+ my $first_open = index($text, '[');
+ my $unclosed_root = substr($text, 0, $first_open);
+ return undef unless $unclosed_root =~ /\A\s*[A-Za-z_][A-Za-z0-9_]*\s*\z/o;
+
+ # An unclosed final path segment keeps the ordinary top-level scanner inside
+ # bracket depth. Find its assignment token without treating quoted/comparison
+ # equals as ownership. This branch exists only to produce the exact authored
+ # unclosed-segment diagnostic.
+ my $state = _new_scan_state();
+ my $len = length($text);
+ my $candidate;
+ for (my $idx = 0; $idx < $len; ++$idx) {
+  my $ch = substr($text, $idx, 1);
+  next if _consume_quote_only_scan_char($state, $text, $idx, $ch);
+  next unless $ch eq '=';
+  my $prev = $idx > 0 ? substr($text, $idx - 1, 1) : '';
+  my $next = $idx + 1 < $len ? substr($text, $idx + 1, 1) : '';
+  next if $next eq '>' || $next eq '=';
+  next if $prev eq '<' || $prev eq '>' || $prev eq '!' || $prev eq '=' || $prev eq ':';
+  $candidate = $idx;
+ }
+ return $candidate
+}
+
+sub _parse_nested_write_assignment_expr {
+ my ($trimmed, $start, $end) = @_;
+ my $eq_idx = _find_nested_write_assignment_eq($trimmed);
+ return undef unless defined $eq_idx;
+ return undef if $eq_idx > 0 && substr($trimmed, $eq_idx - 1, 1) eq ':';
+
+ my $left_text = substr($trimmed, 0, $eq_idx);
+ my $right_text = substr($trimmed, $eq_idx + 1);
+ my ($left, $left_start, $left_end) = _trim_with_offsets($left_text, $start);
+ my ($right, $right_start) = _trim_with_offsets($right_text, $start + $eq_idx + 1);
+ return undef unless index($left, '[') >= 0;
+
+ my $opening = index($left, '[');
+ my $root_source = substr($left, 0, $opening);
+ my ($root, $root_start, $root_end) = _trim_with_offsets($root_source, $left_start);
+ unless (defined($root) && $root =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o) {
+  my $message = defined($root) && $root =~ /\A(?:\{|\[|['"]|-?\d)/s
+   ? 'nested write root must be a bare identifier'
+   : 'nested write root must remain a bare identifier';
+  _throw_action_parse_diagnostic(
+   'nested_write_root_not_addressable',
+   $message,
+   $root_start,
+   $root_end > $root_start ? $root_end : $root_start + 1,
+  );
+ }
+
+ state %reserved = map { $_ => 1 } qw(
+  CAPTURE IINDEX IMATCH IMATCH_HASH IMATCH_LIST IPOS
+  LINDEX LMATCH LMATCH_HASH LMATCH_LIST LSPOS STRING
+  descr false info minfo null retv true undef
+ );
+ if ($reserved{$root}) {
+  _throw_action_parse_diagnostic(
+   'nested_write_root_reserved',
+   "nested write root '$root' is reserved",
+   $root_start,
+   $root_end,
+  );
+ }
+
+ my @segments;
+ my $cursor = $opening;
+ my $left_len = length($left);
+ while ($cursor < $left_len) {
+  while ($cursor < $left_len && substr($left, $cursor, 1) =~ /\s/o) {
+   ++$cursor;
+  }
+  last if $cursor == $left_len;
+  unless (substr($left, $cursor, 1) eq '[') {
+   my $next_open = index($left, '[', $cursor);
+   my $diagnostic_end = $next_open >= 0 ? $next_open : length($left);
+   _throw_action_parse_diagnostic(
+    'nested_write_root_not_addressable',
+    'nested write root must remain a bare identifier',
+    $root_start,
+    $left_start + $diagnostic_end,
+   );
+  }
+
+  my $segment_open = $cursor;
+  my $close = _find_matching_delim($left, $segment_open, '[', ']');
+  unless (defined $close) {
+   my $diagnostic_end = $left_len;
+   --$diagnostic_end while $diagnostic_end > $segment_open
+    && substr($left, $diagnostic_end - 1, 1) =~ /\s/o;
+   _throw_action_parse_diagnostic(
+    'nested_write_segment_unclosed',
+    'nested write segment is missing its closing bracket',
+    $left_start + $segment_open,
+    $left_start + $diagnostic_end,
+   );
+  }
+
+  my $payload = substr($left, $segment_open + 1, $close - $segment_open - 1);
+  my ($segment_source, $segment_start, $segment_end) = _trim_with_offsets(
+   $payload,
+   $left_start + $segment_open + 1,
+  );
+  unless (length($segment_source)) {
+   _throw_action_parse_diagnostic(
+    'nested_write_segment_empty',
+    'nested write segment may not be empty',
+    $left_start + $segment_open,
+    $left_start + $close + 1,
+   );
+  }
+
+  my $expression = $segment_source eq 'null'
+   ? _node('undef', $segment_source, $segment_start, $segment_end, literal_spelling => 'null')
+   : parse_action_expr($segment_source, { base_start => $segment_start });
+  if (!ref($expression) || ($expression->{kind} // '') eq 'raw_perl') {
+   _throw_action_parse_diagnostic(
+    'nested_write_segment_expression_invalid',
+    'segment must be one balanced ActionIR value expression',
+    $segment_start,
+    $segment_end,
+   );
+  }
+  push @segments, {
+   kind => 'path_segment',
+   source => $segment_source,
+   source_span => _span($segment_start, $segment_end),
+   expression => $expression,
+  };
+  $cursor = $close + 1;
+ }
+
+ return undef unless @segments;
+ my $value = parse_action_expr($right, { base_start => $right_start });
+ return _node(
+  'assign_nested_access',
+  $trimmed,
+  $start,
+  $end,
+  base => $root,
+  segments => \@segments,
+  value => $value,
+ )
 }
 
 sub _parse_fluent_chain_expr {
@@ -1246,5 +1414,9 @@ sub _consume_scan_char {
  if ($ch eq ']') { --$state->{bracket_depth} if $state->{bracket_depth} > 0; return 1; }
  return 0
 }
+
+package LinkedSpec::ActionIR::AST::Parser::Diagnostic;
+
+use overload '""' => sub { return $_[0]{message} // $_[0]{code} // 'action parse failed' }, fallback => 1;
 
 1;

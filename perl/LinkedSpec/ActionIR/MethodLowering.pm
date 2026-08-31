@@ -997,16 +997,7 @@ sub _lower_ast_nested_access_assignment_value_node {
  my $base = $node->{base};
  return undef unless defined($base) && $base =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
  my $segments = $node->{segments};
- return undef unless ref($segments) eq 'ARRAY' && @$segments > 1;
-
- my $require_dep = sub {
-  my ($name) = @_;
-  my $cb = (ref($deps) eq 'HASH') ? $deps->{$name} : undef;
-  die "(LinkedSpec::ActionIR::MethodLowering::_require_dep) -E- missing dependency callback '$name'"
-   unless ref($cb) eq 'CODE';
-  return $cb;
- };
- my $lower_scalar_access_key_expr = $require_dep->('lower_scalar_access_key_expr');
+ return undef unless ref($segments) eq 'ARRAY' && @$segments;
 
  my $value_source = _actionir_ast_value_source_expr($node->{value});
  $value_source = $node->{value}{source}
@@ -1017,55 +1008,64 @@ sub _lower_ast_nested_access_assignment_value_node {
 
  my @prefix;
  my @compiled_segments;
+ my $rule_label = (ref($deps) eq 'HASH' && defined($deps->{rule_label}) && !ref($deps->{rule_label}))
+  ? $deps->{rule_label}
+  : '<action>';
+ my $source_id = 'action:'.$rule_label;
  for (my $idx = 0; $idx < @$segments; ++$idx) {
   my $segment = $segments->[$idx];
-  return undef unless ref($segment) eq 'HASH';
-  if (($segment->{kind} // '') eq 'key') {
-   my $quote = '"';
-   $quote = $1 if defined($segment->{source}) && $segment->{source} =~ /\A\[\s*(['"])/s;
-   my $var = '$__ls_path_key_'.$idx;
-   push @prefix, 'my '.$var.' = '._actionir_ast_quote_string_source($segment->{value}, $quote).';';
-   push @compiled_segments, { kind => 'key', var => $var };
-   next;
+  return undef unless ref($segment) eq 'HASH' && ($segment->{kind} // '') eq 'path_segment';
+  my $expression = $segment->{expression};
+  return undef unless ref($expression) eq 'HASH';
+  my $expression_source = _actionir_ast_value_source_expr($expression);
+  $expression_source = $expression->{source}
+   if !(defined($expression_source) && length($expression_source)) && defined($expression->{source});
+  return undef unless defined($expression_source) && length($expression_source);
+  my $expression_lowered = _lower_mutation_slot_value_expr($expression_source, $deps);
+  return undef unless defined($expression_lowered) && length($expression_lowered);
+
+  my $hint = 'dynamic';
+  my $expression_kind = $expression->{kind} // '';
+  if ($expression_kind eq 'string') {
+   $hint = 'string';
+  } elsif ($expression_kind eq 'number') {
+   my $number_source = $expression->{source};
+   $hint = defined($number_source) && $number_source =~ /\A-?\d+\z/o ? 'integer' : 'number';
+  } elsif ($expression_kind eq 'boolean') {
+   $hint = 'boolean';
+  } elsif ($expression_kind eq 'undef') {
+   $hint = 'null';
+  } elsif ($expression_kind eq 'array_literal') {
+   $hint = 'array';
+  } elsif ($expression_kind eq 'hash_literal') {
+   $hint = 'harray';
+  } elsif ($expression_kind eq 'codeblock_literal') {
+   $hint = 'codeblock';
   }
-  return undef unless ($segment->{kind} // '') eq 'index';
-  my $index_source = _actionir_ast_value_source_expr($segment->{expr});
-  $index_source = $segment->{expr}{source}
-   if ref($segment->{expr}) eq 'HASH' && !(defined($index_source) && length($index_source));
-  return undef unless defined($index_source) && length($index_source);
-  my $index_lowered = $lower_scalar_access_key_expr->($index_source);
-  return undef unless defined($index_lowered) && length($index_lowered);
-  my $var = '$__ls_path_idx_'.$idx;
-  push @prefix, 'my '.$var.' = int(('.$index_lowered.') // 0);';
-  push @compiled_segments, { kind => 'index', var => $var };
+
+  my $span = $segment->{source_span};
+  return undef unless ref($span) eq 'HASH'
+   && defined($span->{start}) && $span->{start} =~ /\A\d+\z/o
+   && defined($span->{end}) && $span->{end} =~ /\A\d+\z/o;
+  my $var = '$__ls_path_segment_'.$idx;
+  push @prefix, 'my '.$var.' = '.$expression_lowered.';';
+  push @compiled_segments,
+   '{ value => '.$var
+   .', kind_hint => "'.$hint.'"'
+   .', source_span => { source_id => '._actionir_ast_quote_string_source($source_id, '"')
+   .', start => '.$span->{start}.', end => '.$span->{end}
+   .', unit => "unicode_scalar", provenance => "authored" } }';
  }
  push @prefix, 'my $__ls_path_value = '.$value_lowered.';';
- push @prefix, 'my $__ls_path_cursor = $'.$base.';';
- push @prefix, 'my $__ls_path_ok = (ref($__ls_path_cursor) eq "HASH" || ref($__ls_path_cursor) eq "ARRAY") ? 1 : 0;';
-
+ push @prefix, 'my $__ls_path_present = (defined($'.$base.') || $__ls_binding_presence{"'.$base.'"}) ? 1 : 0;';
  my @body = @prefix;
- for (my $idx = 0; $idx < $#compiled_segments; ++$idx) {
-  my $segment = $compiled_segments[$idx];
-  my $var = $segment->{var};
-  if ($segment->{kind} eq 'key') {
-   push @body,
-    'if ($__ls_path_ok) { if (ref($__ls_path_cursor) eq "HASH" && exists $__ls_path_cursor->{'.$var.'}) { $__ls_path_cursor = $__ls_path_cursor->{'.$var.'}; } else { $__ls_path_ok = 0; } }';
-  } else {
-   push @body,
-    'if ($__ls_path_ok) { if (ref($__ls_path_cursor) eq "ARRAY" && '.$var.' >= 0 && '.$var.' < @{$__ls_path_cursor}) { $__ls_path_cursor = $__ls_path_cursor->['.$var.']; } else { $__ls_path_ok = 0; } }';
-  }
- }
-
- my $final = $compiled_segments[-1];
- my $final_var = $final->{var};
- if ($final->{kind} eq 'key') {
-  push @body,
-   'if ($__ls_path_ok) { if (ref($__ls_path_cursor) eq "HASH") { $__ls_path_cursor->{'.$final_var.'} = $__ls_path_value; } else { $__ls_path_ok = 0; } }';
- } else {
-  push @body,
-   'if ($__ls_path_ok) { if (ref($__ls_path_cursor) eq "ARRAY" && '.$final_var.' >= 0 && '.$final_var.' <= @{$__ls_path_cursor}) { if ('.$final_var.' == @{$__ls_path_cursor}) { push @{$__ls_path_cursor}, $__ls_path_value; } else { splice @{$__ls_path_cursor}, '.$final_var.', 1, $__ls_path_value; } } else { $__ls_path_ok = 0; } }';
- }
- push @body, '$__ls_path_ok ? $'.$base.' : undef';
+ push @body, 'require LinkedSpec::BindingRuntime;';
+ push @body,
+  'my ($__ls_path_updated, $__ls_path_result) = LinkedSpec::BindingRuntime::nested_write('
+  .'$'.$base.', $__ls_path_present, "'.$base.'", ['.join(', ', @compiled_segments).'], $__ls_path_value);';
+ push @body, '$'.$base.' = $__ls_path_updated;';
+ push @body, '$__ls_binding_presence{"'.$base.'"} = 1;';
+ push @body, '$__ls_path_result';
  return 'do { '.join(' ', @body).' }'
 }
 
@@ -1119,6 +1119,25 @@ sub _uniform_binding_array_push_expr {
  return undef unless defined($value_expr) && length($value_expr);
  return 'do { require LinkedSpec::BindingRuntime; $'.$target.' = '
   .'LinkedSpec::BindingRuntime::push_value($'.$target.', "'.$target.'", '.$value_expr.') }'
+}
+
+sub _nested_write_target_is_tracked {
+ my ($target, $deps) = @_;
+ return 0 unless defined($target) && $target =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+ my $predicate = (ref($deps) eq 'HASH') ? $deps->{nested_write_target} : undef;
+ return ref($predicate) eq 'CODE' && $predicate->($target) ? 1 : 0
+}
+
+sub _tracked_scalar_assignment_expr {
+ my ($target, $value_expr, $deps, $returns_value) = @_;
+ return undef unless defined($target) && $target =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+ return undef unless defined($value_expr) && length($value_expr);
+ return $returns_value
+  ? 'do { $'.$target.' = '.$value_expr.'; $'.$target.' }'
+  : '$'.$target.' = '.$value_expr
+  unless _nested_write_target_is_tracked($target, $deps);
+ my $tail = $returns_value ? '; $'.$target : '';
+ return 'do { $'.$target.' = '.$value_expr.'; $__ls_binding_presence{"'.$target.'"} = 1'.$tail.' }'
 }
 
 sub _uniform_binding_target_symbol {
@@ -1521,8 +1540,8 @@ sub _user_function_collect_local_decls_from_node {
  if ($kind eq 'assign_nested_access') {
   _user_function_record_local_decl($decls, $params, '$', $node->{base});
   foreach my $segment (@{$node->{segments} || []}) {
-   next unless ref($segment) eq 'HASH' && ($segment->{kind} // '') eq 'index';
-   _user_function_collect_local_decls_from_node($segment->{expr}, $decls, $params);
+   next unless ref($segment) eq 'HASH' && ($segment->{kind} // '') eq 'path_segment';
+   _user_function_collect_local_decls_from_node($segment->{expression}, $decls, $params);
   }
   _user_function_collect_local_decls_from_node($node->{value}, $decls, $params);
   return;
@@ -1637,6 +1656,7 @@ sub _user_function_local_decl_statements {
   ? (@{$signature->{positional_params}}, defined($signature->{rest_param}) ? $signature->{rest_param} : ())
   : ();
  my %params = map { $_ => 1 } @binding_names;
+ my $nested_write_targets = _user_function_nested_write_targets($definition);
  my %decls;
  my $body_ast = $definition->{body_ast};
  if (ref($body_ast) eq 'HASH') {
@@ -1649,7 +1669,36 @@ sub _user_function_local_decl_statements {
   my $decl = $decls{$key};
   push @ordered, 'my '.$decl->{sigil}.$decl->{name}.';';
  }
+ if (keys %$nested_write_targets) {
+  my @present_params = grep { $nested_write_targets->{$_} } @binding_names;
+  my $initializer = @present_params
+   ? ' = ('.join(', ', map { '"'.$_.'" => 1' } @present_params).')'
+   : '';
+  push @ordered, 'my %__ls_binding_presence'.$initializer.';';
+ }
  return \@ordered
+}
+
+sub _user_function_nested_write_targets {
+ my ($definition) = @_;
+ my %targets;
+ my $visit;
+ $visit = sub {
+  my ($value) = @_;
+  if (ref($value) eq 'ARRAY') {
+   $visit->($_) for @$value;
+   return;
+  }
+  return unless ref($value) eq 'HASH';
+  if (($value->{kind} // '') eq 'assign_nested_access'
+   && defined($value->{base})
+   && $value->{base} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o) {
+   $targets{$value->{base}} = 1;
+  }
+  $visit->($_) for values %$value;
+ };
+ $visit->($definition->{body_ast}) if ref($definition) eq 'HASH';
+ return \%targets
 }
 
 sub _user_function_scalar_value_name {
@@ -2057,7 +2106,7 @@ sub _lower_ast_assignment_operator_statement {
   return undef unless defined($source) && length($source);
   my $source_expr = _lower_value_binding_source_expr($source, $deps);
   return undef unless defined($source_expr) && length($source_expr);
-  return '$'.$target.' = '.$source_expr
+  return _tracked_scalar_assignment_expr($target, $source_expr, $deps, 0)
  }
 
  if ($kind eq 'assign_array_append') {
@@ -3019,6 +3068,12 @@ my $lower_numeric_array_reducer_source_expr = sub {
    unless ref($statements) eq 'ARRAY';
 
   my $body_deps = _user_function_deps_with_call($deps, $name);
+  my $nested_write_targets = _user_function_nested_write_targets($definition);
+  $body_deps->{nested_write_target} = sub {
+   my ($target) = @_;
+   return defined($target) && $nested_write_targets->{$target} ? 1 : 0;
+  };
+  $body_deps->{nested_write_target_names} = [sort keys %$nested_write_targets];
   my $local_decl_statements = _user_function_local_decl_statements($definition);
   my %scalar_value_names = map { $_ => 1 } @$params;
   $scalar_value_names{$rest_param} = 1 if defined($rest_param);
@@ -3438,7 +3493,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
      unless defined($value_expr) && length($value_expr);
     $value_expr = $source_expr unless defined($value_expr) && length($value_expr);
     return undef unless defined($value_expr) && length($value_expr);
-    return 'do { $'.$target_name.' = '.$value_expr.'; $'.$target_name.' }'
+    return _tracked_scalar_assignment_expr($target_name, $value_expr, $deps, 1)
    }
 
    my $lower_declare_initializer_expr = $require_dep->('lower_declare_initializer_expr');
@@ -3462,7 +3517,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    if !(defined($value_expr) && length($value_expr)) && defined($value_node->{source});
   return undef unless defined($value_expr) && length($value_expr);
 
-  return 'do { $'.$target_name.' = '.$value_expr.'; $'.$target_name.' }'
+  return _tracked_scalar_assignment_expr($target_name, $value_expr, $deps, 1)
  };
 	$lower_ast_supported_call_source_node = sub {
 	 my ($node) = @_;
@@ -6477,7 +6532,11 @@ sub _lower_assign_statement {
  if (defined($target_trimmed) && $target_trimmed =~ /^[A-Za-z_][A-Za-z0-9_]*$/o) {
   my $source_expr = _lower_value_binding_source_expr($source, $deps);
   return $finish->(undef, 'bare_value_target_failed', { target => $target_trimmed }) unless defined($source_expr) && length($source_expr);
-  return $finish->("\$$target_trimmed = $source_expr", 'bare_value_target', { target => $target_trimmed });
+  return $finish->(
+   _tracked_scalar_assignment_expr($target_trimmed, $source_expr, $deps, 0),
+   'bare_value_target',
+   { target => $target_trimmed },
+  );
  }
  if (defined($target_trimmed)
   && $target_trimmed =~ /^(?:array|hash)\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)$/o) {
@@ -6489,7 +6548,11 @@ sub _lower_assign_statement {
    my $source_expr = _lower_value_binding_source_expr($source, $deps);
    return $finish->(undef, 'scalar_held_wrapper_target_failed', { target => $target_name })
     unless defined($source_expr) && length($source_expr);
-   return $finish->('$'.$target_name.' = '.$source_expr, 'scalar_held_wrapper_target', { target => $target_name });
+   return $finish->(
+    _tracked_scalar_assignment_expr($target_name, $source_expr, $deps, 0),
+    'scalar_held_wrapper_target',
+    { target => $target_name },
+   );
   }
  }
 
@@ -6497,7 +6560,11 @@ sub _lower_assign_statement {
  if (defined $symbol) {
   my $source_expr = $lower_assignment_source_expr->($source);
   return $finish->(undef, 'scalar_target_failed', { target => $symbol }) unless defined $source_expr;
-  return $finish->("\$$symbol = $source_expr", 'scalar_target', { target => $symbol });
+  return $finish->(
+   _tracked_scalar_assignment_expr($symbol, $source_expr, $deps, 0),
+   'scalar_target',
+   { target => $symbol },
+  );
  }
 
  my $array_symbol = $extract_array_symbol_name->($target);
@@ -6567,7 +6634,7 @@ sub _lower_scalar_assignment_operator_statement {
   taken => 1,
   context => { target => $target_symbol },
  );
- return '$'.$target_symbol.' = '.$source_expr
+ return _tracked_scalar_assignment_expr($target_symbol, $source_expr, $deps, 0)
 }
 
 #------------------------------------------------------------------------------

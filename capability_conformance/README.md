@@ -13,10 +13,10 @@ Its six runtime routes plus the permanent self-hosted grammar run through
 `bash tools/check_standalone_lifecycle_block_five_backend.sh`. The resulting 18-row capability census is
 90 pass / 0 partial / 0 gap.
 
-## Future write vivification
+## Neutral write vivification
 
 `write_vivification_contract.json` freezes the backend-neutral nested-write direction from ADR `0036` without
-admitting current behavior. Ordinary `IDENTIFIER[SEGMENT]... = VALUE` syntax lowers to one future
+itself admitting a public capability. Ordinary `IDENTIFIER[SEGMENT]... = VALUE` syntax lowers to one neutral
 `assign_nested_access` shape whose segment kind comes from the evaluated expression: string selects harray and
 nonnegative integer selects dense array. The fixture fixes missing-container creation, absent-versus-null,
 left-to-right segments then RHS, same-binding side effects before the isolated snapshot, copy-on-write commit,
@@ -28,8 +28,10 @@ bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py
 
 The checker validates five AST cases, seven syntax failures, 11 successful writes, 16 structural failures, three
 expression failures, three non-creating reads, detachment, eight writes from the shared composition fixture, and
-105 rejected base mutations. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT remain non-vivifying until their
-separately owned implementation/admission leaves; this artifact does not change the capability census.
+105 rejected base mutations. Perl now consumes this unchanged contract under `.19.2.1`, with permanent direct
+projection in `t/write_vivification_perl_contract.t`. Rust, Dart, Julia, PUC Lua, and LuaJIT remain non-vivifying
+until their separately owned implementation/admission leaves. The neutral artifact and Perl milestone do not
+change the public capability census.
 
 ## Future `map_leaves!` receiver mutation
 
@@ -81,7 +83,9 @@ bash tools/run_python_project_data.sh tools/check_map_leaves_mutation_contract.p
 The exact composed current-boundary fixture has a non-bang control returning `{"leaf":[]}` on all six runtime
 routes. Its bang form stops before callback nested-write lowering: Perl returns null; Rust warns at the stopped
 identifier token and returns null; Dart, Julia, PUC Lua, and LuaJIT report their generic parser-invocation failure.
-No current parser, lowering, runtime, capability row, generated format, or public feature is admitted.
+No bang parser/lowering/runtime, capability row, generated format, or public composition feature is admitted.
+Perl's separately owned ordinary nested-write implementation does not make `map_leaves!` or this composition
+current.
 
 `mcp_semantic_transport_contract.json` (`linkedspec-mcp-transport-v1`) is the single backend-neutral machine
 contract for LinkedSpec's modern MCP `2026-07-28` stdio projection. Its root-relative artifact inventory pins the

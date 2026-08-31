@@ -44,7 +44,7 @@ The Perl reference and Rust backend accept direct array and hash shape literals 
 ```
 
 Shape literals are accepted in value-consuming sites such as `return(payload)`, scalar assignment sources,
-array append RHS values, hash-index assignment RHS values, `push(target, value)`, and nested constructor
+array append RHS values, typed-path assignment RHS values, `push(target, value)`, and nested constructor
 payloads. Array elements, hash keys, and hash values lower through the scoped DSL value-expression rules:
 primitive literals stay typed, recognized helper calls compose, direct nested access keeps its own bracket
 semantics, nested shape literals recurse, and non-reserved bare names are scalar working-variable reads.
@@ -75,7 +75,7 @@ set(meta, {});                 # explicit aggregate hash reset
 Bare working-variable reads and targets are the current scalar surface:
 `set(payload, [value])` stores the whole array payload in `payload`. In value positions, `name` reads the
 working variable named `name`.
-Direct-access brackets (`payload["items"][i]`), hash-index assignment brackets (`meta[key] = value`),
+Direct-access brackets (`payload["items"][i]`), typed-path assignment brackets (`meta[key] = value`),
 control-flow/block braces, and all-bare child-call routing remain separate surfaces.
 
 All current native backends accept expression-valued blocks in value-consuming sites. A non-empty
@@ -150,9 +150,10 @@ dispatch rule.
 > operator `name = value`, which bind scalar, array, or hash RHS values as the variable's current
 > typed value;
 > the scalar source in `return(name)`, `set(out, name)`, and `out = name`; the array target of
-> `push(name, ...)` and the array append operator `name += value`; and the hash target of
-> `set_key(name, key, value)` and hash-index assignment `name[key] = value` auto-exist from a
-> **bare** name too, with the kind fixed by that position. `copy(name)` snapshots the current array or harray
+> `push(name, ...)` and the array append operator `name += value`; and the harray target of
+> `set_key(name, key, value)` auto-exist from a **bare** name too. On Perl, typed-path assignment
+> `name[key] = value` chooses the absent root from the evaluated selector kind instead of fixing it from syntax;
+> remaining backends retain their prior hash-target behavior until admission. `copy(name)` snapshots the current array or harray
 > value. A backend MUST supply the same auto-existence: a position-referenced variable is a fresh working slot for
 > the parse, not a value carried across parses. Recursive re-entry uses explicit fresh-container bindings:
 > `set(name, [])` and `set(name, {})` establish rule-local aggregate bindings before
@@ -227,20 +228,20 @@ dispatch rule.
 
 ### Direct nested access and value-path assignment: `base["key"][index]`
 - **Signature**: `base[path_segment...]`, where `base` is a working scalar containing an array/hash payload.
-- **Returns**: read form returns the selected value or `undef`; assignment form returns the updated root value on
-  success or `undef` on failure.
-- **Behavior**: Reads any-depth mixed hash/array paths directly from a structured payload. Quoted string
-  segments such as `["children"]` or `['children']` are hash keys. Numeric segments and explicit helper/value
-  expressions such as `[0]` or `[i]` are array indexes. A non-reserved bare path atom such as `[i]`
-  is also a scalar array-index read, equivalent to `[i]`. The same direct path may be used as an assignment
-  target, for example `payload["children"][0]["name"] = value`.
+- **Returns**: read form returns the selected value or `undef`; assignment returns the updated root on success.
+  Perl structural failures throw the typed v1 diagnostic; remaining backends return null at their prior boundary.
+- **Behavior**: Reads any-depth mixed hash/array paths directly from a structured payload without creating state.
+  Assignment uses the same spelling. On Perl, each bracket expression is evaluated and its runtime kind selects
+  harray (string) or array (nonnegative integer), so dynamic selectors are not classified from their authored
+  spelling. A non-reserved bare path atom such as `[i]` reads the scalar working variable. The assignment target
+  remains a bare binding, for example `payload["children"][0]["name"] = value`.
 - **Edge cases**: Reads return `undef` when a segment does not exist or the current value has the wrong container
-  kind. Writes do not autovivify intermediate containers: every intermediate hash key or array element must
-  already exist and have the required array/hash shape. The final segment may create or replace a hash key, replace
-  an existing array element, or append exactly at the current array length. Array gaps, missing intermediate keys,
-  and wrong intermediate shapes yield `undef` and leave the root unchanged. Segment index expressions are evaluated
-  before the RHS value expression; the root path check and mutation happen after both. Primitive literals and engine
-  locals such as `[true]` or `[CAPTURE]` are not claimed as scalar path variables.
+  kind. Perl writes create an absent root and missing intermediates only when evaluated selectors determine the
+  shape; bound null and wrong kinds are conflicts. Arrays may replace or append exactly at length, never create a
+  gap. Segments evaluate once left-to-right, then RHS once; typed selector/kind/gap failures commit no partial path.
+  Rust, Dart, Julia, and Lua retain the earlier requirement that intermediates already exist and return null on a
+  missing/wrong path until cross-backend admission. Primitive literals and engine locals such as `[true]` or
+  `[CAPTURE]` are not claimed as scalar path variables.
 - **Example**:
   ```text
   Top::
@@ -866,7 +867,7 @@ dispatch rule.
 | Merge override | `return(merge_hash(hash("a", 1, "b", 2), hash("b", 9, "c", 3)))` | `x` | `[{"a":1,"b":9,"c":3}]` |
 | Pure `set_key` | `set(meta, { "a" : 1 }); return(array(meta.set_key("b", 2).count_keys(), count_keys(meta)))` | `x` | `[[2,1]]` |
 | Statement `set_key` | `set_key(meta, "a", 1); set_key(meta, "b", 2); return(copy(meta))` | `x` | `[{"a":1,"b":2}]` |
-| Hash-index assignment | `key = "stage"; value = "ok"; meta[key] = value; return(copy(meta))` | `x` | `[{"stage":"ok"}]` |
+| Typed-path assignment (string selector) | `key = "stage"; value = "ok"; meta[key] = value; return(copy(meta))` | `x` | `[{"stage":"ok"}]` |
 | Rename/drop/pick | `return(rename_key(hash("old", 1, "keep", 2), "old", "new"))` / `return(drop_keys(hash("a", 1, "b", 2, "c", 3), "b", "c"))` / `return(pick_keys(hash("a", 1, "b", 2, "c", 3), "b", "missing"))` | `x` | `[{"keep":2,"new":1}]` / `[{"a":1}]` / `[{"b":2}]` |
 | Membership/count | `return(array(has_key(hash("a", 1), "a"), has_key(hash("a", 1), "missing")))` / `return(count_keys(hash("a", 1, "b", 2)))` | `x` | `[[1,0]]` / `[2]` |
 | Sorted views | `return(sorted_keys(hash("b", 2, "a", 1)))` / `return(sorted_values(hash("b", 2, "a", 1)))` | `x` | `[["a","b"]]` / `[[1,2]]` |
@@ -930,21 +931,24 @@ dispatch rule.
 - **Behavior**: Returns a new hash with the key set to the value. Does not mutate the input.
 - **Statement form**: `set_key(name, key, value)` mutates the named working hash `name` directly. An absent target
   starts as an empty harray; an incompatible existing value fails with `binding_kind_mismatch`.
-- **Operator form**: `name[key] = value` mutates the same named working hash directly, and yields an independent
-  updated hash snapshot in value positions; bare key/RHS identifiers in the mutation slot read scalar working
-  variables. Receiver-dot `name.set_key(key, value)` remains pure.
+- **Operator form**: `name[key] = value` is a separate typed-path contract on Perl. An evaluated string has the
+  same field-update effect, while a nonnegative integer selects an array. It yields an independent updated root
+  snapshot in value positions; bare key/RHS identifiers read scalar working variables. Remaining backends retain
+  the earlier hash-index interpretation until admission. Receiver-dot `name.set_key(key, value)` remains pure.
 
 ### `name[key] = value`
 - **Signature**: `target[key_expr] = value_expr`
-- **Returns**: updated hash snapshot in value positions; side-effect-only behavior when used as a statement.
-- **Behavior**: Hash-index assignment. Mutates the named working hash `target` at the evaluated string key. Lowers and runs identically to `set_key(target, key_expr, value_expr)` for accepted key/value expressions, and evaluates to the updated hash snapshot when used as a value.
-- **Examples**: `meta["stage"] = "normalized"`, `meta[cat("source", "_kind")] = kind`, `meta[field_name] = field_value`, `meta[field_name] = field_value`.
-- **Edge cases**: The left side target is a bare hash target and auto-exists as a per-invocation working hash
-  unless the name currently holds a scalar-bound array/hash value from bare assignment. In that scalar-held case,
-  a single-segment assignment mutates the held root: hash keys update/create hash entries, while numeric array
-  indexes replace or append at len. Bare key/RHS identifiers read scalar working variables in this mutation slot.
-  Receiver-dot `meta.set_key(key, value)` remains pure copy-valued composition; use `meta[key] = value` when you
-  want mutation.
+- **Returns**: updated typed-root snapshot in value positions; side-effect-only behavior when used as a statement.
+- **Behavior**: Typed path assignment on Perl. It evaluates the selector and value once, chooses harray for a
+  string or array for a nonnegative integer, mutates an isolated root copy, then commits and returns a detached
+  updated root. It is not identical lowering to harray-only `set_key`. Rust, Dart, Julia, and Lua retain the
+  earlier hash-index contract until admission.
+- **Examples**: `meta["stage"] = "normalized"`, `meta[cat("source", "_kind")] = kind`,
+  `meta[field_name] = field_value`, `items[position] = field_value`.
+- **Edge cases**: The left side is a bare typed binding. On Perl, absence creates the root chosen by the selector;
+  explicitly bound null or another wrong kind is a typed conflict. Array indexes replace or append at len, never
+  create a gap. Bare key/RHS identifiers read scalar working variables in this mutation slot. Receiver-dot
+  `meta.set_key(key, value)` remains pure copy-valued composition; use `meta[key] = value` when you want mutation.
 
 ### `rename_key(h, old, new)`
 - **Signature**: `rename_key(h: hash, old_key: string, new_key: string)`
@@ -1000,9 +1004,10 @@ dispatch rule.
   Field reads from a named working hash use `name.pick_keys(key).sorted_values().first()` after storing
   expression receivers in a named hash. Direct bracket reads such as `retv["key"]` are for scalar hashref
   payloads, not working-hash value reads.
-- **Boundary**: `set_key(name, key, value)` and `name[key] = value` mutate the named working hash; hash-index
-  assignment also yields the updated hash snapshot in value positions. Receiver-dot `meta.set_key(key, value)` is
-  pure value composition; it mutates nothing unless its result is explicitly assigned back.
+- **Boundary**: `set_key(name, key, value)` mutates the named working harray. On Perl,
+  `name[key] = value` is typed-path assignment and may instead select array for an integer; it yields the updated
+  root snapshot in value positions. Remaining backends retain their earlier hash-index meaning until admission.
+  Receiver-dot `meta.set_key(key, value)` is pure value composition; it mutates nothing unless assigned back.
 - **Block receivers**: An expression-valued block whose value is a hash can be the receiver, for example
   `{ { "b" : 2, "a" : 1 } }.sorted_keys().join_values(",")`.
 
@@ -1822,7 +1827,7 @@ and `raw.trim().split("-").lowercase_each().join_values("_")` bridges explicitly
 bindings are accepted anywhere the helper contract admits the runtime value kind; quoted strings are literal
 constructor payloads, not aliases or indirect lookup. Mutation statement forms remain available, and assignment/mutation operators also have
 expression values where documented: `name = value` yields the stored value, `items += value` yields the updated
-array snapshot, and `name[key] = value` yields the updated hash snapshot. Array end mutations likewise yield an
+array snapshot, and `name[key] = value` yields the updated typed-root snapshot. Array end mutations likewise yield an
 independent updated array and can continue through compatible receivers. Inline value `if`/`switch` is portable in the supported
 value-consuming slots (`return(...)`,
 assignment RHS, and fluent `.return(...)`), and its contract is the selected payload value rather than any
@@ -1877,22 +1882,22 @@ The `.spec` format has migrated these helper families to terser spellings. The *
 | `name = value` / `=(name, value)` | `set(name, value)` / `name = value` | assignment expression/operator spelling. It stores the target and yields the stored typed value in value positions. |
 | `items += value` | `push(items, value)` | array append operator. A bare RHS reads a scalar working variable; all-bare `push(A,B)` remains child-call syntax; in value positions it yields the updated array snapshot. |
 | `items.push_back(value)` / `items.push_front(value)` / `items.pop_back()` / `items.pop_front()` | `items += value` for back append only | named array end mutations. They mutate a bare array binding and evaluate to an independent updated snapshot; pop methods discard the removed value. |
-| `meta[key] = value` | `set_key(meta, key, value)` | hash-index assignment operator. Bare key/RHS identifiers read scalar working variables in mutation slots; in value positions it yields the updated hash snapshot. |
-| `payload["items"][0]["name"] = value` | direct nested access assignment | mutates a scalar-held array/hash value path. Intermediate containers must exist; final hash keys may be created; final array indexes may replace or append at len. |
+| `meta[key] = value` | `set_key(meta, key, value)` for explicit harray intent | typed-path assignment operator on Perl (string→harray, nonnegative integer→array); remaining backends retain their earlier hash-index boundary. Bare key/RHS identifiers read scalar working variables; value positions yield the updated root snapshot. |
+| `payload["items"][0]["name"] = value` | direct nested access assignment | mutates a scalar-held array/harray path. Perl creates absent/unambiguous missing containers from evaluated string/integer selectors; remaining backends still require existing intermediates until admission. Wrong kinds are never coerced and array gaps remain invalid. |
 | `cat(args...)` | string value expression | String concatenation through the portable scalar-to-text contract: strings unchanged, booleans `1`/`0`, stable finite decimal text (`-0.0` → `0`, `1.0` → `1`), and null for any null/array/harray/codeblock argument. Retired `concat` remains unsupported. |
 | `copy(container)` | array/harray snapshot | one unified `copy(...)` dispatches from the current runtime value kind. |
 
 Direct nested access, for example `payload["children"][0]["name"]` or `payload["children"][i]["name"]`, is
 also part of the terse surface. It is not a helper rename; it is the replacement surface for the older nested
-path helper spelling. Quoted segments are hash keys, and bare path atoms such as `[i]` read scalar working
-variables as array indexes. As an lvalue, a direct nested path mutates an existing scalar-held array/hash value
-tree with the no-autovivification write rules described above.
+path helper spelling. For reads, quoted segments are hash keys and bare path atoms such as `[i]` read scalar
+working variables. As a Perl lvalue, every segment is instead classified from its evaluated value kind. A direct nested path mutates a scalar-held array/harray value tree with the transitional
+backend rules described above: vivifying on Perl, checked existing-path behavior on the remaining backends.
 
 The current helper aliases above lower within their supported statement/helper families. Assignment forms
 (`set(...)`, `name = value`, and `=(name, value)`) now compose as value expressions when the
 target receives a scalar, array, or hash RHS value. Mutation assignment operators also compose as value
-expressions: `items += value` yields the updated array snapshot and `meta[key] = value` yields the updated hash
-snapshot; nested value-path assignment yields the updated root value on success and `undef` on failed path checks.
+expressions: `items += value` yields the updated array snapshot and `meta[key] = value` yields the updated typed-root
+snapshot. Perl typed path failures throw exact diagnostics; remaining backends retain their earlier null result.
 Array end mutations yield updated arrays too; pop methods still discard the removed element.
 Value-producing helper aliases such as `cat(...)` and `copy(...)` compose in the value positions documented by
 their contracts. New `.spec` authoring should prefer the terse names.

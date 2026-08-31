@@ -1,5 +1,28 @@
 # ARCHITECTURE STATE
 
+## Perl nested writes now implement the frozen typed vivification contract
+
+`FUTURE-PARITY-BACKLOG.19.2.1` advances only the Perl reference to
+`linkedspec-write-vivification-v1`. One- and many-segment bracket assignment parse as one
+`assign_nested_access`; every `path_segment` keeps its ordinary expression and exact authored Unicode-scalar
+span. Lowering evaluates segments left-to-right then RHS exactly once before reading the root and invocation-local
+presence state. That state distinguishes an absent Perl lexical from explicitly bound `undef` in rule and
+user-function frames; parameters begin present and fresh locals begin absent on every function call.
+
+`LinkedSpec::BindingRuntime::nested_write` validates evaluated selector kinds, snapshots the post-evaluation root,
+and builds on an isolated clone. String/nonnegative integer selects harray/array; absent roots and unambiguous
+missing children create; bound null/wrong kinds conflict; dense arrays replace or append at length and reject
+gaps. Exact typed errors retain binding, failing segment, copied prefix, authored span, and kind/gap fields.
+Structural failure commits no partial path, completed expression effects keep ordinary semantics, and successful
+binding/result/initial/RHS aggregates detach.
+
+The permanent Perl contract projects all frozen 5/7/11/16 cases plus dynamic-kind fidelity, evaluation,
+detachment, bound-null, same-binding, and fresh function-state boundaries. Focused ActionIR/trace/uniform proof
+passes 50 tests and the exact finalized Phase 0 passes all 1,032 in 963 seconds;
+both neutral mutation checkers remain unchanged. Rust, Dart, Julia, and Lua retain the prior non-vivifying path,
+and `map_leaves!` remains unsupported. No portable capability, generated format, facade/schema/MCP, CLI,
+tool/storage/doctrine, or public admission moves; Perl `.19.2.2` is next.
+
 ## Future write and receiver mutation compose through one shared neutral fixture
 
 `FUTURE-PARITY-BACKLOG.19.1.3` freezes `linkedspec-write-map-leaves-composition-v1` without enabling backend
@@ -19,10 +42,11 @@ Callback success commits the rebuilt receiver once and releases the guard before
 side receiver write then follows ordinary nested-write semantics; its structural failure preserves the completed
 bang commit. All callback, write, snapshot, local, unrelated, committed, and returned aggregates remain detached.
 
-The exact non-bang control returns `{"leaf":[]}` on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. The composed bang
+At the neutral `.19.1.3` boundary, the exact non-bang control returned `{"leaf":[]}` on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. The composed bang
 source stops before callback nested-write lowering: Perl/Rust return null (Rust warns), while Dart/Julia/both Lua
 ABIs expose generic parser-invocation failure. No parser, compiler, runtime, fixture admission, capability,
-generated format, facade, schema, MCP, CLI, or current public behavior moves. Perl `.19.2.1` is next.
+generated format, facade, schema, MCP, CLI, or current public behavior moved. Perl `.19.2.1` has since advanced
+only ordinary nested-write behavior as described above; bang parsing remains unchanged.
 
 ## Future `map_leaves!` receiver mutation has one executable neutral authority
 
@@ -2924,6 +2948,11 @@ This document is the current high-level technical reading of the project shape. 
   checker validates 5/7/11/16/3/3 cases plus detachment and rejects 105 mutations. Exact Perl/Rust/Dart/Julia/PUC-
   Lua/LuaJIT boundary probes remain non-vivifying, so no current parser/compiler/runtime/capability state moves.
   `.19.1.2` owns the separate `map_leaves!` neutral contract before backend work.
+- `2026-08-31` refresh: `.19.2.1` implements the unchanged frozen write contract on Perl only. One/many typed
+  segments, authored spans, evaluated string/integer dispatch, absent/null presence, dense isolated creation,
+  exact typed errors, post-evaluation snapshots, detached roots, and rule/function invocation state pass direct
+  fixture projection and composite Phase 0. Rust/Dart/Julia/Lua remain non-vivifying; `map_leaves!`, capability,
+  generated formats, and public admission remain unchanged. Perl `.19.2.2` follows.
 - `2026-07-15` refresh: ADR `0035` makes terse, readable, and highly expressive authoring a hard constraint on
   future universal `.spec` evolution. Terseness removes redundant ceremony rather than semantic signal;
   readability keeps structure, value flow, mutation, scope, recovery, and typed diagnostics locally predictable;

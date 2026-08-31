@@ -688,14 +688,15 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   Unicode-scalar spans, evaluated string/integer kind selection, write-only missing-container creation, dense
   arrays, segment/RHS order, expression-failure propagation, post-evaluation same-binding snapshots, isolated
   atomic commit, detached results, structural diagnostics, and non-creating reads.
-- **WHEN:** designing or implementing nested assignment/vivification in any backend. This checker freezes future
-  semantics only; never infer current backend admission from its success. Before changing lowering, directly probe
-  a quoted segment and a computed string segment: current implementations statically split key versus index and
-  therefore cannot yet satisfy the evaluated-kind contract.
+- **WHEN:** designing or implementing nested assignment/vivification in any backend. This checker freezes neutral
+  semantics; never infer portable/public admission from its success. Perl consumes it under `.19.2.1`. Before
+  changing another backend, directly probe a quoted segment and a computed string segment: Rust/Dart/Julia/Lua
+  still statically split key versus index and therefore cannot yet satisfy the evaluated-kind contract.
 - **HOW:** `bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py`.
 - **OUTPUT:** `write-vivification contract: 5 valid syntax, 7 invalid syntax, 11 success, 16 structural failures, 3 evaluation failures, 3 read exclusions, 8 composed writes, 105 rejected mutations; future behavior remains unadmitted`.
-- **CURRENT BOUNDARY:** use the existing `terse_11_4` backend tests/corpus case for unchanged non-vivification;
-  Perl's `LinkedSpec::call_spec_handler_subst` and `return_descriptor` show the current static segment split.
+- **CURRENT BOUNDARY:** Perl's permanent `t/write_vivification_perl_contract.t` projects the frozen fixture through
+  `LinkedSpec::call_spec_handler_subst`, live rules, and user functions. Use existing `terse_11_4` tests/corpus for
+  the unchanged Rust/Dart/Julia/Lua non-vivification boundary. Public capability admission remains pending.
 
 ### 4.8.3 `tools/check_map_leaves_mutation_contract.py` — future neutral receiver-mutation oracle
 

@@ -293,15 +293,19 @@ in the same value contract as typed value binding: `items = [value]`, `set(items
 `=(items, [value])` bind an array value to `items` and evaluate to that stored array value; `meta = { key : value }`
 binds a hash value and evaluates to that stored hash value. `set(items, ...)` and `set(meta, ...)` bind the same
 observable typed values as bare assignment. Mutation assignments also have expression
-values: `items += value` appends to the named array and evaluates to the updated array snapshot, while
-`meta[key] = value` updates the named hash and evaluates to the updated hash snapshot.
+values: `items += value` appends to the named array and evaluates to the updated array snapshot. On Perl,
+`meta[key] = value` updates the typed root selected by the evaluated string/nonnegative-integer key and yields the
+updated root snapshot; remaining backends retain their earlier named-hash interpretation until admission.
 
 Nested value-path assignment mutates scalar-held array/hash payloads through direct access syntax:
-`payload["items"][0]["name"] = value`. Intermediate path containers must already exist and match the segment kind.
-The final segment may create or replace a hash key, replace an existing array element, or append exactly at the
-array length. Missing intermediates, wrong intermediate container kinds, and array gaps yield `undef` and leave the
-root unchanged. Successful expression-valued nested assignment yields the updated root value. Segment index
-expressions are evaluated before the RHS value expression; the root path check and mutation happen after both.
+`payload["items"][0]["name"] = value`. On Perl, each evaluated string/nonnegative-integer segment selects an
+harray/array. The first selector may create an absent root, and the next selector may create a missing
+intermediate. Bound null and other wrong kinds are not coerced; arrays replace or append exactly at length and
+reject gaps. Segments evaluate once left-to-right, then the RHS once, before isolated structural validation.
+Success commits and yields a detached updated root. Invalid selectors, kind conflicts, and gaps throw typed
+diagnostic objects and commit no partial path; already completed expression effects retain ordinary semantics.
+Reads never create state. Rust, Dart, Julia, and Lua retain the prior existing-intermediate/null-result boundary
+until the remaining implementation and public-admission leaves complete.
 
 Array end mutations are also statement-level operations on a named working array:
 `items.push_back(value)` appends, `items.push_front(value)` prepends, `items.pop_back()`
@@ -354,11 +358,11 @@ helper family. For example, `{ [3, 1, 2] }.sorted().join_values(",")` evaluates 
 block to an array, then applies the ordinary array receiver-chain contract; `{ " a-b " }.trim().split("-").count()`
 does the same through string helpers and the explicit `split` array bridge.
 
-Named hash mutation updates a working hash in place. `set_key(meta, "stage", "normalized")` and
-`meta["stage"] = "normalized"` both update the working hash `meta`. The hash target auto-exists just like a
-declared `meta` working variable. In mutation slots, bare key/RHS identifiers read scalar working variables:
-`set_key(meta, key, value)` and `meta[key] = value` use `$key` and `$value`. When `meta[key] = value` is used as an
-expression, it yields the updated hash snapshot after the field write.
+Named harray mutation through `set_key(meta, "stage", "normalized")` remains explicit. On Perl,
+`meta["stage"] = "normalized"` has the same observable field update but runs through typed-path assignment;
+`meta[0] = value` instead selects an array. An absent target is created from the selector, while bound null/wrong
+kinds and array gaps are typed failures. In mutation slots, bare selector/RHS identifiers read scalar working
+variables. When `meta[key] = value` is used as an expression, it yields the detached updated root snapshot.
 
 ### 5.4 Return Value
 

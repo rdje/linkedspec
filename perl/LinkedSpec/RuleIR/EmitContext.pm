@@ -24,6 +24,7 @@ use constant {
 
 our $__ls_current_function_registry;
 our $__ls_current_bare_type_memory;
+our $__ls_current_nested_write_targets;
 our $__ls_current_rule_label;
 
 sub _trace_should_dump {
@@ -272,6 +273,13 @@ sub _actionir_owner_default_deps {
     %$owner_deps,
     bare_symbol_kind => \&_bare_symbol_kind,
     bare_symbol_names => [sort keys %$__ls_current_bare_type_memory],
+   };
+  }
+  if (ref($owner_deps) eq 'HASH' && ref($__ls_current_nested_write_targets) eq 'HASH') {
+   $owner_deps = {
+    %$owner_deps,
+    nested_write_target => \&_nested_write_target,
+    nested_write_target_names => [sort keys %$__ls_current_nested_write_targets],
    };
   }
   if (ref($owner_deps) eq 'HASH'
@@ -685,6 +693,13 @@ sub _bare_symbol_kind {
  return $__ls_current_bare_type_memory->{$name}
 }
 
+sub _nested_write_target {
+ my ($name) = @_;
+ return 0 unless defined($name) && length($name);
+ return 0 unless ref($__ls_current_nested_write_targets) eq 'HASH';
+ return $__ls_current_nested_write_targets->{$name} ? 1 : 0
+}
+
 sub _bare_symbol_kind_from_sigil {
  my ($sigil) = @_;
  return 'array' if defined($sigil) && $sigil eq '@';
@@ -799,8 +814,8 @@ sub _collect_bare_identifier_type_memory {
   if ($kind eq 'assign_nested_access') {
    $record->($node->{base}, 'scalar');
    foreach my $segment (@{$node->{segments} || []}) {
-    next unless ref($segment) eq 'HASH' && ($segment->{kind} // '') eq 'index';
-    $collect_ast_type_node->($segment->{expr});
+    next unless ref($segment) eq 'HASH' && ($segment->{kind} // '') eq 'path_segment';
+    $collect_ast_type_node->($segment->{expression});
    }
    $collect_ast_type_node->($node->{value});
    return;
@@ -1021,6 +1036,48 @@ sub _collect_bare_identifier_type_memory {
  }
 
  return \%kind_by_name
+}
+
+sub _collect_nested_write_targets {
+ my ($rule_ir) = @_;
+ return {} unless ref($rule_ir) eq 'HASH';
+ my @raw_blocks;
+ my $code_blocks = (ref($rule_ir->{code_blocks}) eq 'HASH') ? $rule_ir->{code_blocks} : {};
+ for my $key (qw(ICODE ECODE EXCODE ITCODE LXCODE LSCODE LECODE)) {
+  push @raw_blocks, @{$code_blocks->{$key} || []};
+ }
+ push @raw_blocks, map { (ref($_) eq 'HASH') ? $_->{code} : () } @{$rule_ir->{acode_entries} || []};
+ push @raw_blocks, map { (ref($_) eq 'HASH') ? $_->{code} : () } @{$rule_ir->{bcode_entries} || []};
+ push @raw_blocks, map { (ref($_) eq 'HASH') ? $_->{call} : () } @{$rule_ir->{bcode_entries} || []};
+ push @raw_blocks, map { (ref($_) eq 'HASH') ? $_->{code} : () } @{$rule_ir->{and_icode_entries} || []};
+
+ my %targets;
+ my $visit;
+ $visit = sub {
+  my ($value) = @_;
+  if (ref($value) eq 'ARRAY') {
+   $visit->($_) for @$value;
+   return;
+  }
+  return unless ref($value) eq 'HASH';
+  if (($value->{kind} // '') eq 'assign_nested_access'
+   && defined($value->{base})
+   && $value->{base} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o) {
+   $targets{$value->{base}} = 1;
+  }
+  $visit->($_) for values %$value;
+ };
+ for my $block (@raw_blocks) {
+  next unless defined($block) && length($block);
+  my $ast;
+  eval {
+   LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::AST');
+   $ast = LinkedSpec::ActionIR::AST::parse_action_block($block, {});
+   1;
+  } or next;
+  $visit->($ast);
+ }
+ return \%targets
 }
 
 sub _lower_return_general_statement {
@@ -1292,6 +1349,7 @@ sub rewrite_action_code_for_compat {
    },
   );
 	  local $__ls_current_bare_type_memory = $compat_bare_type_memory;
+	  local $__ls_current_nested_write_targets = _collect_nested_write_targets($compat_rule_ir);
 	  my $trimmed = _trim_action_ir_value($code);
 	  if (defined($trimmed) && $trimmed =~ /^:[A-Za-z_][A-Za-z0-9_]*$/o) {
 	   my $diagnostic = 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read"; undef }';
@@ -2030,8 +2088,8 @@ sub _collect_auto_working_var_decls {
   if ($kind eq 'assign_nested_access') {
    $record->('$', $node->{base});
    foreach my $segment (@{$node->{segments} || []}) {
-    next unless ref($segment) eq 'HASH' && ($segment->{kind} // '') eq 'index';
-    $collect_ast_node_refs->($segment->{expr}, 1);
+    next unless ref($segment) eq 'HASH' && ($segment->{kind} // '') eq 'path_segment';
+    $collect_ast_node_refs->($segment->{expression}, 1);
    }
    $collect_ast_node_refs->($node->{value}, 1);
    return;
@@ -2336,6 +2394,7 @@ sub build_rule_ir_emit_context {
   ? $rule_ir->{function_registry}
   : undef;
  local $__ls_current_bare_type_memory = _collect_bare_identifier_type_memory($rule_ir);
+ local $__ls_current_nested_write_targets = _collect_nested_write_targets($rule_ir);
  local $__ls_current_rule_label = defined($label) && !ref($label) ? $label : '';
  _trace_emit_context_decision(
   phase => 'build_rule_ir_emit_context',
@@ -2434,6 +2493,9 @@ sub build_rule_ir_emit_context {
   )
  );
  my $auto_var_decls = _collect_auto_working_var_decls($rule_ir, $lowered_text);
+ push @$auto_var_decls, 'my %__ls_binding_presence;'
+  if ref($__ls_current_nested_write_targets) eq 'HASH'
+  && keys %$__ls_current_nested_write_targets;
 
  my $emit_context = {
   label     => $label,

@@ -721,7 +721,7 @@
   Commit: `FUTURE-PARITY-BACKLOG.18.3 - plan optional native parser acceleration`
 
 - ID: `FUTURE-PARITY-BACKLOG.19`
-  Status: `in progress; neutral .19.1 complete, Perl .19.2.1 next`
+  Status: `in progress; Perl .19.2.1 active`
   Goal: Add portable explicit nested-write vivification and receiver-mutating method semantics without hidden
     reads, host-language aliasing, or backend drift.
   Children: `.19.0`, `.19.1`, `.19.2`, `.19.3`, `.19.4`, `.19.5`, `.19.6`, `.19.7`
@@ -932,7 +932,7 @@
   Commit: `FUTURE-PARITY-BACKLOG.19.1.3 - compose neutral future mutations`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.2`
-  Status: `pending`
+  Status: `in progress; .19.2.1 complete, .19.2.2 next`
   Goal: Implement the unchanged v1 contract on the Perl reference backend.
   Children: `.19.2.1`, `.19.2.2`
   Dependencies: `.19.1`
@@ -940,11 +940,57 @@
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.2.1`
-  Status: `pending`
+  Status: `done` (2026-08-31; focused signoff from exact clean neutral-composition parent
+    `db71152ad4f7f981402b3a503601d184046bbc54`; no push)
   Goal: Implement Perl reference nested write-vivification over scalar-held typed value trees.
   Dependencies: `.19.1.3`
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused` — this leaf implements only the unchanged, already frozen nested-write v1 contract
+    on the Perl reference path. It does not implement `map_leaves!`, change another backend, admit a capability or
+    public-current claim, move generated formats, add an executable/storage owner, or alter doctrine infrastructure.
+  Focused checks: exact Perl ActionIR AST/source-span and syntax diagnostics; typed evaluated-segment order, absent
+    root/intermediate creation, bound-null/wrong-kind/gap failures, post-evaluation same-binding snapshots,
+    expression-failure propagation, detached commit/results, and read/non-write no-drift; direct lowering/source
+    inspection, focused plus appropriate broad Perl phase0, both neutral/composition checkers, Knowledge/task/index,
+    bounded histories, memory, all nine doctrines, rendered mdBook, and whitespace.
+  Canonical trigger: `none planned` — escalate if the implementation changes generated/public/capability formats,
+    current non-Perl behavior, tool/storage/doctrine infrastructure, or forces a bounded-history rollover. Final
+    five-backend admission and recurring/public proof remain owned by `.19.7-.9`.
+  Ownership: `.19.2.1` owns only Perl parsing/lowering/runtime behavior for `linkedspec-write-vivification-v1` and
+    exact Perl-focused tests/docs. Perl `map_leaves!` remains exclusively `.19.2.2`; Rust/Dart/Julia/Lua remain
+    `.19.3-.6`; no cross-backend/public admission occurs here.
+  Checklist: [x] clean activation/task ownership [x] Knowledge/decision/toolbox retrieval [x] exact current Perl
+    AST/lowering/runtime seam audit [x] parser/AST typed-segment implementation [x] isolated vivifying runtime and
+    typed diagnostics [x] focused/exclusion/detachment regression proof [x] durable docs/Knowledge/live sync
+    [x] focused signoff [x] atomic commit/brief/clean handoff.
+  Activation evidence: exact `git status --short --untracked-files=all` is empty at
+    `db71152ad4f7f981402b3a503601d184046bbc54`; `.19.1.1-.3` and neutral parent `.19.1` are committed complete;
+    `git_message_brief.txt` is zero bytes; generated mdBook/runtime-probe output is absent; no background job
+    remains; and no push occurred after the focused neutral-composition commit.
+  Implementation evidence: one- and many-segment writes now parse as one `assign_nested_access` with exact
+    expression-bearing `path_segment` source/spans and seven frozen typed syntax failures. Perl lowering evaluates
+    segments left-to-right then RHS, snapshots presence/root afterward, and delegates isolated structural work to
+    `BindingRuntime::nested_write`. Evaluated strings/nonnegative integers select harray/array; absent roots and
+    unambiguous missing children create, bound null/wrong kinds conflict, and arrays replace/append without gaps.
+    Typed errors retain the exact code/operation/binding/failing index/copied prefix/authored span and kind/gap
+    fields. Commit/result/initial/RHS aggregate boundaries detach and reads remain unchanged.
+  Presence/evaluation evidence: RuleIR adds invocation-local presence state only for rules with nested-write
+    targets; tracked assignments distinguish explicitly bound null from absence. User functions own fresh presence
+    state per call, mark parameters present, and reset absent locals. Tied-scalar proof shows every segment once
+    left-to-right then RHS; expression failure stops structural work; same-binding segment/RHS effects settle
+    before the outer snapshot and survive only as completed expression state after later structural failure.
+  Regression evidence: `t/write_vivification_perl_contract.t` projects all frozen 5 AST, 7 syntax, 11 success, and
+    16 structural-failure cases plus four-way detachment, evaluation failure, same-binding composition, live
+    bound-null, dynamic scalar-kind fidelity, and repeated function-local state. ActionIR/trace/uniform plus the new contract pass 50 permanent
+    tests. The first complete Phase 0 run proves 1,020 unaffected subtests and identifies exactly 12 stale source
+    expectations; after expectation-only repair, an exact replay proves all 12. A fresh post-review exact-tree
+    Phase 0 then passes all 1,032 in 963 seconds. Both unchanged neutral checkers pass at 105 write and 167 base +
+    593 composition mutations.
+  Focused signoff evidence: all changed Perl modules pass syntax; whitespace, Knowledge/task/index, bounded
+    histories, project storage, capability/language no-drift, rendered sole-facing mdBook, all nine doctrines, and
+    memory architecture pass. Review confirms no non-Perl runtime, neutral contract, generated format, capability,
+    facade/schema/MCP, CLI, tool/storage owner, doctrine, or public admission moves; no canonical trigger fires.
+  Verification: **PASS 2026-08-31.** Perl-only implementation complete; parent `.19.2` stays open for `.19.2.2`.
+  Commit: `FUTURE-PARITY-BACKLOG.19.2.1 - implement Perl write vivification`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.2.2`
   Status: `pending`

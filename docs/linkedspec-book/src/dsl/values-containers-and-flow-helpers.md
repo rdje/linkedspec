@@ -72,7 +72,9 @@ forms are also value expressions. `name = "ok"` and `=(name, "ok")` store the sc
 assignments such as `items = [value]`, `set(items, [value])`, `=(items, [value])`, and
 `meta = { key : value }` bind the array or hash as the current typed value of the bare target and yield that
 stored value. Mutation assignments also compose as values: `items += value` mutates the named array and yields the
-updated array snapshot, while `meta[key] = value` mutates the named hash and yields the updated hash snapshot.
+updated array snapshot, while `meta[key] = value` mutates the typed root selected by the evaluated key and yields
+the updated root snapshot. On Perl a string selects harray and a nonnegative integer selects array; the remaining
+backends retain their prior hash-index interpretation until admission.
 These forms compose in `return(...)`, helper arguments, expression-valued blocks, user functions, or compatible
 receiver chains.
 
@@ -84,12 +86,19 @@ payload["items"][0]["name"] = "new";
 payload["items"][1] = { "name" : "tail" };
 ```
 
-Nested writes mutate the array/hash value currently held by the bare variable. Intermediate containers must
-already exist and have the required shape; LinkedSpec does not autovivify missing hashes or arrays. A final hash
-key may be created or replaced. A final array index may replace an existing element or append exactly at the
-current array length. An array gap, missing intermediate key, or wrong intermediate container leaves the root
-unchanged and yields `undef` in value positions. Segment index expressions are evaluated before the RHS value
-expression; the root path check and mutation happen after both.
+Nested writes mutate the typed array/harray value held by the bare variable. On the Perl reference, every bracket
+is evaluated as an ordinary value expression: a string selects an harray and a nonnegative integer selects a
+zero-based array. An absent root is created from the first selector, and a missing intermediate is created from
+the next selector. Existing null or another wrong kind is never coerced. Arrays remain dense: an existing index
+may be replaced and index `length` may append, while a larger gap fails. Segments evaluate once left-to-right,
+then the RHS once; isolated structural building begins afterward. Success commits and returns a detached updated
+root. Invalid selectors, kind conflicts, and gaps throw typed nested-write diagnostics without a partial path
+commit. Reads remain pure and never create containers.
+
+This behavior is currently a Perl-reference implementation milestone. Rust, Dart, Julia, and Lua retain the
+earlier checked boundary until their `.19` backend leaves: every intermediate must already exist with the required
+shape, and a missing/wrong path or gap yields null without changing the root. Portable/public admission follows
+only after all backend leaves and recurring proof complete.
 
 ## Pushing values
 

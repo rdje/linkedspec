@@ -89,8 +89,9 @@ diagnostics identify the authored segment; structural codes distinguish invalid 
 dense-array gap.
 
 Reads remain pure and never create a root, child, cache, or other state. Temporary/literal/helper/property roots,
-an invented `vivify(...)` helper, and an invented `:=` operator are excluded. Current backends still require every
-intermediate container to exist; the neutral contract is implementation input, not a current-feature claim.
+an invented `vivify(...)` helper, and an invented `:=` operator are excluded. The Perl reference now implements
+this unchanged contract under `.19.2.1`; Rust, Dart, Julia, and Lua still require every intermediate container to
+exist. Portable/public admission remains pending until all owned backend and recurring-proof leaves complete.
 
 Second, LinkedSpec reserves a Ruby-style trailing `!` for a method that genuinely updates its receiver. The only
 version-1 candidate is:

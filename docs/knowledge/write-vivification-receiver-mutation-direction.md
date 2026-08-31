@@ -16,25 +16,27 @@ answers:
   - does map_leaves bang traverse replacement subtrees immediately
   - when will write vivification and map_leaves bang be implemented
 date: 2026-07-15
-status: accepted direction; mechanism and composition contracts frozen, backend implementation pending
+status: accepted direction; contracts frozen and Perl nested-write implementation complete; remaining backends/mutation/admission pending
 tags: [dsl, mutation, autovivification, receiver-methods, traversal, paths, portability, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.19.0; ADR 0036; Knowledge Map cards for nested writes/uniform binding/five-backend traversal; source audit of Perl MethodExpr/AST Parser, Rust expr parser, Dart/Julia/Lua ActionIR parsers; Perl direct nested-write probe, Rust terse_11_4 (3/3), Dart exact no-autovivification test, Julia complete local tests with a writable depot stacked before installed packages, and Lua 121/121 on PUC Lua/LuaJIT. The first Julia empty-depot-only attempt failed on blocked registry resolution; the stacked-depot rerun passed. No behavior changed."
 evidence_update_2026_08_30_neutral_write_contract: "FUTURE-PARITY-BACKLOG.19.1.1 freezes linkedspec-write-vivification-v1 before backend code. One assign_nested_access node owns every one-or-more-segment write; evaluated strings select harrays and nonnegative integers select arrays; syntax and structural diagnostics carry authored Unicode-scalar spans; segments then RHS evaluate before isolated validation; completed same-binding expression side effects settle before the snapshot; dense creation, atomic commit, and detached results are executable through an independent 105-mutation checker. Current Perl/Rust/Dart/Julia/Lua behavior stays non-vivifying."
 evidence_update_2026_08_31_neutral_composition: "FUTURE-PARITY-BACKLOG.19.1.2 freezes linkedspec-map-leaves-mutation-v1; .19.1.3 then binds both unchanged mechanisms through linkedspec-write-map-leaves-composition-v1. Both existing checkers validate eight writes, six callback compositions, one continuation, 167 base map mutations, and 593 composition mutations. Current six-runtime source still stops at the bang token before callback write lowering."
+evidence_update_2026_08_31_perl_reference: "FUTURE-PARITY-BACKLOG.19.2.1 implements the unchanged nested-write contract on Perl only, including typed evaluated paths, absent-versus-null presence, dense isolated creation, typed diagnostics, detachment, and invocation-local rule/function state. map_leaves! remains unsupported everywhere; Rust/Dart/Julia/Lua nested writes retain the prior boundary."
 reverify: "rg -n '0036|FUTURE-PARITY-BACKLOG\\.19|map_leaves!|write-only|arrays remain dense' docs/decisions/0036-write-vivification-and-receiver-mutation.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src/overview/design-rationale.md && rg -n 'parse_method_function_expr|parse_name|_isIdentifier|_action_is_identifier|A-Za-z_.*A-Za-z0-9_' perl/LinkedSpec/ActionIR/MethodExpr.pm rust/linkedspec-core/src/expr.rs dart/lib/src/action/action_parser.dart julia/src/action/ActionParser.jl lua/src/linkedspec/action_parser.lua"
 ---
 
 # Write vivification and explicit receiver mutation direction
 
-Current behavior remains non-vivifying: nested assignment requires every intermediate array/harray to exist. A
-final harray key may be created, and a final array index may replace an element or append exactly at length.
-Missing/wrong intermediates and gaps leave the root unchanged. Current ActionIR method grammars also do not accept
-`!` as a method-name suffix.
+Perl nested assignment now implements write-only vivification: an absent root or missing intermediate is created
+from the evaluated string/integer selector kind. Rust, Dart, Julia, and Lua still require existing intermediate
+array/harray shapes. Every backend keeps dense arrays and refuses wrong-kind coercion. Current ActionIR method
+grammars still do not accept `!` as a method-name suffix.
 
 ADR `0036` accepts two future mechanisms after complete current-backend parity:
 
-1. A nested **write** may create a missing root or intermediate. The frozen future-neutral contract is
-   [[write-vivification-neutral-contract]]; no backend is admitted by that contract leaf. Reads never create state. The next evaluated
+1. A nested **write** may create a missing root or intermediate. The frozen neutral contract is
+   [[write-vivification-neutral-contract]], now implemented on the Perl reference by
+   [[write-vivification-perl-reference]]. Reads never create state. The next evaluated
    segment determines the container: exact nonnegative integer means array, string means harray. Existing
    wrong-kind values are never coerced. Arrays remain dense, so indexes greater than `length` fail instead of
    inventing null filler leaves. Path/RHS evaluation precedes isolated copy-on-write validation and commit.
@@ -50,8 +52,9 @@ writable references. Assigning `value` does not secretly update a leaf.
 The shared composition boundary is [[write-map-leaves-neutral-composition]]. `walk_leaves!`, `reduce_leaves!`,
 function-form `map_leaves!(tree)`, arbitrary bang-suffixed identifiers, temporary
 or nested-access v1 receivers, and short traversal aliases are excluded. Exact neutral diagnostics and re-entrant
-same-receiver behavior belong to `.19.1`; Perl/Rust/Dart/Julia/Lua implementations and public admission follow in
-`.19.2-.19.7`. Until those leaves land, the current non-vivifying/bang-invalid contract remains authoritative.
+same-receiver behavior belong to `.19.1`; Perl `map_leaves!`, Rust/Dart/Julia/Lua implementations, and public
+admission follow in `.19.2.2-.19.7`. Until those leaves land, bang syntax remains invalid everywhere and only Perl
+may claim current write vivification.
 
 ## Links
 

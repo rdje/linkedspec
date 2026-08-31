@@ -9,6 +9,31 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-31 (`FUTURE-PARITY-BACKLOG.19.2.1` — Perl write vivification): one `assign_nested_access` path now owns
+  one and many bracket segments. Keeping each segment as a typed expression plus authored span avoids the former
+  quoted-key/computed-index parser guess and lets a runtime string or integer select harray or array correctly.
+- Perl needs explicit presence state: lexical `undef` means either absent or bound null, but the neutral contract
+  distinguishes them. Rule-local and user-function-local `%__ls_binding_presence` maps exist only when a nested
+  write target is present; tracked scalar assignment marks it, function parameters initialize as present, and
+  fresh locals begin absent per invocation.
+- Signoff review caught the statement-helper twin before commit: `root = undef` marked presence, while
+  `set(root, undef)` initially bypassed that seam and would have vivified. Routing all scalar statement spellings
+  through the same tracked-assignment helper restores the documented alias; the live contract now tests both.
+- Lowering stores segment values left-to-right, then RHS, before it reads the root/presence and calls the runtime.
+  This makes once-only order inspectable and ensures a same-binding segment/RHS assignment settles before the
+  outer snapshot. Expression failures never enter structural work; later structural failure preserves completed
+  expression state but never a partial path.
+- `BindingRuntime::nested_write` validates all selectors first, clones the post-evaluation root, creates only
+  selector-determined missing containers, and clones both commit and result. `B` scalar flags preserve dynamic
+  integer versus numeric-string identity; JSON booleans are diagnosed before numeric coercion.
+- The frozen fixture drives exact Perl AST, parser-diagnostic, runtime-success, runtime-failure, and source-span
+  projections. Dedicated live cases catch bound-null presence and repeated zero-argument user-function calls;
+  tied scalars prove segment/RHS order and unchanged expression-error propagation.
+- The first full 1,032-subtest Phase 0 pass had exactly 12 failures, all generated-source assertions on the changed
+  lowering. After correcting only those expectations (including authored-span normalization for spacing twins),
+  an exact focused replay of the 12 passes; all other 1,020 had already passed. Permanent focused suites pass 50
+  tests. After the final presence/type refinements, a fresh exact-tree Phase 0 passes all 1,032 in 963 seconds;
+  both frozen neutral checkers remain unchanged at 105 write / 167+593 map/composition mutations.
 - 2026-08-31 (`FUTURE-PARITY-BACKLOG.19.1.3` — neutral mutation composition): the two atomicity domains are
   intentionally different. `map_leaves!` protects and atomically commits only its receiver rebuild; a nested write
   to another identity retains normal success/failure and completed-expression semantics. A later callback failure

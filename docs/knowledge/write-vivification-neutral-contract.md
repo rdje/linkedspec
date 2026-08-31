@@ -17,10 +17,11 @@ answers:
   - "why must current static key index lowering change"
   - "how are nested write source spans measured"
 date: 2026-08-30
-status: future neutral contract frozen under FUTURE-PARITY-BACKLOG.19.1.1; no backend admitted
+status: neutral contract frozen under FUTURE-PARITY-BACKLOG.19.1.1; implemented on Perl only by .19.2.1
 tags: [dsl, actionir, assignment, autovivification, diagnostics, source-spans, mutation, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.19.1.1 adds capability_conformance/write_vivification_contract.json and tools/check_write_vivification_contract.py. The independent checker validates five exact AST cases, seven syntax failures, 11 successful writes, 16 structural failures, three expression failures, three read exclusions, detached values, and 105 rejected mutations. Exact current probes remain non-vivifying on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Perl lowering proves quoted segments are currently tagged key while every computed segment is statically tagged/coerced as index; Rust/Dart/Julia/Lua preserve the same authored key/index split. No backend behavior or public-current capability changes in this leaf."
 evidence_update_2026_08_31_composition: "FUTURE-PARITY-BACKLOG.19.1.3 adds linkedspec-write-map-leaves-composition-v1 as a shared fixture consumed by both existing checkers. This write checker now validates eight additional nested writes spanning detached callback value, unrelated global, same-spelling shadow local, active receiver guard, and post-commit receiver targets while retaining all 105 base mutations. No write behavior is admitted."
+evidence_update_2026_08_31_perl_reference: "FUTURE-PARITY-BACKLOG.19.2.1 implements the unchanged v1 contract on Perl only. One-/many-segment parsing, authored spans, exact typed syntax/runtime diagnostics, evaluated string/integer dispatch, absent-versus-bound-null presence, dense isolated creation, post-evaluation snapshots, detachment, and rule/function invocation state are exercised directly from the frozen fixture. Rust, Dart, Julia, and Lua remain non-vivifying; capability/public admission remains pending."
 reverify: "bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py"
 ---
 
@@ -33,8 +34,9 @@ document["sections"][0]["title"] = title
 document[segment_name][position] = make_value()
 ```
 
-It deliberately admits no current backend. Until the implementation and final admission leaves land, all five
-backends retain their existing non-vivifying behavior.
+It was frozen without admitting a backend. Perl now implements that unchanged contract under `.19.2.1`; Rust,
+Dart, Julia, and Lua retain their existing non-vivifying behavior until their owned implementation leaves and the
+later public admission boundary land.
 
 ## One typed path model
 
@@ -80,4 +82,5 @@ Reads never create state. Scalar assignment, temporary/literal/helper/property r
 an invented `vivify(...)` helper, and an invented `:=` operator are outside this contract.
 
 Related: [[write-vivification-receiver-mutation-direction]], [[terse-nested-value-path-assignment]],
-[[uniform-binding-neutral-contract]], [[write-map-leaves-neutral-composition]], and ADR `0036`.
+[[write-vivification-perl-reference]], [[uniform-binding-neutral-contract]],
+[[write-map-leaves-neutral-composition]], and ADR `0036`.

@@ -284,11 +284,14 @@ sub _control_ast_value_source_expr {
   return $expr
  }
  if ($kind eq 'assign_nested_access') {
-  my $target = _control_ast_value_source_expr({
-   kind => 'nested_access',
-   base => $node->{base},
-   segments => $node->{segments},
-  });
+  my $target = $node->{base};
+  return undef unless defined($target) && $target =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+  foreach my $segment (@{$node->{segments} || []}) {
+   return undef unless ref($segment) eq 'HASH' && ($segment->{kind} // '') eq 'path_segment';
+   my $expression = _control_ast_value_source_expr($segment->{expression});
+   return undef unless defined($expression) && length($expression);
+   $target .= '['.$expression.']';
+  }
   my $value = _control_ast_value_source_expr($node->{value});
   return undef unless defined($target) && length($target);
   return undef unless defined($value) && length($value);

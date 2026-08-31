@@ -1106,12 +1106,15 @@ Three backbone items tracked major structural modernization — all done:
   artifacts, performance/deployment, troubleshooting, and exact variant limitations. A read-only inventory,
   shared template, cross-links, canonical-owner metadata, and drift checks precede migration; implementation waits
   for current backend parity and no companion scaffold exists yet.
-- **Planned write-vivification and explicit receiver mutation** - ADR `0036` and `FUTURE-PARITY-BACKLOG.19`
-  reserve a post-current-parity extension. Nested assignments may create only missing containers whose kind is
+- **Write-vivification and explicit receiver mutation rollout** - ADR `0036` and `FUTURE-PARITY-BACKLOG.19`
+  govern a post-current-parity extension. Nested assignments may create only missing containers whose kind is
   unambiguous from the next evaluated segment; reads remain pure, existing wrong-kind values are not coerced, and
   arrays remain dense. `map_leaves!` is the only v1 bang candidate and will atomically rebind a bare named receiver
-  after successful original-shape/root-kind traversal. Current nested writes do not autovivify, current parsers do
-  not accept bang methods, and `.19.1-.19.7` remain pending neutral/backend/admission work.
+  after successful original-shape/root-kind traversal. Neutral write, bang, and composition contracts `.19.1.1-.3`
+  are frozen. Perl `.19.2.1` now implements nested-write vivification with evaluated typed paths, invocation-local
+  absent-versus-null presence, dense isolated creation, exact diagnostics, and detached commit/results. Rust,
+  Dart, Julia, and Lua retain the prior no-autovivification boundary; no parser accepts bang methods yet.
+  Perl `map_leaves!`, remaining backends, public admission, and recurring proof remain pending under `.19.2.2-.9`.
   All 13 ordinary harray names close at 103/103 through `.4.3.5.5` on both Lua ABIs. Sorted arrays continue
   through array receivers, count/membership are terminal, and mutation-result/pure-receiver prose is guarded.
   Eager blocks, lazy inline controls, attached/marker if and switch, and attached while close through

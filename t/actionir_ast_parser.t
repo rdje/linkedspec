@@ -162,12 +162,14 @@ subtest 'assignment and mutation statement nodes' => sub {
     is($append->{value}{kind}, 'variable', 'array append RHS is parsed');
 
     my $hash = parse_expr('meta[key] = { key : value }');
-    is($hash->{kind}, 'assign_hash_index', 'hash-index assignment parses as assign_hash_index');
-    is($hash->{key}{kind}, 'variable', 'hash assignment key is parsed as expression');
+    is($hash->{kind}, 'assign_nested_access', 'one-segment assignment parses through the unified nested-write node');
+    is($hash->{base}, 'meta', 'unified nested-write assignment retains its bare binding base');
+    is($hash->{segments}[0]{kind}, 'path_segment', 'hash assignment owns an expression-bearing path segment');
+    is($hash->{segments}[0]{expression}{kind}, 'variable', 'hash assignment segment is parsed as an expression');
     is($hash->{value}{kind}, 'hash_literal', 'hash assignment RHS is parsed as hash literal');
 
     my $colon_hash = parse_expr('meta[key] = { key : value }');
-    is($colon_hash->{kind}, 'assign_hash_index', 'colon hash-index assignment parses as assign_hash_index');
+    is($colon_hash->{kind}, 'assign_nested_access', 'colon hash-index assignment uses the same unified node');
     is($colon_hash->{value}{kind}, 'hash_literal', 'colon hash assignment RHS is parsed as hash literal');
 
     my $operator_call = parse_expr('=(target, value)');
@@ -741,10 +743,11 @@ subtest 'assignment expression lowering consumes AST nodes' => sub {
         q{return do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::push_value($items, "items", $value) }},
         'array append expression returns the updated typed binding'
     );
-    is(
-        LinkedSpec::call_spec_handler_subst('Top', q{return(meta[key] = value)}),
-        q{return do { require LinkedSpec::BindingRuntime; $meta = LinkedSpec::BindingRuntime::index_set($meta, "meta", $key, $value) }},
-        'hash-index assignment expression returns the updated typed binding'
+    my $nested_write = LinkedSpec::call_spec_handler_subst('Top', q{return(meta[key] = value)});
+    like(
+        $nested_write,
+        qr/^return do \{ my \$__ls_path_segment_0 = \$key; .*LinkedSpec::BindingRuntime::nested_write\(\$meta, .*kind_hint => "dynamic".*\); \$meta = \$__ls_path_updated; .*\$__ls_path_result \}$/,
+        'one-segment assignment expression returns the detached unified nested-write result'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', q{return((items += value).count())}),
