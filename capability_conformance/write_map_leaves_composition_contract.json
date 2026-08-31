@@ -1,0 +1,279 @@
+{
+  "format": 1,
+  "contract_id": "linkedspec-write-map-leaves-composition-v1",
+  "status": "future-neutral-composition; no backend behavior admitted",
+  "requires": {
+    "write_vivification": {
+      "contract_id": "linkedspec-write-vivification-v1",
+      "path": "capability_conformance/write_vivification_contract.json",
+      "canonical_json_sha256": "efabe777bf7fa5d7c3fa6e6fbe181bba89931b8c9b93a3631013c1f6009a2663"
+    },
+    "map_leaves_mutation": {
+      "contract_id": "linkedspec-map-leaves-mutation-v1",
+      "path": "capability_conformance/map_leaves_mutation_contract.json",
+      "canonical_json_sha256": "6267f3b93e3ef48fb7c002dee6982afc635d6bb5e7c9f95f05223df46249eeda"
+    }
+  },
+  "policy": {
+    "callback_write": "a map_leaves! callback may use ordinary nested write-vivification against its detached value or any binding identity other than the active receiver",
+    "identity_guard": "the map_leaves! guard compares resolved binding identity before evaluating a nested-write segment or RHS; spelling alone neither triggers nor bypasses the guard",
+    "callback_value": "vivifying the detached callback value changes only that callback-local value; the returned updated root becomes the replacement and is not revisited during the same traversal",
+    "unrelated_success": "a successful nested write to an unrelated binding commits with ordinary write semantics independently of the later map_leaves! receiver commit",
+    "unrelated_failure": "a failed unrelated nested write propagates its unchanged diagnostic, retains completed expression effects under the write contract, and aborts map_leaves! before receiver commit",
+    "later_callback_failure": "unrelated writes completed by earlier or current callbacks persist when a later callback failure prevents the receiver commit",
+    "same_receiver_precedence": "a nested write through the active receiver identity fails with receiver_mutation_reentrant before segment or RHS evaluation and therefore precedes every latent nested-write diagnostic",
+    "shadow_identity": "a helper parameter or scoped binding with the receiver spelling but a distinct identity may vivify normally without writing the guarded receiver",
+    "post_commit": "ordinary continuation begins after map_leaves! commits and after the guard is released; a nested write reached there follows the write contract, while its failure preserves the earlier receiver commit",
+    "detachment": "callback values, nested-write results and RHS aggregates, traversal snapshots, committed bindings, returned roots, unrelated bindings, and shadow locals remain detached across their contract boundaries",
+    "current_boundary": "until backend implementation leaves land, the composed source stops at the unsupported map_leaves! token before callback nested-write lowering or runtime on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT"
+  },
+  "callback_cases": [
+    {
+      "id": "callback_value_vivifies_and_replaces_without_revisit",
+      "source": "tree.map_leaves!() { value[0][\"name\"] = \"A\"; return(value) }",
+      "helper_sources": {},
+      "binding": "tree",
+      "initial_bindings": {"tree": {"leaf": []}},
+      "initial_locals": {},
+      "callback_steps": [
+        {
+          "frame": {"value": [], "key": "leaf", "path": ["leaf"], "depth": 1},
+          "write": {
+            "container": "callback",
+            "target": {"storage": "callback_value", "name": "value", "identity": "callback_value_vivifies_and_replaces_without_revisit:callback:0:value"},
+            "source": "value[0][\"name\"] = \"A\"",
+            "segments": [
+              {"source": "0", "kind": "integer", "value": 0},
+              {"source": "\"name\"", "kind": "string", "value": "name"}
+            ],
+            "rhs": {"source": "\"A\"", "value": "A"},
+            "expected_initial_binding": {"present": true, "value": []},
+            "expected_effects": ["segment:0", "segment:1", "rhs"],
+            "expected_binding": {"present": true, "value": [{"name": "A"}]},
+            "expected_result": [{"name": "A"}]
+          },
+          "result_source": "write_result"
+        }
+      ],
+      "expected_bindings": {"tree": {"leaf": [{"name": "A"}]}},
+      "expected_locals": {},
+      "expected_result": {"leaf": [{"name": "A"}]},
+      "expected_effects": ["write:value:segment:0", "write:value:segment:1", "write:value:rhs", "callback:leaf", "commit:tree"]
+    },
+    {
+      "id": "unrelated_vivification_commits_before_receiver_commit",
+      "source": "tree.map_leaves!() { journal[\"seen\"][0] = path; return(value) }",
+      "helper_sources": {},
+      "binding": "tree",
+      "initial_bindings": {"tree": {"a": "A"}},
+      "initial_locals": {},
+      "callback_steps": [
+        {
+          "frame": {"value": "A", "key": "a", "path": ["a"], "depth": 1},
+          "write": {
+            "container": "callback",
+            "target": {"storage": "binding", "name": "journal", "identity": "global:journal"},
+            "source": "journal[\"seen\"][0] = path",
+            "segments": [
+              {"source": "\"seen\"", "kind": "string", "value": "seen"},
+              {"source": "0", "kind": "integer", "value": 0}
+            ],
+            "rhs": {"source": "path", "value": ["a"]},
+            "expected_initial_binding": {"present": false},
+            "expected_effects": ["segment:0", "segment:1", "rhs"],
+            "expected_binding": {"present": true, "value": {"seen": [["a"]]}},
+            "expected_result": {"seen": [["a"]]}
+          },
+          "result_source": "literal",
+          "result": "A!"
+        }
+      ],
+      "expected_bindings": {"tree": {"a": "A!"}, "journal": {"seen": [["a"]]}},
+      "expected_locals": {},
+      "expected_result": {"a": "A!"},
+      "expected_effects": ["write:journal:segment:0", "write:journal:segment:1", "write:journal:rhs", "callback:a", "commit:tree"]
+    },
+    {
+      "id": "unrelated_writes_persist_when_later_callback_fails",
+      "source": "tree.map_leaves!() { journal[0] = path; return(fail_on_b(value)) }",
+      "helper_sources": {},
+      "binding": "tree",
+      "initial_bindings": {"tree": {"a": "A", "b": "B"}},
+      "initial_locals": {},
+      "callback_steps": [
+        {
+          "frame": {"value": "A", "key": "a", "path": ["a"], "depth": 1},
+          "write": {
+            "container": "callback",
+            "target": {"storage": "binding", "name": "journal", "identity": "global:journal"},
+            "source": "journal[0] = path",
+            "segments": [{"source": "0", "kind": "integer", "value": 0}],
+            "rhs": {"source": "path", "value": ["a"]},
+            "expected_initial_binding": {"present": false},
+            "expected_effects": ["segment:0", "rhs"],
+            "expected_binding": {"present": true, "value": [["a"]]},
+            "expected_result": [["a"]]
+          },
+          "result_source": "literal",
+          "result": "A!"
+        },
+        {
+          "frame": {"value": "B", "key": "b", "path": ["b"], "depth": 1},
+          "write": {
+            "container": "callback",
+            "target": {"storage": "binding", "name": "journal", "identity": "global:journal"},
+            "source": "journal[0] = path",
+            "segments": [{"source": "0", "kind": "integer", "value": 0}],
+            "rhs": {"source": "path", "value": ["b"]},
+            "expected_initial_binding": {"present": true, "value": [["a"]]},
+            "expected_effects": ["segment:0", "rhs"],
+            "expected_binding": {"present": true, "value": [["b"]]},
+            "expected_result": [["b"]]
+          },
+          "error": {"code": "callback_failed", "stage": "action_runtime", "source_span": {"source_id": "contract:unrelated_writes_persist_when_later_callback_fails", "start": 47, "end": 63, "unit": "unicode_scalar", "provenance": "authored"}, "message": "second callback requested failure"}
+        }
+      ],
+      "expected_bindings": {"tree": {"a": "A", "b": "B"}, "journal": [["b"]]},
+      "expected_locals": {},
+      "expected_effects": ["write:journal:segment:0", "write:journal:rhs", "callback:a", "write:journal:segment:0", "write:journal:rhs"],
+      "expected_diagnostic": {"code": "callback_failed", "stage": "action_runtime", "source_span": {"source_id": "contract:unrelated_writes_persist_when_later_callback_fails", "start": 47, "end": 63, "unit": "unicode_scalar", "provenance": "authored"}, "message": "second callback requested failure"}
+    },
+    {
+      "id": "failed_unrelated_write_preserves_rhs_effect_only",
+      "source": "tree.map_leaves!() { other[2] = mutate_other_then_value(); return(value) }",
+      "helper_sources": {},
+      "binding": "tree",
+      "initial_bindings": {"tree": {"a": "A"}, "other": []},
+      "initial_locals": {},
+      "callback_steps": [
+        {
+          "frame": {"value": "A", "key": "a", "path": ["a"], "depth": 1},
+          "write": {
+            "container": "callback",
+            "target": {"storage": "binding", "name": "other", "identity": "global:other"},
+            "source": "other[2] = mutate_other_then_value()",
+            "segments": [{"source": "2", "kind": "integer", "value": 2}],
+            "rhs": {"source": "mutate_other_then_value()", "value": "outer", "same_binding_after": ["rhs"]},
+            "expected_initial_binding": {"present": true, "value": []},
+            "expected_effects": ["segment:0", "rhs"],
+            "expected_binding": {"present": true, "value": ["rhs"]},
+            "expected_error": {"code": "nested_write_array_gap", "segment_index": 0, "path": [], "index": 2, "length": 1, "source_target": "segment:0"}
+          }
+        }
+      ],
+      "expected_bindings": {"tree": {"a": "A"}, "other": ["rhs"]},
+      "expected_locals": {},
+      "expected_effects": ["write:other:segment:0", "write:other:rhs"],
+      "expected_diagnostic_source": "write"
+    },
+    {
+      "id": "same_receiver_guard_precedes_write_evaluation",
+      "source": "tree.map_leaves!() { tree[invalid_selector()] = failing_rhs(); return(value) }",
+      "helper_sources": {},
+      "binding": "tree",
+      "initial_bindings": {"tree": {"a": "A"}},
+      "initial_locals": {},
+      "callback_steps": [
+        {
+          "frame": {"value": "A", "key": "a", "path": ["a"], "depth": 1},
+          "write": {
+            "container": "callback",
+            "target": {"storage": "binding", "name": "tree", "identity": "global:tree"},
+            "source": "tree[invalid_selector()] = failing_rhs()",
+            "segments": [{"source": "invalid_selector()", "evaluation_error": {"code": "selector_failed", "message": "selector must not run"}}],
+            "rhs": {"source": "failing_rhs()", "evaluation_error": {"code": "rhs_failed", "message": "RHS must not run"}},
+            "expected_initial_binding": {"present": true, "value": {"a": "A"}},
+            "execution": "guarded_before_evaluation",
+            "attempt_span": {"source_id": "contract:same_receiver_guard_precedes_write_evaluation", "start": 21, "end": 25, "unit": "unicode_scalar", "provenance": "authored"}
+          }
+        }
+      ],
+      "expected_bindings": {"tree": {"a": "A"}},
+      "expected_locals": {},
+      "expected_effects": [],
+      "expected_diagnostic": {"code": "receiver_mutation_reentrant", "operation": "map_leaves_mutation", "binding": "tree", "method": "map_leaves", "attempt": "nested_write", "source_span": {"source_id": "contract:same_receiver_guard_precedes_write_evaluation", "start": 21, "end": 25, "unit": "unicode_scalar", "provenance": "authored"}, "message": "cannot write active map_leaves! receiver binding 'tree' from its callback"}
+    },
+    {
+      "id": "same_spelling_shadow_vivifies_independently",
+      "source": "tree.map_leaves!() { return(shadow_write(value)) }",
+      "helper_sources": {"shadow_write": "fn shadow_write(tree) { tree[0][\"local\"] = \"A\"; return(tree) }"},
+      "binding": "tree",
+      "initial_bindings": {"tree": {"leaf": []}},
+      "initial_locals": {},
+      "callback_steps": [
+        {
+          "frame": {"value": [], "key": "leaf", "path": ["leaf"], "depth": 1},
+          "write": {
+            "container": "helper:shadow_write",
+            "target": {"storage": "local", "name": "tree", "identity": "same_spelling_shadow_vivifies_independently:helper:shadow_write:param:tree", "initialize_from": "callback_value"},
+            "source": "tree[0][\"local\"] = \"A\"",
+            "segments": [
+              {"source": "0", "kind": "integer", "value": 0},
+              {"source": "\"local\"", "kind": "string", "value": "local"}
+            ],
+            "rhs": {"source": "\"A\"", "value": "A"},
+            "expected_initial_binding": {"present": true, "value": []},
+            "expected_effects": ["segment:0", "segment:1", "rhs"],
+            "expected_binding": {"present": true, "value": [{"local": "A"}]},
+            "expected_result": [{"local": "A"}]
+          },
+          "result_source": "write_result"
+        }
+      ],
+      "expected_bindings": {"tree": {"leaf": [{"local": "A"}]}},
+      "expected_locals": {"same_spelling_shadow_vivifies_independently:helper:shadow_write:param:tree": [{"local": "A"}]},
+      "expected_result": {"leaf": [{"local": "A"}]},
+      "expected_effects": ["write:tree:segment:0", "write:tree:segment:1", "write:tree:rhs", "callback:leaf", "commit:tree"]
+    }
+  ],
+  "continuation_cases": [
+    {
+      "id": "post_commit_write_failure_preserves_map_commit",
+      "source": "tree.map_leaves!() { return(cat(value, \"!\")) }.write_after()",
+      "helper_sources": {"write_after": "fn write_after(result) { tree[\"extra\"][2] = \"X\"; return(result) }"},
+      "binding": "tree",
+      "initial_bindings": {"tree": {"a": "A"}},
+      "initial_locals": {},
+      "callback_steps": [
+        {"frame": {"value": "A", "key": "a", "path": ["a"], "depth": 1}, "result_source": "literal", "result": "A!"}
+      ],
+      "continuation": {
+        "method": "write_after",
+        "expected_input": {"a": "A!"},
+        "write": {
+          "container": "helper:write_after",
+          "target": {"storage": "binding", "name": "tree", "identity": "global:tree"},
+          "source": "tree[\"extra\"][2] = \"X\"",
+          "segments": [
+            {"source": "\"extra\"", "kind": "string", "value": "extra"},
+            {"source": "2", "kind": "integer", "value": 2}
+          ],
+          "rhs": {"source": "\"X\"", "value": "X"},
+          "expected_initial_binding": {"present": true, "value": {"a": "A!"}},
+          "expected_effects": ["segment:0", "segment:1", "rhs"],
+          "expected_binding": {"present": true, "value": {"a": "A!"}},
+          "expected_error": {"code": "nested_write_array_gap", "segment_index": 1, "path": ["extra"], "index": 2, "length": 0, "source_target": "segment:1"}
+        }
+      },
+      "expected_bindings": {"tree": {"a": "A!"}},
+      "expected_locals": {},
+      "expected_effects": ["callback:a", "commit:tree", "write:tree:segment:0", "write:tree:segment:1", "write:tree:rhs"],
+      "expected_diagnostic_source": "write"
+    }
+  ],
+  "current_boundary": {
+    "id": "composed_source_stops_at_bang_token",
+    "source": "Top::\n /x/ -> Done { tree = { \"leaf\" : [] }; return(tree.map_leaves!() { value[0][\"path\"] = path; return(value) }) }\n\nDone::\n /[a-z]+/\n",
+    "nonbang_control_source": "Top::\n /x/ -> Done { tree = { \"leaf\" : [] }; return(tree.map_leaves() { return(value) }) }\n\nDone::\n /[a-z]+/\n",
+    "expected_nonbang_result": {"leaf": []},
+    "failure_stage": "action_parse_before_callback_nested_write_lowering",
+    "routes": [
+      {"route": "perl", "expected_exit": 0, "expected_classification": "bang_chain_raw_fallback_returns_null"},
+      {"route": "rust", "expected_exit": 0, "expected_classification": "identifier_stops_before_bang_warning_then_null"},
+      {"route": "dart", "expected_exit": 1, "expected_classification": "generic_parser_invocation_failure"},
+      {"route": "julia", "expected_exit": 1, "expected_classification": "generic_parser_invocation_failure"},
+      {"route": "puc_lua", "expected_exit": 1, "expected_classification": "generic_parser_invocation_failure"},
+      {"route": "luajit", "expected_exit": 1, "expected_classification": "generic_parser_invocation_failure"}
+    ]
+  }
+}

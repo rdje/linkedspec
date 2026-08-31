@@ -10,6 +10,7 @@ LinkedSpec backend has admitted the future behavior.
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -18,6 +19,9 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_PATH = ROOT / "capability_conformance" / "write_vivification_contract.json"
+COMPOSITION_PATH = (
+    ROOT / "capability_conformance" / "write_map_leaves_composition_contract.json"
+)
 IDENTIFIER_SOURCE = r"[A-Za-z_][A-Za-z0-9_]*"
 IDENTIFIER = re.compile(IDENTIFIER_SOURCE + r"\Z")
 INTEGER = re.compile(r"-?(?:0|[1-9][0-9]*)\Z")
@@ -51,6 +55,16 @@ def fail(
 
 def cloned(value: Any) -> Any:
     return copy.deepcopy(value)
+
+
+def canonical_json_sha256(value: Any) -> str:
+    encoded = json.dumps(
+        value,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
 
 
 CANONICAL_POLICY = {
@@ -1167,6 +1181,175 @@ def mutated_contracts(contract: dict[str, Any]) -> list[tuple[str, dict[str, Any
     return mutations
 
 
+def composition_source_holder(
+    case: dict[str, Any], action: dict[str, Any]
+) -> tuple[str, str]:
+    container = action.get("container")
+    if container == "callback":
+        source_id = f"contract:{case['id']}"
+        holder = case.get("source")
+    elif isinstance(container, str) and container.startswith("helper:"):
+        helper = container.removeprefix("helper:")
+        helpers = case.get("helper_sources")
+        if not isinstance(helpers, dict) or not all(
+            isinstance(key, str) and isinstance(value, str)
+            for key, value in helpers.items()
+        ):
+            fail("invalid_composition_contract", f"case {case.get('id')} helper sources drifted")
+        if helper not in helpers:
+            fail("invalid_composition_contract", f"case {case.get('id')} helper {helper!r} is missing")
+        source_id = f"contract:{case['id']}:helper:{helper}"
+        holder = helpers[helper]
+    else:
+        fail("invalid_composition_contract", f"case {case.get('id')} write container drifted")
+    if not isinstance(holder, str) or not holder:
+        fail("invalid_composition_contract", f"case {case.get('id')} source holder is invalid")
+    source = action.get("source")
+    if not isinstance(source, str) or not source or holder.count(source) != 1:
+        fail(
+            "invalid_composition_contract",
+            f"case {case.get('id')} write source must occur exactly once in {container}",
+        )
+    return source_id, holder
+
+
+def _validate_composed_write(
+    case: dict[str, Any],
+    action: dict[str, Any],
+    reserved: set[str],
+) -> None:
+    if not isinstance(action, dict):
+        fail("invalid_composition_contract", f"case {case.get('id')} write must be an object")
+    source_id, holder = composition_source_holder(case, action)
+    target = action.get("target")
+    if not isinstance(target, dict):
+        fail("invalid_composition_contract", f"case {case.get('id')} target must be an object")
+    target_fields = {"storage", "name", "identity"}
+    if "initialize_from" in target:
+        target_fields.add("initialize_from")
+    require_fields(target, target_fields, f"case {case.get('id')} target")
+    if target["storage"] not in {"binding", "callback_value", "local"}:
+        fail("invalid_composition_contract", f"case {case.get('id')} target storage drifted")
+    if not isinstance(target["name"], str) or not IDENTIFIER.fullmatch(target["name"]):
+        fail("invalid_composition_contract", f"case {case.get('id')} target name drifted")
+    if not isinstance(target["identity"], str) or not target["identity"]:
+        fail("invalid_composition_contract", f"case {case.get('id')} target identity drifted")
+    if target.get("initialize_from") not in {None, "callback_value"}:
+        fail("invalid_composition_contract", f"case {case.get('id')} local initializer drifted")
+
+    guarded = action.get("execution") == "guarded_before_evaluation"
+    expected_fields = {
+        "container",
+        "target",
+        "source",
+        "segments",
+        "rhs",
+        "expected_initial_binding",
+    }
+    if guarded:
+        expected_fields |= {"execution", "attempt_span"}
+    else:
+        expected_fields |= {"expected_effects", "expected_binding"}
+        expected_fields.add("expected_error" if "expected_error" in action else "expected_result")
+    require_fields(action, expected_fields, f"case {case.get('id')} write")
+
+    synthetic = {
+        "id": f"{case['id']}:{action['container']}",
+        "source": action["source"],
+        "binding": target["name"],
+        "initial_binding": action["expected_initial_binding"],
+        "segments": action["segments"],
+        "rhs": action["rhs"],
+    }
+    parsed = validate_case_source(synthetic, reserved)
+    offset = holder.index(action["source"])
+    if parsed["source_span"]["end"] + offset > len(holder):
+        fail("invalid_composition_contract", f"case {case.get('id')} write span escapes holder")
+
+    if guarded:
+        attempt_span = action["attempt_span"]
+        if not isinstance(attempt_span, dict) or set(attempt_span) != {
+            "source_id",
+            "start",
+            "end",
+            "unit",
+            "provenance",
+        }:
+            fail("invalid_composition_contract", f"case {case.get('id')} attempt span drifted")
+        if (
+            attempt_span["source_id"] != source_id
+            or attempt_span["unit"] != "unicode_scalar"
+            or attempt_span["provenance"] != "authored"
+            or holder[attempt_span["start"] : attempt_span["end"]] != target["name"]
+        ):
+            fail("invalid_composition_contract", f"case {case.get('id')} guarded target span drifted")
+        return
+
+    state, result, error, effects = execute_write(synthetic, reserved)
+    if effects != action["expected_effects"]:
+        fail("invalid_composition_contract", f"case {case.get('id')} write effects drifted")
+    if state != action["expected_binding"]:
+        fail("invalid_composition_contract", f"case {case.get('id')} write binding drifted")
+    if "expected_result" in action:
+        if error is not None or result != action["expected_result"]:
+            fail("invalid_composition_contract", f"case {case.get('id')} write result drifted")
+    else:
+        synthetic["expected_error"] = action["expected_error"]
+        expected_error = resolve_expected_error(synthetic, parsed)
+        if result is not None or error != expected_error:
+            fail("invalid_composition_contract", f"case {case.get('id')} write diagnostic drifted")
+
+
+def validate_composition_write_surfaces(
+    composition: dict[str, Any], write_contract: dict[str, Any]
+) -> int:
+    if not isinstance(composition, dict):
+        fail("invalid_composition_contract", "composition root must be an object")
+    required = composition.get("requires", {}).get("write_vivification")
+    if required != {
+        "contract_id": "linkedspec-write-vivification-v1",
+        "path": "capability_conformance/write_vivification_contract.json",
+        "canonical_json_sha256": canonical_json_sha256(write_contract),
+    }:
+        fail("invalid_composition_contract", "write-vivification reference drifted")
+    callback_cases = composition.get("callback_cases")
+    continuation_cases = composition.get("continuation_cases")
+    if not isinstance(callback_cases, list) or not isinstance(continuation_cases, list):
+        fail("invalid_composition_contract", "composition cases must be arrays")
+    case_ids = [case.get("id") for case in [*callback_cases, *continuation_cases] if isinstance(case, dict)]
+    if len(case_ids) != len(callback_cases) + len(continuation_cases) or len(case_ids) != len(set(case_ids)):
+        fail("invalid_composition_contract", "composition case ids must be present and unique")
+
+    reserved = set(write_contract["syntax"]["reserved_root_names"])
+    count = 0
+    for case in callback_cases:
+        if not isinstance(case.get("callback_steps"), list):
+            fail("invalid_composition_contract", f"case {case.get('id')} callback steps drifted")
+        for step in case["callback_steps"]:
+            if not isinstance(step, dict):
+                fail("invalid_composition_contract", f"case {case.get('id')} callback step drifted")
+            if "write" in step:
+                _validate_composed_write(case, step["write"], reserved)
+                count += 1
+    for case in continuation_cases:
+        continuation = case.get("continuation")
+        if not isinstance(continuation, dict) or "write" not in continuation:
+            fail("invalid_composition_contract", f"case {case.get('id')} continuation write drifted")
+        _validate_composed_write(case, continuation["write"], reserved)
+        count += 1
+    if count != 8:
+        fail("invalid_composition_contract", f"expected 8 composed writes, got {count}")
+    return count
+
+
+def load_composition_contract() -> dict[str, Any]:
+    with COMPOSITION_PATH.open("r", encoding="utf-8") as handle:
+        value = json.load(handle)
+    if not isinstance(value, dict):
+        fail("invalid_composition_contract", "composition root must be an object")
+    return value
+
+
 def load_contract() -> dict[str, Any]:
     with CONTRACT_PATH.open("r", encoding="utf-8") as handle:
         value = json.load(handle)
@@ -1178,6 +1361,8 @@ def load_contract() -> dict[str, Any]:
 def main() -> None:
     contract = load_contract()
     validate_contract(contract)
+    composition = load_composition_contract()
+    composed_writes = validate_composition_write_surfaces(composition, contract)
     mutations = mutated_contracts(contract)
     for name, candidate in mutations:
         try:
@@ -1193,6 +1378,7 @@ def main() -> None:
         f"{len(contract['failure_cases'])} structural failures, "
         f"{len(contract['evaluation_failure_cases'])} evaluation failures, "
         f"{len(contract['read_exclusion_cases'])} read exclusions, "
+        f"{composed_writes} composed writes, "
         f"{len(mutations)} rejected mutations; future behavior remains unadmitted"
     )
 

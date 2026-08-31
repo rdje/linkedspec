@@ -27,9 +27,9 @@ bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py
 ```
 
 The checker validates five AST cases, seven syntax failures, 11 successful writes, 16 structural failures, three
-expression failures, three non-creating reads, detachment, and 105 rejected mutations. Perl, Rust, Dart, Julia,
-PUC Lua, and LuaJIT remain non-vivifying until their separately owned implementation/admission leaves; this
-artifact does not change the capability census.
+expression failures, three non-creating reads, detachment, eight writes from the shared composition fixture, and
+105 rejected base mutations. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT remain non-vivifying until their
+separately owned implementation/admission leaves; this artifact does not change the capability census.
 
 ## Future `map_leaves!` receiver mutation
 
@@ -50,10 +50,38 @@ bash tools/run_python_project_data.sh tools/check_map_leaves_mutation_contract.p
 ```
 
 The checker validates four syntax forms, fourteen exact syntax failures, five exclusions, ten successful state-
-machine cases, eight pre-commit failures, continuation/shadow/guard-release/non-bang/detachment proof, and 167
-rejected mutations. Current Perl and Rust soft-fail the bang twin to null (Rust also warns), while the Dart, Julia,
-and Lua primary CLIs return a generic parser-invocation failure; all five accept the byte-identical non-bang control.
-Those current rejection differences are evidence only, not behavior admitted by this future contract.
+machine cases, eight pre-commit failures, continuation/shadow/guard-release/non-bang/detachment proof, six shared
+callback compositions, one post-commit continuation composition, 167 base mutations, and 593 composition
+mutations. Current Perl and Rust soft-fail the bang twin to null (Rust also warns), while the Dart, Julia, and Lua
+primary CLIs return a generic parser-invocation failure; all five accept the byte-identical non-bang control. Those
+current rejection differences are evidence only, not behavior admitted by this future contract.
+
+## Future write/receiver-mutation composition
+
+`write_map_leaves_composition_contract.json` binds the two future-neutral authorities by contract identity, root-
+relative path, and canonical-JSON digest. It is a fixture consumed by both existing checkers, not a third
+executable entrypoint. Eight nested writes prove callback-local vivification, replacement-subtree non-revisit,
+unrelated success, unrelated effects across a later callback failure, write-local structural rollback with
+completed RHS effects, same-receiver guard precedence before segment/RHS evaluation, distinct same-spelling
+shadow identity, and a receiver write reached after commit and guard release.
+
+The composition keeps the two atomicity domains distinct. `map_leaves!` commits only its rebuilt receiver after
+all callbacks succeed; ordinary writes to unrelated identities commit or fail under the nested-write contract.
+Consequently a later callback failure preserves earlier unrelated writes, while an unrelated nested-write failure
+aborts the receiver commit and propagates its unchanged diagnostic. A continuation-side write failure occurs
+after the receiver commit and cannot roll it back.
+
+Run both existing authorities:
+
+```bash
+bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py
+bash tools/run_python_project_data.sh tools/check_map_leaves_mutation_contract.py
+```
+
+The exact composed current-boundary fixture has a non-bang control returning `{"leaf":[]}` on all six runtime
+routes. Its bang form stops before callback nested-write lowering: Perl returns null; Rust warns at the stopped
+identifier token and returns null; Dart, Julia, PUC Lua, and LuaJIT report their generic parser-invocation failure.
+No current parser, lowering, runtime, capability row, generated format, or public feature is admitted.
 
 `mcp_semantic_transport_contract.json` (`linkedspec-mcp-transport-v1`) is the single backend-neutral machine
 contract for LinkedSpec's modern MCP `2026-07-28` stdio projection. Its root-relative artifact inventory pins the

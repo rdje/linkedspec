@@ -10,6 +10,24 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-31 — FUTURE-PARITY-BACKLOG.19.1.3 — compose neutral future mutations
+
+- Added future-only `linkedspec-write-map-leaves-composition-v1`, digest-binding the unchanged write-vivification
+  and `map_leaves!` authorities by contract identity and repo-relative path. Both existing checkers consume the
+  shared fixture, so no executable entrypoint, temporary allocator, or project-data census changes.
+- The write checker independently validates eight composed nested writes. The receiver-mutation checker executes
+  six callback compositions plus one post-commit continuation and rejects 593 scalar/container-shape composition
+  mutations while retaining all 105 write and 167 map base mutations.
+- Frozen callback-local vivification and non-revisited replacement, unrelated write success/failure effects across
+  receiver rollback, same-receiver guard precedence before segment/RHS evaluation, distinct same-spelling shadow
+  identity, detachment, and continuation-side receiver-write failure after the bang commit and guard release.
+- Exact current primary-command proof returns `{"leaf":[]}` for the non-bang control on Perl, Rust, Dart, Julia,
+  PUC Lua, and LuaJIT. The bang form stops before callback nested-write lowering: Perl/Rust return null (Rust
+  warns); Dart/Julia/both Lua ABIs exit at the generic parser-invocation boundary.
+- Synchronized ADR `0036`, Knowledge, roadmap, architecture, capability/Toolbox guidance, task/index, bounded live
+  continuity, and the sole-facing mdBook. No parser, compiler, runtime, current fixture/capability, generated
+  format, facade, schema, MCP, CLI, or public-current behavior is admitted; Perl `.19.2.1` follows.
+
 ## 2026-08-31 — FUTURE-PARITY-BACKLOG.19.1.2 — lock neutral map_leaves mutation
 
 - Added future-only `linkedspec-map-leaves-mutation-v1` and an independent backend-neutral parser/state-machine

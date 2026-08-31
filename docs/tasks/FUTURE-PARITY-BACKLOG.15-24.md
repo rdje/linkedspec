@@ -721,7 +721,7 @@
   Commit: `FUTURE-PARITY-BACKLOG.18.3 - plan optional native parser acceleration`
 
 - ID: `FUTURE-PARITY-BACKLOG.19`
-  Status: `in progress; .19.1.2 active`
+  Status: `in progress; neutral .19.1 complete, Perl .19.2.1 next`
   Goal: Add portable explicit nested-write vivification and receiver-mutating method semantics without hidden
     reads, host-language aliasing, or backend drift.
   Children: `.19.0`, `.19.1`, `.19.2`, `.19.3`, `.19.4`, `.19.5`, `.19.6`, `.19.7`
@@ -751,7 +751,7 @@
   Commit: `FUTURE-PARITY-BACKLOG.19.0 - plan write vivification and bang mutation`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.1`
-  Status: `in progress; .19.1.2 complete, .19.1.3 pending`
+  Status: `done; focused-signoff-complete`
   Goal: Lock an executable backend-neutral v1 contract for nested write-vivification and approved `!` mutation.
   Children: `.19.1.1`, `.19.1.2`, `.19.1.3`
   Dependencies: `.19.0`; complete current Perl/Rust/Dart/Julia/Lua parity (satisfied by
@@ -759,8 +759,10 @@
   Acceptance: Strict fixtures define syntax/AST, write-only creation, path segment/container selection, gaps,
     kind conflicts, copied results, mutation identity, callback return replacement, original-shape traversal,
     stable copied paths, exact exclusions, and typed diagnostics before backend code.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-08-31.** `.19.1.1-.3` freeze both unchanged future mechanisms and their strict shared
+    composition before backend code. No syntax, runtime, capability, generated, or public-current state is
+    admitted; Perl implementation starts at `.19.2.1`.
+  Commit: closed by `FUTURE-PARITY-BACKLOG.19.1.3 - compose neutral future mutations`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.1.1`
   Status: `done; focused-signoff-complete` (2026-08-30; activated from exact clean pushed mdBook-drift closeout commit
@@ -879,12 +881,55 @@
   Commit: `FUTURE-PARITY-BACKLOG.19.1.2 - lock neutral map_leaves mutation`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.1.3`
-  Status: `pending`
+  Status: `done; focused-signoff-complete` (2026-08-31; task-tree-first from exact clean future `map_leaves!` contract commit
+    `4f06e4a6a261d7b084d3c68e76664781f2df4068`; no push)
   Goal: Compose strict future fixtures/checkers for both v1 mechanisms and prove current backends fail only at the
     expected pre-implementation boundary.
   Dependencies: `.19.1.1`, `.19.1.2`
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused` — this leaf composes the two already frozen future-only contracts and their strict
+    checkers without admitting syntax, lowering, runtime behavior, generated carriers, capability state, or public
+    current behavior on any backend.
+  Focused checks: exact cross-contract schema/reference and mutation-rejection proof; valid/invalid composed future
+    fixtures covering nested vivification inside `map_leaves!` callbacks, protected receiver identity, detached
+    traversal/commit, rollback, continuation, reentrancy, shadowing, and diagnostic precedence; current Perl,
+    Rust, Dart, Julia, PUC Lua, and LuaJIT probes that stop only at the typed pre-implementation boundary; direct
+    contract/checker dependents, Knowledge Map, task/index, bounded histories, memory, all nine doctrines, rendered
+    mdBook, and whitespace.
+  Canonical trigger: `none planned` — escalate if composition adds a maintained executable entrypoint or changes
+    the exact tool-storage census, doctrine/infrastructure, generated/public/capability behavior, a mandatory
+    history rollover, or any backend implementation.
+  Ownership: `.19.1.3` owns only strict composition governance and current-boundary proof. Perl behavior remains
+    exclusively owned by `.19.2.1-.2`; Rust and remaining backend behavior remain owned by `.19.3-.6`; admission,
+    recurrence, and public current claims remain owned by `.19.7-.9`.
+  Checklist: [x] clean activation/task ownership [x] Knowledge/decision/toolbox retrieval [x] composed contract
+    and fixture design [x] strict checker and mutation governance [x] six-runtime current-boundary proof
+    [x] durable Knowledge/roadmap/book/live synchronization [x] focused signoff [x] atomic commit/brief/clean handoff.
+  Activation evidence: exact `git status --short --untracked-files=all` is empty at
+    `4f06e4a6a261d7b084d3c68e76664781f2df4068`; `.19.1.2` is committed canonical-signoff-complete with receipt
+    candidate `e1dd1eb36ad33e8cd6fef085768e720a72109f865143c609fc01cf3568df8f73`; `git_message_brief.txt` is zero
+    bytes, reproducible mdBook output is absent, the canonical background job is consumed, and no push occurred.
+  Contract evidence: `linkedspec-write-map-leaves-composition-v1` digest-binds the two unchanged neutral mechanism
+    contracts and feeds both existing checker entrypoints. The write checker validates eight embedded writes; the
+    map checker executes six callback compositions and one post-commit continuation, retains all 167 base
+    mutations, and rejects 593 scalar/container-shape composition mutations. Cases freeze callback-local
+    vivification/replacement non-revisit, unrelated success and callback-failure persistence, structural write
+    rollback with completed RHS effects, same-receiver guard precedence before segment/RHS evaluation, distinct
+    same-spelling shadow identity, detachment, and receiver-write failure after bang commit/guard release. No new
+    executable entrypoint, temporary allocator, storage census, backend behavior, or admission is introduced.
+  Current-boundary evidence: the exact JSON-owned non-bang source returns `{"leaf":[]}` through the primary Perl,
+    Rust, Dart, Julia, PUC Lua, and LuaJIT routes. Replacing only the method token with the composed bang/callback-
+    write source stops before callback lowering: Perl exits 0 with null; Rust exits 0 with its exact stopped-
+    identifier warning and null; Dart, Julia, and both Lua ABIs exit 1 with generic parser-invocation failure.
+    Disposable Lua native probe outputs were repository-volume-local and removed; no background job remains.
+  Focused signoff evidence: both neutral checkers pass at 8 composed writes / 105 write mutations and 6 callback
+    plus 1 continuation composition / 167 base map + 593 composition mutations. Python syntax, exact unchanged
+    37-entrypoint project-data storage, capability 90/0/0, language coverage 250/105+1/126, Knowledge Map
+    919/7,821, task partition/index, both bounded-history checks, rendered sole-facing mdBook, all nine doctrines,
+    memory architecture, and whitespace pass. Review confirms only future contract/checker governance and aligned
+    design/continuity surfaces move; no canonical trigger fires and complete local CI is correctly deferred.
+  Verification: **PASS 2026-08-31.** Focused signoff complete; no future syntax/runtime behavior is admitted.
+    `.19.1` closes and Perl implementation `.19.2.1` is the next clean-boundary leaf.
+  Commit: `FUTURE-PARITY-BACKLOG.19.1.3 - compose neutral future mutations`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.2`
   Status: `pending`

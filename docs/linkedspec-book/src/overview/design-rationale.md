@@ -133,6 +133,59 @@ First every callback succeeds, then `tree` is rebound once, then a detached copy
 Without a continuation, the detached updated tree is the expression result; statement-position use may discard
 the result while retaining the receiver update.
 
+### Composing nested writes with `map_leaves!`
+
+The third future-neutral contract composes the two mechanisms rather than inventing another mutation rule. A
+callback may vivify its detached `value` and return the updated result as the leaf replacement. For a hash-root
+traversal, an array value is a cross-kind leaf, so this future example invokes the callback once and does not
+revisit the newly returned array subtree:
+
+```text
+tree.map_leaves!() {
+    value[0]["name"] = "normalized"
+    return(value)
+}
+```
+
+If `tree` begins as `{ "leaf" : [] }`, the callback-local nested write builds
+`[{ "name" : "normalized" }]`; complete success commits
+`{ "leaf" : [{ "name" : "normalized" }] }`. The callback copy, nested-write result, replacement, receiver
+commit, and returned root remain detached. Mutating `value` alone still does not write the receiver—the callback
+must return the updated value for it to become the replacement.
+
+Writes to an unrelated binding retain ordinary nested-write semantics during the guarded callback interval:
+
+```text
+tree.map_leaves!() {
+    journal["seen"][0] = path
+    return(value)
+}
+```
+
+The `journal` write commits independently. If a later callback fails, `tree` remains at its pre-call value but the
+completed `journal` write persists. If the journal write itself hits an invalid selector, kind conflict, or dense-
+array gap, its unchanged nested-write diagnostic aborts the bang call before receiver commit. Only its isolated
+structural path is atomic: a segment or RHS side effect completed before that structural failure retains the
+write contract's normal semantics.
+
+The receiver guard has earlier precedence than nested-write evaluation:
+
+```text
+tree.map_leaves!() {
+    tree[invalid_selector()] = failing_rhs()
+    return(value)
+}
+```
+
+Because the target resolves to the active receiver identity, this fails with `receiver_mutation_reentrant` before
+`invalid_selector()` or `failing_rhs()` runs. A helper parameter also named `tree` is allowed when it resolves to a
+distinct identity; vivifying that local value cannot bypass the guard or write the outer receiver.
+
+After callback success, receiver commit releases the guard before continuation. A continuation helper may then
+perform an ordinary nested write to `tree`. If that write fails, its own structural attempt rolls back, but the
+earlier mapped receiver value remains committed. This is the same commit-before-continuation rule, now exercised
+through both future mechanisms rather than through a generic failing method.
+
 This contract also distinguishes existence from addressability. The authored receiver must be a bare non-reserved
 uniform-binding name, and at runtime it must already hold an harray or array. An absent, null, or scalar receiver
 gets an exact typed diagnostic rather than implicit creation or a silent `undef`. All syntax, receiver, and
@@ -143,8 +196,10 @@ that direction. They would save no meaningful ceremony or would advertise mutati
 contract. Current nested writes still require every intermediate container to exist, and current parsers do not
 accept `map_leaves!`. The verified non-bang control produces the same value on Perl, Rust, Dart, Julia, and Lua;
 changing only the method token to `map_leaves!` remains rejected on all five because their fluent grammars still
-accept identifier characters only. ADR `0036`, the two neutral contracts under `capability_conformance/`, and
-backlog `.19.1-.19.7` own the future composition and five-backend work.
+accept identifier characters only. The exact composed control returns `{"leaf":[]}` on all six runtime routes;
+its bang twin stops before callback nested-write lowering, producing null on Perl/Rust (with the Rust warning) and
+generic parser-invocation failure on Dart/Julia/PUC Lua/LuaJIT. ADR `0036`, the two mechanism contracts plus their
+shared composition contract under `capability_conformance/`, and backlog `.19.1-.19.7` own the future work.
 
 ## 3. Actions are moving toward backend-neutral semantics
 

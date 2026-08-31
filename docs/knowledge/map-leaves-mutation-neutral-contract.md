@@ -17,6 +17,7 @@ date: 2026-08-31
 status: accepted future-neutral contract; backend implementation pending
 tags: [language, mutation, map-leaves, receiver-methods, traversal, reentrancy, diagnostics, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.19.1.2 adds capability_conformance/map_leaves_mutation_contract.json and tools/check_map_leaves_mutation_contract.py. The independent checker passes 4 valid syntax, 14 invalid syntax, 5 exclusions, 10 successes, 8 pre-commit failures, continuation/shadow/guard-release/nonbang/detachment proof, and 167 rejected mutations. A checked-in action-edge control returns the same nested value on Perl/Rust/Dart/Julia/Lua. Its minimal one-token bang twin becomes null on Perl/Rust (Rust warns) and a generic parser-invocation failure on Dart/Julia/Lua. Parser and Perl ActionIR/toolbox inspection prove all current fluent method grammars are identifier-only and Perl classifies the bang segment as raw_perl/invalid_fluent_chain. No backend behavior or capability is admitted."
+evidence_update_2026_08_31_composition: "FUTURE-PARITY-BACKLOG.19.1.3 makes the existing checker also execute six shared callback compositions and one post-commit continuation against the unchanged write-vivification authority. It retains 167 base mutations and rejects 593 composition scalar/container-shape mutations. Exact composed current probes preserve the same pre-runtime bang boundary on six routes; no backend behavior is admitted."
 reverify: "bash tools/run_python_project_data.sh tools/check_map_leaves_mutation_contract.py && rg -n 'parse_name|_parse_fluent_call_segment|_parseFluentCallSegment|_action_parse_fluent_call_segment|parse_fluent_call' rust/linkedspec-core/src/expr.rs perl/LinkedSpec/ActionIR/AST/Parser.pm dart/lib/src/action/action_parser.dart julia/src/action/ActionParser.jl lua/src/linkedspec/action_parser.lua"
 ---
 
@@ -50,3 +51,5 @@ output on all five backends. Replacing only `map_leaves` with `map_leaves!` is s
 null (Rust emits its parse warning), while Dart/Julia/Lua expose a generic parser-invocation failure. This
 difference occurs before runtime dispatch because every current fluent grammar accepts identifier characters only;
 the neutral contract supplies the future common typed boundary rather than blessing any current rejection shape.
+
+Composition with nested write-vivification is frozen separately by [[write-map-leaves-neutral-composition]].

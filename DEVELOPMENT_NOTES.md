@@ -9,6 +9,22 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-31 (`FUTURE-PARITY-BACKLOG.19.1.3` — neutral mutation composition): the two atomicity domains are
+  intentionally different. `map_leaves!` protects and atomically commits only its receiver rebuild; a nested write
+  to another identity retains normal success/failure and completed-expression semantics. A later callback failure
+  therefore preserves earlier unrelated writes while leaving the receiver unchanged.
+- Guard lookup must precede every attempted same-receiver nested-write segment and RHS evaluation. The composed
+  fixture makes a latent failing selector and RHS observable only if this ordering regresses; the correct result is
+  immediate `receiver_mutation_reentrant` with zero write effects. Same spelling is insufficient—a helper parameter
+  with a distinct identity may vivify normally.
+- Commit releases the receiver guard before continuation. The continuation fixture reaches `tree` again, performs
+  an ordinary structurally failing nested write, and proves the failed path is discarded while the already-mapped
+  receiver commit remains.
+- Extending both existing checkers avoids a third tool/storage owner. Eight write surfaces, six callback cases, one
+  continuation, 105 write mutations, 167 map mutations, and 593 composition scalar/container-shape mutations pass.
+- Primary-command probes use the exact JSON-owned source. The non-bang twin returns `{"leaf":[]}` on all six
+  routes; the bang form stops before callback lowering with null on Perl/Rust (Rust warning) and exit-1 generic
+  parser invocation on Dart/Julia/PUC Lua/LuaJIT. Disposable same-volume Lua native outputs were removed.
 - 2026-08-31 (`FUTURE-PARITY-BACKLOG.19.1.2` — future `map_leaves!` contract): a checked-in action-edge fixture is
   the trustworthy parser control. Its non-bang form returns the same nested value on Perl/Rust/Dart/Julia/Lua;
   replacing only the method spelling yields null on Perl/Rust (Rust warns) and generic invocation failure on the

@@ -15,11 +15,17 @@ import json
 import re
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
+
+import check_write_vivification_contract as write_vivification
 
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_PATH = ROOT / "capability_conformance" / "map_leaves_mutation_contract.json"
+WRITE_CONTRACT_PATH = ROOT / "capability_conformance" / "write_vivification_contract.json"
+COMPOSITION_PATH = (
+    ROOT / "capability_conformance" / "write_map_leaves_composition_contract.json"
+)
 IDENTIFIER_SOURCE = r"[A-Za-z_][A-Za-z0-9_]*"
 IDENTIFIER = re.compile(rf"{IDENTIFIER_SOURCE}\Z")
 OPERATION = "map_leaves_mutation"
@@ -73,6 +79,7 @@ EXPECTED_TOP_LEVEL_KEYS = {
 # This digest freezes every policy/syntax/AST/diagnostic byte as canonical JSON.
 # Runtime behavior is checked independently below rather than trusted from it.
 EXPECTED_SEMANTIC_DIGEST = "ee3feedf9bdca9ae23fa8ed368f1f19984b67a8036b7f1e94f403fa61d612d0c"
+EXPECTED_COMPOSITION_DIGEST = "097e48f7b46a22314929bd0b2ee0e333c95ac7bf489b1ceb39c6c503b37b7fa2"
 
 EXPECTED_IDS = {
     "valid_syntax_cases": {
@@ -144,6 +151,26 @@ EXPECTED_EXCLUDED_CLASSIFICATIONS = {
     "bang_variable": "invalid_identifier_not_receiver_mutation",
 }
 
+EXPECTED_COMPOSITION_CALLBACK_IDS = {
+    "callback_value_vivifies_and_replaces_without_revisit",
+    "unrelated_vivification_commits_before_receiver_commit",
+    "unrelated_writes_persist_when_later_callback_fails",
+    "failed_unrelated_write_preserves_rhs_effect_only",
+    "same_receiver_guard_precedes_write_evaluation",
+    "same_spelling_shadow_vivifies_independently",
+}
+EXPECTED_COMPOSITION_CONTINUATION_IDS = {
+    "post_commit_write_failure_preserves_map_commit",
+}
+EXPECTED_CURRENT_BOUNDARY_ROUTES = [
+    ("perl", 0, "bang_chain_raw_fallback_returns_null"),
+    ("rust", 0, "identifier_stops_before_bang_warning_then_null"),
+    ("dart", 1, "generic_parser_invocation_failure"),
+    ("julia", 1, "generic_parser_invocation_failure"),
+    ("puc_lua", 1, "generic_parser_invocation_failure"),
+    ("luajit", 1, "generic_parser_invocation_failure"),
+]
+
 
 class ContractError(ValueError):
     """A stable contract-validation or syntax failure."""
@@ -172,6 +199,11 @@ class RunResult:
     effects: list[str]
     diagnostic: dict[str, Any] | None
     artifacts: dict[str, Any]
+
+
+@dataclass(frozen=True)
+class HookResult:
+    value: Any
 
 
 @dataclass(frozen=True)
@@ -687,6 +719,16 @@ def run_invocation(
     bindings: dict[str, Any],
     callback_steps: list[dict[str, Any]],
     continuation: list[dict[str, Any]] | None = None,
+    callback_hook: Callable[
+        [dict[str, Any], dict[str, Any], dict[str, Any], list[str]],
+        HookResult | None,
+    ]
+    | None = None,
+    continuation_hook: Callable[
+        [dict[str, Any], Any, dict[str, Any], list[str]],
+        HookResult | None,
+    ]
+    | None = None,
 ) -> RunResult:
     parsed = parse_mutation(source, case_id)
     if parsed["receiver"]["name"] != binding:
@@ -756,6 +798,12 @@ def run_invocation(
                 fail("callback_frame_alias_detected", "local frame mutation escaped its copy")
             artifacts["mutated_callback_frames"].append(local_frame)
 
+        hook_result = (
+            callback_hook(step, local_frame, working_bindings, effects)
+            if callback_hook is not None
+            else None
+        )
+
         for effect in step.get("effects", []):
             _apply_effect(working_bindings, effect, binding)
             effects.append(f"effect:{effect['binding']}")
@@ -777,9 +825,12 @@ def run_invocation(
         if "error" in step:
             validate_runtime_diagnostic(step["error"], f"{case_id}.callback_error")
             raise RuntimeFailure(cloned(step["error"]))
-        if "result" not in step:
+        if hook_result is not None:
+            result = cloned(hook_result.value)
+        elif "result" not in step:
             fail("checker_invalid_fixture", f"{case_id} successful callback step lacks result")
-        result = cloned(step["result"])
+        else:
+            result = cloned(step["result"])
         artifacts["callback_results"].append(cloned(result))
         effects.append(f"callback:{_path_label(path)}")
         return result
@@ -837,6 +888,20 @@ def run_invocation(
                 "continuation_input_mismatch",
                 f"{case_id} continuation {call['method']} received {current!r}",
             )
+        try:
+            hook_result = (
+                continuation_hook(call, current, working_bindings, effects)
+                if continuation_hook is not None
+                else None
+            )
+        except RuntimeFailure as error:
+            return RunResult(
+                working_bindings,
+                None,
+                effects,
+                cloned(error.diagnostic),
+                artifacts,
+            )
         if "error" in call:
             validate_runtime_diagnostic(call["error"], f"{case_id}.continuation_error")
             return RunResult(
@@ -846,7 +911,7 @@ def run_invocation(
                 cloned(call["error"]),
                 artifacts,
             )
-        current = cloned(call["result"])
+        current = cloned(hook_result.value if hook_result is not None else call["result"])
         effects.append(f"continuation:{call['method']}")
     return RunResult(working_bindings, cloned(current), effects, None, artifacts)
 
@@ -1359,6 +1424,431 @@ def validate_contract(contract: dict[str, Any]) -> None:
     validate_detachment(detachment)
 
 
+def _composition_binding_state(
+    target: dict[str, Any],
+    bindings: dict[str, Any],
+    local_bindings: dict[str, Any],
+    callback_frame: dict[str, Any] | None,
+) -> dict[str, Any]:
+    storage = target["storage"]
+    if storage == "binding":
+        name = target["name"]
+        return (
+            {"present": True, "value": cloned(bindings[name])}
+            if name in bindings
+            else {"present": False}
+        )
+    if storage == "callback_value":
+        if callback_frame is None or target["name"] != "value":
+            fail("composition_fixture_invalid", "callback-value write lacks a callback frame")
+        return {"present": True, "value": cloned(callback_frame["value"])}
+    identity = target["identity"]
+    if identity not in local_bindings and target.get("initialize_from") == "callback_value":
+        if callback_frame is None:
+            fail("composition_fixture_invalid", "local callback initializer lacks a frame")
+        local_bindings[identity] = cloned(callback_frame["value"])
+    return (
+        {"present": True, "value": cloned(local_bindings[identity])}
+        if identity in local_bindings
+        else {"present": False}
+    )
+
+
+def _store_composition_binding_state(
+    target: dict[str, Any],
+    state: dict[str, Any],
+    bindings: dict[str, Any],
+    local_bindings: dict[str, Any],
+    callback_frame: dict[str, Any] | None,
+) -> None:
+    storage = target["storage"]
+    if storage == "binding":
+        if state["present"]:
+            bindings[target["name"]] = cloned(state["value"])
+        else:
+            bindings.pop(target["name"], None)
+        return
+    if storage == "callback_value":
+        if callback_frame is None or not state["present"]:
+            fail("composition_fixture_invalid", "callback-value write produced absent state")
+        callback_frame["value"] = cloned(state["value"])
+        return
+    identity = target["identity"]
+    if state["present"]:
+        local_bindings[identity] = cloned(state["value"])
+    else:
+        local_bindings.pop(identity, None)
+
+
+def _shift_composed_write_diagnostic(
+    case: dict[str, Any], action: dict[str, Any], diagnostic: dict[str, Any]
+) -> dict[str, Any]:
+    shifted = cloned(diagnostic)
+    span = shifted.get("source_span")
+    if span is None:
+        return shifted
+    source_id, holder = write_vivification.composition_source_holder(case, action)
+    offset = holder.index(action["source"])
+    span["source_id"] = source_id
+    span["start"] += offset
+    span["end"] += offset
+    if holder[span["start"] : span["end"]] != action["segments"][shifted["segment_index"]]["source"]:
+        fail("composition_fixture_invalid", f"case {case['id']} shifted write span drifted")
+    return shifted
+
+
+def _execute_composed_write(
+    *,
+    case: dict[str, Any],
+    action: dict[str, Any],
+    bindings: dict[str, Any],
+    local_bindings: dict[str, Any],
+    callback_frame: dict[str, Any] | None,
+    effects: list[str],
+    guard_active: bool,
+    reserved: set[str],
+) -> HookResult | None:
+    target = action["target"]
+    actual_initial = _composition_binding_state(
+        target, bindings, local_bindings, callback_frame
+    )
+    if actual_initial != action["expected_initial_binding"]:
+        fail(
+            "composition_initial_state_mismatch",
+            f"case {case['id']} expected {action['expected_initial_binding']!r}, got {actual_initial!r}",
+        )
+
+    active_identity = f"global:{case['binding']}"
+    if guard_active and target["identity"] == active_identity:
+        if action.get("execution") != "guarded_before_evaluation":
+            fail("composition_fixture_invalid", f"case {case['id']} bypasses the active guard")
+        attempt = {
+            "attempt": "nested_write",
+            "source_span": cloned(action["attempt_span"]),
+        }
+        raise RuntimeFailure(_reentrant_diagnostic(case["binding"], attempt))
+    if action.get("execution") == "guarded_before_evaluation":
+        fail("composition_fixture_invalid", f"case {case['id']} expected a guard on another identity")
+
+    synthetic = {
+        "id": f"{case['id']}:{action['container']}",
+        "source": action["source"],
+        "binding": target["name"],
+        "initial_binding": actual_initial,
+        "segments": action["segments"],
+        "rhs": action["rhs"],
+    }
+    state, result, diagnostic, write_effects = write_vivification.execute_write(
+        synthetic, reserved
+    )
+    if write_effects != action["expected_effects"] or state != action["expected_binding"]:
+        fail("composition_write_mismatch", f"case {case['id']} nested write outcome drifted")
+    _store_composition_binding_state(
+        target, state, bindings, local_bindings, callback_frame
+    )
+    effects.extend(f"write:{target['name']}:{effect}" for effect in write_effects)
+
+    if diagnostic is not None:
+        if "expected_error" not in action or result is not None:
+            fail("composition_write_mismatch", f"case {case['id']} unexpected write failure")
+        parsed = write_vivification.validate_case_source(synthetic, reserved)
+        expected_case = {**synthetic, "expected_error": action["expected_error"]}
+        expected = write_vivification.resolve_expected_error(expected_case, parsed)
+        if diagnostic != expected:
+            fail("composition_write_mismatch", f"case {case['id']} write diagnostic drifted")
+        raise RuntimeFailure(_shift_composed_write_diagnostic(case, action, diagnostic))
+
+    if result != action.get("expected_result"):
+        fail("composition_write_mismatch", f"case {case['id']} write result drifted")
+    if isinstance(result, (dict, list)) and state.get("value") is result:
+        fail("composition_alias_detected", f"case {case['id']} write result aliases binding")
+    return HookResult(cloned(result))
+
+
+def _validate_composition_frame(frame: Any, label: str) -> None:
+    if not isinstance(frame, dict):
+        fail("composition_fixture_invalid", f"{label} must be an object")
+    common = {"value", "path", "depth"}
+    selector = set(frame) - common
+    if common - set(frame) or selector not in ({"key"}, {"index"}):
+        fail("composition_fixture_invalid", f"{label} fields drifted")
+    if not isinstance(frame["path"], list) or frame["depth"] != len(frame["path"]):
+        fail("composition_fixture_invalid", f"{label} path/depth drifted")
+
+
+def _expected_composed_write_diagnostic(
+    case: dict[str, Any], action: dict[str, Any], reserved: set[str]
+) -> dict[str, Any]:
+    synthetic = {
+        "id": f"{case['id']}:{action['container']}",
+        "source": action["source"],
+        "binding": action["target"]["name"],
+        "initial_binding": action["expected_initial_binding"],
+        "segments": action["segments"],
+        "rhs": action["rhs"],
+    }
+    parsed = write_vivification.validate_case_source(synthetic, reserved)
+    expected_case = {**synthetic, "expected_error": action["expected_error"]}
+    diagnostic = write_vivification.resolve_expected_error(expected_case, parsed)
+    return _shift_composed_write_diagnostic(case, action, diagnostic)
+
+
+def _validate_composition_case(
+    case: dict[str, Any],
+    *,
+    continuation_case: bool,
+    reserved: set[str],
+) -> None:
+    parsed = parse_mutation(case["source"], case["id"])
+    if parsed["receiver"]["name"] != case["binding"]:
+        fail("composition_fixture_invalid", f"case {case['id']} receiver drifted")
+    helper_sources = case["helper_sources"]
+    if not isinstance(helper_sources, dict) or not all(
+        isinstance(name, str) and isinstance(source, str)
+        for name, source in helper_sources.items()
+    ):
+        fail("composition_fixture_invalid", f"case {case['id']} helper sources drifted")
+    if not isinstance(case["initial_locals"], dict) or not isinstance(
+        case["expected_locals"], dict
+    ):
+        fail("composition_fixture_invalid", f"case {case['id']} local stores drifted")
+
+    for index, step in enumerate(case["callback_steps"]):
+        if not isinstance(step, dict):
+            fail("composition_fixture_invalid", f"case {case['id']} callback {index} drifted")
+        _validate_composition_frame(step.get("frame"), f"case {case['id']} callback {index}.frame")
+        if step.get("result_source") not in {None, "write_result", "literal"}:
+            fail("composition_fixture_invalid", f"case {case['id']} callback result source drifted")
+        if step.get("result_source") == "write_result" and "write" not in step:
+            fail("composition_fixture_invalid", f"case {case['id']} callback lacks result write")
+        if step.get("result_source") == "literal" and "result" not in step:
+            fail("composition_fixture_invalid", f"case {case['id']} callback lacks literal result")
+        if "error" in step:
+            validate_runtime_diagnostic(step["error"], f"case {case['id']} callback {index}.error")
+
+    local_bindings = cloned(case["initial_locals"])
+
+    def callback_hook(
+        step: dict[str, Any],
+        frame: dict[str, Any],
+        bindings: dict[str, Any],
+        effects: list[str],
+    ) -> HookResult | None:
+        if "write" not in step:
+            return None
+        outcome = _execute_composed_write(
+            case=case,
+            action=step["write"],
+            bindings=bindings,
+            local_bindings=local_bindings,
+            callback_frame=frame,
+            effects=effects,
+            guard_active=True,
+            reserved=reserved,
+        )
+        return outcome if step.get("result_source") == "write_result" else None
+
+    continuation_calls: list[dict[str, Any]] = []
+    continuation_hook = None
+    if continuation_case:
+        continuation = case["continuation"]
+        methods = [call["method"] for call in parsed["continuation"]]
+        if methods != [continuation["method"]]:
+            fail("composition_fixture_invalid", f"case {case['id']} continuation source drifted")
+        continuation_calls = [
+            {
+                "method": continuation["method"],
+                "expected_input": continuation["expected_input"],
+                "result": None,
+            }
+        ]
+
+        def run_continuation(
+            call: dict[str, Any],
+            _current: Any,
+            bindings: dict[str, Any],
+            effects: list[str],
+        ) -> HookResult | None:
+            if call["method"] != continuation["method"]:
+                fail("composition_fixture_invalid", f"case {case['id']} continuation method drifted")
+            return _execute_composed_write(
+                case=case,
+                action=continuation["write"],
+                bindings=bindings,
+                local_bindings=local_bindings,
+                callback_frame=None,
+                effects=effects,
+                guard_active=False,
+                reserved=reserved,
+            )
+
+        continuation_hook = run_continuation
+    elif parsed["continuation"]:
+        fail("composition_fixture_invalid", f"case {case['id']} has unowned continuation")
+
+    result = run_invocation(
+        source=case["source"],
+        case_id=case["id"],
+        binding=case["binding"],
+        bindings=case["initial_bindings"],
+        callback_steps=case["callback_steps"],
+        continuation=continuation_calls,
+        callback_hook=callback_hook,
+        continuation_hook=continuation_hook,
+    )
+    if result.bindings != case["expected_bindings"]:
+        fail("composition_binding_mismatch", f"case {case['id']} bindings drifted")
+    if local_bindings != case["expected_locals"]:
+        fail("composition_binding_mismatch", f"case {case['id']} locals drifted")
+    if result.effects != case["expected_effects"]:
+        fail("composition_effect_mismatch", f"case {case['id']} effects drifted")
+
+    if "expected_diagnostic" in case:
+        validate_expected_diagnostic(case["expected_diagnostic"], f"case {case['id']}.diagnostic")
+        expected_diagnostic = case["expected_diagnostic"]
+    elif case.get("expected_diagnostic_source") == "write":
+        action = (
+            case["continuation"]["write"]
+            if continuation_case
+            else next(step["write"] for step in case["callback_steps"] if "expected_error" in step.get("write", {}))
+        )
+        expected_diagnostic = _expected_composed_write_diagnostic(case, action, reserved)
+    else:
+        expected_diagnostic = None
+
+    if result.diagnostic != expected_diagnostic:
+        fail("composition_diagnostic_mismatch", f"case {case['id']} diagnostic drifted")
+    if expected_diagnostic is None:
+        if result.result != case["expected_result"]:
+            fail("composition_result_mismatch", f"case {case['id']} result drifted")
+    elif result.result is not None:
+        fail("composition_result_mismatch", f"case {case['id']} failure returned a result")
+
+
+def validate_composition_contract(
+    composition: dict[str, Any],
+    map_contract: dict[str, Any],
+    write_contract: dict[str, Any],
+) -> None:
+    if not isinstance(composition, dict):
+        fail("composition_schema_invalid", "composition root must be an object")
+    if hashlib.sha256(canonical_json(composition).encode("utf-8")).hexdigest() != EXPECTED_COMPOSITION_DIGEST:
+        fail("composition_semantics_drifted", "composition contract digest changed")
+    require_fields(
+        composition,
+        {
+            "format",
+            "contract_id",
+            "status",
+            "requires",
+            "policy",
+            "callback_cases",
+            "continuation_cases",
+            "current_boundary",
+        },
+        "composition",
+    )
+    if (
+        composition["format"] != 1
+        or composition["contract_id"] != "linkedspec-write-map-leaves-composition-v1"
+        or composition["status"] != "future-neutral-composition; no backend behavior admitted"
+    ):
+        fail("composition_schema_invalid", "composition identity/status drifted")
+    expected_requires = {
+        "write_vivification": {
+            "contract_id": "linkedspec-write-vivification-v1",
+            "path": "capability_conformance/write_vivification_contract.json",
+            "canonical_json_sha256": write_vivification.canonical_json_sha256(write_contract),
+        },
+        "map_leaves_mutation": {
+            "contract_id": "linkedspec-map-leaves-mutation-v1",
+            "path": "capability_conformance/map_leaves_mutation_contract.json",
+            "canonical_json_sha256": hashlib.sha256(
+                canonical_json(map_contract).encode("utf-8")
+            ).hexdigest(),
+        },
+    }
+    if composition["requires"] != expected_requires:
+        fail("composition_reference_drifted", "composition prerequisite references drifted")
+    if set(case["id"] for case in composition["callback_cases"]) != EXPECTED_COMPOSITION_CALLBACK_IDS:
+        fail("composition_case_ids_invalid", "callback composition ids drifted")
+    if set(case["id"] for case in composition["continuation_cases"]) != EXPECTED_COMPOSITION_CONTINUATION_IDS:
+        fail("composition_case_ids_invalid", "continuation composition ids drifted")
+
+    write_vivification.validate_composition_write_surfaces(composition, write_contract)
+    reserved = set(write_contract["syntax"]["reserved_root_names"])
+    for case in composition["callback_cases"]:
+        _validate_composition_case(case, continuation_case=False, reserved=reserved)
+    for case in composition["continuation_cases"]:
+        _validate_composition_case(case, continuation_case=True, reserved=reserved)
+
+    boundary = composition["current_boundary"]
+    require_fields(
+        boundary,
+        {
+            "id",
+            "source",
+            "nonbang_control_source",
+            "expected_nonbang_result",
+            "failure_stage",
+            "routes",
+        },
+        "composition.current_boundary",
+    )
+    if (
+        boundary["id"] != "composed_source_stops_at_bang_token"
+        or boundary["failure_stage"] != "action_parse_before_callback_nested_write_lowering"
+        or "tree.map_leaves!()" not in boundary["source"]
+        or 'value[0]["path"] = path' not in boundary["source"]
+        or "tree.map_leaves!()" in boundary["nonbang_control_source"]
+        or "tree.map_leaves()" not in boundary["nonbang_control_source"]
+        or boundary["expected_nonbang_result"] != {"leaf": []}
+    ):
+        fail("composition_current_boundary_drifted", "current boundary fixture drifted")
+    routes = [
+        (route["route"], route["expected_exit"], route["expected_classification"])
+        for route in boundary["routes"]
+    ]
+    if routes != EXPECTED_CURRENT_BOUNDARY_ROUTES:
+        fail("composition_current_boundary_drifted", "six-runtime boundary matrix drifted")
+
+
+def mutated_composition_contracts(
+    composition: dict[str, Any]
+) -> list[tuple[str, dict[str, Any]]]:
+    mutations: list[tuple[str, dict[str, Any]]] = []
+
+    def visit(node: Any, path: tuple[Any, ...]) -> None:
+        if isinstance(node, (dict, list)):
+            changed = cloned(composition)
+            changed_node: Any = changed
+            for segment in path:
+                changed_node = changed_node[segment]
+            if isinstance(changed_node, dict):
+                changed_node["__mutation"] = True
+            else:
+                changed_node.append("__mutation")
+            label = "/".join(str(segment) for segment in path) or "root"
+            mutations.append((f"{label}:shape", changed))
+        if isinstance(node, dict):
+            for key, child in node.items():
+                visit(child, (*path, key))
+            return
+        if isinstance(node, list):
+            for index, child in enumerate(node):
+                visit(child, (*path, index))
+            return
+        changed = cloned(composition)
+        cursor: Any = changed
+        for segment in path[:-1]:
+            cursor = cursor[segment]
+        cursor[path[-1]] = _mutate_scalar(node)
+        mutations.append(("/".join(str(segment) for segment in path), changed))
+
+    visit(composition, ())
+    return mutations
+
+
 def _mutate_scalar(value: Any) -> Any:
     if isinstance(value, bool):
         return not value
@@ -1464,9 +1954,23 @@ def load_contract() -> dict[str, Any]:
     return loaded
 
 
+def load_json_object(path: Path, label: str) -> dict[str, Any]:
+    try:
+        loaded = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        fail("contract_load_failed", f"{label}: {error}")
+    if not isinstance(loaded, dict):
+        fail("contract_schema_invalid", f"{label} root must be an object")
+    return loaded
+
+
 def main() -> None:
     contract = load_contract()
     validate_contract(contract)
+    write_contract = load_json_object(WRITE_CONTRACT_PATH, "write contract")
+    write_vivification.validate_contract(write_contract)
+    composition = load_json_object(COMPOSITION_PATH, "composition contract")
+    validate_composition_contract(composition, contract, write_contract)
     mutations = mutated_contracts(contract)
     rejected = 0
     for label, changed in mutations:
@@ -1476,6 +1980,15 @@ def main() -> None:
             rejected += 1
         else:
             fail("mutation_survived", f"mutation {label!r} unexpectedly passed")
+    composition_mutations = mutated_composition_contracts(composition)
+    composition_rejected = 0
+    for label, changed in composition_mutations:
+        try:
+            validate_composition_contract(changed, contract, write_contract)
+        except (ContractError, write_vivification.ContractError, KeyError, TypeError, IndexError):
+            composition_rejected += 1
+        else:
+            fail("mutation_survived", f"composition mutation {label!r} unexpectedly passed")
     print(
         "map_leaves! mutation contract: "
         f"{len(contract['valid_syntax_cases'])} valid syntax, "
@@ -1484,7 +1997,10 @@ def main() -> None:
         f"{len(contract['success_cases'])} success, "
         f"{len(contract['failure_cases'])} pre-commit failures, "
         "continuation/shadow/guard/nonbang/detachment proof, "
-        f"{rejected} rejected mutations; future behavior remains unadmitted"
+        f"{len(composition['callback_cases'])} callback compositions, "
+        f"{len(composition['continuation_cases'])} continuation composition, "
+        f"{rejected} base + {composition_rejected} composition mutations rejected; "
+        "future behavior remains unadmitted"
     )
 
 

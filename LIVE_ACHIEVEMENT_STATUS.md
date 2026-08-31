@@ -2,20 +2,23 @@
 
 ## Current Activity
 
-- No leaf is active after `.19.1.2` freezes the future-only `map_leaves!` receiver-mutation contract at exact
-  canonical signoff. Current parser/runtime behavior remains bang-invalid on every backend.
+- No leaf is active after `.19.1.3` freezes the future-only write/`map_leaves!` composition at focused signoff.
+  Neutral parent `.19.1` is closed; current parser/runtime behavior remains unchanged on every backend.
 
 ## Latest Completed Slice
 
-- `.19.1.2` freezes one mutation AST, resolved-binding guard, original-shape traversal, copied callback frame,
-  atomic commit, detached result, post-commit continuation, and exact diagnostics/exclusions at 167 mutations.
+- `.19.1.3` digest-binds both unchanged mechanism contracts and proves eight writes, six callback compositions,
+  one post-commit continuation, and 593 composition mutations without backend admission.
 
 ## Next Action
 
-- From the clean `.19.1.2` handoff, activate `FUTURE-PARITY-BACKLOG.19.1.3` task-tree-first and compose both future-
-  neutral mutation contracts against their unchanged current-backend pre-implementation boundaries.
+- From the clean `.19.1.3` handoff, activate `FUTURE-PARITY-BACKLOG.19.2.1` task-tree-first and implement the
+  unchanged nested write-vivification v1 contract on the Perl reference backend.
 
 ## Recent Completions
+
+- `2026-08-31` — `.19.1.3` composes both future mutations at 8 writes / 6 callbacks / 1 continuation / 593
+  mutations; all six current routes stop before callback write lowering and no backend is admitted.
 
 - `2026-08-31` — `.19.1.2` freezes future `map_leaves!` at 4/14/5 syntax, 10 success, 8 pre-commit failure, five
   special state proofs, 167 mutations, and a 37-entrypoint canonical storage boundary; no backend is admitted.
@@ -63,9 +66,6 @@
 
 - `2026-08-28` — `.14.7.9` makes exact assignment-form `parse_job(...)` public at staged 9/9/123 plus 129 public
   mutations, keeps typed at 13/1/189, and removes the satisfied future exclusion without runtime movement.
-
-- `2026-08-28` — `.14.7.8` binds five staged sources/six routes, completes neutral recurrence at 123 mutations,
-  promotes typed staged dispatch to 13/1/187 and capability truth to 85/0/0, and hands off public authoring `.9`.
 
 ## History
 

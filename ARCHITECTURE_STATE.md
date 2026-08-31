@@ -1,5 +1,29 @@
 # ARCHITECTURE STATE
 
+## Future write and receiver mutation compose through one shared neutral fixture
+
+`FUTURE-PARITY-BACKLOG.19.1.3` freezes `linkedspec-write-map-leaves-composition-v1` without enabling backend
+syntax or runtime behavior. The fixture digest-binds both unchanged mechanism contracts and is consumed by their
+two existing checkers, so it adds no executable entrypoint, temporary allocator, or tool-storage census movement.
+The write checker independently validates eight embedded writes. The mutation checker executes six callback
+compositions plus one post-commit continuation and rejects 593 scalar/container-shape mutations in addition to its
+167 base mutations.
+
+Identity fixes the transaction boundary. A callback may vivify its detached `value` and return the updated root as
+the non-revisited replacement. Writes to unrelated identities retain ordinary write semantics and persist across
+a later callback failure; their own unchanged failure aborts receiver commit while retaining only already-
+completed expression effects. The active receiver identity instead raises `receiver_mutation_reentrant` before
+segment or RHS evaluation. A same-spelling shadow identity remains legal.
+
+Callback success commits the rebuilt receiver once and releases the guard before continuation. A continuation-
+side receiver write then follows ordinary nested-write semantics; its structural failure preserves the completed
+bang commit. All callback, write, snapshot, local, unrelated, committed, and returned aggregates remain detached.
+
+The exact non-bang control returns `{"leaf":[]}` on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. The composed bang
+source stops before callback nested-write lowering: Perl/Rust return null (Rust warns), while Dart/Julia/both Lua
+ABIs expose generic parser-invocation failure. No parser, compiler, runtime, fixture admission, capability,
+generated format, facade, schema, MCP, CLI, or current public behavior moves. Perl `.19.2.1` is next.
+
 ## Future `map_leaves!` receiver mutation has one executable neutral authority
 
 `FUTURE-PARITY-BACKLOG.19.1.2` freezes `linkedspec-map-leaves-mutation-v1` without enabling backend syntax. The
@@ -19,7 +43,7 @@ five special state proofs, and 167 rejected mutations. Exact non-bang control ou
 The one-token bang twin remains unsupported: Perl/Rust yield null (Rust warns), while Dart/Julia/Lua expose their
 generic parser-invocation failure. Source audit traces every result to identifier-only fluent grammar; no parser,
 compiler, runtime, fixture, capability, generated format, facade, schema, MCP, CLI, or current public behavior
-moves. Composition `.19.1.3` is next.
+moves. Shared composition `.19.1.3` has since frozen the cross-mechanism boundary above.
 
 ## Lua next fixture ownership is explicit and behavior is unchanged
 

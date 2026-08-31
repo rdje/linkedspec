@@ -1,7 +1,7 @@
 # 0036 - Nested creation is write-only and `!` denotes explicit receiver mutation
 
 - Date: 2026-07-15
-- Status: accepted direction; implementation pending
+- Status: accepted direction; neutral contracts complete, backend implementation pending
 - Tags: dsl, language-evolution, mutation, autovivification, receiver-methods, traversal, paths, portability
 
 ## Context
@@ -119,6 +119,35 @@ exclusions, ten successes, eight pre-commit failures, the continuation/shadow/gu
 boundaries, and 167 rejected mutations. A verified five-backend control accepts the unchanged non-bang call; its
 one-token bang twin remains unsupported on every backend. Implementation still begins only in `.19.2` after the
 composition leaf `.19.1.3` passes.
+
+## Neutral composition freeze (2026-08-31)
+
+Leaf `.19.1.3` binds the two unchanged mechanism contracts through
+`linkedspec-write-map-leaves-composition-v1` without admitting backend behavior:
+
+- a callback may vivify its detached `value` and return the updated result as a replacement; the replacement is
+  not revisited and remains detached from callback, snapshot, committed, and returned boundaries;
+- a nested write to an unrelated binding commits or fails under ordinary write semantics. Its completed effects
+  persist across a later callback failure, while its own unchanged diagnostic aborts the bang call before receiver
+  commit. Structural failure rolls back only the isolated write path, not an already-completed segment/RHS effect;
+- the active receiver guard compares resolved identity before any nested-write segment or RHS evaluation.
+  `receiver_mutation_reentrant` therefore wins over every latent nested-write diagnostic and produces no attempted-
+  write effect;
+- a same-spelling helper parameter or scoped binding remains legal when its resolved identity differs from the
+  receiver identity; and
+- callback success commits the receiver and releases the guard before continuation. A continuation-side receiver
+  write then uses ordinary write semantics; its failure preserves the earlier bang commit.
+
+The shared fixture is `capability_conformance/write_map_leaves_composition_contract.json`. Both existing checkers
+consume it: the write checker independently validates eight embedded writes, while the mutation checker executes
+six callback compositions plus one post-commit continuation and rejects 593 scalar/container-shape mutations in
+addition to its 167 base mutations. This adds no executable entrypoint or temporary allocator.
+
+The exact current composed probe remains stopped at the unsupported bang token before callback nested-write
+lowering. Its non-bang control returns `{"leaf":[]}` on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. The bang form
+returns null on Perl/Rust (with Rust's stopped-identifier warning) and the generic parser-invocation failure on
+Dart/Julia/both Lua ABIs. Backend implementation begins with `.19.2.1`; current capability/public claims remain
+unchanged until the later admission leaves.
 
 ## Consequences
 
