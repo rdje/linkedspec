@@ -961,6 +961,9 @@ hash_expr.map_leaves() { return(value) }
                         — hash-tree receiver block traversal over non-hash leaves
 array_expr.map_leaves() { return(value) }
                         — array-tree receiver block traversal over scalar/hash leaves; Perl/Rust current
+binding_identifier.map_leaves!() { block }
+                        — Perl-only current receiver mutation; one bare existing harray/array binding, dedicated
+                          bang AST, callback-result leaf replacement, original-shape traversal, atomic rebind
 contains(arr, needle)   — array membership test
 index_of(arr, needle)   — first index of needle
 is_empty(arr)           — true if array/hash is empty
@@ -1004,7 +1007,15 @@ array_expr.map_leaves() { block }
                         — replace every scalar/hash leaf with block result, returns new array tree
 array_expr.reduce_leaves(initial) { block }
                         — fold every scalar/hash leaf into acc, returns final accumulator
+binding_identifier.map_leaves!() { block }
+                        — Perl-only current; callback binds value, path/@path, depth, and key or index; direct
+                          callback mutation of the receiver identity is rejected
 ```
+
+The bang suffix above belongs only to the exact `map_leaves!` method token; it is not part of identifier grammar.
+The receiver cannot be a literal, temporary, helper result, property, or bracket access. Function-form
+`map_leaves!(binding)`, `walk_leaves!`, `reduce_leaves!`, bang continuation, and arbitrary user-defined bang names
+are excluded. Rust, Dart, Julia, and Lua do not yet accept this form.
 
 ### 7.5 Numeric Helpers
 ```

@@ -11,7 +11,7 @@
     "map_leaves_mutation": {
       "contract_id": "linkedspec-map-leaves-mutation-v1",
       "path": "capability_conformance/map_leaves_mutation_contract.json",
-      "canonical_json_sha256": "6267f3b93e3ef48fb7c002dee6982afc635d6bb5e7c9f95f05223df46249eeda"
+      "canonical_json_sha256": "a15c6dd363b4cb8cbd5d3d6781b4abc0bf0412b7ee3eb7576a3c674bf19d2db9"
     }
   },
   "policy": {
@@ -23,7 +23,7 @@
     "later_callback_failure": "unrelated writes completed by earlier or current callbacks persist when a later callback failure prevents the receiver commit",
     "same_receiver_precedence": "a nested write through the active receiver identity fails with receiver_mutation_reentrant before segment or RHS evaluation and therefore precedes every latent nested-write diagnostic",
     "shadow_identity": "a helper parameter or scoped binding with the receiver spelling but a distinct identity may vivify normally without writing the guarded receiver",
-    "post_commit": "ordinary continuation begins after map_leaves! commits and after the guard is released; a nested write reached there follows the write contract, while its failure preserves the earlier receiver commit",
+    "post_commit": "ordinary caller-scoped continuation begins after map_leaves! publishes its leaf updates and after the guard is released; a nested write reached there follows the write contract, while its failure preserves the earlier leaf publication",
     "detachment": "callback values, nested-write results and RHS aggregates, traversal snapshots, committed bindings, returned roots, unrelated bindings, and shadow locals remain detached across their contract boundaries",
     "current_boundary": "until backend implementation leaves land, the composed source stops at the unsupported map_leaves! token before callback nested-write lowering or runtime on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT"
   },
@@ -229,8 +229,8 @@
   "continuation_cases": [
     {
       "id": "post_commit_write_failure_preserves_map_commit",
-      "source": "tree.map_leaves!() { return(cat(value, \"!\")) }.write_after()",
-      "helper_sources": {"write_after": "fn write_after(result) { tree[\"extra\"][2] = \"X\"; return(result) }"},
+      "source": "tree.map_leaves!() { return(cat(value, \"!\")) }.with() { tree[\"extra\"][2] = \"X\"; return(value) }",
+      "helper_sources": {},
       "binding": "tree",
       "initial_bindings": {"tree": {"a": "A"}},
       "initial_locals": {},
@@ -238,10 +238,10 @@
         {"frame": {"value": "A", "key": "a", "path": ["a"], "depth": 1}, "result_source": "literal", "result": "A!"}
       ],
       "continuation": {
-        "method": "write_after",
+        "method": "with",
         "expected_input": {"a": "A!"},
         "write": {
-          "container": "helper:write_after",
+          "container": "continuation:with",
           "target": {"storage": "binding", "name": "tree", "identity": "global:tree"},
           "source": "tree[\"extra\"][2] = \"X\"",
           "segments": [

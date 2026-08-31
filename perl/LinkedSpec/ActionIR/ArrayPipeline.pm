@@ -276,11 +276,17 @@ sub _build_array_pipeline_plan_from_expr {
 # Function: _lower_array_pipeline_expr
 # Purpose : Lower recursive composable array method expressions into ordered
 #           Perl statements over a stable target array symbol.
-# Args    : ($expr, $deps)
+# Args    : ($expr, $source_span, $deps)
 # Returns : lowered statement string or undef
 #------------------------------------------------------------------------------
 sub _lower_array_pipeline_expr {
- my ($expr, $deps) = @_;
+ my ($expr, $source_span, $deps) = @_;
+ if (ref($source_span) eq 'HASH' && !defined($deps)) {
+  # The owner-dispatch seam appends dependencies after the caller's arguments.
+  # Preserve compatibility with the historical direct `(expr, deps)` form.
+  $deps = $source_span;
+  $source_span = undef;
+ }
  my $scope = _trace_array_pipeline_enter(
   'lower_array_pipeline_expr',
   'expr',
@@ -305,6 +311,33 @@ sub _lower_array_pipeline_expr {
  my $target_symbol = $pipeline->{target_symbol};
  if ($pipeline->{binding_target}) {
   my @statements = ('require LinkedSpec::BindingRuntime');
+  my $receiver_mutation_target = ref($deps->{receiver_mutation_target}) eq 'CODE'
+   ? $deps->{receiver_mutation_target}
+   : undef;
+  my $receiver_guarded = ref($receiver_mutation_target) eq 'CODE'
+   && $receiver_mutation_target->($target_symbol) ? 1 : 0;
+  if ($receiver_guarded) {
+   my $span = ref($source_span) eq 'HASH' ? $source_span : {
+    start => 0,
+    end => length($expr // ''),
+   };
+   my $start = defined($span->{start}) && $span->{start} =~ /\A\d+\z/o
+    ? $span->{start}
+    : 0;
+   my $end = defined($span->{end}) && $span->{end} =~ /\A\d+\z/o
+    ? $span->{end}
+    : $start + length($expr // '');
+   my $rule_label = defined($deps->{rule_label}) && !ref($deps->{rule_label})
+    ? $deps->{rule_label}
+    : '<action>';
+   $rule_label =~ s/([\\"])/\\$1/go;
+   my $attempt = 'helper:'.($pipeline->{ops}[0]{op} // 'array_pipeline');
+   $attempt =~ s/([\\"])/\\$1/go;
+   push @statements,
+    'LinkedSpec::BindingRuntime::assert_receiver_writable(\$'.$target_symbol.', "'.$target_symbol.'", "'.$attempt.'", '
+    .'{ source_id => "action:'.$rule_label.'", start => '.$start.', end => '.$end
+    .', unit => "unicode_scalar", provenance => "authored" })';
+  }
   foreach my $op (@{$pipeline->{ops}}) {
    my $name = $op->{op} // '';
    if ($name eq 'split') {
@@ -333,7 +366,9 @@ sub _lower_array_pipeline_expr {
    push @statements,
     '$'.$target_symbol.' = LinkedSpec::BindingRuntime::array_transform($'.$target_symbol.', "'.$target_symbol.'", "'.$name.'"'.$suffix.')';
   }
-  push @statements, '$'.$target_symbol;
+  push @statements, $receiver_guarded
+   ? 'my $__ls_receiver_guarded_pipeline_result = $'.$target_symbol
+   : '$'.$target_symbol;
   return $finish->(
    'do { '.join('; ', @statements).' }',
    'binding_pipeline_lowered',
@@ -384,7 +419,7 @@ sub _lower_split_statement {
  my $expr = 'split('.$target.', '.$source;
  $expr .= ', '.$delimiter if defined($delimiter) && length($delimiter);
  $expr .= ')';
- return _lower_array_pipeline_expr($expr, $deps)
+ return _lower_array_pipeline_expr($expr, undef, $deps)
 }
 
 #------------------------------------------------------------------------------
@@ -395,7 +430,7 @@ sub _lower_split_statement {
 #------------------------------------------------------------------------------
 sub _lower_trim_each_statement {
  my ($target, $deps) = @_;
- return _lower_array_pipeline_expr('trim_each('.$target.')', $deps)
+ return _lower_array_pipeline_expr('trim_each('.$target.')', undef, $deps)
 }
 
 #------------------------------------------------------------------------------
@@ -406,7 +441,7 @@ sub _lower_trim_each_statement {
 #------------------------------------------------------------------------------
 sub _lower_filter_nonempty_statement {
  my ($target, $deps) = @_;
- return _lower_array_pipeline_expr('filter_nonempty('.$target.')', $deps)
+ return _lower_array_pipeline_expr('filter_nonempty('.$target.')', undef, $deps)
 }
 
 #------------------------------------------------------------------------------
@@ -417,7 +452,7 @@ sub _lower_filter_nonempty_statement {
 #------------------------------------------------------------------------------
 sub _lower_lowercase_each_statement {
  my ($target, $deps) = @_;
- return _lower_array_pipeline_expr('lowercase_each('.$target.')', $deps)
+ return _lower_array_pipeline_expr('lowercase_each('.$target.')', undef, $deps)
 }
 
 #------------------------------------------------------------------------------
@@ -428,7 +463,7 @@ sub _lower_lowercase_each_statement {
 #------------------------------------------------------------------------------
 sub _lower_uppercase_each_statement {
  my ($target, $deps) = @_;
- return _lower_array_pipeline_expr('uppercase_each('.$target.')', $deps)
+ return _lower_array_pipeline_expr('uppercase_each('.$target.')', undef, $deps)
 }
 
 #------------------------------------------------------------------------------
@@ -439,7 +474,7 @@ sub _lower_uppercase_each_statement {
 #------------------------------------------------------------------------------
 sub _lower_uniq_statement {
  my ($target, $deps) = @_;
- return _lower_array_pipeline_expr('uniq('.$target.')', $deps)
+ return _lower_array_pipeline_expr('uniq('.$target.')', undef, $deps)
 }
 
 #------------------------------------------------------------------------------
@@ -450,7 +485,7 @@ sub _lower_uniq_statement {
 #------------------------------------------------------------------------------
 sub _lower_filter_match_statement {
  my ($target, $pattern, $deps) = @_;
- return _lower_array_pipeline_expr('filter_match('.$target.', '.$pattern.')', $deps)
+ return _lower_array_pipeline_expr('filter_match('.$target.', '.$pattern.')', undef, $deps)
 }
 
 1;

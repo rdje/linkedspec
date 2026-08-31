@@ -256,6 +256,9 @@ sub _parse_expr {
  my $assignment = _parse_assignment_expr($trimmed, $start, $end);
  return $assignment if $assignment;
 
+ my $receiver_mutation = _parse_receiver_mutation_expr($trimmed, $start, $end);
+ return $receiver_mutation if $receiver_mutation;
+
  my $chain = _parse_fluent_chain_expr($trimmed, $start, $end);
  return $chain if $chain;
 
@@ -1081,6 +1084,267 @@ sub _parse_nested_write_assignment_expr {
  )
 }
 
+sub _top_level_dot_indexes {
+ my ($text) = @_;
+ my @dots;
+ my $state = _new_scan_state();
+ my $len = length($text // '');
+ for (my $idx = 0; $idx < $len; ++$idx) {
+  my $ch = substr($text, $idx, 1);
+  if (_consume_scan_char($state, $text, $idx, $ch)) {
+   next;
+  }
+  push @dots, $idx if $ch eq '.' && _scan_is_top_level($state);
+ }
+ return \@dots
+}
+
+sub _receiver_bang_candidate_at {
+ my ($text, $dot) = @_;
+ my $len = length($text // '');
+ my $idx = $dot + 1;
+ ++$idx while $idx < $len && substr($text, $idx, 1) =~ /\s/o;
+ my $name_start = $idx;
+ return undef unless $idx < $len && substr($text, $idx, 1) =~ /[A-Za-z_]/o;
+ ++$idx;
+ ++$idx while $idx < $len && substr($text, $idx, 1) =~ /[A-Za-z0-9_]/o;
+ my $name_end = $idx;
+ my $bang_start = $idx;
+ ++$bang_start while $bang_start < $len && substr($text, $bang_start, 1) =~ /\s/o;
+ return undef unless $bang_start < $len && substr($text, $bang_start, 1) eq '!';
+ my $bang_end = $bang_start;
+ ++$bang_end while $bang_end < $len && substr($text, $bang_end, 1) eq '!';
+ return {
+  dot => $dot,
+  name_start => $name_start,
+  name_end => $name_end,
+  bang_start => $bang_start,
+  bang_end => $bang_end,
+  spaced => $bang_start == $name_end ? 0 : 1,
+  bang_count => $bang_end - $bang_start,
+ }
+}
+
+sub _first_receiver_bang_candidate {
+ my ($text) = @_;
+ foreach my $dot (@{_top_level_dot_indexes($text)}) {
+  my $candidate = _receiver_bang_candidate_at($text, $dot);
+  return $candidate if ref($candidate) eq 'HASH';
+ }
+ return undef
+}
+
+sub _parse_receiver_mutation_expr {
+ my ($trimmed, $start, $end) = @_;
+ if ($trimmed =~ /\Amap_leaves!\s*\(/o) {
+  _throw_action_parse_diagnostic(
+   'bang_method_function_form_invalid',
+   'map_leaves! is receiver-only; use binding.map_leaves!() { ... }',
+   $start,
+   $start + length('map_leaves!'),
+  );
+ }
+
+ my $candidate = _first_receiver_bang_candidate($trimmed);
+ return undef unless ref($candidate) eq 'HASH';
+ my $method = substr(
+  $trimmed,
+  $candidate->{name_start},
+  $candidate->{name_end} - $candidate->{name_start},
+ );
+ my $source_method = substr(
+  $trimmed,
+  $candidate->{name_start},
+  $candidate->{bang_end} - $candidate->{name_start},
+ );
+ if ($candidate->{spaced}) {
+  _throw_action_parse_diagnostic(
+   'bang_method_suffix_invalid',
+   'the bang suffix must immediately follow map_leaves',
+   $start + $candidate->{name_start},
+   $start + $candidate->{bang_end},
+  );
+ }
+ if ($candidate->{bang_count} != 1) {
+  _throw_action_parse_diagnostic(
+   'bang_method_suffix_invalid',
+   'map_leaves! accepts exactly one bang suffix',
+   $start + $candidate->{name_start},
+   $start + $candidate->{bang_end},
+  );
+ }
+ if ($method ne 'map_leaves') {
+  _throw_action_parse_diagnostic(
+   'bang_method_unknown',
+   "unsupported bang method '$source_method'",
+   $start + $candidate->{name_start},
+   $start + $candidate->{bang_end},
+  );
+ }
+
+ my ($receiver, $receiver_start, $receiver_end) = _trim_with_offsets(
+  substr($trimmed, 0, $candidate->{dot}),
+  $start,
+ );
+ unless ($receiver =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o) {
+  _throw_action_parse_diagnostic(
+   'receiver_mutation_receiver_not_addressable',
+   'receiver mutation requires one bare uniform-binding identifier',
+   $receiver_start,
+   $receiver_end,
+  );
+ }
+ state %reserved = map { $_ => 1 } qw(
+  CAPTURE IINDEX IMATCH IMATCH_HASH IMATCH_LIST IPOS
+  LINDEX LMATCH LMATCH_HASH LMATCH_LIST LSPOS STRING
+  descr false info minfo null retv true undef
+ );
+ if ($reserved{$receiver}) {
+  _throw_action_parse_diagnostic(
+   'receiver_mutation_receiver_reserved',
+   "receiver mutation cannot target reserved binding '$receiver'",
+   $receiver_start,
+   $receiver_end,
+  );
+ }
+
+ my $cursor = $candidate->{bang_end};
+ my $len = length($trimmed);
+ ++$cursor while $cursor < $len && substr($trimmed, $cursor, 1) =~ /\s/o;
+ unless ($cursor < $len && substr($trimmed, $cursor, 1) eq '(') {
+  _throw_action_parse_diagnostic(
+   'map_leaves_mutation_arguments_invalid',
+   'map_leaves! expects empty parentheses before its callback',
+   $start + $candidate->{name_start},
+   $start + $cursor,
+  );
+ }
+ my $open_paren = $cursor;
+ my $close_paren = _find_matching_delim($trimmed, $open_paren, '(', ')');
+ unless (defined $close_paren) {
+  _throw_action_parse_diagnostic(
+   'map_leaves_mutation_arguments_invalid',
+   'map_leaves! expects empty parentheses before its callback',
+   $start + $open_paren,
+   $end,
+  );
+ }
+ if (substr($trimmed, $open_paren + 1, $close_paren - $open_paren - 1) =~ /\S/o) {
+  _throw_action_parse_diagnostic(
+   'map_leaves_mutation_arguments_invalid',
+   'map_leaves! expects empty parentheses before its callback',
+   $start + $open_paren,
+   $start + $close_paren + 1,
+  );
+ }
+
+ my $callback_open = $close_paren + 1;
+ ++$callback_open while $callback_open < $len && substr($trimmed, $callback_open, 1) =~ /\s/o;
+ unless ($callback_open < $len && substr($trimmed, $callback_open, 1) eq '{') {
+  _throw_action_parse_diagnostic(
+   'map_leaves_mutation_callback_missing',
+   'map_leaves! requires one immediate trailing callback block',
+   $start + $candidate->{name_start},
+   $start + $close_paren + 1,
+  );
+ }
+ my $callback_close = _find_matching_delim($trimmed, $callback_open, '{', '}');
+ unless (defined $callback_close) {
+  _throw_action_parse_diagnostic(
+   'map_leaves_mutation_callback_missing',
+   'map_leaves! requires one immediate trailing callback block',
+   $start + $callback_open,
+   $end,
+  );
+ }
+
+ my $body_source = substr($trimmed, $callback_open + 1, $callback_close - $callback_open - 1);
+ my $body = parse_action_block($body_source, { base_start => $start + $callback_open + 1 });
+ my @continuation;
+ my $tail_start = $callback_close + 1;
+ my $tail = substr($trimmed, $tail_start);
+ if ($tail =~ /\S/o) {
+  my $synthetic = 'x'.$tail;
+  my $segments = _split_top_level_fluent_segments($synthetic);
+  return _raw_node($trimmed, $start, $end, 'invalid_receiver_mutation_continuation')
+   unless ref($segments) eq 'ARRAY' && @$segments > 1 && $segments->[0]{text} eq 'x';
+  for (my $idx = 1; $idx < @$segments; ++$idx) {
+   my $segment = $segments->[$idx];
+   my $segment_start = $start + $tail_start + $segment->{start} - 1;
+   my $segment_end = $start + $tail_start + $segment->{end} - 1;
+   if ($segment->{text} =~ /\A([A-Za-z_][A-Za-z0-9_]*)(!+)/o) {
+    _throw_action_parse_diagnostic(
+     'receiver_mutation_continuation_bang_invalid',
+     'a receiver-mutation chain continuation must use an existing non-bang fluent call',
+     $segment_start,
+     $segment_start + length($1) + length($2),
+    );
+   }
+   my $call = _parse_fluent_call_segment(
+    $segment->{text},
+    $segment_start,
+    $segment_end,
+    $idx == $#$segments,
+   );
+   return _raw_node($trimmed, $start, $end, 'invalid_receiver_mutation_continuation')
+    unless ref($call) eq 'HASH';
+   my $open = index($segment->{text}, '(');
+   my $close = defined($open) && $open >= 0
+    ? _find_matching_delim($segment->{text}, $open, '(', ')')
+    : undef;
+   return _raw_node($trimmed, $start, $end, 'invalid_receiver_mutation_continuation')
+    unless defined $close;
+   push @continuation, {
+    kind => 'fluent_call',
+    method => $call->{method},
+    source_method => $call->{source_method},
+    source => $segment->{text},
+    source_span => _span($segment_start, $segment_end),
+    args_source => substr($segment->{text}, $open + 1, $close - $open - 1),
+    args_span => _span($segment_start + $open + 1, $segment_start + $close),
+   };
+  }
+ }
+
+ my $callback_source = substr($trimmed, $callback_open, $callback_close - $callback_open + 1);
+ my $mutation_source = substr(
+  $trimmed,
+  $candidate->{name_start},
+  $callback_close - $candidate->{name_start} + 1,
+ );
+ return _node(
+  'receiver_mutation_chain',
+  $trimmed,
+  $start,
+  $end,
+  receiver => _node(
+   'binding_reference',
+   $receiver,
+   $receiver_start,
+   $receiver_end,
+   name => $receiver,
+  ),
+  mutation => _node(
+   'receiver_mutation_call',
+   $mutation_source,
+   $start + $candidate->{name_start},
+   $start + $callback_close + 1,
+   method => 'map_leaves',
+   source_method => 'map_leaves!',
+   method_span => _span($start + $candidate->{name_start}, $start + $candidate->{bang_end}),
+   args_span => _span($start + $open_paren, $start + $close_paren + 1),
+   callback => _node(
+    'block_value',
+    $callback_source,
+    $start + $callback_open,
+    $start + $callback_close + 1,
+    body => $body,
+   ),
+  ),
+  continuation => \@continuation,
+ )
+}
+
 sub _parse_fluent_chain_expr {
  my ($trimmed, $start, $end) = @_;
  my $segments = _split_top_level_fluent_segments($trimmed);
@@ -1163,7 +1427,7 @@ sub _parse_fluent_call_segment {
  my $block_start = $start + $attached->{open_idx};
  my $block_end = $start + $attached->{close_idx} + 1;
  my $block_source = substr($text, $attached->{open_idx}, $attached->{close_idx} - $attached->{open_idx} + 1);
- my $block = parse_action_block($attached->{body});
+ my $block = parse_action_block($attached->{body}, { base_start => $block_start + 1 });
  push @args, _node('block_value', $block_source, $block_start, $block_end, block => $block);
 
  return {

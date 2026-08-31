@@ -5,8 +5,10 @@ use warnings;
 
 use B ();
 use JSON::PP ();
-use Scalar::Util qw(looks_like_number);
+use Scalar::Util qw(looks_like_number refaddr);
 use LinkedSpec::OwnerDispatch ();
+
+my %ACTIVE_RECEIVER_MUTATIONS;
 
 sub _clone_value {
  my ($value) = @_;
@@ -59,6 +61,126 @@ sub _nested_write_error {
 sub is_nested_write_error {
  my ($value) = @_;
  return ref($value) eq 'LinkedSpec::BindingRuntime::NestedWriteError' ? 1 : 0
+}
+
+sub _receiver_mutation_error {
+ my (%fields) = @_;
+ die bless(\%fields, 'LinkedSpec::BindingRuntime::ReceiverMutationError')
+}
+
+sub is_receiver_mutation_error {
+ my ($value) = @_;
+ return ref($value) eq 'LinkedSpec::BindingRuntime::ReceiverMutationError' ? 1 : 0
+}
+
+sub assert_receiver_writable {
+ my ($slot_ref, $identifier, $attempt, $source_span) = @_;
+ die "receiver write guard requires a scalar binding reference\n"
+  unless ref($slot_ref) eq 'SCALAR' || ref($slot_ref) eq 'REF';
+ my $guard = $ACTIVE_RECEIVER_MUTATIONS{refaddr($slot_ref)};
+ return 1 unless ref($guard) eq 'HASH';
+ $identifier = $guard->{binding}
+  unless defined($identifier) && length($identifier);
+ $attempt = 'write' unless defined($attempt) && length($attempt);
+ _receiver_mutation_error(
+  code => 'receiver_mutation_reentrant',
+  operation => 'map_leaves_mutation',
+  binding => $identifier,
+  method => 'map_leaves',
+  attempt => $attempt,
+  source_span => _clone_value($source_span),
+  message => "cannot write active map_leaves! receiver binding '$identifier' from its callback",
+ );
+}
+
+sub map_leaves_mutation {
+ my ($slot_ref, $present, $identifier, $source_span, $callback) = @_;
+ die "map_leaves! requires a scalar binding reference\n"
+  unless ref($slot_ref) eq 'SCALAR' || ref($slot_ref) eq 'REF';
+ die "map_leaves! requires a callback\n" unless ref($callback) eq 'CODE';
+ $identifier = '<unknown>' unless defined($identifier) && length($identifier);
+
+ assert_receiver_writable($slot_ref, $identifier, 'map_leaves!', $source_span);
+ unless ($present) {
+  _receiver_mutation_error(
+   code => 'map_leaves_mutation_receiver_missing',
+   operation => 'map_leaves_mutation',
+   binding => $identifier,
+   method => 'map_leaves',
+   source_span => _clone_value($source_span),
+   message => "map_leaves! receiver binding '$identifier' does not exist",
+  );
+ }
+
+ my $source = _clone_value($$slot_ref);
+ my $root_kind = _runtime_kind($source);
+ unless ($root_kind eq 'harray' || $root_kind eq 'array') {
+  _receiver_mutation_error(
+   code => 'map_leaves_mutation_receiver_kind_mismatch',
+   operation => 'map_leaves_mutation',
+   binding => $identifier,
+   method => 'map_leaves',
+   expected_kinds => ['harray', 'array'],
+   actual_kind => $root_kind,
+   source_span => _clone_value($source_span),
+   message => "map_leaves! receiver '$identifier' must hold an harray or array, got $root_kind",
+  );
+ }
+
+ my $identity = refaddr($slot_ref);
+ local $ACTIVE_RECEIVER_MUTATIONS{$identity} = {
+  binding => $identifier,
+ };
+ my $visit;
+ if ($root_kind eq 'harray') {
+  $visit = sub {
+   my ($node, $path) = @_;
+   my %updated;
+   foreach my $key (sort keys %$node) {
+    my @next_path = (@$path, $key);
+    my $value = $node->{$key};
+    if (defined($value) && ref($value) eq 'HASH') {
+     $updated{$key} = $visit->($value, \@next_path);
+    } else {
+     my $replacement = $callback->(
+      _clone_value($value),
+      _clone_value($key),
+      _clone_value(\@next_path),
+      scalar(@next_path),
+      'harray',
+     );
+     $updated{$key} = _clone_value($replacement);
+    }
+   }
+   return \%updated
+  };
+ } else {
+  $visit = sub {
+   my ($node, $path) = @_;
+   my @updated;
+   for (my $index = 0; $index < @$node; ++$index) {
+    my @next_path = (@$path, $index);
+    my $value = $node->[$index];
+    if (defined($value) && ref($value) eq 'ARRAY') {
+     push @updated, $visit->($value, \@next_path);
+    } else {
+     my $replacement = $callback->(
+      _clone_value($value),
+      0 + $index,
+      _clone_value(\@next_path),
+      scalar(@next_path),
+      'array',
+     );
+     push @updated, _clone_value($replacement);
+    }
+   }
+   return \@updated
+  };
+ }
+
+ my $rebuilt = $visit->($source, []);
+ $$slot_ref = _clone_value($rebuilt);
+ return _clone_value($rebuilt)
 }
 
 sub nested_write {
@@ -292,5 +414,9 @@ sub array_end_mutation {
 package LinkedSpec::BindingRuntime::NestedWriteError;
 
 use overload '""' => sub { return $_[0]{message} // $_[0]{code} // 'nested write failed' }, fallback => 1;
+
+package LinkedSpec::BindingRuntime::ReceiverMutationError;
+
+use overload '""' => sub { return $_[0]{message} // $_[0]{code} // 'receiver mutation failed' }, fallback => 1;
 
 1;

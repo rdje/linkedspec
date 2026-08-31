@@ -40,13 +40,14 @@ the exact two rejected forms plus five ordered contrasts through eleven mutation
 `.23.2` reconciles semantic introspection, cursor/bare-edge, logical truthiness, structured controls, standalone
 lifecycle shorthand, root selection, and adjacent gap/typed claims with their executable contracts. It expands
 narrow live governance to cursor 30/28, standalone 15/7/14, logical 19/14, root 24/18, and gap 8/15/10/34 while
-preserving runtime bytes and closes parent `.23`. Nested-write contract leaf `.19.1.1` is now complete without
-backend admission: one future
-`assign_nested_access` node retains typed expression segments, evaluated strings/integers choose harray/array,
-segments then RHS precede isolated validation, dense creation is atomic, completed same-binding expression side
-effects settle before the snapshot, and syntax/structural failures carry authored Unicode-scalar spans. The
-independent checker covers 5/7/11/16/3/3 cases and rejects 105 mutations. `.19.1.2` is next for the separate
-`map_leaves!` neutral contract.
+preserving runtime bytes and closes parent `.23`. Mutation contracts `.19.1.1-.3` are complete: one
+`assign_nested_access` node retains evaluated typed segments, dense isolated creation, exact evaluation order and
+typed spans; one dedicated `receiver_mutation_chain` owns only bare `map_leaves!`, original-shape traversal,
+receiver guard, atomic publication, and detached continuation. Perl `.19.2.1-.2` implements both unchanged
+contracts and passes focused plus Phase 0 1,032/1,032 proof. The current authorities reject 105 write, 167 base
+map, and 592 corrected composition mutations. Rust/Dart/Julia/Lua and portable/public admission remain unchanged;
+the required complete-record rollover creates change segment `4987`, with exact finite 26/25 capacity authorized
+by ADR `0098` and canonical proof required. Rust nested-write `.19.3.1` is next.
 Capacity `.0` freezes, canonical `.1` implements,
 and focused `.2` independently recomposes one bounded `.14.6.5-.14.8` task member with every pressure ceiling and
 stable ID preserved. The storage prerequisite is composition-closed. Julia `.14.6.5` is split into historical

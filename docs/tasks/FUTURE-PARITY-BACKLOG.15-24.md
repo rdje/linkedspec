@@ -932,12 +932,14 @@
   Commit: `FUTURE-PARITY-BACKLOG.19.1.3 - compose neutral future mutations`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.2`
-  Status: `in progress; .19.2.1 complete, .19.2.2 decision-blocked`
+  Status: `done` (2026-08-31; corrected canonical signoff complete)
   Goal: Implement the unchanged v1 contract on the Perl reference backend.
   Children: `.19.2.1`, `.19.2.2`
   Dependencies: `.19.1`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS.** Both Perl reference slices implement the unchanged neutral nested-write and
+    `map_leaves!` contracts without changing another backend or admitting a portable/public capability.
+  Commit: `.19.2.1` `FUTURE-PARITY-BACKLOG.19.2.1 - implement Perl write vivification`; `.19.2.2`
+    `FUTURE-PARITY-BACKLOG.19.2.2 - implement Perl map leaves mutation`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.2.1`
   Status: `done` (2026-08-31; focused signoff from exact clean neutral-composition parent
@@ -993,31 +995,35 @@
   Commit: `FUTURE-PARITY-BACKLOG.19.2.1 - implement Perl write vivification`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.2.2`
-  Status: `in progress; decision-blocked on neutral/user-function scope conflict` (2026-08-31; task-tree-first from exact clean Perl write-vivification commit
-    `6b960624ead7be7ac55d835253e2013d7a514a6a`; no push)
-  Goal: Implement Perl reference `map_leaves!` parsing, lowering, atomic receiver rebinding, and typed boundaries.
+  Status: `done` (2026-08-31; task-tree-first from exact clean Perl write-vivification
+    commit `6b960624ead7be7ac55d835253e2013d7a514a6a`, resumed after blocker-record commit
+    `be3d58dda7e89919e63c380c70180432b303dbbe`; no push)
+  Goal: Implement Perl reference `map_leaves!` parsing, controlled leaf-value replacement, atomic updated-tree
+    commit, and typed boundaries without granting callback code direct receiver mutation.
   Dependencies: `.19.2.1`
-  Verification tier: `focused` — this leaf implements only the unchanged, already frozen `map_leaves!` v1 and
-    write-composition contracts on the Perl reference path. It does not change another backend, admit a portable
-    capability/public-current claim, move generated formats, add an executable/storage owner, or alter doctrine
-    infrastructure.
-  Focused checks: exact Perl ActionIR AST/source-span and syntax diagnostics; bare receiver resolution and root-kind
-    traversal over a detached original-shape snapshot; copied callback frames, replacement/non-revisit, receiver-
+  Verification tier: `canonical` — implementation scope remains the unchanged, already frozen `map_leaves!` v1
+    and write-composition contracts on the Perl reference path, without another backend or portable/public
+    admission. The leaf began focused, but its required complete change record forces a bounded-history rollover,
+    finite capacity ADR, and doctrine-infrastructure movement; ADR `0073` therefore requires a staged receipt.
+  Focused checks: expanded exact Perl ActionIR AST/source-span and syntax diagnostics; bare receiver resolution;
+    root-kind traversal over a detached original-shape snapshot; copied callback frames, replacement/non-revisit, receiver-
     identity guard and shadow boundary; atomic receiver rebind, detachment, guard release, callback/continuation
     failures, and nested-write composition; direct lowering/source inspection, focused plus appropriate broad Perl
     regression, both neutral/composition checkers, Knowledge/task/index, bounded histories, memory, all nine
     doctrines, rendered mdBook, and whitespace.
-  Canonical trigger: `none planned` — escalate if implementation changes generated/public/capability formats,
-    current non-Perl behavior, tool/storage/doctrine infrastructure, or forces a bounded-history rollover. Final
-    five-backend admission and recurring/public proof remain owned by `.19.7-.9`.
+  Canonical trigger: `fired by required bounded change-history rollover` — immutable segment `4987`, ADR `0098`,
+    and the exact 26-file/25-manifest-line finite capacity step move storage/doctrine infrastructure. Receipt-bound
+    canonical local CI is therefore required. Final five-backend admission and recurring/public proof remain owned
+    by `.19.7-.9`.
   Ownership: `.19.2.2` owns only Perl parsing/lowering/runtime behavior for
     `linkedspec-map-leaves-mutation-v1`, its frozen nested-write composition, and exact Perl-focused tests/docs.
     Rust/Dart/Julia/Lua remain `.19.3-.6`; no cross-backend/public admission occurs here.
   Checklist: [x] clean activation/task ownership [x] Knowledge/decision/toolbox retrieval [x] exact current Perl
-    AST/lowering/traversal seam audit [ ] director resolves neutral/user-function scope conflict
-    [ ] bang parser and dedicated typed AST [ ] isolated traversal, receiver guard,
-    atomic rebind, and typed diagnostics [ ] nested-write composition and focused regression proof
-    [ ] durable docs/Knowledge/live sync [ ] focused signoff [ ] atomic commit/brief/clean handoff.
+    AST/lowering/traversal seam audit [x] director resolves neutral/user-function scope conflict
+    [x] bang parser and dedicated typed AST [x] isolated traversal, receiver guard,
+    atomic rebind, and typed diagnostics [x] nested-write composition and focused regression proof
+    [x] durable docs/Knowledge/live sync [x] focused signoff [x] corrected staged canonical signoff
+    [x] atomic commit/brief/clean handoff.
   Activation evidence: exact `git status --short --untracked-files=all` is empty at
     `6b960624ead7be7ac55d835253e2013d7a514a6a`; `.19.2.1` is committed focused-signoff-complete after all nine
     doctrine hooks and a fresh 1,032-test Phase 0 pass; `git_message_brief.txt` is zero bytes; generated mdBook and
@@ -1028,19 +1034,74 @@
     state capture/mutation. An exact Perl probe returns caller `[{"a":"A"},[]]` unchanged while the helper
     returns its own `[{},["entered"]]`, confirming this is semantic, not parser wording. Implementing the fixture
     literally would silently widen user functions on Perl and later all backends beyond this leaf's ownership.
-  Decision required: **A (recommended)** preserves pure functions and corrects only the future-neutral fixtures:
+  Decision alternatives recorded at discovery: **A (recommended)** preserves pure functions and corrects only the future-neutral fixtures:
     use existing explicit-target `set(tree, ...)` for helper-mediated callback rejection and a caller-scoped
     `.with() { tree[...] = ...; return(value) }` continuation for post-commit write proof; exact Perl controls prove
     both constructs already reach the caller binding. **B** opens a separately ratified five-backend program for
     implicit caller-binding capture before resuming bang implementation. No behavior or contract bytes change
     until the director chooses.
-  Blocker-record verification: both unchanged neutral checkers pass at 105 write / 167 map / 593 composition
+  Director clarification (2026-08-31): choose A. `foo.map_leaves!()` authorizes the traversal mechanism to replace
+    selected leaf values and atomically publish the rebuilt tree after callback success; it does **not** authorize
+    callback code to assign, nested-write, change root kind/topology, or otherwise mutate `foo` itself. The binding
+    identity and original root-kind/key-or-index traversal topology remain protected; only callback-selected leaf
+    values may differ. Ordinary functions retain fresh local scope. The implementation's copy-on-write root swap is
+    invisible atomic publication machinery, not a general receiver-write permission. `myfunc!` is illustrative
+    notation here; v1 remains the specifically ratified `map_leaves!` surface, with arbitrary user-defined bang
+    methods outside this leaf.
+  Blocker-record verification: both then-unchanged neutral checkers passed at 105 write / 167 map / 593 composition
     mutations; the exact no-capture and two caller-scope alternative probes produce the recorded values; Knowledge
     Map 921/7,834, task partition/index, bounded histories, rendered sole-facing mdBook, whitespace, and all nine
     doctrines pass. The reproducible book output is removed. No production/test/fixture/capability/generated/
     facade/schema/MCP/CLI file moves, no canonical trigger fires, and no background job remains.
-  Verification: `pending`
-  Commit: `pending`
+  Contract correction evidence: option A changes only the two impossible carriers while preserving their intended
+    observations: the helper-mediated case is inline callback code using explicit-target `set(tree, {})`, and the
+    post-commit receiver-write case is a caller-scoped `.with()` continuation. The resulting digest-bound corpus
+    has 592 current composition mutations; the historical pre-correction freeze/checker record above remains 593.
+  Implementation evidence: Perl now parses only bare `IDENTIFIER.map_leaves!() { ACTION_BLOCK }` into a dedicated
+    `receiver_mutation_chain` with the frozen 4 valid / 14 invalid / 5 exclusion boundary and exact authored spans.
+    Lowering supplies copied `value`, `path`/`@path`, `depth`, and `key|index` bindings, accepts the callback result
+    as the replacement leaf, and routes ordinary continuations after commit. `BindingRuntime::map_leaves_mutation`
+    snapshots the receiver, traverses only its original root kind and shape, never revisits replacement containers,
+    rebuilds completely, and publishes one detached root atomically only after every callback succeeds.
+  Receiver-safety evidence: one invocation-local guard keys the actual Perl scalar-slot identity, so same-spelling
+    shadows remain independent. It rejects direct assignment, nested write, nested bang, `set`, `set_key`, `push`,
+    array-end mutation, and binding-target array pipelines before their write/evaluation seam while allowing
+    unrelated binding effects. Audit caught and closed the initially missed pipeline seam; expanded signoff then
+    found three-argument `split(target, source, delimiter)` stopped at AST value-helper arity before that owner.
+    Recognized pipeline statements now route to the existing owner first. Live proof covers all eight binding-
+    target pipeline names, a composed pipeline, and all four array-end methods with exact spans. Guard release is
+    exception-safe; callback failure leaves the receiver unchanged, and a later continuation failure cannot roll
+    back an already completed bang commit.
+  Regression evidence: `t/map_leaves_mutation_perl_contract.t` projects every frozen parser/runtime/composition
+    case plus exact callback-scoped bindings, detachment, source spans, guard precedence/release, shadows,
+    function scope, array-pipeline rejection, and post-commit behavior. With fatal warnings, the focused five-file
+    suite passes 58 tests. The write checker passes 105 mutations; the map checker passes 167 base + 592
+    composition mutations. A fresh broad Perl `t/phase0_regression.t` passes all 1,032 tests in 1,016 seconds.
+  Focused signoff evidence: all changed Perl modules pass syntax; whitespace, Knowledge/task/index, bounded
+    histories, project storage, capability/language no-drift, rendered sole-facing mdBook, all nine doctrines, and
+    memory architecture pass. The complete `CHANGES.md` record forces a governed rollover: segment `4987` from
+    clean activation `be3d58dd`, ADR `0098`, and exact 26/25 capacity preserve every aggregate/byte/owner/lifecycle/
+    verifier/storage control. That infrastructure movement fires canonical proof. No generated format, executable
+    owner, other backend, facade/schema/MCP, CLI, portable capability, or public-current surface moves.
+  Canonical attempt one: all stages through diagnostic output, complete named marks, and punctuation-light zero-
+    argument syntax pass. `check_uniform_binding_mutation_result_surface.py` then rejects two stale required
+    phrases: `.19.2.1` correctly generalized typed-path assignment prose from a hash snapshot to a typed-root
+    snapshot because integer selectors update arrays, but the recurring checker's literal anchors still demand
+    the superseded hash-only wording. This leaf owns restoring checker/book agreement without reverting accurate
+    public semantics, adding direct drift proof, and rerunning the exact staged canonical candidate from the start.
+  Canonical attempt two: the corrected recurring checker requires the accurate typed-root sentences and passes 53
+    public files / 12 current anchors / 9 classified historical cards. The exact staged run passes all nine
+    doctrines, every five-backend admission family, and every later product/public check through primary CLI and
+    tool-storage proof. It then stops only when the outer Codex sandbox denies the process-locality oracle's nested
+    macOS `sandbox-exec` with known status 71 before the relocated driver starts. Existing canonical Knowledge
+    classifies this harness boundary; no source, contract, checker, or oracle correction is warranted.
+  Canonical attempt three: the unchanged permission-authorized exact candidate passes process containment and the
+    complete receipt-bound canonical gate from the beginning. The receipt matches current `HEAD` plus the complete
+    staged diff before the atomic commit.
+  Verification: **PASS 2026-08-31.** Perl `map_leaves!`, the pure-function carrier correction, direct receiver-
+    safety proof, bounded history rollover, and typed-root checker repair are signoff-complete. Parent `.19.2`
+    closes without another backend or portable/public capability admission; Rust `.19.3.1` is next.
+  Commit: `FUTURE-PARITY-BACKLOG.19.2.2 - implement Perl map leaves mutation`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.3`
   Status: `pending`

@@ -695,6 +695,11 @@ sub _lower_ast_block_side_effect_statement {
  foreach my $candidate_kind ('assign_scalar', 'assign_array_append', 'assign_hash_index', 'assign_nested_access') {
   next unless $kind eq $candidate_kind;
   my $lowered = _lower_ast_assignment_operator_statement($node, $deps, $candidate_kind);
+  return 'do { my $__ls_receiver_guarded_write = '.$lowered.'; }'
+   if $kind eq 'assign_nested_access'
+   && defined($lowered)
+   && length($lowered)
+   && _receiver_mutation_target_is_tracked($node->{base}, $deps);
   return $lowered if defined($lowered) && length($lowered);
  }
 
@@ -703,9 +708,21 @@ sub _lower_ast_block_side_effect_statement {
   return $lowered if defined($lowered) && length($lowered);
  }
 
+ if ($kind eq 'receiver_mutation_chain') {
+  my $lowered = _lower_method_value_expr($node->{source}, $deps);
+  return $lowered if defined($lowered) && length($lowered);
+ }
+
  if ($kind eq 'call') {
   my $method = _actionir_ast_statement_method($node->{name}, $node->{source});
   return undef if defined($method) && $method eq 'return';
+  if (defined($method) && $method =~ /^(?:split|split_each|trim_each|filter_nonempty|filter_match|lowercase_each|uppercase_each|uniq)$/o) {
+   my $lower_array_pipeline_expr = ref($deps) eq 'HASH' ? $deps->{lower_array_pipeline_expr} : undef;
+   if (ref($lower_array_pipeline_expr) eq 'CODE') {
+    my $lowered = $lower_array_pipeline_expr->($node->{source}, $node->{source_span});
+    return $lowered if defined($lowered) && length($lowered);
+   }
+  }
   if (defined($method) && $method =~ /^(?:set|set_key|push)$/o) {
    my $lowered = _lower_ast_call_statement(
     $node,
@@ -718,7 +735,10 @@ sub _lower_ast_block_side_effect_statement {
 
  my $source = _actionir_ast_value_source_expr($node);
  return undef unless defined($source) && length($source);
- return _lower_block_value_component_expr($source, $deps)
+ my $value_deps = ref($deps) eq 'HASH' ? { %$deps } : {};
+ $value_deps->{actionir_source_span} = $node->{source_span}
+  if ref($node->{source_span}) eq 'HASH';
+ return _lower_block_value_component_expr($source, $value_deps)
 }
 
 sub _lower_block_local_return_payload_expr {
@@ -872,6 +892,46 @@ sub _actionir_ast_quote_string_source {
  return $quote.$value.$quote
 }
 
+sub _actionir_ast_rule_source_id {
+ my ($deps) = @_;
+ my $rule_label = (ref($deps) eq 'HASH' && defined($deps->{rule_label}) && !ref($deps->{rule_label}))
+  ? $deps->{rule_label}
+  : '<action>';
+ return 'action:'.$rule_label
+}
+
+sub _actionir_ast_typed_span_expr {
+ my ($span, $deps) = @_;
+ return undef unless ref($span) eq 'HASH'
+  && defined($span->{start}) && $span->{start} =~ /\A\d+\z/o
+  && defined($span->{end}) && $span->{end} =~ /\A\d+\z/o;
+ my $source_id = _actionir_ast_rule_source_id($deps);
+ return '{ source_id => '._actionir_ast_quote_string_source($source_id, '"')
+  .', start => '.$span->{start}.', end => '.$span->{end}
+  .', unit => "unicode_scalar", provenance => "authored" }'
+}
+
+sub _receiver_mutation_target_is_tracked {
+ my ($target, $deps) = @_;
+ return 0 unless defined($target) && $target =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+ my $predicate = ref($deps) eq 'HASH' ? $deps->{receiver_mutation_target} : undef;
+ return ref($predicate) eq 'CODE' && $predicate->($target) ? 1 : 0
+}
+
+sub _receiver_write_guarded_expr {
+ my ($target, $attempt, $span, $deps, $inner_expr) = @_;
+ return undef unless defined($target) && $target =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+ return undef unless defined($attempt) && length($attempt);
+ return undef unless defined($inner_expr) && length($inner_expr);
+ return $inner_expr unless _receiver_mutation_target_is_tracked($target, $deps);
+ my $span_expr = _actionir_ast_typed_span_expr($span, $deps);
+ return undef unless defined($span_expr) && length($span_expr);
+ return 'do { require LinkedSpec::BindingRuntime; '
+  .'LinkedSpec::BindingRuntime::assert_receiver_writable(\$'.$target.', "'.$target.'", '
+  ._actionir_ast_quote_string_source($attempt, '"').', '.$span_expr.'); '
+  .$inner_expr.' }'
+}
+
 sub _actionir_ast_plain_data_expr {
  my ($value) = @_;
  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'JSON::PP');
@@ -909,6 +969,10 @@ sub _actionir_ast_value_source_expr {
   && length($node->{source_text});
  return _actionir_ast_unsupported_helper_expr($node->{code})
   if $kind eq 'codeblock_literal_error';
+ return $node->{source}
+  if $kind eq 'receiver_mutation_chain'
+  && defined($node->{source})
+  && length($node->{source});
  if ($kind eq 'indexed_var') {
   return undef unless defined($node->{name}) && $node->{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
   my $index = _actionir_ast_value_source_expr($node->{index});
@@ -1012,6 +1076,22 @@ sub _lower_ast_nested_access_assignment_value_node {
   ? $deps->{rule_label}
   : '<action>';
  my $source_id = 'action:'.$rule_label;
+ my $node_span = $node->{source_span};
+ return undef unless ref($node_span) eq 'HASH';
+ if (_receiver_mutation_target_is_tracked($base, $deps)) {
+  my $guard = _receiver_write_guarded_expr(
+   $base,
+   'nested_write',
+   {
+    start => $node_span->{start},
+    end => $node_span->{start} + length($base),
+   },
+   $deps,
+   '1',
+  );
+  return undef unless defined($guard) && length($guard);
+  push @prefix, $guard.';';
+ }
  for (my $idx = 0; $idx < @$segments; ++$idx) {
   my $segment = $segments->[$idx];
   return undef unless ref($segment) eq 'HASH' && ($segment->{kind} // '') eq 'path_segment';
@@ -1496,6 +1576,18 @@ sub _user_function_collect_local_decls_from_node {
   _user_function_record_local_decl($decls, $params, '$', $node->{name});
   return;
  }
+
+ if ($kind eq 'receiver_mutation_chain') {
+  my $receiver = $node->{receiver};
+  _user_function_record_local_decl($decls, $params, '$', $receiver->{name})
+   if ref($receiver) eq 'HASH'
+   && defined($receiver->{name})
+   && $receiver->{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+  my $callback = $node->{mutation}{callback}{body};
+  _user_function_collect_local_decls_from_node($callback, $decls, $params)
+   if ref($callback) eq 'HASH';
+  return;
+ }
  if ($kind eq 'colon_scalar_slot_removed') {
   return;
  }
@@ -1695,6 +1787,35 @@ sub _user_function_nested_write_targets {
    && $value->{base} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o) {
    $targets{$value->{base}} = 1;
   }
+  if (($value->{kind} // '') eq 'receiver_mutation_chain'
+   && ref($value->{receiver}) eq 'HASH'
+   && defined($value->{receiver}{name})
+   && $value->{receiver}{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o) {
+   $targets{$value->{receiver}{name}} = 1;
+  }
+  $visit->($_) for values %$value;
+ };
+ $visit->($definition->{body_ast}) if ref($definition) eq 'HASH';
+ return \%targets
+}
+
+sub _user_function_receiver_mutation_targets {
+ my ($definition) = @_;
+ my %targets;
+ my $visit;
+ $visit = sub {
+  my ($value) = @_;
+  if (ref($value) eq 'ARRAY') {
+   $visit->($_) for @$value;
+   return;
+  }
+  return unless ref($value) eq 'HASH';
+  if (($value->{kind} // '') eq 'receiver_mutation_chain'
+   && ref($value->{receiver}) eq 'HASH'
+   && defined($value->{receiver}{name})
+   && $value->{receiver}{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o) {
+   $targets{$value->{receiver}{name}} = 1;
+  }
   $visit->($_) for values %$value;
  };
  $visit->($definition->{body_ast}) if ref($definition) eq 'HASH';
@@ -1817,6 +1938,8 @@ sub _lower_dropped_value_statement {
  return undef unless defined($lowered) && length($lowered);
  return undef if $lowered eq $trimmed;
  $lowered = '+'.$lowered if $lowered =~ /^\s*\{/s;
+ return 'do { my $__ls_receiver_mutation_dropped = '.$lowered.'; undef }'
+  if ($ast_node->{kind} // '') eq 'receiver_mutation_chain';
  return 'do { '.$lowered.'; undef }'
 }
 
@@ -1907,7 +2030,18 @@ sub _lower_ast_call_statement {
    ? $deps->{lower_assign_statement}
    : sub { return _lower_assign_statement($_[0], $_[1], $deps) };
   my $lowered = $lower_assign_statement->($effective_args->[0], $effective_args->[1]);
-  return defined($lowered) && length($lowered) ? $lowered : _actionir_ast_unsupported_helper_expr($method)
+  return _actionir_ast_unsupported_helper_expr($method)
+   unless defined($lowered) && length($lowered);
+  my $target = $trim_action_ir_value->($effective_args->[0]);
+  return $lowered unless defined($target) && $target =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+  my $guarded = _receiver_write_guarded_expr(
+   $target,
+   'helper:set',
+   $node->{source_span},
+   $deps,
+   $lowered,
+  );
+  return defined($guarded) && length($guarded) ? $guarded : $lowered
  }
 
  if ($method eq 'set_key') {
@@ -1939,8 +2073,16 @@ sub _lower_ast_call_statement {
   return _actionir_ast_unsupported_helper_expr($method)
    unless defined($value_lowered) && length($value_lowered);
   my $binding_symbol = _uniform_binding_target_symbol($target_expr, 'hash', $deps);
-  return _uniform_binding_hash_index_set_expr($binding_symbol, $key_lowered, $value_lowered)
-   if defined($binding_symbol);
+  if (defined($binding_symbol)) {
+   my $inner = _uniform_binding_hash_index_set_expr($binding_symbol, $key_lowered, $value_lowered);
+   return _receiver_write_guarded_expr(
+    $binding_symbol,
+    'helper:set_key',
+    $node->{source_span},
+    $deps,
+    $inner,
+   );
+  }
   return '$'.$hash_symbol.'{'.$key_lowered.'} = '.$value_lowered
  }
 
@@ -1973,7 +2115,14 @@ sub _lower_ast_call_statement {
    && $first_expr =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o
    && $second_expr =~ /^([A-Za-z_][A-Za-z0-9_]*)$/o
    && !defined($second_literal)) {
-   return _uniform_binding_ambiguous_push_expr($first_expr, $second_expr)
+   my $inner = _uniform_binding_ambiguous_push_expr($first_expr, $second_expr);
+   return _receiver_write_guarded_expr(
+    $first_expr,
+    'helper:push',
+    $node->{source_span},
+    $deps,
+    $inner,
+   )
   }
 
   my $target_expr = $trim_action_ir_value->($effective_args->[0]);
@@ -1991,8 +2140,16 @@ sub _lower_ast_call_statement {
   my $lowered_value = _lower_method_value_expr($value_expr, $deps);
   $lowered_value = $value_expr unless defined($lowered_value) && length($lowered_value);
   my $binding_symbol = _uniform_binding_target_symbol($target_expr, 'array', $deps);
-  return _uniform_binding_array_push_expr($binding_symbol, $lowered_value)
-   if defined($binding_symbol);
+  if (defined($binding_symbol)) {
+   my $inner = _uniform_binding_array_push_expr($binding_symbol, $lowered_value);
+   return _receiver_write_guarded_expr(
+    $binding_symbol,
+    'helper:push',
+    $node->{source_span},
+    $deps,
+    $inner,
+   );
+  }
   return "push \@$target_symbol, $lowered_value"
  }
 
@@ -2049,14 +2206,30 @@ sub _lower_ast_array_end_mutation_method_statement {
   return _actionir_ast_unsupported_helper_expr($method)
    unless defined($lowered_value) && length($lowered_value);
   my $binding_symbol = _uniform_binding_target_symbol($receiver_expr, 'array', $deps);
-  return _uniform_binding_array_end_expr($binding_symbol, $method, $lowered_value)
-   if defined($binding_symbol);
+  if (defined($binding_symbol)) {
+   my $inner = _uniform_binding_array_end_expr($binding_symbol, $method, $lowered_value);
+   return _receiver_write_guarded_expr(
+    $binding_symbol,
+    $method,
+    $node->{receiver}{source_span},
+    $deps,
+    $inner,
+   );
+  }
   return ($method eq 'push_back' ? 'push @' : 'unshift @').$target_symbol.', '.$lowered_value
  }
 
  my $binding_symbol = _uniform_binding_target_symbol($receiver_expr, 'array', $deps);
- return _uniform_binding_array_end_expr($binding_symbol, $method, undef)
-  if defined($binding_symbol);
+ if (defined($binding_symbol)) {
+  my $inner = _uniform_binding_array_end_expr($binding_symbol, $method, undef);
+  return _receiver_write_guarded_expr(
+   $binding_symbol,
+   $method,
+   $node->{receiver}{source_span},
+   $deps,
+   $inner,
+  );
+ }
  return 'pop @'.$target_symbol if $method eq 'pop_back';
  return 'shift @'.$target_symbol if $method eq 'pop_front';
  return undef
@@ -2091,6 +2264,23 @@ sub _lower_ast_assignment_operator_statement {
   }
   return _actionir_ast_value_source_expr($value_node)
  };
+ my $guarded = sub {
+  my ($target, $attempt, $inner_expr) = @_;
+  return undef unless defined($inner_expr) && length($inner_expr);
+  return $inner_expr unless _receiver_mutation_target_is_tracked($target, $deps);
+  my $span = $node->{source_span};
+  return undef unless ref($span) eq 'HASH';
+  return _receiver_write_guarded_expr(
+   $target,
+   $attempt,
+   {
+    start => $span->{start},
+    end => $span->{start} + length($target),
+   },
+   $deps,
+   $inner_expr,
+  )
+ };
 
  if ($kind eq 'assign_scalar') {
   _trace_method_decision(
@@ -2106,7 +2296,8 @@ sub _lower_ast_assignment_operator_statement {
   return undef unless defined($source) && length($source);
   my $source_expr = _lower_value_binding_source_expr($source, $deps);
   return undef unless defined($source_expr) && length($source_expr);
-  return _tracked_scalar_assignment_expr($target, $source_expr, $deps, 0)
+  my $inner = _tracked_scalar_assignment_expr($target, $source_expr, $deps, 0);
+  return $guarded->($target, 'assign', $inner)
  }
 
  if ($kind eq 'assign_array_append') {
@@ -2123,7 +2314,8 @@ sub _lower_ast_assignment_operator_statement {
   return undef unless defined($value) && length($value);
   my $lowered_value = _lower_mutation_slot_value_expr($value, $deps);
   return undef unless defined($lowered_value) && length($lowered_value);
-  return _uniform_binding_array_push_expr($target, $lowered_value)
+  my $inner = _uniform_binding_array_push_expr($target, $lowered_value);
+  return $guarded->($target, 'append', $inner)
  }
 
  if ($kind eq 'assign_hash_index') {
@@ -2137,7 +2329,8 @@ sub _lower_ast_assignment_operator_statement {
   my $target = $node->{name};
   return undef unless defined($target) && $target =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
   my $scalar_held = _lower_ast_scalar_held_hash_index_assignment_value_node($node, $deps);
-  return $scalar_held if defined($scalar_held) && length($scalar_held);
+  return $guarded->($target, 'nested_write', $scalar_held)
+   if defined($scalar_held) && length($scalar_held);
   my $key = $ast_value_source->($node->{key});
   my $value = $ast_value_source->($node->{value});
   return undef unless defined($key) && length($key);
@@ -2147,7 +2340,8 @@ sub _lower_ast_assignment_operator_statement {
   return undef unless defined($key_lowered) && length($key_lowered);
 	  my $value_lowered = _lower_mutation_slot_value_expr($value, $deps);
 	  return undef unless defined($value_lowered) && length($value_lowered);
-	  return '$'.$target.'{'.$key_lowered.'} = '.$value_lowered
+	  my $inner = '$'.$target.'{'.$key_lowered.'} = '.$value_lowered;
+	  return $guarded->($target, 'nested_write', $inner)
  }
 
  if ($kind eq 'assign_nested_access') {
@@ -2779,13 +2973,19 @@ my $lower_numeric_array_reducer_source_expr = sub {
  return undef
 };
  my $legacy_method_value_expr = sub {
-  my ($source_expr) = @_;
+  my ($source_expr, $source_span) = @_;
   return undef unless defined $source_expr;
   my $source_trimmed = $trim_action_ir_value->($source_expr);
   return undef unless defined($source_trimmed) && length($source_trimmed);
   my $compat_deps = ref($deps) eq 'HASH'
    ? { %$deps, __actionir_ast_value_lowering_compat_bridge => 1 }
    : { __actionir_ast_value_lowering_compat_bridge => 1 };
+  my $effective_source_span = ref($deps) eq 'HASH'
+   && ref($deps->{actionir_source_span}) eq 'HASH'
+   ? $deps->{actionir_source_span}
+   : $source_span;
+  $compat_deps->{actionir_source_span} = $effective_source_span
+   if ref($effective_source_span) eq 'HASH';
   return _lower_method_value_expr($source_trimmed, $compat_deps)
  };
  my %ast_value_only_call_arity = (
@@ -2927,6 +3127,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
  my $lower_ast_value_only_call_node;
  my $lower_ast_aggregate_call_node;
  my $lower_ast_fluent_chain_node;
+ my $lower_ast_receiver_mutation_chain_node;
  my $lower_ast_scalar_assignment_value_node;
  my $lower_ast_user_function_call_node;
  my $lower_ast_codeblock_variable_call_node;
@@ -3074,6 +3275,12 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return defined($target) && $nested_write_targets->{$target} ? 1 : 0;
   };
   $body_deps->{nested_write_target_names} = [sort keys %$nested_write_targets];
+  my $receiver_mutation_targets = _user_function_receiver_mutation_targets($definition);
+  $body_deps->{receiver_mutation_target} = sub {
+   my ($target) = @_;
+   return defined($target) && $receiver_mutation_targets->{$target} ? 1 : 0;
+  };
+  $body_deps->{receiver_mutation_target_names} = [sort keys %$receiver_mutation_targets];
   my $local_decl_statements = _user_function_local_decl_statements($definition);
   my %scalar_value_names = map { $_ => 1 } @$params;
   $scalar_value_names{$rest_param} = 1 if defined($rest_param);
@@ -3386,6 +3593,18 @@ my $lower_numeric_array_reducer_source_expr = sub {
 
   my ($target_name, $target_sigil, $value_node);
   my $kind = $node->{kind} // '';
+  my $guarded = sub {
+   my ($target, $attempt, $inner_expr, $whole_call) = @_;
+   return undef unless defined($inner_expr) && length($inner_expr);
+   return $inner_expr unless _receiver_mutation_target_is_tracked($target, $deps);
+   my $span = $node->{source_span};
+   return undef unless ref($span) eq 'HASH';
+   $span = {
+    start => $span->{start},
+    end => $span->{start} + length($target),
+   } unless $whole_call;
+   return _receiver_write_guarded_expr($target, $attempt, $span, $deps, $inner_expr)
+  };
   if ($kind eq 'assign_array_append') {
    my $target = $node->{name};
    return undef unless defined($target) && $target =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
@@ -3395,14 +3614,16 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return undef unless defined($value_source) && length($value_source);
    my $lowered_value = _lower_mutation_slot_value_expr($value_source, $deps);
    return undef unless defined($lowered_value) && length($lowered_value);
-   return _uniform_binding_array_push_expr($target, $lowered_value)
+   my $inner = _uniform_binding_array_push_expr($target, $lowered_value);
+   return $guarded->($target, 'append', $inner, 0)
   }
 
   if ($kind eq 'assign_hash_index') {
    my $target = $node->{name};
    return undef unless defined($target) && $target =~ /^[A-Za-z_][A-Za-z0-9_]*$/o;
    my $scalar_held = _lower_ast_scalar_held_hash_index_assignment_value_node($node, $deps);
-   return $scalar_held if defined($scalar_held) && length($scalar_held);
+   return $guarded->($target, 'nested_write', $scalar_held, 0)
+    if defined($scalar_held) && length($scalar_held);
    my $key_source = $ast_expr_source_node->($node->{key});
    $key_source = $node->{key}{source}
     if ref($node->{key}) eq 'HASH' && !(defined($key_source) && length($key_source));
@@ -3416,7 +3637,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return undef unless defined($key_lowered) && length($key_lowered);
    my $value_lowered = _lower_mutation_slot_value_expr($value_source, $deps);
    return undef unless defined($value_lowered) && length($value_lowered);
-   return 'do { $'.$target.'{'.$key_lowered.'} = '.$value_lowered.'; +{%'.$target.'} }'
+   my $inner = 'do { $'.$target.'{'.$key_lowered.'} = '.$value_lowered.'; +{%'.$target.'} }';
+   return $guarded->($target, 'nested_write', $inner, 0)
   }
 
   if ($kind eq 'assign_nested_access') {
@@ -3493,7 +3715,9 @@ my $lower_numeric_array_reducer_source_expr = sub {
      unless defined($value_expr) && length($value_expr);
     $value_expr = $source_expr unless defined($value_expr) && length($value_expr);
     return undef unless defined($value_expr) && length($value_expr);
-    return _tracked_scalar_assignment_expr($target_name, $value_expr, $deps, 1)
+    my $inner = _tracked_scalar_assignment_expr($target_name, $value_expr, $deps, 1);
+    my $attempt = $kind eq 'call' && ($node->{name} // '') eq 'set' ? 'helper:set' : 'assign';
+    return $guarded->($target_name, $attempt, $inner, $kind eq 'call')
    }
 
    my $lower_declare_initializer_expr = $require_dep->('lower_declare_initializer_expr');
@@ -3517,7 +3741,9 @@ my $lower_numeric_array_reducer_source_expr = sub {
    if !(defined($value_expr) && length($value_expr)) && defined($value_node->{source});
   return undef unless defined($value_expr) && length($value_expr);
 
-  return _tracked_scalar_assignment_expr($target_name, $value_expr, $deps, 1)
+  my $inner = _tracked_scalar_assignment_expr($target_name, $value_expr, $deps, 1);
+  my $attempt = $kind eq 'call' && ($node->{name} // '') eq 'set' ? 'helper:set' : 'assign';
+  return $guarded->($target_name, $attempt, $inner, $kind eq 'call')
  };
 	$lower_ast_supported_call_source_node = sub {
 	 my ($node) = @_;
@@ -3815,6 +4041,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
    if $kind eq 'block_value';
   return $lower_ast_fluent_chain_node->($node)
    if $kind eq 'fluent_chain';
+  return $lower_ast_receiver_mutation_chain_node->($node)
+   if $kind eq 'receiver_mutation_chain';
   if ($kind eq 'call') {
    my $logical_call = $lower_ast_logical_call_node->($node);
    return $logical_call if defined($logical_call) && length($logical_call);
@@ -3975,7 +4203,10 @@ my $lower_numeric_array_reducer_source_expr = sub {
   return '['.join(', ', @arg_exprs).']'
    if $method eq 'array' && @arg_exprs != 1;
 
-  return $legacy_method_value_expr->($method.'('.join(', ', @arg_exprs).')')
+  return $legacy_method_value_expr->(
+   $method.'('.join(', ', @arg_exprs).')',
+   $node->{source_span},
+  )
  };
  $lower_ast_fluent_chain_node = sub {
   my ($node) = @_;
@@ -4362,6 +4593,14 @@ my $lower_numeric_array_reducer_source_expr = sub {
     $mutation_expr = _uniform_binding_array_end_expr($target, $first_method, undef);
    }
    return undef unless defined($mutation_expr) && length($mutation_expr);
+   $mutation_expr = _receiver_write_guarded_expr(
+    $target,
+    $first_method,
+    $receiver->{source_span},
+    $deps,
+    $mutation_expr,
+   );
+   return undef unless defined($mutation_expr) && length($mutation_expr);
 
    my $current_expr = $mutation_expr;
    my $current_family = 'array';
@@ -4571,6 +4810,103 @@ my $lower_numeric_array_reducer_source_expr = sub {
   }
 
   return undef
+ };
+
+ $lower_ast_receiver_mutation_chain_node = sub {
+  my ($node) = @_;
+  return undef unless ref($node) eq 'HASH'
+   && ($node->{kind} // '') eq 'receiver_mutation_chain';
+  my $receiver = $node->{receiver};
+  my $mutation = $node->{mutation};
+  return undef unless ref($receiver) eq 'HASH'
+   && ($receiver->{kind} // '') eq 'binding_reference'
+   && ref($mutation) eq 'HASH'
+   && ($mutation->{kind} // '') eq 'receiver_mutation_call'
+   && ($mutation->{method} // '') eq 'map_leaves'
+   && ($mutation->{source_method} // '') eq 'map_leaves!';
+  my $target = $receiver->{name};
+  return undef unless defined($target) && $target =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+  my $callback = $mutation->{callback};
+  return undef unless ref($callback) eq 'HASH'
+   && ($callback->{kind} // '') eq 'block_value'
+   && ref($callback->{body}) eq 'HASH'
+   && ($callback->{body}{kind} // '') eq 'action_block';
+  my $callback_node = {
+   kind => 'block_value',
+   block => $callback->{body},
+   source => $callback->{source},
+   source_span => $callback->{source_span},
+  };
+  my $callback_expr = $lower_ast_block_value_node->($callback_node);
+  return undef unless defined($callback_expr) && length($callback_expr);
+
+  my $receiver_span_expr = _actionir_ast_typed_span_expr($receiver->{source_span}, $deps);
+  return undef unless defined($receiver_span_expr) && length($receiver_span_expr);
+  my $identifier = _actionir_ast_quote_string_source($target, '"');
+  my $callback_sub = 'sub { '
+   .'my ($__ls_map_value, $__ls_map_selector, $__ls_map_path, $__ls_map_depth, $__ls_map_root_kind) = @_; '
+   .'my $value = $__ls_map_value; '
+   .'my @value = (defined($value) && ref($value) eq \'ARRAY\') ? @{$value} : (); '
+   .'my %value = (defined($value) && ref($value) eq \'HASH\') ? %{$value} : (); '
+   .'my $path = [@{$__ls_map_path}]; my @path = @{$path}; '
+   .'my $depth = $__ls_map_depth; '
+   .'my $key = $__ls_map_root_kind eq \'harray\' ? $__ls_map_selector : undef; '
+   .'my $index = $__ls_map_root_kind eq \'array\' ? $__ls_map_selector : undef; '
+   .$callback_expr.' }';
+  my $current_expr = 'do { require LinkedSpec::BindingRuntime; '
+   .'my $__ls_map_result = LinkedSpec::BindingRuntime::map_leaves_mutation('
+   .'\$'.$target.', (defined($'.$target.') || $__ls_binding_presence{'.$identifier.'}) ? 1 : 0, '
+   .$identifier.', '.$receiver_span_expr.', '.$callback_sub.'); '
+   .'$__ls_binding_presence{'.$identifier.'} = 1; $__ls_map_result }';
+
+  foreach my $continuation (@{$node->{continuation} || []}) {
+   return undef unless ref($continuation) eq 'HASH'
+    && ($continuation->{kind} // '') eq 'fluent_call'
+    && defined($continuation->{source})
+    && length($continuation->{source});
+   my $base_start = ref($continuation->{source_span}) eq 'HASH'
+    ? $continuation->{source_span}{start} - 2
+    : 0;
+   LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::AST');
+   my $parsed = LinkedSpec::ActionIR::AST::parse_action_expr(
+    'x.'.$continuation->{source},
+    { base_start => $base_start, deps => $deps || {} },
+   );
+   return undef unless ref($parsed) eq 'HASH'
+    && ($parsed->{kind} // '') eq 'fluent_chain'
+    && ref($parsed->{calls}) eq 'ARRAY'
+    && @{$parsed->{calls}} == 1;
+   my $call = $parsed->{calls}[0];
+   if (($call->{method} // '') eq 'with' && $call->{receiver_trailing_block_arg}) {
+    my $args = $call->{args} || [];
+    return undef unless ref($args) eq 'ARRAY' && @$args == 1;
+    my $with_node = {
+     kind => 'call',
+     name => 'with',
+     source_method => 'with',
+     source => $continuation->{source},
+     source_span => $continuation->{source_span},
+     args => [
+      { kind => 'raw_perl', source => '('.$current_expr.')' },
+      $args->[0],
+     ],
+     trailing_block_arg => 1,
+    };
+    my $with_expr = $lower_ast_with_trailing_block_call_node->($with_node);
+    return undef unless defined($with_expr) && length($with_expr);
+    $current_expr = $with_expr;
+    next;
+   }
+   my $chain = {
+    kind => 'fluent_chain',
+    receiver => { kind => 'raw_perl', source => '('.$current_expr.')' },
+    calls => [$call],
+   };
+   my $continued = $lower_ast_fluent_chain_node->($chain);
+   return undef unless defined($continued) && length($continued);
+   $current_expr = $continued;
+  }
+  return $current_expr
  };
 
  return undef unless defined $expr;
@@ -6163,7 +6499,10 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   }
   return undef;
  }
- my $pipeline_expr = $lower_array_pipeline_expr->($trimmed);
+ my $pipeline_expr = $lower_array_pipeline_expr->(
+  $trimmed,
+  ref($deps) eq 'HASH' ? $deps->{actionir_source_span} : undef,
+ );
  return $pipeline_expr if defined($pipeline_expr) && length($pipeline_expr);
  if ($trimmed =~ /^hash\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))$/o) {
   my $payload = $+{PAREN};

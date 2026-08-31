@@ -878,6 +878,7 @@ Hash helpers return scalar information about an object or a new hash/array value
 | `hash_expr.walk_leaves() { block }` | hash value | visit every non-hash leaf for side effects and return the original tree. |
 | `hash_expr.map_leaves() { block }` | hash value | return a new tree with every non-hash leaf replaced by the block result. |
 | `hash_expr.reduce_leaves(initial) { block }` | value | fold every non-hash leaf into an accumulator. |
+| `binding_name.map_leaves!() { block }` | updated hash/array value | Perl only: atomically replace leaves and rebind one bare named receiver. |
 
 Examples:
 
@@ -974,6 +975,36 @@ leaf_count = items.reduce_leaves(0) {
   return(acc.add(1))
 };
 ```
+
+### Perl-only `map_leaves!` receiver update
+
+`binding_name.map_leaves!() { block }` is the mutating twin of `map_leaves()` on the Perl reference. The receiver
+must already exist as an harray or array and must be a bare uniform-binding name. The starting root kind chooses
+the same traversal rule described above. Mapping reads a detached original-shape snapshot, uses each callback
+result as the replacement leaf, commits the complete rebuilt receiver once, and returns a separate detached copy.
+
+Callbacks receive detached `value`, `path`/`@path`, `depth`, and root-kind-specific `key` or `index`. Returning a
+new aggregate replaces the current leaf but does not add new work to the traversal. Changing `value` without
+returning it has no receiver effect.
+
+```text
+items = ["A", ["B"], { "opaque" : "C" }];
+
+top_level_count = items.map_leaves!() {
+  return(lowercase(value))
+}.count();
+```
+
+For this array root, the strings are leaves and the harray is also one opaque leaf. All callbacks must succeed
+before `items` changes. A callback may write unrelated bindings, but it may not directly write `items` by
+assignment, nested path, nested bang, mutation helper, array-end method, or binding-target array pipeline. Such an
+attempt raises `receiver_mutation_reentrant` before the write. A same-spelling parameter/local in a distinct scope
+is a different identity and remains legal.
+
+The receiver guard is released before fluent continuation. Therefore a continuation runs against the detached
+updated value, and its later failure does not undo the already completed receiver commit. Rust, Dart, Julia, and
+Lua do not yet accept this bang surface; `map_leaves!(items)`, temporary or nested receivers, other bang methods,
+and arbitrary user-defined bang functions are outside v1.
 
 The terse hash-index operator is the statement form written with the key next to the target:
 

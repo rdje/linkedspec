@@ -1188,6 +1188,9 @@ def composition_source_holder(
     if container == "callback":
         source_id = f"contract:{case['id']}"
         holder = case.get("source")
+    elif container == "continuation:with":
+        source_id = f"contract:{case['id']}"
+        holder = case.get("source")
     elif isinstance(container, str) and container.startswith("helper:"):
         helper = container.removeprefix("helper:")
         helpers = case.get("helper_sources")

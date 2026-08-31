@@ -25,6 +25,7 @@ use constant {
 our $__ls_current_function_registry;
 our $__ls_current_bare_type_memory;
 our $__ls_current_nested_write_targets;
+our $__ls_current_receiver_mutation_targets;
 our $__ls_current_rule_label;
 
 sub _trace_should_dump {
@@ -280,6 +281,13 @@ sub _actionir_owner_default_deps {
     %$owner_deps,
     nested_write_target => \&_nested_write_target,
     nested_write_target_names => [sort keys %$__ls_current_nested_write_targets],
+   };
+  }
+  if (ref($owner_deps) eq 'HASH' && ref($__ls_current_receiver_mutation_targets) eq 'HASH') {
+   $owner_deps = {
+    %$owner_deps,
+    receiver_mutation_target => \&_receiver_mutation_target,
+    receiver_mutation_target_names => [sort keys %$__ls_current_receiver_mutation_targets],
    };
   }
   if (ref($owner_deps) eq 'HASH'
@@ -700,6 +708,13 @@ sub _nested_write_target {
  return $__ls_current_nested_write_targets->{$name} ? 1 : 0
 }
 
+sub _receiver_mutation_target {
+ my ($name) = @_;
+ return 0 unless defined($name) && length($name);
+ return 0 unless ref($__ls_current_receiver_mutation_targets) eq 'HASH';
+ return $__ls_current_receiver_mutation_targets->{$name} ? 1 : 0
+}
+
 sub _bare_symbol_kind_from_sigil {
  my ($sigil) = @_;
  return 'array' if defined($sigil) && $sigil eq '@';
@@ -1038,9 +1053,10 @@ sub _collect_bare_identifier_type_memory {
  return \%kind_by_name
 }
 
-sub _collect_nested_write_targets {
+sub _collect_action_write_target_sets {
  my ($rule_ir) = @_;
- return {} unless ref($rule_ir) eq 'HASH';
+ return {nested_write => {}, receiver_mutation => {}}
+  unless ref($rule_ir) eq 'HASH';
  my @raw_blocks;
  my $code_blocks = (ref($rule_ir->{code_blocks}) eq 'HASH') ? $rule_ir->{code_blocks} : {};
  for my $key (qw(ICODE ECODE EXCODE ITCODE LXCODE LSCODE LECODE)) {
@@ -1051,7 +1067,8 @@ sub _collect_nested_write_targets {
  push @raw_blocks, map { (ref($_) eq 'HASH') ? $_->{call} : () } @{$rule_ir->{bcode_entries} || []};
  push @raw_blocks, map { (ref($_) eq 'HASH') ? $_->{code} : () } @{$rule_ir->{and_icode_entries} || []};
 
- my %targets;
+ my %nested_write_targets;
+ my %receiver_mutation_targets;
  my $visit;
  $visit = sub {
   my ($value) = @_;
@@ -1063,7 +1080,13 @@ sub _collect_nested_write_targets {
   if (($value->{kind} // '') eq 'assign_nested_access'
    && defined($value->{base})
    && $value->{base} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o) {
-   $targets{$value->{base}} = 1;
+   $nested_write_targets{$value->{base}} = 1;
+  }
+  if (($value->{kind} // '') eq 'receiver_mutation_chain'
+   && ref($value->{receiver}) eq 'HASH'
+   && defined($value->{receiver}{name})
+   && $value->{receiver}{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o) {
+   $receiver_mutation_targets{$value->{receiver}{name}} = 1;
   }
   $visit->($_) for values %$value;
  };
@@ -1077,7 +1100,20 @@ sub _collect_nested_write_targets {
   } or next;
   $visit->($ast);
  }
- return \%targets
+ return {
+  nested_write => \%nested_write_targets,
+  receiver_mutation => \%receiver_mutation_targets,
+ }
+}
+
+sub _collect_nested_write_targets {
+ my ($rule_ir) = @_;
+ return _collect_action_write_target_sets($rule_ir)->{nested_write}
+}
+
+sub _collect_receiver_mutation_targets {
+ my ($rule_ir) = @_;
+ return _collect_action_write_target_sets($rule_ir)->{receiver_mutation}
 }
 
 sub _lower_return_general_statement {
@@ -1349,7 +1385,13 @@ sub rewrite_action_code_for_compat {
    },
   );
 	  local $__ls_current_bare_type_memory = $compat_bare_type_memory;
-	  local $__ls_current_nested_write_targets = _collect_nested_write_targets($compat_rule_ir);
+	  my $compat_write_targets = _collect_action_write_target_sets($compat_rule_ir);
+	  my %compat_presence_targets = (
+	   %{$compat_write_targets->{nested_write}},
+	   %{$compat_write_targets->{receiver_mutation}},
+	  );
+	  local $__ls_current_nested_write_targets = \%compat_presence_targets;
+	  local $__ls_current_receiver_mutation_targets = $compat_write_targets->{receiver_mutation};
 	  my $trimmed = _trim_action_ir_value($code);
 	  if (defined($trimmed) && $trimmed =~ /^:[A-Za-z_][A-Za-z0-9_]*$/o) {
 	   my $diagnostic = 'do { my $__ls_actionir_unsupported_helper = "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read"; undef }';
@@ -2394,7 +2436,13 @@ sub build_rule_ir_emit_context {
   ? $rule_ir->{function_registry}
   : undef;
  local $__ls_current_bare_type_memory = _collect_bare_identifier_type_memory($rule_ir);
- local $__ls_current_nested_write_targets = _collect_nested_write_targets($rule_ir);
+ my $write_targets = _collect_action_write_target_sets($rule_ir);
+ my %presence_targets = (
+  %{$write_targets->{nested_write}},
+  %{$write_targets->{receiver_mutation}},
+ );
+ local $__ls_current_nested_write_targets = \%presence_targets;
+ local $__ls_current_receiver_mutation_targets = $write_targets->{receiver_mutation};
  local $__ls_current_rule_label = defined($label) && !ref($label) ? $label : '';
  _trace_emit_context_decision(
   phase => 'build_rule_ir_emit_context',

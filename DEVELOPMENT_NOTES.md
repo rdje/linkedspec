@@ -9,6 +9,52 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-31 (`FUTURE-PARITY-BACKLOG.19.2.2` — canonical checker repair): canonical attempt one passes every
+  stage through punctuation-light zero-argument behavior, then exposes two stale literal anchors in
+  `check_uniform_binding_mutation_result_surface.py`. The prior `.19.2.1` typed-path work correctly changed public
+  prose from an updated hash snapshot to an updated typed root because integer selectors can update arrays; the
+  checker still required the superseded hash-only phrases.
+- Keep the book accurate and move the recurring anchors to the existing root-generic sentences. The corrected
+  checker passes 53 public files / 12 current anchors / 9 classified historical cards and Python syntax. The
+  final exact staged candidate restarts canonical proof because the checker and continuity state changed after
+  attempt one, passes from the beginning, and produces the matching receipt required for the atomic commit.
+- 2026-08-31 (`FUTURE-PARITY-BACKLOG.19.2.2` — Perl `map_leaves!`): parser ownership must precede generic fluent
+  parsing because `!` is deliberately not an identifier character. The dedicated node admits only a bare binding
+  receiver and carries its callback plus ordinary continuation; invalid receiver/function/bang variants therefore
+  fail at one typed syntax boundary instead of leaking into host Perl residue.
+- Receiver protection is identity-based. `Scalar::Util::refaddr` over the actual scalar slot distinguishes a
+  same-spelling function parameter from the guarded outer binding. A dynamically scoped guard is installed before
+  snapshot/traversal and released on both success and exception; nested same-receiver bang detects the guard before
+  absent/kind checks, giving re-entrancy the required diagnostic precedence.
+- Runtime mapping clones the root before walking it, recurses only through containers matching the starting root
+  kind, and constructs a complete replacement before one scalar-slot publication. Callback inputs and outputs are
+  cloned independently. This makes callback failure atomic for the receiver without rolling back ordinary effects
+  on unrelated bindings; continuation begins only after the guard is gone and the root is committed.
+- The write-surface audit found one non-obvious bypass after the obvious assignment/helper routes were guarded:
+  binding-target array pipelines such as `trim_each(items)` and `uniq(trim_each(items))` mutate their source by
+  assignment. `ArrayPipeline` now checks the active receiver before any pipeline operation/source/delimiter
+  evaluation and retains the authored source span. Its final tracked result uses a real private assignment so
+  fatal-warning execution has no void-context private-variable warning.
+- Expanded signoff then exposed a routing distinction inside that family: three-argument
+  `split(items, source, delimiter)` parsed as an AST call whose value-helper arity intentionally stops at two, so
+  callback statement lowering emitted unsupported-helper residue before reaching `ArrayPipeline`. The repair
+  sends recognized pipeline statements to their existing owner before generic AST value lowering. Exact live
+  tests now cover `split`, `split_each`, `trim_each`, `filter_nonempty`, `filter_match`, `lowercase_each`,
+  `uppercase_each`, `uniq`, a composed pipeline, and all four array-end methods; every receiver attempt reports
+  its authored span and leaves the receiver unchanged.
+- The frozen helper carriers could not reach caller bindings because user functions are intentionally pure/fresh-
+  local. The director-selected correction uses inline `set(tree, {})` and a caller-scoped trailing `.with()`;
+  intended guard and post-commit observations stay intact, implicit capture stays deferred, and the mechanically
+  generated current composition count becomes 592 rather than the historical pre-correction 593.
+- Permanent proof runs under fatal warnings and covers exact AST/diagnostics/spans, harray/array traversal,
+  callback bindings, replacement non-revisit, detachment, atomic rollback, identity shadows, every executable
+  receiver-write route, guard release, nested composition, and post-commit continuation. Five focused files pass
+  58 tests; the neutral checkers pass 105 write and 167 base + 592 composition mutations; broad Phase 0 passes all
+  1,032 tests in 1,016 seconds.
+- The required complete change record crossed rollover pressure at 474/512 lines. The governed tool archives 221
+  complete lines as immutable segment `4987`, leaving the final root at 259/512. ADR `0098` advances only the
+  finite change-history collection/manifest controls to 26/25; exact totals remain 47,493/55,000 lines and
+  3,412,036/4,194,304 bytes. This infrastructure movement requires canonical proof before commit.
 - 2026-08-31 (`FUTURE-PARITY-BACKLOG.19.2.2` — implementation blocker): Knowledge retrieval exposed a real
   incompatibility before bang code. The neutral helper-mediated and post-commit examples label unparameterized
   function `tree`/`audit` names as caller identities, while the admitted function MVP makes all working variables

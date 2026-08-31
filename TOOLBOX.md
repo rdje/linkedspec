@@ -698,7 +698,7 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   `LinkedSpec::call_spec_handler_subst`, live rules, and user functions. Use existing `terse_11_4` tests/corpus for
   the unchanged Rust/Dart/Julia/Lua non-vivification boundary. Public capability admission remains pending.
 
-### 4.8.3 `tools/check_map_leaves_mutation_contract.py` — future neutral receiver-mutation oracle
+### 4.8.3 `tools/check_map_leaves_mutation_contract.py` — neutral receiver-mutation oracle
 
 - **WHAT:** validates `linkedspec-map-leaves-mutation-v1`: the sole v1 bang token, dedicated
   `receiver_mutation_chain` AST/spans, bare resolved receiver identity, current root-kind traversal over a detached
@@ -708,14 +708,13 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   touching backend code; do not generalize its one accepted bang token to identifiers, functions, other methods,
   temporary/nested receivers, or callback aliases.
 - **HOW:** `bash tools/run_python_project_data.sh tools/check_map_leaves_mutation_contract.py`.
-- **OUTPUT:** `map_leaves! mutation contract: 4 valid syntax, 14 invalid syntax, 5 exclusions, 10 success, 8 pre-commit failures, continuation/shadow/guard/nonbang/detachment proof, 6 callback compositions, 1 continuation composition, 167 base + 593 composition mutations rejected; future behavior remains unadmitted`.
+- **OUTPUT:** `map_leaves! mutation contract: 4 valid syntax, 14 invalid syntax, 5 exclusions, 10 success, 8 pre-commit failures, continuation/shadow/guard/nonbang/detachment proof, 6 callback compositions, 1 continuation composition, 167 base + 592 composition mutations rejected; future behavior remains unadmitted`.
 - **CURRENT BOUNDARY:** use the exact `terse_13_3_array_tree_traversal_receiver_blocks` fixture as the five-backend
-  non-bang control. Its minimal bang twin currently becomes null on Perl/Rust (with a Rust parser warning) and a
-  generic nonzero parser-invocation failure on Dart/Julia/Lua. Perl's action AST classifies the bang chain as
-  `raw_perl/invalid_fluent_chain`; every current parser restricts fluent method names to identifier characters.
-  The `.19.2.2` audit also proves that unparameterized user functions cannot carry caller-binding mutation under
-  the admitted fresh-local function contract. Do not implement those two fixture carriers literally until the
-  director resolves [[map-leaves-function-scope-contract-conflict]].
+  non-bang control. Perl now implements the exact bang contract and projects it permanently through
+  `t/map_leaves_mutation_perl_contract.t`; Rust still becomes null with its parser warning, and Dart/Julia/Lua keep
+  their generic nonzero parser-invocation failure. The `.19.2.2` audit also proved that unparameterized user
+  functions cannot carry caller-binding mutation under the admitted fresh-local function contract. The director-
+  selected correction uses explicit-target `set` and caller-scoped `.with`, without implicit capture.
 
 ### 4.8.4 Shared write/`map_leaves!` composition fixture
 

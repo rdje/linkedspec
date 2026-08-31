@@ -9,10 +9,10 @@
     "traversal": "the starting root kind selects recursion for the whole call: harray roots recurse only through harrays in ascending key order and array roots recurse only through arrays in zero-based index order",
     "callback_frame": "each leaf callback receives detached scoped value, path, depth, and root-kind selector key or index; path is a fresh complete receiver-root-relative copy for every callback",
     "callback_result": "the callback result is detached into the rebuilt leaf; assigning or mutating scoped value does not update the receiver, and a replacement aggregate is not revisited during the same call",
-    "atomic_commit": "callback traversal and rebuilding never mutate the receiver; complete callback success commits the rebuilt root to the receiver binding exactly once",
+    "atomic_commit": "callback code cannot modify the receiver binding, root kind, or original traversal topology; complete callback success atomically publishes only the rebuilt leaf values through one implementation-owned copy-on-write root swap",
     "reentrancy": "while callbacks execute, every direct or helper-mediated write through the same resolved receiver binding identity is rejected before that attempted write; a shadow binding with the same spelling and unrelated binding identities remain independent",
     "failure_effects": "receiver validation, callback, or re-entrant failure leaves the receiver unchanged while already-completed ordinary effects on unrelated bindings retain normal semantics",
-    "result": "successful commit returns a detached updated-root value; statement-position use may discard that value without suppressing the receiver update",
+    "result": "successful leaf publication returns a detached updated-root value; statement-position use may discard that value without suppressing the approved leaf updates",
     "continuation": "ordinary fluent continuation starts only after the bang call commits and consumes the detached returned value; a later continuation failure does not roll back the completed bang commit",
     "detachment": "the invocation snapshot, committed receiver, returned root, callback values and paths, callback aggregate results, and authored initial aggregates do not share writable host aliases",
     "nonbang": "map_leaves remains the unchanged non-mutating twin and cannot obtain receiver mutation through callback value or result aliases",
@@ -379,15 +379,15 @@
     },
     {
       "id": "helper_mediated_reentrant",
-      "source": "tree.map_leaves!() { mutate_tree(); return(value) }",
+      "source": "tree.map_leaves!() { audit += \"entered\"; set(tree, {}); return(value) }",
       "binding": "tree",
       "initial_bindings": {"tree": {"a": "A"}, "audit": []},
       "callback_steps": [
-        {"frame": {"value": "A", "key": "a", "path": ["a"], "depth": 1}, "effects": [{"operation": "append", "binding": "audit", "value": "entered"}], "mutation_attempt": {"binding": "tree", "attempt": "helper:mutate_tree", "source_span": {"source_id": "contract:helper_mediated_reentrant", "start": 21, "end": 34, "unit": "unicode_scalar", "provenance": "authored"}}}
+        {"frame": {"value": "A", "key": "a", "path": ["a"], "depth": 1}, "effects": [{"operation": "append", "binding": "audit", "value": "entered"}], "mutation_attempt": {"binding": "tree", "attempt": "helper:set", "source_span": {"source_id": "contract:helper_mediated_reentrant", "start": 41, "end": 54, "unit": "unicode_scalar", "provenance": "authored"}}}
       ],
       "expected_bindings": {"tree": {"a": "A"}, "audit": ["entered"]},
       "expected_effects": ["effect:audit"],
-      "expected_diagnostic": {"code": "receiver_mutation_reentrant", "operation": "map_leaves_mutation", "binding": "tree", "method": "map_leaves", "attempt": "helper:mutate_tree", "source_span": {"source_id": "contract:helper_mediated_reentrant", "start": 21, "end": 34, "unit": "unicode_scalar", "provenance": "authored"}, "message": "cannot write active map_leaves! receiver binding 'tree' from its callback"}
+      "expected_diagnostic": {"code": "receiver_mutation_reentrant", "operation": "map_leaves_mutation", "binding": "tree", "method": "map_leaves", "attempt": "helper:set", "source_span": {"source_id": "contract:helper_mediated_reentrant", "start": 41, "end": 54, "unit": "unicode_scalar", "provenance": "authored"}, "message": "cannot write active map_leaves! receiver binding 'tree' from its callback"}
     }
   ],
   "continuation_failure_case": {

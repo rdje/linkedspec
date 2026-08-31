@@ -1,7 +1,7 @@
 # 0036 - Nested creation is write-only and `!` denotes explicit receiver mutation
 
 - Date: 2026-07-15
-- Status: accepted direction; neutral contracts complete, Perl nested writes implemented, remaining backends/mutation/admission pending
+- Status: accepted direction; neutral contracts and both Perl mechanisms implemented, remaining backends/admission pending
 - Tags: dsl, language-evolution, mutation, autovivification, receiver-methods, traversal, paths, portability
 
 ## Context
@@ -88,8 +88,9 @@ Leaf `.19.1.1` resolves the nested-write details delegated by decision item 5 wi
 - the committed binding, returned updated root, initial aggregate, and aggregate RHS remain detached values.
 
 The executable owner is `capability_conformance/write_vivification_contract.json`, checked by
-`tools/check_write_vivification_contract.py`. Current Perl/Rust/Dart/Julia/Lua lowering remains unchanged and
-non-vivifying; backend implementation begins only in `.19.2` after `.19.1.2-.3` complete the neutral parent.
+`tools/check_write_vivification_contract.py`. At this freeze boundary Perl/Rust/Dart/Julia/Lua lowering remained
+unchanged and non-vivifying; backend implementation began only in `.19.2` after `.19.1.2-.3` completed the neutral
+parent.
 
 ## Neutral `map_leaves!` contract freeze (2026-08-31)
 
@@ -116,9 +117,9 @@ Leaf `.19.1.2` resolves the receiver-mutation details delegated by decision item
 The executable owner is `capability_conformance/map_leaves_mutation_contract.json`, checked by
 `tools/check_map_leaves_mutation_contract.py`. It covers four valid syntax forms, fourteen syntax failures, five
 exclusions, ten successes, eight pre-commit failures, the continuation/shadow/guard-release/non-bang/detachment
-boundaries, and 167 rejected mutations. A verified five-backend control accepts the unchanged non-bang call; its
-one-token bang twin remains unsupported on every backend. Implementation still begins only in `.19.2` after the
-composition leaf `.19.1.3` passes.
+boundaries, and 167 rejected mutations. At this freeze boundary a verified five-backend control accepted the
+unchanged non-bang call while its one-token bang twin remained unsupported on every backend. Implementation began
+only in `.19.2` after the composition leaf `.19.1.3` passed.
 
 ## Neutral composition freeze (2026-08-31)
 
@@ -140,13 +141,15 @@ Leaf `.19.1.3` binds the two unchanged mechanism contracts through
 
 The shared fixture is `capability_conformance/write_map_leaves_composition_contract.json`. Both existing checkers
 consume it: the write checker independently validates eight embedded writes, while the mutation checker executes
-six callback compositions plus one post-commit continuation and rejects 593 scalar/container-shape mutations in
-addition to its 167 base mutations. This adds no executable entrypoint or temporary allocator.
+six callback compositions plus one post-commit continuation. The original freeze rejected 593 scalar/container-
+shape mutations in addition to its 167 base mutations. The implementation-scope carrier correction described
+below preserves every observation while reducing the current mechanically generated composition total to 592.
+This adds no executable entrypoint or temporary allocator.
 
-The exact current composed probe remains stopped at the unsupported bang token before callback nested-write
-lowering. Its non-bang control returns `{"leaf":[]}` on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. The bang form
-returns null on Perl/Rust (with Rust's stopped-identifier warning) and the generic parser-invocation failure on
-Dart/Julia/both Lua ABIs. Backend implementation begins with `.19.2.1`; current capability/public claims remain
+At the freeze boundary the exact composed probe stopped at the unsupported bang token before callback nested-
+write lowering. Its non-bang control returned `{"leaf":[]}` on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. The
+bang form returned null on Perl/Rust (with Rust's stopped-identifier warning) and the generic parser-invocation
+failure on Dart/Julia/both Lua ABIs. Backend implementation began with `.19.2.1`; capability/public claims remain
 unchanged until the later admission leaves.
 
 ## Perl nested-write implementation (2026-08-31)
@@ -167,10 +170,10 @@ Leaf `.19.2.1` implements the unchanged `linkedspec-write-vivification-v1` contr
   while completed same-binding segment/RHS effects retain the frozen post-evaluation snapshot semantics.
 
 The permanent Perl contract projects all frozen AST, syntax, success, structural-failure, evaluation, detachment,
-bound-null, and user-function cases. This leaf does not implement `map_leaves!`, alter Rust/Dart/Julia/Lua, or
+bound-null, and user-function cases. This leaf did not implement `map_leaves!`, alter Rust/Dart/Julia/Lua, or
 admit a portable/public capability. Those boundaries remain owned by `.19.2.2-.19.9`.
 
-## Unresolved implementation carrier conflict (2026-08-31)
+## Function-scope carrier resolution (2026-08-31)
 
 The `.19.2.2` Perl implementation audit found that two frozen composition examples use unparameterized user
 functions while labeling their `tree`/`audit` spellings as caller bindings. That conflicts with the admitted
@@ -178,11 +181,32 @@ portable function contract: parameters and working variables have fresh function
 capture is forbidden, and caller-state-mutating functions remain deferred. An exact Perl probe confirms the
 helper mutates only its local bindings.
 
-No decision or behavior changes here. The recommended correction preserves pure functions and the receiver-
-mutation semantics while replacing only those carriers with existing caller-scope constructs: explicit-target
-`set(tree, ...)` for helper-mediated callback rejection and a trailing `.with()` block for post-commit receiver
-write proof. Adopting implicit function capture instead requires a separate five-backend language decision.
-`.19.2.2` is blocked pending director choice; see [[map-leaves-function-scope-contract-conflict]].
+The director chose option A: preserve pure functions and replace only those carriers with existing caller-scope
+constructs. The helper-mediated rejection now uses inline explicit-target `set(tree, ...)`; the post-commit proof
+uses a trailing caller-scoped `.with()` block. The intended receiver-identity and commit-order observations remain
+unchanged, the corrected current composition corpus has 592 mutations, and no implicit capture was introduced.
+See [[map-leaves-function-scope-contract-conflict]].
+
+## Perl `map_leaves!` implementation (2026-08-31)
+
+Leaf `.19.2.2` implements `linkedspec-map-leaves-mutation-v1` on the Perl reference backend:
+
+- the AST parser recognizes only bare `IDENTIFIER.map_leaves!() { ACTION_BLOCK }` as a dedicated
+  `receiver_mutation_chain`, preserving all 4 valid, 14 invalid, and 5 excluded syntax shapes with exact spans;
+- lowering creates copied callback bindings for `value`, `path`/`@path`, `depth`, and `key|index`, uses the callback
+  result as the leaf replacement, and starts ordinary fluent continuation only after runtime commit;
+- `BindingRuntime::map_leaves_mutation` deep-copies the receiver, traverses only the original root kind and shape,
+  never revisits replacement containers, rebuilds fully, and performs one detached atomic root publication;
+- a dynamically scoped guard keys the actual receiver scalar slot, not its spelling. Direct assignment, nested
+  write, nested bang, `set`, `set_key`, `push`, array-end methods, and binding-target array pipelines all reject
+  before writing the receiver, while unrelated bindings and distinct same-spelling shadows remain legal; and
+- callback/re-entrant failure leaves the receiver unchanged and always releases the guard. A continuation starts
+  after release, so its ordinary failure preserves an already completed receiver commit.
+
+The permanent Perl contract exercises the frozen base and composition authority, including the array-pipeline
+write audit, with fatal warnings. It passes 58 focused tests, 105 write mutations, 167 base map mutations, 592
+composition mutations, and the complete 1,032-test Perl Phase 0 regression. Rust, Dart, Julia, and Lua remain at
+the prior non-bang/non-vivifying boundary; portable capability and public admission remain future.
 
 ## Consequences
 
@@ -197,8 +221,8 @@ write proof. Adopting implicit function capture instead requires a separate five
 - “Absolute path” means complete root-to-leaf path inside the traversal receiver. The variable name is receiver
   identity, not an extra path element. Hash-root paths contain keys; array-root paths contain zero-based indexes.
 - During `.19.2-.19.6`, public guidance must name the backend transition explicitly: Perl implements nested-write
-  vivification; Rust, Dart, Julia, and Lua retain the checked non-vivifying boundary. `map_leaves!` remains
-  unsupported syntax until its owned backend and admission leaves land.
+  vivification and `map_leaves!`; Rust, Dart, Julia, and Lua retain the checked non-vivifying/non-bang boundary.
+  Portable `map_leaves!` admission remains future until the remaining backend and admission leaves land.
 
 ## Links
 

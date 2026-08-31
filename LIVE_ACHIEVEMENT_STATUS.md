@@ -2,29 +2,32 @@
 
 ## Current Activity
 
-- `.19.2.2` is task-tree active but decision-blocked before behavior code. Two future bang-composition helper
-  carriers assume implicit caller binding capture that the admitted pure function-local contract forbids.
+- `.19.2` is complete on Perl: nested-write vivification and `map_leaves!` both implement their unchanged frozen
+  contracts without portable/public admission. Rust nested-write leaf `.19.3.1` is next.
 
 ## Latest Completed Slice
 
-- `.19.2.1` unifies Perl nested-write AST/lowering/runtime behavior, creates absent/unambiguous typed paths,
-  preserves bound-null and dense atomic boundaries, and locks exact diagnostics, detachment, and function state.
+- `.19.2.2` implements Perl `map_leaves!`, closes every receiver-write route found by audit, passes corrected exact
+  canonical proof, and closes parent `.19.2` without another backend or public admission.
 
 ## Next Action
 
-- Director chooses: recommended A preserves pure functions and corrects the carriers to explicit-target `set` and
-  caller-scoped `.with`; B opens a separate five-backend implicit-capture decision before bang implementation.
+- Derive the new clean `HEAD`, activate Rust nested-write `.19.3.1` task-tree-first, and audit the exact Rust typed
+  AST/serialization/emission/runtime seams before implementation.
 
 ## Recent Completions
 
+- `2026-08-31` — `.19.2.2` implements Perl `map_leaves!`; 58 focused tests, 105 write / 167 base + 592 composition
+  mutations, Phase 0 1,032/1,032, and corrected exact canonical CI pass after repairing two stale hash-only anchors.
+
 - `2026-08-31` — `.19.2.2` audit proves the frozen function carriers conflict with fresh local scope and records
-  the exact no-capture probe plus a viable no-language-expansion repair; no behavior or fixture bytes change.
+  the exact no-capture probe; option A later corrects the carriers without language expansion.
 
 - `2026-08-31` — `.19.2.1` implements Perl write vivification from the frozen 5/7/11/16 fixture with typed
   evaluated paths, presence-aware rules/functions, isolated dense commit, detachment, and no non-Perl admission.
 
-- `2026-08-31` — `.19.1.3` composes both future mutations at 8 writes / 6 callbacks / 1 continuation / 593
-  mutations; all six current routes stop before callback write lowering and no backend is admitted.
+- `2026-08-31` — `.19.1.3` originally freezes both future mutations at 8 writes / 6 callbacks / 1 continuation /
+  593 mutations; the later pure-function carrier correction preserves the observations at 592 current mutations.
 
 - `2026-08-31` — `.19.1.2` freezes future `map_leaves!` at 4/14/5 syntax, 10 success, 8 pre-commit failure, five
   special state proofs, 167 mutations, and a 37-entrypoint canonical storage boundary; no backend is admitted.
@@ -64,9 +67,6 @@
   every existing brace owner and legacy inert carrier, corrects premature book teaching, and splits implementation
   into Perl/Rust `.15.1` and remaining-backend/self-hosted/public `.15.2`.
 
-
-- `2026-08-28` — `.14.7.10` independently recomposes staged 9/9/123 plus public 129, all six runtime routes,
-  typed 13/1/189, generated/capability 85/0/0, and language coverage unchanged, then closes parent `.14.7`.
 
 ## History
 

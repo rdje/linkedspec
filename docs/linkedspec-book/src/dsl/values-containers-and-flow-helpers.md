@@ -435,6 +435,31 @@ return(items.reduce_leaves(0) {
 });
 ```
 
+### Mutating leaves on the Perl reference
+
+Perl additionally supports `map_leaves!` on one bare named harray or array binding:
+
+```text
+tree = { "name" : "ALPHA", "nested" : { "name" : "BETA" } };
+
+count = tree.map_leaves!() {
+  return(lowercase(value))
+}.count_keys();
+```
+
+The callback result replaces the current leaf; after all callbacks succeed, `tree` is rebound once and the
+detached updated value feeds `.count_keys()`. Traversal uses the original shape and root kind, so replacement
+containers are not revisited. The block gets detached `value`, `path`/`@path`, `depth`, and `key` or `index`.
+
+The exclamation mark authorizes this traversal operation to replace leaves. It does not let callback code mutate
+the receiver binding directly. Assignment, bracket write, nested bang, mutation helpers, array-end methods, and
+binding-target array pipelines aimed at the active receiver fail with `receiver_mutation_reentrant`; unrelated
+bindings and distinct same-spelling scoped bindings remain legal. Callback failure leaves the receiver unchanged.
+
+Only the exact `binding_name.map_leaves!() { block }` form is current, and only on Perl. Function-form bang calls,
+temporary/nested receivers, `walk_leaves!`, `reduce_leaves!`, and arbitrary user-defined bang functions are not
+accepted. Rust, Dart, Julia, and Lua implementation plus portable/public admission remain pending.
+
 ## Reading and copying collections
 
 Use explicit helpers when you need a snapshot or derived collection:

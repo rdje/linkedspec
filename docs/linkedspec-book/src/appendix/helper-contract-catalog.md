@@ -726,6 +726,40 @@ dispatch rule.
   - `return(items.map_leaves() { return(value) }.count())` yields `[2]`: the top-level mapped array has two
     elements, even though traversal visited three leaves.
 
+### Perl receiver mutation: `map_leaves!`
+
+- **Signature**: `binding_name.map_leaves!() { block }`
+- **Returns**: a detached copy of the updated harray or array root; the named receiver is also rebound atomically.
+- **Backend status**: current on the Perl reference under `FUTURE-PARITY-BACKLOG.19.2.2`. Rust, Dart, Julia, and
+  Lua do not yet accept the bang form; portable capability/public admission remains pending.
+- **Addressability**: `binding_name` must be one existing, non-reserved, bare uniform binding that holds an harray
+  or array. Literals, temporaries, helper results, bracket/property receivers, function-form `map_leaves!(tree)`,
+  other bang methods, and arbitrary user-defined `name!` functions are not valid v1 forms.
+- **Traversal and replacement**: the starting root kind determines recursion. An harray root recurses only through
+  harrays in sorted-key depth-first order, treating arrays as leaves. An array root recurses only through arrays in
+  index order, treating harrays as leaves. The runtime walks a detached snapshot of the original shape. Each block
+  result replaces its leaf; a returned container of the root kind is not revisited during this call.
+- **Callback bindings**: every callback receives detached `value`, complete copied `path`/`@path`, `depth`, and
+  `key` for harray roots or `index` for array roots. Changing `value` alone does not update the receiver; return the
+  desired replacement. Ordinary effects on unrelated bindings remain visible.
+- **Receiver protection**: callback code may not directly mutate the receiver binding. Direct assignment, bracket
+  write, nested `map_leaves!`, `set`, `set_key`, `push`, `push_front`/`push_back`/`pop_front`/`pop_back`, and a
+  binding-target array pipeline such as `trim_each(items)` fail with `receiver_mutation_reentrant` before writing.
+  A distinct scoped binding with the same spelling is allowed because identity, not text, is guarded.
+- **Atomicity and continuation**: callback or re-entrant failure leaves the receiver unchanged and releases the
+  guard. Complete callback success publishes the rebuilt receiver once. Only then may the detached result enter a
+  continuation such as `.count()` or `.count_keys()`. A later continuation failure cannot roll back the commit.
+- **Examples**:
+  - Harray root: `tree = { "a" : "A", "nested" : { "b" : "B" } }; tree.map_leaves!() {
+    return(lowercase(value)) }` leaves `tree` as `{ "a" : "a", "nested" : { "b" : "b" } }`.
+  - Array root: `items = ["A", ["B"]]; count = items.map_leaves!() { return(lowercase(value)) }.count()` leaves
+    `items` as `["a", ["b"]]` and stores `2` in `count` because the continuation counts top-level elements.
+  - Callback-local nested write: for `tree = { "leaf" : [] }`, `tree.map_leaves!() {
+    value[0]["name"] = "normalized"; return(value) }` commits
+    `{ "leaf" : [{ "name" : "normalized" }] }` without revisiting the new array/hash content.
+  - Forbidden receiver write: `tree.map_leaves!() { tree["x"] = value; return(value) }` fails before modifying
+    `tree`. Writing an unrelated `journal["seen"][0] = path` remains ordinary and independent.
+
 ### `contains(arr, needle)`
 - **Signature**: `contains(arr: array, needle: scalar)`
 - **Returns**: boolean
@@ -1871,7 +1905,7 @@ that subset remain a separately locked surface.
 Most helpers propagate `undef` from their inputs to their outputs. Explicit `coalesce(...)` is the canonical way to provide a default. No helper silently converts `undef` to `0` or `""` unless documented otherwise.
 
 ### No Mutation Guarantee
-Value and receiver forms that return arrays or hashes (`copy`, `merge_hash`, value-form `set_key(hash_expr, key, value)`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `sorted_values`, `map_leaves`, `drop_front`, `drop_back`, `take`, `take_last`, `slice`, `sorted`, `reversed`, `concat_arrays`, `filter_nonempty`, `filter_match`, `uniq`, `split`, `split_each`, `trim_each`, `lowercase_each`, `uppercase_each`) do **not** mutate their inputs. They return new containers. A standalone `split_each(name, delimiter)`, `trim_each(name)`, `filter_nonempty(name)`, `filter_match(name, regex)`, `lowercase_each(name)`, `uppercase_each(name)`, or `uniq(name)` call is a statement form and writes its result back to that explicit working array on the Perl reference and Lua backend. Rust, Dart, and Julia currently omit write-back for `split_each`, `filter_match`, and `uniq`; `FUTURE-PARITY-BACKLOG.5` owns repair. `walk_leaves` is the explicit tree side-effect traversal: it returns the original hash or array tree and preserves ordinary callback side effects. Other explicit mutation forms include `name = value`, `items += value`, `items.push_back(value)`, `items.push_front(value)`, `items.pop_back()`, `items.pop_front()`, `set_key(name, key, value)`, and `name[key] = value`.
+Value and receiver forms that return arrays or hashes (`copy`, `merge_hash`, value-form `set_key(hash_expr, key, value)`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `sorted_values`, `map_leaves`, `drop_front`, `drop_back`, `take`, `take_last`, `slice`, `sorted`, `reversed`, `concat_arrays`, `filter_nonempty`, `filter_match`, `uniq`, `split`, `split_each`, `trim_each`, `lowercase_each`, `uppercase_each`) do **not** mutate their inputs. They return new containers. A standalone `split_each(name, delimiter)`, `trim_each(name)`, `filter_nonempty(name)`, `filter_match(name, regex)`, `lowercase_each(name)`, `uppercase_each(name)`, or `uniq(name)` call is a statement form and writes its result back to that explicit working array on the Perl reference and Lua backend. Rust, Dart, and Julia currently omit write-back for `split_each`, `filter_match`, and `uniq`; `FUTURE-PARITY-BACKLOG.5` owns repair. `walk_leaves` is the explicit tree side-effect traversal: it returns the original hash or array tree and preserves ordinary callback side effects. Perl-only `binding.map_leaves!() { block }` is the distinct atomic receiver-rebinding traversal. Other explicit mutation forms include `name = value`, `items += value`, `items.push_back(value)`, `items.push_front(value)`, `items.pop_back()`, `items.pop_front()`, `set_key(name, key, value)`, and `name[key] = value`.
 
 ### Canonical Terse Forms
 The `.spec` format has migrated these helper families to terser spellings. The **terse spelling is canonical**:

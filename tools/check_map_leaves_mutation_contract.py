@@ -78,8 +78,8 @@ EXPECTED_TOP_LEVEL_KEYS = {
 
 # This digest freezes every policy/syntax/AST/diagnostic byte as canonical JSON.
 # Runtime behavior is checked independently below rather than trusted from it.
-EXPECTED_SEMANTIC_DIGEST = "ee3feedf9bdca9ae23fa8ed368f1f19984b67a8036b7f1e94f403fa61d612d0c"
-EXPECTED_COMPOSITION_DIGEST = "097e48f7b46a22314929bd0b2ee0e333c95ac7bf489b1ceb39c6c503b37b7fa2"
+EXPECTED_SEMANTIC_DIGEST = "3b2f4b30b1fb8777f32a3df0ee16f56e860cb49c36bfae4d9d3012aa51b260f5"
+EXPECTED_COMPOSITION_DIGEST = "e373f369bb2693ec0afe3e57741a7f1c67ce1e9706bac65107ab42b5e729e277"
 
 EXPECTED_IDS = {
     "valid_syntax_cases": {
@@ -566,6 +566,14 @@ def parse_mutation(source: str, case_id: str) -> dict[str, Any]:
             fail("receiver_mutation_continuation_invalid", "continuation parentheses are unclosed")
         args_source = source[continuation_open + 1 : continuation_close]
         call_end = continuation_close + 1
+        block_open = call_end
+        while block_open < expression_end and source[block_open].isspace():
+            block_open += 1
+        if block_open < expression_end and source[block_open] == "{":
+            block_close = _matching_delimiter(source, block_open, "{", "}")
+            if block_close is None:
+                fail("receiver_mutation_continuation_invalid", "continuation block is unclosed")
+            call_end = block_close + 1
         call_source = source[call_start:call_end]
         method = source[name_start:name_end]
         continuation.append(

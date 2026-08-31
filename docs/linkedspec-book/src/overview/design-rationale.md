@@ -58,11 +58,12 @@ But concision must not hide what is happening. The project direction is toward:
 - clearer runtime ownership (each module owns its state and its diagnostics)
 - stronger documentation expectations (every surface explained, every contract explicit)
 
-The same principle governs two planned mutation extensions. They are accepted directions, not current syntax or
-runtime behavior.
+The same principle governs two mutation extensions. Both are current on the Perl reference; remaining backends
+and portable/public admission follow through the staged `.19` rollout.
 
-First, the future-neutral nested-write contract now fixes how assignment may eventually create missing path
-containers, but it does not enable that behavior on a backend. The authored form stays ordinary assignment:
+First, the neutral nested-write contract fixes how assignment creates missing path containers. Perl implements
+it; Rust, Dart, Julia, and Lua retain the earlier non-vivifying boundary. The authored form stays ordinary
+assignment:
 
 ```text
 document["sections"][0]["title"] = title
@@ -74,7 +75,7 @@ variable—selects the path kind: string means harray and nonnegative integer me
 string can select an harray, a dynamic integer can select an array, and quoted `"0"` remains an harray key. A
 boolean, null, negative/fractional number, aggregate, or codeblock cannot select a path kind.
 
-One and many segments share one future `assign_nested_access` ActionIR shape; every segment retains its exact
+One and many segments share one `assign_nested_access` ActionIR shape; every segment retains its exact
 expression and authored half-open Unicode-scalar span. Segments evaluate once from left to right, then the RHS
 evaluates once. Only afterward does isolated structural validation begin. An absent root is chosen by the first
 segment; a missing intermediate is chosen by the next one. Existing wrong-kind values are never coerced, and arrays
@@ -102,13 +103,14 @@ tree.map_leaves!() {
 }
 ```
 
-The current `map_leaves()` returns a rebuilt tree without changing `tree`. The planned `map_leaves!()` will require
-a bare named receiver, traverse an isolated snapshot using the receiver's existing root-kind rules, commit the
-rebuilt tree only after complete success, rebind `tree`, and return the updated value. The callback's `path` stays
-a complete copied root-to-leaf path; `value` stays a scoped value rather than a writable reference. Replacements
-are based on the original tree shape and are not recursively revisited in the same call.
+The non-bang `map_leaves()` returns a rebuilt tree without changing `tree`. On the Perl reference,
+`map_leaves!()` now requires a bare named receiver, traverses an isolated snapshot using the receiver's existing
+root-kind rules, commits the rebuilt tree only after complete success, rebinds `tree`, and returns the updated
+value. The callback's `path` stays a complete copied root-to-leaf path; `value` stays a scoped value rather than a
+writable reference. Replacements are based on the original tree shape and are not recursively revisited in the
+same call. Rust, Dart, Julia, and Lua implementation and portable admission remain pending.
 
-The future-neutral contract now makes those details executable without making the feature current. Hash roots
+The neutral contract makes those details executable and Perl consumes it. Hash roots
 recurse only through hashes in sorted-key depth-first order; arrays inside them are leaves. Array roots recurse
 only through arrays in zero-based depth-first order; hashes inside them are leaves. Every callback gets its own
 detached `value` and complete `path`, plus `depth` and the root-kind selector `key` or `index`. The callback's
@@ -117,9 +119,10 @@ not traversed again during the same call.
 
 The receiver is protected by binding identity while callbacks run. A callback may update unrelated bindings, and
 a function parameter or other scoped binding that happens to use the same spelling is a distinct identity. A
-direct assignment, nested write, nested `map_leaves!`, or helper-mediated write to the active receiver itself is a
-typed `receiver_mutation_reentrant` failure before the attempted write. Earlier unrelated callback effects remain,
-but the receiver does not receive a partial mapped tree. Callback failures likewise propagate unchanged.
+direct assignment, nested write, nested `map_leaves!`, mutation helper, array-end method, or binding-target array
+pipeline that would write the active receiver itself is a typed `receiver_mutation_reentrant` failure before the
+attempted write. Earlier unrelated callback effects remain, but the receiver does not receive a partial mapped
+tree. Callback failures likewise propagate unchanged.
 
 Commit and chaining have an explicit order:
 
@@ -134,16 +137,15 @@ First every callback succeeds, then `tree` is rebound once, then a detached copy
 Without a continuation, the detached updated tree is the expression result; statement-position use may discard
 the result while retaining the receiver update.
 
-Implementation is currently paused on one contract-carrier conflict, not on these traversal semantics. Two
-future-only fixtures used unparameterized user functions as if their `tree`/`audit` names captured caller
-bindings, but LinkedSpec functions deliberately have fresh local working-variable scope. The recommended repair
-keeps that pure function model and expresses the same guard/ordering proof with existing caller-scope constructs:
-an explicit-target `set(tree, ...)` in the callback and a trailing `.with()` block after the bang result. No bang
-syntax is current until that choice is resolved and the owned backend leaves land.
+Two neutral fixtures originally used unparameterized user functions as if their `tree`/`audit` names captured
+caller bindings, but LinkedSpec functions deliberately have fresh local working-variable scope. The director
+selected the narrow repair: an inline explicit-target `set(tree, ...)` carries helper-mediated rejection, and a
+trailing caller-scoped `.with()` block carries post-commit write proof. This preserves pure functions and the
+intended guard/ordering observations; it does not add caller capture or arbitrary user-defined bang methods.
 
 ### Composing nested writes with `map_leaves!`
 
-The third future-neutral contract composes the two mechanisms rather than inventing another mutation rule. A
+The third neutral contract composes the two mechanisms rather than inventing another mutation rule. On Perl, a
 callback may vivify its detached `value` and return the updated result as the leaf replacement. For a hash-root
 traversal, an array value is a cross-kind leaf, so this future example invokes the callback once and does not
 revisit the newly returned array subtree:
@@ -192,7 +194,7 @@ distinct identity; vivifying that local value cannot bypass the guard or write t
 After callback success, receiver commit releases the guard before continuation. A continuation helper may then
 perform an ordinary nested write to `tree`. If that write fails, its own structural attempt rolls back, but the
 earlier mapped receiver value remains committed. This is the same commit-before-continuation rule, now exercised
-through both future mechanisms rather than through a generic failing method.
+through both mechanisms rather than through a generic failing method.
 
 This contract also distinguishes existence from addressability. The authored receiver must be a bare non-reserved
 uniform-binding name, and at runtime it must already hold an harray or array. An absent, null, or scalar receiver
@@ -201,13 +203,11 @@ re-entrancy diagnostics retain authored half-open Unicode-scalar spans.
 
 `walk_leaves!`, `reduce_leaves!`, function-form bang calls, and arbitrary `!`-suffixed identifiers are not part of
 that direction. They would save no meaningful ceremony or would advertise mutation without a distinct coherent
-contract. Current nested writes still require every intermediate container to exist, and current parsers do not
-accept `map_leaves!`. The verified non-bang control produces the same value on Perl, Rust, Dart, Julia, and Lua;
-changing only the method token to `map_leaves!` remains rejected on all five because their fluent grammars still
-accept identifier characters only. The exact composed control returns `{"leaf":[]}` on all six runtime routes;
-its bang twin stops before callback nested-write lowering, producing null on Perl/Rust (with the Rust warning) and
-generic parser-invocation failure on Dart/Julia/PUC Lua/LuaJIT. ADR `0036`, the two mechanism contracts plus their
-shared composition contract under `capability_conformance/`, and backlog `.19.1-.19.7` own the future work.
+contract. Perl implements nested creation and `map_leaves!`; the verified non-bang control remains identical on
+Perl, Rust, Dart, Julia, and Lua. Rust still rejects the bang spelling at its stopped identifier with a soft null;
+Dart, Julia, PUC Lua, and LuaJIT retain their generic parser-invocation failure. ADR `0036`, the two mechanism
+contracts plus their shared composition contract under `capability_conformance/`, and backlog `.19.1-.19.9` own
+the remaining backend and admission work.
 
 ## 3. Actions are moving toward backend-neutral semantics
 

@@ -244,6 +244,10 @@ sub _control_ast_value_source_expr {
  my ($node) = @_;
  return undef unless ref($node) eq 'HASH';
  my $kind = $node->{kind} // '';
+ return $node->{source}
+  if $kind eq 'receiver_mutation_chain'
+  && defined($node->{source})
+  && length($node->{source});
 
  if ($kind eq 'number') {
   my $source = $node->{source};

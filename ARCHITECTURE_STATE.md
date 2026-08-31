@@ -1,16 +1,28 @@
 # ARCHITECTURE STATE
 
-## Perl `map_leaves!` implementation is decision-blocked on function scope
+## Perl implements controlled `map_leaves!` receiver mutation
 
-The task-tree-first `.19.2.2` audit finds no runtime blocker in traversal itself, but two frozen composition
-carriers contradict LinkedSpec's admitted function architecture. An unparameterized `fn` owns fresh local
-`tree`/`audit` bindings and cannot implicitly reach caller state; exact Perl execution confirms the caller remains
-unchanged. Treating those names as caller identities would expand the portable function model beyond this leaf.
+`FUTURE-PARITY-BACKLOG.19.2.2` advances only Perl to `linkedspec-map-leaves-mutation-v1`. The director chose the
+pure-function-preserving carrier correction: helper-mediated proof uses inline explicit-target `set`, and post-
+commit proof uses caller-scoped `.with`; no implicit caller capture or arbitrary bang-function syntax was added.
 
-Existing caller-scope mechanisms can express the intended proof without that expansion: `set(tree, ...)` supplies
-a helper-mediated callback write, and a trailing `.with()` block can attempt a receiver write after the bang
-result. The recommended contract repair is pending director choice. No parser, lowering, runtime, fixture,
-backend, capability, or public behavior changes in this audit.
+Only bare `IDENTIFIER.map_leaves!() { ACTION_BLOCK }` parses as a dedicated `receiver_mutation_chain`. Lowering
+provides copied `value`, `path`/`@path`, `depth`, and `key|index` callback bindings. The runtime traverses an
+isolated original-shape snapshot according to root kind, accepts callback results as leaf replacements, never
+revisits replacement containers, and publishes one detached rebuilt root only after complete success.
+
+The active receiver scalar slot—not its spelling—is guarded during callbacks. Direct assignment, nested write,
+nested bang, `set`, `set_key`, `push`, array-end methods, and binding-target array pipelines reject before their
+write seam; unrelated bindings and distinct same-spelling shadows remain legal. Guard release is exception-safe,
+and ordinary continuation begins after atomic commit. The permanent Perl contract passes 58 focused tests, 105
+write mutations, 167 base + 592 composition mutations, and Phase 0 1,032/1,032. Rust, Dart, Julia, and Lua remain
+at the prior boundary; capability/public admission is pending.
+
+The mandatory complete change record triggers content-addressed segment `4987`. ADR `0098` advances only finite
+change-history collection/manifest capacity from 25/24 to 26/25; every root, segment, aggregate, byte, ownership,
+lifecycle, verifier, route, and repository-local storage control remains unchanged. The collection is
+47,493/55,000 lines and 3,412,036/4,194,304 bytes. This infrastructure movement requires receipt-bound canonical
+verification for the leaf.
 
 ## Perl nested writes now implement the frozen typed vivification contract
 
@@ -31,9 +43,9 @@ binding/result/initial/RHS aggregates detach.
 The permanent Perl contract projects all frozen 5/7/11/16 cases plus dynamic-kind fidelity, evaluation,
 detachment, bound-null, same-binding, and fresh function-state boundaries. Focused ActionIR/trace/uniform proof
 passes 50 tests and the exact finalized Phase 0 passes all 1,032 in 963 seconds;
-both neutral mutation checkers remain unchanged. Rust, Dart, Julia, and Lua retain the prior non-vivifying path,
-and `map_leaves!` remains unsupported. No portable capability, generated format, facade/schema/MCP, CLI,
-tool/storage/doctrine, or public admission moves; Perl `.19.2.2` is next.
+both neutral mutation checkers pass. Rust, Dart, Julia, and Lua retain the prior non-vivifying path. No portable
+capability, generated format, facade/schema/MCP, CLI, tool/storage/doctrine, or public admission moves; Perl
+`map_leaves!` has since advanced as described above.
 
 ## Future write and receiver mutation compose through one shared neutral fixture
 
@@ -41,7 +53,8 @@ tool/storage/doctrine, or public admission moves; Perl `.19.2.2` is next.
 syntax or runtime behavior. The fixture digest-binds both unchanged mechanism contracts and is consumed by their
 two existing checkers, so it adds no executable entrypoint, temporary allocator, or tool-storage census movement.
 The write checker independently validates eight embedded writes. The mutation checker executes six callback
-compositions plus one post-commit continuation and rejects 593 scalar/container-shape mutations in addition to its
+compositions plus one post-commit continuation. The original freeze rejected 593 scalar/container-shape mutations;
+the pure-function-preserving carrier correction now rejects 592 current composition mutations in addition to its
 167 base mutations.
 
 Identity fixes the transaction boundary. A callback may vivify its detached `value` and return the updated root as
@@ -57,10 +70,10 @@ bang commit. All callback, write, snapshot, local, unrelated, committed, and ret
 At the neutral `.19.1.3` boundary, the exact non-bang control returned `{"leaf":[]}` on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. The composed bang
 source stops before callback nested-write lowering: Perl/Rust return null (Rust warns), while Dart/Julia/both Lua
 ABIs expose generic parser-invocation failure. No parser, compiler, runtime, fixture admission, capability,
-generated format, facade, schema, MCP, CLI, or current public behavior moved. Perl `.19.2.1` has since advanced
-only ordinary nested-write behavior as described above; bang parsing remains unchanged.
+generated format, facade, schema, MCP, CLI, or current public behavior moved. Perl `.19.2.1-.2` have since advanced
+both mechanisms as described above; the other backends remain unchanged.
 
-## Future `map_leaves!` receiver mutation has one executable neutral authority
+## `map_leaves!` receiver mutation has one executable neutral authority
 
 `FUTURE-PARITY-BACKLOG.19.1.2` freezes `linkedspec-map-leaves-mutation-v1` without enabling backend syntax. The
 only v1 bang token is `map_leaves!` on one bare resolved uniform-binding identity. A dedicated
@@ -76,10 +89,10 @@ once and returns a detached root; continuation begins after commit and cannot ro
 
 The independent checker passes 4 valid syntax / 14 invalid / 5 exclusion / 10 success / 8 pre-commit failure cases,
 five special state proofs, and 167 rejected mutations. Exact non-bang control output matches on all five backends.
-The one-token bang twin remains unsupported: Perl/Rust yield null (Rust warns), while Dart/Julia/Lua expose their
-generic parser-invocation failure. Source audit traces every result to identifier-only fluent grammar; no parser,
-compiler, runtime, fixture, capability, generated format, facade, schema, MCP, CLI, or current public behavior
-moves. Shared composition `.19.1.3` has since frozen the cross-mechanism boundary above.
+At the freeze boundary the one-token bang twin was unsupported everywhere. Perl has since implemented the exact
+authority; Rust still yields null with its warning, while Dart/Julia/Lua expose their generic parser-invocation
+failure. No portable capability, generated format, facade, schema, MCP, CLI, or public admission moves. Shared
+composition `.19.1.3` freezes the cross-mechanism boundary above.
 
 ## Lua next fixture ownership is explicit and behavior is unchanged
 

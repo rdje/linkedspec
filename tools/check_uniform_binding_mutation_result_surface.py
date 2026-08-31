@@ -42,13 +42,13 @@ REQUIRED_ANCHORS = {
         "Array end mutations yield updated arrays too",
         "named array end mutations. They mutate a bare array binding",
         "the implicit form has no portable expression result yet",
-        "yields an independent updated hash snapshot in value positions",
+        "yields an independent updated root snapshot in value positions",
         "Receiver-dot `name.set_key(key, value)` remains pure",
     ],
     "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md": [
         "return independent updated arrays",
         "Their append behavior is portable, but their expression results are not yet",
-        "form yields the updated hash snapshot in value positions",
+        "typed path selection and yields the updated root snapshot",
         "Receiver-dot `meta.set_key(key, value)` is a pure derived value unless assigned back",
     ],
     "docs/knowledge/perl-uniform-binding-runtime.md": [

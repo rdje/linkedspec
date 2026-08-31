@@ -102,6 +102,17 @@ sub _statement_is_bound_codeblock_value_drop {
  return (($deps->{bare_symbol_kind}->($name) // '') eq 'scalar') ? 1 : 0
 }
 
+sub _statement_is_receiver_mutation_value_drop {
+ my ($statement, $deps) = @_;
+ return 0 unless defined($statement) && length($statement);
+ my $node = eval {
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::AST::Parser');
+  LinkedSpec::ActionIR::AST::Parser::parse_action_expr($statement, { deps => $deps });
+ };
+ return 0 unless ref($node) eq 'HASH';
+ return (($node->{kind} // '') eq 'receiver_mutation_chain') ? 1 : 0
+}
+
 sub _registered_user_function_value_drop_event {
  my ($statement) = @_;
  return {
@@ -177,6 +188,17 @@ sub _build_canonical_action_ir_events {
      kind => ref($event) eq 'HASH' ? ($event->{kind} // '') : '',
      contract_id => ref($event) eq 'HASH' ? ($event->{contract_id} // '') : '',
     },
+   );
+  } elsif (_statement_is_receiver_mutation_value_drop($statement, $deps)) {
+   push @canonical_events, _registered_user_function_value_drop_event($statement);
+   $canonical_events[-1]{source} = 'receiver_mutation_value_drop';
+   LinkedSpec::ActionIR::Trace::decision(
+    owner => 'canonical_events',
+    phase => 'build_canonical_action_ir_events',
+    label => $label,
+    decision => 'receiver_mutation_value_drop',
+    taken => 1,
+    context => { raw => $statement },
    );
   } elsif (_statement_is_registered_user_function_value_drop($statement, $deps)) {
    push @canonical_events, _registered_user_function_value_drop_event($statement);
