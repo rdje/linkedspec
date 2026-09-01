@@ -44,10 +44,11 @@ preserving runtime bytes and closes parent `.23`. Mutation contracts `.19.1.1-.3
 `assign_nested_access` node retains evaluated typed segments, dense isolated creation, exact evaluation order and
 typed spans; one dedicated `receiver_mutation_chain` owns only bare `map_leaves!`, original-shape traversal,
 receiver guard, atomic publication, and detached continuation. Perl `.19.2.1-.2` implements both unchanged
-contracts and passes focused plus Phase 0 1,032/1,032 proof. The current authorities reject 105 write, 167 base
-map, and 592 corrected composition mutations. Rust/Dart/Julia/Lua and portable/public admission remain unchanged;
-the required complete-record rollover creates change segment `4987`, with exact finite 26/25 capacity authorized
-by ADR `0098` and canonical proof required. Rust nested-write `.19.3.1` is next.
+contracts and passes focused plus Phase 0 1,032/1,032 proof. Rust `.19.3.1` now implements the nested-write half
+through typed parsed/serialized/generated/emitted carriers and exact runtime diagnostics; its 5-case permanent
+contract, 197-test integration target, and 105-fixture corpus pass. The current authorities reject 105 write, 167
+base map, and 592 corrected composition mutations. Rust `map_leaves!`, Dart/Julia/Lua, and portable/public
+admission remain pending; Rust `.19.3.2` follows.
 Capacity `.0` freezes, canonical `.1` implements,
 and focused `.2` independently recomposes one bounded `.14.6.5-.14.8` task member with every pressure ceiling and
 stable ID preserved. The storage prerequisite is composition-closed. Julia `.14.6.5` is split into historical

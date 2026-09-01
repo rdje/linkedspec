@@ -10,6 +10,27 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-01 — FUTURE-PARITY-BACKLOG.19.3.1 — implement Rust write vivification
+
+- Replaced Rust's static quoted-key/computed-index lowering with one `WritePathSegment` carrying typed expression,
+  source, and Unicode-scalar span. One `AssignNestedAccess` now owns one- and many-segment assignments; exact
+  syntax diagnostics and scalar-assignment-RHS parsing retain the frozen boundaries.
+- Added compiler/callable validation and fail-closed checks at direct engine, serde/generated-plan, source-emitter,
+  and decoded emitted-plan seams. Native, serialized, generated, emitted, and independently compiled emitted Rust
+  preserve the same typed node rather than reconstructing a lossy key/index path.
+- Implemented segment-then-RHS evaluation, post-evaluation binding snapshot, evaluated string/integer harray/array
+  selection, absent root/intermediate creation, dense arrays, bound-null/wrong-kind/gap rejection, exact typed
+  errors, isolated atomic publication, completed-expression-effect preservation, and detached values.
+- Added permanent fixture-driven Rust proof for all frozen AST/syntax/success/failure cases, user-function presence,
+  evaluation/detachment/read exclusions, corrupt carriers, and every supported execution route. Focused proof
+  passes 5/5 contract tests, 197/197 integration tests, all 105 oracle fixtures, and both neutral mutation checkers.
+- Corrected the owned oracle case from obsolete soft-null behavior to vivifying success. Full regeneration exposed
+  an unrelated pre-existing expectation drift and inert root regexes; the unrelated file is restored and exact
+  repair/systematic cleanup is task-tree-owned by `.19.3.3`. New fixtures use a zero-regex parent whose edge
+  selects the child regex, matching runtime semantics.
+- Synchronized ADR `0036`, Knowledge, task/index, roadmaps, architecture, capability/Toolbox guidance, bounded live
+  docs, and the sole-facing mdBook. Rust `map_leaves!`, Dart/Julia/Lua, and portable/public admission remain pending.
+
 ## 2026-08-31 — FUTURE-PARITY-BACKLOG.19.2.2 — implement Perl map leaves mutation
 
 - Implemented only bare `IDENTIFIER.map_leaves!() { ACTION_BLOCK }` on Perl as a dedicated

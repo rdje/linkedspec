@@ -9,8 +9,16 @@
          }
       ]
    },
-   null,
-   null,
+   {
+      "items" : [
+         {
+            "name" : "new"
+         },
+         {
+            "name" : "tail"
+         }
+      ]
+   },
    [
       {
          "name" : "new"
@@ -19,5 +27,12 @@
          "name" : "tail"
       }
    ],
-   null
+   [
+      {
+         "name" : "new"
+      },
+      {
+         "name" : "tail"
+      }
+   ]
 ]

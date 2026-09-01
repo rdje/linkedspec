@@ -721,7 +721,7 @@
   Commit: `FUTURE-PARITY-BACKLOG.18.3 - plan optional native parser acceleration`
 
 - ID: `FUTURE-PARITY-BACKLOG.19`
-  Status: `in progress; Perl .19.2.1 active`
+  Status: `in progress; Rust .19.3.1 active`
   Goal: Add portable explicit nested-write vivification and receiver-mutating method semantics without hidden
     reads, host-language aliasing, or backend drift.
   Children: `.19.0`, `.19.1`, `.19.2`, `.19.3`, `.19.4`, `.19.5`, `.19.6`, `.19.7`
@@ -1104,24 +1104,98 @@
   Commit: `FUTURE-PARITY-BACKLOG.19.2.2 - implement Perl map leaves mutation`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.3`
-  Status: `pending`
+  Status: `in progress; .19.3.1 done, .19.3.2 next`
   Goal: Implement the unchanged v1 contract on Rust, including interpreted and supported generated routes.
-  Children: `.19.3.1`, `.19.3.2`
+  Children: `.19.3.1`, `.19.3.2`, `.19.3.3`
   Dependencies: `.19.2`
   Verification: `pending`
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.3.1`
-  Status: `pending`
+  Status: `done; canonical-signoff-complete` (2026-09-01; task-tree-first from exact clean Perl `map_leaves!` commit
+    `67e9a90f2307fd48dde77f52894c9999b11b1fb4`; no push)
   Goal: Implement Rust nested write-vivification through typed parsed/serialized/emitted state and runtime.
   Dependencies: `.19.2`
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `canonical` — this leaf implements the unchanged frozen nested-write v1 contract on Rust and
+    necessarily moves typed serialized/emitted/generated carriers. ADR `0073` classifies generated-format movement
+    as a canonical boundary even though no other backend or portable/public capability is admitted here.
+  Focused checks: exact Rust parsed ActionIR/source spans and syntax diagnostics; typed serialized `SpecFile`,
+    generated-plan, emitted-source, and generated Rust reconstruction; evaluated segment order and kinds; absent
+    root/intermediate creation; bound-null/wrong-kind/gap failures; post-evaluation same-binding snapshots;
+    expression-failure propagation; detached commit/results; read/non-write no-drift; Rust package and direct
+    generated-corpus dependents; both neutral/composition checkers; Knowledge/task/index, bounded histories,
+    memory, all nine doctrines, rendered mdBook, whitespace, and the staged receipt-bound canonical local gate.
+  Canonical trigger: `generated-format movement` — stage the exact candidate and run canonical CI before commit.
+    Final five-backend admission and recurring/public proof remain owned by `.19.7-.9`.
+  Ownership: `.19.3.1` owns only Rust parsing/compiler/runtime behavior for
+    `linkedspec-write-vivification-v1` plus its typed serialized/emitted/generated carriers and exact Rust-focused
+    tests/docs. Rust `map_leaves!` remains exclusively `.19.3.2`; Dart/Julia/Lua remain `.19.4-.6`; no portable or
+    public-current admission occurs here.
+  Checklist: [x] clean activation/task ownership [x] Knowledge/decision/toolbox retrieval
+    [x] exact current Rust AST/compiler/runtime/carrier seam audit [x] parser and typed AST implementation
+    [x] isolated vivifying runtime and typed diagnostics [x] serialized/emitted/generated route proof
+    [x] focused/exclusion/detachment regression proof [x] durable docs/Knowledge/live sync [x] canonical signoff
+    [x] atomic commit/brief/clean handoff.
+  Activation evidence: exact `git status --short --untracked-files=all` is empty at
+    `67e9a90f2307fd48dde77f52894c9999b11b1fb4`; `.19.2.1-.2` and parent `.19.2` are committed complete; the
+    committed canonical receipt matches that HEAD; `git_message_brief.txt` is zero bytes; generated mdBook and
+    runtime-probe output are absent; no background job remains; and no push occurred.
+  Verification finding: the required complete 105-case Perl oracle regeneration reproducibly changes the unrelated
+    `capability_position_helper_surface` expectation from its committed rich record to `[null]`. Git history shows
+    the source fixture's `copy(Top)` selector migration landed on 2026-07-13 while the expected output last moved
+    on 2026-07-11. This leaf restores the unrelated derived file unchanged, records the drift for `.19.3.3`, and
+    changes only its owned nested-write corpus case. The same audit confirmed that many older generator fixtures
+    carry inert regexes on directly entered `Top`; all new `.19.3.1` executable fixtures instead use a zero-regex
+    root whose loop matches `Done`. Systematic oracle cleanup remains exclusively `.19.3.3`.
+  Implementation evidence: Rust now represents every authored bracket segment as `WritePathSegment` with typed
+    expression, source, and Unicode-scalar span, and unifies one/many segments under `AssignNestedAccess`. Parser
+    pre-scan preserves scalar-assignment RHS writes and exact comma/outer-assignment boundaries. Compiler,
+    callable-contract, source-emitter, decoded generated-plan, and direct engine entry all validate the node and
+    fail closed on malformed programmatic/serialized state.
+  Runtime evidence: segment expressions evaluate left-to-right and RHS once before the binding snapshot. Strings
+    select harrays and nonnegative integral numbers select dense arrays; absent roots/intermediates create only
+    from those selector kinds, while bound null, wrong kinds, invalid selectors, and gaps produce exact typed
+    errors without partial structural publication. Completed expression effects remain ordinary state; committed,
+    returned, initial, and RHS aggregates detach. Fresh user-function locals begin absent and parameters present.
+  Carrier evidence: permanent `write_vivification_contract.rs` projects all frozen 5 AST / 7 syntax / 11 success /
+    16 structural-failure cases plus expression ordering/failure, presence, detachment, corrupt-node rejection,
+    native, serde, generated-plan, emitted-source, and independently compiled emitted Rust. New executable sources
+    use `Top:: -> Done` plus child-owned regex, matching parent-loop/target-regex semantics.
+  Focused verification: `cargo fmt --check` and whitespace pass; parser boundary tests pass 3/3; runtime nested-
+    write units pass 4/4; the permanent contract passes 5/5; the complete runtime integration target passes
+    197/197; the manifest oracle passes all 105 fixtures; both neutral checkers pass 105 write and 167 base + 592
+    composition mutations. A full Perl generator pass emits all 105 cases with a project-local 60-second timeout;
+    only the pre-existing `.19.3.3` drift described above is restored outside this leaf.
+  Canonical signoff: the exact staged candidate passes all nine doctrines, Knowledge Map 924/7,852, task/index,
+    bounded-history, rendered mdBook, complete Rust local/package/generated/relocation proof, five-backend and
+    product no-drift, both 66-case primary matrices, resource/storage containment, and Phase 0 through the exact
+    `local CI gate passed` receipt marker. No unrelated oracle expectation is accepted and no portable/public
+    capability, Rust bang method, other backend, facade/schema/MCP, or CLI behavior moves.
+  Verification: **PASS 2026-09-01.** Rust nested-write vivification is signoff-complete through every supported
+    typed carrier; `.19.3.2` is the next clean-boundary leaf.
+  Commit: `FUTURE-PARITY-BACKLOG.19.3.1 - implement Rust write vivification`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.3.2`
   Status: `pending`
   Goal: Implement Rust `map_leaves!` through typed parsed/serialized/emitted state and runtime.
   Dependencies: `.19.3.1`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.3.3`
+  Status: `pending; pre-existing oracle reproducibility defect tracked from .19.3.1`
+  Goal: Restore exact Perl-oracle regeneration and make controlled corpus roots teach parent-loop/child-regex
+    semantics without changing accepted backend behavior.
+  Dependencies: `.19.3.2`
+  Acceptance: Reproduce and root-cause the `capability_position_helper_surface` source/expected split through
+    current Perl and Rust execution, then fix the correct owner rather than blessing drift. Inventory controlled
+    generator/corpus fixtures whose directly entered root carries an inert regex; rewrite those roots to the
+    established zero-regex form while retaining the reachable child's regex and byte-equivalent outputs. Two
+    complete project-data-routed generator passes must emit all 105 fixtures and leave the committed corpus clean;
+    all available backend corpus consumers, capability-position proofs, task/Knowledge/book surfaces, and the
+    designated canonical gate must agree.
+  Future gate requirement: canonical — this leaf repairs the cross-backend oracle authority and may move the
+    complete generated corpus, so exact staged receipt-bound CI is mandatory when the leaf is activated.
   Verification: `pending`
   Commit: `pending`
 

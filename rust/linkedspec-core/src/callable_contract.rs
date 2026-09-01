@@ -288,7 +288,7 @@ fn normalize_expr(
         Expr::AssignNestedAccess {
             segments, value, ..
         } => {
-            normalize_segments(segments, user_contracts)?;
+            normalize_write_segments(segments, user_contracts)?;
             normalize_expr(value, user_contracts)
         }
         Expr::IndexedVar { index, .. } => normalize_expr(index, user_contracts),
@@ -363,6 +363,16 @@ fn normalize_segments(
         if let crate::expr::AccessSegment::Index { expr } = segment {
             normalize_expr(expr, user_contracts)?;
         }
+    }
+    Ok(())
+}
+
+fn normalize_write_segments(
+    segments: &mut [crate::expr::WritePathSegment],
+    user_contracts: &BTreeMap<String, FinalCodeblockContract>,
+) -> Result<(), String> {
+    for segment in segments {
+        normalize_expr(&mut segment.expression, user_contracts)?;
     }
     Ok(())
 }

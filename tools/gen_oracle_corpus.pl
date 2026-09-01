@@ -357,16 +357,15 @@ SPEC
 
     # ── SPEC-FORMAT-TERSE.11.4 — nested mixed value-path assignment ──
     #
-    # Nested writes mutate scalar-held array/hash value trees only when each
-    # intermediate container already exists with the needed shape. Final hash
-    # keys may be created; final array indexes may replace an existing element
-    # or append exactly at len; gaps and wrong/missing intermediate paths return
-    # undef and leave the root unchanged.
+    # Successful nested writes replace existing leaves or append exactly at the
+    # dense-array boundary, and assignment expressions return the updated root.
+    # Typed gap and wrong/missing-container failures live in the dedicated
+    # write-vivification contract rather than this success-only output corpus.
     {   case   => 'terse_11_4_nested_mixed_value_path_assignment',
         input  => 'xhello',
         source => <<'SPEC',
 Top::
- /x/ -> Done { set(value, "new"); payload = { "items" : [{ "name" : "old" }] }; payload["items"][0]["name"] = value; payload["items"][1] = { "name" : "tail" }; missing_result = payload["missing"][0] = "bad"; wrong_result = payload["items"][0][0] = "bad"; root_array = [{ "name" : "old" }]; root_array[0]["name"] = value; root_array[1] = { "name" : "tail" }; return(array(payload, missing_result, wrong_result, root_array, (payload["items"][3] = "gap"))) }
+ -> Done { set(value, "new"); payload = { "items" : [{ "name" : "old" }] }; payload["items"][0]["name"] = value; payload_result = payload["items"][1] = { "name" : "tail" }; root_array = [{ "name" : "old" }]; root_array[0]["name"] = value; root_result = root_array[1] = { "name" : "tail" }; return(array(payload, payload_result, root_array, root_result)) }
 
 Done::
  /[a-z]+/

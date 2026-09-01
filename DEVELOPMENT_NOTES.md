@@ -9,6 +9,29 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-09-01 (`FUTURE-PARITY-BACKLOG.19.3.1` — Rust write vivification): the old Rust AST encoded quoted
+  segments as keys and every computed segment as an index, so it could not honor the frozen evaluated-kind rule.
+  `WritePathSegment` now retains source/span/expression and one `AssignNestedAccess` owns every path length.
+- Assignment pre-scan must stop both at a top-level comma and when an outer scalar assignment occurs before the
+  first bracket. Without the latter, `result = document[...]=value` is misclassified as a malformed root instead
+  of an ordinary scalar assignment whose RHS is a nested write.
+- Runtime evaluation stores all segment values left-to-right and then the RHS before inspecting binding state.
+  Structural work clones that post-evaluation snapshot, which composes same-binding expression effects correctly
+  and isolates only the path publication—not already completed ordinary expression side effects.
+- Rust `RuntimeValue` already distinguishes absent binding lookup from an explicitly stored `Undef`; retaining
+  `has_bare_binding` through rule and function frames gives the same absent-versus-bound-null contract as Perl
+  without a separate presence map. Fresh function locals are absent per invocation and parameters are present.
+- Typed structural errors are serialized JSON through the existing string error API. The stable code/field shape
+  is therefore portable without changing the public Rust error type in this backend-only leaf.
+- Validation belongs at every carrier boundary, not only source parsing: compiler and callable visitors,
+  source emission, decoded generated plans, and direct Engine entry reject corrupt node kind/source/span state.
+- Fixture review reconfirmed dispatch semantics: entering a parent runs its loop, but `-> Done` selects `Done`'s
+  regex. A regex on the parent is irrelevant to that edge unless the edge targets the parent itself. New tests use
+  a zero-regex `Top`; systematic legacy fixture correction is reserved under `.19.3.3`.
+- A complete 105-case Perl oracle regeneration reproducibly changes the unrelated
+  `capability_position_helper_surface` expected value to null. Source-selector migration postdates that expected
+  file, while current Rust/committed corpus still passes. The unrelated output is restored rather than blessed;
+  `.19.3.3` owns root cause, two-pass reproducibility, and cross-backend cleanup.
 - 2026-08-31 (`FUTURE-PARITY-BACKLOG.19.2.2` — canonical checker repair): canonical attempt one passes every
   stage through punctuation-light zero-argument behavior, then exposes two stale literal anchors in
   `check_uniform_binding_mutation_result_surface.py`. The prior `.19.2.1` typed-path work correctly changed public

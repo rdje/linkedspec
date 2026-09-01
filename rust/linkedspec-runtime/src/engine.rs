@@ -45,18 +45,22 @@ use crate::{
     RuntimeSemanticObservationSink,
 };
 use linkedspec_core::ast::RuleMode;
-use linkedspec_core::compiler::validate_compiled_regex_slot_identities;
+use linkedspec_core::compiler::{
+    validate_compiled_regex_slot_identities, validate_nested_write_nodes,
+};
 use linkedspec_core::entry_rule::{
     ENTRY_RULE_NOT_FOUND_CODE, EntryRuleSelectionBasis, NO_RULES_DEFINED_CODE,
     SELECT_ENTRY_RULE_STAGE, VALIDATE_SPEC_STAGE,
 };
-use linkedspec_core::expr::{AccessSegment, Arg, CodeBlock, Expr};
+use linkedspec_core::expr::{
+    AccessSegment, Arg, CodeBlock, Expr, ExpressionSpan, WritePathSegment,
+};
 use linkedspec_core::trace::{TraceConfig, TraceEmitter, TraceLevel};
 use linkedspec_core::types::{
     BcodeEntry, CodeblockValue, CompiledRule, CompiledSpec, CompiledUserFunction, ParseMode,
     RuntimeValue,
 };
-use serde_json::Value;
+use serde_json::{Value, json};
 use std::fmt;
 
 const LINKEDSPEC_WHILE_ITERATION_LIMIT: usize = 10_000;
@@ -347,11 +351,130 @@ impl ExecutionOptions {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 enum EvaluatedAccessSegment {
     Key(String),
     Index(usize),
 }
+
+impl EvaluatedAccessSegment {
+    fn to_json(&self) -> Value {
+        match self {
+            Self::Key(key) => Value::String(key.clone()),
+            Self::Index(index) => json!(index),
+        }
+    }
+
+    fn expected_container_kind(&self) -> &'static str {
+        match self {
+            Self::Key(_) => "harray",
+            Self::Index(_) => "array",
+        }
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+enum NestedWriteFailure {
+    InvalidSegment {
+        actual_kind: &'static str,
+        reason: &'static str,
+    },
+    KindConflict {
+        expected_kind: &'static str,
+        actual_kind: &'static str,
+    },
+    ArrayGap {
+        index: usize,
+        length: usize,
+    },
+}
+
+/// Typed internal diagnostic for the neutral nested-write boundary.
+///
+/// The public engine still returns its established `String` error channel, so
+/// `Display` emits one deterministic structured JSON object at that boundary.
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct NestedWriteError {
+    binding: String,
+    segment_index: usize,
+    path: Vec<EvaluatedAccessSegment>,
+    source_span: ExpressionSpan,
+    failure: NestedWriteFailure,
+}
+
+impl NestedWriteError {
+    fn payload(&self) -> Value {
+        let path = self
+            .path
+            .iter()
+            .map(EvaluatedAccessSegment::to_json)
+            .collect::<Vec<_>>();
+        let source_span = json!({
+            "start": self.source_span.start,
+            "end": self.source_span.end,
+            "unit": "unicode_scalar",
+            "provenance": "authored",
+        });
+        match &self.failure {
+            NestedWriteFailure::InvalidSegment {
+                actual_kind,
+                reason,
+            } => json!({
+                "code": "nested_write_segment_invalid",
+                "operation": "nested_write_vivification",
+                "binding": self.binding,
+                "segment_index": self.segment_index,
+                "path": path,
+                "actual_kind": actual_kind,
+                "reason": reason,
+                "source_span": source_span,
+                "message": format!(
+                    "nested write segment {} for binding '{}' must evaluate to a string or nonnegative integer; got {} ({})",
+                    self.segment_index, self.binding, actual_kind, reason,
+                ),
+            }),
+            NestedWriteFailure::KindConflict {
+                expected_kind,
+                actual_kind,
+            } => json!({
+                "code": "nested_write_kind_conflict",
+                "operation": "nested_write_vivification",
+                "binding": self.binding,
+                "segment_index": self.segment_index,
+                "path": path,
+                "expected_kind": expected_kind,
+                "actual_kind": actual_kind,
+                "source_span": source_span,
+                "message": format!(
+                    "nested write segment {} for binding '{}' requires {}; found {}",
+                    self.segment_index, self.binding, expected_kind, actual_kind,
+                ),
+            }),
+            NestedWriteFailure::ArrayGap { index, length } => json!({
+                "code": "nested_write_array_gap",
+                "operation": "nested_write_vivification",
+                "binding": self.binding,
+                "segment_index": self.segment_index,
+                "path": path,
+                "index": index,
+                "length": length,
+                "source_span": source_span,
+                "message": format!(
+                    "nested write segment {} for binding '{}' cannot create array index {} at length {}",
+                    self.segment_index, self.binding, index, length,
+                ),
+            }),
+        }
+    }
+}
+
+impl std::fmt::Display for NestedWriteError {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(formatter, "{}", self.payload())
+    }
+}
+
+impl std::error::Error for NestedWriteError {}
 
 /// The runtime engine executes CompiledRule nodes against input text.
 pub struct Engine {
@@ -2430,7 +2553,12 @@ impl Engine {
         })
     }
 
+    fn validate_nested_write_state(&self) -> Result<(), String> {
+        validate_nested_write_nodes(&self.spec).map_err(|error| error.to_string())
+    }
+
     fn execute_with_context(&self, ctx: &mut RuntimeContext) -> Result<Value, String> {
+        self.validate_nested_write_state()?;
         self.validate_compiled_slot_identities(ctx)?;
         let (label, basis) = self.resolve_entry_rule_label(ctx, None)?;
         ctx.trace_decision(
@@ -2458,6 +2586,7 @@ impl Engine {
             .map_err(|error| error.to_string())?;
         ctx.install_semantic_observation_sink(options.semantic_observation_sink());
         ctx.install_bounded_child_parse_authority(options.bounded_child_parse_authority())?;
+        self.validate_nested_write_state()?;
         self.validate_compiled_slot_identities(ctx)?;
         let (label, basis) = self.resolve_entry_rule_label(ctx, options.entry_rule())?;
         ctx.trace_decision(
@@ -3572,10 +3701,10 @@ impl Engine {
             Expr::AssignNestedAccess {
                 segments, value, ..
             } => {
-                segments.iter().any(|segment| match segment {
-                    AccessSegment::Key { .. } => false,
-                    AccessSegment::Index { expr } => Self::expr_calls_rule(expr, rule_label),
-                }) || Self::expr_calls_rule(value, rule_label)
+                segments
+                    .iter()
+                    .any(|segment| Self::expr_calls_rule(&segment.expression, rule_label))
+                    || Self::expr_calls_rule(value, rule_label)
             }
             Expr::IndexedVar { index, .. } => Self::expr_calls_rule(index, rule_label),
             Expr::NestedAccess { segments, .. } => segments.iter().any(|segment| match segment {
@@ -3648,12 +3777,12 @@ impl Engine {
                 base,
                 segments,
                 value,
+                ..
             } => {
                 base == "retv"
-                    || segments.iter().any(|segment| match segment {
-                        AccessSegment::Key { .. } => false,
-                        AccessSegment::Index { expr } => Self::expr_reads_retv(expr),
-                    })
+                    || segments
+                        .iter()
+                        .any(|segment| Self::expr_reads_retv(&segment.expression))
                     || Self::expr_reads_retv(value)
             }
             Expr::Variable { name } => name == "retv",
@@ -4425,6 +4554,7 @@ impl Engine {
             base,
             segments,
             value,
+            ..
         } = expr
         else {
             return Ok(false);
@@ -4488,18 +4618,41 @@ impl Engine {
     fn eval_nested_access_assignment_expression(
         &self,
         base: &str,
-        segments: &[AccessSegment],
+        segments: &[WritePathSegment],
         value: &linkedspec_core::expr::Expr,
         ctx: &mut RuntimeContext,
         rule_label: &str,
     ) -> Result<RuntimeValue, String> {
-        let evaluated_segments = self.eval_access_segments(segments, ctx, rule_label)?;
-        let evaluated_value = self.eval_expr(value, ctx, rule_label)?;
-        let original_kind = ctx.bare_kind(base);
-        let mut root = ctx.get_bare_value(base);
-        if !Self::assign_nested_runtime_value(&mut root, &evaluated_segments, evaluated_value) {
-            return Ok(RuntimeValue::Undef);
+        if segments.is_empty() {
+            return Err(
+                "nested_write_serialized_state_invalid reason=segments_empty operation=nested_write_vivification"
+                    .to_string(),
+            );
         }
+        let evaluated_values = self.eval_write_path_segments(segments, ctx, rule_label)?;
+        let evaluated_value = self.eval_expr(value, ctx, rule_label)?;
+        let evaluated_segments =
+            Self::classify_write_path_segments(base, segments, &evaluated_values)
+                .map_err(|error| error.to_string())?;
+
+        let root_was_present = ctx.has_bare_binding(base);
+        let original_kind = ctx.bare_kind(base);
+        let mut root = if root_was_present {
+            ctx.get_bare_value(base)
+        } else {
+            Self::empty_container_for(&evaluated_segments[0])
+        };
+        let mut path = Vec::new();
+        Self::assign_nested_runtime_value(
+            base,
+            &mut root,
+            &evaluated_segments,
+            segments,
+            0,
+            &mut path,
+            evaluated_value,
+        )
+        .map_err(|error| error.to_string())?;
 
         match (original_kind, &root) {
             (Some(RuntimeVarKind::Array), RuntimeValue::Array(values)) => {
@@ -4513,44 +4666,125 @@ impl Engine {
         Ok(root)
     }
 
-    fn eval_access_segments(
+    fn eval_write_path_segments(
         &self,
-        segments: &[AccessSegment],
+        segments: &[WritePathSegment],
         ctx: &mut RuntimeContext,
         rule_label: &str,
-    ) -> Result<Vec<EvaluatedAccessSegment>, String> {
+    ) -> Result<Vec<RuntimeValue>, String> {
         let mut evaluated = Vec::with_capacity(segments.len());
         for segment in segments {
-            match segment {
-                AccessSegment::Key { value } => {
-                    evaluated.push(EvaluatedAccessSegment::Key(value.clone()));
-                }
-                AccessSegment::Index { expr } => {
-                    let idx_val = self.eval_expr(expr, ctx, rule_label)?;
-                    let idx_number = idx_val.as_number().unwrap_or(0.0);
-                    let idx = if idx_number.is_finite() && idx_number >= 0.0 {
-                        idx_number as usize
-                    } else {
-                        usize::MAX
-                    };
-                    evaluated.push(EvaluatedAccessSegment::Index(idx));
-                }
-            }
+            evaluated.push(self.eval_expr(&segment.expression, ctx, rule_label)?);
         }
         Ok(evaluated)
     }
 
+    fn classify_write_path_segments(
+        base: &str,
+        authored: &[WritePathSegment],
+        values: &[RuntimeValue],
+    ) -> Result<Vec<EvaluatedAccessSegment>, NestedWriteError> {
+        debug_assert_eq!(authored.len(), values.len());
+        let mut evaluated = Vec::with_capacity(values.len());
+        for (segment_index, (segment, value)) in authored.iter().zip(values).enumerate() {
+            let classified = match value {
+                RuntimeValue::Scalar(key) => EvaluatedAccessSegment::Key(key.clone()),
+                RuntimeValue::Number(number)
+                    if number.is_finite()
+                        && *number >= 0.0
+                        && number.fract() == 0.0
+                        && *number <= usize::MAX as f64 =>
+                {
+                    EvaluatedAccessSegment::Index(*number as usize)
+                }
+                RuntimeValue::Number(number) => {
+                    let (actual_kind, reason) =
+                        if number.is_finite() && number.fract() == 0.0 && *number < 0.0 {
+                            ("integer", "negative_integer")
+                        } else if number.is_finite() && number.fract() != 0.0 {
+                            ("number", "fractional_number")
+                        } else {
+                            ("number", "kind_not_path_selector")
+                        };
+                    return Err(NestedWriteError {
+                        binding: base.to_string(),
+                        segment_index,
+                        path: evaluated,
+                        source_span: segment.source_span,
+                        failure: NestedWriteFailure::InvalidSegment {
+                            actual_kind,
+                            reason,
+                        },
+                    });
+                }
+                other => {
+                    return Err(NestedWriteError {
+                        binding: base.to_string(),
+                        segment_index,
+                        path: evaluated,
+                        source_span: segment.source_span,
+                        failure: NestedWriteFailure::InvalidSegment {
+                            actual_kind: Self::nested_write_value_kind(other),
+                            reason: "kind_not_path_selector",
+                        },
+                    });
+                }
+            };
+            evaluated.push(classified);
+        }
+        Ok(evaluated)
+    }
+
+    fn nested_write_value_kind(value: &RuntimeValue) -> &'static str {
+        match value {
+            RuntimeValue::Undef => "null",
+            RuntimeValue::Scalar(_) => "string",
+            RuntimeValue::Number(number) if number.is_finite() && number.fract() == 0.0 => {
+                "integer"
+            }
+            RuntimeValue::Number(_) => "number",
+            RuntimeValue::Bool(_) => "boolean",
+            RuntimeValue::Array(_) => "array",
+            RuntimeValue::Hash(_) => "harray",
+            RuntimeValue::Codeblock(_) => "codeblock",
+        }
+    }
+
+    fn empty_container_for(segment: &EvaluatedAccessSegment) -> RuntimeValue {
+        match segment {
+            EvaluatedAccessSegment::Key(_) => RuntimeValue::Hash(Vec::new()),
+            EvaluatedAccessSegment::Index(_) => RuntimeValue::Array(Vec::new()),
+        }
+    }
+
     fn assign_nested_runtime_value(
+        base: &str,
         current: &mut RuntimeValue,
         segments: &[EvaluatedAccessSegment],
+        authored: &[WritePathSegment],
+        segment_index: usize,
+        path: &mut Vec<EvaluatedAccessSegment>,
         value: RuntimeValue,
-    ) -> bool {
-        let Some((segment, rest)) = segments.split_first() else {
-            return false;
-        };
-        if rest.is_empty() {
-            return match (current, segment) {
-                (RuntimeValue::Hash(entries), EvaluatedAccessSegment::Key(key)) => {
+    ) -> Result<(), NestedWriteError> {
+        let segment = &segments[segment_index];
+        let source_span = authored[segment_index].source_span;
+        let last = segment_index + 1 == segments.len();
+
+        match segment {
+            EvaluatedAccessSegment::Key(key) => {
+                let RuntimeValue::Hash(entries) = current else {
+                    return Err(NestedWriteError {
+                        binding: base.to_string(),
+                        segment_index,
+                        path: path.clone(),
+                        source_span,
+                        failure: NestedWriteFailure::KindConflict {
+                            expected_kind: segment.expected_container_kind(),
+                            actual_kind: Self::nested_write_value_kind(current),
+                        },
+                    });
+                };
+                if last {
                     if let Some((_, existing)) =
                         entries.iter_mut().find(|(candidate, _)| candidate == key)
                     {
@@ -4558,38 +4792,80 @@ impl Engine {
                     } else {
                         entries.push((key.clone(), value));
                     }
-                    true
+                    return Ok(());
                 }
-                (RuntimeValue::Array(items), EvaluatedAccessSegment::Index(idx)) => {
-                    if *idx < items.len() {
-                        items[*idx] = value;
-                        true
-                    } else if *idx == items.len() {
-                        items.push(value);
-                        true
-                    } else {
-                        false
-                    }
-                }
-                _ => false,
-            };
-        }
 
-        match (current, segment) {
-            (RuntimeValue::Hash(entries), EvaluatedAccessSegment::Key(key)) => {
-                let Some((_, child)) = entries.iter_mut().find(|(candidate, _)| candidate == key)
-                else {
-                    return false;
-                };
-                Self::assign_nested_runtime_value(child, rest, value)
+                let child_index = entries.iter().position(|(candidate, _)| candidate == key);
+                if child_index.is_none() {
+                    entries.push((
+                        key.clone(),
+                        Self::empty_container_for(&segments[segment_index + 1]),
+                    ));
+                }
+                let child_index = child_index.unwrap_or(entries.len() - 1);
+                path.push(segment.clone());
+                let result = Self::assign_nested_runtime_value(
+                    base,
+                    &mut entries[child_index].1,
+                    segments,
+                    authored,
+                    segment_index + 1,
+                    path,
+                    value,
+                );
+                path.pop();
+                result
             }
-            (RuntimeValue::Array(items), EvaluatedAccessSegment::Index(idx)) => {
-                let Some(child) = items.get_mut(*idx) else {
-                    return false;
+            EvaluatedAccessSegment::Index(index) => {
+                let RuntimeValue::Array(items) = current else {
+                    return Err(NestedWriteError {
+                        binding: base.to_string(),
+                        segment_index,
+                        path: path.clone(),
+                        source_span,
+                        failure: NestedWriteFailure::KindConflict {
+                            expected_kind: segment.expected_container_kind(),
+                            actual_kind: Self::nested_write_value_kind(current),
+                        },
+                    });
                 };
-                Self::assign_nested_runtime_value(child, rest, value)
+                if *index > items.len() {
+                    return Err(NestedWriteError {
+                        binding: base.to_string(),
+                        segment_index,
+                        path: path.clone(),
+                        source_span,
+                        failure: NestedWriteFailure::ArrayGap {
+                            index: *index,
+                            length: items.len(),
+                        },
+                    });
+                }
+                if last {
+                    if *index == items.len() {
+                        items.push(value);
+                    } else {
+                        items[*index] = value;
+                    }
+                    return Ok(());
+                }
+
+                if *index == items.len() {
+                    items.push(Self::empty_container_for(&segments[segment_index + 1]));
+                }
+                path.push(segment.clone());
+                let result = Self::assign_nested_runtime_value(
+                    base,
+                    &mut items[*index],
+                    segments,
+                    authored,
+                    segment_index + 1,
+                    path,
+                    value,
+                );
+                path.pop();
+                result
             }
-            _ => false,
         }
     }
 
@@ -5087,6 +5363,7 @@ impl Engine {
                 base,
                 segments,
                 value,
+                ..
             } => self
                 .eval_nested_access_assignment_expression(base, segments, value, ctx, rule_label),
             Expr::Variable { name } => Ok(ctx.get_bare_value(name)),
@@ -6900,6 +7177,7 @@ impl Engine {
                 base,
                 segments,
                 value,
+                ..
             } => self
                 .eval_nested_access_assignment_expression(base, segments, value, ctx, rule_label),
             _ => self.eval_expr(expr, ctx, rule_label),
@@ -11368,5 +11646,305 @@ Boundary: /END/
             RuntimeValue::Scalar("outer".into())
         );
         assert!(!ctx.has_active_codeblock());
+    }
+
+    fn nested_write_test_engine() -> Engine {
+        let parsed = parse_spec("Top::\n -> Done\n\nDone::\n /x/\n").unwrap();
+        validate(&parsed).unwrap();
+        Engine::new(compile(&parsed).unwrap())
+    }
+
+    #[test]
+    fn nested_write_evaluates_segments_then_rhs_before_one_isolated_commit() {
+        let engine = nested_write_test_engine();
+        let block = CodeBlock::parse(
+            r#"document[{ push(audit, "segment-0"); "items" }][{ push(audit, "segment-1"); 0 }] = { push(audit, "rhs"); "value" }"#,
+        )
+        .unwrap();
+        let Expr::AssignNestedAccess {
+            base,
+            segments,
+            value,
+            ..
+        } = &block.statements[0].expr
+        else {
+            panic!("expected nested write");
+        };
+        let mut ctx = RuntimeContext::new("x");
+        let result = engine
+            .eval_nested_access_assignment_expression(base, segments, value, &mut ctx, "Top")
+            .unwrap();
+        assert_eq!(
+            ctx.get_bare_value("audit"),
+            RuntimeValue::Array(vec![
+                RuntimeValue::Scalar("segment-0".into()),
+                RuntimeValue::Scalar("segment-1".into()),
+                RuntimeValue::Scalar("rhs".into()),
+            ])
+        );
+        let expected = RuntimeValue::Hash(vec![(
+            "items".into(),
+            RuntimeValue::Array(vec![RuntimeValue::Scalar("value".into())]),
+        )]);
+        assert_eq!(ctx.get_bare_value("document"), expected);
+        assert_eq!(result, ctx.get_bare_value("document"));
+    }
+
+    #[test]
+    fn nested_write_structural_failure_preserves_only_completed_expression_state() {
+        let engine = nested_write_test_engine();
+        let block = CodeBlock::parse(
+            r#"document["created"][2] = { document = { "after" : "rhs" }; "value" }"#,
+        )
+        .unwrap();
+        let Expr::AssignNestedAccess {
+            base,
+            segments,
+            value,
+            ..
+        } = &block.statements[0].expr
+        else {
+            panic!("expected nested write");
+        };
+        let mut ctx = RuntimeContext::new("x");
+        ctx.set_scalar(
+            "document",
+            RuntimeValue::Hash(vec![(
+                "before".into(),
+                RuntimeValue::Scalar("original".into()),
+            )]),
+        );
+        let error = engine
+            .eval_nested_access_assignment_expression(base, segments, value, &mut ctx, "Top")
+            .unwrap_err();
+        let payload: Value = serde_json::from_str(&error).unwrap();
+        assert_eq!(payload["code"], "nested_write_array_gap");
+        assert_eq!(payload["segment_index"], 1);
+        assert_eq!(payload["path"], json!(["created"]));
+        assert_eq!(payload["index"], 2);
+        assert_eq!(payload["length"], 0);
+        assert_eq!(
+            ctx.get_bare_value("document"),
+            RuntimeValue::Hash(vec![("after".into(), RuntimeValue::Scalar("rhs".into()))]),
+            "the RHS assignment remains, but the isolated 'created' path never commits"
+        );
+    }
+
+    #[test]
+    fn nested_write_detaches_initial_rhs_binding_and_result_values() {
+        let engine = nested_write_test_engine();
+        let block = CodeBlock::parse(r#"document["payload"] = rhs"#).unwrap();
+        let Expr::AssignNestedAccess {
+            base,
+            segments,
+            value,
+            ..
+        } = &block.statements[0].expr
+        else {
+            panic!("expected nested write");
+        };
+        let mut initial = RuntimeValue::Hash(vec![(
+            "existing".into(),
+            RuntimeValue::Array(vec![RuntimeValue::Scalar("keep".into())]),
+        )]);
+        let mut rhs = RuntimeValue::Array(vec![RuntimeValue::Scalar("a".into())]);
+        let mut ctx = RuntimeContext::new("x");
+        ctx.set_scalar("document", initial.clone());
+        ctx.set_scalar("rhs", rhs.clone());
+        let mut result = engine
+            .eval_nested_access_assignment_expression(base, segments, value, &mut ctx, "Top")
+            .unwrap();
+
+        let RuntimeValue::Array(rhs_items) = &mut rhs else {
+            panic!("expected aggregate RHS");
+        };
+        rhs_items[0] = RuntimeValue::Scalar("rhs-mutated".into());
+
+        let RuntimeValue::Hash(result_entries) = &mut result else {
+            panic!("expected harray result");
+        };
+        let RuntimeValue::Array(result_payload) = &mut result_entries
+            .iter_mut()
+            .find(|(key, _)| key == "payload")
+            .expect("result payload")
+            .1
+        else {
+            panic!("expected result payload array");
+        };
+        result_payload[0] = RuntimeValue::Scalar("result-mutated".into());
+
+        let mut binding = ctx.get_bare_value("document");
+        let RuntimeValue::Hash(binding_entries) = &mut binding else {
+            panic!("expected harray binding");
+        };
+        let RuntimeValue::Array(binding_existing) = &mut binding_entries
+            .iter_mut()
+            .find(|(key, _)| key == "existing")
+            .expect("binding existing")
+            .1
+        else {
+            panic!("expected binding existing array");
+        };
+        binding_existing[0] = RuntimeValue::Scalar("binding-mutated".into());
+        ctx.set_scalar("document", binding);
+
+        let RuntimeValue::Hash(initial_entries) = &mut initial else {
+            panic!("expected initial harray");
+        };
+        let RuntimeValue::Array(initial_existing) = &mut initial_entries
+            .iter_mut()
+            .find(|(key, _)| key == "existing")
+            .expect("initial existing")
+            .1
+        else {
+            panic!("expected initial existing array");
+        };
+        initial_existing[0] = RuntimeValue::Scalar("initial-mutated".into());
+
+        assert_eq!(
+            initial,
+            RuntimeValue::Hash(vec![(
+                "existing".into(),
+                RuntimeValue::Array(vec![RuntimeValue::Scalar("initial-mutated".into())]),
+            )])
+        );
+        assert_eq!(
+            rhs,
+            RuntimeValue::Array(vec![RuntimeValue::Scalar("rhs-mutated".into())])
+        );
+        assert_eq!(
+            ctx.get_bare_value("document"),
+            RuntimeValue::Hash(vec![
+                (
+                    "existing".into(),
+                    RuntimeValue::Array(vec![RuntimeValue::Scalar("binding-mutated".into())]),
+                ),
+                (
+                    "payload".into(),
+                    RuntimeValue::Array(vec![RuntimeValue::Scalar("a".into())]),
+                ),
+            ])
+        );
+        assert_eq!(
+            result,
+            RuntimeValue::Hash(vec![
+                (
+                    "existing".into(),
+                    RuntimeValue::Array(vec![RuntimeValue::Scalar("keep".into())]),
+                ),
+                (
+                    "payload".into(),
+                    RuntimeValue::Array(vec![RuntimeValue::Scalar("result-mutated".into())]),
+                ),
+            ])
+        );
+    }
+
+    #[test]
+    fn nested_write_expression_failure_stops_later_segment_and_rhs_evaluation() {
+        let engine = nested_write_test_engine();
+        let cases = [
+            (
+                r#"document[{ push(audit, "segment-0"); dispatch_span() }][{ push(audit, "segment-1"); 0 }] = { push(audit, "rhs"); "value" }"#,
+                &[RuntimeValue::Scalar("segment-0".into())][..],
+            ),
+            (
+                r#"document[{ push(audit, "segment-0"); "first" }][{ push(audit, "segment-1"); dispatch_span() }] = { push(audit, "rhs"); "value" }"#,
+                &[
+                    RuntimeValue::Scalar("segment-0".into()),
+                    RuntimeValue::Scalar("segment-1".into()),
+                ][..],
+            ),
+            (
+                r#"document[{ push(audit, "segment-0"); "key" }] = { push(audit, "rhs"); dispatch_span() }"#,
+                &[
+                    RuntimeValue::Scalar("segment-0".into()),
+                    RuntimeValue::Scalar("rhs".into()),
+                ][..],
+            ),
+        ];
+        for (source, expected_audit) in cases {
+            let block = CodeBlock::parse(source).unwrap();
+            let Expr::AssignNestedAccess {
+                base,
+                segments,
+                value,
+                ..
+            } = &block.statements[0].expr
+            else {
+                panic!("expected nested write");
+            };
+            let mut ctx = RuntimeContext::new("x");
+            ctx.set_scalar("document", RuntimeValue::Hash(Vec::new()));
+            let error = engine
+                .eval_nested_access_assignment_expression(base, segments, value, &mut ctx, "Top")
+                .unwrap_err();
+            assert!(
+                error.contains("progressive_span_binding_required"),
+                "{error}"
+            );
+            assert_eq!(
+                ctx.get_bare_value("audit"),
+                RuntimeValue::Array(expected_audit.to_vec())
+            );
+            assert_eq!(
+                ctx.get_bare_value("document"),
+                RuntimeValue::Hash(Vec::new())
+            );
+        }
+    }
+
+    #[test]
+    fn nested_reads_remain_non_creating_across_absent_missing_and_wrong_kinds() {
+        let engine = nested_write_test_engine();
+        let read_expr = |source: &str| {
+            let block = CodeBlock::parse(&format!("return({source})")).unwrap();
+            let Expr::Call { args, .. } = &block.statements[0].expr else {
+                panic!("expected return call");
+            };
+            args[0].value().clone()
+        };
+
+        let mut absent = RuntimeContext::new("x");
+        assert_eq!(
+            engine
+                .eval_expr(&read_expr(r#"document["key"]"#), &mut absent, "Top")
+                .unwrap(),
+            RuntimeValue::Undef
+        );
+        assert!(!absent.has_bare_binding("document"));
+
+        let mut missing = RuntimeContext::new("x");
+        missing.set_scalar("document", RuntimeValue::Hash(Vec::new()));
+        assert_eq!(
+            engine
+                .eval_expr(&read_expr(r#"document["key"][0]"#), &mut missing, "Top",)
+                .unwrap(),
+            RuntimeValue::Undef
+        );
+        assert_eq!(
+            missing.get_bare_value("document"),
+            RuntimeValue::Hash(Vec::new())
+        );
+
+        let mut wrong = RuntimeContext::new("x");
+        wrong.set_scalar(
+            "document",
+            RuntimeValue::Hash(vec![("key".into(), RuntimeValue::Scalar("scalar".into()))]),
+        );
+        assert_eq!(
+            engine
+                .eval_expr(
+                    &read_expr(r#"document["key"]["nested"]"#),
+                    &mut wrong,
+                    "Top",
+                )
+                .unwrap(),
+            RuntimeValue::Undef
+        );
+        assert_eq!(
+            wrong.get_bare_value("document"),
+            RuntimeValue::Hash(vec![("key".into(), RuntimeValue::Scalar("scalar".into()),)])
+        );
     }
 }

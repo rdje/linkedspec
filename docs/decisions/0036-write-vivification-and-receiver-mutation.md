@@ -1,7 +1,7 @@
 # 0036 - Nested creation is write-only and `!` denotes explicit receiver mutation
 
 - Date: 2026-07-15
-- Status: accepted direction; neutral contracts and both Perl mechanisms implemented, remaining backends/admission pending
+- Status: accepted direction; neutral contracts, both Perl mechanisms, and Rust nested writes implemented; remaining mechanisms/backends/admission pending
 - Tags: dsl, language-evolution, mutation, autovivification, receiver-methods, traversal, paths, portability
 
 ## Context
@@ -173,6 +173,29 @@ The permanent Perl contract projects all frozen AST, syntax, success, structural
 bound-null, and user-function cases. This leaf did not implement `map_leaves!`, alter Rust/Dart/Julia/Lua, or
 admit a portable/public capability. Those boundaries remain owned by `.19.2.2-.19.9`.
 
+## Rust nested-write implementation (2026-09-01)
+
+Leaf `.19.3.1` implements the same unchanged `linkedspec-write-vivification-v1` contract on Rust:
+
+- one `WritePathSegment` representation retains typed expression, source, and Unicode-scalar span, while one
+  `AssignNestedAccess` owns every one- or many-segment write;
+- the parser emits the seven frozen syntax diagnostics, and compiler/callable validation rejects malformed typed
+  nodes before execution. Serde, generated plans, source emission, emitted-plan decode, and direct engine entry
+  preserve and revalidate the same shape;
+- the engine evaluates segments left-to-right and RHS once, then snapshots presence/value and builds on an
+  isolated clone. Strings select harrays, nonnegative integral numbers select dense arrays, and only unambiguous
+  absent roots/intermediates create;
+- bound null, wrong kind, invalid selector, and array gaps produce the exact typed diagnostic fields; expression
+  failures propagate unchanged and structural failure publishes no partial path; and
+- successful binding/result/input/RHS aggregates detach. Rule state, fresh user-function locals, present
+  parameters, native execution, serialized state, generated plan, emitted source, and independently compiled
+  emitted Rust share the same behavior.
+
+The permanent Rust contract projects all frozen AST/syntax/success/structural-failure cases plus evaluation,
+detachment, bound-null, fresh-function, fail-closed carrier, and generated execution boundaries. This leaf does
+not implement Rust `map_leaves!`, alter Dart/Julia/Lua, or admit a portable/public capability. Those boundaries
+remain owned by `.19.3.2-.19.9`.
+
 ## Function-scope carrier resolution (2026-08-31)
 
 The `.19.2.2` Perl implementation audit found that two frozen composition examples use unparameterized user
@@ -205,8 +228,9 @@ Leaf `.19.2.2` implements `linkedspec-map-leaves-mutation-v1` on the Perl refere
 
 The permanent Perl contract exercises the frozen base and composition authority, including the array-pipeline
 write audit, with fatal warnings. It passes 58 focused tests, 105 write mutations, 167 base map mutations, 592
-composition mutations, and the complete 1,032-test Perl Phase 0 regression. Rust, Dart, Julia, and Lua remain at
-the prior non-bang/non-vivifying boundary; portable capability and public admission remain future.
+composition mutations, and the complete 1,032-test Perl Phase 0 regression. Rust now implements the nested-write
+half but remains at the prior non-bang boundary; Dart, Julia, and Lua remain non-bang/non-vivifying. Portable
+capability and public admission remain future.
 
 ## Consequences
 
@@ -221,8 +245,9 @@ the prior non-bang/non-vivifying boundary; portable capability and public admiss
 - “Absolute path” means complete root-to-leaf path inside the traversal receiver. The variable name is receiver
   identity, not an extra path element. Hash-root paths contain keys; array-root paths contain zero-based indexes.
 - During `.19.2-.19.6`, public guidance must name the backend transition explicitly: Perl implements nested-write
-  vivification and `map_leaves!`; Rust, Dart, Julia, and Lua retain the checked non-vivifying/non-bang boundary.
-  Portable `map_leaves!` admission remains future until the remaining backend and admission leaves land.
+  vivification and `map_leaves!`; Rust implements nested-write vivification but not `map_leaves!`; Dart, Julia,
+  and Lua retain the checked non-vivifying/non-bang boundary. Portable admission remains future until the
+  remaining backend and admission leaves land.
 
 ## Links
 

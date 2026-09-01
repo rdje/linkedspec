@@ -55,6 +55,7 @@ pub fn compile(spec: &SpecFile) -> Result<CompiledSpec> {
     crate::callable_contract::normalize_compiled_spec(&mut compiled)
         .map_err(LinkedSpecError::Compile)?;
     validate_no_removed_aggregate_selectors(&compiled)?;
+    validate_nested_write_nodes(&compiled)?;
     resolve_compiled_regex_selectors(&mut compiled)?;
     build_dependency_regex_map(&mut compiled)?;
     validate_recursive_observation_contract(&compiled)?;
@@ -167,6 +168,7 @@ fn compile_with_events(spec: &SpecFile, trace: &mut TraceEmitter) -> Result<Comp
     crate::callable_contract::normalize_compiled_spec(&mut compiled)
         .map_err(LinkedSpecError::Compile)?;
     validate_no_removed_aggregate_selectors(&compiled)?;
+    validate_nested_write_nodes(&compiled)?;
     resolve_compiled_regex_selectors(&mut compiled)?;
     let edge_only_entries = compiled
         .rules
@@ -259,7 +261,7 @@ fn visit_expr(
         Expr::AssignNestedAccess {
             segments, value, ..
         } => {
-            visit_expr_segments(segments, visitor)?;
+            visit_write_segments(segments, visitor)?;
             visit_expr(value, visitor)
         }
         Expr::IndexedVar { index, .. } => visit_expr(index, visitor),
@@ -373,6 +375,16 @@ fn visit_expr_segments(
         if let AccessSegment::Index { expr } = segment {
             visit_expr(expr, visitor)?;
         }
+    }
+    Ok(())
+}
+
+fn visit_write_segments(
+    segments: &[crate::expr::WritePathSegment],
+    visitor: &mut impl FnMut(&Expr) -> std::result::Result<(), LinkedSpecError>,
+) -> std::result::Result<(), LinkedSpecError> {
+    for segment in segments {
+        visit_expr(&segment.expression, visitor)?;
     }
     Ok(())
 }
@@ -607,6 +619,185 @@ pub fn validate_no_removed_aggregate_selectors(spec: &CompiledSpec) -> Result<()
         }
     }
 
+    Ok(())
+}
+
+fn nested_write_state_error(context: &str, reason: &str) -> LinkedSpecError {
+    LinkedSpecError::Diagnostic(
+        PortableDiagnostic::new(
+            "nested_write_serialized_state_invalid",
+            "validate_compiled_actionir",
+            "Compiled nested-write ActionIR does not satisfy the typed v1 carrier contract",
+        )
+        .with_field("context", context.to_string())
+        .with_field("reason", reason.to_string()),
+    )
+}
+
+fn nested_write_root_is_reserved(name: &str) -> bool {
+    matches!(
+        name,
+        "CAPTURE"
+            | "IINDEX"
+            | "IMATCH"
+            | "IMATCH_HASH"
+            | "IMATCH_LIST"
+            | "IPOS"
+            | "LINDEX"
+            | "LMATCH"
+            | "LMATCH_HASH"
+            | "LMATCH_LIST"
+            | "LSPOS"
+            | "STRING"
+            | "descr"
+            | "false"
+            | "info"
+            | "minfo"
+            | "null"
+            | "retv"
+            | "true"
+            | "undef"
+    )
+}
+
+fn char_slice(source: &str, start: usize, end: usize) -> Option<String> {
+    if start > end {
+        return None;
+    }
+    let value = source
+        .chars()
+        .skip(start)
+        .take(end - start)
+        .collect::<String>();
+    (value.chars().count() == end - start).then_some(value)
+}
+
+fn validate_nested_write_block(block: &CodeBlock, context: &str) -> Result<()> {
+    for statement in &block.statements {
+        visit_expr(&statement.expr, &mut |expr| {
+            let Expr::AssignNestedAccess {
+                source,
+                source_span,
+                base,
+                segments,
+                ..
+            } = expr
+            else {
+                return Ok(());
+            };
+            if base.is_empty()
+                || !base
+                    .chars()
+                    .next()
+                    .is_some_and(|character| character.is_ascii_alphabetic() || character == '_')
+                || !base
+                    .chars()
+                    .all(|character| character.is_ascii_alphanumeric() || character == '_')
+                || nested_write_root_is_reserved(base)
+            {
+                return Err(nested_write_state_error(context, "base_not_addressable"));
+            }
+            if segments.is_empty() {
+                return Err(nested_write_state_error(context, "segments_empty"));
+            }
+            let source_width = source_span.end.checked_sub(source_span.start);
+            if source_width != Some(source.chars().count()) {
+                return Err(nested_write_state_error(
+                    context,
+                    "assignment_source_span_mismatch",
+                ));
+            }
+            for segment in segments {
+                if segment.kind != "path_segment" || segment.source.is_empty() {
+                    return Err(nested_write_state_error(
+                        context,
+                        "segment_kind_or_source_invalid",
+                    ));
+                }
+                if segment.source_span.start < source_span.start
+                    || segment.source_span.end > source_span.end
+                    || segment.source_span.end < segment.source_span.start
+                {
+                    return Err(nested_write_state_error(
+                        context,
+                        "segment_source_span_out_of_bounds",
+                    ));
+                }
+                let relative_start = segment.source_span.start - source_span.start;
+                let relative_end = segment.source_span.end - source_span.start;
+                if char_slice(source, relative_start, relative_end).as_deref()
+                    != Some(segment.source.as_str())
+                {
+                    return Err(nested_write_state_error(
+                        context,
+                        "segment_source_span_mismatch",
+                    ));
+                }
+            }
+            Ok(())
+        })?;
+    }
+    Ok(())
+}
+
+fn validate_nested_write_fluent_chain(chain: &[(String, String)], context: &str) -> Result<()> {
+    for (index, (method, args)) in chain.iter().enumerate() {
+        let source = format!("{method}({args})");
+        let Ok(block) = CodeBlock::parse(&source) else {
+            continue;
+        };
+        validate_nested_write_block(&block, &format!("{context} fluent call {index}"))?;
+    }
+    Ok(())
+}
+
+/// Validate every typed nested-write node before native or serialized/generated execution.
+pub fn validate_nested_write_nodes(spec: &CompiledSpec) -> Result<()> {
+    for function in &spec.functions {
+        validate_nested_write_block(
+            &function.body,
+            &format!("function '{}' body", function.name),
+        )?;
+    }
+    for rule in &spec.rules {
+        for (kind, block) in [
+            ("I", rule.preamble.as_ref()),
+            ("LX", rule.lxcode.as_ref()),
+            ("LS", rule.lscode.as_ref()),
+            ("LE", rule.lecode.as_ref()),
+            ("E", rule.ecode.as_ref()),
+            ("EX", rule.excode.as_ref()),
+            ("IT", rule.itcode.as_ref()),
+        ] {
+            if let Some(block) = block {
+                validate_nested_write_block(block, &format!("rule '{}' {kind}-block", rule.label))?;
+            }
+        }
+        for (index, entry) in rule.acode_dispatch.iter().enumerate() {
+            if let Some(block) = &entry.code {
+                validate_nested_write_block(
+                    block,
+                    &format!("rule '{}' action edge {index}", rule.label),
+                )?;
+            }
+            validate_nested_write_fluent_chain(
+                &entry.fluent_chain,
+                &format!("rule '{}' action edge {index}", rule.label),
+            )?;
+        }
+        for (index, entry) in rule.bcode_dispatch.iter().enumerate() {
+            if let Some(block) = &entry.code {
+                validate_nested_write_block(
+                    block,
+                    &format!("rule '{}' blind edge {index}", rule.label),
+                )?;
+            }
+            validate_nested_write_fluent_chain(
+                &entry.fluent_chain,
+                &format!("rule '{}' blind edge {index}", rule.label),
+            )?;
+        }
+    }
     Ok(())
 }
 

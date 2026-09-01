@@ -28,6 +28,7 @@ decision_update_2026_07_18: "The director superseded the final structural-requir
 decision_ratification_2026_07_18: "ADR 0046 and `linkedspec-root-rule-selection-v1` now accept the exact selection order without backend behavior changes. The audit additionally found current Perl selects parsed row zero even before a later marker; Rust requires a marker and lacks fallback; Dart/Julia/Lua have unreachable fallback behind validation. Authored `is_top` remains source identity, selection is execution state, and strict-unused receives no reference or exemption from either selection or marker. Rollout is 1 complete / 6 pending."
 implementation_update_2026_07_18: "FUTURE-PARITY-BACKLOG.9.1.1.2.1.1-.3 implement and admit the complete Perl reference at 65/65 shared primary cases in both option environments. Native, loaded, generated, descriptor, diagnostic, trace, strict, and primary routes apply explicit selector > first marker > first rule without rewriting authored `is_top`. The rollout ledger is 2 complete / 5 pending; Rust, Dart, Julia, Lua, and final admission remain ordered under `.2-.6`."
 rust_admission_update_2026_07_18: "FUTURE-PARITY-BACKLOG.9.1.1.2.2.1-.3 implement and admit complete Rust parity through one topology-checked 15-role consumer and exact 65/65 primary cases in both option environments. The rollout ledger is 3 complete / 4 pending; Dart, Julia, Lua, and final admission remain ordered under `.3-.6`."
+dispatch_target_update_2026_09_01: "FUTURE-PARITY-BACKLOG.19.3.1 fixture review reconfirmed the execution consequence for a dispatch-loop wrapper. Entering Top runs Top's mode-driven loop, and an outgoing `-> Done` edge selects Done's regex slot. A regex stored on Top is not selected by that edge; it participates only when the execution topology targets Top, such as a self-edge or another incoming edge. New Rust vivification fixtures therefore use a zero-regex Top wrapper and put `/[a-z]+/` on Done. The systematic controlled-corpus cleanup is task-tree-owned by `.19.3.3`."
 dart_core_update_2026_07_18: "FUTURE-PARITY-BACKLOG.9.1.1.2.3.1 implements the same precedence in one Dart compiled-state resolver, accepts markerless one-or-more-rule sources, returns portable zero/unknown failures before user code, and preserves descriptor marker identity. Dart composed routes and admission remain `.3.2-.3`; rollout therefore remains 3/7."
 dart_routes_update_2026_07_18: "FUTURE-PARITY-BACKLOG.9.1.1.2.3.2 proves Dart loaded/normalized and generated/emitted direct/traced routes reuse that resolver, trace requested/effective/basis, preserve portable failures and generated v2 identity, and reject stale contracts before selection. Topology admission `.3.3` remains pending, so rollout stays 3/7."
 dart_admission_update_2026_07_18: "FUTURE-PARITY-BACKLOG.9.1.1.2.3.3 admits Dart through one topology-checked 15-role consumer and exact package 270 / primary 65x2 / corpus 105 proof. Root-selection rollout is now 4 complete / 3 pending; Julia, Lua/LuaJIT, and final no-drift remain."
@@ -65,6 +66,11 @@ This supersedes the earlier June 17 "no regex on top / two-rule minimum" validit
   implement it without admission, and its cursor/CLI prerequisites are current through `.9.1.6.5`; Julia
   cursor/root admission, Lua, and final five-backend admission remain tracked
   under `FUTURE-PARITY-BACKLOG.9.1.1.2.4-.6`.
+- **A dispatch edge selects its target rule's regex slot.** In the common wrapper shape, entering `Top` runs
+  `Top`'s loop and `-> Done` tests `Done`'s regex. A regex carried by `Top` is irrelevant to that edge unless the
+  edge targets `Top` itself. This is why a zero-regex `Top` plus a regex-bearing child is the clearest fixture for
+  parent-loop/child-match behavior; it does not contradict the fact that a top rule can use its own regex when its
+  execution topology selects it.
 
 ## The idiom vs the law (ADR 0010)
 

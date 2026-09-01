@@ -114,6 +114,23 @@ pub enum AccessSegment {
     Index { expr: Box<Expr> },
 }
 
+/// One expression-bearing segment in an addressable nested write.
+///
+/// Unlike [`AccessSegment`], this carrier deliberately preserves the authored
+/// expression without assigning a hash-key or array-index meaning during
+/// parsing. The runtime chooses that meaning from the evaluated value.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct WritePathSegment {
+    /// Stable neutral node identity retained in serialized/generated state.
+    pub kind: String,
+    /// Exact authored expression text, excluding the surrounding brackets.
+    pub source: String,
+    /// Half-open Unicode-scalar offsets within the containing ActionIR source.
+    pub source_span: ExpressionSpan,
+    /// Ordinary typed ActionIR expression evaluated for this segment.
+    pub expression: Box<Expr>,
+}
+
 /// One key/value pair in a direct hash shape literal.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct HashLiteralEntry {
@@ -239,8 +256,10 @@ pub enum Expr {
     /// A nested value-path assignment operator: `payload["items"][0]["name"] = value`
     #[serde(rename = "assign_nested_access")]
     AssignNestedAccess {
+        source: String,
+        source_span: ExpressionSpan,
         base: String,
-        segments: Vec<AccessSegment>,
+        segments: Vec<WritePathSegment>,
         value: Box<Expr>,
     },
     /// A variable reference: `results`, `retv`, `$name`
@@ -373,6 +392,11 @@ impl Expr {
                 AccessSegment::Index { expr } => expr.find_removed_aggregate_selector(),
             })
         };
+        let in_write_segments = |segments: &[WritePathSegment]| {
+            segments
+                .iter()
+                .find_map(|segment| segment.expression.find_removed_aggregate_selector())
+        };
 
         match self {
             Expr::Call { name, args } => {
@@ -401,7 +425,7 @@ impl Expr {
                 .or_else(|| value.find_removed_aggregate_selector()),
             Expr::AssignNestedAccess {
                 segments, value, ..
-            } => in_segments(segments).or_else(|| value.find_removed_aggregate_selector()),
+            } => in_write_segments(segments).or_else(|| value.find_removed_aggregate_selector()),
             Expr::IndexedVar { index, .. } => index.find_removed_aggregate_selector(),
             Expr::NestedAccess { segments, .. } => in_segments(segments),
             Expr::ValueAccess { receiver, segments } => receiver
@@ -452,6 +476,11 @@ impl Expr {
                 AccessSegment::Index { expr } => expr.contains_recognition_runtime_intrinsic(),
             })
         };
+        let write_segments_contain = |segments: &[WritePathSegment]| {
+            segments
+                .iter()
+                .any(|segment| segment.expression.contains_recognition_runtime_intrinsic())
+        };
         match self {
             Expr::RecognitionCheckpoint
             | Expr::ProgressiveDispatchSpan { .. }
@@ -470,7 +499,7 @@ impl Expr {
             }
             Expr::AssignNestedAccess {
                 segments, value, ..
-            } => segments_contain(segments) || value.contains_recognition_runtime_intrinsic(),
+            } => write_segments_contain(segments) || value.contains_recognition_runtime_intrinsic(),
             Expr::IndexedVar { index, .. } => index.contains_recognition_runtime_intrinsic(),
             Expr::NestedAccess { segments, .. } => segments_contain(segments),
             Expr::ValueAccess { receiver, segments } => {
@@ -563,20 +592,7 @@ impl std::fmt::Display for Expr {
             Expr::AssignScalar { name, value } => write!(f, "{name} = {value}"),
             Expr::AssignArrayAppend { name, value } => write!(f, "{name} += {value}"),
             Expr::AssignHashIndex { name, key, value } => write!(f, "{name}[{key}] = {value}"),
-            Expr::AssignNestedAccess {
-                base,
-                segments,
-                value,
-            } => {
-                write!(f, "{base}")?;
-                for segment in segments {
-                    match segment {
-                        AccessSegment::Key { value } => write!(f, "[\"{value}\"]")?,
-                        AccessSegment::Index { expr } => write!(f, "[{expr}]")?,
-                    }
-                }
-                write!(f, " = {value}")
-            }
+            Expr::AssignNestedAccess { source, .. } => f.write_str(source),
             Expr::Variable { name } => write!(f, "{name}"),
             Expr::IndexedVar { name, index } => write!(f, "{name}[{index}]"),
             Expr::NestedAccess { base, segments } => {
@@ -1194,7 +1210,7 @@ impl<'a> Parser<'a> {
             return Ok(expr);
         }
         self.pos = start;
-        if let Some(expr) = self.try_parse_hash_index_assignment_statement()? {
+        if let Some(expr) = self.try_parse_nested_access_assignment()? {
             return Ok(expr);
         }
         self.pos = start;
@@ -1636,66 +1652,280 @@ impl<'a> Parser<'a> {
         }
     }
 
-    fn try_parse_hash_index_assignment_statement(&mut self) -> Result<Option<Expr>, String> {
+    fn try_parse_nested_access_assignment(&mut self) -> Result<Option<Expr>, String> {
         self.skip_whitespace();
         let start = self.pos;
-        let Some(ch) = self.peek() else {
+        let Some((first_bracket, assignment_eq)) = self.nested_write_assignment_shape(start) else {
             return Ok(None);
         };
-        if !ch.is_ascii_alphabetic() && ch != '_' {
-            return Ok(None);
+
+        let root_end = self.trim_ascii_whitespace_end(start, first_bracket);
+        let root = &self.src[start..root_end];
+        let addressable = root
+            .chars()
+            .next()
+            .is_some_and(|ch| ch.is_ascii_alphabetic() || ch == '_')
+            && root
+                .chars()
+                .all(|ch| ch.is_ascii_alphanumeric() || ch == '_');
+        if !addressable {
+            let message = if root.starts_with('{') || root.starts_with('[') {
+                "nested write root must be a bare identifier"
+            } else {
+                "nested write root must remain a bare identifier"
+            };
+            return Err(self.nested_write_syntax_error(
+                "nested_write_root_not_addressable",
+                start,
+                root_end,
+                message,
+            ));
+        }
+        if Self::nested_write_root_is_reserved(root) {
+            return Err(self.nested_write_syntax_error(
+                "nested_write_root_reserved",
+                start,
+                root_end,
+                &format!("nested write root '{root}' is reserved"),
+            ));
         }
 
-        let name = self.parse_name();
-        if name.is_empty() || !name.chars().all(|c| c.is_ascii_alphanumeric() || c == '_') {
-            self.pos = start;
-            return Ok(None);
-        }
-        self.skip_whitespace();
-        if self.peek() != Some('[') {
-            self.pos = start;
-            return Ok(None);
+        let name = root.to_string();
+        self.pos = first_bracket;
+        let mut segments = Vec::new();
+        while self.peek() == Some('[') {
+            let open = self.pos;
+            let Some(close) = Self::matching_closing_square(self.src, open)
+                .filter(|close| *close < assignment_eq)
+            else {
+                let end = self.trim_ascii_whitespace_end(open, assignment_eq);
+                return Err(self.nested_write_syntax_error(
+                    "nested_write_segment_unclosed",
+                    open,
+                    end,
+                    "nested write segment is missing its closing bracket",
+                ));
+            };
+            let expression_start = self.skip_ascii_whitespace_start(open + 1, close);
+            let expression_end = self.trim_ascii_whitespace_end(expression_start, close);
+            if expression_start == expression_end {
+                return Err(self.nested_write_syntax_error(
+                    "nested_write_segment_empty",
+                    open,
+                    close + 1,
+                    "nested write segment may not be empty",
+                ));
+            }
+
+            let segment_source = &self.src[expression_start..expression_end];
+            let mut segment_parser = Parser::with_character_base_and_mode(
+                segment_source,
+                self.character_offset(expression_start),
+                self.mode,
+            );
+            let expression = segment_parser.parse_expr().map_err(|_| {
+                self.nested_write_syntax_error(
+                    "nested_write_segment_expression_invalid",
+                    expression_start,
+                    expression_end,
+                    "segment must be one balanced ActionIR value expression",
+                )
+            })?;
+            segment_parser.skip_whitespace();
+            if segment_parser.pos != segment_source.len() {
+                return Err(self.nested_write_syntax_error(
+                    "nested_write_segment_expression_invalid",
+                    expression_start,
+                    expression_end,
+                    "segment must be one balanced ActionIR value expression",
+                ));
+            }
+            segments.push(WritePathSegment {
+                kind: "path_segment".to_string(),
+                source: segment_source.to_string(),
+                source_span: ExpressionSpan {
+                    start: self.character_offset(expression_start),
+                    end: self.character_offset(expression_end),
+                },
+                expression: Box::new(expression),
+            });
+            self.pos = close + 1;
+            self.skip_whitespace();
         }
 
-        let segments = self.parse_access_segments(&name)?;
-        if segments.is_empty() {
-            self.pos = start;
-            return Ok(None);
+        if self.pos != assignment_eq || self.peek() != Some('=') {
+            return Err(self.nested_write_syntax_error(
+                "nested_write_segment_expression_invalid",
+                first_bracket + 1,
+                assignment_eq,
+                "segment must be one balanced ActionIR value expression",
+            ));
         }
-        self.skip_whitespace();
-        if self.peek() != Some('=') {
-            self.pos = start;
-            return Ok(None);
-        }
-        let after_eq = self.src[self.pos + 1..].chars().next();
-        if matches!(after_eq, Some('=') | Some('>')) {
-            self.pos = start;
-            return Ok(None);
-        }
-
         self.advance(1);
         self.skip_whitespace();
         if self.pos >= self.src.len() {
-            self.pos = start;
-            return Ok(None);
+            return Err("unexpected end of nested write value expression".to_string());
         }
         let value = self.parse_expr()?;
-        if segments.len() == 1 {
-            let key = match segments.into_iter().next().unwrap() {
-                AccessSegment::Key { value } => Expr::StringLiteral { value },
-                AccessSegment::Index { expr } => *expr,
-            };
-            return Ok(Some(Expr::AssignHashIndex {
-                name,
-                key: Box::new(key),
-                value: Box::new(value),
-            }));
-        }
+        let end = self.pos;
         Ok(Some(Expr::AssignNestedAccess {
+            source: self.src[start..end].to_string(),
+            source_span: ExpressionSpan {
+                start: self.character_offset(start),
+                end: self.character_offset(end),
+            },
             base: name,
             segments,
             value: Box::new(value),
         }))
+    }
+
+    /// Locate an authored nested-write assignment without assigning semantics
+    /// to any segment. The returned offsets are byte positions in `self.src`.
+    fn nested_write_assignment_shape(&self, start: usize) -> Option<(usize, usize)> {
+        let bytes = self.src.as_bytes();
+        let mut pos = start;
+        let mut paren_depth = 0usize;
+        let mut brace_depth = 0usize;
+        let mut square_depth = 0usize;
+        let mut first_bracket = None;
+        let mut unclosed_assignment = None;
+
+        while pos < bytes.len() {
+            match bytes[pos] {
+                b'"' | b'\'' => {
+                    pos = Self::skip_delimited_literal(self.src, pos, bytes[pos]).ok()?;
+                    continue;
+                }
+                b'(' => paren_depth += 1,
+                b')' if paren_depth > 0 => paren_depth -= 1,
+                b')' => break,
+                b'{' => brace_depth += 1,
+                b'}' if brace_depth > 0 => brace_depth -= 1,
+                b'}' => break,
+                b'[' if paren_depth == 0 && brace_depth == 0 && square_depth == 0 => {
+                    first_bracket.get_or_insert(pos);
+                    square_depth = 1;
+                }
+                b'[' if first_bracket.is_some() => square_depth += 1,
+                b']' if square_depth > 0 => square_depth -= 1,
+                b'=' if Self::is_assignment_token(bytes, pos)
+                    && first_bracket.is_none()
+                    && paren_depth == 0
+                    && brace_depth == 0
+                    && square_depth == 0 =>
+                {
+                    break;
+                }
+                b'=' if Self::is_assignment_token(bytes, pos) && first_bracket.is_some() => {
+                    if paren_depth == 0 && brace_depth == 0 && square_depth == 0 {
+                        return Some((first_bracket.unwrap(), pos));
+                    }
+                    if square_depth > 0 {
+                        unclosed_assignment.get_or_insert(pos);
+                    }
+                }
+                b',' | b';' | b'\n' | b'\r'
+                    if paren_depth == 0 && brace_depth == 0 && square_depth == 0 =>
+                {
+                    break;
+                }
+                _ => {}
+            }
+            pos += self.src[pos..].chars().next()?.len_utf8();
+        }
+
+        if square_depth > 0 {
+            unclosed_assignment.map(|assignment| (first_bracket.unwrap(), assignment))
+        } else {
+            None
+        }
+    }
+
+    fn is_assignment_token(bytes: &[u8], pos: usize) -> bool {
+        !matches!(bytes.get(pos + 1), Some(b'=' | b'>'))
+            && !matches!(
+                pos.checked_sub(1).and_then(|prior| bytes.get(prior)),
+                Some(b'!' | b'<' | b'>' | b'=')
+            )
+    }
+
+    fn matching_closing_square(source: &str, open: usize) -> Option<usize> {
+        let bytes = source.as_bytes();
+        let mut pos = open;
+        let mut depth = 0usize;
+        while pos < bytes.len() {
+            match bytes[pos] {
+                b'"' | b'\'' => {
+                    pos = Self::skip_delimited_literal(source, pos, bytes[pos]).ok()?;
+                    continue;
+                }
+                b'[' => depth += 1,
+                b']' => {
+                    depth = depth.checked_sub(1)?;
+                    if depth == 0 {
+                        return Some(pos);
+                    }
+                }
+                _ => {}
+            }
+            pos += source[pos..].chars().next()?.len_utf8();
+        }
+        None
+    }
+
+    fn skip_ascii_whitespace_start(&self, mut start: usize, end: usize) -> usize {
+        while start < end && self.src.as_bytes()[start].is_ascii_whitespace() {
+            start += 1;
+        }
+        start
+    }
+
+    fn trim_ascii_whitespace_end(&self, start: usize, mut end: usize) -> usize {
+        while end > start && self.src.as_bytes()[end - 1].is_ascii_whitespace() {
+            end -= 1;
+        }
+        end
+    }
+
+    fn nested_write_syntax_error(
+        &self,
+        code: &str,
+        start: usize,
+        end: usize,
+        message: &str,
+    ) -> String {
+        format!(
+            "{code} stage=action_parse source_span={{start:{},end:{},unit:unicode_scalar,provenance:authored}} message={message:?}",
+            self.character_offset(start),
+            self.character_offset(end)
+        )
+    }
+
+    fn nested_write_root_is_reserved(name: &str) -> bool {
+        matches!(
+            name,
+            "CAPTURE"
+                | "IINDEX"
+                | "IMATCH"
+                | "IMATCH_HASH"
+                | "IMATCH_LIST"
+                | "IPOS"
+                | "LINDEX"
+                | "LMATCH"
+                | "LMATCH_HASH"
+                | "LMATCH_LIST"
+                | "LSPOS"
+                | "STRING"
+                | "descr"
+                | "false"
+                | "info"
+                | "minfo"
+                | "null"
+                | "retv"
+                | "true"
+                | "undef"
+        )
     }
 
     fn try_parse_array_append_statement(&mut self) -> Result<Option<Expr>, String> {
@@ -1848,11 +2078,11 @@ impl<'a> Parser<'a> {
         }
 
         let assignment_start = self.pos;
+        if let Some(expr) = self.try_parse_nested_access_assignment()? {
+            return self.parse_fluent_chain(expr);
+        }
+        self.pos = assignment_start;
         if matches!(self.peek(), Some(ch) if ch.is_ascii_alphabetic() || ch == '_') {
-            if let Some(expr) = self.try_parse_hash_index_assignment_statement()? {
-                return self.parse_fluent_chain(expr);
-            }
-            self.pos = assignment_start;
             if let Some(expr) = self.try_parse_array_append_statement()? {
                 return self.parse_fluent_chain(expr);
             }
@@ -3541,14 +3771,20 @@ mod tests {
     }
 
     #[test]
-    fn parse_hash_index_assignment_statement() {
+    fn parse_one_segment_nested_assignment_statement() {
         let code = r#"meta[cat("s", "tage")] = value; return(copy(meta))"#;
         let block = CodeBlock::parse(code).unwrap();
         assert_eq!(block.statements.len(), 2);
         match &block.statements[0].expr {
-            Expr::AssignHashIndex { name, key, value } => {
-                assert_eq!(name, "meta");
-                match key.as_ref() {
+            Expr::AssignNestedAccess {
+                base,
+                segments,
+                value,
+                ..
+            } => {
+                assert_eq!(base, "meta");
+                assert_eq!(segments.len(), 1);
+                match segments[0].expression.as_ref() {
                     Expr::Call { name, args } => {
                         assert_eq!(name, "cat");
                         assert_eq!(args.len(), 2);
@@ -3560,7 +3796,7 @@ mod tests {
                     _ => panic!("expected bare variable RHS"),
                 }
             }
-            _ => panic!("expected hash-index assignment"),
+            _ => panic!("expected unified nested assignment"),
         }
     }
 
@@ -3589,12 +3825,20 @@ mod tests {
             _ => panic!("expected array append"),
         }
         match &block.statements[1].expr {
-            Expr::AssignHashIndex { name, key, value } => {
-                assert_eq!(name, "meta");
-                assert!(matches!(key.as_ref(), Expr::Variable { name } if name == "key"));
+            Expr::AssignNestedAccess {
+                base,
+                segments,
+                value,
+                ..
+            } => {
+                assert_eq!(base, "meta");
+                assert_eq!(segments.len(), 1);
+                assert!(
+                    matches!(segments[0].expression.as_ref(), Expr::Variable { name } if name == "key")
+                );
                 assert!(matches!(value.as_ref(), Expr::Variable { name } if name == "value"));
             }
-            _ => panic!("expected hash-index assignment"),
+            _ => panic!("expected unified nested assignment"),
         }
     }
 
@@ -3728,14 +3972,22 @@ mod tests {
             other => panic!("expected array append, got {:?}", other),
         }
         match &block.statements[1].expr {
-            Expr::AssignHashIndex { name, key, value } => {
-                assert_eq!(name, "meta");
-                assert!(matches!(key.as_ref(), Expr::Variable { name } if name == "key"));
+            Expr::AssignNestedAccess {
+                base,
+                segments,
+                value,
+                ..
+            } => {
+                assert_eq!(base, "meta");
+                assert_eq!(segments.len(), 1);
+                assert!(
+                    matches!(segments[0].expression.as_ref(), Expr::Variable { name } if name == "key")
+                );
                 assert!(
                     matches!(value.as_ref(), Expr::HashLiteral { entries } if entries.len() == 1)
                 );
             }
-            other => panic!("expected hash-index assignment, got {:?}", other),
+            other => panic!("expected unified nested assignment, got {:?}", other),
         }
     }
 
@@ -3754,14 +4006,22 @@ mod tests {
             other => panic!("expected scalar assignment, got {:?}", other),
         }
         match &block.statements[1].expr {
-            Expr::AssignHashIndex { name, key, value } => {
-                assert_eq!(name, "meta");
-                assert!(matches!(key.as_ref(), Expr::Variable { name } if name == "key"));
+            Expr::AssignNestedAccess {
+                base,
+                segments,
+                value,
+                ..
+            } => {
+                assert_eq!(base, "meta");
+                assert_eq!(segments.len(), 1);
+                assert!(
+                    matches!(segments[0].expression.as_ref(), Expr::Variable { name } if name == "key")
+                );
                 assert!(
                     matches!(value.as_ref(), Expr::HashLiteral { entries } if entries.len() == 1)
                 );
             }
-            other => panic!("expected hash-index assignment, got {:?}", other),
+            other => panic!("expected unified nested assignment, got {:?}", other),
         }
         match &block.statements[2].expr {
             Expr::Call { name, args } => {
@@ -4172,6 +4432,125 @@ mod tests {
                 other => panic!("expected NestedAccess, got {:?}", other),
             },
             _ => panic!("expected Call"),
+        }
+    }
+
+    #[test]
+    fn parse_nested_write_uses_expression_segments_and_unicode_scalar_spans() {
+        let source = r#"document["é"][position] = "值""#;
+        let block = CodeBlock::parse(source).unwrap();
+        let Expr::AssignNestedAccess {
+            source: parsed_source,
+            source_span,
+            base,
+            segments,
+            value,
+        } = &block.statements[0].expr
+        else {
+            panic!("expected unified nested-write node");
+        };
+        assert_eq!(parsed_source, source);
+        assert_eq!(source_span.start, 0);
+        assert_eq!(source_span.end, source.chars().count());
+        assert_eq!(base, "document");
+        assert_eq!(segments.len(), 2);
+        assert_eq!(segments[0].kind, "path_segment");
+        assert_eq!(segments[0].source, r#""é""#);
+        assert_eq!(
+            segments[0].source_span,
+            ExpressionSpan { start: 9, end: 12 }
+        );
+        assert!(matches!(
+            segments[0].expression.as_ref(),
+            Expr::StringLiteral { value } if value == "é"
+        ));
+        assert_eq!(segments[1].source, "position");
+        assert_eq!(
+            segments[1].source_span,
+            ExpressionSpan { start: 14, end: 22 }
+        );
+        assert!(matches!(
+            segments[1].expression.as_ref(),
+            Expr::Variable { name } if name == "position"
+        ));
+        assert!(matches!(value.as_ref(), Expr::StringLiteral { value } if value == "值"));
+
+        let encoded = serde_json::to_value(&block).unwrap();
+        let node = &encoded["statements"][0]["expr"];
+        assert_eq!(node["kind"], "assign_nested_access");
+        assert_eq!(node["segments"][0]["kind"], "path_segment");
+        assert_eq!(node["segments"][0]["source"], r#""é""#);
+        assert_eq!(node["segments"][1]["expression"]["kind"], "variable");
+        let reconstructed: CodeBlock = serde_json::from_value(encoded).unwrap();
+        assert_eq!(reconstructed, block);
+    }
+
+    #[test]
+    fn parse_one_segment_write_uses_unified_nested_node() {
+        let block = CodeBlock::parse(r#"document["title"] = title"#).unwrap();
+        assert!(matches!(
+            &block.statements[0].expr,
+            Expr::AssignNestedAccess { segments, .. } if segments.len() == 1
+        ));
+    }
+
+    #[test]
+    fn parse_scalar_assignment_rhs_can_be_a_nested_write() {
+        let block = CodeBlock::parse(r#"result = document["items"][0] = "value""#).unwrap();
+        assert!(matches!(
+            &block.statements[0].expr,
+            Expr::AssignScalar { name, value }
+                if name == "result"
+                    && matches!(value.as_ref(), Expr::AssignNestedAccess { base, segments, .. }
+                        if base == "document" && segments.len() == 2)
+        ));
+    }
+
+    #[test]
+    fn parse_nested_write_reports_frozen_typed_syntax_boundaries() {
+        let cases = [
+            (
+                r#"make_document()["x"] = value"#,
+                "nested_write_root_not_addressable",
+                "start:0,end:15",
+            ),
+            (
+                r#"{}["x"] = value"#,
+                "nested_write_root_not_addressable",
+                "start:0,end:2",
+            ),
+            (
+                "document[] = value",
+                "nested_write_segment_empty",
+                "start:8,end:10",
+            ),
+            (
+                r#"document["x" = value"#,
+                "nested_write_segment_unclosed",
+                "start:8,end:12",
+            ),
+            (
+                "document[0:1] = value",
+                "nested_write_segment_expression_invalid",
+                "start:9,end:12",
+            ),
+            (
+                r#"document.value["x"] = value"#,
+                "nested_write_root_not_addressable",
+                "start:0,end:14",
+            ),
+            (
+                r#"retv["x"] = value"#,
+                "nested_write_root_reserved",
+                "start:0,end:4",
+            ),
+        ];
+        for (source, code, span) in cases {
+            let error = CodeBlock::parse(source).unwrap_err();
+            assert!(error.contains(code), "{source}: {error}");
+            assert!(error.contains("stage=action_parse"), "{source}: {error}");
+            assert!(error.contains(span), "{source}: {error}");
+            assert!(error.contains("unit:unicode_scalar"), "{source}: {error}");
         }
     }
 
@@ -4838,16 +5217,22 @@ return(copy(results));"#;
                             other => panic!("expected array append assignment, got {other:?}"),
                         }
                         match args[5].value() {
-                            Expr::AssignHashIndex { name, key, value } => {
-                                assert_eq!(name, "meta");
+                            Expr::AssignNestedAccess {
+                                base,
+                                segments,
+                                value,
+                                ..
+                            } => {
+                                assert_eq!(base, "meta");
+                                assert_eq!(segments.len(), 1);
                                 assert!(
-                                    matches!(key.as_ref(), Expr::Variable { name } if name == "key")
+                                    matches!(segments[0].expression.as_ref(), Expr::Variable { name } if name == "key")
                                 );
                                 assert!(
                                     matches!(value.as_ref(), Expr::Variable { name } if name == "value")
                                 );
                             }
-                            other => panic!("expected hash-index assignment, got {other:?}"),
+                            other => panic!("expected unified nested assignment, got {other:?}"),
                         }
                     }
                     other => panic!("expected array call, got {other:?}"),
@@ -4881,11 +5266,11 @@ return(copy(results));"#;
                             Expr::FluentChain { receiver, calls } => {
                                 assert!(matches!(
                                     receiver.as_ref(),
-                                    Expr::AssignHashIndex { name, .. } if name == "meta"
+                                    Expr::AssignNestedAccess { base, .. } if base == "meta"
                                 ));
                                 assert_eq!(calls[0].method, "count_keys");
                             }
-                            other => panic!("expected hash-index receiver chain, got {other:?}"),
+                            other => panic!("expected nested-write receiver chain, got {other:?}"),
                         }
                     }
                     other => panic!("expected array call, got {other:?}"),

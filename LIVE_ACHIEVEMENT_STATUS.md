@@ -2,20 +2,24 @@
 
 ## Current Activity
 
-- `.19.2` is complete on Perl: nested-write vivification and `map_leaves!` both implement their unchanged frozen
-  contracts without portable/public admission. Rust nested-write leaf `.19.3.1` is next.
+- Rust nested-write leaf `.19.3.1` is signoff-complete across typed parsed/serialized/generated/emitted carriers.
+  Parent `.19.3` remains active; Rust `map_leaves!` leaf `.19.3.2` is next without public admission.
 
 ## Latest Completed Slice
 
-- `.19.2.2` implements Perl `map_leaves!`, closes every receiver-write route found by audit, passes corrected exact
-  canonical proof, and closes parent `.19.2` without another backend or public admission.
+- `.19.3.1` implements Rust nested-write vivification with exact typed diagnostics and fail-closed carrier
+  validation, passes focused/broad/canonical proof, and leaves Rust bang plus portable/public admission pending.
 
 ## Next Action
 
-- Derive the new clean `HEAD`, activate Rust nested-write `.19.3.1` task-tree-first, and audit the exact Rust typed
-  AST/serialization/emission/runtime seams before implementation.
+- Derive the new clean `HEAD`, activate `.19.3.2` task-tree-first, and audit Rust parser/compiler/runtime ownership
+  for the unchanged `map_leaves!` contract before behavior changes.
 
 ## Recent Completions
+
+- `2026-09-01` — `.19.3.1` unifies Rust nested writes under one typed expression-segment node, executes dense
+  isolated vivification across native/generated carriers, and passes focused 5/5, 197/197, 105/105, broad Rust,
+  and exact staged canonical proof.
 
 - `2026-08-31` — `.19.2.2` implements Perl `map_leaves!`; 58 focused tests, 105 write / 167 base + 592 composition
   mutations, Phase 0 1,032/1,032, and corrected exact canonical CI pass after repairing two stale hash-only anchors.
@@ -62,11 +66,6 @@
 
 - `2026-08-29` — `.15.1` makes bare rule-item blocks exact lifecycle `I` shorthand on Perl/Rust, preserves source,
   spans, position and owners, orders all duplicate mixtures, fixes Rust last-slot-wins, and locks malformed twins.
-
-- `2026-08-29` — `.15.0` ratifies bare rule-item blocks as future direct lifecycle-`I` normalization, preserves
-  every existing brace owner and legacy inert carrier, corrects premature book teaching, and splits implementation
-  into Perl/Rust `.15.1` and remaining-backend/self-hosted/public `.15.2`.
-
 
 ## History
 

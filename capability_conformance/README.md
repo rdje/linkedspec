@@ -28,10 +28,11 @@ bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py
 
 The checker validates five AST cases, seven syntax failures, 11 successful writes, 16 structural failures, three
 expression failures, three non-creating reads, detachment, eight writes from the shared composition fixture, and
-105 rejected base mutations. Perl now consumes this unchanged contract under `.19.2.1`, with permanent direct
-projection in `t/write_vivification_perl_contract.t`. Rust, Dart, Julia, PUC Lua, and LuaJIT remain non-vivifying
-until their separately owned implementation/admission leaves. The neutral artifact and Perl milestone do not
-change the public capability census.
+105 rejected base mutations. Perl consumes this unchanged contract under `.19.2.1`, with permanent direct
+projection in `t/write_vivification_perl_contract.t`; Rust consumes it under `.19.3.1`, with native/serialized/
+generated/emitted proof in `rust/linkedspec-runtime/tests/write_vivification_contract.rs`. Dart, Julia, PUC Lua,
+and LuaJIT remain non-vivifying until their separately owned implementation/admission leaves. These backend
+milestones do not change the public capability census.
 
 ## Neutral `map_leaves!` receiver mutation
 
@@ -83,9 +84,10 @@ bash tools/run_python_project_data.sh tools/check_map_leaves_mutation_contract.p
 ```
 
 The exact composed fixture has a non-bang control returning `{"leaf":[]}` on all six runtime routes. Perl now
-executes the bang form and its nested-write composition. Rust still warns at the stopped identifier token and
-returns null; Dart, Julia, PUC Lua, and LuaJIT report their generic parser-invocation failure. No portable
-capability row, generated format, or public composition feature is admitted.
+executes the bang form and its nested-write composition. Rust implements the standalone nested-write half, but
+the composed source still stops at the unimplemented bang token before its callback can run; it warns at the
+stopped identifier and returns null. Dart, Julia, PUC Lua, and LuaJIT report their generic parser-invocation
+failure. No portable capability row or public composition feature is admitted.
 
 `mcp_semantic_transport_contract.json` (`linkedspec-mcp-transport-v1`) is the single backend-neutral machine
 contract for LinkedSpec's modern MCP `2026-07-28` stdio projection. Its root-relative artifact inventory pins the

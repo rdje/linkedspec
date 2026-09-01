@@ -2153,8 +2153,8 @@ fn terse_11_3_explicit_typed_targets_remain_aggregate_storage() {
 }
 
 // ── SPEC-FORMAT-TERSE.11.4 — nested mixed value-path writes:
-// multi-segment lvalue paths mutate scalar-held array/hash value trees with
-// explicit no-autovivification behavior for missing/wrong intermediate nodes.
+// multi-segment lvalue paths mutate scalar-held array/hash value trees under
+// the frozen dense-array and typed write-vivification contract.
 
 #[test]
 fn terse_11_4_nested_hash_array_hash_value_path_writes_run() {
@@ -2177,12 +2177,12 @@ fn terse_11_4_nested_array_hash_value_path_writes_run() {
 }
 
 #[test]
-fn terse_11_4_nested_assignment_expression_returns_root_or_undef() {
-    let grammar = "Top::\n /x/ -> Done { payload = { \"items\" : [{ \"name\" : \"old\" }] }; return(array((payload[\"items\"][0][\"name\"] = \"new\").count_keys(), payload[\"items\"][1] = \"tail\", payload, payload[\"items\"][3] = \"gap\", payload, payload[\"missing\"][0] = \"bad\", payload, payload[\"items\"][0][0] = \"bad\", payload)) }\n\nDone::\n /[a-z]+/\n";
+fn terse_11_4_nested_assignment_expression_returns_updated_root() {
+    let grammar = "Top::\n -> Done { payload = { \"items\" : [{ \"name\" : \"old\" }] }; return(array((payload[\"items\"][0][\"name\"] = \"new\").count_keys(), payload[\"items\"][1] = \"tail\", payload)) }\n\nDone::\n /[a-z]+/\n";
     assert_eq!(
         build_and_run(grammar, "xhello"),
-        serde_json::json!([[1, {"items": [{"name": "new"}, "tail"]}, {"items": [{"name": "new"}, "tail"]}, null, {"items": [{"name": "new"}, "tail"]}, null, {"items": [{"name": "new"}, "tail"]}, null, {"items": [{"name": "new"}, "tail"]}]]),
-        "nested assignment expressions return the updated root on success and undef without mutation on missing or wrong-shape paths"
+        serde_json::json!([[1, {"items": [{"name": "new"}, "tail"]}, {"items": [{"name": "new"}, "tail"]}]]),
+        "successful nested assignment expressions return the updated root"
     );
 }
 

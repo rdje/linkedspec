@@ -1,14 +1,14 @@
 # MEMORY
 
-- activation_commit: `be3d58dda7e89919e63c380c70180432b303dbbe` — exact clean blocker-record commit from which
-  `FUTURE-PARITY-BACKLOG.19.2.2` resumed implementation under the director's option-A clarification.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.19.2.2 - implement Perl map leaves mutation`; both Perl mutation
-  halves are signoff-complete without portable/public admission.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.19.3.1` — next clean-boundary leaf, Rust nested write-vivification.
-- next_action: derive the new clean `HEAD`, activate `.19.3.1` task-tree-first, retrieve its Rust/runtime owners,
-  and audit the exact typed parsed/serialized/emitted/runtime seams before implementation.
-- in_flight_uncommitted: intended none after the atomic `.19.2.2` commit; no background job, runtime probe
-  artifact, generated mdBook output, or pending receipt result remains.
+- activation_commit: `67e9a90f2307fd48dde77f52894c9999b11b1fb4` — exact clean Perl mutation commit from which
+  `FUTURE-PARITY-BACKLOG.19.3.1` was activated task-tree-first.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.19.3.1 - implement Rust write vivification`; typed parsed,
+  serialized, generated-plan, emitted-source, independently compiled, and native execution are signoff-complete.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.19.3.2` — next clean-boundary leaf, Rust `map_leaves!`.
+- next_action: derive the new clean `HEAD`, activate `.19.3.2` task-tree-first, retrieve its Rust parser/compiler/
+  runtime carrier owners, and audit the unchanged receiver-mutation contract before implementation.
+- in_flight_uncommitted: intended none after the atomic `.19.3.1` commit; no background job, generated mdBook
+  output, runtime probe artifact, or pending receipt result remains.
 - blockers: none.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -19,10 +19,11 @@
   self-hosted grammar preserves reserved lifecycle precedence. ADR `0094`.
 - current_standalone_block_frontier: admitted `.15.0-.2` behavior is unchanged; `.15.3` repairs the stale Lua
   `next()` fixture with action-edge ownership and recomposes the complete 178x2 / 109x2 dual-ABI boundary.
-- current_perl_write_vivification: `linkedspec-write-vivification-v1` is implemented on Perl with one typed expression-segment AST,
+- current_write_vivification: `linkedspec-write-vivification-v1` is implemented on Perl and Rust with one typed expression-segment AST,
   evaluated string/integer harray/array selection, dense atomic creation, post-evaluation snapshots, detached
   results, exact diagnostics/spans, invocation-local absent/null presence, and read exclusions at 105 rejected
-  mutations; Rust/Dart/Julia/Lua and public capability admission remain pending.
+  mutations. Rust preserves it through serde/generated/emitted carriers; Dart/Julia/Lua and public capability
+  admission remain pending.
 - current_perl_map_leaves_mutation: `linkedspec-map-leaves-mutation-v1` is implemented on Perl with one bang-only mutation AST,
   resolved receiver identity guard, root-kind original-shape traversal, copied frames, atomic rebind, detached
   result, post-commit continuation, exact diagnostics/exclusions, and 167 base mutations. Receiver callback writes
@@ -30,7 +31,8 @@
   are guarded. Rust/Dart/Julia/Lua and public admission remain pending.
 - current_mutation_composition_contract: `linkedspec-write-map-leaves-composition-v1` digest-binds both unchanged
   mechanisms across eight writes, six callback cases, one continuation, and 592 current composition mutations;
-  Perl executes both halves while the other backends remain pending.
+  Perl executes both halves; Rust executes standalone nested writes while its pending bang parser stops composed
+  callbacks; Dart/Julia/Lua remain pending.
 - current_map_leaves_scope_resolution: option A preserves pure functions. Helper-mediated rejection uses inline
   explicit-target `set(tree, ...)`; post-commit receiver-write proof uses caller-scoped `.with()`. No implicit
   caller capture or arbitrary user-defined bang method is admitted.
