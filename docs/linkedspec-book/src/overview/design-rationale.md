@@ -103,14 +103,14 @@ tree.map_leaves!() {
 }
 ```
 
-The non-bang `map_leaves()` returns a rebuilt tree without changing `tree`. On the Perl reference,
+The non-bang `map_leaves()` returns a rebuilt tree without changing `tree`. On Perl and Rust,
 `map_leaves!()` now requires a bare named receiver, traverses an isolated snapshot using the receiver's existing
 root-kind rules, commits the rebuilt tree only after complete success, rebinds `tree`, and returns the updated
 value. The callback's `path` stays a complete copied root-to-leaf path; `value` stays a scoped value rather than a
 writable reference. Replacements are based on the original tree shape and are not recursively revisited in the
-same call. Rust, Dart, Julia, and Lua implementation and portable admission remain pending.
+same call. Dart, Julia, and Lua implementation and portable admission remain pending.
 
-The neutral contract makes those details executable and Perl consumes it. Hash roots
+The neutral contract makes those details executable and Perl/Rust consume it. Hash roots
 recurse only through hashes in sorted-key depth-first order; arrays inside them are leaves. Array roots recurse
 only through arrays in zero-based depth-first order; hashes inside them are leaves. Every callback gets its own
 detached `value` and complete `path`, plus `depth` and the root-kind selector `key` or `index`. The callback's
@@ -203,9 +203,9 @@ re-entrancy diagnostics retain authored half-open Unicode-scalar spans.
 
 `walk_leaves!`, `reduce_leaves!`, function-form bang calls, and arbitrary `!`-suffixed identifiers are not part of
 that direction. They would save no meaningful ceremony or would advertise mutation without a distinct coherent
-contract. Perl implements nested creation and `map_leaves!`; Rust implements nested creation but still rejects
-the bang spelling at its stopped identifier with a soft null. The verified non-bang control remains identical on
-Perl, Rust, Dart, Julia, and Lua; Dart, Julia, PUC Lua, and LuaJIT retain their generic parser-invocation failure.
+contract. Perl and Rust implement nested creation and `map_leaves!`. The verified non-bang control remains
+identical on Perl, Rust, Dart, Julia, and Lua; Dart, Julia, PUC Lua, and LuaJIT retain their generic parser-
+invocation failure for the bang form.
 ADR `0036`, the two mechanism
 contracts plus their shared composition contract under `capability_conformance/`, and backlog `.19.1-.19.9` own
 the remaining backend and admission work.

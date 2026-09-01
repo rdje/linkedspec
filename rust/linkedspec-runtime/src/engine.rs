@@ -47,13 +47,16 @@ use crate::{
 use linkedspec_core::ast::RuleMode;
 use linkedspec_core::compiler::{
     validate_compiled_regex_slot_identities, validate_nested_write_nodes,
+    validate_receiver_mutation_nodes,
 };
 use linkedspec_core::entry_rule::{
     ENTRY_RULE_NOT_FOUND_CODE, EntryRuleSelectionBasis, NO_RULES_DEFINED_CODE,
     SELECT_ENTRY_RULE_STAGE, VALIDATE_SPEC_STAGE,
 };
 use linkedspec_core::expr::{
-    AccessSegment, Arg, CodeBlock, Expr, ExpressionSpan, WritePathSegment,
+    AccessSegment, Arg, CodeBlock, Expr, ExpressionSpan, FluentCall, ReceiverMutationActionBlock,
+    ReceiverMutationBindingReference, ReceiverMutationCall, ReceiverMutationContinuationCall,
+    WritePathSegment,
 };
 use linkedspec_core::trace::{TraceConfig, TraceEmitter, TraceLevel};
 use linkedspec_core::types::{
@@ -475,6 +478,78 @@ impl std::fmt::Display for NestedWriteError {
 }
 
 impl std::error::Error for NestedWriteError {}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+enum ReceiverMutationFailure {
+    Missing,
+    KindMismatch { actual_kind: &'static str },
+    Reentrant { attempt: String },
+}
+
+/// Typed runtime diagnostic for the frozen `map_leaves!` boundary.
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct ReceiverMutationError {
+    binding: String,
+    source_span: ExpressionSpan,
+    failure: ReceiverMutationFailure,
+}
+
+impl ReceiverMutationError {
+    fn payload(&self) -> Value {
+        let source_span = json!({
+            "start": self.source_span.start,
+            "end": self.source_span.end,
+            "unit": "unicode_scalar",
+            "provenance": "authored",
+        });
+        match &self.failure {
+            ReceiverMutationFailure::Missing => json!({
+                "code": "map_leaves_mutation_receiver_missing",
+                "operation": "map_leaves_mutation",
+                "binding": self.binding,
+                "method": "map_leaves",
+                "source_span": source_span,
+                "message": format!(
+                    "map_leaves! receiver binding '{}' does not exist",
+                    self.binding,
+                ),
+            }),
+            ReceiverMutationFailure::KindMismatch { actual_kind } => json!({
+                "code": "map_leaves_mutation_receiver_kind_mismatch",
+                "operation": "map_leaves_mutation",
+                "binding": self.binding,
+                "method": "map_leaves",
+                "expected_kinds": ["harray", "array"],
+                "actual_kind": actual_kind,
+                "source_span": source_span,
+                "message": format!(
+                    "map_leaves! receiver '{}' must hold an harray or array, got {}",
+                    self.binding, actual_kind,
+                ),
+            }),
+            ReceiverMutationFailure::Reentrant { attempt } => json!({
+                "code": "receiver_mutation_reentrant",
+                "operation": "map_leaves_mutation",
+                "binding": self.binding,
+                "method": "map_leaves",
+                "attempt": attempt,
+                "source_span": source_span,
+                "message": format!(
+                    "cannot write active map_leaves! receiver binding '{}' from its callback",
+                    self.binding,
+                ),
+            }),
+        }
+    }
+}
+
+impl std::fmt::Display for ReceiverMutationError {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(formatter, "{}", self.payload())
+    }
+}
+
+impl std::error::Error for ReceiverMutationError {}
 
 /// The runtime engine executes CompiledRule nodes against input text.
 pub struct Engine {
@@ -2553,12 +2628,16 @@ impl Engine {
         })
     }
 
-    fn validate_nested_write_state(&self) -> Result<(), String> {
-        validate_nested_write_nodes(&self.spec).map_err(|error| error.to_string())
+    fn validate_typed_write_state(&self) -> Result<(), String> {
+        validate_nested_write_nodes(&self.spec)
+            .map_err(|error| error.to_string())
+            .and_then(|()| {
+                validate_receiver_mutation_nodes(&self.spec).map_err(|error| error.to_string())
+            })
     }
 
     fn execute_with_context(&self, ctx: &mut RuntimeContext) -> Result<Value, String> {
-        self.validate_nested_write_state()?;
+        self.validate_typed_write_state()?;
         self.validate_compiled_slot_identities(ctx)?;
         let (label, basis) = self.resolve_entry_rule_label(ctx, None)?;
         ctx.trace_decision(
@@ -2586,7 +2665,7 @@ impl Engine {
             .map_err(|error| error.to_string())?;
         ctx.install_semantic_observation_sink(options.semantic_observation_sink());
         ctx.install_bounded_child_parse_authority(options.bounded_child_parse_authority())?;
-        self.validate_nested_write_state()?;
+        self.validate_typed_write_state()?;
         self.validate_compiled_slot_identities(ctx)?;
         let (label, basis) = self.resolve_entry_rule_label(ctx, options.entry_rule())?;
         ctx.trace_decision(
@@ -3706,6 +3785,23 @@ impl Engine {
                     .any(|segment| Self::expr_calls_rule(&segment.expression, rule_label))
                     || Self::expr_calls_rule(value, rule_label)
             }
+            Expr::ReceiverMutationChain {
+                mutation,
+                continuation,
+                ..
+            } => {
+                mutation
+                    .callback
+                    .body
+                    .statements
+                    .iter()
+                    .any(|statement| Self::expr_calls_rule(&statement.expr, rule_label))
+                    || continuation.iter().any(|call| {
+                        call.args
+                            .iter()
+                            .any(|argument| Self::arg_calls_rule(argument, rule_label))
+                    })
+            }
             Expr::IndexedVar { index, .. } => Self::expr_calls_rule(index, rule_label),
             Expr::NestedAccess { segments, .. } => segments.iter().any(|segment| match segment {
                 AccessSegment::Key { .. } => false,
@@ -3784,6 +3880,23 @@ impl Engine {
                         .iter()
                         .any(|segment| Self::expr_reads_retv(&segment.expression))
                     || Self::expr_reads_retv(value)
+            }
+            Expr::ReceiverMutationChain {
+                receiver,
+                mutation,
+                continuation,
+                ..
+            } => {
+                receiver.name == "retv"
+                    || mutation
+                        .callback
+                        .body
+                        .statements
+                        .iter()
+                        .any(|statement| Self::expr_reads_retv(&statement.expr))
+                    || continuation
+                        .iter()
+                        .any(|call| call.args.iter().any(Self::arg_reads_retv))
             }
             Expr::Variable { name } => name == "retv",
             Expr::IndexedVar { name, index } => name == "retv" || Self::expr_reads_retv(index),
@@ -4105,6 +4218,7 @@ impl Engine {
             if !Self::statement_controls_active(&if_stack, &switch_stack) {
                 continue;
             }
+            self.assert_receiver_write_expr(&stmt.expr, ctx)?;
             if let Some(flow) = self.execute_statement_while_loop(&stmt.expr, ctx, rule_label)? {
                 if flow == StatementBlockFlow::Returned {
                     return Ok(flow);
@@ -4146,6 +4260,7 @@ impl Engine {
         ctx: &mut RuntimeContext,
         rule_label: &str,
     ) -> Result<(), String> {
+        self.assert_receiver_write_expr(expr, ctx)?;
         if self.execute_scalar_assignment_operator_statement(expr, ctx, rule_label)? {
             return Ok(());
         }
@@ -5184,6 +5299,240 @@ impl Engine {
         Ok(current)
     }
 
+    fn receiver_mutation_value_kind(value: &RuntimeValue) -> &'static str {
+        match value {
+            RuntimeValue::Hash(_) => "harray",
+            RuntimeValue::Array(_) => "array",
+            RuntimeValue::Undef => "null",
+            RuntimeValue::Scalar(_) => "string",
+            RuntimeValue::Number(_) => "number",
+            RuntimeValue::Bool(_) => "boolean",
+            RuntimeValue::Codeblock(_) => "codeblock",
+        }
+    }
+
+    fn receiver_write_attempt(expr: &Expr) -> Option<(&str, String, Option<ExpressionSpan>)> {
+        match expr {
+            Expr::AssignScalar { name, .. } => Some((name, "assign".to_string(), None)),
+            Expr::AssignArrayAppend { name, .. } => Some((name, "append".to_string(), None)),
+            Expr::AssignHashIndex { name, .. } => Some((name, "nested_write".to_string(), None)),
+            Expr::AssignNestedAccess {
+                source_span, base, ..
+            } => Some((
+                base,
+                "nested_write".to_string(),
+                Some(ExpressionSpan {
+                    start: source_span.start,
+                    end: source_span.start + base.chars().count(),
+                }),
+            )),
+            Expr::ReceiverMutationChain { receiver, .. } => Some((
+                receiver.name.as_str(),
+                "map_leaves!".to_string(),
+                Some(receiver.source_span),
+            )),
+            Expr::FluentChain { receiver, calls } => {
+                let Expr::Variable { name } = receiver.as_ref() else {
+                    return None;
+                };
+                let call = calls.first()?;
+                Self::is_statement_only_array_end_mutation_method(&call.method)
+                    .then(|| (name.as_str(), call.method.clone(), None))
+            }
+            Expr::Call { name, args } => {
+                let target = match args.first()?.value() {
+                    Expr::Variable { name } => name.as_str(),
+                    _ => return None,
+                };
+                let attempt = match name.as_str() {
+                    "set" | "=" if args.len() >= 2 => "helper:set".to_string(),
+                    "set_key" if args.len() >= 3 => "helper:set_key".to_string(),
+                    "push" if args.len() >= 2 => "helper:push".to_string(),
+                    "split" if args.len() == 3 => "helper:split".to_string(),
+                    "split_each" | "trim_each" | "filter_nonempty" | "filter_match"
+                    | "lowercase_each" | "uppercase_each" | "uniq" => {
+                        format!("helper:{name}")
+                    }
+                    _ => return None,
+                };
+                Some((target, attempt, None))
+            }
+            _ => None,
+        }
+    }
+
+    fn assert_receiver_write_expr(&self, expr: &Expr, ctx: &RuntimeContext) -> Result<(), String> {
+        let Some((target, attempt, explicit_span)) = Self::receiver_write_attempt(expr) else {
+            return Ok(());
+        };
+        let Some((binding, site_span)) = ctx.active_receiver_write(target, &attempt) else {
+            return Ok(());
+        };
+        Err(ReceiverMutationError {
+            binding: binding.to_string(),
+            source_span: explicit_span
+                .or(site_span)
+                .unwrap_or(ExpressionSpan { start: 0, end: 0 }),
+            failure: ReceiverMutationFailure::Reentrant { attempt },
+        }
+        .to_string())
+    }
+
+    fn receiver_mutation_write_sites(
+        binding: &str,
+        body: &ReceiverMutationActionBlock,
+    ) -> std::collections::HashMap<String, ExpressionSpan> {
+        let source = body.source.as_str();
+        let bytes = source.as_bytes();
+        let mut sites = std::collections::HashMap::new();
+        let mut pos = 0usize;
+        while pos < bytes.len() {
+            if matches!(bytes[pos], b'"' | b'\'') {
+                let quote = bytes[pos];
+                pos += 1;
+                while pos < bytes.len() {
+                    if bytes[pos] == b'\\' {
+                        pos = (pos + 2).min(bytes.len());
+                    } else if bytes[pos] == quote {
+                        pos += 1;
+                        break;
+                    } else {
+                        pos += 1;
+                    }
+                }
+                continue;
+            }
+            if !(bytes[pos].is_ascii_alphabetic() || bytes[pos] == b'_') {
+                pos += 1;
+                continue;
+            }
+            let token_start = pos;
+            pos += 1;
+            while pos < bytes.len() && (bytes[pos].is_ascii_alphanumeric() || bytes[pos] == b'_') {
+                pos += 1;
+            }
+            let token = &source[token_start..pos];
+            let mut after = pos;
+            while bytes
+                .get(after)
+                .is_some_and(|byte| byte.is_ascii_whitespace())
+            {
+                after += 1;
+            }
+            let span_for = |start: usize, end: usize| ExpressionSpan {
+                start: body.source_span.start + source[..start].chars().count(),
+                end: body.source_span.start + source[..end].chars().count(),
+            };
+
+            if token == binding {
+                if source[after..].starts_with("+=") {
+                    sites
+                        .entry("append".to_string())
+                        .or_insert_with(|| span_for(token_start, pos));
+                } else if source[after..].starts_with('=') && !source[after..].starts_with("==") {
+                    sites
+                        .entry("assign".to_string())
+                        .or_insert_with(|| span_for(token_start, pos));
+                } else if source[after..].starts_with('[') {
+                    let statement_end = source[after..]
+                        .find([';', '\n', '\r'])
+                        .map_or(source.len(), |offset| after + offset);
+                    if source[after..statement_end].contains('=') {
+                        sites
+                            .entry("nested_write".to_string())
+                            .or_insert_with(|| span_for(token_start, pos));
+                    }
+                } else if source[after..].starts_with('.') {
+                    let mut method_start = after + 1;
+                    while bytes
+                        .get(method_start)
+                        .is_some_and(|byte| byte.is_ascii_whitespace())
+                    {
+                        method_start += 1;
+                    }
+                    let mut method_end = method_start;
+                    while bytes
+                        .get(method_end)
+                        .is_some_and(|byte| byte.is_ascii_alphanumeric() || *byte == b'_')
+                    {
+                        method_end += 1;
+                    }
+                    let method = &source[method_start..method_end];
+                    let attempt = if method == "map_leaves" && bytes.get(method_end) == Some(&b'!')
+                    {
+                        Some("map_leaves!")
+                    } else if matches!(
+                        method,
+                        "push_back" | "push_front" | "pop_back" | "pop_front"
+                    ) {
+                        Some(method)
+                    } else {
+                        None
+                    };
+                    if let Some(attempt) = attempt {
+                        sites
+                            .entry(attempt.to_string())
+                            .or_insert_with(|| span_for(token_start, pos));
+                    }
+                }
+            }
+
+            let helper_attempt = match token {
+                "set" | "=" => Some("helper:set".to_string()),
+                "set_key" | "push" | "split" | "split_each" | "trim_each" | "filter_nonempty"
+                | "filter_match" | "lowercase_each" | "uppercase_each" | "uniq" => {
+                    Some(format!("helper:{token}"))
+                }
+                _ => None,
+            };
+            if let Some(attempt) = helper_attempt
+                && bytes.get(after) == Some(&b'(')
+                && let Some(close) = Self::matching_runtime_parenthesis(source, after)
+            {
+                let first_arg = source[after + 1..close]
+                    .split(',')
+                    .next()
+                    .unwrap_or_default()
+                    .trim();
+                if first_arg == binding {
+                    sites
+                        .entry(attempt)
+                        .or_insert_with(|| span_for(token_start, close + 1));
+                }
+            }
+        }
+        sites
+    }
+
+    fn matching_runtime_parenthesis(source: &str, open: usize) -> Option<usize> {
+        let bytes = source.as_bytes();
+        let mut pos = open;
+        let mut depth = 0usize;
+        while pos < bytes.len() {
+            if matches!(bytes[pos], b'"' | b'\'') {
+                let quote = bytes[pos];
+                pos += 1;
+                while pos < bytes.len() {
+                    if bytes[pos] == b'\\' {
+                        pos = (pos + 2).min(bytes.len());
+                    } else if bytes[pos] == quote {
+                        break;
+                    }
+                    pos += 1;
+                }
+            } else if bytes[pos] == b'(' {
+                depth += 1;
+            } else if bytes[pos] == b')' {
+                depth = depth.checked_sub(1)?;
+                if depth == 0 {
+                    return Some(pos);
+                }
+            }
+            pos += 1;
+        }
+        None
+    }
+
     /// Evaluate an expression tree against the runtime context.
     fn eval_expr(
         &self,
@@ -5192,6 +5541,7 @@ impl Engine {
         rule_label: &str,
     ) -> Result<RuntimeValue, String> {
         use linkedspec_core::expr::Expr;
+        self.assert_receiver_write_expr(expr, ctx)?;
         match expr {
             Expr::Call { name, args } => {
                 if name == "dispatch_span" {
@@ -5366,6 +5716,14 @@ impl Engine {
                 ..
             } => self
                 .eval_nested_access_assignment_expression(base, segments, value, ctx, rule_label),
+            Expr::ReceiverMutationChain {
+                receiver,
+                mutation,
+                continuation,
+                ..
+            } => {
+                self.eval_receiver_mutation_chain(receiver, mutation, continuation, ctx, rule_label)
+            }
             Expr::Variable { name } => Ok(ctx.get_bare_value(name)),
             Expr::IndexedVar { name, index } => {
                 let idx_val = self.eval_expr(index, ctx, rule_label)?;
@@ -6178,6 +6536,238 @@ impl Engine {
         format!(
             "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:{method}: receiver `{signature}` requires the accepted tree traversal trailing-block arity in rule '{rule_label}'"
         )
+    }
+
+    fn eval_receiver_mutation_chain(
+        &self,
+        receiver: &ReceiverMutationBindingReference,
+        mutation: &ReceiverMutationCall,
+        continuation: &[ReceiverMutationContinuationCall],
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        if !ctx.has_bare_binding(&receiver.name) {
+            return Err(ReceiverMutationError {
+                binding: receiver.name.clone(),
+                source_span: receiver.source_span,
+                failure: ReceiverMutationFailure::Missing,
+            }
+            .to_string());
+        }
+
+        let original_kind = ctx.bare_kind(&receiver.name);
+        let snapshot = ctx.get_bare_value(&receiver.name);
+        if !matches!(snapshot, RuntimeValue::Hash(_) | RuntimeValue::Array(_)) {
+            return Err(ReceiverMutationError {
+                binding: receiver.name.clone(),
+                source_span: receiver.source_span,
+                failure: ReceiverMutationFailure::KindMismatch {
+                    actual_kind: Self::receiver_mutation_value_kind(&snapshot),
+                },
+            }
+            .to_string());
+        }
+
+        let write_sites =
+            Self::receiver_mutation_write_sites(&receiver.name, &mutation.callback.body);
+        let Some(identity) = ctx.activate_receiver_mutation(&receiver.name, write_sites) else {
+            return Err(ReceiverMutationError {
+                binding: receiver.name.clone(),
+                source_span: receiver.source_span,
+                failure: ReceiverMutationFailure::Reentrant {
+                    attempt: "map_leaves!".to_string(),
+                },
+            }
+            .to_string());
+        };
+
+        let rebuilt = match snapshot {
+            RuntimeValue::Hash(entries) => {
+                let mut path = Vec::new();
+                self.map_receiver_mutation_hash_entries(
+                    &entries,
+                    &mut path,
+                    &mutation.callback.body,
+                    ctx,
+                    rule_label,
+                )
+                .map(RuntimeValue::Hash)
+            }
+            RuntimeValue::Array(items) => {
+                let mut path = Vec::new();
+                self.map_receiver_mutation_array_items(
+                    &items,
+                    &mut path,
+                    &mutation.callback.body,
+                    ctx,
+                    rule_label,
+                )
+                .map(RuntimeValue::Array)
+            }
+            _ => unreachable!("receiver kind was checked before guard activation"),
+        };
+
+        let rebuilt = match rebuilt {
+            Ok(value) => value,
+            Err(error) => {
+                ctx.deactivate_receiver_mutation(identity);
+                return Err(error);
+            }
+        };
+        match (original_kind, &rebuilt) {
+            (Some(RuntimeVarKind::Array), RuntimeValue::Array(values)) => {
+                ctx.set_array(&receiver.name, values.clone());
+            }
+            (Some(RuntimeVarKind::Hash), RuntimeValue::Hash(values)) => {
+                ctx.set_hash(&receiver.name, values.clone());
+            }
+            _ => ctx.set_scalar(&receiver.name, rebuilt.clone()),
+        }
+        ctx.deactivate_receiver_mutation(identity);
+
+        let calls = continuation
+            .iter()
+            .map(|call| FluentCall {
+                method: call.method.clone(),
+                args: call.args.clone(),
+            })
+            .collect::<Vec<_>>();
+        let mut current = rebuilt.clone();
+        for (index, call) in calls.iter().enumerate() {
+            if Self::is_receiver_trailing_block_surface_call(call) {
+                current =
+                    self.eval_receiver_with_trailing_block_call(current, call, ctx, rule_label)?;
+            } else {
+                current = self.eval_receiver_dynamic_value_chain_call(
+                    current,
+                    call,
+                    calls.get(index + 1),
+                    index + 1 == calls.len(),
+                    ctx,
+                    rule_label,
+                )?;
+            }
+        }
+        Ok(current)
+    }
+
+    fn map_receiver_mutation_hash_entries(
+        &self,
+        entries: &[(String, RuntimeValue)],
+        path: &mut Vec<String>,
+        body: &ReceiverMutationActionBlock,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<Vec<(String, RuntimeValue)>, String> {
+        let mut mapped = Vec::new();
+        for (key, value) in Self::sorted_hash_tree_entries(entries) {
+            path.push(key.clone());
+            let next_value = match value {
+                RuntimeValue::Hash(children) => self
+                    .map_receiver_mutation_hash_entries(&children, path, body, ctx, rule_label)
+                    .map(RuntimeValue::Hash),
+                leaf => {
+                    self.eval_receiver_mutation_hash_leaf(leaf, &key, path, body, ctx, rule_label)
+                }
+            };
+            path.pop();
+            mapped.push((key, next_value?));
+        }
+        Ok(mapped)
+    }
+
+    fn map_receiver_mutation_array_items(
+        &self,
+        items: &[RuntimeValue],
+        path: &mut Vec<usize>,
+        body: &ReceiverMutationActionBlock,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<Vec<RuntimeValue>, String> {
+        let mut mapped = Vec::new();
+        for (index, value) in items.iter().enumerate() {
+            path.push(index);
+            let next_value = match value {
+                RuntimeValue::Array(children) => self
+                    .map_receiver_mutation_array_items(children, path, body, ctx, rule_label)
+                    .map(RuntimeValue::Array),
+                leaf => self.eval_receiver_mutation_array_leaf(
+                    leaf.clone(),
+                    index,
+                    path,
+                    body,
+                    ctx,
+                    rule_label,
+                ),
+            };
+            path.pop();
+            mapped.push(next_value?);
+        }
+        Ok(mapped)
+    }
+
+    fn eval_receiver_mutation_hash_leaf(
+        &self,
+        value: RuntimeValue,
+        key: &str,
+        path: &[String],
+        body: &ReceiverMutationActionBlock,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        let mut bindings = vec![
+            ctx.enter_scoped_scalar_binding("value", value),
+            ctx.enter_scoped_scalar_binding("key", RuntimeValue::Scalar(key.to_string())),
+            ctx.enter_scoped_scalar_binding(
+                "path",
+                RuntimeValue::Array(
+                    path.iter()
+                        .map(|part| RuntimeValue::Scalar(part.clone()))
+                        .collect(),
+                ),
+            ),
+            ctx.enter_scoped_scalar_binding("depth", RuntimeValue::Number(path.len() as f64)),
+        ];
+        let callback = CodeBlock {
+            statements: body.statements.clone(),
+        };
+        let result = self.eval_block_value(&callback, ctx, rule_label);
+        while let Some(binding) = bindings.pop() {
+            ctx.exit_scoped_variable_binding(binding);
+        }
+        result
+    }
+
+    fn eval_receiver_mutation_array_leaf(
+        &self,
+        value: RuntimeValue,
+        index: usize,
+        path: &[usize],
+        body: &ReceiverMutationActionBlock,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        let mut bindings = vec![
+            ctx.enter_scoped_scalar_binding("value", value),
+            ctx.enter_scoped_scalar_binding("index", RuntimeValue::Number(index as f64)),
+            ctx.enter_scoped_scalar_binding(
+                "path",
+                RuntimeValue::Array(
+                    path.iter()
+                        .map(|part| RuntimeValue::Number(*part as f64))
+                        .collect(),
+                ),
+            ),
+            ctx.enter_scoped_scalar_binding("depth", RuntimeValue::Number(path.len() as f64)),
+        ];
+        let callback = CodeBlock {
+            statements: body.statements.clone(),
+        };
+        let result = self.eval_block_value(&callback, ctx, rule_label);
+        while let Some(binding) = bindings.pop() {
+            ctx.exit_scoped_variable_binding(binding);
+        }
+        result
     }
 
     fn sorted_hash_tree_entries(entries: &[(String, RuntimeValue)]) -> Vec<(String, RuntimeValue)> {
@@ -11945,6 +12535,160 @@ Boundary: /END/
         assert_eq!(
             wrong.get_bare_value("document"),
             RuntimeValue::Hash(vec![("key".into(), RuntimeValue::Scalar("scalar".into()),)])
+        );
+    }
+
+    fn receiver_mutation_expr(source: &str) -> Expr {
+        CodeBlock::parse(source).unwrap().statements[0].expr.clone()
+    }
+
+    #[test]
+    fn receiver_mutation_callback_failure_is_atomic_and_releases_the_guard() {
+        let engine = nested_write_test_engine();
+        let original = vec![
+            ("a".into(), RuntimeValue::Scalar("A".into())),
+            ("b".into(), RuntimeValue::Scalar("B".into())),
+        ];
+        let mut ctx = RuntimeContext::new("x");
+        ctx.set_hash("tree", original.clone());
+        ctx.set_array("audit", Vec::new());
+        ctx.set_array("journal", Vec::new());
+
+        let failing = receiver_mutation_expr(
+            r#"tree.map_leaves!() { audit += path; journal[0] = path; return(if(str_eq(key, "b"), dispatch_span(), else(cat(value, "!")))) }"#,
+        );
+        let error = engine
+            .eval_expr(&failing, &mut ctx, "Top")
+            .expect_err("second callback must fail");
+        assert!(
+            error.contains("progressive_span_binding_required"),
+            "{error}"
+        );
+        assert_eq!(ctx.get_bare_value("tree"), RuntimeValue::Hash(original));
+        assert_eq!(
+            ctx.get_bare_value("audit"),
+            RuntimeValue::Array(vec![
+                RuntimeValue::Array(vec![RuntimeValue::Scalar("a".into())]),
+                RuntimeValue::Array(vec![RuntimeValue::Scalar("b".into())]),
+            ])
+        );
+        assert_eq!(
+            ctx.get_bare_value("journal"),
+            RuntimeValue::Array(vec![RuntimeValue::Array(vec![RuntimeValue::Scalar(
+                "b".into()
+            )])])
+        );
+
+        let succeeding =
+            receiver_mutation_expr(r#"tree.map_leaves!() { return(cat(value, "!")) }"#);
+        let result = engine
+            .eval_expr(&succeeding, &mut ctx, "Top")
+            .expect("a later invocation proves that the failed guard was released");
+        let expected = RuntimeValue::Hash(vec![
+            ("a".into(), RuntimeValue::Scalar("A!".into())),
+            ("b".into(), RuntimeValue::Scalar("B!".into())),
+        ]);
+        assert_eq!(result, expected);
+        assert_eq!(ctx.get_bare_value("tree"), expected);
+    }
+
+    #[test]
+    fn receiver_mutation_continuation_failure_preserves_the_completed_commit() {
+        let engine = nested_write_test_engine();
+        let mut ctx = RuntimeContext::new("x");
+        ctx.set_hash("tree", vec![("a".into(), RuntimeValue::Scalar("A".into()))]);
+        let expr = receiver_mutation_expr(
+            r#"tree.map_leaves!() { return(cat(value, "!")) }.with() { tree["extra"][2] = "X"; return(value) }"#,
+        );
+        let error = engine
+            .eval_expr(&expr, &mut ctx, "Top")
+            .expect_err("continuation nested write must fail after publication");
+        assert!(error.contains("nested_write_array_gap"), "{error}");
+        assert_eq!(
+            ctx.get_bare_value("tree"),
+            RuntimeValue::Hash(vec![("a".into(), RuntimeValue::Scalar("A!".into()),)])
+        );
+    }
+
+    #[test]
+    fn receiver_mutation_guard_covers_array_end_and_binding_target_pipelines() {
+        let engine = nested_write_test_engine();
+        let cases = [
+            (
+                r#"items.map_leaves!() { items += "x"; return(value) }"#,
+                "append",
+            ),
+            (
+                r#"items.map_leaves!() { items.push_back("x"); return(value) }"#,
+                "push_back",
+            ),
+            (
+                r#"items.map_leaves!() { split_each(items, ","); return(value) }"#,
+                "helper:split_each",
+            ),
+        ];
+        for (source, attempt) in cases {
+            let mut ctx = RuntimeContext::new("x");
+            ctx.set_array("items", vec![RuntimeValue::Scalar("A".into())]);
+            let error = engine
+                .eval_expr(&receiver_mutation_expr(source), &mut ctx, "Top")
+                .expect_err(attempt);
+            let payload: Value = serde_json::from_str(&error).unwrap();
+            assert_eq!(payload["code"], "receiver_mutation_reentrant");
+            assert_eq!(payload["attempt"], attempt);
+            assert_eq!(
+                ctx.get_bare_value("items"),
+                RuntimeValue::Array(vec![RuntimeValue::Scalar("A".into())])
+            );
+        }
+
+        let mut ctx = RuntimeContext::new("x");
+        ctx.set_hash("tree", vec![("a".into(), RuntimeValue::Scalar("A".into()))]);
+        let expr = receiver_mutation_expr(
+            r#"tree.map_leaves!() { set(tree, { audit += "rhs"; return({}) }); return(value) }"#,
+        );
+        let error = engine
+            .eval_expr(&expr, &mut ctx, "Top")
+            .expect_err("helper target guard must precede operand evaluation");
+        let payload: Value = serde_json::from_str(&error).unwrap();
+        assert_eq!(payload["attempt"], "helper:set");
+        assert!(!ctx.has_bare_binding("audit"));
+
+        let mut ctx = RuntimeContext::new("x");
+        ctx.set_hash("tree", vec![("a".into(), RuntimeValue::Scalar("A".into()))]);
+        let error = engine
+            .eval_expr(
+                &receiver_mutation_expr(
+                    r#"tree.map_leaves!() { tree[dispatch_span()] = dispatch_span(); return(value) }"#,
+                ),
+                &mut ctx,
+                "Top",
+            )
+            .expect_err("nested-write guard must precede selector and RHS evaluation");
+        let payload: Value = serde_json::from_str(&error).unwrap();
+        assert_eq!(payload["code"], "receiver_mutation_reentrant");
+        assert_eq!(payload["attempt"], "nested_write");
+
+        let mut ctx = RuntimeContext::new("x");
+        ctx.set_hash("tree", vec![("a".into(), RuntimeValue::Scalar("A".into()))]);
+        ctx.set_array("other", Vec::new());
+        let error = engine
+            .eval_expr(
+                &receiver_mutation_expr(
+                    r#"tree.map_leaves!() { other[2] = push(other, "rhs"); return(value) }"#,
+                ),
+                &mut ctx,
+                "Top",
+            )
+            .expect_err("failed unrelated write must abort receiver publication");
+        assert!(error.contains("nested_write_array_gap"), "{error}");
+        assert_eq!(
+            ctx.get_bare_value("tree"),
+            RuntimeValue::Hash(vec![("a".into(), RuntimeValue::Scalar("A".into()))])
+        );
+        assert_eq!(
+            ctx.get_bare_value("other"),
+            RuntimeValue::Array(vec![RuntimeValue::Scalar("rhs".into())])
         );
     }
 }

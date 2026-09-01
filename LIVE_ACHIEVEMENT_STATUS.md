@@ -2,20 +2,24 @@
 
 ## Current Activity
 
-- Rust nested-write leaf `.19.3.1` is signoff-complete across typed parsed/serialized/generated/emitted carriers.
-  Parent `.19.3` remains active; Rust `map_leaves!` leaf `.19.3.2` is next without public admission.
+- Rust nested-write `.19.3.1` and `map_leaves!` `.19.3.2` are signoff-complete across typed native, serialized,
+  generated, emitted, and independently compiled carriers. Parent `.19.3` remains active at oracle cleanup `.3`.
 
 ## Latest Completed Slice
 
-- `.19.3.1` implements Rust nested-write vivification with exact typed diagnostics and fail-closed carrier
-  validation, passes focused/broad/canonical proof, and leaves Rust bang plus portable/public admission pending.
+- `.19.3.2` implements Rust `map_leaves!` with stable binding identities, complete pre-evaluation receiver guard,
+  atomic original-shape mapping, strict write composition, and detached post-commit continuation.
 
 ## Next Action
 
-- Derive the new clean `HEAD`, activate `.19.3.2` task-tree-first, and audit Rust parser/compiler/runtime ownership
-  for the unchanged `map_leaves!` contract before behavior changes.
+- Derive the new clean `HEAD`, activate `.19.3.3` task-tree-first, and use the LinkedSpec toolbox to reproduce and
+  repair the pre-existing root/target-regex oracle drift without changing the semantic rule.
 
 ## Recent Completions
+
+- `2026-09-01` — `.19.3.2` implements Rust `map_leaves!`; 9/9 permanent carrier/behavior tests, 3/3 private
+  failure-state tests, unchanged 167 base + 592 composition mutations, corrected 11/11 trace controls, and the
+  complete Rust component gate pass; direct entry is locked as lifecycle-positive and own-regex-negative.
 
 - `2026-09-01` — `.19.3.1` unifies Rust nested writes under one typed expression-segment node, executes dense
   isolated vivification across native/generated carriers, and passes focused 5/5, 197/197, 105/105, broad Rust,
@@ -63,9 +67,6 @@
 
 - `2026-08-29` — `.15.2` closes standalone lifecycle-block parity across five backends/six routes, self-hosted
   grammar, generated carriers, capability 90/0/0, public teaching, and exact recurring no-drift.
-
-- `2026-08-29` — `.15.1` makes bare rule-item blocks exact lifecycle `I` shorthand on Perl/Rust, preserves source,
-  spans, position and owners, orders all duplicate mixtures, fixes Rust last-slot-wins, and locks malformed twins.
 
 ## History
 

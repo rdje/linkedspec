@@ -56,10 +56,12 @@ The checker validates four syntax forms, fourteen exact syntax failures, five ex
 machine cases, eight pre-commit failures, continuation/shadow/guard-release/non-bang/detachment proof, six shared
 callback compositions, one post-commit continuation composition, 167 base mutations, and 593 composition
 mutations at the original freeze boundary. The pure-function-preserving carrier correction retains every
-observation and yields 592 current composition mutations. Perl now consumes the exact contract under `.19.2.2`,
-with permanent direct proof in `t/map_leaves_mutation_perl_contract.t`. Rust still soft-fails the bang twin to null
-with its warning; Dart, Julia, and Lua return their generic parser-invocation failure. All five accept the byte-
-identical non-bang control. Portable capability admission remains pending.
+observation and yields 592 current composition mutations. Perl consumes the exact contract under `.19.2.2`, with
+permanent direct proof in `t/map_leaves_mutation_perl_contract.t`; Rust consumes it under `.19.3.2`, with native,
+serde, generated-plan, emitted-source, independently compiled, and private failure-state proof in
+`rust/linkedspec-runtime/tests/map_leaves_mutation_contract.rs` and `rust/linkedspec-runtime/src/engine.rs`.
+Dart, Julia, and Lua return their generic parser-invocation failure. All five accept the byte-identical non-bang
+control. Portable capability admission remains pending.
 
 ## Neutral write/receiver-mutation composition
 
@@ -83,11 +85,9 @@ bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py
 bash tools/run_python_project_data.sh tools/check_map_leaves_mutation_contract.py
 ```
 
-The exact composed fixture has a non-bang control returning `{"leaf":[]}` on all six runtime routes. Perl now
-executes the bang form and its nested-write composition. Rust implements the standalone nested-write half, but
-the composed source still stops at the unimplemented bang token before its callback can run; it warns at the
-stopped identifier and returns null. Dart, Julia, PUC Lua, and LuaJIT report their generic parser-invocation
-failure. No portable capability row or public composition feature is admitted.
+The exact composed fixture has a non-bang control returning `{"leaf":[]}` on all six runtime routes. Perl and
+Rust execute the bang form and its nested-write composition. Dart, Julia, PUC Lua, and LuaJIT report their generic
+parser-invocation failure. No portable capability row or public composition feature is admitted.
 
 `mcp_semantic_transport_contract.json` (`linkedspec-mcp-transport-v1`) is the single backend-neutral machine
 contract for LinkedSpec's modern MCP `2026-07-28` stdio projection. Its root-relative artifact inventory pins the

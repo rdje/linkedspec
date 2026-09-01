@@ -870,7 +870,7 @@ When `direct_access` is used as `nested_assignment` on Perl, every segment is re
 expression. Its evaluated string/nonnegative-integer kind selects harray/array, so an absent root and unambiguous
 missing intermediates may be created. Existing null/wrong kinds are not coerced; array indexes replace or append
 exactly at length and gaps fail. Segments then RHS evaluate before isolated structural work; typed failures commit
-no partial path. Rust, Dart, Julia, and Lua retain the earlier rule that every intermediate already exists until
+no partial path. Dart, Julia, and Lua retain the earlier rule that every intermediate already exists until
 their implementation and admission leaves complete. Read semantics remain non-creating on every backend.
 
 Bare scalar reads and typed assignment:
@@ -962,7 +962,7 @@ hash_expr.map_leaves() { return(value) }
 array_expr.map_leaves() { return(value) }
                         — array-tree receiver block traversal over scalar/hash leaves; Perl/Rust current
 binding_identifier.map_leaves!() { block }
-                        — Perl-only current receiver mutation; one bare existing harray/array binding, dedicated
+                        — Perl/Rust current receiver mutation; one bare existing harray/array binding, dedicated
                           bang AST, callback-result leaf replacement, original-shape traversal, atomic rebind
 contains(arr, needle)   — array membership test
 index_of(arr, needle)   — first index of needle
@@ -1008,14 +1008,14 @@ array_expr.map_leaves() { block }
 array_expr.reduce_leaves(initial) { block }
                         — fold every scalar/hash leaf into acc, returns final accumulator
 binding_identifier.map_leaves!() { block }
-                        — Perl-only current; callback binds value, path/@path, depth, and key or index; direct
-                          callback mutation of the receiver identity is rejected
+                        — Perl/Rust current; callback binds value, path (also @path on Perl), depth, and key or
+                          index; direct callback mutation of the receiver identity is rejected
 ```
 
 The bang suffix above belongs only to the exact `map_leaves!` method token; it is not part of identifier grammar.
 The receiver cannot be a literal, temporary, helper result, property, or bracket access. Function-form
 `map_leaves!(binding)`, `walk_leaves!`, `reduce_leaves!`, bang continuation, and arbitrary user-defined bang names
-are excluded. Rust, Dart, Julia, and Lua do not yet accept this form.
+are excluded. Dart, Julia, and Lua do not yet accept this form.
 
 ### 7.5 Numeric Helpers
 ```

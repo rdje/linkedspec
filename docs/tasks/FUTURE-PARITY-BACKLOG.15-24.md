@@ -1104,7 +1104,7 @@
   Commit: `FUTURE-PARITY-BACKLOG.19.2.2 - implement Perl map leaves mutation`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.3`
-  Status: `in progress; .19.3.1 done, .19.3.2 next`
+  Status: `in progress; .19.3.1-.2 done, .19.3.3 next`
   Goal: Implement the unchanged v1 contract on Rust, including interpreted and supported generated routes.
   Children: `.19.3.1`, `.19.3.2`, `.19.3.3`
   Dependencies: `.19.2`
@@ -1176,11 +1176,86 @@
   Commit: `FUTURE-PARITY-BACKLOG.19.3.1 - implement Rust write vivification`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.3.2`
-  Status: `pending`
+  Status: `done; focused-signoff-complete` (2026-09-01; task-tree-first from exact clean Rust nested-write commit
+    `c1dc84baeaa6f2d1d9644d01ae25e32d9f67f046`; no push)
   Goal: Implement Rust `map_leaves!` through typed parsed/serialized/emitted state and runtime.
   Dependencies: `.19.3.1`
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused` — this leaf changes only the already-ratified Rust private implementation and its
+    direct neutral/generated consumers; Dart/Julia/Lua, portable capability, public examples, parent admission,
+    and the push boundary remain owned by `.19.4-.19.9`. The required Rust component gate also owns correction of
+    the one pre-existing `trace_controls` route-sink assertion that expected `Top`'s own regex to match on entry;
+    systematic positive target-regex fixture/oracle cleanup remains `.19.3.3`.
+  Focused checks: unchanged neutral checker and exact Rust projection of all 4 valid syntax, 14 invalid syntax,
+    5 exclusions, 10 successes, 8 pre-commit failures, continuation/shadow/guard-release/nonbang/detachment proof,
+    167 base mutations, and 592 nested-write compositions; core/runtime parser, compiler, serde, emitted-source,
+    generated-plan, independently compiled source, corpus, and integration dependents; formatting, Knowledge,
+    task/index, bounded histories, memory, all nine doctrines, rendered mdBook, cross-backend no-drift, and the
+    complete Rust component local gate.
+  Canonical trigger: `none` — escalate only if verification requires cross-backend/public admission,
+    infrastructure/storage/doctrine movement, a mandatory bounded-history rollover, or repair of the separately
+    owned oracle reproducibility drift; otherwise later admission/push leaves retain the canonical boundary.
+  Acceptance: Parse only `IDENTIFIER.map_leaves!() { ACTION_BLOCK }` as the dedicated typed
+    `receiver_mutation_chain`, retaining receiver/call/callback/continuation structure and exact authored Unicode-
+    scalar spans across serde, compiler validation, emitted plans, source emission, and independently compiled
+    generated Rust. Resolve one existing bare uniform-binding identity containing an harray or array; traverse a
+    detached original-shape snapshot in sorted-key or index order; provide detached `value`, complete copied
+    `path`, `depth`, and `key|index`; replace each leaf with the detached callback result without revisiting
+    replacement aggregates; then commit the rebuilt binding once and return a detached updated root before
+    ordinary fluent continuation. Guard that resolved identity during callbacks so direct, nested-write, nested-
+    bang, helper-mediated, array-end, and binding-target pipeline writes fail before mutation with exact
+    `receiver_mutation_reentrant`, while unrelated and distinct same-spelling shadow identities remain legal.
+    Callback/re-entrant failure leaves the receiver unchanged and releases the guard; continuation failure keeps
+    the prior commit. Preserve non-bang behavior and compose exactly with Rust `.19.3.1` nested writes.
+  Ownership: `.19.3.2` owns Rust parser/compiler/runtime/carrier implementation and its direct proof. It also owns
+    the exact Rust `trace_controls` route-sink assertion correction discovered by its required local gate: lock
+    that a directly entered `Top` does not test its own inert regex, while preserving the test's output, lifecycle,
+    and routed-trace purpose. It must not bless `.19.3.3` oracle drift, perform the systematic inert-root/positive-
+    dispatch inventory, change Dart/Julia/Lua, or claim portable/public capability; `.19.3.3` and `.19.4-.19.9`
+    retain those boundaries.
+  Checklist: [x] clean activation/task ownership [x] Knowledge/ADR/toolbox retrieval [x] tool-first Rust seam audit
+    [x] typed parser/compiler/serde/emitted carrier [x] atomic guarded runtime [x] base/composition/generated proof
+    [x] focused dependent/no-drift proof [x] durable docs/memory/task/index synchronization [x] complete Rust
+    component gate after the owned trace-fixture repair [x] focused signoff [x] atomic commit/brief/clean handoff.
+  Activation evidence: exact `git status --short --untracked-files=all` was empty at
+    `c1dc84baeaa6f2d1d9644d01ae25e32d9f67f046`; `git_message_brief.txt` was zero bytes; `.19.3.1` is committed
+    signoff-complete with its canonical receipt; no background job or generated mdBook output remained. The
+    Knowledge Map routed this leaf to the neutral mutation, pure-function carrier resolution, write-composition,
+    and Rust nested-write facts plus ADR `0036` and Toolbox §4.8.3-.4 before behavior inspection.
+  Carrier evidence: Rust now reserves bang parsing only for the exact bare-receiver `map_leaves!` surface and
+    retains one `ReceiverMutationChain` with typed receiver, mutation, callback ActionIR, continuation, exact
+    source, and authored Unicode-scalar spans. Compiler/callable visitors, direct Engine entry, serde,
+    source-emitter, generated-plan decode, and independently compiled emitted Rust validate the same node and fail
+    closed on malformed serialized state.
+  Runtime evidence: `RuntimeContext` assigns stable visible-binding identities, replaces/restores them across
+    scoped and function-local lifetimes, and guards the resolved receiver identity during callbacks. Every owned
+    assignment/append, nested-write/bang, helper, array-end, and binding-target pipeline route rejects before
+    operand/segment/RHS evaluation when it targets that identity; unrelated and same-spelling shadow identities
+    remain legal. A detached original-shape root-kind traversal publishes once after complete callback success,
+    never revisits replacement aggregates, releases the guard on all exits, and begins continuation after commit.
+  Proof evidence: permanent `map_leaves_mutation_contract.rs` passes 9/9 across the frozen 4/14/5 syntax inventory,
+    all base/special/composition behaviors, Unicode spans, non-bang isolation, detachment, corrupt-state rejection,
+    native/serde/generated/emitted/independently compiled execution, and exact parent-loop/target-regex fixtures.
+    Three private runtime tests prove state visible only after failure: receiver atomicity/guard release, completed
+    unrelated write effects, same-receiver pre-evaluation precedence, and post-commit continuation failure. The
+    unchanged neutral oracle rejects all 167 base and 592 composition mutations.
+  Focused verification: `cargo fmt --check` and whitespace pass; `linkedspec-core` passes 201/201; the complete
+    Rust runtime integration target passes 197/197; the manifest oracle passes 3/3 while comparing all 105 fixtures
+    with the Perl reference; the permanent mutation and write-composition contracts pass 9/9 and 5/5; private
+    receiver-failure units pass 3/3; and the unchanged Perl contract passes all 8 top-level tests. Both neutral
+    checkers, capability 90/0/0, 250-name language coverage, the mutation-result surface, Knowledge Map 925/7,861,
+    task/index, bounded-history checks, and rendered mdBook pass. The first complete Rust component-gate attempt
+    passed every preceding core/runtime target but stopped at `trace_controls` 10/11 because its route-sink test
+    expected a `regex_match` from an inert `/x/` on directly entered `Top`; the runtime correctly entered `Top`'s
+    loop without testing that regex. The exact task-owned assertion now requires lifecycle execution and forbids
+    an entry-implied regex match. A complete rerun passes `trace_controls` 11/11, all Rust core/runtime/generated
+    targets, repository-local storage proof for 17 Rust owners and 195 locked registry packages, and both 66/66
+    primary CLI matrices.
+    The reproducible book output and independent emitted-source workspace are removed; no full CI is run because
+    no ADR `0073` canonical trigger moved.
+  Verification: **PASS 2026-09-01.** Direct owned proof and the complete Rust component gate are green; the stale
+    trace assertion is corrected without production dispatch movement, and `.19.3.3` is the next clean-boundary
+    leaf.
+  Commit: `FUTURE-PARITY-BACKLOG.19.3.2 - implement Rust map leaves mutation`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.3.3`
   Status: `pending; pre-existing oracle reproducibility defect tracked from .19.3.1`
@@ -1189,11 +1264,14 @@
   Dependencies: `.19.3.2`
   Acceptance: Reproduce and root-cause the `capability_position_helper_surface` source/expected split through
     current Perl and Rust execution, then fix the correct owner rather than blessing drift. Inventory controlled
-    generator/corpus fixtures whose directly entered root carries an inert regex; rewrite those roots to the
-    established zero-regex form while retaining the reachable child's regex and byte-equivalent outputs. Two
-    complete project-data-routed generator passes must emit all 105 fixtures and leave the committed corpus clean;
-    all available backend corpus consumers, capability-position proofs, task/Knowledge/book surfaces, and the
-    designated canonical gate must agree.
+    generator/corpus/trace fixtures whose directly entered root carries an inert regex or whose assertion assumes
+    entry tests that regex; rewrite those roots to the established zero-regex form while retaining the reachable
+    child's regex and byte-equivalent outputs. Verify across every available backend consumer that entry starts
+    the selected rule's mode-driven loop and each outgoing edge tests its target rule's regex, never the entered
+    rule's regex merely because it was selected as root. Two complete project-data-routed generator passes must
+    emit all 105 fixtures and leave the committed corpus clean; all available backend corpus consumers,
+    capability-position proofs, trace contracts, task/Knowledge/book surfaces, and the designated canonical gate
+    must agree.
   Future gate requirement: canonical — this leaf repairs the cross-backend oracle authority and may move the
     complete generated corpus, so exact staged receipt-bound CI is mandatory when the leaf is activated.
   Verification: `pending`

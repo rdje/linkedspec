@@ -239,7 +239,7 @@ dispatch rule.
   kind. Perl writes create an absent root and missing intermediates only when evaluated selectors determine the
   shape; bound null and wrong kinds are conflicts. Arrays may replace or append exactly at length, never create a
   gap. Segments evaluate once left-to-right, then RHS once; typed selector/kind/gap failures commit no partial path.
-  Rust, Dart, Julia, and Lua retain the earlier requirement that intermediates already exist and return null on a
+  Dart, Julia, and Lua retain the earlier requirement that intermediates already exist and return null on a
   missing/wrong path until cross-backend admission. Primitive literals and engine locals such as `[true]` or
   `[CAPTURE]` are not claimed as scalar path variables.
 - **Example**:
@@ -726,12 +726,12 @@ dispatch rule.
   - `return(items.map_leaves() { return(value) }.count())` yields `[2]`: the top-level mapped array has two
     elements, even though traversal visited three leaves.
 
-### Perl receiver mutation: `map_leaves!`
+### Perl/Rust receiver mutation: `map_leaves!`
 
 - **Signature**: `binding_name.map_leaves!() { block }`
 - **Returns**: a detached copy of the updated harray or array root; the named receiver is also rebound atomically.
-- **Backend status**: current on the Perl reference under `FUTURE-PARITY-BACKLOG.19.2.2`. Rust, Dart, Julia, and
-  Lua do not yet accept the bang form; portable capability/public admission remains pending.
+- **Backend status**: current on Perl under `FUTURE-PARITY-BACKLOG.19.2.2` and Rust under `.19.3.2`. Dart, Julia,
+  and Lua do not yet accept the bang form; portable capability/public admission remains pending.
 - **Addressability**: `binding_name` must be one existing, non-reserved, bare uniform binding that holds an harray
   or array. Literals, temporaries, helper results, bracket/property receivers, function-form `map_leaves!(tree)`,
   other bang methods, and arbitrary user-defined `name!` functions are not valid v1 forms.
@@ -739,8 +739,8 @@ dispatch rule.
   harrays in sorted-key depth-first order, treating arrays as leaves. An array root recurses only through arrays in
   index order, treating harrays as leaves. The runtime walks a detached snapshot of the original shape. Each block
   result replaces its leaf; a returned container of the root kind is not revisited during this call.
-- **Callback bindings**: every callback receives detached `value`, complete copied `path`/`@path`, `depth`, and
-  `key` for harray roots or `index` for array roots. Changing `value` alone does not update the receiver; return the
+- **Callback bindings**: every callback receives detached `value`, complete copied `path` (also `@path` on Perl),
+  `depth`, and `key` for harray roots or `index` for array roots. Changing `value` alone does not update the receiver; return the
   desired replacement. Ordinary effects on unrelated bindings remain visible.
 - **Receiver protection**: callback code may not directly mutate the receiver binding. Direct assignment, bracket
   write, nested `map_leaves!`, `set`, `set_key`, `push`, `push_front`/`push_back`/`pop_front`/`pop_back`, and a
@@ -975,7 +975,7 @@ dispatch rule.
 - **Returns**: updated typed-root snapshot in value positions; side-effect-only behavior when used as a statement.
 - **Behavior**: Typed path assignment on Perl. It evaluates the selector and value once, chooses harray for a
   string or array for a nonnegative integer, mutates an isolated root copy, then commits and returns a detached
-  updated root. It is not identical lowering to harray-only `set_key`. Rust, Dart, Julia, and Lua retain the
+  updated root. It is not identical lowering to harray-only `set_key`. Dart, Julia, and Lua retain the
   earlier hash-index contract until admission.
 - **Examples**: `meta["stage"] = "normalized"`, `meta[cat("source", "_kind")] = kind`,
   `meta[field_name] = field_value`, `items[position] = field_value`.
@@ -1905,7 +1905,7 @@ that subset remain a separately locked surface.
 Most helpers propagate `undef` from their inputs to their outputs. Explicit `coalesce(...)` is the canonical way to provide a default. No helper silently converts `undef` to `0` or `""` unless documented otherwise.
 
 ### No Mutation Guarantee
-Value and receiver forms that return arrays or hashes (`copy`, `merge_hash`, value-form `set_key(hash_expr, key, value)`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `sorted_values`, `map_leaves`, `drop_front`, `drop_back`, `take`, `take_last`, `slice`, `sorted`, `reversed`, `concat_arrays`, `filter_nonempty`, `filter_match`, `uniq`, `split`, `split_each`, `trim_each`, `lowercase_each`, `uppercase_each`) do **not** mutate their inputs. They return new containers. A standalone `split_each(name, delimiter)`, `trim_each(name)`, `filter_nonempty(name)`, `filter_match(name, regex)`, `lowercase_each(name)`, `uppercase_each(name)`, or `uniq(name)` call is a statement form and writes its result back to that explicit working array on the Perl reference and Lua backend. Rust, Dart, and Julia currently omit write-back for `split_each`, `filter_match`, and `uniq`; `FUTURE-PARITY-BACKLOG.5` owns repair. `walk_leaves` is the explicit tree side-effect traversal: it returns the original hash or array tree and preserves ordinary callback side effects. Perl-only `binding.map_leaves!() { block }` is the distinct atomic receiver-rebinding traversal. Other explicit mutation forms include `name = value`, `items += value`, `items.push_back(value)`, `items.push_front(value)`, `items.pop_back()`, `items.pop_front()`, `set_key(name, key, value)`, and `name[key] = value`.
+Value and receiver forms that return arrays or hashes (`copy`, `merge_hash`, value-form `set_key(hash_expr, key, value)`, `rename_key`, `drop_keys`, `pick_keys`, `sorted_keys`, `sorted_values`, `map_leaves`, `drop_front`, `drop_back`, `take`, `take_last`, `slice`, `sorted`, `reversed`, `concat_arrays`, `filter_nonempty`, `filter_match`, `uniq`, `split`, `split_each`, `trim_each`, `lowercase_each`, `uppercase_each`) do **not** mutate their inputs. They return new containers. A standalone `split_each(name, delimiter)`, `trim_each(name)`, `filter_nonempty(name)`, `filter_match(name, regex)`, `lowercase_each(name)`, `uppercase_each(name)`, or `uniq(name)` call is a statement form and writes its result back to that explicit working array on the Perl reference and Lua backend. Rust, Dart, and Julia currently omit write-back for `split_each`, `filter_match`, and `uniq`; `FUTURE-PARITY-BACKLOG.5` owns repair. `walk_leaves` is the explicit tree side-effect traversal: it returns the original hash or array tree and preserves ordinary callback side effects. Perl/Rust `binding.map_leaves!() { block }` is the distinct atomic receiver-rebinding traversal. Other explicit mutation forms include `name = value`, `items += value`, `items.push_back(value)`, `items.push_front(value)`, `items.pop_back()`, `items.pop_front()`, `set_key(name, key, value)`, and `name[key] = value`.
 
 ### Canonical Terse Forms
 The `.spec` format has migrated these helper families to terser spellings. The **terse spelling is canonical**:

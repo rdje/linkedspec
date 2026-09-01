@@ -155,7 +155,14 @@ fn traced_entrypoint_validates_route_sink_setup_without_changing_output() {
     let trace = std::fs::read_to_string(&path).expect("read routed trace file");
     assert!(trace.contains("rust_runtime:engine:execute"), "{trace}");
     assert!(trace.contains("rust_runtime:engine:top_rule"), "{trace}");
-    assert!(trace.contains("rust_runtime:engine:regex_match"), "{trace}");
+    assert!(
+        trace.contains("rust_runtime:engine:lifecycle_block"),
+        "{trace}"
+    );
+    assert!(
+        !trace.contains("rust_runtime:engine:regex_match"),
+        "direct rule entry must not test that rule's own regex:\n{trace}"
+    );
     let _ = std::fs::remove_file(path);
 }
 

@@ -8,6 +8,7 @@ use crate::{
     RuntimeSemanticObservationEvent, RuntimeSemanticObservationSink,
     source_location::{Position, SourceAuthority, SourceLocationContext, Span},
 };
+use linkedspec_core::expr::ExpressionSpan;
 use linkedspec_core::trace::{TraceEmitter, TraceEventKind, TraceLevel, TraceResult, TraceScope};
 use linkedspec_core::types::{AcodeEntry, AuthoredRegexSelector, RegexSelectorKind, RuntimeValue};
 use serde_json::{Value, json};
@@ -224,6 +225,13 @@ pub struct RuntimeContext {
     hashes: std::collections::HashMap<String, Vec<(String, RuntimeValue)>>,
     /// Remembered bare identifier kind after declaration or assignment.
     bare_kinds: std::collections::HashMap<String, RuntimeVarKind>,
+    /// Stable identity of each currently visible binding. Ordinary writes keep
+    /// this identity; scoped/function-local bindings replace and later restore it.
+    binding_identities: std::collections::HashMap<String, u64>,
+    /// Monotonic allocator for invocation-local binding identities.
+    next_binding_identity: u64,
+    /// Receiver identities guarded while a `map_leaves!` callback executes.
+    active_receiver_mutations: std::collections::HashMap<u64, ActiveReceiverMutation>,
     /// Descriptor-tag scalars that must stay bare-readable even when a same-name
     /// aggregate accumulator is mutated through a type-implying helper.
     descriptor_scalar_bare_reads: std::collections::HashSet<String>,
@@ -320,11 +328,18 @@ pub struct RuntimeContext {
 type RuntimeDeclarationScope = std::collections::HashMap<String, RuntimeVariableSnapshot>;
 
 #[derive(Debug, Clone)]
+struct ActiveReceiverMutation {
+    binding: String,
+    write_sites: std::collections::HashMap<String, ExpressionSpan>,
+}
+
+#[derive(Debug, Clone)]
 struct RuntimeVariableSnapshot {
     scalar: Option<RuntimeValue>,
     array: Option<Vec<RuntimeValue>>,
     hash: Option<Vec<(String, RuntimeValue)>>,
     bare_kind: Option<RuntimeVarKind>,
+    binding_identity: Option<u64>,
     descriptor_scalar_bare_read: bool,
 }
 
@@ -402,6 +417,7 @@ pub(crate) struct RuntimeVariableStores {
     arrays: std::collections::HashMap<String, Vec<RuntimeValue>>,
     hashes: std::collections::HashMap<String, Vec<(String, RuntimeValue)>>,
     bare_kinds: std::collections::HashMap<String, RuntimeVarKind>,
+    binding_identities: std::collections::HashMap<String, u64>,
     descriptor_scalar_bare_reads: std::collections::HashSet<String>,
 }
 
@@ -425,6 +441,9 @@ impl RuntimeContext {
             arrays: std::collections::HashMap::new(),
             hashes: std::collections::HashMap::new(),
             bare_kinds: std::collections::HashMap::new(),
+            binding_identities: std::collections::HashMap::new(),
+            next_binding_identity: 1,
+            active_receiver_mutations: std::collections::HashMap::new(),
             descriptor_scalar_bare_reads: std::collections::HashSet::new(),
             accumulator: Vec::new(),
             entry_groups: Vec::new(),
@@ -1930,10 +1949,72 @@ impl RuntimeContext {
         &self.input[self.pos..]
     }
 
+    fn allocate_binding_identity(&mut self) -> u64 {
+        let identity = self.next_binding_identity;
+        self.next_binding_identity = self.next_binding_identity.saturating_add(1);
+        identity
+    }
+
+    fn ensure_binding_identity(&mut self, name: &str) -> u64 {
+        if let Some(identity) = self.binding_identities.get(name).copied() {
+            return identity;
+        }
+        let identity = self.allocate_binding_identity();
+        self.binding_identities.insert(name.to_string(), identity);
+        identity
+    }
+
+    fn replace_binding_identity(&mut self, name: &str) -> u64 {
+        let identity = self.allocate_binding_identity();
+        self.binding_identities.insert(name.to_string(), identity);
+        identity
+    }
+
+    pub(crate) fn binding_identity(&self, name: &str) -> Option<u64> {
+        self.binding_identities.get(name).copied()
+    }
+
+    pub(crate) fn activate_receiver_mutation(
+        &mut self,
+        name: &str,
+        write_sites: std::collections::HashMap<String, ExpressionSpan>,
+    ) -> Option<u64> {
+        let identity = self.binding_identity(name)?;
+        if self.active_receiver_mutations.contains_key(&identity) {
+            return None;
+        }
+        self.active_receiver_mutations.insert(
+            identity,
+            ActiveReceiverMutation {
+                binding: name.to_string(),
+                write_sites,
+            },
+        );
+        Some(identity)
+    }
+
+    pub(crate) fn deactivate_receiver_mutation(&mut self, identity: u64) {
+        self.active_receiver_mutations.remove(&identity);
+    }
+
+    pub(crate) fn active_receiver_write(
+        &self,
+        name: &str,
+        attempt: &str,
+    ) -> Option<(&str, Option<ExpressionSpan>)> {
+        let identity = self.binding_identity(name)?;
+        let active = self.active_receiver_mutations.get(&identity)?;
+        Some((
+            active.binding.as_str(),
+            active.write_sites.get(attempt).copied(),
+        ))
+    }
+
     // ── Scalars ──
 
     pub fn declare_scalar(&mut self, name: &str) {
         self.record_declaration(name);
+        self.replace_binding_identity(name);
         self.bare_kinds
             .insert(name.to_string(), RuntimeVarKind::Scalar);
         self.scalars.insert(name.to_string(), RuntimeValue::Undef);
@@ -1941,6 +2022,7 @@ impl RuntimeContext {
 
     pub fn declare_scalar_with(&mut self, name: &str, value: RuntimeValue) {
         self.record_declaration(name);
+        self.replace_binding_identity(name);
         self.bare_kinds
             .insert(name.to_string(), RuntimeVarKind::Scalar);
         self.scalars.insert(name.to_string(), value);
@@ -1954,6 +2036,7 @@ impl RuntimeContext {
     }
 
     pub fn set_scalar(&mut self, name: &str, value: RuntimeValue) {
+        self.ensure_binding_identity(name);
         self.bare_kinds
             .insert(name.to_string(), RuntimeVarKind::Scalar);
         self.scalars.insert(name.to_string(), value);
@@ -1965,6 +2048,7 @@ impl RuntimeContext {
         value: RuntimeValue,
     ) -> RuntimeScopedVariableBinding {
         let snapshot = self.snapshot_variable(name);
+        self.replace_binding_identity(name);
         self.bare_kinds
             .insert(name.to_string(), RuntimeVarKind::Scalar);
         self.scalars.insert(name.to_string(), value);
@@ -2135,18 +2219,21 @@ impl RuntimeContext {
 
     pub fn declare_array(&mut self, name: &str) {
         self.record_declaration(name);
+        self.replace_binding_identity(name);
         self.bare_kinds
             .insert(name.to_string(), RuntimeVarKind::Array);
         self.arrays.insert(name.to_string(), Vec::new());
     }
 
     pub fn set_array(&mut self, name: &str, values: Vec<RuntimeValue>) {
+        self.ensure_binding_identity(name);
         self.bare_kinds
             .insert(name.to_string(), RuntimeVarKind::Array);
         self.arrays.insert(name.to_string(), values);
     }
 
     pub fn push_array_value(&mut self, arr_name: &str, value: RuntimeValue) {
+        self.ensure_binding_identity(arr_name);
         self.bare_kinds
             .insert(arr_name.to_string(), RuntimeVarKind::Array);
         self.arrays
@@ -2156,6 +2243,7 @@ impl RuntimeContext {
     }
 
     pub fn push_front_value(&mut self, arr_name: &str, value: RuntimeValue) {
+        self.ensure_binding_identity(arr_name);
         self.bare_kinds
             .insert(arr_name.to_string(), RuntimeVarKind::Array);
         self.arrays
@@ -2165,6 +2253,7 @@ impl RuntimeContext {
     }
 
     pub fn pop_back_value(&mut self, arr_name: &str) -> RuntimeValue {
+        self.ensure_binding_identity(arr_name);
         self.bare_kinds
             .insert(arr_name.to_string(), RuntimeVarKind::Array);
         self.arrays
@@ -2175,6 +2264,7 @@ impl RuntimeContext {
     }
 
     pub fn pop_front_value(&mut self, arr_name: &str) -> RuntimeValue {
+        self.ensure_binding_identity(arr_name);
         self.bare_kinds
             .insert(arr_name.to_string(), RuntimeVarKind::Array);
         let values = self.arrays.entry(arr_name.to_string()).or_default();
@@ -2197,12 +2287,14 @@ impl RuntimeContext {
 
     pub fn declare_hash(&mut self, name: &str) {
         self.record_declaration(name);
+        self.replace_binding_identity(name);
         self.bare_kinds
             .insert(name.to_string(), RuntimeVarKind::Hash);
         self.hashes.insert(name.to_string(), Vec::new());
     }
 
     pub fn set_hash(&mut self, name: &str, values: Vec<(String, RuntimeValue)>) {
+        self.ensure_binding_identity(name);
         self.bare_kinds
             .insert(name.to_string(), RuntimeVarKind::Hash);
         self.hashes.insert(name.to_string(), values);
@@ -2213,6 +2305,7 @@ impl RuntimeContext {
     }
 
     pub fn set_hash_entry(&mut self, hash_name: &str, key: &str, value: RuntimeValue) {
+        self.ensure_binding_identity(hash_name);
         self.bare_kinds
             .insert(hash_name.to_string(), RuntimeVarKind::Hash);
         let entries = self.hashes.entry(hash_name.to_string()).or_default();
@@ -2235,6 +2328,7 @@ impl RuntimeContext {
             arrays: std::mem::take(&mut self.arrays),
             hashes: std::mem::take(&mut self.hashes),
             bare_kinds: std::mem::take(&mut self.bare_kinds),
+            binding_identities: std::mem::take(&mut self.binding_identities),
             descriptor_scalar_bare_reads: std::mem::take(&mut self.descriptor_scalar_bare_reads),
         }
     }
@@ -2244,6 +2338,7 @@ impl RuntimeContext {
         self.arrays = stores.arrays;
         self.hashes = stores.hashes;
         self.bare_kinds = stores.bare_kinds;
+        self.binding_identities = stores.binding_identities;
         self.descriptor_scalar_bare_reads = stores.descriptor_scalar_bare_reads;
     }
 
@@ -2289,6 +2384,14 @@ impl RuntimeContext {
                     self.bare_kinds.remove(&name);
                 }
             }
+            match snapshot.binding_identity {
+                Some(value) => {
+                    self.binding_identities.insert(name.clone(), value);
+                }
+                None => {
+                    self.binding_identities.remove(&name);
+                }
+            }
             if snapshot.descriptor_scalar_bare_read {
                 self.descriptor_scalar_bare_reads.insert(name);
             } else {
@@ -2307,7 +2410,14 @@ impl RuntimeContext {
     }
 
     pub(crate) fn record_rule_local_binding(&mut self, name: &str) {
+        let already_local = self
+            .declaration_scopes
+            .last()
+            .is_some_and(|scope| scope.contains_key(name));
         self.record_declaration(name);
+        if !already_local {
+            self.replace_binding_identity(name);
+        }
     }
 
     fn snapshot_variable(&self, name: &str) -> RuntimeVariableSnapshot {
@@ -2316,6 +2426,7 @@ impl RuntimeContext {
             array: self.arrays.get(name).cloned(),
             hash: self.hashes.get(name).cloned(),
             bare_kind: self.bare_kinds.get(name).copied(),
+            binding_identity: self.binding_identities.get(name).copied(),
             descriptor_scalar_bare_read: self.descriptor_scalar_bare_reads.contains(name),
         }
     }
@@ -2353,6 +2464,14 @@ impl RuntimeContext {
                 self.bare_kinds.remove(name);
             }
         }
+        match snapshot.binding_identity {
+            Some(value) => {
+                self.binding_identities.insert(name.to_string(), value);
+            }
+            None => {
+                self.binding_identities.remove(name);
+            }
+        }
         if snapshot.descriptor_scalar_bare_read {
             self.descriptor_scalar_bare_reads.insert(name.to_string());
         } else {
@@ -2374,6 +2493,7 @@ impl RuntimeContext {
                 array: self.arrays.get(name).cloned(),
                 hash: self.hashes.get(name).cloned(),
                 bare_kind: self.bare_kinds.get(name).copied(),
+                binding_identity: self.binding_identities.get(name).copied(),
                 descriptor_scalar_bare_read: self.descriptor_scalar_bare_reads.contains(name),
             });
     }
@@ -2439,6 +2559,7 @@ impl RuntimeContext {
     /// in, `retv` resolved to undef for virtually every grammar.
     pub fn set_retv(&mut self, value: RuntimeValue) {
         self.bind_descriptor_scalar_bare_read(&value);
+        self.ensure_binding_identity("retv");
         self.bare_kinds
             .insert("retv".to_string(), RuntimeVarKind::Scalar);
         self.scalars.insert("retv".to_string(), value);
@@ -2453,6 +2574,7 @@ impl RuntimeContext {
         {
             return;
         }
+        self.ensure_binding_identity(name);
         self.scalars.insert(name.to_string(), value.clone());
         self.descriptor_scalar_bare_reads.insert(name.to_string());
     }

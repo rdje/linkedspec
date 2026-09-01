@@ -131,6 +131,87 @@ pub struct WritePathSegment {
     pub expression: Box<Expr>,
 }
 
+/// One bare addressable binding targeted by a receiver-mutating method.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct ReceiverMutationBindingReference {
+    /// Stable neutral node identity.
+    pub kind: String,
+    /// Uniform-binding spelling resolved by the runtime.
+    pub name: String,
+    /// Exact authored receiver spelling.
+    pub source: String,
+    /// Half-open Unicode-scalar offsets within the containing ActionIR source.
+    pub source_span: ExpressionSpan,
+}
+
+/// Typed callback body retained by a receiver-mutating method.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct ReceiverMutationActionBlock {
+    /// Stable neutral node identity.
+    pub kind: String,
+    /// Exact authored callback body excluding braces.
+    pub source: String,
+    /// Half-open Unicode-scalar offsets for the callback body.
+    pub source_span: ExpressionSpan,
+    /// Parsed statements executed once for each frozen leaf.
+    pub statements: Vec<Stmt>,
+}
+
+/// Immediate callback owned by one receiver-mutating call.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct ReceiverMutationCallback {
+    /// Stable neutral node identity.
+    pub kind: String,
+    /// Exact authored callback including braces.
+    pub source: String,
+    /// Half-open Unicode-scalar offsets including braces.
+    pub source_span: ExpressionSpan,
+    /// Typed callback body.
+    pub body: ReceiverMutationActionBlock,
+}
+
+/// One ordinary non-bang fluent continuation after receiver publication.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct ReceiverMutationContinuationCall {
+    /// Stable neutral node identity.
+    pub kind: String,
+    /// Canonical non-bang method name.
+    pub method: String,
+    /// Exact authored method spelling.
+    pub source_method: String,
+    /// Exact authored call excluding the leading dot.
+    pub source: String,
+    /// Half-open Unicode-scalar offsets excluding the leading dot.
+    pub source_span: ExpressionSpan,
+    /// Exact authored parenthesized argument payload.
+    pub args_source: String,
+    /// Half-open Unicode-scalar offsets for the argument payload.
+    pub args_span: ExpressionSpan,
+    /// Existing typed ActionIR arguments, including any trailing block.
+    pub args: Vec<Arg>,
+}
+
+/// The sole v1 receiver-mutating call, `map_leaves!`.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct ReceiverMutationCall {
+    /// Stable neutral node identity.
+    pub kind: String,
+    /// Canonical non-bang method identity.
+    pub method: String,
+    /// Exact authored bang-method spelling.
+    pub source_method: String,
+    /// Exact authored mutation call excluding the receiver and dot.
+    pub source: String,
+    /// Half-open Unicode-scalar offsets for the mutation call.
+    pub source_span: ExpressionSpan,
+    /// Half-open Unicode-scalar offsets for the method token.
+    pub method_span: ExpressionSpan,
+    /// Half-open Unicode-scalar offsets including the required empty parentheses.
+    pub args_span: ExpressionSpan,
+    /// Immediate typed callback.
+    pub callback: ReceiverMutationCallback,
+}
+
 /// One key/value pair in a direct hash shape literal.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct HashLiteralEntry {
@@ -261,6 +342,15 @@ pub enum Expr {
         base: String,
         segments: Vec<WritePathSegment>,
         value: Box<Expr>,
+    },
+    /// A dedicated receiver-mutating chain rooted at one bare binding.
+    #[serde(rename = "receiver_mutation_chain")]
+    ReceiverMutationChain {
+        source: String,
+        source_span: ExpressionSpan,
+        receiver: ReceiverMutationBindingReference,
+        mutation: ReceiverMutationCall,
+        continuation: Vec<ReceiverMutationContinuationCall>,
     },
     /// A variable reference: `results`, `retv`, `$name`
     #[serde(rename = "variable")]
@@ -426,6 +516,17 @@ impl Expr {
             Expr::AssignNestedAccess {
                 segments, value, ..
             } => in_write_segments(segments).or_else(|| value.find_removed_aggregate_selector()),
+            Expr::ReceiverMutationChain {
+                mutation,
+                continuation,
+                ..
+            } => mutation
+                .callback
+                .body
+                .statements
+                .iter()
+                .find_map(|statement| statement.expr.find_removed_aggregate_selector())
+                .or_else(|| continuation.iter().find_map(|call| in_args(&call.args))),
             Expr::IndexedVar { index, .. } => index.find_removed_aggregate_selector(),
             Expr::NestedAccess { segments, .. } => in_segments(segments),
             Expr::ValueAccess { receiver, segments } => receiver
@@ -500,6 +601,19 @@ impl Expr {
             Expr::AssignNestedAccess {
                 segments, value, ..
             } => write_segments_contain(segments) || value.contains_recognition_runtime_intrinsic(),
+            Expr::ReceiverMutationChain {
+                mutation,
+                continuation,
+                ..
+            } => {
+                mutation
+                    .callback
+                    .body
+                    .statements
+                    .iter()
+                    .any(|statement| statement.expr.contains_recognition_runtime_intrinsic())
+                    || continuation.iter().any(|call| args_contain(&call.args))
+            }
             Expr::IndexedVar { index, .. } => index.contains_recognition_runtime_intrinsic(),
             Expr::NestedAccess { segments, .. } => segments_contain(segments),
             Expr::ValueAccess { receiver, segments } => {
@@ -593,6 +707,7 @@ impl std::fmt::Display for Expr {
             Expr::AssignArrayAppend { name, value } => write!(f, "{name} += {value}"),
             Expr::AssignHashIndex { name, key, value } => write!(f, "{name}[{key}] = {value}"),
             Expr::AssignNestedAccess { source, .. } => f.write_str(source),
+            Expr::ReceiverMutationChain { source, .. } => f.write_str(source),
             Expr::Variable { name } => write!(f, "{name}"),
             Expr::IndexedVar { name, index } => write!(f, "{name}[{index}]"),
             Expr::NestedAccess { base, segments } => {
@@ -1902,6 +2017,389 @@ impl<'a> Parser<'a> {
         )
     }
 
+    fn receiver_mutation_syntax_error(
+        &self,
+        code: &str,
+        start: usize,
+        end: usize,
+        message: &str,
+    ) -> String {
+        format!(
+            "{code} stage=action_parse source_span={{start:{},end:{},unit:unicode_scalar,provenance:authored}} message={message:?}",
+            self.character_offset(start),
+            self.character_offset(end)
+        )
+    }
+
+    /// Parse the one reserved v1 bang-method surface without widening ordinary
+    /// identifiers or fluent calls to accept `!`.
+    fn try_parse_receiver_mutation_expr(&mut self) -> Result<Option<Expr>, String> {
+        let start = self.pos;
+        if self.remaining().starts_with("map_leaves!") {
+            let after = start + "map_leaves!".len();
+            let mut cursor = after;
+            while self
+                .src
+                .as_bytes()
+                .get(cursor)
+                .is_some_and(|byte| byte.is_ascii_whitespace())
+            {
+                cursor += 1;
+            }
+            if self.src.as_bytes().get(cursor) == Some(&b'(') {
+                return Err(self.receiver_mutation_syntax_error(
+                    "bang_method_function_form_invalid",
+                    start,
+                    after,
+                    "map_leaves! is receiver-only; use binding.map_leaves!() { ... }",
+                ));
+            }
+        }
+
+        let Some((dot, method_start, method_end, bang_start, bang_end)) =
+            self.find_top_level_bang_method(start)
+        else {
+            return Ok(None);
+        };
+        let method = self.src[method_start..method_end].to_string();
+        let source_method = self.src[method_start..bang_end].to_string();
+        if method != "map_leaves" {
+            return Err(self.receiver_mutation_syntax_error(
+                "bang_method_unknown",
+                method_start,
+                bang_end,
+                &format!("unsupported bang method '{source_method}'"),
+            ));
+        }
+        if bang_start != method_end {
+            return Err(self.receiver_mutation_syntax_error(
+                "bang_method_suffix_invalid",
+                method_start,
+                bang_end,
+                "the bang suffix must immediately follow map_leaves",
+            ));
+        }
+        if bang_end - bang_start != 1 {
+            return Err(self.receiver_mutation_syntax_error(
+                "bang_method_suffix_invalid",
+                method_start,
+                bang_end,
+                "map_leaves! accepts exactly one bang suffix",
+            ));
+        }
+
+        let receiver_start = self.skip_ascii_whitespace_start(start, dot);
+        let receiver_end = self.trim_ascii_whitespace_end(receiver_start, dot);
+        let receiver = self.src[receiver_start..receiver_end].to_string();
+        let addressable = receiver
+            .chars()
+            .next()
+            .is_some_and(|character| character.is_ascii_alphabetic() || character == '_')
+            && receiver
+                .chars()
+                .all(|character| character.is_ascii_alphanumeric() || character == '_');
+        if !addressable {
+            return Err(self.receiver_mutation_syntax_error(
+                "receiver_mutation_receiver_not_addressable",
+                receiver_start,
+                receiver_end,
+                "receiver mutation requires one bare uniform-binding identifier",
+            ));
+        }
+        if Self::nested_write_root_is_reserved(&receiver) {
+            return Err(self.receiver_mutation_syntax_error(
+                "receiver_mutation_receiver_reserved",
+                receiver_start,
+                receiver_end,
+                &format!("receiver mutation cannot target reserved binding '{receiver}'"),
+            ));
+        }
+
+        self.pos = bang_end;
+        self.skip_inline_whitespace();
+        let args_open = self.pos;
+        if self.peek() != Some('(') {
+            return Err(self.receiver_mutation_syntax_error(
+                "map_leaves_mutation_arguments_invalid",
+                args_open,
+                args_open,
+                "map_leaves! expects empty parentheses before its callback",
+            ));
+        }
+        let args_close =
+            Self::matching_closing_parenthesis(self.src, args_open).ok_or_else(|| {
+                self.receiver_mutation_syntax_error(
+                    "map_leaves_mutation_arguments_invalid",
+                    args_open,
+                    self.src.len(),
+                    "map_leaves! expects empty parentheses before its callback",
+                )
+            })?;
+        if !self.src[args_open + 1..args_close].trim().is_empty() {
+            return Err(self.receiver_mutation_syntax_error(
+                "map_leaves_mutation_arguments_invalid",
+                args_open,
+                args_close + 1,
+                "map_leaves! expects empty parentheses before its callback",
+            ));
+        }
+        self.pos = args_close + 1;
+        self.skip_inline_whitespace();
+        if self.peek() != Some('{') {
+            return Err(self.receiver_mutation_syntax_error(
+                "map_leaves_mutation_callback_missing",
+                method_start,
+                self.pos,
+                "map_leaves! requires one immediate trailing callback block",
+            ));
+        }
+        let callback_open = self.pos;
+        let callback_close =
+            Self::matching_closing_brace(self.src, callback_open).map_err(|_| {
+                self.receiver_mutation_syntax_error(
+                    "map_leaves_mutation_callback_missing",
+                    method_start,
+                    self.src.len(),
+                    "map_leaves! requires one immediate trailing callback block",
+                )
+            })?;
+        let callback_body_start = callback_open + 1;
+        let callback_body_source = self.src[callback_body_start..callback_close].to_string();
+        let callback_block = self.parse_nested_block(
+            &callback_body_source,
+            self.character_offset(callback_body_start),
+        )?;
+        self.pos = callback_close + 1;
+
+        let mut continuation = Vec::new();
+        loop {
+            let before_whitespace = self.pos;
+            self.skip_inline_whitespace();
+            if self.peek() != Some('.') {
+                self.pos = before_whitespace;
+                break;
+            }
+            self.advance(1);
+            self.skip_inline_whitespace();
+            let continuation_start = self.pos;
+            let continuation_method = self.parse_name();
+            if continuation_method.is_empty() {
+                return Err(format!(
+                    "expected a fluent continuation method at position {}",
+                    self.pos
+                ));
+            }
+            if self.peek() == Some('!') {
+                let mut end = self.pos;
+                while self.src.as_bytes().get(end) == Some(&b'!') {
+                    end += 1;
+                }
+                return Err(self.receiver_mutation_syntax_error(
+                    "receiver_mutation_continuation_bang_invalid",
+                    continuation_start,
+                    end,
+                    "a receiver-mutation chain continuation must use an existing non-bang fluent call",
+                ));
+            }
+            self.skip_inline_whitespace();
+            if self.peek() != Some('(') {
+                return Err(format!(
+                    "expected '(' after fluent method '{}' at position {}",
+                    continuation_method, self.pos
+                ));
+            }
+            let continuation_args_open = self.pos;
+            self.advance(1);
+            let args = if self.peek() == Some(')') {
+                Vec::new()
+            } else {
+                self.parse_args_for_callee(&continuation_method)?
+            };
+            if self.peek() != Some(')') {
+                return Err(format!(
+                    "expected ')' after fluent method '{}' args at position {}",
+                    continuation_method, self.pos
+                ));
+            }
+            let continuation_args_close = self.pos;
+            self.advance(1);
+            let args = self.parse_optional_fluent_trailing_block_arg(&continuation_method, args)?;
+            let continuation_end = self.pos;
+            continuation.push(ReceiverMutationContinuationCall {
+                kind: "fluent_call".to_string(),
+                method: continuation_method.clone(),
+                source_method: continuation_method,
+                source: self.src[continuation_start..continuation_end].to_string(),
+                source_span: ExpressionSpan {
+                    start: self.character_offset(continuation_start),
+                    end: self.character_offset(continuation_end),
+                },
+                args_source: self.src[continuation_args_open + 1..continuation_args_close]
+                    .to_string(),
+                args_span: ExpressionSpan {
+                    start: self.character_offset(continuation_args_open + 1),
+                    end: self.character_offset(continuation_args_close),
+                },
+                args,
+            });
+        }
+
+        let end = self.pos;
+        Ok(Some(Expr::ReceiverMutationChain {
+            source: self.src[start..end].to_string(),
+            source_span: ExpressionSpan {
+                start: self.character_offset(start),
+                end: self.character_offset(end),
+            },
+            receiver: ReceiverMutationBindingReference {
+                kind: "binding_reference".to_string(),
+                name: receiver.clone(),
+                source: receiver,
+                source_span: ExpressionSpan {
+                    start: self.character_offset(receiver_start),
+                    end: self.character_offset(receiver_end),
+                },
+            },
+            mutation: ReceiverMutationCall {
+                kind: "receiver_mutation_call".to_string(),
+                method: "map_leaves".to_string(),
+                source_method: "map_leaves!".to_string(),
+                source: self.src[method_start..callback_close + 1].to_string(),
+                source_span: ExpressionSpan {
+                    start: self.character_offset(method_start),
+                    end: self.character_offset(callback_close + 1),
+                },
+                method_span: ExpressionSpan {
+                    start: self.character_offset(method_start),
+                    end: self.character_offset(bang_end),
+                },
+                args_span: ExpressionSpan {
+                    start: self.character_offset(args_open),
+                    end: self.character_offset(args_close + 1),
+                },
+                callback: ReceiverMutationCallback {
+                    kind: "block_value".to_string(),
+                    source: self.src[callback_open..callback_close + 1].to_string(),
+                    source_span: ExpressionSpan {
+                        start: self.character_offset(callback_open),
+                        end: self.character_offset(callback_close + 1),
+                    },
+                    body: ReceiverMutationActionBlock {
+                        kind: "action_block".to_string(),
+                        source: callback_body_source,
+                        source_span: ExpressionSpan {
+                            start: self.character_offset(callback_body_start),
+                            end: self.character_offset(callback_close),
+                        },
+                        statements: callback_block.statements,
+                    },
+                },
+            },
+            continuation,
+        }))
+    }
+
+    /// Find a top-level fluent method carrying one or more bang suffixes.
+    fn find_top_level_bang_method(
+        &self,
+        start: usize,
+    ) -> Option<(usize, usize, usize, usize, usize)> {
+        let bytes = self.src.as_bytes();
+        let mut pos = start;
+        let mut paren_depth = 0usize;
+        let mut bracket_depth = 0usize;
+        let mut brace_depth = 0usize;
+        while pos < bytes.len() {
+            match bytes[pos] {
+                b'"' | b'\'' => {
+                    pos = Self::skip_delimited_literal(self.src, pos, bytes[pos]).ok()?;
+                    continue;
+                }
+                b'/' => {
+                    if let Some(next) = Self::skip_regex_literal(self.src, pos) {
+                        pos = next;
+                        continue;
+                    }
+                }
+                b'(' => paren_depth += 1,
+                b')' if paren_depth > 0 => paren_depth -= 1,
+                b'[' => bracket_depth += 1,
+                b']' if bracket_depth > 0 => bracket_depth -= 1,
+                b'{' => brace_depth += 1,
+                b'}' if brace_depth > 0 => brace_depth -= 1,
+                b'.' if paren_depth == 0 && bracket_depth == 0 && brace_depth == 0 => {
+                    let dot = pos;
+                    let mut method_start = dot + 1;
+                    while bytes
+                        .get(method_start)
+                        .is_some_and(|byte| byte.is_ascii_whitespace())
+                    {
+                        method_start += 1;
+                    }
+                    let mut method_end = method_start;
+                    while bytes
+                        .get(method_end)
+                        .is_some_and(|byte| byte.is_ascii_alphanumeric() || *byte == b'_')
+                    {
+                        method_end += 1;
+                    }
+                    let mut bang_start = method_end;
+                    while bytes
+                        .get(bang_start)
+                        .is_some_and(|byte| byte.is_ascii_whitespace())
+                    {
+                        bang_start += 1;
+                    }
+                    if bytes.get(bang_start) == Some(&b'!') {
+                        let mut bang_end = bang_start;
+                        while bytes.get(bang_end) == Some(&b'!') {
+                            bang_end += 1;
+                        }
+                        return Some((dot, method_start, method_end, bang_start, bang_end));
+                    }
+                }
+                b',' | b';' | b'\n' | b'\r'
+                    if paren_depth == 0 && bracket_depth == 0 && brace_depth == 0 =>
+                {
+                    break;
+                }
+                _ => {}
+            }
+            pos += self.src[pos..].chars().next()?.len_utf8();
+        }
+        None
+    }
+
+    fn matching_closing_parenthesis(source: &str, open: usize) -> Option<usize> {
+        let bytes = source.as_bytes();
+        let mut pos = open;
+        let mut depth = 0usize;
+        while pos < bytes.len() {
+            match bytes[pos] {
+                b'"' | b'\'' => {
+                    pos = Self::skip_delimited_literal(source, pos, bytes[pos]).ok()?;
+                    continue;
+                }
+                b'/' => {
+                    if let Some(next) = Self::skip_regex_literal(source, pos) {
+                        pos = next;
+                        continue;
+                    }
+                }
+                b'(' => depth += 1,
+                b')' => {
+                    depth = depth.checked_sub(1)?;
+                    if depth == 0 {
+                        return Some(pos);
+                    }
+                }
+                _ => {}
+            }
+            pos += source[pos..].chars().next()?.len_utf8();
+        }
+        None
+    }
+
     fn nested_write_root_is_reserved(name: &str) -> bool {
         matches!(
             name,
@@ -2075,6 +2573,10 @@ impl<'a> Parser<'a> {
         self.skip_whitespace();
         if self.pos >= self.src.len() {
             return Err("unexpected end of expression".into());
+        }
+
+        if let Some(expr) = self.try_parse_receiver_mutation_expr()? {
+            return Ok(expr);
         }
 
         let assignment_start = self.pos;

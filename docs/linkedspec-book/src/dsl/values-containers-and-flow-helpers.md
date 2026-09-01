@@ -86,7 +86,7 @@ payload["items"][0]["name"] = "new";
 payload["items"][1] = { "name" : "tail" };
 ```
 
-Nested writes mutate the typed array/harray value held by the bare variable. On the Perl reference, every bracket
+Nested writes mutate the typed array/harray value held by the bare variable. On Perl and Rust, every bracket
 is evaluated as an ordinary value expression: a string selects an harray and a nonnegative integer selects a
 zero-based array. An absent root is created from the first selector, and a missing intermediate is created from
 the next selector. Existing null or another wrong kind is never coerced. Arrays remain dense: an existing index
@@ -95,7 +95,7 @@ then the RHS once; isolated structural building begins afterward. Success commit
 root. Invalid selectors, kind conflicts, and gaps throw typed nested-write diagnostics without a partial path
 commit. Reads remain pure and never create containers.
 
-This behavior is currently a Perl-reference implementation milestone. Rust, Dart, Julia, and Lua retain the
+This behavior is currently implemented on Perl and Rust. Dart, Julia, and Lua retain the
 earlier checked boundary until their `.19` backend leaves: every intermediate must already exist with the required
 shape, and a missing/wrong path or gap yields null without changing the root. Portable/public admission follows
 only after all backend leaves and recurring proof complete.
@@ -435,9 +435,9 @@ return(items.reduce_leaves(0) {
 });
 ```
 
-### Mutating leaves on the Perl reference
+### Mutating leaves on Perl and Rust
 
-Perl additionally supports `map_leaves!` on one bare named harray or array binding:
+Perl and Rust support `map_leaves!` on one bare named harray or array binding:
 
 ```text
 tree = { "name" : "ALPHA", "nested" : { "name" : "BETA" } };
@@ -449,16 +449,17 @@ count = tree.map_leaves!() {
 
 The callback result replaces the current leaf; after all callbacks succeed, `tree` is rebound once and the
 detached updated value feeds `.count_keys()`. Traversal uses the original shape and root kind, so replacement
-containers are not revisited. The block gets detached `value`, `path`/`@path`, `depth`, and `key` or `index`.
+containers are not revisited. The block gets detached `value`, `path` (also `@path` on Perl), `depth`, and `key`
+or `index`.
 
 The exclamation mark authorizes this traversal operation to replace leaves. It does not let callback code mutate
 the receiver binding directly. Assignment, bracket write, nested bang, mutation helpers, array-end methods, and
 binding-target array pipelines aimed at the active receiver fail with `receiver_mutation_reentrant`; unrelated
 bindings and distinct same-spelling scoped bindings remain legal. Callback failure leaves the receiver unchanged.
 
-Only the exact `binding_name.map_leaves!() { block }` form is current, and only on Perl. Function-form bang calls,
+Only the exact `binding_name.map_leaves!() { block }` form is current, on Perl and Rust. Function-form bang calls,
 temporary/nested receivers, `walk_leaves!`, `reduce_leaves!`, and arbitrary user-defined bang functions are not
-accepted. Rust, Dart, Julia, and Lua implementation plus portable/public admission remain pending.
+accepted. Dart, Julia, and Lua implementation plus portable/public admission remain pending.
 
 ## Reading and copying collections
 

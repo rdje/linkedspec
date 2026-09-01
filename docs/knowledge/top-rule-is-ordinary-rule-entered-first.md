@@ -19,6 +19,8 @@ answers:
   - "what is the root rule selection precedence"
   - "does --top-rule override Rule::"
   - "what is the default root rule when there is no double colon rule"
+  - "does entering a rule immediately test that entered rule's own regex"
+  - "which rule's regex does an outgoing dispatch edge test"
 date: 2026-06-23
 status: confirmed runtime mechanics; ADR 0046 admitted on Perl/Rust/Dart with Julia core/routes implemented
 tags: [engine, parser, top-rule, codegen, recursion, language-model, TOP-RULE-AS-NORMAL, ADR-0010, ADR-0046]
@@ -29,6 +31,7 @@ decision_ratification_2026_07_18: "ADR 0046 and `linkedspec-root-rule-selection-
 implementation_update_2026_07_18: "FUTURE-PARITY-BACKLOG.9.1.1.2.1.1-.3 implement and admit the complete Perl reference at 65/65 shared primary cases in both option environments. Native, loaded, generated, descriptor, diagnostic, trace, strict, and primary routes apply explicit selector > first marker > first rule without rewriting authored `is_top`. The rollout ledger is 2 complete / 5 pending; Rust, Dart, Julia, Lua, and final admission remain ordered under `.2-.6`."
 rust_admission_update_2026_07_18: "FUTURE-PARITY-BACKLOG.9.1.1.2.2.1-.3 implement and admit complete Rust parity through one topology-checked 15-role consumer and exact 65/65 primary cases in both option environments. The rollout ledger is 3 complete / 4 pending; Dart, Julia, Lua, and final admission remain ordered under `.3-.6`."
 dispatch_target_update_2026_09_01: "FUTURE-PARITY-BACKLOG.19.3.1 fixture review reconfirmed the execution consequence for a dispatch-loop wrapper. Entering Top runs Top's mode-driven loop, and an outgoing `-> Done` edge selects Done's regex slot. A regex stored on Top is not selected by that edge; it participates only when the execution topology targets Top, such as a self-edge or another incoming edge. New Rust vivification fixtures therefore use a zero-regex Top wrapper and put `/[a-z]+/` on Done. The systematic controlled-corpus cleanup is task-tree-owned by `.19.3.3`."
+rust_trace_gate_update_2026_09_01: "FUTURE-PARITY-BACKLOG.19.3.2's complete Rust component gate exposed one stale `trace_controls` assertion, not a runtime dispatch defect. The fixture directly enters `Top`, so its trace must contain rule entry and lifecycle execution but no `regex_match` merely for Top's inert `/x/`. The corrected negative assertion passes `trace_controls` 11/11 and the complete Rust local gate; no production dispatch code changed. `.19.3.3` owns the systematic positive target-regex audit across every available backend."
 dart_core_update_2026_07_18: "FUTURE-PARITY-BACKLOG.9.1.1.2.3.1 implements the same precedence in one Dart compiled-state resolver, accepts markerless one-or-more-rule sources, returns portable zero/unknown failures before user code, and preserves descriptor marker identity. Dart composed routes and admission remain `.3.2-.3`; rollout therefore remains 3/7."
 dart_routes_update_2026_07_18: "FUTURE-PARITY-BACKLOG.9.1.1.2.3.2 proves Dart loaded/normalized and generated/emitted direct/traced routes reuse that resolver, trace requested/effective/basis, preserve portable failures and generated v2 identity, and reject stale contracts before selection. Topology admission `.3.3` remains pending, so rollout stays 3/7."
 dart_admission_update_2026_07_18: "FUTURE-PARITY-BACKLOG.9.1.1.2.3.3 admits Dart through one topology-checked 15-role consumer and exact package 270 / primary 65x2 / corpus 105 proof. Root-selection rollout is now 4 complete / 3 pending; Julia, Lua/LuaJIT, and final no-drift remain."
@@ -71,6 +74,11 @@ This supersedes the earlier June 17 "no regex on top / two-rule minimum" validit
   edge targets `Top` itself. This is why a zero-regex `Top` plus a regex-bearing child is the clearest fixture for
   parent-loop/child-match behavior; it does not contradict the fact that a top rule can use its own regex when its
   execution topology selects it.
+- **Entry is not an implicit self-match.** Directly selecting a rule invokes its handler and starts that rule's
+  mode-driven execution. It does not, by the act of entry alone, test the entered rule's own regex or emit a
+  regex-match event. A self-edge or another incoming edge can select that regex normally. Rust's routed-trace
+  regression test locks this negative entry invariant; `.19.3.3` owns the corresponding positive target-edge
+  proof across all available backends.
 
 ## The idiom vs the law (ADR 0010)
 

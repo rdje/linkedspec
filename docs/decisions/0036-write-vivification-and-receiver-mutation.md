@@ -1,7 +1,7 @@
 # 0036 - Nested creation is write-only and `!` denotes explicit receiver mutation
 
 - Date: 2026-07-15
-- Status: accepted direction; neutral contracts, both Perl mechanisms, and Rust nested writes implemented; remaining mechanisms/backends/admission pending
+- Status: accepted direction; neutral contracts and both Perl/Rust mechanisms implemented; Dart/Julia/Lua and admission pending
 - Tags: dsl, language-evolution, mutation, autovivification, receiver-methods, traversal, paths, portability
 
 ## Context
@@ -193,8 +193,33 @@ Leaf `.19.3.1` implements the same unchanged `linkedspec-write-vivification-v1` 
 
 The permanent Rust contract projects all frozen AST/syntax/success/structural-failure cases plus evaluation,
 detachment, bound-null, fresh-function, fail-closed carrier, and generated execution boundaries. This leaf does
-not implement Rust `map_leaves!`, alter Dart/Julia/Lua, or admit a portable/public capability. Those boundaries
-remain owned by `.19.3.2-.19.9`.
+not itself implement Rust `map_leaves!`; `.19.3.2` has since composed that mechanism with these nested writes.
+Dart/Julia/Lua and portable/public admission remain owned by `.19.4-.19.9`.
+
+## Rust `map_leaves!` implementation (2026-09-01)
+
+Leaf `.19.3.2` implements the unchanged `linkedspec-map-leaves-mutation-v1` contract on Rust:
+
+- `ReceiverMutationChain` retains the typed bare receiver, mutation call, callback ActionIR, ordinary fluent
+  continuation, exact authored source, and half-open Unicode-scalar spans through compiler validation, serde,
+  generated plans, source emission, emitted-plan decode, and independently compiled emitted Rust;
+- `RuntimeContext` assigns stable identities to visible bindings and replaces/restores them across scoped and
+  function-local lifetimes. The callback guard therefore follows the resolved receiver identity, while a
+  same-spelling parameter or scoped binding remains distinct;
+- direct assignment, append, nested write, nested bang, mutation helpers, array-end methods, and binding-target
+  pipelines reject before their operand/segment/RHS evaluation when they target the active receiver;
+- the engine traverses a detached original-shape snapshot in sorted-key or index order, recursing only through
+  containers of the starting root kind. Copied callback frames produce detached, non-revisited replacements;
+  complete success publishes once, while callback/re-entrant failure leaves the receiver unchanged and releases
+  the guard; and
+- ordinary unrelated effects keep their normal semantics. Continuation starts after commit and guard release, so
+  its later failure preserves the completed receiver publication. All aggregate boundaries detach.
+
+Permanent proof projects the 4/14/5 syntax inventory, 10 successes, 8 pre-commit failures, special state cases,
+six callback compositions, one continuation composition, native/serde/generated/emitted/independently compiled
+routes, and corrupt-node rejection. Private runtime proof exercises state visible only after failure. The unchanged
+oracle rejects all 167 base and 592 current composition mutations. Dart/Julia/Lua and portable/public admission
+remain future.
 
 ## Function-scope carrier resolution (2026-08-31)
 
@@ -228,9 +253,9 @@ Leaf `.19.2.2` implements `linkedspec-map-leaves-mutation-v1` on the Perl refere
 
 The permanent Perl contract exercises the frozen base and composition authority, including the array-pipeline
 write audit, with fatal warnings. It passes 58 focused tests, 105 write mutations, 167 base map mutations, 592
-composition mutations, and the complete 1,032-test Perl Phase 0 regression. Rust now implements the nested-write
-half but remains at the prior non-bang boundary; Dart, Julia, and Lua remain non-bang/non-vivifying. Portable
-capability and public admission remain future.
+composition mutations, and the complete 1,032-test Perl Phase 0 regression. Rust has since implemented both
+mechanisms; Dart, Julia, and Lua remain non-bang/non-vivifying. Portable capability and public admission remain
+future.
 
 ## Consequences
 
@@ -244,9 +269,9 @@ capability and public admission remain future.
   be added; they are excluded because no distinct coherent mutation contract has been accepted.
 - “Absolute path” means complete root-to-leaf path inside the traversal receiver. The variable name is receiver
   identity, not an extra path element. Hash-root paths contain keys; array-root paths contain zero-based indexes.
-- During `.19.2-.19.6`, public guidance must name the backend transition explicitly: Perl implements nested-write
-  vivification and `map_leaves!`; Rust implements nested-write vivification but not `map_leaves!`; Dart, Julia,
-  and Lua retain the checked non-vivifying/non-bang boundary. Portable admission remains future until the
+- During `.19.2-.19.6`, public guidance must name the backend transition explicitly: Perl and Rust implement
+  nested-write vivification and `map_leaves!`; Dart, Julia, and Lua retain the checked non-vivifying/non-bang
+  boundary. Portable admission remains future until the
   remaining backend and admission leaves land.
 
 ## Links

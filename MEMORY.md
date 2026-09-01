@@ -1,13 +1,13 @@
 # MEMORY
 
-- activation_commit: `67e9a90f2307fd48dde77f52894c9999b11b1fb4` — exact clean Perl mutation commit from which
-  `FUTURE-PARITY-BACKLOG.19.3.1` was activated task-tree-first.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.19.3.1 - implement Rust write vivification`; typed parsed,
-  serialized, generated-plan, emitted-source, independently compiled, and native execution are signoff-complete.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.19.3.2` — next clean-boundary leaf, Rust `map_leaves!`.
-- next_action: derive the new clean `HEAD`, activate `.19.3.2` task-tree-first, retrieve its Rust parser/compiler/
-  runtime carrier owners, and audit the unchanged receiver-mutation contract before implementation.
-- in_flight_uncommitted: intended none after the atomic `.19.3.1` commit; no background job, generated mdBook
+- activation_commit: `c1dc84baeaa6f2d1d9644d01ae25e32d9f67f046` — exact clean Rust nested-write commit from which
+  `FUTURE-PARITY-BACKLOG.19.3.2` was activated task-tree-first.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.19.3.2 - implement Rust map leaves mutation`; typed native,
+  serialized, generated-plan, emitted-source, independently compiled, and composed execution are signoff-complete.
+- active_work_unit: `FUTURE-PARITY-BACKLOG.19.3.3` — next clean-boundary leaf, Rust oracle/root-semantics cleanup.
+- next_action: derive the new clean `HEAD`, activate `.19.3.3` task-tree-first, then reproduce and repair the
+  pre-existing root/target-regex oracle drift with LinkedSpec's toolbox before changing fixtures.
+- in_flight_uncommitted: intended none after the atomic `.19.3.2` commit; no background job, generated mdBook
   output, runtime probe artifact, or pending receipt result remains.
 - blockers: none.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -24,15 +24,18 @@
   results, exact diagnostics/spans, invocation-local absent/null presence, and read exclusions at 105 rejected
   mutations. Rust preserves it through serde/generated/emitted carriers; Dart/Julia/Lua and public capability
   admission remain pending.
-- current_perl_map_leaves_mutation: `linkedspec-map-leaves-mutation-v1` is implemented on Perl with one bang-only mutation AST,
+- current_map_leaves_mutation: `linkedspec-map-leaves-mutation-v1` is implemented on Perl and Rust with one bang-only mutation AST,
   resolved receiver identity guard, root-kind original-shape traversal, copied frames, atomic rebind, detached
   result, post-commit continuation, exact diagnostics/exclusions, and 167 base mutations. Receiver callback writes
   through assignment, nested write/bang, mutation helpers, array-end methods, and binding-target array pipelines
-  are guarded. Rust/Dart/Julia/Lua and public admission remain pending.
+  are guarded. Rust preserves the typed node through serde/generated/emitted carriers. Dart/Julia/Lua and public
+  admission remain pending.
+- current_rule_entry_dispatch_invariant: selecting a rule enters its handler and starts its mode-driven execution;
+  entry alone never tests that rule's own regex. An outgoing edge selects its target rule's regex. Rust's corrected
+  routed-trace lock passes 11/11 and the complete component gate; `.19.3.3` owns systematic cross-backend proof.
 - current_mutation_composition_contract: `linkedspec-write-map-leaves-composition-v1` digest-binds both unchanged
   mechanisms across eight writes, six callback cases, one continuation, and 592 current composition mutations;
-  Perl executes both halves; Rust executes standalone nested writes while its pending bang parser stops composed
-  callbacks; Dart/Julia/Lua remain pending.
+  Perl and Rust execute both halves; Dart/Julia/Lua remain pending.
 - current_map_leaves_scope_resolution: option A preserves pure functions. Helper-mediated rejection uses inline
   explicit-target `set(tree, ...)`; post-commit receiver-write proof uses caller-scoped `.with()`. No implicit
   caller capture or arbitrary user-defined bang method is admitted.
@@ -46,6 +49,6 @@
   authorizes exactly 21 collection files / 20 manifest lines with every byte and aggregate ceiling unchanged.
 - current_change_history_capacity: immutable segment `4987` is the twenty-fourth manifest record; ADR `0098`
   authorizes exactly 26 collection files / 25 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-08-31 — README, roadmaps, codebase, mdBook, memory architecture, task-tree doctrine,
-  `.19.2.2`, ADR `0036`, write/map/composition/function-scope Knowledge, indexed history, Toolbox, commit workflow,
+- latest_bootstrap_read: 2026-09-01 — README, roadmaps, codebase, mdBook, memory architecture, task-tree doctrine,
+  `.19.3.2`, ADR `0036`, write/map/composition/function-scope Knowledge, indexed history, Toolbox, commit workflow,
   and Git state read.

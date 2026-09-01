@@ -9,6 +9,33 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-09-01 (`FUTURE-PARITY-BACKLOG.19.3.2` — Rust `map_leaves!`): reserving `!` only in the dedicated
+  receiver-mutation parser keeps ordinary identifiers, functions, methods, and continuations unchanged. One typed
+  carrier retains the callback ActionIR and authored Unicode-scalar source/spans through every Rust route.
+- Receiver safety requires identity, not spelling. `RuntimeContext` now preserves an identity across ordinary
+  writes, allocates a fresh identity for scoped/function-local bindings, and restores the caller identity on exit;
+  an explicit parameter named `tree` is therefore legal without weakening the outer receiver guard.
+- Guard checks run at the common expression/statement seams before target operands, nested-write segments/RHS, or
+  pipeline evaluation. This makes `receiver_mutation_reentrant` deterministic and prevents hidden side effects
+  from a forbidden write attempt.
+- Mapping uses an isolated original snapshot and only recurses through the starting root kind. Callback results
+  are detached replacements and are never revisited; all callbacks must complete before one receiver publication.
+- Callback/re-entrant failure releases the guard and leaves the receiver unchanged while ordinary completed
+  effects on other identities persist. Successful publication releases the guard before continuation, so a later
+  continuation failure cannot roll the commit back.
+- Permanent proof must include carrier compilation, not merely emitted text inspection. The integration test
+  creates a repository-volume workspace, independently compiles the emitted module offline, executes it, and
+  removes the workspace through its drop guard.
+- The frozen neutral mutation oracle remains unchanged at 167 base + 592 composition mutations. Rust-specific
+  proof executes callback-value/unrelated/shadow writes, pre-evaluation same-receiver precedence, later callback
+  failure, unrelated write failure effects, post-commit continuation failure, non-bang isolation, and detachment.
+- The complete Rust gate caught a stale trace-test assumption rather than a runtime regression. Selecting `Top`
+  enters its handler and executes its lifecycle/loop; entry is not an implicit edge back to `Top`, so the inert
+  `/x/` on that fixture cannot produce `regex_match`. Replacing the positive regex assertion with an explicit
+  lifecycle-positive/regex-negative lock makes the target pass 11/11 and preserves production dispatch bytes.
+- The positive twin remains topology-driven: an outgoing edge selects its target rule's regex. `.19.3.3` owns a
+  controlled fixture/oracle inventory and cross-backend proof of both halves rather than allowing individual
+  backend tests to encode a different entry interpretation.
 - 2026-09-01 (`FUTURE-PARITY-BACKLOG.19.3.1` — Rust write vivification): the old Rust AST encoded quoted
   segments as keys and every computed segment as an index, so it could not honor the frozen evaluated-kind rule.
   `WritePathSegment` now retains source/span/expression and one `AssignNestedAccess` owns every path length.

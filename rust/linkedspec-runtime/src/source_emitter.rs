@@ -19,6 +19,7 @@ use linkedspec_core::ast::RuleMode;
 use linkedspec_core::compiler::{
     REGEX_SLOT_IDENTITY_CONTRACT, validate_compiled_regex_slot_identities,
     validate_nested_write_nodes, validate_no_removed_aggregate_selectors,
+    validate_receiver_mutation_nodes,
 };
 use linkedspec_core::entry_rule::{ENTRY_RULE_NOT_FOUND_CODE, NO_RULES_DEFINED_CODE};
 use linkedspec_core::error::LinkedSpecError;
@@ -390,6 +391,15 @@ pub fn emit_rust_source_v2(
             GeneratedSourceStage::EmitSource,
             GeneratedSourceCode::GeneratedSourceEmitFailed,
             "Failed to emit generated Rust source from invalid compiled nested-write state",
+            source_identity,
+        )
+        .with_detail(error.to_string())
+    })?;
+    validate_receiver_mutation_nodes(compiled).map_err(|error| {
+        GeneratedSourceError::new(
+            GeneratedSourceStage::EmitSource,
+            GeneratedSourceCode::GeneratedSourceEmitFailed,
+            "Failed to emit generated Rust source from invalid compiled receiver-mutation state",
             source_identity,
         )
         .with_detail(error.to_string())
@@ -1004,6 +1014,9 @@ fn decode_generated_compiled_spec_v2(
         GeneratedSourceError::compile_failed(source_identity, error.to_string())
     })?;
     validate_nested_write_nodes(&compiled).map_err(|error| {
+        GeneratedSourceError::compile_failed(source_identity, error.to_string())
+    })?;
+    validate_receiver_mutation_nodes(&compiled).map_err(|error| {
         GeneratedSourceError::compile_failed(source_identity, error.to_string())
     })?;
     validate_compiled_regex_slot_identities(&compiled)

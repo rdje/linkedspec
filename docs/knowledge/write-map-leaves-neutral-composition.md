@@ -14,13 +14,14 @@ answers:
   - "does continuation nested-write failure roll back the map_leaves bang commit"
   - "what is the current six-runtime boundary for composed write and map_leaves bang source"
 date: 2026-08-31
-status: accepted neutral composition; implemented on Perl, remaining backends/admission pending
+status: accepted neutral composition; implemented on Perl and Rust, remaining backends/admission pending
 tags: [dsl, mutation, vivification, map-leaves, composition, identity, atomicity, diagnostics, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.19.1.3 adds capability_conformance/write_map_leaves_composition_contract.json without a new executable entrypoint. The existing write checker validates eight embedded nested writes; the existing mutation checker executes six callback compositions and one post-commit continuation, retains 167 base mutations, and rejects 593 composition scalar/container-shape mutations. Exact primary-command probes return the non-bang control {\"leaf\":[]} on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. The bang source stops before callback nested-write lowering: Perl returns null; Rust warns at the stopped map_leaves identifier then returns null; Dart, Julia, and both Lua ABIs exit 1 with the generic parser-invocation boundary. No backend or capability is admitted."
 evidence_update_2026_08_31_perl_write_boundary: "FUTURE-PARITY-BACKLOG.19.2.1 makes the nested-write half executable on Perl but leaves map_leaves! parsing/runtime untouched. The composed callback/continuation cases therefore remain neutral-only on every backend until .19.2.2 and later backend/admission leaves."
 evidence_update_2026_08_31_scope_conflict: "The .19.2.2 audit proves the helper-mediated and post-commit fn carriers cannot reach caller tree/audit under the admitted fresh function-local contract. Existing explicit-target set and caller-scoped with blocks can express the same identity/ordering proof without implicit capture. Director decision is required before fixture or behavior change."
 evidence_update_2026_08_31_perl_implementation: "The director chose option A. FUTURE-PARITY-BACKLOG.19.2.2 replaces the impossible helper carriers with explicit-target set and caller-scoped with, preserving pure function scope and all intended observations. The corrected current corpus has 592 composition mutations. Perl implements both mechanisms and rejects every active-receiver write route, including binding-target array pipelines; Rust, Dart, Julia, Lua, capability, and public admission remain pending."
-reverify: "bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py && bash tools/run_python_project_data.sh tools/check_map_leaves_mutation_contract.py && PERL5OPT=-Mwarnings=FATAL perl -Iperl t/map_leaves_mutation_perl_contract.t && rg -n 'write-map-leaves-composition|callback compositions|post-commit|592 composition' capability_conformance/README.md capability_conformance/write_map_leaves_composition_contract.json TOOLBOX.md docs/decisions/0036-write-vivification-and-receiver-mutation.md docs/tasks/FUTURE-PARITY-BACKLOG.15-24.md"
+evidence_update_2026_09_01_rust_implementation: "FUTURE-PARITY-BACKLOG.19.3.2 executes the frozen six callback compositions and one continuation boundary on Rust. Direct proof covers callback-value and unrelated vivification, later callback failure, failed unrelated write effects, pre-evaluation same-receiver guard precedence, distinct same-spelling shadow vivification, post-commit continuation failure, and all detachment boundaries. The current composition oracle rejects all 592 mutations unchanged."
+reverify: "bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py && bash tools/run_python_project_data.sh tools/check_map_leaves_mutation_contract.py && PERL5OPT=-Mwarnings=FATAL perl -Iperl t/map_leaves_mutation_perl_contract.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test map_leaves_mutation_contract && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib receiver_mutation_ -- --nocapture"
 ---
 
 # Future-neutral write/`map_leaves!` composition
@@ -52,10 +53,10 @@ Complete callback success commits the rebuilt receiver once and releases its gua
 against the detached result. A continuation helper may reach the receiver and perform an ordinary nested write;
 if that write fails, its structural attempt rolls back but the earlier `map_leaves!` receiver commit remains.
 
-The composed source is current on Perl: both mechanisms execute and preserve the boundaries above. Its non-bang
-control remains unchanged on all six runtime routes. Rust still stops before callback nested-write lowering at its
-soft-null boundary; Dart/Julia/Lua retain their generic nonzero parser boundary. Remaining implementations and
-portable/public admission follow in later `.19` leaves.
+The composed source is current on Perl and Rust: both mechanisms execute and preserve the boundaries above,
+including generated Rust carriers. Its non-bang control remains unchanged on all six runtime routes.
+Dart/Julia/Lua retain their generic nonzero parser boundary. Remaining implementations and portable/public
+admission follow in later `.19` leaves.
 
 Related: ADR `0036`, [[write-vivification-receiver-mutation-direction]], and
 [[tool-project-data-ssd-storage]]. The resolved carrier conflict is

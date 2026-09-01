@@ -1111,13 +1111,14 @@ Three backbone items tracked major structural modernization — all done:
   unambiguous from the next evaluated segment; reads remain pure, existing wrong-kind values are not coerced, and
   arrays remain dense. `map_leaves!` is the only v1 bang method and atomically rebinds a bare named receiver after
   successful original-shape/root-kind traversal. Neutral write, bang, and composition contracts `.19.1.1-.3` are
-  frozen. Perl `.19.2.1-.2` implements both: evaluated typed nested paths, invocation-local presence, dense
-  isolated creation, a dedicated bang AST, copied callback bindings, identity-keyed receiver guard across every
-  executable write route, atomic publication, detached results, and post-commit continuation. The director-
+  frozen. Perl `.19.2.1-.2` and Rust `.19.3.1-.2` implement both: evaluated typed nested paths, presence-aware
+  dense isolated creation, dedicated typed bang ASTs, copied callback bindings, identity-keyed receiver guards
+  across every executable write route, atomic publication, detached results, and post-commit continuation. The director-
   selected carrier correction preserves fresh function-local scope through explicit-target `set` and caller-
   scoped `.with`; no caller capture or arbitrary bang functions were added. Focused 58 tests, 105 write / 167 base
-  + 592 composition mutations, and Phase 0 1,032/1,032 pass. Rust, Dart, Julia, and Lua retain the prior boundary;
-  their implementations plus portable/public admission and recurring proof remain pending under `.19.3-.9`.
+  + 592 composition mutations, and Phase 0 1,032/1,032 pass. Rust adds 9/9 permanent native/serde/generated/
+  emitted/independently compiled proofs plus 3/3 private failure-state tests. Dart, Julia, and Lua retain the prior
+  boundary; their implementations plus portable/public admission and recurring proof remain pending under `.19.4-.9`.
   All 13 ordinary harray names close at 103/103 through `.4.3.5.5` on both Lua ABIs. Sorted arrays continue
   through array receivers, count/membership are terminal, and mutation-result/pure-receiver prose is guarded.
   Eager blocks, lazy inline controls, attached/marker if and switch, and attached while close through

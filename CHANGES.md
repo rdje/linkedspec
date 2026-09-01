@@ -10,6 +10,29 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-01 — FUTURE-PARITY-BACKLOG.19.3.2 — implement Rust map leaves mutation
+
+- Added the dedicated Rust `receiver_mutation_chain` carrier for only bare
+  `IDENTIFIER.map_leaves!() { ACTION_BLOCK } CONTINUATION*`, with exact typed receiver/callback/continuation
+  structure and authored Unicode-scalar spans across compiler validation, serde, generated plans, and emission.
+- Added stable runtime binding identities and an active-receiver guard. Direct assignment/append, nested write or
+  bang, mutation helpers, array-end methods, and binding-target pipelines reject before operand/segment/RHS
+  evaluation only when they resolve to the guarded receiver; same-spelling shadows and unrelated bindings remain
+  legal.
+- Implemented detached original-shape traversal by root kind, copied callback frames, non-revisited replacement,
+  one atomic publication, exception-safe guard release, ordinary unrelated effects, detached returned roots, and
+  commit-before-continuation semantics.
+- Added permanent Rust proof for all frozen 4 valid / 14 invalid / 5 excluded syntax cases, 10 successes, 8 pre-
+  commit failures, special state boundaries, six callback compositions, one continuation composition, malformed
+  carrier rejection, and native/serde/generated/emitted/independently compiled execution.
+- Focused proof passes 9/9 integration and 3/3 private failure-state tests; the unchanged neutral checker rejects
+  all 167 base and 592 composition mutations. No Dart/Julia/Lua or portable capability admission moves.
+- The required complete Rust component gate exposed and repaired one stale trace assertion: direct entry starts
+  `Top`'s handler/lifecycle loop but does not test `Top`'s own inert regex. The corrected negative lock passes the
+  trace target 11/11 and the complete Rust local gate; production dispatch behavior is unchanged.
+- Synchronized ADR `0036`, Knowledge, task/index, roadmaps, architecture/capability/Toolbox guidance, bounded live
+  docs, and the sole-facing mdBook. The already-owned `.19.3.3` root/target-regex oracle cleanup follows.
+
 ## 2026-09-01 — FUTURE-PARITY-BACKLOG.19.3.1 — implement Rust write vivification
 
 - Replaced Rust's static quoted-key/computed-index lowering with one `WritePathSegment` carrying typed expression,

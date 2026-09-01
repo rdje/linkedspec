@@ -298,13 +298,13 @@ values: `items += value` appends to the named array and evaluates to the updated
 updated root snapshot; remaining backends retain their earlier named-hash interpretation until admission.
 
 Nested value-path assignment mutates scalar-held array/hash payloads through direct access syntax:
-`payload["items"][0]["name"] = value`. On Perl, each evaluated string/nonnegative-integer segment selects an
+`payload["items"][0]["name"] = value`. On Perl and Rust, each evaluated string/nonnegative-integer segment selects an
 harray/array. The first selector may create an absent root, and the next selector may create a missing
 intermediate. Bound null and other wrong kinds are not coerced; arrays replace or append exactly at length and
 reject gaps. Segments evaluate once left-to-right, then the RHS once, before isolated structural validation.
 Success commits and yields a detached updated root. Invalid selectors, kind conflicts, and gaps throw typed
 diagnostic objects and commit no partial path; already completed expression effects retain ordinary semantics.
-Reads never create state. Rust, Dart, Julia, and Lua retain the prior existing-intermediate/null-result boundary
+Reads never create state. Dart, Julia, and Lua retain the prior existing-intermediate/null-result boundary
 until the remaining implementation and public-admission leaves complete.
 
 Array end mutations are also statement-level operations on a named working array:

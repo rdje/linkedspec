@@ -291,6 +291,22 @@ fn normalize_expr(
             normalize_write_segments(segments, user_contracts)?;
             normalize_expr(value, user_contracts)
         }
+        Expr::ReceiverMutationChain {
+            mutation,
+            continuation,
+            ..
+        } => {
+            normalize_statements(&mut mutation.callback.body.statements, user_contracts)?;
+            for call in continuation {
+                normalize_call_arguments(
+                    CallableSurface::Receiver,
+                    &call.method,
+                    &mut call.args,
+                    user_contracts,
+                )?;
+            }
+            Ok(())
+        }
         Expr::IndexedVar { index, .. } => normalize_expr(index, user_contracts),
         Expr::NestedAccess { segments, .. } => normalize_segments(segments, user_contracts),
         Expr::ValueAccess { receiver, segments } => {

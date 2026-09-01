@@ -43,9 +43,9 @@ structural failure commits no partial path, although a segment/RHS side effect a
 snapshot remains ordinary program state. Success detaches the committed binding, expression result, initial tree,
 and aggregate RHS.
 
-Reads are unchanged and never create state. This is a Perl-reference implementation milestone, not portable
-admission: Rust, Dart, Julia, and Lua still use the prior checked non-vivifying write behavior, and `map_leaves!`
-remains unsupported until its separately owned implementation leaves land.
+Reads are unchanged and never create state. This card owns the Perl milestone, not portable admission. Rust has
+since implemented the same write contract under `.19.3.1` and `map_leaves!` under `.19.3.2`; Dart, Julia, and Lua
+still use the prior checked non-vivifying/non-bang behavior.
 
 Related: [[write-vivification-neutral-contract]], [[terse-nested-value-path-assignment]],
 [[uniform-binding-neutral-contract]], [[write-map-leaves-neutral-composition]], and ADR `0036`.

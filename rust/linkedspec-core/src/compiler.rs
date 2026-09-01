@@ -56,6 +56,7 @@ pub fn compile(spec: &SpecFile) -> Result<CompiledSpec> {
         .map_err(LinkedSpecError::Compile)?;
     validate_no_removed_aggregate_selectors(&compiled)?;
     validate_nested_write_nodes(&compiled)?;
+    validate_receiver_mutation_nodes(&compiled)?;
     resolve_compiled_regex_selectors(&mut compiled)?;
     build_dependency_regex_map(&mut compiled)?;
     validate_recursive_observation_contract(&compiled)?;
@@ -169,6 +170,7 @@ fn compile_with_events(spec: &SpecFile, trace: &mut TraceEmitter) -> Result<Comp
         .map_err(LinkedSpecError::Compile)?;
     validate_no_removed_aggregate_selectors(&compiled)?;
     validate_nested_write_nodes(&compiled)?;
+    validate_receiver_mutation_nodes(&compiled)?;
     resolve_compiled_regex_selectors(&mut compiled)?;
     let edge_only_entries = compiled
         .rules
@@ -263,6 +265,17 @@ fn visit_expr(
         } => {
             visit_write_segments(segments, visitor)?;
             visit_expr(value, visitor)
+        }
+        Expr::ReceiverMutationChain {
+            mutation,
+            continuation,
+            ..
+        } => {
+            visit_statements(&mutation.callback.body.statements, visitor)?;
+            for call in continuation {
+                visit_expr_args(&call.args, visitor)?;
+            }
+            Ok(())
         }
         Expr::IndexedVar { index, .. } => visit_expr(index, visitor),
         Expr::NestedAccess { segments, .. } => visit_expr_segments(segments, visitor),
@@ -672,6 +685,152 @@ fn char_slice(source: &str, start: usize, end: usize) -> Option<String> {
     (value.chars().count() == end - start).then_some(value)
 }
 
+fn receiver_mutation_state_error(context: &str, reason: &str) -> LinkedSpecError {
+    LinkedSpecError::Diagnostic(
+        PortableDiagnostic::new(
+            "receiver_mutation_serialized_state_invalid",
+            "validate_compiled_actionir",
+            "Compiled receiver-mutation ActionIR does not satisfy the typed v1 carrier contract",
+        )
+        .with_field("context", context.to_string())
+        .with_field("reason", reason.to_string()),
+    )
+}
+
+fn span_projection(
+    source: &str,
+    containing_span: crate::expr::ExpressionSpan,
+    span: crate::expr::ExpressionSpan,
+) -> Option<String> {
+    if span.start < containing_span.start || span.end > containing_span.end {
+        return None;
+    }
+    char_slice(
+        source,
+        span.start - containing_span.start,
+        span.end - containing_span.start,
+    )
+}
+
+fn identifier_is_valid(name: &str) -> bool {
+    !name.is_empty()
+        && name
+            .chars()
+            .next()
+            .is_some_and(|character| character.is_ascii_alphabetic() || character == '_')
+        && name
+            .chars()
+            .all(|character| character.is_ascii_alphanumeric() || character == '_')
+}
+
+fn identifier_is_addressable(name: &str) -> bool {
+    identifier_is_valid(name) && !nested_write_root_is_reserved(name)
+}
+
+fn validate_receiver_mutation_block(block: &CodeBlock, context: &str) -> Result<()> {
+    for statement in &block.statements {
+        visit_expr(&statement.expr, &mut |expr| {
+            let Expr::ReceiverMutationChain {
+                source,
+                source_span,
+                receiver,
+                mutation,
+                continuation,
+            } = expr
+            else {
+                return Ok(());
+            };
+            if source_span.end.checked_sub(source_span.start) != Some(source.chars().count()) {
+                return Err(receiver_mutation_state_error(
+                    context,
+                    "chain_source_span_mismatch",
+                ));
+            }
+            if receiver.kind != "binding_reference"
+                || receiver.source != receiver.name
+                || !identifier_is_addressable(&receiver.name)
+                || span_projection(source, *source_span, receiver.source_span).as_deref()
+                    != Some(receiver.source.as_str())
+            {
+                return Err(receiver_mutation_state_error(
+                    context,
+                    "receiver_reference_invalid",
+                ));
+            }
+            if mutation.kind != "receiver_mutation_call"
+                || mutation.method != "map_leaves"
+                || mutation.source_method != "map_leaves!"
+                || span_projection(source, *source_span, mutation.source_span).as_deref()
+                    != Some(mutation.source.as_str())
+                || span_projection(source, *source_span, mutation.method_span).as_deref()
+                    != Some("map_leaves!")
+                || span_projection(source, *source_span, mutation.args_span).as_deref()
+                    != Some("()")
+                || mutation.source_span.start != mutation.method_span.start
+            {
+                return Err(receiver_mutation_state_error(
+                    context,
+                    "mutation_call_invalid",
+                ));
+            }
+            let callback = &mutation.callback;
+            let body = &callback.body;
+            if callback.kind != "block_value"
+                || body.kind != "action_block"
+                || span_projection(source, *source_span, callback.source_span).as_deref()
+                    != Some(callback.source.as_str())
+                || span_projection(source, *source_span, body.source_span).as_deref()
+                    != Some(body.source.as_str())
+                || !callback.source.starts_with('{')
+                || !callback.source.ends_with('}')
+                || callback.source_span.start.checked_add(1) != Some(body.source_span.start)
+                || body.source_span.end.checked_add(1) != Some(callback.source_span.end)
+                || mutation.source_span.end != callback.source_span.end
+            {
+                return Err(receiver_mutation_state_error(
+                    context,
+                    "mutation_callback_invalid",
+                ));
+            }
+            let mut prior_end = mutation.source_span.end;
+            for call in continuation {
+                if call.kind != "fluent_call"
+                    || call.method.is_empty()
+                    || call.method.contains('!')
+                    || call.source_method != call.method
+                    || !identifier_is_valid(&call.method)
+                    || call.source_span.start < prior_end
+                    || span_projection(source, *source_span, call.source_span).as_deref()
+                        != Some(call.source.as_str())
+                    || span_projection(source, *source_span, call.args_span).as_deref()
+                        != Some(call.args_source.as_str())
+                    || !call.source.starts_with(&call.source_method)
+                    || call.args_span.start < call.source_span.start
+                    || call.args_span.end > call.source_span.end
+                {
+                    return Err(receiver_mutation_state_error(
+                        context,
+                        "continuation_call_invalid",
+                    ));
+                }
+                prior_end = call.source_span.end;
+            }
+            if continuation
+                .last()
+                .is_some_and(|call| call.source_span.end != source_span.end)
+                || continuation.is_empty() && mutation.source_span.end != source_span.end
+            {
+                return Err(receiver_mutation_state_error(
+                    context,
+                    "chain_terminal_span_invalid",
+                ));
+            }
+            Ok(())
+        })?;
+    }
+    Ok(())
+}
+
 fn validate_nested_write_block(block: &CodeBlock, context: &str) -> Result<()> {
     for statement in &block.statements {
         visit_expr(&statement.expr, &mut |expr| {
@@ -796,6 +955,51 @@ pub fn validate_nested_write_nodes(spec: &CompiledSpec) -> Result<()> {
                 &entry.fluent_chain,
                 &format!("rule '{}' blind edge {index}", rule.label),
             )?;
+        }
+    }
+    Ok(())
+}
+
+/// Validate every typed receiver-mutation node before native or serialized/generated execution.
+pub fn validate_receiver_mutation_nodes(spec: &CompiledSpec) -> Result<()> {
+    for function in &spec.functions {
+        validate_receiver_mutation_block(
+            &function.body,
+            &format!("function '{}' body", function.name),
+        )?;
+    }
+    for rule in &spec.rules {
+        for (kind, block) in [
+            ("I", rule.preamble.as_ref()),
+            ("LX", rule.lxcode.as_ref()),
+            ("LS", rule.lscode.as_ref()),
+            ("LE", rule.lecode.as_ref()),
+            ("E", rule.ecode.as_ref()),
+            ("EX", rule.excode.as_ref()),
+            ("IT", rule.itcode.as_ref()),
+        ] {
+            if let Some(block) = block {
+                validate_receiver_mutation_block(
+                    block,
+                    &format!("rule '{}' {kind}-block", rule.label),
+                )?;
+            }
+        }
+        for (index, entry) in rule.acode_dispatch.iter().enumerate() {
+            if let Some(block) = &entry.code {
+                validate_receiver_mutation_block(
+                    block,
+                    &format!("rule '{}' action edge {index}", rule.label),
+                )?;
+            }
+        }
+        for (index, entry) in rule.bcode_dispatch.iter().enumerate() {
+            if let Some(block) = &entry.code {
+                validate_receiver_mutation_block(
+                    block,
+                    &format!("rule '{}' blind edge {index}", rule.label),
+                )?;
+            }
         }
     }
     Ok(())
