@@ -48,8 +48,9 @@ contracts and passes focused plus Phase 0 1,032/1,032 proof. Rust `.19.3.1-.2` n
 through typed parsed/serialized/generated/emitted carriers and exact runtime diagnostics; permanent proof includes
 independently compiled emitted Rust, identity-guarded receiver mutation, and strict nested-write composition. The
 current authorities reject 105 write, 167 base map, and 592 corrected composition mutations. Dart/Julia/Lua and
-portable/public admission remain pending; Rust oracle/root-semantics cleanup `.19.3.3` is canonical-signoff-
-complete, with measured macOS first-launch/cache-interference audit `.19.3.4.0` next before the Rust parent closes.
+portable/public admission remain pending. Rust oracle/root-semantics cleanup `.19.3.3` is canonical-signoff-
+complete; controlled `.19.3.4.0` classifies older-artifact launch delay as external macOS policy/cache state and
+requires no repository repair, closing Rust parent `.19.3`. Dart nested write-vivification `.19.4.1` is next.
 Capacity `.0` freezes, canonical `.1` implements,
 and focused `.2` independently recomposes one bounded `.14.6.5-.14.8` task member with every pressure ceiling and
 stable ID preserved. The storage prerequisite is composition-closed. Julia `.14.6.5` is split into historical

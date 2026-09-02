@@ -10,6 +10,24 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-02 — FUTURE-PARITY-BACKLOG.19.3.4.0 — classify macOS Rust first-launch latency
+
+- Separated dependency compilation, linking, first process launch, and test execution under controlled serial,
+  repository-managed runs. Two older distinct `trace_controls` binaries first-listed in 45.32 and 51.75 seconds,
+  then repeated in 0.00 seconds without executing a test body.
+- During both delayed launches, the Rust process was not yet visible and `syspolicyd` owned substantial CPU; prior
+  stack evidence fixed the wait at `_dyld_start`, before Rust `main`. The delay is therefore macOS per-artifact
+  policy/cache assessment, not a LinkedSpec test loop.
+- Built two unique controls in isolated same-volume targets in 37.18 and 23.17 seconds. The first hash's signed-
+  copy/original pair launched in 0.44/0.45 seconds; the second hash remained wholly unmanipulated and launched in
+  0.41 seconds, excluding a persistent source, build, storage, signature form, provenance, or first-launch defect.
+- Classified the original canonical interval separately from its independently observed target deletion and
+  `cargo sweep` interference. No Gatekeeper weakening, provenance clearing, prelaunch, re-signing, cache-layout
+  change, or test-coverage reduction is justified; repair leaf `.19.3.4.1` closes as not required.
+- Added durable Knowledge, Toolbox, and mdBook guidance for future diagnosis, synchronized the task/index,
+  roadmaps, live status, memory, changes, and engineering notes, and closed the Rust `.19.3` lane with focused
+  documentation/doctrine proof. Dart nested write-vivification `.19.4.1` is next.
+
 ## 2026-09-01 — FUTURE-PARITY-BACKLOG.19.3.3 — restore exact oracle and root-target semantics
 
 - Reproduced the `capability_position_helper_surface` drift through current Perl and Rust before changing the

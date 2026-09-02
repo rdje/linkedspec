@@ -512,6 +512,28 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 - **HOW:** `bash tools/test_rust_project_data_storage.sh`. `tools/run_rust_local.sh` invokes the oracle after the
   complete package/build proof and reuses those expensive results.
 
+#### macOS Rust first-launch latency: classify before changing anything
+
+On macOS, a freshly started Cargo test can be silent before Rust `main` while operating-system policy assessment
+owns the time. Do not infer a test loop from silence, delete `rust/target`, clear provenance, re-sign accepted
+artifacts, disable Gatekeeper, or move caches. First prove the stage inside repository-managed storage:
+
+```bash
+bash tools/run_cargo_local.sh test --offline --manifest-path rust/Cargo.toml \
+  -p linkedspec-runtime --test trace_controls --no-run
+rg --files rust/target/debug/deps | rg '/trace_controls-[0-9a-f]+$'
+```
+
+Then time `BINARY --list` twice inside `bash tools/project_data_run.sh ...`; `--list` excludes test-body work. Use
+read-only `ps`, `xattr -l`, `codesign -dvvv`, and `spctl -a -vv -t execute` evidence to separate process launch,
+metadata, and policy state. A normal ad-hoc Cargo binary may be `spctl`-rejected, so rejection alone is not a defect
+or a reason to weaken trust.
+
+The controlled macOS 26.5.2 closeout in [[macos-rust-first-launch-validation-latency]] measured two older hashes at
+45.32/0.00 and 51.75/0.00 seconds first/warm while `syspolicyd` was busy. A first fresh hash's signed-copy/original
+pair launched in 0.44/0.45 seconds, and a second wholly unmanipulated unique hash launched in 0.41 seconds. That
+evidence closes the observed case as external per-artifact policy/cache state, not a persistent Linkedspec defect.
+
 ### 4.3.4 `tools/test_dart_project_data_storage.sh` — Dart SSD-local storage oracle
 
 - **WHAT:** lock the exact 21 maintained Dart temporary owners, including non-ignored untracked sources before

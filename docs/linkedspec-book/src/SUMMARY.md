@@ -71,5 +71,6 @@
 # Development
 
 - [Local CI and Regression](development/local-ci-and-regression.md)
+- [Diagnosing macOS Rust Launch Latency](development/macos-rust-launch-latency.md)
 - [Inspecting `.spec` Code Generation](development/codegen-inspector.md)
 - [Documentation Workflow](development/documentation-workflow.md)

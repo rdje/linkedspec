@@ -1,14 +1,14 @@
 # MEMORY
 
-- activation_commit: `7fabe7371e4e98eea394d5f455286122452caab6` — exact clean Rust `map_leaves!` commit from which
-  `FUTURE-PARITY-BACKLOG.19.3.3` was activated task-tree-first.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.19.3.3 - restore oracle root semantics`; exact staged canonical,
-  cross-backend recurring proof, Phase 0 1,032/1,032, atomic commit, and clean handoff are signoff-complete.
-- active_work_unit: none — clean handoff after `.19.3.3`; `.19.3.4.0` is the next task-tree-first activation.
-- next_action: from the committed clean boundary, activate `FUTURE-PARITY-BACKLOG.19.3.4.0`, retrieve its latency
-  Knowledge/toolbox owners, and run controlled serial cold/warm process-launch classification before any repair.
-- in_flight_uncommitted: none. All `.19.3.3` implementation, documentation, exact staged canonical verification,
-  receipt, commit, brief clearing, generated-output cleanup, and background-job consumption are complete.
+- activation_commit: `5c20f95859118574e1daaf5f5a70b28abb4774bf` — exact clean oracle/root-semantics commit from which
+  `FUTURE-PARITY-BACKLOG.19.3.4.0` was activated task-tree-first.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.19.3.4.0 - classify macOS Rust launch latency`; controlled
+  evidence, durable sync, focused proof, atomic commit, and clean handoff are signoff-complete.
+- active_work_unit: none — clean handoff after `.19.3.4.0`; Dart `.19.4.1` is the next task-tree-first activation.
+- next_action: from the committed clean boundary, activate `FUTURE-PARITY-BACKLOG.19.4.1`, retrieve the frozen
+  nested-write v1 contract and Dart typed/runtime owners, then implement only that Dart slice.
+- in_flight_uncommitted: none. All `.19.3.4.0` diagnostics, classification, documentation, focused verification,
+  commit, brief clearing, diagnostic cleanup, and background-job consumption are complete.
 - blockers: none.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -37,6 +37,9 @@
   PUC-Lua/LuaJIT 105-case corpus routes are green. Root selection passes its exact five-backend/six-runtime driver,
   recursive observation passes all six routes, the repository-managed Rust trace target passes 12/12, and exact
   staged canonical signoff plus both 66/66 CLI environments and Phase 0 1,032/1,032 are green.
+- current_macos_rust_launch_classification: older ad-hoc test artifacts can incur external per-artifact macOS
+  policy/cache waits before Rust `main`; 45.32/51.75-second first inventories became 0.00-second warm runs, while
+  one wholly unmanipulated unique provenance-tagged control first-launched in 0.41 seconds. No repo repair applies.
 - current_mutation_composition_contract: `linkedspec-write-map-leaves-composition-v1` digest-binds both unchanged
   mechanisms across eight writes, six callback cases, one continuation, and 592 current composition mutations;
   Perl and Rust execute both halves; Dart/Julia/Lua remain pending.
@@ -54,4 +57,4 @@
 - current_change_history_capacity: immutable segment `4987` is the twenty-fourth manifest record; ADR `0098`
   authorizes exactly 26 collection files / 25 manifest lines with every byte and aggregate ceiling unchanged.
 - latest_bootstrap_read: 2026-09-02 — README, roadmaps, codebase, mdBook, memory architecture, task-tree doctrine,
-  `.19.3.3`, root-entry/oracle/typed-source Knowledge, indexed history, Toolbox, commit workflow, and Git state read.
+  `.19.3.4.0`, launch-latency Knowledge, indexed history, Toolbox, commit workflow, and Git state read.

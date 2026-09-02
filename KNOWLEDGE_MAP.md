@@ -12305,7 +12305,7 @@ _Lua preserves variadic-v2 signatures before binding rest arrays_
 _A cold repository-local Rust test launch stalled in macOS validation before main_
 
 - **answers:** why did the Rust trace controls build take 55 minutes | was trace_controls looping after the cold build | why was the Rust test binary stuck at dyld_start | what task owns macOS syspolicyd Rust launch latency | is macOS first launch validation latency tracked
-- **date:** 2026-09-01 · **status:** observed and queued for audit under FUTURE-PARITY-BACKLOG.19.3.4
+- **date:** 2026-09-01 · **status:** classified as external per-artifact macOS policy state; no repository repair required
 - **evidence:** `During FUTURE-PARITY-BACKLOG.19.3.3 signoff, a plain-cargo test with repository-local target but user-home registry reads finished its cold build in 55m44s after prolonged per-crate waits. More than three minutes after Cargo launched trace_controls, it had 112 KiB footprint and no test output. Process census found Cargo/test alive and macOS syspolicyd consuming substantial CPU; a one-second sample contained only _dyld_start, proving Rust test code had not begun. The exact /tmp report created by sample was consumed, deleted, and verified absent. The eventual 12/12 result is diagnostic only until rerun through LinkedSpec's managed Cargo wrapper.`
 - **reverify:** `rg -n 'Rust launch-latency finding|FUTURE-PARITY-BACKLOG.19.3.4' docs/tasks/FUTURE-PARITY-BACKLOG.15-24.md ROADMAP.md ROADMAP_V2.md docs/TASK_TREE.md`
 - **source:** [`docs/knowledge/macos-rust-first-launch-validation-latency.md`](docs/knowledge/macos-rust-first-launch-validation-latency.md)

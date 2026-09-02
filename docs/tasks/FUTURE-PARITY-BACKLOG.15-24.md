@@ -1104,12 +1104,14 @@
   Commit: `FUTURE-PARITY-BACKLOG.19.2.2 - implement Perl map leaves mutation`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.3`
-  Status: `in progress; .19.3.1-.3 done, .19.3.4.0 next`
+  Status: `done; focused-signoff-complete through .19.3.4.0` (2026-09-02)
   Goal: Implement the unchanged v1 contract on Rust, including interpreted and supported generated routes.
   Children: `.19.3.1`, `.19.3.2`, `.19.3.3`, `.19.3.4`
   Dependencies: `.19.2`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-09-02.** Rust `.19.3.1-.2` implement both frozen mutation contracts, `.19.3.3`
+    supplies exact staged canonical cross-backend root-target proof, and `.19.3.4.0` closes the measured external
+    launch-latency question without repository repair. No Rust implementation frontier remains.
+  Commit: closed by `FUTURE-PARITY-BACKLOG.19.3.4.0 - classify macOS Rust launch latency`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.3.1`
   Status: `done; canonical-signoff-complete` (2026-09-01; task-tree-first from exact clean Perl `map_leaves!` commit
@@ -1443,20 +1445,29 @@
   Commit: `FUTURE-PARITY-BACKLOG.19.3.3 - restore oracle root semantics`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.3.4`
-  Status: `pending; fishy signoff finding queued by .19.3.3`
+  Status: `done; no repository-controlled repair required` (2026-09-02)
   Goal: Measure and safely contain abnormal macOS first-launch validation latency for repository-local Rust test
     binaries without weakening operating-system trust, project-data locality, or verification coverage.
   Children: `.19.3.4.0`, `.19.3.4.1`
   Dependencies: `.19.3.3`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: **PASS 2026-09-02.** Controlled `.0` evidence classifies external per-artifact macOS policy/cache
+    state; `.1` is explicitly not required and no speculative workaround is admitted.
+  Commit: closed by `FUTURE-PARITY-BACKLOG.19.3.4.0 - classify macOS Rust launch latency`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.3.4.0`
-  Status: `pending; next clean-boundary leaf after .19.3.3`
+  Status: `done; focused-signoff-complete` (2026-09-02; task-tree-first from exact clean oracle/root-semantics
+    commit `5c20f95859118574e1daaf5f5a70b28abb4774bf`; no push)
   Goal: Reproduce and classify the cold-build/first-launch latency before selecting any repair.
   Dependencies: `.19.3.3`
-  Planned verification: `focused` — read-only process/toolchain/filesystem evidence and a ratified task split only;
-    no workflow, trust, storage, CI, test, runtime, or language behavior changes.
+  Verification tier: `focused` — read-only process/toolchain/filesystem evidence and an evidence-backed closeout
+    only; no workflow, trust, storage, CI, test, runtime, or language behavior changes.
+  Focused checks: controlled managed-run first/warm inventory timing on two existing distinct code hashes; live
+    process/CPU census; exact xattr/signature/`spctl` metadata; same-device and run-lifecycle proof; two fresh unique
+    isolated builds and untouched first/warm launches; task/index, Knowledge, Toolbox/book, bounded histories,
+    memory/live/roadmap synchronization, mdBook render, all nine doctrines, and whitespace.
+  Canonical trigger: `none` — the classification changes no executable, build, cache, trust, storage, CI, test, or
+    public language contract. `.19.3.3` already supplied the designated canonical parent behavior boundary; any
+    future repair would require separate `.19.3.4.1` activation and canonical infrastructure proof.
   Acceptance: From a clean boundary, use repository-local controlled probes to separate dependency compilation,
     linking, first process launch, and test execution time. Record process states, CPU/OS-validation ownership,
     executable metadata and extended attributes, repository-volume/cache topology, concurrent-versus-serial Cargo
@@ -1465,30 +1476,91 @@
     any OS tool output written outside project storage. Ratify a narrowly safe `.1` repair or close with durable
     external-toolchain evidence if no repository-controlled defect exists. Never disable Gatekeeper, change global
     trust policy, clear ambiguous shared metadata, or bless off-volume project data.
-  Checklist: [ ] clean activation [ ] Knowledge/toolbox retrieval [ ] controlled timing reproduction
-    [ ] process/stack/metadata evidence [ ] warm/concurrency/storage comparison [ ] exact causal classification
-    [ ] `.1` acceptance refinement or evidence-backed no-project-defect closeout [ ] durable sync [ ] focused proof
-    [ ] atomic commit/clean handoff.
+  Checklist: [x] clean activation [x] Knowledge/toolbox retrieval [x] controlled timing reproduction
+    [x] process/stack/metadata evidence [x] warm/concurrency/storage comparison [x] exact causal classification
+    [x] `.1` acceptance refinement or evidence-backed no-project-defect closeout [x] durable sync [x] focused proof
+    [x] atomic commit/clean handoff.
+  Activation evidence: exact `git status --short --untracked-files=all` is empty at committed clean HEAD
+    `5c20f95859118574e1daaf5f5a70b28abb4774bf`; the committed canonical receipt matches that HEAD,
+    `git_message_brief.txt` is zero bytes, reproducible mdBook output is absent, and no canonical, commit, Cargo,
+    Rust compiler, or LinkedSpec test process remains. The Knowledge Map resolves
+    [[macos-rust-first-launch-validation-latency]] before diagnostics; its dated evidence requires controlled serial
+    cold/warm reproduction that separates the previously observed `_dyld_start`/`syspolicyd` delay from the
+    independently observed Claude-owned target deletion and `cargo sweep` interference.
   Queued evidence: `.19.3.3` separates long cold builds and pre-main launch delay from fast test execution, observes
     macOS `syspolicyd` plus `_dyld_start`, and catches a separate Claude-owned cleanup process deleting four
     repository-local Rust target/cache directories and running `cargo sweep --time 7` during canonical CI. `.0`
     must reproduce under controlled serial ownership and distinguish OS validation from concurrent artifact
     invalidation before selecting any repair.
-  Commit: `pending`
+  Controlled baseline evidence: with no Linkedspec Cargo/Rust/cleanup process present, the checkout and
+    `rust/target`, `rust/target/debug`, and `rust/target/debug/deps` directories carry
+    `com.apple.provenance`; the authored Rust source and installed `rustc`/`cargo` executables do not. Both current
+    `trace_controls` Mach-O binaries inherit provenance, are arm64 ad-hoc linker-signed with distinct code-directory
+    hashes and no team identifier, and each read-only `spctl -a -vv -t execute` assessment takes about one minute
+    before returning `rejected`. A plain `mktemp` file inside a managed repository-local run also inherits the same
+    provenance, proving the attribute is not emitted specifically by Rust or the linker.
+  Controlled direct-launch evidence: inside one serial managed run, the current
+    `trace_controls-ac091f2e380dee79` binary's first `--list` launch took 45.32 seconds at 0.00 user/system CPU,
+    while `syspolicyd` reached 51.1% CPU and the Rust process was not yet visible in the process census. The
+    immediately repeated launch of the identical binary and twelve-test inventory took 0.00 seconds. This
+    reproduces policy/loader startup latency independently of dependency compilation, linking, and test-body work.
+    The distinct `trace_controls-8a91930698b7f9a7` hash independently reproduces 51.75 seconds versus 0.00 seconds
+    for its ten-test inventory, with 0.00 user/system CPU, no visible Rust process, no Cargo/compiler/cleanup
+    competitor, and `syspolicyd` at 57.8% CPU during the first launch. Suite contents and one specific code hash
+    are therefore excluded; a controlled disposable-copy metadata comparison remains before final causality.
+  Disposable metadata-probe evidence: two exact managed-run copies were explicitly re-signed under distinct
+    identifiers. Attempting to delete `com.apple.provenance` from one exact throwaway copy returned success, but an
+    immediate read showed the attribute already present again; this checkout's macOS policy therefore prevents a
+    stable provenance/no-provenance A/B without an out-of-scope trust change. Explicit signing changed both copies
+    from `adhoc,linker-signed` to normalized `adhoc`, and their first direct inventory launches took only 0.50 and
+    0.43 seconds despite retained provenance. That is a candidate signing/registration seam, not a conclusion:
+    `codesign` itself may have warmed each new hash, so `.0` still requires an untouched freshly linked hash and an
+    explicitly signed fresh copy compared before either is executed.
+  Fresh serial evidence: a default isolated no-run rebuild reused the already warm `ac091f2e` artifact hash and is
+    therefore excluded from first-launch causality. Two behavior-equivalent isolated builds then forced genuinely
+    new hashes only through test-profile debug metadata: `3960e8c0` built in 37.18 seconds, and untouched linker-
+    signed `14e07002` built in 23.17 seconds. Both retained provenance. The first run's explicitly signed copy and
+    untouched original launched in 0.44/0.45 seconds; the second run performed no copy or forced signing and its
+    untouched first/warm inventory launches took 0.41/0.00 seconds. Fresh compile/link/launch is therefore healthy
+    with repository-local Cargo cache and isolated same-device targets. Provenance, ad-hoc linker signing,
+    executable size, high `syspolicyd` CPU, and first launch are each insufficient alone to reproduce the defect.
+  Classification: the 45.32/51.75-second measurements prove an external per-artifact macOS policy/cache wait for
+    two older, previously unexecuted hashes; the 0.41-second untouched unique control proves no persistent
+    Linkedspec source/build/storage/signing defect. The contaminated canonical interval additionally had
+    independent target deletion/`cargo sweep` interference, while this serial audit used no competing Linkedspec
+    Cargo/compiler/cleanup process. Host identity is macOS 26.5.2 build 25F84 / Darwin 25.5.0. Sampling
+    `syspolicyd` itself requires ungranted `sudo`; the managed failed attempt retained no artifact, and the earlier
+    unprivileged test-process sample already fixes the wait before Rust main at `_dyld_start`. No global trust,
+    xattr, cache, coverage, or workflow mutation is justified; `.19.3.4.1` is not required.
+  Focused signoff: **PASS 2026-09-02.** The derived Knowledge Map is synchronized at 928 facts / 7,883 question
+    keys; both bounded histories pass at changes 371/512 lines and 33,684/65,536 bytes plus engineering notes
+    266/512 and 27,425/65,536. The sole-facing mdBook renders successfully after routing the diagnosis into its
+    own bounded page; README routing pressure passes 20 surfaces / 62 routes / 32/32 mutations. Task metadata,
+    exact partition index, bounded memory handoff, project-data residue census, whitespace, and all nine registered
+    doctrines pass. The candidate contains only task, Knowledge, Toolbox/book, roadmap, and live continuity
+    documentation; no executable, test, build, cache, trust, storage, CI, or language contract changed, so the
+    recorded focused tier remains exact under ADR `0073`.
+  Commit: `FUTURE-PARITY-BACKLOG.19.3.4.0 - classify macOS Rust launch latency`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.3.4.1`
-  Status: `blocked on .19.3.4.0 decision`
+  Status: `not-required; .19.3.4.0 proves no persistent repository-controlled defect`
   Goal: Implement only the measured repository-controlled latency repair, if `.0` proves one is necessary.
   Dependencies: `.19.3.4.0`
-  Planned verification: `canonical if activated` — any toolchain warmup, CI topology, executable metadata, cache,
-    storage, or process-launch change is infrastructure movement under ADR `0073`.
+  Verification: `not applicable` — `.0` selects no repair; activation would require new contradictory controlled
+    evidence plus canonical infrastructure ownership under ADR `0073`.
   Acceptance: Apply the smallest `.0`-ratified project-local repair, preserve exact test coverage and failure
     propagation, keep all generated/cache/temp data on the repository filesystem, and leave OS trust protections
     enabled. Prove bounded cold and warm timings against the frozen reproduction plus unchanged Rust focused and
     canonical consumers; synchronize task, Knowledge, Toolbox/book guidance, storage/doctrine evidence, and clean
     handoff. If `.0` proves the latency is wholly external and no safe repository repair exists, mark this leaf
     not-required with that exact evidence rather than introducing a speculative workaround.
-  Commit: `pending`
+  Closure evidence: fresh isolated same-device builds complete in 23.17-37.18 seconds; the first hash's signed-
+    copy/original comparison runs in 0.44/0.45 seconds, and the second wholly unmanipulated provenance-tagged
+    linker-signed hash first-launches in 0.41 seconds. Only older unwarmed artifacts reproduce 45.32/51.75-second
+    macOS policy waits, and the original canonical evidence was independently contaminated by target deletion and
+    `cargo sweep`. Re-signing, clearing provenance, prelaunching, weakening Gatekeeper, or changing cache/test
+    topology would therefore be speculative and is prohibited.
+  Commit: `not required`; `.19.3.4.0` records the evidence-backed closeout.
 
 - ID: `FUTURE-PARITY-BACKLOG.19.4`
   Status: `pending`

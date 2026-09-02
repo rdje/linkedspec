@@ -9,6 +9,22 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-09-02 (`FUTURE-PARITY-BACKLOG.19.3.4.0` — macOS Rust launch classification): always time compile/link,
+  first inventory launch, and test execution separately. `BINARY --list` removes test bodies from the question;
+  process census then distinguishes an unstarted program from slow runtime work.
+- Two older distinct `trace_controls` hashes reproduced 45.32/51.75-second first inventory launches and immediate
+  0.00/0.00-second warm launches. The Rust process was not visible while `syspolicyd` consumed CPU, consistently
+  with the prior `_dyld_start` sample: macOS policy assessment delayed process entry before Rust `main`.
+- Provenance and ad-hoc linker signing are observations, not causes by themselves. Two unique isolated builds
+  retained both conditions and completed in 37.18/23.17 seconds. The first hash's signed-copy/original comparison
+  ran in 0.44/0.45 seconds; the second wholly unmanipulated hash ran in 0.41 seconds. High `syspolicyd` CPU alone
+  was likewise insufficient to reproduce the long delay.
+- The original canonical interval also contained independently observed target deletion plus `cargo sweep` from
+  another process. Do not treat that contaminated cold-build duration as compiler/cache evidence, and never
+  delete another owner's target while a gate is running.
+- The controlled result classifies external per-artifact macOS policy/cache state without a persistent
+  repository-controlled defect. Re-signing, clearing provenance, weakening Gatekeeper, prelaunching binaries,
+  moving caches, or reducing tests would be speculative; `.19.3.4.1` is correctly not required.
 - 2026-09-01 (`FUTURE-PARITY-BACKLOG.19.3.3` — oracle/root dispatch repair): never rebase a committed oracle
   expectation until live reference execution and the frozen consumer have been compared at the source/projection
   seam. Here Rust preserved the rich record while Perl returned null only because a typed helper diagnostic caused
