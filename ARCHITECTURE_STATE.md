@@ -1,5 +1,25 @@
 # ARCHITECTURE STATE
 
+## Dart implements frozen typed nested-write vivification
+
+`FUTURE-PARITY-BACKLOG.19.4.1` advances Dart to `linkedspec-write-vivification-v1`. One
+`ActionWritePathSegment` retains the typed expression, exact authored source, and half-open Unicode-scalar span;
+one `ActionAssignNestedAccessExpr` owns every one- or many-segment bracket write. Parser, callable, compiled-state,
+generated-plan, emitted-source, and direct runtime boundaries reject malformed typed carriers.
+
+The interpreter evaluates all segments left-to-right and then the RHS before reading the root. It distinguishes
+absence from bound null, copies the post-evaluation root, classifies evaluated strings/nonnegative integers as
+harray/array selectors, constructs only dense unambiguous missing containers, and publishes once. Invalid
+selectors, wrong kinds, bound null, and gaps emit exact typed diagnostics without partial path publication;
+completed expression effects remain ordinary state, expression failures retain identity, reads remain
+non-creating, and successful mutable boundaries detach.
+
+Permanent proof covers the frozen 5/7/11/16/3/3 inventory, detachment, function presence, astral spans, malformed
+carriers, native execution, `SpecFile` JSON reconstruction, generated plans, emitted source, an independently
+analyzed/executed caller package, and the primary CLI. The complete Dart gate passes 450/450 package tests, 24
+managed temporary owners / 47 locked packages, CLI 66/66 in both environments, and corpus 105/105. Dart
+`map_leaves!`, Julia/Lua, and portable/public admission remain pending.
+
 ## Rust implements controlled `map_leaves!` receiver mutation
 
 `FUTURE-PARITY-BACKLOG.19.3.2` advances Rust to `linkedspec-map-leaves-mutation-v1`. One dedicated
@@ -18,7 +38,8 @@ guard before continuation; callback/re-entrant failure leaves the receiver uncha
 while unrelated completed effects persist. Continuation failure preserves the prior commit. Permanent proof
 passes 9/9 across syntax, runtime, serde/generated/emitted/independently compiled, corruption, non-bang,
 detachment, and composition boundaries; private failure-state proof passes 3/3; the unchanged oracle rejects 167
-base and 592 composition mutations. `.19.3.3` next owns the pre-existing oracle/root-semantics cleanup.
+base and 592 composition mutations. `.19.3.3-.4.0` have since closed the oracle/root-semantics cleanup and external
+macOS launch-latency classification.
 
 ## Rust nested writes implement the frozen typed vivification contract
 
@@ -39,8 +60,8 @@ serialized, generated-plan, emitted-source, and independently compiled emitted R
 integration target and 105-fixture oracle corpus pass. New executable fixtures use a zero-regex `Top` wrapper:
 its outgoing edge selects the child rule's regex, while a regex on `Top` would matter only to an edge targeting
 `Top`. Systematic legacy fixture cleanup and one pre-existing oracle-regeneration drift are owned by `.19.3.3`.
-Rust `map_leaves!` has since advanced as described above; Dart/Julia/Lua and portable/public admission remain
-pending.
+Rust `map_leaves!` has since advanced as described above; Dart nested writes have also advanced, while Dart
+`map_leaves!`, Julia/Lua, and portable/public admission remain pending.
 
 ## Perl implements controlled `map_leaves!` receiver mutation
 
@@ -58,8 +79,8 @@ nested bang, `set`, `set_key`, `push`, array-end methods, and binding-target arr
 write seam; unrelated bindings and distinct same-spelling shadows remain legal. Guard release is exception-safe,
 and ordinary continuation begins after atomic commit. The permanent Perl contract passes 58 focused tests, 105
 write mutations, 167 base + 592 composition mutations, and Phase 0 1,032/1,032. Rust now implements both
-mechanisms as described above; Dart, Julia, and Lua remain at both prior boundaries. Capability/public admission
-is pending.
+mechanisms as described above; Dart implements nested writes but remains non-bang, and Julia/Lua remain at both
+prior boundaries. Capability/public admission is pending.
 
 The mandatory complete change record triggers content-addressed segment `4987`. ADR `0098` advances only finite
 change-history collection/manifest capacity from 25/24 to 26/25; every root, segment, aggregate, byte, ownership,
@@ -86,8 +107,8 @@ binding/result/initial/RHS aggregates detach.
 The permanent Perl contract projects all frozen 5/7/11/16 cases plus dynamic-kind fidelity, evaluation,
 detachment, bound-null, same-binding, and fresh function-state boundaries. Focused ActionIR/trace/uniform proof
 passes 50 tests and the exact finalized Phase 0 passes all 1,032 in 963 seconds;
-both neutral mutation checkers pass. Rust has since implemented the same write authority as described above;
-Dart, Julia, and Lua retain the prior non-vivifying path. No portable
+both neutral mutation checkers pass. Rust and Dart have since implemented the same write authority as described
+above; Julia and Lua retain the prior non-vivifying path. No portable
 capability, generated format, facade/schema/MCP, CLI, tool/storage/doctrine, or public admission moves; Perl
 `map_leaves!` has since advanced as described above.
 
@@ -115,7 +136,8 @@ At the neutral `.19.1.3` boundary, the exact non-bang control returned `{"leaf":
 source stops before callback nested-write lowering: Perl/Rust return null (Rust warns), while Dart/Julia/both Lua
 ABIs expose generic parser-invocation failure. No parser, compiler, runtime, fixture admission, capability,
 generated format, facade, schema, MCP, CLI, or current public behavior moved. Perl `.19.2.1-.2` and Rust
-`.19.3.1-.2` have since advanced both mechanisms as described above; the other backends remain unchanged.
+`.19.3.1-.2` have since advanced both mechanisms as described above; Dart `.19.4.1` has advanced nested writes
+only, while Dart bang and both Julia/Lua mechanisms remain unchanged.
 
 ## `map_leaves!` receiver mutation has one executable neutral authority
 

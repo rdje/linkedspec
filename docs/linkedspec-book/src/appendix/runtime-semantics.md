@@ -293,18 +293,18 @@ in the same value contract as typed value binding: `items = [value]`, `set(items
 `=(items, [value])` bind an array value to `items` and evaluate to that stored array value; `meta = { key : value }`
 binds a hash value and evaluates to that stored hash value. `set(items, ...)` and `set(meta, ...)` bind the same
 observable typed values as bare assignment. Mutation assignments also have expression
-values: `items += value` appends to the named array and evaluates to the updated array snapshot. On Perl,
-`meta[key] = value` updates the typed root selected by the evaluated string/nonnegative-integer key and yields the
-updated root snapshot; remaining backends retain their earlier named-hash interpretation until admission.
+values: `items += value` appends to the named array and evaluates to the updated array snapshot. On Perl, Rust,
+and Dart, `meta[key] = value` updates the typed root selected by the evaluated string/nonnegative-integer key and
+yields the updated root snapshot; Julia and Lua retain their earlier named-hash interpretation until admission.
 
 Nested value-path assignment mutates scalar-held array/hash payloads through direct access syntax:
-`payload["items"][0]["name"] = value`. On Perl and Rust, each evaluated string/nonnegative-integer segment selects an
+`payload["items"][0]["name"] = value`. On Perl, Rust, and Dart, each evaluated string/nonnegative-integer segment selects an
 harray/array. The first selector may create an absent root, and the next selector may create a missing
 intermediate. Bound null and other wrong kinds are not coerced; arrays replace or append exactly at length and
 reject gaps. Segments evaluate once left-to-right, then the RHS once, before isolated structural validation.
 Success commits and yields a detached updated root. Invalid selectors, kind conflicts, and gaps throw typed
 diagnostic objects and commit no partial path; already completed expression effects retain ordinary semantics.
-Reads never create state. Dart, Julia, and Lua retain the prior existing-intermediate/null-result boundary
+Reads never create state. Julia and Lua retain the prior existing-intermediate/null-result boundary
 until the remaining implementation and public-admission leaves complete.
 
 Array end mutations are also statement-level operations on a named working array:

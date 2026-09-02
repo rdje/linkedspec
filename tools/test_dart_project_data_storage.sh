@@ -82,6 +82,7 @@ expected_temp_owners=(
  dart/test/spec_loader_test.dart
  dart/test/trace_test.dart
  dart/test/unicode_rule_label_identity_routes_test.dart
+ dart/test/write_vivification_contract_test.dart
 )
 mapfile -t actual_temp_owners < <(
  while IFS= read -r relative; do

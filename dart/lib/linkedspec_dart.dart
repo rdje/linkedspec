@@ -45,6 +45,7 @@ export 'src/action/action_ast.dart'
         ActionUndefExpr,
         ActionValueAccessExpr,
         ActionVariableExpr,
+        ActionWritePathSegment,
         findRemovedAggregateSelectorInBlock,
         findRemovedAggregateSelectorInExpr;
 export 'src/action/action_contracts.dart'
@@ -67,7 +68,11 @@ export 'src/action/function_registry.dart'
         UserFunctionRegistry,
         UserFunctionRegistryException;
 export 'src/action/action_parser.dart'
-    show parseActionBlock, parseActionExpression, parseActionStatement;
+    show
+        ActionParseException,
+        parseActionBlock,
+        parseActionExpression,
+        parseActionStatement;
 export 'src/ast/spec_ast.dart'
     show
         ActionEdgeBodyElementKind,
@@ -119,6 +124,7 @@ export 'src/compiler/compiled_spec.dart'
         linkedSpecRegexSlotIdentityContract,
         linkedSpecRootRuleSelectionContract,
         validateCompiledRegexSlotIdentities,
+        validateNestedWriteSerializedState,
         validateNoRemovedAggregateSelectors;
 export 'src/corpus/manifest_runner.dart'
     show

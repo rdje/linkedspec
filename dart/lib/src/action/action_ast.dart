@@ -437,6 +437,33 @@ final class ActionIndexAccessSegment extends ActionAccessSegment {
   }
 }
 
+/// One authored nested-write path segment.
+///
+/// Unlike read access segments, this node deliberately retains the ordinary
+/// typed expression. Runtime selector kind comes from the evaluated value,
+/// never from parser-time spelling.
+final class ActionWritePathSegment {
+  const ActionWritePathSegment({
+    required this.source,
+    required this.sourceSpan,
+    required this.expression,
+  });
+
+  final String kind = 'path_segment';
+  final String source;
+  final ActionSourceSpan sourceSpan;
+  final ActionExpr expression;
+
+  ActionJsonObject toJson() {
+    return {
+      'kind': kind,
+      'source': source,
+      'source_span': sourceSpan.toJson(),
+      'expression': expression.toJson(),
+    };
+  }
+}
+
 final class ActionNestedAccessExpr extends ActionExpr {
   const ActionNestedAccessExpr({
     required super.source,
@@ -802,7 +829,7 @@ final class ActionAssignNestedAccessExpr extends ActionExpr {
   }) : super(kind: 'assign_nested_access');
 
   final String base;
-  final List<ActionAccessSegment> segments;
+  final List<ActionWritePathSegment> segments;
   final ActionExpr value;
 
   @override
@@ -1177,6 +1204,18 @@ RemovedAggregateSelector? findRemovedAggregateSelectorInExpr(ActionExpr expr) {
     return null;
   }
 
+  RemovedAggregateSelector? inWriteSegments(
+    List<ActionWritePathSegment> segments,
+  ) {
+    for (final segment in segments) {
+      final selector = findRemovedAggregateSelectorInExpr(segment.expression);
+      if (selector != null) {
+        return selector;
+      }
+    }
+    return null;
+  }
+
   switch (expr) {
     case ActionCallExpr(:final name, :final args):
       if ((name == 'array' || name == 'hash') && args.length == 1) {
@@ -1217,7 +1256,8 @@ RemovedAggregateSelector? findRemovedAggregateSelectorInExpr(ActionExpr expr) {
       return findRemovedAggregateSelectorInExpr(key) ??
           findRemovedAggregateSelectorInExpr(value);
     case ActionAssignNestedAccessExpr(:final segments, :final value):
-      return inSegments(segments) ?? findRemovedAggregateSelectorInExpr(value);
+      return inWriteSegments(segments) ??
+          findRemovedAggregateSelectorInExpr(value);
     case ActionIndexedVarExpr(:final index):
       return findRemovedAggregateSelectorInExpr(index);
     case ActionNestedAccessExpr(:final segments):

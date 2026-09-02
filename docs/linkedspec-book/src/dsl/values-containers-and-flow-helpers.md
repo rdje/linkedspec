@@ -86,7 +86,7 @@ payload["items"][0]["name"] = "new";
 payload["items"][1] = { "name" : "tail" };
 ```
 
-Nested writes mutate the typed array/harray value held by the bare variable. On Perl and Rust, every bracket
+Nested writes mutate the typed array/harray value held by the bare variable. On Perl, Rust, and Dart, every bracket
 is evaluated as an ordinary value expression: a string selects an harray and a nonnegative integer selects a
 zero-based array. An absent root is created from the first selector, and a missing intermediate is created from
 the next selector. Existing null or another wrong kind is never coerced. Arrays remain dense: an existing index
@@ -95,7 +95,7 @@ then the RHS once; isolated structural building begins afterward. Success commit
 root. Invalid selectors, kind conflicts, and gaps throw typed nested-write diagnostics without a partial path
 commit. Reads remain pure and never create containers.
 
-This behavior is currently implemented on Perl and Rust. Dart, Julia, and Lua retain the
+This behavior is currently implemented on Perl, Rust, and Dart. Julia and Lua retain the
 earlier checked boundary until their `.19` backend leaves: every intermediate must already exist with the required
 shape, and a missing/wrong path or gap yields null without changing the root. Portable/public admission follows
 only after all backend leaves and recurring proof complete.

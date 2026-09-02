@@ -240,6 +240,7 @@ CompiledSpec compileSpec(
     );
     validateCompiledRegexSlotIdentities(compiled);
     validateNoRemovedAggregateSelectors(compiled);
+    validateNestedWriteSerializedState(compiled);
     validateProgressiveSpanDispatchContract(compiled);
     validateStagedParseJobContract(compiled);
     _validateRecursiveObservationPolicy(compiled);
@@ -489,6 +490,58 @@ void validateNoRemovedAggregateSelectors(CompiledSpec compiled) {
     }
     for (final (index, edge) in rule.blindEdges.indexed) {
       validateFluentCalls(edge.fluentChain, "rule '$label' blind edge $index");
+    }
+  }
+}
+
+/// Reject a caller-constructed nested-write node that has lost its required
+/// typed path-segment sequence.
+///
+/// Authored source cannot produce this state. Runtime and generated-source
+/// boundaries nevertheless validate it because [CompiledSpec] is a public
+/// typed carrier and must fail closed when constructed programmatically.
+void validateNestedWriteSerializedState(CompiledSpec compiled) {
+  void visit(Object? value, String context) {
+    if (value is List<Object?>) {
+      for (final (index, item) in value.indexed) {
+        visit(item, '$context[$index]');
+      }
+      return;
+    }
+    if (value is! Map<String, Object?>) {
+      return;
+    }
+    if (value['kind'] == 'assign_nested_access') {
+      final segments = value['segments'];
+      if (segments is! List<Object?> || segments.isEmpty) {
+        throw CompiledSpecException(
+          'nested_write_serialized_state_invalid: $context must contain '
+          'at least one typed path_segment',
+        );
+      }
+      for (final (index, segment) in segments.indexed) {
+        if (segment is! Map<String, Object?> ||
+            segment['kind'] != 'path_segment' ||
+            segment['expression'] is! Map<String, Object?>) {
+          throw CompiledSpecException(
+            'nested_write_serialized_state_invalid: '
+            '$context.segments[$index] must be one typed path_segment',
+          );
+        }
+      }
+    }
+    for (final entry in value.entries) {
+      visit(entry.value, '$context.${entry.key}');
+    }
+  }
+
+  for (final label in compiled.compiledRuleOrder) {
+    final rule = compiled.rulesByLabel[label];
+    if (rule == null) {
+      continue;
+    }
+    for (final (index, payload) in rule.actionPayloads.indexed) {
+      visit(payload.actionAst.toJson(), '$label.action_payloads[$index]');
     }
   }
 }

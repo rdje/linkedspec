@@ -11,7 +11,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-EXPECTED_PUBLIC_FILE_COUNT = 61
+EXPECTED_PUBLIC_FILE_COUNT = 62
 EXPECTED_CLASSIFIED_REFERENCE_COUNT = 32
 MIGRATION_GUIDE = "docs/linkedspec-book/src/dsl/values-containers-and-flow-helpers.md"
 MIGRATION_SECTION_START = (

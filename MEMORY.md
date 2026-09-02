@@ -1,14 +1,14 @@
 # MEMORY
 
-- activation_commit: `5c20f95859118574e1daaf5f5a70b28abb4774bf` — exact clean oracle/root-semantics commit from which
-  `FUTURE-PARITY-BACKLOG.19.3.4.0` was activated task-tree-first.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.19.3.4.0 - classify macOS Rust launch latency`; controlled
-  evidence, durable sync, focused proof, atomic commit, and clean handoff are signoff-complete.
-- active_work_unit: none — clean handoff after `.19.3.4.0`; Dart `.19.4.1` is the next task-tree-first activation.
-- next_action: from the committed clean boundary, activate `FUTURE-PARITY-BACKLOG.19.4.1`, retrieve the frozen
-  nested-write v1 contract and Dart typed/runtime owners, then implement only that Dart slice.
-- in_flight_uncommitted: none. All `.19.3.4.0` diagnostics, classification, documentation, focused verification,
-  commit, brief clearing, diagnostic cleanup, and background-job consumption are complete.
+- activation_commit: `1247316d7d51c60243a21fb65209f3b7f851207d` — exact clean Rust closeout commit from which
+  `FUTURE-PARITY-BACKLOG.19.4.1` was activated task-tree-first.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.19.4.1 - implement Dart write vivification`; typed carrier,
+  runtime semantics, durable sync, complete Dart proof, canonical signoff, atomic commit, and clean handoff are complete.
+- active_work_unit: none — clean handoff after `.19.4.1`; Dart `.19.4.2` is the next task-tree-first activation.
+- next_action: from the committed clean boundary, activate `FUTURE-PARITY-BACKLOG.19.4.2`, retrieve the frozen
+  receiver-mutation/composition contracts and Dart binding/traversal owners, then implement only that Dart slice.
+- in_flight_uncommitted: none. All `.19.4.1` code, tests, documentation, exact staged canonical verification,
+  commit, brief clearing, generated-output cleanup, and background-job consumption are complete.
 - blockers: none.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -19,11 +19,11 @@
   self-hosted grammar preserves reserved lifecycle precedence. ADR `0094`.
 - current_standalone_block_frontier: admitted `.15.0-.2` behavior is unchanged; `.15.3` repairs the stale Lua
   `next()` fixture with action-edge ownership and recomposes the complete 178x2 / 109x2 dual-ABI boundary.
-- current_write_vivification: `linkedspec-write-vivification-v1` is implemented on Perl and Rust with one typed expression-segment AST,
+- current_write_vivification: `linkedspec-write-vivification-v1` is implemented on Perl, Rust, and Dart with one typed expression-segment AST,
   evaluated string/integer harray/array selection, dense atomic creation, post-evaluation snapshots, detached
   results, exact diagnostics/spans, invocation-local absent/null presence, and read exclusions at 105 rejected
-  mutations. Rust preserves it through serde/generated/emitted carriers; Dart/Julia/Lua and public capability
-  admission remain pending.
+  mutations. Rust and Dart preserve it through serialized/reconstructed/generated/emitted carriers; Julia/Lua and
+  public capability admission remain pending.
 - current_map_leaves_mutation: `linkedspec-map-leaves-mutation-v1` is implemented on Perl and Rust with one bang-only mutation AST,
   resolved receiver identity guard, root-kind original-shape traversal, copied frames, atomic rebind, detached
   result, post-commit continuation, exact diagnostics/exclusions, and 167 base mutations. Receiver callback writes
@@ -57,4 +57,4 @@
 - current_change_history_capacity: immutable segment `4987` is the twenty-fourth manifest record; ADR `0098`
   authorizes exactly 26 collection files / 25 manifest lines with every byte and aggregate ceiling unchanged.
 - latest_bootstrap_read: 2026-09-02 — README, roadmaps, codebase, mdBook, memory architecture, task-tree doctrine,
-  `.19.3.4.0`, launch-latency Knowledge, indexed history, Toolbox, commit workflow, and Git state read.
+  `.19.4.1`, write-vivification Knowledge/ADR, verification policy, commit workflow, and Git state read.

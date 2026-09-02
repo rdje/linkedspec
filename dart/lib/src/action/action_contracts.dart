@@ -821,7 +821,7 @@ final class _ActionContractResolver {
           sourceSpan: expr.sourceSpan,
           positionalArgCount: 2,
         );
-        _visitAccessSegments(segments);
+        _visitWritePathSegments(segments);
         visitExpr(value);
       case ActionBlockValueExpr(:final block):
         visitBlock(block);
@@ -1145,6 +1145,12 @@ final class _ActionContractResolver {
       if (segment is ActionIndexAccessSegment) {
         visitExpr(segment.expr);
       }
+    }
+  }
+
+  void _visitWritePathSegments(List<ActionWritePathSegment> segments) {
+    for (final segment in segments) {
+      visitExpr(segment.expression);
     }
   }
 }

@@ -225,7 +225,7 @@ void _normalizeExpr(ActionExpr expr, UserFunctionRegistry registry) {
       _normalizeExpr(key, registry);
       _normalizeExpr(value, registry);
     case ActionAssignNestedAccessExpr(:final segments, :final value):
-      _normalizeSegments(segments, registry);
+      _normalizeWriteSegments(segments, registry);
       _normalizeExpr(value, registry);
     case ActionIndexedVarExpr(:final index):
       _normalizeExpr(index, registry);
@@ -305,5 +305,14 @@ void _normalizeSegments(
     if (segment is ActionIndexAccessSegment) {
       _normalizeExpr(segment.expr, registry);
     }
+  }
+}
+
+void _normalizeWriteSegments(
+  List<ActionWritePathSegment> segments,
+  UserFunctionRegistry registry,
+) {
+  for (final segment in segments) {
+    _normalizeExpr(segment.expression, registry);
   }
 }

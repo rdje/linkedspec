@@ -49,6 +49,16 @@ final class RuntimeDiagnostic {
     this.regexIndex,
     this.expectedRegexIndex,
     this.actualRegexIndex,
+    this.operation,
+    this.binding,
+    this.segmentIndex,
+    this.path,
+    this.actualKind,
+    this.reason,
+    this.expectedKind,
+    this.arrayIndex,
+    this.length,
+    this.sourceSpan,
   });
 
   final String type;
@@ -76,6 +86,16 @@ final class RuntimeDiagnostic {
   final int? regexIndex;
   final int? expectedRegexIndex;
   final int? actualRegexIndex;
+  final String? operation;
+  final String? binding;
+  final int? segmentIndex;
+  final List<Object?>? path;
+  final String? actualKind;
+  final String? reason;
+  final String? expectedKind;
+  final int? arrayIndex;
+  final int? length;
+  final Map<String, Object?>? sourceSpan;
 
   JsonObject toJson() => {
     'type': type,
@@ -103,6 +123,16 @@ final class RuntimeDiagnostic {
     if (regexIndex != null) 'regex_index': regexIndex,
     if (expectedRegexIndex != null) 'expected_regex_index': expectedRegexIndex,
     if (actualRegexIndex != null) 'actual_regex_index': actualRegexIndex,
+    if (operation != null) 'operation': operation,
+    if (binding != null) 'binding': binding,
+    if (segmentIndex != null) 'segment_index': segmentIndex,
+    if (path != null) 'path': _copyValue(path),
+    if (actualKind != null) 'actual_kind': actualKind,
+    if (reason != null) 'reason': reason,
+    if (expectedKind != null) 'expected_kind': expectedKind,
+    if (arrayIndex != null) 'index': arrayIndex,
+    if (length != null) 'length': length,
+    if (sourceSpan != null) 'source_span': _copyValue(sourceSpan),
   };
 }
 
@@ -295,6 +325,7 @@ final class LinkedSpecRuntimeEngine {
   }) {
     try {
       validateCompiledRegexSlotIdentities(compiledSpec);
+      validateNestedWriteSerializedState(compiledSpec);
     } on SpecValidationException catch (error) {
       final diagnostic = error.diagnostic;
       throw RuntimeInterpreterException(
@@ -307,6 +338,20 @@ final class LinkedSpecRuntimeEngine {
           ruleLabel: diagnostic?.field('rule_label') as String?,
           targetRule: diagnostic?.field('target_rule') as String?,
           regexIndex: diagnostic?.field('regex_index') as int?,
+        ),
+      );
+    } on CompiledSpecException catch (error) {
+      final code =
+          error.message.startsWith('nested_write_serialized_state_invalid:')
+          ? 'nested_write_serialized_state_invalid'
+          : 'compiled_state_invalid';
+      throw RuntimeInterpreterException(
+        error.message,
+        diagnostic: _diagnostic(
+          stage: 'validate_compiled_rule',
+          code: code,
+          summary: 'Dart compiled-state validation failed',
+          detail: error.message,
         ),
       );
     }
@@ -734,6 +779,16 @@ final class LinkedSpecRuntimeEngine {
     int? regexIndex,
     int? expectedRegexIndex,
     int? actualRegexIndex,
+    String? operation,
+    String? binding,
+    int? segmentIndex,
+    List<Object?>? path,
+    String? actualKind,
+    String? reason,
+    String? expectedKind,
+    int? arrayIndex,
+    int? length,
+    Map<String, Object?>? sourceSpan,
   }) {
     final effectiveRule = ruleLabel ?? topRule;
     return RuntimeDiagnostic(
@@ -766,6 +821,16 @@ final class LinkedSpecRuntimeEngine {
       regexIndex: regexIndex,
       expectedRegexIndex: expectedRegexIndex,
       actualRegexIndex: actualRegexIndex,
+      operation: operation,
+      binding: binding,
+      segmentIndex: segmentIndex,
+      path: path,
+      actualKind: actualKind,
+      reason: reason,
+      expectedKind: expectedKind,
+      arrayIndex: arrayIndex,
+      length: length,
+      sourceSpan: sourceSpan,
     );
   }
 
@@ -8280,6 +8345,16 @@ final class _RuntimeExecutionContext {
     int? regexIndex,
     int? expectedRegexIndex,
     int? actualRegexIndex,
+    String? operation,
+    String? binding,
+    int? segmentIndex,
+    List<Object?>? path,
+    String? actualKind,
+    String? reason,
+    String? expectedKind,
+    int? arrayIndex,
+    int? length,
+    Map<String, Object?>? sourceSpan,
   }) {
     final effectiveRule = ruleLabel ?? currentRuleLabel ?? topRule;
     return engine._diagnostic(
@@ -8303,6 +8378,16 @@ final class _RuntimeExecutionContext {
       regexIndex: regexIndex,
       expectedRegexIndex: expectedRegexIndex,
       actualRegexIndex: actualRegexIndex,
+      operation: operation,
+      binding: binding,
+      segmentIndex: segmentIndex,
+      path: path,
+      actualKind: actualKind,
+      reason: reason,
+      expectedKind: expectedKind,
+      arrayIndex: arrayIndex,
+      length: length,
+      sourceSpan: sourceSpan,
     );
   }
 
@@ -8603,20 +8688,24 @@ final class _RuntimeStoreSnapshot {
 }
 
 final class _NestedWriteRoot {
-  const _NestedWriteRoot._(this.name, this.value, this.kind);
+  const _NestedWriteRoot._(this.name, this.value, this.kind, this.present);
+
+  const _NestedWriteRoot.absent(String name)
+    : this._(name, null, _NestedWriteRootKind.scalar, false);
 
   const _NestedWriteRoot.scalar(String name, Object? value)
-    : this._(name, value, _NestedWriteRootKind.scalar);
+    : this._(name, value, _NestedWriteRootKind.scalar, true);
 
   const _NestedWriteRoot.array(String name, Object? value)
-    : this._(name, value, _NestedWriteRootKind.array);
+    : this._(name, value, _NestedWriteRootKind.array, true);
 
   const _NestedWriteRoot.hash(String name, Object? value)
-    : this._(name, value, _NestedWriteRootKind.hash);
+    : this._(name, value, _NestedWriteRootKind.hash, true);
 
   final String name;
   final Object? value;
   final _NestedWriteRootKind kind;
+  final bool present;
 
   void store(_RuntimeExecutionContext context, Object? value) {
     switch (kind) {
@@ -8632,21 +8721,29 @@ final class _NestedWriteRoot {
 
 enum _NestedWriteRootKind { scalar, array, hash }
 
-final class _EvaluatedAccessSegment {
-  const _EvaluatedAccessSegment.key(this.key)
-    : kind = _EvaluatedAccessSegmentKind.key,
-      index = null;
+final class _EvaluatedWriteSegment {
+  const _EvaluatedWriteSegment({required this.value, required this.sourceSpan});
 
-  const _EvaluatedAccessSegment.index(this.index)
-    : kind = _EvaluatedAccessSegmentKind.arrayIndex,
-      key = null;
-
-  final _EvaluatedAccessSegmentKind kind;
-  final String? key;
-  final int? index;
+  final Object? value;
+  final ActionSourceSpan sourceSpan;
 }
 
-enum _EvaluatedAccessSegmentKind { key, arrayIndex }
+final class _WriteSelector {
+  const _WriteSelector.key(this.key, this.sourceSpan)
+    : index = null,
+      expectedKind = 'harray';
+
+  const _WriteSelector.index(this.index, this.sourceSpan)
+    : key = null,
+      expectedKind = 'array';
+
+  final String? key;
+  final int? index;
+  final String expectedKind;
+  final ActionSourceSpan sourceSpan;
+
+  Object get pathValue => key ?? index!;
+}
 
 final class _RegexPlan {
   _RegexPlan({required this.patterns})
@@ -9153,7 +9250,7 @@ Object? _assignHashIndex(
   return _setBareHashEntry(context, name, storedKey, storedValue);
 }
 
-_NestedWriteRoot? _rootStorageForWrite(
+_NestedWriteRoot _rootStorageForWrite(
   _RuntimeExecutionContext context,
   String base,
 ) {
@@ -9166,18 +9263,34 @@ _NestedWriteRoot? _rootStorageForWrite(
   if (context.hashes.containsKey(base)) {
     return _NestedWriteRoot.hash(base, context.hashes[base]);
   }
-  return null;
+  return _NestedWriteRoot.absent(base);
 }
 
 Object? _writeNested(
   _RuntimeExecutionContext context,
   String base,
-  List<ActionAccessSegment> segments,
+  List<ActionWritePathSegment> segments,
   ActionExpr value,
   String ruleLabel,
   _CurrentActionEdge? currentEdge,
 ) {
-  final evaluatedSegments = _evaluateAccessSegments(
+  if (segments.isEmpty) {
+    final message =
+        "nested write carrier for binding '$base' must contain at least one "
+        'typed path segment';
+    throw RuntimeInterpreterException(
+      message,
+      diagnostic: context.diagnostic(
+        stage: 'runtime_execution',
+        summary: 'Dart nested write carrier validation failed',
+        detail: message,
+        code: 'nested_write_serialized_state_invalid',
+        operation: 'nested_write_vivification',
+        binding: base,
+      ),
+    );
+  }
+  final evaluatedSegments = _evaluateWriteSegments(
     segments,
     context,
     ruleLabel,
@@ -9192,101 +9305,232 @@ Object? _writeNested(
     ),
   );
   final rootStorage = _rootStorageForWrite(context, base);
-  if (rootStorage == null || evaluatedSegments.isEmpty) {
-    return null;
-  }
-  final root = _copyValue(rootStorage.value);
-  if (root is! Map && root is! List) {
-    return null;
-  }
-  final updated = _assignNestedValue(root, evaluatedSegments, storedValue);
-  if (!updated) {
-    return null;
-  }
+  final selectors = _classifyWriteSelectors(context, base, evaluatedSegments);
+  final root = rootStorage.present
+      ? _copyValue(rootStorage.value)
+      : _emptyContainer(selectors.first);
+  _assignVivifiedNestedValue(context, base, root, selectors, storedValue);
   rootStorage.store(context, root);
   return _copyValue(root);
 }
 
-bool _assignNestedValue(
+void _assignVivifiedNestedValue(
+  _RuntimeExecutionContext context,
+  String base,
   Object? root,
-  List<_EvaluatedAccessSegment> segments,
+  List<_WriteSelector> segments,
   Object? value,
 ) {
   var node = root;
   for (var index = 0; index < segments.length; index += 1) {
     final isLast = index == segments.length - 1;
     final segment = segments[index];
-    switch (segment.kind) {
-      case _EvaluatedAccessSegmentKind.key:
-        final key = segment.key;
-        if (key == null) {
-          return false;
-        }
-        if (node is! Map<String, Object?>) {
-          return false;
-        }
-        if (isLast) {
-          node[key] = _copyValue(value);
-        } else {
-          final child = node[key];
-          if (child == null) {
-            return false;
-          }
-          node = child;
-        }
-      case _EvaluatedAccessSegmentKind.arrayIndex:
-        final listIndex = segment.index;
-        if (node is! List<Object?> || listIndex == null) {
-          return false;
-        }
-        if (isLast) {
-          if (listIndex > node.length) {
-            return false;
-          }
-          if (listIndex == node.length) {
-            node.add(_copyValue(value));
-          } else {
-            node[listIndex] = _copyValue(value);
-          }
-        } else {
-          if (listIndex >= node.length) {
-            return false;
-          }
-          final child = node[listIndex];
-          if (child == null) {
-            return false;
-          }
-          node = child;
-        }
+    final path = [
+      for (var pathIndex = 0; pathIndex < index; pathIndex += 1)
+        segments[pathIndex].pathValue,
+    ];
+    if (segment.key case final key?) {
+      if (node is! Map<String, Object?>) {
+        _throwNestedWriteKindConflict(
+          context,
+          base,
+          index,
+          path,
+          segment,
+          node,
+        );
+      }
+      if (isLast) {
+        node[key] = _copyValue(value);
+        continue;
+      }
+      if (!node.containsKey(key)) {
+        final child = _emptyContainer(segments[index + 1]);
+        node[key] = child;
+        node = child;
+      } else {
+        node = node[key];
+      }
+      continue;
+    }
+
+    final listIndex = segment.index!;
+    if (node is! List<Object?>) {
+      _throwNestedWriteKindConflict(context, base, index, path, segment, node);
+    }
+    if (listIndex > node.length) {
+      _throwNestedWriteArrayGap(
+        context,
+        base,
+        index,
+        path,
+        segment,
+        node.length,
+      );
+    }
+    if (isLast) {
+      if (listIndex == node.length) {
+        node.add(_copyValue(value));
+      } else {
+        node[listIndex] = _copyValue(value);
+      }
+      continue;
+    }
+    if (listIndex == node.length) {
+      final child = _emptyContainer(segments[index + 1]);
+      node.add(child);
+      node = child;
+    } else {
+      node = node[listIndex];
     }
   }
-  return true;
 }
 
-List<_EvaluatedAccessSegment> _evaluateAccessSegments(
-  List<ActionAccessSegment> segments,
+List<_EvaluatedWriteSegment> _evaluateWriteSegments(
+  List<ActionWritePathSegment> segments,
   _RuntimeExecutionContext context,
   String ruleLabel,
   _CurrentActionEdge? currentEdge,
 ) {
   return [
     for (final segment in segments)
-      switch (segment) {
-        ActionKeyAccessSegment(value: final key) => _EvaluatedAccessSegment.key(
-          key,
+      _EvaluatedWriteSegment(
+        value: context.engine._evaluateExpression(
+          segment.expression,
+          context,
+          ruleLabel,
+          currentEdge: currentEdge,
         ),
-        ActionIndexAccessSegment(:final expr) => _EvaluatedAccessSegment.index(
-          _arrayIndex(
-            context.engine._evaluateExpression(
-              expr,
-              context,
-              ruleLabel,
-              currentEdge: currentEdge,
-            ),
-          ),
-        ),
-      },
+        sourceSpan: segment.sourceSpan,
+      ),
   ];
+}
+
+List<_WriteSelector> _classifyWriteSelectors(
+  _RuntimeExecutionContext context,
+  String base,
+  List<_EvaluatedWriteSegment> segments,
+) {
+  final selectors = <_WriteSelector>[];
+  for (final (index, segment) in segments.indexed) {
+    final value = segment.value;
+    if (value is String) {
+      selectors.add(_WriteSelector.key(value, segment.sourceSpan));
+      continue;
+    }
+    if (value is int && value >= 0) {
+      selectors.add(_WriteSelector.index(value, segment.sourceSpan));
+      continue;
+    }
+    final actualKind = _nestedWriteValueKind(value);
+    final reason = value is int && value < 0
+        ? 'negative_integer'
+        : value is num
+        ? 'fractional_number'
+        : 'kind_not_path_selector';
+    final message =
+        "nested write segment $index for binding '$base' must evaluate "
+        'to a string or nonnegative integer; got $actualKind ($reason)';
+    throw RuntimeInterpreterException(
+      message,
+      diagnostic: context.diagnostic(
+        stage: 'runtime_execution',
+        summary: 'Dart nested write failed',
+        detail: message,
+        code: 'nested_write_segment_invalid',
+        operation: 'nested_write_vivification',
+        binding: base,
+        segmentIndex: index,
+        path: [for (final selector in selectors) selector.pathValue],
+        actualKind: actualKind,
+        reason: reason,
+        sourceSpan: _nestedWriteSourceSpan(segment.sourceSpan),
+      ),
+    );
+  }
+  return selectors;
+}
+
+Object _emptyContainer(_WriteSelector selector) {
+  return selector.key != null ? <String, Object?>{} : <Object?>[];
+}
+
+Never _throwNestedWriteKindConflict(
+  _RuntimeExecutionContext context,
+  String base,
+  int segmentIndex,
+  List<Object?> path,
+  _WriteSelector selector,
+  Object? actual,
+) {
+  final actualKind = _nestedWriteValueKind(actual);
+  final message =
+      "nested write segment $segmentIndex for binding '$base' requires "
+      '${selector.expectedKind}; found $actualKind';
+  throw RuntimeInterpreterException(
+    message,
+    diagnostic: context.diagnostic(
+      stage: 'runtime_execution',
+      summary: 'Dart nested write failed',
+      detail: message,
+      code: 'nested_write_kind_conflict',
+      operation: 'nested_write_vivification',
+      binding: base,
+      segmentIndex: segmentIndex,
+      path: path,
+      expectedKind: selector.expectedKind,
+      actualKind: actualKind,
+      sourceSpan: _nestedWriteSourceSpan(selector.sourceSpan),
+    ),
+  );
+}
+
+Never _throwNestedWriteArrayGap(
+  _RuntimeExecutionContext context,
+  String base,
+  int segmentIndex,
+  List<Object?> path,
+  _WriteSelector selector,
+  int length,
+) {
+  final index = selector.index!;
+  final message =
+      "nested write segment $segmentIndex for binding '$base' cannot "
+      'create array index $index at length $length';
+  throw RuntimeInterpreterException(
+    message,
+    diagnostic: context.diagnostic(
+      stage: 'runtime_execution',
+      summary: 'Dart nested write failed',
+      detail: message,
+      code: 'nested_write_array_gap',
+      operation: 'nested_write_vivification',
+      binding: base,
+      segmentIndex: segmentIndex,
+      path: path,
+      arrayIndex: index,
+      length: length,
+      sourceSpan: _nestedWriteSourceSpan(selector.sourceSpan),
+    ),
+  );
+}
+
+String _nestedWriteValueKind(Object? value) {
+  return switch (value) {
+    null => 'null',
+    bool() => 'boolean',
+    int() => 'integer',
+    num() => 'number',
+    String() => 'string',
+    List() => 'array',
+    Map() when _decodeRuntimeCodeblock(value) != null => 'codeblock',
+    Map() => 'harray',
+    _ => 'scalar',
+  };
+}
+
+Map<String, Object?> _nestedWriteSourceSpan(ActionSourceSpan span) {
+  return {...span.toJson(), 'unit': 'unicode_scalar', 'provenance': 'authored'};
 }
 
 int? _arrayIndex(Object? value) {

@@ -17,6 +17,7 @@ evidence_update_2026_07_20_semantic_introspection_page: "FUTURE-PARITY-BACKLOG.1
 evidence_update_2026_07_29_readme_routing: "README-STABILITY-POLICY.1 retains the bounded root README in the 59-file discovered scan but removes its two duplicate historical selector references. Classified/current counts are now 25/0; backend README coverage and bare-binding anchors are unchanged."
 evidence_update_2026_08_25_staged_ast_enrichment_page: "FUTURE-PARITY-BACKLOG.14.7.2 adds compiler/staged-ast-enrichment.md. The discovered public inventory is now 60 files; classified/current selector counts remain 25/0."
 evidence_update_2026_08_29_codegen_inspector_page: "FUTURE-PARITY-BACKLOG.13.1 adds development/codegen-inspector.md. The exact staged canonical gate discovers 61 public files; classified/current selector counts remain 25/0, and component README discovery plus all four backend bare-binding anchors are unchanged."
+evidence_update_2026_09_02_macos_latency_page: "FUTURE-PARITY-BACKLOG.19.3.4.0 adds development/macos-rust-launch-latency.md. The .19.4.1 canonical boundary discovers that the public cardinality guard remained at 61; the corrected exact inventory is 62 files, with backend README discovery and all four bare-binding anchors unchanged."
 reverify: "bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py"
 ---
 
@@ -31,5 +32,5 @@ already-fixed capability README, and scans those files beside root documents and
 classified-reference counts make inventory growth deliberate; backend-specific bare-binding anchors ensure the
 entry documents teach the replacement, not merely avoid the removed spelling.
 
-The current discovered inventory is 61 files; classified and current example counts are 25 and zero after root
+The current discovered inventory is 62 files; classified and current example counts are 25 and zero after root
 README history was routed to canonical documentation.

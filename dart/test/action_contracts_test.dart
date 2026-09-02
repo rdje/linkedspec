@@ -42,10 +42,13 @@ void main() {
     expect(resolution.ok, isTrue);
     expect(_contract(resolution, '=').canonicalName, 'set');
     expect(_contract(resolution, '+=').canonicalName, 'push');
-    expect(_contract(resolution, '[]=').canonicalName, 'set_key');
+    final nestedWrites = resolution.contracts
+        .where((contract) => contract.sourceName == 'nested_access=')
+        .toList();
+    expect(nestedWrites, hasLength(2));
     expect(
-      _contract(resolution, 'nested_access=').canonicalName,
-      'nested_access_assignment',
+      nestedWrites.map((contract) => contract.canonicalName),
+      everyElement('nested_access_assignment'),
     );
   });
 

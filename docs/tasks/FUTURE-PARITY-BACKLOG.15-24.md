@@ -1563,7 +1563,7 @@
   Commit: `not required`; `.19.3.4.0` records the evidence-backed closeout.
 
 - ID: `FUTURE-PARITY-BACKLOG.19.4`
-  Status: `pending`
+  Status: `in progress; .19.4.1 complete; .19.4.2 next`
   Goal: Implement the unchanged v1 contract on Dart across native and supported generated/emitted routes.
   Children: `.19.4.1`, `.19.4.2`
   Dependencies: `.19.3`
@@ -1571,11 +1571,75 @@
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.4.1`
-  Status: `pending`
+  Status: `done; canonical-signoff-complete` (2026-09-02; task-tree-first from exact clean Rust closeout commit
+    `1247316d7d51c60243a21fb65209f3b7f851207d`; no push)
   Goal: Implement Dart nested write-vivification through typed parsed/emitted state and runtime.
   Dependencies: `.19.3`
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `canonical` — this leaf implements the frozen nested-write v1 contract on a new backend and
+    moves Dart typed parsed/generated/emitted carriers. ADR `0073` classifies backend admission and generated-
+    format movement as a designated exact staged boundary.
+  Focused checks: frozen neutral 5 AST / 7 syntax / 11 success / 16 structural / 3 expression-failure / 3 read-
+    exclusion cases; all 105 write-vivification mutations; Dart parser/compiler/runtime native, serialized,
+    generated-plan, emitted-state/source, and primary CLI routes; adjacent scalar assignment, access, helper,
+    `map_leaves!`-absence, diagnostics/span, corpus, and complete Dart component dependents; format/analyze,
+    project-data containment, Knowledge, task/index, bounded histories, memory/live/roadmap/book, mdBook render,
+    whitespace, and all nine doctrines.
+  Canonical trigger: `Dart backend implementation + typed generated/emitted carrier movement` — stage the exact
+    candidate with no unstaged inputs and run receipt-bound `bash tools/run_ci_local.sh` before atomic commit.
+  Acceptance: Preserve `linkedspec-write-vivification-v1` unchanged. Parse one typed nested-write node whose
+    segments retain authored expressions and Unicode-scalar spans; evaluate all segment expressions left-to-right
+    and then the RHS exactly once; snapshot binding state only afterward; isolate dense harray/array container
+    creation and publish atomically only on success; detach stored/returned mutable values; distinguish absent from
+    present null; preserve exact errors and non-write read behavior. Carry the typed node through every supported
+    Dart native/serialized/generated/emitted route without admitting `map_leaves!`, Julia/Lua behavior, or a
+    portable/public capability early.
+  Checklist: [x] clean activation/task ownership [x] Knowledge/decision/toolbox retrieval [x] Dart owner inventory
+    [x] exact RED through frozen neutral contract [x] typed parse/serialized/generated/emitted carrier
+    [x] isolated dense runtime publication/evaluation/detachment [x] diagnostics/read exclusions
+    [x] focused Dart/direct-dependent proof [x] durable docs/task/index synchronization
+    [x] exact staged canonical signoff [x] atomic commit/brief/clean handoff.
+  Activation evidence: exact `git status --short --untracked-files=all` is empty at committed clean HEAD
+    `1247316d7d51c60243a21fb65209f3b7f851207d`; `git_message_brief.txt` is zero bytes; reproducible mdBook output
+    is absent; repository-managed run residue is zero; post-commit activation-pointer and all nine doctrines pass;
+    and an escalated process census finds no LinkedSpec gate, Cargo, Rust compiler, or test job beyond its own
+    filter process. `.19.3.4.0` is committed complete and closes Rust `.19.3` without a speculative repair.
+  Retrieval/RED evidence: ADR `0036`, [[write-vivification-neutral-contract]], the Perl/Rust realization cards,
+    frozen contract/checker, and `.19.1.1`/`.19.2.1`/`.19.3.1` task evidence are read before source changes. The
+    neutral checker passes 5 valid AST / 7 syntax / 11 success / 16 structural / 3 expression-failure / 3 read-
+    exclusion cases, eight composition writes, and 105 rejected mutations; Dart's exact legacy no-autovivification
+    test remains green. Source inventory finds an existing dormant `ActionAssignNestedAccessExpr` and isolated-
+    clone runtime, but quoted segments are parser-tagged keys, one-segment writes collapse to
+    `ActionAssignHashIndexExpr`, missing roots/intermediates return null, spans include brackets/code units, and no
+    typed v1 structural diagnostic exists. New permanent Dart RED proves both seams: the first frozen syntax case
+    is the wrong AST node and an absent mixed root returns `[null, null]` instead of the detached created tree.
+  Implementation evidence: authored one- and many-segment writes now lower to one
+    `ActionAssignNestedAccessExpr`; each `ActionWritePathSegment` retains its typed expression, source, and exact
+    Unicode-scalar span. Parser/callable/compiled-state/generated/emitted/runtime seams reject corrupt or empty
+    typed segment state. Runtime evaluates segments then RHS, snapshots presence afterward, selects harray/array
+    from evaluated string/nonnegative integer values, creates only dense unambiguous missing state on an isolated
+    copy, publishes once, detaches mutable boundaries, and preserves completed expression effects. Exact typed
+    diagnostics own invalid selector, kind conflict, and array gap; reads remain non-creating.
+  Carrier evidence: the same node executes natively, after `SpecFile` JSON reconstruction, in validated generated
+    plans, through emitted source, in a fresh independently analyzed/executed caller package, and through the
+    primary CLI. Malformed carriers fail closed. Dart `map_leaves!`, Julia/Lua, capability/public admission, and
+    recurring cross-backend proof remain unchanged.
+  Verification evidence: the neutral checker passes 5 AST / 7 syntax / 11 success / 16 structural-failure / 3
+    expression-failure / 3 read-exclusion cases, eight composed writes, and 105 rejected mutations. Permanent Dart
+    proof covers the complete fixture, detachment, function presence, astral spans, malformed carriers, and every
+    supported route. Focused parser/runtime/contract proof passes 67/67 + 6/6; the full package passes 450/450.
+    The complete corrected Dart gate passes format 110/0, strict analysis, 24 managed temporary owners / 47 locked
+    packages, CLI 66/66 in default and POSIX environments, and corpus 105/105. Its first run correctly stopped on
+    the new test becoming the 24th `Directory.systemTemp` owner; exact registration and rerun restore containment.
+  Signoff evidence: task/index, ADR/Knowledge Map, architecture, roadmaps, bounded live/history surfaces, memory,
+    and the sole-facing mdBook identify Perl/Rust/Dart as current nested-write implementations and retain Dart
+    bang plus Julia/Lua/public boundaries. Canonical attempt one passes through punctuation-light behavior, then
+    catches a stale 61-file aggregate-selector public cardinality guard after `.19.3.4.0` added the macOS launch-
+    latency mdBook page. The corrected checker, current mdBook status, and two Knowledge owners lock 62 files with
+    unchanged 32 classified references / zero current examples. Render, histories, storage, whitespace, all nine
+    doctrines, and the restarted exact receipt-bound staged canonical CI pass against the final candidate; no
+    generated output or background job remains.
+  Verification: `canonical-signoff-complete`
+  Commit: `FUTURE-PARITY-BACKLOG.19.4.1 - implement Dart write vivification`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.4.2`
   Status: `pending`

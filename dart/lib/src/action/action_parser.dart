@@ -13,15 +13,58 @@ ActionExpr parseActionExpression(String source) {
   return _ActionParser(source, 0, source).parseExpression();
 }
 
+final class ActionParseException implements Exception {
+  const ActionParseException({
+    required this.code,
+    required this.sourceSpan,
+    required this.message,
+  });
+
+  final String code;
+  final String stage = 'action_parse';
+  final ActionSourceSpan sourceSpan;
+  final String message;
+
+  Map<String, Object?> toJson() {
+    return {
+      'code': code,
+      'stage': stage,
+      'source_span': {
+        ...sourceSpan.toJson(),
+        'unit': 'unicode_scalar',
+        'provenance': 'authored',
+      },
+      'message': message,
+    };
+  }
+
+  @override
+  String toString() {
+    return 'ActionParseException($code, stage=$stage, '
+        'start=${sourceSpan.start}, end=${sourceSpan.end}): $message';
+  }
+}
+
 final class _ActionParser {
-  _ActionParser(this.source, this.baseStart, this.rootSource);
+  _ActionParser(
+    this.source,
+    this.baseStart,
+    this.rootSource, {
+    this.characterSpans = false,
+  });
 
   final String source;
   final int baseStart;
   final String rootSource;
+  final bool characterSpans;
 
-  _ActionParser _child(String source, int baseStart) {
-    return _ActionParser(source, baseStart, rootSource);
+  _ActionParser _child(String source, int baseStart, {bool? characterSpans}) {
+    return _ActionParser(
+      source,
+      baseStart,
+      rootSource,
+      characterSpans: characterSpans ?? this.characterSpans,
+    );
   }
 
   ActionSourceSpan _characterSpan(int start, int end) {
@@ -29,6 +72,12 @@ final class _ActionParser {
       start: rootSource.substring(0, start).runes.length,
       end: rootSource.substring(0, end).runes.length,
     );
+  }
+
+  ActionSourceSpan _span(int start, int end) {
+    return characterSpans
+        ? _characterSpan(start, end)
+        : ActionSourceSpan(start: start, end: end);
   }
 
   ActionBlock parseBlock() {
@@ -850,6 +899,107 @@ final class _ActionParser {
     return segments;
   }
 
+  ({String base, List<ActionWritePathSegment> segments})?
+  _parseNestedWriteTarget(_TextSpan left) {
+    final open = left.text.indexOf('[');
+    if (open < 0) {
+      return null;
+    }
+    final rootPrefix = left.text.substring(0, open).trimRight();
+    if (!_isIdentifier(rootPrefix)) {
+      final message = rootPrefix == '{}'
+          ? 'nested write root must be a bare identifier'
+          : 'nested write root must remain a bare identifier';
+      _nestedWriteSyntaxError(
+        code: 'nested_write_root_not_addressable',
+        start: left.start,
+        end: left.start + rootPrefix.length,
+        message: message,
+      );
+    }
+    if (_nestedWriteReservedRoots.contains(rootPrefix)) {
+      _nestedWriteSyntaxError(
+        code: 'nested_write_root_reserved',
+        start: left.start,
+        end: left.start + rootPrefix.length,
+        message: "nested write root '$rootPrefix' is reserved",
+      );
+    }
+
+    final segments = <ActionWritePathSegment>[];
+    var pos = open;
+    while (pos < left.text.length) {
+      while (pos < left.text.length && left.text[pos].trim().isEmpty) {
+        pos += 1;
+      }
+      if (pos == left.text.length) {
+        break;
+      }
+      if (left.text[pos] != '[') {
+        _nestedWriteSyntaxError(
+          code: 'nested_write_root_not_addressable',
+          start: left.start,
+          end: left.end,
+          message: 'nested write root must remain a bare identifier',
+        );
+      }
+      final close = _findMatchingDelimiter(left.text, pos, '[', ']');
+      if (close == null) {
+        _nestedWriteSyntaxError(
+          code: 'nested_write_segment_unclosed',
+          start: left.start + pos,
+          end: left.end,
+          message: 'nested write segment is missing its closing bracket',
+        );
+      }
+      final payload = left.text.substring(pos + 1, close);
+      final trimmed = _trimWithOffsets(payload, left.start + pos + 1);
+      if (trimmed.text.isEmpty) {
+        _nestedWriteSyntaxError(
+          code: 'nested_write_segment_empty',
+          start: left.start + pos,
+          end: left.start + close + 1,
+          message: 'nested write segment may not be empty',
+        );
+      }
+      final expression = _child(
+        trimmed.text,
+        trimmed.start,
+        characterSpans: true,
+      ).parseExpression();
+      if (expression is ActionRawExpr) {
+        _nestedWriteSyntaxError(
+          code: 'nested_write_segment_expression_invalid',
+          start: trimmed.start,
+          end: trimmed.end,
+          message: 'segment must be one balanced ActionIR value expression',
+        );
+      }
+      segments.add(
+        ActionWritePathSegment(
+          source: trimmed.text,
+          sourceSpan: _characterSpan(trimmed.start, trimmed.end),
+          expression: expression,
+        ),
+      );
+      pos = close + 1;
+    }
+    return (base: rootPrefix, segments: List.unmodifiable(segments));
+  }
+
+  Never _nestedWriteSyntaxError({
+    required String code,
+    required int start,
+    required int end,
+    required String message,
+  }) {
+    throw ActionParseException(
+      code: code,
+      sourceSpan: _characterSpan(start, end),
+      message: message,
+    );
+  }
+
   ActionExpr? _parseAssignment(String text, int start) {
     final appendIndex = _findTopLevelToken(text, '+=');
     if (appendIndex != null) {
@@ -869,7 +1019,9 @@ final class _ActionParser {
       );
     }
 
-    final eqIndex = _findTopLevelAssignmentEquals(text);
+    final eqIndex =
+        _findTopLevelAssignmentEquals(text) ??
+        _findUnclosedNestedWriteAssignmentEquals(text);
     if (eqIndex == null) {
       return null;
     }
@@ -881,6 +1033,21 @@ final class _ActionParser {
       text.substring(eqIndex + 1),
       start + eqIndex + 1,
     );
+    final nestedTarget = _parseNestedWriteTarget(left);
+    if (nestedTarget != null) {
+      final value = _child(
+        right.text,
+        right.start,
+        characterSpans: true,
+      ).parseExpression();
+      return ActionAssignNestedAccessExpr(
+        source: text,
+        sourceSpan: _characterSpan(start, start + text.length),
+        base: nestedTarget.base,
+        segments: nestedTarget.segments,
+        value: value,
+      );
+    }
     final value = _child(right.text, right.start).parseExpression();
     if (_isIdentifier(left.text)) {
       if (value case ActionCallExpr(
@@ -953,46 +1120,6 @@ final class _ActionParser {
         source: text,
         sourceSpan: _span(start, start + text.length),
         name: left.text,
-        value: value,
-      );
-    }
-    final target = _child(
-      left.text,
-      left.start,
-    )._parseVariableOrAccess(left.text, left.start);
-    if (target is ActionIndexedVarExpr) {
-      return ActionAssignHashIndexExpr(
-        source: text,
-        sourceSpan: _span(start, start + text.length),
-        name: target.name,
-        key: target.index,
-        value: value,
-      );
-    }
-    if (target is ActionNestedAccessExpr) {
-      if (target.segments.length == 1) {
-        final segment = target.segments.single;
-        final key = segment is ActionKeyAccessSegment
-            ? ActionStringLiteralExpr(
-                source: segment.source,
-                sourceSpan: segment.sourceSpan,
-                value: segment.value,
-                quote: '"',
-              )
-            : (segment as ActionIndexAccessSegment).expr;
-        return ActionAssignHashIndexExpr(
-          source: text,
-          sourceSpan: _span(start, start + text.length),
-          name: target.base,
-          key: key,
-          value: value,
-        );
-      }
-      return ActionAssignNestedAccessExpr(
-        source: text,
-        sourceSpan: _span(start, start + text.length),
-        base: target.base,
-        segments: target.segments,
         value: value,
       );
     }
@@ -1479,6 +1606,29 @@ final class _CodeblockSignatureResult {
   final String? errorCode;
 }
 
+const _nestedWriteReservedRoots = <String>{
+  'CAPTURE',
+  'IINDEX',
+  'IMATCH',
+  'IMATCH_HASH',
+  'IMATCH_LIST',
+  'IPOS',
+  'LINDEX',
+  'LMATCH',
+  'LMATCH_HASH',
+  'LMATCH_LIST',
+  'LSPOS',
+  'STRING',
+  'descr',
+  'false',
+  'info',
+  'minfo',
+  'null',
+  'retv',
+  'true',
+  'undef',
+};
+
 const _reservedCodeblockParameters = <String>{
   'fn',
   'return',
@@ -1561,10 +1711,6 @@ _CodeblockSignatureResult _parseCodeblockSignature(String source) {
       maxArity: rest == null ? positional.length : null,
     ),
   );
-}
-
-ActionSourceSpan _span(int start, int end) {
-  return ActionSourceSpan(start: start, end: end);
 }
 
 _TextSpan _trimWithOffsets(String text, int baseStart) {
@@ -1795,12 +1941,50 @@ int? _findTopLevelAssignmentEquals(String text) {
     if (prev == '!' ||
         prev == '<' ||
         prev == '>' ||
+        prev == ':' ||
         prev == '=' ||
         next == '=' ||
         next == '>') {
       continue;
     }
     return index;
+  }
+  return null;
+}
+
+int? _findUnclosedNestedWriteAssignmentEquals(String text) {
+  final root = RegExp(r'^\s*[A-Za-z_][A-Za-z0-9_]*\s*\[').firstMatch(text);
+  if (root == null) {
+    return null;
+  }
+  final open = text.indexOf('[', root.start);
+  if (_findMatchingDelimiter(text, open, '[', ']') != null) {
+    return null;
+  }
+  final state = _ScanState();
+  for (var index = open + 1; index < text.length; index += 1) {
+    final ch = text[index];
+    if (_consumeQuotedOrRegex(state, text, index, ch)) {
+      continue;
+    }
+    if (ch == '"' || ch == "'") {
+      state.quote = ch;
+      continue;
+    }
+    if (ch != '=') {
+      continue;
+    }
+    final prev = index > 0 ? text[index - 1] : '';
+    final next = index + 1 < text.length ? text[index + 1] : '';
+    if (prev != '!' &&
+        prev != '<' &&
+        prev != '>' &&
+        prev != ':' &&
+        prev != '=' &&
+        next != '=' &&
+        next != '>') {
+      return index;
+    }
   }
   return null;
 }

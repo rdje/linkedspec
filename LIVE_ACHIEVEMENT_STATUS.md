@@ -2,22 +2,25 @@
 
 ## Current Activity
 
-- Rust `.19.3` is complete. Its final `.19.3.4.0` audit classifies the older-artifact first-launch delay as
-  external per-artifact macOS policy/cache state: controlled unique fresh builds and untouched launches are
-  healthy, so no repository-controlled repair or `.19.3.4.1` implementation is required.
+- Dart `.19.4` is in progress. Nested-write leaf `.19.4.1` implements the frozen v1 contract across typed native,
+  reconstructed, generated, emitted, independently executed, and primary-CLI routes; `map_leaves!` `.19.4.2` is
+  the remaining Dart half.
 
 ## Latest Completed Slice
 
-- `.19.3.4.0` separates compile/link/launch/test timing, reproduces 45.32/51.75-second older-artifact policy waits
-  versus one wholly unmanipulated 0.41-second unique control, closes `.19.3.4.1` as not required, and completes Rust
-  `.19.3`.
+- `.19.4.1` unifies one/many bracket writes under expression-bearing typed segments, implements dense atomic Dart
+  vivification with exact evaluation/diagnostic/detachment semantics, and passes the 5/7/11/16/3/3 contract, 105
+  rejected mutations, complete Dart gate, and exact staged canonical boundary.
 
 ## Next Action
 
-- From the committed clean `.19.3.4.0` boundary, activate Dart nested write-vivification `.19.4.1` task-tree-first
-  and retrieve the frozen v1 contract plus Dart typed/runtime owners before implementation.
+- From the committed clean `.19.4.1` boundary, activate Dart `map_leaves!` `.19.4.2` task-tree-first and retrieve
+  the frozen receiver-mutation/composition contracts plus the Dart binding-identity and traversal owners.
 
 ## Recent Completions
+
+- `2026-09-02` — `.19.4.1` implements Dart write vivification through all supported typed and executable routes;
+  450/450 package tests, 24 temporary owners / 47 packages, CLI 66x2, corpus 105/105, and exact canonical CI pass.
 
 - `2026-09-02` — `.19.3.4.0` reproduces two older-artifact macOS policy waits at 45.32/51.75 seconds versus
   immediate 0.00-second repeats, then proves a wholly unmanipulated unique control at 0.41 seconds. No persistent
@@ -69,9 +72,6 @@
 
 - `2026-08-29` — `.22.1` enforces task-status-consistent clean memory handoffs across four fields, three valid
   active/clean/idle cases, and six rejected mutations; conflicting global task definitions are queued under `.22.2`.
-
-- `2026-08-29` — `.22` governs 8 closed-state families / 12 markers / 15 consumers in one stable task-index
-  section, proves four frontier/deletion mutations, and removes repeated-action's bounded-memory handoff coupling.
 
 ## History
 

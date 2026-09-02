@@ -10,6 +10,31 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-02 — FUTURE-PARITY-BACKLOG.19.4.1 — implement Dart write vivification
+
+- Unified every authored Dart bracket write, including one-segment assignment, under one
+  `ActionAssignNestedAccessExpr` with expression-bearing `ActionWritePathSegment` values, exact source, and
+  half-open Unicode-scalar spans. Seven malformed/non-addressable forms now fail through exact typed parse errors.
+- Preserved the carrier through callable/compiled-state validation, `SpecFile` JSON reconstruction, generated
+  plans, emitted source, independently analyzed/executed caller-package code, and the primary CLI. Malformed or
+  empty serialized segment sequences fail closed.
+- Implemented segment-left-to-right then RHS evaluation, post-evaluation presence snapshots, evaluated
+  string/integer harray/array selection, dense absent-root/intermediate creation, isolated atomic publication,
+  completed-expression-effect preservation, and detached mutable boundaries.
+- Added exact `nested_write_segment_invalid`, `nested_write_kind_conflict`, and `nested_write_array_gap` runtime
+  diagnostics. Bound null and existing wrong kinds are never coerced; reads remain non-creating; Dart
+  `map_leaves!`, Julia/Lua behavior, and portable/public admission do not move.
+- Added permanent fixture-driven Dart proof for all 5 AST / 7 syntax / 11 success / 16 structural-failure / 3
+  expression-failure / 3 read-exclusion cases plus detachment, functions, astral spans, malformed carriers, and
+  every supported execution route. The neutral checker retains all 105 rejected mutations.
+- The complete Dart gate passes format 110/0, strict analysis, 450/450 package tests, 24 managed temporary owners /
+  47 locked packages, CLI 66/66 in default and POSIX environments, and corpus 105/105. Task/index, Knowledge,
+  architecture, roadmaps, continuity docs, and the sole-facing mdBook now name Perl/Rust/Dart vivification and
+  Julia/Lua's remaining boundary. Exact staged canonical attempt one also catches and repairs the stale public-
+  Markdown cardinality guard left when `.19.3.4.0` added the macOS launch-latency page: the corrected public
+  selector proof is 62 files / 32 classified historical references / zero current examples. Restarted exact
+  staged canonical CI binds the final candidate before commit.
+
 ## 2026-09-02 — FUTURE-PARITY-BACKLOG.19.3.4.0 — classify macOS Rust first-launch latency
 
 - Separated dependency compilation, linking, first process launch, and test execution under controlled serial,

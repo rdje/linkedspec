@@ -61,8 +61,8 @@ But concision must not hide what is happening. The project direction is toward:
 The same principle governs two mutation extensions. Both are current on the Perl reference; remaining backends
 and portable/public admission follow through the staged `.19` rollout.
 
-First, the neutral nested-write contract fixes how assignment creates missing path containers. Perl and Rust
-implement it; Dart, Julia, and Lua retain the earlier non-vivifying boundary. The authored form stays ordinary
+First, the neutral nested-write contract fixes how assignment creates missing path containers. Perl, Rust, and
+Dart implement it; Julia and Lua retain the earlier non-vivifying boundary. The authored form stays ordinary
 assignment:
 
 ```text
@@ -90,9 +90,11 @@ diagnostics identify the authored segment; structural codes distinguish invalid 
 dense-array gap.
 
 Reads remain pure and never create a root, child, cache, or other state. Temporary/literal/helper/property roots,
-an invented `vivify(...)` helper, and an invented `:=` operator are excluded. Perl and Rust now implement this
-unchanged contract under `.19.2.1` and `.19.3.1`; Dart, Julia, and Lua still require every intermediate container
-to exist. Portable/public admission remains pending until all owned backend and recurring-proof leaves complete.
+an invented `vivify(...)` helper, and an invented `:=` operator are excluded. Perl, Rust, and Dart now implement
+this unchanged contract under `.19.2.1`, `.19.3.1`, and `.19.4.1`; Julia and Lua still require every intermediate
+container to exist. Dart preserves the typed path through native, reconstructed, generated-plan, emitted-source,
+independently analyzed/executed caller-package, and primary-CLI routes. Portable/public admission remains pending
+until all owned backend and recurring-proof leaves complete.
 
 Second, LinkedSpec reserves a Ruby-style trailing `!` for a method that genuinely updates its receiver. The only
 version-1 candidate is:
@@ -203,9 +205,9 @@ re-entrancy diagnostics retain authored half-open Unicode-scalar spans.
 
 `walk_leaves!`, `reduce_leaves!`, function-form bang calls, and arbitrary `!`-suffixed identifiers are not part of
 that direction. They would save no meaningful ceremony or would advertise mutation without a distinct coherent
-contract. Perl and Rust implement nested creation and `map_leaves!`. The verified non-bang control remains
-identical on Perl, Rust, Dart, Julia, and Lua; Dart, Julia, PUC Lua, and LuaJIT retain their generic parser-
-invocation failure for the bang form.
+contract. Perl and Rust implement nested creation and `map_leaves!`; Dart currently implements nested creation
+only. The verified non-bang control remains identical on Perl, Rust, Dart, Julia, and Lua; Dart, Julia, PUC Lua,
+and LuaJIT retain their generic parser-invocation failure for the bang form.
 ADR `0036`, the two mechanism
 contracts plus their shared composition contract under `capability_conformance/`, and backlog `.19.1-.19.9` own
 the remaining backend and admission work.

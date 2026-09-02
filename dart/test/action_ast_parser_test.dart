@@ -69,8 +69,9 @@ void main() {
 
     final hash =
         parseActionExpression('meta[key] = { stage : value }')
-            as ActionAssignHashIndexExpr;
-    expect(hash.key, isA<ActionVariableExpr>());
+            as ActionAssignNestedAccessExpr;
+    expect(hash.segments, hasLength(1));
+    expect(hash.segments.single.expression, isA<ActionVariableExpr>());
     expect(hash.value, isA<ActionHashLiteralExpr>());
 
     final nested =

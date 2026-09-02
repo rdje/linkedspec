@@ -9,6 +9,38 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-09-02 (`FUTURE-PARITY-BACKLOG.19.4.1` — Dart write vivification): authored one-segment and multi-segment
+  writes must share the same typed carrier. Keeping `ActionAssignHashIndexExpr` only for programmatic/legacy input
+  prevents authored spelling from deciding harray versus array before the selector evaluates.
+- `ActionWritePathSegment` carries the ordinary typed expression plus exact segment source/span. Segment/RHS
+  parsing uses Unicode-scalar offsets, including astral text, so Dart code-unit indexing cannot leak into the
+  cross-backend diagnostic contract.
+- Evaluation and structural publication are separate phases: evaluate all segments left-to-right once, evaluate
+  RHS once, then inspect binding presence and clone the post-evaluation root. Build only on that clone and publish
+  once. This retains same-binding expression effects while forbidding a partial structural path.
+- Absence is not null. An absent root can be selected from the first string/nonnegative-integer segment; an
+  explicitly bound null or wrong-kind value is a conflict. Missing intermediates use the next selector, and arrays
+  replace or append exactly at length but never synthesize gap fillers.
+- Every mutable ingress/egress is copied: initial aggregate, aggregate RHS, committed binding, returned root, and
+  diagnostic path prefixes. Expression failures preserve their original exception identity; structural failures
+  use the frozen typed fields and authored failing-segment span.
+- Validate the typed carrier at each executable boundary, not only source parse. Dart rejects malformed segment
+  records before direct runtime, generated-plan, or emitted-source execution, while `SpecFile` reconstruction
+  preserves the same valid node.
+- The independently emitted-source test uses a repository-managed caller package and analyzes/executes that fresh
+  package. This proves emitted Dart as a consumer rather than merely comparing source text.
+- The first complete Dart gate correctly detected a project-data inventory change: the new permanent test is the
+  24th `Directory.systemTemp` owner. Registering that exact owner restored the 24-owner / 47-package storage gate;
+  no off-volume default or unmanaged temporary path was added.
+- Full Dart proof is format 110/0, strict analysis, 450/450 tests, CLI 66/66 twice, and corpus 105/105. The neutral
+  contract remains 5/7/11/16/3/3 plus 105 rejected mutations. Dart `map_leaves!` stays owned by `.19.4.2`; Julia,
+  Lua, recurring cross-backend proof, and portable/public admission remain later leaves.
+- Exact staged canonical attempt one passes every preceding cross-backend admission through punctuation-light
+  behavior, then catches `check_public_aggregate_selector_surface.py` at 62 discovered files versus a stale 61.
+  Clean commit `1247316d` had added the macOS Rust launch-latency mdBook page without advancing that unrelated
+  cardinality guard. The checker, current mdBook status, and both selector-public Knowledge owners now lock 62
+  while the semantic inventories remain 32 classified removed/history references and zero current examples; the
+  final staged candidate restarts canonical proof from the beginning for a matching receipt.
 - 2026-09-02 (`FUTURE-PARITY-BACKLOG.19.3.4.0` — macOS Rust launch classification): always time compile/link,
   first inventory launch, and test execution separately. `BINARY --list` removes test bodies from the question;
   process census then distinguishes an unstarted program from slow runtime work.
