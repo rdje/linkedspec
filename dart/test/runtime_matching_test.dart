@@ -146,6 +146,33 @@ void main() {
     expect(action.captures, ['Done ', r'''{ return("{not a brace}") }''']);
     expect(action.namedCapture('blkAB'), r'''{ return("{not a brace}") }''');
 
+    final lifecycleLine = RuntimeRegexAlternation.compile([
+      r'''(?m:^[ \t]*(I|LS|LE|LX|E|EX|IT)[ \t]*(?<blkLBL>\{(?:[^{}"']++|"(?:\\.|[^"])*+"|'(?:\\.|[^'])*+'|(?&blkLBL))*+\})[ \t]*(?=\r?$))''',
+    ]);
+    final lifecycle = lifecycleLine.seekMatch(
+      'ignored\n I { return("ok") }  \ntrailing',
+      0,
+    )!;
+    expect(lifecycle.text, ' I { return("ok") }  ');
+    expect(lifecycle.captures, ['I', '{ return("ok") }']);
+    expect(lifecycle.namedCapture('blkLBL'), '{ return("ok") }');
+    expect(lifecycleLine.seekMatch(' I { return("bad") } suffix\n', 0), isNull);
+
+    final standaloneLifecycle = RuntimeRegexAlternation.compile([
+      r'''(?m:^[ \t]*(?<blkSLB>\{(?:[^{}"']++|"(?:\\.|[^"])*+"|'(?:\\.|[^'])*+'|(?&blkSLB))*+\})[ \t]*(?=\r?$))''',
+    ]);
+    final standalone = standaloneLifecycle.seekMatch(
+      'ignored\n { return("ok") }  \ntrailing',
+      0,
+    )!;
+    expect(standalone.text, ' { return("ok") }  ');
+    expect(standalone.captures, ['{ return("ok") }']);
+    expect(standalone.namedCapture('blkSLB'), '{ return("ok") }');
+    expect(
+      standaloneLifecycle.seekMatch(' { return("bad") } suffix\n', 0),
+      isNull,
+    );
+
     final function = RuntimeRegexAlternation.compile([
       r'''fn[ \t]+([A-Za-z_]\w*)\s*\(([A-Za-z_]\w*(?:\s*,\s*[A-Za-z_]\w*)*)?\)\s*(?<blkFN>\{(?:[^{}"']++|"(?:\\.|[^"])*+"|'(?:\\.|[^'])*+'|(?&blkFN))*+\})''',
     ]);

@@ -1104,9 +1104,9 @@
   Commit: `FUTURE-PARITY-BACKLOG.19.2.2 - implement Perl map leaves mutation`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.3`
-  Status: `in progress; .19.3.1-.2 done, .19.3.3 next`
+  Status: `in progress; .19.3.1-.3 done, .19.3.4.0 next`
   Goal: Implement the unchanged v1 contract on Rust, including interpreted and supported generated routes.
-  Children: `.19.3.1`, `.19.3.2`, `.19.3.3`
+  Children: `.19.3.1`, `.19.3.2`, `.19.3.3`, `.19.3.4`
   Dependencies: `.19.2`
   Verification: `pending`
   Commit: `pending`
@@ -1258,23 +1258,236 @@
   Commit: `FUTURE-PARITY-BACKLOG.19.3.2 - implement Rust map leaves mutation`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.3.3`
-  Status: `pending; pre-existing oracle reproducibility defect tracked from .19.3.1`
+  Status: `done; canonical-signoff-complete` (2026-09-02; task-tree-first from Rust `map_leaves!` commit
+    `7fabe7371e4e98eea394d5f455286122452caab6`; no push)
   Goal: Restore exact Perl-oracle regeneration and make controlled corpus roots teach parent-loop/child-regex
     semantics without changing accepted backend behavior.
   Dependencies: `.19.3.2`
+  Verification tier: `canonical` — this leaf repairs the cross-backend oracle authority and may move the complete
+    generated corpus; exact staged receipt-bound CI is mandatory under ADR `0073`.
+  Focused checks: toolbox-first Perl/Rust source/result/trace reproduction; exact generator source and committed
+    expectation ownership; controlled inert-root/target-regex fixture inventory; all available backend corpus,
+    capability-position, root-selection, recursive-observation, and trace consumers; two complete repository-data-
+    routed 105-fixture generation passes; Knowledge, task/index, bounded histories, memory, all nine doctrines,
+    rendered mdBook when teaching moves, whitespace, and exact no-unowned-behavior-drift proof.
+  Canonical trigger: `cross-backend oracle authority + potentially generated corpus + parent Rust closeout` — stage
+    the exact candidate and run receipt-bound `tools/run_ci_local.sh` before the atomic commit. The required
+    closeout note crosses engineering-history rollover pressure, so its immutable segment, manifest member, and
+    finite capacity ADR are infrastructure changes covered by the same final exact canonical boundary.
   Acceptance: Reproduce and root-cause the `capability_position_helper_surface` source/expected split through
     current Perl and Rust execution, then fix the correct owner rather than blessing drift. Inventory controlled
     generator/corpus/trace fixtures whose directly entered root carries an inert regex or whose assertion assumes
     entry tests that regex; rewrite those roots to the established zero-regex form while retaining the reachable
     child's regex and byte-equivalent outputs. Verify across every available backend consumer that entry starts
-    the selected rule's mode-driven loop and each outgoing edge tests its target rule's regex, never the entered
-    rule's regex merely because it was selected as root. Two complete project-data-routed generator passes must
+    the selected rule's mode-driven loop and each outgoing `->` match edge tests its target rule's regex, never the
+    entered rule's regex merely because it was selected as root. Two complete project-data-routed generator passes must
     emit all 105 fixtures and leave the committed corpus clean; all available backend corpus consumers,
     capability-position proofs, trace contracts, task/Knowledge/book surfaces, and the designated canonical gate
     must agree.
-  Future gate requirement: canonical — this leaf repairs the cross-backend oracle authority and may move the
-    complete generated corpus, so exact staged receipt-bound CI is mandatory when the leaf is activated.
+  Ownership: `.19.3.3` owns the exact pre-existing `capability_position_helper_surface` source/expected drift and
+    the controlled fixture/assertion cleanup needed to lock entry-versus-target-regex semantics. It may correct the
+    generator, committed oracle, backend tests, traces, the exact Dart/Julia fluent-call whitespace parsing defect,
+    the exact Dart complete-line `blkLBL`/`blkSLB` structural-regex bridge omissions, the exact stale Dart `next()`
+    test whose bare block became lifecycle `I`, and their durable explanations only after toolbox evidence identifies
+    the causal owner. It also owns routing this leaf's new absent-match evidence into a separate Knowledge card
+    because the canonical rollout card has only six bytes of remaining bounded capacity. It must not change
+    dispatch semantics, extend general PCRE support or unrelated ActionIR syntax, extend `map_leaves!`, admit
+    another mutation backend, or move portable/public mutation capability. This leaf also owns durable diagnosis
+    and task-tree opening for the unexpectedly slow macOS first launch of newly linked repository-local Rust test
+    binaries; implementation remains outside this dirty leaf under queued `.19.3.4`.
+    Canonical verification may also repair exact stale phase-0 expected rewrite strings for the same owned Perl
+    local-match projection family; that is test-oracle alignment only and must not alter the repaired lowering.
+    This leaf also owns the mechanically required engineering-notes rollover triggered by its complete closeout
+    evidence and only the exact finite collection/manifest capacity adjustment needed to admit that new immutable
+    segment; all byte, aggregate, root, member, lifecycle, storage, and verifier ceilings remain unchanged.
+  Checklist: [x] clean activation/task ownership [x] Knowledge/decision/toolbox retrieval [x] two-route drift RED
+    [x] causal source/expected owner proof [x] controlled root/target-regex inventory [x] correct owner repair
+    [x] bounded all-backend blocker root cause/ownership [x] two-pass 105-fixture reproducibility
+    [x] Dart/Julia corpus blocker repair [x] stale Dart `next()` fixture ownership [x] bounded Knowledge evidence routing
+    [x] all-backend direct-dependent proof [x] durable sync
+    [x] stale phase-0 local-match rewrite expectations aligned [x] mandatory notes rollover/capacity ADR
+    [x] final exact staged canonical signoff [x] atomic commit/brief/clean handoff.
+  Activation evidence: exact `git status --short --untracked-files=all` was empty at
+    `7fabe7371e4e98eea394d5f455286122452caab6`; `git_message_brief.txt` was zero bytes; `.19.3.2` was committed after
+    its complete Rust component gate and post-commit hooks; no background job or generated mdBook output remained.
+  Causal RED evidence: current Perl `LinkedSpec::Get` executes the governed position source on `ab`, enters
+    `Value`, then skips it after `match_col()` throws typed `source_location_position_out_of_range` with an absent
+    local-match offset, producing `[null]`; the exact Rust governed test passes the committed rich record. History
+    proves selector migration intentionally preserved that rich value. `call_spec_handler_subst`, `return_descriptor`,
+    and emitted-source inspection locate the defect after successful ActionIR classification: the 2026-08-02 typed-
+    projection conversion sends undefined `$LSPOS`/`$LMATCH` bounds into strict span projections instead of
+    preserving absent-local-match null length/positions and 1-based line/column defaults. This leaf owns correction
+    of that complete Perl local-match projection family plus a present zero-width control; entry-match semantics and
+    other backends do not move.
+  Repair evidence: Perl ActionIR now guards all nine local-match length/position/line/column projections on both
+    `$LMATCH` and `$LSPOS`. A genuinely absent local match returns null for structural length/start/end offsets and
+    the documented one-based `1` for display lines/columns; a present zero-width match at offset zero retains
+    concrete zero length/offsets and column one. The governed live position source again equals its committed rich
+    record with no runtime diagnostic, and an independently emitted/loaded Perl parser returns the same record.
+    Focused syntax and `t/typed_source_location_perl_contract.t` proof passes 4 top-level tests, including 202
+    complete projection assertions and 10 absent/zero-width assertions.
+  Controlled-fixture evidence: exact inventory found 67 inline generator rows and the source-backed control-marker
+    fixture with an inert `Top` `/x/` before `-> Done`; one additional inline wrapper already used the correct form.
+    All 68 generator-owned inline wrappers now use zero-regex entry dispatch, the source-backed control does too,
+    and the first complete regeneration changes exactly 68 derived `input.spec` files with zero `input.txt`,
+    `expected.json`, or manifest changes. New neutral guard `t/oracle_root_target_regex_semantics.t` passes 7/7,
+    rejects the old form in generator/source/corpus, retains the exact 105-case authority, and requires every
+    rewritten zero-regex wrapper. The first corpus-diff digest is
+    `4df3a7eec18215dc05d823089abc2635fbd9f7df3827fc4fe5cfcafb8eba7e21`.
+    A second independent complete `ORACLE_TIMEOUT=30` pass emits the same 105 fixtures, byte-identical corpus diff,
+    and exact digest. No expectation, input text, or manifest byte changes in either pass.
+  Trace evidence: the existing direct-entry control remains regex-negative. A new positive zero-regex-root fixture
+    proves Rust compiles no authored `Top` regex slot, projects `Done`'s `/x/` into the parent dispatch plan, emits
+    `target_rule=Done`, enters `Done`, and records exactly one successful regex match. The focused test passes; no
+    backend production dispatch implementation changes. The final repository-managed command
+    `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test trace_controls`
+    passes all 12 tests in 2.23 seconds after a 2m07s rebuild and delayed first launch. An initial wrapper call
+    without `--manifest-path rust/Cargo.toml` fails before Cargo discovery and changes no file; it is not counted.
+  Cross-backend blocker ownership: complete Dart and Julia corpus execution proves every controlled rewritten
+    zero-regex-root case passes, so their target-dispatch semantics agree with Perl, Rust, PUC Lua, and LuaJIT.
+    The same complete runs expose two pre-existing, unrelated tail defects that prevent truthful all-backend
+    admission: Dart and Julia parse `I.return ([])` as an empty `return()` plus invalid `([])` remainder because
+    their fluent scanners do not admit whitespace before an argument list; Dart additionally sends the
+    self-hosted complete-line `lifecycle_block_line` and `standalone_lifecycle_block` patterns with recursive named
+    groups `blkLBL`/`blkSLB` to native `RegExp` because its bounded structural bridge recognizes only the older
+    inline `blkLB` family. History
+    locates both boundaries in the already-committed standalone-lifecycle rollout even though its durable evidence
+    claimed a green full corpus. Before any backend repair, this leaf expands exact ownership only to whitespace-
+    tolerant Dart/Julia fluent parsing and the exact Dart `blkLBL`/`blkSLB` complete-line structural families, with focused
+    parser/matcher regressions and unchanged expected corpus outputs. It does not admit general PCRE recursion,
+    change dispatch semantics, or broaden any other ActionIR syntax.
+  Cross-backend blocker repair: Dart and Julia fluent scanners now ignore legal horizontal whitespace between a
+    method name and its parenthesized argument list, so `I.return ([])` lowers to `return([])` without a raw tail.
+    Dart's bounded structural bridge recognizes only the exact self-hosted complete-line `blkLBL` explicit-
+    lifecycle and `blkSLB` standalone-lifecycle families, preserves their positional/named captures and physical-
+    line boundary, and continues to reject a non-whitespace suffix. Focused Dart parser/matcher tests pass 19 and
+    Julia's direct parser assertion passes. The corrected complete Dart and Julia corpus gates each pass 105/105;
+    Rust passes its 3-test manifest/oracle target across all 105 fixtures, and complete PUC Lua and LuaJIT corpus
+    routes also pass 105/105. The complete Julia component gate additionally passes its package suite, repository-
+    local project-data proof, primary CLI conformance, and final 105/105 corpus route. All committed expected
+    outputs remain unchanged.
+  Dart gate blocker evidence: the complete Dart component gate reaches one stale interpreter test whose
+    `/skip/ { next() }` source now correctly means a regex item followed by standalone lifecycle `I`. The entry
+    `next()` therefore exits before regex iteration; the old expectation could pass only while the bare block was
+    incorrectly inert. This is the exact Dart analogue of the test-only Lua ownership repair committed by `.15.3`.
+    This leaf owns rewriting only that fixture to `-> Skip { next() }` plus child `Skip: /skip/`, where the action
+    edge owns the block and the established result remains `keep` at cursor eight. No Dart parser or interpreter
+    behavior moves for this repair. The exact focused Dart interpreter test passes 1/1 with result `keep` and
+    cursor eight. The corrected complete Dart component gate then passes format, analysis, all 441 tests,
+    repository-local project-data proof, both 66/66 CLI matrices, and the 105/105 corpus route.
+  Knowledge routing evidence: the first doctrine pass correctly rejects adding this leaf's 825-byte absent-match
+    record to `typed-source-location-runtime-rollout-plan.md`, whose clean-HEAD size was 65,530/65,536 bytes. The
+    rollout card is restored byte-for-byte to its bounded clean-HEAD content; new focused card
+    [[perl-absent-local-match-projection-repair]] owns the causal and reverify detail. After the separate Rust
+    launch-latency finding card is added, the regenerated Knowledge Map passes at 927 facts / 7,878 question keys,
+    and README routed-destination closure passes without raising any per-file, collection, aggregate, or README
+    limit.
+  Rust launch-latency finding: the first repository-local `trace_controls` build finishes in 55m44s after
+    prolonged per-crate waits. The resulting test process then remains at 112 KiB and zero test output for more
+    than three minutes. A process census shows Cargo and the test binary alive while macOS `syspolicyd` consumes
+    substantial CPU; an exact one-second stack sample contains only `_dyld_start`, proving the test has not entered
+    Rust code and the new semantic fixture is not looping. The sample tool's exact off-volume report is consumed,
+    deleted, and verified absent. This environment/toolchain latency is fishy enough to require queued task-tree
+    audit `.19.3.4`; no trust bypass or speculative workflow change belongs in `.19.3.3`. The initiating trace
+    command was also plain Cargo and therefore read the user-home registry even though its target stayed repository-
+    local. Its 12/12 result is diagnostic only; this leaf owns an exact rerun through `tools/run_cargo_local.sh`
+    before accepting trace signoff, and no off-volume dependency access will be counted as final evidence. The
+    managed root-selection Rust admission build subsequently takes 117m57s, while the managed trace rebuild takes
+    2m07s and its launched test remains silent for about 98 seconds before completing its 12 tests in 2.23s. These
+    clean-versus-warm measurements strengthen `.19.3.4.0`; they do not justify a trust or workflow change here.
+  Direct-dependent evidence: `tools/check_recursive_observation_six_runtime.sh` passes all six runtime routes plus
+    capability 90/0/0 and language coverage 250 current names / 105 corpus fixtures + one named-mark fixture / 126
+    independent public Perl contracts. `tools/check_root_rule_selection_five_backend.sh` passes the neutral and
+    Perl routes; exact Rust 1/1, Dart 1/1, Julia 137/137, PUC Lua 139, and LuaJIT 139 admission consumers; the five-
+    backend × two-environment × six-case primary matrix; generated-source Rust 105/105; capability 90/0/0; and the
+    same language-coverage ledger. The managed Rust trace target passes 12/12. The mdBook renders successfully and
+    its generated output is removed; Knowledge Map regeneration/check passes at 927 facts / 7,878 keys.
+  Canonical attempt evidence: the first complete staged run reaches the sandbox locality probe only after every
+    preceding semantic/runtime check passes, then the restricted harness denies `sandbox-exec` with status 71.
+    The exact unchanged elevated rerun passes that process-locality proof and every preceding check, including the
+    five-backend root-selection contract and focused Perl root routes, before Phase 0 reports exactly one failed
+    subtest out of 1,032: three expected strings still encode the pre-repair unguarded `match_start_pos()`,
+    `match_len()`, and `match_end_pos()` lowerings. The emitted lowerings equal the focused 202-projection contract
+    and correctly require both `$LMATCH` and `$LSPOS`; this leaf therefore owns aligning only those three stale
+    Phase-0 expectations, rerunning the focused regression, and restarting canonical on the restaged candidate.
+    Syntax, the 4-test/202-projection focused contract, and direct substitution probes pass; the complete
+    repository-routed Phase-0 file then passes 1,032/1,032 in 1,046 seconds.
+  Canonical signoff evidence: the exact staged candidate passes all nine doctrines; six-runtime staged,
+    progressive, gap, recognition, typed-source, and recursive-observation proof; the five-backend root-selection
+    contract and focused Perl root routes; six-runtime MCP and semantic-introspection composition; duplicate-slot,
+    repetition, lifecycle, cursor, callable, diagnostic, generated-source, storage/process-locality, and relocated-
+    root checks; both 66/66 CLI environments; and Phase 0 1,032/1,032 in 1,000 seconds. The gate writes the required
+    staged receipt from clean activation HEAD, and the final closeout-only status/index edits are recomposed on the
+    exact landing candidate before commit.
+  Canonical latency evidence: a read-only process census during that run found an independent Claude-owned shell
+    deleting this checkout's `rust/target/debug/incremental`, `rust/target/es19_boot`, `rust/target/audit_notest`,
+    and `rust/target/coldprobe` directories and invoking `cargo sweep --time 7`; no tracked file changed, but the
+    concurrent cleanup invalidated Rust incremental artifacts during receipt-bound CI. A later Rust MCP binary
+    remained at 112 KiB in macOS `_dyld_start` for more than five minutes, then executed its three tests in 2.43
+    seconds. The one-second sample report written by macOS under `/tmp` was consumed, deleted exactly, and verified
+    absent. These are measured inputs for `.19.3.4.0`, not a semantic failure or permission to weaken trust,
+    locality, or verification.
+  Closeout rollover trigger: the complete canonical/latency record raised `DEVELOPMENT_NOTES.md` to 465/512
+    lines, crossing the enforced 90% rollover threshold. This node owns the mechanical immutable segment,
+    manifest/root update, finite capacity ADR, index/Knowledge synchronization, and final canonical restart; no
+    executable scope expands.
+  Closeout rollover evidence: the governed tool archives 218 complete clean-HEAD lines as immutable segment
+    `4986` (23,232 bytes, SHA-256 prefix `1f25a697bee5`) from activation commit `7fabe737`, leaving the hot root at
+    247/512 lines and 25,482/65,536 bytes. The resulting collection is 22 files / 24,732 lines / 2,648,238 bytes
+    with a 21-line, 12,558-byte manifest. ADR `0099` advances only `max_files` 21→22 and manifest `max_lines`
+    20→21; every root, byte, segment, aggregate, owner, lifecycle, verifier, route, and storage control remains
+    unchanged.
+  Verification: **PASS 2026-09-02.** Focused and all-backend direct-dependent proof, mandatory bounded-history
+    rollover, exact staged canonical CI/receipt, atomic commit, brief clearing, and clean handoff are complete;
+    `.19.3.4.0` is the next clean-boundary leaf.
+  Commit: `FUTURE-PARITY-BACKLOG.19.3.3 - restore oracle root semantics`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.3.4`
+  Status: `pending; fishy signoff finding queued by .19.3.3`
+  Goal: Measure and safely contain abnormal macOS first-launch validation latency for repository-local Rust test
+    binaries without weakening operating-system trust, project-data locality, or verification coverage.
+  Children: `.19.3.4.0`, `.19.3.4.1`
+  Dependencies: `.19.3.3`
   Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.3.4.0`
+  Status: `pending; next clean-boundary leaf after .19.3.3`
+  Goal: Reproduce and classify the cold-build/first-launch latency before selecting any repair.
+  Dependencies: `.19.3.3`
+  Planned verification: `focused` — read-only process/toolchain/filesystem evidence and a ratified task split only;
+    no workflow, trust, storage, CI, test, runtime, or language behavior changes.
+  Acceptance: From a clean boundary, use repository-local controlled probes to separate dependency compilation,
+    linking, first process launch, and test execution time. Record process states, CPU/OS-validation ownership,
+    executable metadata and extended attributes, repository-volume/cache topology, concurrent-versus-serial Cargo
+    behavior, and warm rerun contrast. Prove whether `syspolicyd`/Gatekeeper, artifact attributes, SSD execution,
+    redundant isolated targets, or another exact seam owns the delay; remove every diagnostic artifact, especially
+    any OS tool output written outside project storage. Ratify a narrowly safe `.1` repair or close with durable
+    external-toolchain evidence if no repository-controlled defect exists. Never disable Gatekeeper, change global
+    trust policy, clear ambiguous shared metadata, or bless off-volume project data.
+  Checklist: [ ] clean activation [ ] Knowledge/toolbox retrieval [ ] controlled timing reproduction
+    [ ] process/stack/metadata evidence [ ] warm/concurrency/storage comparison [ ] exact causal classification
+    [ ] `.1` acceptance refinement or evidence-backed no-project-defect closeout [ ] durable sync [ ] focused proof
+    [ ] atomic commit/clean handoff.
+  Queued evidence: `.19.3.3` separates long cold builds and pre-main launch delay from fast test execution, observes
+    macOS `syspolicyd` plus `_dyld_start`, and catches a separate Claude-owned cleanup process deleting four
+    repository-local Rust target/cache directories and running `cargo sweep --time 7` during canonical CI. `.0`
+    must reproduce under controlled serial ownership and distinguish OS validation from concurrent artifact
+    invalidation before selecting any repair.
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.3.4.1`
+  Status: `blocked on .19.3.4.0 decision`
+  Goal: Implement only the measured repository-controlled latency repair, if `.0` proves one is necessary.
+  Dependencies: `.19.3.4.0`
+  Planned verification: `canonical if activated` — any toolchain warmup, CI topology, executable metadata, cache,
+    storage, or process-launch change is infrastructure movement under ADR `0073`.
+  Acceptance: Apply the smallest `.0`-ratified project-local repair, preserve exact test coverage and failure
+    propagation, keep all generated/cache/temp data on the repository filesystem, and leave OS trust protections
+    enabled. Prove bounded cold and warm timings against the frozen reproduction plus unchanged Rust focused and
+    canonical consumers; synchronize task, Knowledge, Toolbox/book guidance, storage/doctrine evidence, and clean
+    handoff. If `.0` proves the latency is wholly external and no safe repository repair exists, mark this leaf
+    not-required with that exact evidence rather than introducing a speculative workaround.
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.4`

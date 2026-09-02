@@ -2,20 +2,27 @@
 
 ## Current Activity
 
-- Rust nested-write `.19.3.1` and `map_leaves!` `.19.3.2` are signoff-complete across typed native, serialized,
-  generated, emitted, and independently compiled carriers. Parent `.19.3` remains active at oracle cleanup `.3`.
+- Rust nested-write `.19.3.1`, `map_leaves!` `.19.3.2`, and oracle/root-target-regex repair `.19.3.3` are signoff-
+  complete. `.19.3.3` restores absent-match Perl projections, rewrites 68 controlled roots without output drift,
+  locks entry-versus-target selection across all backends, and passes exact staged canonical proof. Measured macOS
+  launch/cache-interference classification `.19.3.4.0` is the next clean-boundary leaf.
 
 ## Latest Completed Slice
 
-- `.19.3.2` implements Rust `map_leaves!` with stable binding identities, complete pre-evaluation receiver guard,
-  atomic original-shape mapping, strict write composition, and detached post-commit continuation.
+- `.19.3.3` restores exact Perl oracle generation and root-target semantics, passes all five backends/six routes,
+  exact storage/relocation proof, CLI 66x2, and Phase 0 1,032/1,032 under receipt-bound canonical signoff.
 
 ## Next Action
 
-- Derive the new clean `HEAD`, activate `.19.3.3` task-tree-first, and use the LinkedSpec toolbox to reproduce and
-  repair the pre-existing root/target-regex oracle drift without changing the semantic rule.
+- From the committed clean `.19.3.3` boundary, activate `.19.3.4.0` task-tree-first and reproduce the abnormal Rust
+  cold-build/pre-main latency under controlled serial artifact ownership before selecting any repair.
 
 ## Recent Completions
+
+- `2026-09-02` — `.19.3.3` restores nine Perl absent-match projections, 68 zero-regex controlled roots, exact
+  target-selection traces, and complete five-backend corpus agreement; staged canonical passes all doctrines,
+  storage/relocation, CLI 66x2, and Phase 0 1,032/1,032; ADR `0099` admits required notes segment `4986` at finite
+  collection/manifest capacity 22/21.
 
 - `2026-09-01` — `.19.3.2` implements Rust `map_leaves!`; 9/9 permanent carrier/behavior tests, 3/3 private
   failure-state tests, unchanged 167 base + 592 composition mutations, corrected 11/11 trace controls, and the
@@ -64,9 +71,6 @@
 
 - `2026-08-29` — `.13.1` restores five-form codegen inspection through explicit current owner packages and adds a
   recurring source/runtime smoke against facade plugin-AUTOLOAD regression.
-
-- `2026-08-29` — `.15.2` closes standalone lifecycle-block parity across five backends/six routes, self-hosted
-  grammar, generated carriers, capability 90/0/0, public teaching, and exact recurring no-drift.
 
 ## History
 

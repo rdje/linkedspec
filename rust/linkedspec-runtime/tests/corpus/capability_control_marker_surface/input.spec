@@ -1,5 +1,5 @@
 Top::
- /x/ -> Done {
+ -> Done {
   branch = ""
   i(false)
   branch = "bad"

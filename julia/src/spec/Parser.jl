@@ -1246,6 +1246,7 @@ function _parse_fluent_chain_with_remainder(text::AbstractString)
     while startswith(remaining, ".")
         remaining = _drop_prefix(remaining, ".")
         method, remaining = _take_method_name(remaining)
+        remaining = lstrip(remaining)
 
         if startswith(remaining, "(")
             paren = _extract_paren_content_with_end(remaining)

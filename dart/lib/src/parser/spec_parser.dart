@@ -1437,7 +1437,7 @@ _FluentParse _parseFluentChainWithRemainder(String text) {
       nameEnd += 1;
     }
     final method = remaining.substring(0, nameEnd);
-    remaining = remaining.substring(nameEnd);
+    remaining = remaining.substring(nameEnd).trimLeft();
 
     if (remaining.startsWith('(')) {
       final paren = _extractParenContentWithEnd(remaining);

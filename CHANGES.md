@@ -10,6 +10,56 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-01 — FUTURE-PARITY-BACKLOG.19.3.3 — restore exact oracle and root-target semantics
+
+- Reproduced the `capability_position_helper_surface` drift through current Perl and Rust before changing the
+  oracle. The expectation was correct: Perl skipped the child after strict source-location projection received an
+  absent local-match offset, while Rust retained the rich committed result.
+- Corrected all nine Perl local-match projections to distinguish absent state from a real zero-width match at
+  offset zero. Structural length/start/end values remain null when absent, display lines/columns retain their
+  one-based default, and present zero-width positions remain concrete.
+- Replaced 67 inline and one source-backed inert `Top:: /x/ -> Done` controls with zero-regex roots. This locks the
+  language rule that selecting a root starts its handler loop; only an outgoing edge selects and tests its target
+  rule's regex. Expected values, input bytes, and manifest bytes are unchanged.
+- Added a neutral fixture-shape guard and complementary Rust traces: direct entry is lifecycle-positive and own-
+  regex-negative, while a zero-regex `Top` edge selects `Done`, enters it, and records exactly one successful
+  target-regex match.
+- Ran two complete repository-routed Perl generations across all 105 fixtures. Both produced the same 68 input-
+  only changes at SHA-256 `4df3a7eec18215dc05d823089abc2635fbd9f7df3827fc4fe5cfcafb8eba7e21`.
+- Repaired pre-existing full-corpus blockers without widening language contracts: Dart and Julia now accept legal
+  whitespace in `I.return ([])`, and Dart's bounded structural bridge recognizes only the exact complete-line
+  `blkLBL`/`blkSLB` self-hosted patterns. Complete Rust, Dart, Julia, PUC Lua, and LuaJIT corpus routes pass 105/105
+  with unchanged expectations.
+- Corrected one stale Dart `next()` test to give its block action-edge ownership through `-> Skip { next() }` plus
+  child `Skip: /skip/`. The established result remains `keep` at cursor eight; production Dart parsing and
+  execution do not move.
+- Routed the new absent-match explanation into its own focused Knowledge card because the canonical typed-source
+  rollout card had only six bytes of headroom. The original card remains unchanged and every existing per-file,
+  collection, aggregate, and README pressure limit remains fixed.
+- Root-caused an abnormally slow cold Rust verification boundary far enough to exclude the semantic test itself:
+  after a 55m44s build, the launched binary remained in macOS `_dyld_start` while `syspolicyd` was active. Opened
+  measured audit/repair task `.19.3.4`; this slice changes no trust policy or verification topology.
+- Synchronized task/index, Knowledge Map, bounded status/memory/engineering notes, and mdBook teaching with the
+  exact cross-runtime entry-versus-target-regex invariant.
+- Completed the composed proof: recursive observation passes all six runtime routes; root selection passes exact
+  Rust 1/1, Dart 1/1, Julia 137/137, PUC Lua 139, and LuaJIT 139 admission consumers plus the 5×2×6 CLI matrix;
+  the repository-managed trace suite passes 12/12. Generated-source 105/105, capability 90/0/0, and language
+  coverage 250 current names / 105+1 fixtures / 126 public Perl contracts remain green.
+- Canonical Phase 0 exposed three stale exact-string expectations for the repaired local-match start, length, and
+  end projections. Aligned only those test-oracle strings with the already-proven two-register guards; direct
+  probes, the 202-projection contract, and the complete Phase-0 file pass 1,032/1,032 without production movement.
+- Exact staged canonical signoff passes all nine doctrines, the complete recurring cross-backend composition,
+  repository storage/process locality and relocation, both 66/66 CLI environments, and Phase 0 1,032/1,032 in
+  1,000 seconds. The staged receipt is bound to the clean activation HEAD and exact landing candidate.
+- A canonical-run process census also caught an independent Claude-owned cleanup deleting four repository-local
+  Rust target/cache directories and running `cargo sweep --time 7`; a separate MCP binary waited over five minutes
+  in `_dyld_start` before passing 3/3 in 2.43 seconds. Queued `.19.3.4.0` owns controlled serial classification;
+  this leaf changes no trust, cache, or verification policy.
+- The complete closeout note triggers the governed engineering-history rollover: 218 clean-HEAD lines become
+  immutable segment `4986`, leaving the hot root at 247/512 lines. ADR `0099` admits only collection file capacity
+  21→22 and manifest lines 20→21; all byte, segment, aggregate, route, lifecycle, verifier, and storage ceilings
+  remain fixed.
+
 ## 2026-09-01 — FUTURE-PARITY-BACKLOG.19.3.2 — implement Rust map leaves mutation
 
 - Added the dedicated Rust `receiver_mutation_chain` carrier for only bare

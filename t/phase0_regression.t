@@ -13615,7 +13615,7 @@ subtest 'emit_context_pipeline_helper_substitutions' => sub {
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'match_start_pos()'),
-        q#do { LinkedSpec::SourceLocation::Runtime::span_start_offset($info, $STRING, $LSPOS - length($LMATCH), $LSPOS, "match_start_pos") }#,
+        q#do { defined($LMATCH) && defined($LSPOS) ? LinkedSpec::SourceLocation::Runtime::span_start_offset($info, $STRING, $LSPOS - length($LMATCH), $LSPOS, "match_start_pos") : undef }#,
         'match_start_pos() helper rewrite preserves explicit current-local-match left-edge position semantics'
     );
     is(
@@ -13655,12 +13655,12 @@ subtest 'emit_context_pipeline_helper_substitutions' => sub {
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'match_len()'),
-        q#do { defined($LMATCH) ? LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $LSPOS - length($LMATCH), $LSPOS, "match_len") : length($LMATCH) }#,
+        q#do { defined($LMATCH) && defined($LSPOS) ? LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $LSPOS - length($LMATCH), $LSPOS, "match_len") : undef }#,
         'match_len() helper rewrite preserves explicit current-local-match width semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'match_end_pos()'),
-        q#do { LinkedSpec::SourceLocation::Runtime::position_offset($info, $STRING, $LSPOS, "match_end_pos") }#,
+        q#do { defined($LMATCH) && defined($LSPOS) ? LinkedSpec::SourceLocation::Runtime::position_offset($info, $STRING, $LSPOS, "match_end_pos") : undef }#,
         'match_end_pos() helper rewrite preserves explicit current-local-match right-edge position semantics'
     );
     is(

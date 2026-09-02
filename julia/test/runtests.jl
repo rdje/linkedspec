@@ -4041,6 +4041,11 @@ Top::
     @test block isa CodeBlockBodyElementKind
     @test block.code == "set(out, undef); set(out, \"ok\"); return(out)"
 
+    spaced_arguments = parse_spec("Top::\n I.return ([])\n")
+    spaced_block = only(top_rule(spaced_arguments).body).kind
+    @test spaced_block isa CodeBlockBodyElementKind
+    @test spaced_block.code == "return([])"
+
     multiline_args = parse_spec(raw"""
 Top::
  I.return({

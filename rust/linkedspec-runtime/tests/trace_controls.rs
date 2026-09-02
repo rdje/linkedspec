@@ -22,6 +22,16 @@ Top::
  /x/ { return("hit") }
 "#;
 
+const TARGET_REGEX_SPEC: &str = r#"
+Top::
+ -> Done .push
+ LX { return(copy(Top)) }
+
+Done:
+ /x/
+ I { return("hit") }
+"#;
+
 const USER_FUNCTION_SPEC: &str = r#"fn label() {return("hit")}
 
 Top::
@@ -162,6 +172,50 @@ fn traced_entrypoint_validates_route_sink_setup_without_changing_output() {
     assert!(
         !trace.contains("rust_runtime:engine:regex_match"),
         "direct rule entry must not test that rule's own regex:\n{trace}"
+    );
+    let _ = std::fs::remove_file(path);
+}
+
+#[test]
+fn zero_regex_root_selects_only_the_target_rule_regex() {
+    let path = temp_trace_path("target-regex-selection");
+    let compiled = compile_spec(TARGET_REGEX_SPEC);
+    let top = compiled.find("Top").expect("Top rule");
+    let done = compiled.find("Done").expect("Done rule");
+
+    assert!(
+        top.regex_slots.is_empty(),
+        "Top must have no authored regex slots"
+    );
+    assert_eq!(
+        top.regex_patterns,
+        ["x"],
+        "Top's dispatch plan must project Done's regex"
+    );
+    assert_eq!(done.regex_patterns, ["x"]);
+
+    let engine = Engine::new(compiled);
+    let untraced = engine.execute("x").expect("execute untraced");
+    let traced = engine
+        .execute_with_trace("x", trace_config(&path, true))
+        .expect("execute traced");
+    assert_eq!(traced, untraced);
+
+    let trace = std::fs::read_to_string(&path).expect("read trace file");
+    assert!(
+        trace.contains(
+            "rust_runtime:engine:regex_slot_selected taken=1 reason=rule_label=Top selection_role=choice target_rule=Done regex_index=0"
+        ),
+        "the parent loop must select Done's regex slot:\n{trace}"
+    );
+    assert!(
+        trace.contains("rust_runtime:engine:child_dispatch taken=1 reason=label=Done"),
+        "the selected target must be entered after its regex matches:\n{trace}"
+    );
+    assert_eq!(
+        trace.matches("rust_runtime:engine:regex_match taken=1").count(),
+        1,
+        "entering Done must not test Done's regex a second time:\n{trace}"
     );
     let _ = std::fs::remove_file(path);
 }

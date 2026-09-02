@@ -21,6 +21,15 @@ sub slurp_json {
  return JSON::PP->new->decode($document)
 }
 
+sub slurp_text {
+ my ($path) = @_;
+ open my $fh, '<:encoding(UTF-8)', $path or die "cannot read $path: $!";
+ local $/;
+ my $document = <$fh>;
+ close $fh or die "cannot close $path: $!";
+ return $document
+}
+
 my $typed_contract = slurp_json(File::Spec->catfile(
  $Bin,
  '..',
@@ -45,7 +54,7 @@ diag(
 ) unless $projection_interface;
 
 SKIP: {
- skip 'future typed-source projection interface is absent', 1
+ skip 'future typed-source projection interface is absent', 2
   unless $projection_interface;
 
  subtest 'all helper projections route through typed values without changing results' => sub {
@@ -178,6 +187,113 @@ SKIP: {
     'standalone generated helper projections preserve the exact result',
    ) if $execute_ok;
   }
+ };
+
+ subtest 'absent local-match projections preserve null coordinates and one-based display defaults' => sub {
+  my $position_fixture_path = File::Spec->catfile(
+   $Bin,
+   '..',
+   'capability_conformance',
+   'fixtures',
+   'capability_position_helper_surface.spec',
+  );
+  my $expected_path = File::Spec->catfile(
+   $Bin,
+   '..',
+   'rust',
+   'linkedspec-runtime',
+   'tests',
+   'corpus',
+   'capability_position_helper_surface',
+   'expected.json',
+  );
+  my $position_source = slurp_text($position_fixture_path);
+  my $position_expected = slurp_json($expected_path);
+  my %runtime_ctx;
+  my $parser = LinkedSpec::Get(
+   \$position_source,
+   runtime_ctx_ref => \%runtime_ctx,
+  );
+  ok(ref($parser) eq 'CODE', 'the governed position fixture compiles live');
+  my $input = 'ab';
+  is_deeply(
+   $parser->(\$input),
+   $position_expected,
+   'absent local-match projections preserve the committed rich reference record',
+  );
+  ok(
+   !exists($runtime_ctx{last_error}),
+   'absent local-match projections leave runtime diagnostics clear',
+  );
+
+  my $lowered = LinkedSpec::call_spec_handler_subst(
+   'Value',
+   'return(hash("col", match_col(), "len", match_len(), "end", match_end_pos()))',
+  );
+  like(
+   $lowered,
+   qr/defined\(\$LMATCH\) && defined\(\$LSPOS\).*"match_col"\) : 1/s,
+   'local-match display coordinates explicitly preserve the one-based absent default',
+  );
+  like(
+   $lowered,
+   qr/defined\(\$LMATCH\) && defined\(\$LSPOS\).*"match_len"\) : undef/s,
+   'local-match structural coordinates explicitly preserve absent null',
+  );
+
+  my $generated_source = LinkedSpec::emit_generated_source(
+   \$position_source,
+   source_identity => 'capability_position_helper_surface.spec',
+  );
+  my $package = 'LinkedSpec::TypedSourceLocationAbsentMatchGenerated';
+  my $loaded = eval "package $package; $generated_source; 1";
+  ok($loaded, 'standalone generated absent-match source loads') or diag($@);
+  if ($loaded) {
+   no strict 'refs';
+   $input = 'ab';
+   my $generated_result;
+   my $execute_ok = eval {
+    $generated_result = &{"${package}::Execute"}(\$input);
+    1
+   };
+   ok($execute_ok, 'standalone generated absent-match execution completes') or diag($@);
+   is_deeply(
+    $generated_result,
+    $position_expected,
+    'standalone generated execution preserves the same rich reference record',
+   ) if $execute_ok;
+  }
+
+  my $zero_width_source = <<'SPEC';
+Top::
+ /(?<empty>)/ -> Top {
+  return(hash(
+   "col", match_col(),
+   "end_col", match_end_col(),
+   "end_pos", match_end_pos(),
+   "has", match_has(empty),
+   "len", match_len(),
+   "start_col", match_start_col(),
+   "start_pos", match_start_pos()
+  ))
+ }
+SPEC
+  my $zero_width_parser = LinkedSpec::Get(\$zero_width_source);
+  ok(ref($zero_width_parser) eq 'CODE', 'the zero-width local-match control compiles');
+  $input = '';
+  is_deeply(
+   $zero_width_parser->(\$input),
+   {
+    col       => 1,
+    end_col   => 1,
+    end_pos   => 0,
+    has       => 1,
+    len       => 0,
+    start_col => 1,
+    start_pos => 0,
+   },
+   'a present zero-width match at offset zero is not mistaken for absence',
+  );
  };
 }
 

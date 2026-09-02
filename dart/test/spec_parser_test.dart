@@ -143,6 +143,11 @@ Top::
     final block = compact.topRule!.body[0].kind as CodeBlockBodyElementKind;
     expect(block.code, 'set(out, undef); set(out, "ok"); return(out)');
 
+    final spacedArguments = parseSpec('Top::\n I.return ([])\n');
+    final spacedBlock =
+        spacedArguments.topRule!.body.single.kind as CodeBlockBodyElementKind;
+    expect(spacedBlock.code, 'return([])');
+
     final multilineArgs = parseSpec(r'''
 Top::
  I.return({

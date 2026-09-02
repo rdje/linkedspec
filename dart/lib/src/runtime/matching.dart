@@ -564,6 +564,11 @@ RegExp? _compileStructuralRegex(
   );
 }
 
+const _specLifecycleLineBlockPattern =
+    r'''(?m:^[ \t]*(I|LS|LE|LX|E|EX|IT)[ \t]*(?<blkLBL>\{(?:[^{}"']++|"(?:\\.|[^"])*+"|'(?:\\.|[^'])*+'|(?&blkLBL))*+\})[ \t]*(?=\r?$))''';
+const _specStandaloneLifecycleBlockPattern =
+    r'''(?m:^[ \t]*(?<blkSLB>\{(?:[^{}"']++|"(?:\\.|[^"])*+"|'(?:\\.|[^'])*+'|(?&blkSLB))*+\})[ \t]*(?=\r?$))''';
+
 enum _StructuralRegexKind {
   squareBrackets,
   ebnfReturnScalar,
@@ -575,6 +580,8 @@ enum _StructuralRegexKind {
   specBlindFluent,
   specBareBlock,
   specBareFluent,
+  specLifecycleLineBlock,
+  specStandaloneLifecycleBlock,
   specLifecycleBlock,
   specLifecycleFluent,
   specFunctionDefinition;
@@ -613,6 +620,12 @@ enum _StructuralRegexKind {
     }
     if (pattern.startsWith(r'(?m:^[ \t]*(') && pattern.contains('(?<blkBEF>')) {
       return _StructuralRegexKind.specBareFluent;
+    }
+    if (pattern == _specLifecycleLineBlockPattern) {
+      return _StructuralRegexKind.specLifecycleLineBlock;
+    }
+    if (pattern == _specStandaloneLifecycleBlockPattern) {
+      return _StructuralRegexKind.specStandaloneLifecycleBlock;
     }
     if (pattern.startsWith(r'(I|LS|LE|LX|E|EX|IT)[ \t]*(?<blkLB>') ||
         pattern.startsWith(r'(\w++)[ \t]*(?<blkLB>')) {
@@ -668,6 +681,10 @@ RegExp? _compileSpecStructuralPrefix(
         multiLine: true,
         unicode: unicode,
       );
+    case _StructuralRegexKind.specLifecycleLineBlock:
+      return RegExp(r'^[ \t]*(I|LS|LE|LX|E|EX|IT)[ \t]*', multiLine: true);
+    case _StructuralRegexKind.specStandaloneLifecycleBlock:
+      return RegExp(r'^[ \t]*', multiLine: true);
     case _StructuralRegexKind.specLifecycleBlock:
       return RegExp(
         pattern.startsWith('(I|')
@@ -826,6 +843,15 @@ final class _StructuralRegExp implements RegExp {
       ),
       _StructuralRegexKind.specBareBlock => _matchSpecBareBlock(input, start),
       _StructuralRegexKind.specBareFluent => _matchSpecBareFluent(input, start),
+      _StructuralRegexKind.specLifecycleLineBlock => _matchSpecBlock(
+        input,
+        start,
+        prefix: _specPrefix!,
+        blockName: 'blkLBL',
+        completeLine: true,
+      ),
+      _StructuralRegexKind.specStandaloneLifecycleBlock =>
+        _matchSpecStandaloneLifecycleBlock(input, start),
       _StructuralRegexKind.specLifecycleBlock => _matchSpecBlock(
         input,
         start,
@@ -998,6 +1024,7 @@ final class _StructuralRegExp implements RegExp {
     int start, {
     required RegExp prefix,
     required String blockName,
+    bool completeLine = false,
   }) {
     final prefixMatch = prefix.matchAsPrefix(input, start);
     if (prefixMatch == null) {
@@ -1008,13 +1035,46 @@ final class _StructuralRegExp implements RegExp {
     if (blockEnd == null) {
       return null;
     }
+    final end = completeLine
+        ? _physicalLineMatchEnd(input, blockEnd)
+        : blockEnd;
+    if (end == null) {
+      return null;
+    }
     final block = input.substring(blockStart, blockEnd);
     return _match(
       input,
       start,
-      blockEnd,
-      [input.substring(start, blockEnd), prefixMatch.group(1), block],
+      end,
+      [input.substring(start, end), prefixMatch.group(1), block],
       named: {blockName: block},
+    );
+  }
+
+  _StructuralRegExpMatch? _matchSpecStandaloneLifecycleBlock(
+    String input,
+    int start,
+  ) {
+    final prefixMatch = _specPrefix!.matchAsPrefix(input, start);
+    if (prefixMatch == null) {
+      return null;
+    }
+    final blockStart = prefixMatch.end;
+    final blockEnd = _parseBalancedCodeBlock(input, blockStart);
+    if (blockEnd == null) {
+      return null;
+    }
+    final end = _physicalLineMatchEnd(input, blockEnd);
+    if (end == null) {
+      return null;
+    }
+    final block = input.substring(blockStart, blockEnd);
+    return _match(
+      input,
+      start,
+      end,
+      [input.substring(start, end), block],
+      named: {'blkSLB': block},
     );
   }
 

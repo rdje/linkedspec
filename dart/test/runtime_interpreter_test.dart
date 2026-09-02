@@ -1565,14 +1565,18 @@ Top::
   test('statement next skips to the next rule iteration', () {
     final engine = _engine(r'''
 Top::
- /skip/ { next() }
+ -> Skip { next() }
  /keep/
  E { return(match_text()) }
+
+Skip:
+ /skip/
 ''');
 
     final result = engine.parse('skipkeep');
 
     expect(result.value, 'keep');
+    expect(result.cursorCodeUnit, 8);
   });
 
   test('wraps action runtime failures with structured diagnostics', () {

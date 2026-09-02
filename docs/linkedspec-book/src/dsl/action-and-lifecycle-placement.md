@@ -25,6 +25,11 @@ Use the simple forms first. Reach for the advanced lifecycle hooks only when the
 
 Unless an example includes a `Top::` wrapper, treat it as a rule-paragraph fragment. Complete public examples should use the two-rule shape: a no-regex `::` entry rule dispatches to one or more normal `:` rules that own the regexes. In a dispatched normal rule, `I { ... }` sees the entry match, while `-> Rule[index] { ... }` actions run for later local slots in that rule.
 
+Selecting a rule starts that rule's handler and mode-driven loop; selection alone does not test the selected rule's
+own regex. Each outgoing `->` match edge selects the regex slot owned by its written target. A rule's own regex
+participates when a self-edge or another incoming match edge targets that rule. A blind `=>` call enters its target
+without selecting one of the target's regex slots.
+
 Action-edge identity comes from the written target, never adjacency. `-> Document[2]` selects regex
 slot 2 declared by `Document`, even when the enclosing rule is `Top`; a regex line immediately before
 the edge does not trigger its block. Compact same-rule examples below place declarations and edges in
@@ -96,7 +101,7 @@ both blocks below as one ordered `I` preamble rather than letting the second ove
 Top::
  I { set(out, "first") }
  { return(cat(out, "-second")) }
- /x/ -> Done
+ -> Done
 
 Done:
  /()/
@@ -255,6 +260,10 @@ token : /[A-Za-z_]\w*/
  I.set(text, lowercase(entry_text()))
   .return(hash("kind", "token", "text", text))
 ```
+
+Whitespace may appear between a fluent method name and its argument list. For example, `I.return ([])` and
+`I.return([])` both mean `return([])`. This is useful when aligning compact lifecycle calls in tabular grammar
+sources; the dot before the method remains required.
 
 That form is equivalent to `I { text = lowercase(entry_text()); return(...) }`: each method in the
 chain executes as a lifecycle statement for the receiver marker.

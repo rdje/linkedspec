@@ -1,5 +1,5 @@
 Top::
- /x/ -> Done { set(value, "ok"); set(out, value); name = value; return(array(out, name)) }
+ -> Done { set(value, "ok"); set(out, value); name = value; return(array(out, name)) }
 
 Done::
  /[a-z]+/
