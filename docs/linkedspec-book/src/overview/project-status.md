@@ -1117,12 +1117,13 @@ Three backbone items tracked major structural modernization — all done:
   selected carrier correction preserves fresh function-local scope through explicit-target `set` and caller-
   scoped `.with`; no caller capture or arbitrary bang functions were added. Focused 58 tests, 105 write / 167 base
   + 592 composition mutations, and Phase 0 1,032/1,032 pass. Rust adds 9/9 permanent native/serde/generated/
-  emitted/independently compiled proofs plus 3/3 private failure-state tests. Dart `.19.4.1` now implements the
-  nested-write half through native, reconstructed `SpecFile`, generated-plan, emitted-source, independently
-  analyzed/executed caller-package, and primary-CLI routes. Its complete gate passes 450/450 package tests, 24
-  managed temporary owners / 47 locked packages, CLI 66/66 in default and POSIX environments, and corpus 105/105.
-  Dart `map_leaves!` `.19.4.2`, Julia/Lua implementations, portable/public admission, and recurring proof remain
-  pending under `.19.4.2-.9`.
+  emitted/independently compiled proofs plus 3/3 private failure-state tests. Dart `.19.4.1-.2` now implements
+  both mechanisms through native, reconstructed `SpecFile`, generated-plan, emitted-source, independently
+  analyzed/executed caller-package, and primary-CLI routes. The Dart bang carrier is typed end to end; receiver
+  protection follows stable binding identity across direct, nested, helper, array-end, and binding-target
+  pipeline writes. Its complete gate passes 461/461 package tests, 25 managed temporary owners / 47 locked
+  packages, CLI 66/66 in default and POSIX environments, and corpus 105/105. Julia/Lua implementations,
+  portable/public admission, and recurring proof remain pending under `.19.5-.9`; Julia `.19.5.1` is next.
   All 13 ordinary harray names close at 103/103 through `.4.3.5.5` on both Lua ABIs. Sorted arrays continue
   through array receivers, count/membership are terminal, and mutation-result/pure-receiver prose is guarded.
   Eager blocks, lazy inline controls, attached/marker if and switch, and attached while close through

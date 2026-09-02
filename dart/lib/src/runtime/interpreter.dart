@@ -51,6 +51,9 @@ final class RuntimeDiagnostic {
     this.actualRegexIndex,
     this.operation,
     this.binding,
+    this.method,
+    this.attempt,
+    this.expectedKinds,
     this.segmentIndex,
     this.path,
     this.actualKind,
@@ -88,6 +91,9 @@ final class RuntimeDiagnostic {
   final int? actualRegexIndex;
   final String? operation;
   final String? binding;
+  final String? method;
+  final String? attempt;
+  final List<String>? expectedKinds;
   final int? segmentIndex;
   final List<Object?>? path;
   final String? actualKind;
@@ -125,6 +131,9 @@ final class RuntimeDiagnostic {
     if (actualRegexIndex != null) 'actual_regex_index': actualRegexIndex,
     if (operation != null) 'operation': operation,
     if (binding != null) 'binding': binding,
+    if (method != null) 'method': method,
+    if (attempt != null) 'attempt': attempt,
+    if (expectedKinds != null) 'expected_kinds': expectedKinds,
     if (segmentIndex != null) 'segment_index': segmentIndex,
     if (path != null) 'path': _copyValue(path),
     if (actualKind != null) 'actual_kind': actualKind,
@@ -326,6 +335,7 @@ final class LinkedSpecRuntimeEngine {
     try {
       validateCompiledRegexSlotIdentities(compiledSpec);
       validateNestedWriteSerializedState(compiledSpec);
+      validateReceiverMutationSerializedState(compiledSpec);
     } on SpecValidationException catch (error) {
       final diagnostic = error.diagnostic;
       throw RuntimeInterpreterException(
@@ -344,6 +354,10 @@ final class LinkedSpecRuntimeEngine {
       final code =
           error.message.startsWith('nested_write_serialized_state_invalid:')
           ? 'nested_write_serialized_state_invalid'
+          : error.message.startsWith(
+              'receiver_mutation_serialized_state_invalid:',
+            )
+          ? 'receiver_mutation_serialized_state_invalid'
           : 'compiled_state_invalid';
       throw RuntimeInterpreterException(
         error.message,
@@ -781,6 +795,9 @@ final class LinkedSpecRuntimeEngine {
     int? actualRegexIndex,
     String? operation,
     String? binding,
+    String? method,
+    String? attempt,
+    List<String>? expectedKinds,
     int? segmentIndex,
     List<Object?>? path,
     String? actualKind,
@@ -823,6 +840,9 @@ final class LinkedSpecRuntimeEngine {
       actualRegexIndex: actualRegexIndex,
       operation: operation,
       binding: binding,
+      method: method,
+      attempt: attempt,
+      expectedKinds: expectedKinds,
       segmentIndex: segmentIndex,
       path: path,
       actualKind: actualKind,
@@ -3438,8 +3458,15 @@ final class LinkedSpecRuntimeEngine {
           'invalid callable-codeblock literal in rule $ruleLabel: $code',
         );
       case ActionAssignScalarExpr(:final name, :final value):
+        _assertReceiverMutationWritable(
+          context,
+          name,
+          'assign',
+          _bindingTargetSpan(expr.sourceSpan, name),
+        );
         if (value is ActionRecognitionCheckpointExpr) {
           context.recognitionCheckpoint(ruleLabel, name);
+          context.ensureBindingIdentity(name);
           context.variables[name] = null;
           context.arrays.remove(name);
           context.hashes.remove(name);
@@ -3453,11 +3480,18 @@ final class LinkedSpecRuntimeEngine {
             currentEdge: currentEdge,
           ),
         );
+        context.ensureBindingIdentity(name);
         context.variables[name] = stored;
         context.arrays.remove(name);
         context.hashes.remove(name);
         return _copyValue(stored);
       case ActionAssignArrayAppendExpr(:final name, :final value):
+        _assertReceiverMutationWritable(
+          context,
+          name,
+          'append',
+          _bindingTargetSpan(expr.sourceSpan, name),
+        );
         final stored = _copyValue(
           _evaluateExpression(
             value,
@@ -3468,6 +3502,12 @@ final class LinkedSpecRuntimeEngine {
         );
         return _appendArrayValue(context, name, stored);
       case ActionAssignHashIndexExpr(:final name, :final key, :final value):
+        _assertReceiverMutationWritable(
+          context,
+          name,
+          'nested_write',
+          _bindingTargetSpan(expr.sourceSpan, name),
+        );
         return _assignHashIndex(
           context,
           name,
@@ -3481,11 +3521,24 @@ final class LinkedSpecRuntimeEngine {
         :final segments,
         :final value,
       ):
+        _assertReceiverMutationWritable(
+          context,
+          base,
+          'nested_write',
+          _bindingTargetSpan(expr.sourceSpan, base),
+        );
         return _writeNested(
           context,
           base,
           segments,
           value,
+          ruleLabel,
+          currentEdge,
+        );
+      case ActionReceiverMutationChainExpr():
+        return _evaluateReceiverMutationChain(
+          expr,
+          context,
           ruleLabel,
           currentEdge,
         );
@@ -3540,6 +3593,12 @@ final class LinkedSpecRuntimeEngine {
         :final textPlan,
         :final options,
       ):
+        _assertReceiverMutationWritable(
+          context,
+          target,
+          'assign',
+          _bindingTargetSpan(expr.sourceSpan, target),
+        );
         final marker = constructStagedParseJobMarker(
           authority: context.sourceAuthority,
           registers: context.registers,
@@ -3548,6 +3607,7 @@ final class LinkedSpecRuntimeEngine {
           options: options,
         );
         final stored = _copyValue(marker);
+        context.ensureBindingIdentity(target);
         context.variables[target] = stored;
         context.arrays.remove(target);
         context.hashes.remove(target);
@@ -3558,6 +3618,12 @@ final class LinkedSpecRuntimeEngine {
         :final topRule,
         :final span,
       ):
+        _assertReceiverMutationWritable(
+          context,
+          target,
+          'assign',
+          _bindingTargetSpan(expr.sourceSpan, target),
+        );
         final authority = context.progressiveExecution;
         if (authority == null) {
           throw ProgressiveDispatchException.missingRegistry(
@@ -3573,6 +3639,7 @@ final class LinkedSpecRuntimeEngine {
           transactionActive: context.hasActiveRecognitionTransaction,
         );
         final stored = _copyValue(value);
+        context.ensureBindingIdentity(target);
         context.variables[target] = stored;
         context.arrays.remove(target);
         context.hashes.remove(target);
@@ -3594,6 +3661,12 @@ final class LinkedSpecRuntimeEngine {
         context.recognitionRollback(ruleLabel, token);
         return null;
       case ActionObserveRecognitionExpr(:final target, :final rule):
+        _assertReceiverMutationWritable(
+          context,
+          target,
+          'assign',
+          _bindingTargetSpan(expr.sourceSpan, target),
+        );
         final observation = context.beginRecursiveObservation(rule);
         try {
           final child = currentEdge != null && currentEdge.target.label == rule
@@ -3705,6 +3778,233 @@ final class LinkedSpecRuntimeEngine {
     }
   }
 
+  Object? _evaluateReceiverMutationChain(
+    ActionReceiverMutationChainExpr expr,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    final receiver = expr.receiver;
+    if (!_hasRuntimeBinding(context, receiver.name)) {
+      final message =
+          "map_leaves! receiver binding '${receiver.name}' does not exist";
+      throw RuntimeInterpreterException(
+        message,
+        diagnostic: context.diagnostic(
+          stage: 'runtime_execution',
+          summary: 'Dart map_leaves! receiver mutation failed',
+          detail: message,
+          code: 'map_leaves_mutation_receiver_missing',
+          operation: 'map_leaves_mutation',
+          binding: receiver.name,
+          method: 'map_leaves',
+          sourceSpan: _receiverMutationSourceSpan(receiver.sourceSpan),
+        ),
+      );
+    }
+    final rootStorage = _rootStorageForWrite(context, receiver.name);
+    final snapshot = _copyValue(rootStorage.value);
+    if (snapshot is! Map && snapshot is! List) {
+      final actualKind = _nestedWriteValueKind(snapshot);
+      final message =
+          "map_leaves! receiver '${receiver.name}' must hold an harray or "
+          'array, got $actualKind';
+      throw RuntimeInterpreterException(
+        message,
+        diagnostic: context.diagnostic(
+          stage: 'runtime_execution',
+          summary: 'Dart map_leaves! receiver mutation failed',
+          detail: message,
+          code: 'map_leaves_mutation_receiver_kind_mismatch',
+          operation: 'map_leaves_mutation',
+          binding: receiver.name,
+          method: 'map_leaves',
+          expectedKinds: const ['harray', 'array'],
+          actualKind: actualKind,
+          sourceSpan: _receiverMutationSourceSpan(receiver.sourceSpan),
+        ),
+      );
+    }
+    final identity = context.activateReceiverMutation(receiver.name);
+    if (identity == null) {
+      _throwReceiverMutationReentrant(
+        context,
+        receiver.name,
+        'map_leaves!',
+        receiver.sourceSpan,
+      );
+    }
+
+    late final Object? rebuilt;
+    try {
+      rebuilt = snapshot is Map
+          ? _mapReceiverMutationHash(
+              _asHash(snapshot),
+              expr.mutation.callback.body,
+              context,
+              ruleLabel,
+              currentEdge,
+            )
+          : _mapReceiverMutationArray(
+              _asArray(snapshot),
+              expr.mutation.callback.body,
+              context,
+              ruleLabel,
+              currentEdge,
+            );
+      rootStorage.store(context, rebuilt);
+    } finally {
+      context.deactivateReceiverMutation(identity);
+    }
+
+    Object? result = _copyValue(rebuilt);
+    for (final call in expr.continuation) {
+      final trailingBlock =
+          call.args.isNotEmpty &&
+          call.args.last.value is ActionCodeblockArgumentExpr;
+      result = _evaluateFluentCall(
+        result,
+        ActionFluentCall(
+          method: call.method,
+          sourceMethod: call.sourceMethod,
+          args: call.args,
+          source: call.source,
+          sourceSpan: call.sourceSpan,
+          trailingBlockArg: trailingBlock,
+          receiverTrailingBlockArg: trailingBlock,
+        ),
+        context,
+        ruleLabel,
+        currentEdge: currentEdge,
+      );
+    }
+    return _copyValue(result);
+  }
+
+  Map<String, Object?> _mapReceiverMutationHash(
+    Map<String, Object?> root,
+    ActionBlock callback,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    Map<String, Object?> mapNode(Map<String, Object?> node, List<String> path) {
+      final result = <String, Object?>{};
+      final keys = node.keys.toList()..sort();
+      for (final key in keys) {
+        final value = node[key];
+        final nextPath = [...path, key];
+        result[key] = value is Map
+            ? mapNode(_asHash(value), nextPath)
+            : _evaluateReceiverMutationHashLeaf(
+                callback,
+                value,
+                key,
+                nextPath,
+                context,
+                ruleLabel,
+                currentEdge,
+              );
+      }
+      return result;
+    }
+
+    return mapNode(root, const []);
+  }
+
+  Object? _evaluateReceiverMutationHashLeaf(
+    ActionBlock callback,
+    Object? value,
+    String key,
+    List<String> path,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    final bindings = <_ScopedVariableBinding>[
+      context.enterScopedScalar('value', _copyValue(value)),
+      context.enterScopedScalar('key', key),
+      context.enterScopedScalar('path', [for (final item in path) item]),
+      context.enterScopedScalar('depth', path.length),
+    ];
+    try {
+      return _copyValue(
+        _evaluateBlockValue(
+          callback,
+          context,
+          ruleLabel,
+          currentEdge: currentEdge,
+        ),
+      );
+    } finally {
+      for (final binding in bindings.reversed) {
+        context.exitScopedVariable(binding);
+      }
+    }
+  }
+
+  List<Object?> _mapReceiverMutationArray(
+    List<Object?> root,
+    ActionBlock callback,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    List<Object?> mapNode(List<Object?> node, List<int> path) {
+      final result = <Object?>[];
+      for (final (index, value) in node.indexed) {
+        final nextPath = [...path, index];
+        result.add(
+          value is List
+              ? mapNode(_asArray(value), nextPath)
+              : _evaluateReceiverMutationArrayLeaf(
+                  callback,
+                  value,
+                  index,
+                  nextPath,
+                  context,
+                  ruleLabel,
+                  currentEdge,
+                ),
+        );
+      }
+      return result;
+    }
+
+    return mapNode(root, const []);
+  }
+
+  Object? _evaluateReceiverMutationArrayLeaf(
+    ActionBlock callback,
+    Object? value,
+    int index,
+    List<int> path,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    final bindings = <_ScopedVariableBinding>[
+      context.enterScopedScalar('value', _copyValue(value)),
+      context.enterScopedScalar('index', index),
+      context.enterScopedScalar('path', [for (final item in path) item]),
+      context.enterScopedScalar('depth', path.length),
+    ];
+    try {
+      return _copyValue(
+        _evaluateBlockValue(
+          callback,
+          context,
+          ruleLabel,
+          currentEdge: currentEdge,
+        ),
+      );
+    } finally {
+      for (final binding in bindings.reversed) {
+        context.exitScopedVariable(binding);
+      }
+    }
+  }
+
   Object? _evaluateCall(
     ActionCallExpr call,
     _RuntimeExecutionContext context,
@@ -3735,8 +4035,7 @@ final class LinkedSpecRuntimeEngine {
     }
     if (statementContext &&
         _executeArrayStringTransformStatement(
-          helperName,
-          positionalArgs,
+          call,
           context,
           ruleLabel,
           currentEdge,
@@ -3826,9 +4125,21 @@ final class LinkedSpecRuntimeEngine {
                 currentEdge: currentEdge,
               );
       case 'set':
-        return _callSet(positionalArgs, context, ruleLabel, currentEdge);
+        return _callSet(
+          positionalArgs,
+          call.sourceSpan,
+          context,
+          ruleLabel,
+          currentEdge,
+        );
       case 'push':
-        return _callPush(positionalArgs, context, ruleLabel, currentEdge);
+        return _callPush(
+          positionalArgs,
+          call.sourceSpan,
+          context,
+          ruleLabel,
+          currentEdge,
+        );
       case 'array':
         return _callArray(positionalArgs, context, ruleLabel, currentEdge);
       case 'hash':
@@ -3862,6 +4173,7 @@ final class LinkedSpecRuntimeEngine {
       case 'split':
         return _callSplitFromExpressions(
           positionalArgs,
+          call.sourceSpan,
           context,
           ruleLabel,
           currentEdge,
@@ -4861,6 +5173,7 @@ final class LinkedSpecRuntimeEngine {
 
   Object? _callSet(
     List<ActionExpr> args,
+    ActionSourceSpan callSpan,
     _RuntimeExecutionContext context,
     String ruleLabel,
     _CurrentActionEdge? currentEdge,
@@ -4868,6 +5181,18 @@ final class LinkedSpecRuntimeEngine {
     if (args.length < 2) {
       return null;
     }
+    final variableTarget = _variableName(args[0]);
+    if (variableTarget == null) {
+      throw RuntimeInterpreterException(
+        'set target in rule $ruleLabel must be a variable',
+      );
+    }
+    _assertReceiverMutationWritable(
+      context,
+      variableTarget,
+      'helper:set',
+      callSpan,
+    );
     final value = _copyValue(
       _evaluateExpression(
         args[1],
@@ -4876,12 +5201,7 @@ final class LinkedSpecRuntimeEngine {
         currentEdge: currentEdge,
       ),
     );
-    final variableTarget = _variableName(args[0]);
-    if (variableTarget == null) {
-      throw RuntimeInterpreterException(
-        'set target in rule $ruleLabel must be a variable',
-      );
-    }
+    context.ensureBindingIdentity(variableTarget);
     context.variables[variableTarget] = value;
     context.arrays.remove(variableTarget);
     context.hashes.remove(variableTarget);
@@ -4889,23 +5209,45 @@ final class LinkedSpecRuntimeEngine {
   }
 
   bool _executeArrayStringTransformStatement(
-    String helperName,
-    List<ActionExpr> args,
+    ActionCallExpr call,
     _RuntimeExecutionContext context,
     String ruleLabel,
     _CurrentActionEdge? currentEdge,
   ) {
-    if (!const {
-          'trim_each',
-          'filter_nonempty',
-          'lowercase_each',
-          'uppercase_each',
-        }.contains(helperName) ||
-        args.length != 1) {
+    final helperName = canonicalActionHelperName(call.name);
+    final args = call.args.map((arg) => arg.value).toList();
+    final expectedArity = switch (helperName) {
+      'trim_each' ||
+      'filter_nonempty' ||
+      'lowercase_each' ||
+      'uppercase_each' ||
+      'uniq' => 1,
+      'split_each' || 'filter_match' => 2,
+      _ => null,
+    };
+    if (expectedArity == null || args.length != expectedArity) {
       return false;
     }
-    final bareTarget = _variableName(args.single);
+    final bareTarget = _variableName(args.first);
     if (bareTarget == null) {
+      return false;
+    }
+    _assertReceiverMutationWritable(
+      context,
+      bareTarget,
+      'helper:$helperName',
+      call.sourceSpan,
+    );
+    if (!const {
+      'trim_each',
+      'filter_nonempty',
+      'lowercase_each',
+      'uppercase_each',
+    }.contains(helperName)) {
+      // FUTURE-PARITY-BACKLOG.5 owns Dart write-back for split_each,
+      // filter_match, and uniq. They are still binding-target mutation
+      // attempts for active-receiver guard precedence, but their ordinary
+      // behavior remains unchanged until that separately owned repair.
       return false;
     }
     final transformed = _callArrayHelperFromExpressions(
@@ -4921,11 +5263,18 @@ final class LinkedSpecRuntimeEngine {
 
   Object? _callPush(
     List<ActionExpr> args,
+    ActionSourceSpan callSpan,
     _RuntimeExecutionContext context,
     String ruleLabel,
     _CurrentActionEdge? currentEdge,
   ) {
     if (args.isEmpty) {
+      _assertReceiverMutationWritable(
+        context,
+        ruleLabel,
+        'helper:push',
+        callSpan,
+      );
       final child = _requireCurrentEdgeChild(currentEdge, context, ruleLabel);
       return _appendArrayValue(context, ruleLabel, child.value);
     }
@@ -4933,6 +5282,12 @@ final class LinkedSpecRuntimeEngine {
     if (args.length == 1 && currentEdge != null) {
       final childRule = _variableName(args[0]);
       if (childRule != null && compiledSpec.rule(childRule) != null) {
+        _assertReceiverMutationWritable(
+          context,
+          ruleLabel,
+          'helper:push',
+          callSpan,
+        );
         final child = childRule == currentEdge.target.label
             ? _executeActionEdgeChild(currentEdge, context)
             : _executeRule(childRule, 0, context);
@@ -4945,6 +5300,7 @@ final class LinkedSpecRuntimeEngine {
           'push target in rule $ruleLabel must be a variable',
         );
       }
+      _assertReceiverMutationWritable(context, target, 'helper:push', callSpan);
       final child = _executeActionEdgeChild(currentEdge, context);
       context.retv = child.value;
       return _appendArrayValue(context, target, child.value);
@@ -4958,6 +5314,13 @@ final class LinkedSpecRuntimeEngine {
           compiledSpec.rule(firstName) != null) {
         final childIndex = _literalNonNegativeInteger(args[1]);
         if (secondTarget != null || childIndex != null) {
+          final target = secondTarget ?? ruleLabel;
+          _assertReceiverMutationWritable(
+            context,
+            target,
+            'helper:push',
+            callSpan,
+          );
           final child = firstName == currentEdge.target.label
               ? _executeActionEdgeChild(currentEdge, context)
               : _executeRule(firstName, 0, context);
@@ -4979,6 +5342,7 @@ final class LinkedSpecRuntimeEngine {
           'push target in rule $ruleLabel must be a variable',
         );
       }
+      _assertReceiverMutationWritable(context, target, 'helper:push', callSpan);
       final value = _copyValue(
         _evaluateExpression(
           args[1],
@@ -5304,12 +5668,22 @@ final class LinkedSpecRuntimeEngine {
       return null;
     }
     final target = bareTarget;
+    final mutationSpan = ActionSourceSpan(
+      start: receiver.sourceSpan.start,
+      end: call.sourceSpan.end,
+    );
     switch (call.method) {
       case 'push_back':
       case 'push_front':
         if (call.args.length != 1) {
           return null;
         }
+        _assertReceiverMutationWritable(
+          context,
+          target,
+          call.method,
+          mutationSpan,
+        );
         final value = _copyValue(
           _evaluateExpression(
             call.args.single.value,
@@ -5330,6 +5704,12 @@ final class LinkedSpecRuntimeEngine {
         if (call.args.isNotEmpty) {
           return null;
         }
+        _assertReceiverMutationWritable(
+          context,
+          target,
+          call.method,
+          mutationSpan,
+        );
         final array = _bareArrayForMutation(context, target);
         if (array.isNotEmpty) {
           if (call.method == 'pop_back') {
@@ -5365,6 +5745,12 @@ final class LinkedSpecRuntimeEngine {
       return false;
     }
     final target = bareTarget;
+    _assertReceiverMutationWritable(
+      context,
+      target,
+      'helper:set_key',
+      call.sourceSpan,
+    );
     final key = _stringValue(
       _evaluateExpression(
         args[1],
@@ -5403,6 +5789,12 @@ final class LinkedSpecRuntimeEngine {
     if (target == null || target.isEmpty) {
       return false;
     }
+    _assertReceiverMutationWritable(
+      context,
+      target,
+      'helper:$helperName',
+      call.sourceSpan,
+    );
     final source = _scalarString(context.variables[target], nullAsEmpty: true);
     if (source == null) {
       return false;
@@ -5444,6 +5836,7 @@ final class LinkedSpecRuntimeEngine {
       replacement,
       global: flags.contains('g'),
     );
+    context.ensureBindingIdentity(target);
     context.variables[target] = updated;
     context.arrays.remove(target);
     context.hashes.remove(target);
@@ -5452,12 +5845,19 @@ final class LinkedSpecRuntimeEngine {
 
   Object? _callSplitFromExpressions(
     List<ActionExpr> args,
+    ActionSourceSpan callSpan,
     _RuntimeExecutionContext context,
     String ruleLabel,
     _CurrentActionEdge? currentEdge,
   ) {
     final bareTarget = args.length >= 3 ? _variableName(args.first) : null;
     if (bareTarget != null) {
+      _assertReceiverMutationWritable(
+        context,
+        bareTarget,
+        'helper:split',
+        callSpan,
+      );
       final source = _evaluateExpression(
         args[1],
         context,
@@ -7556,6 +7956,8 @@ final class _RuntimeExecutionContext {
   final Map<String, List<Object?>> arrays = <String, List<Object?>>{};
   final Map<String, Map<String, Object?>> hashes =
       <String, Map<String, Object?>>{};
+  final Map<String, int> _bindingIdentities = <String, int>{};
+  final Map<int, String> _activeReceiverMutations = <int, String>{};
   final Map<String, Map<String, int>> markBuckets =
       <String, Map<String, int>>{};
   final Set<String> activeRuleEntries = <String>{};
@@ -7571,6 +7973,7 @@ final class _RuntimeExecutionContext {
   final List<_RecursiveObservationScope> _recursiveObservationScopes =
       <_RecursiveObservationScope>[];
   int _ruleLocalBindingSuppressionDepth = 0;
+  int _nextBindingIdentity = 1;
 
   RuntimeMatchRegisters registers;
   Object? retv;
@@ -8265,10 +8668,49 @@ final class _RuntimeExecutionContext {
     variables.clear();
     arrays.clear();
     hashes.clear();
+    _bindingIdentities.clear();
+  }
+
+  int ensureBindingIdentity(String name) {
+    return _bindingIdentities.putIfAbsent(name, () => _nextBindingIdentity++);
+  }
+
+  int bindFreshIdentity(String name) {
+    final identity = _nextBindingIdentity++;
+    _bindingIdentities[name] = identity;
+    return identity;
+  }
+
+  int? visibleBindingIdentity(String name) {
+    if (!variables.containsKey(name) &&
+        !arrays.containsKey(name) &&
+        !hashes.containsKey(name)) {
+      return null;
+    }
+    return ensureBindingIdentity(name);
+  }
+
+  int? activateReceiverMutation(String name) {
+    final identity = visibleBindingIdentity(name);
+    if (identity == null || _activeReceiverMutations.containsKey(identity)) {
+      return null;
+    }
+    _activeReceiverMutations[identity] = name;
+    return identity;
+  }
+
+  void deactivateReceiverMutation(int identity) {
+    _activeReceiverMutations.remove(identity);
+  }
+
+  String? activeReceiverMutationFor(String name) {
+    final identity = visibleBindingIdentity(name);
+    return identity == null ? null : _activeReceiverMutations[identity];
   }
 
   void bindUserFunctionParam(String name, Object? value) {
     final copied = _copyValue(value);
+    bindFreshIdentity(name);
     variables[name] = copied;
     if (copied is List) {
       arrays[name] = _asArray(copied);
@@ -8347,6 +8789,9 @@ final class _RuntimeExecutionContext {
     int? actualRegexIndex,
     String? operation,
     String? binding,
+    String? method,
+    String? attempt,
+    List<String>? expectedKinds,
     int? segmentIndex,
     List<Object?>? path,
     String? actualKind,
@@ -8380,6 +8825,9 @@ final class _RuntimeExecutionContext {
       actualRegexIndex: actualRegexIndex,
       operation: operation,
       binding: binding,
+      method: method,
+      attempt: attempt,
+      expectedKinds: expectedKinds,
       segmentIndex: segmentIndex,
       path: path,
       actualKind: actualKind,
@@ -8396,6 +8844,7 @@ final class _RuntimeExecutionContext {
       name: name,
       snapshot: _VariableSnapshot.capture(this, name),
     );
+    bindFreshIdentity(name);
     variables[name] = _copyValue(value);
     arrays.remove(name);
     hashes.remove(name);
@@ -8587,6 +9036,8 @@ final class _VariableSnapshot {
     required this.array,
     required this.hadHash,
     required this.hash,
+    required this.hadIdentity,
+    required this.identity,
   });
 
   factory _VariableSnapshot.capture(
@@ -8606,6 +9057,8 @@ final class _VariableSnapshot {
             in (context.hashes[name] ?? const <String, Object?>{}).entries)
           entry.key: _copyValue(entry.value),
       },
+      hadIdentity: context._bindingIdentities.containsKey(name),
+      identity: context._bindingIdentities[name],
     );
   }
 
@@ -8615,6 +9068,8 @@ final class _VariableSnapshot {
   final List<Object?> array;
   final bool hadHash;
   final Map<String, Object?> hash;
+  final bool hadIdentity;
+  final int? identity;
 
   void restore(_RuntimeExecutionContext context, String name) {
     if (hadVariable) {
@@ -8634,6 +9089,11 @@ final class _VariableSnapshot {
     } else {
       context.hashes.remove(name);
     }
+    if (hadIdentity) {
+      context._bindingIdentities[name] = identity!;
+    } else {
+      context._bindingIdentities.remove(name);
+    }
   }
 }
 
@@ -8642,6 +9102,7 @@ final class _RuntimeStoreSnapshot {
     required this.variables,
     required this.arrays,
     required this.hashes,
+    required this.bindingIdentities,
   });
 
   factory _RuntimeStoreSnapshot.capture(_RuntimeExecutionContext context) {
@@ -8661,12 +9122,14 @@ final class _RuntimeStoreSnapshot {
               hashEntry.key: _copyValue(hashEntry.value),
           },
       },
+      bindingIdentities: Map<String, int>.from(context._bindingIdentities),
     );
   }
 
   final Map<String, Object?> variables;
   final Map<String, List<Object?>> arrays;
   final Map<String, Map<String, Object?>> hashes;
+  final Map<String, int> bindingIdentities;
 
   void restore(_RuntimeExecutionContext context) {
     context.clearStores();
@@ -8684,6 +9147,7 @@ final class _RuntimeStoreSnapshot {
             hashEntry.key: _copyValue(hashEntry.value),
         },
     });
+    context._bindingIdentities.addAll(bindingIdentities);
   }
 }
 
@@ -8708,6 +9172,7 @@ final class _NestedWriteRoot {
   final bool present;
 
   void store(_RuntimeExecutionContext context, Object? value) {
+    context.ensureBindingIdentity(name);
     switch (kind) {
       case _NestedWriteRootKind.scalar:
         context.variables[name] = _copyValue(value);
@@ -9028,6 +9493,7 @@ List<Object?> _storeBareArray(
   List<Object?> values,
 ) {
   final updated = [for (final item in values) _copyValue(item)];
+  context.ensureBindingIdentity(name);
   if (context.arrays.containsKey(name) &&
       !context.variables.containsKey(name)) {
     context.arrays[name] = updated;
@@ -9104,6 +9570,7 @@ Map<String, Object?> _storeBareHash(
   Map<String, Object?> values,
 ) {
   final updated = _asHash(values);
+  context.ensureBindingIdentity(name);
   if (context.hashes.containsKey(name) &&
       !context.variables.containsKey(name)) {
     context.hashes[name] = updated;
@@ -9225,6 +9692,7 @@ Object? _assignHashIndex(
       } else {
         list[index] = storedValue;
       }
+      context.ensureBindingIdentity(name);
       context.variables[name] = list;
       return _copyValue(list);
     }
@@ -9248,6 +9716,55 @@ Object? _assignHashIndex(
     ),
   );
   return _setBareHashEntry(context, name, storedKey, storedValue);
+}
+
+ActionSourceSpan _bindingTargetSpan(ActionSourceSpan sourceSpan, String name) {
+  return ActionSourceSpan(
+    start: sourceSpan.start,
+    end: sourceSpan.start + name.runes.length,
+  );
+}
+
+Map<String, Object?> _receiverMutationSourceSpan(ActionSourceSpan span) {
+  return {...span.toJson(), 'unit': 'unicode_scalar', 'provenance': 'authored'};
+}
+
+void _assertReceiverMutationWritable(
+  _RuntimeExecutionContext context,
+  String target,
+  String attempt,
+  ActionSourceSpan sourceSpan,
+) {
+  final activeBinding = context.activeReceiverMutationFor(target);
+  if (activeBinding == null) {
+    return;
+  }
+  _throwReceiverMutationReentrant(context, activeBinding, attempt, sourceSpan);
+}
+
+Never _throwReceiverMutationReentrant(
+  _RuntimeExecutionContext context,
+  String binding,
+  String attempt,
+  ActionSourceSpan sourceSpan,
+) {
+  final message =
+      "cannot write active map_leaves! receiver binding '$binding' from "
+      'its callback';
+  throw RuntimeInterpreterException(
+    message,
+    diagnostic: context.diagnostic(
+      stage: 'runtime_execution',
+      summary: 'Dart map_leaves! receiver mutation failed',
+      detail: message,
+      code: 'receiver_mutation_reentrant',
+      operation: 'map_leaves_mutation',
+      binding: binding,
+      method: 'map_leaves',
+      attempt: attempt,
+      sourceSpan: _receiverMutationSourceSpan(sourceSpan),
+    ),
+  );
 }
 
 _NestedWriteRoot _rootStorageForWrite(

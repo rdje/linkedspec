@@ -10,6 +10,29 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-02 — FUTURE-PARITY-BACKLOG.19.4.2 — implement Dart map-leaves receiver mutation
+
+- Added the dedicated typed Dart `receiver_mutation_chain` carrier for exact
+  `binding.map_leaves!() { block }` syntax, including typed receiver, callback, continuation, source, and
+  Unicode-scalar spans. Invalid bang spellings and corrupt serialized state now fail through exact diagnostics.
+- Implemented detached original-shape harray/array traversal, copied callback frames, result replacement without
+  revisit, atomic one-time receiver publication, detached return, and commit-before-continuation behavior.
+- Added stable runtime binding identities and guarded every direct, nested, helper, array-end, and binding-target
+  pipeline write route before operand/segment/RHS evaluation. Distinct same-spelling scoped identities and
+  unrelated writes remain legal; callback failure releases the guard without publishing a partial receiver.
+- Preserved the existing `FUTURE-PARITY-BACKLOG.5` ownership of Dart statement write-back gaps for
+  `split_each`, `filter_match`, and `uniq`; this slice recognizes and guards those attempts without widening their
+  ordinary behavior.
+- Corrected the composition contract's two stale `Top:: /x/ -> Done` current-boundary sources to zero-regex
+  `Top:: -> Done`. This locks the established semantic that entering `Top` runs its loop while the outgoing edge
+  selects and matches `Done`'s regex; no expected runtime value or mutation inventory changed.
+- Added permanent Dart native/reconstructed/generated/emitted/independent-caller/CLI proof. The exact contract
+  remains 4 valid / 14 invalid / 5 exclusions / 10 successes / 8 failures, 167 base + 592 composition mutations;
+  the write checker remains 5/7/11/16/3/3 plus 105 mutations. Dart format 111/0, analysis, package 461/461,
+  storage 25 owners / 47 packages, CLI 66/66 twice, and corpus 105/105 pass.
+- The dedicated root-selection proof passes Perl 12/12, Rust/Dart 1/1, Julia 137/137, both Lua ABIs 139, the exact
+  5-backend x 2-environment x 6-case CLI matrix, and all generated/capability/language ledgers.
+
 ## 2026-09-02 — FUTURE-PARITY-BACKLOG.19.4.1 — implement Dart write vivification
 
 - Unified every authored Dart bracket write, including one-segment assignment, under one

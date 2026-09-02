@@ -241,6 +241,7 @@ CompiledSpec compileSpec(
     validateCompiledRegexSlotIdentities(compiled);
     validateNoRemovedAggregateSelectors(compiled);
     validateNestedWriteSerializedState(compiled);
+    validateReceiverMutationSerializedState(compiled);
     validateProgressiveSpanDispatchContract(compiled);
     validateStagedParseJobContract(compiled);
     _validateRecursiveObservationPolicy(compiled);
@@ -529,6 +530,189 @@ void validateNestedWriteSerializedState(CompiledSpec compiled) {
           );
         }
       }
+    }
+    for (final entry in value.entries) {
+      visit(entry.value, '$context.${entry.key}');
+    }
+  }
+
+  for (final label in compiled.compiledRuleOrder) {
+    final rule = compiled.rulesByLabel[label];
+    if (rule == null) {
+      continue;
+    }
+    for (final (index, payload) in rule.actionPayloads.indexed) {
+      visit(payload.actionAst.toJson(), '$label.action_payloads[$index]');
+    }
+  }
+}
+
+/// Reject caller-constructed receiver-mutation nodes that do not retain the
+/// exact typed v1 carrier and authored source projections.
+void validateReceiverMutationSerializedState(CompiledSpec compiled) {
+  Never invalid(String context, String reason) {
+    throw CompiledSpecException(
+      'receiver_mutation_serialized_state_invalid: $context $reason',
+    );
+  }
+
+  Map<String, Object?> object(Object? value, String context) {
+    if (value is! Map<String, Object?>) {
+      invalid(context, 'must be an object');
+    }
+    return value;
+  }
+
+  ({int start, int end}) span(Object? value, String context) {
+    final encoded = object(value, context);
+    final start = encoded['start'];
+    final end = encoded['end'];
+    if (encoded.length != 2 ||
+        start is! int ||
+        end is! int ||
+        start < 0 ||
+        end < start) {
+      invalid(context, 'must be one valid half-open span');
+    }
+    return (start: start, end: end);
+  }
+
+  String? projection(
+    String source,
+    ({int start, int end}) sourceSpan,
+    ({int start, int end}) childSpan,
+  ) {
+    final relativeStart = childSpan.start - sourceSpan.start;
+    final relativeEnd = childSpan.end - sourceSpan.start;
+    final characters = source.runes.toList(growable: false);
+    if (relativeStart < 0 ||
+        relativeEnd < relativeStart ||
+        relativeEnd > characters.length) {
+      return null;
+    }
+    return String.fromCharCodes(characters.sublist(relativeStart, relativeEnd));
+  }
+
+  void validateNode(Map<String, Object?> node, String context) {
+    final source = node['source'];
+    if (source is! String) {
+      invalid(context, 'source must be a string');
+    }
+    final sourceSpan = span(node['source_span'], '$context.source_span');
+    final receiver = object(node['receiver'], '$context.receiver');
+    final receiverName = receiver['name'];
+    final receiverSource = receiver['source'];
+    final receiverSpan = span(
+      receiver['source_span'],
+      '$context.receiver.source_span',
+    );
+    if (receiver['kind'] != 'binding_reference' ||
+        receiverName is! String ||
+        !RegExp(r'^[A-Za-z_][A-Za-z0-9_]*$').hasMatch(receiverName) ||
+        receiverSource != receiverName ||
+        projection(source, sourceSpan, receiverSpan) != receiverSource) {
+      invalid(context, 'receiver binding reference is invalid');
+    }
+
+    final mutation = object(node['mutation'], '$context.mutation');
+    final mutationSource = mutation['source'];
+    final mutationSpan = span(
+      mutation['source_span'],
+      '$context.mutation.source_span',
+    );
+    final methodSpan = span(
+      mutation['method_span'],
+      '$context.mutation.method_span',
+    );
+    final argsSpan = span(mutation['args_span'], '$context.mutation.args_span');
+    if (mutation['kind'] != 'receiver_mutation_call' ||
+        mutation['method'] != 'map_leaves' ||
+        mutation['source_method'] != 'map_leaves!' ||
+        mutationSource is! String ||
+        projection(source, sourceSpan, mutationSpan) != mutationSource ||
+        projection(source, sourceSpan, methodSpan) != 'map_leaves!' ||
+        !RegExp(
+          r'^\(\s*\)$',
+        ).hasMatch(projection(source, sourceSpan, argsSpan) ?? '')) {
+      invalid(context, 'mutation call is invalid');
+    }
+
+    final callback = object(mutation['callback'], '$context.mutation.callback');
+    final callbackSource = callback['source'];
+    final callbackSpan = span(
+      callback['source_span'],
+      '$context.mutation.callback.source_span',
+    );
+    final body = object(callback['body'], '$context.mutation.callback.body');
+    final bodySource = body['source'];
+    final bodySpan = span(
+      body['source_span'],
+      '$context.mutation.callback.body.source_span',
+    );
+    if (callback['kind'] != 'block_value' ||
+        callbackSource is! String ||
+        projection(source, sourceSpan, callbackSpan) != callbackSource ||
+        body['kind'] != 'action_block' ||
+        bodySource is! String ||
+        body['statements'] is! List<Object?> ||
+        projection(source, sourceSpan, bodySpan) != bodySource ||
+        callbackSpan.start + 1 != bodySpan.start ||
+        bodySpan.end + 1 != callbackSpan.end) {
+      invalid(context, 'callback block is invalid');
+    }
+
+    final continuation = node['continuation'];
+    if (continuation is! List<Object?>) {
+      invalid(context, 'continuation must be a list');
+    }
+    var priorEnd = mutationSpan.end;
+    for (final (index, rawCall) in continuation.indexed) {
+      final call = object(rawCall, '$context.continuation[$index]');
+      final callSource = call['source'];
+      final callMethod = call['method'];
+      final callSourceMethod = call['source_method'];
+      final callArgsSource = call['args_source'];
+      final callSpan = span(
+        call['source_span'],
+        '$context.continuation[$index].source_span',
+      );
+      final callArgsSpan = span(
+        call['args_span'],
+        '$context.continuation[$index].args_span',
+      );
+      if (call['kind'] != 'fluent_call' ||
+          callMethod is! String ||
+          callMethod.contains('!') ||
+          callSourceMethod != callMethod ||
+          callSource is! String ||
+          callArgsSource is! String ||
+          call['args'] is! List<Object?> ||
+          callSpan.start <= priorEnd ||
+          projection(source, sourceSpan, callSpan) != callSource ||
+          projection(source, sourceSpan, callArgsSpan) != callArgsSource ||
+          !callSource.startsWith(callMethod)) {
+        invalid(context, 'continuation call $index is invalid');
+      }
+      priorEnd = callSpan.end;
+    }
+    if ((continuation.isEmpty && mutationSpan.end != sourceSpan.end) ||
+        (continuation.isNotEmpty && priorEnd != sourceSpan.end)) {
+      invalid(context, 'terminal source span is invalid');
+    }
+  }
+
+  void visit(Object? value, String context) {
+    if (value is List<Object?>) {
+      for (final (index, item) in value.indexed) {
+        visit(item, '$context[$index]');
+      }
+      return;
+    }
+    if (value is! Map<String, Object?>) {
+      return;
+    }
+    if (value['kind'] == 'receiver_mutation_chain') {
+      validateNode(value, context);
     }
     for (final entry in value.entries) {
       visit(entry.value, '$context.${entry.key}');

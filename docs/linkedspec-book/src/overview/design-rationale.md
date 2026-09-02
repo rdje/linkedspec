@@ -105,14 +105,14 @@ tree.map_leaves!() {
 }
 ```
 
-The non-bang `map_leaves()` returns a rebuilt tree without changing `tree`. On Perl and Rust,
+The non-bang `map_leaves()` returns a rebuilt tree without changing `tree`. On Perl, Rust, and Dart,
 `map_leaves!()` now requires a bare named receiver, traverses an isolated snapshot using the receiver's existing
 root-kind rules, commits the rebuilt tree only after complete success, rebinds `tree`, and returns the updated
 value. The callback's `path` stays a complete copied root-to-leaf path; `value` stays a scoped value rather than a
 writable reference. Replacements are based on the original tree shape and are not recursively revisited in the
-same call. Dart, Julia, and Lua implementation and portable admission remain pending.
+same call. Julia and Lua implementation and portable admission remain pending.
 
-The neutral contract makes those details executable and Perl/Rust consume it. Hash roots
+The neutral contract makes those details executable and Perl/Rust/Dart consume it. Hash roots
 recurse only through hashes in sorted-key depth-first order; arrays inside them are leaves. Array roots recurse
 only through arrays in zero-based depth-first order; hashes inside them are leaves. Every callback gets its own
 detached `value` and complete `path`, plus `depth` and the root-kind selector `key` or `index`. The callback's
@@ -147,8 +147,8 @@ intended guard/ordering observations; it does not add caller capture or arbitrar
 
 ### Composing nested writes with `map_leaves!`
 
-The third neutral contract composes the two mechanisms rather than inventing another mutation rule. On Perl, a
-callback may vivify its detached `value` and return the updated result as the leaf replacement. For a hash-root
+The third neutral contract composes the two mechanisms rather than inventing another mutation rule. On Perl,
+Rust, and Dart, a callback may vivify its detached `value` and return the updated result as the leaf replacement. For a hash-root
 traversal, an array value is a cross-kind leaf, so this future example invokes the callback once and does not
 revisit the newly returned array subtree:
 
@@ -205,9 +205,9 @@ re-entrancy diagnostics retain authored half-open Unicode-scalar spans.
 
 `walk_leaves!`, `reduce_leaves!`, function-form bang calls, and arbitrary `!`-suffixed identifiers are not part of
 that direction. They would save no meaningful ceremony or would advertise mutation without a distinct coherent
-contract. Perl and Rust implement nested creation and `map_leaves!`; Dart currently implements nested creation
-only. The verified non-bang control remains identical on Perl, Rust, Dart, Julia, and Lua; Dart, Julia, PUC Lua,
-and LuaJIT retain their generic parser-invocation failure for the bang form.
+contract. Perl, Rust, and Dart implement nested creation and `map_leaves!`. The verified non-bang control remains
+identical on Perl, Rust, Dart, Julia, and Lua; Julia, PUC Lua, and LuaJIT retain their generic parser-invocation
+failure for the bang form.
 ADR `0036`, the two mechanism
 contracts plus their shared composition contract under `capability_conformance/`, and backlog `.19.1-.19.9` own
 the remaining backend and admission work.

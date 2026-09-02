@@ -1,14 +1,13 @@
 # MEMORY
 
-- activation_commit: `1247316d7d51c60243a21fb65209f3b7f851207d` — exact clean Rust closeout commit from which
-  `FUTURE-PARITY-BACKLOG.19.4.1` was activated task-tree-first.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.19.4.1 - implement Dart write vivification`; typed carrier,
-  runtime semantics, durable sync, complete Dart proof, canonical signoff, atomic commit, and clean handoff are complete.
-- active_work_unit: none — clean handoff after `.19.4.1`; Dart `.19.4.2` is the next task-tree-first activation.
-- next_action: from the committed clean boundary, activate `FUTURE-PARITY-BACKLOG.19.4.2`, retrieve the frozen
-  receiver-mutation/composition contracts and Dart binding/traversal owners, then implement only that Dart slice.
-- in_flight_uncommitted: none. All `.19.4.1` code, tests, documentation, exact staged canonical verification,
-  commit, brief clearing, generated-output cleanup, and background-job consumption are complete.
+- activation_commit: `6f0ae8706c497497fcfd5e085753aebb1ae310b8` — exact clean Dart vivification commit from which `FUTURE-PARITY-BACKLOG.19.4.2` was activated task-tree-first.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.19.4.2 - implement Dart map leaves mutation`; typed carrier,
+  identity-guarded runtime, durable sync, focused proof, atomic commit, and clean handoff are complete.
+- active_work_unit: none — clean handoff after `.19.4.2`; Julia `.19.5.1` is the next task-tree-first activation.
+- next_action: from the committed clean boundary, activate `FUTURE-PARITY-BACKLOG.19.5.1`, retrieve the frozen
+  write-vivification contract and Julia typed-path/runtime/generated owners, then implement only that Julia slice.
+- in_flight_uncommitted: none. All `.19.4.2` code, tests, documentation, focused verification, commit, brief
+  clearing, generated-output cleanup, and background-job consumption are complete.
 - blockers: none.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -24,12 +23,12 @@
   results, exact diagnostics/spans, invocation-local absent/null presence, and read exclusions at 105 rejected
   mutations. Rust and Dart preserve it through serialized/reconstructed/generated/emitted carriers; Julia/Lua and
   public capability admission remain pending.
-- current_map_leaves_mutation: `linkedspec-map-leaves-mutation-v1` is implemented on Perl and Rust with one bang-only mutation AST,
+- current_map_leaves_mutation: `linkedspec-map-leaves-mutation-v1` is implemented on Perl, Rust, and Dart with one bang-only mutation AST,
   resolved receiver identity guard, root-kind original-shape traversal, copied frames, atomic rebind, detached
   result, post-commit continuation, exact diagnostics/exclusions, and 167 base mutations. Receiver callback writes
   through assignment, nested write/bang, mutation helpers, array-end methods, and binding-target array pipelines
-  are guarded. Rust preserves the typed node through serde/generated/emitted carriers. Dart/Julia/Lua and public
-  admission remain pending.
+  are guarded. Rust and Dart preserve the typed node through serialized/generated/emitted carriers. Julia/Lua and
+  public admission remain pending.
 - current_rule_entry_dispatch_invariant: selecting a rule enters its handler and starts its mode-driven execution;
   entry alone never tests that rule's own regex. An outgoing `->` match edge selects its target rule's regex. Rust now has
   both the direct-entry negative lock and a zero-regex-parent positive trace with typed `target_rule=Done`; the
@@ -42,7 +41,8 @@
   one wholly unmanipulated unique provenance-tagged control first-launched in 0.41 seconds. No repo repair applies.
 - current_mutation_composition_contract: `linkedspec-write-map-leaves-composition-v1` digest-binds both unchanged
   mechanisms across eight writes, six callback cases, one continuation, and 592 current composition mutations;
-  Perl and Rust execute both halves; Dart/Julia/Lua remain pending.
+  Perl, Rust, and Dart execute both halves; Julia/Lua remain pending. Current-boundary roots use zero-regex
+  `Top:: -> Done`, so the parent loop selects and matches `Done`'s regex rather than an inert parent regex.
 - current_map_leaves_scope_resolution: option A preserves pure functions. Helper-mediated rejection uses inline
   explicit-target `set(tree, ...)`; post-commit receiver-write proof uses caller-scoped `.with()`. No implicit
   caller capture or arbitrary user-defined bang method is admitted.
@@ -57,4 +57,4 @@
 - current_change_history_capacity: immutable segment `4987` is the twenty-fourth manifest record; ADR `0098`
   authorizes exactly 26 collection files / 25 manifest lines with every byte and aggregate ceiling unchanged.
 - latest_bootstrap_read: 2026-09-02 — README, roadmaps, codebase, mdBook, memory architecture, task-tree doctrine,
-  `.19.4.1`, write-vivification Knowledge/ADR, verification policy, commit workflow, and Git state read.
+  `.19.4.2`, mutation/composition Knowledge/ADR, verification policy, commit workflow, and Git state read.

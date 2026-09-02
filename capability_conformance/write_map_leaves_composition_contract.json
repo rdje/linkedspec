@@ -263,8 +263,8 @@
   ],
   "current_boundary": {
     "id": "composed_source_stops_at_bang_token",
-    "source": "Top::\n /x/ -> Done { tree = { \"leaf\" : [] }; return(tree.map_leaves!() { value[0][\"path\"] = path; return(value) }) }\n\nDone::\n /[a-z]+/\n",
-    "nonbang_control_source": "Top::\n /x/ -> Done { tree = { \"leaf\" : [] }; return(tree.map_leaves() { return(value) }) }\n\nDone::\n /[a-z]+/\n",
+    "source": "Top::\n -> Done { tree = { \"leaf\" : [] }; return(tree.map_leaves!() { value[0][\"path\"] = path; return(value) }) }\n\nDone::\n /[a-z]+/\n",
+    "nonbang_control_source": "Top::\n -> Done { tree = { \"leaf\" : [] }; return(tree.map_leaves() { return(value) }) }\n\nDone::\n /[a-z]+/\n",
     "expected_nonbang_result": {"leaf": []},
     "failure_stage": "action_parse_before_callback_nested_write_lowering",
     "routes": [

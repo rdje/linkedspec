@@ -38,6 +38,11 @@ export 'src/action/action_ast.dart'
         ActionPositionalArgument,
         ActionRawExpr,
         ActionRegexLiteralExpr,
+        ActionReceiverMutationBindingReference,
+        ActionReceiverMutationCall,
+        ActionReceiverMutationCallback,
+        ActionReceiverMutationChainExpr,
+        ActionReceiverMutationContinuationCall,
         RemovedAggregateSelector,
         ActionSourceSpan,
         ActionStatement,
@@ -125,6 +130,7 @@ export 'src/compiler/compiled_spec.dart'
         linkedSpecRootRuleSelectionContract,
         validateCompiledRegexSlotIdentities,
         validateNestedWriteSerializedState,
+        validateReceiverMutationSerializedState,
         validateNoRemovedAggregateSelectors;
 export 'src/corpus/manifest_runner.dart'
     show

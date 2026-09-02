@@ -735,9 +735,10 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
 - **HOW:** `bash tools/run_python_project_data.sh tools/check_map_leaves_mutation_contract.py`.
 - **OUTPUT:** `map_leaves! mutation contract: 4 valid syntax, 14 invalid syntax, 5 exclusions, 10 success, 8 pre-commit failures, continuation/shadow/guard/nonbang/detachment proof, 6 callback compositions, 1 continuation composition, 167 base + 592 composition mutations rejected; future behavior remains unadmitted`.
 - **CURRENT BOUNDARY:** use the exact `terse_13_3_array_tree_traversal_receiver_blocks` fixture as the five-backend
-  non-bang control. Perl and Rust implement the exact bang contract and project it permanently through
-  `t/map_leaves_mutation_perl_contract.t` and `rust/linkedspec-runtime/tests/map_leaves_mutation_contract.rs`;
-  Dart/Julia/Lua keep their generic nonzero parser-invocation failure. The `.19.2.2` audit also proved that unparameterized user
+  non-bang control. Perl, Rust, and Dart implement the exact bang contract and project it permanently through
+  `t/map_leaves_mutation_perl_contract.t`, `rust/linkedspec-runtime/tests/map_leaves_mutation_contract.rs`, and
+  `dart/test/map_leaves_mutation_contract_test.dart`; Julia/Lua keep their generic nonzero parser-invocation
+  failure. The `.19.2.2` audit also proved that unparameterized user
   functions cannot carry caller-binding mutation under the admitted fresh-local function contract. The director-
   selected correction uses explicit-target `set` and caller-scoped `.with`, without implicit capture.
 
@@ -747,6 +748,9 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   authorities and supplies eight nested-write actions across six callback cases plus one continuation case. It
   distinguishes callback-local, unrelated, active-receiver, shadow, and post-commit identities; proves exact
   effect/diagnostic order; and keeps receiver atomicity separate from ordinary write effects.
+- **ROOT SHAPE:** current-runtime controls use `Top:: -> Done` with no parent regex. Entering `Top` starts its
+  handler loop; that edge selects `Done`'s regex. A parent `/x/` would be inert for `-> Done` and would weaken the
+  intended dispatch proof.
 - **WHEN:** changing either future contract or implementing callback/continuation write behavior in any backend.
   Run both checkers; the write checker validates every embedded write in isolation, while the mutation checker
   executes the composed traversal/guard/commit state machine and rejects every scalar and container-shape drift.

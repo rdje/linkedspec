@@ -30,6 +30,19 @@ own regex. Each outgoing `->` match edge selects the regex slot owned by its wri
 participates when a self-edge or another incoming match edge targets that rule. A blind `=>` call enters its target
 without selecting one of the target's regex slots.
 
+For example, this entry rule's loop tests `Done`'s `/[a-z]+/`; `Top` needs and owns no regex for that dispatch:
+
+```text
+Top::
+ -> Done
+
+Done:
+ /[a-z]+/
+```
+
+Adding `/x/` to `Top` would not make that regex participate in `-> Done`. It would need a self-edge or another
+incoming edge that explicitly targets `Top`.
+
 Action-edge identity comes from the written target, never adjacency. `-> Document[2]` selects regex
 slot 2 declared by `Document`, even when the enclosing rule is `Top`; a regex line immediately before
 the edge does not trigger its block. Compact same-rule examples below place declarations and edges in

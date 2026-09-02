@@ -9,6 +9,28 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-09-02 (`FUTURE-PARITY-BACKLOG.19.4.2` — Dart `map_leaves!`): parse this surface before ordinary fluent
+  methods and retain a dedicated receiver/callback/continuation carrier through compiler, reconstruction,
+  generated-plan, emitter, independent-caller, CLI, and runtime boundaries. Generic method lowering cannot
+  preserve its addressability, atomicity, guard, and diagnostic contract.
+- The receiver guard must key stable binding identity, not variable spelling. Ordinary writes retain a binding's
+  identity; fresh function parameters and callback-local bindings receive distinct identities and restore any
+  shadowed identity at scope exit.
+- Traverse a deep copy of the original root under root-kind rules, copy every callback field, collect detached
+  replacement results, and publish once. Always release the guard in `finally`; release it before continuations so
+  a later continuation observes the committed root and cannot roll it back.
+- Guard at the write owner before evaluating operands, path segments, or RHS expressions. The Dart coverage spans
+  assignment, append, nested write/bang, `set`/`set_key`/`push`/`split`, array-end methods, regex substitution,
+  and all binding-target array pipelines.
+- Do not repair an adjacent behavior while instrumenting its guard. Dart still lacks ordinary statement write-
+  back for `split_each`, `filter_match`, and `uniq`, owned by `FUTURE-PARITY-BACKLOG.5`; the guard recognizes those
+  authored attempts only while the target identity is active.
+- Rule selection and regex matching are different operations. `Top:: -> Done` enters `Top` and lets its loop
+  select `Done`'s regex; a `/x/` owned by `Top` has no role in that edge. The composition fixture's stale parent
+  regex masked this proof and was removed without changing expected observations or inventory cardinality.
+- Complete Dart evidence is format 111/0, strict analysis, 461/461 tests, 25 managed temporary owners / 47 locked
+  packages, CLI 66/66 in default and POSIX environments, and corpus 105/105. The neutral authorities retain 167
+  base + 592 composition mutations and 105 write mutations.
 - 2026-09-02 (`FUTURE-PARITY-BACKLOG.19.4.1` — Dart write vivification): authored one-segment and multi-segment
   writes must share the same typed carrier. Keeping `ActionAssignHashIndexExpr` only for programmatic/legacy input
   prevents authored spelling from deciding harray versus array before the selector evaluates.

@@ -124,6 +124,11 @@ final class _ActionParser {
       return assignment;
     }
 
+    final receiverMutation = _parseReceiverMutationChain(text, start);
+    if (receiverMutation != null) {
+      return receiverMutation;
+    }
+
     final chain = _parseFluentChain(text, start);
     if (chain != null) {
       return chain;
@@ -1160,6 +1165,274 @@ final class _ActionParser {
       sourceSpan: _span(start, start + text.length),
       receiver: receiver,
       calls: calls,
+    );
+  }
+
+  /// Parse the one reserved v1 bang-method surface without widening ordinary
+  /// identifiers or fluent calls to accept `!`.
+  ActionExpr? _parseReceiverMutationChain(String text, int start) {
+    final functionForm = RegExp(r'^map_leaves!\s*\(').firstMatch(text);
+    if (functionForm != null) {
+      _receiverMutationSyntaxError(
+        code: 'bang_method_function_form_invalid',
+        start: start,
+        end: start + 'map_leaves!'.length,
+        message:
+            'map_leaves! is receiver-only; use '
+            'binding.map_leaves!() { ... }',
+      );
+    }
+
+    final segments = _splitTopLevelFluentSegments(text);
+    if (segments.length <= 1) {
+      return null;
+    }
+    final bangPattern = RegExp(r'^([A-Za-z_][A-Za-z0-9_]*)(\s*)(!+)');
+    int? mutationIndex;
+    RegExpMatch? bangMatch;
+    for (var index = 1; index < segments.length; index += 1) {
+      final match = bangPattern.firstMatch(segments[index].text);
+      if (match != null) {
+        mutationIndex = index;
+        bangMatch = match;
+        break;
+      }
+    }
+    if (mutationIndex == null || bangMatch == null) {
+      return null;
+    }
+
+    final mutationSegment = segments[mutationIndex];
+    var dot = mutationSegment.start - 1;
+    while (dot >= 0 && text[dot].trim().isEmpty) {
+      dot -= 1;
+    }
+    if (dot < 0 || text[dot] != '.') {
+      return null;
+    }
+    final receiverText = _trimWithOffsets(text.substring(0, dot), start);
+    final method = bangMatch.group(1)!;
+    final separatingWhitespace = bangMatch.group(2)!;
+    final bangs = bangMatch.group(3)!;
+    final methodStart = start + mutationSegment.start;
+    final methodEnd = methodStart + method.length;
+    final bangStart = methodEnd + separatingWhitespace.length;
+    final bangEnd = bangStart + bangs.length;
+    final sourceMethod = '$method$separatingWhitespace$bangs';
+
+    if (method != 'map_leaves') {
+      _receiverMutationSyntaxError(
+        code: 'bang_method_unknown',
+        start: methodStart,
+        end: bangEnd,
+        message: "unsupported bang method '$sourceMethod'",
+      );
+    }
+    if (separatingWhitespace.isNotEmpty) {
+      _receiverMutationSyntaxError(
+        code: 'bang_method_suffix_invalid',
+        start: methodStart,
+        end: bangEnd,
+        message: 'the bang suffix must immediately follow map_leaves',
+      );
+    }
+    if (bangs.length != 1) {
+      _receiverMutationSyntaxError(
+        code: 'bang_method_suffix_invalid',
+        start: methodStart,
+        end: bangEnd,
+        message: 'map_leaves! accepts exactly one bang suffix',
+      );
+    }
+    if (!_isIdentifier(receiverText.text)) {
+      _receiverMutationSyntaxError(
+        code: 'receiver_mutation_receiver_not_addressable',
+        start: receiverText.start,
+        end: receiverText.end,
+        message:
+            'receiver mutation requires one bare uniform-binding identifier',
+      );
+    }
+    if (_nestedWriteReservedRoots.contains(receiverText.text)) {
+      _receiverMutationSyntaxError(
+        code: 'receiver_mutation_receiver_reserved',
+        start: receiverText.start,
+        end: receiverText.end,
+        message:
+            "receiver mutation cannot target reserved binding '${receiverText.text}'",
+      );
+    }
+
+    final mutationText = mutationSegment.text;
+    var cursor = bangMatch.end;
+    while (cursor < mutationText.length &&
+        mutationText[cursor].trim().isEmpty) {
+      cursor += 1;
+    }
+    final argsOpen = cursor;
+    if (argsOpen >= mutationText.length || mutationText[argsOpen] != '(') {
+      _receiverMutationSyntaxError(
+        code: 'map_leaves_mutation_arguments_invalid',
+        start: methodStart + argsOpen,
+        end: methodStart + argsOpen,
+        message: 'map_leaves! expects empty parentheses before its callback',
+      );
+    }
+    final argsClose = _findMatchingDelimiter(mutationText, argsOpen, '(', ')');
+    if (argsClose == null) {
+      _receiverMutationSyntaxError(
+        code: 'map_leaves_mutation_arguments_invalid',
+        start: methodStart + argsOpen,
+        end: start + mutationSegment.end,
+        message: 'map_leaves! expects empty parentheses before its callback',
+      );
+    }
+    if (mutationText.substring(argsOpen + 1, argsClose).trim().isNotEmpty) {
+      _receiverMutationSyntaxError(
+        code: 'map_leaves_mutation_arguments_invalid',
+        start: methodStart + argsOpen,
+        end: methodStart + argsClose + 1,
+        message: 'map_leaves! expects empty parentheses before its callback',
+      );
+    }
+    cursor = argsClose + 1;
+    while (cursor < mutationText.length &&
+        mutationText[cursor].trim().isEmpty) {
+      cursor += 1;
+    }
+    if (cursor >= mutationText.length || mutationText[cursor] != '{') {
+      _receiverMutationSyntaxError(
+        code: 'map_leaves_mutation_callback_missing',
+        start: methodStart,
+        end: methodStart + cursor,
+        message: 'map_leaves! requires one immediate trailing callback block',
+      );
+    }
+    final callbackOpen = cursor;
+    final callbackClose = _findMatchingDelimiter(
+      mutationText,
+      callbackOpen,
+      '{',
+      '}',
+    );
+    if (callbackClose == null ||
+        mutationText.substring(callbackClose + 1).trim().isNotEmpty) {
+      _receiverMutationSyntaxError(
+        code: 'map_leaves_mutation_callback_missing',
+        start: methodStart,
+        end: start + mutationSegment.end,
+        message: 'map_leaves! requires one immediate trailing callback block',
+      );
+    }
+    final callbackBodyStart = methodStart + callbackOpen + 1;
+    final callbackBodySource = mutationText.substring(
+      callbackOpen + 1,
+      callbackClose,
+    );
+    final callbackBody = _child(
+      callbackBodySource,
+      callbackBodyStart,
+      characterSpans: true,
+    ).parseBlock();
+
+    final continuation = <ActionReceiverMutationContinuationCall>[];
+    for (var index = mutationIndex + 1; index < segments.length; index += 1) {
+      final segment = segments[index];
+      final continuationBang = bangPattern.firstMatch(segment.text);
+      if (continuationBang != null) {
+        final continuationStart = start + segment.start;
+        _receiverMutationSyntaxError(
+          code: 'receiver_mutation_continuation_bang_invalid',
+          start: continuationStart,
+          end: continuationStart + continuationBang.end,
+          message:
+              'a receiver-mutation chain continuation must use an existing '
+              'non-bang fluent call',
+        );
+      }
+      final segmentStart = start + segment.start;
+      final continuationParser = _child(
+        segment.text,
+        segmentStart,
+        characterSpans: true,
+      );
+      final parsed = continuationParser._parseFluentCallSegment(
+        segment.text,
+        segmentStart,
+        start + segment.end,
+        allowBareIdentifier: false,
+      );
+      final attached = _splitAttachedBlock(segment.text);
+      final head = _trimWithOffsets(
+        attached?.head ?? segment.text,
+        segmentStart,
+      );
+      final callee = _parseCallee(head.text);
+      final open = _findTopLevelOpenParen(head.text);
+      final close = open == null
+          ? null
+          : _findMatchingDelimiter(head.text, open, '(', ')');
+      if (parsed == null || callee == null || open == null || close == null) {
+        return ActionRawExpr(
+          source: text,
+          sourceSpan: _characterSpan(start, start + text.length),
+          reason: 'invalid_receiver_mutation_continuation',
+        );
+      }
+      continuation.add(
+        ActionReceiverMutationContinuationCall(
+          source: segment.text,
+          sourceSpan: _characterSpan(segmentStart, start + segment.end),
+          method: parsed.method,
+          sourceMethod: parsed.sourceMethod ?? parsed.method,
+          argsSource: head.text.substring(open + 1, close),
+          argsSpan: _characterSpan(head.start + open + 1, head.start + close),
+          args: parsed.args,
+        ),
+      );
+    }
+
+    return ActionReceiverMutationChainExpr(
+      source: text,
+      sourceSpan: _characterSpan(start, start + text.length),
+      receiver: ActionReceiverMutationBindingReference(
+        source: receiverText.text,
+        sourceSpan: _characterSpan(receiverText.start, receiverText.end),
+        name: receiverText.text,
+      ),
+      mutation: ActionReceiverMutationCall(
+        source: mutationText,
+        sourceSpan: _characterSpan(methodStart, start + mutationSegment.end),
+        method: 'map_leaves',
+        sourceMethod: 'map_leaves!',
+        methodSpan: _characterSpan(methodStart, bangEnd),
+        argsSpan: _characterSpan(
+          methodStart + argsOpen,
+          methodStart + argsClose + 1,
+        ),
+        callback: ActionReceiverMutationCallback(
+          source: mutationText.substring(callbackOpen, callbackClose + 1),
+          sourceSpan: _characterSpan(
+            methodStart + callbackOpen,
+            methodStart + callbackClose + 1,
+          ),
+          body: callbackBody,
+        ),
+      ),
+      continuation: List.unmodifiable(continuation),
+    );
+  }
+
+  Never _receiverMutationSyntaxError({
+    required String code,
+    required int start,
+    required int end,
+    required String message,
+  }) {
+    throw ActionParseException(
+      code: code,
+      sourceSpan: _characterSpan(start, end),
+      message: message,
     );
   }
 

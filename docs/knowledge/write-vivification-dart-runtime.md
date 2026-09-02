@@ -13,7 +13,7 @@ answers:
   - "how does Dart reject a malformed nested write carrier"
   - "are Dart nested write binding result input and RHS values detached"
 date: 2026-09-02
-status: implemented under FUTURE-PARITY-BACKLOG.19.4.1; Dart map_leaves! and portable/public admission pending
+status: implemented under FUTURE-PARITY-BACKLOG.19.4.1; Dart map_leaves! now implemented; portable/public admission pending
 tags: [dart, dsl, actionir, assignment, autovivification, diagnostics, generated-source, cli, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.19.4.1 replaces authored Dart one-segment assign_hash_index and parser-tagged multi-segment access with ActionWritePathSegment plus one ActionAssignNestedAccessExpr. The permanent contract test projects 5 AST / 7 syntax / 11 success / 16 structural-failure / 3 expression-failure / 3 read-exclusion rows, exact evaluation effects, same-binding composition, detachment, function presence, astral Unicode spans, malformed-carrier rejection, SpecFile JSON reconstruction, native/generated-plan/emitted-source/primary-CLI execution, and independently analyzes/runs the emitted caller package. The complete Dart gate passes format 110/0, strict analysis, 450/450 tests, 24 managed temporary owners / 47 locked packages, CLI 66/66 in default and POSIX environments, and corpus 105/105."
 reverify: "bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py && bash tools/run_dart_local.sh"
@@ -47,9 +47,9 @@ direct runtime and generated source/plan boundaries, so programmatic carriers fa
 
 The same node executes after `SpecFile` JSON reconstruction, through a validated generated rule plan, through
 fresh emitted Dart source independently analyzed and executed in a managed caller package, and through the Dart
-primary CLI. Reads remain unchanged and non-creating. This leaf does not implement Dart `map_leaves!` and does not
-admit a portable/public capability; those boundaries remain owned by `.19.4.2` and `.19.7-.19.9`.
+primary CLI. Reads remain unchanged and non-creating. Dart `map_leaves!` has since composed with these writes under
+`.19.4.2`; portable/public capability remains owned by `.19.7-.19.9`.
 
 Related: [[write-vivification-neutral-contract]], [[terse-nested-value-path-assignment]],
 [[write-vivification-perl-reference]], [[write-vivification-rust-runtime]],
-[[write-map-leaves-neutral-composition]], and ADR `0036`.
+[[write-map-leaves-neutral-composition]], [[map-leaves-mutation-dart-runtime]], and ADR `0036`.

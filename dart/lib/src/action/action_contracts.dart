@@ -823,6 +823,21 @@ final class _ActionContractResolver {
         );
         _visitWritePathSegments(segments);
         visitExpr(value);
+      case ActionReceiverMutationChainExpr(
+        mutation: final mutation,
+        :final continuation,
+      ):
+        visitBlock(mutation.callback.body);
+        for (final call in continuation) {
+          _resolveHelperCall(
+            name: call.method,
+            source: call.source,
+            sourceSpan: call.sourceSpan,
+            surface: 'receiver_method',
+            args: call.args,
+          );
+          _visitArgs(call.args);
+        }
       case ActionBlockValueExpr(:final block):
         visitBlock(block);
       case ActionContextualCodeblockCandidateExpr():

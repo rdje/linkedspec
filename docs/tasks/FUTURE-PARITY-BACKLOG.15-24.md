@@ -1563,12 +1563,13 @@
   Commit: `not required`; `.19.3.4.0` records the evidence-backed closeout.
 
 - ID: `FUTURE-PARITY-BACKLOG.19.4`
-  Status: `in progress; .19.4.1 complete; .19.4.2 next`
+  Status: `done; closed by .19.4.2` (2026-09-02)
   Goal: Implement the unchanged v1 contract on Dart across native and supported generated/emitted routes.
   Children: `.19.4.1`, `.19.4.2`
   Dependencies: `.19.3`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `focused-signoff-complete`; both Dart mechanisms and the parent-loop/target-regex invariant pass
+    native/generated/direct-dependent proof; Julia `.19.5.1` is the next independent backend leaf.
+  Commit: `FUTURE-PARITY-BACKLOG.19.4.2 - implement Dart map leaves mutation`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.4.1`
   Status: `done; canonical-signoff-complete` (2026-09-02; task-tree-first from exact clean Rust closeout commit
@@ -1642,11 +1643,94 @@
   Commit: `FUTURE-PARITY-BACKLOG.19.4.1 - implement Dart write vivification`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.4.2`
-  Status: `pending`
+  Status: `done; focused-signoff-complete` (2026-09-02; task-tree-first from exact clean Dart nested-write commit
+    `6f0ae8706c497497fcfd5e085753aebb1ae310b8`; no push)
   Goal: Implement Dart `map_leaves!` through typed parsed/emitted state and runtime.
   Dependencies: `.19.4.1`
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused` — this leaf changes only the already-ratified Dart private implementation and its
+    direct neutral/generated consumers. Julia/Lua, portable capability, public examples, recurring cross-backend
+    admission, and the push boundary remain owned by `.19.5-.9`.
+  Focused checks: unchanged neutral checker and exact Dart projection of all 4 valid syntax, 14 invalid syntax,
+    5 exclusions, 10 successes, 8 pre-commit failures, continuation/shadow/guard-release/nonbang/detachment proof,
+    167 base mutations, and 592 nested-write compositions; parser, compiler, reconstructed `SpecFile`, generated-
+    plan, emitted-source, independently executed caller, primary CLI, package, corpus, and storage dependents;
+    formatting/analyzer, Knowledge, task/index, bounded histories, memory, all nine doctrines, rendered mdBook,
+    cross-backend no-drift, and whitespace. Also lock the discovered composition-boundary fixture repair from an
+    inert `/x/ -> Done` root to the established zero-regex `-> Done` form on all six primary routes.
+  Canonical trigger: `none` — escalate only if verification requires cross-backend/public admission,
+    infrastructure/storage/doctrine movement, or a mandatory bounded-history rollover. Otherwise `.19.7-.9`
+    retain portable/public admission and the exact staged canonical/push boundary.
+  Acceptance: Parse only `IDENTIFIER.map_leaves!() { ACTION_BLOCK }` as the dedicated typed
+    `receiver_mutation_chain`, retaining receiver/call/callback/continuation structure and exact authored Unicode-
+    scalar spans through contracts, reconstructed `SpecFile`, generated plans, source emission, and an independent
+    emitted-source caller. Resolve one existing bare uniform-binding identity containing an harray or array;
+    traverse a detached original-shape snapshot in sorted-key or index order; provide detached `value`, complete
+    copied `path`, `depth`, and `key|index`; replace each leaf with the detached callback result without revisiting
+    replacement aggregates; then commit the rebuilt binding once and return a detached updated root before an
+    ordinary fluent continuation. Guard the resolved receiver identity during callbacks so direct, nested-write,
+    nested-bang, helper-mediated, array-end, and binding-target pipeline writes fail before operand/segment/RHS
+    evaluation with exact `receiver_mutation_reentrant`, while unrelated and distinct same-spelling shadow
+    identities remain legal. Callback/re-entrant failure leaves the receiver unchanged and releases the guard;
+    continuation failure keeps the prior commit. Preserve non-bang behavior and compose exactly with Dart
+    `.19.4.1` nested writes; reject malformed typed carriers; do not admit Julia/Lua or portable/public capability.
+  Ownership: `.19.4.2` owns Dart parser/compiler/runtime/carrier implementation, direct proof, Dart status/docs,
+    parent `.19.4` closeout, and the exact behavior-neutral stale root spelling discovered in the required frozen
+    composition boundary. It must not otherwise change the frozen neutral contracts, Julia/Lua behavior, public
+    current examples, capability/facade/schema/MCP surfaces, recurring cross-backend admission, or push state.
+  Checklist: [x] clean activation/task ownership [x] Knowledge/ADR and sibling-contract retrieval
+    [x] Toolbox-first Dart owner inventory [x] exact RED and stale-root cause through frozen neutral contract
+    [x] typed parser/compiler/reconstructed/generated/emitted carrier [x] atomic identity-guarded runtime
+    [x] base/composition/generated/CLI proof [x] focused dependent/no-drift proof
+    [x] durable docs/Knowledge/live sync [x] focused signoff [x] atomic commit/brief/clean handoff.
+  Activation evidence: exact `git status --short --untracked-files=all` was empty at
+    `6f0ae8706c497497fcfd5e085753aebb1ae310b8`; `git_message_brief.txt` was zero bytes; the committed canonical
+    receipt matched that HEAD; `.19.4.1` was committed with all nine doctrine hooks after exact staged canonical
+    proof; reproducible mdBook output was absent; and a permission-authorized process census found no LinkedSpec
+    gate, Dart, Cargo, compiler, or test job in flight. The Knowledge Map routed this leaf to the frozen neutral
+    mutation/composition contracts, the pure-function carrier resolution, Dart uniform-binding owner, and the
+    completed Perl/Rust realization boundaries before behavior inspection.
+  Pre-implementation finding: the required primary-command RED exposed that the composition contract's
+    `current_boundary.source` and non-bang twin still used `Top:: /x/ -> Done`, contrary to the established
+    parent-loop/target-regex invariant and `.19.3.3`'s complete controlled-fixture cleanup. Explicit Dart CLI proof
+    with `--top-rule Top` compiled and invoked both stale forms successfully but returned `null`, because the inert
+    parent regex cannot serve as the child-owned dispatch control. Removing only `/x/` makes the non-bang twin
+    return `{"leaf":[]}` and the bang twin reach Dart's exact parser-invocation failure. This leaf owns correcting
+    that fixture and checker anchors across all six declared routes before using it as Dart implementation proof;
+    the frozen map/write semantics and route expectations do not change.
+  Implementation evidence: Dart parses only the exact bare-identifier bang form into
+    `ActionReceiverMutationChainExpr` with typed binding, callback, and ordinary-continuation records. Callable,
+    compiled-state, reconstruction, emitter, generated-plan, and direct runtime boundaries preserve or validate
+    the carrier with Unicode-scalar spans and reject corrupt state. The runtime maps a detached original-shape
+    snapshot under root-kind recursion, copies every callback/replacement boundary, publishes once, returns a
+    detached result, and starts continuation only after commit and guard release.
+  Identity/guard evidence: execution assigns stable visible-binding identities and fresh scoped/function-local
+    identities. Direct assignment/append, nested write/bang, `set`, `set_key`, `push`, `split`, four array-end
+    methods, regex substitution, and every binding-target array pipeline reject the active receiver before
+    operand/segment/RHS evaluation. Unrelated and distinct same-spelling identities remain legal. `finally`
+    releases the guard on callback, rebuild, or store failure. The separately owned ordinary Dart write-back gap
+    for `split_each`, `filter_match`, and `uniq` remains unchanged under backlog `.5`.
+  Dart proof evidence: eleven permanent tests project all 4 valid / 14 invalid / 5 excluded syntax rows, 10
+    successes, 8 failures, special state/continuation/shadow/guard/nonbang/detachment cases, six callback and one
+    continuation composition, malformed state, reconstructed `SpecFile`, native/generated-plan/emitted-source,
+    independently analyzed/executed caller, and primary CLI. The complete Dart gate passes format 111/0, strict
+    analysis, package 461/461, 25 managed temporary owners / 47 locked packages, CLI 66/66 in default and POSIX
+    environments, and corpus 105/105. Both neutral checkers retain 167 base + 592 composition and 105 write
+    mutation rejections.
+  Cross-backend/root evidence: unchanged Perl mutation proof passes all 8 top-level tests and unchanged Rust
+    mutation proof passes 9/9. The dedicated root-selection driver passes its 8/3/3 neutral contract with 54
+    mutations; Perl 12/12, Rust 1/1, Dart 1/1, Julia 137/137, PUC Lua 139, and LuaJIT 139 native admission; the
+    exact 5 backends x 2 environments x 6 selected primary matrix; and generated-source/capability/language
+    ledgers. This directly locks the corrected zero-regex `Top` loop selecting `Done`'s regex. The first Rust
+    focused build took 19m20s; its new binary then waited pre-main entirely at macOS `_dyld_start`, matching the
+    already-classified `.19.3.4.0` external per-artifact boundary. The one-second sample was consumed, its exact
+    off-volume report deleted, and residue proved absent; once entered, all nine tests ran in 29.23s.
+  Signoff evidence: Knowledge regenerates and validates at 930 facts / 7,904 keys; task/index, bounded histories,
+    memory/live status, architecture, both roadmaps, ADR/index, Toolbox, and the sole-facing mdBook are aligned.
+    The book renders successfully and its generated output is removed. `git diff --check`, 60-line memory, all
+    nine doctrines, exact project-storage routes, and residue checks pass. This remains a focused leaf: no
+    capability/public admission, infrastructure/doctrine movement, rollover, or push-boundary trigger occurred.
+  Verification: `focused-signoff-complete`
+  Commit: `FUTURE-PARITY-BACKLOG.19.4.2 - implement Dart map leaves mutation`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.5`
   Status: `pending`

@@ -284,13 +284,25 @@ Rule:
         reason: 'helper $name',
       );
     }
-    for (final name in ['Töp', '9method', 'trim!']) {
+    for (final name in ['Töp', '9method']) {
       expect(
         parseActionExpression('"x".$name()'),
         isA<ActionRawExpr>(),
         reason: 'fluent $name',
       );
     }
+    expect(
+      () => parseActionExpression('"x".trim!()'),
+      throwsA(
+        isA<ActionParseException>()
+            .having((error) => error.code, 'code', 'bang_method_unknown')
+            .having(
+              (error) => error.message,
+              'message',
+              "unsupported bang method 'trim!'",
+            ),
+      ),
+    );
 
     const lifecycleMarkers = ['I', 'LS', 'LE', 'LX', 'E', 'EX', 'IT'];
     final lifecycle = parseSpec('''

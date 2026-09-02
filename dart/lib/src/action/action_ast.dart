@@ -843,6 +843,115 @@ final class ActionAssignNestedAccessExpr extends ActionExpr {
   }
 }
 
+/// One bare, addressable uniform binding targeted by a receiver mutation.
+final class ActionReceiverMutationBindingReference extends ActionNode {
+  const ActionReceiverMutationBindingReference({
+    required super.source,
+    required super.sourceSpan,
+    required this.name,
+  }) : super(kind: 'binding_reference');
+
+  final String name;
+
+  @override
+  ActionJsonObject toJson() => {...baseJson(), 'name': name};
+}
+
+/// The immediate typed callback owned by `map_leaves!`.
+final class ActionReceiverMutationCallback extends ActionNode {
+  const ActionReceiverMutationCallback({
+    required super.source,
+    required super.sourceSpan,
+    required this.body,
+  }) : super(kind: 'block_value');
+
+  final ActionBlock body;
+
+  @override
+  ActionJsonObject toJson() => {...baseJson(), 'body': body.toJson()};
+}
+
+/// The sole v1 receiver-mutating call.
+final class ActionReceiverMutationCall extends ActionNode {
+  const ActionReceiverMutationCall({
+    required super.source,
+    required super.sourceSpan,
+    required this.method,
+    required this.sourceMethod,
+    required this.methodSpan,
+    required this.argsSpan,
+    required this.callback,
+  }) : super(kind: 'receiver_mutation_call');
+
+  final String method;
+  final String sourceMethod;
+  final ActionSourceSpan methodSpan;
+  final ActionSourceSpan argsSpan;
+  final ActionReceiverMutationCallback callback;
+
+  @override
+  ActionJsonObject toJson() => {
+    ...baseJson(),
+    'method': method,
+    'source_method': sourceMethod,
+    'method_span': methodSpan.toJson(),
+    'args_span': argsSpan.toJson(),
+    'callback': callback.toJson(),
+  };
+}
+
+/// One ordinary non-bang fluent call after receiver publication.
+final class ActionReceiverMutationContinuationCall extends ActionNode {
+  const ActionReceiverMutationContinuationCall({
+    required super.source,
+    required super.sourceSpan,
+    required this.method,
+    required this.sourceMethod,
+    required this.argsSource,
+    required this.argsSpan,
+    required this.args,
+  }) : super(kind: 'fluent_call');
+
+  final String method;
+  final String sourceMethod;
+  final String argsSource;
+  final ActionSourceSpan argsSpan;
+  final List<ActionArgument> args;
+
+  @override
+  ActionJsonObject toJson() => {
+    ...baseJson(),
+    'method': method,
+    'source_method': sourceMethod,
+    'args_source': argsSource,
+    'args_span': argsSpan.toJson(),
+    'args': [for (final argument in args) argument.toJson()],
+  };
+}
+
+/// One guarded receiver mutation followed by ordinary fluent continuation.
+final class ActionReceiverMutationChainExpr extends ActionExpr {
+  const ActionReceiverMutationChainExpr({
+    required super.source,
+    required super.sourceSpan,
+    required this.receiver,
+    required this.mutation,
+    required this.continuation,
+  }) : super(kind: 'receiver_mutation_chain');
+
+  final ActionReceiverMutationBindingReference receiver;
+  final ActionReceiverMutationCall mutation;
+  final List<ActionReceiverMutationContinuationCall> continuation;
+
+  @override
+  ActionJsonObject toJson() => {
+    ...baseJson(),
+    'receiver': receiver.toJson(),
+    'mutation': mutation.toJson(),
+    'continuation': [for (final call in continuation) call.toJson()],
+  };
+}
+
 final class ActionFluentCall {
   const ActionFluentCall({
     required this.method,
@@ -1258,6 +1367,23 @@ RemovedAggregateSelector? findRemovedAggregateSelectorInExpr(ActionExpr expr) {
     case ActionAssignNestedAccessExpr(:final segments, :final value):
       return inWriteSegments(segments) ??
           findRemovedAggregateSelectorInExpr(value);
+    case ActionReceiverMutationChainExpr(
+      mutation: final mutation,
+      :final continuation,
+    ):
+      final callback = findRemovedAggregateSelectorInBlock(
+        mutation.callback.body,
+      );
+      if (callback != null) {
+        return callback;
+      }
+      for (final call in continuation) {
+        final selector = inArgs(call.args);
+        if (selector != null) {
+          return selector;
+        }
+      }
+      return null;
     case ActionIndexedVarExpr(:final index):
       return findRemovedAggregateSelectorInExpr(index);
     case ActionNestedAccessExpr(:final segments):

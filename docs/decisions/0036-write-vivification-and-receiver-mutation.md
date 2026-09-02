@@ -1,7 +1,7 @@
 # 0036 - Nested creation is write-only and `!` denotes explicit receiver mutation
 
 - Date: 2026-07-15
-- Status: accepted direction; neutral contracts and both Perl/Rust mechanisms implemented; Dart nested writes implemented; Dart bang, Julia/Lua, and admission pending
+- Status: accepted direction; neutral contracts and Perl/Rust/Dart mechanisms implemented; Julia/Lua and admission pending
 - Tags: dsl, language-evolution, mutation, autovivification, receiver-methods, traversal, paths, portability
 
 ## Context
@@ -244,6 +244,30 @@ Permanent proof projects the frozen 5 AST / 7 syntax / 11 success / 16 structura
 Dart route. The complete Dart gate passes format 110/0, strict analysis, 450/450 tests, 24 managed temporary
 owners / 47 locked packages, CLI 66/66 in default and POSIX environments, and corpus 105/105. Reads remain
 non-creating. Dart `map_leaves!`, Julia/Lua, and portable/public admission do not move in this leaf.
+
+## Dart `map_leaves!` implementation (2026-09-02)
+
+Leaf `.19.4.2` implements `linkedspec-map-leaves-mutation-v1` on Dart without changing the neutral contract:
+
+- `ActionReceiverMutationChainExpr` retains the bare binding reference, mutation method, typed callback block,
+  ordinary continuation, exact source, and half-open Unicode-scalar spans through contract/callable resolution,
+  compiled-state validation, generated plans, emitted source, and direct runtime entry;
+- stable runtime binding identities distinguish the active receiver from same-spelling callback scopes and
+  user-function parameters. Direct assignment/append, nested write, nested bang, explicit mutation helpers, all
+  array-end methods, and binding-target pipelines check the resolved identity before operand/segment/RHS work;
+- the interpreter traverses a detached original-shape snapshot in sorted harray-key or array-index order, recursing
+  only through the starting root kind. Copied callback frames produce detached, non-revisited replacements;
+  callback or re-entrant failure publishes nothing and always releases the guard;
+- successful traversal publishes one rebuilt root, returns another detached root, releases the guard, and then
+  executes ordinary continuation, so a continuation failure preserves the completed receiver commit; and
+- reconstructed `SpecFile`, native execution, generated plan, emitted Dart independently analyzed/executed by a
+  caller package, primary CLI, malformed-state rejection, and nested-write composition share this carrier.
+
+Permanent proof projects the 4/14/5 syntax inventory, 10 successes, 8 pre-commit failures, special state cases,
+six callback compositions, one continuation composition, and all supported Dart routes. The unchanged checker
+rejects 167 base and 592 composition mutations. The composed-boundary audit corrected only an inert parent `/x/`
+to the established zero-regex `Top` loop/child-owned `Done` regex shape; no language observation changed. Julia,
+Lua, portable capability, public examples, and recurring admission remain owned by `.19.5-.19.9`.
 
 ## Function-scope carrier resolution (2026-08-31)
 

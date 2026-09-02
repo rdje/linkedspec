@@ -227,6 +227,19 @@ void _normalizeExpr(ActionExpr expr, UserFunctionRegistry registry) {
     case ActionAssignNestedAccessExpr(:final segments, :final value):
       _normalizeWriteSegments(segments, registry);
       _normalizeExpr(value, registry);
+    case ActionReceiverMutationChainExpr(
+      mutation: final mutation,
+      :final continuation,
+    ):
+      normalizeActionBlockFinalCodeblocks(mutation.callback.body, registry);
+      for (final call in continuation) {
+        _normalizeArgs(
+          CallableSurface.receiver,
+          call.method,
+          call.args,
+          registry,
+        );
+      }
     case ActionIndexedVarExpr(:final index):
       _normalizeExpr(index, registry);
     case ActionNestedAccessExpr(:final segments):

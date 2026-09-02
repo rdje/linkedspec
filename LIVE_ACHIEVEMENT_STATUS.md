@@ -2,22 +2,23 @@
 
 ## Current Activity
 
-- Dart `.19.4` is in progress. Nested-write leaf `.19.4.1` implements the frozen v1 contract across typed native,
-  reconstructed, generated, emitted, independently executed, and primary-CLI routes; `map_leaves!` `.19.4.2` is
-  the remaining Dart half.
+- Dart `.19.4` is complete. `.19.4.1-.2` implement nested write-vivification and `map_leaves!` across typed native,
+  reconstructed, generated, emitted, independently executed, and primary-CLI routes.
 
 ## Latest Completed Slice
 
-- `.19.4.1` unifies one/many bracket writes under expression-bearing typed segments, implements dense atomic Dart
-  vivification with exact evaluation/diagnostic/detachment semantics, and passes the 5/7/11/16/3/3 contract, 105
-  rejected mutations, complete Dart gate, and exact staged canonical boundary.
+- `.19.4.2` adds Dart's typed identity-guarded atomic `map_leaves!`, preserves all frozen base/composition
+  semantics, and corrects the stale current-boundary fixture root to zero-regex `Top:: -> Done`.
 
 ## Next Action
 
-- From the committed clean `.19.4.1` boundary, activate Dart `map_leaves!` `.19.4.2` task-tree-first and retrieve
-  the frozen receiver-mutation/composition contracts plus the Dart binding-identity and traversal owners.
+- From the committed clean `.19.4.2` boundary, activate Julia write-vivification `.19.5.1` task-tree-first and
+  retrieve the frozen write contract plus Julia typed path/runtime/generated owners.
 
 ## Recent Completions
+
+- `2026-09-02` — `.19.4.2` implements typed atomic Dart `map_leaves!`; 461/461 package tests, 25 temporary owners /
+  47 packages, CLI 66x2, corpus 105/105, unchanged 167 + 592 mutation authorities, and rooted 5x2x6 pass.
 
 - `2026-09-02` — `.19.4.1` implements Dart write vivification through all supported typed and executable routes;
   450/450 package tests, 24 temporary owners / 47 packages, CLI 66x2, corpus 105/105, and exact canonical CI pass.
@@ -69,9 +70,6 @@
 
 - `2026-08-30` — `.22.2` makes 1,718 exact current task definitions globally unique across 96 files, repairs the
   sole legacy duplicate, and guards the boundary with ten mutations plus exact canonical proof.
-
-- `2026-08-29` — `.22.1` enforces task-status-consistent clean memory handoffs across four fields, three valid
-  active/clean/idle cases, and six rejected mutations; conflicting global task definitions are queued under `.22.2`.
 
 ## History
 

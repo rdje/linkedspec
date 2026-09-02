@@ -79,7 +79,7 @@ EXPECTED_TOP_LEVEL_KEYS = {
 # This digest freezes every policy/syntax/AST/diagnostic byte as canonical JSON.
 # Runtime behavior is checked independently below rather than trusted from it.
 EXPECTED_SEMANTIC_DIGEST = "3b2f4b30b1fb8777f32a3df0ee16f56e860cb49c36bfae4d9d3012aa51b260f5"
-EXPECTED_COMPOSITION_DIGEST = "e373f369bb2693ec0afe3e57741a7f1c67ce1e9706bac65107ab42b5e729e277"
+EXPECTED_COMPOSITION_DIGEST = "a7d20c825cb3d8362d6f278586b6bb65c215e4a84ba64f5bb15bd10b1b82ba2f"
 
 EXPECTED_IDS = {
     "valid_syntax_cases": {
@@ -1808,8 +1808,12 @@ def validate_composition_contract(
         or boundary["failure_stage"] != "action_parse_before_callback_nested_write_lowering"
         or "tree.map_leaves!()" not in boundary["source"]
         or 'value[0]["path"] = path' not in boundary["source"]
+        or "Top::\n -> Done" not in boundary["source"]
+        or "Top::\n /x/ -> Done" in boundary["source"]
         or "tree.map_leaves!()" in boundary["nonbang_control_source"]
         or "tree.map_leaves()" not in boundary["nonbang_control_source"]
+        or "Top::\n -> Done" not in boundary["nonbang_control_source"]
+        or "Top::\n /x/ -> Done" in boundary["nonbang_control_source"]
         or boundary["expected_nonbang_result"] != {"leaf": []}
     ):
         fail("composition_current_boundary_drifted", "current boundary fixture drifted")
