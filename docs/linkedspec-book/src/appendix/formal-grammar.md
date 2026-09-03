@@ -866,12 +866,12 @@ array-index reads. Non-reserved bare path atoms such as `[i]` are also scalar
 array-index reads of working variable `i`. Primitive literals and engine
 locals are not claimed as bare path atoms.
 
-When `direct_access` is used as `nested_assignment` on Perl, Rust, or Dart, every segment is retained as an ordinary typed
+When `direct_access` is used as `nested_assignment` on Perl, Rust, Dart, or Julia, every segment is retained as an ordinary typed
 expression. Its evaluated string/nonnegative-integer kind selects harray/array, so an absent root and unambiguous
 missing intermediates may be created. Existing null/wrong kinds are not coerced; array indexes replace or append
 exactly at length and gaps fail. Segments then RHS evaluate before isolated structural work; typed failures commit
-no partial path. Julia and Lua retain the earlier rule that every intermediate already exists until
-their implementation and admission leaves complete. Read semantics remain non-creating on every backend.
+no partial path. Lua retains the earlier rule that every intermediate already exists until its implementation
+and admission leaves complete. Read semantics remain non-creating on every backend.
 
 Bare scalar reads and typed assignment:
 

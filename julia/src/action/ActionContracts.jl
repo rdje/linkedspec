@@ -801,7 +801,7 @@ function _visit_expr!(resolver::_ActionContractResolver, expr::ActionExpr)
             source_span = expr.source_span,
             positional_arg_count = 2,
         )
-        _visit_access_segments!(resolver, expr.segments)
+        _visit_write_path_segments!(resolver, expr.segments)
         _visit_expr!(resolver, expr.value)
     elseif expr isa ActionBlockValueExpr
         _visit_block!(resolver, expr.block)
@@ -1058,6 +1058,16 @@ function _visit_access_segments!(resolver::_ActionContractResolver, segments::Ve
         if segment isa ActionIndexAccessSegment
             _visit_expr!(resolver, segment.expr)
         end
+    end
+    return nothing
+end
+
+function _visit_write_path_segments!(
+    resolver::_ActionContractResolver,
+    segments::Vector{ActionWritePathSegment},
+)
+    for segment in segments
+        _visit_expr!(resolver, segment.expression)
     end
     return nothing
 end

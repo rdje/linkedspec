@@ -241,19 +241,19 @@ labels and a value expression such as `case(cat(foo, ""), body)` when the case v
 > append form `push(items, expr)`; when the value is a working variable,
 > `items += value` reads that typed value, and in value positions the expression yields the updated array snapshot.
 > The typed-path operator `meta["key"] = expr` has the same field-update effect as
-> `set_key(meta, "key", expr)` on Perl, Rust, and Dart, but it is not the same runtime contract: its evaluated string selector
+> `set_key(meta, "key", expr)` on Perl, Rust, Dart, and Julia, but it is not the same runtime contract: its evaluated string selector
 > chooses harray, while a nonnegative integer chooses array. `meta[key] = value` reads working values `key` and
-> `value`, and in value positions yields the updated root snapshot. Julia and Lua retain the earlier
-> hash-index interpretation until cross-backend admission.
+> `value`, and in value positions yields the updated root snapshot. Lua retains the earlier hash-index
+> interpretation until cross-backend admission.
 > Direct nested access `payload["children"][0]["name"]` is accepted for mixed path segments.
-> Reads retain their existing direct-access interpretation and never create state. For assignment on Perl, Rust, and Dart, every
+> Reads retain their existing direct-access interpretation and never create state. For assignment on Perl, Rust, Dart, and Julia, every
 > bracket is an ordinary expression whose evaluated value selects the path kind: string means harray and
 > nonnegative integer means array. Non-reserved bare path atoms such as `[i]` read scalar working variables.
 > The same path can be an assignment target: `payload["children"][0]["name"] = value` mutates the
-> scalar-held array/harray value. Perl, Rust, and Dart create an absent root and missing intermediates when the
+> scalar-held array/harray value. Perl, Rust, Dart, and Julia create an absent root and missing intermediates when the
 > selector kind determines their shape; bound null and wrong kinds are conflicts, and arrays remain dense.
-> Structural failures throw typed diagnostics and commit no partial path. Julia and Lua retain the
-> prior existing-intermediate/null-result behavior until their backend and admission leaves land.
+> Structural failures throw typed diagnostics and commit no partial path. Lua retains the prior existing-
+> intermediate/null-result behavior until its backend and admission leaves land.
 > Direct shape literals `[]` and `{ key : value }` are accepted as value expressions on the Perl reference and
 > Rust backend. Bare elements/keys/values inside the shape read scalar working variables, and fixed hash field
 > names should be quoted. Direct shape literals bind as typed values for bare assignment targets on both variants:
@@ -352,7 +352,7 @@ These helpers mutate or dispatch rule state. The assignment forms also have the 
 | `name = expr` | replace the named typed value | a working variable should hold the expression result, whether scalar, array, or hash. |
 | `set(name, expr)` | replace the named typed value | a working variable should visibly hold the expression result, including direct shape payloads such as `[value]`. |
 | `items += expr` | append one value and yield the updated array snapshot when used as an expression | a named array should grow by one explicit value expression; equivalent to `push(items, expr)` for accepted RHS shapes. |
-| `meta[key_expr] = expr` | update one typed path and yield the updated root snapshot when used as an expression | on Perl, Rust, and Dart, an evaluated string selects harray and a nonnegative integer selects array; use `set_key` when harray-only intent must be explicit. Julia and Lua retain their earlier hash-index boundary until admission. |
+| `meta[key_expr] = expr` | update one typed path and yield the updated root snapshot when used as an expression | on Perl, Rust, Dart, and Julia, an evaluated string selects harray and a nonnegative integer selects array; use `set_key` when harray-only intent must be explicit. Lua retains its earlier hash-index boundary until admission. |
 | `call(rule)` | dispatch to another rule | a child rule should run and optionally provide a value. |
 | `retv = call(rule)` | capture a child result | later helper logic needs the child payload. |
 | `push(rule)` | call one rule and append its result | the shortest spelling is desired for appending a child result into the current rule accumulator. |
@@ -878,7 +878,7 @@ Hash helpers return scalar information about an object or a new hash/array value
 | `hash_expr.walk_leaves() { block }` | hash value | visit every non-hash leaf for side effects and return the original tree. |
 | `hash_expr.map_leaves() { block }` | hash value | return a new tree with every non-hash leaf replaced by the block result. |
 | `hash_expr.reduce_leaves(initial) { block }` | value | fold every non-hash leaf into an accumulator. |
-| `binding_name.map_leaves!() { block }` | updated hash/array value | Perl/Rust: atomically replace leaves and rebind one bare named receiver. |
+| `binding_name.map_leaves!() { block }` | updated hash/array value | Perl/Rust/Dart: atomically replace leaves and rebind one bare named receiver. |
 
 Examples:
 
@@ -976,9 +976,9 @@ leaf_count = items.reduce_leaves(0) {
 };
 ```
 
-### Perl/Rust `map_leaves!` receiver update
+### Perl/Rust/Dart `map_leaves!` receiver update
 
-`binding_name.map_leaves!() { block }` is the mutating twin of `map_leaves()` on Perl and Rust. The receiver
+`binding_name.map_leaves!() { block }` is the mutating twin of `map_leaves()` on Perl, Rust, and Dart. The receiver
 must already exist as an harray or array and must be a bare uniform-binding name. The starting root kind chooses
 the same traversal rule described above. Mapping reads a detached original-shape snapshot, uses each callback
 result as the replacement leaf, commits the complete rebuilt receiver once, and returns a separate detached copy.
@@ -1003,8 +1003,8 @@ attempt raises `receiver_mutation_reentrant` before the write. A same-spelling p
 is a different identity and remains legal.
 
 The receiver guard is released before fluent continuation. Therefore a continuation runs against the detached
-updated value, and its later failure does not undo the already completed receiver commit. Dart, Julia, and Lua do
-not yet accept this bang surface; `map_leaves!(items)`, temporary or nested receivers, other bang methods,
+updated value, and its later failure does not undo the already completed receiver commit. Julia and Lua do not
+yet accept this bang surface; `map_leaves!(items)`, temporary or nested receivers, other bang methods,
 and arbitrary user-defined bang functions are outside v1.
 
 The terse hash-index operator is the statement form written with the key next to the target:

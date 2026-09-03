@@ -98,8 +98,8 @@ Write values into declared variables or containers:
 - `split(name, source, delimiter)` — replace the bare array binding and yield the updated value; the two-argument
   `split(source, delimiter)` remains pure
 - `set_key(name, key, value)` — set one key in a named working hash
-- `name[key] = value` — terse typed-path assignment operator; in value positions it yields the updated root snapshot. A string selector has the same field-update effect as `set_key` on Perl, Rust, and Dart, while a nonnegative integer selects an array; Julia and Lua retain their earlier hash-index boundary until admission
-- `payload["items"][0]["name"] = value` — nested value-path assignment into a scalar-held array/harray payload; Perl, Rust, and Dart create an absent root and unambiguous missing intermediates from evaluated string/integer selectors, while Julia/Lua retain the existing-container boundary until cross-backend admission; all variants reject wrong-kind coercion and sparse array gaps
+- `name[key] = value` — terse typed-path assignment operator; in value positions it yields the updated root snapshot. A string selector has the same field-update effect as `set_key` on Perl, Rust, Dart, and Julia, while a nonnegative integer selects an array; Lua retains its earlier hash-index boundary until admission
+- `payload["items"][0]["name"] = value` — nested value-path assignment into a scalar-held array/harray payload; Perl, Rust, Dart, and Julia create an absent root and unambiguous missing intermediates from evaluated string/integer selectors, while Lua retains the existing-container boundary until cross-backend admission; all variants reject wrong-kind coercion and sparse array gaps
 
 ### Capture and mark helpers
 

@@ -1122,8 +1122,10 @@ Three backbone items tracked major structural modernization — all done:
   analyzed/executed caller-package, and primary-CLI routes. The Dart bang carrier is typed end to end; receiver
   protection follows stable binding identity across direct, nested, helper, array-end, and binding-target
   pipeline writes. Its complete gate passes 461/461 package tests, 25 managed temporary owners / 47 locked
-  packages, CLI 66/66 in default and POSIX environments, and corpus 105/105. Julia/Lua implementations,
-  portable/public admission, and recurring proof remain pending under `.19.5-.9`; Julia `.19.5.1` is next.
+  packages, CLI 66/66 in default and POSIX environments, and corpus 105/105. Julia `.19.5.1` now implements
+  nested writes through one typed path plus native, reconstructed, generated-plan, emitted-module, and primary-
+  CLI routes with 406 focused assertions. Julia bang, Lua, portable/public admission, and recurring proof remain
+  pending under `.19.5.2-.9`.
   All 13 ordinary harray names close at 103/103 through `.4.3.5.5` on both Lua ABIs. Sorted arrays continue
   through array receivers, count/membership are terminal, and mutation-result/pure-receiver prose is guarded.
   Eager blocks, lazy inline controls, attached/marker if and switch, and attached while close through

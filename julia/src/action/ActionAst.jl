@@ -354,6 +354,23 @@ function ActionIndexAccessSegment(; expr, source, source_span)
     return ActionIndexAccessSegment("index", expr, String(source), source_span)
 end
 
+"""One expression-bearing segment in an authored nested-write path."""
+struct ActionWritePathSegment
+    kind::String
+    source::String
+    source_span::ActionSourceSpan
+    expression::ActionExpr
+end
+
+function ActionWritePathSegment(; source, source_span, expression)
+    return ActionWritePathSegment(
+        "path_segment",
+        String(source),
+        source_span,
+        expression,
+    )
+end
+
 struct ActionNestedAccessExpr <: ActionExpr
     kind::String
     source::String
@@ -619,7 +636,7 @@ struct ActionAssignNestedAccessExpr <: ActionExpr
     source::String
     source_span::ActionSourceSpan
     base::String
-    segments::Vector{ActionAccessSegment}
+    segments::Vector{ActionWritePathSegment}
     value::ActionExpr
 end
 
@@ -629,7 +646,7 @@ function ActionAssignNestedAccessExpr(; source, source_span, base, segments, val
         String(source),
         source_span,
         String(base),
-        ActionAccessSegment[segments...],
+        ActionWritePathSegment[segments...],
         value,
     )
 end
@@ -976,6 +993,16 @@ function _find_removed_aggregate_selector_in_segments(segments)
     return nothing
 end
 
+function _find_removed_aggregate_selector_in_write_segments(segments)
+    for segment in segments
+        selector = find_removed_aggregate_selector(segment.expression)
+        if selector !== nothing
+            return selector
+        end
+    end
+    return nothing
+end
+
 """Return the first removed one-bare-identifier aggregate selector below `expr`."""
 function find_removed_aggregate_selector(expr::ActionExpr)
     if expr isa ActionCallExpr
@@ -1012,7 +1039,7 @@ function find_removed_aggregate_selector(expr::ActionExpr)
         selector = find_removed_aggregate_selector(expr.key)
         return selector === nothing ? find_removed_aggregate_selector(expr.value) : selector
     elseif expr isa ActionAssignNestedAccessExpr
-        selector = _find_removed_aggregate_selector_in_segments(expr.segments)
+        selector = _find_removed_aggregate_selector_in_write_segments(expr.segments)
         return selector === nothing ? find_removed_aggregate_selector(expr.value) : selector
     elseif expr isa ActionIndexedVarExpr
         return find_removed_aggregate_selector(expr.index)
@@ -1238,6 +1265,15 @@ function to_json(segment::ActionIndexAccessSegment)
         "expr" => to_json(segment.expr),
         "source" => segment.source,
         "source_span" => to_json(segment.source_span),
+    )
+end
+
+function to_json(segment::ActionWritePathSegment)
+    return Dict(
+        "kind" => segment.kind,
+        "source" => segment.source,
+        "source_span" => to_json(segment.source_span),
+        "expression" => to_json(segment.expression),
     )
 end
 

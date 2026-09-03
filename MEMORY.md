@@ -1,13 +1,13 @@
 # MEMORY
 
-- activation_commit: `6f0ae8706c497497fcfd5e085753aebb1ae310b8` — exact clean Dart vivification commit from which `FUTURE-PARITY-BACKLOG.19.4.2` was activated task-tree-first.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.19.4.2 - implement Dart map leaves mutation`; typed carrier,
-  identity-guarded runtime, durable sync, focused proof, atomic commit, and clean handoff are complete.
-- active_work_unit: none — clean handoff after `.19.4.2`; Julia `.19.5.1` is the next task-tree-first activation.
-- next_action: from the committed clean boundary, activate `FUTURE-PARITY-BACKLOG.19.5.1`, retrieve the frozen
-  write-vivification contract and Julia typed-path/runtime/generated owners, then implement only that Julia slice.
-- in_flight_uncommitted: none. All `.19.4.2` code, tests, documentation, focused verification, commit, brief
-  clearing, generated-output cleanup, and background-job consumption are complete.
+- activation_commit: `0fdb809556aa2229360973b2746b06a9bbf2e105` — exact clean Dart mutation closeout commit from which `FUTURE-PARITY-BACKLOG.19.5.1` was activated task-tree-first.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.19.5.1 - implement Julia write vivification`; typed carrier,
+  isolated dense runtime, exact diagnostics, durable sync, canonical proof, atomic commit, and clean handoff complete.
+- active_work_unit: none — clean handoff after `.19.5.1`; Julia `.19.5.2` is the next task-tree-first activation.
+- next_action: from the committed clean boundary, activate `FUTURE-PARITY-BACKLOG.19.5.2`, retrieve the frozen
+  mutation/composition contracts and Julia binding/runtime owners, then implement only that Julia bang slice.
+- in_flight_uncommitted: none. All `.19.5.1` code, tests, documentation, verification, commit, brief clearing,
+  generated-output cleanup, and background-job consumption are complete.
 - blockers: none.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -18,11 +18,11 @@
   self-hosted grammar preserves reserved lifecycle precedence. ADR `0094`.
 - current_standalone_block_frontier: admitted `.15.0-.2` behavior is unchanged; `.15.3` repairs the stale Lua
   `next()` fixture with action-edge ownership and recomposes the complete 178x2 / 109x2 dual-ABI boundary.
-- current_write_vivification: `linkedspec-write-vivification-v1` is implemented on Perl, Rust, and Dart with one typed expression-segment AST,
+- current_write_vivification: `linkedspec-write-vivification-v1` is implemented on Perl, Rust, Dart, and Julia with one typed expression-segment AST,
   evaluated string/integer harray/array selection, dense atomic creation, post-evaluation snapshots, detached
   results, exact diagnostics/spans, invocation-local absent/null presence, and read exclusions at 105 rejected
-  mutations. Rust and Dart preserve it through serialized/reconstructed/generated/emitted carriers; Julia/Lua and
-  public capability admission remain pending.
+  mutations. Rust, Dart, and Julia preserve it through serialized/reconstructed/generated/emitted carriers; Lua
+  and public capability admission remain pending.
 - current_map_leaves_mutation: `linkedspec-map-leaves-mutation-v1` is implemented on Perl, Rust, and Dart with one bang-only mutation AST,
   resolved receiver identity guard, root-kind original-shape traversal, copied frames, atomic rebind, detached
   result, post-commit continuation, exact diagnostics/exclusions, and 167 base mutations. Receiver callback writes
@@ -41,8 +41,8 @@
   one wholly unmanipulated unique provenance-tagged control first-launched in 0.41 seconds. No repo repair applies.
 - current_mutation_composition_contract: `linkedspec-write-map-leaves-composition-v1` digest-binds both unchanged
   mechanisms across eight writes, six callback cases, one continuation, and 592 current composition mutations;
-  Perl, Rust, and Dart execute both halves; Julia/Lua remain pending. Current-boundary roots use zero-regex
-  `Top:: -> Done`, so the parent loop selects and matches `Done`'s regex rather than an inert parent regex.
+  Perl, Rust, and Dart execute both halves; Julia executes the write half but remains bang-pending, and Lua remains
+  pending. Zero-regex `Top:: -> Done` lets the parent loop select and match `Done`'s regex, not an inert parent one.
 - current_map_leaves_scope_resolution: option A preserves pure functions. Helper-mediated rejection uses inline
   explicit-target `set(tree, ...)`; post-commit receiver-write proof uses caller-scoped `.with()`. No implicit
   caller capture or arbitrary user-defined bang method is admitted.

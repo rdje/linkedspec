@@ -1733,7 +1733,7 @@
   Commit: `FUTURE-PARITY-BACKLOG.19.4.2 - implement Dart map leaves mutation`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.5`
-  Status: `pending`
+  Status: `in progress; .19.5.1 complete, .19.5.2 next`
   Goal: Implement the unchanged v1 contract on Julia across native and supported generated/emitted routes.
   Children: `.19.5.1`, `.19.5.2`
   Dependencies: `.19.4`
@@ -1741,11 +1741,64 @@
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.5.1`
-  Status: `pending`
+  Status: `canonical-signoff-complete` (activated 2026-09-02; completed 2026-09-03 from exact clean Dart
+    mutation commit `0fdb809556aa2229360973b2746b06a9bbf2e105`; no push)
   Goal: Implement Julia nested write-vivification through typed parsed/emitted state and runtime.
   Dependencies: `.19.4`
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `canonical` — this leaf implements the frozen nested-write v1 contract on a new backend and
+    moves Julia typed parsed/reconstructed/generated/emitted carriers. ADR `0073` classifies backend admission
+    and generated-format movement as a designated exact staged boundary.
+  Focused checks: frozen neutral 5 AST / 7 syntax / 11 success / 16 structural / 3 expression-failure / 3 read-
+    exclusion cases and all 105 mutations; Julia parser/compiler/runtime native, reconstructed, generated-plan,
+    emitted-source, independent-caller where supported, and primary CLI routes; adjacent assignment/access/helper,
+    `map_leaves!`-absence, diagnostics/span, corpus, and complete Julia component dependents; formatting/static
+    checks, project-data containment, Knowledge, task/index, bounded histories, memory/live/roadmap/book, rendered
+    mdBook, whitespace, and all nine doctrines.
+  Canonical trigger: `Julia backend implementation + typed generated/emitted carrier movement` — stage the exact
+    candidate with no unstaged inputs and run receipt-bound `bash tools/run_ci_local.sh` before atomic commit.
+  Acceptance: Preserve `linkedspec-write-vivification-v1` unchanged. Parse one typed nested-write node whose
+    segments retain authored expressions and Unicode-scalar spans; evaluate every segment left-to-right and then
+    the RHS exactly once; snapshot binding presence only afterward; create dense selector-determined harray/array
+    state on an isolated copy; publish once only after structural success; and detach initial, RHS, stored, and
+    returned mutable values. Distinguish absent from present null, preserve completed expression effects and exact
+    typed errors, keep reads non-creating, and preserve fresh rule/function invocation state. Carry and validate
+    the node through every supported Julia native/reconstructed/generated/emitted route without admitting
+    `map_leaves!`, Lua behavior, or portable/public capability early.
+  Ownership: `.19.5.1` owns Julia parser/compiler/runtime/carrier implementation, permanent direct proof, Julia
+    status/docs, and compatibility evidence only. It must not alter the frozen neutral/composition contracts,
+    Perl/Rust/Dart/Lua behavior, public current examples, capability/facade/schema/MCP surfaces, or push state.
+  Checklist: [x] clean activation/task ownership [x] Knowledge/ADR and sibling-contract retrieval
+    [x] Toolbox-first Julia owner inventory [x] exact RED through frozen neutral contract
+    [x] typed parser/compiler/reconstructed/generated/emitted carrier [x] isolated dense runtime publication
+    [x] diagnostics/evaluation/detachment/read exclusions [x] focused Julia/direct-dependent proof
+    [x] durable docs/Knowledge/live sync [x] exact staged canonical signoff [x] atomic commit/brief/clean handoff.
+  Activation evidence: exact `git status --short --untracked-files=all` was empty at
+    `0fdb809556aa2229360973b2746b06a9bbf2e105`; `git_message_brief.txt` was zero bytes; post-commit activation
+    boundary and all nine hooks passed; reproducible mdBook output and the consumed off-volume sample report were
+    absent; and no prior result remained to consume. Dart `.19.4.2` and parent `.19.4` are committed complete.
+  Implementation evidence: added `ActionWritePathSegment` and unified every authored Julia one/many-segment
+    bracket assignment under `ActionAssignNestedAccessExpr`; carried and validated it through action visitors,
+    callable/semantic contracts, compiled state, source emission, generated plans, reconstruction, and runtime.
+    The interpreter evaluates segments then RHS exactly once, snapshots presence afterward, builds only dense
+    selector-determined containers on an isolated copy, publishes once, detaches mutable boundaries, preserves
+    completed expression effects and original evaluation failures, rejects bound null/wrong kinds/gaps through
+    exact typed diagnostics/spans, and leaves reads non-creating. Corrupt typed carriers fail closed.
+  Permanent proof: `julia/test/write_vivification_contract_test.jl` consumes the unchanged neutral fixture and
+    passes 406 assertions across 5 AST / 7 invalid / 4 excluded forms, 11 successes, 16 structural failures,
+    3 evaluation failures, 3 read exclusions, astral spans, detachment, invocation-local presence, corruption,
+    native/reconstructed/generated-plan/emitted-module/CLI routes. The independent checker retains 105 rejected
+    mutations. The complete Julia package suite, primary CLI, corpus 105/105, and project-data containment at
+    21 temporary owners / 5 locked package trees pass; the stale hard-coded 20-owner success sentence was
+    corrected after its already-exact 21-versus-21 inventory comparison passed.
+  Durable sync: Knowledge, ADR `0036`/index, architecture, both roadmaps, task registry/index, Toolbox, memory/live,
+    bounded histories, and the sole-facing mdBook distinguish Julia write support from its still-pending bang
+    support. Two stale mdBook Dart-bang sentences and the stale pre-Dart task-registry frontier are corrected;
+    dated historical records remain unchanged. Julia `map_leaves!`, Lua, recurring proof, capability/public
+    admission, and every other backend remain outside this leaf.
+  Verification: `canonical-signoff-complete` — focused neutral 105-mutation, Julia 406-assertion, complete package,
+    storage 21/5, primary CLI, and corpus 105/105 proofs pass. Knowledge/task/history/doctrine checks, rendered
+    mdBook, whitespace, and exact staged receipt-bound `bash tools/run_ci_local.sh` pass on the final candidate.
+  Commit: `FUTURE-PARITY-BACKLOG.19.5.1 - implement Julia write vivification`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.5.2`
   Status: `pending`

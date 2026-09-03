@@ -81,7 +81,8 @@ mechanisms through typed parsed/serialized/generated/emitted carriers and identi
 root-semantics cleanup `.19.3.3` is canonical-signoff-complete. Controlled `.19.3.4.0` classifies the older-
 artifact delay as external macOS policy/cache state, requires no repository repair, and closes Rust `.19.3`.
 Dart `.19.4.1-.2` now implements both mechanisms through native/reconstructed/generated/emitted/independent/CLI
-routes; Julia nested-write `.19.5.1` is next while Julia/Lua remain non-vivifying/non-bang.
+routes. Julia `.19.5.1` implements nested writes through native/reconstructed/generated/emitted-module/CLI routes;
+Julia `map_leaves!` `.19.5.2` is next while Julia remains non-bang and Lua remains non-vivifying/non-bang.
 
 Accepted long-horizon direction: ADR `0064` plus `SPEC-LANGUAGE-SELF-CONTAINMENT` define portable `.spec`
 problem-domain closure without ambient effects and an optional honest EBNF-like frontend over the same canonical
@@ -486,8 +487,8 @@ projected directly at 5 AST / 7 syntax / 11 success / 16 structural failures plu
 Rust `.19.3.1` consumes the unchanged nested-write authority through one typed segment/node representation,
 native/serialized/generated-plan/emitted/independently compiled execution, exact diagnostics, and fail-closed
 carrier validation. `.19.3.2` adds the dedicated receiver-mutation carrier, stable binding identities, complete
-write guard, original-shape atomic mapping, detached results, and generated-route proof. Julia and Lua remain
-non-vivifying/non-bang; no capability/public admission occurs. Perl `map_leaves!` `.19.2.2`
+write guard, original-shape atomic mapping, detached results, and generated-route proof. No capability/public
+admission occurs. Perl `map_leaves!` `.19.2.2`
 is complete after the director chose the pure-function-preserving carrier correction. A dedicated bang AST,
 original-shape copy-on-write traversal, identity-keyed receiver guard across every executable write route, atomic
 publication, detached result, and post-commit continuation pass 58 focused tests, 167 base + 592 composition
@@ -497,8 +498,9 @@ state tests, and the unchanged 167 base + 592 composition oracle; `.19.3.3` is c
 Rust `.19.3` closes. Dart `.19.4.1-.2` now preserves both unchanged mechanisms through typed ASTs, stable binding
 identities, native execution, reconstructed `SpecFile`, generated plans, emitted source, independently analyzed/
 executed callers, and primary CLI. Complete Dart proof passes 461 package tests, 25 temporary owners / 47 locked
-packages, and the unchanged 105 write / 167 base + 592 composition mutations; Julia `.19.5.1` is next, while
-Julia/Lua and portable/public admission remain pending.
+packages, and the unchanged 105 write / 167 base + 592 composition mutations. Julia `.19.5.1` now implements the
+write half through native/reconstructed/generated/emitted-module/CLI routes with 406 focused assertions, while
+Julia bang, both Lua mechanisms, and portable/public admission remain pending. Julia `.19.5.2` is next.
 The required complete-record rollover creates immutable change segment `4987`; ADR `0098` advances only finite
 collection/manifest capacity to 26/25 and makes the leaf a receipt-bound canonical boundary.
 

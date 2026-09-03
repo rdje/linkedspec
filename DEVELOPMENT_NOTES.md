@@ -9,6 +9,29 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-09-03 (`FUTURE-PARITY-BACKLOG.19.5.1` — Julia write vivification): one typed
+  `ActionAssignNestedAccessExpr` must own authored one- and many-segment bracket assignment. Each
+  `ActionWritePathSegment` retains its ordinary expression plus source/span; authored spelling must not preselect
+  harray versus array before evaluation.
+- Julia evaluation and publication are separate phases: evaluate every segment left-to-right and then the RHS,
+  inspect binding presence afterward, deep-copy the post-evaluation root, validate/build the complete dense path,
+  then publish exactly once. This preserves completed expression effects without exposing a partial path.
+- Track absence separately from value. An absent root/intermediate may be created from the current/next evaluated
+  selector; bound null and wrong kinds are conflicts. A string selects harray, a nonnegative integer other than
+  `Bool` selects array, and arrays may replace or append at length but never invent gap fillers.
+- Copy mutable boundaries deliberately: current root, aggregate RHS, stored tree, returned tree, and diagnostic
+  path prefix. Expression failures keep their original exception identity; structural failures use the frozen
+  typed fields and authored failing-segment span.
+- Validate public typed carriers at compiler, direct-runtime, generated-plan, and source-emitter seams. Parser-only
+  checks do not protect reconstructed or programmatically corrupted state.
+- Permanent Julia proof consumes the neutral fixture directly and passes 406 assertions across native,
+  reconstructed, generated-plan, emitted-module, and CLI routes. The complete Julia package suite, primary CLI,
+  corpus 105/105, neutral 105 mutations, and repository-local storage boundary pass.
+- A passing checker can still print stale evidence: the storage script compared 21 expected paths with 21
+  discovered paths but printed a hard-coded 20. Keep displayed cardinalities synchronized with their substantive
+  inventories; the rerun reports 21 temporary owners and five locked package trees.
+- Current task registries and adjacent book statements are live projections, not dated history. This slice repairs
+  the stale pre-Dart task frontier and two Dart-bang sentences while leaving historical boundary claims intact.
 - 2026-09-02 (`FUTURE-PARITY-BACKLOG.19.4.2` — Dart `map_leaves!`): parse this surface before ordinary fluent
   methods and retain a dedicated receiver/callback/continuation carrier through compiler, reconstruction,
   generated-plan, emitter, independent-caller, CLI, and runtime boundaries. Generic method lowering cannot

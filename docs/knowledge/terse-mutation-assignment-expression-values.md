@@ -37,6 +37,6 @@ remained statement-only; uniform binding later superseded that boundary and made
 [[terse-assignment-expression-closure]] and [[uniform-binding-array-end-result-supersession]].
 
 Perl later superseded the harray-only `meta[key]` interpretation under `FUTURE-PARITY-BACKLOG.19.2.1`: evaluated
-string selectors still update harrays, while nonnegative integers update arrays. Current Perl prose therefore says
-the expression yields an updated typed-root snapshot. Rust, Dart, Julia, and Lua retain their earlier boundary
-until their owned admission leaves.
+string selectors still update harrays, while nonnegative integers update arrays. Rust, Dart, and Julia now share
+that typed-root result under `.19.3.1`, `.19.4.1`, and `.19.5.1`; Lua retains the earlier boundary until its owned
+admission leaf.

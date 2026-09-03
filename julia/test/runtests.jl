@@ -39,6 +39,7 @@ include("logical_helper_contract_test.jl")
 include("variadic_user_function_contract_test.jl")
 include("callable_codeblock_literal_contract_test.jl")
 include("uniform_binding_contract_test.jl")
+include("write_vivification_contract_test.jl")
 include("punctuation_light_zero_arg_contract_test.jl")
 include("complete_named_mark_contract_test.jl")
 include("diagnostic_output_contract_test.jl")
@@ -1179,8 +1180,8 @@ end
     @test append.value isa ActionVariableExpr
 
     hash_assignment = parse_action_expression("meta[key] = { stage : value }")
-    @test hash_assignment isa ActionAssignHashIndexExpr
-    @test hash_assignment.key isa ActionVariableExpr
+    @test hash_assignment isa ActionAssignNestedAccessExpr
+    @test only(hash_assignment.segments).expression isa ActionVariableExpr
     @test hash_assignment.value isa ActionHashLiteralExpr
 
     nested_assignment = parse_action_expression("payload[\"children\"][0][\"name\"] = value")
@@ -1289,8 +1290,16 @@ end
     @test assignments.ok
     @test _action_contract(assignments, "=").canonical_name == "set"
     @test _action_contract(assignments, "+=").canonical_name == "push"
-    @test _action_contract(assignments, "[]=").canonical_name == "set_key"
-    @test _action_contract(assignments, "nested_access=").canonical_name == "nested_access_assignment"
+    @test isempty(contract for contract in assignments.contracts if contract.source_name == "[]=")
+    nested_assignment_contracts = [
+        contract for contract in assignments.contracts
+        if contract.source_name == "nested_access="
+    ]
+    @test length(nested_assignment_contracts) == 2
+    @test all(
+        contract -> contract.canonical_name == "nested_access_assignment",
+        nested_assignment_contracts,
+    )
 
     unknown = resolve_action_block_contracts(parse_action_block("unknown_helper(value); @invalid"))
     @test !unknown.ok
@@ -2238,12 +2247,10 @@ Top::
      payload["items"][0]["name"] = "new",
      payload["items"][1] = "tail",
      payload,
-     payload["items"][3] = "gap",
-     payload["missing"][0] = "bad",
-     payload["items"][0][0] = "bad",
+     payload["missing"][0] = "made",
+     payload,
      root_array[0]["name"] = "changed",
      root_array[1] = { "name" : "tail" },
-     root_array["bad"] = { "name" : "bad" },
      root_array
    ))
  }
@@ -2254,6 +2261,10 @@ Top::
     updated_payload = Dict{String,Any}(
         "items" => Any[Dict{String,Any}("name" => "new"), "tail"],
     )
+    vivified_payload = Dict{String,Any}(
+        "items" => Any[Dict{String,Any}("name" => "new"), "tail"],
+        "missing" => Any["made"],
+    )
     updated_root_once = Any[Dict{String,Any}("name" => "changed")]
     updated_root = Any[
         Dict{String,Any}("name" => "changed"),
@@ -2263,12 +2274,10 @@ Top::
         updated_payload_once,
         updated_payload,
         updated_payload,
-        nothing,
-        nothing,
-        nothing,
+        vivified_payload,
+        vivified_payload,
         updated_root_once,
         updated_root,
-        nothing,
         updated_root,
     ]
 

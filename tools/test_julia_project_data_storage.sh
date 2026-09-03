@@ -107,6 +107,7 @@ expected_temp_owners=(
  julia/test/spec_loader_test.jl
  julia/test/unicode_rule_label_identity_routes_test.jl
  julia/test/unicode_rule_label_negative_isolation_test.jl
+ julia/test/write_vivification_contract_test.jl
 )
 mapfile -t actual_temp_owners < <(
  rg -l 'mktempdir\(|tempdir\(' "$REPO_ROOT/julia" --glob '*.jl' |
@@ -210,4 +211,4 @@ if find "$TMPDIR" -mindepth 1 -type d -name 'jl_*' -print -quit | grep -q .; the
  fail 'a completed focused Julia workspace remained in managed temporary storage'
 fi
 
-printf '[julia-project-data-test] PASS: 20 Julia owners, 5 locked package trees, generated output, and traces stay on repository storage\n'
+printf '[julia-project-data-test] PASS: 21 Julia owners, 5 locked package trees, generated output, and traces stay on repository storage\n'

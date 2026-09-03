@@ -803,7 +803,7 @@ function _semantic_call_visit_children!(
         visit(expression.value)
     elseif expression isa ActionAssignNestedAccessExpr
         for segment in expression.segments
-            segment isa ActionIndexAccessSegment && visit(segment.expr)
+            visit(segment.expression)
         end
         visit(expression.value)
     elseif expression isa ActionFluentChainExpr

@@ -36,6 +36,62 @@ struct _ActionSeparator
     token::String
 end
 
+"""Typed authored-source failure produced while parsing ActionIR."""
+struct ActionParseException <: Exception
+    code::String
+    stage::String
+    source_span::ActionSourceSpan
+    message::String
+end
+
+function ActionParseException(; code, source_span, message)
+    return ActionParseException(
+        String(code),
+        "action_parse",
+        source_span,
+        String(message),
+    )
+end
+
+Base.showerror(io::IO, error::ActionParseException) = print(io, error.message)
+
+function to_json(error::ActionParseException)
+    return Dict{String,Any}(
+        "code" => error.code,
+        "stage" => error.stage,
+        "source_span" => Dict{String,Any}(
+            "start" => error.source_span.start,
+            "end" => error.source_span.stop,
+            "unit" => "unicode_scalar",
+            "provenance" => "authored",
+        ),
+        "message" => error.message,
+    )
+end
+
+const _ACTION_NESTED_WRITE_RESERVED_ROOTS = Set([
+    "CAPTURE",
+    "IINDEX",
+    "IMATCH",
+    "IMATCH_HASH",
+    "IMATCH_LIST",
+    "IPOS",
+    "LINDEX",
+    "LMATCH",
+    "LMATCH_HASH",
+    "LMATCH_LIST",
+    "LSPOS",
+    "STRING",
+    "descr",
+    "false",
+    "info",
+    "minfo",
+    "null",
+    "retv",
+    "true",
+    "undef",
+])
+
 mutable struct _ActionScanState
     quote_char::Union{Nothing,Char}
     escaped::Bool
@@ -1169,6 +1225,9 @@ function _action_parse_assignment(text::String, start::Int)
 
     eq_index = _action_find_top_level_assignment_equals(text)
     if eq_index === nothing
+        eq_index = _action_find_unclosed_nested_write_assignment_equals(text)
+    end
+    if eq_index === nothing
         return nothing
     end
     left = _action_trim_with_offsets(_action_slice(text, 0, eq_index), start)
@@ -1179,6 +1238,18 @@ function _action_parse_assignment(text::String, start::Int)
         _action_slice(text, eq_index + 1, _action_len(text)),
         start + eq_index + 1,
     )
+    nested_target = _action_parse_nested_write_target(left)
+    if nested_target !== nothing
+        value = parse_action_expression(right.text, right.start)
+        return ActionAssignNestedAccessExpr(
+            source = text,
+            source_span = ActionSourceSpan(start, start + _action_len(text)),
+            base = nested_target.base,
+            segments = nested_target.segments,
+            value = value,
+        )
+    end
+
     value = parse_action_expression(right.text, right.start)
     if _action_is_identifier(left.text)
         staged = _action_staged_parse_job_assignment(
@@ -1212,36 +1283,101 @@ function _action_parse_assignment(text::String, start::Int)
             key = target.index,
             value = value,
         )
-    elseif target isa ActionNestedAccessExpr
-        if length(target.segments) == 1
-            segment = target.segments[1]
-            key = if segment isa ActionKeyAccessSegment
-                ActionStringLiteralExpr(
-                    source = segment.source,
-                    source_span = segment.source_span,
-                    value = segment.value,
-                    quote_char = "\"",
-                )
-            else
-                segment.expr
-            end
-            return ActionAssignHashIndexExpr(
-                source = text,
-                source_span = ActionSourceSpan(start, start + _action_len(text)),
-                name = target.base,
-                key = key,
-                value = value,
-            )
-        end
-        return ActionAssignNestedAccessExpr(
-            source = text,
-            source_span = ActionSourceSpan(start, start + _action_len(text)),
-            base = target.base,
-            segments = target.segments,
-            value = value,
-        )
     end
     return nothing
+end
+
+function _action_parse_nested_write_target(left::_ActionTextSpan)
+    chars = collect(left.text)
+    open = findfirst(==('['), chars)
+    open === nothing && return nothing
+    open_index = open - 1
+    root = _action_trim_with_offsets(
+        _action_slice(left.text, 0, open_index),
+        left.start,
+    )
+    if !_action_is_identifier(root.text)
+        message = root.text == "{}" ?
+                  "nested write root must be a bare identifier" :
+                  "nested write root must remain a bare identifier"
+        _action_nested_write_syntax_error(
+            code = "nested_write_root_not_addressable",
+            start = root.start,
+            stop = root.stop,
+            message = message,
+        )
+    end
+    if root.text in _ACTION_NESTED_WRITE_RESERVED_ROOTS
+        _action_nested_write_syntax_error(
+            code = "nested_write_root_reserved",
+            start = root.start,
+            stop = root.stop,
+            message = "nested write root '$(root.text)' is reserved",
+        )
+    end
+
+    segments = ActionWritePathSegment[]
+    position = open_index
+    while position < length(chars)
+        while position < length(chars) && isspace(chars[position + 1])
+            position += 1
+        end
+        position == length(chars) && break
+        if chars[position + 1] != '['
+            _action_nested_write_syntax_error(
+                code = "nested_write_root_not_addressable",
+                start = left.start,
+                stop = left.stop,
+                message = "nested write root must remain a bare identifier",
+            )
+        end
+        close = _action_find_matching_delimiter(left.text, position, '[', ']')
+        if close === nothing
+            _action_nested_write_syntax_error(
+                code = "nested_write_segment_unclosed",
+                start = left.start + position,
+                stop = left.stop,
+                message = "nested write segment is missing its closing bracket",
+            )
+        end
+        payload = _action_slice(left.text, position + 1, close)
+        segment = _action_trim_with_offsets(
+            payload,
+            left.start + position + 1,
+        )
+        if isempty(segment.text)
+            _action_nested_write_syntax_error(
+                code = "nested_write_segment_empty",
+                start = left.start + position,
+                stop = left.start + close + 1,
+                message = "nested write segment may not be empty",
+            )
+        end
+        expression = parse_action_expression(segment.text, segment.start)
+        if expression isa ActionRawExpr
+            _action_nested_write_syntax_error(
+                code = "nested_write_segment_expression_invalid",
+                start = segment.start,
+                stop = segment.stop,
+                message = "segment must be one balanced ActionIR value expression",
+            )
+        end
+        push!(segments, ActionWritePathSegment(
+            source = segment.text,
+            source_span = ActionSourceSpan(segment.start, segment.stop),
+            expression = expression,
+        ))
+        position = close + 1
+    end
+    return (base = root.text, segments = segments)
+end
+
+function _action_nested_write_syntax_error(; code, start, stop, message)
+    throw(ActionParseException(
+        code = code,
+        source_span = ActionSourceSpan(start, stop),
+        message = message,
+    ))
 end
 
 function _action_parse_fluent_chain(text::String, start::Int)
@@ -1556,10 +1692,39 @@ function _action_find_top_level_assignment_equals(text::String)
         end
         prev = index > 0 ? chars[index] : '\0'
         next = index + 1 < length(chars) ? chars[index + 2] : '\0'
-        if prev in ('!', '<', '>', '=') || next == '=' || next == '>'
+        if prev in ('!', '<', '>', ':', '=') || next == '=' || next == '>'
             continue
         end
         return index
+    end
+    return nothing
+end
+
+function _action_find_unclosed_nested_write_assignment_equals(text::String)
+    chars = collect(text)
+    open = findfirst(==('['), chars)
+    open === nothing && return nothing
+    root = strip(_action_slice(text, 0, open - 1))
+    _action_is_identifier(root) || return nothing
+    _action_find_matching_delimiter(text, open - 1, '[', ']') === nothing ||
+        return nothing
+
+    state = _ActionScanState()
+    for index in open:(length(chars) - 1)
+        ch = chars[index + 1]
+        if _action_consume_quoted_or_regex!(state, text, index, ch)
+            continue
+        end
+        if ch == '"' || ch == '\''
+            state.quote_char = ch
+            continue
+        end
+        ch == '=' || continue
+        prev = index > 0 ? chars[index] : '\0'
+        next = index + 1 < length(chars) ? chars[index + 2] : '\0'
+        if !(prev in ('!', '<', '>', ':', '=')) && next != '=' && next != '>'
+            return index
+        end
     end
     return nothing
 end

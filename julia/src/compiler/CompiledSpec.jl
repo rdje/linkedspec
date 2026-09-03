@@ -461,6 +461,53 @@ function validate_no_removed_aggregate_selectors(compiled::CompiledSpec)
     return nothing
 end
 
+"""Reject a caller-constructed nested-write node with a malformed typed path."""
+function validate_nested_write_serialized_state(compiled::CompiledSpec)
+    function visit(value, context::String)
+        if value isa AbstractVector
+            for (index, item) in enumerate(value)
+                visit(item, "$context[$(index - 1)]")
+            end
+            return nothing
+        elseif !(value isa AbstractDict)
+            return nothing
+        end
+        if get(value, "kind", nothing) == "assign_nested_access"
+            segments = get(value, "segments", nothing)
+            if !(segments isa AbstractVector) || isempty(segments)
+                throw(CompiledSpecException(
+                    "nested_write_serialized_state_invalid: $context must " *
+                    "contain at least one typed path_segment",
+                ))
+            end
+            for (index, segment) in enumerate(segments)
+                if !(segment isa AbstractDict) ||
+                        get(segment, "kind", nothing) != "path_segment" ||
+                        !(get(segment, "expression", nothing) isa AbstractDict)
+                    throw(CompiledSpecException(
+                        "nested_write_serialized_state_invalid: " *
+                        "$context.segments[$(index - 1)] must be one typed " *
+                        "path_segment",
+                    ))
+                end
+            end
+        end
+        for (key, item) in pairs(value)
+            visit(item, "$context.$(String(key))")
+        end
+        return nothing
+    end
+
+    for label in compiled.compiled_rule_order
+        rule = get(compiled.rules_by_label, label, nothing)
+        rule === nothing && continue
+        for (index, payload) in enumerate(action_payloads(rule))
+            visit(to_json(payload.action_ast), "$label.action_payloads[$(index - 1)]")
+        end
+    end
+    return nothing
+end
+
 mutable struct _RecursiveObservationEffects
     writes_observation::Bool
     rule_calls::Set{String}
@@ -997,6 +1044,7 @@ function _compile_spec(
     )
     validate_compiled_regex_slot_identities(compiled)
     validate_no_removed_aggregate_selectors(compiled)
+    validate_nested_write_serialized_state(compiled)
     validate_staged_parse_job_contract(compiled)
     validate_recursive_observation_policy(compiled)
     validate_progressive_dispatch_policy(compiled)

@@ -294,18 +294,18 @@ in the same value contract as typed value binding: `items = [value]`, `set(items
 binds a hash value and evaluates to that stored hash value. `set(items, ...)` and `set(meta, ...)` bind the same
 observable typed values as bare assignment. Mutation assignments also have expression
 values: `items += value` appends to the named array and evaluates to the updated array snapshot. On Perl, Rust,
-and Dart, `meta[key] = value` updates the typed root selected by the evaluated string/nonnegative-integer key and
-yields the updated root snapshot; Julia and Lua retain their earlier named-hash interpretation until admission.
+Dart, and Julia, `meta[key] = value` updates the typed root selected by the evaluated string/nonnegative-integer
+key and yields the updated root snapshot; Lua retains its earlier named-hash interpretation until admission.
 
 Nested value-path assignment mutates scalar-held array/hash payloads through direct access syntax:
-`payload["items"][0]["name"] = value`. On Perl, Rust, and Dart, each evaluated string/nonnegative-integer segment selects an
+`payload["items"][0]["name"] = value`. On Perl, Rust, Dart, and Julia, each evaluated string/nonnegative-integer segment selects an
 harray/array. The first selector may create an absent root, and the next selector may create a missing
 intermediate. Bound null and other wrong kinds are not coerced; arrays replace or append exactly at length and
 reject gaps. Segments evaluate once left-to-right, then the RHS once, before isolated structural validation.
 Success commits and yields a detached updated root. Invalid selectors, kind conflicts, and gaps throw typed
 diagnostic objects and commit no partial path; already completed expression effects retain ordinary semantics.
-Reads never create state. Julia and Lua retain the prior existing-intermediate/null-result boundary
-until the remaining implementation and public-admission leaves complete.
+Reads never create state. Lua retains the prior existing-intermediate/null-result boundary until its
+implementation and the public-admission leaves complete.
 
 Array end mutations are also statement-level operations on a named working array:
 `items.push_back(value)` appends, `items.push_front(value)` prepends, `items.pop_back()`

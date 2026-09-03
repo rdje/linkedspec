@@ -173,7 +173,7 @@ function _normalize_final_codeblock_expr!(expr::ActionExpr, registry::UserFuncti
         _normalize_final_codeblock_expr!(expr.key, registry)
         _normalize_final_codeblock_expr!(expr.value, registry)
     elseif expr isa ActionAssignNestedAccessExpr
-        _normalize_final_codeblock_segments!(expr.segments, registry)
+        _normalize_final_codeblock_write_segments!(expr.segments, registry)
         _normalize_final_codeblock_expr!(expr.value, registry)
     elseif expr isa ActionIndexedVarExpr
         _normalize_final_codeblock_expr!(expr.index, registry)
@@ -240,6 +240,13 @@ function _normalize_final_codeblock_segments!(segments, registry)
         if segment isa ActionIndexAccessSegment
             _normalize_final_codeblock_expr!(segment.expr, registry)
         end
+    end
+    return nothing
+end
+
+function _normalize_final_codeblock_write_segments!(segments, registry)
+    for segment in segments
+        _normalize_final_codeblock_expr!(segment.expression, registry)
     end
     return nothing
 end

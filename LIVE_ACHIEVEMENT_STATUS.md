@@ -2,20 +2,23 @@
 
 ## Current Activity
 
-- Dart `.19.4` is complete. `.19.4.1-.2` implement nested write-vivification and `map_leaves!` across typed native,
-  reconstructed, generated, emitted, independently executed, and primary-CLI routes.
+- Julia write-vivification `.19.5.1` is canonical-signoff-complete from clean activation `0fdb8095`; typed native,
+  reconstructed, generated-plan, emitted-module, and CLI routes are aligned. Parent `.19.5` remains active.
 
 ## Latest Completed Slice
 
-- `.19.4.2` adds Dart's typed identity-guarded atomic `map_leaves!`, preserves all frozen base/composition
-  semantics, and corrects the stale current-boundary fixture root to zero-regex `Top:: -> Done`.
+- `.19.5.1` implements Julia's unified typed nested writes with evaluated selectors, isolated dense publication,
+  exact diagnostics, detachment, malformed-carrier rejection, and unchanged read behavior.
 
 ## Next Action
 
-- From the committed clean `.19.4.2` boundary, activate Julia write-vivification `.19.5.1` task-tree-first and
-  retrieve the frozen write contract plus Julia typed path/runtime/generated owners.
+- From the committed clean `.19.5.1` boundary, activate Julia `map_leaves!` `.19.5.2` task-tree-first and retrieve
+  the frozen mutation/composition contracts plus Julia binding, parser, runtime, and generated-source owners.
 
 ## Recent Completions
+
+- `2026-09-03` — `.19.5.1` implements Julia write vivification through native/reconstructed/generated/emitted/CLI
+  routes; focused 406, complete package, storage 21/5, primary CLI, corpus 105/105, and canonical CI pass.
 
 - `2026-09-02` — `.19.4.2` implements typed atomic Dart `map_leaves!`; 461/461 package tests, 25 temporary owners /
   47 packages, CLI 66x2, corpus 105/105, unchanged 167 + 592 mutation authorities, and rooted 5x2x6 pass.
@@ -67,9 +70,6 @@
 
 - `2026-08-30` — `.23.1` restores seven mechanically collapsed selector migration examples, requires five ordered
   non-identity contrasts, and closes focused public no-drift at 61/32/0 plus eleven semantic mutations.
-
-- `2026-08-30` — `.22.2` makes 1,718 exact current task definitions globally unique across 96 files, repairs the
-  sole legacy duplicate, and guards the boundary with ten mutations plus exact canonical proof.
 
 ## History
 

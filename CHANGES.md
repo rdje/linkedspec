@@ -10,6 +10,31 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-03 — FUTURE-PARITY-BACKLOG.19.5.1 — implement Julia write vivification
+
+- Unified authored Julia one- and many-segment bracket writes under `ActionAssignNestedAccessExpr` with typed
+  expression-bearing `ActionWritePathSegment` records, exact source, and half-open Unicode-scalar spans. Reserved,
+  empty, unclosed, malformed, and non-addressable targets now fail through exact typed parse diagnostics.
+- Preserved and validated the carrier across action visitors, callable/semantic contracts, compiled-state JSON
+  reconstruction, generated plans, source emission, and direct runtime execution. Empty or malformed programmatic
+  paths fail closed at every executable boundary.
+- Implemented segment-left-to-right then RHS evaluation, post-evaluation binding-presence snapshots, evaluated
+  string/integer harray/array selection, dense absent-root/intermediate creation, isolated atomic publication,
+  completed-expression-effect preservation, and detached mutable ingress/egress.
+- Added exact `nested_write_segment_invalid`, `nested_write_kind_conflict`, and `nested_write_array_gap` Julia
+  diagnostics. Bound null and wrong existing kinds are never coerced; expression failures preserve identity;
+  reads remain non-creating; Julia `map_leaves!`, Lua, and portable/public admission do not move.
+- Added permanent fixture-driven proof for all 5 AST / 7 syntax / 11 success / 16 structural-failure / 3
+  expression-failure / 3 read-exclusion cases, four exclusions, astral spans, detachment, fresh function state,
+  corrupt carriers, and native/reconstructed/generated-plan/emitted-module/primary-CLI routes. The focused suite
+  passes 406 assertions and the unchanged neutral checker rejects all 105 mutations.
+- The complete Julia package suite, primary CLI, and corpus 105/105 pass. Project-data containment registers the
+  exact 21st temporary owner, retains five locked package trees, and corrects only its stale hard-coded 20-owner
+  success sentence after the substantive 21-versus-21 inventory comparison already passed.
+- Synchronized the task/index, Knowledge, ADR `0036`/index, architecture, roadmaps, Toolbox, continuity docs, and
+  sole-facing mdBook. This also corrects two stale current Dart-bang book sentences and the task registry's stale
+  pre-Dart frontier while preserving dated history. Exact staged canonical CI binds the completed candidate.
+
 ## 2026-09-02 — FUTURE-PARITY-BACKLOG.19.4.2 — implement Dart map-leaves receiver mutation
 
 - Added the dedicated typed Dart `receiver_mutation_chain` carrier for exact

@@ -699,7 +699,7 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
 - **WHEN:** changing aggregate-selector migration teaching, public Markdown inventory, bare-binding examples,
   selector-retirement status, or the bounded historical-reference census.
 - **HOW:** `bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py`.
-- **OUTPUT:** 61 public files / 32 classified historical references / zero current examples, five exact ordered
+- **OUTPUT:** 62 public files / 32 classified historical references / zero current examples, five exact ordered
   migration contrasts, eleven rejected contrast mutations, zero executable positives, and capability admission.
 - **BOUNDARY:** the seven concrete retired spellings are allowed only inside the uniquely bounded mdBook migration
   section. Executable `.spec` inputs and current examples remain selector-free.
@@ -711,17 +711,20 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   arrays, segment/RHS order, expression-failure propagation, post-evaluation same-binding snapshots, isolated
   atomic commit, detached results, structural diagnostics, and non-creating reads.
 - **WHEN:** designing or implementing nested assignment/vivification in any backend. This checker freezes neutral
-  semantics; never infer portable/public admission from its success. Perl consumes it under `.19.2.1` and Rust
-  under `.19.3.1`. Before changing another backend, directly probe a quoted segment and a computed string segment:
-  Dart/Julia/Lua still statically split key versus index and therefore cannot yet satisfy the evaluated-kind
-  contract.
+  semantics; never infer portable/public admission from its success. Perl, Rust, Dart, and Julia consume it under
+  `.19.2.1`, `.19.3.1`, `.19.4.1`, and `.19.5.1`. Before changing Lua, directly probe a quoted segment and a
+  computed string segment: Lua still statically splits key versus index and therefore cannot yet satisfy the
+  evaluated-kind contract.
 - **HOW:** `bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py`.
 - **OUTPUT:** `write-vivification contract: 5 valid syntax, 7 invalid syntax, 11 success, 16 structural failures, 3 evaluation failures, 3 read exclusions, 8 composed writes, 105 rejected mutations; future behavior remains unadmitted`.
 - **CURRENT BOUNDARY:** Perl's permanent `t/write_vivification_perl_contract.t` projects the frozen fixture through
   `LinkedSpec::call_spec_handler_subst`, live rules, and user functions. Rust's permanent
   `rust/linkedspec-runtime/tests/write_vivification_contract.rs` projects parsed, serialized, generated-plan,
-  emitted-source, independently compiled emitted Rust, native rules, and user functions. Existing `terse_11_4`
-  tests/corpus retain the checked boundary on Dart/Julia/Lua. Public capability admission remains pending.
+  emitted-source, independently compiled emitted Rust, native rules, and user functions. Dart uses
+  `dart/test/write_vivification_contract_test.dart`; Julia uses
+  `julia/test/write_vivification_contract_test.jl` across native, reconstructed, generated-plan, emitted-module,
+  and primary-CLI routes. Existing `terse_11_4` tests/corpus retain the checked boundary on Lua. Public capability
+  admission remains pending.
 
 ### 4.8.3 `tools/check_map_leaves_mutation_contract.py` — neutral receiver-mutation oracle
 
