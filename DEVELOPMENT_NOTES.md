@@ -9,6 +9,37 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-09-03 (`FUTURE-PARITY-BACKLOG.19.5.2` — Julia `map_leaves!`): keep bang syntax in one dedicated parser
+  path. Do not allow `!` in ordinary identifiers or callees; typed receiver/mutation/callback/continuation state is
+  required to preserve addressability, transaction ordering, and exact authored spans.
+- A receiver guard must key a stable visible-binding identity. Ordinary rebinding retains identity, while callback
+  frames and user-function parameters get fresh identities and restore any shadow afterward. Text equality is not
+  enough to distinguish forbidden receiver writes from legal same-spelling locals.
+- Reject at the write owner before evaluating any operand, selector, or RHS. Julia now applies that ordering to
+  assignment, append, nested write/bang, explicit mutation helpers, array-end methods, regex substitution, and all
+  binding-target array pipelines—including the three pipelines whose ordinary write-back remains separately owned.
+- Traverse only a deep-copied original shape under its root kind. Copy callback `value` and `path`, detach callback
+  results, never revisit replacement aggregates, publish the rebuilt binding once, and release the guard in
+  `finally` before any ordinary continuation.
+- Direct callback blocks are not generic delayed codeblock values. Execute their typed `ActionBlock` in fresh
+  scoped bindings and catch callback-local `return` at that boundary so it cannot escape the traversal.
+- Refactoring fluent continuation into a value-call owner keeps bang continuation post-commit and detached while
+  preserving ordinary fluent semantics. Binding-mutating array-end methods remain addressability-dependent and
+  yield no detached continuation mutation.
+- Permanent proof passes 496 assertions across syntax, runtime, composition, malformed state, reconstruction,
+  generated plan, emitted module, and CLI. Julia's 22nd temporary owner remains under managed repository-local
+  `TMPDIR`; no off-volume path or generated-format change was introduced.
+- Derive storage-oracle success cardinality from its already-compared expected-owner array; the substantive 22/22
+  check was correct while a literal success string still said 21. The complete change record also triggers
+  content-addressed history segment `4986`; ADR `0100` raises only finite collection/manifest routing to 27/26.
+- A typed-carrier validator must not dispatch solely on the caller-controlled `kind` value it is validating.
+  Recognize the receiver/mutation/continuation structure independently, then require the exact node kind; otherwise
+  a programmatic malformed node can skip the intended fail-closed boundary.
+- Pre-evaluation guards must not broaden an ordinary helper's mutation arity. Inspect a three-argument
+  `substr`/`regex_subst` target early enough to reject the active receiver, then return to the existing pure or
+  unsupported path unless the four-argument statement-mutation signature is present.
+- The exact control remains `Top:: -> Done`: entering `Top` starts its loop, whose outgoing edge selects and
+  matches `Done`'s regex. Adding a regex to `Top` would be inert here and would weaken this semantic proof.
 - 2026-09-03 (`FUTURE-PARITY-BACKLOG.19.5.1` — Julia write vivification): one typed
   `ActionAssignNestedAccessExpr` must own authored one- and many-segment bracket assignment. Each
   `ActionWritePathSegment` retains its ordinary expression plus source/span; authored spelling must not preselect

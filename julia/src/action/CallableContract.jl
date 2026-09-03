@@ -156,6 +156,17 @@ function _normalize_final_codeblock_expr!(expr::ActionExpr, registry::UserFuncti
            expr isa ActionProgressiveDispatchSpanExpr ||
            expr isa ActionStagedParseJobExpr
         return nothing
+    elseif expr isa ActionReceiverMutationChainExpr
+        normalize_action_block_final_codeblocks!(expr.mutation.callback.body, registry)
+        for call in expr.continuation
+            _normalize_final_codeblock_args!(
+                CallableReceiverSurface,
+                call.method,
+                call.args,
+                false,
+                registry,
+            )
+        end
     elseif expr isa ActionFluentChainExpr
         _normalize_final_codeblock_expr!(expr.receiver, registry)
         for call in expr.calls

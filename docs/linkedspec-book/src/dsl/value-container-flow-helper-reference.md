@@ -878,7 +878,7 @@ Hash helpers return scalar information about an object or a new hash/array value
 | `hash_expr.walk_leaves() { block }` | hash value | visit every non-hash leaf for side effects and return the original tree. |
 | `hash_expr.map_leaves() { block }` | hash value | return a new tree with every non-hash leaf replaced by the block result. |
 | `hash_expr.reduce_leaves(initial) { block }` | value | fold every non-hash leaf into an accumulator. |
-| `binding_name.map_leaves!() { block }` | updated hash/array value | Perl/Rust/Dart: atomically replace leaves and rebind one bare named receiver. |
+| `binding_name.map_leaves!() { block }` | updated hash/array value | Perl/Rust/Dart/Julia: atomically replace leaves and rebind one bare named receiver. |
 
 Examples:
 
@@ -976,9 +976,9 @@ leaf_count = items.reduce_leaves(0) {
 };
 ```
 
-### Perl/Rust/Dart `map_leaves!` receiver update
+### Perl/Rust/Dart/Julia `map_leaves!` receiver update
 
-`binding_name.map_leaves!() { block }` is the mutating twin of `map_leaves()` on Perl, Rust, and Dart. The receiver
+`binding_name.map_leaves!() { block }` is the mutating twin of `map_leaves()` on Perl, Rust, Dart, and Julia. The receiver
 must already exist as an harray or array and must be a bare uniform-binding name. The starting root kind chooses
 the same traversal rule described above. Mapping reads a detached original-shape snapshot, uses each callback
 result as the replacement leaf, commits the complete rebuilt receiver once, and returns a separate detached copy.
@@ -1003,8 +1003,8 @@ attempt raises `receiver_mutation_reentrant` before the write. A same-spelling p
 is a different identity and remains legal.
 
 The receiver guard is released before fluent continuation. Therefore a continuation runs against the detached
-updated value, and its later failure does not undo the already completed receiver commit. Julia and Lua do not
-yet accept this bang surface; `map_leaves!(items)`, temporary or nested receivers, other bang methods,
+updated value, and its later failure does not undo the already completed receiver commit. Lua does not yet accept
+this bang surface; `map_leaves!(items)`, temporary or nested receivers, other bang methods,
 and arbitrary user-defined bang functions are outside v1.
 
 The terse hash-index operator is the statement form written with the key next to the target:

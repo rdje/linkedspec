@@ -1733,12 +1733,14 @@
   Commit: `FUTURE-PARITY-BACKLOG.19.4.2 - implement Dart map leaves mutation`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.5`
-  Status: `in progress; .19.5.1 complete, .19.5.2 next`
+  Status: `done; canonical-signoff-complete` (2026-09-03; both Julia mechanisms implemented, no push)
   Goal: Implement the unchanged v1 contract on Julia across native and supported generated/emitted routes.
   Children: `.19.5.1`, `.19.5.2`
   Dependencies: `.19.4`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `.19.5.1` canonical 406-assertion write proof plus `.19.5.2` canonical 496-assertion mutation proof;
+    complete Julia package/CLI/corpus, repository storage, neutral mutations, durable sync, and doctrines pass.
+  Commit: `.19.5.1` `FUTURE-PARITY-BACKLOG.19.5.1 - implement Julia write vivification`; `.19.5.2`
+    `FUTURE-PARITY-BACKLOG.19.5.2 - implement Julia map leaves mutation`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.5.1`
   Status: `canonical-signoff-complete` (activated 2026-09-02; completed 2026-09-03 from exact clean Dart
@@ -1801,11 +1803,90 @@
   Commit: `FUTURE-PARITY-BACKLOG.19.5.1 - implement Julia write vivification`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.5.2`
-  Status: `pending`
+  Status: `canonical-signoff-complete` (activated and completed 2026-09-03 from exact clean Julia nested-write
+    commit `5b3d7adc0cce9bc862b9b3aa00cbbce924dbf916`; no push)
   Goal: Implement Julia `map_leaves!` through typed parsed/emitted state and runtime.
   Dependencies: `.19.5.1`
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `canonical` — this began as a focused private Julia implementation, but its mandatory
+    complete `CHANGES.md` record crossed the bounded rollover threshold. The resulting immutable history member
+    exhausts the prior finite collection/manifest route, so ADR `0100` and receipt-bound canonical proof are now
+    required in this same leaf. Lua, portable capability, public examples, recurring cross-backend admission, and
+    the push boundary remain owned by `.19.6-.9`.
+  Focused checks: unchanged neutral checker and exact Julia projection of all 4 valid syntax, 14 invalid syntax,
+    5 exclusions, 10 successes, 8 pre-commit failures, continuation/shadow/guard-release/nonbang/detachment proof,
+    167 base mutations, and 592 nested-write compositions; parser, compiler, reconstructed compiled state,
+    generated-plan, emitted-source, independently executed caller where supported, primary CLI, package, corpus,
+    and storage dependents; formatting/static checks, Knowledge, task/index, bounded histories, memory, all nine
+    doctrines, rendered mdBook, cross-backend no-drift, and whitespace.
+  Canonical trigger: `mandatory bounded change-history rollover and exact finite capacity ADR 0100` — stage the
+    complete candidate and run receipt-bound `bash tools/run_ci_local.sh`. `.19.7-.9` still retain portable/public
+    admission and the later push boundary.
+  Acceptance: Parse only `IDENTIFIER.map_leaves!() { ACTION_BLOCK }` as the dedicated typed
+    `receiver_mutation_chain`, retaining receiver/call/callback/continuation structure and exact authored Unicode-
+    scalar spans through contracts, reconstructed compiled state, generated plans, source emission, and an
+    independent emitted-source caller where supported. Resolve one existing bare uniform-binding identity
+    containing an harray or array; traverse a detached original-shape snapshot in sorted-key or index order;
+    provide detached `value`, complete copied `path`, `depth`, and `key|index`; replace each leaf with the detached
+    callback result without revisiting replacement aggregates; then commit the rebuilt binding once and return a
+    detached updated root before an ordinary fluent continuation. Guard the resolved receiver identity during
+    callbacks so direct, nested-write, nested-bang, helper-mediated, array-end, and binding-target pipeline writes
+    fail before operand/segment/RHS evaluation with exact `receiver_mutation_reentrant`, while unrelated and
+    distinct same-spelling shadow identities remain legal. Callback/re-entrant failure leaves the receiver
+    unchanged and releases the guard; continuation failure keeps the prior commit. Preserve non-bang behavior and
+    compose exactly with Julia `.19.5.1` nested writes; reject malformed typed carriers; do not admit Lua or
+    portable/public capability.
+  Ownership: `.19.5.2` owns Julia parser/compiler/runtime/carrier implementation, direct proof, Julia status/docs,
+    parent `.19.5` closeout, and the mechanically required bounded change-history rollover plus its one exact
+    finite route-capacity decision. It must not alter the frozen neutral/composition contracts, Perl/Rust/Dart/Lua
+    behavior, public current examples, capability/facade/schema/MCP surfaces, recurring cross-backend admission,
+    or push state.
+  Checklist: [x] clean activation/task ownership [x] Knowledge/ADR and sibling-contract retrieval
+    [x] Toolbox-first Julia owner inventory [x] exact RED through frozen neutral/composition contracts
+    [x] typed parser/compiler/reconstructed/generated/emitted carrier [x] atomic identity-guarded runtime
+    [x] base/composition/generated/CLI proof [x] focused dependent/no-drift proof
+    [x] durable docs/Knowledge/live sync [x] exact staged canonical signoff [x] atomic commit/brief/clean handoff.
+  Activation evidence: exact `git status --short --untracked-files=all` was empty at
+    `5b3d7adc0cce9bc862b9b3aa00cbbce924dbf916`; `git_message_brief.txt` was zero bytes; `.19.5.1` was committed with
+    all nine doctrine hooks after exact staged canonical proof and its receipt was promoted to that HEAD; the
+    prior canonical job was fully consumed; and no generated mdBook output or background job remained. The clean
+    boundary permits this task-tree pivot; no implementation file changes precede this ownership record.
+  Implementation evidence: the unchanged neutral checkers pass at 4/14/5 syntax, 10 successes, 8 pre-commit
+    failures, 167 base mutations, 8 composed writes, 6 callbacks, one continuation, and 592 composition mutations.
+    The exact zero-regex `Top:: -> Done` Julia control first returned generic parser-invocation failure. Julia now
+    owns a dedicated typed receiver/mutation/callback/continuation carrier with authored Unicode-scalar spans,
+    fail-closed compiled-state validation at compiler/runtime/generated-plan/source-emitter boundaries, stable
+    binding identities across ordinary writes, fresh callback/function-shadow identities, original-shape copied
+    traversal, one guarded commit, detached results, and post-commit ordinary continuation. The permanent focused
+    suite passes 496/496 across every frozen syntax row plus all 10 success and 8 failure rows by stable ID, every direct/helper/array-end/pipeline
+    pre-evaluation guard, nested-write composition, shadowing, non-bang isolation, malformed state, reconstructed
+    state, native/generated-plan/emitted-module/primary-CLI routes, and the director-confirmed zero-regex parent
+    semantics.
+  Dependent finding: adding the 22nd Julia temporary-workspace owner passed the oracle's exact array comparison,
+    but its success sentence still printed the hard-coded prior total 21. The same owned storage update now derives
+    the displayed total from the checked array; no containment rule or external path changed.
+  Rollover finding: the complete change record reached 465/512 lines and required the governed rollover. It creates
+    immutable content-addressed segment `4986` from clean activation commit `5b3d7adc`, leaving the hot root at
+    252/512 lines. The resulting 27-file collection and 26-line manifest exceed only the previous finite 26/25
+    route; ADR `0100` owns the exact 27/26 capacity step with every byte and aggregate ceiling unchanged.
+  Director review note: `ROADMAP.md` is the primary long-form/historical plan and `ROADMAP_V2.md` is its shorter
+    execution-focused companion, as the latter's `Relationship to ROADMAP.md` section and ADR `0001` require.
+    This slice preserves their lockstep contract. Mechanically deriving or retiring one would reduce duplication
+    risk but is not authorized here and would require a separately activated task-tree owner and consumer audit.
+  Validation finding: final review proved a caller-corrupted top-level typed node `kind` could suppress the
+    validator's own kind-based dispatch. The validator now detects the receiver/mutation/continuation structure
+    independently and requires the exact kind; all four compiler/runtime/generated-plan/emitter rejection routes
+    cover both this corruption and an invalid receiver projection.
+  No-regression finding: the initial early guard widened three-argument `substr` into the four-argument statement-
+    mutation path and moved invalid-target `set` failure ahead of RHS evaluation. Final integration preserves the
+    old ordinary semantics while still rejecting a valid active receiver before operand evaluation; a focused
+    pure-discarded `substr` check locks the boundary.
+  Signoff evidence: the focused 496-assertion suite, unchanged 167 base + 592 composition and 105 write mutation
+    oracles, complete Julia package suite, primary CLI, corpus 105/105, and 22-owner / five-package-tree storage
+    proof pass. The mdBook renders, both history-pressure checks pass after the exact rollover, Knowledge and task
+    indexes regenerate, all nine doctrines and whitespace pass, and exact staged receipt-bound canonical CI passes
+    on the final candidate. Generated book output is removed before commit.
+  Verification: `canonical-signoff-complete`
+  Commit: `FUTURE-PARITY-BACKLOG.19.5.2 - implement Julia map leaves mutation`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.6`
   Status: `pending`

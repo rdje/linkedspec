@@ -156,12 +156,246 @@ function _action_parse_expr(text::String, start::Int)
         return assignment
     end
 
+    receiver_mutation = _action_parse_receiver_mutation_chain(text, start)
+    if receiver_mutation !== nothing
+        return receiver_mutation
+    end
+
     chain = _action_parse_fluent_chain(text, start)
     if chain !== nothing
         return chain
     end
 
     return _action_parse_expr_without_chain(text, start)
+end
+
+"""Parse the sole v1 bang-method without widening ordinary identifiers."""
+function _action_parse_receiver_mutation_chain(text::String, start::Int)
+    if match(r"^map_leaves!\s*\(", text) !== nothing
+        _action_receiver_mutation_syntax_error(
+            code = "bang_method_function_form_invalid",
+            start = start,
+            stop = start + _action_len("map_leaves!"),
+            message = "map_leaves! is receiver-only; use binding.map_leaves!() { ... }",
+        )
+    end
+
+    segments = _action_split_top_level_fluent_segments(text)
+    length(segments) <= 1 && return nothing
+    bang_pattern = r"^([A-Za-z_][A-Za-z0-9_]*)(\s*)(!+)"
+    mutation_index = nothing
+    bang_match = nothing
+    for index in 2:length(segments)
+        candidate = match(bang_pattern, segments[index].text)
+        if candidate !== nothing
+            mutation_index = index
+            bang_match = candidate
+            break
+        end
+    end
+    (mutation_index === nothing || bang_match === nothing) && return nothing
+
+    mutation_segment = segments[mutation_index]
+    dot = mutation_segment.start - 1
+    chars = collect(text)
+    while dot >= 0 && isspace(chars[dot + 1])
+        dot -= 1
+    end
+    if dot < 0 || chars[dot + 1] != '.'
+        return nothing
+    end
+    receiver_text = _action_trim_with_offsets(_action_slice(text, 0, dot), start)
+    method = String(bang_match.captures[1])
+    separating_whitespace = String(bang_match.captures[2])
+    bangs = String(bang_match.captures[3])
+    method_start = start + mutation_segment.start
+    method_stop = method_start + _action_len(method)
+    bang_start = method_stop + _action_len(separating_whitespace)
+    bang_stop = bang_start + _action_len(bangs)
+    source_method = method * separating_whitespace * bangs
+
+    if method != "map_leaves"
+        _action_receiver_mutation_syntax_error(
+            code = "bang_method_unknown",
+            start = method_start,
+            stop = bang_stop,
+            message = "unsupported bang method '$source_method'",
+        )
+    end
+    if !isempty(separating_whitespace)
+        _action_receiver_mutation_syntax_error(
+            code = "bang_method_suffix_invalid",
+            start = method_start,
+            stop = bang_stop,
+            message = "the bang suffix must immediately follow map_leaves",
+        )
+    end
+    if _action_len(bangs) != 1
+        _action_receiver_mutation_syntax_error(
+            code = "bang_method_suffix_invalid",
+            start = method_start,
+            stop = bang_stop,
+            message = "map_leaves! accepts exactly one bang suffix",
+        )
+    end
+    if !_action_is_identifier(receiver_text.text)
+        _action_receiver_mutation_syntax_error(
+            code = "receiver_mutation_receiver_not_addressable",
+            start = receiver_text.start,
+            stop = receiver_text.stop,
+            message = "receiver mutation requires one bare uniform-binding identifier",
+        )
+    end
+    if receiver_text.text in _ACTION_NESTED_WRITE_RESERVED_ROOTS
+        _action_receiver_mutation_syntax_error(
+            code = "receiver_mutation_receiver_reserved",
+            start = receiver_text.start,
+            stop = receiver_text.stop,
+            message = "receiver mutation cannot target reserved binding '$(receiver_text.text)'",
+        )
+    end
+
+    mutation_text = mutation_segment.text
+    cursor = _action_len(method) + _action_len(separating_whitespace) + _action_len(bangs)
+    mutation_chars = collect(mutation_text)
+    while cursor < length(mutation_chars) && isspace(mutation_chars[cursor + 1])
+        cursor += 1
+    end
+    args_open = cursor
+    if args_open >= length(mutation_chars) || mutation_chars[args_open + 1] != '('
+        _action_receiver_mutation_syntax_error(
+            code = "map_leaves_mutation_arguments_invalid",
+            start = method_start + args_open,
+            stop = method_start + args_open,
+            message = "map_leaves! expects empty parentheses before its callback",
+        )
+    end
+    args_close = _action_find_matching_delimiter(mutation_text, args_open, '(', ')')
+    if args_close === nothing
+        _action_receiver_mutation_syntax_error(
+            code = "map_leaves_mutation_arguments_invalid",
+            start = method_start + args_open,
+            stop = start + mutation_segment.stop,
+            message = "map_leaves! expects empty parentheses before its callback",
+        )
+    end
+    if !isempty(strip(_action_slice(mutation_text, args_open + 1, args_close)))
+        _action_receiver_mutation_syntax_error(
+            code = "map_leaves_mutation_arguments_invalid",
+            start = method_start + args_open,
+            stop = method_start + args_close + 1,
+            message = "map_leaves! expects empty parentheses before its callback",
+        )
+    end
+    cursor = args_close + 1
+    while cursor < length(mutation_chars) && isspace(mutation_chars[cursor + 1])
+        cursor += 1
+    end
+    if cursor >= length(mutation_chars) || mutation_chars[cursor + 1] != '{'
+        _action_receiver_mutation_syntax_error(
+            code = "map_leaves_mutation_callback_missing",
+            start = method_start,
+            stop = method_start + cursor,
+            message = "map_leaves! requires one immediate trailing callback block",
+        )
+    end
+    callback_open = cursor
+    callback_close = _action_find_matching_delimiter(mutation_text, callback_open, '{', '}')
+    if callback_close === nothing ||
+       !isempty(strip(_action_slice(mutation_text, callback_close + 1, _action_len(mutation_text))))
+        _action_receiver_mutation_syntax_error(
+            code = "map_leaves_mutation_callback_missing",
+            start = method_start,
+            stop = start + mutation_segment.stop,
+            message = "map_leaves! requires one immediate trailing callback block",
+        )
+    end
+    callback_body_start = method_start + callback_open + 1
+    callback_body_source = _action_slice(mutation_text, callback_open + 1, callback_close)
+    callback_body = _action_parse_block(callback_body_source, callback_body_start)
+
+    continuation = ActionReceiverMutationContinuationCall[]
+    for index in (mutation_index + 1):length(segments)
+        segment = segments[index]
+        continuation_bang = match(bang_pattern, segment.text)
+        if continuation_bang !== nothing
+            continuation_start = start + segment.start
+            continuation_stop = continuation_start + _action_len(continuation_bang.match)
+            _action_receiver_mutation_syntax_error(
+                code = "receiver_mutation_continuation_bang_invalid",
+                start = continuation_start,
+                stop = continuation_stop,
+                message = "a receiver-mutation chain continuation must use an existing non-bang fluent call",
+            )
+        end
+        segment_start = start + segment.start
+        parsed = _action_parse_fluent_call_segment(
+            segment.text,
+            segment_start,
+            start + segment.stop;
+            allow_bare_identifier = false,
+        )
+        attached = _action_split_attached_block(segment.text)
+        head = _action_trim_with_offsets(
+            attached === nothing ? segment.text : attached.head,
+            segment_start,
+        )
+        callee = _action_parse_callee(head.text)
+        open = _action_find_top_level_open_paren(head.text)
+        close = open === nothing ? nothing :
+                _action_find_matching_delimiter(head.text, open, '(', ')')
+        if parsed === nothing || callee === nothing || open === nothing || close === nothing
+            return ActionRawExpr(
+                source = text,
+                source_span = ActionSourceSpan(start, start + _action_len(text)),
+                reason = "invalid_receiver_mutation_continuation",
+            )
+        end
+        push!(continuation, ActionReceiverMutationContinuationCall(
+            source = segment.text,
+            source_span = ActionSourceSpan(segment_start, start + segment.stop),
+            method = parsed.method,
+            source_method = something(parsed.source_method, parsed.method),
+            args_source = _action_slice(head.text, open + 1, close),
+            args_span = ActionSourceSpan(head.start + open + 1, head.start + close),
+            args = parsed.args,
+        ))
+    end
+
+    return ActionReceiverMutationChainExpr(
+        source = text,
+        source_span = ActionSourceSpan(start, start + _action_len(text)),
+        receiver = ActionReceiverMutationBindingReference(
+            source = receiver_text.text,
+            source_span = ActionSourceSpan(receiver_text.start, receiver_text.stop),
+            name = receiver_text.text,
+        ),
+        mutation = ActionReceiverMutationCall(
+            source = mutation_text,
+            source_span = ActionSourceSpan(method_start, start + mutation_segment.stop),
+            method = "map_leaves",
+            source_method = "map_leaves!",
+            method_span = ActionSourceSpan(method_start, bang_stop),
+            args_span = ActionSourceSpan(method_start + args_open, method_start + args_close + 1),
+            callback = ActionReceiverMutationCallback(
+                source = _action_slice(mutation_text, callback_open, callback_close + 1),
+                source_span = ActionSourceSpan(
+                    method_start + callback_open,
+                    method_start + callback_close + 1,
+                ),
+                body = callback_body,
+            ),
+        ),
+        continuation = continuation,
+    )
+end
+
+function _action_receiver_mutation_syntax_error(; code, start, stop, message)
+    throw(ActionParseException(
+        code = code,
+        source_span = ActionSourceSpan(start, stop),
+        message = message,
+    ))
 end
 
 function _action_parse_expr_without_chain(text::String, start::Int)

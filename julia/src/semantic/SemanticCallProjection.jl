@@ -806,6 +806,11 @@ function _semantic_call_visit_children!(
             visit(segment.expression)
         end
         visit(expression.value)
+    elseif expression isa ActionReceiverMutationChainExpr
+        visit_block(expression.mutation.callback.body)
+        for call in expression.continuation
+            visit_args(call.args)
+        end
     elseif expression isa ActionFluentChainExpr
         visit(expression.receiver)
         for call in expression.calls

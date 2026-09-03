@@ -508,6 +508,180 @@ function validate_nested_write_serialized_state(compiled::CompiledSpec)
     return nothing
 end
 
+"""Reject malformed caller-constructed receiver-mutation typed carriers."""
+function validate_receiver_mutation_serialized_state(compiled::CompiledSpec)
+    invalid(context, reason) = throw(CompiledSpecException(
+        "receiver_mutation_serialized_state_invalid: $context $reason",
+    ))
+
+    function object(value, context)
+        value isa AbstractDict || invalid(context, "must be an object")
+        return value
+    end
+
+    function span(value, context)
+        encoded = object(value, context)
+        start = get(encoded, "start", nothing)
+        stop = get(encoded, "end", nothing)
+        if length(encoded) != 2 || !(start isa Integer) || !(stop isa Integer) ||
+                start < 0 || stop < start
+            invalid(context, "must be one valid half-open span")
+        end
+        return (start = Int(start), stop = Int(stop))
+    end
+
+    function projection(source::String, source_span, child_span)
+        relative_start = child_span.start - source_span.start
+        relative_stop = child_span.stop - source_span.start
+        chars = collect(source)
+        if relative_start < 0 || relative_stop < relative_start ||
+                relative_stop > length(chars)
+            return nothing
+        end
+        return String(chars[(relative_start + 1):relative_stop])
+    end
+
+    function validate_node(node::AbstractDict, context::String)
+        get(node, "kind", nothing) == "receiver_mutation_chain" ||
+            invalid(context, "kind must be receiver_mutation_chain")
+        source = get(node, "source", nothing)
+        source isa AbstractString || invalid(context, "source must be a string")
+        source = String(source)
+        source_span = span(get(node, "source_span", nothing), "$context.source_span")
+
+        receiver = object(get(node, "receiver", nothing), "$context.receiver")
+        receiver_name = get(receiver, "name", nothing)
+        receiver_source = get(receiver, "source", nothing)
+        receiver_span = span(
+            get(receiver, "source_span", nothing),
+            "$context.receiver.source_span",
+        )
+        if get(receiver, "kind", nothing) != "binding_reference" ||
+                !(receiver_name isa AbstractString) ||
+                !_action_is_identifier(receiver_name) ||
+                receiver_source != receiver_name ||
+                projection(source, source_span, receiver_span) != receiver_source
+            invalid(context, "receiver binding reference is invalid")
+        end
+
+        mutation = object(get(node, "mutation", nothing), "$context.mutation")
+        mutation_source = get(mutation, "source", nothing)
+        mutation_span = span(
+            get(mutation, "source_span", nothing),
+            "$context.mutation.source_span",
+        )
+        method_span = span(
+            get(mutation, "method_span", nothing),
+            "$context.mutation.method_span",
+        )
+        args_span = span(
+            get(mutation, "args_span", nothing),
+            "$context.mutation.args_span",
+        )
+        projected_args = projection(source, source_span, args_span)
+        if get(mutation, "kind", nothing) != "receiver_mutation_call" ||
+                get(mutation, "method", nothing) != "map_leaves" ||
+                get(mutation, "source_method", nothing) != "map_leaves!" ||
+                !(mutation_source isa AbstractString) ||
+                projection(source, source_span, mutation_span) != mutation_source ||
+                projection(source, source_span, method_span) != "map_leaves!" ||
+                !(projected_args isa AbstractString) ||
+                !occursin(r"^\(\s*\)$", projected_args)
+            invalid(context, "mutation call is invalid")
+        end
+
+        callback = object(
+            get(mutation, "callback", nothing),
+            "$context.mutation.callback",
+        )
+        callback_source = get(callback, "source", nothing)
+        callback_span = span(
+            get(callback, "source_span", nothing),
+            "$context.mutation.callback.source_span",
+        )
+        body = object(
+            get(callback, "body", nothing),
+            "$context.mutation.callback.body",
+        )
+        body_source = get(body, "source", nothing)
+        body_span = span(
+            get(body, "source_span", nothing),
+            "$context.mutation.callback.body.source_span",
+        )
+        if get(callback, "kind", nothing) != "block_value" ||
+                !(callback_source isa AbstractString) ||
+                projection(source, source_span, callback_span) != callback_source ||
+                get(body, "kind", nothing) != "action_block" ||
+                !(body_source isa AbstractString) ||
+                !(get(body, "statements", nothing) isa AbstractVector) ||
+                projection(source, source_span, body_span) != body_source ||
+                callback_span.start + 1 != body_span.start ||
+                body_span.stop + 1 != callback_span.stop
+            invalid(context, "callback block is invalid")
+        end
+
+        continuation = get(node, "continuation", nothing)
+        continuation isa AbstractVector || invalid(context, "continuation must be a list")
+        prior_stop = mutation_span.stop
+        for (index, raw_call) in enumerate(continuation)
+            call_context = "$context.continuation[$(index - 1)]"
+            call = object(raw_call, call_context)
+            call_source = get(call, "source", nothing)
+            call_method = get(call, "method", nothing)
+            call_source_method = get(call, "source_method", nothing)
+            call_args_source = get(call, "args_source", nothing)
+            call_span = span(get(call, "source_span", nothing), "$call_context.source_span")
+            call_args_span = span(get(call, "args_span", nothing), "$call_context.args_span")
+            if get(call, "kind", nothing) != "fluent_call" ||
+                    !(call_method isa AbstractString) || occursin('!', call_method) ||
+                    call_source_method != call_method ||
+                    !(call_source isa AbstractString) ||
+                    !(call_args_source isa AbstractString) ||
+                    !(get(call, "args", nothing) isa AbstractVector) ||
+                    call_span.start <= prior_stop ||
+                    projection(source, source_span, call_span) != call_source ||
+                    projection(source, source_span, call_args_span) != call_args_source ||
+                    !startswith(call_source, call_method)
+                invalid(context, "continuation call $(index - 1) is invalid")
+            end
+            prior_stop = call_span.stop
+        end
+        if (isempty(continuation) && mutation_span.stop != source_span.stop) ||
+                (!isempty(continuation) && prior_stop != source_span.stop)
+            invalid(context, "terminal source span is invalid")
+        end
+        return nothing
+    end
+
+    function visit(value, context::String)
+        if value isa AbstractVector
+            for (index, item) in enumerate(value)
+                visit(item, "$context[$(index - 1)]")
+            end
+            return nothing
+        elseif !(value isa AbstractDict)
+            return nothing
+        end
+        if get(value, "kind", nothing) == "receiver_mutation_chain" ||
+                all(key -> haskey(value, key), ("receiver", "mutation", "continuation"))
+            validate_node(value, context)
+        end
+        for (key, item) in pairs(value)
+            visit(item, "$context.$(String(key))")
+        end
+        return nothing
+    end
+
+    for label in compiled.compiled_rule_order
+        rule = get(compiled.rules_by_label, label, nothing)
+        rule === nothing && continue
+        for (index, payload) in enumerate(action_payloads(rule))
+            visit(to_json(payload.action_ast), "$label.action_payloads[$(index - 1)]")
+        end
+    end
+    return nothing
+end
+
 mutable struct _RecursiveObservationEffects
     writes_observation::Bool
     rule_calls::Set{String}
@@ -1045,6 +1219,7 @@ function _compile_spec(
     validate_compiled_regex_slot_identities(compiled)
     validate_no_removed_aggregate_selectors(compiled)
     validate_nested_write_serialized_state(compiled)
+    validate_receiver_mutation_serialized_state(compiled)
     validate_staged_parse_job_contract(compiled)
     validate_recursive_observation_policy(compiled)
     validate_progressive_dispatch_policy(compiled)

@@ -1,7 +1,7 @@
 # 0036 - Nested creation is write-only and `!` denotes explicit receiver mutation
 
 - Date: 2026-07-15
-- Status: accepted direction; nested writes implemented through Julia, bang mutation through Dart; Julia bang/Lua/admission pending
+- Status: accepted direction; both mechanisms implemented through Julia; Lua/admission pending
 - Tags: dsl, language-evolution, mutation, autovivification, receiver-methods, traversal, paths, portability
 
 ## Context
@@ -219,8 +219,8 @@ Leaf `.19.3.2` implements the unchanged `linkedspec-map-leaves-mutation-v1` cont
 Permanent proof projects the 4/14/5 syntax inventory, 10 successes, 8 pre-commit failures, special state cases,
 six callback compositions, one continuation composition, native/serde/generated/emitted/independently compiled
 routes, and corrupt-node rejection. Private runtime proof exercises state visible only after failure. The unchanged
-oracle rejects all 167 base and 592 current composition mutations. Dart now implements both mechanisms; Julia
-nested writes have also advanced, while Julia bang, Lua, and portable/public admission remain future.
+oracle rejects all 167 base and 592 current composition mutations. Dart and Julia now implement both mechanisms;
+Lua and portable/public admission remain future.
 
 ## Dart nested-write implementation (2026-09-02)
 
@@ -289,7 +289,8 @@ Leaf `.19.5.1` implements the unchanged `linkedspec-write-vivification-v1` contr
 Permanent proof projects the frozen 5 AST / 7 syntax / 11 success / 16 structural-failure / 3 expression-failure /
 3 read-exclusion inventory plus detachment, function presence, astral spans, corrupt carriers, and every supported
 Julia route. The focused contract passes 406 assertions and the complete package suite passes. Julia
-`map_leaves!`, both Lua mechanisms, recurring proof, and portable/public admission remain future.
+`map_leaves!` has since advanced below; both Lua mechanisms, recurring proof, and portable/public admission remain
+future.
 
 ## Function-scope carrier resolution (2026-08-31)
 
@@ -324,8 +325,33 @@ Leaf `.19.2.2` implements `linkedspec-map-leaves-mutation-v1` on the Perl refere
 The permanent Perl contract exercises the frozen base and composition authority, including the array-pipeline
 write audit, with fatal warnings. It passes 58 focused tests, 105 write mutations, 167 base map mutations, 592
 composition mutations, and the complete 1,032-test Perl Phase 0 regression. Rust and Dart have since implemented
-both mechanisms; Julia has implemented nested write-vivification but remains non-bang, while Lua remains
-non-bang/non-vivifying. Portable capability and public admission remain future.
+both mechanisms; Julia has since implemented both mechanisms, while Lua remains non-bang/non-vivifying. Portable
+capability and public admission remain future.
+
+## Julia `map_leaves!` implementation (2026-09-03)
+
+Leaf `.19.5.2` implements `linkedspec-map-leaves-mutation-v1` on Julia without changing either neutral contract:
+
+- `ActionReceiverMutationChainExpr` retains one bare binding reference, mutation call, direct typed callback
+  `ActionBlock`, ordinary continuation, exact source, and half-open Unicode-scalar spans through contract,
+  callable, semantic, compiler, generated-plan, source-emitter, and runtime boundaries;
+- visible bindings have stable identities across ordinary writes, while callback scopes and user-function
+  parameters receive fresh identities and restore their shadows. The active guard therefore follows resolution,
+  not spelling;
+- assignment/append, nested write/bang, explicit mutation helpers, array-end methods, regex substitution, and all
+  binding-target array pipelines reject before their operand, selector, or RHS work only when they target the
+  guarded identity. Unrelated and distinct same-spelling writes remain legal;
+- the interpreter maps a detached original-shape snapshot in sorted harray-key or array-index order, recursing
+  only through the starting root kind. Copied callback frames yield detached, non-revisited replacements;
+  callback or re-entrant failure publishes no receiver root and always releases the guard; and
+- complete callback success publishes once, releases the guard, returns another detached root, and only then
+  executes ordinary fluent continuation, so continuation failure cannot undo the completed commit.
+
+Permanent proof passes 496 assertions across all 4 valid / 14 invalid / 5 excluded syntax cases, the frozen
+behavior and composition groups, 18 pre-evaluation guarded write forms, corruption, reconstruction, native,
+generated-plan, emitted-module, and primary-CLI routes. The unchanged neutral checkers reject 167 base plus 592
+composition mutations. The exact control keeps `Top` regex-free: entering it starts the parent loop, whose edge
+selects `Done` and matches only `Done`'s regex. Lua, recurring proof, and portable/public admission remain future.
 
 ## Consequences
 
@@ -339,10 +365,9 @@ non-bang/non-vivifying. Portable capability and public admission remain future.
   be added; they are excluded because no distinct coherent mutation contract has been accepted.
 - “Absolute path” means complete root-to-leaf path inside the traversal receiver. The variable name is receiver
   identity, not an extra path element. Hash-root paths contain keys; array-root paths contain zero-based indexes.
-- During `.19.2-.19.6`, public guidance must name the backend transition explicitly: Perl, Rust, and Dart
-  implement nested-write vivification and `map_leaves!`; Julia implements nested-write vivification but not
-  `map_leaves!`; Lua retains the checked non-vivifying/non-bang boundary. Portable admission remains future until
-  the remaining backend and admission leaves land.
+- During `.19.2-.19.6`, public guidance must name the backend transition explicitly: Perl, Rust, Dart, and Julia
+  implement nested-write vivification and `map_leaves!`; Lua retains the checked non-vivifying/non-bang boundary.
+  Portable admission remains future until the remaining backend and admission leaves land.
 
 ## Links
 

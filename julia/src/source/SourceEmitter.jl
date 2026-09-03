@@ -206,6 +206,7 @@ function validate_generated_rule_plan_v2(
     try
         validate_no_removed_aggregate_selectors(compiled)
         validate_nested_write_serialized_state(compiled)
+        validate_receiver_mutation_serialized_state(compiled)
     catch error
         throw(generated_source_compile_failed(identity, error))
     end
@@ -604,6 +605,7 @@ function emit_julia_source_v2(compiled::CompiledSpec, source_identity::AbstractS
         end
         validate_no_removed_aggregate_selectors(compiled)
         validate_nested_write_serialized_state(compiled)
+        validate_receiver_mutation_serialized_state(compiled)
         normalized_spec = _generated_effective_spec(compiled)
         spec_json = _generated_canonical_json(to_json(normalized_spec))
         identity_hex = bytes2hex(codeunits(identity))

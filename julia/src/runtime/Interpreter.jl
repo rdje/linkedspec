@@ -27,6 +27,9 @@ struct RuntimeDiagnostic
     actual_regex_index::Union{Nothing,Int}
     operation::Union{Nothing,String}
     binding::Union{Nothing,String}
+    method::Union{Nothing,String}
+    attempt::Union{Nothing,String}
+    expected_kinds::Union{Nothing,Vector{String}}
     segment_index::Union{Nothing,Int}
     path::Union{Nothing,Vector{Any}}
     expected_kind::Union{Nothing,String}
@@ -66,6 +69,9 @@ function RuntimeDiagnostic(;
     actual_regex_index = nothing,
     operation = nothing,
     binding = nothing,
+    method = nothing,
+    attempt = nothing,
+    expected_kinds = nothing,
     segment_index = nothing,
     path = nothing,
     expected_kind = nothing,
@@ -105,6 +111,10 @@ function RuntimeDiagnostic(;
         actual_regex_index === nothing ? nothing : Int(actual_regex_index),
         optional_string(operation),
         optional_string(binding),
+        optional_string(method),
+        optional_string(attempt),
+        expected_kinds === nothing ? nothing :
+            String[String(item) for item in expected_kinds],
         segment_index === nothing ? nothing : Int(segment_index),
         path === nothing ? nothing : Any[deepcopy(value) for value in path],
         optional_string(expected_kind),
@@ -328,6 +338,27 @@ function LinkedSpecRuntimeEngine(
         end
         rethrow()
     end
+    try
+        validate_receiver_mutation_serialized_state(compiled_spec)
+    catch error
+        if error isa CompiledSpecException
+            throw(RuntimeInterpreterException(
+                error.message;
+                diagnostic = RuntimeDiagnostic(
+                    type = "runtime_parser",
+                    stage = "validate_compiled_rule",
+                    owner_stage = "julia_runtime",
+                    summary = "Julia compiled-state validation failed",
+                    detail = error.message,
+                    spec_name = spec_name,
+                    spec_path = spec_path,
+                    handler_source_label = "julia_runtime",
+                    code = "receiver_mutation_serialized_state_invalid",
+                ),
+            ))
+        end
+        rethrow()
+    end
     return LinkedSpecRuntimeEngine(
         compiled_spec,
         max_iterations,
@@ -345,6 +376,8 @@ struct _RuntimeRuleLocalBinding
     array::Any
     hash_present::Bool
     hash::Any
+    identity_present::Bool
+    identity::Union{Nothing,Int}
 end
 
 struct _RuntimeRecognitionToken
@@ -392,6 +425,9 @@ mutable struct _RuntimeExecutionContext
     variables::Dict{String,Any}
     arrays::Dict{String,Vector{Any}}
     hashes::Dict{String,Dict{String,Any}}
+    binding_identities::Dict{String,Int}
+    active_receiver_mutations::Dict{Int,String}
+    next_binding_identity::Int
     mark_buckets::Dict{String,Dict{String,Int}}
     recognition_frames::Vector{_RuntimeRecognitionFrame}
     recursive_observation_scopes::Vector{_RuntimeRecursiveObservationScope}
@@ -442,6 +478,9 @@ function _RuntimeExecutionContext(
         Dict{String,Any}(),
         Dict{String,Vector{Any}}(),
         Dict{String,Dict{String,Any}}(),
+        Dict{String,Int}(),
+        Dict{Int,String}(),
+        1,
         Dict{String,Dict{String,Int}}(),
         _RuntimeRecognitionFrame[],
         _RuntimeRecursiveObservationScope[],
@@ -463,6 +502,48 @@ function _RuntimeExecutionContext(
         generated_source_identity === nothing ?
             nothing : String(generated_source_identity),
     )
+end
+
+function _ensure_runtime_binding_identity!(context::_RuntimeExecutionContext, name::String)
+    identity = get(context.binding_identities, name, nothing)
+    if identity === nothing
+        identity = context.next_binding_identity
+        context.next_binding_identity += 1
+        context.binding_identities[name] = identity
+    end
+    return identity
+end
+
+function _bind_runtime_fresh_identity!(context::_RuntimeExecutionContext, name::String)
+    identity = context.next_binding_identity
+    context.next_binding_identity += 1
+    context.binding_identities[name] = identity
+    return identity
+end
+
+function _visible_runtime_binding_identity(context::_RuntimeExecutionContext, name::String)
+    _runtime_binding_present(context, name) || return nothing
+    return _ensure_runtime_binding_identity!(context, name)
+end
+
+function _activate_runtime_receiver_mutation!(context::_RuntimeExecutionContext, name::String)
+    identity = _visible_runtime_binding_identity(context, name)
+    if identity === nothing || haskey(context.active_receiver_mutations, identity)
+        return nothing
+    end
+    context.active_receiver_mutations[identity] = name
+    return identity
+end
+
+function _deactivate_runtime_receiver_mutation!(context::_RuntimeExecutionContext, identity::Int)
+    delete!(context.active_receiver_mutations, identity)
+    return nothing
+end
+
+function _active_runtime_receiver_mutation(context::_RuntimeExecutionContext, name::String)
+    identity = _visible_runtime_binding_identity(context, name)
+    identity === nothing && return nothing
+    return get(context.active_receiver_mutations, identity, nothing)
 end
 
 function _runtime_recognition_frame_state(
@@ -1524,6 +1605,8 @@ struct _RuntimeScopedBinding
     array::Any
     hash_present::Bool
     hash::Any
+    identity_present::Bool
+    identity::Union{Nothing,Int}
 end
 
 mutable struct _CurrentRuntimeActionEdge
@@ -3581,6 +3664,14 @@ function _evaluate_runtime_action_expr!(
         end
         return result
     elseif expr isa ActionStagedParseJobExpr
+        _assert_runtime_receiver_mutation_writable!(
+            engine,
+            context,
+            expr.target,
+            "assign",
+            _runtime_binding_target_span(expr.source_span, expr.target),
+            rule_label,
+        )
         marker = construct_staged_parse_job_marker(
             authority = context.source_authority,
             registers = context.registers,
@@ -3594,6 +3685,14 @@ function _evaluate_runtime_action_expr!(
             _runtime_copy(marker),
         )
     elseif expr isa ActionProgressiveDispatchSpanExpr
+        _assert_runtime_receiver_mutation_writable!(
+            engine,
+            context,
+            expr.target,
+            "assign",
+            _runtime_binding_target_span(expr.source_span, expr.target),
+            rule_label,
+        )
         state = context.progressive_dispatch_state
         state === nothing && throw(
             BoundedChildParseAuthority.missing_registry_exception(
@@ -3619,6 +3718,14 @@ function _evaluate_runtime_action_expr!(
             _runtime_copy(result),
         )
     elseif expr isa ActionAssignScalarExpr
+        _assert_runtime_receiver_mutation_writable!(
+            engine,
+            context,
+            expr.name,
+            "assign",
+            _runtime_binding_target_span(expr.source_span, expr.name),
+            rule_label,
+        )
         if expr.value isa ActionRecognitionCheckpointExpr
             _runtime_recognition_checkpoint!(context, rule_label, expr.name)
             return _store_runtime_bare_binding!(context, expr.name, nothing)
@@ -3632,6 +3739,14 @@ function _evaluate_runtime_action_expr!(
         ))
         return _store_runtime_bare_binding!(context, expr.name, value)
     elseif expr isa ActionAssignArrayAppendExpr
+        _assert_runtime_receiver_mutation_writable!(
+            engine,
+            context,
+            expr.name,
+            "append",
+            _runtime_binding_target_span(expr.source_span, expr.name),
+            rule_label,
+        )
         value = _runtime_copy(_evaluate_runtime_action_expr!(
             engine,
             expr.value,
@@ -3641,6 +3756,14 @@ function _evaluate_runtime_action_expr!(
         ))
         return _append_runtime_array_value!(context, expr.name, value)
     elseif expr isa ActionAssignHashIndexExpr
+        _assert_runtime_receiver_mutation_writable!(
+            engine,
+            context,
+            expr.name,
+            "nested_write",
+            _runtime_binding_target_span(expr.source_span, expr.name),
+            rule_label,
+        )
         return _assign_runtime_index!(
             engine,
             context,
@@ -3651,12 +3774,28 @@ function _evaluate_runtime_action_expr!(
             current_edge,
         )
     elseif expr isa ActionAssignNestedAccessExpr
+        _assert_runtime_receiver_mutation_writable!(
+            engine,
+            context,
+            expr.base,
+            "nested_write",
+            _runtime_binding_target_span(expr.source_span, expr.base),
+            rule_label,
+        )
         return _assign_runtime_nested!(
             engine,
             context,
             expr.base,
             expr.segments,
             expr.value,
+            rule_label,
+            current_edge,
+        )
+    elseif expr isa ActionReceiverMutationChainExpr
+        return _evaluate_runtime_receiver_mutation_chain!(
+            engine,
+            expr,
+            context,
             rule_label,
             current_edge,
         )
@@ -3730,6 +3869,14 @@ function _evaluate_runtime_action_expr!(
             payload = child.value,
         )
     elseif expr isa ActionObserveRecognitionExpr
+        _assert_runtime_receiver_mutation_writable!(
+            engine,
+            context,
+            expr.target,
+            "assign",
+            _runtime_binding_target_span(expr.source_span, expr.target),
+            rule_label,
+        )
         scope = _begin_runtime_recursive_observation!(context, expr.rule)
         try
             target_index = current_edge !== nothing &&
@@ -3971,6 +4118,7 @@ function _evaluate_runtime_call!(
     if statement_context && helper_name == "set_key" && _execute_runtime_set_key_statement!(
             engine,
             args,
+            call.source_span,
             context,
             rule_label,
             current_edge,
@@ -3980,7 +4128,9 @@ function _evaluate_runtime_call!(
     if statement_context && helper_name in ("substr", "regex_subst") &&
             _execute_runtime_regex_substitution_statement!(
                 engine,
+                helper_name,
                 args,
+                call.source_span,
                 context,
                 rule_label,
                 current_edge,
@@ -3991,6 +4141,7 @@ function _evaluate_runtime_call!(
             engine,
             helper_name,
             args,
+            call.source_span,
             context,
             rule_label,
             current_edge,
@@ -4015,9 +4166,9 @@ function _evaluate_runtime_call!(
         end
         return nothing
     elseif helper_name == "set"
-        return _call_runtime_set!(engine, args, context, rule_label, current_edge)
+        return _call_runtime_set!(engine, args, call.source_span, context, rule_label, current_edge)
     elseif helper_name == "push"
-        return _call_runtime_push!(engine, args, context, rule_label, current_edge)
+        return _call_runtime_push!(engine, args, call.source_span, context, rule_label, current_edge)
     elseif helper_name == "array"
         return _call_runtime_array(engine, args, context, rule_label, current_edge)
     elseif helper_name == "hash"
@@ -4043,6 +4194,7 @@ function _evaluate_runtime_call!(
         return _call_runtime_split_from_expressions!(
             engine,
             args,
+            call.source_span,
             context,
             rule_label,
             current_edge,
@@ -4723,13 +4875,16 @@ function _execute_runtime_user_function!(
     saved_variables = context.variables
     saved_arrays = context.arrays
     saved_hashes = context.hashes
+    saved_binding_identities = context.binding_identities
     context.variables = Dict{String,Any}()
     context.arrays = Dict{String,Vector{Any}}()
     context.hashes = Dict{String,Dict{String,Any}}()
+    context.binding_identities = Dict{String,Int}()
     push!(context.active_user_functions, definition.name)
 
     try
         for (name, value) in zip(definition.params, values)
+            _bind_runtime_fresh_identity!(context, name)
             context.variables[name] = _runtime_copy(value)
             if value isa AbstractVector
                 context.arrays[name] = _runtime_as_array(value)
@@ -4743,6 +4898,7 @@ function _execute_runtime_user_function!(
             rest_name === nothing && throw(RuntimeInterpreterException(
                 "user function '$(definition.name)' has no variadic rest parameter",
             ))
+            _bind_runtime_fresh_identity!(context, rest_name)
             context.variables[rest_name] = _runtime_copy(rest_values)
             context.arrays[rest_name] = _runtime_as_array(rest_values)
         end
@@ -4761,6 +4917,7 @@ function _execute_runtime_user_function!(
         context.variables = saved_variables
         context.arrays = saved_arrays
         context.hashes = saved_hashes
+        context.binding_identities = saved_binding_identities
         pop!(context.active_user_functions)
     end
 end
@@ -5004,10 +5161,13 @@ function _enter_runtime_scoped_scalar!(context, name::String, value)
         _runtime_copy(get(context.arrays, name, nothing)),
         haskey(context.hashes, name),
         _runtime_copy(get(context.hashes, name, nothing)),
+        haskey(context.binding_identities, name),
+        get(context.binding_identities, name, nothing),
     )
     delete!(context.variables, name)
     delete!(context.arrays, name)
     delete!(context.hashes, name)
+    _bind_runtime_fresh_identity!(context, name)
     context.variables[name] = _runtime_copy(value)
     return binding
 end
@@ -5016,6 +5176,7 @@ function _exit_runtime_scoped_binding!(context, binding::_RuntimeScopedBinding)
     delete!(context.variables, binding.name)
     delete!(context.arrays, binding.name)
     delete!(context.hashes, binding.name)
+    delete!(context.binding_identities, binding.name)
     if binding.variable_present
         context.variables[binding.name] = _runtime_copy(binding.variable)
     end
@@ -5024,6 +5185,9 @@ function _exit_runtime_scoped_binding!(context, binding::_RuntimeScopedBinding)
     end
     if binding.hash_present
         context.hashes[binding.name] = _runtime_as_hash(binding.hash)
+    end
+    if binding.identity_present
+        context.binding_identities[binding.name] = binding.identity
     end
     return nothing
 end
@@ -5043,6 +5207,8 @@ function _record_runtime_rule_local_binding!(context, name::String)
         _runtime_copy(get(context.arrays, name, nothing)),
         haskey(context.hashes, name),
         _runtime_copy(get(context.hashes, name, nothing)),
+        haskey(context.binding_identities, name),
+        get(context.binding_identities, name, nothing),
     )
     return nothing
 end
@@ -5056,6 +5222,7 @@ function _restore_runtime_rule_local_bindings!(context)
         delete!(context.variables, name)
         delete!(context.arrays, name)
         delete!(context.hashes, name)
+        delete!(context.binding_identities, name)
         if binding.variable_present
             context.variables[name] = _runtime_copy(binding.variable)
         end
@@ -5065,13 +5232,27 @@ function _restore_runtime_rule_local_bindings!(context)
         if binding.hash_present
             context.hashes[name] = _runtime_as_hash(binding.hash)
         end
+        if binding.identity_present
+            context.binding_identities[name] = binding.identity
+        end
     end
     return nothing
 end
 
-function _call_runtime_set!(engine, args, context, rule_label, current_edge)
+function _call_runtime_set!(engine, args, call_span, context, rule_label, current_edge)
     if length(args) < 2
         return nothing
+    end
+    variable_target = _runtime_variable_name(args[1])
+    if variable_target !== nothing
+        _assert_runtime_receiver_mutation_writable!(
+            engine,
+            context,
+            variable_target,
+            "helper:set",
+            call_span,
+            rule_label,
+        )
     end
     value = _runtime_copy(_evaluate_runtime_action_expr!(
         engine,
@@ -5080,7 +5261,6 @@ function _call_runtime_set!(engine, args, context, rule_label, current_edge)
         rule_label,
         current_edge,
     ))
-    variable_target = _runtime_variable_name(args[1])
     if variable_target !== nothing
         return _store_runtime_bare_binding!(context, variable_target, value)
     end
@@ -5089,7 +5269,7 @@ function _call_runtime_set!(engine, args, context, rule_label, current_edge)
     ))
 end
 
-function _call_runtime_push!(engine, args, context, rule_label, current_edge)
+function _call_runtime_push!(engine, args, call_span, context, rule_label, current_edge)
     child_rule = isempty(args) ? nothing : _runtime_variable_name(first(args))
     if child_rule !== nothing &&
             compiled_rule(engine.compiled_spec, child_rule) !== nothing &&
@@ -5108,6 +5288,14 @@ function _call_runtime_push!(engine, args, context, rule_label, current_edge)
         end
         valid_shape = target !== nothing && (length(args) < 3 || index !== nothing)
         if valid_shape
+            _assert_runtime_receiver_mutation_writable!(
+                engine,
+                context,
+                target,
+                "helper:push",
+                call_span,
+                rule_label,
+            )
             child = current_edge !== nothing && child_rule == current_edge.target.label ?
                 _execute_runtime_action_edge_child!(engine, current_edge, context) :
                 _execute_runtime_rule!(engine, child_rule, 0, context)
@@ -5118,6 +5306,14 @@ function _call_runtime_push!(engine, args, context, rule_label, current_edge)
     end
 
     if isempty(args)
+        _assert_runtime_receiver_mutation_writable!(
+            engine,
+            context,
+            rule_label,
+            "helper:push",
+            call_span,
+            rule_label,
+        )
         child = _require_runtime_action_edge_child!(engine, current_edge, context, rule_label)
         return _append_runtime_array_value!(context, rule_label, child.value)
     end
@@ -5125,6 +5321,14 @@ function _call_runtime_push!(engine, args, context, rule_label, current_edge)
     if length(args) == 1 && current_edge !== nothing
         child_rule = _runtime_variable_name(first(args))
         if child_rule !== nothing && compiled_rule(engine.compiled_spec, child_rule) !== nothing
+            _assert_runtime_receiver_mutation_writable!(
+                engine,
+                context,
+                rule_label,
+                "helper:push",
+                call_span,
+                rule_label,
+            )
             child = child_rule == current_edge.target.label ?
                 _execute_runtime_action_edge_child!(engine, current_edge, context) :
                 _execute_runtime_rule!(engine, child_rule, 0, context)
@@ -5137,6 +5341,14 @@ function _call_runtime_push!(engine, args, context, rule_label, current_edge)
                 "push target in rule $rule_label must be a variable",
             ))
         end
+        _assert_runtime_receiver_mutation_writable!(
+            engine,
+            context,
+            target,
+            "helper:push",
+            call_span,
+            rule_label,
+        )
         child = _execute_runtime_action_edge_child!(engine, current_edge, context)
         context.retv = child.value
         return _append_runtime_array_value!(context, target, child.value)
@@ -5149,6 +5361,14 @@ function _call_runtime_push!(engine, args, context, rule_label, current_edge)
                 "push target in rule $rule_label must be a variable",
             ))
         end
+        _assert_runtime_receiver_mutation_writable!(
+            engine,
+            context,
+            target,
+            "helper:push",
+            call_span,
+            rule_label,
+        )
         value = _runtime_copy(_evaluate_runtime_action_expr!(
             engine,
             args[2],
@@ -5426,6 +5646,226 @@ struct _RuntimeTreeCodeblockCallback
     pass_leaf_value::Bool
 end
 
+function _evaluate_runtime_receiver_mutation_chain!(
+    engine,
+    expr::ActionReceiverMutationChainExpr,
+    context,
+    rule_label,
+    current_edge,
+)
+    receiver = expr.receiver
+    if !_runtime_binding_present(context, receiver.name)
+        message = "map_leaves! receiver binding '$(receiver.name)' does not exist"
+        throw(RuntimeInterpreterException(
+            message;
+            diagnostic = _runtime_context_diagnostic(
+                engine,
+                context;
+                stage = "runtime_execution",
+                summary = "Julia map_leaves! receiver mutation failed",
+                detail = message,
+                code = "map_leaves_mutation_receiver_missing",
+                operation = "map_leaves_mutation",
+                binding = receiver.name,
+                method = "map_leaves",
+                source_span = _runtime_receiver_mutation_source_span(receiver.source_span),
+                rule_label = rule_label,
+            ),
+        ))
+    end
+
+    storage_kind, root = _runtime_store_for_write(context, receiver.name)
+    snapshot = _runtime_copy(root)
+    if !(snapshot isa AbstractDict) && !(snapshot isa AbstractVector)
+        actual_kind = _runtime_nested_write_value_kind(snapshot)
+        message = "map_leaves! receiver '$(receiver.name)' must hold an harray or " *
+                  "array, got $actual_kind"
+        throw(RuntimeInterpreterException(
+            message;
+            diagnostic = _runtime_context_diagnostic(
+                engine,
+                context;
+                stage = "runtime_execution",
+                summary = "Julia map_leaves! receiver mutation failed",
+                detail = message,
+                code = "map_leaves_mutation_receiver_kind_mismatch",
+                operation = "map_leaves_mutation",
+                binding = receiver.name,
+                method = "map_leaves",
+                expected_kinds = ["harray", "array"],
+                actual_kind = actual_kind,
+                source_span = _runtime_receiver_mutation_source_span(receiver.source_span),
+                rule_label = rule_label,
+            ),
+        ))
+    end
+
+    identity = _activate_runtime_receiver_mutation!(context, receiver.name)
+    if identity === nothing
+        _throw_runtime_receiver_mutation_reentrant(
+            engine,
+            context,
+            receiver.name,
+            "map_leaves!",
+            receiver.source_span,
+            rule_label,
+        )
+    end
+
+    rebuilt = nothing
+    try
+        rebuilt = snapshot isa AbstractDict ?
+            _map_runtime_receiver_mutation_hash(
+                engine,
+                _runtime_as_hash(snapshot),
+                expr.mutation.callback.body,
+                context,
+                rule_label,
+                current_edge,
+            ) :
+            _map_runtime_receiver_mutation_array(
+                engine,
+                _runtime_as_array(snapshot),
+                expr.mutation.callback.body,
+                context,
+                rule_label,
+                current_edge,
+            )
+        _store_runtime_updated_root!(context, storage_kind, receiver.name, rebuilt)
+    finally
+        _deactivate_runtime_receiver_mutation!(context, identity)
+    end
+
+    result = _runtime_copy(rebuilt)
+    for call in expr.continuation
+        trailing_block = !isempty(call.args) &&
+            last(call.args).value isa ActionCodeblockArgumentExpr
+        ordinary_call = ActionFluentCall(
+            method = call.method,
+            source_method = call.source_method,
+            args = call.args,
+            source = call.source,
+            source_span = call.source_span,
+            trailing_block_arg = trailing_block,
+            receiver_trailing_block_arg = trailing_block,
+        )
+        result = _evaluate_runtime_fluent_value_call!(
+            engine,
+            result,
+            ordinary_call,
+            context,
+            rule_label,
+            current_edge,
+        )
+    end
+    return _runtime_copy(result)
+end
+
+function _map_runtime_receiver_mutation_hash(
+    engine,
+    root,
+    callback,
+    context,
+    rule_label,
+    current_edge,
+)
+    function map_node(node, path)
+        result = Dict{String,Any}()
+        for key in sort!(collect(keys(node)))
+            value = node[key]
+            next_path = Any[path..., key]
+            result[key] = value isa AbstractDict ?
+                map_node(_runtime_as_hash(value), next_path) :
+                _evaluate_runtime_receiver_mutation_leaf!(
+                    engine,
+                    callback,
+                    value,
+                    next_path,
+                    context,
+                    rule_label,
+                    current_edge;
+                    key = key,
+                )
+        end
+        return result
+    end
+    return map_node(root, Any[])
+end
+
+function _map_runtime_receiver_mutation_array(
+    engine,
+    root,
+    callback,
+    context,
+    rule_label,
+    current_edge,
+)
+    function map_node(node, path)
+        result = Any[]
+        for (offset, value) in enumerate(node)
+            index = offset - 1
+            next_path = Any[path..., index]
+            push!(result, value isa AbstractVector ?
+                map_node(_runtime_as_array(value), next_path) :
+                _evaluate_runtime_receiver_mutation_leaf!(
+                    engine,
+                    callback,
+                    value,
+                    next_path,
+                    context,
+                    rule_label,
+                    current_edge;
+                    index = index,
+                ))
+        end
+        return result
+    end
+    return map_node(root, Any[])
+end
+
+function _evaluate_runtime_receiver_mutation_leaf!(
+    engine,
+    callback,
+    value,
+    path,
+    context,
+    rule_label,
+    current_edge;
+    key = nothing,
+    index = nothing,
+)
+    bindings = _RuntimeScopedBinding[]
+    try
+        push!(bindings, _enter_runtime_scoped_scalar!(context, "value", _runtime_copy(value)))
+        if key !== nothing
+            push!(bindings, _enter_runtime_scoped_scalar!(context, "key", key))
+        end
+        if index !== nothing
+            push!(bindings, _enter_runtime_scoped_scalar!(context, "index", index))
+        end
+        push!(bindings, _enter_runtime_scoped_scalar!(context, "path", _runtime_copy(path)))
+        push!(bindings, _enter_runtime_scoped_scalar!(context, "depth", length(path)))
+        try
+            return _runtime_copy(_evaluate_runtime_block_value!(
+                engine,
+                callback,
+                context,
+                rule_label,
+                current_edge,
+            ))
+        catch error
+            if error isa _RuntimeActionReturn
+                return _runtime_copy(error.value)
+            end
+            rethrow()
+        end
+    finally
+        for binding in Iterators.reverse(bindings)
+            _exit_runtime_scoped_binding!(context, binding)
+        end
+    end
+end
+
 function _evaluate_runtime_fluent_chain!(
     engine,
     chain,
@@ -5460,80 +5900,63 @@ function _evaluate_runtime_fluent_chain!(
             end
             continue
         end
-        if helper_name == "with"
-            value = _call_runtime_receiver_with_codeblock!(
-                engine,
-                value,
-                call,
-                context,
-                rule_label,
-                current_edge,
-            )
-            continue
-        elseif helper_name in _RUNTIME_TREE_TRAVERSAL_NAMES
-            value = _call_runtime_tree_traversal_codeblock!(
-                engine,
-                value,
-                call,
-                context,
-                rule_label,
-                current_edge,
-            )
-            continue
-        elseif helper_name == "copy"
-            value = _runtime_copy(value)
-            continue
-        elseif helper_name == "coalesce" || helper_name == "coalesce_nonempty"
-            if _runtime_coalesce_accepts(value, helper_name == "coalesce_nonempty")
-                value = _runtime_copy(value)
-                continue
-            end
-            args = ActionExpr[getfield(arg, :value) for arg in call.args]
-            value = _call_runtime_coalesce(
-                engine,
-                args,
-                context,
-                rule_label,
-                current_edge;
-                require_nonempty = helper_name == "coalesce_nonempty",
-            )
-            continue
-        elseif helper_name in _RUNTIME_HASH_HELPER_NAMES
-            values = Any[_runtime_copy(value)]
-            for arg in call.args
-                push!(values, _runtime_copy(_evaluate_runtime_action_expr!(
-                    engine,
-                    getfield(arg, :value),
-                    context,
-                    rule_label,
-                    current_edge,
-                )))
-            end
-            value = _call_runtime_hash_helper(helper_name, values)
-            continue
-        elseif helper_name in _RUNTIME_ARRAY_HELPER_NAMES
-            values = Any[_runtime_copy(value)]
-            for arg in call.args
-                push!(values, _runtime_copy(_evaluate_runtime_action_expr!(
-                    engine,
-                    getfield(arg, :value),
-                    context,
-                    rule_label,
-                    current_edge,
-                )))
-            end
-            if helper_name == "join_values"
-                delimiter = length(values) >= 2 ? values[2] : ""
-                values = Any[delimiter, values[1]]
-            end
-            value = _call_runtime_array_helper(helper_name, values)
-            continue
-        elseif !(helper_name in _RUNTIME_PURE_HELPER_NAMES)
-            throw(RuntimeInterpreterException(
-                "unsupported runtime fluent method '.$(call.method)' in rule $rule_label",
-            ))
-        end
+        value = _evaluate_runtime_fluent_value_call!(
+            engine,
+            value,
+            call,
+            context,
+            rule_label,
+            current_edge,
+        )
+    end
+    return value
+end
 
+function _evaluate_runtime_fluent_value_call!(
+    engine,
+    value,
+    call,
+    context,
+    rule_label,
+    current_edge,
+)
+    helper_name = canonical_action_helper_name(call.method)
+    if helper_name in _RUNTIME_ARRAY_END_MUTATION_NAMES
+        return nothing
+    elseif helper_name == "with"
+        return _call_runtime_receiver_with_codeblock!(
+            engine,
+            value,
+            call,
+            context,
+            rule_label,
+            current_edge,
+        )
+    elseif helper_name in _RUNTIME_TREE_TRAVERSAL_NAMES
+        return _call_runtime_tree_traversal_codeblock!(
+            engine,
+            value,
+            call,
+            context,
+            rule_label,
+            current_edge,
+        )
+    elseif helper_name == "copy"
+        return _runtime_copy(value)
+    elseif helper_name == "coalesce" || helper_name == "coalesce_nonempty"
+        if _runtime_coalesce_accepts(value, helper_name == "coalesce_nonempty")
+            return _runtime_copy(value)
+        end
+        args = ActionExpr[getfield(arg, :value) for arg in call.args]
+        return _call_runtime_coalesce(
+            engine,
+            args,
+            context,
+            rule_label,
+            current_edge;
+            require_nonempty = helper_name == "coalesce_nonempty",
+        )
+    elseif helper_name in _RUNTIME_HASH_HELPER_NAMES
         values = Any[_runtime_copy(value)]
         for arg in call.args
             push!(values, _runtime_copy(_evaluate_runtime_action_expr!(
@@ -5544,9 +5967,40 @@ function _evaluate_runtime_fluent_chain!(
                 current_edge,
             )))
         end
-        value = _call_runtime_pure_helper(helper_name, values)
+        return _call_runtime_hash_helper(helper_name, values)
+    elseif helper_name in _RUNTIME_ARRAY_HELPER_NAMES
+        values = Any[_runtime_copy(value)]
+        for arg in call.args
+            push!(values, _runtime_copy(_evaluate_runtime_action_expr!(
+                engine,
+                getfield(arg, :value),
+                context,
+                rule_label,
+                current_edge,
+            )))
+        end
+        if helper_name == "join_values"
+            delimiter = length(values) >= 2 ? values[2] : ""
+            values = Any[delimiter, values[1]]
+        end
+        return _call_runtime_array_helper(helper_name, values)
+    elseif !(helper_name in _RUNTIME_PURE_HELPER_NAMES)
+        throw(RuntimeInterpreterException(
+            "unsupported runtime fluent method '.$(call.method)' in rule $rule_label",
+        ))
     end
-    return value
+
+    values = Any[_runtime_copy(value)]
+    for arg in call.args
+        push!(values, _runtime_copy(_evaluate_runtime_action_expr!(
+            engine,
+            getfield(arg, :value),
+            context,
+            rule_label,
+            current_edge,
+        )))
+    end
+    return _call_runtime_pure_helper(helper_name, values)
 end
 
 function _call_runtime_receiver_with_codeblock!(
@@ -5944,6 +6398,14 @@ function _execute_runtime_array_end_mutation!(
         if length(call.args) != 1
             return nothing
         end
+        _assert_runtime_receiver_mutation_writable!(
+            engine,
+            context,
+            target,
+            helper_name,
+            call.source_span,
+            rule_label,
+        )
         value = _runtime_copy(_evaluate_runtime_action_expr!(
             engine,
             getfield(only(call.args), :value),
@@ -5963,6 +6425,14 @@ function _execute_runtime_array_end_mutation!(
     if !isempty(call.args)
         return nothing
     end
+    _assert_runtime_receiver_mutation_writable!(
+        engine,
+        context,
+        target,
+        helper_name,
+        call.source_span,
+        rule_label,
+    )
     return _mutate_runtime_array_storage!(context, target) do items
         if !isempty(items)
             helper_name == "pop_back" ? pop!(items) : popfirst!(items)
@@ -5977,6 +6447,7 @@ end
 function _execute_runtime_set_key_statement!(
     engine,
     args,
+    call_span,
     context,
     rule_label,
     current_edge,
@@ -5992,6 +6463,14 @@ function _execute_runtime_set_key_statement!(
     if target === nothing || isempty(target)
         return false
     end
+    _assert_runtime_receiver_mutation_writable!(
+        engine,
+        context,
+        target,
+        "helper:set_key",
+        call_span,
+        rule_label,
+    )
     key = _runtime_string(_evaluate_runtime_action_expr!(
         engine,
         effective_args[2],
@@ -6022,9 +6501,24 @@ function _mutate_runtime_array_storage!(mutator, context::_RuntimeExecutionConte
     return _store_runtime_bare_binding!(context, name, updated)
 end
 
-function _call_runtime_split_from_expressions!(engine, args, context, rule_label, current_edge)
+function _call_runtime_split_from_expressions!(
+    engine,
+    args,
+    call_span,
+    context,
+    rule_label,
+    current_edge,
+)
     target = length(args) == 3 ? _runtime_variable_name(first(args)) : nothing
     if target !== nothing
+        _assert_runtime_receiver_mutation_writable!(
+            engine,
+            context,
+            target,
+            "helper:split",
+            call_span,
+            rule_label,
+        )
         source = _evaluate_runtime_action_expr!(
             engine,
             args[2],
@@ -6061,16 +6555,42 @@ function _execute_runtime_array_transform_statement!(
     engine,
     helper_name,
     args,
+    call_span,
     context,
     rule_label,
     current_edge,
 )
-    if !(helper_name in ("trim_each", "filter_nonempty", "lowercase_each", "uppercase_each")) ||
-            length(args) != 1
+    expected_arity = if helper_name in (
+        "trim_each",
+        "filter_nonempty",
+        "lowercase_each",
+        "uppercase_each",
+        "uniq",
+    )
+        1
+    elseif helper_name in ("split_each", "filter_match")
+        2
+    else
+        nothing
+    end
+    if expected_arity === nothing || length(args) != expected_arity
         return false
     end
-    target = _runtime_variable_name(only(args))
+    target = _runtime_variable_name(first(args))
     if target === nothing
+        return false
+    end
+    _assert_runtime_receiver_mutation_writable!(
+        engine,
+        context,
+        target,
+        "helper:$helper_name",
+        call_span,
+        rule_label,
+    )
+    if !(helper_name in ("trim_each", "filter_nonempty", "lowercase_each", "uppercase_each"))
+        # Their ordinary function-form write-back remains independently owned,
+        # but they are still binding-target attempts for guard precedence.
         return false
     end
     value = _runtime_copy(_evaluate_runtime_action_expr!(
@@ -6597,16 +7117,30 @@ end
 
 function _execute_runtime_regex_substitution_statement!(
     engine,
+    helper_name,
     args,
+    call_span,
     context,
     rule_label,
     current_edge,
 )
-    if length(args) < 4
+    if length(args) < 3
         return false
     end
     target = _runtime_variable_name(args[1])
     if target === nothing
+        return false
+    end
+
+    _assert_runtime_receiver_mutation_writable!(
+        engine,
+        context,
+        target,
+        "helper:$helper_name",
+        call_span,
+        rule_label,
+    )
+    if length(args) < 4
         return false
     end
 
@@ -6623,13 +7157,13 @@ function _execute_runtime_regex_substitution_statement!(
         return false
     end
     pattern_flags = pattern_value isa _RuntimeRegexValue ? pattern_value.flags : ""
-    explicit_flags = _runtime_regex_substitution_flags!(
+    explicit_flags = length(args) >= 4 ? _runtime_regex_substitution_flags!(
         engine,
         args[4],
         context,
         rule_label,
         current_edge,
-    )
+    ) : ""
     flags = join(unique(collect(pattern_flags * explicit_flags)))
     regex = _runtime_compile_helper_regex(pattern, flags)
     if regex === nothing
@@ -7909,6 +8443,7 @@ function _store_runtime_bare_binding!(
     name::String,
     value,
 )
+    _ensure_runtime_binding_identity!(context, name)
     stored = _runtime_copy(value)
     delete!(context.variables, name)
     delete!(context.arrays, name)
@@ -8381,6 +8916,61 @@ function _runtime_nested_write_source_span(span::ActionSourceSpan)
     )
 end
 
+_runtime_receiver_mutation_source_span(span::ActionSourceSpan) =
+    _runtime_nested_write_source_span(span)
+
+function _runtime_binding_target_span(source_span::ActionSourceSpan, name::String)
+    return ActionSourceSpan(source_span.start, source_span.start + length(collect(name)))
+end
+
+function _assert_runtime_receiver_mutation_writable!(
+    engine,
+    context,
+    target::String,
+    attempt::String,
+    source_span::ActionSourceSpan,
+    rule_label::String,
+)
+    active_binding = _active_runtime_receiver_mutation(context, target)
+    active_binding === nothing && return nothing
+    _throw_runtime_receiver_mutation_reentrant(
+        engine,
+        context,
+        active_binding,
+        attempt,
+        source_span,
+        rule_label,
+    )
+end
+
+function _throw_runtime_receiver_mutation_reentrant(
+    engine,
+    context,
+    binding::String,
+    attempt::String,
+    source_span::ActionSourceSpan,
+    rule_label::String,
+)
+    message = "cannot write active map_leaves! receiver binding '$binding' from its callback"
+    throw(RuntimeInterpreterException(
+        message;
+        diagnostic = _runtime_context_diagnostic(
+            engine,
+            context;
+            stage = "runtime_execution",
+            summary = "Julia map_leaves! receiver mutation failed",
+            detail = message,
+            code = "receiver_mutation_reentrant",
+            operation = "map_leaves_mutation",
+            binding = binding,
+            method = "map_leaves",
+            attempt = attempt,
+            source_span = _runtime_receiver_mutation_source_span(source_span),
+            rule_label = rule_label,
+        ),
+    ))
+end
+
 function _runtime_store_for_write(context::_RuntimeExecutionContext, name::String)
     if haskey(context.variables, name)
         return (:variable, context.variables[name])
@@ -8487,6 +9077,9 @@ function _runtime_diagnostic(
     actual_regex_index = nothing,
     operation = nothing,
     binding = nothing,
+    method = nothing,
+    attempt = nothing,
+    expected_kinds = nothing,
     segment_index = nothing,
     path = nothing,
     expected_kind = nothing,
@@ -8528,6 +9121,9 @@ function _runtime_diagnostic(
         actual_regex_index = actual_regex_index,
         operation = operation,
         binding = binding,
+        method = method,
+        attempt = attempt,
+        expected_kinds = expected_kinds,
         segment_index = segment_index,
         path = path,
         expected_kind = expected_kind,
@@ -8559,6 +9155,9 @@ function _runtime_context_diagnostic(
     cycle = nothing,
     operation = nothing,
     binding = nothing,
+    method = nothing,
+    attempt = nothing,
+    expected_kinds = nothing,
     segment_index = nothing,
     path = nothing,
     expected_kind = nothing,
@@ -8588,6 +9187,9 @@ function _runtime_context_diagnostic(
         cycle = cycle,
         operation = operation,
         binding = binding,
+        method = method,
+        attempt = attempt,
+        expected_kinds = expected_kinds,
         segment_index = segment_index,
         path = path,
         expected_kind = expected_kind,
@@ -8631,6 +9233,9 @@ function to_json(diagnostic::RuntimeDiagnostic)
         "actual_regex_index" => diagnostic.actual_regex_index,
         "operation" => diagnostic.operation,
         "binding" => diagnostic.binding,
+        "method" => diagnostic.method,
+        "attempt" => diagnostic.attempt,
+        "expected_kinds" => diagnostic.expected_kinds,
         "segment_index" => diagnostic.segment_index,
         "path" => diagnostic.path,
         "expected_kind" => diagnostic.expected_kind,

@@ -740,6 +740,19 @@ function _visit_expr!(resolver::_ActionContractResolver, expr::ActionExpr)
         # not entries in the ordinary callable-helper registry. The private
         # staged declaration is likewise a dedicated logical node.
         return nothing
+    elseif expr isa ActionReceiverMutationChainExpr
+        _visit_block!(resolver, expr.mutation.callback.body)
+        for call in expr.continuation
+            _resolve_helper_call!(
+                resolver;
+                name = call.method,
+                source = call.source,
+                source_span = call.source_span,
+                surface = "receiver_method",
+                args = call.args,
+            )
+            _visit_args!(resolver, call.args)
+        end
     elseif expr isa ActionFluentChainExpr
         _visit_expr!(resolver, expr.receiver)
         for call in expr.calls

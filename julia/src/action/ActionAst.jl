@@ -651,6 +651,133 @@ function ActionAssignNestedAccessExpr(; source, source_span, base, segments, val
     )
 end
 
+"""One bare, addressable uniform binding targeted by a receiver mutation."""
+struct ActionReceiverMutationBindingReference <: ActionNode
+    kind::String
+    source::String
+    source_span::ActionSourceSpan
+    name::String
+end
+
+function ActionReceiverMutationBindingReference(; source, source_span, name)
+    return ActionReceiverMutationBindingReference(
+        "binding_reference",
+        String(source),
+        source_span,
+        String(name),
+    )
+end
+
+"""The immediate typed callback owned by `map_leaves!`."""
+struct ActionReceiverMutationCallback <: ActionNode
+    kind::String
+    source::String
+    source_span::ActionSourceSpan
+    body::ActionBlock
+end
+
+function ActionReceiverMutationCallback(; source, source_span, body)
+    return ActionReceiverMutationCallback(
+        "block_value",
+        String(source),
+        source_span,
+        body,
+    )
+end
+
+"""The sole v1 receiver-mutating call."""
+struct ActionReceiverMutationCall <: ActionNode
+    kind::String
+    source::String
+    source_span::ActionSourceSpan
+    method::String
+    source_method::String
+    method_span::ActionSourceSpan
+    args_span::ActionSourceSpan
+    callback::ActionReceiverMutationCallback
+end
+
+function ActionReceiverMutationCall(;
+    source,
+    source_span,
+    method,
+    source_method,
+    method_span,
+    args_span,
+    callback,
+)
+    return ActionReceiverMutationCall(
+        "receiver_mutation_call",
+        String(source),
+        source_span,
+        String(method),
+        String(source_method),
+        method_span,
+        args_span,
+        callback,
+    )
+end
+
+"""One ordinary non-bang fluent call after receiver publication."""
+struct ActionReceiverMutationContinuationCall <: ActionNode
+    kind::String
+    source::String
+    source_span::ActionSourceSpan
+    method::String
+    source_method::String
+    args_source::String
+    args_span::ActionSourceSpan
+    args::Vector{ActionArgument}
+end
+
+function ActionReceiverMutationContinuationCall(;
+    source,
+    source_span,
+    method,
+    source_method,
+    args_source,
+    args_span,
+    args,
+)
+    return ActionReceiverMutationContinuationCall(
+        "fluent_call",
+        String(source),
+        source_span,
+        String(method),
+        String(source_method),
+        String(args_source),
+        args_span,
+        ActionArgument[args...],
+    )
+end
+
+"""One guarded receiver mutation followed by ordinary fluent continuation."""
+struct ActionReceiverMutationChainExpr <: ActionExpr
+    kind::String
+    source::String
+    source_span::ActionSourceSpan
+    receiver::ActionReceiverMutationBindingReference
+    mutation::ActionReceiverMutationCall
+    continuation::Vector{ActionReceiverMutationContinuationCall}
+end
+
+function ActionReceiverMutationChainExpr(;
+    source,
+    source_span,
+    receiver,
+    mutation,
+    continuation,
+)
+    return ActionReceiverMutationChainExpr(
+        "receiver_mutation_chain",
+        String(source),
+        source_span,
+        receiver,
+        mutation,
+        ActionReceiverMutationContinuationCall[continuation...],
+    )
+end
+
 struct ActionFluentCall
     method::String
     args::Vector{ActionArgument}
@@ -1020,6 +1147,18 @@ function find_removed_aggregate_selector(expr::ActionExpr)
            expr isa ActionRecognitionRollbackExpr ||
            expr isa ActionProgressiveDispatchSpanExpr ||
            expr isa ActionStagedParseJobExpr
+        return nothing
+    elseif expr isa ActionReceiverMutationChainExpr
+        selector = find_removed_aggregate_selector(expr.mutation.callback.body)
+        if selector !== nothing
+            return selector
+        end
+        for call in expr.continuation
+            selector = _find_removed_aggregate_selector_in_args(call.args)
+            if selector !== nothing
+                return selector
+            end
+        end
         return nothing
     elseif expr isa ActionFluentChainExpr
         selector = find_removed_aggregate_selector(expr.receiver)
@@ -1398,6 +1537,46 @@ function to_json(expr::ActionAssignNestedAccessExpr)
     result["base"] = expr.base
     result["segments"] = [to_json(segment) for segment in expr.segments]
     result["value"] = to_json(expr.value)
+    return result
+end
+
+function to_json(reference::ActionReceiverMutationBindingReference)
+    result = _action_base_json(reference)
+    result["name"] = reference.name
+    return result
+end
+
+function to_json(callback::ActionReceiverMutationCallback)
+    result = _action_base_json(callback)
+    result["body"] = to_json(callback.body)
+    return result
+end
+
+function to_json(call::ActionReceiverMutationCall)
+    result = _action_base_json(call)
+    result["method"] = call.method
+    result["source_method"] = call.source_method
+    result["method_span"] = to_json(call.method_span)
+    result["args_span"] = to_json(call.args_span)
+    result["callback"] = to_json(call.callback)
+    return result
+end
+
+function to_json(call::ActionReceiverMutationContinuationCall)
+    result = _action_base_json(call)
+    result["method"] = call.method
+    result["source_method"] = call.source_method
+    result["args_source"] = call.args_source
+    result["args_span"] = to_json(call.args_span)
+    result["args"] = [to_json(argument) for argument in call.args]
+    return result
+end
+
+function to_json(expr::ActionReceiverMutationChainExpr)
+    result = _action_base_json(expr)
+    result["receiver"] = to_json(expr.receiver)
+    result["mutation"] = to_json(expr.mutation)
+    result["continuation"] = [to_json(call) for call in expr.continuation]
     return result
 end
 

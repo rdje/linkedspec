@@ -726,12 +726,13 @@ dispatch rule.
   - `return(items.map_leaves() { return(value) }.count())` yields `[2]`: the top-level mapped array has two
     elements, even though traversal visited three leaves.
 
-### Perl/Rust/Dart receiver mutation: `map_leaves!`
+### Perl/Rust/Dart/Julia receiver mutation: `map_leaves!`
 
 - **Signature**: `binding_name.map_leaves!() { block }`
 - **Returns**: a detached copy of the updated harray or array root; the named receiver is also rebound atomically.
-- **Backend status**: current on Perl under `FUTURE-PARITY-BACKLOG.19.2.2`, Rust under `.19.3.2`, and Dart under
-  `.19.4.2`. Julia and Lua do not yet accept the bang form; portable capability/public admission remains pending.
+- **Backend status**: current on Perl under `FUTURE-PARITY-BACKLOG.19.2.2`, Rust under `.19.3.2`, Dart under
+  `.19.4.2`, and Julia under `.19.5.2`. Lua does not yet accept the bang form; portable capability/public
+  admission remains pending.
 - **Addressability**: `binding_name` must be one existing, non-reserved, bare uniform binding that holds an harray
   or array. Literals, temporaries, helper results, bracket/property receivers, function-form `map_leaves!(tree)`,
   other bang methods, and arbitrary user-defined `name!` functions are not valid v1 forms.
