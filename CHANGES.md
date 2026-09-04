@@ -10,6 +10,21 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-04 — RUST-DEPENDENCY-WARNING-ZERO.0 — own Rust warning cleanup
+
+- Converted the director-identified canonical Rust warning stream into a dedicated non-blocking task tree rather
+  than leaving it as a conversational observation. Repeated clean carriers report 1,870 `pgen` warnings with
+  1,360 automated suggestions plus 26 `rgx-core` warnings; these remain output counts pending a unique-cause census.
+- Recorded the nested repository boundary: LinkedSpec pins `rgx` at
+  `8763a0e6bea97879f027237439d57725f83ead23`, and `pgen` is nested beneath it. Durable remediation therefore
+  requires explicit upstream commits and reviewed gitlink integration.
+- Split future work into census, authored `pgen`, generator/generated `pgen`, `rgx-core`, direct LinkedSpec,
+  dependency-pin integration, and zero-warning enforcement leaves. Broad allowances, warning filtering,
+  `RUSTFLAGS=-Awarnings`, blind `cargo fix`, and reduced canonical coverage are explicit non-solutions.
+- Synchronized the task ledger, both roadmaps, architecture/live/continuity state, Knowledge Map source, and
+  sole-facing project status without changing Rust source, dependency pins, generators, generated artifacts, CI,
+  or runtime behavior. The non-blocking intake returns PNT to Lua `map_leaves!` `.19.6.2` after commit.
+
 ## 2026-09-04 — FUTURE-PARITY-BACKLOG.19.6.1 — implement Lua write vivification
 
 - Unified authored Lua one- and many-segment bracket writes under one `assign_nested_access` `ActionExpr` with

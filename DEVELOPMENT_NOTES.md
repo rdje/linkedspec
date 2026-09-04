@@ -9,6 +9,19 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-09-04 (`RUST-DEPENDENCY-WARNING-ZERO.0` — durable Rust warning cleanup ownership): repeated clean canonical
+  carriers report `pgen (lib) generated 1870 warnings` and 1,360 suggested fixes, plus 26 `rgx-core` warnings.
+  Treat these as emitted diagnostic counts, not unique causal counts: generated repetition and multiple targets can
+  amplify one source defect.
+- Census before repair. Capture machine-readable diagnostics under repository-local storage and classify by crate,
+  lint, authored/generated authority, generator source, duplication factor, and safe remediation class. Split again
+  if a warning family is too broad for one reviewable leaf.
+- Fix generated warnings at the generator/template and prove regeneration idempotence. Do not hand-edit derived
+  parser files, suppress output, add crate-wide allowances, set `RUSTFLAGS=-Awarnings`, or run blind bulk fixes.
+- Respect repository ownership: main Git pins `rgx`; `pgen` is nested beneath it. Land clean upstream commits and
+  explicit gitlink updates before enforcing the zero-warning boundary in LinkedSpec.
+- Intake is planning-only and non-blocking. After its atomic commit, return to the already-owned Lua `map_leaves!`
+  `.19.6.2` frontier; warning implementation begins only when `.1` is explicitly activated from a clean boundary.
 - 2026-09-04 (`FUTURE-PARITY-BACKLOG.19.6.1` — Lua write vivification): one typed `assign_nested_access`
   expression must own every authored one- or many-segment bracket assignment. Each `ActionWritePathSegment`
   retains its ordinary expression plus exact source/span; authored spelling cannot preselect harray versus array.

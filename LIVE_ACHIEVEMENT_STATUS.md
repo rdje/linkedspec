@@ -2,21 +2,26 @@
 
 ## Current Activity
 
-- Lua nested-write `.19.6.1` is canonical-signoff-complete from exact clean `7df68275`: shared typed parsed/
-  reconstructed state and dense isolated runtime pass 436 assertions on both ABIs plus the complete Lua gate.
-  Lua `map_leaves!`, portable/public admission, and capability truth remain unchanged and pending.
+- `RUST-DEPENDENCY-WARNING-ZERO.0` is focused-signoff-complete from clean Lua-write commit `7ed47a0a`. It durably
+  owns the reproduced 1,870-`pgen` / 26-`rgx-core` warning output, nested upstream/pin boundary, causal repair split,
+  and future zero-warning gate without changing build behavior or reprioritizing Lua parity.
 
 ## Latest Completed Slice
 
-- `.19.6.1` implements typed Lua nested writes across native, reconstructed, generated-plan, emitted-module, and
-  CLI routes on PUC Lua and LuaJIT while preserving the frozen 105 mutations and non-bang boundary.
+- Warning-intake `.0` converts the repeated canonical warning stream into seven bounded future cleanup/enforcement
+  leaves, a searchable Knowledge fact, and aligned roadmap/book/continuity state without executable movement.
 
 ## Next Action
 
-- Commit `.19.6.1`, verify the exact clean boundary and cleared brief, then activate Lua `map_leaves!` leaf
-  `.19.6.2` task-tree-first and run its unchanged RED on both ABIs.
+- Commit warning-intake `.0`, verify the exact clean boundary and cleared brief, then activate Lua `map_leaves!`
+  `.19.6.2` task-tree-first and run its unchanged RED on both ABIs. Warning census `.1` remains durably queued and
+  non-blocking unless the director reprioritizes it.
 
 ## Recent Completions
+
+- `2026-09-04` — director-requested `RUST-DEPENDENCY-WARNING-ZERO.0` owns the reproducible 1,870-`pgen` /
+  26-`rgx-core` warning output and splits causal upstream/generated/direct cleanup plus zero-warning enforcement;
+  planning changes no source, pin, generator, CI, or runtime behavior.
 
 - `2026-09-04` — `.19.6.1` implements Lua write vivification; 436 assertions per ABI, full 178x2 integration,
   CLI 66x2, corpus 105/105, storage, 105 neutral mutations, mdBook, doctrines, and canonical CI pass.
@@ -68,10 +73,6 @@
 
 - `2026-08-30` — `.15.3` replaces one false-positive Lua `next()` fixture with exact action-edge ownership,
   passes 178/178 and 109/109 on both ABIs, and admits notes segment `4987` at finite capacity 21/20 via ADR `0097`.
-
-- `2026-08-30` — `.19.1.1` freezes future write vivification at 5 AST / 7 syntax / 11 success / 16 structural /
-  3 expression-failure / 3 read-exclusion cases plus detachment and 105 mutations; all six current runtime routes
-  remain non-vivifying. Focused Lua proof also identifies and queues one unrelated stale fixture under `.15.3`.
 
 ## History
 

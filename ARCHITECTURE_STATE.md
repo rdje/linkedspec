@@ -1,5 +1,18 @@
 # ARCHITECTURE STATE
 
+## Canonical Rust dependency warning debt is durably owned
+
+`RUST-DEPENDENCY-WARNING-ZERO.0` records the director-requested cleanup of the warning stream reproduced by
+multiple clean canonical Rust carriers: `pgen` reports 1,870 build warnings and 1,360 automated suggestions, while
+`rgx-core` reports 26 warnings. These are output counts, not yet unique causal counts; authored `pgen`, generator-
+owned parser output, `rgx-core`, and direct LinkedSpec warnings must be classified separately before repair.
+
+The boundary crosses repositories: LinkedSpec pins `rgx` as gitlink `8763a0e6bea97879f027237439d57725f83ead23`,
+and `pgen` is nested beneath it. Future leaves own a machine-readable census, causal upstream fixes, deterministic
+regeneration, explicit pin integration, and warning-denying recurrence. Global allowances, warning filtering,
+`RUSTFLAGS=-Awarnings`, and blind `cargo fix` do not satisfy the task. Intake changes no build or runtime behavior
+and remains non-blocking; Lua `map_leaves!` `.19.6.2` resumes after the planning commit.
+
 ## Lua implements frozen typed nested-write vivification on both ABIs
 
 `FUTURE-PARITY-BACKLOG.19.6.1` advances shared Lua to `linkedspec-write-vivification-v1` on PUC Lua and LuaJIT.

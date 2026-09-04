@@ -1,14 +1,13 @@
 # MEMORY
 
-- activation_commit: `7df6827588f5a159edb727fba59d6b6294c1d722` — exact clean Julia map-leaves closeout commit from which `FUTURE-PARITY-BACKLOG.19.6.1` was activated task-tree-first.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.19.6.1 - implement Lua write vivification`; typed carrier, dense
-  isolated runtime, dual-ABI permanent proof, canonical signoff, and commit complete.
-- active_work_unit: `FUTURE-PARITY-BACKLOG.19.6.1 - implement Lua write vivification`; completed and committed
-  from exact clean activation `7df68275`, with no push in this PNT batch.
-- next_action: from the resulting clean boundary, activate Lua `map_leaves!` leaf
-  `FUTURE-PARITY-BACKLOG.19.6.2` task-tree-first, then run its unchanged RED on both ABIs.
-- in_flight_uncommitted: none at the intended clean post-landing handoff.
+- activation_commit: `7ed47a0a1104d984967808c98f52a3e1d5031520` — exact clean Lua write-vivification commit from which `RUST-DEPENDENCY-WARNING-ZERO.0` was activated task-tree-first.
+- latest_completed_leaf: `RUST-DEPENDENCY-WARNING-ZERO.0 - own Rust warning cleanup`; focused signoff complete.
+- active_work_unit: `RUST-DEPENDENCY-WARNING-ZERO.0` complete from clean `7ed47a0a`; commit remains.
+- next_action: from the resulting clean commit, activate Lua `FUTURE-PARITY-BACKLOG.19.6.2` and run dual-ABI RED.
+- in_flight_uncommitted: none at intended clean post-commit handoff; no executable or pin change.
 - blockers: none.
+- current_rust_warning_debt: repeated clean carriers report 1,870 `pgen` plus 26 `rgx-core` output warnings;
+  `RUST-DEPENDENCY-WARNING-ZERO.1-.7` own causal repair/pins/enforcement without suppression, after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
   and requires every exact current task ID to be unique across partitioned and unpartitioned storage.
