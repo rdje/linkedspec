@@ -10,9 +10,10 @@ answers:
   - does Lua map_leaves bang exist yet
   - where is the Lua write vivification regression test
 date: 2026-09-04
-status: current; Lua nested writes implemented on PUC Lua and LuaJIT, Lua map_leaves bang and portable admission pending
+status: current; Lua nested writes and map_leaves bang implemented on PUC Lua and LuaJIT, portable admission pending
 tags: [lua, luajit, actionir, assignment, autovivification, diagnostics, generated-source, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.19.6.1 replaces Lua's authored key/index-tagged assignment lowering with ActionWritePathSegment plus assign_nested_access. Parser/compiler/runtime/static-contract/source-emitter owners carry typed expressions and Unicode-scalar spans through native, public SpecFile reconstruction, generated-plan, emitted-module, and primary-CLI routes on PUC Lua and LuaJIT. Runtime evaluates every segment then RHS, snapshots afterward, distinguishes absent from bound null, builds selector-determined dense harray/array state on an isolated copy, publishes once, preserves completed expression effects and exact expression failures, and returns detached values. lua/test/write_vivification_contract_test.lua consumes the unchanged 5/7/11/16/3/3 neutral fixture, rejects malformed and reserved carriers, and permanently proves map_leaves! remains unadmitted at 436 assertions on each ABI. The complete Lua gate, CLI 66x2, corpus 105/105, and project-data storage proof pass."
+evidence_update_2026_09_04_lua_map_leaves: "FUTURE-PARITY-BACKLOG.19.6.2 implements the separate typed receiver-mutation carrier and identity-guarded copy-on-write runtime without changing nested-write semantics. The 530-assertion permanent suite passes on both ABIs and composes callback-local, unrelated, same-receiver, shadow, and post-commit nested writes across native, public SpecFile reconstruction, generated-plan, emitted-module, primary-CLI, and user-function-body routes. The adjacent write fixture now passes 438 assertions after replacing its stale raw-syntax expectation with the frozen typed invalid-arguments diagnostic."
 reverify: "bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py && bash tools/run_lua_project_data.sh puc lua/test/write_vivification_contract_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/write_vivification_contract_test.lua && bash tools/run_lua_local.sh"
 ---
 
@@ -36,9 +37,8 @@ segment/RHS side effects completed before the snapshot remain visible. Reads kee
 their prior non-creating behavior. Compiler, direct-runtime, generated-plan, and
 source-emission boundaries reject malformed typed write carriers.
 
-One shared permanent consumer runs unchanged on PUC Lua and LuaJIT. It also locks the
-separate frontier: `map_leaves!` remains unsupported raw syntax until `.19.6.2`, and
-portable/public cross-backend admission remains owned by later `.19` leaves.
+One shared permanent consumer runs unchanged on PUC Lua and LuaJIT. The separate `map_leaves!` carrier is now
+implemented under `.19.6.2`; portable/public cross-backend admission remains owned by later `.19` leaves.
 
 Related: [[write-vivification-neutral-contract]], [[terse-nested-value-path-assignment]],
 [[lua-action-edge-child-call-reuse]], [[write-vivification-receiver-mutation-direction]],

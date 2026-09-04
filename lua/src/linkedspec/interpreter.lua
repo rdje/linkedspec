@@ -18,6 +18,7 @@ local typed_source = {
   progressive = require("linkedspec.bounded_child_parse_authority"),
   staged = require("linkedspec.staged_parse_job"),
   staged_enrichment = require("linkedspec.staged_ast_enrichment"),
+  receiver_mutation = {},
 }
 
 local ERROR_MT = {
@@ -79,9 +80,7 @@ local function copy_value(value, active)
   if action_ast.node_type(value) == "ActionExpr" and
       (value.kind == "block_value" or value.kind == "codeblock_argument" or
         value.kind == "codeblock_literal") then
-    local copied = value.kind == "codeblock_literal" and
-      action_parser.parse_action_expression_at(value.source, value.source_span.start) or
-      action_parser.parse_action_expression(value.source)
+    local copied = action_parser.parse_action_expression_at(value.source, value.source_span.start)
     if value.kind == "codeblock_literal" then
       if copied.kind ~= "codeblock_literal" then
         fail("runtime callable-codeblock source no longer parses as a literal")
@@ -206,6 +205,24 @@ function M.runtime_engine(compiled, options)
           }),
         })
       end
+      local valid_receiver_mutation, receiver_mutation_error = pcall(
+        compiled_spec.validate_receiver_mutation_serialized_state,
+        compiled
+      )
+      if not valid_receiver_mutation then
+        if not compiled_spec.is_compiled_spec_error(receiver_mutation_error) then
+          error(receiver_mutation_error, 0)
+        end
+        fail(receiver_mutation_error.message, {
+          code = "receiver_mutation_serialized_state_invalid",
+          diagnostic = runtime_diagnostic({ spec_name = options.spec_name, spec_path = options.spec_path }, {
+            stage = "validate_compiled_rule",
+            code = "receiver_mutation_serialized_state_invalid",
+            summary = "Lua compiled-state validation failed",
+            detail = receiver_mutation_error.message,
+          }),
+        })
+      end
       compiled_spec.validate_progressive_dispatch_policy(compiled)
       return setmetatable({
         compiled_spec = compiled,
@@ -272,6 +289,9 @@ runtime_diagnostic = function(engine, fields)
     "actual_regex_index",
     "operation",
     "binding",
+    "method",
+    "attempt",
+    "expected_kinds",
     "segment_index",
     "path",
     "actual_kind",
@@ -347,6 +367,8 @@ local function context(
     variables = {},
     arrays = {},
     harrays = {},
+    binding_identities = {},
+    active_receiver_mutations = {},
     active_user_functions = {},
     active_codeblocks = {},
     mark_buckets = {},
@@ -413,6 +435,15 @@ local function lookup_binding(ctx, name)
   return json.null, nil
 end
 
+function typed_source.receiver_mutation.ensure_binding_identity(ctx, name)
+  local identity = ctx.binding_identities[name]
+  if identity == nil then
+    identity = {}
+    ctx.binding_identities[name] = identity
+  end
+  return identity
+end
+
 function callable_codeblock.lookup_binding(ctx, name)
   if ctx.variables[name] ~= nil then return ctx.variables[name], true end
   if ctx.arrays[name] ~= nil then return ctx.arrays[name], true end
@@ -421,6 +452,7 @@ function callable_codeblock.lookup_binding(ctx, name)
 end
 
 local function bind_scalar(ctx, name, value)
+  typed_source.receiver_mutation.ensure_binding_identity(ctx, name)
   ctx.variables[name] = copy_value(value)
   ctx.arrays[name] = nil
   ctx.harrays[name] = nil
@@ -428,6 +460,7 @@ local function bind_scalar(ctx, name, value)
 end
 
 local function bind_array(ctx, name, value)
+  typed_source.receiver_mutation.ensure_binding_identity(ctx, name)
   local stored = json.kind(value) == "array" and copy_value(value) or json.array()
   ctx.variables[name] = nil
   ctx.harrays[name] = nil
@@ -436,6 +469,7 @@ local function bind_array(ctx, name, value)
 end
 
 local function bind_harray(ctx, name, value)
+  typed_source.receiver_mutation.ensure_binding_identity(ctx, name)
   local stored = json.kind(value) == "harray" and copy_value(value) or json.harray()
   ctx.variables[name] = nil
   ctx.arrays[name] = nil
@@ -449,6 +483,22 @@ local function store_binding(ctx, name, storage, value)
   return bind_scalar(ctx, name, value)
 end
 
+function typed_source.receiver_mutation.copy_binding_identities(source)
+  local result = {}
+  for name, identity in pairs(source) do result[name] = identity end
+  return result
+end
+
+function typed_source.receiver_mutation.fresh_binding_identities(...)
+  local result = {}
+  for index = 1, select("#", ...) do
+    for name in pairs(select(index, ...)) do
+      if result[name] == nil then result[name] = {} end
+    end
+  end
+  return result
+end
+
 local function target_descriptor(expr)
   local name = target_name(expr)
   if name then return { kind = "scalar", name = name } end
@@ -458,6 +508,50 @@ end
 local function binding_target_descriptor(expr)
   if expr.kind == "variable" then return { kind = "scalar", name = expr.name } end
   return nil
+end
+
+function typed_source.receiver_mutation.binding_name_source_span(expr, name)
+  return action_ast.source_span(expr.source_span.start, expr.source_span.start + #name)
+end
+
+function typed_source.receiver_mutation.guard(ctx, name)
+  local identity = ctx.binding_identities[name]
+  if identity == nil then return nil end
+  return ctx.active_receiver_mutations[identity]
+end
+
+function typed_source.receiver_mutation.reject_write(engine, ctx, name, attempt, source_span)
+  local guard = typed_source.receiver_mutation.guard(ctx, name)
+  if guard == nil then return end
+  local message = "cannot write active map_leaves! receiver binding '" .. name .. "' from its callback"
+  local authored_span = json.harray({
+    start = source_span.start,
+    ["end"] = source_span["end"],
+    unit = "unicode_scalar",
+    provenance = "authored",
+  })
+  fail(message, {
+    code = "receiver_mutation_reentrant",
+    stage = "runtime_execution",
+    operation = "map_leaves_mutation",
+    binding = name,
+    method = "map_leaves",
+    attempt = attempt,
+    source_span = authored_span,
+    diagnostic = runtime_diagnostic(engine, {
+      stage = "runtime_execution",
+      code = "receiver_mutation_reentrant",
+      summary = "Lua receiver mutation failed",
+      detail = message,
+      top_rule = ctx.top_rule,
+      rule_label = ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule,
+      operation = "map_leaves_mutation",
+      binding = name,
+      method = "map_leaves",
+      attempt = attempt,
+      source_span = authored_span,
+    }),
+  })
 end
 
 local function binding_kind_mismatch(name, expected_kind, value)
@@ -2160,6 +2254,7 @@ local function evaluate_numeric_reducer_values(engine, expr, ctx, accumulator, e
 end
 
 local function evaluate_mutable_split(engine, expr, ctx, accumulator, edge_state, target)
+  typed_source.receiver_mutation.reject_write(engine, ctx, target.name, "helper:split", expr.source_span)
   array_binding_for_mutation(ctx, target.name)
   local source = evaluate_expr(engine, argument_expr(expr.args[2]), ctx, accumulator, edge_state)
   local delimiter = expr.args[3] and
@@ -3137,6 +3232,13 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
         if child_index == nil then output_target = nil end
       end
       if output_target then
+        typed_source.receiver_mutation.reject_write(
+          engine,
+          ctx,
+          output_target.name,
+          "helper:push",
+          expr.source_span
+        )
         local child = edge_state and first_name == edge_state.target.label and
           dispatch_edge_child(engine, edge_state, ctx) or execute_rule(engine, first_name, 0, ctx)
         ctx.retv = copy_value(child.value)
@@ -3146,6 +3248,13 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
     end
     if child_rule then fail("push child form has invalid target or index", { helper_name = "push" }) end
     if #expr.args >= 2 and first_target then
+      typed_source.receiver_mutation.reject_write(
+        engine,
+        ctx,
+        first_target.name,
+        "helper:push",
+        expr.source_span
+      )
       local value = evaluate_expr(engine, argument_expr(expr.args[2]), ctx, accumulator, edge_state)
       return append_array_binding(ctx, first_target, value)
     end
@@ -3157,6 +3266,13 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
     if #expr.args == 1 and edge_state then
       local output_target = binding_target_descriptor(argument_expr(expr.args[1]))
       if not output_target then fail("push output target must be a bare binding") end
+      typed_source.receiver_mutation.reject_write(
+        engine,
+        ctx,
+        output_target.name,
+        "helper:push",
+        expr.source_span
+      )
       local child = dispatch_edge_child(engine, edge_state, ctx)
       return append_array_binding(ctx, output_target, child.value)
     end
@@ -3168,10 +3284,18 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
       value = ctx.retv
     end
     local output_target = { kind = "scalar", name = ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule }
+    typed_source.receiver_mutation.reject_write(
+      engine,
+      ctx,
+      output_target.name,
+      "helper:push",
+      expr.source_span
+    )
     return append_array_binding(ctx, output_target, value)
   elseif name == "set" or name == "=" then
     local target = expr.args[1] and target_descriptor(argument_expr(expr.args[1]))
     if not target or not expr.args[2] then fail("set expects target and value") end
+    typed_source.receiver_mutation.reject_write(engine, ctx, target.name, "helper:set", expr.source_span)
     local value = evaluate_expr(engine, argument_expr(expr.args[2]), ctx, accumulator, edge_state)
     return bind_scalar(ctx, target.name, value)
   elseif name == "array" then
@@ -3234,6 +3358,217 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
     end
   end
   fail("unsupported runtime helper '" .. tostring(name) .. "'", { helper_name = name })
+end
+
+function typed_source.receiver_mutation.evaluate_fluent_calls(
+  engine,
+  value,
+  calls,
+  target_receiver,
+  ctx,
+  accumulator,
+  edge_state
+)
+  for index, call in ipairs(calls) do
+    local call_expr = {
+      kind = "call",
+      name = call.method,
+      args = call.args,
+      source = call.source,
+      source_span = call.source_span,
+    }
+    local canonical_name = action_contracts.canonical_action_helper_name(call.method)
+    if action_contracts.builtin_final_codeblock_contract("receiver", canonical_name) ~= nil then
+      local block_expr = final_codeblock_argument(canonical_name, "receiver", call.args)
+      if canonical_name == "with" then
+        value = evaluate_with_block(engine, block_expr, value, ctx, accumulator, edge_state)
+      else
+        value = evaluate_tree_receiver_block(
+          engine,
+          canonical_name,
+          call_expr,
+          block_expr,
+          value,
+          ctx,
+          accumulator,
+          edge_state
+        )
+        if canonical_name == "reduce_leaves" and index < #calls then return json.null end
+      end
+    elseif ARRAY_END_MUTATIONS[canonical_name] then
+      local target = index == 1 and target_receiver and binding_target_descriptor(target_receiver) or nil
+      if not target then return json.null end
+      typed_source.receiver_mutation.reject_write(
+        engine,
+        ctx,
+        target.name,
+        canonical_name,
+        typed_source.receiver_mutation.binding_name_source_span(target_receiver, target.name)
+      )
+      local items, storage = array_binding_for_mutation(ctx, target.name)
+      if canonical_name == "push_back" or canonical_name == "push_front" then
+        if #call.args ~= 1 then return json.null end
+        local added = evaluate_expr(engine, argument_expr(call.args[1]), ctx, accumulator, edge_state)
+        if canonical_name == "push_back" then
+          items[#items + 1] = copy_value(added)
+        else
+          table.insert(items, 1, copy_value(added))
+        end
+      elseif #call.args ~= 0 then
+        return json.null
+      elseif #items > 0 then
+        table.remove(items, canonical_name == "pop_back" and #items or 1)
+      end
+      value = store_array_mutation(ctx, target, storage, items)
+    elseif canonical_name == "push" and #call.args == 0 then
+      accumulator[#accumulator + 1] = copy_value(value)
+    elseif canonical_name == "return" then
+      local returned = value
+      if #call.args > 0 then
+        returned = evaluate_expr(engine, call.args[1].value, ctx, accumulator, edge_state)
+      end
+      flow("return", returned)
+    elseif canonical_name == "coalesce" or canonical_name == "coalesce_nonempty" then
+      value = evaluate_coalesce(engine, call_expr, ctx, accumulator, edge_state, value)
+    elseif canonical_name == "copy" and #call.args == 0 then
+      value = copy_value(value)
+    elseif is_pure_string_helper(canonical_name) then
+      value = evaluate_pure_string_values(engine, call_expr, ctx, accumulator, edge_state, value)
+      if (TERMINAL_STRING_HELPERS[canonical_name] or is_string_comparison(canonical_name)) and
+          index < #calls then
+        return json.null
+      end
+    elseif scalar_numeric.supports_reducer(canonical_name) and
+        (json.kind(value) == "array" or not scalar_numeric.supports(canonical_name)) then
+      value = evaluate_numeric_reducer_values(
+        engine,
+        call_expr,
+        ctx,
+        accumulator,
+        edge_state,
+        canonical_name,
+        value
+      )
+      if index < #calls then return json.null end
+    elseif scalar_numeric.supports(canonical_name) then
+      value = evaluate_scalar_numeric_values(
+        engine,
+        call_expr,
+        ctx,
+        accumulator,
+        edge_state,
+        canonical_name,
+        value
+      )
+      if scalar_numeric.is_comparison(canonical_name) and index < #calls then return json.null end
+    elseif PURE_ARRAY_HELPERS[canonical_name] then
+      value = evaluate_array_values(engine, call_expr, ctx, accumulator, edge_state, value)
+      if canonical_name == "join_values" and index < #calls then return json.null end
+    elseif PURE_HASH_HELPERS[canonical_name] then
+      value = evaluate_hash_values(engine, call_expr, ctx, accumulator, edge_state, value)
+      if (canonical_name == "count_keys" or canonical_name == "has_key") and index < #calls then
+        return json.null
+      end
+    else
+      value = evaluate_call(engine, call_expr, ctx, accumulator, edge_state)
+    end
+  end
+  return value
+end
+
+function typed_source.receiver_mutation.failure(engine, ctx, message, fields)
+  fields.stage = "runtime_execution"
+  fields.operation = "map_leaves_mutation"
+  fields.method = "map_leaves"
+  fields.diagnostic = runtime_diagnostic(engine, {
+    stage = fields.stage,
+    code = fields.code,
+    summary = "Lua receiver mutation failed",
+    detail = message,
+    top_rule = ctx.top_rule,
+    rule_label = ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule,
+    operation = fields.operation,
+    binding = fields.binding,
+    method = fields.method,
+    expected_kinds = fields.expected_kinds,
+    actual_kind = fields.actual_kind,
+    source_span = fields.source_span,
+  })
+  fail(message, fields)
+end
+
+function typed_source.receiver_mutation.evaluate_chain(engine, expr, ctx, accumulator, edge_state)
+  local receiver = expr.receiver
+  local name = receiver.name
+  local value
+  local storage
+  if ctx.variables[name] ~= nil then
+    value, storage = ctx.variables[name], "variable"
+  elseif ctx.arrays[name] ~= nil then
+    value, storage = ctx.arrays[name], "array"
+  elseif ctx.harrays[name] ~= nil then
+    value, storage = ctx.harrays[name], "harray"
+  else
+    local message = "map_leaves! receiver binding '" .. name .. "' does not exist"
+    typed_source.receiver_mutation.failure(engine, ctx, message, {
+      code = "map_leaves_mutation_receiver_missing",
+      binding = name,
+      source_span = callable_codeblock.nested_write.source_span(receiver.source_span),
+    })
+  end
+
+  typed_source.receiver_mutation.reject_write(engine, ctx, name, "map_leaves!", receiver.source_span)
+  local root_kind = json.kind(value)
+  if root_kind ~= "harray" and root_kind ~= "array" then
+    local actual_kind = callable_codeblock.nested_write.value_kind(value)
+    local message = "map_leaves! receiver '" .. name ..
+      "' must hold an harray or array, got " .. actual_kind
+    typed_source.receiver_mutation.failure(engine, ctx, message, {
+      code = "map_leaves_mutation_receiver_kind_mismatch",
+      binding = name,
+      expected_kinds = json.array({ "harray", "array" }),
+      actual_kind = actual_kind,
+      source_span = callable_codeblock.nested_write.source_span(receiver.source_span),
+    })
+  end
+
+  local callback = expr.mutation.callback
+  local block_expr = action_ast.expr("block_value", callback.source, callback.source_span, {
+    block = callback.body,
+  })
+  local call_expr = {
+    kind = "call",
+    name = "map_leaves",
+    args = { action_ast.positional_argument(block_expr) },
+    source = expr.mutation.source,
+    source_span = expr.mutation.source_span,
+  }
+  local identity = typed_source.receiver_mutation.ensure_binding_identity(ctx, name)
+  ctx.active_receiver_mutations[identity] = { binding = name, method = "map_leaves" }
+  local mapped_ok, mapped_or_error = pcall(
+    evaluate_tree_receiver_block,
+    engine,
+    "map_leaves",
+    call_expr,
+    block_expr,
+    copy_value(value),
+    ctx,
+    accumulator,
+    edge_state
+  )
+  ctx.active_receiver_mutations[identity] = nil
+  if not mapped_ok then error(mapped_or_error, 0) end
+
+  local committed = store_binding(ctx, name, storage, mapped_or_error)
+  return typed_source.receiver_mutation.evaluate_fluent_calls(
+    engine,
+    copy_value(committed),
+    expr.continuation,
+    nil,
+    ctx,
+    accumulator,
+    edge_state
+  )
 end
 
 evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
@@ -3301,6 +3636,13 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
     return bind_scalar(ctx, expr.target, marker)
   end
   if kind == "assign_scalar" then
+    typed_source.receiver_mutation.reject_write(
+      engine,
+      ctx,
+      expr.name,
+      "assign",
+      typed_source.receiver_mutation.binding_name_source_span(expr, expr.name)
+    )
     if expr.value.kind == "recognition_checkpoint" then
       local rule_label = ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule
       typed_source.recognition.checkpoint(ctx, rule_label, expr.name)
@@ -3310,6 +3652,13 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
     return bind_scalar(ctx, expr.name, value)
   end
   if kind == "assign_array_append" then
+    typed_source.receiver_mutation.reject_write(
+      engine,
+      ctx,
+      expr.name,
+      "append",
+      typed_source.receiver_mutation.binding_name_source_span(expr, expr.name)
+    )
     local value = evaluate_expr(engine, expr.value, ctx, accumulator, edge_state)
     return append_array_binding(ctx, { kind = "scalar", name = expr.name }, value)
   end
@@ -3353,6 +3702,13 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
     return copy_value(value)
   end
   if kind == "assign_hash_index" then
+    typed_source.receiver_mutation.reject_write(
+      engine,
+      ctx,
+      expr.name,
+      "nested_write",
+      typed_source.receiver_mutation.binding_name_source_span(expr, expr.name)
+    )
     local key = evaluate_expr(engine, expr.key, ctx, accumulator, edge_state)
     local value = evaluate_expr(engine, expr.value, ctx, accumulator, edge_state)
     local current, storage = lookup_binding(ctx, expr.name)
@@ -3367,6 +3723,13 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
     return store_harray_mutation(ctx, { kind = "scalar", name = expr.name }, storage, root)
   end
   if kind == "assign_nested_access" then
+    typed_source.receiver_mutation.reject_write(
+      engine,
+      ctx,
+      expr.base,
+      "nested_write",
+      typed_source.receiver_mutation.binding_name_source_span(expr, expr.base)
+    )
     if type(expr.segments) ~= "table" or #expr.segments == 0 then
       local message = "nested write carrier for binding '" .. tostring(expr.base) ..
         "' must contain at least one typed path segment"
@@ -3466,100 +3829,20 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
     return json.null
   end
   if kind == "call" then return evaluate_call(engine, expr, ctx, accumulator, edge_state) end
+  if kind == "receiver_mutation_chain" then
+    return typed_source.receiver_mutation.evaluate_chain(engine, expr, ctx, accumulator, edge_state)
+  end
   if kind == "fluent_chain" then
     local value = evaluate_expr(engine, expr.receiver, ctx, accumulator, edge_state)
-    for index, call in ipairs(expr.calls) do
-      local call_expr = { kind = "call", name = call.method, args = call.args }
-      local canonical_name = action_contracts.canonical_action_helper_name(call.method)
-      if action_contracts.builtin_final_codeblock_contract("receiver", canonical_name) ~= nil then
-        local block_expr = final_codeblock_argument(canonical_name, "receiver", call.args)
-        if canonical_name == "with" then
-          value = evaluate_with_block(engine, block_expr, value, ctx, accumulator, edge_state)
-        else
-          value = evaluate_tree_receiver_block(
-            engine,
-            canonical_name,
-            call_expr,
-            block_expr,
-            value,
-            ctx,
-            accumulator,
-            edge_state
-          )
-          if canonical_name == "reduce_leaves" and index < #expr.calls then return json.null end
-        end
-      elseif ARRAY_END_MUTATIONS[canonical_name] then
-        local target = index == 1 and binding_target_descriptor(expr.receiver) or nil
-        if not target then return json.null end
-        local items, storage = array_binding_for_mutation(ctx, target.name)
-        if canonical_name == "push_back" or canonical_name == "push_front" then
-          if #call.args ~= 1 then return json.null end
-          local added = evaluate_expr(engine, argument_expr(call.args[1]), ctx, accumulator, edge_state)
-          if canonical_name == "push_back" then
-            items[#items + 1] = copy_value(added)
-          else
-            table.insert(items, 1, copy_value(added))
-          end
-        elseif #call.args ~= 0 then
-          return json.null
-        elseif #items > 0 then
-          table.remove(items, canonical_name == "pop_back" and #items or 1)
-        end
-        value = store_array_mutation(ctx, target, storage, items)
-      elseif canonical_name == "push" and #call.args == 0 then
-        accumulator[#accumulator + 1] = copy_value(value)
-      elseif canonical_name == "return" then
-        local returned = value
-        if #call.args > 0 then
-          returned = evaluate_expr(engine, call.args[1].value, ctx, accumulator, edge_state)
-        end
-        flow("return", returned)
-      elseif canonical_name == "coalesce" or canonical_name == "coalesce_nonempty" then
-        value = evaluate_coalesce(engine, call_expr, ctx, accumulator, edge_state, value)
-      elseif canonical_name == "copy" and #call.args == 0 then
-        value = copy_value(value)
-      elseif is_pure_string_helper(canonical_name) then
-        value = evaluate_pure_string_values(engine, call_expr, ctx, accumulator, edge_state, value)
-        if (TERMINAL_STRING_HELPERS[canonical_name] or is_string_comparison(canonical_name)) and
-            index < #expr.calls then
-          return json.null
-        end
-      elseif scalar_numeric.supports_reducer(canonical_name) and
-          (json.kind(value) == "array" or not scalar_numeric.supports(canonical_name)) then
-        value = evaluate_numeric_reducer_values(
-          engine,
-          call_expr,
-          ctx,
-          accumulator,
-          edge_state,
-          canonical_name,
-          value
-        )
-        if index < #expr.calls then return json.null end
-      elseif scalar_numeric.supports(canonical_name) then
-        value = evaluate_scalar_numeric_values(
-          engine,
-          call_expr,
-          ctx,
-          accumulator,
-          edge_state,
-          canonical_name,
-          value
-        )
-        if scalar_numeric.is_comparison(canonical_name) and index < #expr.calls then return json.null end
-      elseif PURE_ARRAY_HELPERS[canonical_name] then
-        value = evaluate_array_values(engine, call_expr, ctx, accumulator, edge_state, value)
-        if canonical_name == "join_values" and index < #expr.calls then return json.null end
-      elseif PURE_HASH_HELPERS[canonical_name] then
-        value = evaluate_hash_values(engine, call_expr, ctx, accumulator, edge_state, value)
-        if (canonical_name == "count_keys" or canonical_name == "has_key") and index < #expr.calls then
-          return json.null
-        end
-      else
-        value = evaluate_call(engine, call_expr, ctx, accumulator, edge_state)
-      end
-    end
-    return value
+    return typed_source.receiver_mutation.evaluate_fluent_calls(
+      engine,
+      value,
+      expr.calls,
+      expr.receiver,
+      ctx,
+      accumulator,
+      edge_state
+    )
   end
   fail("unsupported runtime ActionIR kind '" .. tostring(kind) .. "'", { action_kind = kind })
 end
@@ -3572,11 +3855,20 @@ local function substitution_flag_text(engine, expr, ctx, accumulator, edge_state
 end
 
 local function execute_regex_substitution_statement(engine, expr, ctx, accumulator, edge_state)
-  if expr.kind ~= "call" or #expr.args < 4 then return false end
+  if expr.kind ~= "call" then return false end
   local name = action_contracts.canonical_action_helper_name(expr.name)
   if name ~= "substr" and name ~= "regex_subst" then return false end
+  if not expr.args[1] then return false end
   local target_expr = argument_expr(expr.args[1])
   if target_expr.kind ~= "variable" then return false end
+  typed_source.receiver_mutation.reject_write(
+    engine,
+    ctx,
+    target_expr.name,
+    "helper:" .. name,
+    expr.source_span
+  )
+  if #expr.args < 4 then return false end
 
   local pattern_value = evaluate_expr(engine, argument_expr(expr.args[2]), ctx, accumulator, edge_state)
   local pattern
@@ -3648,6 +3940,7 @@ local function execute_array_transform_statement(engine, expr, ctx, accumulator,
   end
   local target = binding_target_descriptor(argument_expr(expr.args[1]))
   if not target then return false end
+  typed_source.receiver_mutation.reject_write(engine, ctx, target.name, "helper:" .. name, expr.source_span)
   local current, storage = array_binding_for_mutation(ctx, target.name)
   local transformed
   if name == "lowercase_each" or name == "uppercase_each" then
@@ -3670,6 +3963,7 @@ local function execute_hash_set_key_statement(engine, expr, ctx, accumulator, ed
   end
   local target = binding_target_descriptor(argument_expr(expr.args[1]))
   if not target then return false end
+  typed_source.receiver_mutation.reject_write(engine, ctx, target.name, "helper:set_key", expr.source_span)
   local key_value = evaluate_expr(engine, argument_expr(expr.args[2]), ctx, accumulator, edge_state)
   local value = evaluate_expr(engine, argument_expr(expr.args[3]), ctx, accumulator, edge_state)
   local updated, storage = harray_binding_for_mutation(ctx, target.name)
@@ -4270,10 +4564,16 @@ execute_user_function = function(engine, expr, ctx, accumulator, edge_state)
   local saved_variables = ctx.variables
   local saved_arrays = ctx.arrays
   local saved_harrays = ctx.harrays
+  local saved_binding_identities = ctx.binding_identities
   local saved_active_user_functions = ctx.active_user_functions
   ctx.variables = frame_or_error.variables
   ctx.arrays = frame_or_error.arrays
   ctx.harrays = frame_or_error.harrays
+  ctx.binding_identities = typed_source.receiver_mutation.fresh_binding_identities(
+    frame_or_error.variables,
+    frame_or_error.arrays,
+    frame_or_error.harrays
+  )
   ctx.active_user_functions = frame_or_error.active_path
 
   local executed, value_or_error = pcall(
@@ -4287,6 +4587,7 @@ execute_user_function = function(engine, expr, ctx, accumulator, edge_state)
   ctx.variables = saved_variables
   ctx.arrays = saved_arrays
   ctx.harrays = saved_harrays
+  ctx.binding_identities = saved_binding_identities
   ctx.active_user_functions = saved_active_user_functions
 
   if not executed then
@@ -4731,10 +5032,12 @@ execute_rule = function(engine, label, entry_index, ctx, entry_slot)
   local saved_variables = ctx.variables
   local saved_arrays = ctx.arrays
   local saved_harrays = ctx.harrays
+  local saved_binding_identities = ctx.binding_identities
   ctx.registers = saved_registers:enter_child()
   ctx.variables = copy_store(saved_variables)
   ctx.arrays = copy_store(saved_arrays)
   ctx.harrays = copy_store(saved_harrays)
+  ctx.binding_identities = typed_source.receiver_mutation.copy_binding_identities(saved_binding_identities)
   ctx.rule_stack[#ctx.rule_stack + 1] = label
   local recognition_ok, recognition_error = pcall(
     typed_source.recognition.enter_invocation,
@@ -4751,6 +5054,7 @@ execute_rule = function(engine, label, entry_index, ctx, entry_slot)
     ctx.variables = saved_variables
     ctx.arrays = saved_arrays
     ctx.harrays = saved_harrays
+    ctx.binding_identities = saved_binding_identities
     ctx.active[recursion_key] = nil
     error(recognition_error, 0)
   end
@@ -4984,6 +5288,7 @@ execute_rule = function(engine, label, entry_index, ctx, entry_slot)
   ctx.variables = saved_variables
   ctx.arrays = saved_arrays
   ctx.harrays = saved_harrays
+  ctx.binding_identities = saved_binding_identities
   ctx.active[recursion_key] = nil
   if ok then return result_or_flow end
   if getmetatable(result_or_flow) == FLOW_MT then
@@ -5203,6 +5508,46 @@ end
 
 M.runtime_execute_with_trace = M.runtime_parse_with_trace
 
+-- Package-private seams for proving receiver-mutation rollback, guard release,
+-- and post-commit continuation behavior against one persistent runtime frame.
+-- They deliberately remain absent from the root `linkedspec` facade.
+function M._receiver_mutation_context_for_testing(engine, initial_bindings, diagnostic_sink)
+  if M.node_type(engine) ~= "LinkedSpecRuntimeEngine" then fail("test context expects runtime engine") end
+  local ctx = context(
+    engine,
+    "xhello",
+    "Top",
+    engine.compiled_spec.rules_by_label,
+    diagnostic_sink,
+    nil,
+    nil,
+    nil,
+    nil,
+    nil
+  )
+  for name, value in pairs(initial_bindings or {}) do
+    local kind = json.kind(value)
+    local storage = kind == "array" and "array" or (kind == "harray" and "harray" or "variable")
+    store_binding(ctx, name, storage, value)
+  end
+  return ctx
+end
+
+function M._receiver_mutation_evaluate_for_testing(engine, ctx, source)
+  return evaluate_expr(
+    engine,
+    action_parser.parse_action_expression(source),
+    ctx,
+    json.array(),
+    nil
+  )
+end
+
+function M._receiver_mutation_binding_for_testing(ctx, name)
+  local value, storage = lookup_binding(ctx, name)
+  return copy_value(value), storage ~= nil
+end
+
 function M.to_json(value)
   if getmetatable(value) == ERROR_MT then
     return json.harray({
@@ -5245,6 +5590,9 @@ function M.to_json(value)
       "actual_regex_index",
       "operation",
       "binding",
+      "method",
+      "attempt",
+      "expected_kinds",
       "segment_index",
       "path",
       "actual_kind",

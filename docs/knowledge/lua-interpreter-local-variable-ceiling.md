@@ -11,6 +11,7 @@ status: current maintenance constraint
 tags: [lua, luajit, interpreter, architecture, maintenance, local-variable-limit, FUTURE-PARITY-BACKLOG]
 evidence: "During FUTURE-PARITY-BACKLOG.9.1.8.1.6, adding one top-level local module binding and one local trace helper made luac -p reject lua/src/linkedspec/interpreter.lua with 'too many local variables (limit is 200) in main function'. Removing the extra binding and publishing the helper through the existing module table restored PUC Lua and LuaJIT syntax and complete tests."
 evidence_update_2026_08_07: "FUTURE-PARITY-BACKLOG.14.2.5.2 initially added a source-location module local plus seven local typed adapters; PUC Lua again rejected interpreter.lua at the exact 200-local ceiling before any test ran. Moving the module binding into one private typed_source table and publishing adapters as table fields restored PUC and LuaJIT loading. Core 133/133, projection 240/240, aliases 638/638, and complete package 177/177 then pass on each ABI."
+evidence_update_2026_09_04: "FUTURE-PARITY-BACKLOG.19.6.2 again reached the 200-local load-time ceiling while adding receiver-mutation helpers. Publishing the coherent implementation under the existing private typed_source.receiver_mutation namespace instead of adding chunk locals restored both ABI syntax/load paths. The permanent map-leaves suite passes 530 assertions per ABI and the complete dual-ABI Lua gate passes."
 reverify: "find lua/src/linkedspec -name '*.lua' -print0 | xargs -0 -n1 luac -p"
 ---
 

@@ -434,9 +434,9 @@ return(items.reduce_leaves(0) {
 });
 ```
 
-### Mutating leaves on Perl, Rust, Dart, and Julia
+### Mutating leaves on all five backends
 
-Perl, Rust, Dart, and Julia support `map_leaves!` on one bare named harray or array binding:
+Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT support `map_leaves!` on one bare named harray or array binding:
 
 ```text
 tree = { "name" : "ALPHA", "nested" : { "name" : "BETA" } };
@@ -456,9 +456,11 @@ the receiver binding directly. Assignment, bracket write, nested bang, mutation 
 binding-target array pipelines aimed at the active receiver fail with `receiver_mutation_reentrant`; unrelated
 bindings and distinct same-spelling scoped bindings remain legal. Callback failure leaves the receiver unchanged.
 
-Only the exact `binding_name.map_leaves!() { block }` form is current on Perl, Rust, Dart, and Julia. Function-form bang calls,
+Only the exact `binding_name.map_leaves!() { block }` form is current. Function-form bang calls,
 temporary/nested receivers, `walk_leaves!`, `reduce_leaves!`, and arbitrary user-defined bang functions are not
-accepted. Lua implementation plus portable/public admission remain pending.
+accepted. Lua preserves the typed receiver, callback, and continuation through native, reconstructed,
+generated-plan, emitted-module, primary-CLI, and user-function-body execution on both ABIs. Portable capability,
+public no-drift, and recurring proof are owned by `FUTURE-PARITY-BACKLOG.19.7-.19.9`.
 
 ## Reading and copying collections
 

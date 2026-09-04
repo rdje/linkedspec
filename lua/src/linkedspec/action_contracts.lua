@@ -511,6 +511,33 @@ local function resolver(function_registry)
         resolve_call(normalized.method, normalized.source, normalized.source_span, "receiver_method", normalized.args)
         visit_args(normalized.args)
       end
+    elseif kind == "receiver_mutation_chain" then
+      local mutation = expr.mutation
+      local mutation_args = { action_ast.positional_argument(mutation.callback) }
+      resolve_call(
+        mutation.method,
+        mutation.source,
+        mutation.source_span,
+        "receiver_method",
+        mutation_args
+      )
+      visit_expr(mutation.callback)
+      for _, call in ipairs(expr.continuation or {}) do
+        local ordinary_call = action_ast.fluent_call(
+          call.method,
+          call.args,
+          call.source,
+          call.source_span,
+          {
+            source_method = call.source_method,
+            args_source = call.args_source,
+            args_span = call.args_span,
+          }
+        )
+        local normalized = M.normalize_contextual_codeblock_call("receiver", ordinary_call, function_registry)
+        resolve_call(normalized.method, normalized.source, normalized.source_span, "receiver_method", normalized.args)
+        visit_args(normalized.args)
+      end
     elseif kind == "assign_scalar" then
       record_structural(expr, "=", "set", "assignment", "assignment", 2)
       visit_expr(expr.value)
@@ -535,7 +562,7 @@ local function resolver(function_registry)
         source_span = expr.source_span,
       })
     elseif kind == "block_value" or kind == "codeblock_argument" then
-      visit_block(expr.block)
+      visit_block(expr.block or expr.body)
     elseif kind == "array_literal" then
       for _, item in ipairs(expr.items) do visit_expr(item) end
     elseif kind == "hash_literal" then

@@ -1889,12 +1889,12 @@
   Commit: `FUTURE-PARITY-BACKLOG.19.5.2 - implement Julia map leaves mutation`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.6`
-  Status: `pending`
+  Status: `done` / `canonical-signoff-complete` (closed by `.19.6.2`; no push)
   Goal: Implement the unchanged v1 contract on PUC Lua and LuaJIT through public compiled-state reconstruction.
   Children: `.19.6.1`, `.19.6.2`
   Dependencies: `.19.5`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: `canonical-signoff-complete`
+  Commit: `closed by FUTURE-PARITY-BACKLOG.19.6.2`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.6.1`
   Status: `done` / `canonical-signoff-complete` (activated 2026-09-04 from exact clean Julia map-leaves commit
@@ -1970,11 +1970,95 @@
   Commit: `FUTURE-PARITY-BACKLOG.19.6.1 - implement Lua write vivification`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.6.2`
-  Status: `pending`
+  Status: `done` / `canonical-signoff-complete` (2026-09-04; task-tree-first from exact clean Rust-warning ownership commit
+    `b65cbd6051ecbf65cd4202d40e834ef345c67aa3`; no push)
   Goal: Implement Lua `map_leaves!` through typed parsed/reconstructed state on both ABIs.
   Dependencies: `.19.6.1`
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `canonical` — this leaf implements the frozen receiver-mutation v1 contract on the final
+    backend and moves Lua typed parsed/public reconstructed compiled state across both supported ABIs. ADR `0073`
+    classifies backend admission and serialized/generated-format movement as a designated exact staged boundary.
+  Focused checks: unchanged neutral checker and exact Lua projection of all 4 valid syntax, 14 invalid syntax,
+    5 exclusions, 10 successes, 8 pre-commit failures, continuation/shadow/guard-release/nonbang/detachment proof,
+    167 base mutations, and 592 nested-write compositions; shared Lua parser/compiler/runtime native and public
+    `SpecFile` reconstructed routes on PUC Lua and LuaJIT; generated-plan, emitted-module, primary CLI, local
+    package, corpus, and project-data-storage dependents; adjacent assignment/access/helper and nested-write
+    behavior, diagnostics/spans, malformed typed state, formatting/static checks, Knowledge, task/index, bounded
+    histories, memory/live/roadmap/book, rendered mdBook, cross-backend no-drift, whitespace, and all nine doctrines.
+  Canonical trigger: `Lua backend implementation + typed public reconstructed-state movement on two ABIs` — stage
+    the exact candidate with no unstaged inputs and run receipt-bound `bash tools/run_ci_local.sh` before atomic
+    commit. Portable/public admission and the push boundary remain owned by `.19.7-.9`.
+  Acceptance: Parse only `IDENTIFIER.map_leaves!() { ACTION_BLOCK }` as the dedicated typed
+    `receiver_mutation_chain`, retaining receiver/call/callback/continuation structure and exact authored Unicode-
+    scalar spans through contracts, public `SpecFile` reconstruction, generated plans, and source emission. Resolve
+    one existing bare uniform-binding identity containing an harray or array; traverse a detached original-shape
+    snapshot in sorted-key or index order; provide detached `value`, complete copied `path`, `depth`, and
+    `key|index`; replace each leaf with the detached callback result without revisiting replacement aggregates;
+    then commit the rebuilt binding once and return a detached updated root before an ordinary fluent continuation.
+    Guard the resolved receiver identity during callbacks so direct, nested-write, nested-bang, helper-mediated,
+    array-end, and binding-target pipeline writes fail before operand/segment/RHS evaluation with exact
+    `receiver_mutation_reentrant`, while unrelated and distinct same-spelling shadow identities remain legal.
+    Callback/re-entrant failure leaves the receiver unchanged and releases the guard; continuation failure keeps
+    the prior commit. Preserve non-bang behavior and compose exactly with Lua `.19.6.1` nested writes; reject
+    malformed typed carriers; do not admit portable/public capability early.
+  Ownership: `.19.6.2` owns shared Lua parser/compiler/runtime/carrier implementation, permanent dual-ABI proof,
+    Lua status/docs, parent `.19.6` closeout, and direct compatibility evidence only. It must not alter the frozen
+    neutral/composition contracts, Perl/Rust/Dart/Julia behavior, public current examples, capability/facade/schema/
+    MCP surfaces, recurring cross-backend admission, or push state.
+  Checklist: [x] clean activation/task ownership [x] Knowledge/ADR and sibling-contract retrieval
+    [x] Toolbox-first Lua owner inventory [x] exact RED through frozen neutral/composition contracts
+    [x] typed parser/compiler/public reconstructed/generated/emitted carrier [x] atomic identity-guarded runtime
+    [x] base/composition/generated/CLI proof [x] focused dependent/no-drift proof
+    [x] durable docs/Knowledge/live sync [x] exact staged canonical signoff [x] atomic commit/brief/clean handoff.
+  Activation evidence: exact `git status --short --untracked-files=all` was empty at
+    `b65cbd6051ecbf65cd4202d40e834ef345c67aa3`; `git_message_brief.txt` was zero bytes; `.19.6.1` was committed with
+    all nine doctrine hooks after exact staged canonical proof and its receipt was promoted to that HEAD before the
+    clean warning-ownership intake pivot. `RUST-DEPENDENCY-WARNING-ZERO.0` is now durably committed and its `.1`
+    census remains non-blocking. Reproducible mdBook output is absent, no background result remains to consume, and
+    no Lua implementation file changed before this owner.
+  RED evidence (2026-09-04): the unchanged neutral oracle passed its frozen 4 valid / 14 invalid / 5 excluded
+    syntax, 10 success, 8 pre-commit failure, continuation/shadow/guard/nonbang/detachment, six callback, one
+    continuation, 167 base-mutation, and 592 composition-mutation inventory. Shared Lua still rejected every bang
+    form before callback execution while the non-bang and nested-write controls passed on PUC Lua and LuaJIT.
+    Toolbox-first parser/compiler/runtime/source-emitter inspection located no typed receiver-mutation carrier or
+    identity guard; existing `map_leaves` supplied only the neutral recurring traversal kernel.
+  Implementation evidence: exact `IDENTIFIER.map_leaves!() { ACTION_BLOCK } CONTINUATION*` now parses as one
+    typed `receiver_mutation_chain` with `binding_reference`, `receiver_mutation_call`, `block_value`, and
+    `fluent_call` children retaining source and half-open Unicode-scalar spans. Assignment lowering runs first so
+    the chain composes as an RHS. Contracts and static projection visit callback/continuation state; compiler,
+    direct-runtime, public `SpecFile` reconstruction, generated-plan, and source-emitter boundaries reject
+    malformed or reserved carrier state before execution.
+  Runtime evidence: visible Lua bindings retain stable identity across writes while callback and user-function
+    scopes allocate fresh identities. All 18 direct, append, nested-write/bang, helper, array-end, regex-
+    substitution, and binding-target-pipeline routes reject the resolved active receiver before operands,
+    segments, or RHS evaluation. Detached original-shape/root-kind traversal supplies copied callback fields,
+    does not revisit replacements, publishes once, returns a separate copy, clears the guard on all exits, and
+    releases it before continuation. Callback/re-entrant failure preserves the receiver; unrelated completed
+    effects remain; continuation failure preserves the prior bang commit.
+  Compatibility evidence: `lua/test/map_leaves_mutation_contract_test.lua` passes 530 assertions unchanged on
+    PUC Lua and LuaJIT across every frozen stable ID, all 18 guarded paths, six callback and one continuation
+    composition, native, reconstructed, generated-plan, emitted-module, primary-CLI, malformed-state, detachment,
+    same-spelling shadow, and staged user-function-body routes. Adjacent write proof passes 438 per ABI after its
+    stale pre-implementation raw-syntax expectation became the exact frozen invalid-arguments diagnostic. The
+    unchanged neutral oracle rejects all 167 base and 592 composition mutations. Complete Lua local proof passes
+    both ABIs, all 178 integration cases, CLI 66/66 in default and POSIX environments, corpus 105/105, and
+    repository-local storage proof.
+  Engineering evidence: adding chunk locals reproduced Lua 5.1's known 200-local interpreter ceiling. Publishing
+    the coherent helpers under the existing private `typed_source.receiver_mutation` namespace restores PUC Lua
+    and LuaJIT syntax/load without suppression. The zero-regex fixture keeps exact dispatch semantics: entering
+    `Top` starts its loop, whose edge selects and consumes `Done`'s regex; `Top` owns no inert regex.
+  Canonical attempt one: all preceding doctrine, staged, progressive, gap, recognition, typed-source, MCP,
+    semantic-introspection, duplicate-slot, repetition, lifecycle, root-selection, callable, diagnostic, mark, and
+    uniform-binding checks pass. The aggregate-selector retirement guard then rejects one generic mdBook sentence
+    saying that "final public admission remain" for `map_leaves!`; the future boundary is valid, but the wording
+    collides with the retired aggregate-selector status phrase. The guide now names the precise `.19.7-.19.9`
+    portable/public/recurring owners and the exact corrected staged candidate reruns from the beginning.
+  Signoff evidence: both roadmaps, Toolbox, bounded change/notes/live/memory state, Knowledge sources/index, parent
+    `.19.6`, and the sole-facing mdBook describe the five-backend implementation boundary while portable/public/
+    recurring admission remains `.19.7-.9`. The book renders, bounded-history checks pass, Knowledge/task indexes
+    regenerate, whitespace and all nine doctrines pass, and exact receipt-bound canonical CI passes on the final
+    staged candidate. Generated book output is removed before commit.
+  Verification: `canonical-signoff-complete`
+  Commit: `FUTURE-PARITY-BACKLOG.19.6.2 - implement Lua map leaves mutation`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.7`
   Status: `pending`

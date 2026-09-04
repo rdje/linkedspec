@@ -2,22 +2,27 @@
 
 ## Current Activity
 
-- `RUST-DEPENDENCY-WARNING-ZERO.0` is focused-signoff-complete from clean Lua-write commit `7ed47a0a`. It durably
-  owns the reproduced 1,870-`pgen` / 26-`rgx-core` warning output, nested upstream/pin boundary, causal repair split,
-  and future zero-warning gate without changing build behavior or reprioritizing Lua parity.
+- Lua `map_leaves!` `.19.6.2` is canonical-signoff-complete from clean warning-intake commit `b65cbd60`. Shared
+  typed receiver mutation now executes on PUC Lua and LuaJIT without moving portable capability, recurring proof,
+  public admission, or the queued Rust warning-remediation tree.
 
 ## Latest Completed Slice
 
-- Warning-intake `.0` converts the repeated canonical warning stream into seven bounded future cleanup/enforcement
-  leaves, a searchable Knowledge fact, and aligned roadmap/book/continuity state without executable movement.
+- `.19.6.2` closes the five-backend implementation frontier with stable Lua binding identities, all 18 guarded
+  write routes, atomic original-shape traversal, and typed native/reconstructed/generated/emitted/CLI carriers.
+  Permanent proof passes 530 assertions per ABI and the complete dual-ABI Lua gate.
 
 ## Next Action
 
-- Commit warning-intake `.0`, verify the exact clean boundary and cleared brief, then activate Lua `map_leaves!`
-  `.19.6.2` task-tree-first and run its unchanged RED on both ABIs. Warning census `.1` remains durably queued and
-  non-blocking unless the director reprioritizes it.
+- Commit `.19.6.2`, verify the exact clean boundary and cleared brief, then activate portable/public mutation
+  admission `.19.7` task-tree-first. Warning census `.1` remains durably queued and non-blocking unless the
+  director reprioritizes it.
 
 ## Recent Completions
+
+- `2026-09-04` — `.19.6.2` implements typed atomic Lua `map_leaves!`; 530 assertions per ABI, full 178x2
+  integration, CLI 66x2, corpus 105/105, storage, unchanged 167 + 592 mutations, mdBook, doctrines, and exact
+  receipt-bound canonical CI pass; parent `.19.6` closes.
 
 - `2026-09-04` — director-requested `RUST-DEPENDENCY-WARNING-ZERO.0` owns the reproducible 1,870-`pgen` /
   26-`rgx-core` warning output and splits causal upstream/generated/direct cleanup plus zero-warning enforcement;
@@ -70,9 +75,6 @@
 
 - `2026-08-31` — `.19.1.2` freezes future `map_leaves!` at 4/14/5 syntax, 10 success, 8 pre-commit failure, five
   special state proofs, 167 mutations, and a 37-entrypoint canonical storage boundary; no backend is admitted.
-
-- `2026-08-30` — `.15.3` replaces one false-positive Lua `next()` fixture with exact action-edge ownership,
-  passes 178/178 and 109/109 on both ABIs, and admits notes segment `4987` at finite capacity 21/20 via ADR `0097`.
 
 ## History
 

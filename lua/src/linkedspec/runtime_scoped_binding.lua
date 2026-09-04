@@ -52,6 +52,8 @@ function M.run_frame(context, bindings, copy_value, callback)
     error("RuntimeScopedBindingException: callback must be a function", 0)
   end
   bindings = validated_bindings(bindings)
+  if context.binding_identities == nil then context.binding_identities = {} end
+  local identities = require_table(context.binding_identities, "context.binding_identities")
 
   local stores = {}
   for index, store_name in ipairs(STORE_NAMES) do
@@ -64,10 +66,16 @@ function M.run_frame(context, bindings, copy_value, callback)
     for store_index, store in ipairs(stores) do
       snapshots[store_index] = snapshot_store(store, binding.name, copy_value)
     end
-    frame[binding_index] = { name = binding.name, snapshots = snapshots }
+    frame[binding_index] = {
+      name = binding.name,
+      snapshots = snapshots,
+      identity_present = identities[binding.name] ~= nil,
+      identity = identities[binding.name],
+    }
   end
   for _, binding in ipairs(bindings) do
     for _, store in ipairs(stores) do store[binding.name] = nil end
+    identities[binding.name] = {}
   end
 
   local ok, result = pcall(function()
@@ -81,6 +89,7 @@ function M.run_frame(context, bindings, copy_value, callback)
     for store_index, store in ipairs(stores) do
       restore_store(store, saved.name, saved.snapshots[store_index])
     end
+    identities[saved.name] = saved.identity_present and saved.identity or nil
   end
   if not ok then error(result, 0) end
   return result

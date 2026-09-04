@@ -9,10 +9,11 @@ answers:
   - do Julia emitted parsers preserve nested write path expressions
   - where is the Julia write vivification regression test
 date: 2026-09-03
-status: current; Julia nested writes and map_leaves bang implemented, Lua nested writes also implemented, Lua bang and portable admission pending
+status: current; Julia nested writes and map_leaves bang implemented, Lua now implements both, portable admission pending
 tags: [julia, actionir, assignment, autovivification, diagnostics, generated-source, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.19.5.1 replaces authored Julia key/index-tagged assignment lowering with ActionWritePathSegment plus ActionAssignNestedAccessExpr. Parser/compiler/runtime/source-emitter validation carries typed expressions and Unicode-scalar spans through native, SpecFile reconstruction, generated-plan, emitted-module, and primary-CLI routes. Runtime evaluates every segment then RHS, snapshots afterward, distinguishes absent from bound null, builds selector-determined dense harray/array state on an isolated copy, publishes once, preserves completed expression effects and original expression failures, and returns detached results. julia/test/write_vivification_contract_test.jl directly consumes the unchanged 5/7/11/16/3/3 neutral fixture and verifies malformed-carrier rejection. Julia map_leaves! and Lua/public admission remain pending."
 evidence_update_2026_09_03_julia_map_leaves: "FUTURE-PARITY-BACKLOG.19.5.2 adds Julia's separate typed receiver-mutation carrier and identity-guarded copy-on-write runtime without changing nested-write semantics. The 496-assertion permanent suite composes callback-local, unrelated, same-receiver, shadow, and post-commit nested writes across native, reconstructed, generated-plan, emitted-module, and CLI routes. Both Julia mechanisms are current; Lua and portable/public admission remain pending."
+evidence_update_2026_09_04_lua_map_leaves: "FUTURE-PARITY-BACKLOG.19.6.2 implements the same unchanged receiver-mutation contract in shared Lua on PUC Lua and LuaJIT. Julia behavior remains unchanged; all five backend implementations are current while portable/public admission remains pending."
 reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT = pwd(); include(\"julia/test/write_vivification_contract_test.jl\")' && bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py"
 ---
 

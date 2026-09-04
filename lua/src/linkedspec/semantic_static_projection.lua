@@ -1398,6 +1398,9 @@ call_visit_children = function(builder, expression, owner_id, cursor, local_orde
   elseif kind == "fluent_chain" then
     visit(expression.receiver)
     for _, call in ipairs(expression.calls or {}) do visit_args(call.args) end
+  elseif kind == "receiver_mutation_chain" then
+    visit_block(expression.mutation and expression.mutation.callback and expression.mutation.callback.body)
+    for _, call in ipairs(expression.continuation or {}) do visit_args(call.args) end
   elseif kind == "nested_access" then
     for _, segment in ipairs(expression.segments or {}) do
       if segment.kind == "index" then visit(segment.expr) end

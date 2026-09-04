@@ -99,6 +99,34 @@ function M.write_path_segment(source, source_span, expression)
   })
 end
 
+function M.receiver_mutation_binding_reference(name, source, source_span)
+  return node("ActionReceiverMutationBindingReference", {
+    kind = "binding_reference",
+    name = name,
+    source = source,
+    source_span = source_span,
+  })
+end
+
+function M.receiver_mutation_callback(source, source_span, body)
+  return node("ActionReceiverMutationCallback", {
+    kind = "block_value",
+    source = source,
+    source_span = source_span,
+    body = body,
+  })
+end
+
+function M.receiver_mutation_call(fields)
+  fields.kind = "receiver_mutation_call"
+  return node("ActionReceiverMutationCall", fields)
+end
+
+function M.receiver_mutation_continuation_call(fields)
+  fields.kind = "fluent_call"
+  return node("ActionReceiverMutationContinuationCall", fields)
+end
+
 function M.hash_entry(key, value)
   return node("ActionHashEntry", { key = key, value = value })
 end
@@ -220,6 +248,14 @@ find_removed_aggregate_selector = function(value)
     local selector = find_removed_aggregate_selector(value.receiver)
     if selector then return selector end
     for _, call in ipairs(value.calls or {}) do
+      selector = find_in_args(call.args)
+      if selector then return selector end
+    end
+    return nil
+  elseif kind == "receiver_mutation_chain" then
+    local selector = find_in_block(value.mutation and value.mutation.callback and value.mutation.callback.body)
+    if selector then return selector end
+    for _, call in ipairs(value.continuation or {}) do
       selector = find_in_args(call.args)
       if selector then return selector end
     end

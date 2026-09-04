@@ -587,6 +587,92 @@ local function validate_nested_write_serialized_state(compiled)
   end
 end
 
+local function validate_receiver_mutation_serialized_state(compiled)
+  local function invalid(context, reason)
+    fail("receiver_mutation_serialized_state_invalid: " .. context .. " " .. reason, {
+      code = "receiver_mutation_serialized_state_invalid",
+    })
+  end
+
+  local function typed_span(value)
+    return action_ast.node_type(value) == "ActionSourceSpan" and
+      type(value.start) == "number" and type(value["end"]) == "number" and
+      value.start % 1 == 0 and value["end"] % 1 == 0 and
+      value.start >= 0 and value["end"] >= value.start
+  end
+
+  local function visit(value, context)
+    if type(value) ~= "table" then return end
+    local receiver_mutation_shape = value.kind == "receiver_mutation_chain" or
+      action_ast.node_type(value.receiver) == "ActionReceiverMutationBindingReference" or
+      action_ast.node_type(value.mutation) == "ActionReceiverMutationCall"
+    if receiver_mutation_shape then
+      if action_ast.node_type(value) ~= "ActionExpr" then
+        invalid(context, "must be one typed receiver_mutation_chain expression")
+      end
+      if value.kind ~= "receiver_mutation_chain" then
+        invalid(context, "must retain receiver_mutation_chain kind")
+      end
+      if type(value.source) ~= "string" or value.source == "" or not typed_span(value.source_span) then
+        invalid(context, "must retain authored source and one typed source span")
+      end
+
+      local receiver = value.receiver
+      if action_ast.node_type(receiver) ~= "ActionReceiverMutationBindingReference" or
+          receiver.kind ~= "binding_reference" or type(receiver.name) ~= "string" or
+          not receiver.name:match("^[A-Za-z_][A-Za-z0-9_]*$") or
+          action_parser.is_nested_write_reserved_root(receiver.name) or
+          receiver.source ~= receiver.name or not typed_span(receiver.source_span) then
+        invalid(context .. ".receiver", "must be one typed non-reserved bare binding_reference")
+      end
+
+      local mutation = value.mutation
+      if action_ast.node_type(mutation) ~= "ActionReceiverMutationCall" or
+          mutation.kind ~= "receiver_mutation_call" or mutation.method ~= "map_leaves" or
+          mutation.source_method ~= "map_leaves!" or type(mutation.source) ~= "string" or
+          mutation.source == "" or not typed_span(mutation.source_span) or
+          not typed_span(mutation.method_span) or not typed_span(mutation.args_span) then
+        invalid(context .. ".mutation", "must be the typed map_leaves! receiver_mutation_call")
+      end
+
+      local callback = mutation.callback
+      if action_ast.node_type(callback) ~= "ActionReceiverMutationCallback" or
+          callback.kind ~= "block_value" or type(callback.source) ~= "string" or
+          callback.source == "" or not typed_span(callback.source_span) or
+          action_ast.node_type(callback.body) ~= "ActionBlock" then
+        invalid(context .. ".mutation.callback", "must retain one typed callback block")
+      end
+
+      if type(value.continuation) ~= "table" then
+        invalid(context .. ".continuation", "must be a typed continuation list")
+      end
+      for index, call in ipairs(value.continuation) do
+        local call_context = context .. ".continuation[" .. (index - 1) .. "]"
+        if action_ast.node_type(call) ~= "ActionReceiverMutationContinuationCall" or
+            call.kind ~= "fluent_call" or type(call.method) ~= "string" or
+            not call.method:match("^[A-Za-z_][A-Za-z0-9_]*$") or
+            call.source_method ~= call.method or type(call.source) ~= "string" or
+            type(call.args_source) ~= "string" or type(call.args) ~= "table" or
+            not typed_span(call.source_span) or not typed_span(call.args_span) then
+          invalid(call_context, "must be one typed non-bang fluent continuation")
+        end
+      end
+    end
+    for key, child in pairs(value) do
+      if key ~= "source_span" and key ~= "method_span" and key ~= "args_span" then
+        visit(child, context .. "." .. tostring(key))
+      end
+    end
+  end
+
+  for _, label in ipairs(compiled.compiled_rule_order) do
+    local rule = compiled.rules_by_label[label]
+    for index, payload in ipairs(M.action_payloads(rule)) do
+      visit(payload.action_ast, label .. ".action_payloads[" .. (index - 1) .. "]")
+    end
+  end
+end
+
 local function recursive_observation_effects(value, function_names)
   local effects = {
     writes_observation = false,
@@ -1006,6 +1092,7 @@ function M.compile_spec(spec, options)
       M.validate_compiled_regex_slot_identities(compiled)
       validate_no_removed_aggregate_selectors(compiled)
       validate_nested_write_serialized_state(compiled)
+      validate_receiver_mutation_serialized_state(compiled)
       validate_staged_parse_job_contract(compiled)
       validate_recursive_observation_policy(compiled)
       validate_progressive_dispatch_policy(compiled)
@@ -1110,6 +1197,13 @@ function M.validate_nested_write_serialized_state(compiled)
     fail("validate_nested_write_serialized_state expects CompiledSpec")
   end
   validate_nested_write_serialized_state(compiled)
+end
+
+function M.validate_receiver_mutation_serialized_state(compiled)
+  if M.node_type(compiled) ~= "CompiledSpec" then
+    fail("validate_receiver_mutation_serialized_state expects CompiledSpec")
+  end
+  validate_receiver_mutation_serialized_state(compiled)
 end
 
 function M.validate_progressive_dispatch_policy(compiled)

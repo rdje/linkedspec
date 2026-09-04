@@ -226,10 +226,16 @@ for _, fixture in ipairs(contract.excluded_syntax_cases) do
 end
 
 do
-  local future_receiver_mutation = linkedspec.parse_action_expression(
-    'document.map_leaves!({|value| return(value) })'
-  )
-  check_equal(future_receiver_mutation.kind, "raw_perl", "map_leaves bang remains unadmitted")
+  local ok, receiver_mutation_failure = capture(function()
+    return linkedspec.parse_action_expression('document.map_leaves!({|value| return(value) })')
+  end)
+  check_equal(ok, false, "legacy bang shape rejects after receiver-mutation admission")
+  check_equal(linkedspec.is_action_parse_error(receiver_mutation_failure), true,
+    "legacy bang shape has a typed parse failure")
+  if linkedspec.is_action_parse_error(receiver_mutation_failure) then
+    check_equal(receiver_mutation_failure.code, "map_leaves_mutation_arguments_invalid",
+      "legacy bang shape requires empty parentheses")
+  end
 end
 
 local astral = linkedspec.action_ast.to_json(

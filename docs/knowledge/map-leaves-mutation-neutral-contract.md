@@ -14,7 +14,7 @@ answers:
   - "does continuation failure roll back map_leaves bang"
   - "why do current backends reject map_leaves bang differently"
 date: 2026-08-31
-status: accepted neutral contract; implemented on Perl, Rust, Dart, and Julia; Lua/admission pending
+status: accepted neutral contract; implemented on all five backends; portable/public admission pending
 tags: [language, mutation, map-leaves, receiver-methods, traversal, reentrancy, diagnostics, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.19.1.2 adds capability_conformance/map_leaves_mutation_contract.json and tools/check_map_leaves_mutation_contract.py. The independent checker passes 4 valid syntax, 14 invalid syntax, 5 exclusions, 10 successes, 8 pre-commit failures, continuation/shadow/guard-release/nonbang/detachment proof, and 167 rejected mutations. A checked-in action-edge control returns the same nested value on Perl/Rust/Dart/Julia/Lua. Its minimal one-token bang twin becomes null on Perl/Rust (Rust warns) and a generic parser-invocation failure on Dart/Julia/Lua. Parser and Perl ActionIR/toolbox inspection prove all current fluent method grammars are identifier-only and Perl classifies the bang segment as raw_perl/invalid_fluent_chain. No backend behavior or capability is admitted."
 evidence_update_2026_08_31_composition: "FUTURE-PARITY-BACKLOG.19.1.3 makes the existing checker also execute six shared callback compositions and one post-commit continuation against the unchanged write-vivification authority. It retains 167 base mutations and rejects 593 composition scalar/container-shape mutations. Exact composed current probes preserve the same pre-runtime bang boundary on six routes; no backend behavior is admitted."
@@ -25,7 +25,8 @@ evidence_update_2026_08_31_write_surface_signoff: "Expanded Perl signoff found d
 evidence_update_2026_09_01_rust_implementation: "FUTURE-PARITY-BACKLOG.19.3.2 implements the dedicated typed carrier and identity-guarded copy-on-write runtime on Rust. Permanent proof passes 9 integration tests across all frozen syntax/behavior/composition boundaries and independently compiled emitted Rust, plus 3 private state tests for atomic rollback, guard release, write-before-evaluation precedence, unrelated-write effects, and post-commit continuation failure. The unchanged neutral checker rejects 167 base and 592 composition mutations."
 evidence_update_2026_09_02_dart_implementation: "FUTURE-PARITY-BACKLOG.19.4.2 implements the dedicated typed carrier and stable identity-guarded copy-on-write runtime on Dart. Eleven permanent tests cover the complete frozen syntax, behavior, composition, malformed-state, reconstructed, generated-plan, emitted-source, independent-caller, and primary-CLI routes. The full Dart package passes 461 tests; the unchanged neutral oracle rejects 167 base and 592 composition mutations."
 evidence_update_2026_09_03_julia_implementation: "FUTURE-PARITY-BACKLOG.19.5.2 implements the dedicated typed carrier and stable identity-guarded copy-on-write runtime on Julia. Its permanent 496-assertion suite covers every frozen syntax, behavior, composition, 18 guarded-write, malformed-state, reconstructed, generated-plan, emitted-module, and primary-CLI boundary. The unchanged neutral oracle rejects 167 base and 592 composition mutations."
-reverify: "bash tools/run_python_project_data.sh tools/check_map_leaves_mutation_contract.py && PERL5OPT=-Mwarnings=FATAL perl -Iperl t/map_leaves_mutation_perl_contract.t && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test map_leaves_mutation_contract && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib receiver_mutation_ -- --nocapture && (cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/map_leaves_mutation_contract_test.dart) && bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT = pwd(); include(\"julia/test/map_leaves_mutation_contract_test.jl\")'"
+evidence_update_2026_09_04_lua_implementation: "FUTURE-PARITY-BACKLOG.19.6.2 implements the dedicated typed carrier and stable identity-guarded copy-on-write runtime in shared Lua. The permanent 530-assertion suite passes unchanged on PUC Lua and LuaJIT across every frozen syntax, behavior, composition, 18 guarded-write, malformed-state, public SpecFile reconstruction, generated-plan, emitted-module, primary-CLI, and user-function-body boundary. The unchanged neutral oracle rejects 167 base and 592 composition mutations."
+reverify: "bash tools/run_python_project_data.sh tools/check_map_leaves_mutation_contract.py && PERL5OPT=-Mwarnings=FATAL perl -Iperl t/map_leaves_mutation_perl_contract.t && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test map_leaves_mutation_contract && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib receiver_mutation_ -- --nocapture && (cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/map_leaves_mutation_contract_test.dart) && bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT = pwd(); include(\"julia/test/map_leaves_mutation_contract_test.jl\")' && bash tools/run_lua_project_data.sh puc lua/test/map_leaves_mutation_contract_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/map_leaves_mutation_contract_test.lua"
 ---
 
 # Neutral `map_leaves!` contract
@@ -53,14 +54,14 @@ result, and only then does ordinary fluent continuation execute. A continuation 
 completed receiver commit. The committed binding, returned root, snapshot, callback frames, and aggregate callback
 results share no writable host aliases.
 
-Perl, Rust, Dart, and Julia now implement this contract through dedicated typed ASTs and copy-on-write runtimes. Rust
+Perl, Rust, Dart, Julia, and Lua now implement this contract through dedicated typed ASTs and copy-on-write runtimes. Rust
 preserves the node through `SpecFile`/`CompiledSpec` serde and independently compiled emitted Rust. Dart preserves
 its typed carrier through compiler validation and reconstructs authored source through generated plans, emitted
 source, an independently executed caller package, and the primary CLI. Julia preserves the same typed state
 through `SpecFile` reconstruction, validated generated plans, an independently included emitted module, and the
-primary CLI. The exact non-bang control remains unchanged on all five backends. Lua still exposes its generic
-parser-invocation boundary for the bang form; its implementation and portable/public admission remain owned by
-later `.19` leaves.
+primary CLI. Shared Lua preserves it through native, public `SpecFile` reconstruction, generated-plan,
+independently loaded emitted-module, primary-CLI, and user-function-body routes on both ABIs. The exact non-bang
+control remains unchanged on all five backends. Portable/public admission remains owned by later `.19` leaves.
 
 Composition with nested write-vivification is frozen separately by [[write-map-leaves-neutral-composition]].
 The implementation-time function-scope conflict in two composition carriers was resolved without caller capture;

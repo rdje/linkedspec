@@ -58,9 +58,8 @@ But concision must not hide what is happening. The project direction is toward:
 - clearer runtime ownership (each module owns its state and its diagnostics)
 - stronger documentation expectations (every surface explained, every contract explicit)
 
-The same principle governs two mutation extensions. Nested writes are current on all five backends, while
-receiver mutation is current through Julia; Lua receiver mutation and portable/public admission follow through
-`.19`.
+The same principle governs two mutation extensions. Nested writes and receiver mutation are current on all five
+backends; portable capability, recurring proof, and final public admission follow through `.19.7-.9`.
 
 First, the neutral nested-write contract fixes how assignment creates missing path containers. Perl, Rust, Dart,
 Julia, PUC Lua, and LuaJIT implement it. The authored form stays ordinary assignment:
@@ -106,14 +105,14 @@ tree.map_leaves!() {
 }
 ```
 
-The non-bang `map_leaves()` returns a rebuilt tree without changing `tree`. On Perl, Rust, Dart, and Julia,
+The non-bang `map_leaves()` returns a rebuilt tree without changing `tree`. On Perl, Rust, Dart, Julia, and Lua,
 `map_leaves!()` now requires a bare named receiver, traverses an isolated snapshot using the receiver's existing
 root-kind rules, commits the rebuilt tree only after complete success, rebinds `tree`, and returns the updated
 value. The callback's `path` stays a complete copied root-to-leaf path; `value` stays a scoped value rather than a
 writable reference. Replacements are based on the original tree shape and are not recursively revisited in the
-same call. Lua implementation and portable admission remain pending.
+same call. Lua preserves the same typed state on both PUC Lua and LuaJIT; portable admission remains pending.
 
-The neutral contract makes those details executable and Perl/Rust/Dart/Julia consume it. Hash roots
+The neutral contract makes those details executable and all five backends consume it. Hash roots
 recurse only through hashes in sorted-key depth-first order; arrays inside them are leaves. Array roots recurse
 only through arrays in zero-based depth-first order; hashes inside them are leaves. Every callback gets its own
 detached `value` and complete `path`, plus `depth` and the root-kind selector `key` or `index`. The callback's
@@ -206,9 +205,9 @@ re-entrancy diagnostics retain authored half-open Unicode-scalar spans.
 
 `walk_leaves!`, `reduce_leaves!`, function-form bang calls, and arbitrary `!`-suffixed identifiers are not part of
 that direction. They would save no meaningful ceremony or would advertise mutation without a distinct coherent
-contract. All five backends implement nested creation; Perl, Rust, Dart, and Julia also implement `map_leaves!`.
-The verified non-bang control remains identical on every backend; PUC Lua and LuaJIT retain their unsupported raw
-syntax boundary for the bang form.
+contract. All five backends implement both nested creation and `map_leaves!`. The verified non-bang control
+remains identical on every backend; PUC Lua and LuaJIT carry the dedicated bang node through native,
+reconstructed, generated-plan, emitted-module, primary-CLI, and user-function-body execution.
 ADR `0036`, the two mechanism
 contracts plus their shared composition contract under `capability_conformance/`, and backlog `.19.1-.19.9` own
 the remaining backend and admission work.

@@ -9,6 +9,35 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-09-04 (`FUTURE-PARITY-BACKLOG.19.6.2` — Lua `map_leaves!`): keep the bang token in one exact parser path.
+  Assignment must parse first so `result = tree.map_leaves!()` remains an assignment whose typed RHS is the
+  mutation chain, rather than misclassifying `result = tree` as the receiver.
+- Carry receiver, mutation, direct callback block, continuation, authored source, and Unicode-scalar spans as typed
+  state. Validate reconstructed state at compiler, runtime-engine, generated-plan, and source-emitter boundaries;
+  parser-only rejection cannot protect caller-built `SpecFile` values.
+- Guard stable binding identity, not spelling. Ordinary writes retain identity; callback frames and user-function
+  parameters get fresh identities. This rejects writes to the actual receiver while allowing an unrelated local
+  also named `tree`.
+- Every write owner must check the guard before evaluating an operand, selector, segment, or RHS. The Lua surface
+  includes direct assignment/append, nested write/bang, `set`/`set_key`/`push`, array-end methods, split/filter/
+  casing pipelines, and statement regex substitution. Pure three-argument `substr` remains unchanged outside the
+  guarded receiver case.
+- Traverse a deep-copied original shape under the starting root kind. Copy callback `value` and `path`, detach the
+  result, never revisit replacement aggregates, publish once after complete callback success, and release the
+  guard before any continuation. Callback failure rolls back only the receiver rebuild; continuation failure
+  preserves the already committed receiver.
+- Direct callback blocks are typed `block_value` state, while post-bang calls remain ordinary fluent semantics.
+  Contextual contract normalization may project a continuation transiently as `ActionFluentCall`; the compiled
+  carrier retains its specialized receiver-mutation continuation type.
+- Lua 5.1's 200-local chunk ceiling recurred during implementation. Attaching helpers to the existing private
+  `typed_source.receiver_mutation` table avoids new chunk locals and keeps the same implementation loadable on
+  PUC Lua and LuaJIT.
+- Permanent proof is 530 assertions per ABI and explicitly includes a staged user-function body, all frozen stable
+  IDs, 18 pre-evaluation guards, callback/re-entrant rollback and guard release, continuation commit, malformed
+  state, public reconstruction, generated/emitted routes, CLI, and strict nested-write composition. The full Lua
+  gate and unchanged 167 + 592 mutation oracles pass.
+- The dispatch fixture remains `Top:: -> Done`: entering `Top` starts its loop, and the edge selects and consumes
+  `Done`'s regex. A regex on `Top` would be inert and would weaken the proof.
 - 2026-09-04 (`RUST-DEPENDENCY-WARNING-ZERO.0` — durable Rust warning cleanup ownership): repeated clean canonical
   carriers report `pgen (lib) generated 1870 warnings` and 1,360 suggested fixes, plus 26 `rgx-core` warnings.
   Treat these as emitted diagnostic counts, not unique causal counts: generated repetition and multiple targets can

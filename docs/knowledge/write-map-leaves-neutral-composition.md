@@ -14,7 +14,7 @@ answers:
   - "does continuation nested-write failure roll back the map_leaves bang commit"
   - "what is the current six-runtime boundary for composed write and map_leaves bang source"
 date: 2026-08-31
-status: accepted neutral composition; both mechanisms implemented on Perl/Rust/Dart/Julia, Lua/admission pending
+status: accepted neutral composition; both mechanisms implemented on all five backends, portable/public admission pending
 tags: [dsl, mutation, vivification, map-leaves, composition, identity, atomicity, diagnostics, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.19.1.3 adds capability_conformance/write_map_leaves_composition_contract.json without a new executable entrypoint. The existing write checker validates eight embedded nested writes; the existing mutation checker executes six callback compositions and one post-commit continuation, retains 167 base mutations, and rejects 593 composition scalar/container-shape mutations. Exact primary-command probes return the non-bang control {\"leaf\":[]} on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. The bang source stops before callback nested-write lowering: Perl returns null; Rust warns at the stopped map_leaves identifier then returns null; Dart, Julia, and both Lua ABIs exit 1 with the generic parser-invocation boundary. No backend or capability is admitted."
 evidence_update_2026_08_31_perl_write_boundary: "FUTURE-PARITY-BACKLOG.19.2.1 makes the nested-write half executable on Perl but leaves map_leaves! parsing/runtime untouched. The composed callback/continuation cases therefore remain neutral-only on every backend until .19.2.2 and later backend/admission leaves."
@@ -25,7 +25,8 @@ evidence_update_2026_09_02_dart_implementation: "FUTURE-PARITY-BACKLOG.19.4.2 ex
 evidence_update_2026_09_03_julia_write_half: "FUTURE-PARITY-BACKLOG.19.5.1 implements the unchanged write half on Julia through typed native/reconstructed/generated/emitted-module/CLI routes. The composed non-bang control and its embedded writes now use Julia's evaluated-selector dense isolated semantics; map_leaves! still fails before callback execution, so full Julia composition remains owned by .19.5.2."
 evidence_update_2026_09_03_julia_composition: "FUTURE-PARITY-BACKLOG.19.5.2 executes the frozen six callback and one continuation composition boundaries on Julia. Callback-local and unrelated vivification use the .19.5.1 carrier, same-receiver guard precedence wins before selectors/RHS, same-spelling function parameters remain distinct, non-bang aliases remain isolated, and the zero-regex Top loop selects Done's regex. The current composition oracle rejects all 592 mutations unchanged."
 evidence_update_2026_09_04_lua_write_half: "FUTURE-PARITY-BACKLOG.19.6.1 implements the unchanged write half in shared Lua on PUC Lua and LuaJIT through typed native/reconstructed/generated/emitted/CLI routes. The composed non-bang control and embedded writes now use evaluated-selector dense isolated semantics; map_leaves! remains unsupported raw syntax, so full Lua composition stays owned by .19.6.2."
-reverify: "bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py && bash tools/run_python_project_data.sh tools/check_map_leaves_mutation_contract.py && PERL5OPT=-Mwarnings=FATAL perl -Iperl t/map_leaves_mutation_perl_contract.t && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test map_leaves_mutation_contract && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib receiver_mutation_ -- --nocapture && (cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/map_leaves_mutation_contract_test.dart) && bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT = pwd(); include(\"julia/test/map_leaves_mutation_contract_test.jl\")'"
+evidence_update_2026_09_04_lua_composition: "FUTURE-PARITY-BACKLOG.19.6.2 executes all six callback and one continuation composition boundaries in shared Lua on PUC Lua and LuaJIT. Callback-local and unrelated vivification use the .19.6.1 carrier, same-receiver guard precedence wins before selectors/RHS, same-spelling function parameters remain distinct, non-bang aliases remain isolated, and the zero-regex Top loop selects Done's regex. The unchanged composition oracle rejects all 592 mutations."
+reverify: "bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py && bash tools/run_python_project_data.sh tools/check_map_leaves_mutation_contract.py && PERL5OPT=-Mwarnings=FATAL perl -Iperl t/map_leaves_mutation_perl_contract.t && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test map_leaves_mutation_contract && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib receiver_mutation_ -- --nocapture && (cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/map_leaves_mutation_contract_test.dart) && bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT = pwd(); include(\"julia/test/map_leaves_mutation_contract_test.jl\")' && bash tools/run_lua_project_data.sh puc lua/test/map_leaves_mutation_contract_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/map_leaves_mutation_contract_test.lua"
 ---
 
 # Future-neutral write/`map_leaves!` composition
@@ -57,12 +58,11 @@ Complete callback success commits the rebuilt receiver once and releases its gua
 against the detached result. A continuation helper may reach the receiver and perform an ordinary nested write;
 if that write fails, its structural attempt rolls back but the earlier `map_leaves!` receiver commit remains.
 
-The composed source is current on Perl, Rust, Dart, and Julia: both mechanisms execute and preserve the boundaries
-above, including generated Rust/Dart carriers and Julia's generated-plan/emitted-module routes. Lua implements
-the nested-write half but still rejects the bang carrier. The non-bang
-control remains unchanged on all six runtime routes. It uses a zero-regex `Top` whose loop dispatches to `Done`;
-only `Done` owns the matching regex. Lua receiver mutation and portable/public admission follow in later `.19`
-leaves.
+The composed source is current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT: both mechanisms execute and
+preserve the boundaries above, including generated Rust/Dart carriers, Julia's generated-plan/emitted-module
+routes, and Lua's shared typed reconstructed/generated/emitted carrier. The non-bang control remains unchanged on
+all six runtime routes. It uses a zero-regex `Top` whose loop dispatches to `Done`; only `Done` owns the matching
+regex. Portable/public admission follows in later `.19` leaves.
 
 Related: ADR `0036`, [[write-vivification-receiver-mutation-direction]], and
 [[tool-project-data-ssd-storage]]. The resolved carrier conflict is

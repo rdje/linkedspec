@@ -10,6 +10,33 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-04 — FUTURE-PARITY-BACKLOG.19.6.2 — implement Lua map-leaves receiver mutation
+
+- Added the dedicated Lua `receiver_mutation_chain` for exact
+  `binding.map_leaves!() { block }` syntax. Typed receiver, mutation call, callback body, ordinary continuation,
+  authored source, and half-open Unicode-scalar spans survive action contracts and static projection.
+- Validated the carrier at compile, direct-runtime, generated-plan, public `SpecFile` reconstruction, and source-
+  emitter boundaries. Malformed or reserved programmatic state fails closed before execution.
+- Added stable runtime binding identities across ordinary writes plus fresh callback and user-function identities.
+  Direct assignment, append, nested write/bang, mutation helpers, array-end methods, regex substitution, and every
+  binding-target array pipeline reject an active receiver before evaluating operands, segments, or RHS values.
+- Implemented detached original-shape harray/array traversal, root-kind-only recursion, copied callback values and
+  paths, non-revisited replacements, one atomic receiver publication, detached return, guaranteed guard release,
+  and commit-before-continuation ordering. Unrelated and distinct same-spelling scoped writes remain ordinary.
+- Added one permanent shared 530-assertion suite per ABI covering all frozen 4 valid / 14 invalid / 5 excluded
+  syntax rows, 10 successes, 8 pre-commit failures, all 18 guarded write routes, six callback compositions, one
+  continuation composition, detachment, native/reconstructed/generated/emitted/CLI routes, and user-function
+  bodies. The adjacent write suite passes 438 assertions per ABI with the frozen typed bang-arguments diagnostic.
+- Preserved Lua 5.1 compatibility at its 200-local chunk ceiling by publishing the coherent implementation under
+  the existing private `typed_source.receiver_mutation` namespace. PUC Lua and LuaJIT syntax/load and complete
+  execution remain identical.
+- The unchanged neutral oracle rejects all 167 base and 592 composition mutations. The complete Lua local gate
+  passes both ABIs, 178 integration cases each, CLI 66/66 in default and POSIX environments, corpus 105/105, and
+  repository-local storage proof.
+- Synchronized the parent task closeout, both roadmaps, Toolbox, live/continuity state, Knowledge Map sources, and
+  sole-facing mdBook at the five-backend implementation boundary. Portable capability, recurring proof, and
+  public admission remain owned by `.19.7-.9`.
+
 ## 2026-09-04 — RUST-DEPENDENCY-WARNING-ZERO.0 — own Rust warning cleanup
 
 - Converted the director-identified canonical Rust warning stream into a dedicated non-blocking task tree rather

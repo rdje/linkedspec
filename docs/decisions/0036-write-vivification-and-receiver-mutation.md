@@ -376,7 +376,34 @@ The permanent shared consumer passes 436 assertions per ABI and explicitly prove
 unsupported. The complete Lua gate, CLI 66x2, corpus 105/105, and repository-local storage proof pass. During the
 full integration run, stale action-edge endpoint expectations were corrected from 1 to 6: the parent loop had
 already consumed the child-owned `Done` regex for `xhello`, so this repairs test evidence without changing runtime
-dispatch. Lua receiver mutation, recurring proof, and portable/public admission remain future.
+dispatch. At that `.19.6.1` boundary, Lua receiver mutation, recurring proof, and portable/public admission
+remained future.
+
+## Lua `map_leaves!` implementation (2026-09-04)
+
+Leaf `.19.6.2` implements the unchanged `linkedspec-map-leaves-mutation-v1` contract in shared Lua on PUC Lua
+and LuaJIT:
+
+- exact `IDENTIFIER.map_leaves!() { ACTION_BLOCK } CONTINUATION*` syntax lowers to a typed
+  `receiver_mutation_chain` with distinct receiver, mutation-call, direct callback-block, and ordinary fluent-
+  continuation state plus authored Unicode-scalar spans;
+- action contracts/static projection preserve the callback and continuation, while compiler, direct-runtime,
+  public `SpecFile` reconstruction, generated-plan, and source-emitter boundaries fail closed on malformed or
+  reserved state;
+- visible bindings keep stable identity across ordinary writes, callback and user-function scopes get fresh
+  identities, and every direct/nested/helper/array-end/regex-substitution/binding-target-pipeline write checks the
+  resolved active receiver before evaluating operands, segments, or RHS values;
+- detached original-shape traversal follows the starting root kind, copies callback fields and results, does not
+  revisit replacement aggregates, publishes once after complete success, clears the guard on every exit, and
+  releases it before post-commit continuation; and
+- the known Lua 5.1 200-local ceiling is preserved by placing the implementation under the existing private
+  `typed_source.receiver_mutation` namespace rather than adding chunk-local aliases.
+
+The permanent shared suite passes 530 assertions per ABI across all frozen syntax/behavior/composition IDs, all
+18 guarded writes, user-function bodies, malformed state, native, reconstructed, generated-plan, emitted-module,
+and primary-CLI routes. The adjacent write suite passes 438 per ABI; the unchanged neutral oracles reject all 167
+base and 592 composition mutations; and the complete Lua gate passes. This closes the five-backend implementation
+parent `.19.6`. Portable capability, recurring proof, and final public admission remain owned by `.19.7-.9`.
 
 ## Consequences
 
@@ -391,9 +418,8 @@ dispatch. Lua receiver mutation, recurring proof, and portable/public admission 
 - “Absolute path” means complete root-to-leaf path inside the traversal receiver. The variable name is receiver
   identity, not an extra path element. Hash-root paths contain keys; array-root paths contain zero-based indexes.
 - During `.19.2-.19.6`, public guidance must name the backend transition explicitly: all five backends implement
-  nested-write vivification; Perl, Rust, Dart, and Julia also implement `map_leaves!`, while Lua retains only the
-  checked non-bang boundary. Portable admission remains future until the remaining backend and admission leaves
-  land.
+  nested-write vivification and `map_leaves!`. Portable admission remains future until the remaining admission
+  leaves land.
 
 ## Links
 

@@ -1095,6 +1095,191 @@ local function parser(root_source)
     )
   end
 
+  local function parse_receiver_mutation_chain(text, start_byte)
+    if text:match("^map_leaves!%s*%(") then
+      action_parse_fail(
+        "bang_method_function_form_invalid",
+        span(start_byte, start_byte + #"map_leaves!"),
+        "map_leaves! is receiver-only; use binding.map_leaves!() { ... }"
+      )
+    end
+
+    local segments = split_fluent(text, start_byte)
+    if #segments <= 1 then return nil end
+    local mutation_index
+    local method
+    local separating_whitespace
+    local bangs
+    for index = 2, #segments do
+      local candidate, whitespace, suffix = segments[index].text:match(
+        "^([A-Za-z_][A-Za-z0-9_]*)(%s*)(!+)"
+      )
+      if candidate then
+        mutation_index = index
+        method = candidate
+        separating_whitespace = whitespace
+        bangs = suffix
+        break
+      end
+    end
+    if mutation_index == nil then return nil end
+
+    local mutation_segment = segments[mutation_index]
+    local method_start = mutation_segment.start
+    local dot_position = method_start - start_byte
+    while dot_position >= 1 and text:sub(dot_position, dot_position):match("%s") do
+      dot_position = dot_position - 1
+    end
+    if dot_position < 1 or text:sub(dot_position, dot_position) ~= "." then return nil end
+    local receiver_text, receiver_start, receiver_end = trim_offsets(text:sub(1, dot_position - 1), start_byte)
+    local method_end = method_start + #method
+    local bang_start = method_end + #separating_whitespace
+    local bang_end = bang_start + #bangs
+    local source_method = method .. separating_whitespace .. bangs
+
+    if method ~= "map_leaves" then
+      action_parse_fail(
+        "bang_method_unknown",
+        span(method_start, bang_end),
+        "unsupported bang method '" .. source_method .. "'"
+      )
+    end
+    if separating_whitespace ~= "" then
+      action_parse_fail(
+        "bang_method_suffix_invalid",
+        span(method_start, bang_end),
+        "the bang suffix must immediately follow map_leaves"
+      )
+    end
+    if #bangs ~= 1 then
+      action_parse_fail(
+        "bang_method_suffix_invalid",
+        span(method_start, bang_end),
+        "map_leaves! accepts exactly one bang suffix"
+      )
+    end
+    if not receiver_text:match("^[A-Za-z_][A-Za-z0-9_]*$") then
+      action_parse_fail(
+        "receiver_mutation_receiver_not_addressable",
+        span(receiver_start, receiver_end),
+        "receiver mutation requires one bare uniform-binding identifier"
+      )
+    end
+    if M.is_nested_write_reserved_root(receiver_text) then
+      action_parse_fail(
+        "receiver_mutation_receiver_reserved",
+        span(receiver_start, receiver_end),
+        "receiver mutation cannot target reserved binding '" .. receiver_text .. "'"
+      )
+    end
+
+    local mutation_text = mutation_segment.text
+    local cursor = #method + #separating_whitespace + #bangs + 1
+    cursor = skip_space(mutation_text, cursor)
+    local args_open = cursor
+    if mutation_text:sub(args_open, args_open) ~= "(" then
+      action_parse_fail(
+        "map_leaves_mutation_arguments_invalid",
+        span(method_start + args_open - 1, method_start + args_open - 1),
+        "map_leaves! expects empty parentheses before its callback"
+      )
+    end
+    local args_close = find_matching(mutation_text, args_open, "(", ")")
+    if args_close == nil then
+      action_parse_fail(
+        "map_leaves_mutation_arguments_invalid",
+        span(method_start + args_open - 1, mutation_segment["end"]),
+        "map_leaves! expects empty parentheses before its callback"
+      )
+    end
+    if mutation_text:sub(args_open + 1, args_close - 1):match("%S") then
+      action_parse_fail(
+        "map_leaves_mutation_arguments_invalid",
+        span(method_start + args_open - 1, method_start + args_close),
+        "map_leaves! expects empty parentheses before its callback"
+      )
+    end
+
+    cursor = skip_space(mutation_text, args_close + 1)
+    if mutation_text:sub(cursor, cursor) ~= "{" then
+      action_parse_fail(
+        "map_leaves_mutation_callback_missing",
+        span(method_start, method_start + cursor - 1),
+        "map_leaves! requires one immediate trailing callback block"
+      )
+    end
+    local callback_open = cursor
+    local callback_close = find_matching(mutation_text, callback_open, "{", "}")
+    if callback_close == nil or mutation_text:sub(callback_close + 1):match("%S") then
+      action_parse_fail(
+        "map_leaves_mutation_callback_missing",
+        span(method_start, mutation_segment["end"]),
+        "map_leaves! requires one immediate trailing callback block"
+      )
+    end
+    local callback_body_source = mutation_text:sub(callback_open + 1, callback_close - 1)
+    local callback_body_start = method_start + callback_open
+    local callback_body = parse_block(callback_body_source, callback_body_start)
+
+    local continuation = {}
+    for index = mutation_index + 1, #segments do
+      local segment = segments[index]
+      local bang_method, bang_space, continuation_bangs = segment.text:match(
+        "^([A-Za-z_][A-Za-z0-9_]*)(%s*)(!+)"
+      )
+      if bang_method then
+        action_parse_fail(
+          "receiver_mutation_continuation_bang_invalid",
+          span(segment.start, segment.start + #bang_method + #bang_space + #continuation_bangs),
+          "a receiver-mutation chain continuation must use an existing non-bang fluent call"
+        )
+      end
+      local parsed = parse_fluent_call(segment, false)
+      local attached = split_attached_block(segment.text)
+      local head, head_start = trim_offsets(
+        attached and attached.head or segment.text,
+        segment.start
+      )
+      local open_position = head:find("(", 1, true)
+      local close_position = open_position and find_matching(head, open_position, "(", ")") or nil
+      if parsed == nil or open_position == nil or close_position == nil then
+        return raw_expr(text, start_byte, "invalid_receiver_mutation_continuation")
+      end
+      continuation[#continuation + 1] = action_ast.receiver_mutation_continuation_call({
+        method = parsed.method,
+        source_method = parsed.method,
+        source = segment.text,
+        source_span = span(segment.start, segment["end"]),
+        args_source = head:sub(open_position + 1, close_position - 1),
+        args_span = span(head_start + open_position, head_start + close_position - 1),
+        args = parsed.args,
+      })
+    end
+
+    local callback_source = mutation_text:sub(callback_open, callback_close)
+    return action_ast.expr("receiver_mutation_chain", text, span(start_byte, start_byte + #text), {
+      receiver = action_ast.receiver_mutation_binding_reference(
+        receiver_text,
+        receiver_text,
+        span(receiver_start, receiver_end)
+      ),
+      mutation = action_ast.receiver_mutation_call({
+        method = "map_leaves",
+        source_method = "map_leaves!",
+        source = mutation_text,
+        source_span = span(method_start, mutation_segment["end"]),
+        method_span = span(method_start, bang_end),
+        args_span = span(method_start + args_open - 1, method_start + args_close),
+        callback = action_ast.receiver_mutation_callback(
+          callback_source,
+          span(method_start + callback_open - 1, method_start + callback_close),
+          callback_body
+        ),
+      }),
+      continuation = continuation,
+    })
+  end
+
   local CONTROL_CANONICAL = {
     ["if"]="if", i="if", when="if", ["elseif"]="elseif", elif="elseif",
     ["else"]="else", otherwise="else", ["while"]="while", switch="switch",
@@ -1286,6 +1471,8 @@ local function parser(root_source)
     if text == "" then return raw_expr(text, start_byte, "empty_expression") end
     local assignment = parse_assignment(text, start_byte)
     if assignment then return assignment end
+    local receiver_mutation = parse_receiver_mutation_chain(text, start_byte)
+    if receiver_mutation then return receiver_mutation end
     local fluent_segments = split_fluent(text, start_byte)
     if #fluent_segments > 1 then
       local receiver_text = fluent_segments[1].text
