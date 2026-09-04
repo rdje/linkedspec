@@ -2,21 +2,24 @@
 
 ## Current Activity
 
-- Julia `map_leaves!` `.19.5.2` is canonical-signoff-complete with its typed carrier, identity guard, atomic
-  original-shape runtime, 496-assertion permanent proof, and bounded-history rollover. From the next clean commit,
-  Lua nested-write `.19.6.1` is the precise task-tree-first frontier; portable/public capability remains unchanged.
+- Lua nested-write `.19.6.1` is canonical-signoff-complete from exact clean `7df68275`: shared typed parsed/
+  reconstructed state and dense isolated runtime pass 436 assertions on both ABIs plus the complete Lua gate.
+  Lua `map_leaves!`, portable/public admission, and capability truth remain unchanged and pending.
 
 ## Latest Completed Slice
 
-- `.19.5.2` implements Julia's typed identity-guarded `map_leaves!` across native, reconstructed, generated-plan,
-  emitted-module, and CLI routes while preserving the frozen 167 base and 592 composition mutations.
+- `.19.6.1` implements typed Lua nested writes across native, reconstructed, generated-plan, emitted-module, and
+  CLI routes on PUC Lua and LuaJIT while preserving the frozen 105 mutations and non-bang boundary.
 
 ## Next Action
 
-- Commit `.19.5.2`, verify the exact clean boundary and cleared brief, then activate Lua nested-write leaf `.19.6.1`
-  task-tree-first and run its unchanged RED.
+- Commit `.19.6.1`, verify the exact clean boundary and cleared brief, then activate Lua `map_leaves!` leaf
+  `.19.6.2` task-tree-first and run its unchanged RED on both ABIs.
 
 ## Recent Completions
+
+- `2026-09-04` — `.19.6.1` implements Lua write vivification; 436 assertions per ABI, full 178x2 integration,
+  CLI 66x2, corpus 105/105, storage, 105 neutral mutations, mdBook, doctrines, and canonical CI pass.
 
 - `2026-09-03` — `.19.5.2` implements Julia `map_leaves!`; focused 496, complete package/CLI/corpus, storage 22/5,
   167 + 592 neutral mutations, all doctrines, mdBook, and receipt-bound canonical CI pass; ADR `0100` admits
@@ -69,9 +72,6 @@
 - `2026-08-30` — `.19.1.1` freezes future write vivification at 5 AST / 7 syntax / 11 success / 16 structural /
   3 expression-failure / 3 read-exclusion cases plus detachment and 105 mutations; all six current runtime routes
   remain non-vivifying. Focused Lua proof also identifies and queues one unrelated stale fixture under `.15.3`.
-
-- `2026-08-30` — `.23.2` aligns current book guidance, guards every corrected claim at its narrow owner, preserves
-  dated evidence, closes `.23`, and passes the exact staged canonical batch boundary without runtime movement.
 
 ## History
 

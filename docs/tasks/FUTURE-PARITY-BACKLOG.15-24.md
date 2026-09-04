@@ -1897,11 +1897,77 @@
   Commit: `pending`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.6.1`
-  Status: `pending`
+  Status: `done` / `canonical-signoff-complete` (activated 2026-09-04 from exact clean Julia map-leaves commit
+    `7df6827588f5a159edb727fba59d6b6294c1d722`; no push)
   Goal: Implement Lua nested write-vivification through typed parsed/reconstructed state on both ABIs.
   Dependencies: `.19.5`
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `canonical` — this leaf implements the frozen nested-write v1 contract on the final backend
+    and moves Lua typed parsed/public reconstructed compiled state across both supported ABIs. ADR `0073`
+    classifies backend admission and serialized/generated-format movement as a designated exact staged boundary.
+  Focused checks: frozen neutral 5 AST / 7 syntax / 11 success / 16 structural / 3 expression-failure / 3 read-
+    exclusion cases and all 105 mutations; shared Lua parser/compiler/runtime native and public `SpecFile`
+    reconstructed routes on PUC Lua and LuaJIT; primary CLI, local package, corpus, and project-data-storage
+    dependents; adjacent assignment/access/helper behavior, `map_leaves!` absence, diagnostics/spans, malformed typed
+    state, formatting/static checks, Knowledge, task/index, bounded histories, memory/live/roadmap/book, rendered
+    mdBook, whitespace, and all nine doctrines.
+  Canonical trigger: `Lua backend implementation + typed public reconstructed-state movement on two ABIs` — stage
+    the exact candidate with no unstaged inputs and run receipt-bound `bash tools/run_ci_local.sh` before atomic
+    commit. Lua `map_leaves!`, portable/public admission, parent closeout, and the push boundary remain later work.
+  Acceptance: Preserve `linkedspec-write-vivification-v1` unchanged. Parse one typed nested-write node whose
+    segments retain authored expressions and Unicode-scalar spans; evaluate every segment left-to-right and then
+    the RHS exactly once; snapshot binding presence only afterward; create dense selector-determined harray/array
+    state on an isolated copy; publish once only after structural success; and detach initial, RHS, stored, and
+    returned mutable values. Distinguish absent from present null, preserve completed expression effects and exact
+    typed errors, keep reads non-creating, and preserve fresh rule/function invocation state. Carry and validate
+    the node through Lua native and public compiled-state reconstruction on both PUC Lua and LuaJIT without
+    admitting `map_leaves!`, portable capability, or public cross-backend behavior early.
+  Ownership: `.19.6.1` owns only shared Lua parser/compiler/runtime/carrier implementation, permanent dual-ABI
+    proof, Lua-specific status/docs, and direct compatibility evidence. It must not alter the frozen neutral or
+    composition contracts, Perl/Rust/Dart/Julia behavior, Lua `map_leaves!`, public current examples,
+    capability/facade/schema/MCP surfaces, parent `.19.6` status, recurring cross-backend admission, or push state.
+  Checklist: [x] clean activation/task ownership [x] Knowledge/ADR and sibling-contract retrieval
+    [x] Toolbox-first Lua owner inventory [x] exact RED through frozen neutral contract
+    [x] typed parser/compiler/public reconstructed carrier [x] isolated dense runtime publication
+    [x] diagnostics/evaluation/detachment/read exclusions [x] focused dual-ABI/direct-dependent proof
+    [x] durable docs/Knowledge/live sync [x] exact staged canonical signoff [x] atomic commit/brief/clean handoff.
+  Activation evidence: exact `git status --short --untracked-files=all` was empty at
+    `7df6827588f5a159edb727fba59d6b6294c1d722`; `git_message_brief.txt` was zero bytes; `.19.5.2` was committed with
+    all nine doctrine hooks after exact staged canonical proof and its receipt was promoted to that HEAD; the
+    canonical and commit jobs were fully consumed; and no generated mdBook output or background job remained.
+    The clean boundary permits this task-tree pivot; no Lua implementation file changes precede this owner.
+  RED evidence (2026-09-04): the unchanged neutral oracle passed its frozen inventory (`5` valid syntax, `7`
+    invalid syntax, `11` successes, `16` structural failures, `3` evaluation failures, `3` read exclusions, `8`
+    composed writes, and `105` rejected mutations). The same direct parsed-source probe on PUC Lua and LuaJIT
+    returned `[null,null,{},null]` for quoted and computed-string missing-root paths where the contract requires
+    vivified harrays. Toolbox-first tracing then located the cause in the existing owners: Lua statically lowers
+    quoted versus computed brackets to `key`/`index`, lowers one bracket to `assign_hash_index`, and requires every
+    root/intermediate aggregate to pre-exist. The compiler, runtime-engine, generated-plan validator, and source
+    emitter currently validate adjacent invariants but do not yet validate typed nested-write carrier state.
+  Implementation evidence: all authored one- and many-segment Lua writes now lower to one typed
+    `assign_nested_access` expression with `ActionWritePathSegment` children retaining typed expressions, authored
+    source, and half-open Unicode-scalar spans. Parser syntax failures are structured; contracts and semantic
+    static projection visit segment expressions; compiler, runtime, generated-plan, and source-emitter boundaries
+    reject malformed, empty, or reserved reconstructed carriers. Runtime evaluates segments left-to-right and RHS
+    once, snapshots binding presence afterward, creates selector-determined dense harray/array paths on a detached
+    copy, publishes once, and preserves exact typed failure fields, completed expression effects, original
+    expression failures, non-creating reads, fresh invocation state, and mutable-value detachment.
+  Compatibility evidence: one permanent fixture-driven source passes `436` assertions unchanged on PUC Lua and
+    LuaJIT across all frozen `5/7/11/16/3/3` rows, astral spans, exclusions, detachment, fresh functions, bound
+    null, corrupt/reserved state, native, public `SpecFile` reconstruction, generated-plan, emitted-module, and
+    primary-CLI routes. It explicitly proves `map_leaves!` remains unsupported raw syntax. The unchanged neutral
+    checker still rejects all `105` mutations. The complete Lua local gate passes both ABIs, all `178` integration
+    cases, CLI `66/66` in default and POSIX environments, corpus `105/105`, and repository-local storage proof.
+  Rule-dispatch evidence: the full Lua gate exposed stale expected endpoints in existing action-edge tests. The
+    runtime correctly ended at cursor `6` for `xhello` because zero-regex `Top` entered its loop and that edge
+    selected and consumed `Done`'s regex. Only stale expected `1` values were corrected; no dispatch code or
+    fixture source changed. `docs/knowledge/lua-action-edge-child-call-reuse.md` now preserves this reverified fact.
+  Signoff evidence: the Lua guide, sole-facing mdBook, architecture, ADR `0036`, Toolbox, roadmaps, Knowledge,
+    task/index, live pointers, and bounded histories describe the exact five-backend-write/four-backend-bang
+    frontier. The mdBook renders, both history-pressure checks pass, Knowledge/task indexes regenerate, whitespace
+    and all nine doctrines pass, and exact receipt-bound canonical CI passes on the final staged candidate.
+    Generated book output is removed before commit.
+  Verification: `canonical-signoff-complete`
+  Commit: `FUTURE-PARITY-BACKLOG.19.6.1 - implement Lua write vivification`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.6.2`
   Status: `pending`

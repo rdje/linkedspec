@@ -1392,7 +1392,7 @@ call_visit_children = function(builder, expression, owner_id, cursor, local_orde
     visit(expression.value)
   elseif kind == "assign_nested_access" then
     for _, segment in ipairs(expression.segments or {}) do
-      if segment.kind == "index" then visit(segment.expr) end
+      if segment.kind == "path_segment" then visit(segment.expression) end
     end
     visit(expression.value)
   elseif kind == "fluent_chain" then

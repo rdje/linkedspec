@@ -711,10 +711,8 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   arrays, segment/RHS order, expression-failure propagation, post-evaluation same-binding snapshots, isolated
   atomic commit, detached results, structural diagnostics, and non-creating reads.
 - **WHEN:** designing or implementing nested assignment/vivification in any backend. This checker freezes neutral
-  semantics; never infer portable/public admission from its success. Perl, Rust, Dart, and Julia consume it under
-  `.19.2.1`, `.19.3.1`, `.19.4.1`, and `.19.5.1`. Before changing Lua, directly probe a quoted segment and a
-  computed string segment: Lua still statically splits key versus index and therefore cannot yet satisfy the
-  evaluated-kind contract.
+  semantics; never infer portable/public admission from its success. Perl, Rust, Dart, Julia, and Lua consume it
+  under `.19.2.1`, `.19.3.1`, `.19.4.1`, `.19.5.1`, and `.19.6.1`.
 - **HOW:** `bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py`.
 - **OUTPUT:** `write-vivification contract: 5 valid syntax, 7 invalid syntax, 11 success, 16 structural failures, 3 evaluation failures, 3 read exclusions, 8 composed writes, 105 rejected mutations; future behavior remains unadmitted`.
 - **CURRENT BOUNDARY:** Perl's permanent `t/write_vivification_perl_contract.t` projects the frozen fixture through
@@ -723,8 +721,10 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   emitted-source, independently compiled emitted Rust, native rules, and user functions. Dart uses
   `dart/test/write_vivification_contract_test.dart`; Julia uses
   `julia/test/write_vivification_contract_test.jl` across native, reconstructed, generated-plan, emitted-module,
-  and primary-CLI routes. Existing `terse_11_4` tests/corpus retain the checked boundary on Lua. Public capability
-  admission remains pending.
+  and primary-CLI routes. Shared Lua uses `lua/test/write_vivification_contract_test.lua` for the same supported
+  routes on PUC Lua and LuaJIT; the focused command is
+  `bash tools/run_lua_project_data.sh <puc|luajit> lua/test/write_vivification_contract_test.lua`. Lua
+  `map_leaves!` and public capability admission remain pending.
 
 ### 4.8.3 `tools/check_map_leaves_mutation_contract.py` — neutral receiver-mutation oracle
 
@@ -764,8 +764,8 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
 - **OUTPUT:** eight embedded writes, six callback compositions, one post-commit continuation composition, and 592
   independently rejected composition mutations.
 - **CURRENT BOUNDARY:** the exact non-bang control returns `{"leaf":[]}` on Perl, Rust, Dart, Julia, PUC Lua, and
-  LuaJIT. Perl and Rust execute the complete bang composition; Dart/Julia/both Lua ABIs exit at the generic
-  parser-invocation boundary.
+  LuaJIT. Perl, Rust, Dart, and Julia execute the complete bang composition. PUC Lua and LuaJIT execute the
+  nested-write half but still stop at the unadmitted bang token before any callback composition.
 
 ### 4.9 `tools/check_semantic_introspection_contract.py` — neutral model/query oracle
 

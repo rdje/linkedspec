@@ -10,15 +10,16 @@ answers:
   - "does single segment payload[1] mutate scalar held arrays"
   - "when does nested value path assignment evaluate index expressions"
 date: 2026-09-02
-status: current; Perl, Rust, Dart, and Julia vivify under FUTURE-PARITY-BACKLOG.19.2.1/.19.3.1/.19.4.1/.19.5.1 while Lua retains the prior checked boundary
-tags: [spec-format-terse, assignment, nested-access, duck-typing, perl, rust, dart, julia, oracle, SPEC-FORMAT-TERSE]
+status: current; all five backends vivify under FUTURE-PARITY-BACKLOG.19.2.1/.19.3.1/.19.4.1/.19.5.1/.19.6.1
+tags: [spec-format-terse, assignment, nested-access, duck-typing, perl, rust, dart, julia, lua, luajit, oracle, SPEC-FORMAT-TERSE]
 evidence: "SPEC-FORMAT-TERSE.11.4 added typed nested assignment support on Perl and Rust. Multi-segment lvalues such as `payload[\"items\"][0][\"name\"] = value` mutate scalar-held `RuntimeValue` / generated-Perl array/hash trees through explicit path checks. Intermediate path containers must already exist and have the required shape; there is no Perl autovivification. A final hash key may be created or replaced. A final array index may replace an existing element or append exactly at len; gaps return undef/null and leave the root unchanged. Successful expression-valued nested assignment returns the updated root, while missing/wrong paths return undef/null. Segment index expressions are evaluated before the RHS value expression, and the root path check/mutation happens after both have been evaluated. Single-segment `payload[1] = value` also mutates a scalar-held array root when `payload` currently holds an array value; named hash storage remains the fallback when the bare name is not scalar-bound. The Rust integration tests `terse_11_4_*` pass, and the manifest-backed oracle corpus includes `terse_11_4_nested_mixed_value_path_assignment` with 92 fixtures."
 evidence_update_2026_08_30_future_contract_boundary: "FUTURE-PARITY-BACKLOG.19.1.1 reconfirms this unchanged current boundary on Perl, Rust (three exact tests), Dart (one exact test), Julia (one exact corpus case), PUC Lua, and LuaJIT while freezing a separate future neutral contract. Current lowering chooses quoted key versus computed index statically; the future contract instead uses each segment's evaluated string/integer kind and unifies one-/multi-segment writes under assign_nested_access. No current backend behavior is admitted by .19.1.1."
 evidence_update_2026_08_31_perl_vivification: "FUTURE-PARITY-BACKLOG.19.2.1 advances only Perl to linkedspec-write-vivification-v1. Perl now chooses paths from evaluated string/integer kinds, creates absent roots/intermediates, rejects bound null/wrong kinds/gaps with typed errors, and commits detached isolated trees. The earlier no-autovivification behavior remains current on Rust, Dart, Julia, and Lua until their backend leaves."
 evidence_update_2026_09_01_rust_vivification: "FUTURE-PARITY-BACKLOG.19.3.1 advances Rust to linkedspec-write-vivification-v1 through native, serialized, generated-plan, emitted-source, and independently compiled emitted-source carriers. One typed path evaluates segments then RHS, creates only selector-determined absent containers, rejects bound null/wrong kinds/gaps with exact typed errors, and commits detached isolated trees. The earlier no-autovivification behavior remains current on Dart, Julia, and Lua until their backend leaves."
 evidence_update_2026_09_02_dart_vivification: "FUTURE-PARITY-BACKLOG.19.4.1 advances Dart to linkedspec-write-vivification-v1 through native, SpecFile JSON reconstruction, generated-plan, emitted-source, independently analyzed/executed emitted caller, and primary-CLI routes. One typed path evaluates segments then RHS, creates only selector-determined absent containers, rejects bound null/wrong kinds/gaps with exact typed diagnostics, and commits detached isolated trees. Julia and Lua retain the earlier checked boundary."
 evidence_update_2026_09_03_julia_vivification: "FUTURE-PARITY-BACKLOG.19.5.1 advances Julia to linkedspec-write-vivification-v1 through native, SpecFile reconstruction, generated-plan, emitted-module, and primary-CLI routes. One typed path evaluates segments then RHS, creates only selector-determined absent containers on an isolated copy, rejects bound null/wrong kinds/gaps with exact typed diagnostics, preserves expression effects and failures, and commits detached trees. Lua retains the earlier checked boundary."
-reverify: "bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py && bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT = pwd(); include(\"julia/test/write_vivification_contract_test.jl\")'"
+evidence_update_2026_09_04_lua_vivification: "FUTURE-PARITY-BACKLOG.19.6.1 advances shared Lua to linkedspec-write-vivification-v1 on PUC Lua and LuaJIT through native, SpecFile reconstruction, generated-plan, emitted-module, and primary-CLI routes. One typed path evaluates segments then RHS, creates only selector-determined absent containers on an isolated copy, rejects bound null/wrong kinds/gaps with exact typed diagnostics, preserves expression effects and failures, and commits detached trees. All five backends now implement the nested-write mechanism; portable/public admission remains separate."
+reverify: "bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py && bash tools/run_lua_project_data.sh puc lua/test/write_vivification_contract_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/write_vivification_contract_test.lua"
 ---
 
 # Nested Value-Path Assignment
@@ -31,25 +32,16 @@ payload["items"][0]["name"] = value
 payload["items"][1] = { "name" : "tail" }
 ```
 
-The common assignment spelling is stable, but the project is now in an explicitly tracked backend transition.
-On the Perl, Rust, Dart, and Julia backends:
+The common assignment spelling is stable. On Perl, Rust, Dart, Julia, and both supported Lua ABIs:
 
 - an absent root and missing intermediate are created from the evaluated current/next segment kind;
 - strings select harrays and nonnegative integers select arrays, including dynamic expressions;
 - existing null/wrong-kind values are never coerced, and array gaps are rejected with typed diagnostics; and
 - success commits and returns a detached updated root after segment-then-RHS evaluation.
 
-Lua retains the earlier checked boundary:
-
-- every intermediate hash key or array element must already exist;
-- every intermediate value must have the required hash/array shape;
-- the final hash key may be created or replaced;
-- the final array index may replace an existing element or append exactly at the current array length;
-- array gaps, missing intermediates, and wrong-shape transitions return `undef` / `null` and do not mutate the root.
-
-On that remaining backend, successful nested assignment returns the updated root value and failed path checks
-return `null`; single-segment assignment still updates an already shaped scalar-held root. Perl, Rust, Dart, and
-Julia structural failures instead return their exact v1 typed diagnostic boundary and commit no partial path.
+All five backends return their exact v1 typed diagnostic boundary on structural failure and commit no partial
+path. Successful nested assignment returns an independent updated root value; one-segment assignment uses the
+same evaluated-selector carrier rather than a separate harray-only lowering.
 
 Evaluation order is segment expressions first, then the RHS value expression, then root path validation and
 mutation. A failing path therefore does not mutate the root, but any side effects from already evaluated index or
@@ -57,5 +49,5 @@ RHS expressions follow the normal expression-evaluation model.
 
 The transition authority is [[write-vivification-neutral-contract]]; current backend realizations are
 [[write-vivification-perl-reference]], [[write-vivification-rust-runtime]],
-[[write-vivification-dart-runtime]], and [[write-vivification-julia-runtime]]. Cross-backend and public admission
-remain owned by the later `.19` leaves.
+[[write-vivification-dart-runtime]], [[write-vivification-julia-runtime]], and
+[[write-vivification-lua-runtime]]. Cross-backend and public admission remain owned by the later `.19` leaves.

@@ -24,6 +24,7 @@ evidence_update_2026_09_01_rust_implementation: "FUTURE-PARITY-BACKLOG.19.3.2 ex
 evidence_update_2026_09_02_dart_implementation: "FUTURE-PARITY-BACKLOG.19.4.2 executes the six callback and one continuation composition boundaries on Dart through the same typed carrier as the base mutation contract. The required primary-route audit also found both current-boundary sources used an inert parent /x/ contrary to the established parent-loop/child-regex invariant. Removing only that parent regex restores the intended zero-regex Top dispatch to Done's /[a-z]+/; the non-bang result and bang parse boundary then match their frozen observations. The checker digest changes only for those two source bytes and still rejects 592 mutations."
 evidence_update_2026_09_03_julia_write_half: "FUTURE-PARITY-BACKLOG.19.5.1 implements the unchanged write half on Julia through typed native/reconstructed/generated/emitted-module/CLI routes. The composed non-bang control and its embedded writes now use Julia's evaluated-selector dense isolated semantics; map_leaves! still fails before callback execution, so full Julia composition remains owned by .19.5.2."
 evidence_update_2026_09_03_julia_composition: "FUTURE-PARITY-BACKLOG.19.5.2 executes the frozen six callback and one continuation composition boundaries on Julia. Callback-local and unrelated vivification use the .19.5.1 carrier, same-receiver guard precedence wins before selectors/RHS, same-spelling function parameters remain distinct, non-bang aliases remain isolated, and the zero-regex Top loop selects Done's regex. The current composition oracle rejects all 592 mutations unchanged."
+evidence_update_2026_09_04_lua_write_half: "FUTURE-PARITY-BACKLOG.19.6.1 implements the unchanged write half in shared Lua on PUC Lua and LuaJIT through typed native/reconstructed/generated/emitted/CLI routes. The composed non-bang control and embedded writes now use evaluated-selector dense isolated semantics; map_leaves! remains unsupported raw syntax, so full Lua composition stays owned by .19.6.2."
 reverify: "bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py && bash tools/run_python_project_data.sh tools/check_map_leaves_mutation_contract.py && PERL5OPT=-Mwarnings=FATAL perl -Iperl t/map_leaves_mutation_perl_contract.t && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test map_leaves_mutation_contract && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib receiver_mutation_ -- --nocapture && (cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/map_leaves_mutation_contract_test.dart) && bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT = pwd(); include(\"julia/test/map_leaves_mutation_contract_test.jl\")'"
 ---
 
@@ -57,11 +58,11 @@ against the detached result. A continuation helper may reach the receiver and pe
 if that write fails, its structural attempt rolls back but the earlier `map_leaves!` receiver commit remains.
 
 The composed source is current on Perl, Rust, Dart, and Julia: both mechanisms execute and preserve the boundaries
-above, including generated Rust/Dart carriers and Julia's generated-plan/emitted-module routes. Lua retains both
-earlier boundaries. The non-bang
+above, including generated Rust/Dart carriers and Julia's generated-plan/emitted-module routes. Lua implements
+the nested-write half but still rejects the bang carrier. The non-bang
 control remains unchanged on all six runtime routes. It uses a zero-regex `Top` whose loop dispatches to `Done`;
-only `Done` owns the matching regex. The remaining Lua implementation and portable/public admission follow in later
-`.19` leaves.
+only `Done` owns the matching regex. Lua receiver mutation and portable/public admission follow in later `.19`
+leaves.
 
 Related: ADR `0036`, [[write-vivification-receiver-mutation-direction]], and
 [[tool-project-data-ssd-storage]]. The resolved carrier conflict is

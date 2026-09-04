@@ -12,6 +12,7 @@ date: 2026-07-15
 status: current
 tags: [lua, runtime, action-edge, call, passive-terminal, recursion, corpus, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.6.2.1 routes call(target) through dispatch_edge_child when target matches the current compiled action edge, caches one result, refreshes retv, and leaves unrelated named calls on direct execution. The dispatcher structurally skips rules with no lifecycle/action/blind/plain payload because the parent dependency regex already consumed the passive terminal match. Trace-backed tests lock non-self, self-recursive, passive, and unrelated paths on PUC Lua and LuaJIT at 163/163. Exact offsets 40-98 improve from 50/59 to 56/59 on both ABIs: all three HLink, both EBNF, and SimEnv cases pass unchanged; only three separately owned compare residuals remain."
+evidence_update_2026_09_04_endpoint_repair: "FUTURE-PARITY-BACKLOG.19.6.1 re-runs the full 178-case Lua integration harness while adding nested-write vivification. It finds several stale expected endpoint values of 1 in action-edge fixtures whose parent loop has consumed Done's child-owned regex and therefore ends at 6 for input xhello. Updating only those expected observations makes every emitted TAP case genuinely green on PUC Lua and LuaJIT; runtime code and the established parent-match/child-regex mechanism do not change."
 reverify: "bash tools/run_lua_local.sh"
 ---
 

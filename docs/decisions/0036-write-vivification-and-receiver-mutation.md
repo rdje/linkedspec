@@ -289,8 +289,8 @@ Leaf `.19.5.1` implements the unchanged `linkedspec-write-vivification-v1` contr
 Permanent proof projects the frozen 5 AST / 7 syntax / 11 success / 16 structural-failure / 3 expression-failure /
 3 read-exclusion inventory plus detachment, function presence, astral spans, corrupt carriers, and every supported
 Julia route. The focused contract passes 406 assertions and the complete package suite passes. Julia
-`map_leaves!` has since advanced below; both Lua mechanisms, recurring proof, and portable/public admission remain
-future.
+`map_leaves!` has since advanced below. At this dated Julia-write boundary both Lua mechanisms, recurring proof,
+and portable/public admission remained future; the later Lua write implementation is recorded below.
 
 ## Function-scope carrier resolution (2026-08-31)
 
@@ -325,8 +325,9 @@ Leaf `.19.2.2` implements `linkedspec-map-leaves-mutation-v1` on the Perl refere
 The permanent Perl contract exercises the frozen base and composition authority, including the array-pipeline
 write audit, with fatal warnings. It passes 58 focused tests, 105 write mutations, 167 base map mutations, 592
 composition mutations, and the complete 1,032-test Perl Phase 0 regression. Rust and Dart have since implemented
-both mechanisms; Julia has since implemented both mechanisms, while Lua remains non-bang/non-vivifying. Portable
-capability and public admission remain future.
+both mechanisms; Julia has since implemented both mechanisms. At this dated Perl-bang boundary Lua remained
+non-bang/non-vivifying; the later Lua write implementation is recorded below. Portable capability and public
+admission remain future.
 
 ## Julia `map_leaves!` implementation (2026-09-03)
 
@@ -353,6 +354,30 @@ generated-plan, emitted-module, and primary-CLI routes. The unchanged neutral ch
 composition mutations. The exact control keeps `Top` regex-free: entering it starts the parent loop, whose edge
 selects `Done` and matches only `Done`'s regex. Lua, recurring proof, and portable/public admission remain future.
 
+## Lua nested-write implementation (2026-09-04)
+
+Leaf `.19.6.1` implements the unchanged `linkedspec-write-vivification-v1` contract in shared Lua on PUC Lua and
+LuaJIT:
+
+- one `ActionWritePathSegment` retains each authored expression, source, and half-open Unicode-scalar span, while
+  one `assign_nested_access` `ActionExpr` owns every one- or many-segment bracket write;
+- parser contracts, static call projection, compiled-state validation, generated plans, source emission, and
+  direct runtime entry preserve the carrier and reject malformed or reserved reconstructed state;
+- the runtime evaluates every segment left-to-right and then the RHS, snapshots binding presence/value only
+  afterward, and constructs on an isolated copy. Evaluated strings select harrays and nonnegative integers select
+  dense arrays; absent roots/intermediates create, while bound null, wrong kinds, invalid selectors, and gaps emit
+  exact typed diagnostics without partial publication;
+- completed expression effects retain ordinary semantics, expression failures preserve identity, reads remain
+  non-creating, and successful binding/result/input/RHS aggregates detach; and
+- the same behavior executes natively, after public `SpecFile` reconstruction, through generated plans, through a
+  freshly loaded emitted module, and through the primary CLI on both supported Lua ABIs.
+
+The permanent shared consumer passes 436 assertions per ABI and explicitly proves `map_leaves!` remains
+unsupported. The complete Lua gate, CLI 66x2, corpus 105/105, and repository-local storage proof pass. During the
+full integration run, stale action-edge endpoint expectations were corrected from 1 to 6: the parent loop had
+already consumed the child-owned `Done` regex for `xhello`, so this repairs test evidence without changing runtime
+dispatch. Lua receiver mutation, recurring proof, and portable/public admission remain future.
+
 ## Consequences
 
 - The terse deep-write form remains ordinary assignment, for example
@@ -365,9 +390,10 @@ selects `Done` and matches only `Done`'s regex. Lua, recurring proof, and portab
   be added; they are excluded because no distinct coherent mutation contract has been accepted.
 - “Absolute path” means complete root-to-leaf path inside the traversal receiver. The variable name is receiver
   identity, not an extra path element. Hash-root paths contain keys; array-root paths contain zero-based indexes.
-- During `.19.2-.19.6`, public guidance must name the backend transition explicitly: Perl, Rust, Dart, and Julia
-  implement nested-write vivification and `map_leaves!`; Lua retains the checked non-vivifying/non-bang boundary.
-  Portable admission remains future until the remaining backend and admission leaves land.
+- During `.19.2-.19.6`, public guidance must name the backend transition explicitly: all five backends implement
+  nested-write vivification; Perl, Rust, Dart, and Julia also implement `map_leaves!`, while Lua retains only the
+  checked non-bang boundary. Portable admission remains future until the remaining backend and admission leaves
+  land.
 
 ## Links
 

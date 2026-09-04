@@ -14,7 +14,7 @@ answers:
   - "are Dart map_leaves bang aggregate boundaries detached"
   - "how does Dart reject corrupt receiver mutation state"
 date: 2026-09-02
-status: implemented under FUTURE-PARITY-BACKLOG.19.4.2; Julia also implemented, Lua and portable/public admission pending
+status: implemented under FUTURE-PARITY-BACKLOG.19.4.2; Julia also implemented, Lua nested writes implemented, Lua bang and portable/public admission pending
 tags: [dart, dsl, actionir, map-leaves, mutation, identity, atomicity, generated-source, cli, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.19.4.2 adds ActionReceiverMutationChainExpr with typed receiver, callback, and continuation carriers plus compiled-state validation at compiler, direct engine, source-emitter, and generated-plan boundaries. Stable scoped binding identities guard the resolved receiver before direct, nested, nested-bang, helper, array-end, or binding-target-pipeline operands run. The permanent 11-test contract projects 4 valid / 14 invalid / 5 excluded syntax cases, all frozen behavior and composition boundaries, malformed-state rejection, SpecFile reconstruction, native/generated-plan/emitted-source/independently executed/primary-CLI routes, and the unchanged neutral oracle rejects 167 base plus 592 composition mutations. The full Dart package passes 461 tests; project storage registers 25 temporary owners and 47 locked packages."
 evidence_update_2026_09_03_julia_implementation: "FUTURE-PARITY-BACKLOG.19.5.2 implements the same unchanged typed identity-guarded receiver mutation on Julia. Dart behavior and its permanent proof remain unchanged; only Lua and portable/public admission remain pending."

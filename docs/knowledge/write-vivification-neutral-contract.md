@@ -17,7 +17,7 @@ answers:
   - "why must current static key index lowering change"
   - "how are nested write source spans measured"
 date: 2026-08-30
-status: neutral contract frozen under FUTURE-PARITY-BACKLOG.19.1.1; implemented on Perl, Rust, Dart, and Julia by .19.2.1/.19.3.1/.19.4.1/.19.5.1
+status: neutral contract frozen under FUTURE-PARITY-BACKLOG.19.1.1; implemented on all five backends by .19.2.1/.19.3.1/.19.4.1/.19.5.1/.19.6.1
 tags: [dsl, actionir, assignment, autovivification, diagnostics, source-spans, mutation, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.19.1.1 adds capability_conformance/write_vivification_contract.json and tools/check_write_vivification_contract.py. The independent checker validates five exact AST cases, seven syntax failures, 11 successful writes, 16 structural failures, three expression failures, three read exclusions, detached values, and 105 rejected mutations. Exact current probes remain non-vivifying on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Perl lowering proves quoted segments are currently tagged key while every computed segment is statically tagged/coerced as index; Rust/Dart/Julia/Lua preserve the same authored key/index split. No backend behavior or public-current capability changes in this leaf."
 evidence_update_2026_08_31_composition: "FUTURE-PARITY-BACKLOG.19.1.3 adds linkedspec-write-map-leaves-composition-v1 as a shared fixture consumed by both existing checkers. This write checker now validates eight additional nested writes spanning detached callback value, unrelated global, same-spelling shadow local, active receiver guard, and post-commit receiver targets while retaining all 105 base mutations. No write behavior is admitted."
@@ -26,7 +26,8 @@ evidence_update_2026_09_01_rust_reference: "FUTURE-PARITY-BACKLOG.19.3.1 impleme
 evidence_update_2026_09_01_rust_composition: "FUTURE-PARITY-BACKLOG.19.3.2 implements Rust map_leaves! and executes the frozen write/mutation composition. Callback-local, unrelated, active-receiver, shadow, and post-commit nested writes retain the unchanged write contract; Dart/Julia/Lua and portable/public admission remain pending."
 evidence_update_2026_09_02_dart_reference: "FUTURE-PARITY-BACKLOG.19.4.1 implements the unchanged v1 contract on Dart. One ActionWritePathSegment/ActionAssignNestedAccessExpr carrier preserves expression-bearing paths and Unicode-scalar spans through native, SpecFile JSON reconstruction, generated plans, emitted source, an independently analyzed/executed caller package, and the primary CLI. Runtime evaluates all segments then RHS, snapshots afterward, creates dense selector-determined containers, detaches success values, emits exact typed structural fields, preserves expression failures, and rejects malformed typed carriers. Julia/Lua, Dart map_leaves!, and portable/public admission remain pending."
 evidence_update_2026_09_03_julia_reference: "FUTURE-PARITY-BACKLOG.19.5.1 implements the unchanged v1 contract on Julia. ActionWritePathSegment/ActionAssignNestedAccessExpr preserves expression-bearing paths and Unicode-scalar spans through native, SpecFile reconstruction, generated-plan, emitted-module, and primary-CLI routes. Runtime evaluates segments then RHS, snapshots afterward, creates dense selector-determined containers on an isolated copy, detaches success values, preserves expression effects/failures, emits exact typed structural fields, keeps reads non-creating, and rejects malformed typed carriers. Julia map_leaves!, Lua, and portable/public admission remain pending."
-reverify: "bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py && bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT = pwd(); include(\"julia/test/write_vivification_contract_test.jl\")'"
+evidence_update_2026_09_04_lua_reference: "FUTURE-PARITY-BACKLOG.19.6.1 implements the unchanged v1 contract in shared Lua on PUC Lua and LuaJIT. ActionWritePathSegment plus assign_nested_access preserves expression-bearing paths and Unicode-scalar spans through native, SpecFile reconstruction, generated-plan, emitted-module, and primary-CLI routes. Runtime evaluates segments then RHS, snapshots afterward, creates dense selector-determined containers on an isolated copy, detaches success values, preserves expression effects/failures, emits exact typed structural fields, keeps reads non-creating, and rejects malformed/reserved typed carriers. The permanent fixture consumer passes 436 assertions per ABI; Lua map_leaves! and portable/public admission remain pending."
+reverify: "bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py && bash tools/run_lua_project_data.sh puc lua/test/write_vivification_contract_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/write_vivification_contract_test.lua"
 ---
 
 # Future neutral write-vivification contract
@@ -38,9 +39,9 @@ document["sections"][0]["title"] = title
 document[segment_name][position] = make_value()
 ```
 
-It was frozen without admitting a backend. Perl, Rust, Dart, and Julia now implement that unchanged contract
-under `.19.2.1`, `.19.3.1`, `.19.4.1`, and `.19.5.1`; Lua retains its existing non-vivifying behavior until its
-owned implementation leaf and the later public admission boundary land.
+It was frozen without admitting a backend. Perl, Rust, Dart, Julia, and Lua now implement that unchanged contract
+under `.19.2.1`, `.19.3.1`, `.19.4.1`, `.19.5.1`, and `.19.6.1`. Portable/public admission remains a separate later
+boundary.
 
 ## One typed path model
 
@@ -87,6 +88,6 @@ an invented `vivify(...)` helper, and an invented `:=` operator are outside this
 
 Related: [[write-vivification-receiver-mutation-direction]], [[terse-nested-value-path-assignment]],
 [[write-vivification-perl-reference]], [[write-vivification-rust-runtime]],
-[[write-vivification-dart-runtime]], [[write-vivification-julia-runtime]],
+[[write-vivification-dart-runtime]], [[write-vivification-julia-runtime]], [[write-vivification-lua-runtime]],
 [[uniform-binding-neutral-contract]],
 [[write-map-leaves-neutral-composition]], and ADR `0036`.

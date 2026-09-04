@@ -3,6 +3,69 @@ local json = require("linkedspec.json")
 
 local M = {}
 
+local ACTION_PARSE_ERROR_MT = {
+  __tostring = function(value)
+    return "ActionParseException: " .. value.message
+  end,
+}
+
+local NESTED_WRITE_RESERVED_ROOTS = {
+  CAPTURE = true,
+  IINDEX = true,
+  IMATCH = true,
+  IMATCH_HASH = true,
+  IMATCH_LIST = true,
+  IPOS = true,
+  LINDEX = true,
+  LMATCH = true,
+  LMATCH_HASH = true,
+  LMATCH_LIST = true,
+  LSPOS = true,
+  STRING = true,
+  descr = true,
+  ["false"] = true,
+  info = true,
+  minfo = true,
+  null = true,
+  retv = true,
+  ["true"] = true,
+  undef = true,
+}
+
+function M.is_nested_write_reserved_root(value)
+  return type(value) == "string" and NESTED_WRITE_RESERVED_ROOTS[value] == true
+end
+
+local function action_parse_fail(code, source_span, message)
+  error(setmetatable({
+    code = code,
+    stage = "action_parse",
+    source_span = source_span,
+    message = message,
+  }, ACTION_PARSE_ERROR_MT), 0)
+end
+
+function M.is_action_parse_error(value)
+  return getmetatable(value) == ACTION_PARSE_ERROR_MT
+end
+
+function M.action_parse_error_to_json(value)
+  if not M.is_action_parse_error(value) then
+    error("ActionParseException: action_parse_error_to_json expects ActionParseException", 0)
+  end
+  return json.harray({
+    code = value.code,
+    stage = value.stage,
+    source_span = json.harray({
+      start = value.source_span.start,
+      ["end"] = value.source_span["end"],
+      unit = "unicode_scalar",
+      provenance = "authored",
+    }),
+    message = value.message,
+  })
+end
+
 local function trim_offsets(text, absolute_start)
   local first = 1
   while first <= #text and text:sub(first, first):match("%s") do
@@ -300,11 +363,44 @@ local function find_assignment_equals(text)
     if top_level(state) and character == "=" then
       local before = text:sub(position - 1, position - 1)
       local after = text:sub(position + 1, position + 1)
-      if before ~= "=" and before ~= "!" and before ~= "<" and before ~= ">" and after ~= "=" and after ~= ">" then
+      if before ~= "=" and before ~= "!" and before ~= "<" and before ~= ">" and before ~= ":" and
+          after ~= "=" and after ~= ">" then
         return position
       end
     end
     consume_scan(state, text, position)
+  end
+  return nil
+end
+
+local function find_unclosed_nested_write_assignment_equals(text)
+  local open_position = text:find("[", 1, true)
+  if open_position == nil then return nil end
+  local root = text:sub(1, open_position - 1):match("^%s*([A-Za-z_][A-Za-z0-9_]*)%s*$")
+  if root == nil or find_matching(text, open_position, "[", "]") ~= nil then return nil end
+
+  local quote
+  local escaped = false
+  for position = open_position + 1, #text do
+    local character = text:sub(position, position)
+    if quote then
+      if escaped then
+        escaped = false
+      elseif character == "\\" then
+        escaped = true
+      elseif character == quote then
+        quote = nil
+      end
+    elseif character == '"' or character == "'" then
+      quote = character
+    elseif character == "=" then
+      local before = text:sub(position - 1, position - 1)
+      local after = text:sub(position + 1, position + 1)
+      if before ~= "=" and before ~= "!" and before ~= "<" and before ~= ">" and before ~= ":" and
+          after ~= "=" and after ~= ">" then
+        return position
+      end
+    end
   end
   return nil
 end
@@ -570,6 +666,87 @@ local function parser(root_source)
     })
   end
 
+  local function nested_write_syntax_error(code, start_byte, end_byte, message)
+    action_parse_fail(code, span(start_byte, end_byte), message)
+  end
+
+  local function parse_nested_write_target(left, left_start)
+    local open_position = left:find("[", 1, true)
+    if open_position == nil then return nil end
+    local root_text, root_start, root_end = trim_offsets(left:sub(1, open_position - 1), left_start)
+    if not root_text:match("^[A-Za-z_][A-Za-z0-9_]*$") then
+      local message = root_text == "{}" and
+        "nested write root must be a bare identifier" or
+        "nested write root must remain a bare identifier"
+      nested_write_syntax_error(
+        "nested_write_root_not_addressable",
+        root_start,
+        root_end,
+        message
+      )
+    end
+    if M.is_nested_write_reserved_root(root_text) then
+      nested_write_syntax_error(
+        "nested_write_root_reserved",
+        root_start,
+        root_end,
+        "nested write root '" .. root_text .. "' is reserved"
+      )
+    end
+
+    local segments = {}
+    local position = open_position
+    while position <= #left do
+      position = skip_space(left, position)
+      if position > #left then break end
+      if left:sub(position, position) ~= "[" then
+        nested_write_syntax_error(
+          "nested_write_root_not_addressable",
+          left_start,
+          left_start + #left,
+          "nested write root must remain a bare identifier"
+        )
+      end
+      local close_position = find_matching(left, position, "[", "]")
+      if close_position == nil then
+        nested_write_syntax_error(
+          "nested_write_segment_unclosed",
+          left_start + position - 1,
+          left_start + #left,
+          "nested write segment is missing its closing bracket"
+        )
+      end
+      local payload, payload_start, payload_end = trim_offsets(
+        left:sub(position + 1, close_position - 1),
+        left_start + position
+      )
+      if payload == "" then
+        nested_write_syntax_error(
+          "nested_write_segment_empty",
+          left_start + position - 1,
+          left_start + close_position,
+          "nested write segment may not be empty"
+        )
+      end
+      local expression = parse_expression(payload, payload_start)
+      if expression.kind == "raw_perl" then
+        nested_write_syntax_error(
+          "nested_write_segment_expression_invalid",
+          payload_start,
+          payload_end,
+          "segment must be one balanced ActionIR value expression"
+        )
+      end
+      segments[#segments + 1] = action_ast.write_path_segment(
+        payload,
+        span(payload_start, payload_end),
+        expression
+      )
+      position = close_position + 1
+    end
+    return { base = root_text, segments = segments }
+  end
+
   local function staged_parse_job_error(code)
     error("LINKEDSPEC_STAGED_AST_ENRICHMENT_ERROR:" .. code, 0)
   end
@@ -769,12 +946,20 @@ local function parser(root_source)
         })
       end
     end
-    local equals = find_assignment_equals(text)
+    local equals = find_assignment_equals(text) or find_unclosed_nested_write_assignment_equals(text)
     if not equals then
       return nil
     end
     local left, left_start = trim_offsets(text:sub(1, equals - 1), start_byte)
     local right, right_start = trim_offsets(text:sub(equals + 1), start_byte + equals)
+    local nested_target = parse_nested_write_target(left, left_start)
+    if nested_target then
+      return action_ast.expr("assign_nested_access", text, span(start_byte, start_byte + #text), {
+        base = nested_target.base,
+        segments = nested_target.segments,
+        value = parse_expression(right, right_start),
+      })
+    end
     local value = parse_expression(right, right_start)
     local name = left:match("^([A-Za-z_][A-Za-z0-9_]*)$")
     if name then
@@ -832,23 +1017,6 @@ local function parser(root_source)
       return action_ast.expr("assign_hash_index", text, span(start_byte, start_byte + #text), {
         name = target.name,
         key = target.index,
-        value = value,
-      })
-    elseif target and target.kind == "nested_access" then
-      if #target.segments == 1 then
-        local segment = target.segments[1]
-        local key = segment.kind == "key" and action_ast.expr(
-          "string", segment.source, segment.source_span, { value = segment.value, quote = '"' }
-        ) or segment.expr
-        return action_ast.expr("assign_hash_index", text, span(start_byte, start_byte + #text), {
-          name = target.base,
-          key = key,
-          value = value,
-        })
-      end
-      return action_ast.expr("assign_nested_access", text, span(start_byte, start_byte + #text), {
-        base = target.base,
-        segments = target.segments,
         value = value,
       })
     end

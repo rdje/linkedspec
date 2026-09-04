@@ -538,6 +538,55 @@ local function validate_no_removed_aggregate_selectors(compiled)
   end
 end
 
+local function validate_nested_write_serialized_state(compiled)
+  local function invalid(context, reason)
+    fail("nested_write_serialized_state_invalid: " .. context .. " " .. reason, {
+      code = "nested_write_serialized_state_invalid",
+    })
+  end
+
+  local function visit(value, context)
+    if type(value) ~= "table" then return end
+    if value.kind == "assign_nested_access" then
+      if action_ast.node_type(value) ~= "ActionExpr" then
+        invalid(context, "must be one typed assign_nested_access expression")
+      end
+      if type(value.base) ~= "string" or not value.base:match("^[A-Za-z_][A-Za-z0-9_]*$") then
+        invalid(context .. ".base", "must be one bare identifier")
+      end
+      if action_parser.is_nested_write_reserved_root(value.base) then
+        invalid(context .. ".base", "must not be a reserved binding")
+      end
+      if type(value.segments) ~= "table" or #value.segments == 0 then
+        invalid(context, "must contain at least one typed path_segment")
+      end
+      for index, segment in ipairs(value.segments) do
+        local segment_context = context .. ".segments[" .. (index - 1) .. "]"
+        if action_ast.node_type(segment) ~= "ActionWritePathSegment" or
+            segment.kind ~= "path_segment" or
+            type(segment.source) ~= "string" or segment.source == "" or
+            action_ast.node_type(segment.source_span) ~= "ActionSourceSpan" or
+            action_ast.node_type(segment.expression) ~= "ActionExpr" then
+          invalid(segment_context, "must be one typed path_segment")
+        end
+      end
+      if action_ast.node_type(value.value) ~= "ActionExpr" then
+        invalid(context .. ".value", "must be one typed ActionExpr")
+      end
+    end
+    for key, child in pairs(value) do
+      if key ~= "source_span" then visit(child, context .. "." .. tostring(key)) end
+    end
+  end
+
+  for _, label in ipairs(compiled.compiled_rule_order) do
+    local rule = compiled.rules_by_label[label]
+    for index, payload in ipairs(M.action_payloads(rule)) do
+      visit(payload.action_ast, label .. ".action_payloads[" .. (index - 1) .. "]")
+    end
+  end
+end
+
 local function recursive_observation_effects(value, function_names)
   local effects = {
     writes_observation = false,
@@ -956,6 +1005,7 @@ function M.compile_spec(spec, options)
       }, COMPILED_SPEC_MT)
       M.validate_compiled_regex_slot_identities(compiled)
       validate_no_removed_aggregate_selectors(compiled)
+      validate_nested_write_serialized_state(compiled)
       validate_staged_parse_job_contract(compiled)
       validate_recursive_observation_policy(compiled)
       validate_progressive_dispatch_policy(compiled)
@@ -1053,6 +1103,13 @@ function M.validate_no_removed_aggregate_selectors(compiled)
     fail("validate_no_removed_aggregate_selectors expects CompiledSpec")
   end
   validate_no_removed_aggregate_selectors(compiled)
+end
+
+function M.validate_nested_write_serialized_state(compiled)
+  if M.node_type(compiled) ~= "CompiledSpec" then
+    fail("validate_nested_write_serialized_state expects CompiledSpec")
+  end
+  validate_nested_write_serialized_state(compiled)
 end
 
 function M.validate_progressive_dispatch_policy(compiled)

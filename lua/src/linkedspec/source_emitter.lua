@@ -420,6 +420,11 @@ function M.validate_generated_rule_plan_v2(compiled, plan, source_identity, actu
   end
   local selector_ok, selector_error = pcall(compiled_spec.validate_no_removed_aggregate_selectors, compiled)
   if not selector_ok then raise(M.generated_source_compile_failed(identity, selector_error)) end
+  local nested_write_ok, nested_write_error = pcall(
+    compiled_spec.validate_nested_write_serialized_state,
+    compiled
+  )
+  if not nested_write_ok then raise(M.generated_source_compile_failed(identity, nested_write_error)) end
   if #compiled.compiled_rule_order ~= #plan then
     generated_plan_failure(
       identity,
@@ -753,6 +758,7 @@ function M.emit_lua_source_v2(compiled, source_identity)
   local ok, result = pcall(function()
     compiled_spec.validate_compiled_regex_slot_identities(compiled)
     compiled_spec.validate_no_removed_aggregate_selectors(compiled)
+    compiled_spec.validate_nested_write_serialized_state(compiled)
     local spec_json = json.encode(spec_ast.to_json(effective_spec(compiled)))
     return generated_module_source(
       hex_encode(identity),

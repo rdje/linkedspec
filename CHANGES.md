@@ -10,6 +10,32 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-04 — FUTURE-PARITY-BACKLOG.19.6.1 — implement Lua write vivification
+
+- Unified authored Lua one- and many-segment bracket writes under one `assign_nested_access` `ActionExpr` with
+  typed expression-bearing `ActionWritePathSegment` records, exact source, and half-open Unicode-scalar spans.
+  Reserved, empty, unclosed, malformed, and non-addressable targets fail through structured parse diagnostics.
+- Preserved and validated the carrier across action-contract and semantic-static visitors, compiler, public
+  `SpecFile` reconstruction, direct runtime, generated plans, and source emission. Empty, malformed, or reserved
+  programmatic paths fail closed at every executable boundary.
+- Implemented segment-left-to-right then RHS evaluation, post-evaluation binding-presence snapshots, evaluated
+  string/integer harray/array selection, dense absent-root/intermediate creation, isolated atomic publication,
+  completed-expression-effect preservation, exact expression-failure identity, and detached mutable boundaries.
+- Added exact `nested_write_segment_invalid`, `nested_write_kind_conflict`, and `nested_write_array_gap` runtime
+  diagnostics. Bound null and wrong existing kinds are never coerced, and reads remain non-creating.
+- Added one permanent shared Lua consumer covering all frozen 5 AST / 7 syntax / 11 success / 16 structural /
+  3 expression-failure / 3 read-exclusion cases, exclusions, astral spans, detachment, fresh function state,
+  corrupt/reserved carriers, and native/reconstructed/generated-plan/emitted-module/primary-CLI routes. It passes
+  436 assertions on PUC Lua and 436 on LuaJIT and locks `map_leaves!` as still unsupported raw syntax.
+- The complete Lua gate passes both ABIs, all 178 integration cases, CLI 66/66 in default and POSIX environments,
+  corpus 105/105, and repository-local storage proof. The unchanged neutral checker rejects all 105 mutations.
+- The full gate exposed stale cursor expectations in existing action-edge tests. Only expected endpoints change
+  from 1 to 6: zero-regex `Top` enters its loop, whose edge selects and consumes `Done`'s regex for `xhello`.
+  Runtime dispatch and fixture source remain unchanged, and the durable Lua action-edge fact now records the proof.
+- Synchronized the Lua guide, sole-facing mdBook, architecture, ADR `0036`, Toolbox, task/index, roadmaps,
+  Knowledge, and live pointers at the exact five-backend-write/four-backend-bang frontier. Receipt-bound canonical
+  CI validates the final staged candidate; Lua `map_leaves!` and portable/public admission remain pending.
+
 ## 2026-09-03 — FUTURE-PARITY-BACKLOG.19.5.2 — implement Julia map-leaves receiver mutation
 
 - Added the dedicated typed Julia `receiver_mutation_chain` for exact

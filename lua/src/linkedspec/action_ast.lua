@@ -90,6 +90,15 @@ function M.access_segment(kind, source, source_span, fields)
   return node("ActionAccessSegment", fields)
 end
 
+function M.write_path_segment(source, source_span, expression)
+  return node("ActionWritePathSegment", {
+    kind = "path_segment",
+    source = source,
+    source_span = source_span,
+    expression = expression,
+  })
+end
+
 function M.hash_entry(key, value)
   return node("ActionHashEntry", { key = key, value = value })
 end
@@ -180,6 +189,9 @@ local function find_in_segments(segments)
   for _, segment in ipairs(segments or {}) do
     if segment.kind == "index" then
       local selector = find_removed_aggregate_selector(segment.expr)
+      if selector then return selector end
+    elseif segment.kind == "path_segment" then
+      local selector = find_removed_aggregate_selector(segment.expression)
       if selector then return selector end
     end
   end

@@ -190,6 +190,22 @@ function M.runtime_engine(compiled, options)
         })
       end
       compiled_spec.validate_no_removed_aggregate_selectors(compiled)
+      local valid_nested_write, nested_write_error = pcall(
+        compiled_spec.validate_nested_write_serialized_state,
+        compiled
+      )
+      if not valid_nested_write then
+        if not compiled_spec.is_compiled_spec_error(nested_write_error) then error(nested_write_error, 0) end
+        fail(nested_write_error.message, {
+          code = "nested_write_serialized_state_invalid",
+          diagnostic = runtime_diagnostic({ spec_name = options.spec_name, spec_path = options.spec_path }, {
+            stage = "validate_compiled_rule",
+            code = "nested_write_serialized_state_invalid",
+            summary = "Lua compiled-state validation failed",
+            detail = nested_write_error.message,
+          }),
+        })
+      end
       compiled_spec.validate_progressive_dispatch_policy(compiled)
       return setmetatable({
         compiled_spec = compiled,
@@ -254,6 +270,16 @@ runtime_diagnostic = function(engine, fields)
     "regex_index",
     "expected_regex_index",
     "actual_regex_index",
+    "operation",
+    "binding",
+    "segment_index",
+    "path",
+    "actual_kind",
+    "reason",
+    "source_span",
+    "expected_kind",
+    "index",
+    "length",
   }) do
     if fields[name] ~= nil then diagnostic[name] = fields[name] end
   end
@@ -535,6 +561,170 @@ local function access_segment_matches(root, segment)
   local kind = json.kind(root)
   return (segment.kind == "key" and kind == "harray") or
     (segment.kind == "index" and kind == "array")
+end
+
+callable_codeblock.nested_write = {}
+
+function callable_codeblock.nested_write.value_kind(value)
+  if value == json.null then return "null" end
+  if action_ast.node_type(value) == "ActionExpr" and
+      (value.kind == "block_value" or value.kind == "codeblock_argument" or
+        value.kind == "codeblock_literal") then
+    return "codeblock"
+  end
+  local kind = json.kind(value)
+  if kind == "array" or kind == "harray" then return kind end
+  if type(value) == "boolean" then return "boolean" end
+  if type(value) == "string" then return "string" end
+  if type(value) == "number" then return value % 1 == 0 and "integer" or "number" end
+  return "scalar"
+end
+
+function callable_codeblock.nested_write.source_span(source_span)
+  return json.harray({
+    start = source_span.start,
+    ["end"] = source_span["end"],
+    unit = "unicode_scalar",
+    provenance = "authored",
+  })
+end
+
+function callable_codeblock.nested_write.selector_value(selector)
+  return selector.kind == "harray" and selector.key or selector.index
+end
+
+function callable_codeblock.nested_write.path(selectors, stop)
+  local path = json.array()
+  for index = 1, stop do path[index] = callable_codeblock.nested_write.selector_value(selectors[index]) end
+  return path
+end
+
+function callable_codeblock.nested_write.failure(engine, ctx, message, fields)
+  fields.stage = "runtime_execution"
+  fields.operation = "nested_write_vivification"
+  fields.diagnostic = runtime_diagnostic(engine, {
+    stage = fields.stage,
+    summary = "Lua nested write failed",
+    detail = message,
+    top_rule = ctx.top_rule,
+    rule_label = ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule,
+    code = fields.code,
+    operation = fields.operation,
+    binding = fields.binding,
+    segment_index = fields.segment_index,
+    path = fields.path,
+    actual_kind = fields.actual_kind,
+    reason = fields.reason,
+    source_span = fields.source_span,
+    expected_kind = fields.expected_kind,
+    index = fields.index,
+    length = fields.length,
+  })
+  fail(message, fields)
+end
+
+function callable_codeblock.nested_write.classify_selectors(engine, ctx, base, evaluated)
+  local selectors = {}
+  for index, segment in ipairs(evaluated) do
+    local value = segment.value
+    if type(value) == "string" then
+      selectors[index] = { kind = "harray", key = value, source_span = segment.source_span }
+    elseif type(value) == "number" and value % 1 == 0 and value >= 0 then
+      selectors[index] = { kind = "array", index = value, source_span = segment.source_span }
+    else
+      local actual_kind = callable_codeblock.nested_write.value_kind(value)
+      local reason = type(value) == "number" and value % 1 == 0 and value < 0 and
+        "negative_integer" or
+        (type(value) == "number" and "fractional_number" or "kind_not_path_selector")
+      local segment_index = index - 1
+      local message = "nested write segment " .. segment_index .. " for binding '" .. base ..
+        "' must evaluate to a string or nonnegative integer; got " .. actual_kind .. " (" .. reason .. ")"
+      callable_codeblock.nested_write.failure(engine, ctx, message, {
+        code = "nested_write_segment_invalid",
+        binding = base,
+        segment_index = segment_index,
+        path = callable_codeblock.nested_write.path(selectors, index - 1),
+        actual_kind = actual_kind,
+        reason = reason,
+        source_span = callable_codeblock.nested_write.source_span(segment.source_span),
+      })
+    end
+  end
+  return selectors
+end
+
+function callable_codeblock.nested_write.empty_container(selector)
+  return selector.kind == "array" and json.array() or json.harray()
+end
+
+function callable_codeblock.nested_write.kind_conflict(engine, ctx, base, selectors, position, actual)
+  local selector = selectors[position]
+  local segment_index = position - 1
+  local actual_kind = callable_codeblock.nested_write.value_kind(actual)
+  local message = "nested write segment " .. segment_index .. " for binding '" .. base ..
+    "' requires " .. selector.kind .. "; found " .. actual_kind
+  callable_codeblock.nested_write.failure(engine, ctx, message, {
+    code = "nested_write_kind_conflict",
+    binding = base,
+    segment_index = segment_index,
+    path = callable_codeblock.nested_write.path(selectors, position - 1),
+    expected_kind = selector.kind,
+    actual_kind = actual_kind,
+    source_span = callable_codeblock.nested_write.source_span(selector.source_span),
+  })
+end
+
+function callable_codeblock.nested_write.array_gap(engine, ctx, base, selectors, position, array_length)
+  local selector = selectors[position]
+  local segment_index = position - 1
+  local message = "nested write segment " .. segment_index .. " for binding '" .. base ..
+    "' cannot create array index " .. selector.index .. " at length " .. array_length
+  callable_codeblock.nested_write.failure(engine, ctx, message, {
+    code = "nested_write_array_gap",
+    binding = base,
+    segment_index = segment_index,
+    path = callable_codeblock.nested_write.path(selectors, position - 1),
+    index = selector.index,
+    length = array_length,
+    source_span = callable_codeblock.nested_write.source_span(selector.source_span),
+  })
+end
+
+function callable_codeblock.nested_write.assign_value(engine, ctx, base, root, selectors, stored_value)
+  local node = root
+  for position, selector in ipairs(selectors) do
+    local is_last = position == #selectors
+    if selector.kind == "harray" then
+      if json.kind(node) ~= "harray" then
+        callable_codeblock.nested_write.kind_conflict(engine, ctx, base, selectors, position, node)
+      end
+      if is_last then
+        node[selector.key] = copy_value(stored_value)
+      elseif node[selector.key] == nil then
+        local child = callable_codeblock.nested_write.empty_container(selectors[position + 1])
+        node[selector.key] = child
+        node = child
+      else
+        node = node[selector.key]
+      end
+    else
+      if json.kind(node) ~= "array" then
+        callable_codeblock.nested_write.kind_conflict(engine, ctx, base, selectors, position, node)
+      end
+      local array_length = #node
+      if selector.index > array_length then
+        callable_codeblock.nested_write.array_gap(engine, ctx, base, selectors, position, array_length)
+      elseif is_last then
+        node[selector.index + 1] = copy_value(stored_value)
+      elseif selector.index == array_length then
+        local child = callable_codeblock.nested_write.empty_container(selectors[position + 1])
+        node[selector.index + 1] = child
+        node = child
+      else
+        node = node[selector.index + 1]
+      end
+    end
+  end
 end
 
 local function is_passive_terminal_rule(rule)
@@ -3177,33 +3367,35 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
     return store_harray_mutation(ctx, { kind = "scalar", name = expr.name }, storage, root)
   end
   if kind == "assign_nested_access" then
-    local segments = {}
+    if type(expr.segments) ~= "table" or #expr.segments == 0 then
+      local message = "nested write carrier for binding '" .. tostring(expr.base) ..
+        "' must contain at least one typed path segment"
+      callable_codeblock.nested_write.failure(engine, ctx, message, {
+        code = "nested_write_serialized_state_invalid",
+        binding = expr.base,
+      })
+    end
+    local evaluated = {}
     for index, segment in ipairs(expr.segments) do
-      local key
-      if segment.kind == "key" then
-        key = segment.value
-      else
-        key = runtime_access_index(evaluate_expr(engine, segment.expr, ctx, accumulator, edge_state))
+      if segment.kind ~= "path_segment" or action_ast.node_type(segment.expression) ~= "ActionExpr" then
+        local message = "nested write carrier for binding '" .. tostring(expr.base) ..
+          "' contains an invalid typed path segment"
+        callable_codeblock.nested_write.failure(engine, ctx, message, {
+          code = "nested_write_serialized_state_invalid",
+          binding = expr.base,
+          segment_index = index - 1,
+        })
       end
-      segments[index] = { kind = segment.kind, key = key }
+      evaluated[index] = {
+        value = evaluate_expr(engine, segment.expression, ctx, accumulator, edge_state),
+        source_span = segment.source_span,
+      }
     end
-    local value = evaluate_expr(engine, expr.value, ctx, accumulator, edge_state)
+    local stored_value = copy_value(evaluate_expr(engine, expr.value, ctx, accumulator, edge_state))
+    local selectors = callable_codeblock.nested_write.classify_selectors(engine, ctx, expr.base, evaluated)
     local current, storage = lookup_binding(ctx, expr.base)
-    if json.kind(current) ~= "array" and json.kind(current) ~= "harray" then return json.null end
-    local root = copy_value(current)
-    local target = root
-    for index, segment in ipairs(segments) do
-      if not access_segment_matches(target, segment) then return json.null end
-      if index == #segments then
-        if not write_index(target, segment.key, value) then return json.null end
-      else
-        local next_value = read_index(target, segment.key)
-        if json.kind(next_value) ~= "array" and json.kind(next_value) ~= "harray" then return json.null end
-        local written, copied = write_index(target, segment.key, next_value)
-        if not written then return json.null end
-        target = copied
-      end
-    end
+    local root = storage == nil and callable_codeblock.nested_write.empty_container(selectors[1]) or copy_value(current)
+    callable_codeblock.nested_write.assign_value(engine, ctx, expr.base, root, selectors, stored_value)
     return store_binding(ctx, expr.base, storage, root)
   end
   if kind == "recognition_checkpoint" then
@@ -5051,6 +5243,16 @@ function M.to_json(value)
       "regex_index",
       "expected_regex_index",
       "actual_regex_index",
+      "operation",
+      "binding",
+      "segment_index",
+      "path",
+      "actual_kind",
+      "reason",
+      "source_span",
+      "expected_kind",
+      "index",
+      "length",
     }) do
       if value[name] ~= nil then diagnostic[name] = value[name] end
     end

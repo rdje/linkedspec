@@ -58,12 +58,12 @@ But concision must not hide what is happening. The project direction is toward:
 - clearer runtime ownership (each module owns its state and its diagnostics)
 - stronger documentation expectations (every surface explained, every contract explicit)
 
-The same principle governs two mutation extensions. Nested writes are current through Julia, while receiver
-mutation is current through Dart; remaining backend and portable/public admission follow through `.19`.
+The same principle governs two mutation extensions. Nested writes are current on all five backends, while
+receiver mutation is current through Julia; Lua receiver mutation and portable/public admission follow through
+`.19`.
 
 First, the neutral nested-write contract fixes how assignment creates missing path containers. Perl, Rust, Dart,
-and Julia implement it; Lua retains the earlier non-vivifying boundary. The authored form stays ordinary
-assignment:
+Julia, PUC Lua, and LuaJIT implement it. The authored form stays ordinary assignment:
 
 ```text
 document["sections"][0]["title"] = title
@@ -90,12 +90,12 @@ diagnostics identify the authored segment; structural codes distinguish invalid 
 dense-array gap.
 
 Reads remain pure and never create a root, child, cache, or other state. Temporary/literal/helper/property roots,
-an invented `vivify(...)` helper, and an invented `:=` operator are excluded. Perl, Rust, Dart, and Julia now
-implement this unchanged contract under `.19.2.1`, `.19.3.1`, `.19.4.1`, and `.19.5.1`; Lua still requires every
-intermediate container to exist. Dart preserves the typed path through native, reconstructed, generated-plan,
+an invented `vivify(...)` helper, and an invented `:=` operator are excluded. All five backends implement this
+unchanged contract under `.19.2.1`, `.19.3.1`, `.19.4.1`, `.19.5.1`, and `.19.6.1`. Dart preserves the typed path through native, reconstructed, generated-plan,
 emitted-source, independently analyzed/executed caller-package, and primary-CLI routes. Julia preserves it through
-native, reconstructed, generated-plan, emitted-module, and primary-CLI routes. Portable/public admission remains
-pending until all owned backend and recurring-proof leaves complete.
+native, reconstructed, generated-plan, emitted-module, and primary-CLI routes. Lua preserves it through those same
+supported route families on both ABIs. Portable/public admission remains pending until all owned backend and
+recurring-proof leaves complete.
 
 Second, LinkedSpec reserves a Ruby-style trailing `!` for a method that genuinely updates its receiver. The only
 version-1 candidate is:
@@ -206,9 +206,9 @@ re-entrancy diagnostics retain authored half-open Unicode-scalar spans.
 
 `walk_leaves!`, `reduce_leaves!`, function-form bang calls, and arbitrary `!`-suffixed identifiers are not part of
 that direction. They would save no meaningful ceremony or would advertise mutation without a distinct coherent
-contract. Perl, Rust, Dart, and Julia implement nested creation and `map_leaves!`. The verified non-bang control
-remains identical on Perl, Rust, Dart, Julia, and Lua; PUC Lua and LuaJIT retain their generic parser-invocation
-failure for the bang form.
+contract. All five backends implement nested creation; Perl, Rust, Dart, and Julia also implement `map_leaves!`.
+The verified non-bang control remains identical on every backend; PUC Lua and LuaJIT retain their unsupported raw
+syntax boundary for the bang form.
 ADR `0036`, the two mechanism
 contracts plus their shared composition contract under `capability_conformance/`, and backlog `.19.1-.19.9` own
 the remaining backend and admission work.

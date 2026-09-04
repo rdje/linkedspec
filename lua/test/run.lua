@@ -1389,8 +1389,8 @@ test("corpus library permanently admits the ordered 40-case core prefix", functi
     assert_equal(result.name, execution.validation.manifest.cases[index], "core manifest order " .. index)
     assert_equal(linkedspec.corpus_fixture_passed(result), true, "core fixture status " .. result.name)
     assert_equal(result.matched, true, "core match " .. result.name)
-    assert_equal(result.cursor_code_unit, 1, "core byte endpoint " .. result.name)
-    assert_equal(result.cursor_char_offset, 1, "core character endpoint " .. result.name)
+    assert_equal(result.cursor_code_unit, 6, "core child-regex byte endpoint " .. result.name)
+    assert_equal(result.cursor_char_offset, 6, "core child-regex character endpoint " .. result.name)
     assert_equal(result.failure_stage, nil, "core failure stage " .. result.name)
     assert_equal(result.failure, nil, "core failure text " .. result.name)
     assert_equal(
@@ -1445,34 +1445,34 @@ end)
 
 test("corpus library permanently admits the ordered 59-case advanced and shipped window", function()
   local expected_cases = {
-    { "terse_2_2_6_2_attached_while_blocks", 1 },
-    { "terse_2_3_4_deep_pure_helper_composition", 1 },
-    { "terse_2_3_4_1_bare_hash_helper_arg_composition", 1 },
-    { "terse_2_3_4_1_bare_array_helper_arg_composition", 1 },
-    { "terse_2_3_4_2_inline_if_value_control", 1 },
-    { "terse_2_3_4_2_inline_switch_value_control", 1 },
-    { "terse_15_2_3_bare_value_reads_and_case_labels", 1 },
-    { "terse_2_3_5_1_array_receiver_value_chains", 1 },
-    { "terse_2_3_5_2_hash_receiver_value_chains", 1 },
-    { "terse_2_3_5_3_string_receiver_value_chains", 1 },
-    { "terse_2_3_5_4_number_receiver_value_chains", 1 },
-    { "terse_7_3_array_numeric_reducer_receiver_methods", 1 },
-    { "terse_3_2_1_numeric_word_aliases", 1 },
-    { "terse_3_2_2_arithmetic_symbol_callees", 1 },
-    { "terse_3_2_3_2_string_comparison_helpers", 1 },
-    { "terse_3_2_3_3_numeric_comparison_word_aliases", 1 },
-    { "terse_3_2_3_4_numeric_comparison_symbol_callees", 1 },
-    { "terse_3_3_1_scalar_assignment_expressions", 1 },
-    { "terse_3_3_2_aggregate_assignment_expressions", 1 },
-    { "terse_3_3_3_mutation_assignment_expressions", 1 },
-    { "terse_3_3_4_assignment_expression_closure", 1 },
-    { "terse_4_3_2_user_function_runtime", 1 },
-    { "terse_2_3_5_5_block_valued_receiver_chains", 1 },
-    { "terse_14_3_with_helper_trailing_block", 1 },
-    { "terse_14_4_receiver_with_trailing_block", 1 },
-    { "terse_12_3_hash_tree_traversal_receiver_blocks", 1 },
-    { "terse_13_3_array_tree_traversal_receiver_blocks", 1 },
-    { "terse_2_3_5_6_typed_wrapper_quoted_names", 1 },
+    { "terse_2_2_6_2_attached_while_blocks", 6 },
+    { "terse_2_3_4_deep_pure_helper_composition", 6 },
+    { "terse_2_3_4_1_bare_hash_helper_arg_composition", 6 },
+    { "terse_2_3_4_1_bare_array_helper_arg_composition", 6 },
+    { "terse_2_3_4_2_inline_if_value_control", 6 },
+    { "terse_2_3_4_2_inline_switch_value_control", 6 },
+    { "terse_15_2_3_bare_value_reads_and_case_labels", 6 },
+    { "terse_2_3_5_1_array_receiver_value_chains", 6 },
+    { "terse_2_3_5_2_hash_receiver_value_chains", 6 },
+    { "terse_2_3_5_3_string_receiver_value_chains", 6 },
+    { "terse_2_3_5_4_number_receiver_value_chains", 6 },
+    { "terse_7_3_array_numeric_reducer_receiver_methods", 6 },
+    { "terse_3_2_1_numeric_word_aliases", 6 },
+    { "terse_3_2_2_arithmetic_symbol_callees", 6 },
+    { "terse_3_2_3_2_string_comparison_helpers", 6 },
+    { "terse_3_2_3_3_numeric_comparison_word_aliases", 6 },
+    { "terse_3_2_3_4_numeric_comparison_symbol_callees", 6 },
+    { "terse_3_3_1_scalar_assignment_expressions", 6 },
+    { "terse_3_3_2_aggregate_assignment_expressions", 6 },
+    { "terse_3_3_3_mutation_assignment_expressions", 6 },
+    { "terse_3_3_4_assignment_expression_closure", 6 },
+    { "terse_4_3_2_user_function_runtime", 6 },
+    { "terse_2_3_5_5_block_valued_receiver_chains", 6 },
+    { "terse_14_3_with_helper_trailing_block", 6 },
+    { "terse_14_4_receiver_with_trailing_block", 6 },
+    { "terse_12_3_hash_tree_traversal_receiver_blocks", 6 },
+    { "terse_13_3_array_tree_traversal_receiver_blocks", 6 },
+    { "terse_2_3_5_6_typed_wrapper_quoted_names", 6 },
     { "tclite_command_subst", 2 },
     { "tclite_double_quote", 2 },
     { "lispish_x_y", 5 },
@@ -2814,8 +2814,8 @@ test("ActionIR parses access assignments nested calls and keyword arguments", fu
   assert_equal(linkedspec.parse_action_expression("items += value").kind, "assign_array_append", "append assignment")
   assert_equal(
     linkedspec.parse_action_expression("meta[key] = { stage : value }").kind,
-    "assign_hash_index",
-    "hash assignment"
+    "assign_nested_access",
+    "single-segment nested assignment"
   )
   assert_equal(
     linkedspec.parse_action_expression('payload["children"][0]["name"] = value').kind,
@@ -2927,7 +2927,7 @@ test("ActionIR contracts resolve canonical helpers through nested nodes", functi
   assert_equal(#resolution.diagnostics, 0, "nested diagnostics")
 end)
 
-test("ActionIR contracts map structural assignments and current equals alias", function()
+test("ActionIR contracts map unified nested assignments and current equals alias", function()
   local block = linkedspec.parse_action_block(
     'name = "ok"; items += name; meta[name] = [name]; ' ..
     'payload["children"][0]["name"] = name; =(other, "value")'
@@ -2941,7 +2941,7 @@ test("ActionIR contracts map structural assignments and current equals alias", f
   end
   assert_equal(canonical["="], "set", "scalar assignment contract")
   assert_equal(canonical["+="], "push", "append assignment contract")
-  assert_equal(canonical["[]="], "set_key", "hash assignment contract")
+  assert_equal(canonical["[]="], nil, "retired authored hash assignment contract")
   assert_equal(canonical["nested_access="], "nested_access_assignment", "nested assignment contract")
 
   local equals_call
@@ -5827,7 +5827,6 @@ Top::
    meta_snapshot = copy(meta)
    items += 4
    meta["kind"] = "changed"
-   items[8]["name"] = "forbidden"
  }
  E {
    return({
@@ -5878,42 +5877,35 @@ Top::
   assert_equal(linkedspec.runtime_value_kind(json.array()), "array", "empty array kind")
 end)
 
-test("runtime nested assignment preserves segment kinds order and atomic failure", function()
+test("runtime nested assignment selects path kinds from evaluated values", function()
   local result = linkedspec.runtime_parse(
     linkedspec.runtime_engine(linkedspec.compile_spec(linkedspec.parse_spec([[
 Top::
  /x/
  I {
    payload = { "items" : [{ "name" : "old" }] }
-   dynamic_index = "0"
+   dynamic_index = 0
    payload["items"][dynamic_index]["name"] = "new"
    payload["items"][1] = { "name" : "tail" }
-   wrong_result = payload["items"][0][0] = "bad"
-   index_seen = -1
-   rhs_seen = "before"
-   missing_result = payload["missing"][index_seen = 0] = (rhs_seen = "after")
+   payload["missing"][0]["created"] = true
  }
  E {
    return(array(
      payload,
-     wrong_result,
-     missing_result,
-     index_seen,
-     rhs_seen,
-     payload["items"][0][0],
-     payload["items"][0]["name"]
+     payload["items"][0]["name"],
+     payload["missing"][0]["created"]
    ))
  }
 ]]))),
     "x"
   )
-  assert_equal(json.encode(result.value[1]), [[{"items":[{"name":"new"},{"name":"tail"}]}]], "valid path root")
-  assert_equal(result.value[2], json.null, "numeric segment rejects harray write")
-  assert_equal(result.value[3], json.null, "missing intermediate rejects write")
-  assert_equal(result.value[4], 0, "all index expressions evaluate before path validation")
-  assert_equal(result.value[5], "after", "RHS evaluates before path validation")
-  assert_equal(result.value[6], json.null, "numeric segment rejects harray read")
-  assert_equal(result.value[7], "new", "typed key path reads updated value")
+  assert_equal(
+    json.encode(result.value[1]),
+    [[{"items":[{"name":"new"},{"name":"tail"}],"missing":[{"created":true}]}]],
+    "evaluated path root"
+  )
+  assert_equal(result.value[2], "new", "dynamic integer selects array")
+  assert_equal(result.value[3], true, "missing path is vivified")
 end)
 
 test("runtime executes exact nested assignment core corpus fixture", function()
@@ -5931,8 +5923,8 @@ test("runtime executes exact nested assignment core corpus fixture", function()
   )
   local result = linkedspec.runtime_parse(engine, fixture.input_text)
   assert_equal(result.matched, true, "fixture matched")
-  assert_equal(result.cursor_code_unit, 1, "fixture byte endpoint remains unchanged")
-  assert_equal(result.cursor_char_offset, 1, "fixture character endpoint remains unchanged")
+  assert_equal(result.cursor_code_unit, 6, "fixture child-regex byte endpoint")
+  assert_equal(result.cursor_char_offset, 6, "fixture child-regex character endpoint")
   assert_equal(
     json.encode(result.output),
     json.encode(json.array({ fixture.expected_json })),
@@ -8793,25 +8785,25 @@ Top::
  /x/ -> Done { set(wrong, "text"); set_key(wrong, "key", 1) }
 Done::
  /x/
-]], actual_kind = "scalar" },
+]], actual_kind = "scalar", code = "binding_kind_mismatch" },
     { source = [[
 Top::
  /x/ -> Done { set(wrong, 17); wrong["key"] = "value" }
 Done::
  /x/
-]], actual_kind = "scalar" },
+]], actual_kind = "integer", code = "nested_write_kind_conflict" },
     { source = [[
 Top::
  /x/ -> Done { set(wrong, ["array"]); set_key(wrong, "key", "value") }
 Done::
  /x/
-]], actual_kind = "array" },
+]], actual_kind = "array", code = "binding_kind_mismatch" },
   }) do
     local ok, failure = pcall(function() execute_uniform_binding_source(case.source) end)
     assert_equal(ok, false, "wrong-kind harray mutation fails")
     assert_equal(linkedspec.is_runtime_interpreter_error(failure), true, "typed harray mutation error")
-    assert_equal(failure.code, "binding_kind_mismatch", "harray mutation error code")
-    assert_equal(failure.identifier, "wrong", "harray mutation error identifier")
+    assert_equal(failure.code, case.code, "harray mutation error code")
+    assert_equal(failure.identifier or failure.binding, "wrong", "harray mutation error identifier")
     assert_equal(failure.expected_kind, "harray", "harray mutation expected kind")
     assert_equal(failure.actual_kind, case.actual_kind, "harray mutation actual kind")
   end

@@ -9,6 +9,29 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-09-04 (`FUTURE-PARITY-BACKLOG.19.6.1` — Lua write vivification): one typed `assign_nested_access`
+  expression must own every authored one- or many-segment bracket assignment. Each `ActionWritePathSegment`
+  retains its ordinary expression plus exact source/span; authored spelling cannot preselect harray versus array.
+- Keep evaluation and structural publication distinct: evaluate all path expressions left-to-right and then RHS,
+  snapshot binding presence afterward, deep-copy the resulting root, validate/build the complete dense path, and
+  publish once. This preserves completed expression effects without exposing a partial path.
+- Absence is not null. Missing roots/intermediates may be created from current/next evaluated selector kind;
+  present null and wrong kinds conflict. String selects harray, exact nonnegative integer selects zero-based array,
+  and arrays may replace or append at length but never invent filler values.
+- Copy mutable boundaries deliberately: current root, aggregate RHS, stored tree, returned tree, diagnostic path,
+  and public route results. Preserve the original error object when segment or RHS evaluation itself fails.
+- Validate the typed carrier at compiler, runtime-engine, generated-plan, and source-emitter seams. Validation must
+  reject reserved bases as well as malformed nodes; parser-only checks do not protect reconstructed or caller-
+  corrupted state.
+- Lua 5.1's 200-local chunk ceiling is a real implementation constraint. Grouping the nested-write helpers below
+  the existing `callable_codeblock` namespace avoids adding file-scope locals while keeping each operation named,
+  testable, and shared unchanged by PUC Lua and LuaJIT.
+- The permanent fixture consumer passes 436 assertions per ABI across frozen syntax/runtime/read behavior,
+  malformed state, reconstruction, generated plans, emitted modules, and CLI. The complete Lua gate, 66x2 CLI,
+  105/105 corpus, storage proof, and unchanged 105-mutation oracle pass; `map_leaves!` remains unsupported.
+- TAP-looking output is not sufficient evidence if a legacy harness exits zero after printing `not ok`. The full
+  Lua run exposed stale endpoint assertions and they are now genuinely green: `Top:: -> Done` enters `Top` and its
+  edge consumes `Done`'s regex, so `xhello` ends at character cursor 6 rather than 1. No runtime dispatch changed.
 - 2026-09-03 (`FUTURE-PARITY-BACKLOG.19.5.2` — Julia `map_leaves!`): keep bang syntax in one dedicated parser
   path. Do not allow `!` in ordinary identifiers or callees; typed receiver/mutation/callback/continuation state is
   required to preserve addressability, transaction ordering, and exact authored spans.

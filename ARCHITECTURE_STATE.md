@@ -1,5 +1,26 @@
 # ARCHITECTURE STATE
 
+## Lua implements frozen typed nested-write vivification on both ABIs
+
+`FUTURE-PARITY-BACKLOG.19.6.1` advances shared Lua to `linkedspec-write-vivification-v1` on PUC Lua and LuaJIT.
+One `ActionWritePathSegment` retains each typed expression, exact authored source, and half-open Unicode-scalar
+span; one `assign_nested_access` `ActionExpr` owns every one- or many-segment bracket write. Parser contracts,
+static call projection, compiled-state validation, generated plans, source emission, and direct runtime entry
+preserve that carrier and reject malformed or reserved reconstructed state.
+
+The interpreter evaluates all segments left-to-right and then the RHS before reading the root. It distinguishes
+absence from bound null, copies the post-evaluation root, classifies evaluated strings/nonnegative integers as
+harray/array selectors, constructs only dense unambiguous missing containers, and publishes once. Invalid
+selectors, wrong kinds, bound null, and gaps emit exact typed diagnostics without partial path publication;
+completed expression effects remain ordinary state, expression failures retain identity, reads remain
+non-creating, and successful mutable boundaries detach.
+
+One permanent test consumes the unchanged 5/7/11/16/3/3 neutral inventory on both ABIs and covers detachment,
+function presence, astral spans, malformed/reserved carriers, native execution, public `SpecFile` reconstruction,
+generated plans, emitted modules, and the primary CLI. It passes 436 assertions on PUC Lua and 436 on LuaJIT;
+the complete Lua gate, CLI 66x2, corpus 105/105, and repository-local storage proof pass. `map_leaves!` remains
+unsupported raw syntax, so Lua receiver mutation, recurring proof, and portable/public admission stay pending.
+
 ## Julia implements controlled `map_leaves!` receiver mutation
 
 `FUTURE-PARITY-BACKLOG.19.5.2` advances Julia to `linkedspec-map-leaves-mutation-v1`. A dedicated
@@ -22,7 +43,8 @@ continuation failure cannot undo an already completed commit.
 Permanent proof passes 496 assertions across 4/14/5 syntax, all frozen behaviors, 18 pre-evaluation write guards,
 nested-write composition, non-bang isolation, corrupted state, reconstruction, native/generated-plan/emitted-
 module/primary-CLI routes, and the exact zero-regex-parent dispatch invariant. The unchanged neutral oracles reject
-167 base plus 592 composition mutations. Lua, recurring proof, and portable/public admission remain pending.
+167 base plus 592 composition mutations. Lua nested writes have since advanced as described above; Lua receiver
+mutation, recurring proof, and portable/public admission remain pending.
 
 Its mandatory complete change record also rolls the bounded hot shard into immutable segment `4986`. ADR `0100`
 raises only finite change-history collection/manifest capacity to 27/26; all byte and aggregate ceilings remain
@@ -45,8 +67,8 @@ non-creating, and successful mutable boundaries detach.
 Permanent proof covers the frozen 5/7/11/16/3/3 inventory, detachment, function presence, astral spans, malformed
 carriers, native execution, `SpecFile` reconstruction, generated plans, emitted modules loaded into an isolated
 host module, and the primary CLI. The focused contract passes 406 assertions and the complete Julia package suite
-passes. Julia `map_leaves!` has since advanced as described above; both Lua mechanisms, recurring proof, and
-portable/public admission remain pending.
+passes. Julia `map_leaves!` and Lua nested writes have since advanced as described above; Lua receiver mutation,
+recurring proof, and portable/public admission remain pending.
 
 ## Dart implements controlled `map_leaves!` receiver mutation
 
@@ -66,7 +88,8 @@ guard before continuation; callback/re-entrant failure leaves the receiver uncha
 while unrelated completed effects persist. Continuation failure preserves the prior commit. Permanent proof
 covers 4/14/5 syntax, 10 successes, 8 failures, composition, corruption, reconstruction, generated/emitted/
 independent/CLI routes, 461 package tests, 25 temporary owners / 47 packages, and the unchanged 167 + 592 mutation
-oracles. Julia has since advanced through the same contract; Lua and portable/public admission remain pending.
+oracles. Julia has since advanced through the same contract; Lua nested writes have also advanced, while Lua
+receiver mutation and portable/public admission remain pending.
 
 ## Dart implements frozen typed nested-write vivification
 
@@ -86,8 +109,8 @@ Permanent proof covers the frozen 5/7/11/16/3/3 inventory, detachment, function 
 carriers, native execution, `SpecFile` JSON reconstruction, generated plans, emitted source, an independently
 analyzed/executed caller package, and the primary CLI. Its landing gate passed 450/450 package tests, 24 managed
 temporary owners / 47 locked packages, CLI 66/66 in both environments, and corpus 105/105. Dart and Julia
-`map_leaves!` have since composed with their respective nested-write paths as described above; Lua and
-portable/public admission remain pending.
+`map_leaves!` have since composed with their respective nested-write paths as described above; Lua nested writes
+have also advanced, while Lua receiver mutation and portable/public admission remain pending.
 
 ## Rust implements controlled `map_leaves!` receiver mutation
 
@@ -130,7 +153,7 @@ integration target and 105-fixture oracle corpus pass. New executable fixtures u
 its outgoing edge selects the child rule's regex, while a regex on `Top` would matter only to an edge targeting
 `Top`. Systematic legacy fixture cleanup and one pre-existing oracle-regeneration drift are owned by `.19.3.3`.
 Rust `map_leaves!` has since advanced as described above; Dart and Julia now implement both mechanisms, while Lua
-and portable/public admission remain pending.
+implements nested writes only and portable/public admission remains pending.
 
 ## Perl implements controlled `map_leaves!` receiver mutation
 
@@ -147,9 +170,9 @@ The active receiver scalar slot—not its spelling—is guarded during callbacks
 nested bang, `set`, `set_key`, `push`, array-end methods, and binding-target array pipelines reject before their
 write seam; unrelated bindings and distinct same-spelling shadows remain legal. Guard release is exception-safe,
 and ordinary continuation begins after atomic commit. The permanent Perl contract passes 58 focused tests, 105
-write mutations, 167 base + 592 composition mutations, and Phase 0 1,032/1,032. Rust and Dart now implement both
-mechanisms as described above; Julia implements nested writes but remains non-bang, and Lua remains at both prior
-boundaries. Capability/public admission is pending.
+write mutations, 167 base + 592 composition mutations, and Phase 0 1,032/1,032. Rust, Dart, and Julia now
+implement both mechanisms as described above; Lua implements nested writes but remains non-bang.
+Capability/public admission is pending.
 
 The mandatory complete change record triggers content-addressed segment `4987`. ADR `0098` advances only finite
 change-history collection/manifest capacity from 25/24 to 26/25; every root, segment, aggregate, byte, ownership,
@@ -176,8 +199,8 @@ binding/result/initial/RHS aggregates detach.
 The permanent Perl contract projects all frozen 5/7/11/16 cases plus dynamic-kind fidelity, evaluation,
 detachment, bound-null, same-binding, and fresh function-state boundaries. Focused ActionIR/trace/uniform proof
 passes 50 tests and the exact finalized Phase 0 passes all 1,032 in 963 seconds;
-both neutral mutation checkers pass. Rust, Dart, and Julia have since implemented the same write authority as
-described above; Lua retains the prior non-vivifying path. No portable
+both neutral mutation checkers pass. Rust, Dart, Julia, and Lua have since implemented the same write authority as
+described above. No portable
 capability, generated format, facade/schema/MCP, CLI, tool/storage/doctrine, or public admission moves; Perl
 `map_leaves!` has since advanced as described above.
 

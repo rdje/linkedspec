@@ -1125,8 +1125,10 @@ Three backbone items tracked major structural modernization — all done:
   packages, CLI 66/66 in default and POSIX environments, and corpus 105/105. Julia `.19.5.1-.2` now implements
   both mechanisms through typed native, reconstructed, generated-plan, emitted-module, and primary-CLI routes:
   nested writes pass 406 focused assertions, and `map_leaves!` passes 496 with stable binding identities, all 18
-  pre-evaluation guarded write forms, and strict nested-write composition. Lua, portable/public admission, and
-  recurring proof remain pending under `.19.6-.9`.
+  pre-evaluation guarded write forms, and strict nested-write composition. Lua `.19.6.1` now implements the
+  nested-write half through shared typed native, reconstructed, generated-plan, emitted-module, and primary-CLI
+  routes on PUC Lua and LuaJIT, with 436 focused assertions per ABI. Lua `map_leaves!`, portable/public admission,
+  and recurring proof remain pending under `.19.6.2-.9`.
   All 13 ordinary harray names close at 103/103 through `.4.3.5.5` on both Lua ABIs. Sorted arrays continue
   through array receivers, count/membership are terminal, and mutation-result/pure-receiver prose is guarded.
   Eager blocks, lazy inline controls, attached/marker if and switch, and attached while close through

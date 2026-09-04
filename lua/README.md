@@ -1262,8 +1262,12 @@ rebinds `items` as an array, `set(meta, {})` rebinds `meta` as an harray, and
 runtime value type governs later reads and mutations. Retired aggregate selectors
 reject at compiled-state admission. Array indexes are zero-based at the DSL
 boundary and harray keys are strings. Direct and nested access returns `json.null`
-for a missing or wrong-kind path; nested assignment never creates missing
-intermediate containers.
+for a missing or wrong-kind path and never creates state. Nested assignment is a
+separate write contract: each evaluated string or exact nonnegative integer segment
+selects harray or zero-based array, an absent root or unambiguous missing intermediate
+is created on an isolated copy, and success publishes once. Present null, existing
+wrong kinds, invalid selectors, and sparse array gaps raise typed nested-write
+diagnostics without a partial structural path.
 
 ```lua
 local result = linkedspec.runtime_parse(linkedspec.runtime_engine(

@@ -381,6 +381,8 @@ local function resolver(function_registry)
     for _, segment in ipairs(segments) do
       if segment.kind == "index" then
         visit_expr(segment.expr)
+      elseif segment.kind == "path_segment" then
+        visit_expr(segment.expression)
       end
     end
   end
