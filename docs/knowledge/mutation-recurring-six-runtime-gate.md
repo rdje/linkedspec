@@ -9,9 +9,10 @@ answers:
   - "what pins mutation authority digests and route topology"
   - "why does the mutation matrix refresh Dart metadata offline"
 date: 2026-09-05
-status: recurring six-runtime proof complete under FUTURE-PARITY-BACKLOG.19.8; public closeout remains .19.9
+status: recurring six-runtime proof complete under .19.8; public closeout complete under .19.9
 tags: [mutation, autovivification, map-leaves, composition, recurrence, verification, governance, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.19.8 adds executable tools/check_mutation_six_runtime.sh. It enters repository-managed project data; runs the unchanged write authority and bang/composition authority; executes Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT consumers in fixed order; and then validates generated-source, capability, and language-coverage ledgers. tools/check_capability_conformance.pl binds owner, driver, LINKEDSPEC_RUN_MUTATION_MATRIX switch, storage initializer, three historical authority IDs/statuses/canonical JSON digests, exact commands and order, executable path state, and exact-one tools/run_ci_local.sh registration. Seventeen recurring mutations reject authority, route, support, storage, owner, driver, CI, and live-artifact drift. The complete route passes write 5/7/11/16/3/3 plus 8 compositions and 105 mutations; bang 4/14/5/10/8 plus 6 callback and 1 continuation compositions, 167 base and 592 composition mutations; Perl 19; Rust 5+9; Dart 9+11; Julia 406+496; PUC Lua and LuaJIT 438+530 each; generated source 100/0/0; capability 20/100/0/0; and language coverage 250/105+1/126. Canonical CI requires and syntax-checks the driver always and executes it exactly once when the opt-in switch is 1. No production behavior, frozen artifact bytes, public-current content, or parent status changes."
+evidence_update_2026_09_05_public_closeout: "FUTURE-PARITY-BACKLOG.19.9 leaves this exact runtime driver and every authority byte unchanged, publishes governed current examples, and adds tools/check_mutation_public_surface.py as the independent documentation layer. Its 63-file/14-document/eleven-example/ten-stale-claim/50-mutation proof closes public no-drift and parent .19 while this card remains the canonical route-order and runtime-recurrence pointer."
 reverify: "bash tools/check_mutation_six_runtime.sh && perl tools/check_capability_conformance.pl && rg -n 'LINKEDSPEC_RUN_MUTATION_MATRIX|check_mutation_six_runtime' tools/run_ci_local.sh"
 ---
 
@@ -31,6 +32,9 @@ Canonical CI tracks and syntax-checks the driver on every run. Set `LINKEDSPEC_R
 it exactly once inside that gate. The driver enters the repository-managed project-data environment before any
 toolchain command. Its Dart leg also runs locked `pub get --offline` through the project-data wrapper so ignored
 compiler/test metadata agrees with the active SDK without consulting the network or an off-volume cache.
+
+Public teaching is governed independently by [[mutation-public-surface-no-drift]]; that `.19.9` closeout does not
+change this driver, its route order, or any frozen contract byte.
 
 Related: [[mutation-capability-admission]], [[write-vivification-neutral-contract]],
 [[map-leaves-mutation-neutral-contract]], [[write-map-leaves-neutral-composition]], and

@@ -1,7 +1,7 @@
 # 0036 - Nested creation is write-only and `!` denotes explicit receiver mutation
 
 - Date: 2026-07-15
-- Status: accepted; both mechanisms portable-capability-admitted on all five backends; recurrence/public closeout pending
+- Status: accepted; both mechanisms portable-capability-admitted, recurrently proven, and public-closed
 - Tags: dsl, language-evolution, mutation, autovivification, receiver-methods, traversal, paths, portability
 
 ## Context
@@ -437,6 +437,22 @@ topology through seventeen fail-closed mutations. This changes verification infr
 bytes, production behavior, public-current teaching, parent `.19`, and push remain unchanged; `.19.9` owns those
 remaining public/no-drift/closeout boundaries.
 
+## Public closeout (2026-09-05)
+
+Leaf `.19.9` publishes the admitted current semantics without changing the three frozen authorities or any
+parser, compiler, runtime, generated carrier, capability row, facade, schema, MCP, or CLI behavior. The primary
+guide demonstrates missing-container creation, dense-array append/gap rejection, existing-kind conflicts,
+segment-before-RHS evaluation, original-shape traversal, callback fields, receiver-identity guarding, rollback,
+detached results, callback-local composition, and post-commit continuation.
+
+`tools/check_mutation_public_surface.py` inventories 63 current public Markdown files, requires exact anchors in
+14 mutation-owning documents, binds eleven semantic example classes to exact policy strings from the frozen write,
+bang, and composition contracts, rejects ten stale current claims, and proves those controls through 50 isolated
+in-memory mutations. Historical task, decision, Knowledge, and history records remain outside its stale-current
+scan. Canonical CI tracks and runs the checker unconditionally; the capability checker independently pins its
+`.19.9` owner and exact-one CI registration. The exact six-runtime driver remains the recurring executable behavior
+proof. Together those layers close parent `.19` while preserving every frozen authority byte.
+
 ## Consequences
 
 - The terse deep-write form remains ordinary assignment, for example
@@ -450,7 +466,7 @@ remaining public/no-drift/closeout boundaries.
 - “Absolute path” means complete root-to-leaf path inside the traversal receiver. The variable name is receiver
   identity, not an extra path element. Hash-root paths contain keys; array-root paths contain zero-based indexes.
 - During `.19.2-.19.6`, public guidance named the backend transition explicitly. `.19.7` admits both portable
-  capability rows and `.19.8` completes recurring proof, while `.19.9` retains public-current closeout.
+  capability rows, `.19.8` completes recurring proof, and `.19.9` closes current public teaching and no-drift.
 
 ## Links
 

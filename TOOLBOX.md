@@ -580,7 +580,7 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
 
 - **WHAT:** `tools/run_python_project_data.sh` runs one repository-relative Python checker with managed scratch and
   retained `PYTHONPYCACHEPREFIX`; `tools/test_tool_project_data_storage.sh` freezes three Python temporary owners,
-  14 shell allocator owners, and 31 Python tool entrypoints while exercising Python bytecode, Unicode-generator
+  15 shell allocator owners, and 38 Python tool entrypoints while exercising Python bytecode, Unicode-generator
   scratch, Knowledge Map output, mdBook destinations, CLI workspaces, TAP, and oracle capture boundaries.
 - **WHEN:** use the targeted wrapper for every maintained Python checker command; run the oracle when changing
   Python imports/tempfiles, shell allocation, Knowledge Map configuration/output, mdBook output, conformance,
@@ -704,7 +704,7 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
 - **BOUNDARY:** the seven concrete retired spellings are allowed only inside the uniquely bounded mdBook migration
   section. Executable `.spec` inputs and current examples remain selector-free.
 
-### 4.8.2 `tools/check_write_vivification_contract.py` — future neutral nested-write oracle
+### 4.8.2 `tools/check_write_vivification_contract.py` — frozen neutral nested-write oracle
 
 - **WHAT:** validates `linkedspec-write-vivification-v1`: one unified expression-segment AST, exact syntax and
   Unicode-scalar spans, evaluated string/integer kind selection, write-only missing-container creation, dense
@@ -746,8 +746,8 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   Julia preserves the typed carrier through native, reconstructed, generated-plan, emitted-module, and primary-
   CLI routes. Shared Lua preserves it through native, public `SpecFile` reconstruction, generated-plan,
   emitted-module, primary-CLI, and user-function-body routes on PUC Lua and LuaJIT; the permanent suite passes 530
-  assertions per ABI. `.19.7` separately admits its exact capability row and `.19.8` completes exact six-runtime
-  recurrence; public-current closeout remains `.19.9`. The `.19.2.2` audit also proved that unparameterized user functions cannot
+  assertions per ABI. `.19.7` separately admits its exact capability row, `.19.8` completes exact six-runtime
+  recurrence, and `.19.9` closes public-current no-drift. The `.19.2.2` audit also proved that unparameterized user functions cannot
   carry caller-binding mutation under the admitted fresh-local function contract. The director-selected correction
   uses explicit-target `set` and caller-scoped `.with`, without implicit capture.
 
@@ -763,14 +763,14 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
 - **WHEN:** changing either future contract or implementing callback/continuation write behavior in any backend.
   Run both checkers; the write checker validates every embedded write in isolation, while the mutation checker
   executes the composed traversal/guard/commit state machine and rejects every scalar and container-shape drift.
-- **HOW:** run the two commands in §§4.8.2–4.8.3. No third maintained executable exists, so the Python tool census
-  remains 37 and the fixture allocates no project data.
+- **HOW:** run the two commands in §§4.8.2–4.8.3. The fixture itself added no third executable and allocates no
+  project data; the later `.19.9` public checker advances the repository-wide Python tool census to 38.
 - **OUTPUT:** eight embedded writes, six callback compositions, one post-commit continuation composition, and 592
   independently rejected composition mutations.
 - **CURRENT BOUNDARY:** the exact non-bang control returns `{"leaf":[]}` on Perl, Rust, Dart, Julia, PUC Lua, and
   LuaJIT. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT execute the complete bang composition. `.19.7` admits two
-  capability rows sharing this dependency, and `.19.8` completes exact six-runtime recurrence; public-current
-  no-drift remains `.19.9`.
+  capability rows sharing this dependency, `.19.8` completes exact six-runtime recurrence, and `.19.9` closes
+  public-current no-drift.
 
 ### 4.8.5 `tools/check_capability_conformance.pl` — portable capability governance
 
@@ -782,12 +782,12 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   neutral behavior or backend execution consumers.
 - **HOW:** `perl tools/check_capability_conformance.pl`.
 - **OUTPUT:** 20 capabilities / 100 pass / 0 partial / 0 gap, one exclusion, 19 general governance mutations,
-  two mutation capabilities, 16 mutation-admission mutations, 17 mutation-recurring mutations, 12 governed
-  projections, six public mutations, and four language-surface mutations.
+  two mutation capabilities, 16 mutation-admission mutations, 17 mutation-recurring mutations, four mutation-
+  public-gate mutations, 12 governed projections, six public mutations, and four language-surface mutations.
 - **MUTATION BOUNDARY:** the dedicated admission mutations reject row omission/duplication/order drift, changed
   contract/source/reference/note state, non-pass backend state, inactive ownership, neutral authority ID/format/
   digest drift, and composition ID/digest drift. The contract files retain their original neutral status text;
-  `.19.8` owns completed recurring six-runtime execution and `.19.9` owns public-current closeout.
+  `.19.8` owns completed recurring six-runtime execution and `.19.9` closes the public-current surface.
 
 ### 4.8.6 `tools/check_mutation_six_runtime.sh` — exact recurring mutation proof
 
@@ -806,7 +806,20 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
 - **BOUNDARY:** the capability checker pins the recurring owner, driver/switch/storage initializer, all three
   historical authority IDs/statuses/digests, command/route/support order, executable state, and exact-one CI
   topology. Canonical CI always tracks, path-audits, and syntax-checks the driver. Frozen authority bytes,
-  production behavior, public-current examples, parent `.19`, and push do not move in `.19.8`.
+  production behavior, public-current examples, parent `.19`, and push do not move in `.19.8`; `.19.9` closes those
+  later public/parent boundaries without changing this runtime proof.
+
+### 4.8.7 `tools/check_mutation_public_surface.py` — current mutation teaching/no-drift
+
+- **WHAT:** inventories public Markdown, requires exact current mutation anchors, binds eleven semantic example
+  classes to the frozen write/bang/composition authorities, and rejects stale unsupported/non-vivifying claims.
+- **WHEN:** changing nested-write or `map_leaves!` public examples/status, any mutation-owning public document, or
+  the public Markdown inventory. Historical task/decision/Knowledge records are outside the stale-current scan.
+- **HOW:** `bash tools/run_python_project_data.sh tools/check_mutation_public_surface.py`.
+- **OUTPUT:** 63 public files, 14 governed documents, eleven semantic example classes, ten stale claims rejected,
+  and 50 independently rejected in-memory authority/document/status mutations.
+- **BOUNDARY:** `.19.9` adds only public-current teaching and recurring no-drift. It does not modify the three
+  frozen JSON authorities, runtime code, generated carriers, capability rows, facades, schemas, MCP, or CLI.
 
 ### 4.9 `tools/check_semantic_introspection_contract.py` — neutral model/query oracle
 

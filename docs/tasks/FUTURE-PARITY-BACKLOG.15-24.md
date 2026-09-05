@@ -721,7 +721,7 @@
   Commit: `FUTURE-PARITY-BACKLOG.18.3 - plan optional native parser acceleration`
 
 - ID: `FUTURE-PARITY-BACKLOG.19`
-  Status: `in progress; public closeout .19.9 next`
+  Status: `done; canonical-signoff-complete`
   Goal: Add portable explicit nested-write vivification and receiver-mutating method semantics without hidden
     reads, host-language aliasing, or backend drift.
   Children: `.19.0`, `.19.1`, `.19.2`, `.19.3`, `.19.4`, `.19.5`, `.19.6`, `.19.7`, `.19.8`, `.19.9`
@@ -729,6 +729,10 @@
     neutrally, uses `!` only for methods that genuinely mutate their receiver and have a clear non-mutating twin,
     preserves root-kind traversal and stable callback paths, reaches exact Perl/Rust/Dart/Julia/Lua parity, and
     closes capability/public/book/KM/no-drift proof before the parent is done.
+  Verification: **PASS 2026-09-05.** `.19.1-.19.8` freeze, implement, admit, and recur both exact mechanisms;
+    `.19.9` publishes eleven governed semantic example classes, adds 63-file/14-document public no-drift with 50
+    isolated mutations, preserves all frozen/runtime bytes, and closes the parent at capability 100/0/0 across six
+    runtime routes plus receipt-bound canonical and clean-HEAD pre-push proof.
 
 - ID: `FUTURE-PARITY-BACKLOG.19.0`
   Status: `done`
@@ -2214,7 +2218,8 @@
   Commit: `FUTURE-PARITY-BACKLOG.19.8 - register recurring mutation proof`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.9`
-  Status: `pending`
+  Status: `done; canonical-signoff-complete` (2026-09-05; task-tree-first from exact clean recurring-mutation-gate commit
+    `36ecb51939aa65e560136a24c309a1b336db1766`; no push)
   Goal: Publish the admitted mutation surface, close exhaustive public/book/Knowledge/no-drift proof and parent
     `.19`, then complete the batch push boundary.
   Dependencies: `.19.8`
@@ -2230,8 +2235,48 @@
     activation.
   Ownership: `.19.9` owns public-current content and checker, final no-drift/parent closeout, and the push boundary;
     it must not change the already-admitted contract or production runtime semantics.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `canonical` — this leaf changes public-current teaching and its recurring no-drift checker,
+    closes parent `.19`, and owns the outward push boundary.
+  Focused checks: current public anchor/stale-claim checker and semantic mutations; exact examples against frozen
+    write/bang/composition authorities and all six admitted runtime routes; generated-source, capability, language-
+    coverage, Knowledge Map, task/index, bounded histories/live state, memory, README routing, mdBook render,
+    whitespace, and all nine doctrines.
+  Canonical trigger: `public admission + parent closeout + push boundary` — the exact staged candidate must pass
+    receipt-bound canonical local CI with `LINKEDSPEC_RUN_MUTATION_MATRIX=1`; the committed clean HEAD must pass
+    pre-push proof before the completed batch is pushed once.
+  Checklist: [x] clean activation/task ownership [x] public-current inventory and exact examples
+    [x] recurring public checker and semantic mutations [x] six-runtime/support no-drift recomposition
+    [x] parent/roadmap/book/Knowledge/live synchronization [x] exact staged canonical signoff
+    [x] atomic commit/brief/clean pre-push boundary [x] one completed-batch push.
+  Activation evidence: exact `git status --short --untracked-files=all` is empty at
+    `36ecb51939aa65e560136a24c309a1b336db1766`; `git_message_brief.txt` is zero bytes; the promoted canonical receipt
+    matches that HEAD; `.19.8` is committed complete with the exact recurring driver and all-six-runtime proof;
+    reproducible mdBook output is absent, no background job remains, and no push occurred.
+  Public audit evidence: the deterministic public inventory contains 63 Markdown files, of which 14 own current
+    mutation semantics or status. The primary guide now covers eleven authority-derived classes: missing-container
+    creation, dense append/gap rejection, wrong-kind conflicts, segment/RHS evaluation order, original-shape
+    traversal, callback fields, receiver identity, rollback, detached results, callback-local vivification, and
+    post-commit continuation. The audit corrected one real current contradiction in `dart/README.md`, which still
+    claimed missing intermediates were not autovivified; historical task/decision/Knowledge/history prose remains
+    intact.
+  Governance evidence: new repository-routed `tools/check_mutation_public_surface.py` binds those examples and all
+    current anchors to exact policy strings from the three unchanged frozen authorities, rejects ten stale-current
+    claims, and rejects 50 isolated authority/document/status/inventory mutations. Canonical CI tracks and runs it
+    unconditionally; capability governance adds four owner/tracking/exact-one-execution mutations. The checker has
+    no allocator and advances only the maintained Python entrypoint census 37→38, retaining three Python temporary
+    owners and 15 shell allocator owners.
+  Focused signoff evidence: exact public 63/14/11/10/50, write 5/7/11/16/3/3 + eight composition + 105 mutations,
+    bang 4/14/5/10/8 + six callback/one continuation composition + 167/592 mutations, capability 20/100/0/0,
+    generated source 100/0/0, and language coverage 250/105+1/126 pass. The recurring driver then passes Perl 19,
+    Rust 9+5, Dart 9+11, Julia 406+496, and PUC Lua/LuaJIT 438+530 each plus all three support ledgers. Knowledge Map
+    940/7,979, storage 3/15/38, both bounded histories, rendered 82-file/15.7-MiB mdBook inspection, whitespace, and
+    all nine doctrines pass; generated book output is removed.
+  Canonical signoff evidence: the exact fully staged candidate passes receipt-bound canonical local CI with
+    `LINKEDSPEC_RUN_MUTATION_MATRIX=1`. The resulting committed clean HEAD passes the pre-push boundary and the
+    completed batch is pushed once. No production source, capability row, generated carrier, facade/schema/MCP/CLI
+    contract, root README, or frozen authority byte changes.
+  Verification: `canonical-signoff-complete`
+  Commit: `FUTURE-PARITY-BACKLOG.19.9 - close public mutation semantics`
 
 - ID: `FUTURE-PARITY-BACKLOG.20`
   Status: `proposed`

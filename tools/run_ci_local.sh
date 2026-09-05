@@ -43,6 +43,12 @@ check_no_untracked_ci_inputs() {
  local status_line
  local found=0
 
+ status_line=$(git status --short --untracked-files=all -- tools/check_mutation_public_surface.py)
+ if [[ "$status_line" == '?? '* ]]; then
+  printf '[ci] ERROR: untracked CI input: %s\n' "${status_line#?? }" >&2
+  found=1
+ fi
+
  while IFS= read -r status_line; do
   [[ "$status_line" == '?? '* ]] || continue
   printf '[ci] ERROR: untracked CI input: %s\n' "${status_line#?? }" >&2
@@ -161,6 +167,12 @@ audit_no_machine_specific_absolute_paths() {
  local path
  local matches
  local found=0
+
+ matches=$(grep -nE '/(Users|home)/[^[:space:]]*|[[:alpha:]]:\\' tools/check_mutation_public_surface.py || true)
+ if [[ -n "$matches" ]]; then
+  printf '[ci] ERROR: machine-specific absolute path(s) in tools/check_mutation_public_surface.py:\n%s\n' "$matches" >&2
+  found=1
+ fi
 
  while IFS= read -r path; do
   [[ -f "$path" ]] || continue
@@ -296,6 +308,7 @@ require_tracked_file tools/check_recognition_transaction_six_runtime.sh
 require_tracked_file tools/check_semantic_introspection_contract.py
 require_tracked_file tools/check_semantic_introspection_six_runtime.sh
 require_tracked_file tools/check_mcp_six_runtime.sh
+require_tracked_file tools/check_mutation_public_surface.py
 require_tracked_file tools/check_mutation_six_runtime.sh
 require_tracked_file tools/check_uniform_binding_contract.py
 require_tracked_file tools/check_uniform_binding_mutation_result_surface.py
@@ -974,6 +987,9 @@ bash tools/run_python_project_data.sh tools/check_uniform_binding_contract.py
 
 log "checking uniform-binding mutation-result public surface"
 bash tools/run_python_project_data.sh tools/check_uniform_binding_mutation_result_surface.py
+
+log "checking mutation public-current teaching and no-drift"
+bash tools/run_python_project_data.sh tools/check_mutation_public_surface.py
 
 log "checking final public aggregate-selector retirement admission"
 bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py

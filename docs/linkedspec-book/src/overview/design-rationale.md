@@ -59,8 +59,8 @@ But concision must not hide what is happening. The project direction is toward:
 - stronger documentation expectations (every surface explained, every contract explicit)
 
 The same principle governs two mutation extensions. Nested writes and receiver mutation are current on all five
-backends, `.19.7` admits both exact portable capability rows, and `.19.8` completes exact six-runtime recurrence.
-Final public-current no-drift and parent closeout remain `.19.9`.
+backends, `.19.7` admits both exact portable capability rows, `.19.8` supplies exact six-runtime recurrence, and
+`.19.9` closes their governed public surface and parent activity.
 
 First, the neutral nested-write contract fixes how assignment creates missing path containers. Perl, Rust, Dart,
 Julia, PUC Lua, and LuaJIT implement it. The authored form stays ordinary assignment:
@@ -95,8 +95,7 @@ unchanged contract under `.19.2.1`, `.19.3.1`, `.19.4.1`, `.19.5.1`, and `.19.6.
 emitted-source, independently analyzed/executed caller-package, and primary-CLI routes. Julia preserves it through
 native, reconstructed, generated-plan, emitted-module, and primary-CLI routes. Lua preserves it through those same
 supported route families on both ABIs. `.19.7` admits the exact nested-write capability row while preserving the
-frozen neutral contract, and `.19.8` completes exact six-runtime recurrence; final public-current closeout remains
-`.19.9`.
+frozen neutral contract, `.19.8` completes exact six-runtime recurrence, and `.19.9` closes public no-drift.
 
 Second, LinkedSpec reserves a Ruby-style trailing `!` for a method that genuinely updates its receiver. The only
 version-1 candidate is:
@@ -112,7 +111,8 @@ The non-bang `map_leaves()` returns a rebuilt tree without changing `tree`. On P
 root-kind rules, commits the rebuilt tree only after complete success, rebinds `tree`, and returns the updated
 value. The callback's `path` stays a complete copied root-to-leaf path; `value` stays a scoped value rather than a
 writable reference. Replacements are based on the original tree shape and are not recursively revisited in the
-same call. Lua preserves the same typed state on both PUC Lua and LuaJIT; portable admission remains pending.
+same call. Lua preserves the same typed state on both PUC Lua and LuaJIT; portable admission and public no-drift
+are complete.
 
 The neutral contract makes those details executable and all five backends consume it. Hash roots
 recurse only through hashes in sorted-key depth-first order; arrays inside them are leaves. Array roots recurse
@@ -150,8 +150,8 @@ intended guard/ordering observations; it does not add caller capture or arbitrar
 ### Composing nested writes with `map_leaves!`
 
 The third neutral contract composes the two mechanisms rather than inventing another mutation rule. On Perl,
-Rust, Dart, and Julia, a callback may vivify its detached `value` and return the updated result as the leaf replacement. For a hash-root
-traversal, an array value is a cross-kind leaf, so this future example invokes the callback once and does not
+Rust, Dart, Julia, PUC Lua, and LuaJIT, a callback may vivify its detached `value` and return the updated result as
+the leaf replacement. For a hash-root traversal, an array value is a cross-kind leaf, so this current example invokes the callback once and does not
 revisit the newly returned array subtree:
 
 ```text
@@ -211,8 +211,8 @@ contract. All five backends implement both nested creation and `map_leaves!`. Th
 remains identical on every backend; PUC Lua and LuaJIT carry the dedicated bang node through native,
 reconstructed, generated-plan, emitted-module, primary-CLI, and user-function-body execution.
 ADR `0036`, the two mechanism
-contracts plus their shared composition contract under `capability_conformance/`, and backlog `.19.1-.19.9` own
-the remaining backend and admission work.
+contracts plus their shared composition contract under `capability_conformance/`, and completed backlog
+`.19.1-.19.9` own the behavior, admission, recurrence, and public no-drift proof.
 
 ## 3. Actions are moving toward backend-neutral semantics
 

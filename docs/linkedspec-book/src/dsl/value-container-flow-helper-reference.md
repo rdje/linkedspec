@@ -364,6 +364,14 @@ These helpers mutate or dispatch rule state. The assignment forms also have the 
 | `return_undef()` | return `undef` | an optional rule branch has no value. |
 | `next()`; Perl also accepts `next` | skip the current action path | comments or ignored delimiters should be recognized without adding to the current accumulator. |
 | `exit_now(status)` | exit immediately with an optional status | a fatal parse-time diagnostic should stop execution after emitting its message. |
+
+Nested lvalue paths use the same assignment surface on every backend. For example,
+`document["sections"][0]["title"] = "Intro"` creates an absent harray/array/harray path, while an array write may
+replace an existing index or append exactly at `length`. A larger index raises `nested_write_array_gap`; a bound
+null, scalar, or other wrong-kind intermediate raises `nested_write_kind_conflict`. All segments evaluate once
+left-to-right, then the RHS once, before isolated structural validation. Success publishes once and yields a
+detached updated root; reads never create containers.
+
 Canonical child-result pattern:
 
 ```text
@@ -1005,8 +1013,8 @@ The receiver guard is released before fluent continuation. Therefore a continuat
 updated value, and its later failure does not undo the already completed receiver commit. Lua carries this state
 through native, reconstructed, generated-plan, emitted-module, primary-CLI, and user-function-body routes on both
 ABIs. `map_leaves!(items)`, temporary or nested receivers, other bang methods, and arbitrary user-defined bang
-functions are outside v1. `.19.7` admits the exact portable capability row and `.19.8` completes exact six-runtime
-recurrence; public-current closeout remains `.19.9`.
+functions are outside v1. `.19.7` admits the exact portable capability row, `.19.8` completes exact six-runtime
+recurrence, and `.19.9` closes current public no-drift for the exact v1 surface.
 
 The terse hash-index operator is the statement form written with the key next to the target:
 

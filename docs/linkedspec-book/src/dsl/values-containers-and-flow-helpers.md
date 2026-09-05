@@ -97,7 +97,39 @@ commit. Reads remain pure and never create containers.
 
 This behavior is implemented on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Lua carries the same typed path
 through native, reconstructed, generated-plan, emitted-module, and primary-CLI routes. `.19.7` admits its exact
-portable capability row and `.19.8` completes exact six-runtime recurrence; public-current closeout remains `.19.9`.
+portable capability row, `.19.8` supplies exact six-runtime recurrence, and `.19.9` closes public no-drift.
+
+### Nested-write creation, dense arrays, conflicts, and evaluation order
+
+An absent root and all unambiguous intermediates can be created by one write:
+
+```text
+document["sections"][0]["title"] = "Intro";
+```
+
+The result is `{ "sections" : [{ "title" : "Intro" }] }`. The string segment creates an harray, the integer
+segment creates a dense array, and the final string creates the leaf field. A write to an existing array may
+replace an element or append exactly at its current length:
+
+```text
+document = ["a"];
+document[1] = "b";
+```
+
+That produces `["a", "b"]`. Starting again from `["a"]`, `document[2] = "gap"` fails with
+`nested_write_array_gap` and leaves `document` as `["a"]`; LinkedSpec never invents an element at index `1`.
+Likewise, this fails with `nested_write_kind_conflict` and preserves the original scalar:
+
+```text
+document = { "item" : "scalar" };
+document["item"]["name"] = "new";
+```
+
+For `document[first_segment()][second_segment()] = rhs_value()`, the two segment expressions run exactly once in
+left-to-right order, then the RHS runs exactly once. Only then does the runtime snapshot the target and validate
+the structure on an isolated copy. Completed expression side effects remain ordinary effects if validation later
+fails, but no partial container path is published. A successful assignment publishes once and yields a detached
+updated-root value: later mutation of that result cannot alias the stored `document`.
 
 ## Pushing values
 
@@ -456,12 +488,79 @@ the receiver binding directly. Assignment, bracket write, nested bang, mutation 
 binding-target array pipelines aimed at the active receiver fail with `receiver_mutation_reentrant`; unrelated
 bindings and distinct same-spelling scoped bindings remain legal. Callback failure leaves the receiver unchanged.
 
+Traversal follows the receiver's original root kind and shape. For an array root, this records the callback paths
+`0`, `1/0`, and `2`; the nested harray at index `2` is one opaque cross-kind leaf:
+
+```text
+items = ["A", ["B"], { "opaque" : "C" }];
+paths = [];
+
+updated = items.map_leaves!() {
+  paths += join_values("/", path);
+  return(value)
+};
+```
+
+Each callback receives detached `value` and `path`, plus `depth` and `index` for this array-root traversal
+(`key` is supplied instead for an harray root). Returning a new array beneath an array root, or a new harray
+beneath an harray root, replaces the current leaf but does not add work to this invocation.
+
+The guard follows resolved binding identity. This example is rejected before the bracket segment or RHS can run,
+and `tree` remains exactly as it was before the bang call:
+
+```text
+tree.map_leaves!() {
+  tree["x"] = value;
+  return(value)
+};
+```
+
+The same rollback applies when a callback itself fails after earlier leaf results were computed: no rebuilt leaf
+is committed, although ordinary effects already made to unrelated bindings remain. A same-spelling local or
+function parameter is a different binding identity and remains legal.
+
+The bang call returns a detached copy of the committed root. Consequently, mutating `updated` after this call
+does not mutate `tree` again:
+
+```text
+updated = tree.map_leaves!() {
+  return(lowercase(value))
+};
+updated["extra"] = "copy-only";
+```
+
+Nested write-vivification composes inside the detached callback leaf value. For
+`tree = { "leaf" : [] }`, this calls the callback once, creates the replacement, and does not revisit it:
+
+```text
+tree.map_leaves!() {
+  value[0]["name"] = "A";
+  return(value)
+};
+```
+
+The committed result is `{ "leaf" : [{ "name" : "A" }] }`. Continuation begins only after that atomic commit
+and after guard release. In this exact boundary case, the later dense-array-gap failure does not undo the already
+published leaf update:
+
+```text
+tree = { "a" : "A" };
+tree.map_leaves!() {
+  return(cat(value, "!"))
+}.with() {
+  tree["extra"][2] = "X";
+  return(value)
+};
+```
+
+The call reports `nested_write_array_gap`, while `tree` remains `{ "a" : "A!" }`.
+
 Only the exact `binding_name.map_leaves!() { block }` form is current. Function-form bang calls,
 temporary/nested receivers, `walk_leaves!`, `reduce_leaves!`, and arbitrary user-defined bang functions are not
 accepted. Lua preserves the typed receiver, callback, and continuation through native, reconstructed,
 generated-plan, emitted-module, primary-CLI, and user-function-body execution on both ABIs. `.19.7` admits the
-exact portable capability row and `.19.8` completes exact six-runtime recurrence; public-current no-drift remains
-owned by `.19.9`.
+exact portable capability row, `.19.8` completes exact six-runtime recurrence, and `.19.9` closes the governed
+public surface without widening the syntax.
 
 ## Reading and copying collections
 

@@ -14,7 +14,7 @@ answers:
   - "does continuation nested-write failure roll back the map_leaves bang commit"
   - "what is the current six-runtime boundary for composed write and map_leaves bang source"
 date: 2026-08-31
-status: accepted neutral composition; implementation, portable capability, and recurring proof complete; public closeout pending
+status: accepted neutral composition; implementation, admission, recurrence, and public closeout complete
 tags: [dsl, mutation, vivification, map-leaves, composition, identity, atomicity, diagnostics, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.19.1.3 adds capability_conformance/write_map_leaves_composition_contract.json without a new executable entrypoint. The existing write checker validates eight embedded nested writes; the existing mutation checker executes six callback compositions and one post-commit continuation, retains 167 base mutations, and rejects 593 composition scalar/container-shape mutations. Exact primary-command probes return the non-bang control {\"leaf\":[]} on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. The bang source stops before callback nested-write lowering: Perl returns null; Rust warns at the stopped map_leaves identifier then returns null; Dart, Julia, and both Lua ABIs exit 1 with the generic parser-invocation boundary. No backend or capability is admitted."
 evidence_update_2026_08_31_perl_write_boundary: "FUTURE-PARITY-BACKLOG.19.2.1 makes the nested-write half executable on Perl but leaves map_leaves! parsing/runtime untouched. The composed callback/continuation cases therefore remain neutral-only on every backend until .19.2.2 and later backend/admission leaves."
@@ -28,6 +28,7 @@ evidence_update_2026_09_04_lua_write_half: "FUTURE-PARITY-BACKLOG.19.6.1 impleme
 evidence_update_2026_09_04_lua_composition: "FUTURE-PARITY-BACKLOG.19.6.2 executes all six callback and one continuation composition boundaries in shared Lua on PUC Lua and LuaJIT. Callback-local and unrelated vivification use the .19.6.1 carrier, same-receiver guard precedence wins before selectors/RHS, same-spelling function parameters remain distinct, non-bang aliases remain isolated, and the zero-regex Top loop selects Done's regex. The unchanged composition oracle rejects all 592 mutations."
 evidence_update_2026_09_04_portable_admission: "FUTURE-PARITY-BACKLOG.19.7 cites this unchanged composition authority as a required dependency of both admitted mutation capability rows rather than creating a third capability. The capability checker pins the composition ID plus both required authority IDs, repository-relative paths, and canonical JSON digests, while retaining the historical future-neutral status string. Recurring six-runtime execution remains .19.8 and public-current closeout remains .19.9."
 evidence_update_2026_09_05_recurring_proof: "FUTURE-PARITY-BACKLOG.19.8 executes this unchanged composition across Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT in one repository-routed driver. The capability checker digest-binds all three authorities, exact route and support-ledger order, owner/storage/driver topology, and exact-one canonical CI registration through 17 recurring mutations. Public-current closeout remains .19.9."
+evidence_update_2026_09_05_public_closeout: "FUTURE-PARITY-BACKLOG.19.9 binds current callback-local nested-write and post-commit continuation examples back to this unchanged composition authority. The public checker requires both semantic classes and exact policy text, rejects stale rollout claims, and preserves all three frozen JSON authorities byte-for-byte."
 reverify: "bash tools/check_mutation_six_runtime.sh && bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py && bash tools/run_python_project_data.sh tools/check_map_leaves_mutation_contract.py"
 ---
 
@@ -65,7 +66,7 @@ preserve the boundaries above, including generated Rust/Dart carriers, Julia's g
 routes, and Lua's shared typed reconstructed/generated/emitted carrier. The non-bang control remains unchanged on
 all six runtime routes. It uses a zero-regex `Top` whose loop dispatches to `Done`; only `Done` owns the matching
 regex. `.19.7` admits two portable capability rows that share this authority and `.19.8` completes exact
-six-runtime recurrence; `.19.9` retains public-current closeout.
+six-runtime recurrence; `.19.9` closes current public teaching and no-drift.
 
 Related: ADR `0036`, [[write-vivification-receiver-mutation-direction]], and
 [[tool-project-data-ssd-storage]]. The resolved carrier conflict is

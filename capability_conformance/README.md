@@ -33,7 +33,7 @@ expression failures, three non-creating reads, detachment, eight writes from the
 typed native and supported reconstructed/generated/emitted carriers; PUC Lua and LuaJIT execute the shared Lua
 consumer independently. `.19.7` admits `language.nested_write_vivification` with exact production/test references
 for all five backends and immutable composition-authority linkage. Exact six-runtime recurrence is complete under
-`.19.8`, and final public-current no-drift remains `.19.9`.
+`.19.8`; `.19.9` closes current public no-drift without rewriting this frozen authority.
 
 ## Neutral `map_leaves!` receiver mutation
 
@@ -63,7 +63,7 @@ same authority through typed native and supported reconstructed/generated/emitte
 LuaJIT independently executing the shared Lua consumer. `.19.7` admits
 `language.map_leaves_receiver_mutation` with exact production/test references on all five backends. The byte-
 identical non-bang control remains unchanged; exact six-runtime recurrence is complete under `.19.8`, and final
-public-current no-drift remains `.19.9`.
+public-current no-drift is closed under `.19.9`.
 
 ## Neutral write/receiver-mutation composition
 
@@ -92,7 +92,7 @@ Dart, Julia, PUC Lua, and LuaJIT execute the bang form and its nested-write comp
 dependency shared by the two admitted capability rows rather than a third capability. The capability checker pins
 both neutral authority IDs, formats, freeze statuses, canonical JSON digests, exact row order, five backend proof
 sets, and the Lua dual-ABI note through 16 rejected admission mutations. `.19.8` now supplies the recurring
-composed driver; `.19.9` owns final public-current examples and no-drift.
+composed driver; `.19.9` closes final public-current examples and no-drift.
 
 ## Recurring mutation proof
 
@@ -115,6 +115,24 @@ storage substitution, owner state, driver omission, CI omission/duplication, and
 Canonical CI always requires, path-audits, and syntax-checks the driver; `LINKEDSPEC_RUN_MUTATION_MATRIX=1`
 executes it exactly once. This recurring boundary changes no capability row, frozen authority byte, production
 behavior, or public-current example.
+
+## Public mutation surface
+
+`tools/check_mutation_public_surface.py` binds the current public teaching back to the three frozen authorities.
+It inventories the bounded root/component/mdBook Markdown surface, requires exact current anchors in every
+mutation-owning document, verifies examples for creation, dense arrays, conflicts, evaluation order, original-
+shape traversal, callback fields, receiver identity, rollback, detachment, composition, and post-commit
+continuation, and rejects stale unsupported/non-vivifying claims. It deliberately excludes task, decision,
+Knowledge, and history records from its stale-current scan so historically accurate freeze/rollout evidence is
+not rewritten. Run:
+
+```bash
+bash tools/run_python_project_data.sh tools/check_mutation_public_surface.py
+```
+
+Canonical local CI tracks and runs this checker on every invocation. The capability checker pins its `.19.9`
+owner, repository-relative path, and exact-one CI execution. This adds documentation no-drift proof only: both
+capability rows remain unchanged at the 20-capability / 100-pass / 0-partial / 0-gap census.
 
 `mcp_semantic_transport_contract.json` (`linkedspec-mcp-transport-v1`) is the single backend-neutral machine
 contract for LinkedSpec's modern MCP `2026-07-28` stdio projection. Its root-relative artifact inventory pins the

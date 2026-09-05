@@ -9,6 +9,35 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-09-05 (`FUTURE-PARITY-BACKLOG.19.9` — public mutation closeout): public teaching is a separate verification
+  layer from frozen neutral authority, backend implementation, portable admission, and six-runtime recurrence.
+  Close it with current examples plus a recurring public checker; do not rewrite historical task/decision evidence
+  or the three frozen `future-neutral` JSON files.
+- Inventory public Markdown deterministically: six fixed root/component surfaces, every component README, and all
+  mdBook source pages produce 63 unique files. Fourteen documents own current mutation semantics or status; fail on
+  any inventory change so new public pages receive deliberate classification.
+- Bind teaching to exact authority policy strings rather than copying a second semantic model. Eleven public
+  example classes cover creation, density, conflicts, evaluation, original shape, callback fields, receiver
+  identity, rollback, detachment, callback-local composition, and post-commit continuation.
+- The stale-current scan deliberately excludes task trees, decisions, Knowledge cards, and archived history. Those
+  records truthfully describe earlier freeze/rollout boundaries; current root/component/book guidance must not say
+  either mechanism remains non-vivifying, unsupported, or pending.
+- The audit found one real current drift: `dart/README.md` still said nested writes did not autovivify missing
+  intermediates after the Dart implementation and portable admission. Correct that claim and lock the replacement
+  anchor instead of classifying the contradiction as harmless history.
+- A receiver bang updates leaf values by atomically rebinding the named receiver after complete original-shape
+  traversal. It does not permit arbitrary bang identifiers, temporary/nested receivers, or direct same-receiver
+  writes during callbacks. The active guard compares resolved binding identity before evaluating an attempted
+  receiver write; unrelated and distinct same-spelling bindings remain ordinary.
+- The public checker performs 50 isolated in-memory mutations across authority text, document anchors, example
+  anchors, stale claims, and inventory. Capability governance adds four independent owner/tracking/execution
+  mutations, preventing the documentation proof from becoming an untracked or uncalled script.
+- Route the new Python checker through `tools/run_python_project_data.sh`. It owns no temporary allocator and moves
+  only the exact maintained-entrypoint census 37→38; three Python temporary owners and 15 shell allocators remain
+  unchanged. Canonical CI retains repository-relative paths and same-volume storage throughout.
+- Parent `.19` closes only after the exact six-runtime driver remains green on Perl, Rust, Dart, Julia, PUC Lua,
+  and LuaJIT, all support ledgers agree at capability 100/0/0, the sole-facing book renders, and the staged
+  receipt-bound canonical gate passes. No production or frozen-authority byte moves in this leaf.
 - 2026-09-05 (`FUTURE-PARITY-BACKLOG.19.8` — recurring mutation proof): keep the three frozen JSON authorities
   byte-stable. Later capability/recurrence truth belongs in exact external governance that pins their historical
   IDs, status strings, paths, canonical digests, and dependency/order topology.

@@ -2,23 +2,27 @@
 
 ## Current Activity
 
-- Recurring mutation proof `.19.8` is complete across Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. The next leaf
-  is public-current closeout `.19.9`, which is not yet activated. Production behavior, frozen contract bytes,
-  public-current examples, parent `.19`, and the queued Rust warning remediation remain unchanged.
+- Mutation parent `.19` is closed. `.19.9` publishes eleven authority-derived example classes and adds recurring
+  public no-drift across 63 Markdown files / 14 governed documents / ten stale-current denials / 50 mutations.
+  Six-runtime behavior, capability 100/0/0, production code, generated carriers, and all frozen contract bytes are
+  unchanged; the next clean PNT frontier is `RUST-MUTATION-TESTING.1`.
 
 ## Latest Completed Slice
 
-- `.19.8` adds one repository-routed recurring driver for both mutation authorities and their composition. Exact
-  ordered six-runtime consumers, three support ledgers, 17 fail-closed recurrence mutations, all nine doctrines,
-  mdBook, and receipt-bound staged canonical CI pass without production or public-current movement.
+- `.19.9` closes current nested-write/`map_leaves!` teaching, repairs the stale Dart non-vivification claim, binds
+  eleven semantic classes to the frozen authorities through 50 public mutations, and closes parent `.19` without
+  production or frozen-byte movement.
 
 ## Next Action
 
-- From the clean `.19.8` commit, activate public-current closeout `.19.9` task-tree-first. Publish exact examples,
-  prove public no-drift, close parent `.19`, complete the push boundary, and push; warning census `.1` stays
-  durably queued and non-blocking.
+- From the clean pushed `.19.9` commit, activate `RUST-MUTATION-TESTING.1` task-tree-first and add its safe manual
+  configuration/command surface before any mutation pilot. Warning cleanup `.1` stays durably queued.
 
 ## Recent Completions
+
+- `2026-09-05` — `.19.9` publishes exact current mutation examples, governs 63 public files / 14 documents / eleven
+  semantic classes through 50 mutations, passes six runtime routes plus canonical/pre-push proof, and closes parent
+  `.19` without production or frozen-authority changes.
 
 - `2026-09-05` — `.19.8` registers one exact recurring mutation driver across six runtime routes, frozen
   authority/composition digests, support ledgers, project-local storage, exact-one canonical CI, and 17 rejected
@@ -74,9 +78,6 @@
 
 - `2026-08-31` — `.19.2.2` audit proves the frozen function carriers conflict with fresh local scope and records
   the exact no-capture probe; option A later corrects the carriers without language expansion.
-
-- `2026-08-31` — `.19.2.1` implements Perl write vivification from the frozen 5/7/11/16 fixture with typed
-  evaluated paths, presence-aware rules/functions, isolated dense commit, detachment, and no non-Perl admission.
 
 ## History
 

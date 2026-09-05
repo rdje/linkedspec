@@ -14,7 +14,7 @@ answers:
   - "does continuation failure roll back map_leaves bang"
   - "why do current backends reject map_leaves bang differently"
 date: 2026-08-31
-status: accepted neutral contract; five-backend implementation, portable capability, and six-runtime recurrence complete
+status: accepted neutral contract; implementation, admission, recurrence, and public closeout complete
 tags: [language, mutation, map-leaves, receiver-methods, traversal, reentrancy, diagnostics, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.19.1.2 adds capability_conformance/map_leaves_mutation_contract.json and tools/check_map_leaves_mutation_contract.py. The independent checker passes 4 valid syntax, 14 invalid syntax, 5 exclusions, 10 successes, 8 pre-commit failures, continuation/shadow/guard-release/nonbang/detachment proof, and 167 rejected mutations. A checked-in action-edge control returns the same nested value on Perl/Rust/Dart/Julia/Lua. Its minimal one-token bang twin becomes null on Perl/Rust (Rust warns) and a generic parser-invocation failure on Dart/Julia/Lua. Parser and Perl ActionIR/toolbox inspection prove all current fluent method grammars are identifier-only and Perl classifies the bang segment as raw_perl/invalid_fluent_chain. No backend behavior or capability is admitted."
 evidence_update_2026_08_31_composition: "FUTURE-PARITY-BACKLOG.19.1.3 makes the existing checker also execute six shared callback compositions and one post-commit continuation against the unchanged write-vivification authority. It retains 167 base mutations and rejects 593 composition scalar/container-shape mutations. Exact composed current probes preserve the same pre-runtime bang boundary on six routes; no backend behavior is admitted."
@@ -28,6 +28,7 @@ evidence_update_2026_09_03_julia_implementation: "FUTURE-PARITY-BACKLOG.19.5.2 i
 evidence_update_2026_09_04_lua_implementation: "FUTURE-PARITY-BACKLOG.19.6.2 implements the dedicated typed carrier and stable identity-guarded copy-on-write runtime in shared Lua. The permanent 530-assertion suite passes unchanged on PUC Lua and LuaJIT across every frozen syntax, behavior, composition, 18 guarded-write, malformed-state, public SpecFile reconstruction, generated-plan, emitted-module, primary-CLI, and user-function-body boundary. The unchanged neutral oracle rejects 167 base and 592 composition mutations."
 evidence_update_2026_09_04_portable_admission: "FUTURE-PARITY-BACKLOG.19.7 admits language.map_leaves_receiver_mutation as one exact language-runtime capability across Perl, Rust, Dart, Julia, and shared Lua, with independent PUC Lua/LuaJIT execution recorded. The capability checker pins this neutral authority's ID, format, unchanged future-neutral status, canonical JSON digest, shared composition dependency, exact backend references, row order, and owner state through 16 dedicated admission mutations. Current census is 20 capabilities / 100 pass / 0 partial / 0 gap; recurrence remains .19.8 and public-current closeout remains .19.9."
 evidence_update_2026_09_05_recurring_proof: "FUTURE-PARITY-BACKLOG.19.8 runs this unchanged authority and its composition before exact consumers on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT, then all three support ledgers. The recurring topology pins this file's historical status and canonical digest through 17 fail-closed mutations and exact-one canonical CI registration. Public-current closeout remains .19.9."
+evidence_update_2026_09_05_public_closeout: "FUTURE-PARITY-BACKLOG.19.9 binds current public original-shape, callback-field, receiver-identity, rollback, and detached-result examples back to this unchanged authority. The public checker requires those example classes and exact policy text, rejects stale unsupported claims, and preserves this frozen JSON byte-for-byte."
 reverify: "bash tools/check_mutation_six_runtime.sh && bash tools/run_python_project_data.sh tools/check_map_leaves_mutation_contract.py"
 ---
 
@@ -64,7 +65,7 @@ through `SpecFile` reconstruction, validated generated plans, an independently i
 primary CLI. Shared Lua preserves it through native, public `SpecFile` reconstruction, generated-plan,
 independently loaded emitted-module, primary-CLI, and user-function-body routes on both ABIs. The exact non-bang
 control remains unchanged on all five backends. `.19.7` admits the exact portable capability row and `.19.8`
-completes exact six-runtime recurrence; public-current closeout remains `.19.9`.
+completes exact six-runtime recurrence; `.19.9` closes current public teaching and no-drift.
 
 Composition with nested write-vivification is frozen separately by [[write-map-leaves-neutral-composition]].
 The implementation-time function-scope conflict in two composition carriers was resolved without caller capture;

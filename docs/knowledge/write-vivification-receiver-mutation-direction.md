@@ -16,7 +16,7 @@ answers:
   - does map_leaves bang traverse replacement subtrees immediately
   - when will write vivification and map_leaves bang be implemented
 date: 2026-07-15
-status: accepted direction; implementation, portable capability, and recurring proof complete; public closeout pending
+status: accepted direction; implementation, admission, recurrence, and public closeout complete
 tags: [dsl, mutation, autovivification, receiver-methods, traversal, paths, portability, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.19.0; ADR 0036; Knowledge Map cards for nested writes/uniform binding/five-backend traversal; source audit of Perl MethodExpr/AST Parser, Rust expr parser, Dart/Julia/Lua ActionIR parsers; Perl direct nested-write probe, Rust terse_11_4 (3/3), Dart exact no-autovivification test, Julia complete local tests with a writable depot stacked before installed packages, and Lua 121/121 on PUC Lua/LuaJIT. The first Julia empty-depot-only attempt failed on blocked registry resolution; the stacked-depot rerun passed. No behavior changed."
 evidence_update_2026_08_30_neutral_write_contract: "FUTURE-PARITY-BACKLOG.19.1.1 freezes linkedspec-write-vivification-v1 before backend code. One assign_nested_access node owns every one-or-more-segment write; evaluated strings select harrays and nonnegative integers select arrays; syntax and structural diagnostics carry authored Unicode-scalar spans; segments then RHS evaluate before isolated validation; completed same-binding expression side effects settle before the snapshot; dense creation, atomic commit, and detached results are executable through an independent 105-mutation checker. Current Perl/Rust/Dart/Julia/Lua behavior stays non-vivifying."
@@ -31,6 +31,7 @@ evidence_update_2026_09_04_lua_write: "FUTURE-PARITY-BACKLOG.19.6.1 implements t
 evidence_update_2026_09_04_lua_map_leaves: "FUTURE-PARITY-BACKLOG.19.6.2 implements the unchanged map_leaves! mechanism in shared Lua through one typed receiver/callback/continuation carrier, stable scoped binding identities, pre-evaluation receiver guards, copied original-shape traversal, atomic publication, detached results, and post-commit continuation. The permanent suite passes 530 assertions per ABI across native, public SpecFile reconstruction, generated-plan, emitted-module, primary-CLI, user-function-body, and complete composition routes. All five backend implementations are complete; recurring proof and portable/public admission remain pending."
 evidence_update_2026_09_04_portable_admission: "FUTURE-PARITY-BACKLOG.19.7 admits language.nested_write_vivification and language.map_leaves_receiver_mutation as exact portable capabilities. Their five-backend proof sets and shared Lua dual-ABI note advance the manifest to 20 capabilities / 100 pass / 0 partial / 0 gap; 16 dedicated checker mutations pin the frozen authorities and composition dependency without changing production behavior. Recurring proof remains .19.8 and public-current closeout remains .19.9."
 evidence_update_2026_09_05_recurring_proof: "FUTURE-PARITY-BACKLOG.19.8 composes both exact mechanisms through one fixed Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT route and three support ledgers. Seventeen fail-closed mutations pin the historical authority digests/statuses, deterministic order, project-data routing, and exact-one canonical CI registration. Public-current teaching, parent closeout, and push remain .19.9."
+evidence_update_2026_09_05_public_closeout: "FUTURE-PARITY-BACKLOG.19.9 publishes exact current examples, adds one recurring checker over 63 public files and 14 governed documents, rejects 50 isolated authority/document/status mutations, and closes parent .19 without changing production or frozen contract bytes."
 reverify: "bash tools/check_mutation_six_runtime.sh && rg -n '0036|FUTURE-PARITY-BACKLOG\\.19|map_leaves!|write-only|arrays remain dense' docs/decisions/0036-write-vivification-and-receiver-mutation.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src/overview/design-rationale.md"
 ---
 
@@ -63,7 +64,7 @@ function-form `map_leaves!(tree)`, arbitrary bang-suffixed identifiers, temporar
 or nested-access v1 receivers, and short traversal aliases are excluded. Exact neutral diagnostics and re-entrant
 same-receiver behavior belong to `.19.1`. All five backends implement `map_leaves!`; shared Lua joined the first
 four under `.19.6.2`. `.19.7` admits both exact portable capability rows, and `.19.8` completes exact six-runtime
-recurrence. Public-current teaching, final no-drift, parent closeout, and push remain `.19.9`.
+recurrence. `.19.9` closes current public teaching, final no-drift, and parent `.19`.
 
 ## Links
 

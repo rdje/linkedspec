@@ -10,6 +10,26 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-05 — FUTURE-PARITY-BACKLOG.19.9 — close public mutation semantics
+
+- Published exact current nested-write and `map_leaves!` semantics across the governed public surface. The primary
+  mdBook guide now demonstrates missing-container creation, dense append and gap rejection, wrong-kind conflicts,
+  evaluation order, original-shape traversal, callback fields, identity guarding, rollback, detached results,
+  callback-local nested-write composition, and post-commit continuation.
+- Corrected current-surface drift in the Dart guide and design/helper status prose: all five backends implement both
+  admitted mechanisms, while non-bang `map_leaves` remains a detached non-mutating value form.
+- Added `tools/check_mutation_public_surface.py`. It inventories 63 public Markdown files, requires exact anchors in
+  14 mutation-owning documents, binds eleven semantic example classes to the unchanged frozen authorities, rejects
+  ten stale-current claims, and rejects 50 isolated authority/document/status mutations.
+- Registered the checker unconditionally in canonical CI and pinned its `.19.9` owner, tracked path, and exact-one
+  execution through four capability-governance mutations. Its repository-routed Python entrypoint advances only
+  the storage census from 37 to 38; temporary-owner counts remain three Python and 15 shell.
+- Aligned ADR `0036`, its index, Knowledge Map cards, both roadmaps, architecture, Toolbox, capability guidance,
+  task/index, live continuity, bounded histories, and the sole-facing mdBook. Parent `.19` closes without changing
+  runtime production code, capability rows, generated carriers, or any of the three frozen JSON authority bytes.
+- Re-ran the exact Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT mutation matrix plus generated-source, capability, and
+  language ledgers, then passed focused storage/doctrine/book proof and receipt-bound staged canonical CI.
+
 ## 2026-09-05 — FUTURE-PARITY-BACKLOG.19.8 — register recurring mutation proof
 
 - Added one repository-routed driver that validates the unchanged nested-write and `map_leaves!`/composition

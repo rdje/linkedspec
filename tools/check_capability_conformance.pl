@@ -278,6 +278,10 @@ my $mutation_recurring_owner = 'FUTURE-PARITY-BACKLOG.19.8';
 my $mutation_recurring_driver = 'tools/check_mutation_six_runtime.sh';
 my $mutation_recurring_switch = 'LINKEDSPEC_RUN_MUTATION_MATRIX';
 my $mutation_recurring_storage_initializer = 'tools/project_data_env.sh';
+my $mutation_public_owner = 'FUTURE-PARITY-BACKLOG.19.9';
+my $mutation_public_checker = 'tools/check_mutation_public_surface.py';
+my $mutation_public_command =
+ 'bash tools/run_python_project_data.sh tools/check_mutation_public_surface.py';
 my @expected_mutation_recurring_authority_order = qw(
  write_vivification
  map_leaves_mutation
@@ -557,6 +561,22 @@ sub validate_mutation_recurring_gate {
   unless substring_count($ci_source, $ci_audit) == 1;
  fail('mutation recurring driver must have one inventory and one execution-time tracked-file check')
   unless substring_count($ci_source, "require_tracked_file $mutation_recurring_driver") == 2;
+}
+
+sub validate_mutation_public_gate {
+ my ($task_status, $ci_source, $check_file) = @_;
+ fail("mutation public owner '$mutation_public_owner' is not tracked")
+  unless exists $task_status->{$mutation_public_owner};
+ fail("mutation public owner '$mutation_public_owner' must be active or done")
+  unless $task_status->{$mutation_public_owner} eq 'active'
+   || $task_status->{$mutation_public_owner} eq 'done';
+ require_repo_path('mutation public checker', $mutation_public_checker) if $check_file;
+ fail('mutation public checker must be executable')
+  if $check_file && !-x File::Spec->catfile($repo_root, split m{/}, $mutation_public_checker);
+ fail('mutation public checker must have exactly one tracked-file registration')
+  unless substring_count($ci_source, "require_tracked_file $mutation_public_checker") == 1;
+ fail('mutation public checker must execute exactly once in canonical CI')
+  unless substring_count($ci_source, $mutation_public_command) == 1;
 }
 
 sub validate_mutation_capabilities {
@@ -1183,6 +1203,45 @@ sub mutation_recurring_gate_checks {
  return scalar @mutations;
 }
 
+sub mutation_public_gate_checks {
+ my ($task_sources, $ci_source) = @_;
+ my $task_status = parse_task_statuses($task_sources);
+ my @mutations;
+
+ push @mutations, ['mutation_public_owner_status', sub {
+  my $candidate_sources = mutate_task_status_line(
+   $task_sources,
+   $mutation_public_owner,
+   "  Status: `pending`\n",
+  );
+  validate_mutation_public_gate(parse_task_statuses($candidate_sources), $ci_source, 0);
+ }];
+ push @mutations, ['mutation_public_tracking_omission', sub {
+  my $candidate_source = $ci_source;
+  my $marker = "require_tracked_file $mutation_public_checker";
+  my $position = index($candidate_source, $marker);
+  die "mutation setup could not find public checker registration exactly once\n"
+   unless $position >= 0 && substring_count($candidate_source, $marker) == 1;
+  substr($candidate_source, $position, length($marker), '');
+  validate_mutation_public_gate($task_status, $candidate_source, 0);
+ }];
+ push @mutations, ['mutation_public_ci_omission', sub {
+  my $candidate_source = $ci_source;
+  my $position = index($candidate_source, $mutation_public_command);
+  die "mutation setup could not find public checker command exactly once\n"
+   unless $position >= 0 && substring_count($candidate_source, $mutation_public_command) == 1;
+  substr($candidate_source, $position, length($mutation_public_command), '');
+  validate_mutation_public_gate($task_status, $candidate_source, 0);
+ }];
+ push @mutations, ['mutation_public_ci_duplication', sub {
+  my $candidate_source = $ci_source . "\n$mutation_public_command\n";
+  validate_mutation_public_gate($task_status, $candidate_source, 0);
+ }];
+
+ expect_mutation_failure(@$_) for @mutations;
+ return scalar @mutations;
+}
+
 sub public_projection_mutation_checks {
  my ($contract, $sources) = @_;
  my @mutations;
@@ -1297,6 +1356,8 @@ my $mutation_recurring_count = mutation_recurring_gate_checks(
  $mutation_recurring_driver_source,
  $canonical_ci_source,
 );
+validate_mutation_public_gate($task_status, $canonical_ci_source, 1);
+my $mutation_public_count = mutation_public_gate_checks($sources, $canonical_ci_source);
 my $public_contract = expected_public_contract();
 my $public_sources = public_projection_sources();
 validate_public_contract($public_contract, $public_sources);
@@ -1308,7 +1369,8 @@ my $language_surface_mutation_count = language_surface_mutation_checks(
  $language_surface_contract, $manifest, $language_surface_source
 );
 
-printf "capability-conformance: OK (schema v2; %d capabilities; backend states pass=%d partial=%d gap=%d; %d exclusions; %d governance mutations; %d mutation capabilities; %d mutation-admission mutations; %d mutation-recurring mutations; %d governed projections; %d public mutations; %d language-surface mutations)\n",
+printf "capability-conformance: OK (schema v2; %d capabilities; backend states pass=%d partial=%d gap=%d; %d exclusions; %d governance mutations; %d mutation capabilities; %d mutation-admission mutations; %d mutation-recurring mutations; %d mutation-public-gate mutations; %d governed projections; %d public mutations; %d language-surface mutations)\n",
  scalar(@{$manifest->{capabilities}}), @{$counts}{qw(pass partial gap)}, scalar(@{$manifest->{excluded_or_future}}),
  $mutation_count, scalar(@expected_mutation_capabilities), $mutation_admission_count, $mutation_recurring_count,
- scalar(@expected_public_projections), $public_mutation_count, $language_surface_mutation_count;
+ $mutation_public_count, scalar(@expected_public_projections), $public_mutation_count,
+ $language_surface_mutation_count;

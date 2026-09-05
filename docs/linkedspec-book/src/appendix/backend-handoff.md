@@ -1,5 +1,12 @@
 # Backend Handoff
 
+> **Nested-write and `map_leaves!` parity is publicly closed:** ordinary bare-binding nested assignment performs
+> evaluated string/integer path selection, dense unambiguous creation, isolated publication, and detached result
+> delivery on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. The sole v1 bang method maps only an existing bare
+> harray/array receiver's leaves over its original shape, guards that receiver identity during callbacks, commits
+> once, and starts continuation afterward. Run `bash tools/check_mutation_six_runtime.sh` for the six-runtime proof
+> and `bash tools/run_python_project_data.sh tools/check_mutation_public_surface.py` for current public no-drift.
+>
 > **Standalone lifecycle-block parity is complete:** ADR `0094` requires a rule-item-leading `{ ... }` to
 > normalize directly to lifecycle `I`, preserve authored source/line and explicit-twin ActionIR semantics, append
 > duplicates in order, retain every earlier brace owner, and leave legacy plain carriers inert. Perl, Rust, Dart,
