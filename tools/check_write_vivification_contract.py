@@ -1382,7 +1382,7 @@ def main() -> None:
         f"{len(contract['evaluation_failure_cases'])} evaluation failures, "
         f"{len(contract['read_exclusion_cases'])} read exclusions, "
         f"{composed_writes} composed writes, "
-        f"{len(mutations)} rejected mutations; future behavior remains unadmitted"
+        f"{len(mutations)} rejected mutations; neutral authority remains frozen; capability admission is external"
     )
 
 

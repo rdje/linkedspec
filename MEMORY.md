@@ -1,34 +1,30 @@
 # MEMORY
 
-- activation_commit: `b65cbd6051ecbf65cd4202d40e834ef345c67aa3` — exact clean Rust-warning ownership commit from which Lua `FUTURE-PARITY-BACKLOG.19.6.2` was activated task-tree-first.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.19.6.2 - implement Lua map leaves mutation`; canonical signoff complete.
-- active_work_unit: none; `.19.6.2` is durably landed and parent `.19.6` is closed; no push.
-- next_action: activate `FUTURE-PARITY-BACKLOG.19.7` task-tree-first from the clean `.19.6.2` commit and admit the
-  portable/public mutation surface without advancing recurring proof or push early.
-- in_flight_uncommitted: none; no background job remains and the workspace is clean.
+- activation_commit: `1a24a76297ed579abae919e0baba356f44ea89bb` — exact clean Lua `map_leaves!` implementation commit from which portable admission `FUTURE-PARITY-BACKLOG.19.7` was activated task-tree-first.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.19.7 - admit portable mutation capabilities`; canonical signoff complete.
+- active_work_unit: none; exact clean post-`.19.7` handoff, with `.19.8` not yet activated and no push.
+- next_action: activate `FUTURE-PARITY-BACKLOG.19.8` task-tree-first from the clean `.19.7` commit, then build its
+  recurring six-runtime proof without advancing public-current closeout `.19.9`.
+- in_flight_uncommitted: none; no background job remains.
 - blockers: none.
 - current_rust_warning_debt: repeated clean carriers report 1,870 `pgen` plus 26 `rgx-core` output warnings;
   `RUST-DEPENDENCY-WARNING-ZERO.1-.7` own causal repair/pins/enforcement without suppression, after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
   and requires every exact current task ID to be unique across partitioned and unpartitioned storage.
-- current_standalone_block_contract: all five backends normalize rule-item-leading `{ ... }` directly to lifecycle
-  `I` with exact authored source/opening line, explicit-twin ActionIR semantics/diagnostics, unchanged brace owners,
-  and authored duplicates. Source emits no new `PlainBlock`; legacy plain data remains readable and inert. The
-  self-hosted grammar preserves reserved lifecycle precedence. ADR `0094`.
-- current_standalone_block_frontier: admitted `.15.0-.2` behavior is unchanged; `.15.3` repairs the stale Lua
-  `next()` fixture with action-edge ownership and recomposes the complete 178x2 / 109x2 dual-ABI boundary.
 - current_write_vivification: `linkedspec-write-vivification-v1` is implemented on all five backends with one typed expression-segment AST,
   evaluated string/integer harray/array selection, dense atomic creation, post-evaluation snapshots, detached
   results, exact diagnostics/spans, invocation-local absent/null presence, and read exclusions at 105 rejected
   mutations. Rust, Dart, Julia, PUC Lua, and LuaJIT preserve it through supported serialized/reconstructed/
-  generated/emitted carriers; portable/public capability admission remains pending.
+  generated/emitted carriers. Portable capability `language.nested_write_vivification` is admitted by `.19.7`;
+  recurring proof remains `.19.8` and final public-current teaching remains `.19.9`.
 - current_map_leaves_mutation: `linkedspec-map-leaves-mutation-v1` is implemented on all five backends with one bang-only mutation AST,
   resolved receiver identity guard, root-kind original-shape traversal, copied frames, atomic rebind, detached
   result, post-commit continuation, exact diagnostics/exclusions, and 167 base mutations. Receiver callback writes
   through assignment, nested write/bang, mutation helpers, array-end methods, and binding-target array pipelines
   are guarded. Rust, Dart, Julia, PUC Lua, and LuaJIT preserve the typed node through their supported reconstructed/
-  generated/emitted carriers; the Lua suite passes 530 assertions per ABI. Portable/public admission remains pending.
+  generated/emitted carriers; the Lua suite passes 530 assertions per ABI. Portable capability
+  `language.map_leaves_receiver_mutation` is admitted by `.19.7`; recurrence/public closeout remain `.19.8-.19.9`.
 - current_rule_entry_dispatch_invariant: selecting a rule enters its handler and starts its mode-driven execution;
   entry alone never tests that rule's own regex. An outgoing `->` match edge selects its target rule's regex. Rust now has
   both the direct-entry negative lock and a zero-regex-parent positive trace with typed `target_rule=Done`; the
@@ -47,7 +43,7 @@
   explicit-target `set(tree, ...)`; post-commit receiver-write proof uses caller-scoped `.with()`. No implicit
   caller capture or arbitrary user-defined bang method is admitted.
 - current_core_state: typed source is 14/0/231; recognition 138/250/58; progressive 9/9/116 plus public
-  6/12/10/60; gap 9/0/63 plus public 8/15/10/34; staged 9/9/123 plus public 6/17/10/129; capability 90/0/0;
+  6/12/10/60; gap 9/0/63 plus public 8/15/10/34; staged 9/9/123 plus public 6/17/10/129; capability 100/0/0;
   semantic introspection 9/0/128.
 - standing_contracts: all durable paths are repo-relative; all project data stays on the repository filesystem;
   README remains bounded; ordinary leaves use focused proof and designated infrastructure/public/push boundaries

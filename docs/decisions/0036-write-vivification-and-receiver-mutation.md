@@ -1,7 +1,7 @@
 # 0036 - Nested creation is write-only and `!` denotes explicit receiver mutation
 
 - Date: 2026-07-15
-- Status: accepted direction; both mechanisms implemented through Julia; Lua/admission pending
+- Status: accepted; both mechanisms portable-capability-admitted on all five backends; recurrence/public closeout pending
 - Tags: dsl, language-evolution, mutation, autovivification, receiver-methods, traversal, paths, portability
 
 ## Context
@@ -403,7 +403,29 @@ The permanent shared suite passes 530 assertions per ABI across all frozen synta
 18 guarded writes, user-function bodies, malformed state, native, reconstructed, generated-plan, emitted-module,
 and primary-CLI routes. The adjacent write suite passes 438 per ABI; the unchanged neutral oracles reject all 167
 base and 592 composition mutations; and the complete Lua gate passes. This closes the five-backend implementation
-parent `.19.6`. Portable capability, recurring proof, and final public admission remain owned by `.19.7-.9`.
+parent `.19.6`. At that implementation boundary, portable capability, recurring proof, and final public admission
+remained owned by `.19.7-.9`.
+
+## Portable capability admission (2026-09-04)
+
+Leaf `.19.7` admits the two completed mechanisms as exact `language-runtime` capability rows:
+
+- `language.nested_write_vivification` cites the frozen write authority and shared composition dependency;
+- `language.map_leaves_receiver_mutation` cites the frozen receiver-mutation authority and the same composition
+  dependency; and
+- each row records exact production/test evidence for Perl, Rust, Dart, Julia, and shared Lua, whose note requires
+  independent execution on PUC Lua and LuaJIT.
+
+The manifest advances from 18 capabilities / 90 pass states to 20 / 100 with no partial or gap state. Its checker
+pins exact row order, contract text, sources, backend status/reference sets, the dual-ABI note, tracked owner state,
+neutral authority IDs/formats/statuses/canonical JSON digests, and composition ID/path/digest links. Sixteen
+dedicated mutations prove that omission, duplication, reordering, stale backend state, evidence substitution, or
+authority drift fails closed.
+
+This admission does not rewrite the frozen artifacts' historically accurate `future-neutral` status strings and
+does not change parser, compiler, runtime, generated carrier, facade, schema, MCP, CLI, or example behavior.
+Recurring six-runtime execution is a separate `.19.8` boundary; public-current teaching, final no-drift, parent
+closeout, and push remain `.19.9`.
 
 ## Consequences
 
@@ -417,9 +439,8 @@ parent `.19.6`. Portable capability, recurring proof, and final public admission
   be added; they are excluded because no distinct coherent mutation contract has been accepted.
 - “Absolute path” means complete root-to-leaf path inside the traversal receiver. The variable name is receiver
   identity, not an extra path element. Hash-root paths contain keys; array-root paths contain zero-based indexes.
-- During `.19.2-.19.6`, public guidance must name the backend transition explicitly: all five backends implement
-  nested-write vivification and `map_leaves!`. Portable admission remains future until the remaining admission
-  leaves land.
+- During `.19.2-.19.6`, public guidance named the backend transition explicitly. `.19.7` now admits both portable
+  capability rows while `.19.8` and `.19.9` retain recurring proof and public-current closeout respectively.
 
 ## Links
 

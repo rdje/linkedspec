@@ -711,10 +711,11 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   arrays, segment/RHS order, expression-failure propagation, post-evaluation same-binding snapshots, isolated
   atomic commit, detached results, structural diagnostics, and non-creating reads.
 - **WHEN:** designing or implementing nested assignment/vivification in any backend. This checker freezes neutral
-  semantics; never infer portable/public admission from its success. Perl, Rust, Dart, Julia, and Lua consume it
-  under `.19.2.1`, `.19.3.1`, `.19.4.1`, `.19.5.1`, and `.19.6.1`.
+  semantics; never infer capability admission from its success alone. Perl, Rust, Dart, Julia, and Lua consume it
+  under `.19.2.1`, `.19.3.1`, `.19.4.1`, `.19.5.1`, and `.19.6.1`; `.19.7` separately admits its exact capability
+  row.
 - **HOW:** `bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py`.
-- **OUTPUT:** `write-vivification contract: 5 valid syntax, 7 invalid syntax, 11 success, 16 structural failures, 3 evaluation failures, 3 read exclusions, 8 composed writes, 105 rejected mutations; future behavior remains unadmitted`.
+- **OUTPUT:** `write-vivification contract: 5 valid syntax, 7 invalid syntax, 11 success, 16 structural failures, 3 evaluation failures, 3 read exclusions, 8 composed writes, 105 rejected mutations; neutral authority remains frozen; capability admission is external`.
 - **CURRENT BOUNDARY:** Perl's permanent `t/write_vivification_perl_contract.t` projects the frozen fixture through
   `LinkedSpec::call_spec_handler_subst`, live rules, and user functions. Rust's permanent
   `rust/linkedspec-runtime/tests/write_vivification_contract.rs` projects parsed, serialized, generated-plan,
@@ -736,7 +737,7 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   touching backend code; do not generalize its one accepted bang token to identifiers, functions, other methods,
   temporary/nested receivers, or callback aliases.
 - **HOW:** `bash tools/run_python_project_data.sh tools/check_map_leaves_mutation_contract.py`.
-- **OUTPUT:** `map_leaves! mutation contract: 4 valid syntax, 14 invalid syntax, 5 exclusions, 10 success, 8 pre-commit failures, continuation/shadow/guard/nonbang/detachment proof, 6 callback compositions, 1 continuation composition, 167 base + 592 composition mutations rejected; future behavior remains unadmitted`.
+- **OUTPUT:** `map_leaves! mutation contract: 4 valid syntax, 14 invalid syntax, 5 exclusions, 10 success, 8 pre-commit failures, continuation/shadow/guard/nonbang/detachment proof, 6 callback compositions, 1 continuation composition, 167 base + 592 composition mutations rejected; neutral authority remains frozen; capability admission is external`.
 - **CURRENT BOUNDARY:** use the exact `terse_13_3_array_tree_traversal_receiver_blocks` fixture as the five-backend
   non-bang control. Perl, Rust, Dart, Julia, and Lua implement the exact bang contract and project it permanently through
   `t/map_leaves_mutation_perl_contract.t`, `rust/linkedspec-runtime/tests/map_leaves_mutation_contract.rs`, and
@@ -745,9 +746,10 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   Julia preserves the typed carrier through native, reconstructed, generated-plan, emitted-module, and primary-
   CLI routes. Shared Lua preserves it through native, public `SpecFile` reconstruction, generated-plan,
   emitted-module, primary-CLI, and user-function-body routes on PUC Lua and LuaJIT; the permanent suite passes 530
-  assertions per ABI. Portable/public capability admission remains pending. The `.19.2.2` audit also proved that unparameterized user
-  functions cannot carry caller-binding mutation under the admitted fresh-local function contract. The director-
-  selected correction uses explicit-target `set` and caller-scoped `.with`, without implicit capture.
+  assertions per ABI. `.19.7` separately admits its exact capability row; recurrence remains `.19.8` and public-
+  current closeout remains `.19.9`. The `.19.2.2` audit also proved that unparameterized user functions cannot
+  carry caller-binding mutation under the admitted fresh-local function contract. The director-selected correction
+  uses explicit-target `set` and caller-scoped `.with`, without implicit capture.
 
 ### 4.8.4 Shared write/`map_leaves!` composition fixture
 
@@ -766,8 +768,26 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
 - **OUTPUT:** eight embedded writes, six callback compositions, one post-commit continuation composition, and 592
   independently rejected composition mutations.
 - **CURRENT BOUNDARY:** the exact non-bang control returns `{"leaf":[]}` on Perl, Rust, Dart, Julia, PUC Lua, and
-  LuaJIT. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT execute the complete bang composition. Portable/public and
-  recurring admission remain separately owned by `.19.7-.9`.
+  LuaJIT. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT execute the complete bang composition. `.19.7` admits two
+  capability rows sharing this dependency; recurring execution remains `.19.8`, and public-current no-drift
+  remains `.19.9`.
+
+### 4.8.5 `tools/check_capability_conformance.pl` — portable capability governance
+
+- **WHAT:** validates the exact capability manifest schema, tracked owners, all backend states/references, public
+  projections, language-surface claims, and exclusions. Mutation admission `.19.7` adds exact governance for
+  `language.nested_write_vivification` and `language.map_leaves_receiver_mutation`.
+- **WHEN:** changing a capability row, its tracked owner, a cited implementation/test path, or either frozen
+  mutation authority/composition dependency. This checker records capability truth; it does not replace the
+  neutral behavior or backend execution consumers.
+- **HOW:** `perl tools/check_capability_conformance.pl`.
+- **OUTPUT:** 20 capabilities / 100 pass / 0 partial / 0 gap, one exclusion, 19 general governance mutations,
+  two mutation capabilities, 16 mutation-admission mutations, 12 governed projections, six public mutations, and
+  four language-surface mutations.
+- **MUTATION BOUNDARY:** the dedicated admission mutations reject row omission/duplication/order drift, changed
+  contract/source/reference/note state, non-pass backend state, inactive ownership, neutral authority ID/format/
+  digest drift, and composition ID/digest drift. The contract files retain their original neutral status text;
+  `.19.8` owns recurring six-runtime execution and `.19.9` owns public-current closeout.
 
 ### 4.9 `tools/check_semantic_introspection_contract.py` — neutral model/query oracle
 

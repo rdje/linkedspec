@@ -1014,8 +1014,8 @@ binding_identifier.map_leaves!() { block }
 The bang suffix above belongs only to the exact `map_leaves!` method token; it is not part of identifier grammar.
 The receiver cannot be a literal, temporary, helper result, property, or bracket access. Function-form
 `map_leaves!(binding)`, `walk_leaves!`, `reduce_leaves!`, bang continuation, and arbitrary user-defined bang names
-are excluded. Shared Lua accepts the exact form on PUC Lua and LuaJIT; portable capability and recurring/public
-admission remain pending.
+are excluded. Shared Lua accepts the exact form on PUC Lua and LuaJIT; `.19.7` admits the exact portable capability
+row, recurring proof remains `.19.8`, and public-current closeout remains `.19.9`.
 
 ### 7.5 Numeric Helpers
 ```

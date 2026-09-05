@@ -10,8 +10,9 @@ admitted backends. It complements, rather than replaces, the executable 105-fixt
 `{ ... }` normalizes to lifecycle `I`, preserves actual source/opening line and explicit-twin ActionIR semantics,
 orders duplicates, keeps earlier brace owners, rejects malformed twins, and leaves legacy plain carriers inert.
 Its six runtime routes plus the permanent self-hosted grammar run through
-`bash tools/check_standalone_lifecycle_block_five_backend.sh`. The resulting 18-row capability census is
-90 pass / 0 partial / 0 gap.
+`bash tools/check_standalone_lifecycle_block_five_backend.sh`. At that feature's admission boundary, the resulting
+18-row capability census was 90 pass / 0 partial / 0 gap. Mutation admission `.19.7` has since added two exact
+language-runtime rows, so the current census is 20 capabilities and 100 pass / 0 partial / 0 gap.
 
 ## Neutral write vivification
 
@@ -28,11 +29,11 @@ bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py
 
 The checker validates five AST cases, seven syntax failures, 11 successful writes, 16 structural failures, three
 expression failures, three non-creating reads, detachment, eight writes from the shared composition fixture, and
-105 rejected base mutations. Perl consumes this unchanged contract under `.19.2.1`, with permanent direct
-projection in `t/write_vivification_perl_contract.t`; Rust consumes it under `.19.3.1`, with native/serialized/
-generated/emitted proof in `rust/linkedspec-runtime/tests/write_vivification_contract.rs`. Dart, Julia, PUC Lua,
-and LuaJIT remain non-vivifying until their separately owned implementation/admission leaves. These backend
-milestones do not change the public capability census.
+105 rejected base mutations. Perl, Rust, Dart, Julia, and shared Lua now consume this unchanged contract through
+typed native and supported reconstructed/generated/emitted carriers; PUC Lua and LuaJIT execute the shared Lua
+consumer independently. `.19.7` admits `language.nested_write_vivification` with exact production/test references
+for all five backends and immutable composition-authority linkage. The recurring six-runtime gate remains `.19.8`,
+and final public-current no-drift remains `.19.9`.
 
 ## Neutral `map_leaves!` receiver mutation
 
@@ -57,11 +58,12 @@ machine cases, eight pre-commit failures, continuation/shadow/guard-release/non-
 callback compositions, one post-commit continuation composition, 167 base mutations, and 593 composition
 mutations at the original freeze boundary. The pure-function-preserving carrier correction retains every
 observation and yields 592 current composition mutations. Perl consumes the exact contract under `.19.2.2`, with
-permanent direct proof in `t/map_leaves_mutation_perl_contract.t`; Rust consumes it under `.19.3.2`, with native,
-serde, generated-plan, emitted-source, independently compiled, and private failure-state proof in
-`rust/linkedspec-runtime/tests/map_leaves_mutation_contract.rs` and `rust/linkedspec-runtime/src/engine.rs`.
-Dart, Julia, and Lua return their generic parser-invocation failure. All five accept the byte-identical non-bang
-control. Portable capability admission remains pending.
+permanent direct proof in `t/map_leaves_mutation_perl_contract.t`; Rust, Dart, Julia, and shared Lua consume the
+same authority through typed native and supported reconstructed/generated/emitted carriers, with PUC Lua and
+LuaJIT independently executing the shared Lua consumer. `.19.7` admits
+`language.map_leaves_receiver_mutation` with exact production/test references on all five backends. The byte-
+identical non-bang control remains unchanged; recurring six-runtime proof remains `.19.8`, and final public-current
+no-drift remains `.19.9`.
 
 ## Neutral write/receiver-mutation composition
 
@@ -85,9 +87,12 @@ bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py
 bash tools/run_python_project_data.sh tools/check_map_leaves_mutation_contract.py
 ```
 
-The exact composed fixture has a non-bang control returning `{"leaf":[]}` on all six runtime routes. Perl and
-Rust execute the bang form and its nested-write composition. Dart, Julia, PUC Lua, and LuaJIT report their generic
-parser-invocation failure. No portable capability row or public composition feature is admitted.
+The exact composed fixture has a non-bang control returning `{"leaf":[]}` on all six runtime routes. Perl, Rust,
+Dart, Julia, PUC Lua, and LuaJIT execute the bang form and its nested-write composition. The composition remains a
+dependency shared by the two admitted capability rows rather than a third capability. The capability checker pins
+both neutral authority IDs, formats, freeze statuses, canonical JSON digests, exact row order, five backend proof
+sets, and the Lua dual-ABI note through 16 rejected admission mutations. `.19.8` still owns one recurring composed
+driver; `.19.9` owns final public-current examples and no-drift.
 
 `mcp_semantic_transport_contract.json` (`linkedspec-mcp-transport-v1`) is the single backend-neutral machine
 contract for LinkedSpec's modern MCP `2026-07-28` stdio projection. Its root-relative artifact inventory pins the

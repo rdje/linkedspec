@@ -11,7 +11,7 @@ answers:
   - "does Rust nested write distinguish absent binding and null"
   - "are Rust nested write results detached"
 date: 2026-09-01
-status: implemented under FUTURE-PARITY-BACKLOG.19.3.1; Rust map_leaves! implemented by .19.3.2; portable/public admission pending
+status: implemented under FUTURE-PARITY-BACKLOG.19.3.1; portable capability admitted under .19.7
 tags: [rust, dsl, actionir, assignment, autovivification, diagnostics, generated-source, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.19.3.1 replaces Rust's static key/index split with WritePathSegment and one AssignNestedAccess node for one or many authored segments. Parser, callable-contract, compiler, serde, source-emitter, generated-plan, independently compiled emitted source, and Engine entrypoints all validate the typed node. Runtime proof covers the frozen 5 AST / 7 syntax / 11 success / 16 structural-failure contract, evaluation order/failure, absent versus bound-null state, fresh user functions, dense arrays, post-evaluation snapshots, rollback, reads, detachment, and exact typed diagnostic fields. The 105-fixture corpus and 197-test runtime integration suite pass."
 reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test write_vivification_contract && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test integration_test && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle"

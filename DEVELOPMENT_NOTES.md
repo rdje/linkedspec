@@ -9,6 +9,22 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-09-04 (`FUTURE-PARITY-BACKLOG.19.7` — portable mutation capability admission): capability admission is a
+  distinct durable fact from neutral contract freeze, backend implementation, recurring execution, and public-
+  current closeout. Preserve those boundaries rather than using one broad final leaf.
+- The earlier `.19.7-.19.9` refinement named three owners but created only `.19.7`. Restore `.19.8` for the routed
+  six-runtime driver and `.19.9` for public no-drift/parent closeout/push before changing capability state.
+- Admit one capability row per mechanism. The shared write/`map_leaves!` composition is a required dependency of
+  both rows, not a third feature row; current census therefore moves from 18/90 to 20/100.
+- Capability evidence must be exact: ordered source paths, five backend production/test sets, pass status, and a
+  shared-Lua note that explicitly records independent PUC Lua and LuaJIT execution.
+- Keep the three frozen JSON artifacts byte-stable, including their historically accurate `future-neutral` status
+  strings. Pin their canonical JSON digests and dependency topology from the later capability checker instead of
+  rewriting the original freeze boundary.
+- Sixteen admission mutations cover row omission, duplication, order, text/source/reference/note/status drift,
+  inactive ownership, authority identity/format/content-digest cases, and composition identity/digest substitution.
+- This leaf changes capability truth and durable status only. No parser/compiler/runtime/generated carrier,
+  facade/schema/MCP/CLI contract, recurring CI registration, or public-current example moves before `.19.8-.19.9`.
 - 2026-09-04 (`FUTURE-PARITY-BACKLOG.19.6.2` — Lua `map_leaves!`): keep the bang token in one exact parser path.
   Assignment must parse first so `result = tree.map_leaves!()` remains an assignment whose typed RHS is the
   mutation chain, rather than misclassifying `result = tree` as the receiver.

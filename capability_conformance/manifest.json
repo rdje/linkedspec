@@ -97,6 +97,32 @@
       }
     },
     {
+      "id": "language.nested_write_vivification",
+      "category": "language-runtime",
+      "contract": "An authored bare-binding nested assignment evaluates typed path segments then its RHS once, creates only unambiguous missing dense containers on an isolated copy, publishes atomically, returns a detached updated root, and never turns reads into writes.",
+      "sources": ["docs/decisions/0036-write-vivification-and-receiver-mutation.md", "capability_conformance/write_vivification_contract.json", "capability_conformance/write_map_leaves_composition_contract.json"],
+      "backends": {
+        "perl": {"status": "pass", "references": ["perl/LinkedSpec/ActionIR/AST/Parser.pm", "perl/LinkedSpec/ActionIR/MethodLowering.pm", "t/write_vivification_perl_contract.t"]},
+        "rust": {"status": "pass", "references": ["rust/linkedspec-core/src/expr.rs", "rust/linkedspec-runtime/src/engine.rs", "rust/linkedspec-runtime/tests/write_vivification_contract.rs"]},
+        "dart": {"status": "pass", "references": ["dart/lib/src/action/action_parser.dart", "dart/lib/src/runtime/interpreter.dart", "dart/test/write_vivification_contract_test.dart"]},
+        "julia": {"status": "pass", "references": ["julia/src/action/ActionParser.jl", "julia/src/runtime/Interpreter.jl", "julia/test/write_vivification_contract_test.jl"]},
+        "lua": {"status": "pass", "references": ["lua/src/linkedspec/action_parser.lua", "lua/src/linkedspec/interpreter.lua", "lua/test/write_vivification_contract_test.lua"], "note": "The shared Lua implementation and permanent contract execute independently on PUC Lua and LuaJIT."}
+      }
+    },
+    {
+      "id": "language.map_leaves_receiver_mutation",
+      "category": "language-runtime",
+      "contract": "The sole v1 bang method map_leaves! mutates only the resolved receiver binding's leaves through original-shape copied traversal, rejects callback writes to that identity, commits atomically, returns a detached root, and runs ordinary continuation afterward.",
+      "sources": ["docs/decisions/0036-write-vivification-and-receiver-mutation.md", "capability_conformance/map_leaves_mutation_contract.json", "capability_conformance/write_map_leaves_composition_contract.json"],
+      "backends": {
+        "perl": {"status": "pass", "references": ["perl/LinkedSpec/ActionIR/AST/Parser.pm", "perl/LinkedSpec/ActionIR/MethodLowering.pm", "t/map_leaves_mutation_perl_contract.t"]},
+        "rust": {"status": "pass", "references": ["rust/linkedspec-core/src/expr.rs", "rust/linkedspec-runtime/src/engine.rs", "rust/linkedspec-runtime/tests/map_leaves_mutation_contract.rs"]},
+        "dart": {"status": "pass", "references": ["dart/lib/src/action/action_parser.dart", "dart/lib/src/runtime/interpreter.dart", "dart/test/map_leaves_mutation_contract_test.dart"]},
+        "julia": {"status": "pass", "references": ["julia/src/action/ActionParser.jl", "julia/src/runtime/Interpreter.jl", "julia/test/map_leaves_mutation_contract_test.jl"]},
+        "lua": {"status": "pass", "references": ["lua/src/linkedspec/action_parser.lua", "lua/src/linkedspec/interpreter.lua", "lua/test/map_leaves_mutation_contract_test.lua"], "note": "The shared Lua implementation and permanent contract execute independently on PUC Lua and LuaJIT."}
+      }
+    },
+    {
       "id": "language.user_functions_staged_bodies",
       "category": "language-runtime",
       "contract": "Top-level exact-arity functions use the neutral definition shell, staged body job, ActionIR body AST, and runtime registry behavior.",

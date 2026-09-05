@@ -304,7 +304,8 @@ intermediate. Bound null and other wrong kinds are not coerced; arrays replace o
 reject gaps. Segments evaluate once left-to-right, then the RHS once, before isolated structural validation.
 Success commits and yields a detached updated root. Invalid selectors, kind conflicts, and gaps throw typed
 diagnostic objects and commit no partial path; already completed expression effects retain ordinary semantics.
-Reads never create state. Portable/public admission remains a separate later boundary.
+Reads never create state. `.19.7` admits the exact portable capability row; recurring proof and public-current
+closeout remain `.19.8-.19.9`.
 
 Array end mutations are also statement-level operations on a named working array:
 `items.push_back(value)` appends, `items.push_front(value)` prepends, `items.pop_back()`

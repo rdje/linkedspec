@@ -10,6 +10,23 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-04 — FUTURE-PARITY-BACKLOG.19.7 — admit portable mutation capabilities
+
+- Restored the omitted `.19.8` recurring-proof and `.19.9` public-closeout task records promised by the prior
+  `.19.7-.19.9` split, then narrowed `.19.7` to portable capability admission only.
+- Added exact `language.nested_write_vivification` and `language.map_leaves_receiver_mutation` rows with pass
+  evidence for Perl, Rust, Dart, Julia, and shared Lua plus explicit independent PUC Lua/LuaJIT execution.
+- Advanced the current capability census from 18 rows / 90 pass states to 20 / 100 with no partial or gap state.
+  Production behavior, public facade/schema/MCP/CLI surfaces, and frozen neutral contract bytes remain unchanged.
+- Extended the capability checker to pin row order, contract text, sources, backend evidence, the Lua dual-ABI
+  note, tracked owner state, neutral authority IDs/formats/statuses/canonical JSON digests, and the composition
+  ID/path/digest dependency through 16 rejected admission mutations.
+- Updated only the two neutral checker success summaries to say that their authority remains frozen and later
+  capability admission is external, removing a stale global “unadmitted” claim without changing fixture bytes.
+- Synchronized ADR `0036`, Knowledge Map sources, both roadmaps, architecture/live/continuity state, task/index,
+  Toolbox, and sole-facing mdBook status. Recurring six-runtime execution remains `.19.8`; public-current examples,
+  final no-drift, parent closeout, and push remain `.19.9`.
+
 ## 2026-09-04 — FUTURE-PARITY-BACKLOG.19.6.2 — implement Lua map-leaves receiver mutation
 
 - Added the dedicated Lua `receiver_mutation_chain` for exact

@@ -96,8 +96,8 @@ root. Invalid selectors, kind conflicts, and gaps throw typed nested-write diagn
 commit. Reads remain pure and never create containers.
 
 This behavior is implemented on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Lua carries the same typed path
-through native, reconstructed, generated-plan, emitted-module, and primary-CLI routes. Portable/public admission
-remains a separate later boundary until receiver mutation and recurring proof complete.
+through native, reconstructed, generated-plan, emitted-module, and primary-CLI routes. `.19.7` admits its exact
+portable capability row; recurring six-runtime proof and public-current closeout remain `.19.8-.19.9`.
 
 ## Pushing values
 
@@ -459,8 +459,8 @@ bindings and distinct same-spelling scoped bindings remain legal. Callback failu
 Only the exact `binding_name.map_leaves!() { block }` form is current. Function-form bang calls,
 temporary/nested receivers, `walk_leaves!`, `reduce_leaves!`, and arbitrary user-defined bang functions are not
 accepted. Lua preserves the typed receiver, callback, and continuation through native, reconstructed,
-generated-plan, emitted-module, primary-CLI, and user-function-body execution on both ABIs. Portable capability,
-public no-drift, and recurring proof are owned by `FUTURE-PARITY-BACKLOG.19.7-.19.9`.
+generated-plan, emitted-module, primary-CLI, and user-function-body execution on both ABIs. `.19.7` admits the
+exact portable capability row; recurring proof is owned by `.19.8`, and public-current no-drift by `.19.9`.
 
 ## Reading and copying collections
 

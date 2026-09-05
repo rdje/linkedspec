@@ -12,7 +12,7 @@ answers:
   - "does Rust map_leaves bang commit before continuation"
   - "do Rust map_leaves bang values share writable aliases"
 date: 2026-09-01
-status: implemented under FUTURE-PARITY-BACKLOG.19.3.2; portable/public admission pending
+status: implemented under FUTURE-PARITY-BACKLOG.19.3.2; portable capability admitted under .19.7
 tags: [rust, dsl, actionir, map-leaves, mutation, identity, atomicity, generated-source, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.19.3.2 adds ReceiverMutationChain with typed receiver/callback/continuation carriers and validates it at compiler, direct Engine, source-emitter, and generated-plan decode boundaries. RuntimeContext assigns stable binding identities and guards only the resolved receiver identity. The permanent contract passes 9/9 across 4 valid / 14 invalid / 5 excluded syntax cases, all base/special/composition behavior, serde/native/generated/emitted/independently compiled routes, and corrupt-node rejection; 3/3 private tests prove atomic rollback, guard release, unrelated effects, precedence, and post-commit failure. The unchanged neutral oracle rejects 167 base and 592 composition mutations."
 reverify: "bash tools/run_python_project_data.sh tools/check_map_leaves_mutation_contract.py && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test map_leaves_mutation_contract && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib receiver_mutation_ -- --nocapture"

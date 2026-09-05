@@ -2012,7 +2012,7 @@ def main() -> None:
         f"{len(composition['callback_cases'])} callback compositions, "
         f"{len(composition['continuation_cases'])} continuation composition, "
         f"{rejected} base + {composition_rejected} composition mutations rejected; "
-        "future behavior remains unadmitted"
+        "neutral authority remains frozen; capability admission is external"
     )
 
 

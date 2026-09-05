@@ -2,23 +2,27 @@
 
 ## Current Activity
 
-- Lua `map_leaves!` `.19.6.2` is canonical-signoff-complete from clean warning-intake commit `b65cbd60`. Shared
-  typed receiver mutation now executes on PUC Lua and LuaJIT without moving portable capability, recurring proof,
-  public admission, or the queued Rust warning-remediation tree.
+- Portable mutation capability admission `.19.7` is complete at 100 pass / 0 partial / 0 gap. The next leaf is
+  recurring six-runtime proof `.19.8`, which is not yet activated. Production behavior, neutral contract bytes,
+  public-current examples, and the queued Rust warning remediation remain unchanged.
 
 ## Latest Completed Slice
 
-- `.19.6.2` closes the five-backend implementation frontier with stable Lua binding identities, all 18 guarded
-  write routes, atomic original-shape traversal, and typed native/reconstructed/generated/emitted/CLI carriers.
-  Permanent proof passes 530 assertions per ABI and the complete dual-ABI Lua gate.
+- `.19.7` admits `language.nested_write_vivification` and `language.map_leaves_receiver_mutation` through exact
+  five-backend evidence, frozen-neutral/composition digests, and 16 fail-closed admission mutations. Capability
+  governance, direct six-runtime consumers, all nine doctrines, mdBook, and exact staged canonical CI pass.
 
 ## Next Action
 
-- Commit `.19.6.2`, verify the exact clean boundary and cleared brief, then activate portable/public mutation
-  admission `.19.7` task-tree-first. Warning census `.1` remains durably queued and non-blocking unless the
-  director reprioritizes it.
+- From the clean `.19.7` commit, activate recurring six-runtime proof `.19.8` task-tree-first. Public-current
+  teaching, parent `.19` closeout, and push remain `.19.9`; warning census `.1` stays durably queued and
+  non-blocking.
 
 ## Recent Completions
+
+- `2026-09-04` — `.19.7` admits two portable mutation capabilities at 100/0/0, pins exact frozen authority and
+  composition topology through 16 admission mutations, preserves production/neutral bytes, and passes direct
+  six-runtime, doctrine, mdBook, and receipt-bound canonical proof.
 
 - `2026-09-04` — `.19.6.2` implements typed atomic Lua `map_leaves!`; 530 assertions per ABI, full 178x2
   integration, CLI 66x2, corpus 105/105, storage, unchanged 167 + 592 mutations, mdBook, doctrines, and exact
@@ -72,9 +76,6 @@
 
 - `2026-08-31` — `.19.1.3` originally freezes both future mutations at 8 writes / 6 callbacks / 1 continuation /
   593 mutations; the later pure-function carrier correction preserves the observations at 592 current mutations.
-
-- `2026-08-31` — `.19.1.2` freezes future `map_leaves!` at 4/14/5 syntax, 10 success, 8 pre-commit failure, five
-  special state proofs, 167 mutations, and a 37-entrypoint canonical storage boundary; no backend is admitted.
 
 ## History
 

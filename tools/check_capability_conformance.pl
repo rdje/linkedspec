@@ -3,6 +3,7 @@ use strict;
 use warnings;
 
 use Cwd qw(abs_path);
+use Digest::SHA qw(sha256_hex);
 use File::Basename qw(dirname);
 use File::Spec;
 use JSON::PP qw(decode_json encode_json);
@@ -182,6 +183,97 @@ my @expected_language_surface_forbidden_claims = (
  'Round 2 is extending this surface. Perl and Rust now accept attached-block',
  'Inline value-form `if(...)` and `switch(...)` are portable on Perl and Rust',
 );
+my @expected_mutation_capabilities = (
+ {
+  id          => 'language.nested_write_vivification',
+  category    => 'language-runtime',
+  contract    => 'An authored bare-binding nested assignment evaluates typed path segments then its RHS once, creates only unambiguous missing dense containers on an isolated copy, publishes atomically, returns a detached updated root, and never turns reads into writes.',
+  sources     => [
+   'docs/decisions/0036-write-vivification-and-receiver-mutation.md',
+   'capability_conformance/write_vivification_contract.json',
+   'capability_conformance/write_map_leaves_composition_contract.json',
+  ],
+  references => {
+   perl => [
+    'perl/LinkedSpec/ActionIR/AST/Parser.pm',
+    'perl/LinkedSpec/ActionIR/MethodLowering.pm',
+    't/write_vivification_perl_contract.t',
+   ],
+   rust => [
+    'rust/linkedspec-core/src/expr.rs',
+    'rust/linkedspec-runtime/src/engine.rs',
+    'rust/linkedspec-runtime/tests/write_vivification_contract.rs',
+   ],
+   dart => [
+    'dart/lib/src/action/action_parser.dart',
+    'dart/lib/src/runtime/interpreter.dart',
+    'dart/test/write_vivification_contract_test.dart',
+   ],
+   julia => [
+    'julia/src/action/ActionParser.jl',
+    'julia/src/runtime/Interpreter.jl',
+    'julia/test/write_vivification_contract_test.jl',
+   ],
+   lua => [
+    'lua/src/linkedspec/action_parser.lua',
+    'lua/src/linkedspec/interpreter.lua',
+    'lua/test/write_vivification_contract_test.lua',
+   ],
+  },
+ },
+ {
+  id          => 'language.map_leaves_receiver_mutation',
+  category    => 'language-runtime',
+  contract    => "The sole v1 bang method map_leaves! mutates only the resolved receiver binding's leaves through original-shape copied traversal, rejects callback writes to that identity, commits atomically, returns a detached root, and runs ordinary continuation afterward.",
+  sources     => [
+   'docs/decisions/0036-write-vivification-and-receiver-mutation.md',
+   'capability_conformance/map_leaves_mutation_contract.json',
+   'capability_conformance/write_map_leaves_composition_contract.json',
+  ],
+  references => {
+   perl => [
+    'perl/LinkedSpec/ActionIR/AST/Parser.pm',
+    'perl/LinkedSpec/ActionIR/MethodLowering.pm',
+    't/map_leaves_mutation_perl_contract.t',
+   ],
+   rust => [
+    'rust/linkedspec-core/src/expr.rs',
+    'rust/linkedspec-runtime/src/engine.rs',
+    'rust/linkedspec-runtime/tests/map_leaves_mutation_contract.rs',
+   ],
+   dart => [
+    'dart/lib/src/action/action_parser.dart',
+    'dart/lib/src/runtime/interpreter.dart',
+    'dart/test/map_leaves_mutation_contract_test.dart',
+   ],
+   julia => [
+    'julia/src/action/ActionParser.jl',
+    'julia/src/runtime/Interpreter.jl',
+    'julia/test/map_leaves_mutation_contract_test.jl',
+   ],
+   lua => [
+    'lua/src/linkedspec/action_parser.lua',
+    'lua/src/linkedspec/interpreter.lua',
+    'lua/test/map_leaves_mutation_contract_test.lua',
+   ],
+  },
+ },
+);
+my $expected_lua_mutation_note =
+ 'The shared Lua implementation and permanent contract execute independently on PUC Lua and LuaJIT.';
+my %expected_mutation_authorities = (
+ write_vivification => {
+  path             => 'capability_conformance/write_vivification_contract.json',
+  contract_id      => 'linkedspec-write-vivification-v1',
+  canonical_sha256 => 'efabe777bf7fa5d7c3fa6e6fbe181bba89931b8c9b93a3631013c1f6009a2663',
+ },
+ map_leaves_mutation => {
+  path             => 'capability_conformance/map_leaves_mutation_contract.json',
+  contract_id      => 'linkedspec-map-leaves-mutation-v1',
+  canonical_sha256 => 'a15c6dd363b4cb8cbd5d3d6781b4abc0bf0412b7ee3eb7576a3c674bf19d2db9',
+ },
+);
+my $mutation_composition_path = 'capability_conformance/write_map_leaves_composition_contract.json';
 
 sub clone_value {
  my ($value) = @_;
@@ -214,6 +306,95 @@ sub normalize_space {
  $text =~ s/\s+/ /g;
  $text =~ s/^ | $//g;
  return $text;
+}
+
+sub require_exact_string_array {
+ my ($where, $actual, $expected) = @_;
+ fail("$where must be an array") unless ref($actual) eq 'ARRAY';
+ fail("$where drifted") unless join("\0", @$actual) eq join("\0", @$expected);
+}
+
+sub canonical_json_sha256 {
+ my ($value) = @_;
+ return sha256_hex(JSON::PP->new->canonical(1)->utf8(1)->encode($value));
+}
+
+sub validate_mutation_capabilities {
+ my ($manifest, $task_status, $artifacts) = @_;
+ my $owner = 'FUTURE-PARITY-BACKLOG.19.7';
+ fail("mutation capability owner '$owner' is not tracked") unless exists $task_status->{$owner};
+ fail("mutation capability owner '$owner' must be active or done")
+  unless $task_status->{$owner} eq 'active' || $task_status->{$owner} eq 'done';
+
+ my @ids = map { $_->{id} } @{$manifest->{capabilities}};
+ my %index;
+ for my $position (0 .. $#ids) {
+  $index{$ids[$position]} = $position;
+ }
+ for my $expected (@expected_mutation_capabilities) {
+  fail("mutation capability '$expected->{id}' is missing") unless exists $index{$expected->{id}};
+ }
+ my $standalone_index = $index{'language.standalone_lifecycle_block'};
+ fail('standalone lifecycle capability row is missing') unless defined $standalone_index;
+ fail('mutation capability rows must immediately follow standalone lifecycle in exact order')
+  unless $index{$expected_mutation_capabilities[0]{id}} == $standalone_index + 1
+  && $index{$expected_mutation_capabilities[1]{id}} == $standalone_index + 2;
+
+ for my $expected (@expected_mutation_capabilities) {
+  my $row = $manifest->{capabilities}[$index{$expected->{id}}];
+  fail("$expected->{id}.category drifted") unless $row->{category} eq $expected->{category};
+  fail("$expected->{id}.contract drifted") unless $row->{contract} eq $expected->{contract};
+  require_exact_string_array("$expected->{id}.sources", $row->{sources}, $expected->{sources});
+  for my $backend (@expected_backends) {
+   my $entry = $row->{backends}{$backend};
+   fail("$expected->{id} is not admitted on $backend") unless $entry->{status} eq 'pass';
+   require_exact_string_array(
+    "$expected->{id}.backends.$backend.references",
+    $entry->{references},
+    $expected->{references}{$backend},
+   );
+   if ($backend eq 'lua') {
+    fail("$expected->{id}.backends.lua.note drifted")
+     unless exists $entry->{note} && $entry->{note} eq $expected_lua_mutation_note;
+   } else {
+    fail("$expected->{id}.backends.$backend must not carry an admission note") if exists $entry->{note};
+   }
+  }
+ }
+
+ for my $name (sort keys %expected_mutation_authorities) {
+  my $expected = $expected_mutation_authorities{$name};
+  my $artifact = $artifacts->{$name};
+  fail("$name authority must be an object") unless ref($artifact) eq 'HASH';
+  fail("$name authority format drifted") unless $artifact->{format} == 1;
+  fail("$name authority id drifted") unless $artifact->{contract_id} eq $expected->{contract_id};
+  fail("$name authority freeze status drifted")
+   unless $artifact->{status} eq 'future-neutral-contract; no backend behavior admitted';
+  fail("$name authority canonical JSON drifted")
+   unless canonical_json_sha256($artifact) eq $expected->{canonical_sha256};
+ }
+
+ my $composition = $artifacts->{composition};
+ fail('mutation composition authority must be an object') unless ref($composition) eq 'HASH';
+ fail('mutation composition authority format drifted') unless $composition->{format} == 1;
+ fail('mutation composition authority id drifted')
+  unless $composition->{contract_id} eq 'linkedspec-write-map-leaves-composition-v1';
+ fail('mutation composition authority freeze status drifted')
+  unless $composition->{status} eq 'future-neutral-composition; no backend behavior admitted';
+ require_hash_keys(
+  'mutation composition requires',
+  $composition->{requires},
+  qw(write_vivification map_leaves_mutation),
+ );
+ for my $name (qw(write_vivification map_leaves_mutation)) {
+  my $required = $composition->{requires}{$name};
+  my $expected = $expected_mutation_authorities{$name};
+  require_hash_keys("mutation composition requires.$name", $required, qw(contract_id path canonical_json_sha256));
+  fail("mutation composition $name contract id drifted") unless $required->{contract_id} eq $expected->{contract_id};
+  fail("mutation composition $name path drifted") unless $required->{path} eq $expected->{path};
+  fail("mutation composition $name digest drifted")
+   unless $required->{canonical_json_sha256} eq $expected->{canonical_sha256};
+ }
 }
 
 sub validate_public_contract {
@@ -540,6 +721,115 @@ sub governance_mutation_checks {
  return scalar @mutations;
 }
 
+sub mutation_capability_admission_checks {
+ my ($manifest, $task_sources, $artifacts) = @_;
+ my $task_status = parse_task_statuses($task_sources);
+ my @mutations;
+ my $add_manifest_mutation = sub {
+  my ($name, $mutate) = @_;
+  push @mutations, [$name, sub {
+   my $candidate = clone_value($manifest);
+   $mutate->($candidate);
+   validate_manifest($candidate, $task_status);
+   validate_mutation_capabilities($candidate, $task_status, $artifacts);
+  }];
+ };
+ my $find_index = sub {
+  my ($candidate, $id) = @_;
+  for my $index (0 .. $#{$candidate->{capabilities}}) {
+   return $index if $candidate->{capabilities}[$index]{id} eq $id;
+  }
+  die "mutation setup could not find capability '$id'\n";
+ };
+
+ $add_manifest_mutation->('mutation_capability_omission', sub {
+  my ($candidate) = @_;
+  my $index = $find_index->($candidate, $expected_mutation_capabilities[0]{id});
+  splice @{$candidate->{capabilities}}, $index, 1;
+ });
+ $add_manifest_mutation->('mutation_capability_duplication', sub {
+  my ($candidate) = @_;
+  my $index = $find_index->($candidate, $expected_mutation_capabilities[1]{id});
+  push @{$candidate->{capabilities}}, clone_value($candidate->{capabilities}[$index]);
+ });
+ $add_manifest_mutation->('mutation_capability_order', sub {
+  my ($candidate) = @_;
+  my $first = $find_index->($candidate, $expected_mutation_capabilities[0]{id});
+  my $second = $find_index->($candidate, $expected_mutation_capabilities[1]{id});
+  @{$candidate->{capabilities}}[$first, $second] = @{$candidate->{capabilities}}[$second, $first];
+ });
+ $add_manifest_mutation->('mutation_capability_contract_text', sub {
+  my ($candidate) = @_;
+  my $index = $find_index->($candidate, $expected_mutation_capabilities[0]{id});
+  $candidate->{capabilities}[$index]{contract} .= ' drift';
+ });
+ $add_manifest_mutation->('mutation_capability_source_order', sub {
+  my ($candidate) = @_;
+  my $index = $find_index->($candidate, $expected_mutation_capabilities[1]{id});
+  @{$candidate->{capabilities}[$index]{sources}}[0, 1] = @{$candidate->{capabilities}[$index]{sources}}[1, 0];
+ });
+ $add_manifest_mutation->('mutation_capability_backend_status', sub {
+  my ($candidate) = @_;
+  my $index = $find_index->($candidate, $expected_mutation_capabilities[0]{id});
+  $candidate->{capabilities}[$index]{backends}{rust}{status} = 'partial';
+  $candidate->{capabilities}[$index]{gap_owner} = 'FUTURE-PARITY-BACKLOG.19.8';
+ });
+ $add_manifest_mutation->('mutation_capability_backend_reference', sub {
+  my ($candidate) = @_;
+  my $index = $find_index->($candidate, $expected_mutation_capabilities[1]{id});
+  $candidate->{capabilities}[$index]{backends}{dart}{references}[0] = 'dart/lib/src/action/action_ast.dart';
+ });
+ $add_manifest_mutation->('mutation_capability_lua_dual_abi_note', sub {
+  my ($candidate) = @_;
+  my $index = $find_index->($candidate, $expected_mutation_capabilities[0]{id});
+  delete $candidate->{capabilities}[$index]{backends}{lua}{note};
+ });
+
+ push @mutations, ['mutation_capability_owner_status', sub {
+  my $candidate_sources = mutate_task_status_line(
+   $task_sources,
+   'FUTURE-PARITY-BACKLOG.19.7',
+   "  Status: `pending`\n",
+  );
+  my $candidate_status = parse_task_statuses($candidate_sources);
+  validate_manifest($manifest, $candidate_status);
+  validate_mutation_capabilities($manifest, $candidate_status, $artifacts);
+ }];
+
+ my $add_artifact_mutation = sub {
+  my ($name, $mutate) = @_;
+  push @mutations, [$name, sub {
+   my $candidate = clone_value($artifacts);
+   $mutate->($candidate);
+   validate_mutation_capabilities($manifest, $task_status, $candidate);
+  }];
+ };
+ $add_artifact_mutation->('write_authority_id', sub {
+  $_[0]{write_vivification}{contract_id} = 'linkedspec-write-vivification-v2';
+ });
+ $add_artifact_mutation->('map_authority_format', sub {
+  $_[0]{map_leaves_mutation}{format} = 2;
+ });
+ $add_artifact_mutation->('write_authority_content_digest', sub {
+  $_[0]{write_vivification}{policy}{atomic_commit} .= ' drift';
+ });
+ $add_artifact_mutation->('map_authority_content_digest', sub {
+  $_[0]{map_leaves_mutation}{policy}{atomic_commit} .= ' drift';
+ });
+ $add_artifact_mutation->('composition_authority_id', sub {
+  $_[0]{composition}{contract_id} = 'linkedspec-write-map-leaves-composition-v2';
+ });
+ $add_artifact_mutation->('composition_write_digest', sub {
+  $_[0]{composition}{requires}{write_vivification}{canonical_json_sha256} = '0' x 64;
+ });
+ $add_artifact_mutation->('composition_map_digest', sub {
+  $_[0]{composition}{requires}{map_leaves_mutation}{canonical_json_sha256} = '0' x 64;
+ });
+
+ expect_mutation_failure(@$_) for @mutations;
+ return scalar @mutations;
+}
+
 sub public_projection_mutation_checks {
  my ($contract, $sources) = @_;
  my @mutations;
@@ -616,8 +906,24 @@ sub language_surface_mutation_checks {
 my $manifest = eval { decode_json(read_text($manifest_path)) };
 fail("invalid JSON in capability_conformance/manifest.json: $@") if $@;
 my $sources = task_sources();
-my $counts = validate_candidate($manifest, $sources);
+my $task_status = parse_task_statuses($sources);
+my $counts = validate_manifest($manifest, $task_status);
 my $mutation_count = governance_mutation_checks($manifest, $sources);
+my %mutation_artifact_paths = (
+ map { $_ => $expected_mutation_authorities{$_}{path} } keys %expected_mutation_authorities
+);
+$mutation_artifact_paths{composition} = $mutation_composition_path;
+my $mutation_artifacts = {
+ map {
+  my $name = $_;
+  my $path = File::Spec->catfile($repo_root, split m{/}, $mutation_artifact_paths{$name});
+  my $value = eval { decode_json(read_text($path)) };
+  fail("invalid JSON in $mutation_artifact_paths{$name}: $@") if $@;
+  $name => $value;
+ } sort keys %mutation_artifact_paths
+};
+validate_mutation_capabilities($manifest, $task_status, $mutation_artifacts);
+my $mutation_admission_count = mutation_capability_admission_checks($manifest, $sources, $mutation_artifacts);
 my $public_contract = expected_public_contract();
 my $public_sources = public_projection_sources();
 validate_public_contract($public_contract, $public_sources);
@@ -629,6 +935,7 @@ my $language_surface_mutation_count = language_surface_mutation_checks(
  $language_surface_contract, $manifest, $language_surface_source
 );
 
-printf "capability-conformance: OK (schema v2; %d capabilities; backend states pass=%d partial=%d gap=%d; %d exclusions; %d governance mutations; %d governed projections; %d public mutations; %d language-surface mutations)\n",
+printf "capability-conformance: OK (schema v2; %d capabilities; backend states pass=%d partial=%d gap=%d; %d exclusions; %d governance mutations; %d mutation capabilities; %d mutation-admission mutations; %d governed projections; %d public mutations; %d language-surface mutations)\n",
  scalar(@{$manifest->{capabilities}}), @{$counts}{qw(pass partial gap)}, scalar(@{$manifest->{excluded_or_future}}),
- $mutation_count, scalar(@expected_public_projections), $public_mutation_count, $language_surface_mutation_count;
+ $mutation_count, scalar(@expected_mutation_capabilities), $mutation_admission_count,
+ scalar(@expected_public_projections), $public_mutation_count, $language_surface_mutation_count;

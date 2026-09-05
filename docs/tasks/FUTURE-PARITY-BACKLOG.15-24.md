@@ -721,10 +721,10 @@
   Commit: `FUTURE-PARITY-BACKLOG.18.3 - plan optional native parser acceleration`
 
 - ID: `FUTURE-PARITY-BACKLOG.19`
-  Status: `in progress; Rust .19.3.1 active`
+  Status: `in progress; recurring proof .19.8 next`
   Goal: Add portable explicit nested-write vivification and receiver-mutating method semantics without hidden
     reads, host-language aliasing, or backend drift.
-  Children: `.19.0`, `.19.1`, `.19.2`, `.19.3`, `.19.4`, `.19.5`, `.19.6`, `.19.7`
+  Children: `.19.0`, `.19.1`, `.19.2`, `.19.3`, `.19.4`, `.19.5`, `.19.6`, `.19.7`, `.19.8`, `.19.9`
   Acceptance: The language distinguishes reads from creating writes, defines path/container/conflict/gap semantics
     neutrally, uses `!` only for methods that genuinely mutate their receiver and have a clear non-mutating twin,
     preserves root-kind traversal and stable callback paths, reaches exact Perl/Rust/Dart/Julia/Lua parity, and
@@ -2061,9 +2061,124 @@
   Commit: `FUTURE-PARITY-BACKLOG.19.6.2 - implement Lua map leaves mutation`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.7`
-  Status: `pending`
-  Goal: Admit the portable surface and close public/capability/book/KM/cross-backend no-drift.
+  Status: `done; canonical-signoff-complete` (2026-09-04; activated from exact clean Lua mutation commit
+    `1a24a76297ed579abae919e0baba356f44ea89bb`; no push)
+  Goal: Admit both completed mutation contracts as portable capabilities without advancing recurrence or public
+    closeout early.
   Dependencies: `.19.2`, `.19.3`, `.19.4`, `.19.5`, `.19.6`
+  Verification tier: `canonical` — this leaf changes portable capability truth after all five backend
+    implementations and six runtime routes are complete. ADR `0073` classifies capability admission as an exact
+    staged receipt boundary.
+  Focused checks: retrieve both frozen neutral contracts and their composition authority; audit the capability
+    manifest/schema/checker, generated-source and language-coverage projections, support ledgers, and exact
+    backend/runtime evidence; admit only nested write-vivification and `map_leaves!` mutation rows whose current
+    implementations satisfy every frozen syntax, behavior, diagnostic, identity, atomicity, composition, and
+    typed-carrier invariant; reject incomplete/stale/topology mutations; keep facades, schemas, MCP, CLI, runtime,
+    fixture semantics, and public-current examples unchanged; synchronize task/index, decision, Knowledge,
+    roadmaps, architecture, bounded live/history, memory, and mdBook status; run focused neutral/capability/direct-
+    dependent proof, all nine doctrines, render/cleanup, whitespace, and exact staged canonical CI.
+  Canonical trigger: `portable capability admission` — stage the exact candidate with no unstaged inputs and run
+    receipt-bound `bash tools/run_ci_local.sh` before atomic commit. Recurring gate registration remains `.19.8`;
+    public-current examples, final no-drift, parent closeout, and push remain `.19.9`.
+  Acceptance: Capability governance names both exact frozen authorities and their composition dependency, records
+    five backend implementations and six runtime routes complete, and fails closed if any required implementation,
+    route, contract digest, diagnostic/result boundary, or generated/reconstructed carrier regresses. Existing
+    capability totals and public projections advance only by the exact admitted rows. No production source,
+    runtime behavior, generated format, public facade/schema/MCP/CLI surface, or current teaching example changes.
+  Ownership: `.19.7` owns the missing `.19.8-.19.9` task-row restoration, portable capability admission, its exact
+    governance proof, and status-only durable synchronization. `.19.8` exclusively owns recurring six-runtime
+    execution/registration. `.19.9` exclusively owns public-current teaching/no-drift, parent closeout, and push.
+  Checklist: [x] exact clean activation/task ownership [x] missing split root-caused and restored
+    [x] Knowledge/ADR/capability-owner retrieval [x] exact pre-admission capability RED
+    [x] portable rows/schema/checker [x] topology/digest/stale-state mutation proof
+    [x] focused neutral/direct-dependent proof [x] durable status synchronization
+    [x] exact staged canonical signoff [x] atomic commit/brief/clean handoff.
+  Activation evidence: exact `git status --short --untracked-files=all` was empty at
+    `1a24a76297ed579abae919e0baba356f44ea89bb`; `git_message_brief.txt` was zero bytes; `.19.6.2` was committed
+    after exact staged canonical CI and all nine doctrine hooks, with the receipt promoted to that HEAD. The
+    canonical and commit jobs were fully consumed, generated mdBook output was absent, and no background result
+    remained. History proves `.19` originally listed only broad `.19.7`; refinement commit `db71152a` deliberately
+    assigned admission, recurrence, and public-current work to `.19.7-.9` but omitted the `.19.8` and `.19.9`
+    records. This task-tree-first activation restores those promised owners before any capability change.
+  Pre-admission RED evidence: an exact `jq -e` query requiring both future IDs in
+    `capability_conformance/manifest.json` returned `false` with status 1 at the clean activation boundary. The
+    capability owner, schema-v2 validator, generated-source census, language-coverage checker, both immutable
+    neutral contracts, and their digest-linked composition authority were retrieved before implementation.
+  Implementation evidence: the manifest adds exactly `language.nested_write_vivification` and
+    `language.map_leaves_receiver_mutation` immediately after standalone lifecycle, each as `language-runtime`
+    with exact ADR/neutral/composition sources and pass references for Perl, Rust, Dart, Julia, and Lua. The two
+    Lua rows require independent PUC Lua/LuaJIT execution. Census advances 18→20 capabilities and 90→100 pass
+    states with zero partial/gap. The capability checker pins row text/order/source/evidence/note/owner state,
+    both frozen authority IDs/formats/statuses/canonical JSON digests, and composition ID/path/digest topology;
+    16 admission mutations reject omission, duplication, reordering, stale status, proof substitution, and
+    authority drift. Frozen neutral artifact bytes and historically accurate `future-neutral` statuses do not
+    change; their checker success summaries now distinguish frozen neutral authority from external capability
+    admission instead of making the stale global claim that behavior remains unadmitted.
+  Focused evidence: capability schema/governance passes at 20 / 100/0/0 with 16 admission mutations; neutral
+    write 5/7/11/16/3/3 plus 105 mutations and map 4/14/5/10/8 plus 167+592 mutations pass; generated-source reports
+    census 100/0/0 and language coverage remains 250 / 105+1 / 126. Direct consumers pass Perl 19 tests; Rust 9
+    bang + 5 write + 3 private receiver-state tests; Dart 20; Julia 406 write + 496 bang; and Lua 438 write + 530
+    bang assertions independently on both ABIs. Rust builds reproduce only the already-owned 1,870 `pgen` and 26
+    `rgx-core` warning-output baseline. One delayed Rust binary was sampled at `_dyld_start` before `main`, exactly
+    matching the separately closed external macOS launch classification; its automatic off-volume sample report
+    was deleted immediately and an exact residue check passed.
+  Canonical attempt one: the staged doctrine phase passes eight checks but verification cadence rejects three
+    newly added `Verification tier:` lines: completed owner `.19.7` plus restored, still-pending `.19.8` and
+    `.19.9`. Pending task records acquire their single formal tier declaration when activated. Removing the two
+    premature declarations leaves exactly one owning-leaf tier without changing their canonical boundary,
+    acceptance, dependencies, or scope; the corrected exact staged candidate reruns from the beginning.
+  Canonical attempt two: the corrected staged candidate passes every preceding doctrine, contract, backend,
+    generated-carrier, MCP, and semantic-introspection stage, then the outer agent sandbox denies the process-
+    locality oracle's required nested macOS `sandbox-exec` profile with status 71. This is the repository's
+    previously classified harness boundary rather than a project containment failure. The exact candidate records
+    that environmental stop, refreshes its task index, and reruns the complete canonical gate with host permission
+    so the nested deny-write/necessary-read proof and every later stage execute authoritatively.
+  Durable-sync evidence: ADR `0036` and its index, Knowledge sources and derived map, both roadmaps, architecture,
+    Toolbox, task/index, bounded change/engineering/live state, memory, capability guide, and sole-facing mdBook
+    now distinguish admitted capability `.19.7` from recurring proof `.19.8` and public-current closeout `.19.9`.
+    No production, generated format, facade/schema/MCP/CLI contract, recurring registration, or example changes.
+  Signoff evidence: the final exact staged candidate passes capability 20 / 100/0/0 with all 16 admission
+    mutations; both frozen neutral checkers and their 105 / 167+592 mutation suites; generated/language
+    projections; direct Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT consumers; both bounded-history checks;
+    Knowledge/task regeneration; rendered mdBook; whitespace; all nine doctrines; and receipt-bound canonical CI.
+    Generated book output is removed, the commit brief is cleared, and the clean handoff points exclusively to
+    not-yet-activated recurrence `.19.8`.
+  Verification: `canonical-signoff-complete`
+  Commit: `FUTURE-PARITY-BACKLOG.19.7 - admit portable mutation capabilities`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.8`
+  Status: `pending`
+  Goal: Register and execute one exact recurring six-runtime proof for both mutation contracts and their composed
+    transaction boundaries.
+  Dependencies: `.19.7`
+  Acceptance: One repository-routed driver executes the unchanged write-vivification, `map_leaves!`, and composed
+    authorities through Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; verifies capability/generated/language/support
+    ledgers; rejects omission, route substitution, stale digest/status, and ordering drift; stores all project data
+    on the repository volume; registers exactly once in canonical CI; and changes no production behavior, public
+    current examples, facade/schema/MCP/CLI contract, or parent status. Adding the recurring cross-backend gate is
+    a canonical verification-infrastructure boundary under ADR `0073`; its formal tier is recorded at activation.
+  Ownership: `.19.8` owns only recurring driver/registration, exact omission-governed proof, and status sync.
+    Public-current teaching/no-drift, parent closeout, and push remain `.19.9`.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.9`
+  Status: `pending`
+  Goal: Publish the admitted mutation surface, close exhaustive public/book/Knowledge/no-drift proof and parent
+    `.19`, then complete the batch push boundary.
+  Dependencies: `.19.8`
+  Acceptance: Every governed public document and the sole-facing mdBook teaches nested write-vivification and
+    `map_leaves!` exactly, with examples covering creation, dense arrays, conflicts, evaluation order, original-
+    shape traversal, callback fields, identity guard, rollback, detached results, composition, and post-commit
+    continuation. A recurring public checker requires current anchors and rejects stale unsupported/non-vivifying
+    claims without rewriting historical records. Knowledge, task/index, both roadmaps, architecture, changes,
+    notes, live status, memory, capability/language/generated/support projections, and ADR/index agree; the exact
+    six-runtime recurring gate and canonical CI pass on the staged candidate; parent `.19` closes; the committed
+    clean HEAD passes pre-push proof and the completed batch is pushed once. Final public admission, parent
+    closeout, and outward push form a canonical boundary under ADR `0073`; its formal tier is recorded at
+    activation.
+  Ownership: `.19.9` owns public-current content and checker, final no-drift/parent closeout, and the push boundary;
+    it must not change the already-admitted contract or production runtime semantics.
   Verification: `pending`
   Commit: `pending`
 
