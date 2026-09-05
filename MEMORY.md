@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `1a24a76297ed579abae919e0baba356f44ea89bb` — exact clean Lua `map_leaves!` implementation commit from which portable admission `FUTURE-PARITY-BACKLOG.19.7` was activated task-tree-first.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.19.7 - admit portable mutation capabilities`; canonical signoff complete.
-- active_work_unit: none; exact clean post-`.19.7` handoff, with `.19.8` not yet activated and no push.
-- next_action: activate `FUTURE-PARITY-BACKLOG.19.8` task-tree-first from the clean `.19.7` commit, then build its
-  recurring six-runtime proof without advancing public-current closeout `.19.9`.
+- activation_commit: `e77b0ec64e61bb5c4fb461988f505c670e95e2f0` — exact clean portable mutation-capability admission commit from which recurring proof `FUTURE-PARITY-BACKLOG.19.8` was activated task-tree-first.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.19.8 - register recurring mutation proof`; canonical signoff complete.
+- active_work_unit: none; exact clean post-`.19.8` handoff, with `.19.9` not yet activated and no push.
+- next_action: activate `FUTURE-PARITY-BACKLOG.19.9` task-tree-first from the clean `.19.8` commit, then publish
+  the admitted mutation surface, close parent `.19`, run the final push boundary, and push the completed batch.
 - in_flight_uncommitted: none; no background job remains.
 - blockers: none.
 - current_rust_warning_debt: repeated clean carriers report 1,870 `pgen` plus 26 `rgx-core` output warnings;
@@ -17,14 +17,15 @@
   results, exact diagnostics/spans, invocation-local absent/null presence, and read exclusions at 105 rejected
   mutations. Rust, Dart, Julia, PUC Lua, and LuaJIT preserve it through supported serialized/reconstructed/
   generated/emitted carriers. Portable capability `language.nested_write_vivification` is admitted by `.19.7`;
-  recurring proof remains `.19.8` and final public-current teaching remains `.19.9`.
+  exact six-runtime recurrence is complete under `.19.8`, and final public-current teaching remains `.19.9`.
 - current_map_leaves_mutation: `linkedspec-map-leaves-mutation-v1` is implemented on all five backends with one bang-only mutation AST,
   resolved receiver identity guard, root-kind original-shape traversal, copied frames, atomic rebind, detached
   result, post-commit continuation, exact diagnostics/exclusions, and 167 base mutations. Receiver callback writes
   through assignment, nested write/bang, mutation helpers, array-end methods, and binding-target array pipelines
   are guarded. Rust, Dart, Julia, PUC Lua, and LuaJIT preserve the typed node through their supported reconstructed/
   generated/emitted carriers; the Lua suite passes 530 assertions per ABI. Portable capability
-  `language.map_leaves_receiver_mutation` is admitted by `.19.7`; recurrence/public closeout remain `.19.8-.19.9`.
+  `language.map_leaves_receiver_mutation` is admitted by `.19.7`; exact six-runtime recurrence is complete under
+  `.19.8`, and public closeout remains `.19.9`.
 - current_rule_entry_dispatch_invariant: selecting a rule enters its handler and starts its mode-driven execution;
   entry alone never tests that rule's own regex. An outgoing `->` match edge selects its target rule's regex. Rust now has
   both the direct-entry negative lock and a zero-regex-parent positive trace with typed `target_rule=Done`; the
@@ -37,8 +38,8 @@
   one wholly unmanipulated unique provenance-tagged control first-launched in 0.41 seconds. No repo repair applies.
 - current_mutation_composition_contract: `linkedspec-write-map-leaves-composition-v1` digest-binds both unchanged
   mechanisms across eight writes, six callback cases, one continuation, and 592 current composition mutations;
-  Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT execute both halves. Zero-regex `Top:: -> Done` lets the parent
-  loop select and match `Done`'s regex, not an inert parent one.
+  Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT execute both halves through one governed recurring driver. Zero-regex
+  `Top:: -> Done` lets the parent loop select and match `Done`'s regex, not an inert parent one.
 - current_map_leaves_scope_resolution: option A preserves pure functions. Helper-mediated rejection uses inline
   explicit-target `set(tree, ...)`; post-commit receiver-write proof uses caller-scoped `.with()`. No implicit
   caller capture or arbitrary user-defined bang method is admitted.
@@ -48,9 +49,10 @@
 - standing_contracts: all durable paths are repo-relative; all project data stays on the repository filesystem;
   README remains bounded; ordinary leaves use focused proof and designated infrastructure/public/push boundaries
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
-- current_engineering_notes_capacity: immutable segment `4986` is the twenty-first manifest record; ADR `0099`
-  authorizes exactly 22 collection files / 21 manifest lines with every byte and aggregate ceiling unchanged.
+- current_engineering_notes_capacity: immutable segment `4985-18da440ab1c4` is the twenty-second manifest record;
+  ADR `0101` authorizes exactly 23 collection files / 22 manifest lines with every byte and aggregate ceiling
+  unchanged.
 - current_change_history_capacity: immutable segment `4986` is the twenty-fifth history segment; ADR `0100`
   authorizes exactly 27 collection files / 26 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-04 — README, memory architecture, current memory/bootstrap, task-tree doctrine,
-  `.19.6.2`, mutation/composition/Lua traversal Knowledge, verification policy, and exact Git state read.
+- latest_bootstrap_read: 2026-09-05 — README, memory architecture, current memory/bootstrap, task-tree doctrine,
+  `.19.8`, mutation/composition Knowledge, verification policy, and exact Git state read.

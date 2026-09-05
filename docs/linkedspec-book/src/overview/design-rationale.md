@@ -59,8 +59,8 @@ But concision must not hide what is happening. The project direction is toward:
 - stronger documentation expectations (every surface explained, every contract explicit)
 
 The same principle governs two mutation extensions. Nested writes and receiver mutation are current on all five
-backends, and `.19.7` admits both exact portable capability rows. Recurring proof remains `.19.8`; final public-
-current no-drift and parent closeout remain `.19.9`.
+backends, `.19.7` admits both exact portable capability rows, and `.19.8` completes exact six-runtime recurrence.
+Final public-current no-drift and parent closeout remain `.19.9`.
 
 First, the neutral nested-write contract fixes how assignment creates missing path containers. Perl, Rust, Dart,
 Julia, PUC Lua, and LuaJIT implement it. The authored form stays ordinary assignment:
@@ -95,7 +95,8 @@ unchanged contract under `.19.2.1`, `.19.3.1`, `.19.4.1`, `.19.5.1`, and `.19.6.
 emitted-source, independently analyzed/executed caller-package, and primary-CLI routes. Julia preserves it through
 native, reconstructed, generated-plan, emitted-module, and primary-CLI routes. Lua preserves it through those same
 supported route families on both ABIs. `.19.7` admits the exact nested-write capability row while preserving the
-frozen neutral contract; recurring six-runtime proof and final public-current closeout remain `.19.8-.19.9`.
+frozen neutral contract, and `.19.8` completes exact six-runtime recurrence; final public-current closeout remains
+`.19.9`.
 
 Second, LinkedSpec reserves a Ruby-style trailing `!` for a method that genuinely updates its receiver. The only
 version-1 candidate is:

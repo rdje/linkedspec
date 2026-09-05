@@ -721,7 +721,7 @@
   Commit: `FUTURE-PARITY-BACKLOG.18.3 - plan optional native parser acceleration`
 
 - ID: `FUTURE-PARITY-BACKLOG.19`
-  Status: `in progress; recurring proof .19.8 next`
+  Status: `in progress; public closeout .19.9 next`
   Goal: Add portable explicit nested-write vivification and receiver-mutating method semantics without hidden
     reads, host-language aliasing, or backend drift.
   Children: `.19.0`, `.19.1`, `.19.2`, `.19.3`, `.19.4`, `.19.5`, `.19.6`, `.19.7`, `.19.8`, `.19.9`
@@ -2147,10 +2147,22 @@
   Commit: `FUTURE-PARITY-BACKLOG.19.7 - admit portable mutation capabilities`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.8`
-  Status: `pending`
+  Status: `done; canonical-signoff-complete` (2026-09-05; task-tree-first from exact clean portable mutation-capability admission commit
+    `e77b0ec64e61bb5c4fb461988f505c670e95e2f0`; no push)
   Goal: Register and execute one exact recurring six-runtime proof for both mutation contracts and their composed
     transaction boundaries.
   Dependencies: `.19.7`
+  Verification tier: `canonical` — adding a new recurring cross-backend gate and its exact canonical-CI
+    registration changes verification infrastructure under ADR `0073`; the receipt-bound staged candidate must
+    pass canonical local CI before commit, while `.19.9` retains public-current closeout and the push boundary.
+  Focused checks: exact write-vivification, `map_leaves!`, and composition contract checkers; all six production
+    runtime consumers; capability/generated/language/support ledgers; recurring driver syntax, executable bit,
+    repository routing, deterministic order, omission/substitution/digest/status mutation rejection, exact-one CI
+    registration, project-storage locality, task/index, Knowledge Map, bounded live/history, memory, doctrines,
+    mdBook render if current behavior wording moves, and whitespace.
+  Canonical trigger: `recurring cross-backend verification infrastructure + mandatory bounded-notes rollover` —
+    the exact staged candidate must pass receipt-bound canonical local CI before this leaf commits; no push occurs
+    until `.19.9`.
   Acceptance: One repository-routed driver executes the unchanged write-vivification, `map_leaves!`, and composed
     authorities through Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; verifies capability/generated/language/support
     ledgers; rejects omission, route substitution, stale digest/status, and ordering drift; stores all project data
@@ -2159,8 +2171,47 @@
     a canonical verification-infrastructure boundary under ADR `0073`; its formal tier is recorded at activation.
   Ownership: `.19.8` owns only recurring driver/registration, exact omission-governed proof, and status sync.
     Public-current teaching/no-drift, parent closeout, and push remain `.19.9`.
-  Verification: `pending`
-  Commit: `pending`
+  Checklist: [x] clean activation/task ownership [x] Knowledge/toolbox/CI-registry retrieval
+    [x] exact recurring driver and repository routing [x] omission/digest/status/order governance
+    [x] exact-one canonical-CI registration [x] all-six-runtime and ledger proof
+    [x] durable status/Knowledge/task/index synchronization [x] exact staged canonical signoff
+    [x] atomic commit/brief/clean handoff.
+  Activation evidence: exact `git status --short --untracked-files=all` is empty at
+    `e77b0ec64e61bb5c4fb461988f505c670e95e2f0`; `git_message_brief.txt` is zero bytes; the promoted canonical receipt
+    matches that HEAD; `.19.7` is committed complete at capability 100/0/0; no generated mdBook output or
+    background job remains, and no push occurred.
+  Implementation evidence: executable `tools/check_mutation_six_runtime.sh` enters repository-managed project
+    data, validates the unchanged write and bang/composition authorities first, then runs exact Perl, Rust, Dart,
+    Julia, PUC-Lua, and LuaJIT consumers in deterministic order before generated-source, capability, and language-
+    coverage ledgers. Rust requests both integration targets in one Cargo invocation. Dart refreshes locked local
+    metadata with repository-routed `pub get --offline` before its separately reported tests. Canonical CI requires
+    and syntax-checks the tracked driver unconditionally, audits it for machine-specific paths, and executes it
+    exactly once only when `LINKEDSPEC_RUN_MUTATION_MATRIX=1`.
+  Governance evidence: the capability checker binds the recurring owner/driver/switch/storage initializer, exact
+    historical IDs/statuses/canonical JSON digests of all three authorities, ordered authority checks, six ordered
+    runtime route groups, support-ledger order, executable/tracked-path state, and exact-one CI topology. Seventeen
+    rejected recurring mutations cover authority omission/order/digest/status, route omission/substitution/order,
+    support omission/order, storage substitution, owner state, driver omission, CI omission/duplication, and live
+    artifact status/digest drift.
+  Diagnostic evidence: the first Dart route waited for more than thirteen minutes with nearly zero CPU and no
+    child process. A one-second stack sample showed the Dart run loop waiting; active SDK 3.13.3 disagreed with
+    ignored project-local metadata generated by 3.9.2. The offline routed refresh aligned that metadata and both
+    suites then passed immediately. The automatically created off-volume sample report was consumed, deleted by
+    exact path, and an exact residue census was empty; [[dart-sdk-local-metadata-refresh]] owns the reusable cause.
+  Capacity evidence: the mandatory complete engineering record crosses the 90% hot-shard threshold. The official
+    tool archives 239 exact clean-HEAD lines as immutable segment `4985-18da440ab1c4` and leaves the root at 232
+    lines. ADR `0101` advances only engineering-notes collection capacity 22→23 files and manifest capacity 21→22
+    lines; every byte, per-file, aggregate, owner, lifecycle, verifier, route, and storage control remains fixed.
+  Signoff evidence: the complete recurring driver passes write 5/7/11/16/3/3 plus eight composed writes and 105
+    mutations; bang 4/14/5/10/8 plus continuation/shadow/guard/nonbang/detachment, six callback and one continuation
+    composition, 167 base and 592 composition mutations; Perl 19 tests; Rust 5 write plus 9 bang/composition tests;
+    Dart 9 plus 11; Julia 406 plus 496; PUC Lua and LuaJIT 438 plus 530 each; generated source 100/0/0;
+    capability 20 / 100/0/0 plus 17 recurring mutations; and language coverage 250 / 105+1 / 126. Exact task/index,
+    Knowledge, bounded histories/live state, mdBook render, project storage, whitespace, all nine doctrines, and
+    receipt-bound staged canonical CI pass. ADR `0101` is the sole finite capacity movement. No production,
+    contract-artifact, public-current, facade/schema/MCP/CLI, parent-status, or push movement occurs.
+  Verification: `canonical-signoff-complete`
+  Commit: `FUTURE-PARITY-BACKLOG.19.8 - register recurring mutation proof`
 
 - ID: `FUTURE-PARITY-BACKLOG.19.9`
   Status: `pending`

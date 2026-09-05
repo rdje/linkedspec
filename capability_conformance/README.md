@@ -32,8 +32,8 @@ expression failures, three non-creating reads, detachment, eight writes from the
 105 rejected base mutations. Perl, Rust, Dart, Julia, and shared Lua now consume this unchanged contract through
 typed native and supported reconstructed/generated/emitted carriers; PUC Lua and LuaJIT execute the shared Lua
 consumer independently. `.19.7` admits `language.nested_write_vivification` with exact production/test references
-for all five backends and immutable composition-authority linkage. The recurring six-runtime gate remains `.19.8`,
-and final public-current no-drift remains `.19.9`.
+for all five backends and immutable composition-authority linkage. Exact six-runtime recurrence is complete under
+`.19.8`, and final public-current no-drift remains `.19.9`.
 
 ## Neutral `map_leaves!` receiver mutation
 
@@ -62,8 +62,8 @@ permanent direct proof in `t/map_leaves_mutation_perl_contract.t`; Rust, Dart, J
 same authority through typed native and supported reconstructed/generated/emitted carriers, with PUC Lua and
 LuaJIT independently executing the shared Lua consumer. `.19.7` admits
 `language.map_leaves_receiver_mutation` with exact production/test references on all five backends. The byte-
-identical non-bang control remains unchanged; recurring six-runtime proof remains `.19.8`, and final public-current
-no-drift remains `.19.9`.
+identical non-bang control remains unchanged; exact six-runtime recurrence is complete under `.19.8`, and final
+public-current no-drift remains `.19.9`.
 
 ## Neutral write/receiver-mutation composition
 
@@ -91,8 +91,30 @@ The exact composed fixture has a non-bang control returning `{"leaf":[]}` on all
 Dart, Julia, PUC Lua, and LuaJIT execute the bang form and its nested-write composition. The composition remains a
 dependency shared by the two admitted capability rows rather than a third capability. The capability checker pins
 both neutral authority IDs, formats, freeze statuses, canonical JSON digests, exact row order, five backend proof
-sets, and the Lua dual-ABI note through 16 rejected admission mutations. `.19.8` still owns one recurring composed
-driver; `.19.9` owns final public-current examples and no-drift.
+sets, and the Lua dual-ABI note through 16 rejected admission mutations. `.19.8` now supplies the recurring
+composed driver; `.19.9` owns final public-current examples and no-drift.
+
+## Recurring mutation proof
+
+Run the exact repository-routed recurrence with:
+
+```bash
+bash tools/check_mutation_six_runtime.sh
+```
+
+The driver validates the write authority and bang/composition authority first, then executes Perl, Rust, Dart,
+Julia, PUC Lua, and LuaJIT consumers in that fixed order before generated-source, capability, and language-
+coverage ledgers. It enters the project-data environment before invoking toolchains. The Dart leg refreshes
+locked package metadata through routed `pub get --offline`; it does not consult the network or a global cache.
+
+`tools/check_capability_conformance.pl` binds the recurring owner, driver, canonical opt-in switch, storage
+initializer, all three historical artifact IDs/statuses/canonical JSON digests, exact command and route order,
+support-ledger order, executable state, and exact-one canonical-CI registration. Seventeen rejected recurring
+mutations cover authority omission/order/digest/status, route omission/substitution/order, support omission/order,
+storage substitution, owner state, driver omission, CI omission/duplication, and live artifact status/digest drift.
+Canonical CI always requires, path-audits, and syntax-checks the driver; `LINKEDSPEC_RUN_MUTATION_MATRIX=1`
+executes it exactly once. This recurring boundary changes no capability row, frozen authority byte, production
+behavior, or public-current example.
 
 `mcp_semantic_transport_contract.json` (`linkedspec-mcp-transport-v1`) is the single backend-neutral machine
 contract for LinkedSpec's modern MCP `2026-07-28` stdio projection. Its root-relative artifact inventory pins the

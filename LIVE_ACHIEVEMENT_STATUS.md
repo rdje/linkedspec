@@ -2,23 +2,27 @@
 
 ## Current Activity
 
-- Portable mutation capability admission `.19.7` is complete at 100 pass / 0 partial / 0 gap. The next leaf is
-  recurring six-runtime proof `.19.8`, which is not yet activated. Production behavior, neutral contract bytes,
-  public-current examples, and the queued Rust warning remediation remain unchanged.
+- Recurring mutation proof `.19.8` is complete across Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. The next leaf
+  is public-current closeout `.19.9`, which is not yet activated. Production behavior, frozen contract bytes,
+  public-current examples, parent `.19`, and the queued Rust warning remediation remain unchanged.
 
 ## Latest Completed Slice
 
-- `.19.7` admits `language.nested_write_vivification` and `language.map_leaves_receiver_mutation` through exact
-  five-backend evidence, frozen-neutral/composition digests, and 16 fail-closed admission mutations. Capability
-  governance, direct six-runtime consumers, all nine doctrines, mdBook, and exact staged canonical CI pass.
+- `.19.8` adds one repository-routed recurring driver for both mutation authorities and their composition. Exact
+  ordered six-runtime consumers, three support ledgers, 17 fail-closed recurrence mutations, all nine doctrines,
+  mdBook, and receipt-bound staged canonical CI pass without production or public-current movement.
 
 ## Next Action
 
-- From the clean `.19.7` commit, activate recurring six-runtime proof `.19.8` task-tree-first. Public-current
-  teaching, parent `.19` closeout, and push remain `.19.9`; warning census `.1` stays durably queued and
-  non-blocking.
+- From the clean `.19.8` commit, activate public-current closeout `.19.9` task-tree-first. Publish exact examples,
+  prove public no-drift, close parent `.19`, complete the push boundary, and push; warning census `.1` stays
+  durably queued and non-blocking.
 
 ## Recent Completions
+
+- `2026-09-05` — `.19.8` registers one exact recurring mutation driver across six runtime routes, frozen
+  authority/composition digests, support ledgers, project-local storage, exact-one canonical CI, and 17 rejected
+  topology mutations; all focused and receipt-bound canonical proof passes without behavior/public movement.
 
 - `2026-09-04` — `.19.7` admits two portable mutation capabilities at 100/0/0, pins exact frozen authority and
   composition topology through 16 admission mutations, preserves production/neutral bytes, and passes direct
@@ -73,9 +77,6 @@
 
 - `2026-08-31` — `.19.2.1` implements Perl write vivification from the frozen 5/7/11/16 fixture with typed
   evaluated paths, presence-aware rules/functions, isolated dense commit, detachment, and no non-Perl admission.
-
-- `2026-08-31` — `.19.1.3` originally freezes both future mutations at 8 writes / 6 callbacks / 1 continuation /
-  593 mutations; the later pure-function carrier correction preserves the observations at 592 current mutations.
 
 ## History
 

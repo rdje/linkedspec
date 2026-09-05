@@ -731,7 +731,8 @@ dispatch rule.
 - **Returns**: a detached copy of the updated harray or array root; the named receiver is also rebound atomically.
 - **Backend status**: current on Perl under `FUTURE-PARITY-BACKLOG.19.2.2`, Rust under `.19.3.2`, Dart under
   `.19.4.2`, Julia under `.19.5.2`, and shared Lua under `.19.6.2` on PUC Lua and LuaJIT. `.19.7` admits the exact
-  portable capability row; recurring proof remains `.19.8`, and public-current closeout remains `.19.9`.
+  portable capability row and `.19.8` completes exact six-runtime recurrence; public-current closeout remains
+  `.19.9`.
 - **Addressability**: `binding_name` must be one existing, non-reserved, bare uniform binding that holds an harray
   or array. Literals, temporaries, helper results, bracket/property receivers, function-form `map_leaves!(tree)`,
   other bang methods, and arbitrary user-defined `name!` functions are not valid v1 forms.

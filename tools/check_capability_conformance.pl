@@ -274,6 +274,86 @@ my %expected_mutation_authorities = (
  },
 );
 my $mutation_composition_path = 'capability_conformance/write_map_leaves_composition_contract.json';
+my $mutation_recurring_owner = 'FUTURE-PARITY-BACKLOG.19.8';
+my $mutation_recurring_driver = 'tools/check_mutation_six_runtime.sh';
+my $mutation_recurring_switch = 'LINKEDSPEC_RUN_MUTATION_MATRIX';
+my $mutation_recurring_storage_initializer = 'tools/project_data_env.sh';
+my @expected_mutation_recurring_authority_order = qw(
+ write_vivification
+ map_leaves_mutation
+ composition
+);
+my %expected_mutation_recurring_authorities = (
+ write_vivification => {
+  path                  => 'capability_conformance/write_vivification_contract.json',
+  contract_id           => 'linkedspec-write-vivification-v1',
+  status                => 'future-neutral-contract; no backend behavior admitted',
+  canonical_json_sha256 => 'efabe777bf7fa5d7c3fa6e6fbe181bba89931b8c9b93a3631013c1f6009a2663',
+ },
+ map_leaves_mutation => {
+  path                  => 'capability_conformance/map_leaves_mutation_contract.json',
+  contract_id           => 'linkedspec-map-leaves-mutation-v1',
+  status                => 'future-neutral-contract; no backend behavior admitted',
+  canonical_json_sha256 => 'a15c6dd363b4cb8cbd5d3d6781b4abc0bf0412b7ee3eb7576a3c674bf19d2db9',
+ },
+ composition => {
+  path                  => 'capability_conformance/write_map_leaves_composition_contract.json',
+  contract_id           => 'linkedspec-write-map-leaves-composition-v1',
+  status                => 'future-neutral-composition; no backend behavior admitted',
+  canonical_json_sha256 => 'a7d20c825cb3d8362d6f278586b6bb65c215e4a84ba64f5bb15bd10b1b82ba2f',
+ },
+);
+my @expected_mutation_recurring_authority_checks = (
+ 'bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py',
+ 'bash tools/run_python_project_data.sh tools/check_map_leaves_mutation_contract.py',
+);
+my @expected_mutation_recurring_routes = (
+ {
+  id       => 'perl',
+  commands => [
+   'PERL5OPT=-Mwarnings=FATAL PERL5LIB= prove -Iperl t/write_vivification_perl_contract.t t/map_leaves_mutation_perl_contract.t',
+  ],
+ },
+ {
+  id       => 'rust',
+  commands => [
+   '"$CARGO_CMD" test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test write_vivification_contract --test map_leaves_mutation_contract',
+  ],
+ },
+ {
+  id       => 'dart',
+  commands => [
+   '( cd dart && bash ../tools/run_dart_project_data.sh pub get --offline )',
+   '( cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/write_vivification_contract_test.dart )',
+   '( cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/map_leaves_mutation_contract_test.dart )',
+  ],
+ },
+ {
+  id       => 'julia',
+  commands => [
+   q{bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --compiled-modules=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT = pwd(); include("julia/test/write_vivification_contract_test.jl"); include("julia/test/map_leaves_mutation_contract_test.jl")'},
+  ],
+ },
+ {
+  id       => 'puc_lua',
+  commands => [
+   'bash tools/run_lua_project_data.sh puc lua/test/write_vivification_contract_test.lua',
+   'bash tools/run_lua_project_data.sh puc lua/test/map_leaves_mutation_contract_test.lua',
+  ],
+ },
+ {
+  id       => 'luajit',
+  commands => [
+   'bash tools/run_lua_project_data.sh luajit lua/test/write_vivification_contract_test.lua',
+   'bash tools/run_lua_project_data.sh luajit lua/test/map_leaves_mutation_contract_test.lua',
+  ],
+ },
+);
+my @expected_mutation_recurring_support_checks = (
+ 'perl tools/check_generated_source_contract.pl',
+ 'perl tools/check_capability_conformance.pl',
+ 'perl tools/check_language_capability_coverage.pl',
+);
 
 sub clone_value {
  my ($value) = @_;
@@ -317,6 +397,166 @@ sub require_exact_string_array {
 sub canonical_json_sha256 {
  my ($value) = @_;
  return sha256_hex(JSON::PP->new->canonical(1)->utf8(1)->encode($value));
+}
+
+sub expected_mutation_recurring_gate {
+ return {
+  owner               => $mutation_recurring_owner,
+  driver              => $mutation_recurring_driver,
+  local_ci_switch     => $mutation_recurring_switch,
+  storage_initializer => $mutation_recurring_storage_initializer,
+  authority_order     => clone_value(\@expected_mutation_recurring_authority_order),
+  authorities         => clone_value(\%expected_mutation_recurring_authorities),
+  authority_checks    => clone_value(\@expected_mutation_recurring_authority_checks),
+  runtime_routes      => clone_value(\@expected_mutation_recurring_routes),
+  support_checks      => clone_value(\@expected_mutation_recurring_support_checks),
+ };
+}
+
+sub substring_count {
+ my ($source, $needle) = @_;
+ fail('cannot count an empty recurring marker') unless length $needle;
+ my $count = 0;
+ my $offset = 0;
+ while (1) {
+  my $position = index($source, $needle, $offset);
+  last if $position < 0;
+  $count++;
+  $offset = $position + length($needle);
+ }
+ return $count;
+}
+
+sub require_exact_markers_in_order {
+ my ($where, $source, $markers) = @_;
+ my $prior = -1;
+ for my $marker (@$markers) {
+  my $count = substring_count($source, $marker);
+  fail("$where marker must appear exactly once: $marker") unless $count == 1;
+  my $position = index($source, $marker);
+  fail("$where marker order drifted at: $marker") unless $position > $prior;
+  $prior = $position;
+ }
+}
+
+sub validate_mutation_recurring_gate {
+ my ($gate, $task_status, $artifacts, $driver_source, $ci_source, $check_files) = @_;
+ require_hash_keys(
+  'mutation recurring gate',
+  $gate,
+  qw(
+   owner
+   driver
+   local_ci_switch
+   storage_initializer
+   authority_order
+   authorities
+   authority_checks
+   runtime_routes
+   support_checks
+  ),
+ );
+ fail('mutation recurring owner drifted') unless $gate->{owner} eq $mutation_recurring_owner;
+ fail("mutation recurring owner '$gate->{owner}' is not tracked") unless exists $task_status->{$gate->{owner}};
+ fail("mutation recurring owner '$gate->{owner}' must be active or done")
+  unless $task_status->{$gate->{owner}} eq 'active' || $task_status->{$gate->{owner}} eq 'done';
+ fail('mutation recurring driver drifted') unless $gate->{driver} eq $mutation_recurring_driver;
+ fail('mutation recurring local-CI switch drifted') unless $gate->{local_ci_switch} eq $mutation_recurring_switch;
+ fail('mutation recurring storage initializer drifted')
+  unless $gate->{storage_initializer} eq $mutation_recurring_storage_initializer;
+ require_exact_string_array(
+  'mutation recurring authority order',
+  $gate->{authority_order},
+  \@expected_mutation_recurring_authority_order,
+ );
+ require_exact_string_array(
+  'mutation recurring authority checks',
+  $gate->{authority_checks},
+  \@expected_mutation_recurring_authority_checks,
+ );
+ require_exact_string_array(
+  'mutation recurring support checks',
+  $gate->{support_checks},
+  \@expected_mutation_recurring_support_checks,
+ );
+
+ require_hash_keys(
+  'mutation recurring authorities',
+  $gate->{authorities},
+  @expected_mutation_recurring_authority_order,
+ );
+ for my $name (@expected_mutation_recurring_authority_order) {
+  my $actual = $gate->{authorities}{$name};
+  my $expected = $expected_mutation_recurring_authorities{$name};
+  require_hash_keys(
+   "mutation recurring authorities.$name",
+   $actual,
+   qw(path contract_id status canonical_json_sha256),
+  );
+  for my $field (qw(path contract_id status canonical_json_sha256)) {
+   fail("mutation recurring $name $field drifted") unless $actual->{$field} eq $expected->{$field};
+  }
+  my $artifact = $artifacts->{$name};
+  fail("mutation recurring $name artifact must be an object") unless ref($artifact) eq 'HASH';
+  fail("mutation recurring $name artifact id is stale")
+   unless $artifact->{contract_id} eq $actual->{contract_id};
+  fail("mutation recurring $name artifact status is stale")
+   unless $artifact->{status} eq $actual->{status};
+  fail("mutation recurring $name artifact digest is stale")
+   unless canonical_json_sha256($artifact) eq $actual->{canonical_json_sha256};
+ }
+
+ fail('mutation recurring runtime routes must be an array') unless ref($gate->{runtime_routes}) eq 'ARRAY';
+ fail('mutation recurring runtime route count drifted')
+  unless @{$gate->{runtime_routes}} == @expected_mutation_recurring_routes;
+ for my $index (0 .. $#expected_mutation_recurring_routes) {
+  my $actual = $gate->{runtime_routes}[$index];
+  my $expected = $expected_mutation_recurring_routes[$index];
+  require_hash_keys("mutation recurring runtime_routes[$index]", $actual, qw(id commands));
+  fail("mutation recurring runtime route $index id drifted") unless $actual->{id} eq $expected->{id};
+  require_exact_string_array(
+   "mutation recurring runtime route $actual->{id} commands",
+   $actual->{commands},
+   $expected->{commands},
+  );
+ }
+
+ if ($check_files) {
+  require_repo_path('mutation recurring driver', $gate->{driver});
+  require_repo_path('mutation recurring storage initializer', $gate->{storage_initializer});
+  fail('mutation recurring driver must be executable')
+   unless -x File::Spec->catfile($repo_root, split m{/}, $gate->{driver});
+ }
+
+ my @driver_commands = (
+  @{$gate->{authority_checks}},
+  map({ @{$_->{commands}} } @{$gate->{runtime_routes}}),
+  @{$gate->{support_checks}},
+ );
+ require_exact_markers_in_order('mutation recurring driver', $driver_source, \@driver_commands);
+ require_exact_markers_in_order(
+  'mutation recurring storage route',
+  $driver_source,
+  [
+   'source "$REPO_ROOT/tools/project_data_env.sh"',
+   'linkedspec_project_data_enter_run "$REPO_ROOT/tools/check_mutation_six_runtime.sh" "$@"',
+  ],
+ );
+
+ my $ci_if = 'if [[ "${LINKEDSPEC_RUN_MUTATION_MATRIX:-0}" == "1" ]]; then';
+ my $ci_run = 'bash "$REPO_ROOT/tools/check_mutation_six_runtime.sh"';
+ my $ci_syntax = 'bash -n tools/check_mutation_six_runtime.sh';
+ my $ci_audit = 'mutation_driver_matches=$(grep -nE';
+ fail('mutation recurring canonical-CI condition must appear exactly once')
+  unless substring_count($ci_source, $ci_if) == 1;
+ fail('mutation recurring driver must execute exactly once in canonical CI')
+  unless substring_count($ci_source, $ci_run) == 1;
+ fail('mutation recurring driver syntax registration must appear exactly once')
+  unless substring_count($ci_source, $ci_syntax) == 1;
+ fail('mutation recurring driver path audit must appear exactly once')
+  unless substring_count($ci_source, $ci_audit) == 1;
+ fail('mutation recurring driver must have one inventory and one execution-time tracked-file check')
+  unless substring_count($ci_source, "require_tracked_file $mutation_recurring_driver") == 2;
 }
 
 sub validate_mutation_capabilities {
@@ -830,6 +1070,119 @@ sub mutation_capability_admission_checks {
  return scalar @mutations;
 }
 
+sub mutation_recurring_gate_checks {
+ my ($gate, $task_sources, $artifacts, $driver_source, $ci_source) = @_;
+ my $task_status = parse_task_statuses($task_sources);
+ my @mutations;
+ my $add_gate_mutation = sub {
+  my ($name, $mutate) = @_;
+  push @mutations, [$name, sub {
+   my $candidate = clone_value($gate);
+   $mutate->($candidate);
+   validate_mutation_recurring_gate(
+    $candidate, $task_status, $artifacts, $driver_source, $ci_source, 0,
+   );
+  }];
+ };
+
+ $add_gate_mutation->('mutation_recurring_authority_omission', sub {
+  pop @{$_[0]{authority_order}};
+ });
+ $add_gate_mutation->('mutation_recurring_authority_order', sub {
+  @{$_[0]{authority_order}}[0, 1] = @{$_[0]{authority_order}}[1, 0];
+ });
+ $add_gate_mutation->('mutation_recurring_write_digest', sub {
+  $_[0]{authorities}{write_vivification}{canonical_json_sha256} = '0' x 64;
+ });
+ $add_gate_mutation->('mutation_recurring_map_status', sub {
+  $_[0]{authorities}{map_leaves_mutation}{status} = 'portable-current';
+ });
+ $add_gate_mutation->('mutation_recurring_composition_digest', sub {
+  $_[0]{authorities}{composition}{canonical_json_sha256} = '0' x 64;
+ });
+ $add_gate_mutation->('mutation_recurring_route_omission', sub {
+  pop @{$_[0]{runtime_routes}};
+ });
+ $add_gate_mutation->('mutation_recurring_route_substitution', sub {
+  $_[0]{runtime_routes}[1]{commands}[0] =
+   '"$CARGO_CMD" test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test write_vivification_contract';
+ });
+ $add_gate_mutation->('mutation_recurring_route_order', sub {
+  @{$_[0]{runtime_routes}}[0, 1] = @{$_[0]{runtime_routes}}[1, 0];
+ });
+ $add_gate_mutation->('mutation_recurring_support_omission', sub {
+  pop @{$_[0]{support_checks}};
+ });
+ $add_gate_mutation->('mutation_recurring_support_order', sub {
+  @{$_[0]{support_checks}}[0, 1] = @{$_[0]{support_checks}}[1, 0];
+ });
+ $add_gate_mutation->('mutation_recurring_storage_initializer', sub {
+  $_[0]{storage_initializer} = 'tools/missing_project_data_env.sh';
+ });
+
+ push @mutations, ['mutation_recurring_owner_status', sub {
+  my $candidate_sources = mutate_task_status_line(
+   $task_sources,
+   $mutation_recurring_owner,
+   "  Status: `pending`\n",
+  );
+  validate_mutation_recurring_gate(
+   $gate,
+   parse_task_statuses($candidate_sources),
+   $artifacts,
+   $driver_source,
+   $ci_source,
+   0,
+  );
+ }];
+
+ push @mutations, ['mutation_recurring_driver_command_omission', sub {
+  my $candidate_source = $driver_source;
+  my $marker = $expected_mutation_recurring_routes[0]{commands}[0];
+  my $position = index($candidate_source, $marker);
+  die "mutation setup could not find recurring driver command exactly once\n"
+   unless $position >= 0 && substring_count($candidate_source, $marker) == 1;
+  substr($candidate_source, $position, length($marker), '');
+  validate_mutation_recurring_gate(
+   $gate, $task_status, $artifacts, $candidate_source, $ci_source, 0,
+  );
+ }];
+ push @mutations, ['mutation_recurring_ci_registration_omission', sub {
+  my $candidate_source = $ci_source;
+  my $marker = 'bash "$REPO_ROOT/tools/check_mutation_six_runtime.sh"';
+  my $position = index($candidate_source, $marker);
+  die "mutation setup could not find recurring CI registration exactly once\n"
+   unless $position >= 0 && substring_count($candidate_source, $marker) == 1;
+  substr($candidate_source, $position, length($marker), '');
+  validate_mutation_recurring_gate(
+   $gate, $task_status, $artifacts, $driver_source, $candidate_source, 0,
+  );
+ }];
+ push @mutations, ['mutation_recurring_ci_registration_duplication', sub {
+  my $candidate_source = $ci_source . "\nbash \"\$REPO_ROOT/tools/check_mutation_six_runtime.sh\"\n";
+  validate_mutation_recurring_gate(
+   $gate, $task_status, $artifacts, $driver_source, $candidate_source, 0,
+  );
+ }];
+ push @mutations, ['mutation_recurring_artifact_status', sub {
+  my $candidate = clone_value($artifacts);
+  $candidate->{map_leaves_mutation}{status} = 'portable-current';
+  validate_mutation_recurring_gate(
+   $gate, $task_status, $candidate, $driver_source, $ci_source, 0,
+  );
+ }];
+ push @mutations, ['mutation_recurring_artifact_digest', sub {
+  my $candidate = clone_value($artifacts);
+  $candidate->{composition}{format} = 2;
+  validate_mutation_recurring_gate(
+   $gate, $task_status, $candidate, $driver_source, $ci_source, 0,
+  );
+ }];
+
+ expect_mutation_failure(@$_) for @mutations;
+ return scalar @mutations;
+}
+
 sub public_projection_mutation_checks {
  my ($contract, $sources) = @_;
  my @mutations;
@@ -924,6 +1277,26 @@ my $mutation_artifacts = {
 };
 validate_mutation_capabilities($manifest, $task_status, $mutation_artifacts);
 my $mutation_admission_count = mutation_capability_admission_checks($manifest, $sources, $mutation_artifacts);
+my $mutation_recurring_gate = expected_mutation_recurring_gate();
+my $mutation_recurring_driver_source = read_text(
+ File::Spec->catfile($repo_root, split m{/}, $mutation_recurring_driver)
+);
+my $canonical_ci_source = read_text(File::Spec->catfile($repo_root, 'tools', 'run_ci_local.sh'));
+validate_mutation_recurring_gate(
+ $mutation_recurring_gate,
+ $task_status,
+ $mutation_artifacts,
+ $mutation_recurring_driver_source,
+ $canonical_ci_source,
+ 1,
+);
+my $mutation_recurring_count = mutation_recurring_gate_checks(
+ $mutation_recurring_gate,
+ $sources,
+ $mutation_artifacts,
+ $mutation_recurring_driver_source,
+ $canonical_ci_source,
+);
 my $public_contract = expected_public_contract();
 my $public_sources = public_projection_sources();
 validate_public_contract($public_contract, $public_sources);
@@ -935,7 +1308,7 @@ my $language_surface_mutation_count = language_surface_mutation_checks(
  $language_surface_contract, $manifest, $language_surface_source
 );
 
-printf "capability-conformance: OK (schema v2; %d capabilities; backend states pass=%d partial=%d gap=%d; %d exclusions; %d governance mutations; %d mutation capabilities; %d mutation-admission mutations; %d governed projections; %d public mutations; %d language-surface mutations)\n",
+printf "capability-conformance: OK (schema v2; %d capabilities; backend states pass=%d partial=%d gap=%d; %d exclusions; %d governance mutations; %d mutation capabilities; %d mutation-admission mutations; %d mutation-recurring mutations; %d governed projections; %d public mutations; %d language-surface mutations)\n",
  scalar(@{$manifest->{capabilities}}), @{$counts}{qw(pass partial gap)}, scalar(@{$manifest->{excluded_or_future}}),
- $mutation_count, scalar(@expected_mutation_capabilities), $mutation_admission_count,
+ $mutation_count, scalar(@expected_mutation_capabilities), $mutation_admission_count, $mutation_recurring_count,
  scalar(@expected_public_projections), $public_mutation_count, $language_surface_mutation_count;

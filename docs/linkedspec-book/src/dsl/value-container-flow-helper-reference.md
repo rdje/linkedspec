@@ -1005,8 +1005,8 @@ The receiver guard is released before fluent continuation. Therefore a continuat
 updated value, and its later failure does not undo the already completed receiver commit. Lua carries this state
 through native, reconstructed, generated-plan, emitted-module, primary-CLI, and user-function-body routes on both
 ABIs. `map_leaves!(items)`, temporary or nested receivers, other bang methods, and arbitrary user-defined bang
-functions are outside v1. `.19.7` admits the exact portable capability row; recurring proof remains `.19.8` and
-public-current closeout remains `.19.9`.
+functions are outside v1. `.19.7` admits the exact portable capability row and `.19.8` completes exact six-runtime
+recurrence; public-current closeout remains `.19.9`.
 
 The terse hash-index operator is the statement form written with the key next to the target:
 

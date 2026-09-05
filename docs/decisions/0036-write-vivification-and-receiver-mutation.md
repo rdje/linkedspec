@@ -424,8 +424,18 @@ authority drift fails closed.
 
 This admission does not rewrite the frozen artifacts' historically accurate `future-neutral` status strings and
 does not change parser, compiler, runtime, generated carrier, facade, schema, MCP, CLI, or example behavior.
-Recurring six-runtime execution is a separate `.19.8` boundary; public-current teaching, final no-drift, parent
-closeout, and push remain `.19.9`.
+## Recurring six-runtime proof (2026-09-05)
+
+Leaf `.19.8` adds one repository-routed driver for the unchanged nested-write and `map_leaves!`/composition
+authorities. It executes exact consumers in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT order, then generated-
+source, capability, and language-coverage ledgers. Canonical CI tracks, path-audits, and syntax-checks the driver
+unconditionally and executes it exactly once when `LINKEDSPEC_RUN_MUTATION_MATRIX=1`.
+
+The capability checker binds the recurring owner, driver, opt-in switch, project-data initializer, three exact
+historical authority IDs/statuses/canonical JSON digests, command and route order, support-ledger order, and CI
+topology through seventeen fail-closed mutations. This changes verification infrastructure only. Frozen artifact
+bytes, production behavior, public-current teaching, parent `.19`, and push remain unchanged; `.19.9` owns those
+remaining public/no-drift/closeout boundaries.
 
 ## Consequences
 
@@ -439,8 +449,8 @@ closeout, and push remain `.19.9`.
   be added; they are excluded because no distinct coherent mutation contract has been accepted.
 - “Absolute path” means complete root-to-leaf path inside the traversal receiver. The variable name is receiver
   identity, not an extra path element. Hash-root paths contain keys; array-root paths contain zero-based indexes.
-- During `.19.2-.19.6`, public guidance named the backend transition explicitly. `.19.7` now admits both portable
-  capability rows while `.19.8` and `.19.9` retain recurring proof and public-current closeout respectively.
+- During `.19.2-.19.6`, public guidance named the backend transition explicitly. `.19.7` admits both portable
+  capability rows and `.19.8` completes recurring proof, while `.19.9` retains public-current closeout.
 
 ## Links
 

@@ -17,7 +17,7 @@ answers:
   - "why must current static key index lowering change"
   - "how are nested write source spans measured"
 date: 2026-08-30
-status: neutral contract frozen; implemented on all five backends; portable capability admitted under FUTURE-PARITY-BACKLOG.19.7
+status: neutral contract frozen; five-backend implementation, portable capability, and six-runtime recurrence complete
 tags: [dsl, actionir, assignment, autovivification, diagnostics, source-spans, mutation, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.19.1.1 adds capability_conformance/write_vivification_contract.json and tools/check_write_vivification_contract.py. The independent checker validates five exact AST cases, seven syntax failures, 11 successful writes, 16 structural failures, three expression failures, three read exclusions, detached values, and 105 rejected mutations. Exact current probes remain non-vivifying on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Perl lowering proves quoted segments are currently tagged key while every computed segment is statically tagged/coerced as index; Rust/Dart/Julia/Lua preserve the same authored key/index split. No backend behavior or public-current capability changes in this leaf."
 evidence_update_2026_08_31_composition: "FUTURE-PARITY-BACKLOG.19.1.3 adds linkedspec-write-map-leaves-composition-v1 as a shared fixture consumed by both existing checkers. This write checker now validates eight additional nested writes spanning detached callback value, unrelated global, same-spelling shadow local, active receiver guard, and post-commit receiver targets while retaining all 105 base mutations. No write behavior is admitted."
@@ -29,7 +29,8 @@ evidence_update_2026_09_03_julia_reference: "FUTURE-PARITY-BACKLOG.19.5.1 implem
 evidence_update_2026_09_04_lua_reference: "FUTURE-PARITY-BACKLOG.19.6.1 implements the unchanged v1 contract in shared Lua on PUC Lua and LuaJIT. ActionWritePathSegment plus assign_nested_access preserves expression-bearing paths and Unicode-scalar spans through native, SpecFile reconstruction, generated-plan, emitted-module, and primary-CLI routes. Runtime evaluates segments then RHS, snapshots afterward, creates dense selector-determined containers on an isolated copy, detaches success values, preserves expression effects/failures, emits exact typed structural fields, keeps reads non-creating, and rejects malformed/reserved typed carriers. The permanent fixture consumer passes 436 assertions per ABI; Lua map_leaves! and portable/public admission remain pending."
 evidence_update_2026_09_04_lua_composition: "FUTURE-PARITY-BACKLOG.19.6.2 implements Lua map_leaves! without changing the nested-write contract. The adjacent permanent write consumer now passes 438 assertions per ABI after its pre-bang raw-syntax expectation was replaced by the frozen typed invalid-arguments diagnostic; all six callback and one continuation compositions execute through the separate 530-assertion bang suite. Portable/public admission remains pending."
 evidence_update_2026_09_04_portable_admission: "FUTURE-PARITY-BACKLOG.19.7 admits language.nested_write_vivification as one exact language-runtime capability across Perl, Rust, Dart, Julia, and shared Lua, with independent PUC Lua/LuaJIT execution recorded. The capability checker pins this neutral authority's ID, format, unchanged future-neutral status, canonical JSON digest, shared composition dependency, exact backend references, row order, and owner state through 16 dedicated admission mutations. Current census is 20 capabilities / 100 pass / 0 partial / 0 gap; recurrence remains .19.8 and public-current closeout remains .19.9."
-reverify: "bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py && bash tools/run_lua_project_data.sh puc lua/test/write_vivification_contract_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/write_vivification_contract_test.lua"
+evidence_update_2026_09_05_recurring_proof: "FUTURE-PARITY-BACKLOG.19.8 runs this unchanged authority before exact consumers on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT, then all three support ledgers. The recurring topology pins this file's historical status and canonical digest through 17 fail-closed mutations and exact-one canonical CI registration. Public-current closeout remains .19.9."
+reverify: "bash tools/check_mutation_six_runtime.sh && bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py"
 ---
 
 # Future neutral write-vivification contract
@@ -43,7 +44,7 @@ document[segment_name][position] = make_value()
 
 It was frozen without admitting a backend. Perl, Rust, Dart, Julia, and Lua now implement that unchanged contract
 under `.19.2.1`, `.19.3.1`, `.19.4.1`, `.19.5.1`, and `.19.6.1`. `.19.7` separately admits the exact portable
-capability row; recurring proof and public-current closeout remain `.19.8-.19.9`.
+capability row and `.19.8` completes exact six-runtime recurrence; public-current closeout remains `.19.9`.
 
 ## One typed path model
 

@@ -725,7 +725,7 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   and primary-CLI routes. Shared Lua uses `lua/test/write_vivification_contract_test.lua` for the same supported
   routes on PUC Lua and LuaJIT; the focused command is
   `bash tools/run_lua_project_data.sh <puc|luajit> lua/test/write_vivification_contract_test.lua`. Lua
-  `map_leaves!` is implemented separately by `.19.6.2`; public capability admission remains pending.
+  `map_leaves!` is implemented separately by `.19.6.2`; portable capability admission is complete under `.19.7`.
 
 ### 4.8.3 `tools/check_map_leaves_mutation_contract.py` — neutral receiver-mutation oracle
 
@@ -746,8 +746,8 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   Julia preserves the typed carrier through native, reconstructed, generated-plan, emitted-module, and primary-
   CLI routes. Shared Lua preserves it through native, public `SpecFile` reconstruction, generated-plan,
   emitted-module, primary-CLI, and user-function-body routes on PUC Lua and LuaJIT; the permanent suite passes 530
-  assertions per ABI. `.19.7` separately admits its exact capability row; recurrence remains `.19.8` and public-
-  current closeout remains `.19.9`. The `.19.2.2` audit also proved that unparameterized user functions cannot
+  assertions per ABI. `.19.7` separately admits its exact capability row and `.19.8` completes exact six-runtime
+  recurrence; public-current closeout remains `.19.9`. The `.19.2.2` audit also proved that unparameterized user functions cannot
   carry caller-binding mutation under the admitted fresh-local function contract. The director-selected correction
   uses explicit-target `set` and caller-scoped `.with`, without implicit capture.
 
@@ -769,8 +769,8 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   independently rejected composition mutations.
 - **CURRENT BOUNDARY:** the exact non-bang control returns `{"leaf":[]}` on Perl, Rust, Dart, Julia, PUC Lua, and
   LuaJIT. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT execute the complete bang composition. `.19.7` admits two
-  capability rows sharing this dependency; recurring execution remains `.19.8`, and public-current no-drift
-  remains `.19.9`.
+  capability rows sharing this dependency, and `.19.8` completes exact six-runtime recurrence; public-current
+  no-drift remains `.19.9`.
 
 ### 4.8.5 `tools/check_capability_conformance.pl` — portable capability governance
 
@@ -782,12 +782,31 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   neutral behavior or backend execution consumers.
 - **HOW:** `perl tools/check_capability_conformance.pl`.
 - **OUTPUT:** 20 capabilities / 100 pass / 0 partial / 0 gap, one exclusion, 19 general governance mutations,
-  two mutation capabilities, 16 mutation-admission mutations, 12 governed projections, six public mutations, and
-  four language-surface mutations.
+  two mutation capabilities, 16 mutation-admission mutations, 17 mutation-recurring mutations, 12 governed
+  projections, six public mutations, and four language-surface mutations.
 - **MUTATION BOUNDARY:** the dedicated admission mutations reject row omission/duplication/order drift, changed
   contract/source/reference/note state, non-pass backend state, inactive ownership, neutral authority ID/format/
   digest drift, and composition ID/digest drift. The contract files retain their original neutral status text;
-  `.19.8` owns recurring six-runtime execution and `.19.9` owns public-current closeout.
+  `.19.8` owns completed recurring six-runtime execution and `.19.9` owns public-current closeout.
+
+### 4.8.6 `tools/check_mutation_six_runtime.sh` — exact recurring mutation proof
+
+- **WHAT:** composes the frozen nested-write authority, frozen `map_leaves!` plus shared transaction authority,
+  exact Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT consumers, and generated-source/capability/language support ledgers.
+- **WHEN:** changing either mutation authority, composition fixture, permanent runtime consumer, admitted evidence,
+  recurring route, project-data preparation, or canonical registration. Retrieve
+  [[mutation-recurring-six-runtime-gate]] before changing its topology.
+- **HOW:** `bash tools/check_mutation_six_runtime.sh`; set `LINKEDSPEC_RUN_MUTATION_MATRIX=1` to execute it exactly
+  once inside canonical CI. The driver enters repository-managed project data and refreshes locked Dart metadata
+  with routed offline dependency resolution before the two Dart suites.
+- **OUTPUT:** write 5/7/11/16/3/3 plus eight composed writes and 105 mutations; bang 4/14/5/10/8 plus six callback
+  and one continuation compositions, 167 base and 592 composition mutations; Perl 19; Rust 5+9; Dart 9+11;
+  Julia 406+496; PUC Lua and LuaJIT 438+530 each; generated source 100/0/0; capability 20/100/0/0; language
+  coverage 250/105+1/126; and 17 recurring topology mutations.
+- **BOUNDARY:** the capability checker pins the recurring owner, driver/switch/storage initializer, all three
+  historical authority IDs/statuses/digests, command/route/support order, executable state, and exact-one CI
+  topology. Canonical CI always tracks, path-audits, and syntax-checks the driver. Frozen authority bytes,
+  production behavior, public-current examples, parent `.19`, and push do not move in `.19.8`.
 
 ### 4.9 `tools/check_semantic_introspection_contract.py` — neutral model/query oracle
 

@@ -10,6 +10,25 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-05 — FUTURE-PARITY-BACKLOG.19.8 — register recurring mutation proof
+
+- Added one repository-routed driver that validates the unchanged nested-write and `map_leaves!`/composition
+  authorities, then executes their exact consumers on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT in fixed order.
+- Followed the runtime routes with generated-source, capability, and language-coverage ledgers. Rust requests both
+  integration targets in one Cargo invocation; Dart refreshes locked project-local metadata offline before its
+  two separately reported suites.
+- Bound the recurring owner, driver, CI switch, storage initializer, three exact authority digests/statuses,
+  commands, route/support order, executable state, and exact-one canonical registration through 17 rejected
+  recurring mutations in the capability checker.
+- Registered unconditional tracked-file, path, and syntax checks in canonical CI plus one opt-in execution under
+  `LINKEDSPEC_RUN_MUTATION_MATRIX=1`. No production behavior, frozen contract bytes, public-current examples,
+  facade/schema/MCP/CLI contract, parent status, or push changed.
+- Preserved the diagnosed stale-Dart-metadata wait and its offline safeguard in the Knowledge Map, synchronized
+  task/index, roadmaps, architecture, Toolbox, capability guide, bounded live/continuity state, and the mdBook,
+  and passed the complete recurring route plus focused/doctrine/storage/render and exact staged canonical proof.
+- The required notes rollover creates immutable segment `4985-18da440ab1c4`; ADR `0101` advances only the finite
+  engineering-notes collection/manifest capacity to 23/22 and leaves every byte and aggregate ceiling unchanged.
+
 ## 2026-09-04 — FUTURE-PARITY-BACKLOG.19.7 — admit portable mutation capabilities
 
 - Restored the omitted `.19.8` recurring-proof and `.19.9` public-closeout task records promised by the prior
