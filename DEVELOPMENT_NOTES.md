@@ -10,6 +10,11 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.38 — MCP method and version errors precede complete metadata validation
+
+Perl decoded and stdio routes agree on six competing-error controls, but their method/version-first order differs from ADR 0055.
+Repair .36 owns authority review and cross-runtime reconciliation; existing passing suites do not prove the documented order.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.37 — four transport payload examples do not replace all-twenty proof
 
 The embedded MCP bundle contains three exact native responses and one declared restricted capability projection.

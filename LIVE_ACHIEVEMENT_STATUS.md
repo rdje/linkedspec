@@ -5,21 +5,24 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   exhaustive inventory are complete; codebase/book remain incomplete. `rgx` and its dependencies are excluded.
 - Intake `.31` preserves all baseline Perl source reading, supporting book/native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.38`–`.3.2.54` remain pending.
-- Repairs `.7`–`.30` and `.32`–`.35` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
+  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.39`–`.3.2.54` remain pending.
+- Repairs `.7`–`.30` and `.32`–`.36` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.37` completes embedded MCP JSON reading and verifies its payload and source digests.
-  This is item 41/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.2.38` completes MCP/numeric runtime reading and owns validation-order reconciliation.
+  This is item 42/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.38`: read MCPContract 15–21, MCPContractRuntime 1–300, MCPServer 1–648, MCPWire 1–419, and Numeric 1–110.
+- Activate `SESSION-STARTUP-READING.3.2.39`: read PluginBridge 1–199, PluginRegistry 1–130, ProgressiveSpanDispatch 1–937, its Policy 1–58, and Runtime 1–172.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.38` reads MCP and Numeric runtime owners; 31 MCP/nine numeric
+  tests pass; paired error-order controls expose reconciliation work owned by `.36`.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.37` finishes embedded MCP JSON; canonical bundle, four payload,
   and seven source digests pass, with byte-fresh binding and one updated Knowledge record.
@@ -65,9 +68,6 @@
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.23` completes the MethodLowering prefix and reconciles dated AST/binding/callable
   milestones; the next range is 1496–2378.
-
-- `2026-09-06` — `SESSION-STARTUP-READING.3.2.22` completes MethodExpr comprehension and
-  reconciles authored-value/scope precedence; MethodLowering is the next checkpoint.
 
 ## History
 

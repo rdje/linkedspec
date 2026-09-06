@@ -52,7 +52,8 @@ only SHA-256, and performs the same 32-byte XOR comparison step using a dummy di
 Unknown, expired, revoked, and unauthorized valid handles therefore share one external tool error. Only private
 `_new_for_test` accepts deterministic entropy/time and reduced test capacity/collision bounds.
 
-Registration calls native capabilities once to validate the index and retain only five ceiling scalars. A live
+Registration calls native capabilities once to validate the index and retain the policy ceilings, native defaults,
+and source/digest availability needed for bounded projection. It retains no capability response object. A live
 capabilities tool call still invokes native capabilities; an allowed query is passed unchanged to native query.
 Policy can lower only source detail, page maximum, and record/relation/depth maxima. Restricted capabilities are a
 schema-preserving projection; an above-policy request is denied before native query. No semantic answer is stored.
@@ -108,3 +109,12 @@ for key in ['handle_unavailable_response','policy_denied_response']:
  print(key+': tool isError=True; no structuredContent PASS')
 PY
 ```
+
+The September 6 `.3.2.38` checkpoint reads the contract runtime, complete server/wire, and accessor suffix.
+MCPContractRuntime checks the embedded digest on lazy initialization, clones returned data through canonical
+JSON, validates its frozen schema profile, and constructs typed response shells. MCPServer records explicit
+policy-component presence and keeps prepared request identity until wire emission/flush completes. MCPWire
+preflights decoded duplicate keys and root numeric-id spelling before JSON construction; its raw byte/token
+checks are a separate boundary from decoded dispatch. The managed dispatch/stdio/admission suites pass
+31 top-level tests. Six extra cases expose the documented validation-order discrepancy in
+[[perl-mcp-validation-error-order-drift]], owned by `.36`; passing the existing suites does not close it.

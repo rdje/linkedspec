@@ -9,7 +9,8 @@ answers:
   - "how does signed modulo behave across backends"
   - "why must Lua numeric helpers wait for a neutral contract"
   - "do scalar numeric helpers match across all six runtime variants"
-date: 2026-07-12
+  - "where does Perl enforce numeric helper arity and finite results"
+date: 2026-09-06
 status: current
 tags: [numeric, parity, perl, rust, dart, julia, lua, helpers, contract, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.4.3.3.1.0 used LinkedSpec::Get for a direct Perl matrix and inspected rust/linkedspec-{core,runtime}, dart/lib/src/runtime/interpreter.dart, julia/src/runtime/Interpreter.jl, and their focused tests. Perl accepts booleans as numeric and maps invalid comparisons to 0; Rust also converts booleans and maps invalid comparisons/unary calls to 0. Dart/Julia reject booleans and return null/nothing. Perl rejects extra sub/div operands, Rust ignores them, and Dart/Julia fold them. Numeric string grammars and signed remainder mechanisms also differ. The public catalog says invalid numeric inputs return undef, but no executable neutral scalar contract owns these edges."
@@ -37,3 +38,10 @@ startup finding [[scalar-numeric-unicode-digit-oracle-drift]] exposes a further 
 disagreement outside that finite fixture; `SESSION-STARTUP-READING.20` owns authority review and repair.
 Passing the original fixture does not establish equivalence for every accepted numeric string.
 Aggregate reducers and receiver forms stay in their already-separated downstream leaves.
+
+The September 6 `.3.2.38` checkpoint reads Numeric.pm 1–110. `evaluate` rejects unknown helper names
+and invalid arities, converts each input through `scalar_number`, applies the owned arithmetic/comparison/
+rounding rules, and normalizes nonfinite results to undef and signed zero to zero. `scalar_number` rejects
+references and checks host numeric flags before the decimal-string recognizer; its Unicode-digit/coercion
+disagreement remains the separately owned `.20` exception above. The managed Perl numeric suite passes nine
+top-level tests and the neutral checker passes 55 cases / 18 helpers. Other runtime consumers are not rerun.

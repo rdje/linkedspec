@@ -35,7 +35,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -651,12 +651,19 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.37 - read MCP payload suffix and verify embedded digests`
 
 - ID: `SESSION-STARTUP-READING.3.2.38`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 36: 1,484 lines/fragments, 51,303 bytes.
   Scope: `perl/LinkedSpec/MCPContract.pm` lines 15–21; `perl/LinkedSpec/MCPContractRuntime.pm` lines 1–300; `perl/LinkedSpec/MCPServer.pm` lines 1–648; `perl/LinkedSpec/MCPWire.pm` lines 1–419; `perl/LinkedSpec/Numeric.pm` lines 1–110.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact baseline ranges; MCP runtime/wire and numeric Knowledge; managed Perl MCP
+    dispatch/stdio/admission and scalar-numeric proof; focused continuity and diff review.
+  Canonical trigger: `none` — source reading and Knowledge continuity only.
+  Verification: Exact baseline identity and 1,484-line / 51,303-byte coverage pass. Managed MCP dispatch/
+    stdio/admission suites pass 31 top-level tests; Perl numeric passes nine and neutral numeric 55/18.
+    Six competing-error cases agree through decoded/stdio routes and expose ADR ordering drift, owned by
+    `.36.1`–`.36.3`. One new and three updated Knowledge records preserve evidence; focused gates precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.38 - read MCP runtime and track validation order drift`
 
 - ID: `SESSION-STARTUP-READING.3.2.39`
   Status: `pending`
@@ -1520,11 +1527,50 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     a true argument stays typed while a dynamic literal array returns [1,0], all without context errors.
   Commit: `pending`
 
+- ID: `SESSION-STARTUP-READING.36`
+  Status: `pending`
+  Goal: Reconcile MCP validation-error precedence with its accepted ordering and executable proof.
+  Dependencies: `.3`/`.4`/`.5`.
+  Children: `.36.1`, `.36.2`, `.36.3`
+
+- ID: `SESSION-STARTUP-READING.36.1`
+  Status: `pending`
+  Goal: Audit competing MCP validation failures against the current normative order.
+  Acceptance: Use ADR 0055 section 6, later decisions, neutral artifacts, and public decoded/stdio controls.
+    Cover invalid envelope/id, special initialize, missing/malformed metadata, unsupported version, unknown
+    method, and invalid tool arguments in combinations. Measure all six runtimes; preserve independent expected
+    outcomes and identify exact source branches and missing fixture coverage before changing an oracle.
+    Ask for direction only if current normative authorities cannot resolve an actual conflict.
+  Verification: `pending` — `.3.2.38` proves Perl checks unknown methods and unsupported version before full
+    metadata validation; six cases agree across decoded and stdio routes despite the documented earlier metadata step.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.36.2`
+  Status: `pending`
+  Goal: Repair affected MCP dispatch paths with independently justified precedence regressions.
+  Dependencies: `.36.1`.
+  Acceptance: Decompose affected implementations into bounded owned repair leaves before editing them.
+    Preserve the special legacy diagnostic, validated-id handling, silent notifications, error sanitation,
+    prepared cancellation/flush cleanup, and native semantic authority. Add mixed-failure neutral and public
+    decoded/stdio regressions; run focused direct-dependent proof plus canonical verification for contract changes.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.36.3`
+  Status: `pending`
+  Goal: Close MCP validation-order documentation and recurring proof without drift.
+  Dependencies: `.36.2`.
+  Acceptance: Reconcile the accepted decision, current book/examples, Knowledge, and exact neutral/runtime
+    error-order behavior; render the book and run required six-runtime/contract/canonical proof. Qualify
+    historical evidence honestly and close `.36` only after every owned repair and claim agrees.
+  Verification: `pending`
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.38` | `pending` | read MCPContract 15–21, MCPContractRuntime 1–300, MCPServer 1–648, MCPWire 1–419, and Numeric 1–110. |
+| 1 | `SESSION-STARTUP-READING.3.2.39` | `pending` | read PluginBridge 1–199, PluginRegistry 1–130, ProgressiveSpanDispatch 1–937, its Policy 1–58, and Runtime 1–172. |
 
 ## Reading Ledger
 
@@ -1535,7 +1581,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.38`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.39`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
 | mdBook | **No** | `.31` records fourteen complete book sources plus the two earlier local-CI ranges: 640,041 bytes of disjoint coverage. | Remaining 1,316,541 source bytes, formal chapter checkpoints, and rendered alignment under `.4`. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -2846,6 +2892,40 @@ PERL
   passing five-test binding suite from `.3.2.35` are not rerun. No runtime, public-book, policy, protocol,
   or admission changes. Codebase/book remains No and `.3.2.38` follows.
 
+### MCP schema, registry, wire, and numeric runtime ownership at `.3.2.38`
+
+- Activated from clean `c38afa72b3390e408c55ed849225c42ad9e70eae` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Re-reviewed MCPContract 15–21, MCPContractRuntime 1–165 / 166–300, MCPServer 1–225 / 226–435 /
+  436–648, MCPWire 1–215 / 216–419, and Numeric 1–110 without truncation. Exact baseline identity passes:
+  1,484 lines / 51,303 bytes. The 138-byte MCPContract suffix completes that module's per-leaf reading;
+  this adds no duplicate physical-reading credit over `.31`.
+- MCPContractRuntime checks the embedded digest, lazily decodes the data, clones outputs through canonical
+  JSON, validates the closed schema profile, and builds response shells. Server state lives behind object
+  identity, registers preexisting native indexes, extracts policy/default/source-availability fields,
+  validates authorization digests and monotonic expiry, tracks explicit policy-component presence, and
+  holds prepared response identity through wire flush/cancellation cleanup. Corrected earlier five-scalar
+  wording in both MCP ownership cards: the extracted projection data also includes defaults/availability.
+- MCPWire owns bounded LF/CRLF framing, EOF/overlong drainage, strict UTF-8, duplicate decoded-key preflight,
+  raw numeric-id syntax/range, schema-checked canonical output, and fixed optional I/O diagnostics. It delegates
+  dispatch to the same server path. No formal constant-time or arbitrary-host-object guarantee is inferred.
+- Six initial decoded controls, then the same six repeated on decoded and in-memory stdio routes, show exact
+  response identity. Unknown method plus missing metadata yields -32601; old version plus missing required
+  clientCapabilities yields -32022. Known current/missing-metadata controls yield -32602. Source checks method
+  first, protocol next, and full request schema later, unlike ADR 0055 section 6's earlier metadata step.
+  The current static suite consumes separate canonical failures; that does not prove combined precedence.
+  `.36.1` owns authority/six-runtime census, `.36.2` bounded repair decomposition, and `.36.3` public closeout.
+  Exact public probe and table live in `docs/knowledge/perl-mcp-validation-error-order-drift.md`.
+- Read current MCP plan/decoded/contract/ADR/repair and numeric/Unicode Knowledge first. Numeric owns helper
+  arity, scalar conversion, finite arithmetic, half-away rounding, signed modulo, and normalized results;
+  `.20` still owns the recorded Unicode-digit/coercion mismatch. No new authority choice or numeric fix.
+- `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/mcp_server_perl_dispatch.t
+  t/mcp_server_perl_stdio.t t/mcp_server_perl_admission.t` passes 31 top-level tests across three files.
+  `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/scalar_numeric_contract.t` passes nine.
+  `bash tools/run_python_project_data.sh tools/check_scalar_numeric_contract.py` passes 55 cases / 18 helpers.
+  Other runtime consumers are not rerun; passing existing suites closes neither `.20` nor `.36`.
+- One new and three updated Knowledge records preserve findings and ownership. No runtime, public-book,
+  policy, protocol, or admission edits. Codebase/book remains No; `.3.2.39` follows.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -2884,7 +2964,8 @@ PERL
   `.3.2.34` is item 38/100 at `19b0a7c4`;
   `.3.2.35` is item 39/100 at `4b903622`;
   `.3.2.36` is item 40/100 at `c3dadd4b`;
-  `.3.2.37` is item 41/100 once committed.
+  `.3.2.37` is item 41/100 at `c38afa72`;
+  `.3.2.38` is item 42/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -2990,6 +3071,7 @@ PERL
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.35` | Exact 32768-byte fragment/full-file baseline identity; MCP binding/admission Knowledge; managed generator, five binding tests, six frame controls, admission complete/141; focused continuity | PASS bounded fragment and focused proof; one Knowledge card reconciles current topology and response-layer examples. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.36` | Exact fragment/full-file identity; MCP/ADR/repair Knowledge; three embedded-neutral equality checks and repaired-field controls; ordered materializer/validator35/10/10/76; focused continuity | PASS bounded contract data and neutral proof; two records reconcile; historical ADR clarification task-owned under `.5`. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.37` | Exact suffix/full-file identity; MCP plan/contract Knowledge; canonical bundle/header, neutral payload, four response and seven source digests; managed binding freshness; focused continuity | PASS embedded suffix and digest/freshness controls; one Knowledge card records payload versus recurring-proof boundaries. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.38` | Exact baseline ranges; MCP/numeric Knowledge; 31 MCP and nine numeric tests; neutral 55/18; six decoded then six paired decoded/stdio precedence controls; focused continuity | PASS reading and existing suites; documented precedence discrepancy rooted and owned by `.36`; one new/three updated cards. |
 
 ## Commit Log
 
@@ -3037,6 +3119,7 @@ PERL
 | `SESSION-STARTUP-READING.3.2.35` | `SESSION-STARTUP-READING.3.2.35 - read MCP frame data and reconcile current admission` | MCP frame/schema prefix read; generated binding fresh, response examples and current admission qualified. |
 | `SESSION-STARTUP-READING.3.2.36` | `SESSION-STARTUP-READING.3.2.36 - read MCP contract policy and reconcile historical claims` | MCP policy/corpus/schema fragment read; exact neutral identity and already-repaired component policy documented. |
 | `SESSION-STARTUP-READING.3.2.37` | `SESSION-STARTUP-READING.3.2.37 - read MCP payload suffix and verify embedded digests` | MCP embedded JSON completed; four payload and seven source digests verified without runtime or protocol changes. |
+| `SESSION-STARTUP-READING.3.2.38` | `SESSION-STARTUP-READING.3.2.38 - read MCP runtime and track validation order drift` | MCP/numeric owners read; validation-order discrepancy repair-owned and projection-field wording corrected. |
 
 ## Changelog
 
@@ -3124,3 +3207,5 @@ PERL
   proof, reconciles two records and ADR alignment ownership, and advances to `.3.2.37`.
 - `2026-09-06`: `.3.2.37` reads the MCP schema/payload suffix, verifies canonical bundle and four/seven response/source
   digests plus binding freshness, updates one Knowledge card, and advances to `.3.2.38`.
+- `2026-09-06`: `.3.2.38` reads MCP/numeric owners, passes 31 MCP/nine numeric and neutral 55/18 proof, reproduces
+  competing-error order across two routes, owns `.36`, and advances to `.3.2.39`.

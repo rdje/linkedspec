@@ -10,6 +10,11 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.38 — read MCP runtime and track validation order drift
+
+Read 1,484 lines / 51,303 bytes; exact baseline, 31 MCP/nine numeric tests, and neutral 55-case/18-helper proof pass.
+Six paired decoded/stdio controls expose documented validation-order drift; own .36 and update runtime/Knowledge boundaries.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.37 — read MCP payload suffix and verify embedded digests
 
 Read MCPContract bytes 65927–83273; exact baseline, canonical bundle/header digest, and neutral payload identity pass.

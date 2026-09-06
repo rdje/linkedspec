@@ -45,8 +45,8 @@ of at most 4,096 octets, bounded lifetime, and lowering-only policy. It retains 
 each tool call hashes its out-of-band context and compares exactly 32 bytes through a branch-free XOR accumulator
 (using a dummy digest for unknown handles), then rechecks revocation, absolute monotonic expiry, and policy. This
 does not claim formal interpreter-level constant time, but unknown/expired/revoked/unauthorized states stay
-externally indistinguishable. The registry stores only the index, auth/lifecycle state, policy, and five native
-policy scalars—not semantic responses. The four implementation leaves are in-process binding/registry/dispatch
+externally indistinguishable. The registry stores only the index, auth/lifecycle state, policy, and the native
+ceiling/default/source-availability fields needed for policy projection, rather than semantic responses. The four implementation leaves are in-process binding/registry/dispatch
 `.1`, strict stdio/lifecycle `.2`, exact Perl admission/ledger `.3`, and no-change closeout `.4`.
 
 ## September 6 embedded payload and digest boundary
@@ -83,3 +83,9 @@ for key,path in bundle['contract']['artifacts'].items():
 print('Canonical embedded JSON/header digest, neutral payload identity, four response digests, seven source digests PASS')
 PY
 ```
+
+Reading checkpoint `.3.2.38` completes the 138-byte MCPContract accessor suffix and all three runtime owners.
+The server retains extracted policy data: source ceiling/digest availability, page default/maximum, and
+three budget defaults/maxima, then records explicit overlay presence. The earlier five-scalar wording named
+the configurable ceiling surface incompletely; source inspection confirms the additional projection inputs.
+Runtime error-precedence evidence and repair ownership are [[perl-mcp-validation-error-order-drift]].
