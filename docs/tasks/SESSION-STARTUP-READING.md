@@ -475,12 +475,18 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.25 - read value calls and own caller shadowing repair`
 
 - ID: `SESSION-STARTUP-READING.3.2.26`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 24: 1,168 lines/fragments, 58,949 bytes.
   Scope: `perl/LinkedSpec/ActionIR/MethodLowering.pm` lines 3744–4911.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact range/full-file identity; AST fluent/block and hash/array traversal Knowledge;
+    managed AST parser suite and public traversal controls; memory/Knowledge/history and staged review.
+  Canonical trigger: `none` — source-reading and existing Knowledge chronology only.
+  Verification: Exact full-file baseline identity and 1,168-line / 58,949-byte coverage pass. The AST parser suite
+    passes 23 tests; public hash/array/scalar root controls match their documented traversal branches.
+    Three existing Knowledge records reconcile; memory/history/review and required commit hooks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.26 - read receiver chains and reconcile tree dispatch`
 
 - ID: `SESSION-STARTUP-READING.3.2.27`
   Status: `pending`
@@ -1361,7 +1367,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.26` | `pending` | complete MethodLowering baseline lines 3744–4911. |
+| 1 | `SESSION-STARTUP-READING.3.2.27` | `pending` | complete MethodLowering baseline lines 4912–5942. |
 
 ## Reading Ledger
 
@@ -1372,7 +1378,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.26`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.27`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
 | mdBook | **No** | `.31` records fourteen complete book sources plus the two earlier local-CI ranges: 640,041 bytes of disjoint coverage. | Remaining 1,316,541 source bytes, formal chapter checkpoints, and rendered alignment under `.4`. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -2290,6 +2296,25 @@ PERL
   implementation, public-book change, or standalone generated-parser execution is claimed.
 - Global codebase/book answers remain No. `.3.2.26` continues the same source at 3744–4911.
 
+### Block values, receiver chains, and root-dependent traversal at `.3.2.26`
+
+- Activated from clean `85167df3ae9883636ec00ea5c8259aa581b238b5` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Re-reviewed 3744–4025, 4026–4330, 4331–4630, and 4631–4911 in full after `.31`'s physical forward pass.
+  Exact whole-file baseline identity and 1,168 lines / 58,949 bytes agree.
+- Read the assignment-bridge tail, direct path reads, block-local early/final returns, contextual `with`,
+  typed value/helper/aggregate dispatch, receiver-family continuation, immediate hash/array traversal
+  callback frames, array-end value mutation, and guarded `map_leaves!` continuation construction.
+- Existing fluent-chain, block-value, hash/array traversal, array contract, and uniform-binding mutation
+  records were read. The original hash-only non-hash rejection statement now links to the later shared
+  hash/array dispatcher; the array contract preserves hash-root behavior, and its initial phase0 count
+  is explicitly historical. The exact current public control replaces the older hash-card probe string.
+- Managed `PERL5LIB= prove -Iperl t/actionir_ast_parser.t` passes 23 top-level tests. Three public Get
+  controls return hash depths `{a:1,arr:1,b:{y:2}}`, array depths `[[2],1,1]`, and scalar `[null,0]`
+  (no callback effect), all without a context error. Opposite-family containers are leaves within the
+  selected traversal. Exact command: `docs/knowledge/perl-hash-tree-traversal-callback-frame.md`.
+- No runtime/book edits or new runtime defect are claimed. Codebase/book remain No, and `.3.2.27`
+  continues the source at 4912–5942; previously owned repairs retain their prerequisite sequence.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -2316,7 +2341,8 @@ PERL
   `.3.2.22` is item 26/100 at `27ff841a`;
   `.3.2.23` is item 27/100 at `2c398b92`;
   `.3.2.24` is item 28/100 at `d392ad2b`;
-  `.3.2.25` is item 29/100 once committed.
+  `.3.2.25` is item 29/100 at `85167df3`;
+  `.3.2.26` is item 30/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -2410,6 +2436,7 @@ PERL
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.23` | Exact prefix/full-file identity; existing Knowledge milestone reconciliation; managed MethodLowering trace suite; focused continuity | PASS four top-level tests and prefix identity; required staged commit gates precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.24` | Exact range/full-file identity; signature/retirement Knowledge; variadic function suite; public mixed-path read; focused continuity | PASS 66 tests and error-free one result; required staged gates precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.25` | Exact range/full-file identity; function/callable Knowledge; eight Get/source/descriptor controls; focused continuity | PASS diagnostic controls; caller-local shadowing reproduced and repair .32 owned; required staged gates precede landing. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.26` | Exact range/full-file identity; block/receiver/traversal Knowledge; AST parser suite; three public root controls; focused continuity | PASS 23 tests and hash/array/scalar controls; required staged gates precede landing. |
 
 ## Commit Log
 
@@ -2445,6 +2472,7 @@ PERL
 | `SESSION-STARTUP-READING.3.2.23` | `SESSION-STARTUP-READING.3.2.23 - read method lowering prefix and reconcile milestones` | Prefix comprehension and dated AST/binding/callable milestone ownership reconciled; no source/book change. |
 | `SESSION-STARTUP-READING.3.2.24` | `SESSION-STARTUP-READING.3.2.24 - read function signatures and statement lowering` | Function signatures and guarded statement bridges read; four historical Knowledge records reconciled. |
 | `SESSION-STARTUP-READING.3.2.25` | `SESSION-STARTUP-READING.3.2.25 - read value calls and own caller shadowing repair` | Value and function-call dispatch read; eight controls root-cause caller-local shadowing and own repair .32. |
+| `SESSION-STARTUP-READING.3.2.26` | `SESSION-STARTUP-READING.3.2.26 - read receiver chains and reconcile tree dispatch` | Block and receiver dispatch read; three traversal records distinguish original milestones from current shared dispatch. |
 
 ## Changelog
 
@@ -2508,3 +2536,5 @@ PERL
   tests plus a current mixed-path read, and reconciles retired-syntax Knowledge; next `.3.2.25`.
 - `2026-09-06`: `.3.2.25` reads value/function dispatch, preserves eight caller-scope controls, and owns repair `.32`;
   existing execution Knowledge is qualified, with `.3.2.26` next.
+- `2026-09-06`: `.3.2.26` reads block/receiver/tree dispatch, validates 23 AST tests and three root controls, and
+  reconciles existing traversal Knowledge; `.3.2.27` is next.

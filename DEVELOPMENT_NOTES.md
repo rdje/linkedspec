@@ -10,6 +10,11 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.26 — root kind selects the traversal family
+
+Hash roots recurse through hashes and array roots through arrays; opposite-family containers remain leaves.
+Scalar controls return null without callback effects; existing hash-only milestone wording now points to shared dispatch.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.25 — caller dependencies do not preserve emitted lexical scope
 
 Body-local declarations precede emitted argument evaluation; same-name scalar, aggregate, and nested caller reads become null.

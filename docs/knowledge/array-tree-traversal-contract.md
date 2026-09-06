@@ -48,6 +48,8 @@ Return behavior mirrors hash-tree traversal:
 - `map_leaves` returns a new array tree with the same array structure and callback results replacing leaves.
 - `reduce_leaves(initial)` returns the final accumulator, or `initial` for an empty valid tree.
 
-Non-array receivers return `undef` without running callbacks; oracle JSON serializes that as `null`.
+Scalar receivers return `undef` without running callbacks; oracle JSON serializes that as `null`.
+Hash receivers retain their separate hash-tree behavior through the shared dispatcher, as recorded in
+[[perl-array-tree-traversal-callback-frame]]; the original array-lane non-array wording did not retire it.
 `walk_leaves` and `map_leaves` may feed later array-family receiver methods such as `.count()`.
 `reduce_leaves(...)` is terminal.

@@ -10,6 +10,11 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.26 — read receiver chains and reconcile tree dispatch
+
+Read MethodLowering 3744–4911 (1,168 lines / 58,949 bytes); 23 AST tests and three public root controls pass.
+Reconcile hash/array traversal chronology and historical suite counts in existing Knowledge; focused continuity checks apply.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.25 — read value calls and own caller shadowing repair
 
 Read MethodLowering 2379–3743 (1,365 lines / 65,506 bytes); eight public controls expose caller-local shadowing.

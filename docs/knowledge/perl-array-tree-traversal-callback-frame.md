@@ -12,7 +12,7 @@ answers:
 date: 2026-07-08
 status: current
 tags: [spec-format-terse, array-tree, trailing-block, method-lowering, perl, SPEC-FORMAT-TERSE]
-evidence: "SPEC-FORMAT-TERSE.13.2 updates perl/LinkedSpec/ActionIR/MethodLowering.pm so `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` receiver trailing-block calls dispatch at runtime over hash or array receiver values. Hash receivers preserve the `.12` sorted-key contract. Array receivers traverse nested arrays depth-first by zero-based index, treat hash values as leaves, bind scoped `value`, `index`, `path`, `depth`, and reduce-only `acc`, return `undef` without callbacks for scalar receivers, and allow `walk_leaves` / `map_leaves` to feed array-family continuations such as `.count()`. Tests in `t/actionir_ast_parser.t` and `t/phase0_regression.t` lock parsing, lowering diagnostics, valid/empty/non-array runtime behavior, hash leaves, continuation, scoped restoration, descriptor readiness, and generated-source residue. Full phase0 is `Files=1, Tests=1028`, `Result: PASS`."
+evidence: "SPEC-FORMAT-TERSE.13.2 updates perl/LinkedSpec/ActionIR/MethodLowering.pm so `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` receiver trailing-block calls dispatch at runtime over hash or array receiver values. Hash receivers preserve the `.12` sorted-key contract. Array receivers traverse nested arrays depth-first by zero-based index, treat hash values as leaves, bind scoped `value`, `index`, `path`, `depth`, and reduce-only `acc`, return `undef` without callbacks for scalar receivers, and allow `walk_leaves` / `map_leaves` to feed array-family continuations such as `.count()`. Tests in `t/actionir_ast_parser.t` and `t/phase0_regression.t` lock parsing, lowering diagnostics, valid/empty/non-array runtime behavior, hash leaves, continuation, scoped restoration, descriptor readiness, and generated-source residue. The original .13.2 milestone recorded phase0 `Files=1, Tests=1028`, `Result: PASS`; this is historical evidence, not a current suite count."
 reverify: "PERL5LIB= prove -q -Iperl t/phase0_regression.t && prove -q -Iperl t/actionir_ast_parser.t && rg -n 'SPEC-FORMAT-TERSE\\.13\\.2|__ls_array_tree|array-tree traversal|Tests=1028|1\\.\\.1028' perl/LinkedSpec/ActionIR/MethodLowering.pm t/phase0_regression.t t/actionir_ast_parser.t docs/tasks/SPEC-FORMAT-TERSE.md docs/knowledge/perl-array-tree-traversal-callback-frame.md"
 ---
 
@@ -47,3 +47,6 @@ Array callback blocks get scoped scalar bindings:
 `walk_leaves` returns the original array tree after side effects. `map_leaves` returns a new array tree with the
 same nested-array structure and replaced leaves. `reduce_leaves(initial)` returns the final accumulator, or
 `initial` for an empty array. `walk_leaves` and `map_leaves` can feed array-family continuations such as `.count()`.
+
+The September 6 root-dispatch recheck and exact command live with
+[[perl-hash-tree-traversal-callback-frame]] so the shared hash/array distinction has one diagnostic owner.
