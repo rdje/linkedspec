@@ -5,21 +5,24 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.44`–`.3.2.54` remain pending.
+  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.45`–`.3.2.54` remain pending.
 - Repairs `.7`–`.30` and `.32`–`.43` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.43` completes query, runtime-projection, and source-map reading with dated Knowledge reconciliation.
-  This is item 47/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.2.44` completes static semantic reading and precise failure/teaching evidence reconciliation.
+  This is item 48/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.44`: read SemanticStaticProjection 1–1067.
+- Activate `SESSION-STARTUP-READING.3.2.45`: read SourceLocation 1–700.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.44` reads 1,067 lines / 34,029 bytes and retains five-test static proof.
+  Exact failure controls refine .23; passing standalone proof exposes omitted TOOLBOX guidance under .41.6.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.43` reads 982 lines / 35,427 bytes across three semantic owners.
   Retains unchanged passing proof, qualifies July milestones, and verifies exact consumed-spool cleanup.
@@ -65,9 +68,6 @@
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.29` reads the lowering suffix and progressive scanner;
   129 Perl assertions and neutral 9/9/116 proof pass; three admission pointers reconcile.
-
-- `2026-09-06` — `SESSION-STARTUP-READING.3.2.28` reads collection/constructor paths and passes three value controls;
-  paired Perl/PUC tagged-record divergence is owned by `.33.1`/`.33.2`.
 
 ## History
 

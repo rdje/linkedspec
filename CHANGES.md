@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.44 — read static semantics and refine failure evidence
+
+Read all static semantic projection source (1,067 lines / 34,029 bytes) and retain unchanged five-test proof. Exact public controls show the original error code/message survive while unrelated failure gets a fabricated dependency decision/explanation and warning; refine .23 accordingly. Own stale TOOLBOX bare-block guidance under .41.6 after confirming its omission from the passing standalone reader. No runtime or public-book changes.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.43 — read semantic queries and source mapping
 
 Read SemanticQuery, SemanticRuntimeProjection, and SemanticSourceMap completely (982 lines / 35,427 bytes). Exact source/test/neutral identities retain prior passing query/runtime/foundation proof. Qualify historical rollout counts and preserve current privacy/source-map boundaries in four existing Knowledge records. Verify the exact committed-evidence preparation spool was removed; no runtime or public-book changes.

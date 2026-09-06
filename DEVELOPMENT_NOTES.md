@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.44 — semantic diagnostic preservation differs from causal explanation
+
+The failed static path retains the supplied diagnostic but constructs dependency evidence unconditionally. Accurate repair acceptance must preserve the existing good diagnostic and valid missing-rule normalization while correcting the fabricated causal rows. The standalone public checker reads fifteen explicit paths, so passing it does not validate TOOLBOX's omitted stale rejection guidance.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.43 — semantic query evidence and private source authority
 
 Source detail is redacted at the query boundary; private source maps retain strict UTF-8 byte/character authority. Runtime projection admits native observations against static topology and derives a separate immutable index. Explain accounting matches the neutral evaluator, so no Perl-only budget defect is claimed. July rollout/signoff counts remain dated historical evidence alongside the consumed current canonical proof.

@@ -7,6 +7,8 @@ answers:
   - "why does the book introduction still call parse_job unavailable"
   - "why do old semantic rollout counts pass the public checker"
   - "which repair owns complete mdBook alignment after full startup reading"
+  - "why does TOOLBOX still say Perl rejects standalone lifecycle blocks"
+  - "which task corrects stale bare-block debugging instructions"
   - "why do stale cursor staged semantic and gap paragraphs survive public checks"
   - "does document input need to look like a spec source"
   - "are definedness helpers condition only in Perl return contexts"
@@ -114,3 +116,21 @@ for my $case (['empty','',0],['ordinary','not a spec',0],['leading_blank_comment
 }
 PERL
 ```
+
+## Toolbox lifecycle guidance omitted from the current reader
+
+`SESSION-STARTUP-READING.3.2.44` checks TOOLBOX section 1 against the current
+[[standalone-lifecycle-block-audit]] authority and the four .3.2.42 public inline/multiline explicit/bare
+controls, which all execute return(7). TOOLBOX still says current Perl must reject a rule-item-leading
+brace and describes normalization as future. This is stale guidance, not an unresolved behavior choice.
+
+The standalone checker passes 9 placements / 4 duplicate forms / 6 ownership cases / 3 malformed twins /
+6 runtime routes / 15 public documents / 7 stale-claim denials / 14 mutations. Its public reader at
+`tools/check_standalone_lifecycle_block_contract.py` 67–80 reads only contract-listed paths; the exact
+15-document list omits TOOLBOX. Thus this passing public proof cannot validate that instruction.
+Startup .41.6 now explicitly owns its correction and actual-claim/path coverage alongside related
+lifecycle teaching. Other assessment candidates there remain unverified until their own controls.
+No TOOLBOX, checker, contract, or public-book edit is part of this reading checkpoint.
+
+Reverify with `bash tools/run_python_project_data.sh tools/check_standalone_lifecycle_block_contract.py`
+and the exact public lifecycle matrix in [[perl-semantic-inline-header-lifecycle-loss]].

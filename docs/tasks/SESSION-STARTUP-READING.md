@@ -756,12 +756,22 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.43 - read semantic queries and source mapping`
 
 - ID: `SESSION-STARTUP-READING.3.2.44`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 42: 1,067 lines/fragments, 34,029 bytes.
   Scope: `perl/LinkedSpec/SemanticStaticProjection.pm` lines 1–1067.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact source/static-test identity and retained canonical static proof; public Get/semantic failure controls;
+    existing inline-lifecycle evidence and standalone public-checker census; precise Knowledge/repair ownership;
+    memory/Knowledge/doctrines, both history pressure checks, and staged diff review.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Complete 1,067-line / 34,029-byte source reading and baseline identity pass; the 155-line static test
+    is fully read and unchanged from the preceding five-test canonical PASS. Two exact public Get/query
+    controls distinguish retained diagnostics from fabricated dependency evidence; initial controls expose
+    the same classification gap for other failures. Standalone neutral proof passes 15 public documents /
+    seven denials / fourteen mutations while omitting TOOLBOX. Existing .23/.41.6/.43 retain repair ownership.
+  Commit: `SESSION-STARTUP-READING.3.2.44 - read static semantics and refine failure evidence`
 
 - ID: `SESSION-STARTUP-READING.3.2.45`
   Status: `pending`
@@ -1289,13 +1299,16 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 - ID: `SESSION-STARTUP-READING.23`
   Status: `pending`
-  Goal: Preserve the real compilation failure in static semantic diagnostics.
+  Goal: Preserve honest compilation-failure decision and explanation evidence.
   Dependencies: `.3`/`.4`/`.5`.
-  Acceptance: Lock recognition_token_escape against the current fabricated dependency_target_missing record.
+  Acceptance: Retain the already-correct recognition_token_escape diagnostic code and message while
+    replacing its fabricated dependency_resolution decision/dependency_target_missing explanation.
     Keep genuine unknown-rule diagnostics correct, avoid uninitialized blank-target warnings, use honest
     fallback for unclassified failures, and preserve exact source evidence across native/generated/MCP routes.
     Extend the actual failure-class matrix and synchronize the book and existing authority records.
-  Verification: `pending` — `.31` records the invalid fabricated dependency and a valid missing-rule control.
+  Verification: `pending` — `.3.2.44` refines .31 with two exact public Get/query controls: the original
+    diagnostic code/message survive, but unrelated failure gets a false dependency decision/explanation
+    and an undefined-target warning. The bare missing-rule control retains correct code, span, and explanation.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.24`
@@ -1809,10 +1822,14 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     expressions, num_mod noninteger behavior, zero-progress thresholds, inline comments, fluent child-value
     examples, entry-versus-match captures, and tablegrep precedence statements against existing Knowledge
     and public tools. Check HandlerIR host-code versus language-neutral guidance against adopted decisions.
-    These are assessment candidates, not newly established runtime defects. Root any surprise, create a
-    bounded repair child before changes, and close each candidate with evidence, public examples, and render.
-  Verification: `pending` — full-book reading identifies the listed ambiguous or conflicting assertions;
-    no unmeasured runtime failure or output-wrapper defect is claimed.
+    These are assessment candidates, not newly established runtime defects. Also correct the confirmed
+    stale TOOLBOX section 1 instruction that current Perl must reject bare rule-item blocks: .3.2.42
+    public twins and the current standalone contract prove acceptance. Its 15-document reader omits
+    TOOLBOX; cover the actual false guidance and controlled variants with the repair. Root any surprise,
+    create a bounded repair child before changes, and close each candidate with evidence, public examples, and render.
+  Verification: `pending` — full-book reading identifies the listed assessment candidates. The additional
+    TOOLBOX guidance defect is confirmed at .3.2.44: standalone neutral proof passes 15 documents /
+    seven denials / fourteen mutations while omitting that file. No unmeasured runtime failure is claimed.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.41.7`
@@ -1881,7 +1898,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.44` | `pending` | read SemanticStaticProjection 1–1067. |
+| 1 | `SESSION-STARTUP-READING.3.2.45` | `pending` | read SourceLocation 1–700. |
 
 ## Reading Ledger
 
@@ -1892,7 +1909,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.44`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.45`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -3520,6 +3537,44 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - Roadmap and physical book reading remain Yes; codebase reading remains No and formal .4 alignment
   stays pending. This checkpoint changes only task/Knowledge/live continuity; .3.2.44 is next.
 
+### Static semantic evidence and precise failure classification at `.3.2.44`
+
+- Activated from clean `7a97647c9317bdd60b8aa7de0986ecf837bccdfb` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read SemanticStaticProjection 1–235 / 236–460 / 461–700 / 701–880 / 881–1067 completely
+  during the frozen canonical run. Exact current baseline identity passes: 1,067 lines / 34,029 bytes.
+  The complete 155-line static test was read; its five top-level tests passed in the preceding canonical
+  candidate and the current source/test bytes are unchanged. This does not duplicate .31 physical credit.
+- Reconciled descriptor-authoritative compiled topology, source-authoritative authored forms and spans,
+  independent duplicate/indexed regex identities, private source retention, function masking, canonical
+  record/relation ordering, and call-projector delegation. Existing .22 and .43 retain their known gaps.
+- Reverified .23 through public Get and public list queries. The first minimal fixtures selected
+  recognition_attempt_count and explicit-arrow final descriptor failure, not the original intended escape
+  and bare missing-rule cases; both nevertheless show the same false dependency classification. The
+  corrected two-case matrix reaches recognition_token_escape and bare_edge_target_undefined exactly.
+- For the escape, the semantic diagnostic retains recognition_token_escape and the original message.
+  A separate dependency_resolution decision and dependency_target_missing explanation invent a blank
+  target and emit the line-418 uninitialized warning. The bare missing-rule control correctly maps to
+  unknown_rule_reference, preserves Missing source bytes 6–13, and emits no warning. Forced compile
+  logs were captured in memory. The original whole-diagnostic-replacement wording was too broad;
+  this measured correction refines .31 and the existing .23 acceptance without claiming a repair.
+- After public tools, reread failed-projection 294–436 and compiled components 437–508. The code
+  retains supplied diagnostic code/summary with one intentional bare-edge mapping, then unconditionally
+  creates dependency decision/explanation rows. Exact matrix, warning, and source evidence are in the
+  existing compile-failure Knowledge card. No generated/MCP/backend behavior was remeasured here.
+- The earlier four explicit/bare inline/multiline controls and two outward descriptors remain valid:
+  every parser returns seven, but only explicit multiline I yields its lifecycle record. .43 owns the
+  header-tail scanner repair; bare controls do not justify inventing an explicit marker.
+- TOOLBOX section 1 still directs rejection of the already-supported bare block. The current lifecycle
+  Knowledge/ADR contract and earlier public controls establish the stale instruction. The standalone
+  checker passes 9 placements / 4 duplicate forms / 6 ownership cases / 3 malformed twins / 6 routes /
+  15 public documents / 7 denials / 14 mutations; its exact 15-path reader omits TOOLBOX. Reader 1–90
+  and contract-validation 144–164 were read; public-contract JSON was fully inspected. .41.6 now owns
+  correction and claim/path coverage. Other lifecycle assessment candidates remain unverified.
+- Three existing Knowledge records preserve these boundaries. Supporting test reads include recognition
+  authority 252–292, contract 295–318, and the small semantic failed.spec fixture after public controls.
+  Required roadmap/physical-book reading remain Yes, codebase No; formal .4 and all repairs stay pending.
+  No runtime, public-book, TOOLBOX, checker, policy, or protocol edits occur. Next .3.2.45.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -3564,7 +3619,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.2.40` is item 44/100 at `e548ce4b`;
   `.3.2.41` is item 45/100 at `da8185b9`;
   `.3.2.42` is item 46/100 at `dde05b65`;
-  `.3.2.43` is item 47/100 once committed.
+  `.3.2.43` is item 47/100 at `7a97647c`;
+  `.3.2.44` is item 48/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -3676,6 +3732,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.41` | Exact source baseline; 137 Perl tests; typed/semantic/diagnostic/logical neutral proof; eight value/four exit controls; required history rollover and exact-source proof; staged canonical boundary | PASS focused reading/probes; `.39`/`.40` own defects; ADR 0104 finite history capacity requires final staged canonical receipt before landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.42` | Exact source/book identities; 20 semantic tests; neutral semantic/generated proof; four input/direct, nine Get, and eight isolated factory controls; Knowledge and focused continuity; four inline-lifecycle and two descriptor controls | PASS reading and finite controls; physical mdBook Yes, codebase No; .41/.42/.43 own repairs without premature implementation. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.43` | Exact 982-line baseline and unchanged prior-proof inputs; retained 9/106/5 tests and neutral 6/20/128; four Knowledge reconciliations; exact consumed-spool cleanup; focused continuity | PASS scoped reading and retained proof; July milestones dated; codebase still No; no runtime changes. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.44` | Exact static-source/test identity; retained five-test proof; two exact plus two initial public failure controls; retained inline/descriptor evidence; standalone neutral 15/7/14; precise Knowledge and focused continuity | PASS scoped reading and controls; retained diagnostic versus fabricated explanation distinguished; .23/.41.6 refined without runtime changes. |
 
 ## Commit Log
 
@@ -3729,6 +3786,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.2.41` | `SESSION-STARTUP-READING.3.2.41 - read runtime observers and preserve bounded change history` | Runtime owners read; boolean/unwind repairs owned; exact change-history suffix and finite routing capacity preserved. |
 | `SESSION-STARTUP-READING.3.2.42` | `SESSION-STARTUP-READING.3.2.42 - read semantic projection and preserve complete book coverage` | Semantic call/index comprehension, complete book coverage, and measured book/compiler/inline-semantic repair ownership preserved. |
 | `SESSION-STARTUP-READING.3.2.43` | `SESSION-STARTUP-READING.3.2.43 - read semantic queries and source mapping` | Query/source-map and derived-observation owners read; current versus historical evidence reconciled. |
+| `SESSION-STARTUP-READING.3.2.44` | `SESSION-STARTUP-READING.3.2.44 - read static semantics and refine failure evidence` | Static projection read; failure claim narrowed to actual decision/explanation defect; omitted Toolbox guidance is repair-owned. |
 
 ## Changelog
 
@@ -3826,3 +3884,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   required change-history rollover with ADR 0104; next `.3.2.42` after exact staged canonical proof.
 - `2026-09-06`: `.3.2.42` reads semantic call/index owners, preserves complete 50-file book reading, and owns .41/.42/.43 repairs with exact public and isolated controls.
 - `2026-09-06`: `.3.2.43` completes query/runtime-projection/source-map comprehension, qualifies historical Knowledge milestones, and verifies exact preparation-spool cleanup.
+- `2026-09-06`: `.3.2.44` reads static semantic projection, refines .23 to preserved diagnostics with fabricated dependency evidence, and attaches stale TOOLBOX lifecycle guidance to .41.6.
