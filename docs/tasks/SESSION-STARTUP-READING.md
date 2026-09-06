@@ -35,7 +35,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -460,12 +460,19 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.24 - read function signatures and statement lowering`
 
 - ID: `SESSION-STARTUP-READING.3.2.25`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 23: 1,365 lines/fragments, 65,506 bytes.
   Scope: `perl/LinkedSpec/ActionIR/MethodLowering.pm` lines 2379–3743.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+    Verify caller argument scope against the existing function-execution contract with public engine probes.
+  Verification tier: `focused`
+  Focused checks: Exact range/full-file baseline identity; value/callable/function Knowledge;
+    public Get and generated-source caller-scope controls; memory/Knowledge/history and staged review.
+  Canonical trigger: `none` — source-reading and diagnostic continuity only; repairs remain separately owned.
+  Verification: Exact baseline identity and 1,365-line / 65,506-byte coverage pass. Eight public Get/source/descriptor
+    controls establish caller-local shadowing in scalar, aggregate, and nested calls with passing controls;
+    `.32` owns repair. Memory/history/staged review and required commit hooks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.25 - read value calls and own caller shadowing repair`
 
 - ID: `SESSION-STARTUP-READING.3.2.26`
   Status: `pending`
@@ -1336,11 +1343,25 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     Queued checkpoint statuses stay pending; pre-commit rechecks the final candidate.
   Commit: `SESSION-STARTUP-READING.31 - preserve forward reading and own confirmed repairs`
 
+- ID: `SESSION-STARTUP-READING.32`
+  Status: `pending`
+  Goal: Preserve caller-context argument evaluation before any user-function local declaration becomes visible.
+  Dependencies: `.3`/`.4`/`.5`.
+  Acceptance: Reproduce the scalar local-name collision through Get and emitted source, with literal and
+    distinct-name controls; cover aggregate inputs, parameter names, nested calls, rest arguments, and eager
+    evaluation order. Separate caller argument evaluation from body-local binding without exposing compiler
+    temporary collisions. Add focused RED/GREEN runtime/generated-source proof and direct-dependent callable
+    coverage; reconcile the function-execution Knowledge and public contract with the verified implementation.
+    Measure other backends before claiming cross-runtime impact or parity.
+  Verification: `pending` — Get returns null for `f(temp)` when the body declares local `temp`; literal and
+    distinct-name controls return outer. Dumped Perl declares `my $temp` before the argument temporary.
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.25` | `pending` | complete MethodLowering baseline lines 2379–3743. |
+| 1 | `SESSION-STARTUP-READING.3.2.26` | `pending` | complete MethodLowering baseline lines 3744–4911. |
 
 ## Reading Ledger
 
@@ -1351,7 +1372,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.25`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.26`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
 | mdBook | **No** | `.31` records fourteen complete book sources plus the two earlier local-CI ranges: 640,041 bytes of disjoint coverage. | Remaining 1,316,541 source bytes, formal chapter checkpoints, and rendered alignment under `.4`. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -2246,6 +2267,29 @@ PERL
 
 - Later checkpoints remain pending; codebase/book stay No. `.3.2.25` owns MethodLowering 2379–3743.
 
+### Value dispatch and function caller-scope evidence at `.3.2.25`
+
+- Activated from clean `d392ad2bee69a7fa2b5090c40589ca5f77d011f9` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- This checkpoint re-reviewed 2379–2795, 2796–3210, 3211–3500, and 3501–3743 in full, following `.31`'s
+  physical forward reading. Exact whole-file baseline identity and 1,365 lines / 65,506 bytes agree.
+- Read authored collection normalization, scalar/container ownership, quote-aware shape construction,
+  array pipeline/reducer dispatch, AST/source compatibility, eager logical calls, fixed/rest user-function
+  execution, dynamic codeblock invocation, source reconstruction, and the receiver-aware assignment bridge.
+  Previously recorded wrong-kind, numeric, and dynamic-receiver gaps remain with `.17`, `.20`, and `.19`.
+- Existing function/callable/AST Knowledge was checked before diagnosis. Public Get, captured generated source,
+  and descriptors show body locals shadowing caller arguments: scalar, array-valued, and nested-call cases
+  return null, while literal/distinct-name/parameter-only controls preserve their inputs. All eight compile
+  and report no context error, raw dependency, or unresolved helper. MethodLowering 3293 emits local
+  declarations before argument temporaries at 3294–3295; this explains the observed lexical capture.
+- The first aggregate probe expected an empty host array and stopped when the actual result was null.
+  The dump shows a uniform scalar binding; the final eight-case observation records null accurately.
+  No test fixture was re-blessed. The exact successful command and result table are committed in
+  `docs/knowledge/perl-user-function-caller-shadowing.md`; the older execution card now qualifies its claim.
+- New repair `.32` owns caller-scope separation and scalar/aggregate/nested/rest/order/temporary-name
+  regression controls after required reading and policy review. Other backends remain unprobed; no
+  implementation, public-book change, or standalone generated-parser execution is claimed.
+- Global codebase/book answers remain No. `.3.2.26` continues the same source at 3744–4911.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -2271,7 +2315,8 @@ PERL
   `.3.2.21` is item 24/100 at `17d3e919`; `.31` is item 25/100 at `3e8b05cd`;
   `.3.2.22` is item 26/100 at `27ff841a`;
   `.3.2.23` is item 27/100 at `2c398b92`;
-  `.3.2.24` is item 28/100 once committed.
+  `.3.2.24` is item 28/100 at `d392ad2b`;
+  `.3.2.25` is item 29/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -2364,6 +2409,7 @@ PERL
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.22` | Exact full-file reading/identity; authored-value/legacy arity controls; Knowledge reconciliation; focused continuity | PASS bounded controls and baseline identity; final staged gates precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.23` | Exact prefix/full-file identity; existing Knowledge milestone reconciliation; managed MethodLowering trace suite; focused continuity | PASS four top-level tests and prefix identity; required staged commit gates precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.24` | Exact range/full-file identity; signature/retirement Knowledge; variadic function suite; public mixed-path read; focused continuity | PASS 66 tests and error-free one result; required staged gates precede landing. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.25` | Exact range/full-file identity; function/callable Knowledge; eight Get/source/descriptor controls; focused continuity | PASS diagnostic controls; caller-local shadowing reproduced and repair .32 owned; required staged gates precede landing. |
 
 ## Commit Log
 
@@ -2398,6 +2444,7 @@ PERL
 | `SESSION-STARTUP-READING.3.2.22` | `SESSION-STARTUP-READING.3.2.22 - read method expression normalization` | MethodExpr comprehension and scope precedence recorded; next MethodLowering prefix. |
 | `SESSION-STARTUP-READING.3.2.23` | `SESSION-STARTUP-READING.3.2.23 - read method lowering prefix and reconcile milestones` | Prefix comprehension and dated AST/binding/callable milestone ownership reconciled; no source/book change. |
 | `SESSION-STARTUP-READING.3.2.24` | `SESSION-STARTUP-READING.3.2.24 - read function signatures and statement lowering` | Function signatures and guarded statement bridges read; four historical Knowledge records reconciled. |
+| `SESSION-STARTUP-READING.3.2.25` | `SESSION-STARTUP-READING.3.2.25 - read value calls and own caller shadowing repair` | Value and function-call dispatch read; eight controls root-cause caller-local shadowing and own repair .32. |
 
 ## Changelog
 
@@ -2459,3 +2506,5 @@ PERL
   four trace tests pass, and `.3.2.24` continues the next prefix range.
 - `2026-09-06`: `.3.2.24` records signature/local-binding and statement-bridge comprehension, validates 66 variadic
   tests plus a current mixed-path read, and reconciles retired-syntax Knowledge; next `.3.2.25`.
+- `2026-09-06`: `.3.2.25` reads value/function dispatch, preserves eight caller-scope controls, and owns repair `.32`;
+  existing execution Knowledge is qualified, with `.3.2.26` next.

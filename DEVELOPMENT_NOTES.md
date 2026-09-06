@@ -10,6 +10,11 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.25 — caller dependencies do not preserve emitted lexical scope
+
+Body-local declarations precede emitted argument evaluation; same-name scalar, aggregate, and nested caller reads become null.
+Literal, distinct-name, and parameter-only controls pass; .32 owns separation and regression coverage after required reading.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.24 — versioned signatures and current authored reads
 
 The fixed/rest signature adapter feeds isolated local declarations and typed statement guards; body dispatch follows next.

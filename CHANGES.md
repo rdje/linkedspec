@@ -10,6 +10,11 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.25 — read value calls and own caller shadowing repair
+
+Read MethodLowering 2379–3743 (1,365 lines / 65,506 bytes); eight public controls expose caller-local shadowing.
+Own repair .32 and record the exact generated-source cause in Knowledge; required focused continuity checks apply.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.24 — read function signatures and statement lowering
 
 Read MethodLowering 1496–2378 (883 lines / 33,969 bytes); 66 variadic tests and a public mixed-path control pass.
