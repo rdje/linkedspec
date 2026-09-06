@@ -148,12 +148,23 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.4 - read bootstrap grammar core`
 
 - ID: `SESSION-STARTUP-READING.3.2.5`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 3: 590 lines/fragments, 23,054 bytes.
   Scope: `perl/LinkedSpec/CompilerState.pm` lines 1–590.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+    Apply the mandatory changelog rollover if this checkpoint crosses 90%; verify complete-record preservation.
+    Any required finite history-member capacity admission follows README_POLICY and exact indexed-ADR proof,
+    without changing product code, current-view ceilings, archive identity, or the required-reading boundary.
+  Verification tier: `canonical`
+  Focused checks: Two exact reading chunks and baseline identity; existing CompilerState/descriptor Knowledge;
+    required rollover plus independent clean-source suffix/hash/count proof; document-history and README routing;
+    `bash scripts/check_memory_architecture.sh`; both history-pressure checks; `git diff --check`.
+  Canonical trigger: `infrastructure` — ADR 0102 admits one required history member and manifest line in the route registry.
+  Verification: CompilerState fully read in 1–300 / 301–590 chunks, 590 lines / 23,054 bytes, baseline-identical.
+    Required rollover archives exact source lines 242–459 as segment 4985; independent byte/hash proof passes.
+    ADR 0102 records the exact finite 28-file/27-manifest-line admission. Final staged canonical receipt is required
+    before landing; no production change or completed full-codebase claim.
+  Commit: `SESSION-STARTUP-READING.3.2.5 - read compiler state and preserve history`
 
 - ID: `SESSION-STARTUP-READING.3.2.6`
   Status: `pending`
@@ -688,7 +699,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.5` | `pending` | Read CompilerState.pm baseline lines 1–590 in bounded chunks. |
+| 1 | `SESSION-STARTUP-READING.3.2.6` | `pending` | Read Compiler.pm baseline lines 1–1041 in bounded chunks. |
 
 ## Reading Ledger
 
@@ -699,7 +710,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | Eleven Perl files in full under `.3.2.1`, `.3.2.3`, and `.3.2.4`; checkpoint-relevant scripts listed below. | Remaining 78 Perl paths and other first-party source/test/spec/fixture/tool inputs not explicitly listed as read. |
+| Codebase | **No** | Twelve Perl files in full under `.3.2.1` and `.3.2.3`–`.3.2.5`; checkpoint-relevant scripts listed below. | Remaining 77 Perl paths and other first-party source/test/spec/fixture/tool inputs not explicitly listed as read. |
 | mdBook | **No** | `docs/linkedspec-book/src/SUMMARY.md`; `docs/linkedspec-book/src/development/local-ci-and-regression.md` 1897–1943 and 1988–2004. | All other chapter text, including the unread portions of that development chapter. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -867,6 +878,24 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   harness completed successfully. This harness error is not a repository defect. All probe jobs are consumed.
 - No production or book change; remaining reading starts at `.3.2.5`. The source-reading gate remains No.
 
+### Compiler state and required history rollover at `.3.2.5`
+
+- Read `perl/LinkedSpec/CompilerState.pm` through EOF in 1–300 and 301–590 chunks: 590 lines / 23,054 bytes,
+  baseline-identical. Twelve unique Perl files are fully read; 77 baseline Perl files remain unread.
+- Existing `compilerstate-internal-model`, resolved descriptor-model-tag, and outward-versus-semantic-wire cards
+  reconcile state construction, definition/compiled ordering, function projection, migration-summary shaping,
+  dependency maps, validation views, and the four-key outward projection. Host regex/callable values remain an
+  intentional native boundary. This reading establishes no additional defect or runtime-completion claim.
+- The complete six-line changelog record takes the root to 465/512 lines; the required rollover archives 218
+  clean-HEAD suffix lines / 20,348 bytes as segment `4985` and leaves 247 lines / 21,550 bytes. Independent
+  byte comparison and SHA-256 prove exact activation source lines 242–459 with no prior segment edits.
+- Normalized the current view's trailing blank line for `git diff --check`; the candidate root is 246 lines /
+  21,549 bytes. The immutable suffix remains byte-identical; only current-view EOF whitespace changed afterward.
+- The resulting history needs 28 files and 27 manifest lines. ADR `0102` admits exactly those two finite counts
+  under existing README/history policy, preserving all byte/current-view/aggregate ceilings and authority. This
+  required checkpoint-storage maintenance stays within startup continuity; donor-policy adoption and product
+  changes remain gated. The registry movement makes this leaf canonical, with an exact staged receipt before commit.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -881,7 +910,7 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 - No runtime behavior was verified by reading. No new public explanation is warranted by this checkpoint;
   substantive codebase/book drift, if found during `.3`/`.4`, must receive an owning leaf before remediation.
 - Batch history: `.2` is resumed item 1/100 at `d6d3c890`; `.6` is item 2/100 at `03d692c1`; `.3.1` is item 3/100
-  at `942c6138`; `.3.2.1` is item 4/100 at `c0eb1acf`; `.3.2.2` is item 5/100 at `094e05bc`; `.3.2.3` is item 6/100 at `27fd160f`; `.3.2.4` is item 7/100 once committed. `.1` belongs
+  at `942c6138`; `.3.2.1` is item 4/100 at `c0eb1acf`; `.3.2.2` is item 5/100 at `094e05bc`; `.3.2.3` is item 6/100 at `27fd160f`; `.3.2.4` is item 7/100 at `4f311a9e`; `.3.2.5` is item 8/100 once committed. `.1` belongs
   to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -930,6 +959,8 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.3` | Five-file full reading/baseline identity; existing Knowledge; managed comparison/public-error controls | PASS reading; CONFIRMED stale diagnostic defect, repair `.8` pending. All probe jobs completed. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.3` | Required pre-commit Knowledge and all nine doctrines; post-commit pointer; clean status/empty brief | PASS at `27fd160f`. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.4` | Four exact core chunks/baseline identity; existing Knowledge; scanner/helper/descriptor/public controls | PASS reading; CONFIRMED regex-tail defect, repair `.9` pending; all probes consumed. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.4` | Required pre-commit Knowledge and all nine doctrines; post-commit pointer; clean status/empty brief | PASS at `4f311a9e`. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.5` | Exact full reading/baseline identity; required rollover; independent suffix/count/SHA-256 proof | PASS; final canonical proof required before landing ADR 0102 capacity step. |
 
 ## Commit Log
 
@@ -943,6 +974,7 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `SESSION-STARTUP-READING.3.2.2` | `SESSION-STARTUP-READING.3.2.2 - partition remaining Perl reading` | All unread Perl bytes owned before reading; no new reading credit. |
 | `SESSION-STARTUP-READING.3.2.3` | `SESSION-STARTUP-READING.3.2.3 - read resolution and bootstrap adapters` | Ten unique Perl files read; stale diagnostic defect proved and repair `.8` owned. |
 | `SESSION-STARTUP-READING.3.2.4` | `SESSION-STARTUP-READING.3.2.4 - read bootstrap grammar core` | Eleven unique Perl files read; attached-tail regex defect proved and `.9` owned. |
+| `SESSION-STARTUP-READING.3.2.5` | `SESSION-STARTUP-READING.3.2.5 - read compiler state and preserve history` | Twelve Perl files read; required complete-record rollover and finite capacity ADR 0102. |
 
 ## Changelog
 
@@ -962,3 +994,5 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   `.8`; the next exact reading leaf is `.3.2.4`, with both repairs gated on required reading.
 - `2026-09-06`: `.3.2.4` completes bootstrap core reading and diagnoses attached-tail regex truncation;
   `.9` owns repair and `.3.2.5` is the next required reading leaf.
+- `2026-09-06`: `.3.2.5` completes compiler-state reading and required history rollover; ADR 0102 admits
+  exactly one history member/manifest row under canonical verification. Next reading is `.3.2.6`.

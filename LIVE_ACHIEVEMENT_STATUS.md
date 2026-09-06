@@ -10,15 +10,18 @@
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.4` reads the bootstrap core and proves attached-tail regex truncation.
-  This is item 7/100; eleven Perl files read. Codebase and book reading remain incomplete.
+- `SESSION-STARTUP-READING.3.2.5` reads compiler state and preserves history through required rollover/ADR 0102.
+  This is item 8/100; twelve Perl files read. Codebase and book reading remain incomplete.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.5` and read CompilerState.pm baseline lines 1–590. Complete required
+- Activate `SESSION-STARTUP-READING.3.2.6` and read Compiler.pm baseline lines 1–1041. Complete required
   reading and policy review, then repairs `.7`–`.9` before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.5` reads compiler state; exact required rollover preserves history
+  and ADR 0102 admits one finite member/manifest row. Next reading is `.3.2.6`.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.4` reads the core and proves attached-tail regex truncation;
   repair `.9` is owned, and `.3.2.5` continues mandatory reading.
@@ -70,9 +73,6 @@
 - `2026-09-03` — `.19.5.2` implements Julia `map_leaves!`; focused 496, complete package/CLI/corpus, storage 22/5,
   167 + 592 neutral mutations, all doctrines, mdBook, and receipt-bound canonical CI pass; ADR `0100` admits
   change-history segment `4986` at exact finite 27/26 routing capacity.
-
-- `2026-09-03` — `.19.5.1` implements Julia write vivification through native/reconstructed/generated/emitted/CLI
-  routes; focused 406, complete package, storage 21/5, primary CLI, corpus 105/105, and canonical CI pass.
 
 ## History
 

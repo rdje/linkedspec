@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.5 — compiler-state reading and bounded history
+
+- CompilerState agrees with the existing three-state ownership and native outward-projection records; no new
+  behavioral defect is established by this full reading. Compiler pipeline reading follows at `.3.2.6`.
+- Required rollover preserves exact clean-HEAD records in segment 4985. ADR 0102 adds one history member and
+  manifest line, preserving every byte/root/aggregate ceiling; this checkpoint therefore uses canonical proof.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.4 — regex delimiter control
 
 - The attached-tail scanner starts at an opening delimiter but requires the whole preceding prefix to be empty

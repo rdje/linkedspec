@@ -5,7 +5,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
 
 Current session prerequisite: [SESSION-STARTUP-READING](docs/tasks/SESSION-STARTUP-READING.md) records the
 required-reading baseline, exact coverage, and `rgx` exclusion. Roadmap reading is complete; codebase/book remain
-incomplete. Eleven Perl files are read; `.3.2.5` reads compiler state next. Repairs `.7`–`.9` (cleanup liveness,
+incomplete. Twelve Perl files are read; `.3.2.6` reads the compiler pipeline next. Repairs `.7`–`.9` (cleanup liveness,
 stale comparison, regex-tail truncation) follow required reading and precede Rust mutation setup.
 
 Rule-local cursor rollout is closed at 74 files / 8 complete + 0 pending / 60 mutations; recurring backend proof
