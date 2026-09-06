@@ -26,7 +26,8 @@ transition/removal machinery, not as the future identity of LinkedSpec. Key poin
   `pplugin` spec, and lazy-loads its default parser callback through `OwnerDispatch`.
 - **The lazy compatibility cycle**: `LinkedSpec -> PluginBridge -> PPlugin -> LinkedSpec::get_parser('pplugin')`.
 - **17 dead `.plg` files** deleted (1,030 lines, 45 actions) in `PLUGIN-ACTION-MIGRATION`.
-  **19 `.plg` files** remain as legacy corpus.
+  The earlier census of **19 `.plg` files** is historical; the September 6 Git census contains
+  **13**, all under `noncore/plugin/`.
 - **Extracted helper owners** (`HTTP::FileAccess`, `QC::Flow`, `Timing::SetupHold`, etc.) now
   live outside `LinkedSpec::*` under domain packages. Direct Perl callers use these owners
   instead of routing through `LinkedSpec::run_plugin(...)`.
@@ -79,3 +80,19 @@ my $ok=eval{LinkedSpec::register_plugin('invalid-name',sub{1});1};die 'invalid n
 print $j->encode({bulk_count=>$count,dispatch=>$value,lookup=>'c',replacement=>'replaced',removed=>$removed,invalid_name=>'rejected',legacy_loaded=>JSON::PP::false,error_state=>'preserved'}),"\n";
 PERL
 ```
+
+## September 6 legacy discovery and configuration reading
+
+`.3.2.53` completes PPlugin 331 lines, PathSearch 47 lines, and env.conf 51 lines alongside the
+function registry (1,202 lines / 45,829 bytes total), all baseline-identical. PPlugin's default
+ordered roots are the invocation working directory and repository `plugin/`; it does not automatically
+search the 13 parked `noncore/plugin/` files. Per-root filenames are sorted and deduplicated; the
+legacy registry is cached on first construction. Body text becomes Perl eval callbacks only in this
+legacy adapter. Registered PluginBridge dispatch remains independent, as proven in `.3.2.39`.
+
+PathSearch is older generic recursive discovery: it caches a directory census, adds caller directories,
+deduplicates via a hash, and returns the first discovered matching basename/extension. No deterministic
+root-precedence guarantee is inferred from that hash order. env.conf retains legacy program/configuration
+and system-tool spellings; neither file was executed or treated as current portable parser authority.
+The parked plugin census uses `git ls-files -- '*.plg'`, not recursive runtime discovery. No legacy
+callback, network/configured service, or cleanup command is invoked by this reading checkpoint.

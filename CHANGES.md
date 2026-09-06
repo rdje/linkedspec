@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.53 — reconcile function registry and legacy discovery
+
+Read all four function-registry/plugin/path/configuration files with exact baseline identity. Two callable suites pass 76 tests and both neutral contracts pass. Reconcile spec-owned parsing, fixed/variadic/typed-final metadata, and the distinction between current registered dispatch and legacy discovery. Correct the parked plugin count to 13 and update continuity without runtime, configuration, or book changes.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.52 — reconcile XID classifier and current named-slot admission
 
 Reconcile the previously read 855-line XID classifier with exact baseline identity and ADR 0051 named-slot reuse. Offline regeneration and direct Perl checks pass across 806 ranges, 3,224 endpoint/gap checks, 17 fixtures, and two identity pairs. Correct stale gap admission Knowledge against current 9/0/63 and public 8/15/10/34 proof. Runtime, generated tables, and book remain unchanged.

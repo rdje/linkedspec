@@ -901,12 +901,19 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.52 - reconcile XID classifier and current named-slot admission`
 
 - ID: `SESSION-STARTUP-READING.3.2.53`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 51: 1,202 lines/fragments, 45,829 bytes.
   Scope: `perl/LinkedSpec/UserFunctionRegistry.pm` lines 1–773; `perl/PPlugin.pm` lines 1–331; `perl/PathSearch.pm` lines 1–47; `perl/env.conf` lines 1–51.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Full prior/current function registry and legacy plugin/path/config reading; exact baseline identity; canonical spec-owned function/signature Knowledge and registered plugin controls; bounded current proof with no legacy recursive discovery; memory/history/fast doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: All four owned files reread completely: 1,202 lines / 45,829 bytes; exact baseline identity passes.
+    Two managed callable suites pass 76 top-level tests in 29 seconds. Neutral signature 3/9/7 and
+    codeblock 7/11/9/7/4/8/23 pass. Git census is 13 parked .plg files. Knowledge reconciles spec-owned
+    parsing, versioned metadata, and legacy discovery without runtime/grammar or public-book changes.
+  Commit: `SESSION-STARTUP-READING.3.2.53 - reconcile function registry and legacy discovery`
 
 - ID: `SESSION-STARTUP-READING.3.2.54`
   Status: `pending`
@@ -1985,7 +1992,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.53` | `pending` | reconcile UserFunctionRegistry, PPlugin, PathSearch, and env.conf with their current and legacy owners. |
+| 1 | `SESSION-STARTUP-READING.3.2.54` | `pending` | reconcile gdcheck, htmlcss_driver, and ptchange, preserving the existing .25/.26 defect owners. |
 
 ## Reading Ledger
 
@@ -1996,7 +2003,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.53`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoint `.3.2.54` remains pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -3882,6 +3889,31 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   clean status verified before activation. Roadmap/physical book Yes; codebase No and .4/repairs pending.
   Next .3.2.53.
 
+### Function metadata and legacy plugin/path configuration at `.3.2.53`
+
+- Activated from clean `bdf491a56b9ce6461a6e3ed2c924de6e0af9e2eb` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Completely reread UserFunctionRegistry 1–200 / 201–390 / 391–580 / 581–773, PPlugin 1–331,
+  PathSearch 1–47 and env.conf 1–51. All four baseline identities pass: 1,202 lines / 45,829 bytes.
+  Physical coverage was already credited under .31; this closes its queued comprehension checkpoint.
+- Retrieve registry, spec-owned parser, variadic, final-codeblock, and plugin boundary Knowledge.
+  Reconcile cached spec-owned definition parsing and restored loading guard; exact fixed/v2 signatures
+  and typed final metadata across body records; deterministic ordinal job identity; narrow staged body
+  dispatch; collisions/parameters; and newline-preserving stripping. Outward typed codeblock v3 is
+  separate from internal fixed-v1 metadata and the version-1 registry container.
+- Read all 174 lines of the variadic consumer plus codeblock metadata subtest 346–397. Current
+  managed suites pass 76 top-level tests in 29 seconds; neutral signature 3 definitions/9 calls/7
+  invalid definitions and codeblock 7/11/9/7/4/8/23 pass. No full codeblock-test reading credit or
+  new generated-process claim is inferred from the variadic emitted-text assertions.
+- Git counts 13 tracked .plg files, all parked under noncore/plugin; correct the older 19-file
+  current claim. Default legacy discovery uses cwd and root plugin/, ordered files, and a cached
+  registry. PathSearch caches recursive directories and hash-deduplicates matches without a stable
+  precedence guarantee. env.conf retains legacy program/system-tool settings. Neither broad legacy
+  discovery nor configured callbacks/services/cleanup are executed. Prior registered bridge proof
+  remains supported by unchanged bridge/registry/facade bytes.
+- No runtime, grammar, descriptor, configuration, or public-book changes. Prior
+  bdf491a56b9ce6461a6e3ed2c924de6e0af9e2eb passed nine doctrines/post-pointer, then brief/clean checks.
+  Roadmap/physical book Yes; codebase No and formal alignment/repairs remain pending. Next .3.2.54.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -3935,7 +3967,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.2.49` is item 53/100 at `a3211421`;
   `.3.2.50` is item 54/100 at `78b272ec`;
   `.3.2.51` is item 55/100 at `bea31562`;
-  `.3.2.52` is item 56/100 once committed.
+  `.3.2.52` is item 56/100 at `bdf491a5`;
+  `.3.2.53` is item 57/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -4056,6 +4089,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.50` | Prior complete middle-range reading; exact baseline and unchanged inputs; retained regeneration/12 fixtures/Perl52; Knowledge status; focused continuity | PASS; generated semantics unchanged; physical book/formal alignment distinction corrected. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.51` | Complete prior final range + exact identity; evaluator/12 fixtures; unchanged regeneration/Perl52; dated pressure census; Knowledge and focused continuity | PASS; complete case-table comprehension accounted; no runtime or generated-data change. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.52` | Complete prior XID range + baseline; ADR0051/consumer seams; Unicode806/9/8/2; direct3224/17/2; gap9/0/63/public8/15/10/34; focused continuity | PASS; generated classifier and current named-slot admission reconciled; historical stages retained. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.53` | Four complete files + baseline; 76 callable tests; neutral signature/codeblock; tracked plugin census13; canonical Knowledge and focused continuity | PASS; current registry metadata and legacy corpus/discovery boundaries reconciled. |
 
 ## Commit Log
 
@@ -4118,6 +4152,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.2.50` | `SESSION-STARTUP-READING.3.2.50 - reconcile middle Unicode table range and reading status` | Unicode lower/upper table transition reconciled; current reading status and retained proof preserved. |
 | `SESSION-STARTUP-READING.3.2.51` | `SESSION-STARTUP-READING.3.2.51 - reconcile Unicode evaluator and contextual casing` | Final case-table range reconciled; contextual evaluator, retained proof and native-planning pressure recorded. |
 | `SESSION-STARTUP-READING.3.2.52` | `SESSION-STARTUP-READING.3.2.52 - reconcile XID classifier and current named-slot admission` | XID range and direct classifier proof recorded; stale gap Knowledge admission corrected without runtime movement. |
+| `SESSION-STARTUP-READING.3.2.53` | `SESSION-STARTUP-READING.3.2.53 - reconcile function registry and legacy discovery` | Function registry and legacy files read; 76 tests and neutral proof recorded; 13-file corpus count corrected. |
 
 ## Changelog
 
@@ -4224,3 +4259,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-06`: `.3.2.50` reconciles the middle Unicode mapping range and clarifies physical mdBook completion versus pending formal alignment in inventory Knowledge.
 - `2026-09-06`: `.3.2.51` reconciles final Unicode mapping/property/evaluator coverage and records the dated task-storage census before native planning.
 - `2026-09-06`: `.3.2.52` reconciles the generated XID classifier, records direct boundary/fixture proof, and corrects stale named-slot/gap admission Knowledge.
+- `2026-09-06`: `.3.2.53` reconciles spec-owned function metadata, completes legacy plugin/path/config reading, and records current callable proof and the parked plugin census.

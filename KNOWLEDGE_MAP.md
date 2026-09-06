@@ -16402,7 +16402,7 @@ _SPEC-FORMAT-TERSE.4.1 implementation inventory for user-defined functions_
 - **source:** [`docs/knowledge/terse-user-function-implementation-inventory.md`](docs/knowledge/terse-user-function-implementation-inventory.md)
 
 ### terse-user-function-registry-seam
-_SPEC-FORMAT-TERSE.4.2.1 Perl user-function registry descriptor seam_
+_Perl user-function registry normalizes spec-owned definitions and versioned metadata_
 
 - **answers:** does LinkedSpec descriptor include user functions | where are user functions stored | what does the function registry contain | does SPEC-FORMAT-TERSE.4.2.1 execute user functions | are registered function calls still unresolved | does SPEC-FORMAT-TERSE.4.2.2 execute registered value calls | how are function definitions parsed before bootstrap | what rejects duplicate user functions | what fields are in descriptor functions | does function_definition live in spec.spec
 - **date:** 2026-07-01 · **status:** current

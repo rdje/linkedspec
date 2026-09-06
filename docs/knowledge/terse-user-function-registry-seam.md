@@ -1,6 +1,6 @@
 ---
 id: terse-user-function-registry-seam
-title: SPEC-FORMAT-TERSE.4.2.1 Perl user-function registry descriptor seam
+title: Perl user-function registry normalizes spec-owned definitions and versioned metadata
 answers:
   - "does LinkedSpec descriptor include user functions"
   - "where are user functions stored"
@@ -30,10 +30,10 @@ fn normalize(value) {
 ```
 
 `specs/spec.spec` owns the active `function_definition` grammar and `spec_file`
-dispatch. The Perl reference still uses a temporary pre-bootstrap bridge in
-`LinkedSpec::UserFunctionRegistry`: it scans only top-level definitions, records them,
-and blanks their source span while preserving newlines before ordinary validation and
-bootstrap parsing.
+dispatch. The Perl pre-bootstrap bridge in `LinkedSpec::UserFunctionRegistry` now compiles and caches
+`specs/user_function_definition.spec` at top `user_function_definitions`. It consumes that spec-returned
+AST, validates records, and blanks each definition span while preserving newlines before ordinary
+validation and bootstrap parsing. It no longer owns a separate raw definition-shell scanner.
 
 The compiled state carries:
 
@@ -46,8 +46,10 @@ The public descriptor carries:
 - `meta.function_order`
 - `meta.function_count`
 
-Each function definition records `name`, ordered `params`, `arity`, `source_span`,
-`body_span`, `body_source`, and `body_ast`.
+Fixed version-1 definitions record `name`, ordered `params`, `arity`, source/body spans and text,
+staged body records, and `body_ast`. Version-2 variadic definitions use the neutral callable signature
+instead of `params`/`arity`. Typed final-codeblock declarations carry final parameter-kind metadata
+internally and use the separately governed version-3 outward descriptor projection.
 
 The registry rejects duplicate function names, invalid or duplicate params, reserved
 runtime/lifecycle/function symbols, built-in helper/control-name collisions, and
@@ -58,4 +60,24 @@ registered calls executable in Perl value positions and compatible receiver-dot 
 with zero raw fallback and zero unresolved helpers. `.4.2.3` adds registry-aware
 standalone discard: registered calls/chains lower as `VALUE_DROP`, while unregistered
 standalone call-shaped statements stay raw compatibility debt. Wrong-arity registered
-calls still report unresolved-helper metadata.
+calls and variadic below-minimum calls report unresolved-helper metadata.
+
+## September 6 complete registry reading
+
+`SESSION-STARTUP-READING.3.2.53` reads all 773 lines / 30,552 bytes with exact baseline identity
+(SHA-256 `805626ff7aeebdbb00565fa102afccdd3e6c8126e2e341f44bfeff1d0cd5361c`). Parser construction
+uses a reentrancy flag restored after its guarded load and caches only a valid CODE parser. Fixed,
+variadic, and typed-final records require matching body payload/job signature, text, and spans; ordinal
+paths and job ids are rewritten deterministically. Body AST comes from the narrow staged registry.
+The registry container stays version 1 even when contained function records use version 2.
+
+Two managed existing suites pass 76 top-level tests in 29 seconds: variadic definitions/calls and
+callable codeblock literals. Neutral signature proof is 3 definitions / 9 calls / 7 invalid definitions;
+codeblock proof is 7 literals / 11 calls / 9 invalid literals / 7 invalid calls / 4 invalid declarations /
+8 contextual forms / 23 governance mutations. The complete 174-line variadic consumer and the
+codeblock metadata subtest at 346–397 were read; the remaining codeblock consumer is not newly credited.
+The variadic suite checks emitted source text and native execution; generated runtime claims retain
+their separate existing consumer evidence. No runtime, grammar, or descriptor contract changed.
+
+Canonical successors: [[spec-defined-user-function-definition-parser]], [[perl-variadic-user-functions]],
+[[perl-generic-final-codeblock-normalization]], and [[function-body-staged-registry-dispatch]].
