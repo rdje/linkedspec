@@ -10,6 +10,15 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.9 — validation diagnostic source identity
+
+- The validator's next-line lookup repeats its current row and truthiness erases a literal zero line. Content-based
+  index lookup attributes repeated headers to their first occurrence; the separate regex pass retains the final
+  paragraph owner. Direct context, callback, and public Get probes confirm the wrong diagnostics while rejection
+  remains intact. Repairs `.11.1`–`.11.3` preserve source units and syntax acceptance through bounded controls.
+- Scalar metadata repairs the coupling card's literal-pipe retrieval; the open-block command now reaches the
+  validator without removed parse_mode. Validation.pm's suffix remains unread under `.3.2.10`.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.8 — explicit SpecEntry ownership and stale inputs
 
 - Current SpecEntry coordinates RuleIR, EmitContext, HandlerVariantEmitter, source capture, and runtime wrapping;

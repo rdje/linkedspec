@@ -11,12 +11,17 @@ date: 2026-07-08
 status: confirmed
 tags: [spec-language, validation, rule-paragraphs, helper-dsl, SPEC-LANG-REFERENCE]
 evidence: "SPEC-LANG-REFERENCE.10.5.5 reverified the `user-model/spec-files-and-rule-paragraphs.md` label-in-block example. A bare `label:` line while an `I { ... }` block is open does not become a new top-level rule; `perl/LinkedSpec/Validation.pm` checks `_parse_rule_label_line($line)` while `edge_scan_depth > 0` and rejects it as `Rule definition not allowed inside open block`, suggesting that the preceding block must close before starting a rule. A colon-bearing quoted string remains valid helper DSL block content: `return(hash(\"label:\", \"inside block\"))` compiles and returns the key `label:` in the payload. This distinction is the rule-paragraph boundary: rule starts are top-level constructs, but open blocks still must contain valid helper DSL."
-reverify: "perl -Iperl -MLinkedSpec -e 'my $bad = qq{Top::\\n -> Item .push\\n\\nLX { return(copy(array(Top))) }\\n\\nItem:\\n /a/ I {\\nlabel:\\n return(hash(\"kind\", \"top\"))\\n }\\n}; eval { LinkedSpec::Get(\\$bad, parse_mode => \"consume\"); 1 } or print $@;'  # reports: Rule definition not allowed inside open block"
+reverify: bash tools/project_data_run.sh perl -Iperl -MLinkedSpec::Validation -e 'my $s=join(chr(10), q!Top::!, q! I {!, q!label:!, q! return(1)!, q! }!, q!!); my %f; my $ok=LinkedSpec::Validation::validate_dsl_syntax(\$s,{on_failure=>sub {%f=@_}}); die q!unexpected result! if $ok || $f{summary} ne q!Rule definition inside open block!; print $f{detail};'
 ---
 
 # Rule starts versus open action/lifecycle blocks
 
 **Confirmed 2026-07-08** during `SPEC-LANG-REFERENCE.10.5.5`.
+
+**Reverified 2026-09-06 (`SESSION-STARTUP-READING.3.2.9`):** The direct validator rejects the open-block
+control at line 3 with summary `Rule definition inside open block`. The retrieval command now uses that
+boundary directly and omits the removed `parse_mode` option that prevented the historical command from
+reaching validation. The separate repeated `Next:` diagnostic defect is owned in [[perl-validation-diagnostic-source-drift]].
 
 Rule labels such as `Next:` and `Top::` are top-level paragraph starts. They are not valid
 inside an open action or lifecycle block. If a bare label-like line such as `label:` appears

@@ -5,20 +5,23 @@
 - `SESSION-STARTUP-READING` owns the director-required reading prerequisite. Roadmap reading and exhaustive
   inventory `.3.1` are complete; codebase and mdBook reading remain incomplete. The director excluded `rgx`
   and its nested dependencies. Diagnosis `.6` confirms false-dead cleanup authorization on denied inspection;
-  `.7` owns cleanup repair; `.8` stale comparison; `.9` regex tails; `.10` unbound AND_BCODE inputs. All follow required
-  reading, before mutation setup. Feature and capability status are unchanged.
+  `.7` owns cleanup repair; `.8` stale comparison; `.9` regex tails; `.10` unbound AND_BCODE inputs; `.11`
+  diagnostic source context. All follow required reading, before mutation setup. Feature and capability status are unchanged.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.8` completes SpecEntry reading and owns unbound-input repair `.10`.
-  This is item 11/100; fourteen full Perl files read. Codebase and book remain incomplete.
+- `SESSION-STARTUP-READING.3.2.9` reads Validation.pm 1–1320 and owns diagnostic repairs `.11.1`–`.11.3`.
+  This is item 12/100; fourteen full Perl files plus the validation prefix read. Codebase/book remain incomplete.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.9` and read Validation.pm baseline lines 1–1320. Complete required
-  reading and policy review, then repairs `.7`–`.10` before Rust mutation configuration.
+- Activate `SESSION-STARTUP-READING.3.2.10` and read Validation.pm baseline lines 1321–1904. Complete required
+  reading and policy review, then repairs `.7`–`.11` before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.9` reads the validation prefix, owns diagnostic source
+  repairs `.11.1`–`.11.3`, and fixes Knowledge retrieval; `.3.2.10` reads the suffix next.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.8` reads SpecEntry, reconciles historical coupling cards,
   and owns unbound AND_BCODE input repair `.10`; `.3.2.9` reads Validation.pm next.
@@ -67,10 +70,6 @@
 - `2026-09-04` — `.19.7` admits two portable mutation capabilities at 100/0/0, pins exact frozen authority and
   composition topology through 16 admission mutations, preserves production/neutral bytes, and passes direct
   six-runtime, doctrine, mdBook, and receipt-bound canonical proof.
-
-- `2026-09-04` — `.19.6.2` implements typed atomic Lua `map_leaves!`; 530 assertions per ABI, full 178x2
-  integration, CLI 66x2, corpus 105/105, storage, unchanged 167 + 592 mutations, mdBook, doctrines, and exact
-  receipt-bound canonical CI pass; parent `.19.6` closes.
 
 ## History
 

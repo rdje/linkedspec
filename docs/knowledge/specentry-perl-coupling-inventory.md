@@ -12,12 +12,8 @@ answers:
   - where does SpecEntry preserve compile and runtime handler diagnostics
 date: 2026-06-12
 status: historical inventory with current owner reconciliation dated 2026-09-06
-evidence: |
-  Full read of perl/LinkedSpec/SpecEntry.pm (918 lines). 10 variant builders
-  dispatched from _build_handler_variants, each generating Perl source strings
-  that are eval'd by _build_runtime_handler.
-reverify: |
-  wc -l perl/LinkedSpec/SpecEntry.pm && grep -c 'sub _build_.*_variant\|sub _build_.*_body' perl/LinkedSpec/SpecEntry.pm
+evidence: "Historical 2026-06-12 inventory read 918 lines and ten inline builders. SESSION-STARTUP-READING.3.2.8 re-read all current 600 lines, reconciled extracted owners, and separately owned unbound AND_BCODE inputs. Original details remain below. .3.2.9 normalizes retrieval fields after the derived map exposed literal block-scalar pipes."
+reverify: "rg -n 'sub compile_spec_entry|sub _build_handler_variants|sub _build_runtime_handler|HandlerVariantEmitter|compiled_handler = eval' perl/LinkedSpec/SpecEntry.pm"
 source: docs/knowledge/specentry-perl-coupling-inventory.md
 ---
 

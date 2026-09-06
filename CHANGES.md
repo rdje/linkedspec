@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.9 — read validation and own diagnostic repairs
+
+- Read Validation.pm 1–1320 / 43,290 bytes. Direct and public probes confirm incorrect diagnostic context,
+  repeated-line positions, and regex rule attribution; bounded repairs `.11.1`–`.11.3` are owned.
+- Corrected stale Knowledge retrieval fields and the open-block reverify command. Invalid specs still reject;
+  product source/book unchanged. Focused coverage/probes, memory/Knowledge/doctrines/history, and diff review.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.8 — read SpecEntry and own unbound input repair
 
 - Read all 600 lines / 23,171 bytes of SpecEntry; fourteen whole Perl files covered. Validation reading follows.
