@@ -30,7 +30,7 @@ contains complete private `source_refs` while its snapshot says `source_detail_c
 `content_digest_available=false`. The oracle describes construction authority, not a public query response. The
 package-private exact-oracle seam used by backend tests is not a public bypass.
 
-All four admitted backends implement the same split:
+At the July 25 milestone, the four then-admitted backends implemented the same split:
 
 - Perl `_project_source`, Rust `project_source`, Dart `_projectSemanticQuerySource`, and Julia
   `_semantic_query_project_source` read complete private source authority;
@@ -47,3 +47,8 @@ target implementation; it changes no production behavior, fixture, record, respo
 See [[semantic-introspection-neutral-contract]], [[lua-semantic-static-projection-plan]],
 [[perl-semantic-static-projection]], [[rust-semantic-static-projection]], and
 [[julia-semantic-static-projection-plan]].
+
+The September 6 `.3.2.43` reading rechecks the complete Perl query/source-map owners against this
+boundary. Current neutral proof is 9/9 rollout and 6/6 runtime admission; the four-backend wording and
+Lua acceptance correction above describe their dated July milestone. This checkpoint preserves the
+existing privacy contract and does not rerun every native consumer or change outward projection.

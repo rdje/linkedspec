@@ -739,12 +739,21 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.42 - read semantic projection and preserve complete book coverage`
 
 - ID: `SESSION-STARTUP-READING.3.2.43`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 41: 982 lines/fragments, 35,427 bytes.
   Scope: `perl/LinkedSpec/SemanticQuery.pm` lines 1–596; `perl/LinkedSpec/SemanticRuntimeProjection.pm` lines 1–214; `perl/LinkedSpec/SemanticSourceMap.pm` lines 1–172.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact source/test/neutral baseline identity; prior passing query/runtime/foundation and neutral proof;
+    full owner comprehension and existing Knowledge reconciliation; memory/doctrines/Knowledge, both history
+    pressure checks, exact cleanup evidence, and staged diff review.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Complete 982-line / 35,427-byte reading and exact baseline identity pass. Prior canonical query (9),
+    runtime-observation (106), and foundation (5) tests plus neutral 6/20/128 at 9/9 rollout and 6/6 admission
+    are retained against unchanged test/source/contract inputs. Four Knowledge owners distinguish dated
+    rollout from current evidence. No runtime change or whole-codebase completion is claimed.
+  Commit: `SESSION-STARTUP-READING.3.2.43 - read semantic queries and source mapping`
 
 - ID: `SESSION-STARTUP-READING.3.2.44`
   Status: `pending`
@@ -1872,7 +1881,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.43` | `pending` | read SemanticQuery 1–596, SemanticRuntimeProjection 1–214, and SemanticSourceMap 1–172. |
+| 1 | `SESSION-STARTUP-READING.3.2.44` | `pending` | read SemanticStaticProjection 1–1067. |
 
 ## Reading Ledger
 
@@ -1883,7 +1892,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.43`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.44`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -3479,6 +3488,38 @@ Verified paragraph/checker mechanisms and exact public controls live in
 Other lifecycle/helper/representation assertions remain explicitly bounded assessment candidates,
 not unmeasured runtime defect claims. No public-book, runtime, or policy changes occurred.
 
+### Semantic query, observation, and source-map boundaries at `.3.2.43`
+
+- Activated from clean `dde05b657eea91fd03b6ae14dfc2366156942583` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read SemanticQuery 1–230 / 231–440 / 441–596, SemanticRuntimeProjection 1–214, and
+  SemanticSourceMap 1–172 completely during the preceding frozen canonical run; the two smaller
+  owners were reread while the preceding checkpoint's hooks ran. Current exact baseline identity
+  passes for all three owners: 982 lines / 35,427 bytes. This does not duplicate .31 physical credit.
+- Query validation receives cloned plain data, canonicalizes operation-specific paging/traversal and
+  evidence selection, and applies source/digest ceilings at the outward boundary. Source mapping
+  validates strict UTF-8 text/byte equivalence, exact character boundaries, LF-based coordinates,
+  and ASCII integer ranges. It keeps source authority private rather than deleting it at construction.
+- Derived runtime projection validates exact native event shape, one final successful entry result,
+  and selecting-rule/regex-slot topology before cloning static state and appending ordered records.
+  It uses static shapes; existing .20 owns Unicode-digit validation concerns.
+- Compared explain accounting with neutral evaluator 1158–1245: both reserve the decision record
+  and use the remaining record budget for evidence, then derive explained_by relations and depth-one
+  cost. This resolves a proposed Perl-only discrepancy; it does not establish an unmeasured broad
+  request contract or a new defect. Relation traversal retains separate multi-budget accounting.
+- The prior exact canonical gate at da8185b9 passes query 9, runtime observation 106, foundation 5,
+  and neutral 6 fixtures / 20 queries / 128 mutations, with 9/9 rollout and 6/6 admission. Source,
+  those three test files, the neutral checker, and model are byte-identical to that candidate. Existing
+  proof is retained; no unnecessary new full gate or unchanged runtime test repetition occurs.
+- Four Knowledge owners now record source-map/derived-projection comprehension and qualify July
+  rollout, capability, Phase 0, and four-backend privacy milestones as dated history. Current counts
+  are explicitly tied to the consumed September 6 canonical evidence.
+- After .3.2.42 committed as dde05b657eea91fd03b6ae14dfc2366156942583 with nine passing doctrines
+  and a passing post-commit pointer, its brief was cleared and Git was clean. The exact 148,121-byte
+  preparation spool matched SHA-256 9617f5c29d41c552f020997afc82083b0c17b8107a8f9d2bb48e2dcc9414dc99
+  and expected owners before deletion. Only that file was removed; absence was rechecked here.
+- Roadmap and physical book reading remain Yes; codebase reading remains No and formal .4 alignment
+  stays pending. This checkpoint changes only task/Knowledge/live continuity; .3.2.44 is next.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -3522,7 +3563,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.2.39` is item 43/100 at `800fc5a4`;
   `.3.2.40` is item 44/100 at `e548ce4b`;
   `.3.2.41` is item 45/100 at `da8185b9`;
-  `.3.2.42` is item 46/100 once committed.
+  `.3.2.42` is item 46/100 at `dde05b65`;
+  `.3.2.43` is item 47/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -3633,6 +3675,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.40` | Exact baseline ranges; recognition authority/integration/neutral Knowledge; managed 59 tests and 138/250/58 at 9/9; six post-terminal controls; focused continuity | PASS reading and existing proof; obsolete snapshot restoration rooted and repair-owned by `.38`; one new/three updated cards. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.41` | Exact source baseline; 137 Perl tests; typed/semantic/diagnostic/logical neutral proof; eight value/four exit controls; required history rollover and exact-source proof; staged canonical boundary | PASS focused reading/probes; `.39`/`.40` own defects; ADR 0104 finite history capacity requires final staged canonical receipt before landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.42` | Exact source/book identities; 20 semantic tests; neutral semantic/generated proof; four input/direct, nine Get, and eight isolated factory controls; Knowledge and focused continuity; four inline-lifecycle and two descriptor controls | PASS reading and finite controls; physical mdBook Yes, codebase No; .41/.42/.43 own repairs without premature implementation. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.43` | Exact 982-line baseline and unchanged prior-proof inputs; retained 9/106/5 tests and neutral 6/20/128; four Knowledge reconciliations; exact consumed-spool cleanup; focused continuity | PASS scoped reading and retained proof; July milestones dated; codebase still No; no runtime changes. |
 
 ## Commit Log
 
@@ -3685,6 +3728,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.2.40` | `SESSION-STARTUP-READING.3.2.40 - read recognition core and own post-terminal restoration defect` | Recognition core/static owners read; post-terminal cross-owner snapshot restoration repair-owned. |
 | `SESSION-STARTUP-READING.3.2.41` | `SESSION-STARTUP-READING.3.2.41 - read runtime observers and preserve bounded change history` | Runtime owners read; boolean/unwind repairs owned; exact change-history suffix and finite routing capacity preserved. |
 | `SESSION-STARTUP-READING.3.2.42` | `SESSION-STARTUP-READING.3.2.42 - read semantic projection and preserve complete book coverage` | Semantic call/index comprehension, complete book coverage, and measured book/compiler/inline-semantic repair ownership preserved. |
+| `SESSION-STARTUP-READING.3.2.43` | `SESSION-STARTUP-READING.3.2.43 - read semantic queries and source mapping` | Query/source-map and derived-observation owners read; current versus historical evidence reconciled. |
 
 ## Changelog
 
@@ -3781,3 +3825,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-06`: `.3.2.41` reads runtime observers, passes 137 tests and four neutral checks, owns `.39`/`.40`, and performs
   required change-history rollover with ADR 0104; next `.3.2.42` after exact staged canonical proof.
 - `2026-09-06`: `.3.2.42` reads semantic call/index owners, preserves complete 50-file book reading, and owns .41/.42/.43 repairs with exact public and isolated controls.
+- `2026-09-06`: `.3.2.43` completes query/runtime-projection/source-map comprehension, qualifies historical Knowledge milestones, and verifies exact preparation-spool cleanup.

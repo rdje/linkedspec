@@ -5,21 +5,24 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.43`–`.3.2.54` remain pending.
+  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.44`–`.3.2.54` remain pending.
 - Repairs `.7`–`.30` and `.32`–`.43` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.42` completes semantic call/index reading and preserves full physical mdBook coverage with book, mode, and inline-semantic repair ownership.
-  This is item 46/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.2.43` completes query, runtime-projection, and source-map reading with dated Knowledge reconciliation.
+  This is item 47/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.43`: read SemanticQuery 1–596, SemanticRuntimeProjection 1–214, and SemanticSourceMap 1–172.
+- Activate `SESSION-STARTUP-READING.3.2.44`: read SemanticStaticProjection 1–1067.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.43` reads 982 lines / 35,427 bytes across three semantic owners.
+  Retains unchanged passing proof, qualifies July milestones, and verifies exact consumed-spool cleanup.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.42` reads semantic call/index owners and preserves all 50 book files / 1,956,582 bytes.
   Twenty semantic tests pass; .41/.42/.43 own book alignment, combined-mode validation, and inline-lifecycle projection repairs.
@@ -65,9 +68,6 @@
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.28` reads collection/constructor paths and passes three value controls;
   paired Perl/PUC tagged-record divergence is owned by `.33.1`/`.33.2`.
-
-- `2026-09-06` — `SESSION-STARTUP-READING.3.2.27` reads helper fallback and numeric/string/collection dispatch; nine numeric
-  tests and four descriptors pass, while the recorded Unicode-digit gap remains open.
 
 ## History
 

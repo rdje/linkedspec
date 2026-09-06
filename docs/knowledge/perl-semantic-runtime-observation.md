@@ -56,3 +56,12 @@ before event construction. Event constructors supply native typed fields; derive
 trust and immutable snapshot admission. The focused semantic suite is included in four managed Perl runtime
 suites passing 137 tests collectively. Neutral semantic proof passes six fixture groups / twenty exact queries /
 128 mutations / 9 complete rollout rows / 6 complete admission rows; other runtime execution is not rerun.
+
+## September 6 derived-projection reading
+
+`SESSION-STARTUP-READING.3.2.43` reads SemanticRuntimeProjection 1–214 completely. Admission requires
+exact native event fields, a single final successful entry-rule result, and existing selecting-rule/slot
+topology before cloning the static projection and adding ordered execution/event records. Event value
+shapes come from static evidence. Source-query privacy remains the evaluator boundary. The unchanged
+106-test runtime suite passed in the preceding canonical gate; the broader Unicode-digit validation
+question remains owned by startup `.20`, not closed by this passing fixture set.

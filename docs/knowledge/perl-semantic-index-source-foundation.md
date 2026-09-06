@@ -37,3 +37,11 @@ data, and derived execution indexes preserve the original static instance. The t
 call-projection, and query suites pass twenty tests collectively against unchanged source. Source mapping
 and runtime-projection comprehension retain their separately owned subsequent checkpoint; this does not
 claim full-codebase or newly completed backend admission.
+
+## September 6 source-map reading
+
+`SESSION-STARTUP-READING.3.2.43` completes SemanticSourceMap 1–172. The inside-out owner verifies
+strict UTF-8 text/byte equality and records character-boundary byte offsets plus LF-based line/column
+coordinates. Byte ranges and exact-search starting offsets must fall on encoded character boundaries;
+excerpts are sliced from decoded text. Integer inputs use ASCII digits. The existing foundation suite
+passes five top-level tests in the preceding canonical proof, with source and test inputs unchanged.
