@@ -6,20 +6,24 @@
   inventory `.3.1` are complete; codebase and mdBook reading remain incomplete. The director excluded `rgx`
   and its nested dependencies. Diagnosis `.6` confirms false-dead cleanup authorization on denied inspection;
   `.7` owns cleanup repair; `.8` stale comparison; `.9` regex tails; `.10` unbound AND_BCODE inputs; `.11`
-  diagnostic source context; `.12` bare/explicit edge order. All follow required reading, before mutation setup.
+  diagnostic source context; `.12` bare/explicit edge order; `.13` repeated blind-target code identity. All follow
+  required reading, before mutation setup.
   Feature and capability status are unchanged.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.12` reads EmitContext 1–1489 and corrects the recorded owner-registry count.
-  This is item 15/100; sixteen full Perl files plus this prefix read. Codebase/book remain incomplete.
+- `SESSION-STARTUP-READING.3.2.13` completes EmitContext reading and owns blind-target identity repair `.13`.
+  This is item 16/100; seventeen full Perl files read. Codebase/book remain incomplete.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.13` and read RuleIR/EmitContext.pm baseline lines 1490–2583. Complete required
-  reading and policy review, then repairs `.7`–`.12` before Rust mutation configuration.
+- Activate `SESSION-STARTUP-READING.3.2.14` and read HandlerVariantEmitter.pm baseline lines 1–1403. Complete required
+  reading and policy review, then repairs `.7`–`.13` before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.13` completes EmitContext and owns repeated blind-target
+  identity repair `.13`; `.3.2.14` reads HandlerVariantEmitter next.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.12` reads EmitContext 1–1489 and reconciles the registry
   cards; `.3.2.13` reads its suffix next.
@@ -65,9 +69,6 @@
 
 - `2026-09-06` — `SESSION-STARTUP-READING.2` completes roadmap reading and reconciles the current direction;
   codebase/book reading and policy comparisons remain pending.
-
-- `2026-09-06` — `SESSION-STARTUP-READING.1` preserves baseline reading coverage, the `rgx` exclusion, and the
-  remaining work under the director-authorized startup-tracking exception; focused documentation checks pass.
 
 ## History
 

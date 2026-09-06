@@ -10,6 +10,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.13 — blind-edge occurrence identity
+
+- EmitContext preserves duplicate call names in BCALLs but overwrites their code in BCODEs. The emitter also
+  retrieves and dispatches by name. Native repeated-target AND/OR results therefore select the last block;
+  equivalent distinct-target controls retain the first. Repair `.13` owns occurrence identity across both seams.
+- Suffix reading completes lifecycle/metadata assembly and working-variable discovery. Seventeen Perl files are
+  read; HandlerVariantEmitter.pm 1–1403 is next. Source inspection is not generated-carrier execution proof.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.12 — EmitContext bridge registry
 
 - Prefix reading reconciles owner dispatch, dependency injection, type/write-target collection, lowering wrappers,

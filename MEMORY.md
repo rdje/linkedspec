@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `3ab399d034f34029ac136a31a7b252a7dd8d31cc` — clean RuleIR reading and edge-order checkpoint.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.12 - read EmitContext bridge and reconcile registry`; suffix remains unread.
-- active_work_unit: `SESSION-STARTUP-READING.3.2.12`; completed prefix checkpoint; frontier `.3.2.13` is pending.
-- next_action: activate `.3.2.13` and read RuleIR/EmitContext.pm baseline lines 1490–2583,
-  then continue required reading and repairs `.7`–`.12` before Rust mutation setup.
-- in_flight_uncommitted: none.
-- blockers: `.7` blocks recovery/purge (EPERM-as-dead); `.8`–`.12` own comparison, regex-tail, input, diagnostic, and edge-order repairs.
+- activation_commit: `5e2cf75632f1fd16c3e94fac0f610ee572ea3e26` — clean EmitContext-prefix reading checkpoint.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.13 - complete EmitContext reading and own blind-edge repair`; seventeen Perl files read.
+- active_work_unit: none; bounded reading and repairs remain pending in `docs/tasks/SESSION-STARTUP-READING.md`.
+- next_action: activate `.3.2.14` and read HandlerVariantEmitter.pm baseline lines 1–1403,
+  then continue required reading and repairs `.7`–`.13` before Rust mutation setup.
+- in_flight_uncommitted: none in the committed handoff state; no background job remains.
+- blockers: `.7` blocks recovery/purge (EPERM-as-dead); `.8`–`.13` own comparison, regex-tail, input, diagnostic, edge-order/identity repairs.
 - current_rust_warning_debt: repeated clean carriers report 1,870 `pgen` plus 26 `rgx-core` output warnings;
   `RUST-DEPENDENCY-WARNING-ZERO.1-.7` own causal repair/pins/enforcement without suppression, after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4985` is the twenty-sixth history segment; ADR `0102`
   authorizes exactly 28 collection files / 27 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; exhaustive inventory, exact coverage, rgx exclusion, and resumed batch progress (15/100 after `.3.2.12` lands) are in SESSION-STARTUP-READING.
+- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; exhaustive inventory, exact coverage, rgx exclusion, and resumed batch progress (16/100 after `.3.2.13` lands) are in SESSION-STARTUP-READING.

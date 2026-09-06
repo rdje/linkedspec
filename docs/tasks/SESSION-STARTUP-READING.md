@@ -35,7 +35,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -278,12 +278,19 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.12 - read EmitContext bridge and reconcile registry`
 
 - ID: `SESSION-STARTUP-READING.3.2.13`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 11: 1,094 lines/fragments, 46,079 bytes.
   Scope: `perl/LinkedSpec/RuleIR/EmitContext.pm` lines 1490–2583.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+    Probe repeated blind-target attached-code identity through public Get/descriptor/source controls before classification.
+  Verification tier: `focused`
+  Focused checks: Exact suffix reading/full-file baseline identity; existing EmitContext/type-memory/working-variable Knowledge;
+    public repeated-target controls and source/owner probes; memory/doctrine/Knowledge/history checks; `git diff --check` and final staged review.
+  Canonical trigger: `none` — source-reading continuity only; no production, infrastructure, or public change.
+  Verification: Six untruncated ranges complete 1490–2583 / 46,079 bytes; full-file baseline identity passes.
+    Public AND/OR controls, descriptor/source capture, and direct rewrite prove repeated blind targets lose
+    attached-code identity. Repair `.13` and Knowledge preserve the causal evidence; focused checks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.13 - complete EmitContext reading and own blind-edge repair`
 
 - ID: `SESSION-STARTUP-READING.3.2.14`
   Status: `pending`
@@ -693,7 +700,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING.5`
   Status: `pending`
   Goal: Complete supplied-policy adoption/update comparisons and the startup alignment review before implementation.
-  Acceptance: Record local adoption evidence and applicable donor updates; own any required changes; confirm all three reading answers Yes, then route to repairs `.7`–`.12` before restoring RUST-MUTATION-TESTING.1.
+  Acceptance: Record local adoption evidence and applicable donor updates; own any required changes; confirm all three reading answers Yes, then route to repairs `.7`–`.13` before restoring RUST-MUTATION-TESTING.1.
   Verification: `pending`
   Commit: `pending`
 
@@ -814,11 +821,25 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: `pending` — `.3.2.11` proves native OR/AND failures and isolates the collection/normalization split.
   Commit: `pending`
 
+- ID: `SESSION-STARTUP-READING.13`
+  Status: `pending`
+  Goal: Preserve attached code by blind-edge occurrence when a rule calls the same target more than once.
+  Dependencies: `.3`, `.4`, `.5` required-reading completion; authored-order repair `.12` precedes this repair.
+  Acceptance: Lock repeated-target versus equivalent-distinct-target OR/AND controls. Preserve each occurrence's
+    code and no-code identity through RuleIR, EmitContext, HandlerIR, dispatch, trace, and supported generated
+    carriers; target names alone cannot select an occurrence. Cover different blocks, side effects, no-block
+    entries, repeated families, first-match short-circuiting, cursor/recognition state, lifecycle code, and order.
+    Verify native and emitted/loaded routes plus direct-dependent conformance and backend comparison; update
+    book/Knowledge and commit before mutation setup. Split bounded children before implementation if carrier/
+    public work exceeds one safe slice. Repeated targets must remain accepted with their own attached behavior.
+  Verification: `pending` — `.3.2.13` proves native AND/OR failures and isolates hash overwrite plus name dispatch.
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.13` | `pending` | Read RuleIR/EmitContext.pm baseline lines 1490–2583 in bounded chunks. |
+| 1 | `SESSION-STARTUP-READING.3.2.14` | `pending` | Read HandlerVariantEmitter.pm baseline lines 1–1403 in bounded chunks. |
 
 ## Reading Ledger
 
@@ -829,7 +850,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | Sixteen Perl files in full plus EmitContext 1–1489 under `.3.2.12`; supporting reads below. | Remaining 73 Perl paths and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | Seventeen Perl files in full through EmitContext under `.3.2.13`; supporting reads below. | Remaining 72 Perl paths and all other first-party inputs not explicitly listed as read. |
 | mdBook | **No** | `docs/linkedspec-book/src/SUMMARY.md`; `docs/linkedspec-book/src/development/local-ci-and-regression.md` 1897–1943 and 1988–2004. | All other chapter text, including the unread portions of that development chapter. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -1147,6 +1168,34 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   defect or public contract change is established here; existing repairs `.7`–`.12` remain gated on reading.
 - Next exact scope is EmitContext.pm 1490–2583 under `.3.2.13`; codebase/book reading remain incomplete.
 
+### EmitContext suffix and repeated blind-target identity at `.3.2.13`
+
+- Activated from clean `5e2cf75632f1fd16c3e94fac0f610ee572ea3e26`; prior Knowledge/all nine doctrines,
+  post-commit pointer, zero-byte brief, clean status, and complete derived-map review passed (948 facts /
+  8,018 keys). Read 1490–1699, 1700–1910, 1911–2110, 2111–2300, 2301–2495, and 2496–2583
+  without truncation: 1,094 lines / 46,079 bytes. EmitContext is fully read at 2,583 lines / 95,475 bytes;
+  seventeen whole Perl files are covered and 72 remain. Full EmitContext/emitter baseline identity passes.
+- Reconciled action/dependency projection, lifecycle rewriting, readiness/compatibility telemetry, literal
+  masking, AST/text working-variable discovery, declaration deduplication, child-push binding harmonization,
+  write-presence state, and final context assembly with existing owner/AST/non-strict-scope cards. Historical
+  declaration examples are not treated as current syntax or a fresh audit of unread ActionIR modules.
+- Repeated-target probes confirm a distinct occurrence-identity defect: regex-consuming OR Child/Child yields
+  [second], while equivalent Child/Other yields [first]. Immediate-return AND controls yield scalar second
+  versus first. The descriptor keeps both explicit blind edges; emitted source repeats the last code in both
+  name-based branches. Direct `_rewrite_bcode_entries` returns two Child calls but one final code value.
+- Supporting HandlerVariantEmitter.pm 515–590 was read without truncation; prior 100–176 and 804–880 coverage
+  remains valid, while other emitter ranges remain unread. `_build_bcodes_dispatch_block` independently keys
+  retrieval and branch conditions by target name. Repair `.13` therefore owns storage and occurrence dispatch,
+  native/carrier/direct-dependent/backend proof, and book reconciliation after reading and `.12`.
+- Initial diagnostic outputs were not retained to completion and are excluded from evidence. A permitted
+  process census found no remaining task-owned probes before the retained rerun; all retained direct/public
+  probes subsequently completed with exit zero. OR with I-only children returned null in both variants, so it
+  was replaced by a regex-consuming positive control rather than counted as an OR identity result. No liveness
+  recovery or purge was used, and no background job remains at this checkpoint.
+- `perl-repeated-blind-target-code-collision` preserves exact native results and causal boundaries. Emitted
+  source was inspected but not independently loaded here; other-backend failures remain unmeasured. Next
+  exact reading is HandlerVariantEmitter.pm 1–1403 under `.3.2.14`; codebase/book remain incomplete.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -1165,7 +1214,8 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   `27fd160f`; `.3.2.4` is item 7/100 at `4f311a9e`; `.3.2.5` is item 8/100 at `6c1234cc`; `.3.2.6` is item 9/100 at
   `f864f881`; `.3.2.7` is item 10/100 at `dc7f5f09`; `.3.2.8` is item 11/100 at `e4b1f296`;
   `.3.2.9` is item 12/100 at `96a1c242`; `.3.2.10` is item 13/100 at `ff6c228c`;
-  `.3.2.11` is item 14/100 at `3ab399d0`; `.3.2.12` is item 15/100 once committed. `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
+  `.3.2.11` is item 14/100 at `3ab399d0`; `.3.2.12` is item 15/100 at `5e2cf756`;
+  `.3.2.13` is item 16/100 once committed. `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
 
@@ -1232,6 +1282,8 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.11` | Five complete-file chunks/baseline identity; OR spelling and AND public controls; direct RuleIR normalization | PASS reading/probes; focused memory/doctrine/Knowledge/history and staged checks precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.11` | Required Knowledge/all nine doctrines; post-commit pointer; zero-byte brief/clean status; derived-map review | PASS at `3ab399d0`; 948 facts / 8,018 keys. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.12` | Seven prefix chunks/full-file identity; exact registry extraction and existing Knowledge reconciliation | PASS reading/card reverify; focused memory/doctrine/Knowledge/history and staged checks precede landing. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.12` | Required Knowledge/all nine doctrines; post-commit pointer; zero-byte brief/clean status; derived-map review | PASS at `5e2cf756`; 948 facts / 8,018 keys. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.13` | Six suffix chunks/full-file identity; public AND/OR equivalent-target controls; descriptor/source and direct rewrite | PASS reading/retained probes; focused memory/doctrine/Knowledge/history and staged checks precede landing. |
 
 ## Commit Log
 
@@ -1253,6 +1305,7 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `SESSION-STARTUP-READING.3.2.10` | `SESSION-STARTUP-READING.3.2.10 - complete validation reading` | Fifteen full Perl files read; current edge/capture owners reconciled. |
 | `SESSION-STARTUP-READING.3.2.11` | `SESSION-STARTUP-READING.3.2.11 - read RuleIR and own edge-order repair` | Sixteen full Perl files read; native/public order defect and repair `.12` preserved. |
 | `SESSION-STARTUP-READING.3.2.12` | `SESSION-STARTUP-READING.3.2.12 - read EmitContext bridge and reconcile registry` | EmitContext prefix read; owner cardinality and retrieval corrected; suffix remains unread. |
+| `SESSION-STARTUP-READING.3.2.13` | `SESSION-STARTUP-READING.3.2.13 - complete EmitContext reading and own blind-edge repair` | Seventeen full Perl files read; blind occurrence-identity defect and repair `.13` preserved. |
 
 ## Changelog
 
@@ -1288,3 +1341,5 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   Repair `.12` is owned; `.3.2.12` reads EmitContext.pm next.
 - `2026-09-06`: `.3.2.12` reads EmitContext 1–1489 and reconciles fourteen registry keys with the existing cards.
   `.3.2.13` reads the suffix next; codebase/book remain incomplete.
+- `2026-09-06`: `.3.2.13` completes EmitContext reading and owns repeated blind-target repair `.13`.
+  `.3.2.14` reads HandlerVariantEmitter next; codebase/book remain incomplete.

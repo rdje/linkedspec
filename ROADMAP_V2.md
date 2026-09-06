@@ -3,8 +3,8 @@ Execution-oriented companion to `ROADMAP.md`.
 
 Current session prerequisite: [SESSION-STARTUP-READING](docs/tasks/SESSION-STARTUP-READING.md) records the
 required-reading baseline, exact coverage, and `rgx` exclusion. Roadmap reading is complete; codebase/book remain
-incomplete. Sixteen Perl files plus EmitContext 1–1489 are read; `.3.2.13` reads its suffix next. Repairs `.7`–`.12`
-(cleanup liveness, stale comparison, regex tails, unbound inputs, diagnostic source context, bare/explicit edge order)
+incomplete. Seventeen Perl files are read; `.3.2.14` reads HandlerVariantEmitter.pm next. Repairs `.7`–`.13`
+(cleanup liveness, stale comparison, regex tails, unbound inputs, diagnostic source context, edge order/identity)
 follow required reading and precede Rust mutation setup.
 
 Rule-local cursor rollout is closed at 74 files / 8 complete + 0 pending / 60 mutations, with

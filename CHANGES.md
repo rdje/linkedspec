@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.13 — complete EmitContext reading and own blind-edge repair
+
+- Read the 1,094-line suffix; EmitContext is fully covered at 2,583 lines / 95,475 bytes, seventeen Perl files total.
+- Public AND/OR controls and source/direct-owner probes confirm repeated blind targets overwrite attached code.
+  Repair `.13` owns occurrence identity through emission and carriers after required reading.
+- Focused identity/probes, Knowledge, memory/doctrines/history, and staged review; product source/book unchanged.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.12 — read EmitContext bridge and reconcile registry
 
 - Read EmitContext.pm 1–1489 / 49,396 bytes; sixteen whole Perl files plus this prefix are covered.
