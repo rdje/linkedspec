@@ -548,12 +548,18 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.30 - read rewrite orchestration and reconcile scanner ownership`
 
 - ID: `SESSION-STARTUP-READING.3.2.31`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 29: 1,433 lines/fragments, 41,163 bytes.
   Scope: `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm` lines 1–1179; `perl/LinkedSpec/ActionIR/Scanner/PrimitiveBasicRules.pm` lines 1–254.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact range/full-file identity; legacy/scanner and bare-read Knowledge;
+    public Get value controls and child-push lowering probe; memory/Knowledge/history and staged review.
+  Canonical trigger: `none` — source reading and Knowledge continuity only.
+  Verification: Exact full-file baseline identity and 1,433-line / 41,163-byte coverage pass. Five public Get
+    controls pass, and generated child-push source confirms handler-first dispatch with binding fallback.
+    Three Knowledge records reconcile; focused memory/history/scope checks and required hooks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.31 - read legacy scanners and reconcile bare push precedence`
 
 - ID: `SESSION-STARTUP-READING.3.2.32`
   Status: `pending`
@@ -1427,7 +1433,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.31` | `pending` | complete Scanner/LegacyRules 1–1179 and Scanner/PrimitiveBasicRules 1–254. |
+| 1 | `SESSION-STARTUP-READING.3.2.32` | `pending` | complete PrimitivePipelineRules, RecognitionTransactionRules, ScannerCore, StagedParseJob, and StatementSplit. |
 
 ## Reading Ledger
 
@@ -1438,7 +1444,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.31`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.32`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
 | mdBook | **No** | `.31` records fourteen complete book sources plus the two earlier local-CI ranges: 640,041 bytes of disjoint coverage. | Remaining 1,316,541 source bytes, formal chapter checkpoints, and rendered alignment under `.4`. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -2513,6 +2519,70 @@ PERL
   No fresh all-backend or complete defect-free claim follows from this bounded trace proof.
 - No source, public-book, or policy changes. Codebase/book remain No; `.3.2.31` follows.
 
+### Legacy and primitive scanner coverage with current push precedence at `.3.2.31`
+
+- Activated from clean `6f113221546d579cae647069e19b9bfa3a8c4f81` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Re-reviewed LegacyRules 1–310, 311–610, 611–905, and 906–1179 plus PrimitiveBasicRules 1–254
+  without truncation. Exact whole-file baseline identity passes: 1,433 lines / 41,163 bytes, with no
+  duplicate physical-reading credit beyond `.31`.
+- LegacyRules owns call/child-push/return scanning, capture slices and marks, cursor/input projections,
+  entry/match groups and positions, and cursor controls. Call scanning avoids the specific recognition/
+  observation child positions. PrimitiveBasicRules owns host-shaped assignment/call/push/return patterns,
+  statement-based bare return/exit/declaration/destructuring/substitution/position controls, and gap helpers.
+- Read current scanner architecture, fallback audit, uniform-binding, mutation-slot, scalar-seam, and
+  historical bare-variable gap Knowledge before interpretation. Three old records needed current storage
+  and child-push qualification; their dated milestone evidence remains historical.
+- Three public Get controls pass scalar source assignment, harray values carried through array append /
+  keyed mutation, and typed array return. Generated `push(Child,items)` checks for a compiled Child handler;
+  absent one, it appends the value of items to binding Child. Exact successful controls follow.
+
+```bash
+bash tools/project_data_run.sh env PERL5LIB= perl -Iperl -MLinkedSpec -MJSON::PP - <<'PERL'
+use strict;use warnings;
+my $json=JSON::PP->new->canonical->allow_nonref;
+for my $case (
+ ['scalar_source','name="ok";out=name;return(out)','ok'],
+ ['typed_mutation','items=[];value={"n":1};key="k";meta={};items += value;meta[key]=value;return([items,meta])',[[{n=>1}],{k=>{n=>1}}]],
+ ['return_forms','value=[1,2];return(value)',[1,2]]
+){
+ my $spec="Top::\n /x/ -> Top { $case->[1] }\n";my %ctx;
+ my $p=LinkedSpec::Get(\$spec,runtime_ctx_ref=>\%ctx);
+ die "$case->[0] compile" unless ref($p) eq 'CODE';my $input='x';my $got=$p->(\$input);
+ print $json->encode({case=>$case->[0],result=>$got,context_error=>defined($ctx{last_error})?1:0}),"\n";
+ die "$case->[0] mismatch" unless $json->encode($got) eq $json->encode($case->[2]) && !defined($ctx{last_error});
+}
+print LinkedSpec::call_spec_handler_subst('Top','push(Child,items)'),"\n";
+PERL
+```
+
+- Existing `perl-uniform-binding-runtime` already records the handler-first contract. The generated branch
+  agrees with MethodLowering 1253–1265 and the existing static-rule precedence fixture at
+  `t/uniform_binding_contract.t` 231–248. Two public controls independently pass both branches:
+
+```bash
+bash tools/project_data_run.sh env PERL5LIB= perl -Iperl -MLinkedSpec -MJSON::PP - <<'PERL'
+use strict;use warnings;
+my $json=JSON::PP->new->canonical;
+my @cases=(
+ ['binding_only',"Top::\n /x/ -> Top { items=[];value=\"v\";push(items,value);return(items) }\n",'x',['v']],
+ ['registered_rule',"Top::\n I { items=[\"unchanged\"];outputs=[] }\n /x/ -> Done { push(items,outputs);return([items,outputs]) }\nitems::\n /x/ I { return(\"child-result\") }\nDone::\n /x/\n",'xx',[['unchanged'],['child-result']]]
+);
+for my $case (@cases){
+ my %ctx;my $p=LinkedSpec::Get(\$case->[1],runtime_ctx_ref=>\%ctx);
+ die "$case->[0] compile" unless ref($p) eq 'CODE';my $input=$case->[2];my $got=$p->(\$input);
+ print $json->encode({case=>$case->[0],result=>$got,context_error=>defined($ctx{last_error})?1:0}),"\n";
+ die "$case->[0] mismatch" unless $json->encode($got) eq $json->encode($case->[3]) && !defined($ctx{last_error});
+}
+PERL
+```
+
+- Binding-only result is `["v"]`; registered rule result is `[["unchanged"],["child-result"]]`.
+  All five Get controls leave context error clear. This is an existing documented precedence rule, not a
+  new runtime defect or repair; Rust and the other backends are not reverified by this checkpoint.
+- Mutation-slot and scalar-seam cards now distinguish their historical separate storage from current
+  uniform typed values and retired selector syntax. The fallback audit links the same handler-first
+  choice, removing its unconditional child-call claim. Codebase/book remain No; `.3.2.32` follows.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -2544,7 +2614,8 @@ PERL
   `.3.2.27` is item 31/100 at `e4716fcf`;
   `.3.2.28` is item 32/100 at `86673c75`;
   `.3.2.29` is item 33/100 at `3c1a955a`;
-  `.3.2.30` is item 34/100 once committed.
+  `.3.2.30` is item 34/100 at `6f113221`;
+  `.3.2.31` is item 35/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -2643,6 +2714,7 @@ PERL
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.28` | Exact range/full-file identity; constructor/collection/mutation Knowledge; three public controls; paired Perl/PUC tagged controls; focused continuity | PASS bounded controls; tagged/split divergence rooted and .33 review/repair owned; required staged gates precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.29` | Exact range/full-file identity; progressive and normalization Knowledge; managed 129-assertion carrier consumer and neutral 9/9 checker; focused continuity | PASS; private six-runtime closeout pointers reconciled; required staged gates precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.30` | Exact range/full-file identity; scanner/AST/trace Knowledge; managed five-test pipeline suite and seven-dispatcher census; focused continuity | PASS; four Knowledge boundaries reconciled and known lexical repair linked; required staged gates precede landing. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.31` | Exact range/full-file identity; legacy/bare-read/uniform Knowledge; five public Get controls and generated handler-first source; focused continuity | PASS; existing push precedence confirmed and three historical records reconciled; required staged gates precede landing. |
 
 ## Commit Log
 
@@ -2683,6 +2755,7 @@ PERL
 | `SESSION-STARTUP-READING.3.2.28` | `SESSION-STARTUP-READING.3.2.28 - read collection helpers and own tagged-record repair` | Collection and constructor paths read; selector history reconciled and paired tagged-record divergence owned by .33. |
 | `SESSION-STARTUP-READING.3.2.29` | `SESSION-STARTUP-READING.3.2.29 - read lowering suffix and reconcile progressive admission` | MethodLowering suffix and ProgressiveSpanDispatch read; three progressive admission records follow completed private closeout. |
 | `SESSION-STARTUP-READING.3.2.30` | `SESSION-STARTUP-READING.3.2.30 - read rewrite orchestration and reconcile scanner ownership` | RewritePipeline, Scanner, and FlowRules read; scanner registry and AST migration Knowledge reconciled. |
+| `SESSION-STARTUP-READING.3.2.31` | `SESSION-STARTUP-READING.3.2.31 - read legacy scanners and reconcile bare push precedence` | Legacy/basic scanners read; historical scalar-slot and unconditional child-push claims reconciled with uniform binding. |
 
 ## Changelog
 
@@ -2756,3 +2829,5 @@ PERL
   9/9/116 neutral proof pass, three Knowledge pointers reconcile, and `.3.2.30` follows.
 - `2026-09-06`: `.3.2.30` reads rewrite orchestration and scanner/flow surfaces; five trace tests and seven-dispatcher
   census pass, four Knowledge records reconcile, and `.3.2.31` follows.
+- `2026-09-06`: `.3.2.31` reads legacy/basic scanners, passes five public controls and generated handler-first push
+  inspection, reconciles three historical records, and advances to `.3.2.32`.

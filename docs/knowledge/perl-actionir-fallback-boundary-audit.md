@@ -19,6 +19,7 @@ date: 2026-07-01
 status: current
 tags: [actionir, ast, perl-reference, fallback, user-functions, diagnostics]
 evidence: "PERL-ACTIONIR-AST-MIGRATION.5.1 used TOOLBOX call_spec_handler_subst, return_descriptor, and ActionIR AST parser probes plus code reads of CanonicalEvents, RewritePipeline, RuleIR::EmitContext, MethodLowering, and ActionIR::AST::Parser. Malformed covered helpers such as substr/count report unresolved-helper metadata with raw_perl_dependency_count == 0. Retired helpers and non-DSL host-shaped statements remain RAW_PERL compatibility debt. all-bare push(A,B) remains child-call aggregation. PERL-ACTIONIR-AST-MIGRATION.5.3.2 changed return/value-position unknown typed calls/chains such as return(user_fn(\"x\")) and return(user_fn(\"x\").trim()) from generated host calls into unresolved-helper diagnostics; unregistered standalone user_fn(\"x\") / user_fn(\"x\").trim() remain raw compatibility debt. PERL-ACTIONIR-AST-MIGRATION.5.4 proved bootstrap has no current first-class fn grammar/node support and locked permanent fn grammar ownership to specs/spec.spec. SPEC-FORMAT-TERSE.4.2.2 makes exact-arity registered value-position calls executable; SPEC-FORMAT-TERSE.4.2.3 makes exact-arity registered standalone calls/chains canonical VALUE_DROP with zero raw fallback."
+evidence_update_2026_09_06_reading: "SESSION-STARTUP-READING.3.2.31 re-reads LegacyRules and PrimitiveBasicRules with exact baseline identity. Three Get value controls pass, including a harray carried through array append and keyed mutation. Two further Get controls pass both all-bare push branches: unregistered binding append yields [v], while registered rule dispatch yields unchanged source binding plus child-result in the destination. Generated lowering and MethodLowering 1253-1265 confirm handler-first selection. These bounded Perl controls do not reverify Rust."
 reverify: "perl -Iperl -MLinkedSpec -MJSON::PP -e 'for my $s (q{return(substr(\"abc\"))}, q{return(count(1,2))}, q{return(user_fn(\"x\"))}, q{return(user_fn(\"x\").trim())}, q{user_fn(\"x\")}, q{user_fn(\"x\").trim()}, q{return_array(foo)}, q{my $x = 1}, q{push(A,B)}) { my $d=LinkedSpec::Get(\\qq{Top::\\n /x/ -> Done { $s }\\n\\nDone::\\n /x/\\n}, return_descriptor=>1); my $m=$d->{spec}{Top}{meta}{action_rewriter}; print \"$s raw=$m->{raw_perl_dependency_count} unresolved=$m->{unresolved_helper_count} ready=$m->{language_agnostic_action_ir_ready}\\n\" } my $spec = q{fn normalize(value) { return(trim(value)) }\\nTop::\\n /x/ -> Done { return(normalize(\" x \")) }\\nDone::\\n /x/\\n}; my $d=LinkedSpec::Get(\\$spec, return_descriptor=>1); my $m=$d->{spec}{Top}{meta}{action_rewriter}; print \"registered normalize raw=$m->{raw_perl_dependency_count} unresolved=$m->{unresolved_helper_count} ready=$m->{language_agnostic_action_ir_ready}\\n\"' && rg -n 'function_definition:|-> function_definition' specs/spec.spec && ! rg -n '\\bfn\\s+[A-Za-z_][A-Za-z0-9_]*\\s*\\(|function_definition|user_function_definition|FN_DEF' perl/LinkedSpec/BootstrapSpec.pm perl/LinkedSpec/BootstrapSpec/Core.pm"
 ---
 
@@ -33,8 +34,10 @@ Retired helpers such as `return_array(...)` / `return_a(...)` and non-DSL host-s
 `my $x = 1` or bare `print "x"` remain explicit `RAW_PERL` compatibility debt. Narrow return payload
 compatibility shapes remain fenced too.
 
-The all-bare `push(A,B)` form remains the existing child-call aggregation convention, not scalar append. Use
-`items += value` or an unambiguous literal/value `push(...)` for append intent; `push_value(...)` is retired.
+The historical all-bare `push(A,B)` child-call precedence now follows uniform binding: a registered
+static rule handler for A wins; when no handler exists, the value of B is appended to array binding A.
+`items += value` remains an explicit append form; `push_value(...)` is retired. See
+[[perl-uniform-binding-runtime]].
 
 Unknown call names are different. The AST parser already represents `user_fn("x")` as a `call` node and
 `user_fn("x").trim()` as a `fluent_chain` with a `call` receiver. After

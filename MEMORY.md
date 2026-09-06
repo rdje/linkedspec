@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `3c1a955a1669469697dd3325c1dcde74c684e76f` — clean preceding reading checkpoint.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.30 - read rewrite orchestration and reconcile scanner ownership`.
+- activation_commit: `6f113221546d579cae647069e19b9bfa3a8c4f81` — clean preceding reading checkpoint.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.31 - read legacy scanners and reconcile bare push precedence`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: activate `.3.2.31`; complete Scanner/LegacyRules 1–1179 and Scanner/PrimitiveBasicRules 1–254,
+- next_action: activate `.3.2.32`; complete PrimitivePipelineRules, RecognitionTransactionRules, ScannerCore, StagedParseJob, and StatementSplit,
   then continue queued reading. Intake `.31` preserves the forward source coverage and exact findings.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30` and `.32`–`.33` precede mutation setup; `.29` is part of `.5` adoption.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4985` is the twenty-sixth history segment; ADR `0102`
   authorizes exactly 28 collection files / 27 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; `.31` records all Perl source reading, pending per-leaf checkpoints, book coverage, and resumed batch progress (34/100 after `.3.2.30` lands).
+- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; `.31` records all Perl source reading, pending per-leaf checkpoints, book coverage, and resumed batch progress (35/100 after `.3.2.31` lands).
