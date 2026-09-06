@@ -17,6 +17,10 @@ reverify: "rg -n 'split_tagged_records|descriptor_scalar_bare_read|bind_descript
 
 # Terse Source Migration Runtime Boundaries
 
+This is the dated July 6 migration record. Retired helper spellings below describe that checkpoint; they are
+not current authoring aliases. [[terse-helper-retirement-no-drift-closeout]] records the later removal and
+current replacements. The historical causal evidence remains intact.
+
 `SPEC-FORMAT-TERSE.15.2.4` proved that after Perl/Rust bare-read parity, current source migration from `:name` to
 bare reads is output-preserving only if four boundaries stay explicit:
 

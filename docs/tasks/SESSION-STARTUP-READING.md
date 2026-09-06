@@ -415,12 +415,19 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.21 - read flow adapters and preserve required history`
 
 - ID: `SESSION-STARTUP-READING.3.2.22`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 20: 298 lines/fragments, 7,800 bytes.
   Scope: `perl/LinkedSpec/ActionIR/MethodExpr.pm` lines 1–298.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+    Reconcile authored-value versus legacy scope ownership using the forward coverage preserved in `.31`.
+  Verification tier: `focused`
+  Focused checks: Exact full-file reading and baseline identity; existing optional-scope and migration Knowledge;
+    bounded normalizer controls; memory/doctrine/Knowledge/history checks; final diff and staged-scope review.
+  Canonical trigger: `none` — reading continuity only; no runtime, public, or infrastructure change.
+  Verification: Full 298-line / 7,800-byte source reading and baseline identity pass. Bounded controls preserve
+    three authored values in a distinct list, allow explicit legacy/fixed-arity fallback, keep input unchanged,
+    and reject missing minimum arity. Existing Knowledge reconciles; focused continuity checks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.22 - read method expression normalization`
 
 - ID: `SESSION-STARTUP-READING.3.2.23`
   Status: `pending`
@@ -1319,7 +1326,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.22` | `pending` | Complete the MethodExpr comprehension/Knowledge checkpoint using the exact forward coverage preserved in `.31`. |
+| 1 | `SESSION-STARTUP-READING.3.2.23` | `pending` | Complete the MethodLowering prefix checkpoint, baseline lines 1–1495, using the forward coverage in `.31`. |
 
 ## Reading Ledger
 
@@ -1330,7 +1337,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.22`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.23`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
 | mdBook | **No** | `.31` records fourteen complete book sources plus the two earlier local-CI ranges: 640,041 bytes of disjoint coverage. | Remaining 1,316,541 source bytes, formal chapter checkpoints, and rendered alignment under `.4`. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -2161,6 +2168,25 @@ optional-coverage claim follows. The commit hooks passed all nine doctrines, the
 passed, and the receipt was promoted to `17d3e919118430d4fad0e31d6c1a4a8e2d9dc333`. The brief was cleared to
 zero bytes and Git was clean before activating `.31`; no background job remains.
 
+### Method expression parsing and scope precedence at `.3.2.22`
+
+- Activated from clean `3e8b05cd343dafa0b67c536bfe0c9e6b52f074c7` after intake `.31` committed, its post-commit pointer passed,
+  and the brief/status cleanup completed. The preceding canonical result remains recorded in that intake.
+- MethodExpr.pm was fully consumed at 1–150 and 151–298 during forward reading, then reviewed in full for
+  this checkpoint: 298 lines / 7,800 bytes, baseline-identical. This closes the next individual checkpoint;
+  all 89 Perl files remain physically read, with later comprehension/Knowledge checkpoints still pending.
+- The module preserves method names, distinguishes slash-symbol calls from regex quoting, splits CSV values
+  with nesting/quote/escape state, parses nested function calls, and normalizes optional scope against arity.
+  Opt-in authored-value precedence clones an already-valid argument list before any legacy scope removal.
+  Fixed-arity compatibility can remove a leading scope only when the remaining arity is valid.
+- Existing `hash-tree-callback-append-scope-collision` and
+  `terse-source-migration-runtime-boundaries` cards were read in full and reconciled with the retirement
+  closeout. Older spellings remain historical evidence; two new retrieval questions point to the normalizer.
+- The bounded normalizer control preserves key / quoted-at / depth as three values with precedence, returns
+  two values through legacy and fixed-arity fallback, keeps a distinct authored list and unchanged input,
+  and rejects an empty list below minimum arity. This checks the source-owner boundary, not full runtime parity.
+- Source/book remain unchanged; codebase/book are No. Next `.3.2.23` covers MethodLowering 1–1495.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -2183,7 +2209,8 @@ zero bytes and Git was clean before activating `.31`; no background job remains.
   `.3.2.13` is item 16/100 at `a7d17e6f`; `.3.2.14` is item 17/100 at `e421887d`;
   `.3.2.15` is item 18/100 at `762bef64`; `.3.2.16` is item 19/100 at `9a881160`; `.3.2.17` is item 20/100 at `34958c8f`; `.3.2.18` is item 21/100 at `54e1a487`;
   `.3.2.19` is item 22/100 at `8db085f2`; `.3.2.20` is item 23/100 at `ba9a494c`;
-  `.3.2.21` is item 24/100 at `17d3e919`; `.31` is item 25/100 once committed, before queued `.3.2.22`.
+  `.3.2.21` is item 24/100 at `17d3e919`; `.31` is item 25/100 at `3e8b05cd`;
+  `.3.2.22` is item 26/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -2271,10 +2298,9 @@ zero bytes and Git was clean before activating `.31`; no background job remains.
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.20` | Exact prefix reading/identity; candidate-context probe; compact trace suite | PASS probe and one file/four top-level tests; focused continuity/staged checks precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.21` | Exact reading/identity; pipeline trace; public emptiness/host-seed controls; required rollover/hash | PASS five trace tests and bounded controls; ADR 0103 exact staged canonical proof required before landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.21` | Canonical process-locality failure; same no-op initialization control in restricted/permitted execution; unchanged full oracle outside harness | Restricted control exits 71; permitted control and full six-family oracle PASS. Exact full canonical rerun remains required; no receipt from failed attempt. |
-
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.21` | Exact full canonical rerun, receipt, all nine doctrines, post-commit pointer and brief/status | PASS at `17d3e919`; mandatory chain, both CLI 66/66, Phase 0 1,032; optional flags unset/skipped. No pending job. |
-
 | `2026-09-06` | `SESSION-STARTUP-READING.31` | Source/card/path and unique-ID audit; exact staged scope; Knowledge/memory/all nine doctrines; both history checks; diff review | PASS: 89 unchanged Perl files, 38 new unique IDs, 33 queued checkpoints pending, 14 new cards; no public/source changes. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.22` | Exact full-file reading/identity; authored-value/legacy arity controls; Knowledge reconciliation; focused continuity | PASS bounded controls and baseline identity; final staged gates precede landing. |
 
 ## Commit Log
 
@@ -2305,8 +2331,8 @@ zero bytes and Git was clean before activating `.31`; no background job remains.
 | `SESSION-STARTUP-READING.3.2.19` | `SESSION-STARTUP-READING.3.2.19 - finish contract catalog reading` | Contracts fully read; ordered builder fact indexed; twenty-five Perl files complete. |
 | `SESSION-STARTUP-READING.3.2.20` | `SESSION-STARTUP-READING.3.2.20 - read control flow prefix and verify candidate isolation` | ControlFlow prefix read; bounded candidate-state isolation verified; existing caveat owners retained. |
 | `SESSION-STARTUP-READING.3.2.21` | `SESSION-STARTUP-READING.3.2.21 - read flow adapters and preserve required history` | Twenty-nine Perl files read; emptiness repairs owned; exact notes rollover and finite capacity recorded. |
-
 | `SESSION-STARTUP-READING.31` | `SESSION-STARTUP-READING.31 - preserve forward reading and own confirmed repairs` | Forward coverage and confirmed findings durably owned; prior canonical success; queued checkpoints remain pending. |
+| `SESSION-STARTUP-READING.3.2.22` | `SESSION-STARTUP-READING.3.2.22 - read method expression normalization` | MethodExpr comprehension and scope precedence recorded; next MethodLowering prefix. |
 
 ## Changelog
 
@@ -2362,3 +2388,5 @@ zero bytes and Git was clean before activating `.31`; no background job remains.
   notes history under finite ADR 0103 capacity; MethodExpr follows canonical checkpoint landing.
 - `2026-09-06`: `.31` preserves forward reading and source-confirmed findings from the canonical wait,
   owns repairs `.17`–`.30`, indexes the JSON observation artifact, and routes back to queued MethodExpr.
+- `2026-09-06`: `.3.2.22` closes MethodExpr comprehension, indexes its scope normalizer, and qualifies
+  dated migration spellings. Queued checkpoints continue with the MethodLowering prefix.

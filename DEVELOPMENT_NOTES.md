@@ -10,6 +10,11 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.22 — authored values precede legacy scope
+
+Already-valid authored arguments are cloned before optional-scope fallback; fixed-arity compatibility remains explicit.
+Existing Knowledge gains retrieval keys and qualifies dated migration spellings; exact evidence belongs to the task.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.31 — evidence survives the canonical wait
 
 - Read-only preparation during the frozen canonical candidate is now recorded without bulk-closing queued

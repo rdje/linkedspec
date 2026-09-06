@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `17d3e919118430d4fad0e31d6c1a4a8e2d9dc333` — clean flow-adapter/history checkpoint.
-- latest_completed_leaf: `SESSION-STARTUP-READING.31 - preserve forward reading and own confirmed repairs`.
+- activation_commit: `3e8b05cd343dafa0b67c536bfe0c9e6b52f074c7` — clean forward-reading intake.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.22 - read method expression normalization`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: activate `.3.2.22`; complete its MethodExpr comprehension/Knowledge checkpoint,
+- next_action: activate `.3.2.23`; complete MethodLowering baseline lines 1–1495,
   then continue queued reading. Intake `.31` preserves the forward source coverage and exact findings.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30` precede mutation setup; `.29` is part of `.5` adoption.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4985` is the twenty-sixth history segment; ADR `0102`
   authorizes exactly 28 collection files / 27 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; `.31` records all Perl source reading, pending per-leaf checkpoints, book coverage, and resumed batch progress (25/100 after `.31` lands).
+- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; `.31` records all Perl source reading, pending per-leaf checkpoints, book coverage, and resumed batch progress (26/100 after `.3.2.22` lands).

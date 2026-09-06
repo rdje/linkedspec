@@ -7,6 +7,8 @@ answers:
   - "where is the callback append key loss caused"
   - "how was the callback append key loss fixed"
   - "when does an optional scope label lose to authored helper values"
+  - "which Perl module owns helper argument scope normalization"
+  - "does optional scope normalization copy the authored argument array"
   - "is hash tree callback depth zero based"
   - "what depth does a root hash leaf receive"
 date: 2026-07-13
