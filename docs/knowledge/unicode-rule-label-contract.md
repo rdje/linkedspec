@@ -22,6 +22,8 @@ answers:
   - "which Lua downstream routes preserve exact Unicode rule label identity"
   - "is Lua positive Unicode rule-label identity aligned on PUC Lua and LuaJIT"
   - "which backends still need Unicode rule label alignment"
+  - "where is the Perl named-slot Unicode classifier generated"
+  - "does the Perl XID classifier enforce the named-slot digit reservation"
 date: 2026-07-25
 status: current
 tags: [grammar, unicode, rule-labels, rust, dart, julia, lua, generated-data, validation, portability]
@@ -106,3 +108,60 @@ Lua prerequisite. Source/outcome planning `.10.7.2.0` follows. See
 [[lua-body-fluent-suffix-loss]], [[lua-unicode-rule-label-negative-isolation]],
 [[primary-cli-strict-utf8-text-contract]], and
 [[rust-native-spec-resolution]].
+
+## September 6 Perl classifier checkpoint
+
+`SESSION-STARTUP-READING.3.2.52` reconciles the complete .31 reading of
+`perl/LinkedSpec/UnicodeXIDContinue.pm`: 855 lines / 17,340 bytes; baseline SHA-256
+`db2185e0a2366849c126d76b27ad5591eee9463ea5e825e815e9feabe97b8947`.
+ADR 0051's August 13 addition makes this generated Perl table a shared identifier authority for named
+regex-slot declarations and selectors. Validation and RuleIR call the complete-string predicate, then
+separately reject ASCII digit-only slot names. The classifier itself admits digit-only labels under
+the rule-label policy. Its production string path unpacks scalar codepoints before binary search;
+this is not a claim about accepting arbitrary caller-supplied numeric strings at the internal point API.
+
+Current managed regeneration passes at 806 ranges, nine positive/eight negative fixtures, and two
+distinct pairs. A direct in-memory Perl control independently invokes every range start/end and both
+adjacent gaps (3,224 checks), all 17 fixtures, and both identity pairs. It passes without warnings.
+This is direct classifier proof; public parser/generated/CLI routes retain their existing owners.
+The current checker byte-compares JSON, five backend classifiers, and the portable regex class;
+its Perl topology/range checks alone do not execute the Perl classifier.
+
+Exact direct control:
+
+```sh
+bash tools/project_data_run.sh env PERL5LIB= perl -Iperl - <<'STARTUP56_XID_CONTROL'
+use strict;
+use warnings;
+use JSON::PP ();
+use LinkedSpec::UnicodeXIDContinue ();
+open my $fh, '<:raw', 'capability_conformance/unicode_rule_label_contract.json' or die $!;
+my $contract = JSON::PP->new->utf8(1)->decode(do { local $/; <$fh> });
+close $fh or die $!;
+my $boundary_checks = 0;
+for my $range (@{$contract->{xid_continue_ranges}}) {
+ my ($start, $end) = map { hex($_) } @$range;
+ for my $check ([$start, 1], [$end, 1], [$start - 1, 0], [$end + 1, 0]) {
+  my ($point, $expected) = @$check;
+  my $actual = LinkedSpec::UnicodeXIDContinue::is_xid_continue_codepoint($point);
+  die "boundary $point differs" unless $actual == $expected;
+  ++$boundary_checks;
+ }
+}
+my $fixture_checks = 0;
+for my $group (['positive_fixtures', 1], ['negative_fixtures', 0]) {
+ for my $fixture (@{$contract->{$group->[0]}}) {
+  my $actual = LinkedSpec::UnicodeXIDContinue::is_xid_continue_string($fixture->{label});
+  die "fixture $fixture->{id} differs" unless $actual == $group->[1];
+  ++$fixture_checks;
+ }
+}
+for my $pair (@{$contract->{distinct_fixtures}}) {
+ die 'identity collision' unless $pair->{left} ne $pair->{right};
+ for my $side (qw(left right)) {
+  die 'distinct label rejected' unless LinkedSpec::UnicodeXIDContinue::is_xid_continue_string($pair->{$side});
+ }
+}
+print JSON::PP->new->canonical(1)->encode({ranges=>scalar(@{$contract->{xid_continue_ranges}}),boundary_checks=>$boundary_checks,fixture_checks=>$fixture_checks,distinct_pairs=>scalar(@{$contract->{distinct_fixtures}}),result=>'PASS'}),"\n";
+STARTUP56_XID_CONTROL
+```

@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `78b272ec9e307092bee162dfdae87abbef778c18` — clean preceding reading checkpoint.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.51 - reconcile Unicode evaluator and contextual casing`.
+- activation_commit: `bea31562b2548eb2d1faf896edace1c3e918f00c` — clean preceding reading checkpoint.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.52 - reconcile XID classifier and current named-slot admission`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: activate `.3.2.52`; reconcile UnicodeXIDContinue.pm 1–855 and the pinned rule-label contract,
+- next_action: activate `.3.2.53`; reconcile UserFunctionRegistry, PPlugin, PathSearch, and env.conf with their current and legacy owners,
   then continue queued reading. Intake `.31` preserves the forward source coverage and exact findings.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30` and `.32`–`.44` precede mutation setup; `.29` is part of `.5` adoption.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4984` is the twenty-seventh history segment; ADR `0104`
   authorizes exactly 29 collection files / 28 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook Yes (physical); .31/.3.2.42 preserve complete book/Perl source coverage and repair ownership; formal .4 alignment remains pending (55/100 after `.3.2.51` lands).
+- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook Yes (physical); .31/.3.2.42 preserve complete book/Perl source coverage and repair ownership; formal .4 alignment remains pending (56/100 after `.3.2.52` lands).

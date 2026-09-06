@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.52 — reconcile XID classifier and current named-slot admission
+
+Reconcile the previously read 855-line XID classifier with exact baseline identity and ADR 0051 named-slot reuse. Offline regeneration and direct Perl checks pass across 806 ranges, 3,224 endpoint/gap checks, 17 fixtures, and two identity pairs. Correct stale gap admission Knowledge against current 9/0/63 and public 8/15/10/34 proof. Runtime, generated tables, and book remain unchanged.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.51 — reconcile Unicode evaluator and contextual casing
 
 Reconcile the final 835 lines / 17,404 bytes of the previously read Unicode case table, including contextual-property lookup and original-input Final Sigma evaluation. All three checkpoints account for the full file and retain unchanged regeneration/Perl proof. Record a dated task-storage census for the upcoming native reading split; limits and generated data remain unchanged.

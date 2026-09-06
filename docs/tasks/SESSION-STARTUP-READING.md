@@ -886,12 +886,19 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.51 - reconcile Unicode evaluator and contextual casing`
 
 - ID: `SESSION-STARTUP-READING.3.2.52`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 50: 855 lines/fragments, 17,340 bytes.
   Scope: `perl/LinkedSpec/UnicodeXIDContinue.pm` lines 1–855.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Reconcile complete .31 XID table reading with exact baseline; ADR0051 and direct named-slot consumers; managed Unicode rule-label regeneration and direct classifier fixture/range controls; retain prior gap/CLI proof; Knowledge, memory/history and fast doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Complete .31-owned 855 lines / 17,340 bytes reconciled; exact baseline identity passes.
+    Current Unicode regeneration: 806 ranges, 9 positive/8 negative fixtures, 2 distinct pairs.
+    Direct Perl classifier: 3,224 endpoint/gap checks, 17 fixtures, 2 identity pairs PASS without warnings.
+    Current gap neutral/public proof is 9/0/63 and 8/15/10/34; prior unchanged Perl124 is retained.
+  Commit: `SESSION-STARTUP-READING.3.2.52 - reconcile XID classifier and current named-slot admission`
 
 - ID: `SESSION-STARTUP-READING.3.2.53`
   Status: `pending`
@@ -1978,7 +1985,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.52` | `pending` | reconcile UnicodeXIDContinue.pm 1–855 and the pinned rule-label contract. |
+| 1 | `SESSION-STARTUP-READING.3.2.53` | `pending` | reconcile UserFunctionRegistry, PPlugin, PathSearch, and env.conf with their current and legacy owners. |
 
 ## Reading Ledger
 
@@ -1989,7 +1996,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.52`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.53`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -3848,6 +3855,33 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   and clean status verified before activation. Roadmap/physical mdBook Yes; codebase No and formal
   alignment/repairs remain pending. Next .3.2.52.
 
+### Generated XID classifier and named-slot identity at `.3.2.52`
+
+- Activated from clean `bea31562b2548eb2d1faf896edace1c3e918f00c` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Reconcile .31's complete 855-line / 17,340-byte UnicodeXIDContinue reading. Exact baseline
+  SHA-256 is db2185e0a2366849c126d76b27ad5591eee9463ea5e825e815e9feabe97b8947. Revisit
+  header/ranges 1–80 and predicate tail 815–855 without duplicate physical credit.
+- Retrieve Unicode rule-label and self-hosted-boundary Knowledge, ADR 0051, gap origin/executable-plan
+  and closed recurring/public Knowledge. Read direct consumers Validation 550–610 / 695–722 and
+  RuleIR 548–585. They use complete-string XID membership, then independently reserve ASCII digit-only
+  slot names. The production point predicate receives unpacked scalars; arbitrary numeric-string
+  internal-point input is not admitted by this evidence. .20 retains its separate numeric review.
+- Read checker support 1–99 / 157–242 / 285–316 and decode the actual policy plus positive,
+  negative, and distinct fixture fields. This does not close the remaining 992-line checker, large
+  neutral JSON, generator, self-hosted grammar, or native reading lanes.
+- Managed current Unicode checker passes 806 ranges, nine positive/eight negative fixtures, two
+  distinct pairs. A separate direct Perl control executes 3,224 range endpoints/adjacent gaps,
+  all 17 fixtures, and both exact-identity pairs without warnings. Exact command is durable in
+  Unicode Knowledge. Classifier execution is distinct from checker byte/topology assertions.
+- Correct three canonical Knowledge owners: the Perl classifier's named-slot reuse; stale gap-origin
+  pending-public status; and executable-plan future entry_slot/admission wording. Preserve dated
+  implementation chronology explicitly. Fresh gap governance passes 9/0/63 plus public 8/15/10/34;
+  source, consumers, checker and contract match da8185b9, retaining its Perl124 rather than rerunning it.
+- No runtime, tests, generated tables, language policy, or public-book changes. Prior
+  bea31562b2548eb2d1faf896edace1c3e918f00c passed nine doctrines/post-pointer; brief cleared and
+  clean status verified before activation. Roadmap/physical book Yes; codebase No and .4/repairs pending.
+  Next .3.2.53.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -3900,7 +3934,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.2.48` is item 52/100 at `69e221bf`;
   `.3.2.49` is item 53/100 at `a3211421`;
   `.3.2.50` is item 54/100 at `78b272ec`;
-  `.3.2.51` is item 55/100 once committed.
+  `.3.2.51` is item 55/100 at `bea31562`;
+  `.3.2.52` is item 56/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -4020,6 +4055,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.49` | Prior full first-range reading + exact identity; ADR0027 and full checker/consumer; offline five-module regeneration/12 fixtures; Perl52; focused continuity | PASS; current regeneration coverage corrected, generated/carrier proof scoped, no new physical credit. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.50` | Prior complete middle-range reading; exact baseline and unchanged inputs; retained regeneration/12 fixtures/Perl52; Knowledge status; focused continuity | PASS; generated semantics unchanged; physical book/formal alignment distinction corrected. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.51` | Complete prior final range + exact identity; evaluator/12 fixtures; unchanged regeneration/Perl52; dated pressure census; Knowledge and focused continuity | PASS; complete case-table comprehension accounted; no runtime or generated-data change. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.52` | Complete prior XID range + baseline; ADR0051/consumer seams; Unicode806/9/8/2; direct3224/17/2; gap9/0/63/public8/15/10/34; focused continuity | PASS; generated classifier and current named-slot admission reconciled; historical stages retained. |
 
 ## Commit Log
 
@@ -4081,6 +4117,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.2.49` | `SESSION-STARTUP-READING.3.2.49 - reconcile first generated Unicode case range` | First Unicode range reconciled; five-module regeneration and 52 Perl tests preserve pinned authority. |
 | `SESSION-STARTUP-READING.3.2.50` | `SESSION-STARTUP-READING.3.2.50 - reconcile middle Unicode table range and reading status` | Unicode lower/upper table transition reconciled; current reading status and retained proof preserved. |
 | `SESSION-STARTUP-READING.3.2.51` | `SESSION-STARTUP-READING.3.2.51 - reconcile Unicode evaluator and contextual casing` | Final case-table range reconciled; contextual evaluator, retained proof and native-planning pressure recorded. |
+| `SESSION-STARTUP-READING.3.2.52` | `SESSION-STARTUP-READING.3.2.52 - reconcile XID classifier and current named-slot admission` | XID range and direct classifier proof recorded; stale gap Knowledge admission corrected without runtime movement. |
 
 ## Changelog
 
@@ -4186,3 +4223,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-06`: `.3.2.49` reconciles the first Unicode table range from complete .31 reading, refreshes five-module regeneration coverage, and records 52 current Perl tests.
 - `2026-09-06`: `.3.2.50` reconciles the middle Unicode mapping range and clarifies physical mdBook completion versus pending formal alignment in inventory Knowledge.
 - `2026-09-06`: `.3.2.51` reconciles final Unicode mapping/property/evaluator coverage and records the dated task-storage census before native planning.
+- `2026-09-06`: `.3.2.52` reconciles the generated XID classifier, records direct boundary/fixture proof, and corrects stale named-slot/gap admission Knowledge.

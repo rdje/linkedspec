@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.52 — identifier membership and named-slot reservation have separate owners
+
+The generated XID complete-string predicate permits the same class in every position, including ASCII digits. Validation and RuleIR separately reserve ASCII digit-only names for positional slot selectors. Current direct range/fixture checks execute the classifier, while deterministic regeneration verifies the shared data. Neither proof alone establishes all parser or emitted-runtime routes; their existing owners and retained evidence remain explicit.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.51 — contextual casing follows pinned properties over original input
 
 Final Sigma skips Case_Ignorable scalars on both sides and tests the remaining Cased context in the original input. The six sigma fixtures distinguish terminal, following-cased, no-preceding-cased, and ignorable contexts. Full mappings and identity fallback then produce scalar output without normalization. Existing generated-data and Perl proofs cover these unchanged mechanisms.

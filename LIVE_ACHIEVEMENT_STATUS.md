@@ -5,21 +5,24 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.52`–`.3.2.54` remain pending.
+  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.53`–`.3.2.54` remain pending.
 - Repairs `.7`–`.30` and `.32`–`.44` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.51` completes case-table comprehension and reconciles the contextual Unicode evaluator.
-  This is item 55/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.2.52` reconciles the XID classifier and current named-slot admission with direct proof.
+  This is item 56/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.52`: reconcile UnicodeXIDContinue.pm 1–855 and the pinned rule-label contract.
+- Activate `SESSION-STARTUP-READING.3.2.53`: reconcile UserFunctionRegistry, PPlugin, PathSearch, and env.conf with their current and legacy owners.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.52` reconciles all 855 XID table lines and passes 3,224 direct boundary checks.
+  Seventeen fixtures/two identity pairs pass; gap Knowledge now matches current public admission.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.51` reconciles the last 835 case-table lines and all 12 fixture records.
   All 3,835 lines are accounted for; retained regeneration/Perl52 proof and storage limits remain unchanged.
@@ -65,9 +68,6 @@
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.37` finishes embedded MCP JSON; canonical bundle, four payload,
   and seven source digests pass, with byte-fresh binding and one updated Knowledge record.
-
-- `2026-09-06` — `SESSION-STARTUP-READING.3.2.36` reads the MCP policy/corpus/schema middle fragment;
-  embedded-neutral identity and 35/10/10/76 proof pass; two contract records reconcile.
 
 ## History
 

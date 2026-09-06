@@ -1,6 +1,6 @@
 ---
 id: inter-match-gap-executable-contract-plan
-title: Inter-match gap capture has a frozen neutral contract and all six admitted private runtimes
+title: Inter-match gap capture has a frozen neutral contract and all six publicly admitted runtimes
 answers:
   - "where will the inter match gap executable contract live"
   - "what is the inter match gap contract id"
@@ -22,7 +22,7 @@ answers:
   - "what are the capture_gaps rollout legs"
   - "is capture_gaps implemented now"
 date: 2026-08-16
-status: neutral parent closed; all six private runtimes and recurring proof admitted; public no-drift pending
+status: neutral parent, all six runtimes, recurring/public admission and handoff complete
 tags: [capture, segmentation, named-slots, typed-source, lifecycle, transaction, recursion, contract, plan]
 evidence: "INTER-MATCH-GAP-CAPTURE.1.1-.1.3 establish the executable neutral Unicode/empty/child/rollback/nested model, recurrence, and public no-overclaim. Perl .2, Rust .3, Dart .4, Julia .5, and shared dual-ABI Lua .6 are privately admitted through authored/static identity, same-authority native state, reconstructed/descriptor/generated carriers, independent emitted proof, existing-primary parity, and exact ordinary/canonical/rooted registration. INTER-MATCH-GAP-CAPTURE.7.1 admits recurrence itself. Current governance is 8 complete + 1 pending / 61 semantic mutations plus ten admission mutations for each of Rust, Dart, and Julia and sixteen for Lua. Public no-drift remains pending for .7.2."
 evidence_update_2026_08_15_julia_plan: "Julia audit INTER-MATCH-GAP-CAPTURE.5.0 proves numeric selectors compile, named declarations/selectors/directive are raw invalid syntax, the four accessors are unknown helpers, legacy move_pos has no execution effect, and repeated LS precedes selection. It freezes .5.1-.5.5 across authored/static metadata, same-authority native state, normalized reconstruction/descriptor/generated-plan carriers, independently loaded emitted proof, and primary/nine-role admission. No Julia behavior or 4/5/57 rollout state moves."
@@ -35,6 +35,12 @@ reverify: "bash tools/check_inter_match_gap_capture_six_runtime.sh && prove -Ipe
 ---
 
 # Frozen executable-neutral plan
+
+Current availability is complete under `INTER-MATCH-GAP-CAPTURE.7.1-.7.3`: all six runtime routes,
+recurring proof, and public language/no-drift admission. The implementation chronology below preserves
+the dated stages; it is not the current rollout queue. See [[inter-match-gap-recurring-public-closeout-plan]].
+
+## Historical implementation chronology
 
 `INTER-MATCH-GAP-CAPTURE.1.0` specified the artifact before implementation. `.1.1` now provides
 `capability_conformance/inter_match_gap_capture_contract.json` (`format: 1`, contract id
@@ -69,7 +75,7 @@ selector, target rule, current regex index, and nullable stable slot id. Numeric
 the same named declaration, but numeric provenance follows position while named provenance follows identity.
 Brackets own selection; dot remains the mandatory fluent-behavior separator.
 
-Future `entry_slot()` returns `undef` for direct entry or a detached ordinary harray with exact fields
+`entry_slot()` returns `undef` for direct entry or a detached ordinary harray with exact fields
 `target_rule`, `regex_index`, `slot_id`, `selector_kind`, and `authored_selector` for action-edge entry. It does not
 create a new value kind or leak matcher/runtime authority.
 
@@ -112,14 +118,20 @@ AST mutation, diagnostics, output, external calls, registry effects, or host sta
 cursor-regression, repetition-progress, and recursive-progress diagnostics stay authoritative; the new contract
 adds only named-slot, directive, compatibility-conflict, and unavailable-context diagnostics.
 
-Perl, Rust, Dart, and Julia recognize the named declaration/selector syntax and `@capture_gaps`, validate the static
-contract, retain private descriptor/generated provenance, and execute native, reconstructed/generated, emitted,
-and primary roles through their existing recognition/source authorities. Their full consumers are admitted in
-ordinary CI and the rooted recurring route; no outward public admission has occurred. Lua `.6.0` is behavior-free
-and freezes authored/static metadata, one shared native recognition path, normalized/descriptor/generated-v2
-carriers, independently emitted dual-ABI proof, and final primary/nine-role admission across `.6.1-.6.5`.
+Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT recognize the named declaration/selector syntax and
+`@capture_gaps`, validate the static contract, retain private descriptor/generated provenance, and execute
+their admitted native, reconstructed/generated, emitted, and primary roles through existing recognition/source
+authorities. Their consumers are admitted in ordinary CI and the recurring route; `.7.2` makes the gap calls
+public language and `.7.3` closes the unchanged handoff. Private runtime authority remains private.
 See ADR `0045`, `docs/knowledge/inter-match-gap-rust-implementation-plan.md`,
 `docs/knowledge/inter-match-gap-dart-implementation-plan.md`,
 `docs/knowledge/inter-match-gap-julia-implementation-plan.md`,
 `docs/knowledge/inter-match-gap-lua-implementation-plan.md`, and `docs/tasks/INTER-MATCH-GAP-CAPTURE.md` for
 the complete fixtures, mutation classes, storage routes, carrier roles, and remaining implementation ownership.
+
+## September 6 retained current boundary
+
+`SESSION-STARTUP-READING.3.2.52` reads the complete Knowledge owner, its closed successor, ADR 0051,
+and the Perl named-slot classifier consumers. It corrects stale future/skip/public-pending prose while
+retaining dated implementation evidence. Current neutral checker passes 9/0/63 and public 8/15/10/34;
+Perl runtime 124 remains the unchanged prior canonical evidence. No feature, policy, or book edit occurs.
