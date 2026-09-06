@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `8db085f26c288063bc2d52f13d2ad697254fa608` — clean Contracts completion checkpoint.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.20 - read control flow prefix and verify candidate isolation`; prefix read.
+- activation_commit: `ba9a494caa79fdd6fca7833d5bfc1fbce727fc9d` — clean ControlFlow prefix checkpoint.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.21 - read flow adapters and preserve required history`; twenty-nine Perl files read.
 - active_work_unit: none; bounded reading and repairs remain pending in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: activate `.3.2.21`, finish ControlFlow, and read DeclareMethod, Diagnostics, and FlowExpr,
-  then continue required reading and repairs `.7`–`.15` before Rust mutation setup.
+- next_action: activate `.3.2.22` and read ActionIR/MethodExpr.pm baseline lines 1–298,
+  then continue required reading and repairs `.7`–`.16` before Rust mutation setup.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
-- blockers: `.7` blocks recovery/purge; `.8`–`.15` own comparison, regex, input, diagnostic, edge, return/state, and nested-span repairs.
+- blockers: `.7` blocks recovery/purge; `.8`–`.16` own comparison, regex, input, diagnostic, edge, return/state, nested-span, and emptiness repairs.
 - current_rust_warning_debt: repeated clean carriers report 1,870 `pgen` plus 26 `rgx-core` output warnings;
   `RUST-DEPENDENCY-WARNING-ZERO.1-.7` own causal repair/pins/enforcement without suppression, after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -52,9 +52,9 @@
 - standing_contracts: all durable paths are repo-relative; all project data stays on the repository filesystem;
   README remains bounded; ordinary leaves use focused proof and designated infrastructure/public/push boundaries
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
-- current_engineering_notes_capacity: immutable segment `4985-18da440ab1c4` is the twenty-second manifest record;
-  ADR `0101` authorizes exactly 23 collection files / 22 manifest lines with every byte and aggregate ceiling
+- current_engineering_notes_capacity: immutable segment `4984-dd7eba212246` is the twenty-third manifest record;
+  ADR `0103` authorizes exactly 24 collection files / 23 manifest lines with every byte and aggregate ceiling
   unchanged.
 - current_change_history_capacity: immutable segment `4985` is the twenty-sixth history segment; ADR `0102`
   authorizes exactly 28 collection files / 27 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; exhaustive inventory, exact coverage, rgx exclusion, and resumed batch progress (23/100 after `.3.2.20` lands) are in SESSION-STARTUP-READING.
+- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; exhaustive inventory, exact coverage, rgx exclusion, and resumed batch progress (24/100 after `.3.2.21` lands) are in SESSION-STARTUP-READING.

@@ -10,6 +10,16 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.21 — read flow adapters and preserve required history
+
+- Complete ControlFlow/DeclareMethod/Diagnostics/FlowExpr: 1,439 lines / 59,142 bytes; twenty-nine files read.
+- Public/source/host-seed controls prove emptiness and literal-slot defects; `.16.1`/`.16.2` own repair.
+- Required notes rollover preserves 223 exact clean-source lines; ADR 0103 admits only one member/manifest row.
+- Pipeline trace passes five tests; focused identity/Knowledge/history and exact staged canonical proof apply.
+  Product/book remain unchanged; MethodExpr reading follows checkpoint landing.
+- The first gate hit nested macOS sandbox denial; controlled permitted execution passes the unchanged storage
+  oracle. Knowledge records the environment requirement; full canonical proof must be rerun before landing.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.20 — read control flow prefix and verify candidate isolation
 
 - Read ControlFlow 1–1485 / 56,984 bytes; full-file baseline identity passes. Existing control owners reconcile.

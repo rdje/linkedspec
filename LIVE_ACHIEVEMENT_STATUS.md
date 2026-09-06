@@ -8,19 +8,22 @@
   `.7` owns cleanup repair; `.8` stale comparison; `.9` regex tails; `.10` unbound AND_BCODE inputs; `.11`
   diagnostic source context; `.12` bare/explicit edge order; `.13` repeated blind-target code identity. All follow
   required reading, before mutation setup; `.14` owns I-block/repetition literal and result-scope repairs.
-  `.15` owns nested AST offsets. Feature and capability status are unchanged.
+  `.15` owns nested AST offsets; `.16` owns emptiness/host-slot repair. Feature and capability status are unchanged.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.20` reads ControlFlow 1–1485 and verifies candidate state isolation.
-  This is item 23/100; twenty-five full Perl files plus the prefix read. Codebase/book remain incomplete.
+- `SESSION-STARTUP-READING.3.2.21` completes four files, owns emptiness repairs, and preserves notes history.
+  This is item 24/100; twenty-nine full Perl files read. Codebase/book remain incomplete.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.21`: finish ControlFlow and read DeclareMethod, Diagnostics, and FlowExpr.
-  Complete required reading and policy review, then repairs `.7`–`.15` before Rust mutation configuration.
+- Activate `SESSION-STARTUP-READING.3.2.22`: read ActionIR/MethodExpr.pm baseline lines 1–298.
+  Complete required reading and policy review, then repairs `.7`–`.16` before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.21` completes four files, owns emptiness repairs `.16`,
+  and preserves exact notes history under ADR 0103; MethodExpr is next.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.20` reads ControlFlow 1–1485 and verifies candidate
   state isolation plus compact trace; `.3.2.21` finishes it and the next adapters.
@@ -66,9 +69,6 @@
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.6` reads the compiler prefix and preserves exact prior CI/loader
   evidence; the historical duplicate-slot card points to its fix, and `.3.2.7` reads the suffix next.
-
-- `2026-09-06` — `SESSION-STARTUP-READING.3.2.5` reads compiler state; exact required rollover preserves history
-  and ADR 0102 admits one finite member/manifest row. Next reading is `.3.2.6`.
 
 ## History
 

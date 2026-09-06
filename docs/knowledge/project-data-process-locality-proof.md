@@ -17,11 +17,14 @@ answers:
   - why must the process oracle capture host temp before routing TMPDIR
   - why does getconf return project scratch after TMPDIR routing
   - how does the process oracle reject false host temporary authority
+  - why does sandbox_apply fail inside a restricted agent harness
+  - how should canonical CI run when nested macOS sandbox initialization is denied
 date: 2026-07-27
 status: current
 tags: [architecture, storage, filesystem, process, sandbox, relocation, dart, lua, toolchain, PROJECT-DATA-SSD-ROOTING]
 evidence: "PROJECT-DATA-SSD-ROOTING.4.2 adds tools/test_project_data_process_locality.sh and registers it in canonical local CI. On macOS it creates a collision-safe checkout view below managed repository scratch, starts from an outside-filesystem cwd with hostile TMPDIR/TMP/TEMP/Cargo/Dart/Julia/Python cache roots, and uses sandbox-exec to deny all writes outside the relocated checkout plus /dev/null and to deny data reads from developer HOME and both OS temporary roots except one exact read-only caller input. Real Perl, Rust, Dart, Julia, Lua, and Python-tool probes create nonempty traces or bytecode beneath the relocated root; the probe-set guard requires all six families. Deterministic mutations reject an old-volume write, a shared Cargo-cache read, a symlink escape, and a missing tool probe. fs_usage and dtruss require root on this host; sandbox-exec supplies non-root kernel containment in a normal local terminal. The first contained run exposed Dart's pre-command HOME telemetry read and Apple's cc shim xcrun_db temporary write. tools/run_dart_project_data.sh now gives only Dart a same-device repository-local HOME, all maintained Dart command surfaces use it, and the Lua builder invokes the active Apple clang plus SDK directly instead of the stateful cc shim. Correction PROJECT-DATA-SSD-ROOTING.6 proves post-routing getconf DARWIN_USER_TEMP_DIR can echo routed project TMPDIR, preserves inherited TMPDIR before routing, and makes the oracle reject missing or repository-device host authority. Complete canonical local CI then passes through process containment and Phase 0 1,031/1,031."
 evidence_update_2026_07_29_lua_mcp: "FUTURE-PARITY-BACKLOG.10.9.6.1 makes the overlaid Lua builder consume a new uncommitted native source before the leaf commit. The first canonical run proved a HEAD archive alone cannot contain that source; the relocation fixture now overlays lua/native/mcp_system.c explicitly, the MCP checker mutation-locks the overlay, and the kernel-contained six-family driver passes."
+evidence_update_2026_09_06_harness: "SESSION-STARTUP-READING.3.2.21 canonical CI reached the process-locality test, then sandbox-exec reported sandbox_apply: Operation not permitted and its driver exited 71. The same read-only sandbox-exec allow-default /usr/bin/true control exits 71 inside the restricted harness and 0 with approved execution outside it. The unchanged full process-locality test then exits 0 outside the harness, including all six families and retained containment REDs. This isolates an execution-environment prerequisite; no profile weakening, skipped test, or product repair is justified. The failed canonical attempt supplies no receipt; rerun the exact staged canonical candidate in the permitted environment."
 reverify: "bash -n tools/test_project_data_process_locality.sh tools/run_dart_project_data.sh tools/build_lua_native.sh && bash tools/test_project_data_process_locality.sh && bash scripts/check_project_data_storage_locality.sh"
 ---
 
@@ -65,3 +68,19 @@ unchanged.
 Related facts: [[project-data-ssd-storage-locality]], [[project-data-storage-locality-doctrine]],
 [[project-data-workflow-routing]], [[dart-project-data-ssd-storage]], [[lua-project-data-ssd-storage]],
 [[repository-root-path-portability]].
+
+## Restricted harness execution requirement — 2026-09-06
+
+A restricted agent harness can deny installation of a nested macOS sandbox before the contained command starts.
+The diagnostic `sandbox-exec: sandbox_apply: Operation not permitted` therefore needs an initialization control,
+not an inference that a backend attempted forbidden project I/O:
+
+```sh
+/usr/bin/sandbox-exec -p '(version 1) (allow default)' /usr/bin/true
+```
+
+This no-op returned 71 inside the restricted harness and 0 outside it. Running the unchanged
+`bash tools/test_project_data_process_locality.sh` outside the harness then passed its relocated six-family
+driver and containment assertions. Use approved execution outside the harness for this oracle and for canonical
+CI that includes it. Keep the oracle's own sandbox profile and all denials intact. A focused pass does not replace
+the full staged-candidate receipt required by `COMMIT.md`.

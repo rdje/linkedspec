@@ -35,7 +35,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -395,12 +395,24 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.20 - read control flow prefix and verify candidate isolation`
 
 - ID: `SESSION-STARTUP-READING.3.2.21`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 19: 1,439 lines/fragments, 59,142 bytes.
   Scope: `perl/LinkedSpec/ActionIR/ControlFlow.pm` lines 1486–1796; `perl/LinkedSpec/ActionIR/DeclareMethod.pm` lines 1–328; `perl/LinkedSpec/ActionIR/Diagnostics.pm` lines 1–269; `perl/LinkedSpec/ActionIR/FlowExpr.pm` lines 1–531.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+    Perform the required engineering-notes rollover and admit only the exact finite history capacity it needs,
+    with indexed ADR evidence; preserve every immutable byte and current-view/aggregate ceiling.
+  Verification tier: `canonical`
+  Focused checks: Exact four-file reading/identity; existing diagnostics/flow/declaration Knowledge;
+    focused diagnostic/flow controls; required rollover and independent clean-source byte/hash proof;
+    memory/Knowledge/history/routing checks, final staged review, and exact staged canonical receipt.
+  Canonical trigger: `infrastructure` — required finite engineering-notes history capacity in the route registry.
+  Verification: Nine exact ranges cover 1,439 lines / 59,142 bytes; four full-file identities pass.
+    Pipeline trace passes five top-level tests. Public/generated/host-seed controls prove emptiness defects,
+    owned by `.16.1`/`.16.2`. Exact required rollover and ADR 0103 admit one member/manifest record;
+    the first canonical attempt encounters denied nested sandbox initialization. A no-op control isolates the
+    restriction, and permitted execution passes the unchanged full process-locality oracle. Knowledge preserves
+    this prerequisite; rerun full canonical CI for the final staged receipt. No production repair or full-reading claim.
+  Commit: `SESSION-STARTUP-READING.3.2.21 - read flow adapters and preserve required history`
 
 - ID: `SESSION-STARTUP-READING.3.2.22`
   Status: `pending`
@@ -926,11 +938,39 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: `pending` — `.3.2.16` proves three omitted base_start handoffs and passing adjacent controls.
   Commit: `pending`
 
+- ID: `SESSION-STARTUP-READING.16`
+  Status: `pending`
+  Goal: Make emptiness depend on the evaluated DSL value and keep literals out of host symbol lookup.
+  Dependencies: `.3`, `.4`, `.5` required-reading completion; nested-span repair `.15` precedes this activity.
+  Children: `.16.1`, `.16.2`
+
+- ID: `SESSION-STARTUP-READING.16.1`
+  Status: `pending`
+  Goal: Apply one typed emptiness rule to literals, bindings, nested reads, and computed values.
+  Acceptance: Lock the public literal `"0"` versus bound `"0"` discrepancy, empty-string controls, and
+    is_nonempty inversion. Evaluate each expression once and preserve documented undefined/empty scalar,
+    array, and hash semantics across conditions, assignments, return values, fluent and attached forms.
+    Cover booleans/numeric zero, computed zero text, nested containers, and side effects; compare direct and
+    generated/loaded routes plus the direct-dependent backend contract. Update mdBook/Knowledge and commit.
+  Verification: `pending` — `.3.2.21` public Get returns empty for literal `"0"`, nonempty for its bound twin.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.16.2`
+  Status: `pending`
+  Goal: Prevent numeric and keyword literal tokens from becoming generated host scalar references.
+  Dependencies: `.16.1`
+  Acceptance: Tighten scalar-symbol recognition or classify typed literal values before lookup, with an audit
+    of direct consumers. Lock is_empty numeric/boolean/undef forms, program-name and regex-capture independence,
+    valid identifiers, Unicode/name exclusions, and compound-expression boundaries. Preserve binding identity,
+    generated diagnostics, and supported emitted/loaded behavior; run direct-dependent proof and update book.
+  Verification: `pending` — `.3.2.21` lowering emits `$0` for literal 0 through the permissive scalar extractor.
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.21` | `pending` | Finish ControlFlow and read DeclareMethod, Diagnostics, and FlowExpr. |
+| 1 | `SESSION-STARTUP-READING.3.2.22` | `pending` | Read ActionIR/MethodExpr.pm baseline lines 1–298. |
 
 ## Reading Ledger
 
@@ -941,8 +981,8 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | Twenty-five Perl files in full plus ControlFlow.pm 1–1485 under `.3.2.20`; supporting reads below. | ControlFlow suffix, the other 63 Perl paths, and all other first-party inputs not explicitly listed as read. |
-| mdBook | **No** | `docs/linkedspec-book/src/SUMMARY.md`; `docs/linkedspec-book/src/development/local-ci-and-regression.md` 1897–1943 and 1988–2004. | All other chapter text, including the unread portions of that development chapter. |
+| Codebase | **No** | Twenty-nine Perl files in full through FlowExpr.pm under `.3.2.21`; supporting reads below. | The other 60 Perl paths, and all other first-party inputs not explicitly listed as read. |
+| mdBook | **No** | `docs/linkedspec-book/src/SUMMARY.md`; `docs/linkedspec-book/src/development/local-ci-and-regression.md` 1897–1943 and 1988–2004; focused emptiness reference ranges under `.3.2.21` below. | All chapter text not explicitly listed as read. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
 manifest or an absolute checkout path:
@@ -1453,6 +1493,47 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   probe/trace, Knowledge, memory/doctrines/history pressure, and final staged review own this checkpoint.
   Next `.3.2.21` finishes ControlFlow and reads DeclareMethod, Diagnostics, and FlowExpr.
 
+### ControlFlow completion, adapters, emptiness defects, and notes rollover at `.3.2.21`
+
+- Activated from clean `ba9a494caa79fdd6fca7833d5bfc1fbce727fc9d`; prior nine doctrines, post-pointer,
+  zero-byte brief, clean status, and complete derived-map review passed (951 facts / 8,040 keys).
+  Read ControlFlow 1486–1650 / 1651–1796, DeclareMethod 1–165 / 166–328, Diagnostics 1–145 / 146–269,
+  and FlowExpr 1–180 / 181–360 / 361–531 without truncation. FlowExpr's final range was repeated separately
+  after an oversized combined query; only the complete final output counts. Scoped total is 1,439 lines /
+  59,142 bytes: respectively 311/12,965, 328/14,185, 269/8,970, and 531/23,022. All four full-file
+  baseline identities pass; twenty-nine whole Perl files are read. Read-only ranges preceded activation while
+  prior hooks completed; checkpoint edits followed its clean boundary.
+- Read switch closure/default/output/termination, declaration initializer shapes and AST-set fallback,
+  unresolved-helper/node/canonical diagnostic aggregation, value-family inference, emptiness/definedness,
+  composite logical/comparison lowering, and raw fallback boundaries. Existing AST/trace/readiness facts reconcile.
+  Managed pipeline trace passes one file/five top-level tests; prior compact trace remains recorded at `.3.2.20`.
+- Fishy emptiness fallback received public tooling before source diagnosis. On input x, otherwise identical
+  Get parsers return empty for is_empty("0"), nonempty for a binding holding "0", and empty for empty string;
+  all construct and run without last_error. Generated literal zero reads $0. The same compiled parser returns
+  empty with process-local program name '' and nonempty with 'program'. Additional generated-source-only
+  controls map 1/true/undef to $1/$true/$undef and invert the faulty quoted-zero result for is_nonempty.
+- Root cause: FlowExpr's general expression fallback uses host falsehood; its scalar fast path instead checks
+  explicit emptiness. ValueExpr's scalar extractor accepts any word token before literal classification.
+  Supporting ValueExpr 115–175 was read after the tooling. Existing public reference explicitly preserves "0";
+  read value-container-flow-helper-reference.md 489–511 and 1034–1063, plus helper-contract-catalog.md 770–787.
+  These bounded supporting ranges do not complete either chapter. Repair `.16.1` owns value equivalence and
+  `.16.2` literal/host-slot isolation, after required reading; Knowledge stores reproducer and proof boundaries.
+- Engineering notes reached 468 lines / 42,587 bytes and required rollover. Governed tool archives clean source
+  lines 238–460 into segment 4984: 223 lines / 22,371 bytes, SHA-256
+  dd7eba212246efd893dbff32143a2c821576c7a704e1a697265213dc728d1f9a. Independent source/blob/hash and
+  unchanged prior-manifest checks pass. Current root is 245 lines / 20,216 bytes; manifest 23 lines / 13,782 bytes.
+  Collection is 24 files / 25,194 lines / 2,691,497 bytes. ADR 0103 admits exactly max_files 23→24 and manifest
+  max_lines 22→23; all current-root, byte, segment, aggregate, ownership, and immutable contracts remain fixed.
+- Production/book remain unchanged. Exact reading/probes, Knowledge/history/routing/memory, staged diff review,
+  and receipt-bound canonical CI own this infrastructure checkpoint. No push at this intermediate boundary;
+  `.3.2.22` reads MethodExpr.pm 1–298 after the canonical checkpoint lands.
+- The first canonical attempt passes the preceding contracts/runtime consumers, Perl storage, and Python/tool
+  storage, then stops at the process-locality driver: sandbox_apply is denied and the driver exits 71. A no-op
+  sandbox-exec control reproduces 71 inside the restricted harness and passes outside it. Approved execution of
+  the unchanged full process-locality test passes the relocated six-family driver and containment assertions.
+  Existing `project-data-process-locality-proof` now owns this causal requirement. No profile/test is weakened;
+  the failed attempt grants no receipt, and the final staged candidate requires a complete permitted rerun.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -1474,7 +1555,8 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   `.3.2.11` is item 14/100 at `3ab399d0`; `.3.2.12` is item 15/100 at `5e2cf756`;
   `.3.2.13` is item 16/100 at `a7d17e6f`; `.3.2.14` is item 17/100 at `e421887d`;
   `.3.2.15` is item 18/100 at `762bef64`; `.3.2.16` is item 19/100 at `9a881160`; `.3.2.17` is item 20/100 at `34958c8f`; `.3.2.18` is item 21/100 at `54e1a487`;
-  `.3.2.19` is item 22/100 at `8db085f2`; `.3.2.20` is item 23/100 once committed. `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
+  `.3.2.19` is item 22/100 at `8db085f2`; `.3.2.20` is item 23/100 at `ba9a494c`;
+  `.3.2.21` is item 24/100 once committed. `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
 
@@ -1503,6 +1585,7 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 - `.10` owns confirmed unbound AND_BCODE package-variable inputs; repair follows `.9` without inventing self-match semantics.
 - `.11.1`–`.11.3` own diagnostic context/occurrence/rule-attribution repairs after `.10`; invalid inputs still reject.
 - `.12` owns confirmed native bare/explicit edge-order drift after `.11`; metadata and execution currently disagree.
+- `.16.1`/`.16.2` own confirmed emptiness expression drift and literal/host-slot leakage after `.15`.
 
 ## Verification Log
 
@@ -1555,6 +1638,8 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.18` | Exact prefix identity/ranges; catalog count/detachment; historical status reconciliation | PASS reading/catalog; focused memory/doctrine/Knowledge/history and staged checks precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.19` | Exact suffix reading/identity; fourteen-group source extraction; owner reconciliation | PASS reading/structure; focused memory/doctrine/Knowledge/history and staged checks precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.20` | Exact prefix reading/identity; candidate-context probe; compact trace suite | PASS probe and one file/four top-level tests; focused continuity/staged checks precede landing. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.21` | Exact reading/identity; pipeline trace; public emptiness/host-seed controls; required rollover/hash | PASS five trace tests and bounded controls; ADR 0103 exact staged canonical proof required before landing. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.21` | Canonical process-locality failure; same no-op initialization control in restricted/permitted execution; unchanged full oracle outside harness | Restricted control exits 71; permitted control and full six-family oracle PASS. Exact full canonical rerun remains required; no receipt from failed attempt. |
 
 ## Commit Log
 
@@ -1584,6 +1669,7 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `SESSION-STARTUP-READING.3.2.18` | `SESSION-STARTUP-READING.3.2.18 - read contract prefix and reconcile projection status` | Contracts prefix read; 92-row detached catalog rechecked; stale-current card wording bounded. |
 | `SESSION-STARTUP-READING.3.2.19` | `SESSION-STARTUP-READING.3.2.19 - finish contract catalog reading` | Contracts fully read; ordered builder fact indexed; twenty-five Perl files complete. |
 | `SESSION-STARTUP-READING.3.2.20` | `SESSION-STARTUP-READING.3.2.20 - read control flow prefix and verify candidate isolation` | ControlFlow prefix read; bounded candidate-state isolation verified; existing caveat owners retained. |
+| `SESSION-STARTUP-READING.3.2.21` | `SESSION-STARTUP-READING.3.2.21 - read flow adapters and preserve required history` | Twenty-nine Perl files read; emptiness repairs owned; exact notes rollover and finite capacity recorded. |
 
 ## Changelog
 
@@ -1635,3 +1721,5 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   twenty-five Perl files are fully read, and `.3.2.20` starts ControlFlow.
 - `2026-09-06`: `.3.2.20` reads ControlFlow 1–1485, verifies candidate state isolation and compact trace,
   and retains existing caveat repair ownership; `.3.2.21` completes ControlFlow and the next adapters.
+- `2026-09-06`: `.3.2.21` completes four files, owns emptiness/literal repairs `.16`, and preserves required
+  notes history under finite ADR 0103 capacity; MethodExpr follows canonical checkpoint landing.

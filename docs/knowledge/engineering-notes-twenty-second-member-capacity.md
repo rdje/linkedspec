@@ -8,13 +8,16 @@ answers:
   - "which ADR authorizes engineering notes segment 4986"
   - "did the engineering notes aggregate pressure limits increase for segment 4986"
 date: 2026-09-02
-status: current
+status: historical capacity milestone; superseded by ADR 0101 and ADR 0103
 tags: [documentation, history, rollover, routing, pressure, doctrine, continuity]
 evidence: "FUTURE-PARITY-BACKLOG.19.3.3's mandatory complete engineering-notes closeout record takes the current shard to 465/512 lines and creates immutable segment 4986 from exact clean activation commit 7fabe737. The resulting bounded collection is 22 files / 24,732 lines / 2,648,238 bytes with a 21-line manifest. ADR 0099 authorizes only max_files 21→22 and manifest max_lines 20→21. Root, per-history-file, aggregate-line, aggregate-byte, and every byte control remain unchanged and below their ceilings; owner, lifecycle, verifier, patterns, and ADR 0069 storage authority do not change."
 reverify: "perl tools/roll_document_history.pl --surface engineering_notes --check && bash scripts/check_readme_stability.sh && wc -lc DEVELOPMENT_NOTES.md docs/history/development-notes/manifest.jsonl docs/history/development-notes/*.md"
 ---
 
 # Engineering-notes twenty-second-member capacity
+
+This dated capacity milestone is historical. ADR `0101` subsequently admitted 23 files; ADR `0103` admits
+24 files for required segment `4984`. See [[engineering-notes-twenty-fourth-member-capacity]] for that boundary.
 
 The bounded engineering-notes store consists of the current root, manifest, and immutable content-addressed
 segments. Mandatory segment `4986` adds exactly one segment and one manifest record, so finite collection controls
