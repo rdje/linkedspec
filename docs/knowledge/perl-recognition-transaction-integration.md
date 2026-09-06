@@ -13,7 +13,7 @@ answers:
   - "is the Perl recognition transaction final-path consumer green"
   - "are Perl recognition transactions admitted or public"
   - "how is the Perl final-path transaction test registered in canonical CI"
-  - "why are Perl recognition transaction intrinsics absent from the 246-name helper inventory"
+  - "why are Perl recognition transaction intrinsics absent from the generic helper inventory"
 date: 2026-08-10
 status: current admitted Perl integration; exact final-path consumer is canonical
 tags: [perl, recognition, transaction, ActionIR, effects, marks, progress, generated-source, admitted, FUTURE-PARITY-BACKLOG]
@@ -22,6 +22,8 @@ evidence_update_2026_08_10_signoff: "After exact classification of the four gram
 evidence_update_2026_08_10_admission: "FUTURE-PARITY-BACKLOG.14.3.2.3 requires, syntax-checks, and executes t/recognition_transaction_perl_contract.t exactly once in canonical CI. Only the Perl rollout row advances, giving 2/9 complete with 41 semantic mutations and public governance at 3 documents / 8 forbidden claims / 14 mutations. The consumer changes only two admission-metadata assertions and passes all 51 tests; production implementation bytes do not change."
 evidence_update_2026_08_10_admission_signoff: "The definitive staged-tree canonical gate passes all eight doctrines, exact Perl admission, mandatory cross-runtime and storage/relocation consumers, both primary CLI environments at 66/66, RAM 34%, and Phase 0 at 1,031/1,031 in 733 wall-clock seconds before the exact local-gate pass marker. Perl parent FUTURE-PARITY-BACKLOG.14.3.2 is composition-complete and Rust dormant RED .14.3.3.0 is next."
 evidence_update_2026_08_10_rust_admission: "FUTURE-PARITY-BACKLOG.14.3.3.3 independently admits the unchanged Rust integration at ordinary/canonical 12/12. Perl remains the exact 51-test reference admission; shared rollout is now neutral + Perl + Rust 3/9, with Dart, Julia, PUC Lua, LuaJIT, recurring composition, and public no-drift still RED."
+evidence_update_2026_09_06_reading: "SESSION-STARTUP-READING.3.2.32 re-reads pipeline/recognition scanners, ScannerCore, staged marker lowering, and StatementSplit with exact baseline identity. The managed staged Perl consumer passes 143 checks; staged governance passes 9/9/123 plus public 6/17/10/129, recognition governance passes 138/250/58 with 9/9 rollout, and language coverage passes 250 names/126 public Perl contracts. This is bounded Perl/neutral proof; other runtime execution routes are not rerun."
+last_verified: 2026-09-06
 reverify: "perl -Iperl -c perl/LinkedSpec/RecognitionTransactionPolicy.pm && perl -Iperl -c perl/LinkedSpec/RecognitionTransactionRuntime.pm && perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/RecognitionTransactionRules.pm && prove -Iperl t/recognition_transaction_perl_authority.t t/recognition_transaction_perl_contract.t t/generated_source_contract.t && bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py && test \"$(rg -c 'require_tracked_file t/recognition_transaction_perl_contract[.]t|perl -c -Iperl t/recognition_transaction_perl_contract[.]t|PERL5LIB= prove -Iperl t/recognition_transaction_perl_contract[.]t' tools/run_ci_local.sh)\" = 3"
 ---
 
@@ -31,10 +33,10 @@ Perl now recognizes the four exact authored forms as dedicated canonical
 ActionIR. The scanner preserves direct token/result slots and the unevaluated
 static `call(Rule)` operand; generic call and assignment scanners do not
 duplicate or eagerly evaluate those nodes. After ordinary descriptor
-construction and validation have retained diagnostic precedence, a closed
-132-node effect table computes named-rule dependencies to a recursive fixed
-point and rejects dynamic, forbidden, or unknown recognition callees before
-execution.
+construction and validation have retained diagnostic precedence, the closed effect table computes
+named-rule dependencies to a recursive fixed point and rejects dynamic, forbidden, or unknown
+recognition callees before execution. The initial 132-node census is historical: the current neutral
+checker reports 138 ActionIR rows (134 current plus four dedicated transaction nodes).
 
 Every live or emitted handler enters one source-local invocation frame. During
 `recognize_once`, the runtime executes the static child once, carries acceptance
@@ -57,11 +59,16 @@ admitted while the later runtimes, recurring composition, and public closeout we
 reading reconciliation routes current combined status to [[typed-authoring-model-public-no-drift]]; those
 historical pending rows must not be read as today's support status.
 The four grammar-owned transaction intrinsics remain outside the aligned
-246-name ordinary helper-call inventories: their contracts lower directly to
+250-name ordinary helper-call inventories: their contracts lower directly to
 dedicated `RECOGNITION_*` nodes. The independent language-coverage checker
 classifies those four exact names, requires them to exist in Perl, and rejects
 their accidental admission as shared backend helpers while continuing to prove
-all 122 ordinary public Perl calls.
+all 126 public Perl contracts.
+
+The `.3.2.32` reading checkpoint confirms the exact statement scanner and current neutral census.
+[[perl-recognition-token-lexical-order-drift]] qualifies static validation claims: quoted token text
+and first-token regex caching still have owned repair under `SESSION-STARTUP-READING.21`.
+Passing the finite contract mutation set does not close those separately reproduced defects.
 
 ## Links
 

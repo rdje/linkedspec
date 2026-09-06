@@ -10,6 +10,11 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.32 — read staged scanners and reconcile authoring boundaries
+
+Read 1,355 lines / 48,756 bytes across five scanner/staged/splitting owners; exact baseline identity passes.
+143 staged checks plus neutral/language proof pass; reconcile public parse_job assignment and current recognition inventory Knowledge.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.31 — read legacy scanners and reconcile bare push precedence
 
 Read 1,433 lines / 41,163 bytes of LegacyRules and PrimitiveBasicRules; exact baseline identity passes.

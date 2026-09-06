@@ -5,21 +5,24 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   exhaustive inventory are complete; codebase/book remain incomplete. `rgx` and its dependencies are excluded.
 - Intake `.31` preserves all baseline Perl source reading, supporting book/native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.32`–`.3.2.54` remain pending.
+  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.33`–`.3.2.54` remain pending.
 - Repairs `.7`–`.30` and `.32`–`.33` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.31` completes legacy/basic scanner reading and reconciles historical bare-read and push precedence claims.
-  This is item 35/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.2.32` completes pipeline/staged scanner reading and reconciles public authoring and recognition inventory records.
+  This is item 36/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.32`: complete PrimitivePipelineRules, RecognitionTransactionRules, ScannerCore, StagedParseJob, and StatementSplit.
+- Activate `SESSION-STARTUP-READING.3.2.33`: complete StatementSplit/Core 1–419, StatementSplit/Mode 1–214, Trace 1–124, and ValueExpr 1–666.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.32` reads pipeline/recognition/staged and splitting owners;
+  143 staged checks and neutral/language proof pass; two authoring records reconcile.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.31` reads legacy/basic scanners and confirms both push branches;
   five public controls pass; three historical bare-read records reconcile.
@@ -65,9 +68,6 @@
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.18` reads Contracts 1–1396, checks its detached 92-row
   catalog, and reconciles historical card status. Contracts suffix is next.
-
-- `2026-09-06` — `SESSION-STARTUP-READING.3.2.17` finishes the AST parser and pipeline/event adapters;
-  twenty-four whole Perl files read and existing owner cards indexed. Contracts prefix is next.
 
 ## History
 

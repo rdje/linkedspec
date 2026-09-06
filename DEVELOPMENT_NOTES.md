@@ -10,6 +10,11 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.32 — public staged authoring uses a private marker carrier
+
+Exact assignment-form parse_job is public; its opaque declaration carrier and caller-supplied execution authority remain private.
+Recognition inventory is 138 ActionIR rows / 250 calls; .21 still owns the separately reproduced token-validation defects.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.31 — all-bare push uses handler-first dispatch
 
 A registered rule handler wins for push(A,B); without one, the value of B is appended to binding A.

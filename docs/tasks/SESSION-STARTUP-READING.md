@@ -562,12 +562,18 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.31 - read legacy scanners and reconcile bare push precedence`
 
 - ID: `SESSION-STARTUP-READING.3.2.32`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 30: 1,355 lines/fragments, 48,756 bytes.
   Scope: `perl/LinkedSpec/ActionIR/Scanner/PrimitivePipelineRules.pm` lines 1–571; `perl/LinkedSpec/ActionIR/Scanner/RecognitionTransactionRules.pm` lines 1–124; `perl/LinkedSpec/ActionIR/ScannerCore.pm` lines 1–223; `perl/LinkedSpec/ActionIR/StagedParseJob.pm` lines 1–393; `perl/LinkedSpec/ActionIR/StatementSplit.pm` lines 1–44.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact range/full-file identity; staged/recognition and pipeline Knowledge;
+    managed staged Perl consumer, neutral staged/recognition and language checks; memory/Knowledge/history and review.
+  Canonical trigger: `none` — source reading and Knowledge continuity only.
+  Verification: Exact full-file baseline identity and 1,355-line / 48,756-byte coverage pass. Managed staged Perl
+    consumer passes 143 checks; staged 9/9/123/public 6/17/10/129, recognition 138/250/58, and language
+    250/126 proof pass. Two Knowledge records reconcile; required focused continuity checks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.32 - read staged scanners and reconcile authoring boundaries`
 
 - ID: `SESSION-STARTUP-READING.3.2.33`
   Status: `pending`
@@ -1433,7 +1439,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.32` | `pending` | complete PrimitivePipelineRules, RecognitionTransactionRules, ScannerCore, StagedParseJob, and StatementSplit. |
+| 1 | `SESSION-STARTUP-READING.3.2.33` | `pending` | complete StatementSplit/Core 1–419, StatementSplit/Mode 1–214, Trace 1–124, and ValueExpr 1–666. |
 
 ## Reading Ledger
 
@@ -1444,7 +1450,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.32`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.33`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
 | mdBook | **No** | `.31` records fourteen complete book sources plus the two earlier local-CI ranges: 640,041 bytes of disjoint coverage. | Remaining 1,316,541 source bytes, formal chapter checkpoints, and rendered alignment under `.4`. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -2583,6 +2589,37 @@ PERL
   uniform typed values and retired selector syntax. The fallback audit links the same handler-first
   choice, removing its unconditional child-call claim. Codebase/book remain No; `.3.2.32` follows.
 
+### Pipeline, recognition, staged marker, and splitting ownership at `.3.2.32`
+
+- Activated from clean `b1108cbb18c5cd347912a4ce44f86b289958abef` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Re-reviewed PrimitivePipelineRules 1–285 / 286–571, RecognitionTransactionRules 1–124,
+  StagedParseJob 1–220 / 221–393, and StatementSplit 1–44 without truncation. ScannerCore 1–223 was
+  re-read during `.3.2.30` registry diagnosis in this same reading run. Exact baseline identity for all
+  five files passes: 1,355 lines / 48,756 bytes, with no duplicated physical-reading credit over `.31`.
+- Pipeline scanning combines raw helper patterns with statement-based mutation/value-drop recognition,
+  balanced receiver/index parsing, nested-access AST fallback, and array pipeline-plan extraction.
+  Recognition scanning preserves exact result/token/operand fields for observation and transaction forms;
+  the generic assignment scanner excludes their assignment spellings.
+- StagedParseJob owns one exclusive scalar assignment, validates literal option keys/policies/capabilities,
+  builds direct entry/match or ordered cat text plans, and lowers inert marker construction with only
+  the needed private match information. Parser resolution and scheduling remain separate runtime owners.
+- StatementSplit validates its trim dependency and lazily delegates to Core under OwnerDispatch error
+  preservation. ScannerCore's seven-owner/five-dependency registry is already indexed under `.3.2.30`.
+- Read marker/provenance, carrier/admission, public parse-job, recognition integration, and known token
+  validation Knowledge before reconciliation. The marker card's non-public authoring claim was stale
+  after `.14.7.9`; exact assignment authoring is public while its carrier/authority stays private and the
+  generic helper inventory excludes parse_job. Recognition inventory prose now uses the current census
+  and links `.21`'s separately reproduced lexical/order defects.
+- `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/staged_ast_enrichment_perl_contract.t`
+  passes 143 top-level checks. `bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py`
+  passes nine rollout legs / 123 neutral mutations plus public 6/17/10/129.
+- `bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py` passes
+  138 ActionIR rows (134 current + four dedicated), 250 calls, 58 rejected mutations, and 9/9 rollout.
+  `bash tools/project_data_run.sh env PERL5LIB= perl tools/check_language_capability_coverage.pl` passes
+  250 current calls and 126 independently covered public Perl contracts. Other runtime routes are not rerun.
+- No runtime, public-book, or policy changes. The finite proofs do not close known `.18`/`.21` repairs;
+  codebase/book remain No and `.3.2.33` follows.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -2615,7 +2652,8 @@ PERL
   `.3.2.28` is item 32/100 at `86673c75`;
   `.3.2.29` is item 33/100 at `3c1a955a`;
   `.3.2.30` is item 34/100 at `6f113221`;
-  `.3.2.31` is item 35/100 once committed.
+  `.3.2.31` is item 35/100 at `b1108cbb`;
+  `.3.2.32` is item 36/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -2715,6 +2753,7 @@ PERL
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.29` | Exact range/full-file identity; progressive and normalization Knowledge; managed 129-assertion carrier consumer and neutral 9/9 checker; focused continuity | PASS; private six-runtime closeout pointers reconciled; required staged gates precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.30` | Exact range/full-file identity; scanner/AST/trace Knowledge; managed five-test pipeline suite and seven-dispatcher census; focused continuity | PASS; four Knowledge boundaries reconciled and known lexical repair linked; required staged gates precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.31` | Exact range/full-file identity; legacy/bare-read/uniform Knowledge; five public Get controls and generated handler-first source; focused continuity | PASS; existing push precedence confirmed and three historical records reconciled; required staged gates precede landing. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.32` | Exact range/full-file identity; pipeline/staged/recognition Knowledge; managed 143-check staged consumer, two neutral checkers and language inventory; focused continuity | PASS bounded Perl/neutral proof; two authoring/inventory records reconciled; required staged gates precede landing. |
 
 ## Commit Log
 
@@ -2756,6 +2795,7 @@ PERL
 | `SESSION-STARTUP-READING.3.2.29` | `SESSION-STARTUP-READING.3.2.29 - read lowering suffix and reconcile progressive admission` | MethodLowering suffix and ProgressiveSpanDispatch read; three progressive admission records follow completed private closeout. |
 | `SESSION-STARTUP-READING.3.2.30` | `SESSION-STARTUP-READING.3.2.30 - read rewrite orchestration and reconcile scanner ownership` | RewritePipeline, Scanner, and FlowRules read; scanner registry and AST migration Knowledge reconciled. |
 | `SESSION-STARTUP-READING.3.2.31` | `SESSION-STARTUP-READING.3.2.31 - read legacy scanners and reconcile bare push precedence` | Legacy/basic scanners read; historical scalar-slot and unconditional child-push claims reconciled with uniform binding. |
+| `SESSION-STARTUP-READING.3.2.32` | `SESSION-STARTUP-READING.3.2.32 - read staged scanners and reconcile authoring boundaries` | Pipeline, recognition, staged marker, and splitting owners read; two Knowledge records follow current public/neutral boundaries. |
 
 ## Changelog
 
@@ -2831,3 +2871,5 @@ PERL
   census pass, four Knowledge records reconcile, and `.3.2.31` follows.
 - `2026-09-06`: `.3.2.31` reads legacy/basic scanners, passes five public controls and generated handler-first push
   inspection, reconciles three historical records, and advances to `.3.2.32`.
+- `2026-09-06`: `.3.2.32` reads pipeline/recognition/staged/splitting owners, passes 143 staged checks and neutral/
+  language proof, reconciles two Knowledge records, and advances to `.3.2.33`.
