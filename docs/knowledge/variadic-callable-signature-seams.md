@@ -24,7 +24,8 @@ numeric v1 contract independently locks the same exact-versus-variadic distincti
 receiver into the effective helper argument list (except explicitly governed order exceptions), so their arity is
 still the semantic helper signature rather than a separate host-method rule.
 
-User-defined functions have no equivalent open upper bound. Exact `arity` is repeated through:
+Before the variadic contract, user-defined functions had no equivalent open upper bound. The preflight
+inventoried exact `arity` across:
 
 - the `specs/user_function_definition.spec` returned node;
 - its `body_payload` and `body_parse_job` staged sidecars;
@@ -43,7 +44,7 @@ Unrecognized rest spellings currently produce a `function_definition_error`. The
 invalid-definition detail. The critical trace is not a swallowed exception or a successful empty registry.
 
 Implementation began with the versioned neutral signature/schema and executable fixture. Perl, Rust, Dart, and
-Julia now carry it through staged metadata, public descriptors, native execution, and generated state. Lua's
-spec-owned shell, exact registry, isolated frame, and compiled descriptor deliberately precede body dispatch;
-`LUA-BACKEND-PARITY.5.1` is therefore the first dependency-complete native owner. `.5.3` owns descriptor admission,
-while `.8.1-.4` own generated preservation, execution, recurring proof, and capability retirement.
+Julia carry it through staged metadata, public descriptors, native execution, and generated state. At that
+four-backend closeout, Lua's planned dependency order put its spec-owned shell, registry, isolated frame, and
+compiled descriptor before body dispatch. `LUA-BACKEND-PARITY.5.1`, `.5.3`, and `.8.1-.4` own the native,
+descriptor, and generated follow-up respectively; that historical sequence is not a current pending-state claim.

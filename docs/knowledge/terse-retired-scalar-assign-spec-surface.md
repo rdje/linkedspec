@@ -14,7 +14,7 @@ answers:
 date: 2026-07-06
 status: confirmed
 tags: [dsl, terse, scalar-slot, assignment, retirement, type-inference, bare-identifiers, spec-format-terse, SPEC-FORMAT-TERSE]
-evidence: "SPEC-FORMAT-TERSE.6.2.3.2 retired authored `scalar(...)` and `assign(...)`. At that time `:name` was the explicit scalar-slot path, but SPEC-FORMAT-TERSE.15.2.4 migrated current sources to bare reads, SPEC-FORMAT-TERSE.15.3 hard-retired Perl `:name` support, and SPEC-FORMAT-TERSE.15.4 hard-retired Rust `Expr::ScalarSlot`. Current authoring reads variables by bare name in value positions and uses `name = value` / `set(name, value)` for assignment; explicit `array(name)` / `hash(name)` targets mark aggregate-storage mutation boundaries."
+evidence: "SPEC-FORMAT-TERSE.6.2.3.2 retired authored `scalar(...)` and `assign(...)`. At that time `:name` was the explicit scalar-slot path, but SPEC-FORMAT-TERSE.15.2.4 migrated current sources to bare reads, SPEC-FORMAT-TERSE.15.3 hard-retired Perl `:name` support, and SPEC-FORMAT-TERSE.15.4 hard-retired Rust `Expr::ScalarSlot`. Current authoring reads variables by bare name in value positions and uses `name = value` / `set(name, value)` for assignment. The later uniform-binding/selector-retirement work also removes explicit `array(name)` / `hash(name)` target selectors; mutations use the bare binding."
 reverify: "rg -n '\\bscalar\\s*\\(|\\bassign\\s*\\(' specs tests/corpus rust/linkedspec-runtime/tests/corpus --glob '*.spec' --glob '*.md' ; rg -n '\\bscalar\\s*\\(|\\bassign\\s*\\(' docs/linkedspec-book/src ; prove -q -Iperl t/phase0_regression.t ; prove -q -Iperl t/actionir_ast_parser.t ; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_6_2_3_2_bare_identifier_remembers_type_after_initialization"
 ---
 
@@ -26,7 +26,10 @@ The current authored `.spec` surface no longer treats `scalar(...)` as the scala
 - scalar read in value positions: `name`
 - assignment statement/expression: `name = value` or `set(name, value)`
 - aggregate initialization: `items = [value]`, `meta = { key : value }`
-- explicit aggregate-storage mutation boundary: `array(items)` / `hash(meta)`
+- aggregate mutation: use the bare binding, such as `push(items, value)` or `meta[key] = value`
+
+Exact one-bare-name `array(items)` / `hash(meta)` selectors were subsequently retired.
+[[perl-aggregate-selector-compile-rejection]] owns the precise Perl rejection and retained constructor boundary.
 
 After initialization, a bare identifier carries its known kind. `items = [value]` makes later `items` and
 `copy(items)` array-valued; `meta = { key : value }` makes later `meta` and `copy(meta)` hash-valued; ordinary

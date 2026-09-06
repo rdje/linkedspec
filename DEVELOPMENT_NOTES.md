@@ -10,6 +10,11 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.24 — versioned signatures and current authored reads
+
+The fixed/rest signature adapter feeds isolated local declarations and typed statement guards; body dispatch follows next.
+Historical fixed-only, scalar-wrapper, and aggregate-selector wording now points to the implemented successor contracts.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.23 — typed lowering and milestone chronology
 
 The prefix composes typed blocks, logical values, nested writes, and callable binding setup with explicit compatibility paths.

@@ -20,17 +20,19 @@ reverify: "prove -Iperl t/phase0_regression.t && rg -n 'function_registry|user_f
 ---
 
 `SPEC-FORMAT-TERSE.4.2.2` makes registered Perl user-function calls executable in
-value positions.
+value positions. This records the initial fixed-arity milestone; [[perl-variadic-user-functions]] owns the
+later version-2 rest-signature extension alongside unchanged version-1 fixed signatures.
 
-The lowering boundary is:
+The original lowering boundary is:
 
 - exact-arity registered calls resolve before built-in helper fallback
 - arguments are evaluated eagerly in the caller context
 - parameters are rebound inside a generated function-local `do { ... }` block
 - function-local scalar, array, and hash working variables are declared in that block
 - final expression bodies and body-local `return(expr)` produce the function result
-- array/hash results can feed compatible receiver-dot chains such as `.length()`; retired
-  `.scalaref(...)` field reads use named working-hash reads such as `scalar(hash(name), key)` instead
+- array/hash results can feed compatible receiver-dot chains such as `.length()`; current field reads use
+  direct brackets, such as `name["key"]`. The earlier `scalar(hash(name), key)` replacement is retired too;
+  see [[terse-retired-scalar-assign-spec-surface]] and [[perl-aggregate-selector-compile-rejection]]
 - wrong arity remains an unresolved-helper diagnostic with zero raw fallback
 
 `SPEC-FORMAT-TERSE.4.2.3` adds standalone registered-call discard: a standalone

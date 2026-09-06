@@ -20,7 +20,7 @@ reverify: "perl -Iperl -MLinkedSpec -e 'for my $expr (q{return(foo[\"a\"][9][\"b
 Direct nested access is implemented for explicit mixed hash/array paths:
 
 ```text
-foo["a"][9]["b"][scalar(z)]
+foo["a"][9]["b"][z]
 ```
 
 Segment semantics are conservative and variant-neutral:
@@ -34,11 +34,6 @@ The accepted direct form is the supported spelling for these scalar payload read
 former legacy `scalaref(base,path)` helper has since been retired under
 `SCALAREF-RETIREMENT.4`.
 
-The full brainstorm spelling:
-
-```text
-foo["a"][9]["b"][z]
-```
-
-is now accepted on both variants. The remaining Channel 2 work is RHS-shape/type inference under
-`SPEC-FORMAT-TERSE.1.2.3.5`.
+The mixed path above is accepted on Perl and Rust. The historical `scalar(z)` probe in the evidence predates scalar-wrapper
+retirement; current authoring uses bare `z`. The former next step `.1.2.3.5` was subsequently implemented
+and superseded by typed value binding; [[terse-rhs-shape-type-inference-ground-truth]] preserves that chronology.

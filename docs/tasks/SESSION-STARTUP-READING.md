@@ -445,12 +445,19 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.23 - read method lowering prefix and reconcile milestones`
 
 - ID: `SESSION-STARTUP-READING.3.2.24`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 22: 883 lines/fragments, 33,969 bytes.
   Scope: `perl/LinkedSpec/ActionIR/MethodLowering.pm` lines 1496–2378.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+    Reconcile related fixed/variadic signature chronology and retired direct-read/aggregate-selector wording.
+  Verification tier: `focused`
+  Focused checks: Exact range/full-file baseline identity; function signature, binding, statement, and retirement
+    Knowledge; managed `prove -Iperl t/variadic_user_function_contract.t`; memory/doctrine/Knowledge/history and staged review.
+  Canonical trigger: `none` — source-reading and existing Knowledge continuity only.
+  Verification: Full-file baseline identity and exact 883-line / 33,969-byte range pass. The variadic function
+    suite passes 66 tests; a public mixed-path read returns one with no context error. Existing signature and
+    retirement records reconcile; focused memory/history/scope checks and required commit hooks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.24 - read function signatures and statement lowering`
 
 - ID: `SESSION-STARTUP-READING.3.2.25`
   Status: `pending`
@@ -1333,7 +1340,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.24` | `pending` | complete MethodLowering baseline lines 1496–2378. |
+| 1 | `SESSION-STARTUP-READING.3.2.25` | `pending` | complete MethodLowering baseline lines 2379–3743. |
 
 ## Reading Ledger
 
@@ -1344,7 +1351,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.24`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.25`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
 | mdBook | **No** | `.31` records fourteen complete book sources plus the two earlier local-CI ranges: 640,041 bytes of disjoint coverage. | Remaining 1,316,541 source bytes, formal chapter checkpoints, and rendered alignment under `.4`. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -2211,6 +2218,34 @@ zero bytes and Git was clean before activating `.31`; no background job remains.
 - All Perl source remains physically read; subsequent comprehension checkpoints remain pending. Codebase/book
   stay No, and the next owned range is MethodLowering 1496–2378.
 
+### Function signatures, local bindings, and statement lowering at `.3.2.24`
+
+- Activated from clean `2c398b922192172310bfd733bdcecaef0ee6750a` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Forward reading consumed 1496–1700, 1701–1905, 1906–2110, 2111–2290, and 2291–2378; this checkpoint
+  reviewed 1496–1910 and 1911–2378 in full. The 883 lines / 33,969 bytes and full baseline identity agree.
+- Read version-1 fixed and version-2 rest-signature validation, copied call-stack state, local declaration
+  discovery, nested-write presence and receiver-target inventories, and unknown-call traversal. The remainder
+  covers VALUE_DROP, typed return/set/push/array-end dispatch, and guarded assignment operators.
+  Actual user-function body/value dispatch follows in the next range; it is not attributed to this prefix.
+- Existing function execution, variadic implementation/signature, scalar retirement, direct access, selector
+  rejection, and RHS-shape chronology cards were read in full. Four existing records now distinguish the
+  initial fixed-function and rollout milestones from current signatures and retired authored syntax.
+- Managed `PERL5LIB= prove -Iperl t/variadic_user_function_contract.t` passes 66 top-level tests. A public Get
+  control builds a mixed hash/array value and reads it with a bare index; it returns `one` and no context error.
+  The exact successful control follows. Source/book remain unchanged; no whole-backend signoff is claimed.
+
+```bash
+bash tools/project_data_run.sh env PERL5LIB= perl -Iperl -MLinkedSpec -MJSON::PP - <<'PERL'
+use strict; use warnings;
+my $spec=qq{Top::\n /x/ -> Top { foo = hash("a", array(hash("b", array("zero", "one")))); z = 1; return(foo["a"][0]["b"][z]) }\n};
+my %ctx;my $parser=LinkedSpec::Get(\$spec,runtime_ctx_ref=>\%ctx);die 'compile failed' unless ref($parser) eq 'CODE';
+my $input='x';my $result=$parser->(\$input);die 'unexpected result' unless defined($result) && $result eq 'one' && !defined($ctx{last_error});
+print JSON::PP->new->canonical->encode({result=>$result,context_error=>undef}),"\n";
+PERL
+```
+
+- Later checkpoints remain pending; codebase/book stay No. `.3.2.25` owns MethodLowering 2379–3743.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -2235,7 +2270,8 @@ zero bytes and Git was clean before activating `.31`; no background job remains.
   `.3.2.19` is item 22/100 at `8db085f2`; `.3.2.20` is item 23/100 at `ba9a494c`;
   `.3.2.21` is item 24/100 at `17d3e919`; `.31` is item 25/100 at `3e8b05cd`;
   `.3.2.22` is item 26/100 at `27ff841a`;
-  `.3.2.23` is item 27/100 once committed.
+  `.3.2.23` is item 27/100 at `2c398b92`;
+  `.3.2.24` is item 28/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -2327,6 +2363,7 @@ zero bytes and Git was clean before activating `.31`; no background job remains.
 | `2026-09-06` | `SESSION-STARTUP-READING.31` | Source/card/path and unique-ID audit; exact staged scope; Knowledge/memory/all nine doctrines; both history checks; diff review | PASS: 89 unchanged Perl files, 38 new unique IDs, 33 queued checkpoints pending, 14 new cards; no public/source changes. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.22` | Exact full-file reading/identity; authored-value/legacy arity controls; Knowledge reconciliation; focused continuity | PASS bounded controls and baseline identity; final staged gates precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.23` | Exact prefix/full-file identity; existing Knowledge milestone reconciliation; managed MethodLowering trace suite; focused continuity | PASS four top-level tests and prefix identity; required staged commit gates precede landing. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.24` | Exact range/full-file identity; signature/retirement Knowledge; variadic function suite; public mixed-path read; focused continuity | PASS 66 tests and error-free one result; required staged gates precede landing. |
 
 ## Commit Log
 
@@ -2360,6 +2397,7 @@ zero bytes and Git was clean before activating `.31`; no background job remains.
 | `SESSION-STARTUP-READING.31` | `SESSION-STARTUP-READING.31 - preserve forward reading and own confirmed repairs` | Forward coverage and confirmed findings durably owned; prior canonical success; queued checkpoints remain pending. |
 | `SESSION-STARTUP-READING.3.2.22` | `SESSION-STARTUP-READING.3.2.22 - read method expression normalization` | MethodExpr comprehension and scope precedence recorded; next MethodLowering prefix. |
 | `SESSION-STARTUP-READING.3.2.23` | `SESSION-STARTUP-READING.3.2.23 - read method lowering prefix and reconcile milestones` | Prefix comprehension and dated AST/binding/callable milestone ownership reconciled; no source/book change. |
+| `SESSION-STARTUP-READING.3.2.24` | `SESSION-STARTUP-READING.3.2.24 - read function signatures and statement lowering` | Function signatures and guarded statement bridges read; four historical Knowledge records reconciled. |
 
 ## Changelog
 
@@ -2419,3 +2457,5 @@ zero bytes and Git was clean before activating `.31`; no background job remains.
   dated migration spellings. Queued checkpoints continue with the MethodLowering prefix.
 - `2026-09-06`: `.3.2.23` records MethodLowering prefix comprehension and qualifies dated Knowledge rollout notes;
   four trace tests pass, and `.3.2.24` continues the next prefix range.
+- `2026-09-06`: `.3.2.24` records signature/local-binding and statement-bridge comprehension, validates 66 variadic
+  tests plus a current mixed-path read, and reconciles retired-syntax Knowledge; next `.3.2.25`.
