@@ -54,3 +54,14 @@ the emitted dependency string; it is not a newly executed fresh-process generate
 Rust and other backend native consumers are not rerun by this reading checkpoint. The July execution
 counts in the evidence header remain historical. See [[unicode-17-case-contract-data]] for current
 five-module regeneration proof.
+
+## September 6 middle Perl table checkpoint
+
+`.3.2.50` reconciles the complete `.31` reading of lines 1501–3000: 32,854 bytes,
+SHA-256 `02b460974dd06064b0af0ea3ac7ff1164ffc53e2ee71c1721dd5a4f652c68f1f`.
+The range finishes the lower map and begins the upper map; the upper-map tail and contextual-property
+algorithm remain the next checkpoint. Full mappings such as sharp-s to `0053 0053` intentionally expand
+one input scalar. They do not introduce locale tailoring or normalization. Current table, generator,
+neutral contract, checker, and consumer bytes match the preceding checkpoint, whose five-module
+regeneration, 12 neutral fixtures, and 52 Perl tests remain the retained proof. No second runtime run
+or duplicate physical reading credit is claimed.

@@ -856,12 +856,19 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.49 - reconcile first generated Unicode case range`
 
 - ID: `SESSION-STARTUP-READING.3.2.50`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 48: 1,500 lines/fragments, 32,854 bytes.
   Scope: `perl/LinkedSpec/UnicodeCaseMapping.pm` lines 1501–3000.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Reconcile .31's complete 1,500-line Unicode middle-range reading and current exact baseline; retain just-consumed unchanged five-module regeneration and Perl52 proof; canonical Knowledge and reading-status consistency; memory/history/fast doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Complete .31-owned reading of 1,500 lines / 32,854 bytes reconciled; exact baseline fragment
+    SHA-256 and unchanged table/generator/contract/checker/consumer identity pass. Retain .3.2.49's
+    five-module regeneration, 12 neutral fixtures and 52 Perl tests without rerunning unchanged suites.
+    Inventory Knowledge now separates completed physical mdBook reading from pending formal alignment.
+  Commit: `SESSION-STARTUP-READING.3.2.50 - reconcile middle Unicode table range and reading status`
 
 - ID: `SESSION-STARTUP-READING.3.2.51`
   Status: `pending`
@@ -1964,7 +1971,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.50` | `pending` | reconcile UnicodeCaseMapping.pm 1501–3000 with the completed table reading and pinned authority. |
+| 1 | `SESSION-STARTUP-READING.3.2.51` | `pending` | reconcile UnicodeCaseMapping.pm 3001–3835, including contextual properties and the evaluator. |
 
 ## Reading Ledger
 
@@ -1975,7 +1982,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.50`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.51`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -3794,6 +3801,24 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   passing, brief cleared, and clean status before activation. Roadmap/physical mdBook Yes; codebase No,
   formal .4 and repairs pending. Next .3.2.50.
 
+### Middle generated Unicode range and precise reading status at `.3.2.50`
+
+- Activated from clean `a32114213ec20ab003551fc428566b345c3cc8dd` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- The complete 1501–3000 physical reading is already durable under .31. Reconcile its 1,500 lines /
+  32,854 bytes with exact baseline SHA-256 02b460974dd06064b0af0ea3ac7ff1164ffc53e2ee71c1721dd5a4f652c68f1f.
+  Revisit the 1501–1625 lower/upper seam and 2988–3005 boundary; no duplicate coverage credit.
+- This range finishes lower mappings and opens the upper table. Full sharp-s expansion is intentional
+  under ADR 0027. Contextual property ranges and evaluator remain the next checkpoint, with earlier
+  supporting reading retained. No data, generator, normalization, locale, or behavior change occurs.
+- Exact table, generator/upstream, neutral contract, checker and consumer bytes match a3211421.
+  Retain its consumed five-module regeneration/12 neutral fixtures and 52 Perl tests; no fresh peer
+  execution or unchanged-suite rerun. Update the canonical Perl/Rust Knowledge with the precise range.
+- Retrieve startup inventory Knowledge and clarify its stale book-reading status: physical mdBook
+  reading is complete across 50 files under .31/.3.2.42; formal .4 alignment is still pending.
+  Codebase reading remains No and no unread first-party input receives credit.
+- Prior a32114213ec20ab003551fc428566b345c3cc8dd passed all nine doctrines/post-pointer;
+  brief cleared and clean status verified before activation. Next .3.2.51.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -3844,7 +3869,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.2.46` is item 50/100 at `7c2d6ee0`;
   `.3.2.47` is item 51/100 at `6654c0df`;
   `.3.2.48` is item 52/100 at `69e221bf`;
-  `.3.2.49` is item 53/100 once committed.
+  `.3.2.49` is item 53/100 at `a3211421`;
+  `.3.2.50` is item 54/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -3962,6 +3988,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.47` | Five complete ranges and exact baseline; unchanged staged runtime/consumer/checker/contract identity; four Knowledge owners; focused continuity | PASS bounded reading and retained proof; legacy metadata/general authority boundary explicit; .44 remains owned. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.48` | Complete Trace/baseline; 20 direct/wrapped exception controls; three generated suites 11 tests; unchanged CLI proof; Knowledge and focused continuity | PASS focused reading and tests; .24 retained with direct/wrapper distinction and exact object-identity evidence. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.49` | Prior full first-range reading + exact identity; ADR0027 and full checker/consumer; offline five-module regeneration/12 fixtures; Perl52; focused continuity | PASS; current regeneration coverage corrected, generated/carrier proof scoped, no new physical credit. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.50` | Prior complete middle-range reading; exact baseline and unchanged inputs; retained regeneration/12 fixtures/Perl52; Knowledge status; focused continuity | PASS; generated semantics unchanged; physical book/formal alignment distinction corrected. |
 
 ## Commit Log
 
@@ -4021,6 +4048,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.2.47` | `SESSION-STARTUP-READING.3.2.47 - read staged runtime and legacy registry boundaries` | Staged suffix/runtime/marker/policy/legacy registry read; exact unchanged proof and v1/v2 separation preserved. |
 | `SESSION-STARTUP-READING.3.2.48` | `SESSION-STARTUP-READING.3.2.48 - read Trace and qualify lazy exception-state evidence` | Trace read; 20 diagnostic controls and 11 passing tests qualify .24 without claiming repair. |
 | `SESSION-STARTUP-READING.3.2.49` | `SESSION-STARTUP-READING.3.2.49 - reconcile first generated Unicode case range` | First Unicode range reconciled; five-module regeneration and 52 Perl tests preserve pinned authority. |
+| `SESSION-STARTUP-READING.3.2.50` | `SESSION-STARTUP-READING.3.2.50 - reconcile middle Unicode table range and reading status` | Unicode lower/upper table transition reconciled; current reading status and retained proof preserved. |
 
 ## Changelog
 
@@ -4124,3 +4152,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-06`: `.3.2.47` completes staged runtime and legacy registry reading, records fresh authority/private marker lifetime, and separates legacy cache-key metadata from general scheduling.
 - `2026-09-06`: `.3.2.48` completes Trace reading, records 20 direct/wrapped string/object controls and 11 generated tests, and qualifies exception-state and historical CLI claims.
 - `2026-09-06`: `.3.2.49` reconciles the first Unicode table range from complete .31 reading, refreshes five-module regeneration coverage, and records 52 current Perl tests.
+- `2026-09-06`: `.3.2.50` reconciles the middle Unicode mapping range and clarifies physical mdBook completion versus pending formal alignment in inventory Knowledge.

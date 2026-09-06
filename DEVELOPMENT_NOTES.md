@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.50 — completed physical reading does not imply completed alignment
+
+The table checkpoint reuses complete .31 reading plus exact current identity, while the mdBook inventory now states its completed physical coverage separately from the pending .4 alignment audit. Neither status grants unread source credit. The preceding Unicode regeneration and 52-test Perl evidence remain valid for unchanged inputs.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.49 — generated-table identity and runtime execution are separate evidence
 
 The current checker byte-compares six generated files and independently evaluates the neutral fixtures. That establishes source/data consistency for all backends; fresh Perl runtime evidence comes from the separate 52-test consumer. Its generated-source check inspects the dependency declaration only. The checkpoint retains .31's complete physical reading and does not claim fresh native execution for the other runtimes.

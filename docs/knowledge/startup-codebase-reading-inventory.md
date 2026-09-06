@@ -8,7 +8,7 @@ answers:
   - does startup reading include noncore and generated fixtures
   - how are startup reading ranges bounded
 date: 2026-09-06
-status: inventory complete; source and book reading incomplete
+status: inventory complete; codebase reading incomplete; physical mdBook reading complete, formal alignment pending
 tags: [continuity, reading, codebase, inventory, task-tree]
 evidence: "SESSION-STARTUP-READING.3.1 inventories exact Git blobs at baeb984e36a94a15951cd23d4c52def5064cdaca: 2,547 entries / 52,084,744 stored bytes, including one excluded rgx gitlink, 50 book entries, 1,197 durable-memory entries, 28 root Markdown files, and 1,271 source/tool/fixture entries. Source lanes contain 22,332,523 bytes; 1,267 text entries have 565,122 LF delimiters and four pinned gzip inputs add 54,500 decoded LFs. Enumeration/decompression is not reading credit."
 reverify:
@@ -30,7 +30,9 @@ source tree to read wholesale, and loading the generated Knowledge Map is not co
 Every reading child must name exact files and inclusive ranges before execution. Bound each at 1,500 decoded
 text lines and 65,536 bytes, use smaller output chunks, and retain unread suffixes. A single over-limit line
 needs explicit byte ranges. The first child `.3.2.1` owns the five facade/invocation/context files at 1,430
-lines / 56,706 bytes. Remaining codebase and book answers stay No until actual reading and final delta review.
+lines / 56,706 bytes. The overall codebase answer stays No until complete reading and final delta review.
+The physical mdBook answer is now Yes: `.31` and `.3.2.42` preserve complete 50-file coverage; formal
+`.4` alignment remains pending. `.3.2.50` reconciles this status wording without granting unread source credit.
 
 Do not copy this inventory into an unbounded parallel manifest. Git stores the exact population and object
 identities; the task-tree stores the selectors, ownership, range progress, and completion evidence.

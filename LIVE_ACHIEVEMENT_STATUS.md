@@ -5,21 +5,24 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.50`–`.3.2.54` remain pending.
+  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.51`–`.3.2.54` remain pending.
 - Repairs `.7`–`.30` and `.32`–`.44` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.49` reconciles the first generated Unicode range and verifies its pinned data authority.
-  This is item 53/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.2.50` reconciles the middle Unicode table range and clarifies reading inventory status.
+  This is item 54/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.50`: reconcile UnicodeCaseMapping.pm 1501–3000 with the completed table reading and pinned authority.
+- Activate `SESSION-STARTUP-READING.3.2.51`: reconcile UnicodeCaseMapping.pm 3001–3835, including contextual properties and the evaluator.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.50` reconciles the previously read lower/upper table transition.
+  Unchanged regeneration/Perl52 proof is retained; physical book completion stays distinct from .4 alignment.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.49` reconciles 1,500 previously read Unicode table lines.
   Offline five-module regeneration and 12 fixtures pass; the Perl casing consumer passes 52 tests.
@@ -65,9 +68,6 @@
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.35` reads 32,768 bytes of MCP frame/schema data; binding and
   complete/141 admission proof pass, with six response-layer controls and one reconciled card.
-
-- `2026-09-06` — `SESSION-STARTUP-READING.3.2.34` reads binding/callable/codeblock/gap owners and MCP header;
-  134 tests and gap proof pass; six controls root boolean-literal defect `.35`.
 
 ## History
 

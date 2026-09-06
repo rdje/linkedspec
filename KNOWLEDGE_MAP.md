@@ -15667,7 +15667,7 @@ _Standalone rule blocks portably normalize to lifecycle I on all five backends_
 _Startup reading uses an exhaustive Git baseline with bounded source ranges_
 
 - **answers:** how large is the required startup codebase reading | which code is excluded from startup reading | where is complete codebase reading coverage tracked | does startup reading include noncore and generated fixtures | how are startup reading ranges bounded
-- **date:** 2026-09-06 · **status:** inventory complete; source and book reading incomplete
+- **date:** 2026-09-06 · **status:** inventory complete; codebase reading incomplete; physical mdBook reading complete, formal alignment pending
 - **evidence:** `SESSION-STARTUP-READING.3.1 inventories exact Git blobs at baeb984e36a94a15951cd23d4c52def5064cdaca: 2,547 entries / 52,084,744 stored bytes, including one excluded rgx gitlink, 50 book entries, 1,197 durable-memory entries, 28 root Markdown files, and 1,271 source/tool/fixture entries. Source lanes contain 22,332,523 bytes; 1,267 text entries have 565,122 LF delimiters and four pinned gzip inputs add 54,500 decoded LFs. Enumeration/decompression is not reading credit.`
 - **source:** [`docs/knowledge/startup-codebase-reading-inventory.md`](docs/knowledge/startup-codebase-reading-inventory.md)
 
