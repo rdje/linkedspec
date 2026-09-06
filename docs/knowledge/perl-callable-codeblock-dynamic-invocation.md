@@ -35,7 +35,9 @@ places that object in `runtime_ctx_ref->{last_error}{detail}`. Static helpers an
 precedence over same-named codeblock bindings.
 
 This fact is Perl-specific. ADR 0032 declaration `.11.3.3.1` and generic attached/contextual final-block behavior
-`.11.3.3.2` are complete; Perl closeout and Rust/Dart/Julia parity follow.
+`.11.3.3.2` are complete. The subsequent Perl closeout is `.11.3.4`, recorded by
+[[perl-generic-final-codeblock-normalization]]. The older native-parity next-step note belongs to that
+historical rollout; current backend progress remains owned by the task-tree.
 
 Related facts: [[callable-codeblock-literal-contract]], [[perl-callable-codeblock-literal-record]],
 [[terse-user-function-value-call-execution]], [[perl-generic-final-codeblock-normalization]].

@@ -47,7 +47,8 @@ Current builtin contracts cover helper `with` and receiver `with`, `walk_leaves`
 `reduce_leaves`. Unknown attached receiver methods may parse structurally but fail callable-contract validation;
 syntax recognition no longer grants semantics. Closeout `.11.3.4` found no raw-host fallback, stored coderef or
 captured environment, parser method allowlist, harray promotion, compatibility rewrite, or unresolved helper.
-Perl callable-codeblock behavior is closed; other backend implementations remain future.
+Perl callable-codeblock behavior is closed under `.11.3.4`. Other backend implementations were future work
+at that milestone; this dated note does not report their current rollout state.
 
 Related facts: [[final-codeblock-parameter-declaration]], [[callable-codeblock-literal-contract]],
 [[perl-callable-codeblock-dynamic-invocation]], [[perl-final-codeblock-signature-declaration-gap]].

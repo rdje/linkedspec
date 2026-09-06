@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `3e8b05cd343dafa0b67c536bfe0c9e6b52f074c7` — clean forward-reading intake.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.22 - read method expression normalization`.
+- activation_commit: `27ff841afdfb276f520d4988a5807df5e364e7f5` — clean preceding reading checkpoint.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.23 - read method lowering prefix and reconcile milestones`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: activate `.3.2.23`; complete MethodLowering baseline lines 1–1495,
+- next_action: activate `.3.2.24`; complete MethodLowering baseline lines 1496–2378,
   then continue queued reading. Intake `.31` preserves the forward source coverage and exact findings.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30` precede mutation setup; `.29` is part of `.5` adoption.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4985` is the twenty-sixth history segment; ADR `0102`
   authorizes exactly 28 collection files / 27 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; `.31` records all Perl source reading, pending per-leaf checkpoints, book coverage, and resumed batch progress (26/100 after `.3.2.22` lands).
+- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; `.31` records all Perl source reading, pending per-leaf checkpoints, book coverage, and resumed batch progress (27/100 after `.3.2.23` lands).

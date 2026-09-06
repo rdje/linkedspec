@@ -10,6 +10,11 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.23 — typed lowering and milestone chronology
+
+The prefix composes typed blocks, logical values, nested writes, and callable binding setup with explicit compatibility paths.
+Existing migration cards now distinguish their initial milestone from completed successors; detailed evidence stays in the task.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.22 — authored values precede legacy scope
 
 Already-valid authored arguments are cloned before optional-scope fallback; fixed-arity compatibility remains explicit.

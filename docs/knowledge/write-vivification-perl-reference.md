@@ -13,7 +13,7 @@ answers:
 date: 2026-08-31
 status: current on the Perl reference under FUTURE-PARITY-BACKLOG.19.2.1; portable capability admitted under .19.7
 tags: [dsl, actionir, assignment, autovivification, diagnostics, perl, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.19.2.1 unifies one- and many-segment bracket assignment as expression-bearing assign_nested_access, lowers evaluated segments left-to-right then RHS once, tracks absent versus explicitly bound null per rule/function invocation, and delegates isolated dense creation to LinkedSpec::BindingRuntime::nested_write. The runtime classifies evaluated strings as harray selectors, integer scalars as array selectors, and integral-valued number scalars as invalid numbers; it throws exact typed segment/kind/gap objects, snapshots after completed same-binding expression effects, commits no partial path, and returns detached updated roots. t/write_vivification_perl_contract.t projects all 5 AST and 7 syntax cases plus 11 success, 16 structural failure, dynamic-kind fidelity, detachment, evaluation, same-binding, both null-assignment spellings, exact live spans, and user-function boundaries from the frozen v1 fixture. Permanent ActionIR/trace/uniform suites pass 50 tests; a fresh exact-tree Phase 0 passes all 1,032 in 963 seconds after the earlier 12 stale source expectations were repaired. Rust, Dart, Julia, and Lua retain their earlier non-vivifying behavior until .19.3-.6; no portable/public admission occurs here."
+evidence: "FUTURE-PARITY-BACKLOG.19.2.1 unifies one- and many-segment bracket assignment as expression-bearing assign_nested_access, lowers evaluated segments left-to-right then RHS once, tracks absent versus explicitly bound null per rule/function invocation, and delegates isolated dense creation to LinkedSpec::BindingRuntime::nested_write. The runtime classifies evaluated strings as harray selectors, integer scalars as array selectors, and integral-valued number scalars as invalid numbers; it throws exact typed segment/kind/gap objects, snapshots after completed same-binding expression effects, commits no partial path, and returns detached updated roots. t/write_vivification_perl_contract.t projects all 5 AST and 7 syntax cases plus 11 success, 16 structural failure, dynamic-kind fidelity, detachment, evaluation, same-binding, both null-assignment spellings, exact live spans, and user-function boundaries from the frozen v1 fixture. Permanent ActionIR/trace/uniform suites pass 50 tests; a fresh exact-tree Phase 0 passes all 1,032 in 963 seconds after the earlier 12 stale source expectations were repaired. At this Perl-only milestone, Rust, Dart, Julia, and Lua retained their earlier behavior pending .19.3-.6; portable/public admission was outside its scope."
 reverify: "prove -Iperl t/write_vivification_perl_contract.t t/actionir_ast_parser.t t/trace_actionir_method_lowering.t t/uniform_binding_contract.t && bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py"
 ---
 
@@ -43,9 +43,10 @@ structural failure commits no partial path, although a segment/RHS side effect a
 snapshot remains ordinary program state. Success detaches the committed binding, expression result, initial tree,
 and aggregate RHS.
 
-Reads are unchanged and never create state. This card owns the Perl milestone, not portable admission. Rust and
-Dart have since implemented both contracts under `.19.3.1-.2` and `.19.4.1-.2`; Julia implements the write
-contract under `.19.5.1` but remains non-bang, while Lua retains both prior checked boundaries.
+Reads are unchanged and never create state. This card owns the Perl milestone. The intermediate rollout
+snapshot recorded Rust/Dart completion and Julia write-only progress while Lua was pending. September 6
+reading qualifies that snapshot as historical: later portable admission, six-runtime recurrence, and public
+closeout belong to `FUTURE-PARITY-BACKLOG.19.7`, `.19.8`, and `.19.9`, respectively.
 
 Related: [[write-vivification-neutral-contract]], [[terse-nested-value-path-assignment]],
 [[uniform-binding-neutral-contract]], [[write-map-leaves-neutral-composition]], and ADR `0036`.

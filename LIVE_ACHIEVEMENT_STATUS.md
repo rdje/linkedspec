@@ -5,21 +5,24 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   exhaustive inventory are complete; codebase/book remain incomplete. `rgx` and its dependencies are excluded.
 - Intake `.31` preserves all baseline Perl source reading, supporting book/native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.23`–`.3.2.54` remain pending.
+  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.24`–`.3.2.54` remain pending.
 - Repairs `.7`–`.30` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.22` completes MethodExpr comprehension and reconciles scope precedence.
-  This is item 26/100. Intake `.31` retains the forward coverage, findings, and prior canonical result.
+- `SESSION-STARTUP-READING.3.2.23` completes the MethodLowering prefix and reconciles dated Knowledge milestones.
+  This is item 27/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.23`: complete MethodLowering baseline lines 1–1495.
-  Continue required reading and policy review, then the tracked repairs before Rust mutation configuration.
+- Activate `SESSION-STARTUP-READING.3.2.24`: complete MethodLowering baseline lines 1496–2378.
+  Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.23` completes the MethodLowering prefix and reconciles dated AST/binding/callable
+  milestones; the next range is 1496–2378.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.22` completes MethodExpr comprehension and
   reconciles authored-value/scope precedence; MethodLowering is the next checkpoint.
@@ -65,9 +68,6 @@
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.9` reads the validation prefix, owns diagnostic source
   repairs `.11.1`–`.11.3`, and fixes Knowledge retrieval; `.3.2.10` reads the suffix next.
-
-- `2026-09-06` — `SESSION-STARTUP-READING.3.2.8` reads SpecEntry, reconciles historical coupling cards,
-  and owns unbound AND_BCODE input repair `.10`; `.3.2.9` reads Validation.pm next.
 
 ## History
 

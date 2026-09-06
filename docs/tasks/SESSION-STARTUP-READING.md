@@ -430,12 +430,19 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.22 - read method expression normalization`
 
 - ID: `SESSION-STARTUP-READING.3.2.23`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 21: 1,495 lines/fragments, 61,967 bytes.
   Scope: `perl/LinkedSpec/ActionIR/MethodLowering.pm` lines 1–1495.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+    Reconcile the older value-dispatcher record with its completed statement/block migration successors.
+  Verification tier: `focused`
+  Focused checks: Exact prefix/full-file identity and reading; existing AST, block, binding, and trace owners;
+    managed `prove -Iperl t/trace_actionir_method_lowering.t`; memory/doctrine/Knowledge/history and staged review.
+  Canonical trigger: `none` — bounded source-reading and Knowledge continuity only.
+  Verification: Full-file baseline identity and 1–1495 / 61,967-byte prefix coverage pass. Four MethodLowering trace
+    tests pass. Existing AST/block/binding/callable records reconcile; dated later-migration notes are qualified.
+    Focused memory/history/diff review and all required commit hooks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.23 - read method lowering prefix and reconcile milestones`
 
 - ID: `SESSION-STARTUP-READING.3.2.24`
   Status: `pending`
@@ -1326,7 +1333,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.23` | `pending` | Complete the MethodLowering prefix checkpoint, baseline lines 1–1495, using the forward coverage in `.31`. |
+| 1 | `SESSION-STARTUP-READING.3.2.24` | `pending` | complete MethodLowering baseline lines 1496–2378. |
 
 ## Reading Ledger
 
@@ -1337,7 +1344,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.23`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.24`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
 | mdBook | **No** | `.31` records fourteen complete book sources plus the two earlier local-CI ranges: 640,041 bytes of disjoint coverage. | Remaining 1,316,541 source bytes, formal chapter checkpoints, and rendered alignment under `.4`. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -2187,6 +2194,23 @@ zero bytes and Git was clean before activating `.31`; no background job remains.
   and rejects an empty list below minimum arity. This checks the source-owner boundary, not full runtime parity.
 - Source/book remain unchanged; codebase/book are No. Next `.3.2.23` covers MethodLowering 1–1495.
 
+### MethodLowering prefix and dated migration ownership at `.3.2.23`
+
+- Activated from clean `27ff841afdfb276f520d4988a5807df5e364e7f5` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- The prefix was read in eight untruncated forward ranges preserved by `.31`; checkpoint review additionally
+  consumed 1–405, 406–815, 816–1210, and 1211–1495. Full-file baseline identity and the 61,967-byte prefix agree.
+- Read trace/family adapters, typed logical evaluation, dependency assembly, direct-container inference,
+  inline if/switch values, AST-first block side effects/returns, and the guarded compatibility block path.
+  Source reconstruction, typed spans, nested-write evaluation/presence updates, binding mutation adapters,
+  helper classification, and contextual/dynamic codeblock binding setup complete this prefix.
+- Existing AST value/operator/call/block/fallback, trace, uniform-binding, write-vivification, and callable
+  Knowledge records were read and reconciled. The early value-dispatcher card now points to completed
+  `.4.1`–`.4.3`; intermediate write/callable rollout notes identify their historical milestone scope.
+- Managed `PERL5LIB= prove -Iperl t/trace_actionir_method_lowering.t` passes one file / four top-level tests.
+  No runtime repair or whole-helper audit is claimed. Existing `.19` still owns the dynamic receiver-guard gap.
+- All Perl source remains physically read; subsequent comprehension checkpoints remain pending. Codebase/book
+  stay No, and the next owned range is MethodLowering 1496–2378.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -2210,7 +2234,8 @@ zero bytes and Git was clean before activating `.31`; no background job remains.
   `.3.2.15` is item 18/100 at `762bef64`; `.3.2.16` is item 19/100 at `9a881160`; `.3.2.17` is item 20/100 at `34958c8f`; `.3.2.18` is item 21/100 at `54e1a487`;
   `.3.2.19` is item 22/100 at `8db085f2`; `.3.2.20` is item 23/100 at `ba9a494c`;
   `.3.2.21` is item 24/100 at `17d3e919`; `.31` is item 25/100 at `3e8b05cd`;
-  `.3.2.22` is item 26/100 once committed.
+  `.3.2.22` is item 26/100 at `27ff841a`;
+  `.3.2.23` is item 27/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -2301,6 +2326,7 @@ zero bytes and Git was clean before activating `.31`; no background job remains.
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.21` | Exact full canonical rerun, receipt, all nine doctrines, post-commit pointer and brief/status | PASS at `17d3e919`; mandatory chain, both CLI 66/66, Phase 0 1,032; optional flags unset/skipped. No pending job. |
 | `2026-09-06` | `SESSION-STARTUP-READING.31` | Source/card/path and unique-ID audit; exact staged scope; Knowledge/memory/all nine doctrines; both history checks; diff review | PASS: 89 unchanged Perl files, 38 new unique IDs, 33 queued checkpoints pending, 14 new cards; no public/source changes. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.22` | Exact full-file reading/identity; authored-value/legacy arity controls; Knowledge reconciliation; focused continuity | PASS bounded controls and baseline identity; final staged gates precede landing. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.23` | Exact prefix/full-file identity; existing Knowledge milestone reconciliation; managed MethodLowering trace suite; focused continuity | PASS four top-level tests and prefix identity; required staged commit gates precede landing. |
 
 ## Commit Log
 
@@ -2333,6 +2359,7 @@ zero bytes and Git was clean before activating `.31`; no background job remains.
 | `SESSION-STARTUP-READING.3.2.21` | `SESSION-STARTUP-READING.3.2.21 - read flow adapters and preserve required history` | Twenty-nine Perl files read; emptiness repairs owned; exact notes rollover and finite capacity recorded. |
 | `SESSION-STARTUP-READING.31` | `SESSION-STARTUP-READING.31 - preserve forward reading and own confirmed repairs` | Forward coverage and confirmed findings durably owned; prior canonical success; queued checkpoints remain pending. |
 | `SESSION-STARTUP-READING.3.2.22` | `SESSION-STARTUP-READING.3.2.22 - read method expression normalization` | MethodExpr comprehension and scope precedence recorded; next MethodLowering prefix. |
+| `SESSION-STARTUP-READING.3.2.23` | `SESSION-STARTUP-READING.3.2.23 - read method lowering prefix and reconcile milestones` | Prefix comprehension and dated AST/binding/callable milestone ownership reconciled; no source/book change. |
 
 ## Changelog
 
@@ -2390,3 +2417,5 @@ zero bytes and Git was clean before activating `.31`; no background job remains.
   owns repairs `.17`–`.30`, indexes the JSON observation artifact, and routes back to queued MethodExpr.
 - `2026-09-06`: `.3.2.22` closes MethodExpr comprehension, indexes its scope normalizer, and qualifies
   dated migration spellings. Queued checkpoints continue with the MethodLowering prefix.
+- `2026-09-06`: `.3.2.23` records MethodLowering prefix comprehension and qualifies dated Knowledge rollout notes;
+  four trace tests pass, and `.3.2.24` continues the next prefix range.

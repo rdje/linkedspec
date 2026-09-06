@@ -10,6 +10,11 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.23 — read method lowering prefix and reconcile milestones
+
+Read and reconcile MethodLowering 1–1495 (61,967 bytes); four focused trace tests pass.
+Existing Knowledge clarifies completed statement migration and historical rollout scope; focused continuity checks apply.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.22 — read method expression normalization
 
 Complete the MethodExpr checkpoint (298 lines / 7,800 bytes) and reconcile authored-value/scope precedence.
