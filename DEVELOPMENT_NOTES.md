@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.2 — byte-complete reading boundaries
+
+- Keep exact ranges in task ownership and object identity in Git. Verify line ranges as byte intervals so gaps,
+  overlaps, missing suffixes, and the 82,883-byte MCP payload cannot hide behind a line-count-only census.
+- The 52 planned leaves confer no reading credit. Execute each with Knowledge retrieval, untruncated smaller
+  outputs, comprehension evidence, source-delta review, and its own focused commit before advancing.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.1 — facade reading continuity
 
 - The five-file read agrees with the existing thin-facade ownership record. Keep compiler semantics in the

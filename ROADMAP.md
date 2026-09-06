@@ -4,9 +4,9 @@ LinkedSpec is being positioned as a progressive extraction parser DSL: fast, rec
 Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and policy contracts in a shorter operational form. Keep both roadmap files aligned when a slice changes active status or execution policy.
 
 Current session prerequisite: [SESSION-STARTUP-READING](docs/tasks/SESSION-STARTUP-READING.md) records the
-director-required reading before `RUST-MUTATION-TESTING.1`. Roadmap reading and exhaustive inventory `.3.1` are
-complete; `.3.2.1` read five facade/invocation owners, and `.3.2.2` splits remaining Perl reading next. `.7` repairs cleanup
-after codebase/book/policy reading; recovery/purge and mutation setup wait for that repair.
+required-reading baseline, exact coverage, and `rgx` exclusion. Roadmap reading is complete; codebase/book remain
+incomplete. `.3.2.2` owns all remaining Perl ranges; `.3.2.3` reads the dependency group next. Cleanup repair `.7`
+remains required after reading and before recovery/purge or Rust mutation setup.
 
 Rule-local cursor rollout is closed at 74 files / 8 complete + 0 pending / 60 mutations; recurring backend proof
 remains `tools/check_rule_local_cursor_five_backend.sh`.

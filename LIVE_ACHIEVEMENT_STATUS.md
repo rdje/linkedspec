@@ -9,15 +9,18 @@
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.1` completes five facade/invocation/context files with exact baseline identity.
-  This is item 4/100 in the resumed batch. The remaining codebase and book are not claimed read.
+- `SESSION-STARTUP-READING.3.2.2` owns 52 bounded leaves for all 84 remaining Perl paths, with exact byte coverage.
+  This is item 5/100 in the resumed batch. Codebase and book reading remain incomplete.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.2` and split the remaining 84 Perl files into bounded children. Follow the recorded
-  book/policy review sequence, then repair `.7` before activating `RUST-MUTATION-TESTING.1` for safe configuration.
+- Activate `SESSION-STARTUP-READING.3.2.3` and read its five exact resolution/loading dependency files. Follow the
+  recorded book/policy review sequence, then repair `.7` before `RUST-MUTATION-TESTING.1` safe configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.2` partitions every remaining Perl byte into 52 bounded leaves;
+  independent coverage/budget checks pass, and `.3.2.3` is next.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.1` reads five invocation owners, reconciles existing Knowledge,
   and preserves unchanged source/syntax. Remaining Perl reading starts with `.3.2.2` decomposition.
@@ -69,10 +72,6 @@
 
 - `2026-09-02` — `.19.4.1` implements Dart write vivification through all supported typed and executable routes;
   450/450 package tests, 24 temporary owners / 47 packages, CLI 66x2, corpus 105/105, and exact canonical CI pass.
-
-- `2026-09-02` — `.19.3.4.0` reproduces two older-artifact macOS policy waits at 45.32/51.75 seconds versus
-  immediate 0.00-second repeats, then proves a wholly unmanipulated unique control at 0.41 seconds. No persistent
-  LinkedSpec defect or safe repair exists; `.19.3.4.1` is not required and Rust `.19.3` closes.
 
 ## History
 

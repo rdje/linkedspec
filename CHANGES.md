@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.2 — partition remaining Perl reading
+
+- Owned all 84 remaining baseline Perl paths in 52 bounded leaves, including exact byte fragments for the long
+  generated MCP JSON payload. Independent interval checks prove 2,076,984 bytes covered once and all budgets met.
+- Perl remains baseline-identical. No new reading credit or public change; `.3.2.3` reads the dependency group next.
+- Validation: exact coverage/budgets/delta, focused memory/doctrine/Knowledge, history pressure, and staged review.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.1 — read facade invocation owners
 
 - Read all five exact facade/dispatch/runtime/parser-factory/context files through EOF: 1,430 lines / 56,706

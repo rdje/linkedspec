@@ -2,9 +2,9 @@
 Execution-oriented companion to `ROADMAP.md`.
 
 Current session prerequisite: [SESSION-STARTUP-READING](docs/tasks/SESSION-STARTUP-READING.md) records the
-director-required reading before `RUST-MUTATION-TESTING.1`. Roadmap reading and exhaustive inventory `.3.1` are
-complete; `.3.2.1` read five facade/invocation owners, and `.3.2.2` splits remaining Perl reading next. `.7` repairs cleanup
-after codebase/book/policy reading; recovery/purge and mutation setup wait for that repair.
+required-reading baseline, exact coverage, and `rgx` exclusion. Roadmap reading is complete; codebase/book remain
+incomplete. `.3.2.2` owns all remaining Perl ranges; `.3.2.3` reads the dependency group next. Cleanup repair `.7`
+remains required after reading and before recovery/purge or Rust mutation setup.
 
 Rule-local cursor rollout is closed at 74 files / 8 complete + 0 pending / 60 mutations, with
 selected 5x2x5 recurring and public proof.

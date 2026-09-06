@@ -80,7 +80,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING.3.2`
   Status: `active`
   Goal: Read all 89 baseline Perl entries and their current deltas, starting with the facade invocation owners.
-  Children: `.3.2.1`, `.3.2.2`
+  Children: `.3.2.1`, `.3.2.2`, `.3.2.3`, `.3.2.4`, `.3.2.5`, `.3.2.6`, `.3.2.7`, `.3.2.8`, `.3.2.9`, `.3.2.10`, `.3.2.11`, `.3.2.12`, `.3.2.13`, `.3.2.14`, `.3.2.15`, `.3.2.16`, `.3.2.17`, `.3.2.18`, `.3.2.19`, `.3.2.20`, `.3.2.21`, `.3.2.22`, `.3.2.23`, `.3.2.24`, `.3.2.25`, `.3.2.26`, `.3.2.27`, `.3.2.28`, `.3.2.29`, `.3.2.30`, `.3.2.31`, `.3.2.32`, `.3.2.33`, `.3.2.34`, `.3.2.35`, `.3.2.36`, `.3.2.37`, `.3.2.38`, `.3.2.39`, `.3.2.40`, `.3.2.41`, `.3.2.42`, `.3.2.43`, `.3.2.44`, `.3.2.45`, `.3.2.46`, `.3.2.47`, `.3.2.48`, `.3.2.49`, `.3.2.50`, `.3.2.51`, `.3.2.52`, `.3.2.53`, `.3.2.54`
 
 - ID: `SESSION-STARTUP-READING.3.2.1`
   Status: `done`
@@ -98,10 +98,432 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.1 - read facade invocation owners`
 
 - ID: `SESSION-STARTUP-READING.3.2.2`
-  Status: `pending`
+  Status: `done`
   Goal: Split the remaining 84 baseline Perl paths into exact bounded reading children before reading them.
   Acceptance: Subtract `.3.2.1` by exact path; use the inventory's byte/line boundary rule and retain every file.
     Prior supporting read coverage remains explicit and cannot silently remove an unread interval.
+  Verification tier: `focused`
+  Focused checks: Exact baseline path/range coverage and byte/line budgets; baseline-to-current Perl delta;
+    `bash scripts/check_memory_architecture.sh`; required pre-commit `bash scripts/check_doctrines.sh`;
+    both `tools/roll_document_history.pl --check` surfaces; `git diff --check`.
+  Canonical trigger: `none` — reading decomposition and continuity only; no source or policy change.
+  Verification: Independent byte-interval audit passes: all 84 exact remaining paths / 2,076,984 bytes
+    covered once by 52 bounded leaves; declared budgets match and Perl source remains baseline-identical.
+  Commit: `SESSION-STARTUP-READING.3.2.2 - partition remaining Perl reading`
+
+- ID: `SESSION-STARTUP-READING.3.2.3`
+  Status: `pending`
+  Goal: Read baseline Perl group 1: 1,103 lines/fragments, 36,759 bytes.
+  Scope: `perl/LinkedSpec/Resolver.pm` lines 1–223; `perl/LinkedSpec/SpecLoader.pm` lines 1–352; `perl/LinkedSpec/EntryRuleSelection.pm` lines 1–74; `perl/LinkedSpec/GeneratedSource.pm` lines 1–319; `perl/LinkedSpec/BootstrapSpec.pm` lines 1–135.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.4`
+  Status: `pending`
+  Goal: Read baseline Perl group 2: 1,196 lines/fragments, 39,291 bytes.
+  Scope: `perl/LinkedSpec/BootstrapSpec/Core.pm` lines 1–1196.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.5`
+  Status: `pending`
+  Goal: Read baseline Perl group 3: 590 lines/fragments, 23,054 bytes.
+  Scope: `perl/LinkedSpec/CompilerState.pm` lines 1–590.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.6`
+  Status: `pending`
+  Goal: Read baseline Perl group 4: 1,041 lines/fragments, 41,073 bytes.
+  Scope: `perl/LinkedSpec/Compiler.pm` lines 1–1041.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.7`
+  Status: `pending`
+  Goal: Read baseline Perl group 5: 961 lines/fragments, 43,851 bytes.
+  Scope: `perl/LinkedSpec/Compiler.pm` lines 1042–2002.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.8`
+  Status: `pending`
+  Goal: Read baseline Perl group 6: 600 lines/fragments, 23,171 bytes.
+  Scope: `perl/LinkedSpec/SpecEntry.pm` lines 1–600.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.9`
+  Status: `pending`
+  Goal: Read baseline Perl group 7: 1,320 lines/fragments, 43,290 bytes.
+  Scope: `perl/LinkedSpec/Validation.pm` lines 1–1320.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.10`
+  Status: `pending`
+  Goal: Read baseline Perl group 8: 584 lines/fragments, 18,639 bytes.
+  Scope: `perl/LinkedSpec/Validation.pm` lines 1321–1904.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.11`
+  Status: `pending`
+  Goal: Read baseline Perl group 9: 987 lines/fragments, 31,462 bytes.
+  Scope: `perl/LinkedSpec/RuleIR.pm` lines 1–987.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.12`
+  Status: `pending`
+  Goal: Read baseline Perl group 10: 1,489 lines/fragments, 49,396 bytes.
+  Scope: `perl/LinkedSpec/RuleIR/EmitContext.pm` lines 1–1489.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.13`
+  Status: `pending`
+  Goal: Read baseline Perl group 11: 1,094 lines/fragments, 46,079 bytes.
+  Scope: `perl/LinkedSpec/RuleIR/EmitContext.pm` lines 1490–2583.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.14`
+  Status: `pending`
+  Goal: Read baseline Perl group 12: 1,403 lines/fragments, 53,304 bytes.
+  Scope: `perl/LinkedSpec/HandlerVariantEmitter.pm` lines 1–1403.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.15`
+  Status: `pending`
+  Goal: Read baseline Perl group 13: 736 lines/fragments, 24,430 bytes.
+  Scope: `perl/LinkedSpec/HandlerVariantEmitter.pm` lines 1404–1920; `perl/LinkedRE.pm` lines 1–148; `perl/LinkedSpec/ActionIR/AST.pm` lines 1–71.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.16`
+  Status: `pending`
+  Goal: Read baseline Perl group 14: 1,498 lines/fragments, 47,935 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/AST/Parser.pm` lines 1–1498.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.17`
+  Status: `pending`
+  Goal: Read baseline Perl group 15: 1,195 lines/fragments, 47,612 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/AST/Parser.pm` lines 1499–1686; `perl/LinkedSpec/ActionIR/ArrayPipeline.pm` lines 1–491; `perl/LinkedSpec/ActionIR/CanonicalEvents.pm` lines 1–297; `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` lines 1–219.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.18`
+  Status: `pending`
+  Goal: Read baseline Perl group 16: 1,396 lines/fragments, 65,503 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/Contracts.pm` lines 1–1396.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.19`
+  Status: `pending`
+  Goal: Read baseline Perl group 17: 1,117 lines/fragments, 48,433 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/Contracts.pm` lines 1397–2513.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.20`
+  Status: `pending`
+  Goal: Read baseline Perl group 18: 1,485 lines/fragments, 56,984 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/ControlFlow.pm` lines 1–1485.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.21`
+  Status: `pending`
+  Goal: Read baseline Perl group 19: 1,439 lines/fragments, 59,142 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/ControlFlow.pm` lines 1486–1796; `perl/LinkedSpec/ActionIR/DeclareMethod.pm` lines 1–328; `perl/LinkedSpec/ActionIR/Diagnostics.pm` lines 1–269; `perl/LinkedSpec/ActionIR/FlowExpr.pm` lines 1–531.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.22`
+  Status: `pending`
+  Goal: Read baseline Perl group 20: 298 lines/fragments, 7,800 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/MethodExpr.pm` lines 1–298.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.23`
+  Status: `pending`
+  Goal: Read baseline Perl group 21: 1,495 lines/fragments, 61,967 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/MethodLowering.pm` lines 1–1495.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.24`
+  Status: `pending`
+  Goal: Read baseline Perl group 22: 883 lines/fragments, 33,969 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/MethodLowering.pm` lines 1496–2378.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.25`
+  Status: `pending`
+  Goal: Read baseline Perl group 23: 1,365 lines/fragments, 65,506 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/MethodLowering.pm` lines 2379–3743.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.26`
+  Status: `pending`
+  Goal: Read baseline Perl group 24: 1,168 lines/fragments, 58,949 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/MethodLowering.pm` lines 3744–4911.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.27`
+  Status: `pending`
+  Goal: Read baseline Perl group 25: 1,031 lines/fragments, 64,411 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/MethodLowering.pm` lines 4912–5942.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.28`
+  Status: `pending`
+  Goal: Read baseline Perl group 26: 1,303 lines/fragments, 64,878 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/MethodLowering.pm` lines 5943–7245.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.29`
+  Status: `pending`
+  Goal: Read baseline Perl group 27: 977 lines/fragments, 36,165 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/MethodLowering.pm` lines 7246–8057; `perl/LinkedSpec/ActionIR/ProgressiveSpanDispatch.pm` lines 1–165.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.30`
+  Status: `pending`
+  Goal: Read baseline Perl group 28: 1,173 lines/fragments, 41,839 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/RewritePipeline.pm` lines 1–745; `perl/LinkedSpec/ActionIR/Scanner.pm` lines 1–90; `perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm` lines 1–338.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.31`
+  Status: `pending`
+  Goal: Read baseline Perl group 29: 1,433 lines/fragments, 41,163 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm` lines 1–1179; `perl/LinkedSpec/ActionIR/Scanner/PrimitiveBasicRules.pm` lines 1–254.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.32`
+  Status: `pending`
+  Goal: Read baseline Perl group 30: 1,355 lines/fragments, 48,756 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/Scanner/PrimitivePipelineRules.pm` lines 1–571; `perl/LinkedSpec/ActionIR/Scanner/RecognitionTransactionRules.pm` lines 1–124; `perl/LinkedSpec/ActionIR/ScannerCore.pm` lines 1–223; `perl/LinkedSpec/ActionIR/StagedParseJob.pm` lines 1–393; `perl/LinkedSpec/ActionIR/StatementSplit.pm` lines 1–44.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.33`
+  Status: `pending`
+  Goal: Read baseline Perl group 31: 1,423 lines/fragments, 47,678 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/StatementSplit/Core.pm` lines 1–419; `perl/LinkedSpec/ActionIR/StatementSplit/Mode.pm` lines 1–214; `perl/LinkedSpec/ActionIR/Trace.pm` lines 1–124; `perl/LinkedSpec/ActionIR/ValueExpr.pm` lines 1–666.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.34`
+  Status: `pending`
+  Goal: Read baseline Perl group 32: 1,264 lines/fragments, 39,889 bytes.
+  Scope: `perl/LinkedSpec/BindingRuntime.pm` lines 1–422; `perl/LinkedSpec/CallableContract.pm` lines 1–135; `perl/LinkedSpec/CodeblockRuntime.pm` lines 1–403; `perl/LinkedSpec/InterMatchGapRuntime.pm` lines 1–291; `perl/LinkedSpec/MCPContract.pm` lines 1–12; `perl/LinkedSpec/MCPContract.pm` lines 13–13.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.35`
+  Status: `pending`
+  Goal: Read baseline Perl group 33: 1 lines/fragments, 32,768 bytes.
+  Scope: `perl/LinkedSpec/MCPContract.pm` bytes 391–33158.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.36`
+  Status: `pending`
+  Goal: Read baseline Perl group 34: 1 lines/fragments, 32,768 bytes.
+  Scope: `perl/LinkedSpec/MCPContract.pm` bytes 33159–65926.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.37`
+  Status: `pending`
+  Goal: Read baseline Perl group 35: 1 lines/fragments, 17,347 bytes.
+  Scope: `perl/LinkedSpec/MCPContract.pm` bytes 65927–83273.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.38`
+  Status: `pending`
+  Goal: Read baseline Perl group 36: 1,484 lines/fragments, 51,303 bytes.
+  Scope: `perl/LinkedSpec/MCPContract.pm` lines 15–21; `perl/LinkedSpec/MCPContractRuntime.pm` lines 1–300; `perl/LinkedSpec/MCPServer.pm` lines 1–648; `perl/LinkedSpec/MCPWire.pm` lines 1–419; `perl/LinkedSpec/Numeric.pm` lines 1–110.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.39`
+  Status: `pending`
+  Goal: Read baseline Perl group 37: 1,496 lines/fragments, 52,208 bytes.
+  Scope: `perl/LinkedSpec/PluginBridge.pm` lines 1–199; `perl/LinkedSpec/PluginRegistry.pm` lines 1–130; `perl/LinkedSpec/ProgressiveSpanDispatch.pm` lines 1–937; `perl/LinkedSpec/ProgressiveSpanDispatchPolicy.pm` lines 1–58; `perl/LinkedSpec/ProgressiveSpanDispatchRuntime.pm` lines 1–172.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.40`
+  Status: `pending`
+  Goal: Read baseline Perl group 38: 924 lines/fragments, 33,632 bytes.
+  Scope: `perl/LinkedSpec/RecognitionTransaction.pm` lines 1–655; `perl/LinkedSpec/RecognitionTransactionPolicy.pm` lines 1–269.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.41`
+  Status: `pending`
+  Goal: Read baseline Perl group 39: 1,269 lines/fragments, 39,210 bytes.
+  Scope: `perl/LinkedSpec/RecognitionTransactionRuntime.pm` lines 1–681; `perl/LinkedSpec/RecursiveObservationPolicy.pm` lines 1–71; `perl/LinkedSpec/RuntimeDiagnosticOutput.pm` lines 1–247; `perl/LinkedSpec/RuntimeLogical.pm` lines 1–96; `perl/LinkedSpec/RuntimeSemanticObservation.pm` lines 1–174.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.42`
+  Status: `pending`
+  Goal: Read baseline Perl group 40: 1,148 lines/fragments, 37,003 bytes.
+  Scope: `perl/LinkedSpec/SemanticCallProjection.pm` lines 1–753; `perl/LinkedSpec/SemanticIndex.pm` lines 1–395.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.43`
+  Status: `pending`
+  Goal: Read baseline Perl group 41: 982 lines/fragments, 35,427 bytes.
+  Scope: `perl/LinkedSpec/SemanticQuery.pm` lines 1–596; `perl/LinkedSpec/SemanticRuntimeProjection.pm` lines 1–214; `perl/LinkedSpec/SemanticSourceMap.pm` lines 1–172.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.44`
+  Status: `pending`
+  Goal: Read baseline Perl group 42: 1,067 lines/fragments, 34,029 bytes.
+  Scope: `perl/LinkedSpec/SemanticStaticProjection.pm` lines 1–1067.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.45`
+  Status: `pending`
+  Goal: Read baseline Perl group 43: 700 lines/fragments, 21,209 bytes.
+  Scope: `perl/LinkedSpec/SourceLocation.pm` lines 1–700.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.46`
+  Status: `pending`
+  Goal: Read baseline Perl group 44: 1,498 lines/fragments, 49,952 bytes.
+  Scope: `perl/LinkedSpec/StagedASTEnrichment.pm` lines 1–1498.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.47`
+  Status: `pending`
+  Goal: Read baseline Perl group 45: 1,374 lines/fragments, 43,289 bytes.
+  Scope: `perl/LinkedSpec/StagedASTEnrichment.pm` lines 1499–2013; `perl/LinkedSpec/StagedASTEnrichmentRuntime.pm` lines 1–120; `perl/LinkedSpec/StagedParseJob.pm` lines 1–352; `perl/LinkedSpec/StagedParseJobPolicy.pm` lines 1–59; `perl/LinkedSpec/StagedParserRegistry.pm` lines 1–328.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.48`
+  Status: `pending`
+  Goal: Read baseline Perl group 46: 521 lines/fragments, 16,259 bytes.
+  Scope: `perl/LinkedSpec/Trace.pm` lines 1–521.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.49`
+  Status: `pending`
+  Goal: Read baseline Perl group 47: 1,500 lines/fragments, 32,073 bytes.
+  Scope: `perl/LinkedSpec/UnicodeCaseMapping.pm` lines 1–1500.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.50`
+  Status: `pending`
+  Goal: Read baseline Perl group 48: 1,500 lines/fragments, 32,854 bytes.
+  Scope: `perl/LinkedSpec/UnicodeCaseMapping.pm` lines 1501–3000.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.51`
+  Status: `pending`
+  Goal: Read baseline Perl group 49: 835 lines/fragments, 17,404 bytes.
+  Scope: `perl/LinkedSpec/UnicodeCaseMapping.pm` lines 3001–3835.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.52`
+  Status: `pending`
+  Goal: Read baseline Perl group 50: 855 lines/fragments, 17,340 bytes.
+  Scope: `perl/LinkedSpec/UnicodeXIDContinue.pm` lines 1–855.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.53`
+  Status: `pending`
+  Goal: Read baseline Perl group 51: 1,202 lines/fragments, 45,829 bytes.
+  Scope: `perl/LinkedSpec/UserFunctionRegistry.pm` lines 1–773; `perl/PPlugin.pm` lines 1–331; `perl/PathSearch.pm` lines 1–47; `perl/env.conf` lines 1–51.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.54`
+  Status: `pending`
+  Goal: Read baseline Perl group 52: 839 lines/fragments, 22,702 bytes.
+  Scope: `perl/gdcheck.pl` lines 1–431; `perl/htmlcss_driver.pl` lines 1–166; `perl/ptchange.pl` lines 1–242.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
   Verification: `pending`
   Commit: `pending`
 
@@ -222,7 +644,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.2` | `pending` | Split the remaining 84 baseline Perl paths into exact bounded reading children. |
+| 1 | `SESSION-STARTUP-READING.3.2.3` | `pending` | Read the exact resolver/load/root-selection/generated-source/bootstrap facade group. |
 
 ## Reading Ledger
 
@@ -322,6 +744,31 @@ relationships despite prior facade coverage. Other inputs remain unread unless l
 records; all source/test/spec/tool inputs and all book files remain unchanged. Every checkpoint's own final diff
 is reviewed separately.
 
+### Shared Perl-reading acceptance and decomposition at `.3.2.2`
+
+The 52 pending siblings `.3.2.3`–`.3.2.54` own all 84 remaining baseline Perl paths / 2,076,984 bytes exactly
+once. Each Scope uses inclusive, one-based baseline line or byte ranges; byte offsets start at the beginning
+of the named blob. The five `.3.2.1` paths are excluded by exact name. The first group follows the facade's
+resolution/loading dependencies. Large modules split at declarations or blank statement boundaries where
+possible; generated table rows remain complete records. Every suffix is owned, and every leaf fits the
+1,500-line / 65,536-byte limit. Reading uses smaller untruncated output chunks within that scope.
+
+`MCPContract.pm` line 14 is an 82,883-byte generated payload: `.3.2.35`–`.3.2.37` own its three byte fragments.
+The preceding 13 lines and following seven lines remain explicitly owned. These byte fragments intersect the
+same logical line, so summing per-leaf line/fragments is not a distinct-line total. No generated JSON is omitted.
+
+For every reading child: activate its existing task owner first; retrieve the relevant Knowledge owner before
+interpreting code; read every scoped byte without truncation; reconcile comprehension and record exact
+coverage; diagnose surprising behavior with Toolbox probes and own any repair; review baseline/current deltas;
+record focused changed-surface checks and required memory/doctrine/history proof; update continuity and commit
+before advancing. Reading alone is not runtime signoff. Public/book changes remain conditional on material
+public findings and the startup authorization boundary. No code or book reading credit comes from this plan.
+
+Independent verification converts all declared line ranges to baseline byte intervals and requires contiguous,
+non-overlapping coverage from byte 1 through EOF for all 84 paths, no extra path, and each declared leaf budget.
+This plan adds no second manifest: the owned task Scope fields are the reading plan; Git remains the file/object
+inventory. Final `.3.11` still reconciles all first-party lanes and current deltas.
+
 ### Facade invocation reading at `.3.2.1`
 
 - Completed `perl/LinkedSpec.pm` 1–296, `perl/LinkedSpec/OwnerDispatch.pm` 1–220,
@@ -355,7 +802,7 @@ is reviewed separately.
 - No runtime behavior was verified by reading. No new public explanation is warranted by this checkpoint;
   substantive codebase/book drift, if found during `.3`/`.4`, must receive an owning leaf before remediation.
 - Batch history: `.2` is resumed item 1/100 at `d6d3c890`; `.6` is item 2/100 at `03d692c1`; `.3.1` is item 3/100
-  at `942c6138`; `.3.2.1` is item 4/100 once committed. `.1` belongs
+  at `942c6138`; `.3.2.1` is item 4/100 at `c0eb1acf`; `.3.2.2` is item 5/100 once committed. `.1` belongs
   to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -396,6 +843,8 @@ is reviewed separately.
 | `2026-09-06` | `SESSION-STARTUP-READING.3.1` | Managed Perl facade/phase0 syntax; both history-pressure checks; diff review | PASS; both syntax checks OK, change-history warns below rollover, engineering notes OK. Required pre-commit supplies final doctrine/Knowledge proof. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.1` | Required pre-commit Knowledge and all nine doctrines; post-commit pointer; clean status/empty brief | PASS at `942c6138`. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.1` | Exact five-file full reading, baseline identity, existing owner/trivia Knowledge, managed facade/phase0 syntax | PASS; 1,430 lines / 56,706 bytes covered, no production delta. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.1` | Required pre-commit Knowledge and all nine doctrines; post-commit pointer; clean status/empty brief | PASS at `c0eb1acf`. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.2` | Independent byte-interval coverage/budget audit and baseline Perl diff | PASS: 52 leaves, 84 exact paths, 2,076,984 bytes, no gaps/overlaps/source delta. |
 
 ## Commit Log
 
@@ -406,6 +855,7 @@ is reviewed separately.
 | `SESSION-STARTUP-READING.6` | `SESSION-STARTUP-READING.6 - diagnose denied liveness probes` | Exact causal evidence and owned repair; no production change or deletion test. |
 | `SESSION-STARTUP-READING.3.1` | `SESSION-STARTUP-READING.3.1 - bound the codebase reading inventory` | Complete baseline accounting and bounded next child; source/book reading still incomplete. |
 | `SESSION-STARTUP-READING.3.2.1` | `SESSION-STARTUP-READING.3.2.1 - read facade invocation owners` | Five unique Perl files complete; remaining 84 Perl entries and other lanes remain unread. |
+| `SESSION-STARTUP-READING.3.2.2` | `SESSION-STARTUP-READING.3.2.2 - partition remaining Perl reading` | All unread Perl bytes owned before reading; no new reading credit. |
 
 ## Changelog
 
@@ -419,3 +869,5 @@ is reviewed separately.
   defines exact `.3.2.1` coverage before source reading. No production or public-book change.
 - `2026-09-06`: `.3.2.1` completes the five-file invocation boundary and reconciles it with existing Knowledge;
   `.3.2.2` owns decomposition of the remaining 84 Perl paths.
+- `2026-09-06`: `.3.2.2` owns 52 exact remaining Perl groups, including byte fragments for generated MCP JSON;
+  independent interval proof passes, and `.3.2.3` is the next reading leaf.
