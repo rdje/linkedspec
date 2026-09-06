@@ -5,21 +5,24 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   exhaustive inventory are complete; codebase/book remain incomplete. `rgx` and its dependencies are excluded.
 - Intake `.31` preserves all baseline Perl source reading, supporting book/native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.30`–`.3.2.54` remain pending.
+  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.31`–`.3.2.54` remain pending.
 - Repairs `.7`–`.30` and `.32`–`.33` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.29` completes the MethodLowering suffix and private progressive scanner, reconciling current admission pointers.
-  This is item 33/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.2.30` completes rewrite/scanner/flow reading and reconciles the current scanner and AST migration boundaries.
+  This is item 34/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.30`: complete RewritePipeline 1–745, Scanner 1–90, and Scanner/FlowRules 1–338.
+- Activate `SESSION-STARTUP-READING.3.2.31`: complete Scanner/LegacyRules 1–1179 and Scanner/PrimitiveBasicRules 1–254.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.30` reads rewrite and scanner/flow ownership;
+  five trace tests and the seven-dispatcher census pass; four Knowledge records reconcile.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.29` reads the lowering suffix and progressive scanner;
   129 Perl assertions and neutral 9/9/116 proof pass; three admission pointers reconcile.
@@ -65,9 +68,6 @@
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.16` reads AST parser 1–1498, proves nested offset loss,
   and owns `.15`; two focused parser suites pass, and `.3.2.17` finishes the parser and adapters.
-
-- `2026-09-06` — `SESSION-STARTUP-READING.3.2.15` finishes emitter/LinkedRE/AST, extends existing return
-  repairs to repetition, and reconciles diagnostic JSON; `.3.2.16` reads the AST parser next.
 
 ## History
 

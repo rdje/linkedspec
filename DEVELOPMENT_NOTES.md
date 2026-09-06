@@ -10,6 +10,11 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.30 — defined empty scanner results retain ownership
+
+ScannerCore orders staged, progressive, recognition, basic, pipeline, flow, and legacy dispatchers; the first defined result wins.
+Rewrite spans still use source text; the existing .18 lexical repair remains open, and completed AST/function work is reflected in Knowledge.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.29 — progressive private parity does not publish a helper
 
 The scanner exclusively owns a dispatch assignment and validates literal identities plus a bare span binding.

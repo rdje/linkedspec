@@ -10,6 +10,11 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.30 — read rewrite orchestration and reconcile scanner ownership
+
+Read 1,173 lines / 41,839 bytes across RewritePipeline, Scanner, and FlowRules; exact baseline identity passes.
+Five pipeline trace tests and seven-dispatcher census pass; reconcile four scanner/AST Knowledge records.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.29 — read lowering suffix and reconcile progressive admission
 
 Read 977 lines / 36,165 bytes across MethodLowering suffix and ProgressiveSpanDispatch; baseline identity passes.

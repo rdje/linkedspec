@@ -534,12 +534,18 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.29 - read lowering suffix and reconcile progressive admission`
 
 - ID: `SESSION-STARTUP-READING.3.2.30`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 28: 1,173 lines/fragments, 41,839 bytes.
   Scope: `perl/LinkedSpec/ActionIR/RewritePipeline.pm` lines 1–745; `perl/LinkedSpec/ActionIR/Scanner.pm` lines 1–90; `perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm` lines 1–338.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact range/full-file identity; AST migration, scanner registry, and trace Knowledge;
+    managed pipeline trace suite and registry census; memory/Knowledge/history and staged review.
+  Canonical trigger: `none` — source reading and Knowledge continuity only.
+  Verification: Exact full-file baseline identity and 1,173-line / 41,839-byte coverage pass. Managed pipeline
+    trace proof passes five top-level tests; callable registry census confirms seven ordered dispatchers.
+    Four Knowledge records reconcile; focused memory/history/scope checks and required hooks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.30 - read rewrite orchestration and reconcile scanner ownership`
 
 - ID: `SESSION-STARTUP-READING.3.2.31`
   Status: `pending`
@@ -1421,7 +1427,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.30` | `pending` | complete RewritePipeline 1–745, Scanner 1–90, and Scanner/FlowRules 1–338. |
+| 1 | `SESSION-STARTUP-READING.3.2.31` | `pending` | complete Scanner/LegacyRules 1–1179 and Scanner/PrimitiveBasicRules 1–254. |
 
 ## Reading Ledger
 
@@ -1432,7 +1438,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.30`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.31`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
 | mdBook | **No** | `.31` records fourteen complete book sources plus the two earlier local-CI ranges: 640,041 bytes of disjoint coverage. | Remaining 1,316,541 source bytes, formal chapter checkpoints, and rendered alignment under `.4`. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -2481,6 +2487,32 @@ PERL
   passes rollout 9/9/116 and public 6/12/10/60. Other runtime routes are not rerun by this reading checkpoint.
 - No runtime, public-book, or policy behavior changes. Codebase/book remain No; `.3.2.30` follows.
 
+### Source-span rewrite orchestration and scanner ownership at `.3.2.30`
+
+- Activated from clean `3c1a955a1669469697dd3325c1dcde74c684e76f` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Re-reviewed RewritePipeline 1–245, 246–485, and 486–745, Scanner 1–90, and FlowRules 1–175 /
+  176–338 without truncation. Exact whole-file baseline identity passes for all three files: 1,173 lines /
+  41,839 bytes. This checkpoint adds no duplicate physical-reading credit to `.31`.
+- RewritePipeline rejects removed aggregate selectors structurally, inserts implicit-if closures and
+  newline terminators, guards ambiguous unmatched event rewrites, and applies contract lowering by
+  source-span replacement. Original-source lookup tracks separators; replacement searches the current
+  rewritten text from zero. Unbalanced if/switch stacks return the original code after tracing.
+- Scanner lazily obtains ScannerCore and preserves the caller error state. FlowRules scans if/elseif/
+  else/while/switch families, nested case/default branches, printing/exit/return helpers, and exact
+  standalone bare or parenthesized next. Internal scanner IDs do not establish public helper admission.
+- Checked existing AST seam/inventory/fallback, scanner-family, pipeline-trace, function execution,
+  and quoted-rewrite Knowledge first. ScannerCore 1–223 was additionally re-read to reconcile its registry:
+  staged, progressive, recognition, basic, pipeline, flow, legacy. Five dynamically scoped callbacks are
+  shared; the first defined response, including an empty array, owns the contract and stops dispatch.
+- `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/trace_actionir_pipeline.t` passes five
+  top-level tests. A managed ScannerCore callable registry/JSON census reports all seven owners in order;
+  `rg --files perl/LinkedSpec/ActionIR/Scanner` finds the five actual family modules. The scanner Knowledge
+  record preserves a direct callable reverify command; the old four-family/six-file census is superseded.
+- Four existing records reconcile the seven-owner architecture, registered function/value-drop support,
+  retired alias/selector history, completed fallback audit, and the known `.18` lexical rewrite limitation.
+  No fresh all-backend or complete defect-free claim follows from this bounded trace proof.
+- No source, public-book, or policy changes. Codebase/book remain No; `.3.2.31` follows.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -2511,7 +2543,8 @@ PERL
   `.3.2.26` is item 30/100 at `a32cf422`;
   `.3.2.27` is item 31/100 at `e4716fcf`;
   `.3.2.28` is item 32/100 at `86673c75`;
-  `.3.2.29` is item 33/100 once committed.
+  `.3.2.29` is item 33/100 at `3c1a955a`;
+  `.3.2.30` is item 34/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -2609,6 +2642,7 @@ PERL
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.27` | Exact range/full-file identity; AST/fallback/retirement/numeric Knowledge; scalar numeric suite; four public descriptors; focused continuity | PASS nine tests and four expected diagnostic counts; known Unicode-digit repair remains open; required gates precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.28` | Exact range/full-file identity; constructor/collection/mutation Knowledge; three public controls; paired Perl/PUC tagged controls; focused continuity | PASS bounded controls; tagged/split divergence rooted and .33 review/repair owned; required staged gates precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.29` | Exact range/full-file identity; progressive and normalization Knowledge; managed 129-assertion carrier consumer and neutral 9/9 checker; focused continuity | PASS; private six-runtime closeout pointers reconciled; required staged gates precede landing. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.30` | Exact range/full-file identity; scanner/AST/trace Knowledge; managed five-test pipeline suite and seven-dispatcher census; focused continuity | PASS; four Knowledge boundaries reconciled and known lexical repair linked; required staged gates precede landing. |
 
 ## Commit Log
 
@@ -2648,6 +2682,7 @@ PERL
 | `SESSION-STARTUP-READING.3.2.27` | `SESSION-STARTUP-READING.3.2.27 - read helper fallback and qualify numeric evidence` | Helper fallback and numeric/string/collection prefix read; four AST/numeric Knowledge records qualified. |
 | `SESSION-STARTUP-READING.3.2.28` | `SESSION-STARTUP-READING.3.2.28 - read collection helpers and own tagged-record repair` | Collection and constructor paths read; selector history reconciled and paired tagged-record divergence owned by .33. |
 | `SESSION-STARTUP-READING.3.2.29` | `SESSION-STARTUP-READING.3.2.29 - read lowering suffix and reconcile progressive admission` | MethodLowering suffix and ProgressiveSpanDispatch read; three progressive admission records follow completed private closeout. |
+| `SESSION-STARTUP-READING.3.2.30` | `SESSION-STARTUP-READING.3.2.30 - read rewrite orchestration and reconcile scanner ownership` | RewritePipeline, Scanner, and FlowRules read; scanner registry and AST migration Knowledge reconciled. |
 
 ## Changelog
 
@@ -2719,3 +2754,5 @@ PERL
   paired Perl/PUC tagged-record drift with `.33.1`/`.33.2` ownership; `.3.2.29` follows.
 - `2026-09-06`: `.3.2.29` reads the lowering suffix and private progressive scanner; the 129-assertion Perl consumer and
   9/9/116 neutral proof pass, three Knowledge pointers reconcile, and `.3.2.30` follows.
+- `2026-09-06`: `.3.2.30` reads rewrite orchestration and scanner/flow surfaces; five trace tests and seven-dispatcher
+  census pass, four Knowledge records reconcile, and `.3.2.31` follows.

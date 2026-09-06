@@ -55,3 +55,12 @@ Leftovers are appended by hash-key traversal; this record makes no stable order 
 CanonicalEvents/Core.pm maps contract IDs to canonical kinds and normalizes argument context/target modes.
 The private mapping is not an authoring-admission registry: retained internal contract IDs do not restore retired
 public spellings. This is source-level reconciliation, not a new execution or backend-conformance result.
+
+The 2026-09-06 `.3.2.30` checkpoint re-reads RewritePipeline, Scanner, and FlowRules at
+the unchanged baseline. The managed `t/trace_actionir_pipeline.t` suite passes five
+top-level tests. RewritePipeline finds original statement spans for separator bookkeeping,
+but searches the evolving rewritten text from offset zero for replacement; flexible call
+matching preserves quoted characters while relaxing external whitespace. This is not
+lexical ownership of the surrounding text: [[perl-quoted-primitive-rewrite-event-drift]]
+records the known quoted-text corruption and false-event repair under `.18`. Unbalanced
+if/switch stacks return the original code after trace reporting.
