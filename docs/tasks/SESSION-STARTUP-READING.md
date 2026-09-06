@@ -606,12 +606,19 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.34 - read runtime owners and track codeblock boolean drift`
 
 - ID: `SESSION-STARTUP-READING.3.2.35`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 33: 1 lines/fragments, 32,768 bytes.
   Scope: `perl/LinkedSpec/MCPContract.pm` bytes 391–33158.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact embedded-data byte range and baseline identity; MCP generated-binding and
+    admission Knowledge; managed binding freshness/test and admission checker; focused continuity review.
+  Canonical trigger: `none` — source reading and Knowledge continuity only.
+  Verification: Exact full-file baseline identity and bytes 391–33158 (32,768 bytes) pass. Managed generator
+    reports the 83,411-byte Perl binding fresh; five binding tests, six artifact frame controls, and
+    admission 5/5 implementations / 6/6 runtimes / complete / 141 mutations pass. One Knowledge record
+    reconciles historical topology and response layers; required focused continuity checks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.35 - read MCP frame data and reconcile current admission`
 
 - ID: `SESSION-STARTUP-READING.3.2.36`
   Status: `pending`
@@ -1500,7 +1507,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.35` | `pending` | read MCPContract bytes 391–33158 and reconcile the embedded contract's first fragment. |
+| 1 | `SESSION-STARTUP-READING.3.2.36` | `pending` | read MCPContract bytes 33159–65926 and reconcile the next embedded contract fragment. |
 
 ## Reading Ledger
 
@@ -1511,7 +1518,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.35`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.36`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
 | mdBook | **No** | `.31` records fourteen complete book sources plus the two earlier local-CI ranges: 640,041 bytes of disjoint coverage. | Remaining 1,316,541 source bytes, formal chapter checkpoints, and rendered alignment under `.4`. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -2743,6 +2750,31 @@ PERL
   not close the separate `.19` receiver or `.35` literal defect.
 - No runtime, public-book, or policy edits. Codebase/book remains No; `.3.2.35` follows.
 
+### Embedded MCP canonical frame and tool-schema prefix at `.3.2.35`
+
+- Activated from clean `19b0a7c4d3f02f875b015bbb46816d8e6313886b` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Re-reviewed MCPContract.pm bytes 391–8582 / 8583–16774 / 16775–24966 / 24967–33158 without
+  truncation, exactly 32,768 bytes. Full-file identity matches the reading baseline; the fragment SHA-256 is
+  `7846664315f28f00563a9dac88632f47f5c8fbf531ff10215724620764f2df19`. No duplicate physical-reading
+  credit is added over `.31`; the remaining embedded fragments and executable suffix have their own leaves.
+- Read the data-only binding format, canonical cancellation/capability/query/discovery and error frames,
+  five native discovery identities, restricted capability projection, semantic rejection, and the two
+  tool-schema prefix. Request metadata, opaque handle syntax, paging/budget/source fields, typed response
+  records/relations, and native semantic diagnostics remain embedded contract data, not new server behavior.
+- Read generated-binding, implementation-admission, recurring all-twenty, and stdio-contract Knowledge first.
+  Qualified the Perl card's obsolete current 1/5 implementation and 1/6 runtime claim as historical;
+  the current ledger remains 5/5 + 6/6, shared rollout complete, 141 mutations, with no status movement.
+- Six artifact controls compare the canonical capability/query/restricted/semantic-rejection text with
+  structuredContent and confirm isError=false, including native ok=false. Handle-unavailable and policy-denied
+  tool failures have isError=true and no structuredContent. The exact managed probe is preserved in
+  `docs/knowledge/perl-mcp-decoded-server.md`; it does not claim fresh dispatch or six-runtime execution.
+- `bash tools/run_python_project_data.sh tools/generate_perl_mcp_contract.py` reports the full 83,411-byte
+  binding byte-fresh. `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl
+  t/mcp_contract_perl_binding.t` passes five top-level tests. `bash tools/run_python_project_data.sh
+  tools/check_mcp_implementation_admission.py` passes current 5/5 + 6/6 complete/141 governance.
+- One Knowledge record reconciles topology and response-layer ownership. No runtime, public-book, policy,
+  protocol, or admission changes; codebase/book remains No and `.3.2.36` follows.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -2778,7 +2810,8 @@ PERL
   `.3.2.31` is item 35/100 at `b1108cbb`;
   `.3.2.32` is item 36/100 at `9be547af`;
   `.3.2.33` is item 37/100 at `ab4b1f1e`;
-  `.3.2.34` is item 38/100 once committed.
+  `.3.2.34` is item 38/100 at `19b0a7c4`;
+  `.3.2.35` is item 39/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -2881,6 +2914,7 @@ PERL
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.32` | Exact range/full-file identity; pipeline/staged/recognition Knowledge; managed 143-check staged consumer, two neutral checkers and language inventory; focused continuity | PASS bounded Perl/neutral proof; two authoring/inventory records reconciled; required staged gates precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.33` | Exact range/full-file identity; separator/trace Knowledge; four compact trace tests; twelve public newline/comment cases plus dumped-source repeats; focused continuity | PASS reading/trace controls; comment failures reproduced and owned by `.34.1`/`.34.2`; one new/three qualified cards. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.34` | Exact baseline ranges; binding/callable/codeblock/gap Knowledge; managed 134 callable/gap tests; neutral gap 9/0/63 and public 8/15/10/34; six boolean controls and emitted AST; focused continuity | PASS reading and existing focused suites; boolean-literal defect rooted and owned by `.35`; one new/three qualified cards. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.35` | Exact 32768-byte fragment/full-file baseline identity; MCP binding/admission Knowledge; managed generator, five binding tests, six frame controls, admission complete/141; focused continuity | PASS bounded fragment and focused proof; one Knowledge card reconciles current topology and response-layer examples. |
 
 ## Commit Log
 
@@ -2925,6 +2959,7 @@ PERL
 | `SESSION-STARTUP-READING.3.2.32` | `SESSION-STARTUP-READING.3.2.32 - read staged scanners and reconcile authoring boundaries` | Pipeline, recognition, staged marker, and splitting owners read; two Knowledge records follow current public/neutral boundaries. |
 | `SESSION-STARTUP-READING.3.2.33` | `SESSION-STARTUP-READING.3.2.33 - read separator and value owners and track comment failures` | Splitter/trace/value owners read; comment failures rooted and repair-owned, universal coverage claims qualified. |
 | `SESSION-STARTUP-READING.3.2.34` | `SESSION-STARTUP-READING.3.2.34 - read runtime owners and track codeblock boolean drift` | Runtime owners read; dynamic boolean result drift repair-owned and historical gap admission prose qualified. |
+| `SESSION-STARTUP-READING.3.2.35` | `SESSION-STARTUP-READING.3.2.35 - read MCP frame data and reconcile current admission` | MCP frame/schema prefix read; generated binding fresh, response examples and current admission qualified. |
 
 ## Changelog
 
@@ -3006,3 +3041,5 @@ PERL
   twelve controls, creates `.34.1`/`.34.2`, and advances to `.3.2.34`.
 - `2026-09-06`: `.3.2.34` reads binding/callable/codeblock/gap owners and MCP header, passes 134 tests and neutral gap
   proof, roots dynamic boolean kind loss under `.35`, and advances to `.3.2.35`.
+- `2026-09-06`: `.3.2.35` reads the first MCP data fragment, passes binding freshness/five tests/six frame controls/
+  complete-141 admission proof, reconciles one Knowledge card, and advances to `.3.2.36`.

@@ -2,7 +2,7 @@
 id: perl-mcp-decoded-server
 title: Perl MCP generated binding, decoded dispatch, and strict stdio server
 status: current implementation; decoded dispatch, strict stdio, and exact Perl admission complete
-date: 2026-07-29
+date: 2026-09-06
 answers:
   - Is the Perl LinkedSpec MCP server implemented?
   - How do I register a Perl SemanticIndex with MCP?
@@ -18,6 +18,8 @@ answers:
   - What does Perl MCP emit on EOF or an I/O failure?
   - Is the Perl MCP implementation admitted?
   - How many MCP implementations and runtimes are admitted?
+  - Does a semantic ok false response make the Perl MCP tool isError true?
+  - Which generated Perl MCP frames preserve semantic text and structured identity?
 reverify:
   - bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py
   - bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py
@@ -67,7 +69,42 @@ UTF-8 JSON plus one LF. Default stderr is empty; an optional distinct log handle
 releases indexes, and returns zero; input/output failure performs the same cleanup and returns nonzero.
 
 `FUTURE-PARITY-BACKLOG.10.9.2.3` admits this implementation through one exact twelve-role consumer and a separate
-status/proof ledger. Current topology is Perl complete at 1/5 native implementations and 1/6 runtime admissions,
-with every other row and shared thin rollout pending. The ledger pins the unchanged transport digest; its checker
+status/proof ledger. At that historical milestone, topology was Perl complete at 1/5 native implementations
+and 1/6 runtime admissions, with every other row and shared thin rollout pending. The ledger pins the unchanged transport digest; its checker
 rejects 28 status, topology, role, source-authority, tracked-input, and canonical-order mutations. The admission
 consumer composes existing server/native/neutral authorities and defines no second semantic or protocol oracle.
+
+## September 6 current admission and embedded frame boundary
+
+The current ledger is 5/5 native implementations, 6/6 runtimes, shared rollout complete, and 141 rejected
+mutations, reverified with the managed admission checker during `SESSION-STARTUP-READING.3.2.35`.
+[[mcp-implementation-admission-ledger]] and [[mcp-recurring-six-runtime-plan]] retain rollout and exact all-twenty
+identity authority. This checkpoint does not rerun the six runtime consumers or claim fresh recurring signoff.
+
+The first 32,768-byte embedded-data fragment (MCPContract.pm bytes 391–33158) contains discovery identities,
+request/response/error shells, restricted capability examples, and the beginning of the two tool schemas.
+The managed generator reports the complete 83,411-byte binding byte-fresh and the binding suite passes five
+top-level tests. Exact baseline identity and fragment SHA-256 are preserved in the reading task.
+
+In the four canonical capability/query/restricted/semantic-rejection response examples, decoded text equals
+structuredContent and isError remains false. The semantic-rejection payload has its own ok=false and diagnostics;
+that is a native semantic result, not a transport tool error. The handle-unavailable and policy-denied examples
+instead set isError=true and omit structuredContent. Six direct artifact controls confirm those distinctions.
+These are embedded contract examples; fresh server dispatch and the remaining contract fragments belong to
+later reading checkpoints.
+
+Reverify those six artifact controls:
+
+```sh
+bash tools/project_data_run.sh env PYTHONDONTWRITEBYTECODE=1 python3 - <<'PY'
+from pathlib import Path
+import json
+bundle=json.loads(Path('perl/LinkedSpec/MCPContract.pm').read_text().splitlines()[13]);frames=bundle['canonical_frames']
+for key in ['capabilities_call_response','query_call_response','restricted_capabilities_response','semantic_ok_false_response']:
+ r=frames[key]['result'];assert json.loads(r['content'][0]['text'])==r['structuredContent'];assert r['isError'] is False
+ print(key+': native ok='+str(r['structuredContent']['ok'])+', tool isError=False, text/structured identity PASS')
+for key in ['handle_unavailable_response','policy_denied_response']:
+ r=frames[key]['result'];assert r['isError'] is True;assert 'structuredContent' not in r
+ print(key+': tool isError=True; no structuredContent PASS')
+PY
+```

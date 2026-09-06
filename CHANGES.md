@@ -10,6 +10,11 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.35 — read MCP frame data and reconcile current admission
+
+Read MCPContract bytes 391–33158 with exact baseline identity; full 83,411-byte binding is fresh and five binding tests pass.
+Six frame controls and complete/141 admission proof pass; reconcile historical Perl-only topology and semantic/tool error layers.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.34 — read runtime owners and track codeblock boolean drift
 
 Read 1,264 lines / 39,889 bytes; exact baseline identity, 134 callable/gap tests, and current neutral gap proof pass.

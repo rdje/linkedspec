@@ -10,6 +10,11 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.35 — MCP semantic rejection remains a successful tool response
+
+Canonical semantic ok=false retains isError=false and matching text/structured content; handle/policy failures use isError=true.
+Current admission is 5/5 implementations and 6/6 runtimes complete with 141 mutations; the old Perl-only statement was historical.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.34 — dynamic boolean type loss occurs after AST preservation
 
 Emitted codeblock AST preserves boolean kind and source; CodeblockRuntime converts literal payloads to numeric 1/0.
