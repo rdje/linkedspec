@@ -15,7 +15,7 @@ answers:
   - "is recursive observation a public helper"
   - "is Perl recursive observation admitted in canonical CI"
 date: 2026-08-12
-status: current private Perl admission; all runtime successors and recurrence current; public closeout pending
+status: current private Perl admission; six-runtime recurrence and public closeout complete
 tags: [perl, source-location, recursion, observation, ActionIR, generated-source, admission, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.14.4.2 adds dedicated OBSERVE_RECOGNITION scanning/lowering, RecursiveObservationPolicy static validation, direct-parent and rejected-attempt identity in the existing RecognitionTransaction authority, detached SourceLocation record builders, live/generated runtime observation, and unchanged typed recursion errors. t/recursive_observation_perl_contract.t passes seven top-level groups covering exact event/lowering, static failures, falsey/failure outcomes, entry/match/exit/cursor/detach behavior, abort/reject identity, direct/mutual guards, and independently loaded emitted source. The typed-source checker records Perl on the still-pending recursive_observation row at 8 complete / 6 pending / 71 mutations. The recognition checker remains complete at 129 current + four dedicated transaction nodes, 246 calls, and 58 mutations because OBSERVE_RECOGNITION is a rejected binding_write effect. Language coverage classifies observe_recognition as grammar-owned/non-public outside the 246 helper inventory."
 canonical_update_2026_08_12: "Canonical proof exposed admitted recognition consumers that snapshot the live and aggregate ActionIR counts. Neutral metadata assertions now expect 129 live in Rust, Dart, Julia, and Lua and 133 aggregate in Dart, Julia, and Lua; backend transaction behavior and the 9/9 rollout are unchanged."
@@ -44,8 +44,9 @@ or parse-wide history escapes.
 Canonical CI requires, syntax-checks, and executes the exact final-path consumer with the existing Perl typed-
 source consumers. The form is grammar-owned and private: it is not a public helper, a new authored value kind, a
 descriptor/generated schema revision, a semantic/MCP field, or a CLI/README surface. Rust is now independently
-admitted by `.14.4.3`; Dart, Julia, shared Lua, recurring composition, and public
-closeout remain owned by `.14.4.4-.8`.
+admitted by `.14.4.3`; that dated milestone is followed by all runtime successors, recurrence, and completed
+public projection in [[recursive-observation-public-no-drift]]. Final combined authoring closeout is complete
+under [[typed-authoring-model-public-no-drift]]; neither milestone exports an additional observation API.
 
 ## Links
 
@@ -54,3 +55,10 @@ closeout remain owned by `.14.4.4-.8`.
 - Recognition authority: [[perl-recognition-transaction-private-authority]].
 - Decision: ADR `0056`, section 22.
 - Task owner: [[FUTURE-PARITY-BACKLOG.14]] `.14.4.2`.
+
+The September 6 `.3.2.41` checkpoint completes Runtime and RecursiveObservationPolicy source reading.
+Policy validates the bare target and static existing callee over canonical events. Runtime records completion
+and rejected-child identity through the existing authority, rebases a detached nine-field record, and distinguishes
+accepted/failed/aborted/rejected outcomes from payload. The four focused Perl runtime suites pass 137 tests
+collectively; typed governance passes 14/0/231, including recursive public 6/6/10 and combined 8/8/6/10.
+Other runtime routes are not rerun in this reading checkpoint.

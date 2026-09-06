@@ -5,21 +5,24 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   exhaustive inventory are complete; codebase/book remain incomplete. `rgx` and its dependencies are excluded.
 - Intake `.31` preserves all baseline Perl source reading, supporting book/native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.41`–`.3.2.54` remain pending.
-- Repairs `.7`–`.30` and `.32`–`.38` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
+  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.42`–`.3.2.54` remain pending.
+- Repairs `.7`–`.30` and `.32`–`.40` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.40` completes recognition core/static reading and owns post-terminal snapshot restoration repair.
-  This is item 44/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.2.41` completes recognition/observer runtime reading and preserves required bounded change history.
+  This is item 45/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.41`: read RecognitionTransactionRuntime 1–681, RecursiveObservationPolicy 1–71, RuntimeDiagnosticOutput 1–247, RuntimeLogical 1–96, and RuntimeSemanticObservation 1–174.
+- Activate `SESSION-STARTUP-READING.3.2.42`: read SemanticCallProjection 1–753 and SemanticIndex 1–395.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.41` reads runtime observers and passes 137 tests plus four neutral checks.
+  `.39`/`.40` own boolean/unwind defects; required history rollover uses exact finite capacity and canonical proof.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.40` reads recognition core and static policy; 59 tests and neutral proof pass.
   Cross-owner misuse of invalidated tokens restores obsolete snapshots; `.38` owns repair.
@@ -65,9 +68,6 @@
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.26` reads block, receiver-chain, and tree dispatch; 23 AST tests and
   hash/array/scalar root controls pass, with existing traversal chronology reconciled.
-
-- `2026-09-06` — `SESSION-STARTUP-READING.3.2.25` reads value/function dispatch and records eight caller-scope controls;
-  `.32` owns the demonstrated local-name shadowing repair.
 
 ## History
 

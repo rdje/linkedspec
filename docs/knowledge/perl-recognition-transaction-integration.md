@@ -87,3 +87,11 @@ and interpolated /o expression remain the already-owned `.21` exception; no lexi
 The managed authority/carrier pair passes 59 tests and the neutral checker passes 138/250/58 at 9/9.
 [[perl-recognition-invalidated-token-restoration]] records a separate private-core terminal-state defect
 under `.38`; neither static policy proof nor carrier parity establishes its repair.
+
+Checkpoint `.3.2.41` completes RecognitionTransactionRuntime 1–681 and measures two further runtime
+exceptions: [[perl-recognition-commit-boolean-kind-drift]] changes boolean payload kind, and
+[[perl-recognition-unwind-actual-state-gap]] leaves the real input cursor advanced on an unfinished typed
+exit. Tasks `.39` and `.40` own those repairs; the earlier private post-terminal defect remains `.38`.
+The source shares recognition/observation scopes over one authority, synchronizes real state during explicit
+operations, isolates recursive marks, and enforces cursor progress only in active recognition/observation.
+The measured unwind exception qualifies the unconditional restoration language above.

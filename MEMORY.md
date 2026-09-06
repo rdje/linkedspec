@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `800fc5a4598de78b235dffaf1cdbde9e28e13c27` — clean preceding reading checkpoint.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.40 - read recognition core and own post-terminal restoration defect`.
+- activation_commit: `e548ce4be5d3164ab8be54dc3d63dece2dda0ffb` — clean preceding reading checkpoint.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.41 - read runtime observers and preserve bounded change history`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: activate `.3.2.41`; read RecognitionTransactionRuntime 1–681, RecursiveObservationPolicy 1–71, RuntimeDiagnosticOutput 1–247, RuntimeLogical 1–96, and RuntimeSemanticObservation 1–174,
+- next_action: activate `.3.2.42`; read SemanticCallProjection 1–753 and SemanticIndex 1–395,
   then continue queued reading. Intake `.31` preserves the forward source coverage and exact findings.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
-- blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30` and `.32`–`.38` precede mutation setup; `.29` is part of `.5` adoption.
+- blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30` and `.32`–`.40` precede mutation setup; `.29` is part of `.5` adoption.
 - current_rust_warning_debt: repeated clean carriers report 1,870 `pgen` plus 26 `rgx-core` output warnings;
   `RUST-DEPENDENCY-WARNING-ZERO.1-.7` own causal repair/pins/enforcement without suppression, after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -55,6 +55,6 @@
 - current_engineering_notes_capacity: immutable segment `4984-dd7eba212246` is the twenty-third manifest record;
   ADR `0103` authorizes exactly 24 collection files / 23 manifest lines with every byte and aggregate ceiling
   unchanged.
-- current_change_history_capacity: immutable segment `4985` is the twenty-sixth history segment; ADR `0102`
-  authorizes exactly 28 collection files / 27 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; `.31` records all Perl source reading, pending per-leaf checkpoints, book coverage, and resumed batch progress (44/100 after `.3.2.40` lands).
+- current_change_history_capacity: immutable segment `4984` is the twenty-seventh history segment; ADR `0104`
+  authorizes exactly 29 collection files / 28 manifest lines with every byte and aggregate ceiling unchanged.
+- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; `.31` records all Perl source reading, pending per-leaf checkpoints, book coverage, and resumed batch progress (45/100 after `.3.2.41` lands).

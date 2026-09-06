@@ -28,3 +28,10 @@ Only after that exception does a string slot take precedence, which preserves th
 
 This is a host-representation boundary, not permission to use Perl's native boolean context. Logical helpers and
 lazy control conditions both call the same runtime seam.
+
+Checkpoint `.3.2.41` reads RuntimeLogical 1–96. Arrays and ordinary hashes use emptiness, codeblock-shaped
+hashes and other references are true, JSON booleans preserve their value, nonfinite numbers are false, and
+nonempty strings retain string truth under the documented host-flag exception. evaluate returns JSON booleans
+for and/or/not; this owner does not itself make already-evaluated arguments lazy. The managed neutral checker
+passes 17 truthiness / 10 helper / 3 effect cases, 8 complete rows, 19 public documents, 14 forbidden claims,
+and 26 mutations. The four focused Perl runtime suites pass 137 tests collectively.

@@ -41,9 +41,18 @@ position 2, and the input identity hashes all three bytes as
 through direct, loaded-spec, portable-loader, captured generated direct/Get, independently loaded generated
 direct/traced, and validated reconstructed-plan roles. The focused test has 106 assertions and proves malformed/
 foreign rejection plus trace/diagnostic neutrality. Composed Perl admission `.10.3.6` reuses those owners across
-its direct/loaded/generated/traced roles and advances only Perl, so rollout is 2/9 and admission is 1/6.
+its direct/loaded/generated/traced roles and initially advances only Perl to 2/9 rollout and 1/6 admission.
+That historical milestone is now followed by complete 9/9 rollout and 6/6 admission, verified by the current
+neutral checker at the September 6 `.3.2.41` checkpoint.
 
 Related facts: [[perl-semantic-query-evaluator]], [[perl-semantic-introspection-authority-map]],
 [[perl-semantic-introspection-admission]],
 [[perl-duplicate-regex-slot-identity-admission]], [[diagnostic-output-neutral-contract]],
 [[trace-cross-variant-capability-contract]].
+
+The complete RuntimeSemanticObservation 1–174 reading confirms separate sink/error slots, strict option
+validation, UTF-8 encoding of decoded text versus exact bytes for unflagged input, and early no-sink returns
+before event construction. Event constructors supply native typed fields; derived-index validation owns
+trust and immutable snapshot admission. The focused semantic suite is included in four managed Perl runtime
+suites passing 137 tests collectively. Neutral semantic proof passes six fixture groups / twenty exact queries /
+128 mutations / 9 complete rollout rows / 6 complete admission rows; other runtime execution is not rerun.

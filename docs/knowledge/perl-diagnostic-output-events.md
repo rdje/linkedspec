@@ -51,3 +51,11 @@ controls argument evaluation or delivery.
 
 Related facts: [[diagnostic-output-neutral-contract]], [[cross-backend-diagnostic-output-drift]],
 [[lua-diagnostic-output-events]], [[perl-generated-handler-runtime-errors]].
+
+The September 6 `.3.2.41` checkpoint reads RuntimeDiagnosticOutput 1–247: sink option validation,
+descriptor-local control-error identity, rendering, arity checks, ordered delivery, and typed exit remain
+separate from semantic observation. Diagnostic events are ordinary blessed hashes; no immutability guarantee
+is inferred. The neutral checker passes 3 helpers / 11 render cases / 6 scenarios / 8 complete / 20 mutations.
+The four focused Perl runtime suites pass 137 tests collectively. Four public exit controls retain status
+seven while exposing the recognition-specific unwind gap in [[perl-recognition-unwind-actual-state-gap]],
+owned by `.40`; diagnostic exception identity alone does not prove parser-state rollback.

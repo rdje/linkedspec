@@ -10,6 +10,11 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.41 — recognition value kind and unwind state need distinct repairs
+
+Eight public value controls expose boolean-to-number conversion; four typed-exit controls expose unrestored actual cursor state.
+Tasks .39/.40 own repairs; required history rollover preserves exact accepted bytes and uses receipt-bound canonical verification.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.40 — invalidated tokens can still restore old snapshots before rejection
 
 Cross-frame/source token checks restore before checking terminal state, erasing newer owner cursor/boundary/marks.

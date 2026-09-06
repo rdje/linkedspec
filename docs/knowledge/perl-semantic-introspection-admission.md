@@ -39,9 +39,11 @@ Its 12 contract-declared roles execute exactly once:
 
 The neutral checker requires the consumer path, ordered role list, canonical tracked registration and invocation,
 Perl admission status, and Perl rollout status. Eight new mutations remove or alter those boundaries, while the
-existing early-admission mutation now targets Rust. The totals are 65 rejected mutations, rollout 2 complete / 7
-pending, and native admission 1 complete / 5 pending. Rust `.10.4` is next; later backends, recurring six-runtime
-proof, MCP, and public no-drift remain pending.
+existing early-admission mutation now targets Rust. At that July-21 milestone the totals were 65 rejected mutations, rollout 2 complete / 7
+pending, and native admission 1 complete / 5 pending, with Rust `.10.4` next. Those are historical counts.
+The September 6 `.3.2.41` reading checkpoint reruns the current neutral checker: six fixture groups, twenty
+exact queries, 128 rejected mutations, 9/9 rollout, and 6/6 native admission are complete. This bounded
+checkpoint does not rerun every runtime admission consumer.
 
 Related facts: [[semantic-introspection-neutral-contract]], [[perl-semantic-query-evaluator]],
 [[perl-semantic-runtime-observation]], [[perl-semantic-introspection-authority-map]].
