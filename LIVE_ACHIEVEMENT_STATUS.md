@@ -10,15 +10,18 @@
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.6` reads Compiler.pm lines 1–1041 and preserves prior canonical/loader evidence.
-  This is item 9/100; twelve full Perl files plus the compiler prefix read. Codebase and book remain incomplete.
+- `SESSION-STARTUP-READING.3.2.7` completes Compiler.pm reading and indexes its phase/mode boundaries.
+  This is item 10/100; thirteen full Perl files read. Codebase and book remain incomplete.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.7` and read Compiler.pm baseline lines 1042–2002. Complete required
+- Activate `SESSION-STARTUP-READING.3.2.8` and read SpecEntry.pm baseline lines 1–600. Complete required
   reading and policy review, then repairs `.7`–`.9` before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.7` completes compiler reading and indexes existing pipeline
+  phase/mode/error boundaries; `.3.2.8` reads SpecEntry.pm next.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.6` reads the compiler prefix and preserves exact prior CI/loader
   evidence; the historical duplicate-slot card points to its fix, and `.3.2.7` reads the suffix next.
@@ -69,9 +72,6 @@
 - `2026-09-04` — director-requested `RUST-DEPENDENCY-WARNING-ZERO.0` owns the reproducible 1,870-`pgen` /
   26-`rgx-core` warning output and splits causal upstream/generated/direct cleanup plus zero-warning enforcement;
   planning changes no source, pin, generator, CI, or runtime behavior.
-
-- `2026-09-04` — `.19.6.1` implements Lua write vivification; 436 assertions per ABI, full 178x2 integration,
-  CLI 66x2, corpus 105/105, storage, 105 neutral mutations, mdBook, doctrines, and canonical CI pass.
 
 ## History
 

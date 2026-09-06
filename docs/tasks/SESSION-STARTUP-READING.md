@@ -185,12 +185,19 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.6 - read compiler generation and state assembly`
 
 - ID: `SESSION-STARTUP-READING.3.2.7`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 5: 961 lines/fragments, 43,851 bytes.
   Scope: `perl/LinkedSpec/Compiler.pm` lines 1042–2002.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+    Index source-level pipeline phase/return-mode boundaries without duplicating the existing state/root owners.
+  Verification tier: `focused`
+  Focused checks: Four exact reading chunks and baseline identity; existing pipeline/context/diagnostic Knowledge;
+    memory/doctrine/Knowledge/history checks; `git diff --check` and final staged review.
+  Canonical trigger: `none` — source-reading continuity only; no production, infrastructure, or public change.
+  Verification: Four untruncated chunks cover baseline-identical lines 1042–2002 / 43,851 bytes, completing
+    Compiler.pm at 2,002 lines / 84,924 bytes. Existing architecture/Knowledge owners reconcile; a bounded
+    source-level card indexes phase and mode boundaries. No new runtime defect or public change.
+  Commit: `SESSION-STARTUP-READING.3.2.7 - complete compiler pipeline reading`
 
 - ID: `SESSION-STARTUP-READING.3.2.8`
   Status: `pending`
@@ -709,7 +716,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.7` | `pending` | Read Compiler.pm baseline lines 1042–2002 in bounded chunks. |
+| 1 | `SESSION-STARTUP-READING.3.2.8` | `pending` | Read SpecEntry.pm baseline lines 1–600 in bounded chunks. |
 
 ## Reading Ledger
 
@@ -720,7 +727,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | Twelve Perl files in full under `.3.2.1` and `.3.2.3`–`.3.2.5`, plus Compiler.pm lines 1–1041 under `.3.2.6`; checkpoint-relevant scripts listed below. | Compiler.pm 1042–2002 and the other 76 not-yet-fully-read Perl paths; all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | Thirteen Perl files in full under `.3.2.1` and `.3.2.3`–`.3.2.7`; checkpoint-relevant scripts listed below. | Remaining 76 Perl paths and all other first-party inputs not explicitly listed as read. |
 | mdBook | **No** | `docs/linkedspec-book/src/SUMMARY.md`; `docs/linkedspec-book/src/development/local-ci-and-regression.md` 1897–1943 and 1988–2004. | All other chapter text, including the unread portions of that development chapter. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -932,6 +939,20 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   call sites in rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs 2072–2115 and 2217–2252.
   These bounded supporting reads do not mark the remaining Rust file or tool lane complete.
 
+### Compiler pipeline suffix at `.3.2.7`
+
+- Activated from clean `f864f881f5210a99d68602166e8720a741f84795`; prior Knowledge/all nine doctrines,
+  post-commit pointer, empty brief, and clean status passed. Read Compiler.pm 1042–1280, 1281–1520,
+  1521–1760, and 1761–2002 without truncation: 961 lines / 43,851 bytes. The complete module is now read
+  at 2,002 lines / 84,924 bytes; thirteen whole Perl files are covered and 76 remain.
+- Reconciled runtime-context preparation, function stripping/registry attachment, envelope/DSL/bootstrap stages,
+  descriptor-state/reference validation, policy passes, source flush, return-mode precedence, root attribution,
+  and invocation error preservation with existing Knowledge and ARCHITECTURE_STATE.md 4571–4623.
+- The new `perl-compiler-pipeline-stage-and-mode-boundaries` card indexes the precise phase/stop/return
+  boundaries absent from the question map. It links existing state/root/generated/runtime owners and explicitly
+  records source-level evidence without a new runtime signoff claim. No new defect or public-book change.
+- Next exact reading is SpecEntry.pm 1–600 under `.3.2.8`. Required codebase/book reading remains incomplete.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -945,9 +966,11 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   ordinary proof and canonical designated/push proof. No competing executable roadmap direction was found.
 - No runtime behavior was verified by reading. No new public explanation is warranted by this checkpoint;
   substantive codebase/book drift, if found during `.3`/`.4`, must receive an owning leaf before remediation.
-- Batch history: `.2` is resumed item 1/100 at `d6d3c890`; `.6` is item 2/100 at `03d692c1`; `.3.1` is item 3/100
-  at `942c6138`; `.3.2.1` is item 4/100 at `c0eb1acf`; `.3.2.2` is item 5/100 at `094e05bc`; `.3.2.3` is item 6/100 at `27fd160f`; `.3.2.4` is item 7/100 at `4f311a9e`; `.3.2.5` is item 8/100 at `6c1234cc`; `.3.2.6` is item 9/100 once committed. `.1` belongs
-  to the prior checkpoint. This intermediate boundary does not trigger a push.
+- Batch history: `.2` is resumed item 1/100 at `d6d3c890`; `.6` is item 2/100 at `03d692c1`; `.3.1` is item 3/100 at
+  `942c6138`; `.3.2.1` is item 4/100 at `c0eb1acf`; `.3.2.2` is item 5/100 at `094e05bc`; `.3.2.3` is item 6/100 at
+  `27fd160f`; `.3.2.4` is item 7/100 at `4f311a9e`; `.3.2.5` is item 8/100 at `6c1234cc`; `.3.2.6` is item 9/100 at
+  `f864f881`; `.3.2.7` is item 10/100 once committed. `.1` belongs to the prior checkpoint. This intermediate
+  boundary does not trigger a push.
 
 ## Decisions
 
@@ -999,6 +1022,8 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.5` | Exact full reading/baseline identity; required rollover; independent suffix/count/SHA-256 proof | PASS; final canonical proof required before landing ADR 0102 capacity step. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.5` | Exact default canonical gate; staged receipt; all nine commit doctrines; promoted receipt; empty brief/clean status | PASS at `6c1234cc`; Phase 0 1,032/1,032 and primary CLI 66/66 twice. No pending job. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.6` | Four exact compiler chunks/baseline identity; Knowledge reconciliation; prior receipt and dated sample review; exact two-file cleanup | PASS reading/evidence; final focused memory/doctrine/Knowledge/history and staged checks precede landing. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.6` | Required Knowledge/all nine doctrines; post-commit pointer; empty brief/clean status; derived-map review | PASS at `f864f881`; 944 facts / 7,996 keys. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.7` | Four suffix chunks/full-file identity; existing owner reconciliation; source-level Knowledge card | PASS reading; final focused memory/doctrine/Knowledge/history and staged checks precede landing. |
 
 ## Commit Log
 
@@ -1014,6 +1039,7 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `SESSION-STARTUP-READING.3.2.4` | `SESSION-STARTUP-READING.3.2.4 - read bootstrap grammar core` | Eleven unique Perl files read; attached-tail regex defect proved and `.9` owned. |
 | `SESSION-STARTUP-READING.3.2.5` | `SESSION-STARTUP-READING.3.2.5 - read compiler state and preserve history` | Twelve Perl files read; required complete-record rollover and finite capacity ADR 0102. |
 | `SESSION-STARTUP-READING.3.2.6` | `SESSION-STARTUP-READING.3.2.6 - read compiler generation and state assembly` | Compiler prefix read; prior canonical/loader evidence and historical duplicate-slot resolution preserved. |
+| `SESSION-STARTUP-READING.3.2.7` | `SESSION-STARTUP-READING.3.2.7 - complete compiler pipeline reading` | Thirteen whole Perl files read; source-level phase/mode boundaries indexed. |
 
 ## Changelog
 
@@ -1037,3 +1063,5 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   exactly one history member/manifest row under canonical verification. Next reading is `.3.2.6`.
 - `2026-09-06`: `.3.2.6` reads Compiler.pm 1–1041, records prior canonical/loader evidence, and links the
   historical duplicate-slot card to its existing fix. Next reading is `.3.2.7`; codebase/book remain incomplete.
+- `2026-09-06`: `.3.2.7` completes compiler reading and indexes its existing phase/mode boundaries.
+  Thirteen Perl files are read; `.3.2.8` reads SpecEntry.pm next.

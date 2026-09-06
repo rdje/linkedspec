@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `6c1234cc0fd3cb194c6d75314d86bfe05da104a0` — clean canonical compiler-state/history checkpoint.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.6 - read compiler generation and state assembly`; compiler prefix read.
+- activation_commit: `f864f881f5210a99d68602166e8720a741f84795` — clean compiler-prefix and evidence checkpoint.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.7 - complete compiler pipeline reading`; thirteen Perl files read.
 - active_work_unit: none; bounded reading and repairs remain pending in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: activate `SESSION-STARTUP-READING.3.2.7`; read Compiler.pm baseline lines 1042–2002,
+- next_action: activate `SESSION-STARTUP-READING.3.2.8`; read SpecEntry.pm baseline lines 1–600,
   then continue required reading and repairs `.7`–`.9` before Rust mutation setup.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge (EPERM-as-dead); `.8` stale comparison and `.9` regex-tail repair follow reading.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4985` is the twenty-sixth history segment; ADR `0102`
   authorizes exactly 28 collection files / 27 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; exhaustive inventory, exact coverage, rgx exclusion, and resumed batch progress (9/100 after `.3.2.6` lands) are in SESSION-STARTUP-READING.
+- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; exhaustive inventory, exact coverage, rgx exclusion, and resumed batch progress (10/100 after `.3.2.7` lands) are in SESSION-STARTUP-READING.

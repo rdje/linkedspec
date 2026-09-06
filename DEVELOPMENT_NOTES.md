@@ -10,6 +10,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.7 — pipeline stop and return boundaries
+
+- The pipeline validates compiled descriptor state and staged/progressive/recursive/recognition policies before
+  outward projection. Parse-only stops before compilation; generate-only stops after generation/source flush;
+  descriptor mode follows it. The new Knowledge card indexes these source-level boundaries and error ownership.
+- Root precedence, generated-v2 metadata, and invocation diagnostic semantics remain in their existing owners;
+  this reading establishes no new runtime defect or behavioral change. SpecEntry reading follows at `.3.2.8`.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.6 — compiler prefix and dated CI evidence
 
 - Compiler generation preserves v2 plan rows while carrying execution-only dependency slots, entry selection,

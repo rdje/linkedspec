@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.7 — complete compiler pipeline reading
+
+- Read Compiler.pm lines 1042–2002; all 2,002 lines / 84,924 bytes now read, with thirteen whole Perl files covered.
+- Reconciled existing state/root/generated/diagnostic owners and indexed source-level phase and return-mode boundaries.
+- Focused proof: exact reading/identity, Knowledge, memory/doctrines/history, and staged review. Product and book unchanged.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.6 — read compiler generation and state assembly
 
 - Read Compiler.pm baseline-identical lines 1–1041; generated-v2, state, slot, and diagnostic owners reconcile.
