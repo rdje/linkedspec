@@ -3,23 +3,26 @@
 ## Current Activity
 
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
-  exhaustive inventory are complete; codebase/book remain incomplete. `rgx` and its dependencies are excluded.
-- Intake `.31` preserves all baseline Perl source reading, supporting book/native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.42`–`.3.2.54` remain pending.
-- Repairs `.7`–`.30` and `.32`–`.40` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
+  physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
+- Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
+  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.43`–`.3.2.54` remain pending.
+- Repairs `.7`–`.30` and `.32`–`.43` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.41` completes recognition/observer runtime reading and preserves required bounded change history.
-  This is item 45/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.2.42` completes semantic call/index reading and preserves full physical mdBook coverage with book, mode, and inline-semantic repair ownership.
+  This is item 46/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.42`: read SemanticCallProjection 1–753 and SemanticIndex 1–395.
+- Activate `SESSION-STARTUP-READING.3.2.43`: read SemanticQuery 1–596, SemanticRuntimeProjection 1–214, and SemanticSourceMap 1–172.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.42` reads semantic call/index owners and preserves all 50 book files / 1,956,582 bytes.
+  Twenty semantic tests pass; .41/.42/.43 own book alignment, combined-mode validation, and inline-lifecycle projection repairs.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.41` reads runtime observers and passes 137 tests plus four neutral checks.
   `.39`/`.40` own boolean/unwind defects; required history rollover uses exact finite capacity and canonical proof.
@@ -65,9 +68,6 @@
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.27` reads helper fallback and numeric/string/collection dispatch; nine numeric
   tests and four descriptors pass, while the recorded Unicode-digit gap remains open.
-
-- `2026-09-06` — `SESSION-STARTUP-READING.3.2.26` reads block, receiver-chain, and tree dispatch; 23 AST tests and
-  hash/array/scalar root controls pass, with existing traversal chronology reconciled.
 
 ## History
 

@@ -2,9 +2,9 @@
 Execution-oriented companion to `ROADMAP.md`.
 
 Current session prerequisite: [SESSION-STARTUP-READING](docs/tasks/SESSION-STARTUP-READING.md) records the
-required-reading baseline, exact coverage, and `rgx` exclusion. Roadmap reading is complete; codebase/book remain
-incomplete. Intake `.31` preserves all Perl source reading and confirmed findings; queued comprehension
-checkpoints resume at `.3.2.42` (semantic call projection and index construction). Repairs `.7`–`.30` and `.32`–`.40` remain task-owned before Rust mutation setup;
+required-reading baseline, exact coverage, and `rgx` exclusion. Roadmap and physical mdBook reading are complete; codebase reading remains
+incomplete. Intakes .31/.3.2.42 preserve exact coverage and confirmed findings; queued comprehension
+checkpoints resume at `.3.2.43` (semantic queries, runtime projections, and source mapping). Repairs `.7`–`.30` and `.32`–`.43` remain task-owned before Rust mutation setup;
 policy-gate repair `.29` is part of `.5` adoption after the required reading.
 
 Rule-local cursor rollout is closed at 74 files / 8 complete + 0 pending / 60 mutations, with

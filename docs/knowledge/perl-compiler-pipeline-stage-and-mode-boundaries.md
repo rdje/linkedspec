@@ -58,3 +58,12 @@ remain in their existing canonical records:
 [[perl-root-rule-selection-core]], [[perl-root-rule-selection-routes]],
 [[perl-generated-source-contract-v2]], [[compilerstate-internal-model]],
 [[runtimecontext-boundary]], and [[linkedspec-pm-is-thin-facade]].
+
+## Public combined-mode limitation found September 6
+
+The table describes the compiler's successful source-level stops. It does not establish agreement of the
+outer Runtime and ParserFactory result validators for combined flags. Nine public Get controls and eight
+isolated factory controls at `SESSION-STARTUP-READING.3.2.42` show that requesting return_descriptor
+with either mode-only option produces a false outer diagnostic despite the successful undef stop.
+[[perl-get-mode-result-validation-precedence-drift]] owns exact evidence; repair `.42` covers both
+validators and the complete public matrix. Single-mode behavior in the table remains correct.

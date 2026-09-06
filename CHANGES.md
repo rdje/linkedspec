@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.42 — read semantic projection and preserve complete book coverage
+
+Read both semantic owners, 1,148 lines / 37,003 bytes; 20 semantic tests and unchanged neutral proof pass. Preserve complete physical book coverage (50 files / 1,956,582 bytes), exact identities, and bounded repair ownership .41/.42. Four input/direct controls, nine Get controls, and eight isolated factory controls distinguish teaching drift from a real combined-mode diagnostic defect. No public-book or runtime behavior changes. Four inline/bare lifecycle controls and two descriptor controls root the additional semantic-member loss owned by .43.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.41 — read runtime observers and preserve bounded change history
 
 Read 1,269 lines / 39,210 bytes; 137 runtime tests and four neutral checks pass; .39/.40 own measured defects.

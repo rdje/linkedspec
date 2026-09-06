@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.42 — semantic projection, complete reading, and claim boundaries
+
+The private call projector and opaque index preserve their current owners; the known no-function early-return defect remains .22-owned. Complete book reading exposes fixed-path/exact-marker public-checker gaps and incorrect input/mode descriptions; .41 owns bounded reconciliation. Compiler mode precedence differs from both outer result validators, independently reproduced under .42. Exact loader observation, consumed canonical proof, and all current reading evidence remain in task/Knowledge records. A forward static-projection control also proves that header-inline I executes but loses its lifecycle record; .43 owns this source-scanning repair.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.41 — recognition value kind and unwind state need distinct repairs
 
 Eight public value controls expose boolean-to-number conversion; four typed-exit controls expose unrestored actual cursor state.

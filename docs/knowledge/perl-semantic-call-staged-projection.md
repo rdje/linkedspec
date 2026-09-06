@@ -12,11 +12,11 @@ answers:
   - "does Perl semantic call projection expose ActionIR or generated source"
   - "what does semantic_index_perl_calls_projection test"
   - "are Perl semantic capabilities and query public after calls projection"
-date: 2026-07-21
+date: 2026-09-06
 status: current private compiled projection; public query/runtime layers and composed admission added separately
 tags: [perl, semantic-introspection, actionir, calls, bindings, staging, generated-source, unicode]
 evidence: perl/LinkedSpec/SemanticCallProjection.pm; perl/LinkedSpec/SemanticStaticProjection.pm; perl/LinkedSpec/GeneratedSource.pm; t/semantic_index_perl_calls_projection.t; FUTURE-PARITY-BACKLOG.10.3.3.1.1
-reverify: PERL5LIB= prove -Iperl t/semantic_index_perl_calls_projection.t && bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py && perl tools/check_generated_source_contract.pl
+reverify: bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/semantic_index_perl_calls_projection.t && bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py && bash tools/project_data_run.sh env PERL5LIB= perl tools/check_generated_source_contract.pl
 ---
 
 `LinkedSpec::semantic_index(...)` now retains the corrected calls snapshot's complete private compiled projection.
@@ -50,3 +50,15 @@ Related facts: [[perl-semantic-static-projection]], [[perl-semantic-introspectio
 [[perl-semantic-introspection-admission]],
 [[semantic-introspection-staged-artifact-schema]], [[semantic-introspection-generated-plan-authority]],
 [[outward-descriptor-is-not-semantic-wire-model]].
+
+## September 6 source-reading boundary
+
+`SESSION-STARTUP-READING.3.2.42` reads all 753 SemanticCallProjection lines and all 395 SemanticIndex
+lines at unchanged baseline baeb984e. The source retains authored definition merging, bounded fixed-point
+function-shape inference, typed call preorder, independent staged provenance, and shared generated-v2
+identity. Three focused foundation/call/query suites pass twenty tests collectively.
+
+The projection description above concerns its supported compiled-call path. An empty function registry
+still returns before rule-call traversal, so helper-only rules can lose call and binding records.
+That independently reproduced defect remains `.22`-owned in
+[[semantic-rule-calls-empty-function-gate]]; passing the existing call snapshot does not close it.

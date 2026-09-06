@@ -60,3 +60,20 @@ prelaunch work, or move caches off-volume. `.19.3.4.1` is closed not-required un
 contradicts the fresh unique controls.
 
 Related: [[project-data-storage-enforcement]], [[top-rule-is-ordinary-rule-entered-first]].
+
+## Later September 6 progressive-consumer observation
+
+During the frozen `SESSION-STARTUP-READING.3.2.41` canonical run, the managed Rust progressive
+admission binary was launched at 19:37:18.113 +0200. The one-second sample at 19:42:49.159 +0200
+on macOS 26.6.2 build 25G83 found PID 91339 at 112 KiB, with all 803 samples at `_dyld_start`.
+This places that sampled delay before Rust main; it does not identify a kernel or policy cause.
+The wait cleared without intervention, and the consumer passed 1/1 in 332.85 test seconds after
+its separate 16m40s build. These times are distinct phases, not a single measured launch duration.
+
+The report was created at
+`.linkedspec-data/scratch/startup45-progressive-launch-91339.sample.txt`; its SHA-256 was
+`da395d33cb3bf7784d504c3d902b371dc3cfb9f8cd6ad80d42e8205d373e89d5`.
+After full consumption and hash verification, only that exact report was deleted and its absence
+verified. No target cleanup, recovery/purge, signing change, or trust bypass occurred.
+The completed reading checkpoint `.3.2.42` preserves this dated observation separately from
+the older controlled OS-specific conclusion.

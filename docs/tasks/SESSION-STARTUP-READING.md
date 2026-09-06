@@ -35,7 +35,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -717,12 +717,26 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.41 - read runtime observers and preserve bounded change history`
 
 - ID: `SESSION-STARTUP-READING.3.2.42`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 40: 1,148 lines/fragments, 37,003 bytes.
   Scope: `perl/LinkedSpec/SemanticCallProjection.pm` lines 1–753; `perl/LinkedSpec/SemanticIndex.pm` lines 1–395.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+    Preserve complete forward mdBook coverage and exact current-baseline verification; own confirmed
+    book drift, combined compiler-mode validation, and forward inline-lifecycle findings before Knowledge.
+  Verification tier: `focused`
+  Focused checks: Exact source/book baseline identity; complete forward reading evidence; managed semantic
+    foundation/calls/query tests; neutral semantic/generated-source proof; public input/direct and complete
+    compiler/factory mode controls; Knowledge/memory/doctrines/history pressure and final staged diff review.
+  Canonical trigger: `none` — reading evidence and repair ownership only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Exact source identity and 1,148-line / 37,003-byte scoped reading pass. Three managed semantic
+    suites pass 20 tests; current neutral semantic/generated-source proof is reused from the unchanged
+    preceding canonical inputs. All 50 book files / 1,956,582 bytes are physically read and baseline-identical,
+    with complete nonoverlapping interval/digest proof. Four public/direct input controls, nine public compiler
+    controls, and eight isolated factory controls establish bounded teaching and .42 validator findings.
+    .41 owns eight book-repair lanes. Four forward inline-lifecycle query controls plus two descriptors
+    reproduce .43 source-member loss; no runtime/public-book repair or codebase-wide completion is claimed.
+  Commit: `SESSION-STARTUP-READING.3.2.42 - read semantic projection and preserve complete book coverage`
 
 - ID: `SESSION-STARTUP-READING.3.2.43`
   Status: `pending`
@@ -894,7 +908,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `pending`
   Goal: Read the complete mdBook and check its explanations against the roadmap and codebase.
   Acceptance: Split by SUMMARY.md chapters and bounded ranges before execution; read every chapter and own any verified drift.
-  Verification: `pending`
+  Verification: Physical source reading is complete under .31/.3.2.42: 50 files / 1,956,582 bytes,
+    exact baseline identity and nonoverlapping interval/hash proof. Formal codebase/roadmap reconciliation,
+    subsequent deltas, and rendered inspection remain pending; .41 owns the additional verified book drift.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.5`
@@ -1704,11 +1720,159 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: `pending`
   Commit: `pending`
 
+- ID: `SESSION-STARTUP-READING.41`
+  Status: `pending`
+  Goal: Reconcile the completely read mdBook with current executable contracts and prevent the measured claim gaps.
+  Dependencies: `.3`/`.4`/`.5`.
+  Children: `.41.1`, `.41.2`, `.41.3`, `.41.4`, `.41.5`, `.41.6`, `.41.7`, `.41.8`
+  Acceptance: Preserve dated historical evidence while correcting claims presented as current. Every child
+    owns bounded authoring and executable claim checks; split implementation before editing if it exceeds
+    one safe slice. Coordinate existing .28/.29/.30 and runtime repair owners without double-closing them.
+
+- ID: `SESSION-STARTUP-READING.41.1`
+  Status: `pending`
+  Goal: Correct staged parse-job authoring, recursive dispatch, and provider-boundary teaching.
+  Acceptance: Reconcile design rationale, pipeline overview, EBNF walkthrough, and backend handoff with
+    the current assignment-only parse_job contract and all-six-runtime admission. Qualify the historical
+    function-body-v1 limitations; preserve current prohibition of ambient loading/provider lookup and the
+    separate unimplemented import model. Coordinate .28.3's introduction repair. Exercise the actual
+    contradictory paragraphs and all affected chapter paths through meaningful public-checker mutations;
+    exact markers alone must not certify surrounding false current prose. Render and run required public proof.
+  Verification: `pending` — .3.2.42 records fully read pages and passing neutral/public controls despite
+    explicit current unsupported/future claims; fixed path sets and exact denials explain the gap.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.41.2`
+  Status: `pending`
+  Goal: Align cursor dispatch, generated routes, and named capture-selector status.
+  Acceptance: Reconcile regex/blind-call/generated-handler guides and formal/runtime/backend appendices
+    against current rule-local cursor-v2 and admitted named gap capture. Distinguish authored mode policy,
+    dispatch-edge matching, public entry, and direct handler execution; remove only false current migration
+    claims. Cover affected pages beyond the existing regex link markers and omitted guides. Coordinate .30
+    grouped-edge and .27 lifecycle semantics; add independently justified examples, recurrence checks, and render.
+  Verification: `pending` — current guides still describe Julia/Lua v1 adapters and future named selectors;
+    the cursor contract's current reader/marker coverage does not enforce those paragraphs.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.41.3`
+  Status: `pending`
+  Goal: Reconcile semantic API and MCP backend status across descriptor and handoff teaching.
+  Acceptance: Replace descriptor-reference future-native-API claims and qualify historical handoff ledger
+    snapshots against current all-six semantic/MCP admission. Coordinate .28.4, .36, and semantic repairs .22/.23/.43; do not imply that
+    passing admission closes separately owned call projection or error-order defects. Test actual stale
+    paragraphs and current backend status claims, retain dated milestones, and render the book.
+  Verification: `pending` — descriptor reference lines 96–99 contradict current semantic admission while
+    existing public marker/denial checks pass; full handoff reading finds mixed historical/current wording.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.41.4`
+  Status: `pending`
+  Goal: Reconcile gap-capture and typed-source current status without erasing historical measurements.
+  Acceptance: Correct descriptor-reference Dart pending and diagnostics Lua dormant claims; reconcile
+    capture guide current gap and typed-source counts with canonical owners. Keep the public typed-span
+    API exclusion and genuinely historical counts explicit. Extend the gap public inventory beyond its
+    omitted descriptor/diagnostic chapters and test the observed false-current claims. Run focused neutral
+    plus required public proof, render, and coordinate current typed/gap repair owners.
+  Verification: `pending` — current gap 9 complete/0 pending and typed 14 complete/0 pending coexist
+    with stale current paragraphs; the exact eight-document gap reader omits two affected chapters.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.41.5`
+  Status: `pending`
+  Goal: Correct compiler mode, document-input, and leading-trivia API boundaries.
+  Dependencies: `.42` for final combined-option contract claims.
+  Acceptance: Teach parse_only as an undef stop before compiled-state generation and generate_only as
+    source parsing/validation plus generation ending in undef; document source capture separately.
+    Distinguish specification-envelope validation from document input. Public entry skips leading trivia
+    once; direct descriptor handlers bypass that wrapper. Preserve four input/direct controls and the
+    nine-case option/invalid-source matrix, add copyable examples, cover the actual false prose, and render.
+    Reverify the separate dual-bootstrap-equivalence claim before changing its scope.
+  Verification: `pending` — public empty and ordinary non-spec document input succeed; leading
+    blank/comment input starts at cursor 8 publicly and 0 directly. Compiler/API prose conflates those
+    boundaries; .42 owns the independent combined-mode false diagnostic.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.41.6`
+  Status: `pending`
+  Goal: Resolve remaining lifecycle, helper, authoring, and representation assertions with exact controls.
+  Acceptance: Assess the contradictory E/EX/LX ordering tables against family-specific emitted behavior;
+    coordinate .27 rather than infer a single global order. Check bare push dispatch, mutation-result
+    expressions, num_mod noninteger behavior, zero-progress thresholds, inline comments, fluent child-value
+    examples, entry-versus-match captures, and tablegrep precedence statements against existing Knowledge
+    and public tools. Check HandlerIR host-code versus language-neutral guidance against adopted decisions.
+    These are assessment candidates, not newly established runtime defects. Root any surprise, create a
+    bounded repair child before changes, and close each candidate with evidence, public examples, and render.
+  Verification: `pending` — full-book reading identifies the listed ambiguous or conflicting assertions;
+    no unmeasured runtime failure or output-wrapper defect is claimed.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.41.7`
+  Status: `pending`
+  Goal: Align public development commands and verification cadence with adopted workflow and locality.
+  Acceptance: Coordinate .29 and policy adoption .5 for actual gate-family/default decisions. Correct
+    full-CI-per-behavior-change wording to ADR 0073's focused default and canonical boundaries. Ensure
+    every copyable project command runs from the repository root with managed data routing; review direct
+    Julia/Dart/Cargo examples and retain documented toolchain dependencies. Make existing task ownership
+    explicit for small doc fixes. Replace moving capacity/capability-count duplication with canonical
+    pointers or qualified dated evidence; cover actual workflow claims and render without inventing policy.
+  Verification: `pending` — local-CI prose says full gate for every behavior change and default toolchain
+    independence; current canonical gate runs mandatory backend admissions and reports 20 capabilities/100 states.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.41.8`
+  Status: `pending`
+  Goal: Close whole-book alignment and recurrence after the bounded repairs.
+  Dependencies: `.41.1`–`.41.7`; related `.28`/`.30` repairs.
+  Acceptance: Reconcile all 50 baseline book paths and intervening changes with code, roadmap, task owners,
+    decisions, examples, and actual checker coverage. Preserve historical counts as dated observations.
+    Render and inspect the book, run exact public/cross-runtime and canonical proof, and close .41 only
+    when every child and every confirmed public claim defect has its completed repair evidence.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.42`
+  Status: `pending`
+  Goal: Preserve successful mode-only compilation when return_descriptor is also requested.
+  Dependencies: `.3`/`.4`/`.5`.
+  Acceptance: Reconcile existing compiler option precedence with facade and factory validation. Cover all
+    eight parse_only/generate_only/return_descriptor combinations through public Get and get_parser, exact
+    source capture, and preservation of genuine compile failures. The compiler's successful undef stop
+    must not acquire runtime_owner or parser_factory failure merely because descriptor output is also
+    requested. Preserve malformed defined-result rejection and trace classification. Add independently
+    justified failing regressions, repair both validators, update API/book/Knowledge under .41.5, and run
+    focused direct-dependent plus required public proof. Ask only if a newer normative authority actually
+    conflicts with the established option contract.
+  Verification: `pending` — the nine-case public Get control finds false runtime_owner/run_get_pipeline
+    errors for all three descriptor-plus-mode combinations; the five other combinations and invalid-source
+    attribution behave as recorded. Runtime's descriptor-first predicate was introduced by 86d6511c7,
+    while Compiler checks parse_only, then generate_only, then return_descriptor. ParserFactory has the
+    same descriptor-first result check: eight isolated callback controls independently reproduce its three
+    false errors and failed trace classification. The named-source public get_parser matrix remains to be measured.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.43`
+  Status: `pending`
+  Goal: Preserve explicit inline lifecycle members in semantic introspection.
+  Dependencies: `.3`/`.4`/`.5`.
+  Acceptance: Reproduce equivalent header-inline and following-line I blocks through public Get,
+    descriptor/source tools, and semantic queries. Both execute return(7), but only the multiline form
+    currently produces lifecycle:rule:Top:I:0. The scanner recognizes the header then skips its remaining
+    text, leaving no member for lifecycle projection. Reconcile lifecycle/source-span authority, census
+    supported inline members and all six runtimes, and decompose affected repairs before editing. Preserve
+    authored member order, exact Unicode/newline/header/member spans, function masking, and multiline
+    nesting; bare action blocks must not gain an invented explicit I marker. Add independent regressions,
+    update semantic teaching/Knowledge, and run focused plus required public/cross-runtime proof.
+  Verification: `pending` — four public controls return seven without errors and query successfully;
+    explicit inline I has zero lifecycle records, explicit multiline I has one, and both bare controls have
+    none. SemanticStaticProjection _scan_source 589–601 ignores _parse_header's tail before member capture.
+    This is separate from .22's function-registry gate and .23's fabricated failure explanation.
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.42` | `pending` | read SemanticCallProjection 1–753 and SemanticIndex 1–395. |
+| 1 | `SESSION-STARTUP-READING.3.2.43` | `pending` | read SemanticQuery 1–596, SemanticRuntimeProjection 1–214, and SemanticSourceMap 1–172. |
 
 ## Reading Ledger
 
@@ -1719,8 +1883,8 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.42`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
-| mdBook | **No** | `.31` records fourteen complete book sources plus the two earlier local-CI ranges: 640,041 bytes of disjoint coverage. | Remaining 1,316,541 source bytes, formal chapter checkpoints, and rendered alignment under `.4`. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.43`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
+| mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
 manifest or an absolute checkout path:
@@ -3184,6 +3348,137 @@ PERL
   History capacity has its separate Knowledge record. No runtime, public-book, protocol, or admission edits;
   codebase/book remains No. The next checkpoint is `.3.2.42`.
 
+### Semantic call/index ownership and complete physical book coverage at `.3.2.42`
+
+- Activated from clean `da8185b94972441b07034eece644cc7efd14dc97` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read SemanticCallProjection 1–240 / 241–500 / 501–753 and SemanticIndex 1–220 / 221–395
+  completely during the preceding frozen canonical run. Exact source identity passes: 1,148 lines /
+  37,003 bytes. This comprehension checkpoint does not duplicate .31's physical Perl-reading credit.
+- Reconciled authored definition ordering, bounded function-shape propagation, typed call traversal,
+  function-before-helper resolution, separate staged payload/job/result provenance, shared generated-v2
+  identity, and detached private projections. The opaque index retains copied source/outcome/projection,
+  delegates queries without parser execution, and derives independent observation snapshots.
+  Existing .22 still owns the empty-function early return; no passing snapshot closes that defect.
+- Managed foundation/call/query tests pass three files / twenty top-level tests in 39 wall seconds.
+  Current neutral semantic proof passes 6 fixture groups / 20 exact queries / 128 mutations / 9 complete
+  rollout rows / 6 complete admission rows. The preceding canonical generated-source proof is retained
+  against unchanged inputs; no extra full gate is run for this ordinary evidence checkpoint.
+- Complete physical mdBook coverage is recorded separately below. Verified current paragraphs were
+  compared with existing Knowledge, public controls, exact contract reader/marker/denial loops, and the
+  current neutral proof. .41.1–.41.8 own bounded book reconciliation; .28/.29/.30 keep their prior scopes.
+  Historical snapshots remain dated. Other lifecycle/helper/representation questions remain assessment
+  candidates until exact tools and authority establish their behavior.
+- An initial public mode control's error-free assumption failed, triggering complete diagnosis. Nine
+  final Get cases cover all eight mode/descriptor combinations plus invalid generate-only source. The
+  three descriptor-plus-mode combinations return the compiler's successful undef but acquire a false
+  runtime_owner/run_get_pipeline error. parse_only produces no generated source; the other generated
+  paths capture 8,806 bytes for the exact small fixture. Invalid source keeps compiler validation
+  attribution. Forced parse-only bootstrap output was captured in memory.
+- Eight isolated ParserFactory callback controls reproduce the same three false errors at its own
+  compile_spec validator and failed trace decision, independently of Runtime. Full Runtime history
+  86d6511c7 introduces descriptor-first validation; April 9 c5ba9fe57 renames the checked key from return_descr to return_descriptor without changing priority.
+  Compiler checks parse_only, generate_only, then descriptor. .42 owns both validator repairs and full
+  public named-source coverage, with exact matrices in its Knowledge card.
+- Four input/direct controls return cursor zero for empty input, ordinary non-spec text, and ordinary
+  leading space; leading blank/comment input returns eight publicly and zero through the descriptor
+  handler. All contexts are error-free. Runtime's one public-entry skip loop and Compiler's scalar-ref
+  guard explain why the book's every-handler skip and document-as-spec restrictions are false.
+- Forward .3.2.44 diagnosis uses four public Get/query twins: every parser returns seven without
+  errors, but explicit header-inline I has zero lifecycle records and following-line I has one.
+  Both bare-body controls have no explicit I record. Two outward descriptors have identical public
+  metadata and expose no lifecycle body fields. _scan_source recognizes a header and skips its tail;
+  lifecycle projection uses only captured members. Source 460–505 / 568–710 and the complete
+  155-line static test were read after the public tools. .43 owns exact member/span authority,
+  all-six-runtime census, bounded repair and regressions; other runtimes were not measured here.
+- The previously consumed macOS progressive-launch sample and eventual passing test are preserved in
+  their existing Knowledge owner, with exact sample SHA and exact-path cleanup evidence. It proves the
+  sampled pre-main loader boundary, not a newly controlled kernel/policy cause.
+- Additional supporting source reads include ParserFactory 1–85 / 275–368, Compiler 1780–1938,
+  Runtime 115–154, phase0 9865–9975, .githooks/pre-commit 1–27 (EOF), and
+  knowledge-map/scripts/check_knowledge_map.sh 1–90. These are bounded supporting ranges, not full
+  verification/tooling lane completion.
+- During the preceding long gate, prepared evidence was saved at
+  .linkedspec-data/scratch/startup46-preparation-20260906.json: 148,121 bytes, SHA-256
+  9617f5c29d41c552f020997afc82083b0c17b8107a8f9d2bb48e2dcc9414dc99, with exact readback.
+  It is temporary recovery data, not a substitute for these task/Knowledge/Git records. After this
+  checkpoint commits, verify that exact size/hash and delete only that file, then prove its absence.
+- No runtime, public-book, policy, protocol, or infrastructure edit occurs. Roadmap and physical mdBook
+  reading are Yes; codebase reading is No and formal .4 alignment remains pending. Next .3.2.43 reads
+  the query, runtime-projection, and source-map owners.
+- The preceding exact staged canonical gate passed at base e548ce4be5d3164ab8be54dc3d63dece2dda0ffb,
+  candidate SHA-256 494bab842b8b16dc553c8de43ff97ca5d2e0fa3a147f103d6bf8d3fdc624f0e4.
+  Both primary CLI environments pass 66/66; Phase 0 passes 1,032 tests in 1,051 wall seconds.
+  The default gate exited zero; optional local gates and recurring matrices were not enabled.
+  Commit da8185b94972441b07034eece644cc7efd14dc97 exists after the configured pre-commit gate;
+  the repeated post-commit pointer and exact promoted HEAD receipt pass, and the brief is zero bytes.
+  The final commit-command output was lost across context compaction, so its stdout is not claimed.
+
+### Complete physical mdBook reading preserved at `.3.2.42`
+
+The `.3.2.41` staged canonical candidate remained frozen while read-only preparation completed every
+remaining book range. The fourteen complete files and two partial ranges of one local-CI file recorded
+under `.31` account for 640,041 bytes; this pass adds exactly 1,316,541 disjoint bytes. All 50 tracked
+book files, including configuration and SUMMARY, are fully read: 1,956,582 bytes. These are file counts,
+not fifty prose chapters. The earlier two partial ranges do not mean two partial files.
+
+Every chapter was consumed in bounded untruncated outputs. Final independent verification reconciles all
+64 interval records, their SHA-256 digests, contiguous complete line coverage without overlaps or holes,
+the exact 50-path set, and current bytes against reading baseline
+`baeb984e36a94a15951cd23d4c52def5064cdaca`. All checks pass. Git plus this complete path/range ledger
+remains the inventory; no duplicate manifest is introduced. Previously truncated outputs received no
+credit until their exact ranges were reread.
+
+The following thirty-six files now join the fourteen complete files listed under `.31`. Every range is
+1 through the stated EOF. The local-CI row includes its two earlier partial ranges exactly once.
+
+| Book path below `docs/linkedspec-book/` | Full lines; bytes |
+| --- | ---: |
+| `src/overview/design-rationale.md` | 259; 16,310 |
+| `src/overview/project-status.md` | 1,641; 182,688 |
+| `src/user-model/spec-files-and-rule-paragraphs.md` | 318; 13,457 |
+| `src/user-model/worked-spec-walkthrough.md` | 342; 12,718 |
+| `src/user-model/rule-modes-and-parse-modes.md` | 896; 39,736 |
+| `src/user-model/regex-in-spec.md` | 290; 13,692 |
+| `src/user-model/blind-calls-and-parser-orchestration.md` | 469; 13,945 |
+| `src/user-model/runtime-context-and-tracing.md` | 625; 25,247 |
+| `src/public-api/get-and-get-parser.md` | 682; 31,740 |
+| `src/public-api/descriptor-introspection.md` | 642; 31,584 |
+| `src/dsl/action-model-and-helper-surface.md` | 228; 11,189 |
+| `src/dsl/actionir-lowering-mental-model.md` | 193; 9,901 |
+| `src/dsl/declaration-helper-reference.md` | 93; 2,612 |
+| `src/dsl/fluent-and-block-forms.md` | 541; 17,474 |
+| `src/dsl/capture-marks-and-source-locations.md` | 1,431; 93,808 |
+| `src/dsl/source-boundary-helper-reference.md` | 648; 34,135 |
+| `src/compiler/pipeline-overview.md` | 637; 43,440 |
+| `src/compiler/staged-ast-enrichment.md` | 958; 57,285 |
+| `src/compiler/compiled-state-model.md` | 289; 15,178 |
+| `src/compiler/generated-handlers-and-dispatch.md` | 525; 31,655 |
+| `src/compiler/diagnostics.md` | 267; 12,299 |
+| `src/specs-and-corpora/shipped-specs-and-corpora.md` | 334; 16,423 |
+| `src/specs-and-corpora/lispish-spec-walkthrough.md` | 425; 9,522 |
+| `src/specs-and-corpora/ebnf-spec-walkthrough.md` | 786; 23,758 |
+| `src/specs-and-corpora/tablegrep-spec-walkthrough.md` | 96; 4,959 |
+| `src/specs-and-corpora/portmap-spec-walkthrough.md` | 118; 4,746 |
+| `src/specs-and-corpora/pplugin-spec-walkthrough.md` | 101; 5,894 |
+| `src/architecture/owner-tree.md` | 625; 45,849 |
+| `src/architecture/structured-format-program.md` | 178; 11,906 |
+| `src/appendix/formal-grammar.md` | 1,308; 71,322 |
+| `src/appendix/runtime-semantics.md` | 759; 37,484 |
+| `src/appendix/backend-handoff.md` | 2,923; 217,400 |
+| `src/development/local-ci-and-regression.md` | 2,048; 146,113 |
+| `src/development/macos-rust-launch-latency.md` | 26; 1,686 |
+| `src/development/codegen-inspector.md` | 53; 2,518 |
+| `src/development/documentation-workflow.md` | 232; 10,360 |
+
+Physical reading is Yes; `.4` remains pending formal alignment with the unread codebase and review of
+subsequent changes. `.41.1`–`.41.8` own the additional book repair lanes, coordinated with existing
+`.28`/`.29`/`.30`; `.42` owns the independently reproduced combined-mode validator defect.
+Verified paragraph/checker mechanisms and exact public controls live in
+`docs/knowledge/startup-public-teaching-checker-blind-spots.md` and
+`docs/knowledge/perl-get-mode-result-validation-precedence-drift.md`.
+Other lifecycle/helper/representation assertions remain explicitly bounded assessment candidates,
+not unmeasured runtime defect claims. No public-book, runtime, or policy changes occurred.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -3226,7 +3521,8 @@ PERL
   `.3.2.38` is item 42/100 at `34af111f`;
   `.3.2.39` is item 43/100 at `800fc5a4`;
   `.3.2.40` is item 44/100 at `e548ce4b`;
-  `.3.2.41` is item 45/100 once committed.
+  `.3.2.41` is item 45/100 at `da8185b9`;
+  `.3.2.42` is item 46/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -3336,6 +3632,7 @@ PERL
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.39` | Exact baseline ranges; plugin/progressive Knowledge and ADR 0080; managed 138 tests and neutral 9/9/116 plus public 6/12/10/60; public plugin and six ceiling controls; focused continuity | PASS reading and existing proof; resource/diagnostic enforcement gaps rooted and owned by `.37`; one new/four updated cards. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.40` | Exact baseline ranges; recognition authority/integration/neutral Knowledge; managed 59 tests and 138/250/58 at 9/9; six post-terminal controls; focused continuity | PASS reading and existing proof; obsolete snapshot restoration rooted and repair-owned by `.38`; one new/three updated cards. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.41` | Exact source baseline; 137 Perl tests; typed/semantic/diagnostic/logical neutral proof; eight value/four exit controls; required history rollover and exact-source proof; staged canonical boundary | PASS focused reading/probes; `.39`/`.40` own defects; ADR 0104 finite history capacity requires final staged canonical receipt before landing. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.42` | Exact source/book identities; 20 semantic tests; neutral semantic/generated proof; four input/direct, nine Get, and eight isolated factory controls; Knowledge and focused continuity; four inline-lifecycle and two descriptor controls | PASS reading and finite controls; physical mdBook Yes, codebase No; .41/.42/.43 own repairs without premature implementation. |
 
 ## Commit Log
 
@@ -3387,6 +3684,7 @@ PERL
 | `SESSION-STARTUP-READING.3.2.39` | `SESSION-STARTUP-READING.3.2.39 - read progressive authority and own ceiling enforcement gaps` | Plugin and progressive owners read; measured ceiling enforcement gaps repair-owned with exact controls. |
 | `SESSION-STARTUP-READING.3.2.40` | `SESSION-STARTUP-READING.3.2.40 - read recognition core and own post-terminal restoration defect` | Recognition core/static owners read; post-terminal cross-owner snapshot restoration repair-owned. |
 | `SESSION-STARTUP-READING.3.2.41` | `SESSION-STARTUP-READING.3.2.41 - read runtime observers and preserve bounded change history` | Runtime owners read; boolean/unwind repairs owned; exact change-history suffix and finite routing capacity preserved. |
+| `SESSION-STARTUP-READING.3.2.42` | `SESSION-STARTUP-READING.3.2.42 - read semantic projection and preserve complete book coverage` | Semantic call/index comprehension, complete book coverage, and measured book/compiler/inline-semantic repair ownership preserved. |
 
 ## Changelog
 
@@ -3482,3 +3780,4 @@ PERL
   post-terminal controls, owns `.38`, and advances to `.3.2.41`.
 - `2026-09-06`: `.3.2.41` reads runtime observers, passes 137 tests and four neutral checks, owns `.39`/`.40`, and performs
   required change-history rollover with ADR 0104; next `.3.2.42` after exact staged canonical proof.
+- `2026-09-06`: `.3.2.42` reads semantic call/index owners, preserves complete 50-file book reading, and owns .41/.42/.43 repairs with exact public and isolated controls.
