@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.19 — complete contract assembly ownership
+
+- Contracts resolves required callbacks before concatenating fourteen groups; staged/progressive groups delegate
+  to dedicated owners. The existing lowering card records source order without claiming new runtime admission.
+- Six untruncated suffix ranges complete the file; 64 Perl files remain unread. ControlFlow is next.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.18 — projection catalog and historical status
 
 - The typed-source catalog returns 47/30/11/4 rows across capture/entry/input/cursor families; nested mutation

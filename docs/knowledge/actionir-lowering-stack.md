@@ -6,11 +6,13 @@ answers:
   - "what are the ActionIR sub-owners"
   - "how does helper code get from .spec to emitted Perl"
   - "what is the ActionIR pipeline"
-date: 2026-06-12
+  - "in what order are Perl action lowering contract groups assembled"
+  - "where is the complete Perl action lowering contract catalog built"
+date: 2026-09-06
 status: current
 tags: [architecture, actionir, lowering, pipeline]
 evidence: "ARCHITECTURE_STATE.md §ActionIR Reading documents the ActionIR sub-owners. SESSION-STARTUP-READING.3.2.12 reverified EmitContext's fourteen registry keys: these thirteen ActionIR owners plus the separate Trace owner."
-reverify: "ls perl/LinkedSpec/ActionIR/*.pm | wc -l"
+reverify: "ls perl/LinkedSpec/ActionIR/*.pm | wc -l; sed -n '/^sub build_action_lowering_contracts {/,/^}/p' perl/LinkedSpec/ActionIR/Contracts.pm"
 ---
 
 The ActionIR subtree transforms `.spec` action code through a staged pipeline:
@@ -37,5 +39,14 @@ subset of EmitContext's fourteen keys; `trace` maps separately to `LinkedSpec::T
 See [[emitcontext-owner-registry]] for the exact source extraction command. This corrects
 the original evidence's ambiguous “all 13 keys” wording; the dated pipeline inventory above
 is not a fresh audit of every ActionIR module.
+
+Contract assembly reverified on 2026-09-06 under `SESSION-STARTUP-READING.3.2.19`:
+`Contracts::build_action_lowering_contracts` resolves required callbacks, then concatenates
+fourteen groups in this source order: call/dispatch, recursive observation, inter-match gap,
+recognition transaction, staged parse job, progressive span dispatch, return, capture/cursor,
+compatibility IR passthrough, assignment/regex, array pipeline, dropped value, flow control,
+and emit/declare. The staged and progressive groups delegate to their dedicated owners;
+the other groups are built locally. This is source ownership/order evidence, not fresh
+runtime admission or parity proof. The complete file is 2,513 baseline lines / 113,936 bytes.
 
 Related: [[emitcontext-owner-registry]], [[scanner-rule-family-architecture]], [[ownerdispatch-shared-seam]].

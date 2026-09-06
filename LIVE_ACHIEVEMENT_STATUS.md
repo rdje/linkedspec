@@ -12,15 +12,18 @@
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.18` reads the Contracts prefix and rechecks the detached typed-source catalog.
-  This is item 21/100; twenty-four full Perl files plus the prefix read. Codebase/book remain incomplete.
+- `SESSION-STARTUP-READING.3.2.19` finishes Contracts and indexes its ordered builder.
+  This is item 22/100; twenty-five full Perl files read. Codebase/book remain incomplete.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.19`: finish ActionIR/Contracts.pm baseline lines 1397–2513.
+- Activate `SESSION-STARTUP-READING.3.2.20`: read ActionIR/ControlFlow.pm baseline lines 1–1485.
   Complete required reading and policy review, then repairs `.7`–`.15` before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.19` finishes Contracts and indexes its fourteen-group
+  builder; twenty-five whole Perl files read, and ControlFlow is next.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.18` reads Contracts 1–1396, checks its detached 92-row
   catalog, and reconciles historical card status. Contracts suffix is next.
@@ -66,9 +69,6 @@
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.4` reads the core and proves attached-tail regex truncation;
   repair `.9` is owned, and `.3.2.5` continues mandatory reading.
-
-- `2026-09-06` — `SESSION-STARTUP-READING.3.2.3` reads five adapters and proves stale comparison state;
-  repair `.8` is owned, and `.3.2.4` continues mandatory reading.
 
 ## History
 
