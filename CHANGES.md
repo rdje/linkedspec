@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.11 — read RuleIR and own edge-order repair
+
+- Read all 987 lines / 31,462 bytes of RuleIR; sixteen whole Perl files covered.
+- Public OR/AND controls and direct normalization prove bare-before-explicit execution-order drift while metadata
+  retains authored order. Repair `.12` owns correction and carrier verification after mandatory reading.
+- Focused identity/probes, Knowledge, memory/doctrines/history, and staged review; product source/book unchanged.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.10 — complete validation reading
 
 - Read Validation.pm 1321–1904; all 1,904 lines / 61,929 bytes now covered, with fifteen whole Perl files read.

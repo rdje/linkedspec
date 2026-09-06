@@ -35,7 +35,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -248,12 +248,19 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.10 - complete validation reading`
 
 - ID: `SESSION-STARTUP-READING.3.2.11`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 9: 987 lines/fragments, 31,462 bytes.
   Scope: `perl/LinkedSpec/RuleIR.pm` lines 1–987.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact reading chunks/baseline identity; current rule-local/root/slot/trace Knowledge and direct/public ordering probes;
+    memory/doctrine/Knowledge/history checks; `git diff --check` and final staged review.
+  Canonical trigger: `none` — source-reading continuity only; no production, infrastructure, or public change.
+  Verification: Five untruncated chunks cover all 987 lines / 31,462 bytes; baseline identity passes.
+    Existing collection/normalization/planning owners reconcile. Public OR/AND and spelling controls plus
+    direct collect/normalize probes confirm bare/explicit execution-order drift; repair `.12` is owned.
+    Focused continuity/Knowledge checks precede landing; no runtime source change.
+  Commit: `SESSION-STARTUP-READING.3.2.11 - read RuleIR and own edge-order repair`
 
 - ID: `SESSION-STARTUP-READING.3.2.12`
   Status: `pending`
@@ -679,7 +686,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING.5`
   Status: `pending`
   Goal: Complete supplied-policy adoption/update comparisons and the startup alignment review before implementation.
-  Acceptance: Record local adoption evidence and applicable donor updates; own any required changes; confirm all three reading answers Yes, then route to repairs `.7`–`.11` before restoring RUST-MUTATION-TESTING.1.
+  Acceptance: Record local adoption evidence and applicable donor updates; own any required changes; confirm all three reading answers Yes, then route to repairs `.7`–`.12` before restoring RUST-MUTATION-TESTING.1.
   Verification: `pending`
   Commit: `pending`
 
@@ -786,11 +793,25 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: `pending` — `.3.2.9` proves Top's invalid regex is attributed to Next.
   Commit: `pending`
 
+- ID: `SESSION-STARTUP-READING.12`
+  Status: `pending`
+  Goal: Preserve authored execution order when bare and explicit edges share one ownership family.
+  Dependencies: `.3`, `.4`, `.5` required-reading completion; diagnostic repair activity `.11` precedes this repair.
+  Acceptance: Lock the bare-before-explicit OR priority and AND child-order failures with all-bare,
+    all-explicit, and explicit-before-bare controls. Normalize through one authored sequence so execution,
+    dependencies, descriptor edges, and supported generated carriers agree. Preserve lifecycle-generated
+    actions, grouped/indexed/named selectors, duplicate slots, repeated families, and mixed-ownership rejection.
+    Verify native and emitted/loaded/trace routes plus direct-dependent conformance and backend comparison;
+    update book/Knowledge and commit before mutation setup. Split bounded children before implementation if
+    carrier/public work exceeds one safe slice. Do not change the existing authored-order contract.
+  Verification: `pending` — `.3.2.11` proves native OR/AND failures and isolates the collection/normalization split.
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.11` | `pending` | Read RuleIR.pm baseline lines 1–987 in bounded chunks. |
+| 1 | `SESSION-STARTUP-READING.3.2.12` | `pending` | Read RuleIR/EmitContext.pm baseline lines 1–1489 in bounded chunks. |
 
 ## Reading Ledger
 
@@ -801,7 +822,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | Fifteen Perl files in full under `.3.2.1` and `.3.2.3`–`.3.2.10`; supporting reads below. | Remaining 74 Perl paths and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | Sixteen Perl files in full under `.3.2.1` and `.3.2.3`–`.3.2.11`; supporting reads below. | Remaining 73 Perl paths and all other first-party inputs not explicitly listed as read. |
 | mdBook | **No** | `docs/linkedspec-book/src/SUMMARY.md`; `docs/linkedspec-book/src/development/local-ci-and-regression.md` 1897–1943 and 1988–2004. | All other chapter text, including the unread portions of that development chapter. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -1084,6 +1105,25 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   compatibility boundary in the gap closeout card, not an unowned new finding or a capture_gaps alias.
 - Next exact reading is RuleIR.pm 1–987 under `.3.2.11`; required codebase/book reading remains incomplete.
 
+### RuleIR reading and authored execution-order defect at `.3.2.11`
+
+- Activated from clean `ff6c228c7804270916b64a7c9332be92a5df1f76`; prior Knowledge/all nine doctrines,
+  post-commit pointer, zero-byte brief, and clean status passed. Read RuleIR.pm 1–200, 201–400, 401–600,
+  601–800, and 801–987 without truncation: complete 987 lines / 31,462 bytes, including EOF and unchanged
+  from baseline. Sixteen whole Perl files are covered and 73 remain.
+- Reconciled handler-family selection, trace decisions, authored top/regex/slot/lifecycle collection, legacy
+  marks, bare normalization, selector authority, resolved metadata, gap eligibility, and mixed-ownership
+  rejection with existing root, rule-local, gap, SpecEntry, and trace owners.
+- Public OR spelling controls prove that bare First before explicit Second reverses dependency order and
+  returns second, while explicit/bare, all-bare, and all-explicit return first. Every metadata edge sequence
+  still says First, Second. AND bare First before explicit Second returns second, first. A direct RuleIR
+  probe isolates explicit collection followed by bare append during normalization, independent of later
+  emission. `perl-bare-explicit-edge-order-drift` preserves exact probes and causal boundaries; `.12` owns
+  repair after reading and `.7`–`.11`, preserving authored order, lifecycle actions, and native/carrier parity.
+- These are native/public and direct-owner results; generated/other-backend failure was not measured here.
+  All probe processes exited zero. Next reading is RuleIR/EmitContext.pm 1–1489 under `.3.2.12`;
+  codebase/book remain incomplete and source remains unchanged until the required-reading boundary closes.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -1101,8 +1141,8 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   `942c6138`; `.3.2.1` is item 4/100 at `c0eb1acf`; `.3.2.2` is item 5/100 at `094e05bc`; `.3.2.3` is item 6/100 at
   `27fd160f`; `.3.2.4` is item 7/100 at `4f311a9e`; `.3.2.5` is item 8/100 at `6c1234cc`; `.3.2.6` is item 9/100 at
   `f864f881`; `.3.2.7` is item 10/100 at `dc7f5f09`; `.3.2.8` is item 11/100 at `e4b1f296`;
-  `.3.2.9` is item 12/100 at `96a1c242`; `.3.2.10` is item 13/100 once committed. `.1` belongs to the prior
-  checkpoint. This intermediate boundary does not trigger a push.
+  `.3.2.9` is item 12/100 at `96a1c242`; `.3.2.10` is item 13/100 at `ff6c228c`;
+  `.3.2.11` is item 14/100 once committed. `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
 
@@ -1130,6 +1170,7 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 - `.9` owns confirmed attached-tail regex truncation and public handler-compile failure; repair follows `.8`.
 - `.10` owns confirmed unbound AND_BCODE package-variable inputs; repair follows `.9` without inventing self-match semantics.
 - `.11.1`–`.11.3` own diagnostic context/occurrence/rule-attribution repairs after `.10`; invalid inputs still reject.
+- `.12` owns confirmed native bare/explicit edge-order drift after `.11`; metadata and execution currently disagree.
 
 ## Verification Log
 
@@ -1164,6 +1205,8 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.9` | Six prefix chunks/baseline identity; direct context/formatter and callback/Get controls; corrected open-block reverify | PASS reading/probes; focused memory/doctrine/Knowledge/history and staged checks precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.9` | Required Knowledge/all nine doctrines; post-commit pointer; zero-byte brief/clean status; derived-map review | PASS at `96a1c242`; 947 facts / 8,013 keys. Retrieval commands and evidence render correctly. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.10` | Three suffix chunks/full-file identity; existing edge/slash/gap/diagnostic reconciliation | PASS reading; focused memory/doctrine/Knowledge/history and staged checks precede landing. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.10` | Required Knowledge/all nine doctrines; post-commit pointer; zero-byte brief/clean status | PASS at `ff6c228c`; derived-map count unchanged at 947 facts / 8,013 keys. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.11` | Five complete-file chunks/baseline identity; OR spelling and AND public controls; direct RuleIR normalization | PASS reading/probes; focused memory/doctrine/Knowledge/history and staged checks precede landing. |
 
 ## Commit Log
 
@@ -1183,6 +1226,7 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `SESSION-STARTUP-READING.3.2.8` | `SESSION-STARTUP-READING.3.2.8 - read SpecEntry and own unbound input repair` | Fourteen whole Perl files read; historical coupling reconciled; explicit repair `.10` owns the private handoff defect. |
 | `SESSION-STARTUP-READING.3.2.9` | `SESSION-STARTUP-READING.3.2.9 - read validation and own diagnostic repairs` | Validation prefix read; diagnostic repair children and retrieval corrections preserved. |
 | `SESSION-STARTUP-READING.3.2.10` | `SESSION-STARTUP-READING.3.2.10 - complete validation reading` | Fifteen full Perl files read; current edge/capture owners reconciled. |
+| `SESSION-STARTUP-READING.3.2.11` | `SESSION-STARTUP-READING.3.2.11 - read RuleIR and own edge-order repair` | Sixteen full Perl files read; native/public order defect and repair `.12` preserved. |
 
 ## Changelog
 
@@ -1214,3 +1258,5 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   stale Knowledge retrieval. `.3.2.10` reads the validation suffix next.
 - `2026-09-06`: `.3.2.10` completes Validation.pm reading and reconciles the historical edge card.
   Fifteen Perl files are read; `.3.2.11` reads RuleIR.pm next.
+- `2026-09-06`: `.3.2.11` completes RuleIR reading and proves bare/explicit execution-order drift.
+  Repair `.12` is owned; `.3.2.12` reads EmitContext.pm next.

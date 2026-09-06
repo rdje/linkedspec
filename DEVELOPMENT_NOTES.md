@@ -10,6 +10,16 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.11 — one authored order across edge spellings
+
+- RuleIR collects explicit actions/blind calls immediately but holds bare candidates separately. Normalization
+  appends bare entries to executable arrays, while descriptor edges independently follow edge_sequence. Bare
+  First before explicit Second therefore reverses OR priority and AND child order; equivalent-spelling controls
+  preserve First, Second. Direct owner probes isolate the same split before emission.
+- Repair `.12` must unify authored execution order without dropping lifecycle-generated actions or changing
+  selector/duplicate-slot semantics. Native failures are measured; carrier/backend comparisons belong to repair.
+  Full RuleIR reading is complete; RuleIR/EmitContext.pm 1–1489 is next and implementation remains read-gated.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.10 — validation scanner boundaries
 
 - The suffix completes static edge/selector/group/fluent scanning, slash-call discrimination, and targeted error
