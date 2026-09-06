@@ -5,21 +5,24 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   exhaustive inventory are complete; codebase/book remain incomplete. `rgx` and its dependencies are excluded.
 - Intake `.31` preserves all baseline Perl source reading, supporting book/native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.40`–`.3.2.54` remain pending.
-- Repairs `.7`–`.30` and `.32`–`.37` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
+  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.41`–`.3.2.54` remain pending.
+- Repairs `.7`–`.30` and `.32`–`.38` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.39` completes plugin/progressive authority reading and owns measured ceiling enforcement gaps.
-  This is item 43/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.2.40` completes recognition core/static reading and owns post-terminal snapshot restoration repair.
+  This is item 44/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.40`: read RecognitionTransaction 1–655 and RecognitionTransactionPolicy 1–269.
+- Activate `SESSION-STARTUP-READING.3.2.41`: read RecognitionTransactionRuntime 1–681, RecursiveObservationPolicy 1–71, RuntimeDiagnosticOutput 1–247, RuntimeLogical 1–96, and RuntimeSemanticObservation 1–174.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.40` reads recognition core and static policy; 59 tests and neutral proof pass.
+  Cross-owner misuse of invalidated tokens restores obsolete snapshots; `.38` owns repair.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.39` reads plugin and progressive authority; 138 tests and neutral/public proof pass.
   Six limit controls expose resource/diagnostic repair work owned by `.37`.
@@ -65,9 +68,6 @@
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.25` reads value/function dispatch and records eight caller-scope controls;
   `.32` owns the demonstrated local-name shadowing repair.
-
-- `2026-09-06` — `SESSION-STARTUP-READING.3.2.24` reads function signatures and guarded statement bridges; 66 variadic tests and
-  a current mixed-path read pass, with the next range at 2379–3743.
 
 ## History
 

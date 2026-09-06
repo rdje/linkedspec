@@ -78,3 +78,12 @@ Passing the finite contract mutation set does not close those separately reprodu
 - Private state foundation: [[perl-recognition-transaction-private-authority]].
 - Generated carrier: [[perl-generated-source-contract-v2]].
 - Implementation owner: [[FUTURE-PARITY-BACKLOG.14]] `.14.3.2.2`; admission owner `.14.3.2.3`.
+
+The September 6 `.3.2.40` checkpoint reads the full core and static Policy owner. Policy first checks
+transaction shape and IF/ELIF/ELSE terminal paths, then propagates named calls and dependency references to
+a fixed point over the closed effect vocabulary. Missing callees, fallback/unresolved helpers, and unknown
+nodes contribute unknown effects. Rejected recognition callees fail before execution. The raw token scan
+and interpolated /o expression remain the already-owned `.21` exception; no lexical fix is claimed.
+The managed authority/carrier pair passes 59 tests and the neutral checker passes 138/250/58 at 9/9.
+[[perl-recognition-invalidated-token-restoration]] records a separate private-core terminal-state defect
+under `.38`; neither static policy proof nor carrier parity establishes its repair.

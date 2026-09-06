@@ -10,6 +10,11 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.40 — invalidated tokens can still restore old snapshots before rejection
+
+Cross-frame/source token checks restore before checking terminal state, erasing newer owner cursor/boundary/marks.
+Six private controls distinguish this defect from valid live-token rollback; .38 owns repair and reachability review.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.39 — computed progressive ceilings do not prove enforced child boundaries
 
 Perl checks shared remaining steps but omits effective step/result-node bounds and copies raw over-ceiling child diagnostics.

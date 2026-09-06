@@ -35,7 +35,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -682,12 +682,20 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.39 - read progressive authority and own ceiling enforcement gaps`
 
 - ID: `SESSION-STARTUP-READING.3.2.40`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 38: 924 lines/fragments, 33,632 bytes.
   Scope: `perl/LinkedSpec/RecognitionTransaction.pm` lines 1–655; `perl/LinkedSpec/RecognitionTransactionPolicy.pm` lines 1–269.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact baseline ranges; recognition authority/integration and known lexical defect Knowledge;
+    managed authority/carrier and neutral proof; terminal-state controls; continuity and diff review.
+  Canonical trigger: `none` — source reading and Knowledge continuity only.
+  Verification: Exact baseline identity and 924-line / 33,632-byte coverage pass. Managed recognition authority/
+    carrier suites pass 59 top-level tests; neutral proof passes 138/250/58 at 9/9 with public and admission
+    guards. Six post-terminal private controls root obsolete snapshot restoration under `.38`; one new/three
+    updated Knowledge records preserve the finite proof boundary. Known lexical defects remain `.21`-owned.
+    Focused continuity gates precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.40 - read recognition core and own post-terminal restoration defect`
 
 - ID: `SESSION-STARTUP-READING.3.2.41`
   Status: `pending`
@@ -1614,11 +1622,40 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: `pending`
   Commit: `pending`
 
+- ID: `SESSION-STARTUP-READING.38`
+  Status: `pending`
+  Goal: Prevent invalidated recognition tokens from restoring obsolete snapshots.
+  Dependencies: `.3`/`.4`/`.5`.
+  Children: `.38.1`, `.38.2`
+
+- ID: `SESSION-STARTUP-READING.38.1`
+  Status: `pending`
+  Goal: Repair post-terminal transaction misuse without changing already committed or later frame state.
+  Acceptance: Preserve restore-before-report for live token misuse and permanent invalidation after commit/
+    rollback. Audit every token operation and source/invocation/generation path, plus all six runtimes; decompose
+    affected repairs before editing. Perl currently restores an obsolete snapshot when a committed or rolled-back
+    token is reused from another frame/source. Add independent controls that first advance the owner after
+    terminal invalidation, assert exact cursor/boundary/mark preservation on rejection, and preserve diagnostic
+    precedence under the accepted contract. Check authored/carrier reachability separately from private-host misuse.
+  Verification: `pending` — `.3.2.40` reproduces six private-authority controls: both same-frame cases retain
+    current state, while four cross-frame/source cases restore cursor/boundary/marks to the old checkpoint.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.38.2`
+  Status: `pending`
+  Goal: Close transaction invalidation claims and recurring proof after the repair.
+  Dependencies: `.38.1`.
+  Acceptance: Reconcile neutral fixtures, all affected runtime consumers, book/Knowledge, and task history;
+    qualify finite historical evidence without claiming an authored token escape from a private API probe.
+    Run required six-runtime/canonical proof and render the book before closing `.38`.
+  Verification: `pending`
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.40` | `pending` | read RecognitionTransaction 1–655 and RecognitionTransactionPolicy 1–269. |
+| 1 | `SESSION-STARTUP-READING.3.2.41` | `pending` | read RecognitionTransactionRuntime 1–681, RecursiveObservationPolicy 1–71, RuntimeDiagnosticOutput 1–247, RuntimeLogical 1–96, and RuntimeSemanticObservation 1–174. |
 
 ## Reading Ledger
 
@@ -1629,7 +1666,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.40`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.41`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
 | mdBook | **No** | `.31` records fourteen complete book sources plus the two earlier local-CI ranges: 640,041 bytes of disjoint coverage. | Remaining 1,316,541 source bytes, formal chapter checkpoints, and rendered alignment under `.4`. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -3012,6 +3049,39 @@ PERL
   fallback execution, and full Phase 0 are not rerun. No runtime, public-book, protocol, policy, or admission
   edits. Codebase/book remains No; `.3.2.40` follows.
 
+### Recognition snapshots, token lifecycle, and static effect closure at `.3.2.40`
+
+- Activated from clean `800fc5a4598de78b235dffaf1cdbde9e28e13c27` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read RecognitionTransaction 1–230 / 231–460 / 461–655 and Policy 1–140 / 141–269 without truncation
+  while the preceding checkpoint hooks completed. Activation then verified clean HEAD and exact unchanged
+  baseline identity: 924 lines / 33,632 bytes. No duplicate physical-reading credit over intake `.31`.
+- Retrieved private authority, integration, known lexical/compilation-order defect, and public-closeout
+  Knowledge before source reading; then read the neutral Knowledge owner and relevant token/fixture ranges.
+  The core keeps source/invocation/generation/token records behind opaque handles, stages acceptance separately
+  from payload, copies cursor/boundary/mark snapshots, and cleans active transactions on leave/destruction.
+  Rejected recursive-observation identities reserve monotonic ids without entering another frame.
+- Static Policy checks transaction shape and IF-family terminal path counts before recursive effect closure.
+  Canonical CALL/RECOGNIZE_ONCE and dependency references feed a fixed point over closed effects; missing
+  callees, fallback/unresolved helpers, and unknown nodes contribute unknown effects. Current progressive/
+  staged dispatch nodes remain forbidden. The raw token scan and interpolated /o expression remain known
+  `.21` defects; this checkpoint reads their exact mechanism and does not claim repair.
+- Six private-authority controls complete commit or rollback, advance owner state to cursor six/boundary
+  five/mark m four, then reuse the terminal token. Same-frame cases reject and preserve new state. Both
+  cross-frame and cross-source routes reject but restore the obsolete zero/zero/empty-mark checkpoint,
+  for four destructive restoration cases across the two terminal kinds.
+- Source roots the discrepancy: source/invocation checks precede invalidated-state rejection and call
+  `_restore_and_invalidate`; that helper assigns an active owner's snapshot before `_invalidate` notices
+  the token was already invalidated. Existing cross-owner tests cover live tokens that should restore.
+  These new controls do not prove authored reachability or other-runtime behavior.
+  `.38.1` owns all-operation/ownership census and bounded repair; `.38.2` owns neutral/runtime/book/
+  Knowledge and recurring closeout. One new and three updated Knowledge records retain exact controls.
+- `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl
+  t/recognition_transaction_perl_authority.t t/recognition_transaction_perl_contract.t` passes 59 top-level
+  tests across two files. The managed neutral checker passes 138 node rows / 250 calls / 58 mutations,
+  9/9 rollout, public 3/26/45, guide 1/14/18, and current backend admission guards. Other runtime consumers
+  are not rerun; existing proof closes neither `.21` nor `.38`. No runtime, public-book, protocol, policy,
+  or admission edits. Codebase/book remains No; `.3.2.41` follows.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -3052,7 +3122,8 @@ PERL
   `.3.2.36` is item 40/100 at `c3dadd4b`;
   `.3.2.37` is item 41/100 at `c38afa72`;
   `.3.2.38` is item 42/100 at `34af111f`;
-  `.3.2.39` is item 43/100 once committed.
+  `.3.2.39` is item 43/100 at `800fc5a4`;
+  `.3.2.40` is item 44/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -3160,6 +3231,7 @@ PERL
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.37` | Exact suffix/full-file identity; MCP plan/contract Knowledge; canonical bundle/header, neutral payload, four response and seven source digests; managed binding freshness; focused continuity | PASS embedded suffix and digest/freshness controls; one Knowledge card records payload versus recurring-proof boundaries. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.38` | Exact baseline ranges; MCP/numeric Knowledge; 31 MCP and nine numeric tests; neutral 55/18; six decoded then six paired decoded/stdio precedence controls; focused continuity | PASS reading and existing suites; documented precedence discrepancy rooted and owned by `.36`; one new/three updated cards. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.39` | Exact baseline ranges; plugin/progressive Knowledge and ADR 0080; managed 138 tests and neutral 9/9/116 plus public 6/12/10/60; public plugin and six ceiling controls; focused continuity | PASS reading and existing proof; resource/diagnostic enforcement gaps rooted and owned by `.37`; one new/four updated cards. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.40` | Exact baseline ranges; recognition authority/integration/neutral Knowledge; managed 59 tests and 138/250/58 at 9/9; six post-terminal controls; focused continuity | PASS reading and existing proof; obsolete snapshot restoration rooted and repair-owned by `.38`; one new/three updated cards. |
 
 ## Commit Log
 
@@ -3209,6 +3281,7 @@ PERL
 | `SESSION-STARTUP-READING.3.2.37` | `SESSION-STARTUP-READING.3.2.37 - read MCP payload suffix and verify embedded digests` | MCP embedded JSON completed; four payload and seven source digests verified without runtime or protocol changes. |
 | `SESSION-STARTUP-READING.3.2.38` | `SESSION-STARTUP-READING.3.2.38 - read MCP runtime and track validation order drift` | MCP/numeric owners read; validation-order discrepancy repair-owned and projection-field wording corrected. |
 | `SESSION-STARTUP-READING.3.2.39` | `SESSION-STARTUP-READING.3.2.39 - read progressive authority and own ceiling enforcement gaps` | Plugin and progressive owners read; measured ceiling enforcement gaps repair-owned with exact controls. |
+| `SESSION-STARTUP-READING.3.2.40` | `SESSION-STARTUP-READING.3.2.40 - read recognition core and own post-terminal restoration defect` | Recognition core/static owners read; post-terminal cross-owner snapshot restoration repair-owned. |
 
 ## Changelog
 
@@ -3300,3 +3373,5 @@ PERL
   competing-error order across two routes, owns `.36`, and advances to `.3.2.39`.
 - `2026-09-06`: `.3.2.39` reads plugin/progressive owners, passes 138 tests and neutral/public proof, records facade and ceiling
   controls, owns `.37` repairs, and advances to `.3.2.40`.
+- `2026-09-06`: `.3.2.40` reads recognition core/static policy, passes 59 tests and neutral/public proof, reproduces six
+  post-terminal controls, owns `.38`, and advances to `.3.2.41`.

@@ -53,3 +53,17 @@ The authored surface is current without exposing the authority implementation.
 - Internal integration: [[perl-recognition-transaction-integration]].
 - Typed source owner pattern: [[typed-source-location-runtime-rollout-plan]].
 - Owner: [[FUTURE-PARITY-BACKLOG.14]] `.14.3.2.1`.
+
+## September 6 complete core reading and terminal-state exception
+
+Checkpoint `.3.2.40` reads RecognitionTransaction 1–655. Opaque handles index authority, frame, and token
+records; invocation ids/generations advance independently, rejected recursive observations reserve their own
+identity, and transaction snapshots own cursor, boundary, and copied mark scalars. Attempts carry match
+presence separately from payload; commit invalidates before returning a staged value, while rollback and
+live misuse restore the saved state. Frame/token/authority destruction handles active state cleanup.
+
+[[perl-recognition-invalidated-token-restoration]] qualifies the permanence of terminal invalidation:
+six private controls show that cross-frame/source misuse of completed tokens can restore an obsolete
+snapshot over newer state. `SESSION-STARTUP-READING.38` owns repair, separately from the known static lexical
+issue `.21`. The managed authority/carrier suites pass 59 top-level tests; neutral proof passes
+138/250/58 with 9/9 rollout. Those finite cases do not close the new defect or prove authored reachability.

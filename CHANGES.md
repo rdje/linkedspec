@@ -10,6 +10,11 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.40 — read recognition core and own post-terminal restoration defect
+
+Read 924 lines / 33,632 bytes; exact baseline, 59 recognition tests, and neutral/public proof pass.
+Six post-terminal controls root obsolete snapshot restoration; .38 owns repair and .21 remains open.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.39 — read progressive authority and own ceiling enforcement gaps
 
 Read 1,496 lines / 52,208 bytes; exact baseline, 138 progressive tests, and neutral/public proof pass.

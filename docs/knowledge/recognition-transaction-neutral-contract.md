@@ -75,3 +75,9 @@ Each admitted backend consumer also reads the current neutral artifact. Conseque
 advance status, availability, mutation count, rollout paths, and later-RED assertions in every earlier admitted
 consumer, even though their backend execution does not change. Canonical execution of those exact consumers is the
 cross-consumer no-drift proof.
+
+The September 6 `.3.2.40` reading checkpoint reruns the neutral checker: 138/250/58 and 9/9, public
+3/26/45, guide 1/14/18, and the current backend admission guards all pass. The managed Perl authority/carrier
+suites pass 59 top-level tests. Their finite fixtures do not combine terminal invalidation, later owner-state
+advancement, and cross-frame/source misuse; [[perl-recognition-invalidated-token-restoration]] records six
+controls and repair ownership under `SESSION-STARTUP-READING.38`. Other runtime execution is not rerun.
