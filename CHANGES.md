@@ -10,6 +10,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.4 — read bootstrap grammar core
+
+- Read all 1,196 baseline-identical core lines; eleven Perl files now read. Next is CompilerState `.3.2.5`.
+- Proved attached-tail regex delimiters truncate code: the quoted-pattern control returns 1; `/}/` fails handler
+  compilation. Knowledge records the unreachable slash-quote condition; `.9` owns repair after required reading.
+- Validation: untruncated reading/identity, existing Knowledge, exact scanner/helper/public controls, focused
+  memory/doctrine/Knowledge/history checks, and staged review. No production or public-book change.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.3 — read resolution and bootstrap adapters
 
 - Read five complete baseline-identical adapters: 1,103 lines / 36,759 bytes; ten Perl files now read.

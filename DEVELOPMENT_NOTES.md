@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.4 — regex delimiter control
+
+- The attached-tail scanner starts at an opening delimiter but requires the whole preceding prefix to be empty
+  before recognizing a regex literal. That condition cannot hold, so regex closers incorrectly change depth.
+- Direct offsets plus quoted/regex public twins separate helper support from bootstrap truncation. Repair `.9`
+  must preserve division-symbol recognition and all caller forms; broader brace scanners were not audited here.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.3 — bootstrap comparison lifetime
 
 - Portable SpecLoader and legacy Resolver intentionally serve different lookup contracts; generated-v2 cursor

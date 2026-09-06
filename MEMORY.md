@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `094e05bc54f048ddda4fa8c3e41ebd85095384be` — clean Perl-decomposition checkpoint before adapter reading.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.3 - read resolution and bootstrap adapters`; ten Perl files read.
+- activation_commit: `27fd160f5cd4de4bce0766962ee60717207933dd` — clean adapter-reading checkpoint before bootstrap core.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.4 - read bootstrap grammar core`; eleven Perl files read.
 - active_work_unit: none; bounded reading and cleanup repair remain pending in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: activate `SESSION-STARTUP-READING.3.2.4`; read BootstrapSpec/Core.pm baseline lines 1–1196,
-  then continue required reading and repair `.7`/`.8` before Rust mutation setup.
+- next_action: activate `SESSION-STARTUP-READING.3.2.5`; read CompilerState.pm baseline lines 1–590,
+  then continue required reading and repairs `.7`–`.9` before Rust mutation setup.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
-- blockers: `.7` blocks recovery/purge (EPERM-as-dead); `.8` owns stale bootstrap comparison state; reading can continue.
+- blockers: `.7` blocks recovery/purge (EPERM-as-dead); `.8` stale comparison and `.9` regex-tail repair follow reading.
 - current_rust_warning_debt: repeated clean carriers report 1,870 `pgen` plus 26 `rgx-core` output warnings;
   `RUST-DEPENDENCY-WARNING-ZERO.1-.7` own causal repair/pins/enforcement without suppression, after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4986` is the twenty-fifth history segment; ADR `0100`
   authorizes exactly 27 collection files / 26 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; exhaustive inventory, exact coverage, rgx exclusion, and resumed batch progress (6/100 after `.3.2.3` lands) are in SESSION-STARTUP-READING.
+- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; exhaustive inventory, exact coverage, rgx exclusion, and resumed batch progress (7/100 after `.3.2.4` lands) are in SESSION-STARTUP-READING.

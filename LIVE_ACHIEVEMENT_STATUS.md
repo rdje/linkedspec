@@ -5,20 +5,23 @@
 - `SESSION-STARTUP-READING` owns the director-required reading prerequisite. Roadmap reading and exhaustive
   inventory `.3.1` are complete; codebase and mdBook reading remain incomplete. The director excluded `rgx`
   and its nested dependencies. Diagnosis `.6` confirms false-dead cleanup authorization on denied inspection;
-  `.7` owns cleanup repair; `.8` owns stale bootstrap comparison state. Both follow required reading, before
-  mutation setup. Feature and capability status are unchanged.
+  `.7` owns cleanup repair; `.8` stale comparison; `.9` attached-tail regex truncation. All follow required
+  reading, before mutation setup. Feature and capability status are unchanged.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.3` reads five dependency adapters and diagnoses stale bootstrap comparison state.
-  This is item 6/100; ten Perl files read. Codebase and book reading remain incomplete.
+- `SESSION-STARTUP-READING.3.2.4` reads the bootstrap core and proves attached-tail regex truncation.
+  This is item 7/100; eleven Perl files read. Codebase and book reading remain incomplete.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.4` and read BootstrapSpec/Core.pm baseline lines 1–1196. Complete required
-  reading and policy review, then repairs `.7`/`.8` before Rust mutation configuration.
+- Activate `SESSION-STARTUP-READING.3.2.5` and read CompilerState.pm baseline lines 1–590. Complete required
+  reading and policy review, then repairs `.7`–`.9` before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.4` reads the core and proves attached-tail regex truncation;
+  repair `.9` is owned, and `.3.2.5` continues mandatory reading.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.3` reads five adapters and proves stale comparison state;
   repair `.8` is owned, and `.3.2.4` continues mandatory reading.
@@ -70,9 +73,6 @@
 
 - `2026-09-03` — `.19.5.1` implements Julia write vivification through native/reconstructed/generated/emitted/CLI
   routes; focused 406, complete package, storage 21/5, primary CLI, corpus 105/105, and canonical CI pass.
-
-- `2026-09-02` — `.19.4.2` implements typed atomic Dart `map_leaves!`; 461/461 package tests, 25 temporary owners /
-  47 packages, CLI 66x2, corpus 105/105, unchanged 167 + 592 mutation authorities, and rooted 5x2x6 pass.
 
 ## History
 

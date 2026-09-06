@@ -35,7 +35,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -131,12 +131,21 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.3 - read resolution and bootstrap adapters`
 
 - ID: `SESSION-STARTUP-READING.3.2.4`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 2: 1,196 lines/fragments, 39,291 bytes.
   Scope: `perl/LinkedSpec/BootstrapSpec/Core.pm` lines 1–1196.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+    Probe quoted-versus-regex delimiters in attached conditional tails before classifying the balanced scanner.
+  Verification tier: `focused`
+  Focused checks: Full untruncated core reading and baseline identity; existing bootstrap/grammar Knowledge;
+    managed attached-tail, call_spec_handler_subst, descriptor, and public execution controls; exact source trace;
+    `bash scripts/check_memory_architecture.sh`; required pre-commit `bash scripts/check_doctrines.sh`;
+    both `tools/roll_document_history.pl --check` surfaces; `git diff --check`.
+  Canonical trigger: `none` — source-reading continuity only; no production or public behavior change.
+  Verification: All 1,196 lines / 39,291 bytes read in four untruncated chunks; baseline identity passes.
+    Direct scanner and public controls prove regex-delimiter truncation; quoted-pattern execution returns 1,
+    regex form returns undef with exact handler-compile error. Knowledge and `.9` own repair after reading.
+  Commit: `SESSION-STARTUP-READING.3.2.4 - read bootstrap grammar core`
 
 - ID: `SESSION-STARTUP-READING.3.2.5`
   Status: `pending`
@@ -618,7 +627,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING.5`
   Status: `pending`
   Goal: Complete supplied-policy adoption/update comparisons and the startup alignment review before implementation.
-  Acceptance: Record local adoption evidence and applicable donor updates; own any required changes; confirm all three reading answers Yes, then route to repairs `.7` and `.8` before restoring RUST-MUTATION-TESTING.1.
+  Acceptance: Record local adoption evidence and applicable donor updates; own any required changes; confirm all three reading answers Yes, then route to repairs `.7`, `.8`, and `.9` before restoring RUST-MUTATION-TESTING.1.
   Verification: `pending`
   Commit: `pending`
 
@@ -663,11 +672,23 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: `pending` — `.3.2.3` owns the non-destructive diagnostic evidence, not this repair.
   Commit: `pending`
 
+- ID: `SESSION-STARTUP-READING.9`
+  Status: `pending`
+  Goal: Preserve regex-literal delimiters when reading attached conditional tails.
+  Dependencies: `.3`, `.4`, `.5` required-reading completion; repairs `.7` then `.8` precede this repair.
+  Acceptance: Lock the observed truncated brace/parenthesis tails and public `matches("}", /}/)` failure with
+    quoted-pattern controls. Repair lexical recognition using the established regex-versus-division contract;
+    cover escaped slashes, character classes, nested delimiters, quoted text, and action/blind/lifecycle callers.
+    Preserve full tail/source positions and exact diagnostics for malformed inputs. Check self-hosted grammar
+    alignment, run focused direct/dependent proof, update book/Knowledge/continuity, and commit before mutation setup.
+  Verification: `pending` — `.3.2.4` owns diagnosis; no repair is claimed before mandatory reading.
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.4` | `pending` | Read BootstrapSpec/Core.pm baseline lines 1–1196 in bounded chunks. |
+| 1 | `SESSION-STARTUP-READING.3.2.5` | `pending` | Read CompilerState.pm baseline lines 1–590 in bounded chunks. |
 
 ## Reading Ledger
 
@@ -678,7 +699,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | Ten Perl files in full under `.3.2.1` and `.3.2.3`; checkpoint-relevant scripts listed below. | Remaining 79 Perl paths and other first-party source/test/spec/fixture/tool inputs not explicitly listed as read. |
+| Codebase | **No** | Eleven Perl files in full under `.3.2.1`, `.3.2.3`, and `.3.2.4`; checkpoint-relevant scripts listed below. | Remaining 78 Perl paths and other first-party source/test/spec/fixture/tool inputs not explicitly listed as read. |
 | mdBook | **No** | `docs/linkedspec-book/src/SUMMARY.md`; `docs/linkedspec-book/src/development/local-ci-and-regression.md` 1897–1943 and 1988–2004. | All other chapter text, including the unread portions of that development chapter. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -828,6 +849,24 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 - No additional source-reading credit is inferred from the consumer grep or runtime probes. Remaining reading
   starts at `.3.2.4`; source repairs `.7` then `.8` follow `.3`/`.4`/`.5` and precede Rust mutation setup.
 
+### Bootstrap grammar core reading at `.3.2.4`
+
+- Read `perl/LinkedSpec/BootstrapSpec/Core.pm` through EOF in exact chunks 1–300, 301–600, 601–900, and
+  901–1196: 1,196 lines / 39,291 bytes, baseline-identical. Eleven unique Perl files are now fully read.
+- Reconciled the primary bootstrap/secondary self-hosted boundary with existing Knowledge. The core builds
+  ordered token handlers, rule/brace dispatch, authored selectors, mode bounds, lifecycle/action/blind/bare-edge
+  payloads, and method-chain rendering. It does not replace the permanent self-hosted language owner.
+- Investigated the suspect slash-quote branch instead of classifying it without tools. Direct attached-tail
+  probes show quoted braces preserved and regex closing braces/parentheses truncated; helper lowering confirms
+  the regex match expression itself is supported. Public descriptor creation succeeds for both pattern forms,
+  but execution returns 1 for the quoted twin and undef with `rule_handler_compile` for `/}/`.
+- The prefix includes the opening delimiter, making the empty-prefix slash-quote condition unreachable. Exact
+  offsets, source locations, public control, and limited scope are in
+  `docs/knowledge/bootstrap-conditional-regex-delimiters.md`; `.9` owns repair after `.7`/`.8` and required reading.
+- An initial inline probe used the wrong Perl quote delimiter and failed to parse; the corrected `q~...~`
+  harness completed successfully. This harness error is not a repository defect. All probe jobs are consumed.
+- No production or book change; remaining reading starts at `.3.2.5`. The source-reading gate remains No.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -842,7 +881,7 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 - No runtime behavior was verified by reading. No new public explanation is warranted by this checkpoint;
   substantive codebase/book drift, if found during `.3`/`.4`, must receive an owning leaf before remediation.
 - Batch history: `.2` is resumed item 1/100 at `d6d3c890`; `.6` is item 2/100 at `03d692c1`; `.3.1` is item 3/100
-  at `942c6138`; `.3.2.1` is item 4/100 at `c0eb1acf`; `.3.2.2` is item 5/100 at `094e05bc`; `.3.2.3` is item 6/100 once committed. `.1` belongs
+  at `942c6138`; `.3.2.1` is item 4/100 at `c0eb1acf`; `.3.2.2` is item 5/100 at `094e05bc`; `.3.2.3` is item 6/100 at `27fd160f`; `.3.2.4` is item 7/100 once committed. `.1` belongs
   to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -868,6 +907,7 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 - `.7` blocks managed recovery/purge and later mutation-workspace setup until denied/unknown liveness is safe.
   Read-only reading can continue; no source repair is authorized by the narrow startup-tracking exception.
 - `.8` owns confirmed stale bootstrap diagnostic state after `.7`; no primary parser corruption was demonstrated.
+- `.9` owns confirmed attached-tail regex truncation and public handler-compile failure; repair follows `.8`.
 
 ## Verification Log
 
@@ -888,6 +928,8 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.2` | Independent byte-interval coverage/budget audit and baseline Perl diff | PASS: 52 leaves, 84 exact paths, 2,076,984 bytes, no gaps/overlaps/source delta. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.2` | Required pre-commit Knowledge and all nine doctrines; post-commit pointer; clean status/empty brief | PASS at `094e05bc`. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.3` | Five-file full reading/baseline identity; existing Knowledge; managed comparison/public-error controls | PASS reading; CONFIRMED stale diagnostic defect, repair `.8` pending. All probe jobs completed. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.3` | Required pre-commit Knowledge and all nine doctrines; post-commit pointer; clean status/empty brief | PASS at `27fd160f`. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.4` | Four exact core chunks/baseline identity; existing Knowledge; scanner/helper/descriptor/public controls | PASS reading; CONFIRMED regex-tail defect, repair `.9` pending; all probes consumed. |
 
 ## Commit Log
 
@@ -900,6 +942,7 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `SESSION-STARTUP-READING.3.2.1` | `SESSION-STARTUP-READING.3.2.1 - read facade invocation owners` | Five unique Perl files complete; remaining 84 Perl entries and other lanes remain unread. |
 | `SESSION-STARTUP-READING.3.2.2` | `SESSION-STARTUP-READING.3.2.2 - partition remaining Perl reading` | All unread Perl bytes owned before reading; no new reading credit. |
 | `SESSION-STARTUP-READING.3.2.3` | `SESSION-STARTUP-READING.3.2.3 - read resolution and bootstrap adapters` | Ten unique Perl files read; stale diagnostic defect proved and repair `.8` owned. |
+| `SESSION-STARTUP-READING.3.2.4` | `SESSION-STARTUP-READING.3.2.4 - read bootstrap grammar core` | Eleven unique Perl files read; attached-tail regex defect proved and `.9` owned. |
 
 ## Changelog
 
@@ -917,3 +960,5 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   independent interval proof passes, and `.3.2.3` is the next reading leaf.
 - `2026-09-06`: `.3.2.3` completes five dependency adapters, diagnoses stale comparison state, and owns repair
   `.8`; the next exact reading leaf is `.3.2.4`, with both repairs gated on required reading.
+- `2026-09-06`: `.3.2.4` completes bootstrap core reading and diagnoses attached-tail regex truncation;
+  `.9` owns repair and `.3.2.5` is the next required reading leaf.
