@@ -621,12 +621,19 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.35 - read MCP frame data and reconcile current admission`
 
 - ID: `SESSION-STARTUP-READING.3.2.36`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 34: 1 lines/fragments, 32,768 bytes.
   Scope: `perl/LinkedSpec/MCPContract.pm` bytes 33159–65926.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact embedded-data range/baseline identity; MCP contract and repaired-boundary
+    Knowledge; managed materializer/independent validator and artifact controls; focused continuity review.
+  Canonical trigger: `none` — source reading and Knowledge continuity only.
+  Verification: Exact full-file baseline identity and bytes 33159–65926 (32,768 bytes) pass. Embedded contract,
+    schema, and corpus equal their neutral owners; 72 fact keys, bounded query-contract strings, and
+    explicit-component-only policy controls pass. Managed materializer then independent validator pass
+    35/10/10/76. Two Knowledge records reconcile; `.5` owns ADR policy clarification; focused gates precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.36 - read MCP contract policy and reconcile historical claims`
 
 - ID: `SESSION-STARTUP-READING.3.2.37`
   Status: `pending`
@@ -854,7 +861,10 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Goal: Complete supplied-policy adoption/update comparisons and the startup alignment review before implementation.
   Acceptance: Record local adoption evidence and applicable donor updates; own any required changes; confirm all
     three reading answers Yes. Review and complete `.29` as part of adoption before this closeout, then route to
-    the remaining tracked startup repairs before restoring RUST-MUTATION-TESTING.1.
+    the remaining tracked startup repairs before restoring RUST-MUTATION-TESTING.1. During alignment, qualify
+    ADR 0055 section 5 against the later all-twenty repair: only explicit overlay components enforce transport
+    pre-dispatch denial; unsupplied components stay with native diagnostics. `.3.2.36` records matching neutral/
+    embedded policy evidence; preserve historical decision evidence while making its current boundary explicit.
   Verification: `pending`
   Commit: `pending`
 
@@ -1507,7 +1517,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.36` | `pending` | read MCPContract bytes 33159–65926 and reconcile the next embedded contract fragment. |
+| 1 | `SESSION-STARTUP-READING.3.2.37` | `pending` | read MCPContract bytes 65927–83273 and complete the embedded JSON data suffix. |
 
 ## Reading Ledger
 
@@ -1518,7 +1528,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.36`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.37`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
 | mdBook | **No** | `.31` records fourteen complete book sources plus the two earlier local-CI ranges: 640,041 bytes of disjoint coverage. | Remaining 1,316,541 source bytes, formal chapter checkpoints, and rendered alignment under `.4`. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -2775,6 +2785,35 @@ PERL
 - One Knowledge record reconciles topology and response-layer ownership. No runtime, public-book, policy,
   protocol, or admission changes; codebase/book remains No and `.3.2.36` follows.
 
+### Embedded MCP policy, corpus, and schema authority at `.3.2.36`
+
+- Activated from clean `4b9036222f16892a29de29d9ef01660048d0b918` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Re-reviewed MCPContract.pm bytes 33159–41350 / 41351–49542 / 49543–57734 / 57735–65926
+  without truncation, exactly 32,768 bytes. Full-file baseline identity passes; fragment SHA-256 is
+  `5b77ebfcc05b4bf50d90ad0891f87665cc3709c45579df37452a5e76e280dc10`. This adds no duplicate
+  physical-reading credit over `.31`; the embedded suffix begins at byte 65927 under `.3.2.37`.
+- Read the end of canonical tool/error frames, digest-pinned neutral artifact references, authority fences,
+  canonical JSON, component-wise lowering policy, handle/authorization/expiry rules, protocol/request metadata,
+  native identities, shutdown, and fixed tools. Corpus data includes exact frame order, four unavailable-handle
+  states, ten lifecycle cases, four policy cases, ten raw-byte cases, and the closed schema through the query
+  request prefix. These are generated data owners; fresh native transport execution is not claimed.
+- Read ADR 0055 and the existing all-twenty blocker/repair Knowledge before reconciliation. The embedded
+  deployment policy explicitly limits pre-dispatch denial to supplied overlay components; unsupplied components
+  remain native dispatch and native portable response. This is the already-implemented all-twenty correction,
+  not a new contract decision. `.5` startup alignment now explicitly owns qualifying the earlier ADR section 5
+  wording without erasing its historical evidence or changing the accepted runtime boundary.
+- A managed Python comparison decodes MCPContract line 14 and checks its `contract`, `schema`, and `corpus`
+  against their three neutral JSON owners; all values match. Direct assertions confirm the 72-key recordFacts
+  enum, query contract `{minLength:1,maxLength:128,type:string,x-linkedspec-maxUtf8Bytes:128}`, explicit overlay
+  enforcement, native handling of unsupplied components, and current validation count 76.
+- `bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py` passes
+  35 canonical frames / 10 raw inputs / 10 lifecycle cases and exact artifact digests. The subsequent
+  `bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py` passes 35/10/10/76.
+  No materialization --write, runtime consumer, protocol modification, or new oracle is introduced.
+- Reconciled the stdio card's stale current 68 count to 76 and the all-twenty card's old public-closeout
+  chronology, with current embedded evidence and ADR-alignment ownership. No runtime, public-book, or
+  policy edit; codebase/book remains No and `.3.2.37` follows.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -2811,7 +2850,8 @@ PERL
   `.3.2.32` is item 36/100 at `9be547af`;
   `.3.2.33` is item 37/100 at `ab4b1f1e`;
   `.3.2.34` is item 38/100 at `19b0a7c4`;
-  `.3.2.35` is item 39/100 once committed.
+  `.3.2.35` is item 39/100 at `4b903622`;
+  `.3.2.36` is item 40/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -2915,6 +2955,7 @@ PERL
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.33` | Exact range/full-file identity; separator/trace Knowledge; four compact trace tests; twelve public newline/comment cases plus dumped-source repeats; focused continuity | PASS reading/trace controls; comment failures reproduced and owned by `.34.1`/`.34.2`; one new/three qualified cards. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.34` | Exact baseline ranges; binding/callable/codeblock/gap Knowledge; managed 134 callable/gap tests; neutral gap 9/0/63 and public 8/15/10/34; six boolean controls and emitted AST; focused continuity | PASS reading and existing focused suites; boolean-literal defect rooted and owned by `.35`; one new/three qualified cards. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.35` | Exact 32768-byte fragment/full-file baseline identity; MCP binding/admission Knowledge; managed generator, five binding tests, six frame controls, admission complete/141; focused continuity | PASS bounded fragment and focused proof; one Knowledge card reconciles current topology and response-layer examples. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.36` | Exact fragment/full-file identity; MCP/ADR/repair Knowledge; three embedded-neutral equality checks and repaired-field controls; ordered materializer/validator35/10/10/76; focused continuity | PASS bounded contract data and neutral proof; two records reconcile; historical ADR clarification task-owned under `.5`. |
 
 ## Commit Log
 
@@ -2960,6 +3001,7 @@ PERL
 | `SESSION-STARTUP-READING.3.2.33` | `SESSION-STARTUP-READING.3.2.33 - read separator and value owners and track comment failures` | Splitter/trace/value owners read; comment failures rooted and repair-owned, universal coverage claims qualified. |
 | `SESSION-STARTUP-READING.3.2.34` | `SESSION-STARTUP-READING.3.2.34 - read runtime owners and track codeblock boolean drift` | Runtime owners read; dynamic boolean result drift repair-owned and historical gap admission prose qualified. |
 | `SESSION-STARTUP-READING.3.2.35` | `SESSION-STARTUP-READING.3.2.35 - read MCP frame data and reconcile current admission` | MCP frame/schema prefix read; generated binding fresh, response examples and current admission qualified. |
+| `SESSION-STARTUP-READING.3.2.36` | `SESSION-STARTUP-READING.3.2.36 - read MCP contract policy and reconcile historical claims` | MCP policy/corpus/schema fragment read; exact neutral identity and already-repaired component policy documented. |
 
 ## Changelog
 
@@ -3043,3 +3085,5 @@ PERL
   proof, roots dynamic boolean kind loss under `.35`, and advances to `.3.2.35`.
 - `2026-09-06`: `.3.2.35` reads the first MCP data fragment, passes binding freshness/five tests/six frame controls/
   complete-141 admission proof, reconciles one Knowledge card, and advances to `.3.2.36`.
+- `2026-09-06`: `.3.2.36` reads MCP policy/corpus/schema data, passes exact embedded-neutral identity and 35/10/10/76
+  proof, reconciles two records and ADR alignment ownership, and advances to `.3.2.37`.

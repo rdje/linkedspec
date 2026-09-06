@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `19b0a7c4d3f02f875b015bbb46816d8e6313886b` — clean preceding reading checkpoint.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.35 - read MCP frame data and reconcile current admission`.
+- activation_commit: `4b9036222f16892a29de29d9ef01660048d0b918` — clean preceding reading checkpoint.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.36 - read MCP contract policy and reconcile historical claims`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: activate `.3.2.36`; read MCPContract bytes 33159–65926 and reconcile the next embedded contract fragment,
+- next_action: activate `.3.2.37`; read MCPContract bytes 65927–83273 and complete the embedded JSON data suffix,
   then continue queued reading. Intake `.31` preserves the forward source coverage and exact findings.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30` and `.32`–`.35` precede mutation setup; `.29` is part of `.5` adoption.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4985` is the twenty-sixth history segment; ADR `0102`
   authorizes exactly 28 collection files / 27 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; `.31` records all Perl source reading, pending per-leaf checkpoints, book coverage, and resumed batch progress (39/100 after `.3.2.35` lands).
+- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; `.31` records all Perl source reading, pending per-leaf checkpoints, book coverage, and resumed batch progress (40/100 after `.3.2.36` lands).

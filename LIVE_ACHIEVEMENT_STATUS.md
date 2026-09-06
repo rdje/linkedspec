@@ -5,21 +5,24 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   exhaustive inventory are complete; codebase/book remain incomplete. `rgx` and its dependencies are excluded.
 - Intake `.31` preserves all baseline Perl source reading, supporting book/native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.36`–`.3.2.54` remain pending.
+  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.37`–`.3.2.54` remain pending.
 - Repairs `.7`–`.30` and `.32`–`.35` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.35` completes the MCP frame-data prefix and reconciles current admission and response layers.
-  This is item 39/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.2.36` completes the MCP policy/corpus/schema middle fragment and reconciles two contract records.
+  This is item 40/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.36`: read MCPContract bytes 33159–65926 and reconcile the next embedded contract fragment.
+- Activate `SESSION-STARTUP-READING.3.2.37`: read MCPContract bytes 65927–83273 and complete the embedded JSON data suffix.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.36` reads the MCP policy/corpus/schema middle fragment;
+  embedded-neutral identity and 35/10/10/76 proof pass; two contract records reconcile.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.35` reads 32,768 bytes of MCP frame/schema data; binding and
   complete/141 admission proof pass, with six response-layer controls and one reconciled card.
@@ -65,9 +68,6 @@
 
 - `2026-09-06` — `SESSION-STARTUP-READING.31` preserves forward reading and confirmed findings,
   creates repair ownership `.17`–`.30`, and records successful preceding canonical completion.
-
-- `2026-09-06` — `SESSION-STARTUP-READING.3.2.21` completes four files, owns emptiness repairs `.16`,
-  and preserves exact notes history under ADR 0103; MethodExpr is next.
 
 ## History
 

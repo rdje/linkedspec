@@ -21,7 +21,7 @@ answers:
   - how many canonical MCP fixtures exist
   - how do I regenerate or verify the MCP canonical frames
   - are the native LinkedSpec MCP servers implemented yet
-date: 2026-07-29
+date: 2026-09-06
 status: exact neutral contract canonical; all five implementations, all six runtimes, and recurring rollout complete
 tags: [mcp, json-rpc, stdio, semantic-api, security, transport, FUTURE-PARITY-BACKLOG]
 evidence: "ADR 0055 and FUTURE-PARITY-BACKLOG.10.9.1.0 select the stable final 2026-07-28 stateless revision, modern-only stdio, exact discovery/two-tool topology, explicit opaque handle registry, lowering-only deployment policy, canonical payload identity, cancellation, stderr-only sanitized logging, and EOF shutdown."
@@ -77,7 +77,7 @@ indistinguishable handle states, and four lowering-policy cases. Verify its exac
 `bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py`; use `--write` only
 when deliberately regenerating the JSONL. Run
 `bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py` for the independent
-28-positive/7-negative schema and 68-mutation proof. Perl, Rust, Dart, Julia, and one shared Lua source implement
+28-positive/7-negative schema and current 76-mutation proof (the dated original admission proved 68). Perl, Rust, Dart, Julia, and one shared Lua source implement
 and parent-close that contract; PUC Lua and LuaJIT admit the Lua source independently. The implementation ledger
 is 5/5 + 6/6 with recurring rollout complete and 141 rejected mutations. Rooted
 `tools/check_mcp_six_runtime.sh` proves all twenty native/MCP semantic identities on Perl, Rust, Dart, Julia,
@@ -90,3 +90,11 @@ governance test rejects either an omitted materializer or reversed order.
 Related facts: [[mcp-native-server-topology]], [[julia-native-mcp-server-plan]], [[julia-mcp-decoded-server]], [[julia-mcp-strict-stdio]], [[dart-native-mcp-server-plan]], [[dart-mcp-decoded-server]], [[dart-mcp-strict-stdio]], [[semantic-introspection-api-mcp-direction]],
 [[semantic-introspection-neutral-contract]], [[project-data-storage-locality-contract]], and
 [[mcp-recurring-six-runtime-plan]].
+
+September 6 reading checkpoint `.3.2.36` re-reads MCPContract.pm bytes 33159–65926 and compares its
+embedded contract, schema, and corpus with their neutral owners: all three values match. Managed materialization
+then independent validation passes 35 canonical frames / 10 raw inputs / 10 lifecycle cases / 76 mutations.
+The source fixes explicit-component-only deployment-policy enforcement, while unsupplied components retain native
+dispatch and native portable responses. The earlier ADR 0055 section 5 prose must be read with the later
+all-twenty correction in [[mcp-all-twenty-transport-blocker]]; startup alignment `.5` owns making that
+qualification explicit in the decision itself after required reading. No transport behavior changes here.

@@ -10,6 +10,11 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.36 — read MCP contract policy and reconcile historical claims
+
+Read MCPContract bytes 33159–65926; exact baseline and embedded contract/schema/corpus identity pass.
+Materializer then independent validator pass 35/10/10/76; qualify historical counts and task-own ADR policy clarification in .5.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.35 — read MCP frame data and reconcile current admission
 
 Read MCPContract bytes 391–33158 with exact baseline identity; full 83,411-byte binding is fresh and five binding tests pass.

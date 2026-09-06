@@ -10,7 +10,7 @@ answers:
   - "which MCP schema fact keys are missing"
   - "does MCP currently preserve all twenty semantic responses"
   - "what must change before thin_mcp_transport promotion"
-date: 2026-07-29
+date: 2026-09-06
 status: verified blocker repaired; all-twenty six-runtime proof and routed rollout complete
 tags: [mcp, semantic-introspection, schema, policy, conformance, blocker]
 evidence: "FUTURE-PARITY-BACKLOG.10.9.7.1.0 proved capabilities plus 16/19 query identities and root-caused missing effects/return_shape output keys, const query-contract input, and default-policy preemption. Authorized leaf .10.9.7.1.1.1 derives the exact 72-key semantic fact union, admits nonempty query-contract strings through 128 characters/128 UTF-8 bytes, and keys pre-dispatch denial to explicit component presence in all five servers. Leaf .10.9.7.1.1.2 proves capabilities plus all nineteen queries preserve direct-native/MCP structured/text/decoded/digest identity on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Leaf .10.9.7.1.1.3 composes those consumers through the rooted recurring driver and promotes both ledgers atomically. Neutral MCP remains 35/10/10/76 with byte-fresh bindings 83,411/83,225/83,214/120,030/83,166; formal state is 5/5 implementations + 6/6 runtimes with rollout complete/141."
@@ -46,4 +46,12 @@ The non-selected alternative was to weaken the claim to seventeen direct/MCP ide
 transport outcomes. The transport blocker is repaired and `.1.1.2` now proves all twenty identities on all six
 runtimes. `.1.1.3` composes that evidence through the rooted recurring gate, adds omission-sensitive governance,
 and promotes `thin_mcp_transport` in both ledgers under the same owner. The blocker is closed; public no-drift
-remains separately owned by `.10.10`.
+is also closed under `.10.10`, as indexed by [[mcp-implementation-admission-ledger]].
+
+The September 6 `.3.2.36` reading checkpoint confirms the generated Perl binding has exactly the neutral
+contract/schema/corpus values. Its recordFacts enum contains 72 keys; query-contract input is a nonempty string
+bounded by both 128 characters and 128 UTF-8 bytes; deployment pre-dispatch enforcement is
+`explicit_overlay_component_presence_only`, and unsupplied components remain native. The managed materializer
+and independent transport validator pass 35/10/10/76. These are artifact/governance checks, not a rerun of
+six-runtime dispatch. ADR 0055 section 5 predates this component-presence clarification;
+`SESSION-STARTUP-READING.5` owns its explicit historical/current qualification during startup alignment.

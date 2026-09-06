@@ -10,6 +10,11 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.36 — MCP policy denial depends on explicit overlay components
+
+The existing all-twenty repair leaves unsupplied limits with native diagnostics; generated and neutral policy values match.
+Startup alignment .5 owns qualifying earlier ADR 0055 prose. This reading checkpoint changes no protocol or runtime behavior.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.35 — MCP semantic rejection remains a successful tool response
 
 Canonical semantic ok=false retains isError=false and matching text/structured content; handle/policy failures use isError=true.
