@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.17 — finish AST parser and read pipeline adapters
+
+- Finish AST parser and read ArrayPipeline/CanonicalEvents/Core: 1,195 lines / 47,612 bytes, baseline-identical.
+- Twenty-four Perl files are read; existing pipeline/event Knowledge gains retrieval keys and dated owner notes.
+- Focused identity, memory/doctrines/Knowledge/history, and staged review; product/book unchanged.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.16 — read AST parser and own nested span repair
 
 - Read AST/Parser.pm 1–1498 / 47,935 bytes; full-file baseline identity passes.

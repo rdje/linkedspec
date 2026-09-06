@@ -3,7 +3,7 @@ Execution-oriented companion to `ROADMAP.md`.
 
 Current session prerequisite: [SESSION-STARTUP-READING](docs/tasks/SESSION-STARTUP-READING.md) records the
 required-reading baseline, exact coverage, and `rgx` exclusion. Roadmap reading is complete; codebase/book remain
-incomplete. Twenty Perl files plus AST parser 1–1498 are read; `.3.2.17` finishes the parser and adapters next.
+incomplete. Twenty-four Perl files are read; `.3.2.18` reads ActionIR/Contracts.pm 1–1396 next.
 Repairs `.7`–`.15` (cleanup, comparison, regex, inputs, diagnostics, edge identity/order, return/state, nested spans)
 follow required reading and precede Rust mutation setup.
 

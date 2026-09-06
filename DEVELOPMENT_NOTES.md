@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.17 — ordered plans and canonical event ownership
+
+- ArrayPipeline separates typed binding updates/receiver guards from internal array emission. CanonicalEvents
+  matches helper queues in statement order; Core normalizes kinds/arguments, with separate unmatched fallbacks.
+- Existing trace cards own these source facts. Reading completes four files, with no new runtime claim;
+  Contracts.pm 1–1396 is next, and nested-offset repair `.15` remains pending after mandatory reading.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.16 — nested parser calls must preserve coordinates
 
 - Three eager/attached block calls omit base_start; their nested diagnostics reset to body-local coordinates.

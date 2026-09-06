@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `762bef64659f48ccada872ec76ac150a0b6714ed` — clean emitter/adapter reading checkpoint.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.16 - read AST parser and own nested span repair`; parser suffix remains unread.
+- activation_commit: `9a88116001b7f5c8c550155aedfe7dcd4c55ea71` — clean AST parser-prefix reading checkpoint.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.17 - finish AST parser and read pipeline adapters`; twenty-four Perl files read.
 - active_work_unit: none; bounded reading and repairs remain pending in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: activate `.3.2.17`; finish AST/Parser.pm 1499–1686 and read ArrayPipeline/CanonicalEvents/Core,
+- next_action: activate `.3.2.18` and read ActionIR/Contracts.pm baseline lines 1–1396,
   then continue required reading and repairs `.7`–`.15` before Rust mutation setup.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge; `.8`–`.15` own comparison, regex, input, diagnostic, edge, return/state, and nested-span repairs.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4985` is the twenty-sixth history segment; ADR `0102`
   authorizes exactly 28 collection files / 27 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; exhaustive inventory, exact coverage, rgx exclusion, and resumed batch progress (19/100 after `.3.2.16` lands) are in SESSION-STARTUP-READING.
+- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; exhaustive inventory, exact coverage, rgx exclusion, and resumed batch progress (20/100 after `.3.2.17` lands) are in SESSION-STARTUP-READING.

@@ -12,15 +12,18 @@
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.16` reads the AST parser prefix and owns nested-span repair `.15`.
-  This is item 19/100; twenty full Perl files plus the prefix read. Codebase/book remain incomplete.
+- `SESSION-STARTUP-READING.3.2.17` completes AST parser and pipeline/event adapter reading.
+  This is item 20/100; twenty-four full Perl files read. Codebase/book remain incomplete.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.17`: AST/Parser.pm 1499–1686, ArrayPipeline, and CanonicalEvents/Core.
+- Activate `SESSION-STARTUP-READING.3.2.18`: read ActionIR/Contracts.pm baseline lines 1–1396.
   Complete required reading and policy review, then repairs `.7`–`.15` before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.17` finishes the AST parser and pipeline/event adapters;
+  twenty-four whole Perl files read and existing owner cards indexed. Contracts prefix is next.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.16` reads AST parser 1–1498, proves nested offset loss,
   and owns `.15`; two focused parser suites pass, and `.3.2.17` finishes the parser and adapters.
@@ -66,9 +69,6 @@
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.2` partitions every remaining Perl byte into 52 bounded leaves;
   independent coverage/budget checks pass, and `.3.2.3` is next.
-
-- `2026-09-06` — `SESSION-STARTUP-READING.3.2.1` reads five invocation owners, reconciles existing Knowledge,
-  and preserves unchanged source/syntax. Remaining Perl reading starts with `.3.2.2` decomposition.
 
 ## History
 

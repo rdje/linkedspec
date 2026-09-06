@@ -10,7 +10,9 @@ answers:
   - "does trace show DeclareMethod initializer decisions"
   - "does trace show ControlFlow if switch decisions"
   - "how do I reverify compact lowerer trace coverage"
-date: 2026-07-04
+  - "where are Perl array pipeline plans lowered"
+  - "which array pipeline path guards a receiver mutation target"
+date: 2026-09-06
 status: current
 tags: [trace, observability, actionir, flow-expr, value-expr, array-pipeline, declare-method, control-flow, perl, task-tree, mdbook]
 evidence: "perl/LinkedSpec/ActionIR/{FlowExpr.pm,ValueExpr.pm,ArrayPipeline.pm,DeclareMethod.pm,ControlFlow.pm}; t/trace_actionir_compact_lowerers.t; docs/linkedspec-book/src/public-api/trace-api.md; docs/tasks/TRACE-OBSERVABILITY.md .3.4.4"
@@ -48,3 +50,10 @@ Covered decisions include:
 
 The trace hooks stay lazy through `LinkedSpec::ActionIR::Trace`: requiring compact lowerer modules or calling them
 through `EmitContext` without explicit trace configuration does not load `LinkedSpec::Trace`.
+
+The 2026-09-06 `.3.2.17` reading checkpoint confirms ArrayPipeline.pm's two emission paths without changing
+them: `_build_array_pipeline_plan_from_expr` collects operations recursively, and `_lower_array_pipeline_expr`
+emits them in order. A uniform-binding target uses scalar-held values through BindingRuntime; an active receiver
+target gets `assert_receiver_writable` with its authored source span before any operation. The legacy internal
+array path builds list expressions over `@target`. This is source-level ownership evidence, not new runtime proof;
+[[perl-uniform-binding-runtime]] and [[map-leaves-mutation-neutral-contract]] retain the behavior contracts.

@@ -9,7 +9,9 @@ answers:
   - "does trace show unresolved helper diagnostics"
   - "does trace show implicit if closure handling"
   - "how do I reverify ActionIR pipeline trace coverage"
-date: 2026-07-04
+  - "where are Perl canonical event kinds normalized"
+  - "how do canonical helper events align with action statements"
+date: 2026-09-06
 status: current
 tags: [trace, observability, actionir, scanner, canonical-events, diagnostics, rewrite-pipeline, perl, task-tree, mdbook]
 evidence: "perl/LinkedSpec/ActionIR/Trace.pm; perl/LinkedSpec/ActionIR/{Scanner.pm,ScannerCore.pm,CanonicalEvents.pm,Diagnostics.pm,RewritePipeline.pm}; t/trace_actionir_pipeline.t; docs/linkedspec-book/src/public-api/trace-api.md; docs/linkedspec-book/src/user-model/runtime-context-and-tracing.md; TOOLBOX.md; docs/tasks/TRACE-OBSERVABILITY.md .3.4.3"
@@ -45,3 +47,11 @@ configured.
 
 Scanner trace intentionally reports event-producing matches rather than every no-match probe. Diagnostics replay all
 rewrite contracts, so per-contract no-match lines would add volume without improving the root-cause signal.
+
+The 2026-09-06 `.3.2.17` reading checkpoint confirms the current owner split. CanonicalEvents.pm queues helper
+events by trimmed raw statement, consumes each matched queue in statement order, classifies registered function,
+bound codeblock, and receiver-mutation value drops, records RAW_PERL fallbacks, and appends leftover scan events.
+Leftovers are appended by hash-key traversal; this record makes no stable order claim for those unmatched keys.
+CanonicalEvents/Core.pm maps contract IDs to canonical kinds and normalizes argument context/target modes.
+The private mapping is not an authoring-admission registry: retained internal contract IDs do not restore retired
+public spellings. This is source-level reconciliation, not a new execution or backend-conformance result.
