@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.54 — reconcile legacy utility reading and repair evidence
+
+Read gdcheck, htmlcss_driver, and ptchange completely and verify baseline identity. Three syntax checks pass; nine gdcheck controls reproduce the already tracked defects. Preserve the prior ptchange runtime evidence, record exact revalidation, and own canonical Perl parent closeout plus bounded Rust decomposition before advancing. No runtime or public-book change.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.53 — reconcile function registry and legacy discovery
 
 Read all four function-registry/plugin/path/configuration files with exact baseline identity. Two callable suites pass 76 tests and both neutral contracts pass. Reconcile spec-owned parsing, fixed/variadic/typed-final metadata, and the distinction between current registered dispatch and legacy discovery. Correct the parked plugin count to 13 and update continuity without runtime, configuration, or book changes.

@@ -80,7 +80,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING.3.2`
   Status: `active`
   Goal: Read all 89 baseline Perl entries and their current deltas, starting with the facade invocation owners.
-  Children: `.3.2.1`, `.3.2.2`, `.3.2.3`, `.3.2.4`, `.3.2.5`, `.3.2.6`, `.3.2.7`, `.3.2.8`, `.3.2.9`, `.3.2.10`, `.3.2.11`, `.3.2.12`, `.3.2.13`, `.3.2.14`, `.3.2.15`, `.3.2.16`, `.3.2.17`, `.3.2.18`, `.3.2.19`, `.3.2.20`, `.3.2.21`, `.3.2.22`, `.3.2.23`, `.3.2.24`, `.3.2.25`, `.3.2.26`, `.3.2.27`, `.3.2.28`, `.3.2.29`, `.3.2.30`, `.3.2.31`, `.3.2.32`, `.3.2.33`, `.3.2.34`, `.3.2.35`, `.3.2.36`, `.3.2.37`, `.3.2.38`, `.3.2.39`, `.3.2.40`, `.3.2.41`, `.3.2.42`, `.3.2.43`, `.3.2.44`, `.3.2.45`, `.3.2.46`, `.3.2.47`, `.3.2.48`, `.3.2.49`, `.3.2.50`, `.3.2.51`, `.3.2.52`, `.3.2.53`, `.3.2.54`
+  Children: `.3.2.1`, `.3.2.2`, `.3.2.3`, `.3.2.4`, `.3.2.5`, `.3.2.6`, `.3.2.7`, `.3.2.8`, `.3.2.9`, `.3.2.10`, `.3.2.11`, `.3.2.12`, `.3.2.13`, `.3.2.14`, `.3.2.15`, `.3.2.16`, `.3.2.17`, `.3.2.18`, `.3.2.19`, `.3.2.20`, `.3.2.21`, `.3.2.22`, `.3.2.23`, `.3.2.24`, `.3.2.25`, `.3.2.26`, `.3.2.27`, `.3.2.28`, `.3.2.29`, `.3.2.30`, `.3.2.31`, `.3.2.32`, `.3.2.33`, `.3.2.34`, `.3.2.35`, `.3.2.36`, `.3.2.37`, `.3.2.38`, `.3.2.39`, `.3.2.40`, `.3.2.41`, `.3.2.42`, `.3.2.43`, `.3.2.44`, `.3.2.45`, `.3.2.46`, `.3.2.47`, `.3.2.48`, `.3.2.49`, `.3.2.50`, `.3.2.51`, `.3.2.52`, `.3.2.53`, `.3.2.54`, `.3.2.55`
 
 - ID: `SESSION-STARTUP-READING.3.2.1`
   Status: `done`
@@ -916,10 +916,29 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.53 - reconcile function registry and legacy discovery`
 
 - ID: `SESSION-STARTUP-READING.3.2.54`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 52: 839 lines/fragments, 22,702 bytes.
   Scope: `perl/gdcheck.pl` lines 1–431; `perl/htmlcss_driver.pl` lines 1–166; `perl/ptchange.pl` lines 1–242.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Complete utility source reading and exact baseline identities; existing .25/.26 diagnostic Knowledge; managed syntax checks without executing legacy driver outputs; memory, bounded history, and all fast doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: All three utility files reread through EOF: 839 lines / 22,702 bytes, baseline-identical.
+    Managed syntax checks pass for each file; nine targeted gdcheck assertions reproduce the already owned
+    signed-tolerance, duplicate-row, and DEFAULT defects. Prior ptchange spaced-path evidence is retained.
+    No repair or public-book change. .3.2.55 owns canonical parent closeout and complete Rust decomposition.
+  Commit: `SESSION-STARTUP-READING.3.2.54 - reconcile legacy utility reading and repair evidence`
+
+- ID: `SESSION-STARTUP-READING.3.2.55`
+  Status: `pending`
+  Goal: Close the fully read Perl lane and own the complete bounded Rust reading plan.
+  Acceptance: Independently reconcile all 89 baseline Perl paths and current deltas with the 53 completed
+    reading leaves plus their decomposition checkpoint and .31's physical ledger. Preserve every pending repair and distinguish reading
+    completion from runtime signoff. Verify exact disjoint Rust scope/budgets for all 412 baseline entries,
+    review semantic boundaries and current deltas, and create reading children before reading new Rust code.
+    Measure resulting task-collection pressure and reserve room for evidence; no capacity change is implied.
+    Update canonical Knowledge and bounded continuity; run exact staged canonical CI for the parent closeout.
   Verification: `pending`
   Commit: `pending`
 
@@ -1992,7 +2011,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.54` | `pending` | reconcile gdcheck, htmlcss_driver, and ptchange, preserving the existing .25/.26 defect owners. |
+| 1 | `SESSION-STARTUP-READING.3.2.55` | `pending` | reconcile all Perl coverage, define bounded Rust children, and run canonical proof for the Perl parent closeout. |
 
 ## Reading Ledger
 
@@ -2003,7 +2022,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoint `.3.2.54` remains pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. The Perl reading queue is complete; `.3.2.55` owns formal parent closeout. | Canonical Perl closeout and all other first-party inputs not explicitly listed as read. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -3914,6 +3933,26 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   bdf491a56b9ce6461a6e3ed2c924de6e0af9e2eb passed nine doctrines/post-pointer, then brief/clean checks.
   Roadmap/physical book Yes; codebase No and formal alignment/repairs remain pending. Next .3.2.54.
 
+### Legacy comparison, HTML rendering, and constraint conversion at `.3.2.54`
+
+- Activated from clean `bd0573533e45fdd903255fb959e3c1f7e5971a27` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Completely reread gdcheck 1–225 / 226–431, htmlcss_driver 1–166, and ptchange 1–242:
+  839 lines / 22,702 bytes. Exact baseline identities pass; the three raw 0xb5 comment bytes are escaped
+  in the reading output without source conversion. Physical coverage was already preserved by .31.
+- Retrieve .25/.26's canonical diagnostic cards before interpretation. Three managed syntax checks pass;
+  nine fresh assertions reproduce four signed-tolerance twins, duplicate removal/addition, and DEFAULT
+  cardinalities zero/one/two. These assert observed defects, not desired behavior. Persist the exact command
+  in the existing gdcheck card. Retain prior argv-list ptchange evidence after exact source identity.
+- Reconcile key/column masks and config readers; HTML class/custom-color emission, sorted scripted cells,
+  added/removed script dispatch, and table-order output; false-path mixed pin/port Cartesian expansion,
+  untouched-span reinsertion, and conditional clock-script output. No HTML callbacks or ptchange output
+  workflow is executed by syntax checks. Existing repairs .25/.26 remain pending.
+- Own .3.2.55 before writing the next pointer: independently close Perl coverage and decompose all Rust
+  bytes with pressure proof and canonical CI. No new Rust reading credit is claimed. The Perl parent stays
+  active until that closeout; all other codebase lanes and .4/.5 remain incomplete.
+- Prior bd0573533e45fdd903255fb959e3c1f7e5971a27 passed all nine doctrines and post-pointer verification;
+  brief was zero and tree clean before activation. No runtime, configuration, or public-book changes.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -3968,7 +4007,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.2.50` is item 54/100 at `78b272ec`;
   `.3.2.51` is item 55/100 at `bea31562`;
   `.3.2.52` is item 56/100 at `bdf491a5`;
-  `.3.2.53` is item 57/100 once committed.
+  `.3.2.53` is item 57/100 at `bd057353`;
+  `.3.2.54` is item 58/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -4090,6 +4130,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.51` | Complete prior final range + exact identity; evaluator/12 fixtures; unchanged regeneration/Perl52; dated pressure census; Knowledge and focused continuity | PASS; complete case-table comprehension accounted; no runtime or generated-data change. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.52` | Complete prior XID range + baseline; ADR0051/consumer seams; Unicode806/9/8/2; direct3224/17/2; gap9/0/63/public8/15/10/34; focused continuity | PASS; generated classifier and current named-slot admission reconciled; historical stages retained. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.53` | Four complete files + baseline; 76 callable tests; neutral signature/codeblock; tracked plugin census13; canonical Knowledge and focused continuity | PASS; current registry metadata and legacy corpus/discovery boundaries reconciled. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.54` | Three complete files + exact baseline; three managed syntax checks; nine gdcheck diagnostic assertions; canonical utility Knowledge; focused continuity | PASS; final queued Perl utility checkpoint reconciled; .25/.26 remain unrepaired. |
 
 ## Commit Log
 
@@ -4153,6 +4194,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.2.51` | `SESSION-STARTUP-READING.3.2.51 - reconcile Unicode evaluator and contextual casing` | Final case-table range reconciled; contextual evaluator, retained proof and native-planning pressure recorded. |
 | `SESSION-STARTUP-READING.3.2.52` | `SESSION-STARTUP-READING.3.2.52 - reconcile XID classifier and current named-slot admission` | XID range and direct classifier proof recorded; stale gap Knowledge admission corrected without runtime movement. |
 | `SESSION-STARTUP-READING.3.2.53` | `SESSION-STARTUP-READING.3.2.53 - reconcile function registry and legacy discovery` | Function registry and legacy files read; 76 tests and neutral proof recorded; 13-file corpus count corrected. |
+| `SESSION-STARTUP-READING.3.2.54` | `SESSION-STARTUP-READING.3.2.54 - reconcile legacy utility reading and repair evidence` | 839 utility lines reread; exact diagnostic control retained; .55 owns canonical closeout. |
 
 ## Changelog
 
@@ -4260,3 +4302,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-06`: `.3.2.51` reconciles final Unicode mapping/property/evaluator coverage and records the dated task-storage census before native planning.
 - `2026-09-06`: `.3.2.52` reconciles the generated XID classifier, records direct boundary/fixture proof, and corrects stale named-slot/gap admission Knowledge.
 - `2026-09-06`: `.3.2.53` reconciles spec-owned function metadata, completes legacy plugin/path/config reading, and records current callable proof and the parked plugin census.
+- `2026-09-06`: `.3.2.54` completes legacy utility comprehension and preserves existing repair evidence; owns the Perl closeout and Rust decomposition before advancing.

@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `bdf491a56b9ce6461a6e3ed2c924de6e0af9e2eb` — clean preceding reading checkpoint.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.53 - reconcile function registry and legacy discovery`.
+- activation_commit: `bd0573533e45fdd903255fb959e3c1f7e5971a27` — clean preceding reading checkpoint.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.54 - reconcile legacy utility reading and repair evidence`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: activate `.3.2.54`; reconcile gdcheck, htmlcss_driver, and ptchange, preserving the existing .25/.26 defect owners,
+- next_action: activate `.3.2.55`; reconcile all Perl coverage, define bounded Rust children, and run canonical proof for the Perl parent closeout,
   then continue queued reading. Intake `.31` preserves the forward source coverage and exact findings.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30` and `.32`–`.44` precede mutation setup; `.29` is part of `.5` adoption.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4984` is the twenty-seventh history segment; ADR `0104`
   authorizes exactly 29 collection files / 28 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook Yes (physical); .31/.3.2.42 preserve complete book/Perl source coverage and repair ownership; formal .4 alignment remains pending (57/100 after `.3.2.53` lands).
+- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook Yes (physical); .31/.3.2.42 preserve complete book/Perl source coverage and repair ownership; formal .4 alignment remains pending (58/100 after `.3.2.54` lands).

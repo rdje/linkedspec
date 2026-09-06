@@ -5,21 +5,24 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Queued comprehension checkpoint `.3.2.54` remains pending.
+  findings, and donor-policy comparisons. The Perl reading queue is complete; `.3.2.55` owns canonical parent closeout.
 - Repairs `.7`–`.30` and `.32`–`.44` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.53` completes function registry and legacy discovery comprehension with focused callable proof.
-  This is item 57/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.2.54` completes the final queued Perl utility reading checkpoint with precise existing-defect evidence.
+  This is item 58/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.54`: reconcile gdcheck, htmlcss_driver, and ptchange, preserving the existing .25/.26 defect owners.
+- Activate `SESSION-STARTUP-READING.3.2.55`: reconcile all Perl coverage, define bounded Rust children, and run canonical proof for the Perl parent closeout.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.54` reads all 839 legacy utility lines. Three syntax checks and nine diagnostic assertions pass;
+  existing comparison/path repairs remain pending and .3.2.55 owns canonical closeout.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.53` reads four registry/legacy files totaling 1,202 lines / 45,829 bytes.
   Seventy-six callable tests pass; current metadata and the 13-file parked plugin census are reconciled.
@@ -65,9 +68,6 @@
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.39` reads plugin and progressive authority; 138 tests and neutral/public proof pass.
   Six limit controls expose resource/diagnostic repair work owned by `.37`.
-
-- `2026-09-06` — `SESSION-STARTUP-READING.3.2.38` reads MCP and Numeric runtime owners; 31 MCP/nine numeric
-  tests pass; paired error-order controls expose reconciliation work owned by `.36`.
 
 ## History
 

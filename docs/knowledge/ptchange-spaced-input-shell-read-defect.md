@@ -25,3 +25,10 @@ An Open3 argv-list caller supplied two identical inputs containing preserved com
 The script reads with qx(cat $ARGV[0]), uses two-argument output opens, and has a machine-specific shebang. The repair owns shell-free IO, valid path characters, safe failure behavior, compatible transformations, and repository-derived defaults under the reviewed storage policy. Arbitrary command execution was not tested.
 
 Sources: `perl/ptchange.pl`.
+
+At `SESSION-STARTUP-READING.3.2.54`, all 242 lines / 7,877 bytes were reread and remain baseline-identical
+(SHA-256 `13336081ceff048e5172169d4e9bad5997b245c10170ef30f81220dcaae30062`). Managed syntax proof passes.
+The prior argv-list spaced-path control remains the runtime evidence; it was not repeated by this reading slice.
+The complete transformation path preserves untouched spans, splits mixed pin/port object lists through Cartesian
+combinations, reinserts false-path commands, and writes a separate clock script only when clocks are discovered.
+Those existing transformations are compatibility inputs to `.26`, whose shell-free IO repair remains pending.
