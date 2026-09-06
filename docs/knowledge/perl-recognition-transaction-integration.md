@@ -52,9 +52,10 @@ same runtime and carries local regexes only when a transaction needs them.
 
 Admission `.14.3.2.3` requires, syntax-checks, and executes the exact final-path
 consumer once in canonical CI. The Perl rollout leg is complete and public-current
-guidance identifies the forms as current on Perl. Rust has since been admitted
-independently; Dart, Julia, PUC Lua, LuaJIT, recurring, and public-no-drift remain
-RED.
+guidance identifies the forms as current on Perl. At this card's August-10 checkpoint, Rust was independently
+admitted while the later runtimes, recurring composition, and public closeout were pending. The 2026-09-06
+reading reconciliation routes current combined status to [[typed-authoring-model-public-no-drift]]; those
+historical pending rows must not be read as today's support status.
 The four grammar-owned transaction intrinsics remain outside the aligned
 246-name ordinary helper-call inventories: their contracts lower directly to
 dedicated `RECOGNITION_*` nodes. The independent language-coverage checker

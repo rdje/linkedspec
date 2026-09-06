@@ -352,12 +352,18 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.17 - finish AST parser and read pipeline adapters`
 
 - ID: `SESSION-STARTUP-READING.3.2.18`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 16: 1,396 lines/fragments, 65,503 bytes.
   Scope: `perl/LinkedSpec/ActionIR/Contracts.pm` lines 1–1396.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact prefix reading and baseline identity; existing lowering, binding, transaction, and
+    typed-source Knowledge reconciliation; direct catalog count/detachment probe; memory/doctrine/Knowledge/history checks and final staged review.
+  Canonical trigger: `none` — bounded source-reading continuity; no production or public change.
+  Verification: Seven untruncated prefix ranges cover 1,396 lines / 65,503 bytes; full-file baseline identity
+    passes. Catalog recheck gives 47/30/11/4 detached rows, total 92. Existing ownership and historical status
+    reconcile; no new runtime/admission claim. Focused checks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.18 - read contract prefix and reconcile projection status`
 
 - ID: `SESSION-STARTUP-READING.3.2.19`
   Status: `pending`
@@ -911,7 +917,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.18` | `pending` | Read ActionIR/Contracts.pm baseline lines 1–1396. |
+| 1 | `SESSION-STARTUP-READING.3.2.19` | `pending` | Finish ActionIR/Contracts.pm baseline lines 1397–2513. |
 
 ## Reading Ledger
 
@@ -922,7 +928,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | Twenty-four Perl files in full through AST parser/ArrayPipeline/CanonicalEvents/Core under `.3.2.17`; supporting reads below. | Remaining 65 Perl paths and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | Twenty-four Perl files in full plus Contracts.pm 1–1396 under `.3.2.18`; supporting reads below. | Contracts suffix, the other 64 Perl paths, and all other first-party inputs not explicitly listed as read. |
 | mdBook | **No** | `docs/linkedspec-book/src/SUMMARY.md`; `docs/linkedspec-book/src/development/local-ci-and-regression.md` 1897–1943 and 1988–2004. | All other chapter text, including the unread portions of that development chapter. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -1368,6 +1374,33 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   staged review are the focused proof for this reading leaf. Next `.3.2.18` reads Contracts.pm 1–1396;
   required codebase/mdBook reading is still incomplete.
 
+### Contracts prefix and typed-source catalog at `.3.2.18`
+
+- Activated from clean `34958c8f4d3399bee3b5cf01f72466a8c51df59a`; prior nine doctrines, post-pointer,
+  zero-byte brief, clean status, and full derived-map review passed (951 facts / 8,036 keys). Read Contracts
+  1–180, 181–385, 386–600, 601–810, 811–1000, 1001–1200, and 1201–1396 without truncation:
+  1,396 lines / 65,503 bytes; full-file baseline identity passes. Read-only ranges preceded activation while
+  the prior commit hooks completed; checkpoint edits followed its clean boundary. Twenty-four whole Perl files
+  remain read; suffix 1397–2513 belongs to `.3.2.19`.
+- Read primitive/push target classification, static observation/transaction lowering, required dependency
+  callbacks and dropped-value fallback, mark trace construction, typed source projection families, dispatch,
+  returns, capture/cursor boundaries, named-mark capture/take, and mark-copy construction. Unread suffix still
+  owns final catalog assembly; no complete registry-order claim is made from this prefix.
+- Existing uniform-binding, transaction integration, typed-source rollout, and final authoring closeout records
+  precede reconciliation. Typed-source record's relevant Perl/current sections 161–225 and 276–290 were read
+  untruncated; an earlier combined 1–130 output was truncated and supplies no full-card coverage claim.
+  Direct `typed_source_projection_rows` gives capture_mark 47, entry_match 30, input_cursor 11, cursor_control 4;
+  modifying the returned nested row does not change a fresh call. Total 92 and detachment pass.
+- Existing projection and transaction cards now label their old pending-status passages as historical and
+  point to the already-closed final authoring model. This ledger records the bounded catalog recheck;
+  no new admission, result-shape, generated-source, or other-backend test claim. Private compatibility IDs and
+  canonical authored helper names remain distinct; no retired syntax is restored.
+- First pre-commit attempt passed eight doctrines but rejected the typed-source card at 65,952/65,536 bytes.
+  Shortened its historical-status correction and kept detailed catalog recheck evidence here; no cap increase,
+  archive edit, or hook bypass. Final resulting-tree checks must pass before landing.
+- Production/book remain unchanged. Focused reading/identity/catalog/Knowledge plus memory/doctrine/history
+  and staged review own this checkpoint. No new defect or background job remains; `.3.2.19` reads the suffix.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -1388,7 +1421,7 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   `.3.2.9` is item 12/100 at `96a1c242`; `.3.2.10` is item 13/100 at `ff6c228c`;
   `.3.2.11` is item 14/100 at `3ab399d0`; `.3.2.12` is item 15/100 at `5e2cf756`;
   `.3.2.13` is item 16/100 at `a7d17e6f`; `.3.2.14` is item 17/100 at `e421887d`;
-  `.3.2.15` is item 18/100 at `762bef64`; `.3.2.16` is item 19/100 at `9a881160`; `.3.2.17` is item 20/100 once committed. `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
+  `.3.2.15` is item 18/100 at `762bef64`; `.3.2.16` is item 19/100 at `9a881160`; `.3.2.17` is item 20/100 at `34958c8f`; `.3.2.18` is item 21/100 once committed. `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
 
@@ -1465,6 +1498,8 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.16` | Exact prefix identity/reading; AST and public offset controls; two parser suites | PASS 30 top-level tests and retained probes; focused memory/doctrine/Knowledge/history and staged checks precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.16` | Required Knowledge/all nine doctrines; post-pointer; empty brief/clean status; derived-map review | PASS at `9a881160`; 951 facts / 8,032 keys. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.17` | Exact four-file baseline identity/ranges; Knowledge owner reconciliation | PASS reading; focused memory/doctrine/Knowledge/history and staged checks precede landing. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.17` | Required Knowledge/all nine doctrines; post-pointer; empty brief/clean status; derived-map review | PASS at `34958c8f`; 951 facts / 8,036 keys. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.18` | Exact prefix identity/ranges; catalog count/detachment; historical status reconciliation | PASS reading/catalog; focused memory/doctrine/Knowledge/history and staged checks precede landing. |
 
 ## Commit Log
 
@@ -1491,6 +1526,7 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `SESSION-STARTUP-READING.3.2.15` | `SESSION-STARTUP-READING.3.2.15 - finish emitter adapters and extend return repairs` | Twenty full Perl files read; existing return/scope repairs extend to repetition; diagnostic projection bounded. |
 | `SESSION-STARTUP-READING.3.2.16` | `SESSION-STARTUP-READING.3.2.16 - read AST parser and own nested span repair` | Parser prefix read; nested-offset repair `.15` owns three recursive handoffs and adjacent controls. |
 | `SESSION-STARTUP-READING.3.2.17` | `SESSION-STARTUP-READING.3.2.17 - finish AST parser and read pipeline adapters` | Twenty-four whole Perl files read; existing pipeline/event owners indexed; Contracts prefix follows. |
+| `SESSION-STARTUP-READING.3.2.18` | `SESSION-STARTUP-READING.3.2.18 - read contract prefix and reconcile projection status` | Contracts prefix read; 92-row detached catalog rechecked; stale-current card wording bounded. |
 
 ## Changelog
 
@@ -1536,3 +1572,5 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   `.3.2.17` completes the parser and reads ArrayPipeline/CanonicalEvents adapters.
 - `2026-09-06`: `.3.2.17` completes AST parser and pipeline/event adapters; twenty-four Perl files read.
   Existing Knowledge owners gain direct retrieval keys; `.3.2.18` reads the Contracts prefix.
+- `2026-09-06`: `.3.2.18` reads Contracts 1–1396 and rechecks the detached typed-source catalog;
+  historical status wording is reconciled, and `.3.2.19` finishes Contracts.

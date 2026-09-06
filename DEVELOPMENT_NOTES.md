@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.18 — projection catalog and historical status
+
+- The typed-source catalog returns 47/30/11/4 rows across capture/entry/input/cursor families; nested mutation
+  of one result leaves the next result unchanged. This checks catalog shape/detachment, not full runtime parity.
+- Contract prefix ownership reconciles with existing facts; two old pending-status passages now identify their
+  historical milestone. Final catalog assembly remains unread in the next suffix leaf.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.17 — ordered plans and canonical event ownership
 
 - ArrayPipeline separates typed binding updates/receiver guards from internal array emission. CanonicalEvents

@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.18 — read contract prefix and reconcile projection status
+
+- Read Contracts.pm 1–1396 / 65,503 bytes; full-file identity passes and its detached catalog remains 92 rows.
+- Existing projection/transaction cards distinguish historical pending milestones from completed final status.
+- Focused reading/catalog/Knowledge, memory/doctrines/history, and staged review; source/book unchanged.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.17 — finish AST parser and read pipeline adapters
 
 - Finish AST parser and read ArrayPipeline/CanonicalEvents/Core: 1,195 lines / 47,612 bytes, baseline-identical.

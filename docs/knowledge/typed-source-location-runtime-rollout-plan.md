@@ -196,9 +196,8 @@ adds 13 surface/state mutations; Perl `.14.4.2`, Rust `.14.4.3`, Dart `.14.4.4`,
 observation row. Recurrence `.14.4.7` adds eleven topology/storage regressions plus one complete-to-pending
 regression and promotes only that row. Public closeout `.14.4.8` adds 27 projection/stale-claim/surface mutations
 without adding or promoting a rollout row. Lossless-gap composition `.14.5.1` adds twelve cross-contract,
-projection, route, storage, and registration regressions and promotes only its row. Current truth is 10 complete /
-4 pending / 126; the combined `.14.8`
-recurring/public no-drift row remains pending.
+projection, route, storage, and registration regressions and promotes only its row. That milestone was 10/4/126;
+final `.14.8` below supersedes it at 14 complete / 0 pending / 231.
 
 Perl core `.14.2.1.1` now implements `LinkedSpec::SourceLocation`. Module-private authority state snapshots decoded
 text and precomputes scalar-boundary line, column, and UTF-8 byte evidence. Positions, direct spans, and derived
