@@ -65,7 +65,12 @@ Before the leaf, all three terse spellings passed through unrecognized — `set(
 - **`cat`/`copy` (composite/source positions)**: added to the FlowExpr value-expr prefix list (`FlowExpr.pm`
   :270, the assignment-source path) and `cat` to the bootstrap general-payload gate (`BootstrapSpec/Core.pm`).
 
-## Three distinct implementation shapes (why one alias does not cover the leaf)
+## Historical implementation analysis before `.1.4.1`
+
+The next three points preserve the original diagnosis and proposed changes. They are not instructions to
+reintroduce retired aliases. Current `copy(name)` resolves the runtime typed binding under
+[[perl-uniform-binding-runtime]]; exact aggregate selectors are governed by
+[[perl-aggregate-selector-compile-rejection]].
 
 1. **`cat`→`concat` is a PURE rename.** The clean home is the alias-normalization seam
    `_normalize_method_name` (`perl/LinkedSpec/ActionIR/MethodExpr.pm:19-26`), applied at
@@ -113,7 +118,8 @@ A Perl-reference engine change and its lockstep Rust-parity obligation (ADR
 [0006](../decisions/0006-multi-backend-vision.md)) are separable and touch **unrelated ownership areas**
 (Perl `ActionIR/*` + `t/phase0_regression.t` + book vs Rust `engine.rs` + oracle corpus + cargo tests),
 which `COMMIT.md` forbids bundling — exactly mirroring `.1.1`→`.1.1.1`/`.1.1.2` and
-`.1.2`→`.1.2.1`/`.1.2.2`. `.1.4` is now a closed container; the next terse frontier is `.1.3`.
+`.1.2`→`.1.2.1`/`.1.2.2`. `.1.4` is a closed container. The former next-frontier pointer to `.1.3` belongs to that historical handoff;
+current work is resolved through the task-tree index.
 
 ## Links
 

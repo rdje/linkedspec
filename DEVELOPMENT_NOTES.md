@@ -10,6 +10,11 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.28 — tagged fields execute inside Perl map
+
+Generated Perl evaluates carried fields per produced row and drops trailing empty items; PUC evaluates fields once and preserves them.
+The empty-source split results also differ; .33 owns contract/impact review and repair, with exact paired controls in Knowledge.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.27 — compatibility bridges and finite numeric proof
 
 AST dispatch enters the guarded compatibility catalog; scalar Numeric calls and inline aggregate reducers remain distinct paths.

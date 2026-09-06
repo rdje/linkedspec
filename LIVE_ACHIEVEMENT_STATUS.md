@@ -5,21 +5,24 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   exhaustive inventory are complete; codebase/book remain incomplete. `rgx` and its dependencies are excluded.
 - Intake `.31` preserves all baseline Perl source reading, supporting book/native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.28`–`.3.2.54` remain pending.
-- Repairs `.7`–`.30` and `.32` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
+  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.29`–`.3.2.54` remain pending.
+- Repairs `.7`–`.30` and `.32`–`.33` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.27` completes helper-fallback reading and qualifies historical AST/numeric evidence.
-  This is item 31/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.2.28` completes collection-helper reading and owns tagged-record contract review and repair.
+  This is item 32/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.28`: complete MethodLowering baseline lines 5943–7245.
+- Activate `SESSION-STARTUP-READING.3.2.29`: complete MethodLowering baseline lines 7246–8057 and ProgressiveSpanDispatch 1–165.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.28` reads collection/constructor paths and passes three value controls;
+  paired Perl/PUC tagged-record divergence is owned by `.33.1`/`.33.2`.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.27` reads helper fallback and numeric/string/collection dispatch; nine numeric
   tests and four descriptors pass, while the recorded Unicode-digit gap remains open.
@@ -65,9 +68,6 @@
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.14` reads the emitter prefix, reconciles historical cards,
   and owns literal/state repairs `.14.1`/`.14.2`; `.3.2.15` continues reading.
-
-- `2026-09-06` — `SESSION-STARTUP-READING.3.2.13` completes EmitContext and owns repeated blind-target
-  identity repair `.13`; `.3.2.14` reads HandlerVariantEmitter next.
 
 ## History
 

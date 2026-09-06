@@ -35,7 +35,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -505,12 +505,19 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.27 - read helper fallback and qualify numeric evidence`
 
 - ID: `SESSION-STARTUP-READING.3.2.28`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 26: 1,303 lines/fragments, 64,878 bytes.
   Scope: `perl/LinkedSpec/ActionIR/MethodLowering.pm` lines 5943–7245.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact range/full-file identity; collection/hash/constructor and mutation Knowledge;
+    selected public value controls plus paired Perl Get/source and PUC Lua tagged-record controls;
+    memory/Knowledge/history and staged review.
+  Canonical trigger: `none` — source-reading and Knowledge continuity only.
+  Verification: Exact baseline identity and 1,303-line / 64,878-byte coverage pass. Three public constructor/copy/
+    collection controls pass; two Perl Get and two fresh PUC Lua controls expose tagged-field and split drift.
+    `.33.1`/`.33.2` own review/repair; focused memory/history/scope checks and required hooks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.28 - read collection helpers and own tagged-record repair`
 
 - ID: `SESSION-STARTUP-READING.3.2.29`
   Status: `pending`
@@ -1375,11 +1382,40 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     distinct-name controls return outer. Dumped Perl declares `my $temp` before the argument temporary.
   Commit: `pending`
 
+- ID: `SESSION-STARTUP-READING.33`
+  Status: `pending`
+  Goal: Reconcile tagged-record argument evaluation and split behavior with the public contract and runtime evidence.
+  Dependencies: `.3`/`.4`/`.5`.
+  Children: `.33.1`, `.33.2`
+
+- ID: `SESSION-STARTUP-READING.33.1`
+  Status: `pending`
+  Goal: Bound tagged-record divergence across native/generated runtimes and determine the authoritative contract.
+  Acceptance: Replay the exact Perl Get/source controls across all six runtimes. Cover source/delimiter/tag/
+    carried-field evaluation count and order, empty/trailing/consecutive items, literal/regex delimiters,
+    variable delimiters, scalar receivers, and nested carried-value independence. Reconcile book once-only
+    teaching, Lua implementation evidence, Perl-reference policy, and existing corpus expectations before repair.
+    Assign separate implementation leaves if the coordinated correction exceeds one safe slice.
+  Verification: `pending` — Perl carried field increments twice for a,b, and zero times for empty input;
+    tagged splitting drops the trailing empty item retained by ordinary split. See `.3.2.28` evidence.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.33.2`
+  Status: `pending`
+  Goal: Implement the reviewed tagged-record contract and prevent recurrence in runtime and public examples.
+  Dependencies: `.33.1`.
+  Acceptance: Add independently justified failing controls, correct affected lowerers/interpreters, and cover
+    direct/generated/helper/receiver forms without silently re-blessing oracle data. Preserve non-scope source
+    argument ownership and exact record shape. Synchronize the helper reference and Knowledge, add real public
+    claim coverage, and run focused direct-dependent plus required cross-runtime admission proof.
+  Verification: `pending`
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.28` | `pending` | complete MethodLowering baseline lines 5943–7245. |
+| 1 | `SESSION-STARTUP-READING.3.2.29` | `pending` | complete MethodLowering baseline lines 7246–8057 and ProgressiveSpanDispatch 1–165. |
 
 ## Reading Ledger
 
@@ -1390,7 +1426,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.28`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.29`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
 | mdBook | **No** | `.31` records fourteen complete book sources plus the two earlier local-CI ranges: 640,041 bytes of disjoint coverage. | Remaining 1,316,541 source bytes, formal chapter checkpoints, and rendered alignment under `.4`. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -2369,6 +2405,56 @@ PERL
   warning/control and unresolved timing, with the two older lifecycle records linked to the limitation.
 - Source and public book remain unchanged. Codebase/book remain No; `.3.2.28` owns 5943–7245.
 
+### Collection helpers, constructors, and tagged-record divergence at `.3.2.28`
+
+- Activated from clean `e4716fcf55042846646e654190a68cca11ee57d2` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Re-reviewed 5943–6230, 6231–6530, 6531–6810, 6811–7070, and 7071–7245 without truncation.
+  Whole-file baseline identity and 1,303 lines / 64,878 bytes agree with `.31`'s forward pass.
+- Read array bounds/concat/split/tagged/sort/membership helpers, hash views/transforms, coalesce/copy,
+  constructors and source-slot reads, mutation/return payload lowering, assignment bridges, receiver
+  splitting/family registries, and the legacy array-chain normalizer. Later family normalizers follow next.
+- Existing constructor/retirement, alias-history, uniform-binding, tagged-record, and split Knowledge was
+  read. Historical bare-name selector teaching now points to structural retirement; alias implementation
+  instructions and next-frontier wording are explicitly historical. A new question indexes why an outer
+  copy remains unchanged after the tested nested write rebinds its original through BindingRuntime.
+- Three public controls pass: literal constructors, copy followed by nested mutation, and combined array/
+  hash helper results. The exact successful control and captured-source filter follow.
+
+```bash
+bash tools/project_data_run.sh env PERL5LIB= perl -Iperl -MLinkedSpec -MJSON::PP - <<'PERL'
+use strict;use warnings;
+my $json=JSON::PP->new->canonical->allow_nonref;
+for my $case (
+ ['constructors','value = 7; return([array("foo"), hash("foo",value)])',[['foo'],{foo=>7}]],
+ ['copy_independence','original = {"nested":{"x":1}}; snapshot = copy(original); original["nested"]["x"] = 2; return([original,snapshot])',[{nested=>{x=>2}},{nested=>{x=>1}}]],
+ ['collection_hash','items=[1,2,3,4]; meta={"b":2,"a":1}; return([items.slice(1,2),items.take_last(2),meta.sorted_keys(),meta.pick_keys("b")])',[[2,3],[3,4],['a','b'],{b=>2}]]
+){
+ my $spec="Top::\n /x/ -> Top { $case->[1] }\n";my %ctx;my $src='';
+ my $p=LinkedSpec::Get(\$spec,runtime_ctx_ref=>\%ctx,dump_parser_source=>1,parser_source_ref=>\$src);
+ die "$case->[0] compile" unless ref($p) eq 'CODE';my $input='x';my $got=$p->(\$input);
+ print $json->encode({case=>$case->[0],result=>$got,context_error=>defined($ctx{last_error})?1:0}),"\n";
+ if($case->[0] eq 'copy_independence'){for my $line(split /\n/,$src){print "$line\n" if $line =~ /__ls_copy_value/}}
+ die "$case->[0] mismatch" unless $json->encode($got) eq $json->encode($case->[2]) && !defined($ctx{last_error});
+}
+PERL
+```
+
+- Tagged-record diagnosis uses two Perl Get/source controls and the same specs through fresh PUC Lua CLI.
+  For `a,b,`, Perl makes two records, with carried increments 1/2 and final counter 2; PUC makes three
+  records with field 1 and counter 1. Ordinary split retains the trailing empty item on both.
+  For empty input, Perl yields no records, counter 0, and no ordinary split items; PUC yields one empty
+  record, counter 1, and one ordinary empty item. All controls succeed without a Perl context error.
+- Generated Perl and MethodLowering 6068–6075 put fields inside map and omit the split trailing-empty
+  limit. Lua interpreter 1093–1106 appends the suffix; 1897–1907 and 1926–1940 split already-evaluated
+  arguments and copy fields. Diagnostic source reads covered Lua 1082–1145 and 1840–1970; they do not
+  complete Lua reading. Helper-reference 1163–1166 confirms the current once-only public claim.
+- New `.33.1` owns all-runtime/native/generated impact and authoritative contract review; `.33.2` owns
+  the resulting fix and regression/public coverage. Fresh evidence is only Perl and PUC Lua here;
+  LuaJIT and the other backends remain unprobed. Exact paired commands/results live in
+  `docs/knowledge/tagged-record-evaluation-and-split-drift.md`; the two Lua records link that limitation.
+- No runtime or public-book edit was made. Codebase/book remain No; `.3.2.29` reads the suffix and
+  ProgressiveSpanDispatch next, before the remaining prerequisite checkpoints and owned repairs.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -2397,7 +2483,8 @@ PERL
   `.3.2.24` is item 28/100 at `d392ad2b`;
   `.3.2.25` is item 29/100 at `85167df3`;
   `.3.2.26` is item 30/100 at `a32cf422`;
-  `.3.2.27` is item 31/100 once committed.
+  `.3.2.27` is item 31/100 at `e4716fcf`;
+  `.3.2.28` is item 32/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -2493,6 +2580,7 @@ PERL
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.25` | Exact range/full-file identity; function/callable Knowledge; eight Get/source/descriptor controls; focused continuity | PASS diagnostic controls; caller-local shadowing reproduced and repair .32 owned; required staged gates precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.26` | Exact range/full-file identity; block/receiver/traversal Knowledge; AST parser suite; three public root controls; focused continuity | PASS 23 tests and hash/array/scalar controls; required staged gates precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.27` | Exact range/full-file identity; AST/fallback/retirement/numeric Knowledge; scalar numeric suite; four public descriptors; focused continuity | PASS nine tests and four expected diagnostic counts; known Unicode-digit repair remains open; required gates precede landing. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.28` | Exact range/full-file identity; constructor/collection/mutation Knowledge; three public controls; paired Perl/PUC tagged controls; focused continuity | PASS bounded controls; tagged/split divergence rooted and .33 review/repair owned; required staged gates precede landing. |
 
 ## Commit Log
 
@@ -2530,6 +2618,7 @@ PERL
 | `SESSION-STARTUP-READING.3.2.25` | `SESSION-STARTUP-READING.3.2.25 - read value calls and own caller shadowing repair` | Value and function-call dispatch read; eight controls root-cause caller-local shadowing and own repair .32. |
 | `SESSION-STARTUP-READING.3.2.26` | `SESSION-STARTUP-READING.3.2.26 - read receiver chains and reconcile tree dispatch` | Block and receiver dispatch read; three traversal records distinguish original milestones from current shared dispatch. |
 | `SESSION-STARTUP-READING.3.2.27` | `SESSION-STARTUP-READING.3.2.27 - read helper fallback and qualify numeric evidence` | Helper fallback and numeric/string/collection prefix read; four AST/numeric Knowledge records qualified. |
+| `SESSION-STARTUP-READING.3.2.28` | `SESSION-STARTUP-READING.3.2.28 - read collection helpers and own tagged-record repair` | Collection and constructor paths read; selector history reconciled and paired tagged-record divergence owned by .33. |
 
 ## Changelog
 
@@ -2597,3 +2686,5 @@ PERL
   reconciles existing traversal Knowledge; `.3.2.27` is next.
 - `2026-09-06`: `.3.2.27` reads helper fallback and numeric/string/collection paths, passes nine numeric tests and
   four descriptor controls, and qualifies existing AST/numeric Knowledge; next `.3.2.28`.
+- `2026-09-06`: `.3.2.28` reads collection/constructor/mutation paths, passes three value controls, and preserves
+  paired Perl/PUC tagged-record drift with `.33.1`/`.33.2` ownership; `.3.2.29` follows.

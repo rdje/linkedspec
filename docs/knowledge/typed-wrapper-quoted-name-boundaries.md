@@ -1,6 +1,6 @@
 ---
 id: typed-wrapper-quoted-name-boundaries
-title: "Aggregate typed wrappers read working variables only from bare name tokens: array(foo) reads array foo and hash(bar) reads hash bar; quoted strings remain constructor payloads, and terse constructors are direct shapes like [value] and { \"key\" : value }."
+title: "Quoted constructor payloads stay literal; exact bare-name aggregate selectors were later retired."
 answers:
   - "does array(\"foo\") mean the same as array(foo)"
   - "does array('foo') mean the same as array(foo)"
@@ -20,17 +20,20 @@ reverify: "perl -Iperl -MLinkedSpec -e 'for my $expr (q{return(count(array(foo))
 
 # Typed Wrapper Quoted-Name Boundaries
 
-Confirmed for `SPEC-FORMAT-TERSE.2.3.5.6`.
+The original boundary was confirmed for `SPEC-FORMAT-TERSE.2.3.5.6`. Later uniform binding retired exact
+`array(name)` / `hash(name)` selectors. [[perl-aggregate-selector-compile-rejection]] owns Perl's structural
+rejection, while [[uniform-binding-neutral-contract]] owns the portable replacement with bare typed values.
+Quoted, empty, computed, and valid multi-argument constructors remain values.
 
-Aggregate typed wrappers read a working variable only when the argument is a bare name token:
+The historical selector forms were:
 
 ```text
 array(foo)
 hash(bar)
 ```
 
-`array(foo)` reads the array/list working variable `foo`, and `hash(bar)` reads the hash/associative-array
-working variable `bar`.
+At that earlier milestone, `array(foo)` read the array/list working variable `foo`, and `hash(bar)` read the
+hash/associative-array working variable `bar`. These exact selectors are now rejected on Perl.
 
 Quoted strings remain literal constructor payloads. They are not aliases for the bare-name reads and are not
 runtime scalar indirection:
@@ -42,7 +45,8 @@ hash("foo", value) # hash constructor entry with fixed key "foo"
 hash('foo', value) # hash constructor entry with fixed key 'foo'
 ```
 
-If scalar `alias` contains `"foo"`, `array(alias)` reads the array named `alias`, not the array named `foo`.
+The earlier selector read was never scalar indirection: `array(alias)` selected `alias`, not a binding named
+by its string contents. That selector form is now retired; a bare `alias` reads its current typed value.
 `array("alias")` constructs a one-element array payload containing the string `"alias"`.
 
 The preferred terse constructor surface is direct shape syntax:

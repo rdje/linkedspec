@@ -4,7 +4,7 @@ title: Lua split-tagged-record construction reuses governed split semantics
 answers:
   - "does Lua support split_tagged_records"
   - "what shape does Lua split_tagged_records return"
-  - "does split_tagged_records evaluate carried fields once"
+  - "does Lua split_tagged_records evaluate carried fields once"
   - "does Lua split_tagged_records copy carried arrays"
   - "does Lua split_tagged_records accept regex delimiters and receivers"
 date: 2026-07-12
@@ -29,3 +29,7 @@ array. Tree callbacks are a different mechanism and remain owned by `LUA-BACKEND
 
 Related facts: [[lua-pure-split-bridge]], [[lua-runtime-array-transform-pipelines]],
 [[lua-runtime-array-construction]], [[scalar-to-text-coercion-cross-backend-gap]].
+
+September 6 fresh PUC controls confirm once-only fields, but expose Perl divergence and an empty-source
+pure-split difference. [[tagged-record-evaluation-and-split-drift]] owns the paired evidence and links the
+contract-review/repair tasks; this Lua-specific record does not establish all-runtime parity.

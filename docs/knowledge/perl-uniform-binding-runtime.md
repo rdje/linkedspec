@@ -12,6 +12,7 @@ answers:
   - "do Perl pure helpers read the same bare typed binding as mutations"
   - "why did copy inside a Perl user function become an unsupported helper"
   - "how does Perl distinguish an implicit rule accumulator from an untyped copy binding"
+  - "why can a shallow Perl copy remain unchanged after a nested write"
 date: 2026-07-12
 status: current
 tags: [perl, language, bindings, array, harray, mutation, diagnostics, FUTURE-PARITY-BACKLOG]
@@ -59,3 +60,10 @@ with explicit ownership at both boundaries.
 Related facts: [[uniform-binding-neutral-contract]], [[perl-aggregate-selector-compile-rejection]],
 [[spec-facing-aggregate-selector-retirement-inventory]],
 [[uniform-expression-compatibility-retirement-doctrine]].
+
+September 6 `.3.2.28` reverified `original = {"nested":{"x":1}}; snapshot = copy(original);`
+followed by `original["nested"]["x"] = 2`. Public Get returns original x=2 and snapshot x=1. The dumped
+copy creates an outer hash snapshot; the later write calls `BindingRuntime::nested_write` and rebinds
+`original` to its updated value. This control establishes independence for that DSL mutation sequence,
+not a promise that the copy expression recursively clones arbitrary host objects. The exact control lives
+in `docs/tasks/SESSION-STARTUP-READING.md` under `.3.2.28`.

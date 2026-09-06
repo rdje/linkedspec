@@ -26,3 +26,7 @@ Regex split keeps separate segment and search cursors. A zero-width delimiter ad
 decoded Unicode scalar while retaining the segment boundary, matching lookahead-style splits without looping or
 dropping text. String receiver `.split(...)` returns the same typed array. Downstream array methods are deliberately
 owned by active `.4.3.4`; statement scalar regex mutation is closed under `.4.3.2.2.3`.
+
+The September 6 empty-source comparison in [[tagged-record-evaluation-and-split-drift]] returns one empty
+item on PUC Lua and no items on Perl. `SESSION-STARTUP-READING.33` owns review and repair; the original
+split admission is not proof that this edge agrees across runtimes.
