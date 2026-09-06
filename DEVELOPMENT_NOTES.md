@@ -10,6 +10,15 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.2 — reconcile roadmap reading
+
+- Resumed the saved immutable reading baseline and repaired truncated output before recording completed ranges.
+  Both roadmap changes since baseline were the same startup pointer; the current task direction remains intact.
+- Treat dated migration spellings in historical roadmap detail as history. The current task frontier and accepted
+  contracts control execution; reading completion is distinct from fresh code/runtime or book-alignment proof.
+- Continue with a whole first-party inventory and bounded reading children. Preserve the director's `rgx`
+  exclusion, include files outside language directories, and leave all unlisted coverage explicitly unread.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.1 — preserve reading continuity
 
 - The director authorized choosing a startup-reading checkpoint before the otherwise mandatory no-edit reading

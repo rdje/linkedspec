@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `baeb984e36a94a15951cd23d4c52def5064cdaca` — clean public closeout from which the startup-reading checkpoint was activated task-tree-first.
-- latest_completed_leaf: `SESSION-STARTUP-READING.1 - preserve required reading progress`; focused checkpoint complete.
-- active_work_unit: none; checkpoint complete, remaining reading is pending in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: activate `SESSION-STARTUP-READING.2`; read baseline ROADMAP_V2.md lines 1341–1585, then follow the
-  recorded codebase/book/policy review sequence before `RUST-MUTATION-TESTING.1` implementation.
+- activation_commit: `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4` — clean startup checkpoint from which roadmap reading resumed.
+- latest_completed_leaf: `SESSION-STARTUP-READING.2 - complete roadmap reading`; focused reading checkpoint complete.
+- active_work_unit: none; roadmap reading complete, remaining reading is pending in `docs/tasks/SESSION-STARTUP-READING.md`.
+- next_action: activate `SESSION-STARTUP-READING.3`; inventory and split remaining first-party codebase reading,
+  then follow the recorded book/policy review sequence before `RUST-MUTATION-TESTING.1` implementation.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: none.
 - current_rust_warning_debt: repeated clean carriers report 1,870 `pgen` plus 26 `rgx-core` output warnings;
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4986` is the twenty-fifth history segment; ADR `0100`
   authorizes exactly 27 collection files / 26 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-06 — full required-reading answers remain roadmap No / codebase No / mdBook No; exact coverage and the director's rgx exclusion are recorded in SESSION-STARTUP-READING.
+- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; exact coverage, rgx exclusion, and resumed batch progress (1/100 after `.2` lands) are recorded in SESSION-STARTUP-READING.

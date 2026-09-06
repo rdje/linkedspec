@@ -10,6 +10,15 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.2 — complete roadmap reading
+
+- Read the remaining baseline ROADMAP_V2.md lines 1341–1585 without truncation and reviewed both roadmap diffs.
+  Roadmap reading is complete; codebase and mdBook reading remain incomplete.
+- Reconciled current direction with task ownership and ADRs 0039/0073: finish startup reading, add safe Rust
+  mutation configuration, then run a separately owned pilot. No feature or runtime-proof claim changes.
+- Updated exact reading coverage and batch continuity; `.3` next inventories and decomposes codebase reading.
+- Validation: focused memory/doctrine/Knowledge checks, both history-pressure checks, diff and staged-scope review.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.1 — preserve required reading progress
 
 - Added the director-authorized startup-tracking checkpoint with exact clean baseline, completed reading ranges,

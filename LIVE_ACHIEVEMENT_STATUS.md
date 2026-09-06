@@ -2,21 +2,24 @@
 
 ## Current Activity
 
-- `SESSION-STARTUP-READING` owns the director-required reading prerequisite. Checkpoint `.1` preserves its exact
-  baseline and coverage; roadmap, codebase, and mdBook reading remain incomplete. The director excluded `rgx`
+- `SESSION-STARTUP-READING` owns the director-required reading prerequisite. Checkpoint `.2` completes roadmap
+  reading; codebase and mdBook reading remain incomplete. The director excluded `rgx`
   and its nested dependencies. Mutation parent `.19` remains closed; feature and capability status are unchanged.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.1` saves the authorized reading checkpoint and aligns the roadmap/task/continuity
-  pointers. It records unfinished reading honestly and makes no implementation or fresh runtime-proof claim.
+- `SESSION-STARTUP-READING.2` completes remaining roadmap ranges and current-direction reconciliation, with
+  focused continuity proof. This is reading leaf 1/100 in the resumed batch, without implementation claims.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.2` and finish baseline ROADMAP_V2.md lines 1341–1585. Follow the recorded
+- Activate `SESSION-STARTUP-READING.3` and inventory/split remaining first-party codebase reading. Follow the recorded
   codebase/book/policy review sequence before activating `RUST-MUTATION-TESTING.1` for safe manual configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.2` completes roadmap reading and reconciles the current direction;
+  codebase/book reading and policy comparisons remain pending.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.1` preserves baseline reading coverage, the `rgx` exclusion, and the
   remaining work under the director-authorized startup-tracking exception; focused documentation checks pass.
@@ -73,9 +76,6 @@
 - `2026-09-01` — `.19.3.1` unifies Rust nested writes under one typed expression-segment node, executes dense
   isolated vivification across native/generated carriers, and passes focused 5/5, 197/197, 105/105, broad Rust,
   and exact staged canonical proof.
-
-- `2026-08-31` — `.19.2.2` implements Perl `map_leaves!`; 58 focused tests, 105 write / 167 base + 592 composition
-  mutations, Phase 0 1,032/1,032, and corrected exact canonical CI pass after repairing two stale hash-only anchors.
 
 ## History
 
