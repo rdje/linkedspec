@@ -9,7 +9,7 @@ answers:
 date: 2026-06-12
 status: current
 tags: [architecture, actionir, lowering, pipeline]
-evidence: "ARCHITECTURE_STATE.md §ActionIR Reading: 12+ sub-owners documented; EmitContext owner registry maps all 13 keys"
+evidence: "ARCHITECTURE_STATE.md §ActionIR Reading documents the ActionIR sub-owners. SESSION-STARTUP-READING.3.2.12 reverified EmitContext's fourteen registry keys: these thirteen ActionIR owners plus the separate Trace owner."
 reverify: "ls perl/LinkedSpec/ActionIR/*.pm | wc -l"
 ---
 
@@ -31,5 +31,11 @@ The ActionIR subtree transforms `.spec` action code through a staged pipeline:
 
 The lowering pipeline is now modular with real sub-owners instead of one giant mixed-semantics
 file. Each owner assembles its default callback map through `OwnerDispatch::build_dep_map`.
+
+Registry cardinality reverified on 2026-09-06: the thirteen listed ActionIR owners are a
+subset of EmitContext's fourteen keys; `trace` maps separately to `LinkedSpec::Trace`.
+See [[emitcontext-owner-registry]] for the exact source extraction command. This corrects
+the original evidence's ambiguous “all 13 keys” wording; the dated pipeline inventory above
+is not a fresh audit of every ActionIR module.
 
 Related: [[emitcontext-owner-registry]], [[scanner-rule-family-architecture]], [[ownerdispatch-shared-seam]].

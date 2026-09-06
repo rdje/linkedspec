@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.12 — EmitContext bridge registry
+
+- Prefix reading reconciles owner dispatch, dependency injection, type/write-target collection, lowering wrappers,
+  compatibility rewriting, and code joining with existing owners. The registry contains thirteen ActionIR keys
+  plus Trace; two cards now state that distinction and the registry card has an exact extraction command.
+- This is source-reading evidence, without new runtime signoff or product changes. EmitContext 1490–2583 is next.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.11 — one authored order across edge spellings
 
 - RuleIR collects explicit actions/blind calls immediately but holds bare candidates separately. Normalization

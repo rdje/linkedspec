@@ -11,15 +11,18 @@
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.11` completes RuleIR reading and owns bare/explicit edge-order repair `.12`.
-  This is item 14/100; sixteen full Perl files read. Codebase/book remain incomplete.
+- `SESSION-STARTUP-READING.3.2.12` reads EmitContext 1–1489 and corrects the recorded owner-registry count.
+  This is item 15/100; sixteen full Perl files plus this prefix read. Codebase/book remain incomplete.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.12` and read RuleIR/EmitContext.pm baseline lines 1–1489. Complete required
+- Activate `SESSION-STARTUP-READING.3.2.13` and read RuleIR/EmitContext.pm baseline lines 1490–2583. Complete required
   reading and policy review, then repairs `.7`–`.12` before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.12` reads EmitContext 1–1489 and reconciles the registry
+  cards; `.3.2.13` reads its suffix next.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.11` reads RuleIR and owns native bare/explicit edge-order
   repair `.12`; `.3.2.12` reads EmitContext.pm next.
@@ -65,10 +68,6 @@
 
 - `2026-09-06` — `SESSION-STARTUP-READING.1` preserves baseline reading coverage, the `rgx` exclusion, and the
   remaining work under the director-authorized startup-tracking exception; focused documentation checks pass.
-
-- `2026-09-05` — `.19.9` publishes exact current mutation examples, governs 63 public files / 14 documents / eleven
-  semantic classes through 50 mutations, passes six runtime routes plus canonical/pre-push proof, and closes parent
-  `.19` without production or frozen-authority changes.
 
 ## History
 

@@ -263,12 +263,19 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.11 - read RuleIR and own edge-order repair`
 
 - ID: `SESSION-STARTUP-READING.3.2.12`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 10: 1,489 lines/fragments, 49,396 bytes.
   Scope: `perl/LinkedSpec/RuleIR/EmitContext.pm` lines 1–1489.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+    Reconcile the owner-registry card's stated cardinality and keys with the current explicit registry.
+  Verification tier: `focused`
+  Focused checks: Exact reading chunks/baseline identity; existing EmitContext/ActionIR owner and trace Knowledge;
+    exact registry-key extraction; memory/doctrine/Knowledge/history checks; `git diff --check` and final staged review.
+  Canonical trigger: `none` — source-reading continuity only; no production, infrastructure, or public change.
+  Verification: Seven untruncated ranges cover lines 1–1489 / 49,396 bytes; baseline identity passes.
+    Existing owner/trace contracts reconcile; exact registry extraction confirms fourteen keys, thirteen
+    ActionIR owners plus Trace, correcting two existing cards. Focused continuity checks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.12 - read EmitContext bridge and reconcile registry`
 
 - ID: `SESSION-STARTUP-READING.3.2.13`
   Status: `pending`
@@ -811,7 +818,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.12` | `pending` | Read RuleIR/EmitContext.pm baseline lines 1–1489 in bounded chunks. |
+| 1 | `SESSION-STARTUP-READING.3.2.13` | `pending` | Read RuleIR/EmitContext.pm baseline lines 1490–2583 in bounded chunks. |
 
 ## Reading Ledger
 
@@ -822,7 +829,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | Sixteen Perl files in full under `.3.2.1` and `.3.2.3`–`.3.2.11`; supporting reads below. | Remaining 73 Perl paths and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | Sixteen Perl files in full plus EmitContext 1–1489 under `.3.2.12`; supporting reads below. | Remaining 73 Perl paths and all other first-party inputs not explicitly listed as read. |
 | mdBook | **No** | `docs/linkedspec-book/src/SUMMARY.md`; `docs/linkedspec-book/src/development/local-ci-and-regression.md` 1897–1943 and 1988–2004. | All other chapter text, including the unread portions of that development chapter. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -1124,6 +1131,22 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   All probe processes exited zero. Next reading is RuleIR/EmitContext.pm 1–1489 under `.3.2.12`;
   codebase/book remain incomplete and source remains unchanged until the required-reading boundary closes.
 
+### EmitContext bridge prefix at `.3.2.12`
+
+- Activated from clean `3ab399d034f34029ac136a31a7b252a7dd8d31cc`; prior Knowledge/all nine doctrines,
+  post-commit pointer, zero-byte brief, clean status, and derived-map review passed at 948 facts / 8,018 keys.
+  Read EmitContext.pm 1–220, 221–435, 436–680, 681–915, 916–1155, 1156–1375, and 1376–1489
+  without truncation: 1,489 lines / 49,396 bytes. Full-file baseline identity passes; sixteen whole Perl
+  files remain covered, with EmitContext's 1,094-line suffix still owned by `.3.2.13`.
+- Reconciled lazy owner/callback loading, caller-context dispatch, dependency injection, type-memory and
+  write-target collection, lowering wrappers, trace decisions, compatibility fallback, and code-chunk joining
+  against existing EmitContext/ActionIR cards. Source comprehension is not fresh runtime signoff.
+- Exact bounded registry extraction returns fourteen keys: thirteen ActionIR packages plus Trace. The original
+  registry card already listed fourteen names but said thirteen; its count and ineffective mention-counting
+  reverify are corrected, and the adjacent lowering card distinguishes the thirteen-owner subset. No production
+  defect or public contract change is established here; existing repairs `.7`–`.12` remain gated on reading.
+- Next exact scope is EmitContext.pm 1490–2583 under `.3.2.13`; codebase/book reading remain incomplete.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -1142,7 +1165,7 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   `27fd160f`; `.3.2.4` is item 7/100 at `4f311a9e`; `.3.2.5` is item 8/100 at `6c1234cc`; `.3.2.6` is item 9/100 at
   `f864f881`; `.3.2.7` is item 10/100 at `dc7f5f09`; `.3.2.8` is item 11/100 at `e4b1f296`;
   `.3.2.9` is item 12/100 at `96a1c242`; `.3.2.10` is item 13/100 at `ff6c228c`;
-  `.3.2.11` is item 14/100 once committed. `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
+  `.3.2.11` is item 14/100 at `3ab399d0`; `.3.2.12` is item 15/100 once committed. `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
 
@@ -1207,6 +1230,8 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.10` | Three suffix chunks/full-file identity; existing edge/slash/gap/diagnostic reconciliation | PASS reading; focused memory/doctrine/Knowledge/history and staged checks precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.10` | Required Knowledge/all nine doctrines; post-commit pointer; zero-byte brief/clean status | PASS at `ff6c228c`; derived-map count unchanged at 947 facts / 8,013 keys. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.11` | Five complete-file chunks/baseline identity; OR spelling and AND public controls; direct RuleIR normalization | PASS reading/probes; focused memory/doctrine/Knowledge/history and staged checks precede landing. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.11` | Required Knowledge/all nine doctrines; post-commit pointer; zero-byte brief/clean status; derived-map review | PASS at `3ab399d0`; 948 facts / 8,018 keys. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.12` | Seven prefix chunks/full-file identity; exact registry extraction and existing Knowledge reconciliation | PASS reading/card reverify; focused memory/doctrine/Knowledge/history and staged checks precede landing. |
 
 ## Commit Log
 
@@ -1227,6 +1252,7 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `SESSION-STARTUP-READING.3.2.9` | `SESSION-STARTUP-READING.3.2.9 - read validation and own diagnostic repairs` | Validation prefix read; diagnostic repair children and retrieval corrections preserved. |
 | `SESSION-STARTUP-READING.3.2.10` | `SESSION-STARTUP-READING.3.2.10 - complete validation reading` | Fifteen full Perl files read; current edge/capture owners reconciled. |
 | `SESSION-STARTUP-READING.3.2.11` | `SESSION-STARTUP-READING.3.2.11 - read RuleIR and own edge-order repair` | Sixteen full Perl files read; native/public order defect and repair `.12` preserved. |
+| `SESSION-STARTUP-READING.3.2.12` | `SESSION-STARTUP-READING.3.2.12 - read EmitContext bridge and reconcile registry` | EmitContext prefix read; owner cardinality and retrieval corrected; suffix remains unread. |
 
 ## Changelog
 
@@ -1260,3 +1286,5 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   Fifteen Perl files are read; `.3.2.11` reads RuleIR.pm next.
 - `2026-09-06`: `.3.2.11` completes RuleIR reading and proves bare/explicit execution-order drift.
   Repair `.12` is owned; `.3.2.12` reads EmitContext.pm next.
+- `2026-09-06`: `.3.2.12` reads EmitContext 1–1489 and reconciles fourteen registry keys with the existing cards.
+  `.3.2.13` reads the suffix next; codebase/book remain incomplete.

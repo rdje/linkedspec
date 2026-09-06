@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.12 — read EmitContext bridge and reconcile registry
+
+- Read EmitContext.pm 1–1489 / 49,396 bytes; sixteen whole Perl files plus this prefix are covered.
+- Corrected existing registry cards: fourteen keys comprise thirteen ActionIR owners and Trace. Exact source
+  extraction replaces mention counting. Focused identity/retrieval, continuity/doctrines/history, and staged review.
+- The suffix remains `.3.2.13`; codebase/book reading are incomplete and product source/book are unchanged.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.11 — read RuleIR and own edge-order repair
 
 - Read all 987 lines / 31,462 bytes of RuleIR; sixteen whole Perl files covered.
