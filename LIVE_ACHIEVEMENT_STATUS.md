@@ -10,15 +10,18 @@
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.9` reads Validation.pm 1–1320 and owns diagnostic repairs `.11.1`–`.11.3`.
-  This is item 12/100; fourteen full Perl files plus the validation prefix read. Codebase/book remain incomplete.
+- `SESSION-STARTUP-READING.3.2.10` completes Validation.pm reading and reconciles current edge/capture owners.
+  This is item 13/100; fifteen full Perl files read. Codebase/book remain incomplete.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.10` and read Validation.pm baseline lines 1321–1904. Complete required
+- Activate `SESSION-STARTUP-READING.3.2.11` and read RuleIR.pm baseline lines 1–987. Complete required
   reading and policy review, then repairs `.7`–`.11` before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.10` completes validation reading and reconciles the edge
+  Knowledge card; `.3.2.11` reads RuleIR.pm next.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.9` reads the validation prefix, owns diagnostic source
   repairs `.11.1`–`.11.3`, and fixes Knowledge retrieval; `.3.2.10` reads the suffix next.
@@ -66,10 +69,6 @@
 - `2026-09-05` — `.19.8` registers one exact recurring mutation driver across six runtime routes, frozen
   authority/composition digests, support ledgers, project-local storage, exact-one canonical CI, and 17 rejected
   topology mutations; all focused and receipt-bound canonical proof passes without behavior/public movement.
-
-- `2026-09-04` — `.19.7` admits two portable mutation capabilities at 100/0/0, pins exact frozen authority and
-  composition topology through 16 admission mutations, preserves production/neutral bytes, and passes direct
-  six-runtime, doctrine, mdBook, and receipt-bound canonical proof.
 
 ## History
 

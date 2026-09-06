@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.10 — complete validation reading
+
+- Read Validation.pm 1321–1904; all 1,904 lines / 61,929 bytes now covered, with fifteen whole Perl files read.
+- Reconciled edge/slash/diagnostic owners and historical edge-card staging notes with current admissions.
+- Focused identity/reading, Knowledge, memory/doctrines/history, and staged review. No source or book change.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.9 — read validation and own diagnostic repairs
 
 - Read Validation.pm 1–1320 / 43,290 bytes. Direct and public probes confirm incorrect diagnostic context,

@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `e4b1f296910e73205f2ea8a2498a14040b1ff381` — clean SpecEntry reading and owned repair checkpoint.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.9 - read validation and own diagnostic repairs`; Validation.pm prefix read.
+- activation_commit: `96a1c2426ce68cf5f7b9281dbeb3005d3d876fd9` — clean validation-prefix and diagnostic checkpoint.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.10 - complete validation reading`; fifteen Perl files read.
 - active_work_unit: none; bounded reading and repairs remain pending in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: activate `SESSION-STARTUP-READING.3.2.10`; read Validation.pm baseline lines 1321–1904,
+- next_action: activate `SESSION-STARTUP-READING.3.2.11`; read RuleIR.pm baseline lines 1–987,
   then continue required reading and repairs `.7`–`.11` before Rust mutation setup.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge (EPERM-as-dead); `.8`–`.11` own comparison, regex-tail, unbound-input, and diagnostic repairs.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4985` is the twenty-sixth history segment; ADR `0102`
   authorizes exactly 28 collection files / 27 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; exhaustive inventory, exact coverage, rgx exclusion, and resumed batch progress (12/100 after `.3.2.9` lands) are in SESSION-STARTUP-READING.
+- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; exhaustive inventory, exact coverage, rgx exclusion, and resumed batch progress (13/100 after `.3.2.10` lands) are in SESSION-STARTUP-READING.

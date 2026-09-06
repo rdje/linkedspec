@@ -10,6 +10,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.10 — validation scanner boundaries
+
+- The suffix completes static edge/selector/group/fluent scanning, slash-call discrimination, and targeted error
+  payload reading. Existing edge, arithmetic, rule-local cursor, and gap records own the semantics; earlier
+  diagnostic defects remain in `.11`. No fresh runtime defect or signoff is inferred from source reading.
+- The edge card now distinguishes optional blind-return handling from parent regex selection and redirects its
+  dated rollout notes to admitted bare-edge/gap owners. RuleIR.pm is the next exact reading scope.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.9 — validation diagnostic source identity
 
 - The validator's next-line lookup repeats its current row and truthiness erases a literal zero line. Content-based

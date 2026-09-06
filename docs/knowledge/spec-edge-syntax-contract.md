@@ -21,12 +21,20 @@ reverify: "perl -Iperl -c t/phase0_regression.t"
 
 # .spec Edge Syntax Contract
 
+**2026-09-06 reconciliation (`SESSION-STARTUP-READING.3.2.10`):** Explicit edges retain the ownership
+model below. An optional `=> Child { ... }` block handles the blind child's return; a blind call still does
+not preselect its child's regex. Bare-edge normalization is now admitted across all backends in
+[[rule-local-cursor-and-bare-edge-contract]], and gap recurring/public closeout is complete in
+[[inter-match-gap-recurring-public-closeout-plan]]. The dated rollout notes below describe earlier stages,
+not the current implementation frontier. Validation.pm's full 1,904-line reading reconciles its explicit
+target, selector, grouped-block, fluent-suffix, and mixed-ownership diagnostics with those owners.
+
 As of `SPEC-FORMAT-TERSE.3.1`, Round 3 keeps the existing edge syntax:
 
 - `-> Target` is an action edge. It binds the current rule to a child rule and
   requires action code for semantic transformation.
-- `=> Target` is a blind-call edge. It delegates to the child rule without a
-  parent action block; the child rule's own actions run.
+- `=> Target` is a blind-call edge. It invokes the child without a parent regex
+  selection; the child rule's own actions run. An optional attached block handles its return.
 - `-> A | B { code }` is valid grouped action-edge syntax. The pipe is only
   syntactic factoring: one shared block is expanded across the listed targets,
   and each target still dispatches independently.

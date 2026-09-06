@@ -233,12 +233,19 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.9 - read validation and own diagnostic repairs`
 
 - ID: `SESSION-STARTUP-READING.3.2.10`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 8: 584 lines/fragments, 18,639 bytes.
   Scope: `perl/LinkedSpec/Validation.pm` lines 1321–1904.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+    Reconcile the relevant historical edge card with already-admitted bare-edge and gap owners.
+  Verification tier: `focused`
+  Focused checks: Exact suffix chunks/full-file baseline identity; existing edge/slash/diagnostic Knowledge;
+    memory/doctrine/Knowledge/history checks; `git diff --check` and final staged review.
+  Canonical trigger: `none` — source-reading continuity only; no production, infrastructure, or public change.
+  Verification: Three untruncated chunks cover 584 lines / 18,639 bytes, completing baseline-identical
+    Validation.pm at 1,904 lines / 61,929 bytes. Existing edge/slash/gap and diagnostic owners reconcile;
+    the edge card now links admitted owners and clarifies optional blind-return blocks. No new runtime defect.
+  Commit: `SESSION-STARTUP-READING.3.2.10 - complete validation reading`
 
 - ID: `SESSION-STARTUP-READING.3.2.11`
   Status: `pending`
@@ -783,7 +790,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.10` | `pending` | Read Validation.pm baseline lines 1321–1904 in bounded chunks. |
+| 1 | `SESSION-STARTUP-READING.3.2.11` | `pending` | Read RuleIR.pm baseline lines 1–987 in bounded chunks. |
 
 ## Reading Ledger
 
@@ -794,7 +801,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | Fourteen Perl files in full under `.3.2.1` and `.3.2.3`–`.3.2.8`, plus Validation.pm 1–1320 under `.3.2.9`; supporting reads below. | Validation.pm 1321–1904 and the other 74 not-yet-fully-read Perl paths; all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | Fifteen Perl files in full under `.3.2.1` and `.3.2.3`–`.3.2.10`; supporting reads below. | Remaining 74 Perl paths and all other first-party inputs not explicitly listed as read. |
 | mdBook | **No** | `docs/linkedspec-book/src/SUMMARY.md`; `docs/linkedspec-book/src/development/local-ci-and-regression.md` 1897–1943 and 1988–2004. | All other chapter text, including the unread portions of that development chapter. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -1061,6 +1068,22 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 - All diagnostic processes exited zero. Next reading is Validation.pm 1321–1904 under `.3.2.10`; codebase/book
   remain incomplete, product source is unchanged, and public-book changes remain with the owned repairs.
 
+### Validation suffix at `.3.2.10`
+
+- Activated from clean `96a1c2426ce68cf5f7b9281dbeb3005d3d876fd9`; prior Knowledge/all nine doctrines,
+  post-commit pointer, zero-byte brief, clean status, and derived-map review passed. The prior retrieval fixes
+  now appear as actual commands/evidence in the derived map. Read Validation.pm 1321–1520, 1521–1720, and
+  1721–1904 without truncation: 584 lines / 18,639 bytes. The full baseline-identical module is now read
+  at 1,904 lines / 61,929 bytes; fifteen whole Perl files covered and 74 remain.
+- Reconciled quote/slash skipping, cross-line depth, static edge/selector/group/fluent parsing, slash-call
+  delegation, substitute/translate segments, and targeted diagnostic payloads with existing edge, arithmetic,
+  rule-local, and gap owners. The earlier diagnostic defects remain owned under `.11`; no new runtime defect
+  is established by this suffix. This source reading does not claim fresh backend or parser signoff.
+- The edge Knowledge card clarifies the already-supported blind-return block and points its dated bare-edge/gap
+  staging notes to the existing admitted owners. Legacy split-marker divergence remains the explicit
+  compatibility boundary in the gap closeout card, not an unowned new finding or a capture_gaps alias.
+- Next exact reading is RuleIR.pm 1–987 under `.3.2.11`; required codebase/book reading remains incomplete.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -1078,7 +1101,8 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   `942c6138`; `.3.2.1` is item 4/100 at `c0eb1acf`; `.3.2.2` is item 5/100 at `094e05bc`; `.3.2.3` is item 6/100 at
   `27fd160f`; `.3.2.4` is item 7/100 at `4f311a9e`; `.3.2.5` is item 8/100 at `6c1234cc`; `.3.2.6` is item 9/100 at
   `f864f881`; `.3.2.7` is item 10/100 at `dc7f5f09`; `.3.2.8` is item 11/100 at `e4b1f296`;
-  `.3.2.9` is item 12/100 once committed. `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
+  `.3.2.9` is item 12/100 at `96a1c242`; `.3.2.10` is item 13/100 once committed. `.1` belongs to the prior
+  checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
 
@@ -1138,6 +1162,8 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.8` | Three complete-file reading chunks; baseline identity; isolated HandlerIR differential; public descriptor/source control; historical Knowledge reconciliation | PASS reading/probes; final focused memory/doctrine/Knowledge/history and staged checks precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.8` | Required Knowledge/all nine doctrines; post-commit pointer; zero-byte brief/clean status; derived-map review | PASS at `e4b1f296`; 946 facts / 8,008 keys. Literal old metadata pipes are corrected in `.3.2.9`. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.9` | Six prefix chunks/baseline identity; direct context/formatter and callback/Get controls; corrected open-block reverify | PASS reading/probes; focused memory/doctrine/Knowledge/history and staged checks precede landing. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.9` | Required Knowledge/all nine doctrines; post-commit pointer; zero-byte brief/clean status; derived-map review | PASS at `96a1c242`; 947 facts / 8,013 keys. Retrieval commands and evidence render correctly. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.10` | Three suffix chunks/full-file identity; existing edge/slash/gap/diagnostic reconciliation | PASS reading; focused memory/doctrine/Knowledge/history and staged checks precede landing. |
 
 ## Commit Log
 
@@ -1156,6 +1182,7 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `SESSION-STARTUP-READING.3.2.7` | `SESSION-STARTUP-READING.3.2.7 - complete compiler pipeline reading` | Thirteen whole Perl files read; source-level phase/mode boundaries indexed. |
 | `SESSION-STARTUP-READING.3.2.8` | `SESSION-STARTUP-READING.3.2.8 - read SpecEntry and own unbound input repair` | Fourteen whole Perl files read; historical coupling reconciled; explicit repair `.10` owns the private handoff defect. |
 | `SESSION-STARTUP-READING.3.2.9` | `SESSION-STARTUP-READING.3.2.9 - read validation and own diagnostic repairs` | Validation prefix read; diagnostic repair children and retrieval corrections preserved. |
+| `SESSION-STARTUP-READING.3.2.10` | `SESSION-STARTUP-READING.3.2.10 - complete validation reading` | Fifteen full Perl files read; current edge/capture owners reconciled. |
 
 ## Changelog
 
@@ -1185,3 +1212,5 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   AND_BCODE input repair `.10`; next reading is Validation.pm 1–1320 under `.3.2.9`.
 - `2026-09-06`: `.3.2.9` reads Validation.pm 1–1320, owns diagnostic repairs `.11.1`–`.11.3`, and repairs
   stale Knowledge retrieval. `.3.2.10` reads the validation suffix next.
+- `2026-09-06`: `.3.2.10` completes Validation.pm reading and reconciles the historical edge card.
+  Fifteen Perl files are read; `.3.2.11` reads RuleIR.pm next.
