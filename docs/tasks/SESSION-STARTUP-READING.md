@@ -35,7 +35,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -591,12 +591,19 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.33 - read separator and value owners and track comment failures`
 
 - ID: `SESSION-STARTUP-READING.3.2.34`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 32: 1,264 lines/fragments, 39,889 bytes.
   Scope: `perl/LinkedSpec/BindingRuntime.pm` lines 1–422; `perl/LinkedSpec/CallableContract.pm` lines 1–135; `perl/LinkedSpec/CodeblockRuntime.pm` lines 1–403; `perl/LinkedSpec/InterMatchGapRuntime.pm` lines 1–291; `perl/LinkedSpec/MCPContract.pm` lines 1–12; `perl/LinkedSpec/MCPContract.pm` lines 13–13.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact baseline ranges; binding/callable/codeblock/gap Knowledge; managed callable
+    and gap contracts, neutral gap proof; memory/Knowledge/history and diff review.
+  Canonical trigger: `none` — source reading and Knowledge continuity only.
+  Verification: Exact baseline identity and 1,264-line / 39,889-byte coverage pass. Managed callable/gap suites
+    pass 134 top-level tests; neutral gap passes 9/0/63 plus public 8/15/10/34. Six public controls and
+    emitted-record decoding root boolean-literal kind loss in CodeblockRuntime; `.35` owns repair.
+    One new and three qualified Knowledge records preserve evidence; required focused gates precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.34 - read runtime owners and track codeblock boolean drift`
 
 - ID: `SESSION-STARTUP-READING.3.2.35`
   Status: `pending`
@@ -1474,11 +1481,26 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     and generated host comment. Public invocation returns no result with no context error.
   Commit: `pending`
 
+- ID: `SESSION-STARTUP-READING.35`
+  Status: `pending`
+  Goal: Preserve typed boolean literals during dynamic Perl codeblock evaluation.
+  Dependencies: `.3`/`.4`/`.5`.
+  Acceptance: Reproduce public direct versus dynamic true/false results and inspect the typed AST and
+    CodeblockRuntime boolean branch. Preserve JSON boolean identity for returned, assigned, nested-container,
+    fixed/rest-argument, and contextual-final-block literals without changing numeric 0/1 or string values.
+    Add independently justified neutral and focused live/generated regression evidence; measure other runtimes
+    before claiming parity. Reconcile primitive-literal/codeblock teaching and Knowledge, render the book, and
+    run direct-dependent callable/logical/value checks plus required public signoff. Keep `.19` receiver-guard
+    repair separate; neither defect is closed by the existing callable suite passing.
+  Verification: `pending` — `.3.2.34` public controls return true/false directly but 1/0 through cb() literals;
+    a true argument stays typed while a dynamic literal array returns [1,0], all without context errors.
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.34` | `pending` | complete BindingRuntime 1–422, CallableContract 1–135, CodeblockRuntime 1–403, InterMatchGapRuntime 1–291, and MCPContract 1–13. |
+| 1 | `SESSION-STARTUP-READING.3.2.35` | `pending` | read MCPContract bytes 391–33158 and reconcile the embedded contract's first fragment. |
 
 ## Reading Ledger
 
@@ -1489,7 +1511,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.34`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.35`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
 | mdBook | **No** | `.31` records fourteen complete book sources plus the two earlier local-CI ranges: 640,041 bytes of disjoint coverage. | Remaining 1,316,541 source bytes, formal chapter checkpoints, and rendered alignment under `.4`. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -2687,6 +2709,40 @@ PERL
   passes four top-level tests. Required memory, Knowledge, history, and review checks precede landing.
 - No runtime, public-book, or policy edits. Reading codebase/book remains No; `.3.2.34` follows.
 
+### Binding, callable, codeblock, and gap runtime boundaries at `.3.2.34`
+
+- Activated from clean `ab4b1f1e5fbe33a0df4d3c643375e5e22ca6b98f` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Re-reviewed BindingRuntime 1–225 / 226–422, CallableContract 1–135, CodeblockRuntime 1–210 /
+  211–403, InterMatchGapRuntime 1–291, and MCPContract 1–13 without truncation. Exact baseline identity
+  passes: 1,264 lines / 39,889 bytes across four whole files and the 390-byte MCP header. No duplicate
+  physical-reading credit is added over `.31`; the embedded MCP data begins at byte 391 in `.3.2.35`.
+- BindingRuntime owns runtime selector kinds, atomic copied nested writes with dense array creation,
+  identity-based active receiver guards, root-kind map traversal, and scalar-held array/hash operations.
+  Existing `.19`/`.20`/`.33` defects remain owned; no broader deep-clone or host-object safety claim is made.
+- CallableContract exposes copied builtin acceptance metadata and typed final-user-parameter validation;
+  contextual arguments preserve typed body/source spans, and runtime projection yields a codeblock literal.
+  CodeblockRuntime interprets its supported AST, invokes explicit dynamic bindings, copies arguments, restores
+  prior parameter values after body execution, and diagnoses recursion/arity/callability. Nonparameter writes
+  still use the direct slot path already implicated by `.19` receiver-guard evidence.
+- Six public Get controls show direct true/false are JSON booleans while literals evaluated in cb() become
+  numeric 1/0 and a dynamic literal array becomes [1,0]. A passed-in true remains typed. All contexts report
+  no error. call_spec_handler_subst plus decoded embedded record preserves boolean AST kind/source; only
+  CodeblockRuntime's boolean evaluation branch converts it to numeric values. `.35` owns focused repair.
+  Exact commands are in `docs/knowledge/perl-codeblock-boolean-literal-kind-drift.md`; other runtimes and
+  independently loaded generated-parser executions were not measured for these controls.
+- InterMatchGapRuntime attaches candidate/tail/cursor state to the existing recognition guard, checks
+  post-child cursor monotonicity, qualifies entry-slot provenance against the active parent, and returns
+  detached gap spans through the source-location owner. The old Perl implementation card's pending rollout
+  prose is now explicitly historical; current public language and six-runtime rollout belong to recurrence.
+- Read binding, callable/variadic/final-block, primitive/logical, gap plan/recurrence, and MCP generated-binding
+  Knowledge before reconciliation. One new boolean fact and three qualified records preserve the boundaries.
+- `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/callable_codeblock_literal_contract.t
+  t/inter_match_gap_capture_perl_contract.t` passes 134 top-level tests across two files.
+  `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py` passes 9/0/63
+  and public 8/15/10/34, plus Rust/Dart/Julia/Lua admission mutations 10/10/10/16. This finite proof does
+  not close the separate `.19` receiver or `.35` literal defect.
+- No runtime, public-book, or policy edits. Codebase/book remains No; `.3.2.35` follows.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -2721,7 +2777,8 @@ PERL
   `.3.2.30` is item 34/100 at `6f113221`;
   `.3.2.31` is item 35/100 at `b1108cbb`;
   `.3.2.32` is item 36/100 at `9be547af`;
-  `.3.2.33` is item 37/100 once committed.
+  `.3.2.33` is item 37/100 at `ab4b1f1e`;
+  `.3.2.34` is item 38/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -2823,6 +2880,7 @@ PERL
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.31` | Exact range/full-file identity; legacy/bare-read/uniform Knowledge; five public Get controls and generated handler-first source; focused continuity | PASS; existing push precedence confirmed and three historical records reconciled; required staged gates precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.32` | Exact range/full-file identity; pipeline/staged/recognition Knowledge; managed 143-check staged consumer, two neutral checkers and language inventory; focused continuity | PASS bounded Perl/neutral proof; two authoring/inventory records reconciled; required staged gates precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.33` | Exact range/full-file identity; separator/trace Knowledge; four compact trace tests; twelve public newline/comment cases plus dumped-source repeats; focused continuity | PASS reading/trace controls; comment failures reproduced and owned by `.34.1`/`.34.2`; one new/three qualified cards. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.34` | Exact baseline ranges; binding/callable/codeblock/gap Knowledge; managed 134 callable/gap tests; neutral gap 9/0/63 and public 8/15/10/34; six boolean controls and emitted AST; focused continuity | PASS reading and existing focused suites; boolean-literal defect rooted and owned by `.35`; one new/three qualified cards. |
 
 ## Commit Log
 
@@ -2866,6 +2924,7 @@ PERL
 | `SESSION-STARTUP-READING.3.2.31` | `SESSION-STARTUP-READING.3.2.31 - read legacy scanners and reconcile bare push precedence` | Legacy/basic scanners read; historical scalar-slot and unconditional child-push claims reconciled with uniform binding. |
 | `SESSION-STARTUP-READING.3.2.32` | `SESSION-STARTUP-READING.3.2.32 - read staged scanners and reconcile authoring boundaries` | Pipeline, recognition, staged marker, and splitting owners read; two Knowledge records follow current public/neutral boundaries. |
 | `SESSION-STARTUP-READING.3.2.33` | `SESSION-STARTUP-READING.3.2.33 - read separator and value owners and track comment failures` | Splitter/trace/value owners read; comment failures rooted and repair-owned, universal coverage claims qualified. |
+| `SESSION-STARTUP-READING.3.2.34` | `SESSION-STARTUP-READING.3.2.34 - read runtime owners and track codeblock boolean drift` | Runtime owners read; dynamic boolean result drift repair-owned and historical gap admission prose qualified. |
 
 ## Changelog
 
@@ -2945,3 +3004,5 @@ PERL
   language proof, reconciles two Knowledge records, and advances to `.3.2.33`.
 - `2026-09-06`: `.3.2.33` reads splitter/trace/value owners, passes four trace tests, roots comment/newline failures in
   twelve controls, creates `.34.1`/`.34.2`, and advances to `.3.2.34`.
+- `2026-09-06`: `.3.2.34` reads binding/callable/codeblock/gap owners and MCP header, passes 134 tests and neutral gap
+  proof, roots dynamic boolean kind loss under `.35`, and advances to `.3.2.35`.

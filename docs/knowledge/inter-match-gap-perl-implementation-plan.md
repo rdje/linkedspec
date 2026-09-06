@@ -1,6 +1,6 @@
 ---
 id: inter-match-gap-perl-implementation-plan
-title: Perl gap implementation is split across metadata, live state, loaded parity, and admission
+title: Perl gap metadata, live state, loaded parity, and admission milestones; current rollout is complete
 answers:
   - "what is the Perl implementation plan for inter match gap capture"
   - "which leaf adds named regex slots in Perl"
@@ -22,8 +22,8 @@ answers:
   - "how does generated Perl preserve inter match gap typed errors"
   - "why does generated Perl gap execution reset the input cursor"
   - "why can generated Perl gap selection not read live rule metadata"
-date: 2026-08-14
-status: Perl authored/static, native live, emitted/loaded, and private runtime admission complete through .2.4
+date: 2026-09-06
+status: historical Perl milestones; current all-runtime and public-language rollout complete
 tags: [capture, segmentation, perl, parser, actionir, lifecycle, transaction, generated-source, admission]
 evidence: "INTER-MATCH-GAP-CAPTURE.2.0 freezes the .2.1-.2.4 plan. .2.1 implements permanent grammar/reference-bridge named slots, Unicode 17 identity, exact static diagnostics, directive and five-field edge metadata, generated dependency provenance, and the final consumer. .2.2 attaches private state to the existing recognition guard, adds exact lifecycle hooks and four source-read nodes, and makes all nine live contract groups pass. .2.3 from clean 34d02e0c imports the private runtime in emitted source, preserves gap-classified typed errors, aligns generated Execute's input boundary with ordinary Get, guards live-only metadata fallback, and makes five independently loaded groups / 138 internal assertions pass. .2.4 from clean 45460329 runs the full 124-test consumer once ordinarily and once in the rooted route, promotes only perl_runtime, and advances the neutral ledger to 2 complete / 7 pending / 56 mutations without outward admission. Definitive signoff passes Knowledge 834/6995, all eight doctrines, CLI 66/66 twice, Phase 0 1031/1031 in 765 seconds, exact neutral-plus-Perl routing, and local-CI exit 0."
 reverify: "bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py && bash tools/check_inter_match_gap_capture_six_runtime.sh && perl tools/check_language_capability_coverage.pl --report"
@@ -36,6 +36,21 @@ parsing, static diagnostics, slot/directive metadata, resolved provenance, gener
 dormant final-path consumer. `.2.2` owns live invocation state, accessors, lifecycle placement, transactions, and
 recursion. `.2.3` owns emitted and independently loaded execution. `.2.4` owns canonical registration, rooted
 recurring execution, the Perl rollout row, mutation advancement, and parent closeout.
+
+## Current boundary — 2026-09-06
+
+The `.2.0`–`.2.4` sections below preserve their dated admission evidence. Their pending-runtime, private-helper,
+inventory-count, and next-leaf statements are historical, not the current rollout.
+[[inter-match-gap-recurring-governance]] owns the current all-six-runtime and public-language admission.
+The `.3.2.34` reading checkpoint re-reads InterMatchGapRuntime.pm 1–291 and re-runs the managed neutral checker:
+9 complete / 0 pending / 63 semantic mutations plus public 8 documents / 15 denials / 10 guards / 34 mutations.
+The managed Perl callable/gap suites pass a combined 134 top-level tests; other runtime consumers are not rerun.
+
+Source confirms gap state remains attached to the existing recognition invocation guard. Candidate installation
+records detached span and selected-slot provenance; accepted commit validates the cursor against selected-match
+end before advancing the gap cursor. Entry-slot reads require the active parent candidate, matching owner id,
+and selected target rule. Gap span reads detach their record; gap text uses the source-location owner. These
+source facts preserve the architecture; this checkpoint does not promote a facade, schema, or capability.
 
 ## Verified baseline
 

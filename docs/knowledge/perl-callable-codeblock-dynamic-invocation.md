@@ -10,7 +10,7 @@ answers:
   - "can a Perl codeblock result feed a receiver chain"
   - "what error does a non callable Perl value produce"
   - "does a helper shadow a same named codeblock variable"
-date: 2026-07-12
+date: 2026-09-06
 status: current
 tags: [perl, actionir, codeblock, callable, dynamic-scope, diagnostics, generated-source, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.11.3.2 adds LinkedSpec::CodeblockRuntime, scalar working-slot dependency projection, bound-call and VALUE_DROP lowering, exact neutral fixture execution, standalone generated-source proof, static helper/user-function precedence, and typed arity/keyword/not-callable/recursion failures."
@@ -41,3 +41,10 @@ historical rollout; current backend progress remains owned by the task-tree.
 
 Related facts: [[callable-codeblock-literal-contract]], [[perl-callable-codeblock-literal-record]],
 [[terse-user-function-value-call-execution]], [[perl-generic-final-codeblock-normalization]].
+
+September 6 `.3.2.34` re-reads CodeblockRuntime.pm 1–403. Parameter values save and restore around body
+evaluation; nonparameter writes directly use the resolved caller slot. This mechanism leaves the known active
+receiver guard gap [[perl-dynamic-codeblock-receiver-guard-gap]] open under `.19`. Six public controls also
+show that a literal true/false inside the interpreted body becomes numeric 1/0, although a boolean argument
+remains typed. [[perl-codeblock-boolean-literal-kind-drift]] records emitted-AST confirmation and `.35` repair
+ownership. The combined callable/gap suite passes 134 top-level tests; that finite proof closes neither defect.

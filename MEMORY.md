@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `9be547af99c2a9c99757eb0986d3292ad64b3a50` — clean preceding reading checkpoint.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.33 - read separator and value owners and track comment failures`.
+- activation_commit: `ab4b1f1e5fbe33a0df4d3c643375e5e22ca6b98f` — clean preceding reading checkpoint.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.34 - read runtime owners and track codeblock boolean drift`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: activate `.3.2.34`; complete BindingRuntime 1–422, CallableContract 1–135, CodeblockRuntime 1–403, InterMatchGapRuntime 1–291, and MCPContract 1–13,
+- next_action: activate `.3.2.35`; read MCPContract bytes 391–33158 and reconcile the embedded contract's first fragment,
   then continue queued reading. Intake `.31` preserves the forward source coverage and exact findings.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
-- blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30` and `.32`–`.34` precede mutation setup; `.29` is part of `.5` adoption.
+- blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30` and `.32`–`.35` precede mutation setup; `.29` is part of `.5` adoption.
 - current_rust_warning_debt: repeated clean carriers report 1,870 `pgen` plus 26 `rgx-core` output warnings;
   `RUST-DEPENDENCY-WARNING-ZERO.1-.7` own causal repair/pins/enforcement without suppression, after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4985` is the twenty-sixth history segment; ADR `0102`
   authorizes exactly 28 collection files / 27 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; `.31` records all Perl source reading, pending per-leaf checkpoints, book coverage, and resumed batch progress (37/100 after `.3.2.33` lands).
+- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; `.31` records all Perl source reading, pending per-leaf checkpoints, book coverage, and resumed batch progress (38/100 after `.3.2.34` lands).

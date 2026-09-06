@@ -10,6 +10,11 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.34 — dynamic boolean type loss occurs after AST preservation
+
+Emitted codeblock AST preserves boolean kind and source; CodeblockRuntime converts literal payloads to numeric 1/0.
+A passed boolean stays typed, and ordinary actions return JSON booleans. Repair .35 follows reading; existing suites do not close it.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.33 — comments expose two independent separator failures
 
 LF/CRLF inline comments hide RewritePipeline's appended semicolon; handler compilation fails despite Get returning a wrapper.

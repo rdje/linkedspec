@@ -10,6 +10,11 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.34 — read runtime owners and track codeblock boolean drift
+
+Read 1,264 lines / 39,889 bytes; exact baseline identity, 134 callable/gap tests, and current neutral gap proof pass.
+Six public controls and emitted AST isolate dynamic boolean kind loss; own repair .35 and qualify literal/codeblock/gap Knowledge.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.33 — read separator and value owners and track comment failures
 
 Read 1,423 lines / 47,678 bytes across four owners; exact baseline identity and four compact trace tests pass.

@@ -5,21 +5,24 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   exhaustive inventory are complete; codebase/book remain incomplete. `rgx` and its dependencies are excluded.
 - Intake `.31` preserves all baseline Perl source reading, supporting book/native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.34`–`.3.2.54` remain pending.
-- Repairs `.7`–`.30` and `.32`–`.34` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
+  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.35`–`.3.2.54` remain pending.
+- Repairs `.7`–`.30` and `.32`–`.35` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.33` completes splitter/trace/value reading and records two task-owned comment/newline failures.
-  This is item 37/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.2.34` completes binding/callable/codeblock/gap reading and owns dynamic boolean-literal repair.
+  This is item 38/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.34`: complete BindingRuntime 1–422, CallableContract 1–135, CodeblockRuntime 1–403, InterMatchGapRuntime 1–291, and MCPContract 1–13.
+- Activate `SESSION-STARTUP-READING.3.2.35`: read MCPContract bytes 391–33158 and reconcile the embedded contract's first fragment.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.34` reads binding/callable/codeblock/gap owners and MCP header;
+  134 tests and gap proof pass; six controls root boolean-literal defect `.35`.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.33` reads splitter/trace/value owners and passes four trace tests;
   twelve comment/newline controls expose failures owned by `.34.1`/`.34.2`.
@@ -65,9 +68,6 @@
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.20` reads ControlFlow 1–1485 and verifies candidate
   state isolation plus compact trace; `.3.2.21` finishes it and the next adapters.
-
-- `2026-09-06` — `SESSION-STARTUP-READING.3.2.19` finishes Contracts and indexes its fourteen-group
-  builder; twenty-five whole Perl files read, and ControlFlow is next.
 
 ## History
 
