@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `a32114213ec20ab003551fc428566b345c3cc8dd` — clean preceding reading checkpoint.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.50 - reconcile middle Unicode table range and reading status`.
+- activation_commit: `78b272ec9e307092bee162dfdae87abbef778c18` — clean preceding reading checkpoint.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.51 - reconcile Unicode evaluator and contextual casing`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: activate `.3.2.51`; reconcile UnicodeCaseMapping.pm 3001–3835, including contextual properties and the evaluator,
+- next_action: activate `.3.2.52`; reconcile UnicodeXIDContinue.pm 1–855 and the pinned rule-label contract,
   then continue queued reading. Intake `.31` preserves the forward source coverage and exact findings.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30` and `.32`–`.44` precede mutation setup; `.29` is part of `.5` adoption.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4984` is the twenty-seventh history segment; ADR `0104`
   authorizes exactly 29 collection files / 28 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook Yes (physical); .31/.3.2.42 preserve complete book/Perl source coverage and repair ownership; formal .4 alignment remains pending (54/100 after `.3.2.50` lands).
+- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook Yes (physical); .31/.3.2.42 preserve complete book/Perl source coverage and repair ownership; formal .4 alignment remains pending (55/100 after `.3.2.51` lands).

@@ -65,3 +65,19 @@ one input scalar. They do not introduce locale tailoring or normalization. Curre
 neutral contract, checker, and consumer bytes match the preceding checkpoint, whose five-module
 regeneration, 12 neutral fixtures, and 52 Perl tests remain the retained proof. No second runtime run
 or duplicate physical reading credit is claimed.
+
+## September 6 final Perl table checkpoint
+
+`.3.2.51` reconciles all 835 previously read lines 3001–3835 (17,404 bytes; SHA-256
+`319a14861db1ff096bb78caecd6bc307fd1a0e38c2bd86680adefc64d8e8b31f`). The upper-map tail is followed
+by 158 Cased and 464 Case_Ignorable ranges, then binary-search membership and the scalar evaluator.
+Final Sigma examines the original input, skips Case_Ignorable on either side, requires a preceding
+Cased scalar, and rejects the final form when a following Cased scalar remains. It applies only to
+lowercasing capital sigma. Other scalars use full mapping sequences or retain identity; output is
+packed without normalization. This is casing, not a general word-boundary or case-folding algorithm.
+
+All 12 neutral fixtures, including the six sigma-context controls and combining-output cases, were
+reconciled against this evaluator. Complete physical coverage stays credited to `.31`; the three
+comprehension checkpoints now cover all 3,835 lines / 82,331 bytes without gaps. The unchanged
+five-module regeneration and Perl52 proof from `.3.2.49` remains current retained evidence. No
+new peer-runtime execution, generated-source execution, or altered input-type contract is claimed.

@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.51 — contextual casing follows pinned properties over original input
+
+Final Sigma skips Case_Ignorable scalars on both sides and tests the remaining Cased context in the original input. The six sigma fixtures distinguish terminal, following-cased, no-preceding-cased, and ignorable contexts. Full mappings and identity fallback then produce scalar output without normalization. Existing generated-data and Perl proofs cover these unchanged mechanisms.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.50 — completed physical reading does not imply completed alignment
 
 The table checkpoint reuses complete .31 reading plus exact current identity, while the mdBook inventory now states its completed physical coverage separately from the pending .4 alignment audit. Neither status grants unread source credit. The preceding Unicode regeneration and 52-test Perl evidence remain valid for unchanged inputs.

@@ -38,3 +38,12 @@ Do not copy this inventory into an unbounded parallel manifest. Git stores the e
 identities; the task-tree stores the selectors, ownership, range progress, and completion evidence.
 
 Related: [[linkedspec-pm-is-thin-facade]], [[project-data-liveness-permission-denial]].
+
+## September 6 planning pressure census
+
+Before the native reading split, `.3.2.51` records the slice `.3.2.50` candidate's read-only task
+collection census: 100 files / 76,699 lines / 7,789,885 bytes against 128 / 80,000 / 8,388,608.
+The general task member limit is 8,000 lines / 1,048,576 bytes; the 5,000-line limits apply only to
+explicitly listed future-parity parts. Recompute the resulting collection before adding native children
+or their evidence. This measurement neither increases a limit nor requires a partition by itself.
+The current route authority is `doctrine/readme_stability/routes.jsonl` surface `task_evidence`.

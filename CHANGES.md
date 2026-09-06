@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.51 — reconcile Unicode evaluator and contextual casing
+
+Reconcile the final 835 lines / 17,404 bytes of the previously read Unicode case table, including contextual-property lookup and original-input Final Sigma evaluation. All three checkpoints account for the full file and retain unchanged regeneration/Perl proof. Record a dated task-storage census for the upcoming native reading split; limits and generated data remain unchanged.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.50 — reconcile middle Unicode table range and reading status
 
 Reconcile the middle 1,500 lines / 32,854 bytes of the already-read Unicode case table and retain exact unchanged regeneration/fixture/Perl evidence. Clarify startup inventory Knowledge: physical mdBook reading is complete, formal alignment remains pending, and codebase reading remains incomplete. Update task and live continuity without generated-data or runtime changes.
