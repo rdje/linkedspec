@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Session continuity prerequisite to RUST-MUTATION-TESTING.1`
 - Created: `2026-09-06`
-- Last updated: `2026-09-06`
+- Last updated: `2026-09-07`
 - Owner: repo-local workflow
 - Reading baseline: `baeb984e36a94a15951cd23d4c52def5064cdaca`
 
@@ -35,7 +35,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -955,7 +955,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.55 - close Perl reading and own bounded Rust scopes`
 
 - ID: `SESSION-STARTUP-READING.3.3`
-  Status: `pending`
+  Status: `active`
   Goal: Split and read all 412 baseline Rust entries, including source, tests, corpus, generated files, and manifests.
   Acceptance: Define bounded file/range children before reading; `rgx` is excluded but first-party Rust is not.
   Children: `.3.3.1`, `.3.3.2`, `.3.3.3`, `.3.3.4`, `.3.3.5`, `.3.3.6`, `.3.3.7`, `.3.3.8`, `.3.3.9`, `.3.3.10`, `.3.3.11`, `.3.3.12`, `.3.3.13`, `.3.3.14`, `.3.3.15`, `.3.3.16`, `.3.3.17`, `.3.3.18`, `.3.3.19`, `.3.3.20`, `.3.3.21`, `.3.3.22`, `.3.3.23`, `.3.3.24`, `.3.3.25`, `.3.3.26`, `.3.3.27`, `.3.3.28`, `.3.3.29`, `.3.3.30`, `.3.3.31`, `.3.3.32`, `.3.3.33`, `.3.3.34`, `.3.3.35`, `.3.3.36`, `.3.3.37`, `.3.3.38`, `.3.3.39`, `.3.3.40`, `.3.3.41`, `.3.3.42`, `.3.3.43`, `.3.3.44`, `.3.3.45`, `.3.3.46`, `.3.3.47`, `.3.3.48`, `.3.3.49`, `.3.3.50`, `.3.3.51`, `.3.3.52`, `.3.3.53`, `.3.3.54`, `.3.3.55`, `.3.3.56`, `.3.3.57`, `.3.3.58`, `.3.3.59`, `.3.3.60`, `.3.3.61`, `.3.3.62`, `.3.3.63`, `.3.3.64`, `.3.3.65`, `.3.3.66`, `.3.3.67`
@@ -964,13 +964,21 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 
 - ID: `SESSION-STARTUP-READING.3.3.1`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 1: 1,496 lines/fragments, 37,995 bytes.
   Scope: `rust/.gitignore` lines 1–3;
     `rust/Cargo.lock` lines 1–1493.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact ignore/lockfile-range identity and 199-package TOML census; retained CLI/core and four regex-boundary controls; task-first .45–.47 and .49 ownership; Knowledge/memory/all doctrines/history and final scope/diff.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Complete ignore file and lockfile prefix read: 1,496 lines / 37,995 bytes, baseline-identical.
+    Locked TOML census: v4, 199 unique package identities, 195 registry checksums, four local records.
+    Retain preceding exact canonical parent closeout; ordinary checkpoint needs focused proof only.
+    Forward evidence is owned by .45–.47 and .49: eleven earlier CLI controls, the isolated core program,
+    and four new regex-boundary controls. No repair closes.
+  Commit: `SESSION-STARTUP-READING.3.3.1 - read Rust lockfile prefix and own parser boundary repairs`
 
 - ID: `SESSION-STARTUP-READING.3.3.2`
   Status: `pending`
@@ -2968,11 +2976,75 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     state by refaddr after obsolete markers can be released; no installed runtime source was altered.
   Commit: `pending`
 
+- ID: `SESSION-STARTUP-READING.45`
+  Status: `pending`
+  Goal: Reject malformed Rust rule code instead of accepting a warning and dropping the block.
+  Dependencies: `.3`/`.4`/`.5`.
+  Acceptance: After prerequisite reading, split bounded parser/compiler, carrier-regression, and public alignment leaves before implementation. Make malformed lifecycle/action/blind blocks return precise
+    compilation errors; retain valid block behavior and typed diagnostics. Cover all rule-code call sites
+    and native/reconstructed/generated routes, census shipped malformed examples, and preserve function-body rejection. Do not broaden accepted syntax or suppress errors to obtain passing tests.
+  Verification: `pending` — Eleven managed CLI controls establish five malformed rule blocks accepted with
+    warning, compile:ok/invoke:ok, and null or fallback 42. Three valid controls and three rejecting
+    controls pass their diagnostic assertions. compiler.rs parse_rule_code_block returns Ok(None) outside
+    five governed error prefixes, and compile_rule drops that absent block. Nested-write and mutation
+    argument errors also take this path.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.46`
+  Status: `pending`
+  Goal: Make Rust malformed-expression diagnostics safe at every UTF-8 boundary.
+  Dependencies: `.3`/`.4`/`.5`.
+  Acceptance: Replace raw byte-window slicing with a UTF-8-safe diagnostic excerpt while preserving scalar
+    source positions and meaningful bounded context. Cover ASCII, multibyte boundaries, valid Unicode, and
+    malformed inputs through direct core and relevant public routes. Separately resolve the earlier whole-spec ASCII timeout before claiming its cause; a caught core panic does not establish a CLI panic.
+    Preserve precise error propagation and update relevant public teaching after prerequisites.
+  Verification: `pending` — An isolated core program observes CodeBlock::parse returning errors for ASCII
+    and aligned Unicode, parsing valid Unicode, but panicking for @ followed by twenty e-acute characters.
+    expr.rs unexpected_character_error slices at pos+40 inside a scalar. Harness catch_unwind only
+    observes the failure. The earlier whole-spec ASCII probe timed out before any Unicode case; its cause
+    remains unresolved.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.47`
+  Status: `pending`
+  Goal: Align Rust parser and compiled validation for whitespace-only mutation argument lists.
+  Dependencies: `.3`/`.4`/`.5`.
+  Acceptance: Accept the same semantically empty parentheses through parser and compiler validation while
+    preserving exact authored source and character spans. Keep nonempty arguments rejected. Add
+    independent empty/space/tab/multiline and invalid controls across native and supported
+    serialized/reconstructed/generated carriers; reconcile the canonical contract and public examples
+    without silently normalizing away source evidence.
+  Verification: `pending` — The isolated core program parses empty, space-only, and tab-only map_leaves!
+    argument lists. Compilation accepts only (). Space/tab produce
+    receiver_mutation_serialized_state_invalid with reason mutation_call_invalid. The parser uses
+    trim().is_empty(), while compiler source-projection validation requires the exact string ().
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.49`
+  Status: `pending`
+  Goal: Preserve Rust statement boundaries after unflagged regex literals.
+  Dependencies: `.3`/`.4`/`.5`; coordinate error propagation with `.45`.
+  Acceptance: Keep regex suffix flags adjacent to their closing slash and preserve following
+    newline/semicolon statement separators. Compare unflagged and flagged regex assignments, ordinary
+    string assignments, CRLF and whitespace boundaries, and arithmetic slash-call controls. Retain
+    subsequent assignment AST/source spans through native and supported serialized/reconstructed/generated
+    routes. Coordinate with .45 so malformed blocks reject, while this valid newline form compiles and
+    returns seven. Do not silently expand or redefine regex flag semantics; split wider changes before
+    implementation.
+  Verification: `pending` — Four managed native CLI controls all exit zero. Semicolon-separated regex
+    assignment, adjacent-flag regex plus newline, and string plus newline return seven without warnings.
+    Unflagged regex plus newline returns null with a parse-I-block warning at byte 13 and
+    compile:ok/invoke:ok. expr.rs parse_regex skips whitespace before scanning ASCII suffix letters,
+    consuming the newline and following out identifier; .45's compiler path then drops the invalidated
+    block. The separate core harness timed out during rustc compilation and never ran; its exact scratch
+    absence was verified.
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.1` | `pending` | read the owned Rust ignore file and Cargo.lock prefix, retrieving dependency Knowledge before interpretation. |
+| 1 | `SESSION-STARTUP-READING.3.3.2` | `pending` | reconcile the owned Cargo.lock suffix, manifests, Rust README, AST, and callable-contract prefix; persist the confirmed requirement mismatch. |
 
 ## Reading Ledger
 
@@ -2983,7 +3055,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete under `.3.2.55`; 66 Rust reading checkpoints and their closeout are owned. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoint `.3.3.1` is reconciled and `.3.3.2`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -4967,6 +5039,44 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - Resulting .3.2.55 candidate pressure: 100 files / 77,867 lines / 7,874,864 bytes;
   2,133 lines and 513,744 bytes remain within the existing aggregate caps.
 
+### Rust lockfile reading and durable forward diagnostic intake at `.3.3.1`
+
+- Activated from clean `611d7b5c1a53fa8c38fb8fcc17e2304dc21ca63a` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Physically read rust/.gitignore 1–3 and Cargo.lock 1–1493 in six untruncated windows while the
+  preceding canonical candidate was frozen; its commit body preserves that preparation. Reconcile only
+  this owned group now: 1,496 lines / 37,995 bytes, exact baseline identity and budget proof.
+- Ignore-file SHA-256: 3c190dc8bc9f793ca5c8d1e5f01b329ea63b2853bc9e8a3e18da63f7fb10c5b5;
+  lock prefix: 387c9d18efd9f56bbbbcb63aee878314a8c86ad772a717366becfbc925e1cbd6.
+- Retrieve dependency/local-storage Knowledge first. Lock v4 pins 199 unique package identities:
+  195 registry checksums and four local records. rgx/pgen source remains excluded; Git owns the relative
+  dependency pin. Cargo.lock remains tracked despite its ignore pattern. No fetch, upgrade, or cache move.
+- Append the exact lock census to existing storage Knowledge. Qualify its older cache byte/file/hash
+  values as July 26 evidence, not a fresh cache census. Suffix 1494–1850 stays assigned to .3.3.2.
+- Intake the forward .3.3.3 diagnosis into new repair .45 before other durable edits: malformed I/E
+  blocks warn, disappear, and report successful compile/invoke, including typed nested-write/bang errors.
+  Eleven managed CLI controls plus the exact compiler branch establish the cause. Store the reproducer in
+  its Knowledge card; fix all relevant block routes and public teaching after .3/.4/.5. No repair closes.
+- Activate the Rust parent and advance one checkpoint only. Later physical preparation in the preceding
+  commit body still needs its own comprehension/delta checkpoint. Roadmap Yes; codebase No; physical
+  mdBook Yes with formal alignment pending. Prior canonical receipt and post-commit proof are retained.
+- Preserve completed core diagnostics from forward .3.3.6 in repairs .46/.47: UTF-8 clipping can panic,
+  and compiler validation rejects space/tab-only bang arguments accepted by its parser. The exact
+  isolated core program, linked artifact hash, and removed scratch are in the preceding commit body;
+  the earlier whole-spec timeout is not proof of either defect's public CLI behavior.
+- Preceding canonical gate and receipt pass: both primary CLI environments 66/66, Phase 0 1,032/1,032
+  in 1,066 seconds; optional whole-backend/matrix routes remain explicitly skipped. Commit 611d7b5c
+  passes all nine doctrines/post-pointer and promotes the exact receipt. The brief was cleared and Git clean.
+- The separate forward .3.3.7 regex-boundary harness timed out while compiling after 180 seconds;
+  its source never ran. The subprocess was reaped and exact owned scratch absence verified. This does not
+  establish a parser defect or a canonical-gate failure; the bounded native CLI comparison is separate.
+- Four direct native CLI controls now establish the separate regex-newline defect: unflagged regex plus
+  newline warns and returns null, while semicolon, adjacent-flag/newline, and string/newline return seven.
+  parse_regex consumes whitespace then the following identifier as suffix flags; .45's fallback drops
+  the invalidated I block. Create .49 before adding its exact evidence to the shared Knowledge card.
+  The failed core-harness compilation is not credited as a running test. All diagnostic jobs are consumed.
+- The director put reporting aside. No report artifact or .48 leaf was created; preceding commit body
+  preserves the returned app reference and corrected guidance. Continue the original LinkedSpec batch.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -5023,7 +5133,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.2.52` is item 56/100 at `bdf491a5`;
   `.3.2.53` is item 57/100 at `bd057353`;
   `.3.2.54` is item 58/100 at `888d8ca2`;
-  `.3.2.55` is item 59/100 once committed.
+  `.3.2.55` is item 59/100 at `611d7b5c`;
+  `.3.3.1` is item 60/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -5147,6 +5258,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.53` | Four complete files + baseline; 76 callable tests; neutral signature/codeblock; tracked plugin census13; canonical Knowledge and focused continuity | PASS; current registry metadata and legacy corpus/discovery boundaries reconciled. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.54` | Three complete files + exact baseline; three managed syntax checks; nine gdcheck diagnostic assertions; canonical utility Knowledge; focused continuity | PASS; final queued Perl utility checkpoint reconciled; .25/.26 remain unrepaired. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.55` | Independent Perl coverage/54 commit identities; Rust candidate and task Scope audits; current deltas; resulting pressure; memory/Knowledge/history; exact staged canonical CI | PASS coverage and ownership; canonical receipt required before parent-closeout landing. |
+| `2026-09-07` | `SESSION-STARTUP-READING.3.3.1` | Exact two-range reading/baseline; 199-package lock census; retained eleven CLI/isolated core controls and four regex-boundary controls; task-first repairs .45–.47 and .49; preceding canonical receipt; focused continuity | PASS reading and bounded diagnostic evidence; Rust parent active; all four new repairs pending. |
 
 ## Commit Log
 
@@ -5212,6 +5324,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.2.53` | `SESSION-STARTUP-READING.3.2.53 - reconcile function registry and legacy discovery` | Function registry and legacy files read; 76 tests and neutral proof recorded; 13-file corpus count corrected. |
 | `SESSION-STARTUP-READING.3.2.54` | `SESSION-STARTUP-READING.3.2.54 - reconcile legacy utility reading and repair evidence` | 839 utility lines reread; exact diagnostic control retained; .55 owns canonical closeout. |
 | `SESSION-STARTUP-READING.3.2.55` | `SESSION-STARTUP-READING.3.2.55 - close Perl reading and own bounded Rust scopes` | Close 89-file Perl reading; own all 412 Rust paths in 66 bounded leaves plus closeout; exact canonical boundary. |
+| `SESSION-STARTUP-READING.3.3.1` | `SESSION-STARTUP-READING.3.3.1 - read Rust lockfile prefix and own parser boundary repairs` | Read 1,496 lock/ignore lines; own malformed-block, Unicode diagnostic, mutation-argument, and regex-newline repairs; retain prior canonical milestone. |
 
 ## Changelog
 
@@ -5321,3 +5434,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-06`: `.3.2.53` reconciles spec-owned function metadata, completes legacy plugin/path/config reading, and records current callable proof and the parked plugin census.
 - `2026-09-06`: `.3.2.54` completes legacy utility comprehension and preserves existing repair evidence; owns the Perl closeout and Rust decomposition before advancing.
 - `2026-09-06`: `.3.2.55` closes Perl reading after independent coverage reconciliation and owns all Rust reading ranges; existing repairs and whole-codebase reading remain pending.
+- `2026-09-07`: `.3.3.1` reconciles the first Rust reading group and owns forward malformed-block acceptance, Unicode diagnostic panic, parser/compiler whitespace mismatch, and regex-newline loss as .45–.47 and .49; no repair is closed.

@@ -13,11 +13,13 @@ answers:
   - does LinkedSpec still consult the shared developer Cargo cache
   - was any old Rust temporary data deleted from the internal volume
   - how is Rust copied binary relocation tested under repository local temporary storage
+  - how many packages are in LinkedSpec Cargo.lock
+  - why is Rust Cargo.lock tracked despite its ignore pattern
   - why does the Rust repository topology unit test inject a marker predicate
-date: 2026-07-26
+date: 2026-09-07
 status: current
 tags: [rust, cargo, storage, filesystem, ssd, cache, temporary-data, relocation, PROJECT-DATA-SSD-ROOTING]
-evidence: "PROJECT-DATA-SSD-ROOTING.2.2 adds tools/run_cargo_local.sh and tools/test_rust_project_data_storage.sh. The oracle locks 17 Rust temporary-allocation owners, verifies TMPDIR/CARGO_HOME/CARGO_TARGET_DIR and a real copied-binary trace share the repository device, exercises core trace, runtime topology/trace/source-emitter paths, and resolves Cargo.lock offline. The repo-local Cargo home covers 195 compressed packages and 195 source directories, 12,741 files, 371,604 KiB, with canonical compressed-cache hash a51efb284d62287872f6cc2fd113b1f31c6c5c2e5c1e7d1dd5e52de1e735b399. Exact Rust-prefixed residue in the inherited OS temporary roots is zero; the ambiguous shared Cargo cache remains untouched and is no longer consulted by supported workflows. The complete Rust gate passes runtime 149, corpus 105, generated classifier 105, integration 197, and primary 66x2."
+evidence: "Original cache, residue, and gate measurements below are dated 2026-07-26. SESSION-STARTUP-READING.3.3.1 on 2026-09-07 freshly verifies lock v4 with 199 unique package identities, 195 registry checksums, and four local records; it does not repeat a cache census. PROJECT-DATA-SSD-ROOTING.2.2 adds tools/run_cargo_local.sh and tools/test_rust_project_data_storage.sh. The oracle locks 17 Rust temporary-allocation owners, verifies TMPDIR/CARGO_HOME/CARGO_TARGET_DIR and a real copied-binary trace share the repository device, exercises core trace, runtime topology/trace/source-emitter paths, and resolves Cargo.lock offline. The repo-local Cargo home covers 195 compressed packages and 195 source directories, 12,741 files, 371,604 KiB, with canonical compressed-cache hash a51efb284d62287872f6cc2fd113b1f31c6c5c2e5c1e7d1dd5e52de1e735b399. Exact Rust-prefixed residue in the inherited OS temporary roots is zero; the ambiguous shared Cargo cache remains untouched and is no longer consulted by supported workflows. The complete Rust gate passes runtime 149, corpus 105, generated classifier 105, integration 197, and primary 66x2."
 reverify: "bash tools/test_rust_project_data_storage.sh && bash tools/run_rust_local.sh && bash tools/run_cargo_local.sh fetch --manifest-path rust/Cargo.toml --locked --offline"
 ---
 
@@ -27,11 +29,11 @@ self-roots, initializes repository-filesystem project data, enters a managed run
 Cargo arguments. The full `tools/run_rust_local.sh` gate runs the dedicated storage oracle after its complete
 package/build proof.
 
-The retained Cargo cache covers every registry dependency in `rust/Cargo.lock`: 195 compressed cache files and
-195 unpacked source directories, 12,741 files and 371,604 KiB in total. The canonical compressed-cache inventory
-hash is `a51efb284d62287872f6cc2fd113b1f31c6c5c2e5c1e7d1dd5e52de1e735b399`. A locked offline fetch and build prove
-the repository cache is sufficient. The shared developer Cargo cache is ambiguous multi-project data, so it was
-not copied wholesale or deleted; supported workflows no longer consult it.
+The 2026-07-26 retained-cache census covered every registry dependency in the then-current `rust/Cargo.lock`:
+195 compressed cache files and 195 unpacked source directories, 12,741 files and 371,604 KiB in total. The canonical compressed-cache inventory
+hash is `a51efb284d62287872f6cc2fd113b1f31c6c5c2e5c1e7d1dd5e52de1e735b399`. A locked offline fetch and build
+at that boundary proved the repository cache sufficient for that snapshot. The shared developer Cargo cache
+is ambiguous multi-project data, so it was not copied wholesale or deleted; supported workflows no longer consult it.
 
 The exact tracked Rust temporary-owner count is 17. The planning scan reported 16 because it matched the fully
 qualified `std::env::temp_dir()` spelling but missed `rust/linkedspec-core/src/trace.rs`, which imports `env` and
@@ -45,6 +47,22 @@ serve as a synthetic external executable. The Rust unit test therefore injects a
 relative synthetic paths to prove executable/cwd/fallback precedence without filesystem ancestry ambiguity. The
 storage oracle separately copies the real built command into managed scratch, invokes it from a nested cwd, writes
 a trace, and proves the command, trace, temp, Cargo home, and target all share the repository device.
+
+## Current lock metadata and dated cache evidence
+
+The 2026-09-07 static TOML census verifies lock format 4, 199 distinct name/version/source identities, 195
+registry packages with hexadecimal SHA-256 checksums, and four local records: `linkedspec-core` 0.1.0,
+`linkedspec-runtime` 0.1.0, `pgen` 1.0.0, and `rgx-core` 0.1.0. Whole-lock SHA-256 is
+`406070255767e7601b68eb93d912cfc86e0cb7fc7df448d7cbd9c28c057b9113`. The lock remains tracked despite
+`rust/.gitignore` listing Cargo.lock; an ignore rule does not remove an existing tracked file. Distinct
+versions in dependency references are intentional lockfile disambiguation, not duplicate package identities.
+
+The Git gitlink pins `rgx` at `8763a0e6bea97879f027237439d57725f83ead23`; Cargo.lock itself does not pin
+the local dependency source revision. Inspecting this required build metadata did not read excluded dependency
+source. This checkpoint reads only lock lines 1–1493; the complete-file metadata census is not suffix reading
+credit. Lines 1494–1850 remain checkpoint .3.3.2. Earlier cache file counts, byte sizes, residue, and gate counts
+above remain dated July 26 evidence rather than a new September cache census. No dependency fetch or upgrade
+was needed for this reading checkpoint.
 
 Related facts: [[project-data-ssd-storage-locality]], [[project-data-workflow-routing]],
 [[repository-root-path-portability]], [[rust-local-verification-gate]].

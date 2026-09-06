@@ -5,21 +5,24 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl reading closes under `.3.2.55`; 66 Rust reading checkpoints and their closeout remain pending.
-- Repairs `.7`–`.30` and `.32`–`.44` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
+  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1` is reconciled and `.3.3.2`–`.3.3.66` plus closeout remain pending.
+- Repairs `.7`–`.30`, `.32`–`.47`, and `.49` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.55` closes the Perl reading lane and owns the complete bounded Rust plan.
-  This is item 59/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.3.1` reads the Rust ignore file and lockfile prefix, and owns four confirmed parser/compiler repairs.
+  This is item 60/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.3.1`: read the owned Rust ignore file and Cargo.lock prefix, retrieving dependency Knowledge before interpretation.
+- Activate `SESSION-STARTUP-READING.3.3.2`: reconcile the owned Cargo.lock suffix, manifests, Rust README, AST, and callable-contract prefix; persist the confirmed requirement mismatch.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-07` — `SESSION-STARTUP-READING.3.3.1` reconciles 1,496 Rust lock/ignore lines and exact 199-package metadata.
+  Forward diagnostics receive repair owners .45–.47 and .49; no runtime correction is claimed.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.55` reconciles all 89 Perl files and owns 66 Rust reading slices across 412 files.
   Parent closeout requires an exact staged canonical receipt; no runtime repair is claimed.
@@ -65,9 +68,6 @@
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.41` reads runtime observers and passes 137 tests plus four neutral checks.
   `.39`/`.40` own boolean/unwind defects; required history rollover uses exact finite capacity and canonical proof.
-
-- `2026-09-06` — `SESSION-STARTUP-READING.3.2.40` reads recognition core and static policy; 59 tests and neutral proof pass.
-  Cross-owner misuse of invalidated tokens restores obsolete snapshots; `.38` owns repair.
 
 ## History
 

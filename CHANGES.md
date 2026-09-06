@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.1 — read Rust lockfile prefix and own parser boundary repairs
+
+Read the Rust ignore file and Cargo.lock prefix completely; verify exact baseline ranges and the 199-package lock structure. Retain the preceding canonical milestone and distinguish historical cache measurements from current lock metadata. Own malformed-block acceptance, UTF-8 diagnostic slicing, empty-argument whitespace inconsistency, and regex-newline loss under .45–.47 and .49 with exact reproducible Knowledge evidence. Runtime repairs and public-book alignment remain pending behind prerequisite reading.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.55 — close Perl reading and own bounded Rust scopes
 
 Independently reconcile all 89 Perl files, their disjoint byte ranges, completed checkpoint commits, and unchanged current source. Close the Perl reading parent and define 66 exact Rust reading children plus closeout across all 412 files, including generated payloads and empty fixtures. Store repeatable coverage audits, verify documentation pressure, and require canonical CI for this milestone. Existing defects and whole-codebase reading remain pending.

@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.1 — commit frozen verification before reconciling forward reading
+
+The preceding canonical candidate stayed unchanged while owned Rust source was read. Its commit body preserves exact ranges and forward probes; each source group still needs a separate comprehension/delta checkpoint. Eleven CLI controls establish malformed rule-block warning/drop behavior. A separate isolated core program establishes UTF-8 diagnostic slicing panic and parser/compiler disagreement on whitespace-only mutation arguments. These are bounded observations, with no claim that the earlier whole-spec timeout has the same cause. Four native CLI controls also confirm regex-newline statement loss. Repairs .45–.47 and .49 remain pending.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.55 — reading completion requires both comprehension and exact coverage
 
 The interval audit confirms that the recorded comprehension checkpoints cover every Perl byte; it does not create reading credit by itself. Rust ownership uses the same baseline and hard budgets, with explicit continuation windows for large methods and embedded data. Two empty fixtures and the oversized MCP line remain accounted for. Closing a language reading parent requires canonical proof while ordinary reading leaves keep focused verification.
