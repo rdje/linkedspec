@@ -2,7 +2,7 @@
 id: perl-native-mcp-server-plan
 title: Perl native MCP server plan
 status: current historical plan; implementation, admission, and no-change parent closeout complete under FUTURE-PARITY-BACKLOG.10.9.2.1-.4
-date: 2026-07-29
+date: 2026-09-06
 answers:
   - What Perl module will own the native LinkedSpec MCP server?
   - How will Perl MCP avoid reading contract files at runtime?
@@ -11,6 +11,8 @@ answers:
   - How does Perl MCP compare authorization context and enforce expiry?
   - Why is the Perl descriptor not an MCP payload?
   - Which leaves implement and admit the Perl MCP server?
+  - Which semantic payload examples are embedded in the Perl MCP binding?
+  - Does the Perl MCP bundle preserve the neutral artifact and response digests?
 reverify:
   - bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py
   - bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py
@@ -46,3 +48,38 @@ does not claim formal interpreter-level constant time, but unknown/expired/revok
 externally indistinguishable. The registry stores only the index, auth/lifecycle state, policy, and five native
 policy scalars—not semantic responses. The four implementation leaves are in-process binding/registry/dispatch
 `.1`, strict stdio/lifecycle `.2`, exact Perl admission/ledger `.3`, and no-change closeout `.4`.
+
+## September 6 embedded payload and digest boundary
+
+`SESSION-STARTUP-READING.3.2.37` reads MCPContract.pm bytes 65927–83273, finishing its embedded JSON
+schema and payload data. The remaining Perl accessor suffix belongs to `.3.2.38`. The generated bundle stores
+four transport examples: default capabilities, the restricted capabilities projection, graph-list rules, and
+an invalid-operation semantic response. Three preserve native responses (including native ok=false); the fourth
+is the declared capability-field projection. Those four transport examples do not replace the separate
+all-twenty native/MCP consumer authority in [[mcp-recurring-six-runtime-plan]].
+
+The exact embedded JSON is canonical and matches its header SHA-256; its payload collection equals the neutral
+payload file. All four response hashes and all seven neutral source-artifact hashes match. The managed generator
+also confirms the 83,411-byte binding is byte-fresh. This is data identity/freshness evidence, not new native
+query or server dispatch proof. The public compiled descriptor remains outside the MCP payload boundary above.
+
+Reverify the bounded suffix and digest checks:
+
+```sh
+bash tools/project_data_run.sh env PYTHONDONTWRITEBYTECODE=1 python3 - <<'PY'
+from pathlib import Path
+import json,hashlib,re,subprocess
+p='perl/LinkedSpec/MCPContract.pm';raw=Path(p).read_bytes();assert raw==subprocess.check_output(['git','show','baeb984e36a94a15951cd23d4c52def5064cdaca:'+p]);part=raw[65926:83273];assert len(part)==17347
+print('Exact baseline and suffix bytes65927–83273 SHA256 '+hashlib.sha256(part).hexdigest())
+line=raw.splitlines()[13];bundle=json.loads(line);declared=re.search(rb"BUNDLE_SHA256 = '([0-9a-f]{64})'",raw).group(1).decode();assert hashlib.sha256(line).hexdigest()==declared
+canonical=lambda v:json.dumps(v,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()
+assert canonical(bundle)==line
+payloads=bundle['semantic_payloads'];assert payloads==json.loads(Path('capability_conformance/mcp_semantic_transport/semantic_payloads.json').read_text())
+for payload in payloads['payloads']:
+ assert hashlib.sha256(canonical(payload['response'])).hexdigest()==payload['response_sha256']
+ print(payload['id']+': canonical response digest PASS')
+for key,path in bundle['contract']['artifacts'].items():
+ assert hashlib.sha256(Path(path).read_bytes()).hexdigest()==bundle['source_sha256'][key]
+print('Canonical embedded JSON/header digest, neutral payload identity, four response digests, seven source digests PASS')
+PY
+```

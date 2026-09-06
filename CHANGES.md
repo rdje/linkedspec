@@ -10,6 +10,11 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.37 — read MCP payload suffix and verify embedded digests
+
+Read MCPContract bytes 65927–83273; exact baseline, canonical bundle/header digest, and neutral payload identity pass.
+All four response and seven source digests match; the 83,411-byte binding is fresh. Index payload versus all-twenty proof boundaries.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.36 — read MCP contract policy and reconcile historical claims
 
 Read MCPContract bytes 33159–65926; exact baseline and embedded contract/schema/corpus identity pass.
