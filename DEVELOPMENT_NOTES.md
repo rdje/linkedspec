@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.16 — nested parser calls must preserve coordinates
+
+- Three eager/attached block calls omit base_start; their nested diagnostics reset to body-local coordinates.
+  Callable literals and receiver callbacks preserve offsets, including the Unicode control. Repair `.15` owns this.
+- Public last_error.detail retains the blessed Diagnostic; allow_blessed JSON null was a display artifact.
+  Existing parser/punctuation suites pass 30 top-level tests. No source, book, or backend behavior was changed.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.15 — repetition shares the return/scope defect
 
 - REP turns quoted return-plus-space into an interpolated result-slot assignment. Two bounded matches grow

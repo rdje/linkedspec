@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.16 — read AST parser and own nested span repair
+
+- Read AST/Parser.pm 1–1498 / 47,935 bytes; full-file baseline identity passes.
+- Direct and public controls prove omitted nested offsets; `.15` owns repair and source-span regression coverage.
+- Two parser suites pass 30 top-level tests; focused memory/doctrines/Knowledge/history and staged review.
+  Product/book remain unchanged; `.3.2.17` completes the parser and adapter reading.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.15 — finish emitter adapters and extend return repairs
 
 - Complete emitter suffix, LinkedRE, and AST facade: 736 lines / 24,430 bytes; twenty Perl files read.

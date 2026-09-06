@@ -35,7 +35,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -323,12 +323,19 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.15 - finish emitter adapters and extend return repairs`
 
 - ID: `SESSION-STARTUP-READING.3.2.16`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 14: 1,498 lines/fragments, 47,935 bytes.
   Scope: `perl/LinkedSpec/ActionIR/AST/Parser.pm` lines 1–1498.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact scoped reading and baseline identity; existing AST/parser Knowledge reconciliation;
+    ASCII/Unicode AST and public Get controls; `t/actionir_ast_parser.t` and `t/punctuation_light_zero_arg_contract.t`;
+    memory/doctrine/Knowledge/history checks and final staged review.
+  Canonical trigger: `none` — bounded source-reading continuity; no production or public change.
+  Verification: Seven untruncated ranges cover 1,498 lines / 47,935 bytes; full-file baseline identity passes.
+    Seven ASCII and two Unicode AST controls isolate nested offset loss; public Get preserves the typed
+    diagnostic in last_error.detail. Two focused suites pass 30 top-level tests; repair `.15` owns the gap.
+  Commit: `SESSION-STARTUP-READING.3.2.16 - read AST parser and own nested span repair`
 
 - ID: `SESSION-STARTUP-READING.3.2.17`
   Status: `pending`
@@ -880,11 +887,25 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: `pending` — `.3.2.14` proves I-block package dependency; `.3.2.15` also proves REP package writes on plain literals.
   Commit: `pending`
 
+- ID: `SESSION-STARTUP-READING.15`
+  Status: `pending`
+  Goal: Preserve the containing ActionIR coordinate space through every nested block parser call.
+  Dependencies: `.3`, `.4`, `.5` required-reading completion; return/scope repairs `.14` precede this repair.
+  Acceptance: Lock eager-brace, attached function-call, and attached control-body offsets with nonzero bases,
+    nested levels, leading whitespace, duplicate statement text, Unicode scalars, and CRLF. Preserve correct
+    callable-literal, receiver trailing-block, and map_leaves! callback paths. Assert successful AST child spans
+    and exact typed syntax/runtime diagnostic spans against authored substrings; verify direct AST, public Get,
+    supported generated carriers, and direct-dependent conformance. Preserve rejection, statement semantics,
+    diagnostic object payloads, and source-coordinate contracts. Update book/Knowledge and commit before
+    mutation setup; split safe children before implementation if public/carrier work exceeds one slice.
+  Verification: `pending` — `.3.2.16` proves three omitted base_start handoffs and passing adjacent controls.
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.16` | `pending` | Read ActionIR/AST/Parser.pm baseline lines 1–1498. |
+| 1 | `SESSION-STARTUP-READING.3.2.17` | `pending` | Finish AST/Parser.pm 1499–1686, then ArrayPipeline and CanonicalEvents/Core. |
 
 ## Reading Ledger
 
@@ -895,7 +916,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | Twenty Perl files in full through emitter/LinkedRE/AST under `.3.2.15`; supporting reads below. | Remaining 69 Perl paths and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | Twenty Perl files in full plus AST/Parser.pm 1–1498 under `.3.2.16`; supporting reads below. | AST parser suffix, the other 68 Perl paths, and all other first-party inputs not explicitly listed as read. |
 | mdBook | **No** | `docs/linkedspec-book/src/SUMMARY.md`; `docs/linkedspec-book/src/development/local-ci-and-regression.md` 1897–1943 and 1988–2004. | All other chapter text, including the unread portions of that development chapter. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -1294,6 +1315,31 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   diagnostic, not lossless roundtripping. Every retained probe exited zero; no job remains. Next exact reading
   is ActionIR/AST/Parser.pm 1–1498 under `.3.2.16`; required codebase/book reading remains incomplete.
 
+### AST parser prefix and nested source offsets at `.3.2.16`
+
+- Activation checkpoint is clean `762bef64659f48ccada872ec76ac150a0b6714ed`; prior slice's nine doctrines,
+  post-pointer, zero-byte brief, clean status, and full derived-map review passed (950 facts / 8,028 keys).
+  Read 1–200, 201–420, 421–640, 641–860, 861–1080, 1081–1300, and 1301–1498 without truncation:
+  1,498 lines / 47,935 bytes. Full-file baseline identity passes. Early read-only ranges were consumed while
+  the prior commit finished; no next-leaf mutation occurred until its clean boundary. Twenty whole Perl files
+  remain complete; AST parser suffix 1499–1686 belongs to `.3.2.17` with three further adapter files.
+- Existing AST, newline-split, callable-literal, source-map, and nested-write cards precede reconciliation.
+  Read node/raw fallback, trimming, statement offsets, literals, calls/attached controls, shape/codeblock forms,
+  signature validation, access, unified writes, bang mutation, fluent chains, and opening-brace scan ownership.
+  Historical migration aliases do not establish current admission. No full-codebase or mdBook completion claim.
+- Seven ASCII direct AST controls with base_start 100 isolate eager braces, attached controls, and attached
+  function calls resetting nested offsets, while root/callable/receiver/bang controls retain them. Two Unicode
+  controls preserve scalar units but show the same missing outer offset. Exact values and source sites are in
+  `docs/knowledge/perl-actionir-nested-block-span-loss.md`; `.15` owns repair after reading and `.14`.
+- Public Get rejects the malformed write and logs the same local-body span. Correct HASH context capture
+  retains the blessed typed diagnostic in last_error.detail. A preliminary scalar-context invocation was
+  invalid for the API, and allow_blessed JSON rendered the retained object as null; explicit field projection
+  proves retention. Do not infer erased diagnostics. Compiler 710–750/1415–1473 and RuntimeContext 337–377
+  source traces reuse already-read files. No generated loading or other-backend failure is claimed.
+- Managed `PERL5LIB= prove -q -Iperl t/actionir_ast_parser.t t/punctuation_light_zero_arg_contract.t` passes
+  two files / 30 top-level tests in 24 seconds. All retained probe jobs exited zero. Production/book are
+  unchanged; codebase/book remain No. Next `.3.2.17` reads the exact parser suffix and adapter group.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -1314,7 +1360,7 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   `.3.2.9` is item 12/100 at `96a1c242`; `.3.2.10` is item 13/100 at `ff6c228c`;
   `.3.2.11` is item 14/100 at `3ab399d0`; `.3.2.12` is item 15/100 at `5e2cf756`;
   `.3.2.13` is item 16/100 at `a7d17e6f`; `.3.2.14` is item 17/100 at `e421887d`;
-  `.3.2.15` is item 18/100 once committed. `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
+  `.3.2.15` is item 18/100 at `762bef64`; `.3.2.16` is item 19/100 once committed. `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
 
@@ -1387,6 +1433,8 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.14` | Seven prefix chunks/full-file identity; direct builders; public selected-I literal/source/package controls; historical return reverify | PASS reading/probes; focused memory/doctrine/Knowledge/history and staged checks precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.14` | Required Knowledge/all nine doctrines; post-commit pointer; zero-byte brief/clean status; derived-map review | PASS at `e421887d`; 950 facts / 8,026 keys. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.15` | Exact three-file completion/identity; bounded REP literal/source/package controls; diagnostic JSON projection | PASS reading/probes; focused memory/doctrine/Knowledge/history and staged checks precede landing. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.15` | Required Knowledge/all nine doctrines; post-pointer; zero-byte brief/clean status; derived-map review | PASS at `762bef64`; 950 facts / 8,028 keys. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.16` | Exact prefix identity/reading; AST and public offset controls; two parser suites | PASS 30 top-level tests and retained probes; focused memory/doctrine/Knowledge/history and staged checks precede landing. |
 
 ## Commit Log
 
@@ -1411,6 +1459,7 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `SESSION-STARTUP-READING.3.2.13` | `SESSION-STARTUP-READING.3.2.13 - complete EmitContext reading and own blind-edge repair` | Seventeen full Perl files read; blind occurrence-identity defect and repair `.13` preserved. |
 | `SESSION-STARTUP-READING.3.2.14` | `SESSION-STARTUP-READING.3.2.14 - read emitter prefix and own I-block repairs` | Emitter prefix read; literal/scope defects and `.14` repair children preserved; historical contracts reconciled. |
 | `SESSION-STARTUP-READING.3.2.15` | `SESSION-STARTUP-READING.3.2.15 - finish emitter adapters and extend return repairs` | Twenty full Perl files read; existing return/scope repairs extend to repetition; diagnostic projection bounded. |
+| `SESSION-STARTUP-READING.3.2.16` | `SESSION-STARTUP-READING.3.2.16 - read AST parser and own nested span repair` | Parser prefix read; nested-offset repair `.15` owns three recursive handoffs and adjacent controls. |
 
 ## Changelog
 
@@ -1452,3 +1501,5 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   repairs `.14.1`/`.14.2`. `.3.2.15` reads the emitter suffix plus LinkedRE and ActionIR AST.
 - `2026-09-06`: `.3.2.15` completes emitter/LinkedRE/AST reading, extends `.14` repairs to REP, and bounds
   JSON projection claims. `.3.2.16` reads ActionIR/AST/Parser.pm 1–1498 next.
+- `2026-09-06`: `.3.2.16` reads the AST parser prefix, proves nested span loss, and owns repair `.15`;
+  `.3.2.17` completes the parser and reads ArrayPipeline/CanonicalEvents adapters.
