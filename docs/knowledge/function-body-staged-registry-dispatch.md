@@ -67,3 +67,14 @@ generated-format, or public behavior before the general contract expands.
 Related backend facts: [[julia-staged-function-body-registry]],
 [[lua-staged-function-body-registry]], [[lua-fixed-v1-user-function-runtime]], and
 [[general-staged-ast-current-boundary]].
+
+## September 6 Perl registry checkpoint
+
+`SESSION-STARTUP-READING.3.2.47` reads all 328 lines / 11,759 bytes of
+`perl/LinkedSpec/StagedParserRegistry.pm` and verifies exact baseline identity. `execute_parse_jobs`
+normalizes the full list, sorts the collected depth, and invokes all four phases for each job. `compile`
+constructs a cache-key record; there is no memoized plan store in this module. Array/hash inputs are copied
+recursively, while other reference kinds are passed through by its legacy plain-copy helper. This is not
+the general-v2 bounded detached-result contract. Result/failure policy fields remain transported metadata;
+the trusted function-body integration owns the admitted stitch. Existing Unicode-numeric review `.20`
+and general scheduler marker-lifetime review `.44` retain their separate ownership.

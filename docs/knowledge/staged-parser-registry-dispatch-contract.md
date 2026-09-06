@@ -40,3 +40,14 @@ The shipped product keeps two paths separate. The stable one-depth function-body
 `actionir-body.spec` / `action_block` and stitches `body_ast`. General v2 separately supports exact assignment-form
 public authoring, the caller-frozen registry, all policies, breadth-first recurrence, cycle/resource authority,
 and typed diagnostics on all six runtime routes. See [[general-staged-ast-current-boundary]] for the boundary.
+
+## September 6 Perl reading boundary
+
+`SESSION-STARTUP-READING.3.2.47` completes the legacy registry and general runtime/suffix reading.
+The resolve/load/compile/execute sequence above describes the registry architecture; the current general-v2
+scheduler performs only pure selection of caller-completed outcomes and compiled authority. It does not
+invoke a loader or compiler during authored execution. The narrow Perl v1 registry independently implements
+its built-in adapter phases, constructs a cache-key record for every job, and has no stored plan cache.
+See [[function-body-staged-registry-dispatch]] for that one-depth path. Exact unchanged source, consumer,
+checker, and contract identity retain the prior staged 143-test and neutral 9/9/123 proof; this reading
+checkpoint does not rerun or widen that evidence.

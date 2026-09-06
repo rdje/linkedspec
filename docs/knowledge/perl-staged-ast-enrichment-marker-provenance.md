@@ -56,3 +56,19 @@ parent execution. See [[portable-parse-job-public-authoring]] and
 Related: [[perl-staged-ast-enrichment-dormant-red]], [[perl-staged-ast-enrichment-current-depth-authority]], [[perl-staged-ast-enrichment-recursive-authority]],
 [[general-staged-ast-enrichment-neutral-contract]],
 [[typed-source-location-cursor-algebra-direction]], and ADR `0088`.
+
+## September 6 marker and invocation ownership checkpoint
+
+`SESSION-STARTUP-READING.3.2.47` completes all marker, static policy, runtime seam, and scheduler suffix
+reading, with exact baseline identity across five ranges (1,374 lines / 43,289 bytes). Marker construction
+materializes typed source text and copies a logical sidecar into a private address-keyed table; destruction
+removes that marker's table entry. Returned sidecar records are JSON-detached snapshots. Static policy
+validates dedicated marker events before carriers execute. The runtime seam constructs fresh authority
+for each configured invocation, clones ordinary configuration, preserves cancellation/clock identities,
+checks the same input reference, and enriches recursively after the parent callback returns.
+
+The suffix validates exact marker targets and typed paths, rejects cyclic/non-plain results, permits inert
+markers in detached results, and sanitizes/rebases child diagnostics. These mechanisms do not solve the
+separate retired scheduler-key lifetime assumption owned by `.44`; its native non-reproduction and isolated
+counterexample remain precisely bounded in [[perl-staged-marker-retired-identity-risk]]. Unchanged Perl
+143-test plus neutral 9/9/123 and public 6/17/10/129 results remain the prior consumed canonical proof.

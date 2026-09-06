@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.47 — read staged runtime and legacy registry boundaries
+
+Read all five staged suffix/runtime/job/policy/registry ranges: 1,374 lines / 43,289 bytes with exact baseline identity. Clarify that the legacy function-body registry constructs cache-key metadata without memoizing plans, while the separate general scheduler receives fresh invocation authority. Preserve unchanged staged canonical evidence and the existing .44 marker-lifetime risk. Runtime and public-book bytes remain unchanged.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.46 — read staged authority and own marker identity risk
 
 Read the first 1,498 lines / 49,952 bytes of staged authority and retain unchanged 143-test plus neutral/public proof. Reconcile one-depth and admitted recursive boundaries. Native ordinary/weak/pool lifetime controls all complete; an isolated identity-recycling substitute returns an unprocessed marker after three calls. Own this latent risk under .44 with native non-reproduction explicit and preserve all controls in Knowledge. No runtime or public-book changes.

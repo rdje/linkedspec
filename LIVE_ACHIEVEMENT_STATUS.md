@@ -5,21 +5,24 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.47`–`.3.2.54` remain pending.
+  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.48`–`.3.2.54` remain pending.
 - Repairs `.7`–`.30` and `.32`–`.44` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.46` completes staged authority reading and owns the precisely bounded marker-identity risk.
-  This is item 50/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.2.47` completes staged suffix, runtime, marker, policy, and legacy registry comprehension.
+  This is item 51/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.47`: read StagedASTEnrichment 1499–2013 and the staged runtime/job/policy/registry owners.
+- Activate `SESSION-STARTUP-READING.3.2.48`: read Trace.pm 1–521 and reconcile the existing lazy-callback exception-state repair.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.47` reads five staged ranges totaling 1,374 lines / 43,289 bytes.
+  Legacy one-depth metadata and fresh general authority remain separate; .44 stays pending.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.46` reads staged authority 1–1498 and retains 143-test proof.
   Native lifetime controls pass; isolated identity recycling truncates recursion and is owned by .44.
@@ -65,9 +68,6 @@
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.32` reads pipeline/recognition/staged and splitting owners;
   143 staged checks and neutral/language proof pass; two authoring records reconcile.
-
-- `2026-09-06` — `SESSION-STARTUP-READING.3.2.31` reads legacy/basic scanners and confirms both push branches;
-  five public controls pass; three historical bare-read records reconcile.
 
 ## History
 

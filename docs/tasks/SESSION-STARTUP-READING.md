@@ -811,12 +811,19 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.46 - read staged authority and own marker identity risk`
 
 - ID: `SESSION-STARTUP-READING.3.2.47`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 45: 1,374 lines/fragments, 43,289 bytes.
   Scope: `perl/LinkedSpec/StagedASTEnrichment.pm` lines 1499–2013; `perl/LinkedSpec/StagedASTEnrichmentRuntime.pm` lines 1–120; `perl/LinkedSpec/StagedParseJob.pm` lines 1–352; `perl/LinkedSpec/StagedParseJobPolicy.pm` lines 1–59; `perl/LinkedSpec/StagedParserRegistry.pm` lines 1–328.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Complete owned staged suffix/runtime/job/policy/registry reading; exact baseline and unchanged consumer/checker/contract identity; reconcile canonical Knowledge owners and existing .44 risk; memory, history, derived Knowledge and fast commit doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: All five owned ranges read completely: 1,374 lines / 43,289 bytes; exact baseline identity passes.
+    Source, Perl consumers, neutral checker and contract remain identical to the consumed canonical proof:
+    Perl 143, neutral 9/9/123 and public 6/17/10/129. Knowledge distinguishes legacy cache-key metadata
+    from the general scheduler and records fresh invocation/private marker ownership; .44 remains pending.
+  Commit: `SESSION-STARTUP-READING.3.2.47 - read staged runtime and legacy registry boundaries`
 
 - ID: `SESSION-STARTUP-READING.3.2.48`
   Status: `pending`
@@ -1940,7 +1947,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.47` | `pending` | read StagedASTEnrichment 1499–2013 and the staged runtime/job/policy/registry owners. |
+| 1 | `SESSION-STARTUP-READING.3.2.48` | `pending` | read Trace.pm 1–521 and reconcile the existing lazy-callback exception-state repair. |
 
 ## Reading Ledger
 
@@ -1951,7 +1958,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.47`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.48`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -3688,6 +3695,34 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   after all nine doctrines and the post-commit pointer passed; its brief is empty and activation was clean.
   Roadmap/physical mdBook remain Yes; codebase No and formal .4/repairs remain pending. Next .3.2.47.
 
+### Staged suffix, runtime, marker policy, and legacy registry at `.3.2.47`
+
+- Activated from clean `7c2d6ee0d54350667b5cf15c4d634bb9d3efe9d2` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Completely reread StagedASTEnrichment 1499–1760 / 1761–2013, Runtime 1–120,
+  StagedParseJob 1–352, StagedParseJobPolicy 1–59, and StagedParserRegistry 1–328. All five
+  ranges retain exact baseline identity: 1,374 lines / 43,289 bytes. This closes the queued
+  comprehension checkpoint; the physical bytes were already credited in .31.
+- Retrieved and fully read the registry/dispatch, function-body-v1, marker/provenance, and general-v2
+  boundary Knowledge owners before reconciling mechanisms. The legacy registry normalizes and sorts
+  one collected depth, invokes resolve/load/compile/execute for every job, and records a cache key;
+  it contains no memoized compiled-plan cache. Its policy strings are transport metadata until the
+  separate trusted function-body stitch. General v2 remains a separate caller-frozen authority.
+- Read exact runtime configuration keys, fresh per-invocation authority, preserved cancellation/clock
+  identities, cloned ordinary configuration, input-reference identity, transaction-active lookup,
+  and post-parent enrich_recursively. Marker state is detached into a private side table and deleted
+  on destruction; materialized source data retains no source authority. Static policy validates only
+  dedicated marker events and reports the first declaration diagnostic.
+- Read target identity checks, typed paths, all stitch modes, child diagnostic sanitization/rebasing,
+  bounded plain-result detachment with allowed opaque markers, cycle rejection, exact job digests,
+  JSON-kind-aware integer checks, expiring execution context, and private error/authority cleanup.
+  Existing .44 owns retired marker identity risk; no additional failure or native reuse is claimed.
+- Exact current Perl source, staged/phase0 consumers, staged checker, and neutral contract match the
+  consumed da8185b9 canonical checkpoint. Retain its Perl 143, neutral 9/9/123, public 6/17/10/129
+  and Phase 0 1,032 results without rerunning unchanged runtime suites or treating them as new proof.
+- The prior leaf committed as 7c2d6ee0d54350667b5cf15c4d634bb9d3efe9d2 after all nine doctrines and
+  post-commit pointer passed; brief was cleared and clean status verified before activation.
+  Roadmap/physical book remain Yes, codebase No, formal .4 and tracked repairs pending. Next .3.2.48.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -3735,7 +3770,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.2.43` is item 47/100 at `7a97647c`;
   `.3.2.44` is item 48/100 at `78e0ee6b`;
   `.3.2.45` is item 49/100 at `cd0a1bab`;
-  `.3.2.46` is item 50/100 once committed.
+  `.3.2.46` is item 50/100 at `7c2d6ee0`;
+  `.3.2.47` is item 51/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -3850,6 +3886,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.44` | Exact static-source/test identity; retained five-test proof; two exact plus two initial public failure controls; retained inline/descriptor evidence; standalone neutral 15/7/14; precise Knowledge and focused continuity | PASS scoped reading and controls; retained diagnostic versus fabricated explanation distinguished; .23/.41.6 refined without runtime changes. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.45` | Exact 700-line source and prior-proof identities; retained three-suite 18-test/typed 14/0/231 evidence; scoped Knowledge reconciliation; memory/Knowledge/doctrines/history and staged review | PASS reading and unchanged evidence; authority/value privacy and compatibility boundaries retained; no behavior change. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.46` | Exact 1,498-line baseline and unchanged staged inputs; retained 143 and 9/9/123 plus public proof; 24 native and four modeled lifetime controls; four Knowledge owners; focused continuity | PASS bounded reading/native controls; isolated recycling counterexample tracked as .44 with native non-reproduction explicit. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.47` | Five complete ranges and exact baseline; unchanged staged runtime/consumer/checker/contract identity; four Knowledge owners; focused continuity | PASS bounded reading and retained proof; legacy metadata/general authority boundary explicit; .44 remains owned. |
 
 ## Commit Log
 
@@ -3906,6 +3943,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.2.44` | `SESSION-STARTUP-READING.3.2.44 - read static semantics and refine failure evidence` | Static projection read; failure claim narrowed to actual decision/explanation defect; omitted Toolbox guidance is repair-owned. |
 | `SESSION-STARTUP-READING.3.2.45` | `SESSION-STARTUP-READING.3.2.45 - read typed source-location authority` | Complete typed source-location owner reading and scoped existing Knowledge reconciliation. |
 | `SESSION-STARTUP-READING.3.2.46` | `SESSION-STARTUP-READING.3.2.46 - read staged authority and own marker identity risk` | Staged authority read; native lifetime proof and isolated retired-identity counterexample preserved under .44. |
+| `SESSION-STARTUP-READING.3.2.47` | `SESSION-STARTUP-READING.3.2.47 - read staged runtime and legacy registry boundaries` | Staged suffix/runtime/marker/policy/legacy registry read; exact unchanged proof and v1/v2 separation preserved. |
 
 ## Changelog
 
@@ -4006,3 +4044,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-06`: `.3.2.44` reads static semantic projection, refines .23 to preserved diagnostics with fabricated dependency evidence, and attaches stale TOOLBOX lifecycle guidance to .41.6.
 - `2026-09-06`: `.3.2.45` completes the typed source-location owner and compatibility adapter reading with exact baseline and retained proof.
 - `2026-09-06`: `.3.2.46` reads staged authority, reconciles routed recursion, and owns .44's modeled identity-recycling risk with exact native and isolated controls.
+- `2026-09-06`: `.3.2.47` completes staged runtime and legacy registry reading, records fresh authority/private marker lifetime, and separates legacy cache-key metadata from general scheduling.
