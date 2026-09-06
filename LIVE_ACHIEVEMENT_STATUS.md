@@ -5,21 +5,24 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.45`–`.3.2.54` remain pending.
+  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.46`–`.3.2.54` remain pending.
 - Repairs `.7`–`.30` and `.32`–`.43` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.44` completes static semantic reading and precise failure/teaching evidence reconciliation.
-  This is item 48/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.2.45` completes typed source-location authority and compatibility adapter reading.
+  This is item 49/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.45`: read SourceLocation 1–700.
+- Activate `SESSION-STARTUP-READING.3.2.46`: read StagedASTEnrichment 1–1498.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.45` reads 700 lines / 21,209 bytes of typed source authority and compatibility adapters.
+  Retains unchanged 18-test and 14/0/231 proof with scoped Knowledge reconciliation.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.44` reads 1,067 lines / 34,029 bytes and retains five-test static proof.
   Exact failure controls refine .23; passing standalone proof exposes omitted TOOLBOX guidance under .41.6.
@@ -65,9 +68,6 @@
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.30` reads rewrite and scanner/flow ownership;
   five trace tests and the seven-dispatcher census pass; four Knowledge records reconcile.
-
-- `2026-09-06` — `SESSION-STARTUP-READING.3.2.29` reads the lowering suffix and progressive scanner;
-  129 Perl assertions and neutral 9/9/116 proof pass; three admission pointers reconcile.
 
 ## History
 

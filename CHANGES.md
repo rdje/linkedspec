@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.45 — read typed source-location authority
+
+Read all 700 lines / 21,209 bytes of SourceLocation. Preserve the authority/value privacy boundary, detached provenance, and existing scalar/helper compatibility in its canonical Knowledge home. Exact source/test/contract identities retain prior 18-test and typed 14/0/231 proof. Keep the near-capacity Knowledge home bounded through a focused linked compatibility card and its existing canonical reverify driver. No runtime or public-book changes.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.44 — read static semantics and refine failure evidence
 
 Read all static semantic projection source (1,067 lines / 34,029 bytes) and retain unchanged five-test proof. Exact public controls show the original error code/message survive while unrelated failure gets a fabricated dependency decision/explanation and warning; refine .23 accordingly. Own stale TOOLBOX bare-block guidance under .41.6 after confirming its omission from the passing standalone reader. No runtime or public-book changes.

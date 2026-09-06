@@ -774,12 +774,23 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.44 - read static semantics and refine failure evidence`
 
 - ID: `SESSION-STARTUP-READING.3.2.45`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 43: 700 lines/fragments, 21,209 bytes.
   Scope: `perl/LinkedSpec/SourceLocation.pm` lines 1–700.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+    Keep the existing near-capacity Knowledge home bounded; route scoped compatibility detail to a
+    focused linked card before edits. Preserve existing limits and record the rejected oversized candidate.
+  Verification tier: `focused`
+  Focused checks: Exact source/test/neutral baseline identity; retained typed-value/projection/recursive tests and neutral
+    proof; full owner reading and relevant Knowledge reconciliation; memory/Knowledge/doctrines, both history
+    pressure checks, and staged diff review.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Complete 700-line / 21,209-byte source reading and exact baseline identity pass. Prior canonical
+    value/projection/recursive suites pass 18 tests across three files; typed neutral proof is 14/0/231.
+    Current source/test/checker/contract inputs remain unchanged. Existing Knowledge preserves authority,
+    detached values, and compatibility boundaries in bounded linked cards; no new runtime or public contract is claimed.
+  Commit: `SESSION-STARTUP-READING.3.2.45 - read typed source-location authority`
 
 - ID: `SESSION-STARTUP-READING.3.2.46`
   Status: `pending`
@@ -1898,7 +1909,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.45` | `pending` | read SourceLocation 1–700. |
+| 1 | `SESSION-STARTUP-READING.3.2.46` | `pending` | read StagedASTEnrichment 1–1498. |
 
 ## Reading Ledger
 
@@ -1909,7 +1920,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.45`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.46`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -3575,6 +3586,37 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   Required roadmap/physical-book reading remain Yes, codebase No; formal .4 and all repairs stay pending.
   No runtime, public-book, TOOLBOX, checker, policy, or protocol edits occur. Next .3.2.45.
 
+### Typed source authority and compatibility projections at `.3.2.45`
+
+- Activated from clean `78e0ee6b1d719a1113bf6ad0e351d890fb88ea52` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read SourceLocation 1–240 / 241–475 / 476–700 completely during the frozen canonical run,
+  then reread all 1–215 / 216–475 / 476–700 while the preceding checkpoint's hooks ran. Exact
+  baseline identity passes: 700 lines / 21,209 bytes; .31 physical credit is not counted again.
+- The authority snapshots decoded source and scalar-boundary line/column/strict-UTF-8 byte evidence.
+  Separate inside-out value stores retain monotonic authority identity and detached position/span/derived
+  records without live authority or text references. The authority validates and materializes, copies
+  ordered provenance, and preserves four structured value errors with privacy-filtered context.
+- Runtime helpers reuse match-info authority while preserving scalar cursor/mark storage, primitive
+  results, absence values, and existing shallow capture-container copies. Nonnegative in-bounds slices
+  materialize typed spans; other starts/widths deliberately retain host substr compatibility. This is
+  existing behavior, not an expanded typed authoring or deep-copy contract.
+- Retrieved the canonical typed-source Knowledge home before reading, then reconciled its relevant
+  160–245 Perl/boundary and 275–290 final-closeout sections plus metadata. A prior truncated whole-card
+  output is not credited as complete reading of unrelated backend history. The existing near-capacity
+  home now links to a focused compatibility card; its general authority record remains canonical.
+- The prior exact canonical gate at da8185b9 passes typed values/projections/recursive observation:
+  three files / eighteen tests / twenty-eight wall seconds, plus neutral 14 complete / 0 pending /
+  231 mutations. Current source, all three test files, checker, and contract are byte-identical;
+  retained proof suffices for this unchanged-source reading checkpoint. CI registration 810–820
+  was read to confirm the exact three-suite boundary, without claiming a complete tooling-lane read.
+- Pre-commit correctly rejected a 67,175-byte Knowledge card against its unchanged 65,536-byte cap;
+  its clean-HEAD size was already 65,511. Routed new compatibility detail to
+  docs/knowledge/perl-source-location-slice-compatibility.md, kept a direct parent link, and replaced
+  the duplicated long reverify recipe with the existing six-authority composition command. The complete
+  33-line driver was read; this is documentation routing, not a newly run combined gate or limit change.
+- No new defect or behavior change is established. Roadmap and physical mdBook remain Yes; codebase
+  remains No and formal .4 alignment/repairs stay pending. Next .3.2.46 reads staged AST authority.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -3620,7 +3662,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.2.41` is item 45/100 at `da8185b9`;
   `.3.2.42` is item 46/100 at `dde05b65`;
   `.3.2.43` is item 47/100 at `7a97647c`;
-  `.3.2.44` is item 48/100 once committed.
+  `.3.2.44` is item 48/100 at `78e0ee6b`;
+  `.3.2.45` is item 49/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -3733,6 +3776,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.42` | Exact source/book identities; 20 semantic tests; neutral semantic/generated proof; four input/direct, nine Get, and eight isolated factory controls; Knowledge and focused continuity; four inline-lifecycle and two descriptor controls | PASS reading and finite controls; physical mdBook Yes, codebase No; .41/.42/.43 own repairs without premature implementation. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.43` | Exact 982-line baseline and unchanged prior-proof inputs; retained 9/106/5 tests and neutral 6/20/128; four Knowledge reconciliations; exact consumed-spool cleanup; focused continuity | PASS scoped reading and retained proof; July milestones dated; codebase still No; no runtime changes. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.44` | Exact static-source/test identity; retained five-test proof; two exact plus two initial public failure controls; retained inline/descriptor evidence; standalone neutral 15/7/14; precise Knowledge and focused continuity | PASS scoped reading and controls; retained diagnostic versus fabricated explanation distinguished; .23/.41.6 refined without runtime changes. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.45` | Exact 700-line source and prior-proof identities; retained three-suite 18-test/typed 14/0/231 evidence; scoped Knowledge reconciliation; memory/Knowledge/doctrines/history and staged review | PASS reading and unchanged evidence; authority/value privacy and compatibility boundaries retained; no behavior change. |
 
 ## Commit Log
 
@@ -3787,6 +3831,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.2.42` | `SESSION-STARTUP-READING.3.2.42 - read semantic projection and preserve complete book coverage` | Semantic call/index comprehension, complete book coverage, and measured book/compiler/inline-semantic repair ownership preserved. |
 | `SESSION-STARTUP-READING.3.2.43` | `SESSION-STARTUP-READING.3.2.43 - read semantic queries and source mapping` | Query/source-map and derived-observation owners read; current versus historical evidence reconciled. |
 | `SESSION-STARTUP-READING.3.2.44` | `SESSION-STARTUP-READING.3.2.44 - read static semantics and refine failure evidence` | Static projection read; failure claim narrowed to actual decision/explanation defect; omitted Toolbox guidance is repair-owned. |
+| `SESSION-STARTUP-READING.3.2.45` | `SESSION-STARTUP-READING.3.2.45 - read typed source-location authority` | Complete typed source-location owner reading and scoped existing Knowledge reconciliation. |
 
 ## Changelog
 
@@ -3885,3 +3930,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-06`: `.3.2.42` reads semantic call/index owners, preserves complete 50-file book reading, and owns .41/.42/.43 repairs with exact public and isolated controls.
 - `2026-09-06`: `.3.2.43` completes query/runtime-projection/source-map comprehension, qualifies historical Knowledge milestones, and verifies exact preparation-spool cleanup.
 - `2026-09-06`: `.3.2.44` reads static semantic projection, refines .23 to preserved diagnostics with fabricated dependency evidence, and attaches stale TOOLBOX lifecycle guidance to .41.6.
+- `2026-09-06`: `.3.2.45` completes the typed source-location owner and compatibility adapter reading with exact baseline and retained proof.

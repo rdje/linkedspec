@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.45 — typed values retain identity while the authority owns text
+
+Positions, spans, and ordered derived text carry detached source identity/offset/provenance records; decoded text and conversion tables remain inside the authority. The Runtime adapter preserves existing scalar and shallow collection results, including the deliberate host substr fallback outside typed slice bounds. This scoped reading does not admit a public typed-value API. A rejected oversized Knowledge append is routed to a focused linked card without changing any size limit.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.44 — semantic diagnostic preservation differs from causal explanation
 
 The failed static path retains the supplied diagnostic but constructs dependency evidence unconditionally. Accurate repair acceptance must preserve the existing good diagnostic and valid missing-rule normalization while correcting the fabricated causal rows. The standalone public checker reads fifteen explicit paths, so passing it does not validate TOOLBOX's omitted stale rejection guidance.
