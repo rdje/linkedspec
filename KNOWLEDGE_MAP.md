@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **944** facts · **7995** question keys.
+> **944** facts · **7996** question keys.
 
 ## Questions → fact
 
@@ -7569,6 +7569,7 @@
 - "why did predecessor progressive admission cards still call Lua pending" -> [lua-progressive-span-dispatch-recomposition](docs/knowledge/lua-progressive-span-dispatch-recomposition.md) · 2026-08-25
 - "why did recursive observation public closeout not add a rollout row" -> [recursive-observation-public-no-drift](docs/knowledge/recursive-observation-public-no-drift.md) · 2026-08-12
 - "why did removed aggregate selectors remain in backend READMEs" -> [aggregate-selector-backend-readme-coverage](docs/knowledge/aggregate-selector-backend-readme-coverage.md) · 2026-07-12 · reverify: `bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py`
+- "why did rustc wait in dlopen during startup canonical CI" -> [macos-rust-first-launch-validation-latency](docs/knowledge/macos-rust-first-launch-validation-latency.md) · 2026-09-01 · reverify: `rg -n 'Rust launch-latency finding|FUTURE-PARITY-BACKLOG.19.3.4' docs/tasks/FUTURE-PARITY-BACKLOG.15-24.md ROADMAP.md ROADMAP_V2.md docs/TASK_TREE.md`
 - "why did scalar(retv) resolve to undef in the Rust runtime" -> [rust-retv-propagation](docs/knowledge/rust-retv-propagation.md) · 2026-07-02 · reverify: `cd rust && cargo test --manifest-path Cargo.toml 2>&1 | grep -E 'test result'; grep -n 'set_retv\\|return_value\\|fn execute_rule' linkedspec-runtime/src/engine.rs linkedspec-runtime/src/runtime.rs`
 - "why did semantic introspection default rules incorrectly say and contiguous" -> [semantic-introspection-static-rule-authority](docs/knowledge/semantic-introspection-static-rule-authority.md) · 2026-07-21 · reverify: `bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py && jq '.static_rule_authority' capability_conformance/semantic_introspection_contract.json && jq '.snapshots[] | {id, rules: [.records[] | select(.kind == \"rule\") | {name, facts: {family: .facts.family, cursor_policy: .facts.cursor_policy, edge_ownership: .facts.edge_ownership}}]}' capability_conformance/semantic_introspection_model.json`
 - "why did source migration from colon scalar slots require runtime fixes" -> [terse-source-migration-runtime-boundaries](docs/knowledge/terse-source-migration-runtime-boundaries.md) · 2026-07-06 · reverify: `rg -n 'split_tagged_records|descriptor_scalar_bare_read|bind_descriptor_scalar_bare_read|_control_ast_value_source_expr|array_copy|hash_copy|copy\\(' perl rust tools/gen_oracle_corpus.pl`
@@ -12451,7 +12452,7 @@ _Lua preserves variadic-v2 signatures before binding rest arrays_
 ### macos-rust-first-launch-validation-latency
 _A cold repository-local Rust test launch stalled in macOS validation before main_
 
-- **answers:** why did the Rust trace controls build take 55 minutes | was trace_controls looping after the cold build | why was the Rust test binary stuck at dyld_start | what task owns macOS syspolicyd Rust launch latency | is macOS first launch validation latency tracked
+- **answers:** why did the Rust trace controls build take 55 minutes | was trace_controls looping after the cold build | why was the Rust test binary stuck at dyld_start | what task owns macOS syspolicyd Rust launch latency | is macOS first launch validation latency tracked | why did rustc wait in dlopen during startup canonical CI
 - **date:** 2026-09-01 · **status:** classified as external per-artifact macOS policy state; no repository repair required
 - **evidence:** `During FUTURE-PARITY-BACKLOG.19.3.3 signoff, a plain-cargo test with repository-local target but user-home registry reads finished its cold build in 55m44s after prolonged per-crate waits. More than three minutes after Cargo launched trace_controls, it had 112 KiB footprint and no test output. Process census found Cargo/test alive and macOS syspolicyd consuming substantial CPU; a one-second sample contained only _dyld_start, proving Rust test code had not begun. The exact /tmp report created by sample was consumed, deleted, and verified absent. The eventual 12/12 result is diagnostic only until rerun through LinkedSpec's managed Cargo wrapper.`
 - **reverify:** `rg -n 'Rust launch-latency finding|FUTURE-PARITY-BACKLOG.19.3.4' docs/tasks/FUTURE-PARITY-BACKLOG.15-24.md ROADMAP.md ROADMAP_V2.md docs/TASK_TREE.md`
@@ -13030,10 +13031,10 @@ _SPEC-FORMAT-TERSE.12.2 - Perl hash-tree traversal receiver blocks bind scalar c
 - **source:** [`docs/knowledge/perl-hash-tree-traversal-callback-frame.md`](docs/knowledge/perl-hash-tree-traversal-callback-frame.md)
 
 ### perl-identical-dependency-regex-index-aliasing
-_Perl indexed dependency dispatch cannot distinguish identical regex alternatives_
+_Historical Perl ordered dependency dispatch aliased identical regex alternatives_
 
 - **answers:** why does an AND action sequence report the wrong match index | what happens when two edge owned regex slots have the same pattern | why did the rule local cursor marker fixture need delimiter lookahead | where is identical dependency regex identity tracked | does LinkedRE preserve slot identity for duplicate regex patterns
-- **date:** 2026-07-17 · **status:** confirmed latent risk; repair owned by FUTURE-PARITY-BACKLOG.9.1.8.1
+- **date:** 2026-07-17 · **status:** historical finding; resolved by FUTURE-PARITY-BACKLOG.9.1.8.1.2 and the complete duplicate-slot rollout
 - **evidence:** `During FUTURE-PARITY-BACKLOG.9.1.3.2, an AND marker fixture with explicit edges for all five slots still returned undef. Routed debug trace showed the second word at cursor position 10 matched dependency index 1 while the handler required index 3. Compiler::build_dependency_regex_map collects the two slot regexes in dependency order; LinkedRE::oredRE emits a left-to-right alternation with a branch-local $pos assignment. Because both alternatives were /\\w+/, Perl selected the first matching branch and therefore returned index 1 for both word positions. Making the slots mutually exclusive with /\\w+(?=,)/ and /\\w+(?=\\))/ produced indices 1 and 3 and restored the exact expected value. This is a pre-existing slot-identity limitation, not rule-local cursor semantics; the fixture migration is local and `.9.1.8.1` owns the cross-backend language decision and engine repair/rejection.`
 - **reverify:** `LINKEDSPEC_TRACE_LEVEL=debug perl -Iperl -MLinkedSpec -e 'my $s=join chr(10), q{Top::AND}, q{ /foo\\(/ -> Top[0] { }}, q{ /\\w+/ -> Top[1] { }}, q{ /,/ -> Top[2] { }}, q{ /\\w+/ -> Top[3] { }}, q{ /\\)/ -> Top[4] { return(1) }}, q{}; my $p=LinkedSpec::Get(\\$s); my $in=q{foo(alpha,beta)}; my $out=$p->(\\$in); print defined($out) ? $out : q{undef}, qq{\\n}' && rg -n 'sub oredRE|build_dependency_regex_map|FUTURE-PARITY-BACKLOG.9.1.8.1' perl/LinkedRE.pm perl/LinkedSpec/Compiler.pm docs/tasks/FUTURE-PARITY-BACKLOG.md`
 - **source:** [`docs/knowledge/perl-identical-dependency-regex-index-aliasing.md`](docs/knowledge/perl-identical-dependency-regex-index-aliasing.md)

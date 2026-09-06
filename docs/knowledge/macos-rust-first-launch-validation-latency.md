@@ -7,6 +7,7 @@ answers:
   - "why was the Rust test binary stuck at dyld_start"
   - "what task owns macOS syspolicyd Rust launch latency"
   - "is macOS first launch validation latency tracked"
+  - "why did rustc wait in dlopen during startup canonical CI"
 date: 2026-09-01
 status: classified as external per-artifact macOS policy state; no repository repair required
 tags: [rust, macos, syspolicyd, gatekeeper, verification, performance, FUTURE-PARITY-BACKLOG]
@@ -16,6 +17,34 @@ evidence_update_canonical_2026_09_02: "During the successful receipt-bound canon
 evidence_update_closeout_2026_09_02: "Controlled managed runs reproduced two older distinct trace_controls hashes at 45.32/0.00 and 51.75/0.00 seconds for first/warm --list launches, with zero user/system CPU, no visible Rust process, and syspolicyd at 51.1-57.8% CPU. Both binaries were provenance-tagged, ad-hoc linker-signed, and slowly rejected by spctl. Ordinary managed-run files also inherit provenance. However two fresh behavior-equivalent unique isolated builds completed in 37.18 and 23.17 seconds. The first hash's explicitly signed copy and original launched in 0.44/0.45 seconds; the second wholly unmanipulated provenance-tagged linker-signed hash first-launched in 0.41 seconds, then 0.00 warm. Fresh serial compile/link/launch is therefore healthy. The delay is external per-artifact macOS policy/cache state for older contaminated artifacts, not a persistent Linkedspec source/build/storage/signing defect. No trust, xattr, cache, coverage, or workflow repair is justified; FUTURE-PARITY-BACKLOG.19.3.4.1 is not required."
 reverify: "rg -n 'Rust launch-latency finding|FUTURE-PARITY-BACKLOG.19.3.4' docs/tasks/FUTURE-PARITY-BACKLOG.15-24.md ROADMAP.md ROADMAP_V2.md docs/TASK_TREE.md"
 ---
+
+## Dated startup observation — 2026-09-06
+
+Canonical verification for `SESSION-STARTUP-READING.3.2.5` on macOS 26.6.2 build 25G83
+again separated compiler/loader waits from test execution. At 04:17:07 +0200, the pgen
+compiler process (PID 75954, launched 04:12:07) had a 1.7 GiB footprint. All 798 samples
+of its compiler worker ended in `__fcntl` through `rustc_metadata::creader::dlsym_proc_macros`,
+`load_dylib`, dyld `dlopen`, `Loader::mapSegments`, and `SyscallDelegate::fcntl`.
+This locates that interval in procedural-macro library loading; it does not identify
+the underlying kernel or policy cause.
+
+The staged-AST test binary (PID 13554, launched 04:33:41) still had a 112 KiB footprint
+at 04:39:06, with all 801 samples at `_dyld_start`. Rust test code had not begun at that
+sample. The wait cleared; the test subsequently built its emitted programs and passed
+1/1 in 571.92 seconds. Later process censuses also found zero CPU time and
+32 KiB RSS before several other test harnesses started; their eventual tests passed.
+
+Both sample reports were created directly in `.linkedspec-data/scratch`, consumed,
+hash-verified, deleted, and verified absent. Their SHA-256 values are
+`9b09b3be640607333e5d525b5d684e5b80301948d8b261a5b503c3f651ffa3f9` (compiler) and
+`9ed3f99007e0ad35fac8bf50cd904ee8f3d78d177ccfd5ca9675cb228e2d51b8` (test).
+The full default canonical gate passed and its receipt was promoted to `6c1234cc`.
+It did not enable the separately opt-in local gates or recurring matrices. No target
+cleanup, re-signing, trust bypass, or off-volume scratch was used for this diagnosis.
+These are new dated measurements, not a controlled repetition of the older closeout
+below or proof of its exact policy/cache cause on this newer OS.
+
+## Earlier controlled closeout
 
 The controlled closeout is specific to macOS 26.5.2 build 25F84 / Darwin 25.5.0. It separates dependency build,
 link, policy/loader wait, and test execution without deleting an existing target. The two delayed older hashes and

@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.6 — read compiler generation and state assembly
+
+- Read Compiler.pm baseline-identical lines 1–1041; generated-v2, state, slot, and diagnostic owners reconcile.
+- Recorded the prior canonical PASS and dated macOS loader observations; linked the historical duplicate-slot
+  finding to its existing resolution. Two consumed sample reports were hash-verified, removed, and checked absent.
+- Focused proof covers exact reading/identity, Knowledge, memory/doctrines/history, and staged review. No source or book change.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.5 — read compiler state and preserve history
 
 - Read all 590 baseline-identical CompilerState lines and reconciled existing descriptor ownership.

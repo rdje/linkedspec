@@ -167,12 +167,22 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.5 - read compiler state and preserve history`
 
 - ID: `SESSION-STARTUP-READING.3.2.6`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 4: 1,041 lines/fragments, 41,073 bytes.
   Scope: `perl/LinkedSpec/Compiler.pm` lines 1–1041.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+    Preserve the preceding canonical result and dated loader observations in the existing Knowledge owner.
+    Link the historical duplicate-slot risk card to its already-admitted resolution without rewriting its evidence.
+  Verification tier: `focused`
+  Focused checks: Exact scoped reading and baseline identity; existing compiler ownership reconciliation;
+    prior canonical receipt and measured loader evidence; memory/doctrine/Knowledge/history checks;
+    `git diff --check` and final staged review.
+  Canonical trigger: `none` — source-reading and measured startup continuity only; no infrastructure or public change.
+  Verification: Four untruncated chunks cover baseline-identical lines 1–1041 / 41,073 bytes. Existing state,
+    generated-v2, function-registry, and duplicate-slot owners reconcile. Prior exact canonical proof passed;
+    dated samples are preserved in Knowledge and their two consumed files were hash-verified/deleted/checked absent.
+    The historical duplicate-slot card links its existing resolution; focused commit checks are recorded below.
+  Commit: `SESSION-STARTUP-READING.3.2.6 - read compiler generation and state assembly`
 
 - ID: `SESSION-STARTUP-READING.3.2.7`
   Status: `pending`
@@ -699,7 +709,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.6` | `pending` | Read Compiler.pm baseline lines 1–1041 in bounded chunks. |
+| 1 | `SESSION-STARTUP-READING.3.2.7` | `pending` | Read Compiler.pm baseline lines 1042–2002 in bounded chunks. |
 
 ## Reading Ledger
 
@@ -710,7 +720,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | Twelve Perl files in full under `.3.2.1` and `.3.2.3`–`.3.2.5`; checkpoint-relevant scripts listed below. | Remaining 77 Perl paths and other first-party source/test/spec/fixture/tool inputs not explicitly listed as read. |
+| Codebase | **No** | Twelve Perl files in full under `.3.2.1` and `.3.2.3`–`.3.2.5`, plus Compiler.pm lines 1–1041 under `.3.2.6`; checkpoint-relevant scripts listed below. | Compiler.pm 1042–2002 and the other 76 not-yet-fully-read Perl paths; all other first-party inputs not explicitly listed as read. |
 | mdBook | **No** | `docs/linkedspec-book/src/SUMMARY.md`; `docs/linkedspec-book/src/development/local-ci-and-regression.md` 1897–1943 and 1988–2004. | All other chapter text, including the unread portions of that development chapter. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -896,6 +906,32 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   required checkpoint-storage maintenance stays within startup continuity; donor-policy adoption and product
   changes remain gated. The registry movement makes this leaf canonical, with an exact staged receipt before commit.
 
+### Compiler generation/state prefix and preceding canonical evidence at `.3.2.6`
+
+- Activated from clean `6c1234cc0fd3cb194c6d75314d86bfe05da104a0` with the prior canonical receipt promoted,
+  all nine commit doctrines PASS, empty message file, and no remaining job. Read Compiler.pm 1–260, 261–520,
+  521–780, and 781–1041 without truncation: 1,041 lines / 41,073 bytes, baseline-identical. Its 1042–2002
+  suffix remains `.3.2.7`; twelve whole Perl files and this partial thirteenth file are covered.
+- Reconciled generated-v2 plan/entry serialization, execution-only dependency-slot rows, invocation-local sinks,
+  enrichment and typed error forwarding, callback/parsed-entry diagnostics, CompilerState assembly/projection,
+  dependency validation, and parsed label/slot/root metadata with existing Knowledge. No new runtime defect.
+- The older identical-regex risk card still described an open finding despite its linked family's 2026-07-20
+  Perl admission and complete portable rollout. Its title/status and explicit resolution pointer now mark the
+  retained diagnosis as historical; the original evidence remains intact. The prior canonical run freshly
+  passed the 12-role Perl duplicate-slot consumer. Public semantics and book teaching did not change.
+- Preceding `.3.2.5` default canonical CI passed, including the mandatory backend admission consumers,
+  relocation/process containment, primary CLI 66/66 in both option environments, and Phase 0 1,032/1,032 in
+  1,121 wall seconds. Separately opt-in local gates and recurring matrices were not enabled. The staged receipt
+  bound base `4f311a9e` to SHA-256 `775ebdf60905a47393731db24c50de74c1037d77fe32d6eca8abc3e8b5d9a12a`
+  and was promoted to `6c1234cc`. No tracked candidate changed while that run was active.
+- Existing macOS launch-latency Knowledge now preserves the 2026-09-06 / macOS 26.6.2 compiler `dlopen`/`fcntl`
+  and test `_dyld_start` samples, eventual passing execution, and the older controlled conclusion's OS-specific
+  boundary. Exact sample hashes were verified before deleting only the two consumed reports; both paths are
+  absent. No recovery/purge, target cleanup, re-signing, or trust bypass was used.
+- Supporting reading additionally covers tools/verification_receipt.sh 1–150 (EOF) and the two Cargo-child
+  call sites in rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs 2072–2115 and 2217–2252.
+  These bounded supporting reads do not mark the remaining Rust file or tool lane complete.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -910,7 +946,7 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 - No runtime behavior was verified by reading. No new public explanation is warranted by this checkpoint;
   substantive codebase/book drift, if found during `.3`/`.4`, must receive an owning leaf before remediation.
 - Batch history: `.2` is resumed item 1/100 at `d6d3c890`; `.6` is item 2/100 at `03d692c1`; `.3.1` is item 3/100
-  at `942c6138`; `.3.2.1` is item 4/100 at `c0eb1acf`; `.3.2.2` is item 5/100 at `094e05bc`; `.3.2.3` is item 6/100 at `27fd160f`; `.3.2.4` is item 7/100 at `4f311a9e`; `.3.2.5` is item 8/100 once committed. `.1` belongs
+  at `942c6138`; `.3.2.1` is item 4/100 at `c0eb1acf`; `.3.2.2` is item 5/100 at `094e05bc`; `.3.2.3` is item 6/100 at `27fd160f`; `.3.2.4` is item 7/100 at `4f311a9e`; `.3.2.5` is item 8/100 at `6c1234cc`; `.3.2.6` is item 9/100 once committed. `.1` belongs
   to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -961,6 +997,8 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.4` | Four exact core chunks/baseline identity; existing Knowledge; scanner/helper/descriptor/public controls | PASS reading; CONFIRMED regex-tail defect, repair `.9` pending; all probes consumed. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.4` | Required pre-commit Knowledge and all nine doctrines; post-commit pointer; clean status/empty brief | PASS at `4f311a9e`. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.5` | Exact full reading/baseline identity; required rollover; independent suffix/count/SHA-256 proof | PASS; final canonical proof required before landing ADR 0102 capacity step. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.5` | Exact default canonical gate; staged receipt; all nine commit doctrines; promoted receipt; empty brief/clean status | PASS at `6c1234cc`; Phase 0 1,032/1,032 and primary CLI 66/66 twice. No pending job. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.6` | Four exact compiler chunks/baseline identity; Knowledge reconciliation; prior receipt and dated sample review; exact two-file cleanup | PASS reading/evidence; final focused memory/doctrine/Knowledge/history and staged checks precede landing. |
 
 ## Commit Log
 
@@ -975,6 +1013,7 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `SESSION-STARTUP-READING.3.2.3` | `SESSION-STARTUP-READING.3.2.3 - read resolution and bootstrap adapters` | Ten unique Perl files read; stale diagnostic defect proved and repair `.8` owned. |
 | `SESSION-STARTUP-READING.3.2.4` | `SESSION-STARTUP-READING.3.2.4 - read bootstrap grammar core` | Eleven unique Perl files read; attached-tail regex defect proved and `.9` owned. |
 | `SESSION-STARTUP-READING.3.2.5` | `SESSION-STARTUP-READING.3.2.5 - read compiler state and preserve history` | Twelve Perl files read; required complete-record rollover and finite capacity ADR 0102. |
+| `SESSION-STARTUP-READING.3.2.6` | `SESSION-STARTUP-READING.3.2.6 - read compiler generation and state assembly` | Compiler prefix read; prior canonical/loader evidence and historical duplicate-slot resolution preserved. |
 
 ## Changelog
 
@@ -996,3 +1035,5 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   `.9` owns repair and `.3.2.5` is the next required reading leaf.
 - `2026-09-06`: `.3.2.5` completes compiler-state reading and required history rollover; ADR 0102 admits
   exactly one history member/manifest row under canonical verification. Next reading is `.3.2.6`.
+- `2026-09-06`: `.3.2.6` reads Compiler.pm 1–1041, records prior canonical/loader evidence, and links the
+  historical duplicate-slot card to its existing fix. Next reading is `.3.2.7`; codebase/book remain incomplete.

@@ -10,6 +10,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.6 — compiler prefix and dated CI evidence
+
+- Compiler generation preserves v2 plan rows while carrying execution-only dependency slots, entry selection,
+  invocation sinks, enrichment, and typed error forwarding. CompilerState still owns record assembly/projection.
+- The older duplicate-pattern risk was already fixed for ordered handlers; its dated card now points to that
+  admission. Current macOS samples locate a procedural-macro loader wait and a pre-main test wait; the older
+  controlled OS-specific classification is not generalized. The exact default canonical gate passed at 6c1234cc.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.5 — compiler-state reading and bounded history
 
 - CompilerState agrees with the existing three-state ownership and native outward-projection records; no new

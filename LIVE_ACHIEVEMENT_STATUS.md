@@ -10,15 +10,18 @@
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.5` reads compiler state and preserves history through required rollover/ADR 0102.
-  This is item 8/100; twelve Perl files read. Codebase and book reading remain incomplete.
+- `SESSION-STARTUP-READING.3.2.6` reads Compiler.pm lines 1–1041 and preserves prior canonical/loader evidence.
+  This is item 9/100; twelve full Perl files plus the compiler prefix read. Codebase and book remain incomplete.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.6` and read Compiler.pm baseline lines 1–1041. Complete required
+- Activate `SESSION-STARTUP-READING.3.2.7` and read Compiler.pm baseline lines 1042–2002. Complete required
   reading and policy review, then repairs `.7`–`.9` before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.6` reads the compiler prefix and preserves exact prior CI/loader
+  evidence; the historical duplicate-slot card points to its fix, and `.3.2.7` reads the suffix next.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.5` reads compiler state; exact required rollover preserves history
   and ADR 0102 admits one finite member/manifest row. Next reading is `.3.2.6`.
@@ -69,10 +72,6 @@
 
 - `2026-09-04` — `.19.6.1` implements Lua write vivification; 436 assertions per ABI, full 178x2 integration,
   CLI 66x2, corpus 105/105, storage, 105 neutral mutations, mdBook, doctrines, and canonical CI pass.
-
-- `2026-09-03` — `.19.5.2` implements Julia `map_leaves!`; focused 496, complete package/CLI/corpus, storage 22/5,
-  167 + 592 neutral mutations, all doctrines, mdBook, and receipt-bound canonical CI pass; ADR `0100` admits
-  change-history segment `4986` at exact finite 27/26 routing capacity.
 
 ## History
 
