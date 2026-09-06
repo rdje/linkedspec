@@ -63,3 +63,11 @@ helper or outward API. [[progressive-span-dispatch-public-no-drift]] owns the co
 - Historical RED: [[perl-progressive-span-dispatch-dormant-red]].
 - Neutral model: [[progressive-span-dispatch-audit-plan]].
 - Owner: [[FUTURE-PARITY-BACKLOG.14]] `.14.6.2.2`.
+
+The September 6 `.3.2.39` checkpoint completes Policy and Runtime source reading. Static validation scans
+canonical progressive events after the rule table exists. Runtime requires the exact host option field set,
+creates a fresh invocation with an empty active chain, clones caller grant/ceiling data, and localizes the
+descriptor slot while preserving scalar/list/void callback context. Actual dispatch lazily obtains live
+recognition-transaction state and delegates to the core. The managed authority/carrier pair passes 138 tests.
+Calculated core ceilings have the separately measured enforcement gap in
+[[perl-progressive-resource-ceiling-enforcement-gap]]; passing carrier equivalence does not close `.37`.

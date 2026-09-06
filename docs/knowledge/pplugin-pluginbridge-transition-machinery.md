@@ -6,7 +6,9 @@ answers:
   - "should new code use plugin dispatch"
   - "what is the plugin modernization status"
   - "is LinkedSpec still a plugin-hosting framework"
-date: 2026-06-12
+  - "does registered Perl plugin dispatch load the legacy PPlugin runtime"
+  - "where do Perl plugin replacement and bulk registration live"
+date: 2026-09-06
 status: current
 tags: [architecture, plugin, legacy, modernization]
 evidence: "ARCHITECTURE_STATE.md §Current Strategic Judgments: 'LinkedSpec is no longer best understood as a plugin-hosting framework'; PLUGIN-MODERNIZATION tree completed (5 leaves, 2026-05-17)"
@@ -46,3 +48,34 @@ hash/list-context parity for the syntax smoke; it does not broaden Lua into lega
 runtime execution.
 
 Related: [[ownerdispatch-shared-seam]], [[lua-flat-array-hash-splicing]].
+
+## September 6 bridge and registry ownership
+
+Reading checkpoint `.3.2.39` covers PluginBridge 1–199 and PluginRegistry 1–130. The bridge validates
+bare explicit names separately from AUTOLOAD suffix normalization, requires its injected fallback callbacks,
+and resolves registered CODE handlers before lazy legacy loading. OwnerDispatch preserves successful caller
+error state. PluginRegistry owns process-local state, replacement, sorted bulk registration, lookup/presence,
+and clear counts. Bulk registration iterates entries; this does not promise transactional rollback.
+
+An isolated public-facade control verifies two registrations, argument-preserving dispatch, callback lookup,
+replacement, two-entry clear, invalid-name rejection, preserved caller error state, and no PPlugin load.
+Legacy fallback execution and the full Phase 0 suite are not rerun in this reading checkpoint.
+
+```sh
+bash tools/project_data_run.sh env PERL5LIB= perl -Iperl -MLinkedSpec -MJSON::PP - <<'PERL'
+use strict;use warnings;my $j=JSON::PP->new->canonical;
+LinkedSpec::clear_registered_plugins();
+die 'legacy eagerly loaded' if exists $INC{'PPlugin.pm'};
+my $count=LinkedSpec::register_plugins({reading_probe=>sub{ return join(':',@_) },reading_other=>sub{0}});
+die 'bulk count' unless $count==2;
+$@="saved-reading-error\n";my $value=LinkedSpec::run_plugin('reading_probe','a','b');
+die 'dispatch/error state' unless $value eq 'a:b' && $@ eq "saved-reading-error\n";
+my $cb=LinkedSpec::get_plugin('reading_probe');die 'lookup' unless ref($cb) eq 'CODE' && $cb->('c') eq 'c';
+LinkedSpec::register_plugin('reading_probe',sub{'replaced'});
+die 'replacement' unless LinkedSpec::run_plugin('reading_probe') eq 'replaced';
+die 'legacy loaded by registered dispatch' if exists $INC{'PPlugin.pm'};
+my $removed=LinkedSpec::clear_registered_plugins();die 'clear count' unless $removed==2;
+my $ok=eval{LinkedSpec::register_plugin('invalid-name',sub{1});1};die 'invalid name accepted' if $ok;
+print $j->encode({bulk_count=>$count,dispatch=>$value,lookup=>'c',replacement=>'replaced',removed=>$removed,invalid_name=>'rejected',legacy_loaded=>JSON::PP::false,error_state=>'preserved'}),"\n";
+PERL
+```

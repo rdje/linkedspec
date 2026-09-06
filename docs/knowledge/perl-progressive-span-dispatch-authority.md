@@ -69,3 +69,16 @@ and completed 9/9 public no-drift boundary in
 - Private carriers: [[perl-progressive-span-dispatch-carriers]].
 - Typed positions/spans: [[perl-typed-source-location-values]].
 - Owner: [[FUTURE-PARITY-BACKLOG.14]] `.14.6.2.1`.
+
+## September 6 complete authority reading and enforcement exception
+
+Checkpoint `.3.2.39` reads ProgressiveSpanDispatch 1–937 plus Policy 1–58 and Runtime 1–172.
+The core stores registry/invocation/view state behind object identity, copies source text, validates exact
+entry/span shapes, bounds same-source views, rebases scalar coordinates, and invalidates views after callbacks.
+It checks transaction exclusion, registry/top-rule permission, capability/policy intersection, shared remaining
+steps, cancellation/deadline, and decreasing-span/depth/call limits. Detached plain aggregates preserve booleans
+and reject cycles, live-looking keys, and unsupported references. These checks do not establish enforcement of
+every computed numeric or source-detail ceiling: [[perl-progressive-resource-ceiling-enforcement-gap]] records
+six controls and `SESSION-STARTUP-READING.37` owns the repair. Existing source-safe/bounded language must be read
+with that measured exception. The managed authority and carrier suites pass 138 tests; neutral proof is
+9/9/116 plus public 6/12/10/60. The other five runtime routes are not rerun.

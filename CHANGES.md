@@ -10,6 +10,11 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.39 — read progressive authority and own ceiling enforcement gaps
+
+Read 1,496 lines / 52,208 bytes; exact baseline, 138 progressive tests, and neutral/public proof pass.
+Public plugin controls pass; six progressive controls root ceiling enforcement gaps now repair-owned by .37.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.38 — read MCP runtime and track validation order drift
 
 Read 1,484 lines / 51,303 bytes; exact baseline, 31 MCP/nine numeric tests, and neutral 55-case/18-helper proof pass.

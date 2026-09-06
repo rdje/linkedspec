@@ -154,3 +154,11 @@ final row `.14.8`.
 
 Accepted architecture: ADR `0080`. Related: [[staged-linked-parsing-architecture]], [[staged-parser-registry-dispatch-contract]],
 [[typed-source-location-cursor-algebra-direction]], and [[recognition-transaction-public-closeout]].
+
+## September 6 measured Perl exception
+
+[[perl-progressive-resource-ceiling-enforcement-gap]] qualifies the universal ceiling and diagnostic-safety
+claims above. Six private-authority controls show that Perl computes minima but accepts an over-ceiling cost
+and result, and copies an over-ceiling raw child diagnostic containing source text. The shared remaining-budget
+negative control still rejects. `SESSION-STARTUP-READING.37` owns authority review, bounded repairs, and
+six-runtime/public reconciliation; historical admission and the passing finite fixtures do not close it.

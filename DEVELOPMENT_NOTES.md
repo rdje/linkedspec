@@ -10,6 +10,11 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.39 — computed progressive ceilings do not prove enforced child boundaries
+
+Perl checks shared remaining steps but omits effective step/result-node bounds and copies raw over-ceiling child diagnostics.
+Six controls qualify the passing suites; .37 owns resource and source-detail review, repairs, and recurring closeout.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.38 — MCP method and version errors precede complete metadata validation
 
 Perl decoded and stdio routes agree on six competing-error controls, but their method/version-first order differs from ADR 0055.
