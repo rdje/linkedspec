@@ -38,8 +38,9 @@ collection/reducer, and hash helper calls moved to the slot-aware AST call dispa
 `fluent_chain` value chains moved to AST traversal in `PERL-ACTIONIR-AST-MIGRATION.3.3`;
 see `docs/knowledge/perl-actionir-ast-fluent-chain-lowering.md`. Nested unsupported call
 nodes inside AST-lowered values from known helper families now report unresolved-helper
-diagnostics through `PERL-ACTIONIR-AST-MIGRATION.3.2.3`; unknown call names remain
-future/function resolution territory. Typed return payloads moved to AST traversal in
+diagnostics through `PERL-ACTIONIR-AST-MIGRATION.3.2.3`. Later registered-function execution and unknown
+value-call diagnostics are owned by [[terse-user-function-value-call-execution]] and
+[[perl-actionir-fallback-boundary-audit]]. Typed return payloads moved to AST traversal in
 `PERL-ACTIONIR-AST-MIGRATION.3.4`; see
 `docs/knowledge/perl-actionir-ast-return-payload-lowering.md`.
 

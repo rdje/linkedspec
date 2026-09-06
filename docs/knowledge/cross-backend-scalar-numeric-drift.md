@@ -1,6 +1,6 @@
 ---
 id: cross-backend-scalar-numeric-drift
-title: Scalar numeric helper drift is resolved by one executable six-runtime contract
+title: Scalar numeric contract admission and the later Unicode-digit exception
 answers:
   - "do scalar numeric helpers behave identically across Perl Rust Dart and Julia"
   - "are booleans valid numeric helper inputs"
@@ -32,5 +32,8 @@ Before the neutral contract, scalar numeric edge behavior differed:
 
 The rollout adopted the versioned neutral scalar contract (`.4.3.3.1.1`), aligned Perl/Rust (`.2`) and Dart/Julia
 (`.3`), then implemented Lua without delegating syntax, modulo, rounding, or invalid policy to `tonumber`, `%`, or
-host truthiness (`.4`). The composed checker now proves all 55 exact cases across all six runtime variants.
+host truthiness (`.4`). The composed checker covers the 55 exact admitted cases across all six runtime variants. The September 6
+startup finding [[scalar-numeric-unicode-digit-oracle-drift]] exposes a further input-language/coercion
+disagreement outside that finite fixture; `SESSION-STARTUP-READING.20` owns authority review and repair.
+Passing the original fixture does not establish equivalence for every accepted numeric string.
 Aggregate reducers and receiver forms stay in their already-separated downstream leaves.

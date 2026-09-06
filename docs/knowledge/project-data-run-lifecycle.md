@@ -44,3 +44,7 @@ deletion boundary; it retains explicit failures. `--purge-failed` is the separat
 retained failures. A live or reused PID/group is a conservative retain. Legacy, malformed, mismatched-group, and
 interrupted `starting` markers never authorize automated deletion. Related facts:
 [[project-data-env-initializer]], [[project-data-workflow-routing]], [[project-data-ssd-storage-locality]].
+
+September 6 startup evidence in [[project-data-liveness-permission-denial]] qualifies these original
+lifecycle guarantees: denied liveness inspection is not absence, and a later group-setup warning needs
+establishment evidence. `SESSION-STARTUP-READING.7` owns the repair and verification before recovery/purge.

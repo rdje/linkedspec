@@ -40,3 +40,7 @@ Separate traps prove TERM reaches both direct child and descendant before scratc
 
 Related facts: [[project-data-run-lifecycle]], [[project-data-migration-reconciliation]],
 [[project-data-ssd-storage-locality]].
+
+September 6 startup evidence in [[project-data-liveness-permission-denial]] qualifies these original
+lifecycle guarantees: denied liveness inspection is not absence, and a later group-setup warning needs
+establishment evidence. `SESSION-STARTUP-READING.7` owns the repair and verification before recovery/purge.

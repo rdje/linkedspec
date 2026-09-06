@@ -10,6 +10,11 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.27 — compatibility bridges and finite numeric proof
+
+AST dispatch enters the guarded compatibility catalog; scalar Numeric calls and inline aggregate reducers remain distinct paths.
+The 55-case fixture leaves .20 open; successful map generation with a setpgid warning adds establishment verification to .7.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.26 — root kind selects the traversal family
 
 Hash roots recurse through hashes and array roots through arrays; opposite-family containers remain leaves.

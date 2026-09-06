@@ -489,12 +489,20 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.26 - read receiver chains and reconcile tree dispatch`
 
 - ID: `SESSION-STARTUP-READING.3.2.27`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 25: 1,031 lines/fragments, 64,411 bytes.
   Scope: `perl/LinkedSpec/ActionIR/MethodLowering.pm` lines 4912–5942.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact range/full-file identity; existing AST/fallback/retirement and numeric Knowledge;
+    managed scalar numeric suite and public descriptor controls; observed group-setup warning/source and
+    child PID/PGID control; memory/Knowledge/history and staged review.
+  Canonical trigger: `none` — source-reading and existing Knowledge reconciliation only.
+  Verification: Exact baseline identity and 1,031-line / 64,411-byte coverage pass. The scalar numeric suite
+    passes nine top-level tests; four public descriptors distinguish malformed/unknown and registered calls
+    with zero raw dependency. Seven Knowledge records reconcile, including `.7` group-establishment evidence;
+    required focused checks/hooks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.27 - read helper fallback and qualify numeric evidence`
 
 - ID: `SESSION-STARTUP-READING.3.2.28`
   Status: `pending`
@@ -822,6 +830,10 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     results must retain scratch. Cover wrapper, child, group, normal drain, recovery, and retained-failure purge
     with non-destructive deterministic EPERM/ESRCH tests and a live restricted-process control. Preserve positive
     dead-run cleanup, signal forwarding, PID-reuse conservatism, same-volume storage, and valid marker ownership.
+    Verify child process-group establishment before trusting the recorded group identity: `.3.2.27` observed
+    a child setpgid EPERM warning followed by successful generation. Its original PGID was not captured;
+    a subsequent PID/PGID control matches. Distinguish benign parent/child setup races from failed group
+    establishment with controlled evidence, and retain scratch if the group identity cannot be established.
     Update Toolbox/book/KM claims, run focused lifecycle/storage/dependent checks and exact canonical proof.
     Split into bounded children before implementation if needed; reading prerequisites remain mandatory.
   Verification: `pending`
@@ -1367,7 +1379,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.27` | `pending` | complete MethodLowering baseline lines 4912–5942. |
+| 1 | `SESSION-STARTUP-READING.3.2.28` | `pending` | complete MethodLowering baseline lines 5943–7245. |
 
 ## Reading Ledger
 
@@ -1378,7 +1390,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.27`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.28`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
 | mdBook | **No** | `.31` records fourteen complete book sources plus the two earlier local-CI ranges: 640,041 bytes of disjoint coverage. | Remaining 1,316,541 source bytes, formal chapter checkpoints, and rendered alignment under `.4`. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -2315,6 +2327,48 @@ PERL
 - No runtime/book edits or new runtime defect are claimed. Codebase/book remain No, and `.3.2.27`
   continues the source at 4912–5942; previously owned repairs retain their prerequisite sequence.
 
+### Helper fallback, numeric dispatch, and bounded contract evidence at `.3.2.27`
+
+- Activated from clean `a32cf42245dc97ec31d4e8f6b89d10c658bf2718` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Re-reviewed 4912–5140, 5141–5390, 5391–5625, 5626–5810, and 5811–5942 without truncation.
+  Whole-file baseline identity and 1,031 lines / 64,411 bytes agree with `.31`'s forward reading.
+- Read AST-versus-compatibility entry dispatch and trace decisions, rule/gap/source/capture helpers, string
+  transforms and concatenation, scalar Numeric calls versus inline aggregate reducers, string predicates,
+  emptiness/read/collection paths, and the slice prefix. The slice body continues in `.3.2.28`.
+- Existing AST value/call/aggregate/fallback, helper-retirement, scalar-numeric admission, and Unicode-digit
+  evidence were read. Four existing cards now distinguish completed function/statement migrations from
+  earlier milestones, retired spellings from current constructors/bindings, and the 55-case numeric
+  admission from the later `.20` disagreement outside that fixture. Previously owned `.16`/`.17` gaps
+  remain open; no broad helper correctness or resolved Unicode-digit defect is claimed.
+- Managed `PERL5LIB= prove -Iperl t/scalar_numeric_contract.t` passes nine top-level tests. Public descriptors
+  for malformed substr/count and an unknown value call each report one unresolved helper with zero raw
+  dependency; the registered value call reports zero of both. The exact successful command follows.
+
+```bash
+bash tools/project_data_run.sh env PERL5LIB= perl -Iperl -MLinkedSpec -MJSON::PP - <<'PERL'
+use strict;use warnings;
+for my $c(
+ ['substr_arity','return(substr("abc"))',1],
+ ['count_arity','return(count(1,2))',1],
+ ['unknown_value','return(unregistered_probe("x"))',1],
+ ['registered_value','return(normalize(" x "))',0]
+){
+ my $spec="fn normalize(value) { return(trim(value)) }\nTop::\n /x/ -> Top { $c->[1] }\n";
+ my %ctx;my $d=LinkedSpec::Get(\$spec,return_descriptor=>1,runtime_ctx_ref=>\%ctx);
+ die "$c->[0] descriptor" unless ref($d) eq 'HASH';
+ my $m=$d->{spec}{Top}{meta}{action_rewriter};my $raw=$m->{raw_perl_dependency_count}//0;my $unresolved=$m->{unresolved_helper_count}//0;
+ print JSON::PP->new->canonical->encode({case=>$c->[0],raw=>$raw,unresolved=>$unresolved}),"\n";
+ die "$c->[0] metadata mismatch" unless $raw==0 && $unresolved==$c->[2];
+}
+PERL
+```
+
+- Managed map generation emitted child setpgid EPERM, then completed successfully. A subsequent child
+  PID/PGID control matches; the original final group is unobserved. Wrapper 308–314 assumes group identity
+  from the child PID. Existing `.7` now owns establishment verification; its Knowledge card preserves exact
+  warning/control and unresolved timing, with the two older lifecycle records linked to the limitation.
+- Source and public book remain unchanged. Codebase/book remain No; `.3.2.28` owns 5943–7245.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -2342,7 +2396,8 @@ PERL
   `.3.2.23` is item 27/100 at `2c398b92`;
   `.3.2.24` is item 28/100 at `d392ad2b`;
   `.3.2.25` is item 29/100 at `85167df3`;
-  `.3.2.26` is item 30/100 once committed.
+  `.3.2.26` is item 30/100 at `a32cf422`;
+  `.3.2.27` is item 31/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -2437,6 +2492,7 @@ PERL
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.24` | Exact range/full-file identity; signature/retirement Knowledge; variadic function suite; public mixed-path read; focused continuity | PASS 66 tests and error-free one result; required staged gates precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.25` | Exact range/full-file identity; function/callable Knowledge; eight Get/source/descriptor controls; focused continuity | PASS diagnostic controls; caller-local shadowing reproduced and repair .32 owned; required staged gates precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.26` | Exact range/full-file identity; block/receiver/traversal Knowledge; AST parser suite; three public root controls; focused continuity | PASS 23 tests and hash/array/scalar controls; required staged gates precede landing. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.27` | Exact range/full-file identity; AST/fallback/retirement/numeric Knowledge; scalar numeric suite; four public descriptors; focused continuity | PASS nine tests and four expected diagnostic counts; known Unicode-digit repair remains open; required gates precede landing. |
 
 ## Commit Log
 
@@ -2473,6 +2529,7 @@ PERL
 | `SESSION-STARTUP-READING.3.2.24` | `SESSION-STARTUP-READING.3.2.24 - read function signatures and statement lowering` | Function signatures and guarded statement bridges read; four historical Knowledge records reconciled. |
 | `SESSION-STARTUP-READING.3.2.25` | `SESSION-STARTUP-READING.3.2.25 - read value calls and own caller shadowing repair` | Value and function-call dispatch read; eight controls root-cause caller-local shadowing and own repair .32. |
 | `SESSION-STARTUP-READING.3.2.26` | `SESSION-STARTUP-READING.3.2.26 - read receiver chains and reconcile tree dispatch` | Block and receiver dispatch read; three traversal records distinguish original milestones from current shared dispatch. |
+| `SESSION-STARTUP-READING.3.2.27` | `SESSION-STARTUP-READING.3.2.27 - read helper fallback and qualify numeric evidence` | Helper fallback and numeric/string/collection prefix read; four AST/numeric Knowledge records qualified. |
 
 ## Changelog
 
@@ -2538,3 +2595,5 @@ PERL
   existing execution Knowledge is qualified, with `.3.2.26` next.
 - `2026-09-06`: `.3.2.26` reads block/receiver/tree dispatch, validates 23 AST tests and three root controls, and
   reconciles existing traversal Knowledge; `.3.2.27` is next.
+- `2026-09-06`: `.3.2.27` reads helper fallback and numeric/string/collection paths, passes nine numeric tests and
+  four descriptor controls, and qualifies existing AST/numeric Knowledge; next `.3.2.28`.

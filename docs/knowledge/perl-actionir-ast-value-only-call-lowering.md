@@ -20,10 +20,11 @@ call node's source text for covered helper families, recursively materializes co
 argument AST nodes, and then invokes the existing Perl helper catalog through the
 explicit compatibility bridge with already-lowered argument expressions. Unsupported
 nested call arguments from known helper families now report through the `.3.2.3`
-unresolved-helper sentinel path. Unknown call names remain future/user-function
-territory until their grammar and resolution are owned.
+unresolved-helper sentinel path. Registered user functions subsequently gained value/standalone execution;
+unknown value calls use the same diagnostic boundary. See [[terse-user-function-value-call-execution]] and
+[[perl-actionir-fallback-boundary-audit]].
 
-The covered `.3.2.1` families are scalar/string value helpers, string predicates,
+The original `.3.2.1` families were scalar/string value helpers, string predicates,
 `concat`, `coalesce`, `coalesce_nonempty`, scalar-argument numeric helpers, and explicit
 numeric comparison helpers (`num_eq`, `num_ne`, `num_gt`, `num_ge`, `num_lt`, `num_le`).
 Numeric word aliases such as `add`/`mul` canonicalize to their `num_*` helper names
@@ -33,7 +34,9 @@ This `.3.2.1` leaf deliberately did not claim aggregate-wrapper, collection, red
 hash, or symbol-slot helper semantics. Those families are now covered by
 `PERL-ACTIONIR-AST-MIGRATION.3.2.2`; see
 `docs/knowledge/perl-actionir-ast-aggregate-call-lowering.md`. Legacy wrapper aliases
-such as `scalar(...)`, `array(...)`, and `hash(...)` remain deprecated compatibility
-syntax per ADR 0007, not the canonical destination surface. Receiver-dot `fluent_chain`
+were transitional at this milestone. The later retirement in [[terse-helper-retirement-no-drift-closeout]]
+removes `scalar(...)` and `concat(...)`; current authoring uses bare scalar reads and `cat(...)`.
+`array(...)` and `hash(...)` remain current constructors subject to their argument contracts.
+Receiver-dot `fluent_chain`
 forms are now covered by `PERL-ACTIONIR-AST-MIGRATION.3.3`; see
 `docs/knowledge/perl-actionir-ast-fluent-chain-lowering.md`.

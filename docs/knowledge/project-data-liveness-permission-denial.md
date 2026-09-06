@@ -7,6 +7,8 @@ answers:
   - can restricted process inspection delete live scratch
   - is managed recovery safe when kill zero returns permission denied
   - which task owns permission denied liveness repair
+  - why did managed generation report child setpgid operation not permitted
+  - does the run wrapper verify child process group establishment
 date: 2026-09-06
 status: confirmed defect; repair pending under SESSION-STARTUP-READING.7
 tags: [storage, cleanup, process, liveness, permissions, sandbox, defect]
@@ -44,3 +46,23 @@ The existing `tools/test_project_data_lifecycle.sh` (441 lines reviewed) exercis
 descendant cases, but has no denied-inspection case. Its previous passes do not cover this distinction.
 
 Related: [[project-data-descendant-liveness-gap]], [[project-data-run-lifecycle]].
+
+## Process-group setup warning — September 6 follow-up
+
+During `SESSION-STARTUP-READING.3.2.27`, managed Knowledge-map generation emitted
+`child setpgid (22263 to 22263): Operation not permitted`, then completed with exit 0 and the expected
+968 facts / 8,102 keys. This historical count describes that generation only. The original child's PGID
+was not captured, so this warning does not prove a mismatched group or unsafe cleanup.
+
+`tools/project_data_run.sh:308` enables monitor mode, launches the command in the background, and
+310–314 record `$!` as both child PID and process-group ID with no independent establishment check.
+A subsequent current-process control reports matching PID/PGID 27725 and exits 0:
+
+```bash
+bash tools/project_data_run.sh env PERL5LIB= perl -MJSON::PP -e 'print JSON::PP->new->canonical->encode({pid=>$$,pgid=>getpgrp(0),group_matches_pid=>getpgrp(0)==$$?1:0}),qq{\n}'
+```
+
+`SESSION-STARTUP-READING.7` now includes group-establishment verification and controlled failure coverage.
+The denied child-side setup attempt is observed; its kernel/parent-child timing cause and the original final
+group identity remain unestablished. Do not infer either a failed group or complete lifecycle correctness from
+the successful command. The repair must distinguish a benign setup race from absent group establishment.

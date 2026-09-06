@@ -10,6 +10,11 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.27 — read helper fallback and qualify numeric evidence
+
+Read MethodLowering 4912–5942 (1,031 lines / 64,411 bytes); nine numeric tests and four descriptor controls pass.
+Reconcile AST/numeric evidence; extend .7 with the observed group-setup warning and unresolved establishment check.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.26 — read receiver chains and reconcile tree dispatch
 
 Read MethodLowering 3744–4911 (1,168 lines / 58,949 bytes); 23 AST tests and three public root controls pass.

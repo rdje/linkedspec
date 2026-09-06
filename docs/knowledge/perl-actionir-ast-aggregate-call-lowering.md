@@ -20,7 +20,11 @@ families from `LinkedSpec::ActionIR::AST` `call` nodes. The dispatcher rebuilds 
 helper-call surface from typed AST fields, then deliberately reuses the existing Perl
 helper catalog through the compatibility bridge so public output stays byte-compatible.
 
-Covered families include:
+The original `.3.2.2` migration covered the families below. Retired names in this historical inventory
+are not current authoring syntax; [[terse-helper-retirement-no-drift-closeout]] owns their later removal.
+[[perl-uniform-binding-runtime]] owns the subsequent single typed binding model.
+
+The milestone inventory was:
 
 - deprecated wrapper aliases: `scalar`/`s`, `array`/`a`, `hash`/`h`;
 - copy and flatten helpers: `array_copy`, `hash_copy`, `copy`, `flat`, `flat_array`,
@@ -36,14 +40,15 @@ Covered families include:
   `drop_keys`, `pick_keys`, `has_key`, `count_keys`, `sorted_keys`, `sorted_values`,
   entry/match map helpers.
 
-The key compatibility boundary is slot policy. Aggregate source slots stay symbol-shaped
-when the helper contract expects a working array/hash name, so `array(items)` continues
-to read `@items` and `hash(meta)` continues to read `%meta`. Quoted wrapper payloads stay
-literal constructor payloads, so `array("items")` does not alias `@items`.
+The migration preserved the then-existing aggregate symbol slots and quoted constructor boundaries.
+Current scalar-held aggregate values follow uniform binding; the old `@items`/`%meta` explanation is not
+an unconditional current storage rule. `array("items")` remains a literal constructor payload.
+Wrong-kind host-slot reads found during startup are separately owned in `SESSION-STARTUP-READING.17`.
 
 Follow-up status: `PERL-ACTIONIR-AST-MIGRATION.3.2.3` now diagnoses supported helper
 shapes that cannot lower cleanly through the unresolved-helper metadata channel.
 Receiver-dot `fluent_chain` traversal is now covered by
 `PERL-ACTIONIR-AST-MIGRATION.3.3`; see
 `docs/knowledge/perl-actionir-ast-fluent-chain-lowering.md`. Return-payload AST
-traversal (`.3.4`) and statement/control lowering remain pending.
+traversal subsequently landed at `.3.4`, and statement operators, helper calls, and block bodies at
+`.4.1`–`.4.3`; [[perl-actionir-ast-value-lowering-dispatcher]] links their completed owners.

@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **968** facts · **8102** question keys.
+> **968** facts · **8104** question keys.
 
 ## Questions → fact
 
@@ -2701,6 +2701,7 @@
 - "does the recursion guard affect legitimate consume-before-recurse recursion" -> [top-rule-recursion-forward-progress-guard](docs/knowledge/top-rule-recursion-forward-progress-guard.md) · 2026-08-09 · reverify: `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test integration_test top_rule_as_normal -- --nocapture && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle -- --nocapture`
 - "does the relocation process oracle keep project data on the repository filesystem" -> [repository-root-relocation-process-proof](docs/knowledge/repository-root-relocation-process-proof.md) · 2026-07-27 · reverify: `bash tools/test_repo_root_process_portability.sh && bash tools/test_project_data_workflow_routing.sh && bash tools/project_data_run.sh --list`
 - "does the root rule selection checker verify roadmap status" -> [root-rule-rollout-roadmap-projection](docs/knowledge/root-rule-rollout-roadmap-projection.md) · 2026-07-18 · reverify: `bash tools/run_python_project_data.sh tools/check_root_rule_selection_contract.py && rg -n 'ROADMAP.md|ROADMAP_V2.md' tools/check_root_rule_selection_contract.py capability_conformance/root_rule_selection_contract.json`
+- "does the run wrapper verify child process group establishment" -> [project-data-liveness-permission-denial](docs/knowledge/project-data-liveness-permission-denial.md) · 2026-09-06
 - "does the runtime input digest include a trailing newline" -> [perl-semantic-runtime-observation](docs/knowledge/perl-semantic-runtime-observation.md) · 2026-07-21 · reverify: `PERL5LIB= prove -Iperl t/semantic_index_perl_runtime_observation.t`
 - "does the rust variant terminate a no-consume recursive cycle or stack overflow" -> [top-rule-recursion-forward-progress-guard](docs/knowledge/top-rule-recursion-forward-progress-guard.md) · 2026-08-09 · reverify: `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test integration_test top_rule_as_normal -- --nocapture && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle -- --nocapture`
 - "does the same staged AST test run on PUC Lua and LuaJIT" -> [lua-staged-ast-enrichment-dormant-red](docs/knowledge/lua-staged-ast-enrichment-dormant-red.md) · 2026-08-27
@@ -7618,6 +7619,7 @@
 - "why did guarded project data recovery race a compiler descendant" -> [project-data-descendant-liveness-gap](docs/knowledge/project-data-descendant-liveness-gap.md) · 2026-07-26 · reverify: `bash -n tools/project_data_run.sh tools/test_project_data_lifecycle.sh && bash tools/test_project_data_lifecycle.sh && rg -n 'process_group_id|process_group_is_live|child_group_active|indeterminate' tools/project_data_run.sh`
 - "why did inline switch case labels differ from attached switch case labels" -> [terse-bare-read-value-position-gap](docs/knowledge/terse-bare-read-value-position-gap.md) · 2026-07-06 · reverify: `perl -Iperl -MLinkedSpec -e 'my $spec = qq{Top::\\n /x/ -> Done { set(kind, \"b\"); switch(kind) { case(\"a\") { return(\"bad\") } case(\"b\") { return(\"good\") } default { return(\"def\") } } }\\n\\nDone::\\n /[a-z]+/\\n}; my $p = LinkedSpec::Get(\\$spec); my $in=\"xhello\"; print $p->(\\$in), \"\\n\";'`
 - "why did lib_reader still have quoted or null fields after RUST-PARITY.7.3.4.1" -> [rust-statement-mutation-helpers](docs/knowledge/rust-statement-mutation-helpers.md) · 2026-07-03 · reverify: `rg -n 'regex_subst_call_parts|split_statement_call_parts|rust_parity_7_3_4_4|lib_reader_sattribute|lib_reader_cattribute|Statement-style regex substitution' rust/linkedspec-runtime/src/engine.rs rust/linkedspec-runtime/tests/integration_test.rs tools/gen_oracle_corpus.pl docs/linkedspec-book/src docs/tasks/RUST-PARITY.md`
+- "why did managed generation report child setpgid operation not permitted" -> [project-data-liveness-permission-denial](docs/knowledge/project-data-liveness-permission-denial.md) · 2026-09-06
 - "why did migrated bare join values read an empty Perl array" -> [perl-uniform-binding-runtime](docs/knowledge/perl-uniform-binding-runtime.md) · 2026-07-12 · reverify: `prove -Iperl t/uniform_binding_contract.t t/actionir_ast_parser.t t/trace_actionir_compact_lowerers.t t/trace_actionir_method_lowering.t`
 - "why did migrating :name to bare break spec.spec and ebnf.spec output" -> [terse-bare-read-value-position-gap](docs/knowledge/terse-bare-read-value-position-gap.md) · 2026-07-06 · reverify: `perl -Iperl -MLinkedSpec -e 'my $spec = qq{Top::\\n /x/ -> Done { set(kind, \"b\"); switch(kind) { case(\"a\") { return(\"bad\") } case(\"b\") { return(\"good\") } default { return(\"def\") } } }\\n\\nDone::\\n /[a-z]+/\\n}; my $p = LinkedSpec::Get(\\$spec); my $in=\"xhello\"; print $p->(\\$in), \"\\n\";'`
 - "why did non hash scalar receiver need to avoid hash(name) coercion for map_leaves" -> [perl-hash-tree-traversal-callback-frame](docs/knowledge/perl-hash-tree-traversal-callback-frame.md) · 2026-07-08 · reverify: `perl -0777 -ne 'print $1 if /^```bash\\n(.*?)^```/ms' docs/knowledge/perl-hash-tree-traversal-callback-frame.md | bash`
@@ -8547,7 +8549,7 @@ _Native and generated diagnostic helpers share one event contract across five ba
 - **source:** [`docs/knowledge/cross-backend-diagnostic-output-drift.md`](docs/knowledge/cross-backend-diagnostic-output-drift.md)
 
 ### cross-backend-scalar-numeric-drift
-_Scalar numeric helper drift is resolved by one executable six-runtime contract_
+_Scalar numeric contract admission and the later Unicode-digit exception_
 
 - **answers:** do scalar numeric helpers behave identically across Perl Rust Dart and Julia | are booleans valid numeric helper inputs | what happens when numeric comparisons receive invalid input | are subtraction and division variadic | how does signed modulo behave across backends | why must Lua numeric helpers wait for a neutral contract | do scalar numeric helpers match across all six runtime variants
 - **date:** 2026-07-12 · **status:** current
@@ -13815,7 +13817,7 @@ _Final project-data residue census is empty after retained SSD use_
 ### project-data-liveness-permission-denial
 _Denied process inspection can misclassify live managed scratch as abandoned_
 
-- **answers:** why does project data list call a running process abandoned | does project data cleanup distinguish EPERM from ESRCH | can restricted process inspection delete live scratch | is managed recovery safe when kill zero returns permission denied | which task owns permission denied liveness repair
+- **answers:** why does project data list call a running process abandoned | does project data cleanup distinguish EPERM from ESRCH | can restricted process inspection delete live scratch | is managed recovery safe when kill zero returns permission denied | which task owns permission denied liveness repair | why did managed generation report child setpgid operation not permitted | does the run wrapper verify child process group establishment
 - **date:** 2026-09-06 · **status:** confirmed defect; repair pending under SESSION-STARTUP-READING.7
 - **evidence:** `SESSION-STARTUP-READING.6 at source d6d3c890c2e4aa49747879b2db227f2577db0fb6 launches a managed 45-second sleep. Same-run restricted list reports abandoned and permitted list reports live. Restricted kill-zero on wrapper 91044, child 91271, and group -91271 returns zero with errno 1 / EPERM; permitted ps shows both alive at 27 seconds and all three kill-zero probes succeed. The wrapper exits 0 and final permitted list finds zero leftovers. No recover/purge/deletion probe runs.`
 - **source:** [`docs/knowledge/project-data-liveness-permission-denial.md`](docs/knowledge/project-data-liveness-permission-denial.md)
