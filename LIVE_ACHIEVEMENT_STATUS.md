@@ -5,20 +5,23 @@
 - `SESSION-STARTUP-READING` owns the director-required reading prerequisite. Roadmap reading and exhaustive
   inventory `.3.1` are complete; codebase and mdBook reading remain incomplete. The director excluded `rgx`
   and its nested dependencies. Diagnosis `.6` confirms false-dead cleanup authorization on denied inspection;
-  `.7` owns cleanup repair; `.8` stale comparison; `.9` attached-tail regex truncation. All follow required
+  `.7` owns cleanup repair; `.8` stale comparison; `.9` regex tails; `.10` unbound AND_BCODE inputs. All follow required
   reading, before mutation setup. Feature and capability status are unchanged.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.7` completes Compiler.pm reading and indexes its phase/mode boundaries.
-  This is item 10/100; thirteen full Perl files read. Codebase and book remain incomplete.
+- `SESSION-STARTUP-READING.3.2.8` completes SpecEntry reading and owns unbound-input repair `.10`.
+  This is item 11/100; fourteen full Perl files read. Codebase and book remain incomplete.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.8` and read SpecEntry.pm baseline lines 1–600. Complete required
-  reading and policy review, then repairs `.7`–`.9` before Rust mutation configuration.
+- Activate `SESSION-STARTUP-READING.3.2.9` and read Validation.pm baseline lines 1–1320. Complete required
+  reading and policy review, then repairs `.7`–`.10` before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.8` reads SpecEntry, reconciles historical coupling cards,
+  and owns unbound AND_BCODE input repair `.10`; `.3.2.9` reads Validation.pm next.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.7` completes compiler reading and indexes existing pipeline
   phase/mode/error boundaries; `.3.2.8` reads SpecEntry.pm next.
@@ -68,10 +71,6 @@
 - `2026-09-04` — `.19.6.2` implements typed atomic Lua `map_leaves!`; 530 assertions per ABI, full 178x2
   integration, CLI 66x2, corpus 105/105, storage, unchanged 167 + 592 mutations, mdBook, doctrines, and exact
   receipt-bound canonical CI pass; parent `.19.6` closes.
-
-- `2026-09-04` — director-requested `RUST-DEPENDENCY-WARNING-ZERO.0` owns the reproducible 1,870-`pgen` /
-  26-`rgx-core` warning output and splits causal upstream/generated/direct cleanup plus zero-warning enforcement;
-  planning changes no source, pin, generator, CI, or runtime behavior.
 
 ## History
 

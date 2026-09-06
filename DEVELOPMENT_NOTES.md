@@ -10,6 +10,17 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.8 — explicit SpecEntry ownership and stale inputs
+
+- Current SpecEntry coordinates RuleIR, EmitContext, HandlerVariantEmitter, source capture, and runtime wrapping;
+  the old 918-line inline-builder inventory now carries an explicit historical boundary and current owner links.
+- AND_BCODE passes package REs/and_icode instead of caller lexicals. Emitter interception shows absent optional
+  fields normally and injected package values with identical explicit inputs. Public descriptor/source control
+  selects the blind-call loop, but no public result failure was measured. Repair `.10` must eliminate unbound
+  inputs without re-enabling obsolete self-matching; accepted I-block behavior remains part of its reconciliation.
+- Three exact chunks complete SpecEntry; supporting emitter reads are bounded in the task ledger. Next is
+  Validation.pm 1–1320, and implementation remains gated on complete codebase/book reading.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.7 — pipeline stop and return boundaries
 
 - The pipeline validates compiled descriptor state and staged/progressive/recursive/recognition policies before

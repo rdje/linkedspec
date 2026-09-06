@@ -35,7 +35,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -200,12 +200,20 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.7 - complete compiler pipeline reading`
 
 - ID: `SESSION-STARTUP-READING.3.2.8`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 6: 600 lines/fragments, 23,171 bytes.
   Scope: `perl/LinkedSpec/SpecEntry.pm` lines 1–600.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+    Reconcile the older SpecEntry coupling cards against current owners; preserve historical evidence explicitly.
+  Verification tier: `focused`
+  Focused checks: Exact reading chunks and baseline identity; Knowledge owner reconciliation and isolated handoff probes;
+    memory/doctrine/Knowledge/history checks; `git diff --check` and final staged review.
+  Canonical trigger: `none` — source-reading continuity only; no production, infrastructure, or public change.
+  Verification: Three untruncated chunks cover all 600 lines / 23,171 bytes, including EOF; baseline identity
+    passes. Existing owners reconcile and two older coupling cards now explicitly preserve historical scope.
+    Isolated HandlerIR probes confirm unbound AND_BCODE inputs; public descriptor/source control bounds the
+    finding without claiming a result failure. Repair `.10` is owned; focused continuity checks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.8 - read SpecEntry and own unbound input repair`
 
 - ID: `SESSION-STARTUP-READING.3.2.9`
   Status: `pending`
@@ -655,7 +663,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING.5`
   Status: `pending`
   Goal: Complete supplied-policy adoption/update comparisons and the startup alignment review before implementation.
-  Acceptance: Record local adoption evidence and applicable donor updates; own any required changes; confirm all three reading answers Yes, then route to repairs `.7`, `.8`, and `.9` before restoring RUST-MUTATION-TESTING.1.
+  Acceptance: Record local adoption evidence and applicable donor updates; own any required changes; confirm all three reading answers Yes, then route to repairs `.7`–`.10` before restoring RUST-MUTATION-TESTING.1.
   Verification: `pending`
   Commit: `pending`
 
@@ -712,11 +720,25 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: `pending` — `.3.2.4` owns diagnosis; no repair is claimed before mandatory reading.
   Commit: `pending`
 
+- ID: `SESSION-STARTUP-READING.10`
+  Status: `pending`
+  Goal: Eliminate unbound package-variable inputs from the AND_BCODE variant handoff.
+  Dependencies: `.3`, `.4`, `.5` required-reading completion; repairs `.7`–`.9` precede this repair.
+  Acceptance: Reproduce the isolated argument/global differential from `.3.2.8`; the builder must depend only
+    on explicit current inputs. Trace whether the legacy regex/I-block extension has any supported caller and
+    either remove its dead handoff or wire supported data at the correct semantic boundary. Preserve ADR 0010
+    entry-without-self-match and current blind-call/cursor ownership; do not enable parent regex matching merely
+    by forwarding the missing fields. Lock private-state independence and relevant live/generated AND controls,
+    reconcile accepted attached I-block behavior, update book/Knowledge as warranted, and commit before mutation
+    setup. Split scope before implementation if cross-backend/public contract work is required.
+  Verification: `pending` — `.3.2.8` proves the private handoff defect; no public result defect is yet claimed.
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.8` | `pending` | Read SpecEntry.pm baseline lines 1–600 in bounded chunks. |
+| 1 | `SESSION-STARTUP-READING.3.2.9` | `pending` | Read Validation.pm baseline lines 1–1320 in bounded chunks. |
 
 ## Reading Ledger
 
@@ -727,7 +749,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | Thirteen Perl files in full under `.3.2.1` and `.3.2.3`–`.3.2.7`; checkpoint-relevant scripts listed below. | Remaining 76 Perl paths and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | Fourteen Perl files in full under `.3.2.1` and `.3.2.3`–`.3.2.8`; checkpoint-relevant scripts listed below. | Remaining 75 Perl paths and all other first-party inputs not explicitly listed as read. |
 | mdBook | **No** | `docs/linkedspec-book/src/SUMMARY.md`; `docs/linkedspec-book/src/development/local-ci-and-regression.md` 1897–1943 and 1988–2004. | All other chapter text, including the unread portions of that development chapter. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -953,6 +975,27 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   records source-level evidence without a new runtime signoff claim. No new defect or public-book change.
 - Next exact reading is SpecEntry.pm 1–600 under `.3.2.8`. Required codebase/book reading remains incomplete.
 
+### SpecEntry reading and explicit handoff defect at `.3.2.8`
+
+- Activated from clean `dc7f5f090c078d0d3d05886eec371db89bfae625`; prior Knowledge/all nine doctrines,
+  post-commit pointer, zero-byte brief, clean status, and derived-map review passed. Read SpecEntry.pm
+  1–200, 201–400, and 401–600 without truncation: complete 600 lines / 23,171 bytes. Baseline identity
+  passes; fourteen whole Perl files are covered and 75 remain. No product source changed.
+- Reconciled RuleIR/EmitContext orchestration, HandlerIR selection/emission, preamble authority/recognition/gaps,
+  lexical working variables, labeled compile/runtime diagnostics, balanced recursion keys, and typed/control
+  exception routes. The two older SpecEntry coupling cards explicitly retain their original evidence as history
+  and point to current owners. This does not reopen already completed native backend rollout.
+- Isolated emitter interception proves the AND_BCODE branch reads package `REs`/`and_icode`, not caller lexicals
+  or explicit arguments. With normal package state both optional fields are absent; localized package state
+  injects both. The single-acode node retains its supplied argument. A public descriptor/source control selects
+  AND_BCODE and emits the blind child loop without the legacy match section. No public result failure is claimed.
+  `specentry-and-bcode-unbound-inputs` preserves exact controls and causal locations; `.10` owns repair after
+  reading and `.7`–`.9`, with entry-without-self-match and blind-call semantics required to remain correct.
+- Supporting HandlerVariantEmitter.pm reads are exactly 100–176 and 804–880 (baseline-identical); all other
+  emitter text remains unread under its existing children. Probe processes exited zero; no background job remains.
+- Next reading: Validation.pm 1–1320 under `.3.2.9`; codebase and book answers remain No. Public-book review
+  of the diagnosed handoff follows complete reading and repair; no behavioral change is made in this checkpoint.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -969,8 +1012,8 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 - Batch history: `.2` is resumed item 1/100 at `d6d3c890`; `.6` is item 2/100 at `03d692c1`; `.3.1` is item 3/100 at
   `942c6138`; `.3.2.1` is item 4/100 at `c0eb1acf`; `.3.2.2` is item 5/100 at `094e05bc`; `.3.2.3` is item 6/100 at
   `27fd160f`; `.3.2.4` is item 7/100 at `4f311a9e`; `.3.2.5` is item 8/100 at `6c1234cc`; `.3.2.6` is item 9/100 at
-  `f864f881`; `.3.2.7` is item 10/100 once committed. `.1` belongs to the prior checkpoint. This intermediate
-  boundary does not trigger a push.
+  `f864f881`; `.3.2.7` is item 10/100 at `dc7f5f09`; `.3.2.8` is item 11/100 once committed. `.1` belongs to the
+  prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
 
@@ -996,6 +1039,7 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   Read-only reading can continue; no source repair is authorized by the narrow startup-tracking exception.
 - `.8` owns confirmed stale bootstrap diagnostic state after `.7`; no primary parser corruption was demonstrated.
 - `.9` owns confirmed attached-tail regex truncation and public handler-compile failure; repair follows `.8`.
+- `.10` owns confirmed unbound AND_BCODE package-variable inputs; repair follows `.9` without inventing self-match semantics.
 
 ## Verification Log
 
@@ -1024,6 +1068,8 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.6` | Four exact compiler chunks/baseline identity; Knowledge reconciliation; prior receipt and dated sample review; exact two-file cleanup | PASS reading/evidence; final focused memory/doctrine/Knowledge/history and staged checks precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.6` | Required Knowledge/all nine doctrines; post-commit pointer; empty brief/clean status; derived-map review | PASS at `f864f881`; 944 facts / 7,996 keys. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.7` | Four suffix chunks/full-file identity; existing owner reconciliation; source-level Knowledge card | PASS reading; final focused memory/doctrine/Knowledge/history and staged checks precede landing. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.7` | Required Knowledge/all nine doctrines; post-commit pointer; zero-byte brief/clean status; derived-map review | PASS at `dc7f5f09`; 945 facts / 8,003 keys. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.8` | Three complete-file reading chunks; baseline identity; isolated HandlerIR differential; public descriptor/source control; historical Knowledge reconciliation | PASS reading/probes; final focused memory/doctrine/Knowledge/history and staged checks precede landing. |
 
 ## Commit Log
 
@@ -1040,6 +1086,7 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `SESSION-STARTUP-READING.3.2.5` | `SESSION-STARTUP-READING.3.2.5 - read compiler state and preserve history` | Twelve Perl files read; required complete-record rollover and finite capacity ADR 0102. |
 | `SESSION-STARTUP-READING.3.2.6` | `SESSION-STARTUP-READING.3.2.6 - read compiler generation and state assembly` | Compiler prefix read; prior canonical/loader evidence and historical duplicate-slot resolution preserved. |
 | `SESSION-STARTUP-READING.3.2.7` | `SESSION-STARTUP-READING.3.2.7 - complete compiler pipeline reading` | Thirteen whole Perl files read; source-level phase/mode boundaries indexed. |
+| `SESSION-STARTUP-READING.3.2.8` | `SESSION-STARTUP-READING.3.2.8 - read SpecEntry and own unbound input repair` | Fourteen whole Perl files read; historical coupling reconciled; explicit repair `.10` owns the private handoff defect. |
 
 ## Changelog
 
@@ -1065,3 +1112,5 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   historical duplicate-slot card to its existing fix. Next reading is `.3.2.7`; codebase/book remain incomplete.
 - `2026-09-06`: `.3.2.7` completes compiler reading and indexes its existing phase/mode boundaries.
   Thirteen Perl files are read; `.3.2.8` reads SpecEntry.pm next.
+- `2026-09-06`: `.3.2.8` completes SpecEntry reading, reconciles old coupling records, and owns unbound
+  AND_BCODE input repair `.10`; next reading is Validation.pm 1–1320 under `.3.2.9`.

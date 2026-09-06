@@ -10,6 +10,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.8 — read SpecEntry and own unbound input repair
+
+- Read all 600 lines / 23,171 bytes of SpecEntry; fourteen whole Perl files covered. Validation reading follows.
+- Reconciled two historical coupling cards. Isolated probes confirm AND_BCODE reads unbound package variables;
+  repair `.10` owns explicit-state cleanup with current entry semantics preserved. No public result defect claimed.
+- Focused proof: exact coverage/identity, descriptor/source and private controls, Knowledge, memory/doctrines/history,
+  and staged review. Runtime source and public book remain unchanged during required reading.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.7 — complete compiler pipeline reading
 
 - Read Compiler.pm lines 1042–2002; all 2,002 lines / 84,924 bytes now read, with thirteen whole Perl files covered.

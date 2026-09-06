@@ -1,6 +1,6 @@
 ---
 id: specentry-perl-coupling-inventory
-title: SpecEntry.pm Perl coupling inventory — every eval site, generated-code pattern, and LinkedRE dependency across 10 handler-variant builders
+title: SpecEntry current orchestration and historical Perl coupling inventory
 answers:
   - what Perl coupling points exist in SpecEntry.pm
   - how are handler variants built in SpecEntry
@@ -8,8 +8,10 @@ answers:
   - how does SpecEntry depend on LinkedRE::or
   - what Perl variables are assumed by generated handlers
   - how many handler variant builders are in SpecEntry
+  - which current owners does SpecEntry coordinate
+  - where does SpecEntry preserve compile and runtime handler diagnostics
 date: 2026-06-12
-status: current
+status: historical inventory with current owner reconciliation dated 2026-09-06
 evidence: |
   Full read of perl/LinkedSpec/SpecEntry.pm (918 lines). 10 variant builders
   dispatched from _build_handler_variants, each generating Perl source strings
@@ -18,6 +20,29 @@ reverify: |
   wc -l perl/LinkedSpec/SpecEntry.pm && grep -c 'sub _build_.*_variant\|sub _build_.*_body' perl/LinkedSpec/SpecEntry.pm
 source: docs/knowledge/specentry-perl-coupling-inventory.md
 ---
+
+## Current owner reconciliation — 2026-09-06
+
+`SESSION-STARTUP-READING.3.2.8` read all current 600 lines / 23,171 bytes, unchanged from the
+`baeb984e` baseline. The 918-line inventory below predates HandlerIR extraction. Its line numbers,
+inline-builder locations, old lifecycle gaps, and project-wide portability conclusion are historical;
+they must not be treated as new current defects without re-verification.
+
+The current module coordinates `RuleIR` collection, edge normalization, planning, and validation, then
+`RuleIR::EmitContext` action lowering. It passes explicit variant inputs to `HandlerVariantEmitter`, selects
+the planned available variant (or `_default`), and attaches emitted source/runtime closure and rule metadata.
+The preamble owns invocation source authority, recognition entry, optional gap activation, and one lexical
+working-variable scope. Runtime wrapping owns source-labeled compilation diagnostics, balanced recursion
+keys, execution diagnostics, and marked-control-error propagation. The JSON diagnostic branch retains
+`handler_json`; it does not construct a Perl runtime handler.
+
+Current semantics remain with [[handler-ir-design]], [[perl-rule-local-cursor-rollout-boundaries]],
+[[perl-generated-source-contract-v2]], [[perl-sparse-and-structural-slots]], [[runtimecontext-boundary]],
+and [[working-vars-no-strict-need-my-lexical]]. The older AND return-codegen issue is already resolved in
+[[and-return-edge-codegen-defect]]. Newly probed unbound AND_BCODE inputs are separately owned by
+[[specentry-and-bcode-unbound-inputs]] and repair `SESSION-STARTUP-READING.10`.
+
+Everything below is the preserved 2026-06-12 inventory.
 
 # SpecEntry.pm — Perl Coupling Inventory
 

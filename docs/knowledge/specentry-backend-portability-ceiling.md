@@ -1,17 +1,24 @@
 ---
 id: specentry-backend-portability-ceiling
-title: SpecEntry emits Perl source strings and eval()s them — this is the strongest backend-portability ceiling in the project
+title: Historical SpecEntry portability ceiling before HandlerIR and native backend rollout
 answers:
   - "why can't LinkedSpec target non-Perl backends"
   - "what is the biggest portability blocker"
   - "how does SpecEntry generate runtime handlers"
   - "what would it take to port LinkedSpec to another language"
 date: 2026-06-12
-status: current
+status: historical; HandlerIR extraction and native backend rollout supersede the project-wide blocker
 tags: [architecture, specentry, portability, eval, tech-debt]
 evidence: "ARCHITECTURE_STATE.md §Main Hotspots and Risks: 'SpecEntry still relies on generated Perl source plus eval; strongest backend-portability ceiling; still a likely long-term refactor target'"
 reverify: "grep -n 'backend-portability ceiling\|eval' ARCHITECTURE_STATE.md | head -3"
 ---
+
+**2026-09-06 reconciliation (`SESSION-STARTUP-READING.3.2.8`):** The original assessment below describes
+2026-06-12. Current SpecEntry delegates structural variant construction and emission to
+`HandlerVariantEmitter`; see [[handler-ir-design]] and [[specentry-perl-coupling-inventory]]. Its Perl runtime
+wrapper still compiles emitted Perl using `eval`, but this is not a current project-wide blocker to native
+Rust, Dart, Julia, or Lua implementations. Their admitted rule-local contract is indexed in
+[[rule-local-cursor-and-bare-edge-contract]]. The original proposal and evidence are preserved as history.
 
 `LinkedSpec::SpecEntry` compiles parsed rule entries into generated runtime handler code. It
 still assembles Perl source strings and `eval`s them — this is explicitly the "clearest
