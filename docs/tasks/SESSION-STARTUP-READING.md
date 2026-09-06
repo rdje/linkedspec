@@ -35,7 +35,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -112,12 +112,23 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.2 - partition remaining Perl reading`
 
 - ID: `SESSION-STARTUP-READING.3.2.3`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 1: 1,103 lines/fragments, 36,759 bytes.
   Scope: `perl/LinkedSpec/Resolver.pm` lines 1–223; `perl/LinkedSpec/SpecLoader.pm` lines 1–352; `perl/LinkedSpec/EntryRuleSelection.pm` lines 1–74; `perl/LinkedSpec/GeneratedSource.pm` lines 1–319; `perl/LinkedSpec/BootstrapSpec.pm` lines 1–135.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+    Investigate whether cached `spec_spec_result` survives a later unsuccessful diagnostic parse before
+    interpreting it as current-invocation metadata; use Get/descriptor and bootstrap probes before source tracing.
+  Verification tier: `focused`
+  Focused checks: Exact scoped reading and baseline identity; existing Knowledge-owner reconciliation;
+    managed Get/descriptor plus cached-bootstrap empty/positive comparison probes and consumer/source trace;
+    `bash scripts/check_memory_architecture.sh`; required pre-commit `bash scripts/check_doctrines.sh`;
+    both `tools/roll_document_history.pl --check` surfaces; `git diff --check`.
+  Canonical trigger: `none` — source-reading continuity only; no production or public behavior change.
+  Verification: Five complete files / 1,103 lines / 36,759 bytes read without truncation; baseline identity
+    preserved. Existing resolution/root-selection/generated-source/bootstrap contracts reconciled. Probes confirm
+    stale diagnostic comparison state; public Get still rejects malformed source. Repair `.8` and Knowledge own
+    the defect; no production repair or full-codebase claim.
+  Commit: `SESSION-STARTUP-READING.3.2.3 - read resolution and bootstrap adapters`
 
 - ID: `SESSION-STARTUP-READING.3.2.4`
   Status: `pending`
@@ -607,7 +618,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING.5`
   Status: `pending`
   Goal: Complete supplied-policy adoption/update comparisons and the startup alignment review before implementation.
-  Acceptance: Record local adoption evidence and applicable donor updates; own any required changes; confirm all three reading answers Yes, then route to cleanup repair `.7` before restoring RUST-MUTATION-TESTING.1.
+  Acceptance: Record local adoption evidence and applicable donor updates; own any required changes; confirm all three reading answers Yes, then route to repairs `.7` and `.8` before restoring RUST-MUTATION-TESTING.1.
   Verification: `pending`
   Commit: `pending`
 
@@ -640,11 +651,23 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: `pending`
   Commit: `pending`
 
+- ID: `SESSION-STARTUP-READING.8`
+  Status: `pending`
+  Goal: Make bootstrap diagnostic comparison state describe the current invocation.
+  Dependencies: `.3`, `.4`, `.5` required-reading completion; `.7` cleanup safety repair precedes this repair.
+  Acceptance: Reproduce successful comparison followed by unsuccessful comparison with the shared cache and
+    an injected state. Clear stale comparison output on every attempt, including empty/undefined/throwing or
+    unavailable comparison paths; preserve primary bootstrap behavior, recursion protection, and successful
+    comparison capture. Add focused regression proof, review actual metadata consumers and public explanation,
+    update Knowledge and continuity, and commit before returning to Rust mutation setup.
+  Verification: `pending` — `.3.2.3` owns the non-destructive diagnostic evidence, not this repair.
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.3` | `pending` | Read the exact resolver/load/root-selection/generated-source/bootstrap facade group. |
+| 1 | `SESSION-STARTUP-READING.3.2.4` | `pending` | Read BootstrapSpec/Core.pm baseline lines 1–1196 in bounded chunks. |
 
 ## Reading Ledger
 
@@ -655,7 +678,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | Five facade/invocation/context files in full under `.3.2.1`; checkpoint-relevant scripts listed below. | Remaining 84 Perl paths and other first-party source/test/spec/fixture/tool inputs not explicitly listed as read. |
+| Codebase | **No** | Ten Perl files in full under `.3.2.1` and `.3.2.3`; checkpoint-relevant scripts listed below. | Remaining 79 Perl paths and other first-party source/test/spec/fixture/tool inputs not explicitly listed as read. |
 | mdBook | **No** | `docs/linkedspec-book/src/SUMMARY.md`; `docs/linkedspec-book/src/development/local-ci-and-regression.md` 1897–1943 and 1988–2004. | All other chapter text, including the unread portions of that development chapter. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -788,6 +811,23 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 - Source identity and both managed syntax checks pass. No new causal fact beyond the retrieved owners, no
   production/public change, and no fresh behavioral-conformance claim results from this reading checkpoint.
 
+### Resolution and bootstrap adapter reading at `.3.2.3`
+
+- Read `Resolver.pm` 1–223, `SpecLoader.pm` 1–352, `EntryRuleSelection.pm` 1–74, `GeneratedSource.pm` 1–319,
+  and `BootstrapSpec.pm` 1–135, all under `perl/LinkedSpec/`, through EOF without truncation. The five files
+  total 1,103 lines / 36,759 bytes and remain baseline-identical. Ten unique Perl files are now fully read.
+- Retrieved the existing portable/legacy resolution, root selection, generated-v2, self-hosted grammar, and
+  dual-path bootstrap cards before interpreting those boundaries. Resolver retains legacy local/PathSearch
+  discovery; SpecLoader uses explicit ordered candidates, strict preserved UTF-8, typed results/errors, and
+  compiler identity. Entry selection preserves authored order/markers. GeneratedSource derives cursor policy
+  from ten families and validates contract then rows. Bootstrap primary output remains authoritative.
+- The shared bootstrap comparison result survives an empty later comparison. Exact managed probes establish
+  one initial row, zero negative rows, retained old array identity, and replacement on a later positive control.
+  Public Get separately rejects malformed source at validation. No primary parser or public exposure defect is
+  claimed. `docs/knowledge/bootstrap-comparison-stale-result.md` records mechanism/evidence; `.8` owns repair.
+- No additional source-reading credit is inferred from the consumer grep or runtime probes. Remaining reading
+  starts at `.3.2.4`; source repairs `.7` then `.8` follow `.3`/`.4`/`.5` and precede Rust mutation setup.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -802,7 +842,7 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 - No runtime behavior was verified by reading. No new public explanation is warranted by this checkpoint;
   substantive codebase/book drift, if found during `.3`/`.4`, must receive an owning leaf before remediation.
 - Batch history: `.2` is resumed item 1/100 at `d6d3c890`; `.6` is item 2/100 at `03d692c1`; `.3.1` is item 3/100
-  at `942c6138`; `.3.2.1` is item 4/100 at `c0eb1acf`; `.3.2.2` is item 5/100 once committed. `.1` belongs
+  at `942c6138`; `.3.2.1` is item 4/100 at `c0eb1acf`; `.3.2.2` is item 5/100 at `094e05bc`; `.3.2.3` is item 6/100 once committed. `.1` belongs
   to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -827,6 +867,7 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   not a test failure or an external blocker.
 - `.7` blocks managed recovery/purge and later mutation-workspace setup until denied/unknown liveness is safe.
   Read-only reading can continue; no source repair is authorized by the narrow startup-tracking exception.
+- `.8` owns confirmed stale bootstrap diagnostic state after `.7`; no primary parser corruption was demonstrated.
 
 ## Verification Log
 
@@ -845,6 +886,8 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.1` | Exact five-file full reading, baseline identity, existing owner/trivia Knowledge, managed facade/phase0 syntax | PASS; 1,430 lines / 56,706 bytes covered, no production delta. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.1` | Required pre-commit Knowledge and all nine doctrines; post-commit pointer; clean status/empty brief | PASS at `c0eb1acf`. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.2` | Independent byte-interval coverage/budget audit and baseline Perl diff | PASS: 52 leaves, 84 exact paths, 2,076,984 bytes, no gaps/overlaps/source delta. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.2` | Required pre-commit Knowledge and all nine doctrines; post-commit pointer; clean status/empty brief | PASS at `094e05bc`. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.3` | Five-file full reading/baseline identity; existing Knowledge; managed comparison/public-error controls | PASS reading; CONFIRMED stale diagnostic defect, repair `.8` pending. All probe jobs completed. |
 
 ## Commit Log
 
@@ -856,6 +899,7 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `SESSION-STARTUP-READING.3.1` | `SESSION-STARTUP-READING.3.1 - bound the codebase reading inventory` | Complete baseline accounting and bounded next child; source/book reading still incomplete. |
 | `SESSION-STARTUP-READING.3.2.1` | `SESSION-STARTUP-READING.3.2.1 - read facade invocation owners` | Five unique Perl files complete; remaining 84 Perl entries and other lanes remain unread. |
 | `SESSION-STARTUP-READING.3.2.2` | `SESSION-STARTUP-READING.3.2.2 - partition remaining Perl reading` | All unread Perl bytes owned before reading; no new reading credit. |
+| `SESSION-STARTUP-READING.3.2.3` | `SESSION-STARTUP-READING.3.2.3 - read resolution and bootstrap adapters` | Ten unique Perl files read; stale diagnostic defect proved and repair `.8` owned. |
 
 ## Changelog
 
@@ -871,3 +915,5 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   `.3.2.2` owns decomposition of the remaining 84 Perl paths.
 - `2026-09-06`: `.3.2.2` owns 52 exact remaining Perl groups, including byte fragments for generated MCP JSON;
   independent interval proof passes, and `.3.2.3` is the next reading leaf.
+- `2026-09-06`: `.3.2.3` completes five dependency adapters, diagnoses stale comparison state, and owns repair
+  `.8`; the next exact reading leaf is `.3.2.4`, with both repairs gated on required reading.

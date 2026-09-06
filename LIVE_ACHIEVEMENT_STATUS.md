@@ -5,19 +5,23 @@
 - `SESSION-STARTUP-READING` owns the director-required reading prerequisite. Roadmap reading and exhaustive
   inventory `.3.1` are complete; codebase and mdBook reading remain incomplete. The director excluded `rgx`
   and its nested dependencies. Diagnosis `.6` confirms false-dead cleanup authorization on denied inspection;
-  `.7` owns repair before recovery/purge and mutation setup. Feature and capability status are unchanged.
+  `.7` owns cleanup repair; `.8` owns stale bootstrap comparison state. Both follow required reading, before
+  mutation setup. Feature and capability status are unchanged.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.2` owns 52 bounded leaves for all 84 remaining Perl paths, with exact byte coverage.
-  This is item 5/100 in the resumed batch. Codebase and book reading remain incomplete.
+- `SESSION-STARTUP-READING.3.2.3` reads five dependency adapters and diagnoses stale bootstrap comparison state.
+  This is item 6/100; ten Perl files read. Codebase and book reading remain incomplete.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.3` and read its five exact resolution/loading dependency files. Follow the
-  recorded book/policy review sequence, then repair `.7` before `RUST-MUTATION-TESTING.1` safe configuration.
+- Activate `SESSION-STARTUP-READING.3.2.4` and read BootstrapSpec/Core.pm baseline lines 1–1196. Complete required
+  reading and policy review, then repairs `.7`/`.8` before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.3` reads five adapters and proves stale comparison state;
+  repair `.8` is owned, and `.3.2.4` continues mandatory reading.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.2` partitions every remaining Perl byte into 52 bounded leaves;
   independent coverage/budget checks pass, and `.3.2.3` is next.
@@ -69,9 +73,6 @@
 
 - `2026-09-02` — `.19.4.2` implements typed atomic Dart `map_leaves!`; 461/461 package tests, 25 temporary owners /
   47 packages, CLI 66x2, corpus 105/105, unchanged 167 + 592 mutation authorities, and rooted 5x2x6 pass.
-
-- `2026-09-02` — `.19.4.1` implements Dart write vivification through all supported typed and executable routes;
-  450/450 package tests, 24 temporary owners / 47 packages, CLI 66x2, corpus 105/105, and exact canonical CI pass.
 
 ## History
 

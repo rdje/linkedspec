@@ -10,6 +10,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.3 — read resolution and bootstrap adapters
+
+- Read five complete baseline-identical adapters: 1,103 lines / 36,759 bytes; ten Perl files now read.
+- Proved stale bootstrap comparison state after an empty comparison; public Get still rejects malformed source.
+  Knowledge records the exact mechanism and controls; `.8` owns repair after mandatory reading and cleanup `.7`.
+- Validation: full reading/identity, existing contract retrieval, managed negative/positive/public-error probes,
+  focused memory/doctrine/Knowledge, both history checks, and staged review. No production/public change.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.2 — partition remaining Perl reading
 
 - Owned all 84 remaining baseline Perl paths in 52 bounded leaves, including exact byte fragments for the long

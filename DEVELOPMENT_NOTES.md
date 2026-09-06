@@ -10,6 +10,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.3 — bootstrap comparison lifetime
+
+- Portable SpecLoader and legacy Resolver intentionally serve different lookup contracts; generated-v2 cursor
+  policy and authored root-selection precedence match existing Knowledge. Bootstrap remains the primary parser.
+- Comparison result lifetime is a new defect: only successful nonempty comparisons overwrite the shared slot.
+  One-row/empty/replacement controls prove stale diagnostic state, while public Get rejects malformed input.
+  Repair `.8` must clear per-invocation state without changing primary output or recursion protection.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.2 — byte-complete reading boundaries
 
 - Keep exact ranges in task ownership and object identity in Git. Verify line ranges as byte intervals so gaps,
