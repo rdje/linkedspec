@@ -2,23 +2,24 @@
 
 ## Current Activity
 
-- Mutation parent `.19` is closed. `.19.9` publishes eleven authority-derived example classes and adds recurring
-  public no-drift across 63 Markdown files / 14 governed documents / ten stale-current denials / 50 mutations.
-  Six-runtime behavior, capability 100/0/0, production code, generated carriers, and all frozen contract bytes are
-  unchanged; the next clean PNT frontier is `RUST-MUTATION-TESTING.1`.
+- `SESSION-STARTUP-READING` owns the director-required reading prerequisite. Checkpoint `.1` preserves its exact
+  baseline and coverage; roadmap, codebase, and mdBook reading remain incomplete. The director excluded `rgx`
+  and its nested dependencies. Mutation parent `.19` remains closed; feature and capability status are unchanged.
 
 ## Latest Completed Slice
 
-- `.19.9` closes current nested-write/`map_leaves!` teaching, repairs the stale Dart non-vivification claim, binds
-  eleven semantic classes to the frozen authorities through 50 public mutations, and closes parent `.19` without
-  production or frozen-byte movement.
+- `SESSION-STARTUP-READING.1` saves the authorized reading checkpoint and aligns the roadmap/task/continuity
+  pointers. It records unfinished reading honestly and makes no implementation or fresh runtime-proof claim.
 
 ## Next Action
 
-- From the clean pushed `.19.9` commit, activate `RUST-MUTATION-TESTING.1` task-tree-first and add its safe manual
-  configuration/command surface before any mutation pilot. Warning cleanup `.1` stays durably queued.
+- Activate `SESSION-STARTUP-READING.2` and finish baseline ROADMAP_V2.md lines 1341–1585. Follow the recorded
+  codebase/book/policy review sequence before activating `RUST-MUTATION-TESTING.1` for safe manual configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.1` preserves baseline reading coverage, the `rgx` exclusion, and the
+  remaining work under the director-authorized startup-tracking exception; focused documentation checks pass.
 
 - `2026-09-05` — `.19.9` publishes exact current mutation examples, governs 63 public files / 14 documents / eleven
   semantic classes through 50 mutations, passes six runtime routes plus canonical/pre-push proof, and closes parent
@@ -75,9 +76,6 @@
 
 - `2026-08-31` — `.19.2.2` implements Perl `map_leaves!`; 58 focused tests, 105 write / 167 base + 592 composition
   mutations, Phase 0 1,032/1,032, and corrected exact canonical CI pass after repairing two stale hash-only anchors.
-
-- `2026-08-31` — `.19.2.2` audit proves the frozen function carriers conflict with fresh local scope and records
-  the exact no-capture probe; option A later corrects the carriers without language expansion.
 
 ## History
 

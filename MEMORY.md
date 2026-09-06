@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `36ecb51939aa65e560136a24c309a1b336db1766` — exact clean recurring-mutation-gate commit from which completed public closeout `FUTURE-PARITY-BACKLOG.19.9` was activated task-tree-first.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.19.9 - close public mutation semantics`; canonical/push complete.
-- active_work_unit: none; mutation parent `.19` is closed and no next leaf is activated in this commit.
-- next_action: from clean pushed `.19.9`, activate `RUST-MUTATION-TESTING.1` task-tree-first; add safe manual
-  configuration/commands before any pilot.
+- activation_commit: `baeb984e36a94a15951cd23d4c52def5064cdaca` — clean public closeout from which the startup-reading checkpoint was activated task-tree-first.
+- latest_completed_leaf: `SESSION-STARTUP-READING.1 - preserve required reading progress`; focused checkpoint complete.
+- active_work_unit: none; checkpoint complete, remaining reading is pending in `docs/tasks/SESSION-STARTUP-READING.md`.
+- next_action: activate `SESSION-STARTUP-READING.2`; read baseline ROADMAP_V2.md lines 1341–1585, then follow the
+  recorded codebase/book/policy review sequence before `RUST-MUTATION-TESTING.1` implementation.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: none.
 - current_rust_warning_debt: repeated clean carriers report 1,870 `pgen` plus 26 `rgx-core` output warnings;
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4986` is the twenty-fifth history segment; ADR `0100`
   authorizes exactly 27 collection files / 26 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-05 — README, memory architecture, memory/bootstrap, task-tree doctrine, `.19.9`, mutation/composition Knowledge, verification policy, and exact Git state read.
+- latest_bootstrap_read: 2026-09-06 — full required-reading answers remain roadmap No / codebase No / mdBook No; exact coverage and the director's rgx exclusion are recorded in SESSION-STARTUP-READING.

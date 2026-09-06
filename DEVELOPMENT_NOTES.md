@@ -9,6 +9,17 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+
+## 2026-09-06 — SESSION-STARTUP-READING.1 — preserve reading continuity
+
+- The director authorized choosing a startup-reading checkpoint before the otherwise mandatory no-edit reading
+  prerequisite is complete. Keep that exception limited to startup tracking; it does not authorize implementation.
+- Bind coverage to the clean Git baseline and record only output actually read, repairing truncated ranges before
+  counting them. Git's immutable tree is the complete recoverable inventory; directory-only censuses are partial.
+- `rgx` and its nested dependencies are excluded by the director. First-party Rust remains required reading.
+- The ledger owns the remaining work and keeps all three full-reading answers No. Production quality remains the
+  purpose; a documentation checkpoint preserves continuity and does not establish feature or audit completion.
+
 - 2026-09-05 (`FUTURE-PARITY-BACKLOG.19.9` — public mutation closeout): public teaching is a separate verification
   layer from frozen neutral authority, backend implementation, portable admission, and six-runtime recurrence.
   Close it with current examples plus a recurring public checker; do not rewrite historical task/decision evidence

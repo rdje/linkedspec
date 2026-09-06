@@ -10,6 +10,17 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.1 — preserve required reading progress
+
+- Added the director-authorized startup-tracking checkpoint with exact clean baseline, completed reading ranges,
+  `rgx`/nested-dependency exclusion, remaining reading, and explicit No answers for all three full-reading gates.
+- Aligned the task index, both roadmaps, and bounded continuity pointers. The next action finishes the roadmap
+  reading; first-party codebase, mdBook, and supplied-policy review remain prerequisites to Rust mutation setup.
+- Recorded the narrow documentation exception without changing doctrine, runtime behavior, or public teaching.
+  No mutation campaign or feature implementation is claimed by this checkpoint.
+- Verification is focused: memory/doctrine checks, both history-pressure checks, diff hygiene, and staged-scope
+  review. The public book remains a product explanation; detailed reading progress lives in the task tree.
+
 ## 2026-09-05 — FUTURE-PARITY-BACKLOG.19.9 — close public mutation semantics
 
 - Published exact current nested-write and `map_leaves!` semantics across the governed public surface. The primary
