@@ -12,6 +12,8 @@ answers:
   - "how do I reverify compact lowerer trace coverage"
   - "where are Perl array pipeline plans lowered"
   - "which array pipeline path guards a receiver mutation target"
+  - "how does a rejected Perl branch rewrite preserve control context"
+  - "where are ControlFlow candidate rewrite contexts copied and committed"
 date: 2026-09-06
 status: current
 tags: [trace, observability, actionir, flow-expr, value-expr, array-pipeline, declare-method, control-flow, perl, task-tree, mdbook]
@@ -57,3 +59,11 @@ emits them in order. A uniform-binding target uses scalar-held values through Bi
 target gets `assert_receiver_writable` with its authored source span before any operation. The legacy internal
 array path builds list expressions over `@target`. This is source-level ownership evidence, not new runtime proof;
 [[perl-uniform-binding-runtime]] and [[map-leaves-mutation-neutral-contract]] retain the behavior contracts.
+
+The 2026-09-06 `.3.2.20` checkpoint reads ControlFlow.pm 1–1485 and confirms branch-rule isolation:
+`_lower_flow_branch_single_statement` gives each rewrite rule a candidate from
+`_clone_flow_branch_rewrite_ctx`, which copies stack-entry hashes and counter values while sharing the rules.
+Only a defined, nonempty result different from the input commits that candidate to the branch context.
+A controlled rejected-rule probe changed its candidate stack/counter; the next rule still saw the original
+values, and its accepted counter update committed. The compact-lowerer trace suite passes four top-level tests.
+This bounds the claim to candidate state; the clone is not a general deep copy or a rollback of external effects.

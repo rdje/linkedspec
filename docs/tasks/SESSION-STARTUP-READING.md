@@ -380,12 +380,19 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.19 - finish contract catalog reading`
 
 - ID: `SESSION-STARTUP-READING.3.2.20`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 18: 1,485 lines/fragments, 56,984 bytes.
   Scope: `perl/LinkedSpec/ActionIR/ControlFlow.pm` lines 1–1485.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact prefix reading and baseline identity; control AST/trace Knowledge reconciliation;
+    managed branch-context isolation probe and compact-lowerer trace suite; memory/doctrine/Knowledge/history
+    checks and final staged review.
+  Canonical trigger: `none` — source-reading continuity only; no production or public change.
+  Verification: Seven untruncated prefix ranges cover 1,485 lines / 56,984 bytes; full-file baseline identity
+    passes. Controlled candidate-context rejection/acceptance passes, and compact-lowerer trace passes four
+    top-level tests. Existing AST/trace/caveat owners reconcile; focused continuity checks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.20 - read control flow prefix and verify candidate isolation`
 
 - ID: `SESSION-STARTUP-READING.3.2.21`
   Status: `pending`
@@ -923,7 +930,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.20` | `pending` | Read ActionIR/ControlFlow.pm baseline lines 1–1485. |
+| 1 | `SESSION-STARTUP-READING.3.2.21` | `pending` | Finish ControlFlow and read DeclareMethod, Diagnostics, and FlowExpr. |
 
 ## Reading Ledger
 
@@ -934,7 +941,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | Twenty-five Perl files in full through Contracts.pm under `.3.2.19`; supporting reads below. | The other 64 Perl paths, and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | Twenty-five Perl files in full plus ControlFlow.pm 1–1485 under `.3.2.20`; supporting reads below. | ControlFlow suffix, the other 63 Perl paths, and all other first-party inputs not explicitly listed as read. |
 | mdBook | **No** | `docs/linkedspec-book/src/SUMMARY.md`; `docs/linkedspec-book/src/development/local-ci-and-regression.md` 1897–1943 and 1988–2004. | All other chapter text, including the unread portions of that development chapter. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -1423,6 +1430,29 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 - Focused identity/source extraction, Knowledge, memory/doctrines/history pressure, and final staged review own
   this checkpoint. Production/book remain unchanged; `.3.2.20` reads ControlFlow.pm 1–1485 next.
 
+### ControlFlow prefix and candidate isolation at `.3.2.20`
+
+- Activated from clean `8db085f26c288063bc2d52f13d2ad697254fa608`; prior nine doctrines, post-pointer,
+  zero-byte brief, clean status, and complete derived-map diff review passed (951 facts / 8,038 keys).
+  Read ControlFlow 1–205, 206–415, 416–625, 626–835, 836–1050, 1051–1265, and 1266–1485 without
+  truncation: 1,485 lines / 56,984 bytes. Read-only ranges preceded activation during prior hooks; checkpoint
+  edits followed the clean boundary. Full-file baseline identity passes; suffix 1486–1796 remains unread.
+- Read typed truth/diagnostic generation, AST reconstruction and source-method retention, branch-context
+  construction/copying, attached/inline/marker if handling, implicit closures, candidate rewrite selection,
+  switch assembly and case lowering, and attached-while condition/guard emission.
+- Existing AST if/switch/while, source-method preservation, compact trace, marker-switch caveat, and while
+  boundary cards were read and reconciled. Indexed stable `FUTURE-PARITY-BACKLOG.5` remains active and explicitly
+  owns marker-switch outside-branch placement and while limit/next normalization. No duplicate repair or new
+  other-backend verification claim; the first unbounded partition output was truncated and does not count as
+  full-part reading. A subsequent bounded exact-node extraction supplied the owning acceptance.
+- Controlled branch-rule probe: rejected candidate changes switch_counter 3 to 99 and pushes a stack entry;
+  the next candidate still sees 3/empty stack. Accepted candidate changes while_counter 5 to 6 and commits.
+  Existing trace card owns this bounded state-isolation fact; it does not promise general deep-copy rollback.
+  Managed `PERL5LIB= prove -q -Iperl t/trace_actionir_compact_lowerers.t` passes one file/four top-level tests.
+- Twenty-five whole Perl files plus this prefix are read. Production/book remain unchanged; focused identity,
+  probe/trace, Knowledge, memory/doctrines/history pressure, and final staged review own this checkpoint.
+  Next `.3.2.21` finishes ControlFlow and reads DeclareMethod, Diagnostics, and FlowExpr.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -1444,7 +1474,7 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   `.3.2.11` is item 14/100 at `3ab399d0`; `.3.2.12` is item 15/100 at `5e2cf756`;
   `.3.2.13` is item 16/100 at `a7d17e6f`; `.3.2.14` is item 17/100 at `e421887d`;
   `.3.2.15` is item 18/100 at `762bef64`; `.3.2.16` is item 19/100 at `9a881160`; `.3.2.17` is item 20/100 at `34958c8f`; `.3.2.18` is item 21/100 at `54e1a487`;
-  `.3.2.19` is item 22/100 once committed. `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
+  `.3.2.19` is item 22/100 at `8db085f2`; `.3.2.20` is item 23/100 once committed. `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
 
@@ -1524,6 +1554,7 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.17` | Required Knowledge/all nine doctrines; post-pointer; empty brief/clean status; derived-map review | PASS at `34958c8f`; 951 facts / 8,036 keys. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.18` | Exact prefix identity/ranges; catalog count/detachment; historical status reconciliation | PASS reading/catalog; focused memory/doctrine/Knowledge/history and staged checks precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.19` | Exact suffix reading/identity; fourteen-group source extraction; owner reconciliation | PASS reading/structure; focused memory/doctrine/Knowledge/history and staged checks precede landing. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.20` | Exact prefix reading/identity; candidate-context probe; compact trace suite | PASS probe and one file/four top-level tests; focused continuity/staged checks precede landing. |
 
 ## Commit Log
 
@@ -1552,6 +1583,7 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `SESSION-STARTUP-READING.3.2.17` | `SESSION-STARTUP-READING.3.2.17 - finish AST parser and read pipeline adapters` | Twenty-four whole Perl files read; existing pipeline/event owners indexed; Contracts prefix follows. |
 | `SESSION-STARTUP-READING.3.2.18` | `SESSION-STARTUP-READING.3.2.18 - read contract prefix and reconcile projection status` | Contracts prefix read; 92-row detached catalog rechecked; stale-current card wording bounded. |
 | `SESSION-STARTUP-READING.3.2.19` | `SESSION-STARTUP-READING.3.2.19 - finish contract catalog reading` | Contracts fully read; ordered builder fact indexed; twenty-five Perl files complete. |
+| `SESSION-STARTUP-READING.3.2.20` | `SESSION-STARTUP-READING.3.2.20 - read control flow prefix and verify candidate isolation` | ControlFlow prefix read; bounded candidate-state isolation verified; existing caveat owners retained. |
 
 ## Changelog
 
@@ -1601,3 +1633,5 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   historical status wording is reconciled, and `.3.2.19` finishes Contracts.
 - `2026-09-06`: `.3.2.19` finishes Contracts and indexes its fourteen-group builder;
   twenty-five Perl files are fully read, and `.3.2.20` starts ControlFlow.
+- `2026-09-06`: `.3.2.20` reads ControlFlow 1–1485, verifies candidate state isolation and compact trace,
+  and retains existing caveat repair ownership; `.3.2.21` completes ControlFlow and the next adapters.

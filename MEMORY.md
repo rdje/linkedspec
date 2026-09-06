@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `54e1a487dd797396d8bb5ed847e90380015e3a40` — clean Contracts prefix reading checkpoint.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.19 - finish contract catalog reading`; twenty-five Perl files read.
+- activation_commit: `8db085f26c288063bc2d52f13d2ad697254fa608` — clean Contracts completion checkpoint.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.20 - read control flow prefix and verify candidate isolation`; prefix read.
 - active_work_unit: none; bounded reading and repairs remain pending in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: activate `.3.2.20` and read ActionIR/ControlFlow.pm baseline lines 1–1485,
+- next_action: activate `.3.2.21`, finish ControlFlow, and read DeclareMethod, Diagnostics, and FlowExpr,
   then continue required reading and repairs `.7`–`.15` before Rust mutation setup.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge; `.8`–`.15` own comparison, regex, input, diagnostic, edge, return/state, and nested-span repairs.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4985` is the twenty-sixth history segment; ADR `0102`
   authorizes exactly 28 collection files / 27 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; exhaustive inventory, exact coverage, rgx exclusion, and resumed batch progress (22/100 after `.3.2.19` lands) are in SESSION-STARTUP-READING.
+- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; exhaustive inventory, exact coverage, rgx exclusion, and resumed batch progress (23/100 after `.3.2.20` lands) are in SESSION-STARTUP-READING.

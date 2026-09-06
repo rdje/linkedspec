@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.20 — read control flow prefix and verify candidate isolation
+
+- Read ControlFlow 1–1485 / 56,984 bytes; full-file baseline identity passes. Existing control owners reconcile.
+- Controlled candidate rejection/acceptance and four compact trace tests pass; existing backlog owns caveats.
+- Focused identity/probe/trace, Knowledge, memory/doctrines/history, and staged review; source/book unchanged.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.19 — finish contract catalog reading
 
 - Finish Contracts.pm: suffix 1,117 lines / 48,433 bytes, full-file baseline identity; twenty-five Perl files read.

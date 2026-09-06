@@ -12,15 +12,18 @@
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.19` finishes Contracts and indexes its ordered builder.
-  This is item 22/100; twenty-five full Perl files read. Codebase/book remain incomplete.
+- `SESSION-STARTUP-READING.3.2.20` reads ControlFlow 1–1485 and verifies candidate state isolation.
+  This is item 23/100; twenty-five full Perl files plus the prefix read. Codebase/book remain incomplete.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.20`: read ActionIR/ControlFlow.pm baseline lines 1–1485.
+- Activate `SESSION-STARTUP-READING.3.2.21`: finish ControlFlow and read DeclareMethod, Diagnostics, and FlowExpr.
   Complete required reading and policy review, then repairs `.7`–`.15` before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.20` reads ControlFlow 1–1485 and verifies candidate
+  state isolation plus compact trace; `.3.2.21` finishes it and the next adapters.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.19` finishes Contracts and indexes its fourteen-group
   builder; twenty-five whole Perl files read, and ControlFlow is next.
@@ -66,9 +69,6 @@
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.5` reads compiler state; exact required rollover preserves history
   and ADR 0102 admits one finite member/manifest row. Next reading is `.3.2.6`.
-
-- `2026-09-06` — `SESSION-STARTUP-READING.3.2.4` reads the core and proves attached-tail regex truncation;
-  repair `.9` is owned, and `.3.2.5` continues mandatory reading.
 
 ## History
 

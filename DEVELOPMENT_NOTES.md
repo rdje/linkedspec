@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.20 — branch candidate state isolation
+
+- ControlFlow copies stack-entry hashes and counters per candidate and commits only a changed accepted result.
+  A rejected-rule probe preserves original state for the next rule; accepted counter changes reach the context.
+- Four compact trace tests pass. Existing backlog `.5` retains marker-switch/while caveats; suffix reading is next.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.19 — complete contract assembly ownership
 
 - Contracts resolves required callbacks before concatenating fourteen groups; staged/progressive groups delegate
