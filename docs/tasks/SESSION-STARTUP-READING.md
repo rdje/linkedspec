@@ -841,12 +841,19 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.48 - read Trace and qualify lazy exception-state evidence`
 
 - ID: `SESSION-STARTUP-READING.3.2.49`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 47: 1,500 lines/fragments, 32,073 bytes.
   Scope: `perl/LinkedSpec/UnicodeCaseMapping.pm` lines 1–1500.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Reconcile complete .31-owned first 1,500 Unicode table lines with exact baseline; read canonical data/checker/consumer authority; managed offline Unicode regeneration and Perl casing consumer; Knowledge/live continuity, memory and fast doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Complete prior .31 physical reading reconciled for 1,500 lines / 32,073 bytes; exact baseline
+    fragment identity passes. Current offline checker regenerates all five modules and neutral JSON:
+    1,563/1,581 mappings, 158/464 property ranges, 12 fixtures. Managed Perl consumer passes 52 tests
+    in 13 seconds. No duplicate reading credit, generated edits, or other-backend execution claim.
+  Commit: `SESSION-STARTUP-READING.3.2.49 - reconcile first generated Unicode case range`
 
 - ID: `SESSION-STARTUP-READING.3.2.50`
   Status: `pending`
@@ -1957,7 +1964,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.49` | `pending` | read UnicodeCaseMapping.pm 1–1500 and reconcile the pinned generated case-table authority. |
+| 1 | `SESSION-STARTUP-READING.3.2.50` | `pending` | reconcile UnicodeCaseMapping.pm 1501–3000 with the completed table reading and pinned authority. |
 
 ## Reading Ledger
 
@@ -1968,7 +1975,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.49`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.50`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -3761,6 +3768,32 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   brief was cleared and clean status verified before activation. Roadmap/physical book Yes; codebase No,
   formal .4 and repair prerequisites remain pending. Next .3.2.49.
 
+### First generated Unicode table range and authoritative regeneration at `.3.2.49`
+
+- Activated from clean `69e221bf67d8a3289dd3f0ade35e52ff8d1b9f25` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Intake .31 already physically consumed every byte of UnicodeCaseMapping 1–1500 in smaller
+  complete ranges. Reconcile that durable reading without duplicate physical credit. Current range is
+  1,500 lines / 32,073 bytes, SHA-256 a75e182640627d042dd282ef7257d5ae1ec20431abad1a7fb316498b6abd02a1;
+  entire source remains baseline-identical. The suffix checkpoints remain separately pending.
+- Retrieve the Unicode data, Perl/Rust, Dart/Julia, and six-runtime parity Knowledge owners plus ADR
+  0027. Read the entire current 287-line checker and 88-line Perl consumer; revisit generated header
+  1–110, the 1490–1505 seam, and evaluator 3790–3835 as supporting comprehension of pinned data.
+  This does not credit unread upstream/generator/native files or close their future reading lanes.
+- Current managed offline checker regenerates JSON plus Perl/Rust/Dart/Julia/Lua source in an owned
+  temporary directory and byte-compares all six files; its independent evaluator passes 12 fixtures.
+  Counts remain 1,563 lower / 1,581 upper mappings, 158 Cased / 464 Case_Ignorable ranges. Update
+  two Knowledge bodies that still described only the earlier Perl/Rust generated-file coverage.
+- Current managed Perl consumer passes 52 tests in 13 seconds across direct conversions, compiled
+  helper/receiver/array forms for all fixtures, three pinned metadata fields, and emitted dependency text.
+  The dependency assertion is not fresh-process generated execution. Other backend native consumers
+  are not rerun. No table/generator/data/version/locale/normalization or public-book changes occur.
+- Record that first-fragment lower mappings include full dotted-I combining output and intentional
+  identity mappings; tables are generated authority, not hand-maintained edits. Hash checks establish
+  current identity; prior complete reading establishes coverage. No new defect is claimed.
+- The prior leaf committed as 69e221bf67d8a3289dd3f0ade35e52ff8d1b9f25 with nine doctrines/post-pointer
+  passing, brief cleared, and clean status before activation. Roadmap/physical mdBook Yes; codebase No,
+  formal .4 and repairs pending. Next .3.2.50.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -3810,7 +3843,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.2.45` is item 49/100 at `cd0a1bab`;
   `.3.2.46` is item 50/100 at `7c2d6ee0`;
   `.3.2.47` is item 51/100 at `6654c0df`;
-  `.3.2.48` is item 52/100 once committed.
+  `.3.2.48` is item 52/100 at `69e221bf`;
+  `.3.2.49` is item 53/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -3927,6 +3961,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.46` | Exact 1,498-line baseline and unchanged staged inputs; retained 143 and 9/9/123 plus public proof; 24 native and four modeled lifetime controls; four Knowledge owners; focused continuity | PASS bounded reading/native controls; isolated recycling counterexample tracked as .44 with native non-reproduction explicit. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.47` | Five complete ranges and exact baseline; unchanged staged runtime/consumer/checker/contract identity; four Knowledge owners; focused continuity | PASS bounded reading and retained proof; legacy metadata/general authority boundary explicit; .44 remains owned. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.48` | Complete Trace/baseline; 20 direct/wrapped exception controls; three generated suites 11 tests; unchanged CLI proof; Knowledge and focused continuity | PASS focused reading and tests; .24 retained with direct/wrapper distinction and exact object-identity evidence. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.49` | Prior full first-range reading + exact identity; ADR0027 and full checker/consumer; offline five-module regeneration/12 fixtures; Perl52; focused continuity | PASS; current regeneration coverage corrected, generated/carrier proof scoped, no new physical credit. |
 
 ## Commit Log
 
@@ -3985,6 +4020,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.2.46` | `SESSION-STARTUP-READING.3.2.46 - read staged authority and own marker identity risk` | Staged authority read; native lifetime proof and isolated retired-identity counterexample preserved under .44. |
 | `SESSION-STARTUP-READING.3.2.47` | `SESSION-STARTUP-READING.3.2.47 - read staged runtime and legacy registry boundaries` | Staged suffix/runtime/marker/policy/legacy registry read; exact unchanged proof and v1/v2 separation preserved. |
 | `SESSION-STARTUP-READING.3.2.48` | `SESSION-STARTUP-READING.3.2.48 - read Trace and qualify lazy exception-state evidence` | Trace read; 20 diagnostic controls and 11 passing tests qualify .24 without claiming repair. |
+| `SESSION-STARTUP-READING.3.2.49` | `SESSION-STARTUP-READING.3.2.49 - reconcile first generated Unicode case range` | First Unicode range reconciled; five-module regeneration and 52 Perl tests preserve pinned authority. |
 
 ## Changelog
 
@@ -4087,3 +4123,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-06`: `.3.2.46` reads staged authority, reconciles routed recursion, and owns .44's modeled identity-recycling risk with exact native and isolated controls.
 - `2026-09-06`: `.3.2.47` completes staged runtime and legacy registry reading, records fresh authority/private marker lifetime, and separates legacy cache-key metadata from general scheduling.
 - `2026-09-06`: `.3.2.48` completes Trace reading, records 20 direct/wrapped string/object controls and 11 generated tests, and qualifies exception-state and historical CLI claims.
+- `2026-09-06`: `.3.2.49` reconciles the first Unicode table range from complete .31 reading, refreshes five-module regeneration coverage, and records 52 current Perl tests.

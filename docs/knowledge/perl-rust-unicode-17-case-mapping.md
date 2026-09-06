@@ -33,6 +33,24 @@ handlers execute. Independently loadable parser source explicitly contains `use 
 A fresh Perl process importing only `LinkedSpec` verifies the former; generated-source tests verify the latter.
 
 The backend files are generated artifacts, not hand-maintained tables. `tools/check_unicode_case_contract.py`
-regenerates the JSON and both modules in owned temporary storage and byte-compares all three.
+regenerates the JSON and all five current backend modules in owned temporary storage and byte-compares all six files.
 
 Related facts: [[unicode-17-case-contract-data]], [[unicode-case-mapping-cross-backend-gap]].
+
+## September 6 first Perl table checkpoint
+
+The complete physical table reading remains recorded under `SESSION-STARTUP-READING.31`.
+`.3.2.49` reconciles lines 1–1500 (32,073 bytes; SHA-256
+`a75e182640627d042dd282ef7257d5ae1ec20431abad1a7fb316498b6abd02a1`) with exact baseline identity,
+the generated header, and the pinned authority. This fragment is the opening lower-mapping table;
+the next ranges retain their own comprehension checkpoints. Dotted capital I maps to `0069 0307`,
+while unchanged special-casing entries may legitimately appear in the full data. Identity entries are
+not defects or normalization. The generator remains the sole table author.
+
+`bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/unicode_case_mapping.t` passes 52 tests
+in 13 seconds: pinned identity fields, direct lower/upper conversion, public compiled helper/receiver/
+array forms for all 12 fixtures, and generated-source dependency declaration. The last check inspects
+the emitted dependency string; it is not a newly executed fresh-process generated-carrier proof.
+Rust and other backend native consumers are not rerun by this reading checkpoint. The July execution
+counts in the evidence header remain historical. See [[unicode-17-case-contract-data]] for current
+five-module regeneration proof.

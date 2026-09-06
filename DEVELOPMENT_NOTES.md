@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.49 — generated-table identity and runtime execution are separate evidence
+
+The current checker byte-compares six generated files and independently evaluates the neutral fixtures. That establishes source/data consistency for all backends; fresh Perl runtime evidence comes from the separate 52-test consumer. Its generated-source check inspects the dependency declaration only. The checkpoint retains .31's complete physical reading and does not claim fresh native execution for the other runtimes.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.48 — a non-escaping callback error can still replace caller exception state
 
 The existing helper test catches the call in an outer eval, proving that a detail error becomes trace text and leaves the branch result intact. It does not compare a pre-existing $@. Direct controls show successful and nested callbacks clear it and throwing callbacks replace it; OwnerDispatch already restores the original string or object. The repair must preserve both the established non-escape contract and incoming-state identity without blaming the protected wrapper.

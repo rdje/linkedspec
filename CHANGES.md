@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.49 — reconcile first generated Unicode case range
+
+Reconcile the first 1,500 lines / 32,073 bytes of the fully read Perl Unicode table with exact baseline identity. The offline checker regenerates and compares neutral JSON plus all five backend modules; 12 fixtures and 52 Perl tests pass. Update two Knowledge descriptions of generated coverage and distinguish emitted dependency inspection from fresh-process execution. Generated data and public behavior remain unchanged.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.48 — read Trace and qualify lazy exception-state evidence
 
 Read all 521 lines / 16,259 bytes of Trace with exact baseline identity. Twenty controls distinguish direct lazy-detail exception overwrite from OwnerDispatch preservation, including object identity and nested detail. Three generated trace suites pass 11 tests. Qualify broad trace behavior and dated CLI counts in Knowledge; retain .24's repair ownership and update live continuity without runtime or book changes.
