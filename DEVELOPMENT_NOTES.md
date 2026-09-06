@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.46 — recursive marker identity must outlive host-address assumptions
+
+The scheduler keeps processed/lineage keys after obsolete marker objects can be released. Native controls did not reuse an address and all completed. A substitute that preserves live identities but recycles only retired weak-reference slots exposes silent early completion; retained controls remain correct. The .44 repair must distinguish logical marker lifetime from host-address reuse without relabeling the model as an observed allocator failure.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.45 — typed values retain identity while the authority owns text
 
 Positions, spans, and ordered derived text carry detached source identity/offset/provenance records; decoded text and conversion tables remain inside the authority. The Runtime adapter preserves existing scalar and shallow collection results, including the deliberate host substr fallback outside typed slice bounds. This scoped reading does not admit a public typed-value API. A rejected oversized Knowledge append is routed to a focused linked card without changing any size limit.

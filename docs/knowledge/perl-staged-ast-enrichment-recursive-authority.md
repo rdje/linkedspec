@@ -29,7 +29,7 @@ reverify:
 
 # Perl recursive staged-AST authority
 
-`LinkedSpec::StagedASTEnrichment->enrich_recursively(...)` is a private, deliberately unrouted post-AST entrypoint.
+`LinkedSpec::StagedASTEnrichment->enrich_recursively(...)` is a private post-AST entrypoint invoked by the admitted fresh-authority carriers.
 It preserves the one-depth `enrich_ast(...)` API while repeatedly preparing and settling complete queue depths.
 Every depth is ordered by typed parent path, provenance, and job id. A marker returned by one callback cannot run
 until every sibling at the producing depth has settled.
@@ -55,3 +55,15 @@ recurringly and admit the authored surface without exporting this module or wide
 
 Related: [[perl-staged-ast-enrichment-current-depth-authority]],
 [[perl-staged-ast-enrichment-marker-provenance]], [[general-staged-ast-enrichment-neutral-contract]], and ADR `0088`.
+
+## September 6 source and identity-lifetime boundary
+
+The complete first 1,498 lines are read under startup .3.2.46; the remaining module suffix has a
+separate checkpoint. Complete-depth preparation, breadth-first settlement, pure resolution/cache,
+active-chain decrease checks, narrowed resources, expiring contexts, and provenance rebasing retain
+their current owners. Native weak-reference controls prove that obsolete markers are released.
+
+[[perl-staged-marker-retired-identity-risk]] records a separate isolated recycling counterexample:
+two unretained runs stop after three calls with no error, while held controls finish 24. All ordinary,
+weak, and pooled native controls finish 24 without observed address reuse. Startup .44 owns the risk;
+this is not a claim of a native allocator failure or a newly implemented fix.

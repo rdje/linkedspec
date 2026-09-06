@@ -56,3 +56,12 @@ native/reconstructed/generated/emitted carriers plus admission; `.14.7.9` owns p
 
 Related: [[perl-staged-ast-enrichment-marker-provenance]], [[perl-staged-ast-enrichment-recursive-authority]],
 [[general-staged-ast-enrichment-neutral-contract]], [[general-staged-ast-current-boundary]], and ADR `0088`.
+
+## September 6 complete-depth source reading
+
+Startup .3.2.46 reads StagedASTEnrichment 1–1498 / 49,952 bytes at unchanged baseline baeb984e.
+Pure candidate resolution, normalized top/job/cache identity, policy narrowing, complete target
+reservation, fresh callbacks, and one-depth settlement remain distinct from recursive scheduling.
+The remaining validators/stitch/detachment suffix stays separately checkpointed. Current unchanged
+Perl proof is 143 tests; neutral staged proof is 9/9/123 plus public 6/17/10/129 from the preceding
+canonical run. The recursive identity-lifetime risk is separately .44-owned, not a one-depth failure.

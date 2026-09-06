@@ -65,3 +65,12 @@ still denied.
 - Historical RED: [[perl-staged-ast-enrichment-dormant-red]].
 - Current Julia boundary: [[julia-staged-ast-enrichment-recursive-authority]].
 - Owner: [[FUTURE-PARITY-BACKLOG.14]] `.14.7.3.4`.
+
+## September 6 retained carrier evidence
+
+Startup .3.2.46 retains the preceding canonical Perl 143-test proof and staged neutral 9/9/123 plus
+public 6/17/10/129 after verifying unchanged source/test/checker/contract inputs. The complete 120-line
+Runtime seam was read as supporting context; its formal owner checkpoint remains .3.2.47.
+The public Get lifetime controls in [[perl-staged-marker-retired-identity-risk]] use this admitted carrier
+without changing it. Native runs complete; only the explicitly substituted recycling model truncates.
+The dedicated .44 risk must be closed independently of existing finite admission success.
