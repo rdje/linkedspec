@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.15 — finish emitter adapters and extend return repairs
+
+- Complete emitter suffix, LinkedRE, and AST facade: 736 lines / 24,430 bytes; twenty Perl files read.
+- Bounded REP controls prove literal corruption and package writes; existing `.14.1`/`.14.2` now cover this path.
+  Diagnostic JSON is explicitly a selected-field projection. Product source/book remain unchanged.
+- Focused reading/identity/probes, Knowledge, memory/doctrines/history, and staged review; AST parser is next.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.14 — read emitter prefix and own I-block repairs
 
 - Read HandlerVariantEmitter 1–1403 / 53,304 bytes and reconciled historical HandlerIR/return records.

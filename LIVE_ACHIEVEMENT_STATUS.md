@@ -7,20 +7,23 @@
   and its nested dependencies. Diagnosis `.6` confirms false-dead cleanup authorization on denied inspection;
   `.7` owns cleanup repair; `.8` stale comparison; `.9` regex tails; `.10` unbound AND_BCODE inputs; `.11`
   diagnostic source context; `.12` bare/explicit edge order; `.13` repeated blind-target code identity. All follow
-  required reading, before mutation setup; `.14` owns per-regex I-block literal and result-scope repairs.
+  required reading, before mutation setup; `.14` owns I-block/repetition literal and result-scope repairs.
   Feature and capability status are unchanged.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.14` reads the emitter prefix and owns I-block literal/state repairs `.14.1`/`.14.2`.
-  This is item 17/100; seventeen full Perl files plus the prefix read. Codebase/book remain incomplete.
+- `SESSION-STARTUP-READING.3.2.15` completes emitter/LinkedRE/AST reading and extends `.14` repairs to repetition.
+  This is item 18/100; twenty full Perl files read. Codebase/book remain incomplete.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.15` and read emitter 1404–1920, LinkedRE.pm, and ActionIR/AST.pm. Complete
+- Activate `SESSION-STARTUP-READING.3.2.16` and read ActionIR/AST/Parser.pm baseline lines 1–1498. Complete
   required reading and policy review, then repairs `.7`–`.14` before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.15` finishes emitter/LinkedRE/AST, extends existing return
+  repairs to repetition, and reconciles diagnostic JSON; `.3.2.16` reads the AST parser next.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.14` reads the emitter prefix, reconciles historical cards,
   and owns literal/state repairs `.14.1`/`.14.2`; `.3.2.15` continues reading.
@@ -66,9 +69,6 @@
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.1` accounts for the complete baseline and bounds source reading;
   Toolbox is fully read, codebase/book remain No, and `.3.2.1` is the next exact child.
-
-- `2026-09-06` — `SESSION-STARTUP-READING.6` proves denied liveness is falsely treated as death; exact evidence
-  and repair `.7` are durable. Recovery/purge remain unused pending repair after required reading.
 
 ## History
 

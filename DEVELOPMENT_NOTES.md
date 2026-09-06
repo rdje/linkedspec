@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.15 — repetition shares the return/scope defect
+
+- REP turns quoted return-plus-space into an interpolated result-slot assignment. Two bounded matches grow
+  seed-dependent text; plain controls also write package Top. Existing `.14` repairs cover both emission paths.
+- LinkedRE preserves required slot identity; the AST facade delegates lazily. Diagnostic JSON omits unlisted
+  HandlerIR fields, so its output is not a lossless carrier. Twenty Perl files are read; AST parser reading follows.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.14 — I-block lowering must preserve data and scope
 
 - The emitter rewrites return text inside I-block strings, including the prefix of returning. Its single-acode result

@@ -1,16 +1,18 @@
 ---
 id: perl-and-icode-literal-and-state-corruption
-title: AND per-regex I-block emission rewrites quoted return text and uses a package-scoped result slot
+title: Perl AND I-block and repeated-action return rewriting corrupts literals and uses package-scoped result slots
 answers:
   - "why does return inside a quoted I-block string change the parser result"
   - "why does returning become a rule-name assignment in emitted Perl"
   - "can an AND I-block result depend on LinkedSpec::SpecEntry package state"
   - "where are per-regex I-block literal and result-scope repairs owned"
+  - "why does a repeated action change a quoted return value"
+  - "why does a repetition handler write LinkedSpec::SpecEntry package state"
 date: 2026-09-06
 status: confirmed native literal corruption and package-state dependency; SESSION-STARTUP-READING.14 owns repair after reading
-tags: [perl, emitter, and, lifecycle, literals, lexical-scope, defect]
-evidence: "SESSION-STARTUP-READING.3.2.14 used Get/source capture and positive per-regex I-block controls. Plain data survives; return and returning are rewritten inside quotes. The same parser/input returns seed_one = or seed_two = when only localized LinkedSpec::SpecEntry::Top changes, and writes that package slot. Emitted source declares @Top once but no scalar $Top."
-reverify: "rg -n 'sub _emit_and_(single_acode|bcode)_handler|transformed =~|my @.*label.*_collect' perl/LinkedSpec/HandlerVariantEmitter.pm"
+tags: [perl, emitter, and, repetition, lifecycle, literals, lexical-scope, defect]
+evidence: "SESSION-STARTUP-READING.3.2.14 proves quoted return/returning corruption and package-Top dependency in selected AND I-blocks. SESSION-STARTUP-READING.3.2.15 extends Get/source/package-seed controls to OR{2,2}: plain and return survive but return value becomes seed-dependent growing text; even the plain repetition writes package Top. Both single-acode AND and repeated-acode templates omit the scalar result lexical."
+reverify: "rg -n 'sub _emit_(and_(single_acode|bcode)|rep_acode)_handler|transformed =~|my @.*label.*_collect' perl/LinkedSpec/HandlerVariantEmitter.pm"
 ---
 
 The native reference accepts:
@@ -69,3 +71,32 @@ unchanged. Existing explicit-edge return repair is still resolved and is a separ
 
 Related: [[and-return-edge-codegen-defect]], [[working-vars-no-strict-need-my-lexical]],
 [[specentry-and-bcode-unbound-inputs]], [[handler-ir-design]].
+
+## Repeated-action extension, 2026-09-06
+
+`SESSION-STARTUP-READING.3.2.15` read the remaining emitter and confirmed the same
+mechanisms in `_emit_rep_acode_handler` with a bounded positive control:
+
+```text
+Top::OR{2,2}
+ /x/ -> Top { return("return value") }
+```
+
+For input `xx`, localizing the same package slot produces:
+
+| Seed | Two-match result | Package slot after call |
+| --- | --- | --- |
+| `seed_one` | `["seed_one = value","seed_one = value = value"]` | `seed_one = value = value` |
+| `seed_two` | `["seed_two = value","seed_two = value = value"]` | `seed_two = value = value` |
+
+The emitted assignment is `$Top = "$Top = value"`. Its handler has `my @Top` and
+`my @Top_collect`, with no scalar result declaration. Payload `plain` returns
+`["plain","plain"]` and writes package Top to `plain`; payload `return` returns
+`["return","return"]` and writes package Top to `return`, independently of the seed.
+The repetition rewrite requires whitespace after `return`, so the unspaced literal
+control survives while the spaced literal is corrupted. The package write on the plain
+control also establishes the scope defect without relying on literal corruption.
+
+Repairs `.14.1` and `.14.2` now explicitly cover both selected I-block and repeated-action
+emission. The bounded fixture completes two matches; it does not test unbounded or
+zero-progress loops. Other-backend and independently loaded-source proof remains with repair.

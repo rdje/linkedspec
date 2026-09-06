@@ -38,6 +38,9 @@ lifecycle fields. It does not make those payloads language-neutral. The current 
 retired. This Perl module registers `perl` and diagnostic `json`, not the native runtime
 implementations. Unknown backend/kind dispatch currently returns `undef`; the clear-error
 rule below describes the original desired emitter contract, not a proved private diagnostic.
+Suffix reconciliation under `.3.2.15` also verifies that JSON projects selected fields;
+a direct diagnostic probe omits supplied `and_icode`, `capture_gaps`, and `required_slot_count`
+while retaining kind/label/cursor_policy/acodes. JSON here is not a lossless HandlerIR carrier.
 The dated variant/lifecycle catalog below is historical design context; current rule-local
 selection belongs to [[rule-local-cursor-and-bare-edge-contract]].
 
