@@ -7,20 +7,23 @@
   and its nested dependencies. Diagnosis `.6` confirms false-dead cleanup authorization on denied inspection;
   `.7` owns cleanup repair; `.8` stale comparison; `.9` regex tails; `.10` unbound AND_BCODE inputs; `.11`
   diagnostic source context; `.12` bare/explicit edge order; `.13` repeated blind-target code identity. All follow
-  required reading, before mutation setup.
+  required reading, before mutation setup; `.14` owns per-regex I-block literal and result-scope repairs.
   Feature and capability status are unchanged.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.13` completes EmitContext reading and owns blind-target identity repair `.13`.
-  This is item 16/100; seventeen full Perl files read. Codebase/book remain incomplete.
+- `SESSION-STARTUP-READING.3.2.14` reads the emitter prefix and owns I-block literal/state repairs `.14.1`/`.14.2`.
+  This is item 17/100; seventeen full Perl files plus the prefix read. Codebase/book remain incomplete.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.14` and read HandlerVariantEmitter.pm baseline lines 1–1403. Complete required
-  reading and policy review, then repairs `.7`–`.13` before Rust mutation configuration.
+- Activate `SESSION-STARTUP-READING.3.2.15` and read emitter 1404–1920, LinkedRE.pm, and ActionIR/AST.pm. Complete
+  required reading and policy review, then repairs `.7`–`.14` before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.14` reads the emitter prefix, reconciles historical cards,
+  and owns literal/state repairs `.14.1`/`.14.2`; `.3.2.15` continues reading.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.13` completes EmitContext and owns repeated blind-target
   identity repair `.13`; `.3.2.14` reads HandlerVariantEmitter next.
@@ -66,9 +69,6 @@
 
 - `2026-09-06` — `SESSION-STARTUP-READING.6` proves denied liveness is falsely treated as death; exact evidence
   and repair `.7` are durable. Recovery/purge remain unused pending repair after required reading.
-
-- `2026-09-06` — `SESSION-STARTUP-READING.2` completes roadmap reading and reconciles the current direction;
-  codebase/book reading and policy comparisons remain pending.
 
 ## History
 

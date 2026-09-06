@@ -35,7 +35,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -293,12 +293,19 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.13 - complete EmitContext reading and own blind-edge repair`
 
 - ID: `SESSION-STARTUP-READING.3.2.14`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 12: 1,403 lines/fragments, 53,304 bytes.
   Scope: `perl/LinkedSpec/HandlerVariantEmitter.pm` lines 1–1403.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+    Reconcile the dated HandlerIR card and probe literal preservation in per-regex I-block return rewriting.
+  Verification tier: `focused`
+  Focused checks: Exact prefix reading/full-file baseline identity; existing HandlerIR/emitter/trace/slot Knowledge;
+    direct builder/emitter, public literal/package-state controls, and historical return reverify; memory/doctrine/Knowledge/history checks; `git diff --check` and final staged review.
+  Canonical trigger: `none` — source-reading continuity only; no production, infrastructure, or public change.
+  Verification: Seven untruncated ranges cover 1–1403 / 53,304 bytes; full-file baseline identity passes.
+    Builder/dispatch probes reconcile HandlerIR; indexed return control remains fixed. Public/source/seed
+    controls prove per-regex I-block literal and state corruption; `.14.1`/`.14.2` own repair. Focused checks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.14 - read emitter prefix and own I-block repairs`
 
 - ID: `SESSION-STARTUP-READING.3.2.15`
   Status: `pending`
@@ -700,7 +707,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING.5`
   Status: `pending`
   Goal: Complete supplied-policy adoption/update comparisons and the startup alignment review before implementation.
-  Acceptance: Record local adoption evidence and applicable donor updates; own any required changes; confirm all three reading answers Yes, then route to repairs `.7`–`.13` before restoring RUST-MUTATION-TESTING.1.
+  Acceptance: Record local adoption evidence and applicable donor updates; own any required changes; confirm all three reading answers Yes, then route to repairs `.7`–`.14` before restoring RUST-MUTATION-TESTING.1.
   Verification: `pending`
   Commit: `pending`
 
@@ -835,11 +842,41 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: `pending` — `.3.2.13` proves native AND/OR failures and isolates hash overwrite plus name dispatch.
   Commit: `pending`
 
+- ID: `SESSION-STARTUP-READING.14`
+  Status: `pending`
+  Goal: Preserve literal data and invocation-local result state in per-regex I-block emission.
+  Dependencies: `.3`, `.4`, `.5` required-reading completion; blind occurrence repair `.13` precedes this activity.
+  Children: `.14.1`, `.14.2`
+
+- ID: `SESSION-STARTUP-READING.14.1`
+  Status: `pending`
+  Goal: Rewrite executable I-block returns without modifying literals, identifiers, or nested return scopes.
+  Acceptance: Lock selected per-regex I-block plain/return/returning payloads and explicit-edge controls.
+    Replace whole-string substitution with an appropriate structured or token-aware lowering boundary;
+    preserve quote/regex/comment contents, escaped forms, identifiers, nested blocks/functions, actual return
+    semantics, and capture bridges. Reconcile every retained AND I-block rewrite site with `.10` handoff
+    decisions; prove native and emitted/loaded behavior plus direct-dependent conformance and backend comparison.
+    Update book/Knowledge and commit. Split safe children first if the shared lowering change exceeds this slice.
+  Verification: `pending` — `.3.2.14` captures return-to-assignment replacement inside quoted data.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.14.2`
+  Status: `pending`
+  Goal: Make generated single-acode AND I-block result storage invocation-local.
+  Dependencies: `.14.1`
+  Acceptance: Give each invocation its own internal result slot without changing the rule accumulator or
+    authored variable identity. Prove package-state independence, no writes to the SpecEntry package slot,
+    repeated same-parser and cross-parser calls, recursion, Unicode labels, I-plus-edge collection, and all
+    retained handler variants. Verify native/emitted-loaded routes and direct-dependent matrices, update
+    book/Knowledge, and commit before mutation setup. Preserve recognition/cursor and return-shape contracts.
+  Verification: `pending` — `.3.2.14` proves identical parser/input reads and overwrites localized package Top.
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.14` | `pending` | Read HandlerVariantEmitter.pm baseline lines 1–1403 in bounded chunks. |
+| 1 | `SESSION-STARTUP-READING.3.2.15` | `pending` | Read HandlerVariantEmitter.pm 1404–1920, LinkedRE.pm, and ActionIR/AST.pm. |
 
 ## Reading Ledger
 
@@ -850,7 +887,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | Seventeen Perl files in full through EmitContext under `.3.2.13`; supporting reads below. | Remaining 72 Perl paths and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | Seventeen Perl files in full plus HandlerVariantEmitter 1–1403 under `.3.2.14`; supporting reads below. | Remaining 72 Perl paths and all other first-party inputs not explicitly listed as read. |
 | mdBook | **No** | `docs/linkedspec-book/src/SUMMARY.md`; `docs/linkedspec-book/src/development/local-ci-and-regression.md` 1897–1943 and 1988–2004. | All other chapter text, including the unread portions of that development chapter. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -1196,6 +1233,35 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   source was inspected but not independently loaded here; other-backend failures remain unmeasured. Next
   exact reading is HandlerVariantEmitter.pm 1–1403 under `.3.2.14`; codebase/book remain incomplete.
 
+### HandlerVariantEmitter prefix and I-block corruption at `.3.2.14`
+
+- Activated from clean `a7d17e6fcb4e6deafc8b3b2c46c957fa8f09e8b0`; prior Knowledge/all nine doctrines,
+  post-commit pointer, zero-byte brief, clean status, and derived-map review passed (949 facts / 8,022 keys).
+  Read 1–215, 216–420, 421–645, 646–840, 841–1035, 1036–1235, and 1236–1403 without truncation:
+  1,403 lines / 53,304 bytes. A truncated combined initial output was replaced by the exact 1–215 reread;
+  full emitter baseline identity passes. Seventeen whole Perl files remain covered; the suffix is `.3.2.15`.
+- Reconciled ten variant builders, bounds, slot identity/observation, acode/bcode dispatch, trace helpers,
+  backend/kind dispatch, default/AND/OR templates, and repeated-blind choice with existing HandlerIR, root,
+  slot, trace, and earlier defect owners. Direct builder proof retains Perl strings and cursor_policy;
+  unknown private backend/kind returns undef. The old HandlerIR card now distinguishes its historical catalog
+  from current field/dispatch/payload boundaries. Source header/comment reconciliation follows the final read
+  alignment in `.5`; no new backend route or changed public contract is claimed.
+- Public selected I-block source `Top::AND /x/ I { value = "return"; return(value) }` followed by an explicit
+  `-> Top { return(value) }` edge corrupts literal data. Plain/return/returning cases in one process yield
+  plain, `plain = `, and `plain =  = ing`. Source capture shows `$value = "$Top = "; $Top = $value`.
+  Both textual I-block return-rewrite sites ignore literal and trailing token boundaries.
+- A retained same-parser/input seed control localizes only `LinkedSpec::SpecEntry::Top`: seed_one and seed_two
+  produce and overwrite the package slot with `seed_one = ` and `seed_two = `. Captured source has one
+  array Top declaration and zero scalar Top declarations. The single-acode internal I-result is a package
+  variable; `.14.1` owns literal-safe lowering and `.14.2` owns invocation-local state with independent proof.
+- I-only probes had no outgoing selector, selected no executable handler, and returned zero; they do not
+  activate the per-regex match path and are excluded from literal-preservation evidence. This agrees with
+  the existing no-self-match entry invariant. The explicit-edge literal control returns return unchanged.
+  The old indexed two-edge AND reverify returns 1 after removing retired parse_mode, so that fix stays closed.
+- Retained processes all exited zero and no diagnostic job remains. New Knowledge preserves exact result/
+  source/seed boundaries. Emitted source was inspected, not independently loaded; no other-backend failure
+  is claimed. Next `.3.2.15` reads emitter 1404–1920 plus LinkedRE/ActionIR AST; codebase/book remain incomplete.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -1215,7 +1281,7 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   `f864f881`; `.3.2.7` is item 10/100 at `dc7f5f09`; `.3.2.8` is item 11/100 at `e4b1f296`;
   `.3.2.9` is item 12/100 at `96a1c242`; `.3.2.10` is item 13/100 at `ff6c228c`;
   `.3.2.11` is item 14/100 at `3ab399d0`; `.3.2.12` is item 15/100 at `5e2cf756`;
-  `.3.2.13` is item 16/100 once committed. `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
+  `.3.2.13` is item 16/100 at `a7d17e6f`; `.3.2.14` is item 17/100 once committed. `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
 
@@ -1284,6 +1350,8 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.12` | Seven prefix chunks/full-file identity; exact registry extraction and existing Knowledge reconciliation | PASS reading/card reverify; focused memory/doctrine/Knowledge/history and staged checks precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.12` | Required Knowledge/all nine doctrines; post-commit pointer; zero-byte brief/clean status; derived-map review | PASS at `5e2cf756`; 948 facts / 8,018 keys. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.13` | Six suffix chunks/full-file identity; public AND/OR equivalent-target controls; descriptor/source and direct rewrite | PASS reading/retained probes; focused memory/doctrine/Knowledge/history and staged checks precede landing. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.13` | Required Knowledge/all nine doctrines; post-commit pointer; zero-byte brief/clean status; derived-map review | PASS at `a7d17e6f`; 949 facts / 8,022 keys. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.14` | Seven prefix chunks/full-file identity; direct builders; public selected-I literal/source/package controls; historical return reverify | PASS reading/probes; focused memory/doctrine/Knowledge/history and staged checks precede landing. |
 
 ## Commit Log
 
@@ -1306,6 +1374,7 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `SESSION-STARTUP-READING.3.2.11` | `SESSION-STARTUP-READING.3.2.11 - read RuleIR and own edge-order repair` | Sixteen full Perl files read; native/public order defect and repair `.12` preserved. |
 | `SESSION-STARTUP-READING.3.2.12` | `SESSION-STARTUP-READING.3.2.12 - read EmitContext bridge and reconcile registry` | EmitContext prefix read; owner cardinality and retrieval corrected; suffix remains unread. |
 | `SESSION-STARTUP-READING.3.2.13` | `SESSION-STARTUP-READING.3.2.13 - complete EmitContext reading and own blind-edge repair` | Seventeen full Perl files read; blind occurrence-identity defect and repair `.13` preserved. |
+| `SESSION-STARTUP-READING.3.2.14` | `SESSION-STARTUP-READING.3.2.14 - read emitter prefix and own I-block repairs` | Emitter prefix read; literal/scope defects and `.14` repair children preserved; historical contracts reconciled. |
 
 ## Changelog
 
@@ -1343,3 +1412,5 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   `.3.2.13` reads the suffix next; codebase/book remain incomplete.
 - `2026-09-06`: `.3.2.13` completes EmitContext reading and owns repeated blind-target repair `.13`.
   `.3.2.14` reads HandlerVariantEmitter next; codebase/book remain incomplete.
+- `2026-09-06`: `.3.2.14` reads the emitter prefix, reconciles historical cards, and owns I-block literal/scope
+  repairs `.14.1`/`.14.2`. `.3.2.15` reads the emitter suffix plus LinkedRE and ActionIR AST.

@@ -10,6 +10,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.14 — I-block lowering must preserve data and scope
+
+- The emitter rewrites return text inside I-block strings, including the prefix of returning. Its single-acode result
+  variable lacks a scalar lexical; localized package Top seeds change and receive the same parser's output.
+  Literal-safe lowering and invocation-local storage have separate `.14` repair children.
+- HandlerIR carries lowered strings; cursor_policy and private undef dispatch reconcile its dated design card.
+  Historical explicit-edge return remains fixed at result 1. Emitter suffix/LinkedRE/AST reading follows.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.13 — blind-edge occurrence identity
 
 - EmitContext preserves duplicate call names in BCALLs but overwrites their code in BCODEs. The emitter also

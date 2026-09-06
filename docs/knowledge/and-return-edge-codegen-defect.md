@@ -12,7 +12,7 @@ date: 2026-06-19
 status: resolved
 tags: [codegen, and-rule, handler-emitter, regression-gate, phase0]
 evidence: "PHASE0-BACKHALF-TRIAGE.1 (2026-06-19): 63 of 173 back-half failures; bisection V1–V4 + dumped generated source. FIXED by PHASE0-BACKHALF-TRIAGE.3 (2026-06-21): full phase0 dropped 173→111 failing (62 cleared, all cluster-D + named-G AND-codegen tests now pass; zero regressions)."
-reverify: "perl -Iperl -e 'require LinkedSpec; my $s=\"Top::AND\\n /a/\\n /b/\\n -> Top[0] { x = 1 }\\n -> Top[1] { return(1) }\\n\"; my %c; my $p=LinkedSpec::Get(\\$s,top_rule=>q{Top},parse_mode=>q{consume},runtime_ctx_ref=>\\%c); my $in=q{ab}; my $a=$p->(\\$in); print defined($a)?qq{ast def (FIXED)\\n}:qq{ast UNDEF (defect present)\\n}'  # now prints 'ast def (FIXED)'"
+reverify: bash tools/project_data_run.sh env PERL5LIB= perl -Iperl -MLinkedSpec -MJSON::PP -e 'my $s=qq{Top::AND\n /a/\n /b/\n -> Top[0] { x = 1 }\n -> Top[1] { return(1) }\n};my $p=LinkedSpec::Get(\$s);die q{compile failed} unless ref($p) eq q{CODE};my $in=q{ab};print JSON::PP->new->encode($p->(\$in)),qq{\n};'
 ---
 
 > **RESOLVED 2026-06-21 (`PHASE0-BACKHALF-TRIAGE.3`, authorized by ADR `0008`).** Root cause was a
@@ -27,6 +27,11 @@ reverify: "perl -Iperl -e 'require LinkedSpec; my $s=\"Top::AND\\n /a/\\n /b/\\n
 > This also fixed the single-acode handler's separate never-`push`ed-acode bug (edge action silently
 > dropped → `[]`). All 21 cataloged AND-rule tests return the raw author payload as expected. The card
 > below is the original (defect-present) reading, kept for history.
+
+Reverified on 2026-09-06 under `SESSION-STARTUP-READING.3.2.14`: the indexed two-edge
+control returns `1`. The command now omits retired `parse_mode`. The separate per-regex
+I-block literal/scope defect is owned in [[perl-and-icode-literal-and-state-corruption]];
+this historical explicit-edge fix remains resolved.
 
 Established by `PHASE0-BACKHALF-TRIAGE.1` (read-only triage, 2026-06-19). A latent **reference-engine
 codegen defect** surfaced (not caused) when the phase0 back half stopped being masked by the

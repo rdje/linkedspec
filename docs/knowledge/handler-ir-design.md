@@ -12,7 +12,7 @@ answers:
 date: 2026-06-14
 status: accepted
 tags: [architecture, handler-ir, portability, backends, specentry]
-evidence: "perl/LinkedSpec/HandlerVariantEmitter.pm — 10 variant builders return HandlerIR hashrefs; _emit_handler dispatches via %BACKEND_EMITTERS; _emit_handler_json proves pluggability"
+evidence: "Original MEDIUM-IMPACT HandlerIR design, reconciled by SESSION-STARTUP-READING.3.2.14: ten variant kinds; builders retain lowered Perl action/lifecycle strings, cursor_policy is the current field, and this module registers Perl plus diagnostic JSON. A direct builder probe preserves preamble/acode strings; unknown backend/kind dispatch returns undef."
 reverify: "grep -n 'kind =>' perl/LinkedSpec/HandlerVariantEmitter.pm | head -15"
 ---
 
@@ -31,8 +31,19 @@ lifecycle slot placement — without committing to any target language. A separa
 
 ## Decision
 
+Current-source reconciliation (2026-09-06, `SESSION-STARTUP-READING.3.2.14`): this is a
+structural handler representation, with already-lowered Perl strings in its action and
+lifecycle fields. It does not make those payloads language-neutral. The current field is
+`cursor_policy`, supplied where the variant uses it; the historical `parse_mode` field is
+retired. This Perl module registers `perl` and diagnostic `json`, not the native runtime
+implementations. Unknown backend/kind dispatch currently returns `undef`; the clear-error
+rule below describes the original desired emitter contract, not a proved private diagnostic.
+The dated variant/lifecycle catalog below is historical design context; current rule-local
+selection belongs to [[rule-local-cursor-and-bare-edge-contract]].
+
 1. **HandlerIR is a hashref AST.** Every variant builder returns a plain hashref
-   with well-defined keys. No Perl source strings in the IR layer.
+   with well-defined structural keys. Action and lifecycle payloads remain lowered Perl
+   strings, as detailed in Lifecycle Slot Semantics below.
 
 2. **10 variant kinds.** The current variant catalog covers all combinations of
    rule mode (default/AND/OR/REP) and dispatch style (acode/bcode/mixed).

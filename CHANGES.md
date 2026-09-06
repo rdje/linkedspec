@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.14 — read emitter prefix and own I-block repairs
+
+- Read HandlerVariantEmitter 1–1403 / 53,304 bytes and reconciled historical HandlerIR/return records.
+- Public/source/seed controls prove quoted return text is rewritten and single-acode I-result state reaches
+  the SpecEntry package. `.14.1`/`.14.2` own literal-safe lowering and invocation-local state after reading.
+- Focused identity/probes, Knowledge, memory/doctrines/history, and staged review; source/book unchanged.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.13 — complete EmitContext reading and own blind-edge repair
 
 - Read the 1,094-line suffix; EmitContext is fully covered at 2,583 lines / 95,475 bytes, seventeen Perl files total.
