@@ -10,6 +10,15 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.1 — read facade invocation owners
+
+- Read all five exact facade/dispatch/runtime/parser-factory/context files through EOF: 1,430 lines / 56,706
+  bytes. Reconciled owner flow and leading-trivia behavior with existing Knowledge rather than re-deriving them.
+- Preserved complete source identity against the reading baseline. Codebase/book reading remains No; `.3.2.2`
+  splits the remaining 84 Perl paths next. No runtime, public documentation, or new-defect claim changes.
+- Validation: full bounded reading, baseline diff, managed facade/phase0 syntax, focused memory/doctrine/Knowledge,
+  both history-pressure checks, and staged review.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.1 — bound the codebase reading inventory
 
 - Classified all 2,547 baseline Git entries with exact object-byte counts and disjoint selectors, including

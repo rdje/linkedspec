@@ -5,7 +5,7 @@ Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and po
 
 Current session prerequisite: [SESSION-STARTUP-READING](docs/tasks/SESSION-STARTUP-READING.md) records the
 director-required reading before `RUST-MUTATION-TESTING.1`. Roadmap reading and exhaustive inventory `.3.1` are
-complete; `.3.2.1` reads five facade/invocation owners next. Diagnosis `.6` owns a cleanup-liveness repair under `.7`
+complete; `.3.2.1` read five facade/invocation owners, and `.3.2.2` splits remaining Perl reading next. `.7` repairs cleanup
 after codebase/book/policy reading; recovery/purge and mutation setup wait for that repair.
 
 Rule-local cursor rollout is closed at 74 files / 8 complete + 0 pending / 60 mutations; recurring backend proof

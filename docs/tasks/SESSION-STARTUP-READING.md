@@ -83,14 +83,19 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Children: `.3.2.1`, `.3.2.2`
 
 - ID: `SESSION-STARTUP-READING.3.2.1`
-  Status: `pending`
+  Status: `done`
   Goal: Read the facade invocation and shared-context owners in full.
   Acceptance: Read `perl/LinkedSpec.pm` 1–296, `perl/LinkedSpec/OwnerDispatch.pm` 1–220,
     `perl/LinkedSpec/Runtime.pm` 1–154, `perl/LinkedSpec/ParserFactory.pm` 1–368, and
     `perl/LinkedSpec/RuntimeContext.pm` 1–392. Reconcile against the existing thin-facade Knowledge card;
     record exact comprehension and any tool-confirmed issue. No runtime-change or full-codebase claim.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Full untruncated five-file reading and baseline identity/delta review; existing Knowledge-owner comparison; managed Perl facade/phase0 syntax; `bash scripts/check_memory_architecture.sh`; required pre-commit `bash scripts/check_doctrines.sh`; both `tools/roll_document_history.pl --check` surfaces; `git diff --check`.
+  Canonical trigger: `none` — bounded source-reading checkpoint, with no production or public behavior change.
+  Verification: All five exact files read through EOF without truncation; Git proves baseline identity. Existing
+    thin-facade and leading-trivia Knowledge cards reconcile the owner flow and public-wrapper boundary. Managed
+    facade/phase0 syntax passes; no production change, new defect, or runtime/audit-completion claim.
+  Commit: `SESSION-STARTUP-READING.3.2.1 - read facade invocation owners`
 
 - ID: `SESSION-STARTUP-READING.3.2.2`
   Status: `pending`
@@ -217,7 +222,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.1` | `pending` | Read the exact five-file facade invocation boundary, then split the remaining Perl paths. |
+| 1 | `SESSION-STARTUP-READING.3.2.2` | `pending` | Split the remaining 84 baseline Perl paths into exact bounded reading children. |
 
 ## Reading Ledger
 
@@ -228,7 +233,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | `perl/LinkedSpec.pm` in full; checkpoint-relevant scripts listed below. | Its owner/import tree and all other first-party implementation, tests, specs, fixtures, and tooling not explicitly listed as read. |
+| Codebase | **No** | Five facade/invocation/context files in full under `.3.2.1`; checkpoint-relevant scripts listed below. | Remaining 84 Perl paths and other first-party source/test/spec/fixture/tool inputs not explicitly listed as read. |
 | mdBook | **No** | `docs/linkedspec-book/src/SUMMARY.md`; `docs/linkedspec-book/src/development/local-ci-and-regression.md` 1897–1943 and 1988–2004. | All other chapter text, including the unread portions of that development chapter. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -317,6 +322,25 @@ relationships despite prior facade coverage. Other inputs remain unread unless l
 records; all source/test/spec/tool inputs and all book files remain unchanged. Every checkpoint's own final diff
 is reviewed separately.
 
+### Facade invocation reading at `.3.2.1`
+
+- Completed `perl/LinkedSpec.pm` 1–296, `perl/LinkedSpec/OwnerDispatch.pm` 1–220,
+  `perl/LinkedSpec/Runtime.pm` 1–154, `perl/LinkedSpec/ParserFactory.pm` 1–368, and
+  `perl/LinkedSpec/RuntimeContext.pm` 1–392, each through EOF without truncation. All five remain byte-identical
+  to the baseline; this is five unique Perl files, not five newly unread files plus the earlier facade credit.
+- Understanding agrees with `docs/knowledge/linkedspec-pm-is-thin-facade.md`: public wrappers normalize and
+  delegate; `OwnerDispatch` resolves lazy callbacks/bundles and preserves successful caller error/context;
+  `ParserFactory` resolves/loads named source through injected owners; `Runtime` delegates compiler work;
+  `RuntimeContext` owns identity, source capture, and structured diagnostics/fallback precedence.
+- The public runtime wrapper resets the input position and skips leading blank/comment lines. Retrieved
+  `docs/knowledge/ds-vhistory-leading-newline-oracle-boundary.md` before interpreting that behavior: it is an
+  already-owned cross-backend public-versus-direct-handler boundary, not a new defect from this reading.
+- Descriptor, parser, and mode-only return shapes are deliberately distinct; early factory errors and deeper
+  compiler errors retain their intended attribution. This reading does not validate every dependency's behavior;
+  those remaining owners stay in subsequent bounded leaves.
+- Source identity and both managed syntax checks pass. No new causal fact beyond the retrieved owners, no
+  production/public change, and no fresh behavioral-conformance claim results from this reading checkpoint.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -331,7 +355,7 @@ is reviewed separately.
 - No runtime behavior was verified by reading. No new public explanation is warranted by this checkpoint;
   substantive codebase/book drift, if found during `.3`/`.4`, must receive an owning leaf before remediation.
 - Batch history: `.2` is resumed item 1/100 at `d6d3c890`; `.6` is item 2/100 at `03d692c1`; `.3.1` is item 3/100
-  once committed. `.1` belongs
+  at `942c6138`; `.3.2.1` is item 4/100 once committed. `.1` belongs
   to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -370,6 +394,8 @@ is reviewed separately.
 | `2026-09-06` | `SESSION-STARTUP-READING.6` | Focused memory/history/diff plus required pre-commit Knowledge and all nine doctrines; post-commit pointer; clean status/empty brief | PASS at `03d692c1`; diagnostic checkpoint complete, repair remains pending. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.1` | Exact baseline object/class census, binary/decoded inventory, whole-source delta, bounded first-child accounting | PASS; 2,547 disjoint entries and no source/test/tool/book delta; inventory is not reading credit. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.1` | Managed Perl facade/phase0 syntax; both history-pressure checks; diff review | PASS; both syntax checks OK, change-history warns below rollover, engineering notes OK. Required pre-commit supplies final doctrine/Knowledge proof. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.1` | Required pre-commit Knowledge and all nine doctrines; post-commit pointer; clean status/empty brief | PASS at `942c6138`. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.1` | Exact five-file full reading, baseline identity, existing owner/trivia Knowledge, managed facade/phase0 syntax | PASS; 1,430 lines / 56,706 bytes covered, no production delta. |
 
 ## Commit Log
 
@@ -379,6 +405,7 @@ is reviewed separately.
 | `SESSION-STARTUP-READING.2` | `SESSION-STARTUP-READING.2 - complete roadmap reading` | Completed roadmap reading; exact coverage and focused checks, remaining reading and liveness discrepancy owned. |
 | `SESSION-STARTUP-READING.6` | `SESSION-STARTUP-READING.6 - diagnose denied liveness probes` | Exact causal evidence and owned repair; no production change or deletion test. |
 | `SESSION-STARTUP-READING.3.1` | `SESSION-STARTUP-READING.3.1 - bound the codebase reading inventory` | Complete baseline accounting and bounded next child; source/book reading still incomplete. |
+| `SESSION-STARTUP-READING.3.2.1` | `SESSION-STARTUP-READING.3.2.1 - read facade invocation owners` | Five unique Perl files complete; remaining 84 Perl entries and other lanes remain unread. |
 
 ## Changelog
 
@@ -390,3 +417,5 @@ is reviewed separately.
   Required reading resumes at `.3`; managed recovery/purge remains unused until repaired.
 - `2026-09-06`: `.3.1` classifies every baseline entry, owns all source lanes, completes Toolbox reading, and
   defines exact `.3.2.1` coverage before source reading. No production or public-book change.
+- `2026-09-06`: `.3.2.1` completes the five-file invocation boundary and reconciles it with existing Knowledge;
+  `.3.2.2` owns decomposition of the remaining 84 Perl paths.

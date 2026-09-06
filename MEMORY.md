@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `03d692c13bbc49590f318dd4c8536008d9f979f5` — clean diagnosis checkpoint before codebase inventory.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.1 - bound the codebase reading inventory`; exact inventory complete.
+- activation_commit: `942c613894db31e7d3d4d282a8326cf368d3b0bc` — clean inventory checkpoint before facade-owner reading.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.1 - read facade invocation owners`; five-file reading complete.
 - active_work_unit: none; bounded reading and cleanup repair remain pending in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: activate `SESSION-STARTUP-READING.3.2.1`; read its five exact facade/invocation/context files,
-  then continue the bounded code/book/policy reading and repair `.7` before Rust mutation setup.
+- next_action: activate `SESSION-STARTUP-READING.3.2.2`; split the remaining 84 baseline Perl files into exact
+  bounded reading children, then continue code/book/policy reading and repair `.7` before Rust mutation setup.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge and mutation setup: denied PID/group inspection falsely authorizes cleanup; reading can continue.
 - current_rust_warning_debt: repeated clean carriers report 1,870 `pgen` plus 26 `rgx-core` output warnings;
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4986` is the twenty-fifth history segment; ADR `0100`
   authorizes exactly 27 collection files / 26 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; exhaustive inventory, exact coverage, rgx exclusion, and resumed batch progress (3/100 after `.3.1` lands) are in SESSION-STARTUP-READING.
+- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; exhaustive inventory, exact coverage, rgx exclusion, and resumed batch progress (4/100 after `.3.2.1` lands) are in SESSION-STARTUP-READING.

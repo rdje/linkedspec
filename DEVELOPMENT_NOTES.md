@@ -10,6 +10,15 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.1 — facade reading continuity
+
+- The five-file read agrees with the existing thin-facade ownership record. Keep compiler semantics in the
+  remaining compiler/frontend/ActionIR owners; this checkpoint covers invocation and context plumbing only.
+- The public wrapper's leading-trivia skip is already explained by the ds_vhistory Knowledge card and differs
+  from direct descriptor-handler entry. Retrieval avoided misclassifying an existing contract as a new defect.
+- Preserve exact file/range credit and distinguish syntax/source identity from fresh runtime proof. The remaining
+  84 Perl files require bounded children before reading; the full codebase and book gates remain incomplete.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.1 — exhaustive reading without duplicate manifests
 
 - The immutable Git baseline and ordered disjoint path rules account for every input. Keep membership/object
