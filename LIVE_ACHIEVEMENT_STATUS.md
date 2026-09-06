@@ -2,25 +2,27 @@
 
 ## Current Activity
 
-- `SESSION-STARTUP-READING` owns the director-required reading prerequisite. Roadmap reading and exhaustive
-  inventory `.3.1` are complete; codebase and mdBook reading remain incomplete. The director excluded `rgx`
-  and its nested dependencies. Diagnosis `.6` confirms false-dead cleanup authorization on denied inspection;
-  `.7` owns cleanup repair; `.8` stale comparison; `.9` regex tails; `.10` unbound AND_BCODE inputs; `.11`
-  diagnostic source context; `.12` bare/explicit edge order; `.13` repeated blind-target code identity. All follow
-  required reading, before mutation setup; `.14` owns I-block/repetition literal and result-scope repairs.
-  `.15` owns nested AST offsets; `.16` owns emptiness/host-slot repair. Feature and capability status are unchanged.
+- `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
+  exhaustive inventory are complete; codebase/book remain incomplete. `rgx` and its dependencies are excluded.
+- Intake `.31` preserves all baseline Perl source reading, supporting book/native/tool ranges, confirmed
+  findings, and donor-policy comparisons. Queued comprehension checkpoints `.3.2.22`–`.3.2.54` remain pending.
+- Repairs `.7`–`.30` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
+  Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.21` completes four files, owns emptiness repairs, and preserves notes history.
-  This is item 24/100; twenty-nine full Perl files read. Codebase/book remain incomplete.
+- `SESSION-STARTUP-READING.31` preserves the forward evidence and gives confirmed findings repair ownership.
+  This is item 25/100. The previous canonical checkpoint passed and committed at `17d3e919`.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.22`: read ActionIR/MethodExpr.pm baseline lines 1–298.
-  Complete required reading and policy review, then repairs `.7`–`.16` before Rust mutation configuration.
+- Activate `SESSION-STARTUP-READING.3.2.22`: complete the MethodExpr comprehension/Knowledge checkpoint.
+  Continue required reading and policy review, then the tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.31` preserves forward reading and confirmed findings,
+  creates repair ownership `.17`–`.30`, and records successful preceding canonical completion.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.21` completes four files, owns emptiness repairs `.16`,
   and preserves exact notes history under ADR 0103; MethodExpr is next.
@@ -66,9 +68,6 @@
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.7` completes compiler reading and indexes existing pipeline
   phase/mode/error boundaries; `.3.2.8` reads SpecEntry.pm next.
-
-- `2026-09-06` — `SESSION-STARTUP-READING.3.2.6` reads the compiler prefix and preserves exact prior CI/loader
-  evidence; the historical duplicate-slot card points to its fix, and `.3.2.7` reads the suffix next.
 
 ## History
 

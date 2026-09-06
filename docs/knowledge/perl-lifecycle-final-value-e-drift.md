@@ -8,6 +8,7 @@ answers:
   - "why should lifecycle examples use explicit return"
   - "can Perl lifecycle blocks leak the final statement value"
   - "is Perl lifecycle final-value drift a docs caveat or implementation task"
+  - "which startup repair owns Perl direct default E finalization"
 date: 2026-07-08
 status: current
 tags: [perl-reference, lifecycle, generated-handlers, mdbook, SPEC-LANG-REFERENCE]
@@ -29,3 +30,16 @@ This is a current-backend caveat, not a portable language feature.
 `SPEC-LANG-REFERENCE.10.5.20` records the decision in ADR 0020: keep this as a
 documented caveat until a separate implementation/parity task explicitly owns any Perl
 generated-handler behavior change.
+
+The September 6 intake at `SESSION-STARTUP-READING.31` gives that implementation/parity work an explicit
+owner: `SESSION-STARTUP-READING.27`, with separate contract/mode reconciliation, Perl repair, and carrier/book
+closeout children. ADR 0020 remains the historical caveat decision; this intake does not normalize behavior.
+
+At baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`, public controls with no outgoing edge and
+`Top:: /x/ E { return(match_text()) }` return `0` on Perl and `"x"` on Julia. Explicit self-edge return
+controls return `"x"` on both. Perl's no-edge E constant returns `0`; an I constant works; E after an edge
+assignment returns null. Full generated-source inspection omits the direct regex/E path: the default builder
+in `perl/LinkedSpec/HandlerVariantEmitter.pm` at 100–115 returns undef without action code, while
+`perl/LinkedSpec/SpecEntry.pm` at 143–186 and 287–295 passes E code without a usable handler for that shape.
+Julia's mode execution retains its own regex. These bounded observations require reconciling the intended
+mode/lifecycle contract; they do not establish that Julia is wrong or authorize implicit self-matching changes.

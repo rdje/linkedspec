@@ -10,6 +10,16 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.31 — evidence survives the canonical wait
+
+- Read-only preparation during the frozen canonical candidate is now recorded without bulk-closing queued
+  comprehension checkpoints. Exact ranges, boundaries, controls, causes, and donor revisions live in the task-tree.
+- Confirmed runtime/tool defects and public-checker blind spots have repair children; existing lifecycle debt
+  keeps its original Knowledge owner and gains implementation ownership. Rust semantic behavior remains unprobed.
+- Permissive JSON displayed a retained typed error as null. Source and object controls resolve the artifact;
+  this does not establish parser diagnostic loss or connect it to the separately measured lazy-trace defect.
+- Policy adoption and runtime/public repairs remain gated on complete reading. The intake changes no public behavior.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.21 — flow adapters, emptiness repairs, and history
 
 - Complete ControlFlow/DeclareMethod/Diagnostics/FlowExpr reading: 1,439 lines / 59,142 bytes, baseline-identical.

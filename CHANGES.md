@@ -10,6 +10,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.31 — preserve forward reading and own confirmed repairs
+
+- Preserve exact forward Perl/book coverage, confirmed diagnostics, donor-policy provenance, and prior CI completion.
+- Own repairs .17–.30 before remediation; fourteen Knowledge cards index causes and the typed-error JSON artifact.
+- All baseline Perl source has been read; individual .3.2.22–.3.2.54 checkpoints remain open. Codebase/book stay No.
+- The preceding canonical candidate passed and committed at 17d3e919. This tracking intake uses focused
+  Knowledge, memory/doctrine, history, baseline/evidence, and staged-scope checks; MethodExpr is next.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.21 — read flow adapters and preserve required history
 
 - Complete ControlFlow/DeclareMethod/Diagnostics/FlowExpr: 1,439 lines / 59,142 bytes; twenty-nine files read.

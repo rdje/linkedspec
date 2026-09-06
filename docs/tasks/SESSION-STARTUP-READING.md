@@ -35,7 +35,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -758,7 +758,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING.5`
   Status: `pending`
   Goal: Complete supplied-policy adoption/update comparisons and the startup alignment review before implementation.
-  Acceptance: Record local adoption evidence and applicable donor updates; own any required changes; confirm all three reading answers Yes, then route to repairs `.7`–`.14` before restoring RUST-MUTATION-TESTING.1.
+  Acceptance: Record local adoption evidence and applicable donor updates; own any required changes; confirm all
+    three reading answers Yes. Review and complete `.29` as part of adoption before this closeout, then route to
+    the remaining tracked startup repairs before restoring RUST-MUTATION-TESTING.1.
   Verification: `pending`
   Commit: `pending`
 
@@ -966,11 +968,358 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: `pending` — `.3.2.21` lowering emits `$0` for literal 0 through the permissive scalar extractor.
   Commit: `pending`
 
+- ID: `SESSION-STARTUP-READING.17`
+  Status: `pending`
+  Goal: Make wrong-kind collection helpers independent of same-named Perl host slots.
+  Dependencies: Required reading `.3`/`.4` and policy `.5`; emptiness/literal repair `.16`.
+  Children: `.17.1`, `.17.2`
+
+- ID: `SESSION-STARTUP-READING.17.1`
+  Status: `pending`
+  Goal: Guard array helpers by the evaluated DSL value kind before host-slot fallback.
+  Acceptance: Lock count/first/last on wrong-kind values against isolated empty/nonempty same-named host arrays.
+    Audit direct array-helper consumers, evaluate operands once, preserve valid binding/array behavior and
+    supported generated/loaded routes, and update the book and Knowledge with focused direct-dependent proof.
+  Verification: `pending` — intake `.31` records six parser/host-seed controls; no repair has landed.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.17.2`
+  Status: `pending`
+  Goal: Apply the same evaluated-value boundary to hash counts, key views, and membership.
+  Acceptance: Lock count_keys/sorted_keys/has_key against unrelated host hashes; cover wrong kinds, present null,
+    missing keys, evaluated key order, detached views and snapshots, side effects, and supported carriers.
+    Reconcile the governed wrong-kind contract before changing results; preserve valid aggregate bindings.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.18`
+  Status: `pending`
+  Goal: Preserve quoted source data through primitive rewriting and canonical-event scanning.
+  Dependencies: `.3`/`.4`/`.5`.
+  Children: `.18.1`, `.18.2`
+
+- ID: `SESSION-STARTUP-READING.18.1`
+  Status: `pending`
+  Goal: Prevent primitive set rewriting from modifying text inside a quoted value.
+  Acceptance: Turn the recorded quoted set(counter, 2) corruption into a regression; cover both quote forms,
+    escaped delimiters, comments, regex literals, nested calls, and genuine executable set operations.
+    Use actual lexical/source spans rather than blind substring substitution; preserve downstream source identity.
+  Verification: `pending` — PrimitivePipelineRules' unmasked matcher and raw replacement are localized in `.31`.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.18.2`
+  Status: `pending`
+  Goal: Emit canonical assignment events only for executable assignment syntax.
+  Acceptance: Reject the false ASSIGN event contributed by quoted helper-looking text while retaining real,
+    nested, and repeated assignment events, stable order, exact spans, and once-only event production.
+    Cover descriptor, generated, and direct-dependent scanner consumers; synchronize public teaching as needed.
+  Verification: `pending` — CanonicalEvents independently scans the unmasked quoted spelling.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.19`
+  Status: `pending`
+  Goal: Enforce the active map_leaves! receiver guard for dynamic codeblock assignment.
+  Dependencies: `.3`/`.4`/`.5`.
+  Acceptance: Lock the dynamic-callback bypass alongside the already-rejected direct write. Route nonparameter
+    binding writes through resolved receiver identity checks; preserve parameter shadowing, pure function scope,
+    atomic traversal/rebind, exception unwinding, detached results, and post-commit continuation.
+    Audit all CodeblockRuntime write paths and supported carriers; run direct-dependent mutation/callable proof.
+  Verification: `pending` — `.31` records guarded direct assignment versus unguarded dynamic callback writes.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.20`
+  Status: `pending`
+  Goal: Remove Unicode-digit truncation and warning-producing scalar numeric coercion.
+  Dependencies: `.3`/`.4`/`.5`.
+  Children: `.20.1`, `.20.2`
+
+- ID: `SESSION-STARTUP-READING.20.1`
+  Status: `pending`
+  Goal: Resolve the numeric-string digit language against the normative grammar and independent model.
+  Acceptance: Compare Arabic-Indic and mixed-digit strings with ASCII controls across the neutral oracle and
+    native routes. Distinguish accepted-digit conversion from unsupported-digit rejection; do not assume ASCII
+    rejection or silently bless host truncation. If the governed intent remains ambiguous, ask the director
+    before changing it. Own the exact bounded implementation and fixture movement before editing consumers.
+  Verification: `pending` — Perl and the neutral Python oracle currently disagree on two recorded strings.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.20.2`
+  Status: `pending`
+  Goal: Implement the resolved numeric boundary consistently and without host conversion warnings.
+  Dependencies: `.20.1`.
+  Acceptance: Apply the resolved rule to all affected numeric consumers and carriers; preserve the governed
+    55-case / 18-helper contract, finite-value rules, ASCII controls, and independent expected results.
+    Include non-ASCII/mixed-digit negative or positive locks, generated execution, and accurate book examples.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.21`
+  Status: `pending`
+  Goal: Make recognition-token escape validation lexical and independent of compilation order.
+  Dependencies: `.3`/`.4`/`.5`.
+  Children: `.21.1`, `.21.2`
+
+- ID: `SESSION-STARTUP-READING.21.1`
+  Status: `pending`
+  Goal: Remove first-token-name caching from recognition-token validation.
+  Acceptance: Lock fresh and warmed compiler orders for multiple token names, repeated compilation, Unicode
+    identifiers, rejected bare escapes, and valid nonescaping use. Preserve exact diagnostics and authority
+    boundaries; a missing compile rejection is not evidence that active authority escaped at runtime.
+  Verification: `pending` — the variable-interpolated /o matcher caches the first token name.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.21.2`
+  Status: `pending`
+  Goal: Exclude literal/comment occurrences from recognition-token escape detection.
+  Acceptance: Preserve quoted token-name text while rejecting actual bare escapes; cover nested value syntax,
+    comments, regexes, escaped delimiters, source spans, and supported serialized/generated consumers.
+    Run the recognition contract and direct-dependent lifecycle/error controls; update book and Knowledge.
+  Verification: `pending` — quoted token-name text is currently misclassified by the raw search.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.22`
+  Status: `pending`
+  Goal: Project rule helpers, bindings, and calls independently of an unrelated user-function definition.
+  Dependencies: `.3`/`.4`/`.5`.
+  Children: `.22.1`, `.22.2`, `.22.3`
+
+- ID: `SESSION-STARTUP-READING.22.1`
+  Status: `pending`
+  Goal: Bound the native and frozen-model impact of the empty-function early return.
+  Acceptance: Reproduce the same valid rule on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; retain the
+    zero-versus-five record evidence already measured on four backends/five runtime routes. Rust is unprobed.
+    Inventory affected frozen models, digests, bindings, admissions, and public examples. Define a safe
+    coordinated repair boundary before changing exact expected data; do not silently adapt an oracle.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.22.2`
+  Status: `pending`
+  Goal: Repair the affected projection owners with independently justified shared expectations.
+  Dependencies: `.22.1`.
+  Acceptance: Include helper-only rules, unused-function twins, actual user functions, binding/call order,
+    exact source IDs/spans, and existing function vocabulary. Coordinate inseparable native/model changes
+    in the boundary approved by the impact audit; split further before editing if it exceeds a safe slice.
+    Preserve query limits, immutable snapshots, compile failures, and unsupported-source exclusions.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.22.3`
+  Status: `pending`
+  Goal: Close supported semantic carriers, MCP projection, and public teaching for the corrected rule records.
+  Acceptance: Recompose exact native, serialized/reconstructed, generated/emitted, and MCP behavior where
+    supported. Preserve unchanged transport/security contracts and reject stale missing-record expectations.
+    Update governed book examples and ownership facts; complete the required canonical closeout.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.23`
+  Status: `pending`
+  Goal: Preserve the real compilation failure in static semantic diagnostics.
+  Dependencies: `.3`/`.4`/`.5`.
+  Acceptance: Lock recognition_token_escape against the current fabricated dependency_target_missing record.
+    Keep genuine unknown-rule diagnostics correct, avoid uninitialized blank-target warnings, use honest
+    fallback for unclassified failures, and preserve exact source evidence across native/generated/MCP routes.
+    Extend the actual failure-class matrix and synchronize the book and existing authority records.
+  Verification: `pending` — `.31` records the invalid fabricated dependency and a valid missing-rule control.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.24`
+  Status: `pending`
+  Goal: Preserve the caller's Perl exception state while evaluating lazy trace detail callbacks.
+  Dependencies: `.3`/`.4`/`.5`.
+  Acceptance: Lock quiet, plain-detail, successful-callback, and throwing-callback cases against the same
+    incoming exception. Preserve exception object identity, laziness, nested/reentrant trace calls, parser
+    context, and existing callback/sink failure contracts. Audit the direct callback evaluation paths and
+    validate supported generated/CLI trace consumers without enabling callbacks at quiet levels.
+  Verification: `pending` — Trace's unlocalized callback eval replaces the incoming $@ on success and failure.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.25`
+  Status: `pending`
+  Goal: Correct gdcheck tolerance, duplicate-row, and DEFAULT cardinality behavior.
+  Dependencies: `.3`/`.4`/`.5`.
+  Children: `.25.1`, `.25.2`, `.25.3`
+
+- ID: `SESSION-STARTUP-READING.25.1`
+  Status: `pending`
+  Goal: Compare signed values using the intended nonnegative tolerance magnitude.
+  Acceptance: Lock equal negative values and values within tolerance beside positive twins; cover zero,
+    tolerance boundaries, rejected invalid configuration, exact masks, and existing comparison operators.
+    Preserve the configured meaning of tolerance and document the resolved signed-value examples.
+  Verification: `pending` — signed baseline multiplication reverses the interval for negative values.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.25.2`
+  Status: `pending`
+  Goal: Process every duplicate-key row when data is added or removed.
+  Acceptance: Lock zero-to-two and two-to-zero duplicate transitions, unequal duplicate counts, stable row
+    correspondence/order, every add/remove mask, and unaffected columns. Preserve existing keyed comparison
+    semantics rather than dropping all but index zero; add focused utility-level regression examples.
+  Verification: `pending` — addition/removal currently uses only each key's first indexed row.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.25.3`
+  Status: `pending`
+  Goal: Require exactly one DEFAULT pattern by actual array cardinality.
+  Acceptance: Cover zero, one, two, and more-than-nine authored patterns, consistent diagnostics, and valid
+    non-DEFAULT entries. Replace the decimal-string length test without broadening the configuration grammar.
+  Verification: `pending` — zero and two patterns are accepted because length(@EVAL) tests digit length.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.26`
+  Status: `pending`
+  Goal: Make ptchange file IO preserve valid caller filenames and diagnose failed reads/writes.
+  Dependencies: `.3`/`.4` and storage-policy review `.5`.
+  Acceptance: Replace shell-split input reading and ambiguous output opens; lock plain, spaced, Unicode, and
+    metacharacter filenames, unchanged transformation/clock output, and safe read/write failure behavior.
+    Resolve the machine-specific shebang and repository-derived default outputs under the reviewed locality
+    policy. Use exact owned fixtures and prevent silent empty output or unintended clobbering.
+  Verification: `pending` — identical plain/spaced inputs produce preserved text versus empty output, both exit 0.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.27`
+  Status: `pending`
+  Goal: Resolve and repair the known Perl lifecycle final-value/E-handler divergence.
+  Dependencies: `.3`/`.4`/`.5`.
+  Children: `.27.1`, `.27.2`, `.27.3`
+
+- ID: `SESSION-STARTUP-READING.27.1`
+  Status: `pending`
+  Goal: Reconcile lifecycle return and mode execution against ADR 0020 and exact cross-backend evidence.
+  Acceptance: Compare no-edge own-regex, explicit self-edge, I/E, constant-return, final-statement, and traced
+    controls. Keep rule entry distinct from mode-driven matching. Do not label Julia wrong or impose a blanket
+    own-regex prohibition from the existing Perl failure; ask the director if normative intent remains unresolved.
+    Define the required handler/return cases and bounded implementation children before changing behavior.
+  Verification: `pending` — the existing lifecycle drift card already records the debt; `.31` reverified it.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.27.2`
+  Status: `pending`
+  Goal: Preserve the lifecycle handlers and final values required by the resolved contract.
+  Dependencies: `.27.1`.
+  Acceptance: Correct the demonstrated handler omission/return path while preserving rule-entry invariants,
+    authored edge order, explicit returns, repetitions, and typed diagnostics. Include direct-dependent
+    emitter/SpecEntry and runtime regression proof; split further if the reviewed repair exceeds a safe slice.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.27.3`
+  Status: `pending`
+  Goal: Close supported lifecycle carriers and make the book's lifecycle claims exact.
+  Acceptance: Recompose native, generated/loaded, and trace examples on the required backends; reconcile
+    action-and-lifecycle-placement, trace API, helper-catalog final-statement claims, and the existing Knowledge
+    caveat. Preserve dated evidence and remove a current caveat only when its actual cases pass.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.28`
+  Status: `pending`
+  Goal: Correct demonstrated public teaching drift and cover the real claims in the relevant checkers.
+  Dependencies: `.3`/`.4`/`.5`.
+  Children: `.28.1`, `.28.2`, `.28.3`, `.28.4`, `.28.5`, `.28.6`
+
+- ID: `SESSION-STARTUP-READING.28.1`
+  Status: `pending`
+  Goal: Remove stale logical truthiness/rollout teaching and reject its actual bad paragraphs.
+  Acceptance: Align governed current prose with the admitted truth table, including string zero and empty
+    aggregates. Add actual-document and wrapped-claim mutations, preserve legitimate historical evidence,
+    and reconcile the dated drift card. Keep the already-correct runtime contract unchanged.
+  Verification: `pending` — fresh native truth controls pass while the public checker accepts contradictory prose.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.28.2`
+  Status: `pending`
+  Goal: Remove the stale remaining-backends hash-selector claim and cover it in mutation public checks.
+  Acceptance: Correct the measured paragraph and equivalent current wording; add its actual text and controlled
+    variants to the bounded public audit. Preserve all admitted mutation semantics and historical records.
+    The checker already normalizes whitespace; fix its missing semantic denial rather than inventing that bug.
+  Verification: `pending` — the 63-file public checker passes the observed false remaining-backends claim.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.28.3`
+  Status: `pending`
+  Goal: Teach current portable parse_job authoring in the introduction and include that surface in checking.
+  Acceptance: Replace the false future/unavailable introduction with the admitted assignment-annotation form.
+    Cover reachable public teaching and actual bad-paragraph mutations while retaining reserved import/provider
+    and no-outward-authority boundaries. Do not promote parse_job to an arbitrary generic helper.
+  Verification: `pending` — the current introduction is absent from the staged public-authoring reader set.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.28.4`
+  Status: `pending`
+  Goal: Qualify obsolete semantic rollout/admission counts and check the actual current fields.
+  Acceptance: Replace or explicitly date the false current 3/9 and 2/6 sentence against canonical 9/9 and 6/6.
+    Cover actual and wrapped wrong-value mutations while preserving historical evidence and all query/MCP
+    semantics. Apply the reviewed field-ownership policy rather than guessing that every number is a live count.
+  Verification: `pending` — the page is included, but the real public checker returns no error for that sentence.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.28.5`
+  Status: `pending`
+  Goal: Correct definedness return-context and cat null-fragment teaching in the helper catalog.
+  Acceptance: Replace condition-only claims with precisely supported expression contexts and executable true/
+    false examples. Verify return representation before promising portable encoding. Teach cat's null and
+    wrong-kind boundary beside the empty-string control; add bounded public regression coverage.
+    Preserve current scope/arity and scalar-to-text contracts; no runtime defect is established by these probes.
+  Verification: `pending` — returned/nested definedness works; cat with null returns null, not concatenated text.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.28.6`
+  Status: `pending`
+  Goal: Replace the host-process termination claim with the actual typed exit_now control contract.
+  Acceptance: Show native/generated typed parse unwinding and caller handling at each supported API boundary.
+    Cover the actual false process-exit paragraph and controlled variants in diagnostic public checks;
+    preserve immediate parse termination, event ordering, host continuation, and exception identity.
+  Verification: `pending` — Perl throws RuntimeExitNow and the host continues; the current public checker passes.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.29`
+  Status: `pending`
+  Goal: Align diagnostic-evidence path coverage with the actual polyglot source and verification surfaces.
+  Dependencies: Complete `.3`/`.4` and review adoption scope under `.5`; execute before `.5` adoption closeout.
+  Acceptance: Inventory actual governed source/test/contract paths and explicit exclusions; include the omitted
+    Dart, Julia, Lua, and tests controls. Add a deterministic path matrix and controlled staged-path RED/GREEN
+    proof. Keep documentation-only scope proportional; the evidence gate must not execute recorded Markdown commands.
+    Integrate the fix with the reviewed CLAIM verification adoption and required infrastructure proof.
+  Verification: `pending` — the actual gate predicate accepts Perl/Rust/t/tools twins but excludes four recorded peers.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.30`
+  Status: `pending`
+  Goal: Correct the grouped-edge book example's unproduced child return value.
+  Dependencies: `.3`/`.4`/`.5`.
+  Acceptance: Teach a valid shared matched-text block or explicit per-edge child calls with complete examples
+    for both alternatives. Preserve authored action-block dispatch semantics; do not invent implicit child
+    execution or a dynamic-callee API to rescue the prose. Add appropriate example regression coverage,
+    reconcile the existing edge ownership fact, and render the corrected book.
+  Verification: `pending` — both alternatives return null text in the book form; explicit calls and match_text controls pass.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.31`
+  Status: `done`
+  Goal: Persist read-only forward reading, confirmed findings, and repair ownership from the canonical wait.
+  Scope: Startup task ownership and evidence, Knowledge retrieval, bounded continuity, and supplied-policy provenance.
+  Acceptance: Create exact owners `.17`–`.30` before any remediation; preserve reproduced outcomes, source
+    mechanisms, existing-debt links, full/partial reading ranges, and explicit unprobed boundaries.
+    Record earlier read-only preparation without marking pending per-leaf checkpoint commits complete.
+    Preserve the preceding exact canonical result and route back to `.3.2.22`. No implementation or public-book edits.
+  Verification tier: `focused`
+  Focused checks: Recorded Toolbox/native controls and source locations; baseline/current identity and interval
+    audits; existing Knowledge reconciliation; memory/doctrine/Knowledge/history checks; final scope/diff review.
+  Canonical trigger: `none` — startup tracking only; policy, runtime, public, and infrastructure repairs remain separately owned.
+  Verification: Recorded Toolbox/native controls, exact source locations, disjoint reading audits, donor
+    comparisons, and preceding canonical completion are preserved below. Fourteen Knowledge cards plus the
+    existing lifecycle owner distinguish confirmed gaps, unprobed boundaries, and the JSON display artifact.
+    All nine doctrines, Knowledge synchronization, memory, both history limits, and staged scope/diff pass.
+    Queued checkpoint statuses stay pending; pre-commit rechecks the final candidate.
+  Commit: `SESSION-STARTUP-READING.31 - preserve forward reading and own confirmed repairs`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.22` | `pending` | Read ActionIR/MethodExpr.pm baseline lines 1–298. |
+| 1 | `SESSION-STARTUP-READING.3.2.22` | `pending` | Complete the MethodExpr comprehension/Knowledge checkpoint using the exact forward coverage preserved in `.31`. |
 
 ## Reading Ledger
 
@@ -981,8 +1330,8 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | Twenty-nine Perl files in full through FlowExpr.pm under `.3.2.21`; supporting reads below. | The other 60 Perl paths, and all other first-party inputs not explicitly listed as read. |
-| mdBook | **No** | `docs/linkedspec-book/src/SUMMARY.md`; `docs/linkedspec-book/src/development/local-ci-and-regression.md` 1897–1943 and 1988–2004; focused emptiness reference ranges under `.3.2.21` below. | All chapter text not explicitly listed as read. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.22`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
+| mdBook | **No** | `.31` records fourteen complete book sources plus the two earlier local-CI ranges: 640,041 bytes of disjoint coverage. | Remaining 1,316,541 source bytes, formal chapter checkpoints, and rendered alignment under `.4`. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
 manifest or an absolute checkout path:
@@ -1534,6 +1883,284 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   Existing `project-data-process-locality-proof` now owns this causal requirement. No profile/test is weakened;
   the failed attempt grants no receipt, and the final staged candidate requires a complete permitted rerun.
 
+
+### Forward reading and confirmed findings preserved by `.31`
+
+The exact `.3.2.21` canonical candidate stayed frozen while read-only preparation continued. This intake
+preserves that preparation before its queued reading checkpoints are committed. It grants no runtime repair,
+policy adoption, public-book change, or codebase-wide signoff. The existing `.3.2.22`–`.3.2.54` owners still
+require their individual comprehension/Knowledge/live-document checkpoints and commits; none is bulk-closed.
+
+#### Exact forward Perl reading
+
+All 89 baseline Perl entries have now been read in full, including generated material. All current Perl bytes
+remain identical to `baeb984e36a94a15951cd23d4c52def5064cdaca`. The committed checkpoint before this intake credits
+29 whole files through `.3.2.21`. The following actual read-only coverage is durable; each named leaf's existing
+Scope remains the exact path/range owner. MCP byte fragments are inclusive, one-based offsets within its blob.
+
+| Queued checkpoint | Untruncated reading chunks within its existing Scope | Scoped lines/fragments; bytes |
+| --- | --- | ---: |
+| `.3.2.22` | MethodExpr 1–150 / 151–298 | 298; 7,800 |
+| `.3.2.23` | MethodLowering 1–195 / 196–405 / 406–605 / 606–815 / 816–1010 / 1011–1210 / 1211–1405 / 1406–1495 | 1,495; 61,967 |
+| `.3.2.24` | MethodLowering 1496–1700 / 1701–1905 / 1906–2110 / 2111–2290 / 2291–2378 | 883; 33,969 |
+| `.3.2.25` | MethodLowering 2379–2585 / 2586–2795 / 2796–3005 / 3006–3210 / 3211–3410 / 3411–3580 / 3581–3743 | 1,365; 65,506 |
+| `.3.2.26` | MethodLowering 3744–3940 / 3941–4135 / 4136–4325 / 4326–4520 / 4521–4715 / 4716–4911; the second range was repeated without truncation | 1,168; 58,949 |
+| `.3.2.27` | MethodLowering 4912–5065 / 5066–5230 / 5231–5390 / 5391–5535 / 5536–5680 / 5681–5810 / 5811–5942 | 1,031; 64,411 |
+| `.3.2.28` | MethodLowering 5943–6110 / 6111–6280 / 6281–6445 / 6446–6610 / 6611–6810 / 6811–7010 / 7011–7245 | 1,303; 64,878 |
+| `.3.2.29` | MethodLowering 7246–7450 / 7451–7655 / 7656–7855 / 7856–8057; ProgressiveSpanDispatch 1–165 | 977; 36,165 |
+| `.3.2.30` | RewritePipeline 1–185 / 186–370 / 371–555 / 556–745; Scanner 1–90; FlowRules 1–175 / 176–338 | 1,173; 41,839 |
+| `.3.2.31` | LegacyRules 1–195 / 196–390 / 391–585 / 586–780 / 781–980 / 981–1179; PrimitiveBasicRules 1–135 / 136–254 | 1,433; 41,163 |
+| `.3.2.32` | PrimitivePipelineRules 1–190 / 191–380 / 381–571; RecognitionTransactionRules 1–124; ScannerCore 1–223; StagedParseJob 1–195 / 196–393; StatementSplit 1–44 | 1,355; 48,756 |
+| `.3.2.33` | StatementSplit Core 1–210 / 211–419, Mode 1–214, ActionIR Trace 1–124; ValueExpr 1–175 / 176–350 / 351–520 / 521–666 | 1,423; 47,678 |
+| `.3.2.34` | BindingRuntime 1–210 / 211–422; CallableContract 1–135; CodeblockRuntime 1–200 / 201–403; InterMatchGapRuntime 1–150 / 151–291; MCPContract 1–13 | 1,264; 39,889 |
+| `.3.2.35` | MCPContract bytes 391–16774 / 16775–33158 | 1; 32,768 |
+| `.3.2.36` | MCPContract bytes 33159–65926, consumed in bounded byte output | 1; 32,768 |
+| `.3.2.37` | MCPContract bytes 65927–83273 | 1; 17,347 |
+| `.3.2.38` | MCPContract 15–21; MCPContractRuntime 1–160 / 161–300; MCPServer 1–160 / 161–325 / 326–490 / 491–648; MCPWire 1–210 / 211–419; Numeric 1–110 | 1,484; 51,303 |
+| `.3.2.39` | PluginBridge 1–199; PluginRegistry 1–130; ProgressiveSpanDispatch 1–225 / 226–455 / 456–685 / 686–937; ProgressiveSpanDispatchPolicy 1–58 and ProgressiveSpanDispatchRuntime 1–172 | 1,496; 52,208 |
+| `.3.2.40` | RecognitionTransaction 1–220 / 221–440 / 441–655; its Policy 1–140 / 141–269 | 924; 33,632 |
+| `.3.2.41` | RecognitionTransactionRuntime 1–230 / 231–460 / 461–681; RecursiveObservationPolicy 1–71; RuntimeDiagnosticOutput 1–145 / 146–247; RuntimeLogical 1–96; RuntimeSemanticObservation 1–174 | 1,269; 39,210 |
+| `.3.2.42` | SemanticCallProjection 1–195 / 196–385 / 386–570 / 571–753; SemanticIndex 1–190 / 191–395 | 1,148; 37,003 |
+| `.3.2.43` | SemanticQuery 1–200 / 201–400 / 401–596; SemanticRuntimeProjection 1–214; SemanticSourceMap 1–172 | 982; 35,427 |
+| `.3.2.44` | SemanticStaticProjection 1–225 / 226–455 / 456–685 / 686–890 / 891–1067 | 1,067; 34,029 |
+| `.3.2.45` | SourceLocation 1–230 / 231–465 / 466–700 | 700; 21,209 |
+| `.3.2.46` | StagedASTEnrichment 1–220 / 221–440 / 441–670 / 671–900 / 901–1130 / 1131–1355 / 1356–1498 | 1,498; 49,952 |
+| `.3.2.47` | StagedASTEnrichment 1499–1720 / 1721–1940 / 1941–2013; StagedASTEnrichmentRuntime 1–120; StagedParseJob 1–180 / 181–352; StagedParseJobPolicy 1–59; StagedParserRegistry 1–170 / 171–328 | 1,374; 43,289 |
+| `.3.2.48` | Trace 1–185 / 186–365 / 366–521 | 521; 16,259 |
+| `.3.2.49` | UnicodeCaseMapping 1–1500, consumed in smaller complete table ranges | 1,500; 32,073 |
+| `.3.2.50` | UnicodeCaseMapping 1501–3000, consumed in smaller complete table ranges | 1,500; 32,854 |
+| `.3.2.51` | UnicodeCaseMapping 3001–3835, consumed in smaller complete table ranges | 835; 17,404 |
+| `.3.2.52` | UnicodeXIDContinue 1–855, complete generated range records | 855; 17,340 |
+| `.3.2.53` | UserFunctionRegistry 1–205 / 206–410 / 411–605 / 606–773; PPlugin 1–175 / 176–331; PathSearch 1–47; env.conf 1–51 | 1,202; 45,829 |
+| `.3.2.54` | gdcheck 1–225 / 226–431; htmlcss_driver 1–166; ptchange 1–125 / 126–242 | 839; 22,702 |
+
+The 82,883-byte MCP payload on logical line 14 was also decoded and reconciled with its 35-frame material.
+Its three fragment SHA-256 values are 7846664315f28f00563a9dac88632f47f5c8fbf531ff10215724620764f2df19,
+5b77ebfcc05b4bf50d90ad0891f87665cc3709c45579df37452a5e76e280dc10, and
+0c3751e106207329bacee0b2b0dfde9916242054364fcac63f493df47670c616.
+UnicodeCaseMapping's complete file is 3,835 lines / 82,331 bytes. UnicodeXIDContinue contains the existing
+806 generated ranges; its existing digest is d1b00bda47306e61ee20a7f63db783f98b15d8d15b876c7506bc4b79ecebc0bb.
+The exact-byte encoding audit found only gdcheck comment lines 164/165/167 with raw 0xb5; those bytes were
+read through escaped byte representations. No source conversion or runtime encoding defect is claimed.
+
+#### Confirmed runtime and tooling findings
+
+- `.17`: Six public Get parsers were each compiled once with proper runtime context and run against isolated
+  empty/populated host slots. Wrong-kind count/first/last changed from 0/null/null to 2/first/last;
+  count_keys/sorted_keys/has_key changed from 0/[]/0 to 1/[k]/1. Context errors stayed null and local seeds
+  were restored. MethodLowering's array fallback around 5793–5860 and hash/view/member paths around 6115–6400
+  use helper-looking names as host slot candidates before enforcing the evaluated value kind.
+- `.18`: A quoted value containing set(counter, 2) is rewritten even without an executable set call, and
+  contributes a false ASSIGN event. Toolbox output localizes the unmasked PrimitivePipelineRules matcher
+  (132–150), raw RewritePipeline replacement, and independent CanonicalEvents search (249–267). Lexical repair
+  and canonical-event repair are separately owned; source data must remain source data.
+- `.19`: Direct receiver assignment inside map_leaves! hits the typed guard; public Get returns a runtime_handler
+  failure with null result and a retained typed detail object. A dynamic codeblock
+  assignment bypasses it: the traversal can produce [a:X,a:X] or return a detached shadow with a changed
+  tree while the original path remains unchanged. CodeblockRuntime's write_binding/eval-assignment paths
+  (96/238) bypass the resolved guard enforced by BindingRuntime (76/96). Parameter shadowing remains
+  distinct from nonparameter writes; no arbitrary caller-capture feature is authorized.
+- `.20`: num_add on the string containing U+0661 and 1 returns 1 with a host warning in Perl; the neutral
+  Python oracle returns 2. Mixed ASCII 1 plus U+0662 yields 2 with a warning versus the model's 13.
+  Numeric's Unicode \d acceptance followed by host 0+ conversion (23–25) explains truncation. The intended
+  digit language must be resolved from authority; this intake does not assume that ASCII rejection is correct.
+- `.21`: Quoted transaction-token text is falsely diagnosed as escape. Separately, warming the compiler
+  with token ticket before compiling a bare tx escape makes the latter accept with INVALIDATED/error-null
+  state; a fresh bare tx case rejects. RecognitionTransactionPolicy 186–190 interpolates a token name into
+  a /o regex, caching the first name. No runtime escape of active authority was demonstrated.
+- `.22`: On the same Top rule whose self-edge assigns trim(" x ") then returns the binding, Perl, Dart,
+  Julia, PUC Lua, and LuaJIT compile/query successfully but return no helper/binding/call records. Prepending
+  an unused function produces exactly helper:trim, helper:return, binding:edge:rule:Top:0:value:0, and calls
+  call:edge:rule:Top:0:0 / :1, in order. Empty-function early returns precede rule projection in Perl
+  SemanticCallProjection 94, Dart semantic_call_projection.dart 113, Julia SemanticCallProjection.jl 87, and Lua
+  semantic_static_projection.lua 1828. Rust remains unprobed. The earlier Julia I-block control returned []
+  in both cases and is not proof of this guard; its edge-only action-owner scope was read explicitly.
+- `.23`: Get correctly rejects recognition_token_escape, but static semantic projection fabricates
+  dependency_target_missing with a blank target and an uninitialized warning. A genuine missing-rule
+  control is correct. SemanticStaticProjection's unconditional dependency-failure path (314 onward; 402/416/418)
+  loses the actual failure class; it must preserve evidence or use an honest fallback.
+- `.24`: A seeded $@ survives quiet trace and plain detail. A successful lazy detail callback replaces it
+  with an empty value; a throwing callback replaces it with its own error. Trace 398–439, especially the
+  unlocalized eval at 423, is the cause. Exception identity, nested trace, and parser context are repair criteria.
+- `.25`: gdcheck marks equal -100 values as below tolerance and -100 to -95 as above at tolerance 10;
+  positive twins are unmarked. Its signed margin reverses the interval. Adding/removing two duplicate-key
+  rows processes only index zero. DEFAULT with zero or two patterns is accepted because length(@EVAL)
+  measures the count's decimal digit length rather than requiring one element.
+- `.26`: A managed Open3 argv-list caller supplied identical plain.txt and "with space.txt" inputs.
+  ptchange preserved the plain input but emitted empty output for the spaced path, both exit 0; cat's
+  stderr shows path splitting. The script uses qx(cat $ARGV[0]) at 30, two-argument output opens at 132/155,
+  and a machine-specific shebang. This is a valid-filename failure; arbitrary command execution was not tested.
+- `.27`: The existing perl-lifecycle-final-value-e-drift card and ADR 0020 were read before probing.
+  Top's no-edge /x/ with E return(match_text()) gives Perl 0 and Julia "x", including Julia trace.
+  Explicit self-edge return controls produce "x" on both. Perl's no-edge E constant gives 0; its I constant
+  works; E after edge assignment gives null. Full generated source omits regex/E handling: the default
+  HandlerVariantEmitter builder (100–115) returns undef without action code, while SpecEntry passes E code
+  without a usable handler (143–186/287–295). Julia's mode execution keeps its own regex. Reconcile intent;
+  do not infer that Julia is wrong or erase the existing accurately scoped Perl caveat.
+- `.29`: An extracted copy of the actual diagnostic gate predicate was executed on eight lexical path
+  controls, without changing the index. Perl/Rust/t/tools paths are governed; Dart/Julia/Lua/tests peers are
+  excluded by scripts/check_diagnosis_evidence.sh 21–29. These are path-classification controls, not file
+  existence claims or full staged-hook proof. The existing evidence-shape-only limitation remains explicit.
+- `.30`: Public Get and complete generated-source inspection show the book's grouped edge returns
+  {kind:token,text:null} for both bare and quoted alternatives. Explicit per-edge retv=call(target) returns
+  bare-child/quoted-child; a shared match_text block returns the corresponding raw text. All contexts are
+  error-free. HandlerVariantEmitter's action dispatcher (489–519) emits authored blocks and does not
+  synthesize the missing child call. The documentation fix must preserve that semantic boundary.
+
+#### Measured public-checker gaps
+
+- `.28.1`: The full value/container helper reference still calls string zero false, empty aggregates true,
+  and the five-backend rollout pending at 1431–1436, with a stale pending heading at 1273. Five public Perl
+  truth controls match the admitted contract. The actual logical checker passes 17 truth cases / 10 helpers /
+  3 effect cases / 8 complete and its 19-document / 14-denial / 26-mutation public checks. Its required markers
+  and exact denial strings omit the real contradictory paragraph (source 256–399 and 815–829).
+- `.28.2`: The values/containers guide's 76–77 paragraph retains the prior-backends hash-selector claim,
+  although the same chapter records all-five-backend closure. The actual mutation public checker passes
+  63 files / 14 documents / 11 example classes / 10 denials / 50 mutations. It already normalizes whitespace
+  (257–281); its denial inventory (154–172) lacks the observed claim.
+- `.28.3`: What LinkedSpec Is 32–43 says parse_job is future/unavailable. The existing portable authoring
+  owner proves the current assignment-annotation form. The staged contract checker passes 123 neutral
+  mutations and public 6/17/10/129; its actual public reader excludes that introduction
+  (412 onward, 1438–1448, 1557–1567). Reserved import/provider boundaries remain unchanged.
+- `.28.4`: Semantic Introspection near 984 says the global ledgers are "now 3/9 and 2/6" instead of 9/9 and
+  6/6. The real public_contract_text_errors function receives the page with that sentence and returns [].
+  All 28 declared pages are present; the gap is denial coverage, not a missing page. The checker passes
+  6 groups / 20 queries / 128 mutations and current 9/0 plus 6/0 ledgers.
+- `.28.5`: Helper Catalog 298/313 says definedness is condition-only despite its own current expression
+  support note. Four true and four false returned/nested-with controls all compile/run without error;
+  Perl represents those observed results as 1 and empty string. MethodLowering 4114/4116 emits defined/
+  !defined for values, while FlowExpr 474–487 handles conditions. The catalog's cat entry says undef
+  fragments become empty text, but cat("a",undef,"b") and its array twin return null, whereas the empty-string
+  twin returns "ab". Full emitted once-only part-list/null-guard code and MethodLowering 5330 onward agree
+  with the existing scalar-to-text contract. No portable return-encoding promise follows from these Perl probes.
+- `.28.6`: Helper Catalog near 1281 claims exit_now terminates the parser process. The host demonstrably
+  continues after catching LinkedSpec::RuntimeExitNow with kind runtime_exit_now, rule Top, status 2;
+  context error stays null and the following return is not executed. RuntimeDiagnosticOutput 180–191
+  constructs, marks, and throws the typed object. The actual diagnostic checker passes 3 helpers / 11
+  render rows / 6 scenarios / 8 complete / 20 mutations; its catalog markers and single old-suffix denial
+  do not cover the false process-exit paragraph (190–310/639–649).
+
+
+#### Supporting book and tool reading
+
+The following complete book sources are baseline-identical. Existing partial reads inside them are not added
+twice. Full source reading is distinct from a rendered-book inspection, and `.4` still owns formal chapter
+decomposition, remaining reading, and alignment.
+
+| Book path below `docs/linkedspec-book/` | Full lines; bytes |
+| --- | ---: |
+| `.gitignore` | 1; 6 |
+| `book.toml` | 15; 347 |
+| `src/SUMMARY.md` | 76; 3,354 |
+| `src/index.md` | 40; 2,133 |
+| `src/overview/what-is-linkedspec.md` | 99; 6,691 |
+| `src/overview/documentation-layers.md` | 63; 3,020 |
+| `src/dsl/action-and-lifecycle-placement.md` | 658; 24,890 |
+| `src/public-api/native-spec-loading.md` | 375; 22,275 |
+| `src/public-api/plugin-registry.md` | 63; 3,278 |
+| `src/public-api/trace-api.md` | 636; 39,386 |
+| `src/public-api/semantic-introspection.md` | 4,282; 290,387 |
+| `src/dsl/value-container-flow-helper-reference.md` | 1,831; 87,584 |
+| `src/dsl/values-containers-and-flow-helpers.md` | 662; 32,595 |
+| `src/appendix/helper-contract-catalog.md` | 1,943; 120,603 |
+
+The previous partial `development/local-ci-and-regression.md` ranges 1897–1943 and 1988–2004 remain covered.
+Together these are 16 disjoint completed ranges / 640,041 bytes; all remaining book source is 1,316,541 bytes.
+Independent LF-byte interval and hash accounting covers all 50 baseline paths / 1,956,582 bytes exactly once.
+Semantic Introspection's full SHA-256 is 1d7f3db65618c8169f8e49c9532024b95300a0d09beea8004a42e381fccf6fd5;
+Helper Catalog's is 36874564ee5bc3a2bef85cc05560dedf1d251c3a4052b2c71abb2ecceb6cb1c7.
+All large chapters were consumed in smaller untruncated chunks; preloaded but unreturned tool output was not
+counted until it was emitted and read.
+
+Supporting tooling now also includes complete `tools/project_data_env.sh` 1–288,
+`tools/test_project_data_process_locality.sh` 1–329, and the Dart/Lua/Julia project-data wrappers.
+The diagnostic evidence gate was reread in full. Supporting native source ranges for `.22` were Dart's
+semantic call projection 92–180, Julia's call projection 73–155 and action-owner helper 1009–1078,
+and Lua's static projection 1820–1935; these do not complete the native files or their reading lanes.
+
+#### Resolved questions and remaining ownership
+
+- `array.length` in the variadic-function example is already supported; the existing variadic-function fact
+  resolves the question. Semantic explain budgets are operation-specific under ADR 0049. Neither becomes a defect.
+- Managed startup-only Julia controls for ordinary, one-interior-empty, and two-interior-empty depot fields
+  yield local depots with optional system depots, always with user_depot_present false. Startup/history and
+  package loading were disabled; exact temporary inputs were cleaned. No home-depot access defect is established.
+- Both baseline and current Git contain exactly thirteen parked `noncore/plugin/*.plg` paths. The existing
+  PPlugin transition card's nineteen-file count is dated June evidence; `.3.2.53` will qualify it and record
+  the current census in that owner. The book's thirteen-file count is correct; enumeration is not plugin reading.
+- Existing lifecycle debt remains linked to ADR 0020 and its original card. No duplicated lifecycle discovery,
+  speculative Julia failure, or new implicit grouped-edge child-call behavior is claimed.
+- MethodExpr's focused control independently confirms three authored values in a distinct returned array,
+  two values through legacy/fixed-arity fallback, an unchanged original list, and rejection below minimum arity.
+
+
+#### Supplied-policy comparison evidence
+
+All donor reads were explicitly authorized, read-only, and scoped to the supplied files. Each donor's scoped
+Git status was clean when compared. These records preserve provenance; `.5` still owns adoption decisions,
+mechanical changes, and final alignment after required reading.
+
+- fsmgen `README_POLICY.md`: 187 lines / 9,849 bytes; SHA-256
+  882682fa1ace703ae68726b8532a4ad24fe2c8a271bae4e07b859bd197a621c9.
+  Latest file change is `1f0443b3a4e654f8460ba6eda272c53e1d8b642d` (August 20).
+  The complete latest diff changes only fsmgen's local adoption note from a pinned capacity to a derived
+  downward ratchet; the neutral body is unchanged. LinkedSpec already adopted its own independent
+  128-line / 6,144-byte README boundary under ADR 0063 and subsequent routing closure. Do not copy donor caps.
+- fsmgen `docs/LIVE_DOCUMENT_SIZE_CONTAINMENT_ADOPTION_GUIDE.md`: 431 lines / 21,327 bytes; SHA-256
+  8f77fa39c9bcb9cfc43166259a627a6ced64682030088400b727dccc5d674a53.
+  Latest file change is `727e0d0861efeb8288b23ccd75e6b751c2fdc771` (September 5).
+  Its latest seven-line update distinguishes stable delegated checker success from duplicated changing
+  registry cardinality; exact counts remain valid for fixed synthetic fixtures. The complete guide also
+  classifies derived-on-read, verified copies, authored intent, and immutable evidence, with explicit field
+  ownership and lossless migration. LinkedSpec's README/memory/history systems implement parts of these
+  principles; this is not evidence that the whole donor package is adopted. Review actual fields/consumers in `.5`.
+- pgen `docs/CLAIM_VERIFICATION.md`: 285 lines / 18,166 bytes; SHA-256
+  9f99df25209c43afb74d77e348dd2d0cdb68ce96cf17a4f272ede8328f6046bd.
+  Latest file change is `178251cceeae72173db20db3f409db4abc7e517c` (August 30).
+  The added section 4.1 distinguishes prose, numbers, and named-instance claims; contract numbers require
+  exact gated evidence, while deterministic populations and explicit patterns are the authoring standard.
+  The complete policy requires independent rederivation, revert/reapply RED proof, and independent falsification,
+  with durable inputs and bidirectional history coverage. No explicit local adoption filename/phrase was found;
+  that does not imply all principles are absent. Existing TASK-ACCEPTANCE checks evidence shape and deliberately
+  do not execute Markdown commands. `.29` owns its measured path gap and runs before `.5` adoption closeout.
+
+#### Remaining reading preparation
+
+Read-only decomposition drafts are preparation and carry no source-reading credit. Git plus the existing
+disjoint class selectors remain the inventory authority; no additional tracked manifest was introduced.
+Independent validators checked object identities, LF/decoded-byte intervals, exact-once coverage, empty files,
+and the 1,500-line / 65,536-byte budgets. Formal child creation and manual boundary review still precede reading.
+
+| Pending lane | Baseline paths | Stored bytes | Draft reading groups |
+| --- | ---: | ---: | ---: |
+| Rust | 412 | 3,533,382 | 67 |
+| Dart | 115 | 2,471,305 | 57 |
+| Julia | 95 | 2,693,170 | 53 |
+| Lua | 99 | 2,732,450 | 51 |
+| Specs/configuration/noncore | 158 | 964,256 | 19 |
+| Shared verification/Unicode inputs | 160 | 5,422,313 | 144 |
+| Repository tools | 143 | 2,381,957 | 38 |
+
+The native drafts preserve two empty Rust fixtures and two oversized generated-line fragments each for
+Rust/Dart/Lua. Shared verification includes all four pinned gzip objects and their 3,352,036 decoded bytes;
+its total reading representation is 8,257,059 bytes. The sole current tooling delta is the owned
+`doctrine/readme_stability/routes.jsonl` history-capacity change; it is explicitly accounted for.
+The book draft follows SUMMARY order and leaves 48 pending ranges; one project-status boundary still needs
+manual review. Root guidance classifies all 28 paths: nine recorded full reads, five prescribed memory/history
+retrieval surfaces, and fourteen pending maintained documents (1,354,206 bytes). Pending root text is
+baseline-identical. These draft counts do not imply that their content was read or that their future leaves exist.
+
+#### Preceding canonical completion
+
+The unchanged staged candidate for `.3.2.21` completed canonical CI with exit 0 at 2026-09-06 13:58:18 UTC.
+The receipt binds base `ba9a494caa79fdd6fca7833d5bfc1fbce727fc9d` and candidate SHA-256
+`d3dd218a7cbce4742b9bb857f67a54bdaba85ef6c01510ffeb9f1725e83064af`.
+Mandatory checks passed, including both 66/66 CLI environments, Phase 0 1,032 tests, and the complete six-family
+process-locality oracle. Optional environment-selected matrices were unset and skipped normally; no broader
+optional-coverage claim follows. The commit hooks passed all nine doctrines, the post-commit activation pointer
+passed, and the receipt was promoted to `17d3e919118430d4fad0e31d6c1a4a8e2d9dc333`. The brief was cleared to
+zero bytes and Git was clean before activating `.31`; no background job remains.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -1556,7 +2183,8 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   `.3.2.13` is item 16/100 at `a7d17e6f`; `.3.2.14` is item 17/100 at `e421887d`;
   `.3.2.15` is item 18/100 at `762bef64`; `.3.2.16` is item 19/100 at `9a881160`; `.3.2.17` is item 20/100 at `34958c8f`; `.3.2.18` is item 21/100 at `54e1a487`;
   `.3.2.19` is item 22/100 at `8db085f2`; `.3.2.20` is item 23/100 at `ba9a494c`;
-  `.3.2.21` is item 24/100 once committed. `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
+  `.3.2.21` is item 24/100 at `17d3e919`; `.31` is item 25/100 once committed, before queued `.3.2.22`.
+  `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
 
@@ -1586,6 +2214,9 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 - `.11.1`–`.11.3` own diagnostic context/occurrence/rule-attribution repairs after `.10`; invalid inputs still reject.
 - `.12` owns confirmed native bare/explicit edge-order drift after `.11`; metadata and execution currently disagree.
 - `.16.1`/`.16.2` own confirmed emptiness expression drift and literal/host-slot leakage after `.15`.
+
+- `.17`–`.30` own the additional confirmed runtime/tool/public/evidence gaps preserved in intake `.31`;
+  existing lifecycle debt remains under its original card and gains `.27` implementation ownership.
 
 ## Verification Log
 
@@ -1641,6 +2272,10 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.21` | Exact reading/identity; pipeline trace; public emptiness/host-seed controls; required rollover/hash | PASS five trace tests and bounded controls; ADR 0103 exact staged canonical proof required before landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.21` | Canonical process-locality failure; same no-op initialization control in restricted/permitted execution; unchanged full oracle outside harness | Restricted control exits 71; permitted control and full six-family oracle PASS. Exact full canonical rerun remains required; no receipt from failed attempt. |
 
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.21` | Exact full canonical rerun, receipt, all nine doctrines, post-commit pointer and brief/status | PASS at `17d3e919`; mandatory chain, both CLI 66/66, Phase 0 1,032; optional flags unset/skipped. No pending job. |
+
+| `2026-09-06` | `SESSION-STARTUP-READING.31` | Source/card/path and unique-ID audit; exact staged scope; Knowledge/memory/all nine doctrines; both history checks; diff review | PASS: 89 unchanged Perl files, 38 new unique IDs, 33 queued checkpoints pending, 14 new cards; no public/source changes. |
+
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
@@ -1670,6 +2305,8 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
 | `SESSION-STARTUP-READING.3.2.19` | `SESSION-STARTUP-READING.3.2.19 - finish contract catalog reading` | Contracts fully read; ordered builder fact indexed; twenty-five Perl files complete. |
 | `SESSION-STARTUP-READING.3.2.20` | `SESSION-STARTUP-READING.3.2.20 - read control flow prefix and verify candidate isolation` | ControlFlow prefix read; bounded candidate-state isolation verified; existing caveat owners retained. |
 | `SESSION-STARTUP-READING.3.2.21` | `SESSION-STARTUP-READING.3.2.21 - read flow adapters and preserve required history` | Twenty-nine Perl files read; emptiness repairs owned; exact notes rollover and finite capacity recorded. |
+
+| `SESSION-STARTUP-READING.31` | `SESSION-STARTUP-READING.31 - preserve forward reading and own confirmed repairs` | Forward coverage and confirmed findings durably owned; prior canonical success; queued checkpoints remain pending. |
 
 ## Changelog
 
@@ -1723,3 +2360,5 @@ inventory. Final `.3.11` still reconciles all first-party lanes and current delt
   and retains existing caveat repair ownership; `.3.2.21` completes ControlFlow and the next adapters.
 - `2026-09-06`: `.3.2.21` completes four files, owns emptiness/literal repairs `.16`, and preserves required
   notes history under finite ADR 0103 capacity; MethodExpr follows canonical checkpoint landing.
+- `2026-09-06`: `.31` preserves forward reading and source-confirmed findings from the canonical wait,
+  owns repairs `.17`–`.30`, indexes the JSON observation artifact, and routes back to queued MethodExpr.
