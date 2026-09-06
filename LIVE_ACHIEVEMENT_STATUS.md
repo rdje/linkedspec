@@ -4,19 +4,23 @@
 
 - `SESSION-STARTUP-READING` owns the director-required reading prerequisite. Checkpoint `.2` completes roadmap
   reading; codebase and mdBook reading remain incomplete. The director excluded `rgx`
-  and its nested dependencies. Mutation parent `.19` remains closed; feature and capability status are unchanged.
+  and its nested dependencies. Diagnosis `.6` confirms false-dead cleanup authorization on denied inspection;
+  `.7` owns repair before recovery/purge and mutation setup. Feature and capability status are unchanged.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.2` completes remaining roadmap ranges and current-direction reconciliation, with
-  focused continuity proof. This is reading leaf 1/100 in the resumed batch, without implementation claims.
+- `SESSION-STARTUP-READING.6` records paired live-process/EPERM evidence, exact source cause, and repair ownership.
+  This is item 2/100 in the resumed batch. The controlled run exited 0 with zero leftovers; no deletion was tested.
 
 ## Next Action
 
 - Activate `SESSION-STARTUP-READING.3` and inventory/split remaining first-party codebase reading. Follow the recorded
-  codebase/book/policy review sequence before activating `RUST-MUTATION-TESTING.1` for safe manual configuration.
+  book/policy review sequence, then repair `.7` before activating `RUST-MUTATION-TESTING.1` for safe configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.6` proves denied liveness is falsely treated as death; exact evidence
+  and repair `.7` are durable. Recovery/purge remain unused pending repair after required reading.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.2` completes roadmap reading and reconciles the current direction;
   codebase/book reading and policy comparisons remain pending.
@@ -72,10 +76,6 @@
 - `2026-09-01` — `.19.3.2` implements Rust `map_leaves!`; 9/9 permanent carrier/behavior tests, 3/3 private
   failure-state tests, unchanged 167 base + 592 composition mutations, corrected 11/11 trace controls, and the
   complete Rust component gate pass; direct entry is locked as lifecycle-positive and own-regex-negative.
-
-- `2026-09-01` — `.19.3.1` unifies Rust nested writes under one typed expression-segment node, executes dense
-  isolated vivification across native/generated carriers, and passes focused 5/5, 197/197, 105/105, broad Rust,
-  and exact staged canonical proof.
 
 ## History
 

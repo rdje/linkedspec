@@ -2,8 +2,9 @@
 Execution-oriented companion to `ROADMAP.md`.
 
 Current session prerequisite: [SESSION-STARTUP-READING](docs/tasks/SESSION-STARTUP-READING.md) records the
-director-required reading before `RUST-MUTATION-TESTING.1`. Checkpoint `.2` completes roadmap reading;
-`.3` inventories and splits the remaining codebase reading next. Codebase/book/policy review remains pending.
+director-required reading before `RUST-MUTATION-TESTING.1`. Roadmap reading is complete; `.3` inventories and splits
+remaining codebase reading next. Diagnosis `.6` owns a confirmed cleanup-liveness defect for repair under `.7`
+after codebase/book/policy reading; recovery/purge and mutation setup wait for that repair.
 
 Rule-local cursor rollout is closed at 74 files / 8 complete + 0 pending / 60 mutations, with
 selected 5x2x5 recurring and public proof.

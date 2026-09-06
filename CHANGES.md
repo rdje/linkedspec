@@ -10,6 +10,17 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.6 — diagnose denied liveness probes
+
+- Confirmed that restricted kill-zero inspection returns EPERM for a known live managed process, while current
+  liveness helpers collapse all failures into false/dead. Restricted run listing reports abandoned; permitted
+  inspection of the identical process reports live. Recovery uses the same unsafe authorization predicate.
+- Recorded exact source locations and non-destructive paired evidence in a Knowledge card; repair `.7` is owned
+  after mandatory reading and before recovery/purge or Rust mutation setup. No premature deletion was attempted.
+- The controlled 45-second run completed normally with zero leftovers. Production and public book are unchanged;
+  this narrow startup checkpoint records diagnosis and repair ownership, not a fixed-defect claim.
+- Validation: exact controlled probe, source trace, focused memory/doctrine/Knowledge checks, history and diff review.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.2 — complete roadmap reading
 
 - Read the remaining baseline ROADMAP_V2.md lines 1341–1585 without truncation and reviewed both roadmap diffs.

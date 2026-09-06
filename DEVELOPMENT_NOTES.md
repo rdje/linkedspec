@@ -10,6 +10,17 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.6 — permission-sensitive liveness
+
+- A Boolean kill-zero failure is insufficient evidence of process death: the controlled restricted/permitted
+  comparison proves EPERM for living wrapper, child, and group identities. Both classification and deletion
+  authorization use that same collapsed result in `tools/project_data_run.sh`; repeating it cannot restore safety.
+- Keep the finding separate from observed data loss: no recovery/purge call or premature deletion was tested.
+  The managed probe ended normally and its permitted final census found no leftover run.
+- `docs/knowledge/project-data-liveness-permission-denial.md` owns the causal fact; startup leaf `.7` owns
+  conservative denied/unknown handling, meaningful regression proof, public corrections, and canonical signoff.
+  Required reading still gates source changes. Continue read-only work without invoking recovery or purge.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.2 — reconcile roadmap reading
 
 - Resumed the saved immutable reading baseline and repaired truncated output before recording completed ranges.

@@ -35,7 +35,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -79,21 +79,39 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.6`
-  Status: `pending`
+  Status: `done`
   Goal: Reconcile managed-run liveness reporting across restricted and permitted process inspection.
   Acceptance: Use one known live controlled run and compare same-run read-only `--list`, PID/group probes, and
     permitted process inspection; record exact mechanism and locations. Any confirmed false-dead cleanup boundary
     receives a repair leaf and a non-destructive regression plan before recovery is used. No ambiguous deletion.
-  Verification: A restricted `--list` labeled the running doctrine marker abandoned; subsequent permitted `ps`
-    still found wrapper 83739 and child/group 85961. Later probes found both gone and the successful run cleaned
-    itself. The snapshots were not simultaneous, so this is a discrepancy requiring proof, not a proven deletion.
+  Verification tier: `focused`
+  Focused checks: Controlled repository-managed live-process probe; read-only restricted/permitted run and process inspection; exact liveness-owner source review; `bash scripts/check_memory_architecture.sh`; `bash scripts/check_doctrines.sh`; both `tools/roll_document_history.pl --check` surfaces; `git diff --check`.
+  Canonical trigger: `none` — diagnostic evidence and startup tracking only; any repair requires a separate infrastructure leaf.
+  Verification: Controlled 45-second managed run confirms restricted PID/group probes return errno 1 / EPERM
+    while permitted probes return success for the same live PIDs. Restricted `--list` says abandoned; permitted
+    `--list` says live. Exact source routes all failed kill-zero checks into false-dead recovery authorization.
+    No recovery/deletion probe executed; the wrapper exited 0 and permitted census then found zero leftovers.
+    Evidence and source locations: `docs/knowledge/project-data-liveness-permission-denial.md`.
+  Commit: `SESSION-STARTUP-READING.6 - diagnose denied liveness probes`
+
+- ID: `SESSION-STARTUP-READING.7`
+  Status: `pending`
+  Goal: Repair permission-denied liveness handling before any managed recovery or mutation workspace workflow.
+  Dependencies: `.3`, `.4`, `.5` required-reading completion; `.6` causal evidence.
+  Acceptance: Distinguish confirmed absence from denied/unknown PID and group inspection; denied or unknown
+    results must retain scratch. Cover wrapper, child, group, normal drain, recovery, and retained-failure purge
+    with non-destructive deterministic EPERM/ESRCH tests and a live restricted-process control. Preserve positive
+    dead-run cleanup, signal forwarding, PID-reuse conservatism, same-volume storage, and valid marker ownership.
+    Update Toolbox/book/KM claims, run focused lifecycle/storage/dependent checks and exact canonical proof.
+    Split into bounded children before implementation if needed; reading prerequisites remain mandatory.
+  Verification: `pending`
   Commit: `pending`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3` | `pending` | Inventory and split the remaining first-party codebase reading before executing bounded children. |
+| 1 | `SESSION-STARTUP-READING.3` | `pending` | Inventory and split remaining first-party codebase reading; `.7` repairs the confirmed cleanup defect after required reading. |
 
 ## Reading Ledger
 
@@ -143,6 +161,12 @@ retrieval contract rather than an indiscriminate chronology scan.
 - `TOOLBOX.md`, `ARCHITECTURE_STATE.md`, remaining owner modules, and the full book have not been read in full.
 - `.2` additionally read `TOOLBOX.md` 1–125, 605–682, and 1703–1792; `tools/project_data_env.sh` 1–100;
   `tools/project_data_run.sh` 1–190; ADRs `0001`/`0073`; and knowledge card `project-data-descendant-liveness-gap`.
+- During the `.2` commit and `.6` diagnosis, additional reading completed `TOOLBOX.md` 126–604 and 683–825,
+  plus `tools/project_data_run.sh` 191–355 (EOF). Thus Toolbox coverage is 1–825 and 1703–1792, and the
+  managed-run wrapper is fully read. Its new causal finding is recorded separately; other code remains unread.
+- `.6` also read `tools/test_project_data_lifecycle.sh` 1–441 (EOF): existing live/dead/recovery/marker tests
+  run with ordinary permitted liveness and do not inject denied PID/group inspection. This is source review,
+  not a fresh run of that destructive fixture suite.
 
 ### Roadmap reconciliation at `.2`
 
@@ -157,8 +181,8 @@ retrieval contract rather than an indiscriminate chronology scan.
   ordinary proof and canonical designated/push proof. No competing executable roadmap direction was found.
 - No runtime behavior was verified by reading. No new public explanation is warranted by this checkpoint;
   substantive codebase/book drift, if found during `.3`/`.4`, must receive an owning leaf before remediation.
-- Current batch count: one completed reading leaf in this resumed default-100 batch once `.2` lands; `.1` belongs
-  to the prior checkpoint. No push is authorized by this intermediate boundary alone.
+- Batch history: `.2` is resumed item 1/100 at `d6d3c890`; `.6` is item 2/100 once committed. `.1` belongs
+  to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
 
@@ -173,13 +197,15 @@ retrieval contract rather than an indiscriminate chronology scan.
 
 ## Open Questions
 
-- None requiring director input. Remaining policy comparisons, reading decomposition, and the `.6` liveness
-  discrepancy are owned work. Complete `.6` before any cleanup recovery; implementation remains reading-gated.
+- None requiring director input. `.6` resolved the liveness discrepancy as a real false-dead defect; `.7` owns
+  repair after required reading. Do not use `--recover` or `--purge-failed` while that boundary remains unfixed.
 
 ## Blockers
 
 - None. At activation, Git was clean and no background job was pending. Required reading is unfinished work,
   not a test failure or an external blocker.
+- `.7` blocks managed recovery/purge and later mutation-workspace setup until denied/unknown liveness is safe.
+  Read-only reading can continue; no source repair is authorized by the narrow startup-tracking exception.
 
 ## Verification Log
 
@@ -190,6 +216,7 @@ retrieval contract rather than an indiscriminate chronology scan.
 | `2026-09-06` | `SESSION-STARTUP-READING.1` | Restage reviewed files; `bash scripts/check_readme_stability.sh` | PASS: 20 surfaces, 62 routes, 32/32 mutations; all nine doctrine checks now pass. Final exact-candidate proof also runs in pre-commit. |
 | `2026-09-06` | `SESSION-STARTUP-READING.2` | Untruncated ranges, baseline diffs, current direction, staged scope | PASS; roadmap Yes, codebase/book No. |
 | `2026-09-06` | `SESSION-STARTUP-READING.2` | Memory, nine doctrines, Knowledge Map, both history-pressure checks, staged diff | PASS; all nine doctrines complete successfully, both histories below rollover, no trailing-space errors. Final evidence edits are checked again by pre-commit. |
+| `2026-09-06` | `SESSION-STARTUP-READING.6` | Managed 45-second process; paired restricted/permitted run-list and kill-zero probes; exact source trace; final wrapper/census | CONFIRMED DEFECT; EPERM was false-dead. Probe exits 0; no recovery used; zero leftovers. Repair `.7` is required, not claimed complete. |
 
 ## Commit Log
 
@@ -197,6 +224,7 @@ retrieval contract rather than an indiscriminate chronology scan.
 | --- | --- | --- |
 | `SESSION-STARTUP-READING.1` | `SESSION-STARTUP-READING.1 - preserve required reading progress` | Startup-tracking-only exception; reading remains incomplete. |
 | `SESSION-STARTUP-READING.2` | `SESSION-STARTUP-READING.2 - complete roadmap reading` | Completed roadmap reading; exact coverage and focused checks, remaining reading and liveness discrepancy owned. |
+| `SESSION-STARTUP-READING.6` | `SESSION-STARTUP-READING.6 - diagnose denied liveness probes` | Exact causal evidence and owned repair; no production change or deletion test. |
 
 ## Changelog
 
@@ -204,3 +232,5 @@ retrieval contract rather than an indiscriminate chronology scan.
 - `2026-09-06`: Completed the focused checkpoint and synchronized continuity; remaining reading starts at `.2`.
 - `2026-09-06`: `.2` completes the remaining roadmap ranges and current-direction reconciliation; codebase and
   mdBook reading remain No, and `.3` owns the next inventory/decomposition.
+- `2026-09-06`: `.6` proves the surprising liveness report, records a fact card, and owns the repair as `.7`.
+  Required reading resumes at `.3`; managed recovery/purge remains unused until repaired.

@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4` — clean startup checkpoint from which roadmap reading resumed.
-- latest_completed_leaf: `SESSION-STARTUP-READING.2 - complete roadmap reading`; focused reading checkpoint complete.
-- active_work_unit: none; roadmap reading complete, remaining reading is pending in `docs/tasks/SESSION-STARTUP-READING.md`.
+- activation_commit: `d6d3c890c2e4aa49747879b2db227f2577db0fb6` — clean roadmap checkpoint before liveness diagnosis.
+- latest_completed_leaf: `SESSION-STARTUP-READING.6 - diagnose denied liveness probes`; causal diagnosis complete, repair pending.
+- active_work_unit: none; reading and cleanup repair remain pending in `docs/tasks/SESSION-STARTUP-READING.md`.
 - next_action: activate `SESSION-STARTUP-READING.3`; inventory and split remaining first-party codebase reading,
-  then follow the recorded book/policy review sequence before `RUST-MUTATION-TESTING.1` implementation.
+  then finish book/policy reading and repair `.7` before `RUST-MUTATION-TESTING.1` implementation.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
-- blockers: none.
+- blockers: `.7` blocks recovery/purge and mutation setup: denied PID/group inspection falsely authorizes cleanup; reading can continue.
 - current_rust_warning_debt: repeated clean carriers report 1,870 `pgen` plus 26 `rgx-core` output warnings;
   `RUST-DEPENDENCY-WARNING-ZERO.1-.7` own causal repair/pins/enforcement without suppression, after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4986` is the twenty-fifth history segment; ADR `0100`
   authorizes exactly 27 collection files / 26 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; exact coverage, rgx exclusion, and resumed batch progress (1/100 after `.2` lands) are recorded in SESSION-STARTUP-READING.
+- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook No; exact coverage, rgx exclusion, and resumed batch progress (2/100 after `.6` lands) are recorded in SESSION-STARTUP-READING.
