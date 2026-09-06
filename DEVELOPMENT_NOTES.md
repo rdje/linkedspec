@@ -10,6 +10,11 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.29 — progressive private parity does not publish a helper
+
+The scanner exclusively owns a dispatch assignment and validates literal identities plus a bare span binding.
+Six-runtime recurrence and public no-drift are complete; three early Perl admission cards now preserve that current boundary.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.28 — tagged fields execute inside Perl map
 
 Generated Perl evaluates carried fields per produced row and drops trailing empty items; PUC evaluates fields once and preserves them.

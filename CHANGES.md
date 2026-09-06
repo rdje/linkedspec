@@ -10,6 +10,11 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.29 — read lowering suffix and reconcile progressive admission
+
+Read 977 lines / 36,165 bytes across MethodLowering suffix and ProgressiveSpanDispatch; baseline identity passes.
+Perl carrier proof passes 129 assertions and neutral 9/9/116; reconcile three historical admission pointers with private closeout.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.28 — read collection helpers and own tagged-record repair
 
 Read MethodLowering 5943–7245 (1,303 lines / 64,878 bytes); constructor/copy/collection controls pass.

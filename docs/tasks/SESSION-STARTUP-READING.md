@@ -520,12 +520,18 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.28 - read collection helpers and own tagged-record repair`
 
 - ID: `SESSION-STARTUP-READING.3.2.29`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 27: 977 lines/fragments, 36,165 bytes.
   Scope: `perl/LinkedSpec/ActionIR/MethodLowering.pm` lines 7246–8057; `perl/LinkedSpec/ActionIR/ProgressiveSpanDispatch.pm` lines 1–165.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact range/full-file identity; receiver normalization and progressive carrier Knowledge;
+    selected managed progressive dispatch proof; memory/Knowledge/history and staged review.
+  Canonical trigger: `none` — source reading and Knowledge continuity only.
+  Verification: Exact full-file baseline identity and 977-line / 36,165-byte coverage pass. Managed Perl progressive
+    carrier consumer passes 129 assertions; neutral progressive proof passes 9/9/116 plus public 6/12/10/60.
+    Three Knowledge records reconcile; focused memory/history/scope checks and required hooks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.29 - read lowering suffix and reconcile progressive admission`
 
 - ID: `SESSION-STARTUP-READING.3.2.30`
   Status: `pending`
@@ -1415,7 +1421,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.29` | `pending` | complete MethodLowering baseline lines 7246–8057 and ProgressiveSpanDispatch 1–165. |
+| 1 | `SESSION-STARTUP-READING.3.2.30` | `pending` | complete RewritePipeline 1–745, Scanner 1–90, and Scanner/FlowRules 1–338. |
 
 ## Reading Ledger
 
@@ -1426,7 +1432,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.29`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.30`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
 | mdBook | **No** | `.31` records fourteen complete book sources plus the two earlier local-CI ranges: 640,041 bytes of disjoint coverage. | Remaining 1,316,541 source bytes, formal chapter checkpoints, and rendered alignment under `.4`. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -2455,6 +2461,26 @@ PERL
 - No runtime or public-book edit was made. Codebase/book remain No; `.3.2.29` reads the suffix and
   ProgressiveSpanDispatch next, before the remaining prerequisite checkpoints and owned repairs.
 
+### Receiver normalization suffix and private progressive ActionIR at `.3.2.29`
+
+- Activated from clean `86673c75a56b869e80c7613345f9c0963c013e8b` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Re-reviewed MethodLowering 7246–7505, 7506–7775, and 7776–8057 and all 165 ProgressiveSpanDispatch
+  lines without truncation. Exact whole-file baseline identity passes; owned ranges total 977 lines /
+  36,165 bytes, agreeing with `.31`'s forward coverage. This adds no duplicate physical-reading credit.
+- The suffix covers number/string/hash receiver family normalization, terminal and arity branches,
+  AST-first array-end and hash/nested assignment mutation bridges, set_key/push fallback precedence,
+  regex substitution, and return_undef. Uniform-binding branches precede retained host-slot fallbacks.
+- ProgressiveSpanDispatch exclusively owns its assignment statement. Static validation decodes literal
+  parser/top identities, checks normalized spelling and a bare span binding, and lowers valid operands
+  to the invocation-owned runtime. Invalid static operands remain available for diagnostic ownership.
+- Read existing progressive authority/carrier/admission and recurring/public-closeout Knowledge plus
+  optional-scope collision Knowledge before source diagnosis. Three older progressive cards now point
+  to the completed private six-runtime boundary, while their dated admission evidence remains historical.
+- `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/progressive_span_dispatch_perl_contract.t`
+  passes 129 assertions. `bash tools/run_python_project_data.sh tools/check_progressive_span_dispatch_contract.py`
+  passes rollout 9/9/116 and public 6/12/10/60. Other runtime routes are not rerun by this reading checkpoint.
+- No runtime, public-book, or policy behavior changes. Codebase/book remain No; `.3.2.30` follows.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -2484,7 +2510,8 @@ PERL
   `.3.2.25` is item 29/100 at `85167df3`;
   `.3.2.26` is item 30/100 at `a32cf422`;
   `.3.2.27` is item 31/100 at `e4716fcf`;
-  `.3.2.28` is item 32/100 once committed.
+  `.3.2.28` is item 32/100 at `86673c75`;
+  `.3.2.29` is item 33/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -2581,6 +2608,7 @@ PERL
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.26` | Exact range/full-file identity; block/receiver/traversal Knowledge; AST parser suite; three public root controls; focused continuity | PASS 23 tests and hash/array/scalar controls; required staged gates precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.27` | Exact range/full-file identity; AST/fallback/retirement/numeric Knowledge; scalar numeric suite; four public descriptors; focused continuity | PASS nine tests and four expected diagnostic counts; known Unicode-digit repair remains open; required gates precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.28` | Exact range/full-file identity; constructor/collection/mutation Knowledge; three public controls; paired Perl/PUC tagged controls; focused continuity | PASS bounded controls; tagged/split divergence rooted and .33 review/repair owned; required staged gates precede landing. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.29` | Exact range/full-file identity; progressive and normalization Knowledge; managed 129-assertion carrier consumer and neutral 9/9 checker; focused continuity | PASS; private six-runtime closeout pointers reconciled; required staged gates precede landing. |
 
 ## Commit Log
 
@@ -2619,6 +2647,7 @@ PERL
 | `SESSION-STARTUP-READING.3.2.26` | `SESSION-STARTUP-READING.3.2.26 - read receiver chains and reconcile tree dispatch` | Block and receiver dispatch read; three traversal records distinguish original milestones from current shared dispatch. |
 | `SESSION-STARTUP-READING.3.2.27` | `SESSION-STARTUP-READING.3.2.27 - read helper fallback and qualify numeric evidence` | Helper fallback and numeric/string/collection prefix read; four AST/numeric Knowledge records qualified. |
 | `SESSION-STARTUP-READING.3.2.28` | `SESSION-STARTUP-READING.3.2.28 - read collection helpers and own tagged-record repair` | Collection and constructor paths read; selector history reconciled and paired tagged-record divergence owned by .33. |
+| `SESSION-STARTUP-READING.3.2.29` | `SESSION-STARTUP-READING.3.2.29 - read lowering suffix and reconcile progressive admission` | MethodLowering suffix and ProgressiveSpanDispatch read; three progressive admission records follow completed private closeout. |
 
 ## Changelog
 
@@ -2688,3 +2717,5 @@ PERL
   four descriptor controls, and qualifies existing AST/numeric Knowledge; next `.3.2.28`.
 - `2026-09-06`: `.3.2.28` reads collection/constructor/mutation paths, passes three value controls, and preserves
   paired Perl/PUC tagged-record drift with `.33.1`/`.33.2` ownership; `.3.2.29` follows.
+- `2026-09-06`: `.3.2.29` reads the lowering suffix and private progressive scanner; the 129-assertion Perl consumer and
+  9/9/116 neutral proof pass, three Knowledge pointers reconcile, and `.3.2.30` follows.
