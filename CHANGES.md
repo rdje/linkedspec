@@ -10,6 +10,17 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.1 — bound the codebase reading inventory
+
+- Classified all 2,547 baseline Git entries with exact object-byte counts and disjoint selectors, including
+  legacy code, fixtures, generated files, tooling, four compressed Unicode inputs, book, and durable-memory owners.
+- Split the codebase reading into owned lanes and bounded the first executable child to five exact files;
+  all later children require explicit byte/line ranges before reading. Inventory does not confer reading credit.
+- Completed Toolbox reading, retained exact prior coverage, and verified source/test/tool/book bytes are unchanged
+  from baseline. Roadmap remains Yes; codebase and mdBook remain No. Cleanup repair `.7` remains mandatory.
+- Validation: exact Git/blob and decoded-data census, complete/disjoint accounting, current-delta review, focused
+  continuity/doctrine/Knowledge/history checks, Perl syntax checks, and staged diff review. No production change.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.6 — diagnose denied liveness probes
 
 - Confirmed that restricted kill-zero inspection returns EPERM for a known live managed process, while current

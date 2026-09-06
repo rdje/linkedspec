@@ -10,6 +10,17 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.1 — exhaustive reading without duplicate manifests
+
+- The immutable Git baseline and ordered disjoint path rules account for every input. Keep membership/object
+  identity in Git and exact progress in the task tree; avoid a second growing path manifest.
+- Source/tool/fixture lanes hold 1,271 entries / 22,332,523 stored bytes. Four compressed Unicode inputs require
+  separate decoded accounting; a byte count or successful decompression is not comprehension.
+- Bound each reading leaf at 1,500 decoded lines and 65,536 bytes, including all unread suffixes. Use coherent
+  declarations/tests and explicit byte intervals for exceptionally long lines; never count truncated output.
+- The first concrete boundary is the existing facade/dispatch/runtime/parser-factory/context ownership group.
+  The existing Knowledge card supplies its architecture; code reading checks understanding against that authority.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.6 — permission-sensitive liveness
 
 - A Boolean kill-zero failure is insufficient evidence of process death: the controlled restricted/permitted

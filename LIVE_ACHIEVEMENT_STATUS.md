@@ -2,22 +2,25 @@
 
 ## Current Activity
 
-- `SESSION-STARTUP-READING` owns the director-required reading prerequisite. Checkpoint `.2` completes roadmap
-  reading; codebase and mdBook reading remain incomplete. The director excluded `rgx`
+- `SESSION-STARTUP-READING` owns the director-required reading prerequisite. Roadmap reading and exhaustive
+  inventory `.3.1` are complete; codebase and mdBook reading remain incomplete. The director excluded `rgx`
   and its nested dependencies. Diagnosis `.6` confirms false-dead cleanup authorization on denied inspection;
   `.7` owns repair before recovery/purge and mutation setup. Feature and capability status are unchanged.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.6` records paired live-process/EPERM evidence, exact source cause, and repair ownership.
-  This is item 2/100 in the resumed batch. The controlled run exited 0 with zero leftovers; no deletion was tested.
+- `SESSION-STARTUP-READING.3.1` accounts for all 2,547 baseline entries and defines bounded code-reading lanes.
+  This is item 3/100 in the resumed batch. Enumeration and decompression are not reading credit.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3` and inventory/split remaining first-party codebase reading. Follow the recorded
+- Activate `SESSION-STARTUP-READING.3.2.1` and read its five exact facade/invocation/context files. Follow the recorded
   book/policy review sequence, then repair `.7` before activating `RUST-MUTATION-TESTING.1` for safe configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.1` accounts for the complete baseline and bounds source reading;
+  Toolbox is fully read, codebase/book remain No, and `.3.2.1` is the next exact child.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.6` proves denied liveness is falsely treated as death; exact evidence
   and repair `.7` are durable. Recovery/purge remain unused pending repair after required reading.
@@ -72,10 +75,6 @@
   target-selection traces, and complete five-backend corpus agreement; staged canonical passes all doctrines,
   storage/relocation, CLI 66x2, and Phase 0 1,032/1,032; ADR `0099` admits required notes segment `4986` at finite
   collection/manifest capacity 22/21.
-
-- `2026-09-01` — `.19.3.2` implements Rust `map_leaves!`; 9/9 permanent carrier/behavior tests, 3/3 private
-  failure-state tests, unchanged 167 base + 592 composition mutations, corrected 11/11 trace controls, and the
-  complete Rust component gate pass; direct entry is locked as lifecycle-positive and own-regex-negative.
 
 ## History
 

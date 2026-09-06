@@ -58,9 +58,115 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.2 - complete roadmap reading`
 
 - ID: `SESSION-STARTUP-READING.3`
-  Status: `pending`
+  Status: `active`
   Goal: Read and understand the remaining first-party codebase, including its tests, specs, and repository tooling.
-  Acceptance: Split into bounded file/range children before execution; account for the baseline inventory and complete every in-scope child.
+  Children: `.3.1`, `.3.2`, `.3.3`, `.3.4`, `.3.5`, `.3.6`, `.3.7`, `.3.8`, `.3.9`, `.3.10`, `.3.11`
+
+- ID: `SESSION-STARTUP-READING.3.1`
+  Status: `done`
+  Goal: Classify the complete baseline tracked inventory and define exact bounded first-party reading children.
+  Acceptance: Every baseline path has an explicit category/owner or the director's rgx exclusion; account for
+    source, tests, specs, generated inputs, fixtures, tooling, and files outside language directories. Define
+    deterministic file/range boundaries and review baseline-to-current changes before claiming any coverage.
+  Verification tier: `focused`
+  Focused checks: Git baseline/object and current-delta census; disjoint complete reading-category review; exact bounded next-child scope; managed `perl -Iperl -c perl/LinkedSpec.pm` and `perl -Iperl -c t/phase0_regression.t`; `bash scripts/check_memory_architecture.sh`; `bash scripts/check_doctrines.sh`; both `tools/roll_document_history.pl --check` surfaces; `git diff --check`.
+  Canonical trigger: `none` — reading inventory and tracking only, with no source/tool/policy/public behavior change.
+  Verification: Exact baseline Git object census accounts for 2,547 entries / 52,084,744 blob bytes with one
+    excluded gitlink. The disjoint path rules below account for all entries; only four gzip blobs contain NULs.
+    Source/test/tool inputs remain byte-identical to baseline. First reading child is exactly five files / 1,430
+    lines / 56,706 bytes; inventory and decompression counts do not count as content reading.
+  Commit: `SESSION-STARTUP-READING.3.1 - bound the codebase reading inventory`
+
+- ID: `SESSION-STARTUP-READING.3.2`
+  Status: `active`
+  Goal: Read all 89 baseline Perl entries and their current deltas, starting with the facade invocation owners.
+  Children: `.3.2.1`, `.3.2.2`
+
+- ID: `SESSION-STARTUP-READING.3.2.1`
+  Status: `pending`
+  Goal: Read the facade invocation and shared-context owners in full.
+  Acceptance: Read `perl/LinkedSpec.pm` 1–296, `perl/LinkedSpec/OwnerDispatch.pm` 1–220,
+    `perl/LinkedSpec/Runtime.pm` 1–154, `perl/LinkedSpec/ParserFactory.pm` 1–368, and
+    `perl/LinkedSpec/RuntimeContext.pm` 1–392. Reconcile against the existing thin-facade Knowledge card;
+    record exact comprehension and any tool-confirmed issue. No runtime-change or full-codebase claim.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.2.2`
+  Status: `pending`
+  Goal: Split the remaining 84 baseline Perl paths into exact bounded reading children before reading them.
+  Acceptance: Subtract `.3.2.1` by exact path; use the inventory's byte/line boundary rule and retain every file.
+    Prior supporting read coverage remains explicit and cannot silently remove an unread interval.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3`
+  Status: `pending`
+  Goal: Split and read all 412 baseline Rust entries, including source, tests, corpus, generated files, and manifests.
+  Acceptance: Define bounded file/range children before reading; `rgx` is excluded but first-party Rust is not.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.4`
+  Status: `pending`
+  Goal: Split and read all 115 baseline Dart entries, including compiler/runtime, tests, commands, and package inputs.
+  Acceptance: Define bounded file/range children before reading and account for every path plus current deltas.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.5`
+  Status: `pending`
+  Goal: Split and read all 95 baseline Julia entries, including compiler/runtime, tests, commands, and package inputs.
+  Acceptance: Define bounded file/range children before reading and account for every path plus current deltas.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.6`
+  Status: `pending`
+  Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
+  Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.7`
+  Status: `pending`
+  Goal: Split and read all 158 entries under specs, ebnf, noncore, conf, and tablescript.
+  Acceptance: Account for legacy adapters, plugins, authored grammars, configuration, and non-TypeScript `.ts` data;
+    use LinkedSpec probes before investigating a spec's behavior, and do not infer defects from historical syntax alone.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.8`
+  Status: `pending`
+  Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
+  Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
+    inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.9`
+  Status: `pending`
+  Goal: Split and read all 143 remaining repository-tooling entries from the exhaustive complement rule below.
+  Acceptance: Include hooks, shell/Python/Perl tools, root configuration, command entrypoint, doctrine registry data,
+    and the vendored Knowledge Map bundle. Reuse exact completed supporting ranges and read every remaining range.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.10`
+  Status: `pending`
+  Goal: Review root guidance and relevant durable owners using their prescribed reading or indexed-query lifecycle.
+  Acceptance: Bind all 28 baseline root Markdown paths to their owners: complete remaining maintained architecture/
+    user-guide text in bounded children; retain completed roadmap/bootstrap/Toolbox coverage; query generated
+    Knowledge Map and immutable chronology instead of loading them wholesale. Memory records are not source-code coverage.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.11`
+  Status: `pending`
+  Goal: Reconcile complete source-reading coverage against baseline and final HEAD before closing codebase reading.
+  Acceptance: Lanes `.3.2` through `.3.10` are complete; review all changed/new paths since baseline and resolve every unexplained
+    omission or overlapping credit. The book's configuration/source remains `.4`-owned. All unverified findings
+    have exact owners; read coverage is not runtime signoff.
   Verification: `pending`
   Commit: `pending`
 
@@ -74,7 +180,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING.5`
   Status: `pending`
   Goal: Complete supplied-policy adoption/update comparisons and the startup alignment review before implementation.
-  Acceptance: Record local adoption evidence and applicable donor updates; own any required changes; confirm all three reading answers Yes before restoring RUST-MUTATION-TESTING.1.
+  Acceptance: Record local adoption evidence and applicable donor updates; own any required changes; confirm all three reading answers Yes, then route to cleanup repair `.7` before restoring RUST-MUTATION-TESTING.1.
   Verification: `pending`
   Commit: `pending`
 
@@ -111,7 +217,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3` | `pending` | Inventory and split remaining first-party codebase reading; `.7` repairs the confirmed cleanup defect after required reading. |
+| 1 | `SESSION-STARTUP-READING.3.2.1` | `pending` | Read the exact five-file facade invocation boundary, then split the remaining Perl paths. |
 
 ## Reading Ledger
 
@@ -167,6 +273,49 @@ retrieval contract rather than an indiscriminate chronology scan.
 - `.6` also read `tools/test_project_data_lifecycle.sh` 1–441 (EOF): existing live/dead/recovery/marker tests
   run with ordinary permitted liveness and do not inject denied PID/group inspection. This is source review,
   not a fresh run of that destructive fixture suite.
+- `.3.1` completed `TOOLBOX.md` in full through baseline EOF 1864, and read `unicode_case/README.md` in full.
+  Four gzip payloads were decompressed only for counts; their contents remain unread. Reviewed the existing
+  `linkedspec-pm-is-thin-facade` fact card to select the first code-reading boundary without re-deriving its facts.
+
+### Complete baseline classification at `.3.1`
+
+Baseline is `baeb984e36a94a15951cd23d4c52def5064cdaca`. `git ls-tree -r --full-tree` plus
+`git cat-file --batch` measured the exact stored objects, not changing worktree bytes. Apply these ordered
+path rules; the final complement explicitly owns every otherwise unmatched path.
+
+| Class / path rule | Entries | Stored blob bytes | Reading owner |
+| --- | ---: | ---: | --- |
+| Exact `rgx` gitlink | 1 | 0 | Director-excluded, including nested dependencies |
+| Prefix `docs/linkedspec-book/` | 50 | 1,956,582 | `.4`, including book configuration and all chapter text |
+| Remaining prefix `docs/` | 1,197 | 20,123,040 | Durable memory; retrieve relevant owners and indexed history, not codebase reading |
+| Root `*.md` (no slash) | 28 | 7,672,599 | `.3.10`, roadmap `.2`, and prescribed memory lifecycles |
+| Prefix `perl/` | 89 | 2,133,690 | `.3.2` |
+| Prefix `rust/` | 412 | 3,533,382 | `.3.3` |
+| Prefix `dart/` | 115 | 2,471,305 | `.3.4` |
+| Prefix `julia/` | 95 | 2,693,170 | `.3.5` |
+| Prefix `lua/` | 99 | 2,732,450 | `.3.6` |
+| Prefix `specs/`, `ebnf/`, `noncore/`, `conf/`, or `tablescript/` | 158 | 964,256 | `.3.7` |
+| Prefix `capability_conformance/`, `cli_conformance/`, `t/`, `tests/`, or `unicode_case/` | 160 | 5,422,313 | `.3.8` |
+| Every remaining baseline path | 143 | 2,381,957 | `.3.9`: `.claude`, `.github`, `.githooks`, five root dotfiles, `bin`, `doctrine`, `knowledge-map`, `scripts`, `tools` |
+| **Total** | **2,547** | **52,084,744** | Every entry accounted for once |
+
+The eight source/tool/fixture lanes contain 1,271 entries / 22,332,523 stored bytes. Of these, 1,267 are text
+with 565,122 newline delimiters. Four pinned Unicode gzip inputs are the only NUL-containing blobs; they add
+54,500 decoded newline delimiters / 3,352,036 decoded bytes and remain explicitly in `.3.8`. This count is an
+inventory, not evidence that any of those lines was understood. Generated Unicode modules, generated MCP
+bindings, corpus JSON, and large phase0/runtime files are not silently excluded.
+
+Each future reading leaf names exact paths and inclusive ranges **before** execution, totals at most 1,500
+decoded text lines and 65,536 bytes, and uses smaller output chunks to avoid truncation. Oversized files split
+at coherent declaration/test boundaries within those limits; a single over-limit line uses explicit byte
+ranges. Record all unread suffixes before advancing. Do not duplicate the full immutable inventory into a new
+manifest; recover membership from baseline plus these disjoint selectors and recover identities from Git.
+
+`.3.2.1` is exactly 1,430 lines / 56,706 bytes across five files. Its `LinkedSpec.pm` reread checks owner
+relationships despite prior facade coverage. Other inputs remain unread unless listed above. At clean
+`03d692c13bbc49590f318dd4c8536008d9f979f5`, the ten changed/new paths since baseline are continuity/Knowledge/task
+records; all source/test/spec/tool inputs and all book files remain unchanged. Every checkpoint's own final diff
+is reviewed separately.
 
 ### Roadmap reconciliation at `.2`
 
@@ -181,7 +330,8 @@ retrieval contract rather than an indiscriminate chronology scan.
   ordinary proof and canonical designated/push proof. No competing executable roadmap direction was found.
 - No runtime behavior was verified by reading. No new public explanation is warranted by this checkpoint;
   substantive codebase/book drift, if found during `.3`/`.4`, must receive an owning leaf before remediation.
-- Batch history: `.2` is resumed item 1/100 at `d6d3c890`; `.6` is item 2/100 once committed. `.1` belongs
+- Batch history: `.2` is resumed item 1/100 at `d6d3c890`; `.6` is item 2/100 at `03d692c1`; `.3.1` is item 3/100
+  once committed. `.1` belongs
   to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -217,6 +367,9 @@ retrieval contract rather than an indiscriminate chronology scan.
 | `2026-09-06` | `SESSION-STARTUP-READING.2` | Untruncated ranges, baseline diffs, current direction, staged scope | PASS; roadmap Yes, codebase/book No. |
 | `2026-09-06` | `SESSION-STARTUP-READING.2` | Memory, nine doctrines, Knowledge Map, both history-pressure checks, staged diff | PASS; all nine doctrines complete successfully, both histories below rollover, no trailing-space errors. Final evidence edits are checked again by pre-commit. |
 | `2026-09-06` | `SESSION-STARTUP-READING.6` | Managed 45-second process; paired restricted/permitted run-list and kill-zero probes; exact source trace; final wrapper/census | CONFIRMED DEFECT; EPERM was false-dead. Probe exits 0; no recovery used; zero leftovers. Repair `.7` is required, not claimed complete. |
+| `2026-09-06` | `SESSION-STARTUP-READING.6` | Focused memory/history/diff plus required pre-commit Knowledge and all nine doctrines; post-commit pointer; clean status/empty brief | PASS at `03d692c1`; diagnostic checkpoint complete, repair remains pending. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.1` | Exact baseline object/class census, binary/decoded inventory, whole-source delta, bounded first-child accounting | PASS; 2,547 disjoint entries and no source/test/tool/book delta; inventory is not reading credit. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.1` | Managed Perl facade/phase0 syntax; both history-pressure checks; diff review | PASS; both syntax checks OK, change-history warns below rollover, engineering notes OK. Required pre-commit supplies final doctrine/Knowledge proof. |
 
 ## Commit Log
 
@@ -225,6 +378,7 @@ retrieval contract rather than an indiscriminate chronology scan.
 | `SESSION-STARTUP-READING.1` | `SESSION-STARTUP-READING.1 - preserve required reading progress` | Startup-tracking-only exception; reading remains incomplete. |
 | `SESSION-STARTUP-READING.2` | `SESSION-STARTUP-READING.2 - complete roadmap reading` | Completed roadmap reading; exact coverage and focused checks, remaining reading and liveness discrepancy owned. |
 | `SESSION-STARTUP-READING.6` | `SESSION-STARTUP-READING.6 - diagnose denied liveness probes` | Exact causal evidence and owned repair; no production change or deletion test. |
+| `SESSION-STARTUP-READING.3.1` | `SESSION-STARTUP-READING.3.1 - bound the codebase reading inventory` | Complete baseline accounting and bounded next child; source/book reading still incomplete. |
 
 ## Changelog
 
@@ -234,3 +388,5 @@ retrieval contract rather than an indiscriminate chronology scan.
   mdBook reading remain No, and `.3` owns the next inventory/decomposition.
 - `2026-09-06`: `.6` proves the surprising liveness report, records a fact card, and owns the repair as `.7`.
   Required reading resumes at `.3`; managed recovery/purge remains unused until repaired.
+- `2026-09-06`: `.3.1` classifies every baseline entry, owns all source lanes, completes Toolbox reading, and
+  defines exact `.3.2.1` coverage before source reading. No production or public-book change.
