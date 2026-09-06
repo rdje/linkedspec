@@ -5,21 +5,24 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. The Perl reading queue is complete; `.3.2.55` owns canonical parent closeout.
+  findings, and donor-policy comparisons. Perl reading closes under `.3.2.55`; 66 Rust reading checkpoints and their closeout remain pending.
 - Repairs `.7`–`.30` and `.32`–`.44` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.2.54` completes the final queued Perl utility reading checkpoint with precise existing-defect evidence.
-  This is item 58/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.2.55` closes the Perl reading lane and owns the complete bounded Rust plan.
+  This is item 59/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.2.55`: reconcile all Perl coverage, define bounded Rust children, and run canonical proof for the Perl parent closeout.
+- Activate `SESSION-STARTUP-READING.3.3.1`: read the owned Rust ignore file and Cargo.lock prefix, retrieving dependency Knowledge before interpretation.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-06` — `SESSION-STARTUP-READING.3.2.55` reconciles all 89 Perl files and owns 66 Rust reading slices across 412 files.
+  Parent closeout requires an exact staged canonical receipt; no runtime repair is claimed.
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.54` reads all 839 legacy utility lines. Three syntax checks and nine diagnostic assertions pass;
   existing comparison/path repairs remain pending and .3.2.55 owns canonical closeout.
@@ -65,9 +68,6 @@
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.40` reads recognition core and static policy; 59 tests and neutral proof pass.
   Cross-owner misuse of invalidated tokens restores obsolete snapshots; `.38` owns repair.
-
-- `2026-09-06` — `SESSION-STARTUP-READING.3.2.39` reads plugin and progressive authority; 138 tests and neutral/public proof pass.
-  Six limit controls expose resource/diagnostic repair work owned by `.37`.
 
 ## History
 

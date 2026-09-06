@@ -78,9 +78,14 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.1 - bound the codebase reading inventory`
 
 - ID: `SESSION-STARTUP-READING.3.2`
-  Status: `active`
+  Status: `done`
   Goal: Read all 89 baseline Perl entries and their current deltas, starting with the facade invocation owners.
   Children: `.3.2.1`, `.3.2.2`, `.3.2.3`, `.3.2.4`, `.3.2.5`, `.3.2.6`, `.3.2.7`, `.3.2.8`, `.3.2.9`, `.3.2.10`, `.3.2.11`, `.3.2.12`, `.3.2.13`, `.3.2.14`, `.3.2.15`, `.3.2.16`, `.3.2.17`, `.3.2.18`, `.3.2.19`, `.3.2.20`, `.3.2.21`, `.3.2.22`, `.3.2.23`, `.3.2.24`, `.3.2.25`, `.3.2.26`, `.3.2.27`, `.3.2.28`, `.3.2.29`, `.3.2.30`, `.3.2.31`, `.3.2.32`, `.3.2.33`, `.3.2.34`, `.3.2.35`, `.3.2.36`, `.3.2.37`, `.3.2.38`, `.3.2.39`, `.3.2.40`, `.3.2.41`, `.3.2.42`, `.3.2.43`, `.3.2.44`, `.3.2.45`, `.3.2.46`, `.3.2.47`, `.3.2.48`, `.3.2.49`, `.3.2.50`, `.3.2.51`, `.3.2.52`, `.3.2.53`, `.3.2.54`, `.3.2.55`
+
+  Verification: All 89 baseline files / 2,133,690 bytes are physically read and comprehension-reconciled;
+    .3.2.55 independently verifies exact coverage, current identity, durable commits, and canonical closeout.
+    Pending repairs are unchanged; this status certifies reading completion only.
+  Commit: `SESSION-STARTUP-READING.3.2.55 - close Perl reading and own bounded Rust scopes`
 
 - ID: `SESSION-STARTUP-READING.3.2.1`
   Status: `done`
@@ -931,7 +936,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.54 - reconcile legacy utility reading and repair evidence`
 
 - ID: `SESSION-STARTUP-READING.3.2.55`
-  Status: `pending`
+  Status: `done`
   Goal: Close the fully read Perl lane and own the complete bounded Rust reading plan.
   Acceptance: Independently reconcile all 89 baseline Perl paths and current deltas with the 53 completed
     reading leaves plus their decomposition checkpoint and .31's physical ledger. Preserve every pending repair and distinguish reading
@@ -939,13 +944,969 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     review semantic boundaries and current deltas, and create reading children before reading new Rust code.
     Measure resulting task-collection pressure and reserve room for evidence; no capacity change is implied.
     Update canonical Knowledge and bounded continuity; run exact staged canonical CI for the parent closeout.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `canonical`
+  Focused checks: Independent Perl interval/commit/delta proof; complete bounded Rust range/corpus and empty-file coverage; resulting task pressure; Knowledge, memory, both history checks, exact staged diff and canonical tools/run_ci_local.sh.
+  Canonical trigger: `parent closeout` — formal Perl reading parent closeout; exact staged canonical receipt required.
+  Verification: Independent byte-interval and commit audit passes: all 89 Perl files / 2,133,690 bytes,
+    53 reading leaves plus one decomposition checkpoint, exact EOF coverage and no source delta.
+    Rust plan and task Scope round-trip pass: 66 groups / 412 paths / 3,533,382 bytes, two empty inputs,
+    1,500-line and 65,536-byte maxima. No new Rust reading credit or repair closure. Final staged canonical
+    receipt is mandatory before this parent closeout lands; the committed hook/receipt establishes its result.
+  Commit: `SESSION-STARTUP-READING.3.2.55 - close Perl reading and own bounded Rust scopes`
 
 - ID: `SESSION-STARTUP-READING.3.3`
   Status: `pending`
   Goal: Split and read all 412 baseline Rust entries, including source, tests, corpus, generated files, and manifests.
   Acceptance: Define bounded file/range children before reading; `rgx` is excluded but first-party Rust is not.
+  Children: `.3.3.1`, `.3.3.2`, `.3.3.3`, `.3.3.4`, `.3.3.5`, `.3.3.6`, `.3.3.7`, `.3.3.8`, `.3.3.9`, `.3.3.10`, `.3.3.11`, `.3.3.12`, `.3.3.13`, `.3.3.14`, `.3.3.15`, `.3.3.16`, `.3.3.17`, `.3.3.18`, `.3.3.19`, `.3.3.20`, `.3.3.21`, `.3.3.22`, `.3.3.23`, `.3.3.24`, `.3.3.25`, `.3.3.26`, `.3.3.27`, `.3.3.28`, `.3.3.29`, `.3.3.30`, `.3.3.31`, `.3.3.32`, `.3.3.33`, `.3.3.34`, `.3.3.35`, `.3.3.36`, `.3.3.37`, `.3.3.38`, `.3.3.39`, `.3.3.40`, `.3.3.41`, `.3.3.42`, `.3.3.43`, `.3.3.44`, `.3.3.45`, `.3.3.46`, `.3.3.47`, `.3.3.48`, `.3.3.49`, `.3.3.50`, `.3.3.51`, `.3.3.52`, `.3.3.53`, `.3.3.54`, `.3.3.55`, `.3.3.56`, `.3.3.57`, `.3.3.58`, `.3.3.59`, `.3.3.60`, `.3.3.61`, `.3.3.62`, `.3.3.63`, `.3.3.64`, `.3.3.65`, `.3.3.66`, `.3.3.67`
+  Verification: `pending`
+  Commit: `pending`
+
+
+- ID: `SESSION-STARTUP-READING.3.3.1`
+  Status: `pending`
+  Goal: Read Rust group 1: 1,496 lines/fragments, 37,995 bytes.
+  Scope: `rust/.gitignore` lines 1–3;
+    `rust/Cargo.lock` lines 1–1493.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.2`
+  Status: `pending`
+  Goal: Read Rust group 2: 1,483 lines/fragments, 59,455 bytes.
+  Scope: `rust/Cargo.lock` lines 1494–1850;
+    `rust/Cargo.toml` lines 1–18;
+    `rust/README.md` lines 1–484;
+    `rust/linkedspec-core/Cargo.toml` lines 1–14;
+    `rust/linkedspec-core/src/ast.rs` lines 1–360;
+    `rust/linkedspec-core/src/callable_contract.rs` lines 1–250.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.3`
+  Status: `pending`
+  Goal: Read Rust group 3: 1,499 lines/fragments, 56,169 bytes.
+  Scope: `rust/linkedspec-core/src/callable_contract.rs` lines 251–394;
+    `rust/linkedspec-core/src/compiler.rs` lines 1–1355.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.4`
+  Status: `pending`
+  Goal: Read Rust group 4: 1,481 lines/fragments, 57,687 bytes.
+  Scope: `rust/linkedspec-core/src/compiler.rs` lines 1356–2153;
+    `rust/linkedspec-core/src/descriptor.rs` lines 1–465;
+    `rust/linkedspec-core/src/entry_rule.rs` lines 1–113;
+    `rust/linkedspec-core/src/error.rs` lines 1–105.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.5`
+  Status: `pending`
+  Goal: Read Rust group 5: 1,496 lines/fragments, 57,175 bytes.
+  Scope: `rust/linkedspec-core/src/expr.rs` lines 1–1496.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.6`
+  Status: `pending`
+  Goal: Read Rust group 6: 1,461 lines/fragments, 54,270 bytes.
+  Scope: `rust/linkedspec-core/src/expr.rs` lines 1497–2957.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.7`
+  Status: `pending`
+  Goal: Read Rust group 7: 1,497 lines/fragments, 56,871 bytes.
+  Scope: `rust/linkedspec-core/src/expr.rs` lines 2958–4454.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.8`
+  Status: `pending`
+  Goal: Read Rust group 8: 1,470 lines/fragments, 57,396 bytes.
+  Scope: `rust/linkedspec-core/src/expr.rs` lines 4455–5819;
+    `rust/linkedspec-core/src/lib.rs` lines 1–27;
+    `rust/linkedspec-core/src/parser.rs` lines 1–78.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.9`
+  Status: `pending`
+  Goal: Read Rust group 9: 1,496 lines/fragments, 49,733 bytes.
+  Scope: `rust/linkedspec-core/src/parser.rs` lines 79–1574.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.10`
+  Status: `pending`
+  Goal: Read Rust group 10: 1,466 lines/fragments, 47,137 bytes.
+  Scope: `rust/linkedspec-core/src/parser.rs` lines 1575–2084;
+    `rust/linkedspec-core/src/trace.rs` lines 1–715;
+    `rust/linkedspec-core/src/types.rs` lines 1–241.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.11`
+  Status: `pending`
+  Goal: Read Rust group 11: 1,499 lines/fragments, 45,494 bytes.
+  Scope: `rust/linkedspec-core/src/types.rs` lines 242–538;
+    `rust/linkedspec-core/src/unicode_rule_label.rs` lines 1–850;
+    `rust/linkedspec-core/src/validation.rs` lines 1–352.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.12`
+  Status: `pending`
+  Goal: Read Rust group 12: 1,490 lines/fragments, 54,844 bytes.
+  Scope: `rust/linkedspec-core/src/validation.rs` lines 353–1541;
+    `rust/linkedspec-core/tests/descriptor_test.rs` lines 1–286;
+    `rust/linkedspec-core/tests/rule_local_cursor_normalization_test.rs` lines 1–15.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.13`
+  Status: `pending`
+  Goal: Read Rust group 13: 1,495 lines/fragments, 52,012 bytes.
+  Scope: `rust/linkedspec-core/tests/rule_local_cursor_normalization_test.rs` lines 16–314;
+    `rust/linkedspec-core/tests/types_test.rs` lines 1–222;
+    `rust/linkedspec-core/tests/unicode_rule_label_contract.rs` lines 1–155;
+    `rust/linkedspec-runtime/Cargo.toml` lines 1–20;
+    `rust/linkedspec-runtime/src/bin/linkedspec-rust.rs` lines 1–21;
+    `rust/linkedspec-runtime/src/bounded_child_parse_authority.rs` lines 1–778.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.14`
+  Status: `pending`
+  Goal: Read Rust group 14: 1,494 lines/fragments, 50,413 bytes.
+  Scope: `rust/linkedspec-runtime/src/bounded_child_parse_authority.rs` lines 779–1639;
+    `rust/linkedspec-runtime/src/diagnostic.rs` lines 1–127;
+    `rust/linkedspec-runtime/src/diagnostic_output.rs` lines 1–112;
+    `rust/linkedspec-runtime/src/engine.rs` lines 1–394.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.15`
+  Status: `pending`
+  Goal: Read Rust group 15: 1,500 lines/fragments, 56,911 bytes.
+  Scope: `rust/linkedspec-runtime/src/engine.rs` lines 395–1894.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.16`
+  Status: `pending`
+  Goal: Read Rust group 16: 1,500 lines/fragments, 60,181 bytes.
+  Scope: `rust/linkedspec-runtime/src/engine.rs` lines 1895–3394.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.17`
+  Status: `pending`
+  Goal: Read Rust group 17: 1,493 lines/fragments, 60,008 bytes.
+  Scope: `rust/linkedspec-runtime/src/engine.rs` lines 3395–4887.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.18`
+  Status: `pending`
+  Goal: Read Rust group 18: 1,498 lines/fragments, 58,503 bytes.
+  Scope: `rust/linkedspec-runtime/src/engine.rs` lines 4888–6385.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.19`
+  Status: `pending`
+  Goal: Read Rust group 19: 1,493 lines/fragments, 55,743 bytes.
+  Scope: `rust/linkedspec-runtime/src/engine.rs` lines 6386–7878.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.20`
+  Status: `pending`
+  Goal: Read Rust group 20: 1,400 lines/fragments, 65,528 bytes.
+  Scope: `rust/linkedspec-runtime/src/engine.rs` lines 7879–9278.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.21`
+  Status: `pending`
+  Goal: Read Rust group 21: 1,499 lines/fragments, 59,677 bytes.
+  Scope: `rust/linkedspec-runtime/src/engine.rs` lines 9279–10777.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.22`
+  Status: `pending`
+  Goal: Read Rust group 22: 1,469 lines/fragments, 52,089 bytes.
+  Scope: `rust/linkedspec-runtime/src/engine.rs` lines 10778–12246.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.23`
+  Status: `pending`
+  Goal: Read Rust group 23: 1,364 lines/fragments, 53,265 bytes.
+  Scope: `rust/linkedspec-runtime/src/engine.rs` lines 12247–12694;
+    `rust/linkedspec-runtime/src/helpers.rs` lines 1–850;
+    `rust/linkedspec-runtime/src/lib.rs` lines 1–66.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.24`
+  Status: `pending`
+  Goal: Read Rust group 24: 7 lines/fragments, 65,536 bytes.
+  Scope: `rust/linkedspec-runtime/src/mcp_contract.rs` lines 1–6;
+    `rust/linkedspec-runtime/src/mcp_contract.rs` bytes 298–65536.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.25`
+  Status: `pending`
+  Goal: Read Rust group 25: 1,352 lines/fragments, 65,134 bytes.
+  Scope: `rust/linkedspec-runtime/src/mcp_contract.rs` bytes 65537–83225;
+    `rust/linkedspec-runtime/src/mcp_contract_runtime.rs` lines 1–582;
+    `rust/linkedspec-runtime/src/mcp_server.rs` lines 1–769.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.26`
+  Status: `pending`
+  Goal: Read Rust group 26: 1,500 lines/fragments, 51,296 bytes.
+  Scope: `rust/linkedspec-runtime/src/mcp_server.rs` lines 770–1342;
+    `rust/linkedspec-runtime/src/mcp_wire.rs` lines 1–759;
+    `rust/linkedspec-runtime/src/primary_cli.rs` lines 1–168.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.27`
+  Status: `pending`
+  Goal: Read Rust group 27: 1,500 lines/fragments, 50,300 bytes.
+  Scope: `rust/linkedspec-runtime/src/primary_cli.rs` lines 169–796;
+    `rust/linkedspec-runtime/src/recognition_transaction.rs` lines 1–872.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.28`
+  Status: `pending`
+  Goal: Read Rust group 28: 1,496 lines/fragments, 56,822 bytes.
+  Scope: `rust/linkedspec-runtime/src/recognition_transaction.rs` lines 873–1547;
+    `rust/linkedspec-runtime/src/runtime.rs` lines 1–821.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.29`
+  Status: `pending`
+  Goal: Read Rust group 29: 1,497 lines/fragments, 49,031 bytes.
+  Scope: `rust/linkedspec-runtime/src/runtime.rs` lines 822–2318.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.30`
+  Status: `pending`
+  Goal: Read Rust group 30: 1,494 lines/fragments, 53,412 bytes.
+  Scope: `rust/linkedspec-runtime/src/runtime.rs` lines 2319–2737;
+    `rust/linkedspec-runtime/src/semantic_index.rs` lines 1–692;
+    `rust/linkedspec-runtime/src/semantic_index/call_projection.rs` lines 1–383.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.31`
+  Status: `pending`
+  Goal: Read Rust group 31: 1,494 lines/fragments, 50,420 bytes.
+  Scope: `rust/linkedspec-runtime/src/semantic_index/call_projection.rs` lines 384–1288;
+    `rust/linkedspec-runtime/src/semantic_index/query.rs` lines 1–589.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.32`
+  Status: `pending`
+  Goal: Read Rust group 32: 1,495 lines/fragments, 50,145 bytes.
+  Scope: `rust/linkedspec-runtime/src/semantic_index/query.rs` lines 590–1003;
+    `rust/linkedspec-runtime/src/semantic_index/runtime_projection.rs` lines 1–273;
+    `rust/linkedspec-runtime/src/semantic_index/static_projection.rs` lines 1–808.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.33`
+  Status: `pending`
+  Goal: Read Rust group 33: 1,482 lines/fragments, 50,376 bytes.
+  Scope: `rust/linkedspec-runtime/src/semantic_index/static_projection.rs` lines 809–1720;
+    `rust/linkedspec-runtime/src/semantic_observation.rs` lines 1–133;
+    `rust/linkedspec-runtime/src/source_emitter.rs` lines 1–437.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.34`
+  Status: `pending`
+  Goal: Read Rust group 34: 1,493 lines/fragments, 53,383 bytes.
+  Scope: `rust/linkedspec-runtime/src/source_emitter.rs` lines 438–1466;
+    `rust/linkedspec-runtime/src/source_location.rs` lines 1–464.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.35`
+  Status: `pending`
+  Goal: Read Rust group 35: 1,497 lines/fragments, 51,223 bytes.
+  Scope: `rust/linkedspec-runtime/src/source_location.rs` lines 465–561;
+    `rust/linkedspec-runtime/src/spec_loader.rs` lines 1–564;
+    `rust/linkedspec-runtime/src/spec_parser.rs` lines 1–836.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.36`
+  Status: `pending`
+  Goal: Read Rust group 36: 1,453 lines/fragments, 51,063 bytes.
+  Scope: `rust/linkedspec-runtime/src/spec_parser.rs` lines 837–1022;
+    `rust/linkedspec-runtime/src/staged_ast_enrichment.rs` lines 1–1267.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.37`
+  Status: `pending`
+  Goal: Read Rust group 37: 1,499 lines/fragments, 53,102 bytes.
+  Scope: `rust/linkedspec-runtime/src/staged_ast_enrichment.rs` lines 1268–2766.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.38`
+  Status: `pending`
+  Goal: Read Rust group 38: 1,500 lines/fragments, 50,788 bytes.
+  Scope: `rust/linkedspec-runtime/src/staged_ast_enrichment.rs` lines 2767–3058;
+    `rust/linkedspec-runtime/src/staged_parse_job.rs` lines 1–290;
+    `rust/linkedspec-runtime/src/staged_parser_registry.rs` lines 1–712;
+    `rust/linkedspec-runtime/src/unicode_case_mapping.rs` lines 1–206.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.39`
+  Status: `pending`
+  Goal: Read Rust group 39: 1,500 lines/fragments, 38,103 bytes.
+  Scope: `rust/linkedspec-runtime/src/unicode_case_mapping.rs` lines 207–1706.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.40`
+  Status: `pending`
+  Goal: Read Rust group 40: 1,450 lines/fragments, 37,746 bytes.
+  Scope: `rust/linkedspec-runtime/src/unicode_case_mapping.rs` lines 1707–3156.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.41`
+  Status: `pending`
+  Goal: Read Rust group 41: 1,494 lines/fragments, 43,943 bytes.
+  Scope: `rust/linkedspec-runtime/src/unicode_case_mapping.rs` lines 3157–3859;
+    `rust/linkedspec-runtime/tests/callable_codeblock_literal_contract.rs` lines 1–791.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.42`
+  Status: `pending`
+  Goal: Read Rust group 42: 1,500 lines/fragments, 45,529 bytes.
+  Scope: `rust/linkedspec-runtime/tests/callable_codeblock_literal_contract.rs` lines 792–958;
+    `rust/linkedspec-runtime/tests/complete_named_mark_contract.rs` lines 1–90;
+    `rust/linkedspec-runtime/tests/corpus/README.md` lines 1–116;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_array_bare_arg/expected.json` lines 1–4;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_array_bare_arg/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_array_bare_arg/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_array_declare/expected.json` lines 1–4;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_array_declare/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_array_declare/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_array_no_declare/expected.json` lines 1–4;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_array_no_declare/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_array_no_declare/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_scalar_bare_arg/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_scalar_bare_arg/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_scalar_bare_arg/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_scalar_declare/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_scalar_declare/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_scalar_declare/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_scalar_no_declare/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_scalar_no_declare/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_scalar_no_declare/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_undef_literal/expected.json` lines 1–3;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_undef_literal/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_undef_literal/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/capability_capture_anonymous_surface/expected.json` lines 1–19;
+    `rust/linkedspec-runtime/tests/corpus/capability_capture_anonymous_surface/input.spec` lines 1–51;
+    `rust/linkedspec-runtime/tests/corpus/capability_capture_anonymous_surface/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/capability_capture_named_surface/expected.json` lines 1–23;
+    `rust/linkedspec-runtime/tests/corpus/capability_capture_named_surface/input.spec` lines 1–61;
+    `rust/linkedspec-runtime/tests/corpus/capability_capture_named_surface/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/capability_control_marker_surface/expected.json` lines 1–4;
+    `rust/linkedspec-runtime/tests/corpus/capability_control_marker_surface/input.spec` lines 1–26;
+    `rust/linkedspec-runtime/tests/corpus/capability_control_marker_surface/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/capability_cursor_control_surface/expected.json` lines 1–7;
+    `rust/linkedspec-runtime/tests/corpus/capability_cursor_control_surface/input.spec` lines 1–24;
+    `rust/linkedspec-runtime/tests/corpus/capability_cursor_control_surface/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/capability_position_helper_surface/expected.json` lines 1–37;
+    `rust/linkedspec-runtime/tests/corpus/capability_position_helper_surface/input.spec` lines 1–41;
+    `rust/linkedspec-runtime/tests/corpus/capability_position_helper_surface/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/capability_pure_helper_surface/expected.json` lines 1–47;
+    `rust/linkedspec-runtime/tests/corpus/capability_pure_helper_surface/input.spec` lines 1–38;
+    `rust/linkedspec-runtime/tests/corpus/capability_pure_helper_surface/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/ds_vhistory_version_entry/expected.json` lines 1–24;
+    `rust/linkedspec-runtime/tests/corpus/ds_vhistory_version_entry/input.spec` lines 1–95;
+    `rust/linkedspec-runtime/tests/corpus/ds_vhistory_version_entry/input.txt` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/ebnf_expression_rules/expected.json` lines 1–42;
+    `rust/linkedspec-runtime/tests/corpus/ebnf_expression_rules/input.spec` lines 1–214;
+    `rust/linkedspec-runtime/tests/corpus/ebnf_expression_rules/input.txt` lines 1–2;
+    `rust/linkedspec-runtime/tests/corpus/ebnf_logging_annotation/expected.json` lines 1–22;
+    `rust/linkedspec-runtime/tests/corpus/ebnf_logging_annotation/input.spec` lines 1–214;
+    `rust/linkedspec-runtime/tests/corpus/ebnf_logging_annotation/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/hlink_bracket_body/expected.json` lines 1–3;
+    `rust/linkedspec-runtime/tests/corpus/hlink_bracket_body/input.spec` lines 1–29;
+    `rust/linkedspec-runtime/tests/corpus/hlink_bracket_body/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/hlink_curly_brace/expected.json` lines 1–3;
+    `rust/linkedspec-runtime/tests/corpus/hlink_curly_brace/input.spec` lines 1–28.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.43`
+  Status: `pending`
+  Goal: Read Rust group 43: 1,106 lines/fragments, 59,355 bytes.
+  Scope: `rust/linkedspec-runtime/tests/corpus/hlink_curly_brace/input.spec` lines 29–29;
+    `rust/linkedspec-runtime/tests/corpus/hlink_curly_brace/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/hlink_mixed_bracket_brace/expected.json` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/hlink_mixed_bracket_brace/input.spec` lines 1–29;
+    `rust/linkedspec-runtime/tests/corpus/hlink_mixed_bracket_brace/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/hlink_raw_escaped_brackets/expected.json` lines 1–3;
+    `rust/linkedspec-runtime/tests/corpus/hlink_raw_escaped_brackets/input.spec` lines 1–29;
+    `rust/linkedspec-runtime/tests/corpus/hlink_raw_escaped_brackets/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/hlink_raw_string/expected.json` lines 1–3;
+    `rust/linkedspec-runtime/tests/corpus/hlink_raw_string/input.spec` lines 1–29;
+    `rust/linkedspec-runtime/tests/corpus/hlink_raw_string/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/lib_reader_cattribute/expected.json` lines 1–17;
+    `rust/linkedspec-runtime/tests/corpus/lib_reader_cattribute/input.spec` lines 1–15;
+    `rust/linkedspec-runtime/tests/corpus/lib_reader_cattribute/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/lib_reader_sattribute/expected.json` lines 1–14;
+    `rust/linkedspec-runtime/tests/corpus/lib_reader_sattribute/input.spec` lines 1–15;
+    `rust/linkedspec-runtime/tests/corpus/lib_reader_sattribute/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/lispish_x_y/expected.json` lines 1–6;
+    `rust/linkedspec-runtime/tests/corpus/lispish_x_y/input.spec` lines 1–86;
+    `rust/linkedspec-runtime/tests/corpus/lispish_x_y/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/manifest.json` lines 1–112;
+    `rust/linkedspec-runtime/tests/corpus/portmap_bare/expected.json` lines 1–6;
+    `rust/linkedspec-runtime/tests/corpus/portmap_bare/input.spec` lines 1–33;
+    `rust/linkedspec-runtime/tests/corpus/portmap_bare/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/portmap_bit/expected.json` lines 1–7;
+    `rust/linkedspec-runtime/tests/corpus/portmap_bit/input.spec` lines 1–33;
+    `rust/linkedspec-runtime/tests/corpus/portmap_bit/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/portmap_concatenation/expected.json` lines 1–18;
+    `rust/linkedspec-runtime/tests/corpus/portmap_concatenation/input.spec` lines 1–33;
+    `rust/linkedspec-runtime/tests/corpus/portmap_concatenation/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/portmap_constant/expected.json` lines 1–6;
+    `rust/linkedspec-runtime/tests/corpus/portmap_constant/input.spec` lines 1–33;
+    `rust/linkedspec-runtime/tests/corpus/portmap_constant/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/portmap_slice/expected.json` lines 1–8;
+    `rust/linkedspec-runtime/tests/corpus/portmap_slice/input.spec` lines 1–33;
+    `rust/linkedspec-runtime/tests/corpus/portmap_slice/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/pplugin_empty/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/pplugin_empty/input.spec` lines 1–33;
+    `rust/linkedspec-runtime/tests/corpus/pplugin_empty/input.txt` empty file (0 bytes);
+    `rust/linkedspec-runtime/tests/corpus/proof_edge_array_literal/expected.json` lines 1–4;
+    `rust/linkedspec-runtime/tests/corpus/proof_edge_array_literal/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/proof_edge_array_literal/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/proof_edge_scalar_literal/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/proof_edge_scalar_literal/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/proof_edge_scalar_literal/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/regdef_nested_register_fields/expected.json` lines 1–21;
+    `rust/linkedspec-runtime/tests/corpus/regdef_nested_register_fields/input.spec` lines 1–23;
+    `rust/linkedspec-runtime/tests/corpus/regdef_nested_register_fields/input.txt` lines 1–4;
+    `rust/linkedspec-runtime/tests/corpus/simenv_multiline_value/expected.json` lines 1–17;
+    `rust/linkedspec-runtime/tests/corpus/simenv_multiline_value/input.spec` lines 1–225;
+    `rust/linkedspec-runtime/tests/corpus/simenv_multiline_value/input.txt` lines 1–3;
+    `rust/linkedspec-runtime/tests/corpus/spec_spec_action_edge/expected.json` lines 1–31;
+    `rust/linkedspec-runtime/tests/corpus/spec_spec_action_edge/input.spec` lines 1–145.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.44`
+  Status: `pending`
+  Goal: Read Rust group 44: 225 lines/fragments, 65,141 bytes.
+  Scope: `rust/linkedspec-runtime/tests/corpus/spec_spec_action_edge/input.spec` lines 146–226;
+    `rust/linkedspec-runtime/tests/corpus/spec_spec_action_edge/input.txt` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/spec_spec_comment_skip/expected.json` lines 1–14;
+    `rust/linkedspec-runtime/tests/corpus/spec_spec_comment_skip/input.spec` lines 1–125.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.45`
+  Status: `pending`
+  Goal: Read Rust group 45: 44 lines/fragments, 60,931 bytes.
+  Scope: `rust/linkedspec-runtime/tests/corpus/spec_spec_comment_skip/input.spec` lines 126–169.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.46`
+  Status: `pending`
+  Goal: Read Rust group 46: 231 lines/fragments, 59,566 bytes.
+  Scope: `rust/linkedspec-runtime/tests/corpus/spec_spec_comment_skip/input.spec` lines 170–226;
+    `rust/linkedspec-runtime/tests/corpus/spec_spec_comment_skip/input.txt` lines 1–3;
+    `rust/linkedspec-runtime/tests/corpus/spec_spec_minimal_rule/expected.json` lines 1–14;
+    `rust/linkedspec-runtime/tests/corpus/spec_spec_minimal_rule/input.spec` lines 1–157.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.47`
+  Status: `pending`
+  Goal: Read Rust group 47: 249 lines/fragments, 53,907 bytes.
+  Scope: `rust/linkedspec-runtime/tests/corpus/spec_spec_minimal_rule/input.spec` lines 158–226;
+    `rust/linkedspec-runtime/tests/corpus/spec_spec_minimal_rule/input.txt` lines 1–2;
+    `rust/linkedspec-runtime/tests/corpus/spec_spec_user_function_definition/expected.json` lines 1–37;
+    `rust/linkedspec-runtime/tests/corpus/spec_spec_user_function_definition/input.spec` lines 1–141.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.48`
+  Status: `pending`
+  Goal: Read Rust group 48: 32 lines/fragments, 60,575 bytes.
+  Scope: `rust/linkedspec-runtime/tests/corpus/spec_spec_user_function_definition/input.spec` lines 142–173.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.49`
+  Status: `pending`
+  Goal: Read Rust group 49: 1,500 lines/fragments, 46,200 bytes.
+  Scope: `rust/linkedspec-runtime/tests/corpus/spec_spec_user_function_definition/input.spec` lines 174–226;
+    `rust/linkedspec-runtime/tests/corpus/spec_spec_user_function_definition/input.txt` lines 1–6;
+    `rust/linkedspec-runtime/tests/corpus/tablegrep_simple_term/expected.json` lines 1–8;
+    `rust/linkedspec-runtime/tests/corpus/tablegrep_simple_term/input.spec` lines 1–86;
+    `rust/linkedspec-runtime/tests/corpus/tablegrep_simple_term/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/tclite_command_subst/expected.json` lines 1–9;
+    `rust/linkedspec-runtime/tests/corpus/tclite_command_subst/input.spec` lines 1–35;
+    `rust/linkedspec-runtime/tests/corpus/tclite_command_subst/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/tclite_double_quote/expected.json` lines 1–9;
+    `rust/linkedspec-runtime/tests/corpus/tclite_double_quote/input.spec` lines 1–35;
+    `rust/linkedspec-runtime/tests/corpus/tclite_double_quote/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_11_3_assignment_replacement_and_explicit_targets/expected.json` lines 1–18;
+    `rust/linkedspec-runtime/tests/corpus/terse_11_3_assignment_replacement_and_explicit_targets/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_11_3_assignment_replacement_and_explicit_targets/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_11_3_shape_assignment_value_binding/expected.json` lines 1–24;
+    `rust/linkedspec-runtime/tests/corpus/terse_11_3_shape_assignment_value_binding/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_11_3_shape_assignment_value_binding/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_11_4_nested_mixed_value_path_assignment/expected.json` lines 1–38;
+    `rust/linkedspec-runtime/tests/corpus/terse_11_4_nested_mixed_value_path_assignment/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_11_4_nested_mixed_value_path_assignment/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_12_3_hash_tree_traversal_receiver_blocks/expected.json` lines 1–17;
+    `rust/linkedspec-runtime/tests/corpus/terse_12_3_hash_tree_traversal_receiver_blocks/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_12_3_hash_tree_traversal_receiver_blocks/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_13_3_array_tree_traversal_receiver_blocks/expected.json` lines 1–19;
+    `rust/linkedspec-runtime/tests/corpus/terse_13_3_array_tree_traversal_receiver_blocks/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_13_3_array_tree_traversal_receiver_blocks/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_14_3_with_helper_trailing_block/expected.json` lines 1–8;
+    `rust/linkedspec-runtime/tests/corpus/terse_14_3_with_helper_trailing_block/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_14_3_with_helper_trailing_block/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_14_4_receiver_with_trailing_block/expected.json` lines 1–7;
+    `rust/linkedspec-runtime/tests/corpus/terse_14_4_receiver_with_trailing_block/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_14_4_receiver_with_trailing_block/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_15_2_3_bare_value_reads_and_case_labels/expected.json` lines 1–6;
+    `rust/linkedspec-runtime/tests/corpus/terse_15_2_3_bare_value_reads_and_case_labels/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_15_2_3_bare_value_reads_and_case_labels/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_15_4_bare_scalar_payload_readback/expected.json` lines 1–12;
+    `rust/linkedspec-runtime/tests/corpus/terse_15_4_bare_scalar_payload_readback/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_15_4_bare_scalar_payload_readback/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_array_copy_bare_read/expected.json` lines 1–4;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_array_copy_bare_read/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_array_copy_bare_read/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_copy_bare_array_first/expected.json` lines 1–3;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_copy_bare_array_first/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_copy_bare_array_first/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_copy_bare_hash/expected.json` lines 1–3;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_copy_bare_hash/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_copy_bare_hash/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_hash_copy_bare_read/expected.json` lines 1–3;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_hash_copy_bare_read/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_hash_copy_bare_read/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_assignment_source_bare_reads/expected.json` lines 1–4;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_assignment_source_bare_reads/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_assignment_source_bare_reads/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_mutation_direct_bare_reads/expected.json` lines 1–9;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_mutation_direct_bare_reads/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_mutation_direct_bare_reads/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_return_bare_scalar/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_return_bare_scalar/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_return_bare_scalar/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_5_3_shape_literal_mutation_rhs/expected.json` lines 1–12;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_5_3_shape_literal_mutation_rhs/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_5_3_shape_literal_mutation_rhs/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_5_3_shape_literal_return_values/expected.json` lines 1–14;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_5_3_shape_literal_return_values/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_5_3_shape_literal_return_values/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_3_2_push_alias_array/expected.json` lines 1–4;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_3_2_push_alias_array/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_3_2_push_alias_array/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_3_3_set_key_statement_hash/expected.json` lines 1–3;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_3_3_set_key_statement_hash/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_3_3_set_key_statement_hash/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_3_4_1_scalar_assignment_operator/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_3_4_1_scalar_assignment_operator/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_3_4_1_scalar_assignment_operator/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_3_4_2_array_append_operator/expected.json` lines 1–4;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_3_4_2_array_append_operator/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_3_4_2_array_append_operator/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_3_4_3_hash_index_assignment_operator/expected.json` lines 1–3;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_3_4_3_hash_index_assignment_operator/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_3_4_3_hash_index_assignment_operator/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_4_2_copy_hash_symbol_empty/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_4_2_copy_hash_symbol_empty/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_4_2_copy_hash_symbol_empty/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_4_2_set_cat_copy_array/expected.json` lines 1–3;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_4_2_set_cat_copy_array/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_4_2_set_cat_copy_array/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_5_2_boolean_mutation_flow/expected.json` lines 1–10;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_5_2_boolean_mutation_flow/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_5_2_boolean_mutation_flow/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_5_2_primitive_literals/expected.json` lines 1–8;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_5_2_primitive_literals/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_5_2_primitive_literals/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_5_3_call_spacing/expected.json` lines 1–9;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_5_3_call_spacing/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_5_3_call_spacing/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_5_4_newline_statements/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_5_4_newline_statements/input.spec` lines 1–6;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_5_4_newline_statements/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_5_5_1_direct_nested_access/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_5_5_1_direct_nested_access/input.spec` lines 1–7;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_5_5_1_direct_nested_access/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_6_array_end_mutation_methods/expected.json` lines 1–3;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_6_array_end_mutation_methods/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_6_array_end_mutation_methods/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_1_3_expression_valued_blocks/expected.json` lines 1–7;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_1_3_expression_valued_blocks/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_1_3_expression_valued_blocks/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_1_4_expression_valued_block_early_return/expected.json` lines 1–6;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_1_4_expression_valued_block_early_return/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_1_4_expression_valued_block_early_return/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_2_3_attached_if_blocks/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_2_3_attached_if_blocks/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_2_3_attached_if_blocks/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_2_4_when_otherwise_aliases/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_2_4_when_otherwise_aliases/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_2_4_when_otherwise_aliases/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_2_5_2_attached_switch_blocks/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_2_5_2_attached_switch_blocks/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_2_5_2_attached_switch_blocks/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_2_6_2_attached_while_blocks/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_2_6_2_attached_while_blocks/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_2_6_2_attached_while_blocks/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_4_1_bare_array_helper_arg_composition/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_4_1_bare_array_helper_arg_composition/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_4_1_bare_array_helper_arg_composition/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_4_1_bare_hash_helper_arg_composition/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_4_1_bare_hash_helper_arg_composition/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_4_1_bare_hash_helper_arg_composition/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_4_2_inline_if_value_control/expected.json` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_4_2_inline_if_value_control/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_4_2_inline_if_value_control/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_4_2_inline_switch_value_control/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_4_2_inline_switch_value_control/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_4_2_inline_switch_value_control/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_4_deep_pure_helper_composition/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_4_deep_pure_helper_composition/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_4_deep_pure_helper_composition/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_1_array_receiver_value_chains/expected.json` lines 1–9;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_1_array_receiver_value_chains/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_1_array_receiver_value_chains/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_2_hash_receiver_value_chains/expected.json` lines 1–9;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_2_hash_receiver_value_chains/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_2_hash_receiver_value_chains/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_3_string_receiver_value_chains/expected.json` lines 1–8;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_3_string_receiver_value_chains/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_3_string_receiver_value_chains/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_4_number_receiver_value_chains/expected.json` lines 1–6;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_4_number_receiver_value_chains/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_4_number_receiver_value_chains/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_5_block_valued_receiver_chains/expected.json` lines 1–7;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_5_block_valued_receiver_chains/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_5_block_valued_receiver_chains/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_6_typed_wrapper_quoted_names/expected.json` lines 1–15;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_6_typed_wrapper_quoted_names/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_6_typed_wrapper_quoted_names/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_2_1_numeric_word_aliases/expected.json` lines 1–18;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_2_1_numeric_word_aliases/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_2_1_numeric_word_aliases/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_2_2_arithmetic_symbol_callees/expected.json` lines 1–8;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_2_2_arithmetic_symbol_callees/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_2_2_arithmetic_symbol_callees/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_2_3_2_string_comparison_helpers/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_2_3_2_string_comparison_helpers/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_2_3_2_string_comparison_helpers/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_2_3_3_numeric_comparison_word_aliases/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_2_3_3_numeric_comparison_word_aliases/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_2_3_3_numeric_comparison_word_aliases/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_2_3_4_numeric_comparison_symbol_callees/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_2_3_4_numeric_comparison_symbol_callees/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_2_3_4_numeric_comparison_symbol_callees/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_3_1_scalar_assignment_expressions/expected.json` lines 1–10;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_3_1_scalar_assignment_expressions/input.spec` lines 1–6;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_3_1_scalar_assignment_expressions/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_3_2_aggregate_assignment_expressions/expected.json` lines 1–21;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_3_2_aggregate_assignment_expressions/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_3_2_aggregate_assignment_expressions/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_3_3_mutation_assignment_expressions/expected.json` lines 1–16;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_3_3_mutation_assignment_expressions/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_3_3_mutation_assignment_expressions/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_3_4_assignment_expression_closure/expected.json` lines 1–46;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_3_4_assignment_expression_closure/input.spec` lines 1–6;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_3_4_assignment_expression_closure/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_4_3_2_user_function_runtime/expected.json` lines 1–6;
+    `rust/linkedspec-runtime/tests/corpus/terse_4_3_2_user_function_runtime/input.spec` lines 1–7;
+    `rust/linkedspec-runtime/tests/corpus/terse_4_3_2_user_function_runtime/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_7_3_array_numeric_reducer_receiver_methods/expected.json` lines 1–14;
+    `rust/linkedspec-runtime/tests/corpus/terse_7_3_array_numeric_reducer_receiver_methods/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_7_3_array_numeric_reducer_receiver_methods/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/tkgui_empty/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/tkgui_empty/input.spec` lines 1–22;
+    `rust/linkedspec-runtime/tests/corpus/tkgui_empty/input.txt` empty file (0 bytes);
+    `rust/linkedspec-runtime/tests/corpus/top_rule_body_recursion_sexpr/expected.json` lines 1–7;
+    `rust/linkedspec-runtime/tests/corpus/top_rule_body_recursion_sexpr/input.spec` lines 1–9;
+    `rust/linkedspec-runtime/tests/corpus/top_rule_body_recursion_sexpr/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/top_rule_lx_recursion_nested/expected.json` lines 1–9;
+    `rust/linkedspec-runtime/tests/corpus/top_rule_lx_recursion_nested/input.spec` lines 1–7;
+    `rust/linkedspec-runtime/tests/corpus/top_rule_lx_recursion_nested/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/top_rule_lx_recursion_sequence/expected.json` lines 1–8;
+    `rust/linkedspec-runtime/tests/corpus/top_rule_lx_recursion_sequence/input.spec` lines 1–7;
+    `rust/linkedspec-runtime/tests/corpus/top_rule_lx_recursion_sequence/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/vhdl_library_use/expected.json` lines 1–12;
+    `rust/linkedspec-runtime/tests/corpus/vhdl_library_use/input.spec` lines 1–335.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.50`
+  Status: `pending`
+  Goal: Read Rust group 50: 1,494 lines/fragments, 55,681 bytes.
+  Scope: `rust/linkedspec-runtime/tests/corpus/vhdl_library_use/input.spec` lines 336–384;
+    `rust/linkedspec-runtime/tests/corpus/vhdl_library_use/input.txt` lines 1–2;
+    `rust/linkedspec-runtime/tests/corpus_oracle.rs` lines 1–234;
+    `rust/linkedspec-runtime/tests/diagnostic_output_contract.rs` lines 1–483;
+    `rust/linkedspec-runtime/tests/duplicate_regex_slot_identity_contract.rs` lines 1–473;
+    `rust/linkedspec-runtime/tests/generated_source_full_manifest_classifier.rs` lines 1–253.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.51`
+  Status: `pending`
+  Goal: Read Rust group 51: 1,487 lines/fragments, 51,804 bytes.
+  Scope: `rust/linkedspec-runtime/tests/generated_source_full_manifest_classifier.rs` lines 254–358;
+    `rust/linkedspec-runtime/tests/integration_test.rs` lines 1–1382.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.52`
+  Status: `pending`
+  Goal: Read Rust group 52: 1,408 lines/fragments, 65,108 bytes.
+  Scope: `rust/linkedspec-runtime/tests/integration_test.rs` lines 1383–2790.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.53`
+  Status: `pending`
+  Goal: Read Rust group 53: 1,500 lines/fragments, 55,337 bytes.
+  Scope: `rust/linkedspec-runtime/tests/integration_test.rs` lines 2791–3910;
+    `rust/linkedspec-runtime/tests/inter_match_gap_capture_contract.rs` lines 1–380.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.54`
+  Status: `pending`
+  Goal: Read Rust group 54: 1,449 lines/fragments, 54,955 bytes.
+  Scope: `rust/linkedspec-runtime/tests/inter_match_gap_capture_contract.rs` lines 381–1225;
+    `rust/linkedspec-runtime/tests/logical_helper_contract.rs` lines 1–496;
+    `rust/linkedspec-runtime/tests/map_leaves_mutation_contract.rs` lines 1–108.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.55`
+  Status: `pending`
+  Goal: Read Rust group 55: 1,500 lines/fragments, 53,737 bytes.
+  Scope: `rust/linkedspec-runtime/tests/map_leaves_mutation_contract.rs` lines 109–732;
+    `rust/linkedspec-runtime/tests/mcp_server_rust_admission.rs` lines 1–876.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.56`
+  Status: `pending`
+  Goal: Read Rust group 56: 1,474 lines/fragments, 50,699 bytes.
+  Scope: `rust/linkedspec-runtime/tests/mcp_server_rust_admission.rs` lines 877–1058;
+    `rust/linkedspec-runtime/tests/mcp_server_rust_dispatch.rs` lines 1–326;
+    `rust/linkedspec-runtime/tests/mcp_server_rust_stdio.rs` lines 1–411;
+    `rust/linkedspec-runtime/tests/progressive_span_dispatch_authority.rs` lines 1–555.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.57`
+  Status: `pending`
+  Goal: Read Rust group 57: 1,476 lines/fragments, 52,176 bytes.
+  Scope: `rust/linkedspec-runtime/tests/progressive_span_dispatch_authority.rs` lines 556–818;
+    `rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs` lines 1–610;
+    `rust/linkedspec-runtime/tests/punctuation_light_zero_arg_contract.rs` lines 1–226;
+    `rust/linkedspec-runtime/tests/recognition_transaction_contract.rs` lines 1–377.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.58`
+  Status: `pending`
+  Goal: Read Rust group 58: 1,471 lines/fragments, 49,296 bytes.
+  Scope: `rust/linkedspec-runtime/tests/recognition_transaction_contract.rs` lines 378–932;
+    `rust/linkedspec-runtime/tests/recursive_observation_contract.rs` lines 1–444;
+    `rust/linkedspec-runtime/tests/repeated_action_result_contract.rs` lines 1–472.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.59`
+  Status: `pending`
+  Goal: Read Rust group 59: 1,487 lines/fragments, 48,937 bytes.
+  Scope: `rust/linkedspec-runtime/tests/repeated_action_result_contract.rs` lines 473–516;
+    `rust/linkedspec-runtime/tests/repository_root_relocation.rs` lines 1–95;
+    `rust/linkedspec-runtime/tests/root_rule_selection_admission.rs` lines 1–610;
+    `rust/linkedspec-runtime/tests/root_rule_selection_core.rs` lines 1–301;
+    `rust/linkedspec-runtime/tests/root_rule_selection_routes.rs` lines 1–437.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.60`
+  Status: `pending`
+  Goal: Read Rust group 60: 1,472 lines/fragments, 49,181 bytes.
+  Scope: `rust/linkedspec-runtime/tests/root_rule_selection_routes.rs` lines 438–472;
+    `rust/linkedspec-runtime/tests/rule_local_cursor_contract.rs` lines 1–572;
+    `rust/linkedspec-runtime/tests/rule_local_cursor_execution.rs` lines 1–465;
+    `rust/linkedspec-runtime/tests/rule_local_cursor_normalization.rs` lines 1–50;
+    `rust/linkedspec-runtime/tests/runtime_diagnostics.rs` lines 1–176;
+    `rust/linkedspec-runtime/tests/scalar_numeric_contract.rs` lines 1–32;
+    `rust/linkedspec-runtime/tests/semantic_index_foundation.rs` lines 1–142.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.61`
+  Status: `pending`
+  Goal: Read Rust group 61: 1,461 lines/fragments, 52,200 bytes.
+  Scope: `rust/linkedspec-runtime/tests/semantic_index_foundation.rs` lines 143–269;
+    `rust/linkedspec-runtime/tests/semantic_index_query.rs` lines 1–478;
+    `rust/linkedspec-runtime/tests/semantic_index_runtime_observation.rs` lines 1–636;
+    `rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs` lines 1–220.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.62`
+  Status: `pending`
+  Goal: Read Rust group 62: 1,483 lines/fragments, 48,632 bytes.
+  Scope: `rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs` lines 221–629;
+    `rust/linkedspec-runtime/tests/source_boundary_compatibility_aliases.rs` lines 1–216;
+    `rust/linkedspec-runtime/tests/source_emitter.rs` lines 1–858.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.63`
+  Status: `pending`
+  Goal: Read Rust group 63: 1,492 lines/fragments, 58,940 bytes.
+  Scope: `rust/linkedspec-runtime/tests/source_emitter.rs` lines 859–1166;
+    `rust/linkedspec-runtime/tests/spec_loader.rs` lines 1–264;
+    `rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs` lines 1–920.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.64`
+  Status: `pending`
+  Goal: Read Rust group 64: 1,491 lines/fragments, 55,771 bytes.
+  Scope: `rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs` lines 921–2268;
+    `rust/linkedspec-runtime/tests/standalone_lifecycle_block_contract.rs` lines 1–143.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.65`
+  Status: `pending`
+  Goal: Read Rust group 65: 1,500 lines/fragments, 51,021 bytes.
+  Scope: `rust/linkedspec-runtime/tests/standalone_lifecycle_block_contract.rs` lines 144–470;
+    `rust/linkedspec-runtime/tests/trace_controls.rs` lines 1–477;
+    `rust/linkedspec-runtime/tests/typed_source_location_contract.rs` lines 1–546;
+    `rust/linkedspec-runtime/tests/unicode_case_mapping.rs` lines 1–91;
+    `rust/linkedspec-runtime/tests/unicode_rule_label_routes.rs` lines 1–59.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.66`
+  Status: `pending`
+  Goal: Read Rust group 66: 1,468 lines/fragments, 48,324 bytes.
+  Scope: `rust/linkedspec-runtime/tests/unicode_rule_label_routes.rs` lines 60–196;
+    `rust/linkedspec-runtime/tests/uniform_binding_contract.rs` lines 1–525;
+    `rust/linkedspec-runtime/tests/variadic_user_function_contract.rs` lines 1–214;
+    `rust/linkedspec-runtime/tests/write_vivification_contract.rs` lines 1–592.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.3.67`
+  Status: `pending`
+  Goal: Close the Rust reading lane after every bounded child and final delta review.
+  Acceptance: Verify all 412 baseline paths, current additions/deltas, complete comprehension, exact
+    repair ownership, and Knowledge reconciliation. Reading is not runtime signoff. Require canonical
+    proof for parent closeout and own the next language decomposition before new source reading.
   Verification: `pending`
   Commit: `pending`
 
@@ -2011,7 +2972,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.55` | `pending` | reconcile all Perl coverage, define bounded Rust children, and run canonical proof for the Perl parent closeout. |
+| 1 | `SESSION-STARTUP-READING.3.3.1` | `pending` | read the owned Rust ignore file and Cargo.lock prefix, retrieving dependency Knowledge before interpretation. |
 
 ## Reading Ledger
 
@@ -2022,7 +2983,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. The Perl reading queue is complete; `.3.2.55` owns formal parent closeout. | Canonical Perl closeout and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete under `.3.2.55`; 66 Rust reading checkpoints and their closeout are owned. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -2135,6 +3096,29 @@ Independent verification converts all declared line ranges to baseline byte inte
 non-overlapping coverage from byte 1 through EOF for all 84 paths, no extra path, and each declared leaf budget.
 This plan adds no second manifest: the owned task Scope fields are the reading plan; Git remains the file/object
 inventory. Final `.3.11` still reconciles all first-party lanes and current deltas.
+
+
+### Shared native-reading acceptance and Rust decomposition at `.3.2.55`
+
+The 66 reading children `.3.3.1`–`.3.3.66` own all 412 baseline Rust paths / 3,533,382 bytes once;
+`.3.3.67` owns parent closeout. Inclusive one-based lines and bytes use the same baseline as Perl.
+Both empty corpus files have explicit zero-byte owners. The oversized MCP binding line is split across
+`.3.3.24`–`.3.3.25`; its six-line header remains with the first payload window. Generated Unicode rows,
+embedded contract JSON, full corpus grammars and expected data, manifests, lockfile, and backend README stay in scope.
+
+Each child fits 1,500 lines/fragments and 65,536 bytes. Boundary inspection distinguishes declaration/test
+boundaries from continuations inside larger methods, fluent expressions, embedded grammars, or generated data.
+A window is not a claim that an enclosing method is complete: reconcile its preceding context and explicitly
+retain its suffix owner. Planning inspected boundary context only; no whole Rust file is credited by this plan.
+Read each window in smaller untruncated chunks. Retrieve Knowledge first, diagnose surprises with Toolbox,
+create repair ownership before changes, review current deltas, record concise comprehension and exact coverage,
+run focused direct-dependent and continuity proof, and commit before the next implementation/checkpoint.
+Public/runtime/policy repairs remain gated on `.3`/`.4`/`.5`; full codebase reading remains No.
+
+The independent audit converts the task's Scope records to byte intervals and requires exact contiguous,
+disjoint coverage through EOF plus explicit empty-file ownership, per-child budgets, and current Git identity.
+No separate manifest is created. Recheck collection pressure before later evidence or decomposition grows it;
+the 8,000-line general member limit and 80,000-line aggregate remain unchanged.
 
 ### Facade invocation reading at `.3.2.1`
 
@@ -3953,6 +4937,36 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - Prior bd0573533e45fdd903255fb959e3c1f7e5971a27 passed all nine doctrines and post-pointer verification;
   brief was zero and tree clean before activation. No runtime, configuration, or public-book changes.
 
+### Perl parent closeout and exhaustive Rust reading ownership at `.3.2.55`
+
+- Activated from clean `888d8ca20983667ef427446e8fddf03f6eb5c8a2` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Activated from the completed utility checkpoint; independent source-interval verification covers all
+  89 Perl files / 2,133,690 bytes through EOF once, with no missing path or current delta. All 54 preceding
+  checkpoint subjects exist in Git: 53 source-reading leaves and one decomposition checkpoint. Their
+  largest budgets are 1,500 lines/fragments and 65,506 bytes. .31's physical ledger and each comprehension
+  checkpoint remain the evidence; enumeration alone is not substituted for reading.
+- Close only the Perl reading parent. Existing repair owners .7–.30 and .32–.44 remain pending; no
+  runtime, public-book, policy, or whole-codebase completion is claimed. Roadmap and physical mdBook are
+  Yes; other source lanes and formal .4/.5 reconciliation remain incomplete.
+- Own all 412 baseline Rust paths / 3,533,382 bytes in .3.3.1–.3.3.66, with .3.3.67 parent closeout.
+  Independent candidate and rendered Scope audits require exact contiguous/disjoint coverage, current
+  baseline identity, both empty corpus inputs, and each hard budget. Total 89,242 lines/fragments includes
+  the split MCP logical line; it is not a distinct-line count. Remove the draft's standalone header-only
+  group by keeping all six header lines with the first MCP payload window; the final plan has 66 groups.
+- Inspect split context, distinguishing declaration/test boundaries from method/data/embedded-grammar
+  continuations. Prefix-only display of oversized Unicode lines is planning context, not source credit.
+  Shared native acceptance requires surrounding context, exact suffix ownership, Knowledge-first tools,
+  untruncated physical reading, defect ownership and per-checkpoint commits. Persist both independent
+  audit commands in the existing inventory card; no second manifest or new runtime tool is installed.
+- Final resulting task pressure is recorded below. All existing member and collection limits remain;
+  later slices must remeasure evidence growth. No partition or policy-cap increase is implied.
+- The exact staged candidate requires canonical tools/run_ci_local.sh for this parent closeout. Keep it
+  frozen during the gate, consume the final status, verify its receipt, then commit and clear the brief.
+  Prior 888d8ca20983667ef427446e8fddf03f6eb5c8a2 passed all nine doctrines/post-pointer and clean/brief checks.
+
+- Resulting .3.2.55 candidate pressure: 100 files / 77,867 lines / 7,874,864 bytes;
+  2,133 lines and 513,744 bytes remain within the existing aggregate caps.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -4008,7 +5022,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.2.51` is item 55/100 at `bea31562`;
   `.3.2.52` is item 56/100 at `bdf491a5`;
   `.3.2.53` is item 57/100 at `bd057353`;
-  `.3.2.54` is item 58/100 once committed.
+  `.3.2.54` is item 58/100 at `888d8ca2`;
+  `.3.2.55` is item 59/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -4131,6 +5146,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.52` | Complete prior XID range + baseline; ADR0051/consumer seams; Unicode806/9/8/2; direct3224/17/2; gap9/0/63/public8/15/10/34; focused continuity | PASS; generated classifier and current named-slot admission reconciled; historical stages retained. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.53` | Four complete files + baseline; 76 callable tests; neutral signature/codeblock; tracked plugin census13; canonical Knowledge and focused continuity | PASS; current registry metadata and legacy corpus/discovery boundaries reconciled. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.54` | Three complete files + exact baseline; three managed syntax checks; nine gdcheck diagnostic assertions; canonical utility Knowledge; focused continuity | PASS; final queued Perl utility checkpoint reconciled; .25/.26 remain unrepaired. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.55` | Independent Perl coverage/54 commit identities; Rust candidate and task Scope audits; current deltas; resulting pressure; memory/Knowledge/history; exact staged canonical CI | PASS coverage and ownership; canonical receipt required before parent-closeout landing. |
 
 ## Commit Log
 
@@ -4195,6 +5211,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.2.52` | `SESSION-STARTUP-READING.3.2.52 - reconcile XID classifier and current named-slot admission` | XID range and direct classifier proof recorded; stale gap Knowledge admission corrected without runtime movement. |
 | `SESSION-STARTUP-READING.3.2.53` | `SESSION-STARTUP-READING.3.2.53 - reconcile function registry and legacy discovery` | Function registry and legacy files read; 76 tests and neutral proof recorded; 13-file corpus count corrected. |
 | `SESSION-STARTUP-READING.3.2.54` | `SESSION-STARTUP-READING.3.2.54 - reconcile legacy utility reading and repair evidence` | 839 utility lines reread; exact diagnostic control retained; .55 owns canonical closeout. |
+| `SESSION-STARTUP-READING.3.2.55` | `SESSION-STARTUP-READING.3.2.55 - close Perl reading and own bounded Rust scopes` | Close 89-file Perl reading; own all 412 Rust paths in 66 bounded leaves plus closeout; exact canonical boundary. |
 
 ## Changelog
 
@@ -4303,3 +5320,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-06`: `.3.2.52` reconciles the generated XID classifier, records direct boundary/fixture proof, and corrects stale named-slot/gap admission Knowledge.
 - `2026-09-06`: `.3.2.53` reconciles spec-owned function metadata, completes legacy plugin/path/config reading, and records current callable proof and the parked plugin census.
 - `2026-09-06`: `.3.2.54` completes legacy utility comprehension and preserves existing repair evidence; owns the Perl closeout and Rust decomposition before advancing.
+- `2026-09-06`: `.3.2.55` closes Perl reading after independent coverage reconciliation and owns all Rust reading ranges; existing repairs and whole-codebase reading remain pending.

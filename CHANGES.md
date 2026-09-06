@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.55 — close Perl reading and own bounded Rust scopes
+
+Independently reconcile all 89 Perl files, their disjoint byte ranges, completed checkpoint commits, and unchanged current source. Close the Perl reading parent and define 66 exact Rust reading children plus closeout across all 412 files, including generated payloads and empty fixtures. Store repeatable coverage audits, verify documentation pressure, and require canonical CI for this milestone. Existing defects and whole-codebase reading remain pending.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.54 — reconcile legacy utility reading and repair evidence
 
 Read gdcheck, htmlcss_driver, and ptchange completely and verify baseline identity. Three syntax checks pass; nine gdcheck controls reproduce the already tracked defects. Preserve the prior ptchange runtime evidence, record exact revalidation, and own canonical Perl parent closeout plus bounded Rust decomposition before advancing. No runtime or public-book change.

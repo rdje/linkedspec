@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.55 — reading completion requires both comprehension and exact coverage
+
+The interval audit confirms that the recorded comprehension checkpoints cover every Perl byte; it does not create reading credit by itself. Rust ownership uses the same baseline and hard budgets, with explicit continuation windows for large methods and embedded data. Two empty fixtures and the oversized MCP line remain accounted for. Closing a language reading parent requires canonical proof while ordinary reading leaves keep focused verification.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.54 — diagnostic assertions preserve a defect without closing its repair
 
 The nine gdcheck assertions intentionally pin the observed signed-margin, duplicate-row, and DEFAULT-cardinality failures with positive controls. Their passing result means the diagnostic remains reproducible; the separate .25 repairs remain pending. Reading all Perl groups likewise leaves the parent active until independent coverage reconciliation and canonical closeout under .3.2.55.

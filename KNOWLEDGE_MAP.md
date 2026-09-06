@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **981** facts · **8171** question keys.
+> **981** facts · **8172** question keys.
 
 ## Questions → fact
 
@@ -6707,6 +6707,7 @@
 - "where is the capability exclusion public closeout 24.2 marker kept" -> [task-tree-capability-markers-not-frontier](docs/knowledge/task-tree-capability-markers-not-frontier.md) · 2026-07-18 · reverify: `bash scripts/check_task_tree_metadata.sh; bash tools/run_python_project_data.sh tools/check_logical_helper_contract.py; perl tools/check_capability_conformance.pl`
 - "where is the catastrophic regex that hangs phase0" -> [rtlutils-regex-hang](docs/knowledge/rtlutils-regex-hang.md) · 2026-06-18 · reverify: `! test -e perl/RTLUtils.pm && ! test -e perl/FSMGen.pm && echo 'subsystem retired (LEGACY-VHDL-RETIRE)'   # RESOLVED 2026-06-22: phase0 now 960/960 green end-to-end (PHASE0-BACKHALF-TRIAGE); subtest-131 HTML::PathLinks smoke excised by NONCORE-QUARANTINE.3`
 - "where is the complete Perl action lowering contract catalog built" -> [actionir-lowering-stack](docs/knowledge/actionir-lowering-stack.md) · 2026-09-06 · reverify: `ls perl/LinkedSpec/ActionIR/*.pm | wc -l; sed -n '/^sub build_action_lowering_contracts {/,/^}/p' perl/LinkedSpec/ActionIR/Contracts.pm`
+- "where is the complete Rust startup reading plan" -> [startup-codebase-reading-inventory](docs/knowledge/startup-codebase-reading-inventory.md) · 2026-09-06
 - "where is the complete startup SourceLocation reading recorded" -> [perl-source-location-slice-compatibility](docs/knowledge/perl-source-location-slice-compatibility.md) · 2026-09-06 · reverify: `bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t t/recursive_observation_perl_contract.t && bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py`
 - "where is the cross-variant test corpus" -> [rust-perl-output-oracle](docs/knowledge/rust-perl-output-oracle.md) · 2026-07-08 · reverify: `perl -c -Iperl tools/gen_oracle_corpus.pl; ORACLE_TIMEOUT=0 perl -Iperl tools/gen_oracle_corpus.pl 2>&1 | grep 'hard kill during parser build/parse'; ORACLE_TIMEOUT=30 perl -Iperl tools/gen_oracle_corpus.pl; rg -n '\"case_count\" : 105|capability_capture_named_surface' rust/linkedspec-runtime/tests/corpus/manifest.json; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference`
 - "where is the diagnosis evidence checklist enforced" -> [task-acceptance-evidence-gate-boundary](docs/knowledge/task-acceptance-evidence-gate-boundary.md) · 2026-07-08 · reverify: `bash scripts/check_diagnosis_evidence.sh && bash scripts/check_doctrines.sh && rg -n 'TASK-ACCEPTANCE|check_diagnosis_evidence|Acceptance Checklist' scripts/check_doctrines.sh DOCTRINE_ENFORCEMENT.md TOOLBOX.md docs/tasks/DOCTRINE-ENFORCEMENT-ADOPT.md`
@@ -15668,7 +15669,7 @@ _Standalone rule blocks portably normalize to lifecycle I on all five backends_
 ### startup-codebase-reading-inventory
 _Startup reading uses an exhaustive Git baseline with bounded source ranges_
 
-- **answers:** how large is the required startup codebase reading | which code is excluded from startup reading | where is complete codebase reading coverage tracked | does startup reading include noncore and generated fixtures | how are startup reading ranges bounded
+- **answers:** how large is the required startup codebase reading | which code is excluded from startup reading | where is complete codebase reading coverage tracked | does startup reading include noncore and generated fixtures | how are startup reading ranges bounded | where is the complete Rust startup reading plan
 - **date:** 2026-09-06 · **status:** inventory complete; codebase reading incomplete; physical mdBook reading complete, formal alignment pending
 - **evidence:** `SESSION-STARTUP-READING.3.1 inventories exact Git blobs at baeb984e36a94a15951cd23d4c52def5064cdaca: 2,547 entries / 52,084,744 stored bytes, including one excluded rgx gitlink, 50 book entries, 1,197 durable-memory entries, 28 root Markdown files, and 1,271 source/tool/fixture entries. Source lanes contain 22,332,523 bytes; 1,267 text entries have 565,122 LF delimiters and four pinned gzip inputs add 54,500 decoded LFs. Enumeration/decompression is not reading credit.`
 - **source:** [`docs/knowledge/startup-codebase-reading-inventory.md`](docs/knowledge/startup-codebase-reading-inventory.md)
