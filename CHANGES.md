@@ -10,6 +10,11 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.33 — read separator and value owners and track comment failures
+
+Read 1,423 lines / 47,678 bytes across four owners; exact baseline identity and four compact trace tests pass.
+Twelve public comment/newline controls isolate two defects; own repairs .34.1/.34.2 and qualify universal separator claims.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.32 — read staged scanners and reconcile authoring boundaries
 
 Read 1,355 lines / 48,756 bytes across five scanner/staged/splitting owners; exact baseline identity passes.

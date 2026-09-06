@@ -10,6 +10,11 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.33 — comments expose two independent separator failures
+
+LF/CRLF inline comments hide RewritePipeline's appended semicolon; handler compilation fails despite Get returning a wrapper.
+CR comments absorb the following return in splitter and emitted Perl; .34.1/.34.2 own repair after reading and policy review.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.32 — public staged authoring uses a private marker carrier
 
 Exact assignment-form parse_job is public; its opaque declaration carrier and caller-supplied execution authority remain private.

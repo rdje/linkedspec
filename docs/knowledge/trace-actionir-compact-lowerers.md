@@ -67,3 +67,11 @@ Only a defined, nonempty result different from the input commits that candidate 
 A controlled rejected-rule probe changed its candidate stack/counter; the next rule still saw the original
 values, and its accepted counter update committed. The compact-lowerer trace suite passes four top-level tests.
 This bounds the claim to candidate state; the clone is not a general deep copy or a rollback of external effects.
+
+The 2026-09-06 `.3.2.33` checkpoint reads ValueExpr.pm 1–666 and ActionIR/Trace.pm 1–124.
+ValueExpr retains private legacy selector/access and container-name heuristics alongside scalar-held binding
+reads and method/flow delegation; those legacy branches are not the current typed-AST path contract.
+ActionIR trace wrappers delegate through OwnerDispatch error preservation, remain lazy, normalize decision
+names, and sort context keys. This source-level wrapper fact does not close the separately reproduced direct
+lazy-callback exception-state defect in [[perl-lazy-trace-exception-state-drift]] (`.24`). The managed compact
+trace suite again passes four top-level tests; this checkpoint does not claim a new exhaustive exception-state proof.

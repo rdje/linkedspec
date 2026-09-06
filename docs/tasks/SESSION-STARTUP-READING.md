@@ -35,7 +35,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -576,12 +576,19 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.32 - read staged scanners and reconcile authoring boundaries`
 
 - ID: `SESSION-STARTUP-READING.3.2.33`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 31: 1,423 lines/fragments, 47,678 bytes.
   Scope: `perl/LinkedSpec/ActionIR/StatementSplit/Core.pm` lines 1–419; `perl/LinkedSpec/ActionIR/StatementSplit/Mode.pm` lines 1–214; `perl/LinkedSpec/ActionIR/Trace.pm` lines 1–124; `perl/LinkedSpec/ActionIR/ValueExpr.pm` lines 1–666.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact range/full-file identity; separator/trace/value-access Knowledge;
+    public splitter and parser controls, focused compact trace suite; memory/Knowledge/history and review.
+  Canonical trigger: `none` — source reading and Knowledge continuity only.
+  Verification: Exact full-file baseline identity and 1,423-line / 47,678-byte coverage pass; four compact trace tests pass.
+    Twelve distinct public comment/newline combinations isolate LF/CRLF terminator loss and CR comment loss;
+    three inline cases repeat with dumped source confirmation. Repairs `.34.1`/`.34.2` own failures;
+    one new and three qualified Knowledge records preserve evidence. Required focused gates precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.33 - read separator and value owners and track comment failures`
 
 - ID: `SESSION-STARTUP-READING.3.2.34`
   Status: `pending`
@@ -1435,11 +1442,43 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: `pending`
   Commit: `pending`
 
+- ID: `SESSION-STARTUP-READING.34`
+  Status: `pending`
+  Goal: Preserve executable statements across line comments and every supported newline spelling.
+  Dependencies: `.3`/`.4`/`.5`.
+  Children: `.34.1`, `.34.2`
+
+- ID: `SESSION-STARTUP-READING.34.1`
+  Status: `pending`
+  Goal: Insert generated statement terminators outside inline comments.
+  Acceptance: Reproduce LF/CRLF assignment-comment-return failure through public Get, ActionIR diagnostics,
+    and emitted source; compare no-comment, explicit-semicolon, comment-only, quoted-hash, and nested cases.
+    Preserve lexical ownership and source locations when choosing the generated separator position; an inserted
+    semicolon must not become comment text. Cover live and generated routes, update separator teaching and
+    Knowledge with exact behavior, and run focused direct-dependent proof before required public signoff.
+    Measure other backends before claiming cross-runtime impact; keep the oracle correction independently justified.
+  Verification: `pending` — generated $name = "ok" # note; followed by return fails handler compilation for LF/CRLF.
+    Public Get returns a wrapper but invocation records an error and no result; see `.3.2.33` evidence.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.34.2`
+  Status: `pending`
+  Goal: Terminate CR-only line comments without losing the following authored statement.
+  Acceptance: Reproduce the CR-only splitter and public Get loss, with LF/CRLF and explicit-separator controls.
+    Correct comment state and generated-host newline handling together; changing only the splitter must not
+    leave Perl treating the following statement as comment text. Preserve decoded source locations, quoted/
+    regex payloads, EOF comments, and nested/comment-only forms. Add live/generated and direct splitter
+    regressions, reconcile all universal-newline claims, render the book, and verify relevant runtime parity.
+    Coordinate with `.34.1` without combining independently reviewable repairs.
+  Verification: `pending` — Mode clears line-comment state only on LF; CR keeps return in the same statement
+    and generated host comment. Public invocation returns no result with no context error.
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.33` | `pending` | complete StatementSplit/Core 1–419, StatementSplit/Mode 1–214, Trace 1–124, and ValueExpr 1–666. |
+| 1 | `SESSION-STARTUP-READING.3.2.34` | `pending` | complete BindingRuntime 1–422, CallableContract 1–135, CodeblockRuntime 1–403, InterMatchGapRuntime 1–291, and MCPContract 1–13. |
 
 ## Reading Ledger
 
@@ -1450,7 +1489,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.33`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.34`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
 | mdBook | **No** | `.31` records fourteen complete book sources plus the two earlier local-CI ranges: 640,041 bytes of disjoint coverage. | Remaining 1,316,541 source bytes, formal chapter checkpoints, and rendered alignment under `.4`. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -2620,6 +2659,34 @@ PERL
 - No runtime, public-book, or policy changes. The finite proofs do not close known `.18`/`.21` repairs;
   codebase/book remain No and `.3.2.33` follows.
 
+### Statement splitting, lazy trace, and value-expression ownership at `.3.2.33`
+
+- Activated from clean `9be547af99c2a9c99757eb0986d3292ad64b3a50` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Re-reviewed StatementSplit/Core 1–235 / 236–419, StatementSplit/Mode 1–214, Trace 1–124,
+  and ValueExpr 1–240 / 241–460 / 461–666 without truncation. Exact baseline identity passes for
+  all four files: 1,423 lines / 47,678 bytes; this adds no duplicate physical-reading credit over `.31`.
+- Core owns top-level separator detection, nested quote/regex/delimiter state, attached control tails,
+  and trailing statement emission. Mode's line-comment state clears on LF alone. RewritePipeline's
+  pending newline insertion uses the previous rewritten endpoint, including any trailing inline comment.
+- Twelve distinct public Get/Core/substitution combinations cover no comment, inline comment, an explicit
+  semicolon before a comment, and a standalone comment under LF/CRLF/CR. No-comment controls return ok
+  for all three. Inline LF/CRLF produces no result with a context error; explicit/standalone LF/CRLF pass.
+  Every commented CR form loses the return without a context error. Process exit zero and Get returning a
+  CODE wrapper do not establish handler compilation; invocation result, error, and emitted source are checked.
+- Repeated the three inline cases with dump_parser_source. LF/CRLF emits `$name = "ok" # note;`
+  followed by `return $name`: the generated separator is hidden in comment text and handler compilation fails.
+  CR leaves the comment and return in one split statement and emitted host comment. `.34.1` owns lexical
+  separator placement; `.34.2` owns comment state plus emitted newline handling. Other runtimes were not probed.
+  Exact commands and observations live in `docs/knowledge/perl-comment-newline-lowering-drift.md`.
+- Read prior separator, attached-control, lazy-trace exception-state, and compact-lowerer Knowledge first.
+  Qualified both universal separator claims and the trace/value owner record. ActionIR::Trace wraps calls in
+  OwnerDispatch error preservation and stays lazy; that wrapper fact does not close direct callback defect `.24`.
+  ValueExpr retains legacy access/selector heuristics beside scalar binding reads and method/flow delegation;
+  legacy private branches do not redefine the current typed-AST access contract.
+- `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/trace_actionir_compact_lowerers.t`
+  passes four top-level tests. Required memory, Knowledge, history, and review checks precede landing.
+- No runtime, public-book, or policy edits. Reading codebase/book remains No; `.3.2.34` follows.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -2653,7 +2720,8 @@ PERL
   `.3.2.29` is item 33/100 at `3c1a955a`;
   `.3.2.30` is item 34/100 at `6f113221`;
   `.3.2.31` is item 35/100 at `b1108cbb`;
-  `.3.2.32` is item 36/100 once committed.
+  `.3.2.32` is item 36/100 at `9be547af`;
+  `.3.2.33` is item 37/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -2754,6 +2822,7 @@ PERL
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.30` | Exact range/full-file identity; scanner/AST/trace Knowledge; managed five-test pipeline suite and seven-dispatcher census; focused continuity | PASS; four Knowledge boundaries reconciled and known lexical repair linked; required staged gates precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.31` | Exact range/full-file identity; legacy/bare-read/uniform Knowledge; five public Get controls and generated handler-first source; focused continuity | PASS; existing push precedence confirmed and three historical records reconciled; required staged gates precede landing. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.32` | Exact range/full-file identity; pipeline/staged/recognition Knowledge; managed 143-check staged consumer, two neutral checkers and language inventory; focused continuity | PASS bounded Perl/neutral proof; two authoring/inventory records reconciled; required staged gates precede landing. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.33` | Exact range/full-file identity; separator/trace Knowledge; four compact trace tests; twelve public newline/comment cases plus dumped-source repeats; focused continuity | PASS reading/trace controls; comment failures reproduced and owned by `.34.1`/`.34.2`; one new/three qualified cards. |
 
 ## Commit Log
 
@@ -2796,6 +2865,7 @@ PERL
 | `SESSION-STARTUP-READING.3.2.30` | `SESSION-STARTUP-READING.3.2.30 - read rewrite orchestration and reconcile scanner ownership` | RewritePipeline, Scanner, and FlowRules read; scanner registry and AST migration Knowledge reconciled. |
 | `SESSION-STARTUP-READING.3.2.31` | `SESSION-STARTUP-READING.3.2.31 - read legacy scanners and reconcile bare push precedence` | Legacy/basic scanners read; historical scalar-slot and unconditional child-push claims reconciled with uniform binding. |
 | `SESSION-STARTUP-READING.3.2.32` | `SESSION-STARTUP-READING.3.2.32 - read staged scanners and reconcile authoring boundaries` | Pipeline, recognition, staged marker, and splitting owners read; two Knowledge records follow current public/neutral boundaries. |
+| `SESSION-STARTUP-READING.3.2.33` | `SESSION-STARTUP-READING.3.2.33 - read separator and value owners and track comment failures` | Splitter/trace/value owners read; comment failures rooted and repair-owned, universal coverage claims qualified. |
 
 ## Changelog
 
@@ -2873,3 +2943,5 @@ PERL
   inspection, reconciles three historical records, and advances to `.3.2.32`.
 - `2026-09-06`: `.3.2.32` reads pipeline/recognition/staged/splitting owners, passes 143 staged checks and neutral/
   language proof, reconciles two Knowledge records, and advances to `.3.2.33`.
+- `2026-09-06`: `.3.2.33` reads splitter/trace/value owners, passes four trace tests, roots comment/newline failures in
+  twelve controls, creates `.34.1`/`.34.2`, and advances to `.3.2.34`.

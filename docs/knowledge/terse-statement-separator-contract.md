@@ -10,7 +10,7 @@ answers:
   - "are semicolons inside return payloads protected"
   - "why does Top.if attached block with elseif still work"
   - "what owns SPEC-FORMAT-TERSE.1.5.4 statement separators"
-date: 2026-06-29
+date: 2026-09-06
 status: confirmed
 tags: [dsl, actionir, semicolons, statement-split, rust, parity, spec-format-terse, SPEC-FORMAT-TERSE]
 evidence: "SPEC-FORMAT-TERSE.1.5.4, 2026-06-29. Perl phase0 subtest `spec_format_terse_1_5_4_statement_separator_contract` proves newline-separated `set(...)\nreturn(...)` splits and lowers to valid generated Perl with an inserted `;`, semicolon-separated same-line statements still lower, same-line whitespace adjacency remains raw, and nested semicolons inside `return(do { my $x = 1; $x })` stay protected. `StatementSplit::Core` now requires a line break for implicit method-boundary splitting; `RewritePipeline` inserts the generated terminator for newline-separated lowered statements. `BootstrapSpec::Core` normalizes captured fluent attached-control tails with newline separators so `Top.if(...) { ... } elseif(...) { ... } else { ... }` remains supported without making arbitrary same-line helper adjacency canonical. Rust parser tests `parse_newline_separated_statements_without_semicolons` and `parse_same_line_statements_require_semicolons`, runtime test `terse_1_5_4_newline_and_semicolon_statement_separators_run`, and oracle fixture `terse_1_5_4_newline_statements` lock parity. STATEMENT-SEPARATOR-EXAMPLE-ALIGNMENT.1, 2026-07-10, removed redundant line-ending semicolons from the Dart hash-helper executable fixture and its focused runtime test passed unchanged."
@@ -54,13 +54,21 @@ Bootstrap normalizes the captured `elseif`/`else` tail into newline-separated he
 splitting. That keeps attached-control syntax supported without treating arbitrary same-line helper adjacency
 as canonical.
 
-## Universal Perl Coverage
+## Perl Coverage and Known Comment Gaps
 
 The focused `.1.5.4` lock established the separator contract and the ordinary `set(...)` then `return(...)`
 lowering path. A later exhaustive helper audit found and `FUTURE-PARITY-BACKLOG.1.6.1.1` closed a broader
-coverage gap: every unquoted depth-zero LF, CRLF, or CR now separates statements regardless of whether the
-preceding statement is a function call, assignment, cursor/capture operation, or control marker. Parentheses,
-brackets, blocks, quoted strings, regex payloads, and line comments retain their nested/newline protection.
+coverage gap for the measured function-call, assignment, cursor/capture, and control-marker sequences.
+Parentheses, brackets, blocks, quoted strings, and regex payloads retain their nested/newline protection.
+That repair does not establish universal line-comment coverage; see the qualification below.
+
+## 2026-09-06 comment qualification
+
+`SESSION-STARTUP-READING.3.2.33` measures twelve public Perl combinations. An inline comment after an
+assignment hides the generated semicolon for LF/CRLF, causing handler compilation failure. CR-only comments
+absorb a following return even with an explicit semicolon or standalone comment. No-comment controls pass
+for all three newline spellings. [[perl-comment-newline-lowering-drift]] records the exact toolbox probes,
+source mechanisms, and repair ownership `.34.1`/`.34.2`; the authored separator contract is unchanged.
 
 ## Links
 
