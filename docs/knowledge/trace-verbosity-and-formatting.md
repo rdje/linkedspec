@@ -45,3 +45,12 @@ host-specific stream: ADR 0024 defines a concise, deterministic phase protocol w
 must reproduce.
 
 Related: [[runtimecontext-boundary]], [[ownerdispatch-shared-seam]], [[canonical-primary-cli-trace-protocol]].
+
+## September 6 complete owner reading
+
+`SESSION-STARTUP-READING.3.2.48` completes all 521 lines and confirms initialization/configuration
+precedence, level-gated lazy branch details, scope indentation, escaped mark excerpts, routing, and
+lazy structured stringification. `log_dump` enforces its level only when `enforce_level` is true;
+it is not equivalent to `log_output` gating. `_trace_stringify` uses the exception-preserving owner
+seam, while direct lazy branch-detail eval does not; [[perl-lazy-trace-exception-state-drift]] owns
+that measured exception-state boundary. No sink-error contract or caller path policy is expanded.

@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **981** facts · **8168** question keys.
+> **981** facts · **8169** question keys.
 
 ## Questions → fact
 
@@ -1791,6 +1791,7 @@
 - "does Lua with_execution_observation hash the input" -> [lua-semantic-runtime-observation-derivation](docs/knowledge/lua-semantic-runtime-observation-derivation.md) · 2026-07-28
 - "does MCP currently preserve all twenty semantic responses" -> [mcp-all-twenty-transport-blocker](docs/knowledge/mcp-all-twenty-transport-blocker.md) · 2026-09-06
 - "does MethodLowering consume fluent_chain AST nodes" -> [perl-actionir-ast-fluent-chain-lowering](docs/knowledge/perl-actionir-ast-fluent-chain-lowering.md) · 2026-07-01 · reverify: `prove -Iperl t/actionir_ast_parser.t && prove -q -Iperl t/phase0_regression.t`
+- "does OwnerDispatch protect the lazy Trace callback exception boundary" -> [perl-lazy-trace-exception-state-drift](docs/knowledge/perl-lazy-trace-exception-state-drift.md) · 2026-09-06
 - "does POSIXLY_CORRECT change the Perl CLI" -> [perl-primary-cli-conformance-audit](docs/knowledge/perl-primary-cli-conformance-audit.md) · 2026-07-10 · reverify: `PERL5LIB= prove -v -Iperl t/trace_cli.t; sed -n '1,260p' bin/linkedspec; rg -n 'DUMP_NONE|sub log_output|sub trace_decision' perl/LinkedSpec/Trace.pm perl/LinkedSpec/Validation.pm perl/LinkedSpec/Compiler.pm; rg -n 'FUTURE-PARITY-BACKLOG\.1\.5\.1' docs/tasks/FUTURE-PARITY-BACKLOG.md`
 - "does PUC Lua use a different semantic admission consumer from LuaJIT" -> [lua-semantic-introspection-admission-plan](docs/knowledge/lua-semantic-introspection-admission-plan.md) · 2026-07-28
 - "does PUC Lua use the same semantic admission consumer as LuaJIT" -> [lua-semantic-introspection-admission](docs/knowledge/lua-semantic-introspection-admission.md) · 2026-07-28
@@ -13343,9 +13344,9 @@ _Perl admits named regex-slot identity and stages native-live capture-gaps behav
 - **source:** [`docs/knowledge/perl-inter-match-gap-authored-metadata.md`](docs/knowledge/perl-inter-match-gap-authored-metadata.md)
 
 ### perl-lazy-trace-exception-state-drift
-_Lazy Perl trace detail callbacks overwrite the caller's exception state_
+_Direct lazy Perl trace detail callbacks overwrite the caller's exception state_
 
-- **answers:** why does a Perl trace detail callback clear dollar at | does a throwing lazy trace callback replace an existing Perl exception | which task preserves Perl exception state across lazy trace details
+- **answers:** why does a Perl trace detail callback clear dollar at | does a throwing lazy trace callback replace an existing Perl exception | which task preserves Perl exception state across lazy trace details | does OwnerDispatch protect the lazy Trace callback exception boundary
 - **date:** 2026-09-06 · **status:** dated diagnostic evidence; repair state belongs to the owning task-tree
 - **evidence:** `SESSION-STARTUP-READING.31 preserves the recorded Toolbox/source controls at reading baseline baeb984e36a94a15951cd23d4c52def5064cdaca. The owning task is SESSION-STARTUP-READING.24. No implementation repair or whole-project signoff is claimed.`
 - **source:** [`docs/knowledge/perl-lazy-trace-exception-state-drift.md`](docs/knowledge/perl-lazy-trace-exception-state-drift.md)

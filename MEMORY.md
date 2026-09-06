@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `7c2d6ee0d54350667b5cf15c4d634bb9d3efe9d2` — clean preceding reading checkpoint.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.47 - read staged runtime and legacy registry boundaries`.
+- activation_commit: `6654c0dfd057112c3942f06635926c4dd4625985` — clean preceding reading checkpoint.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.2.48 - read Trace and qualify lazy exception-state evidence`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: activate `.3.2.48`; read Trace.pm 1–521 and reconcile the existing lazy-callback exception-state repair,
+- next_action: activate `.3.2.49`; read UnicodeCaseMapping.pm 1–1500 and reconcile the pinned generated case-table authority,
   then continue queued reading. Intake `.31` preserves the forward source coverage and exact findings.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30` and `.32`–`.44` precede mutation setup; `.29` is part of `.5` adoption.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4984` is the twenty-seventh history segment; ADR `0104`
   authorizes exactly 29 collection files / 28 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook Yes (physical); .31/.3.2.42 preserve complete book/Perl source coverage and repair ownership; formal .4 alignment remains pending (51/100 after `.3.2.47` lands).
+- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook Yes (physical); .31/.3.2.42 preserve complete book/Perl source coverage and repair ownership; formal .4 alignment remains pending (52/100 after `.3.2.48` lands).

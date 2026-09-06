@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.48 — a non-escaping callback error can still replace caller exception state
+
+The existing helper test catches the call in an outer eval, proving that a detail error becomes trace text and leaves the branch result intact. It does not compare a pre-existing $@. Direct controls show successful and nested callbacks clear it and throwing callbacks replace it; OwnerDispatch already restores the original string or object. The repair must preserve both the established non-escape contract and incoming-state identity without blaming the protected wrapper.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.47 — keep registry metadata separate from execution authority
 
 The legacy function-body dispatcher visits all four phases for every normalized job and reports the cache identity in its result record. That record is not a plan cache or an implementation of arbitrary stitch policies. General v2 separately owns caller-frozen plan selection, typed post-AST recursion, and fresh invocation state; the private marker retains detached intent only. Reading and exact identity checks retain the prior 143-test staged proof without expanding its claim.

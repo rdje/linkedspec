@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-06 — SESSION-STARTUP-READING.3.2.48 — read Trace and qualify lazy exception-state evidence
+
+Read all 521 lines / 16,259 bytes of Trace with exact baseline identity. Twenty controls distinguish direct lazy-detail exception overwrite from OwnerDispatch preservation, including object identity and nested detail. Three generated trace suites pass 11 tests. Qualify broad trace behavior and dated CLI counts in Knowledge; retain .24's repair ownership and update live continuity without runtime or book changes.
+
 ## 2026-09-06 — SESSION-STARTUP-READING.3.2.47 — read staged runtime and legacy registry boundaries
 
 Read all five staged suffix/runtime/job/policy/registry ranges: 1,374 lines / 43,289 bytes with exact baseline identity. Clarify that the legacy function-body registry constructs cache-key metadata without memoizing plans, while the separate general scheduler receives fresh invocation authority. Preserve unchanged staged canonical evidence and the existing .44 marker-lifetime risk. Runtime and public-book bytes remain unchanged.

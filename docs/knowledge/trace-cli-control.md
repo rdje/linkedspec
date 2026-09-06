@@ -41,8 +41,10 @@ The later `FUTURE-PARITY-BACKLOG.1.5.1.0` process audit distinguished this
 discoverability proof from exact primary-CLI conformance. `.1.5.1.4` closed
 untraced failure purity; `.1.5.1.5` and ADR `0024` close canonical trace without
 weakening rich native in-memory tracing. The later `.1.5.1.6` sequence resolves the
-successful-JSON Unicode boundary; Perl now passes all 61 shared cases and Rust
-`.1.5.2` owns the active next primary command.
+successful-JSON Unicode boundary; at that July checkpoint Perl passed all 61 shared cases and Rust
+`.1.5.2` owned the next primary command. That is a dated delivery point, not the current queue.
+The consumed September 6 canonical checkpoint `da8185b9` passes both 66-case CLI environments;
+`.3.2.48` verifies unchanged CLI/consumer bytes and retains that proof without rerunning the matrix.
 
 Related fact: [[perl-primary-cli-conformance-audit]].
 Shared process fixture architecture: [[neutral-cli-fixture-runner]].

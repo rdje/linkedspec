@@ -826,12 +826,19 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.47 - read staged runtime and legacy registry boundaries`
 
 - ID: `SESSION-STARTUP-READING.3.2.48`
-  Status: `pending`
+  Status: `done`
   Goal: Read baseline Perl group 46: 521 lines/fragments, 16,259 bytes.
   Scope: `perl/LinkedSpec/Trace.pm` lines 1–521.
   Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Full Trace reading and exact baseline identity; direct/OwnerDispatch string-and-object lazy-detail controls; retained unchanged trace/CLI proof; reconcile .24 repair and trace Knowledge; memory, history and fast doctrine checks.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Full 521-line / 16,259-byte Trace reading and exact baseline identity pass. Twenty direct/wrapped
+    string/object controls isolate .24: direct quiet/plain preserve state, direct lazy cases overwrite it,
+    all OwnerDispatch cases preserve it. Three generated trace suites pass 11 tests in 23 seconds.
+    Existing CLI bytes/proof remain unchanged; four Knowledge owners and focused continuity reconcile.
+  Commit: `SESSION-STARTUP-READING.3.2.48 - read Trace and qualify lazy exception-state evidence`
 
 - ID: `SESSION-STARTUP-READING.3.2.49`
   Status: `pending`
@@ -1347,7 +1354,10 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     incoming exception. Preserve exception object identity, laziness, nested/reentrant trace calls, parser
     context, and existing callback/sink failure contracts. Audit the direct callback evaluation paths and
     validate supported generated/CLI trace consumers without enabling callbacks at quiet levels.
-  Verification: `pending` — Trace's unlocalized callback eval replaces the incoming $@ on success and failure.
+    Distinguish direct owner/generated calls from dispatch_owner_call: the latter already preserves
+    successful-call exception state, including object identity. Do not describe the wrapper as defective.
+  Verification: `pending` — direct Trace lazy eval replaces incoming $@ on success/failure/nested detail;
+    .3.2.48's 20 controls preserve quiet/plain direct state and all OwnerDispatch-wrapped cases.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.25`
@@ -1947,7 +1957,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.2.48` | `pending` | read Trace.pm 1–521 and reconcile the existing lazy-callback exception-state repair. |
+| 1 | `SESSION-STARTUP-READING.3.2.49` | `pending` | read UnicodeCaseMapping.pm 1–1500 and reconcile the pinned generated case-table authority. |
 
 ## Reading Ledger
 
@@ -1958,7 +1968,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.48`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Individual comprehension/Knowledge checkpoints `.3.2.49`–`.3.2.54` remain pending. | Those checkpoint commits and all other first-party inputs not explicitly listed as read. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -3723,6 +3733,34 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   post-commit pointer passed; brief was cleared and clean status verified before activation.
   Roadmap/physical book remain Yes, codebase No, formal .4 and tracked repairs pending. Next .3.2.48.
 
+### Trace owner and exact lazy exception-state boundary at `.3.2.48`
+
+- Activated from clean `6654c0dfd057112c3942f06635926c4dd4625985` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read Trace 1–260 / 261–521 completely: 521 lines / 16,259 bytes, SHA-256
+  f8041e80c7f8342a0497710b130a14085c3dddd0d1ee67eeb04f51dd196ffe22, exact baseline equality.
+  This is comprehension reconciliation of physical reading already preserved in .31.
+- Retrieve Trace formatting/control, generated branch helper, lazy exception-state, OwnerDispatch,
+  and facade Knowledge before tracing the seam. Read TOOLBOX trace guidance, the complete 130-line
+  branch-helper test, OwnerDispatch 1–115 / 195–225, and HandlerVariantEmitter 580–625 as support.
+- Twenty managed in-memory controls cross direct/OwnerDispatch calls, incoming string/object errors,
+  and quiet/plain/success/throw/nested detail. Direct quiet/plain preserve state; direct success/nested
+  clear it, throwing detail replaces it. Every wrapped call preserves the incoming value/object identity.
+  All branch results remain true, quiet emits nothing and calls zero callbacks, active callbacks run once,
+  and throwing/nested details are present. Exact command/results live in the existing .24 Knowledge card.
+- The helper test's outer eval proves non-escape and branch-result retention, not preservation of an
+  incoming exception. Narrow the existing broad parser-behavior claim and make .24's acceptance distinguish
+  protected wrappers from direct generated-owner calls. Do not infer unmeasured parser-context failure.
+- Current focused proof: three generated helper/nonrep/rep suites pass 11 top-level tests in 23 seconds.
+  Trace/Perl dependencies, primary CLI and conformance consumer bytes are unchanged from da8185b9.
+  Its two 66-case CLI environments remain retained prior proof; qualify the CLI card's old July 61-case
+  and Rust-next wording as historical rather than rerunning unchanged canonical CI.
+- Confirm configuration/environment precedence, scope indentation, escaped mark excerpts, sink routing,
+  lazy Data::Dumper through the preserving seam, and log_dump's explicit enforce_level distinction.
+  No runtime, tests, public book, protocol, sink policy, or contract changes. .24 remains pending.
+- Prior commit 6654c0dfd057112c3942f06635926c4dd4625985 passed all nine doctrines/post-pointer;
+  brief was cleared and clean status verified before activation. Roadmap/physical book Yes; codebase No,
+  formal .4 and repair prerequisites remain pending. Next .3.2.49.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -3771,7 +3809,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.2.44` is item 48/100 at `78e0ee6b`;
   `.3.2.45` is item 49/100 at `cd0a1bab`;
   `.3.2.46` is item 50/100 at `7c2d6ee0`;
-  `.3.2.47` is item 51/100 once committed.
+  `.3.2.47` is item 51/100 at `6654c0df`;
+  `.3.2.48` is item 52/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -3887,6 +3926,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.45` | Exact 700-line source and prior-proof identities; retained three-suite 18-test/typed 14/0/231 evidence; scoped Knowledge reconciliation; memory/Knowledge/doctrines/history and staged review | PASS reading and unchanged evidence; authority/value privacy and compatibility boundaries retained; no behavior change. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.46` | Exact 1,498-line baseline and unchanged staged inputs; retained 143 and 9/9/123 plus public proof; 24 native and four modeled lifetime controls; four Knowledge owners; focused continuity | PASS bounded reading/native controls; isolated recycling counterexample tracked as .44 with native non-reproduction explicit. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.47` | Five complete ranges and exact baseline; unchanged staged runtime/consumer/checker/contract identity; four Knowledge owners; focused continuity | PASS bounded reading and retained proof; legacy metadata/general authority boundary explicit; .44 remains owned. |
+| `2026-09-06` | `SESSION-STARTUP-READING.3.2.48` | Complete Trace/baseline; 20 direct/wrapped exception controls; three generated suites 11 tests; unchanged CLI proof; Knowledge and focused continuity | PASS focused reading and tests; .24 retained with direct/wrapper distinction and exact object-identity evidence. |
 
 ## Commit Log
 
@@ -3944,6 +3984,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.2.45` | `SESSION-STARTUP-READING.3.2.45 - read typed source-location authority` | Complete typed source-location owner reading and scoped existing Knowledge reconciliation. |
 | `SESSION-STARTUP-READING.3.2.46` | `SESSION-STARTUP-READING.3.2.46 - read staged authority and own marker identity risk` | Staged authority read; native lifetime proof and isolated retired-identity counterexample preserved under .44. |
 | `SESSION-STARTUP-READING.3.2.47` | `SESSION-STARTUP-READING.3.2.47 - read staged runtime and legacy registry boundaries` | Staged suffix/runtime/marker/policy/legacy registry read; exact unchanged proof and v1/v2 separation preserved. |
+| `SESSION-STARTUP-READING.3.2.48` | `SESSION-STARTUP-READING.3.2.48 - read Trace and qualify lazy exception-state evidence` | Trace read; 20 diagnostic controls and 11 passing tests qualify .24 without claiming repair. |
 
 ## Changelog
 
@@ -4045,3 +4086,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-06`: `.3.2.45` completes the typed source-location owner and compatibility adapter reading with exact baseline and retained proof.
 - `2026-09-06`: `.3.2.46` reads staged authority, reconciles routed recursion, and owns .44's modeled identity-recycling risk with exact native and isolated controls.
 - `2026-09-06`: `.3.2.47` completes staged runtime and legacy registry reading, records fresh authority/private marker lifetime, and separates legacy cache-key metadata from general scheduling.
+- `2026-09-06`: `.3.2.48` completes Trace reading, records 20 direct/wrapped string/object controls and 11 generated tests, and qualifies exception-state and historical CLI claims.
