@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `87065401fab5eeb076ff6795d2aa0af957a4b63b` — clean preceding reading checkpoint.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.4 - read Rust regex resolution descriptors and entry diagnostics`.
+- activation_commit: `cd0e4ff4b74f2a815d9574964c5a29894a8b89ff` — clean preceding reading checkpoint.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.5 - read Rust expression carriers and statement parser prefix`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: activate `.3.3.5`; read the Rust expression AST and statement-parser prefix, preserving typed staged and write boundaries,
+- next_action: activate `.3.3.6`; reconcile the expression parser continuation, retaining the owned UTF-8 diagnostic and mutation-whitespace defects,
   then continue queued reading. Intake `.31` preserves the forward source coverage and exact findings.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30`, `.32`–`.47`, and `.49` precede mutation setup; `.29` is part of `.5` adoption.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4984` is the twenty-seventh history segment; ADR `0104`
   authorizes exactly 29 collection files / 28 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook Yes (physical); .31/.3.2.42 preserve complete book/Perl source coverage and repair ownership; formal .4 alignment remains pending (63/100 after `.3.3.4` lands).
+- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook Yes (physical); .31/.3.2.42 preserve complete book/Perl source coverage and repair ownership; formal .4 alignment remains pending (64/100 after `.3.3.5` lands).

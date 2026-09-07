@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.5 — authored source and typed declarations outlive parser cursors
+
+The expression parser advances in bytes while callable source records use half-open Unicode character coordinates. Debug Display output is a separate surface and cannot stand in for retained authored source or serde state. Staged text/options form inert declarations with strict literal and provenance constraints; runtime authority belongs to the later admitted consumer. Statement normalization reuses existing controls.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.4 — projection policy does not establish native source acceptance
 
 The descriptor can deterministically project supplied compiled state containing repeated labels; the native source pipeline separately rejects duplicate authored labels. Entry selection likewise borrows state without rewriting authored markers. Compiler self-edges reuse existing regex slots despite a stale duplication comment, and later slot validation constrains earlier warning branches. Keep each claim attached to its actual pipeline boundary.
