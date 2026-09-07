@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.11 — read compiled types Unicode labels and validation entrypoints
+
+Read compiled types and the complete pinned Unicode classifier plus AST-validation entrypoints. Confirm derived cursor policy, retained selector/source carriers, scalar-safe prefix slicing and ordinary/traced pass order. Reconcile historical cursor/strict counts and owned validation-comment drift. Unicode, cursor and duplicate-slot neutral checks pass; no runtime or public-book change.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.10 — read core trace and types and own large-number conversion repairs
 
 Read remaining parser tests, core trace and runtime value types. Four paired native controls prove signed large-number JSON saturation and separate scalar-text spelling divergence; own bounded .55 repairs before Knowledge. Reconcile closed August trace work, managed reverify commands and scalar fixture coverage. Managed core trace 7/7; numeric/cursor neutral checks pass. No runtime or public-book change.

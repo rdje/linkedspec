@@ -9,6 +9,8 @@ answers:
   - how does Rust check recursive observation effects through rule and function calls
   - do Rust self-recursive action edges duplicate regex patterns
   - can a skipped Rust dependency target still fail complete compilation
+  - what is the Rust AST validation pass order
+  - do traced Rust AST validation passes match ordinary validation order
 date: 2026-09-07
 status: current source-reading evidence; known parser-boundary repairs remain pending
 tags: [rust, compiler, actionir, lifecycle, normalization, validation, SESSION-STARTUP-READING]
@@ -77,6 +79,21 @@ mutations and eight entry cases/three failures/three strict cases/54 mutations.
 They do not rerun native or generated consumers. The entry/error source read also
 confirms structural emptiness before selector lookup, immutable borrowed selection,
 and sorted portable diagnostic fields retained by `LinkedSpecError::diagnostic`.
+
+Checkpoint `.3.3.11` reads `validation.rs` 1–352. Its AST-validation entrypoints
+are separate from the compiled-state passes above. Both ordinary and traced
+variants call these thirteen checks in order: rule existence, rule labels,
+duplicate rule labels, duplicate function names, function registry, regex-slot
+metadata, capture-gaps directives, edge structure, mixed edges, raw body elements,
+balanced braces, edge targets and regex syntax. Strict mode then checks unused
+rules. This is source-order equivalence; tracing can independently fail I/O.
+
+The first label pass validates complete declaration/action/blind/bare target names
+against the pinned classifier. Function registry checks remain a separate name,
+collision, parameter and variadic-signature boundary. The later checker bodies
+and their native tests remain assigned to the next reading leaf. The obsolete
+numbered module-doc reference is owned by `.41.2`; see
+[[rust-strict-syntax-validation]] and [[unicode-rule-label-contract]].
 
 Related: [[rust-rule-local-cursor-normalization]],
 [[rust-aggregate-selector-compile-rejection]], [[write-vivification-rust-runtime]],

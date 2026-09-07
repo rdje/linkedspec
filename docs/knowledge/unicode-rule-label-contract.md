@@ -24,7 +24,7 @@ answers:
   - "which backends still need Unicode rule label alignment"
   - "where is the Perl named-slot Unicode classifier generated"
   - "does the Perl XID classifier enforce the named-slot digit reservation"
-date: 2026-07-25
+date: 2026-09-07
 status: current
 tags: [grammar, unicode, rule-labels, rust, dart, julia, lua, generated-data, validation, portability]
 evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.5.0.2.0-.4, .10.6.1.0-.4, and .10.7.0-.1.3; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/unicode_rule_label_contract.json; unicode_case/generate_unicode_rule_label_contract.py; unicode_case/unicode_rule_label_regex_class.txt; specs/spec.spec; tools/check_unicode_rule_label_contract.py; rust/linkedspec-core/src/unicode_rule_label.rs; dart/lib/src/parser/unicode_rule_label.dart; julia/src/spec/UnicodeRuleLabel.jl; lua/src/linkedspec/unicode_rule_label.lua; lua/test/unicode_rule_label_identity_routes_test.lua; lua/test/unicode_rule_label_negative_isolation_test.lua; docs/knowledge/lua-unicode-rule-label-implementation-plan.md
@@ -165,3 +165,18 @@ for my $pair (@{$contract->{distinct_fixtures}}) {
 print JSON::PP->new->canonical(1)->encode({ranges=>scalar(@{$contract->{xid_continue_ranges}}),boundary_checks=>$boundary_checks,fixture_checks=>$fixture_checks,distinct_pairs=>scalar(@{$contract->{distinct_fixtures}}),result=>'PASS'}),"\n";
 STARTUP56_XID_CONTROL
 ```
+
+## September 7 Rust classifier checkpoint
+
+`SESSION-STARTUP-READING.3.3.11` reads every line of the 850-line / 20,086-byte Rust
+classifier, including all 806 range rows. Its baseline SHA-256 is
+`28f1a8ffefd324a9191e8cd1bc26dad85ffa7eb6d97edf58106156311d3d114c`.
+Membership binary-searches the pinned inclusive intervals. Complete labels reject
+empty strings; prefix scanning walks `char_indices`, advances by `len_utf8`, and
+splits only after an accepted complete scalar. It neither normalizes nor folds.
+
+The validator prefix rechecks the complete declaration and action/blind/bare
+target labels, preserving exact spelling and the declaration/edge-target role in
+portable diagnostics. Fresh managed regeneration passes all 806 ranges, nine
+positive/eight negative fixtures and two distinct pairs. This is source and neutral
+generated-artifact proof, not a fresh Rust parser/runtime route suite.

@@ -1141,14 +1141,22 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.10 - read core trace and types and own large-number conversion repairs`
 
 - ID: `SESSION-STARTUP-READING.3.3.11`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 11: 1,499 lines/fragments, 45,494 bytes.
   Scope: `rust/linkedspec-core/src/types.rs` lines 242–538;
     `rust/linkedspec-core/src/unicode_rule_label.rs` lines 1–850;
     `rust/linkedspec-core/src/validation.rs` lines 1–352.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Read every scoped compiled-type, Unicode table/function and validation byte without truncation; exact range/current-baseline proof; retrieve compiled-slot/cursor/Unicode Knowledge first; neutral Unicode label, rule-local cursor and duplicate-slot contracts; reconcile source-only limits and any task-owned findings; Knowledge/memory/all doctrines/history and scope/diff.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Read types.rs 242–538, unicode_rule_label.rs 1–850 and validation.rs 1–352 completely:
+    1,499 lines / 45,494 bytes; exact ranges and complete files match baseline. Neutral Unicode 806/9/8/2,
+    cursor 36/18/8/60 and duplicate-slot 5/2/59 pass. Reconcile derived cursor/serde state, UTF-8 prefix
+    boundaries and ordinary/traced AST pass order; .41.2 owns stale validation comments. Focused continuity
+    passes before commit. No fresh native matrix, runtime, public-book, or whole-codebase signoff.
+  Commit: `SESSION-STARTUP-READING.3.3.11 - read compiled types Unicode labels and validation entrypoints`
 
 - ID: `SESSION-STARTUP-READING.3.3.12`
   Status: `pending`
@@ -2916,6 +2924,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     branch and inline tests reuse their existing slots. Qualify its warning/skip commentary against the
     later compiled-slot validator, which rejects missing or out-of-range action targets. Keep standalone
     helper behavior distinct from the complete compilation pipeline; do not change runtime semantics here.
+    Correct validation.rs module documentation's obsolete numbered pass reference (check 5 is no longer
+    edge-target validation) and incomplete pass inventory against ordinary/traced order; retain strict
+    unused-rule behavior and the deliberate default undefined-reference boundary.
   Verification: `pending` — current guides still describe Julia/Lua v1 adapters and future named selectors;
     the cursor contract's current reader/marker coverage does not enforce those paragraphs.
   Commit: `pending`
@@ -3310,7 +3321,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.11` | `pending` | read remaining compiled types, pinned Unicode label implementation, and validation prefix. |
+| 1 | `SESSION-STARTUP-READING.3.3.12` | `pending` | read the remaining validator, descriptor tests, and cursor-normalization test prefix. |
 
 ## Reading Ledger
 
@@ -3321,7 +3332,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.10` are reconciled and `.3.3.11`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.11` are reconciled and `.3.3.12`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -5645,6 +5656,41 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   and scalar-text fixture claims are bounded. The separate primary CLI trace adapter's 61-case milestone
   is dated, with later canonical 66-case evidence retained separately from this reading leaf. No runtime, policy, contract or public-book edit.
 
+### Rust compiled-type, Unicode and validation-entry reading at `.3.3.11`
+
+- Activated from clean `90321cca4c5f7d460ef66a3e19df871d3a85abbb` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read types.rs 242–538 (297 lines / 12,071 bytes), unicode_rule_label.rs 1–850 (850 / 20,086)
+  and validation.rs 1–352 (352 / 13,337): 1,499 lines / 45,494 bytes total. Respective SHA-256 values:
+  095766545512956f67d3545377f236184c3b461457fed63d1b548faafe374ffd,
+  28f1a8ffefd324a9191e8cd1bc26dad85ffa7eb6d97edf58106156311d3d114c and
+  1522eab988b4919cda627dbdddbfb86480a5f5897d79ee9d3b0a9c66bc72dc36. Complete files equal baseline.
+  Types and Unicode are now read through EOF; validation continues at 353 in the next leaf.
+- RuntimeValue Display's integral cast remains in .55.1's existing audit, with no additional native
+  failure claimed. Compiled action/dependency records retain numeric/named/unindexed selector provenance,
+  resolved target slot, authored source identity and line defaults; blind entries retain their distinct
+  child/code/fluent carrier. Serde defaults preserve omitted legacy fields without establishing validity.
+- CompiledRule retains authored family, regex rows, gap directives, dependencies and lifecycle ASTs;
+  cursor_policy is derived solely from mode.is_and, never an independently mutable cursor field.
+  Compiled user functions retain typed body plus authored source and optional staged/signature carriers.
+  CompiledSpec's vector lookup and authored top marker do not perform effective entry resolution.
+- Read all 806 inclusive Unicode ranges and all classifier functions. Binary search uses the pinned
+  Unicode 17 scalar intervals; complete labels reject empty, and char_indices plus len_utf8 makes
+  longest-prefix slicing boundary-safe. No host property lookup, normalization or folding is introduced.
+  Fresh managed regeneration checks the JSON/five classifiers/portable regex class at 806/9/8/2.
+- Ordinary and traced AST validators list the same thirteen non-strict passes in the same order,
+  followed conditionally by unused-rule checking. This does not make trace I/O infallible. These AST
+  passes are separate from compiled callable/regex validation documented in the compiler card.
+  Labels are rechecked across declaration/action/blind/bare roles; function registry checks name
+  collisions, variadic signature shape and parameter validity/uniqueness/reservations separately.
+- Existing .41.2 now explicitly owns the stale numbered module-doc reference and incomplete pass
+  inventory. Strict Knowledge's six-check and 237-test counts are dated June evidence, not current
+  inventory. Cursor admission's 3/5, 68-file and 34-mutation counts are likewise dated; its broad
+  entry-selection-only options sentence is narrowed to the actual global-cursor removal.
+- Neutral cursor proof passes 36 spellings / 18 edge / 8 parent-child cases, 74 migration files,
+  8 complete / 0 pending and 60 mutations. Duplicate-slot proof passes 5 fixtures / 2 diagnostics /
+  6 runtime rows / 7 complete + 0 pending / 59 mutations. No native admission matrix is rerun.
+  Update existing Knowledge and continuity; no implementation, policy, public-book or contract change.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -5711,7 +5757,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.3.7` is item 66/100 at `d3fd3c40`;
   `.3.3.8` is item 67/100 at `2bdea14f`;
   `.3.3.9` is item 68/100 at `236aa4d7`;
-  `.3.3.10` is item 69/100 once committed.
+  `.3.3.10` is item 69/100 at `90321cca`;
+  `.3.3.11` is item 70/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -5845,6 +5892,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.8` | Three exact ranges/current-baseline proof; write 5/7/11/16/3/3/8/105; callable 7/11/9/7/4/8/23; uniform 11/7/6/8; historical Knowledge and .41.6 ownership; focused continuity | PASS reading and neutral proof; parser suffix and all runtime repairs remain pending. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.9` | Exact parser range/current-baseline proof; standalone 9/4/6/3/6/15/7/14; cursor 36/18/8/60; Unicode 806/9/8/2; ten paired body and three matches controls; four lowering/three bootstrap controls; .52-.54 ownership; focused continuity | PASS reading and bounded diagnosis; compact fluent/header/regex-brace repairs pending with exact evidence. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.10` | Exact parser/trace/type range and baseline proof; managed core trace 7/7; numeric 55/18; cursor 36/18/8/60; four paired native number controls; .55 ownership; trace closure/fixture Knowledge; focused continuity | PASS bounded reading and diagnosis; value and scalar-text repairs remain pending under .55. |
+| `2026-09-07` | `SESSION-STARTUP-READING.3.3.11` | Exact three-range/current-baseline proof; Unicode 806/9/8/2; cursor 36/18/8/60; duplicate slots 5/2/59; derived-state/AST-pass Knowledge; .41.2 comment ownership; focused continuity | PASS reading and neutral proof; remaining validator/native suites and all repair leaves stay separately owned. |
 
 ## Commit Log
 
@@ -5920,6 +5968,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.3.8` | `SESSION-STARTUP-READING.3.3.8 - read remaining Rust expression tests and core parser entry` | Complete expr.rs reading and core entry prefix; reconcile test assertion limits and historical binding/rollout prose. |
 | `SESSION-STARTUP-READING.3.3.9` | `SESSION-STARTUP-READING.3.3.9 - read Rust rule-body parsing and own lexical boundary repairs` | Read rule-body parser; own compact fluent, invalid header suffix and Perl/Rust regex-brace repairs .52-.54. |
 | `SESSION-STARTUP-READING.3.3.10` | `SESSION-STARTUP-READING.3.3.10 - read core trace and types and own large-number conversion repairs` | Read parser tests/core trace/types; own finite-value saturation and large-number text repairs .55. |
+| `SESSION-STARTUP-READING.3.3.11` | `SESSION-STARTUP-READING.3.3.11 - read compiled types Unicode labels and validation entrypoints` | Read compiled types and pinned Unicode through EOF plus AST-validation entrypoints; reconcile historical/current claims. |
 
 ## Changelog
 
@@ -6039,3 +6088,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-07`: `.3.3.8` completes expression-test reading and core entry prefix; qualifies old reconstruction, assignment and rollout claims without changing runtime.
 - `2026-09-07`: `.3.3.9` reads rule-body parsing and owns .52-.54 lexical repairs, preserving paired native and exact bootstrap truncation evidence without runtime changes.
 - `2026-09-07`: `.3.3.10` reads remaining parser tests, core trace and types prefix; owns .55 value/text repair and reconciles dated trace closure and scalar fixture coverage.
+- `2026-09-07`: `.3.3.11` completes compiled-type/Unicode reading and validator entry order; reconciles dated cursor/strict evidence and owns stale validation comments under .41.2.

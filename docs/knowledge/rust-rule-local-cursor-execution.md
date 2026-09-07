@@ -14,11 +14,11 @@ answers:
   - "is Rust descriptor v1 migrated to rule local cursor"
   - "is Rust generated source v2 migrated to rule local cursor"
   - "what tests prove Rust rule local cursor execution"
-date: 2026-07-18
+date: 2026-09-07
 status: current and admitted through the 15-role Rust parity consumer
 tags: [rust, cursor, runtime, serialization, loading, recursion, trace, generated-source, descriptor, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.9.1.4.3 removes independent CompiledRule.parse_mode state and derives live policy with CompiledRule::cursor_policy() at every rule entry: exact AND consumes and default/OR seeks. Engine blind orchestration also follows the exact entered family, so parent/global policy cannot propagate through action, blind, call, or recursion. Ordinary CompiledSpec JSON omits the old field and derives after reconstruction; loaded execution uses the same engine. FUTURE-PARITY-BACKLOG.9.1.4.4 makes descriptor v1 consume that normalized state and publishes cursor identity/family/policy/resolved edges. FUTURE-PARITY-BACKLOG.9.1.4.5 removes legacy_artifact_parse_mode plus the private v1 wire serializer and makes generated-source v2 derive policy from its minimal family plan. FUTURE-PARITY-BACKLOG.9.1.4.6 deletes ExecutionOptions/runtime-context global mode state, rejects the primary flag with the targeted usage error, removes the request-trace field, and passes exact 63/63 default and POSIX projections. Admission .9.1.4.7 composes 15 exact roles, requires canonical registration, observes all eight diagnostic/removal outcomes, and advances only rust_parity to reach 3/5 at 68 files plus 34 mutations."
-reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test rule_local_cursor_contract; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test rule_local_cursor_execution; cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test rule_local_cursor_normalization_test; bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py"
+reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test rule_local_cursor_contract && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test rule_local_cursor_execution && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-core --test rule_local_cursor_normalization_test && bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py"
 ---
 
 Normal Rust cursor execution has one semantic authority: the family on the rule
@@ -45,8 +45,9 @@ Descriptor v1 consumes the same derived state. It identifies the neutral cursor
 contract, publishes normalized family/policy/resolved edges, and has no root or rule
 global field. Generated-source v2 now carries only ordered label/family rows and
 derives the same policy during reconstruction; the legacy adapter and private v1
-wire serializer are gone. Rust execution options retain entry-rule selection only;
-the primary command rejects the retired global flag and request traces have no
+wire serializer are gone. Rust execution options no longer retain a global cursor
+mode; entry-rule selection remains independent of that removal, alongside other options.
+The primary command rejects the retired global flag and request traces have no
 global cursor field.
 
 The contract test consumes all 36 family spellings, all eight neutral parent/child
@@ -62,7 +63,18 @@ ordinary serialized, loaded, descriptor, emitted/generated direct/trace,
 mixed/recursive, structural, static-removal, primary, and portable diagnostic
 projections. Exact role-set equality and once-only completion run inside Rust;
 the independent checker requires every function marker plus canonical tracked-
-input and optional-Rust driver registration. Only the Rust rollout leg advances.
+input and optional-Rust driver registration. That July admission advanced only the
+Rust rollout leg; its 3/5, 68-file and 34-mutation counts are historical milestones.
+
+September 7 checkpoint `SESSION-STARTUP-READING.3.3.11` reads `types.rs` through
+EOF and confirms `CompiledRule::cursor_policy` still derives solely from
+`mode.is_and()`. The serde record carries authored family, ordered regex slots,
+selector provenance, gap directives, dependencies and lifecycle ASTs; it has no
+independent cursor-policy field. `CompiledSpec::top_rule` finds an authored marker,
+not effective entry selection. The fresh neutral checker passes 36 spellings,
+18 edge cases, eight parent/child cases, 74 migration files, eight complete / zero
+pending legs and 60 mutations. No native/generated admission suite is rerun by
+this reading checkpoint.
 
 Related: [[rust-rule-local-cursor-normalization]],
 [[rule-local-cursor-neutral-contract]], [[rule-local-cursor-and-bare-edge-contract]],
