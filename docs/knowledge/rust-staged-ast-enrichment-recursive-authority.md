@@ -69,3 +69,17 @@ the AST, prepares and sorts each complete queue depth, validates targets and sto
 diagnostics before executing that depth. Settled markers form the next queue; cumulative counters are projected
 at completion. Detailed execute_recursive_depth, safe-point, cycle/decrease and diagnostic budgeting helpers
 remain subsequent reading; no new native resource, callback-panic or rebasing outcome is inferred from this prefix.
+
+## September 7 execution, detachment and arithmetic boundaries
+
+`SESSION-STARTUP-READING.3.3.37` reads staged_ast_enrichment.rs 1268–2766 completely. Dispatch checks
+cancellation, deadline, remaining steps, depth and call count; callback views expire after invocation.
+Results settle into an unpublished AST; child queues carry lineage, exact cycle tuples and strict source
+decrease checks. Local source diagnostics rebase through direct/derived segments, preserving discontiguity.
+Marker results count atomically, while ordinary objects undergo forbidden-key recursion.
+
+New native boundary controls qualify these mechanisms: .73 owns missing destination reservation shared with
+Perl; .74 owns marker deep-validation bypass and an observed unchecked child-extent panic; .75 owns saturated
+call-counter admission. Canonical homes are `staged-target-preparation-gaps.md`,
+`rust-staged-returned-marker-validation-gaps.md` and `rust-staged-call-counter-saturation.md`.
+Fresh neutral fixtures still pass but do not cover these cases. No repair or cross-carrier result is claimed.

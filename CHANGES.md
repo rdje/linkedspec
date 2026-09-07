@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.37 — trace staged execution and own target validation and counter repairs
+
+Read 1,499 lines/53,102 baseline-identical bytes of staged execution and validation helpers. Independently asserted 28 paired Rust/Perl target records, twelve Rust returned-marker/control records and six call-budget records. Repair .73 owns competing destinations; .74 owns deep marker validation and the backtrace-confirmed provenance overflow; .75 owns exhausted maximum-counter admission. Three new and three existing Knowledge cards preserve exact scope and artifact hashes. Fresh staged/typed neutral checks pass; no runtime/public change is made before required reading completes.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.36 — complete spec parser reading and trace staged registry and invocation authority
 
 Completed spec-parser reading and read the staged-enrichment authority prefix (1,453 lines/51,063 baseline-identical bytes). Five Knowledge cards document exact signature helpers, caller-prepared registry resolution, authority narrowing, fresh seeds and complete-depth preparation. Existing .55.1 now includes the private function-AST integer conversion in its source audit, without a new measured failure claim. Staged, typed-source and scalar-numeric neutral checks pass.

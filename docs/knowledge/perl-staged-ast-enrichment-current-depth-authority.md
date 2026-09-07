@@ -16,7 +16,7 @@ answers:
   - "how are Perl staged child results detached"
   - "does Perl recursively schedule staged AST markers yet"
   - "what is FUTURE-PARITY-BACKLOG 14.7.3.2"
-date: 2026-08-26
+date: 2026-09-07
 status: current private current-depth building block; recursive carriers and Perl admission complete
 tags: [perl, staged-parsing, registry, cache, result-policy, failure-policy, detachment, private, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.3.2 adds unexported LinkedSpec::StagedASTEnrichment over a caller-prepared immutable snapshot whose entries contain already-compiled CODE authority. Pure post-AST selection implements alias, declaring-relative, ordered-root, and ordered-provider priority plus exact missing/ambiguity/collision denial; top/version/capability/policy/source-detail authority narrows; default top precedes canonical v2 job identity; cache identity covers normalized parser/content/import/top/version/sorted-effective-capability fields and stores only immutable execution plans. One complete discovered depth sorts typed paths numerically, gives every callback fresh runtime state, and implements replace_marker, replace_field, sibling_field, append_child, fail, keep_text, and diagnostic_node over an unpublished AST copy. Results are node-bounded and detached, failures/results never enter the cache, stale/missing/colliding/wrong-kind targets reject, and nested inert markers remain untouched. The dormant consumer has 133 GREEN top-level checks and one RED for FUTURE-PARITY-BACKLOG.14.7.3.3 recursion, decreasing-chain/cancellation/resource bounds, and source-rebased diagnostics. V1, discovery, rollout, carriers, format, language/public/outward surfaces, and other backends do not move."
@@ -61,7 +61,12 @@ Related: [[perl-staged-ast-enrichment-marker-provenance]], [[perl-staged-ast-enr
 
 Startup .3.2.46 reads StagedASTEnrichment 1–1498 / 49,952 bytes at unchanged baseline baeb984e.
 Pure candidate resolution, normalized top/job/cache identity, policy narrowing, complete target
-reservation, fresh callbacks, and one-depth settlement remain distinct from recursive scheduling.
+checks, fresh callbacks, and one-depth settlement remain distinct from recursive scheduling.
 The remaining validators/stitch/detachment suffix stays separately checkpointed. Current unchanged
 Perl proof is 143 tests; neutral staged proof is 9/9/123 plus public 6/17/10/129 from the preceding
 canonical run. The recursive identity-lifetime risk is separately .44-owned, not a one-depth failure.
+
+September 7 .3.3.37 corrects the earlier "complete target reservation" description: preparation checks each
+target individually and does not reserve competing destinations. Fourteen fresh host API controls expose
+late sibling/queued-marker rejection and successful duplicate replacement. See [[staged-target-preparation-gaps]]
+and repair .73; no earlier native gate is reclassified as proof of complete destination reservation.

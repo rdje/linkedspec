@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.37 — Complete-depth preparation needs destination reservation and checked marker authority
+
+Each target can be valid against the starting AST while competing with another prepared job. Paired probes show why whole-depth reservation must precede the first callback, with shared append retained. Atomic marker node accounting also must retain deep record validation: Rust accepts forbidden marker fields and reaches an unchecked extent sum for invalid derived provenance. Separately, saturating a call counter before comparing its maximum admits a callback at MAX/MAX. Task owners .73–.75 preserve focused controls, typed-error requirements and later carrier/book verification.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.36 — Prepared registry data and fresh invocation state have separate lifetimes
 
 Rust freezes caller-completed candidates and binds opaque compiled callbacks before dispatch. Seed state may be shared, while each execution receives a fresh registry/cache and recursive counters; callback-local records omit live authority. The queue coordinator prepares and validates a complete depth before callbacks and retains cumulative resources across depths. Lower execution, identity, stitching and rebasing helpers remain in the next reading window, so this prefix does not establish new native results for those mechanisms.

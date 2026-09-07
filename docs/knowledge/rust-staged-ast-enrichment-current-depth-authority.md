@@ -73,3 +73,15 @@ each target against its unpublished working copy. Successful plain JSON is node-
 returned errors and caught panics enter failure-policy settlement. Exact identity construction, discovery,
 stitching/detachment and settlement helpers occur later in the file and are not counted as read here.
 Fresh staged neutral 9 legs/123 base+129 public mutations passes; earlier native controls remain dated evidence.
+
+## September 7 complete-depth target correction
+
+`SESSION-STARTUP-READING.3.3.37` reads staged_ast_enrichment.rs 1268–2766 (1,499 lines/53,102 bytes),
+identical to the accepted source baseline. The identity/cache key helpers use exact logical field sets;
+cache identity includes normalized spec identity, both validated digests, top/version/helper/capability data.
+Typed queue paths order strings before integer indices. Per-job target checks do not reserve all destinations
+against other prepared jobs: paired Rust/Perl controls establish missing competing-target admission.
+See `staged-target-preparation-gaps.md` and repair .73; earlier complete-depth validation claims are bounded
+to individual targets and covered fixtures, not reservation. Source-derived helpers and public native controls
+also expose returned-marker detachment/provenance gaps under .74. Root-only markers reject before callbacks;
+this does not adopt a new root replacement contract.

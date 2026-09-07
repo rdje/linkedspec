@@ -35,7 +35,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`, `SESSION-STARTUP-READING.50`, `SESSION-STARTUP-READING.51`, `SESSION-STARTUP-READING.52`, `SESSION-STARTUP-READING.53`, `SESSION-STARTUP-READING.54`, `SESSION-STARTUP-READING.55`, `SESSION-STARTUP-READING.56`, `SESSION-STARTUP-READING.57`, `SESSION-STARTUP-READING.58`, `SESSION-STARTUP-READING.59`, `SESSION-STARTUP-READING.60`, `SESSION-STARTUP-READING.61`, `SESSION-STARTUP-READING.62`, `SESSION-STARTUP-READING.63`, `SESSION-STARTUP-READING.64`, `SESSION-STARTUP-READING.65`, `SESSION-STARTUP-READING.66`, `SESSION-STARTUP-READING.67`, `SESSION-STARTUP-READING.68`, `SESSION-STARTUP-READING.69`, `SESSION-STARTUP-READING.70`, `SESSION-STARTUP-READING.71`, `SESSION-STARTUP-READING.72`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`, `SESSION-STARTUP-READING.50`, `SESSION-STARTUP-READING.51`, `SESSION-STARTUP-READING.52`, `SESSION-STARTUP-READING.53`, `SESSION-STARTUP-READING.54`, `SESSION-STARTUP-READING.55`, `SESSION-STARTUP-READING.56`, `SESSION-STARTUP-READING.57`, `SESSION-STARTUP-READING.58`, `SESSION-STARTUP-READING.59`, `SESSION-STARTUP-READING.60`, `SESSION-STARTUP-READING.61`, `SESSION-STARTUP-READING.62`, `SESSION-STARTUP-READING.63`, `SESSION-STARTUP-READING.64`, `SESSION-STARTUP-READING.65`, `SESSION-STARTUP-READING.66`, `SESSION-STARTUP-READING.67`, `SESSION-STARTUP-READING.68`, `SESSION-STARTUP-READING.69`, `SESSION-STARTUP-READING.70`, `SESSION-STARTUP-READING.71`, `SESSION-STARTUP-READING.72`, `SESSION-STARTUP-READING.73`, `SESSION-STARTUP-READING.74`, `SESSION-STARTUP-READING.75`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -1500,12 +1500,16 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.36 - complete spec parser reading and trace staged registry and invocation authority`
 
 - ID: `SESSION-STARTUP-READING.3.3.37`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 37: 1,499 lines/fragments, 53,102 bytes.
   Scope: `rust/linkedspec-runtime/src/staged_ast_enrichment.rs` lines 1268–2766.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Read staged_ast_enrichment.rs 1268–2766 with exact baseline identity; Knowledge-first recursive execution, safe points, source rebasing, marker/plan validation and result settlement; selected staged/typed-source neutral proof and bounded tools for unresolved evidence; Knowledge/history/memory/staged diff/all nine doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS reading: 1,499 lines/53,102 baseline-identical bytes; 28 paired target, 12 returned-marker and six budget records independently asserted; .73/.74/.75 own measured gaps; staged123+129 and typed14/0/231; Knowledge/history/memory/staged diff/all nine doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.37 - trace staged execution and own target validation and counter repairs`
 
 - ID: `SESSION-STARTUP-READING.3.3.38`
   Status: `pending`
@@ -4135,11 +4139,35 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: `pending` repair — .3.3.34 recognition parse returns "ok", while three inert-option siblings return ["ok"]; non-recognition parse roles all return ["ok"]. The plain-parse rewrite also leaves an unused generated import. See docs/knowledge/rust-generated-recognition-parse-adapter-gap.md.
   Commit: `pending`
 
+- ID: `SESSION-STARTUP-READING.73`
+  Status: `pending`
+  Goal: Reserve every staged result destination for a complete depth before callback execution.
+  Dependencies: .3/.4/.5; preserve deterministic shared append and unpublished-AST failure behavior.
+  Acceptance: Reject duplicate non-append destinations, mixed append/replacement claims and queued-marker overlap before callback one; preserve distinct sibling writes and ordered shared appends. Reconcile existing Dart/Julia reservations, implement each missing backend, verify one-depth/recursive/carrier routes with independent callback counts and final AST assertions, and update book/Knowledge plus canonical recurrence.
+  Verification: `pending` repair — .3.3.37 Paired Perl/Rust controls in both modes call once before sibling collision/queued-marker rejection and silently overwrite a shared replace target after two calls. Exact evidence belongs in docs/knowledge/staged-target-preparation-gaps.md.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.74`
+  Status: `pending`
+  Goal: Validate returned Rust staged markers deeply and reject invalid provenance without arithmetic panic.
+  Dependencies: .3/.4/.5; preserve atomic marker node accounting and typed failure policies.
+  Acceptance: Reject forbidden nested result keys within markers just as ordinary results; validate text/provenance bounds before queueing, use checked extent/rebase arithmetic, and return typed diagnostics without panic. Cover direct/derived, large extents, nested malformed markers, valid recursive controls and supported carriers; reconcile Julia precedent, public book and canonical recurrence.
+  Verification: `pending` repair — .3.3.37 native returned host-key marker succeeds in both modes while an ordinary host-key record rejects; two u64::MAX extents pass one-depth and panic at strictly_decreases:2121 during recursive preparation. Backtrace and controls: docs/knowledge/rust-staged-returned-marker-validation-gaps.md.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.75`
+  Status: `pending`
+  Goal: Reject exhausted Rust staged callback authority at the maximum representable call counter.
+  Dependencies: .3/.4/.5; preserve cumulative counters across depths and typed admission failure.
+  Acceptance: Replace saturating candidate admission with overflow-safe exhaustion logic; cover zero/one remaining call, ordinary exhausted and u64::MAX exhausted authority, no callback on rejection, exact result counters, recursion and carriers. Audit related arithmetic without assuming every saturation is erroneous; align book/Knowledge and canonical recurrence.
+  Verification: `pending` repair — .3.3.37 native authority total_calls=max_calls=u64::MAX runs one callback and returns unchanged total; total=max=1 rejects before callback and MAX-1/MAX succeeds once. Source dispatch_resource_check:1784–1793. Evidence: docs/knowledge/rust-staged-call-counter-saturation.md.
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.37` | `pending` | read staged_ast_enrichment.rs lines 1268–2766. |
+| 1 | `SESSION-STARTUP-READING.3.3.38` | `pending` | complete staged enrichment, read staged job/registry and begin Unicode case mapping. |
 
 ## Reading Ledger
 
@@ -4150,7 +4178,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.36` are reconciled and `.3.3.37`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.37` are reconciled and `.3.3.38`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -6809,6 +6837,13 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - Signature helpers enforce exact six-field/version/arity/rest shape and typed scalar fields; definition-error presentation selects codeblock-specific messages and source-line/node context. Existing .55.1 adds private usize_field's checked-u64 versus finite-integral-f64 cast boundary and actual AST producers to its inventory; no new reachable function/numeric failure is measured. Frozen staged registry validates prepared entries/callback bindings, hashes opaque logical snapshot data, resolves only prepared candidates and narrows versions/top/capabilities/policies/detail/ceilings. Cache lookup stores only immutable compiled plans; key construction and lower helpers remain later.
 - Context views separate detached local state from live invocation/job budgets and expiry; seed starts fresh registry/authority and rejects active recognition at completion. Current-depth execution prepares/sorts/validates before callbacks on an unpublished AST. Recursive coordinator creates counters once, validates each complete depth and schedules settled children next; detailed execution, safe points, cycle/decrease, detachment and rebasing helpers remain next. Five Knowledge cards retain exact scope. Fresh staged9legs/123base+129public mutations, typed14/0/231 and scalar55cases/18helpers pass; all jobs complete. No new runtime/public/policy repair, native/full gate, recovery or purge. Roadmap Yes/codebase No/physical mdBook Yes; formal alignment pending.
 
+### Staged execution and bounded native counterexamples at `.3.3.37`
+
+- Activated from clean `90ae57bb9814118c3fe041c0723d841d7feabb44` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read staged_ast_enrichment.rs 1268–2766 completely: 1,499 lines/53,102 bytes, SHA-256 `cb7d7f15fa8178e78ebcbc994486ea7c60df4ec30370736ebd42ee444eccd990`; range/full file equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`. Identity/cache fields, typed queue order, dispatch/safe-point authority, callback expiry, detachment, failure settlement, cycle/decrease, diagnostic rebasing and stitching are reconciled in bounded Knowledge cards; final validators remain next.
+- Independent public host API probes assert 28 paired Perl/Rust target records: duplicate sibling targets reject after one callback, duplicate replacement succeeds and overwrites after two, queued-marker overlap rejects after one; distinct destinations and shared appends preserve both results. Root-only markers reject before callbacks without adopting root replacement as a feature. New .73 owns complete target reservation and corrects prior complete-depth wording.
+- Twelve Rust returned-marker/control records isolate deep-key bypass and an invalid two-MAX-segment provenance panic. Backtrace identifies strictly_decreases:2121; ordinary forbidden-key records reject and valid recursive markers succeed. New .74 owns validation and checked provenance arithmetic. Six budget records show ordinary exhaustion rejects, one remaining succeeds, but MAX/MAX runs once with unchanged total; .75 owns saturating admission. No external data, release/backend extrapolation or runtime repair claim. Local manifest 48files/2,885,337bytes, SHA-256 `b87f41e3f3c796ff80a6a10df8cd2d6c8372eb866e3764323c1b88ee5cd6c218`; independent assertions `459cbd58c047336e9036c5e87eebc371fbfa6406ae692740438f8a5f67dddb42`. All jobs consumed, three new/three existing Knowledge owners reconciled. Fresh staged123base+129public and typed14/0/231 pass; no full gate/recovery/purge. Roadmap Yes/codebase No/physical mdBook Yes; formal alignment pending.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -6901,7 +6936,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.3.33` is item 92/100 at `d3fd048f`;
   `.3.3.34` is item 93/100 at `39cdef65`;
   `.3.3.35` is item 94/100 at `b6f6085c`;
-  `.3.3.36` is item 95/100 once committed.
+  `.3.3.36` is item 95/100 at `90ae57bb`;
+  `.3.3.37` is item 96/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -7061,6 +7097,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.34` | Baseline scope; seven identity module compiles/two executable modules/ten results; independent assertions; generated/cursor/typed-source neutral proof; Knowledge/history/memory/staged diff/all nine doctrines | PASS reading/root cause; .71 literal encoding and .72 recognition parse coherence owned. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.35` | Baseline scope; complete source authority/loader and function projection reading; ADR0026/Knowledge reconciliation; resolution/typed/diagnostic/staged neutral proof; Knowledge/history/memory/staged diff/all nine doctrines | PASS reading; complete source authority/loader and accurate historical resolution provenance. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.36` | Baseline scope; spec parser helper completion and staged registry/seed/coordinator reading; .55.1 source inventory; staged/typed/scalar neutral proof; Knowledge/history/memory/staged diff/all nine doctrines | PASS reading; five bounded Knowledge cards preserve exact authority scope and existing numeric audit. |
+| `2026-09-07` | `SESSION-STARTUP-READING.3.3.37` | Baseline reading; paired target/returned-marker/budget assertions and backtrace; library/artifact hashes; staged/typed neutral proof; Knowledge/history/memory/staged diff/all nine doctrines | PASS reading and bounded diagnostic assertions; defects remain explicitly pending under .73/.74/.75. |
 
 ## Commit Log
 
@@ -7162,6 +7199,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.3.34` | `SESSION-STARTUP-READING.3.3.34 - complete emitter reading and own literal and recognition adapter repairs` | Complete emitter reading and preserve independently measured generated identity/projection gaps. |
 | `SESSION-STARTUP-READING.3.3.35` | `SESSION-STARTUP-READING.3.3.35 - complete source authority and loader reading and reconcile function projection` | Complete source authority/loader and retain exact staged function projection and scalar-source boundaries. |
 | `SESSION-STARTUP-READING.3.3.36` | `SESSION-STARTUP-READING.3.3.36 - complete spec parser reading and trace staged registry and invocation authority` | Complete spec parser and preserve frozen registry, fresh seed and queue coordinator boundaries. |
+| `SESSION-STARTUP-READING.3.3.37` | `SESSION-STARTUP-READING.3.3.37 - trace staged execution and own target validation and counter repairs` | Preserve exact staged execution evidence and own destination, marker/provenance and call-counter repairs. |
 
 ## Changelog
 
@@ -7307,3 +7345,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-07`: `.3.3.34` completes emitter reading and owns generated literal and recognition adapter repairs .71/.72.
 - `2026-09-07`: `.3.3.35` completes source authority/loader reading and reconciles staged function projection plus dated resolution evidence.
 - `2026-09-07`: `.3.3.36` completes spec parser and reads staged registry/seed/coordinator; .55.1 retains another source conversion boundary.
+- `2026-09-07`: `.3.3.37` reads staged execution and owns measured target reservation, returned-marker validation and exhausted-counter repairs .73/.74/.75.
