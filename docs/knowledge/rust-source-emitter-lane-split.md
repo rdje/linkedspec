@@ -14,10 +14,10 @@ answers:
   - "which leaf owns non-repetition Rust handler emission"
   - "which leaf owns generated non-REP family-plan emission"
   - "which leaf owns repetition Rust handler emission"
-date: 2026-07-04
+date: 2026-09-07
 status: accepted
 tags: [rust, codegen, HandlerIR, RUST-PARITY, task-tree]
-evidence: "RUST-PARITY.8.1 read docs/knowledge/handler-ir-design.md, perl/LinkedSpec/HandlerVariantEmitter.pm, rust/linkedspec-core/src/types.rs, rust/linkedspec-core/src/compiler.rs, rust/linkedspec-runtime/src/engine.rs, rust/README.md, and docs/linkedspec-book/src/appendix/backend-handoff.md. Perl HandlerIR has 10 structural variant kinds and Perl/JSON emitters. Rust executes an interpreted native structural contract: CompiledSpec contains CompiledRule rows with regex_patterns, parsed lifecycle CodeBlock slots, AcodeEntry dispatch, BcodeEntry dispatch, parse mode, and repetition bounds. RUST-PARITY.8.2 added linkedspec_runtime::source_emitter::emit_rust_source, which emits a standalone Rust module embedding serialized CompiledSpec; tests build that generated source in an isolated temp crate. RUST-PARITY.8.3 split non-REP direct emission because rule-mode/family metadata, generated family-plan emission, acode execution, bcode execution, and matrix closeout are separate mechanisms. RUST-PARITY.8.3.1 preserved parsed RuleMode on CompiledRule and made generated source embed/validate a GENERATED_RULES family plan across default/OR/AND acode-bcode markers. RUST-PARITY.8.3.2 made generated parse enter Engine::execute_generated_with_plan and directly run Default/OrAcode; RUST-PARITY.8.3.3 added direct AndSingleAcode/AndAcodeSeq plus ordered AND sequence semantics; RUST-PARITY.8.3.4 added direct AndBcode/OrBcode execution with shared blind-edge tail handling and OR first-match semantics; RUST-PARITY.8.3.5 closed the non-REP matrix; RUST-PARITY.8.4 closed direct REP families with RepAcode, RepBcode, RepAndAcode, and RepAndBcode plus termination coverage. RUST-PARITY.8.5 added generated-source validation against a manifest-backed 8-case corpus subset while keeping the full 91-fixture corpus as the interpreter oracle gate. The generated-source subset remains curated; the current full interpreter oracle is 91 fixtures."
+evidence: "RUST-PARITY.8.1 read docs/knowledge/handler-ir-design.md, perl/LinkedSpec/HandlerVariantEmitter.pm, rust/linkedspec-core/src/types.rs, rust/linkedspec-core/src/compiler.rs, rust/linkedspec-runtime/src/engine.rs, rust/README.md, and docs/linkedspec-book/src/appendix/backend-handoff.md. Perl HandlerIR has 10 structural variant kinds and Perl/JSON emitters. Rust executes an interpreted native structural contract: CompiledSpec contains CompiledRule rows with regex_patterns, parsed lifecycle CodeBlock slots, AcodeEntry dispatch, BcodeEntry dispatch, parse mode, and repetition bounds. RUST-PARITY.8.2 added linkedspec_runtime::source_emitter::emit_rust_source, which emits a standalone Rust module embedding serialized CompiledSpec; tests build that generated source in an isolated temp crate. RUST-PARITY.8.3 split non-REP direct emission because rule-mode/family metadata, generated family-plan emission, acode execution, bcode execution, and matrix closeout are separate mechanisms. RUST-PARITY.8.3.1 preserved parsed RuleMode on CompiledRule and made generated source embed/validate a GENERATED_RULES family plan across default/OR/AND acode-bcode markers. RUST-PARITY.8.3.2 made generated parse enter Engine::execute_generated_with_plan and directly run Default/OrAcode; RUST-PARITY.8.3.3 added direct AndSingleAcode/AndAcodeSeq plus ordered AND sequence semantics; RUST-PARITY.8.3.4 added direct AndBcode/OrBcode execution with shared blind-edge tail handling and OR first-match semantics; RUST-PARITY.8.3.5 closed the non-REP matrix; RUST-PARITY.8.4 closed direct REP families with RepAcode, RepBcode, RepAndAcode, and RepAndBcode plus termination coverage. RUST-PARITY.8.5 added generated-source validation against a manifest-backed 8-case corpus subset while keeping the full 91-fixture corpus as the interpreter oracle gate. Those 8/91 counts describe the July 4 milestone. Subsequent full-105 recurring admission is recorded in rust-generated-source-corpus-subset."
 reverify: "rg -n 'RUST-PARITY\\.8\\.|emit_rust_source|source_emitter|CompiledSpec|CompiledRule|AcodeEntry|BcodeEntry|HandlerIR|_emit_handler' docs/tasks/RUST-PARITY.md rust/linkedspec-runtime/src/source_emitter.rs rust/linkedspec-runtime/tests/source_emitter.rs rust/linkedspec-core/src/types.rs perl/LinkedSpec/HandlerVariantEmitter.pm rust/README.md"
 ---
 
@@ -34,7 +34,7 @@ patch. It is a parent lane because it crosses three separate contracts:
 - The `.8` lane adds a generated Rust-source path without weakening the
   interpreted runtime path or the manifest-backed oracle corpus.
 
-Current child frontier:
+Historical completed child decomposition:
 
 - `.8.2`: done — minimal emitter API plus generated-source compile/run
   harness. The generated module embeds serialized `CompiledSpec`.
@@ -59,3 +59,12 @@ split. `.8.2` added a source-emitter module and compile/run harness only.
 `.8.3.2`, `.8.3.3`, `.8.3.4`, `.8.3.5`, and `.8.4` replaced fallback
 execution for every current generated family. `.8.5` added the manifest-backed
 corpus-subset proof; see [[rust-generated-source-corpus-subset]].
+
+## September 7 runtime export check
+
+`SESSION-STARTUP-READING.3.3.23` reads runtime lib.rs completely. It publicly exports
+`source_emitter` alongside the interpreted engine, typed diagnostics, observation, CLI and MCP APIs;
+hidden staged authority reexports serve generated consumers. The opening no-code-generation sentence
+is stale and already owned by startup `.41.2`. Current full-105 generated admission belongs to
+[[rust-generated-source-corpus-subset]]; its retained eight-case subset is for localization, not the
+whole admitted breadth. This reading does not rerun emitted modules or their native suites.

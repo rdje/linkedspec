@@ -100,3 +100,14 @@ do not cover every final-expression route. The earlier general guard claim is
 qualified by this measured exception until its repair and carrier recurrence land.
 Exact fixtures, primary/native results and causal source locations are in
 [[rust-final-value-assignment-receiver-guard-gap]].
+
+## September 7 exact engine-test scope
+
+`SESSION-STARTUP-READING.3.3.23` reads all three private receiver tests through engine EOF.
+They assert that callback failure leaves the receiver unchanged while retaining audit/journal effects,
+then prove guard release through a succeeding invocation. A continuation gap failure retains the
+completed receiver commit. Guard controls cover append, push_back, split_each, set before RHS effects,
+and nested write before selector/RHS evaluation; an unrelated failing write keeps its RHS side effect.
+Those covered statements are followed by return expressions. They do not cover the final-assignment
+or substitution gaps already owned by .58/.59. Fresh neutral 167/592 mutation checks pass;
+no fresh native execution is claimed.

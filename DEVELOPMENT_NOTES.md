@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.23 — Restoring offsets does not restore discarded regex context
+
+Rust adds the cursor offset back to match coordinates after passing only input[pos..] to the provider. This cannot restore input-start or preceding-character context for anchors, lookbehind and word boundaries. An explicit collector exposes five disagreements after consuming x; the first uncollected chain returned null and could not answer the question. Whole-input matching must keep slot identity and all capture projections aligned across seek, consume and required-slot routes. .63 tracks that repair and independent carrier/public closure. Engine suffix tests meanwhile demonstrate exact rollback/effect assertions on their covered write routes.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.22 — Returned values alone do not prove skipped operand effects
 
 The coalesce_short_circuits test returns the expected first string even when Rust eagerly evaluates every argument. Assignment probes expose the missing effect boundary in both coalesce variants; a separate predicate also skips defined empty text. Perl's nested ternaries preserve selection order. The initial diagnostic collector then introduced an unrelated false-to-string artifact; inspecting the original lowered Boolean and rerunning with JSON::PP::is_bool preservation separates observer behavior from runtime behavior. .62 tracks actual repairs and permanent recurrence; existing capture cards now distinguish historical free helpers from current typed authority.

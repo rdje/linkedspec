@@ -35,7 +35,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`, `SESSION-STARTUP-READING.50`, `SESSION-STARTUP-READING.51`, `SESSION-STARTUP-READING.52`, `SESSION-STARTUP-READING.53`, `SESSION-STARTUP-READING.54`, `SESSION-STARTUP-READING.55`, `SESSION-STARTUP-READING.56`, `SESSION-STARTUP-READING.57`, `SESSION-STARTUP-READING.58`, `SESSION-STARTUP-READING.59`, `SESSION-STARTUP-READING.60`, `SESSION-STARTUP-READING.61`, `SESSION-STARTUP-READING.62`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`, `SESSION-STARTUP-READING.50`, `SESSION-STARTUP-READING.51`, `SESSION-STARTUP-READING.52`, `SESSION-STARTUP-READING.53`, `SESSION-STARTUP-READING.54`, `SESSION-STARTUP-READING.55`, `SESSION-STARTUP-READING.56`, `SESSION-STARTUP-READING.57`, `SESSION-STARTUP-READING.58`, `SESSION-STARTUP-READING.59`, `SESSION-STARTUP-READING.60`, `SESSION-STARTUP-READING.61`, `SESSION-STARTUP-READING.62`, `SESSION-STARTUP-READING.63`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -1312,14 +1312,18 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.22 - read capture and control tests and own coalesce evaluation repair`
 
 - ID: `SESSION-STARTUP-READING.3.3.23`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 23: 1,364 lines/fragments, 53,265 bytes.
   Scope: `rust/linkedspec-runtime/src/engine.rs` lines 12247–12694;
     `rust/linkedspec-runtime/src/helpers.rs` lines 1–850;
     `rust/linkedspec-runtime/src/lib.rs` lines 1–66.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Read the complete engine test suffix, regex helpers and runtime export surface; exact baseline identity and Knowledge-first reconciliation; selected managed write/capture/regex direct-dependent checks and bounded probes only for newly established gaps; history/memory/derived Knowledge/staged diff/all nine pre-commit doctrines. No runtime/public/policy repairs before prerequisites.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS: complete 1,364-line/53,265-byte source read/current-baseline identity; three managed write/mutation/slot neutral contracts; six informative paired primary Rust/live Perl choice probes plus six retained inconclusive controls; six three-rule descriptors/generated captures; exact sequence/error assertions; .63 ownership; Knowledge/history/memory/staged diff/all nine pre-commit doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.23 - complete engine and regex helper reading and own input-context repair`
 
 - ID: `SESSION-STARTUP-READING.3.3.24`
   Status: `pending`
@@ -3745,11 +3749,60 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: `pending`
   Commit: `pending`
 
+- ID: `SESSION-STARTUP-READING.63`
+  Status: `pending`
+  Goal: Preserve whole-input regex context when matching from a nonzero cursor.
+  Dependencies: prerequisite .3/.4/.5; coordinate slot identity, typed source and regex contract owners.
+  Children: `.63.1`, `.63.2`, `.63.3`, `.63.4`
+  Acceptance: Advancing the cursor must not redefine input-start, line/word boundary or preceding context.
+
+- ID: `SESSION-STARTUP-READING.63.1`
+  Status: `pending`
+  Goal: Repair Rust combined seek matching without discarding preceding input.
+  Acceptance: Match from the current offset against whole input; preserve earliest-start/first-authored
+    choice, absolute captures/spans and named group projection. Cover ^, \A, multiline starts, \b/\B,
+    positive/negative fixed lookbehind, plain controls, Unicode prefixes and cursor-at-end boundaries.
+  Verification: `pending` repair — .3.3.23 six paired collected-rule probes on xhello show five assertion
+    discrepancies and plain agreement. helpers.rs seek_match slices input[pos..] before matching;
+    Perl LinkedRE matches the original scalar at pos. Exact evidence belongs to the regex-context card.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.63.2`
+  Status: `pending`
+  Goal: Reconcile consume and required-slot matching with the same context authority.
+  Dependencies: .63.1.
+  Acceptance: Apply the corrected offset mechanism consistently to consume_match, seek_slot_match and
+    consume_slot_match. Preserve required authored slot identity, duplicate patterns and zero-width
+    progress policy; validate low-level cursor bounds without conflating them with normal DSL inputs.
+  Verification: `pending` — source shows the same input suffix slicing in consume_match and match_slot;
+    the current six behavioral controls exercise ordinary choice seek only. Fresh route proof is required.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.63.3`
+  Status: `pending`
+  Goal: Add exact nonzero-cursor assertion recurrence across supported regex carriers and backends.
+  Dependencies: .63.1, .63.2.
+  Acceptance: Independently assert selected rule sequences and absolute match/capture spans in native,
+    reconstructed/generated/emitted/standalone execution; cover other backends and task-own measured
+    differences. Prevent suffix-copy regressions and retain valid unanchored/duplicate-slot controls.
+  Verification: `pending` — current primary Rust/live Perl results and source inspection are bounded;
+    no native/generated independent execution or other-backend signoff is inferred.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.63.4`
+  Status: `pending`
+  Goal: Close regex-context public examples and canonical parity after recurrence.
+  Dependencies: .63.1-.63.3.
+  Acceptance: Explain cursor versus input boundaries and fixed lookbehind with collected examples;
+    reconcile regex/current backend claims, render the book, and pass exact canonical closure.
+  Verification: `pending`
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.23` | `pending` | read engine lines 12247–12694, helpers.rs lines 1–850, and runtime lib.rs lines 1–66. |
+| 1 | `SESSION-STARTUP-READING.3.3.24` | `pending` | read mcp_contract.rs lines 1–6 and line 7 bytes 298–65536. |
 
 ## Reading Ledger
 
@@ -3760,7 +3813,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.22` are reconciled and `.3.3.23`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.23` are reconciled and `.3.3.24`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -6299,6 +6352,15 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - Five paired Rust primary/live Perl Get controls confirm coalesce skips defined empty text/aggregates and both coalesce variants execute later assignment operands. Perl keeps the selected defined value and skips later assignments. Source shows omitted lazy dispatch, the coalesce nonempty test, and recursive Perl conditional lowering. Five descriptors are ready/unresolved=0; actual generated/lowered captures retain conditionals. .62.1-.62.4 own definedness/laziness, receiver routes, permanent carrier/backend recurrence and public canonical closure. Aggregate contract admission remains explicitly pending.
 - The ephemeral original Perl collector stringified JSON booleans; a Boolean-preserving rerun proves this was an observer artifact, not Perl false-kind drift. Retain both versions and use only typed results for product claims. New coalesce Knowledge plus four reconciled owners retain exact limits and a 40-file/158,215-byte artifact manifest. Three managed neutral contracts pass: logical 26 mutations, typed source 14/0/231, rule-local cursor 36 spellings/60 mutations. All jobs are consumed; no compiler ran. Roadmap Yes, codebase No, physical book Yes; formal alignment and runtime/public/policy repairs remain pending.
 
+### Engine suffix, regex wrappers and nonzero-cursor context at `.3.3.23`
+
+- Activated from clean `fe3cabf1934eaf7181745091f7a5d423c991b895` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read engine 12247–12694 (448 lines/17,318 bytes; SHA-256 `24430ed2a65031d349f6a20d0e8f521d9f8d49da1bc6ccd5666ac6499c192716`), complete helpers.rs (850/33,507; `850047e85f82e0ab3799e02960c245c49077ab3e7bde593c83887b187bffeb3e`) and runtime lib.rs (66/2,440; `3f69d8e02549bf76d3f3495935403b6f87b65f0e9a14c74885f4412b2f64112c`). All 1,364 lines/53,265 bytes and full files equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`. Engine comprehension is complete; next reads embedded MCP contract bytes.
+- Nested-write tests assert exact segment/RHS order, structural error fields and preservation of RHS effects without partial publication. Detachment tests mutate all four value carriers independently; expression failures assert the completed prefix and read exclusions retain original state. Receiver tests assert callback rollback with unrelated effects, release via a successful second invocation, post-commit continuation failure and selected guard-before-evaluation routes. Those tests do not cover .58/.59 final-assignment/substitution exceptions.
+- Regex wrappers normalize ASCII named captures, lower-unbounded quantifiers and one leading positive flag toggle, retain individual compiled slots and wrap each branch for combined choice. Extraction separates internal groups from compact participating captures/absolute spans and named values. Tests check ties, duplicate required slots, optional/empty captures and normalization; reading does not imply fresh native execution. Public lib exports include source_emitter and hidden staged generated-consumer authority; .41.2 already owns its stale no-generation sentence. Reconcile the old emitter card's 8/91 milestone with admitted 105 coverage.
+- Six informative collected-rule pairs on xhello show plain agreement and five Rust discrepancies for ^, input-start, positive/negative fixed lookbehind and word boundary after consuming x. helpers.rs slices input[pos..] in all three matching implementations; Perl LinkedRE retains the original scalar/pos. Six generated/descriptor captures preserve both dispatch slots and three ready/unresolved=0 rule records. .63.1-.63.4 own whole-input seek repair, consume/required slots, carrier/backend recurrence and public closure. Only ordinary choice seek is freshly exercised. The initial six null-only chain probes are retained as inconclusive observation scaffolds, not parity proof.
+- New regex-context Knowledge plus six reconciled owners retain exact source/limits and 37-file/618,941-byte evidence manifest. Three managed neutral contracts pass: writes 105 mutations; receiver mutation 167/592; slot identity five fixtures/two diagnostics/59 mutations. Exact result/error and source/descriptor assertions pass. No compiler ran and all jobs are consumed. Roadmap Yes, codebase No, physical book Yes; formal alignment and runtime/public/policy repairs remain pending.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -6377,7 +6439,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.3.19` is item 78/100 at `14a66b82`;
   `.3.3.20` is item 79/100 at `19e943a4`;
   `.3.3.21` is item 80/100 at `bcc2b2ab`;
-  `.3.3.22` is item 81/100 once committed.
+  `.3.3.22` is item 81/100 at `fe3cabf1`;
+  `.3.3.23` is item 82/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -6523,6 +6586,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.20` | Exact source identity; four managed neutral contracts; ten paired primary values/errors; ten lowered/generated captures; six callback descriptors; .59 ownership; Knowledge/history/memory/staged diff/all nine pre-commit doctrines | PASS bounded reading and exact substitution diagnosis; .59 owns repairs and recurrence. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.21` | Exact source identity; three managed neutral contracts; eleven paired values/errors plus Rust-only overflow; twelve ready descriptors/source captures; exact scalar kinds/panic-site assertions; .60/.61 ownership; Knowledge/history/memory/staged diff/all nine pre-commit doctrines | PASS bounded reading and exact slice/scalar diagnosis; .60/.61 own repairs and recurrence. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.22` | Complete source identity; five paired exact values/effects/JSON kinds; five ready source/descriptor captures; logical/typed/cursor neutral contracts; .62 ownership; Knowledge/history/memory/staged diff/all nine pre-commit doctrines | PASS bounded capture/control reading and coalesce diagnosis; .62 owns runtime/carrier/public repair. |
+| `2026-09-07` | `SESSION-STARTUP-READING.3.3.23` | Full source identity; six informative and six inconclusive retained pairs; six three-rule descriptors/generated captures; exact sequence/error assertions; write/mutation/slot neutral proof; .63 ownership; Knowledge/history/memory/staged diff/all nine pre-commit doctrines | PASS bounded engine/helper/export reading; .63 owns confirmed nonzero-cursor regex context repair. |
 
 ## Commit Log
 
@@ -6610,6 +6674,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.3.20` | `SESSION-STARTUP-READING.3.3.20 - read helper dispatch and own substitution composition repairs` | Complete helper-prefix reading; own substitution flags, callback lowering and receiver protection with exact paired evidence. |
 | `SESSION-STARTUP-READING.3.3.21` | `SESSION-STARTUP-READING.3.3.21 - complete helper reading and own slice and scalar boundary repairs` | Complete helper implementation and test-prefix reading; own array slicing and scalar null/empty repair with bounded exact evidence. |
 | `SESSION-STARTUP-READING.3.3.22` | `SESSION-STARTUP-READING.3.3.22 - read capture and control tests and own coalesce evaluation repair` | Read capture/control assertions, qualify weak smoke coverage, and own coalesce definedness/laziness with corrected Boolean observations. |
+| `SESSION-STARTUP-READING.3.3.23` | `SESSION-STARTUP-READING.3.3.23 - complete engine and regex helper reading and own input-context repair` | Complete engine tests and regex wrappers; own five assertion discrepancies with exact collected-rule controls. |
 
 ## Changelog
 
@@ -6741,3 +6806,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-07`: `.3.3.20` reads group 20 completely, owns substitution repair .59, reconciles capture/helper Knowledge, and retains exact primary/lowering evidence.
 - `2026-09-07`: `.3.3.21` completes helper reading, owns slice/scalar repairs .60/.61, and retains eleven paired controls plus one Rust-only overflow case.
 - `2026-09-07`: `.3.3.22` reads capture/control tests, owns coalesce repair .62, and preserves five typed paired controls.
+- `2026-09-07`: `.3.3.23` completes engine/helper/export reading, owns regex context repair .63, and retains six informative paired controls.

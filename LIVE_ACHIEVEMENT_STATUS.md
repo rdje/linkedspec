@@ -5,21 +5,23 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.22` are reconciled and `.3.3.23`–`.3.3.66` plus closeout remain pending.
-- Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.62` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
+  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.23` are reconciled and `.3.3.24`–`.3.3.66` plus closeout remain pending.
+- Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.63` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.3.22` reads 1,469 engine test lines / 52,089 bytes; owns coalesce definedness and evaluation repair .62.
-  This is item 81/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.3.23` reads 1,364 lines / 53,265 bytes through engine EOF, regex helpers and runtime exports; owns regex context repair .63.
+  This is item 82/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.3.23`: read engine lines 12247–12694, helpers.rs lines 1–850, and runtime lib.rs lines 1–66.
+- Activate `SESSION-STARTUP-READING.3.3.24`: read mcp_contract.rs lines 1–6 and line 7 bytes 298–65536.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-07` — `SESSION-STARTUP-READING.3.3.23` completes engine/helper/export reading and owns confirmed nonzero-cursor regex context repair .63.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.22` reads capture/control tests and owns coalesce definedness/lazy evaluation repair .62.
 
@@ -55,9 +57,6 @@
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.8` reads remaining expression tests and core parser entry (1,470 lines / 57,396 bytes).
   Neutral write/callable/uniform checks pass; historical storage and rollout wording is reconciled.
-
-- `2026-09-07` — `SESSION-STARTUP-READING.3.3.7` reconciles lexical/test source (1,497 lines / 56,871 bytes).
-  Six hash controls and three paired cat controls establish new repair owners .50/.51.
 
 ## History
 

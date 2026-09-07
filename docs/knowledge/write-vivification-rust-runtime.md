@@ -96,3 +96,13 @@ The coordinator's detached root is published only after successful recursion.
 Read access separately coerces numeric indices and returns undef for absent or
 wrong-kind values; it neither invokes this writer nor creates containers.
 Fresh neutral proof retains the counts above; no native carrier suite is rerun.
+
+## September 7 engine-test suffix reading
+
+`SESSION-STARTUP-READING.3.3.23` reads the engine tests through EOF. Unlike value-only smoke tests,
+these assert the exact segment-0/segment-1/RHS audit order, a structural failure's code/path/index/length,
+and preservation of an RHS rebind without publishing a partial path. The detachment test independently
+mutates initial, RHS, returned and stored aggregates. Three expression-failure positions assert exactly
+the completed audit prefix and unchanged target; three read controls check absent binding, missing child
+and wrong-kind state without creation. This is assertion-definition evidence; the native suites were
+not rerun. Fresh neutral proof passes the same 105 mutations and frozen cases above.

@@ -9,7 +9,7 @@ answers:
   - "does entry_group(0) mean the whole match"
   - "does the spec regex contract require lookbehind"
   - "why does spec.spec use negative lookbehind"
-date: 2026-07-08
+date: 2026-09-07
 status: confirmed
 tags: [spec-language, regex, backend-contract, captures, SPEC-LANG-REFERENCE]
 evidence: "SPEC-LANG-REFERENCE.2 verified the regex chapter against LinkedRE, ActionIR helper lowering, the Rust rgx-backed runtime, and shipped specs. SPEC-LANG-REFERENCE.7 promotes the durable backend-facing retrieval card."
@@ -48,3 +48,12 @@ when optional groups would make numbered capture compaction ambiguous.
 - Book contract: `docs/linkedspec-book/src/user-model/regex-in-spec.md`
 - Related: [[rust-capture-group-helper-indexing]], [[entry-match-divergence-verified-shape]]
 - Lookbehind engine proof: [[dart-lua-fixed-lookbehind-support]]
+
+## Current Rust context exception, September 7
+
+Required feature support includes the position at which assertions are evaluated.
+`SESSION-STARTUP-READING.3.3.23` confirms that Rust's current suffix-based choice matcher loses
+preceding context after cursor advancement. Plain text agrees with Perl, while five bounded
+anchor/lookbehind/word-boundary cases differ. [[rust-regex-input-context-drift]] retains exact
+specs and outputs; startup .63 owns repair and recurrence. General provider feature support and
+zero-offset tests do not establish correct nonzero-cursor semantics in the wrapper.

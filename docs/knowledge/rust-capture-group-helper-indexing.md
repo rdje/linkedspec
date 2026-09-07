@@ -62,3 +62,10 @@ captures-only groups are separate, and the absent-entry test checks null versus 
 Named group tests separately check missing names and numeric 1/0 presence. These are source-reading
 facts; the July corpus counts above are historical, and this checkpoint did not rerun native tests.
 Current typed-source neutral proof passes 14 complete / 0 pending / 231 mutations.
+
+Checkpoint `SESSION-STARTUP-READING.3.3.23` reads the extractor and its tests in helpers.rs.
+Each winning-branch capture slot contributes an internal string (empty when absent); only participating
+captures contribute to the DSL list and its parallel absolute byte-span vector. Named extraction skips
+absent names. Exact tests distinguish absent optional capture from participating empty text and isolate
+internal alternation branches. The extractors invoke captures on the same supplied haystack; correcting
+whole-input matching context must keep those projections aligned with selection (.63).

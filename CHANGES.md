@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.23 — complete engine and regex helper reading and own input-context repair
+
+Read the engine test suffix, all regex helpers and runtime exports: 1,364 baseline-identical lines / 53,265 bytes. Six collected-rule Rust primary/Perl Get pairs confirm five nonzero-cursor anchor/lookbehind/word-boundary discrepancies and one plain agreement. Six three-rule descriptors and generated captures tie them to suffix-based Rust matching versus original-scalar Perl matching; .63 owns route repair, recurrence and public closure. Three neutral contracts pass; six Knowledge owners reconcile. Initial null-only controls remain explicitly inconclusive; runtime/public/policy remain unchanged.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.22 — read capture and control tests and own coalesce evaluation repair
 
 Read baseline-identical engine test lines 10778–12246 (1,469 lines / 52,089 bytes), distinguishing exact capture/Unicode/take assertions from weaker smoke checks. Five paired Rust primary/live Perl controls confirm coalesce empty-value and later-operand drift; five ready descriptors and inspected source establish the mechanism. .62 owns repair, carriers and public closure. Correct Boolean observation and four Knowledge owners; logical, typed-source and cursor neutral checks pass. Runtime/public/policy repairs remain prerequisite-blocked.
