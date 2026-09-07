@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.15 — read generated engine loops and audit split boundaries
+
+Read baseline-identical engine lines 395–1894 (1,500 lines / 56,911 bytes), including generated action/blind loops, typed mutation diagnostics and byte/scalar helper boundaries. Seven directly related neutral checks pass. A fresh managed CLI build and seven paired public Rust/Perl controls confirm five empty-source or empty-delimiter split differences, with two equal controls and no subprocess error. Existing .33 owns authoritative split review and repair; the next leaf owns engine continuation. Knowledge and continuity are synchronized without changing runtime, public book or policy.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.14 — read child authority diagnostics and engine definitions
 
 Read all four baseline-identical ranges (1,494 lines / 50,413 bytes): the child-authority suffix, both diagnostic types and engine definitions through line 394. Reconcile four existing Knowledge cards with current optional diagnostic fields, invocation options and authority behavior. The suspected zero-byte diagnostic case is excluded by private positive-only ceiling construction; the existing one-byte UTF-8 assertion is source evidence. Progressive, typed-source, diagnostic-output and scalar-numeric neutral checks pass. Native results remain dated; engine continuation and existing .37 resource/source-detail review stay owned.

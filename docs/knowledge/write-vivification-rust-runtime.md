@@ -52,3 +52,15 @@ counts above remain the 2026-09-01 milestone evidence and are not rerun by this 
 
 Related: [[write-vivification-neutral-contract]], [[terse-nested-value-path-assignment]],
 [[write-vivification-perl-reference]], [[write-map-leaves-neutral-composition]], and ADR `0036`.
+
+## September 7 diagnostic-definition reading
+
+`SESSION-STARTUP-READING.3.3.15` reads the complete `NestedWriteError` formatter
+in the engine window. Its three failure variants serialize binding, evaluated
+path, segment index and authored Unicode-scalar source span, adding the exact
+kind/reason or index/length fields for that failure. Display emits deterministic
+JSON through the existing String channel. This is diagnostic-definition proof;
+assignment evaluation, snapshot and commit implementations remain later reading.
+Fresh neutral write proof again passes 5/7 syntax, 11 successes, 16 structural
+failures, three evaluation failures, three read exclusions, eight compositions
+and 105 mutations. The native milestone counts above are not freshly rerun.

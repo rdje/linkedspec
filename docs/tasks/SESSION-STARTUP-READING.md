@@ -1216,12 +1216,16 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.14 - read child authority diagnostics and engine definitions`
 
 - ID: `SESSION-STARTUP-READING.3.3.15`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 15: 1,500 lines/fragments, 56,911 bytes.
   Scope: `rust/linkedspec-runtime/src/engine.rs` lines 395–1894.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Read engine lines 395–1894 in untruncated chunks with preceding context and exact suffix ownership; current/full-file baseline and range identity; Knowledge-first nested-write, receiver-mutation and invocation/diagnostic authorities; selected managed direct-dependent neutral contracts, bounded source/claim review, paired managed Rust/Perl pure-split boundary controls under existing .33, and dated native evidence; both history checks, explicit memory, derived Knowledge, staged diff and all nine pre-commit doctrines. No runtime/public/policy repair before startup prerequisites.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS: exact engine range/baseline identity; seven managed neutral checks; managed CLI build; seven paired Rust/Perl split controls with five differences/two equal controls; .33 ownership and exact evidence; Knowledge/history/explicit memory/staged diff/all nine pre-commit doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.15 - read generated engine loops and audit split boundaries`
 
 - ID: `SESSION-STARTUP-READING.3.3.16`
   Status: `pending`
@@ -2696,17 +2700,24 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     carried-field evaluation count and order, empty/trailing/consecutive items, literal/regex delimiters,
     variable delimiters, scalar receivers, and nested carried-value independence. Reconcile book once-only
     teaching, Lua implementation evidence, Perl-reference policy, and existing corpus expectations before repair.
+    Explicitly include empty literal and zero-width regex delimiters, distinguishing leading/trailing empty
+    items from empty-source behavior and pure helper results from tagged-record construction.
     Assign separate implementation leaves if the coordinated correction exceeds one safe slice.
   Verification: `pending` — Perl carried field increments twice for a,b, and zero times for empty input;
     tagged splitting drops the trailing empty item retained by ordinary split. See `.3.2.28` evidence.
+    `.3.3.15` adds seven paired current Rust/Perl pure-split controls: five empty-source/empty-delimiter
+    differences and two equal ordinary controls. Rust adds initial empty fields for empty literal/regex
+    delimiters and differs on empty sources; all fourteen compared commands exit zero without stderr.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.33.2`
   Status: `pending`
-  Goal: Implement the reviewed tagged-record contract and prevent recurrence in runtime and public examples.
+  Goal: Implement the reviewed tagged-record and pure-split contract and prevent recurrence in runtime and public examples.
   Dependencies: `.33.1`.
   Acceptance: Add independently justified failing controls, correct affected lowerers/interpreters, and cover
-    direct/generated/helper/receiver forms without silently re-blessing oracle data. Preserve non-scope source
+    direct/generated/helper/receiver forms without silently re-blessing oracle data. Include the measured
+    Rust/Perl empty-source, empty literal/regex delimiter, Unicode and ordinary control pairs from .3.3.15.
+    Preserve non-scope source
     argument ownership and exact record shape. Synchronize the helper reference and Knowledge, add real public
     claim coverage, and run focused direct-dependent plus required cross-runtime admission proof.
   Verification: `pending`
@@ -3456,7 +3467,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.15` | `pending` | read the next engine window, including nested-write validation and invocation construction |
+| 1 | `SESSION-STARTUP-READING.3.3.16` | `pending` | continue engine reading at lines 1895–3394. |
 
 ## Reading Ledger
 
@@ -3467,7 +3478,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.14` are reconciled and `.3.3.15`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.15` are reconciled and `.3.3.16`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -5932,6 +5943,17 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - Fresh managed neutral commands `tools/check_progressive_span_dispatch_contract.py`, `tools/check_typed_source_location_contract.py`, `tools/check_diagnostic_output_contract.py` and `tools/check_scalar_numeric_contract.py` all pass through `bash tools/run_python_project_data.sh`: progressive 9/9 with 116 contract/60 public mutations; typed source 14/0 with 231 mutations; diagnostics 3 helpers/11 render rows/6 scenarios/8 complete/20 mutations; numeric 55 cases/18 helpers.
 - The unchanged-source four-carrier canonical result at `1d3715fc` remains dated native evidence. No private cfg-enabled authority, diagnostic delivery or complete engine native suite is freshly claimed by this documentation leaf. Four existing Knowledge owners are reconciled; runtime, public book and policy remain unchanged. Codebase No; physical book Yes, formal alignment pending.
 
+### Generated engine loops and split boundaries at `.3.3.15`
+
+- Activated from clean `7d6c9f8b52f7417175725950a62afa8310c647d5` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read engine lines 395–1894 in five complete 300-line chunks: 1,500 lines / 56,911 bytes; full-file and range identity match baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`. Range SHA-256 is `3dcd4d3eb399242762e8cdf4a70a554ee200066cc9d8c665d69bc99cc747b6c6`. This completes `GeneratedPlanExecutor` and starts `Engine` construction through `spec_name`; `.3.3.16` owns line 1895 onward.
+- Nested-write/receiver diagnostic formatters retain typed failure fields, evaluated path and authored Unicode-scalar spans. SavedMatchState covers entry/local groups, spans, presence and capture offsets. Byte-to-char and next-boundary helpers require valid internal boundaries; scalar substring helpers iterate characters. Literal/regex and mutation-target adapters remain distinct.
+- Generated families route to action/blind loops with source/family/rule traces, ordered target/slot identity, semantic match observations, child accumulator truncation and entry-slot propagation. Wrappers manage recursion, variable scopes and recognition frames around Result return. Action execution keeps flagged candidate-before-LS/commit-after-LE/tail timing and unflagged LS-before-selection, explicit collection, AND sequence and repetition/progress guards.
+- Blind execution distinguishes repeated AND sequence completion from repeated OR choice and ordinary AND accumulation from OR first-match behavior; recognition outcome is separate from trace truth text. Saved return/match data restores on normal and explicit-return paths. This source checkpoint does not assert universal error-recovery restoration, native emitter freshness or completion of later engine bodies.
+- Managed locked/offline CLI build passes in 16m27s. Seven identical Rust/Perl pure-split specs produce five empty-source/empty-delimiter differences and two equal controls; all fourteen compared commands exit zero without stderr. Rust literal splitting uses host string behavior; its regex loop emits the initial empty slice before a zero-width match. Perl dumped handlers use split with -1 and omit that initial field. The separate public helper arm at 8415–8444 confirms delegation. Existing .33.1 owns contract census and .33.2 explicitly owns pure-split repair/recurrence. Full cases, hashes and commands are in `docs/knowledge/tagged-record-evaluation-and-split-drift.md`; other runtimes/carriers remain unmeasured here. An initial collector's optional-trace JSON assumption was corrected after a raw protocol control; only its empty output file was removed.
+- Seven managed neutral checks pass: write 5/7 syntax, 11 successes, 16 structural failures and 105 mutations; receiver mutation 4/14/5 syntax, 10 successes, eight pre-commit failures and 167 + 592 mutations; cursor 36/18/8/60; gap 9/0/63/public34; duplicate slots 5/2/59; recognition 138/250/58; generated metadata ten families, strict Rust 105/105 and census 100/0/0. The neutral v1 checker label does not change Rust artifact format 2.
+- Updated existing Knowledge owners and kept historical native evidence dated. Public/runtime/policy repairs remain gated on startup prerequisites. Codebase No; physical book Yes, formal alignment pending.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -6002,7 +6024,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.3.11` is item 70/100 at `75ce8db8`;
   `.3.3.12` is item 71/100 at `1d3715fc`;
   `.3.3.13` is item 72/100 at `99226025`;
-  `.3.3.14` is item 73/100 once committed.
+  `.3.3.14` is item 73/100 at `7d6c9f8b`;
+  `.3.3.15` is item 74/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -6140,6 +6163,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.12` | Exact three-range/current-baseline proof; core validation 21/21; gap 9/0/63/public34; root 8/3/3/54; cursor 36/18/8/60; four paired registry/five paired AND/four descriptor controls; .56/.57 ownership; lossless segment 4983; ADR 0105; exact staged canonical proof | PASS bounded reading and lossless archive proof; .56/.57 remain pending; exact canonical receipt required before landing. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.13` | Exact six-range/baseline proof; managed core cursor 5/5 + types 8/8 + Unicode 5/5; cursor/Unicode/logical/progressive neutral proof; finalized prior canonical intake; eight capture identities and ten absence checks; Knowledge/history/memory/all doctrines and diff | PASS bounded source/contract proof and diagnostic intake; constructor/dispatch suffix and existing repairs remain pending. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.14` | Four-range/current-baseline identity; four managed neutral contracts; ceiling constructor/private-field and one-byte assertion source review; Knowledge/history/memory/all doctrines/diff | PASS bounded reading and neutral proof; prior native evidence remains dated, .37 review and engine suffix stay owned. |
+| `2026-09-07` | `SESSION-STARTUP-READING.3.3.15` | Exact engine-range/current-baseline identity; seven managed neutral checks; managed CLI build and seven paired split cases (five differences/two equal controls), .33 ownership and exact log/binary hashes; Knowledge/history/memory/staged diff/all nine pre-commit doctrines | PASS source/neutral proof and bounded split diagnosis; .33 owns contract review and repair; engine continuation stays pending. |
 
 ## Commit Log
 
@@ -6219,6 +6243,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.3.12` | `SESSION-STARTUP-READING.3.3.12 - read static validation and preserve bounded engineering history` | Complete validator/descriptor reading; own .56/.57; preserve segment 4983 with finite ADR 0105 capacity and canonical proof. |
 | `SESSION-STARTUP-READING.3.3.13` | `SESSION-STARTUP-READING.3.3.13 - read core tests and bounded child authority` | Read six Rust ranges, preserve exact verification limits and prior canonical evidence, and remove only consumed captures. |
 | `SESSION-STARTUP-READING.3.3.14` | `SESSION-STARTUP-READING.3.3.14 - read child authority diagnostics and engine definitions` | Finish authority and diagnostic-type reading; reconcile current options/diagnostic Knowledge and resource-boundary limits. |
+| `SESSION-STARTUP-READING.3.3.15` | `SESSION-STARTUP-READING.3.3.15 - read generated engine loops and audit split boundaries` | Read generated action/blind loops, preserve exact scope, and annotate measured split boundaries under existing .33. |
 
 ## Changelog
 
@@ -6342,3 +6367,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-07`: `.3.3.12` completes static validator and descriptor-test reading; owns .56 helper shadowing and .57 nonnumeric bare-selector loss with paired native/descriptor controls; performs required lossless notes rollover and finite ADR 0105 capacity admission under exact staged canonical verification.
 - `2026-09-07`: `.3.3.13` reads all six group-13 ranges, retains verification limits and suffix ownership, records the completed prior canonical gate, and verifies exact consumed-capture cleanup; existing claim repairs remain owned.
 - `2026-09-07`: `.3.3.14` reads group 14 completely, resolves the zero-ceiling concern at the private positive constructor, updates current options/diagnostic Knowledge, and retains exact engine suffix and native-proof limits.
+- `2026-09-07`: `.3.3.15` reads the complete group-15 engine range, records generated-loop and diagnostic/helper boundaries, and preserves exact split controls with existing .33 repair ownership.

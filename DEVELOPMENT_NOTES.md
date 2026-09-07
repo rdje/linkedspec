@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.15 — Generated family execution and literal versus regex splitting
+
+Generated execution derives cursor behavior from the family plan while retaining separate action/blind loops, recognition frames, entry-slot identity and capture-specific lifecycle ordering. Normal/explicit return restoration does not imply every error-recovery route is proved. The split comparison separates literal host splitting from the regex loop's initial zero-width slice and Perl's emitted split boundary; matching Unicode scalars do not imply matching empty fields. Existing .33 owns authoritative review and repair. The diagnostic runner reads plain JSON without optional stdout trace.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.14 — Positive authority construction and current invocation/diagnostic types
 
 Validate apparent boundary issues against the actual construction API: private positive-only ceilings make the one-byte diagnostic fallback representable without admitting zero-byte ceilings. Callback return/unwind invalidates views and pops the active chain before outcome handling. Current options include observation and two opaque seeds, while diagnostics carry later helper/slot/callable fields. Definition reading and neutral fixtures do not establish every engine callsite or replace native carrier proof; the next window owns continuation.

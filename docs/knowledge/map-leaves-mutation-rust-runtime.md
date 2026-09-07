@@ -57,3 +57,14 @@ that every accepted parser spelling survives carrier validation.
 
 Related: [[map-leaves-mutation-neutral-contract]], [[write-map-leaves-neutral-composition]],
 [[write-vivification-rust-runtime]], and ADR `0036`.
+
+## September 7 receiver-error definition reading
+
+`SESSION-STARTUP-READING.3.3.15` reads the complete `ReceiverMutationError`
+formatter: missing binding, wrong aggregate kind and guarded reentry each retain
+their typed code, operation, binding, method and authored Unicode-scalar span,
+plus kind or attempt context. This definition does not by itself prove guard
+placement, traversal or rollback; those engine bodies retain later reading owners.
+Fresh neutral proof again passes four valid/fourteen invalid/five excluded syntax
+cases, ten successes, eight pre-commit failures, six callback/one continuation
+compositions, and 167 base plus 592 composition mutations.

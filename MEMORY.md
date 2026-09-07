@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `9922602583033684ec22466d0b1f3b4669ba497d` — clean preceding reading checkpoint.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.14 - read child authority diagnostics and engine definitions`.
+- activation_commit: `7d6c9f8b52f7417175725950a62afa8310c647d5` — clean preceding reading checkpoint.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.15 - read generated engine loops and audit split boundaries`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: activate `.3.3.15`; read the next engine window, including nested-write validation and invocation construction,
+- next_action: activate `.3.3.16`; continue engine reading at lines 1895–3394,
   then continue queued reading. Intake `.31` preserves the forward source coverage and exact findings.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.57` precede mutation setup; `.29` is part of `.5` adoption.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4984` is the twenty-seventh history segment; ADR `0104`
   authorizes exactly 29 collection files / 28 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook Yes (physical); .31/.3.2.42 preserve complete book/Perl source coverage and repair ownership; formal .4 alignment remains pending (73/100 after `.3.3.14` lands).
+- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook Yes (physical); .31/.3.2.42 preserve complete book/Perl source coverage and repair ownership; formal .4 alignment remains pending (74/100 after `.3.3.15` lands).
