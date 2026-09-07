@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.16 — Invocation success and downstream completion
+
+Execution channels have distinct boundaries: the parent rule result is observed before staged enrichment, and retained sink/exit outcomes survive later generated trace-write failure. Generated engine contexts rely on validation at the source-emitter carrier boundary, while native direct entry checks typed writes itself. Claim wording now names those exact seams and keeps dated native evidence separate from fresh neutral proof.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.15 — Generated family execution and literal versus regex splitting
 
 Generated execution derives cursor behavior from the family plan while retaining separate action/blind loops, recognition frames, entry-slot identity and capture-specific lifecycle ordering. Normal/explicit return restoration does not imply every error-recovery route is proved. The split comparison separates literal host splitting from the regex loop's initial zero-width slice and Perl's emitted split boundary; matching Unicode scalars do not imply matching empty fields. Existing .33 owns authoritative review and repair. The diagnostic runner reads plain JSON without optional stdout trace.

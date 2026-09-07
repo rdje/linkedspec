@@ -55,3 +55,20 @@ The prefix also defines ordered target/slot identity checking, explicit action-f
 iteration collection, strict ASCII decimal/finite numeric conversion, diagnostic/logical/
 gap arity checks, and evaluated key/index segments. Fresh neutral numeric proof passes
 55 cases and eighteen helpers; delivery/order callsites remain with their later owners.
+
+## September 7 invocation-route reading
+
+`SESSION-STARTUP-READING.3.3.16` reads engine lines 1895–3394. Native direct-value
+execution starts the staged seed, installs observation and bounded-child authority,
+validates typed writes and slot identities, then resolves and enters the selected rule.
+Generated option-bearing contexts likewise start fresh authority and validate slot
+identities; source-emitter validation owns typed-write checks before emission and
+after generated JSON decode. These generated contexts expect the validated plan from
+their caller; this does not claim an additional typed-write check inside each context.
+
+Legacy native `execute` creates a fresh context without invocation options and returns
+the accumulator. Generated compatibility and direct-value contexts retain their distinct
+projections; the trace-role adapter with source identity selects direct value. Successful
+parent entry emits its optional semantic result before staged enrichment completes.
+Entry resolution leaves authored compiled state unchanged. The next reading window
+continues at the native regex loop; native carrier counts remain dated evidence.

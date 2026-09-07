@@ -13,7 +13,7 @@ answers:
 date: 2026-09-07
 status: implemented under FUTURE-PARITY-BACKLOG.19.3.1; portable capability admitted under .19.7
 tags: [rust, dsl, actionir, assignment, autovivification, diagnostics, generated-source, FUTURE-PARITY-BACKLOG]
-evidence: "Historical native milestone evidence from 2026-09-01; the September 7 update below is reading and neutral verification only. FUTURE-PARITY-BACKLOG.19.3.1 replaces Rust's static key/index split with WritePathSegment and one AssignNestedAccess node for one or many authored segments. Parser, callable-contract, compiler, serde, source-emitter, generated-plan, independently compiled emitted source, and Engine entrypoints all validate the typed node. Runtime proof covers the frozen 5 AST / 7 syntax / 11 success / 16 structural-failure contract, evaluation order/failure, absent versus bound-null state, fresh user functions, dense arrays, post-evaluation snapshots, rollback, reads, detachment, and exact typed diagnostic fields. The 105-fixture corpus and 197-test runtime integration suite pass."
+evidence: "Historical native milestone evidence from 2026-09-01; the September 7 updates below are reading and neutral verification only. FUTURE-PARITY-BACKLOG.19.3.1 replaces Rust's static key/index split with WritePathSegment and one AssignNestedAccess node for one or many authored segments. Direct Engine entry validates typed nodes; supported generated carriers validate through emission and decoded compiled state before engine execution. Runtime proof covers the frozen 5 AST / 7 syntax / 11 success / 16 structural-failure contract, evaluation order/failure, absent versus bound-null state, fresh user functions, dense arrays, post-evaluation snapshots, rollback, reads, detachment, and exact typed diagnostic fields. The 105-fixture corpus and 197-test runtime integration suite pass."
 reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test write_vivification_contract && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test integration_test && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle"
 ---
 
@@ -36,7 +36,8 @@ Successful binding, result, initial aggregate, and aggregate RHS values are deta
 
 Typed-node validation runs at compiler/callable boundaries, before source emission, after emitted-plan decode,
 and at direct engine entry. Corrupt programmatic or serialized nodes therefore fail closed rather than reaching a
-partially interpreted compatibility path. Native, serialized, generated-plan, emitted-source, and independently
+partially interpreted compatibility path through those validated boundaries. The raw engine generated-plan
+contexts expect caller validation rather than repeating the typed-write check. Native, serialized, generated-plan, emitted-source, and independently
 compiled emitted Rust all execute the same typed semantics.
 
 The original `.19.3.1` leaf did not itself implement Rust `map_leaves!`; `.19.3.2` subsequently composed that
@@ -64,3 +65,9 @@ assignment evaluation, snapshot and commit implementations remain later reading.
 Fresh neutral write proof again passes 5/7 syntax, 11 successes, 16 structural
 failures, three evaluation failures, three read exclusions, eight compositions
 and 105 mutations. The native milestone counts above are not freshly rerun.
+
+`SESSION-STARTUP-READING.3.3.16` confirms the direct entry checks in engine lines
+2631–2669 and, as supporting bounded inspection, source-emitter lines 355–420 and
+997–1030: emission and decoded generated state both validate nested writes and
+receiver mutations. This qualifies validation ownership, without claiming that every
+low-level engine method independently rejects arbitrary unvalidated compiled input.

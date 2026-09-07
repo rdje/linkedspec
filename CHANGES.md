@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.16 — read engine invocation routes and entry dispatch
+
+Read baseline-identical engine lines 1895–3394 (1,500 lines / 60,181 bytes), including public execution wrappers, diagnostic resolution and native blind dispatch. Four related neutral checks pass. Reconcile portable diagnostic stages, sink/exit precedence, generated-input validation ownership and parent-result ordering in five existing Knowledge cards; retain stale source-comment repair under .41.2 and the regex-loop suffix under the next leaf. Runtime, public book and policy are unchanged.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.15 — read generated engine loops and audit split boundaries
 
 Read baseline-identical engine lines 395–1894 (1,500 lines / 56,911 bytes), including generated action/blind loops, typed mutation diagnostics and byte/scalar helper boundaries. Seven directly related neutral checks pass. A fresh managed CLI build and seven paired public Rust/Perl controls confirm five empty-source or empty-delimiter split differences, with two equal controls and no subprocess error. Existing .33 owns authoritative split review and repair; the next leaf owns engine continuation. Knowledge and continuity are synchronized without changing runtime, public book or policy.

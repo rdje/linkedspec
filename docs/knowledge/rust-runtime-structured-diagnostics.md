@@ -29,8 +29,9 @@ cycle context. Every optional field omits `None` during serialization. The engin
 
 `RuntimeContext` retains only the first failure context. Because every interpreted child passes through
 `Engine::execute_rule(...)`, the child's wrapper records its label before variable and recursion frames unwind;
-parent wrappers therefore cannot overwrite it. Missing selected entries use `rule_lookup`, and an empty compiled
-state uses `top_rule_selection`.
+parent wrappers therefore cannot overwrite it. Current root selection returns `entry_rule_not_found` at
+`select_entry_rule`, or `no_rules_defined` at `validate_spec` for an empty compiled state. A later missing
+cross-rule target uses the separate `rule_lookup` failure boundary.
 
 Existing `execute(...)` and `execute_value(...)` delegate through the typed path and return the unchanged message
 as `String`. Successful values, trace APIs, generated-plan APIs, and the canonical primary CLI projection are
@@ -44,3 +45,14 @@ delegates Display to the message, and exposes borrow, consume-message and JSON A
 The updated field inventory is source evidence. Deepest-rule capture and entrypoint
 execution retain their separate engine/runtime owners; the older native counts above
 are dated July results, not a fresh suite run for this documentation checkpoint.
+
+## September 7 execution-wrapper reading
+
+`SESSION-STARTUP-READING.3.3.16` reads engine lines 1895–3394. The structured
+adapter copies the retained failure code, stage, helper/slot/callable context and
+caller-owned spec identity. `entry_rule` is populated for unknown explicit selection;
+handler attribution uses the failing rule or the effective entry fallback. Rule-body
+errors are captured before variable/recursion unwind. This is source proof of these
+wrappers, without claiming every recognition-exit error has a separately captured label.
+Fresh root-selection neutral proof passes 8 selections, 3 failures, 3 strict cases,
+7 complete/0 pending legs and 54 mutations.

@@ -13,12 +13,13 @@ answers:
   - "which Rust runtime semantic routes are equivalent"
   - "what is the twentieth Rust semantic response digest"
   - "does failed Rust execution emit a completed semantic result"
+  - "when does Rust emit the entry result relative to staged AST enrichment"
   - "is Rust semantic introspection admitted after runtime observations"
-date: 2026-07-21
+date: 2026-09-07
 status: current exact runtime observation/query surface; subsequently composed into admitted Rust surface
 tags: [rust, semantic-introspection, runtime, observation, immutability, generated-source, trace, diagnostics]
 evidence: rust/linkedspec-runtime/src/semantic_observation.rs; rust/linkedspec-runtime/src/semantic_index/runtime_projection.rs; rust/linkedspec-runtime/src/engine.rs; rust/linkedspec-runtime/src/runtime.rs; rust/linkedspec-runtime/tests/semantic_index_runtime_observation.rs; FUTURE-PARITY-BACKLOG.10.4.5
-reverify: cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_runtime_observation
+reverify: bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test semantic_index_runtime_observation
 ---
 
 One Rust parser invocation may install a `RuntimeSemanticObservationSink` in `ExecutionOptions`. The synchronous
@@ -46,6 +47,16 @@ positions, exact observer panic identity, quiet execution, and no final result a
 This observation leaf did not itself promote Rust. `FUTURE-PARITY-BACKLOG.10.4.6` subsequently composes it with
 the source/static/calls/query owners through one exact consumer and advances only Rust to rollout 3/9 and native
 admission 2/6.
+
+## September 7 entry-result ordering reading
+
+`SESSION-STARTUP-READING.3.3.16` confirms the option-bearing engine wrappers
+emit `rule_result` only after successful parent rule execution, then call staged-AST
+completion. It records parent-entry success; it is not a guarantee that later enrichment
+or trace delivery succeeds. Failed entry selection returns before that event. The July
+native assertions above remain dated; no combined observation/enrichment failure is
+freshly executed here. Fresh neutral proof passes six fixture groups, twenty exact
+queries, 128 mutations and all nine rollout/six admission legs.
 
 See [[rust-semantic-query-evaluator]], [[rust-semantic-static-projection]],
 [[rust-semantic-call-staged-projection]], [[perl-semantic-runtime-observation]], and

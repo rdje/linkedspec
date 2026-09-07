@@ -64,3 +64,15 @@ do not promise thread-safe or arbitrary reentrant callback delivery.
 The fresh neutral checker passes three helpers, eleven render rows, six scenarios,
 eight complete/zero pending legs and twenty mutations. This is contract/type-reading
 proof; no native/generated delivery suite is freshly run for this checkpoint.
+
+## September 7 output-failure precedence reading
+
+`SESSION-STARTUP-READING.3.3.16` reads the public execution wrappers and their
+finish adapter. On an error, a retained caller sink failure wins, then `exit_now`
+status, then ordinary structured runtime failure. The combined generated trace/output
+wrapper finishes that typed outcome before replaying trace; a subsequent replay or
+scope-exit error preserves an existing Sink or Exit outcome. Other outcomes can become
+trace-write runtime errors. Trace setup errors also use the same typed adapter.
+These are source-level precedence facts, not fresh callback-delivery measurements.
+The neutral diagnostic checker again passes 3 helpers/11 render rows/6 scenarios,
+8 complete/0 pending legs and 20 mutations.

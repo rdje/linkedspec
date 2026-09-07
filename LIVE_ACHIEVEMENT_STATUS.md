@@ -5,21 +5,23 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.15` are reconciled and `.3.3.16`–`.3.3.66` plus closeout remain pending.
+  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.16` are reconciled and `.3.3.17`–`.3.3.66` plus closeout remain pending.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.57` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.3.15` reads 1,500 engine lines / 56,911 bytes, reconciles generated-loop and helper boundaries, and tracks bounded split evidence under .33.
-  This is item 74/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.3.16` reads 1,500 engine lines / 60,181 bytes and reconciles invocation routes, diagnostics, parent-result timing and native entry dispatch.
+  This is item 75/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.3.16`: continue engine reading at lines 1895–3394.
+- Activate `SESSION-STARTUP-READING.3.3.17`: continue engine reading at lines 3395–4887.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-07` — `SESSION-STARTUP-READING.3.3.16` reads engine invocation wrappers and native blind dispatch; preserves validation and observation scope.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.15` reads generated action/blind loops and helper definitions; preserves split-parity ownership under .33.
 
@@ -62,9 +64,6 @@
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.1` reconciles 1,496 Rust lock/ignore lines and exact 199-package metadata.
   Forward diagnostics receive repair owners .45–.47 and .49; no runtime correction is claimed.
-
-- `2026-09-06` — `SESSION-STARTUP-READING.3.2.55` reconciles all 89 Perl files and owns 66 Rust reading slices across 412 files.
-  Parent closeout requires an exact staged canonical receipt; no runtime repair is claimed.
 
 ## History
 
