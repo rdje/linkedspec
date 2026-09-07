@@ -28,8 +28,10 @@ composition. The helper dispatcher repeats the validation defensively, but the e
 guarantees no invalid-call effects. Native `RuntimeDiagnostic` records `code`, `helper_name`, `actual_arity`, and
 `expected_arity`; generated execution preserves the same tokens in its deterministic detail.
 
-Eager helpers and lazy `if`/`switch`/`while` conditions call the same `as_bool` seam. Controls still evaluate only
-the selected branch or loop body. Serialized compiled specs, generated plans, direct-value execution, and emitted
+Eager helpers and lazy `if`/`while` conditions call the same `as_bool` seam.
+Switch selects a string-coerced subject against literal/dynamic case labels; it does
+not use truthiness to compare cases. Controls evaluate only the selected branch or
+loop body. Serialized compiled specs, generated plans, direct-value execution, and emitted
 modules all route back through this runtime owner rather than reimplementing truthiness.
 
 At the initial July 17 logical-helper admission, Rust had no first-class codeblock value and its neutral source
@@ -48,3 +50,11 @@ These bounded checks do not replace the separate logical-runtime and callable-ca
 
 Related facts: [[logical-helper-neutral-contract]], [[logical-helper-five-backend-audit]],
 [[cross-backend-condition-truthiness-drift]].
+
+Reading `SESSION-STARTUP-READING.3.3.21` completes the helper dispatcher:
+and/or inspect already-evaluated operands, whereas if/elseif/switch/while explicitly
+evaluate selected raw expressions. While evaluates the condition before enforcing
+the iteration ceiling. Unknown helpers first try a bound codeblock; active-codeblock
+failure is typed, while ordinary unknown helpers warn and return undef. The neutral
+logical checker passes 17 truthiness/10 helper/3 effect cases and 26 mutations;
+this update does not rerun native generated logical consumers.

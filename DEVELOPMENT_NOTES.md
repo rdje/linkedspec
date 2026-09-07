@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.21 — Range clipping and undefined-value semantics need explicit boundaries
+
+Clipping an array slice's end does not constrain its start, and start+n can overflow before clipping. Rust's primary reproduces four small range panics and one arithmetic panic; bounded Perl controls return empty arrays. Separately, to_str turns undef into empty text before seven transformations and four predicates, while empty-old str::replace inserts separators. Literal undef and an unbound null-name twin both reproduce the differences; empty-string controls agree. .60/.61 retain exact fixes and carrier/public obligations. Reading smoke tests that check only wrappers or membership does not establish the stronger behavior suggested by their names/comments.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.20 — Substitution needs statement routing and receiver protection
 
 Ordinary bare-g substr/regex_subst controls agree, but quoted flags select different Perl paths. Inside callbacks, Perl emits unsupported-helper markers even for unrelated scalar targets; descriptors show unresolved=1/ready=0 while execution continues. Rust performs substitution but its receiver_write_attempt omits both names before unguarded scalar publication. Ten paired values/errors and actual generated text establish separate .59 repairs; the prior final-assignment gap stays in .58. Neutral success is bounded to its fixtures and does not close either omission.

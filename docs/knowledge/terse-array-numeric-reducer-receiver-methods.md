@@ -12,11 +12,11 @@ answers:
   - "are sum and avg number receiver methods"
   - "what did SPEC-FORMAT-TERSE.7.3 backfill"
   - "which task follows SPEC-FORMAT-TERSE.7.3"
-date: 2026-07-04
+date: 2026-09-07
 status: current
 tags: [spec-format-terse, method-chaining, receiver-dot, array, number, reducers, actionir, rust-parity, oracle, mdbook]
 evidence: "SPEC-FORMAT-TERSE.7.3 backfilled numeric aggregate reducers as pure terminal methods on array/list receivers: `scores.sum()`, `scores.avg()`, `scores.median()`, `scores.range()`, `scores.min()`, and `scores.max()`. Perl lowers them through the existing numeric aggregate helper family, including sorted/take/uniq array-chain inputs. Rust accepts the same receiver methods and also supports the documented single-array `num_min(array_expr)` / `num_max(array_expr)` and word-alias `min(array_expr)` / `max(array_expr)` forms. Reducer receiver methods are terminal; invalid continuations such as `scores.sum().drop_front(1)` return `undef` / JSON `null`. Scalar number receiver methods remain the `.2.3.5.4` `num_*` first-argument family, so reducers are not scalar number receiver links. Hash receiver methods from `.7.1` already covered the useful pure hash surface; mutating/ambiguous helpers remain explicit statement/function forms. Locked by Perl phase0, Rust integration tests, oracle fixture `terse_7_3_array_numeric_reducer_receiver_methods`, mdBook examples, and KM regeneration."
-reverify: "prove -q -Iperl t/phase0_regression.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_7_3 --quiet && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle -- --nocapture"
+reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_7_3 --quiet && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle -- --nocapture"
 ---
 
 `SPEC-FORMAT-TERSE.7.3` is the array/list backfill for numeric aggregate receiver methods.
@@ -44,6 +44,13 @@ This does not add scalar number receiver reducer links. Number receivers still u
 helper family (`score.abs().ceil().add(2)`, `score.min(3)`, etc.). Hash receiver methods from the `.7.1`
 inventory did not need additional backfill in this slice; mutating or ambiguous helpers stay explicit.
 
-The follow-up `SPEC-FORMAT-TERSE.7.4` no-drift sweep is now done. No `SPEC-FORMAT-TERSE` leaf is currently
-pending. `TRACE-OBSERVABILITY` has since closed through `.4.5`, so PNT returns to the active task-tree index unless
-a new terse leaf is split or another active tree is reprioritized.
+The follow-up `SPEC-FORMAT-TERSE.7.4` sweep and `TRACE-OBSERVABILITY.4.5`
+are historical closures. Current work is selected from the active task-tree index.
+
+September reading `SESSION-STARTUP-READING.3.3.21` completes these helper arms:
+num_min/max require every array item to pass scalar_numeric_value; sum/avg/median/
+range instead filter through generic as_number and return undef when no numbers
+remain. This records distinct current consumption paths, not a claim that all
+reducers share the scalar-numeric contract. The dated integration/corpus proof
+above is not rerun. Array-chain slicing also has an independent bounds defect:
+[[rust-array-slice-boundary-panics]], owned by startup `.60`.

@@ -10,11 +10,11 @@ answers:
   - "does Rust generated source preserve callable signatures"
   - "why did Rust variadic result length return zero"
   - "does Rust length work on array values"
-date: 2026-07-12
+date: 2026-09-07
 status: current
 tags: [rust, functions, variadic, rest-parameter, descriptor, staged-parsing, generated-source, length, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.4.2.2 updates rust/linkedspec-core AST/compiler/validation/descriptor models and rust/linkedspec-runtime parser/engine execution. The seven tests in variadic_user_function_contract.rs consume the unchanged neutral fixture through native, serialized, emitted, and generated-plan paths."
-reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test variadic_user_function_contract && cargo test --manifest-path rust/Cargo.toml -p linkedspec-core"
+reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test variadic_user_function_contract && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-core"
 ---
 
 Rust accepts `fn name(fixed, ...rest) { ... }` through the shared spec-defined definition parser. The parser
@@ -34,3 +34,8 @@ Compiled JSON carries the typed signature, so emitted Rust source embeds it and 
 deserializes and runs the same semantics. The neutral receiver case exposed a pre-existing drift:
 `all_values(1, 2, 3).length()` returned `0` because the generic scalar helper converted an array to empty text.
 `length` now returns array cardinality for array values and continues to count Unicode characters for scalar text.
+
+September reading `SESSION-STARTUP-READING.3.3.21` confirms the array-cardinality
+branch, but literal-undef and unbound-name controls return zero rather than the
+reference null. [[rust-scalar-helper-null-and-empty-drift]] and repair `.61`
+qualify scalar edge behavior; the July variadic suite is not rerun by this update.

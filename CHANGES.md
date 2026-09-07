@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.21 — complete helper reading and own slice and scalar boundary repairs
+
+Read baseline-identical engine lines 9279–10777 (1,499 lines / 59,677 bytes), completing helper implementation and the first test group. Eleven paired Rust primary/Perl Get controls plus one Rust-only overflow case confirm out-of-range array panics and scalar undefined/empty semantics drift. Twelve ready descriptors and actual generated/lowered guards establish the mechanisms; .60/.61 own repairs, carriers and public closure after prerequisites. Three neutral contracts pass. Knowledge retains exact literal-undef versus unbound-null evidence and qualifies legacy smoke assertions; runtime/public/policy remain unchanged.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.20 — read helper dispatch and own substitution composition repairs
 
 Read baseline-identical engine lines 7879–9278 (1,400 lines / 65,528 bytes), covering target resolution and helper dispatch through the partial match_end_line arm. Ten paired Rust primary/Perl Get controls and generated/lowered source isolate substitution flag, callback-lowering and receiver-protection gaps; new .59.1-.59.4 own repairs and recurrence after prerequisites. Four neutral contracts pass. Knowledge distinguishes current typed captures from historical implementation and qualifies broad guard claims; runtime/public/policy remain unchanged.
