@@ -183,3 +183,39 @@ The report is retained at
 Its header, call graph and collapsed-stack summary were inspected; the remainder
 is image inventory. Symbol processing also took time after the one-second sample;
 that duration is not part of the sampled interval or proof of a workaround.
+
+## September 7 change-history capacity checkpoint
+
+Reading leaf `SESSION-STARTUP-READING.3.3.39` consumes the completed canonical result for `.3.3.38`.
+Approved host execution passed all nine doctrines, the mandatory backend consumers, managed storage/process
+containment, five relocated primary anchors, both CLI environments at 66/66, and Phase 0 1,032/1,032
+in 1,100 wallclock seconds. That duration belongs to Phase 0, not the whole gate.
+25 optional local gates/matrices were skipped; this does not refresh their historical results.
+At base `77cad4543e72ab304ce2a66b26a876b02cd6d3c4`, staged SHA-256
+`b6202c0fa70e508e3af051569e50db937aebfa1642a36436befc5a0754df3d55` matched the
+receipt before commit and was promoted to `eba1a0edb14463e737003025a8d66ffa4f853801`.
+The accepted log is retained at `.linkedspec-data/scratch/startup97-canonical-permitted.log`:
+174,745 lines / 10,622,371 bytes; SHA-256
+`c17d06e44e22b42392ffe31b346e68fe5ab4fcafaf74b02a9dc6346c453b777b`.
+
+Two one-second samples from that run were completely consumed and hash/size verified. Both record
+macOS 26.6.2 (25G83), a 112 KiB footprint and every sampled frame at `_dyld_start`.
+Times below are local +0200 on September 7. Build duration, sampled pre-main interval and eventual
+test execution are separate measurements; no controlled cold/warm comparison or exact OS cause is established.
+
+| Target; PID / parent | Build | Launch | Sample | Frames | Eventual test pass; seconds |
+| --- | --- | --- | --- | --- | --- |
+| staged AST; 49815 / 45947 | 9m38s | 19:40:46.691 | 19:47:42.943 | 765 | 1/1; 1067.48 |
+| MCP dispatch; 24494 / 92950 | 7m24s | 21:16:46.190 | 21:27:57.660 | 762 | 3/3; 2.55 |
+
+The reports remain in project-local scratch, together with their sample metadata:
+
+| Report | Bytes; lines | SHA-256 |
+| --- | --- | --- |
+| `.linkedspec-data/scratch/startup97-staged-49815.sample.txt` | 1075; 32 | `57101b6788078a9b427277fa43b4e154dba976de529bb6d510aefaaab46363fe` |
+| `.linkedspec-data/scratch/startup97-mcp-24494.sample.txt` | 1051; 32 | `113b1a064b59eb8431030338870f3cbe2978cc06a926f4d0f2d7515c161521af` |
+
+Each command was `bash tools/project_data_run.sh /usr/bin/sample <pid> 1 1 -file <report>`.
+The waits cleared without runtime, target, cache, signing or trust changes. Sampling is not established
+as a workaround. Both sample jobs and the canonical gate are fully consumed; no background result remains
+from this checkpoint.

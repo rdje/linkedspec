@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.39 — Separate completed canonical proof from sampled waits and preserved probes
+
+The accepted .3.3.38 receipt binds its exact staged candidate and committed eba1a0ed. The two macOS samples locate pre-main waits that later cleared; build and test durations are separate, with no new OS-cause claim. Their exact log/report identities are in the existing launch-latency Knowledge card. A static probe rerun exercises its linked runtime, so repair verification must rebuild against newly verified libraries. Unicode map expansions and identity entries retain the pinned contract; public behavior is unchanged.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.38 — Declaration authority and legacy registry metadata have distinct guarantees
 
 Marker construction materializes exact text through live source authority; detached host-returned markers require their own validation under .74. The legacy v1 registry executes a fixed built-in ActionIR adapter, constructs cache-key metadata without caching plans and delegates stitch-policy enforcement to function integration. Its integer helper joins existing .55.1 audit scope. Generated Unicode data remains pinned and regenerated, with subsequent table/evaluator reading still pending. Mandatory rollover preserves exact clean-source segment 4983 (247 lines/18,635 bytes; SHA-256 90ac78b4747014cf1c23511da66b37cd4c1e2e3d100d0b62ef7719e4cbc5bc3a); prior manifest records remain byte-identical. ADR0106 admits only 30 collection files, 29 manifest lines and 16,463 manifest bytes. The final staged canonical receipt is required before landing.

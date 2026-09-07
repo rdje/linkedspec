@@ -59,3 +59,11 @@ Independent assertions verify 28 paired targets, six original returned-marker re
 and six resource-boundary controls; assertions SHA-256
 `459cbd58c047336e9036c5e87eebc371fbfa6406ae692740438f8a5f67dddb42`.
 These host API probes do not establish generated/reconstructed carrier behavior or other backend outcomes.
+
+## September 7 preserved-probe scope clarification
+
+`SESSION-STARTUP-READING.3.3.39` clarifies the reverify commands above: invoking the preserved native
+probe reruns the runtime statically linked during `.3.3.37`. It does not test a subsequently rebuilt or
+repaired runtime. Current-source or repair proof must rebuild the probe against newly verified managed
+libraries and record their identities before rerunning the controls. The original measurements and
+pending repair ownership remain unchanged.

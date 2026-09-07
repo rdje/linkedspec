@@ -51,3 +51,11 @@ Its public validate_and_materialize_provenance obtains source-authorized positio
 text; the private constructor always uses it. Those source checks are absent from the already-measured returned
 JSON path. .74 must define the required validation at that host boundary without weakening the declaration
 constructor or pretending a detached marker alone supplies a live source snapshot.
+
+## September 7 preserved-probe scope clarification
+
+`SESSION-STARTUP-READING.3.3.39` clarifies the reverify commands above: invoking the preserved native
+probe reruns the runtime statically linked during `.3.3.37`. It does not test a subsequently rebuilt or
+repaired runtime. Current-source or repair proof must rebuild the probe against newly verified managed
+libraries and record their identities before rerunning the controls. The original measurements and
+pending repair ownership remain unchanged.

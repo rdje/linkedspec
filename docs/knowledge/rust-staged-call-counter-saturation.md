@@ -34,3 +34,11 @@ Repair .75 must deny exhaustion before dispatch using checked accounting, preser
 behavior and cumulative depth semantics, and verify typed errors, exact counters and carriers.
 No other backend or release-specific result is inferred. Each local run has exit 0 and empty stderr.
 Artifacts, assertions and verified runtime/serde identities are indexed in `staged-target-preparation-gaps.md`.
+
+## September 7 preserved-probe scope clarification
+
+`SESSION-STARTUP-READING.3.3.39` clarifies the reverify commands above: invoking the preserved native
+probe reruns the runtime statically linked during `.3.3.37`. It does not test a subsequently rebuilt or
+repaired runtime. Current-source or repair proof must rebuild the probe against newly verified managed
+libraries and record their identities before rerunning the controls. The original measurements and
+pending repair ownership remain unchanged.

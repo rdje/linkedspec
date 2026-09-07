@@ -94,3 +94,14 @@ the rest of the Rust mappings and evaluator remain subsequent physical reading.
 Fresh managed Unicode checking regenerates the contract and all five backend modules byte-identically and
 passes all twelve independent neutral fixtures: 1,563 lower/1,581 upper mappings and 158/464 property ranges.
 This is generation and neutral-evaluator proof, not a new six-runtime execution claim.
+
+## September 7 Rust lower-map completion
+
+`SESSION-STARTUP-READING.3.3.39` reads lines 207–1706 completely: 1,500 lines / 38,103 bytes,
+SHA-256 `285db242fb8cd77506627568d96f91fd09a5ae4fefad69426331f730f4ea928d`,
+with both the range and full file identical to the reading baseline. This completes the lower mapping table
+through supplementary-plane entries and opens the upper table through U+019A. Lowercase identity entries
+for ligatures and Greek special-casing records are intentional. The upper prefix includes full sharp-s
+expansion to 0053 0053 and U+0149 to 02BC 004E; the maps are not mutual inverses.
+The contextual evaluator is still outside this read range. Fresh managed regeneration and all twelve neutral
+fixtures pass with the unchanged 1563/1581/158/464 counts; this adds no native runtime execution claim.
