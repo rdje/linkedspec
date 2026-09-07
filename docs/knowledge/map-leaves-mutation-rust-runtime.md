@@ -68,3 +68,15 @@ placement, traversal or rollback; those engine bodies retain later reading owner
 Fresh neutral proof again passes four valid/fourteen invalid/five excluded syntax
 cases, ten successes, eight pre-commit failures, six callback/one continuation
 compositions, and 167 base plus 592 composition mutations.
+
+Checkpoint `SESSION-STARTUP-READING.3.3.18` reads the expression guard and source
+site scanner, then the complete `eval_expr` dispatcher. The guard runs before
+expression dispatch and asks `RuntimeContext::active_receiver_write` about the
+resolved target and attempt. Typed nested-write/bang nodes carry explicit spans;
+other forms use the active operation's recorded site, with a zero span fallback.
+The scanner skips quoted strings, tracks the first site per attempt kind and
+converts byte positions to Unicode-scalar offsets. It supplies diagnostic sites;
+runtime binding identity remains the authority for whether a write is guarded.
+This bounded reading does not yet cover the bang traversal/commit coordinator or
+the context identity implementation. Fresh neutral proof again passes 167 base
+and 592 composition mutations; native suites remain the dated milestone evidence.

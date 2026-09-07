@@ -64,5 +64,16 @@ while differences remain separately owned. Fresh binding neutral proof passes 11
 migrations/7 executions/6 invalid selectors/8 constructors; logical proof passes
 17 truthiness cases/10 helpers/3 effects/26 mutations. Native counts above remain dated.
 
+Checkpoint `SESSION-STARTUP-READING.3.3.18` completes the expression dispatcher
+and array-end/child-push helpers. Array-end methods accept only a bare variable
+receiver, mutate its typed array and return the updated aggregate to subsequent
+value-chain calls. A later array-end method in an ordinary chain returns undef.
+Child-push dispatch recognizes a compiled-rule first argument, validates a literal
+index shape before dispatch, reuses a scoped action-edge result when available,
+and then resolves the destination binding. This remains distinct from an ordinary
+bare-target push. Read-only access follows its existing numeric coercion path,
+separate from strict write-path classification. Fresh neutral binding proof again
+passes 11 migrations/7 executions/6 invalid selectors/8 constructors.
+
 Related facts: [[uniform-binding-neutral-contract]], [[perl-uniform-binding-runtime]],
 [[spec-facing-aggregate-selector-retirement-inventory]], [[terse-rust-duck-typed-assignment-parity]].

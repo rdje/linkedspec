@@ -11,7 +11,7 @@ answers:
   - "what diagnostics does Rust callable codeblock invocation emit"
   - "how does Rust reject direct and mutual codeblock recursion"
   - "does emitted Rust execute callable codeblocks"
-date: 2026-07-30
+date: 2026-09-07
 status: current
 tags: [rust, actionir, codeblock, callable, dynamic-scope, diagnostics, generated-source, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.11.4.2 adds bound-codeblock fallback dispatch after static callables, once-only ordered argument evaluation, recursively copied temporary fixed/rest bindings, cleanup-safe restoration, caller-visible nonparameter stores, local results, typed value access, exact portable failures and ordered cycles, plus native/reconstructed/generated-plan/emitted-source proof against every neutral valid and invalid call."
@@ -38,7 +38,23 @@ the closing identity and is restored after failures.
 
 Native execution, `CompiledSpec` JSON reconstruction, generated-plan execution, and independently compiled
 emitted Rust all reuse the same engine and typed record. Generic attached/parenthesized final-block normalization
-remains `FUTURE-PARITY-BACKLOG.11.4.3`; explicit invocation does not promote the full generic capability.
+subsequently landed under `FUTURE-PARITY-BACKLOG.11.4.3`; see
+[[rust-generic-final-codeblock-normalization]] for that separate capability.
+
+## September 7 engine invocation reading
+
+`SESSION-STARTUP-READING.3.3.18` reads complete bound-codeblock invocation and
+execution bodies. A present non-codeblock binding reports `value_not_callable`;
+keyword arguments report their count. Fixed/rest arity is checked before entering
+the active-name stack. Parameter bindings are installed individually, with a fresh
+rest array, and restored in reverse order after body evaluation returns a Result;
+the active codeblock name is then removed before returning that result or error.
+The callable body delegates to `eval_block_value`, whose implementation remains a
+later reading owner. This is source proof of these boundaries, not a new native
+execution result. The neutral contract passes seven literals, eleven calls,
+nine invalid literals, seven invalid calls, four invalid declarations, eight
+contextual forms and 23 mutations. The original native/carrier evidence above
+remains the July milestone record.
 
 Related facts: [[rust-callable-codeblock-literal-state]], [[callable-codeblock-literal-contract]],
 [[perl-callable-codeblock-dynamic-invocation]], [[variadic-callable-signature-seams]].

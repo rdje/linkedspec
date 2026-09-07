@@ -85,3 +85,14 @@ array/hash store or writes the scalar-held root and returns that root. The recur
 construction body begins at the next owned window, so its internal traversal and
 rollback details are not newly proved here. Fresh neutral write proof remains
 5/7 syntax, 11 successes, 16 structural failures and 105 mutations.
+
+Checkpoint `SESSION-STARTUP-READING.3.3.18` completes that recursive body at
+engine lines 4888–4986. Harray selection replaces or inserts the final key; an
+absent intermediate is created from the following selector. Array selection
+rejects index greater than length before indexing, appends at length, and replaces
+an existing final slot. Existing intermediates recurse without null replacement,
+so a wrong kind reports the current path prefix and authored segment span.
+The coordinator's detached root is published only after successful recursion.
+Read access separately coerces numeric indices and returns undef for absent or
+wrong-kind values; it neither invokes this writer nor creates containers.
+Fresh neutral proof retains the counts above; no native carrier suite is rerun.

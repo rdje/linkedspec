@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.18 — Function stores and temporary callable parameters
+
+Named user functions take the caller's variable stores and install fresh fixed/rest bindings; callable values temporarily replace only their parameter bindings while using the caller's other stores. Both restore state after body evaluation returns a Result. Expression guards ask RuntimeContext about resolved identity before evaluation; source scanning supplies diagnostic spans. Recursive writes operate on the coordinator's detached snapshot and cannot publish a partial path. These are bounded source observations supported by four neutral contract checks, not fresh native execution.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.17 — Action collection and mutation snapshot boundaries
 
 Explicit repeated action values and lifecycle return control remain separate. Native gap timing agrees with the generated loop while preserving unflagged selection order. Nested-write structural work starts after all path/RHS evaluation and classification; its coordinator commits only after recursive construction returns successfully. Four native diagnostic controls confirm dense append/gap behavior and a saturated write index: exact 2^64 is reported as usize::MAX, while the next representable larger value is an invalid selector. Existing .55.1 owns repair; hashes, retained harness and precise limits are in the numeric Knowledge card. Three prior CLI controls expose only generic invocation failure.

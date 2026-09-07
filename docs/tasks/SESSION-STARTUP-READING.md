@@ -1252,12 +1252,16 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.17 - read native action loops and nested-write coordination`
 
 - ID: `SESSION-STARTUP-READING.3.3.18`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 18: 1,498 lines/fragments, 58,503 bytes.
   Scope: `rust/linkedspec-runtime/src/engine.rs` lines 4888–6385.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Read engine lines 4888–6385 completely with prior coordinator context, current/baseline identity and suffix ownership; retrieve Knowledge for nested writes, receiver mutation and expression execution; selected managed direct-dependent neutral contracts and bounded claim verification; both history checks, explicit memory, derived Knowledge, staged diff and all nine pre-commit doctrines. No runtime/public/policy repairs before startup prerequisites.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS: complete range/current-baseline identity; four managed neutral contracts; bounded Knowledge claim review; history/explicit memory/derived Knowledge/staged diff/all nine pre-commit doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.18 - read recursive writes and expression invocation scopes`
 
 - ID: `SESSION-STARTUP-READING.3.3.19`
   Status: `pending`
@@ -3487,7 +3491,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.18` | `pending` | continue engine reading at lines 4888–6385. |
+| 1 | `SESSION-STARTUP-READING.3.3.19` | `pending` | continue engine reading at lines 6386–7878. |
 
 ## Reading Ledger
 
@@ -3498,7 +3502,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.17` are reconciled and `.3.3.18`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.18` are reconciled and `.3.3.19`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -5992,6 +5996,15 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - Nested writes evaluate segments left-to-right then RHS before classification and binding snapshot. Classification retains authored spans and evaluated path prefixes; the coordinator publishes only after recursive construction succeeds. Recursive helper internals and full guard/evaluator bodies remain later reading. Four native diagnostic controls confirm dense append/gap behavior and a saturated write index: exact 2^64 is reported as usize::MAX, while the next representable larger value is an invalid selector. Existing .55.1 owns repair; hashes, retained harness and precise limits are in the numeric Knowledge card. Three prior CLI controls expose only generic invocation failure.
 - Six managed neutral checks pass: gap 9 complete/63 semantic/34 public mutations; repeated result 8 modes/10 specials/8 complete/54 mutations; write 5/7 syntax/11 successes/16 structural failures/105 mutations; binding 11 migrations/7 executions/6 invalid selectors/8 constructors; callable 7 literals/11 calls/23 mutations; logical 17 truthiness/10 helpers/3 effects/26 mutations. Historical native/carrier counts remain dated. Codebase No; physical book Yes, formal alignment and runtime/public/policy repairs remain pending.
 
+### Recursive writes and expression invocation scopes at `.3.3.18`
+
+- Activated from clean `1f38a1eae9fda6c487d32e0fad783f15f6f67d9e` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read engine lines 4888–6385 in four 300-line chunks and one 298-line chunk: 1,498 lines / 58,503 bytes; full-file and range identity match baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`. Range SHA-256 `ccca6acdfb4fd3c40a827d0fc600effd2d6d446ce76224504e4cc0919ed8e0e0`. Recursive writer, array-end/child-push helpers, guard/site scanner, full expression dispatch, user-function/codeblock invocation and method classifiers are complete. `.3.3.19` owns the trailing-block chain continuation from 6386; bang traversal and context identity internals remain unread.
+- Recursive writes build missing intermediates from the following selector, reject kind conflicts and array gaps with exact path/span context, and publish only through the preceding coordinator on success. Read access keeps its separate numeric-coercion/undef behavior. Array-end mutations start only on bare receivers and pass their updated array to subsequent value calls; child-push resolves compiled-rule dispatch before its destination and may reuse the scoped child result.
+- Expression guards precede evaluation and delegate active target identity to RuntimeContext. Source scanning supplies first-per-attempt diagnostic sites with Unicode-scalar conversion, not identity authority. Expression dispatch keeps lazy controls, typed progressive/staged/recognition nodes, eager user-function arguments, inert codeblock construction and receiver families separate. Recognize-once cancels its scope on child error; observation finishes and stores its descriptor before returning the child Result.
+- Named functions take/restore all caller stores around fresh fixed/rest bindings; callable values install/restore parameters individually around the caller's other stores. Both clean up after body Result. Complete body evaluation, helper fallback, context identity and traversal internals retain later owners. Five Knowledge owners distinguish current source observations from dated native/carrier evidence; the user-function corpus count is historical and the codeblock card points to the subsequently completed generic normalization.
+- Four managed neutral checks pass: write 5/7 syntax/11 successes/16 structural failures/105 mutations; bang 4/14/5 syntax, 10 successes/8 pre-commit failures/167 base + 592 composition mutations; callable 7 literals/11 calls/23 mutations; binding 11 migrations/7 executions/6 invalid selectors/8 constructors. No fresh native run, runtime change or new defect claim; codebase No, physical book Yes and formal alignment/repairs remain pending.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -6065,7 +6078,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.3.14` is item 73/100 at `7d6c9f8b`;
   `.3.3.15` is item 74/100 at `69dacfc6`;
   `.3.3.16` is item 75/100 at `b06b27cf`;
-  `.3.3.17` is item 76/100 once committed.
+  `.3.3.17` is item 76/100 at `1f38a1ea`;
+  `.3.3.18` is item 77/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -6206,6 +6220,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.15` | Exact engine-range/current-baseline identity; seven managed neutral checks; managed CLI build and seven paired split cases (five differences/two equal controls), .33 ownership and exact log/binary hashes; Knowledge/history/memory/staged diff/all nine pre-commit doctrines | PASS source/neutral proof and bounded split diagnosis; .33 owns contract review and repair; engine continuation stays pending. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.16` | Exact range/current-baseline proof; four managed neutral contracts; generated validation and invocation order reading; Knowledge/history/memory/staged diff/all nine pre-commit doctrines | PASS bounded source and neutral proof; .41.2 owns stale comments, engine regex loop remains pending. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.17` | Exact source identity; six managed neutral contracts; four native diagnostic controls/field assertions and exact retained artifacts; .55.1 ownership; Knowledge/history/memory/staged diff/all nine pre-commit doctrines | PASS bounded reading/neutral proof and exact index diagnosis; .55.1 repair and recursive writer continuation remain owned. |
+| `2026-09-07` | `SESSION-STARTUP-READING.3.3.18` | Exact source identity; four managed neutral contracts; invocation/guard/write Knowledge review; history/memory/derived Knowledge/staged diff/all nine pre-commit doctrines | PASS bounded reading/neutral proof; preserve later traversal/context/body ownership. |
 
 ## Commit Log
 
@@ -6288,6 +6303,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.3.15` | `SESSION-STARTUP-READING.3.3.15 - read generated engine loops and audit split boundaries` | Read generated action/blind loops, preserve exact scope, and annotate measured split boundaries under existing .33. |
 | `SESSION-STARTUP-READING.3.3.16` | `SESSION-STARTUP-READING.3.3.16 - read engine invocation routes and entry dispatch` | Reconcile execution projections, diagnostic stages and precedence, generated validation ownership and parent-result ordering. |
 | `SESSION-STARTUP-READING.3.3.17` | `SESSION-STARTUP-READING.3.3.17 - read native action loops and nested-write coordination` | Read native loops/control and nested-write evaluation order; preserve exact diagnostic evidence and following traversal scope. |
+| `SESSION-STARTUP-READING.3.3.18` | `SESSION-STARTUP-READING.3.3.18 - read recursive writes and expression invocation scopes` | Complete recursive-write and expression/callable invocation reading with separate function/codeblock scope boundaries. |
 
 ## Changelog
 
@@ -6414,3 +6430,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-07`: `.3.3.15` reads the complete group-15 engine range, records generated-loop and diagnostic/helper boundaries, and preserves exact split controls with existing .33 repair ownership.
 - `2026-09-07`: `.3.3.16` reads all group-16 bytes, reconciles invocation/diagnostic/observation boundaries, and retains .41.2 comment repair plus the native regex-loop continuation.
 - `2026-09-07`: `.3.3.17` reads group 17 completely, reconciles native action/control and write coordination, and retains exact numeric-boundary repair plus recursive-write continuation ownership.
+- `2026-09-07`: `.3.3.18` reads group 18 completely, reconciles recursive writes, guards and callable scopes, and retains trailing-block/traversal continuation ownership.

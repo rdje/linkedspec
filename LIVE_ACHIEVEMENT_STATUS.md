@@ -5,21 +5,23 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.17` are reconciled and `.3.3.18`–`.3.3.66` plus closeout remain pending.
+  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.18` are reconciled and `.3.3.19`–`.3.3.66` plus closeout remain pending.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.57` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.3.17` reads 1,493 engine lines / 60,008 bytes covering native action loops, statement controls and nested-write coordination.
-  This is item 76/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.3.18` reads 1,498 engine lines / 58,503 bytes covering recursive writes, receiver guards and expression/function/codeblock invocation.
+  This is item 77/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.3.18`: continue engine reading at lines 4888–6385.
+- Activate `SESSION-STARTUP-READING.3.3.19`: continue engine reading at lines 6386–7878.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-07` — `SESSION-STARTUP-READING.3.3.18` reads recursive writes, expression guards and invocation scopes; retains trailing-block/traversal continuation.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.17` reads native regex/action loops, statement controls and nested-write coordination; retains recursive traversal ownership.
 
@@ -60,9 +62,6 @@
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.3` reconciles callable traversal and compiler prefix (1,499 lines / 56,169 bytes).
   Existing .45/.47 findings stay owned; neutral checks do not claim native-suite execution.
-
-- `2026-09-07` — `SESSION-STARTUP-READING.3.3.2` reconciles six Rust reading scopes (1,483 lines / 59,455 bytes).
-  Locked metadata contradicts README 1.85+; .41.2/.41.7 own related comments and public claims.
 
 ## History
 
