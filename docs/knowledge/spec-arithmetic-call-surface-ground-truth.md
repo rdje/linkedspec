@@ -16,11 +16,11 @@ answers:
   - "what is the next task after SPEC-FORMAT-TERSE.3.2.3.2"
   - "what is the next task after SPEC-FORMAT-TERSE.3.2.3.3"
   - "what is the next task after SPEC-FORMAT-TERSE.3.2.3.4"
-date: 2026-07-02
+date: 2026-09-07
 status: current
 tags: [spec-format-terse, arithmetic, comparison, helper-aliases, parser, rust-parity, mdbook]
 evidence: "SPEC-FORMAT-TERSE.3.2 split + SPEC-FORMAT-TERSE.3.2.1/.3.2.2/.3.2.3.3/.3.2.3.4 implementations; TOOLBOX call_spec_handler_subst/runtime/flow probes; perl/LinkedSpec/ActionIR/MethodExpr.pm; perl/LinkedSpec/ActionIR/FlowExpr.pm; perl/LinkedSpec/ActionIR/MethodLowering.pm; perl/LinkedSpec/ActionIR/AST/Parser.pm; perl/LinkedSpec/Validation.pm; perl/LinkedSpec/BootstrapSpec/Core.pm; rust/linkedspec-core/src/expr.rs; rust/linkedspec-core/src/validation.rs; rust/linkedspec-runtime/src/engine.rs; rust/linkedspec-runtime/tests/corpus/terse_3_2_2_arithmetic_symbol_callees; rust/linkedspec-runtime/tests/corpus/terse_3_2_3_3_numeric_comparison_word_aliases; rust/linkedspec-runtime/tests/corpus/terse_3_2_3_4_numeric_comparison_symbol_callees; docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md"
-reverify: "perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm && perl -Iperl -c perl/LinkedSpec/ActionIR/FlowExpr.pm && prove -q -Iperl t/phase0_regression.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_3_2_3_4_numeric_comparison_symbol_callees_run && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle"
+reverify: "perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm && perl -Iperl -c perl/LinkedSpec/ActionIR/FlowExpr.pm && prove -q -Iperl t/phase0_regression.t && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_3_2_3_4_numeric_comparison_symbol_callees_run && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle"
 ---
 
 # SPEC-FORMAT-TERSE.3.2 Arithmetic/Comparison Call Surface Ground Truth
@@ -54,7 +54,7 @@ reverify: "perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm && perl -Ip
 The accepted call-shape decision is one uniform `callee(args)` grammar with word and symbol callees. The
 Lisp-prefix `(op a, b)` / `(ge a, b)` surface is not added.
 
-The `.3.2` split frontier is:
+The historical `.3.2` split frontier recorded on 2026-07-02 was:
 
 - `.3.2.1`: done; non-conflicting numeric word aliases for arithmetic, single/multi-value helpers, and reducers.
 - `.3.2.2`: done; arithmetic symbol callees such as `+(a,b)`.
@@ -69,4 +69,7 @@ The `.3.2` split frontier is:
 - `.3.3.2`: done; direct-shape assignment expression values ship on Perl/Rust, with current storage behavior
   superseded by the later `.11` duck-typed assignment facts.
 - `.3.3.3`: done; array append and hash-index mutation expression values ship on Perl/Rust.
-- `.3.3.4`: current next task; legacy function spelling cleanup and full assignment-expression closure.
+- `.3.3.4`: next at that historical checkpoint; later completed under [[terse-assignment-expression-closure]].
+
+The 2026-09-07 reading checkpoint `SESSION-STARTUP-READING.3.3.7` confirms the later closure pointer.
+Current work belongs to the live task-tree frontier; this historical list must not reopen completed work.

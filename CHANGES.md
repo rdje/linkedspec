@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.7 — read Rust lexical boundaries and own hash and cat repairs
+
+Read callable/literal/postfix parsing and the expression-test prefix against the unchanged baseline. Six Rust CLI/Perl lowering controls establish adjacent hash-colon loss; three paired native controls establish one-argument cat divergence, with constants and two-argument controls agreeing. Root-cause both mechanisms and own .50/.51 before recording exact Knowledge evidence. Retain .49's limits and qualify the arithmetic card's historical next-action wording. No runtime or public-book change.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.6 — read Rust expression parsing and retain boundary repair evidence
 
 Read the Rust expression-parser continuation through nested writes, receiver mutation, staged scalar declarations, expression dispatch and brace classification. Reconcile unchanged source with the existing malformed-rule, Unicode diagnostic and mutation-whitespace controls. Clarify hash-key expression identity and managed mutation/hash reverify commands in Knowledge. No runtime or public-book change; all repairs remain pending.

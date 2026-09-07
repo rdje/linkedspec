@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.7 — lexical observations and historical milestones need separate limits
+
+A probe's positive control must establish that its code ran. No-edge Perl E cases returned zero for both cat arities, so known .27 debt made them unsuitable; explicit action-edge controls isolate the helper difference. The hash matrix separately shows a single colon swallowed by name scanning and the initializer lost through .45. Own both causes before durable findings, retain exact commands, and avoid inferring untested arities or other backends.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.6 — successful parsing is distinct from compiled carrier acceptance
 
 The mutation parser trims empty parentheses while later compiled source projection currently expects the exact empty spelling; the existing repair must align those boundaries while retaining authored spans. UTF-8 diagnostic snippets must likewise respect character boundaries even though the parser cursor is a byte offset. Hash keys remain ordinary expressions, so literal identity comes from quoting rather than an assumed bare-key conversion.

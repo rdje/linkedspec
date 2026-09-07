@@ -35,7 +35,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`, `SESSION-STARTUP-READING.50`, `SESSION-STARTUP-READING.51`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -1071,12 +1071,21 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.6 - read Rust expression parsing and retain boundary repair evidence`
 
 - ID: `SESSION-STARTUP-READING.3.3.7`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 7: 1,497 lines/fragments, 56,871 bytes.
   Scope: `rust/linkedspec-core/src/expr.rs` lines 2958–4454.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact lexical/test range/current-baseline proof; existing arithmetic/hash/callable and .49 Knowledge; neutral callable contract; historical assignment-closure pointer; six asserted Rust CLI/Perl lowering hash controls; three paired native cat controls; task-first .50/.51 ownership; Knowledge/memory/all doctrines/history and final scope/diff.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Owned expr.rs lines 2958–4454 fully read: 1,497 lines / 56,871 bytes; exact range hash and complete
+    current file match baseline. Neutral callable checks pass 7/11 literals/calls, 9/7 invalid cases,
+    four invalid declarations, eight contextual forms and 23 mutations. Six asserted Rust CLI/Perl lowering
+    hash controls establish adjacent-colon loss; three paired explicit-edge Rust CLI/Perl Get controls
+    establish one-argument cat divergence. .50/.51 own repairs before Knowledge. Prior .49 evidence retains
+    its limits. Required continuity checks pass before commit; no runtime repair is claimed.
+  Commit: `SESSION-STARTUP-READING.3.3.7 - read Rust lexical boundaries and own hash and cat repairs`
 
 - ID: `SESSION-STARTUP-READING.3.3.8`
   Status: `pending`
@@ -3093,11 +3102,46 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     absence was verified.
   Commit: `pending`
 
+- ID: `SESSION-STARTUP-READING.50`
+  Status: `pending`
+  Goal: Preserve adjacent colon separators after dynamic bare Rust hash keys.
+  Dependencies: `.3`/`.4`/`.5`; coordinate malformed-block propagation with `.45`.
+  Acceptance: Distinguish the single hash-pair colon from supported identifier/namespace syntax without
+    requiring whitespace before the separator. Preserve evaluated dynamic keys and literal quoted keys;
+    cover spaced/compact, parenthesized/computed, nested and Unicode key expressions, namespace and keyword
+    negative controls, and exact AST/source spans. Verify parser/native and supported reconstructed/generated
+    routes, with independent Perl lowering/portable authority. Add recurrence and accurate book examples.
+    Coordinate .45 so invalid source rejects while these valid key forms retain their initializer.
+  Verification: `pending` repair — six asserted managed Rust CLI/Perl Toolbox lowering controls show
+    spaced and left-space bare keys, compact quoted keys, and compact two-argument computed keys returning
+    {"a":7} on Rust. Bare key:7 and key: 7 instead return null with expected-colon warnings at positions
+    23/24, despite compile:ok/invoke:ok. Perl lowers all six without an unsupported marker. parse_name
+    consumes the colon as an identifier character before parse_hash_literal expects its separator.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.51`
+  Status: `pending`
+  Goal: Reconcile and repair Rust cat minimum-arity divergence against the supported helper contract.
+  Dependencies: `.3`/`.4`/`.5`; coordinate public cat teaching with `.28.5`.
+  Acceptance: Establish the portable minimum-arity and invalid-call result/diagnostic boundary from current
+    authority, then align Rust without silently widening the public helper. Cover zero, one, two and
+    variadic scalar arguments, null/aggregate failures, evaluated-argument effects and helper-name shadowing;
+    verify native and supported reconstructed/generated/emitted routes plus public recurrence. Preserve
+    accepted two-or-more concatenation behavior and existing source provenance. Split implementation and
+    cross-backend admission if needed; ask only if normative authority remains ambiguous after reconciliation.
+  Verification: `pending` repair — a constant control and two-argument cat both return their expected
+    text through Rust primary CLI and Perl public Get on an explicit action-edge spec. cat("a") returns
+    "a" on Rust and null on Perl, with no exceptions, recorded last_error, or stderr. Perl lowering requires
+    at least two arguments (MethodLowering.pm 5330–5332); Rust engine.rs 8213–8222 concatenates converted
+    arguments without an arity guard. The public helper table spells cat(value, value, ...). Earlier no-edge
+    E probes returned zero for both Perl cases and are excluded as arity evidence under known .27 debt.
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.7` | `pending` | reconcile callable and literal parsing plus expression tests, retaining the regex-newline repair. |
+| 1 | `SESSION-STARTUP-READING.3.3.8` | `pending` | read the remaining expression tests, core library entrypoint, and parser prefix. |
 
 ## Reading Ledger
 
@@ -3108,7 +3152,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.6` are reconciled and `.3.3.7`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.7` are reconciled and `.3.3.8`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -5283,6 +5327,46 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   routing. Neutral mutation checks verify their declared contract only; they do not close the observed
   acceptance gaps or rerun all native/generated consumers. No runtime or public-book change.
 
+### Rust lexical boundaries and expression test reading at `.3.3.7`
+
+- Activated from clean `cbd871c6a6ae53dd91e5eddbd4c73b8fefda0cd7` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Reconcile the fully read forward expr.rs range preserved in 611d7b5c's commit body: lines 2958–4454,
+  1,497 lines / 56,871 bytes; SHA-256
+  83ff42b72d5dd9222751deb14c81e889da99c2c937ceb0b0e388f32e3f180788.
+  The complete current file remains baseline-identical; remaining expression tests begin at line 4455.
+- Callable literals preserve authored body/source and containing character-base spans. Brace scanning
+  skips quoted/regex literals; top-level hash classification excludes namespace and nested colons while
+  retaining retired fat-arrow recognition solely to route source to the rejection diagnostic.
+- Dedicated recognition intrinsics require static bare operands and exact call(rule) shape. Established
+  helper/receiver trailing blocks use the builtin callable forms and exact arities; candidate mode instead
+  defers complete-registry normalization. Postfix literal-string keys remain distinct from expression indexes.
+- Keyword-name recognition is ASCII; ordinary names permit Unicode alphanumeric characters and colons.
+  Strings retain authored escaped content. Numeric parsing accepts signed integer/decimal prefixes without
+  swallowing following fluent chains. These are lexical/source facts, not new cross-backend promises.
+- Regex literal parsing consumes suffix letters after skipping whitespace. The already measured .49
+  defect loses a newline before a following identifier; the .45 rule-block fallback then hides the parse
+  failure. Preserve the four native CLI controls recorded at .3.3.1, and the separate preliminary core
+  build timeout which never ran its source. No failed-build success, fresh .49 native run or repair is claimed.
+- Inline tests cover keyword AST, call-result access, statement versus value marker forms, attached
+  if/switch/while separators, trailing-block contexts, scalar/append/nested-write nodes, and expression
+  hash keys. Reading test definitions does not execute them.
+- Reconcile existing arithmetic/hash/callable Knowledge and the completed assignment-closure pointer;
+  preserve historical roadmap chronology as historical. Record lexical distinctions without duplicating
+  the canonical .49 defect evidence. No runtime, public-book, generated-format or policy change.
+- A new six-control managed Rust CLI/Perl Toolbox lowering matrix isolates adjacent-colon loss after bare
+  hash keys. Four controls return {"a":7}; key:7/key: 7 return null with expected-colon warnings. Perl
+  lowers all six valid forms. parse_name consumes the separator before parse_hash_literal expects it;
+  .45 then drops the initializer. Add repair .50 before Knowledge.
+- The first computed-key control used invalid-on-Perl cat(key), so replace it with cat(key, "").
+  Root-cause the arity difference separately: on a valid explicit-edge fixture, a constant and two-argument
+  cat agree on both runtimes, while cat("a") returns "a" on Rust and null on Perl. Perl lowering requires
+  two arguments; Rust engine.rs 8213–8222 has no arity guard. Add .51 before Knowledge, coordinated with .28.5.
+- The earlier no-edge Perl E cases both returned zero and cannot establish cat behavior; .27 already
+  owns that handler divergence. No zero-argument or other-backend outcome is inferred. Additional diagnostic
+  source coverage is engine.rs 8198–8245 and MethodLowering.pm 5315–5340, without broader reading credit.
+- Preserve exact commands and observed values in rust-hash-separator-and-cat-arity-defects. Public helper
+  spelling and dynamic-key authority are checked; both new repairs remain gated on .3/.4/.5.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -5345,7 +5429,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.3.3` is item 62/100 at `87065401`;
   `.3.3.4` is item 63/100 at `cd0e4ff4`;
   `.3.3.5` is item 64/100 at `2af9c321`;
-  `.3.3.6` is item 65/100 once committed.
+  `.3.3.6` is item 65/100 at `cbd871c6`;
+  `.3.3.7` is item 66/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -5475,6 +5560,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.4` | Four exact reading ranges/current-baseline proof; descriptor/entry/slot Knowledge; neutral slot 5/2/59 and entry 8/3/3/54; .41.2 comment ownership; retained native duplicate rejection; focused continuity | PASS reading and focused neutral proof; source/public-comment repairs pending; codebase reading still No. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.5` | Exact prefix/current-baseline proof; callable/staged/write/control Knowledge; neutral staged 123/129 mutations and write 5/7/11/16/3/3/8/105; retained .45–.47/.49; focused continuity | PASS reading and focused neutral proof; expression suffix and native repairs remain pending. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.6` | Exact continuation/current-baseline proof; mutation/hash/callable Knowledge; neutral mutation 4/14/5/10/8/6/1 and 167+592 mutations; retained .45/.46/.47 controls; focused continuity | PASS reading and neutral contract proof; source boundary repairs remain pending with unchanged diagnostic limits. |
+| `2026-09-07` | `SESSION-STARTUP-READING.3.3.7` | Exact lexical range/current-baseline proof; callable 7/11/9/7/4/8/23; six asserted Rust/Perl-lowering hash controls; three paired native cat controls; .50/.51 task-first ownership; .49 limits; focused continuity | PASS reading and bounded diagnosis; .50/.51 repairs pending; whole-codebase reading still No. |
 
 ## Commit Log
 
@@ -5546,6 +5632,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.3.4` | `SESSION-STARTUP-READING.3.3.4 - read Rust regex resolution descriptors and entry diagnostics` | Read 1,481 compiler/descriptor/entry/error lines; separate projection determinism from native validation. |
 | `SESSION-STARTUP-READING.3.3.5` | `SESSION-STARTUP-READING.3.3.5 - read Rust expression carriers and statement parser prefix` | Read 1,496 expression/statement lines; separate byte cursors, character spans and debug formatting. |
 | `SESSION-STARTUP-READING.3.3.6` | `SESSION-STARTUP-READING.3.3.6 - read Rust expression parsing and retain boundary repair evidence` | Read 1,461 expression-parser lines; retain exact Unicode and mutation-whitespace repair evidence. |
+| `SESSION-STARTUP-READING.3.3.7` | `SESSION-STARTUP-READING.3.3.7 - read Rust lexical boundaries and own hash and cat repairs` | Read 1,497 lexical/test lines; own adjacent hash-colon loss and cat arity divergence as .50/.51. |
 
 ## Changelog
 
@@ -5661,3 +5748,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-07`: `.3.3.4` reconciles regex resolution, descriptor projection, entry precedence and portable diagnostics; owns stale self-edge comments and preserves native duplicate rejection.
 - `2026-09-07`: `.3.3.5` reconciles typed expression carriers and statement parsing; preserves staged declaration authority and exact source-coordinate boundaries.
 - `2026-09-07`: `.3.3.6` reconciles expression parsing, nested writes/mutations and brace classification; links existing UTF-8 and whitespace defects without overstating runtime proof.
+- `2026-09-07`: `.3.3.7` reconciles lexical/test reading and owns confirmed adjacent hash-colon loss and cat arity divergence under .50/.51; retains prior regex repair limits.
