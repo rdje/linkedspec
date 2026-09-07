@@ -49,7 +49,8 @@ exact expected/actual contract fields and guidance to regenerate from the
 original `.spec`; no caller/global policy is inferred.
 
 Typed `execute` roles retain direct top-rule values, compatibility `parse`
-roles retain the historical accumulator envelope, and portable generated trace
+roles ordinarily retain the historical accumulator envelope (recognition plain parse is an exception tracked
+in [[rust-generated-recognition-parse-adapter-gap]]), and portable generated trace
 roles retain source/rule/family identity. Related facts:
 [[rust-generated-source-family-plan]],
 [[rust-generated-source-v1-result-projection]],
@@ -66,3 +67,18 @@ later plan validation is outside this prefix. Emission rejects empty identity an
 typed writes/mutations and compiled slot identities before serializing the spec and encoding source identity.
 The module body and execution adapters remain next. Fresh cursor 36/18/8/60 and generated metadata checks pass;
 the latter's neutral-v1 label does not change the Rust artifact-v2 identity. No emitted module is freshly built.
+
+## September 7 emitter completion
+
+`SESSION-STARTUP-READING.3.3.34` reads 438–1466 and completes this owner. Typed adapters validate artifact
+contract before decoding CompiledSpec, then enforce removed-selector, typed write/mutation, slot and plan
+invariants before selecting an entry and executing. Compatibility adapters use `<inline>` identity without a
+caller-supplied artifact-contract argument. Plan validation checks count, ordered labels, known family and
+typed expected family; and_regex_only/and_bcode_seq decode aliases pass only when the expected family matches.
+Emission still uses the canonical ten spellings. Empty/missing entry diagnostics retain typed stage/context;
+trace roles carry source/entry/family, and output-sink/exit failures remain distinguishable.
+
+Fresh generated, cursor and typed-source neutral proof passes. Actual emitted modules reveal two bounded
+gaps: [[rust-generated-source-literal-encoding-gap]] (.71) and
+[[rust-generated-recognition-parse-adapter-gap]] (.72). These later native controls supersede the prefix
+checkpoint's "no emitted module freshly built" scope limit without converting earlier dated gates into new runs.

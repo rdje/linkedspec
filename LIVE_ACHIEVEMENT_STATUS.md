@@ -5,21 +5,23 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.33` are reconciled and `.3.3.34`–`.3.3.66` plus closeout remain pending.
-- Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.70` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
+  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.34` are reconciled and `.3.3.35`–`.3.3.66` plus closeout remain pending.
+- Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.72` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.3.33` reads complete static/event owners and emitter prefix; paired controls own grouped-edge source/index repairs .70.
-  This is item 92/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.3.34` reads emitter completion and source authority prefix; native modules own literal encoding and recognition parse repairs .71/.72.
+  This is item 93/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.3.34`: read source_emitter.rs lines 438–1466 and source_location.rs lines 1–464.
+- Activate `SESSION-STARTUP-READING.3.3.35`: read source_location.rs lines 465–561, spec_loader.rs lines 1–564 and spec_parser.rs lines 1–836.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-07` — `SESSION-STARTUP-READING.3.3.34` completes emitter reading and owns generated literal and recognition parse adapter repairs .71/.72.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.33` completes static/event reading and owns grouped source/selector correlation plus complete parser remainder .70.
 
@@ -50,8 +52,6 @@
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.20` reads helper dispatch and owns measured substitution flags, callback lowering and receiver-guard repairs .59.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.19` reads traversal/callback/value blocks and owns confirmed final-assignment receiver-guard repair .58.
-
-- `2026-09-07` — `SESSION-STARTUP-READING.3.3.18` reads recursive writes, expression guards and invocation scopes; retains trailing-block/traversal continuation.
 
 ## History
 

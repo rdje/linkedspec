@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.34 — complete emitter reading and own literal and recognition adapter repairs
+
+Completed emitter reading and the source-authority prefix (1,493 lines/53,383 baseline-identical bytes). Seven freshly emitted identity modules expose four Rust literal compilation failures. Two executable generated modules show recognition plain parse and inert-option siblings disagree on result shape; .71/.72 own both mechanisms and recurrence. Generated, cursor and typed-source checks pass. Two new/three existing Knowledge cards preserve evidence and limits; no runtime or public-book repair is made during prerequisite reading.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.33 — complete static semantic reading and own grouped edge correlation repairs
 
 Completed the static semantic projector and observation event types, and read the emitter prefix (1,482 lines/50,376 baseline-identical bytes). Five paired public queries expose grouped selector/source loss and Rust partial parsing of per-target selectors. Three paired execution controls still return the correct "b" value. New .70 separates semantic correlation, complete grammar/remainder handling and backend/carrier recurrence. Semantic, cursor and generated metadata checks pass; one new/four existing Knowledge cards and continuity preserve exact evidence.

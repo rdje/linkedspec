@@ -35,7 +35,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`, `SESSION-STARTUP-READING.50`, `SESSION-STARTUP-READING.51`, `SESSION-STARTUP-READING.52`, `SESSION-STARTUP-READING.53`, `SESSION-STARTUP-READING.54`, `SESSION-STARTUP-READING.55`, `SESSION-STARTUP-READING.56`, `SESSION-STARTUP-READING.57`, `SESSION-STARTUP-READING.58`, `SESSION-STARTUP-READING.59`, `SESSION-STARTUP-READING.60`, `SESSION-STARTUP-READING.61`, `SESSION-STARTUP-READING.62`, `SESSION-STARTUP-READING.63`, `SESSION-STARTUP-READING.64`, `SESSION-STARTUP-READING.65`, `SESSION-STARTUP-READING.66`, `SESSION-STARTUP-READING.67`, `SESSION-STARTUP-READING.68`, `SESSION-STARTUP-READING.69`, `SESSION-STARTUP-READING.70`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`, `SESSION-STARTUP-READING.50`, `SESSION-STARTUP-READING.51`, `SESSION-STARTUP-READING.52`, `SESSION-STARTUP-READING.53`, `SESSION-STARTUP-READING.54`, `SESSION-STARTUP-READING.55`, `SESSION-STARTUP-READING.56`, `SESSION-STARTUP-READING.57`, `SESSION-STARTUP-READING.58`, `SESSION-STARTUP-READING.59`, `SESSION-STARTUP-READING.60`, `SESSION-STARTUP-READING.61`, `SESSION-STARTUP-READING.62`, `SESSION-STARTUP-READING.63`, `SESSION-STARTUP-READING.64`, `SESSION-STARTUP-READING.65`, `SESSION-STARTUP-READING.66`, `SESSION-STARTUP-READING.67`, `SESSION-STARTUP-READING.68`, `SESSION-STARTUP-READING.69`, `SESSION-STARTUP-READING.70`, `SESSION-STARTUP-READING.71`, `SESSION-STARTUP-READING.72`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -1460,13 +1460,17 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.33 - complete static semantic reading and own grouped edge correlation repairs`
 
 - ID: `SESSION-STARTUP-READING.3.3.34`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 34: 1,493 lines/fragments, 53,383 bytes.
   Scope: `rust/linkedspec-runtime/src/source_emitter.rs` lines 438–1466;
     `rust/linkedspec-runtime/src/source_location.rs` lines 1–464.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Read source_emitter.rs 438–1466 and source_location.rs 1–464 with exact baseline identity; Knowledge-first generated module roles, reconstruction/plan validation and typed source coordinate/error/projection authority; selected generated/cursor/typed-source neutral proof and bounded controls only for unresolved evidence; Knowledge/history/memory/staged diff/all nine doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS reading/diagnosis: 1,493 lines/53,383 bytes baseline-identical; eight identity emissions/seven module compiles and two executable modules/ten results, independent assertions; generated10/strictRust105, cursor36/18/8/60, typed14/0/231; .71/.72 owned; Knowledge/history/memory/staged diff/all nine doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.34 - complete emitter reading and own literal and recognition adapter repairs`
 
 - ID: `SESSION-STARTUP-READING.3.3.35`
   Status: `pending`
@@ -4106,11 +4110,27 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: `pending` — current neutral fixtures pass despite these additional grouped controls.
   Commit: `pending`
 
+- ID: `SESSION-STARTUP-READING.71`
+  Status: `pending`
+  Goal: Emit Rust-correct string literals that preserve every accepted source identity.
+  Dependencies: .3/.4/.5.
+  Acceptance: Replace JSON-as-Rust escaping at the typed literal boundary; cover every helper caller, quote/backslash/LF/TAB/Unicode/NUL/backspace/formfeed/U+0001 and literal backslash-u controls. Compile and execute emitted modules to verify exact identity round trips; preserve typed errors, serialized payloads and ten-family plans; update public examples/Knowledge and recurring native generated proof.
+  Verification: `pending` repair — .3.3.34 emits all seven nonempty identity controls successfully; ASCII/quoted-whitespace/Unicode compile, four control-character modules fail at the identity literal. See docs/knowledge/rust-generated-source-literal-encoding-gap.md.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.72`
+  Status: `pending`
+  Goal: Make generated recognition parse adapters preserve a coherent result contract.
+  Dependencies: .3/.4/.5; preserve the established typed-value versus legacy-accumulator distinction.
+  Acceptance: Reconcile recognition's plain-parse exception with all options/trace/sink siblings using actual emitted modules, default options/disabled trace/no-sink controls, entry selectors and unused intrinsics. Preserve direct arrays without unwrap heuristics, correct emitted imports, independent native recurrence and book/Knowledge accuracy.
+  Verification: `pending` repair — .3.3.34 recognition parse returns "ok", while three inert-option siblings return ["ok"]; non-recognition parse roles all return ["ok"]. The plain-parse rewrite also leaves an unused generated import. See docs/knowledge/rust-generated-recognition-parse-adapter-gap.md.
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.34` | `pending` | read source_emitter.rs lines 438–1466 and source_location.rs lines 1–464. |
+| 1 | `SESSION-STARTUP-READING.3.3.35` | `pending` | read source_location.rs lines 465–561, spec_loader.rs lines 1–564 and spec_parser.rs lines 1–836. |
 
 ## Reading Ledger
 
@@ -4121,7 +4141,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.33` are reconciled and `.3.3.34`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.34` are reconciled and `.3.3.35`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -6758,6 +6778,14 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - Scratch startup92-semantic-target-index retains 17 files/51,409 bytes plus 2,609-byte manifest SHA-256 `3fb86ddcf0e1d0b09c35bb7b3b2cdd459b4b9f05ad401ce5594a7d18959a1955`; startup92-semantic-group-selector retains 39 files/90,984 bytes plus 6,124-byte manifest `252da991f555c3d798d6f88e79b638ce3efaacf6c91507f6794e824921c42ef7`, both beneath `.linkedspec-data/scratch/`. Independent assertions455bytes `dc3f6d9fc5697af6d32d499d73315857dc34a87c02ec251f814f323a2f00b5f4`. Verified existing probes/CLI reused with distinct recorded logical names; no full-response equality or new compilation claim.
 - Semantic6/20/128 at9/0,6/0, cursor36/18/8/60 and generated metadata10families/strictRust105 pass. Query runtimes Rust2.551/3.824s, Perl10.897/12.078s; Get11.180s and CLI1.279/1.233/1.246s. All jobs consumed. One new/four existing Knowledge cards preserve exact limits; no runtime/public/policy repair, recovery or purge. Roadmap Yes, codebase No, physical mdBook Yes; formal alignment remains pending.
 
+### Emitter completion, source authority prefix and native generated boundaries at `.3.3.34`
+
+- Activated from clean `d3fd048f37bfa90fe371ef78e174a85ae008aff8` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read source_emitter.rs 438–1466 (1,029 lines/38,547 bytes; SHA-256 `777590070ae77d55f68f0dc673423a1af9dcb8e4b7f99f289219131d27ad785e`) and source_location.rs 1–464 (14,836 bytes; `3d0c9ca29b41093bb9eacf2b79e0f8aa37d6e8eb299f5e454e31267d752eb5a9`). All 1,493 lines/53,383 bytes and full files equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`; every owned range read untruncated. Emitter physically complete; source materialization remains next.
+- Adapters preserve contract-before-decode, typed write/slot/plan validation, selected-entry context and distinct sink/exit errors. Plan checks count/ordered labels/known matching family; two aliases are accepted only for matching families. Typed source values are private and authority-bound with checked unique IDs and exact UTF-8 scalar/LF coordinate tables. Three existing Knowledge cards record these bounds; selected Rust sections of the large rollout card were read after its whole output truncated, not falsely counted as full-card reading.
+- Eight native identity controls emit seven modules and reject empty identity; three ASCII/quoted-whitespace/Unicode modules compile, four control-character modules fail because JSON escapes are emitted as Rust literals. Two actual executable modules/five roles each show ordinary parse siblings all return ["ok"], but recognition plain parse returns "ok" while default-options/disabled-trace/no-sink siblings return ["ok"]. .71/.72 own literal encoding, adapter coherence and the rewrite's unused import; 34 other dead-code warnings belong to uncalled roles in private probe modules. New cards retain exact causes and repair acceptance; no runtime/public repair is claimed.
+- Scratch startup93-generated-boundaries holds 66 files/68,030,768 bytes plus a 13,446-byte manifest SHA-256 `efca34731a315b8f34dbd92d02d9be4ffd00f172fb3b40ef91abda228f795580`; independent assertions: 689 bytes `33d25d8edb7bb7c799465e949ab0c5c94e722a55c10da99fee5609df1e585f64`. Probe compile/run: 283.710/10.529s, runner: 110.168/1.373s; all outcomes consumed, libraries rehashed. Generated10families/strictRust105, cursor36/18/8/60, typed14/0/231 pass. No compiler delay cause, recovery, purge or fresh full gate claimed. Roadmap Yes/codebase No/physical mdBook Yes; formal alignment pending.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -6847,7 +6875,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.3.30` is item 89/100 at `c7134e4d`;
   `.3.3.31` is item 90/100 at `cc23abb9`;
   `.3.3.32` is item 91/100 at `c7c62c96`;
-  `.3.3.33` is item 92/100 once committed.
+  `.3.3.33` is item 92/100 at `d3fd048f`;
+  `.3.3.34` is item 93/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -7004,6 +7033,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.31` | Baseline scope; ADR0049/source review; six paired query and six Get controls; independent signature/count/source assertions; semantic6/20/128; Knowledge/history/memory/staged diff/all nine doctrines | PASS reading/root cause; .67 owns false signature acceptance and composite-call/source omissions. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.32` | Baseline scope; complete query/runtime and static prefix reading; eight native queries/four paired Get-CLI controls; independent assertions; semantic/diagnostic/recognition neutral proof; Knowledge/history/memory/staged diff/all nine doctrines | PASS reading/root cause; normal slot diagnostic correct; .68 token-use and .69 newline repairs owned. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.33` | Baseline scope; static/event/emitter reading; five paired query and three paired Get-CLI controls; independent source/index assertions; semantic/cursor/generated neutral proof; Knowledge/history/memory/staged diff/all nine doctrines | PASS reading/root cause; .70 owns grouped source/selector correlation and complete remainder handling. |
+| `2026-09-07` | `SESSION-STARTUP-READING.3.3.34` | Baseline scope; seven identity module compiles/two executable modules/ten results; independent assertions; generated/cursor/typed-source neutral proof; Knowledge/history/memory/staged diff/all nine doctrines | PASS reading/root cause; .71 literal encoding and .72 recognition parse coherence owned. |
 
 ## Commit Log
 
@@ -7102,6 +7132,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.3.31` | `SESSION-STARTUP-READING.3.3.31 - complete semantic call reading and own signature and container projection repairs` | Complete call projection and distinguish matching query payloads from independently valid semantic evidence. |
 | `SESSION-STARTUP-READING.3.3.32` | `SESSION-STARTUP-READING.3.3.32 - complete semantic query reading and own token use and newline repairs` | Complete query/runtime projection and separate actual token-use/parser gaps from a ruled-out failure-mapping concern. |
 | `SESSION-STARTUP-READING.3.3.33` | `SESSION-STARTUP-READING.3.3.33 - complete static semantic reading and own grouped edge correlation repairs` | Complete static/event reading and distinguish correct grouped execution from incomplete semantic source/index records. |
+| `SESSION-STARTUP-READING.3.3.34` | `SESSION-STARTUP-READING.3.3.34 - complete emitter reading and own literal and recognition adapter repairs` | Complete emitter reading and preserve independently measured generated identity/projection gaps. |
 
 ## Changelog
 
@@ -7244,3 +7275,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-07`: `.3.3.31` completes semantic call reading, reads query prefix and owns signature/composite-call evidence repairs .67.
 - `2026-09-07`: `.3.3.32` completes query/runtime projection and owns .68 authored token-use/.69 variable-newline repairs.
 - `2026-09-07`: `.3.3.33` completes static/event reading and owns grouped semantic source/index and parser-remainder repairs .70.
+- `2026-09-07`: `.3.3.34` completes emitter reading and owns generated literal and recognition adapter repairs .71/.72.

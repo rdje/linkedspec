@@ -97,7 +97,7 @@ answers:
   - "why does typed source recurring composition leave rollout at eight complete and six pending"
   - "why does recursive observation public closeout leave typed source rollout at nine complete and five pending"
   - "how many typed source mutations exist after recursive observation public closeout"
-date: 2026-08-01
+date: 2026-09-07
 status: complete six-runtime typed authoring model with combined recurring and public no-drift
 tags: [architecture, source-location, spans, cursor, helpers, perl, rust, dart, julia, lua, rollout]
 evidence: "FUTURE-PARITY-BACKLOG.14.2.0 retrieved ADR 0056, the neutral contract/checker, adjacent live-ledger contracts, TOOLBOX.md, and exact runtime source/test authorities. Perl uses decoded-string scalar offsets; Rust and Lua use UTF-8 bytes; Dart and Julia use code units. Complete named-mark consumers pass on all six runtimes. The exact contract/checker still encode completed public owners .14.1.2-.3 as pending because both leaves explicitly excluded contract changes, leaving no promotion owner. ADR 0056 section 9 and the owning task freeze the correction and implementation order."
@@ -300,3 +300,14 @@ current byte register. Source slicing clamps start and uses saturating width add
 materialization. Reversed/invalid byte spans remain absent through the authority Result-to-Option adapter.
 Capture maps are detached and key-sorted. Fresh neutral proof remains 14 complete/zero pending/231 mutations;
 these source observations do not rerun native/generated projections.
+
+## September 7 immutable Rust value and authority prefix reading
+
+`SESSION-STARTUP-READING.3.3.34` reads source_location.rs 1–464. Position, direct Span and DerivedText
+keep private authority/source identities, scalar offsets and provenance; cloned records expose no text or live
+owner. SourceAuthority snapshots decoded strings, assigns a checked monotonic AtomicU64 identity and retains
+scalar-boundary UTF-8 byte plus one-based line/column tables. LF increments the line; byte-to-scalar conversion
+requires an exact boundary. Direct spans require matching source/authority and non-reversed offsets; derived
+text requires every span to belong to this authority. Coordinate projection checks authority and range again.
+Materialization and the final helper suffix remain next. Current neutral proof is 14/0/231; this source reading
+does not rerun the older native value/helper/generated consumers or widen the public authored-value boundary.

@@ -1,6 +1,6 @@
 ---
 id: rust-generated-source-v1-result-projection
-title: Rust v2 typed generated execution returns the direct rule value while compatibility parse keeps its accumulator envelope
+title: Rust v2 direct and accumulator projections have a generated recognition parse exception
 answers:
   - "why did the Rust neutral generated fixture return an array around ok"
   - "what result does generated Rust execute return"
@@ -8,7 +8,7 @@ answers:
   - "does typed generated execution match Engine execute_value"
   - "does legacy generated tracing retain the accumulator envelope"
   - "how are portable generated trace roles exposed in Rust"
-date: 2026-07-18
+date: 2026-09-07
 status: current
 tags: [rust, generated-source, result-shape, compatibility, trace, contract]
 evidence: "FUTURE-PARITY-BACKLOG.3.1.3.2 ran capability_conformance/generated_source/fixtures/default_action_result_trace_identity through the typed Rust generated executor. Initial output was [\"ok\"] versus expected \"ok\": execute_generated_with_plan_context discarded the top rule RuntimeValue and returned ctx.accumulator, mirroring legacy Engine::execute rather than already-adopted Engine::execute_value. Engine::execute_generated_value_with_plan and its traced role path now return execute_rule(...).to_json(); typed v1 execute/execute_with_trace use that seam. Legacy generated parse/parse_with_trace continue through accumulator-returning methods. A first full gate caught accidental legacy traced projection drift; trace_controls 10/10 passed after projection was selected explicitly. Focused source_emitter passes 5/5; clean full Rust gate passes 137/105/196/5/5/5/10 plus 61x2 CLI."
@@ -21,10 +21,15 @@ reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --te
 Rust intentionally has two outward result shapes. The portable native API
 `Engine::execute_value` returns the selected rule's value directly; historical
 `Engine::execute` returns the accumulator array. Generated source now mirrors
-that established split:
+that established split for ordinary specifications:
 
 - typed v2 `execute` / `execute_with_trace` return the direct top-rule value;
-- compatibility `parse` / `parse_with_trace` retain the accumulator envelope.
+- ordinary compatibility `parse` / `parse_with_trace` retain the accumulator envelope.
+
+September 7 native emitted-module controls establish a recognition exception: only plain parse returns the
+direct value; default-options, disabled-trace and no-sink siblings still return the accumulator.
+[[rust-generated-recognition-parse-adapter-gap]] records the source rewrite, exact results and .72 repair.
+The earlier gate counts are dated evidence, not a fresh assertion of universal adapter coherence.
 
 The neutral fixture made this observable: the contract value is `"ok"`, not
 `["ok"]`. The fix is a generated-plan-aware direct-value engine seam, not an

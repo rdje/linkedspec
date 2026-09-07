@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.34 — Native emitted modules expose gaps outside the neutral fixture corpus
+
+JSON string encoding does not cover Rust literal syntax for every accepted identity. Separately, recognition emission rewrites only plain parse to direct-value execution; default-options, disabled-trace and no-sink siblings still use the accumulator. Actual emitted-module compilation/execution establishes both limits independently of neutral gate success. .71/.72 own corrected literal boundaries, coherent accepted projections and public recurrence; uncalled private probe roles explain 34 dead-code warnings, while one unused emitted import belongs to the recognition rewrite.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.33 — Correct grouped execution can coexist with incomplete semantic provenance
 
 Rust's semantic selector scan finds Child inside ChildLong and loses its explicit index; Perl joins expanded edges to physical source members and loses the second grouped edge's source/index. Separate-member controls remain correct, and grouped execution still returns b. A different initial selector spelling also exposes Rust's partial group parsing and discarded action remainder. Task .70 separates those mechanisms and requires an authoritative grammar reconciliation before any syntax change; existing fixture equality is insufficient source-correlation proof.
