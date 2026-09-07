@@ -75,10 +75,31 @@ snapshots before terminal/misuse errors. Its restore helper checks Invalidated b
 frame state, unlike the measured Perl gap under [[perl-recognition-invalidated-token-restoration]].
 The nine allowed/eleven rejected effects propagate through a recursive fixed point; missing
 callees introduce unknown effects. Progress policy observes cursor advancement independently
-of payload/boundary/mark changes. Remaining live-runtime adapters stay on the next reading leaf.
+of payload/boundary/mark changes. At that checkpoint, the remaining live-runtime adapters were still unread.
 
 Fresh neutral proof passes 138 node rows/250 calls/58 mutations, token 8/17, six graphs, six
 mark cases and eight progress cases, with rollout 9/9 complete. Public sequence is 3/26/45,
 guide 1/14/18 and admission guards remain Rust 8, Dart 13, Julia 14, Lua authority/integration/
 admission 22/19/22. The August 12-test native counts and then-next Dart/3-of-9 handoffs above
 are historical; this reading does not rerun native recognition or emitted-source consumers.
+
+## 2026-09-07 live frame and RuntimeContext connection
+
+`SESSION-STARTUP-READING.3.3.28` completes recognition_transaction.rs 873–1547 and reads
+runtime.rs 1–821, with all 1,496 lines/56,822 bytes equal to the startup baseline.
+A live frame owns invocation identity, named linear tokens, acceptance/lineage, entry cursor, selected
+match, prior same-label marks, and private gap state. Checkpoint synchronizes actual cursor/boundary/marks
+and captures the private gap cursor/ordinal/candidate alongside the authority snapshot; rollback restores
+both. Commit removes the selected token and delegates the terminal transition. Leave restores an unfinished
+checkpoint when present, otherwise actual frame state, then restores the prior same-label mark bucket.
+RuntimeContext clones share the Arc immutable source and Rc parse authority while retaining byte registers.
+
+A flagged gap starts at the entry cursor with ordinal zero. Candidate selection distinguishes prefix from
+interstitial; committing requires the cursor not precede the selected match end and advances the ordinal.
+Tail spans run from the committed gap cursor to input end. Entry slots are accepted only with matching
+parent identity, active parent candidate and target rule. Public gap spans/text use typed source projection.
+Three gap unit tests were read (unavailable fields, rollback, cursor regression), not freshly executed.
+
+Fresh neutral proof passes recognition 138 rows/250 calls/58 mutations with rollout 9/9; gap has nine
+complete rows/zero pending/63 semantic mutations; typed source has 14 complete/zero pending/231 mutations.
+These catalog/contract checks do not constitute fresh native recognition or alias execution.

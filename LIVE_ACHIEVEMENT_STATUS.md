@@ -5,21 +5,23 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.27` are reconciled and `.3.3.28`–`.3.3.66` plus closeout remain pending.
+  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.28` are reconciled and `.3.3.29`–`.3.3.66` plus closeout remain pending.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.65` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.3.27` reads the remaining primary CLI and recognition authority; passes 66 CLI cases and qualifies the Rust invalidation guard.
-  This is item 86/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.3.28` reads recognition adapters and RuntimeContext source connections; reconciles gap rollback and 92 helper/seven alias catalogs.
+  This is item 87/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.3.28`: read recognition_transaction.rs lines 873–1547 and runtime.rs lines 1–821.
+- Activate `SESSION-STARTUP-READING.3.3.29`: read runtime.rs lines 822–2318.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-07` — `SESSION-STARTUP-READING.3.3.28` completes recognition adapter reading and reconciles gap, typed helper and incoming conversion boundaries.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.27` completes CLI reading, passes 66 default cases and reconciles recognition authority guards.
 
@@ -50,9 +52,6 @@
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.14` reads child invocation, diagnostic types and engine definitions; preserves .37 and subsequent engine ownership.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.13` Read core tests and the bounded-child prefix; preserve exact proof limits and prior canonical intake.
-
-- `2026-09-07` — `SESSION-STARTUP-READING.3.3.12` reads validation/descriptor tests (1,490 lines / 54,844 bytes), core21 green.
-  Paired native/descriptor controls establish .56 helper shadowing and .57 selector loss.
 
 ## History
 

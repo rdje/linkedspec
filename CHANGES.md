@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.28 — complete recognition adapters and read RuntimeContext source connections
+
+Completed recognition runtime reading and read RuntimeContext 1–821: 1,496 lines/56,822 baseline-identical bytes. Reconciled frame/gap rollback, source authority and 92 helper/seven alias catalogs. Fresh neutral recognition, gap and typed source checks pass at 9/9, 9/0/63 and 14/0/231 respectively. Existing .55.1 now includes the incoming JSON bridge and its progressive/typed-record consumers as source inventory; no new runtime defect was measured.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.27 — complete primary CLI and read recognition authority guards
 
 Read the remaining primary CLI and recognition authority prefix (1,500 lines; 50,300 baseline-identical bytes), plus 68 restoration helper lines. The existing Rust command passes all 66 shared default cases; neutral recognition passes 138/250/58 at complete 9/9. Rust's restoration helper returns before touching state for an invalidated token, qualifying the existing .38 census without a fresh behavioral claim. Knowledge now distinguishes current trace metadata/rollout from historical counts and preserves the already-owned process-group warning recurrence.

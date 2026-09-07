@@ -31,7 +31,7 @@ date: 2026-09-07
 status: Rust authored, native, reconstructed, descriptor, generated-plan, emitted, primary-command, and private admission roles are signoff-complete under .3.1-.3.5; parent .3 is closed for intended atomic 232
 tags: [capture, segmentation, rust, parser, lifecycle, transaction, generated-source, emitted-source, admission]
 evidence: "INTER-MATCH-GAP-CAPTURE.3.5 starts from clean atomic-231 commit c3326f6d. Primary-first RED is Rust E0425 for the absent primary_command_gap_contract owner; admission RED reports rust_runtime rollout drift before promotion. GREEN uses the existing run_with_context adapter on alpha, beta | gamma\\n- delta and returns exact item/gap pairs for empty prefix, comma, pipe, and bullet/newline separators. The ordinary consumer validates the nine contract roles in declared order and completes each once. Neutral governance passes 3 complete + 6 pending / 56 semantic mutations plus 10 Rust admission mutations; the rooted driver passes neutral, Perl 124, Rust 1/1, then four exact later-runtime skips. Runtime 170/170, recognition 12/12, recursive observation 7/7, cursor, duplicate-slot, source-emitter, typed-source, and recognition ledgers remain green. Generated plan v2, recognition 137/246/58, public helpers 122, typed source 9/5/114, outward surfaces, later runtimes, and recurring/public rows do not move. Definitive signoff passes the 17-owner Rust storage oracle, rendered book 79 files / 14,732 KiB, Knowledge 835 facts / 7,020 keys, all eight doctrines, canonical containment/relocation, CLI 66/66 twice, RAM 73%, Phase 0 1,031/1,031, exact rooted routing, and local-CI exit 0; the sandboxed precursor stops only at expected nested-sandbox status 71."
-reverify: "bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test inter_match_gap_capture_contract contract_declared_rust_roles_execute_once_and_only_once -- --exact && bash tools/check_inter_match_gap_capture_six_runtime.sh"
+reverify: "bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py && bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test inter_match_gap_capture_contract contract_declared_rust_roles_execute_once_and_only_once -- --exact && bash tools/check_inter_match_gap_capture_six_runtime.sh"
 ---
 
 # Rust implementation freeze
@@ -227,3 +227,13 @@ proof passes 9 complete/0 pending, 63 semantic and 34 public mutations.
 Related: [[inter-match-gap-executable-contract-plan]], [[inter-match-gap-recurring-governance]],
 [[inter-match-gap-perl-implementation-plan]], [[rust-duplicate-regex-slot-identity-admission]],
 [[recognition-transaction-neutral-contract]], and ADR `0045`.
+
+## 2026-09-07 recognition adapter reading reconciliation
+
+`SESSION-STARTUP-READING.3.3.28` completes the recognition runtime source and reads its RuntimeContext
+connection. Checkpoints preserve the committed gap cursor, accepted-edge ordinal and detached candidate
+in addition to cursor/boundary/mark authority state. Rollback restores that private gap snapshot; gap commit
+rejects cursor regression before advancing the ordinal. Entry-slot lineage checks parent invocation,
+active candidate and target rule. Gap helper values use the immutable source authority for typed spans/text.
+The three adapter unit tests were read, not rerun. Fresh neutral gap proof remains nine complete/zero
+pending, 63 semantic mutations, and public documentation 8 documents/15 denials/10 guards/34 mutations.

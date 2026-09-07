@@ -161,3 +161,12 @@ build's stable library artifact instead of assuming the recorded hashed archive 
 bash tools/project_data_run.sh rustc --edition=2024 --crate-name startup76_write_index_probe .linkedspec-data/scratch/startup76-write-index-native/probe.rs -L dependency=rust/target/debug/deps --extern linkedspec_runtime=rust/target/debug/liblinkedspec_runtime.rlib -o .linkedspec-data/scratch/startup76-write-index-native/probe &&
 bash tools/project_data_run.sh .linkedspec-data/scratch/startup76-write-index-native/probe
 ```
+
+## 2026-09-07 incoming JSON bridge source inventory
+
+`SESSION-STARTUP-READING.3.3.28` reads runtime.rs 1–821, including `runtime_value_from_json`.
+It recursively maps JSON null, bool, string, array and object into RuntimeValue; JSON numbers pass through
+`as_f64().unwrap_or(0.0)`. Progressive span-dispatch results and typed source records use this bridge.
+The existing `SESSION-STARTUP-READING.55.1` round-trip/conversion audit now explicitly includes these
+incoming consumers. This adds source inventory only: no new numeric failure or reachable fallback-to-zero
+case was measured, and it does not broaden the prior saturation result.
