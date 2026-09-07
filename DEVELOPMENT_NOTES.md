@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.4 — projection policy does not establish native source acceptance
+
+The descriptor can deterministically project supplied compiled state containing repeated labels; the native source pipeline separately rejects duplicate authored labels. Entry selection likewise borrows state without rewriting authored markers. Compiler self-edges reuse existing regex slots despite a stale duplication comment, and later slot validation constrains earlier warning branches. Keep each claim attached to its actual pipeline boundary.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.3 — normalization and diagnostics have distinct compiler boundaries
 
 The callable visitor restores ordinary eager blocks while recursively normalizing contextual blocks. Whole-spec validation then handles removed selectors, typed write/mutation state, and recognition reachability at separate boundaries. Rule-block parse fallback remains a confirmed repair, so successful compilation alone cannot demonstrate that authored lifecycle code survived. Repeated I accumulation is distinct from the other single lifecycle slots.

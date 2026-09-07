@@ -7,11 +7,13 @@ answers:
   - do repeated Rust I lifecycle blocks append
   - do other Rust lifecycle blocks overwrite their compiled slots
   - how does Rust check recursive observation effects through rule and function calls
+  - do Rust self-recursive action edges duplicate regex patterns
+  - can a skipped Rust dependency target still fail complete compilation
 date: 2026-09-07
 status: current source-reading evidence; known parser-boundary repairs remain pending
 tags: [rust, compiler, actionir, lifecycle, normalization, validation, SESSION-STARTUP-READING]
 evidence: "SESSION-STARTUP-READING.3.3.3 reconciles compiler.rs 1–1355 and callable_contract.rs 251–394, 1,499 lines / 56,169 bytes, against unchanged baseline files. Fresh neutral callable checks pass 7/11 literal/call cases, 9/7 invalid cases, four invalid declarations, eight contextual forms and 23 mutations; the selector scan reports zero positive and 20 classified occurrences. These checks are not fresh native runtime execution."
-reverify: "Read rust/linkedspec-core/src/compiler.rs 44–238, 422–551, and 1041–1355 plus rust/linkedspec-core/src/callable_contract.rs 251–394; bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py; bash tools/run_python_project_data.sh tools/check_executable_aggregate_selector_sources.py"
+reverify: "Read rust/linkedspec-core/src/compiler.rs 44–238, 422–551, 1013–1355 and 1538–1654 plus rust/linkedspec-core/src/callable_contract.rs 251–394; bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py; bash tools/run_python_project_data.sh tools/check_executable_aggregate_selector_sources.py"
 ---
 
 `rust/linkedspec-core/src/compiler.rs::compile` builds every compiled function and
@@ -58,6 +60,23 @@ regex's physical source line. Nonregex members reset that adjacency. AND bare
 edges become blind dispatch entries; OR/default bare edges become action entries.
 This records current lowering, without inventing a new lifecycle policy or claiming
 that every parsed body-element kind is implemented by these match arms.
+
+Checkpoint `.3.3.4` completes compiler source reading through line 2153. Named
+selectors resolve before dependency expansion. In `build_dependency_regex_map`,
+external edge-only targets append their selected child pattern; self-targets reuse
+the existing parent slot. The API comment claiming self-edge duplication is stale.
+The helper can warn and skip an invalid target, but complete `compile` and traced
+compilation subsequently call `validate_compiled_regex_slot_identities`, rejecting
+missing target or dispatch slots with `regex_slot_identity_invalid` at
+`validate_compiled_rule`. A successful standalone helper result is not a successful
+complete compilation. `.41.2` owns these comment corrections without changing the
+runtime contract.
+
+Fresh neutral checks at `.3.3.4` pass five slot fixtures/two diagnostics/59 drift
+mutations and eight entry cases/three failures/three strict cases/54 mutations.
+They do not rerun native or generated consumers. The entry/error source read also
+confirms structural emptiness before selector lookup, immutable borrowed selection,
+and sorted portable diagnostic fields retained by `LinkedSpecError::diagnostic`.
 
 Related: [[rust-rule-local-cursor-normalization]],
 [[rust-aggregate-selector-compile-rejection]], [[write-vivification-rust-runtime]],

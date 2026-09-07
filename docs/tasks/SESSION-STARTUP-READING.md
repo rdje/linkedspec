@@ -1019,15 +1019,23 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.3 - read callable normalization and compiler validation prefix`
 
 - ID: `SESSION-STARTUP-READING.3.3.4`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 4: 1,481 lines/fragments, 57,687 bytes.
   Scope: `rust/linkedspec-core/src/compiler.rs` lines 1356–2153;
     `rust/linkedspec-core/src/descriptor.rs` lines 1–465;
     `rust/linkedspec-core/src/entry_rule.rs` lines 1–113;
     `rust/linkedspec-core/src/error.rs` lines 1–105.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Four exact reading ranges/current-baseline proof; existing descriptor/entry/slot Knowledge; neutral slot identity and entry-selection contracts; .41.2 source-comment ownership and retained native duplicate-label rejection; Knowledge/memory/all doctrines/history and final scope/diff.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: All four scopes read: 1,481 lines / 57,687 bytes; exact range hashes and complete current files match baseline.
+    Reconcile selector resolution, self-edge slot reuse, pure descriptor projection, entry precedence, and
+    sorted portable diagnostics with existing Knowledge. Confirm source-comment repair ownership and retain
+    native duplicate-label rejection evidence. Neutral slot checks pass 5 fixtures / 2 diagnostics / 59 mutations; entry checks pass 8 selection /
+    3 failure / 3 strict cases / 54 mutations. Required continuity checks pass before commit.
+  Commit: `SESSION-STARTUP-READING.3.3.4 - read Rust regex resolution descriptors and entry diagnostics`
 
 - ID: `SESSION-STARTUP-READING.3.3.5`
   Status: `pending`
@@ -2853,6 +2861,10 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     retaining its distinction from default canonical execution. Correct ast.rs comments claiming Default
     equals OR+ and Single (&) is choice: rep_min gives 0 versus 1 and is_and includes Single. Preserve
     runtime policy, verify neutral authority, and cover source comments as well as the book prose.
+    Correct compiler.rs documentation saying self-recursive edges duplicate parent regexes: the current
+    branch and inline tests reuse their existing slots. Qualify its warning/skip commentary against the
+    later compiled-slot validator, which rejects missing or out-of-range action targets. Keep standalone
+    helper behavior distinct from the complete compilation pipeline; do not change runtime semantics here.
   Verification: `pending` — current guides still describe Julia/Lua v1 adapters and future named selectors;
     the cursor contract's current reader/marker coverage does not enforce those paragraphs.
   Commit: `pending`
@@ -3068,7 +3080,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.4` | `pending` | reconcile compiler resolution, descriptor projection, entry selection, and portable diagnostics. |
+| 1 | `SESSION-STARTUP-READING.3.3.5` | `pending` | read the Rust expression AST and statement-parser prefix, preserving typed staged and write boundaries. |
 
 ## Reading Ledger
 
@@ -3079,7 +3091,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.3` are reconciled and `.3.3.4`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.4` are reconciled and `.3.3.5`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -5165,6 +5177,40 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   supplies canonical homes. Record the clarified phase order and lifecycle lowering in rust-core-compilation-boundaries; no runtime/public
   book changes and no fresh native-suite execution are claimed by the neutral checks.
 
+### Rust regex resolution and outward projection reading at `.3.3.4`
+
+- Activated from clean `87065401fab5eeb076ff6795d2aa0af957a4b63b` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Reconcile four fully read forward scopes preserved in 611d7b5c's commit body: 1,481 lines /
+  57,687 bytes. Compiler reading now reaches EOF; all four complete current files match the baseline.
+- rust/linkedspec-core/src/compiler.rs 1356–2153: 33416 bytes; SHA-256
+  32d23a302261057a3b07cb25eb6aeeeb49c1d55c3b5fc43291b3b434e8e0343e.
+- rust/linkedspec-core/src/descriptor.rs 1–465: 16895 bytes; SHA-256
+  d0a089263e72be9c359bce09abfb5b0602d5e5774c159097faa252ff8bb245c8.
+- rust/linkedspec-core/src/entry_rule.rs 1–113: 4101 bytes; SHA-256
+  0de08149c4b3f73a8d41443151764aad6e1474e4aee4c8166eb85e890c560c22.
+- rust/linkedspec-core/src/error.rs 1–105: 3275 bytes; SHA-256
+  a25c2a569810a215cfcf79d0053f38d94e99e6930164709670f8d3c858b52519.
+- Named selectors resolve before dependency expansion and retain authored selector/slot provenance.
+  External edge-only targets append child patterns; self-targets reuse parent slots. Later compiled slot
+  validation rejects missing/out-of-range action targets despite earlier warning/skip branches. Existing
+  .41.2 owns stale comments that say self-edges duplicate patterns or imply skipped targets are accepted.
+- Inline compiler tests cover association, named/numeric selectors, self references, function versus rule
+  parse errors, family bounds, fluent/action/blind/lifecycle lowering, and the shipped JSON example. Reading
+  these tests is not a fresh test run. Existing .45 continues to own the malformed-rule fallback.
+- Descriptor projection uses pure BTree-backed maps and four root fields, source/dependency order, normalized
+  cursor metadata, exactly five semantic edge keys and separate selector metadata. Legacy missing-ref
+  fallback orders action refs before blind refs. Typed functions use version 3 for parameter kinds, 2 for
+  signatures, and 1 for legacy metadata. Source paths and staged payloads remain authored projections.
+- A descriptor's deterministic last-definition handling of supplied compiled state is distinct from the
+  supported native source pipeline: the earlier asserted CLI control rejects duplicate authored labels.
+  Do not infer duplicate-source acceptance from a projection helper's map policy.
+- Entry resolution borrows ordered immutable state: structural emptiness precedes explicit lookup, then
+  the first authored marker and first authored rule provide defaults. PortableDiagnostic stores sorted
+  fields and LinkedSpecError::diagnostic retains its typed payload. Neither selection nor projection changes
+  authored is_top. Existing descriptor, entry, and slot-identity Knowledge owns these boundaries.
+- Neutral slot/entry checks reverify their contract surfaces without claiming fresh native, generated,
+  emitted, or full optional Rust gate execution. No runtime or public-book change.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -5224,7 +5270,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.2.55` is item 59/100 at `611d7b5c`;
   `.3.3.1` is item 60/100 at `08149577`;
   `.3.3.2` is item 61/100 at `9e655087`;
-  `.3.3.3` is item 62/100 once committed.
+  `.3.3.3` is item 62/100 at `87065401`;
+  `.3.3.4` is item 63/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -5351,6 +5398,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.1` | Exact two-range reading/baseline; 199-package lock census; retained eleven CLI/isolated core controls and four regex-boundary controls; task-first repairs .45–.47 and .49; preceding canonical receipt; focused continuity | PASS reading and bounded diagnostic evidence; Rust parent active; all four new repairs pending. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.2` | Six exact reading ranges/current-baseline proof; locked offline 199-package metadata; neutral cursor 36/18/8/60; existing Knowledge; .41.2/.41.7 ownership; focused continuity | PASS reading/metadata/neutral proof; requirement and source-comment repairs pending; codebase reading still No. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.3` | Two exact reading ranges/current-baseline proof; existing callable/compiler Knowledge; neutral callable 7/11/9/7/4/8/23; selector zero-positive/20 classified; .45/.47 ownership; focused continuity | PASS reading and focused contract proof; compiler repairs remain pending; whole-codebase reading still No. |
+| `2026-09-07` | `SESSION-STARTUP-READING.3.3.4` | Four exact reading ranges/current-baseline proof; descriptor/entry/slot Knowledge; neutral slot 5/2/59 and entry 8/3/3/54; .41.2 comment ownership; retained native duplicate rejection; focused continuity | PASS reading and focused neutral proof; source/public-comment repairs pending; codebase reading still No. |
 
 ## Commit Log
 
@@ -5419,6 +5467,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.3.1` | `SESSION-STARTUP-READING.3.3.1 - read Rust lockfile prefix and own parser boundary repairs` | Read 1,496 lock/ignore lines; own malformed-block, Unicode diagnostic, mutation-argument, and regex-newline repairs; retain prior canonical milestone. |
 | `SESSION-STARTUP-READING.3.3.2` | `SESSION-STARTUP-READING.3.3.2 - read Rust manifests AST and callable prefix` | Read 1,483 manifest/AST/callable lines; own exact README minimum-version and mode-comment evidence. |
 | `SESSION-STARTUP-READING.3.3.3` | `SESSION-STARTUP-READING.3.3.3 - read callable normalization and compiler validation prefix` | Read 1,499 callable/compiler lines; preserve validation order and exact pending repair boundaries. |
+| `SESSION-STARTUP-READING.3.3.4` | `SESSION-STARTUP-READING.3.3.4 - read Rust regex resolution descriptors and entry diagnostics` | Read 1,481 compiler/descriptor/entry/error lines; separate projection determinism from native validation. |
 
 ## Changelog
 
@@ -5531,3 +5580,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-07`: `.3.3.1` reconciles the first Rust reading group and owns forward malformed-block acceptance, Unicode diagnostic panic, parser/compiler whitespace mismatch, and regex-newline loss as .45–.47 and .49; no repair is closed.
 - `2026-09-07`: `.3.3.2` reconciles Rust manifests, complete AST, and callable-contract prefix; records locked toolchain-declaration drift and mode comments under existing documentation repairs.
 - `2026-09-07`: `.3.3.3` reconciles callable traversal and compiler validation/lowering; retains existing fail-closed and mutation repair ownership.
+- `2026-09-07`: `.3.3.4` reconciles regex resolution, descriptor projection, entry precedence and portable diagnostics; owns stale self-edge comments and preserves native duplicate rejection.

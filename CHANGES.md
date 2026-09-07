@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.4 — read Rust regex resolution descriptors and entry diagnostics
+
+Complete compiler reading and read descriptor, entry-rule, and error modules against the unchanged baseline. Reconcile named selector resolution, self-edge slot reuse, four-root descriptor projection, typed function versions, immutable entry precedence, and portable diagnostics. Extend .41.2 for stale compiler comments and clarify descriptor projection versus native duplicate-label rejection in Knowledge. No runtime or public-book change.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.3 — read callable normalization and compiler validation prefix
 
 Reconcile the callable-contract suffix and compiler prefix against the unchanged reading baseline. Record normalization traversal, whole-spec validation order, recognition reachability, typed write/mutation checks, lifecycle slots, and edge lowering through existing Knowledge. Preserve the pending malformed-block and whitespace-mutation repairs without changing runtime or public-book behavior.

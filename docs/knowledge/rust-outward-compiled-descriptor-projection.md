@@ -11,14 +11,17 @@ answers:
   - "does Rust descriptor v1 use rule local cursor policy"
   - "what fields are in Rust resolved edge descriptors"
   - "does Rust descriptor retain bare versus explicit edge provenance"
-date: 2026-07-18
+  - "does Rust descriptor last-definition projection allow duplicate authored rules"
+  - "where does the Rust descriptor preserve authored regex selectors"
+  - "what determines Rust function descriptor versions one two and three"
+date: 2026-09-07
 status: current through rule-local cursor descriptor v1
 tags: [rust, descriptor, compiler-state, public-api, staged-parsing, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.1.6.2.2 adds rust/linkedspec-core/src/descriptor.rs, CompiledSpec::descriptor_state(), CompiledSpec::to_descriptor_json(), and ordered CompiledRule.dependency_refs. Three focused tests prove the four-key shape, model/order/rule/dependency/staged-function values, compiled-state JSON round-trip identity, and deterministic last-definition projection. The full core package and full Rust gate pass: formatting, 137 runtime tests, 105 oracle fixtures, 196 integration tests, three generated-source tests, ten trace tests, and 61/61 CLI cases in both environments."
+evidence: "The following execution counts are historical July 2026 evidence, not a September rerun. FUTURE-PARITY-BACKLOG.1.6.2.2 adds rust/linkedspec-core/src/descriptor.rs, CompiledSpec::descriptor_state(), CompiledSpec::to_descriptor_json(), and ordered CompiledRule.dependency_refs. Three focused tests prove the four-key shape, model/order/rule/dependency/staged-function values, compiled-state JSON round-trip identity, and deterministic last-definition projection. The full core package and full Rust gate pass: formatting, 137 runtime tests, 105 oracle fixtures, 196 integration tests, three generated-source tests, ten trace tests, and 61/61 CLI cases in both environments. SESSION-STARTUP-READING.3.3.4 rechecks unchanged descriptor source and distinguishes projection policy from native duplicate-label rejection."
 evidence_update_2026_07_11: "FUTURE-PARITY-BACKLOG.1.6.2.3 makes the focused Rust shape test consume capability_conformance/outward_descriptor_contract.json alongside Perl, Dart, and Julia. Exact four-backend descriptor admission is closed."
 evidence_update_2026_07_18: "FUTURE-PARITY-BACKLOG.9.1.4.4 migrates Rust to linkedspec-rule-local-cursor-v1: root/rule global mode fields are absent; every rule publishes normalized family, derived cursor_policy, edge_ownership, and ordered ownership/target/regex_index/block/fluent rows. All 36 families, every valid neutral edge case, direct/CompiledSpec-JSON identity, loaded projection, and live agreement pass; generated-source v1 remains separately staged."
 evidence_update_2026_07_18_generated_v2: "FUTURE-PARITY-BACKLOG.9.1.4.5 removes the last generated-v1 consumer of legacy_artifact_parse_mode. Descriptor and generated-source now independently derive from normalized family state; generated v2 carries no serialized cursor field."
-reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test descriptor_test && bash tools/run_rust_local.sh"
+reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-core --test descriptor_test && bash tools/run_rust_local.sh"
 ---
 
 # Rust Outward Compiled Descriptor Projection
@@ -46,3 +49,22 @@ non-semantic and normalized `CompiledRule` state deliberately does not retain it
 The projection is pure derived state: direct, loaded, and ordinary compiled-JSON-reconstructed values agree, and
 descriptor policy is the same `CompiledRule::cursor_policy()` normal execution spends. Generated-source v2 now
 derives policy independently from its validated neutral family rows; no legacy artifact adapter remains.
+
+The 2026-09-07 source reading confirms that optional `regex_slots`, `capture_gaps`,
+and `resolved_slot_edges` sit alongside the unchanged five-key semantic edge rows.
+`resolved_slot_edges` retains selector kind, authored selector, target rule/index,
+and target slot id. The legacy outward dependency references deliberately project
+only label/index semantics; when absent internally, their fallback lists action
+references before blind references.
+
+Function descriptor version is 3 when parameter kinds are present, otherwise 2
+when a typed signature exists, otherwise 1. Signature-bearing records omit the
+legacy params/arity pair; authored source, spans, and staged payload/job/AST fields
+remain separate from this version choice.
+
+Last-definition rule maps and compile order describe how this pure helper projects
+supplied `CompiledSpec` data. They do not establish acceptance of duplicate authored
+source. The native CLI duplicate-label control retained in
+[[rust-action-parser-boundary-defects]] exits with a compilation failure. Native
+validation and deterministic projection are distinct boundaries; do not infer a
+duplicate-source execution policy from `rules_by_label` or `last_definition_order`.
