@@ -85,3 +85,13 @@ See `staged-target-preparation-gaps.md` and repair .73; earlier complete-depth v
 to individual targets and covered fixtures, not reservation. Source-derived helpers and public native controls
 also expose returned-marker detachment/provenance gaps under .74. Root-only markers reject before callbacks;
 this does not adopt a new root replacement contract.
+
+## September 7 final registry validators
+
+`SESSION-STARTUP-READING.3.3.38` reads staged_ast_enrichment.rs 2767–3058, completing the 3,058-line file.
+Direct candidates validate declaring/authored identities and require a prepared entry; ordered groups require
+positive distinct order values and sort by that order. String sets deduplicate through BTreeSet; ceilings and
+version integers use as_u64 with positive/nonnegative checks, not a floating cast. Parser identity uses the
+declared lowercase ASCII segment syntax; this helper's top-rule syntax is ASCII identifier form. Digest checks
+require sha256 plus 64 lowercase hex digits. Canonical JSON sorts object keys recursively and preserves array
+order before hashing. These exact source observations do not remove .73–.75's measured execution gaps.

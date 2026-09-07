@@ -6,7 +6,7 @@ answers:
   - "why does change history allow 29 collection files"
   - "what are change history routing limits after the runtime reading checkpoint"
 date: 2026-09-06
-status: current
+status: historical capacity; superseded by ADR0106 under SESSION-STARTUP-READING.3.3.38
 tags: [documentation, history, rollover, capacity, doctrine]
 evidence: "SESSION-STARTUP-READING.3.2.41 archives exact clean e548ce4b source lines 248–459; independent source/blob/SHA-256/count and prior-manifest comparison pass. ADR 0104 admits only collection max_files 28 to 29 and manifest max_lines 27 to 28."
 reverify: "perl tools/roll_document_history.pl --surface change_history --check && bash scripts/check_readme_stability.sh && wc -lc CHANGES.md docs/history/changes/manifest.jsonl docs/history/changes/*.md"
@@ -32,3 +32,10 @@ checkpoint lands. Every later capacity increase needs a newly indexed exact-limi
 Related: [[bounded-change-notes-history-contract]],
 `docs/decisions/0102-change-history-twenty-eighth-member-capacity.md`, and
 `docs/decisions/0104-change-history-twenty-ninth-member-capacity.md`.
+
+## September 7 successor
+
+Required segment 4983 consumes another member and exceeds the manifest byte ceiling by 79 bytes.
+ADR0106 admits exactly 30 collection files, 29 manifest lines and 16,463 manifest bytes; all other controls
+remain unchanged. `change-history-thirtieth-member-capacity.md` owns the current measured boundary.
+The preceding evidence above remains the exact historical ADR0104 admission.

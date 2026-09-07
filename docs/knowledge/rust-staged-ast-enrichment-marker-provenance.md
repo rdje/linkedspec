@@ -71,3 +71,17 @@ Related: [[rust-staged-ast-enrichment-dormant-red]], [[general-staged-ast-curren
 [[rust-staged-ast-enrichment-recursive-authority]],
 [[typed-source-location-cursor-algebra-direction]], and ADR
 `0088`.
+
+## September 7 complete declaration implementation
+
+`SESSION-STARTUP-READING.3.3.38` reads all 290 lines/11,273 bytes of staged_parse_job.rs.
+Direct provenance requires exactly kind/source_id/start/end/provenance, then obtains positions, ordered span
+and materialized text from SourceAuthority. Derived records require exactly kind/policy/segments and a nonempty
+ordered list; every segment follows that direct path. Runtime entry/local match and capture ranges are byte
+positions converted immediately through position_from_utf8_byte, then materialized as Unicode-scalar provenance.
+The returned marker carries only selected options, exact text/provenance and origin.
+
+This constructor has access to the source authority and rejects invalid source positions. It is distinct from
+host-callback returned markers accepted by staged_ast_enrichment.rs; .74 owns that boundary's deep validation
+and arithmetic gap. The earlier constructor guarantee does not establish that arbitrary returned JSON is valid.
+Fresh staged123base+129public and typed14/0/231 pass; no new native marker/carrier execution is claimed here.

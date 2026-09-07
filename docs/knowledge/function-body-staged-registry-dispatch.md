@@ -11,7 +11,7 @@ answers:
   - "does Dart have function-body staged dispatch"
   - "does Lua have function-body staged dispatch"
   - "what remains future after STAGED-LINKED-PARSING.5.5"
-date: 2026-07-09
+date: 2026-09-07
 status: current
 tags: [staged-parsing, parser-registry, parse-jobs, user-functions, rust, perl, dart, julia, lua]
 evidence: "STAGED-LINKED-PARSING.5.5 adds Perl/Rust dispatch; DART-BACKEND-PARITY.5.1 adds Dart dispatch; JULIA-BACKEND-PARITY.5.1 adds Julia dispatch; LUA-BACKEND-PARITY.5.1.1 adds Lua dispatch. Evidence lives in the five staged registry owners and their focused tests."
@@ -78,3 +78,15 @@ recursively, while other reference kinds are passed through by its legacy plain-
 the general-v2 bounded detached-result contract. Result/failure policy fields remain transported metadata;
 the trusted function-body integration owns the admitted stitch. Existing Unicode-numeric review `.20`
 and general scheduler marker-lifetime review `.44` retain their separate ownership.
+
+## September 7 Rust registry completion
+
+`SESSION-STARTUP-READING.3.3.38` reads all 712 lines/24,568 bytes of staged_parser_registry.rs.
+It normalizes the whole input list and sorts string-component parent paths, start/end spans and job ids.
+The built-in four-phase adapter constructs a cache-key record per job; it has no persistent or run-local plan
+cache. Both plain and traced routes call the same normalize/resolve/load/compile/execute helpers; traced
+entrypoints add balanced queue/job scopes and phase decisions. CodeBlock::parse_with_callable_candidates parses
+the payload; JSON projection marks action_block/action_stmt and drops_value on direct statements.
+Result/failure policy strings remain transported metadata, as the existing audit records; the function
+integration owns their admitted stitch. The fixed adapter identity and version constants are separate from
+general-v2 caller-frozen authority. No new wrong-top, trace, carrier or runtime result is claimed.

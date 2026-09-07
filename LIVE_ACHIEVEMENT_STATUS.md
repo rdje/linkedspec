@@ -5,21 +5,23 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.37` are reconciled and `.3.3.38`–`.3.3.66` plus closeout remain pending.
+  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.38` are reconciled and `.3.3.39`–`.3.3.66` plus closeout remain pending.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.75` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.3.37` reads staged execution and records paired destination, returned-marker and callback-counter defects with repair ownership.
-  This is item 96/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.3.38` reads all staged source files and begins pinned Unicode mappings with six Knowledge reconciliations.
+  This is item 97/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.3.38`: complete staged enrichment, read staged job/registry and begin Unicode case mapping.
+- Activate `SESSION-STARTUP-READING.3.3.39`: read Unicode case mapping lines 207–1706.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-07` — `SESSION-STARTUP-READING.3.3.38` completes staged source reading and begins generated Unicode mapping data.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.37` reads staged execution and owns target reservation, returned-marker validation and counter admission repairs .73–.75.
 
@@ -50,8 +52,6 @@
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.24` reads the MCP bundle prefix and verifies exact generated, frame and admission identities.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.23` completes engine/helper/export reading and owns confirmed nonzero-cursor regex context repair .63.
-
-- `2026-09-07` — `SESSION-STARTUP-READING.3.3.22` reads capture/control tests and owns coalesce definedness/lazy evaluation repair .62.
 
 ## History
 

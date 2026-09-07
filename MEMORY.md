@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `90ae57bb9814118c3fe041c0723d841d7feabb44` — clean preceding reading checkpoint.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.37 - trace staged execution and own target validation and counter repairs`.
+- activation_commit: `77cad4543e72ab304ce2a66b26a876b02cd6d3c4` — clean preceding reading checkpoint.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.38 - complete staged source reading and preserve bounded change history`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: activate `.3.3.38`; complete staged enrichment, read staged job/registry and begin Unicode case mapping,
+- next_action: activate `.3.3.39`; read Unicode case mapping lines 207–1706,
   then continue queued reading. Intake `.31` preserves the forward source coverage and exact findings.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.75` precede mutation setup; `.29` is part of `.5` adoption.
@@ -55,6 +55,6 @@
 - current_engineering_notes_capacity: immutable segment `4983-274cdb2ddc2b` is the twenty-fourth manifest record;
   ADR `0105` authorizes exactly 25 collection files / 24 manifest lines with every byte and aggregate ceiling
   unchanged.
-- current_change_history_capacity: immutable segment `4984` is the twenty-seventh history segment; ADR `0104`
-  authorizes exactly 29 collection files / 28 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook Yes (physical); .31/.3.2.42 preserve complete book/Perl source coverage and repair ownership; formal .4 alignment remains pending (96/100 after `.3.3.37` lands).
+- current_change_history_capacity: immutable segment `4983` is the twenty-eighth history segment; ADR `0106`
+  authorizes exactly 30 collection files / 29 manifest lines / 16,463 manifest bytes; other ceilings remain unchanged.
+- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook Yes (physical); .31/.3.2.42 preserve complete book/Perl source coverage and repair ownership; formal .4 alignment remains pending (97/100 after `.3.3.38` lands).

@@ -178,3 +178,11 @@ u64-to-usize conversion, then accepts a finite nonnegative integral f64 via `as 
 check. Existing .55.1 now includes this boundary and the actual definition-AST producers in its conversion audit.
 This is source inventory: the parser consumes its embedded grammar's own AST, and no public large-field input,
 incorrect accepted function signature or new native saturation result was measured at this checkpoint.
+
+## September 7 v1 registry integer conversion inventory
+
+`SESSION-STARTUP-READING.3.3.38` reads staged_parser_registry.rs completely. usize_field at 696–712 has
+the same checked-u64 then finite-nonnegative-integral f64-to-usize branch as the function-AST helper.
+It handles legacy job source start/end/line fields. .55.1 now inventories this public v1 record boundary,
+its actual callers and round-trip effects; no new large-field execution or changed queue order is measured.
+The general-v2 enrichment suffix instead uses as_u64 and does not share this floating fallback.

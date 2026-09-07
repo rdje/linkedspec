@@ -43,3 +43,11 @@ with valid controls, failure policies, carriers and book alignment after require
 This measurement uses existing debug libraries; release overflow behavior and other backends are not measured.
 The diagnostic six-record run completes in 0.029 seconds; the complete artifact/assertion manifest and library
 hashes are indexed in `staged-target-preparation-gaps.md`. No generated corpus or runtime file is changed here.
+
+## September 7 declaration boundary reconciliation
+
+The next reading checkpoint `SESSION-STARTUP-READING.3.3.38` completes staged_parse_job.rs.
+Its public validate_and_materialize_provenance obtains source-authorized positions/spans and exact materialized
+text; the private constructor always uses it. Those source checks are absent from the already-measured returned
+JSON path. .74 must define the required validation at that host boundary without weakening the declaration
+constructor or pretending a detached marker alone supplies a live source snapshot.

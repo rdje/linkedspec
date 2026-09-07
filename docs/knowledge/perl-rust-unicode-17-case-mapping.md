@@ -8,7 +8,7 @@ answers:
   - how does Perl generated source load Unicode casing
   - do lowercase_each uppercase_each use pinned Unicode data
   - which LinkedSpec variants already consume Unicode 17 casing
-date: 2026-07-12
+date: 2026-09-07
 status: current
 tags: [unicode, casing, perl, rust, generation, actionir, runtime, parity]
 evidence: "LUA-BACKEND-PARITY.4.3.2.1.2.2 extends unicode_case/generate_unicode_case_contract.py and tools/check_unicode_case_contract.py with byte-compared perl/LinkedSpec/UnicodeCaseMapping.pm and rust/linkedspec-runtime/src/unicode_case_mapping.rs. Perl ActionIR owners and generated-source preamble load the module; scalar and array lowering call it. Rust engine scalar and both array seams call its module. Twelve fixtures pass direct/helper/receiver/array paths; Perl focused 52 and phase0 1..1030 pass; the full Rust runtime package passes; authoritative local CI passes CLI 61x2 and phase0 1..1030. Source audit finds no lc/uc in Perl ActionIR and no to_lowercase/to_uppercase in Rust runtime casing paths."
@@ -81,3 +81,16 @@ reconciled against this evaluator. Complete physical coverage stays credited to 
 comprehension checkpoints now cover all 3,835 lines / 82,331 bytes without gaps. The unchanged
 five-module regeneration and Perl52 proof from `.3.2.49` remains current retained evidence. No
 new peer-runtime execution, generated-source execution, or altered input-type contract is claimed.
+
+## September 7 first Rust mapping checkpoint
+
+`SESSION-STARTUP-READING.3.3.38` reads Rust unicode_case_mapping.rs 1–206: 5,313 bytes,
+SHA-256 `00c0ec0fcd97c4d6208ab8fe99957565274fa5e0056af7f120be27b869055e57`.
+The generated header pins linkedspec-unicode-case-v1, Unicode17.0.0 and logical digest
+5c17653094c49a3bd69222f6e8bde5de5ebd445a121453ccb156ea540a5e3bae. The opening sorted lower mappings include
+ASCII/Latin, dotted-I expansion to 0069 0307 and intentional identity entries. The generator remains sole author;
+the rest of the Rust mappings and evaluator remain subsequent physical reading.
+
+Fresh managed Unicode checking regenerates the contract and all five backend modules byte-identically and
+passes all twelve independent neutral fixtures: 1,563 lower/1,581 upper mappings and 158/464 property ranges.
+This is generation and neutral-evaluator proof, not a new six-runtime execution claim.
