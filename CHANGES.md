@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.40 — complete Unicode upper-map reading
+
+Read Unicode lines 1707–3156 completely: 1,450 lines / 37,746 bytes, identical to the baseline. The upper mapping table is complete through U+1E943. Existing Knowledge records full combining sequences, ligature expansion and many-to-one casing without adding normalization or inverse guarantees. Generation inputs remain unchanged; the preceding checkpoint's five-module regeneration and twelve neutral fixtures remain retained proof. Required continuity checks cover this documentation-only slice.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.39 — finish Unicode lower-map reading and preserve canonical evidence
 
 Read Unicode lines207–1706 completely (1,500 lines/38,103 baseline-identical bytes), finishing the lower table and opening upper full mappings. Unicode regeneration and twelve neutral fixtures pass. Five existing Knowledge cards preserve this comprehension, .3.3.38 canonical PASS at eba1a0ed (CLI66 twice; Phase0 1032/1032 in1100s; 25 optional skips), two fully consumed launch samples, and the requirement to rebuild preserved static probes before claiming later runtime repair.

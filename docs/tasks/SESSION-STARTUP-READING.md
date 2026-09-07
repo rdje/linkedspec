@@ -1540,12 +1540,16 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.39 - finish Unicode lower-map reading and preserve canonical evidence`
 
 - ID: `SESSION-STARTUP-READING.3.3.40`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 40: 1,450 lines/fragments, 37,746 bytes.
   Scope: `rust/linkedspec-runtime/src/unicode_case_mapping.rs` lines 1707–3156.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: All owned Unicode upper-table bytes read without truncation and full-file/range baseline identity; reconcile pinned generation authority and retained .3.3.39 proof; memory, both history-pressure checks, Knowledge synchronization, staged diff and all nine doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS: all 1,450 lines / 37,746 bytes read untruncated and baseline-identical; complete upper-map comprehension reconciled; unchanged generation inputs preserve .3.3.39 Unicode proof; Knowledge, memory, both histories, diff and required nine-doctrine commit checks.
+  Commit: `SESSION-STARTUP-READING.3.3.40 - complete Unicode upper-map reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.41`
   Status: `pending`
@@ -4176,7 +4180,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.40` | `pending` | read Unicode case mapping lines 1707–3156. |
+| 1 | `SESSION-STARTUP-READING.3.3.41` | `pending` | read Unicode properties/evaluator lines 3157–3859 and callable-codeblock contract lines 1–791. |
 
 ## Reading Ledger
 
@@ -4187,7 +4191,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.39` are reconciled and `.3.3.40`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.40` are reconciled and `.3.3.41`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -6869,6 +6873,12 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - Consumed .3.3.38 canonical exit0 and exact receipt promoted to `eba1a0edb14463e737003025a8d66ffa4f853801`: all nine doctrines, mandatory consumers/locality/five relocated anchors, CLI66/66 twice, Phase0 1032/1032 in1100s; 25 optional gates skipped. The existing macOS launch Knowledge card records the full log hash/size and both fully consumed, retained 32-line samples; their pre-main frames do not establish an OS cause or sampling workaround.
 - Five existing Knowledge cards preserve mapping semantics, exact completed verification and static-probe evidence scope. Rerunning the .3.3.37 statically linked probe cannot prove a later runtime repair without rebuilding and verifying library identities. No new defect, runtime/public-book/policy repair, recovery or purge; roadmap Yes/codebase No/physical mdBook Yes, formal .4 alignment pending.
 
+### Unicode upper-map completion at `.3.3.40`
+
+- Activated from clean `fe6d2638c8aa5cecebc214ce33c07c8b1a770278` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read unicode_case_mapping.rs 1707–3156 completely in five untruncated ranges: 1,450 lines / 37,746 bytes; SHA-256 `53e3bf1abba654fbab0a398f277c467e627fdc5b2d57388616d48504ffbd1f01`. Full file and range equal baseline. The upper map is now complete through U+1E943; ordered combining expansions, ligatures and many-to-one casing preserve the pinned contract, with no normalization or inverse-conversion promise.
+- Existing Unicode Knowledge reconciled. Git confirms generation/runtime inputs unchanged since .3.3.39; its five-module regeneration and twelve neutral fixtures remain retained proof. Property ranges/contextual evaluator await .3.3.41. No new runtime test, defect, public-book/policy repair, recovery or purge; roadmap Yes/codebase No/physical mdBook Yes, formal .4 pending.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -6964,7 +6974,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.3.36` is item 95/100 at `90ae57bb`;
   `.3.3.37` is item 96/100 at `77cad454`;
   `.3.3.38` is item 97/100 at `eba1a0ed`;
-  `.3.3.39` is item 98/100 once committed.
+  `.3.3.39` is item 98/100 at `fe6d2638`;
+  `.3.3.40` is item 99/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -7127,6 +7138,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.37` | Baseline reading; paired target/returned-marker/budget assertions and backtrace; library/artifact hashes; staged/typed neutral proof; Knowledge/history/memory/staged diff/all nine doctrines | PASS reading and bounded diagnostic assertions; defects remain explicitly pending under .73/.74/.75. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.38` | Four baseline-identical source ranges; three staged files complete; six Knowledge/.55.1 reconciliation; Unicode/staged/typed checks; Knowledge/history/memory/staged diff/all nine doctrines | PASS reading and generated/neutral checks; existing returned-marker and numeric repairs remain pending. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.39` | Five complete ranges/baseline identity; Unicode generation/12 fixtures; prior canonical receipt/log/two sample identities; five Knowledge cards; memory/history/diff/nine doctrines | PASS reading and evidence reconciliation; .3.3.38 canonical PASS at eba1a0ed; skipped optional results not refreshed. |
+| `2026-09-07` | `SESSION-STARTUP-READING.3.3.40` | Five complete upper-map ranges; baseline and retained-generation input identity; Unicode Knowledge; memory/history/diff/nine doctrines | PASS reading and retained-proof scope; upper map complete, evaluator remains pending. |
 
 ## Commit Log
 
@@ -7231,6 +7243,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.3.37` | `SESSION-STARTUP-READING.3.3.37 - trace staged execution and own target validation and counter repairs` | Preserve exact staged execution evidence and own destination, marker/provenance and call-counter repairs. |
 | `SESSION-STARTUP-READING.3.3.38` | `SESSION-STARTUP-READING.3.3.38 - complete staged source reading and preserve bounded change history` | Complete staged source comprehension and separate declaration authority, returned records and legacy adapter metadata. |
 | `SESSION-STARTUP-READING.3.3.39` | `SESSION-STARTUP-READING.3.3.39 - finish Unicode lower-map reading and preserve canonical evidence` | Preserve completed Unicode lower-map comprehension and exact prior canonical/sample evidence. |
+| `SESSION-STARTUP-READING.3.3.40` | `SESSION-STARTUP-READING.3.3.40 - complete Unicode upper-map reading` | Complete upper-map physical reading with exact range identity and retained generation proof. |
 
 ## Changelog
 
@@ -7379,3 +7392,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-07`: `.3.3.37` reads staged execution and owns measured target reservation, returned-marker validation and exhausted-counter repairs .73/.74/.75.
 - `2026-09-07`: `.3.3.38` completes all three staged source files, starts pinned Unicode mappings and expands existing .55.1 source inventory.
 - `2026-09-07`: `.3.3.39` completes Unicode lower-map reading and preserves canonical .3.3.38 plus bounded sample/probe evidence.
+- `2026-09-07`: `.3.3.40` completes the Unicode upper map and preserves exact reading and retained-proof scope.

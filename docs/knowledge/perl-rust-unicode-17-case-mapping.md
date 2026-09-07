@@ -105,3 +105,17 @@ for ligatures and Greek special-casing records are intentional. The upper prefix
 expansion to 0053 0053 and U+0149 to 02BC 004E; the maps are not mutual inverses.
 The contextual evaluator is still outside this read range. Fresh managed regeneration and all twelve neutral
 fixtures pass with the unchanged 1563/1581/158/464 counts; this adds no native runtime execution claim.
+
+## September 7 Rust upper-map completion
+
+`SESSION-STARTUP-READING.3.3.40` reads all lines 1707–3156: 1,450 lines / 37,746 bytes,
+SHA-256 `53e3bf1abba654fbab0a398f277c467e627fdc5b2d57388616d48504ffbd1f01`,
+with exact baseline equality for the range and full file. This completes the upper table through
+U+1E943. Full mappings preserve ordered combining sequences (for example U+0390 becomes
+0399 0308 0301), expand Latin/Armenian ligatures and merge some distinct inputs such as the two
+lowercase sigma forms into U+03A3. These are pinned full casing mappings, with no new normalization,
+case-folding or reversible-conversion promise. The property tables and evaluator remain the next range.
+
+The generation inputs and runtime modules have not changed since `.3.3.39` at `fe6d2638`, whose
+five-module byte comparison and twelve neutral fixture results remain the retained proof. This reading
+checkpoint adds exact physical coverage and comprehension, with no duplicate runtime execution claim.

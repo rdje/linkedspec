@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.40 — Full upper mappings preserve sequences without promising an inverse
+
+The generated upper table contains ordered two- and three-scalar expansions and maps multiple inputs to one uppercase scalar. These data agree with the existing Unicode contract. Completing the physical table reading adds no algorithm or runtime execution claim; property ranges and contextual evaluation remain the next owned range. Unchanged generation inputs preserve the preceding focused proof.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.39 — Separate completed canonical proof from sampled waits and preserved probes
 
 The accepted .3.3.38 receipt binds its exact staged candidate and committed eba1a0ed. The two macOS samples locate pre-main waits that later cleared; build and test durations are separate, with no new OS-cause claim. Their exact log/report identities are in the existing launch-latency Knowledge card. A static probe rerun exercises its linked runtime, so repair verification must rebuild against newly verified libraries. Unicode map expansions and identity entries retain the pinned contract; public behavior is unchanged.
