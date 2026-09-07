@@ -5,21 +5,23 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.19` are reconciled and `.3.3.20`–`.3.3.66` plus closeout remain pending.
-- Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.58` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
+  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.20` are reconciled and `.3.3.21`–`.3.3.66` plus closeout remain pending.
+- Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.59` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.3.19` reads 1,493 engine lines / 55,743 bytes covering traversal, callbacks and value blocks; six paired cases plus direct native diagnostics own final-assignment guard repair .58.
-  This is item 78/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.3.20` reads 1,400 engine lines / 65,528 bytes covering targets and helper dispatch; ten paired controls own substitution repairs .59.
+  This is item 79/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.3.20`: continue engine reading at lines 7879–9278.
+- Activate `SESSION-STARTUP-READING.3.3.21`: continue engine reading at lines 9279–10777.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-07` — `SESSION-STARTUP-READING.3.3.20` reads helper dispatch and owns measured substitution flags, callback lowering and receiver-guard repairs .59.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.19` reads traversal/callback/value blocks and owns confirmed final-assignment receiver-guard repair .58.
 
@@ -58,9 +60,6 @@
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.5` reconciles the expression prefix (1,496 lines / 57,175 bytes).
   Typed declaration/source evidence stays distinct from native execution and pending parser repairs.
-
-- `2026-09-07` — `SESSION-STARTUP-READING.3.3.4` reconciles four Rust scopes (1,481 lines / 57,687 bytes).
-  Self-edge comments stay repair-owned; descriptor map policy does not imply duplicate-source acceptance.
 
 ## History
 

@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.20 — read helper dispatch and own substitution composition repairs
+
+Read baseline-identical engine lines 7879–9278 (1,400 lines / 65,528 bytes), covering target resolution and helper dispatch through the partial match_end_line arm. Ten paired Rust primary/Perl Get controls and generated/lowered source isolate substitution flag, callback-lowering and receiver-protection gaps; new .59.1-.59.4 own repairs and recurrence after prerequisites. Four neutral contracts pass. Knowledge distinguishes current typed captures from historical implementation and qualifies broad guard claims; runtime/public/policy remain unchanged.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.19 — read receiver traversal and diagnose final-assignment guard
 
 Read baseline-identical engine lines 6386–7878 (1,493 lines / 55,743 bytes), completing receiver traversal, callbacks, value chains and value-block evaluation. Six paired Rust CLI/Perl Get cases plus six direct native diagnostic cases confirm that final scalar/nested same-receiver assignments bypass Rust's guard; nonfinal/explicit-return controls reject and unrelated assignment agrees. New .58.1-.3 own repair, carrier recurrence and public closeout after startup prerequisites. Four neutral checks pass. Knowledge records exact evidence and the completed compiler-wait observation; runtime/public/policy remain unchanged.

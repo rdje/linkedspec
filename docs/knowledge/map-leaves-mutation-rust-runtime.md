@@ -20,8 +20,11 @@ reverify: "bash tools/run_python_project_data.sh tools/check_map_leaves_mutation
 
 # Rust `map_leaves!` receiver mutation
 
-Known exception: final scalar/nested callback assignments bypass the Rust guard;
-[[rust-final-value-assignment-receiver-guard-gap]] qualifies the current claims below.
+Known exceptions: final scalar/nested callback assignments and statement regex
+substitution bypass Rust receiver protection. See
+[[rust-final-value-assignment-receiver-guard-gap]] and
+[[regex-substitution-callback-and-flag-discrepancies]]; startup `.58`/`.59`
+qualify current guard claims below.
 
 Rust parses only `IDENTIFIER.map_leaves!() { ACTION_BLOCK } CONTINUATION*` as a dedicated
 `receiver_mutation_chain`. The carrier retains the bare binding reference, exact method/callback/continuation

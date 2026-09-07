@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.20 — Substitution needs statement routing and receiver protection
+
+Ordinary bare-g substr/regex_subst controls agree, but quoted flags select different Perl paths. Inside callbacks, Perl emits unsupported-helper markers even for unrelated scalar targets; descriptors show unresolved=1/ready=0 while execution continues. Rust performs substitution but its receiver_write_attempt omits both names before unguarded scalar publication. Ten paired values/errors and actual generated text establish separate .59 repairs; the prior final-assignment gap stays in .58. Neutral success is bounded to its fixtures and does not close either omission.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.19 — Final assignments must share the receiver guard
 
 eval_block_value sends its last active statement to eval_block_final_expr, whose direct scalar/nested assignment branches bypass eval_expr's pre-evaluation receiver guard. Native CLI and structured diagnostics reproduce the resulting success, while Perl rejects; moving the write before return(value) restores Rust rejection. The coordinator's success-only rebuild publication cannot compensate for an unchecked callback write. Repair .58 requires shared guard authority and exact state/effect/carrier regressions. The separate compiler wait sampled procedural-macro dlopen/fcntl, then cleared; it establishes no OS cause or trust-workflow change.

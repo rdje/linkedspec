@@ -8,11 +8,11 @@ answers:
   - "which string receiver methods are implemented"
   - "is regex substitution substr a receiver method"
   - "which task follows SPEC-FORMAT-TERSE.7.2"
-date: 2026-07-06
+date: 2026-09-07
 status: current
 tags: [spec-format-terse, method-chaining, receiver-dot, string, substr, rust-parity]
 evidence: "SPEC-FORMAT-TERSE.7.2 verified that the useful pure string/scalar receiver surface from .7.1 is already implemented on Perl and Rust, with no parser/runtime code change. Perl runtime probe returned [\"BCD\",\"BCD\",2] for receiver substr, helper substr, and split bridge evidence, and descriptor metadata was ready=1, fallback=0, raw=0, unresolved=0. Focused Rust `terse_2_3_5_3` tests pass. Existing mdBook docs already demonstrate `\"abcdef\".substr(1, 3).uppercase()` mapping to `uppercase(substr(\"abcdef\", 1, 3))`. After SPEC-FORMAT-TERSE.15.3/.15.4 retired colon scalar slots, statement regex substitution uses a bare target such as `substr(target, pattern, replacement, flags)`; it remains a mutation form, not a pure receiver method."
-reverify: "perl -Iperl -MData::Dumper -MLinkedSpec -e 'my $spec = q{Top::\n /x/ -> Done { return(array(\"abcdef\".substr(1, 3).uppercase(), uppercase(substr(\"abcdef\", 1, 3)), \" a-b \".trim().split(\"-\").count())) }\n\nDone::\n /x/\n}; my $p = LinkedSpec::Get(\\$spec); my $input = \"x\"; print Dumper($p->(\\$input));' && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_2_3_5_3 --quiet"
+reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_2_3_5_3 --quiet"
 ---
 
 `SPEC-FORMAT-TERSE.7.2` closed the string/scalar method backfill leaf as already satisfied.
@@ -38,4 +38,8 @@ counts. Focused Rust `terse_2_3_5_3` tests pass.
 The regex-substitution form `substr(target, pattern, replacement, flags)` remains an explicit statement mutation,
 not a pure string receiver method. The old colon-target spelling is retired with the rest of `:name`.
 
-The next leaf is `SPEC-FORMAT-TERSE.7.3` for array/list, hash, and number receiver backfill audit.
+At the July milestone the next leaf was `SPEC-FORMAT-TERSE.7.3`. Current
+reading `SESSION-STARTUP-READING.3.3.20` confirms the separate pure/mutation
+dispatch, but finds flag-form and callback discrepancies in the statement family:
+[[regex-substitution-callback-and-flag-discrepancies]]. This update does not rerun
+the historical pure-string integration proof.

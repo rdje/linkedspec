@@ -4,7 +4,7 @@ Execution-oriented companion to `ROADMAP.md`.
 Current session prerequisite: [SESSION-STARTUP-READING](docs/tasks/SESSION-STARTUP-READING.md) records the
 required-reading baseline, exact coverage, and `rgx` exclusion. Roadmap and physical mdBook reading are complete; codebase reading remains
 incomplete. Intakes .31/.3.2.42 preserve exact coverage and confirmed findings; queued comprehension
-checkpoints resume at `.3.3.20` (engine continuation, lines 7879–9278). Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.58` remain task-owned before Rust mutation setup;
+checkpoints resume at `.3.3.21` (engine helper continuation, lines 9279–10777). Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.59` remain task-owned before Rust mutation setup;
 policy-gate repair `.29` is part of `.5` adoption after the required reading.
 
 Rule-local cursor rollout is closed at 74 files / 8 complete + 0 pending / 60 mutations, with

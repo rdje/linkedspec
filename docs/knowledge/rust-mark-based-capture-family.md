@@ -10,11 +10,11 @@ answers:
   - "is mark_copy one argument or two arguments"
   - "what does mark_input_start / mark_input_end store in the Rust engine"
   - "how does the mark-based capture family work in the Rust engine"
-date: 2026-06-16
-status: confirmed
+date: 2026-09-07
+status: historical endpoint fix confirmed; current typed projection reconciled
 tags: [rust, engine, runtime, capture, marks, RUST-PARITY]
 evidence: "RUST-PARITY.5.5.3 (2026-06-16): rust/linkedspec-runtime/src/engine.rs call_helper arms for capture_from (fixed), capture_len_from, capture_until_cursor_from(+_len), capture_take_until_cursor_from(+_len), capture_take_len_from, capture_rest_from(+_len), capture_take_rest_from(+_len), capture_between, capture_len_between, mark_input_start, mark_input_end, mark_copy; span_text/span_char_len helpers. Authoritative contract: perl/LinkedSpec/ActionIR/Contracts.pm ~690-1047. 223/223 tests green (207 baseline + 16 helpers_5_5_3_*)."
-reverify: "cd rust && cargo test --manifest-path Cargo.toml 2>&1 | grep -E 'test result'; grep -n '\"capture_from\"\\|\"capture_len_from\"\\|\"capture_between\"\\|\"mark_copy\"\\|fn span_text' linkedspec-runtime/src/engine.rs | head"
+reverify: "bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test typed_source_location_contract"
 ---
 
 # Rust Engine: Mark-Based Capture Family
@@ -49,28 +49,25 @@ the until-cursor and `capture_take_len_from` forms, **end-of-input** for the `_r
 (Note `capture_take_len_from` reports the length mark→match-start but advances the mark to
 the cursor — matching `Contracts.pm`.) Non-take readers never mutate.
 
-## Text vs length, marks, and guards
+## Historical implementation and current typed projection
 
-- Marks are **byte** offsets in `ctx.marks` (a flat `HashMap<String, usize>`); text readers
-  return the raw `input[a..b]` slice (correct chars), `_len_` readers return its **char**
-  count (DSL lengths are char-based, [[rust-char-based-offsets]]).
-- A missing mark, or a reversed / out-of-range span, returns `undef` — matching the Perl
-  readers' `defined`/`>=` guards. Two free helpers `span_text` / `span_char_len` centralize
-  the guarded slice so a degenerate span never panics.
-- `mark_input_start(name)` stores 0; `mark_input_end(name)` stores `ctx.input.len()` (byte
-  length); `mark_copy(target, source)` is **2-arg** — it copies `source`'s position to
-  `target`, or deletes `target` when `source` is unset. (The book catalog previously showed
-  a 1-arg `mark_copy` and a match-**end** `capture_from` — both imprecisions corrected in
-  the Helper Contract Catalog §7 in this slice.)
+At the June milestone, flat mark storage and free span helpers implemented the
+endpoint fix. Current named marks are rule-local and byte-based; helper reads
+project through RuntimeContext typed span/position authority, then materialize text
+or Unicode-scalar lengths. The September 7 reading covers these engine arms and
+reconciles them with [[typed-source-location-runtime-rollout-plan]]. Missing marks
+and reversed/invalid spans return undef. Mutation follows successful typed reads.
 
-## Known follow-on gaps (out of this leaf's scope)
+`mark_input_start(name)` stores byte 0; `mark_input_end(name)` stores the
+input byte length. `mark_copy(target, source)` copies a known source position
+or deletes the target when the source is unavailable.
 
-- The **anonymous** `capture_slice()` / `capture_slice_len()` Rust arms still read to the
-  cursor (`ctx.pos`), but the contract (and the now-corrected catalog) is the **start of the
-  current match** (`$LSPOS - length $LMATCH`). Fix belongs to `RUST-PARITY.5.5.4`.
-- `mark_match_start`/`mark_match_end`, `mark_entry_start`/`mark_entry_end`, `capture_take(mark)`,
-  and `capture_take_between`/`capture_take_between_len` exist in `Contracts.pm` but are absent
-  from both the Rust engine and the `RUST-PARITY.1` inventory — a discovered inventory gap.
+The June follow-on gaps are historical: anonymous capture_slice/length now stop
+at local match start, and named entry/match setters plus take/between helpers are
+present. The complete 7879–9278 range ends inside match_end_line; later helper
+arms remain owned by the next reading leaf. Fourteen complete / zero pending /
+231 neutral mutations pass, but this reading does not rerun the June 223 tests or
+the admitted native projection suite.
 
 ## Links
 

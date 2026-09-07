@@ -13,7 +13,7 @@ answers:
   - "are shadow bindings rejected as reentrant map_leaves mutation"
   - "does continuation failure roll back map_leaves bang"
   - "why do current backends reject map_leaves bang differently"
-date: 2026-08-31
+date: 2026-09-07
 status: accepted neutral contract; implementation, admission, recurrence, and public closeout complete
 tags: [language, mutation, map-leaves, receiver-methods, traversal, reentrancy, diagnostics, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.19.1.2 adds capability_conformance/map_leaves_mutation_contract.json and tools/check_map_leaves_mutation_contract.py. The independent checker passes 4 valid syntax, 14 invalid syntax, 5 exclusions, 10 successes, 8 pre-commit failures, continuation/shadow/guard-release/nonbang/detachment proof, and 167 rejected mutations. A checked-in action-edge control returns the same nested value on Perl/Rust/Dart/Julia/Lua. Its minimal one-token bang twin becomes null on Perl/Rust (Rust warns) and a generic parser-invocation failure on Dart/Julia/Lua. Parser and Perl ActionIR/toolbox inspection prove all current fluent method grammars are identifier-only and Perl classifies the bang segment as raw_perl/invalid_fluent_chain. No backend behavior or capability is admitted."
@@ -33,6 +33,13 @@ reverify: "bash tools/check_mutation_six_runtime.sh && bash tools/run_python_pro
 ---
 
 # Neutral `map_leaves!` contract
+
+The invariant below remains authoritative. September runtime probes find exceptions
+beyond the admitted fixture coverage: Rust final assignments and regex substitution,
+and Perl callback substitution lowering. Repairs `SESSION-STARTUP-READING.58`/`.59`
+own closure; see [[rust-final-value-assignment-receiver-guard-gap]] and
+[[regex-substitution-callback-and-flag-discrepancies]]. Historical passing admission
+and neutral mutation counts do not prove those newly measured paths.
 
 `FUTURE-PARITY-BACKLOG.19.1.2` freezes `linkedspec-map-leaves-mutation-v1` before backend implementation. Its sole
 v1 syntax is `IDENTIFIER.map_leaves!() { ACTION_BLOCK }`. The bang is one suffix on this receiver method token,

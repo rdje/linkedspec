@@ -8,8 +8,8 @@ answers:
   - "does split array target mutate arrays in Rust"
   - "why did lib_reader still have quoted or null fields after RUST-PARITY.7.3.4.1"
   - "what did RUST-PARITY.7.3.4.4 implement"
-date: 2026-07-03
-status: confirmed
+date: 2026-09-07
+status: historical implementation confirmed; callback and flag gaps tracked in startup .59
 tags: [rust, runtime, helpers, mutation, lib_reader, RUST-PARITY]
 evidence: "RUST-PARITY.7.3.4.4 added Rust runtime detection for statement-form `substr(scalar(target), pattern, replacement, flags)` / `regex_subst(...)` before pure value `substr`, mutating the scalar target with regex replacement (`g` global; `i/m/s/x` inline flags; `o` no-op). It also added statement-form `split(array(target), scalar(source), delimiter)` before pure value `split`, replacing the array target. Focused integration tests cover scalar regex substitution, `$1` replacement, split mutation, and real `specs/lib_reader.spec` sattribute/cattribute execution; `lib_reader_sattribute` and `lib_reader_cattribute` are checked-in oracle fixtures."
 reverify: "rg -n 'regex_subst_call_parts|split_statement_call_parts|rust_parity_7_3_4_4|lib_reader_sattribute|lib_reader_cattribute|Statement-style regex substitution' rust/linkedspec-runtime/src/engine.rs rust/linkedspec-runtime/tests/integration_test.rs tools/gen_oracle_corpus.pl docs/linkedspec-book/src docs/tasks/RUST-PARITY.md"
@@ -17,13 +17,14 @@ reverify: "rg -n 'regex_subst_call_parts|split_statement_call_parts|rust_parity_
 
 # Rust Statement Mutation Helpers
 
-Confirmed 2026-07-03 (`RUST-PARITY.7.3.4.4`).
+Historical implementation: 2026-07-03 (`RUST-PARITY.7.3.4.4`). Its native test
+proof above is dated; the September reading does not rerun that suite.
 
-Rust now treats these as mutation statements:
+Current bare-target statement forms after wrapper retirement are:
 
-- `substr(scalar(target), pattern, replacement, flags)`
-- `regex_subst(scalar(target), pattern, replacement, flags)`
-- `split(array(target), scalar(source), delimiter)`
+- `substr(target, pattern, replacement, flags)`
+- `regex_subst(target, pattern, replacement, flags)`
+- `split(target, source, delimiter)`
 
 This is intentionally separate from pure value helpers:
 
@@ -32,3 +33,8 @@ This is intentionally separate from pure value helpers:
 
 The shipped `lib_reader.spec` depends on the mutation forms to strip quotes/whitespace
 from scalar captures and to split comma-list attributes into a working array.
+
+The complete engine 7879–9278 reading in `SESSION-STARTUP-READING.3.3.20`
+confirms raw-target substitution and scalar publication. Ten paired controls expose
+flag-form and callback dispatch/guard discrepancies; see
+[[regex-substitution-callback-and-flag-discrepancies]] and repair `.59`.

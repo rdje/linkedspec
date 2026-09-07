@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `acbadc0fce4abdc03585c0fd26c9a1f7545958e2` — clean preceding reading checkpoint.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.19 - read receiver traversal and diagnose final-assignment guard`.
+- activation_commit: `14a66b821d3ebb64eb91781ebd44e0b80e1f2030` — clean preceding reading checkpoint.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.20 - read helper dispatch and own substitution composition repairs`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: activate `.3.3.20`; continue engine reading at lines 7879–9278,
+- next_action: activate `.3.3.21`; continue engine reading at lines 9279–10777,
   then continue queued reading. Intake `.31` preserves the forward source coverage and exact findings.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
-- blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.58` precede mutation setup; `.29` is part of `.5` adoption.
+- blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.59` precede mutation setup; `.29` is part of `.5` adoption.
 - current_rust_warning_debt: repeated clean carriers report 1,870 `pgen` plus 26 `rgx-core` output warnings;
   `RUST-DEPENDENCY-WARNING-ZERO.1-.7` own causal repair/pins/enforcement without suppression, after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -20,10 +20,10 @@
   exact six-runtime recurrence is complete under `.19.8`, and public teaching/no-drift is closed under `.19.9`.
 - current_map_leaves_mutation: `linkedspec-map-leaves-mutation-v1` is implemented on all five backends with one bang-only mutation AST,
   resolved receiver identity guard, root-kind original-shape traversal, copied frames, atomic rebind, detached
-  result, post-commit continuation, exact diagnostics/exclusions, and 167 base mutations. Receiver callback writes
-  through assignment, nested write/bang, mutation helpers, array-end methods, and binding-target array pipelines
-  are guarded except Rust final scalar/nested writes (startup .58). Backends preserve the typed node through supported reconstructed/
-  generated/emitted carriers; the Lua suite passes 530 assertions per ABI. Portable capability
+  result, post-commit continuation, exact diagnostics/exclusions, and 167 base mutations. Known gaps affect Rust final assignments
+  and substitution, plus Perl callback substitution (startup .58/.59). The typed node survives supported
+  reconstructed/generated/emitted carriers; admitted guard tests remain bounded to their covered routes.
+  The Lua suite passes 530 assertions per ABI. Portable capability
   `language.map_leaves_receiver_mutation` is admitted by `.19.7`; exact six-runtime recurrence is complete under
   `.19.8`, and public teaching/no-drift is closed under `.19.9`.
 - current_rule_entry_dispatch_invariant: selecting a rule enters its handler and starts its mode-driven execution;
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4984` is the twenty-seventh history segment; ADR `0104`
   authorizes exactly 29 collection files / 28 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook Yes (physical); .31/.3.2.42 preserve complete book/Perl source coverage and repair ownership; formal .4 alignment remains pending (78/100 after `.3.3.19` lands).
+- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook Yes (physical); .31/.3.2.42 preserve complete book/Perl source coverage and repair ownership; formal .4 alignment remains pending (79/100 after `.3.3.20` lands).
