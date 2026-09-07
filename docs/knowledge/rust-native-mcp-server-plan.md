@@ -57,7 +57,8 @@ handles; unknown/expired/revoked/unauthorized results stay indistinguishable.
 
 Decoded dispatch implements only discover, list, capabilities, query, and cancellation. It calls native methods
 afresh, rejects all five above-policy components before a query result, preserves exact native payloads, and catches
-unwind panics for sanitized `-32603`. `serve_stdio` reads bounded fixed chunks over borrowed streams, rejects
+unwind panics for sanitized `-32603` responses. The September 7 captured-output gap below
+qualifies the separate process-stderr guarantee. `serve_stdio` reads bounded fixed chunks over borrowed streams, rejects
 malformed UTF-8/JSON and decoded duplicate keys, enforces exact depth/number/id lexemes, drains overlong frames,
 emits only validated canonical LF responses, and retains activity through successful flush. Clean EOF is silent;
 read/write/flush failures clear all registry Arcs and expose only fixed error/log text.
@@ -74,8 +75,8 @@ closes parent `.10.9.3`, and hands the exact contract to Dart `.10.9.4` after th
 ## September 7 embedded-prefix and generator reading
 
 `SESSION-STARTUP-READING.3.3.24` reads module lines 1–6 (297 bytes) and file bytes 298–65536
-of line 7, covering every canonical frame, the manifest, corpus and schema prefix. The remaining
-17,689 module bytes and runtime implementation stay with `.3.3.25` and later reading leaves.
+of line 7, covering every canonical frame, the manifest, corpus and schema prefix. At that checkpoint the remaining
+17,689 module bytes and runtime implementation stayed with `.3.3.25` and later reading leaves.
 Full-module machine identity is separate from that physical reading boundary.
 
 The shared builder requires exactly seven artifact paths/digests, resolves paths within the current
@@ -98,3 +99,33 @@ canonical-text/structured-content identities, including semantic `ok:false` with
 Neutral transport passes 35/10/10/76; admission governance passes 5/5 implementations, 6/6 runtimes,
 rollout complete/141. These are generated-artifact and governance checks, not fresh Rust dispatch,
 stdio or six-runtime execution. Older native counts and intermediate handoffs above remain historical.
+
+## September 7 frozen runtime and dispatch prefix reading
+
+`SESSION-STARTUP-READING.3.3.25` completes the remaining 17,689 embedded bytes,
+all 582 lines of `mcp_contract_runtime.rs`, and server lines 1–769. The final bundle
+contains recursive semantic shapes, source spans, four semantic payloads and seven source
+hashes. The runtime uses `OnceLock<Result<Bundle, ContractError>>` to verify hash, binding
+format and payload storage once; callers receive cloned frames and payloads. Its recursive
+validator is capped at 256 and admits only the frozen local `$defs` reference/profile,
+including Unicode-character and UTF-8-byte string bounds and two explicitly recognized
+handle/hash patterns. It is not a general JSON Schema implementation.
+
+The server retains host-provided immutable `Arc<SemanticIndex>` values. Registration checks
+authorization length, clock/expiry/capacity, native capabilities and lowering-only policy
+before creating a unique handle, with at most sixteen entropy attempts. Explicit source,
+page and budget components retain their own presence bits. Query enforcement precedes
+native query evaluation. Prepared requests remain active for wire emission; direct dispatch
+clears them after response construction. Cancellation suppresses a prepared result and
+shutdown clears registry/request ownership. The remaining server policy checks/tests and
+wire implementation belong to the next physical reading leaf.
+
+The source also checks unknown methods and unsupported versions before complete named
+metadata validation. This extends the existing `.36` owner and
+[[perl-mcp-validation-error-order-drift]]; it does not rerun the six mixed-failure Rust cases.
+The selected neutral transport/admission checks pass 35/10/10/76 and complete 5/5+6/6/141.
+The exact existing native panic test passes 1/1 with --nocapture, but captured stderr includes
+its synthetic panic text and source location. The response assertion does not check process output.
+[[rust-mcp-caught-panic-stderr-gap]] and startup `.64` own the host/output audit, bounded repair,
+isolated-process recurrence and public closure. This is private injected-test evidence, not proof of
+externally reachable failure or real-data disclosure. No runtime or public-book behavior changes.

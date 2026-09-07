@@ -6,9 +6,10 @@ answers:
   - "does an old MCP protocol version bypass missing clientCapabilities validation"
   - "do Perl MCP decoded and stdio dispatch use the documented validation order"
   - "which task owns competing MCP validation error precedence"
-date: 2026-09-06
+  - "does Rust MCP also check method and version before complete metadata"
+date: 2026-09-07
 status: confirmed-open
-tags: [perl, mcp, validation, metadata, protocol, SESSION-STARTUP-READING]
+tags: [perl, rust, mcp, validation, metadata, protocol, SESSION-STARTUP-READING]
 evidence: "SESSION-STARTUP-READING.3.2.38: six public decoded controls, repeated across decoded and in-memory stdio routes; MCPServer.pm 186–230 and ADR 0055 section 6. Existing three MCP suites pass 31 top-level tests."
 reverify: "Run the managed public decoded/stdio probe below and compare the result table with ADR 0055 section 6."
 ---
@@ -34,7 +35,7 @@ in-memory handles, returns zero on EOF, and produces exactly six response frames
 | Known tools/list, old version, clientCapabilities present | `-32022` |
 
 The controls isolate method/version checks taking precedence over missing metadata. This is a demonstrated
-code/decision discrepancy; these results alone do not establish current behavior on other runtimes or justify
+code/decision discrepancy; these Perl results alone do not establish current behavior on other runtimes or justify
 rewriting the neutral expected results to match Perl.
 
 The decoded suite's static-dispatch section consumes separate canonical unsupported-version, missing-metadata,
@@ -47,6 +48,17 @@ or runtime repair is claimed.
 decision/book/Knowledge and recurring closeout. All follow required reading and policy review. Preserve the
 special legacy diagnostic, validated-id and notification rules, cancellation/flush cleanup, and native authority.
 This is separate from the already-repaired explicit policy-component boundary in [[mcp-all-twenty-transport-blocker]].
+
+## September 7 Rust source reconciliation
+
+`SESSION-STARTUP-READING.3.3.25` reads `mcp_server.rs` through line 769. Its
+`dispatch_with_preparation` likewise selects unknown-method `-32601` before inspecting protocol
+metadata, then unsupported-version `-32022` before complete named-request validation. Known
+discovery/list/tool calls validate their complete schemas afterward. ADR 0058 section 4 points
+back to ADR 0055's required order; it does not independently authorize this precedence.
+This is source evidence for the existing `.36.1` census, not a fresh execution of the six
+combined Rust cases or other runtimes. Existing single-failure fixtures do not prove mixed-failure
+ordering. Preserve the dated Perl observations above until the owned cross-runtime repair runs.
 
 ## Reverify
 

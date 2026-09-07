@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.25 — read frozen MCP runtime and own caught-panic output repair
+
+Read the remaining embedded MCP bytes, complete frozen schema runtime and server prefix (1,352 lines/fragments; 65,134 bytes), all baseline-identical. Rust source extends the existing .36 validation-order repair. The exact existing panic unit test passes 1/1 but captured stderr contains its synthetic panic text/source location; new .64 owns host/output audit, repair, isolated-process recurrence and public closure. No external panic reachability or real-data disclosure is inferred. Managed binding and neutral MCP transport/admission pass; native results and already-owned dependency warnings are consumed.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.24 — read embedded MCP contract prefix and reconcile generated identity
 
 Read the first 65,536 bytes of the generated Rust MCP module without truncation, plus its complete shared builder and Rust generator. Both generated bindings are byte-fresh; decoded checks preserve 35 frame identities, four canonical-text/structured pairs, 72 fact keys and bounded contract strings. Transport 35/10/10/76 and admission complete/141 pass. Two Knowledge owners qualify historical sizes and distinguish artifact/governance checks from native execution. The remaining embedded bytes and runtime implementation stay on the next reading leaf.

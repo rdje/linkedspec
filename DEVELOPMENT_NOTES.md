@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.25 — A sanitized returned response does not establish silent process output
+
+The MCP prepare_response builder is wrapped in catch_unwind and returns fixed -32603 on panic. Its existing fixture asserts only returned JSON. With --exact --nocapture, the test still passes while stderr records the synthetic panic and source location. Response construction and process-level panic reporting need separate evidence; .64 owns the bounded correction without silently replacing a host-global hook. Native timing separates 6m10s build from 2.43 test seconds and 524.920 total. Source reading also confirms Rust's method/version-before-full-schema order under existing .36. No production or public-document repair precedes startup prerequisites.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.24 — Generated identity and physical comprehension have different boundaries
 
 The generator can prove byte equality for the entire 83,225-byte module while this reading leaf owns only its first 65,536 bytes. Keep those facts distinct. Its shared builder verifies source digests and canonical frame encoding; the Rust renderer embeds canonical JSON with a noncolliding raw delimiter. Four semantic text/structured pairs retain exact identity, including semantic failure in a successful transport envelope. Fresh neutral admission validates governance rather than rerunning native servers. The next leaf continues inside the schema and then reads production dispatch support.
