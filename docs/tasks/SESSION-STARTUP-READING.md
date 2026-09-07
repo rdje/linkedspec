@@ -1367,13 +1367,17 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.26 - complete MCP wire reading and own final EOF byte-limit repair`
 
 - ID: `SESSION-STARTUP-READING.3.3.27`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 27: 1,500 lines/fragments, 50,300 bytes.
   Scope: `rust/linkedspec-runtime/src/primary_cli.rs` lines 169–796;
     `rust/linkedspec-runtime/src/recognition_transaction.rs` lines 1–872.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Read primary CLI 169–796 and recognition transaction 1–872; exact baseline identity; Knowledge-first CLI/recognition authority reconciliation; selected neutral recognition/CLI direct-dependent proof and bounded diagnostics when evidence requires; history/memory/derived Knowledge/staged diff/all nine pre-commit doctrines. No runtime/public/policy repairs before startup prerequisites.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS: all 1,500 owned lines/50,300 bytes and 68 supporting helper lines baseline-identical; shared Rust CLI 66/66 default with empty stderr; neutral recognition 138/250/58, 9/9 and public/admission guards; .38 source comparison; Knowledge/history/memory/staged diff/all nine pre-commit doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.27 - complete primary CLI and read recognition authority guards`
 
 - ID: `SESSION-STARTUP-READING.3.3.28`
   Status: `pending`
@@ -2912,6 +2916,8 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     precedence under the accepted contract. Check authored/carrier reachability separately from private-host misuse.
   Verification: `pending` — `.3.2.40` reproduces six private-authority controls: both same-frame cases retain
     current state, while four cross-frame/source cases restore cursor/boundary/marks to the old checkpoint.
+    .3.3.27 Rust source comparison finds an early invalidated-status return before snapshot restoration;
+    this excludes the exact Perl mechanism in that helper, not the pending behavioral/runtime census.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.38.2`
@@ -3900,7 +3906,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.27` | `pending` | read primary_cli.rs lines 169–796 and recognition_transaction.rs lines 1–872. |
+| 1 | `SESSION-STARTUP-READING.3.3.28` | `pending` | read recognition_transaction.rs lines 873–1547 and runtime.rs lines 1–821. |
 
 ## Reading Ledger
 
@@ -3911,7 +3917,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.26` are reconciled and `.3.3.27`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.27` are reconciled and `.3.3.28`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -6485,6 +6491,15 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - New Knowledge `rust-mcp-final-eof-byte-limit-gap` and `.65.1`–`.65.3` own Rust repair, delimiter/chunk/size recurrence plus six-runtime census, and public/canonical closure. Exact paired results 2,250 bytes SHA-256 `6df59fc3c3c5c61aed49f5acb976539c00035a7093333f0d38b1c68bd34fb23b`; scratch retains 44 files/3,996,953 bytes plus 6,144-byte manifest `315fbebf2999b26bd528703cc3c338613f5c4b3536b5b28604e4160abc29ace4`. Probe uses verified existing runtime rlib `7cbddb91b8c3043adaf709ae4344f94cf0b17f80e25569456445285648f8c972`, managed compilation 35.867 seconds after the unit job, public execution 0.468. No other-runtime or unbounded acceptance is inferred.
 - Neutral transport 35/10/10/76 and implementation/admission complete 5/5+6/6/141 pass. Existing pgen/rgx-core build warnings remain independently owned. Rust MCP, panic-output and trace Knowledge owners now reflect precise source/proof limits. All jobs and results are consumed; no artifact recovery/purge or runtime/public/policy repair occurs. Roadmap Yes, codebase No, physical book Yes; startup alignment and repairs remain pending.
 
+### Primary CLI completion and recognition authority prefix at `.3.3.27`
+
+- Activated from clean `03f4577ae239c2e7015f03554b77b0eb95d523d1` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read primary_cli.rs 169–796 (628 lines; 20,657 bytes; SHA-256 `71eda498bf259b4a1e8417e6f4053b55a9fdde9c91711da6761d5cb8ad063b66`) and recognition_transaction.rs 1–872 (29,643 bytes; `dfedf17926e9398947f808724f52fcbfc3ea244d30f26c371ff632117ab396b1`). All 1,500 lines/50,300 bytes/full files equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`; every range read without truncation. Primary CLI is now physically complete. Supporting recognition helpers 1387–1454 add 68 lines/2,030 bytes (`fc0d0cb1df36fd724a62147b3f353aef026883fb85ef26372aad22d0b85723dc`) without claiming the intervening runtime adapter read.
+- CLI preserves exact manual option/error policy, removed parse-mode rejection, strict UTF-8, native named/file compilation versus inline parse/validate/compile, deferred input load, direct result execution and LF JSON. Medium trace includes source/input/top rule only; thresholds, UTF-8 byte escaping, trace sinks and executable-before-cwd repository discovery stay adapter-owned. The verified existing primary binary `ad45555750489b78f7835457a09ecfa174d56b7ebf6242a4db5850570797c81a` passes 66/66 shared default cases in 60.311 seconds with empty runner stderr. POSIX and broader Rust gates are not rerun; no Cargo/rustc build occurs.
+- Recognition authority owns checked monotonic generations, Arc source identity, Rc invocation state with weak token/frame links, detached cursor/boundary/mark snapshots, separate matched/payload-presence state, one attempt and explicit terminal transitions. Its nine allowed/eleven rejected effect vocabulary propagates through recursive fixed points; progress depends on cursor advancement. Unlike the measured Perl .38 defect, supporting restore_and_invalidate returns on Invalidated before modifying saved frame state. Existing `.38.1` and Knowledge now record this source boundary; no fresh Rust six-case post-terminal or authored/carrier execution is claimed.
+- Fresh neutral recognition passes 138 node rows/250 calls/58 mutations, token 8/17, effects 6, marks 6, progress 8, rollout 9/9, public 3/26/45, guide 1/14/18, and current admission guards. Knowledge updates qualify historical 61-case CLI/3-of-9 recognition milestones and route Rust reverify through managed Cargo. CLI log `.linkedspec-data/scratch/startup86-cli-recognition/cli-stdout.log` 3,386 bytes SHA-256 `ec285ccb6f3db8052e02a29c46a978f51923f85bbb2fb16e156d31deae44160e`; command/status records retain exact invocation and exit evidence.
+- The known process-group setup warning recurred during the prior slice's successful managed documentation correction; intended bytes were verified and actual PGID was not captured. The existing `.7` fact now preserves that bounded recurrence without a new causal claim or cleanup authorization. All current jobs/results are consumed; no artifact recovery/purge or runtime/public/policy repair occurs. Roadmap Yes, codebase No, physical book Yes; startup alignment and repair prerequisites remain pending.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -6567,7 +6582,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.3.23` is item 82/100 at `71e6df55`;
   `.3.3.24` is item 83/100 at `83b9bfe3`;
   `.3.3.25` is item 84/100 at `d4950016`;
-  `.3.3.26` is item 85/100 once committed.
+  `.3.3.26` is item 85/100 at `03f4577a`;
+  `.3.3.27` is item 86/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -6717,6 +6733,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.24` | Untruncated 65,536-byte source read/current-baseline identity; two byte-fresh generators; neutral transport/admission; decoded bundle/frame/schema assertions; supporting source identity; Knowledge/history/memory/staged diff/all nine pre-commit doctrines | PASS generated MCP prefix and authority identity; runtime/suffix reading remains next. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.25` | Untruncated scope/baseline identity; managed binding/neutral MCP; exact native panic test and captured stdout/stderr; Knowledge/history/memory/staged diff/all nine pre-commit doctrines | PASS reading checkpoint; .36 source evidence extended; new .64 owns confirmed synthetic panic-output gap. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.26` | Complete baseline scope; six native wire tests; twelve paired public size/delimiter cases; canonical-output and source-cause assertions; neutral MCP; Knowledge/history/memory/staged diff/all nine pre-commit doctrines | PASS bounded source reading; .65 owns confirmed one-byte final EOF discrepancy; .64 wire source scope extended. |
+| `2026-09-07` | `SESSION-STARTUP-READING.3.3.27` | Exact baseline source/helper coverage; verified existing CLI 66/66 default; neutral recognition/current guards; source-bounded .38 comparison; Knowledge/history/memory/staged diff/all nine pre-commit doctrines | PASS CLI/recognition reading; current trace/admission facts reconciled and Rust invalidation helper guard qualified. |
 
 ## Commit Log
 
@@ -6808,6 +6825,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.3.24` | `SESSION-STARTUP-READING.3.3.24 - read embedded MCP contract prefix and reconcile generated identity` | Preserve exact generated-prefix coverage and identity, update old sizes, distinguish artifact/governance proof from runtime execution. |
 | `SESSION-STARTUP-READING.3.3.25` | `SESSION-STARTUP-READING.3.3.25 - read frozen MCP runtime and own caught-panic output repair` | Preserve frozen-runtime/registry coverage and separate response sanitation from captured process output; own .64 repair and qualify native reachability. |
 | `SESSION-STARTUP-READING.3.3.26` | `SESSION-STARTUP-READING.3.3.26 - complete MCP wire reading and own final EOF byte-limit repair` | Complete MCP server/wire coverage, qualify existing unit boundaries, and own the independently reproduced EOF limit repair. |
+| `SESSION-STARTUP-READING.3.3.27` | `SESSION-STARTUP-READING.3.3.27 - complete primary CLI and read recognition authority guards` | Complete primary CLI coverage, distinguish current neutral proof from historical native counts, and preserve Rust's early invalidation guard. |
 
 ## Changelog
 
@@ -6943,3 +6961,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-07`: `.3.3.24` reads the first 65,536 generated MCP bytes and reconciles exact binding identity and proof limits.
 - `2026-09-07`: `.3.3.25` completes the embedded MCP module/runtime prefix and owns caught-panic process-output repair .64.
 - `2026-09-07`: `.3.3.26` completes MCP server/wire reading, reads primary trace prefix, and owns EOF byte-limit repair .65.
+- `2026-09-07`: `.3.3.27` completes primary CLI reading, reads recognition authority/effects/progress, and reconciles .38 source scope and current Knowledge.

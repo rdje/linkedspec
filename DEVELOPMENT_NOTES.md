@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.27 — Current source guards and dated runtime evidence have separate scopes
+
+Rust's token validation checks source/invocation before reuse, like Perl, but its restoration helper first returns on Invalidated. The exact stale-snapshot mechanism measured in Perl is therefore absent from this Rust helper; .38 still owns the full behavioral/runtime census. CLI source and 66 default cases confirm source/input/top-rule trace metadata with no retired parse-mode field. Historical 61-case and 3-of-9 Knowledge claims are now explicitly dated, while fresh neutral recognition is complete 9/9. No native recognition consumer or Rust compiler runs in this slice.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.26 — Separate valid size controls expose a missing EOF combination
 
 Both Rust and Perl retain one byte beyond the payload ceiling for CRLF framing. Rust rechecks size only in its newline branch; Perl also checks in decode_payload. A valid padded discovery frame at maximum+1 therefore succeeds only on Rust EOF, while maximum+2 and both newline delimiters reject correctly. Existing malformed overlong input cannot isolate a size check from JSON rejection; ordinary EOF and maximum CRLF tests miss the combination. Twelve independent pairs and exact Rust canonical bytes bound the finding to one byte. .65 owns the correction and recurrence; the initial Perl probe option typo ran no accepted case.

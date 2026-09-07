@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `d495001609729b0a753a2a1a1551aacbd6089ffa` — clean preceding reading checkpoint.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.26 - complete MCP wire reading and own final EOF byte-limit repair`.
+- activation_commit: `03f4577ae239c2e7015f03554b77b0eb95d523d1` — clean preceding reading checkpoint.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.27 - complete primary CLI and read recognition authority guards`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: activate `.3.3.27`; read primary_cli.rs lines 169–796 and recognition_transaction.rs lines 1–872,
+- next_action: activate `.3.3.28`; read recognition_transaction.rs lines 873–1547 and runtime.rs lines 1–821,
   then continue queued reading. Intake `.31` preserves the forward source coverage and exact findings.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.65` precede mutation setup; `.29` is part of `.5` adoption.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4984` is the twenty-seventh history segment; ADR `0104`
   authorizes exactly 29 collection files / 28 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook Yes (physical); .31/.3.2.42 preserve complete book/Perl source coverage and repair ownership; formal .4 alignment remains pending (85/100 after `.3.3.26` lands).
+- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook Yes (physical); .31/.3.2.42 preserve complete book/Perl source coverage and repair ownership; formal .4 alignment remains pending (86/100 after `.3.3.27` lands).

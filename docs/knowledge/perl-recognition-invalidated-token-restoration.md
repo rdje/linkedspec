@@ -6,9 +6,10 @@ answers:
   - "why does cross-invocation misuse of an invalidated Perl token roll back newer marks"
   - "does cross-source token rejection preserve state after terminal invalidation"
   - "which task repairs stale transaction snapshot restoration after commit or rollback"
-date: 2026-09-06
+  - "does Rust restoration guard already invalidated recognition tokens"
+date: 2026-09-07
 status: confirmed-open
-tags: [perl, recognition, token, transaction, invalidation, rollback, SESSION-STARTUP-READING]
+tags: [perl, rust, recognition, token, transaction, invalidation, rollback, SESSION-STARTUP-READING]
 evidence: "SESSION-STARTUP-READING.3.2.40: six private-authority controls, RecognitionTransaction.pm 358–410 and 496–518; authority/carrier suites pass 59 top-level tests."
 reverify: "Run the managed six-case post-terminal probe below and compare owner cursor/boundary/marks before and after rejection."
 ---
@@ -50,6 +51,16 @@ recorded lexical/compilation-order escape checker defect remains
 [[SESSION-STARTUP-READING]] `.38.1` owns all-operation/ownership and six-runtime census, bounded repair
 decomposition, preservation of live rollback, and independent post-terminal regressions.
 `.38.2` owns neutral/runtime/book/Knowledge and recurring closeout after repair.
+
+## September 7 Rust source comparison
+
+`SESSION-STARTUP-READING.3.3.27` reads Rust authority lines 1–872 plus supporting
+drop/restoration helpers 1387–1454. Rust also checks source/invocation ownership before
+its reused-token diagnostic, but `restore_and_invalidate` reads token status and returns
+immediately if already invalidated, before assigning the saved frame state. Its terminal
+`invalidate` helper has the same early status guard. Thus this exact Perl restoration
+mechanism is absent from the inspected Rust helper. This is source evidence, not a fresh
+six-case Rust behavioral run or closure of `.38.1`'s full operation/runtime census.
 
 ## Reverify
 

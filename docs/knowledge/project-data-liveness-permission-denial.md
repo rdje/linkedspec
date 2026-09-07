@@ -9,7 +9,7 @@ answers:
   - which task owns permission denied liveness repair
   - why did managed generation report child setpgid operation not permitted
   - does the run wrapper verify child process group establishment
-date: 2026-09-06
+date: 2026-09-07
 status: confirmed defect; repair pending under SESSION-STARTUP-READING.7
 tags: [storage, cleanup, process, liveness, permissions, sandbox, defect]
 evidence: "SESSION-STARTUP-READING.6 at source d6d3c890c2e4aa49747879b2db227f2577db0fb6 launches a managed 45-second sleep. Same-run restricted list reports abandoned and permitted list reports live. Restricted kill-zero on wrapper 91044, child 91271, and group -91271 returns zero with errno 1 / EPERM; permitted ps shows both alive at 27 seconds and all three kill-zero probes succeed. The wrapper exits 0 and final permitted list finds zero leftovers. No recover/purge/deletion probe runs."
@@ -66,3 +66,9 @@ bash tools/project_data_run.sh env PERL5LIB= perl -MJSON::PP -e 'print JSON::PP-
 The denied child-side setup attempt is observed; its kernel/parent-child timing cause and the original final
 group identity remain unestablished. Do not infer either a failed group or complete lifecycle correctness from
 the successful command. The repair must distinguish a benign setup race from absent group establishment.
+
+September 7 `SESSION-STARTUP-READING.3.3.26` observed the same child-side setup warning
+for PID 76199 during a managed documentation correction. The command exited zero and the
+intended edit was independently verified before staging. The actual resulting PGID was not
+captured, so this recurrence adds no new causal conclusion; existing `.7` ownership and the
+recovery/purge restriction remain unchanged. `.3.3.27` preserves this bounded observation.

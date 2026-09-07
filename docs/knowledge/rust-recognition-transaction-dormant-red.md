@@ -14,22 +14,22 @@ answers:
   - "does Rust have dedicated recognition transaction ActionIR nodes"
   - "does the Rust transaction RED cover independently compiled emitted source"
   - "does the Rust recognition transaction RED change rollout or production behavior"
-date: 2026-08-10
+date: 2026-09-07
 status: historical dormant boundary resolved by FUTURE-PARITY-BACKLOG.14.3.3.3
 tags: [rust, recognition, transaction, ActionIR, RED, generated-source, history, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.14.3.3.0 adds rust/linkedspec-runtime/tests/recognition_transaction_contract.rs behind outer cfg linkedspec_recognition_transaction_red and nested integration cfg linkedspec_recognition_transaction_integration_red. FUTURE-PARITY-BACKLOG.14.3.3.1 adds rust/linkedspec-runtime/src/recognition_transaction.rs and its documentation-hidden lib.rs route under the same outer custom cfg only. The authority owns source-local monotonic invocation/frame/mark/token generations, detached snapshots, strict matched/payload separation, exactly-once attempt state, restore-before-invalidate misuse handling, and terminal drop/unwind cleanup. Supplying the module exposed defects that the prior E0432 had masked in the dormant consumer: constructor shadowing, six abbreviated nonexistent neutral JSON keys, and an incomplete nonexistent syntax path. FUTURE-PARITY-BACKLOG.14.3.3.2 adds four dedicated parser/ActionIR nodes, neutral effect/progress classifiers, live cursor/boundary/mark/acceptance binding, generated-plan execution, and structurally selected emitted-source execution. Ordinary offline Cargo discovers zero tests; explicit outer-cfg execution passes 7/7 and the nested integration passes 12/12. Neither cfg has an ordinary manifest/canonical-driver route, so rollout remains 2/9 and current public behavior remains Perl-only."
 evidence_update_2026_08_10_admission: "FUTURE-PARITY-BACKLOG.14.3.3.3 removes both historical cfgs from all nine governed Rust sources. Ordinary Cargo now executes the unchanged complete consumer at 12/12, canonical CI executes the exact same target once, and eight checker mutations reject stale cfg or registration drift. Rust advances to complete while Dart remains the next RED."
-reverify: "cargo test --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test recognition_transaction_contract && ! rg -n 'linkedspec_recognition_transaction' rust/linkedspec-core rust/linkedspec-runtime"
+reverify: "bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test recognition_transaction_contract && ! rg -n 'linkedspec_recognition_transaction' rust/linkedspec-core rust/linkedspec-runtime"
 ---
 
 # Historical cfg-private Rust recognition-transaction boundary
 
 Before admission, the final-path consumer was
 `rust/linkedspec-runtime/tests/recognition_transaction_contract.rs`. Its
-file-level custom cfg deliberately leaves ordinary Cargo and canonical CI with
-zero active tests. Enable only `linkedspec_recognition_transaction_red` to
-exercise the private state contract. The documentation-hidden
-`linkedspec_runtime::recognition_transaction` module now satisfies that outer
+file-level custom cfg deliberately left ordinary Cargo and canonical CI with
+zero active tests. At that historical stage, enabling only `linkedspec_recognition_transaction_red`
+exercised the private state contract. The documentation-hidden
+`linkedspec_runtime::recognition_transaction` module satisfied that outer
 contract at 7/7 while remaining absent from ordinary builds.
 
 The private module implements one source-local authority with opaque monotonic
@@ -49,10 +49,12 @@ reconstructed, generated-plan, and freshly compiled emitted-source execution
 over the private authority. This remains an internal implementation boundary,
 not admission.
 
-Admission `.14.3.3.3` removed both custom cfgs after that staged proof. Current
-authored Rust recognizes the four forms, ordinary and canonical discovery run
-the same exact 12-test consumer, and rollout is neutral + Perl + Rust 3/9. This
-card remains the canonical history of why the two dormant seams existed.
+Admission `.14.3.3.3` removed both custom cfgs after that staged proof. At that admission,
+authored Rust recognized the four forms, ordinary and canonical discovery ran
+the same exact 12-test consumer, and rollout was neutral + Perl + Rust 3/9.
+September 7 `.3.3.27` confirms current neutral rollout 9/9 and no dormant-source
+claim is current; see [[rust-recognition-transaction-integration]]. This card
+preserves the history of why the two dormant seams existed.
 
 ## Links
 

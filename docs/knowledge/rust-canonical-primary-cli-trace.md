@@ -21,7 +21,7 @@ portable compile/input/invoke records and does not call or reduce the rich `link
 native embedding. Backend-internal scopes, source locations, and runtime decisions therefore cannot leak into
 the primary command contract.
 
-The adapter implements named and numeric thresholds, source/input/top-rule/mode metadata, UTF-8 argument and
+The adapter implements named and numeric thresholds, source/input/top-rule metadata, UTF-8 argument and
 loaded-input byte counts, canonical JSON byte length, uppercase bytewise percent escaping, exact emoji, and
 stdout/route/mirror sinks. A selected file implies route unless a mode is explicit. Reset truncates even at
 none/quiet; otherwise files persist or append. Trace setup/write failures map to the stable compilation failure,
@@ -50,5 +50,25 @@ stdout buffer. A nonempty selected file implies route; explicit stdout/route/mir
 that default. Reset creates/truncates the selected file during setup, before event thresholds;
 emission appends and flushes only for route/mirror and separately accumulates stdout/mirror.
 This prefix confirms sink ownership and byte framing; option parsing, phase event sequencing
-and remaining primary-command source belong to the next reading leaf. It does not rerun
+and remaining primary-command source belonged to the next reading leaf. It does not rerun
 primary CLI conformance or broaden the older 66-case proof.
+
+## September 7 complete primary-command reading
+
+`SESSION-STARTUP-READING.3.3.27` completes lines 169–796. The manual parser rejects
+abbreviations, case changes and positionals, supports long option=value, preserves ordered
+ordinary errors, and rejects removed --parse-mode explicitly. Source selection precedes
+deferred input loading; named/file requests use the native loader and inline requests use
+native parse/validate/compile. Invocation uses direct execute_value and optional entry rule.
+Argument/file decoding is strict UTF-8, and results are JSON bytes plus LF.
+
+The current medium request record contains source kind, input kind and escaped top rule;
+it has no parse-mode field after ADR 0044. Numeric thresholds accept an optional minus followed by ASCII decimal
+digits and saturate to i64 extrema only as threshold policy. Event fields percent-encode
+individual UTF-8 bytes. Executable ancestry wins repository discovery, then cwd ancestry,
+then cwd fallback, without mutating global cwd.
+
+The verified existing CLI binary passes all 66 shared cases in the default environment,
+exit zero in 60.311 seconds with empty runner stderr. This does not rerun POSIX or the
+broader local Rust gate. The exact runner owns separate raw channels, status and expected
+trace files; no Cargo/rustc build or native recognition consumer ran in this reading checkpoint.

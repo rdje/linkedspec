@@ -9,7 +9,7 @@ answers:
   - how are routed trace files checked by CLI conformance
   - what placeholders does the CLI conformance runner support
   - what did FUTURE-PARITY-BACKLOG.1.5.1.1 implement
-date: 2026-07-15
+date: 2026-09-07
 status: current
 tags: [cli, conformance, fixtures, runner, exact-bytes, backends, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.5.1.1 adds the arbitrary-command runner; backend parity extends it unchanged across five backends. PROJECT-DATA-SSD-ROOTING.2.1 routes the standalone matrix through managed repository storage and adds an actual-workspace SSD oracle."
@@ -60,7 +60,10 @@ ADR `0025` requires invalid UTF-8 source/input file cases. `.1.5.1.6.1` adds a
 schema-v1-compatible explicit `bytes_hex` source for workspace files. It is
 mutually exclusive with checked-in `source`, non-empty/lowercase/even-length,
 and materialized as raw bytes. `.6.2` now uses that form for invalid bytes, source
-BOM preservation, and exact Unicode input bytes; the current suite has 61 cases.
+BOM preservation, and exact Unicode input bytes; that milestone had 61 cases.
+September 7 `SESSION-STARTUP-READING.3.3.27` reruns the current 66-case manifest on the
+verified existing Rust CLI in the default environment: 66/66, exit zero, empty runner stderr.
+It does not rerun POSIX or other backend legs.
 
 Related facts: [[user-observable-backend-cli-parity-contract]],
 [[perl-primary-cli-conformance-audit]], [[cross-backend-cli-contract-gap]],

@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.27 — complete primary CLI and read recognition authority guards
+
+Read the remaining primary CLI and recognition authority prefix (1,500 lines; 50,300 baseline-identical bytes), plus 68 restoration helper lines. The existing Rust command passes all 66 shared default cases; neutral recognition passes 138/250/58 at complete 9/9. Rust's restoration helper returns before touching state for an invalidated token, qualifying the existing .38 census without a fresh behavioral claim. Knowledge now distinguishes current trace metadata/rollout from historical counts and preserves the already-owned process-group warning recurrence.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.26 — complete MCP wire reading and own final EOF byte-limit repair
 
 Complete MCP server/wire reading and the primary CLI prefix (1,500 lines; 51,296 baseline-identical bytes). Six existing Rust wire tests pass, but twelve paired public Rust/Perl delimiter/size controls isolate acceptance of one extra byte at final EOF in Rust. New .65 owns repair, combined-boundary recurrence, six-runtime census and public closure; .64 gains exact wire catch scope. Neutral transport/admission pass. All jobs are consumed; runtime/public/policy behavior remains unchanged pending startup prerequisites.
