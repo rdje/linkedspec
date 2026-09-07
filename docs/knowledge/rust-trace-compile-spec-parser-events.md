@@ -10,11 +10,11 @@ answers:
   - "does Rust traced compilation enforce progressive span dispatch validation"
   - "why did compile_with_trace accept residual dispatch_span calls"
   - "what did TRACE-OBSERVABILITY.5.1 repair"
-date: 2026-08-26
+date: 2026-09-07
 status: current
 tags: [trace, observability, rust, parity, staged-parsing, task-tree, mdbook]
 evidence: "rust/linkedspec-core/src/{parser.rs,validation.rs,compiler.rs}; rust/linkedspec-runtime/src/{spec_parser.rs,staged_parser_registry.rs}; rust/linkedspec-runtime/tests/trace_controls.rs; docs/linkedspec-book/src/public-api/trace-api.md"
-reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test trace_controls"
+reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test trace_controls"
 ---
 
 `TRACE-OBSERVABILITY.4.3` adds routed Rust trace events for compile-side and spec-parser owner boundaries while
@@ -35,5 +35,11 @@ staged-parse, and compiled-regex validators but omitted the already-current
 `dispatch_span(...)` could be accepted only when compilation tracing was enabled. `.5.1` restores the missing
 call at the same point in the validator sequence and adds an exact ordinary/traced diagnostic-equality regression.
 Valid traced/untraced compile results remain equal, and the admitted progressive four-route contract remains
-GREEN. The separate gap-aware runtime `child_dispatch` event defect is owned by `.5.2`; Rust must not renew the
-full trace-parity claim until that corrective leaf closes.
+GREEN. The separate gap-aware runtime `child_dispatch` event defect subsequently closed under `.5.2` on
+August 26. That leaf restores the shared entry-slot dispatch/result event seam for interpreted and generated
+plans; its dated proof is 11/11 trace controls, 6/6 source-emitter tests, 1/1 gap admission and 7/7 core trace.
+The corrective tree then closes canonically under `.5.4` after the staged admission proof snapshot repair.
+
+September 7 reading checkpoint `SESSION-STARTUP-READING.3.3.10` reconciles the stale pending sentence against
+the completed `.5.2` and `.5.4` records in `docs/tasks/TRACE-OBSERVABILITY.md`. Their native and canonical
+results remain dated milestone evidence, not an assertion that this reading leaf reran those full suites.

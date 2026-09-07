@@ -9,10 +9,10 @@ answers:
   - does Rust primary CLI trace escape user fields
   - how many shared CLI cases does Rust pass after trace implementation
   - what did FUTURE-PARITY-BACKLOG 1.5.2.3 implement
-date: 2026-07-10
+date: 2026-09-07
 status: current
 tags: [rust, cli, trace, utf8, parity, ADR-0024, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.1.5.2.3 adds CanonicalTrace in primary_cli.rs and passes all 61 unchanged CLI fixtures."
+evidence: "Historical July 10 FUTURE-PARITY-BACKLOG.1.5.2.3 adds CanonicalTrace in primary_cli.rs and passes the then-current 61 CLI fixtures. September 7 reading .3.3.10 distinguishes its phase-success protocol from the rich core trace API and from correct numeric result conversion; it does not rerun the full CLI matrix."
 reverify: "bash tools/run_rust_local.sh"
 ---
 
@@ -27,9 +27,15 @@ stdout/route/mirror sinks. A selected file implies route unless a mode is explic
 none/quiet; otherwise files persist or append. Trace setup/write failures map to the stable compilation failure,
 and compile/input/invoke failures emit only their portable phase outcome.
 
-With `.1.5.2.2`'s direct execution layer beneath it, the built `linkedspec-rust` command passes all 61 unchanged
+With `.1.5.2.2`'s direct execution layer beneath it, the July milestone passed its then-current 61
 neutral fixtures. `.1.5.2.4` closes the milestone in default/POSIX environments and adds recurring
 `tools/run_rust_local.sh` verification.
+
+The later startup canonical checkpoint `.3.2.55` records the current 66-case
+default/POSIX matrix; the old 61 count is not a current inventory. September 7
+`.3.3.10` separately observes successful compile/invoke phases while a large numeric
+result is saturated during conversion: [[rust-large-number-conversion-defect]].
+Phase success is not proof of exact result-value preservation.
 
 Related facts: [[canonical-primary-cli-trace-protocol]], [[rust-primary-cli-mechanism-audit]],
 [[rust-native-direct-value-execution]], [[rust-trace-controls-sinks]],

@@ -35,7 +35,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`, `SESSION-STARTUP-READING.50`, `SESSION-STARTUP-READING.51`, `SESSION-STARTUP-READING.52`, `SESSION-STARTUP-READING.53`, `SESSION-STARTUP-READING.54`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`, `SESSION-STARTUP-READING.50`, `SESSION-STARTUP-READING.51`, `SESSION-STARTUP-READING.52`, `SESSION-STARTUP-READING.53`, `SESSION-STARTUP-READING.54`, `SESSION-STARTUP-READING.55`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -1123,14 +1123,22 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.9 - read Rust rule-body parsing and own lexical boundary repairs`
 
 - ID: `SESSION-STARTUP-READING.3.3.10`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 10: 1,466 lines/fragments, 47,137 bytes.
   Scope: `rust/linkedspec-core/src/parser.rs` lines 1575–2084;
     `rust/linkedspec-core/src/trace.rs` lines 1–715;
     `rust/linkedspec-core/src/types.rs` lines 1–241.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Read every scoped parser/trace/type byte without truncation; range/current-baseline proof; existing trace/cursor/compiled-state Knowledge reconciliation; managed seven-test core trace target; neutral cursor/numeric contracts; four paired native large-number controls and source projection path; .55 task-first ownership; Knowledge/memory/all doctrines/history and scope/diff.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Read parser.rs 1575–2084, trace.rs 1–715 and types.rs 1–241 completely: 1,466 lines / 47,137
+    bytes; exact ranges and complete files match baseline. Managed core trace 7/7; neutral numeric
+    55/18 and cursor 36/18/8/60 pass. Four paired native number controls prove signed large-value saturation
+    and distinct text spelling; .55 owns repairs before Knowledge. All jobs completed; focused continuity
+    passes before commit. No runtime/public-book change or fresh cross-backend trace signoff.
+  Commit: `SESSION-STARTUP-READING.3.3.10 - read core trace and types and own large-number conversion repairs`
 
 - ID: `SESSION-STARTUP-READING.3.3.11`
   Status: `pending`
@@ -3252,11 +3260,57 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: `pending`
   Commit: `pending`
 
+- ID: `SESSION-STARTUP-READING.55`
+  Status: `pending`
+  Goal: Preserve large finite numeric values and reconcile their portable text spelling.
+  Dependencies: `.3`/`.4`/`.5`; coordinate scalar authority `.20`, cat arity `.51` and public teaching `.28.5`.
+  Children: `.55.1`, `.55.2`, `.55.3`
+  Acceptance: Keep numeric value preservation distinct from number-to-text spelling. Do not silently clamp
+    finite values at a host integer boundary or declare portable spelling from a small fixture alone.
+
+- ID: `SESSION-STARTUP-READING.55.1`
+  Status: `pending`
+  Goal: Remove Rust finite integral-number saturation at JSON and related conversion boundaries.
+  Acceptance: Lock direct positive/negative 1e20 output against 42 and independent native value controls.
+    Avoid unchecked f64-to-i64 conversion outside its exact supported range; review to_json, to_str, len, Display,
+    nested values, helper/key uses and every actual outward/generated consumer before selecting one coherent
+    numeric representation. Preserve finite-number value, existing small integer output, nonfinite policy
+    and signed zero. Cover i64-adjacent representable values, fractions and serialization round trips,
+    native/generated/primary CLI routes and portable recurrence; do not promise arbitrary-precision integers.
+  Verification: `pending` repair — Rust CLI returns 9223372036854775807 for 100000000000000000000 and
+    -9223372036854775808 for its negative, with compile:ok/invoke:ok and no stderr. Perl public Get preserves
+    positive/negative 1e20; both return 42 for the control. Engine direct execution calls RuntimeValue::to_json,
+    whose finite integral branch casts to i64 before serde JSON construction.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.55.2`
+  Status: `pending`
+  Goal: Reconcile scalar-text scientific/decimal spelling outside the existing small numeric fixture.
+  Acceptance: Apply the reference-owned finite-number text contract to positive/negative magnitudes, small
+    fractions, exponents, signed zero and shortest stable spelling. Resolve any remaining normative ambiguity
+    before changing the frozen authority; then repair actual divergent consumers without widening cat arity
+    or changing null/aggregate rejection. Keep numeric JSON value preservation under .55.1 separate.
+  Verification: `pending` repair — cat(100000000000000000000,"") returns the full decimal string on Rust and
+    "1e+20" on Perl, with successful execution and no errors. The scalar-text fixture says shortest stable
+    decimal text but its numeric examples are only -0.0, 1.0 and 1.25; it does not establish this magnitude.
+    Current Rust to_scalar_text formats finite f64 directly, while Perl cat lowering stringifies the host value.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.55.3`
+  Status: `pending`
+  Goal: Close large-number public guidance and recurring parity after value/spelling repairs.
+  Dependencies: `.55.1`, `.55.2`.
+  Acceptance: Document the actual finite precision/range and canonical text behavior with worked examples;
+    verify exact supported backend and reconstructed/generated/emitted routes before renewing broad parity
+    claims. Own any additional gaps, retain dated pre-repair evidence, and run canonical closeout proof.
+  Verification: `pending`
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.10` | `pending` | read remaining core parser tests, trace implementation, and compiled-type prefix. |
+| 1 | `SESSION-STARTUP-READING.3.3.11` | `pending` | read remaining compiled types, pinned Unicode label implementation, and validation prefix. |
 
 ## Reading Ledger
 
@@ -3267,7 +3321,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.9` are reconciled and `.3.3.10`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.10` are reconciled and `.3.3.11`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -5545,6 +5599,52 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   the uncovered boundaries and source mechanisms, update existing standalone/header/attached-tail Knowledge,
   and retain the earlier .45–.47/.49–.51 repairs. No implementation, policy or public-book change.
 
+### Rust parser-test, trace and numeric-conversion reading at `.3.3.10`
+
+- Activated from clean `236aa4d7a3ebd29a669bf653aacd204abfbb3a5b` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read parser.rs 1575–2084 (510 lines / 17,297 bytes),
+  trace.rs 1–715 (715 / 21,960) and types.rs 1–241 (241 / 7,880): 1,466 lines / 47,137 bytes total.
+  Respective SHA-256 values are 038cb36896049a23e531552924551bacf062f37df3ef2633fd5fe1d5fd6a3498,
+  bc18a16e2b4ab8a12663d93824ce80868237f2365f4d8ff797ea2b30ae8ca421 and
+  752211002be552941faeb1ed9ae8eda839183db633eaa047d5fb72f133615680. Complete current files equal baseline.
+  The parser is now read through EOF; types continues at line 242 in the next leaf.
+- Remaining parser tests cover header-rest compact edges, multiline fluent/control blocks, attached
+  branches, compact I calls, quoted braces/operators, mode/blind-edge and regex-slot order. Those selected
+  assertions do not close .52-.54 lexical cases discovered in the preceding checkpoint.
+- Core trace uses positive integer thresholds, injectable environment lookup and quiet defaults.
+  File routing, mirror fallback and construction-time append/reset are separate from event gating.
+  Fallible emission methods return I/O errors, while trace_decision discards its emission result and
+  preserves the boolean. No new normative sink policy is inferred; typed diagnostic-output sinks differ.
+- Managed locked/offline single-thread core trace target: 7/7. The build retains normal dependency
+  warnings without suppression. Read-only inspection of known project PIDs proves the run remained live
+  despite the unprivileged run listing saying abandoned, matching existing .7. No recovery, purge,
+  signing or cache manipulation; toolchain executables are required read-only host dependencies.
+- Compilation finishes in 17m10s. At 03:41:27.472 +0200, the test binary launched at 03:39:55.031
+  has 112 KiB footprint and all 800 one-second samples at _dyld_start. This locates the sampled interval
+  before Rust main without proving an OS cause. The earlier compiler sample failed after its PID exited.
+  Both exact paths are absent after fully consuming/hash-verifying/removing the 32-line / 1,015-byte
+  test report. macos-rust-first-launch-validation-latency preserves the command, hash and dated bounds.
+- RuntimeValue keeps f64 numbers, ordered hash entries and inert typed codeblocks. Raw serde and to_json
+  are distinct conversions. Generic as_number/as_bool/nonempty/len are not proof of strict helper policy.
+  Four paired Rust CLI/Perl Get cases all exit zero with empty stderr, Rust compile/invoke success and
+  no Perl exceptions/last_error: 42 agrees; signed 1e20 saturates to signed i64 limits only on Rust;
+  two-argument cat of positive 1e20 returns full decimal text on Rust versus "1e+20" on Perl.
+- Engine execute_value_with_context calls RuntimeValue::to_json before the primary CLI serializes JSON.
+  The finite integral branch casts directly to i64. Own .55.1 value-preserving conversion plus related
+  to_str/len/Display consumer audit; only direct numeric output is freshly measured. The full scalar-text
+  authority contains only -0.0, 1.0 and 1.25 numeric examples, so .55.2 must reconcile reference spelling
+  before frozen authority changes; .55.3 owns later public/cross-backend/generated closeout.
+- Additional causal source reads include engine 1930–1952/2656–2686 and primary_cli 318–347. Reading
+  types 242–538 for the Display audit does not replace the next activated range's coverage proof.
+  Exact four-case command/results and proof limits live in rust-large-number-conversion-defect.
+- Fresh neutral scalar-numeric 55 cases / 18 helpers and cursor 36 spellings / 18 edges / 8 parent-child
+  cases / 60 mutations pass. These fixtures do not cover the newly measured magnitude boundary.
+  Existing cat arity .51 and strict helper input .20 remain separate repairs.
+- Trace Knowledge now points to completed August .5.2/.5.4 repairs instead of stale pending state;
+  historical native and canonical results are dated, reverify commands are managed and unsuppressed,
+  and scalar-text fixture claims are bounded. The separate primary CLI trace adapter's 61-case milestone
+  is dated, with later canonical 66-case evidence retained separately from this reading leaf. No runtime, policy, contract or public-book edit.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -5610,7 +5710,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.3.6` is item 65/100 at `cbd871c6`;
   `.3.3.7` is item 66/100 at `d3fd3c40`;
   `.3.3.8` is item 67/100 at `2bdea14f`;
-  `.3.3.9` is item 68/100 once committed.
+  `.3.3.9` is item 68/100 at `236aa4d7`;
+  `.3.3.10` is item 69/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -5743,6 +5844,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.7` | Exact lexical range/current-baseline proof; callable 7/11/9/7/4/8/23; six asserted Rust/Perl-lowering hash controls; three paired native cat controls; .50/.51 task-first ownership; .49 limits; focused continuity | PASS reading and bounded diagnosis; .50/.51 repairs pending; whole-codebase reading still No. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.8` | Three exact ranges/current-baseline proof; write 5/7/11/16/3/3/8/105; callable 7/11/9/7/4/8/23; uniform 11/7/6/8; historical Knowledge and .41.6 ownership; focused continuity | PASS reading and neutral proof; parser suffix and all runtime repairs remain pending. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.9` | Exact parser range/current-baseline proof; standalone 9/4/6/3/6/15/7/14; cursor 36/18/8/60; Unicode 806/9/8/2; ten paired body and three matches controls; four lowering/three bootstrap controls; .52-.54 ownership; focused continuity | PASS reading and bounded diagnosis; compact fluent/header/regex-brace repairs pending with exact evidence. |
+| `2026-09-07` | `SESSION-STARTUP-READING.3.3.10` | Exact parser/trace/type range and baseline proof; managed core trace 7/7; numeric 55/18; cursor 36/18/8/60; four paired native number controls; .55 ownership; trace closure/fixture Knowledge; focused continuity | PASS bounded reading and diagnosis; value and scalar-text repairs remain pending under .55. |
 
 ## Commit Log
 
@@ -5817,6 +5919,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.3.7` | `SESSION-STARTUP-READING.3.3.7 - read Rust lexical boundaries and own hash and cat repairs` | Read 1,497 lexical/test lines; own adjacent hash-colon loss and cat arity divergence as .50/.51. |
 | `SESSION-STARTUP-READING.3.3.8` | `SESSION-STARTUP-READING.3.3.8 - read remaining Rust expression tests and core parser entry` | Complete expr.rs reading and core entry prefix; reconcile test assertion limits and historical binding/rollout prose. |
 | `SESSION-STARTUP-READING.3.3.9` | `SESSION-STARTUP-READING.3.3.9 - read Rust rule-body parsing and own lexical boundary repairs` | Read rule-body parser; own compact fluent, invalid header suffix and Perl/Rust regex-brace repairs .52-.54. |
+| `SESSION-STARTUP-READING.3.3.10` | `SESSION-STARTUP-READING.3.3.10 - read core trace and types and own large-number conversion repairs` | Read parser tests/core trace/types; own finite-value saturation and large-number text repairs .55. |
 
 ## Changelog
 
@@ -5935,3 +6038,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-07`: `.3.3.7` reconciles lexical/test reading and owns confirmed adjacent hash-colon loss and cat arity divergence under .50/.51; retains prior regex repair limits.
 - `2026-09-07`: `.3.3.8` completes expression-test reading and core entry prefix; qualifies old reconstruction, assignment and rollout claims without changing runtime.
 - `2026-09-07`: `.3.3.9` reads rule-body parsing and owns .52-.54 lexical repairs, preserving paired native and exact bootstrap truncation evidence without runtime changes.
+- `2026-09-07`: `.3.3.10` reads remaining parser tests, core trace and types prefix; owns .55 value/text repair and reconciles dated trace closure and scalar fixture coverage.

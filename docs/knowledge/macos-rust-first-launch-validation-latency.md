@@ -8,7 +8,7 @@ answers:
   - "what task owns macOS syspolicyd Rust launch latency"
   - "is macOS first launch validation latency tracked"
   - "why did rustc wait in dlopen during startup canonical CI"
-date: 2026-09-01
+date: 2026-09-07
 status: classified as external per-artifact macOS policy state; no repository repair required
 tags: [rust, macos, syspolicyd, gatekeeper, verification, performance, FUTURE-PARITY-BACKLOG]
 evidence: "During FUTURE-PARITY-BACKLOG.19.3.3 signoff, a plain-cargo test with repository-local target but user-home registry reads finished its cold build in 55m44s after prolonged per-crate waits. More than three minutes after Cargo launched trace_controls, it had 112 KiB footprint and no test output. Process census found Cargo/test alive and macOS syspolicyd consuming substantial CPU; a one-second sample contained only _dyld_start, proving Rust test code had not begun. The exact /tmp report created by sample was consumed, deleted, and verified absent. The eventual 12/12 result is diagnostic only until rerun through LinkedSpec's managed Cargo wrapper."
@@ -77,3 +77,23 @@ After full consumption and hash verification, only that exact report was deleted
 verified. No target cleanup, recovery/purge, signing change, or trust bypass occurred.
 The completed reading checkpoint `.3.2.42` preserves this dated observation separately from
 the older controlled OS-specific conclusion.
+
+## September 7 core trace observation
+
+The managed locked/offline core trace target in `SESSION-STARTUP-READING.3.3.10`
+finished compilation in 17m10s. Its `linkedspec_core-80ca50544de425d0` test process
+(PID 47932) launched at 03:39:55.031 +0200. At 03:41:27.472, a one-second sample
+on macOS 26.6.2 build 25G83 found a 112 KiB footprint and all 800 samples at
+`_dyld_start`. This locates that interval before Rust main; it does not identify
+the underlying OS policy or kernel cause. An earlier compiler sample attempt
+failed because its target had already exited, establishing no compiler stack.
+
+The successful command was `bash tools/project_data_run.sh /usr/bin/sample 47932
+1 1 -file .linkedspec-data/scratch/startup69-core-trace-47932.sample.txt`.
+The complete 32-line / 1,015-byte report was consumed; SHA-256 is
+`9dd0488a4f8a6d4e3f736c1deba8fcdd7b88dcd52a6e53e7925c23fa500e6d7c`.
+Only that report was deleted, and its absence was verified. The failed compiler
+sample path was also absent. No build artifact, trust setting, signing state or
+shared cache was changed. The wait cleared without intervention; the selected
+core trace tests then passed 7/7 with 194 filtered out in 0.00 test seconds. Build,
+sampled launch wait and test execution are separate phases, not one measured delay.

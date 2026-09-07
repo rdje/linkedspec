@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.10 — successful invocation does not establish numeric value preservation
+
+The direct engine value path converts f64 through an unchecked integral i64 branch before CLI serialization, silently saturating signed 1e20 while reporting success. Scalar text follows another conversion and differs from Perl spelling instead. Keep value preservation, text authority and unmeasured consumers separately owned; small passing fixtures cannot substantiate all finite magnitudes.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.9 — outer scanners can discard source before inner validation
 
 Sharing a body-element classifier does not make inline and physical body-line remainder handling equivalent. Likewise a correct expression parser cannot repair arguments or blocks truncated by an outer scanner. Paired valid controls, invalid layout twins and direct bootstrap payloads separate those causes; passing neutral contracts cannot close cases their fixtures do not cover.
