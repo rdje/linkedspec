@@ -8,8 +8,10 @@ answers:
   - "what task owns macOS syspolicyd Rust launch latency"
   - "is macOS first launch validation latency tracked"
   - "why did rustc wait in dlopen during startup canonical CI"
+  - "did Rust pre-main waits also occur during permitted canonical CI"
+  - "which September 7 startup samples distinguish aborted and accepted CI attempts"
 date: 2026-09-07
-status: classified as external per-artifact macOS policy state; no repository repair required
+status: older controlled artifacts classified; newer OS samples locate pre-main waits without identifying their cause
 tags: [rust, macos, syspolicyd, gatekeeper, verification, performance, FUTURE-PARITY-BACKLOG]
 evidence: "During FUTURE-PARITY-BACKLOG.19.3.3 signoff, a plain-cargo test with repository-local target but user-home registry reads finished its cold build in 55m44s after prolonged per-crate waits. More than three minutes after Cargo launched trace_controls, it had 112 KiB footprint and no test output. Process census found Cargo/test alive and macOS syspolicyd consuming substantial CPU; a one-second sample contained only _dyld_start, proving Rust test code had not begun. The exact /tmp report created by sample was consumed, deleted, and verified absent. The eventual 12/12 result is diagnostic only until rerun through LinkedSpec's managed Cargo wrapper."
 evidence_update_managed_2026_09_01: "The repository-managed root-selection driver then required 117m57s for its Rust admission test build before the binary ran 1/1 in 10.33s. A later exact managed trace command rebuilt in 2m07s, remained silent for about 98 seconds after launching the test binary, and then passed 12/12 in 2.23s. All project data for those accepted runs was routed by tools/project_data_env.sh. The large cold/warm and pre-test/execution split remains an audit input for .19.3.4.0, not a causal conclusion or permission to weaken trust checks."
@@ -97,3 +99,68 @@ sample path was also absent. No build artifact, trust setting, signing state or
 shared cache was changed. The wait cleared without intervention; the selected
 core trace tests then passed 7/7 with 194 filtered out in 0.00 test seconds. Build,
 sampled launch wait and test execution are separate phases, not one measured delay.
+
+
+## September 7 canonical checkpoint: bounded observations
+
+Reading leaf `SESSION-STARTUP-READING.3.3.13` consumes the completed verification for
+`.3.3.12`. The first attempt was launched in the restricted harness despite the
+existing host-execution requirement in [[project-data-process-locality-proof]].
+A no-op initialization control again returned 71 there and 0 in approved host
+execution. The exact project CI group was stopped with exit 143; its component
+results below are diagnostics and supply no canonical receipt. No recovery/purge,
+target removal, profile weakening, signing, or trust-state change was used.
+
+The unchanged candidate then passed canonical CI in the permitted environment:
+all nine doctrines, relocated process containment and five primary anchors,
+CLI 66/66 in both environments, and Phase 0 1,032/1,032 in 1,142 seconds.
+The staged SHA-256 `ac76420b0965d071cb2318925d1f4088e427ec2d594869517be16fbb7209f4c6`
+at base `75ce8db839888a5091d25ee4e5e1c3c501daf3b8` was promoted after commit
+`1d3715fc70e36e97a8c3be1b114edf9f2e706a11`. 25 optional local gates/matrices
+were skipped; their earlier results are not fresh measurements.
+
+Every sample below was taken on 2026-09-07, macOS 26.6.2 (25G83), with a 112 KiB
+physical footprint and every sampled frame at `_dyld_start`. Times are local +0200.
+Compilation, the sampled pre-main interval, and eventual test execution are distinct
+measurements. These are not controlled cold/warm comparisons, and sampling is not
+established as an intervention or workaround.
+
+| Attempt | Target; PID / parent | Build | Launch | Sample | Frames | Eventual test pass; seconds |
+| --- | --- | --- | --- | --- | --- | --- |
+| aborted restricted | staged AST; 81923 / 75157 | 7m34s | 04:40:48.264 | 04:46:02.651 | 804 | 1/1; 1328.48 |
+| aborted restricted | progressive dispatch; 61789 / 56582 | 21m14s | 05:33:53.033 | 05:40:25.255 | 774 | 1/1; 793.82 |
+| aborted restricted | gap capture; 87559 / 76186 | 13m13s | 06:07:33.459 | 06:14:44.557 | 772 | 1/1; 37.13 |
+| aborted restricted | recognition; 14710 / 2984 | 12m39s | 06:31:27.256 | 06:38:19.240 | 772 | 12/12; 30.78 |
+| aborted restricted | recursive observation; 23678 / 19913 | 5m22s | 06:48:22.668 | 06:55:27.277 | 771 | 7/7; 29.15 |
+| aborted restricted | typed source; 38543 / 19913 | shared5m22s | 06:56:06.857 | 07:06:50.026 | 768 | 4/4; 3.62 |
+| permitted canonical | staged AST; 16853 / 96500 | 20m29s | 07:44:03.739 | 07:51:02.487 | 763 | 1/1; 1185.06 |
+| permitted canonical | recognition; 4468 / 1024 | 4m03s | 08:41:05.380 | 08:44:53.630 | 890 | 12/12; 29.60 |
+
+The two permitted-run observations separate the pre-main waits from nested-sandbox
+initialization denial. They do not identify the exact OS/kernel policy cause or
+extend the older macOS 26.5.2 controlled conclusion to this newer OS.
+
+All eight reports were read completely and independently verified by byte count,
+line count, SHA-256, target identity, timestamps, OS, footprint, and sampled frame.
+Their repository-relative locations and exact identities are:
+
+| Report | Bytes; lines | SHA-256 |
+| --- | --- | --- |
+| `.linkedspec-data/scratch/startup71-staged-ast-81923.sample.txt` | 1075; 32 | `d23beb78f70fd615bb836f6d38fbb5fbaca0aaa3adb85863033c8c049c7b28c5` |
+| `.linkedspec-data/scratch/startup71-progressive-test-61789.sample.txt` | 1091; 32 | `af68e25d2ccb30b89315e3c3262366518e3b384ccfcd3452cd75cba46af56610` |
+| `.linkedspec-data/scratch/startup71-gap-test-87559.sample.txt` | 1083; 32 | `fd043d41ffad6a2da5c59b3ccf21bc211a69e10de6dacacf3d00445caa5a6c41` |
+| `.linkedspec-data/scratch/startup71-recognition-test-14710.sample.txt` | 1082; 32 | `ebb06ce90ac1eed94353ebd396b8b98bdb85320ff2982ca4d8a85b4e2444344f` |
+| `.linkedspec-data/scratch/startup71-recursive-test-23678.sample.txt` | 1075; 32 | `174255281c596c72853a36102456e30cfa59d93fe2caac07d49cbad890246e34` |
+| `.linkedspec-data/scratch/startup71-typed-source-test-38543.sample.txt` | 1075; 32 | `c8941bf13b0d92f0be665a7b77c2f0ab62a1c3e5806d89f36eaefd1f216403f7` |
+| `.linkedspec-data/scratch/startup71-permitted-staged-ast-16853.sample.txt` | 1075; 32 | `de991aa5e7db247b153ecc99adc4a36d0e1d72d9cb4d5bc3568860fb0c055add` |
+| `.linkedspec-data/scratch/startup71-permitted-recognition-4468.sample.txt` | 1080; 32 | `280153ecfeec69ba34ff75cd02a5aef5a504441e149d5261050f7fc635b2af76` |
+
+The command for each PID/report pair was `bash tools/project_data_run.sh
+/usr/bin/sample <pid> 1 1 -file <report>`. The earlier compiler sampling attempts
+for PIDs 58148 and 97479 found their targets already exited, establishing no stack;
+their intended report files were absent. They are not successful samples in this table.
+
+Only these eight consumed reports (8,636 bytes / 256 lines) were then deleted. Exact absence,
+including both failed-attempt paths, was verified; no build target, cache, recovery, or purge was touched.
+The accepted full log is `.linkedspec-data/scratch/startup71-canonical-permitted.log`,
+10622381 bytes, SHA-256 `21b4d050901b6e497f33223c38d2eb358cf528ab03f41057e6a99e09218de47f`. It is retained as local verification evidence.

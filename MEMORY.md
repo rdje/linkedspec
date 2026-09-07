@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `75ce8db839888a5091d25ee4e5e1c3c501daf3b8` — clean preceding reading checkpoint.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.12 - read static validation and preserve bounded engineering history`.
+- activation_commit: `1d3715fc70e36e97a8c3be1b114edf9f2e706a11` — clean preceding reading checkpoint.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.13 - read core tests and bounded child authority`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: activate `.3.3.13`; read cursor, value and Unicode tests, runtime crate entry, and bounded-child authority prefix,
+- next_action: activate `.3.3.14`; read the remaining bounded-child authority, runtime diagnostics, and engine entry,
   then continue queued reading. Intake `.31` preserves the forward source coverage and exact findings.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.57` precede mutation setup; `.29` is part of `.5` adoption.
@@ -33,9 +33,9 @@
   PUC-Lua/LuaJIT 105-case corpus routes are green. Root selection passes its exact five-backend/six-runtime driver,
   recursive observation passes all six routes, the repository-managed Rust trace target passes 12/12, and exact
   staged canonical signoff plus both 66/66 CLI environments and Phase 0 1,032/1,032 are green.
-- current_macos_rust_launch_classification: older ad-hoc test artifacts can incur external per-artifact macOS
-  policy/cache waits before Rust `main`; 45.32/51.75-second first inventories became 0.00-second warm runs, while
-  one wholly unmanipulated unique provenance-tagged control first-launched in 0.41 seconds. No repo repair applies.
+- canonical_ci_execution: use approved host execution for `tools/run_ci_local.sh`; nested macOS containment
+  requires it. See `docs/knowledge/project-data-process-locality-proof.md`.
+- current_rust_launch_evidence: newer-OS pre-main samples are bounded in `docs/knowledge/macos-rust-first-launch-validation-latency.md`.
 - current_mutation_composition_contract: `linkedspec-write-map-leaves-composition-v1` digest-binds both unchanged
   mechanisms across eight writes, six callback cases, one continuation, and 592 current composition mutations;
   Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT execute both halves through one governed recurring driver. Zero-regex
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4984` is the twenty-seventh history segment; ADR `0104`
   authorizes exactly 29 collection files / 28 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook Yes (physical); .31/.3.2.42 preserve complete book/Perl source coverage and repair ownership; formal .4 alignment remains pending (71/100 after `.3.3.12` lands).
+- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook Yes (physical); .31/.3.2.42 preserve complete book/Perl source coverage and repair ownership; formal .4 alignment remains pending (72/100 after `.3.3.13` lands).

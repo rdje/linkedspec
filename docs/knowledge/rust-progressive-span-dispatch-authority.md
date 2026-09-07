@@ -11,7 +11,7 @@ answers:
   - "how are Rust progressive child results detached"
   - "does Rust progressive dispatch have ActionIR carriers"
   - "does the Rust progressive authority test run in CI"
-date: 2026-08-26
+date: 2026-09-07
 status: private authority/core, four carriers, and canonical Rust admission current
 tags: [rust, progressive-parsing, registry, source-location, cancellation, diagnostics, task-tree]
 evidence: "FUTURE-PARITY-BACKLOG.14.6.3.1 adds rust/linkedspec-runtime/src/bounded_child_parse_authority.rs and exposes it only through the neutral doc-hidden bounded_child_parse_authority module, because outward guards reserve the progressive syntax/node terminology for later carrier admission. ProgressiveRegistry deeply owns validated logical ids, sha256 fingerprints, allowed top rules, capabilities, policy/resource ceilings, and already-compiled callbacks; register/load return typed denials and no path/provider/compiler authority exists. ProgressiveInvocation owns one SourceAuthority over caller-provided decoded snapshots plus the sole source id, Arc-identity cancellation token, monotonic deadline, shared remaining steps, active global-span chain, depth limit, and total-call limit. Dispatch derives capability/policy intersections and ceiling minima, requires the exact shared token, charges cost before synchronous child execution, enforces pre/post safe points, permits repeated identity/top/source only on a contained strictly smaller span, invalidates every cloned bounded view after the callback, and deeply detaches node-bounded serde_json results while rejecting live-looking fields. rust/linkedspec-runtime/tests/progressive_span_dispatch_authority.rs is file-level cfg linkedspec_progressive_span_dispatch_authority: ordinary discovery runs zero tests and canonical CI omits it; the opt-in proof covers all neutral cases and 26 diagnostics plus nesting, typed rebasing, expiry, mutation isolation, false payloads, and detachment. No dedicated expression node, engine/descriptor/generated carrier, format, rollout row, or outward surface moves; .14.6.3.2 and .3 own those later boundaries."
@@ -39,12 +39,30 @@ dispatch shares cancellation identity, deadline, remaining steps, active chain, 
 failure and panic are contained; `false` remains a valid detached payload, while `null`, live-looking fields, and
 over-ceiling structures fail closed.
 
-The explicit authority consumer passes four tests covering the complete neutral matrix and the nested/mutation
-adversaries. Its ordinary invocation executes zero tests. The separate final-path consumer is now GREEN across
-four dormant carriers.
+The August 26 focused authority proof passes four tests covering the neutral matrix and nested/mutation
+adversaries. Its ordinary invocation executes zero tests. The separate final-path consumer covers four carriers;
+its later canonical admission is distinct from the earlier dormant-carrier milestone.
 
 The dedicated node and native/reconstructed/generated-plan/independently compiled emitted-source carriers use
 this authority through a fresh opaque execution seed. `.14.6.3.3` routes the exact cfg-enabled consumer once in
 canonical CI and promotes only Rust rollout; the separate authority consumer remains focused and dormant.
 `TRACE-OBSERVABILITY.5.3` makes that distinction executable: the authority proof forbids its own route while
 requiring the admitted contract's tracked input and command exactly once.
+
+## September 7 bounded source checkpoint
+
+`SESSION-STARTUP-READING.3.3.13` reads source lines 1–778 (26,241 bytes), through the
+`ProgressiveInvocation` fields. Its constructor, dispatch, narrowing, result checks, and validation helpers
+remain in `.3.3.14`; this checkpoint does not claim that the entire authority implementation is read.
+
+The prefix owns validated immutable registry records and typed register/load denials, Arc-identity cancellation,
+the caller's clock, opaque seed identity, and one mutex-backed invocation shared by execution-state clones.
+Callback source-view clones share expiry; their text is bounded, and local scalar positions/spans are rebased
+through the original `SourceAuthority`. Diagnostic rebasing clones the supplied data and enforces the serialized
+byte ceiling. Full dispatch ordering and helper contracts remain with the suffix owner.
+
+Fresh neutral proof passes all six authority, six cancellation, eight chain, and four execution cases,
+with rollout 9/9, 116 contract mutations, and 60 public mutations. The preceding unchanged-source canonical
+checkpoint `.3.3.12`, committed as `1d3715fc`, passes the separate four-carrier contract consumer 1/1 in
+206.60 test seconds. The private cfg-enabled authority consumer was not freshly rerun for this reading leaf.
+Existing `.41.2` owns the stale `ProgressiveDispatchArguments` comment that predates static carrier admission.

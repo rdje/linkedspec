@@ -10,7 +10,8 @@ answers:
   - "which MCP schema fact keys are missing"
   - "does MCP currently preserve all twenty semantic responses"
   - "what must change before thin_mcp_transport promotion"
-date: 2026-09-06
+  - "which task owns obsolete MCP mutation counts in TOOLBOX"
+date: 2026-09-07
 status: verified blocker repaired; all-twenty six-runtime proof and routed rollout complete
 tags: [mcp, semantic-introspection, schema, policy, conformance, blocker]
 evidence: "FUTURE-PARITY-BACKLOG.10.9.7.1.0 proved capabilities plus 16/19 query identities and root-caused missing effects/return_shape output keys, const query-contract input, and default-policy preemption. Authorized leaf .10.9.7.1.1.1 derives the exact 72-key semantic fact union, admits nonempty query-contract strings through 128 characters/128 UTF-8 bytes, and keys pre-dispatch denial to explicit component presence in all five servers. Leaf .10.9.7.1.1.2 proves capabilities plus all nineteen queries preserve direct-native/MCP structured/text/decoded/digest identity on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Leaf .10.9.7.1.1.3 composes those consumers through the rooted recurring driver and promotes both ledgers atomically. Neutral MCP remains 35/10/10/76 with byte-fresh bindings 83,411/83,225/83,214/120,030/83,166; formal state is 5/5 implementations + 6/6 runtimes with rollout complete/141."
@@ -55,3 +56,10 @@ bounded by both 128 characters and 128 UTF-8 bytes; deployment pre-dispatch enfo
 and independent transport validator pass 35/10/10/76. These are artifact/governance checks, not a rerun of
 six-runtime dispatch. ADR 0055 section 5 predates this component-presence clarification;
 `SESSION-STARTUP-READING.5` owns its explicit historical/current qualification during startup alignment.
+
+The completed September 7 canonical gate for `SESSION-STARTUP-READING.3.3.12`, consumed by `.3.3.13`, again
+passes the neutral transport validator at 35 frames / ten raw inputs / ten lifecycle cases / 76 mutations.
+TOOLBOX section 4.10 still gives 68 mutations in both its checker description and output summary.
+Existing repair `.41.7` owns those two current-count corrections after startup prerequisites, coordinating
+semantic/MCP teaching under `.41.3`. Historical 68-count milestones remain dated evidence. This observation
+does not claim a fresh optional all-twenty composition-matrix run.

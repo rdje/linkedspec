@@ -1184,7 +1184,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.12 - read static validation and preserve bounded engineering history`
 
 - ID: `SESSION-STARTUP-READING.3.3.13`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 13: 1,495 lines/fragments, 52,012 bytes.
   Scope: `rust/linkedspec-core/tests/rule_local_cursor_normalization_test.rs` lines 16–314;
     `rust/linkedspec-core/tests/types_test.rs` lines 1–222;
@@ -1193,8 +1193,12 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     `rust/linkedspec-runtime/src/bin/linkedspec-rust.rs` lines 1–21;
     `rust/linkedspec-runtime/src/bounded_child_parse_authority.rs` lines 1–778.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Read every owned cursor/value/Unicode-test, runtime-manifest/CLI entry, and bounded-child-authority byte; exact range/current-baseline proof; retrieve cursor, scalar/value, Unicode and bounded-child/transaction authority Knowledge first; select managed locked/offline core integration tests and neutral directly dependent contracts; preserve finalized slice71 canonical and dated diagnostic evidence, remove only consumed exact sample reports after durable intake, and annotate existing .41.7 current-count debt; memory/all doctrines/history and scope/diff. No runtime or public-book repair before startup prerequisites.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS: exact six-range/baseline identity; managed locked/offline core cursor 5/5, types 8/8 and Unicode 5/5; four neutral contract checks; completed prior canonical/sample intake; Knowledge, history, memory, all nine doctrines and diff.
+  Commit: `SESSION-STARTUP-READING.3.3.13 - read core tests and bounded child authority`
 
 - ID: `SESSION-STARTUP-READING.3.3.14`
   Status: `pending`
@@ -2942,6 +2946,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     Correct validation.rs module documentation's obsolete numbered pass reference (check 5 is no longer
     edge-target validation) and incomplete pass inventory against ordinary/traced order; retain strict
     unused-rule behavior and the deliberate default undefined-reference boundary.
+    Qualify the ProgressiveDispatchArguments comment in bounded_child_parse_authority.rs that still
+    describes a time before static carriers existed; the current host-argument role composes with
+    admitted carriers owned by their separate syntax, engine, and generated-source modules.
   Verification: `pending` — current guides still describe Julia/Lua v1 adapters and future named selectors;
     the cursor contract's current reader/marker coverage does not enforce those paragraphs.
   Commit: `pending`
@@ -3018,6 +3025,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     local rgx-core/pgen packages. Establish the actual supported compiler through a managed build before
     publishing a replacement minimum; do not treat manifest declarations as a tested minimum. Qualify the
     stale 63-case CLI claim against the 66-case authority and replace direct Cargo examples with root-managed commands.
+    Replace TOOLBOX section 4.10's two current 68-mutation claims with the canonical MCP transport
+    authority or dated evidence: the unchanged September 7 canonical checker reports 76. Preserve
+    genuinely historical 68-count milestones and do not infer an optional matrix rerun from that check.
   Verification: `pending` — local-CI prose says full gate for every behavior change and default toolchain
     independence; current canonical gate runs mandatory backend admissions and reports 20 capabilities/100 states.
   Commit: `pending`
@@ -3442,7 +3452,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.13` | `pending` | read cursor, value and Unicode tests, runtime crate entry, and bounded-child authority prefix. |
+| 1 | `SESSION-STARTUP-READING.3.3.14` | `pending` | read the remaining bounded-child authority, runtime diagnostics, and engine entry |
 
 ## Reading Ledger
 
@@ -3453,7 +3463,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.12` are reconciled and `.3.3.13`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.13` are reconciled and `.3.3.14`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -5874,6 +5884,31 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   storage-infrastructure step selects canonical tier; exact staged receipt, all doctrines and memory
   checks must pass before commit. Public-book/runtime semantics remain unchanged.
 
+### Core integration tests and bounded-child authority prefix at `.3.3.13`
+
+- Activated from clean `1d3715fc70e36e97a8c3be1b114edf9f2e706a11` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read all six owned ranges without truncation: 1,495 lines / 52,012 bytes. Every complete file and owned range remains identical to baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`. The five initial files reach EOF; bounded-child authority ends after invocation fields at 778, with constructor/dispatch/helpers owned by `.3.3.14`.
+
+| Repository-root source | Inclusive lines | Bytes | Range SHA-256 |
+| --- | --- | --- | --- |
+| `rust/linkedspec-core/tests/rule_local_cursor_normalization_test.rs` | 16–314 | 11,666 | `38bbb0759cda553948675c376dafc180f34e1b4c3baa92a132a142c58394fe3e` |
+| `rust/linkedspec-core/tests/types_test.rs` | 1–222 | 7,203 | `4f038028a41a9984e64515e74672882f7ed3710a63f3c12de97ab0c2edb5bda7` |
+| `rust/linkedspec-core/tests/unicode_rule_label_contract.rs` | 1–155 | 5,721 | `87c3c10bf41315945a00cf0bd48fa39b4de10228a6d8468d1f9c75305cc8ca13` |
+| `rust/linkedspec-runtime/Cargo.toml` | 1–20 | 533 | `84f14febdd52e5f482f99e8c8724025f09e544e586e44a9f27c4afc62ae04c35` |
+| `rust/linkedspec-runtime/src/bin/linkedspec-rust.rs` | 1–21 | 648 | `2bccab116d4fc9a90fb22f23b1f3af9ba482a1c079525584d457166d44089fba` |
+| `rust/linkedspec-runtime/src/bounded_child_parse_authority.rs` | 1–778 | 26,241 | `d62af837c6ad5d0833c9aefc8ea7abaae3f0fdd14a4a006f023f13aeb9b4fa15` |
+
+- Cursor tests consume governed families, edge cases and ownership sets, compare selected portable diagnostic fields and dispatch ownership, and preserve physical-line bare recognition. Compiled serde checks are selected projections, not universal equality. Existing `.57` nonnumeric AND bare-selector loss remains outside those fixtures.
+- Type tests cover ParseMode serde, selected compiled identity/policy fields, small-number JSON, typed truth, numeric parsing, nonempty and length examples. Their eight tests do not prove every value variant or complete compiled equality; `.55` large-number loss remains owned. The older logical Knowledge card's no-codeblock claim is qualified against the already current inert Codeblock owner.
+- Unicode tests pin the contract/version/hash and selected positive/negative/prefix cases, exact action/blind/bare identities, and distinct-label compilation. The shared action selector example is parse-only. Invalid-source proof rejects only an invalid full declaration identity, not every malformed source; programmatic negatives cover declaration and action roles. Existing `.53` source-acceptance ownership remains separate.
+- Runtime manifest dependencies remain unchanged. The primary binary delegates OS arguments, writes stdout before stderr, exits one on either write failure, and otherwise preserves the delegated status.
+- The bounded-child prefix owns immutable logical registry records, typed register/load denials, Arc-identity cancellation, the caller clock, opaque execution seeds and shared invocation state. Callback-view clones share expiry and rebase bounded local positions/spans through the original source authority; diagnostic cloning enforces its serialized-byte ceiling. Invocation construction, dispatch ordering, authority narrowing and result/helper validation remain in the unread suffix. Existing `.41.2` owns the stale pre-carrier argument comment.
+- Managed native command `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline --jobs 1 -p linkedspec-core --test rule_local_cursor_normalization_test --test types_test --test unicode_rule_label_contract` exits zero: cursor 5/5 in 1.13s, types 8/8 in 0.00s, Unicode 5/5 in 0.20s, all with zero failures, ignored or filtered tests. Separate compilation is 21m16s. The retained log `.linkedspec-data/scratch/startup72-core-integration.log` is 800043 bytes / 14132 lines, SHA-256 `8aeb382fabebd30d7763513615b2bfbe25be5ee7219bdc95f201641e2236ff16`.
+- Managed neutral checks pass cursor 36/18/8/60, Unicode 806/9/8/2, logical 17 truth/10 helper/3 effect/26 mutations, and progressive 9/9 with 116 contract/60 public mutations. These do not rerun the separate private cfg-enabled authority consumer or every backend route.
+- Consume `.3.3.12`'s completed exact canonical proof: base `75ce8db839888a5091d25ee4e5e1c3c501daf3b8`, staged SHA-256 `ac76420b0965d071cb2318925d1f4088e427ec2d594869517be16fbb7209f4c6`, receipt promoted to `1d3715fc70e36e97a8c3be1b114edf9f2e706a11`. All nine doctrines, six-family process locality, five relocation anchors, CLI 66/66 twice and Phase 0 1,032/1,032 in 1,142 seconds pass. Twenty-five optional gates/matrices were skipped.
+- The aborted restricted attempt supplies no receipt; existing host-execution guidance is made visible in MEMORY. Eight fully consumed pre-main samples distinguish six aborted-attempt observations from two permitted-run observations without a new OS-cause claim. After identity/count/hash verification and the tracked Knowledge intake, only those eight reports (8,636 bytes / 256 lines) were removed and all ten expected-absence paths verified. Full accepted log identity and sample tables are in `docs/knowledge/macos-rust-first-launch-validation-latency.md`.
+- The same canonical checker reports 76 MCP transport mutations while TOOLBOX section 4.10 twice claims 68. Existing `.41.7` owns those current-count corrections; historical milestones and optional-matrix limits remain explicit. No new runtime defect, source/public repair, policy change, target/cache cleanup, or recovery/purge occurs. Codebase remains No; physical book Yes, formal alignment pending.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -5942,7 +5977,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.3.9` is item 68/100 at `236aa4d7`;
   `.3.3.10` is item 69/100 at `90321cca`;
   `.3.3.11` is item 70/100 at `75ce8db8`;
-  `.3.3.12` is item 71/100 once committed.
+  `.3.3.12` is item 71/100 at `1d3715fc`;
+  `.3.3.13` is item 72/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -6078,6 +6114,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.10` | Exact parser/trace/type range and baseline proof; managed core trace 7/7; numeric 55/18; cursor 36/18/8/60; four paired native number controls; .55 ownership; trace closure/fixture Knowledge; focused continuity | PASS bounded reading and diagnosis; value and scalar-text repairs remain pending under .55. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.11` | Exact three-range/current-baseline proof; Unicode 806/9/8/2; cursor 36/18/8/60; duplicate slots 5/2/59; derived-state/AST-pass Knowledge; .41.2 comment ownership; focused continuity | PASS reading and neutral proof; remaining validator/native suites and all repair leaves stay separately owned. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.12` | Exact three-range/current-baseline proof; core validation 21/21; gap 9/0/63/public34; root 8/3/3/54; cursor 36/18/8/60; four paired registry/five paired AND/four descriptor controls; .56/.57 ownership; lossless segment 4983; ADR 0105; exact staged canonical proof | PASS bounded reading and lossless archive proof; .56/.57 remain pending; exact canonical receipt required before landing. |
+| `2026-09-07` | `SESSION-STARTUP-READING.3.3.13` | Exact six-range/baseline proof; managed core cursor 5/5 + types 8/8 + Unicode 5/5; cursor/Unicode/logical/progressive neutral proof; finalized prior canonical intake; eight capture identities and ten absence checks; Knowledge/history/memory/all doctrines and diff | PASS bounded source/contract proof and diagnostic intake; constructor/dispatch suffix and existing repairs remain pending. |
 
 ## Commit Log
 
@@ -6155,6 +6192,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.3.10` | `SESSION-STARTUP-READING.3.3.10 - read core trace and types and own large-number conversion repairs` | Read parser tests/core trace/types; own finite-value saturation and large-number text repairs .55. |
 | `SESSION-STARTUP-READING.3.3.11` | `SESSION-STARTUP-READING.3.3.11 - read compiled types Unicode labels and validation entrypoints` | Read compiled types and pinned Unicode through EOF plus AST-validation entrypoints; reconcile historical/current claims. |
 | `SESSION-STARTUP-READING.3.3.12` | `SESSION-STARTUP-READING.3.3.12 - read static validation and preserve bounded engineering history` | Complete validator/descriptor reading; own .56/.57; preserve segment 4983 with finite ADR 0105 capacity and canonical proof. |
+| `SESSION-STARTUP-READING.3.3.13` | `SESSION-STARTUP-READING.3.3.13 - read core tests and bounded child authority` | Read six Rust ranges, preserve exact verification limits and prior canonical evidence, and remove only consumed captures. |
 
 ## Changelog
 
@@ -6276,3 +6314,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-07`: `.3.3.10` reads remaining parser tests, core trace and types prefix; owns .55 value/text repair and reconciles dated trace closure and scalar fixture coverage.
 - `2026-09-07`: `.3.3.11` completes compiled-type/Unicode reading and validator entry order; reconciles dated cursor/strict evidence and owns stale validation comments under .41.2.
 - `2026-09-07`: `.3.3.12` completes static validator and descriptor-test reading; owns .56 helper shadowing and .57 nonnumeric bare-selector loss with paired native/descriptor controls; performs required lossless notes rollover and finite ADR 0105 capacity admission under exact staged canonical verification.
+- `2026-09-07`: `.3.3.13` reads all six group-13 ranges, retains verification limits and suffix ownership, records the completed prior canonical gate, and verifies exact consumed-capture cleanup; existing claim repairs remain owned.

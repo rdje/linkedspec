@@ -67,6 +67,24 @@ provenance loss in its separate normalizer. `.57` owns both repairs and composed
 recurrence: [[and-bare-nonnumeric-selector-loss]]. Existing numeric/bare fixtures
 and the fresh 21 core validator tests do not cover those nonnumeric cases.
 
+## September 7 selected core integration proof
+
+Checkpoint `SESSION-STARTUP-READING.3.3.13` finishes reading
+`rust/linkedspec-core/tests/rule_local_cursor_normalization_test.rs` and freshly
+passes its five native tests, with no ignored or filtered cases, in 1.13 test
+seconds. The managed invocation selects this target with `--locked --offline
+--jobs 1`. The neutral checker independently passes 36 families, 18 edge cases,
+eight parent/child cases and 60 mutations.
+
+The native assertions compare governed diagnostic codes, stages and declared
+fields, preserve complete portable-diagnostic serde equality, and inspect selected
+compiled family/dispatch ownership after serde. This does not establish universal
+compiled-object equality. Complete physical-line, header-rest and multiline bare
+edges remain typed; a suffix following another same-line member is not a bare edge.
+The six ownership sets and governed edge fixtures do not cover `.57`'s
+nonnumeric AND selectors. Runtime execution, descriptor and generated-route suites
+were not selected by this core-only run.
+
 Related: [[rule-local-cursor-and-bare-edge-contract]],
 [[rule-local-cursor-neutral-contract]], [[rust-rule-local-cursor-execution]],
 [[rust-local-verification-gate]], and

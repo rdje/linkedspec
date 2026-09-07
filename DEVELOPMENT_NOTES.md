@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.13 — Bounded core-test coverage, child-view authority and completed CI intake
+
+The core integration tests inspect specific owned fields and cases; they do not establish universal compiled round-trip equality, every RuntimeValue variant, or blanket malformed-source rejection. Bounded-child reading stops before the invocation implementation, keeping dispatch/narrowing/result-helper proof with the next leaf. Existing Knowledge now preserves those limits, the current Codeblock successor, and dated prior canonical/sample evidence. Only eight fully consumed captures were removed; no target/cache/recovery/purge changed. Existing `.41.2`/`.41.7` own stale current comments and Toolbox counts.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.12 — new typed selectors can bypass an older numeric-only guard
 
 A richer selector record does not make a legacy index-only validation complete: Named and Invalid survive parsing with no numeric index, then disappear in blind lowering. Separately, a copied function-name reservation table can lag the actual helper resolver and admit executable shadowing. Native controls plus compiled descriptor evidence isolate these losses even while existing validation suites pass. The required complete-record rollover preserves 206 clean-source lines in segment 4983; ADR 0105 admits only one collection file and one manifest line, with exact staged canonical proof required before landing.

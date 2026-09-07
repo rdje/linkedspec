@@ -5,22 +5,23 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.12` are reconciled and `.3.3.13`–`.3.3.66` plus closeout remain pending.
+  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.13` are reconciled and `.3.3.14`–`.3.3.66` plus closeout remain pending.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.57` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.3.12` reads static validation and descriptors; owns helper reservation .56 and AND selector loss .57.
-  Required notes rollover preserves 206 lines; ADR 0105 admits one archive member/manifest row with canonical proof.
-  This is item 71/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.3.13` reads six Rust ranges (1,495 lines / 52,012 bytes), preserves bounded test/source claims and prior canonical evidence, and verifies eight-capture cleanup.
+  This is item 72/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.3.13`: read cursor, value and Unicode tests, runtime crate entry, and bounded-child authority prefix.
+- Activate `SESSION-STARTUP-READING.3.3.14`: read the remaining bounded-child authority, runtime diagnostics, and engine entry.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-07` — `SESSION-STARTUP-READING.3.3.13` Read core tests and the bounded-child prefix; preserve exact proof limits and prior canonical intake.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.12` reads validation/descriptor tests (1,490 lines / 54,844 bytes), core21 green.
   Paired native/descriptor controls establish .56 helper shadowing and .57 selector loss.
@@ -66,9 +67,6 @@
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.53` reads four registry/legacy files totaling 1,202 lines / 45,829 bytes.
   Seventy-six callable tests pass; current metadata and the 13-file parked plugin census are reconciled.
-
-- `2026-09-06` — `SESSION-STARTUP-READING.3.2.52` reconciles all 855 XID table lines and passes 3,224 direct boundary checks.
-  Seventeen fixtures/two identity pairs pass; gap Knowledge now matches current public admission.
 
 ## History
 

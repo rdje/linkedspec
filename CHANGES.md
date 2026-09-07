@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.13 — read core tests and bounded child authority
+
+Read 1,495 lines / 52,012 bytes across three core test files, the runtime manifest/entry point, and bounded-child authority through line 778; exact file/range identity matches the recorded baseline. Managed locked/offline core integration targets pass cursor 5/5, types 8/8 and Unicode 5/5, with no ignored or filtered tests. Cursor, Unicode, logical and progressive neutral checks pass. Source notes distinguish selected test assertions from complete serialization/route proof and retain the invocation suffix under `.3.3.14`.
+
+Preserve `.3.3.12`'s exact accepted canonical evidence (nine doctrines, process locality/relocation, CLI 66x2, Phase 0 1,032/1,032), qualify the newer-OS samples, and remove only eight verified consumed captures with ten absence checks. Make the existing canonical host-execution requirement visible in MEMORY, qualify historical codeblock limitations, and assign stale current comments/counts to existing `.41.2`/`.41.7` repairs. Public/runtime/policy repairs still await startup prerequisites.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.12 — read static validation and preserve bounded engineering history
 
 Complete Rust static-validation and descriptor-test reading. Four paired registry controls expose current gap-helper name shadowing on Rust; five paired AND-edge controls and four Perl descriptors prove nonnumeric selector loss on both Rust and Perl. Own .56/.57 repairs before Knowledge. Core validation 21/21 and gap/root/cursor neutral checks pass; preserve exact evidence limits and unchanged runtime/book. Required engineering-notes rollover preserves 206 committed lines in segment 4983; indexed ADR 0105 admits exactly one file/manifest-row slot with all other limits unchanged. Independent lossless proof passes; exact staged canonical CI is required before landing.

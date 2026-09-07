@@ -84,3 +84,18 @@ This no-op returned 71 inside the restricted harness and 0 outside it. Running t
 driver and containment assertions. Use approved execution outside the harness for this oracle and for canonical
 CI that includes it. Keep the oracle's own sandbox profile and all denials intact. A focused pass does not replace
 the full staged-candidate receipt required by `COMMIT.md`.
+
+## September 7 canonical reconfirmation
+
+`SESSION-STARTUP-READING.3.3.13` records the completed `.3.3.12` gate. The initial
+restricted-harness attempt repeated the already documented execution mistake;
+the same no-op returned 71 there and 0 in approved host execution. That attempt
+was safely stopped with exit 143 and supplied no receipt. The unchanged full
+canonical candidate then passed in the permitted environment, including the
+six-family relocated containment test and all retained denials. Commit
+`1d3715fc70e36e97a8c3be1b114edf9f2e706a11` received the promoted exact receipt.
+
+Canonical CI must therefore be launched with approved host execution from the
+start. This is the existing execution prerequisite, not a new permission to
+weaken the test or skip its profile. Separate newer-OS pre-main samples are
+bounded in [[macos-rust-first-launch-validation-latency]].

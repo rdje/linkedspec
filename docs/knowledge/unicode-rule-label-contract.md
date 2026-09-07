@@ -180,3 +180,24 @@ target labels, preserving exact spelling and the declaration/edge-target role in
 portable diagnostics. Fresh managed regeneration passes all 806 ranges, nine
 positive/eight negative fixtures and two distinct pairs. This is source and neutral
 generated-artifact proof, not a fresh Rust parser/runtime route suite.
+
+## September 7 selected core integration coverage
+
+Checkpoint `SESSION-STARTUP-READING.3.3.13` reads the complete 155-line core
+`unicode_rule_label_contract` integration target. Its assertions pin contract
+identity, version and digest; exercise the nine positive, eight negative and
+prefix fixtures; preserve exact header/action/blind/bare labels; and compile
+distinct scalar identities without normalization. The grouped action selector
+example is parse-only.
+
+Its malformed-source assertion allows a parse when no declaration equals the
+entire invalid fixture label. It therefore does not prove blanket rejection of
+malformed sources. Programmatic invalid-label tests cover declaration and action
+roles; they do not independently rerun every other role or runtime carrier.
+Existing `SESSION-STARTUP-READING.53` owns invalid-header suffix acceptance.
+
+The managed locked/offline target freshly passes all five tests, with no ignored
+or filtered cases, in 0.20 test seconds.
+Fresh neutral regeneration again passes 806 ranges, nine positive/eight negative
+fixtures and two distinct pairs. Runtime, generated and emitted identity-route
+suites were not selected by this core-only checkpoint.
