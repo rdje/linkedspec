@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.24 — Generated identity and physical comprehension have different boundaries
+
+The generator can prove byte equality for the entire 83,225-byte module while this reading leaf owns only its first 65,536 bytes. Keep those facts distinct. Its shared builder verifies source digests and canonical frame encoding; the Rust renderer embeds canonical JSON with a noncolliding raw delimiter. Four semantic text/structured pairs retain exact identity, including semantic failure in a successful transport envelope. Fresh neutral admission validates governance rather than rerunning native servers. The next leaf continues inside the schema and then reads production dispatch support.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.23 — Restoring offsets does not restore discarded regex context
 
 Rust adds the cursor offset back to match coordinates after passing only input[pos..] to the provider. This cannot restore input-start or preceding-character context for anchors, lookbehind and word boundaries. An explicit collector exposes five disagreements after consuming x; the first uncollected chain returned null and could not answer the question. Whole-input matching must keep slot identity and all capture projections aligned across seek, consume and required-slot routes. .63 tracks that repair and independent carrier/public closure. Engine suffix tests meanwhile demonstrate exact rollback/effect assertions on their covered write routes.

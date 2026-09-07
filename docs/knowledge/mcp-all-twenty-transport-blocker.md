@@ -63,3 +63,10 @@ TOOLBOX section 4.10 still gives 68 mutations in both its checker description an
 Existing repair `.41.7` owns those two current-count corrections after startup prerequisites, coordinating
 semantic/MCP teaching under `.41.3`. Historical 68-count milestones remain dated evidence. This observation
 does not claim a fresh optional all-twenty composition-matrix run.
+
+The September 7 `.3.3.24` reading checkpoint also reads the corresponding generated Rust prefix.
+Its tools-list schemas preserve the same 72-key fact union and both 128-character/UTF-8-byte query-contract
+bounds. The embedded policy explicitly restricts pre-dispatch enforcement to supplied overlay components.
+Decoded checks preserve four canonical-text/structured-content pairs and keep native semantic `ok:false`
+inside a successful MCP envelope. Byte-fresh Rust/Perl bindings and transport 35/10/10/76 plus complete/141
+admission checks pass again; this does not rerun the twenty requests through six native servers.

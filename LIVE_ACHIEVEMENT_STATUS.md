@@ -5,21 +5,23 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.23` are reconciled and `.3.3.24`–`.3.3.66` plus closeout remain pending.
+  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.24` are reconciled and `.3.3.25`–`.3.3.66` plus closeout remain pending.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.63` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.3.23` reads 1,364 lines / 53,265 bytes through engine EOF, regex helpers and runtime exports; owns regex context repair .63.
-  This is item 82/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.3.24` reads 65,536 embedded MCP module bytes and verifies generated identity; suffix and runtime reading remain next.
+  This is item 83/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.3.24`: read mcp_contract.rs lines 1–6 and line 7 bytes 298–65536.
+- Activate `SESSION-STARTUP-READING.3.3.25`: read mcp_contract.rs file bytes 65537–83225, mcp_contract_runtime.rs lines 1–582, and mcp_server.rs lines 1–769.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-07` — `SESSION-STARTUP-READING.3.3.24` reads the MCP bundle prefix and verifies exact generated, frame and admission identities.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.23` completes engine/helper/export reading and owns confirmed nonzero-cursor regex context repair .63.
 
@@ -54,9 +56,6 @@
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.9` reads rule-body parsing (1,496 lines / 49,733 bytes) and owns .52-.54.
   Paired native and direct bootstrap controls isolate lexical failures while neutral checks remain green.
-
-- `2026-09-07` — `SESSION-STARTUP-READING.3.3.8` reads remaining expression tests and core parser entry (1,470 lines / 57,396 bytes).
-  Neutral write/callable/uniform checks pass; historical storage and rollout wording is reconciled.
 
 ## History
 

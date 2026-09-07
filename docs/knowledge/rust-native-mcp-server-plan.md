@@ -20,11 +20,14 @@ answers:
   - How will Rust MCP preserve canonical semantic response bytes?
   - How will Rust MCP sanitize native panics?
   - Which leaves implement and admit the Rust MCP server?
-date: 2026-07-29
+  - Which artifacts generate the Rust embedded MCP contract?
+  - How does the Rust MCP generator verify its source bundle?
+  - What is the current embedded Rust MCP bundle identity?
+date: 2026-09-07
 status: current; implementation, admission, and no-change parent closeout complete under FUTURE-PARITY-BACKLOG.10.9.3.1-.4
 tags: [rust, mcp, semantic-introspection, embedding, json, security, stdio, generated-binding]
 evidence: docs/decisions/0058-rust-native-mcp-server-seams.md; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.9.3.1-.4; tools/mcp_contract_binding.py; tools/generate_rust_mcp_contract.py; rust/linkedspec-runtime/src/mcp_contract.rs; rust/linkedspec-runtime/src/mcp_contract_runtime.rs; rust/linkedspec-runtime/src/mcp_server.rs; rust/linkedspec-runtime/src/mcp_wire.rs; rust/linkedspec-runtime/tests/mcp_server_rust_dispatch.rs; rust/linkedspec-runtime/tests/mcp_server_rust_stdio.rs; rust/linkedspec-runtime/tests/mcp_server_rust_admission.rs
-reverify: "bash tools/run_python_project_data.sh tools/generate_perl_mcp_contract.py && bash tools/run_python_project_data.sh tools/generate_rust_mcp_contract.py && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib mcp_ && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_dispatch && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_stdio"
+reverify: "bash tools/run_python_project_data.sh tools/generate_perl_mcp_contract.py && bash tools/run_python_project_data.sh tools/generate_rust_mcp_contract.py && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --lib mcp_ && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test mcp_server_rust_dispatch && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test mcp_server_rust_stdio"
 ---
 
 # Rust generated binding, decoded server, and strict stdio
@@ -36,8 +39,9 @@ compile/execute a specification, enable trace, emit generated source, or add a m
 
 Implemented owners are generated private `mcp_contract.rs`, private `mcp_contract_runtime.rs`, public
 `mcp_server.rs`, and private `mcp_wire.rs`. Shared `tools/mcp_contract_binding.py` feeds the Perl
-and Rust generators from digest-verified neutral artifacts. The Perl output remains byte-identical at 83,072
-bytes, the formatter-stable Rust binding is 82,886 bytes, and production Rust parses only that compile-time bundle.
+and Rust generators from digest-verified neutral artifacts. The initial 83,072-byte Perl and 82,886-byte Rust
+sizes describe the July implementation milestone. Current generated sizes and identities are recorded below;
+production Rust parses only its compile-time bundle.
 
 The frozen runtime verifies the embedded SHA-256 digest once, deep-clones returned frames, implements only the
 exact schema keyword profile, classifies all 28 accepted and seven rejected canonical values, and constructs
@@ -66,3 +70,31 @@ exists.
 `.10.9.3.1-.2` implement the server without admission movement, and `.10.9.3.3` advances only Rust to 2/5 + 2/6
 with rollout pending. No-change `.10.9.3.4` recomposes those committed owners under focused/canonical proof,
 closes parent `.10.9.3`, and hands the exact contract to Dart `.10.9.4` after the clean closeout commit.
+
+## September 7 embedded-prefix and generator reading
+
+`SESSION-STARTUP-READING.3.3.24` reads module lines 1–6 (297 bytes) and file bytes 298–65536
+of line 7, covering every canonical frame, the manifest, corpus and schema prefix. The remaining
+17,689 module bytes and runtime implementation stay with `.3.3.25` and later reading leaves.
+Full-module machine identity is separate from that physical reading boundary.
+
+The shared builder requires exactly seven artifact paths/digests, resolves paths within the current
+repository root, checks each hash, and decodes object inputs with strict UTF-8, BOM/duplicate-key and
+nonfinite-constant rejection. Canonical frame rows must match corpus order/count, LF framing and exact
+canonical re-encoding. It constructs one bundle containing the contract/hash, schema, semantic payloads,
+corpus, canonical frames and source hashes. The Rust renderer hashes canonical UTF-8 JSON and increases
+raw-string hash delimiters until the embedded value cannot close the literal. The Rust generator
+and shared builder read repository-derived sources; production consumers use the generated constant.
+The generator's default mode compares bytes; only explicit `--write` mutates the module.
+
+Fresh managed Rust/Perl generator checks pass at 83,225/83,411 bytes. Rust module SHA-256 is
+`7473a113474d090a1304ffc0d419de18b6b97c10639e7a484e5625abc83e7ece`;
+its 82,882-byte JSON has bundle SHA-256
+`a1d2857c57ef93ea0e62403977105fdf6380f6fcb4d7a89ed5749c1bfdd64001`,
+and the embedded manifest hash is
+`e068519994a7d4fb8e4c8ece0e277a470f48204d4c670f915ba49052a52630b3`.
+Independent decoded checks reproduce the generated module and preserve all four success-frame
+canonical-text/structured-content identities, including semantic `ok:false` with transport `isError:false`.
+Neutral transport passes 35/10/10/76; admission governance passes 5/5 implementations, 6/6 runtimes,
+rollout complete/141. These are generated-artifact and governance checks, not fresh Rust dispatch,
+stdio or six-runtime execution. Older native counts and intermediate handoffs above remain historical.

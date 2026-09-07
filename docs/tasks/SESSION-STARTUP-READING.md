@@ -1326,13 +1326,17 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.23 - complete engine and regex helper reading and own input-context repair`
 
 - ID: `SESSION-STARTUP-READING.3.3.24`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 24: 7 lines/fragments, 65,536 bytes.
   Scope: `rust/linkedspec-runtime/src/mcp_contract.rs` lines 1–6;
     `rust/linkedspec-runtime/src/mcp_contract.rs` bytes 298–65536.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Read every owned byte of the embedded MCP contract prefix, using untruncated raw segments and decoded structural cross-checks; exact baseline/authority identity; Knowledge-first contract/provider/generated snapshot reconciliation; selected managed MCP direct-dependent checks; history/memory/derived Knowledge/staged diff/all nine pre-commit doctrines. No runtime/public/policy repairs before startup prerequisites.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS: all 65,536 owned bytes read without truncation and baseline-identical; both managed generated bindings byte-fresh; transport 35/10/10/76 and admission complete 5/5+6/6/141; decoded bundle/frame/schema assertions; shared builder/renderer source identity; Knowledge/history/memory/staged diff/all nine pre-commit doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.24 - read embedded MCP contract prefix and reconcile generated identity`
 
 - ID: `SESSION-STARTUP-READING.3.3.25`
   Status: `pending`
@@ -3802,7 +3806,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.24` | `pending` | read mcp_contract.rs lines 1–6 and line 7 bytes 298–65536. |
+| 1 | `SESSION-STARTUP-READING.3.3.25` | `pending` | read mcp_contract.rs file bytes 65537–83225, mcp_contract_runtime.rs lines 1–582, and mcp_server.rs lines 1–769. |
 
 ## Reading Ledger
 
@@ -3813,7 +3817,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.23` are reconciled and `.3.3.24`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.24` are reconciled and `.3.3.25`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -6361,6 +6365,14 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - Six informative collected-rule pairs on xhello show plain agreement and five Rust discrepancies for ^, input-start, positive/negative fixed lookbehind and word boundary after consuming x. helpers.rs slices input[pos..] in all three matching implementations; Perl LinkedRE retains the original scalar/pos. Six generated/descriptor captures preserve both dispatch slots and three ready/unresolved=0 rule records. .63.1-.63.4 own whole-input seek repair, consume/required slots, carrier/backend recurrence and public closure. Only ordinary choice seek is freshly exercised. The initial six null-only chain probes are retained as inconclusive observation scaffolds, not parity proof.
 - New regex-context Knowledge plus six reconciled owners retain exact source/limits and 37-file/618,941-byte evidence manifest. Three managed neutral contracts pass: writes 105 mutations; receiver mutation 167/592; slot identity five fixtures/two diagnostics/59 mutations. Exact result/error and source/descriptor assertions pass. No compiler ran and all jobs are consumed. Roadmap Yes, codebase No, physical book Yes; formal alignment and runtime/public/policy repairs remain pending.
 
+### Embedded MCP contract prefix and generator identity at `.3.3.24`
+
+- Activated from clean `71e6df55437e017af6719de0d5dab3ff42330ae7` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read module lines 1–6 (297 bytes; SHA-256 `15bd59bda5fca3d501c833233048c1c469b1a9e763203ad6cf74d588240c43f2`) and file bytes 298–65536 of line 7 (65,239 bytes; `265dc365798d2970032cfe024b9fa0fc014d7fefbff6c6c16f4d2c2ab83f0ce0`) in eight 8,000-byte segments plus one 1,239-byte segment. All 65,536 owned bytes/full module equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`. The final fragment ends inside semanticQueryRequest.additionalProperties; .3.3.25 begins at file byte 65537. Full-module machine identity does not claim suffix physical reading.
+- Read all canonical frames, contract manifest, corpus and schema prefix: server discovery and two read-only tools; canonical semantic text plus structured content; semantic ok=false separate from transport isError; fixed error envelopes; lowering-only explicit policy overlays; opaque host-registered handles; metadata/transport ceilings and EOF lifecycle. Corpus retains 35 ordered canonical frames, ten raw cases, ten lifecycle cases, four handle states and four policy cases. The visible tool schemas retain 72 fact keys, 128-character/UTF-8-byte contract strings, exact budget/page ceilings and read-only annotations.
+- Supporting complete reads: tools/generate_rust_mcp_contract.py 52 lines/1,822 bytes SHA-256 `081e231298aad254499681fbfc04a5be0e343358896770d865a39b7a5c49f7ca`; tools/mcp_contract_binding.py 138/5,192 SHA-256 `c1290d629cb471f5bc27cbc1ed9b745128a8bed95ecfa31a5ad1ca84018dad36`; both baseline-identical. The builder verifies exact seven-path/digest inventory, root containment, object decoding and canonical frame order/encoding. The renderer hashes canonical JSON and selects safe Rust raw delimiters. Default generator mode checks bytes; only --write rewrites.
+- Fresh managed generators confirm Rust 83,225 bytes and Perl 83,411. Exact decoded reproduction verifies Rust module hash `7473a113474d090a1304ffc0d419de18b6b97c10639e7a484e5625abc83e7ece`, embedded JSON 82,882 bytes/hash `a1d2857c57ef93ea0e62403977105fdf6380f6fcb4d7a89ed5749c1bfdd64001`, and manifest hash `e068519994a7d4fb8e4c8ece0e277a470f48204d4c670f915ba49052a52630b3`. Four success-frame text/structured pairs are exactly equal; two Knowledge owners qualify old sizes and retain current scope. Neutral transport 35/10/10/76 and admission 5/5+6/6 complete/141 pass. No native server or six-runtime execution is rerun, no compiler ran, and all jobs are consumed. Roadmap Yes, codebase No, physical book Yes; startup alignment and repairs remain pending.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -6440,7 +6452,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.3.20` is item 79/100 at `19e943a4`;
   `.3.3.21` is item 80/100 at `bcc2b2ab`;
   `.3.3.22` is item 81/100 at `fe3cabf1`;
-  `.3.3.23` is item 82/100 once committed.
+  `.3.3.23` is item 82/100 at `71e6df55`;
+  `.3.3.24` is item 83/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -6587,6 +6600,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.21` | Exact source identity; three managed neutral contracts; eleven paired values/errors plus Rust-only overflow; twelve ready descriptors/source captures; exact scalar kinds/panic-site assertions; .60/.61 ownership; Knowledge/history/memory/staged diff/all nine pre-commit doctrines | PASS bounded reading and exact slice/scalar diagnosis; .60/.61 own repairs and recurrence. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.22` | Complete source identity; five paired exact values/effects/JSON kinds; five ready source/descriptor captures; logical/typed/cursor neutral contracts; .62 ownership; Knowledge/history/memory/staged diff/all nine pre-commit doctrines | PASS bounded capture/control reading and coalesce diagnosis; .62 owns runtime/carrier/public repair. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.23` | Full source identity; six informative and six inconclusive retained pairs; six three-rule descriptors/generated captures; exact sequence/error assertions; write/mutation/slot neutral proof; .63 ownership; Knowledge/history/memory/staged diff/all nine pre-commit doctrines | PASS bounded engine/helper/export reading; .63 owns confirmed nonzero-cursor regex context repair. |
+| `2026-09-07` | `SESSION-STARTUP-READING.3.3.24` | Untruncated 65,536-byte source read/current-baseline identity; two byte-fresh generators; neutral transport/admission; decoded bundle/frame/schema assertions; supporting source identity; Knowledge/history/memory/staged diff/all nine pre-commit doctrines | PASS generated MCP prefix and authority identity; runtime/suffix reading remains next. |
 
 ## Commit Log
 
@@ -6675,6 +6689,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.3.21` | `SESSION-STARTUP-READING.3.3.21 - complete helper reading and own slice and scalar boundary repairs` | Complete helper implementation and test-prefix reading; own array slicing and scalar null/empty repair with bounded exact evidence. |
 | `SESSION-STARTUP-READING.3.3.22` | `SESSION-STARTUP-READING.3.3.22 - read capture and control tests and own coalesce evaluation repair` | Read capture/control assertions, qualify weak smoke coverage, and own coalesce definedness/laziness with corrected Boolean observations. |
 | `SESSION-STARTUP-READING.3.3.23` | `SESSION-STARTUP-READING.3.3.23 - complete engine and regex helper reading and own input-context repair` | Complete engine tests and regex wrappers; own five assertion discrepancies with exact collected-rule controls. |
+| `SESSION-STARTUP-READING.3.3.24` | `SESSION-STARTUP-READING.3.3.24 - read embedded MCP contract prefix and reconcile generated identity` | Preserve exact generated-prefix coverage and identity, update old sizes, distinguish artifact/governance proof from runtime execution. |
 
 ## Changelog
 
@@ -6807,3 +6822,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-07`: `.3.3.21` completes helper reading, owns slice/scalar repairs .60/.61, and retains eleven paired controls plus one Rust-only overflow case.
 - `2026-09-07`: `.3.3.22` reads capture/control tests, owns coalesce repair .62, and preserves five typed paired controls.
 - `2026-09-07`: `.3.3.23` completes engine/helper/export reading, owns regex context repair .63, and retains six informative paired controls.
+- `2026-09-07`: `.3.3.24` reads the first 65,536 generated MCP bytes and reconciles exact binding identity and proof limits.

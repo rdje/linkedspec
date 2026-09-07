@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.24 — read embedded MCP contract prefix and reconcile generated identity
+
+Read the first 65,536 bytes of the generated Rust MCP module without truncation, plus its complete shared builder and Rust generator. Both generated bindings are byte-fresh; decoded checks preserve 35 frame identities, four canonical-text/structured pairs, 72 fact keys and bounded contract strings. Transport 35/10/10/76 and admission complete/141 pass. Two Knowledge owners qualify historical sizes and distinguish artifact/governance checks from native execution. The remaining embedded bytes and runtime implementation stay on the next reading leaf.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.23 — complete engine and regex helper reading and own input-context repair
 
 Read the engine test suffix, all regex helpers and runtime exports: 1,364 baseline-identical lines / 53,265 bytes. Six collected-rule Rust primary/Perl Get pairs confirm five nonzero-cursor anchor/lookbehind/word-boundary discrepancies and one plain agreement. Six three-rule descriptors and generated captures tie them to suffix-based Rust matching versus original-scalar Perl matching; .63 owns route repair, recurrence and public closure. Three neutral contracts pass; six Knowledge owners reconcile. Initial null-only controls remain explicitly inconclusive; runtime/public/policy remain unchanged.

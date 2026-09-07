@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `fe3cabf1934eaf7181745091f7a5d423c991b895` — clean preceding reading checkpoint.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.23 - complete engine and regex helper reading and own input-context repair`.
+- activation_commit: `71e6df55437e017af6719de0d5dab3ff42330ae7` — clean preceding reading checkpoint.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.24 - read embedded MCP contract prefix and reconcile generated identity`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: activate `.3.3.24`; read mcp_contract.rs lines 1–6 and line 7 bytes 298–65536,
+- next_action: activate `.3.3.25`; read mcp_contract.rs file bytes 65537–83225, mcp_contract_runtime.rs lines 1–582, and mcp_server.rs lines 1–769,
   then continue queued reading. Intake `.31` preserves the forward source coverage and exact findings.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.63` precede mutation setup; `.29` is part of `.5` adoption.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4984` is the twenty-seventh history segment; ADR `0104`
   authorizes exactly 29 collection files / 28 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook Yes (physical); .31/.3.2.42 preserve complete book/Perl source coverage and repair ownership; formal .4 alignment remains pending (82/100 after `.3.3.23` lands).
+- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook Yes (physical); .31/.3.2.42 preserve complete book/Perl source coverage and repair ownership; formal .4 alignment remains pending (83/100 after `.3.3.24` lands).
