@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.6 — successful parsing is distinct from compiled carrier acceptance
+
+The mutation parser trims empty parentheses while later compiled source projection currently expects the exact empty spelling; the existing repair must align those boundaries while retaining authored spans. UTF-8 diagnostic snippets must likewise respect character boundaries even though the parser cursor is a byte offset. Hash keys remain ordinary expressions, so literal identity comes from quoting rather than an assumed bare-key conversion.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.5 — authored source and typed declarations outlive parser cursors
 
 The expression parser advances in bytes while callable source records use half-open Unicode character coordinates. Debug Display output is a separate surface and cannot stand in for retained authored source or serde state. Staged text/options form inert declarations with strict literal and provenance constraints; runtime authority belongs to the later admitted consumer. Statement normalization reuses existing controls.

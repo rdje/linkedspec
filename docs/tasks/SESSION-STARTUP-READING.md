@@ -1054,12 +1054,21 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.5 - read Rust expression carriers and statement parser prefix`
 
 - ID: `SESSION-STARTUP-READING.3.3.6`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 6: 1,461 lines/fragments, 54,270 bytes.
   Scope: `rust/linkedspec-core/src/expr.rs` lines 1497–2957.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact expression continuation/current-baseline proof; existing callable/write/mutation/hash Knowledge; neutral map-leaves mutation contract; unchanged bounded .45/.46/.47 diagnostics; Knowledge/memory/all doctrines/history and final scope/diff.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Owned expr.rs lines 1497–2957 fully read: 1,461 lines / 54,270 bytes; exact range hash and complete
+    current file match baseline. Reconcile attached controls, source-preserving nested writes/mutations,
+    scalar staged intrinsics, expression dispatch and brace classification. Existing .45/.46/.47 diagnostic
+    controls retain their exact limits. Neutral mutation checks pass 4 valid / 14 invalid / 5 excluded syntax cases, 10 successes,
+    8 pre-commit failures, 6 callback / 1 continuation compositions, and 167 + 592 mutations.
+    Required continuity checks pass before commit.
+  Commit: `SESSION-STARTUP-READING.3.3.6 - read Rust expression parsing and retain boundary repair evidence`
 
 - ID: `SESSION-STARTUP-READING.3.3.7`
   Status: `pending`
@@ -3088,7 +3097,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.6` | `pending` | reconcile the expression parser continuation, retaining the owned UTF-8 diagnostic and mutation-whitespace defects. |
+| 1 | `SESSION-STARTUP-READING.3.3.7` | `pending` | reconcile callable and literal parsing plus expression tests, retaining the regex-newline repair. |
 
 ## Reading Ledger
 
@@ -3099,7 +3108,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.5` are reconciled and `.3.3.6`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.6` are reconciled and `.3.3.7`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -5248,6 +5257,32 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   group-establishment verification. That child's actual PGID was not captured, so no group-failure or
   lifecycle-correctness inference is made. No recovery/purge was run.
 
+### Rust expression continuation and existing boundary repairs at `.3.3.6`
+
+- Activated from clean `2af9c32143a084c1a8296321c3babe1d4a5b3e1f` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Reconcile the fully read forward expr.rs continuation retained in 611d7b5c's commit body: lines
+  1497–2957, 1,461 lines / 54,270 bytes; SHA-256
+  a1cfca66a53c6f8d5704e137213d8605d1c08e4826f72872376f2d1d5461e440.
+  The complete current file remains baseline-identical. Remaining suffix begins at line 2958.
+- Attached controls and nested callable candidates retain their containing character base. Parenthesized
+  block candidates fall back to ordinary eager blocks where callable metadata does not claim them.
+- Nested-write scanning retains expression segments, addressable ASCII roots, authored source and spans,
+  and statement separators. Mutation parsing requires the immediate bang and empty trimmed parentheses,
+  captures the typed callback and continuation in authored order, and rejects bang continuation.
+- Scalar assignment specializes dispatch_span and parse_job into typed declaration nodes. Expression
+  dispatch distinguishes symbolic helpers, regexes, assignments, literals, accesses and typed forms.
+  Hash keys are parsed as expressions; quoted keys establish literal identity. No key-loss defect is
+  inferred from the value of an unbound bare-key expression. Brace classification prioritizes exact {|,
+  then empty/hash-pair payloads, then ordinary eager blocks.
+- Read the exact UTF-8 diagnostic slice at pos+40 and mutation source-boundary checks against the
+  previously measured controls in rust-action-parser-boundary-defects. .46 owns the confirmed isolated
+  core panic; its earlier whole-spec timeout still has no established shared cause. .47 owns whitespace
+  accepted by parsing but rejected by compiled source projection. .45 owns warning/drop of malformed
+  rule blocks, including these typed parse failures. No fix, new panic route, or fresh native run is claimed.
+- Refresh the existing mutation and hash Knowledge with these precise boundaries and managed reverify
+  routing. Neutral mutation checks verify their declared contract only; they do not close the observed
+  acceptance gaps or rerun all native/generated consumers. No runtime or public-book change.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -5309,7 +5344,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.3.2` is item 61/100 at `9e655087`;
   `.3.3.3` is item 62/100 at `87065401`;
   `.3.3.4` is item 63/100 at `cd0e4ff4`;
-  `.3.3.5` is item 64/100 once committed.
+  `.3.3.5` is item 64/100 at `2af9c321`;
+  `.3.3.6` is item 65/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -5438,6 +5474,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.3` | Two exact reading ranges/current-baseline proof; existing callable/compiler Knowledge; neutral callable 7/11/9/7/4/8/23; selector zero-positive/20 classified; .45/.47 ownership; focused continuity | PASS reading and focused contract proof; compiler repairs remain pending; whole-codebase reading still No. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.4` | Four exact reading ranges/current-baseline proof; descriptor/entry/slot Knowledge; neutral slot 5/2/59 and entry 8/3/3/54; .41.2 comment ownership; retained native duplicate rejection; focused continuity | PASS reading and focused neutral proof; source/public-comment repairs pending; codebase reading still No. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.5` | Exact prefix/current-baseline proof; callable/staged/write/control Knowledge; neutral staged 123/129 mutations and write 5/7/11/16/3/3/8/105; retained .45–.47/.49; focused continuity | PASS reading and focused neutral proof; expression suffix and native repairs remain pending. |
+| `2026-09-07` | `SESSION-STARTUP-READING.3.3.6` | Exact continuation/current-baseline proof; mutation/hash/callable Knowledge; neutral mutation 4/14/5/10/8/6/1 and 167+592 mutations; retained .45/.46/.47 controls; focused continuity | PASS reading and neutral contract proof; source boundary repairs remain pending with unchanged diagnostic limits. |
 
 ## Commit Log
 
@@ -5508,6 +5545,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.3.3` | `SESSION-STARTUP-READING.3.3.3 - read callable normalization and compiler validation prefix` | Read 1,499 callable/compiler lines; preserve validation order and exact pending repair boundaries. |
 | `SESSION-STARTUP-READING.3.3.4` | `SESSION-STARTUP-READING.3.3.4 - read Rust regex resolution descriptors and entry diagnostics` | Read 1,481 compiler/descriptor/entry/error lines; separate projection determinism from native validation. |
 | `SESSION-STARTUP-READING.3.3.5` | `SESSION-STARTUP-READING.3.3.5 - read Rust expression carriers and statement parser prefix` | Read 1,496 expression/statement lines; separate byte cursors, character spans and debug formatting. |
+| `SESSION-STARTUP-READING.3.3.6` | `SESSION-STARTUP-READING.3.3.6 - read Rust expression parsing and retain boundary repair evidence` | Read 1,461 expression-parser lines; retain exact Unicode and mutation-whitespace repair evidence. |
 
 ## Changelog
 
@@ -5622,3 +5660,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-07`: `.3.3.3` reconciles callable traversal and compiler validation/lowering; retains existing fail-closed and mutation repair ownership.
 - `2026-09-07`: `.3.3.4` reconciles regex resolution, descriptor projection, entry precedence and portable diagnostics; owns stale self-edge comments and preserves native duplicate rejection.
 - `2026-09-07`: `.3.3.5` reconciles typed expression carriers and statement parsing; preserves staged declaration authority and exact source-coordinate boundaries.
+- `2026-09-07`: `.3.3.6` reconciles expression parsing, nested writes/mutations and brace classification; links existing UTF-8 and whitespace defects without overstating runtime proof.
