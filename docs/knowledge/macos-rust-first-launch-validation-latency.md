@@ -164,3 +164,22 @@ Only these eight consumed reports (8,636 bytes / 256 lines) were then deleted. E
 including both failed-attempt paths, was verified; no build target, cache, recovery, or purge was touched.
 The accepted full log is `.linkedspec-data/scratch/startup71-canonical-permitted.log`,
 10622381 bytes, SHA-256 `21b4d050901b6e497f33223c38d2eb358cf528ab03f41057e6a99e09218de47f`. It is retained as local verification evidence.
+
+## September 7 final-assignment probe compiler observation
+
+During `SESSION-STARTUP-READING.3.3.19`, the task-owned rustc process 57919
+(parent 57732) launched at 12:43:39.998 +0200. A one-second sample at
+12:52:18.957 on macOS 26.6.2 (25G83) records all 798 compiler-worker samples
+in `__fcntl`, reached through procedural-macro loading
+(`dlsym_proc_macros` / `load_dylib` / dyld `dlopen` / `mapSegments`).
+This locates the sampled wait and does not establish a kernel or policy cause.
+The compiler later exited 0 without recovery, cleanup or trust changes; the
+resulting native receiver-guard probe completed all six cases successfully.
+
+The report is retained at
+`.linkedspec-data/scratch/startup78-receiver-guard/compiler.sample.txt`:
+77,430 bytes / 448 lines; SHA-256
+`8e3d0ffb4571b8236d4355479137da5e28e70ed544bd031565f5878d38450b7e`.
+Its header, call graph and collapsed-stack summary were inspected; the remainder
+is image inventory. Symbol processing also took time after the one-second sample;
+that duration is not part of the sampled interval or proof of a workaround.

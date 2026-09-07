@@ -20,6 +20,9 @@ reverify: "bash tools/run_python_project_data.sh tools/check_map_leaves_mutation
 
 # Rust `map_leaves!` receiver mutation
 
+Known exception: final scalar/nested callback assignments bypass the Rust guard;
+[[rust-final-value-assignment-receiver-guard-gap]] qualifies the current claims below.
+
 Rust parses only `IDENTIFIER.map_leaves!() { ACTION_BLOCK } CONTINUATION*` as a dedicated
 `receiver_mutation_chain`. The carrier retains the bare binding reference, exact method/callback/continuation
 source, typed callback statements, and authored half-open Unicode-scalar spans. Compiler, serde, generated-plan,
@@ -80,3 +83,17 @@ runtime binding identity remains the authority for whether a write is guarded.
 This bounded reading does not yet cover the bang traversal/commit coordinator or
 the context identity implementation. Fresh neutral proof again passes 167 base
 and 592 composition mutations; native suites remain the dated milestone evidence.
+
+Checkpoint `SESSION-STARTUP-READING.3.3.19` completes the bang coordinator and
+both recursive rebuild/leaf-frame implementations. It snapshots the existing
+aggregate, activates the identity guard, traverses only the original root-kind
+shape, and releases the guard on callback error. On complete success it publishes
+the rebuilt root, releases the guard and then evaluates continuation. Temporary
+leaf bindings restore after body evaluation returns a Result. This ordering does
+not establish that every callback write reaches the guard: final scalar/nested
+assignment has a confirmed dispatch gap owned by `SESSION-STARTUP-READING.58`.
+The neutral suite still passes 167 base/592 composition mutations; those fixtures
+do not cover every final-expression route. The earlier general guard claim is
+qualified by this measured exception until its repair and carrier recurrence land.
+Exact fixtures, primary/native results and causal source locations are in
+[[rust-final-value-assignment-receiver-guard-gap]].

@@ -35,7 +35,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`, `SESSION-STARTUP-READING.50`, `SESSION-STARTUP-READING.51`, `SESSION-STARTUP-READING.52`, `SESSION-STARTUP-READING.53`, `SESSION-STARTUP-READING.54`, `SESSION-STARTUP-READING.55`, `SESSION-STARTUP-READING.56`, `SESSION-STARTUP-READING.57`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`, `SESSION-STARTUP-READING.50`, `SESSION-STARTUP-READING.51`, `SESSION-STARTUP-READING.52`, `SESSION-STARTUP-READING.53`, `SESSION-STARTUP-READING.54`, `SESSION-STARTUP-READING.55`, `SESSION-STARTUP-READING.56`, `SESSION-STARTUP-READING.57`, `SESSION-STARTUP-READING.58`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -1264,12 +1264,16 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.18 - read recursive writes and expression invocation scopes`
 
 - ID: `SESSION-STARTUP-READING.3.3.19`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 19: 1,493 lines/fragments, 55,743 bytes.
   Scope: `rust/linkedspec-runtime/src/engine.rs` lines 6386–7878.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Read engine lines 6386–7878 completely with preceding trailing-block context and exact suffix ownership; current/baseline identity; Knowledge-first traversal, receiver mutation and value-chain reconciliation; selected managed direct-dependent neutral contracts; both history checks, explicit memory, derived Knowledge, staged diff and all nine pre-commit doctrines. No runtime/public/policy repairs before startup prerequisites.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS: complete range/current-baseline identity; four managed neutral contracts; six paired Rust CLI/Perl Get cases plus six direct native diagnostics and independent field/value assertions; .58 repair ownership; compiler sample consumed; history/memory/derived Knowledge/staged diff/all nine pre-commit doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.19 - read receiver traversal and diagnose final-assignment guard`
 
 - ID: `SESSION-STARTUP-READING.3.3.20`
   Status: `pending`
@@ -3487,11 +3491,57 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: `pending`
   Commit: `pending`
 
+
+- ID: `SESSION-STARTUP-READING.58`
+  Status: `pending`
+  Goal: Enforce the active receiver-write guard on final value-block assignments in Rust.
+  Dependencies: prerequisite .3/.4/.5; coordinate existing mutation and write-vivification authority.
+  Children: `.58.1`, `.58.2`, `.58.3`
+  Acceptance: Final and nonfinal placement must not alter same-receiver rejection or pre-evaluation ordering.
+    Preserve unrelated bindings, scoped callback values, detached results and post-commit continuation.
+
+- ID: `SESSION-STARTUP-READING.58.1`
+  Status: `pending`
+  Goal: Repair final-assignment guard dispatch through the shared Rust value-block evaluator.
+  Acceptance: Reproduce final scalar/nested assignments beside nonfinal and explicit-return twins; require
+    receiver_mutation_reentrant before segment/RHS effects, then route final assignments through the same
+    guarded evaluation authority without changing their returned values. Audit scalar/append/hash/nested
+    assignment branches and callers, including nested value blocks and callable bodies. Prove exact diagnostics,
+    receiver rollback, guard release, unrelated effects and legal same-spelling parameter/local controls.
+  Verification: `pending` repair — six paired primary Rust CLI/Perl Get fixtures at acbadc0f show Rust succeeds
+    for final tree = {} and tree["x"] = value while Perl rejects both with receiver_mutation_reentrant.
+    Nonfinal and explicit-return controls reject on both; unrelated final assignment agrees. eval_block_value
+    sends the last statement to eval_block_final_expr, whose direct scalar/nested branches bypass eval_expr's
+    assert_receiver_write_expr; the nested-write coordinator and set_scalar do not replace that guard.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.58.2`
+  Status: `pending`
+  Goal: Close final-write guard coverage across supported carriers and related callback routes.
+  Dependencies: .58.1.
+  Acceptance: Run the repaired cases through native/serde/generated-plan/emitted/independently compiled Rust;
+    verify source spans and expression-effect ordering rather than accepting generic CLI failure as proof.
+    Inspect remaining backends with equivalent bounded controls; own and repair additional measured gaps.
+    Preserve declared neutral authority and strengthen recurrence without weakening its rejection contract.
+  Verification: `pending` — the six-case September probe establishes Rust direct/primary and Perl public scope
+    only; other backends and generated carriers require fresh proof at repair time.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.58.3`
+  Status: `pending`
+  Goal: Close public guard examples and recurring proof after final-write repairs.
+  Dependencies: .58.1, .58.2.
+  Acceptance: Teach final/nonfinal receiver rejection and legal detached callback writes with exact examples;
+    update all current guard claims, retain dated pre-repair evidence, and run canonical public/cross-backend
+    closeout. Do not equate the currently passing neutral mutations with complete runtime path coverage.
+  Verification: `pending`
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.19` | `pending` | continue engine reading at lines 6386–7878. |
+| 1 | `SESSION-STARTUP-READING.3.3.20` | `pending` | continue engine reading at lines 7879–9278. |
 
 ## Reading Ledger
 
@@ -3502,7 +3552,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.18` are reconciled and `.3.3.19`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.19` are reconciled and `.3.3.20`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -6005,6 +6055,15 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - Named functions take/restore all caller stores around fresh fixed/rest bindings; callable values install/restore parameters individually around the caller's other stores. Both clean up after body Result. Complete body evaluation, helper fallback, context identity and traversal internals retain later owners. Five Knowledge owners distinguish current source observations from dated native/carrier evidence; the user-function corpus count is historical and the codeblock card points to the subsequently completed generic normalization.
 - Four managed neutral checks pass: write 5/7 syntax/11 successes/16 structural failures/105 mutations; bang 4/14/5 syntax, 10 successes/8 pre-commit failures/167 base + 592 composition mutations; callable 7 literals/11 calls/23 mutations; binding 11 migrations/7 executions/6 invalid selectors/8 constructors. No fresh native run, runtime change or new defect claim; codebase No, physical book Yes and formal alignment/repairs remain pending.
 
+### Receiver traversal and final-assignment guard diagnosis at `.3.3.19`
+
+- Activated from clean `acbadc0fce4abdc03585c0fd26c9a1f7545958e2` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read engine lines 6386–7878 in four 300-line chunks and one 293-line chunk: 1,493 lines / 55,743 bytes; full-file and range identity match baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`. Range SHA-256 `f6072a21e05fe62ac2e290ec8815226d99ed0dddb2f9153dec25b0ea14cf073e`. Complete trailing-block routing, pure/bang traversal and callback frames, all receiver value-chain bodies, value-block/while/final-expression evaluation, helper with and scalar-target resolution; `.3.3.20` starts the next target/helper window at 7879.
+- Pure hash traversal is sorted-key DFS through hashes only; arrays recurse by index through arrays only. Cross-kind aggregates are leaves. Walk returns the snapshot, map rebuilds without revisiting replacements, reduce threads its accumulator. Callback/initial-value expressions evaluate before root-kind dispatch; contextual callbacks take zero positional arguments, explicit callables take the leaf/receiver, and temporary frames restore after Result.
+- Bang traversal activates resolved identity, rebuilds the original shape, releases its guard on callback failure, publishes after complete success, then releases before continuation. Dynamic receiver calls retain family/terminal checks, numeric arity gates and join_values argument placement. Value blocks skip inactive branches, handle local returns before final-value evaluation, and propagate loop returns separately from ordinary continuation.
+- Six paired Rust primary CLI/Perl Get cases plus six direct native diagnostic cases confirm final scalar/nested same-receiver assignments bypass Rust's guard; nonfinal/explicit-return controls reject and an unrelated final assignment agrees. eval_block_final_expr dispatches these assignments directly, omitting eval_expr's guard; nonfinal statements keep their own guard. New .58.1-.3 own repair, carrier recurrence and public closeout after prerequisites. Exact sources/values/diagnostics/spans/artifact hashes live in rust-final-value-assignment-receiver-guard-gap; no generated or other-backend result is inferred.
+- Four managed neutral checks pass: bang 167 base/592 composition mutations; write 5/7 syntax/11 successes/16 structural failures/105 mutations; callable 7 literals/11 calls/23 mutations; logical 17 truthiness/10 helpers/3 effects/26 mutations. Manifest census is 105, not a fresh corpus execution. Six Knowledge owners retain dated native proof and qualified claims. A one-second compiler sample locates all 798 worker frames in procedural-macro dlopen/fcntl; compilation and six probes later complete without intervention. Sample/image inventory retained, exact observation in existing latency card. Codebase No, physical book Yes, formal alignment and runtime/public/policy repairs pending.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -6079,7 +6138,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.3.15` is item 74/100 at `69dacfc6`;
   `.3.3.16` is item 75/100 at `b06b27cf`;
   `.3.3.17` is item 76/100 at `1f38a1ea`;
-  `.3.3.18` is item 77/100 once committed.
+  `.3.3.18` is item 77/100 at `acbadc0f`;
+  `.3.3.19` is item 78/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -6221,6 +6281,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.16` | Exact range/current-baseline proof; four managed neutral contracts; generated validation and invocation order reading; Knowledge/history/memory/staged diff/all nine pre-commit doctrines | PASS bounded source and neutral proof; .41.2 owns stale comments, engine regex loop remains pending. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.17` | Exact source identity; six managed neutral contracts; four native diagnostic controls/field assertions and exact retained artifacts; .55.1 ownership; Knowledge/history/memory/staged diff/all nine pre-commit doctrines | PASS bounded reading/neutral proof and exact index diagnosis; .55.1 repair and recursive writer continuation remain owned. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.18` | Exact source identity; four managed neutral contracts; invocation/guard/write Knowledge review; history/memory/derived Knowledge/staged diff/all nine pre-commit doctrines | PASS bounded reading/neutral proof; preserve later traversal/context/body ownership. |
+| `2026-09-07` | `SESSION-STARTUP-READING.3.3.19` | Exact source identity; four managed neutral contracts; 6 paired primary cases + 6 direct diagnostic cases with independent values/codes/spans; .58 ownership; consumed compiler sample; Knowledge/history/memory/staged diff/all nine pre-commit doctrines | PASS bounded reading and exact guard-gap diagnosis; .58 owns repair/carrier/public closure. |
 
 ## Commit Log
 
@@ -6304,6 +6365,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.3.16` | `SESSION-STARTUP-READING.3.3.16 - read engine invocation routes and entry dispatch` | Reconcile execution projections, diagnostic stages and precedence, generated validation ownership and parent-result ordering. |
 | `SESSION-STARTUP-READING.3.3.17` | `SESSION-STARTUP-READING.3.3.17 - read native action loops and nested-write coordination` | Read native loops/control and nested-write evaluation order; preserve exact diagnostic evidence and following traversal scope. |
 | `SESSION-STARTUP-READING.3.3.18` | `SESSION-STARTUP-READING.3.3.18 - read recursive writes and expression invocation scopes` | Complete recursive-write and expression/callable invocation reading with separate function/codeblock scope boundaries. |
+| `SESSION-STARTUP-READING.3.3.19` | `SESSION-STARTUP-READING.3.3.19 - read receiver traversal and diagnose final-assignment guard` | Complete traversal/value-block reading; own confirmed final-assignment guard gap and preserve exact native/reference evidence. |
 
 ## Changelog
 
@@ -6431,3 +6493,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-07`: `.3.3.16` reads all group-16 bytes, reconciles invocation/diagnostic/observation boundaries, and retains .41.2 comment repair plus the native regex-loop continuation.
 - `2026-09-07`: `.3.3.17` reads group 17 completely, reconciles native action/control and write coordination, and retains exact numeric-boundary repair plus recursive-write continuation ownership.
 - `2026-09-07`: `.3.3.18` reads group 18 completely, reconciles recursive writes, guards and callable scopes, and retains trailing-block/traversal continuation ownership.
+- `2026-09-07`: `.3.3.19` reads group 19 completely, owns final-assignment receiver-guard repair .58, and preserves exact native/reference controls plus compiler-wait evidence.

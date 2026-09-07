@@ -12,7 +12,7 @@ answers:
   - "does Rust expose final codeblock parameter kinds in descriptors"
   - "does emitted Rust execute contextual final codeblocks"
   - "what rejects a Rust harray passed to a final codeblock parameter"
-date: 2026-07-30
+date: 2026-09-07
 status: current
 tags: [rust, actionir, codeblock, callable-contract, trailing-block, user-functions, generated-source]
 evidence: "FUTURE-PARITY-BACKLOG.11.4.3 adds provenance-preserving callable candidates, one metadata registry and normalization pass, exact final parameter_kinds, typed codeblock_argument execution through the shared dynamic evaluator, established-parser/control/eager-block preservation, and native/reconstructed/generated-plan/independently-emitted proof."
@@ -45,6 +45,19 @@ Native execution, compiled-JSON reconstruction, generated-plan execution, and in
 Rust prove the same helper, typed-user-function, receiver, and tree behavior. Established core parser tests,
 ordinary eager blocks, callable literals/dynamic calls, variadic functions, semantic projection, structured
 failures, and static precedence remain unchanged.
+
+## September 7 callback evaluation reading
+
+`SESSION-STARTUP-READING.3.3.19` reads the complete helper/receiver `with` and
+tree-callback coordinators. Contextual `CodeblockArgument` values receive no
+positional argument; explicit callable values receive the scoped receiver/leaf.
+Both forms still see the temporary `value` binding, and tree callbacks also see
+their key/index, path, depth and reduce-only accumulator. `with` restores its
+temporary value after callback construction, validation or execution returns a
+Result. Traversal constructs/validates its callback and evaluates any initial
+accumulator before root-kind dispatch. These are source-reading observations;
+the neutral callable contract passes 7 literals/11 calls/23 mutations, while the
+native/carrier counts above remain the July milestone evidence.
 
 Related facts: [[rust-callable-codeblock-literal-state]], [[rust-callable-codeblock-dynamic-invocation]],
 [[perl-generic-final-codeblock-normalization]], [[final-codeblock-parameter-declaration]].

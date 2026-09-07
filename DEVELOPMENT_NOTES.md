@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.19 — Final assignments must share the receiver guard
+
+eval_block_value sends its last active statement to eval_block_final_expr, whose direct scalar/nested assignment branches bypass eval_expr's pre-evaluation receiver guard. Native CLI and structured diagnostics reproduce the resulting success, while Perl rejects; moving the write before return(value) restores Rust rejection. The coordinator's success-only rebuild publication cannot compensate for an unchecked callback write. Repair .58 requires shared guard authority and exact state/effect/carrier regressions. The separate compiler wait sampled procedural-macro dlopen/fcntl, then cleared; it establishes no OS cause or trust-workflow change.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.18 — Function stores and temporary callable parameters
 
 Named user functions take the caller's variable stores and install fresh fixed/rest bindings; callable values temporarily replace only their parameter bindings while using the caller's other stores. Both restore state after body evaluation returns a Result. Expression guards ask RuntimeContext about resolved identity before evaluation; source scanning supplies diagnostic spans. Recursive writes operate on the coordinator's detached snapshot and cannot publish a partial path. These are bounded source observations supported by four neutral contract checks, not fresh native execution.

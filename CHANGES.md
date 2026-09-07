@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.19 — read receiver traversal and diagnose final-assignment guard
+
+Read baseline-identical engine lines 6386–7878 (1,493 lines / 55,743 bytes), completing receiver traversal, callbacks, value chains and value-block evaluation. Six paired Rust CLI/Perl Get cases plus six direct native diagnostic cases confirm that final scalar/nested same-receiver assignments bypass Rust's guard; nonfinal/explicit-return controls reject and unrelated assignment agrees. New .58.1-.3 own repair, carrier recurrence and public closeout after startup prerequisites. Four neutral checks pass. Knowledge records exact evidence and the completed compiler-wait observation; runtime/public/policy remain unchanged.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.18 — read recursive writes and expression invocation scopes
 
 Read baseline-identical engine lines 4888–6385 (1,498 lines / 58,503 bytes), completing recursive writes, receiver guard/site scanning, expression dispatch and function/codeblock invocation. Four direct-dependent neutral checks pass. Five Knowledge owners record the detached writer, identity-versus-diagnostic-site boundary and distinct function/codeblock scopes, with native evidence explicitly dated. Continuity owns the trailing-block suffix and remaining traversal/context/body implementations; runtime, public book and policy are unchanged.

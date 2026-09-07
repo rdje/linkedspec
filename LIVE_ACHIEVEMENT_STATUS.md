@@ -5,21 +5,23 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.18` are reconciled and `.3.3.19`–`.3.3.66` plus closeout remain pending.
-- Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.57` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
+  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.19` are reconciled and `.3.3.20`–`.3.3.66` plus closeout remain pending.
+- Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.58` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.3.18` reads 1,498 engine lines / 58,503 bytes covering recursive writes, receiver guards and expression/function/codeblock invocation.
-  This is item 77/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.3.19` reads 1,493 engine lines / 55,743 bytes covering traversal, callbacks and value blocks; six paired cases plus direct native diagnostics own final-assignment guard repair .58.
+  This is item 78/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.3.19`: continue engine reading at lines 6386–7878.
+- Activate `SESSION-STARTUP-READING.3.3.20`: continue engine reading at lines 7879–9278.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-07` — `SESSION-STARTUP-READING.3.3.19` reads traversal/callback/value blocks and owns confirmed final-assignment receiver-guard repair .58.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.18` reads recursive writes, expression guards and invocation scopes; retains trailing-block/traversal continuation.
 
@@ -59,9 +61,6 @@
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.4` reconciles four Rust scopes (1,481 lines / 57,687 bytes).
   Self-edge comments stay repair-owned; descriptor map policy does not imply duplicate-source acceptance.
-
-- `2026-09-07` — `SESSION-STARTUP-READING.3.3.3` reconciles callable traversal and compiler prefix (1,499 lines / 56,169 bytes).
-  Existing .45/.47 findings stay owned; neutral checks do not claim native-suite execution.
 
 ## History
 
