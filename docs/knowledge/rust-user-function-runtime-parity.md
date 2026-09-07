@@ -14,7 +14,7 @@ date: 2026-09-07
 status: current
 tags: [spec-format-terse, rust, user-functions, runtime, oracle]
 evidence: "SPEC-FORMAT-TERSE.4.3.2 added RuntimeContext variable-store snapshots and active user-function tracking in rust/linkedspec-runtime/src/runtime.rs, plus Engine::execute_user_function in rust/linkedspec-runtime/src/engine.rs. Expr::Call now resolves registered CompiledUserFunction entries before ordinary helper fallback, checks exact arity, evaluates args eagerly in caller context, binds params into fresh scalar/array/hash stores, evaluates the compiled CodeBlock body, restores caller stores, rejects direct/mutual recursion, and returns values into compatible receiver chains. Focused tests in rust/linkedspec-runtime/tests/integration_test.rs cover value calls, local scope, receiver chains, standalone discard, wrong arity, and recursion diagnostics. The shared oracle fixture terse_4_3_2_user_function_runtime brings the corpus to 54 fixtures."
-reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_4_3_2 -- --nocapture && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle -- --nocapture"
+reverify: "bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_4_3_2 -- --nocapture && bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle -- --nocapture"
 ---
 
 `SPEC-FORMAT-TERSE.4.3.2` makes the Rust backend execute the user-function registry
@@ -51,3 +51,14 @@ Callable codeblocks use a separate parameter-only scope, documented in
 [[rust-callable-codeblock-dynamic-invocation]]. The store implementations and body
 evaluator retain their later reading owners. Fresh neutral callable proof passes
 7 literals/11 calls/23 mutations; native counts above remain dated.
+
+## September 7 variable-store completion
+
+`SESSION-STARTUP-READING.3.3.30` completes runtime.rs through line 2737.
+User functions take and restore all six store surfaces: scalar/array/hash maps, bare kinds, binding identities
+and descriptor-scalar read overrides. The monotonic identity allocator and active receiver guards remain outside
+that transferred store bundle. Rule declaration scopes save the first prior snapshot per name; suppression
+disables recording while a user function owns its fresh stores. Both rule exit and temporary-binding restoration
+restore/remove every optional store and its prior identity/override. User-function active names reject recurrence;
+codeblock tracking additionally returns the ordered cycle with its closing name.
+Fresh callable neutral proof passes 7 literals/11 calls/23 mutations; binding passes 11/7/6/8.

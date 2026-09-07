@@ -10,11 +10,11 @@ answers:
   - "how is the Rust semantic source digest computed"
   - "where is the Rust generated semantic plan retained"
   - "what happens when Rust semantic source validation fails"
-date: 2026-07-21
+date: 2026-09-07
 status: current
 tags: [rust, semantic-introspection, source-map, utf8, diagnostics, generated-source, privacy]
 evidence: rust/linkedspec-runtime/src/semantic_index.rs; rust/linkedspec-runtime/tests/semantic_index_foundation.rs; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.4.1
-reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_foundation; bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py"
+reverify: "bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_foundation; bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py"
 ---
 
 `linkedspec_runtime::semantic_index::SemanticIndex` is the opaque Rust source/outcome foundation. Construct it
@@ -46,3 +46,14 @@ target parser, target lifecycle/action code, trace, or runtime semantic observat
 foundation leaf. See [[rust-semantic-introspection-authority-map]], [[semantic-introspection-neutral-contract]],
 and [[rust-generated-source-v2-rule-local-cursor]], [[rust-semantic-static-projection]],
 [[rust-semantic-call-staged-projection]].
+
+## September 7 complete SemanticIndex foundation reading
+
+`SESSION-STARTUP-READING.3.3.30` reads all 692 lines/25,946 bytes of semantic_index.rs.
+Option validation precedes UTF-8 decoding; source maps retain scalar boundaries plus EOF, count LF as a new line,
+and reject reversed/out-of-range or mid-scalar byte ranges. The constructor captures parsed/validated/compiled
+outcome and exact entry/generated-plan metadata, then builds the private static projection without executing
+the target parser. Queries consume cloned projections; observation derivation replaces the projection on a clone.
+Identity/span/text accessors check their respective immutable source ceilings; exact lookup rejects empty needles
+and validates its starting byte boundary. These are source boundaries, not a full fresh foundation test run.
+Fresh neutral semantic proof passes six fixture groups/20 queries/128 mutations with rollout 9/0 and admission 6/0.

@@ -13,11 +13,11 @@ answers:
   - "does Rust semantic call projection expose ActionIR or generated source"
   - "what proves the Rust semantic calls fixture has 22 records and 25 relations"
   - "does Rust semantic introspection have public capabilities or query yet"
-date: 2026-07-21
+date: 2026-09-07
 status: current private compiled projection exposed through admitted exact public static/runtime query
 tags: [rust, semantic-introspection, actionir, calls, bindings, staging, generated-source, unicode]
 evidence: rust/linkedspec-runtime/src/semantic_index/call_projection.rs; rust/linkedspec-runtime/src/semantic_index/static_projection.rs; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.4.3
-reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime semantic_index::static_projection::tests; bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; perl tools/check_generated_source_contract.pl"
+reverify: "bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime semantic_index::static_projection::tests; bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; perl tools/check_generated_source_contract.pl"
 ---
 
 `linkedspec_runtime::semantic_index::SemanticIndex` now retains the corrected calls snapshot's complete private
@@ -51,3 +51,15 @@ See [[rust-semantic-static-projection]], [[rust-semantic-index-source-foundation
 [[rust-semantic-query-evaluator]], [[rust-semantic-runtime-observation]],
 [[semantic-introspection-staged-artifact-schema]], and
 [[semantic-introspection-generated-plan-authority]].
+
+## September 7 projection prefix reading and measured exceptions
+
+`SESSION-STARTUP-READING.3.3.30` reads call_projection.rs 1–383 plus bounded lookup/source helpers.
+Definitions merge by source position then ID, and functions precede helper fallback. The governed helper
+catalog here covers trim, match_text and return. Function-level direct return traverses arguments without
+emitting a return call, while edge return records its call/result shape. Full traversal remains the next window.
+The entry guard omits every rule call when no functions exist, now measured on Rust under startup .22.
+Same-name edge assignments beyond the second repeat a binding ID and overwrite its source reference;
+new .66 owns the six-pair public query diagnosis and repair. See [[semantic-rule-calls-empty-function-gate]]
+and [[rust-semantic-repeated-binding-identity-gap]]. Historical exact 22/25 fixture equality does not cover
+these cases. Fresh neutral semantic proof remains 6 groups/20 queries/128 mutations, rollout 9/0, admission 6/0.

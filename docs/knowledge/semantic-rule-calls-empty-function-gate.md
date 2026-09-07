@@ -1,13 +1,13 @@
 ---
 id: semantic-rule-calls-empty-function-gate
-title: "Rule call projection is gated by an unrelated function definition on four backends"
+title: "Rule call projection is gated by an unrelated function definition on all five backends"
 answers:
   - "why do helper-only rules expose no semantic helper binding or call records"
   - "why does adding an unused function change semantic rule call projection"
   - "which backends have the empty-function semantic projection gate"
-date: 2026-09-06
+date: 2026-09-07
 status: dated diagnostic evidence; repair state belongs to the owning task-tree
-tags: ["startup-reading","semantic","perl","dart","julia","lua"]
+tags: ["startup-reading","semantic","perl","rust","dart","julia","lua"]
 evidence: "SESSION-STARTUP-READING.31 preserves the recorded Toolbox/source controls at reading baseline baeb984e36a94a15951cd23d4c52def5064cdaca. The owning task is SESSION-STARTUP-READING.22. No implementation repair or whole-project signoff is claimed."
 reverify:
   - "git diff baeb984e36a94a15951cd23d4c52def5064cdaca -- perl/LinkedSpec/SemanticCallProjection.pm dart/lib/src/semantic/semantic_call_projection.dart julia/src/semantic/SemanticCallProjection.jl lua/src/linkedspec/semantic_static_projection.lua"
@@ -17,12 +17,12 @@ reverify:
   - "sed -n '1820,1840p' lua/src/linkedspec/semantic_static_projection.lua"
 ---
 
-# Rule call projection is gated by an unrelated function definition on four backends
+# Rule call projection is gated by an unrelated function definition on all five backends
 
 This is the September 6 intake observation at the stated baseline. Current repair state and acceptance belong to
 [SESSION-STARTUP-READING.22](docs/tasks/SESSION-STARTUP-READING.md), rather than a duplicated completion counter.
 
-The same valid Top self-edge assigns trim(" x ") to value and returns it. Perl, Dart, Julia, PUC Lua, and LuaJIT compile and query it successfully but return no helper/binding/call records. Prepending an unused function changes the result to five ordered records: helper:trim, helper:return, binding:edge:rule:Top:0:value:0, and the two call:edge:rule:Top:0 records. Rust has not been probed.
+The same valid Top self-edge assigns trim(" x ") to value and returns it. Perl, Dart, Julia, PUC Lua, and LuaJIT compile and query it successfully but return no helper/binding/call records. Prepending an unused function changes the result to five ordered records: helper:trim, helper:return, binding:edge:rule:Top:0:value:0, and the two call:edge:rule:Top:0 records. The September 7 .3.3.30 Rust/Perl pair reproduces the same zero-versus-five result on Rust; the other runtime measurements remain the September 6 evidence.
 
 Each measured backend returns early when its function registry is empty, before traversing rule bodies. The Julia I-block control was outside its current edge-only call owner scope and is not evidence of this guard. The repair starts with a frozen-model/digest/carrier impact audit; expected payloads must not be silently adapted.
 
@@ -43,3 +43,12 @@ for my $case (['no_function',$body],['unused_function',qq{fn unused(value) { ret
 }
 PERL
 ```
+
+## September 7 Rust completion of the census
+
+`SESSION-STARTUP-READING.3.3.30` reads Rust call_projection.rs and confirms its `extend` returns
+immediately when compiled.functions is empty, before action-owner traversal. The exact same public
+SemanticIndex queries return zero records without a function and five with an unused function, as Perl does.
+Both snapshots compile; responses have no diagnostics and both process stderr files are empty.
+Fixtures/full responses and identity are retained in `.linkedspec-data/scratch/startup89-semantic-bindings/`.
+The independent repeated-binding failure in [[rust-semantic-repeated-binding-identity-gap]] is .66-owned.

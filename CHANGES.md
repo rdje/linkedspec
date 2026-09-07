@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.30 — complete context and semantic foundation reading and own binding identity repair
+
+Completed RuntimeContext and the semantic-index foundation; read the call-projection prefix (1,494 lines/53,412 baseline-identical bytes). Six paired public queries confirm Rust reuses binding suffix 1 after the second same-name assignment and overwrites those source references; Perl preserves distinct occurrences. New .66 owns repair and recurrence, while .22 now includes Rust's separate empty-function gate. Semantic, callable and binding neutral checks pass; all probe processes exit 0 with empty stderr. Updated Knowledge and continuity preserve exact evidence and remaining scope.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.29 — read context observations projections and typed binding stores
 
 Read RuntimeContext 822–2318: 1,497 lines/49,031 baseline-identical bytes. Reconciled observation completion routing, typed byte/scalar projections, diagnostic sinks, binding identities and detached bare aggregate mutations. Five selected neutral contracts pass; six existing Knowledge owners now qualify historical rollout and no-codegen wording. Restoration internals remain the next reading window; no new runtime defect or fresh native execution is claimed.

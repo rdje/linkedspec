@@ -15,7 +15,7 @@ date: 2026-09-07
 status: current
 tags: [rust, actionir, codeblock, callable, dynamic-scope, diagnostics, generated-source, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.11.4.2 adds bound-codeblock fallback dispatch after static callables, once-only ordered argument evaluation, recursively copied temporary fixed/rest bindings, cleanup-safe restoration, caller-visible nonparameter stores, local results, typed value access, exact portable failures and ordered cycles, plus native/reconstructed/generated-plan/emitted-source proof against every neutral valid and invalid call."
-reverify: "bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test callable_codeblock_literal_contract"
+reverify: "bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test callable_codeblock_literal_contract"
 ---
 
 # Rust Callable Codeblock Dynamic Invocation
@@ -58,3 +58,12 @@ remains the July milestone record.
 
 Related facts: [[rust-callable-codeblock-literal-state]], [[callable-codeblock-literal-contract]],
 [[perl-callable-codeblock-dynamic-invocation]], [[variadic-callable-signature-seams]].
+
+## September 7 parameter restoration implementation
+
+`SESSION-STARTUP-READING.3.3.30` completes the RuntimeContext snapshot/restore bodies.
+A temporary parameter restores all prior scalar/array/hash values, bare-kind tag, binding identity and
+descriptor-read override; absent prior entries are removed. Active codeblock entry returns the cycle suffix
+plus the closing name, and exit removes the last matching active entry. This completes source comprehension
+of the parameter cleanup mechanism used by the already-read engine coordinator. Neutral callable proof passes
+7 literals/11 calls/9 invalid literals/7 invalid calls/4 invalid declarations/8 contexts/23 mutations.

@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.30 — A latest-binding lookup cannot also count binding occurrences
+
+Rust call projection stores one latest binding ID per owner/name but counts those keys when allocating occurrence order. That count stays at one, so the third and later writes reuse an ID and overwrite its source-reference entry. Six paired public queries isolate this from the empty-function gate and from ordinary one/two/distinct-name controls; the final excerpt appears on every reused Rust record. Perl's separate counter provides independent occurrence evidence. Repair .66 requires distinct allocation plus query/source recurrence; frozen one-write fixture equality alone did not expose the defect.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.29 — Binding identity and public aggregate results have distinct ownership
 
 RuntimeContext resolves guards through current binding identity and preserves the existing private aggregate store when updating a bare value. Absent Undef permits aggregate initialization; explicitly bound Undef fails the kind check. Bare pop yields a detached updated array, while private pop yields its removed element. Observation completions are consumed within their local scope, typed source adapters convert byte registers through immutable authority, and diagnostic/output/semantic/trace channels retain separate ownership. The next window owns full variable snapshot restoration.
