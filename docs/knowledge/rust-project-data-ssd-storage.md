@@ -59,8 +59,9 @@ versions in dependency references are intentional lockfile disambiguation, not d
 
 The Git gitlink pins `rgx` at `8763a0e6bea97879f027237439d57725f83ead23`; Cargo.lock itself does not pin
 the local dependency source revision. Inspecting this required build metadata did not read excluded dependency
-source. This checkpoint reads only lock lines 1–1493; the complete-file metadata census is not suffix reading
-credit. Lines 1494–1850 remain checkpoint .3.3.2. Earlier cache file counts, byte sizes, residue, and gate counts
+source. Checkpoint `.3.3.1` reads lock lines 1–1493 and `.3.3.2` reads lines 1494–1850 through EOF;
+both exact reading ranges match the baseline. The complete-file metadata census alone supplied no suffix
+reading credit. Earlier cache file counts, byte sizes, residue, and gate counts
 above remain dated July 26 evidence rather than a new September cache census. No dependency fetch or upgrade
 was needed for this reading checkpoint.
 

@@ -981,7 +981,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.1 - read Rust lockfile prefix and own parser boundary repairs`
 
 - ID: `SESSION-STARTUP-READING.3.3.2`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 2: 1,483 lines/fragments, 59,455 bytes.
   Scope: `rust/Cargo.lock` lines 1494–1850;
     `rust/Cargo.toml` lines 1–18;
@@ -990,8 +990,15 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     `rust/linkedspec-core/src/ast.rs` lines 1–360;
     `rust/linkedspec-core/src/callable_contract.rs` lines 1–250.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact six-scope baseline/budget proof; locked offline Cargo metadata and manifest comparison; neutral cursor contract; existing cursor/callable Knowledge; scoped README/comment repair ownership; Knowledge/memory/all doctrines/history and final scope/diff.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: All six scopes read: 1,483 lines / 59,455 bytes; exact range hashes and complete current files match baseline.
+    Locked offline metadata resolves 199 packages and declares Rust 1.95 for rgx-core/pgen, contradicting
+    README 1.85+; no old-toolchain run or earliest working compiler is claimed. Neutral cursor contract
+    passes 36 family/18 edge/8 parent-child cases and 60 drift mutations. Documentation repairs stay pending.
+  Commit: `SESSION-STARTUP-READING.3.3.2 - read Rust manifests AST and callable prefix`
 
 - ID: `SESSION-STARTUP-READING.3.3.3`
   Status: `pending`
@@ -2833,6 +2840,10 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     dispatch-edge matching, public entry, and direct handler execution; remove only false current migration
     claims. Cover affected pages beyond the existing regex link markers and omitted guides. Coordinate .30
     grouped-edge and .27 lifecycle semantics; add independently justified examples, recurrence checks, and render.
+    Reconcile rust/README.md subset wording with the unconditional 105-fixture generated classifier,
+    retaining its distinction from default canonical execution. Correct ast.rs comments claiming Default
+    equals OR+ and Single (&) is choice: rep_min gives 0 versus 1 and is_and includes Single. Preserve
+    runtime policy, verify neutral authority, and cover source comments as well as the book prose.
   Verification: `pending` — current guides still describe Julia/Lua v1 adapters and future named selectors;
     the cursor contract's current reader/marker coverage does not enforce those paragraphs.
   Commit: `pending`
@@ -2902,6 +2913,10 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     Julia/Dart/Cargo examples and retain documented toolchain dependencies. Make existing task ownership
     explicit for small doc fixes. Replace moving capacity/capability-count duplication with canonical
     pointers or qualified dated evidence; cover actual workflow claims and render without inventing policy.
+    Reconcile rust/README.md claiming Rust 1.85+ with locked metadata declaring Rust 1.95 for required
+    local rgx-core/pgen packages. Establish the actual supported compiler through a managed build before
+    publishing a replacement minimum; do not treat manifest declarations as a tested minimum. Qualify the
+    stale 63-case CLI claim against the 66-case authority and replace direct Cargo examples with root-managed commands.
   Verification: `pending` — local-CI prose says full gate for every behavior change and default toolchain
     independence; current canonical gate runs mandatory backend admissions and reports 20 capabilities/100 states.
   Commit: `pending`
@@ -3044,7 +3059,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.2` | `pending` | reconcile the owned Cargo.lock suffix, manifests, Rust README, AST, and callable-contract prefix; persist the confirmed requirement mismatch. |
+| 1 | `SESSION-STARTUP-READING.3.3.3` | `pending` | reconcile the callable-contract suffix and compiler prefix, retaining the task-owned parser/compiler defects. |
 
 ## Reading Ledger
 
@@ -3055,7 +3070,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoint `.3.3.1` is reconciled and `.3.3.2`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.2` are reconciled and `.3.3.3`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -5077,6 +5092,39 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - The director put reporting aside. No report artifact or .48 leaf was created; preceding commit body
   preserves the returned app reference and corrected guidance. Continue the original LinkedSpec batch.
 
+### Rust manifest, AST, callable prefix and requirement evidence at `.3.3.2`
+
+- Activated from clean `08149577237224e96053ee3116fb8bb8164be5a5` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Reconcile the six fully read forward scopes preserved in 611d7b5c's commit body. Cargo.lock now has
+  both prefix and suffix checkpoints through EOF; a whole-file metadata census alone never supplied reading
+  credit. This group is 1,483 lines / 59,455 bytes and all six current files remain baseline-identical.
+- rust/Cargo.lock 1494–1850: 9236 bytes; SHA-256 2e25e0908f0af692ab4aa61f9dbea230096c8688f5d8a5e41c79a9aa61a6a549.
+- rust/Cargo.toml 1–18: 427 bytes; SHA-256 4f85f31df8b2228a18e44f22e9a9e276f6ca91943becea7f7025b70d564cbe81.
+- rust/README.md 1–484: 27733 bytes; SHA-256 6da3d72eca80a4caef1de6063523f8c95f7a8c86dc60b4434ca7aba9858e9f3e.
+- rust/linkedspec-core/Cargo.toml 1–14: 363 bytes; SHA-256 4e1b8f9d81bc30eaee3c2243bf5142fb3b26a51f60f9c99e91fd5e10dda709ed.
+- rust/linkedspec-core/src/ast.rs 1–360: 12809 bytes; SHA-256 1bc180bef4445edfd797c69ea1064639ce53df7407b1629b914f8bce73b4d9d8.
+- rust/linkedspec-core/src/callable_contract.rs 1–250: 8887 bytes; SHA-256 e8e989a4b9cb754b3f20a092d9de903150ec83411c9f08ac33d72548c89b7feb.
+- The two-crate workspace shares version 0.1.0, edition 2024, and a relative local rgx dependency.
+  AST defaults include empty function metadata and inline source identity; line SourceSpan remains distinct
+  from callable character spans. Typed signatures, final parameter kinds, staged payload/job/body AST,
+  edge selectors/provenance, and legacy serializable body kinds remain explicit rather than inferred.
+- Callable contracts cover builtin helper/receiver forms and declared final codeblock parameters. Prefix
+  normalization checks the registry and processes functions plus lifecycle/action/blind blocks, retaining
+  staged statement-extension metadata and rejecting statement-count changes. Candidate arity/placement and
+  eager-block restoration are distinct; recursive visitor/restoration suffix 251–394 remains .3.3.3-owned.
+- Locked offline Cargo metadata again resolves 199 packages: required local rgx-core/pgen declare 1.95,
+  while README line 472 claims 1.85+. Registry rows above 1.85 include platform-specific packages and must
+  not be collapsed into an experimentally proven universal minimum. No excluded dependency source read,
+  fetch, upgrade, old compiler run, or supported-minimum promotion is claimed. .41.7 owns correction.
+- Extend .41.2/.41.7 before Knowledge changes. README current subset/63-case wording needs reconciliation
+  against the unconditional 105-case generated classifier and 66-case primary authority; direct Cargo
+  examples need managed root routing. The generated classifier is not claimed as a fresh default-canonical
+  execution here. AST comments misdescribe Default as OR+ and & as choice; current getters and neutral
+  authority retain default minimum 0 versus OR+ 1 and Single's AND family. Source repairs stay gated.
+- Keep cache measurements explicitly dated; record complete lock reading separately from the static
+  metadata fact. Refresh relevant Knowledge source paths/reverify routing without changing executable
+  tools. All prior compiler repairs .45–.47/.49 remain pending. No runtime or public-book change.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -5134,7 +5182,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.2.53` is item 57/100 at `bd057353`;
   `.3.2.54` is item 58/100 at `888d8ca2`;
   `.3.2.55` is item 59/100 at `611d7b5c`;
-  `.3.3.1` is item 60/100 once committed.
+  `.3.3.1` is item 60/100 at `08149577`;
+  `.3.3.2` is item 61/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -5259,6 +5308,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.54` | Three complete files + exact baseline; three managed syntax checks; nine gdcheck diagnostic assertions; canonical utility Knowledge; focused continuity | PASS; final queued Perl utility checkpoint reconciled; .25/.26 remain unrepaired. |
 | `2026-09-06` | `SESSION-STARTUP-READING.3.2.55` | Independent Perl coverage/54 commit identities; Rust candidate and task Scope audits; current deltas; resulting pressure; memory/Knowledge/history; exact staged canonical CI | PASS coverage and ownership; canonical receipt required before parent-closeout landing. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.1` | Exact two-range reading/baseline; 199-package lock census; retained eleven CLI/isolated core controls and four regex-boundary controls; task-first repairs .45–.47 and .49; preceding canonical receipt; focused continuity | PASS reading and bounded diagnostic evidence; Rust parent active; all four new repairs pending. |
+| `2026-09-07` | `SESSION-STARTUP-READING.3.3.2` | Six exact reading ranges/current-baseline proof; locked offline 199-package metadata; neutral cursor 36/18/8/60; existing Knowledge; .41.2/.41.7 ownership; focused continuity | PASS reading/metadata/neutral proof; requirement and source-comment repairs pending; codebase reading still No. |
 
 ## Commit Log
 
@@ -5325,6 +5375,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.2.54` | `SESSION-STARTUP-READING.3.2.54 - reconcile legacy utility reading and repair evidence` | 839 utility lines reread; exact diagnostic control retained; .55 owns canonical closeout. |
 | `SESSION-STARTUP-READING.3.2.55` | `SESSION-STARTUP-READING.3.2.55 - close Perl reading and own bounded Rust scopes` | Close 89-file Perl reading; own all 412 Rust paths in 66 bounded leaves plus closeout; exact canonical boundary. |
 | `SESSION-STARTUP-READING.3.3.1` | `SESSION-STARTUP-READING.3.3.1 - read Rust lockfile prefix and own parser boundary repairs` | Read 1,496 lock/ignore lines; own malformed-block, Unicode diagnostic, mutation-argument, and regex-newline repairs; retain prior canonical milestone. |
+| `SESSION-STARTUP-READING.3.3.2` | `SESSION-STARTUP-READING.3.3.2 - read Rust manifests AST and callable prefix` | Read 1,483 manifest/AST/callable lines; own exact README minimum-version and mode-comment evidence. |
 
 ## Changelog
 
@@ -5435,3 +5486,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-06`: `.3.2.54` completes legacy utility comprehension and preserves existing repair evidence; owns the Perl closeout and Rust decomposition before advancing.
 - `2026-09-06`: `.3.2.55` closes Perl reading after independent coverage reconciliation and owns all Rust reading ranges; existing repairs and whole-codebase reading remain pending.
 - `2026-09-07`: `.3.3.1` reconciles the first Rust reading group and owns forward malformed-block acceptance, Unicode diagnostic panic, parser/compiler whitespace mismatch, and regex-newline loss as .45–.47 and .49; no repair is closed.
+- `2026-09-07`: `.3.3.2` reconciles Rust manifests, complete AST, and callable-contract prefix; records locked toolchain-declaration drift and mode comments under existing documentation repairs.

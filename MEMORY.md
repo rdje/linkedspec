@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `611d7b5c1a53fa8c38fb8fcc17e2304dc21ca63a` — clean preceding reading checkpoint.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.1 - read Rust lockfile prefix and own parser boundary repairs`.
+- activation_commit: `08149577237224e96053ee3116fb8bb8164be5a5` — clean preceding reading checkpoint.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.2 - read Rust manifests AST and callable prefix`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: activate `.3.3.2`; reconcile the owned Cargo.lock suffix, manifests, Rust README, AST, and callable-contract prefix; persist the confirmed requirement mismatch,
+- next_action: activate `.3.3.3`; reconcile the callable-contract suffix and compiler prefix, retaining the task-owned parser/compiler defects,
   then continue queued reading. Intake `.31` preserves the forward source coverage and exact findings.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30`, `.32`–`.47`, and `.49` precede mutation setup; `.29` is part of `.5` adoption.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4984` is the twenty-seventh history segment; ADR `0104`
   authorizes exactly 29 collection files / 28 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook Yes (physical); .31/.3.2.42 preserve complete book/Perl source coverage and repair ownership; formal .4 alignment remains pending (60/100 after `.3.3.1` lands).
+- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook Yes (physical); .31/.3.2.42 preserve complete book/Perl source coverage and repair ownership; formal .4 alignment remains pending (61/100 after `.3.3.2` lands).

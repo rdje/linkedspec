@@ -11,25 +11,27 @@ answers:
   - "does Rust AND bare edge execute after normalization"
   - "which Rust leaf changes live cursor execution"
   - "how is Rust cursor execution frozen during normalization"
-date: 2026-07-18
+  - "why does the Rust Default mode comment disagree with its repetition minimum"
+  - "is Rust Single ampersand mode choice or AND"
+date: 2026-09-07
 status: verified normalization; normal live policy migrated by FUTURE-PARITY-BACKLOG.9.1.4.3
 tags: [rust, dsl, cursor, bare-edge, parser, compiler, validation, diagnostics, FUTURE-PARITY-BACKLOG]
 evidence: "Rust core classifies compact `|` as authored OR and `&` as authored AND, retains complete-line/header-rest bare targets as `BareEdge`, validates all neutral edge diagnostics with stable code/stage/fields, and lowers family-derived ownership into typed acode/bcode tables. FUTURE-PARITY-BACKLOG.9.1.4.3 spends that normalized family in normal live/loaded/ordinary-reconstructed execution; .9.1.4.4 projects it through descriptor v1; .9.1.4.5 derives generated-source-v2 policy from its minimal neutral family plan and removes the bounded legacy artifact adapter. Contract-driven core tests consume all 36 family and 18 edge cases plus six ownership sets; runtime execution tests consume all 36 family rows, eight parent/child mechanisms, and two structural replacements."
-reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test rule_local_cursor_normalization_test; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test rule_local_cursor_normalization; bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py"
+reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-core --test rule_local_cursor_normalization_test; bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test rule_local_cursor_normalization; bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py"
 ---
 
 Rust syntax/representation normalization is current at four exact seams:
 
-- `linkedspec-core/src/ast.rs` defines authored family identity. `RuleMode::is_and()`
+- `rust/linkedspec-core/src/ast.rs` defines authored family identity. `RuleMode::is_and()`
   includes `&`, `AND`, `AND+`, and bounded AND, but not compact `|`.
-- `linkedspec-core/src/parser.rs` retains a complete physical-line or header-rest
+- `rust/linkedspec-core/src/parser.rs` retains a complete physical-line or header-rest
   bare plain/indexed/grouped/block/fluent member as `BodyElementKind::BareEdge`.
   Reserved lifecycle markers are recognized first, and a suffix after another
   same-line member does not become a bare edge.
-- `linkedspec-core/src/validation.rs` resolves against the complete rule-label set,
+- `rust/linkedspec-core/src/validation.rs` resolves against the complete rule-label set,
   derives AND bare ownership as blind and OR/default ownership as action, rejects
   invalid shape/mixed ownership, and emits `PortableDiagnostic` code/stage/fields.
-- `linkedspec-core/src/compiler.rs` lowers valid normalized bare ownership into
+- `rust/linkedspec-core/src/compiler.rs` lowers valid normalized bare ownership into
   `bcode_dispatch` for AND and `acode_dispatch` for OR/default. It no longer loses
   governed candidates through `Raw`.
 
@@ -44,6 +46,18 @@ plan; `legacy_artifact_parse_mode()` and the private v1 wire serializer are gone
 `stage`, human message, and contract-declared fields. The normalization suite checks
 every governed diagnostic identity directly. Primary-command diagnostic projection
 and retired global option bytes remain assigned to later Rust leaves.
+
+The 2026-09-07 reading checkpoint `SESSION-STARTUP-READING.3.3.2` confirms two stale
+comments in `rust/linkedspec-core/src/ast.rs`: `Default` is described as equivalent
+to `OR+`, although `rep_min()` returns zero for Default and one for OR+; `Single`
+(`&`) is described as choice, although `is_and()` includes Single. These comments
+do not supersede the getters or neutral cursor authority. Existing repair
+`SESSION-STARTUP-READING.41.2` owns their correction after prerequisite reading.
+
+The fresh neutral contract check passes 36 family spellings, 18 edge cases, eight
+parent/child cases, and 60 drift mutations. Earlier native test counts in this card
+remain July evidence; this September reading checkpoint did not rerun those native
+suites or change cursor behavior.
 
 Related: [[rule-local-cursor-and-bare-edge-contract]],
 [[rule-local-cursor-neutral-contract]], [[rust-rule-local-cursor-execution]],

@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.2 — read Rust manifests AST and callable prefix
+
+Reconcile the Cargo.lock suffix, workspace/core manifests, complete Rust README and AST, and callable-contract prefix against unchanged baseline ranges. Preserve the 199-package offline metadata evidence for README's 1.85+ mismatch with required local 1.95 declarations, without claiming an experimentally proven minimum. Extend existing .41.2/.41.7 ownership for mode comments, generated/CLI counts, and command routing; update Knowledge and retain dated cache evidence. No runtime or public-book change.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.1 — read Rust lockfile prefix and own parser boundary repairs
 
 Read the Rust ignore file and Cargo.lock prefix completely; verify exact baseline ranges and the 199-package lock structure. Retain the preceding canonical milestone and distinguish historical cache measurements from current lock metadata. Own malformed-block acceptance, UTF-8 diagnostic slicing, empty-argument whitespace inconsistency, and regex-newline loss under .45–.47 and .49 with exact reproducible Knowledge evidence. Runtime repairs and public-book alignment remain pending behind prerequisite reading.

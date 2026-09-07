@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.2 — build declarations and reading coverage are separate evidence
+
+Cargo metadata establishes declared compiler requirements, not the earliest compiler on which the complete project works. Full lockfile reading is now backed by two exact-range checkpoints rather than inferred from package counts. AST comments also need reconciliation with current getters and neutral policy: default minimum zero differs from OR+ one, and & belongs to AND. Callable normalization preserves typed final-block and staged-extension boundaries; its recursive suffix remains separately owned.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.1 — commit frozen verification before reconciling forward reading
 
 The preceding canonical candidate stayed unchanged while owned Rust source was read. Its commit body preserves exact ranges and forward probes; each source group still needs a separate comprehension/delta checkpoint. Eleven CLI controls establish malformed rule-block warning/drop behavior. A separate isolated core program establishes UTF-8 diagnostic slicing panic and parser/compiler disagreement on whitespace-only mutation arguments. These are bounded observations, with no claim that the earlier whole-spec timeout has the same cause. Four native CLI controls also confirm regex-newline statement loss. Repairs .45–.47 and .49 remain pending.
