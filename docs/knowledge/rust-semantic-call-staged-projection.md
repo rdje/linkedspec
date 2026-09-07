@@ -63,3 +63,19 @@ Same-name edge assignments beyond the second repeat a binding ID and overwrite i
 new .66 owns the six-pair public query diagnosis and repair. See [[semantic-rule-calls-empty-function-gate]]
 and [[rust-semantic-repeated-binding-identity-gap]]. Historical exact 22/25 fixture equality does not cover
 these cases. Fresh neutral semantic proof remains 6 groups/20 queries/128 mutations, rollout 9/0, admission 6/0.
+
+## September 7 independent call evidence controls
+
+`SESSION-STARTUP-READING.3.3.31` reproduces two further gaps on paired Rust/Perl public queries:
+zero/two-argument calls receive signature-acceptance evidence despite their declared fixed arity of one,
+and an array-wrapped trim call is omitted while direct/nested-call controls remain present. Rust additionally
+omits that array binding's source; Perl preserves its RHS source. Six Perl Get controls confirm the array
+call executes and returns ["x"]. New .67 owns distinct compatibility-evidence and composite-traversal repairs;
+see [[semantic-call-signature-and-container-projection-gaps]] for exact sources, assertions and limits.
+Fresh neutral semantic 6/20/128, rollout9/0 and admission6/0 remain green; those fixtures do not close these cases.
+
+The Rust call projector is now physically read through line 1288. It uses bounded fixed-point function
+shapes, exact scalar-to-byte body-span checks, source-position shell matching, staged payload/job/result
+relations and shared generated-plan family. Source call scanning recognizes ASCII names and skips quoted
+strings while balancing parentheses. The current typed traversal and explanations have the exceptions above;
+reading those mechanisms is not blanket conformance evidence for other authored shapes.

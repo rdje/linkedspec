@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.31 — complete semantic call reading and own signature and container projection repairs
+
+Completed semantic call-projection reading and read the query prefix (1,494 lines/50,420 baseline-identical bytes). Six paired public queries expose false arity-acceptance evidence and omitted array-contained calls on Perl/Rust; Rust also omits that binding's source. Six Perl Get controls confirm the active array call returns ["x"]. New .67 owns separate evidence/traversal repairs and recurrence. Neutral semantics remain 6/20/128 at complete rollout/admission; Knowledge and continuity preserve exact findings without runtime/public/policy edits.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.30 — complete context and semantic foundation reading and own binding identity repair
 
 Completed RuntimeContext and the semantic-index foundation; read the call-projection prefix (1,494 lines/53,412 baseline-identical bytes). Six paired public queries confirm Rust reuses binding suffix 1 after the second same-name assignment and overwrites those source references; Perl preserves distinct occurrences. New .66 owns repair and recurrence, while .22 now includes Rust's separate empty-function gate. Semantic, callable and binding neutral checks pass; all probe processes exit 0 with empty stderr. Updated Knowledge and continuity preserve exact evidence and remaining scope.

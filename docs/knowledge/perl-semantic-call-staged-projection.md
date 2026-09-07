@@ -12,7 +12,7 @@ answers:
   - "does Perl semantic call projection expose ActionIR or generated source"
   - "what does semantic_index_perl_calls_projection test"
   - "are Perl semantic capabilities and query public after calls projection"
-date: 2026-09-06
+date: 2026-09-07
 status: current private compiled projection; public query/runtime layers and composed admission added separately
 tags: [perl, semantic-introspection, actionir, calls, bindings, staging, generated-source, unicode]
 evidence: perl/LinkedSpec/SemanticCallProjection.pm; perl/LinkedSpec/SemanticStaticProjection.pm; perl/LinkedSpec/GeneratedSource.pm; t/semantic_index_perl_calls_projection.t; FUTURE-PARITY-BACKLOG.10.3.3.1.1
@@ -62,3 +62,13 @@ The projection description above concerns its supported compiled-call path. An e
 still returns before rule-call traversal, so helper-only rules can lose call and binding records.
 That independently reproduced defect remains `.22`-owned in
 [[semantic-rule-calls-empty-function-gate]]; passing the existing call snapshot does not close it.
+
+## September 7 independent call evidence controls
+
+`SESSION-STARTUP-READING.3.3.31` reproduces two further gaps on paired Rust/Perl public queries:
+zero/two-argument calls receive signature-acceptance evidence despite their declared fixed arity of one,
+and an array-wrapped trim call is omitted while direct/nested-call controls remain present. Rust additionally
+omits that array binding's source; Perl preserves its RHS source. Six Perl Get controls confirm the array
+call executes and returns ["x"]. New .67 owns distinct compatibility-evidence and composite-traversal repairs;
+see [[semantic-call-signature-and-container-projection-gaps]] for exact sources, assertions and limits.
+Fresh neutral semantic 6/20/128, rollout9/0 and admission6/0 remain green; those fixtures do not close these cases.

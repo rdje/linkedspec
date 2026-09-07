@@ -15,11 +15,11 @@ answers:
   - "does Rust semantic query expose ActionIR CompiledSpec or generated source"
   - "does Rust semantic query include runtime events"
   - "is Rust semantic introspection admitted after static query"
-date: 2026-07-21
+date: 2026-09-07
 status: current admitted native static/runtime query evaluator
 tags: [rust, semantic-introspection, query, privacy, pagination, budgets, immutability, json]
 evidence: rust/linkedspec-runtime/src/semantic_index/query.rs; rust/linkedspec-runtime/src/semantic_index.rs; rust/linkedspec-runtime/tests/semantic_index_query.rs; FUTURE-PARITY-BACKLOG.10.4.4
-reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_query; bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py"
+reverify: "bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_query; bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py"
 ---
 
 `linkedspec_runtime::semantic_index::SemanticIndex` exposes `capabilities()`,
@@ -49,3 +49,14 @@ neutral rollout 3/9 and backend admission 2/6.
 See [[rust-semantic-runtime-observation]], [[rust-semantic-static-projection]], [[rust-semantic-call-staged-projection]],
 [[rust-semantic-index-source-foundation]], [[perl-semantic-query-evaluator]], and
 [[semantic-introspection-neutral-contract]].
+
+## September 7 evaluator and validation prefix reading
+
+`SESSION-STARTUP-READING.3.3.31` reads query.rs 1–589. Typed options retain exact field shapes/defaults;
+all public routes enter one raw-value validator. It checks object/contract/field shape, vocabulary, duplicate
+and rank-ordered filters, integer bounds and source ceiling before operation dispatch. The remaining operation
+constraints and page/traversal/projection helpers stay in the next window. The evaluator lists cloned records,
+uses subject membership for Get, and projects source only at return; explanations reserve the decision record
+before paging its steps. Costs are canonical selected model units, not CPU/host scan limits (ADR 0049).
+Existing .66/.67 input-projection defects remain visible through this evaluator; this source reading does not
+claim to repair or freshly exercise get/page/relations. Neutral semantic proof passes current 6/20/128,9/0,6/0.
