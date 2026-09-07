@@ -12,7 +12,7 @@ answers:
   - "does Rust staged AST enrichment run after the parent parse"
   - "is the Rust staged AST consumer in canonical CI"
   - "what follows FUTURE-PARITY-BACKLOG 14.7.4.4"
-date: 2026-08-26
+date: 2026-09-07
 status: current Rust carrier admission with six-runtime recurrence and exact public assignment authoring
 tags: [rust, staged-parsing, carriers, generated-source, invocation-authority, admission, ci, private]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.4.4 adds opaque host-only StagedAstEnrichmentSeed to ExecutionOptions. Every native or generated top-level execution starts a new FrozenStagedRegistry with an empty PlanCache and a new StagedRecursiveAuthority before parent parsing, then calls enrich_recursively only after the complete parent value returns and after checking live recognition-transaction state. Native, serialized/reconstructed, validated generated-plan, and independently compiled emitted-source routes each execute twice through one seed; every run reports one miss/zero hits, one callback, fresh cancellation/clock checks, equal detached AST/sidecars/diagnostics/cache/resources, and no cross-result mutation. Compiled JSON, generated plans, and emitted source contain no callback, compiled parser, registry/source authority, cancellation/deadline/budget state, mutable queue/cache, path, or host handle. The outer cfg, manifest check-cfg, cfg-only exports, and dead-code allowance are removed after the first production caller. The exact ordinary consumer is GREEN and registered once in canonical CI; neutral governance advances only Rust to complete and 84 mutations. Function-body v1, generated-source v2, public/outward surfaces, later backends, recurrence, and combined no-drift remain unchanged or pending."
@@ -67,3 +67,12 @@ Related: [[rust-staged-ast-enrichment-recursive-authority]],
 [[julia-staged-ast-enrichment-marker-provenance]],
 [[general-staged-ast-enrichment-neutral-contract]], and ADR
 `0088`.
+
+## September 7 seed source reading
+
+`SESSION-STARTUP-READING.3.3.36` reads the seed implementation in staged_ast_enrichment.rs 1–1267.
+The recipe owns logical snapshot/options/config and opaque callbacks in shared immutable state; equality is
+recipe identity and Debug remains opaque. Each start reconstructs FrozenStagedRegistry and recursive authority;
+complete rejects an active recognition transaction before recursive enrichment. This confirms the documented
+fresh-seed boundary at source level. Fresh neutral governance remains 123 base/129 public mutations; no new
+native/reconstructed/generated/emitted carrier execution is claimed by this reading checkpoint.

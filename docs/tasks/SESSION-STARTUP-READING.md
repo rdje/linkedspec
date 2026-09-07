@@ -1487,13 +1487,17 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.35 - complete source authority and loader reading and reconcile function projection`
 
 - ID: `SESSION-STARTUP-READING.3.3.36`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 36: 1,453 lines/fragments, 51,063 bytes.
   Scope: `rust/linkedspec-runtime/src/spec_parser.rs` lines 837–1022;
     `rust/linkedspec-runtime/src/staged_ast_enrichment.rs` lines 1–1267.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Read spec_parser.rs 837–1022 and staged_ast_enrichment.rs 1–1267 with exact baseline identity; Knowledge-first signature/span/error helpers and staged provenance/registry/cache/dispatch validation; selected staged and typed-source neutral proof, bounded tools for unresolved mechanisms; Knowledge/history/memory/staged diff/all nine doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS reading: 1,453 lines/51,063 bytes baseline-identical; five Knowledge owners and .55.1 source inventory reconciled; staged9legs/123+129mutations, typed14/0/231 and scalar55/18; Knowledge/history/memory/staged diff/all nine doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.36 - complete spec parser reading and trace staged registry and invocation authority`
 
 - ID: `SESSION-STARTUP-READING.3.3.37`
   Status: `pending`
@@ -3425,6 +3429,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     nested values, helper/key uses and every actual outward/generated consumer before selecting one coherent
     numeric representation. Include runtime_value_from_json and its progressive/typed-record consumers in
     the round-trip inventory; .3.3.28 adds source evidence only, with no new measured conversion failure.
+    Include spec_parser.rs usize_field integer/floating branches and their actual definition-AST producers; .3.3.36 inventories this boundary without claiming a reachable new large-field failure.
     Preserve finite-number value, existing small integer output, nonfinite policy
     and signed zero. Cover i64-adjacent representable values, fractions and serialization round trips,
     native/generated/primary CLI routes and portable recurrence; do not promise arbitrary-precision integers.
@@ -4134,7 +4139,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.36` | `pending` | read spec_parser.rs lines 837–1022 and staged_ast_enrichment.rs lines 1–1267. |
+| 1 | `SESSION-STARTUP-READING.3.3.37` | `pending` | read staged_ast_enrichment.rs lines 1268–2766. |
 
 ## Reading Ledger
 
@@ -4145,7 +4150,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.35` are reconciled and `.3.3.36`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.36` are reconciled and `.3.3.37`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -6797,6 +6802,13 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - Sealed materialization accepts Span/DerivedText, rechecks authority/source/range and emits provenance-indexed errors before detached text. Loader retains explicit roots, stable lexical candidate order, first regular file, Unicode path checks, strict UTF-8 and distinct pipeline stages. Full ADR0026 and native resolution cards reconcile historical Julia fallback wording; no resolution-policy change or new native loader execution is claimed. Current relative root paths are joined as supplied; cwd explicitly anchors cwd/exact relative candidates.
 - Definition projection executes the embedded grammar, validates fixed/signature/final-codeblock forms and exact scalar body/source correspondence, normalizes function parent paths/job IDs, then dispatches actionir-body.spec jobs with fixed policies. Stripping preserves scalar positions and CR/LF, not multibyte byte length; signature/error helper suffix remains next. One new/four existing Knowledge cards record source facts and bounded dated claims; the rollout card hit 66,112/65,536 bytes, so its exact new Rust authority sections move to a focused card with a retained pointer. Fresh resolution14/9/4, typed14/0/231, diagnostic3/11/6/8/20 and staged9legs/123base+129public mutations pass; all jobs complete. No new repair, native/full gate, runtime/public/policy change, recovery or purge. Roadmap Yes/codebase No/physical mdBook Yes; formal alignment pending.
 
+### Spec parser completion and staged authority prefix at `.3.3.36`
+
+- Activated from clean `b6f6085c50a7a7ee8bf2b33a3e861e6d3c86b83c` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read spec_parser.rs 837–1022 (186 lines/6,357 bytes; SHA-256 `b94ca8b8ea63aebd258b5567b897429be974edd0f7c121a6846206487986e309`) and staged_ast_enrichment.rs 1–1267 (44,706 bytes; `7a479df9743d8e66ee2ceca7abde2a04dd3bb96d067e7330ff4d40194297fc2d`). All 1,453 lines/51,063 bytes and full files equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`; every range read untruncated. Spec parser physically complete.
+- Signature helpers enforce exact six-field/version/arity/rest shape and typed scalar fields; definition-error presentation selects codeblock-specific messages and source-line/node context. Existing .55.1 adds private usize_field's checked-u64 versus finite-integral-f64 cast boundary and actual AST producers to its inventory; no new reachable function/numeric failure is measured. Frozen staged registry validates prepared entries/callback bindings, hashes opaque logical snapshot data, resolves only prepared candidates and narrows versions/top/capabilities/policies/detail/ceilings. Cache lookup stores only immutable compiled plans; key construction and lower helpers remain later.
+- Context views separate detached local state from live invocation/job budgets and expiry; seed starts fresh registry/authority and rejects active recognition at completion. Current-depth execution prepares/sorts/validates before callbacks on an unpublished AST. Recursive coordinator creates counters once, validates each complete depth and schedules settled children next; detailed execution, safe points, cycle/decrease, detachment and rebasing helpers remain next. Five Knowledge cards retain exact scope. Fresh staged9legs/123base+129public mutations, typed14/0/231 and scalar55cases/18helpers pass; all jobs complete. No new runtime/public/policy repair, native/full gate, recovery or purge. Roadmap Yes/codebase No/physical mdBook Yes; formal alignment pending.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -6888,7 +6900,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.3.32` is item 91/100 at `c7c62c96`;
   `.3.3.33` is item 92/100 at `d3fd048f`;
   `.3.3.34` is item 93/100 at `39cdef65`;
-  `.3.3.35` is item 94/100 once committed.
+  `.3.3.35` is item 94/100 at `b6f6085c`;
+  `.3.3.36` is item 95/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -7047,6 +7060,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.33` | Baseline scope; static/event/emitter reading; five paired query and three paired Get-CLI controls; independent source/index assertions; semantic/cursor/generated neutral proof; Knowledge/history/memory/staged diff/all nine doctrines | PASS reading/root cause; .70 owns grouped source/selector correlation and complete remainder handling. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.34` | Baseline scope; seven identity module compiles/two executable modules/ten results; independent assertions; generated/cursor/typed-source neutral proof; Knowledge/history/memory/staged diff/all nine doctrines | PASS reading/root cause; .71 literal encoding and .72 recognition parse coherence owned. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.35` | Baseline scope; complete source authority/loader and function projection reading; ADR0026/Knowledge reconciliation; resolution/typed/diagnostic/staged neutral proof; Knowledge/history/memory/staged diff/all nine doctrines | PASS reading; complete source authority/loader and accurate historical resolution provenance. |
+| `2026-09-07` | `SESSION-STARTUP-READING.3.3.36` | Baseline scope; spec parser helper completion and staged registry/seed/coordinator reading; .55.1 source inventory; staged/typed/scalar neutral proof; Knowledge/history/memory/staged diff/all nine doctrines | PASS reading; five bounded Knowledge cards preserve exact authority scope and existing numeric audit. |
 
 ## Commit Log
 
@@ -7147,6 +7161,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.3.33` | `SESSION-STARTUP-READING.3.3.33 - complete static semantic reading and own grouped edge correlation repairs` | Complete static/event reading and distinguish correct grouped execution from incomplete semantic source/index records. |
 | `SESSION-STARTUP-READING.3.3.34` | `SESSION-STARTUP-READING.3.3.34 - complete emitter reading and own literal and recognition adapter repairs` | Complete emitter reading and preserve independently measured generated identity/projection gaps. |
 | `SESSION-STARTUP-READING.3.3.35` | `SESSION-STARTUP-READING.3.3.35 - complete source authority and loader reading and reconcile function projection` | Complete source authority/loader and retain exact staged function projection and scalar-source boundaries. |
+| `SESSION-STARTUP-READING.3.3.36` | `SESSION-STARTUP-READING.3.3.36 - complete spec parser reading and trace staged registry and invocation authority` | Complete spec parser and preserve frozen registry, fresh seed and queue coordinator boundaries. |
 
 ## Changelog
 
@@ -7291,3 +7306,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-07`: `.3.3.33` completes static/event reading and owns grouped semantic source/index and parser-remainder repairs .70.
 - `2026-09-07`: `.3.3.34` completes emitter reading and owns generated literal and recognition adapter repairs .71/.72.
 - `2026-09-07`: `.3.3.35` completes source authority/loader reading and reconciles staged function projection plus dated resolution evidence.
+- `2026-09-07`: `.3.3.36` completes spec parser and reads staged registry/seed/coordinator; .55.1 retains another source conversion boundary.

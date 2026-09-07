@@ -12,7 +12,7 @@ answers:
   - "how are Rust staged sibling parser contexts isolated"
   - "why does the Rust staged AST module allow dead_code"
   - "when is the Rust staged AST dead_code allowance removed"
-date: 2026-08-26
+date: 2026-09-07
 status: current private current-depth authority admitted through FUTURE-PARITY-BACKLOG.14.7.4.4
 tags: [rust, staged-parsing, parse-job, registry, cache, policies, private, admission]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.4.2 adds private rust/linkedspec-runtime/src/staged_ast_enrichment.rs and extends the same outer-cfg consumer. FrozenStagedRegistry accepts only caller-completed candidate outcomes and already-compiled opaque callbacks; pure dispatch performs alias, declaring-relative, ordered-root, and ordered-provider selection plus authority narrowing without loading or ambient access. The exact v2 identity selects the default top first; the run-local cache stores only immutable compiled plans under the neutral eight-field identity. One complete current depth is prepared and target-validated before execution, ordered by typed path/provenance/job id, isolated with fresh sibling contexts, and stitched atomically through all four result and three failure policies after detached node-bounded validation. The final RED now names only .14.7.4.3 recurrence, bounds, and diagnostic rebasing. Ordinary discovery remains zero tests, canonical CI has zero references, function-body v1/generated v2/Rust rollout/public surfaces remain unchanged, and neutral governance stays at 79 mutations."
@@ -57,3 +57,19 @@ real caller and exact consumer without lint suppression.
 Related: [[rust-staged-ast-enrichment-marker-provenance]], [[rust-staged-ast-enrichment-dormant-red]],
 [[rust-staged-ast-enrichment-recursive-authority]], [[general-staged-ast-enrichment-neutral-contract]],
 [[general-staged-ast-current-boundary]], and ADR `0088`.
+
+## September 7 registry and current-depth source reading
+
+`SESSION-STARTUP-READING.3.3.36` reads staged_ast_enrichment.rs 1–1267. Snapshot construction validates explicit
+preparation/access flags, nonempty unique entry identities, bound opaque callbacks, digests, allowed/default
+tops, versions, capabilities, policies and ceilings; callback names are replaced by an opaque sentinel before
+hashing the logical snapshot. It starts an empty Mutex-protected plan cache. Resolution rejects alias/relative
+collisions or same-priority ambiguity, then checks prepared search-root/provider groups without ambient I/O.
+Version/top checks, capability/policy intersections and source-detail/resource minima narrow each request.
+
+The cached values contain only compiled callbacks, selected identities/top and effective capabilities.
+Current-depth execution prepares/sorts every marker and validates targets before callbacks, then revalidates
+each target against its unpublished working copy. Successful plain JSON is node-bounded before stitching;
+returned errors and caught panics enter failure-policy settlement. Exact identity construction, discovery,
+stitching/detachment and settlement helpers occur later in the file and are not counted as read here.
+Fresh staged neutral 9 legs/123 base+129 public mutations passes; earlier native controls remain dated evidence.

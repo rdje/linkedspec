@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.36 — complete spec parser reading and trace staged registry and invocation authority
+
+Completed spec-parser reading and read the staged-enrichment authority prefix (1,453 lines/51,063 baseline-identical bytes). Five Knowledge cards document exact signature helpers, caller-prepared registry resolution, authority narrowing, fresh seeds and complete-depth preparation. Existing .55.1 now includes the private function-AST integer conversion in its source audit, without a new measured failure claim. Staged, typed-source and scalar-numeric neutral checks pass.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.35 — complete source authority and loader reading and reconcile function projection
 
 Completed source-location and native-loader reading and read the function-parser projection prefix (1,497 lines/51,223 baseline-identical bytes). One new/four existing Knowledge cards now explain sealed materialization, deterministic load stages, exact function/body metadata and scalar-preserving stripping; the earlier Julia fallback description is explicitly historical. Rust authority sections move intact to a focused card after the rollout card reached its byte cap. Resolution, typed-source, diagnostic and staged neutral checks pass. Runtime and public-book implementation remain unchanged during prerequisite reading.

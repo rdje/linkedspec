@@ -5,21 +5,23 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.35` are reconciled and `.3.3.36`–`.3.3.66` plus closeout remain pending.
+  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.36` are reconciled and `.3.3.37`–`.3.3.66` plus closeout remain pending.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.72` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.3.35` reads source authority and loader completely, plus staged function projection; reconciles dated resolution evidence.
-  This is item 94/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.3.36` reads spec parser completely and staged authority prefix; preserves exact registry, seed and queue boundaries.
+  This is item 95/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.3.36`: read spec_parser.rs lines 837–1022 and staged_ast_enrichment.rs lines 1–1267.
+- Activate `SESSION-STARTUP-READING.3.3.37`: read staged_ast_enrichment.rs lines 1268–2766.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-07` — `SESSION-STARTUP-READING.3.3.36` completes spec parser and reads frozen staged registry, fresh invocation seed and recursive coordinator.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.35` completes source authority/loader and reads staged function projection with exact scalar-source boundaries.
 
@@ -50,8 +52,6 @@
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.22` reads capture/control tests and owns coalesce definedness/lazy evaluation repair .62.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.21` completes helper reading and owns confirmed slice panics plus scalar null/empty discrepancies under .60/.61.
-
-- `2026-09-07` — `SESSION-STARTUP-READING.3.3.20` reads helper dispatch and owns measured substitution flags, callback lowering and receiver-guard repairs .59.
 
 ## History
 

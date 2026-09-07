@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.36 — Prepared registry data and fresh invocation state have separate lifetimes
+
+Rust freezes caller-completed candidates and binds opaque compiled callbacks before dispatch. Seed state may be shared, while each execution receives a fresh registry/cache and recursive counters; callback-local records omit live authority. The queue coordinator prepares and validates a complete depth before callbacks and retains cumulative resources across depths. Lower execution, identity, stitching and rebasing helpers remain in the next reading window, so this prefix does not establish new native results for those mechanisms.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.35 — Function stripping preserves scalar coordinates while source authority keeps typed provenance
 
 Rust validates function source/body text against decoded-scalar spans, normalizes staged job identity and executes the fixed body parser before attaching its result. Stripping substitutes one space per non-newline scalar, so line/scalar positions remain stable while UTF-8 byte length can shrink. The semantic source mapper handles its own byte conversion. Separately, sealed source-value materialization revalidates authority and each provenance span; the native loader preserves explicit discovery and structured pipeline stages. The existing Knowledge-card cap caught the large rollout card at 66,112 bytes; the new Rust authority sections are routed intact to their own fact card with a retained pointer and unchanged budgets.

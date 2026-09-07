@@ -16,7 +16,7 @@ answers:
   - "is Rust general staged AST enrichment admitted"
   - "why does the Rust staged AST module still allow dead_code"
   - "what is FUTURE-PARITY-BACKLOG 14.7.4.3"
-date: 2026-08-26
+date: 2026-09-07
 status: current private recursive authority, admitted through FUTURE-PARITY-BACKLOG.14.7.4.4 carriers
 tags: [rust, staged-parsing, recursive-queue, breadth-first, cancellation, budgets, diagnostics, source-location, private, admission]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.4.3 extends private rust/linkedspec-runtime/src/staged_ast_enrichment.rs with enrich_recursively. Each complete depth is resolved, authority-checked, stitch-validated, and typed-sorted before callbacks; successful returned markers enter only the next depth. Callback requests receive fresh parser state and detached prior-chain tuples containing normalized parser, selected top, SHA-256 of exact UTF-8 payload text, and full typed provenance. Exact repeats are staged_cycle; same-parser/top recurrence requires strict segment containment and smaller total Unicode-scalar extent. One caller cancellation identity/callback, clock/deadline, remaining steps, total calls, maximum depth/calls, cumulative result nodes, and diagnostic bytes spend monotonically without reset. Expiring callback contexts provide safe_point plus direct/ordered-derived position, span, and diagnostic rebasing; cross-segment spans retain concatenate_in_order. The cfg consumer proves all ten neutral chain rows and adversarial queue/resource/rebasing cases before only the .14.7.4.4 carrier/admission sentinel. Ordinary discovery remains zero tests, canonical CI has no test-path reference, neutral governance remains 79 mutations with Rust dormant_red, and function-body v1/generated v2/public/outward truth does not move."
@@ -55,3 +55,17 @@ top-level seam. See [[rust-staged-ast-enrichment-carriers-admission]] for carrie
 Related: [[rust-staged-ast-enrichment-current-depth-authority]],
 [[rust-staged-ast-enrichment-marker-provenance]], [[general-staged-ast-enrichment-neutral-contract]],
 [[general-staged-ast-current-boundary]], [[typed-source-location-cursor-algebra-direction]], and ADR `0088`.
+
+## September 7 callback view and recursive coordinator prefix
+
+`SESSION-STARTUP-READING.3.3.36` reads staged_ast_enrichment.rs 1–1267. Callback-local cursor/marks/captures/
+variables have detached record projection; their live authority view shares invocation/job counters and an
+active flag through Arc/Mutex. Access rejects absent or expired authority. remaining_steps reads the stricter
+counter; safe-point and source-rebasing methods delegate to helpers still outside this window.
+
+Recursive configuration requires exactly the six mandatory fields with only optional total_calls, non-null
+cancellation identity and positive depth/call maxima. The coordinator creates invocation counters once, clones
+the AST, prepares and sorts each complete queue depth, validates targets and stops on fail-policy preflight
+diagnostics before executing that depth. Settled markers form the next queue; cumulative counters are projected
+at completion. Detailed execute_recursive_depth, safe-point, cycle/decrease and diagnostic budgeting helpers
+remain subsequent reading; no new native resource, callback-panic or rebasing outcome is inferred from this prefix.

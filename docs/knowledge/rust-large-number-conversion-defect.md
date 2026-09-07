@@ -170,3 +170,11 @@ It recursively maps JSON null, bool, string, array and object into RuntimeValue;
 The existing `SESSION-STARTUP-READING.55.1` round-trip/conversion audit now explicitly includes these
 incoming consumers. This adds source inventory only: no new numeric failure or reachable fallback-to-zero
 case was measured, and it does not broaden the prior saturation result.
+
+## September 7 function-AST integer conversion inventory
+
+`SESSION-STARTUP-READING.3.3.36` reads spec_parser.rs 837–1022. Its private usize_field first uses checked
+u64-to-usize conversion, then accepts a finite nonnegative integral f64 via `as usize` without an upper-range
+check. Existing .55.1 now includes this boundary and the actual definition-AST producers in its conversion audit.
+This is source inventory: the parser consumes its embedded grammar's own AST, and no public large-field input,
+incorrect accepted function signature or new native saturation result was measured at this checkpoint.

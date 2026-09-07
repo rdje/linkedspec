@@ -60,3 +60,14 @@ in [[rust-semantic-call-staged-projection]]. SourceLocation materialization uses
 Remaining scalar/signature/error helper suffix 837–1022 is the next reading window. Fresh staged neutral proof
 passes 9 rollout legs/123 base mutations and 6 public documents/129 public mutations; this is not a new native
 function parser, trace or serialized carrier test run.
+
+## September 7 Rust helper completion
+
+`SESSION-STARTUP-READING.3.3.36` reads 837–1022 and completes spec_parser.rs. Callable signatures require exactly
+six named fields, version1, valid ASCII positional/rest names, min_arity equal to positional count and null
+max_arity. Scalar extraction checks string/array/object types; unsigned integer conversion is checked, while
+the floating fallback's unchecked upper boundary is added to .55.1's source inventory in
+[[rust-large-number-conversion-defect]]. Definition-error presentation distinguishes malformed/final/missing
+codeblock parameter forms and unknown types, retaining a positive source line or falling back to node index.
+These helper checks do not replace compiler-level validation or the executable shell grammar. Fresh staged and
+typed-source neutral proof pass; no new native definition/signature or trace suite is claimed.
