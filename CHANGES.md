@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.12 — read static validation and preserve bounded engineering history
+
+Complete Rust static-validation and descriptor-test reading. Four paired registry controls expose current gap-helper name shadowing on Rust; five paired AND-edge controls and four Perl descriptors prove nonnumeric selector loss on both Rust and Perl. Own .56/.57 repairs before Knowledge. Core validation 21/21 and gap/root/cursor neutral checks pass; preserve exact evidence limits and unchanged runtime/book. Required engineering-notes rollover preserves 206 committed lines in segment 4983; indexed ADR 0105 admits exactly one file/manifest-row slot with all other limits unchanged. Independent lossless proof passes; exact staged canonical CI is required before landing.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.11 — read compiled types Unicode labels and validation entrypoints
 
 Read compiled types and the complete pinned Unicode classifier plus AST-validation entrypoints. Confirm derived cursor policy, retained selector/source carriers, scalar-safe prefix slicing and ordinary/traced pass order. Reconcile historical cursor/strict counts and owned validation-comment drift. Unicode, cursor and duplicate-slot neutral checks pass; no runtime or public-book change.

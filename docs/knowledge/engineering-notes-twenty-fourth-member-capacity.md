@@ -12,6 +12,9 @@ evidence: "SESSION-STARTUP-READING.3.2.21 archives exact clean ba9a494c source l
 reverify: "perl tools/roll_document_history.pl --surface engineering_notes --check && bash scripts/check_readme_stability.sh && wc -lc DEVELOPMENT_NOTES.md docs/history/development-notes/manifest.jsonl docs/history/development-notes/*.md"
 ---
 
+The September 6 checkpoint below is historical; current finite capacity is recorded in
+[[engineering-notes-twenty-fifth-member-capacity]] under ADR `0105`.
+
 Required rollover `4984` preserves 223 lines / 22,371 bytes under SHA-256
 `dd7eba212246efd893dbff32143a2c821576c7a704e1a697265213dc728d1f9a`. The resulting collection contains 22
 immutable segments, the bounded root, and a 23-record manifest: 24 files / 25,194 lines / 2,691,497 bytes.

@@ -35,7 +35,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`, `SESSION-STARTUP-READING.50`, `SESSION-STARTUP-READING.51`, `SESSION-STARTUP-READING.52`, `SESSION-STARTUP-READING.53`, `SESSION-STARTUP-READING.54`, `SESSION-STARTUP-READING.55`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`, `SESSION-STARTUP-READING.50`, `SESSION-STARTUP-READING.51`, `SESSION-STARTUP-READING.52`, `SESSION-STARTUP-READING.53`, `SESSION-STARTUP-READING.54`, `SESSION-STARTUP-READING.55`, `SESSION-STARTUP-READING.56`, `SESSION-STARTUP-READING.57`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -1159,14 +1159,29 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.11 - read compiled types Unicode labels and validation entrypoints`
 
 - ID: `SESSION-STARTUP-READING.3.3.12`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 12: 1,490 lines/fragments, 54,844 bytes.
   Scope: `rust/linkedspec-core/src/validation.rs` lines 353–1541;
     `rust/linkedspec-core/tests/descriptor_test.rs` lines 1–286;
     `rust/linkedspec-core/tests/rule_local_cursor_normalization_test.rs` lines 1–15.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+    Complete the required engineering-notes rollover from exact clean HEAD records; independently verify
+    source/blob/hash and unchanged prior manifest. Measure resulting root/collection pressure and own one
+    finite member/manifest slot through indexed ADR 0105 before changing route limits. Preserve all other
+    ceilings and immutable history. Run exact staged canonical CI for the necessary routing-infrastructure step.
+  Verification tier: `canonical`
+  Focused checks: Read every remaining validator, descriptor-test and cursor-test-prefix byte; exact range/current-baseline proof; retrieve strict/slot/named-selector/gap/root/cursor Knowledge before diagnosis; managed locked/offline core validation tests and neutral named-slot/root/cursor contracts; four paired registry controls, five paired AND selector controls and four Perl descriptor projections; .56/.57 ownership; task-own any confirmed gaps before Knowledge; independent lossless rollover/pressure proof, ADR 0105 exact-count authorization, memory/all doctrines/history, exact staged canonical receipt and scope/diff.
+  Canonical trigger: `routing capacity infrastructure` — required engineering-notes rollover crosses
+    the existing finite member/manifest counts; exact indexed limit authorization and staged canonical receipt.
+  Verification: Read validation.rs 353–1541, descriptor_test.rs 1–286 and cursor test 1–15 completely:
+    1,490 lines / 54,844 bytes; exact ranges and complete files match baseline. Managed core validation
+    passes 21/21 (180 filtered); neutral gap 9/0/63 plus public34, root 8/3/3/54 and cursor 36/18/8/60
+    pass. Four paired registry controls, five paired AND selector controls and four Perl descriptor
+    projections prove .56/.57 repairs. Lossless segment 4983 proof passes for 206 lines / 17,316 bytes;
+    indexed ADR 0105 admits only files 24→25 and manifest lines 23→24. Exact staged canonical proof is
+    required before this candidate can land; the receipt and commit hooks enforce that boundary.
+    No runtime/public-book change or fresh descriptor/generated/backend-wide signoff.
+  Commit: `SESSION-STARTUP-READING.3.3.12 - read static validation and preserve bounded engineering history`
 
 - ID: `SESSION-STARTUP-READING.3.3.13`
   Status: `pending`
@@ -3317,11 +3332,117 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: `pending`
   Commit: `pending`
 
+
+- ID: `SESSION-STARTUP-READING.56`
+  Status: `pending`
+  Goal: Restore complete Rust built-in function-name reservation without accidental helper shadowing.
+  Dependencies: prerequisite .3/.4/.5; coordinate current helper authority and callable/typed-source/gap owners.
+  Children: `.56.1`, `.56.2`, `.56.3`
+  Acceptance: Reference-owned built-in names must not become user-defined functions through a stale copied list.
+    Preserve ordinary custom functions and deliberate callable precedence; do not widen names or hide failures.
+
+- ID: `SESSION-STARTUP-READING.56.1`
+  Status: `pending`
+  Goal: Freeze current callable-name reservation authority and exact missing-name diagnostics.
+  Acceptance: Compare the actual Perl registry resolver and current contract owners with Rust's manual list.
+    Lock gap_text and entry_slot rejection beside custom_value success and existing trim rejection; audit
+    other current helper/control names, numeric aliases, private/public helper distinctions and intentional
+    parameter-name rules. Keep namespace reservation separate from helper arity, invocation and method syntax.
+    Establish any wider missing-name population with evidence before expanding the repair.
+  Verification: `pending` repair — four paired public native controls at clean activation 75ce8db8 prove
+    custom_value() returns "sentinel" on both runtimes and trim definitions are rejected by both.
+    Rust accepts gap_text/entry_slot definitions and returns "sentinel"; Perl rejects each at function_registry
+    with the exact built-in helper/control collision detail. No timeout; completed native subprocesses.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.56.2`
+  Status: `pending`
+  Goal: Repair Rust registry validation and prevent recurrence as helper authority evolves.
+  Dependencies: .56.1.
+  Acceptance: Reject every authority-bound collision before function body/runtime execution on source and
+    reconstructed/programmatic definition routes, ordinary/traced validation and supported compilation paths.
+    Replace or mechanically govern the stale is_known_actionir_call_name inventory without admitting retired
+    names or blocking valid custom functions. Preserve numeric aliases, lifecycle/runtime reservations, arity,
+    parameter rules and callable semantics. Verify exact RED/GREEN and direct dependents.
+  Verification: `pending` — validation.rs manual helper-name list omits the two observed gap helpers; Engine
+    resolves registered functions before ordinary eager-helper fallback, making the admitted name executable.
+    Perl UserFunctionRegistry delegates to MethodLowering's current known-value-call resolver.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.56.3`
+  Status: `pending`
+  Goal: Close registry-reservation public teaching and recurring supported-route proof.
+  Dependencies: .56.2.
+  Acceptance: Reverify supported backends and native/reconstructed/generated/emitted routes, own additional
+    gaps, update public namespace examples and negative diagnostics, retain dated pre-repair controls,
+    and run the canonical public/cross-backend closeout. No broad registry parity claim before recurrence.
+  Verification: `pending`
+  Commit: `pending`
+
+
+- ID: `SESSION-STARTUP-READING.57`
+  Status: `pending`
+  Goal: Reject discarded named and malformed selectors on AND bare edges.
+  Dependencies: prerequisite .3/.4/.5; coordinate rule-local cursor and inter-match gap authored-slot authority.
+  Children: `.57.1`, `.57.2`, `.57.3`, `.57.4`
+  Acceptance: Blind ownership must not silently discard authored selector syntax. Preserve unselected bare
+    calls and valid explicit action selectors; keep this defect separate from existing Perl return-path .27.
+
+- ID: `SESSION-STARTUP-READING.57.1`
+  Status: `pending`
+  Goal: Freeze complete selector-bearing blind-edge rejection across the two composed contracts.
+  Acceptance: Lock plain Child success and numeric Child[0] rejection against named Child[word],
+    unknown Child[missing] and malformed Child[!] in AND bare syntax. Align exact portable diagnostics,
+    authored selector/source evidence and rejection order with ADR 0044 and current named-slot authority.
+    Include explicit blind twins, valid action twins, malformed/unclosed/empty selectors and reconstructed
+    AST provenance; resolve genuine contract ambiguity before changing the frozen authority.
+  Verification: `pending` repair — five paired native controls accept plain/named/unknown/malformed forms
+    on Rust and Perl while numeric [0] is rejected by both. Rust returns ["selected"] for each accepted
+    form; Perl returns null even for plain Child, so this does not establish a new Perl return-path defect.
+    Four Perl descriptor probes erase every accepted selector into the identical blind Child row with
+    regex_index null and no resolved_slot_edges.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.57.2`
+  Status: `pending`
+  Goal: Repair Rust AND bare selector validation before blind lowering loses the typed selector.
+  Dependencies: .57.1.
+  Acceptance: Check typed RegexSelector provenance instead of only legacy numeric target.index; retain
+    exact numeric diagnostic compatibility and reject other forbidden authored selector states before
+    bcode construction. Cover source/programmatic/serde ASTs, ordinary/traced validation and supported
+    complete compile routes; preserve plain blind and numeric/named explicit action controls.
+  Verification: `pending` — parse_bare_target_list_prefix sets index only for Numeric. The slot metadata
+    pass skips AND bare targets, check_edge_structure tests only index.is_some, and compile_rule lowers
+    the first target into a blind entry without its typed selector.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.57.3`
+  Status: `pending`
+  Goal: Repair Perl bare-edge normalization without losing authored named/malformed selector evidence.
+  Dependencies: .57.1.
+  Acceptance: Reject every forbidden selector before creating bcode_entries/normalized_edges, using the
+    complete retained selector record rather than only numeric index. Lock exact descriptor rejection,
+    structured diagnostics and native/source-generated controls; keep unrelated child-return .27 separate.
+  Verification: `pending` — RuleIR blind normalization checks defined(index) only, then stores child/code
+    and normalized label/index fields without named-selector provenance. Public Get and descriptor
+    controls independently confirm acceptance and projection loss for named/unknown/malformed brackets.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.57.4`
+  Status: `pending`
+  Goal: Close selector-rejection public teaching and supported backend/carrier recurrence.
+  Dependencies: .57.2, .57.3.
+  Acceptance: Audit remaining backends, own/fix additional gaps, verify complete supported reconstructed/
+    generated/emitted routes, document explicit action selector examples and forbidden blind forms, and
+    run canonical public/cross-backend closeout without renewing broader parity from narrow fixtures.
+  Verification: `pending`
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.12` | `pending` | read the remaining validator, descriptor tests, and cursor-normalization test prefix. |
+| 1 | `SESSION-STARTUP-READING.3.3.13` | `pending` | read cursor, value and Unicode tests, runtime crate entry, and bounded-child authority prefix. |
 
 ## Reading Ledger
 
@@ -3332,7 +3453,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.11` are reconciled and `.3.3.12`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.12` are reconciled and `.3.3.13`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -5691,6 +5812,68 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   6 runtime rows / 7 complete + 0 pending / 59 mutations. No native admission matrix is rerun.
   Update existing Knowledge and continuity; no implementation, policy, public-book or contract change.
 
+### Rust static-validation and descriptor-test reading at `.3.3.12`
+
+- Activated from clean `75ce8db839888a5091d25ee4e5e1c3c501daf3b8` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read validation.rs 353–1541 (1,189 lines / 43,751 bytes), descriptor_test.rs 1–286 (286 / 10,574)
+  and rule_local_cursor_normalization_test.rs 1–15 (15 / 519): 1,490 lines / 54,844 bytes.
+  Respective SHA-256 values: ae31b86aacae09d160e6b95b4717697f108cf7a53fc2ad7c3ad3158b464b030d,
+  3beeedc86c3066001aff5d441bb259d472c4dee9ff7123e40c074d4b6e223da8 and
+  c2fc5cb2e8ec50e0852aef1365eea1cb27cb798a32a1af677bb3dd374ffaf78c. Whole files equal baseline.
+  Validator and descriptor consumer are now read through EOF; cursor test continues at line 16.
+- Function names/params use separate ASCII identifier rules. The registry checks helper/control/lifecycle/
+  runtime collisions and variadic signatures, but its helper list is manual. After Knowledge/Toolbox
+  retrieval, four paired native controls use identical definitions and real explicit-edge execution:
+  custom_value returns sentinel on both; trim definitions fail on both; gap_text and entry_slot execute
+  their user bodies on Rust but fail Perl function_registry with exact built-in collision details.
+- Own .56 before Knowledge: reference-authority/diagnostic inventory, Rust validation repair and governed
+  recurrence, then public/backend/carrier closeout. The Rust validator omits both helper names; engine
+  eval_expr resolves registered functions before ordinary eager-helper fallback. Perl's registry delegates
+  to MethodLowering's known-value-call resolver. Other helper names and generated routes are unmeasured.
+  Exact command and outcomes live in rust-user-function-helper-reservation-gap.
+- Slot metadata validates declaration names/duplicates, skips nonexistent target rules to preserve their
+  established undefined-reference stage, and resolves numeric/named/malformed action selectors. Capture-gap
+  checks reject duplicates and legacy markers and require seek/repetition/action ownership without local
+  parent-regex adjacency. Their frozen neutral checks pass at 9 complete / 0 pending, 63 semantic mutations,
+  34 public mutations, with the existing admission mutation populations unchanged.
+- A second bounded diagnosis finds AND bare validation tests only the old numeric index. Five paired native
+  cases reject Child[0] but accept Child, Child[word], Child[missing] and Child[!]. Accepted Rust cases
+  return ["selected"]; Perl returns null even for plain Child, so do not classify a new return-path defect.
+  Four independent Perl public descriptors erase each accepted selector into the same blind Child row,
+  null regex_index and no resolved_slot_edges.
+- Own .57 before Knowledge: complete-selector diagnostic authority, separate Rust/Perl normalization
+  repairs and later supported-route/public closeout. Rust parsing retains Named/Invalid but sets index
+  only for Numeric; slot validation skips AND bare edges, edge-shape validation checks index only, and
+  compilation emits an unindexed dependency/child call. Perl RuleIR likewise tests defined(index) then
+  drops selector provenance from blind and normalized records. ADR 0044 keeps selection action-owned.
+  Exact native and descriptor commands live in and-bare-nonnumeric-selector-loss; .27 remains separate.
+- Other validation passes derive mixed ownership after bare normalization, reject the retained Raw member
+  only for the same-line I remainder, and balance lifecycle authored outer source or legacy interior.
+  The brace scanner's missing regex state is already .54-owned. Regex literals compile through rgx as
+  a required read-only dependency; no rgx source reading or compatibility expansion is claimed.
+- Strict unused references include action/blind/bare targets, preserve declaration order and add no entry
+  exemption. Managed locked/offline single-thread core validation passes all 21 tests with 180 filtered,
+  after a 1m38s build and 0.82s test execution. No sample was taken for this run's silent interval; do not
+  infer its exact cause from the earlier trace run. Every native/probe process is consumed.
+- The four descriptor test functions assert selected models/orders/staged fields and exact schemas,
+  compiled-state round-trip equality, all 36 cursor families and positive edge rows, and deterministic
+  last-definition projection. Existing descriptor Knowledge already separates that direct projection
+  test from public duplicate-source rejection; no descriptor runtime rerun or new duplicate-rule claim.
+- Root neutral proof passes 8 selection / 3 failure / 3 strict cases and 54 mutations; cursor proof passes
+  36/18/8 at 74 files, 8 complete / 0 pending and 60 mutations. Update registry, bare-edge, strict and gap
+  Knowledge with dated limits. No source implementation, public book, policy or authority contract changes.
+
+- Required `COMMIT.md` rollover archives exact clean activation lines 253–458: segment 4983,
+  206 lines / 17,316 bytes, SHA-256 274cdb2ddc2b6672965d365d2cb98b0f7800db1e84f491bb2ec4436c2d98a6d1.
+  Independent source-blob/hash/prefix proof passes; all prior manifest rows are byte-identical. After the
+  current record update and one-newline mutable-root EOF normalization, root 255 lines / 26,100 bytes,
+  manifest 24 lines / 14,394 bytes,
+  collection 25 files / 25,411 lines / 2,715,309 bytes. Prior pressure fails only files 25/24
+  and manifest lines 24/23. Indexed ADR 0105 admits those two finite slots before the route mutation;
+  every other ceiling, pattern, authority, lifecycle and immutable segment is unchanged. This necessary
+  storage-infrastructure step selects canonical tier; exact staged receipt, all doctrines and memory
+  checks must pass before commit. Public-book/runtime semantics remain unchanged.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -5758,7 +5941,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.3.8` is item 67/100 at `2bdea14f`;
   `.3.3.9` is item 68/100 at `236aa4d7`;
   `.3.3.10` is item 69/100 at `90321cca`;
-  `.3.3.11` is item 70/100 once committed.
+  `.3.3.11` is item 70/100 at `75ce8db8`;
+  `.3.3.12` is item 71/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -5893,6 +6077,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.9` | Exact parser range/current-baseline proof; standalone 9/4/6/3/6/15/7/14; cursor 36/18/8/60; Unicode 806/9/8/2; ten paired body and three matches controls; four lowering/three bootstrap controls; .52-.54 ownership; focused continuity | PASS reading and bounded diagnosis; compact fluent/header/regex-brace repairs pending with exact evidence. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.10` | Exact parser/trace/type range and baseline proof; managed core trace 7/7; numeric 55/18; cursor 36/18/8/60; four paired native number controls; .55 ownership; trace closure/fixture Knowledge; focused continuity | PASS bounded reading and diagnosis; value and scalar-text repairs remain pending under .55. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.11` | Exact three-range/current-baseline proof; Unicode 806/9/8/2; cursor 36/18/8/60; duplicate slots 5/2/59; derived-state/AST-pass Knowledge; .41.2 comment ownership; focused continuity | PASS reading and neutral proof; remaining validator/native suites and all repair leaves stay separately owned. |
+| `2026-09-07` | `SESSION-STARTUP-READING.3.3.12` | Exact three-range/current-baseline proof; core validation 21/21; gap 9/0/63/public34; root 8/3/3/54; cursor 36/18/8/60; four paired registry/five paired AND/four descriptor controls; .56/.57 ownership; lossless segment 4983; ADR 0105; exact staged canonical proof | PASS bounded reading and lossless archive proof; .56/.57 remain pending; exact canonical receipt required before landing. |
 
 ## Commit Log
 
@@ -5969,6 +6154,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.3.9` | `SESSION-STARTUP-READING.3.3.9 - read Rust rule-body parsing and own lexical boundary repairs` | Read rule-body parser; own compact fluent, invalid header suffix and Perl/Rust regex-brace repairs .52-.54. |
 | `SESSION-STARTUP-READING.3.3.10` | `SESSION-STARTUP-READING.3.3.10 - read core trace and types and own large-number conversion repairs` | Read parser tests/core trace/types; own finite-value saturation and large-number text repairs .55. |
 | `SESSION-STARTUP-READING.3.3.11` | `SESSION-STARTUP-READING.3.3.11 - read compiled types Unicode labels and validation entrypoints` | Read compiled types and pinned Unicode through EOF plus AST-validation entrypoints; reconcile historical/current claims. |
+| `SESSION-STARTUP-READING.3.3.12` | `SESSION-STARTUP-READING.3.3.12 - read static validation and preserve bounded engineering history` | Complete validator/descriptor reading; own .56/.57; preserve segment 4983 with finite ADR 0105 capacity and canonical proof. |
 
 ## Changelog
 
@@ -6089,3 +6275,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-07`: `.3.3.9` reads rule-body parsing and owns .52-.54 lexical repairs, preserving paired native and exact bootstrap truncation evidence without runtime changes.
 - `2026-09-07`: `.3.3.10` reads remaining parser tests, core trace and types prefix; owns .55 value/text repair and reconciles dated trace closure and scalar fixture coverage.
 - `2026-09-07`: `.3.3.11` completes compiled-type/Unicode reading and validator entry order; reconciles dated cursor/strict evidence and owns stale validation comments under .41.2.
+- `2026-09-07`: `.3.3.12` completes static validator and descriptor-test reading; owns .56 helper shadowing and .57 nonnumeric bare-selector loss with paired native/descriptor controls; performs required lossless notes rollover and finite ADR 0105 capacity admission under exact staged canonical verification.

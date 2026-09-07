@@ -58,7 +58,16 @@ unused-rule checking. Tracing has separate fallible I/O. The old six-pass count
 and module comment's numbered `check 5` reference are stale; existing `.41.2`
 owns source-comment correction. This source-order reconciliation does not rerun
 the dated strict native cases or claim exhaustive reference parity. The full
-remaining validator implementation and tests are assigned to the next reading leaf.
+remaining validator implementation and tests were assigned to the next reading leaf.
+
+That `.3.3.12` checkpoint completes the file and runs the managed locked/offline
+core validation target: 21/21 pass, with 180 unrelated tests filtered out. Unused
+references include action, blind and bare edge targets and preserve declaration
+order in the diagnostic; no effective-entry exemption is introduced. The selected
+tests include markerless closed cycles and undefined-target precedence for numeric
+and named action selectors. They do not cover the newly found current-helper name
+collisions or AND bare nonnumeric selectors, owned by `.56` and `.57`:
+[[rust-user-function-helper-reservation-gap]], [[and-bare-nonnumeric-selector-loss]].
 
 ## Links
 

@@ -59,6 +59,14 @@ parent/child cases, and 60 drift mutations. Earlier native test counts in this c
 remain July evidence; this September reading checkpoint did not rerun those native
 suites or change cursor behavior.
 
+Checkpoint `.3.3.12` independently finds that the AND bare guard checks only the
+legacy numeric `index`, although parsing now retains typed named/invalid selectors.
+`Child[word]`, `Child[missing]` and `Child[!]` therefore compile as plain blind
+calls while `Child[0]` is rejected. Perl descriptor probes confirm the same
+provenance loss in its separate normalizer. `.57` owns both repairs and composed
+recurrence: [[and-bare-nonnumeric-selector-loss]]. Existing numeric/bare fixtures
+and the fresh 21 core validator tests do not cover those nonnumeric cases.
+
 Related: [[rule-local-cursor-and-bare-edge-contract]],
 [[rule-local-cursor-neutral-contract]], [[rust-rule-local-cursor-execution]],
 [[rust-local-verification-gate]], and

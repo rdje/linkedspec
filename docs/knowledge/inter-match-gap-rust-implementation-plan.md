@@ -27,7 +27,7 @@ answers:
   - "does Rust gap admission change recognition 137 246 58"
   - "what does Rust gap admission change in the rollout mutation ledger"
   - "how can inter match gap capture preserve lists with mixed separators"
-date: 2026-08-15
+date: 2026-09-07
 status: Rust authored, native, reconstructed, descriptor, generated-plan, emitted, primary-command, and private admission roles are signoff-complete under .3.1-.3.5; parent .3 is closed for intended atomic 232
 tags: [capture, segmentation, rust, parser, lifecycle, transaction, generated-source, emitted-source, admission]
 evidence: "INTER-MATCH-GAP-CAPTURE.3.5 starts from clean atomic-231 commit c3326f6d. Primary-first RED is Rust E0425 for the absent primary_command_gap_contract owner; admission RED reports rust_runtime rollout drift before promotion. GREEN uses the existing run_with_context adapter on alpha, beta | gamma\\n- delta and returns exact item/gap pairs for empty prefix, comma, pipe, and bullet/newline separators. The ordinary consumer validates the nine contract roles in declared order and completes each once. Neutral governance passes 3 complete + 6 pending / 56 semantic mutations plus 10 Rust admission mutations; the rooted driver passes neutral, Perl 124, Rust 1/1, then four exact later-runtime skips. Runtime 170/170, recognition 12/12, recursive observation 7/7, cursor, duplicate-slot, source-emitter, typed-source, and recognition ledgers remain green. Generated plan v2, recognition 137/246/58, public helpers 122, typed source 9/5/114, outward surfaces, later runtimes, and recurring/public rows do not move. Definitive signoff passes the 17-owner Rust storage oracle, rendered book 79 files / 14,732 KiB, Knowledge 835 facts / 7,020 keys, all eight doctrines, canonical containment/relocation, CLI 66/66 twice, RAM 73%, Phase 0 1,031/1,031, exact rooted routing, and local-CI exit 0; the sandboxed precursor stops only at expected nested-sandbox status 71."
@@ -196,6 +196,23 @@ also rejects role-order drift, missing roles, undeclared roles, and duplicate co
 
 Recurring/public rows, capability admission, typed-source `lossless_gap_composition`, generated plan v2, the Rust
 facade, semantic/MCP schemas, CLI surface, README, and all later runtimes remain unchanged or pending.
+
+## September 7 validation-reading reconciliation
+
+The rollout and native counts above are dated `.3.1-.3.5` milestone snapshots.
+Fresh neutral governance in `SESSION-STARTUP-READING.3.3.12` reports nine complete /
+zero pending, 63 semantic mutations and 34 public mutations; this reading leaf
+does not rerun the full gap native/generated consumer.
+
+The complete Rust validator confirms declaration-name uniqueness, ASCII-digit-only
+name reservation, deferred undefined-target precedence, duplicate/legacy directive
+checks and seek/repetition/action eligibility. It also exposes a composed boundary
+gap: the older AND bare guard ignores typed nonnumeric selectors, so named and even
+malformed brackets are discarded before blind lowering. Perl shares that guard
+defect. Separately, Rust's function-name reservation list omits current `gap_text`
+and `entry_slot`, allowing user-function shadowing that Perl rejects. Exact probes,
+limits and repair owners `.57`/`.56` are recorded in
+[[and-bare-nonnumeric-selector-loss]] and [[rust-user-function-helper-reservation-gap]].
 
 Related: [[inter-match-gap-executable-contract-plan]], [[inter-match-gap-recurring-governance]],
 [[inter-match-gap-perl-implementation-plan]], [[rust-duplicate-regex-slot-identity-admission]],

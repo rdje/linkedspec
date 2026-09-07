@@ -11,7 +11,7 @@ answers:
   - "when did Rust runtime execution land after the registry"
   - "what Rust diagnostics exist for user functions"
   - "where are Rust user function bodies stored"
-date: 2026-07-02
+date: 2026-09-07
 status: current
 tags: [spec-format-terse, rust, user-functions, compiler, registry]
 evidence: "SPEC-FORMAT-TERSE.4.3.1 added the Rust SpecFile.functions / CompiledSpec.functions registry shape and SPEC-FORMAT-TERSE.4.3.2 added Rust runtime execution. STAGED-LINKED-PARSING.5.3.2 then retired the raw Rust top-level fn parser: linkedspec-runtime::spec_parser executes specs/user_function_definition.spec, validates returned function_definition / function_definition_error AST nodes, strips definition spans, and attaches FunctionDefinition records before validation/compile. rust/linkedspec-core/src/parser.rs now parses rule-only specs and rejects leading fn source when used directly; validation/compiler still reject duplicate names, rule-label collisions, helper/control/lifecycle/runtime/function-keyword collisions, invalid params, duplicate params, reserved params, and invalid bodies; CompiledUserFunction preserves body_payload."
@@ -37,10 +37,19 @@ shape, strips definition spans, and then passes rule-only source to the core par
 resulting `SpecFile.functions` records ordered params, exact arity, original source, body
 source, source/body spans, and the neutral `body_payload`.
 
-Validation rejects duplicate function names, rule-label collisions, built-in
+Validation rejects duplicate function names, rule-label collisions, listed built-in
 helper/control-name collisions including the `.3.2.1` numeric word aliases,
 lifecycle/runtime/function-keyword collisions, invalid params, duplicate params, and
 reserved params before runtime.
+
+September 7 reading `.3.3.12` proves that the copied Rust reservation list is
+incomplete: `gap_text` and `entry_slot` definitions compile and execute their
+user-defined bodies, while Perl rejects both as built-in helper/control collisions.
+The custom function succeeds on both and `trim` is rejected on both. The existing
+21 core validation tests pass but cover neither missing name. `.56` owns the
+authority-based repair and recurrence; exact controls and source mechanism are in
+[[rust-user-function-helper-reservation-gap]]. The historical registry milestone
+does not establish complete reservation coverage after later helper additions.
 
 Compilation records each validated definition as a `CompiledUserFunction` in
 `CompiledSpec.functions`. The compiled record preserves source metadata and `body_payload`
