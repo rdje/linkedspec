@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.17 — read native action loops and nested-write coordination
+
+Read baseline-identical engine lines 3395–4887 (1,493 lines / 60,008 bytes), completing native regex/action loops, eager-dependency scanners, fluent and statement controls, and the nested-write coordinator/classifier. Six direct-dependent neutral checks pass. Four native diagnostic controls confirm dense append/gap behavior and a saturated write index: exact 2^64 is reported as usize::MAX, while the next representable larger value is an invalid selector. Existing .55.1 owns repair; hashes, retained harness and precise limits are in the numeric Knowledge card. Three prior CLI controls expose only generic invocation failure. Knowledge and continuity retain exact scope and the recursive construction suffix; runtime, public book and policy are unchanged.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.16 — read engine invocation routes and entry dispatch
 
 Read baseline-identical engine lines 1895–3394 (1,500 lines / 60,181 bytes), including public execution wrappers, diagnostic resolution and native blind dispatch. Four related neutral checks pass. Reconcile portable diagnostic stages, sink/exit precedence, generated-input validation ownership and parent-result ordering in five existing Knowledge cards; retain stale source-comment repair under .41.2 and the regex-loop suffix under the next leaf. Runtime, public book and policy are unchanged.

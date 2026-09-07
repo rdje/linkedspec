@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.17 — Action collection and mutation snapshot boundaries
+
+Explicit repeated action values and lifecycle return control remain separate. Native gap timing agrees with the generated loop while preserving unflagged selection order. Nested-write structural work starts after all path/RHS evaluation and classification; its coordinator commits only after recursive construction returns successfully. Four native diagnostic controls confirm dense append/gap behavior and a saturated write index: exact 2^64 is reported as usize::MAX, while the next representable larger value is an invalid selector. Existing .55.1 owns repair; hashes, retained harness and precise limits are in the numeric Knowledge card. Three prior CLI controls expose only generic invocation failure.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.16 — Invocation success and downstream completion
 
 Execution channels have distinct boundaries: the parent rule result is observed before staged enrichment, and retained sink/exit outcomes survive later generated trace-write failure. Generated engine contexts rely on validation at the source-emitter carrier boundary, while native direct entry checks typed writes itself. Claim wording now names those exact seams and keeps dated native evidence separate from fresh neutral proof.

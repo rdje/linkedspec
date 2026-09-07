@@ -214,6 +214,16 @@ and `entry_slot`, allowing user-function shadowing that Perl rejects. Exact prob
 limits and repair owners `.57`/`.56` are recorded in
 [[and-bare-nonnumeric-selector-loss]] and [[rust-user-function-helper-reservation-gap]].
 
+Checkpoint `SESSION-STARTUP-READING.3.3.17` reads the complete native regex loop.
+Flagged selection installs local match and gap candidate before LS; unflagged LS
+still precedes selection. The candidate remains through child/action/LE, commits
+before IT, and successful terminal paths install the tail. Failed repetition minima
+and explicit lifecycle returns retain their distinct early exits. Each iteration
+derives cursor policy from the entered rule, and ordered AND sequence progress is
+tracked separately from complete repetition count. This agrees with the already-read
+generated loop; it is not a new native/emitted execution measurement. Fresh neutral
+proof passes 9 complete/0 pending, 63 semantic and 34 public mutations.
+
 Related: [[inter-match-gap-executable-contract-plan]], [[inter-match-gap-recurring-governance]],
 [[inter-match-gap-perl-implementation-plan]], [[rust-duplicate-regex-slot-identity-admission]],
 [[recognition-transaction-neutral-contract]], and ADR `0045`.

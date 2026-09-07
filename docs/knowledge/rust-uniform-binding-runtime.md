@@ -8,11 +8,11 @@ answers:
   - "does a saved Rust mutation result change after a later mutation"
   - "how does Rust distinguish push rule dispatch from binding mutation"
   - "are array name and hash name rejected on Rust yet"
-date: 2026-07-12
+date: 2026-09-07
 status: current
 tags: [rust, language, bindings, array, harray, mutation, diagnostics, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.12.1.3 adds RuntimeContext bare-array/harray mutation methods and native/generated proof. FUTURE-PARITY-BACKLOG.12.1.7.2 then migrates all file-backed specs and closes exposed seams: action-edge fluent push uses the same bare typed binding, direct I assignments are rule-invocation-local, otherwise absent compiled-rule names read as empty implicit accumulators, and an explicit non-undef typed binding wins over a descriptor alias. Rust passes 105/105 interpreted and generated corpus cases plus permanent focused tests. FUTURE-PARITY-BACKLOG.12.1.7.3 completes embedded-source migration, and .12.1.8.2 hard-rejects exact aggregate selectors."
-reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test uniform_binding_contract"
+reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test uniform_binding_contract"
 ---
 
 # Rust uniform binding runtime
@@ -45,6 +45,24 @@ explicitly initialized non-undef typed binding. Focused native/generated tests p
 Exact `array(name)` and `hash(name)` selectors are rejected across Rust's compiled and generated boundaries with
 the portable `aggregate_selector_removed` diagnostic. Empty, multi-argument, quoted, and computed constructor
 forms remain distinct accepted surfaces.
+
+## September 7 statement execution reading
+
+`SESSION-STARTUP-READING.3.3.17` confirms that the I-phase prewalk records direct
+scalar-assignment names and direct bare-target `set` names before executing the block.
+This does not assert that every nested expression is predeclared. Statement handling
+gates inactive controls, checks receiver writes, then dispatches while/return and
+typed mutation forms. Array append uses the shared bare-array operation. Fluent push
+resolves its child and target separately, retaining the selected edge index only for
+the matching child identity.
+
+Standalone trim/filter/case collection transforms distinguish an absent binding from
+an existing wrong kind and replace the typed array. Switch compares a stored string
+subject to ordered case strings, treating a bare case name symbolically; while checks
+its condition before incrementing/enforcing the body limit. Existing cross-backend
+while differences remain separately owned. Fresh binding neutral proof passes 11
+migrations/7 executions/6 invalid selectors/8 constructors; logical proof passes
+17 truthiness cases/10 helpers/3 effects/26 mutations. Native counts above remain dated.
 
 Related facts: [[uniform-binding-neutral-contract]], [[perl-uniform-binding-runtime]],
 [[spec-facing-aggregate-selector-retirement-inventory]], [[terse-rust-duck-typed-assignment-parity]].

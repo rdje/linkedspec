@@ -8,6 +8,8 @@ answers:
   - "does the scalar text fixture cover scientific notation"
   - "which task owns Rust large number saturation"
   - "is numeric JSON value preservation the same as scalar text formatting"
+  - "why does a Rust nested write report an index smaller than 18446744073709551616"
+  - "does Rust nested write classification saturate its maximum usize index"
 date: 2026-09-07
 status: current
 tags: [rust, perl, numeric, scalar-text, json, reading, defect]
@@ -75,3 +77,87 @@ RUST_LARGE_NUMBERS
 Related facts: [[rust-native-direct-value-execution]],
 [[scalar-to-text-coercion-cross-backend-gap]], [[cross-backend-scalar-numeric-drift]],
 [[rust-hash-separator-and-cat-arity-defects]].
+
+## September 7 nested-write index saturation
+
+`SESSION-STARTUP-READING.3.3.17` extends `.55.1` with a measured unsigned
+index conversion boundary. The current CLI rejects all three failing writes with
+its deliberately generic invocation error. A repository-local Rust embedding then
+loads four complete fixtures through `load_and_compile_spec` and calls
+`execute_value_with_diagnostics`. The probe exits zero with empty stderr:
+
+| Index in `items[index] = "x"`, after `items = []` | Native result |
+| --- | --- |
+| `0` | `["x"]` |
+| `1` | `nested_write_array_gap`, index `1`, length `0` |
+| `18446744073709551616` | `nested_write_array_gap`, index **`18446744073709551615`**, length `0` |
+| `18446744073709555712` | `nested_write_segment_invalid`, reason `kind_not_path_selector` |
+
+The third authored number is exactly representable as f64. On the measured 64-bit
+target, `classify_write_path_segments` compares it with `usize::MAX as f64`,
+which rounds upward to that same power of two. The accepted cast then saturates to
+`usize::MAX`; the later dense-array gap diagnostic reports the changed index.
+The next representable larger f64 fails the classifier instead. This is a bounded
+diagnostic-identity defect; these controls do not show a successful out-of-range
+write or establish a portable arbitrary-integer contract.
+
+Existing `.55.1` now explicitly owns this classifier alongside signed JSON/text
+conversion, with adjacent representable values and dense append/gap controls.
+Other runtimes, generated carriers, nested segments and a complete numeric-range
+census are not freshly measured. The recursive writer body remains a later reading
+window; the coordinator/classifier range is engine lines 4733–4852.
+
+Retained evidence, all under `.linkedspec-data/scratch/`:
+
+- `startup76-write-index-boundary.jsonl`: 392 bytes; SHA-256 `3215cefb20fc025b915e98d605b500a038af1e4a2fe20b1d0b3f0782e814e2ce`.
+- `startup76-write-index-native/probe.rs`: 831 bytes; SHA-256 `fa79c8362941695cf6ddc0a4f6ab549e8aaf38a4420f6d98ba75fee9f1865da3`.
+- `startup76-write-index-native/probe`: 34,839,096 bytes; SHA-256 `4c02cd8627716261aefad33700e1e6b28bbb041e2dc1982b033a4795690cf957`.
+- `startup76-write-index-native/stdout.log`: 3,612 bytes; SHA-256 `1648142c99b333ef672fae429667777fa07a62591727a8b220f546961c40c208`; stderr is zero bytes.
+
+The probe links the existing managed-build runtime archive
+`rust/target/debug/deps/liblinkedspec_runtime-3d20e574f9bdf113.rlib`,
+51,910,968 bytes, SHA-256
+`7cbddb91b8c3043adaf709ae4344f94cf0b17f80e25569456445285648f8c972`.
+The runtime source is unchanged from the preceding build. The initial harness
+compile omitted handling the diagnostic serializer's Result; correcting that
+harness produced the successful comparison without a runtime edit.
+
+Exact retained probe source:
+
+```rust
+use linkedspec_runtime::engine::ExecutionOptions;
+use linkedspec_runtime::spec_loader::{SpecLoadOptions, SpecRequest, load_and_compile_spec};
+fn main() {
+    let root = std::env::current_dir().expect("repository cwd");
+    let options = SpecLoadOptions::new(&root);
+    for name in ["append", "small_gap", "rounded_boundary", "above_boundary"] {
+        let path = format!(".linkedspec-data/scratch/startup76-write-index-native/{name}.spec");
+        let loaded = load_and_compile_spec(&SpecRequest::path(path), &options).expect("valid fixture");
+        match loaded.into_engine().execute_value_with_diagnostics("xhello", &ExecutionOptions::new()) {
+            Ok(value) => println!("{name} OK {value}"),
+            Err(error) => println!("{name} ERROR {}", error.to_json().expect("serializable diagnostic")),
+        }
+    }
+}
+```
+
+To reproduce from current source, build the library with
+`bash tools/run_cargo_local.sh build --manifest-path rust/Cargo.toml --locked --offline --jobs 1 -p linkedspec-runtime --lib`.
+Recreate the four named fixtures below the probe directory with this common source,
+substituting the table's exact index for `INDEX`:
+
+```text
+Top::
+ I { items = []; items[INDEX] = "x"; return(items) }
+ /x/ -> Done
+Done:
+ /[a-z]+/
+```
+
+Save the retained Rust source as that directory's `probe.rs`, then use the current
+build's stable library artifact instead of assuming the recorded hashed archive exists:
+
+```bash
+bash tools/project_data_run.sh rustc --edition=2024 --crate-name startup76_write_index_probe .linkedspec-data/scratch/startup76-write-index-native/probe.rs -L dependency=rust/target/debug/deps --extern linkedspec_runtime=rust/target/debug/liblinkedspec_runtime.rlib -o .linkedspec-data/scratch/startup76-write-index-native/probe &&
+bash tools/project_data_run.sh .linkedspec-data/scratch/startup76-write-index-native/probe
+```

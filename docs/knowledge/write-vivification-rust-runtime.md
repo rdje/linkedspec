@@ -71,3 +71,17 @@ and 105 mutations. The native milestone counts above are not freshly rerun.
 997–1030: emission and decoded generated state both validate nested writes and
 receiver mutations. This qualifies validation ownership, without claiming that every
 low-level engine method independently rejects arbitrary unvalidated compiled input.
+
+Checkpoint `SESSION-STARTUP-READING.3.3.17` reads the assignment coordinator and
+segment classifier. It rejects an empty segment list, evaluates all segments left to
+right and then RHS, classifies selectors, and only then reads binding presence/kind
+and its current value. String selectors remain keys; the numeric predicate checks
+finite/nonnegative/integral form, compares with `usize::MAX as f64`, then casts to
+`usize`. The exact rounded upper boundary is under `.55.1` review. Invalid selectors preserve
+their authored span and the already-classified path prefix.
+
+After recursive construction succeeds, the coordinator preserves an existing private
+array/hash store or writes the scalar-held root and returns that root. The recursive
+construction body begins at the next owned window, so its internal traversal and
+rollback details are not newly proved here. Fresh neutral write proof remains
+5/7 syntax, 11 successes, 16 structural failures and 105 mutations.

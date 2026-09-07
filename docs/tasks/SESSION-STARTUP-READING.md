@@ -1240,12 +1240,16 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.16 - read engine invocation routes and entry dispatch`
 
 - ID: `SESSION-STARTUP-READING.3.3.17`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 17: 1,493 lines/fragments, 60,008 bytes.
   Scope: `rust/linkedspec-runtime/src/engine.rs` lines 3395–4887.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Read engine lines 3395–4887 fully with preceding context, exact current/baseline identity and suffix ownership; retrieve Knowledge before analyzing native regex loops and action handling; run selected direct-dependent neutral contracts, both history checks, explicit memory, derived Knowledge, staged diff and all nine pre-commit doctrines. Preserve dated native evidence and startup repair prerequisites.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS: complete range/current-baseline identity; six managed neutral contracts; four native diagnostic controls and independent result-field assertions; .55.1 repair ownership; Knowledge/history/explicit memory/staged diff/all nine pre-commit doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.17 - read native action loops and nested-write coordination`
 
 - ID: `SESSION-STARTUP-READING.3.3.18`
   Status: `pending`
@@ -2971,6 +2975,8 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     Correct engine.rs entry/local-match comments that still describe a rule testing its own regex;
     current selection is over outgoing dispatch patterns, with entry alone independent of that match.
     Preserve the actual first-selected-match fallback and caller match-state restoration boundaries.
+    Reconcile runtime lib.rs module prose claiming no code generation with its current source_emitter API;
+    preserve the distinction between interpreted host execution and emitted standalone Rust modules.
   Verification: `pending` — current guides still describe Julia/Lua v1 adapters and future named selectors;
     the cursor contract's current reader/marker coverage does not enforce those paragraphs.
   Commit: `pending`
@@ -3335,10 +3341,17 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     numeric representation. Preserve finite-number value, existing small integer output, nonfinite policy
     and signed zero. Cover i64-adjacent representable values, fractions and serialization round trips,
     native/generated/primary CLI routes and portable recurrence; do not promise arbitrary-precision integers.
+    Include the nested-write classifier's f64-to-usize boundary: compare the first out-of-range power of two
+    and adjacent representable values with ordinary dense append/gap controls; reject or preserve their
+    identity explicitly instead of silently saturating the diagnostic path/index through a rounded maximum.
   Verification: `pending` repair — Rust CLI returns 9223372036854775807 for 100000000000000000000 and
     -9223372036854775808 for its negative, with compile:ok/invoke:ok and no stderr. Perl public Get preserves
     positive/negative 1e20; both return 42 for the control. Engine direct execution calls RuntimeValue::to_json,
     whose finite integral branch casts to i64 before serde JSON construction.
+    `.3.3.17` adds four native diagnostic controls: append at 0 succeeds; index 1 reports an ordinary gap;
+    exact f64 value 18446744073709551616 reports a gap at changed index 18446744073709551615; the next
+    representable larger value rejects as an invalid selector. The probe exits 0 with empty stderr;
+    existing CLI controls expose only generic invocation failure. Exact artifacts and cause are in the numeric Knowledge card.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.55.2`
@@ -3474,7 +3487,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.17` | `pending` | continue engine reading at lines 3395–4887. |
+| 1 | `SESSION-STARTUP-READING.3.3.18` | `pending` | continue engine reading at lines 4888–6385. |
 
 ## Reading Ledger
 
@@ -3485,7 +3498,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.16` are reconciled and `.3.3.17`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.17` are reconciled and `.3.3.18`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -5970,6 +5983,15 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - Native dispatch balances recursion, recognition and variable frames around Result; body errors capture attribution before unwind, child accumulator additions are truncated, and passive action terminals are skipped. Selected matches retain ordered slot identity, entry/local captures and scalar observation positions. Blind repeated AND/OR, ordinary AND value collection, lifecycle order and progress checks remain distinct. Existing .41.2 owns stale own-regex comments; no blanket error-restoration guarantee is inferred.
 - Four fresh managed neutral checks pass: root 8 selections/3 failures/3 strict/7 complete/54 mutations; semantic 6 groups/20 queries/128 mutations/9 complete/6 admitted; diagnostics 3 helpers/11 render rows/6 scenarios/8 complete/20 mutations; staged 9 rollout/123 mutations plus public6/17/10/129. Native results remain dated; five existing Knowledge cards are reconciled. Codebase No; physical book Yes, formal alignment and runtime/public/policy repairs stay pending.
 
+### Native action loops and nested-write coordination at `.3.3.17`
+
+- Activated from clean `b06b27cfef0b30487b32de29b5e2b8dbe8801d6e` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read engine lines 3395–4887 in four 300-line chunks and one 293-line chunk: 1,493 lines / 60,008 bytes; full-file and range identity match baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`. Range SHA-256 `10bef263c4791d83770e194ef19fc0fa8c5c9894e075433f0109d06a201c018c`. The native loop, dependency scanners, fluent action execution, statement controls and nested-write coordinator/classifier are complete; `.3.3.18` owns the recursive container-write body from 4888.
+- Native regex execution derives cursor policy per iteration; flagged candidate-before-LS, commit-after-LE/before-IT and successful terminal tails preserve unflagged ordering. Repeated AND tracks slot sequence separately from complete repetitions. Explicit action values collect per hit, lifecycle returns retain whole-rule control, and minimum/progress/normal-return paths remain distinct.
+- Eager child-call/retv scans traverse current typed arguments and callbacks but ignore inert literal construction. Direct observation/self-edge branches avoid implicit pre-dispatch; other blocks either scope the prior child result or run before child dispatch. Fluent push preserves matching child slot identity; statement gating, symbolic switch cases, condition-before-limit while, I-phase direct-binding tracking and typed array transforms retain their separate boundaries.
+- Nested writes evaluate segments left-to-right then RHS before classification and binding snapshot. Classification retains authored spans and evaluated path prefixes; the coordinator publishes only after recursive construction succeeds. Recursive helper internals and full guard/evaluator bodies remain later reading. Four native diagnostic controls confirm dense append/gap behavior and a saturated write index: exact 2^64 is reported as usize::MAX, while the next representable larger value is an invalid selector. Existing .55.1 owns repair; hashes, retained harness and precise limits are in the numeric Knowledge card. Three prior CLI controls expose only generic invocation failure.
+- Six managed neutral checks pass: gap 9 complete/63 semantic/34 public mutations; repeated result 8 modes/10 specials/8 complete/54 mutations; write 5/7 syntax/11 successes/16 structural failures/105 mutations; binding 11 migrations/7 executions/6 invalid selectors/8 constructors; callable 7 literals/11 calls/23 mutations; logical 17 truthiness/10 helpers/3 effects/26 mutations. Historical native/carrier counts remain dated. Codebase No; physical book Yes, formal alignment and runtime/public/policy repairs remain pending.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -6042,7 +6064,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.3.13` is item 72/100 at `99226025`;
   `.3.3.14` is item 73/100 at `7d6c9f8b`;
   `.3.3.15` is item 74/100 at `69dacfc6`;
-  `.3.3.16` is item 75/100 once committed.
+  `.3.3.16` is item 75/100 at `b06b27cf`;
+  `.3.3.17` is item 76/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -6182,6 +6205,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.14` | Four-range/current-baseline identity; four managed neutral contracts; ceiling constructor/private-field and one-byte assertion source review; Knowledge/history/memory/all doctrines/diff | PASS bounded reading and neutral proof; prior native evidence remains dated, .37 review and engine suffix stay owned. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.15` | Exact engine-range/current-baseline identity; seven managed neutral checks; managed CLI build and seven paired split cases (five differences/two equal controls), .33 ownership and exact log/binary hashes; Knowledge/history/memory/staged diff/all nine pre-commit doctrines | PASS source/neutral proof and bounded split diagnosis; .33 owns contract review and repair; engine continuation stays pending. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.16` | Exact range/current-baseline proof; four managed neutral contracts; generated validation and invocation order reading; Knowledge/history/memory/staged diff/all nine pre-commit doctrines | PASS bounded source and neutral proof; .41.2 owns stale comments, engine regex loop remains pending. |
+| `2026-09-07` | `SESSION-STARTUP-READING.3.3.17` | Exact source identity; six managed neutral contracts; four native diagnostic controls/field assertions and exact retained artifacts; .55.1 ownership; Knowledge/history/memory/staged diff/all nine pre-commit doctrines | PASS bounded reading/neutral proof and exact index diagnosis; .55.1 repair and recursive writer continuation remain owned. |
 
 ## Commit Log
 
@@ -6263,6 +6287,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.3.14` | `SESSION-STARTUP-READING.3.3.14 - read child authority diagnostics and engine definitions` | Finish authority and diagnostic-type reading; reconcile current options/diagnostic Knowledge and resource-boundary limits. |
 | `SESSION-STARTUP-READING.3.3.15` | `SESSION-STARTUP-READING.3.3.15 - read generated engine loops and audit split boundaries` | Read generated action/blind loops, preserve exact scope, and annotate measured split boundaries under existing .33. |
 | `SESSION-STARTUP-READING.3.3.16` | `SESSION-STARTUP-READING.3.3.16 - read engine invocation routes and entry dispatch` | Reconcile execution projections, diagnostic stages and precedence, generated validation ownership and parent-result ordering. |
+| `SESSION-STARTUP-READING.3.3.17` | `SESSION-STARTUP-READING.3.3.17 - read native action loops and nested-write coordination` | Read native loops/control and nested-write evaluation order; preserve exact diagnostic evidence and following traversal scope. |
 
 ## Changelog
 
@@ -6388,3 +6413,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-07`: `.3.3.14` reads group 14 completely, resolves the zero-ceiling concern at the private positive constructor, updates current options/diagnostic Knowledge, and retains exact engine suffix and native-proof limits.
 - `2026-09-07`: `.3.3.15` reads the complete group-15 engine range, records generated-loop and diagnostic/helper boundaries, and preserves exact split controls with existing .33 repair ownership.
 - `2026-09-07`: `.3.3.16` reads all group-16 bytes, reconciles invocation/diagnostic/observation boundaries, and retains .41.2 comment repair plus the native regex-loop continuation.
+- `2026-09-07`: `.3.3.17` reads group 17 completely, reconciles native action/control and write coordination, and retains exact numeric-boundary repair plus recursive-write continuation ownership.
