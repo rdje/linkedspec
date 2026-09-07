@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.26 — complete MCP wire reading and own final EOF byte-limit repair
+
+Complete MCP server/wire reading and the primary CLI prefix (1,500 lines; 51,296 baseline-identical bytes). Six existing Rust wire tests pass, but twelve paired public Rust/Perl delimiter/size controls isolate acceptance of one extra byte at final EOF in Rust. New .65 owns repair, combined-boundary recurrence, six-runtime census and public closure; .64 gains exact wire catch scope. Neutral transport/admission pass. All jobs are consumed; runtime/public/policy behavior remains unchanged pending startup prerequisites.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.25 — read frozen MCP runtime and own caught-panic output repair
 
 Read the remaining embedded MCP bytes, complete frozen schema runtime and server prefix (1,352 lines/fragments; 65,134 bytes), all baseline-identical. Rust source extends the existing .36 validation-order repair. The exact existing panic unit test passes 1/1 but captured stderr contains its synthetic panic text/source location; new .64 owns host/output audit, repair, isolated-process recurrence and public closure. No external panic reachability or real-data disclosure is inferred. Managed binding and neutral MCP transport/admission pass; native results and already-owned dependency warnings are consumed.

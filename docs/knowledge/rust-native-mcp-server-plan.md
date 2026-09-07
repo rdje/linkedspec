@@ -56,7 +56,7 @@ server-local `Instant`, and lowering-only policy. Fixed-work digest comparison u
 handles; unknown/expired/revoked/unauthorized results stay indistinguishable.
 
 Decoded dispatch implements only discover, list, capabilities, query, and cancellation. It calls native methods
-afresh, rejects all five above-policy components before a query result, preserves exact native payloads, and catches
+afresh, rejects above-policy requests for explicitly supplied overlay components before a query result, preserves exact native payloads, and catches
 unwind panics for sanitized `-32603` responses. The September 7 captured-output gap below
 qualifies the separate process-stderr guarantee. `serve_stdio` reads bounded fixed chunks over borrowed streams, rejects
 malformed UTF-8/JSON and decoded duplicate keys, enforces exact depth/number/id lexemes, drains overlong frames,
@@ -117,8 +117,8 @@ before creating a unique handle, with at most sixteen entropy attempts. Explicit
 page and budget components retain their own presence bits. Query enforcement precedes
 native query evaluation. Prepared requests remain active for wire emission; direct dispatch
 clears them after response construction. Cancellation suppresses a prepared result and
-shutdown clears registry/request ownership. The remaining server policy checks/tests and
-wire implementation belong to the next physical reading leaf.
+shutdown clears registry/request ownership. At that checkpoint the remaining server policy checks/tests and
+wire implementation belonged to the next physical reading leaf.
 
 The source also checks unknown methods and unsupported versions before complete named
 metadata validation. This extends the existing `.36` owner and
@@ -129,3 +129,28 @@ its synthetic panic text and source location. The response assertion does not ch
 [[rust-mcp-caught-panic-stderr-gap]] and startup `.64` own the host/output audit, bounded repair,
 isolated-process recurrence and public closure. This is private injected-test evidence, not proof of
 externally reachable failure or real-data disclosure. No runtime or public-book behavior changes.
+
+## September 7 server suffix and complete wire reading
+
+`SESSION-STARTUP-READING.3.3.26` completes server lines 770–1342 and all 759
+wire lines. Capability projection changes only lowering fields/defaults and snapshot detail/digest
+availability. Query pre-dispatch checks inspect explicit component-presence bits; omitted native
+ceilings retain native semantic diagnostics. Unit source covers source, digest, page and each of
+three budget denials using an unchanged native-dispatch counter, plus omitted/partial overlays.
+
+Wire parsing uses fixed 65,536-byte reads and a bounded retained buffer with one CR allowance.
+The scanner checks decoded duplicate keys, bounded recursive objects/arrays, strict escapes and
+number grammar before serde JSON construction. Root id token kind/spelling survives separately:
+booleans/null/fraction/exponent spelling and integers outside the safe range are rejected. Output
+is validated, canonicalized, LF-terminated and flushed before prepared activity is released;
+ordinary I/O failure shuts down and optionally emits only the fixed event code. The dispatch-only
+wire catch extends `.64`'s source audit without claiming arbitrary stream-trait panic recovery.
+
+The six exact existing wire unit tests pass (172 filtered; 0.03 test seconds; 280.452 total;
+reported build 2m42s). They cover strict/raw inventories, key/depth/id boundaries, continuation,
+ordinary final EOF and prepared cancellation, but their maximum-size control is CRLF-terminated.
+Twelve public Rust/Perl delimiter/size controls confirm one discrepancy: Rust accepts valid
+maximum+1 payload bytes at final EOF while Perl rejects them. The other eleven pairs agree.
+[[rust-mcp-final-eof-byte-limit-gap]] and startup `.65` own repair and recurrence. Neutral transport
+35/10/10/76 and implementation/admission complete 5/5+6/6/141 also pass. This is not fresh public
+integration-suite or six-runtime recurrence proof; no runtime/public-book repair occurs here.

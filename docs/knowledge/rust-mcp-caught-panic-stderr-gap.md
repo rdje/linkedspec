@@ -67,3 +67,12 @@ All jobs/results are consumed; no recovery, artifact purge or runtime repair occ
 prerequisites and must preserve embedding, concurrency and host policy. Inspect registration,
 decoded response and wire catch sites; do not infer reachability from this injected test.
 Related: [[rust-native-mcp-server-plan]], [[perl-mcp-validation-error-order-drift]].
+
+## Subsequent wire source coverage
+
+`SESSION-STARTUP-READING.3.3.26` completes `mcp_wire.rs`. Its `process_payload`
+catch at line 146 surrounds `dispatch_for_wire`, after strict decoding, and maps caught
+failure to fixed internal-error output using a validated id. The wire module installs no
+panic hook either. Borrowed reader/writer calls are outside that catch; ordinary I/O errors
+follow fixed-log shutdown cleanup. This is source scope for `.64.1`, not a fresh injected
+wire panic or a promise to catch arbitrary panics from caller-provided stream traits.

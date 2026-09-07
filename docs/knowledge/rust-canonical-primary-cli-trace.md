@@ -40,3 +40,15 @@ Phase success is not proof of exact result-value preservation.
 Related facts: [[canonical-primary-cli-trace-protocol]], [[rust-primary-cli-mechanism-audit]],
 [[rust-native-direct-value-execution]], [[rust-trace-controls-sinks]],
 [[user-observable-backend-cli-parity-contract]], [[rust-local-verification-gate]].
+
+## September 7 primary adapter prefix reading
+
+`SESSION-STARTUP-READING.3.3.26` reads `primary_cli.rs` lines 1–168. Its
+`CommandOutput` keeps stdout/stderr bytes and exit status separate (success 0, operational
+failure 1, usage 2 with help). `CanonicalTrace` keeps selected file/mode/level/emoji and a
+stdout buffer. A nonempty selected file implies route; explicit stdout/route/mirror overrides
+that default. Reset creates/truncates the selected file during setup, before event thresholds;
+emission appends and flushes only for route/mirror and separately accumulates stdout/mirror.
+This prefix confirms sink ownership and byte framing; option parsing, phase event sequencing
+and remaining primary-command source belong to the next reading leaf. It does not rerun
+primary CLI conformance or broaden the older 66-case proof.

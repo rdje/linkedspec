@@ -1353,14 +1353,18 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.25 - read frozen MCP runtime and own caught-panic output repair`
 
 - ID: `SESSION-STARTUP-READING.3.3.26`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 26: 1,500 lines/fragments, 51,296 bytes.
   Scope: `rust/linkedspec-runtime/src/mcp_server.rs` lines 770–1342;
     `rust/linkedspec-runtime/src/mcp_wire.rs` lines 1–759;
     `rust/linkedspec-runtime/src/primary_cli.rs` lines 1–168.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Read server 770–1342, all strict MCP wire code and primary CLI 1–168; exact baseline identity; Knowledge-first policy/wire/CLI reconciliation; selected managed MCP wire tests and neutral/direct-dependent checks; history/memory/derived Knowledge/staged diff/all nine pre-commit doctrines. No runtime/public/policy repairs before startup prerequisites.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS reading/proof: all 1,500 lines/51,296 bytes baseline-identical; six existing native wire tests; twelve paired public delimiter/size controls and canonical Rust output; EOF maximum+1 defect owned .65; transport 35/10/10/76 and admission complete/141; Knowledge/history/memory/staged diff/all nine pre-commit doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.26 - complete MCP wire reading and own final EOF byte-limit repair`
 
 - ID: `SESSION-STARTUP-READING.3.3.27`
   Status: `pending`
@@ -3822,6 +3826,8 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     Resolve existing embedding/host obligations without silently rewriting the accepted logging contract.
   Verification: `pending` repair — .3.3.25 exact existing panic test passes 1/1 with --nocapture,
     while captured stderr prints its synthetic message and source location; no external reachability claimed.
+    .3.3.26 completes the wire source: its catch surrounds dispatch after decoding; Read/Write calls
+    are outside it. Ordinary I/O errors and injected panics require distinct proof boundaries.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.64.2`
@@ -3853,11 +3859,48 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: `pending`
   Commit: `pending`
 
+- ID: `SESSION-STARTUP-READING.65`
+  Status: `pending`
+  Goal: Enforce the MCP payload-byte ceiling equally at EOF, LF and CRLF boundaries.
+  Dependencies: prerequisite .3/.4/.5; preserve the current neutral request-limit authority.
+  Children: `.65.1`, `.65.2`, `.65.3`
+
+- ID: `SESSION-STARTUP-READING.65.1`
+  Status: `pending`
+  Goal: Repair Rust final-EOF payload validation before decoding or dispatch.
+  Acceptance: Reject every payload above 1,048,576 bytes irrespective of delimiter; preserve exact
+    maximum LF/CRLF/EOF acceptance, bounded CR allowance, final frame semantics and fixed parse error.
+    Use independently valid padded JSON controls so malformed content cannot mask a missing size check.
+  Verification: `pending` repair — .3.3.26 twelve public Rust/Perl controls isolate EOF at maximum+1:
+    Rust returns discovery success, Perl -32700. All other eleven pairs agree. Rust EOF sends its
+    retained maximum+1 buffer directly to a decoder without the Perl decoder's independent length check.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.65.2`
+  Status: `pending`
+  Goal: Add exact delimiter/length recurrence and census other MCP runtime boundaries.
+  Dependencies: .65.1.
+  Acceptance: Cover maximum-1/maximum/maximum+1/maximum+2, EOF/LF/CRLF, lone CR, chunk-split CRLF,
+    valid padded UTF-8 frames, overlong draining followed by valid frames and shutdown/log discipline.
+    Independently measure all six runtimes and task-own any further discrepancy; preserve current limits.
+  Verification: `pending` — six existing Rust wire unit tests pass while the exact public EOF
+    maximum+1 control differs; ordinary EOF and maximum CRLF controls alone do not prove their combination.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.65.3`
+  Status: `pending`
+  Goal: Close MCP size-boundary public teaching and recurring canonical evidence.
+  Dependencies: .65.1-.65.2.
+  Acceptance: Reconcile decision/book/Knowledge and neutral/native proof without changing the ceiling
+    to match a defect; render the book and run required exact canonical closure.
+  Verification: `pending`
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.26` | `pending` | read mcp_server.rs lines 770–1342, mcp_wire.rs lines 1–759, and primary_cli.rs lines 1–168. |
+| 1 | `SESSION-STARTUP-READING.3.3.27` | `pending` | read primary_cli.rs lines 169–796 and recognition_transaction.rs lines 1–872. |
 
 ## Reading Ledger
 
@@ -3868,7 +3911,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.25` are reconciled and `.3.3.26`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.26` are reconciled and `.3.3.27`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -6433,6 +6476,15 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - The exact existing native entropy/clock/panic test passes 1/1 (177 filtered; 2.43 test seconds, 524.920 total, reported build 6m10s) with --exact --nocapture. Its private synthetic panic returns fixed -32603 while captured stderr prints the fixture text and source location; the server source installs no panic hook. The assertion covers returned JSON only. New Knowledge `rust-mcp-caught-panic-stderr-gap` and `.64.1`–`.64.4` own host/library output scope, bounded repair, isolated-process recurrence and public/canonical closure. This does not demonstrate external panic reachability, real-data disclosure, or other-runtime behavior. Captured stderr 798,784 bytes SHA-256 `7faf686c80974299e418a53af61d8034329ba65317c706d13992218010bf1bc2`; stdout 192 bytes `4f4ab0684f4f3998ded7103755a7cb0020b1d8f3fc1e97d2454daa364f7d4b11`; exact command/status and hashes are durable in the fact card.
 - Managed Rust binding is byte-fresh (83,225); neutral transport 35/10/10/76 and admission 5/5+6/6 complete/141 pass. Dependency build warnings remain separately owned (1,870 pgen/26 rgx-core). All native/neutral jobs and results are consumed; no artifact recovery/purge or runtime/public/policy repair occurs. Roadmap Yes, codebase No, physical book Yes; startup alignment and queued repairs remain pending.
 
+### MCP server suffix, strict wire and EOF byte boundary at `.3.3.26`
+
+- Activated from clean `d495001609729b0a753a2a1a1551aacbd6089ffa` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read mcp_server.rs 770–1342 (573 lines; 20,152 bytes; SHA-256 `38ff83e81b71e22e93697d11b2691d52d0985e87edbee813c2ca24a6ed5f67ee`), complete mcp_wire.rs 1–759 (25,848 bytes; `261136a3af1acde8135152d60a6947cecceddc574fa1d4167f7ed60927c83c15`), and primary_cli.rs 1–168 (5,296 bytes; `af9a39d488ba049ef264ad31f8ced17e7a8e283880379c9dc985eb1b1cf88fdc`). All 1,500 lines/51,296 bytes and full files equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`; every range read without truncation. Server and wire are now physically complete.
+- Server suffix projects lowering-only capabilities, checks explicit source/digest/page/budget components and preserves omitted native diagnostics. Tests use dispatch counters for six denied changes, plus registry and cancellation ownership. Wire retains bounded fixed chunks, decoded duplicate-key/depth/escape/number/id evidence, canonical LF output and prepared lifetime through flush; ordinary I/O failure clears ownership and emits only optional fixed text. Its dispatch-only catch extends `.64.1` source scope, without claiming arbitrary Read/Write panic coverage. CLI prefix separates output bytes/status and implements trace routing/reset/append/flush; remaining event/parser source stays next.
+- Six existing native wire tests pass (172 filtered; 0.03 test seconds; 280.452 total, reported 2m42s build), including ordinary EOF and maximum CRLF separately. Twelve independently valid padded discovery frames around 1,048,576 bytes across EOF/LF/CRLF isolate a missing combined boundary: Rust accepts 1,048,577 bytes at EOF, Perl rejects -32700; all other eleven pairs agree. All calls reach normal EOF with one response and no optional log; Rust responses are exact canonical LF, compiler/program stderr empty. The root cause is retained maximum+1 CR allowance going directly through Rust EOF/decode without a final length check; Perl decode independently checks length. Supporting Perl MCPWire.pm 1–175 and MCPServer.pm 274–340 are baseline-identical; the initial unsupported log_handle diagnostic was corrected to log before any accepted cases ran.
+- New Knowledge `rust-mcp-final-eof-byte-limit-gap` and `.65.1`–`.65.3` own Rust repair, delimiter/chunk/size recurrence plus six-runtime census, and public/canonical closure. Exact paired results 2,250 bytes SHA-256 `6df59fc3c3c5c61aed49f5acb976539c00035a7093333f0d38b1c68bd34fb23b`; scratch retains 44 files/3,996,953 bytes plus 6,144-byte manifest `315fbebf2999b26bd528703cc3c338613f5c4b3536b5b28604e4160abc29ace4`. Probe uses verified existing runtime rlib `7cbddb91b8c3043adaf709ae4344f94cf0b17f80e25569456445285648f8c972`, managed compilation 35.867 seconds after the unit job, public execution 0.468. No other-runtime or unbounded acceptance is inferred.
+- Neutral transport 35/10/10/76 and implementation/admission complete 5/5+6/6/141 pass. Existing pgen/rgx-core build warnings remain independently owned. Rust MCP, panic-output and trace Knowledge owners now reflect precise source/proof limits. All jobs and results are consumed; no artifact recovery/purge or runtime/public/policy repair occurs. Roadmap Yes, codebase No, physical book Yes; startup alignment and repairs remain pending.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -6514,7 +6566,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.3.22` is item 81/100 at `fe3cabf1`;
   `.3.3.23` is item 82/100 at `71e6df55`;
   `.3.3.24` is item 83/100 at `83b9bfe3`;
-  `.3.3.25` is item 84/100 once committed.
+  `.3.3.25` is item 84/100 at `d4950016`;
+  `.3.3.26` is item 85/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -6663,6 +6716,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.23` | Full source identity; six informative and six inconclusive retained pairs; six three-rule descriptors/generated captures; exact sequence/error assertions; write/mutation/slot neutral proof; .63 ownership; Knowledge/history/memory/staged diff/all nine pre-commit doctrines | PASS bounded engine/helper/export reading; .63 owns confirmed nonzero-cursor regex context repair. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.24` | Untruncated 65,536-byte source read/current-baseline identity; two byte-fresh generators; neutral transport/admission; decoded bundle/frame/schema assertions; supporting source identity; Knowledge/history/memory/staged diff/all nine pre-commit doctrines | PASS generated MCP prefix and authority identity; runtime/suffix reading remains next. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.25` | Untruncated scope/baseline identity; managed binding/neutral MCP; exact native panic test and captured stdout/stderr; Knowledge/history/memory/staged diff/all nine pre-commit doctrines | PASS reading checkpoint; .36 source evidence extended; new .64 owns confirmed synthetic panic-output gap. |
+| `2026-09-07` | `SESSION-STARTUP-READING.3.3.26` | Complete baseline scope; six native wire tests; twelve paired public size/delimiter cases; canonical-output and source-cause assertions; neutral MCP; Knowledge/history/memory/staged diff/all nine pre-commit doctrines | PASS bounded source reading; .65 owns confirmed one-byte final EOF discrepancy; .64 wire source scope extended. |
 
 ## Commit Log
 
@@ -6753,6 +6807,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.3.23` | `SESSION-STARTUP-READING.3.3.23 - complete engine and regex helper reading and own input-context repair` | Complete engine tests and regex wrappers; own five assertion discrepancies with exact collected-rule controls. |
 | `SESSION-STARTUP-READING.3.3.24` | `SESSION-STARTUP-READING.3.3.24 - read embedded MCP contract prefix and reconcile generated identity` | Preserve exact generated-prefix coverage and identity, update old sizes, distinguish artifact/governance proof from runtime execution. |
 | `SESSION-STARTUP-READING.3.3.25` | `SESSION-STARTUP-READING.3.3.25 - read frozen MCP runtime and own caught-panic output repair` | Preserve frozen-runtime/registry coverage and separate response sanitation from captured process output; own .64 repair and qualify native reachability. |
+| `SESSION-STARTUP-READING.3.3.26` | `SESSION-STARTUP-READING.3.3.26 - complete MCP wire reading and own final EOF byte-limit repair` | Complete MCP server/wire coverage, qualify existing unit boundaries, and own the independently reproduced EOF limit repair. |
 
 ## Changelog
 
@@ -6887,3 +6942,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-07`: `.3.3.23` completes engine/helper/export reading, owns regex context repair .63, and retains six informative paired controls.
 - `2026-09-07`: `.3.3.24` reads the first 65,536 generated MCP bytes and reconciles exact binding identity and proof limits.
 - `2026-09-07`: `.3.3.25` completes the embedded MCP module/runtime prefix and owns caught-panic process-output repair .64.
+- `2026-09-07`: `.3.3.26` completes MCP server/wire reading, reads primary trace prefix, and owns EOF byte-limit repair .65.

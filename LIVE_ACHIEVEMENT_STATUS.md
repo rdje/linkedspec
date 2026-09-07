@@ -5,21 +5,23 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.25` are reconciled and `.3.3.26`–`.3.3.66` plus closeout remain pending.
-- Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.64` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
+  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.26` are reconciled and `.3.3.27`–`.3.3.66` plus closeout remain pending.
+- Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.65` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.3.25` reads the MCP bundle suffix, frozen runtime and registry dispatch; extends .36 and owns .64 caught-panic output repair.
-  This is item 84/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.3.26` reads the remaining MCP server, complete wire and CLI prefix; owns final EOF byte-limit repair .65.
+  This is item 85/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.3.26`: read mcp_server.rs lines 770–1342, mcp_wire.rs lines 1–759, and primary_cli.rs lines 1–168.
+- Activate `SESSION-STARTUP-READING.3.3.27`: read primary_cli.rs lines 169–796 and recognition_transaction.rs lines 1–872.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-07` — `SESSION-STARTUP-READING.3.3.26` completes MCP wire reading and owns the twelve-pair EOF limit discrepancy.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.25` reads MCP runtime/dispatch boundaries and owns the captured synthetic panic-output gap.
 
@@ -52,9 +54,6 @@
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.11` reads types/Unicode/validation (1,499 lines / 45,494 bytes).
   Unicode, cursor and slot neutral checks pass; .41.2 owns stale validation comments.
-
-- `2026-09-07` — `SESSION-STARTUP-READING.3.3.10` reads parser tests/core trace/types (1,466 lines / 47,137 bytes) and owns .55.
-  Four paired native controls separate value saturation from text spelling; core trace 7/7.
 
 ## History
 

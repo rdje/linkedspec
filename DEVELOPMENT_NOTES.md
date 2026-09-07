@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.26 — Separate valid size controls expose a missing EOF combination
+
+Both Rust and Perl retain one byte beyond the payload ceiling for CRLF framing. Rust rechecks size only in its newline branch; Perl also checks in decode_payload. A valid padded discovery frame at maximum+1 therefore succeeds only on Rust EOF, while maximum+2 and both newline delimiters reject correctly. Existing malformed overlong input cannot isolate a size check from JSON rejection; ordinary EOF and maximum CRLF tests miss the combination. Twelve independent pairs and exact Rust canonical bytes bound the finding to one byte. .65 owns the correction and recurrence; the initial Perl probe option typo ran no accepted case.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.25 — A sanitized returned response does not establish silent process output
 
 The MCP prepare_response builder is wrapped in catch_unwind and returns fixed -32603 on panic. Its existing fixture asserts only returned JSON. With --exact --nocapture, the test still passes while stderr records the synthetic panic and source location. Response construction and process-level panic reporting need separate evidence; .64 owns the bounded correction without silently replacing a host-global hook. Native timing separates 6m10s build from 2.43 test seconds and 524.920 total. Source reading also confirms Rust's method/version-before-full-schema order under existing .36. No production or public-document repair precedes startup prerequisites.
