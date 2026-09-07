@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.22 — read capture and control tests and own coalesce evaluation repair
+
+Read baseline-identical engine test lines 10778–12246 (1,469 lines / 52,089 bytes), distinguishing exact capture/Unicode/take assertions from weaker smoke checks. Five paired Rust primary/live Perl controls confirm coalesce empty-value and later-operand drift; five ready descriptors and inspected source establish the mechanism. .62 owns repair, carriers and public closure. Correct Boolean observation and four Knowledge owners; logical, typed-source and cursor neutral checks pass. Runtime/public/policy repairs remain prerequisite-blocked.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.21 — complete helper reading and own slice and scalar boundary repairs
 
 Read baseline-identical engine lines 9279–10777 (1,499 lines / 59,677 bytes), completing helper implementation and the first test group. Eleven paired Rust primary/Perl Get controls plus one Rust-only overflow case confirm out-of-range array panics and scalar undefined/empty semantics drift. Twelve ready descriptors and actual generated/lowered guards establish the mechanisms; .60/.61 own repairs, carriers and public closure after prerequisites. Three neutral contracts pass. Knowledge retains exact literal-undef versus unbound-null evidence and qualifies legacy smoke assertions; runtime/public/policy remain unchanged.

@@ -65,3 +65,12 @@ validate UTF-8 boundaries. `next_char_boundary_after` likewise starts at an alre
 valid boundary. The scalar substring helpers iterate characters directly. This
 qualifies the private-helper precondition, not a newly reproduced public panic.
 The old June native counts above remain historical.
+
+## September 7 test-reading boundary
+
+`SESSION-STARTUP-READING.3.3.22` reads the exact Unicode substring, input slice, cursor/entry/local
+positions, input-end column and capture-length assertions. A named between-span asserts `héllo`
+and length 5; anonymous rest asserts `ab,héllo` and length 8. These establish what the tests check,
+not a fresh native run or proof for every helper. Current DSL projections use typed RuntimeContext
+authority; the private byte helper precondition above remains separate. Scalar undefined input is
+also distinct from character indexing: [[rust-scalar-helper-null-and-empty-drift]] owns that gap.

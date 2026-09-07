@@ -14,12 +14,12 @@ answers:
   - "was the Rust group-indexing divergence fixed"
   - "what does Rust entry_group return when the compacted index is absent"
   - "did Rust entry_group ever return an empty string for an absent capture"
-date: 2026-07-02
+date: 2026-09-07
 status: confirmed
 tags: [rust, capture-groups, helpers, oracle, RUST-PARITY]
 evidence: "RUST-PARITY.7.2: rust/linkedspec-runtime/src/helpers.rs now stores both regex-oriented groups (index 0 full match) and LinkedSpec captures (capture-only, compacted); rust/linkedspec-runtime/src/engine.rs assigns ctx.entry_groups/ctx.match_groups from MatchResult.captures and reads whole-match text/length from spans. Tests cover capture_groups_optional_not_matched, capture_groups_empty_match_remains_participating, helpers_5_2_entry_text_and_entry_group, helpers_5_2_entry_groups_array, and the 65-fixture corpus oracle."
 evidence_update_2026_07_22: "FUTURE-PARITY-BACKLOG.10.5.0.1.2.1 current-grammar five-runtime proof exposed one remaining helper-edge divergence: Rust entry_group(N) wrapped String::default when N was beyond the compacted capture list, yielding JSON empty string while match_group(N), Perl, Dart, Julia, and Lua yielded absent/null. The entry_group branch now maps present strings to Scalar and absence to RuntimeValue::Undef. helpers_5_2_absent_entry_group_is_undef locks both absent null and present index string; the current-grammar 5x2 manifest is byte-exact."
-reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime capture_groups_ -- --nocapture && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime helpers_5_2_entry -- --nocapture && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle -- --nocapture"
+reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime capture_groups_; bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime helpers_5_2_"
 ---
 
 # Rust Capture Group Helper Indexing
@@ -54,3 +54,11 @@ an empty string for an absent vector element.
   `docs/linkedspec-book/src/appendix/helper-contract-catalog.md`
 - Files: `rust/linkedspec-runtime/src/helpers.rs`, `rust/linkedspec-runtime/src/engine.rs`,
   `rust/linkedspec-runtime/src/runtime.rs`
+
+## September 7 assertion audit
+
+`SESSION-STARTUP-READING.3.3.22` reads the actual engine assertions: whole-match text and
+captures-only groups are separate, and the absent-entry test checks null versus a present string.
+Named group tests separately check missing names and numeric 1/0 presence. These are source-reading
+facts; the July corpus counts above are historical, and this checkpoint did not rerun native tests.
+Current typed-source neutral proof passes 14 complete / 0 pending / 231 mutations.

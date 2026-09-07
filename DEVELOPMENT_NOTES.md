@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.22 — Returned values alone do not prove skipped operand effects
+
+The coalesce_short_circuits test returns the expected first string even when Rust eagerly evaluates every argument. Assignment probes expose the missing effect boundary in both coalesce variants; a separate predicate also skips defined empty text. Perl's nested ternaries preserve selection order. The initial diagnostic collector then introduced an unrelated false-to-string artifact; inspecting the original lowered Boolean and rerunning with JSON::PP::is_bool preservation separates observer behavior from runtime behavior. .62 tracks actual repairs and permanent recurrence; existing capture cards now distinguish historical free helpers from current typed authority.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.21 — Range clipping and undefined-value semantics need explicit boundaries
 
 Clipping an array slice's end does not constrain its start, and start+n can overflow before clipping. Rust's primary reproduces four small range panics and one arithmetic panic; bounded Perl controls return empty arrays. Separately, to_str turns undef into empty text before seven transformations and four predicates, while empty-old str::replace inserts separators. Literal undef and an unbound null-name twin both reproduce the differences; empty-string controls agree. .60/.61 retain exact fixes and carrier/public obligations. Reading smoke tests that check only wrappers or membership does not establish the stronger behavior suggested by their names/comments.

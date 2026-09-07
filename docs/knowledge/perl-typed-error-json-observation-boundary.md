@@ -5,7 +5,9 @@ answers:
   - "why does a Perl runtime error detail appear null in JSON output"
   - "does JSON null prove that Get lost a blessed diagnostic object"
   - "how should I inspect a retained Perl typed error before claiming diagnostic loss"
-date: 2026-09-06
+  - "why did a diagnostic collector turn Perl false into the string zero"
+  - "how should Perl JSON booleans survive plain diagnostic normalization"
+date: 2026-09-07
 status: dated diagnostic evidence; repair state belongs to the owning task-tree
 tags: ["startup-reading","perl","diagnostics","tooling"]
 evidence: "SESSION-STARTUP-READING.31 preserves the recorded Toolbox/source controls at reading baseline baeb984e36a94a15951cd23d4c52def5064cdaca. The owning task is SESSION-STARTUP-READING.31. No implementation repair or whole-project signoff is claimed."
@@ -42,3 +44,15 @@ print JSON::PP->new->canonical->encode({
 }),"\n";
 PERL
 ```
+
+## Boolean-preserving collector control, September 7
+
+During `SESSION-STARTUP-READING.3.3.22`, an ephemeral recursive `plain()` collector stringified
+unknown blessed references. That converted `JSON::PP::false` to `"0"` and parser-created true to
+`"1"`. Inspection of actual lowered code showed `JSON::PP::false` was still present. The corrected
+collector returns `$v` when `JSON::PP::is_bool($v)` before its generic reference branch. A rerun then
+preserved native JSON false and true. This was an observer artifact, not a Perl runtime defect.
+Original and corrected scripts/results remain distinct under
+`.linkedspec-data/scratch/startup81-coalesce-boundaries/`; only `perl-typed-results.jsonl` and
+`perl-nonempty-results.jsonl` support the product comparison in [[rust-coalesce-evaluation-drift]].
+Do not erase or reinterpret the original output as a faithful typed result.
