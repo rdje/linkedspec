@@ -9,11 +9,11 @@ answers:
   - "how are Rust semantic source references correlated"
   - "does Rust semantic static projection leak CompiledSpec or paths"
   - "what proves Rust graph privacy failed and runtime-static semantics"
-date: 2026-07-21
+date: 2026-09-07
 status: current private static foundation consumed through admitted public static/runtime query
 tags: [rust, semantic-introspection, records, relations, source-map, diagnostics, privacy, immutability]
 evidence: rust/linkedspec-runtime/src/semantic_index.rs; rust/linkedspec-runtime/src/semantic_index/static_projection.rs; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.4.2
-reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime semantic_index::static_projection::tests; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_foundation; bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py"
+reverify: "bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime semantic_index::static_projection::tests; bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_foundation; bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py"
 ---
 
 `linkedspec_runtime::semantic_index::SemanticIndex` now builds and retains a private static projection after its
@@ -45,3 +45,22 @@ static query is exact under `.10.4.4`, runtime derivation is exact under `.10.4.
 [[rust-semantic-index-source-foundation]],
 [[rust-semantic-introspection-authority-map]], [[semantic-introspection-neutral-contract]], and
 [[perl-semantic-static-projection]].
+
+## September 7 static prefix and actual failure controls
+
+`SESSION-STARTUP-READING.3.3.32` reads static_projection.rs 1–808. Compiled projection cross-correlates
+parsed/scanned/compiled rule and edge owners, registers retained source references, derives shapes, and emits
+canonical contains/dispatches_to/selects_regex relations before call/staged extension. Failed construction retains
+parsed rules and raw diagnostic facts, with dependency explanations gated specifically by unknown_rule_reference.
+
+Four fresh native public constructor/query controls distinguish the real paths. Bare Missing maps correctly
+to unknown_rule_reference with its exact source and dependency explanation. Child[5] with a declared one-slot
+Child instead fails earlier at resolve_selector with regex_slot_index_out_of_range; projection preserves that
+code, fields, exact arrow excerpt and no false dependency explanation. Child[0] compiles. The source-only concern
+that this authored invalid slot would reach the broad regex_slot_identity_invalid mapping is therefore ruled
+out for this normal constructor path; no repair to that mapping is justified by this control.
+
+The fourth token-return source unexpectedly compiles, and paired follow-up execution isolates .68 token-use
+integration from this failure projector. See [[rust-recognition-token-variable-use-gap]] and its exact artifacts.
+Current semantic 6/20/128 and diagnostic3/11/6/8/20 pass; the five original static tests were not rerun here.
+The scanner/shape/explanation suffix from809 onward is the next reading window.

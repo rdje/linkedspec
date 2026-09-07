@@ -5,21 +5,23 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.31` are reconciled and `.3.3.32`–`.3.3.66` plus closeout remain pending.
-- Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.67` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
+  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.32` are reconciled and `.3.3.33`–`.3.3.66` plus closeout remain pending.
+- Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.69` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.3.31` reads complete call projection and query prefix; paired queries and Get controls establish signature/container repair .67.
-  This is item 90/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.3.32` reads complete query/runtime projection and static prefix; native controls own token-use/newline repairs .68/.69.
+  This is item 91/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.3.32`: read query.rs lines 590–1003, runtime_projection.rs lines 1–273 and static_projection.rs lines 1–808.
+- Activate `SESSION-STARTUP-READING.3.3.33`: read static_projection.rs lines 809–1720, semantic_observation.rs lines 1–133 and source_emitter.rs lines 1–437.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-07` — `SESSION-STARTUP-READING.3.3.32` completes query/runtime reading, preserves correct slot diagnostics and owns token-use/newline gaps .68/.69.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.31` completes call reading and owns false signature acceptance plus composite-call/source omissions under .67.
 
@@ -50,8 +52,6 @@
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.18` reads recursive writes, expression guards and invocation scopes; retains trailing-block/traversal continuation.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.17` reads native regex/action loops, statement controls and nested-write coordination; retains recursive traversal ownership.
-
-- `2026-09-07` — `SESSION-STARTUP-READING.3.3.16` reads engine invocation wrappers and native blind dispatch; preserves validation and observation scope.
 
 ## History
 

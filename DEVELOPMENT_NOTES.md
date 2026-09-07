@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.32 — Private rejection tests do not prove authored token-use enforcement
+
+Rust's token authority rejects escapes when called directly, but the real assignment handlers put Undef in the ordinary scalar table and ordinary reads never invoke that rejection. Two clean authored controls therefore return null where Perl rejects; a legal return agrees. The newline-only copy is a different parser failure and is preserved separately from the semicolon control. Native slot controls also rule out the initially suspected false missing-rule mapping because ordinary validation catches the invalid selector earlier. Repairs .68/.69 and the existing .45 own the distinct causes.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.31 — Cross-backend agreement still needs independent semantic evidence
 
 Rust and Perl return matching signature-acceptance explanations even when their own declared one-argument signature contradicts the zero/two supplied argument count. Both also skip calls under an array node; the independent Get control executes trim and returns ["x"]. The Rust binding source additionally disappears because its registration depends on an emitted RHS call. Task .67 separates truthful compatibility evidence from complete typed traversal/source correlation and requires independently justified recurrence beyond frozen fixture equality.

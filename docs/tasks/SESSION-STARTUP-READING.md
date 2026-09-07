@@ -35,7 +35,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`, `SESSION-STARTUP-READING.50`, `SESSION-STARTUP-READING.51`, `SESSION-STARTUP-READING.52`, `SESSION-STARTUP-READING.53`, `SESSION-STARTUP-READING.54`, `SESSION-STARTUP-READING.55`, `SESSION-STARTUP-READING.56`, `SESSION-STARTUP-READING.57`, `SESSION-STARTUP-READING.58`, `SESSION-STARTUP-READING.59`, `SESSION-STARTUP-READING.60`, `SESSION-STARTUP-READING.61`, `SESSION-STARTUP-READING.62`, `SESSION-STARTUP-READING.63`, `SESSION-STARTUP-READING.64`, `SESSION-STARTUP-READING.65`, `SESSION-STARTUP-READING.66`, `SESSION-STARTUP-READING.67`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`, `SESSION-STARTUP-READING.50`, `SESSION-STARTUP-READING.51`, `SESSION-STARTUP-READING.52`, `SESSION-STARTUP-READING.53`, `SESSION-STARTUP-READING.54`, `SESSION-STARTUP-READING.55`, `SESSION-STARTUP-READING.56`, `SESSION-STARTUP-READING.57`, `SESSION-STARTUP-READING.58`, `SESSION-STARTUP-READING.59`, `SESSION-STARTUP-READING.60`, `SESSION-STARTUP-READING.61`, `SESSION-STARTUP-READING.62`, `SESSION-STARTUP-READING.63`, `SESSION-STARTUP-READING.64`, `SESSION-STARTUP-READING.65`, `SESSION-STARTUP-READING.66`, `SESSION-STARTUP-READING.67`, `SESSION-STARTUP-READING.68`, `SESSION-STARTUP-READING.69`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -1432,14 +1432,18 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.31 - complete semantic call reading and own signature and container projection repairs`
 
 - ID: `SESSION-STARTUP-READING.3.3.32`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 32: 1,495 lines/fragments, 50,145 bytes.
   Scope: `rust/linkedspec-runtime/src/semantic_index/query.rs` lines 590–1003;
     `rust/linkedspec-runtime/src/semantic_index/runtime_projection.rs` lines 1–273;
     `rust/linkedspec-runtime/src/semantic_index/static_projection.rs` lines 1–808.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Read query.rs 590–1003, runtime_projection.rs 1–273 and static_projection.rs 1–808 with exact baseline identity; Knowledge-first query validation/budgets, observation topology, static/failure source correlation and existing repair reconciliation; selected semantic neutral proof and bounded diagnostic controls where required; Knowledge/history/memory/staged diff/all nine doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS reading/diagnosis: 1,495 lines/50,145 bytes baseline-identical; eight native constructor/query controls, four paired Get/CLI controls, independent assertions; semantic6/20/128, diagnostic3/11/6/8/20, recognition138/250/58; .68/.69 ownership; Knowledge/history/memory/staged diff/all nine doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.32 - complete semantic query reading and own token use and newline repairs`
 
 - ID: `SESSION-STARTUP-READING.3.3.33`
   Status: `pending`
@@ -2542,6 +2546,8 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: `pending` — `.3.2.44` refines .31 with two exact public Get/query controls: the original
     diagnostic code/message survive, but unrelated failure gets a false dependency decision/explanation
     and an undefined-target warning. The bare missing-rule control retains correct code, span, and explanation.
+    .3.3.32 Rust missing-rule and out-of-range-slot controls retain correct distinct diagnostics; the
+    latter is caught by resolve_selector before slot-failure normalization. Token-use acceptance is .68.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.24`
@@ -4012,11 +4018,58 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: `pending`
   Commit: `pending`
 
+- ID: `SESSION-STARTUP-READING.68`
+  Status: `pending`
+  Goal: Reject forbidden authored recognition-token uses through the real Rust execution pipeline.
+  Dependencies: .3/.4/.5; coordinate .23 and .45 without conflating their separate failure mechanisms.
+  Children: `.68.1`, `.68.2`, `.68.3`
+
+- ID: `SESSION-STARTUP-READING.68.1`
+  Status: `pending`
+  Goal: Preserve token binding identity and enforce actual authored use restrictions.
+  Acceptance: Reject copy/return and every contract-forbidden token use with truthful portable fields,
+    including active and consumed token cases, while legal recognize/commit/rollback/value returns work.
+    Cover assignments, containers, comparisons, functions/codeblocks and serialization without exposing
+    opaque tokens or converting their uses to ordinary undefined values; preserve source and rule scope.
+  Verification: `pending` repair — .3.3.32 Rust public query/CLI accept return(tx) and active copied=tx;
+    CLI returns null without stderr; Perl Get rejects recognition_token_escape. Legal return("ok") agrees.
+    Rust stores an Undef scalar beside the private token; ordinary reads never invoke reject_escape.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.68.2`
+  Status: `pending`
+  Goal: Prove token-use rejection through authored carriers, not only private authority calls.
+  Acceptance: Add independent source-level negative/positive recurrence across native, reconstructed,
+    generated-plan and emitted routes; census all six runtime variants and semantic/MCP construction.
+    Preserve compile/runtime failure ownership and unchanged linearity, restoration and effect contracts.
+  Verification: `pending` — existing Rust negative-token test directly calls the private rejection helper.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.68.3`
+  Status: `pending`
+  Goal: Reconcile public token teaching, admission evidence and canonical proof after integration repair.
+  Dependencies: .68.1-.68.2.
+  Acceptance: Update book/Knowledge with accurate forbidden-use examples and run exact canonical proof.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.69`
+  Status: `pending`
+  Goal: Preserve newline statement boundaries after Rust bare-variable expression lookahead.
+  Dependencies: .3/.4/.5; .45 owns warning/drop, .49 owns the distinct regex suffix scanner.
+  Acceptance: Lock non-token assignment/read controls; preserve newline/CRLF/semicolon/space/comment
+    boundaries while recognizing calls, indexes and fluent continuations with exact source spans.
+    Cover native and supported reconstructed/generated routes; synchronize book and recurrence.
+  Verification: `pending` repair — .3.3.32 copied=tx newline control warns at byte84 and drops its I block;
+    its semicolon twin has no warning. parse_var_or_call consumes whitespace before checking suffixes
+    and does not restore it on the plain-variable path. No intended-body execution is inferred from null.
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.32` | `pending` | read query.rs lines 590–1003, runtime_projection.rs lines 1–273 and static_projection.rs lines 1–808. |
+| 1 | `SESSION-STARTUP-READING.3.3.33` | `pending` | read static_projection.rs lines 809–1720, semantic_observation.rs lines 1–133 and source_emitter.rs lines 1–437. |
 
 ## Reading Ledger
 
@@ -4027,7 +4080,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.31` are reconciled and `.3.3.32`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.32` are reconciled and `.3.3.33`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -6644,6 +6697,16 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - Both explanation builders format acceptance without checking compatibility; both typed call walkers stop on non-call containers. Rust additionally obtains binding source only from an emitted RHS call. New `.67.1`–`.67.4` own signature evidence, composite traversal/source, independent carrier/backend recurrence and public/canonical closeout. Source/query proof uses the verified .89 probe without a new compiler run; Rust queries 7.057 seconds, Perl queries 11.115, Perl Get 11.056, each exit0 with empty stderr.
 - Scratch `.linkedspec-data/scratch/startup90-semantic-call-evidence/` retains 36 files/210,609 bytes plus 7,246-byte manifest SHA-256 `ace19ad5c4d9d7868b413017894086e7ff62eac3ca9badc12b27a44cf0cfc2d1`; independent assertions 2,084 bytes `01ffb7cbe877993595a1ebfef98c232070e3d73b92bcb99b123a91ffbbab71f4`. Neutral semantics pass six groups/20 queries/128 mutations, rollout9/0/admission6/0. One new/three existing Knowledge cards preserve precise limits. All jobs consumed; no runtime/public/policy repair, recovery or purge. Roadmap Yes, codebase No, physical mdBook Yes; formal alignment/prerequisites remain pending.
 
+### Query and runtime projection completion with independent failure controls at `.3.3.32`
+
+- Activated from clean `cc23abb97f54388e3aad505f32c636cdd5bfb740` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read query.rs 590–1003 (414 lines/13,758 bytes; SHA-256 `7713323eb7c6f02e57c40eee59a6b8dc4179eec1ef8ece5f1468aaeec6eb1781`), runtime_projection.rs 1–273 (9,816 bytes; `f6c771e25c969001b700655ef983f84333b7cb28fa6eca16ba4b259a2267c79d`) and static_projection.rs 1–808 (26,571 bytes; `1ec4cbd6eadf2f98fcb12cbfadc74e1b6963b993d1b97cd6860a681a32d2dba9`). All 1,495 lines/50,145 bytes and full files equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`; every range read untruncated. Query/runtime projection are physically complete.
+- Query helpers enforce operation/filter combinations, primary-stream after-id pages, direction/kind breadth-first traversal, logical prefix budgets and structural source/fact projection. Runtime derivation validates typed event combinations, exactly one final succeeded entry result, stable identity format and existing selecting rule/slot topology; it clones/canonicalizes retained records and cannot replay input. Static prefix cross-correlates parsed/scanned/compiled owners and gates dependency explanations specifically on unknown_rule_reference; suffix scanners/shapes remain next.
+- Four native constructor/query controls preserve correct missing-rule and invalid-slot failure evidence. Child[5] is caught by resolve_selector before the broad compiled-slot mapping, retaining regex_slot_index_out_of_range, exact arrow source and no false dependency decision. Child[0] compiles. The source-only suspected wrong missing-rule normalization is ruled out for this ordinary route; .23 records that limit.
+- The token-return control unexpectedly compiles. Four follow-up query and paired Get/CLI cases establish two clean forbidden-use counterexamples: return(tx) and active copied=tx; both Rust CLI results are null with exit0/empty stderr, while Perl rejects recognition_token_escape. Legal return("ok") agrees. Rust stores Undef alongside a separately held token and ordinary variable reads never call reject_escape; the existing negative test invokes that private authority directly. New .68 owns authored rejection/carrier recurrence/public proof, not an observed token-object leak.
+- A newline-only copy separately triggers a separator error at byte84 and the known .45 warning/drop; its semicolon twin isolates token handling. parse_var_or_call consumes whitespace before suffix lookahead without restoring the plain-variable newline. New .69 owns source-preserving separator repair and ordinary non-token/carrier controls; intended-body execution is not inferred from the warned case.
+- Scratch `.linkedspec-data/scratch/startup91-semantic-failure/` covers 71 files/35,587,020 bytes plus 11,923-byte manifest SHA-256 `771a5f9bc682e9875a4bdb128ae1c39e292579d77f6c2204df5cedba544f4467`; independent assertions 455 bytes `975c9bb37c2bf1b42814974c73a4d0452ab298c8b923cf48838f5d1e36a67b5b`. Native probe compilation42.778s/initial run5.313s, exit0/empty stderr; all subsequent jobs consumed. Neutral semantic6/20/128 at9/0,6/0, diagnostic3/11/6/8/20 and recognition138/250/58 at9/9 pass. Two new/five existing Knowledge cards retain exact evidence and limits; no runtime/public/policy repair or recovery/purge. Roadmap Yes, codebase No, physical mdBook Yes; formal alignment pending.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -6731,7 +6794,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.3.28` is item 87/100 at `de526802`;
   `.3.3.29` is item 88/100 at `98be3c19`;
   `.3.3.30` is item 89/100 at `c7134e4d`;
-  `.3.3.31` is item 90/100 once committed.
+  `.3.3.31` is item 90/100 at `cc23abb9`;
+  `.3.3.32` is item 91/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -6886,6 +6950,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.29` | Exact baseline coverage; typed14/0/231, binding11/7/6/8, write105, map167/592, diagnostic20; Knowledge/history/memory/staged diff/all nine doctrines | PASS context observation/projection/store reading; current Knowledge and private-versus-bare mutation boundaries reconciled. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.30` | Baseline scope/supporting proof; six paired public queries/exact IDs and excerpts; semantic6/20/128, callable23, binding11/7/6/8; Knowledge/history/memory/staged diff/all nine doctrines | PASS bounded reading and root cause; new .66 owns repeated binding-ID/source overwrite, .22 gains Rust evidence. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.31` | Baseline scope; ADR0049/source review; six paired query and six Get controls; independent signature/count/source assertions; semantic6/20/128; Knowledge/history/memory/staged diff/all nine doctrines | PASS reading/root cause; .67 owns false signature acceptance and composite-call/source omissions. |
+| `2026-09-07` | `SESSION-STARTUP-READING.3.3.32` | Baseline scope; complete query/runtime and static prefix reading; eight native queries/four paired Get-CLI controls; independent assertions; semantic/diagnostic/recognition neutral proof; Knowledge/history/memory/staged diff/all nine doctrines | PASS reading/root cause; normal slot diagnostic correct; .68 token-use and .69 newline repairs owned. |
 
 ## Commit Log
 
@@ -6982,6 +7047,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.3.29` | `SESSION-STARTUP-READING.3.3.29 - read context observations projections and typed binding stores` | Record completion routing, typed projection and stable binding identity with exact remaining restoration scope. |
 | `SESSION-STARTUP-READING.3.3.30` | `SESSION-STARTUP-READING.3.3.30 - complete context and semantic foundation reading and own binding identity repair` | Complete context/foundation reading and own the independently measured repeated-binding query repair. |
 | `SESSION-STARTUP-READING.3.3.31` | `SESSION-STARTUP-READING.3.3.31 - complete semantic call reading and own signature and container projection repairs` | Complete call projection and distinguish matching query payloads from independently valid semantic evidence. |
+| `SESSION-STARTUP-READING.3.3.32` | `SESSION-STARTUP-READING.3.3.32 - complete semantic query reading and own token use and newline repairs` | Complete query/runtime projection and separate actual token-use/parser gaps from a ruled-out failure-mapping concern. |
 
 ## Changelog
 
@@ -7122,3 +7188,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-07`: `.3.3.29` reads context observations/projections/stores and reconciles six Knowledge owners without a new runtime defect claim.
 - `2026-09-07`: `.3.3.30` completes RuntimeContext/semantic foundation, adds Rust .22 evidence and owns repeated semantic binding identity repair .66.
 - `2026-09-07`: `.3.3.31` completes semantic call reading, reads query prefix and owns signature/composite-call evidence repairs .67.
+- `2026-09-07`: `.3.3.32` completes query/runtime projection and owns .68 authored token-use/.69 variable-newline repairs.

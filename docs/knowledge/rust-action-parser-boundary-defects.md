@@ -132,3 +132,10 @@ RUST_REGEX_CLI_BOUNDARY
 ```
 
 Related facts: [[rust-aggregate-selector-compile-rejection]], [[rust-generic-final-codeblock-normalization]], [[map-leaves-mutation-rust-runtime]], [[rust-project-data-ssd-storage]].
+
+## September 7 newline-copy recurrence
+
+The exact bare-variable copy/newline case in [[rust-bare-variable-newline-consumption]] again reaches .45's
+warning/drop fallback: semantic construction reports compiled and CLI returns null despite discarding the I block.
+The semicolon twin avoids that parse failure. New .69 owns the variable-lookahead separator cause; .45 retains
+compiler rejection ownership. This control is not evidence that the intended copied-token body ran.

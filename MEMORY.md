@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `c7134e4dc3f0baa484f30b7b6019a36944da56c8` — clean preceding reading checkpoint.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.31 - complete semantic call reading and own signature and container projection repairs`.
+- activation_commit: `cc23abb97f54388e3aad505f32c636cdd5bfb740` — clean preceding reading checkpoint.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.32 - complete semantic query reading and own token use and newline repairs`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: activate `.3.3.32`; read query.rs lines 590–1003, runtime_projection.rs lines 1–273 and static_projection.rs lines 1–808,
+- next_action: activate `.3.3.33`; read static_projection.rs lines 809–1720, semantic_observation.rs lines 1–133 and source_emitter.rs lines 1–437,
   then continue queued reading. Intake `.31` preserves the forward source coverage and exact findings.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
-- blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.67` precede mutation setup; `.29` is part of `.5` adoption.
+- blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.69` precede mutation setup; `.29` is part of `.5` adoption.
 - current_rust_warning_debt: repeated clean carriers report 1,870 `pgen` plus 26 `rgx-core` output warnings;
   `RUST-DEPENDENCY-WARNING-ZERO.1-.7` own causal repair/pins/enforcement without suppression, after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4984` is the twenty-seventh history segment; ADR `0104`
   authorizes exactly 29 collection files / 28 manifest lines with every byte and aggregate ceiling unchanged.
-- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook Yes (physical); .31/.3.2.42 preserve complete book/Perl source coverage and repair ownership; formal .4 alignment remains pending (90/100 after `.3.3.31` lands).
+- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook Yes (physical); .31/.3.2.42 preserve complete book/Perl source coverage and repair ownership; formal .4 alignment remains pending (91/100 after `.3.3.32` lands).

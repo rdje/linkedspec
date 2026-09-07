@@ -103,3 +103,10 @@ Three gap unit tests were read (unavailable fields, rollback, cursor regression)
 Fresh neutral proof passes recognition 138 rows/250 calls/58 mutations with rollout 9/9; gap has nine
 complete rows/zero pending/63 semantic mutations; typed source has 14 complete/zero pending/231 mutations.
 These catalog/contract checks do not constitute fresh native recognition or alias execution.
+
+## September 7 authored token-use counterexamples
+
+The fresh public source/query/CLI controls in [[rust-recognition-token-variable-use-gap]] accept forbidden
+return and active copy uses as undefined scalar values. Perl rejects both and a legal return agrees. Repair .68
+owns actual authored enforcement and recurrence; historical private reject_escape assertions do not establish
+that integration. The initial newline copy also exposes .69, separately from the known .45 warning/drop.

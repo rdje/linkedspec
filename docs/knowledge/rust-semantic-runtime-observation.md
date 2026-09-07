@@ -61,3 +61,15 @@ queries, 128 mutations and all nine rollout/six admission legs.
 See [[rust-semantic-query-evaluator]], [[rust-semantic-static-projection]],
 [[rust-semantic-call-staged-projection]], [[perl-semantic-runtime-observation]], and
 [[semantic-introspection-neutral-contract]], and [[rust-semantic-introspection-admission]].
+
+## September 7 complete derivation reading
+
+`SESSION-STARTUP-READING.3.3.32` reads all 273 lines of runtime_projection.rs. It requires a compiled
+static snapshot with no prior execution, validates each typed event, and accepts exactly one final succeeded
+entry-rule result with a lowercase 64-hex SHA-256 input identity. Slot events cannot carry result identity/status;
+result events cannot carry slot identity. Selected rule/slot pairs must exist in the static selects_regex topology.
+The first matching selecting edge supplies that event's static value shape; final result shape comes from the
+entry rule. The cloned model gains one execution plus ordered event records and observed_as relations with
+static evidence ids, then canonicalizes. Caller-supplied positions are retained as typed values; this projector
+does not possess input bytes to re-verify a digest or replay the observed execution. This source reading does not
+claim fresh execution of the seven historical native tests. Current neutral 6/20/128 remains green.

@@ -55,8 +55,23 @@ See [[rust-semantic-runtime-observation]], [[rust-semantic-static-projection]], 
 `SESSION-STARTUP-READING.3.3.31` reads query.rs 1–589. Typed options retain exact field shapes/defaults;
 all public routes enter one raw-value validator. It checks object/contract/field shape, vocabulary, duplicate
 and rank-ordered filters, integer bounds and source ceiling before operation dispatch. The remaining operation
-constraints and page/traversal/projection helpers stay in the next window. The evaluator lists cloned records,
+constraints and page/traversal/projection helpers are completed by the following checkpoint. The evaluator lists cloned records,
 uses subject membership for Get, and projects source only at return; explanations reserve the decision record
 before paging its steps. Costs are canonical selected model units, not CPU/host scan limits (ADR 0049).
 Existing .66/.67 input-projection defects remain visible through this evaluator; this source reading does not
 claim to repair or freshly exercise get/page/relations. Neutral semantic proof passes current 6/20/128,9/0,6/0.
+
+## September 7 complete query helper reading
+
+`SESSION-STARTUP-READING.3.3.32` completes query.rs 590–1003. Operation/filter combinations are
+checked after shared validation. Paging resolves after-id in the filtered primary stream, selects a deterministic
+prefix bounded by page and record/relation budget, and returns the last selected id when more remain.
+Relation traversal records each relation's first breadth-first depth, tracks visited record ids, follows the
+requested direction/kinds and returns canonical projection order. A nonempty next layer marks depth exhaustion.
+These are logical model budgets; the helper may inspect/materialize larger vectors before returning that prefix.
+
+Record projection nulls regex pattern, diagnostic message and explanation summary below text and records the
+exact fact path. Source identity/span/excerpt/digest are assembled structurally from retained source references.
+Malformed responses retain the request's after-id value, empty records/relations, complete page and zero cost.
+Fresh neutral proof remains 6/20/128 at 9/0 and 6/0. This is complete source reading plus the neutral checker;
+the earlier native test counts remain dated, and .66/.67 projection repairs remain pending.

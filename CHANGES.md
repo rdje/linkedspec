@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.32 — complete semantic query reading and own token use and newline repairs
+
+Completed semantic query/runtime projection and read the static prefix (1,495 lines/50,145 baseline-identical bytes). Native failure controls preserve correct missing-rule and out-of-range-slot diagnostics. Follow-up paired Get/CLI controls expose Rust accepting forbidden token return/copy as undefined values; a newline-copy twin separately exposes variable lookahead consuming the delimiter and the known warning/drop fallback. New .68/.69 own repairs and recurrence. Semantic, diagnostic and recognition neutral proof pass; two new/five existing Knowledge cards and continuity retain exact limits.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.31 — complete semantic call reading and own signature and container projection repairs
 
 Completed semantic call-projection reading and read the query prefix (1,494 lines/50,420 baseline-identical bytes). Six paired public queries expose false arity-acceptance evidence and omitted array-contained calls on Perl/Rust; Rust also omits that binding's source. Six Perl Get controls confirm the active array call returns ["x"]. New .67 owns separate evidence/traversal repairs and recurrence. Neutral semantics remain 6/20/128 at complete rollout/admission; Knowledge and continuity preserve exact findings without runtime/public/policy edits.
