@@ -9,7 +9,7 @@ answers:
   - "does a self-indexed semantic edge dispatch to its own rule"
   - "are Perl semantic capabilities and query public yet"
   - "what does semantic_index_perl_static_projection test"
-date: 2026-09-06
+date: 2026-09-07
 status: current private static foundation; public query/runtime layers and composed admission added separately
 tags: [perl, semantic-introspection, records, relations, source-map, diagnostics, immutability]
 evidence: perl/LinkedSpec/SemanticStaticProjection.pm; perl/LinkedSpec/SemanticCallProjection.pm; perl/LinkedSpec/SemanticIndex.pm; t/semantic_index_perl_static_projection.t; t/semantic_index_perl_calls_projection.t; FUTURE-PARITY-BACKLOG.10.3.2.1; FUTURE-PARITY-BACKLOG.10.3.3.1.1
@@ -55,3 +55,11 @@ The empty-function call gate remains .22, and explicit header-inline lifecycle l
 remain exact unchanged evidence; no bare-marker inference or unmeasured backend behavior is added.
 The separate API/runtime/MCP owners above are implementation boundaries, not claims of current
 unimplemented rollout; current semantic admission is complete while these specific defects remain open.
+
+## September 7 grouped source/selector evidence
+
+`SESSION-STARTUP-READING.3.3.33` records five paired public queries and three paired Get/CLI controls
+in [[semantic-grouped-edge-source-correlation-gaps]]. Rust substring matching loses an explicit Child selector
+after ChildLong; Perl joins flattened grouped edges to physical members and loses the second source/index.
+All shared-selector execution controls still return b. Task .70 owns correlation and the separately observed
+Rust per-target-selector prefix acceptance. No runtime repair or other-backend outcome is inferred.

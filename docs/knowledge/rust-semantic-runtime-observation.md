@@ -73,3 +73,11 @@ entry rule. The cloned model gains one execution plus ordered event records and 
 static evidence ids, then canonicalizes. Caller-supplied positions are retained as typed values; this projector
 does not possess input bytes to re-verify a digest or replay the observed execution. This source reading does not
 claim fresh execution of the seven historical native tests. Current neutral 6/20/128 remains green.
+
+## September 7 complete event/sink definition reading
+
+`SESSION-STARTUP-READING.3.3.33` reads all 133 lines of semantic_observation.rs. Constructors separate
+selected-slot fields from final succeeded-result fields; final identity hashes the exact UTF-8 input bytes to
+lowercase SHA-256. The synchronous FnMut sink is shared by Rc/RefCell clones, compares callback allocation
+identity, and hides callback details in Debug. Emit invokes the borrowed callback directly, with no error
+translation; this is source confirmation, not a new native panic/reentrancy execution result.

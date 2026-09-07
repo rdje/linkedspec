@@ -63,4 +63,19 @@ out for this normal constructor path; no repair to that mapping is justified by 
 The fourth token-return source unexpectedly compiles, and paired follow-up execution isolates .68 token-use
 integration from this failure projector. See [[rust-recognition-token-variable-use-gap]] and its exact artifacts.
 Current semantic 6/20/128 and diagnostic3/11/6/8/20 pass; the five original static tests were not rerun here.
-The scanner/shape/explanation suffix from809 onward is the next reading window.
+The scanner/shape/explanation suffix from 809 onward remained unread at that checkpoint; its completion follows.
+
+## September 7 grouped source/selector evidence
+
+`SESSION-STARTUP-READING.3.3.33` records five paired public queries and three paired Get/CLI controls
+in [[semantic-grouped-edge-source-correlation-gaps]]. Rust substring matching loses an explicit Child selector
+after ChildLong; Perl joins flattened grouped edges to physical members and loses the second source/index.
+All shared-selector execution controls still return b. Task .70 owns correlation and the separately observed
+Rust per-target-selector prefix acceptance. No runtime repair or other-backend outcome is inferred.
+
+The full 1,720-line static projector is now read. Scanning groups parsed elements by authored line, handles
+quoted text and a leading regex while finding member bounds, and derives source spans through the captured
+byte/scalar map. Shapes use explicit non-default repetition, first known E return/edge shapes and homogeneous
+array element shapes. Records sort by kind/order/id; relations by source-record rank, kind, target rank and id.
+Nine current internal tests cover graph/privacy/failure/runtime-static/calls, typed order, Unicode/interleaved
+source and clone isolation; they were read, not freshly run. The earlier five-test milestone remains historical.

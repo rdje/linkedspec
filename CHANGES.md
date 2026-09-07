@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.33 — complete static semantic reading and own grouped edge correlation repairs
+
+Completed the static semantic projector and observation event types, and read the emitter prefix (1,482 lines/50,376 baseline-identical bytes). Five paired public queries expose grouped selector/source loss and Rust partial parsing of per-target selectors. Three paired execution controls still return the correct "b" value. New .70 separates semantic correlation, complete grammar/remainder handling and backend/carrier recurrence. Semantic, cursor and generated metadata checks pass; one new/four existing Knowledge cards and continuity preserve exact evidence.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.32 — complete semantic query reading and own token use and newline repairs
 
 Completed semantic query/runtime projection and read the static prefix (1,495 lines/50,145 baseline-identical bytes). Native failure controls preserve correct missing-rule and out-of-range-slot diagnostics. Follow-up paired Get/CLI controls expose Rust accepting forbidden token return/copy as undefined values; a newline-copy twin separately exposes variable lookahead consuming the delimiter and the known warning/drop fallback. New .68/.69 own repairs and recurrence. Semantic, diagnostic and recognition neutral proof pass; two new/five existing Knowledge cards and continuity retain exact limits.
