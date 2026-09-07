@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.14 — Positive authority construction and current invocation/diagnostic types
+
+Validate apparent boundary issues against the actual construction API: private positive-only ceilings make the one-byte diagnostic fallback representable without admitting zero-byte ceilings. Callback return/unwind invalidates views and pops the active chain before outcome handling. Current options include observation and two opaque seeds, while diagnostics carry later helper/slot/callable fields. Definition reading and neutral fixtures do not establish every engine callsite or replace native carrier proof; the next window owns continuation.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.13 — Bounded core-test coverage, child-view authority and completed CI intake
 
 The core integration tests inspect specific owned fields and cases; they do not establish universal compiled round-trip equality, every RuntimeValue variant, or blanket malformed-source rejection. Bounded-child reading stops before the invocation implementation, keeping dispatch/narrowing/result-helper proof with the next leaf. Existing Knowledge now preserves those limits, the current Codeblock successor, and dated prior canonical/sample evidence. Only eight fully consumed captures were removed; no target/cache/recovery/purge changed. Existing `.41.2`/`.41.7` own stale current comments and Toolbox counts.

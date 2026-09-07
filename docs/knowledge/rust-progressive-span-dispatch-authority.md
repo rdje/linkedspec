@@ -11,6 +11,7 @@ answers:
   - "how are Rust progressive child results detached"
   - "does Rust progressive dispatch have ActionIR carriers"
   - "does the Rust progressive authority test run in CI"
+  - "why does the Rust one-byte child diagnostic fallback stay within its ceiling"
 date: 2026-09-07
 status: private authority/core, four carriers, and canonical Rust admission current
 tags: [rust, progressive-parsing, registry, source-location, cancellation, diagnostics, task-tree]
@@ -66,3 +67,32 @@ with rollout 9/9, 116 contract mutations, and 60 public mutations. The preceding
 checkpoint `.3.3.12`, committed as `1d3715fc`, passes the separate four-carrier contract consumer 1/1 in
 206.60 test seconds. The private cfg-enabled authority consumer was not freshly rerun for this reading leaf.
 Existing `.41.2` owns the stale `ProgressiveDispatchArguments` comment that predates static carrier admission.
+
+## September 7 invocation and helper checkpoint
+
+`SESSION-STARTUP-READING.3.3.14` finishes lines 779–1639 (28,104 bytes), so the
+authority file is now fully read. Construction validates decoded source membership,
+positive depth/call limits and every supplied active-chain span. Dispatch validates
+literal identity, exact span shape/bounds, transaction state, registry/top selection,
+capability/policy/resource intersections, chain progress and token/budget/time before
+charging the shared invocation and calling the compiled child.
+
+On callback return or unwind, dispatch pops its chain frame and invalidates the
+shared view before interpreting the result. Null, returned errors and panics become
+typed child failures; false remains valid data. Successful results recheck cancellation
+and deadline, then recursively rebuild JSON under the result-node ceiling and reject
+live-looking field names. Repeated matching parser/top/source identities require a
+contained strictly smaller span.
+
+The zero-byte diagnostic concern is excluded by the actual constructor boundary:
+`ProgressiveCeilings` has private fields and rejects all zero numeric ceilings.
+The child-error truncator keeps complete UTF-8 scalars and uses the one-byte `?`
+fallback when none fits. The existing private authority test explicitly checks
+`éé` under a one-byte ceiling. That test was read, not freshly executed here.
+This does not settle the callback-input versus outward source-detail interpretation
+or nested resource-composition questions already owned by startup `.37.1`/`.37.2`.
+
+Fresh neutral proof passes progressive 9/9 with 116 contract/60 public mutations
+and typed source 14/0 with 231 mutations. The unchanged-source canonical consumer
+result at `1d3715fc` remains dated proof; this documentation leaf does not rerun
+the cfg-enabled native authority or four-carrier consumer.
