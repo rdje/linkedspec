@@ -290,3 +290,13 @@ surface changes.
 
 September 6 complete Perl owner reading and the compatibility slice boundary:
 [[perl-source-location-slice-compatibility]].
+
+## 2026-09-07 Rust projection body reading
+
+`SESSION-STARTUP-READING.3.3.29` reads the RuntimeContext position/span conversion bodies.
+Byte registers are validated through `position_from_utf8_byte` before scalar offsets or coordinates are
+projected. Optional authored scalar line/column arguments clamp to source length; absent arguments use the
+current byte register. Source slicing clamps start and uses saturating width addition before typed span
+materialization. Reversed/invalid byte spans remain absent through the authority Result-to-Option adapter.
+Capture maps are detached and key-sorted. Fresh neutral proof remains 14 complete/zero pending/231 mutations;
+these source observations do not rerun native/generated projections.

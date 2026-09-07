@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.29 — Binding identity and public aggregate results have distinct ownership
+
+RuntimeContext resolves guards through current binding identity and preserves the existing private aggregate store when updating a bare value. Absent Undef permits aggregate initialization; explicitly bound Undef fails the kind check. Bare pop yields a detached updated array, while private pop yields its removed element. Observation completions are consumed within their local scope, typed source adapters convert byte registers through immutable authority, and diagnostic/output/semantic/trace channels retain separate ownership. The next window owns full variable snapshot restoration.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.28 — Recognition rollback includes private gap state alongside public snapshots
 
 The live frame adapter captures committed gap cursor, edge ordinal and detached candidate alongside cursor/boundary/marks. RuntimeContext delegates to one parse authority, restores prior same-label marks on exit and projects gap spans through immutable source authority. The exact 92-name/seven-alias catalog was decoded independently; current neutral proof is distinct from the dated native alias repair. Source reading adds the incoming JSON bridge to .55.1's round-trip audit without asserting a new failing input.

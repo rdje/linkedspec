@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.29 — read context observations projections and typed binding stores
+
+Read RuntimeContext 822–2318: 1,497 lines/49,031 baseline-identical bytes. Reconciled observation completion routing, typed byte/scalar projections, diagnostic sinks, binding identities and detached bare aggregate mutations. Five selected neutral contracts pass; six existing Knowledge owners now qualify historical rollout and no-codegen wording. Restoration internals remain the next reading window; no new runtime defect or fresh native execution is claimed.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.28 — complete recognition adapters and read RuntimeContext source connections
 
 Completed recognition runtime reading and read RuntimeContext 1–821: 1,496 lines/56,822 baseline-identical bytes. Reconciled frame/gap rollback, source authority and 92 helper/seven alias catalogs. Fresh neutral recognition, gap and typed source checks pass at 9/9, 9/0/63 and 14/0/231 respectively. Existing .55.1 now includes the incoming JSON bridge and its progressive/typed-record consumers as source inventory; no new runtime defect was measured.

@@ -77,3 +77,14 @@ passes 11 migrations/7 executions/6 invalid selectors/8 constructors.
 
 Related facts: [[uniform-binding-neutral-contract]], [[perl-uniform-binding-runtime]],
 [[spec-facing-aggregate-selector-retirement-inventory]], [[terse-rust-duck-typed-assignment-parity]].
+
+## September 7 RuntimeContext store reading
+
+`SESSION-STARTUP-READING.3.3.29` reads bare resolution and array/harray mutation bodies.
+An explicit descriptor-scalar override wins before the current bare-kind tag selects a private map.
+Absent-kind plus Undef initializes an empty aggregate; explicitly bound Undef is a wrong-kind value.
+Mutations retain an existing private aggregate store or publish a scalar-held aggregate, returning a detached
+updated root. Bare pop operations return the updated array; private pop methods return the removed value.
+Hash updates replace an existing key in place or append it. Source reading confirms this distinction without
+fresh native execution; neutral binding passes 11 migrations/7 executions/6 invalid selectors/8 constructors,
+write vivification passes 105 mutations and receiver mutation passes 167/592.

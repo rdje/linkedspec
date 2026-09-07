@@ -5,21 +5,23 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.28` are reconciled and `.3.3.29`–`.3.3.66` plus closeout remain pending.
+  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.29` are reconciled and `.3.3.30`–`.3.3.66` plus closeout remain pending.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.65` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.3.28` reads recognition adapters and RuntimeContext source connections; reconciles gap rollback and 92 helper/seven alias catalogs.
-  This is item 87/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.3.29` reads context observations, typed projections and binding stores; passes five selected neutral contracts.
+  This is item 88/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.3.29`: read runtime.rs lines 822–2318.
+- Activate `SESSION-STARTUP-READING.3.3.30`: read runtime.rs lines 2319–2737, semantic_index.rs lines 1–692 and semantic_index/call_projection.rs lines 1–383.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-07` — `SESSION-STARTUP-READING.3.3.29` reads completion routing, typed projection and identity-based stores with five focused contracts.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.28` completes recognition adapter reading and reconciles gap, typed helper and incoming conversion boundaries.
 
@@ -50,8 +52,6 @@
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.15` reads generated action/blind loops and helper definitions; preserves split-parity ownership under .33.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.14` reads child invocation, diagnostic types and engine definitions; preserves .37 and subsequent engine ownership.
-
-- `2026-09-07` — `SESSION-STARTUP-READING.3.3.13` Read core tests and the bounded-child prefix; preserve exact proof limits and prior canonical intake.
 
 ## History
 

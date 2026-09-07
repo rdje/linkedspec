@@ -15,11 +15,11 @@ answers:
   - "does serialized Rust reconstruction preserve recursive observation"
   - "is Rust recursive observation admitted in canonical CI"
   - "how does Rust recursive observation preserve repeated action result collection"
-date: 2026-08-12
-status: current private Rust admission; later runtimes and recurrence current; public closeout pending
+date: 2026-09-07
+status: Rust admission complete; current public closeout is recorded in the typed-source rollout plan
 tags: [rust, source-location, recursion, observation, generated-source, admission, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.14.4.3 adds dedicated ObserveRecognition parsing/serialization, compiler-wide static and transaction-effect validation, direct-parent and rejected-attempt identity in the existing RecognitionTransactionAuthority, pending-entry-only observation scopes, ephemeral runtime completions, detached typed record construction, action-edge single-dispatch policy, and native/generated execution. rust/linkedspec-runtime/tests/recursive_observation_contract.rs passes seven final-path cases across native, serialized reconstruction, generated-plan, and independently compiled emitted source, including a regression proving nested ordinary self-recursion is not misclassified as an observed edge. Observation-only and existing self-finalizer action edges share the governed execute-and-collect branch; tools/check_repeated_action_result_contract.py locks the resulting collect_or_return_action_value! topology at eight sites, and the Rust repeated-action consumer passes 3/3 after consolidation. The typed-source checker records Perl and Rust on the still-pending recursive_observation row at 8 complete / 6 pending / 72 mutations. Recognition remains 129 current + four dedicated transaction nodes / 246 calls / 58 mutations because observation is an existing binding_write effect rather than another neutral inventory row."
-reverify: "cargo test --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test typed_source_location_contract --test recursive_observation_contract --test recognition_transaction_contract && bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py && bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py && perl tools/check_language_capability_coverage.pl"
+reverify: "bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test typed_source_location_contract --test recursive_observation_contract --test recognition_transaction_contract && bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py && bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py && perl tools/check_language_capability_coverage.pl"
 ---
 
 Rust recognizes exactly `value = observe_recognition(observation, call(Child))` as one dedicated private
@@ -43,7 +43,7 @@ records at projection time. No source text, path, parser, live frame, match obje
 second stack, or parse-wide history escapes.
 
 The same implementation is exercised natively, after compiled-spec JSON reconstruction, through generated-plan
-execution, and from independently compiled emitted Rust source. The surface remains grammar-owned and private: it
+execution, and from independently compiled emitted Rust source. At that admission milestone the surface remained grammar-owned and private: it
 does not add a public helper or typed value, facade method, schema field/version, semantic/MCP projection, CLI
 option, or README claim.
 
@@ -64,3 +64,13 @@ RAM 46%, and canonical Phase 0 1,031/1,031 in 744 seconds through `[ci] local CI
 - Recognition authority: [[rust-recognition-transaction-private-authority]].
 - Decision: ADR `0056`, section 23.
 - Task owner: [[FUTURE-PARITY-BACKLOG.14]] `.14.4.3`.
+
+## 2026-09-07 completion adapter reading
+
+`SESSION-STARTUP-READING.3.3.29` reads runtime.rs 822–2318. Recognition and observation
+scopes retain a completion-base offset, split off their local completions and select the last matching
+callee label. Observation entry disarms its pending-entry flag; rejection reserves an attempted-child identity
+without a live frame. The detached nine-field record distinguishes rejected, aborted, accepted and failed,
+and supplies an accepted exit position only for acceptance. Entry/match/exit bytes use typed projection.
+This is source evidence, not a fresh native observation run. Current neutral typed proof passes six observations,
+14 complete/zero pending and 231 mutations, including public guards; the 8/6/72 admission count above is historical.

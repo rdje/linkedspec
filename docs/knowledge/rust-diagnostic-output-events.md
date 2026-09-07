@@ -76,3 +76,13 @@ trace-write runtime errors. Trace setup errors also use the same typed adapter.
 These are source-level precedence facts, not fresh callback-delivery measurements.
 The neutral diagnostic checker again passes 3 helpers/11 render rows/6 scenarios,
 8 complete/0 pending legs and 20 mutations.
+
+## September 7 RuntimeContext sink and failure routing
+
+`SESSION-STARTUP-READING.3.3.29` reads the context adapters. Structured diagnostic capture is first-wins
+for ordinary, portable, helper-arity, codeblock and regex-slot failures. No output sink means immediate success;
+a failing installed sink retains the concrete failure for the outer finish adapter and returns its fixed String
+signal. Taking that failure consumes it. Semantic events use their separate optional sink, and trace events use
+their own enabled buffer. Replay drains the trace buffer through a scope stack, propagating emitter errors.
+Fresh neutral diagnostic proof remains 3 helpers/11 render rows/6 scenarios/8 complete/20 mutations;
+native sink delivery and trace error behavior are not rerun here.

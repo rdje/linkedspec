@@ -111,3 +111,14 @@ and nested write before selector/RHS evaluation; an unrelated failing write keep
 Those covered statements are followed by return expressions. They do not cover the final-assignment
 or substitution gaps already owned by .58/.59. Fresh neutral 167/592 mutation checks pass;
 no fresh native execution is claimed.
+
+## September 7 binding identity body reading
+
+`SESSION-STARTUP-READING.3.3.29` reads RuntimeContext identity/guard methods through line 2318.
+Writes ensure an existing identity; declaration and scoped scalar entry replace it. Scoped entry saves the
+prior variable snapshot, removes competing aggregate stores/descriptor-read override and installs the new
+scalar. Exit delegates to snapshot restoration, whose body remains in the next reading window.
+Receiver activation rejects an absent/already-active identity; write lookup resolves the current name to that
+identity and then to the original binding/attempt span. It does not guard writes by spelling alone.
+The allocator uses saturating u64 increment; this source inventory makes no measured exhaustion claim.
+Existing .58/.59 dispatch gaps remain open. Fresh neutral proof passes 167 base/592 composition mutations.

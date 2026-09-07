@@ -1393,12 +1393,16 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.28 - complete recognition adapters and read RuntimeContext source connections`
 
 - ID: `SESSION-STARTUP-READING.3.3.29`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 29: 1,497 lines/fragments, 49,031 bytes.
   Scope: `rust/linkedspec-runtime/src/runtime.rs` lines 822–2318.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Read runtime.rs 822–2318 with exact baseline identity; Knowledge-first binding identity, scope restoration, mutation guard and typed projection reconciliation; selected write/map/typed neutral checks and bounded diagnostic controls where required; Knowledge/history/memory/staged diff/all nine pre-commit doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS: 1,497 lines/49,031 bytes baseline-identical; typed source 14/0/231, binding 11/7/6/8, write105, map167/592, diagnostic3/11/6/8/20; Knowledge/history/memory/staged diff/all nine pre-commit doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.29 - read context observations projections and typed binding stores`
 
 - ID: `SESSION-STARTUP-READING.3.3.30`
   Status: `pending`
@@ -3912,7 +3916,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.29` | `pending` | read runtime.rs lines 822–2318. |
+| 1 | `SESSION-STARTUP-READING.3.3.30` | `pending` | read runtime.rs lines 2319–2737, semantic_index.rs lines 1–692 and semantic_index/call_projection.rs lines 1–383. |
 
 ## Reading Ledger
 
@@ -3923,7 +3927,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.28` are reconciled and `.3.3.29`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.29` are reconciled and `.3.3.30`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -6514,6 +6518,14 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - Independently decoded catalogs contain exactly 92 unique helpers (47 capture/mark, 30 entry/match, 11 input/cursor, four cursor-control) and seven aliases with canonical targets. Fresh neutral recognition passes 138/250/58 at complete 9/9, gap nine complete/zero pending/63 semantic mutations with public 8/15/10/34, and typed source 14 complete/zero pending/231 mutations. No fresh Cargo/rustc/native recognition or alias proof is claimed.
 - The recursive incoming JSON bridge and progressive/typed-record consumers join the existing `.55.1` conversion inventory without a new measured failure or reachable fallback-to-zero claim. Four canonical Knowledge owners distinguish source inventory/current neutral proof from historical native milestones. All jobs/results consumed; no runtime/public/policy repair, artifact recovery or purge. Roadmap Yes, codebase No, physical book Yes; startup alignment and policy prerequisites remain pending.
 
+### Context observations, projections and typed binding stores at `.3.3.29`
+
+- Activated from clean `de52680260dc660195cbfcf479e53c94b14bda3e` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read runtime.rs 822–2318 (1,497 lines; 49,031 bytes; SHA-256 `1cca319df4eaba99b77293203301ab0e55b341366c1cffdd357699d694dbec42`) in six untruncated ranges. Full file and owned range equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`.
+- Recognition/observation adapters use local completion bases and the last matching callee; pending entry disarms after entry and pre-entry rejection reserves attempted-child identity. Detached nine-field observations distinguish rejected/aborted/accepted/failed, projecting accepted exit only on success. Source position/span adapters validate byte boundaries, clamp optional scalar coordinates/slices, sort detached capture maps and preserve absent invalid spans. Structured diagnostic capture is first-wins; output, semantic observation and buffered trace channels remain separate.
+- Scalar/array/hash writes ensure binding identity and current bare kind. Declaration/scoped entry replace identity; scoped entry saves prior state and removes competing stores/descriptor overrides. Restoration internals remain the next window. Receiver guards resolve current identity rather than spelling, without closing .58/.59 dispatch gaps. Absent/Undef differs from bound Undef for aggregate mutation; bare pop returns the updated detached array while private pop returns the removed element. The saturating u64 identity allocator is source inventory only, with no measured exhaustion claim.
+- Fresh focused neutral checks pass typed source 14 complete/zero pending/231 mutations, binding 11/7/6/8, write105, map167/592 and diagnostic3/11/6/8/20. Six Knowledge owners now qualify historical rollout/no-codegen wording and preserve exact source-versus-native scope. All jobs consumed; no fresh native runtime run, repair, public/policy change, recovery or purge. Roadmap Yes, codebase No, physical mdBook Yes; formal alignment and prerequisites remain pending.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -6598,7 +6610,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.3.25` is item 84/100 at `d4950016`;
   `.3.3.26` is item 85/100 at `03f4577a`;
   `.3.3.27` is item 86/100 at `faa0aaee`;
-  `.3.3.28` is item 87/100 once committed.
+  `.3.3.28` is item 87/100 at `de526802`;
+  `.3.3.29` is item 88/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -6750,6 +6763,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.26` | Complete baseline scope; six native wire tests; twelve paired public size/delimiter cases; canonical-output and source-cause assertions; neutral MCP; Knowledge/history/memory/staged diff/all nine pre-commit doctrines | PASS bounded source reading; .65 owns confirmed one-byte final EOF discrepancy; .64 wire source scope extended. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.27` | Exact baseline source/helper coverage; verified existing CLI 66/66 default; neutral recognition/current guards; source-bounded .38 comparison; Knowledge/history/memory/staged diff/all nine pre-commit doctrines | PASS CLI/recognition reading; current trace/admission facts reconciled and Rust invalidation helper guard qualified. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.28` | Exact baseline coverage; recognition 138/250/58, gap 9/0/63, typed source 14/0/231; 92/7 source catalogs; Knowledge/history/memory/staged diff/all nine doctrines | PASS recognition adapter and RuntimeContext reading; gap/alias milestones and .55.1 incoming conversion inventory reconciled. |
+| `2026-09-07` | `SESSION-STARTUP-READING.3.3.29` | Exact baseline coverage; typed14/0/231, binding11/7/6/8, write105, map167/592, diagnostic20; Knowledge/history/memory/staged diff/all nine doctrines | PASS context observation/projection/store reading; current Knowledge and private-versus-bare mutation boundaries reconciled. |
 
 ## Commit Log
 
@@ -6843,6 +6857,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.3.26` | `SESSION-STARTUP-READING.3.3.26 - complete MCP wire reading and own final EOF byte-limit repair` | Complete MCP server/wire coverage, qualify existing unit boundaries, and own the independently reproduced EOF limit repair. |
 | `SESSION-STARTUP-READING.3.3.27` | `SESSION-STARTUP-READING.3.3.27 - complete primary CLI and read recognition authority guards` | Complete primary CLI coverage, distinguish current neutral proof from historical native counts, and preserve Rust's early invalidation guard. |
 | `SESSION-STARTUP-READING.3.3.28` | `SESSION-STARTUP-READING.3.3.28 - complete recognition adapters and read RuntimeContext source connections` | Complete recognition runtime and record source-authority, gap rollback and exact helper/alias boundaries. |
+| `SESSION-STARTUP-READING.3.3.29` | `SESSION-STARTUP-READING.3.3.29 - read context observations projections and typed binding stores` | Record completion routing, typed projection and stable binding identity with exact remaining restoration scope. |
 
 ## Changelog
 
@@ -6980,3 +6995,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-07`: `.3.3.26` completes MCP server/wire reading, reads primary trace prefix, and owns EOF byte-limit repair .65.
 - `2026-09-07`: `.3.3.27` completes primary CLI reading, reads recognition authority/effects/progress, and reconciles .38 source scope and current Knowledge.
 - `2026-09-07`: `.3.3.28` completes recognition adapters, reads RuntimeContext source connections and reconciles gap/alias/conversion Knowledge.
+- `2026-09-07`: `.3.3.29` reads context observations/projections/stores and reconciles six Knowledge owners without a new runtime defect claim.
