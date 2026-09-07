@@ -1473,14 +1473,18 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.34 - complete emitter reading and own literal and recognition adapter repairs`
 
 - ID: `SESSION-STARTUP-READING.3.3.35`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 35: 1,497 lines/fragments, 51,223 bytes.
   Scope: `rust/linkedspec-runtime/src/source_location.rs` lines 465–561;
     `rust/linkedspec-runtime/src/spec_loader.rs` lines 1–564;
     `rust/linkedspec-runtime/src/spec_parser.rs` lines 1–836.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Read source_location.rs 465–561, spec_loader.rs 1–564 and spec_parser.rs 1–836 with exact baseline identity; Knowledge-first materialization, load/search/validation and staged spec-parser rules; selected typed-source, diagnostic and staged neutral checks; bounded tool controls for unresolved evidence; Knowledge/history/memory/staged diff/all nine doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS reading: 1,497 lines/51,223 bytes baseline-identical; ADR0026 and one new/four existing Knowledge owners reconciled; native resolution14/9/4, typed14/0/231, diagnostic3/11/6/8/20, staged9legs/123+129mutations; Knowledge/history/memory/staged diff/all nine doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.35 - complete source authority and loader reading and reconcile function projection`
 
 - ID: `SESSION-STARTUP-READING.3.3.36`
   Status: `pending`
@@ -4130,7 +4134,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.35` | `pending` | read source_location.rs lines 465–561, spec_loader.rs lines 1–564 and spec_parser.rs lines 1–836. |
+| 1 | `SESSION-STARTUP-READING.3.3.36` | `pending` | read spec_parser.rs lines 837–1022 and staged_ast_enrichment.rs lines 1–1267. |
 
 ## Reading Ledger
 
@@ -4141,7 +4145,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.34` are reconciled and `.3.3.35`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.35` are reconciled and `.3.3.36`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -6786,6 +6790,13 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - Eight native identity controls emit seven modules and reject empty identity; three ASCII/quoted-whitespace/Unicode modules compile, four control-character modules fail because JSON escapes are emitted as Rust literals. Two actual executable modules/five roles each show ordinary parse siblings all return ["ok"], but recognition plain parse returns "ok" while default-options/disabled-trace/no-sink siblings return ["ok"]. .71/.72 own literal encoding, adapter coherence and the rewrite's unused import; 34 other dead-code warnings belong to uncalled roles in private probe modules. New cards retain exact causes and repair acceptance; no runtime/public repair is claimed.
 - Scratch startup93-generated-boundaries holds 66 files/68,030,768 bytes plus a 13,446-byte manifest SHA-256 `efca34731a315b8f34dbd92d02d9be4ffd00f172fb3b40ef91abda228f795580`; independent assertions: 689 bytes `33d25d8edb7bb7c799465e949ab0c5c94e722a55c10da99fee5609df1e585f64`. Probe compile/run: 283.710/10.529s, runner: 110.168/1.373s; all outcomes consumed, libraries rehashed. Generated10families/strictRust105, cursor36/18/8/60, typed14/0/231 pass. No compiler delay cause, recovery, purge or fresh full gate claimed. Roadmap Yes/codebase No/physical mdBook Yes; formal alignment pending.
 
+### Source materialization and loader completion with function projection at `.3.3.35`
+
+- Activated from clean `39cdef6598a5cea1702bb13b2c794c9fbbfb2b47` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read source_location.rs 465–561 (97 lines/2,951 bytes; SHA-256 `38c645f896c1583e22a1b0767d1cb44e6c8c4a772b7dd8a66fcb678a1c2ebb5a`), spec_loader.rs 1–564 (17,279 bytes; `849dc6ae9775c693f7c112b6ed9bcbf5370e22f7f3d9bb3e07e3307ace9e2131`) and spec_parser.rs 1–836 (30,993 bytes; `084d6e35ed31dc11f3b6800daf6354c27b54a28a5129b4ab5a708f8cf7eaac60`). All 1,497 lines/51,223 bytes and full files equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`; every range read untruncated. Source authority and loader physically complete.
+- Sealed materialization accepts Span/DerivedText, rechecks authority/source/range and emits provenance-indexed errors before detached text. Loader retains explicit roots, stable lexical candidate order, first regular file, Unicode path checks, strict UTF-8 and distinct pipeline stages. Full ADR0026 and native resolution cards reconcile historical Julia fallback wording; no resolution-policy change or new native loader execution is claimed. Current relative root paths are joined as supplied; cwd explicitly anchors cwd/exact relative candidates.
+- Definition projection executes the embedded grammar, validates fixed/signature/final-codeblock forms and exact scalar body/source correspondence, normalizes function parent paths/job IDs, then dispatches actionir-body.spec jobs with fixed policies. Stripping preserves scalar positions and CR/LF, not multibyte byte length; signature/error helper suffix remains next. One new/four existing Knowledge cards record source facts and bounded dated claims; the rollout card hit 66,112/65,536 bytes, so its exact new Rust authority sections move to a focused card with a retained pointer. Fresh resolution14/9/4, typed14/0/231, diagnostic3/11/6/8/20 and staged9legs/123base+129public mutations pass; all jobs complete. No new repair, native/full gate, runtime/public/policy change, recovery or purge. Roadmap Yes/codebase No/physical mdBook Yes; formal alignment pending.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -6876,7 +6887,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.3.31` is item 90/100 at `cc23abb9`;
   `.3.3.32` is item 91/100 at `c7c62c96`;
   `.3.3.33` is item 92/100 at `d3fd048f`;
-  `.3.3.34` is item 93/100 once committed.
+  `.3.3.34` is item 93/100 at `39cdef65`;
+  `.3.3.35` is item 94/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -7034,6 +7046,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.32` | Baseline scope; complete query/runtime and static prefix reading; eight native queries/four paired Get-CLI controls; independent assertions; semantic/diagnostic/recognition neutral proof; Knowledge/history/memory/staged diff/all nine doctrines | PASS reading/root cause; normal slot diagnostic correct; .68 token-use and .69 newline repairs owned. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.33` | Baseline scope; static/event/emitter reading; five paired query and three paired Get-CLI controls; independent source/index assertions; semantic/cursor/generated neutral proof; Knowledge/history/memory/staged diff/all nine doctrines | PASS reading/root cause; .70 owns grouped source/selector correlation and complete remainder handling. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.34` | Baseline scope; seven identity module compiles/two executable modules/ten results; independent assertions; generated/cursor/typed-source neutral proof; Knowledge/history/memory/staged diff/all nine doctrines | PASS reading/root cause; .71 literal encoding and .72 recognition parse coherence owned. |
+| `2026-09-07` | `SESSION-STARTUP-READING.3.3.35` | Baseline scope; complete source authority/loader and function projection reading; ADR0026/Knowledge reconciliation; resolution/typed/diagnostic/staged neutral proof; Knowledge/history/memory/staged diff/all nine doctrines | PASS reading; complete source authority/loader and accurate historical resolution provenance. |
 
 ## Commit Log
 
@@ -7133,6 +7146,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.3.32` | `SESSION-STARTUP-READING.3.3.32 - complete semantic query reading and own token use and newline repairs` | Complete query/runtime projection and separate actual token-use/parser gaps from a ruled-out failure-mapping concern. |
 | `SESSION-STARTUP-READING.3.3.33` | `SESSION-STARTUP-READING.3.3.33 - complete static semantic reading and own grouped edge correlation repairs` | Complete static/event reading and distinguish correct grouped execution from incomplete semantic source/index records. |
 | `SESSION-STARTUP-READING.3.3.34` | `SESSION-STARTUP-READING.3.3.34 - complete emitter reading and own literal and recognition adapter repairs` | Complete emitter reading and preserve independently measured generated identity/projection gaps. |
+| `SESSION-STARTUP-READING.3.3.35` | `SESSION-STARTUP-READING.3.3.35 - complete source authority and loader reading and reconcile function projection` | Complete source authority/loader and retain exact staged function projection and scalar-source boundaries. |
 
 ## Changelog
 
@@ -7276,3 +7290,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-07`: `.3.3.32` completes query/runtime projection and owns .68 authored token-use/.69 variable-newline repairs.
 - `2026-09-07`: `.3.3.33` completes static/event reading and owns grouped semantic source/index and parser-remainder repairs .70.
 - `2026-09-07`: `.3.3.34` completes emitter reading and owns generated literal and recognition adapter repairs .71/.72.
+- `2026-09-07`: `.3.3.35` completes source authority/loader reading and reconciles staged function projection plus dated resolution evidence.

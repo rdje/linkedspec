@@ -301,13 +301,5 @@ materialization. Reversed/invalid byte spans remain absent through the authority
 Capture maps are detached and key-sorted. Fresh neutral proof remains 14 complete/zero pending/231 mutations;
 these source observations do not rerun native/generated projections.
 
-## September 7 immutable Rust value and authority prefix reading
-
-`SESSION-STARTUP-READING.3.3.34` reads source_location.rs 1–464. Position, direct Span and DerivedText
-keep private authority/source identities, scalar offsets and provenance; cloned records expose no text or live
-owner. SourceAuthority snapshots decoded strings, assigns a checked monotonic AtomicU64 identity and retains
-scalar-boundary UTF-8 byte plus one-based line/column tables. LF increments the line; byte-to-scalar conversion
-requires an exact boundary. Direct spans require matching source/authority and non-reversed offsets; derived
-text requires every span to belong to this authority. Coordinate projection checks authority and range again.
-Materialization and the final helper suffix remain next. Current neutral proof is 14/0/231; this source reading
-does not rerun the older native value/helper/generated consumers or widen the public authored-value boundary.
+Rust private value/authority and sealed materialization source reading at startup .3.3.34-.35 now lives in
+[[rust-typed-source-authority-materialization]]; its exact sections were routed intact to stay within the per-card byte cap.

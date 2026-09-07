@@ -9,11 +9,11 @@ answers:
   - does the Rust primary CLI delegate named and file loading to the native API
   - what does Rust return when native spec loading fails
   - what did FUTURE-PARITY-BACKLOG 1.6.4.2 implement
-date: 2026-07-11
+date: 2026-09-07
 status: current
 tags: [rust, resolution, files, utf8, diagnostics, native-api, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.6.4.2 exports linkedspec_runtime::spec_loader with typed requests/options/results/errors, consumes all 14 name + 9 resolution + 4 text cases in tests/spec_loader.rs, composes full staged parse/validate/compile and execution, delegates primary CLI named/file selection, and passes 137/105/196/5/3/5/10 plus 61x2 CLI."
-reverify: "perl tools/check_native_spec_resolution_contract.pl && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test spec_loader && bash tools/run_rust_local.sh"
+reverify: "bash tools/project_data_run.sh perl tools/check_native_spec_resolution_contract.pl; bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test spec_loader"
 ---
 
 `linkedspec_runtime::spec_loader` is Rust's public file-oriented API. `SpecRequest::named(...)` selects a portable
@@ -33,3 +33,22 @@ Rust gate proves no CLI byte drift.
 
 Related facts: [[native-spec-resolution-contract]], [[rust-runtime-structured-diagnostics]],
 [[native-in-memory-backend-contract]], [[primary-cli-four-backend-matrix]].
+
+## September 7 complete loader reading
+
+`SESSION-STARTUP-READING.3.3.35` reads all 564 lines. Requests/options keep private owned values; options
+introduce no implicit search roots. Candidate construction preserves lexical first occurrence through a
+HashSet filter without changing order. Cwd is joined explicitly for named/exact-path relative candidates;
+search-root paths are joined as supplied. No canonicalization or recursive search is added by the loader.
+
+Name validation rejects surrounding Unicode whitespace, control characters, absolute prefixes, backslashes
+and invalid path components. Exact paths reject empty/NUL values. Resolution remembers the first non-file
+while continuing to later regular files; missing candidates are skipped, other metadata failures return a
+structured resolution error immediately. Selected paths must be Unicode text before loading or engine creation.
+Strict UTF-8 decoding preserves valid source bytes as decoded text. Full composition attributes parse,
+validation and compilation failures separately and retains the resolved path. Engine conversion adds the
+requested name only for name requests, and adds the resolved path for both kinds.
+
+Fresh neutral 14/9/4 proof passes; the native five-test/full-gate counts above remain dated July evidence.
+This reading checkpoint adds no new filesystem/runtime execution claim. Prior slice .3.3.34 already used the
+public exact-path loader successfully to emit ordinary and recognition modules from repository-local inputs.

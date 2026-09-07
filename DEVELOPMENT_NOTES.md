@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.35 — Function stripping preserves scalar coordinates while source authority keeps typed provenance
+
+Rust validates function source/body text against decoded-scalar spans, normalizes staged job identity and executes the fixed body parser before attaching its result. Stripping substitutes one space per non-newline scalar, so line/scalar positions remain stable while UTF-8 byte length can shrink. The semantic source mapper handles its own byte conversion. Separately, sealed source-value materialization revalidates authority and each provenance span; the native loader preserves explicit discovery and structured pipeline stages. The existing Knowledge-card cap caught the large rollout card at 66,112 bytes; the new Rust authority sections are routed intact to their own fact card with a retained pointer and unchanged budgets.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.34 — Native emitted modules expose gaps outside the neutral fixture corpus
 
 JSON string encoding does not cover Rust literal syntax for every accepted identity. Separately, recognition emission rewrites only plain parse to direct-value execution; default-options, disabled-trace and no-sink siblings still use the accumulator. Actual emitted-module compilation/execution establishes both limits independently of neutral gate success. .71/.72 own corrected literal boundaries, coherent accepted projections and public recurrence; uncalled private probe roles explain 34 dead-code warnings, while one unused emitted import belongs to the recognition rewrite.

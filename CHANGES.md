@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.35 — complete source authority and loader reading and reconcile function projection
+
+Completed source-location and native-loader reading and read the function-parser projection prefix (1,497 lines/51,223 baseline-identical bytes). One new/four existing Knowledge cards now explain sealed materialization, deterministic load stages, exact function/body metadata and scalar-preserving stripping; the earlier Julia fallback description is explicitly historical. Rust authority sections move intact to a focused card after the rollout card reached its byte cap. Resolution, typed-source, diagnostic and staged neutral checks pass. Runtime and public-book implementation remain unchanged during prerequisite reading.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.34 — complete emitter reading and own literal and recognition adapter repairs
 
 Completed emitter reading and the source-authority prefix (1,493 lines/53,383 baseline-identical bytes). Seven freshly emitted identity modules expose four Rust literal compilation failures. Two executable generated modules show recognition plain parse and inert-option siblings disagree on result shape; .71/.72 own both mechanisms and recurrence. Generated, cursor and typed-source checks pass. Two new/three existing Knowledge cards preserve evidence and limits; no runtime or public-book repair is made during prerequisite reading.

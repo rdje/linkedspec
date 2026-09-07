@@ -10,7 +10,9 @@ answers:
   - "can body_brace consume the outer function close"
   - "how are unbalanced user function bodies diagnosed"
   - "where is the user function definition spec file"
-date: 2026-07-02
+  - "how does Rust validate staged function payload and parse job metadata"
+  - "how does Rust strip function definitions without moving scalar offsets"
+date: 2026-09-07
 status: current
 tags: [implementation, staged-parsing, user-functions, ast, diagnostics, language-neutral]
 evidence: "STAGED-LINKED-PARSING.5.3.1 added specs/user_function_definition.spec as the executable grammar owner for top-level fn name(params) { body } definition shells and made LinkedSpec::UserFunctionRegistry consume its returned AST instead of raw-scanning. STAGED-LINKED-PARSING.5.3.2 made Rust consume the same spec-returned function_definition / function_definition_error AST through linkedspec-runtime::spec_parser; rust/linkedspec-core/src/parser.rs no longer extracts top-level fn definitions. Generated-handler debug showed the function_definition dependency map dispatches nested { to body_brace but dispatches the outer } to function_definition[1]; Rust runtime tests lock the same self-recursive finalizer behavior. Focused Perl/Rust tests cover whitespace params, nested braces, adjacent nested body_brace matches, strings, regex literals, malformed definitions, and unbalanced nested bodies returning function_definition_error nodes."
@@ -35,3 +37,26 @@ showed `body_brace` can start only on `{`; at the outer `}` close edge,
 `fn adjacent_braces() { {}{} }` therefore leave the outer close for the function rule.
 Unbalanced nested bodies return a `function_definition_error` AST instead of pushing a
 null node.
+
+## September 7 Rust projection reading
+
+`SESSION-STARTUP-READING.3.3.35` reads spec_parser.rs 1–836. Ordinary and traced entrypoints parse, validate,
+compile and execute the same embedded definition grammar, validate returned node shapes, project definitions,
+then parse the stripped rule source. The typed adapter distinguishes fixed-arity v1, callable-signature v2 and
+the v1 final-codeblock form, rejecting incompatible signature/parameter fields. Definition and body spans must
+match exact decoded-scalar text, with the body contained in its definition.
+
+Body payload and parse job must agree with the projected function's name, signature/parameter kinds, text and
+span. Jobs are restricted to actionir-body.spec/action_block, replace_field/body_ast, fail and function_body
+diagnostic ownership. Parent paths are checked for the functions/*/body_source shape, then rewritten with the
+actual node index; job IDs incorporate that index and the exact body span. The registry executes the validated
+job before FunctionDefinition receives body_ast. It does not substitute a Rust definition-shell scanner.
+
+Definition stripping sorts and rejects overlapping/out-of-range scalar spans, substitutes one space per
+non-newline scalar and preserves CR/LF. Scalar offsets and line layout are retained; multibyte UTF-8 byte
+length need not be retained. The semantic source mapper separately checks scalar-to-byte provenance as described
+in [[rust-semantic-call-staged-projection]]. SourceLocation materialization uses a different private authority.
+
+Remaining scalar/signature/error helper suffix 837–1022 is the next reading window. Fresh staged neutral proof
+passes 9 rollout legs/123 base mutations and 6 public documents/129 public mutations; this is not a new native
+function parser, trace or serialized carrier test run.
