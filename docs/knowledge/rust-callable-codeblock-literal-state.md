@@ -53,5 +53,12 @@ contract. Selected round-trip examples do not establish one for every typed node
 The September checkpoint records source-reading evidence and neutral staged/write
 checks, without rerunning the historical native construction suite.
 
+Checkpoint `.3.3.8` reads the remaining expression tests through EOF. The general
+`assert_roundtrip` helper compares selected expressions after Display/parse, but
+the fluent-chain tests inspect only selected structure and the trailing serde tests
+check decode success or statement count. The nested-write test separately checks
+complete typed equality. These differing assertions must not be summarized as one
+exhaustive AST or authored-source round-trip guarantee.
+
 Related facts: [[callable-codeblock-literal-contract]], [[perl-callable-codeblock-literal-record]],
 [[rust-callable-codeblock-dynamic-invocation]], [[variadic-callable-signature-seams]].

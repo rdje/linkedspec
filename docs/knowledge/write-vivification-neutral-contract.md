@@ -16,10 +16,10 @@ answers:
   - "what diagnostics does nested write vivification use"
   - "why must current static key index lowering change"
   - "how are nested write source spans measured"
-date: 2026-08-30
+date: 2026-09-07
 status: neutral contract frozen; implementation, admission, recurrence, and public closeout complete
 tags: [dsl, actionir, assignment, autovivification, diagnostics, source-spans, mutation, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.19.1.1 adds capability_conformance/write_vivification_contract.json and tools/check_write_vivification_contract.py. The independent checker validates five exact AST cases, seven syntax failures, 11 successful writes, 16 structural failures, three expression failures, three read exclusions, detached values, and 105 rejected mutations. Exact current probes remain non-vivifying on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Perl lowering proves quoted segments are currently tagged key while every computed segment is statically tagged/coerced as index; Rust/Dart/Julia/Lua preserve the same authored key/index split. No backend behavior or public-current capability changes in this leaf."
+evidence: "Historical neutral-freeze evidence from 2026-08-30; subsequent dated rollout updates below supersede its pending-backend wording. FUTURE-PARITY-BACKLOG.19.1.1 adds capability_conformance/write_vivification_contract.json and tools/check_write_vivification_contract.py. The independent checker validates five exact AST cases, seven syntax failures, 11 successful writes, 16 structural failures, three expression failures, three read exclusions, detached values, and 105 rejected mutations. Exact current probes remain non-vivifying on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Perl lowering proves quoted segments are currently tagged key while every computed segment is statically tagged/coerced as index; Rust/Dart/Julia/Lua preserve the same authored key/index split. No backend behavior or public-current capability changes in this leaf."
 evidence_update_2026_08_31_composition: "FUTURE-PARITY-BACKLOG.19.1.3 adds linkedspec-write-map-leaves-composition-v1 as a shared fixture consumed by both existing checkers. This write checker now validates eight additional nested writes spanning detached callback value, unrelated global, same-spelling shadow local, active receiver guard, and post-commit receiver targets while retaining all 105 base mutations. No write behavior is admitted."
 evidence_update_2026_08_31_perl_reference: "FUTURE-PARITY-BACKLOG.19.2.1 implements the unchanged v1 contract on Perl only. One-/many-segment parsing, authored spans, exact typed syntax/runtime diagnostics, evaluated string/integer dispatch, absent-versus-bound-null presence, dense isolated creation, post-evaluation snapshots, detachment, and rule/function invocation state are exercised directly from the frozen fixture. Rust, Dart, Julia, and Lua remain non-vivifying; capability/public admission remains pending."
 evidence_update_2026_09_01_rust_reference: "FUTURE-PARITY-BACKLOG.19.3.1 implements the same unchanged v1 contract on Rust. Parsed, serialized, generated-plan, emitted-source, independently compiled emitted Rust, and native execution preserve one typed assign_nested_access node with expression-bearing path segments and Unicode-scalar spans. Runtime strings/nonnegative integers select harray/array, absent state is distinct from bound null, structural building is isolated and dense, typed errors fail closed, and fresh user-function locals/parameters retain their presence rules. Dart, Julia, and Lua remain non-vivifying; map_leaves! and portable/public admission remain pending on Rust."
@@ -36,7 +36,7 @@ reverify: "bash tools/check_mutation_six_runtime.sh && bash tools/run_python_pro
 
 # Future neutral write-vivification contract
 
-The future `linkedspec-write-vivification-v1` contract keeps ordinary assignment syntax:
+The frozen `linkedspec-write-vivification-v1` contract keeps ordinary assignment syntax:
 
 ```text
 document["sections"][0]["title"] = title
@@ -59,10 +59,11 @@ One or many segments lower to `assign_nested_access`. Each `path_segment` retain
 Unicode-scalar `source_span`, and its complete typed `expression`; the parser does not assign a semantic `key` or
 `index` tag. The complete assignment retains exact source, span, bare binding base, ordered segments, and typed RHS.
 
-This unification is necessary rather than cosmetic. Current lowering assigns quoted literals to a static key path
-and computed expressions to a static integer-index path. A current `payload[segment]` therefore cannot implement
-the accepted rule when `segment` evaluates to a string. The future implementation leaves must replace that static
-choice without changing current behavior early.
+Before the implementation leaves, lowering assigned quoted literals to a static key path and computed expressions
+to a static integer-index path. That historical `payload[segment]` model could not implement the accepted rule when
+`segment` evaluated to a string. The completed write implementations replaced that static choice with evaluated
+expression segments. Ordinary reads retain their separately governed non-creating behavior. The original neutral
+fixture and its historical status remain unchanged; this September reading correction clarifies the rollout prose.
 
 ## Evaluation, creation, and commit
 

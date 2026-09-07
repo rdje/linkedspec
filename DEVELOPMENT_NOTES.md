@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.8 — test assertions and dated rollout evidence need precise scope
+
+A round-trip test name alone does not establish complete typed equality: the nested-write test checks it explicitly, while older serde/fluent cases check fewer properties. Historical assignment and write rollout descriptions likewise need their original dates and current successor pointers. Reading the rule-only parser's empty function registry does not bypass the separate spec-defined runtime adapter.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.7 — lexical observations and historical milestones need separate limits
 
 A probe's positive control must establish that its code ran. No-edge Perl E cases returned zero for both cat arities, so known .27 debt made them unsuitable; explicit action-edge controls isolate the helper difference. The hash matrix separately shows a single colon swallowed by name scanning and the initializer lost through .45. Own both causes before durable findings, retain exact commands, and avoid inferring untested arities or other backends.
