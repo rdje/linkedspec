@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.3 — normalization and diagnostics have distinct compiler boundaries
+
+The callable visitor restores ordinary eager blocks while recursively normalizing contextual blocks. Whole-spec validation then handles removed selectors, typed write/mutation state, and recognition reachability at separate boundaries. Rule-block parse fallback remains a confirmed repair, so successful compilation alone cannot demonstrate that authored lifecycle code survived. Repeated I accumulation is distinct from the other single lifecycle slots.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.2 — build declarations and reading coverage are separate evidence
 
 Cargo metadata establishes declared compiler requirements, not the earliest compiler on which the complete project works. Full lockfile reading is now backed by two exact-range checkpoints rather than inferred from package counts. AST comments also need reconciliation with current getters and neutral policy: default minimum zero differs from OR+ one, and & belongs to AND. Callable normalization preserves typed final-block and staged-extension boundaries; its recursive suffix remains separately owned.

@@ -5,21 +5,24 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.2` are reconciled and `.3.3.3`–`.3.3.66` plus closeout remain pending.
+  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.3` are reconciled and `.3.3.4`–`.3.3.66` plus closeout remain pending.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.3.2` reads Rust manifests, the complete AST, and callable-contract prefix; owns precise documentation evidence.
-  This is item 61/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.3.3` reads callable normalization and compiler validation/lowering; preserves the pending parser-boundary repairs.
+  This is item 62/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.3.3`: reconcile the callable-contract suffix and compiler prefix, retaining the task-owned parser/compiler defects.
+- Activate `SESSION-STARTUP-READING.3.3.4`: reconcile compiler resolution, descriptor projection, entry selection, and portable diagnostics.
   Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
 
 ## Recent Completions
+
+- `2026-09-07` — `SESSION-STARTUP-READING.3.3.3` reconciles callable traversal and compiler prefix (1,499 lines / 56,169 bytes).
+  Existing .45/.47 findings stay owned; neutral checks do not claim native-suite execution.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.2` reconciles six Rust reading scopes (1,483 lines / 59,455 bytes).
   Locked metadata contradicts README 1.85+; .41.2/.41.7 own related comments and public claims.
@@ -65,9 +68,6 @@
 
 - `2026-09-06` — `SESSION-STARTUP-READING.3.2.43` reads 982 lines / 35,427 bytes across three semantic owners.
   Retains unchanged passing proof, qualifies July milestones, and verifies exact consumed-spool cleanup.
-
-- `2026-09-06` — `SESSION-STARTUP-READING.3.2.42` reads semantic call/index owners and preserves all 50 book files / 1,956,582 bytes.
-  Twenty semantic tests pass; .41/.42/.43 own book alignment, combined-mode validation, and inline-lifecycle projection repairs.
 
 ## History
 

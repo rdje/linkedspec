@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.3 — read callable normalization and compiler validation prefix
+
+Reconcile the callable-contract suffix and compiler prefix against the unchanged reading baseline. Record normalization traversal, whole-spec validation order, recognition reachability, typed write/mutation checks, lifecycle slots, and edge lowering through existing Knowledge. Preserve the pending malformed-block and whitespace-mutation repairs without changing runtime or public-book behavior.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.2 — read Rust manifests AST and callable prefix
 
 Reconcile the Cargo.lock suffix, workspace/core manifests, complete Rust README and AST, and callable-contract prefix against unchanged baseline ranges. Preserve the 199-package offline metadata evidence for README's 1.85+ mismatch with required local 1.95 declarations, without claiming an experimentally proven minimum. Extend existing .41.2/.41.7 ownership for mode comments, generated/CLI counts, and command routing; update Knowledge and retain dated cache evidence. No runtime or public-book change.
