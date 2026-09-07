@@ -35,7 +35,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`, `SESSION-STARTUP-READING.50`, `SESSION-STARTUP-READING.51`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`, `SESSION-STARTUP-READING.50`, `SESSION-STARTUP-READING.51`, `SESSION-STARTUP-READING.52`, `SESSION-STARTUP-READING.53`, `SESSION-STARTUP-READING.54`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -1106,12 +1106,21 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.8 - read remaining Rust expression tests and core parser entry`
 
 - ID: `SESSION-STARTUP-READING.3.3.9`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 9: 1,496 lines/fragments, 49,733 bytes.
   Scope: `rust/linkedspec-core/src/parser.rs` lines 79–1574.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Read the exact parser continuation without truncation; current-baseline and range-digest proof; existing rule-header/grouped-edge/body-parser Knowledge reconciliation and Toolbox-first controls for surprises; neutral standalone/cursor/Unicode contracts; ten paired native body controls, three paired matches controls, direct Perl lowering/bootstrap controls; .52-.54 task-first ownership; Knowledge/memory/all doctrines/history and scope/diff.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Read parser.rs 79–1574 completely: 1,496 lines / 49,733 bytes; range digest and complete file
+    match baseline. Neutral standalone 9/4/6/3/6/15/7/14, cursor 36/18/8/60 and Unicode 806/9/8/2
+    checks pass. Ten paired native body cases, three paired matches cases, four Perl lowering controls and
+    three direct bootstrap dumps isolate compact fluent, header suffix and regex-brace defects. .52-.54
+    own bounded repairs before Knowledge. All diagnostic processes completed; required continuity proof
+    passes before commit. No runtime, public-book, full-native or whole-codebase signoff.
+  Commit: `SESSION-STARTUP-READING.3.3.9 - read Rust rule-body parsing and own lexical boundary repairs`
 
 - ID: `SESSION-STARTUP-READING.3.3.10`
   Status: `pending`
@@ -3148,11 +3157,106 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     E probes returned zero for both Perl cases and are excluded as arity evidence under known .27 debt.
   Commit: `pending`
 
+- ID: `SESSION-STARTUP-READING.52`
+  Status: `pending`
+  Goal: Preserve compact Rust fluent argument whitespace and literal delimiters.
+  Dependencies: `.3`/`.4`/`.5`; coordinate standalone teaching with `.41.6`.
+  Children: `.52.1`, `.52.2`
+  Acceptance: Repair both independently confirmed lexical boundaries without changing helper semantics or
+    widening accepted calls. Reconcile supported lifecycle/edge/continuation carriers and public examples.
+
+- ID: `SESSION-STARTUP-READING.52.1`
+  Status: `pending`
+  Goal: Accept horizontal whitespace before compact Rust fluent argument parentheses.
+  Acceptance: Preserve arguments for I.return ("ok") and the tab twin, retaining no-space and braced controls.
+    Reconcile scanner/completeness behavior for lifecycle, action, blind, bare and continuation routes;
+    preserve named arguments, missing-parenthesis errors, source provenance and typed diagnostics.
+    Run native and supported reconstructed/generated controls, update teaching and recurrence.
+  Verification: `pending` repair — paired primary Rust CLI/Perl Get controls return "ok" for compact no-space
+    and braced-space calls; Rust rejects compact space/tab while Perl returns "ok". The fluent scanner checks
+    starts_with('(') before skipping whitespace; I raw-suffix validation then rejects its leftover arguments.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.52.2`
+  Status: `pending`
+  Goal: Keep quoted and regex parentheses out of compact fluent argument depth.
+  Acceptance: Replace delimiter-only extraction with the established lexical argument boundary rules.
+    Lock I.return(")") against the braced twin, then quotes, escaped quotes, regex delimiters, nested calls,
+    multiline calls, attached conditions and malformed endings across every actual caller. Preserve exact
+    source/diagnostics and valid helper behavior; verify native/generated carriers and public recurrence.
+  Verification: `pending` repair — compact I.return(")") fails Rust compilation while its braced twin returns
+    ")" on both Rust and Perl; Perl accepts the compact form. extract_paren_content_with_end counts every
+    parenthesis without quote/regex state, unlike the separate completeness scanner.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.53`
+  Status: `pending`
+  Goal: Preserve unsupported Rust header-rest suffixes for the same validation as body-line twins.
+  Dependencies: `.3`/`.4`/`.5`; coordinate malformed-block propagation with `.45` and public examples with `.41.6`.
+  Acceptance: Lock Top:: I { return("ok") } @unexpected against the body-line twin and valid compact/multiline
+    controls. Preserve unconsumed invalid text instead of discarding it in parse_inline_body; reconcile
+    intentional legacy Raw compatibility without silently widening it. Cover explicit/bare I, recognized
+    successors, comments, multiline continuation origin and exact diagnostic positions through supported
+    parsed/reconstructed/generated routes. Review the neighboring body loop's unreachable advanced &&
+    !consumed_line branch, whose consumed_line is assigned true immediately beforehand; retain correct line
+    advancement and split mechanical cleanup if needed. Add recurrence and accurate book coverage.
+  Verification: `pending` repair — Rust rejects the body-line invalid suffix but compiles/invokes the header
+    form successfully with "ok"; Perl rejects both with Unsupported lifecycle block remainder. Inline parsing
+    breaks on None without Raw retention; ordinary body parsing retains an I suffix and validation rejects it.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.54`
+  Status: `pending`
+  Goal: Preserve regex-literal braces through Perl and Rust rule-block scanners.
+  Dependencies: `.3`/`.4`/`.5`; coordinate existing attached-tail `.9`, rule-block `.45`, and `.41.6` teaching.
+  Children: `.54.1`, `.54.2`, `.54.3`
+  Acceptance: Keep regex delimiters lexical while preserving existing regex-versus-division distinctions,
+    quoted text, nesting, source provenance and malformed-source diagnostics. Do not infer other backend
+    outcomes from the two measured routes.
+
+- ID: `SESSION-STARTUP-READING.54.1`
+  Status: `pending`
+  Goal: Repair Perl bootstrap rule-block regex-brace truncation.
+  Acceptance: Lock I { return(matches("}", /}/)) } against quoted-pattern and /x/ controls through the
+    bootstrap owner and public Get. Reconcile CURLY_BRACE lexical alternatives and all explicit, bare,
+    action, blind and nested callers; keep attached-tail .9 distinct until shared behavior is proven.
+    Preserve complete payload/source and opening line, slash escapes/classes/quantifiers, and malformed
+    diagnostics. Verify emitted source independently and add recurrence/book coverage.
+  Verification: `pending` repair — direct run_bootstrap_parse returns ICODE ending at return(matches("}", /
+    with source ending inside /}; both controls retain full payloads. Public Get produces a coderef but
+    execution returns null with rule_handler_compile for Top/_default. CURLY_BRACE has brace and quoted-string
+    alternatives only; NON_ACTION_CODE_BLOCK stops at its first closing-brace match. Control matches values are
+    Perl 1 and Rust true, not a newly investigated boolean representation issue.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.54.2`
+  Status: `pending`
+  Goal: Repair Rust rule-block collection and validation for regex-literal braces.
+  Acceptance: Align scan_line_for_braces_chars and brace_depth_delta with the accepted literal boundary,
+    retaining complete source, line origins and malformed balance diagnostics. Lock matches("}", /}/) against
+    quoted-pattern and /x/ controls; cover explicit/bare lifecycle and attached edge bodies, nested literals,
+    escapes/classes/quantifiers, multiline quote state and supported serialized/generated carriers.
+    Preserve source expression semantics and avoid accepting genuinely unbalanced blocks.
+  Verification: `pending` repair — Rust primary CLI rejects the regex-brace lifecycle source at compilation
+    while quoted-pattern and ordinary-regex controls execute true. The outer collector and balance validator
+    track quotes/braces but no regex state. Complete expression parsing is a separate inner boundary.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.54.3`
+  Status: `pending`
+  Goal: Close regex-brace public teaching and recurring parity after the two concrete repairs.
+  Dependencies: `.54.1`, `.54.2`; reconcile `.9` without treating its distinct scanner as already repaired.
+  Acceptance: Reverify portable authority and every supported backend/carrier, own any further gaps before
+    admitting broader parity, publish worked regex-brace examples and negatives, and run required canonical
+    boundary proof. Preserve dated pre-repair controls and exact recurrence ownership.
+  Verification: `pending`
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.9` | `pending` | read the core rule parser continuation and reconcile body/edge parsing boundaries. |
+| 1 | `SESSION-STARTUP-READING.3.3.10` | `pending` | read remaining core parser tests, trace implementation, and compiled-type prefix. |
 
 ## Reading Ledger
 
@@ -3163,7 +3267,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.8` are reconciled and `.3.3.9`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.9` are reconciled and `.3.3.10`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -5405,6 +5509,42 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - Fresh neutral write/callable/uniform checks validate their authorities only. Known .45–.47 and .49–.51
   runtime repairs remain pending; no runtime, public-book, policy or generated-format change.
 
+### Rust body-parser reading and bounded lexical diagnosis at `.3.3.9`
+
+- Activated from clean `2bdea14f8b54abd7e79b2d66f023b8fdb89fbaa1` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read parser.rs 79–1574 in six untruncated ranges: 1,496 lines / 49,733 bytes;
+  SHA-256 77358d16bbbad32395002c3109196e91f13fb5d58ad8c492ca5fbe5be80ced9f.
+  The complete current file equals baseline. The remaining parser tests begin at line 1575.
+- Trace wrapping calls the ordinary parser. Headers use pinned Unicode labels, stop modes at whitespace
+  or slash and restore unknown tokens. Inline/body parsing share element classification but differ in
+  unsupported-suffix retention. Action grouped selectors are shared/final-label-adjacent; bare selectors
+  are per-target with optional space; blind edges retain their separate numeric-index grammar.
+- Body classification orders named/anonymous regexes, action/blind edges, lifecycle, gap/split directives,
+  conditional/fluent syntax, standalone I and complete-line bare edges. Block extraction retains authored
+  source separately from normalized interior. Attached branch and multiline fluent helpers have distinct
+  quote/regex/completeness boundaries, so their shared names do not prove equivalent lexical behavior.
+- After Knowledge/Toolbox review, ten paired Rust CLI/Perl Get controls isolate compact space/tab rejection,
+  quoted-parenthesis truncation and invalid header-suffix loss. Compact no-space and braced controls execute
+  the intended I return on both runtimes. Own .52.1/.52.2 and .53 before Knowledge; .53 also owns reviewing
+  the unreachable advanced && !consumed_line branch without claiming a separately observed runtime failure.
+- The raw-regex brace control fails on both runtimes, so do not classify it as a Rust-only issue. Three
+  accepted matches controls show quoted-pattern and /x/ success (Rust true / Perl 1), but /}/ fails Rust
+  compilation and returns Perl null with rule_handler_compile for Top/_default. No boolean parity claim.
+- Three direct primary-bootstrap dumps independently show full control ICODE payloads but the /}/ payload
+  truncated to return(matches("}", / with source ending inside the regex. All report ok=1 and position 67.
+  Perl CURLY_BRACE offers only brace/quoted-string alternatives; Rust outer collection and validation
+  similarly omit regex state. Own .54.1/.54.2 plus later cross-backend/public .54.3, coordinated with the
+  distinct existing attached-tail repair .9. Other backends and generated execution remain unmeasured here.
+- Four direct Perl lowering controls preserve raw regex assignments and quoted/spaced return text. The
+  attempted parser_source_ref capture produced no snippets and establishes no emitted-source evidence.
+  The direct bootstrap owner and native results provide the causal proof. Exact commands live in
+  rust-body-parser-lexical-boundary-defects; all subprocesses completed without timeout.
+- Additional diagnostic source reads cover validation.rs 1056–1079/1080–1190 and Perl BootstrapSpec/Core.pm
+  734–821/1079–1106/1130–1211 plus the BootstrapSpec.pm facade. They do not replace queued validation reading.
+- Fresh neutral standalone/cursor/Unicode proof remains green while these concrete controls fail. Preserve
+  the uncovered boundaries and source mechanisms, update existing standalone/header/attached-tail Knowledge,
+  and retain the earlier .45–.47/.49–.51 repairs. No implementation, policy or public-book change.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -5469,7 +5609,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   `.3.3.5` is item 64/100 at `2af9c321`;
   `.3.3.6` is item 65/100 at `cbd871c6`;
   `.3.3.7` is item 66/100 at `d3fd3c40`;
-  `.3.3.8` is item 67/100 once committed.
+  `.3.3.8` is item 67/100 at `2bdea14f`;
+  `.3.3.9` is item 68/100 once committed.
   `.1` belongs to the prior checkpoint. This intermediate boundary does not trigger a push.
 
 ## Decisions
@@ -5601,6 +5742,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.6` | Exact continuation/current-baseline proof; mutation/hash/callable Knowledge; neutral mutation 4/14/5/10/8/6/1 and 167+592 mutations; retained .45/.46/.47 controls; focused continuity | PASS reading and neutral contract proof; source boundary repairs remain pending with unchanged diagnostic limits. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.7` | Exact lexical range/current-baseline proof; callable 7/11/9/7/4/8/23; six asserted Rust/Perl-lowering hash controls; three paired native cat controls; .50/.51 task-first ownership; .49 limits; focused continuity | PASS reading and bounded diagnosis; .50/.51 repairs pending; whole-codebase reading still No. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.8` | Three exact ranges/current-baseline proof; write 5/7/11/16/3/3/8/105; callable 7/11/9/7/4/8/23; uniform 11/7/6/8; historical Knowledge and .41.6 ownership; focused continuity | PASS reading and neutral proof; parser suffix and all runtime repairs remain pending. |
+| `2026-09-07` | `SESSION-STARTUP-READING.3.3.9` | Exact parser range/current-baseline proof; standalone 9/4/6/3/6/15/7/14; cursor 36/18/8/60; Unicode 806/9/8/2; ten paired body and three matches controls; four lowering/three bootstrap controls; .52-.54 ownership; focused continuity | PASS reading and bounded diagnosis; compact fluent/header/regex-brace repairs pending with exact evidence. |
 
 ## Commit Log
 
@@ -5674,6 +5816,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.3.6` | `SESSION-STARTUP-READING.3.3.6 - read Rust expression parsing and retain boundary repair evidence` | Read 1,461 expression-parser lines; retain exact Unicode and mutation-whitespace repair evidence. |
 | `SESSION-STARTUP-READING.3.3.7` | `SESSION-STARTUP-READING.3.3.7 - read Rust lexical boundaries and own hash and cat repairs` | Read 1,497 lexical/test lines; own adjacent hash-colon loss and cat arity divergence as .50/.51. |
 | `SESSION-STARTUP-READING.3.3.8` | `SESSION-STARTUP-READING.3.3.8 - read remaining Rust expression tests and core parser entry` | Complete expr.rs reading and core entry prefix; reconcile test assertion limits and historical binding/rollout prose. |
+| `SESSION-STARTUP-READING.3.3.9` | `SESSION-STARTUP-READING.3.3.9 - read Rust rule-body parsing and own lexical boundary repairs` | Read rule-body parser; own compact fluent, invalid header suffix and Perl/Rust regex-brace repairs .52-.54. |
 
 ## Changelog
 
@@ -5791,3 +5934,4 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-07`: `.3.3.6` reconciles expression parsing, nested writes/mutations and brace classification; links existing UTF-8 and whitespace defects without overstating runtime proof.
 - `2026-09-07`: `.3.3.7` reconciles lexical/test reading and owns confirmed adjacent hash-colon loss and cat arity divergence under .50/.51; retains prior regex repair limits.
 - `2026-09-07`: `.3.3.8` completes expression-test reading and core entry prefix; qualifies old reconstruction, assignment and rollout claims without changing runtime.
+- `2026-09-07`: `.3.3.9` reads rule-body parsing and owns .52-.54 lexical repairs, preserving paired native and exact bootstrap truncation evidence without runtime changes.

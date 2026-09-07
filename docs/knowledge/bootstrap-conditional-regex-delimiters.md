@@ -5,7 +5,7 @@ answers:
   - why does a regex brace in an attached else block fail on Perl
   - why is bootstrap conditional slash-quote recognition unreachable
   - where is attached conditional regex truncation tracked for repair
-date: 2026-09-06
+date: 2026-09-07
 status: confirmed defect; repair pending SESSION-STARTUP-READING.9
 tags: [perl, bootstrap, regex, control-flow, diagnostics]
 evidence: "SESSION-STARTUP-READING.3.2.4 reads baseline BootstrapSpec/Core.pm and probes its attached-tail owner: quoted-brace control consumes 20/20 characters, regex-brace tail consumes only 16/20, and escaped-parenthesis regex condition only 25/44. Public parser with quoted matches pattern returns 1; regex /}/ returns undef with rule_handler_compile Search pattern not terminated."
@@ -43,5 +43,12 @@ scanner controls establish the truncation; the public run establishes user-visib
 Repair `.9` follows required reading and `.7`/`.8`. It must preserve the existing division-symbol distinction,
 lexical escapes and quoted text, source positions, nested tails, and all three caller forms. Broader regex/brace
 behavior outside this attached-tail owner was not verified by this diagnostic slice.
+
+The later September 7 checkpoint `SESSION-STARTUP-READING.3.3.9` independently
+measures explicit lifecycle-I regex-brace truncation in the bootstrap's
+`CURLY_BRACE` scanner. That separate owner is `.54.1`, coordinated with this `.9`
+repair; neither scanner is fixed by documenting the other. See
+[[rust-body-parser-lexical-boundary-defects]] for its exact bootstrap/public controls
+and the separately measured Rust collector/validator boundary.
 
 Related: [[spec-arithmetic-call-surface-ground-truth]], [[bootstrapspec-vs-spec-spec-dual-path]].

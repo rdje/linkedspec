@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.9 — read Rust rule-body parsing and own lexical boundary repairs
+
+Read Rust rule-body parsing and reconcile header/selector/brace ownership. Ten paired body cases and three matches cases isolate compact whitespace/quoted-parenthesis failures, header-only invalid-suffix loss, and Perl/Rust regex-brace truncation; direct bootstrap dumps prove the shortened ICODE payload. Add bounded repair owners .52-.54 before Knowledge, preserve exact commands and evidence limits, and update current repair pointers. No runtime or public-book change.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.8 — read remaining Rust expression tests and core parser entry
 
 Read the remaining expression tests, crate entrypoint and rule-parser prefix against baseline. Record exact Unicode/serde assertions and narrower older round-trip checks. Qualify historical aggregate-selector/storage and pre-admission write guidance, route stale test naming to .41.6, and preserve the spec-defined function adapter boundary. Fresh neutral write/callable/uniform checks pass; no runtime or public-book change.

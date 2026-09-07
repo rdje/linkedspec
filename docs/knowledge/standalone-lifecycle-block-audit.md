@@ -22,7 +22,7 @@ answers:
   - "how must a Dart next action block be owned after bare blocks became lifecycle I"
   - "can lifecycle fluent calls have whitespace before their argument list"
   - "why did Dart and Julia reject I.return ([])"
-date: 2026-08-29
+date: 2026-09-07
 status: implemented on all five backends and six runtime routes under FUTURE-PARITY-BACKLOG.15.1-.2
 tags: [dsl, lifecycle, codeblock, parser, perl, rust, dart, julia, lua, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.15.0 ratified ADR 0094 from the five-backend audit. `.15.1` adds one neutral explicit/bare twin contract to Perl/Rust and repairs Rust duplicate-I order. `.15.2` makes Dart, Julia, PUC Lua, and LuaJIT emit lifecycle I directly; preserves exact source/opening line and explicit-twin ActionIR semantics; proves native, reconstructed, emitted/generated, ownership, malformed, and inert legacy-plain paths; and gives specs/spec.spec a standalone production plus reserved lifecycle precedence. Dart and Julia retain a post-lifecycle raw suffix only when it is not a recognized rule header, preserving established typed action-diagnostic precedence. All explicit/bare duplicate combinations return first-second in authored order. The exact recurring gate covers five backends, six runtime routes, self-hosting, generated/capability/language ledgers, and public no-drift."
@@ -63,6 +63,14 @@ fixtures put their child headers at actual line boundaries, where existing colle
 Compact lifecycle fluent calls permit whitespace between the method name and its parenthesized argument list.
 For example, `I.return ([])` and `I.return([])` both lower to the same `return([])` lifecycle statement. Dart and
 Julia explicitly lock this spelling because the shipped tclite grammar uses it.
+
+The September 7 reading controls find a remaining Rust gap in this accepted spelling:
+`I.return ("ok")` and its tab twin fail Rust compilation while the compact no-space
+and explicit-block forms succeed. Startup `.52.1` owns the repair. Quoted compact
+parentheses, header-only invalid suffix loss, and outer regex-brace truncation have
+separate owners `.52.2`, `.53`, and `.54`; exact controls and limits are retained in
+[[rust-body-parser-lexical-boundary-defects]]. The earlier shorthand admission does
+not close these newly measured boundaries.
 
 The permanent self-hosted grammar now has a standalone production. A complete-line lifecycle production wins
 before generic bare-edge matching, so all reserved markers remain lifecycle syntax and the bare form projects as
