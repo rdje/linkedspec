@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.49 - reconcile Terse and legacy corpus reading
+
+Stored legacy smokes exercise narrow paths: TkGui is empty, tablegrep is one TERM and VHDL is library/use text. Direct-root and LX-root recursion preserve different outer array shapes. Existing Knowledge retains the richer-case limits.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.48 - reconcile user-function edge grammar reading
 
 Block, fluent and bare edge forms retain different fields; grouped bare edges add source_form. Recursive blocks preserve nested quoted content. Existing grammar Knowledge applies; this is source reading evidence.

@@ -1763,7 +1763,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.48 - reconcile user-function edge grammar reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.49`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 49: 1,500 lines/fragments, 46,200 bytes.
   Scope: `rust/linkedspec-runtime/tests/corpus/spec_spec_user_function_definition/input.spec` lines 174–226;
     `rust/linkedspec-runtime/tests/corpus/spec_spec_user_function_definition/input.txt` lines 1–6;
@@ -1968,8 +1968,11 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     `rust/linkedspec-runtime/tests/corpus/vhdl_library_use/expected.json` lines 1–12;
     `rust/linkedspec-runtime/tests/corpus/vhdl_library_use/input.spec` lines 1–335.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact owned-range/baseline audit, JSON decoding, manifest membership and unchanged grammar mirror; Knowledge, memory, all doctrines, histories and diff.
+  Canonical trigger: `none` — bounded reading checkpoint; fixture and runtime behavior unchanged.
+  Verification: All 202 scopes reconcile: 201 nonempty plus explicit empty TkGui input, 1,500 lines / 46,200 baseline-identical bytes. Ordered path/kind/range/byte/SHA audit is `8bc8ce563d4ccfe4a620b0ae6f4d0de28f28351d01678fe0b869491eec800baf`; 67 JSON files decode and all 68 case directories belong to the 105-case manifest. The final user-function grammar suffix completes all four mirror checkpoints with unchanged .44 identity. Reading covers tablegrep TERM fields, tagged Tclite quote/command structures, 59 Terse fixtures for literals/read/copy/assignment/receiver/control/helper/function behavior, empty TkGui, direct versus LX-root recursion and VHDL library/use tags plus grammar through line 335. Legacy-smoke Knowledge retains its historical richer-case limits; stored fixture evidence is not fresh runtime parity.
+  Commit: `SESSION-STARTUP-READING.3.3.49 - reconcile Terse and legacy corpus reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.50`
   Status: `pending`
@@ -4220,7 +4223,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.49` | `pending` | Complete the user-function grammar suffix and continue tablegrep, Tclite, Terse and VHDL corpus reading. |
+| 1 | `SESSION-STARTUP-READING.3.3.50` | `pending` | Finish the VHDL grammar and read corpus, diagnostics, duplicate-slot and classifier test consumers. |
 
 ## Reading Ledger
 
@@ -4231,7 +4234,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.48` are reconciled and `.3.3.49`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.49` are reconciled and `.3.3.50`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read at baseline; .3.2.42 preserves coverage, and c8759242 reviews/renders the approved parked-coverage delta. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -6990,6 +6993,7 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- `2026-09-08` `.3.3.49`: 202 exact scopes, one explicit empty, 67 decoded JSON files, 68 manifest-owned cases and unchanged grammar mirror pass. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.48`: Exact range and complete mirror identity pass; unchanged .44 Unicode proof applies. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.47`: Four exact scopes, fixture JSON and unchanged canonical mirrors pass; .44 Unicode proof remains applicable. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.46`: Four exact scopes, JSON decode and unchanged mirror identities pass; .44 Unicode proof remains applicable. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
@@ -7289,3 +7293,4 @@ Each canonical task node owns its exact `Commit` subject and retained completion
 - `2026-09-08`: `.3.3.46` reconciles comment-skip and minimal-rule reading; next `.3.3.47`.
 - `2026-09-08`: `.3.3.47` reconciles minimal-rule and user-function reading; next `.3.3.48`.
 - `2026-09-08`: `.3.3.48` reconciles user-function edge grammar reading; next `.3.3.49`.
+- `2026-09-08`: `.3.3.49` reconciles Terse and legacy corpus reading; next `.3.3.50`.

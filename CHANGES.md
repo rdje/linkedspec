@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.49 - reconcile Terse and legacy corpus reading
+
+Reconcile 202 scopes: 1,500 lines / 46,200 bytes, including one explicit empty input. Decode 67 JSON files and verify all 68 case directories against the manifest. Complete the last self-hosted mirror and read Terse, legacy, root-recursion and VHDL-prefix fixtures; retain historical smoke limits. Focused checks pass; production behavior is unchanged.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.48 - reconcile user-function edge grammar reading
 
 Reconcile the user-function grammar edge range: 32 lines / 60,575 baseline-identical bytes. Exact mirror identity retains .44 Unicode proof. Record distinct edge fields and balanced blocks; the suffix remains .49-owned. Focused continuity checks pass; behavior is unchanged.
