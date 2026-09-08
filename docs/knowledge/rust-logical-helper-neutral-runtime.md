@@ -10,6 +10,7 @@ answers:
   - "which Rust generated roles prove the logical helper contract"
   - "what fields are in a Rust logical arity diagnostic"
   - "does Rust logical parity activate explicit codeblock literals"
+  - "does the current Rust logical consumer execute the codeblock truth row"
 date: 2026-09-07
 status: current
 tags: [rust, logical, truthiness, arity, runtime, diagnostics, generated-source, FUTURE-PARITY-BACKLOG]
@@ -58,3 +59,12 @@ the iteration ceiling. Unknown helpers first try a bound codeblock; active-codeb
 failure is typed, while ordinary unknown helpers warn and return undef. The neutral
 logical checker passes 17 truthiness/10 helper/3 effect cases and 26 mutations;
 this update does not rerun native generated logical consumers.
+
+## September 8 complete consumer reading
+
+Startup `.3.3.54` reads all 496 lines / 18,335 baseline-identical bytes of the logical consumer.
+The current truth adapter still returns None for the codeblock row and verifies that this is the only
+skipped row. Later callable construction/invocation proof remains separately owned; this consumer
+does not itself exercise that row. Its four-module emitted workspace asserts child-process success,
+as does the completed fifteen-module gap consumer. These are source-reading facts, not fresh native
+or emitted execution results.
