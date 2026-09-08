@@ -55,6 +55,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Status: `done`
   Goal: Implement Dart as the first future full-parity LinkedSpec backend.
   Children: `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`
+  Commit: `FUTURE-PARITY-BACKLOG.1.1 - scope Dart backend parity plan`; retained completion note: Tree created by the backlog scoping leaf; implementation commits use `DART-BACKEND-PARITY.*` leaf ids.
 
 - ID: `DART-BACKEND-PARITY.1`
   Status: `done`
@@ -73,7 +74,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     the SDK initializes `~/.dart-tool`; after that, `dart help format`, `dart help analyze`,
     `dart help test`, `dart pub --help`, and `dart create --help` run cleanly in the workspace.
     Package layout and commands are recorded below. No Dart package files were created.
-  Commit: `DART-BACKEND-PARITY.1.1 - record Dart toolchain and layout`
+  Commit: `DART-BACKEND-PARITY.1.1 - record Dart toolchain and layout`; retained completion note: Toolchain/layout preflight; no package files.
 
 - ID: `DART-BACKEND-PARITY.1.2`
   Status: `done`
@@ -87,7 +88,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     and `dart run bin/corpus_runner.dart --help` pass. Pub dependency download and analyzer state initialization
     required approved out-of-sandbox access. Repository gates pass after Knowledge Map regeneration.
     Parser/runtime/corpus semantics remain deferred.
-  Commit: `DART-BACKEND-PARITY.1.2 - create Dart scaffold smoke package`
+  Commit: `DART-BACKEND-PARITY.1.2 - create Dart scaffold smoke package`; retained completion note: Minimal package scaffold; no parser/runtime/corpus semantics.
 
 - ID: `DART-BACKEND-PARITY.1.3`
   Status: `done`
@@ -99,7 +100,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     names/duplicates, detects missing and stale fixture directories, requires `input.spec`, `input.txt`,
     and `expected.json`, and parses expected JSON without executing parser semantics. Dart format, analyze,
     tests, corpus-runner real-corpus load, and CLI help checks pass.
-  Commit: `DART-BACKEND-PARITY.1.3 - add Dart corpus manifest IO scaffold`
+  Commit: `DART-BACKEND-PARITY.1.3 - add Dart corpus manifest IO scaffold`; retained completion note: Manifest IO scaffold; `.1` foundation container closes.
 
 - ID: `DART-BACKEND-PARITY.2`
   Status: `done`
@@ -117,7 +118,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     body-element variants, `EdgeTarget`, and `FluentCall`. `test/spec_ast_test.dart` proves JSON
     round-trips and Rust-equivalent `RuleMode` helper behavior. Dart format, analyze, tests, and CLI
     smoke checks pass.
-  Commit: `DART-BACKEND-PARITY.2.1 - define Dart frontend AST data types`
+  Commit: `DART-BACKEND-PARITY.2.1 - define Dart frontend AST data types`; retained completion note: Source-level AST/data types; no parser behavior.
 
 - ID: `DART-BACKEND-PARITY.2.2`
   Status: `done`
@@ -131,7 +132,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     boundaries. `test/spec_parser_test.dart` covers focused Rust-compatible parser seams, all checked-in
     `specs/*.spec`, and corpus `input.spec` files that do not start with top-level `fn` definitions.
     Strict validation remains `.2.3`; top-level function-shell integration remains `.2.4`.
-  Commit: `DART-BACKEND-PARITY.2.2 - implement Dart spec parser`
+  Commit: `DART-BACKEND-PARITY.2.2 - implement Dart spec parser`; retained completion note: Core rule parser; validation/function-shell/runtime behavior deferred.
 
 - ID: `DART-BACKEND-PARITY.2.3`
   Status: `done`
@@ -145,7 +146,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     lightweight regex structural errors. `strictSyntax: true` rejects unused rules. `test/spec_validator_test.dart`
     covers focused failures plus non-strict validation over all checked-in `specs/*.spec` and rule-only corpus
     `input.spec` files.
-  Commit: `DART-BACKEND-PARITY.2.3 - add Dart frontend validation`
+  Commit: `DART-BACKEND-PARITY.2.3 - add Dart frontend validation`; retained completion note: Source-AST validation; function-shell/runtime behavior deferred.
 
 - ID: `DART-BACKEND-PARITY.2.4`
   Status: `done`
@@ -163,7 +164,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     does not raw-scan `fn` source; it requires the spec-returned nodes as its semantic input.
     `test/user_function_definition_shell_test.dart` covers successful projection, no-raw-scanner fallback,
     malformed `function_definition_error` diagnostics, and sidecar drift rejection.
-  Commit: `DART-BACKEND-PARITY.2.4 - integrate Dart function shell projection`
+  Commit: `DART-BACKEND-PARITY.2.4 - integrate Dart function shell projection`; retained completion note: Spec-returned function-definition projection; `.2` frontend container closes.
 
 - ID: `DART-BACKEND-PARITY.3`
   Status: `done`
@@ -187,7 +188,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     expression statements with `drops_value = true`. Unsupported expressions stay structural as `raw_perl`
     nodes for later validation/diagnostics rather than being rewritten as host code. `test/action_ast_parser_test.dart`
     covers each accepted node family.
-  Commit: `DART-BACKEND-PARITY.3.1 - add Dart ActionIR AST parser`
+  Commit: `DART-BACKEND-PARITY.3.1 - add Dart ActionIR AST parser`; retained completion note: Typed helper/action AST parser; helper-contract mapping remains `.3.2`.
 
 - ID: `DART-BACKEND-PARITY.3.2`
   Status: `done`
@@ -201,7 +202,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     validation now shares the current helper/control name table through `isKnownActionIrCallName(...)`.
     Non-current helper-looking calls produce `unknown_helper`; `raw_perl` AST nodes stay diagnostic-only.
     A Dart-tree non-current-spelling scan is clean.
-  Commit: `DART-BACKEND-PARITY.3.2 - add Dart ActionIR contract resolver`
+  Commit: `DART-BACKEND-PARITY.3.2 - add Dart ActionIR contract resolver`; retained completion note: Current helper/control contract resolution; function registry uses the shared current-name table.
 
 - ID: `DART-BACKEND-PARITY.3.3`
   Status: `done`
@@ -232,7 +233,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     - [x] **LOCKSTEP** — Dart README, mdBook Dart handoff/status text, `CHANGES.md`, `DEVELOPMENT_NOTES.md`,
       `LIVE_ACHIEVEMENT_STATUS.md`, `MEMORY.md`, roadmap tracker rows, architecture state, Knowledge Map facts,
       `docs/TASK_TREE.md`, and this task tree are updated.
-  Commit: `DART-BACKEND-PARITY.3.3 - add Dart function registry`
+  Commit: `DART-BACKEND-PARITY.3.3 - add Dart function registry`; retained completion note: Ordered user-function registry and exact-arity resolver; compiled state remains `.3.4`.
 
 - ID: `DART-BACKEND-PARITY.3.4`
   Status: `done`
@@ -258,7 +259,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     - [x] **LOCKSTEP** — Dart README, mdBook Dart handoff/status text, compiled-state model, `CHANGES.md`,
       `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, `ARCHITECTURE_STATE.md`, `MEMORY.md`, roadmap tracker
       row, Knowledge Map facts, `docs/TASK_TREE.md`, and this task tree are updated.
-  Commit: `DART-BACKEND-PARITY.3.4 - add Dart compiled spec state`
+  Commit: `DART-BACKEND-PARITY.3.4 - add Dart compiled spec state`; retained completion note: Ordered compiled rule/dependency/descriptor state; runtime matching starts in `.4.1`.
 
 - ID: `DART-BACKEND-PARITY.4`
   Status: `done`
@@ -290,7 +291,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     - [x] **LOCKSTEP** — Dart README, mdBook Dart handoff/status text, `CHANGES.md`, `DEVELOPMENT_NOTES.md`,
       `LIVE_ACHIEVEMENT_STATUS.md`, `ARCHITECTURE_STATE.md`, `MEMORY.md`, roadmap tracker row, Knowledge Map
       facts, `docs/TASK_TREE.md`, and this task tree are updated.
-  Commit: `DART-BACKEND-PARITY.4.1 - add Dart runtime matching state`
+  Commit: `DART-BACKEND-PARITY.4.1 - add Dart runtime matching state`; retained completion note: Seek/consume regex matching and match-state primitives; rule dispatch starts in `.4.2`.
 
 - ID: `DART-BACKEND-PARITY.4.2`
   Status: `done`
@@ -318,7 +319,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     - [x] **LOCKSTEP** — Dart README, mdBook Dart handoff/status text, `CHANGES.md`, `DEVELOPMENT_NOTES.md`,
       `LIVE_ACHIEVEMENT_STATUS.md`, `ARCHITECTURE_STATE.md`, `MEMORY.md`, roadmap tracker row, Knowledge Map
       facts, `docs/TASK_TREE.md`, and this task tree are updated.
-  Commit: `DART-BACKEND-PARITY.4.2 - add Dart runtime rule interpreter`
+  Commit: `DART-BACKEND-PARITY.4.2 - add Dart runtime rule interpreter`; retained completion note: First executable compiled-rule interpreter; broader helper families remain `.4.3`.
 
 - ID: `DART-BACKEND-PARITY.4.3`
   Status: `done`
@@ -338,7 +339,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Acceptance: Helper/value work is divided by runtime surface area; the next executable frontier is explicit and
     can land without bundling the complete helper catalog in one commit.
   Verification: memory architecture; task-tree metadata; doctrine; `git diff --check`.
-  Commit: `DART-BACKEND-PARITY.4.3.0 - split Dart runtime helper families`
+  Commit: `DART-BACKEND-PARITY.4.3.0 - split Dart runtime helper families`; retained completion note: Helper/value runtime work split before code.
 
 - ID: `DART-BACKEND-PARITY.4.3.1`
   Status: `done`
@@ -369,7 +370,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     - [x] **LOCKSTEP** — Dart README, mdBook Dart handoff/status text, `CHANGES.md`, `DEVELOPMENT_NOTES.md`,
       `LIVE_ACHIEVEMENT_STATUS.md`, `ARCHITECTURE_STATE.md`, `MEMORY.md`, roadmap tracker rows, Knowledge Map
       facts, `docs/TASK_TREE.md`, and this task tree are updated.
-  Commit: `DART-BACKEND-PARITY.4.3.1 - add Dart runtime value capture helpers`
+  Commit: `DART-BACKEND-PARITY.4.3.1 - add Dart runtime value capture helpers`; retained completion note: Core value/store/capture helper subset.
 
 - ID: `DART-BACKEND-PARITY.4.3.2`
   Status: `done`
@@ -396,7 +397,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     - [x] **LOCKSTEP** — Dart README, mdBook Dart handoff/status text, `CHANGES.md`, `DEVELOPMENT_NOTES.md`,
       `LIVE_ACHIEVEMENT_STATUS.md`, `ARCHITECTURE_STATE.md`, `MEMORY.md`, roadmap tracker rows, Knowledge Map
       facts, `docs/TASK_TREE.md`, and this task tree are updated.
-  Commit: `DART-BACKEND-PARITY.4.3.2 - add Dart runtime string numeric helpers`
+  Commit: `DART-BACKEND-PARITY.4.3.2 - add Dart runtime string numeric helpers`; retained completion note: String/scalar and numeric helper families.
 
 - ID: `DART-BACKEND-PARITY.4.3.3`
   Status: `done`
@@ -426,7 +427,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     - [x] **LOCKSTEP** — Dart README, mdBook Dart handoff/status text, `CHANGES.md`, `DEVELOPMENT_NOTES.md`,
       `LIVE_ACHIEVEMENT_STATUS.md`, `ARCHITECTURE_STATE.md`, `MEMORY.md`, roadmap tracker rows, Knowledge Map
       facts, `docs/TASK_TREE.md`, and this task tree are updated.
-  Commit: `DART-BACKEND-PARITY.4.3.3 - add Dart runtime array helpers`
+  Commit: `DART-BACKEND-PARITY.4.3.3 - add Dart runtime array helpers`; retained completion note: Array helper family and statement-only array end mutations.
 
 - ID: `DART-BACKEND-PARITY.4.3.4`
   Status: `done`
@@ -454,7 +455,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     - [x] **LOCKSTEP** — Dart README, mdBook Dart handoff/status text, `CHANGES.md`, `DEVELOPMENT_NOTES.md`,
       `LIVE_ACHIEVEMENT_STATUS.md`, `ARCHITECTURE_STATE.md`, `MEMORY.md`, roadmap tracker rows, Knowledge Map
       facts, `docs/TASK_TREE.md`, and this task tree are updated.
-  Commit: `DART-BACKEND-PARITY.4.3.4 - add Dart runtime hash helpers`
+  Commit: `DART-BACKEND-PARITY.4.3.4 - add Dart runtime hash helpers`; retained completion note: Hash helper family and statement/value mutation boundaries.
 
 - ID: `DART-BACKEND-PARITY.4.3.5`
   Status: `done`
@@ -491,7 +492,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
       metadata, doctrine, and `git diff --check` pass.
     - [x] **LOCKSTEP** — Dart README/CLI help, mdBook Dart handoff/status text, live docs, task-tree index,
       roadmap trackers, Knowledge Map facts, and `MEMORY.md` are updated.
-  Commit: `DART-BACKEND-PARITY.4.3.5 - add Dart runtime controls and tree callbacks`
+  Commit: `DART-BACKEND-PARITY.4.3.5 - add Dart runtime controls and tree callbacks`; retained completion note: Value blocks, structured controls, with-blocks, and tree traversal receiver callbacks.
 
 - ID: `DART-BACKEND-PARITY.4.3.6`
   Status: `done`
@@ -528,7 +529,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
       task-tree metadata, doctrine, and `git diff --check` pass.
     - [x] **LOCKSTEP** — Dart README, mdBook Dart status/handoff text, live docs, task-tree index, roadmap
       trackers, architecture state, Knowledge Map facts, and `MEMORY.md` are updated.
-  Commit: `DART-BACKEND-PARITY.4.3.6 - close Dart helper value no drift`
+  Commit: `DART-BACKEND-PARITY.4.3.6 - close Dart helper value no drift`; retained completion note: Nested value-path assignment no-drift; `.4.3` helper/value container closes.
 
 - ID: `DART-BACKEND-PARITY.4.4`
   Status: `done`
@@ -565,7 +566,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
       `git diff --check` pass.
     - [x] **LOCKSTEP** — Dart README/CLI help, mdBook runtime/status/handoff text, live docs, task-tree index,
       roadmap trackers, architecture state, Knowledge Map facts, and `MEMORY.md` are updated.
-  Commit: `DART-BACKEND-PARITY.4.4 - add Dart backtrack cursor rewinds`
+  Commit: `DART-BACKEND-PARITY.4.4 - add Dart backtrack cursor rewinds`; retained completion note: BACKTRACK/IBACKTRACK cursor rewinds and cursor/input helpers.
 
 - ID: `DART-BACKEND-PARITY.4.5`
   Status: `done`
@@ -589,7 +590,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     trace levels/controls/event classes/sinks, `.4.5.3` runtime branch/lifecycle/source-boundary trace
     instrumentation, and `.4.5.4` no-drift closeout. Memory architecture, Knowledge Map generation/check,
     task-tree metadata, doctrine, and `git diff --check` pass. No Dart runtime behavior changed.
-  Commit: `DART-BACKEND-PARITY.4.5.0 - split Dart diagnostics trace controls`
+  Commit: `DART-BACKEND-PARITY.4.5.0 - split Dart diagnostics trace controls`; retained completion note: Diagnostics/trace leaf split before code.
 
 - ID: `DART-BACKEND-PARITY.4.5.1`
   Status: `done`
@@ -620,7 +621,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
       task-tree metadata, doctrine, and `git diff --check` pass.
     - [x] **LOCKSTEP** — Dart README/CLI status, public exports, mdBook diagnostics/runtime/status/handoff text,
       live docs, roadmap tracker, task-tree index, Knowledge Map facts, and `MEMORY.md` are updated.
-  Commit: `DART-BACKEND-PARITY.4.5.1 - add Dart runtime diagnostics`
+  Commit: `DART-BACKEND-PARITY.4.5.1 - add Dart runtime diagnostics`; retained completion note: Structured runtime diagnostics on Dart runtime exceptions.
 
 - ID: `DART-BACKEND-PARITY.4.5.2`
   Status: `done`
@@ -651,7 +652,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
       architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
     - [x] **LOCKSTEP** — Dart README/CLI/scaffold status, public exports, mdBook trace/status/handoff text, live
       docs, roadmap tracker, task-tree index, Knowledge Map facts, and `MEMORY.md` are updated.
-  Commit: `DART-BACKEND-PARITY.4.5.2 - add Dart trace controls`
+  Commit: `DART-BACKEND-PARITY.4.5.2 - add Dart trace controls`; retained completion note: Trace controls, event classes, sinks, and traced runtime entrypoints.
 
 - ID: `DART-BACKEND-PARITY.4.5.3`
   Status: `done`
@@ -682,7 +683,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
       verification log before commit.
     - [x] **LOCKSTEP** — Dart README/CLI/scaffold status, mdBook trace/status/handoff text, live docs, roadmap
       tracker, task-tree index, Knowledge Map facts, and `MEMORY.md` are updated.
-  Commit: `DART-BACKEND-PARITY.4.5.3 - add Dart runtime trace events`
+  Commit: `DART-BACKEND-PARITY.4.5.3 - add Dart runtime trace events`; retained completion note: Runtime branch/lifecycle/source-boundary trace instrumentation.
 
 - ID: `DART-BACKEND-PARITY.4.5.4`
   Status: `done`
@@ -709,7 +710,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
       architecture, task-tree metadata, doctrine, and `git diff --check` pass.
     - [x] **LOCKSTEP** — Dart README/CLI/scaffold status, mdBook trace/status/handoff text, live docs, roadmap
       tracker, task-tree index, Knowledge Map facts, and `MEMORY.md` are updated.
-  Commit: `DART-BACKEND-PARITY.4.5.4 - close Dart diagnostics trace no drift`
+  Commit: `DART-BACKEND-PARITY.4.5.4 - close Dart diagnostics trace no drift`; retained completion note: Diagnostics/trace status no-drift closeout; `.4.5` container closes.
 
 - ID: `DART-BACKEND-PARITY.5`
   Status: `done`
@@ -730,7 +731,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     `body_ast` while preserving the neutral `body_parse_job`. Focused staged-registry tests, Dart format/analyze,
     full Dart tests, corpus runner/help, CLI help, mdBook, memory architecture, Knowledge Map, task-tree metadata,
     doctrine, and `git diff --check` pass.
-  Commit: `DART-BACKEND-PARITY.5.1 - add Dart staged function-body registry`
+  Commit: `DART-BACKEND-PARITY.5.1 - add Dart staged function-body registry`; retained completion note: Minimal staged registry provider dispatches function-body parse jobs and stitches `body_ast`.
 
 - ID: `DART-BACKEND-PARITY.5.2`
   Status: `done`
@@ -746,7 +747,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     or mutual recursion with structured `user_function_call` diagnostics. Focused runtime tests, Dart
     format/analyze/full tests, corpus runner/help, CLI help, mdBook, memory architecture, Knowledge Map,
     task-tree metadata, doctrine, and `git diff --check` pass.
-  Commit: `DART-BACKEND-PARITY.5.2 - execute Dart user functions`
+  Commit: `DART-BACKEND-PARITY.5.2 - execute Dart user functions`; retained completion note: Registered exact-arity user functions execute at runtime.
 
 - ID: `DART-BACKEND-PARITY.5.3`
   Status: `done`
@@ -762,7 +763,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     from the same compiled state. Focused compiled-state tests, Dart format/analyze/full tests, corpus
     runner/help, CLI help, mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and
     `git diff --check` pass.
-  Commit: `DART-BACKEND-PARITY.5.3 - preserve Dart staged descriptor shapes`
+  Commit: `DART-BACKEND-PARITY.5.3 - preserve Dart staged descriptor shapes`; retained completion note: Neutral staged user-function descriptor shapes are asserted through runtime output.
 
 - ID: `DART-BACKEND-PARITY.6`
   Status: `done`
@@ -1106,7 +1107,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     Knowledge Map are updated; `mdbook build docs/linkedspec-book`, `bash scripts/check_memory_architecture.sh`,
     `bash knowledge-map/scripts/check_knowledge_map.sh`, `bash scripts/check_task_tree_metadata.sh`,
     `bash scripts/check_doctrines.sh`, and `git diff --check` pass.
-  Commit: `DART-BACKEND-PARITY.6.2.4.4.3 - close Dart helper mutation surfaces`
+  Commit: `DART-BACKEND-PARITY.6.2.4.4.3 - close Dart helper mutation surfaces`; retained completion note: Statement-form helper mutation, explicit split replacement, and entry/local line helpers close three parser-smoke fixtures.
 
 - ID: `DART-BACKEND-PARITY.6.2.4.4.4`
   Status: `done`
@@ -1149,7 +1150,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   - [x] **LOCKSTEP** — `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, `MEMORY.md`,
     `ROADMAP.md`, `ROADMAP_V2.md`, `dart/README.md`, mdBook backend/status chapters, task-tree index, and
     Knowledge Map are updated.
-  Commit: `DART-BACKEND-PARITY.6.2.4.4.4 - close Dart legacy accumulator smoke`
+  Commit: `DART-BACKEND-PARITY.6.2.4.4.4 - close Dart legacy accumulator smoke`; retained completion note: `push(Child)` current-rule accumulator semantics close `regdef_nested_register_fields`; `ds_vhistory_version_entry` is routed with direct-access/oracle evidence.
 
 - ID: `DART-BACKEND-PARITY.6.2.4.4.5`
   Status: `done`
@@ -1189,7 +1190,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   - [x] **LOCKSTEP** — `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, `MEMORY.md`,
     `ROADMAP.md`, `ROADMAP_V2.md`, `dart/README.md`, mdBook backend/status chapters, task-tree index, and
     Knowledge Map are updated.
-  Commit: `DART-BACKEND-PARITY.6.2.4.4.5 - split ds_vhistory oracle boundary`
+  Commit: `DART-BACKEND-PARITY.6.2.4.4.5 - split ds_vhistory oracle boundary`; retained completion note: Evidence-only split: public `ds_vhistory` parser leading-newline fixture returns null, direct descriptor handler returns `/proj/foo`, ordinary scalar-held indexed reads remain valid, and `.6.2.4.4.6` owns the boundary decision.
 
 - ID: `DART-BACKEND-PARITY.6.2.4.4.6`
   Status: `done`
@@ -1226,7 +1227,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   - [x] **LOCKSTEP** — `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, `MEMORY.md`,
     `ROADMAP.md`, `ROADMAP_V2.md`, `dart/README.md`, mdBook backend/status chapters, task-tree index, and
     Knowledge Map are updated.
-  Commit: `DART-BACKEND-PARITY.6.2.4.4.6 - mirror public parser leading trivia`
+  Commit: `DART-BACKEND-PARITY.6.2.4.4.6 - mirror public parser leading trivia`; retained completion note: Dart runtime parse entrypoint now skips leading blank/comment lines like the Perl public parser, closing `ds_vhistory_version_entry` and moving parser-smoke to 24/31 green.
 
 - ID: `DART-BACKEND-PARITY.6.2.4.5`
   Status: `done`
@@ -1257,7 +1258,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   - [x] **LOCKSTEP** — `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, `MEMORY.md`,
     `ROADMAP.md`, `ROADMAP_V2.md`, `dart/README.md`, mdBook backend/status chapters, task-tree index, this task
     tree, and Knowledge Map are updated.
-  Commit: `DART-BACKEND-PARITY.6.2.4.5 - close parser smoke no drift`
+  Commit: `DART-BACKEND-PARITY.6.2.4.5 - close parser smoke no drift`; retained completion note: No-drift closeout confirms the non-PCRE parser-smoke residual group is complete and advances the frontier to `.6.2.4.6` for PCRE structural regex constructs.
 
 - ID: `DART-BACKEND-PARITY.6.2.4.6`
   Status: `done`
@@ -1275,7 +1276,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     diagnostic parser-smoke command `dart run bin/corpus_runner.dart --corpus
     ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31` reports 31 passed / 0 failed; Dart
     format/analyze/full tests and the default 99-fixture corpus loader pass.
-  Commit: `DART-BACKEND-PARITY.6.2.4.6 - close Dart structural regex smoke`
+  Commit: `DART-BACKEND-PARITY.6.2.4.6 - close Dart structural regex smoke`; retained completion note: Bounded structural regex matchers and `push(child, index)` action-edge payload extraction close the seven PCRE structural fixtures and the `.6.2.4` parser-smoke parent.
 
 - ID: `DART-BACKEND-PARITY.6.2.5`
   Status: `done`
@@ -1293,7 +1294,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     `fn` source; no Dart raw `fn` scanner owns the semantic definition shape. The three routed fixtures pass by
     name; focused parser/corpus/runtime/contract tests pass; Dart format, analyze, full tests, default 99-fixture
     loader, and the 31-fixture parser-smoke window pass.
-  Commit: `DART-BACKEND-PARITY.6.2.5 - route Dart fn corpus through spec shell`
+  Commit: `DART-BACKEND-PARITY.6.2.5 - route Dart fn corpus through spec shell`; retained completion note: Corpus execution falls back from rule-only parsing to the spec-defined user-function shell for top-level `fn` fixtures; all three routed fixtures pass.
 
 - ID: `DART-BACKEND-PARITY.6.3`
   Status: `done`
@@ -1306,7 +1307,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     cover the full checked-in gate, CLI full-run mode, unsupported manifest formats, invalid and duplicate manifest
     case names, count mismatch, missing fixture dirs, stale extra dirs, missing required fixture files, and output
     mismatch reporting.
-  Commit: `DART-BACKEND-PARITY.6.3 - close full Dart corpus gate`
+  Commit: `DART-BACKEND-PARITY.6.3 - close full Dart corpus gate`; retained completion note: Full Dart corpus execution is 99/99 green; CLI `--execute` without selectors runs the full manifest while drift guards remain strict.
 
 - ID: `DART-BACKEND-PARITY.6.4`
   Status: `done`
@@ -1318,7 +1319,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     core-only by default and includes Dart only when `LINKEDSPEC_RUN_DART=1` is set, so absent Dart SDK state does
     not break the canonical local gate. Root README, Dart README, and mdBook local-CI/backend-handoff/status pages
     document the focused and opt-in commands.
-  Commit: `DART-BACKEND-PARITY.6.4 - wire Dart local verification`
+  Commit: `DART-BACKEND-PARITY.6.4 - wire Dart local verification`; retained completion note: `tools/run_dart_local.sh` owns the focused Dart gate; `tools/run_ci_local.sh` includes it only under `LINKEDSPEC_RUN_DART=1`.
 
 - ID: `DART-BACKEND-PARITY.7`
   Status: `done`
@@ -1335,7 +1336,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     direct `dart test`, and full corpus-runner execution. Project status and trace-status pages agree that the
     current Dart parity boundary is interpreter-first and 99/99 corpus-green, while generated Dart source and
     Dart-specific CLI productization remain follow-up lanes. No runtime behavior changed.
-  Commit: `DART-BACKEND-PARITY.7.1 - close Dart mdBook usage status`
+  Commit: `DART-BACKEND-PARITY.7.1 - close Dart mdBook usage status`; retained completion note: mdBook command/status/handoff docs now match the 99/99 interpreter-first Dart parity boundary and follow-up lanes.
 
 - ID: `DART-BACKEND-PARITY.7.2`
   Status: `done`
@@ -1347,7 +1348,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     needs its own split lane for a minimal emitter scaffold/compile-run harness, generated family-plan metadata,
     direct execution by structural family, and a curated manifest-backed corpus subset. The current Dart
     conformance gate remains the interpreter-first 99/99 corpus run; no Dart runtime behavior changed.
-  Commit: `DART-BACKEND-PARITY.7.2 - defer Dart generated source proof`
+  Commit: `DART-BACKEND-PARITY.7.2 - defer Dart generated source proof`; retained completion note: Generated Dart source is deferred to a future split source-emitter lane with explicit proof prerequisites.
 
 - ID: `DART-BACKEND-PARITY.7.3`
   Status: `done`
@@ -1358,7 +1359,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     moved final Dart no-drift closeout to `.7.5`, recorded the cross-variant obligation in
     `FUTURE-PARITY-BACKLOG`, and added a Knowledge Map card. Memory architecture, Knowledge Map, task-tree
     metadata, doctrine checks, mdBook build, and `git diff --check` pass. No source behavior changed.
-  Commit: `DART-BACKEND-PARITY.7.3 - record variant-specific CLI requirement`
+  Commit: `DART-BACKEND-PARITY.7.3 - record variant-specific CLI requirement`; retained completion note: Docs-only split for per-variant LinkedSpec CLI productization.
 
 - ID: `DART-BACKEND-PARITY.7.4`
   Status: `done`
@@ -1374,7 +1375,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     text and selected fixture execution through the Dart-specific entrypoint, while the focused Dart gate passes
     format, analyzer, 140 tests, CLI help, bounded Dart-specific CLI corpus smoke, and full 99-fixture corpus
     execution.
-  Commit: `DART-BACKEND-PARITY.7.4 - productize Dart-specific CLI`
+  Commit: `DART-BACKEND-PARITY.7.4 - productize Dart-specific CLI`; retained completion note: Dart-specific CLI help and corpus command route through the shared manifest-backed runtime command implementation; corpus runner remains a compatibility wrapper.
 
 - ID: `DART-BACKEND-PARITY.7.5`
   Status: `done`
@@ -1386,7 +1387,7 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     to a future split proof lane, and current-facing roadmap/book/live-doc/task-tree/Knowledge Map surfaces agree
     that no active Dart frontier remains in this tree. Future backend rollout returns to
     `FUTURE-PARITY-BACKLOG.1.2` for Julia planning; no Julia or Lua implementation begins in this closeout slice.
-  Commit: `DART-BACKEND-PARITY.7.5 - close Dart parity milestone`
+  Commit: `DART-BACKEND-PARITY.7.5 - close Dart parity milestone`; retained completion note: Final no-drift closeout marks the scoped interpreter-first Dart milestone complete and returns future backend rollout to the backlog tree.
 
 ## Current Frontier
 
@@ -1732,52 +1733,8 @@ The `.4.1` runtime matching layer adds:
 
 ## Commit Log
 
-| Leaf | Commit subject or reference | Notes |
-| --- | --- | --- |
-| `DART-BACKEND-PARITY` | `FUTURE-PARITY-BACKLOG.1.1 - scope Dart backend parity plan` | Tree created by the backlog scoping leaf; implementation commits use `DART-BACKEND-PARITY.*` leaf ids. |
-| `DART-BACKEND-PARITY.1.1` | `DART-BACKEND-PARITY.1.1 - record Dart toolchain and layout` | Toolchain/layout preflight; no package files. |
-| `DART-BACKEND-PARITY.1.2` | `DART-BACKEND-PARITY.1.2 - create Dart scaffold smoke package` | Minimal package scaffold; no parser/runtime/corpus semantics. |
-| `DART-BACKEND-PARITY.1.3` | `DART-BACKEND-PARITY.1.3 - add Dart corpus manifest IO scaffold` | Manifest IO scaffold; `.1` foundation container closes. |
-| `DART-BACKEND-PARITY.2.1` | `DART-BACKEND-PARITY.2.1 - define Dart frontend AST data types` | Source-level AST/data types; no parser behavior. |
-| `DART-BACKEND-PARITY.2.2` | `DART-BACKEND-PARITY.2.2 - implement Dart spec parser` | Core rule parser; validation/function-shell/runtime behavior deferred. |
-| `DART-BACKEND-PARITY.2.3` | `DART-BACKEND-PARITY.2.3 - add Dart frontend validation` | Source-AST validation; function-shell/runtime behavior deferred. |
-| `DART-BACKEND-PARITY.2.4` | `DART-BACKEND-PARITY.2.4 - integrate Dart function shell projection` | Spec-returned function-definition projection; `.2` frontend container closes. |
-| `DART-BACKEND-PARITY.3.1` | `DART-BACKEND-PARITY.3.1 - add Dart ActionIR AST parser` | Typed helper/action AST parser; helper-contract mapping remains `.3.2`. |
-| `DART-BACKEND-PARITY.3.2` | `DART-BACKEND-PARITY.3.2 - add Dart ActionIR contract resolver` | Current helper/control contract resolution; function registry uses the shared current-name table. |
-| `DART-BACKEND-PARITY.3.3` | `DART-BACKEND-PARITY.3.3 - add Dart function registry` | Ordered user-function registry and exact-arity resolver; compiled state remains `.3.4`. |
-| `DART-BACKEND-PARITY.3.4` | `DART-BACKEND-PARITY.3.4 - add Dart compiled spec state` | Ordered compiled rule/dependency/descriptor state; runtime matching starts in `.4.1`. |
-| `DART-BACKEND-PARITY.4.1` | `DART-BACKEND-PARITY.4.1 - add Dart runtime matching state` | Seek/consume regex matching and match-state primitives; rule dispatch starts in `.4.2`. |
-| `DART-BACKEND-PARITY.4.2` | `DART-BACKEND-PARITY.4.2 - add Dart runtime rule interpreter` | First executable compiled-rule interpreter; broader helper families remain `.4.3`. |
-| `DART-BACKEND-PARITY.4.3.0` | `DART-BACKEND-PARITY.4.3.0 - split Dart runtime helper families` | Helper/value runtime work split before code. |
-| `DART-BACKEND-PARITY.4.3.1` | `DART-BACKEND-PARITY.4.3.1 - add Dart runtime value capture helpers` | Core value/store/capture helper subset. |
-| `DART-BACKEND-PARITY.4.3.2` | `DART-BACKEND-PARITY.4.3.2 - add Dart runtime string numeric helpers` | String/scalar and numeric helper families. |
-| `DART-BACKEND-PARITY.4.3.3` | `DART-BACKEND-PARITY.4.3.3 - add Dart runtime array helpers` | Array helper family and statement-only array end mutations. |
-| `DART-BACKEND-PARITY.4.3.4` | `DART-BACKEND-PARITY.4.3.4 - add Dart runtime hash helpers` | Hash helper family and statement/value mutation boundaries. |
-| `DART-BACKEND-PARITY.4.3.5` | `DART-BACKEND-PARITY.4.3.5 - add Dart runtime controls and tree callbacks` | Value blocks, structured controls, with-blocks, and tree traversal receiver callbacks. |
-| `DART-BACKEND-PARITY.4.3.6` | `DART-BACKEND-PARITY.4.3.6 - close Dart helper value no drift` | Nested value-path assignment no-drift; `.4.3` helper/value container closes. |
-| `DART-BACKEND-PARITY.4.4` | `DART-BACKEND-PARITY.4.4 - add Dart backtrack cursor rewinds` | BACKTRACK/IBACKTRACK cursor rewinds and cursor/input helpers. |
-| `DART-BACKEND-PARITY.4.5.0` | `DART-BACKEND-PARITY.4.5.0 - split Dart diagnostics trace controls` | Diagnostics/trace leaf split before code. |
-| `DART-BACKEND-PARITY.4.5.1` | `DART-BACKEND-PARITY.4.5.1 - add Dart runtime diagnostics` | Structured runtime diagnostics on Dart runtime exceptions. |
-| `DART-BACKEND-PARITY.4.5.2` | `DART-BACKEND-PARITY.4.5.2 - add Dart trace controls` | Trace controls, event classes, sinks, and traced runtime entrypoints. |
-| `DART-BACKEND-PARITY.4.5.3` | `DART-BACKEND-PARITY.4.5.3 - add Dart runtime trace events` | Runtime branch/lifecycle/source-boundary trace instrumentation. |
-| `DART-BACKEND-PARITY.4.5.4` | `DART-BACKEND-PARITY.4.5.4 - close Dart diagnostics trace no drift` | Diagnostics/trace status no-drift closeout; `.4.5` container closes. |
-| `DART-BACKEND-PARITY.5.1` | `DART-BACKEND-PARITY.5.1 - add Dart staged function-body registry` | Minimal staged registry provider dispatches function-body parse jobs and stitches `body_ast`. |
-| `DART-BACKEND-PARITY.5.2` | `DART-BACKEND-PARITY.5.2 - execute Dart user functions` | Registered exact-arity user functions execute at runtime. |
-| `DART-BACKEND-PARITY.5.3` | `DART-BACKEND-PARITY.5.3 - preserve Dart staged descriptor shapes` | Neutral staged user-function descriptor shapes are asserted through runtime output. |
-| `DART-BACKEND-PARITY.7.3` | `DART-BACKEND-PARITY.7.3 - record variant-specific CLI requirement` | Docs-only split for per-variant LinkedSpec CLI productization. |
-| `DART-BACKEND-PARITY.6.2.4.4.3` | `DART-BACKEND-PARITY.6.2.4.4.3 - close Dart helper mutation surfaces` | Statement-form helper mutation, explicit split replacement, and entry/local line helpers close three parser-smoke fixtures. |
-| `DART-BACKEND-PARITY.6.2.4.4.4` | `DART-BACKEND-PARITY.6.2.4.4.4 - close Dart legacy accumulator smoke` | `push(Child)` current-rule accumulator semantics close `regdef_nested_register_fields`; `ds_vhistory_version_entry` is routed with direct-access/oracle evidence. |
-| `DART-BACKEND-PARITY.6.2.4.4.5` | `DART-BACKEND-PARITY.6.2.4.4.5 - split ds_vhistory oracle boundary` | Evidence-only split: public `ds_vhistory` parser leading-newline fixture returns null, direct descriptor handler returns `/proj/foo`, ordinary scalar-held indexed reads remain valid, and `.6.2.4.4.6` owns the boundary decision. |
-| `DART-BACKEND-PARITY.6.2.4.4.6` | `DART-BACKEND-PARITY.6.2.4.4.6 - mirror public parser leading trivia` | Dart runtime parse entrypoint now skips leading blank/comment lines like the Perl public parser, closing `ds_vhistory_version_entry` and moving parser-smoke to 24/31 green. |
-| `DART-BACKEND-PARITY.6.2.4.5` | `DART-BACKEND-PARITY.6.2.4.5 - close parser smoke no drift` | No-drift closeout confirms the non-PCRE parser-smoke residual group is complete and advances the frontier to `.6.2.4.6` for PCRE structural regex constructs. |
-| `DART-BACKEND-PARITY.6.2.4.6` | `DART-BACKEND-PARITY.6.2.4.6 - close Dart structural regex smoke` | Bounded structural regex matchers and `push(child, index)` action-edge payload extraction close the seven PCRE structural fixtures and the `.6.2.4` parser-smoke parent. |
-| `DART-BACKEND-PARITY.6.2.5` | `DART-BACKEND-PARITY.6.2.5 - route Dart fn corpus through spec shell` | Corpus execution falls back from rule-only parsing to the spec-defined user-function shell for top-level `fn` fixtures; all three routed fixtures pass. |
-| `DART-BACKEND-PARITY.6.3` | `DART-BACKEND-PARITY.6.3 - close full Dart corpus gate` | Full Dart corpus execution is 99/99 green; CLI `--execute` without selectors runs the full manifest while drift guards remain strict. |
-| `DART-BACKEND-PARITY.6.4` | `DART-BACKEND-PARITY.6.4 - wire Dart local verification` | `tools/run_dart_local.sh` owns the focused Dart gate; `tools/run_ci_local.sh` includes it only under `LINKEDSPEC_RUN_DART=1`. |
-| `DART-BACKEND-PARITY.7.1` | `DART-BACKEND-PARITY.7.1 - close Dart mdBook usage status` | mdBook command/status/handoff docs now match the 99/99 interpreter-first Dart parity boundary and follow-up lanes. |
-| `DART-BACKEND-PARITY.7.2` | `DART-BACKEND-PARITY.7.2 - defer Dart generated source proof` | Generated Dart source is deferred to a future split source-emitter lane with explicit proof prerequisites. |
-| `DART-BACKEND-PARITY.7.4` | `DART-BACKEND-PARITY.7.4 - productize Dart-specific CLI` | Dart-specific CLI help and corpus command route through the shared manifest-backed runtime command implementation; corpus runner remains a compatibility wrapper. |
-| `DART-BACKEND-PARITY.7.5` | `DART-BACKEND-PARITY.7.5 - close Dart parity milestone` | Final no-drift closeout marks the scoped interpreter-first Dart milestone complete and returns future backend rollout to the backlog tree. |
+Canonical task-node Commit fields retain every consolidated table label, reference and note. Exact source and
+Git comparison are owned by `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.6`; no acceptance or verification field changes.
 
 ## Changelog
 

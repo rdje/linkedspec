@@ -11,14 +11,16 @@
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.3.43` reconciles 53 scopes / 1,106 lines / 59,355 unchanged bytes, 18 JSON files and 105 manifest cases.
-- SimEnv dispatch repair `.76` is owned; DBINP authoring investigations are proposed. Production behavior is unchanged.
+- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.6` consolidates 264 rows in 260 nodes, retaining six unmatched captions and every note/reference.
+- Exact proof preserves other fields; the historical wrong-node reference is corrected. Net saving is 251 lines / 8,210 bytes; focused validation governs landing.
 
 ## Next Action
 
-- Activate `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.6` after this clean checkpoint, then resume reading `.3.3.44`. Preserve unique evidence and existing limits.
+- Resume `SESSION-STARTUP-READING.3.3.44`; future containment `.7` follows Rust closeout before Dart ownership/reading.
 
 ## Recent Completions
+
+- `2026-09-08` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.6` consolidates verified chronology and corrects a historical reference.
 
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.43` reconciles corpus reading, owns SimEnv dispatch and preserves DBINP intake.
 
@@ -49,8 +51,6 @@
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.32` completes query/runtime reading, preserves correct slot diagnostics and owns token-use/newline gaps .68/.69.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.31` completes call reading and owns false signature acceptance plus composite-call/source omissions under .67.
-
-- `2026-09-07` — `SESSION-STARTUP-READING.3.3.30` completes context/foundation reading and owns repeated binding identity/source-reference repair .66.
 
 ## History
 

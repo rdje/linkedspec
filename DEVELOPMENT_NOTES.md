@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-08 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.6 - consolidate verified task chronology and correct historical references
+
+Historical task records use both full subjects and abbreviated pointers; some table captions differ from exact Git subjects. Consolidation preserves those distinctions, matches only explicit subject/typographic variants backed by Git, and retains unmatched captions. Git b4217c37 changed the expression-block task's placeholder to an unrelated string-comparison commit; its real c5f2204b reference is restored with the old value labeled. No parsing behavior, acceptance field, verification evidence or doctrine changes. The retained Dart decomposition estimate needs a later capacity admission, so .6 is an ordinary focused leaf and .7 keeps the capacity parent open.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.43 - reconcile corpus reading and own SimEnv dispatch repair
 
 The SimEnv edge matches variable_substitution but explicitly calls bvariable_substitution in three quoting contexts. Generated action inspection follows that authored callee; changing only those targets in memory restores bare variables while braced controls retain their node shapes. This is distinct from historical single-line verbatim loss. Corpus inventory, stored oracles, empty-input reachability and executed runtime evidence remain separate. Required reading and full cross-backend repair are still pending; the director's RGX/PGEN build-chain clarification is preserved without treating generated dependency state as a blocker.

@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-08 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.6 - consolidate verified task chronology and correct historical references
+
+Consolidate 264 chronology rows into 260 existing task nodes across four closed trees, preserving every prior node reference and verbatim completion note. Six captions remain in their original tables. Exact source/node/Git and inverse reconstruction checks preserve all other node fields and outside text. Net saving: 251 lines and 8,210 bytes. Correct the proven wrong-node expression-block commit reference with its previous value retained. This ordinary documentation leaf uses focused proof; the parent remains open for Dart capacity .7 after Rust closeout.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.43 - reconcile corpus reading and own SimEnv dispatch repair
 
 Reconcile all 53 owned scopes (52 nonempty): 1,106 lines / 59,355 baseline-identical bytes; 18 JSON files decode and the manifest contains 105 unique cases. Twelve paired Perl probes and exact handler lowering confirm a distinct SimEnv bare/braced dispatch defect, now repair-owned by .76. Preserve three DBINP authoring investigations in PARSER-AUTHORING-APIS without activation, clarify historical corpus evidence, and own the next task-capacity boundary under containment .6. No production or public contract changes.

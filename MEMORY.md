@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `c875924236c1fcd0bfd16852a87b920353912533` — clean reading-checkpoint base.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.43 - reconcile corpus reading and own SimEnv dispatch repair`.
+- activation_commit: `e288c3af1def3bcf1fb039d3c50de6a689cb337f` — clean chronology-consolidation base.
+- latest_completed_leaf: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.6 - consolidate verified task chronology and correct historical references`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: activate `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.6` to recover task capacity before reading `.3.3.44`;
-  `PARSER-AUTHORING-APIS` is proposed and approved format `.2.8`/`.12` remain parked.
+- next_action: resume `SESSION-STARTUP-READING.3.3.44`; containment `.7` owns later Dart capacity after Rust closeout.
+  Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.76` precede mutation setup; `.29` is part of `.5` adoption.
 - current_rust_warning_debt: repeated clean carriers report 1,870 `pgen` plus 26 `rgx-core` output warnings;
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4983` is the twenty-eighth history segment; ADR `0106`
   authorizes exactly 30 collection files / 29 manifest lines / 16,463 manifest bytes; other ceilings remain unchanged.
-- latest_bootstrap_read: 2026-09-08 — roadmap Yes / codebase No / physical mdBook Yes; .3.3.43 reconciles corpus/SimEnv reading; formal .4 pending; PNT continues after capacity .6.
+- latest_bootstrap_read: 2026-09-08 — roadmap Yes / codebase No / physical mdBook Yes; .3.3.43 reconciles corpus/SimEnv reading; formal .4 pending; PNT resumes .3.3.44 after completed capacity .6.

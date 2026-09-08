@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-- Status: `active` / `.5` committed; `.6` owns the next measured task-collection capacity boundary
+- Status: `active` / `.6` complete; `.7` owns later Dart reading admission capacity
 - Roadmap lane: `Repository architecture / documentation sustainability`
 - Created: `2026-08-09`
-- Last updated: `2026-09-08` (`.6` owns the next measured capacity boundary; prior closeout evidence is retained)
+- Last updated: `2026-09-08` (`.6` consolidates verified chronology; `.7` retains the later Dart capacity obligation)
 - Owner: repo-local workflow
 
 ## Goal
@@ -58,10 +58,10 @@ or the README `.4` adoption/closeout that installs the guard.
 ## Task Tree
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-  Status: `active` (`.0-.5` complete; `.6` pending after the clean startup `.3.3.43` checkpoint)
+  Status: `active` (`.0-.6` complete; `.7` remains a later capacity prerequisite)
   Goal: Replace measured oversized routed destinations with bounded views over durable stores.
   Depends on: `README-STABILITY-POLICY.4.2`
-  Children: `.0-.6`
+  Children: `.0-.7`
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0`
   Status: `done` (2026-08-09; committed atomically at `dc8dd896` as 176/300; brief cleared; clean proof passed;
@@ -297,21 +297,37 @@ or the README `.4` adoption/closeout that installs the guard.
   Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5 - compact duplicate startup chronology without losing evidence`
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.6`
-  Status: `pending`
-  Goal: Recover required-reading tracking capacity through independently verified duplicate chronology removal.
+  Status: `done`
+  Goal: Recover capacity for the remaining Rust checkpoints through verified duplicate chronology consolidation.
   Acceptance: Measure resulting task pressure; audit closed-tree table/node/Git identities and every consumer;
     retain all unique notes, stable IDs, acceptance, reading/repair evidence and immutable bytes. Use `.5`'s exact
-    equivalence precedent; preserve existing limits, split any infrastructure change, and commit before `.3.3.44`.
-  Verification: Pending; `.3.3.43` measures 101 task files / 79,993 lines / 8,148,759 bytes before this frontier-table expansion.
+    equivalence precedent; correct proven historical commit-reference errors while retaining prior text, preserve limits, split infrastructure changes, and commit before `.3.3.44`.
+  Verification tier: `focused`
+  Focused checks: Exact source/table/node/Git and retained-note equivalence; consumer audit; task metadata,
+    memory, Knowledge, routing pressure, both histories and diff; immutable and non-target identity.
+  Canonical trigger: `none` — ordinary documentation consolidation; parent stays open for `.7`, with no mechanical-owner change.
+  Verification: Exact 264-row/260-node retention and Git identity pass across four closed trees; six captions
+    remain in table form. Non-Commit node fields and all outside text are unchanged; 251 lines / 8,210 bytes
+    removed overall. The wrong .2.1.1 pointer is corrected with prior text retained; runnable audit is in
+    docs/knowledge/startup-task-chronology-compaction.md. Metadata, memory, Knowledge, histories and doctrine proof govern landing.
+  Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.6 - consolidate verified task chronology and correct historical references`
+
+- ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7`
+  Status: `pending`
+  Goal: Admit complete bounded Dart reading ownership within the governed task-store capacity.
+  Dependencies: Rust reading closeout `SESSION-STARTUP-READING.3.3.67`; before Dart child ownership/reading begins.
+  Acceptance: Reverify the preserved estimate of 115 files / 56 groups / 169 range rows; measure resulting
+    ownership and evidence capacity, preserve every unique record and limit, and split any required infrastructure design before changes.
+  Verification: Pending; d6f37492 preserves the estimate. `.6`'s 251-line saving does not establish capacity for the full Dart decomposition.
   Commit: `pending`
 
 ## Current Frontier
 
-| Order | Leaf | Status | Why next |
-| --- | --- | --- | --- |
-| 1 | `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.6` | `pending` | After clean startup `.3.3.43`, recover task capacity before `.3.3.44`; no compaction in the dirty reading slice. |
+No eligible containment leaf. Resume `SESSION-STARTUP-READING.3.3.44`; `.7` becomes eligible after Rust `.3.3.67` and before Dart ownership/reading.
 
 ## Decisions
+
+- `2026-09-08`: `.6` is bounded documentation consolidation with focused proof under ADR 0073; the parent remains open because the preserved Dart decomposition estimate needs `.7` capacity admission. No mechanical owner, limit or current product contract changes.
 
 - Exact history is durable data; containment changes its live projection and retrieval topology, not its truth.
 - The README routing registry's clean baselines are immutable. Transition allowances name owners and finite deltas
@@ -429,6 +445,8 @@ All files and transient proof stay on the repository filesystem; no off-volume c
 
 ## Verification Log
 
+- `2026-09-08` `.6`: four-source Git/node/table/retained-note audit, byte-exact inverse reconstruction and corrected-reference provenance pass; metadata passes partitions 27/27, current-ID 10/10 and stable-marker controls. Final focused continuity proof belongs to its commit.
+
 Planning evidence: clean activation `0bcb5a36`; route report 20 surfaces / 62 routes / 32/32 mutations; exact
 four-file line/byte/SHA-256 census; 121 / 117 / 75 / 132 repository-reference counts; seven live required-marker
 families; an initial four-executable plus two-JSON future-task inventory; 25 top-level future-node boundaries; exact
@@ -529,6 +547,8 @@ brief clearing, generated-residue census, post-pointer check, and clean proof re
 
 ## Commit Log
 
+- `.6`: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.6 - consolidate verified task chronology and correct historical references`.
+
 `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0 - freeze bounded document store contract` — `dc8dd896`, atomic 176/300.
 
 `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.1 - bound live status over exact history` — `99fe03f3`, atomic 177/300.
@@ -542,6 +562,8 @@ brief clearing, generated-residue census, post-pointer check, and clean proof re
 - `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5`: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5 - compact duplicate startup chronology without losing evidence`.
 
 ## Changelog
+
+- `2026-09-08`: `.6` consolidates 264 records with complete retention; `.7` keeps future Dart capacity task-owned.
 
 - `2026-08-09`: Opened from the director-priority README routing-pressure audit. Recorded exact clean measurements
   and owners before policy/checker enforcement or any content migration.

@@ -87,7 +87,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   One inventory claim was rejected on verification: the surface agent called lifecycle markers
   `E`/`IT` "deprecated", which contradicts the completed `LIFECYCLE-FAMILY-AUDIT` (all 7 markers
   equivalent/supported) — NOT propagated. No book content changed (audit only).
-  Commit: `SPEC-LANG-REFERENCE.1` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.1 — audit: full .spec surface inventory + book coverage map; decompose into .2-.8`; prior node reference: `SPEC-LANG-REFERENCE.1` (see Commit Log); retained completion note: Also creates the owning tree + registers it in docs/TASK_TREE.md (ownership-first, folded into the first leaf per repo convention). Audit only — no book change
 
 - ID: `SPEC-LANG-REFERENCE.2`
   Status: `done`
@@ -119,7 +119,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   and added a captures-only/compacted clarifier to `source-boundary-helper-reference.md`. This
   closes the capture-group-mapping accuracy concern, so `.5` (helper-catalog sweep) need not
   re-litigate the indexing contract. `mdbook build` exit 0.
-  Commit: `SPEC-LANG-REFERENCE.2` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.2 — book: regex as a first-class concept (new user-model chapter) + fix capture-indexing drift`; prior node reference: `SPEC-LANG-REFERENCE.2` (see Commit Log); retained completion note: New `user-model/regex-in-spec.md` + `SUMMARY.md`; `formal-grammar.md §3.1` capture-group/flags expansion; corrected the `entry_group`/`match_group` indexing contradiction in `helper-contract-catalog.md`, `overview/what-is-linkedspec.md`, `formal-grammar.md`, `source-boundary-helper-reference.md`. All facts verified vs `LinkedRE.pm`/`Contracts.pm`/rgx/shipped specs
 
 - ID: `SPEC-LANG-REFERENCE.3`
   Status: `done`
@@ -175,7 +175,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   `docs/knowledge/rust-perl-output-oracle.md`), so the divergence is documented at the verified
   reader-wiring level (which span each family reads), matching the book's established style, rather
   than an unverified I/O. `mdbook build` exit 0.
-  Commit: `SPEC-LANG-REFERENCE.4` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.4 — book: grouped action-edge targets (edges chapter) + entry-vs-match divergence (capture chapter)`; prior node reference: `SPEC-LANG-REFERENCE.4` (see Commit Log); retained completion note: Grouped-target section in `action-and-lifecycle-placement.md` (ebnf-grounded) + divergence section in `capture-marks-and-source-locations.md`; both examples compile-verified. Divergence documented at reader-wiring level (top-level I/O entangled with hard accumulator axes — not fabricated)
 
 - ID: `SPEC-LANG-REFERENCE.5`
   Status: `done`
@@ -211,7 +211,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   families / ~140 helpers** — the large remaining surface, decomposed into per-family example
   sub-leaves `.5.2`–`.5.5` (≥1 worked, compile-verified example per family; the original `.5`
   acceptance's "at least one example" is per-family). `mdbook build` exit 0.
-  Commit: `SPEC-LANG-REFERENCE.5.1` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.5.1 — helper-catalog audit: 0 completeness gaps, fix 2 variant-neutrality sigil leaks, decompose example work into .5.2-.5.5`; prior node reference: `SPEC-LANG-REFERENCE.5.1` (see Commit Log); retained completion note: Confirmed 0 public-API gaps; fixed `$name`/`$rule_label` sigil leaks in `helper-contract-catalog.md`; split `.5` into per-family example sub-leaves. mdbook build exit 0
 
 - ID: `SPEC-LANG-REFERENCE.5.2`
   Status: `done`
@@ -242,7 +242,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   …)) }`) actually outputs `[]`, not the documented `["?pair:","key","val"]`; the tagged array is
   produced by the OR self-ref form `Pair:: … -> Pair { return(array(…)) }` (verified) — `.3`'s live
   run used a self-ref-OR shape that was mis-transcribed into the `AND`/`[0]` form.
-  Commit: `SPEC-LANG-REFERENCE.5.2` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.5.2 — book: compile-verified worked examples for all Scalar + Numeric helpers (helper-contract-catalog §2/§5)`; prior node reference: `SPEC-LANG-REFERENCE.5.2` (see Commit Log); retained completion note: 35 helpers, each run-verified through `LinkedSpec::Get` against the oracle; shared runnable-spec preamble; condition-only note for `is_defined`/`is_undefined`; array-form reducers via explicit `array(...)`. Found §5.5 drift → new leaf `.9`. mdbook build exit 0
 
 - ID: `SPEC-LANG-REFERENCE.5.3`
   Status: `done`
@@ -263,7 +263,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   documented receiver chain. The book now documents stable receiver/block/assignment forms, and
   KM fact `array-helper-return-shape-caveats` records the caveat with a reverify command.
   `mdbook build`, whitespace, memory, task-tree, doctrine, and Knowledge Map checks pass.
-  Commit: `SPEC-LANG-REFERENCE.5.3` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.5.3 - add Array helper worked examples`; prior node reference: `SPEC-LANG-REFERENCE.5.3` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.5.3 — add Array helper worked examples`; retained completion note: `helper-contract-catalog.md` now has verified Array examples for constructor/copy/splice, selectors, edge slices, ordering, membership, split, pipelines, mutations, receiver chains, and array-tree traversal. KM fact `array-helper-return-shape-caveats` records split/pipeline shape-sensitive caveats; optional normalization deferred to `.5.3.1`
 
 - ID: `SPEC-LANG-REFERENCE.5.3.1`
   Status: `deferred`
@@ -292,7 +292,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   `hash("a", 1, "missing")` as unsupported-helper output (`[null]` through the demo wrapper), so
   the book now documents explicit `undef` / list-splice forms and KM fact
   `hash-helper-odd-arity-current-behavior` records the caveat.
-  Commit: `SPEC-LANG-REFERENCE.5.4` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.5.4 - add Hash and Control Flow worked examples`; prior node reference: `SPEC-LANG-REFERENCE.5.4` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.5.4 — add Hash and Control Flow worked examples`; retained completion note: `helper-contract-catalog.md` now has verified Hash examples for constructor/copy/splice, pure/mutating updates, sorted views, receiver chains, and hash-tree traversal, plus Control Flow examples for branch forms, `switch`, `while`, `next`, `return`, `return_undef`, and descriptor-verified `exit_now`. KM fact `hash-helper-odd-arity-current-behavior` records the direct odd-arity `hash(...)` caveat; optional normalization deferred to `.5.4.1`
 
 - ID: `SPEC-LANG-REFERENCE.5.4.1`
   Status: `deferred`
@@ -320,7 +320,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   from an unverified `return(call(Inner/Child))` shape to the verified ordered-child shape
   (`Top:: -> Name .push` + `Name:AND` later-slot action). KM fact
   `entry-match-divergence-verified-shape` records the durable pattern. This closes `.5`.
-  Commit: `SPEC-LANG-REFERENCE.5.5` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.5.5 - add remaining helper-family worked examples`; prior node reference: `SPEC-LANG-REFERENCE.5.5` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.5.5 — add remaining helper-family worked examples`; retained completion note: `helper-contract-catalog.md` now has verified Declaration, Capture/Mark, Entry/Match, Input, and Call examples. Corrected stale entry-vs-match examples in the source-boundary chapters to the verified ordered-child shape and added KM fact `entry-match-divergence-verified-shape`. This closes the helper-catalog sweep `.5`; frontier advances to `.6`
 
 - ID: `SPEC-LANG-REFERENCE.6`
   Status: `done`
@@ -339,7 +339,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   action-block timing is needed; consume-mode probes verify `Delimited` and `Block` examples return
   `{"body":"body"}`-shaped payloads. KM fact `split-boundary-marker-action-timing` records the
   durable marker timing caveat. `mdbook build` and KM/memory/doctrine gates pass.
-  Commit: `SPEC-LANG-REFERENCE.6` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.6 - add capture/mark marker cross-example`; prior node reference: `SPEC-LANG-REFERENCE.6` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.6 — add capture/mark marker cross-example`; retained completion note: `source-boundary-helper-reference.md` and `action-and-lifecycle-placement.md` now include a verified marker-form cross-example for `@capture_slice`, `@mark(body_start)`, `mark_match_start(close_start)`, `capture_slice()`, `capture_from(...)`, and `capture_between(...)`. KM fact `split-boundary-marker-action-timing` records marker visibility timing; frontier advances to `.7`
 
 - ID: `SPEC-LANG-REFERENCE.7`
   Status: `done`
@@ -357,7 +357,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   action-vs-blind dispatch retrieval keys and summary. `KNOWLEDGE_MAP.md` now routes all six
   audit-required questions to fact cards, and `knowledge-map/scripts/check_knowledge_map.sh`
   passes.
-  Commit: `SPEC-LANG-REFERENCE.7` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.7 - add spec-language Knowledge Map cards`; prior node reference: `SPEC-LANG-REFERENCE.7` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.7 — add spec-language Knowledge Map cards`; retained completion note: Added canonical KM fact cards for output/return shape, regex backend feature contract, rule-mode semantics, lifecycle/`retv` order, and capture/mark taxonomy; extended `spec-edge-syntax-contract` for action-vs-blind dispatch retrieval. KM gate passes; frontier advances to `.8`
 
 - ID: `SPEC-LANG-REFERENCE.9`
   Status: `done`
@@ -387,7 +387,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   but on **multi-slot** rules returning at the closing slot (often an accumulator snapshot), so the
   construct is real — the drift is specifically single-slot `::AND` self-edge examples claiming the
   `return` value as output.
-  Commit: `SPEC-LANG-REFERENCE.9` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.9 — book: fix drifted §5.5 Pair example output (AND-[0] self-edge returns [] not the tagged array)`; prior node reference: `SPEC-LANG-REFERENCE.9` (see Commit Log); retained completion note: Corrected the §5.5 Pair example to the verified OR self-ref `-> Pair` form (+ §5.7 cross-ref). Surfaced a SYSTEMIC variant across chapters → new leaf `.10` (blocked on a user decision). mdbook build exit 0
 
 - ID: `SPEC-LANG-REFERENCE.10`
   Status: `done`
@@ -402,6 +402,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   preambles with the verified 2-rule idiom), `.10.6` (done — retracted the inaccurate `[]` premise;
   rationale = the 2-rule authoring doctrine), `.10.5.4.1` (done — reactivated the paused scorch),
   `.10.5` (remediation active; `.10.5.5` next)
+  Commit: `SPEC-LANG-REFERENCE.10 — correction: top rule has no regex; .5.2/.9 examples are structurally invalid (not an engine bug); retract .10.1, plan remediation (.10.3-.5)`; table label: `SPEC-LANG-REFERENCE.10` (correction); retained completion note: User-established structural invariant (top `::` rule no regex; valid spec ≥2 rules), verified vs Core.pm/RuleIR.pm + 20-spec audit. Deleted the wrong KM card, added `spec-top-rule-no-regex-two-rule-minimum.md` with the proven 2-rule idiom. Superseded `.10.1` verdict + `.10.2`; added remediation leaves. NO Perl change. Repo handoff-ready; fresh session recommended
 
 - ID: `SPEC-LANG-REFERENCE.10.1`
   Status: `done`
@@ -418,7 +419,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   for an invalid grammar, not an engine defect. The mis-diagnosis KM card
   (`and-single-acode-edge-return-dropped.md`) is **DELETED** and replaced by the correct card
   `spec-top-rule-no-regex-two-rule-minimum.md`. Lesson recorded in DEVELOPMENT_NOTES.
-  Commit: `SPEC-LANG-REFERENCE.10.1` (investigation), corrected by the `.10` remediation commit.
+  Commit: `SPEC-LANG-REFERENCE.10.1 — investigation: single-slot AND drops its edge return ([]) is a Perl-reference regression, not intended (KM card + verdict)`; prior node reference: `SPEC-LANG-REFERENCE.10.1` (investigation), corrected by the `.10` remediation commit.; retained completion note: Read-only root-cause investigation; VERDICT = accidental regression in `AND_SINGLE_ACODE` emitter (missing `push`); triple-verified vs source/git/card; KM card `and-single-acode-edge-return-dropped.md`. `.10.2` fix blocked on a user direction decision. No code/book change. **(Verdict later SUPERSEDED — see `.10` correction commit.)**
 
 - ID: `SPEC-LANG-REFERENCE.10.2`
   Status: `superseded`
@@ -455,7 +456,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   in the catalog is the §8 Entry/Match helper *reference* (correct, untouched). `mdbook build` exit 0
   (rendered HTML confirms the full blocks stay single code blocks with the required inter-rule blank
   line). self-check + KM gate pass. No Perl change.
-  Commit: `SPEC-LANG-REFERENCE.10.3` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.10.3 — book: redo Scalar+Numeric helper examples + preambles with the valid 2-rule idiom (entry_group; re-verified outputs)`; prior node reference: `SPEC-LANG-REFERENCE.10.3` (see Commit Log); retained completion note: Rewrote both `helper-contract-catalog.md` worked-examples preambles + all 33 examples to the top-entry-rule + normal-rule form reading `entry_group(N)`; every output re-derived through `LinkedSpec::Get`; outputs are the one-element accumulator snapshot. `mdbook build` exit 0
 
 - ID: `SPEC-LANG-REFERENCE.10.4`
   Status: `superseded`
@@ -521,7 +522,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   and `spec-files-and-rule-paragraphs.md`. **Idiom note (verified):** the bare action-block form
   `pair: /re/ { return(...) }` (no `I`) returns `[0,0]` — the `I { … }` lifecycle block is required.
   `mdbook build` exit 0.
-  Commit: `SPEC-LANG-REFERENCE.10.5.2` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.10.5.2 — book: fix what-is-linkedspec.md minimal kv example → verified 2-rule idiom`; prior node reference: `SPEC-LANG-REFERENCE.10.5.2` (see Commit Log); retained completion note: Replaced the single-rule `Top::AND+ /…/ -> Top[0]` (regex-on-top → compile-fail/`null`) with `top:: -> pair .push` / `LX{return(array_copy(a(top)))}` + `pair: /(\w+)=(\w+)/ I{return(hash(…entry_group(0/1)…))}`; book-extracted run → `[{"key":"foo","val":"bar"},{"key":"baz","val":"qux"}]`; `mdbook build` exit 0
 
 - ID: `SPEC-LANG-REFERENCE.10.5.3`
   Status: `done`
@@ -537,7 +538,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   `.10.3`): `match_text()` in the freshly-dispatched child returns `null` (`[{"kind":"top","text":
   null}]`); `entry_text()` (the entering match) returns `"foo"`. Only the one inline `.spec` heredoc
   on the page (the `get_parser` example uses a named spec, not inline `.spec`). `mdbook build` exit 0.
-  Commit: `SPEC-LANG-REFERENCE.10.5.3` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.10.5.3 — book: fix get-and-get-parser.md minimal Get example → verified 2-rule idiom`; prior node reference: `SPEC-LANG-REFERENCE.10.5.3` (see Commit Log); retained completion note: Replaced inline `Top::AND /foo/ -> Top[0] {…match_text()…}` (→ `[]`) with `top:: -> word .push` / `LX{return(array_copy(a(top)))}` + `word: /foo/ I{return(hash("kind","top","text",entry_text()))}`; book-extracted run → `[{"kind":"top","text":"foo"}]`; `match_text()`→`null` trap caught; `mdbook build` exit 0
 
 - ID: `SPEC-LANG-REFERENCE.10.5.4`
   Status: `done`
@@ -565,7 +566,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   (2026-06-18) — the `call(...)` dataflow teaching is preserved without them; they remain live in the
   reference engine and elsewhere in the book until `SPEC-FORMAT-TERSE` lands the terse forms.
   `mdbook build` exit 0; `scripts/check_memory_architecture.sh` exit 0. No Perl change.
-  Commit: `SPEC-LANG-REFERENCE.10.5.4` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.10.5.4 — book: fix worked-spec-walkthrough.md → verified 2-rule idiom; re-derive whole-chapter outputs; drop declare/assign`; prior node reference: `SPEC-LANG-REFERENCE.10.5.4` (see Commit Log); retained completion note: Central single-rule `Pair::AND -> Pair[0]` (→`[]`, claimed `{kind:pair,…}`) → `Top::` entry + `Pair:` matcher; every claimed I/O re-derived via `LinkedSpec::Get`; output corrected single-hash→one-element list; `match_group`→`entry_group`; `ctx{top_rule}` Pair→Top; declare()/assign() removed from the advanced sketch per the user terse-format pivot. `mdbook build` exit 0. **Whole-book scorch PAUSED here — user activated `SPEC-FORMAT-TERSE`.**
 
 - ID: `SPEC-LANG-REFERENCE.10.5.4.1`
   Status: `done`
@@ -577,7 +578,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Verification: Done — 2026-07-08. Updated durable coordination records to resolve the 2026-06-18
   pause and point the active frontier at `.10.5.5` (`user-model/spec-files-and-rule-paragraphs.md`).
   No book source, parser/runtime code, corpus, or Knowledge Map fact changed.
-  Commit: `SPEC-LANG-REFERENCE.10.5.4.1` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.10.5.4.1 - reactivate book scorch`; prior node reference: `SPEC-LANG-REFERENCE.10.5.4.1` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.4.1 — reactivate book scorch`; retained completion note: User reactivated `SPEC-LANG-REFERENCE`; durable coordination records now point to `.10.5.5` as the next book-content leaf. Metadata-only; no mdBook source or parser/runtime behavior changed
 
 - ID: `SPEC-LANG-REFERENCE.10.5.5`
   Status: `done`
@@ -591,7 +592,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   line inside an open `{ ... }` block fails validation with `Rule definition not allowed inside open
   block`. The four replacement snippets were compile/run-verified through `LinkedSpec::Get`; the
   mdBook build exits 0 (`mdbook build docs/linkedspec-book`).
-  Commit: `SPEC-LANG-REFERENCE.10.5.5` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.10.5.5 - fix spec file paragraph examples`; prior node reference: `SPEC-LANG-REFERENCE.10.5.5` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.5 — fix spec file paragraph examples`; retained completion note: `spec-files-and-rule-paragraphs.md` runnable examples now use the verified 2-rule idiom; the malformed bare `label:` block is replaced with valid quoted `"label:"` helper content plus the exact validation-error note. Four snippets verified through `LinkedSpec::Get`; mdBook build exit 0; Knowledge fact card added
 
 - ID: `SPEC-LANG-REFERENCE.10.5.6`
   Status: `done`
@@ -610,7 +611,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   .push` / `LX { return(copy(array(Top))) }` + `Word: /foo/ I.return(entry_text())`). Runtime probes:
   token stream `foo "bar"` → `["foo","bar"]`; `seek` over `junk foo` → `["foo"]`; `consume` over
   `junk foo` → `[]`; `consume` over `foo` → `["foo"]`. `mdbook build docs/linkedspec-book` exits 0.
-  Commit: `SPEC-LANG-REFERENCE.10.5.6` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.10.5.6 - fix rule mode and parse mode examples`; prior node reference: `SPEC-LANG-REFERENCE.10.5.6` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.6 — fix rule mode and parse mode examples`; retained completion note: `rule-modes-and-parse-modes.md` regex-owning mode examples now use single-colon labels, the `::` framing teaches no-regex entry/dispatcher usage, and `Top:: /foo/` parse-mode snippets are replaced with the verified 2-rule wrapper. Runtime probes and mdBook build pass
 
 - ID: `SPEC-LANG-REFERENCE.10.5.7`
   Status: `done`
@@ -627,7 +628,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   `[{"amount":"12","name":"abc"}]`; named groups `abc` →
   `[{"amount":null,"name":"abc"}]`, `12abc` → `[{"amount":"12","name":"abc"}]`.
   `mdbook build docs/linkedspec-book` exits 0.
-  Commit: `SPEC-LANG-REFERENCE.10.5.7` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.10.5.7 - fix regex chapter examples`; prior node reference: `SPEC-LANG-REFERENCE.10.5.7` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.7 — fix regex chapter examples`; retained completion note: `regex-in-spec.md` examples now use no-regex `Top::` wrappers plus single-colon regex-bearing rules. Numbered/named capture and compaction teaching is preserved with `entry_group` / `entry_named`; runtime probes and mdBook build pass
 
 - ID: `SPEC-LANG-REFERENCE.10.5.8`
   Status: `done`
@@ -643,7 +644,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   `Top::` wrapper: validation reports `Cannot mix ACTION (->) and BLIND CALL (=>) code blocks`.
   The page scan reports no `::` header followed by a regex slot, and `mdbook build docs/linkedspec-book`
   exits 0.
-  Commit: `SPEC-LANG-REFERENCE.10.5.8` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.10.5.8 - fix blind-call orchestration examples`; prior node reference: `SPEC-LANG-REFERENCE.10.5.8` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.8 — fix blind-call orchestration examples`; retained completion note: `blind-calls-and-parser-orchestration.md` keeps no-regex blind-call `::` wrappers, converts regex-owning action-edge examples to single-colon labels, and clarifies the mixed-edge negative example. Scan/probe and mdBook build pass
 
 - ID: `SPEC-LANG-REFERENCE.10.5.9`
   Status: `done`
@@ -663,7 +664,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   The page scan reports no `::` header followed by a regex slot; `mdbook build docs/linkedspec-book` and
   Knowledge Map check pass. A Perl handler-shape drift found during verification is tracked in Knowledge fact
   `perl-lifecycle-final-value-e-drift` and follow-up leaf `.10.5.20`.
-  Commit: `SPEC-LANG-REFERENCE.10.5.9` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.10.5.9 - fix action and lifecycle placement examples`; prior node reference: `SPEC-LANG-REFERENCE.10.5.9` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.9 — fix action and lifecycle placement examples`; retained completion note: `action-and-lifecycle-placement.md` now separates entry-match `I`/`entry_*` from local-slot action `match_*`, removes regex-on-`::` examples, corrects hash initialization, and records the Perl lifecycle handler drift caveat
 
 - ID: `SPEC-LANG-REFERENCE.10.5.10`
   Status: `done`
@@ -681,7 +682,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   `[{"outer":"greet","outer_name":"greet","inner":"world","inner_name":"world"}]`, preserving the
   entry-vs-match teaching without regex slots under `::`. The page scan reports no `::` header followed
   by a regex slot; `mdbook build docs/linkedspec-book` exits 0.
-  Commit: `SPEC-LANG-REFERENCE.10.5.10` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.10.5.10 - fix capture and entry-match examples`; prior node reference: `SPEC-LANG-REFERENCE.10.5.10` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.10 — fix capture and entry-match examples`; retained completion note: `capture-marks-and-source-locations.md` now uses a no-regex `Top::` wrapper plus normal `Body:` delimiter rule for the `capture_slice()` example, and a blind-call `Top::AND => Call` wrapper plus normal `Call:`/`Inner:` rules for entry-vs-match divergence. Seek-mode capture probe returns `[{"body":"body"}]`; blind-call probe returns `greet` vs `world`; Knowledge fact `perl-capture-slice-delimiter-seek-boundary` records the consume-mode caveat
 
 - ID: `SPEC-LANG-REFERENCE.10.5.11`
   Status: `done`
@@ -695,7 +696,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   `Token:` matcher; runtime probe over `Alpha` returns
   `[{"kind":"token","source":"Token","text":"alpha","text_length":5}]`. The page scan reports no `::`
   header followed by a regex slot; `mdbook build docs/linkedspec-book` exits 0.
-  Commit: `SPEC-LANG-REFERENCE.10.5.11` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.10.5.11 - fix declaration helper examples`; prior node reference: `SPEC-LANG-REFERENCE.10.5.11` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.11 — fix declaration helper examples`; retained completion note: `declaration-helper-reference.md` now uses no-regex wrappers for accumulator and metadata examples: `List::` owns aggregate state while `Item:` owns the matcher, and `Top::` dispatches to regex-owning `Token:`. Runtime probes return the documented two-item list and token metadata outputs; page scan and mdBook build pass
 
 - ID: `SPEC-LANG-REFERENCE.10.5.12`
   Status: `done`
@@ -714,7 +715,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   AtEnd → `[{"cursor_pos":7,"prefix":"abc END","remaining":"","source_end_col":8,"source_end_line":1,"source_len":7}]`;
   entry-vs-match → `[{"entry_group_count":1,"entry_prefix":"foo","entry_text":"foo","local_group_count":1,"local_name":"bar","local_text":"bar"}]`.
   The page scan reports no `::` header followed by a regex slot; `mdbook build docs/linkedspec-book` exits 0.
-  Commit: `SPEC-LANG-REFERENCE.10.5.12` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.10.5.12 - fix source-boundary examples`; prior node reference: `SPEC-LANG-REFERENCE.10.5.12` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.12 — fix source-boundary examples`; retained completion note: `source-boundary-helper-reference.md` now uses no-regex `Top::AND` blind-call wrappers plus normal regex-owning rules for Tuple, Block, Paren, Pair, Body, AtEnd, and entry-vs-match examples. Seven focused probes return the documented source-boundary outputs; page scan and mdBook build pass
 
 - ID: `SPEC-LANG-REFERENCE.10.5.13`
   Status: `done`
@@ -732,7 +733,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Node → `{"kind":"word","name":"Alpha","normalized_name":"alpha"}`;
   Sequence → `{"head":{"text":"alpha"},"item_count":2,"kind":"sequence","rest":[{"text":"beta"}]}`.
   The page scan reports no `::` header followed by a regex slot; `mdbook build docs/linkedspec-book` exits 0.
-  Commit: `SPEC-LANG-REFERENCE.10.5.13` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.10.5.13 - fix value-container flow examples`; prior node reference: `SPEC-LANG-REFERENCE.10.5.13` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.13 — fix value-container flow examples`; retained completion note: `value-container-flow-helper-reference.md` now uses no-regex wrappers or entry rules for Token, FieldList, Node, Sequence, and Kind examples, with regex slots moved to normal matcher rules. Five focused probes return the documented token, field-list, node-normalization, sequence head/tail, and switch-classification outputs; page scan and mdBook build pass
 
 - ID: `SPEC-LANG-REFERENCE.10.5.14`
   Status: `done`
@@ -755,7 +756,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Items `alpha beta` → `{"first":{"text":"alpha"},"kind":"pair","second":{"text":"beta"}}`;
   Items `alpha beta gamma` → `{"count":3,"items":[{"text":"alpha"},{"text":"beta"},{"text":"gamma"}],"kind":"list"}`.
   The four-page scan reports no `::` header followed by a regex slot; `mdbook build docs/linkedspec-book` exits 0.
-  Commit: `SPEC-LANG-REFERENCE.10.5.14` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.10.5.14 - fix remaining DSL examples`; prior node reference: `SPEC-LANG-REFERENCE.10.5.14` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.14 — fix remaining DSL examples`; retained completion note: `values-containers-and-flow-helpers.md`, `action-model-and-helper-surface.md`, and `fluent-and-block-forms.md` now avoid regex-bearing `::` examples for Token, Value, and Items. `actionir-lowering-mental-model.md` audited clean as helper/pipeline fragments only. Focused Token, Value, and Items probes pass; four-page scan and mdBook build pass
 
 - ID: `SPEC-LANG-REFERENCE.10.5.15`
   Status: `done`
@@ -773,7 +774,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   `["?result:",["Alice","Bob"]]`; `SecondChild` on `one two` → `["one","two"]`;
   `ThirdChild` on `first second` → `["?third:",["first","second"]]`. The appendix scan reports
   no `::` header followed by a regex slot; `mdbook build docs/linkedspec-book` exits 0.
-  Commit: `SPEC-LANG-REFERENCE.10.5.15` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.10.5.15 - fix formal grammar examples`; prior node reference: `SPEC-LANG-REFERENCE.10.5.15` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.15 — fix formal grammar examples`; retained completion note: `formal-grammar.md` §1 and §12 now use no-regex top rules plus normal regex-owning matcher rules. The complete example defines every dispatch target and verifies DemoParser, SecondChild, and ThirdChild outputs; appendix scan and mdBook build pass
 
 - ID: `SPEC-LANG-REFERENCE.10.5.16`
   Status: `done`
@@ -792,7 +793,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   pair → `["?pair:","key","val"]`; object → `["?object:","foo"]`;
   manifest → `["?manifest:"]`. The page scan reports no `::` header followed by a regex slot;
   `mdbook build docs/linkedspec-book` exits 0.
-  Commit: `SPEC-LANG-REFERENCE.10.5.16` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.10.5.16 - fix runtime semantics examples`; prior node reference: `SPEC-LANG-REFERENCE.10.5.16` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.16 — fix runtime semantics examples`; retained completion note: `runtime-semantics.md` §5.5/§5.6 now uses no-regex `Top::` wrappers plus normal regex-owning `Done:`, `Pair:`, `object:`, and `manifest:` rules. The folded `.10.4` Pair target now returns the verified `entry_group` tagged array through `Top`; five focused outputs, page scan, and mdBook build pass
 
 - ID: `SPEC-LANG-REFERENCE.10.5.17`
   Status: `done`
@@ -809,7 +810,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Also corrected the same page's stale descriptor helper list after checking the live spec and
   descriptor metadata: five rules ready, zero blocked, zero compatibility, zero raw, zero unresolved.
   `mdbook build docs/linkedspec-book` exits 0.
-  Commit: `SPEC-LANG-REFERENCE.10.5.17` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.10.5.17 - fix tablegrep walkthrough outputs`; prior node reference: `SPEC-LANG-REFERENCE.10.5.17` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.17 — fix tablegrep walkthrough outputs`; retained completion note: `tablegrep-spec-walkthrough.md` now shows verified JSON outputs for the simple term and grouped expression (`sens` is `=`), and its descriptor helper list matches the live spec. Parser probes, descriptor metadata probe, and mdBook build pass
 
 - ID: `SPEC-LANG-REFERENCE.10.5.18`
   Status: `done`
@@ -825,7 +826,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   `["?constant:",["0x1f"]]`, and `{sig_a sig_b[7:0] 0x1f}` ->
   `["?concat:",[["?bare:",["sig_a"]],["?slice:",["sig_b","7","0"]],["?constant:",["0x1f"]]]]`.
   `mdbook build docs/linkedspec-book` exits 0.
-  Commit: `SPEC-LANG-REFERENCE.10.5.18` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.10.5.18 - verify portmap walkthrough outputs`; prior node reference: `SPEC-LANG-REFERENCE.10.5.18` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.18 — verify portmap walkthrough outputs`; retained completion note: `portmap-spec-walkthrough.md`'s five output-shape examples were rechecked against `LinkedSpec::get_parser('portmap')`; the current page already matches the live nested JSON for bare, bit, slice, constant, and concatenation cases. Parser probes and mdBook build pass
 
 - ID: `SPEC-LANG-REFERENCE.10.5.19`
   Status: `done`
@@ -842,7 +843,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Focused `LinkedSpec::Get` probes verify the corrected outputs: `(a(b)c)` -> `[["a",["b"],"c"]]`,
   `(a) (b)` -> `[["a"],["b"]]`, direct value-path assignment -> `"updated"`, array end mutations ->
   `["a"]`, and the function proof -> `["x","ab",2,"v"]`. `mdbook build docs/linkedspec-book` exits 0.
-  Commit: `SPEC-LANG-REFERENCE.10.5.19` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.10.5.19 - finalize book scorch`; prior node reference: `SPEC-LANG-REFERENCE.10.5.19` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.19 — finalize book scorch`; retained completion note: Whole-book closeout scans found and fixed the remaining regex-on-`::` mdBook examples in `spec-files-and-rule-paragraphs.md`, `helper-contract-catalog.md`, and `compiler/pipeline-overview.md`. Follow-up scans return no matches; focused parser probes and mdBook build pass
 
 - ID: `SPEC-LANG-REFERENCE.10.5.20`
   Status: `done`
@@ -863,7 +864,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   now teaches explicit `return(...)` as the portable return channel, and KM fact
   `perl-lifecycle-final-value-e-drift` points to ADR `0020`. `mdbook build`, memory/task/doctrine,
   whitespace, and Knowledge Map checks pass.
-  Commit: `SPEC-LANG-REFERENCE.10.5.20` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.10.5.20 - document lifecycle drift policy`; prior node reference: `SPEC-LANG-REFERENCE.10.5.20` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.20 — document lifecycle drift policy`; retained completion note: Lifecycle final-value/direct-`E` drift resolved as a documented current Perl-reference caveat under ADR `0020`; `runtime-semantics.md` teaches explicit `return(...)` as the portable return channel; KM fact updated; focused probes and gates pass
 
 - ID: `SPEC-LANG-REFERENCE.10.6`
   Status: `done`
@@ -885,7 +886,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   only the *rationale wording* changed (the examples violated the 2-rule authoring doctrine, they
   were not returning `[]`). self-check + KM gate pass (KM regenerates `KNOWLEDGE_MAP.md`). No Perl,
   no book-example change.
-  Commit: `SPEC-LANG-REFERENCE.10.6` (see Commit Log)
+  Commit: `SPEC-LANG-REFERENCE.10.6 — record: retract the inaccurate "regex-on-top → []" premise; reframe the .10 rationale as the 2-rule authoring doctrine`; prior node reference: `SPEC-LANG-REFERENCE.10.6` (see Commit Log); retained completion note: Rewrote the KM card `spec-top-rule-no-regex-two-rule-minimum.md` doctrine-first + superseding Decision + record-framing fixes; doctrine and `.10.3` unchanged. No Perl/book-example change
 
 - ID: `SPEC-LANG-REFERENCE.8`
   Status: `done`
@@ -905,7 +906,7 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   `mdbook build docs/linkedspec-book`, `knowledge-map/scripts/check_knowledge_map.sh`,
   `scripts/check_memory_architecture.sh`, `scripts/check_task_tree_metadata.sh`,
   `scripts/check_doctrines.sh`, and `git diff --check` all pass.
-  Commit: `SPEC-LANG-REFERENCE.8 - correct top-rule doctrine drift and close language reference`
+  Commit: `SPEC-LANG-REFERENCE.8 - correct top-rule doctrine drift and close language reference`; table reference: `SPEC-LANG-REFERENCE.8 — correct top-rule doctrine drift and close language reference`; retained completion note: Reaffirmed ADR `0010` as current doctrine (`::` marks the entered-first rule; `::`/`:` share the feature surface after entry selection), converted the old no-regex/two-rule-minimum card into a superseded redirect, aligned mdBook/toolbox/task/live docs, and closed the language-reference tree. Focused parity probes, mdBook, KM, memory, task-tree metadata, doctrine, and whitespace gates pass
 
 ## Audit Findings (`.1`, 2026-06-17)
 
@@ -1269,46 +1270,14 @@ wrapped only where a complete worked example is intended) during the per-file fi
 
 ## Commit Log
 
+Canonical task-node Commit fields retain every consolidated table label, reference and note. Exact source and
+Git comparison are owned by `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.6`; no acceptance or verification field changes.
+The following historical captions remain in table form because the strict consolidation match did not resolve them.
+
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `SPEC-LANG-REFERENCE.1` | `SPEC-LANG-REFERENCE.1 — audit: full .spec surface inventory + book coverage map; decompose into .2-.8` | Also creates the owning tree + registers it in docs/TASK_TREE.md (ownership-first, folded into the first leaf per repo convention). Audit only — no book change |
-| `SPEC-LANG-REFERENCE.2` | `SPEC-LANG-REFERENCE.2 — book: regex as a first-class concept (new user-model chapter) + fix capture-indexing drift` | New `user-model/regex-in-spec.md` + `SUMMARY.md`; `formal-grammar.md §3.1` capture-group/flags expansion; corrected the `entry_group`/`match_group` indexing contradiction in `helper-contract-catalog.md`, `overview/what-is-linkedspec.md`, `formal-grammar.md`, `source-boundary-helper-reference.md`. All facts verified vs `LinkedRE.pm`/`Contracts.pm`/rgx/shipped specs |
 | `SPEC-LANG-REFERENCE.3` | `SPEC-LANG-REFERENCE.3 — book: output/return-value shape contract in runtime-semantics §5 (output is author's choice; optional tagged shape)` | Expanded `appendix/runtime-semantics.md §5` (§5.5–§5.8): top-rule value, output is author's choice (optional tagged convention per user feedback), return-vs-accumulator, one-level wrap. Verified vs oracle corpus + live Perl run + shipped specs |
-| `SPEC-LANG-REFERENCE.4` | `SPEC-LANG-REFERENCE.4 — book: grouped action-edge targets (edges chapter) + entry-vs-match divergence (capture chapter)` | Grouped-target section in `action-and-lifecycle-placement.md` (ebnf-grounded) + divergence section in `capture-marks-and-source-locations.md`; both examples compile-verified. Divergence documented at reader-wiring level (top-level I/O entangled with hard accumulator axes — not fabricated) |
-| `SPEC-LANG-REFERENCE.5.1` | `SPEC-LANG-REFERENCE.5.1 — helper-catalog audit: 0 completeness gaps, fix 2 variant-neutrality sigil leaks, decompose example work into .5.2-.5.5` | Confirmed 0 public-API gaps; fixed `$name`/`$rule_label` sigil leaks in `helper-contract-catalog.md`; split `.5` into per-family example sub-leaves. mdbook build exit 0 |
-| `SPEC-LANG-REFERENCE.5.2` | `SPEC-LANG-REFERENCE.5.2 — book: compile-verified worked examples for all Scalar + Numeric helpers (helper-contract-catalog §2/§5)` | 35 helpers, each run-verified through `LinkedSpec::Get` against the oracle; shared runnable-spec preamble; condition-only note for `is_defined`/`is_undefined`; array-form reducers via explicit `array(...)`. Found §5.5 drift → new leaf `.9`. mdbook build exit 0 |
-| `SPEC-LANG-REFERENCE.5.3` | `SPEC-LANG-REFERENCE.5.3 — add Array helper worked examples` | `helper-contract-catalog.md` now has verified Array examples for constructor/copy/splice, selectors, edge slices, ordering, membership, split, pipelines, mutations, receiver chains, and array-tree traversal. KM fact `array-helper-return-shape-caveats` records split/pipeline shape-sensitive caveats; optional normalization deferred to `.5.3.1` |
-| `SPEC-LANG-REFERENCE.5.4` | `SPEC-LANG-REFERENCE.5.4 — add Hash and Control Flow worked examples` | `helper-contract-catalog.md` now has verified Hash examples for constructor/copy/splice, pure/mutating updates, sorted views, receiver chains, and hash-tree traversal, plus Control Flow examples for branch forms, `switch`, `while`, `next`, `return`, `return_undef`, and descriptor-verified `exit_now`. KM fact `hash-helper-odd-arity-current-behavior` records the direct odd-arity `hash(...)` caveat; optional normalization deferred to `.5.4.1` |
-| `SPEC-LANG-REFERENCE.5.5` | `SPEC-LANG-REFERENCE.5.5 — add remaining helper-family worked examples` | `helper-contract-catalog.md` now has verified Declaration, Capture/Mark, Entry/Match, Input, and Call examples. Corrected stale entry-vs-match examples in the source-boundary chapters to the verified ordered-child shape and added KM fact `entry-match-divergence-verified-shape`. This closes the helper-catalog sweep `.5`; frontier advances to `.6` |
-| `SPEC-LANG-REFERENCE.6` | `SPEC-LANG-REFERENCE.6 — add capture/mark marker cross-example` | `source-boundary-helper-reference.md` and `action-and-lifecycle-placement.md` now include a verified marker-form cross-example for `@capture_slice`, `@mark(body_start)`, `mark_match_start(close_start)`, `capture_slice()`, `capture_from(...)`, and `capture_between(...)`. KM fact `split-boundary-marker-action-timing` records marker visibility timing; frontier advances to `.7` |
-| `SPEC-LANG-REFERENCE.7` | `SPEC-LANG-REFERENCE.7 — add spec-language Knowledge Map cards` | Added canonical KM fact cards for output/return shape, regex backend feature contract, rule-mode semantics, lifecycle/`retv` order, and capture/mark taxonomy; extended `spec-edge-syntax-contract` for action-vs-blind dispatch retrieval. KM gate passes; frontier advances to `.8` |
-| `SPEC-LANG-REFERENCE.8` | `SPEC-LANG-REFERENCE.8 — correct top-rule doctrine drift and close language reference` | Reaffirmed ADR `0010` as current doctrine (`::` marks the entered-first rule; `::`/`:` share the feature surface after entry selection), converted the old no-regex/two-rule-minimum card into a superseded redirect, aligned mdBook/toolbox/task/live docs, and closed the language-reference tree. Focused parity probes, mdBook, KM, memory, task-tree metadata, doctrine, and whitespace gates pass |
-| `SPEC-LANG-REFERENCE.9` | `SPEC-LANG-REFERENCE.9 — book: fix drifted §5.5 Pair example output (AND-[0] self-edge returns [] not the tagged array)` | Corrected the §5.5 Pair example to the verified OR self-ref `-> Pair` form (+ §5.7 cross-ref). Surfaced a SYSTEMIC variant across chapters → new leaf `.10` (blocked on a user decision). mdbook build exit 0 |
-| `SPEC-LANG-REFERENCE.10.1` | `SPEC-LANG-REFERENCE.10.1 — investigation: single-slot AND drops its edge return ([]) is a Perl-reference regression, not intended (KM card + verdict)` | Read-only root-cause investigation; VERDICT = accidental regression in `AND_SINGLE_ACODE` emitter (missing `push`); triple-verified vs source/git/card; KM card `and-single-acode-edge-return-dropped.md`. `.10.2` fix blocked on a user direction decision. No code/book change. **(Verdict later SUPERSEDED — see `.10` correction commit.)** |
-| `SPEC-LANG-REFERENCE.10` (correction) | `SPEC-LANG-REFERENCE.10 — correction: top rule has no regex; .5.2/.9 examples are structurally invalid (not an engine bug); retract .10.1, plan remediation (.10.3-.5)` | User-established structural invariant (top `::` rule no regex; valid spec ≥2 rules), verified vs Core.pm/RuleIR.pm + 20-spec audit. Deleted the wrong KM card, added `spec-top-rule-no-regex-two-rule-minimum.md` with the proven 2-rule idiom. Superseded `.10.1` verdict + `.10.2`; added remediation leaves. NO Perl change. Repo handoff-ready; fresh session recommended |
-| `SPEC-LANG-REFERENCE.10.3` | `SPEC-LANG-REFERENCE.10.3 — book: redo Scalar+Numeric helper examples + preambles with the valid 2-rule idiom (entry_group; re-verified outputs)` | Rewrote both `helper-contract-catalog.md` worked-examples preambles + all 33 examples to the top-entry-rule + normal-rule form reading `entry_group(N)`; every output re-derived through `LinkedSpec::Get`; outputs are the one-element accumulator snapshot. `mdbook build` exit 0 |
-| `SPEC-LANG-REFERENCE.10.6` | `SPEC-LANG-REFERENCE.10.6 — record: retract the inaccurate "regex-on-top → []" premise; reframe the .10 rationale as the 2-rule authoring doctrine` | Rewrote the KM card `spec-top-rule-no-regex-two-rule-minimum.md` doctrine-first + superseding Decision + record-framing fixes; doctrine and `.10.3` unchanged. No Perl/book-example change |
 | `SPEC-LANG-REFERENCE.10.5.1` | `SPEC-LANG-REFERENCE.10.5.1 — audit: whole-book .spec-snippet scorch (findings table + engine facts) → decompose into per-file fix leaves .10.5.2-.19` | Read-only audit (8 agents + personal ground-truth re-verify). ~105 `::`-mode headers across ~20 files; pervasive `Rule::AND /regex/ -> Rule[N]` idiom is doctrine-divergent + `[]`-shaped. User chose FULL book-wide scorch. ebnf "richer example" cleared. `.10.4` superseded by `.10.5.16`. No book/Perl change |
-| `SPEC-LANG-REFERENCE.10.5.2` | `SPEC-LANG-REFERENCE.10.5.2 — book: fix what-is-linkedspec.md minimal kv example → verified 2-rule idiom` | Replaced the single-rule `Top::AND+ /…/ -> Top[0]` (regex-on-top → compile-fail/`null`) with `top:: -> pair .push` / `LX{return(array_copy(a(top)))}` + `pair: /(\w+)=(\w+)/ I{return(hash(…entry_group(0/1)…))}`; book-extracted run → `[{"key":"foo","val":"bar"},{"key":"baz","val":"qux"}]`; `mdbook build` exit 0 |
-| `SPEC-LANG-REFERENCE.10.5.3` | `SPEC-LANG-REFERENCE.10.5.3 — book: fix get-and-get-parser.md minimal Get example → verified 2-rule idiom` | Replaced inline `Top::AND /foo/ -> Top[0] {…match_text()…}` (→ `[]`) with `top:: -> word .push` / `LX{return(array_copy(a(top)))}` + `word: /foo/ I{return(hash("kind","top","text",entry_text()))}`; book-extracted run → `[{"kind":"top","text":"foo"}]`; `match_text()`→`null` trap caught; `mdbook build` exit 0 |
-| `SPEC-LANG-REFERENCE.10.5.4` | `SPEC-LANG-REFERENCE.10.5.4 — book: fix worked-spec-walkthrough.md → verified 2-rule idiom; re-derive whole-chapter outputs; drop declare/assign` | Central single-rule `Pair::AND -> Pair[0]` (→`[]`, claimed `{kind:pair,…}`) → `Top::` entry + `Pair:` matcher; every claimed I/O re-derived via `LinkedSpec::Get`; output corrected single-hash→one-element list; `match_group`→`entry_group`; `ctx{top_rule}` Pair→Top; declare()/assign() removed from the advanced sketch per the user terse-format pivot. `mdbook build` exit 0. **Whole-book scorch PAUSED here — user activated `SPEC-FORMAT-TERSE`.** |
-| `SPEC-LANG-REFERENCE.10.5.4.1` | `SPEC-LANG-REFERENCE.10.5.4.1 — reactivate book scorch` | User reactivated `SPEC-LANG-REFERENCE`; durable coordination records now point to `.10.5.5` as the next book-content leaf. Metadata-only; no mdBook source or parser/runtime behavior changed |
-| `SPEC-LANG-REFERENCE.10.5.5` | `SPEC-LANG-REFERENCE.10.5.5 — fix spec file paragraph examples` | `spec-files-and-rule-paragraphs.md` runnable examples now use the verified 2-rule idiom; the malformed bare `label:` block is replaced with valid quoted `"label:"` helper content plus the exact validation-error note. Four snippets verified through `LinkedSpec::Get`; mdBook build exit 0; Knowledge fact card added |
-| `SPEC-LANG-REFERENCE.10.5.6` | `SPEC-LANG-REFERENCE.10.5.6 — fix rule mode and parse mode examples` | `rule-modes-and-parse-modes.md` regex-owning mode examples now use single-colon labels, the `::` framing teaches no-regex entry/dispatcher usage, and `Top:: /foo/` parse-mode snippets are replaced with the verified 2-rule wrapper. Runtime probes and mdBook build pass |
-| `SPEC-LANG-REFERENCE.10.5.7` | `SPEC-LANG-REFERENCE.10.5.7 — fix regex chapter examples` | `regex-in-spec.md` examples now use no-regex `Top::` wrappers plus single-colon regex-bearing rules. Numbered/named capture and compaction teaching is preserved with `entry_group` / `entry_named`; runtime probes and mdBook build pass |
-| `SPEC-LANG-REFERENCE.10.5.8` | `SPEC-LANG-REFERENCE.10.5.8 — fix blind-call orchestration examples` | `blind-calls-and-parser-orchestration.md` keeps no-regex blind-call `::` wrappers, converts regex-owning action-edge examples to single-colon labels, and clarifies the mixed-edge negative example. Scan/probe and mdBook build pass |
-| `SPEC-LANG-REFERENCE.10.5.9` | `SPEC-LANG-REFERENCE.10.5.9 — fix action and lifecycle placement examples` | `action-and-lifecycle-placement.md` now separates entry-match `I`/`entry_*` from local-slot action `match_*`, removes regex-on-`::` examples, corrects hash initialization, and records the Perl lifecycle handler drift caveat |
-| `SPEC-LANG-REFERENCE.10.5.10` | `SPEC-LANG-REFERENCE.10.5.10 — fix capture and entry-match examples` | `capture-marks-and-source-locations.md` now uses a no-regex `Top::` wrapper plus normal `Body:` delimiter rule for the `capture_slice()` example, and a blind-call `Top::AND => Call` wrapper plus normal `Call:`/`Inner:` rules for entry-vs-match divergence. Seek-mode capture probe returns `[{"body":"body"}]`; blind-call probe returns `greet` vs `world`; Knowledge fact `perl-capture-slice-delimiter-seek-boundary` records the consume-mode caveat |
-| `SPEC-LANG-REFERENCE.10.5.11` | `SPEC-LANG-REFERENCE.10.5.11 — fix declaration helper examples` | `declaration-helper-reference.md` now uses no-regex wrappers for accumulator and metadata examples: `List::` owns aggregate state while `Item:` owns the matcher, and `Top::` dispatches to regex-owning `Token:`. Runtime probes return the documented two-item list and token metadata outputs; page scan and mdBook build pass |
-| `SPEC-LANG-REFERENCE.10.5.12` | `SPEC-LANG-REFERENCE.10.5.12 — fix source-boundary examples` | `source-boundary-helper-reference.md` now uses no-regex `Top::AND` blind-call wrappers plus normal regex-owning rules for Tuple, Block, Paren, Pair, Body, AtEnd, and entry-vs-match examples. Seven focused probes return the documented source-boundary outputs; page scan and mdBook build pass |
-| `SPEC-LANG-REFERENCE.10.5.13` | `SPEC-LANG-REFERENCE.10.5.13 — fix value-container flow examples` | `value-container-flow-helper-reference.md` now uses no-regex wrappers or entry rules for Token, FieldList, Node, Sequence, and Kind examples, with regex slots moved to normal matcher rules. Five focused probes return the documented token, field-list, node-normalization, sequence head/tail, and switch-classification outputs; page scan and mdBook build pass |
-| `SPEC-LANG-REFERENCE.10.5.14` | `SPEC-LANG-REFERENCE.10.5.14 — fix remaining DSL examples` | `values-containers-and-flow-helpers.md`, `action-model-and-helper-surface.md`, and `fluent-and-block-forms.md` now avoid regex-bearing `::` examples for Token, Value, and Items. `actionir-lowering-mental-model.md` audited clean as helper/pipeline fragments only. Focused Token, Value, and Items probes pass; four-page scan and mdBook build pass |
-| `SPEC-LANG-REFERENCE.10.5.15` | `SPEC-LANG-REFERENCE.10.5.15 — fix formal grammar examples` | `formal-grammar.md` §1 and §12 now use no-regex top rules plus normal regex-owning matcher rules. The complete example defines every dispatch target and verifies DemoParser, SecondChild, and ThirdChild outputs; appendix scan and mdBook build pass |
-| `SPEC-LANG-REFERENCE.10.5.16` | `SPEC-LANG-REFERENCE.10.5.16 — fix runtime semantics examples` | `runtime-semantics.md` §5.5/§5.6 now uses no-regex `Top::` wrappers plus normal regex-owning `Done:`, `Pair:`, `object:`, and `manifest:` rules. The folded `.10.4` Pair target now returns the verified `entry_group` tagged array through `Top`; five focused outputs, page scan, and mdBook build pass |
-| `SPEC-LANG-REFERENCE.10.5.17` | `SPEC-LANG-REFERENCE.10.5.17 — fix tablegrep walkthrough outputs` | `tablegrep-spec-walkthrough.md` now shows verified JSON outputs for the simple term and grouped expression (`sens` is `=`), and its descriptor helper list matches the live spec. Parser probes, descriptor metadata probe, and mdBook build pass |
-| `SPEC-LANG-REFERENCE.10.5.18` | `SPEC-LANG-REFERENCE.10.5.18 — verify portmap walkthrough outputs` | `portmap-spec-walkthrough.md`'s five output-shape examples were rechecked against `LinkedSpec::get_parser('portmap')`; the current page already matches the live nested JSON for bare, bit, slice, constant, and concatenation cases. Parser probes and mdBook build pass |
-| `SPEC-LANG-REFERENCE.10.5.19` | `SPEC-LANG-REFERENCE.10.5.19 — finalize book scorch` | Whole-book closeout scans found and fixed the remaining regex-on-`::` mdBook examples in `spec-files-and-rule-paragraphs.md`, `helper-contract-catalog.md`, and `compiler/pipeline-overview.md`. Follow-up scans return no matches; focused parser probes and mdBook build pass |
-| `SPEC-LANG-REFERENCE.10.5.20` | `SPEC-LANG-REFERENCE.10.5.20 — document lifecycle drift policy` | Lifecycle final-value/direct-`E` drift resolved as a documented current Perl-reference caveat under ADR `0020`; `runtime-semantics.md` teaches explicit `return(...)` as the portable return channel; KM fact updated; focused probes and gates pass |
 
 ## Changelog
 
