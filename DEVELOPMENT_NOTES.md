@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.45 - reconcile self-hosted labels and edge grammar reading
+
+Unicode label membership and physical token boundaries are separate constraints: line anchoring and trailing boundaries prevent valid prefixes or suffixes from silently replacing invalid labels. Headers keep top and mode distinct; named regex slots preserve slot_name, while edge forms select target(s), code or fluent/raw fields. Existing self-hosted-rule-label-physical-boundaries Knowledge remains the causal owner. No runtime or public behavior changes.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.44 - reconcile self-hosted grammar reading and mirror freshness
 
 The self-hosted grammar preserves separate fields for fluent, indexed, blind and bare edges. Complete-line lifecycle dispatch precedes generic bare edges; standalone blocks normalize to lifecycle I. Variadic functions emit a versioned signature, while paragraph accumulation copies completed rules. Mirror identity and Unicode fixtures establish freshness; the inspected comment-skip oracle is stored evidence, not a newly executed parser result.

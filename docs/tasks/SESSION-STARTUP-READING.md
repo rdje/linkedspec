@@ -1713,12 +1713,15 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.44 - reconcile self-hosted grammar reading and mirror freshness`
 
 - ID: `SESSION-STARTUP-READING.3.3.45`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 45: 44 lines/fragments, 60,931 bytes.
   Scope: `rust/linkedspec-runtime/tests/corpus/spec_spec_comment_skip/input.spec` lines 126–169.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact owned-range/baseline audit and current mirror identity against the .44 Unicode freshness proof; Knowledge, memory, all doctrines, histories and diff.
+  Canonical trigger: `none` — bounded reading checkpoint; grammar and runtime unchanged.
+  Verification: All 44 lines / 60,931 bytes match the baseline; range SHA-256 `70dc693993fb724cfca8d8a3394b285210fdb20740f23b605e80da414dcb68d6`. Header labels preserve frozen Unicode membership plus physical-line/colon boundaries; mode and top are separate fields. Named slots preserve slot_name, anonymous anchors preserve pattern, and action/blind/bare block or fluent forms retain their distinct target/code/raw fields. Complete mirror identity remains `03cfb50459984806c806e9ec3f2b072add897c207a2cb93fd267d640a5808004`, so .44 freshness/Unicode proof applies unchanged. Existing self-hosted-rule-label-physical-boundaries Knowledge owns causal interpretation; no new runtime result is claimed.
+  Commit: `SESSION-STARTUP-READING.3.3.45 - reconcile self-hosted labels and edge grammar reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.46`
   Status: `pending`
@@ -4208,7 +4211,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.45` | `pending` | Continue the owned comment-skip grammar range after the completed mirror-freshness checkpoint. |
+| 1 | `SESSION-STARTUP-READING.3.3.46` | `pending` | Complete the comment-skip grammar suffix and continue the minimal-rule mirror. |
 
 ## Reading Ledger
 
@@ -4219,7 +4222,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.44` are reconciled and `.3.3.45`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.45` are reconciled and `.3.3.46`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read at baseline; .3.2.42 preserves coverage, and c8759242 reviews/renders the approved parked-coverage delta. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -6978,6 +6981,7 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- `2026-09-08` `.3.3.45`: exact range and complete canonical mirror identity pass; unchanged .44 Unicode proof applies. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.44`: four exact baseline scopes and JSON decode pass; all grammar mirrors match and the Unicode contract passes. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.43`: exact 53-scope baseline audit, 18 JSON decodes/105 unique manifest cases, twelve paired Perl Get observations and exact callee lowering; Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 
@@ -7269,3 +7273,4 @@ Each canonical task node owns its exact `Commit` subject and retained completion
 - `2026-09-08`: `.3.3.43` reconciles corpus reading, owns SimEnv dispatch .76 and preserves proposed parser-authoring investigations.
 
 - `2026-09-08`: `.3.3.44` reconciles self-hosted grammar reading and four-mirror freshness; next `.3.3.45`.
+- `2026-09-08`: `.3.3.45` reconciles physical label boundaries and edge grammar fields; next `.3.3.46`.

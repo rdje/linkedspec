@@ -5,20 +5,22 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.44` are reconciled and `.3.3.45`–`.3.3.66` plus closeout remain pending.
+  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.45` are reconciled and `.3.3.46`–`.3.3.66` plus closeout remain pending.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.76` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.3.44` reconciles four scopes: 225 lines / 65,141 baseline-identical bytes.
-- The first complete grammar mirror is read; all four mirrors and the Unicode rule-label contract pass freshness checks.
+- `SESSION-STARTUP-READING.3.3.45` reconciles the comment-skip grammar middle: 44 lines / 60,931 baseline-identical bytes.
+- Label boundaries and edge node fields are understood; complete mirror identity retains the .44 freshness proof.
 
 ## Next Action
 
-- Resume `SESSION-STARTUP-READING.3.3.45`; containment `.7` follows Rust closeout before Dart ownership/reading.
+- Resume `SESSION-STARTUP-READING.3.3.46`; containment `.7` follows Rust closeout before Dart ownership/reading.
 
 ## Recent Completions
+
+- `2026-09-08` — `SESSION-STARTUP-READING.3.3.45` reconciles label boundaries and edge grammar reading.
 
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.44` reconciles grammar reading and mirror freshness.
 
@@ -49,8 +51,6 @@
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.34` completes emitter reading and owns generated literal and recognition parse adapter repairs .71/.72.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.33` completes static/event reading and owns grouped source/selector correlation plus complete parser remainder .70.
-
-- `2026-09-07` — `SESSION-STARTUP-READING.3.3.32` completes query/runtime reading, preserves correct slot diagnostics and owns token-use/newline gaps .68/.69.
 
 ## History
 

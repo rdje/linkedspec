@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.45 - reconcile self-hosted labels and edge grammar reading
+
+Reconcile the comment-skip grammar middle: 44 lines / 60,931 baseline-identical bytes. Record header, regex-slot and action/blind/bare node-field comprehension. The complete mirror still matches the exact canonical identity validated by .44; its Unicode proof remains applicable. Focused continuity checks govern this documentation-only checkpoint.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.44 - reconcile self-hosted grammar reading and mirror freshness
 
 Reconcile four owned scopes: 225 lines / 65,141 bytes remain baseline-identical. Complete the action-edge grammar copy and preserve the comment-skip prefix boundary. All four corpus grammar mirrors equal canonical source; the Unicode rule-label contract and JSON decoding pass. The reading checkpoint changes no grammar, runtime or public behavior; remaining Rust checkpoints and formal alignment stay pending.
