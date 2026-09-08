@@ -1837,6 +1837,13 @@ not semantic signal; preserve typed diagnostics and locally predictable structur
 mechanisms over format-specific/host escapes. Uniform binding is the precedent. Recursive traversal retains
 `walk_leaves` / `map_leaves` / `reduce_leaves`; ambiguous short aliases are not adopted.
 
+Approved parked coverage note (2026-09-08, `STRUCTURED-TEXT-FORMAT-PROGRAM.0.1` / ADR `0034` addendum):
+the director greenlights an explicit programming-language track (`.12`) and a mechanism/authoring-difficulty
+matrix (`.2.8`) within the existing program. Preserve the original 91 rows; select language membership and
+versions separately at activation. Record conformance, mechanisms, authoring friction, performance and confidence
+with exact evidence, unassessed states and repair owners. Readiness `.1` remains inactive; current startup reading
+and repairs continue. This is approved DBINP direction, not implementation activation.
+
 Dynamic-parser observability note (2026-07-15, `FUTURE-PARITY-BACKLOG.18.2` / ADR `0037`): future format parsers
 must expose correlated compile-time and runtime trace through the normal native API. Exact rule-label allowlists
 focus emission only; they never change resolution, compilation, execution, recovery, diagnostics, caches, ASTs,

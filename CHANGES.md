@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-08 — STRUCTURED-TEXT-FORMAT-PROGRAM.0.1 - record approved parked language coverage and evidence matrix
+
+Record the director-approved programming-language coverage track and mechanism/authoring-difficulty matrix in the existing format program, ADR 0034 addendum, both roadmaps, task index, Knowledge and visible mdBook status. Future work is owned by .2.8 and .12; readiness .1 stays inactive and the original 91 catalog rows remain exact. Planning documentation adds no supported language or implementation. Focused inventory/state/route, rendered-book and continuity checks govern this slice.
+
 ## 2026-09-08 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5 - compact duplicate startup chronology without losing evidence
 
 Verified all 100 recorded batch identities against Git and all 102 duplicate commit subjects against canonical nodes, then retained each completion note verbatim beside its owning node. Removed the duplicate enumeration/table: 186 task-file lines and 16,380 bytes. Every other node field and all 316 stable IDs remain exact. No registry limit, immutable history, runtime or public surface changes. Exact staged canonical proof governs this containment closeout.

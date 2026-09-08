@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `e455be6a3c85cb7a75bc7ccd36c579efe74bcc97` — clean containment base after reading checkpoint.
-- latest_completed_leaf: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5 - compact duplicate startup chronology without losing evidence`.
+- activation_commit: `d6f37492505661c87c06c112126da101308ec6e4` — clean documentation-intake base.
+- latest_completed_leaf: `STRUCTURED-TEXT-FORMAT-PROGRAM.0.1 - record approved parked language coverage and evidence matrix`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: preserve the director's parameterized/generic-rule question as a proposed investigation;
-  then activate `SESSION-STARTUP-READING.3.3.43` and continue PNT reading.
+- next_action: resume `SESSION-STARTUP-READING.3.3.43`, preserving the remaining DBINP authoring proposals
+  with the intake; approved format-program `.2.8`/`.12` are parked and readiness `.1` is inactive.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.75` precede mutation setup; `.29` is part of `.5` adoption.
 - current_rust_warning_debt: repeated clean carriers report 1,870 `pgen` plus 26 `rgx-core` output warnings;

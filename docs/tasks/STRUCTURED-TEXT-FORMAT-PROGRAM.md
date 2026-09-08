@@ -6,7 +6,7 @@
 - Status: `proposed` (full current-backend parity prerequisite satisfied; readiness leaf `.1` not yet active)
 - Roadmap lane: `Post-parity format coverage and evidence-driven .spec language evolution`
 - Created: `2026-07-15`
-- Last updated: `2026-07-16` (Lua `.8.4` closes five-backend 80/0/0 parity; `.1` remains the explicit readiness gate)
+- Last updated: `2026-09-08` (approved parked coverage extension; documentation intake `.0.1`, readiness `.1` inactive)
 - Owner: repo-local workflow
 
 ## Goal
@@ -16,6 +16,10 @@ Unicode-aware text-to-AST parsers for every eligible entry in the director-provi
 structured-text catalog. Treat authoritative real-format conformance as the requirements generator for future
 `.spec` language evolution: when a format exposes a missing general parsing mechanism, specify it neutrally,
 implement and prove it across Perl, Rust, Dart, Julia, and Lua, then resume that format.
+
+The director's 2026-09-08 DBINP approval adds a separately inventoried programming-language coverage track and
+an evidence-backed mechanism/authoring-difficulty matrix. Both are approved and parked: `.0.1` records the idea,
+`.2.8` owns the future matrix, and `.12` owns future language coverage. `.1` remains pending explicit activation.
 
 ## Non-Goals
 
@@ -69,7 +73,7 @@ implement and prove it across Perl, Rust, Dart, Julia, and Lua, then resume that
 
 ## Shared Leaf Acceptance
 
-Every format leaf must:
+Every admitted format or programming-language leaf must:
 
 - cite a pinned authoritative specification/version and obtain or build a legally usable conformance corpus;
 - define the AST, source spans, raw/normalized value boundary, comments/trivia policy, and portable diagnostics;
@@ -100,11 +104,13 @@ trace, and objectively beneficial after build/load and break-even costs. Perl ac
 - ID: `STRUCTURED-TEXT-FORMAT-PROGRAM`
   Status: `proposed`
   Goal: Complete all 91 eligible catalog rows through reusable syntax families and close exact no-drift.
-  Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`, `.8`, `.9`, `.10`, `.11`
+    Also close the separately admitted programming-language inventory and evidence matrix; finite coverage is not universal completeness.
+  Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`, `.8`, `.9`, `.10`, `.11`, `.12`
 
 - ID: `STRUCTURED-TEXT-FORMAT-PROGRAM.0`
   Status: `done`
   Goal: Ratify the parity-gated program, architecture, exact catalog decomposition, and public roadmap direction.
+  Children: `.0.1` (approved parked extension; original ratification evidence retained below)
   Acceptance: ADR, dedicated task tree, exact 91-row inventory, dynamic `.spec`-graph sole-source contract,
     roadmap/index/live-doc/mdBook/Knowledge Map sync, explicit full-current-backend dependency, and no behavior change.
   Verification: **PASS 2026-07-15.** Direct source/task table extraction reports 91 source rows, 91 owned rows,
@@ -115,6 +121,21 @@ trace, and objectively beneficial after build/load and break-even costs. Perl ac
     exact inventory count, and whitespace checks pass. No parser/compiler/runtime/helper/fixture/capability or
     format behavior changed.
   Commit: `FUTURE-PARITY-BACKLOG.18.0 - adopt structured text requirements program`
+
+- ID: `STRUCTURED-TEXT-FORMAT-PROGRAM.0.1`
+  Status: `done`
+  Goal: Record the director-approved programming-language track and mechanism/authoring-difficulty matrix as parked direction.
+  Acceptance: Keep the original 91 leaf/name/status pairs exact; own future matrix `.2.8` and language track `.12`;
+    synchronize this tree, ADR 0034 addendum, both roadmaps, task index, Knowledge, live docs and visible mdBook status.
+    Readiness `.1` stays pending/inactive; no implementation, corpus acquisition or supported-language claim begins.
+  Verification tier: `focused`
+  Focused checks: Exact 91-row and parked-state comparison; task/roadmap/book route audit; mdBook build and rendered
+    section inspection; Knowledge regeneration; all doctrines including memory; both history pressure checks; diff.
+  Canonical trigger: `none` — planning documentation only, with no current language/API, gate or infrastructure change.
+  Verification: Exact ordered catalog comparison passes 91 unchanged leaf/name/status triples; all future
+    owners remain pending and seven durable/public routes agree. mdBook builds successfully; required rendered
+    inspection and focused continuity checks govern landing. No current parser support or implementation changes.
+  Commit: `STRUCTURED-TEXT-FORMAT-PROGRAM.0.1 - record approved parked language coverage and evidence matrix`
 
 - ID: `STRUCTURED-TEXT-FORMAT-PROGRAM.1`
   Status: `pending`
@@ -129,7 +150,7 @@ trace, and objectively beneficial after build/load and break-even costs. Perl ac
 - ID: `STRUCTURED-TEXT-FORMAT-PROGRAM.2`
   Status: `pending`
   Goal: Establish the reusable contracts and measurement harness before the first format parser.
-  Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`, `.2.5`, `.2.6`, `.2.7`
+  Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`, `.2.5`, `.2.6`, `.2.7`, `.2.8`
 
 | Leaf | Contract/harness slice | Status |
 | --- | --- | --- |
@@ -140,6 +161,18 @@ trace, and objectively beneficial after build/load and break-even costs. Perl ac
 | `.2.5` | Cross-backend cold-construction, warm-cache, parse-throughput/latency, memory/resource protocol for representative, large, streaming-shaped, and adversarial inputs. | `pending` |
 | `.2.6` | Reusable spec import/staged-parse/profile/projection architecture and syntax-family cache contract. | `pending` |
 | `.2.7` | End-to-end construction/runtime trace contract, exact rule-label filtering, correlation, bounded payloads, and shared five-backend/two-Lua-ABI non-interference proof. | `pending` |
+| `.2.8` | Approved parked mechanism coverage and evidence-backed authoring-difficulty matrix; exact scope below. | `pending` |
+
+- ID: `STRUCTURED-TEXT-FORMAT-PROGRAM.2.8`
+  Status: `pending`
+  Goal: At activation, define and implement a machine-readable format/language-to-mechanism matrix and authoring rubric.
+  Dependencies: `.1`, `.2.1`, `.2.3`, `.2.4`, `.2.5`; parked until the program is activated.
+  Acceptance: Separate conformance, mechanism coverage, authoring difficulty, performance and confidence; preserve
+    unassessed/not-run states. Each assessed case records version/profile, owner/revision, rule excerpt, oracle,
+    reproducer and proof. Straightforward/awkward/blocked judgments require concrete evidence; confirmed gaps gain
+    bounded repair ownership and regression cases, with shared neutral rollout before affected parsers resume.
+  Verification: `pending`
+  Commit: `pending`
 
 - ID: `STRUCTURED-TEXT-FORMAT-PROGRAM.3`
   Status: `pending`
@@ -303,15 +336,58 @@ trace, and objectively beneficial after build/load and break-even costs. Perl ac
 | `.11.3` | Run cross-backend performance/resource signoff and document measured tradeoffs without weakening accuracy. | `pending` |
 | `.11.4` | Publish complete mdBook format matrix, examples, AST/diagnostic contracts, versions, limitations, reverify commands, and final roadmap/KM closeout. | `pending` |
 
+- ID: `STRUCTURED-TEXT-FORMAT-PROGRAM.12`
+  Status: `pending`
+  Goal: Exercise programming-language text-to-AST parsing across distinct syntax families, separately from the original 91 rows.
+  Dependencies: `.1`, relevant `.2` foundations and `.2.8`; approved and parked, with no selected language inventory yet.
+  Children: `.12.1`, `.12.2`, `.12.3`, `.12.4`
+
+- ID: `STRUCTURED-TEXT-FORMAT-PROGRAM.12.1`
+  Status: `pending`
+  Goal: Select and pin a representative language/version/dialect inventory at activation.
+  Acceptance: Record syntax-family pressures, parsing/preprocessing boundaries, corpus authority/licensing,
+    shared-foundation reuse and exact membership without double counting; define bounded per-language children before implementation.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `STRUCTURED-TEXT-FORMAT-PROGRAM.12.2`
+  Status: `pending`
+  Goal: Deliver the admitted representative seed language parsers through bounded per-language children.
+  Acceptance: After `.12.1`, split before implementation; each child meets shared leaf acceptance and records
+    conformance, mechanisms and authoring friction in `.2.8`, with owned repairs for every confirmed gap.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `STRUCTURED-TEXT-FORMAT-PROGRAM.12.3`
+  Status: `pending`
+  Goal: Expand through the admitted language inventory using the seed results and reusable foundations.
+  Acceptance: After `.12.2`, split into bounded per-language children; minimize gaps, distinguish grammar/engine/
+    mechanism/authoring/performance causes, and land general neutral repairs before the affected parser resumes.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `STRUCTURED-TEXT-FORMAT-PROGRAM.12.4`
+  Status: `pending`
+  Goal: Close the separately admitted programming-language inventory and its public evidence matrix.
+  Acceptance: After `.12.3`, reconcile exact membership, versions, all-backend proof, examples, limitations and
+    matrix evidence; preserve the original 91-row count. Root completion also requires catalog closeout `.11`.
+  Verification: `pending`
+  Commit: `pending`
+
 ## Current Frontier
+
+Documentation intake `.0.1` is complete. Readiness `.1` and all parser/matrix implementation remain parked; current
+startup reading and repair prerequisites continue in `SESSION-STARTUP-READING`.
 
 | Order | Leaf | Status | Why next |
 | ---: | --- | --- | --- |
-| 1 | `STRUCTURED-TEXT-FORMAT-PROGRAM.0` | `done` | Ratified and durably decomposed without starting implementation. |
-| 2 | `STRUCTURED-TEXT-FORMAT-PROGRAM.1` | `pending` | Backend parity is satisfied; explicit readiness audit/activation is still required. |
+| 1 | `STRUCTURED-TEXT-FORMAT-PROGRAM.1` | `pending` | Explicit readiness audit/activation is still required; implementation remains inactive. |
 
 ## Decisions
 
+- `2026-09-08`: Director greenlights explicit programming-language coverage plus the mechanism/authoring-difficulty
+  matrix as DBINP intake. `.2.8` and `.12` own future work; approval does not activate implementation or promise a
+  language list. ADR `0034` addendum and the public chapter preserve this distinction.
 - `2026-07-15`: The format catalog is a post-parity requirements program for `.spec`, not merely a parser wish
   list. Missing capabilities become general neutral language/runtime features and roll through every current
   backend before the discovering format continues.
@@ -326,6 +402,8 @@ trace, and objectively beneficial after build/load and break-even costs. Perl ac
 
 ## Open Questions
 
+- Language membership, versions/dialects and seed selection belong to `.12.1` at activation; `.2.8` owns the exact
+  rubric/schema. These parked decisions do not block the current startup/repair roadmap.
 - Exact AST normalization/trivia and recovery contracts are deliberately owned by `.2.3`, after parity and before
   a format parser.
 - The format-native decoder API for XML/HTML and other non-UTF-8-capable inputs is deliberately owned by `.2.2`;
@@ -341,6 +419,7 @@ trace, and objectively beneficial after build/load and break-even costs. Perl ac
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-09-08` | `.0.1` | Exact 91-row identity and parked-state comparison; seven routes; mdBook build/rendered inspection; Knowledge, memory/doctrines, both histories and diff. | Focused documentation proof; no implementation activation. |
 | `2026-07-15` | `.0` | Source/task extraction 91/91 unique, missing/extra 0; ADR/task/roadmap/index/live-doc/book/KM sync; memory architecture; Knowledge Map; doctrines; mdBook; task metadata; whitespace. | PASS — complete parity gate is explicit and no behavior changed. |
 | `2026-07-15` | `FUTURE-PARITY-BACKLOG.18.1` | ADR/task/roadmap/index/live-doc/book/KM sync; exact uniform-binding precedent; recursive-traversal naming exclusion; memory architecture; Knowledge Map; doctrines; mdBook; task metadata; whitespace. | PASS — authoring quality is governed without adding syntax, aliases, or behavior. |
 | `2026-07-15` | `FUTURE-PARITY-BACKLOG.18.3` | Generated-source-v1/KM audit; ADR/task/roadmap/index/live-doc/book/KM sync; memory architecture; Knowledge Map; doctrines; mdBook; task metadata; whitespace. | PASS — optional native acceleration is a separate derivative horizon; dynamic format work remains primary and unblocked. |
@@ -349,12 +428,14 @@ trace, and objectively beneficial after build/load and break-even costs. Perl ac
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `.0.1` | `STRUCTURED-TEXT-FORMAT-PROGRAM.0.1 - record approved parked language coverage and evidence matrix` | Approved DBINP extension; future .2.8/.12 parked, readiness inactive, original 91 preserved. |
 | `.0` | `FUTURE-PARITY-BACKLOG.18.0 - adopt structured text requirements program` | ADR, exact 91-row decomposition, hard parity gate, roadmap/book/KM/live-doc synchronization. |
 | `FUTURE-PARITY-BACKLOG.18.1` | `FUTURE-PARITY-BACKLOG.18.1 - govern expressive spec authoring` | ADR 0035, authoring-quality invariant, uniform-binding precedent, and explicit retention of informative recursive names. |
 | `FUTURE-PARITY-BACKLOG.18.3` | `FUTURE-PARITY-BACKLOG.18.3 - plan optional native parser acceleration` | ADR 0038, dynamic/warm/native tiers, exact derivative invariants, and a separate non-blocking horizon tree. |
 
 ## Changelog
 
+- `2026-09-08`: `.0.1` records approved parked language coverage and evidence-matrix ownership without activating `.1` or changing the original 91 rows.
 - `2026-07-15`: Created the parity-gated structured-text format program and exact catalog ownership map.
 - `2026-07-15`: Added ADR `0035`'s terse/readable/highly-expressive authoring constraint without changing behavior.
 - `2026-07-15`: Linked ADR `0038` and the optional non-blocking native-accelerator horizon without changing the

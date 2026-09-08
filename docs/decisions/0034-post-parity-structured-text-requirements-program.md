@@ -79,6 +79,20 @@ byte-decoding questions that must not silently weaken ADR `0025`'s strict-UTF-8 
 - The mdBook becomes the public matrix of supported format/version/profile, AST/diagnostic contract, examples,
   Unicode behavior, conformance evidence, performance evidence, and honest limitations.
 
+## Planning addendum — 2026-09-08, approved and parked
+
+The director approves an explicit programming-language coverage track and a mechanism/authoring-difficulty matrix
+within this program. `STRUCTURED-TEXT-FORMAT-PROGRAM.0.1` records the DBINP intake; `.2.8` owns the future matrix
+and `.12` owns language coverage. The original 91 catalog rows retain their identity and scope. Language membership,
+versions/dialects, corpus authority/licensing and bounded per-language ownership are selected later under `.12.1`.
+
+The matrix separates conformance, mechanisms exercised, authoring difficulty, performance and confidence, with
+unassessed/not-run states and reproducible evidence. Confirmed gaps gain minimal reproductions and owning repair
+tasks; general mechanisms retain the neutral-contract/all-backend rollout before affected parsers resume.
+Finite inventory coverage is not universal parsing completeness. This accepts a parked planning direction only:
+readiness `.1` remains inactive, current startup/repair work continues, and no parser implementation or new current
+API/DSL contract is admitted.
+
 ## Links
 
 - Detailed task tree: `docs/tasks/STRUCTURED-TEXT-FORMAT-PROGRAM.md`

@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-08 — STRUCTURED-TEXT-FORMAT-PROGRAM.0.1 - record approved parked language coverage and evidence matrix
+
+Coverage count, conformance, mechanisms exercised, authoring friction, performance and confidence answer different questions. The parked extension records them separately with reproducible evidence and unassessed states. Language membership/version/dialect and bounded parser ownership are selected at activation; every confirmed gap gains a minimal reproduction and a repair owner. The existing neutral-language/all-backend sequence continues, and finite inventory coverage does not prove universal parsing completeness.
+
 ## 2026-09-08 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5 - compact duplicate startup chronology without losing evidence
 
 Line pressure came partly from recording the same commit subjects in both task nodes and a global table, plus a manually enumerated Git batch. Removing these duplicates preserves one richer node-local owner and reproducible Git history. Independent pre/post comparisons retain all notes and all non-Commit fields; the provenance card supplies the clean source identity and exact batch reconstruction. Read-only donor checks still match all three September 6 policy hashes; local adoption review remains startup .5-owned.

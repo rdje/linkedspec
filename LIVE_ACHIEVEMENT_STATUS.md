@@ -11,14 +11,16 @@
 
 ## Latest Completed Slice
 
-- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5` removes duplicate batch/commit chronology after exact source equivalence proof; every note remains beside its canonical task node.
-- Exact staged canonical proof is required before landing; its final result belongs in the commit body.
+- `STRUCTURED-TEXT-FORMAT-PROGRAM.0.1` records approved parked language coverage `.12` and the evidence matrix `.2.8`.
+- Original 91 rows remain exact; the mdBook makes approval and inactive readiness `.1` visible. Focused documentation proof governs landing.
 
 ## Next Action
 
-- Preserve the director's parameterized/generic-rule question as a proposed investigation, then resume `SESSION-STARTUP-READING.3.3.43`.
+- Resume `SESSION-STARTUP-READING.3.3.43`; retain remaining DBINP authoring proposals with its intake. Format implementation stays parked.
 
 ## Recent Completions
+
+- `2026-09-08` — `STRUCTURED-TEXT-FORMAT-PROGRAM.0.1` records approved parked language coverage and its evidence matrix.
 
 - `2026-09-08` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5` compacts duplicate chronology with exact retained-note proof.
 
@@ -49,8 +51,6 @@
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.30` completes context/foundation reading and owns repeated binding identity/source-reference repair .66.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.29` reads completion routing, typed projection and identity-based stores with five focused contracts.
-
-- `2026-09-07` — `SESSION-STARTUP-READING.3.3.28` completes recognition adapter reading and reconciles gap, typed helper and incoming conversion boundaries.
 
 ## History
 

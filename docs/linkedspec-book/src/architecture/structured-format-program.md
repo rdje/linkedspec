@@ -9,6 +9,54 @@ This work has a strict dependency: it does not begin until Perl, Rust, Dart, Jul
 behavior parity. Planning the program does not make any format currently supported and does not relax an open
 backend obligation.
 
+## Approved and parked: language coverage and authoring difficulty
+
+On 8 September 2026, the director approved an extension of this program: an explicit programming-language
+coverage track and a matrix showing which parsing mechanisms are exercised and how difficult the grammars are
+to author. This is recorded direction for future work. The readiness gate remains inactive; no language parser,
+corpus campaign, or matrix implementation starts with this approval.
+
+The original 91 catalog rows retain their identities and scope. Programming-language coverage will have a
+separate, explicitly selected inventory, reusing existing foundations and catalog entries without double counting.
+The purpose is to expose both capability gaps and unnecessary difficulty in expressing correct parsers.
+
+A format count alone cannot show this. Many formats reuse JSON or XML, while one language can exercise several
+different mechanisms. The future matrix will keep these dimensions separate:
+
+| Dimension | Evidence to record when work is activated |
+| --- | --- |
+| Conformance | Exact format/language version and dialect, parsing boundary, valid/invalid cases, AST and diagnostic expectations, and results for each backend and route. |
+| Parsing mechanisms | Cases exercising recursion, precedence and associativity, lexical context, indentation, contextual syntax, embedded languages, Unicode, recovery, and resource/progress boundaries. |
+| Authoring difficulty | Straightforward, awkward, or blocked authoring, supported by a representative rule excerpt, duplicated logic or workaround, diagnostic experience, and an improvement owner where needed. |
+| Performance | Separate cold construction, warm reuse, and document-parsing measurements over representative and adversarial inputs. |
+| Confidence | Pinned oracle/corpus, source revision, reproducible command, proof scope, and remaining untested boundaries. |
+
+Untried cases stay **unassessed**. A passing parser can still be awkward to write; an untested feature is not
+evidence of a missing capability. A finite corpus also cannot prove that every possible parsing task is covered.
+Completion claims will name the admitted inventory and the precise evidence supporting it.
+
+For example, a parser might pass its expression corpus but repeat substantial precedence-handling logic. Its
+conformance result can be passing while authoring remains awkward, linked to the relevant excerpt and an
+improvement task. If a minimized input instead demonstrates an incorrect AST, that case records a defect and its
+repair owner. These are examples of future reporting, not assessments of current LinkedSpec capabilities.
+
+The language track will first select representative syntax families and pin versions, dialects, preprocessing
+boundaries, corpus authority, and usable licensing. Operator precedence, indentation, context-dependent token
+interpretation, comments/trivia, and mixed embedded languages are selection pressures, not a promised language
+list. Each selected parser receives bounded task ownership before implementation and follows the same neutral
+contract and all-current-backend proof as the format parsers. Parsing source to AST does not implicitly add
+evaluation, typechecking, module loading, or execution.
+
+Every confirmed gap will retain a minimal reproduction and an owning repair task. Diagnosis must distinguish a
+grammar defect, an engine defect, a missing general mechanism, an authoring/documentation problem, and a
+performance limit. A missing general mechanism follows the existing neutral-contract and all-backend rollout
+before the affected parser resumes. The matrix will link the original difficulty to the repair and its verified
+result, so recording a problem leads to accountable follow-through.
+
+The durable routes are `STRUCTURED-TEXT-FORMAT-PROGRAM.2.8` for the matrix and rubric and `.12` for language
+coverage; `.0.1` records this approval. ADR `0034` carries the dated planning addendum. Readiness `.1` remains the
+activation gate, and the current startup reading and repair work retains its place in the roadmap.
+
 ## One dynamic parser source
 
 For each format, the composed `.spec` files are the sole executable source of truth for grammar, parser
