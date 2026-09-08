@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.44 - reconcile self-hosted grammar reading and mirror freshness
+
+Reconcile four owned scopes: 225 lines / 65,141 bytes remain baseline-identical. Complete the action-edge grammar copy and preserve the comment-skip prefix boundary. All four corpus grammar mirrors equal canonical source; the Unicode rule-label contract and JSON decoding pass. The reading checkpoint changes no grammar, runtime or public behavior; remaining Rust checkpoints and formal alignment stay pending.
+
 ## 2026-09-08 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.6 - consolidate verified task chronology and correct historical references
 
 Consolidate 264 chronology rows into 260 existing task nodes across four closed trees, preserving every prior node reference and verbatim completion note. Six captions remain in their original tables. Exact source/node/Git and inverse reconstruction checks preserve all other node fields and outside text. Net saving: 251 lines and 8,210 bytes. Correct the proven wrong-node expression-block commit reference with its previous value retained. This ordinary documentation leaf uses focused proof; the parent remains open for Dart capacity .7 after Rust closeout.

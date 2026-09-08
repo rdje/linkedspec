@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.44 - reconcile self-hosted grammar reading and mirror freshness
+
+The self-hosted grammar preserves separate fields for fluent, indexed, blind and bare edges. Complete-line lifecycle dispatch precedes generic bare edges; standalone blocks normalize to lifecycle I. Variadic functions emit a versioned signature, while paragraph accumulation copies completed rules. Mirror identity and Unicode fixtures establish freshness; the inspected comment-skip oracle is stored evidence, not a newly executed parser result.
+
 ## 2026-09-08 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.6 - consolidate verified task chronology and correct historical references
 
 Historical task records use both full subjects and abbreviated pointers; some table captions differ from exact Git subjects. Consolidation preserves those distinctions, matches only explicit subject/typographic variants backed by Git, and retains unmatched captions. Git b4217c37 changed the expression-block task's placeholder to an unrelated string-comparison commit; its real c5f2204b reference is restored with the old value labeled. No parsing behavior, acceptance field, verification evidence or doctrine changes. The retained Dart decomposition estimate needs a later capacity admission, so .6 is an ordinary focused leaf and .7 keeps the capacity parent open.

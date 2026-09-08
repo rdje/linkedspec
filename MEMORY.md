@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `e288c3af1def3bcf1fb039d3c50de6a689cb337f` — clean chronology-consolidation base.
-- latest_completed_leaf: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.6 - consolidate verified task chronology and correct historical references`.
+- activation_commit: `696738abe53cbbe058fe92f2b047e84a5bd93439` — clean grammar-reading checkpoint base.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.44 - reconcile self-hosted grammar reading and mirror freshness`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: resume `SESSION-STARTUP-READING.3.3.44`; containment `.7` owns later Dart capacity after Rust closeout.
+- next_action: resume `SESSION-STARTUP-READING.3.3.45`; containment `.7` owns later Dart capacity after Rust closeout.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.76` precede mutation setup; `.29` is part of `.5` adoption.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4983` is the twenty-eighth history segment; ADR `0106`
   authorizes exactly 30 collection files / 29 manifest lines / 16,463 manifest bytes; other ceilings remain unchanged.
-- latest_bootstrap_read: 2026-09-08 — roadmap Yes / codebase No / physical mdBook Yes; .3.3.43 reconciles corpus/SimEnv reading; formal .4 pending; PNT resumes .3.3.44 after completed capacity .6.
+- latest_bootstrap_read: 2026-09-08 — roadmap Yes / codebase No / physical mdBook Yes; .3.3.44 reconciles grammar reading/freshness; formal .4 pending; PNT resumes .3.3.45.
