@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-09 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.3 - independently verify Dart capacity and evidence retention
+
+Independent verification of canonical implementation 4489f5e9 confirms exactly four approved registry scalars, actual validator boundaries, retained task/Knowledge paths and questions, 59 history-store files (56 immutable segments and three manifests), and all 11 FUTURE files. Stable lookup returns exact owner bytes from root and docs/. Recompute current pressure and the complete reserve including member limits; all fit. All doctrines, both histories, Knowledge synchronization, rendered book and staged scope govern this focused documentation slice. No capacity, executable or parser change; admission .7.4 remains next.
+
 ## 2026-09-08 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.2 - implement the approved Dart capacity controls
 
 Implement the director-approved ADR 0108 exception through exact execution ADR 0109. Change only task aggregate lines/bytes to 88,000/9,437,184 and Knowledge file/line totals to 1,152/72,000; preserve all member and other limits. The task main census and boundary self-tests share actual member/aggregate validators. Old guards fail five new classes; approved guards pass 31/31. The unchanged routing validator passes 16 registry-bound cases/24 executions. Existing IDs, records and parser behavior remain intact; canonical receipt-bound proof precedes landing, then independent .7.3 and admission .7.4.

@@ -320,7 +320,7 @@ or the README `.4` adoption/closeout that installs the guard.
   Acceptance: Reverify the preserved estimate of 115 files / 56 groups / 169 range rows; measure resulting
     ownership and evidence capacity, preserve every unique record and all limits except ADR 0109's four director-approved aggregate scalars, and split required infrastructure design before changes.
   Evidence-capacity intake: `.3.3.61` measures 1,017 Knowledge Markdown files / 58,284 lines / 4,850,347 bytes against unchanged 1,024 / 64,000 / 6,291,456 ceilings. Include this evidence store in the capacity review before Dart; no count increase is authorized by this measurement.
-  Verification: `.7.0` verifies exact Dart inventory; `.7.1` records the design. The director's greenlight authorizes `.7.2` through ADR 0109; exact boundary and canonical proof govern landing. Independent `.7.3` and admission `.7.4` remain pending.
+  Verification: `.7.0` verifies exact Dart inventory; `.7.1` records the approved design. Implementation `.7.2` lands with canonical proof at 4489f5e9. Independent `.7.3` recomposes controls, preservation, lookup and the complete reserve; admission `.7.4` remains pending.
   Commit: `pending`
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.0`
@@ -370,12 +370,15 @@ or the README `.4` adoption/closeout that installs the guard.
   - [x] **LOCKSTEP** — Director approval, indexed ADRs, Knowledge, roadmaps, mdBook and bounded continuity agree; git diff --check and exact staged canonical receipt precede the per-leaf commit.
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.3`
-  Status: `pending`
+  Status: `done`
   Goal: Independently recompose the committed capacity controls and complete projected Dart reserve.
   Dependencies: `.7.2` clean canonical commit.
   Acceptance: Prove exact registry/guard agreement, old task and Knowledge retention, unchanged immutable/FUTURE retrieval, generated-map freshness and resulting aggregate/member headroom.
-  Verification: Planned focused proof; no additional capacity or mechanism change.
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Committed guard/registry boundary proof; exact task/Knowledge/immutable retention and stable lookup; current and projected member/aggregate pressure; all doctrines, Knowledge freshness, both histories, mdBook render and staged scope.
+  Canonical trigger: `none` — independent documentation verification of the canonically committed controls; no mechanical owner changes.
+  Verification: Independent old/new scope audit proves only four approved registry scalars changed; every earlier task/Knowledge path and question survives. All 59 history-store files (56 immutable segments and three manifests) and 11 FUTURE files retain exact blobs; stable lookup is byte-identical from root and docs/. Actual validators pass 31 classes and 16 cases/24 executions. Complete current and projected aggregate/member reserve fits; exact final measurements and focused results belong to this commit. No additional capacity or mechanism change.
+  Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.3 - independently verify Dart capacity and evidence retention`
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.4`
   Status: `pending`
@@ -387,7 +390,7 @@ or the README `.4` adoption/closeout that installs the guard.
 
 ## Current Frontier
 
-Next: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.3` after the exact canonical `.7.2` commit. The director approved ADR 0108's narrow exception; ADR 0109 implements its four aggregate changes with existing member and preservation controls intact. Admission `.7.4` and Dart source reading remain pending.
+Next: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.4` admits the bounded pending Dart tree after independent `.7.3` verification. Canonical implementation 4489f5e9 and the independent audit preserve all existing limits beyond the four approved scalars, records and retrieval. No Dart source-reading credit yet.
 
 ## Decisions
 

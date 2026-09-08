@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1018** facts · **8400** question keys.
+> **1018** facts · **8401** question keys.
 
 ## Questions → fact
 
@@ -3069,6 +3069,7 @@
 - "how do I execute selected Julia corpus fixtures" -> [julia-corpus-selection-reporting](docs/knowledge/julia-corpus-selection-reporting.md) · 2026-07-10 · reverify: `bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()'`
 - "how do I express AND seek or OR consume without parse_mode" -> [rule-local-cursor-and-bare-edge-contract](docs/knowledge/rule-local-cursor-and-bare-edge-contract.md) · 2026-07-20 · reverify: `bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py; rg -n '0044|linkedspec-rule-local-cursor-v1|parse_mode_override_removed|bare_edge_group_requires_action|linkedspec-generated-source-v2' docs/decisions/0044-rule-local-cursor-and-mode-sensitive-bare-edges.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src`
 - "how do I include the primary CLI matrix in local CI" -> [primary-cli-four-backend-matrix](docs/knowledge/primary-cli-four-backend-matrix.md) · 2026-07-19 · reverify: `bash tools/run_primary_cli_matrix.sh && rg -n 'LINKEDSPEC_RUN_CLI_MATRIX|run_primary_cli_matrix' tools/run_ci_local.sh README.md docs/linkedspec-book/src/development/local-ci-and-regression.md`
+- "how do I independently verify retained evidence and the complete Dart capacity reserve" -> [dart-reading-capacity-controls](docs/knowledge/dart-reading-capacity-controls.md) · 2026-09-08
 - "how do I initialize LinkedSpec repository local temporary and cache storage" -> [project-data-env-initializer](docs/knowledge/project-data-env-initializer.md) · 2026-07-27 · reverify: `bash -n tools/project_data_env.sh tools/test_project_data_env.sh && bash tools/test_project_data_env.sh && git check-ignore .linkedspec-data/probe`
 - "how do I initialize a codeblock variable" -> [callable-codeblock-literal-contract](docs/knowledge/callable-codeblock-literal-contract.md) · 2026-07-12 · reverify: `bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && rg -n '0031|0032|name: codeblock|dynamic caller|FUTURE-PARITY-BACKLOG\\.11\\.[1-8]' docs/decisions/0031-callable-codeblock-literal-and-dynamic-context.md docs/decisions/0032-final-codeblock-parameter-declaration.md docs/tasks/FUTURE-PARITY-BACKLOG.md`
 - "how do I list retained or interrupted LinkedSpec runs" -> [project-data-run-lifecycle](docs/knowledge/project-data-run-lifecycle.md) · 2026-07-26 · reverify: `bash -n tools/project_data_env.sh tools/project_data_run.sh tools/test_project_data_lifecycle.sh && bash tools/test_project_data_lifecycle.sh && bash tools/test_project_data_workflow_routing.sh && bash tools/project_data_run.sh --list && rg -n 'PROJECT-DATA-SSD-ROOTING\\.3\\.1\\.2' docs/tasks/PROJECT-DATA-SSD-ROOTING.md`
@@ -9409,8 +9410,8 @@ _Dart packages, temporary workspaces, generated output, and traces stay on repos
 ### dart-reading-capacity-controls
 _Approved Dart reading capacity preserves bounded members and tests the real validators_
 
-- **answers:** what are the current task and Knowledge capacity limits for Dart reading | which guard enforces the approved Dart task collection capacity | how do I verify task and Knowledge boundaries at their exact limits | did the director approve the capacity exception before full codebase reading | does the Dart capacity exception permit parser repairs or artifact purge
-- **date:** 2026-09-08 · **status:** implemented under LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.2; canonical proof required before landing
+- **answers:** what are the current task and Knowledge capacity limits for Dart reading | which guard enforces the approved Dart task collection capacity | how do I verify task and Knowledge boundaries at their exact limits | did the director approve the capacity exception before full codebase reading | does the Dart capacity exception permit parser repairs or artifact purge | how do I independently verify retained evidence and the complete Dart capacity reserve
+- **date:** 2026-09-08 · **status:** implemented at 4489f5e9 with canonical proof; independently recomposed under LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.3
 - **evidence:** `The director approved ADR 0108 with I greenlight the exception. ADR 0109 authorizes exactly four aggregate scalar changes. The task main census and 31 self-test classes share the real collection validators; new boundary expectations reject the old guards and pass after the two aggregate adjustments. The registry-bound audit below also exercises the unchanged routing validator directly. Canonical completion evidence belongs to the .7.2 commit and exact receipt; independent .7.3 and admission .7.4 remain pending.`
 - **source:** [`docs/knowledge/dart-reading-capacity-controls.md`](docs/knowledge/dart-reading-capacity-controls.md)
 

@@ -55,7 +55,7 @@ clear spelling, not a portability requirement.
 
 ## Documentation pressure containment
 
-Current reading prerequisite (2026-09-08): Perl and Rust source reading are complete. Rust closeout
+Current reading prerequisite (2026-09-09): Perl and Rust source reading are complete. Rust closeout
 3132596c accounts for all 412 files and passes the canonical gate, including all 1,032 Phase 0 tests.
 The complete codebase reading prerequisite remains open.
 
@@ -81,8 +81,11 @@ This is a planning reserve, not a guarantee about unknown future findings.
 
 The task census and its boundary tests now call the same validators. They accept each exact ceiling
 and reject independent line, byte and file-count overflow; member-size constraints remain enforced.
-Full canonical verification governs this infrastructure commit. Independent proof `.7.3` and admission
-`.7.4` remain pending before the separate bounded Dart tree defines its source-reading children.
+Implementation `.7.2` passed canonical verification and landed at 4489f5e9. Independent proof
+`.7.3` confirms exact controls, retained task and Knowledge evidence, unchanged historical bytes,
+and stable retrieval. Recomputing the full planning allowances from the current population still fits
+both aggregate and per-file limits. Admission `.7.4` is next, before the separate bounded Dart tree
+defines its source-reading children; no Dart source-reading credit is claimed yet.
 The director's exception covers capacity infrastructure only; other reading/repair gates and the
 parked authoring and format ideas remain at their current status.
 

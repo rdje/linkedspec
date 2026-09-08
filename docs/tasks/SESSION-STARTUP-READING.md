@@ -4324,7 +4324,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 ## Current Frontier
 
-The director-approved capacity implementation `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.2` hands off independent `.7.3` proof before `.7.4` admission.
+The director-approved capacity implementation is canonical at 4489f5e9; independent `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.3` verifies controls and reserve. Next `.7.4` admits pending bounded Dart ownership.
 Then resume the owned Dart decomposition; no Dart source reading precedes that capacity admission.
 
 | Order | Leaf | Status | Why next |

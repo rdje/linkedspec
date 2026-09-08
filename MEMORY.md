@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `b7638e34ad5e3fe245a639bc8bfb378b8fd3ba63` — clean approved capacity-implementation base.
-- latest_completed_leaf: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.2 - implement the approved Dart capacity controls`.
+- activation_commit: `4489f5e9a3cf60fabf6c4f69d27aedfc87cbac6b` — clean canonical capacity-implementation base.
+- latest_completed_leaf: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.3 - independently verify Dart capacity and evidence retention`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.3` independently verifies the approved capacity controls before `.7.4` Dart admission.
+- next_action: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.4` admits the bounded pending Dart tree and bridges startup `.3.4`.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: startup `.7` blocks recovery/purge. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.79` precede mutation setup; `.29` belongs to `.5`. The director approved the narrow capacity exception; other reading gates remain.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4983` is the twenty-eighth history segment; ADR `0106`
   authorizes exactly 30 collection files / 29 manifest lines / 16,463 manifest bytes; other ceilings remain unchanged.
-- latest_bootstrap_read: 2026-09-08 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; approved capacity .7.2 is implemented; PNT resumes independent .7.3.
+- latest_bootstrap_read: 2026-09-09 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; capacity .7.3 is independently verified; PNT resumes admission .7.4.

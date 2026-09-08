@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-09 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.3 - independently verify Dart capacity and evidence retention
+
+The independent census preserves 2,137 ID-prefixed blocks across 100 task Markdown files; 2,073 use the exact complete-line syntax counted by the current-ID checker. The remaining headers have trailing text and remain byte-identical; the broader preservation count is not a current-ID total. Knowledge Map has a single-file limit schema, while task and Knowledge collections have aggregate/member schemas; the audit handles each actual registry contract. Applying all original growth/template/setup allowances again to the current population conservatively retains the complete Dart reserve. Canonical 4489f5e9 passes all nine doctrines, CLI 66x2 and Phase 0 1,032/1,032 in 1,152 seconds; 25 optional gates remain skipped.
+
 ## 2026-09-08 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.2 - implement the approved Dart capacity controls
 
 The director explicitly greenlit the capacity exception before remaining full-codebase reading. Only one executable owner changes: the task partition checker extracts its existing member/aggregate predicates into pure functions used by the main census and its real boundary tests, then changes two aggregate caps. The registry changes exactly four scalars in two surfaces; route contracts and storage/topology authorities remain identical. Markdown-only task census and index-inclusive routing census retain their distinct scopes. A recorded audit invokes exact validator definitions with actual approved records; accepted design, book and continuity reflect the approval without activating Dart reading or pending repairs.

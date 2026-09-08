@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Director-approved containment `.7.2` implements capacity; independent `.7.3` and admission `.7.4` precede Dart.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Director-approved containment `.7.2` is canonically committed; independent `.7.3` verifies capacity and preservation. Admission `.7.4` precedes Dart.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.2` implements the director-approved capacity exception through ADR 0109: four aggregate scalars, shared actual task validators and bounded proof. Exact canonical results belong to this commit and receipt; independent .7.3 and admission .7.4 remain pending.
+- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.3` independently verifies the committed controls, retained task/Knowledge evidence, immutable bytes, stable lookup and full Dart reserve. Canonical .7.2 is 4489f5e9; .7.4 admission is next.
 
 ## Next Action
 
-- Independently verify the committed capacity controls under `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.3`; preserve the approved scope before `.7.4` admission.
+- Admit the bounded pending Dart tree and startup .3.4 bridge under `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.4`; preserve existing evidence and complete canonical milestone proof before reading decomposition.
 
 ## Recent Completions
+
+- `2026-09-09` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.3` independently verifies capacity, evidence retention, stable lookup and the complete Dart reserve.
 
 - `2026-09-08` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.2` implements the approved capacity exception; exact canonical proof governs landing.
 
@@ -48,8 +50,6 @@
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.57` completes progressive and punctuation consumer reading.
 
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.56` completes MCP tests and checkpoints progressive authority.
-
-- `2026-09-08` — `SESSION-STARTUP-READING.3.3.55` completes mutation consumer and checkpoints MCP admission.
 
 ## History
 

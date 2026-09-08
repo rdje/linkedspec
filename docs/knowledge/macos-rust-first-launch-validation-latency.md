@@ -270,3 +270,25 @@ same stack or cause is not inferred. That consumer subsequently passed 7/7 in
 The required PGEN → RGX → LinkedSpec Rust dependency build chain is expected.
 No target cleanup, recovery/purge, cache/signing/trust change or off-volume scratch
 was used. The observed waits cleared; sampling is not established as a workaround.
+
+## September 8 capacity implementation observation
+
+Canonical capacity implementation .7.2 lands at 4489f5e9. Its source-location test PID 10885
+(parent Cargo 6216) launched at 23:44:22.283 +0200. A one-second sample at 23:51:34.433 on
+macOS 26.6.2 (25G83) records 112 KiB and all 742 frames at _dyld_start. This locates only
+the sampled interval before Rust main; it does not identify the OS/kernel cause or establish
+sampling as a workaround. The wait cleared without intervention; the test passed 4/4 in 3.60
+execution seconds. Its separate shared build took 2m50s.
+
+The complete 32-line / 1,074-byte report was consumed and remains at
+.linkedspec-data/scratch/containment72-source-location-10885.sample.txt, SHA-256
+ af30dd19e4431c71e6eff12142ed436e5dcfa06952f604ac4b24630a43de381a.
+A separate unsampled recursive-observation census found PID 7071 / Cargo 6216 at elapsed
+3m48s, 32 KiB RSS and zero CPU time; it subsequently passed 7/7 in 36.37 test seconds.
+No stack or common cause is inferred for that unsampled interval. All diagnostic and canonical
+jobs were consumed; no target/cache/recovery/purge/signing/trust changes were made.
+
+The complete canonical log is .linkedspec-data/ci-containment72-b7638e34.log: 174,746 lines /
+10,622,490 bytes, SHA-256 34123c7152f50ddc4ec8f93294013ae4f98465199ef9912b00a79cf01c5cf9d9.
+It passes all nine doctrines, required consumers, containment/relocation, CLI 66x2 and Phase 0
+1,032/1,032 in 1,152 wallclock seconds (Phase 0 only). The 25 optional gates/matrices were skipped.
