@@ -2065,15 +2065,18 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.56 - complete MCP tests and reconcile progressive authority reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.57`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 57: 1,476 lines/fragments, 52,176 bytes.
   Scope: `rust/linkedspec-runtime/tests/progressive_span_dispatch_authority.rs` lines 556–818;
     `rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs` lines 1–610;
     `rust/linkedspec-runtime/tests/punctuation_light_zero_arg_contract.rs` lines 1–226;
     `rust/linkedspec-runtime/tests/recognition_transaction_contract.rs` lines 1–377.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Four exact owned-range/baseline identities, carrier/arity/recognition proof-boundary reconciliation; Knowledge, memory, all doctrines, histories and diff.
+  Canonical trigger: `none` — bounded reading checkpoint; tests and runtime unchanged.
+  Verification: Four exact scopes total 1,476 lines / 52,176 baseline-identical bytes; ordered path/kind/range/byte/SHA audit `9f55a70cc97d378ab04bc24c0dea43b656a22cefc558517e2d6af1d3f716d882`. Progressive authority completes smaller rebased spans, shared budgets, detached registry/results and bounded diagnostics; its separate carrier consumer covers typed effects, host callback reconstruction and independent emitted child status/results. Punctuation-light tests cover six standalone spellings and final receivers through native/reconstructed/generated-plan/source assertions, explicitly preserving both zero-argument contains spellings returning numeric zero under the existing FUTURE-PARITY-BACKLOG.5 drift owner. Recognition prefix records neutral inventories/admission, monotonic isolated invocation/mark identity, match state independent of falsey payload and commit/rollback frame state. Recognition suffix remains .58-owned. No new native or emitted execution is claimed.
+  Commit: `SESSION-STARTUP-READING.3.3.57 - complete progressive and punctuation consumer reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.58`
   Status: `pending`
@@ -4257,7 +4260,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.57` | `pending` | Complete progressive authority, read its carrier consumer and punctuation-light tests, then begin recognition tests. |
+| 1 | `SESSION-STARTUP-READING.3.3.58` | `pending` | Complete recognition-transaction reading and begin recursive-observation contracts. |
 
 ## Reading Ledger
 
@@ -4268,7 +4271,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.56` are reconciled and `.3.3.57`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.57` are reconciled and `.3.3.58`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read at baseline; .3.2.42 preserves coverage, and c8759242 reviews/renders the approved parked-coverage delta. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -7027,6 +7030,7 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- `2026-09-08` `.3.3.57`: Four exact scopes and progressive/punctuation/recognition proof-boundary reconciliation pass; the known contains arity exception is explicit. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.56`: Four exact scopes and MCP/progressive test-boundary reconciliation pass; canonical completion records resolve dated admission wording. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.55`: Two exact scopes and mutation/MCP assertion-boundary reconciliation pass; known .58/.59 and .77 repair limits remain explicit. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.54`: Three exact scopes, both explicit emitted status guards and the bounded codeblock-row skip are verified from unchanged source. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
@@ -7342,3 +7346,4 @@ Each canonical task node owns its exact `Commit` subject and retained completion
 - `2026-09-08`: `.3.3.54` completes gap and logical consumer reading; next `.3.3.55`.
 - `2026-09-08`: `.3.3.55` completes mutation consumer and checkpoints MCP admission; next `.3.3.56`.
 - `2026-09-08`: `.3.3.56` completes MCP tests and checkpoints progressive authority; next `.3.3.57`.
+- `2026-09-08`: `.3.3.57` completes progressive and punctuation consumer reading; next `.3.3.58`.

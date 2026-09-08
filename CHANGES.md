@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.57 - complete progressive and punctuation consumer reading
+
+Reconcile four scopes: 1,476 lines / 52,176 baseline-identical bytes. Complete progressive and punctuation consumers and read recognition-prefix state/identity checks. Preserve the existing contains-arity exception and distinguish generated-plan/source assertions from emitted execution. Route the Rust arity recheck through managed Cargo. Focused checks pass.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.56 - complete MCP tests and reconcile progressive authority reading
 
 Reconcile four exact scopes: 1,474 lines / 50,699 bytes. Complete MCP tests and record the private progressive-authority prefix. Preserve existing transport defect limits. Correct an older admission card that still called completed recurrence/public work pending, using canonical completion records. Focused checks pass; behavior is unchanged.

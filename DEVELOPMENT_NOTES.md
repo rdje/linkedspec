@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.57 - complete progressive and punctuation consumer reading
+
+Punctuation aliases preserve their parenthesized counterparts, including the known missing-needle contains result. Recognition keeps matched state separate from falsey payloads. Source assertion coverage and freshly executed proof remain distinct.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.56 - complete MCP tests and reconcile progressive authority reading
 
 MCP positive transport tests do not discharge the existing mixed-error, panic-output or final-EOF defects. The private progressive authority target and admitted four-carrier consumer have distinct cfg/routing boundaries. Their dated rollout snapshots need explicit temporal labels.

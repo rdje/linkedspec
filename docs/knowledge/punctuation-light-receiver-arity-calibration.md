@@ -15,7 +15,7 @@ date: 2026-07-13
 status: confirmed
 tags: [dsl, actionir, receiver, arity, contract, perl-reference, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.16.2.0 used LinkedSpec::call_spec_handler_subst plus perl/LinkedSpec/ActionIR/MethodLowering.pm's canonical %ast_aggregate_call_arity table. Function-form drop_front is [1,2], so its implicit receiver leaves zero or one authored arguments and values.drop_front() validly drops one. Function-form contains is [2,2], so its implicit receiver leaves exactly one authored argument and values.contains() takes the established Perl unsupported-helper rejection path. FUTURE-PARITY-BACKLOG.16.3 then proved pre-existing Rust drift: validation recognizes contains but does not enforce arity, and engine.rs defaults args[1] to empty text, so both values.contains and values.contains() return numeric 0 for [a,b]. FUTURE-PARITY-BACKLOG.16.4 proves Dart's _callArrayContains also returns numeric 0 when fewer than two values arrive; .16.5 proves Julia's _call_runtime_array_contains does the same; .16.6 proves Lua's pure array helper also returns 0 when values[2] is absent. Each syntax alias correctly preserves its parenthesized twin; FUTURE-PARITY-BACKLOG.5 owns helper normalization."
-reverify: "perl -Iperl -MLinkedSpec -e 'for my $s (q{return(values.drop_front())},q{return(values.contains())}) { print LinkedSpec::call_spec_handler_subst(\"Top\",$s),qq{\\n} }' && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test punctuation_light_zero_arg_contract terminal_alias_preserves_existing_rust_method_resolution && (cd dart && bash ../tools/run_dart_project_data.sh test test/punctuation_light_zero_arg_contract_test.dart) && bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include(\"julia/test/punctuation_light_zero_arg_contract_test.jl\")' && bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_punctuation_light_zero_arg_contract.py"
+reverify: "perl -Iperl -MLinkedSpec -e 'for my $s (q{return(values.drop_front())},q{return(values.contains())}) { print LinkedSpec::call_spec_handler_subst(\"Top\",$s),qq{\\n} }' && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test punctuation_light_zero_arg_contract terminal_alias_preserves_existing_rust_method_resolution && (cd dart && bash ../tools/run_dart_project_data.sh test test/punctuation_light_zero_arg_contract_test.dart) && bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include(\"julia/test/punctuation_light_zero_arg_contract_test.jl\")' && bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_punctuation_light_zero_arg_contract.py"
 ---
 
 # Receiver arity calibration
@@ -43,3 +43,11 @@ non-reference backends for this case. Those pre-existing semantic differences ar
 - Lua runtime owner: `lua/src/linkedspec/interpreter.lua`
 - Tree: `docs/tasks/FUTURE-PARITY-BACKLOG.md`, leaf `.16.2.0`
 - Related: [[punctuation-light-zero-argument-calls]]
+
+## September 8 Rust consumer reading
+
+Startup `.3.3.57` reads all 226 lines / 8,062 baseline-identical bytes. The named resolution test
+explicitly compares bare and parenthesized contains results and requires numeric zero; it does not
+claim the Perl-reference arity defect is fixed. The consumer also executes a generated plan and
+inspects emitted source, without compiling a standalone emitted child. No native test is rerun by
+this reading checkpoint; FUTURE-PARITY-BACKLOG.5 remains the existing helper-normalization owner.
