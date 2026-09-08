@@ -2092,7 +2092,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.58 - complete recognition and observation consumer reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.59`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 59: 1,487 lines/fragments, 48,937 bytes.
   Scope: `rust/linkedspec-runtime/tests/repeated_action_result_contract.rs` lines 473–516;
     `rust/linkedspec-runtime/tests/repository_root_relocation.rs` lines 1–95;
@@ -2100,8 +2100,11 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     `rust/linkedspec-runtime/tests/root_rule_selection_core.rs` lines 1–301;
     `rust/linkedspec-runtime/tests/root_rule_selection_routes.rs` lines 1–437.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact baseline/scope identities, root-selection governance and historical/current proof reconciliation; Knowledge, memory, all doctrines, histories and diff.
+  Canonical trigger: `none` — reading and factual continuity; source, contract and public behavior unchanged.
+  Verification: Five exact scopes total 1,487 lines / 48,937 baseline-identical bytes; ordered path/kind/range/byte/SHA audit `47aa1b4f635ba583721b93b0aebcc06d5e5574686370eea1bc41995f750e7fc6`. Repeated-result suffix pins fifteen exact roles and once-only completion. Relocation source copies the fresh primary into a managed synthetic root, distinguishes conflicting ambient identity and requires failure after the moved marker is removed. Root consumers preserve explicit/first-marker/first-rule selection without authored identity mutation, structure-before-selection-before-user-code, authored-edge strict-unused, direct/compatibility options, loaded/reconstructed/descriptor stability and effective/request trace attribution. Emitted-labelled admission roles inspect source; generated roles invoke generated-plan adapters. Independent compilation remains source_emitter-owned. Fresh root governance passes 8 selections / 3 failures / 3 strict cases / 5 backends / 7 complete / 0 pending / 24 public documents / 18 stale-current denials / 54 mutations. Historical Rust-only/65-case Knowledge claims are qualified and three Cargo reverify commands are managed. No fresh native/CLI/relocated/emitted execution is claimed.
+  Commit: `SESSION-STARTUP-READING.3.3.59 - complete Rust root-selection consumer reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.60`
   Status: `pending`
@@ -4276,7 +4279,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.59` | `pending` | Complete repeated-result reading, relocation and root-selection consumers through routes line 437. |
+| 1 | `SESSION-STARTUP-READING.3.3.60` | `pending` | Complete root-route suffix, cursor consumers, runtime diagnostics and the semantic-foundation prefix. |
 
 ## Reading Ledger
 
@@ -4287,7 +4290,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.58` are reconciled and `.3.3.59`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.59` are reconciled and `.3.3.60`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read at baseline; .3.2.42 preserves coverage, and c8759242 reviews/renders the approved parked-coverage delta. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -7046,6 +7049,7 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- `2026-09-08` `.3.3.59`: Five exact scopes PASS (1,487 lines / 48,937 bytes). Managed root contract check PASS at 7 complete / 0 pending and 54 mutations. Historical/current Knowledge reconciliation preserves source-inspection versus independently compiled emitted proof. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.58`: Three scope/baseline identities PASS (1,471 lines / 49,296 bytes). Both exact-source manifest construction probes exit 0; relative controls resolve the same runtime crate, original Drop removes both workspaces and managed scratch is removed. Nine absolute writers and five relative source controls are inventoried; actual repair .78 follows required reading. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.57`: Four exact scopes and progressive/punctuation/recognition proof-boundary reconciliation pass; the known contains arity exception is explicit. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.56`: Four exact scopes and MCP/progressive test-boundary reconciliation pass; canonical completion records resolve dated admission wording. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
@@ -7365,3 +7369,4 @@ Each canonical task node owns its exact `Commit` subject and retained completion
 - `2026-09-08`: `.3.3.56` completes MCP tests and checkpoints progressive authority; next `.3.3.57`.
 - `2026-09-08`: `.3.3.57` completes progressive and punctuation consumer reading; next `.3.3.58`.
 - `2026-09-08`: `.3.3.58` completes recognition/observation reading and owns emitted-manifest portability repair .78; next `.3.3.59`.
+- `2026-09-08`: `.3.3.59` completes root-selection consumer reading and qualifies historical rollout evidence; next `.3.3.60`.

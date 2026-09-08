@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.59 - complete Rust root-selection consumer reading
+
+Completed Rust checkpoint `.3.3.59`: 1,487 lines / 48,937 baseline-identical bytes. Reconciled repeated-result roles, moved-root test construction and root-selection adapters. Fresh neutral governance passes 7 complete / 0 pending with 54 mutations. Qualified historical Rust-only/65-case Knowledge claims and routed three Cargo commands through managed storage; no runtime source changed.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.58 - complete recognition and observation consumer reading
 
 Completed Rust checkpoint `.3.3.58`: 1,471 lines / 49,296 baseline-identical bytes. Preserved recognition/observation and repeated-result proof boundaries. Two source-bound construction probes reproduce absolute emitted Cargo inputs; repair `.78` owns nine writers, relative-path normalization and actual relocated/emitted proof. Knowledge/live/task routing updated; no parser or manifest implementation changed.

@@ -12,12 +12,12 @@ answers:
   - "why does the Rust parser accept blank source before validation"
   - "does root selection affect Rust strict unused rules"
   - "which Rust root-selection routes remain pending"
-date: 2026-07-18
+date: 2026-09-08
 status: superseded by rust-root-rule-selection-routes
 supersedes: rust-root-rule-selection-preflight
 tags: [rust, root-rule, top-rule, markerless, validation, descriptor, diagnostics, strict-syntax, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.9.1.1.2.2.1 adds `CompiledSpec::resolve_entry_rule`, the single ordered resolver over source-ordered `CompiledRule` rows. Explicit selection wins, then the first authored `is_top`, then row zero; empty state returns `no_rules_defined`/`validate_spec`, and an unknown explicit label returns `entry_rule_not_found`/`select_entry_rule` before user code. Validation now accepts one-or-more-rule markerless sources. The parser deliberately returns an empty/comment-only AST so structural validation, not parsing, owns the portable zero-rule stage; non-rule garbage remains a parse error. Native legacy/default and value/explicit execution use the resolver and effective-entry accumulator semantics. Descriptor metadata publishes `entry_rule_contract = linkedspec-root-rule-selection-v1` while definition order and every authored `is_top` bit remain immutable. Strict-unused stays authored-edge-only. `rust-root-rule-selection-routes` supersedes the former pending-route statement after `.2.2`; rollout admission remains `.2.3`."
-reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test root_rule_selection_core --test runtime_diagnostics && bash tools/run_python_project_data.sh tools/check_root_rule_selection_contract.py"
+evidence: "Historical July 18 implementation milestone: FUTURE-PARITY-BACKLOG.9.1.1.2.2.1 adds `CompiledSpec::resolve_entry_rule`, the single ordered resolver over source-ordered `CompiledRule` rows. Explicit selection wins, then the first authored `is_top`, then row zero; empty state returns `no_rules_defined`/`validate_spec`, and an unknown explicit label returns `entry_rule_not_found`/`select_entry_rule` before user code. Validation now accepts one-or-more-rule markerless sources. The parser deliberately returns an empty/comment-only AST so structural validation, not parsing, owns the portable zero-rule stage; non-rule garbage remains a parse error. Native legacy/default and value/explicit execution use the resolver and effective-entry accumulator semantics. Descriptor metadata publishes `entry_rule_contract = linkedspec-root-rule-selection-v1` while definition order and every authored `is_top` bit remain immutable. Strict-unused stays authored-edge-only. `rust-root-rule-selection-routes` supersedes the former pending-route statement after `.2.2`; rollout admission remains `.2.3`."
+reverify: "bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test root_rule_selection_core --test runtime_diagnostics && bash tools/run_python_project_data.sh tools/check_root_rule_selection_contract.py"
 ---
 
 # Rust core root-rule selection
@@ -36,8 +36,15 @@ use another structural error such as a duplicate label when testing the validati
 The outward descriptor publishes the root contract id, definition order, and immutable boolean `is_top` for each
 rule. Effective selection is per-execution state and adds no strict-unused reference or exemption. The subsequent
 route slice aligned loaded, serialized/reconstructed, generated-plan, and emitted-module execution; follow
-[[rust-root-rule-selection-routes]] for the current composed-route contract. `.2.3` alone may topology-check
-admission and promote the Rust rollout row.
+[[rust-root-rule-selection-routes]] for the current composed-route contract. The subsequent `.2.3` topology admission is complete; follow
+[[rust-root-rule-selection-admission]] for the dated Rust milestone and current rollout qualification.
 
 Related: [[root-rule-selection-precedence]], [[rust-root-rule-selection-preflight]],
 [[rust-native-direct-value-execution]], and [[rust-outward-compiled-descriptor-projection]].
+
+## 2026-09-08 consumer reading
+
+Startup .3.3.59 completes this 301-line core consumer. Source assertions preserve explicit/first-marker/
+first-rule resolution, structure before selection before user code, authored-edge-only strict-unused semantics,
+and unchanged authored descriptor identity. Current neutral governance is 7 complete / 0 pending with 54 mutations;
+this is reading plus neutral-contract proof, not a fresh native test result.

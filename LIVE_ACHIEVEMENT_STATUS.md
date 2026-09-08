@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.58` are reconciled and `.3.3.59`–`.3.3.66` plus closeout remain pending.
+  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.59` are reconciled and `.3.3.60`–`.3.3.66` plus closeout remain pending.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.78` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.3.58` completes recognition/observation consumers and the repeated-result prefix (1,471 lines / 49,296 baseline-identical bytes); two construction probes reproduce absolute generated dependencies and passing relative/cleanup controls. Repair `.78` owns nine source-confirmed writers; runtime behavior and emitted execution are unchanged.
+- `SESSION-STARTUP-READING.3.3.59` completes repeated-result/relocation/root-selection source through routes line 437 (1,487 lines / 48,937 baseline-identical bytes). Neutral root governance passes 7 complete / 0 pending and 54 mutations; three Knowledge cards now distinguish historical Rust admission from complete rollout. No native or relocated parser rerun.
 
 ## Next Action
 
-- Resume `SESSION-STARTUP-READING.3.3.59`; containment `.7` follows Rust closeout before Dart ownership/reading.
+- Resume `SESSION-STARTUP-READING.3.3.60`; containment `.7` follows Rust closeout before Dart ownership/reading.
 
 ## Recent Completions
+
+- `2026-09-08` — `SESSION-STARTUP-READING.3.3.59` completes root-selection consumer reading and qualifies historical rollout evidence.
 
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.58` completes recognition/observation reading and owns emitted-manifest portability repair .78.
 
@@ -48,8 +50,6 @@
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.45` reconciles label boundaries and edge grammar reading.
 
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.44` reconciles grammar reading and mirror freshness.
-
-- `2026-09-08` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.6` consolidates verified chronology and corrects a historical reference.
 
 ## History
 
