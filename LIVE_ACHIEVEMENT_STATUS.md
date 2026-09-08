@@ -11,14 +11,16 @@
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.3.42` completes callable/named-mark reading and the owned corpus prefix; focused neutral checks pass.
+- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5` removes duplicate batch/commit chronology after exact source equivalence proof; every note remains beside its canonical task node.
+- Exact staged canonical proof is required before landing; its final result belongs in the commit body.
 
 ## Next Action
 
-- Activate `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5` from the clean checkpoint; compact proven duplicate startup chronology before `.3.3.43`.
-- Preserve the director's generic-rule question as a proposed investigation after that clean pivot.
+- Preserve the director's parameterized/generic-rule question as a proposed investigation, then resume `SESSION-STARTUP-READING.3.3.43`.
 
 ## Recent Completions
+
+- `2026-09-08` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5` compacts duplicate chronology with exact retained-note proof.
 
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.42` completes callable, named-mark and corpus-prefix reading.
 
@@ -49,8 +51,6 @@
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.29` reads completion routing, typed projection and identity-based stores with five focused contracts.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.28` completes recognition adapter reading and reconciles gap, typed helper and incoming conversion boundaries.
-
-- `2026-09-07` — `SESSION-STARTUP-READING.3.3.27` completes CLI reading, passes 66 default cases and reconciles recognition authority guards.
 
 ## History
 

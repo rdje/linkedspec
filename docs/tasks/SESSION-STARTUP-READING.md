@@ -45,7 +45,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Focused checks: `bash scripts/check_memory_architecture.sh`; `bash scripts/check_doctrines.sh`; `perl tools/roll_document_history.pl --surface change_history --check`; `perl tools/roll_document_history.pl --surface engineering_notes --check`; `git diff --check`; staged-path and coverage review.
   Canonical trigger: `none` — bounded continuity documentation; no policy, infrastructure, or public contract changes.
   Verification: Activated task-tree-first from the clean reading baseline; memory, nine doctrine checks, both history-pressure checks, and diff/scope review pass. README routing was rerun after refreshing the staged snapshot; pre-commit checks the final candidate again.
-  Commit: `SESSION-STARTUP-READING.1 - preserve required reading progress`
+  Commit: `SESSION-STARTUP-READING.1 - preserve required reading progress` — Startup-tracking-only exception; reading remains incomplete.
 
 - ID: `SESSION-STARTUP-READING.2`
   Status: `done`
@@ -55,7 +55,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Focused checks: `bash scripts/check_memory_architecture.sh`; `bash scripts/check_doctrines.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `perl tools/roll_document_history.pl --surface change_history --check`; `perl tools/roll_document_history.pl --surface engineering_notes --check`; `git diff --check`; staged-scope and exact reading-range review.
   Canonical trigger: `none` — startup-reading continuity only; no public, policy, infrastructure, or runtime change.
   Verification: Baseline lines 1341–1585 read in five untruncated ranges; both roadmap diffs since baseline reviewed. Current direction agrees with the task index, mutation-testing tree, ADR 0039, and ADR 0073. Focused commit checks recorded below.
-  Commit: `SESSION-STARTUP-READING.2 - complete roadmap reading`
+  Commit: `SESSION-STARTUP-READING.2 - complete roadmap reading` — Completed roadmap reading; exact coverage and focused checks, remaining reading and liveness discrepancy owned.
 
 - ID: `SESSION-STARTUP-READING.3`
   Status: `active`
@@ -75,7 +75,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     excluded gitlink. The disjoint path rules below account for all entries; only four gzip blobs contain NULs.
     Source/test/tool inputs remain byte-identical to baseline. First reading child is exactly five files / 1,430
     lines / 56,706 bytes; inventory and decompression counts do not count as content reading.
-  Commit: `SESSION-STARTUP-READING.3.1 - bound the codebase reading inventory`
+  Commit: `SESSION-STARTUP-READING.3.1 - bound the codebase reading inventory` — Complete baseline accounting and bounded next child; source/book reading still incomplete.
 
 - ID: `SESSION-STARTUP-READING.3.2`
   Status: `done`
@@ -100,7 +100,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: All five exact files read through EOF without truncation; Git proves baseline identity. Existing
     thin-facade and leading-trivia Knowledge cards reconcile the owner flow and public-wrapper boundary. Managed
     facade/phase0 syntax passes; no production change, new defect, or runtime/audit-completion claim.
-  Commit: `SESSION-STARTUP-READING.3.2.1 - read facade invocation owners`
+  Commit: `SESSION-STARTUP-READING.3.2.1 - read facade invocation owners` — Five unique Perl files complete; remaining 84 Perl entries and other lanes remain unread.
 
 - ID: `SESSION-STARTUP-READING.3.2.2`
   Status: `done`
@@ -114,7 +114,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `none` — reading decomposition and continuity only; no source or policy change.
   Verification: Independent byte-interval audit passes: all 84 exact remaining paths / 2,076,984 bytes
     covered once by 52 bounded leaves; declared budgets match and Perl source remains baseline-identical.
-  Commit: `SESSION-STARTUP-READING.3.2.2 - partition remaining Perl reading`
+  Commit: `SESSION-STARTUP-READING.3.2.2 - partition remaining Perl reading` — All unread Perl bytes owned before reading; no new reading credit.
 
 - ID: `SESSION-STARTUP-READING.3.2.3`
   Status: `done`
@@ -133,7 +133,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     preserved. Existing resolution/root-selection/generated-source/bootstrap contracts reconciled. Probes confirm
     stale diagnostic comparison state; public Get still rejects malformed source. Repair `.8` and Knowledge own
     the defect; no production repair or full-codebase claim.
-  Commit: `SESSION-STARTUP-READING.3.2.3 - read resolution and bootstrap adapters`
+  Commit: `SESSION-STARTUP-READING.3.2.3 - read resolution and bootstrap adapters` — Ten unique Perl files read; stale diagnostic defect proved and repair `.8` owned.
 
 - ID: `SESSION-STARTUP-READING.3.2.4`
   Status: `done`
@@ -150,7 +150,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: All 1,196 lines / 39,291 bytes read in four untruncated chunks; baseline identity passes.
     Direct scanner and public controls prove regex-delimiter truncation; quoted-pattern execution returns 1,
     regex form returns undef with exact handler-compile error. Knowledge and `.9` own repair after reading.
-  Commit: `SESSION-STARTUP-READING.3.2.4 - read bootstrap grammar core`
+  Commit: `SESSION-STARTUP-READING.3.2.4 - read bootstrap grammar core` — Eleven unique Perl files read; attached-tail regex defect proved and `.9` owned.
 
 - ID: `SESSION-STARTUP-READING.3.2.5`
   Status: `done`
@@ -169,7 +169,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     Required rollover archives exact source lines 242–459 as segment 4985; independent byte/hash proof passes.
     ADR 0102 records the exact finite 28-file/27-manifest-line admission. Final staged canonical receipt is required
     before landing; no production change or completed full-codebase claim.
-  Commit: `SESSION-STARTUP-READING.3.2.5 - read compiler state and preserve history`
+  Commit: `SESSION-STARTUP-READING.3.2.5 - read compiler state and preserve history` — Twelve Perl files read; required complete-record rollover and finite capacity ADR 0102.
 
 - ID: `SESSION-STARTUP-READING.3.2.6`
   Status: `done`
@@ -187,7 +187,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     generated-v2, function-registry, and duplicate-slot owners reconcile. Prior exact canonical proof passed;
     dated samples are preserved in Knowledge and their two consumed files were hash-verified/deleted/checked absent.
     The historical duplicate-slot card links its existing resolution; focused commit checks are recorded below.
-  Commit: `SESSION-STARTUP-READING.3.2.6 - read compiler generation and state assembly`
+  Commit: `SESSION-STARTUP-READING.3.2.6 - read compiler generation and state assembly` — Compiler prefix read; prior canonical/loader evidence and historical duplicate-slot resolution preserved.
 
 - ID: `SESSION-STARTUP-READING.3.2.7`
   Status: `done`
@@ -202,7 +202,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: Four untruncated chunks cover baseline-identical lines 1042–2002 / 43,851 bytes, completing
     Compiler.pm at 2,002 lines / 84,924 bytes. Existing architecture/Knowledge owners reconcile; a bounded
     source-level card indexes phase and mode boundaries. No new runtime defect or public change.
-  Commit: `SESSION-STARTUP-READING.3.2.7 - complete compiler pipeline reading`
+  Commit: `SESSION-STARTUP-READING.3.2.7 - complete compiler pipeline reading` — Thirteen whole Perl files read; source-level phase/mode boundaries indexed.
 
 - ID: `SESSION-STARTUP-READING.3.2.8`
   Status: `done`
@@ -218,7 +218,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     passes. Existing owners reconcile and two older coupling cards now explicitly preserve historical scope.
     Isolated HandlerIR probes confirm unbound AND_BCODE inputs; public descriptor/source control bounds the
     finding without claiming a result failure. Repair `.10` is owned; focused continuity checks precede landing.
-  Commit: `SESSION-STARTUP-READING.3.2.8 - read SpecEntry and own unbound input repair`
+  Commit: `SESSION-STARTUP-READING.3.2.8 - read SpecEntry and own unbound input repair` — Fourteen whole Perl files read; historical coupling reconciled; explicit repair `.10` owns the private handoff defect.
 
 - ID: `SESSION-STARTUP-READING.3.2.9`
   Status: `done`
@@ -235,7 +235,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     envelope/root/open-block/gap owners reconcile. Context, callback, and public Get probes confirm diagnostic
     source drift; `.11.1`–`.11.3` own bounded repair. Prior retrieval fields and the removed-option command
     are corrected; focused continuity/Knowledge checks precede landing.
-  Commit: `SESSION-STARTUP-READING.3.2.9 - read validation and own diagnostic repairs`
+  Commit: `SESSION-STARTUP-READING.3.2.9 - read validation and own diagnostic repairs` — Validation prefix read; diagnostic repair children and retrieval corrections preserved.
 
 - ID: `SESSION-STARTUP-READING.3.2.10`
   Status: `done`
@@ -250,7 +250,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: Three untruncated chunks cover 584 lines / 18,639 bytes, completing baseline-identical
     Validation.pm at 1,904 lines / 61,929 bytes. Existing edge/slash/gap and diagnostic owners reconcile;
     the edge card now links admitted owners and clarifies optional blind-return blocks. No new runtime defect.
-  Commit: `SESSION-STARTUP-READING.3.2.10 - complete validation reading`
+  Commit: `SESSION-STARTUP-READING.3.2.10 - complete validation reading` — Fifteen full Perl files read; current edge/capture owners reconciled.
 
 - ID: `SESSION-STARTUP-READING.3.2.11`
   Status: `done`
@@ -265,7 +265,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     Existing collection/normalization/planning owners reconcile. Public OR/AND and spelling controls plus
     direct collect/normalize probes confirm bare/explicit execution-order drift; repair `.12` is owned.
     Focused continuity/Knowledge checks precede landing; no runtime source change.
-  Commit: `SESSION-STARTUP-READING.3.2.11 - read RuleIR and own edge-order repair`
+  Commit: `SESSION-STARTUP-READING.3.2.11 - read RuleIR and own edge-order repair` — Sixteen full Perl files read; native/public order defect and repair `.12` preserved.
 
 - ID: `SESSION-STARTUP-READING.3.2.12`
   Status: `done`
@@ -280,7 +280,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: Seven untruncated ranges cover lines 1–1489 / 49,396 bytes; baseline identity passes.
     Existing owner/trace contracts reconcile; exact registry extraction confirms fourteen keys, thirteen
     ActionIR owners plus Trace, correcting two existing cards. Focused continuity checks precede landing.
-  Commit: `SESSION-STARTUP-READING.3.2.12 - read EmitContext bridge and reconcile registry`
+  Commit: `SESSION-STARTUP-READING.3.2.12 - read EmitContext bridge and reconcile registry` — EmitContext prefix read; owner cardinality and retrieval corrected; suffix remains unread.
 
 - ID: `SESSION-STARTUP-READING.3.2.13`
   Status: `done`
@@ -295,7 +295,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: Six untruncated ranges complete 1490–2583 / 46,079 bytes; full-file baseline identity passes.
     Public AND/OR controls, descriptor/source capture, and direct rewrite prove repeated blind targets lose
     attached-code identity. Repair `.13` and Knowledge preserve the causal evidence; focused checks precede landing.
-  Commit: `SESSION-STARTUP-READING.3.2.13 - complete EmitContext reading and own blind-edge repair`
+  Commit: `SESSION-STARTUP-READING.3.2.13 - complete EmitContext reading and own blind-edge repair` — Seventeen full Perl files read; blind occurrence-identity defect and repair `.13` preserved.
 
 - ID: `SESSION-STARTUP-READING.3.2.14`
   Status: `done`
@@ -310,7 +310,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: Seven untruncated ranges cover 1–1403 / 53,304 bytes; full-file baseline identity passes.
     Builder/dispatch probes reconcile HandlerIR; indexed return control remains fixed. Public/source/seed
     controls prove per-regex I-block literal and state corruption; `.14.1`/`.14.2` own repair. Focused checks precede landing.
-  Commit: `SESSION-STARTUP-READING.3.2.14 - read emitter prefix and own I-block repairs`
+  Commit: `SESSION-STARTUP-READING.3.2.14 - read emitter prefix and own I-block repairs` — Emitter prefix read; literal/scope defects and `.14` repair children preserved; historical contracts reconciled.
 
 - ID: `SESSION-STARTUP-READING.3.2.15`
   Status: `done`
@@ -325,7 +325,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: Three emitter suffix ranges plus complete LinkedRE/AST cover 736 lines / 24,430 bytes; baseline identity passes.
     Native bounded REP controls confirm literal corruption and package writes; `.14.1`/`.14.2` extend to this
     same causal family. JSON subset projection and existing slot/AST owners reconcile; focused checks precede landing.
-  Commit: `SESSION-STARTUP-READING.3.2.15 - finish emitter adapters and extend return repairs`
+  Commit: `SESSION-STARTUP-READING.3.2.15 - finish emitter adapters and extend return repairs` — Twenty full Perl files read; existing return/scope repairs extend to repetition; diagnostic projection bounded.
 
 - ID: `SESSION-STARTUP-READING.3.2.16`
   Status: `done`
@@ -340,7 +340,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: Seven untruncated ranges cover 1,498 lines / 47,935 bytes; full-file baseline identity passes.
     Seven ASCII and two Unicode AST controls isolate nested offset loss; public Get preserves the typed
     diagnostic in last_error.detail. Two focused suites pass 30 top-level tests; repair `.15` owns the gap.
-  Commit: `SESSION-STARTUP-READING.3.2.16 - read AST parser and own nested span repair`
+  Commit: `SESSION-STARTUP-READING.3.2.16 - read AST parser and own nested span repair` — Parser prefix read; nested-offset repair `.15` owns three recursive handoffs and adjacent controls.
 
 - ID: `SESSION-STARTUP-READING.3.2.17`
   Status: `done`
@@ -354,7 +354,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: Parser suffix and three complete adapters cover 1,195 lines / 47,612 bytes; all four full-file
     baseline identities pass. Existing AST, binding, mutation, and trace/event Knowledge reconciles; no new
     behavior or defect claim. Twenty-four whole Perl files are read; focused checks precede landing.
-  Commit: `SESSION-STARTUP-READING.3.2.17 - finish AST parser and read pipeline adapters`
+  Commit: `SESSION-STARTUP-READING.3.2.17 - finish AST parser and read pipeline adapters` — Twenty-four whole Perl files read; existing pipeline/event owners indexed; Contracts prefix follows.
 
 - ID: `SESSION-STARTUP-READING.3.2.18`
   Status: `done`
@@ -368,7 +368,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: Seven untruncated prefix ranges cover 1,396 lines / 65,503 bytes; full-file baseline identity
     passes. Catalog recheck gives 47/30/11/4 detached rows, total 92. Existing ownership and historical status
     reconcile; no new runtime/admission claim. Focused checks precede landing.
-  Commit: `SESSION-STARTUP-READING.3.2.18 - read contract prefix and reconcile projection status`
+  Commit: `SESSION-STARTUP-READING.3.2.18 - read contract prefix and reconcile projection status` — Contracts prefix read; 92-row detached catalog rechecked; stale-current card wording bounded.
 
 - ID: `SESSION-STARTUP-READING.3.2.19`
   Status: `done`
@@ -382,7 +382,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: Six untruncated suffix ranges cover 1,117 lines / 48,433 bytes and complete Contracts.pm;
     full-file baseline identity passes. Exact source extraction confirms fourteen ordered builder groups.
     Existing Knowledge owns the bounded structural fact; focused continuity checks precede landing.
-  Commit: `SESSION-STARTUP-READING.3.2.19 - finish contract catalog reading`
+  Commit: `SESSION-STARTUP-READING.3.2.19 - finish contract catalog reading` — Contracts fully read; ordered builder fact indexed; twenty-five Perl files complete.
 
 - ID: `SESSION-STARTUP-READING.3.2.20`
   Status: `done`
@@ -397,7 +397,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: Seven untruncated prefix ranges cover 1,485 lines / 56,984 bytes; full-file baseline identity
     passes. Controlled candidate-context rejection/acceptance passes, and compact-lowerer trace passes four
     top-level tests. Existing AST/trace/caveat owners reconcile; focused continuity checks precede landing.
-  Commit: `SESSION-STARTUP-READING.3.2.20 - read control flow prefix and verify candidate isolation`
+  Commit: `SESSION-STARTUP-READING.3.2.20 - read control flow prefix and verify candidate isolation` — ControlFlow prefix read; bounded candidate-state isolation verified; existing caveat owners retained.
 
 - ID: `SESSION-STARTUP-READING.3.2.21`
   Status: `done`
@@ -417,7 +417,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     the first canonical attempt encounters denied nested sandbox initialization. A no-op control isolates the
     restriction, and permitted execution passes the unchanged full process-locality oracle. Knowledge preserves
     this prerequisite; rerun full canonical CI for the final staged receipt. No production repair or full-reading claim.
-  Commit: `SESSION-STARTUP-READING.3.2.21 - read flow adapters and preserve required history`
+  Commit: `SESSION-STARTUP-READING.3.2.21 - read flow adapters and preserve required history` — Twenty-nine Perl files read; emptiness repairs owned; exact notes rollover and finite capacity recorded.
 
 - ID: `SESSION-STARTUP-READING.3.2.22`
   Status: `done`
@@ -432,7 +432,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: Full 298-line / 7,800-byte source reading and baseline identity pass. Bounded controls preserve
     three authored values in a distinct list, allow explicit legacy/fixed-arity fallback, keep input unchanged,
     and reject missing minimum arity. Existing Knowledge reconciles; focused continuity checks precede landing.
-  Commit: `SESSION-STARTUP-READING.3.2.22 - read method expression normalization`
+  Commit: `SESSION-STARTUP-READING.3.2.22 - read method expression normalization` — MethodExpr comprehension and scope precedence recorded; next MethodLowering prefix.
 
 - ID: `SESSION-STARTUP-READING.3.2.23`
   Status: `done`
@@ -447,7 +447,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: Full-file baseline identity and 1–1495 / 61,967-byte prefix coverage pass. Four MethodLowering trace
     tests pass. Existing AST/block/binding/callable records reconcile; dated later-migration notes are qualified.
     Focused memory/history/diff review and all required commit hooks precede landing.
-  Commit: `SESSION-STARTUP-READING.3.2.23 - read method lowering prefix and reconcile milestones`
+  Commit: `SESSION-STARTUP-READING.3.2.23 - read method lowering prefix and reconcile milestones` — Prefix comprehension and dated AST/binding/callable milestone ownership reconciled; no source/book change.
 
 - ID: `SESSION-STARTUP-READING.3.2.24`
   Status: `done`
@@ -462,7 +462,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: Full-file baseline identity and exact 883-line / 33,969-byte range pass. The variadic function
     suite passes 66 tests; a public mixed-path read returns one with no context error. Existing signature and
     retirement records reconcile; focused memory/history/scope checks and required commit hooks precede landing.
-  Commit: `SESSION-STARTUP-READING.3.2.24 - read function signatures and statement lowering`
+  Commit: `SESSION-STARTUP-READING.3.2.24 - read function signatures and statement lowering` — Function signatures and guarded statement bridges read; four historical Knowledge records reconciled.
 
 - ID: `SESSION-STARTUP-READING.3.2.25`
   Status: `done`
@@ -477,7 +477,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: Exact baseline identity and 1,365-line / 65,506-byte coverage pass. Eight public Get/source/descriptor
     controls establish caller-local shadowing in scalar, aggregate, and nested calls with passing controls;
     `.32` owns repair. Memory/history/staged review and required commit hooks precede landing.
-  Commit: `SESSION-STARTUP-READING.3.2.25 - read value calls and own caller shadowing repair`
+  Commit: `SESSION-STARTUP-READING.3.2.25 - read value calls and own caller shadowing repair` — Value and function-call dispatch read; eight controls root-cause caller-local shadowing and own repair .32.
 
 - ID: `SESSION-STARTUP-READING.3.2.26`
   Status: `done`
@@ -491,7 +491,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: Exact full-file baseline identity and 1,168-line / 58,949-byte coverage pass. The AST parser suite
     passes 23 tests; public hash/array/scalar root controls match their documented traversal branches.
     Three existing Knowledge records reconcile; memory/history/review and required commit hooks precede landing.
-  Commit: `SESSION-STARTUP-READING.3.2.26 - read receiver chains and reconcile tree dispatch`
+  Commit: `SESSION-STARTUP-READING.3.2.26 - read receiver chains and reconcile tree dispatch` — Block and receiver dispatch read; three traversal records distinguish original milestones from current shared dispatch.
 
 - ID: `SESSION-STARTUP-READING.3.2.27`
   Status: `done`
@@ -507,7 +507,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     passes nine top-level tests; four public descriptors distinguish malformed/unknown and registered calls
     with zero raw dependency. Seven Knowledge records reconcile, including `.7` group-establishment evidence;
     required focused checks/hooks precede landing.
-  Commit: `SESSION-STARTUP-READING.3.2.27 - read helper fallback and qualify numeric evidence`
+  Commit: `SESSION-STARTUP-READING.3.2.27 - read helper fallback and qualify numeric evidence` — Helper fallback and numeric/string/collection prefix read; four AST/numeric Knowledge records qualified.
 
 - ID: `SESSION-STARTUP-READING.3.2.28`
   Status: `done`
@@ -522,7 +522,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: Exact baseline identity and 1,303-line / 64,878-byte coverage pass. Three public constructor/copy/
     collection controls pass; two Perl Get and two fresh PUC Lua controls expose tagged-field and split drift.
     `.33.1`/`.33.2` own review/repair; focused memory/history/scope checks and required hooks precede landing.
-  Commit: `SESSION-STARTUP-READING.3.2.28 - read collection helpers and own tagged-record repair`
+  Commit: `SESSION-STARTUP-READING.3.2.28 - read collection helpers and own tagged-record repair` — Collection and constructor paths read; selector history reconciled and paired tagged-record divergence owned by .33.
 
 - ID: `SESSION-STARTUP-READING.3.2.29`
   Status: `done`
@@ -536,7 +536,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: Exact full-file baseline identity and 977-line / 36,165-byte coverage pass. Managed Perl progressive
     carrier consumer passes 129 assertions; neutral progressive proof passes 9/9/116 plus public 6/12/10/60.
     Three Knowledge records reconcile; focused memory/history/scope checks and required hooks precede landing.
-  Commit: `SESSION-STARTUP-READING.3.2.29 - read lowering suffix and reconcile progressive admission`
+  Commit: `SESSION-STARTUP-READING.3.2.29 - read lowering suffix and reconcile progressive admission` — MethodLowering suffix and ProgressiveSpanDispatch read; three progressive admission records follow completed private closeout.
 
 - ID: `SESSION-STARTUP-READING.3.2.30`
   Status: `done`
@@ -550,7 +550,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: Exact full-file baseline identity and 1,173-line / 41,839-byte coverage pass. Managed pipeline
     trace proof passes five top-level tests; callable registry census confirms seven ordered dispatchers.
     Four Knowledge records reconcile; focused memory/history/scope checks and required hooks precede landing.
-  Commit: `SESSION-STARTUP-READING.3.2.30 - read rewrite orchestration and reconcile scanner ownership`
+  Commit: `SESSION-STARTUP-READING.3.2.30 - read rewrite orchestration and reconcile scanner ownership` — RewritePipeline, Scanner, and FlowRules read; scanner registry and AST migration Knowledge reconciled.
 
 - ID: `SESSION-STARTUP-READING.3.2.31`
   Status: `done`
@@ -564,7 +564,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: Exact full-file baseline identity and 1,433-line / 41,163-byte coverage pass. Five public Get
     controls pass, and generated child-push source confirms handler-first dispatch with binding fallback.
     Three Knowledge records reconcile; focused memory/history/scope checks and required hooks precede landing.
-  Commit: `SESSION-STARTUP-READING.3.2.31 - read legacy scanners and reconcile bare push precedence`
+  Commit: `SESSION-STARTUP-READING.3.2.31 - read legacy scanners and reconcile bare push precedence` — Legacy/basic scanners read; historical scalar-slot and unconditional child-push claims reconciled with uniform binding.
 
 - ID: `SESSION-STARTUP-READING.3.2.32`
   Status: `done`
@@ -578,7 +578,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: Exact full-file baseline identity and 1,355-line / 48,756-byte coverage pass. Managed staged Perl
     consumer passes 143 checks; staged 9/9/123/public 6/17/10/129, recognition 138/250/58, and language
     250/126 proof pass. Two Knowledge records reconcile; required focused continuity checks precede landing.
-  Commit: `SESSION-STARTUP-READING.3.2.32 - read staged scanners and reconcile authoring boundaries`
+  Commit: `SESSION-STARTUP-READING.3.2.32 - read staged scanners and reconcile authoring boundaries` — Pipeline, recognition, staged marker, and splitting owners read; two Knowledge records follow current public/neutral boundaries.
 
 - ID: `SESSION-STARTUP-READING.3.2.33`
   Status: `done`
@@ -593,7 +593,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     Twelve distinct public comment/newline combinations isolate LF/CRLF terminator loss and CR comment loss;
     three inline cases repeat with dumped source confirmation. Repairs `.34.1`/`.34.2` own failures;
     one new and three qualified Knowledge records preserve evidence. Required focused gates precede landing.
-  Commit: `SESSION-STARTUP-READING.3.2.33 - read separator and value owners and track comment failures`
+  Commit: `SESSION-STARTUP-READING.3.2.33 - read separator and value owners and track comment failures` — Splitter/trace/value owners read; comment failures rooted and repair-owned, universal coverage claims qualified.
 
 - ID: `SESSION-STARTUP-READING.3.2.34`
   Status: `done`
@@ -608,7 +608,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     pass 134 top-level tests; neutral gap passes 9/0/63 plus public 8/15/10/34. Six public controls and
     emitted-record decoding root boolean-literal kind loss in CodeblockRuntime; `.35` owns repair.
     One new and three qualified Knowledge records preserve evidence; required focused gates precede landing.
-  Commit: `SESSION-STARTUP-READING.3.2.34 - read runtime owners and track codeblock boolean drift`
+  Commit: `SESSION-STARTUP-READING.3.2.34 - read runtime owners and track codeblock boolean drift` — Runtime owners read; dynamic boolean result drift repair-owned and historical gap admission prose qualified.
 
 - ID: `SESSION-STARTUP-READING.3.2.35`
   Status: `done`
@@ -623,7 +623,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     reports the 83,411-byte Perl binding fresh; five binding tests, six artifact frame controls, and
     admission 5/5 implementations / 6/6 runtimes / complete / 141 mutations pass. One Knowledge record
     reconciles historical topology and response layers; required focused continuity checks precede landing.
-  Commit: `SESSION-STARTUP-READING.3.2.35 - read MCP frame data and reconcile current admission`
+  Commit: `SESSION-STARTUP-READING.3.2.35 - read MCP frame data and reconcile current admission` — MCP frame/schema prefix read; generated binding fresh, response examples and current admission qualified.
 
 - ID: `SESSION-STARTUP-READING.3.2.36`
   Status: `done`
@@ -638,7 +638,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     schema, and corpus equal their neutral owners; 72 fact keys, bounded query-contract strings, and
     explicit-component-only policy controls pass. Managed materializer then independent validator pass
     35/10/10/76. Two Knowledge records reconcile; `.5` owns ADR policy clarification; focused gates precede landing.
-  Commit: `SESSION-STARTUP-READING.3.2.36 - read MCP contract policy and reconcile historical claims`
+  Commit: `SESSION-STARTUP-READING.3.2.36 - read MCP contract policy and reconcile historical claims` — MCP policy/corpus/schema fragment read; exact neutral identity and already-repaired component policy documented.
 
 - ID: `SESSION-STARTUP-READING.3.2.37`
   Status: `done`
@@ -653,7 +653,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     matches its header digest and neutral payload collection; all four response and seven source-artifact
     hashes match. The complete 83,411-byte binding is byte-fresh. One Knowledge record indexes bounded
     payload/digest ownership; required focused continuity checks precede landing.
-  Commit: `SESSION-STARTUP-READING.3.2.37 - read MCP payload suffix and verify embedded digests`
+  Commit: `SESSION-STARTUP-READING.3.2.37 - read MCP payload suffix and verify embedded digests` — MCP embedded JSON completed; four payload and seven source digests verified without runtime or protocol changes.
 
 - ID: `SESSION-STARTUP-READING.3.2.38`
   Status: `done`
@@ -668,7 +668,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     stdio/admission suites pass 31 top-level tests; Perl numeric passes nine and neutral numeric 55/18.
     Six competing-error cases agree through decoded/stdio routes and expose ADR ordering drift, owned by
     `.36.1`–`.36.3`. One new and three updated Knowledge records preserve evidence; focused gates precede landing.
-  Commit: `SESSION-STARTUP-READING.3.2.38 - read MCP runtime and track validation order drift`
+  Commit: `SESSION-STARTUP-READING.3.2.38 - read MCP runtime and track validation order drift` — MCP/numeric owners read; validation-order discrepancy repair-owned and projection-field wording corrected.
 
 - ID: `SESSION-STARTUP-READING.3.2.39`
   Status: `done`
@@ -684,7 +684,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     preserve registration/dispatch/lookup/replacement/clear/error-state and avoid legacy loading. Six progressive
     ceiling controls root resource/diagnostic gaps under `.37`; one new/four updated Knowledge records preserve
     evidence. Focused continuity gates precede landing.
-  Commit: `SESSION-STARTUP-READING.3.2.39 - read progressive authority and own ceiling enforcement gaps`
+  Commit: `SESSION-STARTUP-READING.3.2.39 - read progressive authority and own ceiling enforcement gaps` — Plugin and progressive owners read; measured ceiling enforcement gaps repair-owned with exact controls.
 
 - ID: `SESSION-STARTUP-READING.3.2.40`
   Status: `done`
@@ -700,7 +700,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     guards. Six post-terminal private controls root obsolete snapshot restoration under `.38`; one new/three
     updated Knowledge records preserve the finite proof boundary. Known lexical defects remain `.21`-owned.
     Focused continuity gates precede landing.
-  Commit: `SESSION-STARTUP-READING.3.2.40 - read recognition core and own post-terminal restoration defect`
+  Commit: `SESSION-STARTUP-READING.3.2.40 - read recognition core and own post-terminal restoration defect` — Recognition core/static owners read; post-terminal cross-owner snapshot restoration repair-owned.
 
 - ID: `SESSION-STARTUP-READING.3.2.41`
   Status: `done`
@@ -719,7 +719,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     Eight value and four exit controls root `.39`/`.40` repairs. Required complete-record change-history rollover
     and independent clean-source/hash/manifest proof accompany the exact finite capacity decision ADR 0104.
     Receipt-bound canonical verification is required for the final staged infrastructure checkpoint before landing.
-  Commit: `SESSION-STARTUP-READING.3.2.41 - read runtime observers and preserve bounded change history`
+  Commit: `SESSION-STARTUP-READING.3.2.41 - read runtime observers and preserve bounded change history` — Runtime owners read; boolean/unwind repairs owned; exact change-history suffix and finite routing capacity preserved.
 
 - ID: `SESSION-STARTUP-READING.3.2.42`
   Status: `done`
@@ -741,7 +741,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     controls, and eight isolated factory controls establish bounded teaching and .42 validator findings.
     .41 owns eight book-repair lanes. Four forward inline-lifecycle query controls plus two descriptors
     reproduce .43 source-member loss; no runtime/public-book repair or codebase-wide completion is claimed.
-  Commit: `SESSION-STARTUP-READING.3.2.42 - read semantic projection and preserve complete book coverage`
+  Commit: `SESSION-STARTUP-READING.3.2.42 - read semantic projection and preserve complete book coverage` — Semantic call/index comprehension, complete book coverage, and measured book/compiler/inline-semantic repair ownership preserved.
 
 - ID: `SESSION-STARTUP-READING.3.2.43`
   Status: `done`
@@ -758,7 +758,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     runtime-observation (106), and foundation (5) tests plus neutral 6/20/128 at 9/9 rollout and 6/6 admission
     are retained against unchanged test/source/contract inputs. Four Knowledge owners distinguish dated
     rollout from current evidence. No runtime change or whole-codebase completion is claimed.
-  Commit: `SESSION-STARTUP-READING.3.2.43 - read semantic queries and source mapping`
+  Commit: `SESSION-STARTUP-READING.3.2.43 - read semantic queries and source mapping` — Query/source-map and derived-observation owners read; current versus historical evidence reconciled.
 
 - ID: `SESSION-STARTUP-READING.3.2.44`
   Status: `done`
@@ -776,7 +776,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     controls distinguish retained diagnostics from fabricated dependency evidence; initial controls expose
     the same classification gap for other failures. Standalone neutral proof passes 15 public documents /
     seven denials / fourteen mutations while omitting TOOLBOX. Existing .23/.41.6/.43 retain repair ownership.
-  Commit: `SESSION-STARTUP-READING.3.2.44 - read static semantics and refine failure evidence`
+  Commit: `SESSION-STARTUP-READING.3.2.44 - read static semantics and refine failure evidence` — Static projection read; failure claim narrowed to actual decision/explanation defect; omitted Toolbox guidance is repair-owned.
 
 - ID: `SESSION-STARTUP-READING.3.2.45`
   Status: `done`
@@ -795,7 +795,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     value/projection/recursive suites pass 18 tests across three files; typed neutral proof is 14/0/231.
     Current source/test/checker/contract inputs remain unchanged. Existing Knowledge preserves authority,
     detached values, and compatibility boundaries in bounded linked cards; no new runtime or public contract is claimed.
-  Commit: `SESSION-STARTUP-READING.3.2.45 - read typed source-location authority`
+  Commit: `SESSION-STARTUP-READING.3.2.45 - read typed source-location authority` — Complete typed source-location owner reading and scoped existing Knowledge reconciliation.
 
 - ID: `SESSION-STARTUP-READING.3.2.46`
   Status: `done`
@@ -813,7 +813,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     All 24 native ordinary/weak/pool trials complete 24 calls without address reuse. The isolated recycling
     substitute stops two unretained trials at three calls; two retained controls finish 24. .44 owns this
     latent identity assumption; no native allocator failure or installed runtime repair is claimed.
-  Commit: `SESSION-STARTUP-READING.3.2.46 - read staged authority and own marker identity risk`
+  Commit: `SESSION-STARTUP-READING.3.2.46 - read staged authority and own marker identity risk` — Staged authority read; native lifetime proof and isolated retired-identity counterexample preserved under .44.
 
 - ID: `SESSION-STARTUP-READING.3.2.47`
   Status: `done`
@@ -828,7 +828,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     Source, Perl consumers, neutral checker and contract remain identical to the consumed canonical proof:
     Perl 143, neutral 9/9/123 and public 6/17/10/129. Knowledge distinguishes legacy cache-key metadata
     from the general scheduler and records fresh invocation/private marker ownership; .44 remains pending.
-  Commit: `SESSION-STARTUP-READING.3.2.47 - read staged runtime and legacy registry boundaries`
+  Commit: `SESSION-STARTUP-READING.3.2.47 - read staged runtime and legacy registry boundaries` — Staged suffix/runtime/marker/policy/legacy registry read; exact unchanged proof and v1/v2 separation preserved.
 
 - ID: `SESSION-STARTUP-READING.3.2.48`
   Status: `done`
@@ -843,7 +843,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     string/object controls isolate .24: direct quiet/plain preserve state, direct lazy cases overwrite it,
     all OwnerDispatch cases preserve it. Three generated trace suites pass 11 tests in 23 seconds.
     Existing CLI bytes/proof remain unchanged; four Knowledge owners and focused continuity reconcile.
-  Commit: `SESSION-STARTUP-READING.3.2.48 - read Trace and qualify lazy exception-state evidence`
+  Commit: `SESSION-STARTUP-READING.3.2.48 - read Trace and qualify lazy exception-state evidence` — Trace read; 20 diagnostic controls and 11 passing tests qualify .24 without claiming repair.
 
 - ID: `SESSION-STARTUP-READING.3.2.49`
   Status: `done`
@@ -858,7 +858,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     fragment identity passes. Current offline checker regenerates all five modules and neutral JSON:
     1,563/1,581 mappings, 158/464 property ranges, 12 fixtures. Managed Perl consumer passes 52 tests
     in 13 seconds. No duplicate reading credit, generated edits, or other-backend execution claim.
-  Commit: `SESSION-STARTUP-READING.3.2.49 - reconcile first generated Unicode case range`
+  Commit: `SESSION-STARTUP-READING.3.2.49 - reconcile first generated Unicode case range` — First Unicode range reconciled; five-module regeneration and 52 Perl tests preserve pinned authority.
 
 - ID: `SESSION-STARTUP-READING.3.2.50`
   Status: `done`
@@ -873,7 +873,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     SHA-256 and unchanged table/generator/contract/checker/consumer identity pass. Retain .3.2.49's
     five-module regeneration, 12 neutral fixtures and 52 Perl tests without rerunning unchanged suites.
     Inventory Knowledge now separates completed physical mdBook reading from pending formal alignment.
-  Commit: `SESSION-STARTUP-READING.3.2.50 - reconcile middle Unicode table range and reading status`
+  Commit: `SESSION-STARTUP-READING.3.2.50 - reconcile middle Unicode table range and reading status` — Unicode lower/upper table transition reconciled; current reading status and retained proof preserved.
 
 - ID: `SESSION-STARTUP-READING.3.2.51`
   Status: `done`
@@ -888,7 +888,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     All 12 fixture records match the understood evaluator, including six sigma-context controls.
     Table/generator/contract/checker/consumer bytes remain unchanged from .3.2.49's regeneration/Perl52
     proof. All three case-table checkpoints cover 3,835 lines / 82,331 bytes; codebase remains No.
-  Commit: `SESSION-STARTUP-READING.3.2.51 - reconcile Unicode evaluator and contextual casing`
+  Commit: `SESSION-STARTUP-READING.3.2.51 - reconcile Unicode evaluator and contextual casing` — Final case-table range reconciled; contextual evaluator, retained proof and native-planning pressure recorded.
 
 - ID: `SESSION-STARTUP-READING.3.2.52`
   Status: `done`
@@ -903,7 +903,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     Current Unicode regeneration: 806 ranges, 9 positive/8 negative fixtures, 2 distinct pairs.
     Direct Perl classifier: 3,224 endpoint/gap checks, 17 fixtures, 2 identity pairs PASS without warnings.
     Current gap neutral/public proof is 9/0/63 and 8/15/10/34; prior unchanged Perl124 is retained.
-  Commit: `SESSION-STARTUP-READING.3.2.52 - reconcile XID classifier and current named-slot admission`
+  Commit: `SESSION-STARTUP-READING.3.2.52 - reconcile XID classifier and current named-slot admission` — XID range and direct classifier proof recorded; stale gap Knowledge admission corrected without runtime movement.
 
 - ID: `SESSION-STARTUP-READING.3.2.53`
   Status: `done`
@@ -918,7 +918,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     Two managed callable suites pass 76 top-level tests in 29 seconds. Neutral signature 3/9/7 and
     codeblock 7/11/9/7/4/8/23 pass. Git census is 13 parked .plg files. Knowledge reconciles spec-owned
     parsing, versioned metadata, and legacy discovery without runtime/grammar or public-book changes.
-  Commit: `SESSION-STARTUP-READING.3.2.53 - reconcile function registry and legacy discovery`
+  Commit: `SESSION-STARTUP-READING.3.2.53 - reconcile function registry and legacy discovery` — Function registry and legacy files read; 76 tests and neutral proof recorded; 13-file corpus count corrected.
 
 - ID: `SESSION-STARTUP-READING.3.2.54`
   Status: `done`
@@ -933,7 +933,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     Managed syntax checks pass for each file; nine targeted gdcheck assertions reproduce the already owned
     signed-tolerance, duplicate-row, and DEFAULT defects. Prior ptchange spaced-path evidence is retained.
     No repair or public-book change. .3.2.55 owns canonical parent closeout and complete Rust decomposition.
-  Commit: `SESSION-STARTUP-READING.3.2.54 - reconcile legacy utility reading and repair evidence`
+  Commit: `SESSION-STARTUP-READING.3.2.54 - reconcile legacy utility reading and repair evidence` — 839 utility lines reread; exact diagnostic control retained; .55 owns canonical closeout.
 
 - ID: `SESSION-STARTUP-READING.3.2.55`
   Status: `done`
@@ -952,7 +952,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     Rust plan and task Scope round-trip pass: 66 groups / 412 paths / 3,533,382 bytes, two empty inputs,
     1,500-line and 65,536-byte maxima. No new Rust reading credit or repair closure. Final staged canonical
     receipt is mandatory before this parent closeout lands; the committed hook/receipt establishes its result.
-  Commit: `SESSION-STARTUP-READING.3.2.55 - close Perl reading and own bounded Rust scopes`
+  Commit: `SESSION-STARTUP-READING.3.2.55 - close Perl reading and own bounded Rust scopes` — Close 89-file Perl reading; own all 412 Rust paths in 66 bounded leaves plus closeout; exact canonical boundary.
 
 - ID: `SESSION-STARTUP-READING.3.3`
   Status: `active`
@@ -978,7 +978,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     Retain preceding exact canonical parent closeout; ordinary checkpoint needs focused proof only.
     Forward evidence is owned by .45–.47 and .49: eleven earlier CLI controls, the isolated core program,
     and four new regex-boundary controls. No repair closes.
-  Commit: `SESSION-STARTUP-READING.3.3.1 - read Rust lockfile prefix and own parser boundary repairs`
+  Commit: `SESSION-STARTUP-READING.3.3.1 - read Rust lockfile prefix and own parser boundary repairs` — Read 1,496 lock/ignore lines; own malformed-block, Unicode diagnostic, mutation-argument, and regex-newline repairs; retain prior canonical milestone.
 
 - ID: `SESSION-STARTUP-READING.3.3.2`
   Status: `done`
@@ -998,7 +998,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     Locked offline metadata resolves 199 packages and declares Rust 1.95 for rgx-core/pgen, contradicting
     README 1.85+; no old-toolchain run or earliest working compiler is claimed. Neutral cursor contract
     passes 36 family/18 edge/8 parent-child cases and 60 drift mutations. Documentation repairs stay pending.
-  Commit: `SESSION-STARTUP-READING.3.3.2 - read Rust manifests AST and callable prefix`
+  Commit: `SESSION-STARTUP-READING.3.3.2 - read Rust manifests AST and callable prefix` — Read 1,483 manifest/AST/callable lines; own exact README minimum-version and mode-comment evidence.
 
 - ID: `SESSION-STARTUP-READING.3.3.3`
   Status: `done`
@@ -1016,7 +1016,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     not completed repairs. Neutral callable checks pass 7/11 literals/calls, 9/7 invalid cases, four invalid declarations, eight
     contextual forms and 23 mutations; selector scan reports zero positive / 20 classified occurrences.
     Required continuity checks pass before commit.
-  Commit: `SESSION-STARTUP-READING.3.3.3 - read callable normalization and compiler validation prefix`
+  Commit: `SESSION-STARTUP-READING.3.3.3 - read callable normalization and compiler validation prefix` — Read 1,499 callable/compiler lines; preserve validation order and exact pending repair boundaries.
 
 - ID: `SESSION-STARTUP-READING.3.3.4`
   Status: `done`
@@ -1035,7 +1035,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     sorted portable diagnostics with existing Knowledge. Confirm source-comment repair ownership and retain
     native duplicate-label rejection evidence. Neutral slot checks pass 5 fixtures / 2 diagnostics / 59 mutations; entry checks pass 8 selection /
     3 failure / 3 strict cases / 54 mutations. Required continuity checks pass before commit.
-  Commit: `SESSION-STARTUP-READING.3.3.4 - read Rust regex resolution descriptors and entry diagnostics`
+  Commit: `SESSION-STARTUP-READING.3.3.4 - read Rust regex resolution descriptors and entry diagnostics` — Read 1,481 compiler/descriptor/entry/error lines; separate projection determinism from native validation.
 
 - ID: `SESSION-STARTUP-READING.3.3.5`
   Status: `done`
@@ -1051,7 +1051,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     recursive scans, literal options and statement normalization with existing Knowledge. Neutral staged checks pass 123 core / 129 public mutations; write checks pass 5 valid / 7 invalid /
     11 success / 16 structural / 3 evaluation / 3 exclusion / 8 composed cases and 105 mutations.
     Required continuity checks pass before commit; no fresh native-suite execution is claimed.
-  Commit: `SESSION-STARTUP-READING.3.3.5 - read Rust expression carriers and statement parser prefix`
+  Commit: `SESSION-STARTUP-READING.3.3.5 - read Rust expression carriers and statement parser prefix` — Read 1,496 expression/statement lines; separate byte cursors, character spans and debug formatting.
 
 - ID: `SESSION-STARTUP-READING.3.3.6`
   Status: `done`
@@ -1068,7 +1068,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     controls retain their exact limits. Neutral mutation checks pass 4 valid / 14 invalid / 5 excluded syntax cases, 10 successes,
     8 pre-commit failures, 6 callback / 1 continuation compositions, and 167 + 592 mutations.
     Required continuity checks pass before commit.
-  Commit: `SESSION-STARTUP-READING.3.3.6 - read Rust expression parsing and retain boundary repair evidence`
+  Commit: `SESSION-STARTUP-READING.3.3.6 - read Rust expression parsing and retain boundary repair evidence` — Read 1,461 expression-parser lines; retain exact Unicode and mutation-whitespace repair evidence.
 
 - ID: `SESSION-STARTUP-READING.3.3.7`
   Status: `done`
@@ -1085,7 +1085,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     hash controls establish adjacent-colon loss; three paired explicit-edge Rust CLI/Perl Get controls
     establish one-argument cat divergence. .50/.51 own repairs before Knowledge. Prior .49 evidence retains
     its limits. Required continuity checks pass before commit; no runtime repair is claimed.
-  Commit: `SESSION-STARTUP-READING.3.3.7 - read Rust lexical boundaries and own hash and cat repairs`
+  Commit: `SESSION-STARTUP-READING.3.3.7 - read Rust lexical boundaries and own hash and cat repairs` — Read 1,497 lexical/test lines; own adjacent hash-colon loss and cat arity divergence as .50/.51.
 
 - ID: `SESSION-STARTUP-READING.3.3.8`
   Status: `done`
@@ -1103,7 +1103,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     pass 7/11/9/7/4/8/23; uniform binding passes 11/7/6/8. Historical rollout/storage guidance and test
     assertion limits are reconciled in Knowledge; .41.6 owns stale test naming. Required continuity
     checks pass before commit. No native suite, runtime repair or complete-codebase claim.
-  Commit: `SESSION-STARTUP-READING.3.3.8 - read remaining Rust expression tests and core parser entry`
+  Commit: `SESSION-STARTUP-READING.3.3.8 - read remaining Rust expression tests and core parser entry` — Complete expr.rs reading and core entry prefix; reconcile test assertion limits and historical binding/rollout prose.
 
 - ID: `SESSION-STARTUP-READING.3.3.9`
   Status: `done`
@@ -1120,7 +1120,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     three direct bootstrap dumps isolate compact fluent, header suffix and regex-brace defects. .52-.54
     own bounded repairs before Knowledge. All diagnostic processes completed; required continuity proof
     passes before commit. No runtime, public-book, full-native or whole-codebase signoff.
-  Commit: `SESSION-STARTUP-READING.3.3.9 - read Rust rule-body parsing and own lexical boundary repairs`
+  Commit: `SESSION-STARTUP-READING.3.3.9 - read Rust rule-body parsing and own lexical boundary repairs` — Read rule-body parser; own compact fluent, invalid header suffix and Perl/Rust regex-brace repairs .52-.54.
 
 - ID: `SESSION-STARTUP-READING.3.3.10`
   Status: `done`
@@ -1138,7 +1138,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     55/18 and cursor 36/18/8/60 pass. Four paired native number controls prove signed large-value saturation
     and distinct text spelling; .55 owns repairs before Knowledge. All jobs completed; focused continuity
     passes before commit. No runtime/public-book change or fresh cross-backend trace signoff.
-  Commit: `SESSION-STARTUP-READING.3.3.10 - read core trace and types and own large-number conversion repairs`
+  Commit: `SESSION-STARTUP-READING.3.3.10 - read core trace and types and own large-number conversion repairs` — Read parser tests/core trace/types; own finite-value saturation and large-number text repairs .55.
 
 - ID: `SESSION-STARTUP-READING.3.3.11`
   Status: `done`
@@ -1156,7 +1156,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     cursor 36/18/8/60 and duplicate-slot 5/2/59 pass. Reconcile derived cursor/serde state, UTF-8 prefix
     boundaries and ordinary/traced AST pass order; .41.2 owns stale validation comments. Focused continuity
     passes before commit. No fresh native matrix, runtime, public-book, or whole-codebase signoff.
-  Commit: `SESSION-STARTUP-READING.3.3.11 - read compiled types Unicode labels and validation entrypoints`
+  Commit: `SESSION-STARTUP-READING.3.3.11 - read compiled types Unicode labels and validation entrypoints` — Read compiled types and pinned Unicode through EOF plus AST-validation entrypoints; reconcile historical/current claims.
 
 - ID: `SESSION-STARTUP-READING.3.3.12`
   Status: `done`
@@ -1181,7 +1181,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     indexed ADR 0105 admits only files 24→25 and manifest lines 23→24. Exact staged canonical proof is
     required before this candidate can land; the receipt and commit hooks enforce that boundary.
     No runtime/public-book change or fresh descriptor/generated/backend-wide signoff.
-  Commit: `SESSION-STARTUP-READING.3.3.12 - read static validation and preserve bounded engineering history`
+  Commit: `SESSION-STARTUP-READING.3.3.12 - read static validation and preserve bounded engineering history` — Complete validator/descriptor reading; own .56/.57; preserve segment 4983 with finite ADR 0105 capacity and canonical proof.
 
 - ID: `SESSION-STARTUP-READING.3.3.13`
   Status: `done`
@@ -1198,7 +1198,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
     policy, contract, or infrastructure change.
   Verification: PASS: exact six-range/baseline identity; managed locked/offline core cursor 5/5, types 8/8 and Unicode 5/5; four neutral contract checks; completed prior canonical/sample intake; Knowledge, history, memory, all nine doctrines and diff.
-  Commit: `SESSION-STARTUP-READING.3.3.13 - read core tests and bounded child authority`
+  Commit: `SESSION-STARTUP-READING.3.3.13 - read core tests and bounded child authority` — Read six Rust ranges, preserve exact verification limits and prior canonical evidence, and remove only consumed captures.
 
 - ID: `SESSION-STARTUP-READING.3.3.14`
   Status: `done`
@@ -1213,7 +1213,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
     policy, contract, or infrastructure change.
   Verification: PASS: four exact baseline-identical ranges; progressive 9/9/116/public60, typed source 14/0/231, diagnostic output 3/11/6/8/20, scalar numeric 55/18; bounded ceiling-constructor/test-source review; Knowledge/history/memory/all nine doctrines and diff.
-  Commit: `SESSION-STARTUP-READING.3.3.14 - read child authority diagnostics and engine definitions`
+  Commit: `SESSION-STARTUP-READING.3.3.14 - read child authority diagnostics and engine definitions` — Finish authority and diagnostic-type reading; reconcile current options/diagnostic Knowledge and resource-boundary limits.
 
 - ID: `SESSION-STARTUP-READING.3.3.15`
   Status: `done`
@@ -1225,7 +1225,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
     policy, contract, or infrastructure change.
   Verification: PASS: exact engine range/baseline identity; seven managed neutral checks; managed CLI build; seven paired Rust/Perl split controls with five differences/two equal controls; .33 ownership and exact evidence; Knowledge/history/explicit memory/staged diff/all nine pre-commit doctrines.
-  Commit: `SESSION-STARTUP-READING.3.3.15 - read generated engine loops and audit split boundaries`
+  Commit: `SESSION-STARTUP-READING.3.3.15 - read generated engine loops and audit split boundaries` — Read generated action/blind loops, preserve exact scope, and annotate measured split boundaries under existing .33.
 
 - ID: `SESSION-STARTUP-READING.3.3.16`
   Status: `done`
@@ -1237,7 +1237,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
     policy, contract, or infrastructure change.
   Verification: PASS: complete range/current-baseline identity; root, semantic, diagnostic-output and staged-AST neutral checks; bounded generated-validation support; Knowledge/history/explicit memory/staged diff/all nine pre-commit doctrines.
-  Commit: `SESSION-STARTUP-READING.3.3.16 - read engine invocation routes and entry dispatch`
+  Commit: `SESSION-STARTUP-READING.3.3.16 - read engine invocation routes and entry dispatch` — Reconcile execution projections, diagnostic stages and precedence, generated validation ownership and parent-result ordering.
 
 - ID: `SESSION-STARTUP-READING.3.3.17`
   Status: `done`
@@ -1249,7 +1249,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
     policy, contract, or infrastructure change.
   Verification: PASS: complete range/current-baseline identity; six managed neutral contracts; four native diagnostic controls and independent result-field assertions; .55.1 repair ownership; Knowledge/history/explicit memory/staged diff/all nine pre-commit doctrines.
-  Commit: `SESSION-STARTUP-READING.3.3.17 - read native action loops and nested-write coordination`
+  Commit: `SESSION-STARTUP-READING.3.3.17 - read native action loops and nested-write coordination` — Read native loops/control and nested-write evaluation order; preserve exact diagnostic evidence and following traversal scope.
 
 - ID: `SESSION-STARTUP-READING.3.3.18`
   Status: `done`
@@ -1261,7 +1261,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
     policy, contract, or infrastructure change.
   Verification: PASS: complete range/current-baseline identity; four managed neutral contracts; bounded Knowledge claim review; history/explicit memory/derived Knowledge/staged diff/all nine pre-commit doctrines.
-  Commit: `SESSION-STARTUP-READING.3.3.18 - read recursive writes and expression invocation scopes`
+  Commit: `SESSION-STARTUP-READING.3.3.18 - read recursive writes and expression invocation scopes` — Complete recursive-write and expression/callable invocation reading with separate function/codeblock scope boundaries.
 
 - ID: `SESSION-STARTUP-READING.3.3.19`
   Status: `done`
@@ -1273,7 +1273,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
     policy, contract, or infrastructure change.
   Verification: PASS: complete range/current-baseline identity; four managed neutral contracts; six paired Rust CLI/Perl Get cases plus six direct native diagnostics and independent field/value assertions; .58 repair ownership; compiler sample consumed; history/memory/derived Knowledge/staged diff/all nine pre-commit doctrines.
-  Commit: `SESSION-STARTUP-READING.3.3.19 - read receiver traversal and diagnose final-assignment guard`
+  Commit: `SESSION-STARTUP-READING.3.3.19 - read receiver traversal and diagnose final-assignment guard` — Complete traversal/value-block reading; own confirmed final-assignment guard gap and preserve exact native/reference evidence.
 
 - ID: `SESSION-STARTUP-READING.3.3.20`
   Status: `done`
@@ -1285,7 +1285,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
     policy, contract, or infrastructure change.
   Verification: PASS: complete range/current-baseline identity; four managed neutral contracts; ten paired Rust primary/Perl Get cases with exact values/error fields; ten lowerings/generated captures and six callback descriptor controls; .59 repair ownership; history/memory/derived Knowledge/staged diff/all nine pre-commit doctrines.
-  Commit: `SESSION-STARTUP-READING.3.3.20 - read helper dispatch and own substitution composition repairs`
+  Commit: `SESSION-STARTUP-READING.3.3.20 - read helper dispatch and own substitution composition repairs` — Complete helper-prefix reading; own substitution flags, callback lowering and receiver protection with exact paired evidence.
 
 - ID: `SESSION-STARTUP-READING.3.3.21`
   Status: `done`
@@ -1297,7 +1297,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
     policy, contract, or infrastructure change.
   Verification: PASS: complete range/current-baseline identity; three managed neutral contracts; eleven paired Rust primary/Perl Get cases plus one Rust-only overflow control; twelve ready descriptors/lowered/generated captures; exact values/kinds/panic-site assertions; .60/.61 ownership; history/memory/derived Knowledge/staged diff/all nine pre-commit doctrines.
-  Commit: `SESSION-STARTUP-READING.3.3.21 - complete helper reading and own slice and scalar boundary repairs`
+  Commit: `SESSION-STARTUP-READING.3.3.21 - complete helper reading and own slice and scalar boundary repairs` — Complete helper implementation and test-prefix reading; own array slicing and scalar null/empty repair with bounded exact evidence.
 
 - ID: `SESSION-STARTUP-READING.3.3.22`
   Status: `done`
@@ -1309,7 +1309,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
     policy, contract, or infrastructure change.
   Verification: PASS: full 1,469-line source read/current-baseline identity; five paired primary Rust/live Perl exact value/effect/JSON-kind controls; five ready descriptors/lowered/generated captures; three managed neutral contracts; .62 ownership and four Knowledge corrections; history/memory/derived Knowledge/staged diff/all nine pre-commit doctrines.
-  Commit: `SESSION-STARTUP-READING.3.3.22 - read capture and control tests and own coalesce evaluation repair`
+  Commit: `SESSION-STARTUP-READING.3.3.22 - read capture and control tests and own coalesce evaluation repair` — Read capture/control assertions, qualify weak smoke coverage, and own coalesce definedness/laziness with corrected Boolean observations.
 
 - ID: `SESSION-STARTUP-READING.3.3.23`
   Status: `done`
@@ -1323,7 +1323,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
     policy, contract, or infrastructure change.
   Verification: PASS: complete 1,364-line/53,265-byte source read/current-baseline identity; three managed write/mutation/slot neutral contracts; six informative paired primary Rust/live Perl choice probes plus six retained inconclusive controls; six three-rule descriptors/generated captures; exact sequence/error assertions; .63 ownership; Knowledge/history/memory/staged diff/all nine pre-commit doctrines.
-  Commit: `SESSION-STARTUP-READING.3.3.23 - complete engine and regex helper reading and own input-context repair`
+  Commit: `SESSION-STARTUP-READING.3.3.23 - complete engine and regex helper reading and own input-context repair` — Complete engine tests and regex wrappers; own five assertion discrepancies with exact collected-rule controls.
 
 - ID: `SESSION-STARTUP-READING.3.3.24`
   Status: `done`
@@ -1336,7 +1336,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
     policy, contract, or infrastructure change.
   Verification: PASS: all 65,536 owned bytes read without truncation and baseline-identical; both managed generated bindings byte-fresh; transport 35/10/10/76 and admission complete 5/5+6/6/141; decoded bundle/frame/schema assertions; shared builder/renderer source identity; Knowledge/history/memory/staged diff/all nine pre-commit doctrines.
-  Commit: `SESSION-STARTUP-READING.3.3.24 - read embedded MCP contract prefix and reconcile generated identity`
+  Commit: `SESSION-STARTUP-READING.3.3.24 - read embedded MCP contract prefix and reconcile generated identity` — Preserve exact generated-prefix coverage and identity, update old sizes, distinguish artifact/governance proof from runtime execution.
 
 - ID: `SESSION-STARTUP-READING.3.3.25`
   Status: `done`
@@ -1350,7 +1350,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
     policy, contract, or infrastructure change.
   Verification: PASS reading/proof: all 1,352 lines/fragments/65,134 bytes baseline-identical; generated binding byte-fresh; transport 35/10/10/76, admission complete/141; existing native test 1/1 and captured-output gap independently confirmed/owned .64; Knowledge/history/memory/staged diff/all nine pre-commit doctrines. Runtime repair remains pending.
-  Commit: `SESSION-STARTUP-READING.3.3.25 - read frozen MCP runtime and own caught-panic output repair`
+  Commit: `SESSION-STARTUP-READING.3.3.25 - read frozen MCP runtime and own caught-panic output repair` — Preserve frozen-runtime/registry coverage and separate response sanitation from captured process output; own .64 repair and qualify native reachability.
 
 - ID: `SESSION-STARTUP-READING.3.3.26`
   Status: `done`
@@ -1364,7 +1364,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
     policy, contract, or infrastructure change.
   Verification: PASS reading/proof: all 1,500 lines/51,296 bytes baseline-identical; six existing native wire tests; twelve paired public delimiter/size controls and canonical Rust output; EOF maximum+1 defect owned .65; transport 35/10/10/76 and admission complete/141; Knowledge/history/memory/staged diff/all nine pre-commit doctrines.
-  Commit: `SESSION-STARTUP-READING.3.3.26 - complete MCP wire reading and own final EOF byte-limit repair`
+  Commit: `SESSION-STARTUP-READING.3.3.26 - complete MCP wire reading and own final EOF byte-limit repair` — Complete MCP server/wire coverage, qualify existing unit boundaries, and own the independently reproduced EOF limit repair.
 
 - ID: `SESSION-STARTUP-READING.3.3.27`
   Status: `done`
@@ -1377,7 +1377,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
     policy, contract, or infrastructure change.
   Verification: PASS: all 1,500 owned lines/50,300 bytes and 68 supporting helper lines baseline-identical; shared Rust CLI 66/66 default with empty stderr; neutral recognition 138/250/58, 9/9 and public/admission guards; .38 source comparison; Knowledge/history/memory/staged diff/all nine pre-commit doctrines.
-  Commit: `SESSION-STARTUP-READING.3.3.27 - complete primary CLI and read recognition authority guards`
+  Commit: `SESSION-STARTUP-READING.3.3.27 - complete primary CLI and read recognition authority guards` — Complete primary CLI coverage, distinguish current neutral proof from historical native counts, and preserve Rust's early invalidation guard.
 
 - ID: `SESSION-STARTUP-READING.3.3.28`
   Status: `done`
@@ -1390,7 +1390,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
     policy, contract, or infrastructure change.
   Verification: PASS: all 1,496 lines/56,822 bytes baseline-identical; recognition 138/250/58 at 9/9, gap 9/0/63/public34, typed source 14/0/231; exact 92 helper/seven alias catalogs; Knowledge/history/memory/staged diff/all nine pre-commit doctrines.
-  Commit: `SESSION-STARTUP-READING.3.3.28 - complete recognition adapters and read RuntimeContext source connections`
+  Commit: `SESSION-STARTUP-READING.3.3.28 - complete recognition adapters and read RuntimeContext source connections` — Complete recognition runtime and record source-authority, gap rollback and exact helper/alias boundaries.
 
 - ID: `SESSION-STARTUP-READING.3.3.29`
   Status: `done`
@@ -1402,7 +1402,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
     policy, contract, or infrastructure change.
   Verification: PASS: 1,497 lines/49,031 bytes baseline-identical; typed source 14/0/231, binding 11/7/6/8, write105, map167/592, diagnostic3/11/6/8/20; Knowledge/history/memory/staged diff/all nine pre-commit doctrines.
-  Commit: `SESSION-STARTUP-READING.3.3.29 - read context observations projections and typed binding stores`
+  Commit: `SESSION-STARTUP-READING.3.3.29 - read context observations projections and typed binding stores` — Record completion routing, typed projection and stable binding identity with exact remaining restoration scope.
 
 - ID: `SESSION-STARTUP-READING.3.3.30`
   Status: `done`
@@ -1416,7 +1416,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
     policy, contract, or infrastructure change.
   Verification: PASS reading/diagnosis: 1,494 lines/53,412 bytes baseline-identical; six paired public queries with independent ID/excerpt assertions; semantic6/20/128 at9/0 and6/0, callable23, binding11/7/6/8; .22/.66 ownership; Knowledge/history/memory/staged diff/all nine pre-commit doctrines.
-  Commit: `SESSION-STARTUP-READING.3.3.30 - complete context and semantic foundation reading and own binding identity repair`
+  Commit: `SESSION-STARTUP-READING.3.3.30 - complete context and semantic foundation reading and own binding identity repair` — Complete context/foundation reading and own the independently measured repeated-binding query repair.
 
 - ID: `SESSION-STARTUP-READING.3.3.31`
   Status: `done`
@@ -1429,7 +1429,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
     policy, contract, or infrastructure change.
   Verification: PASS reading/diagnosis: 1,494 lines/50,420 bytes baseline-identical; six paired public queries, six Perl Get controls and independent signature/source assertions; semantic6/20/128 at9/0 and6/0; .67 ownership; Knowledge/history/memory/staged diff/all nine doctrines.
-  Commit: `SESSION-STARTUP-READING.3.3.31 - complete semantic call reading and own signature and container projection repairs`
+  Commit: `SESSION-STARTUP-READING.3.3.31 - complete semantic call reading and own signature and container projection repairs` — Complete call projection and distinguish matching query payloads from independently valid semantic evidence.
 
 - ID: `SESSION-STARTUP-READING.3.3.32`
   Status: `done`
@@ -1443,7 +1443,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
     policy, contract, or infrastructure change.
   Verification: PASS reading/diagnosis: 1,495 lines/50,145 bytes baseline-identical; eight native constructor/query controls, four paired Get/CLI controls, independent assertions; semantic6/20/128, diagnostic3/11/6/8/20, recognition138/250/58; .68/.69 ownership; Knowledge/history/memory/staged diff/all nine doctrines.
-  Commit: `SESSION-STARTUP-READING.3.3.32 - complete semantic query reading and own token use and newline repairs`
+  Commit: `SESSION-STARTUP-READING.3.3.32 - complete semantic query reading and own token use and newline repairs` — Complete query/runtime projection and separate actual token-use/parser gaps from a ruled-out failure-mapping concern.
 
 - ID: `SESSION-STARTUP-READING.3.3.33`
   Status: `done`
@@ -1457,7 +1457,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
     policy, contract, or infrastructure change.
   Verification: PASS reading/diagnosis: 1,482 lines/50,376 bytes baseline-identical; five paired public queries, three paired Get/CLI controls and independent assertions; semantic6/20/128, cursor36/18/8/60, generated10families/strictRust105; .70 ownership; Knowledge/history/memory/staged diff/all nine doctrines.
-  Commit: `SESSION-STARTUP-READING.3.3.33 - complete static semantic reading and own grouped edge correlation repairs`
+  Commit: `SESSION-STARTUP-READING.3.3.33 - complete static semantic reading and own grouped edge correlation repairs` — Complete static/event reading and distinguish correct grouped execution from incomplete semantic source/index records.
 
 - ID: `SESSION-STARTUP-READING.3.3.34`
   Status: `done`
@@ -1470,7 +1470,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
     policy, contract, or infrastructure change.
   Verification: PASS reading/diagnosis: 1,493 lines/53,383 bytes baseline-identical; eight identity emissions/seven module compiles and two executable modules/ten results, independent assertions; generated10/strictRust105, cursor36/18/8/60, typed14/0/231; .71/.72 owned; Knowledge/history/memory/staged diff/all nine doctrines.
-  Commit: `SESSION-STARTUP-READING.3.3.34 - complete emitter reading and own literal and recognition adapter repairs`
+  Commit: `SESSION-STARTUP-READING.3.3.34 - complete emitter reading and own literal and recognition adapter repairs` — Complete emitter reading and preserve independently measured generated identity/projection gaps.
 
 - ID: `SESSION-STARTUP-READING.3.3.35`
   Status: `done`
@@ -1484,7 +1484,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
     policy, contract, or infrastructure change.
   Verification: PASS reading: 1,497 lines/51,223 bytes baseline-identical; ADR0026 and one new/four existing Knowledge owners reconciled; native resolution14/9/4, typed14/0/231, diagnostic3/11/6/8/20, staged9legs/123+129mutations; Knowledge/history/memory/staged diff/all nine doctrines.
-  Commit: `SESSION-STARTUP-READING.3.3.35 - complete source authority and loader reading and reconcile function projection`
+  Commit: `SESSION-STARTUP-READING.3.3.35 - complete source authority and loader reading and reconcile function projection` — Complete source authority/loader and retain exact staged function projection and scalar-source boundaries.
 
 - ID: `SESSION-STARTUP-READING.3.3.36`
   Status: `done`
@@ -1497,7 +1497,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
     policy, contract, or infrastructure change.
   Verification: PASS reading: 1,453 lines/51,063 bytes baseline-identical; five Knowledge owners and .55.1 source inventory reconciled; staged9legs/123+129mutations, typed14/0/231 and scalar55/18; Knowledge/history/memory/staged diff/all nine doctrines.
-  Commit: `SESSION-STARTUP-READING.3.3.36 - complete spec parser reading and trace staged registry and invocation authority`
+  Commit: `SESSION-STARTUP-READING.3.3.36 - complete spec parser reading and trace staged registry and invocation authority` — Complete spec parser and preserve frozen registry, fresh seed and queue coordinator boundaries.
 
 - ID: `SESSION-STARTUP-READING.3.3.37`
   Status: `done`
@@ -1509,7 +1509,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
     policy, contract, or infrastructure change.
   Verification: PASS reading: 1,499 lines/53,102 baseline-identical bytes; 28 paired target, 12 returned-marker and six budget records independently asserted; .73/.74/.75 own measured gaps; staged123+129 and typed14/0/231; Knowledge/history/memory/staged diff/all nine doctrines.
-  Commit: `SESSION-STARTUP-READING.3.3.37 - trace staged execution and own target validation and counter repairs`
+  Commit: `SESSION-STARTUP-READING.3.3.37 - trace staged execution and own target validation and counter repairs` — Preserve exact staged execution evidence and own destination, marker/provenance and call-counter repairs.
 
 - ID: `SESSION-STARTUP-READING.3.3.38`
   Status: `done`
@@ -1525,7 +1525,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `infrastructure` — mandatory change-history rollover requires exact ADR 0106 file/manifest capacity admission;
     receipt-bound canonical verification is required before landing, with runtime/public-book reading gates unchanged.
   Verification: PASS focused reading: 1,500 lines/50,788 baseline-identical bytes across four ranges; six existing Knowledge cards/.55.1 source inventory reconciled; Unicode1563/1581/158/464/12, staged123+129, typed14/0/231; Archive source/blob/hash/prior-manifest proof passes; final exact staged canonical receipt is required before landing.
-  Commit: `SESSION-STARTUP-READING.3.3.38 - complete staged source reading and preserve bounded change history`
+  Commit: `SESSION-STARTUP-READING.3.3.38 - complete staged source reading and preserve bounded change history` — Complete staged source comprehension and separate declaration authority, returned records and legacy adapter metadata.
 
 - ID: `SESSION-STARTUP-READING.3.3.39`
   Status: `done`
@@ -1537,7 +1537,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
     policy, contract, or infrastructure change.
   Verification: PASS reading: all 1,500 lines/38,103 baseline-identical bytes; lower map complete, upper prefix reconciled; Unicode1563/1581/158/464/12; prior exact canonical receipt/log and both sample identities consumed; five Knowledge cards, memory/history/diff and required nine-doctrine commit checks.
-  Commit: `SESSION-STARTUP-READING.3.3.39 - finish Unicode lower-map reading and preserve canonical evidence`
+  Commit: `SESSION-STARTUP-READING.3.3.39 - finish Unicode lower-map reading and preserve canonical evidence` — Preserve completed Unicode lower-map comprehension and exact prior canonical/sample evidence.
 
 - ID: `SESSION-STARTUP-READING.3.3.40`
   Status: `done`
@@ -1549,7 +1549,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
     policy, contract, or infrastructure change.
   Verification: PASS: all 1,450 lines / 37,746 bytes read untruncated and baseline-identical; complete upper-map comprehension reconciled; unchanged generation inputs preserve .3.3.39 Unicode proof; Knowledge, memory, both histories, diff and required nine-doctrine commit checks.
-  Commit: `SESSION-STARTUP-READING.3.3.40 - complete Unicode upper-map reading`
+  Commit: `SESSION-STARTUP-READING.3.3.40 - complete Unicode upper-map reading` — Complete upper-map physical reading with exact range identity and retained generation proof.
 
 - ID: `SESSION-STARTUP-READING.3.3.41`
   Status: `done`
@@ -1562,7 +1562,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `batch/push` — item 100 closes the accepted default batch; exact staged canonical CI
     must pass before the final leaf commit and clean push.
   Verification: PASS focused: all 1,494 lines / 43,943 baseline-identical bytes; complete Unicode module and bounded callable assertion scope; Unicode 1563/1581/158/464/12 and callable 7/11/9/7/4/8/23; four Knowledge cards; exact 99-commit batch census. Final exact staged canonical receipt is required before landing; its completed result is recorded in the commit body.
-  Commit: `SESSION-STARTUP-READING.3.3.41 - complete Unicode reading and checkpoint callable contracts at the batch boundary`
+  Commit: `SESSION-STARTUP-READING.3.3.41 - complete Unicode reading and checkpoint callable contracts at the batch boundary` — Close the accepted 100-item batch after exact canonical proof; resume required reading at .3.3.42.
 
 - ID: `SESSION-STARTUP-READING.3.3.42`
   Status: `done`
@@ -1630,7 +1630,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Canonical trigger: `none` — reading and continuity only; no runtime, public contract or infrastructure change.
   Verification: PASS: all 56 scopes / 1,500 lines / 45,529 bytes read untruncated and baseline-identical;
     callable 7/11/9/7/4/8/23 and named-mark 7 helpers/3 mutations pass; focused continuity proof precedes landing.
-  Commit: `SESSION-STARTUP-READING.3.3.42 - complete callable and named-mark reading with corpus prefix`
+  Commit: `SESSION-STARTUP-READING.3.3.42 - complete callable and named-mark reading with corpus prefix` — Complete callable/named-mark reading and owned corpus prefix.
 
 - ID: `SESSION-STARTUP-READING.3.3.43`
   Status: `pending`
@@ -2236,7 +2236,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     `--list` says live. Exact source routes all failed kill-zero checks into false-dead recovery authorization.
     No recovery/deletion probe executed; the wrapper exited 0 and permitted census then found zero leftovers.
     Evidence and source locations: `docs/knowledge/project-data-liveness-permission-denial.md`.
-  Commit: `SESSION-STARTUP-READING.6 - diagnose denied liveness probes`
+  Commit: `SESSION-STARTUP-READING.6 - diagnose denied liveness probes` — Exact causal evidence and owned repair; no production change or deletion test.
 
 - ID: `SESSION-STARTUP-READING.7`
   Status: `pending`
@@ -2784,7 +2784,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     existing lifecycle owner distinguish confirmed gaps, unprobed boundaries, and the JSON display artifact.
     All nine doctrines, Knowledge synchronization, memory, both history limits, and staged scope/diff pass.
     Queued checkpoint statuses stay pending; pre-commit rechecks the final candidate.
-  Commit: `SESSION-STARTUP-READING.31 - preserve forward reading and own confirmed repairs`
+  Commit: `SESSION-STARTUP-READING.31 - preserve forward reading and own confirmed repairs` — Forward coverage and confirmed findings durably owned; prior canonical success; queued checkpoints remain pending.
 
 - ID: `SESSION-STARTUP-READING.32`
   Status: `pending`
@@ -4187,7 +4187,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 ## Current Frontier
 
-No startup leaf is currently eligible: complete `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5` from a clean pivot, then activate `.3.3.43`.
+| Order | Leaf | Status | Why next |
+| --- | --- | --- | --- |
+| 1 | `SESSION-STARTUP-READING.3.3.43` | `pending` | Complete the owned hlink/corpus continuation after clean containment `.5` and proposed generic-rule intake. |
 
 ## Reading Ledger
 
@@ -6914,93 +6916,8 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   ordinary proof and canonical designated/push proof. No competing executable roadmap direction was found.
 - No runtime behavior was verified by reading. No new public explanation is warranted by this checkpoint;
   substantive codebase/book drift, if found during `.3`/`.4`, must receive an owning leaf before remediation.
-- Batch history: `.2` is resumed item 1/100 at `d6d3c890`; `.6` is item 2/100 at `03d692c1`; `.3.1` is item 3/100 at
-  `942c6138`; `.3.2.1` is item 4/100 at `c0eb1acf`; `.3.2.2` is item 5/100 at `094e05bc`; `.3.2.3` is item 6/100 at
-  `27fd160f`; `.3.2.4` is item 7/100 at `4f311a9e`; `.3.2.5` is item 8/100 at `6c1234cc`; `.3.2.6` is item 9/100 at
-  `f864f881`; `.3.2.7` is item 10/100 at `dc7f5f09`; `.3.2.8` is item 11/100 at `e4b1f296`;
-  `.3.2.9` is item 12/100 at `96a1c242`; `.3.2.10` is item 13/100 at `ff6c228c`;
-  `.3.2.11` is item 14/100 at `3ab399d0`; `.3.2.12` is item 15/100 at `5e2cf756`;
-  `.3.2.13` is item 16/100 at `a7d17e6f`; `.3.2.14` is item 17/100 at `e421887d`;
-  `.3.2.15` is item 18/100 at `762bef64`; `.3.2.16` is item 19/100 at `9a881160`; `.3.2.17` is item 20/100 at `34958c8f`; `.3.2.18` is item 21/100 at `54e1a487`;
-  `.3.2.19` is item 22/100 at `8db085f2`; `.3.2.20` is item 23/100 at `ba9a494c`;
-  `.3.2.21` is item 24/100 at `17d3e919`; `.31` is item 25/100 at `3e8b05cd`;
-  `.3.2.22` is item 26/100 at `27ff841a`;
-  `.3.2.23` is item 27/100 at `2c398b92`;
-  `.3.2.24` is item 28/100 at `d392ad2b`;
-  `.3.2.25` is item 29/100 at `85167df3`;
-  `.3.2.26` is item 30/100 at `a32cf422`;
-  `.3.2.27` is item 31/100 at `e4716fcf`;
-  `.3.2.28` is item 32/100 at `86673c75`;
-  `.3.2.29` is item 33/100 at `3c1a955a`;
-  `.3.2.30` is item 34/100 at `6f113221`;
-  `.3.2.31` is item 35/100 at `b1108cbb`;
-  `.3.2.32` is item 36/100 at `9be547af`;
-  `.3.2.33` is item 37/100 at `ab4b1f1e`;
-  `.3.2.34` is item 38/100 at `19b0a7c4`;
-  `.3.2.35` is item 39/100 at `4b903622`;
-  `.3.2.36` is item 40/100 at `c3dadd4b`;
-  `.3.2.37` is item 41/100 at `c38afa72`;
-  `.3.2.38` is item 42/100 at `34af111f`;
-  `.3.2.39` is item 43/100 at `800fc5a4`;
-  `.3.2.40` is item 44/100 at `e548ce4b`;
-  `.3.2.41` is item 45/100 at `da8185b9`;
-  `.3.2.42` is item 46/100 at `dde05b65`;
-  `.3.2.43` is item 47/100 at `7a97647c`;
-  `.3.2.44` is item 48/100 at `78e0ee6b`;
-  `.3.2.45` is item 49/100 at `cd0a1bab`;
-  `.3.2.46` is item 50/100 at `7c2d6ee0`;
-  `.3.2.47` is item 51/100 at `6654c0df`;
-  `.3.2.48` is item 52/100 at `69e221bf`;
-  `.3.2.49` is item 53/100 at `a3211421`;
-  `.3.2.50` is item 54/100 at `78b272ec`;
-  `.3.2.51` is item 55/100 at `bea31562`;
-  `.3.2.52` is item 56/100 at `bdf491a5`;
-  `.3.2.53` is item 57/100 at `bd057353`;
-  `.3.2.54` is item 58/100 at `888d8ca2`;
-  `.3.2.55` is item 59/100 at `611d7b5c`;
-  `.3.3.1` is item 60/100 at `08149577`;
-  `.3.3.2` is item 61/100 at `9e655087`;
-  `.3.3.3` is item 62/100 at `87065401`;
-  `.3.3.4` is item 63/100 at `cd0e4ff4`;
-  `.3.3.5` is item 64/100 at `2af9c321`;
-  `.3.3.6` is item 65/100 at `cbd871c6`;
-  `.3.3.7` is item 66/100 at `d3fd3c40`;
-  `.3.3.8` is item 67/100 at `2bdea14f`;
-  `.3.3.9` is item 68/100 at `236aa4d7`;
-  `.3.3.10` is item 69/100 at `90321cca`;
-  `.3.3.11` is item 70/100 at `75ce8db8`;
-  `.3.3.12` is item 71/100 at `1d3715fc`;
-  `.3.3.13` is item 72/100 at `99226025`;
-  `.3.3.14` is item 73/100 at `7d6c9f8b`;
-  `.3.3.15` is item 74/100 at `69dacfc6`;
-  `.3.3.16` is item 75/100 at `b06b27cf`;
-  `.3.3.17` is item 76/100 at `1f38a1ea`;
-  `.3.3.18` is item 77/100 at `acbadc0f`;
-  `.3.3.19` is item 78/100 at `14a66b82`;
-  `.3.3.20` is item 79/100 at `19e943a4`;
-  `.3.3.21` is item 80/100 at `bcc2b2ab`;
-  `.3.3.22` is item 81/100 at `fe3cabf1`;
-  `.3.3.23` is item 82/100 at `71e6df55`;
-  `.3.3.24` is item 83/100 at `83b9bfe3`;
-  `.3.3.25` is item 84/100 at `d4950016`;
-  `.3.3.26` is item 85/100 at `03f4577a`;
-  `.3.3.27` is item 86/100 at `faa0aaee`;
-  `.3.3.28` is item 87/100 at `de526802`;
-  `.3.3.29` is item 88/100 at `98be3c19`;
-  `.3.3.30` is item 89/100 at `c7134e4d`;
-  `.3.3.31` is item 90/100 at `cc23abb9`;
-  `.3.3.32` is item 91/100 at `c7c62c96`;
-  `.3.3.33` is item 92/100 at `d3fd048f`;
-  `.3.3.34` is item 93/100 at `39cdef65`;
-  `.3.3.35` is item 94/100 at `b6f6085c`;
-  `.3.3.36` is item 95/100 at `90ae57bb`;
-  `.3.3.37` is item 96/100 at `77cad454`;
-  `.3.3.38` is item 97/100 at `eba1a0ed`;
-  `.3.3.39` is item 98/100 at `fe6d2638`;
-  `.3.3.40` is item 99/100 at `f3a26cd5`;
-  `.3.3.41` is item 100/100 once committed.
-  `.1` belongs to the prior checkpoint. Item 100 closes this batch after exact staged canonical proof;
-  the final commit result and promoted receipt govern the clean push. Required reading resumes at .3.3.42.
+- The completed 100-item batch is derived from Git: `git log --reverse --first-parent --format="%h %s" a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4..fb307dae35d0ecfdcbb4b29e65bec36855d6971b`. Leaf `.1` belongs to the preceding checkpoint.
+- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5` verified all 100 ordinal/leaf/hash identities before removing the duplicate enumeration; exact comparison provenance is in `docs/knowledge/startup-task-chronology-compaction.md`.
 
 ## Decisions
 
@@ -7168,110 +7085,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 
 ## Commit Log
 
-| Leaf | Commit subject or reference | Notes |
-| --- | --- | --- |
-| `SESSION-STARTUP-READING.1` | `SESSION-STARTUP-READING.1 - preserve required reading progress` | Startup-tracking-only exception; reading remains incomplete. |
-| `SESSION-STARTUP-READING.2` | `SESSION-STARTUP-READING.2 - complete roadmap reading` | Completed roadmap reading; exact coverage and focused checks, remaining reading and liveness discrepancy owned. |
-| `SESSION-STARTUP-READING.6` | `SESSION-STARTUP-READING.6 - diagnose denied liveness probes` | Exact causal evidence and owned repair; no production change or deletion test. |
-| `SESSION-STARTUP-READING.3.1` | `SESSION-STARTUP-READING.3.1 - bound the codebase reading inventory` | Complete baseline accounting and bounded next child; source/book reading still incomplete. |
-| `SESSION-STARTUP-READING.3.2.1` | `SESSION-STARTUP-READING.3.2.1 - read facade invocation owners` | Five unique Perl files complete; remaining 84 Perl entries and other lanes remain unread. |
-| `SESSION-STARTUP-READING.3.2.2` | `SESSION-STARTUP-READING.3.2.2 - partition remaining Perl reading` | All unread Perl bytes owned before reading; no new reading credit. |
-| `SESSION-STARTUP-READING.3.2.3` | `SESSION-STARTUP-READING.3.2.3 - read resolution and bootstrap adapters` | Ten unique Perl files read; stale diagnostic defect proved and repair `.8` owned. |
-| `SESSION-STARTUP-READING.3.2.4` | `SESSION-STARTUP-READING.3.2.4 - read bootstrap grammar core` | Eleven unique Perl files read; attached-tail regex defect proved and `.9` owned. |
-| `SESSION-STARTUP-READING.3.2.5` | `SESSION-STARTUP-READING.3.2.5 - read compiler state and preserve history` | Twelve Perl files read; required complete-record rollover and finite capacity ADR 0102. |
-| `SESSION-STARTUP-READING.3.2.6` | `SESSION-STARTUP-READING.3.2.6 - read compiler generation and state assembly` | Compiler prefix read; prior canonical/loader evidence and historical duplicate-slot resolution preserved. |
-| `SESSION-STARTUP-READING.3.2.7` | `SESSION-STARTUP-READING.3.2.7 - complete compiler pipeline reading` | Thirteen whole Perl files read; source-level phase/mode boundaries indexed. |
-| `SESSION-STARTUP-READING.3.2.8` | `SESSION-STARTUP-READING.3.2.8 - read SpecEntry and own unbound input repair` | Fourteen whole Perl files read; historical coupling reconciled; explicit repair `.10` owns the private handoff defect. |
-| `SESSION-STARTUP-READING.3.2.9` | `SESSION-STARTUP-READING.3.2.9 - read validation and own diagnostic repairs` | Validation prefix read; diagnostic repair children and retrieval corrections preserved. |
-| `SESSION-STARTUP-READING.3.2.10` | `SESSION-STARTUP-READING.3.2.10 - complete validation reading` | Fifteen full Perl files read; current edge/capture owners reconciled. |
-| `SESSION-STARTUP-READING.3.2.11` | `SESSION-STARTUP-READING.3.2.11 - read RuleIR and own edge-order repair` | Sixteen full Perl files read; native/public order defect and repair `.12` preserved. |
-| `SESSION-STARTUP-READING.3.2.12` | `SESSION-STARTUP-READING.3.2.12 - read EmitContext bridge and reconcile registry` | EmitContext prefix read; owner cardinality and retrieval corrected; suffix remains unread. |
-| `SESSION-STARTUP-READING.3.2.13` | `SESSION-STARTUP-READING.3.2.13 - complete EmitContext reading and own blind-edge repair` | Seventeen full Perl files read; blind occurrence-identity defect and repair `.13` preserved. |
-| `SESSION-STARTUP-READING.3.2.14` | `SESSION-STARTUP-READING.3.2.14 - read emitter prefix and own I-block repairs` | Emitter prefix read; literal/scope defects and `.14` repair children preserved; historical contracts reconciled. |
-| `SESSION-STARTUP-READING.3.2.15` | `SESSION-STARTUP-READING.3.2.15 - finish emitter adapters and extend return repairs` | Twenty full Perl files read; existing return/scope repairs extend to repetition; diagnostic projection bounded. |
-| `SESSION-STARTUP-READING.3.2.16` | `SESSION-STARTUP-READING.3.2.16 - read AST parser and own nested span repair` | Parser prefix read; nested-offset repair `.15` owns three recursive handoffs and adjacent controls. |
-| `SESSION-STARTUP-READING.3.2.17` | `SESSION-STARTUP-READING.3.2.17 - finish AST parser and read pipeline adapters` | Twenty-four whole Perl files read; existing pipeline/event owners indexed; Contracts prefix follows. |
-| `SESSION-STARTUP-READING.3.2.18` | `SESSION-STARTUP-READING.3.2.18 - read contract prefix and reconcile projection status` | Contracts prefix read; 92-row detached catalog rechecked; stale-current card wording bounded. |
-| `SESSION-STARTUP-READING.3.2.19` | `SESSION-STARTUP-READING.3.2.19 - finish contract catalog reading` | Contracts fully read; ordered builder fact indexed; twenty-five Perl files complete. |
-| `SESSION-STARTUP-READING.3.2.20` | `SESSION-STARTUP-READING.3.2.20 - read control flow prefix and verify candidate isolation` | ControlFlow prefix read; bounded candidate-state isolation verified; existing caveat owners retained. |
-| `SESSION-STARTUP-READING.3.2.21` | `SESSION-STARTUP-READING.3.2.21 - read flow adapters and preserve required history` | Twenty-nine Perl files read; emptiness repairs owned; exact notes rollover and finite capacity recorded. |
-| `SESSION-STARTUP-READING.31` | `SESSION-STARTUP-READING.31 - preserve forward reading and own confirmed repairs` | Forward coverage and confirmed findings durably owned; prior canonical success; queued checkpoints remain pending. |
-| `SESSION-STARTUP-READING.3.2.22` | `SESSION-STARTUP-READING.3.2.22 - read method expression normalization` | MethodExpr comprehension and scope precedence recorded; next MethodLowering prefix. |
-| `SESSION-STARTUP-READING.3.2.23` | `SESSION-STARTUP-READING.3.2.23 - read method lowering prefix and reconcile milestones` | Prefix comprehension and dated AST/binding/callable milestone ownership reconciled; no source/book change. |
-| `SESSION-STARTUP-READING.3.2.24` | `SESSION-STARTUP-READING.3.2.24 - read function signatures and statement lowering` | Function signatures and guarded statement bridges read; four historical Knowledge records reconciled. |
-| `SESSION-STARTUP-READING.3.2.25` | `SESSION-STARTUP-READING.3.2.25 - read value calls and own caller shadowing repair` | Value and function-call dispatch read; eight controls root-cause caller-local shadowing and own repair .32. |
-| `SESSION-STARTUP-READING.3.2.26` | `SESSION-STARTUP-READING.3.2.26 - read receiver chains and reconcile tree dispatch` | Block and receiver dispatch read; three traversal records distinguish original milestones from current shared dispatch. |
-| `SESSION-STARTUP-READING.3.2.27` | `SESSION-STARTUP-READING.3.2.27 - read helper fallback and qualify numeric evidence` | Helper fallback and numeric/string/collection prefix read; four AST/numeric Knowledge records qualified. |
-| `SESSION-STARTUP-READING.3.2.28` | `SESSION-STARTUP-READING.3.2.28 - read collection helpers and own tagged-record repair` | Collection and constructor paths read; selector history reconciled and paired tagged-record divergence owned by .33. |
-| `SESSION-STARTUP-READING.3.2.29` | `SESSION-STARTUP-READING.3.2.29 - read lowering suffix and reconcile progressive admission` | MethodLowering suffix and ProgressiveSpanDispatch read; three progressive admission records follow completed private closeout. |
-| `SESSION-STARTUP-READING.3.2.30` | `SESSION-STARTUP-READING.3.2.30 - read rewrite orchestration and reconcile scanner ownership` | RewritePipeline, Scanner, and FlowRules read; scanner registry and AST migration Knowledge reconciled. |
-| `SESSION-STARTUP-READING.3.2.31` | `SESSION-STARTUP-READING.3.2.31 - read legacy scanners and reconcile bare push precedence` | Legacy/basic scanners read; historical scalar-slot and unconditional child-push claims reconciled with uniform binding. |
-| `SESSION-STARTUP-READING.3.2.32` | `SESSION-STARTUP-READING.3.2.32 - read staged scanners and reconcile authoring boundaries` | Pipeline, recognition, staged marker, and splitting owners read; two Knowledge records follow current public/neutral boundaries. |
-| `SESSION-STARTUP-READING.3.2.33` | `SESSION-STARTUP-READING.3.2.33 - read separator and value owners and track comment failures` | Splitter/trace/value owners read; comment failures rooted and repair-owned, universal coverage claims qualified. |
-| `SESSION-STARTUP-READING.3.2.34` | `SESSION-STARTUP-READING.3.2.34 - read runtime owners and track codeblock boolean drift` | Runtime owners read; dynamic boolean result drift repair-owned and historical gap admission prose qualified. |
-| `SESSION-STARTUP-READING.3.2.35` | `SESSION-STARTUP-READING.3.2.35 - read MCP frame data and reconcile current admission` | MCP frame/schema prefix read; generated binding fresh, response examples and current admission qualified. |
-| `SESSION-STARTUP-READING.3.2.36` | `SESSION-STARTUP-READING.3.2.36 - read MCP contract policy and reconcile historical claims` | MCP policy/corpus/schema fragment read; exact neutral identity and already-repaired component policy documented. |
-| `SESSION-STARTUP-READING.3.2.37` | `SESSION-STARTUP-READING.3.2.37 - read MCP payload suffix and verify embedded digests` | MCP embedded JSON completed; four payload and seven source digests verified without runtime or protocol changes. |
-| `SESSION-STARTUP-READING.3.2.38` | `SESSION-STARTUP-READING.3.2.38 - read MCP runtime and track validation order drift` | MCP/numeric owners read; validation-order discrepancy repair-owned and projection-field wording corrected. |
-| `SESSION-STARTUP-READING.3.2.39` | `SESSION-STARTUP-READING.3.2.39 - read progressive authority and own ceiling enforcement gaps` | Plugin and progressive owners read; measured ceiling enforcement gaps repair-owned with exact controls. |
-| `SESSION-STARTUP-READING.3.2.40` | `SESSION-STARTUP-READING.3.2.40 - read recognition core and own post-terminal restoration defect` | Recognition core/static owners read; post-terminal cross-owner snapshot restoration repair-owned. |
-| `SESSION-STARTUP-READING.3.2.41` | `SESSION-STARTUP-READING.3.2.41 - read runtime observers and preserve bounded change history` | Runtime owners read; boolean/unwind repairs owned; exact change-history suffix and finite routing capacity preserved. |
-| `SESSION-STARTUP-READING.3.2.42` | `SESSION-STARTUP-READING.3.2.42 - read semantic projection and preserve complete book coverage` | Semantic call/index comprehension, complete book coverage, and measured book/compiler/inline-semantic repair ownership preserved. |
-| `SESSION-STARTUP-READING.3.2.43` | `SESSION-STARTUP-READING.3.2.43 - read semantic queries and source mapping` | Query/source-map and derived-observation owners read; current versus historical evidence reconciled. |
-| `SESSION-STARTUP-READING.3.2.44` | `SESSION-STARTUP-READING.3.2.44 - read static semantics and refine failure evidence` | Static projection read; failure claim narrowed to actual decision/explanation defect; omitted Toolbox guidance is repair-owned. |
-| `SESSION-STARTUP-READING.3.2.45` | `SESSION-STARTUP-READING.3.2.45 - read typed source-location authority` | Complete typed source-location owner reading and scoped existing Knowledge reconciliation. |
-| `SESSION-STARTUP-READING.3.2.46` | `SESSION-STARTUP-READING.3.2.46 - read staged authority and own marker identity risk` | Staged authority read; native lifetime proof and isolated retired-identity counterexample preserved under .44. |
-| `SESSION-STARTUP-READING.3.2.47` | `SESSION-STARTUP-READING.3.2.47 - read staged runtime and legacy registry boundaries` | Staged suffix/runtime/marker/policy/legacy registry read; exact unchanged proof and v1/v2 separation preserved. |
-| `SESSION-STARTUP-READING.3.2.48` | `SESSION-STARTUP-READING.3.2.48 - read Trace and qualify lazy exception-state evidence` | Trace read; 20 diagnostic controls and 11 passing tests qualify .24 without claiming repair. |
-| `SESSION-STARTUP-READING.3.2.49` | `SESSION-STARTUP-READING.3.2.49 - reconcile first generated Unicode case range` | First Unicode range reconciled; five-module regeneration and 52 Perl tests preserve pinned authority. |
-| `SESSION-STARTUP-READING.3.2.50` | `SESSION-STARTUP-READING.3.2.50 - reconcile middle Unicode table range and reading status` | Unicode lower/upper table transition reconciled; current reading status and retained proof preserved. |
-| `SESSION-STARTUP-READING.3.2.51` | `SESSION-STARTUP-READING.3.2.51 - reconcile Unicode evaluator and contextual casing` | Final case-table range reconciled; contextual evaluator, retained proof and native-planning pressure recorded. |
-| `SESSION-STARTUP-READING.3.2.52` | `SESSION-STARTUP-READING.3.2.52 - reconcile XID classifier and current named-slot admission` | XID range and direct classifier proof recorded; stale gap Knowledge admission corrected without runtime movement. |
-| `SESSION-STARTUP-READING.3.2.53` | `SESSION-STARTUP-READING.3.2.53 - reconcile function registry and legacy discovery` | Function registry and legacy files read; 76 tests and neutral proof recorded; 13-file corpus count corrected. |
-| `SESSION-STARTUP-READING.3.2.54` | `SESSION-STARTUP-READING.3.2.54 - reconcile legacy utility reading and repair evidence` | 839 utility lines reread; exact diagnostic control retained; .55 owns canonical closeout. |
-| `SESSION-STARTUP-READING.3.2.55` | `SESSION-STARTUP-READING.3.2.55 - close Perl reading and own bounded Rust scopes` | Close 89-file Perl reading; own all 412 Rust paths in 66 bounded leaves plus closeout; exact canonical boundary. |
-| `SESSION-STARTUP-READING.3.3.1` | `SESSION-STARTUP-READING.3.3.1 - read Rust lockfile prefix and own parser boundary repairs` | Read 1,496 lock/ignore lines; own malformed-block, Unicode diagnostic, mutation-argument, and regex-newline repairs; retain prior canonical milestone. |
-| `SESSION-STARTUP-READING.3.3.2` | `SESSION-STARTUP-READING.3.3.2 - read Rust manifests AST and callable prefix` | Read 1,483 manifest/AST/callable lines; own exact README minimum-version and mode-comment evidence. |
-| `SESSION-STARTUP-READING.3.3.3` | `SESSION-STARTUP-READING.3.3.3 - read callable normalization and compiler validation prefix` | Read 1,499 callable/compiler lines; preserve validation order and exact pending repair boundaries. |
-| `SESSION-STARTUP-READING.3.3.4` | `SESSION-STARTUP-READING.3.3.4 - read Rust regex resolution descriptors and entry diagnostics` | Read 1,481 compiler/descriptor/entry/error lines; separate projection determinism from native validation. |
-| `SESSION-STARTUP-READING.3.3.5` | `SESSION-STARTUP-READING.3.3.5 - read Rust expression carriers and statement parser prefix` | Read 1,496 expression/statement lines; separate byte cursors, character spans and debug formatting. |
-| `SESSION-STARTUP-READING.3.3.6` | `SESSION-STARTUP-READING.3.3.6 - read Rust expression parsing and retain boundary repair evidence` | Read 1,461 expression-parser lines; retain exact Unicode and mutation-whitespace repair evidence. |
-| `SESSION-STARTUP-READING.3.3.7` | `SESSION-STARTUP-READING.3.3.7 - read Rust lexical boundaries and own hash and cat repairs` | Read 1,497 lexical/test lines; own adjacent hash-colon loss and cat arity divergence as .50/.51. |
-| `SESSION-STARTUP-READING.3.3.8` | `SESSION-STARTUP-READING.3.3.8 - read remaining Rust expression tests and core parser entry` | Complete expr.rs reading and core entry prefix; reconcile test assertion limits and historical binding/rollout prose. |
-| `SESSION-STARTUP-READING.3.3.9` | `SESSION-STARTUP-READING.3.3.9 - read Rust rule-body parsing and own lexical boundary repairs` | Read rule-body parser; own compact fluent, invalid header suffix and Perl/Rust regex-brace repairs .52-.54. |
-| `SESSION-STARTUP-READING.3.3.10` | `SESSION-STARTUP-READING.3.3.10 - read core trace and types and own large-number conversion repairs` | Read parser tests/core trace/types; own finite-value saturation and large-number text repairs .55. |
-| `SESSION-STARTUP-READING.3.3.11` | `SESSION-STARTUP-READING.3.3.11 - read compiled types Unicode labels and validation entrypoints` | Read compiled types and pinned Unicode through EOF plus AST-validation entrypoints; reconcile historical/current claims. |
-| `SESSION-STARTUP-READING.3.3.12` | `SESSION-STARTUP-READING.3.3.12 - read static validation and preserve bounded engineering history` | Complete validator/descriptor reading; own .56/.57; preserve segment 4983 with finite ADR 0105 capacity and canonical proof. |
-| `SESSION-STARTUP-READING.3.3.13` | `SESSION-STARTUP-READING.3.3.13 - read core tests and bounded child authority` | Read six Rust ranges, preserve exact verification limits and prior canonical evidence, and remove only consumed captures. |
-| `SESSION-STARTUP-READING.3.3.14` | `SESSION-STARTUP-READING.3.3.14 - read child authority diagnostics and engine definitions` | Finish authority and diagnostic-type reading; reconcile current options/diagnostic Knowledge and resource-boundary limits. |
-| `SESSION-STARTUP-READING.3.3.15` | `SESSION-STARTUP-READING.3.3.15 - read generated engine loops and audit split boundaries` | Read generated action/blind loops, preserve exact scope, and annotate measured split boundaries under existing .33. |
-| `SESSION-STARTUP-READING.3.3.16` | `SESSION-STARTUP-READING.3.3.16 - read engine invocation routes and entry dispatch` | Reconcile execution projections, diagnostic stages and precedence, generated validation ownership and parent-result ordering. |
-| `SESSION-STARTUP-READING.3.3.17` | `SESSION-STARTUP-READING.3.3.17 - read native action loops and nested-write coordination` | Read native loops/control and nested-write evaluation order; preserve exact diagnostic evidence and following traversal scope. |
-| `SESSION-STARTUP-READING.3.3.18` | `SESSION-STARTUP-READING.3.3.18 - read recursive writes and expression invocation scopes` | Complete recursive-write and expression/callable invocation reading with separate function/codeblock scope boundaries. |
-| `SESSION-STARTUP-READING.3.3.19` | `SESSION-STARTUP-READING.3.3.19 - read receiver traversal and diagnose final-assignment guard` | Complete traversal/value-block reading; own confirmed final-assignment guard gap and preserve exact native/reference evidence. |
-| `SESSION-STARTUP-READING.3.3.20` | `SESSION-STARTUP-READING.3.3.20 - read helper dispatch and own substitution composition repairs` | Complete helper-prefix reading; own substitution flags, callback lowering and receiver protection with exact paired evidence. |
-| `SESSION-STARTUP-READING.3.3.21` | `SESSION-STARTUP-READING.3.3.21 - complete helper reading and own slice and scalar boundary repairs` | Complete helper implementation and test-prefix reading; own array slicing and scalar null/empty repair with bounded exact evidence. |
-| `SESSION-STARTUP-READING.3.3.22` | `SESSION-STARTUP-READING.3.3.22 - read capture and control tests and own coalesce evaluation repair` | Read capture/control assertions, qualify weak smoke coverage, and own coalesce definedness/laziness with corrected Boolean observations. |
-| `SESSION-STARTUP-READING.3.3.23` | `SESSION-STARTUP-READING.3.3.23 - complete engine and regex helper reading and own input-context repair` | Complete engine tests and regex wrappers; own five assertion discrepancies with exact collected-rule controls. |
-| `SESSION-STARTUP-READING.3.3.24` | `SESSION-STARTUP-READING.3.3.24 - read embedded MCP contract prefix and reconcile generated identity` | Preserve exact generated-prefix coverage and identity, update old sizes, distinguish artifact/governance proof from runtime execution. |
-| `SESSION-STARTUP-READING.3.3.25` | `SESSION-STARTUP-READING.3.3.25 - read frozen MCP runtime and own caught-panic output repair` | Preserve frozen-runtime/registry coverage and separate response sanitation from captured process output; own .64 repair and qualify native reachability. |
-| `SESSION-STARTUP-READING.3.3.26` | `SESSION-STARTUP-READING.3.3.26 - complete MCP wire reading and own final EOF byte-limit repair` | Complete MCP server/wire coverage, qualify existing unit boundaries, and own the independently reproduced EOF limit repair. |
-| `SESSION-STARTUP-READING.3.3.27` | `SESSION-STARTUP-READING.3.3.27 - complete primary CLI and read recognition authority guards` | Complete primary CLI coverage, distinguish current neutral proof from historical native counts, and preserve Rust's early invalidation guard. |
-| `SESSION-STARTUP-READING.3.3.28` | `SESSION-STARTUP-READING.3.3.28 - complete recognition adapters and read RuntimeContext source connections` | Complete recognition runtime and record source-authority, gap rollback and exact helper/alias boundaries. |
-| `SESSION-STARTUP-READING.3.3.29` | `SESSION-STARTUP-READING.3.3.29 - read context observations projections and typed binding stores` | Record completion routing, typed projection and stable binding identity with exact remaining restoration scope. |
-| `SESSION-STARTUP-READING.3.3.30` | `SESSION-STARTUP-READING.3.3.30 - complete context and semantic foundation reading and own binding identity repair` | Complete context/foundation reading and own the independently measured repeated-binding query repair. |
-| `SESSION-STARTUP-READING.3.3.31` | `SESSION-STARTUP-READING.3.3.31 - complete semantic call reading and own signature and container projection repairs` | Complete call projection and distinguish matching query payloads from independently valid semantic evidence. |
-| `SESSION-STARTUP-READING.3.3.32` | `SESSION-STARTUP-READING.3.3.32 - complete semantic query reading and own token use and newline repairs` | Complete query/runtime projection and separate actual token-use/parser gaps from a ruled-out failure-mapping concern. |
-| `SESSION-STARTUP-READING.3.3.33` | `SESSION-STARTUP-READING.3.3.33 - complete static semantic reading and own grouped edge correlation repairs` | Complete static/event reading and distinguish correct grouped execution from incomplete semantic source/index records. |
-| `SESSION-STARTUP-READING.3.3.34` | `SESSION-STARTUP-READING.3.3.34 - complete emitter reading and own literal and recognition adapter repairs` | Complete emitter reading and preserve independently measured generated identity/projection gaps. |
-| `SESSION-STARTUP-READING.3.3.35` | `SESSION-STARTUP-READING.3.3.35 - complete source authority and loader reading and reconcile function projection` | Complete source authority/loader and retain exact staged function projection and scalar-source boundaries. |
-| `SESSION-STARTUP-READING.3.3.36` | `SESSION-STARTUP-READING.3.3.36 - complete spec parser reading and trace staged registry and invocation authority` | Complete spec parser and preserve frozen registry, fresh seed and queue coordinator boundaries. |
-| `SESSION-STARTUP-READING.3.3.37` | `SESSION-STARTUP-READING.3.3.37 - trace staged execution and own target validation and counter repairs` | Preserve exact staged execution evidence and own destination, marker/provenance and call-counter repairs. |
-| `SESSION-STARTUP-READING.3.3.38` | `SESSION-STARTUP-READING.3.3.38 - complete staged source reading and preserve bounded change history` | Complete staged source comprehension and separate declaration authority, returned records and legacy adapter metadata. |
-| `SESSION-STARTUP-READING.3.3.39` | `SESSION-STARTUP-READING.3.3.39 - finish Unicode lower-map reading and preserve canonical evidence` | Preserve completed Unicode lower-map comprehension and exact prior canonical/sample evidence. |
-| `SESSION-STARTUP-READING.3.3.40` | `SESSION-STARTUP-READING.3.3.40 - complete Unicode upper-map reading` | Complete upper-map physical reading with exact range identity and retained generation proof. |
-| `SESSION-STARTUP-READING.3.3.41` | `SESSION-STARTUP-READING.3.3.41 - complete Unicode reading and checkpoint callable contracts at the batch boundary` | Close the accepted 100-item batch after exact canonical proof; resume required reading at .3.3.42. |
-| `SESSION-STARTUP-READING.3.3.42` | `SESSION-STARTUP-READING.3.3.42 - complete callable and named-mark reading with corpus prefix` | Complete callable/named-mark reading and owned corpus prefix. |
+Each canonical task node owns its exact `Commit` subject and retained completion note. Query landed history with `git log --all --format="%h %s" --fixed-strings --grep="SESSION-STARTUP-READING."`; this replaces the proven duplicate 102-row table.
 
 ## Changelog
 

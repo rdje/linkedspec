@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-08 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5 - compact duplicate startup chronology without losing evidence
+
+Line pressure came partly from recording the same commit subjects in both task nodes and a global table, plus a manually enumerated Git batch. Removing these duplicates preserves one richer node-local owner and reproducible Git history. Independent pre/post comparisons retain all notes and all non-Commit fields; the provenance card supplies the clean source identity and exact batch reconstruction. Read-only donor checks still match all three September 6 policy hashes; local adoption review remains startup .5-owned.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.42 - complete callable and named-mark reading with corpus prefix
 
 The completed consumers assert different carrier boundaries: contextual callable coverage compiles an emitted fixture, while the named-mark consumer inspects emission and executes a validated generated plan. Reading preserves those distinctions without claiming a fresh native run. The measured task collection requires proven duplicate removal under its existing containment owner; unique reading and repair evidence stays addressable.

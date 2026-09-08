@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-- Status: `active` / `.5` pending; `.0-.4` remain complete
+- Status: `done` / `.5` duplicate-chronology compaction complete; canonical proof required before landing
 - Roadmap lane: `Repository architecture / documentation sustainability`
 - Created: `2026-08-09`
 - Last updated: `2026-09-08` (`.5` owns measured startup-task pressure; prior closeout evidence is retained)
@@ -58,7 +58,7 @@ or the README `.4` adoption/closeout that installs the guard.
 ## Task Tree
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-  Status: `active` (`.0-.4` complete; `.5` owns current task pressure)
+  Status: `done` (`.0-.5` complete; `.5` canonical closeout required before landing)
   Goal: Replace measured oversized routed destinations with bounded views over durable stores.
   Depends on: `README-STABILITY-POLICY.4.2`
   Children: `.0-.5`
@@ -280,18 +280,25 @@ or the README `.4` adoption/closeout that installs the guard.
   - [x] **LOCKSTEP** — Close the ADR/task/program state and return every live/public pointer to the prior frontier.
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5`
-  Status: `pending`
+  Status: `done`
   Goal: Recover task-collection headroom by removing proven duplicate startup chronology.
   Acceptance: Prove every removed batch/commit/verification statement has a richer retained task/Git owner;
     retain unique reading ranges, causal evidence, decisions, repair ownership and all stable IDs. Preserve
     every pressure limit and immutable file; run focused metadata, memory, routing and continuity proof.
     Commit before returning to SESSION-STARTUP-READING.3.3.43; split any required infrastructure change first.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `canonical`
+  Focused checks: Exact batch Git census and all commit-row/leaf/retained-note identities; unchanged stable
+    task IDs, reading/repair fields, registry and immutable files; memory, metadata, routing, histories and diff.
+  Canonical trigger: `parent closeout` — finish the reopened containment tree with exact staged local CI.
+  Verification: Exact comparison passes 100 ordinal/leaf/hash identities, 102 identical commit subjects,
+    all 102 verbatim retained notes and all 316 unchanged stable IDs/other node fields. The task file drops
+    186 lines / 16,380 bytes; existing source/repair evidence remains unchanged. Exact staged canonical
+    proof is required before landing; its completed result is recorded in the commit body.
+  Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5 - compact duplicate startup chronology without losing evidence`
 
 ## Current Frontier
 
-Activate `.5` only after the clean `SESSION-STARTUP-READING.3.3.42` checkpoint; compact proven duplicates, then resume `.3.3.43`.
+None. After clean `.5`, preserve the proposed generic-rule investigation requested by the director, then resume `SESSION-STARTUP-READING.3.3.43`.
 
 ## Decisions
 
@@ -507,6 +514,8 @@ mutations, Rust semantic admission 1/1 in 85.71 seconds, Julia semantic admissio
 option environments, RAM 49%, and Phase 0 1,031/1,031 in 673 seconds. The gate exits 0; only the atomic commit,
 brief clearing, generated-residue census, post-pointer check, and clean proof remain.
 
+- `2026-09-08` `.5`: exact duplicate-equivalence checks pass; memory, task metadata, routing, Knowledge, both histories and exact staged canonical proof govern landing. All route limits and immutable bytes remain unchanged.
+
 ## Commit Log
 
 `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0 - freeze bounded document store contract` — `dc8dd896`, atomic 176/300.
@@ -518,6 +527,8 @@ brief clearing, generated-residue census, post-pointer check, and clean proof re
 `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3 - bound changes and engineering notes` — `921f0507`, atomic 179/300.
 
 `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.4 - close bounded document store program` — intended atomic 180/300.
+
+- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5`: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5 - compact duplicate startup chronology without losing evidence`.
 
 ## Changelog
 
@@ -565,3 +576,5 @@ brief clearing, generated-residue census, post-pointer check, and clean proof re
   definitive canonical gate passes MCP complete/141, Rust semantic 1/1 in 85.71 seconds, Julia semantic 416/416
   in 29.9 seconds, containment/relocation, CLI 66x2, RAM 49%, and Phase 0 1,031/1,031 in 673 seconds. Atomic commit,
   brief clearing, residue census, post-pointer verification, and clean proof remain.
+
+- `2026-09-08`: `.5` removes proven duplicate batch/commit chronology, preserves per-leaf notes and restores startup `.3.3.43`; exact proof is indexed in `docs/knowledge/startup-task-chronology-compaction.md`.

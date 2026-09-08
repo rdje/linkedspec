@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `fb307dae35d0ecfdcbb4b29e65bec36855d6971b` — clean reading checkpoint base.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.42 - complete callable and named-mark reading with corpus prefix`.
+- activation_commit: `e455be6a3c85cb7a75bc7ccd36c579efe74bcc97` — clean containment base after reading checkpoint.
+- latest_completed_leaf: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5 - compact duplicate startup chronology without losing evidence`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: activate `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5` from clean HEAD; compact proven duplicate
-  startup chronology, preserve the proposed generic-rule investigation, then return to reading `.3.3.43`.
+- next_action: preserve the director's parameterized/generic-rule question as a proposed investigation;
+  then activate `SESSION-STARTUP-READING.3.3.43` and continue PNT reading.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.75` precede mutation setup; `.29` is part of `.5` adoption.
 - current_rust_warning_debt: repeated clean carriers report 1,870 `pgen` plus 26 `rgx-core` output warnings;

@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-08 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5 - compact duplicate startup chronology without losing evidence
+
+Verified all 100 recorded batch identities against Git and all 102 duplicate commit subjects against canonical nodes, then retained each completion note verbatim beside its owning node. Removed the duplicate enumeration/table: 186 task-file lines and 16,380 bytes. Every other node field and all 316 stable IDs remain exact. No registry limit, immutable history, runtime or public surface changes. Exact staged canonical proof governs this containment closeout.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.42 - complete callable and named-mark reading with corpus prefix
 
 Read all 56 owned scopes: 1,500 lines / 45,529 baseline-identical bytes. Callable and named-mark neutral checks pass. Existing Knowledge distinguishes source inspection, generated-plan assertions and standalone emitted execution. The task collection approaches its unchanged line ceiling; containment .5 owns duplicate-chronology compaction before reading resumes.
