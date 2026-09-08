@@ -2051,15 +2051,18 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.55 - complete mutation consumer and checkpoint MCP admission reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.56`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 56: 1,474 lines/fragments, 50,699 bytes.
   Scope: `rust/linkedspec-runtime/tests/mcp_server_rust_admission.rs` lines 877–1058;
     `rust/linkedspec-runtime/tests/mcp_server_rust_dispatch.rs` lines 1–326;
     `rust/linkedspec-runtime/tests/mcp_server_rust_stdio.rs` lines 1–411;
     `rust/linkedspec-runtime/tests/progressive_span_dispatch_authority.rs` lines 1–555.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Four exact owned-range/baseline identities, MCP/progressive test-boundary reconciliation; Knowledge, memory, all doctrines, histories and diff.
+  Canonical trigger: `none` — bounded reading checkpoint; transport and runtime unchanged.
+  Verification: Four exact scopes total 1,474 lines / 50,699 baseline-identical bytes; ordered path/kind/range/byte/SHA audit `063139bea5da82cfa8fe131ad67eae9c84d4298652f869456dc6c6a7cca81637`. MCP admission suffix checks prepared-response finality, ordinary I/O sanitization, Arc release, private-owner/source fences and twelve-role order. Public dispatch/stdio consumers cover clone isolation, native/policy identities, authorization/lifetime, canonical raw/ordered streams, EOF, ordinary I/O errors and invalid authority before input consumption. Existing .36/.64/.65 validation-order/panic-output/final-EOF gaps remain separately owned. Progressive prefix is opt-in cfg authority proof for source views, narrowing, cancellation/budget, chain/execution and 26 diagnostic contexts; the admitted four-carrier consumer is separate. Its suffix remains .57-owned. Existing completion records correct stale pending wording in the Rust admission card; no new native run is claimed.
+  Commit: `SESSION-STARTUP-READING.3.3.56 - complete MCP tests and reconcile progressive authority reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.57`
   Status: `pending`
@@ -4254,7 +4257,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.56` | `pending` | Complete MCP admission, dispatch and stdio reading, then begin progressive-span authority tests. |
+| 1 | `SESSION-STARTUP-READING.3.3.57` | `pending` | Complete progressive authority, read its carrier consumer and punctuation-light tests, then begin recognition tests. |
 
 ## Reading Ledger
 
@@ -4265,7 +4268,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.55` are reconciled and `.3.3.56`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.56` are reconciled and `.3.3.57`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read at baseline; .3.2.42 preserves coverage, and c8759242 reviews/renders the approved parked-coverage delta. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -7024,6 +7027,7 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- `2026-09-08` `.3.3.56`: Four exact scopes and MCP/progressive test-boundary reconciliation pass; canonical completion records resolve dated admission wording. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.55`: Two exact scopes and mutation/MCP assertion-boundary reconciliation pass; known .58/.59 and .77 repair limits remain explicit. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.54`: Three exact scopes, both explicit emitted status guards and the bounded codeblock-row skip are verified from unchanged source. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.53`: Two exact scopes, integration EOF and test-route/Knowledge reconciliation pass. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
@@ -7337,3 +7341,4 @@ Each canonical task node owns its exact `Commit` subject and retained completion
 - `2026-09-08`: `.3.3.53` completes integration reading and checkpoints gap capture; next `.3.3.54`.
 - `2026-09-08`: `.3.3.54` completes gap and logical consumer reading; next `.3.3.55`.
 - `2026-09-08`: `.3.3.55` completes mutation consumer and checkpoints MCP admission; next `.3.3.56`.
+- `2026-09-08`: `.3.3.56` completes MCP tests and checkpoints progressive authority; next `.3.3.57`.

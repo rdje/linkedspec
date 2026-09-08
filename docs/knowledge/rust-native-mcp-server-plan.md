@@ -154,3 +154,11 @@ maximum+1 payload bytes at final EOF while Perl rejects them. The other eleven p
 [[rust-mcp-final-eof-byte-limit-gap]] and startup `.65` own repair and recurrence. Neutral transport
 35/10/10/76 and implementation/admission complete 5/5+6/6/141 also pass. This is not fresh public
 integration-suite or six-runtime recurrence proof; no runtime/public-book repair occurs here.
+
+## September 8 public-consumer reading
+
+Startup `.3.3.55-.56` completes admission (1,058 lines), decoded dispatch (326) and stdio (411).
+The admission builds native indexes from frozen source fixtures before host registration; MCP does not
+perform that construction. Positive response/stream, ordinary I/O and lifetime assertions retain their
+bounded scope. Existing mixed-error ordering, panic-stderr and final-EOF defects remain .36/.64/.65-owned.
+No public integration suite or six-runtime recurrence is freshly executed by this reading checkpoint.

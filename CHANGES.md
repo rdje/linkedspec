@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.56 - complete MCP tests and reconcile progressive authority reading
+
+Reconcile four exact scopes: 1,474 lines / 50,699 bytes. Complete MCP tests and record the private progressive-authority prefix. Preserve existing transport defect limits. Correct an older admission card that still called completed recurrence/public work pending, using canonical completion records. Focused checks pass; behavior is unchanged.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.55 - complete mutation consumer and checkpoint MCP admission reading
 
 Reconcile mutation-consumer completion and MCP admission prefix: 1,500 lines / 53,737 bytes. Preserve guard-control limits, emitted process-status proof structure and host-owned native index registration. Existing defects and parked authoring ideas retain their owners. Project the required engineering-notes rollover to .61 and own its exact history/capacity review there. Focused continuity checks pass; implementation is unchanged.

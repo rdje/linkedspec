@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.56 - complete MCP tests and reconcile progressive authority reading
+
+MCP positive transport tests do not discharge the existing mixed-error, panic-output or final-EOF defects. The private progressive authority target and admitted four-carrier consumer have distinct cfg/routing boundaries. Their dated rollout snapshots need explicit temporal labels.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.55 - complete mutation consumer and checkpoint MCP admission reading
 
 Mutation guard statements in these tests precede return(value), leaving known final-expression exceptions outside their scope. MCP admission builds native indexes before registration; that host setup does not expose parser construction through MCP. At four lines per ordinary record, .61 reaches the engineering-notes rollover threshold; that leaf owns exact archive preservation and any required canonical capacity admission.
