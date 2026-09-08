@@ -66,23 +66,25 @@ inventory and planning results; Dart source reading and child ownership await ca
 
 At clean 3132596c, the task collection has 60 lines left and the startup file has 562. Even the
 55-group metadata template needs 605 lines before closeout, verification detail or later findings.
-Knowledge has six file slots left. Design `.7.1` is now recorded in
-proposed ADR `0108` (`docs/decisions/0108-dart-reading-capacity-proposal.md`). It would retain all current
-records and per-file limits, give Dart a separate bounded task-tree, and admit this measured reserve:
+At that boundary, Knowledge had six file slots left. The director approved design `.7.1` in ADR
+`0108`; execution ADR `0109` (`docs/decisions/0109-approved-dart-reading-capacity.md`) implements
+the bounded reserve under `.7.2`, preserving all current records and per-file limits:
 
-| Store | Current limit | Proposed limit |
+| Store | Previous limit | Current limit |
 | --- | --- | --- |
 | Aggregate task evidence | 80,000 lines / 8 MiB | 88,000 lines / 9 MiB |
 | Knowledge collection | 1,024 files / 64,000 lines | 1,152 files / 72,000 lines |
 
-Knowledge byte limits and generated-index limits would stay unchanged. The proposal uses twice the
+Knowledge byte limits and generated-index limits stay unchanged. The reserve uses twice the
 observed net growth across Rust reading and related continuity work, plus explicit setup allowances.
 This is a planning reserve, not a guarantee about unknown future findings.
 
-Implementation `.7.2` is waiting for a narrow director exception: the task-capacity guard must change
-while the full-codebase reading prerequisite is still open. Independent proof `.7.3` and admission
-`.7.4` are also task-owned and pending. Existing limits and the reading gate remain in force.
-Parser/runtime behavior and the parked authoring and format ideas remain at their current status.
+The task census and its boundary tests now call the same validators. They accept each exact ceiling
+and reject independent line, byte and file-count overflow; member-size constraints remain enforced.
+Full canonical verification governs this infrastructure commit. Independent proof `.7.3` and admission
+`.7.4` remain pending before the separate bounded Dart tree defines its source-reading children.
+The director's exception covers capacity infrastructure only; other reading/repair gates and the
+parked authoring and format ideas remain at their current status.
 
 README routing-pressure enforcement is closed at `0bcb5a36`, and the behavior-free store architecture landed at
 `dc8dd896`. Live-status migration landed at `99fe03f3` under ADRs `0066` and `0067`; future-task partitioning

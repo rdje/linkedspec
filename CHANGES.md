@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-08 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.2 - implement the approved Dart capacity controls
+
+Implement the director-approved ADR 0108 exception through exact execution ADR 0109. Change only task aggregate lines/bytes to 88,000/9,437,184 and Knowledge file/line totals to 1,152/72,000; preserve all member and other limits. The task main census and boundary self-tests share actual member/aggregate validators. Old guards fail five new classes; approved guards pass 31/31. The unchanged routing validator passes 16 registry-bound cases/24 executions. Existing IDs, records and parser behavior remain intact; canonical receipt-bound proof precedes landing, then independent .7.3 and admission .7.4.
+
 ## 2026-09-08 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.1 - design bounded Dart capacity and record the approval boundary
 
 Record proposed ADR 0108 with exact task/Knowledge aggregate limits, measured growth and explicit reserve arithmetic, a separate bounded Dart task-tree, preservation/retrieval obligations and pending .7.2-.7.4 implementation/proof/admission. The task guard independently enforces current aggregate caps, so implementation requires a director exception while full-codebase reading is incomplete. No limit, registry, guard, parser or runtime changes are made. The book and continuity expose the pending decision; focused verification governs this design-only slice.

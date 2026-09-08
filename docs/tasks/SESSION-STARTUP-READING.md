@@ -29,6 +29,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - Any discovered defect or policy gap receives an owning leaf and evidence before remediation.
 - Roadmaps, live continuity, and task index agree; public book changes accompany material public understanding.
 - Each completed reading/checkpoint leaf follows `COMMIT.md`; implementation remains gated until reading closes.
+  Director exception (2026-09-08): containment `.7.2-.7.4` may implement and verify ADR 0108/0109 capacity infrastructure before remaining reading; all parser/repair gates remain in force.
 
 ## Task Tree
 
@@ -4323,7 +4324,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 ## Current Frontier
 
-Capacity design `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.1` is complete; `.7.2` awaits the director's narrow exception described in proposed ADR 0108.
+The director-approved capacity implementation `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.2` hands off independent `.7.3` proof before `.7.4` admission.
 Then resume the owned Dart decomposition; no Dart source reading precedes that capacity admission.
 
 | Order | Leaf | Status | Why next |

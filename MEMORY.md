@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `95915ffb7cf7643d8c3021aeaf83e2141194407d` — clean Dart capacity-design base.
-- latest_completed_leaf: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.1 - design bounded Dart capacity and record the approval boundary`.
+- activation_commit: `b7638e34ad5e3fe245a639bc8bfb378b8fd3ba63` — clean approved capacity-implementation base.
+- latest_completed_leaf: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.2 - implement the approved Dart capacity controls`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.2` awaits director approval of proposed ADR 0108; capacity guard changes precede Dart.
+- next_action: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.3` independently verifies the approved capacity controls before `.7.4` Dart admission.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
-- blockers: containment `.7.2` needs the narrow reading-gate exception; startup `.7` blocks recovery/purge. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.79` precede mutation setup; `.29` belongs to `.5`.
+- blockers: startup `.7` blocks recovery/purge. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.79` precede mutation setup; `.29` belongs to `.5`. The director approved the narrow capacity exception; other reading gates remain.
 - current_rust_warning_debt: repeated clean carriers report 1,870 `pgen` plus 26 `rgx-core` output warnings;
   `RUST-DEPENDENCY-WARNING-ZERO.1-.7` own causal repair/pins/enforcement without suppression, after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4983` is the twenty-eighth history segment; ADR `0106`
   authorizes exactly 30 collection files / 29 manifest lines / 16,463 manifest bytes; other ceilings remain unchanged.
-- latest_bootstrap_read: 2026-09-08 — roadmap Yes / full codebase No / physical mdBook Yes; Perl and Rust complete; formal .4 pending; containment .7.1 design is committed, .7.2 waits for director approval.
+- latest_bootstrap_read: 2026-09-08 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; approved capacity .7.2 is implemented; PNT resumes independent .7.3.

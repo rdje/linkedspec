@@ -1,8 +1,12 @@
 # ADR 0108: Proposed bounded capacity for Dart startup reading
 
 - Date: 2026-09-08
-- Status: proposed under `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.1`; director decision required before implementation
+- Status: design accepted by the director on 2026-09-08; execution authorized by ADR 0109 under `.7.2`
 - Tags: documentation, capacity, task-tree, knowledge, continuity, reading-gate
+
+Director update: "I greenlight the exception" approves the narrow scope below.
+`docs/decisions/0109-approved-dart-reading-capacity.md` records its execution authorization.
+The conditional wording below preserves the proposal as it stood at `.7.1` design closeout.
 
 ## Context
 

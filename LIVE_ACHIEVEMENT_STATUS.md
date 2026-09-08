@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Containment `.7.1` records proposed Dart capacity; `.7.2` awaits the director's narrow reading-gate exception.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Director-approved containment `.7.2` implements capacity; independent `.7.3` and admission `.7.4` precede Dart.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.1` completes the bounded capacity proposal and owns implementation/recomposition/admission as .7.2-.7.4. Proposed ADR 0108 requires a director exception before infrastructure changes; no capacity or Dart source-reading change is admitted.
+- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.2` implements the director-approved capacity exception through ADR 0109: four aggregate scalars, shared actual task validators and bounded proof. Exact canonical results belong to this commit and receipt; independent .7.3 and admission .7.4 remain pending.
 
 ## Next Action
 
-- Await the director's narrow exception for `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.2` and proposed ADR 0108; then resume its exact canonical implementation scope.
+- Independently verify the committed capacity controls under `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.3`; preserve the approved scope before `.7.4` admission.
 
 ## Recent Completions
+
+- `2026-09-08` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.2` implements the approved capacity exception; exact canonical proof governs landing.
 
 - `2026-09-08` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.1` records the measured capacity proposal, pending exception and exact successor ownership.
 
@@ -48,8 +50,6 @@
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.56` completes MCP tests and checkpoints progressive authority.
 
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.55` completes mutation consumer and checkpoints MCP admission.
-
-- `2026-09-08` — `SESSION-STARTUP-READING.3.3.54` completes gap and logical consumer reading.
 
 ## History
 

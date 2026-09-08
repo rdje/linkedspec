@@ -119,7 +119,9 @@ changed* lives in git (layer D), not here.
 | [0106](0106-change-history-thirtieth-member-capacity.md) | Change history admits its thirtieth bounded member | 2026-09-07 | accepted under `SESSION-STARTUP-READING.3.3.38` | documentation, history, rollover, routing, pressure, continuity, doctrine |
 | [0107](0107-engineering-notes-twenty-sixth-member-capacity.md) | Engineering-notes history admits its twenty-sixth bounded member | 2026-09-08 | accepted under `SESSION-STARTUP-READING.3.3.61` | documentation, history, rollover, routing, pressure, continuity, doctrine |
 
-| [0108](0108-dart-reading-capacity-proposal.md) | Proposed bounded task and Knowledge capacity before Dart reading | 2026-09-08 | proposed; director exception required under containment `.7.2` | documentation, capacity, task-tree, knowledge, reading-gate |
+| [0108](0108-dart-reading-capacity-proposal.md) | Proposed bounded task and Knowledge capacity before Dart reading | 2026-09-08 | accepted by director; execution ADR 0109 under `.7.2` | documentation, capacity, task-tree, knowledge, reading-gate |
+
+| [0109](0109-approved-dart-reading-capacity.md) | Approved aggregate task and Knowledge capacity for Dart reading | 2026-09-08 | accepted under containment `.7.2`; director exception granted | documentation, capacity, task-tree, knowledge, doctrine |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

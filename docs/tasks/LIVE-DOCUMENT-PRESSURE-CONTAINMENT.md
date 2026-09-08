@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-- Status: `active` / `.7.1` design complete; `.7.2` awaits a director exception
+- Status: `active` / `.7.2` implements approved capacity; `.7.3` is next after canonical landing
 - Roadmap lane: `Repository architecture / documentation sustainability`
 - Created: `2026-08-09`
-- Last updated: `2026-09-08` (`.7.1` records proposed capacity and the explicit reading-gate decision)
+- Last updated: `2026-09-08` (`.7.2` implements the director-approved exception; independent `.7.3` remains pending)
 - Owner: repo-local workflow
 
 ## Goal
@@ -316,11 +316,11 @@ or the README `.4` adoption/closeout that installs the guard.
   Status: `active`
   Goal: Admit complete bounded Dart reading ownership within the governed task-store capacity.
   Dependencies: Rust reading closeout `SESSION-STARTUP-READING.3.3.67`; before Dart child ownership/reading begins.
-  Children: `.7.0-.7.4`; `.7.2` requires the director's narrow capacity/reading-gate exception before implementation.
+  Children: `.7.0-.7.4`; the director approved the narrow capacity/reading-gate exception on 2026-09-08.
   Acceptance: Reverify the preserved estimate of 115 files / 56 groups / 169 range rows; measure resulting
-    ownership and evidence capacity, preserve every unique record and limit, and split any required infrastructure design before changes.
+    ownership and evidence capacity, preserve every unique record and all limits except ADR 0109's four director-approved aggregate scalars, and split required infrastructure design before changes.
   Evidence-capacity intake: `.3.3.61` measures 1,017 Knowledge Markdown files / 58,284 lines / 4,850,347 bytes against unchanged 1,024 / 64,000 / 6,291,456 ceilings. Include this evidence store in the capacity review before Dart; no count increase is authorized by this measurement.
-  Verification: `.7.0` verifies exact Dart inventory; `.7.1` records the bounded proposal in ADR 0108. Existing preservation and limit requirements remain in force pending the director's exception; `.7.2-.7.4` are unactivated.
+  Verification: `.7.0` verifies exact Dart inventory; `.7.1` records the design. The director's greenlight authorizes `.7.2` through ADR 0109; exact boundary and canonical proof govern landing. Independent `.7.3` and admission `.7.4` remain pending.
   Commit: `pending`
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.0`
@@ -349,12 +349,25 @@ or the README `.4` adoption/closeout that installs the guard.
   Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.1 - design bounded Dart capacity and record the approval boundary`
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.2`
-  Status: `pending` (blocked on director exception; no implementation authorized)
+  Status: `done` (director greenlight received 2026-09-08: "I greenlight the exception"; canonical evidence retained in this commit)
   Goal: Implement only the approved aggregate capacity and matching task guard from ADR 0108.
-  Dependencies: `.7.1`; explicit director approval to change capacity infrastructure before remaining required reading.
+  Dependencies: `.7.1`; director approval granted 2026-09-08 for capacity infrastructure before remaining required reading.
   Acceptance: Add exact accepted execution ADR; synchronize both route objects and actual guard boundaries; retain every ID, record, member limit and unrelated control.
-  Verification: Planned canonical proof, actual inclusive/overflow boundaries, routing mutations, source preservation and all doctrines; exact staged receipt before commit.
-  Commit: `pending`
+  Verification tier: `canonical`
+  Focused checks: Task-validator RED/GREEN and 31 self-test classes; 16 registry-bound cases/24 validator executions; exact scope/node/Knowledge/immutable preservation; routing, metadata, memory, histories, Knowledge freshness and mdBook render.
+  Canonical trigger: `approved capacity guard and registry infrastructure change` — exact staged canonical receipt required before commit.
+  Verification: Shared actual member/aggregate validators enforce unchanged member/file ceilings and approved task totals; old guards fail five new boundary classes, approved guards pass all 31. The unchanged routing validator passes 16 approved-registry cases/24 validator executions. ADR 0109 binds exactly four limit changes. Full candidate, preservation and canonical results are retained in the commit; no Dart source-reading credit.
+  Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.2 - implement the approved Dart capacity controls`
+
+
+  #### TOOLBOX Task-Acceptance Checklist
+
+  - [x] **REPRODUCE / ISSUE** — The recorded Dart template exceeds former headroom; actual task-validator expectations fail with old guards (five classes).
+  - [x] **ROOT CAUSE (WHY + WHERE)** — The tool-backed consumer census locates the two independent aggregate checks in scripts/check_task_tree_partitions.pl and the two governed registry records.
+  - [x] **FIX** — Apply ADR 0109's four approved scalars; main census and boundary self-tests share the same pure validators without changing member/file controls.
+  - [x] **ADDRESSED (verified)** — Task boundary GREEN passes 31/31; the unchanged routing validator passes 16 registry-bound cases and 24 actual validator executions.
+  - [x] **NO REGRESSION** — Exact registry/node/scope audit preserves all other controls, prior ownership, immutable stores and parser/runtime sources; scripts/check_task_tree_metadata.sh and canonical proof govern landing.
+  - [x] **LOCKSTEP** — Director approval, indexed ADRs, Knowledge, roadmaps, mdBook and bounded continuity agree; git diff --check and exact staged canonical receipt precede the per-leaf commit.
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.3`
   Status: `pending`
@@ -374,7 +387,7 @@ or the README `.4` adoption/closeout that installs the guard.
 
 ## Current Frontier
 
-Next: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.2`, blocked on the director's narrow capacity/reading-gate exception for ADR 0108. Design `.7.1` is complete; implementation, independent recomposition `.7.3` and admission `.7.4` remain pending. Existing limits, all prior evidence and the startup reading gate remain in force.
+Next: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.3` after the exact canonical `.7.2` commit. The director approved ADR 0108's narrow exception; ADR 0109 implements its four aggregate changes with existing member and preservation controls intact. Admission `.7.4` and Dart source reading remain pending.
 
 ## Decisions
 

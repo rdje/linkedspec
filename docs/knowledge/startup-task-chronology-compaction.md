@@ -17,7 +17,7 @@ answers:
   - how was startup task compaction checked without losing evidence
   - what owns current task collection pressure cleanup
 date: 2026-09-08
-status: .5/.6 and .7.0 complete; .7.1 design recorded; .7.2 awaits director exception
+status: .5/.6 and .7.0/.7.1 complete; approved .7.2 implements capacity; .7.3/.7.4 remain pending
 tags: [continuity, task-tree, history, containment]
 evidence: "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5 checks all 100 batch ordinal/leaf/hash identities against first-parent Git history and all 102 duplicate commit subjects against canonical task nodes; every completion note is retained verbatim beside its node's Commit field. Other task-node fields and stable IDs are identical."
 evidence_update_2026_09_08: "Containment .5 lands at d6f37492 with exact canonical proof. From e288c3af, .6 consolidates 264 rows into 260 nodes across four closed trees, retains six unmatched historical captions, preserves every prior node reference and completion note, and removes 251 lines/8210 bytes overall. A proven wrong-node commit pointer is corrected with its prior text retained. The final ordinary documentation slice uses focused proof; the parent remains open for later Dart capacity .7."
@@ -325,9 +325,10 @@ DART_CAPACITY_AUDIT
 Design `.7.1` starts from clean `95915ffb7cf7643d8c3021aeaf83e2141194407d`.
 `docs/decisions/0108-dart-reading-capacity-proposal.md` records the exact alternatives, proposed limits,
 preservation/retrieval obligations, bounded separate Dart tree and `.7.2-.7.4` implementation sequence.
-The proposal remains unapproved. The existing task guard independently enforces the aggregate limits;
-changing it is implementation while the required-reading gate is still open. `.7.2` therefore awaits
-the director's narrow exception. Neither this design nor the inventory authorizes a capacity increase.
+At `.7.1` closeout the proposal was unapproved because the task guard required implementation while
+full-codebase reading remained open. The director subsequently approved the narrow exception with
+"I greenlight the exception". ADR 0109 and `docs/knowledge/dart-reading-capacity-controls.md` now own
+its exact `.7.2` implementation and boundary proof. Inventory alone grants no additional capacity.
 
 The observed interval from clean Perl closeout 611d7b5c through 95915ffb contains Rust reading plus
 intervening continuity and consolidation, not an isolated runtime experiment. It adds 36 Knowledge

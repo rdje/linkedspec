@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-08 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.2 - implement the approved Dart capacity controls
+
+The director explicitly greenlit the capacity exception before remaining full-codebase reading. Only one executable owner changes: the task partition checker extracts its existing member/aggregate predicates into pure functions used by the main census and its real boundary tests, then changes two aggregate caps. The registry changes exactly four scalars in two surfaces; route contracts and storage/topology authorities remain identical. Markdown-only task census and index-inclusive routing census retain their distinct scopes. A recorded audit invokes exact validator definitions with actual approved records; accepted design, book and continuity reflect the approval without activating Dart reading or pending repairs.
+
 ## 2026-09-08 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.1 - design bounded Dart capacity and record the approval boundary
 
 The 611d7b5c-to-95915ffb interval is observed net documentation growth, including Rust reading and intervening consolidation, not an isolated experiment or a bound on future findings. Twice that sample plus template/setup reserves fits proposed 88,000 task lines/9 MiB and 1,152 Knowledge files/72,000 lines; member, Knowledge-byte and generated-map ceilings stay unchanged. Guard constants make this a real reading-gate decision before implementation. Existing task identities and evidence remain in place; the future Dart tree bridges startup .3.4. Correct the .7.0 commit-body label: its 1,018 Knowledge members are 1,017 facts plus README, not INDEX; counts were correct.

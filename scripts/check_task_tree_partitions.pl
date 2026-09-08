@@ -201,14 +201,28 @@ for my $path (@task_files) {
     my $lines = line_count($bytes);
     $total_lines += $lines;
     $total_bytes += length($bytes);
-    push @errors, "task collection member exceeds 8,000 lines: $path" if $lines > 8_000;
-    push @errors, "task collection member exceeds 1,048,576 bytes: $path" if length($bytes) > 1_048_576;
+    push @errors, collection_member_errors($path, $lines, length($bytes));
 }
-push @errors, 'task collection exceeds 128 files' if @task_files > 128;
-push @errors, 'task collection exceeds 80,000 lines' if $total_lines > 80_000;
-push @errors, 'task collection exceeds 8,388,608 bytes' if $total_bytes > 8_388_608;
+push @errors, collection_total_errors(scalar(@task_files), $total_lines, $total_bytes);
 
 finish(\@errors, scalar(@task_files), $total_lines, $total_bytes, scalar(keys %ids));
+
+sub collection_member_errors {
+    my ($path, $lines, $bytes) = @_;
+    my @errors;
+    push @errors, "task collection member exceeds 8,000 lines: $path" if $lines > 8_000;
+    push @errors, "task collection member exceeds 1,048,576 bytes: $path" if $bytes > 1_048_576;
+    return @errors;
+}
+
+sub collection_total_errors {
+    my ($files, $lines, $bytes) = @_;
+    my @errors;
+    push @errors, 'task collection exceeds 128 files' if $files > 128;
+    push @errors, 'task collection exceeds 88,000 lines' if $lines > 88_000;
+    push @errors, 'task collection exceeds 9,437,184 bytes' if $bytes > 9_437_184;
+    return @errors;
+}
 
 sub finish {
     my ($errors, $files, $lines, $bytes, $ids_count) = @_;
@@ -385,9 +399,38 @@ sub run_self_tests {
         ['line_count_no_lf', sub { line_count("a\nb") == 2 }],
         ['line_limit', sub { 5_001 > 5_000 }],
         ['byte_limit', sub { 786_433 > 786_432 }],
-        ['collection_file_limit', sub { 129 > 128 }],
-        ['collection_line_limit', sub { 80_001 > 80_000 }],
-        ['collection_byte_limit', sub { 8_388_609 > 8_388_608 }],
+        ['collection_inclusive_bounds', sub {
+            return same_strings([collection_total_errors(128, 88_000, 9_437_184)], [])
+                && same_strings([collection_member_errors('member.md', 8_000, 1_048_576)], []);
+        }],
+        ['collection_file_limit', sub {
+            return same_strings([collection_total_errors(129, 88_000, 9_437_184)],
+                ['task collection exceeds 128 files']);
+        }],
+        ['collection_line_limit', sub {
+            return same_strings([collection_total_errors(128, 88_001, 9_437_184)],
+                ['task collection exceeds 88,000 lines']);
+        }],
+        ['collection_byte_limit', sub {
+            return same_strings([collection_total_errors(128, 88_000, 9_437_185)],
+                ['task collection exceeds 9,437,184 bytes']);
+        }],
+        ['collection_member_line_limit', sub {
+            return same_strings([collection_member_errors('member.md', 8_001, 1_048_576)],
+                ['task collection member exceeds 8,000 lines: member.md']);
+        }],
+        ['collection_member_byte_limit', sub {
+            return same_strings([collection_member_errors('member.md', 8_000, 1_048_577)],
+                ['task collection member exceeds 1,048,576 bytes: member.md']);
+        }],
+        ['collection_independent_errors', sub {
+            return same_strings([collection_total_errors(129, 88_001, 9_437_185)],
+                ['task collection exceeds 128 files', 'task collection exceeds 88,000 lines',
+                 'task collection exceeds 9,437,184 bytes'])
+                && same_strings([collection_member_errors('member.md', 8_001, 1_048_577)],
+                    ['task collection member exceeds 8,000 lines: member.md',
+                     'task collection member exceeds 1,048,576 bytes: member.md']);
+        }],
         ['part_00', sub { part_owns_id('00-08', "$TREE.8.9") && !part_owns_id('00-08', "$TREE.9") }],
         ['part_09', sub { part_owns_id('09', "$TREE.9.1") && !part_owns_id('09', "$TREE.10") }],
         ['part_10_low', sub { part_owns_id('10.0-6', "$TREE.10") && part_owns_id('10.0-6', "$TREE.10.6.9") }],
