@@ -2153,14 +2153,17 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.62 - complete semantic admission and emitter boundary reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.63`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 63: 1,492 lines/fragments, 58,940 bytes.
   Scope: `rust/linkedspec-runtime/tests/source_emitter.rs` lines 859–1166;
     `rust/linkedspec-runtime/tests/spec_loader.rs` lines 1–264;
     `rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs` lines 1–920.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact source-range identities; native resolution and staged-AST neutral contracts; source-to-Knowledge proof boundaries; memory, Knowledge, doctrines, histories and diff/scope review.
+  Canonical trigger: `none` — bounded reading and factual reconciliation only; no production, public or infrastructure change.
+  Verification: Three scopes total 1,492 lines / 58,940 baseline-identical bytes; ordered path/kind/range/byte/SHA audit 0fca63d946bf637732e40a6b44d9363dce564e62d131c10facb44072cac2d4ca. Emitter suffix completes fourteen fixtures across ten neutral families, v1 rejection and eight manifest-selected native/emitted oracle cases with checked child success; JSON literal and authored manifest repairs .71/.78 remain pending. Correct the older subset Knowledge card's unqualified all-105 classifier claim against actual repair .77 without invalidating a particular historical result. Loader tests cover 14/9/4 fixture cases plus function execution, identity and parse/validation JSON; directory construction is the non-regular surrogate, not every OS special-file type. Staged prefix covers frozen authority, cache/queue, all four result and three failure policies, sibling isolation, target checks, unpublished failure, resources and callback panic under a replaced hook; recursive suffix remains .64-owned and .73–.75 remain open. Fresh neutral resolution 14/9/4 and staged 9 rollout legs / 123 base / 129 public mutations pass. The earlier .61 canonical native result remains dated, fixture-bound evidence. Required focused continuity proof is retained with the commit.
+  Commit: `SESSION-STARTUP-READING.3.3.63 - complete emitter, loader and staged consumer reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.64`
   Status: `pending`
@@ -4310,7 +4313,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.63` | `pending` | Complete source-emitter suffix, strict spec-loader tests and staged-AST prefix through line 920. |
+| 1 | `SESSION-STARTUP-READING.3.3.64` | `pending` | Continue staged-AST recursive/carrier tests at line 921, then standalone-lifecycle prefix through line 143. |
 
 ## Reading Ledger
 
@@ -4321,7 +4324,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.62` are reconciled and `.3.3.63`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.63` are reconciled and `.3.3.64`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read at baseline; .3.2.42 preserves coverage, and c8759242 reviews/renders the approved parked-coverage delta. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -7080,6 +7083,7 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- `2026-09-08` `.3.3.63`: Exact three-scope identities PASS; native-resolution neutral 14/9/4 and staged neutral 9 legs / 123 base / 129 public mutations PASS. Three Knowledge cards reconcile child status, loader fixture types and current-depth policy/panic proof while preserving .71/.73–.78 repair ownership. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.62`: Exact three-scope identities reconcile admission, source-boundary aliases and emitter prefix; neutral semantic proof and pinned routing/history child-status controls pass. The preceding .61 canonical result is retained with exact log/receipt identity; no optional-gate rerun is inferred. Actual pending .79 owns the reproduced routing signal-status defect. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.61`: Four exact scopes PASS (1,461 lines / 52,200 bytes); semantic governance PASS 6/20/128 with rollout 9/0 and admission 6/0. Independent emitted assertions are precisely qualified. Mandatory engineering-notes rollover and exact finite capacity admission require staged canonical proof; commit body/receipt retain the completed run. Knowledge, memory, histories, diff and doctrine hooks govern canonical landing.
 - `2026-09-08` `.3.3.60`: Seven exact scopes PASS (1,472 lines / 49,181 bytes). Managed cursor contract PASS at 8 complete / 0 pending, 6 runtime legs and 60 mutations. Reading facts preserve named-selector repair .57 and historical/current cursor boundaries. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
@@ -7407,3 +7411,4 @@ Each canonical task node owns its exact `Commit` subject and retained completion
 - `2026-09-08`: `.3.3.60` completes cursor/diagnostic consumer reading and starts semantic-foundation tests; next `.3.3.61`.
 - `2026-09-08`: `.3.3.61` completes semantic consumer reading and performs required engineering-notes rollover; next `.3.3.62`.
 - `2026-09-08`: `.3.3.62` completes admission/emitter boundary reading and owns verifier signal repair .79; next `.3.3.63`.
+- `2026-09-08`: `.3.3.63` completes emitter/loader/staged-prefix reading and corrects classifier proof scope; next `.3.3.64`.

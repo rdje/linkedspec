@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.63 - complete emitter, loader and staged consumer reading
+
+The source-emitter consumer checks direct and compatibility shapes before and inside generated modules, spans fourteen fixtures/ten families and retains an eight-case manifest subset. The separate all-105 classifier's admission record cannot substitute for child-status validation; .77 already owns that gap. Loader non-regular cases use directories as portable surrogates. Staged current-depth tests cover four result/three failure policies and caching/atomicity fixtures, but the panic control replaces the process hook; default-hook behavior is not exercised. Recursive/carrier suffixes remain .64-owned, and existing repair boundaries stay explicit.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.62 - complete semantic admission and emitter boundary reading
 
 Admission's twelve roles freeze fixture identity, query digests and host-leak denials; emitted-labelled routes directly invoke generated-plan helpers and traced wrappers disable text tracing. Alias tests independently compile four modules and check child success; emitter suffix remains .63-owned. The routing verifier and Git helper discard signal bits, confirmed by twelve source-extracted original/guard controls; nine history-helper controls retain correct failure handling. Pending .79 owns production repair. Preserve the .61 canonical/native results separately from optional-gate history and locate September 8 loader samples without inferring an OS cause or a sampling workaround.

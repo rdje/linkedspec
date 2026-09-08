@@ -12,7 +12,7 @@ answers:
   - "how are Rust staged sibling parser contexts isolated"
   - "why does the Rust staged AST module allow dead_code"
   - "when is the Rust staged AST dead_code allowance removed"
-date: 2026-09-07
+date: 2026-09-08
 status: current private current-depth authority admitted through FUTURE-PARITY-BACKLOG.14.7.4.4
 tags: [rust, staged-parsing, parse-job, registry, cache, policies, private, admission]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.4.2 adds private rust/linkedspec-runtime/src/staged_ast_enrichment.rs and extends the same outer-cfg consumer. FrozenStagedRegistry accepts only caller-completed candidate outcomes and already-compiled opaque callbacks; pure dispatch performs alias, declaring-relative, ordered-root, and ordered-provider selection plus authority narrowing without loading or ambient access. The exact v2 identity selects the default top first; the run-local cache stores only immutable compiled plans under the neutral eight-field identity. One complete current depth is prepared and target-validated before execution, ordered by typed path/provenance/job id, isolated with fresh sibling contexts, and stitched atomically through all four result and three failure policies after detached node-bounded validation. The final RED now names only .14.7.4.3 recurrence, bounds, and diagnostic rebasing. Ordinary discovery remains zero tests, canonical CI has zero references, function-body v1/generated v2/Rust rollout/public surfaces remain unchanged, and neutral governance stays at 79 mutations."
@@ -20,8 +20,8 @@ evidence_update_2026_08_26_recursive_authority: "FUTURE-PARITY-BACKLOG.14.7.4.3 
 evidence_update_2026_08_26_carrier_admission: "FUTURE-PARITY-BACKLOG.14.7.4.4 gives this authority its first production caller through StagedAstEnrichmentSeed. Every top-level route constructs a fresh registry/cache, the ordinary/canonical consumer is GREEN, Rust rollout is complete at 84 mutations, and the dormant cfg/check-cfg/dead-code scaffolding is removed."
 root_cause: "The marker/provenance leaf deliberately produced only inert logical data. Rust had no general-v2 frozen registry, pure resolver, selected-top-before-id function, plan-only cache, current-depth ordering/isolation seam, or portable result/failure stitcher. The existing staged_parser_registry.rs is a separate narrow function-body-v1 adapter and cannot safely be widened into that authority."
 reverify:
-  - "bash tools/run_cargo_local.sh test --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test staged_ast_enrichment_contract"
-  - "bash tools/run_cargo_local.sh check --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib"
+  - "bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test staged_ast_enrichment_contract"
+  - "bash tools/run_cargo_local.sh check --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib"
   - "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py"
   - "rg -n 'FrozenStagedRegistry|enrich_current_depth|staged_job_identity|staged_cache_identity|staged_current_depth_order' rust/linkedspec-runtime/src/staged_ast_enrichment.rs rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs"
 ---
@@ -95,3 +95,24 @@ version integers use as_u64 with positive/nonnegative checks, not a floating cas
 declared lowercase ASCII segment syntax; this helper's top-rule syntax is ASCII identifier form. Digest checks
 require sha256 plus 64 lowercase hex digits. Canonical JSON sorts object keys recursively and preserves array
 order before hashing. These exact source observations do not remove .73–.75's measured execution gaps.
+
+## September 8 current-depth consumer reading
+
+`SESSION-STARTUP-READING.3.3.63` reconciles the consumer prefix through line 920.
+It prepares compiled fixtures and frozen callbacks, matches neutral resolution,
+authority, cache-key and queue cases, and exercises all four result policies and
+three failure policies. Shared-registry calls demonstrate plan-cache reuse while a
+separate registry starts empty. Sibling callback contexts, unpublished input on a
+later failure, existing-target collisions, missing targets, authority/budget denials,
+and failure-versus-partial-plan caching have explicit controls. Those fixtures do
+not close the competing-target, provenance and resource gaps owned by `.73`–`.75`.
+
+The contained-panic control temporarily replaces the process panic hook, calls
+`enrich_current_depth`, then restores the previous hook. Its quiet execution does
+not exercise the default panic hook. Recursive authority begins at line 914 and
+continues under `.3.3.64`; fresh four-carrier execution is also reconciled there.
+
+The preceding `.3.3.61` canonical gate (`64d82792`) passed this composed native
+consumer 1/1 in 802.08 test seconds. The selected .63 neutral check passes nine
+rollout legs, 123 base and 129 public mutations; neither result closes the separate
+measured repairs or establishes arbitrary-input coverage.

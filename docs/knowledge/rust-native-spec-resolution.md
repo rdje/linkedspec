@@ -9,11 +9,11 @@ answers:
   - does the Rust primary CLI delegate named and file loading to the native API
   - what does Rust return when native spec loading fails
   - what did FUTURE-PARITY-BACKLOG 1.6.4.2 implement
-date: 2026-09-07
+date: 2026-09-08
 status: current
 tags: [rust, resolution, files, utf8, diagnostics, native-api, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.6.4.2 exports linkedspec_runtime::spec_loader with typed requests/options/results/errors, consumes all 14 name + 9 resolution + 4 text cases in tests/spec_loader.rs, composes full staged parse/validate/compile and execution, delegates primary CLI named/file selection, and passes 137/105/196/5/3/5/10 plus 61x2 CLI."
-reverify: "bash tools/project_data_run.sh perl tools/check_native_spec_resolution_contract.pl; bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test spec_loader"
+reverify: "bash tools/project_data_run.sh perl tools/check_native_spec_resolution_contract.pl && bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test spec_loader"
 ---
 
 `linkedspec_runtime::spec_loader` is Rust's public file-oriented API. `SpecRequest::named(...)` selects a portable
@@ -52,3 +52,16 @@ requested name only for name requests, and adds the resolved path for both kinds
 Fresh neutral 14/9/4 proof passes; the native five-test/full-gate counts above remain dated July evidence.
 This reading checkpoint adds no new filesystem/runtime execution claim. Prior slice .3.3.34 already used the
 public exact-path loader successfully to emit ordinary and recognition modules from repository-local inputs.
+
+## September 8 loader-consumer reading
+
+`SESSION-STARTUP-READING.3.3.63` reconciles all 264 lines of
+`rust/linkedspec-runtime/tests/spec_loader.rs`.
+Five tests consume the shared 14 name / 9 resolution / 4 text cases, then cover a
+loaded function's execution and engine identity, parse versus validation stages,
+and exact missing-name JSON. Fixture construction represents both `directory` and
+`non_regular` with directories: this exercises the non-file branch, not every OS
+special-file type. Text fixtures decode their exact hexadecimal bytes before loading.
+The source uses a Drop-managed scratch directory under the wrapper-supplied temporary
+root. Fresh neutral 14/9/4 checks pass; this reading checkpoint does not rerun the
+native five-test target or refresh the historical full-gate counts above.
