@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.67 - close Rust reading with exact coverage and durable repair ownership
+
+The Rust closeout separates four claims: physically read bytes, reconciled understanding, durable pending defects, and the selected runtime gate. Exact interval coverage and unique commit subjects support the first two continuity claims; they do not turn historical tests or emitted-source inspections into fresh executions. Repair node bodies remain unchanged, including the generated classifier child-status, manifest portability and routing signal-status defects. Expected PGEN → RGX → LinkedSpec Rust generated dependency state is not a blocker. Capacity admission remains a distinct clean-tree task before Dart ownership and reading.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.66 - complete final Rust contract consumer reading
 
 Completion of consumer reading does not turn source assertions into fresh runtime results. The Rust label target compiles its loaded fixture without executing it; labels and variadic functions inspect emitted text while executing generated helpers. The write target independently compiles one computed-string-path child and checks normal success; its full frozen case set is separately exercised natively. These boundaries now live in the existing canonical Knowledge owners. The next leaf independently proves every baseline byte and current delta before canonical Rust reading closeout; containment .7 must precede any Dart decomposition or source reading.

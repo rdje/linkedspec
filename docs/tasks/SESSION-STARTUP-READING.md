@@ -955,12 +955,12 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.2.55 - close Perl reading and own bounded Rust scopes` — Close 89-file Perl reading; own all 412 Rust paths in 66 bounded leaves plus closeout; exact canonical boundary.
 
 - ID: `SESSION-STARTUP-READING.3.3`
-  Status: `active`
+  Status: `done`
   Goal: Split and read all 412 baseline Rust entries, including source, tests, corpus, generated files, and manifests.
   Acceptance: Define bounded file/range children before reading; `rgx` is excluded but first-party Rust is not.
   Children: `.3.3.1`, `.3.3.2`, `.3.3.3`, `.3.3.4`, `.3.3.5`, `.3.3.6`, `.3.3.7`, `.3.3.8`, `.3.3.9`, `.3.3.10`, `.3.3.11`, `.3.3.12`, `.3.3.13`, `.3.3.14`, `.3.3.15`, `.3.3.16`, `.3.3.17`, `.3.3.18`, `.3.3.19`, `.3.3.20`, `.3.3.21`, `.3.3.22`, `.3.3.23`, `.3.3.24`, `.3.3.25`, `.3.3.26`, `.3.3.27`, `.3.3.28`, `.3.3.29`, `.3.3.30`, `.3.3.31`, `.3.3.32`, `.3.3.33`, `.3.3.34`, `.3.3.35`, `.3.3.36`, `.3.3.37`, `.3.3.38`, `.3.3.39`, `.3.3.40`, `.3.3.41`, `.3.3.42`, `.3.3.43`, `.3.3.44`, `.3.3.45`, `.3.3.46`, `.3.3.47`, `.3.3.48`, `.3.3.49`, `.3.3.50`, `.3.3.51`, `.3.3.52`, `.3.3.53`, `.3.3.54`, `.3.3.55`, `.3.3.56`, `.3.3.57`, `.3.3.58`, `.3.3.59`, `.3.3.60`, `.3.3.61`, `.3.3.62`, `.3.3.63`, `.3.3.64`, `.3.3.65`, `.3.3.66`, `.3.3.67`
-  Verification: `pending`
-  Commit: `pending`
+  Verification: All 412 baseline paths / 3,533,382 bytes are physically read and comprehension-reconciled across 66 committed bounded children. .3.3.67 independently verifies exact byte coverage, current mode/blob identity, durable subjects, Knowledge continuity and pending repair ownership; receipt-bound canonical proof is required for parent landing. This status certifies reading completion only. Containment .7 precedes Dart decomposition/reading.
+  Commit: `SESSION-STARTUP-READING.3.3.67 - close Rust reading with exact coverage and durable repair ownership`
 
 
 - ID: `SESSION-STARTUP-READING.3.3.1`
@@ -2207,13 +2207,16 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.66 - complete final Rust contract consumer reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.67`
-  Status: `pending`
+  Status: `done`
   Goal: Close the Rust reading lane after every bounded child and final delta review.
   Acceptance: Verify all 412 baseline paths, current additions/deltas, complete comprehension, exact
     repair ownership, and Knowledge reconciliation. Reading is not runtime signoff. Require canonical
     proof for parent closeout and own the next language decomposition before new source reading.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `canonical`
+  Focused checks: Existing exact Rust scope reverify; independent committed-child, mode/blob/current-delta and pending-repair ownership audits; Knowledge reconciliation; memory, histories, staged diff/scope and all doctrines.
+  Canonical trigger: `milestone` — Rust reading parent closeout; require receipt-bound canonical CI on the exact staged candidate.
+  Verification: PASS: the existing scope audit covers all 412 baseline paths / 3,533,382 bytes exactly once, including two empty files and 89,242 per-window lines/fragments across 66 bounded children. All 66 done subjects resolve to unique commits; verification metadata, current mode/blob/byte identity and zero Rust additions/deletions/uncommitted inputs are independently checked. Reading-commit audit 312b1b4c03b2ad3897765e283c9772a7536122b39ee6d5740dff90874b860815; Rust tree-record audit 53e7795d9405342897bd3990e8fd55ee3a8cfdddb6e67dc977fefcb72dd3b68b. All 141 Knowledge paths changed by reading commits remain present. The 34 post-Perl repair owners preserve 90 pending nodes / 73 pending leaves, with exact body digest 3664cc76bff42040631d688fee5fa75bd4410f6588e1fd9eb45a882532ea967b. Existing earlier/cross-cutting repairs remain open. Reading is complete, not defect remediation or exhaustive runtime signoff. Final canonical outcome and exact staged receipt are required before landing and retained in the commit.
+  Commit: `SESSION-STARTUP-READING.3.3.67 - close Rust reading with exact coverage and durable repair ownership`
 
 - ID: `SESSION-STARTUP-READING.3.4`
   Status: `pending`
@@ -4320,9 +4323,12 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 ## Current Frontier
 
+First complete `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7` from the clean Rust closeout boundary.
+Then resume the owned Dart decomposition; no Dart source reading precedes that capacity admission.
+
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.67` | `pending` | Audit all 412 Rust baseline paths, exact committed reading coverage, current additions/deltas and repair/Knowledge ownership; close parent with canonical proof before containment .7 and Dart decomposition. |
+| 1 | `SESSION-STARTUP-READING.3.4` | `pending` | Define bounded Dart children only after containment .7 completes. |
 
 ## Reading Ledger
 
@@ -4333,7 +4339,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.66` are reconciled; only `.3.3.67` Rust closeout remains pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust reading is complete: all 412 baseline paths / 3,533,382 bytes; `.3.3.67` closes exact coverage, current deltas and durable repair/Knowledge reconciliation. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read at baseline; .3.2.42 preserves coverage, and c8759242 reviews/renders the approved parked-coverage delta. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -7092,6 +7098,8 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- `2026-09-08` `.3.3.67`: Exact scope and independent committed-child/mode/delta/repair/Knowledge continuity audits PASS. All 66 reading children and 141 touched fact paths are durable; 34 post-Perl repair owners retain 90 pending nodes / 73 pending leaves. Final receipt-bound canonical CI governs parent landing; outcome and exact log identity are retained in the commit. Next containment .7 precedes Dart ownership/reading.
+
 - `2026-09-08` `.3.3.66`: Four exact scope/baseline identities PASS. Managed neutral Unicode806/9/8/2, binding11/7/6/8, callable-signature3/9/7 and write5/7/11/16/3/3/8/105 PASS. Existing cards distinguish native/generated-helper execution, strict-loader compilation, emitted-text inspection and the one independently compiled write fixture; no new native run is inferred. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.65`: Five exact scope/baseline identities PASS. Typed neutral 3/7/6/3, 92+7 and14/0/231; Unicode17 five-module byte comparison with12 fixtures; lifecycle9/4/6/3 and14 mutations PASS. Four existing Knowledge cards distinguish runtime/generated-helper execution, emitted-text inspection, catalogs and historical test counts; no new runtime/carrier run is inferred. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.64`: Both scope/baseline identities PASS; staged neutral governance PASS at 9 rollout legs / 123 base / 129 public mutations. Recursive/carrier Knowledge distinguishes historical admission from the completed .61 native run and retains .73–.75/.78. Standalone prefix includes native execution helpers; no emitted compilation is inferred from that prefix. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
@@ -7427,3 +7435,4 @@ Each canonical task node owns its exact `Commit` subject and retained completion
 - `2026-09-08`: `.3.3.64` completes staged recursive/carrier reading and starts standalone-lifecycle tests; next `.3.3.65`.
 - `2026-09-08`: `.3.3.65` completes lifecycle/trace/typed/casing reading with precise carrier proof; next `.3.3.66`.
 - `2026-09-08`: `.3.3.66` completes final Rust contract consumers; only parent closeout remains; next `.3.3.67`.
+- `2026-09-08`: `.3.3.67` closes complete Rust reading; preserves pending repairs and routes Dart capacity first; next `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7`.

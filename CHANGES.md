@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.67 - close Rust reading with exact coverage and durable repair ownership
+
+Close the Rust reading parent after independent proof of all 412 baseline paths / 3,533,382 bytes, two empty inputs and 66 uniquely committed bounded children. Current Git modes, blobs and working bytes match baseline; all 141 Knowledge paths touched by reading commits remain present. Preserve all post-Perl repair ownership: 34 top-level owners, 90 pending nodes and 73 pending leaves, plus unchanged earlier/cross-cutting repairs. The existing inventory card stores executable scope/continuity audits and exact digests. Route the clean next action to containment .7 before Dart decomposition; full-codebase reading remains No. This designated parent boundary requires exact staged canonical CI, whose outcome is retained in the commit.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.66 - complete final Rust contract consumer reading
 
 Reconcile four baseline-identical scopes: 1,468 lines / 48,324 bytes. Complete all sixty-six Rust reading groups while keeping .3.3.67 parent closeout pending. Four existing Knowledge cards distinguish Unicode strict-loader compilation and native/generated selectors, uniform-binding generated helpers, variadic emitted-text inspection and the one independently compiled write-vivification fixture with a relative manifest and checked child status. Fresh Unicode806/9/8/2, binding11/7/6/8, signature3/9/7 and write105-mutation neutral checks pass. Historical runtime evidence and all pending repairs retain their scope; no new native target is claimed.
