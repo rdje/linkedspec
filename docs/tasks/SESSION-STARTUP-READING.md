@@ -35,7 +35,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`, `SESSION-STARTUP-READING.50`, `SESSION-STARTUP-READING.51`, `SESSION-STARTUP-READING.52`, `SESSION-STARTUP-READING.53`, `SESSION-STARTUP-READING.54`, `SESSION-STARTUP-READING.55`, `SESSION-STARTUP-READING.56`, `SESSION-STARTUP-READING.57`, `SESSION-STARTUP-READING.58`, `SESSION-STARTUP-READING.59`, `SESSION-STARTUP-READING.60`, `SESSION-STARTUP-READING.61`, `SESSION-STARTUP-READING.62`, `SESSION-STARTUP-READING.63`, `SESSION-STARTUP-READING.64`, `SESSION-STARTUP-READING.65`, `SESSION-STARTUP-READING.66`, `SESSION-STARTUP-READING.67`, `SESSION-STARTUP-READING.68`, `SESSION-STARTUP-READING.69`, `SESSION-STARTUP-READING.70`, `SESSION-STARTUP-READING.71`, `SESSION-STARTUP-READING.72`, `SESSION-STARTUP-READING.73`, `SESSION-STARTUP-READING.74`, `SESSION-STARTUP-READING.75`, `SESSION-STARTUP-READING.76`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`, `SESSION-STARTUP-READING.50`, `SESSION-STARTUP-READING.51`, `SESSION-STARTUP-READING.52`, `SESSION-STARTUP-READING.53`, `SESSION-STARTUP-READING.54`, `SESSION-STARTUP-READING.55`, `SESSION-STARTUP-READING.56`, `SESSION-STARTUP-READING.57`, `SESSION-STARTUP-READING.58`, `SESSION-STARTUP-READING.59`, `SESSION-STARTUP-READING.60`, `SESSION-STARTUP-READING.61`, `SESSION-STARTUP-READING.62`, `SESSION-STARTUP-READING.63`, `SESSION-STARTUP-READING.64`, `SESSION-STARTUP-READING.65`, `SESSION-STARTUP-READING.66`, `SESSION-STARTUP-READING.67`, `SESSION-STARTUP-READING.68`, `SESSION-STARTUP-READING.69`, `SESSION-STARTUP-READING.70`, `SESSION-STARTUP-READING.71`, `SESSION-STARTUP-READING.72`, `SESSION-STARTUP-READING.73`, `SESSION-STARTUP-READING.74`, `SESSION-STARTUP-READING.75`, `SESSION-STARTUP-READING.76`, `SESSION-STARTUP-READING.77`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -1991,13 +1991,16 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.50 - reconcile corpus and diagnostic test-consumer reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.51`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 51: 1,487 lines/fragments, 51,804 bytes.
   Scope: `rust/linkedspec-runtime/tests/generated_source_full_manifest_classifier.rs` lines 254–358;
     `rust/linkedspec-runtime/tests/integration_test.rs` lines 1–1382.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact scope/source identities, retained classifier counterexample and causal evidence, Knowledge reconciliation, memory, all doctrines, histories and diff.
+  Canonical trigger: `none` — reading and repair intake; verifier implementation remains unchanged.
+  Verification: Both scopes match the baseline: 1,487 lines / 51,804 bytes. Classifier source SHA-256 `25f37479a76a3022758cc09aeb4b162d3086d7d069be267ef7cd1f565eaa9dc7` and extracted tail without the test attribute `f1848092d5c6d0b3f6ec9d52627f8f13d39aa189d9da31f28afcefe8afce1261` match retained evidence. Six freshly replayed controls confirm failed child plus all 105 markers incorrectly passes; the in-memory status guard rejects it, while success/all and missing-marker controls behave as recorded. Scratch is removed; .77 owns repair and its Knowledge card preserves the executable probe. Integration prefix covers structural pipeline limits, staged function/parse-job identity, invalid definitions, edge metadata, retv/entry-match and body recursion through line 1382. Existing return-channel Knowledge is qualified against selective rule-variable scope. No real Cargo failure, parser defect or new integration run is inferred.
+  Commit: `SESSION-STARTUP-READING.3.3.51 - reconcile classifier reading and own failed-child verification repair`
 
 - ID: `SESSION-STARTUP-READING.3.3.52`
   Status: `pending`
@@ -4222,11 +4225,23 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     in `docs/knowledge/simenv-variable-dispatch-mismatch.md`; only in-memory probe substitutions were made.
   Commit: `pending`
 
+- ID: `SESSION-STARTUP-READING.77`
+  Status: `pending`
+  Goal: Make the generated-source classifier reject failed child execution independently of pass markers.
+  Dependencies: `.3`, `.4`, `.5`; preserve exact full-manifest accounting and useful per-case diagnostics.
+  Acceptance: Require host-run process success plus exact marker/accounting evidence; cover success, nonzero,
+    signal termination, missing/duplicate/unknown markers and actual emitted Cargo execution. Keep all 105 cases
+    unconditional, update governed verifier checks and Knowledge, and finish with canonical proof.
+  Verification: Pending repair; `.3.3.51` binds the retained six source-extracted controls in `d6f37492` to
+    current classifier source: exit 101 with all 105 markers incorrectly reports 105 passes and exits zero.
+    The fresh in-memory status-guard control rejects it; executable proof: docs/knowledge/rust-generated-classifier-child-status-gap.md.
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.51` | `pending` | Complete the classifier and read the generated integration-test prefix, owning confirmed verification defects. |
+| 1 | `SESSION-STARTUP-READING.3.3.52` | `pending` | Continue the exact integration-test range at lines 1383–2790. |
 
 ## Reading Ledger
 
@@ -4237,7 +4252,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.50` are reconciled and `.3.3.51`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.51` are reconciled and `.3.3.52`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read at baseline; .3.2.42 preserves coverage, and c8759242 reviews/renders the approved parked-coverage delta. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -6996,6 +7011,7 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- `2026-09-08` `.3.3.51`: Exact scopes/source pins and six source-extracted classifier controls pass their expected outcomes; managed scratch is removed. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.50`: Six exact baseline scopes and canonical Knowledge/test-boundary reconciliation pass. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.49`: 202 exact scopes, one explicit empty, 67 decoded JSON files, 68 manifest-owned cases and unchanged grammar mirror pass. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.48`: Exact range and complete mirror identity pass; unchanged .44 Unicode proof applies. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
@@ -7299,3 +7315,4 @@ Each canonical task node owns its exact `Commit` subject and retained completion
 - `2026-09-08`: `.3.3.48` reconciles user-function edge grammar reading; next `.3.3.49`.
 - `2026-09-08`: `.3.3.49` reconciles Terse and legacy corpus reading; next `.3.3.50`.
 - `2026-09-08`: `.3.3.50` reconciles corpus and diagnostic consumer reading; next `.3.3.51`.
+- `2026-09-08`: `.3.3.51` reconciles classifier reading and owns verifier repair .77; next `.3.3.52`.

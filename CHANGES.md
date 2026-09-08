@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.51 - reconcile classifier reading and own failed-child verification repair
+
+Reconcile the classifier suffix and integration prefix: 1,487 lines / 51,804 baseline-identical bytes. Replay six source-extracted controls: a failed child with all pass markers is falsely accepted; an in-memory guard rejects it. Own repair .77, preserve an executable Knowledge probe, qualify historical classifier claims and correct stale return-scope documentation. Focused checks pass; implementation remains unchanged.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.50 - reconcile corpus and diagnostic test-consumer reading
 
 Reconcile six exact scopes: 1,494 lines / 55,681 bytes. Finish VHDL grammar; read corpus, diagnostic-output and duplicate-slot consumers plus the classifier prefix. Clarify current test-route evidence and route the oracle Cargo reverify through managed storage. Focused checks pass; no runtime change or fresh execution is claimed.
