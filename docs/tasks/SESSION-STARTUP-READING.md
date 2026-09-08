@@ -4323,7 +4323,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 ## Current Frontier
 
-Capacity measurement `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.0` is complete; design `.7.1` is next before parent `.7` admission.
+Capacity design `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.1` is complete; `.7.2` awaits the director's narrow exception described in proposed ADR 0108.
 Then resume the owned Dart decomposition; no Dart source reading precedes that capacity admission.
 
 | Order | Leaf | Status | Why next |

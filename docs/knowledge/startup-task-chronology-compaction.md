@@ -2,6 +2,9 @@
 id: startup-task-chronology-compaction
 title: Task chronology retains exact Git and per-node evidence within the bounded collection
 answers:
+  - what exact capacity exception is proposed before Dart reading
+  - why does Dart capacity need an exception to the startup reading gate
+  - does the Knowledge population include INDEX or README
   - why did the expression block task point to the string comparison commit
   - where are the 264 consolidated historical task records
   - what owns capacity for the Dart reading decomposition
@@ -14,7 +17,7 @@ answers:
   - how was startup task compaction checked without losing evidence
   - what owns current task collection pressure cleanup
 date: 2026-09-08
-status: .5/.6 complete; .7.0 measures Dart capacity; .7.1 owns the pending design
+status: .5/.6 and .7.0 complete; .7.1 design recorded; .7.2 awaits director exception
 tags: [continuity, task-tree, history, containment]
 evidence: "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5 checks all 100 batch ordinal/leaf/hash identities against first-parent Git history and all 102 duplicate commit subjects against canonical task nodes; every completion note is retained verbatim beside its node's Commit field. Other task-node fields and stable IDs are identical."
 evidence_update_2026_09_08: "Containment .5 lands at d6f37492 with exact canonical proof. From e288c3af, .6 consolidates 264 rows into 260 nodes across four closed trees, retains six unmatched historical captions, preserves every prior node reference and completion note, and removes 251 lines/8210 bytes overall. A proven wrong-node commit pointer is corrected with its prior text retained. The final ordinary documentation slice uses focused proof; the parent remains open for later Dart capacity .7."
@@ -315,4 +318,76 @@ draft=''.join(projection).encode()
 report={'activation':ACTIVATION,'baseline':BASE,'inventory':{'paths':len(paths),'lines':80296,'bytes':2471305,'groups':len(groups),'range_rows':len(ranges),'fragments':80297,'byte_ranges':2,'range_sha256':digest(ranges),'inventory_sha256':digest([(p,*baseline[p],len(source[p]),hashlib.sha256(source[p]).hexdigest()) for p in paths])},'projection':{'scope_leaf_count':len(groups),'retained_planning_group_allowance':len(conservative),'56_group_control':'one additional existing file-boundary split; same source units and 169 range rows; not reconstruction of historical packing','conservative_scope_leaf_lines':line_count(draft)+11,'scope_leaf_lines':line_count(draft),'scope_leaf_bytes':len(draft),'sha256':hashlib.sha256(draft).hexdigest(),'boundary':'minimum scoped-leaf template only; excludes decomposition, parent closeout, live updates and later repair/evidence growth; no task ownership or reading credit'},'pressure':pressure}
 print(json.dumps(report,indent=2))
 DART_CAPACITY_AUDIT
+```
+
+## Proposed Dart reserve and approval boundary — `.7.1`
+
+Design `.7.1` starts from clean `95915ffb7cf7643d8c3021aeaf83e2141194407d`.
+`docs/decisions/0108-dart-reading-capacity-proposal.md` records the exact alternatives, proposed limits,
+preservation/retrieval obligations, bounded separate Dart tree and `.7.2-.7.4` implementation sequence.
+The proposal remains unapproved. The existing task guard independently enforces the aggregate limits;
+changing it is implementation while the required-reading gate is still open. `.7.2` therefore awaits
+the director's narrow exception. Neither this design nor the inventory authorizes a capacity increase.
+
+The observed interval from clean Perl closeout 611d7b5c through 95915ffb contains Rust reading plus
+intervening continuity and consolidation, not an isolated runtime experiment. It adds 36 Knowledge
+files, 5,865 Knowledge lines and 407,816 bytes, with 108 existing cards modified and none deleted.
+Task Markdown grows by 2,096 lines / 318,581 bytes; the map grows by 529 lines / 151,509 bytes.
+Twice those observed net increases plus explicit setup and template allowances forms the proposed
+admission reserve. It is a chosen margin, not a guarantee that unknown future findings fit.
+
+Historical label correction owned by `.7.1`: the `.7.0` commit body says '1,017 facts plus INDEX'.
+The actual extra member is `docs/knowledge/README.md`. All counts and the six-slot conclusion are correct;
+the source audit below verifies the distinction directly. No fact or index is missing.
+
+Reverify the immutable historical growth and proposal arithmetic without executing parser code:
+
+```bash
+bash tools/project_data_run.sh python3 - <<'DART_RESERVE_AUDIT'
+import subprocess, json
+START='611d7b5c1a53fa8c38fb8fcc17e2304dc21ca63a'
+END='95915ffb7cf7643d8c3021aeaf83e2141194407d'
+def git(*args): return subprocess.check_output(['git',*args])
+def snapshot(ref):
+    paths=git('ls-tree','-r','--name-only',ref).decode().splitlines()
+    paths=[p for p in paths if p=='KNOWLEDGE_MAP.md' or
+           (p.count('/')==2 and p.endswith('.md') and
+            p.startswith(('docs/tasks/','docs/knowledge/')))]
+    assert paths
+    raw=subprocess.check_output(
+        ['git','cat-file','--batch'],input=''.join(ref+':'+p+'\n' for p in paths).encode())
+    data={};offset=0
+    for p in paths:
+        stop=raw.index(b'\n',offset); header=raw[offset:stop].split();
+        assert len(header)==3 and header[1]==b'blob'
+        size=int(header[2]);offset=stop+1;data[p]=raw[offset:offset+size];offset+=size
+        assert raw[offset:offset+1]==b'\n';offset+=1
+    assert offset==len(raw)
+    result={}
+    for name,prefix in [('task_markdown','docs/tasks/'),('knowledge','docs/knowledge/'),('map','KNOWLEDGE_MAP.md')]:
+        values=[v for p,v in data.items() if p.startswith(prefix)]
+        result[name]={'files':len(values),'lines':sum(v.count(b'\n') for v in values),'bytes':sum(map(len,values))}
+    return result,data
+a,_=snapshot(START);b,data=snapshot(END)
+growth={k:{n:b[k][n]-a[k][n] for n in b[k]} for k in b}
+assert growth['task_markdown']=={'files':1,'lines':2096,'bytes':318581}
+assert growth['knowledge']=={'files':36,'lines':5865,'bytes':407816}
+assert growth['map']=={'files':0,'lines':529,'bytes':151509}
+changes=git('diff','--name-status',START,END,'--','docs/knowledge/').decode().splitlines()
+assert {s:sum(x.startswith(s+'\t') for x in changes) for s in ('A','M','D')}=={'A':36,'M':108,'D':0}
+nonfacts=[p for p,v in data.items() if p.startswith('docs/knowledge/') and b'\nanswers:' not in v]
+assert nonfacts==['docs/knowledge/README.md']
+projections={
+ 'task_lines':(79963+616+2*2096+1000,88000),
+ 'task_bytes':(8193445+39000+2*318581+200000,9437184),
+ 'knowledge_files':(1018+2*36+4,1152),
+ 'knowledge_lines':(58998+2*5865+256,72000),
+ 'knowledge_bytes':(4896566+2*407816+65536,6291456),
+ 'map_lines':(17412+2*529+256,20000),
+ 'map_bytes':(5422756+2*151509+65536,8388608),
+}
+assert all(used<=limit for used,limit in projections.values())
+print(json.dumps({'start':a,'end':b,'growth':growth,'nonfacts':nonfacts,'projections':projections},sort_keys=True))
+print('PASS immutable interval, Knowledge membership and proposed reserve arithmetic; no capacity authorization')
+DART_RESERVE_AUDIT
 ```

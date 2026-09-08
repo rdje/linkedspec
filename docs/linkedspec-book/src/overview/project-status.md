@@ -66,8 +66,23 @@ inventory and planning results; Dart source reading and child ownership await ca
 
 At clean 3132596c, the task collection has 60 lines left and the startup file has 562. Even the
 55-group metadata template needs 605 lines before closeout, verification detail or later findings.
-Knowledge has six file slots left. `.7.1` therefore owns the capacity design, preserving stable task
-ownership, unique evidence and explicit limits before defining implementation and admission leaves.
+Knowledge has six file slots left. Design `.7.1` is now recorded in
+proposed ADR `0108` (`docs/decisions/0108-dart-reading-capacity-proposal.md`). It would retain all current
+records and per-file limits, give Dart a separate bounded task-tree, and admit this measured reserve:
+
+| Store | Current limit | Proposed limit |
+| --- | --- | --- |
+| Aggregate task evidence | 80,000 lines / 8 MiB | 88,000 lines / 9 MiB |
+| Knowledge collection | 1,024 files / 64,000 lines | 1,152 files / 72,000 lines |
+
+Knowledge byte limits and generated-index limits would stay unchanged. The proposal uses twice the
+observed net growth across Rust reading and related continuity work, plus explicit setup allowances.
+This is a planning reserve, not a guarantee about unknown future findings.
+
+Implementation `.7.2` is waiting for a narrow director exception: the task-capacity guard must change
+while the full-codebase reading prerequisite is still open. Independent proof `.7.3` and admission
+`.7.4` are also task-owned and pending. Existing limits and the reading gate remain in force.
+Parser/runtime behavior and the parked authoring and format ideas remain at their current status.
 
 README routing-pressure enforcement is closed at `0bcb5a36`, and the behavior-free store architecture landed at
 `dc8dd896`. Live-status migration landed at `99fe03f3` under ADRs `0066` and `0067`; future-task partitioning

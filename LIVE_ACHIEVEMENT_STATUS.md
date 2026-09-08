@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Rust `.3.3.67` closes exact coverage; containment `.7.0` measures Dart demand and `.7.1` owns capacity design.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Containment `.7.1` records proposed Dart capacity; `.7.2` awaits the director's narrow reading-gate exception.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.0` verifies the complete 115-file Dart inventory and bounded packing, measures task/Knowledge capacity, and routes design .7.1. No Dart source reading or decomposition is admitted. Rust canonical closeout 3132596c remains complete.
+- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.1` completes the bounded capacity proposal and owns implementation/recomposition/admission as .7.2-.7.4. Proposed ADR 0108 requires a director exception before infrastructure changes; no capacity or Dart source-reading change is admitted.
 
 ## Next Action
 
-- Design bounded task and Knowledge capacity under `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.1`; define any implementation/admission leaves before changes.
+- Await the director's narrow exception for `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.2` and proposed ADR 0108; then resume its exact canonical implementation scope.
 
 ## Recent Completions
+
+- `2026-09-08` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.1` records the measured capacity proposal, pending exception and exact successor ownership.
 
 - `2026-09-08` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.0` verifies Dart demand and insufficient admission capacity; routes design .7.1.
 
@@ -48,8 +50,6 @@
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.55` completes mutation consumer and checkpoints MCP admission.
 
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.54` completes gap and logical consumer reading.
-
-- `2026-09-08` — `SESSION-STARTUP-READING.3.3.53` completes integration reading and checkpoints gap capture.
 
 ## History
 

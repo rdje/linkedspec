@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-08 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.1 - design bounded Dart capacity and record the approval boundary
+
+The 611d7b5c-to-95915ffb interval is observed net documentation growth, including Rust reading and intervening consolidation, not an isolated experiment or a bound on future findings. Twice that sample plus template/setup reserves fits proposed 88,000 task lines/9 MiB and 1,152 Knowledge files/72,000 lines; member, Knowledge-byte and generated-map ceilings stay unchanged. Guard constants make this a real reading-gate decision before implementation. Existing task identities and evidence remain in place; the future Dart tree bridges startup .3.4. Correct the .7.0 commit-body label: its 1,018 Knowledge members are 1,017 facts plus README, not INDEX; counts were correct.
+
 ## 2026-09-08 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.0 - measure Dart reading demand and documentation capacity
 
 The old 56-group estimate fixed source totals and ceilings but did not preserve executable packing or group membership. The new recipe independently proves all source coordinates, byte identity and 55-group bounds; splitting at an existing file boundary proves a separate valid 56-group control with the same 169 ranges. Activation 3132596c has only 60 aggregate task lines, 562 startup-file lines and six Knowledge file slots available. The projection excludes closeout and future evidence growth, so it cannot be treated as a sufficient reserve. Design .7.1 must resolve both retrieval and growth before migration or Dart admission; this ordinary measurement uses focused proof.

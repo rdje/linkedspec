@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-- Status: `active` / `.7.0` complete; `.7.1` owns capacity design
+- Status: `active` / `.7.1` design complete; `.7.2` awaits a director exception
 - Roadmap lane: `Repository architecture / documentation sustainability`
 - Created: `2026-08-09`
-- Last updated: `2026-09-08` (`.7.0` records measured capacity; design `.7.1` is next)
+- Last updated: `2026-09-08` (`.7.1` records proposed capacity and the explicit reading-gate decision)
 - Owner: repo-local workflow
 
 ## Goal
@@ -316,11 +316,11 @@ or the README `.4` adoption/closeout that installs the guard.
   Status: `active`
   Goal: Admit complete bounded Dart reading ownership within the governed task-store capacity.
   Dependencies: Rust reading closeout `SESSION-STARTUP-READING.3.3.67`; before Dart child ownership/reading begins.
-  Children: `.7.0`, `.7.1`; implementation/admission leaves must be defined by the capacity design before changes.
+  Children: `.7.0-.7.4`; `.7.2` requires the director's narrow capacity/reading-gate exception before implementation.
   Acceptance: Reverify the preserved estimate of 115 files / 56 groups / 169 range rows; measure resulting
     ownership and evidence capacity, preserve every unique record and limit, and split any required infrastructure design before changes.
   Evidence-capacity intake: `.3.3.61` measures 1,017 Knowledge Markdown files / 58,284 lines / 4,850,347 bytes against unchanged 1,024 / 64,000 / 6,291,456 ceilings. Include this evidence store in the capacity review before Dart; no count increase is authorized by this measurement.
-  Verification: `.7.0` verifies all Dart bytes, explicit 55-group packing and a separate 56-group control; measured stores cannot admit the full metadata. `.7.1` owns capacity design before implementation.
+  Verification: `.7.0` verifies exact Dart inventory; `.7.1` records the bounded proposal in ADR 0108. Existing preservation and limit requirements remain in force pending the director's exception; `.7.2-.7.4` are unactivated.
   Commit: `pending`
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.0`
@@ -337,17 +337,44 @@ or the README `.4` adoption/closeout that installs the guard.
   Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.0 - measure Dart reading demand and documentation capacity`
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.1`
-  Status: `pending`
+  Status: `done` (design/proposal only; director exception remains pending)
   Goal: Design sufficient bounded task and Knowledge capacity from the measured admission demand.
   Acceptance: Audit existing retrieval and preservation contracts and alternatives; retain stable ownership,
     unique evidence and explicit limits; define bounded implementation/verification leaves before any migration.
     Inventory measurements alone do not authorize a limit increase or Dart source reading.
-  Verification: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact historical growth/projection audit; policy/guard/retrieval review; unchanged node and implementation identity; task/memory/Knowledge/history/routing checks; mdBook render and staged scope.
+  Canonical trigger: `none` — documentation-only proposed design; no accepted policy, registry, guard or capacity change.
+  Verification: ADR 0108 freezes exact proposed limits, separate bounded Dart ownership, alternatives and .7.2-.7.4 proof. Twice the measured growth plus explicit overhead fits the proposed reserves; no completion guarantee or authorization is inferred. The task guard makes implementation depend on a director exception to the open reading gate. Executable measurement and the .7.0 INDEX/README label correction are retained in the existing Knowledge card.
+  Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.1 - design bounded Dart capacity and record the approval boundary`
+
+- ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.2`
+  Status: `pending` (blocked on director exception; no implementation authorized)
+  Goal: Implement only the approved aggregate capacity and matching task guard from ADR 0108.
+  Dependencies: `.7.1`; explicit director approval to change capacity infrastructure before remaining required reading.
+  Acceptance: Add exact accepted execution ADR; synchronize both route objects and actual guard boundaries; retain every ID, record, member limit and unrelated control.
+  Verification: Planned canonical proof, actual inclusive/overflow boundaries, routing mutations, source preservation and all doctrines; exact staged receipt before commit.
+  Commit: `pending`
+
+- ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.3`
+  Status: `pending`
+  Goal: Independently recompose the committed capacity controls and complete projected Dart reserve.
+  Dependencies: `.7.2` clean canonical commit.
+  Acceptance: Prove exact registry/guard agreement, old task and Knowledge retention, unchanged immutable/FUTURE retrieval, generated-map freshness and resulting aggregate/member headroom.
+  Verification: Planned focused proof; no additional capacity or mechanism change.
+  Commit: `pending`
+
+- ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.4`
+  Status: `pending`
+  Goal: Admit a bounded pending Dart tree and close the capacity prerequisite.
+  Dependencies: `.7.3`; the director-approved scope and complete admission projection.
+  Acceptance: Create pending DART-STARTUP-READING ownership and bridge startup .3.4 without moving existing evidence; align book/index/continuity; no source-reading credit.
+  Verification: Planned canonical milestone proof; clean commit and zero-byte brief before DART-STARTUP-READING.0 decomposition.
   Commit: `pending`
 
 ## Current Frontier
 
-Next: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.1`. Measurement `.7.0` is complete from clean activation 3132596c; design sufficient task and Knowledge capacity before defining any migration. `SESSION-STARTUP-READING.3.4` ownership and source reading await capacity admission. Existing limits and all prior preservation evidence remain unchanged.
+Next: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.2`, blocked on the director's narrow capacity/reading-gate exception for ADR 0108. Design `.7.1` is complete; implementation, independent recomposition `.7.3` and admission `.7.4` remain pending. Existing limits, all prior evidence and the startup reading gate remain in force.
 
 ## Decisions
 

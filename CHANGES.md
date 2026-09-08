@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-08 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.1 - design bounded Dart capacity and record the approval boundary
+
+Record proposed ADR 0108 with exact task/Knowledge aggregate limits, measured growth and explicit reserve arithmetic, a separate bounded Dart task-tree, preservation/retrieval obligations and pending .7.2-.7.4 implementation/proof/admission. The task guard independently enforces current aggregate caps, so implementation requires a director exception while full-codebase reading is incomplete. No limit, registry, guard, parser or runtime changes are made. The book and continuity expose the pending decision; focused verification governs this design-only slice.
+
 ## 2026-09-08 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.0 - measure Dart reading demand and documentation capacity
 
 Reverify all 115 Dart baseline paths / 80,296 lines / 2,471,305 bytes. Explicit UTF-8-safe packing proves 55 groups and 169 coordinate-verified ranges; a distinct 56-group control preserves the earlier planning allowance without inventing its historical grouping. A minimal 605-line scoped-leaf projection exceeds both aggregate task and startup-file headroom. The existing Knowledge card contains the executable inventory/projection/pressure audit; the book, roadmap and continuity pointers route capacity design .7.1. No Dart reading or ownership, limit change or migration is admitted.
