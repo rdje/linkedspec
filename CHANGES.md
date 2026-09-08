@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.47 - reconcile minimal-rule and user-function grammar reading
+
+Reconcile four owned scopes: 249 lines / 53,907 baseline-identical bytes. Finish the minimal-rule grammar and review its input, the user-function stored oracle and grammar prefix. JSON decoding and unchanged canonical mirror checks pass; .44 Unicode evidence remains applicable. No grammar, runtime or public behavior changes.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.46 - reconcile comment-skip and minimal-rule grammar reading
 
 Reconcile four owned scopes: 231 lines / 59,566 baseline-identical bytes. Finish the comment-skip grammar and review its input plus the minimal-rule stored oracle and grammar prefix. Exact mirror identity retains the .44 Unicode freshness proof; JSON and focused continuity checks pass. No runtime, grammar or public behavior changes.
