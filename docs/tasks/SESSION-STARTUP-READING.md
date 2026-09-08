@@ -2039,13 +2039,16 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.54 - complete gap and logical consumer reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.55`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 55: 1,500 lines/fragments, 53,737 bytes.
   Scope: `rust/linkedspec-runtime/tests/map_leaves_mutation_contract.rs` lines 109–732;
     `rust/linkedspec-runtime/tests/mcp_server_rust_admission.rs` lines 1–876.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact two-scope/baseline audit, mutation/MCP assertion-boundary and Knowledge reconciliation; memory, all doctrines, histories and diff.
+  Canonical trigger: `none` — bounded reading checkpoint; runtime, MCP and test behavior unchanged.
+  Verification: Two exact scopes total 1,500 lines / 53,737 baseline-identical bytes; ordered path/kind/range/byte/SHA audit `04ef81d60c4c2b92f2cb119c8bf5dee5c4ade65b14a2aa6196b7518b60af06a6`. Mutation consumer completes typed Unicode syntax, original-shape traversal, detached callback/output values, unrelated effects, scoped identities, composition, typed receiver failures and serde/generated/emitted routes. Its protected statements precede return(value); known final-assignment/substitution exceptions .58/.59 remain outside those controls. The emitted workspace uses a relative dependency and checks child status. MCP prefix correlates six native snapshots/twenty query identities, 35 canonical frames, ten raw/lifecycle inventories, private handle states, capacity/expiry, lowering-only policy and prepared-cancellation fences. Hosts build native indexes before registration; no MCP authoring is present. Suffix privacy/shutdown/fences remain .56-owned; no fresh native run is claimed.
+  Commit: `SESSION-STARTUP-READING.3.3.55 - complete mutation consumer and checkpoint MCP admission reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.56`
   Status: `pending`
@@ -2113,6 +2116,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     `rust/linkedspec-runtime/tests/semantic_index_runtime_observation.rs` lines 1–636;
     `rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs` lines 1–220.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Continuity work: Own the next required engineering-notes rollover, projected at this checkpoint from .55 at 439 lines plus six ordinary four-line records = 463 lines. Recheck actual pressure; preserve exact clean-source history and prior manifest rows. ADR 0105 current capacity is 25 collection files / 24 manifest lines, so any required count admission needs a new indexed exact-limit ADR and canonical staged proof; preserve other ceilings. Follow COMMIT.md if actual pressure triggers earlier.
   Verification: `pending`
   Commit: `pending`
 
@@ -4250,7 +4254,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.55` | `pending` | Complete map-leaves mutation lines 109–732 and read MCP admission lines 1–876. |
+| 1 | `SESSION-STARTUP-READING.3.3.56` | `pending` | Complete MCP admission, dispatch and stdio reading, then begin progressive-span authority tests. |
 
 ## Reading Ledger
 
@@ -4261,7 +4265,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.54` are reconciled and `.3.3.55`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.55` are reconciled and `.3.3.56`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read at baseline; .3.2.42 preserves coverage, and c8759242 reviews/renders the approved parked-coverage delta. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -7020,6 +7024,7 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- `2026-09-08` `.3.3.55`: Two exact scopes and mutation/MCP assertion-boundary reconciliation pass; known .58/.59 and .77 repair limits remain explicit. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.54`: Three exact scopes, both explicit emitted status guards and the bounded codeblock-row skip are verified from unchanged source. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.53`: Two exact scopes, integration EOF and test-route/Knowledge reconciliation pass. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.52`: Exact range/source identity and retained test-boundary comprehension pass. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
@@ -7331,3 +7336,4 @@ Each canonical task node owns its exact `Commit` subject and retained completion
 - `2026-09-08`: `.3.3.52` reconciles integration control and traversal reading; next `.3.3.53`.
 - `2026-09-08`: `.3.3.53` completes integration reading and checkpoints gap capture; next `.3.3.54`.
 - `2026-09-08`: `.3.3.54` completes gap and logical consumer reading; next `.3.3.55`.
+- `2026-09-08`: `.3.3.55` completes mutation consumer and checkpoints MCP admission; next `.3.3.56`.

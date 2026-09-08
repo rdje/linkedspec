@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.55 - complete mutation consumer and checkpoint MCP admission reading
+
+Reconcile mutation-consumer completion and MCP admission prefix: 1,500 lines / 53,737 bytes. Preserve guard-control limits, emitted process-status proof structure and host-owned native index registration. Existing defects and parked authoring ideas retain their owners. Project the required engineering-notes rollover to .61 and own its exact history/capacity review there. Focused continuity checks pass; implementation is unchanged.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.54 - complete gap and logical consumer reading
 
 Reconcile three scopes: 1,449 lines / 54,955 baseline-identical bytes. Finish gap and logical consumers, verify their explicit emitted-process status checks and record the logical codeblock-row limit. Begin mutation syntax reading. Focused continuity checks pass; test and runtime behavior stay unchanged.

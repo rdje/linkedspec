@@ -5,6 +5,7 @@ answers:
   - "which ADR authorizes engineering notes segment 4983"
   - "why does engineering notes history allow 25 files"
   - "what are current engineering notes routing limits after the September 7 startup rollover"
+  - "which startup leaf owns the next projected engineering notes rollover"
 date: 2026-09-07
 status: current
 tags: [documentation, history, rollover, capacity, doctrine]
@@ -33,3 +34,14 @@ another indexed decision; these measurements do not establish future capacity.
 
 Related: [[bounded-change-notes-history-contract]], [[engineering-notes-twenty-fourth-member-capacity]],
 and `docs/decisions/0105-engineering-notes-twenty-fifth-member-capacity.md`.
+
+## September 8 next rollover projection
+
+Startup `.3.3.55` measures the candidate root at 439 lines / 55,736 bytes,
+and the existing 25-file collection at 25,595 lines / 2,744,945 bytes. The manifest
+remains 24 lines / 14,394 bytes. Six further ordinary four-line records would put
+the root at 463 lines, crossing its 90% rollover threshold. Pending `.3.3.61` owns
+the required archive and exact-limit review, with a fresh pressure check at activation.
+This projection authorizes no capacity increase or archive rewrite; any required count
+admission needs a new indexed ADR and exact staged canonical proof under COMMIT.md.
+If actual pressure triggers earlier, the triggering leaf follows that same workflow.

@@ -122,3 +122,10 @@ Receiver activation rejects an absent/already-active identity; write lookup reso
 identity and then to the original binding/attempt span. It does not guard writes by spelling alone.
 The allocator uses saturating u64 increment; this source inventory makes no measured exhaustion claim.
 Existing .58/.59 dispatch gaps remain open. Fresh neutral proof passes 167 base/592 composition mutations.
+
+## September 8 complete public consumer reading
+
+Startup `.3.3.55` completes all 732 lines of the mutation consumer. Its guarded statement
+controls precede return(value), so final-assignment and substitution exceptions .58/.59 remain
+outside those controls. The emitted workspace uses a relative Cargo dependency and asserts
+child-process success. This source checkpoint does not rerun the nine public or three private tests.

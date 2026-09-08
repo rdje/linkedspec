@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1014** facts · **8367** question keys.
+> **1014** facts · **8368** question keys.
 
 ## Questions → fact
 
@@ -7500,6 +7500,7 @@
 - "which staged result policies work privately in Lua" -> [lua-staged-ast-enrichment-current-depth-authority](docs/knowledge/lua-staged-ast-enrichment-current-depth-authority.md) · 2026-08-27
 - "which staged result policies work privately in Perl" -> [perl-staged-ast-enrichment-current-depth-authority](docs/knowledge/perl-staged-ast-enrichment-current-depth-authority.md) · 2026-09-07
 - "which staged result policies work today" -> [general-staged-ast-current-boundary](docs/knowledge/general-staged-ast-current-boundary.md) · 2026-08-25
+- "which startup leaf owns the next projected engineering notes rollover" -> [engineering-notes-twenty-fifth-member-capacity](docs/knowledge/engineering-notes-twenty-fifth-member-capacity.md) · 2026-09-07 · reverify: `perl tools/roll_document_history.pl --surface engineering_notes --check && bash scripts/check_readme_stability.sh && wc -lc DEVELOPMENT_NOTES.md docs/history/development-notes/manifest.jsonl docs/history/development-notes/*.md`
 - "which startup repair owns Perl direct default E finalization" -> [perl-lifecycle-final-value-e-drift](docs/knowledge/perl-lifecycle-final-value-e-drift.md) · 2026-07-08 · reverify: `perl -Iperl -MJSON::PP -MLinkedSpec -e 'my $json=JSON::PP->new->canonical(1)->allow_nonref(1); my $s=qq{Top::\\n I { set(out, \"from_i\"); set(ignored, \"not_a_return\") }\\n /x/\\n E { return(hash(\"out\", out, \"ignored\", ignored)) }\\n}; my $p=LinkedSpec::Get(\\$s, top_rule=>\"Top\", parse_mode=>\"consume\"); my $in=\"x\"; print $json->encode($p->(\\$in)),\"\\n\";'`
 - "which startup tasks own contradictory book prose missed by public checkers" -> [startup-public-teaching-checker-blind-spots](docs/knowledge/startup-public-teaching-checker-blind-spots.md) · 2026-09-06
 - "which storage task follows final residue proof" -> [project-data-final-residue-proof](docs/knowledge/project-data-final-residue-proof.md) · 2026-07-26 · reverify: `rg -n 'PROJECT-DATA-SSD-ROOTING\\.3\\.2|zero deletion targets|post-use census' docs/tasks/PROJECT-DATA-SSD-ROOTING.md && bash tools/test_perl_project_data_storage.sh && bash tools/test_rust_project_data_storage.sh && bash tools/test_dart_project_data_storage.sh && bash tools/test_julia_project_data_storage.sh && bash tools/test_lua_project_data_storage.sh && bash tools/test_tool_project_data_storage.sh && bash tools/project_data_run.sh --list`
@@ -9936,7 +9937,7 @@ _Engineering-notes history has a finite sixteen-member routing capacity_
 ### engineering-notes-twenty-fifth-member-capacity
 _Engineering-notes segment 4983 requires exactly 25 collection files and 24 manifest lines_
 
-- **answers:** which ADR authorizes engineering notes segment 4983 | why does engineering notes history allow 25 files | what are current engineering notes routing limits after the September 7 startup rollover
+- **answers:** which ADR authorizes engineering notes segment 4983 | why does engineering notes history allow 25 files | what are current engineering notes routing limits after the September 7 startup rollover | which startup leaf owns the next projected engineering notes rollover
 - **date:** 2026-09-07 · **status:** current
 - **evidence:** `SESSION-STARTUP-READING.3.3.12 archives exact clean 75ce8db8 source lines 253–458; independent source/blob/SHA-256 and prior-manifest comparison pass. ADR 0105 admits only collection max_files 24→25 and manifest max_lines 23→24.`
 - **reverify:** `perl tools/roll_document_history.pl --surface engineering_notes --check && bash scripts/check_readme_stability.sh && wc -lc DEVELOPMENT_NOTES.md docs/history/development-notes/manifest.jsonl docs/history/development-notes/*.md`

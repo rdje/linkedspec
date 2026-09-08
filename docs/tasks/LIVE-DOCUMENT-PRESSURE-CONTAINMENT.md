@@ -323,7 +323,7 @@ or the README `.4` adoption/closeout that installs the guard.
 
 ## Current Frontier
 
-No eligible containment leaf. Resume `SESSION-STARTUP-READING.3.3.44`; `.7` becomes eligible after Rust `.3.3.67` and before Dart ownership/reading.
+No eligible containment leaf. Continue the current `SESSION-STARTUP-READING` frontier; `.7` becomes eligible after Rust `.3.3.67` and before Dart ownership/reading. Required engineering-notes rollover remains part of the triggering startup leaf; `.3.3.61` owns the current projection.
 
 ## Decisions
 

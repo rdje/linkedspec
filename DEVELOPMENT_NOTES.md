@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.55 - complete mutation consumer and checkpoint MCP admission reading
+
+Mutation guard statements in these tests precede return(value), leaving known final-expression exceptions outside their scope. MCP admission builds native indexes before registration; that host setup does not expose parser construction through MCP. At four lines per ordinary record, .61 reaches the engineering-notes rollover threshold; that leaf owns exact archive preservation and any required canonical capacity admission.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.54 - complete gap and logical consumer reading
 
 The gap and logical emitted harnesses require successful child termination, unlike the reproduced classifier defect. Logical fixture adaptation still skips the codeblock row; later callable proof does not turn that older consumer into exhaustive row coverage.

@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.54` are reconciled and `.3.3.55`–`.3.3.66` plus closeout remain pending.
+  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.55` are reconciled and `.3.3.56`–`.3.3.66` plus closeout remain pending.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.77` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.3.54` reconciles 1,449 lines / 54,955 bytes. Gap and logical consumers are complete; mutation test reading continues in .55. Their emitted harnesses explicitly check child success.
+- `SESSION-STARTUP-READING.3.3.55` reconciles 1,500 lines / 53,737 baseline-identical bytes. Mutation consumer is complete; MCP admission prefix is read with caller-built native index ownership preserved.
 
 ## Next Action
 
-- Resume `SESSION-STARTUP-READING.3.3.55`; containment `.7` follows Rust closeout before Dart ownership/reading.
+- Resume `SESSION-STARTUP-READING.3.3.56`; containment `.7` follows Rust closeout before Dart ownership/reading.
 
 ## Recent Completions
+
+- `2026-09-08` — `SESSION-STARTUP-READING.3.3.55` completes mutation consumer and checkpoints MCP admission.
 
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.54` completes gap and logical consumer reading.
 
@@ -48,8 +50,6 @@
 - `2026-09-08` — `STRUCTURED-TEXT-FORMAT-PROGRAM.0.1` records approved parked language coverage and its evidence matrix.
 
 - `2026-09-08` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5` compacts duplicate chronology with exact retained-note proof.
-
-- `2026-09-08` — `SESSION-STARTUP-READING.3.3.42` completes callable, named-mark and corpus-prefix reading.
 
 ## History
 
