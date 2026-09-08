@@ -15,7 +15,7 @@ answers:
   - "does Rust semantic query expose ActionIR CompiledSpec or generated source"
   - "does Rust semantic query include runtime events"
   - "is Rust semantic introspection admitted after static query"
-date: 2026-09-07
+date: 2026-09-08
 status: current admitted native static/runtime query evaluator
 tags: [rust, semantic-introspection, query, privacy, pagination, budgets, immutability, json]
 evidence: rust/linkedspec-runtime/src/semantic_index/query.rs; rust/linkedspec-runtime/src/semantic_index.rs; rust/linkedspec-runtime/tests/semantic_index_query.rs; FUTURE-PARITY-BACKLOG.10.4.4
@@ -75,3 +75,10 @@ exact fact path. Source identity/span/excerpt/digest are assembled structurally 
 Malformed responses retain the request's after-id value, empty records/relations, complete page and zero cost.
 Fresh neutral proof remains 6/20/128 at 9/0 and 6/0. This is complete source reading plus the neutral checker;
 the earlier native test counts remain dated, and .66/.67 projection repairs remain pending.
+
+## September 8 complete query consumer reading
+
+Startup .3.3.61 reads all 478 query-test lines. The source compares nineteen static typed/raw-neutral
+digests and 26 malformed request boundaries, plus privacy, detached results and deterministic no-execution
+isolation. Existing input-projection repairs .66/.67 remain outside those canonical fixtures. Fresh neutral
+proof is 6/20/128 with rollout 9/0 and admission 6/0; no new native query test run is claimed.

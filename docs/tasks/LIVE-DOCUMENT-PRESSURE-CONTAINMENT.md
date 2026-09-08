@@ -318,6 +318,7 @@ or the README `.4` adoption/closeout that installs the guard.
   Dependencies: Rust reading closeout `SESSION-STARTUP-READING.3.3.67`; before Dart child ownership/reading begins.
   Acceptance: Reverify the preserved estimate of 115 files / 56 groups / 169 range rows; measure resulting
     ownership and evidence capacity, preserve every unique record and limit, and split any required infrastructure design before changes.
+  Evidence-capacity intake: `.3.3.61` measures 1,017 Knowledge Markdown files / 58,284 lines / 4,850,347 bytes against unchanged 1,024 / 64,000 / 6,291,456 ceilings. Include this evidence store in the capacity review before Dart; no count increase is authorized by this measurement.
   Verification: Pending; d6f37492 preserves the estimate. `.6`'s 251-line saving does not establish capacity for the full Dart decomposition.
   Commit: `pending`
 

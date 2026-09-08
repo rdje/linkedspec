@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `f3e9d0b91cbf7012b6ac58d7daa3428639e971f0` — clean reading checkpoint base.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.60 - complete Rust cursor and diagnostic consumer reading`.
+- activation_commit: `165b74dc88cdb86c433807b0a692893a4e3998d6` — clean reading checkpoint base.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.61 - complete semantic consumer reading and roll engineering notes`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: resume `SESSION-STARTUP-READING.3.3.61`; containment `.7` owns later Dart capacity after Rust closeout.
+- next_action: resume `SESSION-STARTUP-READING.3.3.62`; containment `.7` owns later Dart capacity after Rust closeout.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.78` precede mutation setup; `.29` is part of `.5` adoption.
@@ -52,9 +52,9 @@
 - standing_contracts: all durable paths are repo-relative; all project data stays on the repository filesystem;
   README remains bounded; ordinary leaves use focused proof and designated infrastructure/public/push boundaries
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
-- current_engineering_notes_capacity: immutable segment `4983-274cdb2ddc2b` is the twenty-fourth manifest record;
-  ADR `0105` authorizes exactly 25 collection files / 24 manifest lines with every byte and aggregate ceiling
+- current_engineering_notes_capacity: immutable segment `4982-0cca6b887182` is the twenty-fifth manifest record;
+  ADR `0107` authorizes exactly 26 collection files / 25 manifest lines with every byte and aggregate ceiling
   unchanged.
 - current_change_history_capacity: immutable segment `4983` is the twenty-eighth history segment; ADR `0106`
   authorizes exactly 30 collection files / 29 manifest lines / 16,463 manifest bytes; other ceilings remain unchanged.
-- latest_bootstrap_read: 2026-09-08 — roadmap Yes / codebase No / physical mdBook Yes; .3.3.60 completes cursor/diagnostic consumer reading and starts semantic-foundation tests; formal .4 pending; PNT resumes .3.3.61.
+- latest_bootstrap_read: 2026-09-08 — roadmap Yes / codebase No / physical mdBook Yes; .3.3.61 completes semantic consumer reading and performs required engineering-notes rollover; formal .4 pending; PNT resumes .3.3.62.

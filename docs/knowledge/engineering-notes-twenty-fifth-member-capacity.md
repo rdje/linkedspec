@@ -7,7 +7,7 @@ answers:
   - "what are current engineering notes routing limits after the September 7 startup rollover"
   - "which startup leaf owns the next projected engineering notes rollover"
 date: 2026-09-07
-status: current
+status: historical capacity; superseded by engineering-notes-twenty-sixth-member-capacity
 tags: [documentation, history, rollover, capacity, doctrine]
 evidence: "SESSION-STARTUP-READING.3.3.12 archives exact clean 75ce8db8 source lines 253–458; independent source/blob/SHA-256 and prior-manifest comparison pass. ADR 0105 admits only collection max_files 24→25 and manifest max_lines 23→24."
 reverify: "perl tools/roll_document_history.pl --surface engineering_notes --check && bash scripts/check_readme_stability.sh && wc -lc DEVELOPMENT_NOTES.md docs/history/development-notes/manifest.jsonl docs/history/development-notes/*.md"
@@ -45,3 +45,6 @@ the required archive and exact-limit review, with a fresh pressure check at acti
 This projection authorizes no capacity increase or archive rewrite; any required count
 admission needs a new indexed ADR and exact staged canonical proof under COMMIT.md.
 If actual pressure triggers earlier, the triggering leaf follows that same workflow.
+
+The September 8 projection is fulfilled by completed startup .3.3.61: segment 4982 and exact ADR 0107
+capacity are recorded in [[engineering-notes-twenty-sixth-member-capacity]].

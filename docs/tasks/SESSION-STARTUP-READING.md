@@ -2124,7 +2124,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.60 - complete Rust cursor and diagnostic consumer reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.61`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 61: 1,461 lines/fragments, 52,200 bytes.
   Scope: `rust/linkedspec-runtime/tests/semantic_index_foundation.rs` lines 143–269;
     `rust/linkedspec-runtime/tests/semantic_index_query.rs` lines 1–478;
@@ -2132,8 +2132,12 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     `rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs` lines 1–220.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
   Continuity work: Own the next required engineering-notes rollover, projected at this checkpoint from .55 at 439 lines plus six ordinary four-line records = 463 lines. Recheck actual pressure; preserve exact clean-source history and prior manifest rows. ADR 0105 current capacity is 25 collection files / 24 manifest lines, so any required count admission needs a new indexed exact-limit ADR and canonical staged proof; preserve other ceilings. Follow COMMIT.md if actual pressure triggers earlier.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `canonical`
+  Focused checks: Exact reading identities and semantic proof boundaries; immutable rollover/source/manifest reconstruction, exact routing-limit admission, Knowledge, memory, all doctrines, histories and diff.
+  Canonical trigger: Required engineering-notes rollover and finite routing-registry capacity admission; exact staged-candidate receipt before landing.
+  Verification: Four exact scopes total 1,461 lines / 52,200 baseline-identical bytes; ordered path/kind/range/byte/SHA audit `f378dd38e628f46477f1f4fdf2db59ba99fc84863aff46dc383265bfbfa92fe7`. Foundation suffix separates constructor policy from failed-language snapshots, immutable ceilings and cloned diagnostics. Query tests cover 19 static typed/raw-neutral digests, 26 malformed boundaries, privacy and no-execution isolation; .66/.67 remain outside those fixtures. Runtime tests compare eight routes' typed events and separately derive the twentieth query digest, reject malformed/rederived observations, preserve exact panic identity and trace/diagnostic/Unicode neutrality. Independent emitted proof checks value, count, positions and first/last kinds rather than a complete query digest; Knowledge is corrected and its manifest remains .78-owned. Admission prefix freezes 12 roles, six snapshots and exact event/digest helpers. Fresh neutral semantic proof passes 6 groups / 20 queries / 128 mutations / rollout 9/0 / admission 6/0. Mandatory engineering-notes rollover is part of this canonical leaf; exact storage evidence follows below and receipt-bound CI is required before landing.
+  Storage proof: Exact clean 165b74dc lines 213–459 become segment 4982 (247 lines / 25,964 bytes; SHA-256 0cca6b887182b2d3abbd731a906726d05df4ab9916262d29dcef754f5d895b16). Prior manifest rows stay byte-identical; root is 215 lines / 32,427 bytes. ADR 0107 admits only files 25→26 and manifest lines 24→25; all other ceilings remain unchanged. Evidence: docs/knowledge/engineering-notes-twenty-sixth-member-capacity.md.
+  Commit: `SESSION-STARTUP-READING.3.3.61 - complete semantic consumer reading and roll engineering notes`
 
 - ID: `SESSION-STARTUP-READING.3.3.62`
   Status: `pending`
@@ -3161,6 +3165,11 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     snapshots against current all-six semantic/MCP admission. Coordinate .28.4, .36, and semantic repairs .22/.23/.43; do not imply that
     passing admission closes separately owned call projection or error-order defects. Test actual stale
     paragraphs and current backend status claims, retain dated milestones, and render the book.
+    Qualify the Rust .10.4.5 twentieth-response claim in public-api/semantic-introspection.md lines
+    1354–1357 against exact consumer evidence: eight routes compare typed events; direct derivation
+    checks the query digest; independent emitted compilation checks only value/count/positions/first-last
+    kinds. Preserve the canonical expected digest without claiming an unexecuted full emitted query.
+    Evidence: docs/knowledge/rust-semantic-runtime-observation.md, startup .3.3.61.
   Verification: `pending` — descriptor reference lines 96–99 contradict current semantic admission while
     existing public marker/denial checks pass; full handoff reading finds mixed historical/current wording.
   Commit: `pending`
@@ -4282,7 +4291,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.61` | `pending` | Complete semantic foundation/query/runtime-observation reading, begin admission and perform the owned engineering-notes rollover. |
+| 1 | `SESSION-STARTUP-READING.3.3.62` | `pending` | Complete semantic admission, source-boundary aliases and source-emitter prefix through line 858. |
 
 ## Reading Ledger
 
@@ -4293,7 +4302,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.60` are reconciled and `.3.3.61`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.61` are reconciled and `.3.3.62`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read at baseline; .3.2.42 preserves coverage, and c8759242 reviews/renders the approved parked-coverage delta. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -7052,6 +7061,7 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- `2026-09-08` `.3.3.61`: Four exact scopes PASS (1,461 lines / 52,200 bytes); semantic governance PASS 6/20/128 with rollout 9/0 and admission 6/0. Independent emitted assertions are precisely qualified. Mandatory engineering-notes rollover and exact finite capacity admission require staged canonical proof; commit body/receipt retain the completed run. Knowledge, memory, histories, diff and doctrine hooks govern canonical landing.
 - `2026-09-08` `.3.3.60`: Seven exact scopes PASS (1,472 lines / 49,181 bytes). Managed cursor contract PASS at 8 complete / 0 pending, 6 runtime legs and 60 mutations. Reading facts preserve named-selector repair .57 and historical/current cursor boundaries. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.59`: Five exact scopes PASS (1,487 lines / 48,937 bytes). Managed root contract check PASS at 7 complete / 0 pending and 54 mutations. Historical/current Knowledge reconciliation preserves source-inspection versus independently compiled emitted proof. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.58`: Three scope/baseline identities PASS (1,471 lines / 49,296 bytes). Both exact-source manifest construction probes exit 0; relative controls resolve the same runtime crate, original Drop removes both workspaces and managed scratch is removed. Nine absolute writers and five relative source controls are inventoried; actual repair .78 follows required reading. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
@@ -7375,3 +7385,4 @@ Each canonical task node owns its exact `Commit` subject and retained completion
 - `2026-09-08`: `.3.3.58` completes recognition/observation reading and owns emitted-manifest portability repair .78; next `.3.3.59`.
 - `2026-09-08`: `.3.3.59` completes root-selection consumer reading and qualifies historical rollout evidence; next `.3.3.60`.
 - `2026-09-08`: `.3.3.60` completes cursor/diagnostic consumer reading and starts semantic-foundation tests; next `.3.3.61`.
+- `2026-09-08`: `.3.3.61` completes semantic consumer reading and performs required engineering-notes rollover; next `.3.3.62`.

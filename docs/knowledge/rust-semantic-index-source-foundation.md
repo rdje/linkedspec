@@ -64,3 +64,7 @@ Startup .3.3.60 reads semantic_index_foundation.rs 1–142. Source assertions co
 exact digest, detached generated plan, UTF-8/scalar coordinate agreement and rejection of mid-scalar ranges.
 The remaining foundation cases are .3.3.61-owned. This checkpoint is source reading, not a fresh foundation
 or target-parser run; constructor/query ownership remains as described above.
+
+Startup .3.3.61 completes foundation lines 143–269. Constructor policy errors remain separate from
+failed-language snapshots; assertions cover immutable source ceilings and cloned diagnostics. The entire
+269-line foundation consumer is now read, without a fresh native foundation run.

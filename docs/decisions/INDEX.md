@@ -117,6 +117,7 @@ changed* lives in git (layer D), not here.
 | [0104](0104-change-history-twenty-ninth-member-capacity.md) | Change history admits its twenty-ninth bounded member | 2026-09-06 | accepted under `SESSION-STARTUP-READING.3.2.41` | documentation, history, rollover, routing, pressure, continuity, doctrine |
 | [0105](0105-engineering-notes-twenty-fifth-member-capacity.md) | Engineering-notes history admits its twenty-fifth bounded member | 2026-09-07 | accepted under `SESSION-STARTUP-READING.3.3.12` | documentation, history, rollover, routing, pressure, continuity, doctrine |
 | [0106](0106-change-history-thirtieth-member-capacity.md) | Change history admits its thirtieth bounded member | 2026-09-07 | accepted under `SESSION-STARTUP-READING.3.3.38` | documentation, history, rollover, routing, pressure, continuity, doctrine |
+| [0107](0107-engineering-notes-twenty-sixth-member-capacity.md) | Engineering-notes history admits its twenty-sixth bounded member | 2026-09-08 | accepted under `SESSION-STARTUP-READING.3.3.61` | documentation, history, rollover, routing, pressure, continuity, doctrine |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

@@ -15,7 +15,7 @@ answers:
   - "does failed Rust execution emit a completed semantic result"
   - "when does Rust emit the entry result relative to staged AST enrichment"
   - "is Rust semantic introspection admitted after runtime observations"
-date: 2026-09-07
+date: 2026-09-08
 status: current exact runtime observation/query surface; subsequently composed into admitted Rust surface
 tags: [rust, semantic-introspection, runtime, observation, immutability, generated-source, trace, diagnostics]
 evidence: rust/linkedspec-runtime/src/semantic_observation.rs; rust/linkedspec-runtime/src/semantic_index/runtime_projection.rs; rust/linkedspec-runtime/src/engine.rs; rust/linkedspec-runtime/src/runtime.rs; rust/linkedspec-runtime/tests/semantic_index_runtime_observation.rs; FUTURE-PARITY-BACKLOG.10.4.5
@@ -38,11 +38,12 @@ compiles or executes.
 
 The canonical `runtime.input` bytes are `ab\n`. Slot 0/1 appear at scalar positions 1/2, the final result appears at
 position 2, and its exact input identity is
-`input:sha256:a63d8014dba891345b30174df2b2a57efbb65b4f9f09b98f245d1b3192277ece`. The derived
-`runtime_events` response matches digest `36897041c6f71b95b577ce7b38f42d3649c6adffc6c37c069944a90f6eb65887`
-through direct, loaded, reconstructed, generated-plan, source-emitter, traced/untraced, and independently compiled
-emitted-module routes. Seven focused tests also prove malformed rejection, trace/diagnostic neutrality, Unicode
-positions, exact observer panic identity, quiet execution, and no final result after failed entry selection.
+`input:sha256:a63d8014dba891345b30174df2b2a57efbb65b4f9f09b98f245d1b3192277ece`. The direct-observation derivation test checks the
+`runtime_events` response against digest `36897041c6f71b95b577ce7b38f42d3649c6adffc6c37c069944a90f6eb65887`.
+A separate route test requires exact typed event equality across eight direct, loaded, reconstructed,
+generated-plan and traced/diagnostic combinations. The independently compiled emitted module checks a narrower
+result/event projection, described below. The consumer also covers malformed rejection, trace/diagnostic
+neutrality, Unicode positions, exact observer panic identity, quiet execution and failed-entry observations.
 
 This observation leaf did not itself promote Rust. `FUTURE-PARITY-BACKLOG.10.4.6` subsequently composes it with
 the source/static/calls/query owners through one exact consumer and advances only Rust to rollout 3/9 and native
@@ -81,3 +82,24 @@ selected-slot fields from final succeeded-result fields; final identity hashes t
 lowercase SHA-256. The synchronous FnMut sink is shared by Rc/RefCell clones, compares callback allocation
 identity, and hides callback details in Debug. Emit invokes the borrowed callback directly, with no error
 translation; this is source confirmation, not a new native panic/reentrancy execution result.
+
+## September 8 complete runtime consumer reading and evidence correction
+
+Startup .3.3.61 reads all 636 consumer lines, unchanged from the baseline. The prior claim of complete
+query-digest verification in the independent emitted module was too broad. Its generated assertions at
+517–524 require value ["A", "B"], exactly three events, positions 1/2/2, first kind RegexSlotSelected and
+last kind RuleResult. They do not compare the middle event kind, complete event fields, input digest or a
+SemanticIndex query response. Its direct and traced entrypoints run with trace disabled; child process
+success is checked separately. Full typed-event equality and the twentieth query digest belong to the
+other tests described above. No new runtime execution is inferred from this source-level correction.
+
+The remaining consumer cases reject malformed/rederived observations, preserve exact Arc panic identity,
+trace/diagnostic/Unicode neutrality and omit a final event for failed selection or entry-finalizer failure.
+Parent success before staged enrichment remains the earlier qualified boundary. The authored Cargo manifest
+is one of the nine absolute writers owned by [[rust-emitted-cargo-manifest-path-portability-gap]].
+Fresh neutral proof passes 6 fixture groups / 20 queries / 128 mutations, rollout 9/0 and admission 6/0.
+
+The mdBook Rust authority-map paragraph at public-api/semantic-introspection.md 1354–1357 carries
+the corresponding broad twentieth-response wording. Existing public alignment repair
+SESSION-STARTUP-READING.41.3 owns its precise correction and recurrence after .3/.4/.5; this reading
+checkpoint records that dependency instead of activating public implementation ahead of required reading.

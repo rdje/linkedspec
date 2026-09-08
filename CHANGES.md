@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.61 - complete semantic consumer reading and roll engineering notes
+
+Completed Rust checkpoint `.3.3.61`: 1,461 lines / 52,200 baseline-identical bytes and semantic governance 6/20/128, rollout 9/0, admission 6/0. Corrected the independent emitted-module digest overclaim. The scheduled engineering-notes rollover preserves exact source history with a separately indexed finite count admission; canonical staged verification is required before landing.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.60 - complete Rust cursor and diagnostic consumer reading
 
 Completed Rust checkpoint `.3.3.60`: 1,472 lines / 49,181 baseline-identical bytes. Reconciled cursor/diagnostic consumers, scalar numeric coverage and semantic-foundation prefix. Fresh cursor governance passes 8 complete / 0 pending with 60 mutations. Qualified historical normalization handoffs and retained selector repair `.57`; next `.61` owns semantic reading and scheduled notes rollover.

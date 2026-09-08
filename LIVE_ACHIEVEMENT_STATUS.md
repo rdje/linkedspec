@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.60` are reconciled and `.3.3.61`–`.3.3.66` plus closeout remain pending.
+  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.61` are reconciled and `.3.3.62`–`.3.3.66` plus closeout remain pending.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.78` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.3.60` completes root-route/cursor/diagnostic consumers and semantic-foundation prefix (1,472 lines / 49,181 baseline-identical bytes). Cursor governance passes 8 complete / 0 pending and 60 mutations; existing selector repair `.57` remains open. `.61` next owns semantic reading plus the scheduled engineering-notes rollover.
+- `SESSION-STARTUP-READING.3.3.61` completes foundation/query/runtime-observation consumers and admission prefix (1,461 lines / 52,200 baseline-identical bytes). Semantic governance passes 6/20/128, rollout 9/0 and admission 6/0. Corrected the independent emitted digest overclaim; mandatory notes rollover is receipt-bound canonical work.
 
 ## Next Action
 
-- Resume `SESSION-STARTUP-READING.3.3.61`; containment `.7` follows Rust closeout before Dart ownership/reading.
+- Resume `SESSION-STARTUP-READING.3.3.62`; containment `.7` follows Rust closeout before Dart ownership/reading.
 
 ## Recent Completions
+
+- `2026-09-08` — `SESSION-STARTUP-READING.3.3.61` completes semantic consumer reading and performs required engineering-notes rollover.
 
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.60` completes cursor/diagnostic consumer reading and starts semantic-foundation tests.
 
@@ -48,8 +50,6 @@
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.47` reconciles minimal-rule and user-function reading.
 
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.46` reconciles comment-skip and minimal-rule reading.
-
-- `2026-09-08` — `SESSION-STARTUP-READING.3.3.45` reconciles label boundaries and edge grammar reading.
 
 ## History
 
