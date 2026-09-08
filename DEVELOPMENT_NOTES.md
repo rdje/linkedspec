@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.46 - reconcile comment-skip and minimal-rule grammar reading
+
+The comment-skip input starts with a comment before Top; spec_file dispatch skips that token, and the minimal-rule stored oracle contains one paragraph with rule and regex nodes. The completed grammar suffix preserves complete-line lifecycle precedence, standalone-I normalization, variadic signatures and capture marker/directive nodes. This checkpoint records source comprehension and stored evidence without claiming a new parser execution.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.45 - reconcile self-hosted labels and edge grammar reading
 
 Unicode label membership and physical token boundaries are separate constraints: line anchoring and trailing boundaries prevent valid prefixes or suffixes from silently replacing invalid labels. Headers keep top and mode distinct; named regex slots preserve slot_name, while edge forms select target(s), code or fluent/raw fields. Existing self-hosted-rule-label-physical-boundaries Knowledge remains the causal owner. No runtime or public behavior changes.

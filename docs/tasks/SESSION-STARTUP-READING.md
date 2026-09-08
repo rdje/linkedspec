@@ -1724,15 +1724,18 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.45 - reconcile self-hosted labels and edge grammar reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.46`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 46: 231 lines/fragments, 59,566 bytes.
   Scope: `rust/linkedspec-runtime/tests/corpus/spec_spec_comment_skip/input.spec` lines 170–226;
     `rust/linkedspec-runtime/tests/corpus/spec_spec_comment_skip/input.txt` lines 1–3;
     `rust/linkedspec-runtime/tests/corpus/spec_spec_minimal_rule/expected.json` lines 1–14;
     `rust/linkedspec-runtime/tests/corpus/spec_spec_minimal_rule/input.spec` lines 1–157.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Four exact owned-range/baseline identities, fixture JSON and unchanged canonical mirrors; Knowledge, memory, all doctrines, histories and diff.
+  Canonical trigger: `none` — bounded reading checkpoint; grammar and runtime unchanged.
+  Verification: All four owned scopes match the baseline: 231 lines / 59,566 bytes; ordered audit SHA-256 `f6593863e1e3914a4a4a52b06bd4c99f8e0d7b24d8ddfe7d5a4d57310894c67f`. Comment-skip grammar is complete through EOF; minimal-rule grammar is read through blind-block dispatch. Comment input and decoded minimal-rule oracle preserve Top plus anonymous x-regex nodes; the leading comment is skipped by spec_file dispatch. The suffix preserves bare/lifecycle precedence, standalone-I normalization, variadic signatures and marker/directive nodes. Both complete grammar mirrors retain .44 canonical identity and its Unicode proof. Stored oracle inspection is not a fresh parser execution.
+  Commit: `SESSION-STARTUP-READING.3.3.46 - reconcile comment-skip and minimal-rule grammar reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.47`
   Status: `pending`
@@ -4211,7 +4214,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.46` | `pending` | Complete the comment-skip grammar suffix and continue the minimal-rule mirror. |
+| 1 | `SESSION-STARTUP-READING.3.3.47` | `pending` | Complete the minimal-rule grammar suffix and continue the user-function mirror. |
 
 ## Reading Ledger
 
@@ -4222,7 +4225,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.45` are reconciled and `.3.3.46`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.46` are reconciled and `.3.3.47`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read at baseline; .3.2.42 preserves coverage, and c8759242 reviews/renders the approved parked-coverage delta. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -6981,6 +6984,7 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- `2026-09-08` `.3.3.46`: Four exact scopes, JSON decode and unchanged mirror identities pass; .44 Unicode proof remains applicable. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.45`: exact range and complete canonical mirror identity pass; unchanged .44 Unicode proof applies. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.44`: four exact baseline scopes and JSON decode pass; all grammar mirrors match and the Unicode contract passes. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.43`: exact 53-scope baseline audit, 18 JSON decodes/105 unique manifest cases, twelve paired Perl Get observations and exact callee lowering; Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
@@ -7274,3 +7278,4 @@ Each canonical task node owns its exact `Commit` subject and retained completion
 
 - `2026-09-08`: `.3.3.44` reconciles self-hosted grammar reading and four-mirror freshness; next `.3.3.45`.
 - `2026-09-08`: `.3.3.45` reconciles physical label boundaries and edge grammar fields; next `.3.3.46`.
+- `2026-09-08`: `.3.3.46` reconciles comment-skip and minimal-rule reading; next `.3.3.47`.

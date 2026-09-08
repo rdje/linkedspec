@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `97792240fddb8fa72a3c07a945cef4396720b73d` — clean grammar-reading checkpoint base.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.45 - reconcile self-hosted labels and edge grammar reading`.
+- activation_commit: `8f4a8793ebae6d0495587372570186828dbce15a` — clean reading checkpoint base.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.46 - reconcile comment-skip and minimal-rule grammar reading`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: resume `SESSION-STARTUP-READING.3.3.46`; containment `.7` owns later Dart capacity after Rust closeout.
+- next_action: resume `SESSION-STARTUP-READING.3.3.47`; containment `.7` owns later Dart capacity after Rust closeout.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.76` precede mutation setup; `.29` is part of `.5` adoption.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4983` is the twenty-eighth history segment; ADR `0106`
   authorizes exactly 30 collection files / 29 manifest lines / 16,463 manifest bytes; other ceilings remain unchanged.
-- latest_bootstrap_read: 2026-09-08 — roadmap Yes / codebase No / physical mdBook Yes; .3.3.45 reconciles label/edge grammar reading; formal .4 pending; PNT resumes .3.3.46.
+- latest_bootstrap_read: 2026-09-08 — roadmap Yes / codebase No / physical mdBook Yes; .3.3.46 reconciles comment-skip and minimal-rule reading; formal .4 pending; PNT resumes .3.3.47.

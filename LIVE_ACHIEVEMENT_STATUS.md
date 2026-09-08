@@ -5,20 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.45` are reconciled and `.3.3.46`–`.3.3.66` plus closeout remain pending.
+  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.46` are reconciled and `.3.3.47`–`.3.3.66` plus closeout remain pending.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.76` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.3.45` reconciles the comment-skip grammar middle: 44 lines / 60,931 baseline-identical bytes.
-- Label boundaries and edge node fields are understood; complete mirror identity retains the .44 freshness proof.
+- `SESSION-STARTUP-READING.3.3.46` reconciles four scopes: 231 lines / 59,566 baseline-identical bytes. Comment-skip grammar is complete; the minimal-rule prefix and stored oracle are understood.
 
 ## Next Action
 
-- Resume `SESSION-STARTUP-READING.3.3.46`; containment `.7` follows Rust closeout before Dart ownership/reading.
+- Resume `SESSION-STARTUP-READING.3.3.47`; containment `.7` follows Rust closeout before Dart ownership/reading.
 
 ## Recent Completions
+
+- `2026-09-08` — `SESSION-STARTUP-READING.3.3.46` reconciles comment-skip and minimal-rule reading.
 
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.45` reconciles label boundaries and edge grammar reading.
 
@@ -49,8 +50,6 @@
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.35` completes source authority/loader and reads staged function projection with exact scalar-source boundaries.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.34` completes emitter reading and owns generated literal and recognition parse adapter repairs .71/.72.
-
-- `2026-09-07` — `SESSION-STARTUP-READING.3.3.33` completes static/event reading and owns grouped source/selector correlation plus complete parser remainder .70.
 
 ## History
 
