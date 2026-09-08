@@ -22,7 +22,7 @@ answers:
   - "how must a Dart next action block be owned after bare blocks became lifecycle I"
   - "can lifecycle fluent calls have whitespace before their argument list"
   - "why did Dart and Julia reject I.return ([])"
-date: 2026-09-07
+date: 2026-09-08
 status: implemented on all five backends and six runtime routes under FUTURE-PARITY-BACKLOG.15.1-.2
 tags: [dsl, lifecycle, codeblock, parser, perl, rust, dart, julia, lua, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.15.0 ratified ADR 0094 from the five-backend audit. `.15.1` adds one neutral explicit/bare twin contract to Perl/Rust and repairs Rust duplicate-I order. `.15.2` makes Dart, Julia, PUC Lua, and LuaJIT emit lifecycle I directly; preserves exact source/opening line and explicit-twin ActionIR semantics; proves native, reconstructed, emitted/generated, ownership, malformed, and inert legacy-plain paths; and gives specs/spec.spec a standalone production plus reserved lifecycle precedence. Dart and Julia retain a post-lifecycle raw suffix only when it is not a recognized rule header, preserving established typed action-diagnostic precedence. All explicit/bare duplicate combinations return first-second in authored order. The exact recurring gate covers five backends, six runtime routes, self-hosting, generated/capability/language ledgers, and public no-drift."
@@ -112,3 +112,21 @@ semantics do not change for this repair.
 
 Related: [[rule-local-cursor-and-bare-edge-contract]], [[spec-lifecycle-retv-order]],
 [[terse-lifecycle-value-drop-return-channel]], and [[FUTURE-PARITY-BACKLOG]].
+
+## September 8 Rust consumer boundaries
+
+`SESSION-STARTUP-READING.3.3.64/.65` reconciles all 470 lines of
+`rust/linkedspec-runtime/tests/standalone_lifecycle_block_contract.rs`. Placement
+and provenance twins compare AST/ActionIR/compiled forms; duplicate combinations
+execute through native engines and reconstructed compiled state. Ownership and
+malformed twins retain their earlier brace owners and diagnostic fields; legacy
+plain nodes stay inert, and programmatic lifecycle interiors remain balance-checked.
+
+The final generated-route test inspects emitted source for identity/contract text,
+validates the logical plan and executes the public generated-plan helper plus a
+native engine. It does not independently compile an emitted Rust module. This is
+the Rust target's precise boundary within the earlier multi-backend evidence;
+other backend carrier results are unchanged. Fresh neutral checking passes nine
+placements, four duplicate forms, six ownership cases, three malformed twins and
+fourteen mutations. No new native or six-runtime matrix run is claimed, and the
+separately measured Rust lexical repairs `.52`–`.54` remain pending.

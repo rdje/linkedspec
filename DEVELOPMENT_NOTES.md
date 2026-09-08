@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.65 - complete lifecycle trace and typed-source consumer reading
+
+Generated/emitted terminology needs route-level evidence: the lifecycle and trace targets inspect emitted text while executing native/reconstructed or generated helpers; the staged target from .64 independently compiles children. Typed-source catalog completeness proves 92+7 identities, while three fixture programs exercise the runtime routes and four private errors constrain values. Keep these scopes and historical/native counts explicit in existing bounded cards; the nearly-full global rollout card is not expanded. Unicode casing's 91-line test uses direct, helper, receiver and array forms; current regeneration adds no new native execution claim.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.64 - complete staged recursive and carrier consumer reading
 
 The recursive consumer tests complete breadth-first depths, exact chain identity/decrease, shared resources, expiring callbacks and original-source rebasing. Carrier proof separately compiles an inert marker program and a host-seeded program; each child must succeed before JSON comparison, and four routes compare two runs with fresh cache/counters and detached results. This evidence remains fixture-bound and does not close .73–.75/.78. Standalone helpers include native Engine execution; its .65 suffix must distinguish native/reconstructed/generated-helper execution from emitted-text inspection.

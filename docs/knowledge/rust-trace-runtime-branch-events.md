@@ -11,11 +11,11 @@ answers:
   - "does Rust trace gap-aware action-edge child dispatch"
   - "why was child_dispatch missing from Rust gap capture traces"
   - "what did TRACE-OBSERVABILITY.5.2 repair"
-date: 2026-08-26
+date: 2026-09-08
 status: current
 tags: [trace, observability, rust, parity, runtime, task-tree, mdbook]
 evidence: "rust/linkedspec-runtime/src/{engine.rs,runtime.rs}; rust/linkedspec-runtime/tests/trace_controls.rs; docs/linkedspec-book/src/public-api/trace-api.md; docs/tasks/TRACE-OBSERVABILITY.md .4.4"
-reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test trace_controls"
+reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test trace_controls"
 ---
 
 `TRACE-OBSERVABILITY.4.4` adds Rust runtime trace events while preserving default-quiet entrypoints and traced/
@@ -41,5 +41,16 @@ after the original trace instrumentation. Those seams preserved accumulator and 
 the existing `child_dispatch` / `child_dispatch_result` pair. `.5.2` makes the normal child wrapper delegate to the
 entry-slot seam in each executor and moves the unchanged event lifecycle into that single local owner. Both no-slot
 and gap-aware entry therefore emit exactly one pair under their existing `rust_runtime:engine:*` or
-`rust_runtime:generated_plan:*` namespace. Complete trace controls pass 11/11 with unchanged traced/untraced
-results; Rust can again claim parity for the documented external trace capability contract.
+`rust_runtime:generated_plan:*` namespace. At the .5.2 closeout, the then-current trace controls passed 11/11 with unchanged
+traced/untraced results and restored the documented external trace capability claim.
+
+## September 8 trace-consumer reading
+
+`SESSION-STARTUP-READING.3.3.65` reconciles all 477 lines of
+`rust/linkedspec-runtime/tests/trace_controls.rs`. The current source contains twelve
+tests, including the later zero-regex-root target-selection control. It compares
+quiet parse/validation/compilation/engine/generated-helper outputs, validates sink
+setup, and checks enabled core/runtime/generated-plan and staged-dispatch events.
+The emitted-source test checks exported trace entry-point text; it does not compile
+an independent emitted module. Eleven-test results above remain historical; this
+reading checkpoint does not claim a fresh execution of the twelve-test target.

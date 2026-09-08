@@ -8,11 +8,11 @@ answers:
   - how does Perl generated source load Unicode casing
   - do lowercase_each uppercase_each use pinned Unicode data
   - which LinkedSpec variants already consume Unicode 17 casing
-date: 2026-09-07
+date: 2026-09-08
 status: current
 tags: [unicode, casing, perl, rust, generation, actionir, runtime, parity]
 evidence: "LUA-BACKEND-PARITY.4.3.2.1.2.2 extends unicode_case/generate_unicode_case_contract.py and tools/check_unicode_case_contract.py with byte-compared perl/LinkedSpec/UnicodeCaseMapping.pm and rust/linkedspec-runtime/src/unicode_case_mapping.rs. Perl ActionIR owners and generated-source preamble load the module; scalar and array lowering call it. Rust engine scalar and both array seams call its module. Twelve fixtures pass direct/helper/receiver/array paths; Perl focused 52 and phase0 1..1030 pass; the full Rust runtime package passes; authoritative local CI passes CLI 61x2 and phase0 1..1030. Source audit finds no lc/uc in Perl ActionIR and no to_lowercase/to_uppercase in Rust runtime casing paths."
-reverify: "bash tools/run_python_project_data.sh tools/check_unicode_case_contract.py && prove -q -Iperl t/unicode_case_mapping.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test unicode_case_mapping"
+reverify: "bash tools/run_python_project_data.sh tools/check_unicode_case_contract.py && bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/unicode_case_mapping.t && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test unicode_case_mapping"
 ---
 
 ## Fact
@@ -136,3 +136,15 @@ This agrees with the previously completed Perl evaluator reading.
 Fresh managed regeneration again byte-compares neutral JSON and all five backend modules and passes
 twelve independent neutral fixtures. This is generation/neutral-evaluator verification; this leaf's
 separate final canonical gate must provide its own exact receipt before batch landing.
+
+## September 8 Rust casing-consumer reading
+
+`SESSION-STARTUP-READING.3.3.65` reconciles the complete 91-line
+`rust/linkedspec-runtime/tests/unicode_case_mapping.rs` consumer. It pins contract,
+Unicode version and digest, checks direct lower/upper results for all twelve
+fixtures, and compiles a grammar exercising function, receiver and array-mutation
+forms against the same expected values. This target does not independently compile
+an emitted Rust parser. Fresh managed checking regenerates the neutral artifact and
+all five backend modules byte-identically and passes twelve neutral fixtures with
+1563/1581 mappings and 158/464 property ranges. That is generation/neutral proof;
+older Perl/Rust execution counts are not refreshed by this reading checkpoint.

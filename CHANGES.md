@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.65 - complete lifecycle trace and typed-source consumer reading
+
+Reconcile five baseline-identical scopes: 1,500 lines / 51,021 bytes. Preserve lifecycle native/reconstructed/generated-helper execution while qualifying emitted text inspection; date the older eleven-test trace result against twelve current source tests. Typed-source Knowledge separates exact 92+7 catalog equality from executed helper fixtures, and Unicode casing retains managed generation versus dated runtime proof. Existing lexical repairs .52–.54 remain pending; label suffix is .66-owned. Fresh typed 14/0/231, Unicode twelve-fixture/five-module byte comparison and lifecycle fourteen-mutation proof pass with focused continuity checks.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.64 - complete staged recursive and carrier consumer reading
 
 Reconcile 1,491 lines / 55,771 baseline-identical bytes: complete recursive staged-AST tests and four fresh-authority carriers, then begin standalone-lifecycle helper/placement tests. Both independently compiled staged programs check child success; .78 still owns their absolute Cargo dependency, and .73–.75 runtime gaps remain open. Knowledge qualifies historical RED/rollout records, retains the completed .61 native result and uses managed locked/offline reverify commands. Fresh neutral staged proof passes 9 legs / 123 base / 129 public mutations; exact CI registrations and focused continuity checks govern landing.
