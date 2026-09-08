@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.60 - complete Rust cursor and diagnostic consumer reading
+
+Cursor fixtures prove family-derived policies within their declared cases; nonnumeric AND selectors remain outside those exclusions. Diagnostic tests preserve effective/source/deep-child identities, while the semantic prefix checks source ownership and UTF-8 boundaries. These are source-reading conclusions plus neutral governance, without fresh native execution.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.59 - complete Rust root-selection consumer reading
 
 Root selection preserves immutable authored identity while execution chooses explicit selector, first marker or first rule. The reviewed emitted-labelled roles inspect source or exercise generated-plan adapters; independent compilation remains a separate consumer. Historical intermediate rollout results stay dated; current neutral proof is 7/0 with 54 mutations.

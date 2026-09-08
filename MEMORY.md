@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `44b94c0536e1219ba0f2077c91789c19e5abbfc4` — clean reading checkpoint base.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.59 - complete Rust root-selection consumer reading`.
+- activation_commit: `f3e9d0b91cbf7012b6ac58d7daa3428639e971f0` — clean reading checkpoint base.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.60 - complete Rust cursor and diagnostic consumer reading`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: resume `SESSION-STARTUP-READING.3.3.60`; containment `.7` owns later Dart capacity after Rust closeout.
+- next_action: resume `SESSION-STARTUP-READING.3.3.61`; containment `.7` owns later Dart capacity after Rust closeout.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.78` precede mutation setup; `.29` is part of `.5` adoption.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4983` is the twenty-eighth history segment; ADR `0106`
   authorizes exactly 30 collection files / 29 manifest lines / 16,463 manifest bytes; other ceilings remain unchanged.
-- latest_bootstrap_read: 2026-09-08 — roadmap Yes / codebase No / physical mdBook Yes; .3.3.59 completes root-selection consumer reading and qualifies historical rollout evidence; formal .4 pending; PNT resumes .3.3.60.
+- latest_bootstrap_read: 2026-09-08 — roadmap Yes / codebase No / physical mdBook Yes; .3.3.60 completes cursor/diagnostic consumer reading and starts semantic-foundation tests; formal .4 pending; PNT resumes .3.3.61.

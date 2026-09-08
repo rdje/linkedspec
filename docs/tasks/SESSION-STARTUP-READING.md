@@ -2107,7 +2107,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.59 - complete Rust root-selection consumer reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.60`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 60: 1,472 lines/fragments, 49,181 bytes.
   Scope: `rust/linkedspec-runtime/tests/root_rule_selection_routes.rs` lines 438–472;
     `rust/linkedspec-runtime/tests/rule_local_cursor_contract.rs` lines 1–572;
@@ -2117,8 +2117,11 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     `rust/linkedspec-runtime/tests/scalar_numeric_contract.rs` lines 1–32;
     `rust/linkedspec-runtime/tests/semantic_index_foundation.rs` lines 1–142.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact baseline/scope identities, cursor governance and consumer proof-boundary reconciliation; Knowledge, memory, all doctrines, histories and diff.
+  Canonical trigger: `none` — reading and factual continuity; source, contract and public behavior unchanged.
+  Verification: Seven exact scopes total 1,472 lines / 49,181 baseline-identical bytes; ordered path/kind/range/byte/SHA audit `410b4ae6ee1c9a0af971137008c6f0ab6f73122f7fc9fc2ad6c8b743e80e2b28`. Root-route suffix preserves effective failure attribution and authored descriptor identity. Cursor consumers cover 15 exact roles / 8 diagnostic-removal identities, 36 family forms / 8 child-boundary cases / 2 structural replacements, native/serde/loaded traces, minimal generated family plan and retired override absence; existing nonnumeric AND-selector repair .57 remains outside numeric exclusions. Historical normalization test naming is qualified. Runtime diagnostics cover structured/source/deep-child identity, unknown versus zero-rule contexts, omitted absent fields and legacy compatibility. Scalar numeric source pins 55 neutral cases. Semantic-foundation prefix covers source ownership/digest, detached plan, UTF-8/scalar mapping and mid-scalar rejection; suffix .61 remains. Fresh cursor governance passes 8 complete / 0 pending, 6 runtime legs, 74 migration files, 30 public documents, 28 denials and 60 mutations. No fresh native or emitted execution is claimed.
+  Commit: `SESSION-STARTUP-READING.3.3.60 - complete Rust cursor and diagnostic consumer reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.61`
   Status: `pending`
@@ -4279,7 +4282,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.60` | `pending` | Complete root-route suffix, cursor consumers, runtime diagnostics and the semantic-foundation prefix. |
+| 1 | `SESSION-STARTUP-READING.3.3.61` | `pending` | Complete semantic foundation/query/runtime-observation reading, begin admission and perform the owned engineering-notes rollover. |
 
 ## Reading Ledger
 
@@ -4290,7 +4293,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.59` are reconciled and `.3.3.60`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.60` are reconciled and `.3.3.61`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read at baseline; .3.2.42 preserves coverage, and c8759242 reviews/renders the approved parked-coverage delta. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -7049,6 +7052,7 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- `2026-09-08` `.3.3.60`: Seven exact scopes PASS (1,472 lines / 49,181 bytes). Managed cursor contract PASS at 8 complete / 0 pending, 6 runtime legs and 60 mutations. Reading facts preserve named-selector repair .57 and historical/current cursor boundaries. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.59`: Five exact scopes PASS (1,487 lines / 48,937 bytes). Managed root contract check PASS at 7 complete / 0 pending and 54 mutations. Historical/current Knowledge reconciliation preserves source-inspection versus independently compiled emitted proof. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.58`: Three scope/baseline identities PASS (1,471 lines / 49,296 bytes). Both exact-source manifest construction probes exit 0; relative controls resolve the same runtime crate, original Drop removes both workspaces and managed scratch is removed. Nine absolute writers and five relative source controls are inventoried; actual repair .78 follows required reading. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.57`: Four exact scopes and progressive/punctuation/recognition proof-boundary reconciliation pass; the known contains arity exception is explicit. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
@@ -7370,3 +7374,4 @@ Each canonical task node owns its exact `Commit` subject and retained completion
 - `2026-09-08`: `.3.3.57` completes progressive and punctuation consumer reading; next `.3.3.58`.
 - `2026-09-08`: `.3.3.58` completes recognition/observation reading and owns emitted-manifest portability repair .78; next `.3.3.59`.
 - `2026-09-08`: `.3.3.59` completes root-selection consumer reading and qualifies historical rollout evidence; next `.3.3.60`.
+- `2026-09-08`: `.3.3.60` completes cursor/diagnostic consumer reading and starts semantic-foundation tests; next `.3.3.61`.

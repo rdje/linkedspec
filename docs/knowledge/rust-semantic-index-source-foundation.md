@@ -10,7 +10,7 @@ answers:
   - "how is the Rust semantic source digest computed"
   - "where is the Rust generated semantic plan retained"
   - "what happens when Rust semantic source validation fails"
-date: 2026-09-07
+date: 2026-09-08
 status: current
 tags: [rust, semantic-introspection, source-map, utf8, diagnostics, generated-source, privacy]
 evidence: rust/linkedspec-runtime/src/semantic_index.rs; rust/linkedspec-runtime/tests/semantic_index_foundation.rs; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.4.1
@@ -57,3 +57,10 @@ the target parser. Queries consume cloned projections; observation derivation re
 Identity/span/text accessors check their respective immutable source ceilings; exact lookup rejects empty needles
 and validates its starting byte boundary. These are source boundaries, not a full fresh foundation test run.
 Fresh neutral semantic proof passes six fixture groups/20 queries/128 mutations with rollout 9/0 and admission 6/0.
+
+## September 8 foundation consumer prefix
+
+Startup .3.3.60 reads semantic_index_foundation.rs 1–142. Source assertions cover an owned source copy,
+exact digest, detached generated plan, UTF-8/scalar coordinate agreement and rejection of mid-scalar ranges.
+The remaining foundation cases are .3.3.61-owned. This checkpoint is source reading, not a fresh foundation
+or target-parser run; constructor/query ownership remains as described above.
