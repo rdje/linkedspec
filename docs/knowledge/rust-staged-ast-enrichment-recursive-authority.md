@@ -16,14 +16,14 @@ answers:
   - "is Rust general staged AST enrichment admitted"
   - "why does the Rust staged AST module still allow dead_code"
   - "what is FUTURE-PARITY-BACKLOG 14.7.4.3"
-date: 2026-09-07
+date: 2026-09-08
 status: current private recursive authority, admitted through FUTURE-PARITY-BACKLOG.14.7.4.4 carriers
 tags: [rust, staged-parsing, recursive-queue, breadth-first, cancellation, budgets, diagnostics, source-location, private, admission]
-evidence: "FUTURE-PARITY-BACKLOG.14.7.4.3 extends private rust/linkedspec-runtime/src/staged_ast_enrichment.rs with enrich_recursively. Each complete depth is resolved, authority-checked, stitch-validated, and typed-sorted before callbacks; successful returned markers enter only the next depth. Callback requests receive fresh parser state and detached prior-chain tuples containing normalized parser, selected top, SHA-256 of exact UTF-8 payload text, and full typed provenance. Exact repeats are staged_cycle; same-parser/top recurrence requires strict segment containment and smaller total Unicode-scalar extent. One caller cancellation identity/callback, clock/deadline, remaining steps, total calls, maximum depth/calls, cumulative result nodes, and diagnostic bytes spend monotonically without reset. Expiring callback contexts provide safe_point plus direct/ordered-derived position, span, and diagnostic rebasing; cross-segment spans retain concatenate_in_order. The cfg consumer proves all ten neutral chain rows and adversarial queue/resource/rebasing cases before only the .14.7.4.4 carrier/admission sentinel. Ordinary discovery remains zero tests, canonical CI has no test-path reference, neutral governance remains 79 mutations with Rust dormant_red, and function-body v1/generated v2/public/outward truth does not move."
+evidence: "Historical FUTURE-PARITY-BACKLOG.14.7.4.3 extends private rust/linkedspec-runtime/src/staged_ast_enrichment.rs with enrich_recursively. Each complete depth is resolved, authority-checked, stitch-validated, and typed-sorted before callbacks; successful returned markers enter only the next depth. Callback requests receive fresh parser state and detached prior-chain tuples containing normalized parser, selected top, SHA-256 of exact UTF-8 payload text, and full typed provenance. Exact repeats are staged_cycle; same-parser/top recurrence requires strict segment containment and smaller total Unicode-scalar extent. One caller cancellation identity/callback, clock/deadline, remaining steps, total calls, maximum depth/calls, cumulative result nodes, and diagnostic bytes spend monotonically without reset. Expiring callback contexts provide safe_point plus direct/ordered-derived position, span, and diagnostic rebasing; cross-segment spans retain concatenate_in_order. The cfg consumer proves all ten neutral chain rows and adversarial queue/resource/rebasing cases before only the .14.7.4.4 carrier/admission sentinel. Ordinary discovery remains zero tests, canonical CI has no test-path reference, neutral governance remains 79 mutations with Rust dormant_red, and function-body v1/generated v2/public/outward truth does not move."
 evidence_update_2026_08_26_carrier_admission: "FUTURE-PARITY-BACKLOG.14.7.4.4 supplies the fresh top-level seed/runtime seam and admits this unchanged recursive authority. Ordinary and canonical discovery now run the same GREEN consumer; Rust rollout is complete at 84 neutral mutations, and the temporary cfg/dead-code scaffolding is gone."
 root_cause: "The current-depth authority deliberately stopped after one complete marker depth and left returned markers inert. Rust therefore lacked invocation-wide queue lineage, monotone cross-depth resources, callback liveness/safe points, and typed child-local projection even though the neutral contract and Perl mechanism already fixed those semantics."
 reverify:
-  - "bash tools/run_cargo_local.sh test --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test staged_ast_enrichment_contract"
+  - "bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test staged_ast_enrichment_contract"
   - "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py"
   - "rg -n 'enrich_recursively|StagedRecursiveAuthority|safe_point|staged_cycle|staged_chain_non_decreasing|staged_diagnostic_truncated' rust/linkedspec-runtime/src/staged_ast_enrichment.rs rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs"
 ---
@@ -83,3 +83,20 @@ Perl; .74 owns marker deep-validation bypass and an observed unchecked child-ext
 call-counter admission. Canonical homes are `staged-target-preparation-gaps.md`,
 `rust-staged-returned-marker-validation-gaps.md` and `rust-staged-call-counter-saturation.md`.
 Fresh neutral fixtures still pass but do not cover these cases. No repair or cross-carrier result is claimed.
+
+## September 8 recursive-consumer reconciliation
+
+`SESSION-STARTUP-READING.3.3.64` completes the recursive consumer in
+`rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs` through line 2268.
+The recursive proof uses all ten neutral chain cases and adversarial controls for
+breadth-first sibling ordering, exact cycle tuples, strict decrease, depth/call
+limits, shared steps, cancellation/deadline checks, expired callback views,
+cumulative result/diagnostic budgets, and direct/ordered-derived rebasing.
+Those controls exercise their explicit inputs; the independently measured target,
+returned-marker and saturated-counter gaps remain owned by `.73`–`.75`.
+
+The containing admitted test also pins 37 diagnostics, nine rollout legs and the
+123-mutation neutral snapshot. Its .61 canonical execution passed 1/1 in 802.08
+test seconds (`64d82792`); .64 freshly rechecks neutral governance at 123 base /
+129 public mutations without rerunning the native target. Initial dormant RED and
+79/84-mutation records above are historical stages, not current discovery status.

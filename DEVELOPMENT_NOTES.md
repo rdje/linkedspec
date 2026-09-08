@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.64 - complete staged recursive and carrier consumer reading
+
+The recursive consumer tests complete breadth-first depths, exact chain identity/decrease, shared resources, expiring callbacks and original-source rebasing. Carrier proof separately compiles an inert marker program and a host-seeded program; each child must succeed before JSON comparison, and four routes compare two runs with fresh cache/counters and detached results. This evidence remains fixture-bound and does not close .73–.75/.78. Standalone helpers include native Engine execution; its .65 suffix must distinguish native/reconstructed/generated-helper execution from emitted-text inspection.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.63 - complete emitter, loader and staged consumer reading
 
 The source-emitter consumer checks direct and compatibility shapes before and inside generated modules, spans fourteen fixtures/ten families and retains an eight-case manifest subset. The separate all-105 classifier's admission record cannot substitute for child-status validation; .77 already owns that gap. Loader non-regular cases use directories as portable surrogates. Staged current-depth tests cover four result/three failure policies and caching/atomicity fixtures, but the panic control replaces the process hook; default-hook behavior is not exercised. Recursive/carrier suffixes remain .64-owned, and existing repair boundaries stay explicit.

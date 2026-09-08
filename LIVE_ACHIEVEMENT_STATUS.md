@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.63` are reconciled and `.3.3.64`–`.3.3.66` plus closeout remain pending.
+  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.64` are reconciled and `.3.3.65`–`.3.3.66` plus closeout remain pending.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.3.63` completes emitter suffix, all loader tests and staged prefix (1,492 lines / 58,940 baseline-identical bytes). Neutral resolution and staged contracts pass; Knowledge separates the checked eight-case child runner from the .77-owned all-105 classifier gap and retains staged/manifest/literal repairs.
+- `SESSION-STARTUP-READING.3.3.64` completes the staged recursive/carrier consumer and standalone prefix (1,491 lines / 55,771 baseline-identical bytes). Checked emitted child execution and four fresh-authority routes are reconciled; staged neutral proof passes and .73–.75/.78 remain pending.
 
 ## Next Action
 
-- Resume `SESSION-STARTUP-READING.3.3.64`; containment `.7` follows Rust closeout before Dart ownership/reading.
+- Resume `SESSION-STARTUP-READING.3.3.65`; containment `.7` follows Rust closeout before Dart ownership/reading.
 
 ## Recent Completions
+
+- `2026-09-08` — `SESSION-STARTUP-READING.3.3.64` completes staged recursive/carrier reading and starts standalone-lifecycle tests.
 
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.63` completes emitter/loader/staged-prefix reading and corrects classifier proof scope.
 
@@ -48,8 +50,6 @@
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.50` reconciles corpus and diagnostic consumer reading.
 
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.49` reconciles Terse and legacy corpus reading.
-
-- `2026-09-08` — `SESSION-STARTUP-READING.3.3.48` reconciles user-function edge grammar reading.
 
 ## History
 

@@ -2166,13 +2166,16 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.63 - complete emitter, loader and staged consumer reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.64`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 64: 1,491 lines/fragments, 55,771 bytes.
   Scope: `rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs` lines 921–2268;
     `rust/linkedspec-runtime/tests/standalone_lifecycle_block_contract.rs` lines 1–143.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact source-range identities; staged-AST neutral contract and source-backed carrier/recursive proof boundaries; Knowledge, memory, doctrines, bounded histories and diff/scope review.
+  Canonical trigger: `none` — bounded reading and factual reconciliation only; no production, public or infrastructure change.
+  Verification: Two scopes total 1,491 lines / 55,771 baseline-identical bytes; ordered path/kind/range/byte/SHA audit 0d05f033e4e54ee1cb681c12b5f293e91bd98fa415b3afdfef26d0a16b1ab236. Complete staged consumer: breadth-first chain/cycle/decrease, shared resource and callback liveness, cancellation/deadline, detachment and direct/derived diagnostic controls; frozen snapshot pins 37 diagnostics, nine rollout legs and 123 mutations. Native/reconstructed/generated-plan/independently compiled emitted carriers each execute twice through fresh authority; both emitted Cargo children require success before JSON decoding. Existing .73–.75 runtime gaps and .78 authored absolute dependency remain open. Reconcile dated admission history and retain .61's native 1/1 in 802.08 test seconds without claiming another run. Standalone-lifecycle prefix defines native execution and AST/provenance helpers and starts placement twins; .65 owns the suffix. Fresh staged neutral governance passes 9 legs / 123 base / 129 public mutations; exact CI requirement/command registrations remain one each. Focused continuity proof is retained with the commit.
+  Commit: `SESSION-STARTUP-READING.3.3.64 - complete staged recursive and carrier consumer reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.65`
   Status: `pending`
@@ -4313,7 +4316,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.64` | `pending` | Continue staged-AST recursive/carrier tests at line 921, then standalone-lifecycle prefix through line 143. |
+| 1 | `SESSION-STARTUP-READING.3.3.65` | `pending` | Complete standalone-lifecycle suffix, trace controls, typed-source tests, case mapping and label prefix. |
 
 ## Reading Ledger
 
@@ -4324,7 +4327,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.63` are reconciled and `.3.3.64`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.64` are reconciled and `.3.3.65`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read at baseline; .3.2.42 preserves coverage, and c8759242 reviews/renders the approved parked-coverage delta. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -7083,6 +7086,7 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- `2026-09-08` `.3.3.64`: Both scope/baseline identities PASS; staged neutral governance PASS at 9 rollout legs / 123 base / 129 public mutations. Recursive/carrier Knowledge distinguishes historical admission from the completed .61 native run and retains .73–.75/.78. Standalone prefix includes native execution helpers; no emitted compilation is inferred from that prefix. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.63`: Exact three-scope identities PASS; native-resolution neutral 14/9/4 and staged neutral 9 legs / 123 base / 129 public mutations PASS. Three Knowledge cards reconcile child status, loader fixture types and current-depth policy/panic proof while preserving .71/.73–.78 repair ownership. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.62`: Exact three-scope identities reconcile admission, source-boundary aliases and emitter prefix; neutral semantic proof and pinned routing/history child-status controls pass. The preceding .61 canonical result is retained with exact log/receipt identity; no optional-gate rerun is inferred. Actual pending .79 owns the reproduced routing signal-status defect. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.61`: Four exact scopes PASS (1,461 lines / 52,200 bytes); semantic governance PASS 6/20/128 with rollout 9/0 and admission 6/0. Independent emitted assertions are precisely qualified. Mandatory engineering-notes rollover and exact finite capacity admission require staged canonical proof; commit body/receipt retain the completed run. Knowledge, memory, histories, diff and doctrine hooks govern canonical landing.
@@ -7412,3 +7416,4 @@ Each canonical task node owns its exact `Commit` subject and retained completion
 - `2026-09-08`: `.3.3.61` completes semantic consumer reading and performs required engineering-notes rollover; next `.3.3.62`.
 - `2026-09-08`: `.3.3.62` completes admission/emitter boundary reading and owns verifier signal repair .79; next `.3.3.63`.
 - `2026-09-08`: `.3.3.63` completes emitter/loader/staged-prefix reading and corrects classifier proof scope; next `.3.3.64`.
+- `2026-09-08`: `.3.3.64` completes staged recursive/carrier reading and starts standalone-lifecycle tests; next `.3.3.65`.

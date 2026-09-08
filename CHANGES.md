@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.64 - complete staged recursive and carrier consumer reading
+
+Reconcile 1,491 lines / 55,771 baseline-identical bytes: complete recursive staged-AST tests and four fresh-authority carriers, then begin standalone-lifecycle helper/placement tests. Both independently compiled staged programs check child success; .78 still owns their absolute Cargo dependency, and .73–.75 runtime gaps remain open. Knowledge qualifies historical RED/rollout records, retains the completed .61 native result and uses managed locked/offline reverify commands. Fresh neutral staged proof passes 9 legs / 123 base / 129 public mutations; exact CI registrations and focused continuity checks govern landing.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.63 - complete emitter, loader and staged consumer reading
 
 Reconcile emitter suffix, all native-loader tests and the staged-AST consumer prefix: 1,492 lines / 58,940 baseline-identical bytes. Correct the older eight-case subset card's unqualified all-105 classifier claim against existing .77, retain checked subset/all-family child execution, and keep .71/.78 literal/manifest repairs distinct. Qualify directory non-file fixtures and the staged test's replaced panic hook; .73–.75 remain open. Fresh neutral resolution 14/9/4 and staged 9 legs / 123 base / 129 public mutations pass; source reading does not claim a new full native target run. Knowledge, memory, doctrines, bounded histories and diff govern focused landing.

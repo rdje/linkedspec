@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `6eacb769409fdce6bf0533b217517da2d8f4a661` — clean reading checkpoint base.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.63 - complete emitter, loader and staged consumer reading`.
+- activation_commit: `4b68d1d380193f3974fbd5b28f954c83543fe012` — clean reading checkpoint base.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.64 - complete staged recursive and carrier consumer reading`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: resume `SESSION-STARTUP-READING.3.3.64`; containment `.7` owns later Dart capacity after Rust closeout.
+- next_action: resume `SESSION-STARTUP-READING.3.3.65`; containment `.7` owns later Dart capacity after Rust closeout.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` precede mutation setup; `.29` is part of `.5` adoption.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4983` is the twenty-eighth history segment; ADR `0106`
   authorizes exactly 30 collection files / 29 manifest lines / 16,463 manifest bytes; other ceilings remain unchanged.
-- latest_bootstrap_read: 2026-09-08 — roadmap Yes / codebase No / physical mdBook Yes; .3.3.63 completes emitter/loader/staged-prefix reading and corrects classifier proof scope; formal .4 pending; PNT resumes .3.3.64.
+- latest_bootstrap_read: 2026-09-08 — roadmap Yes / codebase No / physical mdBook Yes; .3.3.64 completes staged recursive/carrier reading and starts standalone-lifecycle tests; formal .4 pending; PNT resumes .3.3.65.
