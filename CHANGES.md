@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.58 - complete recognition and observation consumer reading
+
+Completed Rust checkpoint `.3.3.58`: 1,471 lines / 49,296 baseline-identical bytes. Preserved recognition/observation and repeated-result proof boundaries. Two source-bound construction probes reproduce absolute emitted Cargo inputs; repair `.78` owns nine writers, relative-path normalization and actual relocated/emitted proof. Knowledge/live/task routing updated; no parser or manifest implementation changed.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.57 - complete progressive and punctuation consumer reading
 
 Reconcile four scopes: 1,476 lines / 52,176 baseline-identical bytes. Complete progressive and punctuation consumers and read recognition-prefix state/identity checks. Preserve the existing contains-arity exception and distinguish generated-plan/source assertions from emitted execution. Route the Rust arity recheck through managed Cargo. Focused checks pass.

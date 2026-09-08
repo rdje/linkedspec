@@ -11,7 +11,7 @@ answers:
   - "are Rust recognition transactions admitted or public"
   - "how is the Rust recognition transaction consumer registered in canonical CI"
   - "which backend follows Rust recognition transaction admission"
-date: 2026-09-07
+date: 2026-09-08
 status: admitted Rust integration; current neutral rollout 9/9; historical native test counts qualified below
 tags: [rust, recognition, transaction, ActionIR, effects, progress, generated-source, admitted, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.14.3.3.2 adds cfg-private RecognitionCheckpoint, RecognizeOnce, RecognitionCommit, and RecognitionRollback Expr nodes with exact static normalization and serde reconstruction. The runtime exposes the neutral six-graph effect fixed point and eight-case cursor-progress validator, then binds native and generated-plan invocation entry/exit to the existing source-local authority over real cursor, anonymous boundary, recursive same-label marks, explicit child acceptance, and falsey-safe staged payloads. Structural AST inspection switches only transaction-bearing emitted modules to direct effective-engine execution. The nested consumer passes 12/12 across lowering, policy, native, reconstructed, generated-plan, independent emitted-source, and compatibility assertions; outer authority remains 7/7 and ordinary discovery remains 0 tests. No manifest or canonical-driver registration changes, so neutral rollout stays 2/9 and public support remains Perl-only."
@@ -110,3 +110,7 @@ The fresh public source/query/CLI controls in [[rust-recognition-token-variable-
 return and active copy uses as undefined scalar values. Perl rejects both and a legal return agrees. Repair .68
 owns actual authored enforcement and recurrence; historical private reject_escape assertions do not establish
 that integration. The initial newline copy also exposes .69, separately from the known .45 warning/drop.
+
+## 2026-09-08 consumer reading
+
+SESSION-STARTUP-READING.3.3.58 completes the baseline-identical consumer. The complete test reading preserves the distinction between private escape diagnostics and authored token-use repair .68. Independent emitted execution checks child success and false payload, but its authored Cargo input persists an absolute dependency; construction proof and repair .78 are in [[rust-emitted-cargo-manifest-path-portability-gap]]. No new native or emitted parser run is claimed.

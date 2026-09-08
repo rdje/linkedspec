@@ -15,7 +15,7 @@ answers:
   - "does serialized Rust reconstruction preserve recursive observation"
   - "is Rust recursive observation admitted in canonical CI"
   - "how does Rust recursive observation preserve repeated action result collection"
-date: 2026-09-07
+date: 2026-09-08
 status: Rust admission complete; current public closeout is recorded in the typed-source rollout plan
 tags: [rust, source-location, recursion, observation, generated-source, admission, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.14.4.3 adds dedicated ObserveRecognition parsing/serialization, compiler-wide static and transaction-effect validation, direct-parent and rejected-attempt identity in the existing RecognitionTransactionAuthority, pending-entry-only observation scopes, ephemeral runtime completions, detached typed record construction, action-edge single-dispatch policy, and native/generated execution. rust/linkedspec-runtime/tests/recursive_observation_contract.rs passes seven final-path cases across native, serialized reconstruction, generated-plan, and independently compiled emitted source, including a regression proving nested ordinary self-recursion is not misclassified as an observed edge. Observation-only and existing self-finalizer action edges share the governed execute-and-collect branch; tools/check_repeated_action_result_contract.py locks the resulting collect_or_return_action_value! topology at eight sites, and the Rust repeated-action consumer passes 3/3 after consolidation. The typed-source checker records Perl and Rust on the still-pending recursive_observation row at 8 complete / 6 pending / 72 mutations. Recognition remains 129 current + four dedicated transaction nodes / 246 calls / 58 mutations because observation is an existing binding_write effect rather than another neutral inventory row."
@@ -74,3 +74,7 @@ without a live frame. The detached nine-field record distinguishes rejected, abo
 and supplies an accepted exit position only for acceptance. Entry/match/exit bytes use typed projection.
 This is source evidence, not a fresh native observation run. Current neutral typed proof passes six observations,
 14 complete/zero pending and 231 mutations, including public guards; the 8/6/72 admission count above is historical.
+
+## 2026-09-08 consumer reading
+
+SESSION-STARTUP-READING.3.3.58 completes the baseline-identical consumer. The complete consumer reading covers static non-eager binding, detached Unicode/falsey records, failed and zero-regex outcomes, child edges, ordinary nested recursion versus observed nonprogress, original abort diagnostics and checked emitted status. Its Cargo input shares repair .78 in [[rust-emitted-cargo-manifest-path-portability-gap]]. Construction proof does not rerun observation semantics or supersede the dated admission results.

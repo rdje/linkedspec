@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.58 - complete recognition and observation consumer reading
+
+The emitted manifest probes validate construction, same-target relative controls and exact cleanup without child Cargo builds. Nine runtime-test writers persist absolute dependencies; five sites already use relative inputs. ADR 0052 distinguishes these authored inputs from tool-cache metadata. Runnable evidence and future repair live in `rust-emitted-cargo-manifest-path-portability-gap`.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.57 - complete progressive and punctuation consumer reading
 
 Punctuation aliases preserve their parenthesized counterparts, including the known missing-needle contains result. Recognition keeps matched state separate from falsey payloads. Source assertion coverage and freshly executed proof remain distinct.

@@ -35,7 +35,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`, `SESSION-STARTUP-READING.50`, `SESSION-STARTUP-READING.51`, `SESSION-STARTUP-READING.52`, `SESSION-STARTUP-READING.53`, `SESSION-STARTUP-READING.54`, `SESSION-STARTUP-READING.55`, `SESSION-STARTUP-READING.56`, `SESSION-STARTUP-READING.57`, `SESSION-STARTUP-READING.58`, `SESSION-STARTUP-READING.59`, `SESSION-STARTUP-READING.60`, `SESSION-STARTUP-READING.61`, `SESSION-STARTUP-READING.62`, `SESSION-STARTUP-READING.63`, `SESSION-STARTUP-READING.64`, `SESSION-STARTUP-READING.65`, `SESSION-STARTUP-READING.66`, `SESSION-STARTUP-READING.67`, `SESSION-STARTUP-READING.68`, `SESSION-STARTUP-READING.69`, `SESSION-STARTUP-READING.70`, `SESSION-STARTUP-READING.71`, `SESSION-STARTUP-READING.72`, `SESSION-STARTUP-READING.73`, `SESSION-STARTUP-READING.74`, `SESSION-STARTUP-READING.75`, `SESSION-STARTUP-READING.76`, `SESSION-STARTUP-READING.77`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`, `SESSION-STARTUP-READING.50`, `SESSION-STARTUP-READING.51`, `SESSION-STARTUP-READING.52`, `SESSION-STARTUP-READING.53`, `SESSION-STARTUP-READING.54`, `SESSION-STARTUP-READING.55`, `SESSION-STARTUP-READING.56`, `SESSION-STARTUP-READING.57`, `SESSION-STARTUP-READING.58`, `SESSION-STARTUP-READING.59`, `SESSION-STARTUP-READING.60`, `SESSION-STARTUP-READING.61`, `SESSION-STARTUP-READING.62`, `SESSION-STARTUP-READING.63`, `SESSION-STARTUP-READING.64`, `SESSION-STARTUP-READING.65`, `SESSION-STARTUP-READING.66`, `SESSION-STARTUP-READING.67`, `SESSION-STARTUP-READING.68`, `SESSION-STARTUP-READING.69`, `SESSION-STARTUP-READING.70`, `SESSION-STARTUP-READING.71`, `SESSION-STARTUP-READING.72`, `SESSION-STARTUP-READING.73`, `SESSION-STARTUP-READING.74`, `SESSION-STARTUP-READING.75`, `SESSION-STARTUP-READING.76`, `SESSION-STARTUP-READING.77`, `SESSION-STARTUP-READING.78`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -2079,14 +2079,17 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.57 - complete progressive and punctuation consumer reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.58`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 58: 1,471 lines/fragments, 49,296 bytes.
   Scope: `rust/linkedspec-runtime/tests/recognition_transaction_contract.rs` lines 378–932;
     `rust/linkedspec-runtime/tests/recursive_observation_contract.rs` lines 1–444;
     `rust/linkedspec-runtime/tests/repeated_action_result_contract.rs` lines 1–472.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact reading/source identities, emitted-manifest construction controls and existing policy boundary; Knowledge, memory, all doctrines, histories and diff.
+  Canonical trigger: `none` — reading and repair intake; manifest writers and policy implementation unchanged.
+  Verification: Three exact scopes total 1,471 lines / 49,296 baseline-identical bytes; ordered path/kind/range/byte/SHA audit `28a622601f3fe03251870fdfc8448469beab0bca1ac3da3c118e792788bd506e`. Recognition suffix distinguishes private escape rejection from authored .68, preserves terminal/ownership/unwind/drop diagnostics, typed nodes and false payload carriers. Observation covers static non-eager binding, detached Unicode and falsey results, failed/zero-regex/child-edge outcomes, ordinary recursion versus observed nonprogress and original abort diagnostics. Repeated-result prefix covers modes, scalar pipe, bounds, per-hit arrays/null, lifecycle/selected-slot traces and loaded/reconstructed/descriptor/primary/corpus/source-plan consumers; source inspection is not independent compilation. Two exact-source Rust construction probes reproduce absolute emitted Cargo dependencies, same-target relative controls and exact cleanup; nine source-confirmed writers are repair .78-owned with runnable Knowledge evidence. No fresh parser execution is claimed.
+  Commit: `SESSION-STARTUP-READING.3.3.58 - complete recognition and observation consumer reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.59`
   Status: `pending`
@@ -4256,11 +4259,24 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     The fresh in-memory status-guard control rejects it; executable proof: docs/knowledge/rust-generated-classifier-child-status-gap.md.
   Commit: `pending`
 
+- ID: `SESSION-STARTUP-READING.78`
+  Status: `pending`
+  Goal: Keep authored emitted-test Cargo dependencies relative to repository-derived workspaces.
+  Dependencies: `.3`, `.4`, `.5`; distinguish generated dependency inputs from ADR 0052.6 tool-cache metadata.
+  Acceptance: Audit analogous first-party manifest writers, replace persisted absolute runtime-crate dependencies
+    with correct relative paths, and verify actual emitted builds plus moved-workspace dependency resolution.
+    Preserve exact parser results, workspace cleanup, same-volume storage and legitimate tool metadata;
+    update focused storage/portability regression proof and complete canonical verification.
+  Verification: Pending repair; `.3.3.58` binds retained recognition/recursive-observation construction probes
+    to their unchanged sources. Both write absolute dependencies; relative controls resolve the same crate.
+    Nine source-confirmed writers and five relative controls are inventoried in docs/knowledge/rust-emitted-cargo-manifest-path-portability-gap.md.
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.58` | `pending` | Complete recognition-transaction reading and begin recursive-observation contracts. |
+| 1 | `SESSION-STARTUP-READING.3.3.59` | `pending` | Complete repeated-result reading, relocation and root-selection consumers through routes line 437. |
 
 ## Reading Ledger
 
@@ -4271,7 +4287,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.57` are reconciled and `.3.3.58`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.58` are reconciled and `.3.3.59`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read at baseline; .3.2.42 preserves coverage, and c8759242 reviews/renders the approved parked-coverage delta. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -7030,6 +7046,7 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- `2026-09-08` `.3.3.58`: Three scope/baseline identities PASS (1,471 lines / 49,296 bytes). Both exact-source manifest construction probes exit 0; relative controls resolve the same runtime crate, original Drop removes both workspaces and managed scratch is removed. Nine absolute writers and five relative source controls are inventoried; actual repair .78 follows required reading. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.57`: Four exact scopes and progressive/punctuation/recognition proof-boundary reconciliation pass; the known contains arity exception is explicit. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.56`: Four exact scopes and MCP/progressive test-boundary reconciliation pass; canonical completion records resolve dated admission wording. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.55`: Two exact scopes and mutation/MCP assertion-boundary reconciliation pass; known .58/.59 and .77 repair limits remain explicit. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
@@ -7347,3 +7364,4 @@ Each canonical task node owns its exact `Commit` subject and retained completion
 - `2026-09-08`: `.3.3.55` completes mutation consumer and checkpoints MCP admission; next `.3.3.56`.
 - `2026-09-08`: `.3.3.56` completes MCP tests and checkpoints progressive authority; next `.3.3.57`.
 - `2026-09-08`: `.3.3.57` completes progressive and punctuation consumer reading; next `.3.3.58`.
+- `2026-09-08`: `.3.3.58` completes recognition/observation reading and owns emitted-manifest portability repair .78; next `.3.3.59`.
