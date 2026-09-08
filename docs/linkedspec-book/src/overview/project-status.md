@@ -55,6 +55,20 @@ clear spelling, not a portability requirement.
 
 ## Documentation pressure containment
 
+Current reading prerequisite (2026-09-08): Perl and Rust source reading are complete. Rust closeout
+3132596c accounts for all 412 files and passes the canonical gate, including all 1,032 Phase 0 tests.
+The complete codebase reading prerequisite remains open.
+
+Before Dart reading, `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.0` verifies its 115-file inventory:
+80,296 physical lines / 2,471,305 bytes. Explicit packing gives 55 bounded reading groups and 169 ranges;
+a separate valid 56-group control preserves the earlier conservative planning allowance. These are
+inventory and planning results; Dart source reading and child ownership await capacity admission.
+
+At clean 3132596c, the task collection has 60 lines left and the startup file has 562. Even the
+55-group metadata template needs 605 lines before closeout, verification detail or later findings.
+Knowledge has six file slots left. `.7.1` therefore owns the capacity design, preserving stable task
+ownership, unique evidence and explicit limits before defining implementation and admission leaves.
+
 README routing-pressure enforcement is closed at `0bcb5a36`, and the behavior-free store architecture landed at
 `dc8dd896`. Live-status migration landed at `99fe03f3` under ADRs `0066` and `0067`; future-task partitioning
 landed at `61a52dbd` under ADR `0068`; change and engineering-note hot stores are implemented under ADR `0069`.

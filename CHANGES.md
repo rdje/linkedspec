@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-08 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.0 - measure Dart reading demand and documentation capacity
+
+Reverify all 115 Dart baseline paths / 80,296 lines / 2,471,305 bytes. Explicit UTF-8-safe packing proves 55 groups and 169 coordinate-verified ranges; a distinct 56-group control preserves the earlier planning allowance without inventing its historical grouping. A minimal 605-line scoped-leaf projection exceeds both aggregate task and startup-file headroom. The existing Knowledge card contains the executable inventory/projection/pressure audit; the book, roadmap and continuity pointers route capacity design .7.1. No Dart reading or ownership, limit change or migration is admitted.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.67 - close Rust reading with exact coverage and durable repair ownership
 
 Close the Rust reading parent after independent proof of all 412 baseline paths / 3,533,382 bytes, two empty inputs and 66 uniquely committed bounded children. Current Git modes, blobs and working bytes match baseline; all 141 Knowledge paths touched by reading commits remain present. Preserve all post-Perl repair ownership: 34 top-level owners, 90 pending nodes and 73 pending leaves, plus unchanged earlier/cross-cutting repairs. The existing inventory card stores executable scope/continuity audits and exact digests. Route the clean next action to containment .7 before Dart decomposition; full-codebase reading remains No. This designated parent boundary requires exact staged canonical CI, whose outcome is retained in the commit.

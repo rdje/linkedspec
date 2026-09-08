@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `b8806f9af8c825d3c27544158b47a52c083b4efc` — clean Rust parent-closeout base.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.67 - close Rust reading with exact coverage and durable repair ownership`.
+- activation_commit: `3132596cc5d1d4244d7247908c5b4701ecaa20a8` — clean Dart capacity-measurement base.
+- latest_completed_leaf: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.0 - measure Dart reading demand and documentation capacity`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7` before Dart decomposition/reading under `SESSION-STARTUP-READING.3.4`.
+- next_action: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.1` — design capacity before Dart ownership/reading under `SESSION-STARTUP-READING.3.4`.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
-- blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` precede mutation setup; `.29` is part of `.5` adoption.
+- blockers: `SESSION-STARTUP-READING.7` blocks recovery/purge. Startup repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` precede mutation setup; `.29` is part of `.5` adoption.
 - current_rust_warning_debt: repeated clean carriers report 1,870 `pgen` plus 26 `rgx-core` output warnings;
   `RUST-DEPENDENCY-WARNING-ZERO.1-.7` own causal repair/pins/enforcement without suppression, after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4983` is the twenty-eighth history segment; ADR `0106`
   authorizes exactly 30 collection files / 29 manifest lines / 16,463 manifest bytes; other ceilings remain unchanged.
-- latest_bootstrap_read: 2026-09-08 — roadmap Yes / full codebase No / physical mdBook Yes; Perl and Rust reading complete; formal .4 pending; PNT resumes containment .7 before Dart.
+- latest_bootstrap_read: 2026-09-08 — roadmap Yes / full codebase No / physical mdBook Yes; Perl and Rust reading complete; formal .4 pending; containment .7.0 measured demand; PNT resumes design .7.1 before Dart.

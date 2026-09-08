@@ -4323,7 +4323,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 ## Current Frontier
 
-First complete `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7` from the clean Rust closeout boundary.
+Capacity measurement `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.0` is complete; design `.7.1` is next before parent `.7` admission.
 Then resume the owned Dart decomposition; no Dart source reading precedes that capacity admission.
 
 | Order | Leaf | Status | Why next |

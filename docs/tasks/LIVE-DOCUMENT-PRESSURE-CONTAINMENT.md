@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-- Status: `active` / `.6` complete; `.7` owns later Dart reading admission capacity
+- Status: `active` / `.7.0` complete; `.7.1` owns capacity design
 - Roadmap lane: `Repository architecture / documentation sustainability`
 - Created: `2026-08-09`
-- Last updated: `2026-09-08` (`.6` consolidates verified chronology; `.7` retains the later Dart capacity obligation)
+- Last updated: `2026-09-08` (`.7.0` records measured capacity; design `.7.1` is next)
 - Owner: repo-local workflow
 
 ## Goal
@@ -58,7 +58,7 @@ or the README `.4` adoption/closeout that installs the guard.
 ## Task Tree
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-  Status: `active` (`.0-.6` complete; `.7` remains a later capacity prerequisite)
+  Status: `active` (`.0-.6` complete; `.7` is the current Dart capacity prerequisite)
   Goal: Replace measured oversized routed destinations with bounded views over durable stores.
   Depends on: `README-STABILITY-POLICY.4.2`
   Children: `.0-.7`
@@ -313,18 +313,41 @@ or the README `.4` adoption/closeout that installs the guard.
   Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.6 - consolidate verified task chronology and correct historical references`
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7`
-  Status: `pending`
+  Status: `active`
   Goal: Admit complete bounded Dart reading ownership within the governed task-store capacity.
   Dependencies: Rust reading closeout `SESSION-STARTUP-READING.3.3.67`; before Dart child ownership/reading begins.
+  Children: `.7.0`, `.7.1`; implementation/admission leaves must be defined by the capacity design before changes.
   Acceptance: Reverify the preserved estimate of 115 files / 56 groups / 169 range rows; measure resulting
     ownership and evidence capacity, preserve every unique record and limit, and split any required infrastructure design before changes.
   Evidence-capacity intake: `.3.3.61` measures 1,017 Knowledge Markdown files / 58,284 lines / 4,850,347 bytes against unchanged 1,024 / 64,000 / 6,291,456 ceilings. Include this evidence store in the capacity review before Dart; no count increase is authorized by this measurement.
-  Verification: Pending; d6f37492 preserves the estimate. `.6`'s 251-line saving does not establish capacity for the full Dart decomposition.
+  Verification: `.7.0` verifies all Dart bytes, explicit 55-group packing and a separate 56-group control; measured stores cannot admit the full metadata. `.7.1` owns capacity design before implementation.
+  Commit: `pending`
+
+- ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.0`
+  Status: `done`
+  Goal: Reverify Dart inventory and quantify bounded task and Knowledge capacity before selecting a solution.
+  Acceptance: Account for every baseline/current Dart path and byte; reverify bounded group/range estimates with explicit packing assumptions;
+    measure governed stores and projected ownership; preserve every current node, field, immutable byte and limit.
+    Record an executable audit and route the next design leaf; no Dart source-reading or ownership credit.
+  Verification tier: `focused`
+  Focused checks: Exact inventory/range reconstruction; registry-derived pressure census; task metadata,
+    memory, Knowledge, both histories, affected mdBook render, immutable/non-target identity and staged diff/scope.
+  Canonical trigger: `none` — ordinary measurement and task decomposition; no infrastructure or public contract change.
+  Verification: All 115 Dart paths / 80,296 physical lines / 2,471,305 bytes match baseline. Explicit packing proves 55 groups / 169 exact ranges / 80,297 fragments; a separate 56-group control retains the planning allowance. The 605-line scoped template exceeds activation task headroom of 60 lines and startup headroom of 562 lines. Knowledge has six file slots. Coordinate reconstruction, exact digests and executable pressure audit live in docs/knowledge/startup-task-chronology-compaction.md; focused continuity and book proof govern landing.
+  Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.0 - measure Dart reading demand and documentation capacity`
+
+- ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.1`
+  Status: `pending`
+  Goal: Design sufficient bounded task and Knowledge capacity from the measured admission demand.
+  Acceptance: Audit existing retrieval and preservation contracts and alternatives; retain stable ownership,
+    unique evidence and explicit limits; define bounded implementation/verification leaves before any migration.
+    Inventory measurements alone do not authorize a limit increase or Dart source reading.
+  Verification: `pending`
   Commit: `pending`
 
 ## Current Frontier
 
-Next: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7`. Rust reading closes under `SESSION-STARTUP-READING.3.3.67`; activate this existing capacity leaf only after that clean commit. Admit bounded Dart ownership and evidence capacity before `SESSION-STARTUP-READING.3.4` decomposition or source reading. Existing limits and all prior preservation evidence remain unchanged.
+Next: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.1`. Measurement `.7.0` is complete from clean activation 3132596c; design sufficient task and Knowledge capacity before defining any migration. `SESSION-STARTUP-READING.3.4` ownership and source reading await capacity admission. Existing limits and all prior preservation evidence remain unchanged.
 
 ## Decisions
 

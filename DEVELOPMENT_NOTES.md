@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-08 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.0 - measure Dart reading demand and documentation capacity
+
+The old 56-group estimate fixed source totals and ceilings but did not preserve executable packing or group membership. The new recipe independently proves all source coordinates, byte identity and 55-group bounds; splitting at an existing file boundary proves a separate valid 56-group control with the same 169 ranges. Activation 3132596c has only 60 aggregate task lines, 562 startup-file lines and six Knowledge file slots available. The projection excludes closeout and future evidence growth, so it cannot be treated as a sufficient reserve. Design .7.1 must resolve both retrieval and growth before migration or Dart admission; this ordinary measurement uses focused proof.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.67 - close Rust reading with exact coverage and durable repair ownership
 
 The Rust closeout separates four claims: physically read bytes, reconciled understanding, durable pending defects, and the selected runtime gate. Exact interval coverage and unique commit subjects support the first two continuity claims; they do not turn historical tests or emitted-source inspections into fresh executions. Repair node bodies remain unchanged, including the generated classifier child-status, manifest portability and routing signal-status defects. Expected PGEN → RGX → LinkedSpec Rust generated dependency state is not a blocker. Capacity admission remains a distinct clean-tree task before Dart ownership and reading.

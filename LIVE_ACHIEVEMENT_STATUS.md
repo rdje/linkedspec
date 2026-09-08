@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Rust `.3.3.67` closes exact coverage and durable reconciliation; Dart capacity admission is next.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Rust `.3.3.67` closes exact coverage; containment `.7.0` measures Dart demand and `.7.1` owns capacity design.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.3.67` closes Rust reading: all 412 files / 3,533,382 baseline-identical bytes, 66 uniquely committed reading children and exact current-delta/repair/Knowledge reconciliation. Existing repairs remain pending; the canonical closeout outcome is retained in this commit and its exact receipt. Full-codebase reading remains No.
+- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.0` verifies the complete 115-file Dart inventory and bounded packing, measures task/Knowledge capacity, and routes design .7.1. No Dart source reading or decomposition is admitted. Rust canonical closeout 3132596c remains complete.
 
 ## Next Action
 
-- Complete `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7` before defining or reading Dart children under `SESSION-STARTUP-READING.3.4`.
+- Design bounded task and Knowledge capacity under `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.1`; define any implementation/admission leaves before changes.
 
 ## Recent Completions
+
+- `2026-09-08` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.0` verifies Dart demand and insufficient admission capacity; routes design .7.1.
 
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.67` closes complete Rust reading; preserves pending repairs and routes Dart capacity first.
 
@@ -48,8 +50,6 @@
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.54` completes gap and logical consumer reading.
 
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.53` completes integration reading and checkpoints gap capture.
-
-- `2026-09-08` — `SESSION-STARTUP-READING.3.3.52` reconciles integration control and traversal reading.
 
 ## History
 
