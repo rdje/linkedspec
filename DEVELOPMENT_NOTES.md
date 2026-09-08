@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-07 — SESSION-STARTUP-READING.3.3.41 — The final batch boundary preserves exact coverage and verification scope
+
+Unicode casing uses binary-searched property intervals and original input scalars for Final Sigma, then emits full mapping sequences without normalization. The callable prefix uses different strengths of diagnostic assertion across routes; source reading must preserve that distinction. The first 99 batch commits are independently matched to their recorded leaves and hashes. The final exact staged candidate runs canonical CI; its completed result is added to the ignored commit-message brief so durable commit evidence can include the result without changing the verified candidate.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.40 — Full upper mappings preserve sequences without promising an inverse
 
 The generated upper table contains ordered two- and three-scalar expansions and maps multiple inputs to one uppercase scalar. These data agree with the existing Unicode contract. Completing the physical table reading adds no algorithm or runtime execution claim; property ranges and contextual evaluation remain the next owned range. Unchanged generation inputs preserve the preceding focused proof.

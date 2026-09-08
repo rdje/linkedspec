@@ -62,3 +62,19 @@ exhaustive AST or authored-source round-trip guarantee.
 
 Related facts: [[callable-codeblock-literal-contract]], [[perl-callable-codeblock-literal-record]],
 [[rust-callable-codeblock-dynamic-invocation]], [[variadic-callable-signature-seams]].
+
+## September 7 callable consumer prefix reading
+
+`SESSION-STARTUP-READING.3.3.41` reads test lines 1–791: 27,469 baseline-identical bytes,
+SHA-256 `7b867d0449c8b168d28d85b994ceb97ba2c075130d63c455d76fdbd7b1d54e21`.
+This is partial physical coverage of the 958-line consumer; the final tests remain the next leaf.
+The prefix checks exact literal field sets and retained source/body, signatures and spans, Unicode containing
+coordinates, inert construction/copy/function transport, dependency-scan isolation and compiled JSON equality.
+Generated construction checks inspect source strings and execute the generated-plan route; a separate test
+creates a unique repository-local Cargo workspace, builds emitted fixture/failure modules offline, executes
+them and attempts removal of that exact owned workspace through Drop. Reading that test is not a new emitted execution.
+
+Invalid literal tests require the expected code to occur in the parser error string. They do not compare
+a full structured diagnostic envelope. Fresh neutral checking passes 7 literals, 11 calls, 9 invalid
+literals, 7 invalid calls, 4 invalid declarations, 8 contextual forms and 23 governance mutations.
+The historical native milestone counts above remain dated evidence.

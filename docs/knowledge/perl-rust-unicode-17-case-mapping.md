@@ -119,3 +119,20 @@ case-folding or reversible-conversion promise. The property tables and evaluator
 The generation inputs and runtime modules have not changed since `.3.3.39` at `fe6d2638`, whose
 five-module byte comparison and twelve neutral fixture results remain the retained proof. This reading
 checkpoint adds exact physical coverage and comprehension, with no duplicate runtime execution claim.
+
+## September 7 complete Rust evaluator reading
+
+`SESSION-STARTUP-READING.3.3.41` reads lines 3157–3859 completely: 703 lines / 16,474 bytes,
+SHA-256 `d87280ba0efce3ba229fbf2f064a6c82f549d808d9b04fdebe583912d2a74f8d`.
+All four consecutive Rust checkpoints now cover the complete 3,859-line / 97,636-byte module,
+with full-file and every range identical to the reading baseline.
+The 158 Cased and 464 Case_Ignorable interval tables use binary-search membership. The evaluator
+collects original Unicode scalars, applies Final Sigma only when lowercasing U+03A3, and examines
+the original input on either side while skipping Case_Ignorable scalars. A preceding Cased scalar
+and no following Cased scalar after that skip select U+03C2. Other inputs use the selected full
+mapping sequence or identity; no normalization or host casing API participates.
+This agrees with the previously completed Perl evaluator reading.
+
+Fresh managed regeneration again byte-compares neutral JSON and all five backend modules and passes
+twelve independent neutral fixtures. This is generation/neutral-evaluator verification; this leaf's
+separate final canonical gate must provide its own exact receipt before batch landing.

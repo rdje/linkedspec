@@ -61,3 +61,14 @@ native/carrier counts above remain the July milestone evidence.
 
 Related facts: [[rust-callable-codeblock-literal-state]], [[rust-callable-codeblock-dynamic-invocation]],
 [[perl-generic-final-codeblock-normalization]], [[final-codeblock-parameter-declaration]].
+
+## September 7 contextual consumer prefix reading
+
+`SESSION-STARTUP-READING.3.3.41` reads callable test lines 1–791. The typed-definition check pins
+descriptor version 3 and the final parameter kind in the definition, body payload and staged parse job.
+Attached/parenthesized helper, receiver and tree pairs compare five selected normalized fields; user-function
+forms separately require codeblock_argument, explicit forms retain codeblock_literal, and serialized compiled
+state contains no contextual candidate. Semantic function records retain final-codeblock signature metadata.
+Eleven contextual results are compared exactly across native, reconstructed and generated-plan routes.
+The subsequent eager-block test only begins in this range; its body and later emitted contextual tests
+remain unread. These are assertion-scope observations, not fresh native or emitted execution results.

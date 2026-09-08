@@ -67,3 +67,14 @@ descriptor-read override; absent prior entries are removed. Active codeblock ent
 plus the closing name, and exit removes the last matching active entry. This completes source comprehension
 of the parameter cleanup mechanism used by the already-read engine coordinator. Neutral callable proof passes
 7 literals/11 calls/9 invalid literals/7 invalid calls/4 invalid declarations/8 contexts/23 mutations.
+
+## September 7 consumer assertion scope
+
+Reading checkpoint `SESSION-STARTUP-READING.3.3.41` covers the callable consumer through line 791.
+The shared fixture compares exact results across native, reconstructed and generated-plan routes;
+additional native controls verify discarded effects, static precedence, argument order, deep argument
+copy and the ordered mutual recursion cycle. For seven invalid calls, native diagnostics compare each
+neutral expected field, then reconstructed diagnostics equal the complete native record. Generated-plan
+errors and independently emitted error details require the expected code substring instead of full
+envelope equality. Those distinct assertions must not become an exhaustive diagnostic parity claim.
+This is source comprehension plus the fresh neutral contract check, not a fresh native consumer run.
