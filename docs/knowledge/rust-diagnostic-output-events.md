@@ -86,3 +86,12 @@ signal. Taking that failure consumes it. Semantic events use their separate opti
 their own enabled buffer. Replay drains the trace buffer through a scope stack, propagating emitter errors.
 Fresh neutral diagnostic proof remains 3 helpers/11 render rows/6 scenarios/8 complete/20 mutations;
 native sink delivery and trace error behavior are not rerun here.
+
+## September 8 complete consumer reading
+
+Startup `.3.3.50` reads all 483 lines / 18,067 baseline-identical bytes of
+`diagnostic_output_contract.rs`. Its generated direct/traced paths call the typed-v2
+entrypoints alongside compatibility counterparts. Assertions cover exact events and
+values, quiet defaults, arity-before-effects, concrete sink identity and typed exit.
+This checkpoint inspects the consumer; it does not rerun native delivery or compile
+an independent emitted child. Earlier dated v1 admission evidence remains historical.

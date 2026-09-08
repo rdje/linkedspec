@@ -1975,7 +1975,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.49 - reconcile Terse and legacy corpus reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.50`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 50: 1,494 lines/fragments, 55,681 bytes.
   Scope: `rust/linkedspec-runtime/tests/corpus/vhdl_library_use/input.spec` lines 336–384;
     `rust/linkedspec-runtime/tests/corpus/vhdl_library_use/input.txt` lines 1–2;
@@ -1984,8 +1984,11 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     `rust/linkedspec-runtime/tests/duplicate_regex_slot_identity_contract.rs` lines 1–473;
     `rust/linkedspec-runtime/tests/generated_source_full_manifest_classifier.rs` lines 1–253.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Six exact owned-range/baseline identities and canonical Knowledge/test-boundary reconciliation; memory, all doctrines, histories and diff.
+  Canonical trigger: `none` — bounded reading checkpoint; test and runtime behavior unchanged.
+  Verification: All six owned scopes match the baseline: 1,494 lines / 55,681 bytes; ordered path/kind/range/byte/SHA audit `ee7b4b1b146504e7eb0f4e2e7c416091c2ea2058ac30fcc53863baf749c319fc`. VHDL grammar is complete through EOF. The corpus runner checks manifest format/count/unique valid names and exact directory sets, then compares compatibility output with the wrapped reference. Diagnostic consumers assert quiet/default, direct/compatibility/generated-v2 events, early arity rejection, concrete sink identity and typed exit. Duplicate-slot consumer covers its 15 declared roles across required versus choice, reconstructed/source/trace/CLI and invalid identity paths. Classifier prefix prepares 105 strict-UTF-8 cases with direct/compatibility oracles and minimal plans for one child Cargo workspace; suffix and process result handling remain .51-owned. Existing Knowledge is reconciled; no native execution or emitted compilation is newly claimed.
+  Commit: `SESSION-STARTUP-READING.3.3.50 - reconcile corpus and diagnostic test-consumer reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.51`
   Status: `pending`
@@ -4223,7 +4226,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.50` | `pending` | Finish the VHDL grammar and read corpus, diagnostics, duplicate-slot and classifier test consumers. |
+| 1 | `SESSION-STARTUP-READING.3.3.51` | `pending` | Complete the classifier and read the generated integration-test prefix, owning confirmed verification defects. |
 
 ## Reading Ledger
 
@@ -4234,7 +4237,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.49` are reconciled and `.3.3.50`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.50` are reconciled and `.3.3.51`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read at baseline; .3.2.42 preserves coverage, and c8759242 reviews/renders the approved parked-coverage delta. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -6993,6 +6996,7 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- `2026-09-08` `.3.3.50`: Six exact baseline scopes and canonical Knowledge/test-boundary reconciliation pass. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.49`: 202 exact scopes, one explicit empty, 67 decoded JSON files, 68 manifest-owned cases and unchanged grammar mirror pass. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.48`: Exact range and complete mirror identity pass; unchanged .44 Unicode proof applies. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.47`: Four exact scopes, fixture JSON and unchanged canonical mirrors pass; .44 Unicode proof remains applicable. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
@@ -7294,3 +7298,4 @@ Each canonical task node owns its exact `Commit` subject and retained completion
 - `2026-09-08`: `.3.3.47` reconciles minimal-rule and user-function reading; next `.3.3.48`.
 - `2026-09-08`: `.3.3.48` reconciles user-function edge grammar reading; next `.3.3.49`.
 - `2026-09-08`: `.3.3.49` reconciles Terse and legacy corpus reading; next `.3.3.50`.
+- `2026-09-08`: `.3.3.50` reconciles corpus and diagnostic consumer reading; next `.3.3.51`.

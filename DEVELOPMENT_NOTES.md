@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.50 - reconcile corpus and diagnostic test-consumer reading
+
+The corpus compares compatibility output with a wrapped reference. Diagnostic consumers distinguish typed-v2/direct results, compatibility arrays, output sinks and trace. Reading assertions and a classifier prefix does not establish a new native or emitted run.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.49 - reconcile Terse and legacy corpus reading
 
 Stored legacy smokes exercise narrow paths: TkGui is empty, tablegrep is one TERM and VHDL is library/use text. Direct-root and LX-root recursion preserve different outer array shapes. Existing Knowledge retains the richer-case limits.

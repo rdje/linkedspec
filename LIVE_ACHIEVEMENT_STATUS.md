@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.49` are reconciled and `.3.3.50`–`.3.3.66` plus closeout remain pending.
+  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.50` are reconciled and `.3.3.51`–`.3.3.66` plus closeout remain pending.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.76` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.3.49` reconciles 202 scopes: 1,500 lines / 46,200 baseline-identical bytes. All four grammar mirrors are checkpointed; Terse and legacy fixture reading retains explicit smoke-test limits.
+- `SESSION-STARTUP-READING.3.3.50` reconciles six scopes: 1,494 lines / 55,681 baseline-identical bytes. VHDL grammar and corpus/diagnostic/duplicate-slot consumers are read; classifier completion remains .51-owned.
 
 ## Next Action
 
-- Resume `SESSION-STARTUP-READING.3.3.50`; containment `.7` follows Rust closeout before Dart ownership/reading.
+- Resume `SESSION-STARTUP-READING.3.3.51`; containment `.7` follows Rust closeout before Dart ownership/reading.
 
 ## Recent Completions
+
+- `2026-09-08` — `SESSION-STARTUP-READING.3.3.50` reconciles corpus and diagnostic consumer reading.
 
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.49` reconciles Terse and legacy corpus reading.
 
@@ -48,8 +50,6 @@
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.39` finishes the Unicode lower map and preserves completed canonical evidence.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.38` completes staged source reading and begins generated Unicode mapping data.
-
-- `2026-09-07` — `SESSION-STARTUP-READING.3.3.37` reads staged execution and owns target reservation, returned-marker validation and counter admission repairs .73–.75.
 
 ## History
 

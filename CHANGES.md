@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.50 - reconcile corpus and diagnostic test-consumer reading
+
+Reconcile six exact scopes: 1,494 lines / 55,681 bytes. Finish VHDL grammar; read corpus, diagnostic-output and duplicate-slot consumers plus the classifier prefix. Clarify current test-route evidence and route the oracle Cargo reverify through managed storage. Focused checks pass; no runtime change or fresh execution is claimed.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.49 - reconcile Terse and legacy corpus reading
 
 Reconcile 202 scopes: 1,500 lines / 46,200 bytes, including one explicit empty input. Decode 67 JSON files and verify all 68 case directories against the manifest. Complete the last self-hosted mirror and read Terse, legacy, root-recursion and VHDL-prefix fixtures; retain historical smoke limits. Focused checks pass; production behavior is unchanged.
