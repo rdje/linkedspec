@@ -2,6 +2,7 @@
 id: rust-variadic-user-functions
 title: Rust preserves v1 fixed functions and executes v2 variadic functions natively and from generated state
 answers:
+  - "does the Rust variadic contract target independently compile emitted source"
   - "does Rust support variadic user functions"
   - "where does Rust bind a rest parameter"
   - "does Rust evaluate variadic arguments left to right"
@@ -10,11 +11,11 @@ answers:
   - "does Rust generated source preserve callable signatures"
   - "why did Rust variadic result length return zero"
   - "does Rust length work on array values"
-date: 2026-09-07
+date: 2026-09-08
 status: current
 tags: [rust, functions, variadic, rest-parameter, descriptor, staged-parsing, generated-source, length, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.4.2.2 updates rust/linkedspec-core AST/compiler/validation/descriptor models and rust/linkedspec-runtime parser/engine execution. The seven tests in variadic_user_function_contract.rs consume the unchanged neutral fixture through native, serialized, emitted, and generated-plan paths."
-reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test variadic_user_function_contract && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-core"
+evidence: "FUTURE-PARITY-BACKLOG.4.2.2 updates rust/linkedspec-core AST/compiler/validation/descriptor models and rust/linkedspec-runtime parser/engine execution. The seven tests in variadic_user_function_contract.rs execute native, reconstructed compiled-state and generated-plan paths; emitted-signature evidence is source-text inspection."
+reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test variadic_user_function_contract && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-core"
 ---
 
 Rust accepts `fn name(fixed, ...rest) { ... }` through the shared spec-defined definition parser. The parser
@@ -39,3 +40,19 @@ September reading `SESSION-STARTUP-READING.3.3.21` confirms the array-cardinalit
 branch, but literal-undef and unbound-name controls return zero rather than the
 reference null. [[rust-scalar-helper-null-and-empty-drift]] and repair `.61`
 qualify scalar edge behavior; the July variadic suite is not rerun by this update.
+
+## September 8 variadic consumer reading
+
+`SESSION-STARTUP-READING.3.3.66` reconciles all 214 lines and seven tests in
+`rust/linkedspec-runtime/tests/variadic_user_function_contract.rs`. The exact v1/v2
+unions survive definition records, staged payload/job copies and descriptor keys.
+Native controls exercise mixed/empty rest values, receiver chaining, once-only
+left-to-right arguments, fresh rest arrays and distinct fixed/minimum-arity errors.
+Five malformed rest spellings fail parsing; duplicate/reserved names reach and fail
+semantic validation. Reconstructed compiled state and a generated-plan helper
+execute the neutral fixture. Emitted source is inspected for signature text; no
+independent emitted module is compiled in this target.
+
+Fresh callable-signature neutral checking covers three definitions, nine calls
+and seven invalid signatures. These reading and neutral results do not refresh the
+historical native suite or alter the separately owned scalar-null repair `.61`.

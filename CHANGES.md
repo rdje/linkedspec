@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.66 - complete final Rust contract consumer reading
+
+Reconcile four baseline-identical scopes: 1,468 lines / 48,324 bytes. Complete all sixty-six Rust reading groups while keeping .3.3.67 parent closeout pending. Four existing Knowledge cards distinguish Unicode strict-loader compilation and native/generated selectors, uniform-binding generated helpers, variadic emitted-text inspection and the one independently compiled write-vivification fixture with a relative manifest and checked child status. Fresh Unicode806/9/8/2, binding11/7/6/8, signature3/9/7 and write105-mutation neutral checks pass. Historical runtime evidence and all pending repairs retain their scope; no new native target is claimed.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.65 - complete lifecycle trace and typed-source consumer reading
 
 Reconcile five baseline-identical scopes: 1,500 lines / 51,021 bytes. Preserve lifecycle native/reconstructed/generated-helper execution while qualifying emitted text inspection; date the older eleven-test trace result against twelve current source tests. Typed-source Knowledge separates exact 92+7 catalog equality from executed helper fixtures, and Unicode casing retains managed generation versus dated runtime proof. Existing lexical repairs .52–.54 remain pending; label suffix is .66-owned. Fresh typed 14/0/231, Unicode twelve-fixture/five-module byte comparison and lifecycle fourteen-mutation proof pass with focused continuity checks.

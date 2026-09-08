@@ -2,6 +2,7 @@
 id: unicode-rule-label-contract
 title: Rule labels use pinned Unicode 17 XID_Continue with exact scalar identity
 answers:
+  - "which Rust Unicode label tests execute parsers and which inspect emitted source"
   - "what Unicode characters are allowed in a LinkedSpec rule label"
   - "can a LinkedSpec rule label start with a digit or underscore"
   - "does LinkedSpec normalize Unicode rule labels"
@@ -24,11 +25,11 @@ answers:
   - "which backends still need Unicode rule label alignment"
   - "where is the Perl named-slot Unicode classifier generated"
   - "does the Perl XID classifier enforce the named-slot digit reservation"
-date: 2026-09-07
+date: 2026-09-08
 status: current
 tags: [grammar, unicode, rule-labels, rust, dart, julia, lua, generated-data, validation, portability]
 evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.5.0.2.0-.4, .10.6.1.0-.4, and .10.7.0-.1.3; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/unicode_rule_label_contract.json; unicode_case/generate_unicode_rule_label_contract.py; unicode_case/unicode_rule_label_regex_class.txt; specs/spec.spec; tools/check_unicode_rule_label_contract.py; rust/linkedspec-core/src/unicode_rule_label.rs; dart/lib/src/parser/unicode_rule_label.dart; julia/src/spec/UnicodeRuleLabel.jl; lua/src/linkedspec/unicode_rule_label.lua; lua/test/unicode_rule_label_identity_routes_test.lua; lua/test/unicode_rule_label_negative_isolation_test.lua; docs/knowledge/lua-unicode-rule-label-implementation-plan.md
-reverify: "bash tools/run_python_project_data.sh tools/check_unicode_rule_label_contract.py; bash tools/run_lua_local.sh; cd dart && bash ../tools/run_dart_project_data.sh test test/unicode_rule_label_classifier_test[.]dart test/unicode_rule_label_routes_test[.]dart test/unicode_rule_label_identity_routes_test[.]dart test/unicode_rule_label_negative_isolation_test[.]dart test/self_hosted_unicode_rule_label_test[.]dart test/runtime_matching_test.dart && cd ..; bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-core --test unicode_rule_label_contract; bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test unicode_rule_label_routes"
+reverify: "bash tools/run_python_project_data.sh tools/check_unicode_rule_label_contract.py; bash tools/run_lua_local.sh; cd dart && bash ../tools/run_dart_project_data.sh test test/unicode_rule_label_classifier_test[.]dart test/unicode_rule_label_routes_test[.]dart test/unicode_rule_label_identity_routes_test[.]dart test/unicode_rule_label_negative_isolation_test[.]dart test/self_hosted_unicode_rule_label_test[.]dart test/runtime_matching_test.dart && cd ..; bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-core --test unicode_rule_label_contract; bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test unicode_rule_label_routes"
 ---
 
 ADR `0051` defines a rule label as one or more Unicode 17.0.0 `XID_Continue` scalar values, with the same class at
@@ -201,3 +202,19 @@ or filtered cases, in 0.20 test seconds.
 Fresh neutral regeneration again passes 806 ranges, nine positive/eight negative
 fixtures and two distinct pairs. Runtime, generated and emitted identity-route
 suites were not selected by this core-only checkpoint.
+
+## September 8 Rust runtime-label consumer reading
+
+`SESSION-STARTUP-READING.3.3.65/.66` reconciles the complete 196-line
+`rust/linkedspec-runtime/tests/unicode_rule_label_routes.rs` target. Its three
+current tests preserve the distinct precomposed, decomposed and lowercase labels
+in compiled order and descriptors, execute native selectors, and inspect the
+exact decomposed label in an enabled file trace. The generated route executes
+serialized compiled state through the public plan helper for all three selectors.
+Emitted proof checks exact source substrings; it does not independently compile
+an emitted module. The strict file-loader control checks compiled labels and the
+invalid-UTF-8 decode-stage/code pair, without executing the loaded parser.
+
+Fresh managed neutral regeneration passes 806 ranges, nine positive/eight negative
+fixtures and two distinct pairs. These are source/neutral observations, not a new
+native, generated, emitted-child or cross-backend runtime test result.

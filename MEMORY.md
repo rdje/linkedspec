@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `de374978e3a555e9a153bb0ece7cf94e6d7761d0` — clean reading checkpoint base.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.65 - complete lifecycle trace and typed-source consumer reading`.
+- activation_commit: `667e68ab0c9a9aafcdc0e42fc22d9df42100958b` — clean reading checkpoint base.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.66 - complete final Rust contract consumer reading`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: resume `SESSION-STARTUP-READING.3.3.66`; containment `.7` owns later Dart capacity after Rust closeout.
+- next_action: resume `SESSION-STARTUP-READING.3.3.67`; containment `.7` owns later Dart capacity after Rust closeout.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` precede mutation setup; `.29` is part of `.5` adoption.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4983` is the twenty-eighth history segment; ADR `0106`
   authorizes exactly 30 collection files / 29 manifest lines / 16,463 manifest bytes; other ceilings remain unchanged.
-- latest_bootstrap_read: 2026-09-08 — roadmap Yes / codebase No / physical mdBook Yes; .3.3.65 completes lifecycle/trace/typed/casing reading with precise carrier proof; formal .4 pending; PNT resumes .3.3.66.
+- latest_bootstrap_read: 2026-09-08 — roadmap Yes / codebase No / physical mdBook Yes; .3.3.66 completes final Rust contract consumers; only parent closeout remains; formal .4 pending; PNT resumes .3.3.67.

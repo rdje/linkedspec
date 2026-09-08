@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.66 - complete final Rust contract consumer reading
+
+Completion of consumer reading does not turn source assertions into fresh runtime results. The Rust label target compiles its loaded fixture without executing it; labels and variadic functions inspect emitted text while executing generated helpers. The write target independently compiles one computed-string-path child and checks normal success; its full frozen case set is separately exercised natively. These boundaries now live in the existing canonical Knowledge owners. The next leaf independently proves every baseline byte and current delta before canonical Rust reading closeout; containment .7 must precede any Dart decomposition or source reading.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.65 - complete lifecycle trace and typed-source consumer reading
 
 Generated/emitted terminology needs route-level evidence: the lifecycle and trace targets inspect emitted text while executing native/reconstructed or generated helpers; the staged target from .64 independently compiles children. Typed-source catalog completeness proves 92+7 identities, while three fixture programs exercise the runtime routes and four private errors constrain values. Keep these scopes and historical/native counts explicit in existing bounded cards; the nearly-full global rollout card is not expanded. Unicode casing's 91-line test uses direct, helper, receiver and array forms; current regeneration adds no new native execution claim.

@@ -2,6 +2,7 @@
 id: write-vivification-rust-runtime
 title: "Rust preserves one typed nested-write node through every supported carrier and executes v1 vivification atomically"
 answers:
+  - "which write vivification fixture independently compiles emitted Rust"
   - "how does Rust implement nested write vivification"
   - "does Rust nested write create absent roots and intermediates"
   - "how does Rust preserve nested write path spans through serde and emitted source"
@@ -10,11 +11,11 @@ answers:
   - "when does Rust evaluate nested write segments and RHS"
   - "does Rust nested write distinguish absent binding and null"
   - "are Rust nested write results detached"
-date: 2026-09-07
+date: 2026-09-08
 status: implemented under FUTURE-PARITY-BACKLOG.19.3.1; portable capability admitted under .19.7
 tags: [rust, dsl, actionir, assignment, autovivification, diagnostics, generated-source, FUTURE-PARITY-BACKLOG]
 evidence: "Historical native milestone evidence from 2026-09-01; the September 7 updates below are reading and neutral verification only. FUTURE-PARITY-BACKLOG.19.3.1 replaces Rust's static key/index split with WritePathSegment and one AssignNestedAccess node for one or many authored segments. Direct Engine entry validates typed nodes; supported generated carriers validate through emission and decoded compiled state before engine execution. Runtime proof covers the frozen 5 AST / 7 syntax / 11 success / 16 structural-failure contract, evaluation order/failure, absent versus bound-null state, fresh user functions, dense arrays, post-evaluation snapshots, rollback, reads, detachment, and exact typed diagnostic fields. The 105-fixture corpus and 197-test runtime integration suite pass."
-reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test write_vivification_contract && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test integration_test && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle"
+reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test write_vivification_contract && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test integration_test && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test corpus_oracle"
 ---
 
 # Rust write-vivification runtime
@@ -106,3 +107,23 @@ mutates initial, RHS, returned and stored aggregates. Three expression-failure p
 the completed audit prefix and unchanged target; three read controls check absent binding, missing child
 and wrong-kind state without creation. This is assertion-definition evidence; the native suites were
 not rerun. Fresh neutral proof passes the same 105 mutations and frozen cases above.
+
+## September 8 write-vivification consumer reading
+
+`SESSION-STARTUP-READING.3.3.66` reconciles all 592 lines of
+`rust/linkedspec-runtime/tests/write_vivification_contract.rs`. Five parent tests
+cover frozen typed AST/syntax cases, native successful writes, exact structural
+failure fields, fresh function-local presence and one composed carrier fixture.
+The carrier fixture reconstructs both SpecFile and CompiledSpec, executes native
+and validated generated-plan routes, and rejects a corrupt path-segment kind at
+native entry and generated validation.
+
+That fixture also independently compiles an emitted module whose child test checks
+a computed string path producing `{"sections":[{"title":"Intro"}]}`. The temporary
+Cargo manifest uses the repository-relative `../../../linkedspec-runtime`
+dependency; the offline child must report successful termination. This is a real
+emitted compilation route for that fixture, not a claim that all frozen cases run
+through every carrier. The child workspace is removed by its owned Drop helper.
+Fresh neutral proof retains 5/7 AST/syntax, eleven successes, sixteen structural
+failures, three evaluation failures, three read exclusions, eight compositions and
+105 mutations. No native or child Cargo suite is freshly rerun by this checkpoint.

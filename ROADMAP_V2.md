@@ -4,7 +4,7 @@ Execution-oriented companion to `ROADMAP.md`.
 Current session prerequisite: [SESSION-STARTUP-READING](docs/tasks/SESSION-STARTUP-READING.md) records the
 required-reading baseline, exact coverage, and `rgx` exclusion. Roadmap and physical mdBook reading are complete; codebase reading remains
 incomplete. Intakes .31/.3.2.42 preserve exact coverage and confirmed findings; queued comprehension
-checkpoints resume at `.3.3.66`; `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.6` consolidates chronology under unchanged limits, and `.7` owns later Dart admission capacity. Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` remain task-owned before Rust mutation setup;
+checkpoints resume at `.3.3.67`; `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.6` consolidates chronology under unchanged limits, and `.7` owns later Dart admission capacity. Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` remain task-owned before Rust mutation setup;
 policy-gate repair `.29` is part of `.5` adoption after the required reading. `PARSER-AUTHORING-APIS` preserves proposed DBINP libraries/generics, builders and fileless MCP debugging; no implementation is activated.
 
 Rule-local cursor rollout is closed at 74 files / 8 complete + 0 pending / 60 mutations, with

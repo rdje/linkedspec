@@ -2,13 +2,14 @@
 id: rust-uniform-binding-runtime
 title: "Rust bare mutations use one typed binding on native and generated execution"
 answers:
+  - "what carriers do the Rust uniform binding integration tests exercise"
   - "does Rust support selector free push split and hash mutation"
   - "what does Rust set return for method chaining"
   - "how does Rust report a wrong kind bare mutation"
   - "does a saved Rust mutation result change after a later mutation"
   - "how does Rust distinguish push rule dispatch from binding mutation"
   - "are array name and hash name rejected on Rust yet"
-date: 2026-09-07
+date: 2026-09-08
 status: current
 tags: [rust, language, bindings, array, harray, mutation, diagnostics, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.12.1.3 adds RuntimeContext bare-array/harray mutation methods and native/generated proof. FUTURE-PARITY-BACKLOG.12.1.7.2 then migrates all file-backed specs and closes exposed seams: action-edge fluent push uses the same bare typed binding, direct I assignments are rule-invocation-local, otherwise absent compiled-rule names read as empty implicit accumulators, and an explicit non-undef typed binding wins over a descriptor alias. Rust passes 105/105 interpreted and generated corpus cases plus permanent focused tests. FUTURE-PARITY-BACKLOG.12.1.7.3 completes embedded-source migration, and .12.1.8.2 hard-rejects exact aggregate selectors."
@@ -88,3 +89,19 @@ updated root. Bare pop operations return the updated array; private pop methods 
 Hash updates replace an existing key in place or append it. Source reading confirms this distinction without
 fresh native execution; neutral binding passes 11 migrations/7 executions/6 invalid selectors/8 constructors,
 write vivification passes 105 mutations and receiver mutation passes 167/592.
+
+## September 8 uniform-binding consumer reading
+
+`SESSION-STARTUP-READING.3.3.66` reconciles the complete 525-line, sixteen-test
+`rust/linkedspec-runtime/tests/uniform_binding_contract.rs` target. Assertions
+cover exact retired-selector rejection at compilation, including dead/fluent/unused
+function forms, and synthetic selector rejection during emission and generated
+plan validation. Retained constructors, neutral values, detached array-end results,
+rule-versus-binding push precedence, pure/mutating split, harray updates, dropped
+values, collection rebinds, wrong-kind fields, set chains, action-edge push and
+explicit-binding precedence run through native and generated-plan helper routes.
+This target does not independently compile an emitted module.
+
+Fresh neutral checking retains eleven migrations, seven executions, six invalid
+selectors and eight constructors. Earlier native/corpus results above remain dated;
+this reading checkpoint does not rerun those targets.

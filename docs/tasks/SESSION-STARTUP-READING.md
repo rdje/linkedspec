@@ -2193,15 +2193,18 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.65 - complete lifecycle trace and typed-source consumer reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.66`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 66: 1,468 lines/fragments, 48,324 bytes.
   Scope: `rust/linkedspec-runtime/tests/unicode_rule_label_routes.rs` lines 60–196;
     `rust/linkedspec-runtime/tests/uniform_binding_contract.rs` lines 1–525;
     `rust/linkedspec-runtime/tests/variadic_user_function_contract.rs` lines 1–214;
     `rust/linkedspec-runtime/tests/write_vivification_contract.rs` lines 1–592.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact four-scope baseline identities; Unicode-label, uniform-binding, callable-signature and write-vivification neutral contracts; precise native/generated/emitted consumer boundaries; Knowledge, memory, doctrines, histories and diff/scope review.
+  Canonical trigger: `none` — bounded reading and factual reconciliation only; no production, public or infrastructure change.
+  Verification: Four scopes total 1,468 lines / 48,324 baseline-identical bytes; ordered path/kind/range/byte/SHA audit c917155b39652776984df2a0ff341ef71799394032fce55c8f5bcb9e048fe576. Unicode labels: three native/trace/generated-helper and strict-loader tests; emitted identity is text inspection, and loader checks compilation without loaded-parser execution. Uniform binding: sixteen tests cover selector rejection, retained constructors, detached mutations, precedence, wrong-kind fields and native/generated helpers. Variadic: seven tests preserve exact unions, argument order, fresh rest arrays, arity/invalid-definition diagnostics and reconstructed/generated helpers; emitted signatures are inspected, not independently compiled. Write vivification: five parent tests cover frozen syntax/success/failure/local presence and one carrier fixture with an independently compiled emitted child, relative Cargo dependency and checked exit status. Four existing Knowledge cards retain these boundaries and historical runtime counts; no native or child Cargo target is freshly rerun. Fresh neutral Unicode806/9/8/2, binding11/7/6/8, signature3/9/7 and write5/7/11/16/3/3/8/105 pass. Focused continuity proof is retained with the commit.
+  Commit: `SESSION-STARTUP-READING.3.3.66 - complete final Rust contract consumer reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.67`
   Status: `pending`
@@ -4319,7 +4322,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.66` | `pending` | Complete Unicode-label routes, uniform-binding and variadic contracts, and write-vivification tests. |
+| 1 | `SESSION-STARTUP-READING.3.3.67` | `pending` | Audit all 412 Rust baseline paths, exact committed reading coverage, current additions/deltas and repair/Knowledge ownership; close parent with canonical proof before containment .7 and Dart decomposition. |
 
 ## Reading Ledger
 
@@ -4330,7 +4333,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.65` are reconciled and `.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.66` are reconciled; only `.3.3.67` Rust closeout remains pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read at baseline; .3.2.42 preserves coverage, and c8759242 reviews/renders the approved parked-coverage delta. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -7089,6 +7092,7 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- `2026-09-08` `.3.3.66`: Four exact scope/baseline identities PASS. Managed neutral Unicode806/9/8/2, binding11/7/6/8, callable-signature3/9/7 and write5/7/11/16/3/3/8/105 PASS. Existing cards distinguish native/generated-helper execution, strict-loader compilation, emitted-text inspection and the one independently compiled write fixture; no new native run is inferred. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.65`: Five exact scope/baseline identities PASS. Typed neutral 3/7/6/3, 92+7 and14/0/231; Unicode17 five-module byte comparison with12 fixtures; lifecycle9/4/6/3 and14 mutations PASS. Four existing Knowledge cards distinguish runtime/generated-helper execution, emitted-text inspection, catalogs and historical test counts; no new runtime/carrier run is inferred. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.64`: Both scope/baseline identities PASS; staged neutral governance PASS at 9 rollout legs / 123 base / 129 public mutations. Recursive/carrier Knowledge distinguishes historical admission from the completed .61 native run and retains .73–.75/.78. Standalone prefix includes native execution helpers; no emitted compilation is inferred from that prefix. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.63`: Exact three-scope identities PASS; native-resolution neutral 14/9/4 and staged neutral 9 legs / 123 base / 129 public mutations PASS. Three Knowledge cards reconcile child status, loader fixture types and current-depth policy/panic proof while preserving .71/.73–.78 repair ownership. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
@@ -7422,3 +7426,4 @@ Each canonical task node owns its exact `Commit` subject and retained completion
 - `2026-09-08`: `.3.3.63` completes emitter/loader/staged-prefix reading and corrects classifier proof scope; next `.3.3.64`.
 - `2026-09-08`: `.3.3.64` completes staged recursive/carrier reading and starts standalone-lifecycle tests; next `.3.3.65`.
 - `2026-09-08`: `.3.3.65` completes lifecycle/trace/typed/casing reading with precise carrier proof; next `.3.3.66`.
+- `2026-09-08`: `.3.3.66` completes final Rust contract consumers; only parent closeout remains; next `.3.3.67`.
