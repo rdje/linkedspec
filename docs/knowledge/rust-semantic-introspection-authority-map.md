@@ -16,11 +16,11 @@ answers:
   - "does Rust now have a semantic static projection"
   - "does Rust now have a semantic query evaluator"
   - "is Rust semantic introspection admitted"
-date: 2026-07-21
+date: 2026-09-08
 status: current
 tags: [rust, semantic-introspection, source-map, unicode, diagnostics, runtime, generated-source]
 evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.4.0-.10.4.6; docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md; docs/decisions/0051-unicode-17-xid-continue-rule-labels.md; capability_conformance/semantic_introspection_model.json; capability_conformance/unicode_rule_label_contract.json; rust/linkedspec-runtime/src/semantic_index.rs; rust/linkedspec-runtime/src/semantic_index/static_projection.rs; rust/linkedspec-runtime/src/semantic_index/call_projection.rs; rust/linkedspec-runtime/src/semantic_index/query.rs; rust/linkedspec-runtime/src/semantic_index/runtime_projection.rs; rust/linkedspec-runtime/src/semantic_observation.rs; rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs
-reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; bash tools/run_python_project_data.sh tools/check_unicode_rule_label_contract.py; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test semantic_index_foundation --test runtime_diagnostics --test diagnostic_output_contract --test spec_loader --test trace_controls --test source_emitter --test unicode_rule_label_routes; rg -n 'Semantic(Index|Query|Observation)|semantic_(index|query|observation)|regex_slot_selected' rust -g '*.rs'"
+reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py && bash tools/run_python_project_data.sh tools/check_unicode_rule_label_contract.py && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test semantic_index_foundation --test runtime_diagnostics --test diagnostic_output_contract --test spec_loader --test trace_controls --test source_emitter --test unicode_rule_label_routes && rg -n 'Semantic(Index|Query|Observation)|semantic_(index|query|observation)|regex_slot_selected' rust -g '*.rs'"
 ---
 
 Rust semantic introspection must compose several existing typed owners. `parse_spec_with_user_functions` owns the
@@ -38,7 +38,7 @@ source spans. Function extraction is richer: staged function sidecars retain cha
 payload/job/result policy, and typed body AST. The mapper/correlator must convert final references to zero-based
 half-open bytes and one-based Unicode-scalar columns without serializing Rust AST layout.
 
-Current native probes establish these exact boundaries:
+The original July 21 native probes recorded these exact boundaries:
 
 - graph, calls, failed, and runtime sources parse; graph/calls/runtime validate and compile;
 - calls retains the exact typed body AST and `actionir-body.spec` parse job;
@@ -84,14 +84,19 @@ canonical pages, filtered directional BFS, logical budgets/costs, explanations, 
 exact. See [[rust-semantic-query-evaluator]].
 
 Composed leaf `.10.4.6` adds no new authority. One exact 12-role consumer reuses all of the owners above across
-loaded/reconstructed/generated/source-emitter/traced routes and all 20 query digests. The checker locks its
-topology and advances only Rust to rollout 3/9 and native admission 2/6. See
+loaded/reconstructed/generated/traced routes and all 20 fixture query digests. Its source-emitter-labelled
+routes reuse generated-plan helpers, without independently compiling emitted modules; traced wrappers use
+disabled text tracing. The checker locks its
+topology; the original July 21 promotion advanced Rust to rollout 3/9 and admission 2/6. Startup .3.3.61/.62
+reverification reports the current neutral 128 mutations, rollout 9/0 and admission 6/0, and the composed Rust
+consumer passed 1/1 in 108.53 test seconds in the .3.3.61 canonical gate. These exact fixtures do not establish
+coverage for arbitrary authored sources; startup semantic projection repairs remain pending. See
 [[rust-semantic-introspection-admission]].
 
-During this audit, `TOOLBOX.md` §4.9 still advertised 57 rejected mutations, rollout 1+8, and pre-admission Perl
-state even though the executable checker reports 65, rollout 2+7, and admission 1+5. The checker guards contract,
-CI, and book topology but not its own toolbox command/output documentation. Leaf `.10.4.0.1` owns the current-state
-repair plus a no-drift guard. See [[semantic-introspection-neutral-contract]],
+During the original July 21 audit, `TOOLBOX.md` §4.9 advertised 57 rejected mutations, rollout 1+8, and pre-admission Perl
+state even though that dated checker run reported 65, rollout 2+7, and admission 1+5. This is the historical
+finding routed to leaf `.10.4.0.1` for toolbox repair and a no-drift guard; those figures are not current
+rollout or admission status. See [[semantic-introspection-neutral-contract]],
 [[rust-generated-source-v2-rule-local-cursor]], [[rust-runtime-structured-diagnostics]],
 [[rust-diagnostic-output-events]], [[function-body-parse-job-sidecar]],
 [[outward-descriptor-is-not-semantic-wire-model]], and [[rust-native-spec-resolution]].

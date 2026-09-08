@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.62 - complete semantic admission and emitter boundary reading
+
+Read and reconcile the exact admission suffix, source-boundary compatibility tests and emitter prefix: 1,483 lines / 48,632 baseline-identical bytes. Qualify generated-plan versus independent emitted execution, preserve historical admission/full-gate counts, and retain the completed .61 canonical result and bounded September 8 loader observations. Create actual pending routing signal-status repair .79 with a source-pinned executable fact card; public .41.3/.41.7 and runtime repairs remain gated on .3/.4/.5. Focused proof covers exact identities, semantic governance, original/guard routing children, safe history siblings, Knowledge, memory, doctrines, histories and diff.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.61 - complete semantic consumer reading and roll engineering notes
 
 Completed Rust checkpoint `.3.3.61`: 1,461 lines / 52,200 baseline-identical bytes and semantic governance 6/20/128, rollout 9/0, admission 6/0. Corrected the independent emitted-module digest overclaim. The scheduled engineering-notes rollover preserves exact source history with a separately indexed finite count admission; canonical staged verification is required before landing.

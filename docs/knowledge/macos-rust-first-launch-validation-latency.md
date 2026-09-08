@@ -2,6 +2,7 @@
 id: macos-rust-first-launch-validation-latency
 title: "A cold repository-local Rust test launch stalled in macOS validation before main"
 answers:
+  - "which September 8 samples locate compiler and test startup waits"
   - "why did the Rust trace controls build take 55 minutes"
   - "was trace_controls looping after the cold build"
   - "why was the Rust test binary stuck at dyld_start"
@@ -10,7 +11,7 @@ answers:
   - "why did rustc wait in dlopen during startup canonical CI"
   - "did Rust pre-main waits also occur during permitted canonical CI"
   - "which September 7 startup samples distinguish aborted and accepted CI attempts"
-date: 2026-09-07
+date: 2026-09-08
 status: older controlled artifacts classified; newer OS samples locate pre-main waits without identifying their cause
 tags: [rust, macos, syspolicyd, gatekeeper, verification, performance, FUTURE-PARITY-BACKLOG]
 evidence: "During FUTURE-PARITY-BACKLOG.19.3.3 signoff, a plain-cargo test with repository-local target but user-home registry reads finished its cold build in 55m44s after prolonged per-crate waits. More than three minutes after Cargo launched trace_controls, it had 112 KiB footprint and no test output. Process census found Cargo/test alive and macOS syspolicyd consuming substantial CPU; a one-second sample contained only _dyld_start, proving Rust test code had not begun. The exact /tmp report created by sample was consumed, deleted, and verified absent. The eventual 12/12 result is diagnostic only until rerun through LinkedSpec's managed Cargo wrapper."
@@ -219,3 +220,53 @@ Each command was `bash tools/project_data_run.sh /usr/bin/sample <pid> 1 1 -file
 The waits cleared without runtime, target, cache, signing or trust changes. Sampling is not established
 as a workaround. Both sample jobs and the canonical gate are fully consumed; no background result remains
 from this checkpoint.
+
+## September 8 engineering-notes checkpoint
+
+Reading leaf `SESSION-STARTUP-READING.3.3.62` consumes the canonical result for `.3.3.61`,
+committed as `64d82792b2ff60e1cafad9a9b3f27b33596c91d8`. Approved host execution passed the mandatory consumers,
+all nine doctrines, representative process locality, five relocated primary anchors, both
+CLI environments at 66/66, and Phase 0 1,032/1,032 in 1155 wallclock seconds.
+That duration belongs to Phase 0 only. The 25 optional local gates/matrices were skipped.
+The staged receipt at base `165b74dc88cdb86c433807b0a692893a4e3998d6` bound SHA-256
+`2a23474f8f879aba30adc8290120ce6cb6e28de3ea750065ea4105ebc4453254` and was checked
+before landing and after promotion. The retained log is
+`.linkedspec-data/ci-startup-rust61-165b74dc.log`: 174746 lines / 10622473 bytes,
+SHA-256 `3b77cb7946c19fe7eaa730f4432b6d03e0fc5bedcd337ac7c32de9e789fc3aad`.
+
+All three sampled intervals below occurred on macOS 26.6.2 (25G83), with local
+times +0200 on September 8. Parent build, sampled interval and test execution are separate
+measurements. These are not controlled cold/warm experiments and do not identify the
+underlying kernel or policy cause for this run.
+
+| Target; PID / parent | Launch | Sample | Observed stack | Subsequent result |
+| --- | --- | --- | --- | --- |
+| staged AST test; 33770 / 82585 | 12:36:07.317 | 12:40:07.520 | all 804 frames at `_dyld_start`; 112 KiB | 1/1; 802.08 test seconds, after separate 10m12s parent build |
+| LinkedSpec core compiler for progressive admission; 34050 / 25353 | 13:09:16.804 | 13:12:46.406 | all 798 compiler-worker frames end at `__fcntl` through procedural-macro loading | compiler completed; combined progressive parent build 17m49s |
+| progressive admission test; 40297 / 25353 | 13:16:51.100 | 13:25:20.994 | all 803 frames at `_dyld_start`; 112 KiB | 1/1; 220.33 test seconds |
+
+The compiler chain is `rustc_metadata::creader::dlsym_proc_macros` / `load_dylib` /
+dyld `dlopen` / `Loader::mapSegments` / `SyscallDelegate::fcntl`. The main compiler
+thread joins the worker; other observed threads wait. This locates procedural-macro
+library loading during the sample, without identifying why the system call waited.
+
+The two complete 32-line test reports were read in full. For the 447-line compiler
+report, the header, complete call graph and collapsed-stack totals were read; the
+remaining binary-image inventory was not read in full. Symbol processing after that
+one-second sample also took time, which is not the sampled interval or a proved
+intervention. Every sampling job completed with exit zero and was consumed.
+
+| Retained report | Bytes; lines | SHA-256 |
+| --- | --- | --- |
+| `.linkedspec-data/scratch/startup-rust61-staged-33770.sample.txt` | 1075; 32 | `4f6f40ed68542117a79f0d16f6cba984af2ef3959691405993fb77f2118768e3` |
+| `.linkedspec-data/scratch/startup-rust61-progressive-core-34050.sample.txt` | 77191; 447 | `1de7437a3db59cb50589c15a5aa226fda9510f42e2d890cc455d8116dbf4ef8b` |
+| `.linkedspec-data/scratch/startup-rust61-progressive-test-40297.sample.txt` | 1091; 32 | `e9b6759f9ff75f7096b610ef459cb2cda53726a898aac62362c87c3b85fdf772` |
+
+A later read-only census found recursive-observation PID 18154 / Cargo 16100 alive
+and sleeping at an elapsed 8m50s with 32 KiB RSS. It was not stack-sampled, so the
+same stack or cause is not inferred. That consumer subsequently passed 7/7 in
+43.48 test seconds after a separate shared 7m05s build.
+
+The required PGEN → RGX → LinkedSpec Rust dependency build chain is expected.
+No target cleanup, recovery/purge, cache/signing/trust change or off-volume scratch
+was used. The observed waits cleared; sampling is not established as a workaround.
