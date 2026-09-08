@@ -5,20 +5,22 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.42` are reconciled and `.3.3.43`–`.3.3.66` plus closeout remain pending.
-- Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.75` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
+  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.43` are reconciled and `.3.3.44`–`.3.3.66` plus closeout remain pending.
+- Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.76` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `STRUCTURED-TEXT-FORMAT-PROGRAM.0.1` records approved parked language coverage `.12` and the evidence matrix `.2.8`.
-- Original 91 rows remain exact; the mdBook makes approval and inactive readiness `.1` visible. Focused documentation proof governs landing.
+- `SESSION-STARTUP-READING.3.3.43` reconciles 53 scopes / 1,106 lines / 59,355 unchanged bytes, 18 JSON files and 105 manifest cases.
+- SimEnv dispatch repair `.76` is owned; DBINP authoring investigations are proposed. Production behavior is unchanged.
 
 ## Next Action
 
-- Resume `SESSION-STARTUP-READING.3.3.43`; retain remaining DBINP authoring proposals with its intake. Format implementation stays parked.
+- Activate `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.6` after this clean checkpoint, then resume reading `.3.3.44`. Preserve unique evidence and existing limits.
 
 ## Recent Completions
+
+- `2026-09-08` — `SESSION-STARTUP-READING.3.3.43` reconciles corpus reading, owns SimEnv dispatch and preserves DBINP intake.
 
 - `2026-09-08` — `STRUCTURED-TEXT-FORMAT-PROGRAM.0.1` records approved parked language coverage and its evidence matrix.
 
@@ -49,8 +51,6 @@
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.31` completes call reading and owns false signature acceptance plus composite-call/source omissions under .67.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.30` completes context/foundation reading and owns repeated binding identity/source-reference repair .66.
-
-- `2026-09-07` — `SESSION-STARTUP-READING.3.3.29` reads completion routing, typed projection and identity-based stores with five focused contracts.
 
 ## History
 

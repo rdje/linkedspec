@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `d6f37492505661c87c06c112126da101308ec6e4` — clean documentation-intake base.
-- latest_completed_leaf: `STRUCTURED-TEXT-FORMAT-PROGRAM.0.1 - record approved parked language coverage and evidence matrix`.
+- activation_commit: `c875924236c1fcd0bfd16852a87b920353912533` — clean reading-checkpoint base.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.43 - reconcile corpus reading and own SimEnv dispatch repair`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: resume `SESSION-STARTUP-READING.3.3.43`, preserving the remaining DBINP authoring proposals
-  with the intake; approved format-program `.2.8`/`.12` are parked and readiness `.1` is inactive.
+- next_action: activate `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.6` to recover task capacity before reading `.3.3.44`;
+  `PARSER-AUTHORING-APIS` is proposed and approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
-- blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.75` precede mutation setup; `.29` is part of `.5` adoption.
+- blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.76` precede mutation setup; `.29` is part of `.5` adoption.
 - current_rust_warning_debt: repeated clean carriers report 1,870 `pgen` plus 26 `rgx-core` output warnings;
   `RUST-DEPENDENCY-WARNING-ZERO.1-.7` own causal repair/pins/enforcement without suppression, after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4983` is the twenty-eighth history segment; ADR `0106`
   authorizes exactly 30 collection files / 29 manifest lines / 16,463 manifest bytes; other ceilings remain unchanged.
-- latest_bootstrap_read: 2026-09-08 — durable roadmap Yes / codebase No / physical mdBook Yes; .3.3.42 completes callable/named-mark and corpus-prefix reading; formal .4 alignment pending; PNT requested.
+- latest_bootstrap_read: 2026-09-08 — roadmap Yes / codebase No / physical mdBook Yes; .3.3.43 reconciles corpus/SimEnv reading; formal .4 pending; PNT continues after capacity .6.

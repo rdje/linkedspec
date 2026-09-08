@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.43 - reconcile corpus reading and own SimEnv dispatch repair
+
+The SimEnv edge matches variable_substitution but explicitly calls bvariable_substitution in three quoting contexts. Generated action inspection follows that authored callee; changing only those targets in memory restores bare variables while braced controls retain their node shapes. This is distinct from historical single-line verbatim loss. Corpus inventory, stored oracles, empty-input reachability and executed runtime evidence remain separate. Required reading and full cross-backend repair are still pending; the director's RGX/PGEN build-chain clarification is preserved without treating generated dependency state as a blocker.
+
 ## 2026-09-08 — STRUCTURED-TEXT-FORMAT-PROGRAM.0.1 - record approved parked language coverage and evidence matrix
 
 Coverage count, conformance, mechanisms exercised, authoring friction, performance and confidence answer different questions. The parked extension records them separately with reproducible evidence and unassessed states. Language membership/version/dialect and bounded parser ownership are selected at activation; every confirmed gap gains a minimal reproduction and a repair owner. The existing neutral-language/all-backend sequence continues, and finite inventory coverage does not prove universal parsing completeness.
