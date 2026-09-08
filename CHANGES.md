@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.42 - complete callable and named-mark reading with corpus prefix
+
+Read all 56 owned scopes: 1,500 lines / 45,529 baseline-identical bytes. Callable and named-mark neutral checks pass. Existing Knowledge distinguishes source inspection, generated-plan assertions and standalone emitted execution. The task collection approaches its unchanged line ceiling; containment .5 owns duplicate-chronology compaction before reading resumes.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.41 — complete Unicode reading and checkpoint callable contracts at the batch boundary
 
 Read the Unicode suffix and callable consumer prefix completely: 1,494 lines / 43,943 baseline-identical bytes. The complete Unicode module is now read; four existing Knowledge cards record the evaluator and precise callable assertion scope. Unicode regeneration/twelve fixtures and callable neutral checks pass. An independent Git census verifies the preceding 99 batch commits. This final reading slice requires an exact staged canonical receipt before landing, with the completed gate summary in its commit body and a clean receipt-verified push.

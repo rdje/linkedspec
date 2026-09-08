@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `f3a26cd55982e9b5285349b38bc9b96eb8b9666e` — clean preceding reading checkpoint.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.41 - complete Unicode reading and checkpoint callable contracts at the batch boundary`.
+- activation_commit: `fb307dae35d0ecfdcbb4b29e65bec36855d6971b` — clean reading checkpoint base.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.42 - complete callable and named-mark reading with corpus prefix`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: activate `.3.3.42`; read callable contract lines 792–958, complete named-mark contract and the owned corpus prefix,
-  then continue queued reading. Intake `.31` preserves the forward source coverage and exact findings.
+- next_action: activate `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5` from clean HEAD; compact proven duplicate
+  startup chronology, preserve the proposed generic-rule investigation, then return to reading `.3.3.43`.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.75` precede mutation setup; `.29` is part of `.5` adoption.
 - current_rust_warning_debt: repeated clean carriers report 1,870 `pgen` plus 26 `rgx-core` output warnings;
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4983` is the twenty-eighth history segment; ADR `0106`
   authorizes exactly 30 collection files / 29 manifest lines / 16,463 manifest bytes; other ceilings remain unchanged.
-- latest_bootstrap_read: 2026-09-06 — roadmap Yes / codebase No / mdBook Yes (physical); .31/.3.2.42 preserve complete book/Perl source coverage and repair ownership; formal .4 alignment remains pending (100/100 after `.3.3.41` lands).
+- latest_bootstrap_read: 2026-09-08 — durable roadmap Yes / codebase No / physical mdBook Yes; .3.3.42 completes callable/named-mark and corpus-prefix reading; formal .4 alignment pending; PNT requested.

@@ -3,11 +3,10 @@
 ## Metadata
 
 - Tree ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-- Status: `done` / composition-closeout `.4` signoff-complete for atomic 180/300
+- Status: `active` / `.5` pending; `.0-.4` remain complete
 - Roadmap lane: `Repository architecture / documentation sustainability`
 - Created: `2026-08-09`
-- Last updated: `2026-08-10` (`.0-.3` landed through `921f0507`; `.4` definitive signoff is complete for
-  intended atomic 180/300; no push)
+- Last updated: `2026-09-08` (`.5` owns measured startup-task pressure; prior closeout evidence is retained)
 - Owner: repo-local workflow
 
 ## Goal
@@ -59,10 +58,10 @@ or the README `.4` adoption/closeout that installs the guard.
 ## Task Tree
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-  Status: `done` (2026-08-10; `.0-.4` composition-closeout signoff complete; atomic 180/300 commit pending)
+  Status: `active` (`.0-.4` complete; `.5` owns current task pressure)
   Goal: Replace measured oversized routed destinations with bounded views over durable stores.
   Depends on: `README-STABILITY-POLICY.4.2`
-  Children: `.0-.4`
+  Children: `.0-.5`
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0`
   Status: `done` (2026-08-09; committed atomically at `dc8dd896` as 176/300; brief cleared; clean proof passed;
@@ -280,11 +279,19 @@ or the README `.4` adoption/closeout that installs the guard.
     behavior, README content, and repository-local/root-relative execution.
   - [x] **LOCKSTEP** — Close the ADR/task/program state and return every live/public pointer to the prior frontier.
 
+- ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5`
+  Status: `pending`
+  Goal: Recover task-collection headroom by removing proven duplicate startup chronology.
+  Acceptance: Prove every removed batch/commit/verification statement has a richer retained task/Git owner;
+    retain unique reading ranges, causal evidence, decisions, repair ownership and all stable IDs. Preserve
+    every pressure limit and immutable file; run focused metadata, memory, routing and continuity proof.
+    Commit before returning to SESSION-STARTUP-READING.3.3.43; split any required infrastructure change first.
+  Verification: `pending`
+  Commit: `pending`
+
 ## Current Frontier
 
-`.4` definitive signoff is complete from clean activation `921f0507` and awaits only its atomic 180/300 commit,
-brief clearing, and exact clean proof. The restored product frontier is `FUTURE-PARITY-BACKLOG.14.3.1.1`; it may
-activate task-tree-first only after this worktree is clean.
+Activate `.5` only after the clean `SESSION-STARTUP-READING.3.3.42` checkpoint; compact proven duplicates, then resume `.3.3.43`.
 
 ## Decisions
 

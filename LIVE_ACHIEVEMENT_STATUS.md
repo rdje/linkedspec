@@ -5,21 +5,22 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.41` are reconciled and `.3.3.42`–`.3.3.66` plus closeout remain pending.
+  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.42` are reconciled and `.3.3.43`–`.3.3.66` plus closeout remain pending.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.75` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.3.41` reads the complete Unicode module and callable consumer prefix at the 100-item batch boundary.
-  This is item 100/100. Intake `.31` retains forward coverage, findings, and prior canonical proof.
+- `SESSION-STARTUP-READING.3.3.42` completes callable/named-mark reading and the owned corpus prefix; focused neutral checks pass.
 
 ## Next Action
 
-- Activate `SESSION-STARTUP-READING.3.3.42`: read callable contract lines 792–958, complete named-mark contract and the owned corpus prefix.
-  Continue required reading and policy review, then tracked repairs before Rust mutation configuration.
+- Activate `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5` from the clean checkpoint; compact proven duplicate startup chronology before `.3.3.43`.
+- Preserve the director's generic-rule question as a proposed investigation after that clean pivot.
 
 ## Recent Completions
+
+- `2026-09-08` — `SESSION-STARTUP-READING.3.3.42` completes callable, named-mark and corpus-prefix reading.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.41` completes Unicode reading and checkpoints callable contract assertions at item 100.
 
@@ -50,8 +51,6 @@
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.28` completes recognition adapter reading and reconciles gap, typed helper and incoming conversion boundaries.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.27` completes CLI reading, passes 66 default cases and reconciles recognition authority guards.
-
-- `2026-09-07` — `SESSION-STARTUP-READING.3.3.26` completes MCP wire reading and owns the twelve-pair EOF limit discrepancy.
 
 ## History
 

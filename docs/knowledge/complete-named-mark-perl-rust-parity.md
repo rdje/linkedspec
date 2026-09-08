@@ -55,3 +55,7 @@ parent token/mark accidentally. That behavior change belongs to `.14.3`, not thi
 - Lua continuation: [[lua-complete-named-mark-parity]].
 - Family taxonomy: [[spec-capture-mark-family-taxonomy]].
 - Transaction-frame continuation: [[cursor-transaction-safety-audit-plan]].
+
+## September 8 consumer reading completion
+
+Checkpoint SESSION-STARTUP-READING.3.3.42 reads all 90 lines of rust/linkedspec-runtime/tests/complete_named_mark_contract.rs. This consumer compares the exact neutral value for native execution, CompiledSpec JSON reconstruction and validated generated-plan execution. Its emission assertion checks the contract marker in the source; it does not independently compile the emitted source. The earlier milestone narrative must not attribute standalone compilation to this particular consumer. Fresh neutral proof passes seven helpers and three mutations; reading is not a native rerun.

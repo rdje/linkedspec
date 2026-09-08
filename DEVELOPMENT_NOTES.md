@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.42 - complete callable and named-mark reading with corpus prefix
+
+The completed consumers assert different carrier boundaries: contextual callable coverage compiles an emitted fixture, while the named-mark consumer inspects emission and executes a validated generated plan. Reading preserves those distinctions without claiming a fresh native run. The measured task collection requires proven duplicate removal under its existing containment owner; unique reading and repair evidence stays addressable.
+
 ## 2026-09-07 — SESSION-STARTUP-READING.3.3.41 — The final batch boundary preserves exact coverage and verification scope
 
 Unicode casing uses binary-searched property intervals and original input scalars for Final Sigma, then emits full mapping sequences without normalization. The callable prefix uses different strengths of diagnostic assertion across routes; source reading must preserve that distinction. The first 99 batch commits are independently matched to their recorded leaves and hashes. The final exact staged candidate runs canonical CI; its completed result is added to the ignored commit-message brief so durable commit evidence can include the result without changing the verified candidate.

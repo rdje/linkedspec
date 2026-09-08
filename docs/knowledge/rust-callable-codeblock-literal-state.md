@@ -78,3 +78,7 @@ Invalid literal tests require the expected code to occur in the parser error str
 a full structured diagnostic envelope. Fresh neutral checking passes 7 literals, 11 calls, 9 invalid
 literals, 7 invalid calls, 4 invalid declarations, 8 contextual forms and 23 governance mutations.
 The historical native milestone counts above remain dated evidence.
+
+## September 8 consumer reading completion
+
+Checkpoint SESSION-STARTUP-READING.3.3.42 reads the remaining 792–958 lines, completing physical coverage of the 958-line consumer. Its semantic binding test requires codeblock shape plus the fixed/rest callable signature. Fresh validation is the neutral contract; no native consumer rerun is claimed.

@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Session continuity prerequisite to RUST-MUTATION-TESTING.1`
 - Created: `2026-09-06`
-- Last updated: `2026-09-07`
+- Last updated: `2026-09-08`
 - Owner: repo-local workflow
 - Reading baseline: `baeb984e36a94a15951cd23d4c52def5064cdaca`
 
@@ -1565,7 +1565,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.41 - complete Unicode reading and checkpoint callable contracts at the batch boundary`
 
 - ID: `SESSION-STARTUP-READING.3.3.42`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 42: 1,500 lines/fragments, 45,529 bytes.
   Scope: `rust/linkedspec-runtime/tests/callable_codeblock_literal_contract.rs` lines 792–958;
     `rust/linkedspec-runtime/tests/complete_named_mark_contract.rs` lines 1–90;
@@ -1624,8 +1624,13 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     `rust/linkedspec-runtime/tests/corpus/hlink_curly_brace/expected.json` lines 1–3;
     `rust/linkedspec-runtime/tests/corpus/hlink_curly_brace/input.spec` lines 1–28.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact scoped reading and baseline byte identity; callable and named-mark neutral checks;
+    Knowledge reconciliation; task pressure census; memory, doctrines, Knowledge, both histories and staged diff.
+  Canonical trigger: `none` — reading and continuity only; no runtime, public contract or infrastructure change.
+  Verification: PASS: all 56 scopes / 1,500 lines / 45,529 bytes read untruncated and baseline-identical;
+    callable 7/11/9/7/4/8/23 and named-mark 7 helpers/3 mutations pass; focused continuity proof precedes landing.
+  Commit: `SESSION-STARTUP-READING.3.3.42 - complete callable and named-mark reading with corpus prefix`
 
 - ID: `SESSION-STARTUP-READING.3.3.43`
   Status: `pending`
@@ -4182,9 +4187,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 ## Current Frontier
 
-| Order | Leaf | Status | Why next |
-| --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.42` | `pending` | read callable contract lines 792–958, complete named-mark contract and the owned corpus prefix. |
+No startup leaf is currently eligible: complete `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5` from a clean pivot, then activate `.3.3.43`.
 
 ## Reading Ledger
 
@@ -4195,7 +4198,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.41` are reconciled and `.3.3.42`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.42` are reconciled and `.3.3.43`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read and baseline-identical; .3.2.42 preserves the complete coverage. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -6890,6 +6893,14 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - Callable prefix reading distinguishes exact native/reconstructed records from generated error-code substring assertions, inert state from invocation, and source inspection from emitted execution. The contextual suite prefix covers descriptor/body/job metadata and eleven route results; the eager-block test only starts at the boundary. Four existing Knowledge cards preserve these limits. Fresh Unicode regeneration/12 fixtures and callable 7/11/9/7/4/8/23 checks pass; no new native callable execution is claimed by reading.
 - Independent Git census verifies all 99 preceding first-parent batch commits after `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`, with each recorded leaf/hash in order. Item 100 requires exact staged canonical CI before landing; the completed gate summary/log identity belongs in its commit body, and the promoted exact-HEAD receipt governs final clean push. No new defect, runtime/public-book/policy repair, recovery or purge; codebase reading remains No and formal .4 alignment is pending.
 
+### Callable completion, named marks and corpus prefix at `.3.3.42`
+
+- Clean activation `fb307dae35d0ecfdcbb4b29e65bec36855d6971b`; all 56 owned scopes read in four untruncated groups, 1,500 lines / 45,529 baseline-identical bytes. Callable suffix SHA-256 `d3a518d533d0a4b28dd118a1ff36c39725213304586f1633ef22f7da8d1ec894`; named-mark consumer `00750f546668f63acd29ddcf732f869262f6ea9833ae503ae9b82e5a9d6dccce`.
+- Callable suffix completes eager-block preservation, typed-final-value diagnostic fields, standalone contextual execution and semantic signatures. Named-mark assertions cover native/reconstructed/validated generated-plan values plus emitted source inspection; this consumer does not independently compile its emitted source. Existing Knowledge owns these exact limits.
+- Corpus prefix includes autoexist, six capability families, vhistory, two EBNF fixtures and hlink; hlink_curly_brace source line 29 and its input remain `.3.3.43`. Corpus values remain frozen evidence, not fresh runtime results. Callable and named-mark neutral checks pass; no production/public repair is claimed.
+- Exact routed task census at activation is 100 files / 79,955 lines / 8,146,914 bytes; the 80,000-line limit requires duplicate-chronology compaction under `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5` before continued reading. All limits remain unchanged.
+- Director requests assessment of parameterized/generic rules: preserve a proposed investigation after the clean containment pivot, covering grammar-rule parameters and separate runtime value parameters; no language implementation is authorized by that question.
+
 ### Roadmap reconciliation at `.2`
 
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
@@ -7153,6 +7164,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.39` | Five complete ranges/baseline identity; Unicode generation/12 fixtures; prior canonical receipt/log/two sample identities; five Knowledge cards; memory/history/diff/nine doctrines | PASS reading and evidence reconciliation; .3.3.38 canonical PASS at eba1a0ed; skipped optional results not refreshed. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.40` | Five complete upper-map ranges; baseline and retained-generation input identity; Unicode Knowledge; memory/history/diff/nine doctrines | PASS reading and retained-proof scope; upper map complete, evaluator remains pending. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.41` | Exact two-file reading/baseline identity; complete Unicode coverage; callable assertion scope; Unicode/callable neutral checks; four Knowledge cards; 99-commit batch census; memory/history/diff and receipt-bound canonical gate | PASS focused reading and census; exact staged canonical receipt required before landing, with final result in the commit body. |
+| `2026-09-08` | `SESSION-STARTUP-READING.3.3.42` | Exact scoped reading/baseline identity; callable/named-mark neutral checks; Knowledge, memory, histories, diff and all doctrines | PASS focused reading; pressure maintenance owns the next clean pivot. |
 
 ## Commit Log
 
@@ -7259,6 +7271,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 | `SESSION-STARTUP-READING.3.3.39` | `SESSION-STARTUP-READING.3.3.39 - finish Unicode lower-map reading and preserve canonical evidence` | Preserve completed Unicode lower-map comprehension and exact prior canonical/sample evidence. |
 | `SESSION-STARTUP-READING.3.3.40` | `SESSION-STARTUP-READING.3.3.40 - complete Unicode upper-map reading` | Complete upper-map physical reading with exact range identity and retained generation proof. |
 | `SESSION-STARTUP-READING.3.3.41` | `SESSION-STARTUP-READING.3.3.41 - complete Unicode reading and checkpoint callable contracts at the batch boundary` | Close the accepted 100-item batch after exact canonical proof; resume required reading at .3.3.42. |
+| `SESSION-STARTUP-READING.3.3.42` | `SESSION-STARTUP-READING.3.3.42 - complete callable and named-mark reading with corpus prefix` | Complete callable/named-mark reading and owned corpus prefix. |
 
 ## Changelog
 
@@ -7409,3 +7422,5 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - `2026-09-07`: `.3.3.39` completes Unicode lower-map reading and preserves canonical .3.3.38 plus bounded sample/probe evidence.
 - `2026-09-07`: `.3.3.40` completes the Unicode upper map and preserves exact reading and retained-proof scope.
 - `2026-09-07`: `.3.3.41` completes Unicode module reading and bounds callable consumer coverage at the final 100-item batch checkpoint.
+
+- `2026-09-08`: `.3.3.42` completes reading; pressure owner `.5` precedes `.3.3.43`, and the generic-rule question remains proposed intake.

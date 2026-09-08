@@ -72,3 +72,7 @@ state contains no contextual candidate. Semantic function records retain final-c
 Eleven contextual results are compared exactly across native, reconstructed and generated-plan routes.
 The subsequent eager-block test only begins in this range; its body and later emitted contextual tests
 remain unread. These are assertion-scope observations, not fresh native or emitted execution results.
+
+## September 8 consumer reading completion
+
+Checkpoint SESSION-STARTUP-READING.3.3.42 completes the eager-block test: compiled JSON retains block_value, execution expects the eager result, and an unknown attached callee must contain callable_contract_rejected plus its name. Invalid declarations compare neutral code substrings; typed-function/helper/receiver harray calls compare the exact final_argument_not_codeblock code and harray kind. A separate offline Cargo fixture compiles emitted contextual code and compares the exact result. These are read assertions; fresh proof is the neutral checker, not a new emitted execution.
