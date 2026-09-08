@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.53 - complete integration reading and checkpoint gap-capture consumer
+
+Reconcile two scopes: 1,500 lines / 55,337 baseline-identical bytes. Complete all 3,910 integration lines and read the gap-consumer prefix through 380. Preserve assertion and emitted-fixture preparation limits against existing Knowledge. Focused continuity checks pass; implementation is unchanged.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.52 - reconcile integration control and traversal reading
 
 Reconcile integration lines 1383–2790: 1,408 lines / 65,108 baseline-identical bytes. Preserve control, value-block, scope, callback and child-result distinctions; qualify historical comments. Route expression-block Cargo rechecks through managed storage. Focused continuity checks pass; implementation is unchanged.

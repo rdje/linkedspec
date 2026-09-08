@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.53 - complete integration reading and checkpoint gap-capture consumer
+
+The integration suffix exercises bounded shipped-spec results and rich capability fixtures. The gap prefix introduces role accounting, adapters and emitted fixture sources; preparing those sources does not establish an executed emitted result.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.52 - reconcile integration control and traversal reading
 
 Expression-block returns are local to value evaluation; rule return and accumulator effects have separate boundaries. Callback scopes restore temporary bindings, while mutation assertions distinguish copy from rebinding. This checkpoint reads those controls without rerunning them.

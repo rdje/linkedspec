@@ -2014,13 +2014,16 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.52 - reconcile integration control and traversal reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.53`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 53: 1,500 lines/fragments, 55,337 bytes.
   Scope: `rust/linkedspec-runtime/tests/integration_test.rs` lines 2791–3910;
     `rust/linkedspec-runtime/tests/inter_match_gap_capture_contract.rs` lines 1–380.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact owned-range/baseline identities and test-route/Knowledge reconciliation; memory, all doctrines, histories and diff.
+  Canonical trigger: `none` — bounded reading checkpoint; tests and runtime unchanged.
+  Verification: Both scopes match the baseline: 1,500 lines / 55,337 bytes; ordered path/kind/range/byte/SHA audit `ead4b09249a3ecba074b27145e5169eaff3944d4f00ca72e803387487e7a0dfc`. Integration is complete through line 3910 across .51–.53. The suffix covers bounded shipped-spec outputs, edge/capture identity, fluent block/lifecycle controls, pure/mutating families, assignment results, closed function scope/arity/recursion and six rich capability fixtures including absent versus zero-width matches. Gap prefix covers role accounting, native/generated adapters, heterogeneous-separator primary proof and emitted Unicode/empty/lifecycle/child-extension/nesting/rollback fixture setup through line 380. Existing gap Knowledge separates historical admission and current behavior; the remaining consumer and emitted execution are not credited here. No fresh integration or emitted run is claimed.
+  Commit: `SESSION-STARTUP-READING.3.3.53 - complete integration reading and checkpoint gap-capture consumer`
 
 - ID: `SESSION-STARTUP-READING.3.3.54`
   Status: `pending`
@@ -4244,7 +4247,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.53` | `pending` | Finish integration lines 2791–3910 and read the gap-capture consumer prefix 1–380. |
+| 1 | `SESSION-STARTUP-READING.3.3.54` | `pending` | Complete gap-capture lines 381–1225, read logical helpers and begin map-leaves mutation tests. |
 
 ## Reading Ledger
 
@@ -4255,7 +4258,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.52` are reconciled and `.3.3.53`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.53` are reconciled and `.3.3.54`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read at baseline; .3.2.42 preserves coverage, and c8759242 reviews/renders the approved parked-coverage delta. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -7014,6 +7017,7 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- `2026-09-08` `.3.3.53`: Two exact scopes, integration EOF and test-route/Knowledge reconciliation pass. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.52`: Exact range/source identity and retained test-boundary comprehension pass. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.51`: Exact scopes/source pins and six source-extracted classifier controls pass their expected outcomes; managed scratch is removed. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.50`: Six exact baseline scopes and canonical Knowledge/test-boundary reconciliation pass. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
@@ -7321,3 +7325,4 @@ Each canonical task node owns its exact `Commit` subject and retained completion
 - `2026-09-08`: `.3.3.50` reconciles corpus and diagnostic consumer reading; next `.3.3.51`.
 - `2026-09-08`: `.3.3.51` reconciles classifier reading and owns verifier repair .77; next `.3.3.52`.
 - `2026-09-08`: `.3.3.52` reconciles integration control and traversal reading; next `.3.3.53`.
+- `2026-09-08`: `.3.3.53` completes integration reading and checkpoints gap capture; next `.3.3.54`.
