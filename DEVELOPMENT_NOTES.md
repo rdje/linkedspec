@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.52 - reconcile integration control and traversal reading
+
+Expression-block returns are local to value evaluation; rule return and accumulator effects have separate boundaries. Callback scopes restore temporary bindings, while mutation assertions distinguish copy from rebinding. This checkpoint reads those controls without rerunning them.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.51 - reconcile classifier reading and own failed-child verification repair
 
 Pass-marker completeness cannot establish successful child termination. The classifier loses that distinction despite recording status in diagnostic text. Repair .77 owns exact process/marker accounting. Return-channel documentation now distinguishes historical shared stores from current selective rule-variable snapshots.

@@ -12,7 +12,7 @@ date: 2026-06-29
 status: confirmed
 tags: [dsl, blocks, expressions, rust, parser, runtime, spec-format-terse, SPEC-FORMAT-TERSE]
 evidence: "SPEC-FORMAT-TERSE.2.1.3 on 2026-06-29 landed Rust parser/runtime parity for the Perl core expression-valued block subset. rust/linkedspec-core/src/expr.rs now has Expr::BlockValue, parse_brace_expr(), and top-level hash-pair detection so '{}' and keyed '{ key : value }' stay hash literals while non-empty braces without a top-level hash-pair delimiter parse as block values. rust/linkedspec-runtime/src/engine.rs now evaluates Expr::BlockValue through eval_block_value(): side-effect statements execute in order, the final expression is the value, and a final return(expr) is block-local. At .2.1.3, non-final return(expr) was rejected/deferred to SPEC-FORMAT-TERSE.2.1.4; .2.1.4 later closed that early-return boundary (see [[terse-expression-valued-block-early-return]]). Locks: focused core parser tests for expression-valued blocks, focused runtime terse_2_1_3 tests, a new Perl-oracle fixture terse_2_1_3_expression_valued_blocks, and Rust corpus oracle over 34 fixtures."
-reverify: "cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-core expression_valued_block && cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_2_1_3 && cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime oracle_corpus_matches_perl_reference"
+reverify: "bash tools/run_cargo_local.sh test --quiet --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-core expression_valued_block && bash tools/run_cargo_local.sh test --quiet --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime terse_2_1_3 && bash tools/run_cargo_local.sh test --quiet --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime oracle_corpus_matches_perl_reference"
 ---
 
 # Rust Expression-Valued Block Seams
@@ -28,7 +28,7 @@ The current Rust model has two separate pieces:
 top-level hash-pair `{ key : value }` forms remain `Expr::HashLiteral`, while non-empty brace payloads without a
 top-level hash-pair delimiter become block values.
 
-The runtime has the matching gap:
+The runtime separates statement and value execution:
 
 - `execute_block()` still executes lifecycle statement blocks and returns `()`.
 - `eval_expr()` now dispatches `Expr::BlockValue` to `eval_block_value()`.

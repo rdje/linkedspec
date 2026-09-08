@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.51` are reconciled and `.3.3.52`–`.3.3.66` plus closeout remain pending.
+  findings, and donor-policy comparisons. Perl reading is complete; Rust `.3.3.1`–`.3.3.52` are reconciled and `.3.3.53`–`.3.3.66` plus closeout remain pending.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.77` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.3.3.51` reconciles 1,487 lines / 51,804 bytes and confirms the child-status verifier defect with six controlled probes. Repair .77 owns the fix; the integration suffix remains unread by this checkpoint.
+- `SESSION-STARTUP-READING.3.3.52` reconciles 1,408 lines / 65,108 baseline-identical bytes of integration assertions. Classifier repair .77 remains pending; regex-substitution continuation belongs to .53.
 
 ## Next Action
 
-- Resume `SESSION-STARTUP-READING.3.3.52`; containment `.7` follows Rust closeout before Dart ownership/reading.
+- Resume `SESSION-STARTUP-READING.3.3.53`; containment `.7` follows Rust closeout before Dart ownership/reading.
 
 ## Recent Completions
+
+- `2026-09-08` — `SESSION-STARTUP-READING.3.3.52` reconciles integration control and traversal reading.
 
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.51` reconciles classifier reading and owns verifier repair .77.
 
@@ -48,8 +50,6 @@
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.41` completes Unicode reading and checkpoints callable contract assertions at item 100.
 
 - `2026-09-07` — `SESSION-STARTUP-READING.3.3.40` completes Unicode upper-map reading.
-
-- `2026-09-07` — `SESSION-STARTUP-READING.3.3.39` finishes the Unicode lower map and preserves completed canonical evidence.
 
 ## History
 

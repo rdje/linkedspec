@@ -2003,12 +2003,15 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.51 - reconcile classifier reading and own failed-child verification repair`
 
 - ID: `SESSION-STARTUP-READING.3.3.52`
-  Status: `pending`
+  Status: `done`
   Goal: Read Rust group 52: 1,408 lines/fragments, 65,108 bytes.
   Scope: `rust/linkedspec-runtime/tests/integration_test.rs` lines 1383–2790.
   Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact owned-range/baseline identity and retained test-boundary comprehension; Knowledge, memory, all doctrines, histories and diff.
+  Canonical trigger: `none` — bounded reading checkpoint; integration tests and runtime unchanged.
+  Verification: All 1,408 owned lines / 65,108 bytes match the baseline; SHA-256 `2186798cafd76926b8e4f8a0f8a5d9fecdc80c641b4eb130d38171873a19c378`. Reading covers LX-root nesting, scalar-text policy, per-parse working state, binding/copy/mutation distinctions, colon hashes and retired fat-arrow rejection, nested updated-root writes, local value-block versus rule return, attached/lazy controls, first-case selection, literal bare labels and the 10,000-iteration guard. With/traversal callbacks preserve kind-specific empty/wrong-kind and restoration cases; lifecycle return/drop and fluent child-result containment remain distinct. The range ends at the regex_subst fixture prefix; its suffix remains .53-owned. Historical source comments do not override current assertions or scoped-binding Knowledge. No fresh native execution is claimed.
+  Commit: `SESSION-STARTUP-READING.3.3.52 - reconcile integration control and traversal reading`
 
 - ID: `SESSION-STARTUP-READING.3.3.53`
   Status: `pending`
@@ -4241,7 +4244,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.3.52` | `pending` | Continue the exact integration-test range at lines 1383–2790. |
+| 1 | `SESSION-STARTUP-READING.3.3.53` | `pending` | Finish integration lines 2791–3910 and read the gap-capture consumer prefix 1–380. |
 
 ## Reading Ledger
 
@@ -4252,7 +4255,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.51` are reconciled and `.3.3.52`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust checkpoints `.3.3.1`–`.3.3.52` are reconciled and `.3.3.53`–`.3.3.66` plus closeout remain pending. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read at baseline; .3.2.42 preserves coverage, and c8759242 reviews/renders the approved parked-coverage delta. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained
@@ -7011,6 +7014,7 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- `2026-09-08` `.3.3.52`: Exact range/source identity and retained test-boundary comprehension pass. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.51`: Exact scopes/source pins and six source-extracted classifier controls pass their expected outcomes; managed scratch is removed. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.50`: Six exact baseline scopes and canonical Knowledge/test-boundary reconciliation pass. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
 - `2026-09-08` `.3.3.49`: 202 exact scopes, one explicit empty, 67 decoded JSON files, 68 manifest-owned cases and unchanged grammar mirror pass. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
@@ -7316,3 +7320,4 @@ Each canonical task node owns its exact `Commit` subject and retained completion
 - `2026-09-08`: `.3.3.49` reconciles Terse and legacy corpus reading; next `.3.3.50`.
 - `2026-09-08`: `.3.3.50` reconciles corpus and diagnostic consumer reading; next `.3.3.51`.
 - `2026-09-08`: `.3.3.51` reconciles classifier reading and owns verifier repair .77; next `.3.3.52`.
+- `2026-09-08`: `.3.3.52` reconciles integration control and traversal reading; next `.3.3.53`.

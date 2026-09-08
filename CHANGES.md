@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.52 - reconcile integration control and traversal reading
+
+Reconcile integration lines 1383–2790: 1,408 lines / 65,108 baseline-identical bytes. Preserve control, value-block, scope, callback and child-result distinctions; qualify historical comments. Route expression-block Cargo rechecks through managed storage. Focused continuity checks pass; implementation is unchanged.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.51 - reconcile classifier reading and own failed-child verification repair
 
 Reconcile the classifier suffix and integration prefix: 1,487 lines / 51,804 baseline-identical bytes. Replay six source-extracted controls: a failed child with all pass markers is falsely accepted; an in-memory guard rejects it. Own repair .77, preserve an executable Knowledge probe, qualify historical classifier claims and correct stale return-scope documentation. Focused checks pass; implementation remains unchanged.
