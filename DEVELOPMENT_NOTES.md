@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.48 - reconcile user-function edge grammar reading
+
+Block, fluent and bare edge forms retain different fields; grouped bare edges add source_form. Recursive blocks preserve nested quoted content. Existing grammar Knowledge applies; this is source reading evidence.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.47 - reconcile minimal-rule and user-function grammar reading
 
 The function-definition corpus oracle stores norm(value) and its body text before Top in the first paragraph, followed by a separate Done paragraph. The captured action code contains the call to norm. This proves what the stored syntax representation contains; it does not by itself prove function execution or backend parity. Existing self-hosted grammar Knowledge remains the authority for grammar ownership and bridge policy.

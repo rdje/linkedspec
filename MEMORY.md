@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `32bf445a1d3d3ecbf71a95cd1d795ae7f1ac4d0c` — clean reading checkpoint base.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.47 - reconcile minimal-rule and user-function grammar reading`.
+- activation_commit: `6e61fdf73959cb97497df76ad3b8ee0ba57d7a69` — clean reading checkpoint base.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.3.48 - reconcile user-function edge grammar reading`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: resume `SESSION-STARTUP-READING.3.3.48`; containment `.7` owns later Dart capacity after Rust closeout.
+- next_action: resume `SESSION-STARTUP-READING.3.3.49`; containment `.7` owns later Dart capacity after Rust closeout.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: `.7` blocks recovery/purge. Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.76` precede mutation setup; `.29` is part of `.5` adoption.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4983` is the twenty-eighth history segment; ADR `0106`
   authorizes exactly 30 collection files / 29 manifest lines / 16,463 manifest bytes; other ceilings remain unchanged.
-- latest_bootstrap_read: 2026-09-08 — roadmap Yes / codebase No / physical mdBook Yes; .3.3.47 reconciles minimal-rule and user-function reading; formal .4 pending; PNT resumes .3.3.48.
+- latest_bootstrap_read: 2026-09-08 — roadmap Yes / codebase No / physical mdBook Yes; .3.3.48 reconciles user-function edge grammar reading; formal .4 pending; PNT resumes .3.3.49.

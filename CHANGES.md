@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-08 — SESSION-STARTUP-READING.3.3.48 - reconcile user-function edge grammar reading
+
+Reconcile the user-function grammar edge range: 32 lines / 60,575 baseline-identical bytes. Exact mirror identity retains .44 Unicode proof. Record distinct edge fields and balanced blocks; the suffix remains .49-owned. Focused continuity checks pass; behavior is unchanged.
+
 ## 2026-09-08 — SESSION-STARTUP-READING.3.3.47 - reconcile minimal-rule and user-function grammar reading
 
 Reconcile four owned scopes: 249 lines / 53,907 baseline-identical bytes. Finish the minimal-rule grammar and review its input, the user-function stored oracle and grammar prefix. JSON decoding and unchanged canonical mirror checks pass; .44 Unicode evidence remains applicable. No grammar, runtime or public behavior changes.
