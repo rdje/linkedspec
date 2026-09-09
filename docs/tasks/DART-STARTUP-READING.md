@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / `.1.5` complete; next `.1.6`, with 5/55 reading children complete
+- Status: `active` / `.1.6` complete; next `.1.7`, with 6/55 reading children complete
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-09`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 5/55 children, 7,500/80,297 fragments and 225,536/2,471,305 bytes; ten entries through EOF
-  plus spec_ast.dart through line 880. Exact credit and comprehension remain in each completed node.
+- Current reading: 6/55 children, 9,000/80,297 fragments and 269,107/2,471,305 bytes; thirteen entries through EOF
+  plus compiled_spec.dart through line 457. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -85,7 +85,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Acceptance: Every child accounts for its exact source bytes and deltas, reconciles Knowledge before re-derivation,
     records comprehension and confirmed findings, runs necessary focused diagnostics and commits before the next child.
   Children: `.1.1-.1.55`; exact scopes and baseline evidence below, read in numeric order.
-  Verification: 5/55 children complete; `.1.1-.1.5` own exact reading/comprehension evidence, and all later children remain pending.
+  Verification: 6/55 children complete; `.1.1-.1.6` own exact reading/comprehension evidence, and all later children remain pending.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.1.1`
@@ -164,14 +164,19 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.5 - read callable and spec state; own regex scanner defects`
 
 - ID: `DART-STARTUP-READING.1.6`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 6 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.5` committed; empty brief and clean repository.
   Scope: `dart/lib/src/ast/spec_ast.dart` lines 881-949; `dart/lib/src/cli/linkedspec_dart_cli.dart` lines 1-222; `dart/lib/src/cli/primary_cli.dart` lines 1-752; `dart/lib/src/compiler/compiled_spec.dart` lines 1-457
   Baseline evidence: 1500 fragments / 43571 bytes; ordered range SHA-256 `f6457805cd2c3fae84295255bf78d288bfee4a5d51589deb0093326aa03ad9b3`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Existing spec-AST, compiled-state, primary-CLI and root-selection-core tests plus four selected corpus/primary process tests; seven controlled trace-level/reset adapter probes; exact range/current-delta and evidence retention; all doctrines, both histories, Knowledge synchronization, mdBook rendering and staged scope.
+  Canonical trigger: `none` — bounded required reading and defect intake; no executable, contract or infrastructure change. Trace repair remains separately gated.
+  Comprehension: Spec-AST strict optional/list/map shape decoding; separate corpus and primary CLI arguments/exits; native parse/compile/invoke composition, strict UTF-8/BOM preservation, recursive key-sorted JSON, independent trace thresholds/escaping/sinks; ordered compiled-state construction and callable normalization, entry selection precedence, structural regex-slot validation and the aggregate-selector validator prefix. Compilation invokes further validators whose bodies remain owned by .1.7; no complete compiled_spec.dart reading is claimed yet.
+  Findings: Numeric trace validation accepts decimal strings that int.tryParse cannot represent; trace construction resets the selected file before conversion throws StateError. .2.3 owns the gated repair and exact seven-case evidence in docs/knowledge/dart-primary-cli-trace-overflow.md. Existing switch .2.1 and regex .2.2 remain pending.
+  Verification: Physically read all four declared ranges in untruncated windows, 1,500 fragments / 43,571 baseline-identical bytes with pinned digest unchanged. Existing selected tests pass 18 + 5 + 4 = 27. Seven adapter probes isolate signed-endpoint successes, adjacent-overflow exceptions after reset and an invalid-text usage failure preserving the file. Additional test excerpts are diagnostic reading only, not EOF credit. No whole CLI matrix, process overflow or other-backend proof is claimed. Workflow/retention/rendered-book results belong to this commit.
+  Commit: `DART-STARTUP-READING.1.6 - read CLI and compiler entry; own trace overflow`
 
 - ID: `DART-STARTUP-READING.1.7`
   Status: `pending`
@@ -667,11 +672,11 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Status: `pending`
   Goal: Reconcile and retain ownership of every confirmed Dart finding established during the reading.
   Dependencies: Findings from `.1`; implementation additionally requires startup `.3`, `.4` and `.5`.
-  Children: `.2.1`, `.2.2`; further confirmed findings receive disjoint owners here.
+  Children: `.2.1`, `.2.2`, `.2.3`; further confirmed findings receive disjoint owners here.
   Acceptance: Cross-reference existing owners for known defects; create disjoint bounded repair children here
     immediately for new confirmed defects, with mechanism, source, reproduction, acceptance and unblock conditions.
     If no new repair is needed, close this intake with an explicit complete reconciliation rather than inventing work.
-  Verification: `pending`; `.1.3` owns attached-switch omission/default replacement under `.2.1`; `.1.5` confirms regex-brace action scanning and lifecycle validation defects under `.2.2`. No repair implementation is admitted before startup gates.
+  Verification: `pending`; `.1.3` owns attached-switch omission/default replacement under `.2.1`; `.1.5` confirms regex-brace action scanning and lifecycle validation defects under `.2.2`. Reading .1.6 confirms numeric trace overflow and reset-before-failure under .2.3. No repair implementation is admitted before startup gates.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.2.1`
@@ -720,6 +725,14 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Verification: `pending`; programmatic SpecFile bypasses the outer source collector yet rejects both /}/ and /(})/ with unbalanced braces, one unmatched close. _braceDepthDelta tracks quotes/escapes and braces but no regex state. No Dart outer collector or emitted-carrier result is inferred.
   Commit: `pending`
 
+- ID: `DART-STARTUP-READING.2.3`
+  Status: `pending`
+  Goal: Make primary trace-level validation total and complete before trace-file reset.
+  Dependencies: Startup `.3`, `.4` and `.5`; source finding from `.1.6`.
+  Acceptance: Reconcile numeric range semantics with ADR 0024, the neutral CLI manifest and reference adapter; freeze signed boundary/overflow, ordinary numeric/named, invalid and help controls. Parse/validate trace configuration once before file mutation, preserving valid silent reset and routing. Oversized values must follow resolved portable behavior without uncaught host exceptions; rejected arguments must preserve an existing trace file. Cover the adapter API and process boundary, both option environments and source/input/error controls; own any affected other-backend contract work before changing it and use canonical proof if shared/public semantics move.
+  Verification: `pending`; seven controlled adapter calls show signed 64-bit endpoints and 0/100 succeed; values immediately outside the endpoints throw StateError after truncation, while invalid text returns usage 2 and preserves the sentinel. Exact current source chain and executable replay live in docs/knowledge/dart-primary-cli-trace-overflow.md. No process-exit or other-backend result is inferred.
+  Commit: `pending`
+
 - ID: `DART-STARTUP-READING.3`
   Status: `pending`
   Goal: Close Dart reading with exact coverage, current-delta, comprehension and child-commit proof.
@@ -734,7 +747,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.6` | `pending` | Read spec-AST tail, CLI implementations and initial compiled state: 1,500 fragments / 43,571 bytes. |
+| 1 | `DART-STARTUP-READING.1.7` | `pending` | Read remaining compiler and corpus-runner prefix: 1,500 fragments / 47,088 bytes. |
 
 ## Decisions
 
@@ -749,11 +762,12 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Blockers
 
-- No blocker prevents `.1.6` reading after the `.1.5` commit, empty brief and clean-tree proof; switch .2.1 and regex .2.2 repairs remain gated.
+- No blocker prevents `.1.7` reading after the `.1.6` commit, empty brief and clean-tree proof; switch .2.1, regex .2.2 and trace .2.3 repairs remain gated.
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
 
+- `2026-09-09`: `.1.6` reads four ranges and passes 27 selected tests; seven adapter probes confirm trace integer overflow after file reset, owned by .2.3.
 - `2026-09-09`: `.1.5` reads four ranges and passes 55 selected tests; five probes confirm separate action-scanner and lifecycle-validator regex-brace failures, owned by .2.2 and routed to startup .54.3.
 - `2026-09-09`: `.1.4` reads 1,500 lines / 42,924 bytes and passes 79 selected tests. No additional defect is confirmed; existing switch repair remains pending.
 - `2026-09-09`: `.1.3` reads both ranges and passes 45 selected tests; five probes confirm attached-switch omission/default replacement, durably owned under .2.1 with exact reproduction.
@@ -765,6 +779,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- `2026-09-09`: `DART-STARTUP-READING.1.6 - read CLI and compiler entry; own trace overflow` closes the sixth reading child and owns the trace validation repair.
 - `2026-09-09`: `DART-STARTUP-READING.1.5 - read callable and spec state; own regex scanner defects` closes the fifth reading child and owns the two regex-scanner repairs.
 - `2026-09-09`: `DART-STARTUP-READING.1.4 - read assignment, mutation and scanner parsing` closes the fourth reading child.
 - `2026-09-09`: `DART-STARTUP-READING.1.3 - read resolver and parser; own switch body omission` closes the third reading child and owns the first new Dart repair.
@@ -775,6 +790,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Changelog
 
+- `2026-09-09`: `.1.6` completes spec AST/CLI reading, starts compiler state, owns trace repair .2.3 and routes .1.7.
 - `2026-09-09`: `.1.5` completes parser/callable/registry reading, begins spec AST, owns regex repair .2.2 and routes .1.6.
 - `2026-09-09`: `.1.4` completes assignment/mutation/staged/scanner reading through line 2498 and routes .1.5.
 - `2026-09-09`: `.1.3` completes resolver/initial-parser reading, owns attached-switch repair .2.1 and routes .1.4.

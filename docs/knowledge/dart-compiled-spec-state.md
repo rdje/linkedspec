@@ -43,6 +43,19 @@ through this projection: `body_payload`, normalized `body_parse_job`, stitched
 `body_ast`, `function_order`, and executable runtime output from the same
 compiled state.
 
+## Compiler prefix reading — 2026-09-09
+
+DART-STARTUP-READING.1.6 reads compiled_spec.dart through line 457. Construction
+validates source by default, normalizes callable function bodies against declared
+metadata, builds ordered rule state, resolves dependency regexes, then invokes
+compiled-state validators before returning. Reading those validators' remaining
+bodies belongs to .1.7. Entry selection remains explicit selector, first marker,
+then first compiled authored rule; zero and unknown selection keep distinct
+portable diagnostics. Duplicate-slot validation checks typed child and parent
+indices rather than deduplicating regex pattern text. Existing canonical root
+and regex-slot facts remain authoritative; this leaf's 27 selected tests are
+bounded proof, not a fresh complete generated/emitted or shared-matrix admission.
+
 Related facts: [[dart-function-registry]], [[dart-actionir-contract-resolver]],
 [[dart-staged-function-descriptor-shape]], [[dart-backend-interpreter-first-plan]],
 [[compilerstate-internal-model]].

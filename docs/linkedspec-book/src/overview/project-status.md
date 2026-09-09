@@ -89,11 +89,11 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed five of 55 children, including the complete ActionIR parser,
-callable normalization and function registry, plus spec AST through line 880. This covers 7,500
-fragments / 225,536 bytes. The latest 55 selected AST, registry, callable, validator, staged-registry
-and function-definition tests pass. The next child `.1.6` resumes spec AST, CLI and compiler reading;
-startup `.3.4` remains pending.
+Physical Dart reading has completed six of 55 children, including the complete ActionIR parser,
+callable normalization, function registry, spec AST and both CLI adapters, plus compiled state
+through line 457. This covers 9,000 fragments / 269,107 bytes. The latest 27 selected AST, compiler,
+primary/corpus CLI and root-selection tests pass. The next child `.1.7` resumes compiler/corpus
+reading; startup `.3.4` remains pending.
 
 **Known Dart limitation — attached switches:** a trailing non-branch statement can remain in the
 parsed body while being omitted from helper diagnostics and execution. A later `default` can also
@@ -111,6 +111,13 @@ grouped-regex and quoted-pattern controls execute successfully. The exact five-c
 source mechanisms live in `docs/knowledge/dart-regex-brace-scanner-defects.md`. Dart `.2.2.1/.2.2.2`
 own the gated repairs; startup `.54.3` remains the broad public/cross-backend closeout. These probes
 do not establish outer-source collector or emitted-Dart behavior.
+
+**Known Dart limitation — oversized numeric trace levels:** decimal `--trace` values just outside
+the signed 64-bit range pass argument validation but throw a host exception. With `--trace-reset`,
+the selected file is already truncated before that failure. Seven adapter probes preserve exact
+boundary and invalid-text controls in `docs/knowledge/dart-primary-cli-trace-overflow.md`; gated
+repair `DART-STARTUP-READING.2.3` owns validation before file mutation and portable numeric behavior.
+No process-overflow or other-backend result is claimed by this probe.
 
 The director's exception covers capacity infrastructure only; other reading/repair gates and the
 parked authoring and format ideas remain at their current status.

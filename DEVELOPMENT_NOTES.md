@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-09 — DART-STARTUP-READING.1.6 - read CLI and compiler entry; own trace overflow
+
+Primary CLI trace validation recognizes decimal syntax with a regular expression, while later conversion uses bounded int.tryParse. _CanonicalTrace.create resets the file before conversion, and its filesystem catch does not cover the resulting StateError; invalid text returns usage 2 before the reset. Seven adapter probes isolate both signed endpoints, adjacent overflows, 0/100 and invalid text. This proves the validation/order defect, not a process-exit or other-backend result; .2.3 owns resolution and repair. Compiler prefix reading preserves ordered last-definition state, entry selection and structural regex-slot identities; validation bodies continue in .1.7.
+
 ## 2026-09-09 — DART-STARTUP-READING.1.5 - read callable and spec state; own regex scanner defects
 
 Callable normalization recursively checks retained bodies structurally, while ordinary helper-dependency resolution remains deferred; no body execution follows from normalization. The registry preserves ordered unique names, immutable containers, fixed/variadic matching and descriptor versions. Spec AST decoding retains distinct line/offset and selector-omission fields. The scanner probe isolates two regex-brace failures: slash followed by opening parenthesis is not recognized as regex by the inner delimiter walker, and lifecycle balance counts regex braces even in a programmatic SpecFile. The latter blocks normal execution of both regex-brace controls; only ordinary-group and quoted-pattern controls execute true. Validator lines 322-398 are diagnostic reading, not whole-file credit.

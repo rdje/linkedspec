@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.5 completes five of 55 children: 7,500 fragments / 225,536 bytes. .1.6 is next; switch .2.1 and regex .2.2 defects are owned and gated; remaining required reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.6 completes six of 55 children: 9,000 fragments / 269,107 bytes. .1.7 is next; switch .2.1, regex .2.2 and trace .2.3 defects are owned and gated; remaining required reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `DART-STARTUP-READING.1.5` reads parser tail, callable contract, registry and spec AST through line 880; 55/55 selected tests pass. Five probes confirm grouped-regex action scanning and lifecycle balance defects, owned by .2.2.1/.2.2.2 and routed to startup .54.3. Existing switch repair remains pending.
+- `DART-STARTUP-READING.1.6` completes spec AST/CLI reading and reads compiler state through line 457; 27 selected tests pass. Seven probes confirm numeric trace overflow can throw after file reset, owned by .2.3. Existing switch/regex repairs remain pending.
 
 ## Next Action
 
-- Read `DART-STARTUP-READING.1.6`: spec-AST tail, CLI implementations and initial compiled state, after the clean .1.5 commit.
+- Read `DART-STARTUP-READING.1.7`: compiler remainder and corpus-runner prefix, after the clean .1.6 commit.
 
 ## Recent Completions
+
+- `2026-09-09` — `DART-STARTUP-READING.1.6` reads 1,500 fragments / 43,571 bytes, passes 27 selected tests and owns trace overflow repair .2.3.
 
 - `2026-09-09` — `DART-STARTUP-READING.1.5` reads 1,500 fragments / 42,210 bytes, passes 55 selected tests and owns regex scanner repairs .2.2.
 
@@ -48,8 +50,6 @@
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.65` completes lifecycle/trace/typed/casing reading with precise carrier proof.
 
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.64` completes staged recursive/carrier reading and starts standalone-lifecycle tests.
-
-- `2026-09-08` — `SESSION-STARTUP-READING.3.3.63` completes emitter/loader/staged-prefix reading and corrects classifier proof scope.
 
 ## History
 

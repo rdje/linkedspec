@@ -31,6 +31,18 @@ native trace emitter. The unchanged suite passes 61/61 under default and `POSIXL
 `.1.5.3.4` makes both legs recurring in the focused Dart gate. Rule-local cursor removal later deletes the global
 request field and advances the recurring expanded suite to 63/63 twice.
 
+## Boundary finding — 2026-09-09
+
+The historical shared-suite results above do not cover all numeric strings.
+DART-STARTUP-READING.1.6 confirms that decimal levels immediately outside the
+signed 64-bit range pass syntax validation, then throw StateError after a
+requested trace-file reset. Invalid text instead returns usage 2 and leaves the
+file intact. The exact seven adapter probes and gated .2.3 repair owner live in
+[[dart-primary-cli-trace-overflow]]; no process-overflow or other-backend result
+is inferred. This reading checkpoint passes 27 selected AST/compiler/CLI/root
+tests, including the existing canonical trace controls, without rerunning the
+complete shared process matrix.
+
 Related facts: [[canonical-primary-cli-trace-protocol]], [[dart-trace-controls-sinks]],
 [[dart-primary-cli-native-execution-canonical-json]], [[user-observable-backend-cli-parity-contract]],
 [[dart-primary-cli-closeout]].
