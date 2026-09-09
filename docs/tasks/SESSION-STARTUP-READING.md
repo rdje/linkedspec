@@ -2222,8 +2222,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING.3.4`
   Status: `pending`
   Goal: Split and read all 115 baseline Dart entries, including compiler/runtime, tests, commands, and package inputs.
-  Acceptance: Define bounded file/range children before reading and account for every path plus current deltas.
-  Verification: `pending`
+  Reading owner: `docs/tasks/DART-STARTUP-READING.md` owns .0 decomposition, .1 reading, .2 new repair intake and .3 reading closeout; this startup node remains the prerequisite/closeout owner.
+  Acceptance: Define bounded file/range children before reading and account for every path plus current deltas. DART-STARTUP-READING.3 may complete this reading node only after exact coverage/comprehension and child-commit proof; pending repairs remain owned separately.
+  Verification: Pending source reading; containment .7.4 admits bounded ownership only, without reading credit or moving earlier evidence.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.5`
@@ -4324,12 +4325,12 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 ## Current Frontier
 
-The director-approved capacity implementation is canonical at 4489f5e9; independent `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.3` verifies controls and reserve. Next `.7.4` admits pending bounded Dart ownership.
-Then resume the owned Dart decomposition; no Dart source reading precedes that capacity admission.
+Director-approved capacity implementation 4489f5e9 and independent proof a7d392a8 support containment `.7.4` admission. After its clean canonical commit, resume `DART-STARTUP-READING.0` in `docs/tasks/DART-STARTUP-READING.md`.
+Startup `.3.4` remains pending until that tree proves complete Dart reading; admission itself grants no source-reading credit.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.4` | `pending` | Define bounded Dart children only after containment .7 completes. |
+| 1 | `DART-STARTUP-READING.0` | `pending` | Freeze bounded Dart children after the clean canonical containment .7.4 admission; preserve startup .3.4 ownership. |
 
 ## Reading Ledger
 

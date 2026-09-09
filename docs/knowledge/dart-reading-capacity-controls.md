@@ -8,11 +8,13 @@ answers:
   - did the director approve the capacity exception before full codebase reading
   - does the Dart capacity exception permit parser repairs or artifact purge
   - how do I independently verify retained evidence and the complete Dart capacity reserve
+  - where does bounded Dart startup reading live after capacity admission
 date: 2026-09-08
-status: implemented at 4489f5e9 with canonical proof; independently recomposed under LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.3
+status: implemented at 4489f5e9, independently recomposed at a7d392a8; pending Dart ownership admitted under containment .7.4
 tags: [capacity, task-tree, knowledge, doctrine, continuity]
 evidence: "The director approved ADR 0108 with I greenlight the exception. ADR 0109 authorizes exactly four aggregate scalar changes. The task main census and 31 self-test classes share the real collection validators; new boundary expectations reject the old guards and pass after the two aggregate adjustments. The registry-bound audit below also exercises the unchanged routing validator directly. Canonical completion evidence belongs to the .7.2 commit and exact receipt; independent .7.3 and admission .7.4 remain pending."
 evidence_update_2026_09_09: "Canonical .7.2 lands at 4489f5e9 with all nine doctrines, CLI 66x2 and Phase 0 1032/1032 in 1152 seconds; 25 optional gates are not fresh proof. Independent .7.3 rechecks real boundaries, retained evidence and lookup, current controls, and the complete reserve with all original allowances applied again. Admission .7.4 remains pending."
+evidence_update_admission_2026_09_09: "Containment .7.4 adds the pending DART-STARTUP-READING tree and startup .3.4 bridge, with no source-reading credit. Its .0 decomposes .1 before reading; .2 owns new repair intake; .3 closes reading while preserving pending repairs. Complete resulting inventory/member/aggregate reserve and canonical proof govern landing; current controls and old evidence remain unchanged."
 reverify:
   - "bash tools/project_data_run.sh perl scripts/check_task_tree_partitions.pl"
   - "Run the repository-managed CAPACITY_BOUNDARY_AUDIT block below."
@@ -259,3 +261,18 @@ print(json.dumps(report,indent=2,sort_keys=True))
 print('PASS exact approved diff, retained nodes/questions/immutable bytes, current controls and full remaining reserve')
 CONTAINMENT73_AUDIT
 ```
+
+## Dart ownership admission — 2026-09-09
+
+`docs/tasks/DART-STARTUP-READING.md` is the bounded execution owner after containment `.7.4`.
+Startup `.3.4` retains its original prerequisite and reading-closeout role. The new tree contains only
+five pending definitions at admission: its root and `.0-.3`. Decomposition `.0` must define exact
+`.1` children before any source-reading credit. New defects become `.2` children or cross-reference
+existing owners; their implementation remains behind the startup gates. Reading closeout `.3` can
+complete startup `.3.4` while pending repairs keep the new tree open.
+
+Admission remeasures the actual new member and every current registry member, then adds the complete
+original planning allowances again. The existing CONTAINMENT73_AUDIT block already enumerates new
+members and applies all stricter per-file limits. Its historical comparisons remain pinned to the
+implementation boundary; admission separately proves its own existing-node and immutable retention.
+No additional cap, guard, source/runtime, recovery/purge or parked-feature change is admitted.

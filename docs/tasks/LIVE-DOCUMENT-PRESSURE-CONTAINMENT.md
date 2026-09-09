@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-- Status: `active` / `.7.2` implements approved capacity; `.7.3` is next after canonical landing
+- Status: `done` / bounded Dart ownership admitted; next `DART-STARTUP-READING.0`
 - Roadmap lane: `Repository architecture / documentation sustainability`
 - Created: `2026-08-09`
-- Last updated: `2026-09-08` (`.7.2` implements the director-approved exception; independent `.7.3` remains pending)
+- Last updated: `2026-09-09` (`.7.4` closes capacity admission; canonical evidence belongs to this commit)
 - Owner: repo-local workflow
 
 ## Goal
@@ -58,7 +58,7 @@ or the README `.4` adoption/closeout that installs the guard.
 ## Task Tree
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-  Status: `active` (`.0-.6` complete; `.7` is the current Dart capacity prerequisite)
+  Status: `done` (`.0-.7` complete; bounded Dart ownership admitted without source-reading credit)
   Goal: Replace measured oversized routed destinations with bounded views over durable stores.
   Depends on: `README-STABILITY-POLICY.4.2`
   Children: `.0-.7`
@@ -313,15 +313,15 @@ or the README `.4` adoption/closeout that installs the guard.
   Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.6 - consolidate verified task chronology and correct historical references`
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7`
-  Status: `active`
+  Status: `done`
   Goal: Admit complete bounded Dart reading ownership within the governed task-store capacity.
   Dependencies: Rust reading closeout `SESSION-STARTUP-READING.3.3.67`; before Dart child ownership/reading begins.
   Children: `.7.0-.7.4`; the director approved the narrow capacity/reading-gate exception on 2026-09-08.
   Acceptance: Reverify the preserved estimate of 115 files / 56 groups / 169 range rows; measure resulting
     ownership and evidence capacity, preserve every unique record and all limits except ADR 0109's four director-approved aggregate scalars, and split required infrastructure design before changes.
   Evidence-capacity intake: `.3.3.61` measures 1,017 Knowledge Markdown files / 58,284 lines / 4,850,347 bytes against unchanged 1,024 / 64,000 / 6,291,456 ceilings. Include this evidence store in the capacity review before Dart; no count increase is authorized by this measurement.
-  Verification: `.7.0` verifies exact Dart inventory; `.7.1` records the approved design. Implementation `.7.2` lands with canonical proof at 4489f5e9. Independent `.7.3` recomposes controls, preservation, lookup and the complete reserve; admission `.7.4` remains pending.
-  Commit: `pending`
+  Verification: `.7.0` verifies Dart inventory; `.7.1` records the approved design. Canonical implementation 4489f5e9 and independent recomposition a7d392a8 preserve controls and evidence. Admission `.7.4` creates the bounded pending Dart tree and startup bridge; complete resulting reserve and exact canonical proof govern closure. No Dart source-reading credit.
+  Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.4 - admit bounded Dart reading ownership`
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.0`
   Status: `done`
@@ -337,7 +337,7 @@ or the README `.4` adoption/closeout that installs the guard.
   Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.0 - measure Dart reading demand and documentation capacity`
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.1`
-  Status: `done` (design/proposal only; director exception remains pending)
+  Status: `done` (design/proposal closeout; exception was pending then and was subsequently approved under `.7.2`)
   Goal: Design sufficient bounded task and Knowledge capacity from the measured admission demand.
   Acceptance: Audit existing retrieval and preservation contracts and alternatives; retain stable ownership,
     unique evidence and explicit limits; define bounded implementation/verification leaves before any migration.
@@ -381,16 +381,19 @@ or the README `.4` adoption/closeout that installs the guard.
   Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.3 - independently verify Dart capacity and evidence retention`
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.4`
-  Status: `pending`
+  Status: `done`
   Goal: Admit a bounded pending Dart tree and close the capacity prerequisite.
   Dependencies: `.7.3`; the director-approved scope and complete admission projection.
   Acceptance: Create pending DART-STARTUP-READING ownership and bridge startup .3.4 without moving existing evidence; align book/index/continuity; no source-reading credit.
-  Verification: Planned canonical milestone proof; clean commit and zero-byte brief before DART-STARTUP-READING.0 decomposition.
-  Commit: `pending`
+  Verification tier: `canonical`
+  Focused checks: Exact pending-tree and startup-bridge ownership; baseline inventory/delta and full current/member reserve; prior node/Knowledge/immutable preservation; all doctrines, both histories, Knowledge synchronization, mdBook render and staged scope.
+  Canonical trigger: `Dart capacity admission and containment-parent milestone closeout` — exact staged canonical receipt required before commit.
+  Verification: All 115 Dart paths / 80,296 physical lines / 2,471,305 bytes remain baseline-identical; the 55-group/169-range plan and separate 56-group control reverify. New pending tree and startup .3.4 bridge preserve existing evidence and repairs. Actual new-member/current-store measurements plus every original reserve allowance fit the unchanged controls. Focused preservation/book/doctrine and final canonical results are retained in this commit; no Dart reading credit.
+  Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.4 - admit bounded Dart reading ownership`
 
 ## Current Frontier
 
-Next: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.4` admits the bounded pending Dart tree after independent `.7.3` verification. Canonical implementation 4489f5e9 and the independent audit preserve all existing limits beyond the four approved scalars, records and retrieval. No Dart source-reading credit yet.
+This containment tree is closed after the exact canonical `.7.4` commit, brief clearing and clean proof. Resume `DART-STARTUP-READING.0` in `docs/tasks/DART-STARTUP-READING.md` to freeze bounded reading children. Startup `.3.4` remains the existing reading prerequisite/closeout owner; no Dart source-reading credit yet.
 
 ## Decisions
 

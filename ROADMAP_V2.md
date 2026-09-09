@@ -5,7 +5,7 @@ Current session prerequisite: [SESSION-STARTUP-READING](docs/tasks/SESSION-START
 required-reading baseline, exact coverage, and `rgx` exclusion. Roadmap and physical mdBook reading are complete; codebase reading remains
 incomplete. Intakes .31/.3.2.42 preserve exact coverage and confirmed findings. Perl and Rust reading are
 complete through `.3.3.67`. `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.6` preserves chronology under unchanged
-limits; director-approved `.7.2` lands at 4489f5e9 with canonical proof. Independent `.7.3` verifies preservation and reserve; admission `.7.4` is next before Dart. Repairs `.7`–`.30`, `.32`–`.47`, and
+limits; approved capacity implementation 4489f5e9 and independent proof a7d392a8 support `.7.4` admission. Next [DART-STARTUP-READING.0](docs/tasks/DART-STARTUP-READING.md) defines bounded reading children; startup `.3.4` remains the reading-closeout owner. Repairs `.7`–`.30`, `.32`–`.47`, and
 `.49`–`.79` remain task-owned before Rust mutation setup;
 policy-gate repair `.29` is part of `.5` adoption after the required reading. `PARSER-AUTHORING-APIS` preserves proposed DBINP libraries/generics, builders and fileless MCP debugging; no implementation is activated.
 

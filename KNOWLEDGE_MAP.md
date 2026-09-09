@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1018** facts · **8401** question keys.
+> **1018** facts · **8402** question keys.
 
 ## Questions → fact
 
@@ -6632,6 +6632,7 @@
 - "where does SpecEntry preserve compile and runtime handler diagnostics" -> [specentry-perl-coupling-inventory](docs/knowledge/specentry-perl-coupling-inventory.md) · 2026-06-12 · reverify: `rg -n 'sub compile_spec_entry|sub _build_handler_variants|sub _build_runtime_handler|HandlerVariantEmitter|compiled_handler = eval' perl/LinkedSpec/SpecEntry.pm`
 - "where does a FUTURE-PARITY-BACKLOG stable task id live" -> [future-parity-task-partition-contract](docs/knowledge/future-parity-task-partition-contract.md) · 2026-08-09
 - "where does assign / concat / array_copy / hash_copy lower in the perl engine" -> [terse-helper-rename-lowering-sites](docs/knowledge/terse-helper-rename-lowering-sites.md) · 2026-07-04 · reverify: `perl -Iperl -MLinkedSpec -e 'for my $stmt (q{set(x, 1)},q{return(cat(\"a\",\"b\"))},q{items = [\"a\"]; return(copy(items))},q{meta = { key : \"v\" }; return(copy(meta))}) { my $out=LinkedSpec::call_spec_handler_subst(\"Top\",$stmt); $out =~ s/\\n/\\\\n/g; print \"$stmt => $out\\n\" }' && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_1_4_2 --quiet && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime helpers_5_1_retired_terse_8_4_spellings_diagnose --quiet`
+- "where does bounded Dart startup reading live after capacity admission" -> [dart-reading-capacity-controls](docs/knowledge/dart-reading-capacity-controls.md) · 2026-09-08
 - "where does build_dep_map live" -> [ownerdispatch-shared-seam](docs/knowledge/ownerdispatch-shared-seam.md) · 2026-06-12 · reverify: `grep -l 'OwnerDispatch' perl/LinkedSpec/*.pm perl/LinkedSpec/ActionIR/*.pm | wc -l`
 - "where does canonical CI run Lua progressive span dispatch" -> [lua-progressive-span-dispatch-admission](docs/knowledge/lua-progressive-span-dispatch-admission.md) · 2026-08-25
 - "where does canonical CI run the Dart progressive span dispatch consumer" -> [dart-progressive-span-dispatch-admission](docs/knowledge/dart-progressive-span-dispatch-admission.md) · 2026-08-17
@@ -9410,8 +9411,8 @@ _Dart packages, temporary workspaces, generated output, and traces stay on repos
 ### dart-reading-capacity-controls
 _Approved Dart reading capacity preserves bounded members and tests the real validators_
 
-- **answers:** what are the current task and Knowledge capacity limits for Dart reading | which guard enforces the approved Dart task collection capacity | how do I verify task and Knowledge boundaries at their exact limits | did the director approve the capacity exception before full codebase reading | does the Dart capacity exception permit parser repairs or artifact purge | how do I independently verify retained evidence and the complete Dart capacity reserve
-- **date:** 2026-09-08 · **status:** implemented at 4489f5e9 with canonical proof; independently recomposed under LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.3
+- **answers:** what are the current task and Knowledge capacity limits for Dart reading | which guard enforces the approved Dart task collection capacity | how do I verify task and Knowledge boundaries at their exact limits | did the director approve the capacity exception before full codebase reading | does the Dart capacity exception permit parser repairs or artifact purge | how do I independently verify retained evidence and the complete Dart capacity reserve | where does bounded Dart startup reading live after capacity admission
+- **date:** 2026-09-08 · **status:** implemented at 4489f5e9, independently recomposed at a7d392a8; pending Dart ownership admitted under containment .7.4
 - **evidence:** `The director approved ADR 0108 with I greenlight the exception. ADR 0109 authorizes exactly four aggregate scalar changes. The task main census and 31 self-test classes share the real collection validators; new boundary expectations reject the old guards and pass after the two aggregate adjustments. The registry-bound audit below also exercises the unchanged routing validator directly. Canonical completion evidence belongs to the .7.2 commit and exact receipt; independent .7.3 and admission .7.4 remain pending.`
 - **source:** [`docs/knowledge/dart-reading-capacity-controls.md`](docs/knowledge/dart-reading-capacity-controls.md)
 

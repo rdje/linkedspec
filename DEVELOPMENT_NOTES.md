@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-09 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.4 - admit bounded Dart reading ownership
+
+The separate Dart tree keeps the startup member bounded while retaining every earlier reading range and repair owner. Its .0 must decompose .1 before reading; .2 captures newly confirmed repairs under existing startup gates; .3 can close startup .3.4 reading while pending repairs keep the separate tree open. Admission adds only five pending definitions and does not claim comprehension. The full original reserve is applied again on top of the actual new member and current stores, a conservative admission check. Root metadata and index frontiers now agree; .7.1 status explicitly labels its former pending exception as historical.
+
 ## 2026-09-09 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.3 - independently verify Dart capacity and evidence retention
 
 The independent census preserves 2,137 ID-prefixed blocks across 100 task Markdown files; 2,073 use the exact complete-line syntax counted by the current-ID checker. The remaining headers have trailing text and remain byte-identical; the broader preservation count is not a current-ID total. Knowledge Map has a single-file limit schema, while task and Knowledge collections have aggregate/member schemas; the audit handles each actual registry contract. Applying all original growth/template/setup allowances again to the current population conservatively retains the complete Dart reserve. Canonical 4489f5e9 passes all nine doctrines, CLI 66x2 and Phase 0 1,032/1,032 in 1,152 seconds; 25 optional gates remain skipped.

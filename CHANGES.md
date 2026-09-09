@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-09 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.4 - admit bounded Dart reading ownership
+
+Admit docs/tasks/DART-STARTUP-READING.md with pending decomposition, reading, repair-intake and closeout ownership. Preserve startup .3.4 as the existing reading prerequisite/closeout owner and bridge directly to the new tree. All 115 Dart paths and 2,471,305 bytes remain baseline-identical; the exact 55-group/169-range plan re-verifies. Recompute full current/member reserve, retain old nodes/Knowledge/immutable stores, and synchronize every current frontier and the book. No source-reading credit, executable change, additional capacity increase or parked-feature activation. Exact staged canonical milestone proof precedes the clean handoff to DART-STARTUP-READING.0.
+
 ## 2026-09-09 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.3 - independently verify Dart capacity and evidence retention
 
 Independent verification of canonical implementation 4489f5e9 confirms exactly four approved registry scalars, actual validator boundaries, retained task/Knowledge paths and questions, 59 history-store files (56 immutable segments and three manifests), and all 11 FUTURE files. Stable lookup returns exact owner bytes from root and docs/. Recompute current pressure and the complete reserve including member limits; all fit. All doctrines, both histories, Knowledge synchronization, rendered book and staged scope govern this focused documentation slice. No capacity, executable or parser change; admission .7.4 remains next.
