@@ -10,6 +10,15 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-09 — marker-selected ranges need value-aware control dispatch
+
+`DART-STARTUP-READING.1.17` reads value controls, copied/restored with and tree callback
+bindings, and expression dispatch through interpreter 3674. All 124 selected tests pass.
+Ten AST/native/reconstructed controls expose the marker-range fallback into action
+execution: attached if/while/switch returns escape the value block, while the one-statement
+if adapter loses sibling else. Five direct/marker-only/attached-only controls pass.
+New .2.9 owns unified value-aware dispatch and carrier proof; prior defects remain open.
+
 ## 2026-09-09 — semantic callback passthrough must cross action blocks
 
 `DART-STARTUP-READING.1.16` reads rule cleanup, blind/regex repetition, gap phases,

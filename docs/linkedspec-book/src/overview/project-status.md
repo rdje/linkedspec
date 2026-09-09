@@ -89,14 +89,14 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed sixteen of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed seventeen of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
 parser bridge, function-shell projection, bounded child-parse authority and generated rule plan,
-plus the interpreter through line 2174. This covers 22,028 fragments / 735,897 bytes.
-The latest 100 selected Dart tests pass, including existing emitted gap/recognition/semantic
-consumers and the gap primary route. Child `.1.17` continues value blocks and expression
-evaluation; startup `.3.4` remains pending. Earlier contract evidence retains its checkpoints.
+plus the interpreter through line 3674. This covers 23,528 fragments / 776,881 bytes.
+The latest 124 selected Dart interpreter/ActionIR/callable/binding/write/mutation tests pass,
+including their existing emitted and CLI consumers. Child `.1.18` continues expression and
+helper dispatch; startup `.3.4` remains pending. Earlier contract evidence retains its checkpoints.
 
 The function shell checks the returned definition's text against scalar spans, reconciles staged
 body metadata and removes declarations while preserving line breaks. The private progressive
@@ -208,6 +208,17 @@ succeeds with a nonthrowing observer. Six public native controls are preserved i
 `docs/knowledge/dart-semantic-observer-action-failure-wrapping.md`. Pending repair
 `DART-STARTUP-READING.2.8` owns passthrough, nested-route coverage and trace/cleanup proof.
 Existing emitted consumer passes do not establish this new failure boundary.
+
+**Known Dart limitation — mixed controls in value blocks:** an attached if, while or switch
+inside a marker-selected value branch can turn a block-local return into a surrounding-rule
+return. An attached false if / else inside the same range can skip the else entirely. For
+example, assigning `{ if(true); if(true) { return("local") }; endif(); "tail" }`
+returns "local" from the rule before its continuation. Direct returns, marker-only nesting
+and the attached-only controls retain the local value. Ten typed-AST/native/reconstructed
+controls and precise source locations are preserved in
+`docs/knowledge/dart-mixed-control-value-block-gap.md`. Pending repair
+`DART-STARTUP-READING.2.9` owns value-aware dispatch and mixed nesting/carrier coverage.
+The new defect has not been freshly tested in emitted code or another backend.
 
 **Approved continuity capacity:** the director approved intake `DART-STARTUP-READING.4`.
 Containment `.8` and ADR0110 admit exactly 31 change-history files and a manifest of

@@ -10,6 +10,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-09 — DART-STARTUP-READING.1.17: mixed value-control execution
+
+Read 1,500 fragments / 40,984 unchanged bytes through interpreter line 3674.
+All 124 selected tests pass. Ten native/reconstructed controls show attached controls
+inside marker value ranges can escape local returns or skip else. New .2.9 owns repair
+and carrier proof; exact replay and the book limitation are durable. Reading reaches
+17/55, next .1.18. No executable change.
+
 ## 2026-09-09 — DART-STARTUP-READING.1.16: rule execution and observer error identity
 
 Read 1,500 fragments / 43,183 unchanged bytes through interpreter line 2174.

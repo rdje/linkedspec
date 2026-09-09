@@ -23,3 +23,12 @@ switch depth so inner markers cannot close or select an outer chain.
 
 - Owner: [[FUTURE-PARITY-BACKLOG]] `.1.6.1.2.2.3.2`.
 - Governed source: `capability_conformance/fixtures/capability_control_marker_surface.spec`.
+
+## 2026-09-09 — selected value-range composition limit
+
+Marker grouping itself remains intact in the .1.17 controls, including direct local return
+inside a selected case. An attached if nested in that selected value range instead returns
+from the surrounding rule. The shared range executor also causes the mixed marker-if
+failures in [[dart-mixed-control-value-block-gap]]. Ten native/reconstructed controls own
+this separate composition defect under DART-STARTUP-READING.2.9; the historical admission
+does not establish mixed attached/marker value-return locality.

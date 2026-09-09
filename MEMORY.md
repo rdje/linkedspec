@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `abc06ebde93fd6756086ce43116b207192a2d9ef` — clean sixteenth Dart reading base.
-- latest_completed_leaf: `DART-STARTUP-READING.1.16 - read rule execution; own observer error wrapping`.
+- activation_commit: `8b7a4a1ab1efe85d1f89f1c042de3747af9a56ae` — clean seventeenth Dart reading base.
+- latest_completed_leaf: `DART-STARTUP-READING.1.17 - read value execution; own mixed control gap`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: `DART-STARTUP-READING.1.17` continues interpreter value blocks and expression evaluation.
+- next_action: `DART-STARTUP-READING.1.18` continues interpreter expression and helper dispatch.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: Startup `.7` blocks recovery/purge; history-capacity approval is implemented under containment .8 / ADR0110. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.79` precede mutation setup; `.29` belongs to `.5`. The director approved the narrow capacity exception; other reading gates remain.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4982` is the twenty-ninth history segment; ADR `0110`
   authorizes exactly 31 collection files / 30 manifest lines / 17,039 manifest bytes; other ceilings remain unchanged.
-- latest_bootstrap_read: 2026-09-09 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading 16/55 children, 22,028 fragments / 735,897 bytes; 100 tests pass; six native observer controls own error/stack repair .2.8; next .1.17.
+- latest_bootstrap_read: 2026-09-09 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading 17/55 children, 23,528 fragments / 776,881 bytes; 124 tests pass; ten native/reconstructed controls own mixed value-control repair .2.9; next .1.18.

@@ -66,3 +66,13 @@ Related facts: [[dart-runtime-hash-helpers]], [[dart-runtime-array-helpers]],
 [[terse-expression-valued-block-early-return]],
 [[terse-trailing-block-arguments-final-state]], [[rust-hash-tree-traversal-receiver-blocks]],
 [[rust-array-tree-traversal-receiver-blocks]].
+
+## 2026-09-09 — mixed-control qualification
+
+The local-return claim has a confirmed composition gap: an attached if/while/switch
+inside a marker-selected value range enters the action executor, and the single-statement
+if adapter cannot select a sibling else. Ten controls reproduce four surrounding-rule
+returns and one skipped else through native and SpecFile-JSON execution. Five direct,
+marker-only and attached-only controls keep their local value. The 124 selected existing
+tests pass. [[dart-mixed-control-value-block-gap]] retains exact source and replay;
+DART-STARTUP-READING.2.9 owns the gated repair and broader carrier proof.

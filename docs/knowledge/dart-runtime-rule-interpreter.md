@@ -78,3 +78,20 @@ All 100 selected interpreter/cursor/recognition/observation/gap/repeated-result/
 including emitted and gap-primary consumers. Six native callback probes nevertheless expose
 the action-block semantic failure translation documented in
 [[dart-semantic-observer-action-failure-wrapping]]; new .2.8 owns repair and carrier proof.
+
+## 2026-09-09 — value control, callbacks and expression entry
+
+`DART-STARTUP-READING.1.17` reads lines 2175-3674. Marker selectors retain nested
+boundaries and lazy branch evaluation. The full value-block dispatcher preserves local
+return flow for attached controls, but its marker-range counterpart has the mixed-control
+gap in [[dart-mixed-control-value-block-gap]]; new .2.9 owns it after startup gates.
+
+Helper/receiver with and tree callbacks copy values and restore temporary bindings in
+finally blocks. Hash traversal follows sorted keys through maps; array traversal follows
+indexes through lists, treating the other aggregate as a leaf. Expression dispatch handles
+typed literals/aggregates, cached codeblocks, writes/reads and recognition/staged/progressive
+delegation. This range ends inside observe-recognition child execution; .1.18 continues it.
+
+All 124 selected interpreter/ActionIR/callable/binding/write/mutation tests pass, including
+their existing emitted/CLI consumers. Ten new native/SpecFile-JSON controls establish four
+escaping returns and one skipped else, alongside five successful locality controls.
