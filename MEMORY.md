@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `218f7f52473ab650dab4e52d676c5599d0171a64` — clean twentieth Dart reading base.
-- latest_completed_leaf: `DART-STARTUP-READING.1.20 - read value helpers; own numeric order and slice gaps`.
+- activation_commit: `c8940411b7f9899260ad270cb35d5bd256a63663` — clean twenty-first Dart reading base.
+- latest_completed_leaf: `DART-STARTUP-READING.1.21 - read context bindings; own input slice boundaries`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: `DART-STARTUP-READING.1.21` continues runtime context/frame and binding machinery.
+- next_action: `DART-STARTUP-READING.1.22` finishes interpreter helpers and begins matching state.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: Startup `.7` blocks recovery/purge; history-capacity approval is implemented under containment .8 / ADR0110. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.79` precede mutation setup; `.29` belongs to `.5`. The director approved the narrow capacity exception; other reading gates remain.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4982` is the twenty-ninth history segment; ADR `0110`
   authorizes exactly 31 collection files / 30 manifest lines / 17,039 manifest bytes; other ceilings remain unchanged.
-- latest_bootstrap_read: 2026-09-09 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading 20/55 children, 28,028 fragments / 906,901 bytes; 111 tests and neutral numeric 55/18 pass; 11/8/6 number/order/slice comparisons own Dart .2.12-.2.14; next .1.21.
+- latest_bootstrap_read: 2026-09-09 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading 21/55 children, 29,528 fragments / 946,834 bytes; 124 runtime and six contract tests pass; nine input-slice comparisons extend .2.14 typed overflow and own .2.15 arity; next .1.22.

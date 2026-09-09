@@ -10,6 +10,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-09 — typed projection can hide slice-end overflow as absence
+
+Dart reading .1.21 completes context/binding machinery through 9674; 124+6 tests
+pass. Nine paired input-slice controls show two overflow nulls, six agreements
+and one unsupported zero-argument difference. Source projection catches the
+overflowed negative endpoint as absence (.2.14); documented arity needs early
+handling (.2.15). Observation binding is guarded by its caller before execution.
+
 ## 2026-09-09 — host number and string operations need boundary proof
 
 `DART-STARTUP-READING.1.20` reads supporting value helpers and runtime-context entry

@@ -46,3 +46,13 @@ offsets and converts at helper boundaries.
 
 Related facts: [[dart-runtime-matching-state]], [[dart-runtime-rule-interpreter]],
 [[dart-runtime-core-value-capture-helpers]], [[dart-runtime-value-control-tree-helpers]].
+
+## 2026-09-09 — typed input-slice boundary qualification
+
+[[dart-input-slice-boundary-gaps]] proves that a maximum signed-64 width at scalar
+offset one or end-of-input overflows before clipping and returns null in Dart, while
+Perl returns the suffix or empty text. Existing .2.14 now owns this typed-source route.
+Six valid two-argument controls agree. The ninth case shows Dart accepts input_slice()
+as whole input while Perl reports a late handler error; new .2.15 owns consistent
+documented arity. Portable whole-input authoring remains input_text(). These controls
+are native/SpecFile-JSON plus Perl Get/source; no fresh emitted defect proof is inferred.

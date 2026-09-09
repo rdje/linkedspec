@@ -95,3 +95,13 @@ for (name,expr),d,p,value in zip(cases,dart,perl,values):
 print('PASS six exact Dart native/reconstructed and Perl facade/source slice controls: two failures, four agreements')
 DART_SLICE_END_VERIFY
 ```
+
+## 2026-09-09 — later typed-source evidence from reading .1.21
+
+The earlier six-case scope above did not measure typed-source behavior.
+[[dart-input-slice-boundary-gaps]] now adds eight valid two-argument input_slice cases:
+two overflow nulls at offset one/end-of-input and six agreements with Perl. At
+interpreter.dart 8629, typedSourceSlice repeats addition before clipping; invalid
+negative endpoint projection becomes null rather than a host RangeError. Existing
+.2.14.1/.2.14.2 now explicitly own this route. That card's separate ninth, zero-argument
+case belongs to .2.15; it does not change the documented two-argument signature.

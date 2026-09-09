@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-09 — DART-STARTUP-READING.1.21: input-slice boundaries
+
+Read 1,500 fragments / 39,933 unchanged bytes through interpreter line 9674.
+All 124 runtime and six contract tests pass. Nine native/reconstructed and Perl
+facade/source controls extend .2.14 typed slice overflow and own .2.15 arity.
+Book/KM retain exact limitations and replay. Reading is 21/55; next .1.22.
+
 ## 2026-09-09 — DART-STARTUP-READING.1.20: value-helper boundaries
 
 Read 1,500 fragments / 41,244 unchanged bytes through interpreter line 8174.

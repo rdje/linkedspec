@@ -144,3 +144,19 @@ own [[dart-large-number-helper-corruption]] (.2.12, eleven cases),
 [[dart-helper-unicode-order-gap]] (.2.13, eight cases) and [[dart-slice-end-overflow]]
 (.2.14, six cases). Each includes native/reconstructed and Perl facade/source evidence.
 No source repair or new emitted defect result is claimed; prior ownership remains.
+
+## 2026-09-09 — context, source projections and binding snapshots
+
+`DART-STARTUP-READING.1.21` reads 8175-9674. Gap/observation payloads use typed source
+and recognition authorities. Observation binding's caller guards receiver mutation before
+child execution at 3663; the direct store in bindRecursiveObservation is not a bypass.
+Recognition rollback restores cursor, boundary and marks. Typed source projection catches
+SourceLocationException as absence. Rule-local, callback and whole-store snapshots restore
+copied stores and binding identities; active outer guards remain identity-based while
+function parameter bindings are fresh. Cursor anchors validate source boundaries; copied
+binding views retain presence/kind and legacy stores. .1.22 continues legacy _assignHashIndex.
+
+All 124 selected runtime tests and six contract tests pass, including existing emitted/CLI
+consumers. [[dart-input-slice-boundary-gaps]] retains nine exact paired controls: typed
+input overflow extends .2.14, while documented arity/late reference failure belongs to
+new .2.15. Prior repair owners and all source bytes remain unchanged.

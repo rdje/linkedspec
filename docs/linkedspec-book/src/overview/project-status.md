@@ -89,15 +89,15 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed twenty of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed twenty-one of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
 parser bridge, function-shell projection, bounded child-parse authority and generated rule plan,
-plus the interpreter through line 8174. This covers 28,028 fragments / 906,901 bytes.
-The latest 111 selected Dart interpreter/contract/binding/source/recognition/observation/gap/
-scalar-text tests pass, including existing emitted/CLI consumers and the exact numeric fixture.
-The independent numeric contract passes 55 cases / 18 helpers. Child `.1.21` continues runtime
-context/frame and binding machinery; startup `.3.4` remains pending. Earlier checkpoints retain their evidence.
+plus the interpreter through line 9674. This covers 29,528 fragments / 946,834 bytes.
+The latest 124 selected Dart interpreter/binding/source/recognition/observation/gap/write/mutation
+tests and six ActionIR contract tests pass, including existing emitted/CLI consumers.
+Child `.1.22` finishes interpreter helpers and begins matching state; startup `.3.4` remains pending.
+Earlier checkpoints retain their evidence.
 
 The function shell checks the returned definition's text against scalar spans, reconciles staged
 body metadata and removes declarations while preserving line breaks. The private progressive
@@ -263,6 +263,20 @@ clipping. Perl returns `[2,3]` and `"bc"`. Small widths and the same large width
 succeed on both backends. Six exact native/reconstructed and Perl comparisons are retained
 in `docs/knowledge/dart-slice-end-overflow.md`; `DART-STARTUP-READING.2.14` owns repair.
 These new findings do not claim fresh Dart emitted defect proof or completed fixes.
+
+**Additional Dart input-slice limitations:** on input `"xabc"`,
+`input_slice(1,9223372036854775807)` returns null instead of `"abc"`, and the same
+large width at offset four returns null instead of an empty string. The end overflows
+before typed source projection. Existing `.2.14` now owns this route alongside array/substr
+clipping. Six valid two-argument controls agree with Perl.
+
+The documented signature requires `input_slice(start, length)`. Dart additionally accepts
+`input_slice()` as whole input, while Perl leaves that call raw and reports a generated-handler
+error. Use `input_text()` for whole input. New `DART-STARTUP-READING.2.15` owns consistent
+early arity handling, coordinated with the existing helper-arity backlog. Nine exact
+native/reconstructed and Perl facade/source cases live in
+`docs/knowledge/dart-input-slice-boundary-gaps.md`; no fresh Dart emitted defect result or
+completed repair is claimed.
 
 **Approved continuity capacity:** the director approved intake `DART-STARTUP-READING.4`.
 Containment `.8` and ADR0110 admit exactly 31 change-history files and a manifest of
