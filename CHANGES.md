@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-09 — DART-STARTUP-READING.1.2 - read remaining ActionIR nodes and helper tables
+
+Read both .1.2 ranges: 1,500 fragments / 36,093 baseline-identical bytes, completing ActionIR AST and contract tables through line 689. Reconcile exact selectors, deferred codeblocks and current accepted aliases; refresh the resolver fact and its historical verification command. Existing AST/parser, contract, binding and callable tests pass 50/50. Synchronize book, roadmaps and continuity at 2/55 children, 3,000 fragments / 96,414 bytes; next .1.3. No executable change, new confirmed code defect or parked-feature activation.
+
 ## 2026-09-09 — DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations
 
 Read all six .1.1 ranges: 1,500 fragments / 60,321 baseline-identical bytes, including five complete entries and ActionIR declarations through line 659. Record the thin CLI delegates, explicit public export boundary and typed private carrier/data shapes. Existing ActionIR/parser and spec-AST tests pass 9/9. Synchronize Knowledge, book, roadmaps and bounded continuity; next .1.2 resumes the AST and contracts. No executable change, new confirmed defect or parked-feature activation.

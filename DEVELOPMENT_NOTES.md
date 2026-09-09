@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-09 — DART-STARTUP-READING.1.2 - read remaining ActionIR nodes and helper tables
+
+ActionIR keeps mutation receiver identity, callback body and post-mutation continuations in typed fields. Exact aggregate-selector detection excludes inert callable literal bodies, matching the existing deferred-state contract; that exclusion is not an eager traversal defect. Contract names include canonical helpers, numeric/current aliases and accepted source-boundary aliases. The old resolver fact now makes that distinction and replaces its scaffold-era whole-Dart text negation with focused existing tests. The read ends inside _familyForCanonical; no remaining resolver code is credited until .1.3.
+
 ## 2026-09-09 — DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations
 
 The 22 explicit export directives preserve the public boundary while progressive/staged/recognition ActionIR declarations remain internal to the package facade. The first AST range records logical data and structural JSON, with copied unmodifiable staged provenance/capability lists; runtime behavior is not inferred from declarations. It ends at the literal-codeblock constructor, so .1.2 owns the remaining fields and serializer. Existing nine tests cover AST parsing and spec reconstruction, not exhaustive runtime admission. Source-reading credit is recorded separately from decomposition and repair completion.
