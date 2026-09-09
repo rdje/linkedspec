@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-09 — DART-STARTUP-READING.1.4 - read assignment, mutation and scanner parsing
+
+The parser recognizes staged dispatch only in exact scalar-assignment shapes; normalized literal options and flattened text provenance remain logical data. Receiver mutation separately enforces bare addressable roots, one adjacent bang, empty arguments, immediate callbacks and parenthesized ordinary continuations, retaining explicit character spans. Contextual candidates retain outer body bounds while reparsing body-local AST. Scanner state preserves quote/regex and nesting context, but this range ends inside quoted/regex consumption; .1.5 owns the remaining tail. Existing canonical records own runtime guarantees; 79 passing selected tests do not repair the switch omission.
+
 ## 2026-09-09 — DART-STARTUP-READING.1.3 - read resolver and parser; own switch body omission
 
 The resolver prefers extracted switch cases/default over the complete body; the parser can stop extraction early and overwrite the default. Native and SpecFile-reconstructed execution consume those extracted branches. Controlled unknown-helper placement distinguishes lost diagnostics from lazy branch execution and shows that compile acceptance alone does not imply no contract diagnostics. The finding card preserves all five outcomes and precise sources. Ordinary offsets, explicit character spans, static recognition operands and deferred callable bodies retain their contracts; no whole runtime file is credited by diagnostic excerpts.

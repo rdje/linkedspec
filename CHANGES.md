@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-09 — DART-STARTUP-READING.1.4 - read assignment, mutation and scanner parsing
+
+Read parser lines 999-2498: 1,500 fragments / 42,924 baseline-identical bytes; cumulative 4/55 children, 6,000 fragments / 183,326 bytes. Existing AST/callable/mutation/punctuation/write/progressive/staged tests pass 79/79. Record assignment, reserved mutation, staged declaration and scanner comprehension in the existing parser fact. Synchronize book and continuity while preserving attached-switch defect .2.1 and its gated repair children. No executable change or new defect; next .1.5.
+
 ## 2026-09-09 — DART-STARTUP-READING.1.3 - read resolver and parser; own switch body omission
 
 Read .1.3 contracts 690-1191 and parser 1-998: 1,500 fragments / 43,988 baseline-identical bytes; cumulative 3/55 children, 4,500 fragments / 140,402 bytes. All 45 selected tests pass. Five controlled AST/resolver/native/reconstructed probes confirm attached-switch body omission and duplicate-default replacement. Record exact mechanism/reproduction and gated .2.1.1 validation / .2.1.2 repair owners; synchronize public limitation, Knowledge and continuity. No implementation, emitted or other-backend claim; next .1.4.

@@ -59,6 +59,25 @@ omission/default-replacement finding and its gated repair owners are in
 [[dart-attached-switch-body-omission]]. The 45 selected existing tests pass;
 that does not validate the newly exposed malformed-body cases.
 
+## Parser continuation reading — 2026-09-09
+
+DART-STARTUP-READING.1.4 reads lines 999–2498. Exact scalar assignments own
+the private parse_job/dispatch_span nodes. Staged options require literal,
+closed, unique keys; accepted result/failure policies constrain the target,
+capabilities are unique/sorted, and nonempty cat plans flatten in source order.
+The reserved map_leaves! parser requires one bare addressable receiver, empty
+parentheses and an immediate callback; continuations are ordinary parenthesized
+calls. Callback/continuation nodes use explicit Unicode-character spans.
+These are parsing boundaries; runtime guarantees remain in the mutation and
+staged-provenance facts.
+
+Contextual candidates keep the containing body span while reparsing their
+body AST from local source. Signatures reject invalid/reserved/duplicate
+parameters and nonfinal rest parameters. Scanner helpers retain quote/regex
+and delimiter state when splitting statements, arguments and fluent segments.
+The scope ends inside quoted/regex consumption, before the final scanner tail.
+All 79 selected tests pass; attached-switch repair remains separately pending.
+
 Related facts: [[text-to-ast-backend-doctrine]],
 [[perl-actionir-ast-parser-seam]], [[dart-backend-interpreter-first-plan]],
 [[dart-actionir-contract-resolver]], [[dart-runtime-value-control-tree-helpers]],

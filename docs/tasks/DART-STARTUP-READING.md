@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / `.1.3` complete; next `.1.4`, with 3/55 reading children complete
+- Status: `active` / `.1.4` complete; next `.1.5`, with 4/55 reading children complete
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-09`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 3/55 children, 4,500/80,297 fragments and 140,402/2,471,305 bytes; seven entries through EOF
-  plus action_parser.dart through line 998. Exact credit and comprehension remain in each completed node.
+- Current reading: 4/55 children, 6,000/80,297 fragments and 183,326/2,471,305 bytes; seven entries through EOF
+  plus action_parser.dart through line 2498. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -85,7 +85,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Acceptance: Every child accounts for its exact source bytes and deltas, reconciles Knowledge before re-derivation,
     records comprehension and confirmed findings, runs necessary focused diagnostics and commits before the next child.
   Children: `.1.1-.1.55`; exact scopes and baseline evidence below, read in numeric order.
-  Verification: 3/55 children complete; `.1.1-.1.3` own exact reading/comprehension evidence, and all later children remain pending.
+  Verification: 4/55 children complete; `.1.1-.1.4` own exact reading/comprehension evidence, and all later children remain pending.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.1.1`
@@ -134,14 +134,19 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.3 - read resolver and parser; own switch body omission`
 
 - ID: `DART-STARTUP-READING.1.4`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 4 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.3` committed; empty brief and clean repository.
   Scope: `dart/lib/src/action/action_parser.dart` lines 999-2498
   Baseline evidence: 1500 fragments / 42924 bytes; ordered range SHA-256 `e1ee70f3b01280be2cc974032e13c752c5596dcb86203d0b981297bab62961c1`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Existing Dart AST/parser, callable-codeblock, map-leaves mutation, punctuation-light, nested-write, progressive-dispatch and staged-enrichment tests; exact range/current-delta and prior-evidence audits; all doctrines, both histories, Knowledge synchronization, mdBook rendering and staged scope.
+  Canonical trigger: `none` — bounded source reading and documentation; no executable, contract or infrastructure changes.
+  Comprehension: Scalar/append/nested assignment lowering; exclusive parse_job/dispatch_span carriers; bang-only bare-receiver mutation with immediate callback and ordinary parenthesized continuation; contextual codeblock candidates; strict literal staged options and flattened provenance; fixed/rest signatures; quote/regex-aware delimiter, statement, CSV and fluent scanners. The quoted/regex scanner ends mid-function at line 2498; .1.5 owns its tail. Existing mutation, staged and callable facts remain canonical.
+  Findings: No additional confirmed defect. Attached-switch omission/default replacement remains pending under .2.1; this passing test selection does not close it.
+  Verification: Physically read all 1,500 scoped lines in five untruncated 300-line windows, 42,924 baseline-identical bytes with pinned digest unchanged. All 79 selected existing tests pass, including their covered generated/emitted routes. Exact proof remains limited to those tests; no whole parser/scanner completion is claimed before .1.5. Workflow, retention and rendered-book results belong to this commit.
+  Commit: `DART-STARTUP-READING.1.4 - read assignment, mutation and scanner parsing`
 
 - ID: `DART-STARTUP-READING.1.5`
   Status: `pending`
@@ -701,7 +706,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.4` | `pending` | Resume ActionIR parser lines 999-2498: 1,500 fragments / 42,924 bytes. |
+| 1 | `DART-STARTUP-READING.1.5` | `pending` | Read parser tail, callable contract, function registry and initial spec AST: 1,500 fragments / 42,210 bytes. |
 
 ## Decisions
 
@@ -716,11 +721,12 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Blockers
 
-- No blocker prevents `.1.4` reading after the `.1.3` commit, empty brief and clean-tree proof; switch repair .2.1 remains gated.
+- No blocker prevents `.1.5` reading after the `.1.4` commit, empty brief and clean-tree proof; switch repair .2.1 remains gated.
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
 
+- `2026-09-09`: `.1.4` reads 1,500 lines / 42,924 bytes and passes 79 selected tests. No additional defect is confirmed; existing switch repair remains pending.
 - `2026-09-09`: `.1.3` reads both ranges and passes 45 selected tests; five probes confirm attached-switch omission/default replacement, durably owned under .2.1 with exact reproduction.
 - `2026-09-09`: `.1.2` reads both scoped ranges, preserves baseline identity and passes 50 existing AST/contract/binding/codeblock tests. Deferred literal traversal matches its canonical fact; next .1.3 resumes helper-family resolution.
 - `2026-09-09`: `.1.1` reads all six scoped ranges, retains exact baseline bytes/digests and passes nine existing AST/parser tests. No new defect is confirmed; next `.1.2` resumes the literal-codeblock fields.
@@ -730,6 +736,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- `2026-09-09`: `DART-STARTUP-READING.1.4 - read assignment, mutation and scanner parsing` closes the fourth reading child.
 - `2026-09-09`: `DART-STARTUP-READING.1.3 - read resolver and parser; own switch body omission` closes the third reading child and owns the first new Dart repair.
 - `DART-STARTUP-READING.1.2 - read remaining ActionIR nodes and helper tables` completes AST reading and the first contract-table range.
 - Created by `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.4 - admit bounded Dart reading ownership`.
@@ -738,6 +745,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Changelog
 
+- `2026-09-09`: `.1.4` completes assignment/mutation/staged/scanner reading through line 2498 and routes .1.5.
 - `2026-09-09`: `.1.3` completes resolver/initial-parser reading, owns attached-switch repair .2.1 and routes .1.4.
 - `2026-09-09`: `.1.2` completes the second physical-reading checkpoint and routes `.1.3`.
 - `2026-09-09`: `.1.1` completes the first physical-reading checkpoint and routes `.1.2`.
