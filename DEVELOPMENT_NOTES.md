@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-09 — DART-STARTUP-READING.0 - freeze exact bounded Dart reading children
+
+The reproducible Dart plan becomes actual ownership under .1.1-.1.55. One-based inclusive line coordinates and two UTF-8-safe file-byte windows account for one oversized physical line; 80,297 window fragments therefore cover 80,296 physical lines. Per-child and global digests verify the declared plan independently of its generation. Pending children omit verification-tier declarations until activation, preserving exactly one owning tier per commit. Comprehension and repair completion remain separate from decomposition.
+
 ## 2026-09-09 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.4 - admit bounded Dart reading ownership
 
 The separate Dart tree keeps the startup member bounded while retaining every earlier reading range and repair owner. Its .0 must decompose .1 before reading; .2 captures newly confirmed repairs under existing startup gates; .3 can close startup .3.4 reading while pending repairs keep the separate tree open. Admission adds only five pending definitions and does not claim comprehension. The full original reserve is applied again on top of the actual new member and current stores, a conservative admission check. Root metadata and index frontiers now agree; .7.1 status explicitly labels its former pending exception as historical.

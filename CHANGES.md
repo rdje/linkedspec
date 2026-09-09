@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-09 — DART-STARTUP-READING.0 - freeze exact bounded Dart reading children
+
+Freeze 55 pending Dart reading children / 169 ranges over all 115 baseline-identical paths, 80,296 physical lines and 2,471,305 bytes. Each child declares exact coordinates, dependency, bounds and digest; independent reconstruction covers every byte once. Preserve startup .3.4 and all earlier repairs, synchronize roadmap/book/Knowledge/continuity, and route .1.1. Focused verification applies under canonically admitted capacity a67a18bf. No source-reading credit, executable change or parked-feature activation.
+
 ## 2026-09-09 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.4 - admit bounded Dart reading ownership
 
 Admit docs/tasks/DART-STARTUP-READING.md with pending decomposition, reading, repair-intake and closeout ownership. Preserve startup .3.4 as the existing reading prerequisite/closeout owner and bridge directly to the new tree. All 115 Dart paths and 2,471,305 bytes remain baseline-identical; the exact 55-group/169-range plan re-verifies. Recompute full current/member reserve, retain old nodes/Knowledge/immutable stores, and synchronize every current frontier and the book. No source-reading credit, executable change, additional capacity increase or parked-feature activation. Exact staged canonical milestone proof precedes the clean handoff to DART-STARTUP-READING.0.

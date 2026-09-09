@@ -84,11 +84,13 @@ and reject independent line, byte and file-count overflow; member-size constrain
 Implementation `.7.2` passed canonical verification and landed at 4489f5e9. Independent proof
 `.7.3` confirms exact controls, retained task and Knowledge evidence, unchanged historical bytes,
 and stable retrieval. Recomputing the full planning allowances from the current population still fits
-both aggregate and per-file limits. Admission `.7.4` creates the `docs/tasks/DART-STARTUP-READING.md`
-and closes the capacity prerequisite after canonical verification. Decomposition `DART-STARTUP-READING.0`
-is next; it defines exact source-reading children before reading starts. Startup `.3.4` remains the
-existing reading-closeout owner, and confirmed findings retain separate repair ownership. No Dart
-source-reading credit is claimed at this admission.
+both aggregate and per-file limits. Canonical admission `.7.4` landed at a67a18bf and closed the
+capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading children in
+`docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
+bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
+UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
+The first child `.1.1` is next. Decomposition grants no source-reading credit; startup `.3.4`
+remains pending until reading closeout, and confirmed findings retain separate repair ownership.
 The director's exception covers capacity infrastructure only; other reading/repair gates and the
 parked authoring and format ideas remain at their current status.
 

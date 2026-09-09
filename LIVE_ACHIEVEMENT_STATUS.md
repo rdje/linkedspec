@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Director-approved capacity is implemented and independently verified; containment `.7.4` admits pending Dart ownership. `DART-STARTUP-READING.0` is next.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. `DART-STARTUP-READING.0` defines 55 exact reading children; `.1.1` is next, with no Dart source-reading credit yet.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.4` admits the bounded pending Dart tree and startup .3.4 bridge. Inventory and complete reserve reverify; exact canonical results belong to this commit. No source-reading credit; DART-STARTUP-READING.0 decomposition is next.
+- `DART-STARTUP-READING.0` freezes 55 pending children / 169 ranges over all 115 baseline-identical Dart paths. Independent declared-scope reconstruction and every child digest pass; source reading starts at .1.1.
 
 ## Next Action
 
-- Freeze exact bounded Dart reading children under `DART-STARTUP-READING.0` after the containment .7.4 canonical commit and clean proof.
+- Read the exact first scope under `DART-STARTUP-READING.1.1` after the decomposition commit, cleared brief and clean proof.
 
 ## Recent Completions
+
+- `2026-09-09` — `DART-STARTUP-READING.0` freezes exact bounded source-reading ownership without reading credit.
 
 - `2026-09-09` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.4` admits pending Dart ownership and closes the capacity prerequisite with canonical proof.
 
@@ -48,8 +50,6 @@
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.59` completes root-selection consumer reading and qualifies historical rollout evidence.
 
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.58` completes recognition/observation reading and owns emitted-manifest portability repair .78.
-
-- `2026-09-08` — `SESSION-STARTUP-READING.3.3.57` completes progressive and punctuation consumer reading.
 
 ## History
 
