@@ -10,6 +10,16 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-09 — Dart MCP serializer order and enforcement boundaries
+
+`DART-STARTUP-READING.1.10` completes generated data and contract-runtime reading, then server
+registration/dispatch/policy helpers through line 1019. Default SplayTreeMap sorting uses UTF-16
+ordering and reverses U+E000/U+10000 against the neutral canonical byte owner. ASCII/BMP controls
+pass; nested and injected schema-valid decoded-dispatch responses reproduce the difference.
+The injection proves a production dispatch path, not native payload construction or wire behavior.
+Gated .2.5 owns affected-route proof and repair. Existing 11-test success is retained without
+claiming complete canonical Unicode coverage.
+
 ## 2026-09-09 — generated MCP policy and response boundaries
 
 `DART-STARTUP-READING.1.9` reads the canonical frames, transport policy, complete corpus and

@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-09 — DART-STARTUP-READING.1.10: MCP runtime and Unicode key order
+
+Read 1,500 fragments / 61,935 unchanged bytes through generated bundle/runtime EOF and server line 1019.
+All 11 selected tests pass. Four helper controls and one injected public-dispatch probe confirm
+canonical U+E000/U+10000 ordering divergence with equal JSON values. Repair .2.5 is owned and gated;
+exact replay, public limitation and prior evidence are durable. Reading reaches 10/55; next .1.11.
+
 ## 2026-09-09 — DART-STARTUP-READING.1.9: generated MCP contract reading
 
 Read all 65,536 owned bytes of the first generated bundle window, retaining exact baseline identity.

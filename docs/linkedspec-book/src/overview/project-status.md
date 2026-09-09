@@ -89,14 +89,12 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed nine of 55 children, including the complete ActionIR parser,
-callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner
-and spec loader, plus the first generated MCP bundle window. This covers 11,528 fragments /
-410,743 bytes. The preceding 42-test selection includes the complete 105-fixture corpus.
-The latest four MCP binding tests and neutral validation of 35 frames, 10 raw inputs,
-10 lifecycle cases and 76 rejected mutations pass. The generated binding is byte-fresh;
-its embedded contract, schema and corpus equal their neutral owners.
-Child `.1.10` finishes the bundle and reads the MCP runtime/server; startup `.3.4` remains pending.
+Physical Dart reading has completed ten of 55 children, including the complete ActionIR parser,
+callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
+spec loader, generated MCP bundle and contract runtime, plus the server through line 1019.
+This covers 13,028 fragments / 472,678 bytes. The latest 11 binding/decoded-dispatch tests pass.
+Earlier checkpoints retain the 105-fixture corpus and neutral bundle verification.
+Child `.1.11` finishes MCP server/wire reading and starts the spec parser; startup `.3.4` remains pending.
 
 The embedded MCP contract preserves three distinct outcomes. A native semantic response with
 `ok: false` remains a successful transport result, with `isError: false` and its diagnostics intact.
@@ -147,6 +145,15 @@ controls, including lifecycle evidence and pure controls, are preserved in
 `docs/knowledge/dart-recognition-effect-integration-gap.md`. Gated `DART-STARTUP-READING.2.4.1-.2.4.3`
 own complete graph validation, implementation and carrier/public closeout. Passing prior finite
 fixtures do not establish this missing enforcement; other carriers/backends are not inferred.
+
+**Known Dart limitation — canonical Unicode key order:** the MCP serializer puts U+10000 before
+U+E000, whereas the neutral canonical-JSON implementation puts U+E000 first. ASCII and BMP-only
+controls agree; root and nested supplementary-plane controls differ. A schema-valid response
+injected through the existing test seam also reaches public decoded dispatch with equal structured
+JSON values but different canonical text bytes. This does not establish that a normal native index
+produces those keys. `DART-STARTUP-READING.2.5.1-.2.5.2` own affected-route proof and repair;
+`docs/knowledge/dart-mcp-unicode-key-order-gap.md` retains all five probes. The 11 passing existing
+tests do not close this defect; wire, other serializers and other backends remain unproven by it.
 
 **Approved continuity capacity:** the director approved intake `DART-STARTUP-READING.4`.
 Containment `.8` and ADR0110 admit exactly 31 change-history files and a manifest of
