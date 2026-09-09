@@ -46,3 +46,13 @@ promote the complete generic capability.
 Related facts: [[dart-callable-codeblock-literal-state]], [[callable-codeblock-literal-contract]],
 [[perl-callable-codeblock-dynamic-invocation]], [[rust-callable-codeblock-dynamic-invocation]],
 [[variadic-callable-signature-seams]].
+
+## 2026-09-09 — helper-mediated recursion identity qualification
+
+DART-STARTUP-READING.1.18 confirms that with/tree callback dispatch supplies the helper
+name as the active-codeblock identity. Distinct nested with/map_leaves callbacks
+are falsely rejected, and cb recursing through with(v, cb) reports with -> with instead
+of cb -> cb. Direct bound recursion retains cb identity. Nine native/SpecFile-JSON controls,
+including three successful single/sequential/different-helper controls, live in
+[[dart-callback-helper-recursion-identity-gap]]. Gated repair .2.10 owns identity retention
+and broader carrier proof; the 140 selected test passes do not cover this new boundary.

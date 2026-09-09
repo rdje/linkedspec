@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / `.1.17` complete; next `.1.18`
+- Status: `active` / `.1.18` complete; next `.1.19`
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-09`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 17/55 children, 23,528/80,297 fragments and 776,881/2,471,305 bytes; twenty-seven entries through EOF
-  plus interpreter.dart through line 3674. Exact credit and comprehension remain in each completed node.
+- Current reading: 18/55 children, 25,028/80,297 fragments and 822,211/2,471,305 bytes; twenty-seven entries through EOF
+  plus interpreter.dart through line 5174. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -85,7 +85,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Acceptance: Every child accounts for its exact source bytes and deltas, reconciles Knowledge before re-derivation,
     records comprehension and confirmed findings, runs necessary focused diagnostics and commits before the next child.
   Children: `.1.1-.1.55`; exact scopes and baseline evidence below, read in numeric order.
-  Verification: 17/55 children complete; `.1.1-.1.17` own exact reading/comprehension evidence, and all later children remain pending.
+  Verification: 18/55 children complete; `.1.1-.1.18` own exact reading/comprehension evidence, and all later children remain pending.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.1.1`
@@ -344,14 +344,19 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.17 - read value execution; own mixed control gap`
 
 - ID: `DART-STARTUP-READING.1.18`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 18 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.17` committed; empty brief and clean repository.
   Scope: `dart/lib/src/runtime/interpreter.dart` lines 3675-5174
   Baseline evidence: 1500 fragments / 45330 bytes; ordered range SHA-256 `f406ef9dc15561cb17edf029f5c24ecefffe483fa9508ac0046337ce4d28726f`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Existing Dart interpreter/callable/variadic/mutation/observation/source/logical/diagnostic consumers; nine native/SpecFile-JSON callback identity controls; exact ranges/current deltas and prior evidence retention; all doctrines, both histories, Knowledge freshness, mdBook rendering and staged scope.
+  Canonical trigger: `none` — bounded required reading and defect intake; no executable, contract or infrastructure change.
+  Comprehension: Observation completion binds the record before returning or rethrowing. Receiver mutation validates the binding/root kind, snapshots original shape, guards identity during copied/restored callback traversal, commits once and releases before continuation. Helper dispatch separates statement mutations, registered functions, logical arity, lazy controls, typed capture/position/cursor projections, diagnostic sinks and bound-codeblock fallback. Codeblocks evaluate arguments, reject arity/cycles and restore temporary parameters; functions use fresh local stores and restore caller stores. Receiver helpers preserve special with/tree/coalesce/split dispatch. The range ends at _callSet; .1.19 continues helper implementations.
+  Findings: Nine native/SpecFile-JSON controls confirm four false recursion rejections for distinct nested with/map_leaves callbacks and wrong with identity/cycle for real helper-mediated cb recursion. Three successful single/sequential/different-helper controls and direct cb recursion distinguish the defect. _executeCodeblockValue keys its active list by the supplied name, while helper/receiver/tree callers supply helper names. New .2.10 owns callback identity and exact real-cycle/carrier proof; Lua's existing fact is comparison evidence only. Existing .2.4/.2.8/.2.9 and other repairs remain intact.
+  Verification: Read interpreter 3675-5174 in six complete 250-line outputs. All 1,500 fragments / 45,330 bytes remain baseline-identical with pinned digest unchanged. All 140 selected tests pass, including existing emitted and CLI consumers. Nine exact pre-repair native/reconstructed controls pass; no new generated/emitted or other-backend defect result is inferred. Exact ranges, retained evidence, doctrines, histories, Knowledge and rendered-book proof belongs to this commit.
+  Commit: `DART-STARTUP-READING.1.18 - read helper dispatch; own callback identity gap`
 
 - ID: `DART-STARTUP-READING.1.19`
   Status: `pending`
@@ -727,11 +732,11 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Status: `pending`
   Goal: Reconcile and retain ownership of every confirmed Dart finding established during the reading.
   Dependencies: Findings from `.1`; implementation additionally requires startup `.3`, `.4` and `.5`.
-  Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`, `.2.5`, `.2.6`, `.2.7`, `.2.8`, `.2.9`; further confirmed findings receive disjoint owners here.
+  Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`, `.2.5`, `.2.6`, `.2.7`, `.2.8`, `.2.9`, `.2.10`; further confirmed findings receive disjoint owners here.
   Acceptance: Cross-reference existing owners for known defects; create disjoint bounded repair children here
     immediately for new confirmed defects, with mechanism, source, reproduction, acceptance and unblock conditions.
     If no new repair is needed, close this intake with an explicit complete reconciliation rather than inventing work.
-  Verification: `pending`; `.1.3` owns attached-switch omission/default replacement under `.2.1`; `.1.5` confirms regex-brace action scanning and lifecycle validation defects under `.2.2`. Reading .1.6 confirms numeric trace overflow and reset-before-failure under .2.3. Reading .1.7 confirms disconnected recognition effect validation, leaked writes after rollback and observation edge-closure bypass under .2.4. Reading .1.10 confirms MCP Unicode key-order divergence under .2.5. Reading .1.11 confirms regex/lifecycle-E body suffix loss under .2.6. Reading .1.12 confirms compact fluent argument corruption under .2.7 and outer regex-brace truncation under existing .2.2.2. Reading .1.13 confirms standalone body-fluent suffix loss under existing .2.6. Reading .1.16 confirms semantic observer error/stack loss through action child calls under .2.8; startup .37 retains nested progressive authority findings from .1.15. Reading .1.17 confirms mixed-control return escape and skipped attached else under .2.9. No repair implementation is admitted before startup gates.
+  Verification: `pending`; `.1.3` owns attached-switch omission/default replacement under `.2.1`; `.1.5` confirms regex-brace action scanning and lifecycle validation defects under `.2.2`. Reading .1.6 confirms numeric trace overflow and reset-before-failure under .2.3. Reading .1.7 confirms disconnected recognition effect validation, leaked writes after rollback and observation edge-closure bypass under .2.4. Reading .1.10 confirms MCP Unicode key-order divergence under .2.5. Reading .1.11 confirms regex/lifecycle-E body suffix loss under .2.6. Reading .1.12 confirms compact fluent argument corruption under .2.7 and outer regex-brace truncation under existing .2.2.2. Reading .1.13 confirms standalone body-fluent suffix loss under existing .2.6. Reading .1.16 confirms semantic observer error/stack loss through action child calls under .2.8; startup .37 retains nested progressive authority findings from .1.15. Reading .1.17 confirms mixed-control return escape and skipped attached else under .2.9. Reading .1.18 confirms helper-name callback recursion collision and lost bound identity under .2.10. No repair implementation is admitted before startup gates.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.2.1`
@@ -876,6 +881,14 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Verification: `pending`; ten typed-AST/contract/native/SpecFile-JSON controls reproduce four premature surrounding-rule returns and one skipped attached else. Five direct/marker-only/attached-only controls preserve the local result. All have empty diagnostic lists and matched=true at cursor 1. _executeValueStatementRange routes attached controls to the action evaluator; its single-statement if adapter cannot see sibling else. Exact replay and source locations live in docs/knowledge/dart-mixed-control-value-block-gap.md. No fresh generated/emitted or other-backend defect outcome is claimed.
   Commit: `pending`
 
+- ID: `DART-STARTUP-READING.2.10`
+  Status: `pending`
+  Goal: Separate callback recursion identity from helper names while preserving real bound-codeblock recursion rejection.
+  Dependencies: Startup `.3`, `.4` and `.5`; source finding from `.1.18`.
+  Acceptance: Allow distinct nested contextual/explicit callbacks through helper and receiver with and tree traversal without treating the helper name as callable identity. Preserve the bound callback identity through helper/receiver dispatch so direct, mutual and helper-mediated cycles report the correct ordered callable cycle. Resolve callbacks before installing scoped values; preserve once-only argument evaluation, copied parameter/rest values, restoration on success/failure and the separate map_leaves! receiver guard. Cover nested same/different helpers, sequential calls, named callbacks and real recursion through native, reconstructed, generated-plan and fresh emitted execution. Use the existing neutral contract and Lua identity record as evidence, not fresh backend proof; own any cross-backend follow-up. Update public evidence and use canonical proof at public closeout.
+  Verification: `pending`; nine native/SpecFile-JSON controls confirm four false recursion rejections for distinct nested with/map_leaves callbacks and incorrect with identity/cycle for real helper-mediated cb recursion. Single/sequential with and mixed map/reduce succeed; direct cb recursion reports cb correctly. _executeCodeblockValue keys activeCodeblocks by its name argument; helper/receiver/tree callers pass their helper name. Exact replay and locations live in docs/knowledge/dart-callback-helper-recursion-identity-gap.md. No fresh generated/emitted or other-backend defect result is claimed.
+  Commit: `pending`
+
 - ID: `DART-STARTUP-READING.3`
   Status: `pending`
   Goal: Close Dart reading with exact coverage, current-delta, comprehension and child-commit proof.
@@ -901,7 +914,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.18` | `pending` | Continue interpreter expression and helper dispatch after .1.17 commits cleanly. |
+| 1 | `DART-STARTUP-READING.1.19` | `pending` | Continue interpreter helper implementations after .1.18 commits cleanly. |
 
 ## Decisions
 
@@ -918,10 +931,12 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Blockers
 
-- History capacity is admitted by containment .8 under ADR0110; no reading blocker remains at this boundary. Source repairs .2.1-.2.9 remain gated.
+- History capacity is admitted by containment .8 under ADR0110; no reading blocker remains at this boundary. Source repairs .2.1-.2.10 remain gated.
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-09`: `.1.18` reads 1,500 fragments / 45,330 bytes; 140 selected tests pass. Nine native/reconstructed controls own false nested-callback cycles and helper-mediated identity loss under .2.10; earlier repairs remain intact.
 
 - `2026-09-09`: `.1.17` reads 1,500 fragments / 40,984 bytes; 124 selected tests pass. Ten AST/native/reconstructed controls establish mixed-control return escape and skipped else under new .2.9; earlier repairs remain intact.
 
@@ -958,6 +973,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- `2026-09-09`: `DART-STARTUP-READING.1.18 - read helper dispatch; own callback identity gap` closes the eighteenth reading child from clean 8975ac84.
+
 - `2026-09-09`: `DART-STARTUP-READING.1.17 - read value execution; own mixed control gap` closes the seventeenth reading child from clean 8b7a4a1a.
 
 - `2026-09-09`: `DART-STARTUP-READING.1.16 - read rule execution; own observer error wrapping` closes the sixteenth reading child from clean abc06ebd.
@@ -991,6 +1008,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-09`: `.1.18` reads interpreter through 5174 and owns callback recursion identity repair .2.10. Reading is 18/55; next .1.19.
 
 - `2026-09-09`: `.1.17` reads interpreter through 3674 and owns mixed value-control repair .2.9. Reading is 17/55; next .1.18.
 

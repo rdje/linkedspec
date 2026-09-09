@@ -89,14 +89,14 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed seventeen of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed eighteen of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
 parser bridge, function-shell projection, bounded child-parse authority and generated rule plan,
-plus the interpreter through line 3674. This covers 23,528 fragments / 776,881 bytes.
-The latest 124 selected Dart interpreter/ActionIR/callable/binding/write/mutation tests pass,
-including their existing emitted and CLI consumers. Child `.1.18` continues expression and
-helper dispatch; startup `.3.4` remains pending. Earlier contract evidence retains its checkpoints.
+plus the interpreter through line 5174. This covers 25,028 fragments / 822,211 bytes.
+The latest 140 selected Dart interpreter/callable/variadic/mutation/observation/source/logical/
+diagnostic tests pass, including their existing emitted and CLI consumers. Child `.1.19`
+continues helper implementations; startup `.3.4` remains pending. Earlier evidence retains its checkpoints.
 
 The function shell checks the returned definition's text against scalar spans, reconciles staged
 body metadata and removes declarations while preserving line breaks. The private progressive
@@ -219,6 +219,16 @@ controls and precise source locations are preserved in
 `docs/knowledge/dart-mixed-control-value-block-gap.md`. Pending repair
 `DART-STARTUP-READING.2.9` owns value-aware dispatch and mixed nesting/carrier coverage.
 The new defect has not been freshly tested in emitted code or another backend.
+
+**Known Dart limitation — nested callback identity:** distinct nested `with` callbacks
+can fail with a false `with -> with` recursion cycle. Nested `map_leaves` callbacks
+have the same collision. A bound callback recursing through `with(v, cb)` also reports
+the helper's identity instead of `cb`. Single/sequential callbacks and mixed map/reduce
+controls succeed; direct bound recursion reports `cb -> cb` correctly. Nine exact
+native/reconstructed controls are retained in
+`docs/knowledge/dart-callback-helper-recursion-identity-gap.md`. Pending repair
+`DART-STARTUP-READING.2.10` owns distinct callback nesting and retained named recursion.
+No fresh emitted or other-backend result is claimed for this newly measured boundary.
 
 **Approved continuity capacity:** the director approved intake `DART-STARTUP-READING.4`.
 Containment `.8` and ADR0110 admit exactly 31 change-history files and a manifest of

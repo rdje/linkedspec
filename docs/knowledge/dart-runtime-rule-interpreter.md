@@ -95,3 +95,21 @@ delegation. This range ends inside observe-recognition child execution; .1.18 co
 All 124 selected interpreter/ActionIR/callable/binding/write/mutation tests pass, including
 their existing emitted/CLI consumers. Ten new native/SpecFile-JSON controls establish four
 escaping returns and one skipped else, alongside five successful locality controls.
+
+## 2026-09-09 — observation completion, mutation and helper dispatch
+
+`DART-STARTUP-READING.1.18` reads lines 3675-5174. Observations bind before return or
+typed rethrow. Receiver mutation snapshots the original root, checks binding/kind, holds
+its identity guard through copied callback traversal and releases after one commit before
+continuation. The existing [[map-leaves-mutation-dart-runtime]] remains its authority.
+
+Helper dispatch separates statement mutations, registered calls, logical arity, lazy
+controls, source/capture/cursor projection, diagnostic sinks and bound callable fallback.
+Codeblocks restore temporary parameters; functions run with fresh stores then restore the
+caller. The range ends at _callSet; .1.19 continues helpers. Source absence behavior remains
+[[dart-nullable-match-state-preserves-absence]], including one-based line/column defaults.
+
+The 140 selected interpreter/callable/variadic/mutation/observation/source/logical/diagnostic
+tests pass with existing emitted/CLI consumers. Nine native/reconstructed controls expose
+helper-name recursion collisions in [[dart-callback-helper-recursion-identity-gap]];
+new .2.10 owns repair. Previously owned effect/observer/mixed-control gaps remain open.

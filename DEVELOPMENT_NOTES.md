@@ -10,6 +10,15 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-09 — helper names are not callback recursion identities
+
+`DART-STARTUP-READING.1.18` reads observation completion, guarded receiver mutation,
+helper/callable dispatch and function store restoration through interpreter 5174.
+All 140 selected tests pass. Nine native/reconstructed controls show helper-name tracking
+falsely rejects distinct nested with/map_leaves callbacks and loses cb identity through
+with. Three successful controls and direct recursion distinguish the failure. New .2.10
+owns named/anonymous callback identity and carrier proof; prior repairs remain open.
+
 ## 2026-09-09 — marker-selected ranges need value-aware control dispatch
 
 `DART-STARTUP-READING.1.17` reads value controls, copied/restored with and tree callback

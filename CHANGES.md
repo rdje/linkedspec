@@ -10,6 +10,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-09 — DART-STARTUP-READING.1.18: callback recursion identity
+
+Read 1,500 fragments / 45,330 unchanged bytes through interpreter line 5174.
+All 140 selected tests pass. Nine native/reconstructed controls expose false nested-helper
+callback cycles and lost bound callback identity. New .2.10 owns repair/carrier proof;
+exact replay and book limitation are durable. Reading reaches 18/55, next .1.19.
+No executable change.
+
 ## 2026-09-09 — DART-STARTUP-READING.1.17: mixed value-control execution
 
 Read 1,500 fragments / 40,984 unchanged bytes through interpreter line 3674.

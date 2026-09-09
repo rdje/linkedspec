@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.17 completes seventeen of 55 children: 23,528 fragments / 776,881 bytes. Containment .8 admits the director-approved history capacity at 7d52c98e; all confirmed Dart defects .2.1-.2.9 and startup .37 nested-authority findings are owned and gated; remaining required reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.18 completes eighteen of 55 children: 25,028 fragments / 822,211 bytes. Containment .8 admits the director-approved history capacity at 7d52c98e; all confirmed Dart defects .2.1-.2.10 and startup .37 nested-authority findings are owned and gated; remaining required reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `DART-STARTUP-READING.1.17` reads interpreter through 3674. All 124 selected tests pass. Ten native/reconstructed controls confirm mixed value-control return escape and skipped else, owned by .2.9 with exact replay and a book limitation; earlier repairs remain intact.
+- `DART-STARTUP-READING.1.18` reads interpreter through 5174. All 140 selected tests pass. Nine native/reconstructed controls confirm false nested-callback cycles and helper-mediated identity loss, owned by .2.10 with exact replay and a book limitation; earlier repairs remain intact.
 
 ## Next Action
 
-- `DART-STARTUP-READING.1.18` continues interpreter expression and helper dispatch after .1.17 commits, brief clearing and clean proof.
+- `DART-STARTUP-READING.1.19` continues interpreter helper implementations after .1.18 commits, brief clearing and clean proof.
 
 ## Recent Completions
+
+- `2026-09-09` — `DART-STARTUP-READING.1.18` reads 1,500 fragments / 45,330 bytes; 140 tests pass; nine callback identity controls own .2.10.
 
 - `2026-09-09` — `DART-STARTUP-READING.1.17` reads 1,500 fragments / 40,984 bytes; 124 tests pass; ten mixed-control probes own .2.9.
 
@@ -48,8 +50,6 @@
 - `2026-09-09` — `DART-STARTUP-READING.1.5` reads 1,500 fragments / 42,210 bytes, passes 55 selected tests and owns regex scanner repairs .2.2.
 
 - `2026-09-09` — `DART-STARTUP-READING.1.4` reads 1,500 fragments / 42,924 bytes and passes 79 focused tests; switch repair remains pending.
-
-- `2026-09-09` — `DART-STARTUP-READING.1.3` reads 1,500 fragments / 43,988 bytes, passes 45 focused tests, and owns switch omission repair .2.1.
 
 ## History
 

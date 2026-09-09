@@ -76,3 +76,12 @@ returns and one skipped else through native and SpecFile-JSON execution. Five di
 marker-only and attached-only controls keep their local value. The 124 selected existing
 tests pass. [[dart-mixed-control-value-block-gap]] retains exact source and replay;
 DART-STARTUP-READING.2.9 owns the gated repair and broader carrier proof.
+
+## 2026-09-09 — distinct nested callbacks qualification
+
+Distinct nested with callbacks and nested map_leaves callbacks currently collide in the
+active-codeblock list because helper names stand in for callback identities. Sequential
+with and mixed map/reduce controls succeed. [[dart-callback-helper-recursion-identity-gap]]
+preserves nine native/reconstructed controls and the separate real bound-recursion
+identity loss under DART-STARTUP-READING.2.10. Mixed marker/attached return repair .2.9
+remains separate; no runtime fix is claimed by the .1.18 reading.
