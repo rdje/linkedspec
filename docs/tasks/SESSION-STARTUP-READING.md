@@ -2224,7 +2224,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Goal: Split and read all 115 baseline Dart entries, including compiler/runtime, tests, commands, and package inputs.
   Reading owner: `docs/tasks/DART-STARTUP-READING.md` owns .0 decomposition, .1 reading, .2 new repair intake and .3 reading closeout; this startup node remains the prerequisite/closeout owner.
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas. DART-STARTUP-READING.3 may complete this reading node only after exact coverage/comprehension and child-commit proof; pending repairs remain owned separately.
-  Verification: Pending source reading; canonical admission a67a18bf and DART-STARTUP-READING.0 define 55 pending reading children / 169 exact baseline ranges, without reading credit or moving earlier evidence.
+  Verification: Dart reading remains incomplete: DART-STARTUP-READING.1.1 closes 1/55 children, 1,500 fragments / 60,321 bytes with exact baseline identity and 9/9 AST/parser tests. Next .1.2; earlier evidence and repairs remain intact.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.5`
@@ -4325,12 +4325,12 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 ## Current Frontier
 
-Canonical admission a67a18bf and completed `DART-STARTUP-READING.0` decomposition preserve the full baseline. Resume `DART-STARTUP-READING.1.1` in `docs/tasks/DART-STARTUP-READING.md` after its clean decomposition commit.
+Canonical admission a67a18bf and completed `DART-STARTUP-READING.0` decomposition preserve the full baseline. Resume `DART-STARTUP-READING.1.2` in `docs/tasks/DART-STARTUP-READING.md` after the clean .1.1 reading commit.
 Startup `.3.4` remains pending until that tree proves complete Dart reading; admission itself grants no source-reading credit.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.1` | `pending` | Begin the first of 55 exact reading children; startup .3.4 remains the reading-closeout owner. |
+| 1 | `DART-STARTUP-READING.1.2` | `pending` | Resume ActionIR AST and contract definitions; 1/55 reading children complete and startup .3.4 remains pending. |
 
 ## Reading Ledger
 

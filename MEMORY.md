@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `a67a18bf8222bbc0bc63748f598d3a12a8191850` — clean canonical Dart-admission base.
-- latest_completed_leaf: `DART-STARTUP-READING.0 - freeze exact bounded Dart reading children`.
+- activation_commit: `2f80bcb869d2151f70e4eccec5d5de47ae116d20` — clean Dart-decomposition base.
+- latest_completed_leaf: `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: `DART-STARTUP-READING.1.1` reads its first exact scope in `docs/tasks/DART-STARTUP-READING.md`.
+- next_action: `DART-STARTUP-READING.1.2` resumes ActionIR AST and contracts in `docs/tasks/DART-STARTUP-READING.md`.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: startup `.7` blocks recovery/purge. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.79` precede mutation setup; `.29` belongs to `.5`. The director approved the narrow capacity exception; other reading gates remain.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4983` is the twenty-eighth history segment; ADR `0106`
   authorizes exactly 30 collection files / 29 manifest lines / 16,463 manifest bytes; other ceilings remain unchanged.
-- latest_bootstrap_read: 2026-09-09 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart .0 defines 55 pending reading children; PNT resumes .1.1.
+- latest_bootstrap_read: 2026-09-09 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading 1/55 children, 1,500 fragments / 60,321 bytes; next .1.2.

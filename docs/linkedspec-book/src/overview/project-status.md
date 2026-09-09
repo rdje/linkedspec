@@ -89,8 +89,11 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-The first child `.1.1` is next. Decomposition grants no source-reading credit; startup `.3.4`
-remains pending until reading closeout, and confirmed findings retain separate repair ownership.
+Physical Dart reading has now completed its first child: the README, analyzer and command entrypoints,
+public export list, and initial ActionIR declarations. This covers 1,500 fragments / 60,321 bytes;
+nine existing AST/parser tests pass. The next child `.1.2` resumes the AST and contract definitions.
+This reading checkpoint adds no runtime behavior and confirms no new defect. Startup `.3.4`
+remains pending until all reading is complete; confirmed repairs retain separate ownership.
 The director's exception covers capacity infrastructure only; other reading/repair gates and the
 parked authoring and format ideas remain at their current status.
 

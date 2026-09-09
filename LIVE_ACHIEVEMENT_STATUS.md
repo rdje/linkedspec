@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. `DART-STARTUP-READING.0` defines 55 exact reading children; `.1.1` is next, with no Dart source-reading credit yet.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.1 completes the first of 55 children: 1,500 fragments / 60,321 bytes. .1.2 is next; remaining required reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `DART-STARTUP-READING.0` freezes 55 pending children / 169 ranges over all 115 baseline-identical Dart paths. Independent declared-scope reconstruction and every child digest pass; source reading starts at .1.1.
+- `DART-STARTUP-READING.1.1` reads README, analyzer/CLI entrypoints, the public export list and initial ActionIR declarations. Exact six-range identity and 9/9 existing AST/parser tests pass; no new defect is confirmed.
 
 ## Next Action
 
-- Read the exact first scope under `DART-STARTUP-READING.1.1` after the decomposition commit, cleared brief and clean proof.
+- Read `DART-STARTUP-READING.1.2`: ActionIR AST lines 660-1470 and contract definitions lines 1-689, after the clean .1.1 commit.
 
 ## Recent Completions
+
+- `2026-09-09` — `DART-STARTUP-READING.1.1` reads the first 1,500 fragments / 60,321 bytes and passes nine AST/parser tests.
 
 - `2026-09-09` — `DART-STARTUP-READING.0` freezes exact bounded source-reading ownership without reading credit.
 
@@ -48,8 +50,6 @@
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.60` completes cursor/diagnostic consumer reading and starts semantic-foundation tests.
 
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.59` completes root-selection consumer reading and qualifies historical rollout evidence.
-
-- `2026-09-08` — `SESSION-STARTUP-READING.3.3.58` completes recognition/observation reading and owns emitted-manifest portability repair .78.
 
 ## History
 

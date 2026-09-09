@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-09 — DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations
+
+The 22 explicit export directives preserve the public boundary while progressive/staged/recognition ActionIR declarations remain internal to the package facade. The first AST range records logical data and structural JSON, with copied unmodifiable staged provenance/capability lists; runtime behavior is not inferred from declarations. It ends at the literal-codeblock constructor, so .1.2 owns the remaining fields and serializer. Existing nine tests cover AST parsing and spec reconstruction, not exhaustive runtime admission. Source-reading credit is recorded separately from decomposition and repair completion.
+
 ## 2026-09-09 — DART-STARTUP-READING.0 - freeze exact bounded Dart reading children
 
 The reproducible Dart plan becomes actual ownership under .1.1-.1.55. One-based inclusive line coordinates and two UTF-8-safe file-byte windows account for one oversized physical line; 80,297 window fragments therefore cover 80,296 physical lines. Per-child and global digests verify the declared plan independently of its generation. Pending children omit verification-tier declarations until activation, preserving exactly one owning tier per commit. Comprehension and repair completion remain separate from decomposition.

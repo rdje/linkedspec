@@ -8,7 +8,7 @@ answers:
   - how are oversized Dart source lines split for reading
   - does Dart reading decomposition count as source comprehension
 date: 2026-09-09
-status: decomposition under DART-STARTUP-READING.0; all source-reading children remain pending
+status: exact scopes frozen under DART-STARTUP-READING.0; current physical-reading progress lives in the owning tree
 tags: [dart, startup, reading, task-tree, coverage, continuity]
 evidence: "Clean canonical admission a67a18bf precedes decomposition. The 115 baseline paths / 80296 physical lines / 2471305 bytes remain current-identical. Fifty-five owned children declare 169 ranges with 80297 fragments, including two UTF-8-safe byte windows for one oversized physical line. Every child is at most 1500 fragments and 65536 bytes. Parsing the actual task scopes independently reconstructs each byte exactly once and checks per-child and aggregate digests. Decomposition grants no source-reading or repair-completion credit."
 reverify:
