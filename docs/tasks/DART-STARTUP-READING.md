@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / `.1.13` complete; next `.1.14`
+- Status: `active` / `.1.14` complete; next `.1.15`
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-09`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 13/55 children, 17,528/80,297 fragments and 602,630/2,471,305 bytes; twenty-four entries through EOF
-  plus user_function_definition_shell.dart through line 252. Exact credit and comprehension remain in each completed node.
+- Current reading: 14/55 children, 19,028/80,297 fragments and 647,237/2,471,305 bytes; twenty-five entries through EOF
+  plus bounded_child_parse_authority.dart through line 746. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -85,7 +85,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Acceptance: Every child accounts for its exact source bytes and deltas, reconciles Knowledge before re-derivation,
     records comprehension and confirmed findings, runs necessary focused diagnostics and commits before the next child.
   Children: `.1.1-.1.55`; exact scopes and baseline evidence below, read in numeric order.
-  Verification: 13/55 children complete; `.1.1-.1.13` own exact reading/comprehension evidence, and all later children remain pending.
+  Verification: 14/55 children complete; `.1.1-.1.14` own exact reading/comprehension evidence, and all later children remain pending.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.1.1`
@@ -284,14 +284,19 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.13 - read Unicode and function bridge; own fluent suffix loss`
 
 - ID: `DART-STARTUP-READING.1.14`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 14 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.13` committed; empty brief and clean repository.
   Scope: `dart/lib/src/parser/user_function_definition_shell.dart` lines 253-1006; `dart/lib/src/runtime/bounded_child_parse_authority.dart` lines 1-746
   Baseline evidence: 1500 fragments / 44607 bytes; ordered range SHA-256 `0b7f74ece3a18212c310d4d07fcbd1c737cc20f0e1ba63fa7c49c45705b4e4b1`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Existing Dart function-shell/parser/staged-registry, dormant progressive authority and admitted progressive carrier consumers; exact source ranges/current deltas and prior evidence retention; all doctrines, both histories, Knowledge freshness, mdBook rendering and staged scope.
+  Canonical trigger: `none` — bounded required reading and defect intake; no executable, contract or infrastructure change.
+  Comprehension: Completes shell arity, scalar text/span containment, sidecar kind/name/signature/text/span/policy checks, deterministic parent/job normalization, nonoverlapping source stripping preserving CR/LF, strict variadic signature fields and typed declaration errors. Function SourceSpan retains line fields; scalar body spans remain in sidecars. Bounded authority prefix covers immutable registry/configuration, host-only fresh execution seed, shared cancellation identity, defensive arguments and callback-scoped source view. View operations rebase local scalar positions/spans/diagnostics, enforce offset and diagnostic byte bounds, and guard retained nested requests against expiry. Invocation setup validates decoded sources, limits and active-chain spans; .1.15 resumes constructor state and the actual dispatch algorithm.
+  Findings: No new confirmed defect in this owned range. Shell validation and private authority evidence remain bounded to the inspected source and selected consumers; .2.1-.2.7 repairs and parked authoring proposals retain their owners.
+  Verification: Read shell 253-1006 through EOF and authority 1-746 in complete bounded outputs. All 1,500 fragments / 44,607 bytes remain baseline-identical with the pinned range digest. Twenty-four selected tests pass, including four authority groups and seven admitted carrier groups with independently analyzed/executed emitted Dart source. Exact range/current-delta, retained evidence, doctrines, histories, Knowledge and rendered-book proof belongs to this commit; no fresh complete-backend/all-runtime gate is inferred.
+  Commit: `DART-STARTUP-READING.1.14 - finish function projection and read bounded authority`
 
 - ID: `DART-STARTUP-READING.1.15`
   Status: `pending`
@@ -865,7 +870,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.14` | `pending` | Finish function-shell projection and begin bounded child-parse authority after .1.13 commits cleanly. |
+| 1 | `DART-STARTUP-READING.1.15` | `pending` | Finish bounded child-parse authority, read generated plan and begin interpreter after .1.14 commits cleanly. |
 
 ## Decisions
 
@@ -886,6 +891,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-09`: `.1.14` reads 1,500 fragments / 44,607 bytes, completes function projection and reads bounded authority through line 746. All 24 selected function/progressive tests pass, including emitted analysis/execution; no new confirmed defect.
 
 - `2026-09-09`: `.1.13` reads 1,500 fragments / 48,522 bytes, passes 25 selected tests and neutral Unicode 806/9/8/2 checks. Seven body-fluent controls extend existing suffix-retention repair .2.6; no repair is implemented.
 
@@ -914,6 +921,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- `2026-09-09`: `DART-STARTUP-READING.1.14 - finish function projection and read bounded authority` closes the fourteenth reading child from clean ced8f47a.
+
 - `2026-09-09`: `DART-STARTUP-READING.1.13 - read Unicode and function bridge; own fluent suffix loss` closes the thirteenth reading child from clean 6c2e3ca4.
 
 - `2026-09-09`: `DART-STARTUP-READING.1.12 - finish spec parser; own lexical defects` closes the twelfth reading child from clean 9a86da13.
@@ -939,6 +948,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-09`: `.1.14` completes function-shell reading and begins bounded source-view authority; cumulative reading is 14/55. Next .1.15; earlier repairs remain gated.
 
 - `2026-09-09`: `.1.13` completes staged v1 registry, Unicode classifier and function parser, reads shell through line 252 and owns the body-fluent suffix mechanism under .2.6; next .1.14.
 

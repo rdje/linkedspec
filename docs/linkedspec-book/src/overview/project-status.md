@@ -89,14 +89,20 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed thirteen of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed fourteen of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
-spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier and function
-parser bridge, plus function-shell projection through line 252. This covers 17,528 fragments /
-602,630 bytes. The latest 25 selected tests pass, including emitted Unicode-label execution;
-neutral verification confirms all 806 ranges and the positive/negative/distinct fixtures.
-Child `.1.14` finishes function-shell projection and begins bounded child-parse authority;
-startup `.3.4` remains pending. Earlier corpus and contract evidence remains in its own checkpoints.
+spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
+parser bridge and function-shell projection, plus bounded child-parse authority through line 746.
+This covers 19,028 fragments / 647,237 bytes. The latest 24 selected function/progressive tests
+pass, including independently analyzed and executed emitted Dart source. Child `.1.15` finishes
+bounded child-parse authority, reads the generated plan and begins the interpreter; startup
+`.3.4` remains pending. Earlier corpus, Unicode and contract evidence retains its own checkpoints.
+
+The function shell checks the returned definition's text against scalar spans, reconciles staged
+body metadata and removes declarations while preserving line breaks. The private progressive
+API supplies already-compiled callbacks with a bounded source view; local positions and
+diagnostics rebase to original source coordinates, and the view expires after callback completion.
+Those existing host APIs do not activate the proposed parser builder or fileless MCP work.
 
 The embedded MCP contract preserves three distinct outcomes. A native semantic response with
 `ok: false` remains a successful transport result, with `isError: false` and its diagnostics intact.

@@ -51,3 +51,24 @@ unchanged seven-group consumer is ordinarily and canonically admitted; the autho
 - Current carriers: [[dart-progressive-span-dispatch-carriers]].
 - Typed source authority: [[typed-source-location-cursor-algebra-direction]].
 - Owner: [[FUTURE-PARITY-BACKLOG.14]] `.14.6.4.1`.
+
+## 2026-09-09 — bounded authority prefix reading
+
+`DART-STARTUP-READING.1.14` reads lines 1-746. Registry entries retain already-compiled
+callbacks under validated logical identities/fingerprints; maps and configuration snapshots
+are copied into immutable containers. Runtime register/load methods are typed denials.
+The opaque host seed starts fresh invocation accounting while preserving the caller's shared
+cancellation identity. No callbacks, host source snapshots or authority objects are added
+to generated plan data.
+
+Callback requests expose bounded text, original source identity and scalar position/span/
+diagnostic rebasing through SourceAuthority. Local offset checks include both endpoints;
+diagnostic size uses UTF-8 JSON bytes. Each view operation checks lifetime, and dispatchNested
+checks the same view before delegation. Invocation construction validates source availability,
+limits and active-chain spans. The owned range ends during constructor field transfer;
+`.1.15` owns its remainder, the dispatch algorithm and result-detachment helpers.
+
+Fresh selected proof passes 24 function/progressive tests, including all four dormant
+authority groups and seven admitted carrier groups. The latter independently analyzes and
+executes emitted Dart source. This is selected Dart evidence, not a fresh complete-backend
+or all-runtime gate; known recognition integration repair .2.4 retains its separate owner.

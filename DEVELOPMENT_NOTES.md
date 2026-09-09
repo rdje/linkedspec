@@ -10,6 +10,16 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-09 — function sidecars and callback-scoped source views
+
+`DART-STARTUP-READING.1.14` completes shell projection: scalar text/span checks, matching
+sidecars, normalized parent/job identity and CR/LF-preserving declaration removal. Function
+line fields remain separate from the staged scalar coordinates used by semantic projection.
+The bounded authority prefix owns copied host configuration and callback-local source rebasing;
+every view operation and retained nested request checks lifetime. The actual dispatch algorithm
+starts in .1.15. All 24 selected function/progressive tests pass, including emitted Dart
+analysis/execution. No new confirmed defect or builder activation; earlier repair evidence remains.
+
 ## 2026-09-09 — Unicode identity and body-fluent token completeness
 
 `DART-STARTUP-READING.1.13` completes staged v1 helpers, the 806-range Unicode classifier and

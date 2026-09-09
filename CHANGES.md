@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-09 — DART-STARTUP-READING.1.14: function projection and bounded source authority
+
+Read 1,500 fragments / 44,607 unchanged bytes through function-shell EOF and bounded authority
+line 746. All 24 selected function/progressive tests pass, including emitted analysis/execution.
+No new confirmed defect; Knowledge, book, roadmap and live pointers agree at 14/55.
+Existing repairs stay gated; next .1.15 completes authority and begins runtime reading.
+
 ## 2026-09-09 — DART-STARTUP-READING.1.13: Unicode, function bridge and fluent suffixes
 
 Read 1,500 fragments / 48,522 unchanged bytes through staged registry/Unicode/function parser EOF

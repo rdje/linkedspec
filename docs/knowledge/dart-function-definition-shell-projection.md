@@ -69,3 +69,23 @@ fixed/typed-v1 fields from variadic-v2 signatures and validates identifier spell
 The arity/body/span/sidecar remainder starts at line 253 and stays owned by .1.14.
 Twenty-five selected registry/Unicode/function parser/shell tests pass. No raw fn scanner
 or generic builder capability is added; proposed authoring work remains parked.
+
+## 2026-09-09 — function-shell source reading complete
+
+`DART-STARTUP-READING.1.14` reads lines 253-1006 through EOF. Character offsets are Unicode
+scalars: source/body text must match their slices, body bounds stay inside the definition,
+and removal rejects overlapping spans while replacing non-CR/LF scalars with spaces.
+Line fields are checked for positive ordered bounds and retained by FunctionDefinition;
+the scalar body coordinates remain in the staged sidecars, as distinguished in
+[[dart-semantic-introspection-authority-map]].
+
+Payload/job validation checks kind, function identity, fixed/typed-v1 or variadic-v2
+signature, body text and span equality. Jobs additionally require the fixed parser/top,
+replacement field, failure policy and diagnostic owner. Supplied placeholder parent paths
+are normalized to function indices, and body job ids are regenerated from identity and
+scalar boundaries. Variadic signatures require the exact six fields and null max_arity;
+typed declaration failures receive specific diagnostics before the generic fallback.
+
+The selected shell/parser/registry plus progressive authority/carrier tests pass 24/24.
+This completes physical shell reading without changing its input contract or admitting a
+generic builder. Earlier source and projection evidence remains intact.
