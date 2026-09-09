@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-09 — DART-STARTUP-READING.1.5 - read callable and spec state; own regex scanner defects
+
+Callable normalization recursively checks retained bodies structurally, while ordinary helper-dependency resolution remains deferred; no body execution follows from normalization. The registry preserves ordered unique names, immutable containers, fixed/variadic matching and descriptor versions. Spec AST decoding retains distinct line/offset and selector-omission fields. The scanner probe isolates two regex-brace failures: slash followed by opening parenthesis is not recognized as regex by the inner delimiter walker, and lifecycle balance counts regex braces even in a programmatic SpecFile. The latter blocks normal execution of both regex-brace controls; only ordinary-group and quoted-pattern controls execute true. Validator lines 322-398 are diagnostic reading, not whole-file credit.
+
 ## 2026-09-09 — DART-STARTUP-READING.1.4 - read assignment, mutation and scanner parsing
 
 The parser recognizes staged dispatch only in exact scalar-assignment shapes; normalized literal options and flattened text provenance remain logical data. Receiver mutation separately enforces bare addressable roots, one adjacent bang, empty arguments, immediate callbacks and parenthesized ordinary continuations, retaining explicit character spans. Contextual candidates retain outer body bounds while reparsing body-local AST. Scanner state preserves quote/regex and nesting context, but this range ends inside quoted/regex consumption; .1.5 owns the remaining tail. Existing canonical records own runtime guarantees; 79 passing selected tests do not repair the switch omission.

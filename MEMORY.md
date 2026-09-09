@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `f0c4a2f21dfc24bd2b5a944167d626c3354264e8` — clean prior Dart-reading leaf.
-- latest_completed_leaf: `DART-STARTUP-READING.1.4 - read assignment, mutation and scanner parsing`.
+- activation_commit: `cc5933b42546779df80d5b82d29e41d4c11b8db8` — clean prior Dart-reading leaf.
+- latest_completed_leaf: `DART-STARTUP-READING.1.5 - read callable and spec state; own regex scanner defects`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: `DART-STARTUP-READING.1.5` resumes parser/callable/registry/spec AST in `docs/tasks/DART-STARTUP-READING.md`; .2.1 repair is gated.
+- next_action: `DART-STARTUP-READING.1.6` resumes spec AST/CLI/compiler in `docs/tasks/DART-STARTUP-READING.md`; .2.1/.2.2 repairs are gated.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: startup `.7` blocks recovery/purge. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.79` precede mutation setup; `.29` belongs to `.5`. The director approved the narrow capacity exception; other reading gates remain.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4983` is the twenty-eighth history segment; ADR `0106`
   authorizes exactly 30 collection files / 29 manifest lines / 16,463 manifest bytes; other ceilings remain unchanged.
-- latest_bootstrap_read: 2026-09-09 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading 4/55 children, 6,000 fragments / 183,326 bytes; next .1.5.
+- latest_bootstrap_read: 2026-09-09 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading 5/55 children, 7,500 fragments / 225,536 bytes; next .1.6.

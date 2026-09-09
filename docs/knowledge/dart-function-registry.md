@@ -30,6 +30,22 @@ helper fallback. Keywords diagnose as unsupported. If the name is registered but
 emits `user_function_arity_mismatch` instead of treating the call as an unknown
 helper.
 
+## Registry and callable reading — 2026-09-09
+
+DART-STARTUP-READING.1.5 physically completes function_registry.dart and
+callable_contract.dart. Registry construction rejects duplicate names before
+insertion, preserves source order and freezes its entry/name containers.
+Descriptor records select version 3 for typed parameter kinds, otherwise v1
+without a signature or v2 with one; fixed/variadic matching stays metadata-owned.
+
+Final-codeblock normalization is structural and may recurse into retained
+callable bodies. It is distinct from eager helper/dependency resolution and
+runtime body execution. Builtin/helper/receiver and typed user-function metadata
+select the final slot; unadmitted parenthesized candidates become eager blocks,
+while unadmitted attached candidates fail. Existing canonical callable facts
+remain authoritative; the 55 selected tests pass. The same reading checkpoint's
+regex defects are separately owned in [[dart-regex-brace-scanner-defects]].
+
 Related facts: [[dart-actionir-contract-resolver]], [[dart-backend-scaffold-package]],
 [[dart-function-definition-shell-projection]], [[dart-staged-function-body-registry]],
 [[dart-user-function-runtime-execution]], [[staged-linked-parsing-architecture]].

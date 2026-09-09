@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.4 completes four of 55 children: 6,000 fragments / 183,326 bytes. .1.5 is next; switch defect .2.1 is owned and gated; remaining required reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.5 completes five of 55 children: 7,500 fragments / 225,536 bytes. .1.6 is next; switch .2.1 and regex .2.2 defects are owned and gated; remaining required reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `DART-STARTUP-READING.1.4` reads parser lines 999-2498; 79/79 selected AST/callable/mutation/write/progressive/staged tests pass. No additional defect is confirmed. Attached-switch body omission/default replacement remains owned by .2.1 and its gated validation/repair children.
+- `DART-STARTUP-READING.1.5` reads parser tail, callable contract, registry and spec AST through line 880; 55/55 selected tests pass. Five probes confirm grouped-regex action scanning and lifecycle balance defects, owned by .2.2.1/.2.2.2 and routed to startup .54.3. Existing switch repair remains pending.
 
 ## Next Action
 
-- Read `DART-STARTUP-READING.1.5`: parser tail, callable contract, function registry and initial spec AST, after the clean .1.4 commit.
+- Read `DART-STARTUP-READING.1.6`: spec-AST tail, CLI implementations and initial compiled state, after the clean .1.5 commit.
 
 ## Recent Completions
+
+- `2026-09-09` — `DART-STARTUP-READING.1.5` reads 1,500 fragments / 42,210 bytes, passes 55 selected tests and owns regex scanner repairs .2.2.
 
 - `2026-09-09` — `DART-STARTUP-READING.1.4` reads 1,500 fragments / 42,924 bytes and passes 79 focused tests; switch repair remains pending.
 
@@ -48,8 +50,6 @@
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.64` completes staged recursive/carrier reading and starts standalone-lifecycle tests.
 
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.63` completes emitter/loader/staged-prefix reading and corrects classifier proof scope.
-
-- `2026-09-08` — `SESSION-STARTUP-READING.3.3.62` completes admission/emitter boundary reading and owns verifier signal repair .79.
 
 ## History
 

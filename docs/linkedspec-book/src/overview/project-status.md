@@ -89,12 +89,11 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed four of 55 children: entrypoints, the complete ActionIR node
-model and contract resolver, and parser code through assignment, mutation, staged declarations and
-most scanner helpers. This covers 6,000 fragments / 183,326 bytes. The latest 79 selected tests pass,
-including callable, nested-write, mutation, progressive-dispatch and staged-enrichment consumers.
-The next child `.1.5` reads the parser tail, callable contract, function registry and initial spec AST;
-startup `.3.4` remains pending. No additional defect is confirmed by this checkpoint.
+Physical Dart reading has completed five of 55 children, including the complete ActionIR parser,
+callable normalization and function registry, plus spec AST through line 880. This covers 7,500
+fragments / 225,536 bytes. The latest 55 selected AST, registry, callable, validator, staged-registry
+and function-definition tests pass. The next child `.1.6` resumes spec AST, CLI and compiler reading;
+startup `.3.4` remains pending.
 
 **Known Dart limitation — attached switches:** a trailing non-branch statement can remain in the
 parsed body while being omitted from helper diagnostics and execution. A later `default` can also
@@ -104,6 +103,15 @@ passing existing tests does not close the defect. Exact examples and reproductio
 validation and `.2.1.2` owns repair/carrier proof after startup reading and policy gates. The finding
 does not establish behavior on other backends or emitted Dart. Reading completion and repair
 completion remain separate; this checkpoint changes no runtime behavior.
+
+**Known Dart limitation — regex braces:** `/(})/` is accepted alone but becomes unsupported action
+syntax inside an attached `if`. Independently, lifecycle balance validation counts regex braces
+as block syntax: even a programmatically constructed spec with `/}/` fails validation. Ordinary
+grouped-regex and quoted-pattern controls execute successfully. The exact five-case probe and
+source mechanisms live in `docs/knowledge/dart-regex-brace-scanner-defects.md`. Dart `.2.2.1/.2.2.2`
+own the gated repairs; startup `.54.3` remains the broad public/cross-backend closeout. These probes
+do not establish outer-source collector or emitted-Dart behavior.
+
 The director's exception covers capacity infrastructure only; other reading/repair gates and the
 parked authoring and format ideas remain at their current status.
 
