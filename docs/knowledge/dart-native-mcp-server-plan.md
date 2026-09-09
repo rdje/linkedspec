@@ -53,3 +53,10 @@ status movement, closes the Dart parent, and hands the exact contract to Julia `
 Related facts: [[dart-semantic-query-public-api]], [[dart-semantic-introspection-admission]],
 [[mcp-native-server-topology]], [[mcp-2026-07-28-stdio-contract]],
 [[dart-mcp-strict-stdio]], [[mcp-implementation-admission-ledger]], and [[rust-native-mcp-server-plan]].
+
+## 2026-09-09 — generated-file size qualification
+
+The 82,875-byte value above records the original implementation boundary. At
+`DART-STARTUP-READING.1.9` the baseline-identical generated file is 83,214 bytes and the
+generator's read-only default check passes. Current bounded reading and decoded identity proof
+live in [[dart-mcp-decoded-server]]; no production seam or authority is changed here.

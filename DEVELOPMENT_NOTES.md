@@ -10,6 +10,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-09 — generated MCP policy and response boundaries
+
+`DART-STARTUP-READING.1.9` reads the canonical frames, transport policy, complete corpus and
+schema prefix through the page field. Native semantic rejection remains a successful tool transport
+payload; handle/policy errors and JSON-RPC errors retain distinct envelopes. Explicit policy
+components alone intercept native dispatch. Generator freshness and decoded identity verify the
+complete data owner without granting physical credit beyond byte 65,855 or runtime enforcement.
+
 ## 2026-09-09 — Dart corpus selection and file-loading boundaries
 
 `DART-STARTUP-READING.1.8` confirms whole-corpus validation before selection, structural

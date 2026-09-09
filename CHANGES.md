@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-09 — DART-STARTUP-READING.1.9: generated MCP contract reading
+
+Read all 65,536 owned bytes of the first generated bundle window, retaining exact baseline identity.
+Four binding tests, neutral 35/10/10/76 validation, generator freshness and embedded-value equality pass.
+Dated facts and public outcome distinctions retain prior evidence. Reading reaches 9/55; no new
+defect is confirmed. Next .1.10 finishes the bundle and reads its runtime/server.
+
 ## 2026-09-09 — DART-STARTUP-READING.1.8: corpus and loader reading
 
 Read 1,027 fragments / 29,012 unchanged bytes through corpus/loader EOF and MCP line 9.

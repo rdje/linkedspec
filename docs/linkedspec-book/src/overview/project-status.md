@@ -89,11 +89,20 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed eight of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed nine of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner
-and spec loader, plus the generated MCP prefix. This covers 11,527 fragments / 345,207 bytes.
-All 42 selected corpus, loader, primary CLI and MCP binding tests pass, including the complete
-105-fixture corpus. Child `.1.9` reads the first generated-bundle byte window; startup `.3.4` remains pending.
+and spec loader, plus the first generated MCP bundle window. This covers 11,528 fragments /
+410,743 bytes. The preceding 42-test selection includes the complete 105-fixture corpus.
+The latest four MCP binding tests and neutral validation of 35 frames, 10 raw inputs,
+10 lifecycle cases and 76 rejected mutations pass. The generated binding is byte-fresh;
+its embedded contract, schema and corpus equal their neutral owners.
+Child `.1.10` finishes the bundle and reads the MCP runtime/server; startup `.3.4` remains pending.
+
+The embedded MCP contract preserves three distinct outcomes. A native semantic response with
+`ok: false` remains a successful transport result, with `isError: false` and its diagnostics intact.
+An unavailable handle or deployment-policy denial produces a tool error. Invalid envelopes,
+parameters or protocol versions produce JSON-RPC errors. This data reading confirms the declared
+contract; runtime enforcement remains subject to its separately scoped reading and tests.
 
 The corpus runner validates the whole fixture collection before applying a selector. For example,
 requesting one named case still reports malformed manifest entries elsewhere. Successful execution

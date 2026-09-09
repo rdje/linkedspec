@@ -59,3 +59,41 @@ The four binding tests pass within 42 selected tests, independently checking dig
 frozen schema behavior, canonical frames and serialization. Those tests grant no physical payload
 reading credit: .1.9 starts bytes 320-65855, with the remainder owned by .1.10.
 The existing query-only scope remains; parser builders and fileless execution/debugging are parked.
+
+## 2026-09-09 — first generated bundle window
+
+`DART-STARTUP-READING.1.9` reads bytes 320-65855 in six complete UTF-8 windows.
+This includes all canonical frames, transport policy and corpus, plus the schema prefix ending
+inside `semanticQueryRequest.page`. Semantic `ok=false` remains a native payload with tool
+`isError=false`; unavailable handles/policy denials use tool errors and malformed protocol input
+uses JSON-RPC errors. Policy checks only explicitly supplied overlay components; unsupplied
+components retain native dispatch/portable responses, as the neutral contract already records.
+
+The four existing binding tests pass. Independent neutral validation passes 35 frames,
+10 raw inputs, 10 lifecycle cases and 76 rejected mutations. The generator's default check proves
+the whole 83,214-byte file byte-fresh; decoded contract/schema/corpus equal their neutral owners.
+The 82,882-byte embedded JSON has the unchanged digest recorded above. Whole-bundle checks do
+not grant physical credit for the remaining .1.10 bytes, runtime or server.
+
+`bash tools/run_python_project_data.sh tools/generate_dart_mcp_contract.py` checks freshness without
+rewriting source. The following independent comparison preserves that same read-only boundary:
+
+```bash
+bash tools/project_data_run.sh python3 - <<'DART_MCP_BUNDLE_IDENTITY'
+from pathlib import Path
+import hashlib,json
+source=Path('dart/lib/src/mcp/mcp_contract.dart').read_text()
+quote=chr(39)*3
+payload=source.split('r'+quote,1)[1].rsplit(quote,1)[0]
+bundle=json.loads(payload)
+for key,path in [
+    ('contract','capability_conformance/mcp_semantic_transport_contract.json'),
+    ('schema','capability_conformance/mcp_semantic_transport/schema.json'),
+    ('corpus','capability_conformance/mcp_semantic_transport/corpus.json'),
+]:
+    assert bundle[key]==json.loads(Path(path).read_text()),key
+assert len(payload.encode())==82882
+assert hashlib.sha256(payload.encode()).hexdigest()=='a1d2857c57ef93ea0e62403977105fdf6380f6fcb4d7a89ed5749c1bfdd64001'
+print('PASS embedded contract/schema/corpus identity and dated bundle bytes/digest')
+DART_MCP_BUNDLE_IDENTITY
+```

@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / `.1.8` complete; next `.1.9`
+- Status: `active` / `.1.9` complete; next `.1.10`
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-09`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 8/55 children, 11,527/80,297 fragments and 345,207/2,471,305 bytes; sixteen entries through EOF
-  plus mcp_contract.dart through line 9. Exact credit and comprehension remain in each completed node.
+- Current reading: 9/55 children, 11,528/80,297 fragments and 410,743/2,471,305 bytes; sixteen entries through EOF
+  plus mcp_contract.dart through byte 65,855. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -85,7 +85,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Acceptance: Every child accounts for its exact source bytes and deltas, reconciles Knowledge before re-derivation,
     records comprehension and confirmed findings, runs necessary focused diagnostics and commits before the next child.
   Children: `.1.1-.1.55`; exact scopes and baseline evidence below, read in numeric order.
-  Verification: 8/55 children complete; `.1.1-.1.8` own exact reading/comprehension evidence, and all later children remain pending.
+  Verification: 9/55 children complete; `.1.1-.1.9` own exact reading/comprehension evidence, and all later children remain pending.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.1.1`
@@ -209,14 +209,19 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.8 - read corpus runner and spec loader`
 
 - ID: `DART-STARTUP-READING.1.9`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 9 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.8` committed; empty brief and clean repository.
   Scope: `dart/lib/src/mcp/mcp_contract.dart` bytes 320-65855
   Baseline evidence: 1 fragments / 65536 bytes; ordered range SHA-256 `0f1840a572eb4dae75c8b885cb994bf9844681670769813b98485144628d1342`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Existing Dart MCP contract binding tests and neutral contract checker; generator freshness and independent embedded contract/schema/corpus equality; exact owned byte window/current deltas and prior evidence retention; all doctrines, both histories, Knowledge freshness, mdBook rendering and staged scope.
+  Canonical trigger: `none` — bounded generated-source reading and documentation; no executable, contract or infrastructure change.
+  Comprehension: Raw generated JSON contains canonical discovery/list/capability/query/error frames, complete transport policy and corpus, then the schema prefix through semanticQueryRequest.page. It distinguishes semantic ok=false from tool errors and JSON-RPC errors, fixes host-only opaque handles and explicit-component lowering policy, and declares bounded framing/IDs/nesting, cancellation, EOF and output discipline. Tool schemas retain native semantic structure, closed fact keys and extensible bounded query contract IDs. .1.10 resumes the remaining schema and payloads; runtime enforcement is not inferred from data reading.
+  Findings: No new confirmed defect. Existing MCP facts retain dated admission evidence; generated-file size is qualified against the current 83,214-byte file. Parked authoring APIs remain proposed.
+  Verification: Physically read every owned byte in six complete UTF-8 windows: 320-6463, 6464-18751, 18752-31039, 31040-43327, 43328-55615 and 55616-65855. One initial combined output was truncated and replaced by a complete bounded reread; no missing bytes receive credit. All 65,536 bytes remain baseline-identical with pinned range digest unchanged. Four existing binding tests pass; neutral validation passes 35 frames / 10 raw inputs / 10 lifecycle cases / 76 rejected mutations; generator check is byte-fresh and independent decoded contract/schema/corpus equality passes. These whole-bundle checks grant no EOF or runtime reading credit. Workflow, retention and book proof belong to this commit.
+  Commit: `DART-STARTUP-READING.1.9 - read generated MCP contract window`
 
 - ID: `DART-STARTUP-READING.1.10`
   Status: `pending`
@@ -799,7 +804,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.9` | `pending` | Read the first UTF-8-safe byte window of the generated MCP bundle after .1.8 commits cleanly. |
+| 1 | `DART-STARTUP-READING.1.10` | `pending` | Finish the generated bundle, then read MCP contract runtime and server prefix after .1.9 commits cleanly. |
 
 ## Decisions
 
@@ -821,6 +826,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Verification Log
 
+- `2026-09-09`: `.1.9` reads 65,536 generated bytes; four binding tests, neutral 35/10/10/76 validation, byte freshness and independent embedded-value identity pass. Reading is 9/55; no additional defect confirmed.
+
 - `2026-09-09`: `.1.8` completes corpus/loader reading and MCP lines 1-9; all 42 selected tests pass, including 105/105 corpus execution. No additional defect confirmed; reading is 8/55.
 
 - `2026-09-09`: .4 approval/intake closes through separately owned containment .8; exact preservation and 22 validator executions support its canonical landing. Reading remains 7/55.
@@ -838,6 +845,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- `2026-09-09`: `DART-STARTUP-READING.1.9 - read generated MCP contract window` closes the ninth reading child from clean 6d9776ca.
+
 - `2026-09-09`: `DART-STARTUP-READING.1.8 - read corpus runner and spec loader` closes the eighth reading child from clean 7d52c98e.
 
 - `2026-09-09`: containment .8 commits the approved history exception and .4 intake closeout; next .1.8.
@@ -853,6 +862,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-09`: `.1.9` records complete first-window comprehension and retains the remaining schema/payload/runtime reading boundary at .1.10.
 
 - `2026-09-09`: `.1.8` records validated corpus selection, structural output comparison and strict named/path loading; next .1.9 reads the generated bundle.
 
