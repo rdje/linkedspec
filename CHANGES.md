@@ -10,6 +10,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-09 — DART-STARTUP-READING.1.20: value-helper boundaries
+
+Read 1,500 fragments / 41,244 unchanged bytes through interpreter line 8174.
+The corrected 111-test selection and neutral numeric 55/18 pass. Eleven number,
+eight Unicode-order and six slice comparisons own .2.12-.2.14 with exact
+native/reconstructed and Perl facade/source evidence. Book limitations and prior
+owners remain durable. Reading reaches 20/55; next .1.21. No executable change.
+
 ## 2026-09-09 — DART-STARTUP-READING.1.19: hash splice pairing
 
 Read 1,500 fragments / 43,446 unchanged bytes through interpreter line 6674.

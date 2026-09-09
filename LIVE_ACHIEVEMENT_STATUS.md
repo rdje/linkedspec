@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.19 completes nineteen of 55 children: 26,528 fragments / 865,657 bytes. Containment .8 admits the director-approved history capacity at 7d52c98e; all confirmed Dart defects .2.1-.2.11 and startup .37 nested-authority findings are owned and gated; remaining required reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.20 completes twenty of 55 children: 28,028 fragments / 906,901 bytes. Containment .8 admits the director-approved history capacity at 7d52c98e; all confirmed Dart defects .2.1-.2.14 and startup .37 nested-authority findings are owned and gated; remaining required reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `DART-STARTUP-READING.1.19` reads interpreter through 6674. All 122 selected tests pass. Nine native/reconstructed hash cases and nine Perl facade/source comparisons own Dart splice pairing/order repair under .2.11, with existing helper caveats retained under FUTURE-PARITY-BACKLOG.5.
+- `DART-STARTUP-READING.1.20` reads interpreter through 8174. All 111 selected tests and neutral numeric 55/18 pass. Eleven number, eight Unicode-order and six slice controls own .2.12-.2.14 with exact native/reconstructed and Perl facade/source comparisons; earlier owners remain intact.
 
 ## Next Action
 
-- `DART-STARTUP-READING.1.20` finishes action-child dispatch and reads supporting value helpers after .1.19 commits, brief clearing and clean proof.
+- `DART-STARTUP-READING.1.21` continues runtime context/frame and binding machinery after .1.20 commits, brief clearing and clean proof.
 
 ## Recent Completions
+
+- `2026-09-09` — `DART-STARTUP-READING.1.20` reads 1,500 fragments / 41,244 bytes; 111 tests and neutral numeric 55/18 pass; 11/8/6 number/order/slice comparisons own .2.12-.2.14.
 
 - `2026-09-09` — `DART-STARTUP-READING.1.19` reads 1,500 fragments / 43,446 bytes; 122 tests pass; nine Dart/Perl constructor comparisons own .2.11.
 
@@ -48,8 +50,6 @@
 - `2026-09-09` — `DART-STARTUP-READING.1.7` reads 1,500 fragments / 47,088 bytes, passes 74 selected tests and owns recognition effect repair .2.4.
 
 - `2026-09-09` — `DART-STARTUP-READING.1.6` reads 1,500 fragments / 43,571 bytes, passes 27 selected tests and owns trace overflow repair .2.3.
-
-- `2026-09-09` — `DART-STARTUP-READING.1.5` reads 1,500 fragments / 42,210 bytes, passes 55 selected tests and owns regex scanner repairs .2.2.
 
 ## History
 

@@ -129,3 +129,18 @@ including existing emitted/CLI consumers. [[dart-hash-splice-pairing-gap]] retai
 Dart native/reconstructed cases and nine Perl facade/source comparisons; new .2.11 owns
 Dart repair alongside FUTURE-PARITY-BACKLOG.5's already-owned helper-context decisions.
 The three dropped standalone array-transform rebindings remain owned by that backlog.
+
+## 2026-09-09 — supporting value helpers and runtime context entry
+
+`DART-STARTUP-READING.1.20` reads 6675-8174: action-child completion, explicit splice
+classifiers, copied array/hash transforms, scalar/rune helpers and strict numeric adapters.
+Runtime context initializes source/progressive/staged/recognition authorities. Invocation
+frames restore marks during cleanup and preserve original failures while recording
+accepted/failed/aborted/rejected observations; .1.21 resumes after noteRecognitionMatch.
+
+The corrected complete selection passes 111 tests, including exact numeric/text fixtures
+and existing emitted/CLI consumers; neutral numeric passes 55/18. New exact paired controls
+own [[dart-large-number-helper-corruption]] (.2.12, eleven cases),
+[[dart-helper-unicode-order-gap]] (.2.13, eight cases) and [[dart-slice-end-overflow]]
+(.2.14, six cases). Each includes native/reconstructed and Perl facade/source evidence.
+No source repair or new emitted defect result is claimed; prior ownership remains.

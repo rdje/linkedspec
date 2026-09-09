@@ -49,3 +49,13 @@ Related facts: [[dart-runtime-hash-helpers]], [[dart-runtime-value-control-tree-
 [[dart-runtime-string-numeric-helpers]],
 [[terse-array-receiver-value-chains]], [[array-helper-return-shape-caveats]],
 [[terse-array-numeric-reducer-receiver-methods]], [[terse-type-method-surface-inventory]].
+
+## 2026-09-09 — ordering and slice arithmetic qualifications
+
+sorted's host string comparison puts U+10000 before U+E000, unlike Perl.
+[[dart-helper-unicode-order-gap]] and .2.13 own the lexical order repair. Separately,
+slice([1,2,3],1,9223372036854775807) overflows start+length before clipping and throws
+a wrapped RangeError, while offset zero and small widths succeed. The same mechanism
+affects scalar substr; [[dart-slice-end-overflow]] and .2.14 retain six exact paired
+controls and own safe bounds/carrier proof. This is not the separately owned negative
+count policy. Reading .1.20 changes no executable behavior.

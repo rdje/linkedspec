@@ -69,3 +69,11 @@ map-splice bodies to its existing unsupported hash sentinel. Plain pairs and ord
 nested maps succeed on both backends. DART-STARTUP-READING.2.11 owns Dart repair and
 carrier proof with FUTURE-PARITY-BACKLOG.5's helper-context decisions; no repair or
 fresh Dart emitted result is claimed by the .1.19 reading.
+
+## 2026-09-09 — supplementary-character key order qualification
+
+sorted_keys and sorted_values use host UTF-16 key ordering. U+10000 therefore precedes
+U+E000, opposite the paired Perl reference; sorted_values follows the same reversed key
+sequence. [[dart-helper-unicode-order-gap]] retains eight helper cases and gated .2.13
+owns lexical contract reconciliation, affected consumers and carrier/public repair.
+Constructor splice .2.11 remains separate; no fresh emitted ordering result is inferred.

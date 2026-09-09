@@ -10,6 +10,15 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-09 — host number and string operations need boundary proof
+
+`DART-STARTUP-READING.1.20` reads supporting value helpers and runtime-context entry
+through 8174. The corrected 111-test selection and neutral numeric 55/18 pass.
+Eleven paired controls expose six numeric/text corruptions; eight expose five Unicode
+ordering differences; six expose two slice-end overflows before clipping. New .2.12-.2.14
+own separate repairs and carrier/public proof, coordinated with startup .55/.60 and
+MCP .2.5. Exact native/reconstructed and Perl facade/source replay preserves each boundary.
+
 ## 2026-09-09 — hash arguments must be spliced before pairing
 
 `DART-STARTUP-READING.1.19` reads guarded helper mutations, constructors, typed capture,

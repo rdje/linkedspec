@@ -89,14 +89,15 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed nineteen of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed twenty of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
 parser bridge, function-shell projection, bounded child-parse authority and generated rule plan,
-plus the interpreter through line 6674. This covers 26,528 fragments / 865,657 bytes.
-The latest 122 selected Dart interpreter/binding/source/logical/diagnostic/mutation tests pass,
-including their existing emitted and CLI consumers. Child `.1.20` finishes action-child dispatch
-and reads supporting value helpers; startup `.3.4` remains pending. Earlier checkpoints retain their evidence.
+plus the interpreter through line 8174. This covers 28,028 fragments / 906,901 bytes.
+The latest 111 selected Dart interpreter/contract/binding/source/recognition/observation/gap/
+scalar-text tests pass, including existing emitted/CLI consumers and the exact numeric fixture.
+The independent numeric contract passes 55 cases / 18 helpers. Child `.1.21` continues runtime
+context/frame and binding machinery; startup `.3.4` remains pending. Earlier checkpoints retain their evidence.
 
 The function shell checks the returned definition's text against scalar spans, reconciles staged
 body metadata and removes declarations while preserving line breaks. The private progressive
@@ -240,6 +241,28 @@ so those results do not define the intended map-splice output. Exact nine-case c
 live in `docs/knowledge/dart-hash-splice-pairing-gap.md`. Pending `DART-STARTUP-READING.2.11`
 owns Dart repair and carrier proof alongside `FUTURE-PARITY-BACKLOG.5` helper decisions.
 Fresh Dart defect proof covers native/reconstructed execution; emitted results are not inferred.
+
+**Known Dart limitation — large numeric values:** direct `1e20`-magnitude decimal literals
+survive, but adding zero or using `cat` can clamp their value to a signed-64 endpoint.
+`num_add(9223372036854775807, 1)` wraps negative, and `num_abs(-9223372036854775808)`
+remains negative. Eleven exact native/reconstructed and Perl comparisons distinguish six
+corruptions from five controls in `docs/knowledge/dart-large-number-helper-corruption.md`.
+`DART-STARTUP-READING.2.12` owns repair, coordinated with startup `.55`. Text spelling and
+numeric value preservation remain separate decisions; arbitrary precision is not promised.
+
+**Known Dart limitation — Unicode helper ordering:** `sorted`, `sorted_keys`,
+`sorted_values` and `str_lt`/`str_gt` put U+10000 before U+E000, opposite the Perl reference.
+ASCII, BMP-only and equality controls agree. Eight native/reconstructed and Perl comparisons
+live in `docs/knowledge/dart-helper-unicode-order-gap.md`. `DART-STARTUP-READING.2.13` owns
+the lexical contract, affected consumers and repair; MCP canonical ordering remains under
+`.2.5`. Fresh callback traversal or emitted-Dart behavior is not inferred.
+
+**Known Dart limitation — slice-end overflow:** `slice([1,2,3],1,9223372036854775807)`
+and `substr("abc",1,9223372036854775807)` fail because adding the start overflows before
+clipping. Perl returns `[2,3]` and `"bc"`. Small widths and the same large width at offset zero
+succeed on both backends. Six exact native/reconstructed and Perl comparisons are retained
+in `docs/knowledge/dart-slice-end-overflow.md`; `DART-STARTUP-READING.2.14` owns repair.
+These new findings do not claim fresh Dart emitted defect proof or completed fixes.
 
 **Approved continuity capacity:** the director approved intake `DART-STARTUP-READING.4`.
 Containment `.8` and ADR0110 admit exactly 31 change-history files and a manifest of

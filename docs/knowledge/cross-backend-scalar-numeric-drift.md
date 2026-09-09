@@ -45,3 +45,13 @@ rounding rules, and normalizes nonfinite results to undef and signed zero to zer
 references and checks host numeric flags before the decimal-string recognizer; its Unicode-digit/coercion
 disagreement remains the separately owned `.20` exception above. The managed Perl numeric suite passes nine
 top-level tests and the neutral checker passes 55 cases / 18 helpers. Other runtime consumers are not rerun.
+
+## 2026-09-09 — Dart finite-range exception beyond the admitted fixture
+
+DART-STARTUP-READING.1.20 adds [[dart-large-number-helper-corruption]]: eleven paired
+native/reconstructed Dart and Perl facade/source cases distinguish six corruptions from
+five agreements. Direct positive/negative 1e20 survives in Dart, but helper normalization
+and scalar-text conversion saturate; integer addition wraps and abs(min-int) remains
+negative. .2.12 owns Dart repair alongside startup .55 numeric/text work. Fresh neutral
+55/18 and the existing Dart fixture still pass; they do not cover these magnitude
+boundaries or promise arbitrary-precision arithmetic. Unicode-digit .20 remains separate.

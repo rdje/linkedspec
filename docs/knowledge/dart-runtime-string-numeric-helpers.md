@@ -46,3 +46,17 @@ Related facts: [[dart-runtime-array-helpers]], [[dart-runtime-hash-helpers]],
 [[dart-runtime-core-value-capture-helpers]],
 [[terse-string-scalar-receiver-chains]], [[terse-number-receiver-dot-value-chains]],
 [[terse-numeric-comparison-symbol-callees]], [[terse-string-comparison-bridge]].
+
+## 2026-09-09 — large values, Unicode ordering and substring bounds
+
+The small admitted fixture does not cover every finite magnitude. Native and reconstructed
+Dart preserve direct positive/negative 1e20 but adding zero or cat clamps to signed-64
+endpoints. Integer addition can wrap, and abs(min-int) remains negative.
+[[dart-large-number-helper-corruption]] retains eleven exact Perl comparisons; .2.12 owns
+repair while startup .55 retains the separate portable text-spelling decision.
+
+str_* compareTo uses UTF-16 order, making U+10000 precede U+E000, opposite Perl.
+[[dart-helper-unicode-order-gap]] owns eight cases under .2.13. substr can also overflow
+start+length before clipping; [[dart-slice-end-overflow]] owns six array/string cases under
+.2.14. The 111 selected tests and neutral numeric 55/18 pass; new emitted defect results
+and completed repairs are not inferred.

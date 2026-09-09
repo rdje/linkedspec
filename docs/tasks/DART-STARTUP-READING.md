@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / `.1.19` complete; next `.1.20`
+- Status: `active` / `.1.20` complete; next `.1.21`
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-09`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 19/55 children, 26,528/80,297 fragments and 865,657/2,471,305 bytes; twenty-seven entries through EOF
-  plus interpreter.dart through line 6674. Exact credit and comprehension remain in each completed node.
+- Current reading: 20/55 children, 28,028/80,297 fragments and 906,901/2,471,305 bytes; twenty-seven entries through EOF
+  plus interpreter.dart through line 8174. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -85,7 +85,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Acceptance: Every child accounts for its exact source bytes and deltas, reconciles Knowledge before re-derivation,
     records comprehension and confirmed findings, runs necessary focused diagnostics and commits before the next child.
   Children: `.1.1-.1.55`; exact scopes and baseline evidence below, read in numeric order.
-  Verification: 19/55 children complete; `.1.1-.1.19` own exact reading/comprehension evidence, and all later children remain pending.
+  Verification: 20/55 children complete; `.1.1-.1.20` own exact reading/comprehension evidence, and all later children remain pending.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.1.1`
@@ -374,14 +374,19 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.19 - read helper implementations; own hash splice pairing`
 
 - ID: `DART-STARTUP-READING.1.20`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 20 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.19` committed; empty brief and clean repository.
   Scope: `dart/lib/src/runtime/interpreter.dart` lines 6675-8174
   Baseline evidence: 1500 fragments / 41244 bytes; ordered range SHA-256 `d782685b64732f0f5b9e4c2ad7602a6dd5a5bb86c4d04d113ede296f2c8695a5`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Existing Dart interpreter/contracts/binding/source/recognition/observation/gap/scalar-text consumers; neutral numeric 55-case authority; eleven number, eight Unicode-order and six slice controls through native/SpecFile-JSON and Perl facade/generated source; exact ranges/current deltas and prior retention; all doctrines, both histories, Knowledge freshness, mdBook rendering and staged scope.
+  Canonical trigger: `none` — bounded required reading and defect intake; no executable, contract or infrastructure change.
+  Comprehension: Complete action-child dispatch and splice classifiers, pure/array/hash helper families, copied selection and key transforms, scalar conversion/predicates and rune-based substring/split behavior. Numeric helpers enforce strict finite decimal inputs, arities and invalid-null policy, then delegate arithmetic and integral normalization to host num operations. Runtime context initializes source, progressive, staged and recognition authorities; invocation frames snapshot/restore marks, retain original errors during cleanup and record accepted/failed/aborted/rejected observations. The range ends after noteRecognitionMatch; .1.21 continues context/frame and binding machinery.
+  Findings: Eleven paired number cases show six sign/magnitude corruptions with five controls (.2.12); eight Unicode cases show five lexical-order differences with three controls (.2.13); six slice cases show two wrapped end-overflow RangeErrors with four controls (.2.14). Every case has native/SpecFile-JSON plus Perl Get/generated-source evidence. Existing startup .55/.60, MCP .2.5 and FUTURE-PARITY-BACKLOG.5 retain disjoint numeric/text, slice, canonical-order and helper-caveat ownership. No runtime repair or fresh Dart emitted defect result is claimed.
+  Verification: Read interpreter 6675-8174 in six complete 250-line outputs: 1,500 fragments / 41,244 baseline-identical bytes with unchanged digest. The corrected complete selection passes 111 tests, including exact scalar-numeric/text fixtures and existing emitted/CLI consumers; the initial command misspelled the gap test filename, then the actual gap test passed separately before final selection. Neutral numeric proof passes 55 cases / 18 helpers. Exact pre-repair 11/8/6 case assertions, source-backed Perl comparisons, range/retention audits, doctrines, histories, Knowledge and rendered-book evidence belong to this commit.
+  Commit: `DART-STARTUP-READING.1.20 - read value helpers; own numeric order and slice gaps`
 
 - ID: `DART-STARTUP-READING.1.21`
   Status: `pending`
@@ -737,11 +742,11 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Status: `pending`
   Goal: Reconcile and retain ownership of every confirmed Dart finding established during the reading.
   Dependencies: Findings from `.1`; implementation additionally requires startup `.3`, `.4` and `.5`.
-  Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`, `.2.5`, `.2.6`, `.2.7`, `.2.8`, `.2.9`, `.2.10`, `.2.11`; further confirmed findings receive disjoint owners here.
+  Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`, `.2.5`, `.2.6`, `.2.7`, `.2.8`, `.2.9`, `.2.10`, `.2.11`, `.2.12`, `.2.13`, `.2.14`; further confirmed findings receive disjoint owners here.
   Acceptance: Cross-reference existing owners for known defects; create disjoint bounded repair children here
     immediately for new confirmed defects, with mechanism, source, reproduction, acceptance and unblock conditions.
     If no new repair is needed, close this intake with an explicit complete reconciliation rather than inventing work.
-  Verification: `pending`; `.1.3` owns attached-switch omission/default replacement under `.2.1`; `.1.5` confirms regex-brace action scanning and lifecycle validation defects under `.2.2`. Reading .1.6 confirms numeric trace overflow and reset-before-failure under .2.3. Reading .1.7 confirms disconnected recognition effect validation, leaked writes after rollback and observation edge-closure bypass under .2.4. Reading .1.10 confirms MCP Unicode key-order divergence under .2.5. Reading .1.11 confirms regex/lifecycle-E body suffix loss under .2.6. Reading .1.12 confirms compact fluent argument corruption under .2.7 and outer regex-brace truncation under existing .2.2.2. Reading .1.13 confirms standalone body-fluent suffix loss under existing .2.6. Reading .1.16 confirms semantic observer error/stack loss through action child calls under .2.8; startup .37 retains nested progressive authority findings from .1.15. Reading .1.17 confirms mixed-control return escape and skipped attached else under .2.9. Reading .1.18 confirms helper-name callback recursion collision and lost bound identity under .2.10. Reading .1.19 confirms hash splice pairing/order loss under .2.11, coordinated with FUTURE-PARITY-BACKLOG.5. No repair implementation is admitted before startup gates.
+  Verification: `pending`; `.1.3` owns attached-switch omission/default replacement under `.2.1`; `.1.5` confirms regex-brace action scanning and lifecycle validation defects under `.2.2`. Reading .1.6 confirms numeric trace overflow and reset-before-failure under .2.3. Reading .1.7 confirms disconnected recognition effect validation, leaked writes after rollback and observation edge-closure bypass under .2.4. Reading .1.10 confirms MCP Unicode key-order divergence under .2.5. Reading .1.11 confirms regex/lifecycle-E body suffix loss under .2.6. Reading .1.12 confirms compact fluent argument corruption under .2.7 and outer regex-brace truncation under existing .2.2.2. Reading .1.13 confirms standalone body-fluent suffix loss under existing .2.6. Reading .1.16 confirms semantic observer error/stack loss through action child calls under .2.8; startup .37 retains nested progressive authority findings from .1.15. Reading .1.17 confirms mixed-control return escape and skipped attached else under .2.9. Reading .1.18 confirms helper-name callback recursion collision and lost bound identity under .2.10. Reading .1.19 confirms hash splice pairing/order loss under .2.11, coordinated with FUTURE-PARITY-BACKLOG.5. Reading .1.20 confirms finite-number corruption (.2.12), lexical Unicode ordering (.2.13) and slice-end overflow (.2.14), with separate existing startup .55/.60 and MCP .2.5 coordination. No repair implementation is admitted before startup gates.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.2.1`
@@ -925,6 +930,91 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Verification: `pending`
   Commit: `pending`
 
+- ID: `DART-STARTUP-READING.2.12`
+  Status: `pending`
+  Goal: Preserve finite Dart numeric values through arithmetic and scalar-text conversion.
+  Dependencies: Startup `.3`, `.4` and `.5`; finding from `.1.20`; coordinate startup .55 numeric/text boundaries and .20 numeric input grammar.
+  Children: `.2.12.1`, `.2.12.2`, `.2.12.3`
+  Evidence: docs/knowledge/dart-large-number-helper-corruption.md retains eleven native/SpecFile-JSON and Perl facade/source controls. Direct positive/negative 1e20 survives, but adding zero or cat clamps to signed-64 endpoints. max-int plus one wraps negative, and abs(min-int) remains negative. Perl preserves the corresponding finite values. Five direct/small/invalid controls agree; these are value changes, not a claim to arbitrary-precision arithmetic.
+
+- ID: `DART-STARTUP-READING.2.12.1`
+  Status: `pending`
+  Goal: Freeze numeric range, conversion and scalar-text expectations for the affected Dart consumers.
+  Dependencies: Startup gates; coordinate SESSION-STARTUP-READING.55.1/.55.2 and .20.
+  Acceptance: Lock all eleven intake cases against independent finite-value expectations and the scalar-numeric contract. Audit integral conversion and arithmetic in helpers, reducers, scalar text, indexes/diagnostics and actual callers; distinguish measured failures from source inventory. Reconcile decimal/scientific spelling separately from magnitude and sign preservation. Define supported adjacent integer/double boundaries, fractions, nonfinite results and signed zero without promising arbitrary precision or silently adopting a host's overflow.
+  Verification: `pending`; two helper saturations, two text saturations, integer addition wrap and negative abs reproduce through both Dart carriers; five controls agree with Perl.
+  Commit: `pending`
+
+- ID: `DART-STARTUP-READING.2.12.2`
+  Status: `pending`
+  Goal: Remove Dart helper saturation and unchecked host-integer arithmetic at the resolved boundaries.
+  Dependencies: `.2.12.1` and startup gates.
+  Acceptance: Preserve accepted finite results without unconditional out-of-range toInt conversion; prevent integer wrap and negative absolute values. Apply one resolved conversion policy to the confirmed numeric and text consumers; audit reducers and remainder/rounding paths without claiming untested repair. Preserve invalid-to-null, exact arities, boolean rejection, strict decimal inputs, small integer kinds and signed zero. Add focused independent boundary and regression controls.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-STARTUP-READING.2.12.3`
+  Status: `pending`
+  Goal: Close Dart numeric boundary repair through carriers and public evidence.
+  Dependencies: `.2.12.2`.
+  Acceptance: Verify native, reconstructed, generated-plan and fresh emitted/primary execution, with exact value/kind/sign/text controls and nested outward consumers. Run scalar-numeric/text and direct-dependent checks, coordinate separately owned backend work, update public limitations and use canonical verification at public closeout.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-STARTUP-READING.2.13`
+  Status: `pending`
+  Goal: Align Dart lexical helper ordering with the resolved portable character order.
+  Dependencies: Startup gates; finding from `.1.20`; coordinate the separate MCP canonical-order repair .2.5.
+  Children: `.2.13.1`, `.2.13.2`, `.2.13.3`
+  Evidence: docs/knowledge/dart-helper-unicode-order-gap.md retains eight native/SpecFile-JSON and Perl facade/source controls. sorted, sorted_keys, sorted_values and str_lt/str_gt put U+10000 before U+E000 on Dart, opposite Perl. ASCII, BMP-only and equality controls agree. Four helper seams use host UTF-16 ordering; callback-key sorting is source inventory, not freshly executed defect proof.
+
+- ID: `DART-STARTUP-READING.2.13.1`
+  Status: `pending`
+  Goal: Freeze portable lexical order and all affected helper consumers.
+  Dependencies: Startup gates; coordinate .2.5 and existing string/hash helper contracts.
+  Acceptance: Reconcile the preserved Perl lexical comparison contract with Unicode scalar ordering and the separately governed MCP canonical-byte contract; do not infer a public helper policy solely from the serializer. Lock the eight intake cases plus supplementary/BMP boundaries, prefixes, equality and normalization-distinct text. Audit sorted arrays, hash views, all str_* relations and sorted callback traversal with exact route/effect ownership.
+  Verification: `pending`; five paired helper differences and three agreements are measured; no fresh callback-order, emitted or other-backend result.
+  Commit: `pending`
+
+- ID: `DART-STARTUP-READING.2.13.2`
+  Status: `pending`
+  Goal: Apply the resolved comparison consistently across confirmed Dart helper paths.
+  Dependencies: `.2.13.1` and startup gates.
+  Acceptance: Replace incidental UTF-16 ordering at owned seams with the resolved comparator without normalizing strings, changing equality, array source order, duplicate handling or copied values. Keep sorted_values aligned with sorted_keys. Preserve callback sequencing and diagnostics where the inventory proves an affected traversal, and add independent positive/negative tests for each repaired route.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-STARTUP-READING.2.13.3`
+  Status: `pending`
+  Goal: Close lexical-order repair through supported carriers and public evidence.
+  Dependencies: `.2.13.2`.
+  Acceptance: Prove direct/receiver and native/reconstructed/generated/emitted helper results against independent code-point expectations; verify callback order only on established affected routes. Run direct-dependent helper, scalar and public checks, coordinate MCP .2.5 without conflating contracts, update public teaching and execute canonical closeout.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-STARTUP-READING.2.14`
+  Status: `pending`
+  Goal: Clip Dart array/string slice lengths without overflowing start plus length.
+  Dependencies: Startup gates; finding from `.1.20`; coordinate Rust startup .60 and separate Dart numeric conversion .2.12.
+  Children: `.2.14.1`, `.2.14.2`
+  Evidence: docs/knowledge/dart-slice-end-overflow.md retains six Dart native/SpecFile-JSON and Perl facade/source controls. slice([1,2,3],1,9223372036854775807) and substr("abc",1,9223372036854775807) throw wrapped RangeError with end -9223372036854775808; Perl returns [2,3] and "bc". Small lengths and the same large length at zero succeed. Both Dart helpers add before clipping.
+
+- ID: `DART-STARTUP-READING.2.14.1`
+  Status: `pending`
+  Goal: Repair array and scalar-string end clipping with overflow-safe bounds arithmetic.
+  Dependencies: Startup gates; coordinate existing slice contract and .2.12 numeric conversion inventory.
+  Acceptance: Preserve the complete remaining suffix for a valid oversized width without computing an overflowing end first. Lock all six intake cases plus exact end, beyond end, zero/omitted lengths, empty values, Unicode scalar substrings and adjacent integer bounds. Keep negative/invalid count policy under its existing helper owner; retain copies, once-only evaluation and structured diagnostics. Cover direct and receiver forms, and audit the shared substring consumer before changing statement mutation behavior.
+  Verification: `pending`; two native/reconstructed failures and four successful controls have exact source-backed Perl comparisons; no repair or emitted defect result.
+  Commit: `pending`
+
+- ID: `DART-STARTUP-READING.2.14.2`
+  Status: `pending`
+  Goal: Close overflow-safe slicing through carriers and public evidence.
+  Dependencies: `.2.14.1`.
+  Acceptance: Prove repaired direct/receiver and established mutation consumers through native, reconstructed, generated-plan and fresh emitted/primary routes, with independent expected suffixes and unchanged typed source semantics. Run helper/binding/source/corpus dependents, retain Rust .60 ownership, update public examples and execute canonical closeout.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `DART-STARTUP-READING.3`
   Status: `pending`
   Goal: Close Dart reading with exact coverage, current-delta, comprehension and child-commit proof.
@@ -950,7 +1040,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.20` | `pending` | Finish action-child dispatch and read supporting value helpers after .1.19 commits cleanly. |
+| 1 | `DART-STARTUP-READING.1.21` | `pending` | Continue runtime context/frame and binding machinery after .1.20 commits cleanly. |
 
 ## Decisions
 
@@ -967,10 +1057,12 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Blockers
 
-- History capacity is admitted by containment .8 under ADR0110; no reading blocker remains at this boundary. Source repairs .2.1-.2.11 remain gated.
+- History capacity is admitted by containment .8 under ADR0110; no reading blocker remains at this boundary. Source repairs .2.1-.2.14 remain gated.
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-09`: `.1.20` reads 1,500 fragments / 41,244 bytes; corrected 111-test selection and neutral numeric 55/18 pass. Eleven number, eight Unicode and six slice controls own .2.12-.2.14 with exact native/reconstructed and Perl facade/source comparisons; earlier owners remain intact.
 
 - `2026-09-09`: `.1.19` reads 1,500 fragments / 43,446 bytes; 122 selected tests pass. Nine Dart native/reconstructed controls and nine Perl facade/source comparisons own hash splice pairing/order repair under .2.11; existing helper caveats retain FUTURE-PARITY-BACKLOG.5.
 
@@ -1011,6 +1103,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- `2026-09-09`: `DART-STARTUP-READING.1.20 - read value helpers; own numeric order and slice gaps` closes the twentieth reading child from clean 218f7f52.
+
 - `2026-09-09`: `DART-STARTUP-READING.1.19 - read helper implementations; own hash splice pairing` closes the nineteenth reading child from clean a19fbe2f.
 
 - `2026-09-09`: `DART-STARTUP-READING.1.18 - read helper dispatch; own callback identity gap` closes the eighteenth reading child from clean 8975ac84.
@@ -1048,6 +1142,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-09`: `.1.20` reads interpreter through 8174 and owns numeric, Unicode-order and slice-end repairs .2.12-.2.14. Reading is 20/55; next .1.21.
 
 - `2026-09-09`: `.1.19` reads interpreter through 6674 and owns hash splice repair .2.11. Reading is 19/55; next .1.20.
 
