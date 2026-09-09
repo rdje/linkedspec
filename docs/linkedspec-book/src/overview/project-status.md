@@ -89,16 +89,15 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed twenty-two of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed twenty-three of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
-parser bridge, function-shell projection, bounded child-parse authority, generated rule plan
-and interpreter, plus matching through line 900. This covers 31,028 fragments / 989,670 bytes.
-The latest 132 selected interpreter/matcher/write/mutation/callable/staged/slot/self-hosted
-Unicode tests pass, including generated/emitted/CLI consumers and staged four-route admission.
-The shipped structural corpus window passes 31/31. No new defect is established in this slice.
-Child `.1.23` finishes matching and begins recognition transactions; startup `.3.4` remains
-pending. Earlier checkpoints retain their evidence and all known limitations below remain open.
+parser bridge, function-shell projection, bounded child-parse authority, generated rule plan,
+interpreter and matching, plus recognition transactions through line 483. This covers
+32,528 fragments / 1,030,832 bytes. The latest 99 selected matcher/interpreter/recognition/
+observation/gap/self-hosted/source tests pass, including existing emitted/CLI consumers.
+Child `.1.24` finishes recognition and reads semantic/source authority plus staged entry;
+startup `.3.4` remains pending. Earlier checkpoints retain their evidence.
 
 The function shell checks the returned definition's text against scalar spans, reconciles staged
 body metadata and removes declarations while preserving line breaks. The private progressive
@@ -278,6 +277,16 @@ early arity handling, coordinated with the existing helper-arity backlog. Nine e
 native/reconstructed and Perl facade/source cases live in
 `docs/knowledge/dart-input-slice-boundary-gaps.md`; no fresh Dart emitted defect result or
 completed repair is claimed.
+
+**Known Dart limitation — regex literal normalization:** the adapter changes escaped
+literal `^\{,2}$` to `^\{0,2}$`, rejecting `"{,2}"` and accepting `"{0,2}"`.
+It also changes `^[{,2}]+$` to `^[{0,2}]+$`, unexpectedly accepting `"0"`.
+Perl preserves both literal meanings. Genuine `a{,2}` quantifier support still works,
+so repair must distinguish regex tokens from literal text. Six exact public-alternation,
+native/reconstructed and Perl source-backed controls live in
+`docs/knowledge/dart-regex-quantifier-literal-corruption.md`. New
+`DART-STARTUP-READING.2.16` owns repair; regex-brace scanners and documented dialect
+limits remain separate. No fresh emitted defect result or completed fix is claimed.
 
 **Approved continuity capacity:** the director approved intake `DART-STARTUP-READING.4`.
 Containment `.8` and ADR0110 admit exactly 31 change-history files and a manifest of

@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-09 — DART-STARTUP-READING.1.23: regex literal normalization
+
+Read 1,500 fragments / 41,162 unchanged bytes: matching through EOF and
+recognition through 483. All 99 selected tests pass. Six public Dart/Perl
+controls prove three escaped-literal/class corruptions with three agreements;
+.2.16 owns lexical normalization and carriers. Reading is 23/55; next .1.24.
+
 ## 2026-09-09 — DART-STARTUP-READING.1.22: interpreter completion and matching
 
 Read 1,500 fragments / 42,836 unchanged bytes: interpreter through EOF and

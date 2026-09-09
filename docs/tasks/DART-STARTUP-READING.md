@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / `.1.22` complete; next `.1.23`
+- Status: `active` / `.1.23` complete; next `.1.24`
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-09`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 22/55 children, 31,028/80,297 fragments and 989,670/2,471,305 bytes; twenty-eight entries through EOF
-  plus matching.dart through line 900. Exact credit and comprehension remain in each completed node.
+- Current reading: 23/55 children, 32,528/80,297 fragments and 1,030,832/2,471,305 bytes; twenty-nine entries through EOF
+  plus recognition_transaction.dart through line 483. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -85,7 +85,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Acceptance: Every child accounts for its exact source bytes and deltas, reconciles Knowledge before re-derivation,
     records comprehension and confirmed findings, runs necessary focused diagnostics and commits before the next child.
   Children: `.1.1-.1.55`; exact scopes and baseline evidence below, read in numeric order.
-  Verification: 22/55 children complete; `.1.1-.1.22` own exact reading/comprehension evidence, and all later children remain pending.
+  Verification: 23/55 children complete; `.1.1-.1.23` own exact reading/comprehension evidence, and all later children remain pending.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.1.1`
@@ -419,14 +419,19 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.22 - finish interpreter; read matching and provenance`
 
 - ID: `DART-STARTUP-READING.1.23`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 23 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.22` committed; empty brief and clean repository.
   Scope: `dart/lib/src/runtime/matching.dart` lines 901-1917; `dart/lib/src/runtime/recognition_transaction.dart` lines 1-483
   Baseline evidence: 1500 fragments / 41162 bytes; ordered range SHA-256 `b8c607a80450ab598246cff0a98def4fa05b730b63509fbfabb57587ee3d090d`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: 99 matcher/interpreter/recognition/observation/gap/self-hosted/source tests; six public-alternation/native/SpecFile-JSON and Perl regex/Get/source controls; exact ranges/current deltas, prior retention, all doctrines, both histories, Knowledge freshness, rendered mdBook and staged scope.
+  Canonical trigger: `none` — bounded required reading and defect intake; no executable, contract or infrastructure change.
+  Comprehension: Complete structural block/fluent/function/EBNF matching, immutable match/register handoff, scalar offset and line/column projections, earliest-start/authored-order seek choice, dialect normalization and bounded lexical helpers. Structural codeblocks balance quotes/braces; physical-line surfaces require suffix closure. Normalization lifts supported inline flags, maps POSIX classes, named captures and lower bounds, and removes possessive markers. Recognition begins with private detached frame state, typed diagnostics, opaque token/frame wrappers, authority/source/lineage identities and gap snapshots. Invocation entry accepts only a matching active parent gap slot; leave requires stack order and restores/invalidates an unfinished token before terminal-required rejection. .1.24 continues state synchronization and remaining authority methods.
+  Findings: Six exact controls prove lower-unbounded quantifier normalization rewrites escaped literal braces and character-class text: three parser-level literal corruptions and three agreements, including actual quantifier support. New .2.16 owns lexical normalization and carriers. Existing regex-brace scanners .2.2/startup .54 and disconnected recognition effect enforcement .2.4 remain distinct. No repair or fresh Dart emitted defect proof is claimed.
+  Verification: Read matching 901-1917 through EOF and recognition_transaction 1-483 in full bounded outputs: 1,500 fragments / 41,162 baseline-identical bytes with unchanged digest. All 99 selected tests pass, including existing emitted/CLI consumers. Final six-case probe uses public RuntimeRegexAlternation after correcting an initial harness call to internal compileRuntimeRegex; raw host, exact normalized pattern, native/reconstructed results and two Perl generated-pattern occurrences are asserted. Range/retention audits, doctrines, histories, Knowledge and rendered-book proof belong to this commit.
+  Commit: `DART-STARTUP-READING.1.23 - finish matching; own regex literal normalization`
 
 - ID: `DART-STARTUP-READING.1.24`
   Status: `pending`
@@ -752,11 +757,11 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Status: `pending`
   Goal: Reconcile and retain ownership of every confirmed Dart finding established during the reading.
   Dependencies: Findings from `.1`; implementation additionally requires startup `.3`, `.4` and `.5`.
-  Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`, `.2.5`, `.2.6`, `.2.7`, `.2.8`, `.2.9`, `.2.10`, `.2.11`, `.2.12`, `.2.13`, `.2.14`, `.2.15`; further confirmed findings receive disjoint owners here.
+  Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`, `.2.5`, `.2.6`, `.2.7`, `.2.8`, `.2.9`, `.2.10`, `.2.11`, `.2.12`, `.2.13`, `.2.14`, `.2.15`, `.2.16`; further confirmed findings receive disjoint owners here.
   Acceptance: Cross-reference existing owners for known defects; create disjoint bounded repair children here
     immediately for new confirmed defects, with mechanism, source, reproduction, acceptance and unblock conditions.
     If no new repair is needed, close this intake with an explicit complete reconciliation rather than inventing work.
-  Verification: `pending`; `.1.3` owns attached-switch omission/default replacement under `.2.1`; `.1.5` confirms regex-brace action scanning and lifecycle validation defects under `.2.2`. Reading .1.6 confirms numeric trace overflow and reset-before-failure under .2.3. Reading .1.7 confirms disconnected recognition effect validation, leaked writes after rollback and observation edge-closure bypass under .2.4. Reading .1.10 confirms MCP Unicode key-order divergence under .2.5. Reading .1.11 confirms regex/lifecycle-E body suffix loss under .2.6. Reading .1.12 confirms compact fluent argument corruption under .2.7 and outer regex-brace truncation under existing .2.2.2. Reading .1.13 confirms standalone body-fluent suffix loss under existing .2.6. Reading .1.16 confirms semantic observer error/stack loss through action child calls under .2.8; startup .37 retains nested progressive authority findings from .1.15. Reading .1.17 confirms mixed-control return escape and skipped attached else under .2.9. Reading .1.18 confirms helper-name callback recursion collision and lost bound identity under .2.10. Reading .1.19 confirms hash splice pairing/order loss under .2.11, coordinated with FUTURE-PARITY-BACKLOG.5. Reading .1.20 confirms finite-number corruption (.2.12), lexical Unicode ordering (.2.13) and slice-end overflow (.2.14), with separate existing startup .55/.60 and MCP .2.5 coordination. Reading .1.21 extends .2.14 with typed-source overflow and owns input_slice zero-argument acceptance/late-reference failure under .2.15. No repair implementation is admitted before startup gates.
+  Verification: `pending`; `.1.3` owns attached-switch omission/default replacement under `.2.1`; `.1.5` confirms regex-brace action scanning and lifecycle validation defects under `.2.2`. Reading .1.6 confirms numeric trace overflow and reset-before-failure under .2.3. Reading .1.7 confirms disconnected recognition effect validation, leaked writes after rollback and observation edge-closure bypass under .2.4. Reading .1.10 confirms MCP Unicode key-order divergence under .2.5. Reading .1.11 confirms regex/lifecycle-E body suffix loss under .2.6. Reading .1.12 confirms compact fluent argument corruption under .2.7 and outer regex-brace truncation under existing .2.2.2. Reading .1.13 confirms standalone body-fluent suffix loss under existing .2.6. Reading .1.16 confirms semantic observer error/stack loss through action child calls under .2.8; startup .37 retains nested progressive authority findings from .1.15. Reading .1.17 confirms mixed-control return escape and skipped attached else under .2.9. Reading .1.18 confirms helper-name callback recursion collision and lost bound identity under .2.10. Reading .1.19 confirms hash splice pairing/order loss under .2.11, coordinated with FUTURE-PARITY-BACKLOG.5. Reading .1.20 confirms finite-number corruption (.2.12), lexical Unicode ordering (.2.13) and slice-end overflow (.2.14), with separate existing startup .55/.60 and MCP .2.5 coordination. Reading .1.21 extends .2.14 with typed-source overflow and owns input_slice zero-argument acceptance/late-reference failure under .2.15. Reading .1.23 confirms lower-unbounded quantifier rewriting of escaped literals/classes under .2.16. No repair implementation is admitted before startup gates.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.2.1`
@@ -1048,6 +1053,29 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Verification: `pending`
   Commit: `pending`
 
+- ID: `DART-STARTUP-READING.2.16`
+  Status: `pending`
+  Goal: Preserve regex literals and character classes during lower-unbounded quantifier normalization.
+  Dependencies: Startup gates; reading .1.23; coordinate existing bounded dialect support without conflating regex-brace scanner .2.2/startup .54.
+  Children: `.2.16.1`, `.2.16.2`
+  Evidence: docs/knowledge/dart-regex-quantifier-literal-corruption.md retains six exact public-alternation/native/SpecFile-JSON and Perl Get/source controls. The global {,n} rewrite changes escaped literal text and adds characters inside classes: three parser-level false negatives/positives with three successful controls. Raw host matching independently confirms literal meaning; the genuine a{,2} bridge control remains necessary.
+
+- ID: `DART-STARTUP-READING.2.16.1`
+  Status: `pending`
+  Goal: Normalize only actual regex lower-unbounded quantifier tokens.
+  Dependencies: Startup gates; retain current regex-versus-literal contract.
+  Acceptance: Lock all six intake cases and preserve escaped delimiters, escape parity, bracket classes, literal braces, adjacent quantifiers and malformed syntax. Keep actual a{,2} support. Use lexical context rather than an unconditional textual replacement; inspect adjacent rewrite passes for the same mechanism and own any separately confirmed defects. Preserve regex options, capture identity, authored pattern/source and diagnostic boundaries; do not silently broaden general PCRE support or change existing scoped-flag/possessive policy in this repair.
+  Verification: `pending`; three confirmed literal corruptions and three controls, with exact normalized pattern, raw host/reference matching and public parser results; no repair or fresh emitted defect result.
+  Commit: `pending`
+
+- ID: `DART-STARTUP-READING.2.16.2`
+  Status: `pending`
+  Goal: Close literal-safe normalization through supported carriers and public evidence.
+  Dependencies: `.2.16.1`.
+  Acceptance: Prove the repaired literal/quantifier boundary through public alternation, authored native, reconstructed, generated-plan and fresh emitted/primary carriers. Reverify direct regex/helper, source/capture/staged and shipped structural consumers with independent expected matches; update book/KM and run canonical closeout. Preserve scanner .2.2/startup .54 and documented dialect limitations as separate owners.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `DART-STARTUP-READING.3`
   Status: `pending`
   Goal: Close Dart reading with exact coverage, current-delta, comprehension and child-commit proof.
@@ -1073,7 +1101,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.23` | `pending` | Finish matching and begin recognition transactions after .1.22 commits cleanly. |
+| 1 | `DART-STARTUP-READING.1.24` | `pending` | Finish recognition and read semantic/source authority plus staged entry after .1.23 commits cleanly. |
 
 ## Decisions
 
@@ -1090,10 +1118,12 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Blockers
 
-- History capacity is admitted by containment .8 under ADR0110; no reading blocker remains at this boundary. Source repairs .2.1-.2.15 remain gated.
+- History capacity is admitted by containment .8 under ADR0110; no reading blocker remains at this boundary. Source repairs .2.1-.2.16 remain gated.
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-09`: `.1.23` reads 1,500 fragments / 41,162 bytes, completing matching and recognition through 483; 99 tests pass. Six exact Dart/Perl regex controls own three literal corruptions under .2.16 with three agreements; prior mechanisms and owners remain intact.
 
 - `2026-09-09`: `.1.22` reads 1,500 fragments / 42,836 bytes, completing interpreter and matching through 900; 132 tests and structural corpus 31/31 pass. No new defect; prior mechanisms, limitations and repair owners remain intact.
 
@@ -1140,6 +1170,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- `2026-09-09`: `DART-STARTUP-READING.1.23 - finish matching; own regex literal normalization` closes the twenty-third reading child from clean f9020412.
+
 - `2026-09-09`: `DART-STARTUP-READING.1.22 - finish interpreter; read matching and provenance` closes the twenty-second reading child from clean 4e872956.
 
 - `2026-09-09`: `DART-STARTUP-READING.1.21 - read context bindings; own input slice boundaries` closes the twenty-first reading child from clean c8940411.
@@ -1183,6 +1215,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-09`: `.1.23` completes matching and reads recognition through 483; .2.16 owns regex literal normalization. Reading is 23/55; next .1.24.
 
 - `2026-09-09`: `.1.22` completes interpreter and reads matching through 900. Reading is 22/55; next .1.23; no new repair intake.
 

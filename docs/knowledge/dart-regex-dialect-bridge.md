@@ -35,3 +35,14 @@ the exact shipped structural forms with bounded matchers.
 Related facts: [[dart-shipped-corpus-smoke-split]],
 [[dart-structural-pcre-parser-smoke-parity]], [[dart-runtime-matching-state]],
 [[rust-perl-output-oracle]].
+
+## 2026-09-09 — lower-bound normalization literal corruption
+
+[[dart-regex-quantifier-literal-corruption]] establishes three false match decisions
+with three controls. _normalizeLowerUnboundedQuantifiers at matching.dart 1619
+rewrites {,2} even after an escaped opening brace or inside a character class.
+Raw Dart and Perl preserve the intended literal meaning; public Dart alternation,
+authored native and SpecFile-JSON parsers execute the altered pattern. Actual
+a{,2} support remains a successful bridge control. Gated .2.16 owns lexical repair
+and carrier/public proof; this finding changes neither the documented scoped-flag/
+possessive limits nor the separately owned regex-brace scanners.

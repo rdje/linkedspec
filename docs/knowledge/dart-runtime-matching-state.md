@@ -54,3 +54,18 @@ Unicode rule-label atoms and routes bounded block/fluent/function/EBNF matchers.
 not admit general PCRE. The range ends inside _matchEbnfReturnScalar, continued
 by .1.23. All 132 selected tests and structural corpus 31/31 pass; no new defect
 is established and previous regex limitations retain their owners.
+
+## 2026-09-09 — matching reading complete
+
+`DART-STARTUP-READING.1.23` reads 901-1917 through EOF. Structural matcher captures
+retain bounded block/fluent/function shapes and physical-line suffix checks.
+Immutable registers separate entry/local matches and cursor/capture boundaries;
+seek ties resolve by authored alternative order. Scalar offsets and line/column
+are projected from code-unit state. Dialect passes and lexical helpers finish
+the module; their documented scope remains [[dart-regex-dialect-bridge]].
+
+All 99 selected tests pass with existing emitted/CLI consumers. Six exact
+public-alternation/native/reconstructed and Perl comparisons nevertheless prove
+literal corruption in [[dart-regex-quantifier-literal-corruption]]: the global
+lower-bound rewrite ignores escapes/classes. New .2.16 owns repair; existing
+regex-brace and other interpreter owners remain unchanged.

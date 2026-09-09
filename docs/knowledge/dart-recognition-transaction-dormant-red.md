@@ -64,3 +64,15 @@ to rollout 4/9. The module stays unexported; Julia and Lua remain unavailable.
 ## Reading qualification — 2026-09-09
 
 DART-STARTUP-READING.1.7 finds that classifyEffects is exercised directly by the admitted neutral-graph test but has no production caller in dart/lib. The authority rejects binding_write when called explicitly, while normal compilation/execution accepts a recognized child writing seen=1 and rollback leaves seen=1. A pure rollback control leaves seen=0. Separate compiler observation checks miss structural action/blind transitions. [[dart-recognition-effect-integration-gap]] preserves eight exact controls, source locations and gated .2.4 repair ownership. The earlier passing finite admission fixtures do not establish connected effect enforcement.
+
+## 2026-09-09 — authority entry reading
+
+`DART-STARTUP-READING.1.23` reads recognition_transaction.dart 1-483. Frame states
+copy cursor/boundary/marks; private wrappers retain source/authority/lineage and
+generation identity. Gap state snapshots belong to the same invocation/token.
+Entry accepts a structural slot only from the current parent's live gap and
+matching child rule. Stack-ordered leave restores and invalidates an unfinished
+token before reporting terminal-required. .1.24 continues synchronization and
+the remaining operations. The 99 selected tests pass; the already confirmed
+effect-classifier integration gap .2.4 remains open, and no authority repair or
+new transaction behavior is inferred from this reading.

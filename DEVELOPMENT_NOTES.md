@@ -10,6 +10,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-09 — quantifier normalization needs lexical context
+
+Dart reading .1.23 completes matching and reads recognition through 483.
+Six exact public Dart/Perl controls prove that replacing {,n} globally changes
+escaped literals and character classes, despite 99 passing tests. New .2.16
+owns lexical repair and carriers; actual lower-unbounded quantifiers stay
+supported. Recognition entry reconciles with its existing private authority.
+
 ## 2026-09-09 — matching retains participating-capture identity
 
 Dart reading .1.22 completes interpreter and reads matching through 900.
