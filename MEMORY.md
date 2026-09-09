@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `c8940411b7f9899260ad270cb35d5bd256a63663` — clean twenty-first Dart reading base.
-- latest_completed_leaf: `DART-STARTUP-READING.1.21 - read context bindings; own input slice boundaries`.
+- activation_commit: `4e872956fa0bdafabed352c11da03fcaccf12ebe` — clean twenty-second Dart reading base.
+- latest_completed_leaf: `DART-STARTUP-READING.1.22 - finish interpreter; read matching and provenance`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: `DART-STARTUP-READING.1.22` finishes interpreter helpers and begins matching state.
+- next_action: `DART-STARTUP-READING.1.23` finishes matching and begins recognition transactions.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: Startup `.7` blocks recovery/purge; history-capacity approval is implemented under containment .8 / ADR0110. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.79` precede mutation setup; `.29` belongs to `.5`. The director approved the narrow capacity exception; other reading gates remain.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4982` is the twenty-ninth history segment; ADR `0110`
   authorizes exactly 31 collection files / 30 manifest lines / 17,039 manifest bytes; other ceilings remain unchanged.
-- latest_bootstrap_read: 2026-09-09 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading 21/55 children, 29,528 fragments / 946,834 bytes; 124 runtime and six contract tests pass; nine input-slice comparisons extend .2.14 typed overflow and own .2.15 arity; next .1.22.
+- latest_bootstrap_read: 2026-09-09 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading 22/55 children, 31,028 fragments / 989,670 bytes; interpreter complete, matching through 900; 132 tests and structural corpus 31/31 pass; no new defect; next .1.23.

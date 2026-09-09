@@ -89,15 +89,16 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed twenty-one of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed twenty-two of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
-parser bridge, function-shell projection, bounded child-parse authority and generated rule plan,
-plus the interpreter through line 9674. This covers 29,528 fragments / 946,834 bytes.
-The latest 124 selected Dart interpreter/binding/source/recognition/observation/gap/write/mutation
-tests and six ActionIR contract tests pass, including existing emitted/CLI consumers.
-Child `.1.22` finishes interpreter helpers and begins matching state; startup `.3.4` remains pending.
-Earlier checkpoints retain their evidence.
+parser bridge, function-shell projection, bounded child-parse authority, generated rule plan
+and interpreter, plus matching through line 900. This covers 31,028 fragments / 989,670 bytes.
+The latest 132 selected interpreter/matcher/write/mutation/callable/staged/slot/self-hosted
+Unicode tests pass, including generated/emitted/CLI consumers and staged four-route admission.
+The shipped structural corpus window passes 31/31. No new defect is established in this slice.
+Child `.1.23` finishes matching and begins recognition transactions; startup `.3.4` remains
+pending. Earlier checkpoints retain their evidence and all known limitations below remain open.
 
 The function shell checks the returned definition's text against scalar spans, reconciles staged
 body metadata and removes declarations while preserving line breaks. The private progressive

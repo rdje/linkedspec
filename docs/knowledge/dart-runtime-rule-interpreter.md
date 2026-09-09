@@ -160,3 +160,18 @@ All 124 selected runtime tests and six contract tests pass, including existing e
 consumers. [[dart-input-slice-boundary-gaps]] retains nine exact paired controls: typed
 input overflow extends .2.14, while documented arity/late reference failure belongs to
 new .2.15. Prior repair owners and all source bytes remain unchanged.
+
+## 2026-09-09 — interpreter reading complete
+
+`DART-STARTUP-READING.1.22` reads 9675-10274 through EOF. Legacy hash-index writes
+finish before shared mutation diagnostics and the typed nested-write authority.
+Selectors and RHS evaluate before root capture; copied missing containers are
+created densely and published once. Existing null/wrong-kind roots reject with
+typed path/span diagnostics. [[write-vivification-dart-runtime]] retains this
+contract and detached results. Callable decoding checks record/signature shape;
+ordinary maps/lists copy recursively, and logical truth uses the typed policy.
+
+The slice also reads matching 1-900; 132 selected tests and the 31-case structural
+corpus window pass, including existing generated/emitted/CLI consumers. No new
+defect or repair is claimed. Numeric conversion inventory stays .2.12; all
+earlier interpreter findings remain owned under .2.1-.2.15 and startup owners.

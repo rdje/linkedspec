@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / `.1.21` complete; next `.1.22`
+- Status: `active` / `.1.22` complete; next `.1.23`
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-09`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 21/55 children, 29,528/80,297 fragments and 946,834/2,471,305 bytes; twenty-seven entries through EOF
-  plus interpreter.dart through line 9674. Exact credit and comprehension remain in each completed node.
+- Current reading: 22/55 children, 31,028/80,297 fragments and 989,670/2,471,305 bytes; twenty-eight entries through EOF
+  plus matching.dart through line 900. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -85,7 +85,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Acceptance: Every child accounts for its exact source bytes and deltas, reconciles Knowledge before re-derivation,
     records comprehension and confirmed findings, runs necessary focused diagnostics and commits before the next child.
   Children: `.1.1-.1.55`; exact scopes and baseline evidence below, read in numeric order.
-  Verification: 21/55 children complete; `.1.1-.1.21` own exact reading/comprehension evidence, and all later children remain pending.
+  Verification: 22/55 children complete; `.1.1-.1.22` own exact reading/comprehension evidence, and all later children remain pending.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.1.1`
@@ -404,14 +404,19 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.21 - read context bindings; own input slice boundaries`
 
 - ID: `DART-STARTUP-READING.1.22`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 22 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.21` committed; empty brief and clean repository.
   Scope: `dart/lib/src/runtime/interpreter.dart` lines 9675-10274; `dart/lib/src/runtime/matching.dart` lines 1-900
   Baseline evidence: 1500 fragments / 42836 bytes; ordered range SHA-256 `2bb30b2905fecc8005a1de903fa1c7d3f1f15f876f4eb7d4590cb943c25056b9`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: 132 interpreter/matcher/write/mutation/callable/staged/slot/self-hosted Unicode tests and the 31-case structural corpus window; exact ranges/current deltas, prior retention, all doctrines, both histories, Knowledge freshness, rendered mdBook and staged scope.
+  Canonical trigger: `none` — bounded required reading/reconciliation; no executable, contract or infrastructure change.
+  Comprehension: Finish legacy hash-index mutation, identity guard diagnostics, typed nested-write evaluation/classification/copy/atomic publish, callable record decoding and detached aggregate helpers. Nested writes evaluate all selectors and RHS before reading the root and create only missing dense containers, retaining structural diagnostics and completed expression effects. Matching compiles authored alternatives separately, retains whole and compact participating captures plus original group indexes/options, and projects code-unit boundaries to scalar/line locations. Staged capture recovery lazily instruments named suffix probes and caches only whole-match/text-proven ranges; numeric backreferences and unprovable instrumentation return absence. Structural pattern dispatch recognizes bounded shipped families, derives Unicode rule-label atoms and retains regex options. The range ends inside _matchEbnfReturnScalar; .1.23 completes matching then begins recognition_transaction.dart.
+  Findings: No new defect is established. Existing write-vivification, callable-literal, staged-provenance and bounded structural-PCRE cards match the read mechanisms. Numeric index conversion inventory remains .2.12; input slicing .2.14/.2.15 and all earlier owners stay pending. Bounded structural matchers do not imply general PCRE support; no fresh cross-backend comparison or repaired behavior is claimed.
+  Verification: Read interpreter 9675-10274 through EOF and matching 1-900 in five complete 300-line windows: 1,500 fragments / 42,836 baseline-identical bytes with unchanged digest. All 132 selected tests pass, including generated/emitted/CLI consumers and staged four-route admission; the shipped structural corpus window passes 31/31. Exact range/retention audits, doctrines, histories, Knowledge and rendered-book proof belong to this commit.
+  Commit: `DART-STARTUP-READING.1.22 - finish interpreter; read matching and provenance`
 
 - ID: `DART-STARTUP-READING.1.23`
   Status: `pending`
@@ -1068,7 +1073,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.22` | `pending` | Finish interpreter helpers and begin matching state after .1.21 commits cleanly. |
+| 1 | `DART-STARTUP-READING.1.23` | `pending` | Finish matching and begin recognition transactions after .1.22 commits cleanly. |
 
 ## Decisions
 
@@ -1089,6 +1094,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-09`: `.1.22` reads 1,500 fragments / 42,836 bytes, completing interpreter and matching through 900; 132 tests and structural corpus 31/31 pass. No new defect; prior mechanisms, limitations and repair owners remain intact.
 
 - `2026-09-09`: `.1.21` reads 1,500 fragments / 39,933 bytes; 124 runtime and six contract tests pass. Nine exact input-slice comparisons extend .2.14 typed overflow and own .2.15 arity; prior findings and source bytes remain intact.
 
@@ -1133,6 +1140,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- `2026-09-09`: `DART-STARTUP-READING.1.22 - finish interpreter; read matching and provenance` closes the twenty-second reading child from clean 4e872956.
+
 - `2026-09-09`: `DART-STARTUP-READING.1.21 - read context bindings; own input slice boundaries` closes the twenty-first reading child from clean c8940411.
 
 - `2026-09-09`: `DART-STARTUP-READING.1.20 - read value helpers; own numeric order and slice gaps` closes the twentieth reading child from clean 218f7f52.
@@ -1174,6 +1183,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-09`: `.1.22` completes interpreter and reads matching through 900. Reading is 22/55; next .1.23; no new repair intake.
 
 - `2026-09-09`: `.1.21` reads interpreter through 9674, extends .2.14 and owns .2.15. Reading is 21/55; next .1.22.
 

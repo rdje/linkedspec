@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.21 completes twenty-one of 55 children: 29,528 fragments / 946,834 bytes. Containment .8 admits the director-approved history capacity at 7d52c98e; all confirmed Dart defects .2.1-.2.15 and startup .37 nested-authority findings are owned and gated; remaining required reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.22 completes twenty-two of 55 children: 31,028 fragments / 989,670 bytes. Containment .8 admits the director-approved history capacity at 7d52c98e; all confirmed Dart defects .2.1-.2.15 and startup .37 nested-authority findings are owned and gated; remaining required reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `DART-STARTUP-READING.1.21` reads interpreter through 9674. All 124 runtime and six contract tests pass. Nine exact native/reconstructed and Perl facade/source input-slice controls extend .2.14 typed overflow and own .2.15 arity; prior owners remain intact.
+- `DART-STARTUP-READING.1.22` completes interpreter and reads matching through 900. All 132 selected tests and structural corpus 31/31 pass. Existing write/callable/staged/structural authorities reconcile; no new defect; prior repair owners remain intact.
 
 ## Next Action
 
-- `DART-STARTUP-READING.1.22` finishes interpreter helpers and begins matching state after .1.21 commits, brief clearing and clean proof.
+- `DART-STARTUP-READING.1.23` finishes matching and begins recognition transactions after .1.22 commits, brief clearing and clean proof.
 
 ## Recent Completions
+
+- `2026-09-09` — `DART-STARTUP-READING.1.22` reads 1,500 fragments / 42,836 bytes; 132 tests and structural corpus 31/31 pass; interpreter complete, matching through 900; no new defect.
 
 - `2026-09-09` — `DART-STARTUP-READING.1.21` reads 1,500 fragments / 39,933 bytes; 124 runtime and six contract tests pass; nine input-slice comparisons extend .2.14 and own .2.15.
 
@@ -48,8 +50,6 @@
 - `2026-09-09` — `DART-STARTUP-READING.1.8` reads 1,027 fragments / 29,012 bytes and passes 42 selected tests, including 105/105 corpus.
 
 - `2026-09-09` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.8` admits exactly one approved history member, preserving prior bytes and remaining limits.
-
-- `2026-09-09` — `DART-STARTUP-READING.1.7` reads 1,500 fragments / 47,088 bytes, passes 74 selected tests and owns recognition effect repair .2.4.
 
 ## History
 

@@ -33,3 +33,24 @@ detection.
 Related facts: [[dart-compiled-spec-state]], [[rust-entry-match-separation]],
 [[rust-char-based-offsets]], [[dart-runtime-rule-interpreter]],
 [[dart-backend-interpreter-first-plan]].
+
+## 2026-09-09 — alternatives, capture provenance and structural dispatch
+
+`DART-STARTUP-READING.1.22` reads matching.dart 1-900. Alternative-specific matching
+preserves the authored index, seek selects its best candidate and consume takes
+the first matching alternative. Whole groups keep absent positions as empty text;
+compact captures retain only participating groups plus their original indexes.
+Reindexing preserves those groups, names and regex options.
+
+[[dart-staged-ast-enrichment-marker-provenance]] remains the capture-span authority:
+lazy per-match instrumentation inserts uniquely named suffix probes, reruns with
+the same option bits and checks whole boundaries/text plus each selected capture.
+Unprovable patterns, including numeric backreferences, yield absent provenance;
+ordinary matches do not run the probes. No indexOf-based span guess is introduced.
+
+The structural bridge recognizes the shipped family signatures, derives canonical
+Unicode rule-label atoms and routes bounded block/fluent/function/EBNF matchers.
+[[dart-structural-pcre-parser-smoke-parity]] retains that limited scope; this does
+not admit general PCRE. The range ends inside _matchEbnfReturnScalar, continued
+by .1.23. All 132 selected tests and structural corpus 31/31 pass; no new defect
+is established and previous regex limitations retain their owners.

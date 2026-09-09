@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-09 — DART-STARTUP-READING.1.22: interpreter completion and matching
+
+Read 1,500 fragments / 42,836 unchanged bytes: interpreter through EOF and
+matching through 900. All 132 selected tests and structural corpus 31/31 pass.
+Existing write, callable, staged and structural authorities reconcile without
+a new defect. Reading is 22/55; next .1.23; prior repairs remain owned.
+
 ## 2026-09-09 — DART-STARTUP-READING.1.21: input-slice boundaries
 
 Read 1,500 fragments / 39,933 unchanged bytes through interpreter line 9674.

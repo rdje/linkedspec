@@ -10,6 +10,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-09 — matching retains participating-capture identity
+
+Dart reading .1.22 completes interpreter and reads matching through 900.
+Compact captures keep original group indexes/options; lazy staged suffix probes
+prove boundaries against the original match and decline unprovable patterns.
+Typed writes publish copied roots after evaluation. All 132 tests and structural
+corpus 31/31 pass; prior authorities and defects remain unchanged.
+
 ## 2026-09-09 — typed projection can hide slice-end overflow as absence
 
 Dart reading .1.21 completes context/binding machinery through 9674; 124+6 tests
