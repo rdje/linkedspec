@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / `.1.2` complete; next `.1.3`, with 2/55 reading children complete
+- Status: `active` / `.1.3` complete; next `.1.4`, with 3/55 reading children complete
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-09`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 2/55 children, 3,000/80,297 fragments and 96,414/2,471,305 bytes; six entries through EOF
-  plus action_contracts.dart through line 689. Exact credit and comprehension remain in each completed node.
+- Current reading: 3/55 children, 4,500/80,297 fragments and 140,402/2,471,305 bytes; seven entries through EOF
+  plus action_parser.dart through line 998. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -85,7 +85,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Acceptance: Every child accounts for its exact source bytes and deltas, reconciles Knowledge before re-derivation,
     records comprehension and confirmed findings, runs necessary focused diagnostics and commits before the next child.
   Children: `.1.1-.1.55`; exact scopes and baseline evidence below, read in numeric order.
-  Verification: 2/55 children complete; `.1.1-.1.2` own exact reading/comprehension evidence, and all later children remain pending.
+  Verification: 3/55 children complete; `.1.1-.1.3` own exact reading/comprehension evidence, and all later children remain pending.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.1.1`
@@ -119,14 +119,19 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.2 - read remaining ActionIR nodes and helper tables`
 
 - ID: `DART-STARTUP-READING.1.3`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 3 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.2` committed; empty brief and clean repository.
   Scope: `dart/lib/src/action/action_contracts.dart` lines 690-1191; `dart/lib/src/action/action_parser.dart` lines 1-998
   Baseline evidence: 1500 fragments / 43988 bytes; ordered range SHA-256 `86d0b11709fb23b89543bc7702a52e4de20e7a662abd45991fdbf49c039a25b2`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Existing Dart AST/parser, action-contract, punctuation-light, variadic-function, nested-write and recognition-transaction tests; controlled switch AST/resolver/native/reconstructed probes; exact range/current-delta and prior-evidence audits; all doctrines, both histories, Knowledge synchronization, mdBook rendering and staged scope.
+  Canonical trigger: `none` — bounded source reading, reproducible defect intake and documentation; no executable or contract changes. The defect has gated repair children rather than a behavior change in this leaf.
+  Comprehension: Helper-family priority, immutable resolution output, structural/mutation traversal, deferred callable/intrinsic exclusions, registry positional/variadic matching and keyword rejection; parser dispatch order, literal/brace/control recognition, static recognition operands, access paths and initial nested-write checks. Ordinary offsets and explicit Unicode-character conversion remain distinct. The range ends in the nested-write diagnostic signature; .1.4 resumes that implementation.
+  Findings: Attached-switch body omission and duplicate-default replacement are confirmed in docs/knowledge/dart-attached-switch-body-omission.md. New repair .2.1.1 resolves validation expectations and .2.1.2 implements them after startup .3/.4/.5. Existing marker-switch facts do not cover this attached-branch extraction gap.
+  Verification: Physically read both ranges in untruncated bounded outputs: 1,500 fragments / 43,988 baseline-identical bytes, pinned digest unchanged. All 45 selected tests pass. Five controls show omitted trailing calls and overwritten defaults through AST/resolver, native and SpecFile reconstruction; no emitted or other-backend claim. Diagnostic runtime/test excerpts are additional reads, not whole-file credit. Workflow, retention and rendered-book results belong to this commit.
+  Commit: `DART-STARTUP-READING.1.3 - read resolver and parser; own switch body omission`
 
 - ID: `DART-STARTUP-READING.1.4`
   Status: `pending`
@@ -652,10 +657,34 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Status: `pending`
   Goal: Reconcile and retain ownership of every confirmed Dart finding established during the reading.
   Dependencies: Findings from `.1`; implementation additionally requires startup `.3`, `.4` and `.5`.
+  Children: `.2.1`; further confirmed findings receive disjoint owners here.
   Acceptance: Cross-reference existing owners for known defects; create disjoint bounded repair children here
     immediately for new confirmed defects, with mechanism, source, reproduction, acceptance and unblock conditions.
     If no new repair is needed, close this intake with an explicit complete reconciliation rather than inventing work.
-  Verification: `pending`; no new Dart defect or repair implementation is admitted by this placeholder.
+  Verification: `pending`; `.1.3` confirms attached-switch body omission and duplicate-default replacement, owned by `.2.1`. No repair implementation is admitted before the startup gates.
+  Commit: `pending`
+
+- ID: `DART-STARTUP-READING.2.1`
+  Status: `pending`
+  Goal: Prevent attached-switch parsing and resolution from silently discarding authored body content.
+  Dependencies: Startup `.3`, `.4` and `.5`; source finding from `.1.3`.
+  Children: `.2.1.1`, `.2.1.2`
+  Evidence: `docs/knowledge/dart-attached-switch-body-omission.md` owns exact API probes and source locations. A trailing unknown helper survives in body.statements but is absent from extracted cases and contract diagnostics; native and SpecFile-reconstructed execution return the selected case value. A second default replaces the first in the extracted default field.
+
+- ID: `DART-STARTUP-READING.2.1.1`
+  Status: `pending`
+  Goal: Define and lock complete attached-switch body validation against the normative control contract.
+  Dependencies: Startup `.3`, `.4` and `.5`.
+  Acceptance: Compare authored trailing/interleaved non-branch statements, duplicate defaults, malformed branches and valid nested/empty/default forms against the normative grammar and Perl reference. Establish independent expected diagnostics and precise source spans; preserve lazy branch execution. Own any affected cross-backend follow-ups before changing them; ask the director only if the intended syntax remains genuinely unresolved.
+  Verification: `pending`; five controlled Dart native/reconstructed probes are durable in the finding card; no fresh proof for other backends or emitted carriers.
+  Commit: `pending`
+
+- ID: `DART-STARTUP-READING.2.1.2`
+  Status: `pending`
+  Goal: Implement the resolved attached-switch validation without partial AST acceptance or lost diagnostics.
+  Dependencies: `.2.1.1` and startup gates.
+  Acceptance: Reject or explicitly account for every authored body statement and duplicate default according to the resolved contract; preserve valid branch order, first-match selection, nested switches, returns and deferred callable bodies. Cover parser/resolver, normal compilation, supported reconstructed/generated/emitted carriers and public examples with focused negative/positive proof; use canonical verification if the shared/public contract moves.
+  Verification: `pending`
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.3`
@@ -672,7 +701,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.3` | `pending` | Read the remaining contracts and initial ActionIR parser: 1,500 fragments / 43,988 bytes. |
+| 1 | `DART-STARTUP-READING.1.4` | `pending` | Resume ActionIR parser lines 999-2498: 1,500 fragments / 42,924 bytes. |
 
 ## Decisions
 
@@ -687,11 +716,12 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Blockers
 
-- No blocker prevents `.1.3` reading after the `.1.2` commit, empty brief and clean-tree proof.
+- No blocker prevents `.1.4` reading after the `.1.3` commit, empty brief and clean-tree proof; switch repair .2.1 remains gated.
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
 
+- `2026-09-09`: `.1.3` reads both ranges and passes 45 selected tests; five probes confirm attached-switch omission/default replacement, durably owned under .2.1 with exact reproduction.
 - `2026-09-09`: `.1.2` reads both scoped ranges, preserves baseline identity and passes 50 existing AST/contract/binding/codeblock tests. Deferred literal traversal matches its canonical fact; next .1.3 resumes helper-family resolution.
 - `2026-09-09`: `.1.1` reads all six scoped ranges, retains exact baseline bytes/digests and passes nine existing AST/parser tests. No new defect is confirmed; next `.1.2` resumes the literal-codeblock fields.
 - `2026-09-09`: `.0` freezes 55 children and independently replays declared coordinates/digests with zero current source deltas. All resulting-store and focused checks are recorded in its commit; no reading or repair completion is claimed.
@@ -700,6 +730,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- `2026-09-09`: `DART-STARTUP-READING.1.3 - read resolver and parser; own switch body omission` closes the third reading child and owns the first new Dart repair.
 - `DART-STARTUP-READING.1.2 - read remaining ActionIR nodes and helper tables` completes AST reading and the first contract-table range.
 - Created by `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.4 - admit bounded Dart reading ownership`.
 - `DART-STARTUP-READING.0 - freeze exact bounded Dart reading children` defines ownership only; no reading child was complete at that boundary.
@@ -707,6 +738,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Changelog
 
+- `2026-09-09`: `.1.3` completes resolver/initial-parser reading, owns attached-switch repair .2.1 and routes .1.4.
 - `2026-09-09`: `.1.2` completes the second physical-reading checkpoint and routes `.1.3`.
 - `2026-09-09`: `.1.1` completes the first physical-reading checkpoint and routes `.1.2`.
 - `2026-09-09`: `.0` completes exact decomposition and routes `.1.1`; source-reading credit remains zero.

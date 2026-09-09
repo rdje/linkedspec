@@ -89,13 +89,19 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed two of 55 children: the README, analyzer and command entrypoints,
-public export list, complete ActionIR node model and initial helper-contract tables. This covers
-3,000 fragments / 96,414 bytes. The latest focused AST, contract, binding and callable-codeblock
-tests pass 50/50; deferred codeblock bodies retain their documented non-eager construction boundary.
-The next child `.1.3` resumes contract resolution and starts the ActionIR parser. These reading
-checkpoints add no runtime behavior and confirm no new code defect. Startup `.3.4` remains pending
-until all reading is complete; confirmed repairs retain separate ownership.
+Physical Dart reading has completed three of 55 children: entrypoints, the complete ActionIR node
+model and contract resolver, plus the initial parser implementation. This covers 4,500 fragments /
+140,402 bytes. The latest 45 selected parser, contract, control, function, write and recognition tests
+pass. The next child `.1.4` resumes the parser; startup `.3.4` remains pending.
+
+**Known Dart limitation — attached switches:** a trailing non-branch statement can remain in the
+parsed body while being omitted from helper diagnostics and execution. A later `default` can also
+replace an earlier one. Five controlled AST/resolver and native/reconstructed probes confirm this;
+passing existing tests does not close the defect. Exact examples and reproduction live in
+`docs/knowledge/dart-attached-switch-body-omission.md`. `DART-STARTUP-READING.2.1.1` owns contract
+validation and `.2.1.2` owns repair/carrier proof after startup reading and policy gates. The finding
+does not establish behavior on other backends or emitted Dart. Reading completion and repair
+completion remain separate; this checkpoint changes no runtime behavior.
 The director's exception covers capacity infrastructure only; other reading/repair gates and the
 parked authoring and format ideas remain at their current status.
 

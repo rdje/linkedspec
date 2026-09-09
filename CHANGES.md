@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-09 — DART-STARTUP-READING.1.3 - read resolver and parser; own switch body omission
+
+Read .1.3 contracts 690-1191 and parser 1-998: 1,500 fragments / 43,988 baseline-identical bytes; cumulative 3/55 children, 4,500 fragments / 140,402 bytes. All 45 selected tests pass. Five controlled AST/resolver/native/reconstructed probes confirm attached-switch body omission and duplicate-default replacement. Record exact mechanism/reproduction and gated .2.1.1 validation / .2.1.2 repair owners; synchronize public limitation, Knowledge and continuity. No implementation, emitted or other-backend claim; next .1.4.
+
 ## 2026-09-09 — DART-STARTUP-READING.1.2 - read remaining ActionIR nodes and helper tables
 
 Read both .1.2 ranges: 1,500 fragments / 36,093 baseline-identical bytes, completing ActionIR AST and contract tables through line 689. Reconcile exact selectors, deferred codeblocks and current accepted aliases; refresh the resolver fact and its historical verification command. Existing AST/parser, contract, binding and callable tests pass 50/50. Synchronize book, roadmaps and continuity at 2/55 children, 3,000 fragments / 96,414 bytes; next .1.3. No executable change, new confirmed code defect or parked-feature activation.

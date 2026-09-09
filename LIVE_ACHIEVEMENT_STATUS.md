@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.2 completes two of 55 children: 3,000 fragments / 96,414 bytes. .1.3 is next; remaining required reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.3 completes three of 55 children: 4,500 fragments / 140,402 bytes. .1.4 is next; switch defect .2.1 is owned and gated; remaining required reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `DART-STARTUP-READING.1.2` finishes the ActionIR AST and reads contract tables through line 689. Exact range identity and 50/50 existing AST/contract/binding/codeblock tests pass; no new code defect is confirmed. The resolver fact now distinguishes accepted aliases and uses current focused verification.
+- `DART-STARTUP-READING.1.3` completes contract resolver reading and parser lines 1-998; 45/45 selected tests pass. Five controlled probes expose attached-switch body omission and overwritten defaults through native and reconstructed execution. Repair .2.1 and its two children own validation and implementation after startup gates.
 
 ## Next Action
 
-- Read `DART-STARTUP-READING.1.3`: contract definitions lines 690-1191 and ActionIR parser lines 1-998, after the clean .1.2 commit.
+- Read `DART-STARTUP-READING.1.4`: ActionIR parser lines 999-2498, after the clean .1.3 commit. Switch repair is retained; reading completion is not defect remediation.
 
 ## Recent Completions
+
+- `2026-09-09` — `DART-STARTUP-READING.1.3` reads 1,500 fragments / 43,988 bytes, passes 45 focused tests, and owns switch omission repair .2.1.
 
 - `2026-09-09` — `DART-STARTUP-READING.1.2` reads another 1,500 fragments / 36,093 bytes and passes 50 focused tests.
 
@@ -48,8 +50,6 @@
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.62` completes admission/emitter boundary reading and owns verifier signal repair .79.
 
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.61` completes semantic consumer reading and performs required engineering-notes rollover.
-
-- `2026-09-08` — `SESSION-STARTUP-READING.3.3.60` completes cursor/diagnostic consumer reading and starts semantic-foundation tests.
 
 ## History
 

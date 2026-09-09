@@ -43,6 +43,22 @@ fallback. Canonical helper-family mapping is now owned by
 [[dart-actionir-contract-resolver]]. Later `DART-BACKEND-PARITY` leaves have
 since added compiled-spec construction and the first runtime interpreter layers.
 
+## Initial parser reading — 2026-09-09
+
+DART-STARTUP-READING.1.3 reads parser lines 1–998. Dispatch tries assignment,
+receiver mutation and fluent chains before grouped/literal/shape/control/call/
+access alternatives. Unsupported text remains an explicit raw node.
+Exact `{|` selects callable-literal parsing before hash/eager-block classification.
+Ordinary `_span` retains the parser's UTF-16 offsets unless character mode is
+enabled; callable literal/body bounds explicitly use Unicode-character conversion,
+and nested-write segment parsing enables character spans. Do not generalize
+those conversions to every ActionIR node or runtime register.
+
+Attached-switch extraction is not complete body validation: the confirmed
+omission/default-replacement finding and its gated repair owners are in
+[[dart-attached-switch-body-omission]]. The 45 selected existing tests pass;
+that does not validate the newly exposed malformed-body cases.
+
 Related facts: [[text-to-ast-backend-doctrine]],
 [[perl-actionir-ast-parser-seam]], [[dart-backend-interpreter-first-plan]],
 [[dart-actionir-contract-resolver]], [[dart-runtime-value-control-tree-helpers]],

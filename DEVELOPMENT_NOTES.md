@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-09 — DART-STARTUP-READING.1.3 - read resolver and parser; own switch body omission
+
+The resolver prefers extracted switch cases/default over the complete body; the parser can stop extraction early and overwrite the default. Native and SpecFile-reconstructed execution consume those extracted branches. Controlled unknown-helper placement distinguishes lost diagnostics from lazy branch execution and shows that compile acceptance alone does not imply no contract diagnostics. The finding card preserves all five outcomes and precise sources. Ordinary offsets, explicit character spans, static recognition operands and deferred callable bodies retain their contracts; no whole runtime file is credited by diagnostic excerpts.
+
 ## 2026-09-09 — DART-STARTUP-READING.1.2 - read remaining ActionIR nodes and helper tables
 
 ActionIR keeps mutation receiver identity, callback body and post-mutation continuations in typed fields. Exact aggregate-selector detection excludes inert callable literal bodies, matching the existing deferred-state contract; that exclusion is not an eager traversal defect. Contract names include canonical helpers, numeric/current aliases and accepted source-boundary aliases. The old resolver fact now makes that distinction and replaces its scaffold-era whole-Dart text negation with focused existing tests. The read ends inside _familyForCanonical; no remaining resolver code is credited until .1.3.
