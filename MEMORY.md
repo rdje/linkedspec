@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `df4dc96f27c7d75c6423e44c23d2cf3a50656149` — clean prior Dart-reading leaf.
-- latest_completed_leaf: `DART-STARTUP-READING.1.6 - read CLI and compiler entry; own trace overflow`.
+- activation_commit: `c2682cf90b1be39f65dff15bf0d54acf91076753` — clean prior Dart-reading leaf.
+- latest_completed_leaf: `DART-STARTUP-READING.1.7 - read compiler; own recognition effect bypass`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: `DART-STARTUP-READING.1.7` resumes compiler/corpus in `docs/tasks/DART-STARTUP-READING.md`; .2.1/.2.2/.2.3 repairs are gated.
+- next_action: `DART-STARTUP-READING.4` awaits the director’s narrow history-capacity exception; then resume `.1.8` corpus/loader/MCP reading.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
-- blockers: startup `.7` blocks recovery/purge. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.79` precede mutation setup; `.29` belongs to `.5`. The director approved the narrow capacity exception; other reading gates remain.
+- blockers: Dart `.4` awaits history-capacity approval; startup `.7` blocks recovery/purge. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.79` precede mutation setup; `.29` belongs to `.5`. The director approved the narrow capacity exception; other reading gates remain.
 - current_rust_warning_debt: repeated clean carriers report 1,870 `pgen` plus 26 `rgx-core` output warnings;
   `RUST-DEPENDENCY-WARNING-ZERO.1-.7` own causal repair/pins/enforcement without suppression, after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4983` is the twenty-eighth history segment; ADR `0106`
   authorizes exactly 30 collection files / 29 manifest lines / 16,463 manifest bytes; other ceilings remain unchanged.
-- latest_bootstrap_read: 2026-09-09 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading 6/55 children, 9,000 fragments / 269,107 bytes; next .1.7.
+- latest_bootstrap_read: 2026-09-09 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading 7/55 children, 10,500 fragments / 316,195 bytes; capacity intake .4 precedes .1.8.

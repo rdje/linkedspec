@@ -59,3 +59,7 @@ bounded proof, not a fresh complete generated/emitted or shared-matrix admission
 Related facts: [[dart-function-registry]], [[dart-actionir-contract-resolver]],
 [[dart-staged-function-descriptor-shape]], [[dart-backend-interpreter-first-plan]],
 [[compilerstate-internal-model]].
+
+## Compiler completion reading — 2026-09-09
+
+DART-STARTUP-READING.1.7 completes compiled_spec.dart through EOF. The remaining validators walk serialized payloads and specific function bodies; compilation normalizes bare edges by family, preserves named/indexed slot provenance, expands dependency patterns and projects descriptors from compiled state. Optional edge payload code selects an explicit block when present, otherwise joins its fluent calls; the separate fluent chain remains carried. The special observation closure follows explicit calls/functions but omits structural edges. [[dart-recognition-effect-integration-gap]] owns the confirmed bypass and disconnected generic classifier; 74 selected tests do not close those defects.

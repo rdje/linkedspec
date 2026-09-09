@@ -54,3 +54,7 @@ public helper or typed value, schema field/version, semantic/MCP projection, CLI
 - Recognition authority: [[dart-recognition-transaction-dormant-red]].
 - Decision: ADR `0056`, section 24.
 - Task owner: [[FUTURE-PARITY-BACKLOG.14]] `.14.4.4`.
+
+## Reading qualification — 2026-09-09
+
+DART-STARTUP-READING.1.7 confirms a limit to the earlier compiler-wide claim: action/blind transitions are absent from the special observation effect graph. Ordinary call(Observer) is rejected, but both structural routes compile and enter the same Observer lifecycle during recognize_once. The eight native/authority controls in [[dart-recognition-effect-integration-gap]] also show a generic binding write survives rollback. DART-STARTUP-READING.2.4 owns gated repair; no generated/emitted or other-backend result is inferred from this new probe.

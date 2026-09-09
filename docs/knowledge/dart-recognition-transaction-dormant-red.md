@@ -60,3 +60,7 @@ to rollout 4/9. The module stays unexported; Julia and Lua remain unavailable.
 - Rust precedent: [[rust-recognition-transaction-dormant-red]].
 - Dart typed-source authority: [[dart-typed-source-location-integration]].
 - Owner: [[FUTURE-PARITY-BACKLOG.14]] `.14.3.4.0.1-.3`; next owner `.14.3.5.0`.
+
+## Reading qualification — 2026-09-09
+
+DART-STARTUP-READING.1.7 finds that classifyEffects is exercised directly by the admitted neutral-graph test but has no production caller in dart/lib. The authority rejects binding_write when called explicitly, while normal compilation/execution accepts a recognized child writing seen=1 and rollback leaves seen=1. A pure rollback control leaves seen=0. Separate compiler observation checks miss structural action/blind transitions. [[dart-recognition-effect-integration-gap]] preserves eight exact controls, source locations and gated .2.4 repair ownership. The earlier passing finite admission fixtures do not establish connected effect enforcement.

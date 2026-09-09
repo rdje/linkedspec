@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.6 completes six of 55 children: 9,000 fragments / 269,107 bytes. .1.7 is next; switch .2.1, regex .2.2 and trace .2.3 defects are owned and gated; remaining required reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.7 completes seven of 55 children: 10,500 fragments / 316,195 bytes. .4 awaits a narrow history-capacity exception before .1.8; switch, regex, trace and recognition defects .2.1-.2.4 are owned and gated; remaining required reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `DART-STARTUP-READING.1.6` completes spec AST/CLI reading and reads compiler state through line 457; 27 selected tests pass. Seven probes confirm numeric trace overflow can throw after file reset, owned by .2.3. Existing switch/regex repairs remain pending.
+- `DART-STARTUP-READING.1.7` completes compiler reading and begins corpus; 74 selected tests pass. Eight probes prove the generic effect classifier is disconnected, a binding write survives rollback, and observation closure omits structural edges. Gated .2.4 owns repair; earlier findings remain pending.
 
 ## Next Action
 
-- Read `DART-STARTUP-READING.1.7`: compiler remainder and corpus-runner prefix, after the clean .1.6 commit.
+- `DART-STARTUP-READING.4` awaits a director decision on one additional history member and its exact manifest capacity. The next source child remains .1.8; .1.7 is committed within unchanged controls.
 
 ## Recent Completions
+
+- `2026-09-09` — `DART-STARTUP-READING.1.7` reads 1,500 fragments / 47,088 bytes, passes 74 selected tests and owns recognition effect repair .2.4.
 
 - `2026-09-09` — `DART-STARTUP-READING.1.6` reads 1,500 fragments / 43,571 bytes, passes 27 selected tests and owns trace overflow repair .2.3.
 
@@ -48,8 +50,6 @@
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.66` completes final Rust contract consumers; only parent closeout remains.
 
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.65` completes lifecycle/trace/typed/casing reading with precise carrier proof.
-
-- `2026-09-08` — `SESSION-STARTUP-READING.3.3.64` completes staged recursive/carrier reading and starts standalone-lifecycle tests.
 
 ## History
 

@@ -89,11 +89,11 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed six of 55 children, including the complete ActionIR parser,
-callable normalization, function registry, spec AST and both CLI adapters, plus compiled state
-through line 457. This covers 9,000 fragments / 269,107 bytes. The latest 27 selected AST, compiler,
-primary/corpus CLI and root-selection tests pass. The next child `.1.7` resumes compiler/corpus
-reading; startup `.3.4` remains pending.
+Physical Dart reading has completed seven of 55 children, including the complete ActionIR parser,
+callable normalization, function registry, spec AST, both CLI adapters and compiler, plus the
+corpus-runner prefix. This covers 10,500 fragments / 316,195 bytes. The latest 74 selected compiler,
+mutation, progressive/staged, recognition/observation and cursor-descriptor tests pass. Child `.1.8`
+continues corpus, loader and MCP reading after the history-capacity decision below; startup `.3.4` remains pending.
 
 **Known Dart limitation — attached switches:** a trailing non-branch statement can remain in the
 parsed body while being omitted from helper diagnostics and execution. A later `default` can also
@@ -118,6 +118,22 @@ the selected file is already truncated before that failure. Seven adapter probes
 boundary and invalid-text controls in `docs/knowledge/dart-primary-cli-trace-overflow.md`; gated
 repair `DART-STARTUP-READING.2.3` owns validation before file mutation and portable numeric behavior.
 No process-overflow or other-backend result is claimed by this probe.
+
+**Known Dart limitation — recognition effect enforcement:** a child invoked by `recognize_once`
+can write a binding, and `recognition_rollback` leaves that write visible. The existing generic
+effect classifier rejects that effect when called directly, but executable rule paths do not
+call it. Separate observation checks also miss action/blind transitions. Eight native/authority
+controls, including lifecycle evidence and pure controls, are preserved in
+`docs/knowledge/dart-recognition-effect-integration-gap.md`. Gated `DART-STARTUP-READING.2.4.1-.2.4.3`
+own complete graph validation, implementation and carrier/public closeout. Passing prior finite
+fixtures do not establish this missing enforcement; other carriers/backends are not inferred.
+
+**Continuity prerequisite — history capacity:** the next rollover needs one additional immutable
+history member. Its measured manifest needs 30 lines / 17,039 bytes; current controls permit
+29 lines / 16,463 bytes and 30 collection files. Proposal `DART-STARTUP-READING.4` requests exactly
+31 files and that measured manifest capacity. The existing exception does not cover this increase.
+The completed reading record fits current limits after concise editing; every prior history byte
+is retained. This is a storage prerequisite, not a parser repair or feature activation.
 
 The director's exception covers capacity infrastructure only; other reading/repair gates and the
 parked authoring and format ideas remain at their current status.

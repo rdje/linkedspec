@@ -2224,7 +2224,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Goal: Split and read all 115 baseline Dart entries, including compiler/runtime, tests, commands, and package inputs.
   Reading owner: `docs/tasks/DART-STARTUP-READING.md` owns .0 decomposition, .1 reading, .2 new repair intake and .3 reading closeout; this startup node remains the prerequisite/closeout owner.
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas. DART-STARTUP-READING.3 may complete this reading node only after exact coverage/comprehension and child-commit proof; pending repairs remain owned separately.
-  Verification: Dart reading remains incomplete: DART-STARTUP-READING.1.6 closes 6/55 children, 9,000 fragments / 269,107 bytes with exact baseline identity and 27 selected tests. Dart .2.1/.2.2/.2.3 own switch, regex and numeric trace repairs; .54.3 retains broad regex recurrence. Next .1.7; earlier evidence and repairs remain intact.
+  Verification: Dart reading remains incomplete: DART-STARTUP-READING.1.7 closes 7/55 children, 10,500 fragments / 316,195 bytes with exact baseline identity and 74 selected tests. Dart .2.1-.2.4 own switch, regex, trace and recognition effect repairs; .54.3 retains broad regex recurrence. Capacity intake .4 precedes .1.8; earlier evidence and repairs remain intact.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.5`
@@ -4325,12 +4325,12 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 ## Current Frontier
 
-Canonical admission a67a18bf and completed `DART-STARTUP-READING.0` decomposition preserve the full baseline. Resume `DART-STARTUP-READING.1.7` in `docs/tasks/DART-STARTUP-READING.md` after the clean .1.6 reading commit.
+Canonical admission a67a18bf and completed `DART-STARTUP-READING.0` decomposition preserve the full baseline. Resolve `DART-STARTUP-READING.4` history-capacity intake after the clean .1.7 reading commit, then resume .1.8 in `docs/tasks/DART-STARTUP-READING.md`.
 Startup `.3.4` remains pending until that tree proves complete Dart reading; admission itself grants no source-reading credit.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.7` | `pending` | Resume compiler/corpus; 6/55 reading children complete, Dart .2.1/.2.2/.2.3 repairs gated, and startup .3.4 remains pending. |
+| 1 | `DART-STARTUP-READING.4` | `pending` | Await exact history-capacity exception; 7/55 reading children complete, then .1.8 corpus/loader/MCP. Source repairs remain gated. |
 
 ## Reading Ledger
 

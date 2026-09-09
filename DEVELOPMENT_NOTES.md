@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-09 — DART-STARTUP-READING.1.7 - read compiler; own recognition effect bypass
+
+RecognitionTransactionAuthority.classifyEffects rejects binding_write when directly called by neutral tests, but dart/lib has no production caller. Compiler observation effect closure follows explicit rule/functions and scans payloads without structural action/blind transitions. Runtime recognize_once executes the child before recording its attempt; rollback restores cursor/boundary/marks, not forbidden binding changes. Eight native/authority controls confirm seen changes from 0 to 1 through a recognized child and stays 1 after rollback, while pure rollback stays 0. Structural observation routes enter Observer I instead of rejecting. .2.4 owns complete graph integration and carrier/public proof; this intake does not broaden snapshot semantics or claim untested carriers.
+
+The same leaf’s draft history rollover passed exact source copying but exceeded the three approved collection/manifest controls. Its generated candidate is retained in managed scratch; source c2682cf9 and the manifest record reproduce it. Restore only that uncommitted rollover, preserve every earlier history byte, and shorten only the new changelog record to 339 bytes. CHANGES is then 58,814 bytes; .4 records the exact additional exception and blocks further committed reading pending the director. No capacity limit changes here.
+
 ## 2026-09-09 — DART-STARTUP-READING.1.6 - read CLI and compiler entry; own trace overflow
 
 Primary CLI trace validation recognizes decimal syntax with a regular expression, while later conversion uses bounded int.tryParse. _CanonicalTrace.create resets the file before conversion, and its filesystem catch does not cover the resulting StateError; invalid text returns usage 2 before the reset. Seven adapter probes isolate both signed endpoints, adjacent overflows, 0/100 and invalid text. This proves the validation/order defect, not a process-exit or other-backend result; .2.3 owns resolution and repair. Compiler prefix reading preserves ordered last-definition state, entry selection and structural regex-slot identities; validation bodies continue in .1.7.

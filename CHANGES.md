@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-09 — DART-STARTUP-READING.1.7 - read compiler; own recognition effect bypass
+
+Read compiler/corpus ranges; 74 tests pass. Eight probes confirm recognition-effect bypass and leaked writes after rollback; repair .2.4 is owned and book-visible. Exact reading/proof is in the task tree. History capacity intake .4 precedes .1.8.
+
 ## 2026-09-09 — DART-STARTUP-READING.1.6 - read CLI and compiler entry; own trace overflow
 
 Read all .1.6 ranges: 1,500 fragments / 43,571 baseline-identical bytes; cumulative 6/55 children, 9,000 fragments / 269,107 bytes. Existing selected AST/compiler/CLI/root tests pass 27/27. Seven adapter probes confirm that adjacent signed-integer overflow throws after trace-file reset while invalid text preserves the file. Own gated .2.3 repair, exact reproducible fact and visible book limitation. Preserve earlier switch/regex findings, parked ideas and source bytes; next .1.7.
