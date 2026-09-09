@@ -70,3 +70,17 @@ Related facts: [[dart-backend-scaffold-package]],
 [[dart-runtime-rule-interpreter]], [[dart-starter-corpus-batch]],
 [[dart-middle-corpus-batch]], [[dart-shipped-corpus-smoke-split]],
 [[dart-staged-function-descriptor-shape]], [[rust-perl-output-oracle]].
+
+## 2026-09-09 — bounded source-reading qualification
+
+`DART-STARTUP-READING.1.8` completes `manifest_runner.dart` through line 563.
+The 99-fixture statements above describe their original admission boundary. The current full-corpus
+test asserts 105 fixtures and passes with all 42 selected corpus/loader/primary-CLI/MCP-binding tests.
+
+Validation loads every manifest fixture before named or bounded selection; selecting one case does
+not bypass invalid unselected entries. Named selection preserves requested order and rejects duplicate
+or unknown names and mixed offset/limit options. Default execution preserves manifest order.
+A fixture must match and its output must structurally equal `[expectedJson]`; arrays are ordered and
+maps compare by keys/values. Per-fixture execution errors are collected, while earlier loading errors
+can abort validation. The staged-function parser is the fallback for initial `SpecParseException`.
+This reading confirms the existing harness contract and introduces no source repair.

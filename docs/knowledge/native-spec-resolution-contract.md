@@ -43,3 +43,13 @@ text.
 Related facts: [[native-spec-resolution-policy-drift]], [[primary-cli-strict-utf8-text-contract]],
 [[native-in-memory-backend-contract]], [[user-observable-backend-cli-parity-contract]],
 [[rust-native-spec-resolution]], [[lua-native-spec-resolution]], [[lua-native-spec-pipeline]].
+
+## 2026-09-09 — complete Dart loader reading
+
+`DART-STARTUP-READING.1.8` reads all 491 lines of `dart/lib/src/io/spec_loader.dart`.
+Its existing tests directly consume all 14 name, 9 resolution and 4 text cases and pass within the
+42 selected tests. Ordered candidates use first-regular-file selection and lexical deduplication.
+Loading retains strict UTF-8 text and BOM; `loadAndCompileSpec` subsequently reports a leading BOM
+as a parse-stage failure. Staged function parsing retains requested source identity; validation runs
+before compilation with redundant source validation disabled. Trace scopes close on return/rethrow.
+No new loader defect is confirmed, and no other backend is freshly verified by this Dart reading.

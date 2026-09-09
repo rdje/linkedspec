@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `f8b626f0c0f16fd6168aa9a4633b1179fe09acc2` — clean approved-history implementation base.
-- latest_completed_leaf: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.8 - admit approved history member`.
+- activation_commit: `7d52c98e9df39e459a27db56a8c87ae382714f1d` — clean eighth Dart reading base.
+- latest_completed_leaf: `DART-STARTUP-READING.1.8 - read corpus runner and spec loader`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: `DART-STARTUP-READING.1.8` resumes corpus/loader/MCP reading after approved capacity closeout.
+- next_action: `DART-STARTUP-READING.1.9` reads generated MCP bundle bytes 320-65855.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: Startup `.7` blocks recovery/purge; history-capacity approval is implemented under containment .8 / ADR0110. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.79` precede mutation setup; `.29` belongs to `.5`. The director approved the narrow capacity exception; other reading gates remain.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4982` is the twenty-ninth history segment; ADR `0110`
   authorizes exactly 31 collection files / 30 manifest lines / 17,039 manifest bytes; other ceilings remain unchanged.
-- latest_bootstrap_read: 2026-09-09 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading 7/55 children, 10,500 fragments / 316,195 bytes; approved capacity .8 is complete; next Dart .1.8.
+- latest_bootstrap_read: 2026-09-09 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading 8/55 children, 11,527 fragments / 345,207 bytes; 42 selected tests pass, including 105/105 corpus; next Dart .1.9.

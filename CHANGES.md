@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-09 — DART-STARTUP-READING.1.8: corpus and loader reading
+
+Read 1,027 fragments / 29,012 unchanged bytes through corpus/loader EOF and MCP line 9.
+All 42 selected tests pass, including 105/105 corpus and direct neutral loading cases.
+Dated facts, public explanation and exact coverage retain prior evidence; no new defect is confirmed.
+Reading reaches 8/55; next .1.9 reads the generated bundle. Existing repairs remain gated.
+
 ## 2026-09-09 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.8 - admit approved history member
 
 ADR 0110 implements the director-approved exception: 31 change-history files and a 30-line / 17,039-byte manifest. Governed rollover preserves complete clean-source records; independent source/hash/reconstruction and exact-limit proof accompany canonical validation. Other limits and source-reading gates stay unchanged. Resume Dart .1.8 after clean landing.

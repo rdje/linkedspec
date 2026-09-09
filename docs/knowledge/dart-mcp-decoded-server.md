@@ -48,3 +48,14 @@ ledger and all 58 rejected mutations, and closes the Dart parent before Julia st
 
 Related facts: [[dart-native-mcp-server-plan]], [[dart-semantic-query-public-api]],
 [[dart-mcp-strict-stdio]], [[mcp-2026-07-28-stdio-contract]], and [[mcp-implementation-admission-ledger]].
+
+## 2026-09-09 — generated prefix reading boundary
+
+`DART-STARTUP-READING.1.8` reads only `mcp_contract.dart` lines 1-9: generator provenance,
+private part membership, binding format 1, bundle digest
+`a1d2857c57ef93ea0e62403977105fdf6380f6fcb4d7a89ed5749c1bfdd64001` and the JSON declaration.
+The current baseline-identical file is 83,214 bytes; 82,875 above describes its earlier boundary.
+The four binding tests pass within 42 selected tests, independently checking digest/clone isolation,
+frozen schema behavior, canonical frames and serialization. Those tests grant no physical payload
+reading credit: .1.9 starts bytes 320-65855, with the remainder owned by .1.10.
+The existing query-only scope remains; parser builders and fileless execution/debugging are parked.

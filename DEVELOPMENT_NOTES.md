@@ -10,6 +10,15 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-09 — Dart corpus selection and file-loading boundaries
+
+`DART-STARTUP-READING.1.8` confirms whole-corpus validation before selection, structural
+`[expectedJson]` output comparison and per-fixture execution failure collection. Named loading
+uses ordered direct roots and first-regular-file selection; strict UTF-8 text/BOM is preserved
+before the composed parser's stage-specific rejection. Existing corpus/loader/MCP facts retain
+their older evidence with current qualifications. The complete 42-test selection passes;
+physical reading stops at the generated MCP prefix, independently of binding-test coverage.
+
 ## 2026-09-09 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.8 - admit approved history member
 
 The director's “Greenlighted !” approves DART-STARTUP-READING.4's exact additional history exception. ADR0110 changes only three registry scalars: collection files 30 to 31 and manifest lines/bytes 29/16463 to 30/17039. Remeasure from clean f8b626f0: lines 221-393 are the same 173-line / 26767-byte suffix measured in the earlier proposal, now with current source blob 8e1f556504159c8042676a9c49efbeb448de2bfe. Independent full-byte reconstruction preserves every older record; 22 actual validator executions exercise equality, independent and combined overflow, plus rejection by prior limits and acceptance by approved controls. Exact staged canonical proof is required; subsequent Dart reading retains all other startup gates.

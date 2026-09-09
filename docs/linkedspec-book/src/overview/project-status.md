@@ -89,11 +89,22 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed seven of 55 children, including the complete ActionIR parser,
-callable normalization, function registry, spec AST, both CLI adapters and compiler, plus the
-corpus-runner prefix. This covers 10,500 fragments / 316,195 bytes. The latest 74 selected compiler,
-mutation, progressive/staged, recognition/observation and cursor-descriptor tests pass. Child `.1.8`
-continues corpus, loader and MCP reading after the approved history-capacity boundary below; startup `.3.4` remains pending.
+Physical Dart reading has completed eight of 55 children, including the complete ActionIR parser,
+callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner
+and spec loader, plus the generated MCP prefix. This covers 11,527 fragments / 345,207 bytes.
+All 42 selected corpus, loader, primary CLI and MCP binding tests pass, including the complete
+105-fixture corpus. Child `.1.9` reads the first generated-bundle byte window; startup `.3.4` remains pending.
+
+The corpus runner validates the whole fixture collection before applying a selector. For example,
+requesting one named case still reports malformed manifest entries elsewhere. Successful execution
+requires a match and structural equality between runtime output and `[expectedJson]`: map key order
+does not matter, while array order does. Execution failures are collected so later fixtures still run.
+
+Dart's file API distinguishes `SpecRequest.named('Demo')` from `SpecRequest.path('specs/Demo.spec')`.
+Named lookup checks the working directory's exact name, its `.spec` form, then explicitly supplied
+roots in order. An earlier directory does not hide a later regular file. Loading preserves strict
+UTF-8 text, including a BOM; the composed parser reports a leading BOM at the parse stage.
+These checks establish the covered behavior, while the separately owned limitations below remain open.
 
 **Known Dart limitation — attached switches:** a trailing non-branch statement can remain in the
 parsed body while being omitted from helper diagnostics and execution. A later `default` can also
