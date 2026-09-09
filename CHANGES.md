@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-09 — DART-STARTUP-READING.1.11: MCP wire and body suffix retention
+
+Read 1,500 fragments / 39,800 unchanged bytes through MCP server/wire EOF and spec parser line 744.
+All 16 selected tests pass. Fourteen source/validation/compiler controls confirm discarded regex/E
+suffixes, with valid and retained/rejected controls. Repair .2.6 is owned and gated; exact replay,
+public limitation and earlier evidence remain durable. Reading reaches 11/55; next .1.12.
+
 ## 2026-09-09 — DART-STARTUP-READING.1.10: MCP runtime and Unicode key order
 
 Read 1,500 fragments / 61,935 unchanged bytes through generated bundle/runtime EOF and server line 1019.

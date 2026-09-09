@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `c7e49a553576ec5750d3bc14112679b9123e1ce8` — clean tenth Dart reading base.
-- latest_completed_leaf: `DART-STARTUP-READING.1.10 - read MCP runtime; own Unicode key-order gap`.
+- activation_commit: `6f596d7ba88178182fa0c0987bfbaa3e64468fbf` — clean eleventh Dart reading base.
+- latest_completed_leaf: `DART-STARTUP-READING.1.11 - read wire and parser; own body suffix loss`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: `DART-STARTUP-READING.1.11` finishes MCP server/wire and starts the spec parser.
+- next_action: `DART-STARTUP-READING.1.12` finishes the spec parser and reads the staged registry prefix.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: Startup `.7` blocks recovery/purge; history-capacity approval is implemented under containment .8 / ADR0110. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.79` precede mutation setup; `.29` belongs to `.5`. The director approved the narrow capacity exception; other reading gates remain.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4982` is the twenty-ninth history segment; ADR `0110`
   authorizes exactly 31 collection files / 30 manifest lines / 17,039 manifest bytes; other ceilings remain unchanged.
-- latest_bootstrap_read: 2026-09-09 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading 10/55 children, 13,028 fragments / 472,678 bytes; 11 tests pass; Unicode key-order repair .2.5 owned with five probes; next .1.11.
+- latest_bootstrap_read: 2026-09-09 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading 11/55 children, 14,528 fragments / 512,478 bytes; 16 tests pass; body suffix repair .2.6 owned with fourteen probes; next .1.12.

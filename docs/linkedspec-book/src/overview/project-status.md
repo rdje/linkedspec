@@ -89,12 +89,12 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed ten of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed eleven of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
-spec loader, generated MCP bundle and contract runtime, plus the server through line 1019.
-This covers 13,028 fragments / 472,678 bytes. The latest 11 binding/decoded-dispatch tests pass.
+spec loader and MCP implementation, plus the spec parser through line 744.
+This covers 14,528 fragments / 512,478 bytes. The latest 16 strict-stdio/spec-parser tests pass.
 Earlier checkpoints retain the 105-fixture corpus and neutral bundle verification.
-Child `.1.11` finishes MCP server/wire reading and starts the spec parser; startup `.3.4` remains pending.
+Child `.1.12` finishes the spec parser and starts the staged registry; startup `.3.4` remains pending.
 
 The embedded MCP contract preserves three distinct outcomes. A native semantic response with
 `ok: false` remains a successful transport result, with `isError: false` and its diagnostics intact.
@@ -154,6 +154,15 @@ JSON values but different canonical text bytes. This does not establish that a n
 produces those keys. `DART-STARTUP-READING.2.5.1-.2.5.2` own affected-route proof and repair;
 `docs/knowledge/dart-mcp-unicode-key-order-gap.md` retains all five probes. The 11 passing existing
 tests do not close this defect; wire, other serializers and other backends remain unproven by it.
+
+**Known Dart limitation — discarded body suffixes:** `Top:: /x/ @unexpected` currently produces
+the same body AST as `Top:: /x/` and passes validation and normal compilation. The same loss
+occurs after an `E { return("ok") }` block, on both header and body lines. Moving the invalid
+suffix to its own line rejects it; explicit/bare I and malformed action-edge controls also reject.
+Fourteen exact source/AST/validation/compiler controls live in `docs/knowledge/dart-body-suffix-omission.md`.
+Gated repair `DART-STARTUP-READING.2.6` owns complete suffix retention and diagnostic compatibility.
+Passing existing tests does not close this defect; runtime, generated carriers and other backends
+were not exercised by this probe.
 
 **Approved continuity capacity:** the director approved intake `DART-STARTUP-READING.4`.
 Containment `.8` and ADR0110 admit exactly 31 change-history files and a manifest of

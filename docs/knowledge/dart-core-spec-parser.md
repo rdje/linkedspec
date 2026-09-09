@@ -37,3 +37,19 @@ the node shape returned by `specs/user_function_definition.spec`.
 Related facts: [[dart-frontend-ast-json-contract]], [[dart-backend-scaffold-package]],
 [[dart-frontend-validation]], [[dart-function-definition-shell-projection]],
 [[text-to-ast-backend-doctrine]].
+
+## 2026-09-09 — body collection reading and unsupported-suffix qualification
+
+`DART-STARTUP-READING.1.11` reads source lines 1-744: line/header/mode parsing, body collection,
+fluent continuation, inline/body loops and element selection through the split prefix.
+Permissive parsing can only defer validation for source retained in the AST. Fourteen direct
+controls confirm that regex and lifecycle-E suffixes can instead disappear: both header and
+body variants of `@unexpected` compile, while own-line/I/edge variants retain Raw and reject.
+[[dart-body-suffix-omission]] owns exact source locations, replay and gated repair .2.6.
+This qualifies the older general validation-boundary description without claiming a source fix.
+
+Sixteen existing spec-parser/strict-stdio tests pass at this checkpoint. The current focused
+parser-only command is
+`cd dart && bash ../tools/run_dart_project_data.sh test test/spec_parser_test.dart`.
+The remaining spec-parser source begins at line 745; its broad later mechanisms are not newly
+credited by this range.

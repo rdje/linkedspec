@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.10 completes ten of 55 children: 13,028 fragments / 472,678 bytes. Containment .8 admits the director-approved history capacity at 7d52c98e; switch, regex, trace, recognition and Unicode ordering defects .2.1-.2.5 are owned and gated; remaining required reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.11 completes eleven of 55 children: 14,528 fragments / 512,478 bytes. Containment .8 admits the director-approved history capacity at 7d52c98e; switch, regex, trace, recognition, Unicode ordering and body suffix defects .2.1-.2.6 are owned and gated; remaining required reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `DART-STARTUP-READING.1.10` completes generated bundle/runtime reading and server through line 1019. All 11 selected tests pass. Five controlled probes confirm a canonical Unicode key-order mismatch, owned by .2.5; prior evidence and other repairs remain intact.
+- `DART-STARTUP-READING.1.11` completes MCP server/wire and spec parser through line 744. All 16 selected tests pass. Fourteen controls confirm discarded regex/lifecycle-E suffixes, owned by .2.6; prior evidence and other repairs remain intact.
 
 ## Next Action
 
-- `DART-STARTUP-READING.1.11` finishes MCP server/wire and starts the spec parser after .1.10 commits, brief clearing and clean proof.
+- `DART-STARTUP-READING.1.12` finishes the spec parser and reads the staged registry prefix after .1.11 commits, brief clearing and clean proof.
 
 ## Recent Completions
+
+- `2026-09-09` — `DART-STARTUP-READING.1.11` reads 1,500 fragments / 39,800 bytes, passes 16 selected tests and owns body suffix repair .2.6 with fourteen controls.
 
 - `2026-09-09` — `DART-STARTUP-READING.1.10` reads 1,500 fragments / 61,935 bytes, passes 11 selected tests and owns canonical Unicode ordering .2.5.
 
@@ -48,8 +50,6 @@
 - `2026-09-09` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.3` independently verifies capacity, evidence retention, stable lookup and the complete Dart reserve.
 
 - `2026-09-08` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.2` implements the approved capacity exception; exact canonical proof governs landing.
-
-- `2026-09-08` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.1` records the measured capacity proposal, pending exception and exact successor ownership.
 
 ## History
 

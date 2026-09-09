@@ -45,3 +45,21 @@ contract, or ledger, closes the Dart parent, and hands off to Julia `.10.9.5`.
 
 Related facts: [[dart-mcp-decoded-server]], [[dart-native-mcp-server-plan]],
 [[mcp-2026-07-28-stdio-contract]], and [[mcp-implementation-admission-ledger]].
+
+## 2026-09-09 — complete wire reading and bounded current proof
+
+`DART-STARTUP-READING.1.11` reads server lines 1020-1092 and wire lines 1-683 through EOF.
+The detached-copy helper tracks active ancestors by identity, rejects cycles, non-finite
+numbers, non-string keys and excessive depth, and permits shared acyclic objects.
+Wire token preflight independently validates decoded duplicate keys, surrogate pairing, lexical
+numeric-ID kinds and safe ranges before decoding. LF framing strips one delimiter CR; final EOF
+does not strip it and explicitly rechecks payload length before decode. That source check
+differs from the Rust final-EOF omission owned by startup .65; no fresh EOF boundary probe
+or Rust outcome is claimed here. Prepared response emission, cancellation, flush and shutdown
+balance caller-owned streams/sinks and sanitize I/O failures.
+
+The existing strict-stdio and spec-parser selection passes 16 tests. The older admission totals
+above remain dated evidence, not a fresh complete package or ledger result. Wire serialization
+calls the canonical helper whose uncovered Unicode ordering boundary was established in
+[[dart-mcp-unicode-key-order-gap]] under .1.10. Reading that call does not supply a new wire
+Unicode execution result; .2.5 retains affected-route proof and repair.

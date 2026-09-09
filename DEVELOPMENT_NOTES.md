@@ -10,6 +10,16 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-09 — Dart body suffix loss precedes validation
+
+`DART-STARTUP-READING.1.11` completes MCP server/wire reading and spec parser through line 744.
+Both parser body loops drop unsupported suffixes after regex or E elements; validation cannot
+reject text absent from the AST. Fourteen controls distinguish four accepted malformed tails,
+four valid controls and six retained/rejected invalid cases. Gated .2.6 owns repair, coordinated
+with Rust startup .53 and the existing lifecycle-I diagnostic-precedence boundary.
+Wire source explicitly rechecks final-EOF payload size; no new EOF runtime outcome is claimed.
+Existing strict-stdio/spec-parser tests pass 16/16, without closing uncovered defects.
+
 ## 2026-09-09 — Dart MCP serializer order and enforcement boundaries
 
 `DART-STARTUP-READING.1.10` completes generated data and contract-runtime reading, then server
