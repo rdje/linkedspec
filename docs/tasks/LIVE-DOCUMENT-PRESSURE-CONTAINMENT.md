@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-- Status: `done` / bounded Dart ownership admitted; next `DART-STARTUP-READING.0`
+- Status: `done` / `.8` admits approved history capacity; next Dart `.1.8`
 - Roadmap lane: `Repository architecture / documentation sustainability`
 - Created: `2026-08-09`
-- Last updated: `2026-09-09` (`.7.4` closes capacity admission; canonical evidence belongs to this commit)
+- Last updated: `2026-09-09` (`.8` closes approved history capacity; exact canonical evidence belongs to its commit)
 - Owner: repo-local workflow
 
 ## Goal
@@ -58,10 +58,10 @@ or the README `.4` adoption/closeout that installs the guard.
 ## Task Tree
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-  Status: `done` (`.0-.7` complete; bounded Dart ownership admitted without source-reading credit)
+  Status: `done` (`.0-.8` complete; Dart reading remains 7/55)
   Goal: Replace measured oversized routed destinations with bounded views over durable stores.
   Depends on: `README-STABILITY-POLICY.4.2`
-  Children: `.0-.7`
+  Children: `.0-.8`
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0`
   Status: `done` (2026-08-09; committed atomically at `dc8dd896` as 176/300; brief cleared; clean proof passed;
@@ -391,11 +391,25 @@ or the README `.4` adoption/closeout that installs the guard.
   Verification: All 115 Dart paths / 80,296 physical lines / 2,471,305 bytes remain baseline-identical; the 55-group/169-range plan and separate 56-group control reverify. New pending tree and startup .3.4 bridge preserve existing evidence and repairs. Actual new-member/current-store measurements plus every original reserve allowance fit the unchanged controls. Focused preservation/book/doctrine and final canonical results are retained in this commit; no Dart reading credit.
   Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.4 - admit bounded Dart reading ownership`
 
+- ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.8`
+  Status: `done`
+  Goal: Admit exactly one additional immutable change-history member so committed Dart reading can continue.
+  Dependencies: Clean `f8b626f0c0f16fd6168aa9a4633b1179fe09acc2`; director greenlight of DART-STARTUP-READING.4's three measured controls.
+  Scope: change_history max_files 30 to 31; manifest max_lines 29 to 30 and max_bytes 16463 to 17039; indexed exact-limit ADR and governed rollover. Stable ownership remains .3; every other registry limit/route and every earlier immutable byte is retained.
+  Acceptance: Remeasure from the actual activation source; prove exact source/blob/range/hash/count, prior-record retention, full-byte chronology reconstruction, three-scalar-only registry change, boundary mutations and current pressure. Align intake, Knowledge, book and continuity; canonical commit, zero-byte brief and clean proof precede Dart .1.8. No source repair, cleanup/purge, further capacity or parked feature activation.
+  Verification tier: `canonical`
+  Focused checks: Independent registry/history preservation and reconstruction; actual routing validator boundaries; all doctrines, Knowledge freshness, both history checks, mdBook rendering and exact staged scope.
+  Canonical trigger: `History routing infrastructure and containment-parent closeout` — exact staged canonical receipt required before commit.
+  Verification: Governed segment 4982 preserves clean f8b626f0 CHANGES lines 221-393, blob 8e1f556504159c8042676a9c49efbeb448de2bfe, 173 lines / 26767 bytes, SHA-256 c00b7a2471b553ab83c98d104a731ac521966e5219be58daa289cd012c754aa7. Independent comparison preserves all prior manifest records and other history files; full archive reconstruction passes. Exactly three registry scalars change; 22 actual validator executions reject the old measured limits and exercise equality and independent/combined overflow. Manifest is 30 lines / 17039 bytes; collection 31 files / 48525 lines / 3528243 bytes. ADR0110 records the director greenlight; exact final preservation, doctrine, book and canonical results belong to this commit.
+  Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.8 - admit approved history member`
+
 ## Current Frontier
 
-This containment tree is closed after the exact canonical `.7.4` commit, brief clearing and clean proof. Resume `DART-STARTUP-READING.0` in `docs/tasks/DART-STARTUP-READING.md` to freeze bounded reading children. Startup `.3.4` remains the existing reading prerequisite/closeout owner; no Dart source-reading credit yet.
+This tree closes after .8’s exact canonical commit, brief clearing and clean proof. Resume `DART-STARTUP-READING.1.8` in `docs/tasks/DART-STARTUP-READING.md`. Dart reading remains 7/55; startup `.3.4` remains the reading prerequisite/closeout owner and all other startup gates stay in force.
 
 ## Decisions
+
+- `2026-09-09`: Director “Greenlighted !” authorizes the exact three-control proposal in DART-STARTUP-READING.4; ADR0110 and .8 implement it from clean f8b626f0. No other capacity or startup exception is granted.
 
 - `2026-09-08`: `.6` is bounded documentation consolidation with focused proof under ADR 0073; the parent remains open because the preserved Dart decomposition estimate needs `.7` capacity admission. No mechanical owner, limit or current product contract changes.
 
@@ -515,6 +529,8 @@ All files and transient proof stay on the repository filesystem; no off-volume c
 
 ## Verification Log
 
+- `2026-09-09` .8: 22 real-validator executions and exact registry/source/manifest/reconstruction checks pass. Preserve 2209 prior node blocks, 1026 Knowledge Markdown paths, 109 accepted ADRs and all prior history. Book rendering and memory pass; all doctrines and exact staged canonical evidence govern landing and are recorded in the commit.
+
 - `2026-09-08` `.6`: four-source Git/node/table/retained-note audit, byte-exact inverse reconstruction and corrected-reference provenance pass; metadata passes partitions 27/27, current-ID 10/10 and stable-marker controls. Final focused continuity proof belongs to its commit.
 
 Planning evidence: clean activation `0bcb5a36`; route report 20 surfaces / 62 routes / 32/32 mutations; exact
@@ -617,6 +633,8 @@ brief clearing, generated-residue census, post-pointer check, and clean proof re
 
 ## Commit Log
 
+- .8: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.8 - admit approved history member`.
+
 - `.6`: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.6 - consolidate verified task chronology and correct historical references`.
 
 `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0 - freeze bounded document store contract` — `dc8dd896`, atomic 176/300.
@@ -632,6 +650,8 @@ brief clearing, generated-residue census, post-pointer check, and clean proof re
 - `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5`: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5 - compact duplicate startup chronology without losing evidence`.
 
 ## Changelog
+
+- `2026-09-09`: .8 implements the director-approved history exception under ADR0110, closes Dart intake .4 and routes .1.8 after clean canonical landing.
 
 - `2026-09-08`: `.6` consolidates 264 records with complete retention; `.7` keeps future Dart capacity task-owned.
 

@@ -93,7 +93,7 @@ Physical Dart reading has completed seven of 55 children, including the complete
 callable normalization, function registry, spec AST, both CLI adapters and compiler, plus the
 corpus-runner prefix. This covers 10,500 fragments / 316,195 bytes. The latest 74 selected compiler,
 mutation, progressive/staged, recognition/observation and cursor-descriptor tests pass. Child `.1.8`
-continues corpus, loader and MCP reading after the history-capacity decision below; startup `.3.4` remains pending.
+continues corpus, loader and MCP reading after the approved history-capacity boundary below; startup `.3.4` remains pending.
 
 **Known Dart limitation — attached switches:** a trailing non-branch statement can remain in the
 parsed body while being omitted from helper diagnostics and execution. A later `default` can also
@@ -128,12 +128,13 @@ controls, including lifecycle evidence and pure controls, are preserved in
 own complete graph validation, implementation and carrier/public closeout. Passing prior finite
 fixtures do not establish this missing enforcement; other carriers/backends are not inferred.
 
-**Continuity prerequisite — history capacity:** the next rollover needs one additional immutable
-history member. Its measured manifest needs 30 lines / 17,039 bytes; current controls permit
-29 lines / 16,463 bytes and 30 collection files. Proposal `DART-STARTUP-READING.4` requests exactly
-31 files and that measured manifest capacity. The existing exception does not cover this increase.
-The completed reading record fits current limits after concise editing; every prior history byte
-is retained. This is a storage prerequisite, not a parser repair or feature activation.
+**Approved continuity capacity:** the director approved intake `DART-STARTUP-READING.4`.
+Containment `.8` and ADR0110 admit exactly 31 change-history files and a manifest of
+30 lines / 17,039 bytes. Governed rollover preserves 173 clean-source lines / 26,767 bytes
+as immutable segment 4982. Independent source/hash and complete-history reconstruction retain
+every earlier record; 22 executions of the actual capacity validator verify the boundaries.
+The exact staged canonical gate governs landing. Other root, segment and aggregate ceilings
+remain unchanged; this closes the storage prerequisite for the next reading child.
 
 The director's exception covers capacity infrastructure only; other reading/repair gates and the
 parked authoring and format ideas remain at their current status.

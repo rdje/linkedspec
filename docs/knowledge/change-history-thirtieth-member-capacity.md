@@ -35,3 +35,10 @@ LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3; the mandatory checkpoint owns this finite 
 A receipt-bound canonical gate must pass for the exact staged candidate before commit. This is required
 history continuity during source reading; runtime/public behavior and incomplete reading prerequisites
 remain unchanged. See `docs/decisions/0106-change-history-thirtieth-member-capacity.md`.
+
+## Subsequent approved capacity — 2026-09-09
+
+ADR0110 / containment .8 subsequently admit segment 4982, 31 collection files and
+30 manifest lines / 17,039 bytes. The earlier ADR0106 evidence above remains exact
+for its boundary. Current approval, actual provenance and reproducible preservation
+proof live in `docs/knowledge/dart-reading-history-capacity-blocker.md`.

@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.7 completes seven of 55 children: 10,500 fragments / 316,195 bytes. .4 awaits a narrow history-capacity exception before .1.8; switch, regex, trace and recognition defects .2.1-.2.4 are owned and gated; remaining required reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.7 completes seven of 55 children: 10,500 fragments / 316,195 bytes. containment .8 admits the director-approved history capacity before .1.8; switch, regex, trace and recognition defects .2.1-.2.4 are owned and gated; remaining required reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `DART-STARTUP-READING.1.7` completes compiler reading and begins corpus; 74 selected tests pass. Eight probes prove the generic effect classifier is disconnected, a binding write survives rollback, and observation closure omits structural edges. Gated .2.4 owns repair; earlier findings remain pending.
+- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.8` implements the director-approved three history controls under ADR0110. Exact source/blob/hash and full-history retention pass; 22 real-validator executions verify boundaries. Canonical proof binds the exact staged candidate. Dart reading remains 7/55; defects remain owned and gated.
 
 ## Next Action
 
-- `DART-STARTUP-READING.4` awaits a director decision on one additional history member and its exact manifest capacity. The next source child remains .1.8; .1.7 is committed within unchanged controls.
+- `DART-STARTUP-READING.1.8` resumes corpus/loader/MCP source reading after the canonical capacity commit, brief clearing and clean proof.
 
 ## Recent Completions
+
+- `2026-09-09` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.8` admits exactly one approved history member, preserving prior bytes and remaining limits.
 
 - `2026-09-09` — `DART-STARTUP-READING.1.7` reads 1,500 fragments / 47,088 bytes, passes 74 selected tests and owns recognition effect repair .2.4.
 
@@ -48,8 +50,6 @@
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.67` closes complete Rust reading; preserves pending repairs and routes Dart capacity first.
 
 - `2026-09-08` — `SESSION-STARTUP-READING.3.3.66` completes final Rust contract consumers; only parent closeout remains.
-
-- `2026-09-08` — `SESSION-STARTUP-READING.3.3.65` completes lifecycle/trace/typed/casing reading with precise carrier proof.
 
 ## History
 

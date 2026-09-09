@@ -123,6 +123,8 @@ changed* lives in git (layer D), not here.
 
 | [0109](0109-approved-dart-reading-capacity.md) | Approved aggregate task and Knowledge capacity for Dart reading | 2026-09-08 | accepted under containment `.7.2`; director exception granted | documentation, capacity, task-tree, knowledge, doctrine |
 
+| [0110](0110-change-history-thirty-first-member-capacity.md) | Approved single additional change-history member and exact manifest capacity | 2026-09-09 | accepted under containment `.8`; director greenlight granted | documentation, history, capacity, doctrine |
+
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /
    Decision / Consequences / Links`).

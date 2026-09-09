@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-09 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.8 - admit approved history member
+
+The director's “Greenlighted !” approves DART-STARTUP-READING.4's exact additional history exception. ADR0110 changes only three registry scalars: collection files 30 to 31 and manifest lines/bytes 29/16463 to 30/17039. Remeasure from clean f8b626f0: lines 221-393 are the same 173-line / 26767-byte suffix measured in the earlier proposal, now with current source blob 8e1f556504159c8042676a9c49efbeb448de2bfe. Independent full-byte reconstruction preserves every older record; 22 actual validator executions exercise equality, independent and combined overflow, plus rejection by prior limits and acceptance by approved controls. Exact staged canonical proof is required; subsequent Dart reading retains all other startup gates.
+
 ## 2026-09-09 — DART-STARTUP-READING.1.7 - read compiler; own recognition effect bypass
 
 RecognitionTransactionAuthority.classifyEffects rejects binding_write when directly called by neutral tests, but dart/lib has no production caller. Compiler observation effect closure follows explicit rule/functions and scans payloads without structural action/blind transitions. Runtime recognize_once executes the child before recording its attempt; rollback restores cursor/boundary/marks, not forbidden binding changes. Eight native/authority controls confirm seen changes from 0 to 1 through a recognized child and stays 1 after rollback, while pure rollback stays 0. Structural observation routes enter Observer I instead of rejecting. .2.4 owns complete graph integration and carrier/public proof; this intake does not broaden snapshot semantics or claim untested carriers.
