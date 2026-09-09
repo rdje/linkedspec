@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / `.1.23` complete; next `.1.24`
+- Status: `active` / `.1.24` complete; .5 awaits a capacity decision before .1.25
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
-- Last updated: `2026-09-09`
+- Last updated: `2026-09-10`
 - Owner: repo-local workflow
 
 ## Goal
@@ -22,7 +22,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - Existing startup repairs retain their IDs and evidence; new findings reuse those owners when applicable.
 - Repair implementation remains behind startup reading and policy gates; admission does not waive them.
 - Generics, libraries, builders, fileless MCP debugging and the approved format/language ideas remain parked.
-- Recovery/purge remains blocked by startup `.7`; `.4` owns a capacity proposal only. No infrastructure increase or artifact purge is implemented here.
+- Recovery/purge remains blocked by startup `.7`; capacity intakes .4/.5 own proposals only. No infrastructure increase or artifact purge is implemented in this tree.
 
 ## Acceptance Criteria
 
@@ -56,15 +56,15 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 23/55 children, 32,528/80,297 fragments and 1,030,832/2,471,305 bytes; twenty-nine entries through EOF
-  plus recognition_transaction.dart through line 483. Exact credit and comprehension remain in each completed node.
+- Current reading: 24/55 children, 34,028/80,297 fragments and 1,079,144/2,471,305 bytes; thirty-two entries through EOF
+  plus staged_ast_enrichment.dart through line 306. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
 - ID: `DART-STARTUP-READING`
   Status: `active`
   Goal: Complete bounded Dart reading and durable repair intake while preserving startup prerequisite ownership.
-  Children: `.0`, `.1`, `.2`, `.3`, `.4`
+  Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`
 
 - ID: `DART-STARTUP-READING.0`
   Status: `done`
@@ -85,7 +85,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Acceptance: Every child accounts for its exact source bytes and deltas, reconciles Knowledge before re-derivation,
     records comprehension and confirmed findings, runs necessary focused diagnostics and commits before the next child.
   Children: `.1.1-.1.55`; exact scopes and baseline evidence below, read in numeric order.
-  Verification: 23/55 children complete; `.1.1-.1.23` own exact reading/comprehension evidence, and all later children remain pending.
+  Verification: 24/55 children complete; `.1.1-.1.24` own exact reading/comprehension evidence, and all later children remain pending.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.1.1`
@@ -434,14 +434,19 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.23 - finish matching; own regex literal normalization`
 
 - ID: `DART-STARTUP-READING.1.24`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 24 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.23` committed; empty brief and clean repository.
   Scope: `dart/lib/src/runtime/recognition_transaction.dart` lines 484-965; `dart/lib/src/runtime/semantic_observation.dart` lines 1-113; `dart/lib/src/runtime/source_location.dart` lines 1-599; `dart/lib/src/runtime/staged_ast_enrichment.dart` lines 1-306
   Baseline evidence: 1500 fragments / 48312 bytes; ordered range SHA-256 `a09f9b09d23941bc183e07f9407082cdcd58bf093f1687190fff3e4c691d2725`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: 58 recognition/recursive-observation/gap/typed-source/semantic-index/staged tests; exact draft engineering-history rollover/source/manifest proof and restoration; exact ranges/current deltas, prior retention, all doctrines, both histories, Knowledge freshness, rendered mdBook and staged scope.
+  Canonical trigger: `none` — bounded required reading/reconciliation and a Knowledge link correction; no executable, contract or infrastructure change; .5 is a capacity proposal only.
+  Comprehension: Finish source-local recognition frame/gap synchronization, candidate/commit/tail transitions and detached entry slots. Checkpoint rejects any active stack token after restoration; attempts distinguish match presence from payload, terminal operations enforce exact attempt count, and misuse restores state before invalidation. Effect classification computes a recursive fixed point but its known production integration gap remains .2.4. Semantic observations detach two event kinds, hash UTF-8 input identity and use a synchronous optional sink; immutable derivation validates retained observations separately. Typed source uses private authority/source/scalar identities, exact code-unit boundary lookup, Unicode line/column/UTF-8 tables and ordered concatenation with owned-span validation. Staged entry definitions deep-own reusable snapshots/options, validate frozen registries, create fresh per-execution authority/cache and reject expired recursive contexts. .1.25 continues staged execution from line 307.
+  Findings: No new runtime defect is established. Mandatory engineering-history draft rollover exposes two exhausted count controls; .5 owns the exact unapproved proposal. A concise new record preserves this completed slice within current limits, leaving 50 bytes below rollover; full comprehension stays here and in linked cards. Existing recognition .2.4, semantic wrapper .2.8, numeric .2.12 and typed input_slice .2.14/.2.15 owners retain their evidence. Correct the recognition card's nonexistent Dart source-location link to the existing typed-source rollout authority; prior dated facts remain unchanged. Private source authority validation does not repair input_slice arithmetic or admit a parser-builder API.
+  Verification: Read recognition 484-965 through EOF, semantic_observation 1-113 through EOF, source_location 1-599 through EOF and staged_ast_enrichment 1-306 in full bounded outputs: 1,500 fragments / 48,312 baseline-identical bytes with unchanged digest. All 58 selected tests pass, including the existing gap primary and staged carrier consumers. The draft archive exactly preserves clean source lines 249-447 (199 lines / 31,079 bytes); routing rejects only files 27/26 and manifest lines 26/25. After verified restoration of only this uncommitted rollover, every old history byte remains unchanged and the root is 453 lines / 58,932 bytes. Range/retention audits, doctrines, histories, Knowledge and rendered-book proof belong to this commit.
+  Commit: `DART-STARTUP-READING.1.24 - finish recognition and source authority reading`
 
 - ID: `DART-STARTUP-READING.1.25`
   Status: `pending`
@@ -1097,11 +1102,22 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Verification: Director “Greenlighted !” approves exactly the three proposed controls. Implementation is separately owned by LIVE-DOCUMENT-PRESSURE-CONTAINMENT.8 from clean f8b626f0, with indexed ADR0110, actual-source remeasurement, exact history preservation, 22 real-validator executions and canonical proof. This intake grants no reading credit or further capacity; .1.8 resumes after that clean boundary.
   Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.8 - admit approved history member` (proposal intake routed and closed by its separately owned implementation)
 
+- ID: `DART-STARTUP-READING.5`
+  Status: `pending`
+  Goal: Obtain and route the engineering-history capacity exception required before further committed reading.
+  Dependencies: .1.24 committed with an empty brief and clean repository; director decision before additional infrastructure changes under ADR0109.
+  Scope: Proposal/intake only. Stable responsibility stays LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3; after approval, create a separately owned canonical implementation from a clean repository.
+  Proposal: engineering_notes max_files 26 to 27; its manifest max_lines 25 to 26. All byte, root, segment and aggregate limits, ownership, routes, verifier and prior immutable content remain unchanged.
+  Evidence: docs/knowledge/dart-reading-engineering-history-capacity-blocker.md retains the exact governed draft: clean 62b02fec DEVELOPMENT_NOTES lines 249-447, 199 lines / 31079 bytes, SHA-256 dc8219d5abb8a57b27ca22971d1ae48d19b192277585cf7d98529bdfea90cf8c. The routing gate rejects precisely 27/26 files and 26/25 manifest lines; manifest 15618/16384 bytes and aggregate 25860/27000 lines, 2775501/3145728 bytes fit. The verified draft was restored before .1.24 landing; a concise current record retains full linked evidence and leaves only 50 bytes under mandatory rollover.
+  Acceptance: Record the director decision. If approved, add/index an exact-limit ADR and a separately owned canonical implementation with actual-source remeasurement, immutable-history reconstruction, real-validator boundary checks and receipt-bound canonical proof; admit only these two controls. If declined, preserve history and obtain an alternative. Resume .1.25 only after a clean admitted capacity boundary; no further slot is preapproved.
+  Verification: `pending` director decision; .1.24 owns completed draft/source/retention proof and proposal preparation.
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.24` | `pending` | Finish recognition and read semantic/source authority plus staged entry after .1.23 commits cleanly. |
+| 1 | `DART-STARTUP-READING.5` | `pending` | Decide the exact engineering-history capacity proposal before further committed reading; .1.25 remains next source slice. |
 
 ## Decisions
 
@@ -1114,14 +1130,16 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Open Questions
 
-- None for source reading. The director approved .4’s exact history exception; ADR0110 and containment .8 own its implementation.
+- .5 requires a director decision for engineering_notes files 26→27 and manifest lines 25→26. Prior .4 approval covered change_history only.
 
 ## Blockers
 
-- History capacity is admitted by containment .8 under ADR0110; no reading blocker remains at this boundary. Source repairs .2.1-.2.16 remain gated.
+- Engineering-history capacity .5 blocks further committed reading after .1.24. Change-history capacity remains admitted by containment .8 / ADR0110. Source repairs .2.1-.2.16 remain gated.
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-10`: `.1.24` reads 1,500 fragments / 48,312 bytes, completing recognition, semantic observation and source location plus staged entry through 306; 58 tests pass. No new runtime defect; one stale Knowledge link corrected; prior owners remain intact.
 
 - `2026-09-09`: `.1.23` reads 1,500 fragments / 41,162 bytes, completing matching and recognition through 483; 99 tests pass. Six exact Dart/Perl regex controls own three literal corruptions under .2.16 with three agreements; prior mechanisms and owners remain intact.
 
@@ -1170,6 +1188,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- `2026-09-10`: `DART-STARTUP-READING.1.24 - finish recognition and source authority reading` closes the twenty-fourth reading child from clean 62b02fec.
+
 - `2026-09-09`: `DART-STARTUP-READING.1.23 - finish matching; own regex literal normalization` closes the twenty-third reading child from clean f9020412.
 
 - `2026-09-09`: `DART-STARTUP-READING.1.22 - finish interpreter; read matching and provenance` closes the twenty-second reading child from clean 4e872956.
@@ -1215,6 +1235,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-10`: `.1.24` completes three runtime files and reads staged entry through 306. Reading is 24/55; .5 owns engineering-history capacity before .1.25; no new runtime repair intake.
 
 - `2026-09-09`: `.1.23` completes matching and reads recognition through 483; .2.16 owns regex literal normalization. Reading is 23/55; next .1.24.
 

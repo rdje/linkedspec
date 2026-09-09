@@ -109,3 +109,14 @@ original callback error/stack. [[dart-semantic-observer-action-failure-wrapping]
 source, events, diagnostics and reproduction under gated Dart .2.8. The selected 100 tests
 include existing emitted semantic consumers, but the new gap is proved only through public
 native execution; broad route-admission claims must retain this composition qualification.
+
+## 2026-09-10 — observation record reading complete
+
+`DART-STARTUP-READING.1.24` reads semantic_observation.dart 1-113 through EOF.
+The two event kinds are regex_slot_selected and rule_result. Records hold
+immutable fields and produce detached JSON; result identity hashes UTF-8 input
+with an input:sha256 prefix. Slot records leave input/status absent; successful
+result records carry both. The optional sink executes synchronously. Immutable
+derivation validates retained observations separately; record construction alone
+does not establish that contract. The selected 58 tests pass; the earlier
+action-wrapper failure remains .2.8, with no new observer defect or repair.

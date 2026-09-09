@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `f902041248938a4c451e8c67fc629c8a59907da8` — clean twenty-third Dart reading base.
-- latest_completed_leaf: `DART-STARTUP-READING.1.23 - finish matching; own regex literal normalization`.
+- activation_commit: `62b02fecb4b2e8a2ed779281a37300e5e3ca1fe5` — clean twenty-fourth Dart reading base.
+- latest_completed_leaf: `DART-STARTUP-READING.1.24 - finish recognition and source authority reading`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: `DART-STARTUP-READING.1.24` finishes recognition and reads semantic/source authority plus staged entry.
+- next_action: Resolve `DART-STARTUP-READING.5` engineering-history capacity (files 26→27; manifest lines 25→26), then canonically implement before .1.25.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
-- blockers: Startup `.7` blocks recovery/purge; history-capacity approval is implemented under containment .8 / ADR0110. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.79` precede mutation setup; `.29` belongs to `.5`. The director approved the narrow capacity exception; other reading gates remain.
+- blockers: Startup `.7` blocks recovery/purge; new engineering-history .5 awaits a director decision. Prior change-history approval is implemented under containment .8 / ADR0110. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.79` precede mutation setup; `.29` belongs to `.5`. The director approved the narrow capacity exception; other reading gates remain.
 - current_rust_warning_debt: repeated clean carriers report 1,870 `pgen` plus 26 `rgx-core` output warnings;
   `RUST-DEPENDENCY-WARNING-ZERO.1-.7` own causal repair/pins/enforcement without suppression, after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4982` is the twenty-ninth history segment; ADR `0110`
   authorizes exactly 31 collection files / 30 manifest lines / 17,039 manifest bytes; other ceilings remain unchanged.
-- latest_bootstrap_read: 2026-09-09 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading 23/55 children, 32,528 fragments / 1,030,832 bytes; matching complete, recognition through 483; 99 tests pass; six regex comparisons own .2.16 literal normalization; next .1.24.
+- latest_bootstrap_read: 2026-09-10 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading 24/55 children, 34,028 fragments / 1,079,144 bytes; recognition/semantic/source complete, staged entry through 306; 58 tests pass; no new runtime defect; .5 capacity decision precedes .1.25.

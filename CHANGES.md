@@ -10,6 +10,16 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-10 — DART-STARTUP-READING.1.24: recognition and source authority
+
+Read 1,500 fragments / 48,312 unchanged bytes: recognition, semantic observation
+and source location through EOF, staged entry through 306. All 58 selected tests
+pass. Existing authorities reconcile; a stale Knowledge link is corrected.
+Reading is 24/55; prior defects remain owned and gated. Exact draft engineering-history
+rollover preserves every prior byte but needs files 26→27 and manifest lines 25→26.
+Intake .5 owns the unapproved proposal. Restoring only that verified draft and shortening
+the new engineering summary lets .1.24 land; 50 bytes remain below required rollover.
+
 ## 2026-09-09 — DART-STARTUP-READING.1.23: regex literal normalization
 
 Read 1,500 fragments / 41,162 unchanged bytes: matching through EOF and

@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-10 — Dart recognition/source reading
+
+.1.24: token misuse restores frame/gap state; source values keep authority identity;
+staged seeds create fresh execution state. 58 tests pass. Exact mechanisms and
+retained defects: DART-STARTUP-READING.1.24 and its linked Knowledge cards.
+
 ## 2026-09-09 — quantifier normalization needs lexical context
 
 Dart reading .1.23 completes matching and reads recognition through 483.

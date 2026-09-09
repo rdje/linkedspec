@@ -58,7 +58,7 @@ to rollout 4/9. The module stays unexported; Julia and Lua remain unavailable.
 
 - Neutral contract: [[recognition-transaction-neutral-contract]].
 - Rust precedent: [[rust-recognition-transaction-dormant-red]].
-- Dart typed-source authority: [[dart-typed-source-location-integration]].
+- Dart typed-source authority: [[typed-source-location-runtime-rollout-plan]].
 - Owner: [[FUTURE-PARITY-BACKLOG.14]] `.14.3.4.0.1-.3`; next owner `.14.3.5.0`.
 
 ## Reading qualification — 2026-09-09
@@ -76,3 +76,23 @@ token before reporting terminal-required. .1.24 continues synchronization and
 the remaining operations. The 99 selected tests pass; the already confirmed
 effect-classifier integration gap .2.4 remains open, and no authority repair or
 new transaction behavior is inferred from this reading.
+
+## 2026-09-10 — authority reading complete
+
+`DART-STARTUP-READING.1.24` reads recognition_transaction.dart 484-965 through EOF.
+Candidate prefix/interstitial gaps depend on committed cursor and accepted count;
+commit requires the cursor to reach the selected end, while tail installation
+does not advance it. Entry-slot maps detach from live invocation state.
+
+Checkpoint scans the invocation stack for any active token. Nested checkpoints,
+repeat attempts, zero-attempt terminals and cross-owner misuse restore the
+original frame/gap snapshot before invalidation. Match presence remains separate
+from payload; commit retains staged state, rollback restores it. The source
+classifier computes the neutral effect fixed point; its disconnected production
+integration remains [[dart-recognition-effect-integration-gap]] and .2.4.
+
+All 58 selected recognition/observation/gap/source/semantic/staged tests pass.
+The stale typed-source link now targets the existing rollout card; its Dart
+section owns private authority/source/scalar identities, exact code-unit
+boundaries and ordered owned-span concatenation. This core reconciliation does
+not repair the caller arithmetic in [[dart-input-slice-boundary-gaps]].

@@ -72,3 +72,19 @@ Related: [[dart-staged-ast-enrichment-marker-provenance]],
 [[dart-progressive-span-dispatch-authority]],
 [[dart-staged-ast-enrichment-recursive-authority]], and ADR `0088`.
 See also [[dart-staged-ast-enrichment-carriers-admission]].
+
+## 2026-09-10 — staged entry definitions reconciled
+
+`DART-STARTUP-READING.1.24` reads staged_ast_enrichment.dart 1-306. Each sibling
+receives a fresh mutable context. Recursive safe points share remaining limits
+and cancellation/deadline state, rebase source provenance and reject unavailable
+or expired authority; the constructor validates nonnegative budgets and positive
+depth/call caps.
+
+The reusable seed deep-owns logical snapshots/options and freezes callback maps.
+It validates options and registry at construction, then creates fresh registry,
+cache, options and recursive authority per execution. Factory failures become
+typed snapshot errors. This private seed is not serialized and does not admit
+the proposed parser builder. The selected 58 tests pass; .1.25 continues the
+state and execution implementation. Existing one-depth and recursive owners
+retain their separate contracts and earlier evidence.
