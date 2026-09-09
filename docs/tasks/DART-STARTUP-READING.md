@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / `.1.18` complete; next `.1.19`
+- Status: `active` / `.1.19` complete; next `.1.20`
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-09`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 18/55 children, 25,028/80,297 fragments and 822,211/2,471,305 bytes; twenty-seven entries through EOF
-  plus interpreter.dart through line 5174. Exact credit and comprehension remain in each completed node.
+- Current reading: 19/55 children, 26,528/80,297 fragments and 865,657/2,471,305 bytes; twenty-seven entries through EOF
+  plus interpreter.dart through line 6674. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -85,7 +85,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Acceptance: Every child accounts for its exact source bytes and deltas, reconciles Knowledge before re-derivation,
     records comprehension and confirmed findings, runs necessary focused diagnostics and commits before the next child.
   Children: `.1.1-.1.55`; exact scopes and baseline evidence below, read in numeric order.
-  Verification: 18/55 children complete; `.1.1-.1.18` own exact reading/comprehension evidence, and all later children remain pending.
+  Verification: 19/55 children complete; `.1.1-.1.19` own exact reading/comprehension evidence, and all later children remain pending.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.1.1`
@@ -359,14 +359,19 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.18 - read helper dispatch; own callback identity gap`
 
 - ID: `DART-STARTUP-READING.1.19`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 19 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.18` committed; empty brief and clean repository.
   Scope: `dart/lib/src/runtime/interpreter.dart` lines 5175-6674
   Baseline evidence: 1500 fragments / 43446 bytes; ordered range SHA-256 `6773e512221317f9ae4d6328c1b6e5ac2637b40deb6df0354011c5848b64b768`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Existing Dart interpreter/binding/source/logical/diagnostic/mutation consumers; nine native/SpecFile-JSON hash controls and nine Perl facade/generated-source comparisons; exact ranges/current deltas and prior evidence retention; all doctrines, both histories, Knowledge freshness, mdBook rendering and staged scope.
+  Canonical trigger: `none` — bounded required reading and defect intake; no executable, contract or infrastructure change.
+  Comprehension: Explicit writes and helper mutations guard identity before evaluating operands; push distinguishes implicit edge/rule accumulators from explicit targets. Array construction expands explicit splice values while hash construction pairs raw arguments before a map-only merge. Diagnostic/logical arity checks precede effects; fluent receiver dispatch selects copied typed views. Split/substitution/end mutations rebind only their documented statement shapes. Capture helpers project through source authority, update marks/cursors only after successful projection, and boundary capture selects the earliest valid target match. Eager logical arguments differ from lazy coalesce. The range ends inside passive action-child tracing; .1.20 finishes dispatch and begins supporting value helpers.
+  Findings: Nine Dart native/reconstructed controls and nine source-backed Perl comparisons establish constructor splice pairing/order loss. Leading/middle map splices create container-text keys and lose fields; late map merging defeats authored duplicate order; flat_array is not recognized as a hash splice. Perl's flat_array control succeeds, while six map forms lower to its already-owned unsupported hash sentinel. New .2.11.1-.2.11.3 own Dart contract reconciliation, repair and carrier/public proof alongside FUTURE-PARITY-BACKLOG.5, which also already owns the three dropped array-transform rebindings seen here.
+  Verification: Read interpreter 5175-6674 in six complete 250-line outputs. All 1,500 fragments / 43,446 bytes remain baseline-identical with pinned digest unchanged. All 122 selected tests pass, including existing emitted and CLI consumers. Nine exact native/reconstructed outputs and nine Perl facade/source comparisons pass; new Dart emitted or other-backend results are not inferred. The splice-classifier diagnostic excerpt beyond 6674 adds no whole-file reading credit. Exact ranges, retained evidence, doctrines, histories, Knowledge and rendered-book proof belongs to this commit.
+  Commit: `DART-STARTUP-READING.1.19 - read helper implementations; own hash splice pairing`
 
 - ID: `DART-STARTUP-READING.1.20`
   Status: `pending`
@@ -732,11 +737,11 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Status: `pending`
   Goal: Reconcile and retain ownership of every confirmed Dart finding established during the reading.
   Dependencies: Findings from `.1`; implementation additionally requires startup `.3`, `.4` and `.5`.
-  Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`, `.2.5`, `.2.6`, `.2.7`, `.2.8`, `.2.9`, `.2.10`; further confirmed findings receive disjoint owners here.
+  Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`, `.2.5`, `.2.6`, `.2.7`, `.2.8`, `.2.9`, `.2.10`, `.2.11`; further confirmed findings receive disjoint owners here.
   Acceptance: Cross-reference existing owners for known defects; create disjoint bounded repair children here
     immediately for new confirmed defects, with mechanism, source, reproduction, acceptance and unblock conditions.
     If no new repair is needed, close this intake with an explicit complete reconciliation rather than inventing work.
-  Verification: `pending`; `.1.3` owns attached-switch omission/default replacement under `.2.1`; `.1.5` confirms regex-brace action scanning and lifecycle validation defects under `.2.2`. Reading .1.6 confirms numeric trace overflow and reset-before-failure under .2.3. Reading .1.7 confirms disconnected recognition effect validation, leaked writes after rollback and observation edge-closure bypass under .2.4. Reading .1.10 confirms MCP Unicode key-order divergence under .2.5. Reading .1.11 confirms regex/lifecycle-E body suffix loss under .2.6. Reading .1.12 confirms compact fluent argument corruption under .2.7 and outer regex-brace truncation under existing .2.2.2. Reading .1.13 confirms standalone body-fluent suffix loss under existing .2.6. Reading .1.16 confirms semantic observer error/stack loss through action child calls under .2.8; startup .37 retains nested progressive authority findings from .1.15. Reading .1.17 confirms mixed-control return escape and skipped attached else under .2.9. Reading .1.18 confirms helper-name callback recursion collision and lost bound identity under .2.10. No repair implementation is admitted before startup gates.
+  Verification: `pending`; `.1.3` owns attached-switch omission/default replacement under `.2.1`; `.1.5` confirms regex-brace action scanning and lifecycle validation defects under `.2.2`. Reading .1.6 confirms numeric trace overflow and reset-before-failure under .2.3. Reading .1.7 confirms disconnected recognition effect validation, leaked writes after rollback and observation edge-closure bypass under .2.4. Reading .1.10 confirms MCP Unicode key-order divergence under .2.5. Reading .1.11 confirms regex/lifecycle-E body suffix loss under .2.6. Reading .1.12 confirms compact fluent argument corruption under .2.7 and outer regex-brace truncation under existing .2.2.2. Reading .1.13 confirms standalone body-fluent suffix loss under existing .2.6. Reading .1.16 confirms semantic observer error/stack loss through action child calls under .2.8; startup .37 retains nested progressive authority findings from .1.15. Reading .1.17 confirms mixed-control return escape and skipped attached else under .2.9. Reading .1.18 confirms helper-name callback recursion collision and lost bound identity under .2.10. Reading .1.19 confirms hash splice pairing/order loss under .2.11, coordinated with FUTURE-PARITY-BACKLOG.5. No repair implementation is admitted before startup gates.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.2.1`
@@ -889,6 +894,37 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Verification: `pending`; nine native/SpecFile-JSON controls confirm four false recursion rejections for distinct nested with/map_leaves callbacks and incorrect with identity/cycle for real helper-mediated cb recursion. Single/sequential with and mixed map/reduce succeed; direct cb recursion reports cb correctly. _executeCodeblockValue keys activeCodeblocks by its name argument; helper/receiver/tree callers pass their helper name. Exact replay and locations live in docs/knowledge/dart-callback-helper-recursion-identity-gap.md. No fresh generated/emitted or other-backend defect result is claimed.
   Commit: `pending`
 
+- ID: `DART-STARTUP-READING.2.11`
+  Status: `pending`
+  Goal: Preserve authored hash-constructor splices and pair order in Dart.
+  Dependencies: Startup `.3`, `.4` and `.5`; finding from `.1.19`; coordinate existing FUTURE-PARITY-BACKLOG.5 helper-context decisions.
+  Children: `.2.11.1`, `.2.11.2`, `.2.11.3`
+  Evidence: docs/knowledge/dart-hash-splice-pairing-gap.md retains nine native/SpecFile-JSON cases and nine Perl facade comparisons. Dart pairs raw aggregate arguments before a late map-only merge, creating container-text keys, losing following fields and overriding later authored duplicates. flat_array is absent from hash splice classification. Perl handles the flat_array control correctly; all six map-splice cases lower to its already-owned unsupported hash sentinel. Plain pairs and ordinary nested maps succeed on both backends.
+
+- ID: `DART-STARTUP-READING.2.11.1`
+  Status: `pending`
+  Goal: Resolve exact constructor token and map splice expectations without selecting a host's incidental behavior.
+  Dependencies: Startup gates; coordinate FUTURE-PARITY-BACKLOG.5.
+  Acceptance: Freeze independent expected results for leading, middle, trailing, repeated and empty splices, duplicate order, direct/receiver aliases and ordinary nested values. Reconcile current Dart documentation, Lua's dated ordered-splice contract and the fresh Perl flat-array success/map-sentinel distinction. Separate already-owned odd-arity and map list-context decisions from the Dart loss of authored pairs; route other backend findings to their existing owners. Preserve explicit syntax, once-only ordered evaluation, copy isolation and removed-selector rejection.
+  Verification: `pending`; intake verifies nine Dart native/reconstructed cases and nine Perl facade comparisons, not all accepted spellings or backend carriers.
+  Commit: `pending`
+
+- ID: `DART-STARTUP-READING.2.11.2`
+  Status: `pending`
+  Goal: Implement the resolved Dart constructor splice stream before key/value insertion.
+  Dependencies: `.2.11.1` and startup gates.
+  Acceptance: Remove raw aggregate pairing and the out-of-order second map merge; recognize the resolved direct/receiver splice shapes, including flat_array, and preserve subsequent ordinary pairs and last-authored duplicate behavior. Keep ordinary aggregates nested, copy results deeply and evaluate arguments exactly once in authored order. Lock empty/multiple splices, alias forms, mutation isolation and invalid/odd-shape diagnostics against the resolved contract.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-STARTUP-READING.2.11.3`
+  Status: `pending`
+  Goal: Close Dart constructor splice repair across supported carriers and public evidence.
+  Dependencies: `.2.11.2`.
+  Acceptance: Prove native, SpecFile reconstruction, generated-plan and fresh emitted execution with independent output/effect/copy controls; run direct-dependent constructor, binding, corpus and public checks. Update the book and canonical facts, retain separately unresolved FUTURE-PARITY-BACKLOG.5 semantics, and use canonical verification at public closeout. Do not infer other backend success from Dart carrier agreement.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `DART-STARTUP-READING.3`
   Status: `pending`
   Goal: Close Dart reading with exact coverage, current-delta, comprehension and child-commit proof.
@@ -914,7 +950,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.19` | `pending` | Continue interpreter helper implementations after .1.18 commits cleanly. |
+| 1 | `DART-STARTUP-READING.1.20` | `pending` | Finish action-child dispatch and read supporting value helpers after .1.19 commits cleanly. |
 
 ## Decisions
 
@@ -931,10 +967,12 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Blockers
 
-- History capacity is admitted by containment .8 under ADR0110; no reading blocker remains at this boundary. Source repairs .2.1-.2.10 remain gated.
+- History capacity is admitted by containment .8 under ADR0110; no reading blocker remains at this boundary. Source repairs .2.1-.2.11 remain gated.
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-09`: `.1.19` reads 1,500 fragments / 43,446 bytes; 122 selected tests pass. Nine Dart native/reconstructed controls and nine Perl facade/source comparisons own hash splice pairing/order repair under .2.11; existing helper caveats retain FUTURE-PARITY-BACKLOG.5.
 
 - `2026-09-09`: `.1.18` reads 1,500 fragments / 45,330 bytes; 140 selected tests pass. Nine native/reconstructed controls own false nested-callback cycles and helper-mediated identity loss under .2.10; earlier repairs remain intact.
 
@@ -973,6 +1011,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- `2026-09-09`: `DART-STARTUP-READING.1.19 - read helper implementations; own hash splice pairing` closes the nineteenth reading child from clean a19fbe2f.
+
 - `2026-09-09`: `DART-STARTUP-READING.1.18 - read helper dispatch; own callback identity gap` closes the eighteenth reading child from clean 8975ac84.
 
 - `2026-09-09`: `DART-STARTUP-READING.1.17 - read value execution; own mixed control gap` closes the seventeenth reading child from clean 8b7a4a1a.
@@ -1008,6 +1048,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-09`: `.1.19` reads interpreter through 6674 and owns hash splice repair .2.11. Reading is 19/55; next .1.20.
 
 - `2026-09-09`: `.1.18` reads interpreter through 5174 and owns callback recursion identity repair .2.10. Reading is 18/55; next .1.19.
 

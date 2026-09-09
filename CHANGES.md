@@ -10,6 +10,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-09 — DART-STARTUP-READING.1.19: hash splice pairing
+
+Read 1,500 fragments / 43,446 unchanged bytes through interpreter line 6674.
+All 122 selected tests pass. Nine native/reconstructed hash cases and nine Perl
+facade/source comparisons own Dart splice pairing/order repair under .2.11;
+FUTURE-PARITY-BACKLOG.5 retains existing helper caveats. Exact replay and book
+limitation are durable. Reading reaches 19/55; next .1.20. No executable change.
+
 ## 2026-09-09 — DART-STARTUP-READING.1.18: callback recursion identity
 
 Read 1,500 fragments / 45,330 unchanged bytes through interpreter line 5174.

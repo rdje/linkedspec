@@ -55,3 +55,17 @@ Related facts: [[dart-runtime-array-helpers]],
 [[dart-runtime-core-value-capture-helpers]], [[dart-runtime-backtrack-cursor-helpers]],
 [[terse-hash-receiver-value-chains]],
 [[terse-merge-hash-bare-overlay-boundary]], [[typed-wrapper-quoted-name-boundaries]].
+
+## 2026-09-09 — constructor splicing qualification
+
+The constructor support above is incomplete for positioned splices. _callHash pairs raw
+arguments first, so leading/middle flat(meta) can become a container-text key and consume
+the following field name. Its later map merge also overrides later authored duplicates.
+flat_array is absent from hash splice classification and its list becomes one raw token.
+
+[[dart-hash-splice-pairing-gap]] retains nine native/SpecFile-JSON cases and nine Perl
+facade/source comparisons. Perl handles the flat_array control but lowers the six complete
+map-splice bodies to its existing unsupported hash sentinel. Plain pairs and ordinary
+nested maps succeed on both backends. DART-STARTUP-READING.2.11 owns Dart repair and
+carrier proof with FUTURE-PARITY-BACKLOG.5's helper-context decisions; no repair or
+fresh Dart emitted result is claimed by the .1.19 reading.

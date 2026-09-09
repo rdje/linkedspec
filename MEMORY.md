@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `8975ac8479000127fc2ea0700e7929936328ec3a` — clean eighteenth Dart reading base.
-- latest_completed_leaf: `DART-STARTUP-READING.1.18 - read helper dispatch; own callback identity gap`.
+- activation_commit: `a19fbe2f9a0db12856e21e2dcc36d441ec34efba` — clean nineteenth Dart reading base.
+- latest_completed_leaf: `DART-STARTUP-READING.1.19 - read helper implementations; own hash splice pairing`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: `DART-STARTUP-READING.1.19` continues interpreter helper implementations.
+- next_action: `DART-STARTUP-READING.1.20` finishes action-child dispatch and reads supporting value helpers.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: Startup `.7` blocks recovery/purge; history-capacity approval is implemented under containment .8 / ADR0110. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.79` precede mutation setup; `.29` belongs to `.5`. The director approved the narrow capacity exception; other reading gates remain.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4982` is the twenty-ninth history segment; ADR `0110`
   authorizes exactly 31 collection files / 30 manifest lines / 17,039 manifest bytes; other ceilings remain unchanged.
-- latest_bootstrap_read: 2026-09-09 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading 18/55 children, 25,028 fragments / 822,211 bytes; 140 tests pass; nine native/reconstructed controls own callback identity repair .2.10; next .1.19.
+- latest_bootstrap_read: 2026-09-09 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading 19/55 children, 26,528 fragments / 865,657 bytes; 122 tests pass; nine native/reconstructed hash cases and nine Perl comparisons own Dart .2.11 with existing helper caveats retained; next .1.20.

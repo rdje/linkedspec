@@ -10,6 +10,15 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-09 — hash arguments must be spliced before pairing
+
+`DART-STARTUP-READING.1.19` reads guarded helper mutations, constructors, typed capture,
+logical dispatch and action-child entry through interpreter 6674. All 122 selected tests
+pass. Nine Dart native/reconstructed cases show raw aggregate pairing loses fields and a
+late map merge defeats authored duplicates; flat_array is omitted. Nine Perl facade/source
+comparisons separate successful flat_array from the already-owned map-helper sentinel.
+New .2.11 owns Dart repair/carrier proof with FUTURE-PARITY-BACKLOG.5; prior evidence remains.
+
 ## 2026-09-09 — helper names are not callback recursion identities
 
 `DART-STARTUP-READING.1.18` reads observation completion, guarded receiver mutation,

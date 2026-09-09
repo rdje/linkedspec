@@ -89,14 +89,14 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed eighteen of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed nineteen of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
 parser bridge, function-shell projection, bounded child-parse authority and generated rule plan,
-plus the interpreter through line 5174. This covers 25,028 fragments / 822,211 bytes.
-The latest 140 selected Dart interpreter/callable/variadic/mutation/observation/source/logical/
-diagnostic tests pass, including their existing emitted and CLI consumers. Child `.1.19`
-continues helper implementations; startup `.3.4` remains pending. Earlier evidence retains its checkpoints.
+plus the interpreter through line 6674. This covers 26,528 fragments / 865,657 bytes.
+The latest 122 selected Dart interpreter/binding/source/logical/diagnostic/mutation tests pass,
+including their existing emitted and CLI consumers. Child `.1.20` finishes action-child dispatch
+and reads supporting value helpers; startup `.3.4` remains pending. Earlier checkpoints retain their evidence.
 
 The function shell checks the returned definition's text against scalar spans, reconciles staged
 body metadata and removes declarations while preserving line breaks. The private progressive
@@ -229,6 +229,17 @@ native/reconstructed controls are retained in
 `docs/knowledge/dart-callback-helper-recursion-identity-gap.md`. Pending repair
 `DART-STARTUP-READING.2.10` owns distinct callback nesting and retained named recursion.
 No fresh emitted or other-backend result is claimed for this newly measured boundary.
+
+**Known Dart limitation — hash splice pairing:** with `meta = {"a": 1}`,
+`hash(flat(meta), "b", 2)` currently returns `{"{a: 1}":"b","a":1}`, losing field `b`.
+A leading `flat_array(["a", 1])` similarly becomes a container-text key; that flat-array
+control succeeds on Perl. Dart also merges all map splices last, defeating later authored
+duplicate values. Plain pairs and ordinary nested maps work on both backends. Perl's six
+map-splice controls return null through its separately owned unsupported-helper boundary,
+so those results do not define the intended map-splice output. Exact nine-case comparisons
+live in `docs/knowledge/dart-hash-splice-pairing-gap.md`. Pending `DART-STARTUP-READING.2.11`
+owns Dart repair and carrier proof alongside `FUTURE-PARITY-BACKLOG.5` helper decisions.
+Fresh Dart defect proof covers native/reconstructed execution; emitted results are not inferred.
 
 **Approved continuity capacity:** the director approved intake `DART-STARTUP-READING.4`.
 Containment `.8` and ADR0110 admit exactly 31 change-history files and a manifest of

@@ -113,3 +113,19 @@ The 140 selected interpreter/callable/variadic/mutation/observation/source/logic
 tests pass with existing emitted/CLI consumers. Nine native/reconstructed controls expose
 helper-name recursion collisions in [[dart-callback-helper-recursion-identity-gap]];
 new .2.10 owns repair. Previously owned effect/observer/mixed-control gaps remain open.
+
+## 2026-09-09 — helper implementations and constructor splice intake
+
+`DART-STARTUP-READING.1.19` reads lines 5175-6674. Write helpers guard identity before
+operands; push distinguishes explicit targets from implicit rule/edge accumulators.
+Array construction expands explicit splices; hash construction pairs raw values before
+a second map merge. Fluent receivers use copied typed views. Capture operations project
+through source authority before mark/cursor updates; boundary capture chooses the earliest
+valid rule match. Logical arguments are eager; coalesce remains lazy. Passive action-child
+tracing continues in .1.20.
+
+All 122 selected interpreter/binding/source/logical/diagnostic/mutation tests pass,
+including existing emitted/CLI consumers. [[dart-hash-splice-pairing-gap]] retains nine
+Dart native/reconstructed cases and nine Perl facade/source comparisons; new .2.11 owns
+Dart repair alongside FUTURE-PARITY-BACKLOG.5's already-owned helper-context decisions.
+The three dropped standalone array-transform rebindings remain owned by that backlog.
