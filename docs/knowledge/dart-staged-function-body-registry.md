@@ -60,3 +60,12 @@ authority, with later exact assignment-form parse_job admission documented in
 [[dart-staged-ast-enrichment-carriers-admission]] and
 [[dart-staged-ast-enrichment-current-depth-authority]]. That general runtime is not newly
 read or reverified by this v1 source/test selection; parked builder ideas stay parked.
+
+## 2026-09-09 — v1 registry tail complete
+
+`DART-STARTUP-READING.1.13` reads lines 678-761 through EOF: numeric function-index decoding,
+FunctionDefinition reconstruction retaining all original metadata while replacing bodyAst,
+ordered list equality, map/signature equality and contextual phase diagnostics containing
+job/path/parser/top/payload/span/failure-policy detail. This completes physical v1 registry
+reading. The 25-test registry/Unicode/function selection passes; general v2 runtime proof
+remains owned separately.

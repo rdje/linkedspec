@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `9a86da1317ec8a315bbc067f9708d77233777485` — clean twelfth Dart reading base.
-- latest_completed_leaf: `DART-STARTUP-READING.1.12 - finish spec parser; own lexical defects`.
+- activation_commit: `6c2e3ca4686a0c6cd23a16d47b6d8c3cddb3168a` — clean thirteenth Dart reading base.
+- latest_completed_leaf: `DART-STARTUP-READING.1.13 - read Unicode and function bridge; own fluent suffix loss`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: `DART-STARTUP-READING.1.13` finishes staged v1 helpers, reads Unicode labels and begins function parser/shell.
+- next_action: `DART-STARTUP-READING.1.14` finishes function-shell projection and begins bounded child-parse authority.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: Startup `.7` blocks recovery/purge; history-capacity approval is implemented under containment .8 / ADR0110. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.79` precede mutation setup; `.29` belongs to `.5`. The director approved the narrow capacity exception; other reading gates remain.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4982` is the twenty-ninth history segment; ADR `0110`
   authorizes exactly 31 collection files / 30 manifest lines / 17,039 manifest bytes; other ceilings remain unchanged.
-- latest_bootstrap_read: 2026-09-09 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading 12/55 children, 16,028 fragments / 554,108 bytes; 17 tests pass; ten lexical controls owned by .2.7/.2.2.2; next .1.13.
+- latest_bootstrap_read: 2026-09-09 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading 13/55 children, 17,528 fragments / 602,630 bytes; 25 tests and Unicode checks pass; seven fluent controls extend .2.6; next .1.14.

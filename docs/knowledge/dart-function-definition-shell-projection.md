@@ -53,3 +53,19 @@ Related facts: [[spec-defined-user-function-definition-parser]],
 [[function-body-parse-job-sidecar]], [[dart-staged-function-body-registry]],
 [[dart-core-spec-parser]], [[dart-frontend-ast-json-contract]],
 [[dart-middle-corpus-batch]].
+
+## 2026-09-09 — executable bridge and projection-prefix reading
+
+`DART-STARTUP-READING.1.13` reads all 282 executable parser-bridge lines and shell lines
+1-252. The bridge compiles caller-supplied parserSpecSource directly or reuses the default
+compiled parser. Default logical-spec discovery searches upward from cwd and script
+directories. Each parse uses the compiled parser to execute the source, normalizes the
+returned map/list wrapper and composes staged projection. Trace scopes balance success
+and failures, and parser/compiler/runtime errors retain their phase boundary.
+
+The shell prefix projects spec-produced definition/error nodes, then parses stripped rule
+source, keeping projection failures outside the narrower rule-parse wrapper. It distinguishes
+fixed/typed-v1 fields from variadic-v2 signatures and validates identifier spellings.
+The arity/body/span/sidecar remainder starts at line 253 and stays owned by .1.14.
+Twenty-five selected registry/Unicode/function parser/shell tests pass. No raw fn scanner
+or generic builder capability is added; proposed authoring work remains parked.

@@ -131,3 +131,10 @@ DART_BODY_SUFFIX_VERIFY
 
 Related: [[dart-core-spec-parser]], [[dart-frontend-validation]],
 [[standalone-lifecycle-block-audit]], [[rust-body-parser-lexical-boundary-defects]].
+
+## 2026-09-09 — standalone fluent adapter joins the same repair owner
+
+Seven additional controls under reading .1.13 identify an earlier discarded remainder in
+the standalone fluent adapter. [[dart-body-fluent-suffix-loss]] retains exact source,
+AST/validation/compiler outcomes and reproduction. Existing .2.6 now covers that adapter
+as well as both body loops; the fourteen original regex/E controls above remain unchanged.

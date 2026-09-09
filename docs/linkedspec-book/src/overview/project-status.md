@@ -89,13 +89,14 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed twelve of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed thirteen of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
-spec loader, MCP implementation and spec parser, plus the staged v1 registry through line 677.
-This covers 16,028 fragments / 554,108 bytes. The latest 17 spec-parser/staged-registry tests pass.
-Earlier checkpoints retain the 105-fixture corpus and neutral bundle verification.
-Child `.1.13` finishes staged v1 helpers, reads Unicode labels and begins function parser/shell;
-startup `.3.4` remains pending.
+spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier and function
+parser bridge, plus function-shell projection through line 252. This covers 17,528 fragments /
+602,630 bytes. The latest 25 selected tests pass, including emitted Unicode-label execution;
+neutral verification confirms all 806 ranges and the positive/negative/distinct fixtures.
+Child `.1.14` finishes function-shell projection and begins bounded child-parse authority;
+startup `.3.4` remains pending. Earlier corpus and contract evidence remains in its own checkpoints.
 
 The embedded MCP contract preserves three distinct outcomes. A native semantic response with
 `ok: false` remains a successful transport result, with `isError: false` and its diagnostics intact.
@@ -174,6 +175,14 @@ inside `/}/` and `/(})/` under existing regex repair `.2.2.2`; ordinary regex an
 controls execute true. All ten source/AST/compiler/native controls are reproduced in
 `docs/knowledge/dart-spec-lexical-boundary-defects.md`; generated carriers and other backends
 were not exercised by these probes.
+
+**Additional Dart suffix limitation — standalone body fluents:** `.Töp()` is parsed as method
+`T`, while `.Top-Rule()` and `.Top() @unexpected` produce the same body AST as `.Top()`.
+All three malformed forms pass validation and normal compilation. Own-line and invalid-prefix
+controls reject. These seven controls concern body syntax, not the Unicode rule-label table,
+and do not claim helper execution. Existing repair `DART-STARTUP-READING.2.6` now includes
+the fluent adapter's discarded remainder; `docs/knowledge/dart-body-fluent-suffix-loss.md`
+preserves exact reproduction. The passing Unicode tests do not close this uncovered boundary.
 
 **Approved continuity capacity:** the director approved intake `DART-STARTUP-READING.4`.
 Containment `.8` and ADR0110 admit exactly 31 change-history files and a manifest of

@@ -10,6 +10,17 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-09 — Unicode identity and body-fluent token completeness
+
+`DART-STARTUP-READING.1.13` completes staged v1 helpers, the 806-range Unicode classifier and
+function-parser bridge, then reads shell projection through line 252. Scalar membership and
+supplementary-safe prefix slicing remain exact; 25 selected tests and neutral 806/9/8/2 checks pass.
+The Lua suffix-loss fact prompts seven direct Dart controls: the standalone fluent adapter
+drops its parser helper's remainder, accepting truncated .Töp() and .Top-Rule() plus an invalid
+same-line tail. Existing .2.6 owns adapter and downstream body-loop retention together.
+The function bridge caches its default compiled parser, while shell projection consumes the
+spec-returned nodes. No Unicode table, parser behavior or parked builder capability changes.
+
 ## 2026-09-09 — compact argument extraction and outer block collection
 
 `DART-STARTUP-READING.1.12` completes spec-parser reading and staged v1 registry through line 677.

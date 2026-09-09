@@ -218,3 +218,22 @@ invalid-UTF-8 decode-stage/code pair, without executing the loaded parser.
 Fresh managed neutral regeneration passes 806 ranges, nine positive/eight negative
 fixtures and two distinct pairs. These are source/neutral observations, not a new
 native, generated, emitted-child or cross-backend runtime test result.
+
+## September 9 Dart classifier and selected identity checkpoint
+
+`DART-STARTUP-READING.1.13` reads all 882 lines of the Dart classifier, including every
+one of the 806 generated range rows. Inclusive binary search owns membership; complete
+labels reject empty strings; prefix scanning advances one or two UTF-16 units per accepted
+scalar and preserves original text without normalization or folding.
+
+Fresh neutral verification passes 806 ranges, nine positive/eight negative fixtures and
+two distinct pairs. The selected Dart registry/classifier/identity/isolation/function
+parser/shell tests pass 25/25, including emitted Unicode-label execution. This is the named
+selection, not a fresh complete backend or all-runtime Unicode gate.
+
+Reconciliation with the earlier Lua body-fluent repair led to seven fresh Dart controls:
+standalone .Töp(), .Top-Rule() and .Top() @unexpected lose their suffixes and compile.
+Own-line/no-ASCII-prefix controls retain Raw and reject. The cause is the body-fluent
+adapter's discarded remainder, not generated XID membership. [[dart-body-fluent-suffix-loss]]
+owns exact replay under existing Dart .2.6 and qualifies broad adjacent-grammar isolation
+claims for this additional route; the label classifier and prior identity evidence remain intact.
