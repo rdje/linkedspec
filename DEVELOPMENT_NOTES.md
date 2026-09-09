@@ -10,6 +10,16 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-09 — semantic callback passthrough must cross action blocks
+
+`DART-STARTUP-READING.1.16` reads rule cleanup, blind/regex repetition, gap phases,
+slot observations, action dispatch, lifecycle binding ownership and initial control/value
+flow through interpreter 2174. All 100 selected tests pass. Six native probes identify
+a missing semantic-wrapper passthrough in _executeActionBlock: explicit call(Child) loses
+observer error/stack identity before the outer parser can restore it. Direct/blind/final
+controls preserve both; the nonthrowing twin returns ok. New .2.8 owns repair and broader
+carrier/trace/cleanup proof; exact native events and diagnostics are durably reproduced.
+
 ## 2026-09-09 — calculated callback limits need inherited enforcement
 
 `DART-STARTUP-READING.1.15` finishes bounded dispatch and generated families, then reads

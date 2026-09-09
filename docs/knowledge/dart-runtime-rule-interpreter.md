@@ -58,3 +58,23 @@ This range ends at the execution try block; .1.16 owns its body and cleanup.
 The 82 selected progressive/interpreter/cursor/emitter tests pass, including emitted source.
 Known nested private-authority composition limits are separately preserved in
 [[dart-progressive-nested-authority-gap]]; no runtime repair is made by this reading slice.
+
+## 2026-09-09 — rule execution through initial value-block flow
+
+`DART-STARTUP-READING.1.16` reads lines 675-2174. Rule initialization and blind/regex
+selection retain terminal results/errors for recognition exit, then restore binding scope,
+rule stack, registers and recursion identity through nested cleanup. Blind AND collects
+implicit successful child values; repetition checks counts and progress around lifecycle
+hooks. Capture-enabled regex loops select/install before LS and commit after LE before IT;
+unflagged loops retain their own order. Slot identity checks precede typed observation and
+trace. Action edges track prior dispatch and collect repeated explicit returns where owned.
+
+Lifecycle I records initializer binding ownership before execution. The statement dispatcher
+separates attached/marker if and switch, attached while, structural markers and expressions.
+The range ends during local-return handling in value-block flow; .1.17 owns its continuation.
+Existing switch omission .2.1 and effect integration .2.4 remain unresolved.
+
+All 100 selected interpreter/cursor/recognition/observation/gap/repeated-result/slot tests pass,
+including emitted and gap-primary consumers. Six native callback probes nevertheless expose
+the action-block semantic failure translation documented in
+[[dart-semantic-observer-action-failure-wrapping]]; new .2.8 owns repair and carrier proof.

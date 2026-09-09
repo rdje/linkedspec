@@ -89,14 +89,14 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed fifteen of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed sixteen of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
 parser bridge, function-shell projection, bounded child-parse authority and generated rule plan,
-plus the interpreter through line 674. This covers 20,528 fragments / 692,714 bytes.
-The latest 82 selected Dart tests and neutral progressive checks pass, including existing
-emitted-source consumers. Child `.1.16` continues interpreter rule dispatch; startup `.3.4`
-remains pending. Earlier corpus, Unicode and contract evidence retains its own checkpoints.
+plus the interpreter through line 2174. This covers 22,028 fragments / 735,897 bytes.
+The latest 100 selected Dart tests pass, including existing emitted gap/recognition/semantic
+consumers and the gap primary route. Child `.1.17` continues value blocks and expression
+evaluation; startup `.3.4` remains pending. Earlier contract evidence retains its checkpoints.
 
 The function shell checks the returned definition's text against scalar spans, reconciles staged
 body metadata and removes declarations while preserving line breaks. The private progressive
@@ -199,6 +199,15 @@ twins, are retained in `docs/knowledge/dart-progressive-nested-authority-gap.md`
 Existing startup `.37.1` owns inherited budget/grant enforcement; `.37.2` owns the separate
 source-detail/diagnostic review. Passing ordinary carrier tests do not close this nested
 boundary; fixes remain behind the required-reading and policy gates.
+
+**Known Dart limitation — semantic observer failures inside actions:** a callback failure during
+an explicit `call(Child)` inside an action loses its original error object and stack. The
+action-block catch reports a runtime exception naming an internal wrapper. Direct rule,
+blind-dispatch and final-result failures preserve both identities; the same explicit call
+succeeds with a nonthrowing observer. Six public native controls are preserved in
+`docs/knowledge/dart-semantic-observer-action-failure-wrapping.md`. Pending repair
+`DART-STARTUP-READING.2.8` owns passthrough, nested-route coverage and trace/cleanup proof.
+Existing emitted consumer passes do not establish this new failure boundary.
 
 **Approved continuity capacity:** the director approved intake `DART-STARTUP-READING.4`.
 Containment `.8` and ADR0110 admit exactly 31 change-history files and a manifest of

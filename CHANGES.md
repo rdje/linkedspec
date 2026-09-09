@@ -10,6 +10,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-09 — DART-STARTUP-READING.1.16: rule execution and observer error identity
+
+Read 1,500 fragments / 43,183 unchanged bytes through interpreter line 2174.
+All 100 selected tests pass. Six public native controls show action-mediated child
+observation replaces the original callback error/stack; direct/blind/final controls preserve
+them. New .2.8 owns repair and carrier/cleanup proof. Exact replay and book limitation are
+durable; reading reaches 16/55, next .1.17. No executable change.
+
 ## 2026-09-09 — DART-STARTUP-READING.1.15: dispatch, runtime and nested authority
 
 Read 1,500 fragments / 45,477 unchanged bytes through bounded authority/generated-plan EOF

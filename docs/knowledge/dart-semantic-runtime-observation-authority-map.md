@@ -94,3 +94,18 @@ The governed input is the three UTF-8 bytes `61 62 0a` (`ab\n`). Its identity is
 `Top[0]` at scalar position 1, select `Top[1]` at position 2, then complete `Top` at position 2. Query case
 `runtime_events` must retain response digest
 `36897041c6f71b95b577ce7b38f42d3649c6adffc6c37c069944a90f6eb65887`.
+
+## 2026-09-09 — action-mediated child failure qualification
+
+`DART-STARTUP-READING.1.16` confirms a gap in the original-object/original-stack claim.
+Six public native controls show direct slot/final-result and blind-child slot failures
+preserve both identities, while an explicit call(Child) in lifecycle I wraps the same
+selected-slot callback failure as RuntimeInterpreterException. A final Top-result failure
+after that call still preserves identity, and the nonthrowing observer returns ok.
+
+_executeActionBlock has a diagnostic-output wrapper passthrough but lacks the semantic
+counterpart. Its broad catch translates the private wrapper before _parse can restore the
+original callback error/stack. [[dart-semantic-observer-action-failure-wrapping]] owns exact
+source, events, diagnostics and reproduction under gated Dart .2.8. The selected 100 tests
+include existing emitted semantic consumers, but the new gap is proved only through public
+native execution; broad route-admission claims must retain this composition qualification.
