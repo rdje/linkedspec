@@ -38,3 +38,23 @@ Related facts: [[dart-runtime-matching-state]], [[dart-compiled-spec-state]],
 [[dart-rule-local-cursor-execution]],
 [[dart-runtime-core-value-capture-helpers]], [[dart-runtime-value-control-tree-helpers]],
 [[dart-backend-interpreter-first-plan]].
+
+## 2026-09-09 — interpreter entry and generated plan reading
+
+`DART-STARTUP-READING.1.15` reads interpreter lines 1-674 plus all 68 generated-plan lines.
+The ten generated families derive seek/consume and blind dispatch from the validated family;
+ordered plan rows retain only label/family and value equality. Existing cursor authority
+remains [[dart-rule-local-cursor-execution]].
+
+Runtime entry validates compiled regex-slot and serialized mutation state, resolves the
+entry rule, creates an execution context and skips leading blank/comment lines. After rule
+execution it completes optional staged enrichment, builds result/cursor/lifecycle records
+and emits the optional semantic observation. Diagnostic and semantic sink failures preserve
+their original error/stack; exits and runtime diagnostics keep separate trace boundaries.
+
+Rule entry checks the selected generated family, builds the label/regex-index/cursor
+recursion key, and establishes fresh match registers plus binding/recognition scopes.
+This range ends at the execution try block; .1.16 owns its body and cleanup.
+The 82 selected progressive/interpreter/cursor/emitter tests pass, including emitted source.
+Known nested private-authority composition limits are separately preserved in
+[[dart-progressive-nested-authority-gap]]; no runtime repair is made by this reading slice.

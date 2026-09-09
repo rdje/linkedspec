@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.14 completes fourteen of 55 children: 19,028 fragments / 647,237 bytes. Containment .8 admits the director-approved history capacity at 7d52c98e; all confirmed Dart defects .2.1-.2.7 are owned and gated; remaining required reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.15 completes fifteen of 55 children: 20,528 fragments / 692,714 bytes. Containment .8 admits the director-approved history capacity at 7d52c98e; all confirmed Dart defects .2.1-.2.7 and startup .37 nested-authority findings are owned and gated; remaining required reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `DART-STARTUP-READING.1.14` completes function-shell projection and reads bounded child-parse authority through line 746. All 24 selected function/progressive tests pass, including emitted analysis/execution. No new confirmed defect; earlier evidence and repair ownership remain intact.
+- `DART-STARTUP-READING.1.15` completes bounded authority/generated plan and reads interpreter through line 674. All 82 selected tests and neutral progressive checks pass. Ten private-authority controls route nested budget/grant inheritance and diagnostic review to startup .37.1/.37.2; earlier repairs remain intact.
 
 ## Next Action
 
-- `DART-STARTUP-READING.1.15` finishes bounded child-parse authority, reads generated plan and begins interpreter after .1.14 commits, brief clearing and clean proof.
+- `DART-STARTUP-READING.1.16` continues interpreter rule dispatch and runtime behavior after .1.15 commits, brief clearing and clean proof.
 
 ## Recent Completions
+
+- `2026-09-09` — `DART-STARTUP-READING.1.15` reads 1,500 fragments / 45,477 bytes; 82 tests and neutral progressive checks pass; ten controls extend startup .37 ownership.
 
 - `2026-09-09` — `DART-STARTUP-READING.1.14` reads 1,500 fragments / 44,607 bytes; 24 function/progressive tests pass, including emitted analysis/execution.
 
@@ -48,8 +50,6 @@
 - `2026-09-09` — `DART-STARTUP-READING.1.2` reads another 1,500 fragments / 36,093 bytes and passes 50 focused tests.
 
 - `2026-09-09` — `DART-STARTUP-READING.1.1` reads the first 1,500 fragments / 60,321 bytes and passes nine AST/parser tests.
-
-- `2026-09-09` — `DART-STARTUP-READING.0` freezes exact bounded source-reading ownership without reading credit.
 
 ## History
 

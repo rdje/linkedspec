@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `ced8f47a7a764e2fee86727446b97fe3fe5078b6` — clean fourteenth Dart reading base.
-- latest_completed_leaf: `DART-STARTUP-READING.1.14 - finish function projection and read bounded authority`.
+- activation_commit: `8aa9fa88c2d3f45f45c5ac95c1b3ebd4c1fde69b` — clean fifteenth Dart reading base.
+- latest_completed_leaf: `DART-STARTUP-READING.1.15 - read dispatch and runtime; own nested authority gap`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: `DART-STARTUP-READING.1.15` finishes bounded child-parse authority, reads generated plan and begins interpreter.
+- next_action: `DART-STARTUP-READING.1.16` continues interpreter rule dispatch and runtime behavior.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: Startup `.7` blocks recovery/purge; history-capacity approval is implemented under containment .8 / ADR0110. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.79` precede mutation setup; `.29` belongs to `.5`. The director approved the narrow capacity exception; other reading gates remain.
@@ -57,4 +57,4 @@
   unchanged.
 - current_change_history_capacity: immutable segment `4982` is the twenty-ninth history segment; ADR `0110`
   authorizes exactly 31 collection files / 30 manifest lines / 17,039 manifest bytes; other ceilings remain unchanged.
-- latest_bootstrap_read: 2026-09-09 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading 14/55 children, 19,028 fragments / 647,237 bytes; 24 function/progressive tests pass, including emitted analysis/execution; next .1.15.
+- latest_bootstrap_read: 2026-09-09 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading 15/55 children, 20,528 fragments / 692,714 bytes; 82 tests and neutral progressive proof pass; nested authority findings owned by startup .37; next .1.16.

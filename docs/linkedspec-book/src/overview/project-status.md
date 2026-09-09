@@ -89,14 +89,14 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed fourteen of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed fifteen of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
-parser bridge and function-shell projection, plus bounded child-parse authority through line 746.
-This covers 19,028 fragments / 647,237 bytes. The latest 24 selected function/progressive tests
-pass, including independently analyzed and executed emitted Dart source. Child `.1.15` finishes
-bounded child-parse authority, reads the generated plan and begins the interpreter; startup
-`.3.4` remains pending. Earlier corpus, Unicode and contract evidence retains its own checkpoints.
+parser bridge, function-shell projection, bounded child-parse authority and generated rule plan,
+plus the interpreter through line 674. This covers 20,528 fragments / 692,714 bytes.
+The latest 82 selected Dart tests and neutral progressive checks pass, including existing
+emitted-source consumers. Child `.1.16` continues interpreter rule dispatch; startup `.3.4`
+remains pending. Earlier corpus, Unicode and contract evidence retains its own checkpoints.
 
 The function shell checks the returned definition's text against scalar spans, reconciles staged
 body metadata and removes declarations while preserving line breaks. The private progressive
@@ -189,6 +189,16 @@ controls reject. These seven controls concern body syntax, not the Unicode rule-
 and do not claim helper execution. Existing repair `DART-STARTUP-READING.2.6` now includes
 the fluent adapter's discarded remainder; `docs/knowledge/dart-body-fluent-suffix-loss.md`
 preserves exact reproduction. The passing Unicode tests do not close this uncovered boundary.
+
+**Known Dart limitation — nested progressive authority:** direct dispatch enforces its step,
+result-node and diagnostic byte limits, but a nested request can supply wider grants.
+A child reporting zero remaining steps still enters another child; another control regains
+an extra capability and raises effective step/result-node ceilings from two/one to 100.
+These are private callback API probes. Ten exact controls, including successful and rejected
+twins, are retained in `docs/knowledge/dart-progressive-nested-authority-gap.md`.
+Existing startup `.37.1` owns inherited budget/grant enforcement; `.37.2` owns the separate
+source-detail/diagnostic review. Passing ordinary carrier tests do not close this nested
+boundary; fixes remain behind the required-reading and policy gates.
 
 **Approved continuity capacity:** the director approved intake `DART-STARTUP-READING.4`.
 Containment `.8` and ADR0110 admit exactly 31 change-history files and a manifest of

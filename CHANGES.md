@@ -10,6 +10,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-09 — DART-STARTUP-READING.1.15: dispatch, runtime and nested authority
+
+Read 1,500 fragments / 45,477 unchanged bytes through bounded authority/generated-plan EOF
+and interpreter line 674. All 82 selected tests and neutral progressive checks pass.
+Ten private-authority controls confirm missing nested budget/grant inheritance; existing startup
+.37.1/.37.2 own repair/diagnostic review. Exact replay and book limitation are durable.
+Reading reaches 15/55; next .1.16. No executable or policy change.
+
 ## 2026-09-09 — DART-STARTUP-READING.1.14: function projection and bounded source authority
 
 Read 1,500 fragments / 44,607 unchanged bytes through function-shell EOF and bounded authority

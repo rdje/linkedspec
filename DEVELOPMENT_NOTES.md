@@ -10,6 +10,17 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-09 — calculated callback limits need inherited enforcement
+
+`DART-STARTUP-READING.1.15` finishes bounded dispatch and generated families, then reads
+interpreter entry/validation/context/observation setup through line 674. All 82 selected tests
+and neutral progressive checks pass. Ten direct callback controls prove a composition gap:
+request.remainingSteps is computed, but dispatchNested delegates to invocation.dispatch with
+fresh supplied grants. A child at zero nests anyway; wider arguments regain extra capability
+and 100-step/result-node ceilings. Direct cost/node/diagnostic byte enforcement works.
+Existing startup .37.1/.37.2 own inherited authority and the separate diagnostic source-detail
+review; no new task ID or cross-backend reproduction is inferred. Exact replay is Knowledge-owned.
+
 ## 2026-09-09 — function sidecars and callback-scoped source views
 
 `DART-STARTUP-READING.1.14` completes shell projection: scalar text/span checks, matching

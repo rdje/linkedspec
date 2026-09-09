@@ -72,3 +72,26 @@ Fresh selected proof passes 24 function/progressive tests, including all four do
 authority groups and seven admitted carrier groups. The latter independently analyzes and
 executes emitted Dart source. This is selected Dart evidence, not a fresh complete-backend
 or all-runtime gate; known recognition integration repair .2.4 retains its separate owner.
+
+## 2026-09-09 — dispatch suffix and nested-authority qualification
+
+`DART-STARTUP-READING.1.15` reads lines 747-1504 through EOF. Dispatch validates logical
+identity, exact direct source span, transaction state, registry/top-rule access and the
+supplied capability/policy intersection. Safe points check the shared token/deadline and
+cost against shared remaining steps plus the newly computed maxSteps, then charge before
+callback entry. Repeated parser/top/source spans must be contained and strictly smaller;
+depth and total-call limits apply across identities. Callback cleanup removes the active
+frame and expires the source view even on failure. Result copying counts nodes, rejects
+cycles, live/unsupported values and reserved field tokens; diagnostic truncation is UTF-8.
+
+Fresh ten-case composition proof narrows the earlier claims: direct cost/result-node/
+diagnostic-byte limits reject or truncate as expected, but nestedDispatch delegates to the
+invocation without inheriting the active callback's effective grants or remainingSteps.
+A zero-remaining callback still nests; another supplies wider capabilities/ceilings and
+regains them. [[dart-progressive-nested-authority-gap]] preserves the full private API replay
+under existing startup .37.1/.37.2. Input visibility and outward source-detail containment
+remain separate review questions; no authored or other-backend gap is inferred.
+
+Eighty-two selected authority/carrier/interpreter/cursor/emitter tests and neutral
+9/9/116/public60 checks pass, including existing emitted execution. Those consumers
+remain valid for their covered routes and do not close these newly combined boundaries.
