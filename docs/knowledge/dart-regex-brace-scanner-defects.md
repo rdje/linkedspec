@@ -70,3 +70,15 @@ DART_REGEX_PROBE
 
 Related: [[dart-actionir-ast-parser]], [[dart-frontend-validation]],
 [[rust-body-parser-lexical-boundary-defects]], [[bootstrap-conditional-regex-delimiters]].
+
+## 2026-09-09 — authored-source outer collector now measured
+
+Reading `DART-STARTUP-READING.1.12` completes the outer spec parser. Four additional
+authored-source controls now establish that /}/ and /(})/ truncate lifecycle-I payloads
+at the regex brace and retain Raw tails, causing ordinary validation failure. Ordinary
+regex and quoted-brace twins execute true. `_consumeBlockFromRest` at spec_parser.dart:1092
+calls the quote-aware but regex-unaware `_scanLineForBraces` at line 1381.
+Existing .2.2.2 now owns this confirmed collector mechanism as well as lifecycle validation;
+the earlier five-case evidence above remains unchanged and independently scoped.
+[[dart-spec-lexical-boundary-defects]] preserves the exact new replay. This resolves the
+earlier outer-source uncertainty for these two patterns, without emitted/other-backend proof.

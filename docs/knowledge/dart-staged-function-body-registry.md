@@ -42,3 +42,21 @@ user-function runtime execution is tracked separately in
 Related facts: [[function-body-staged-registry-dispatch]],
 [[dart-function-definition-shell-projection]], [[dart-function-registry]],
 [[dart-actionir-ast-parser]], [[dart-staged-ast-enrichment-dormant-red]].
+
+## 2026-09-09 — v1 registry reading and general-v2 distinction
+
+`DART-STARTUP-READING.1.12` reads lines 1-677. This prefix normalizes and sorts jobs,
+balances queue/per-job trace scopes, resolves the one builtin logical identity, constructs
+load/compiled/cache-key records, invokes parseActionBlock and stitches validated function
+jobs into bodyAst. Function checks distinguish fixed, variadic and final-codeblock metadata,
+then verify body text and parser/top/result/failure policies. Remaining index/copy/equality
+helpers begin at line 678 and belong to .1.13.
+
+The v1 cache key here is a descriptor; this prefix builds metadata for each job and does
+not perform a parser-plan cache lookup. Seventeen existing spec-parser/staged-registry
+tests pass. The narrow v1 non-goals above must not be read as current whole-Dart limitations:
+general v2 has a separate frozen registry, invocation-local plan cache and recursive
+authority, with later exact assignment-form parse_job admission documented in
+[[dart-staged-ast-enrichment-carriers-admission]] and
+[[dart-staged-ast-enrichment-current-depth-authority]]. That general runtime is not newly
+read or reverified by this v1 source/test selection; parked builder ideas stay parked.

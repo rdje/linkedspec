@@ -53,3 +53,16 @@ parser-only command is
 `cd dart && bash ../tools/run_dart_project_data.sh test test/spec_parser_test.dart`.
 The remaining spec-parser source begins at line 745; its broad later mechanisms are not newly
 credited by this range.
+
+## 2026-09-09 — remaining source reading and lexical boundaries
+
+`DART-STARTUP-READING.1.12` completes lines 745-1567 through EOF. It covers bare/action/blind
+target parsing, typed action selectors versus numeric blind/bare indexes, legal edge remainders,
+block/when-otherwise collection and origin tracking, compact fluent completeness/extraction,
+and quote/regex lexical helpers. Seventeen existing parser/staged-registry tests pass.
+
+Ten source/AST/compiler/native controls expose two independent lexical boundaries:
+quoted parentheses corrupt compact fluent extraction, while regex closing braces truncate outer
+lifecycle collection. Six positive controls retain their values. Exact reproduction and the
+new .2.7/existing .2.2.2 repair ownership live in [[dart-spec-lexical-boundary-defects]].
+This completes physical spec-parser reading without repairing these or the earlier suffix gap.

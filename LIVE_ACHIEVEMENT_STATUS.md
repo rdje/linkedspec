@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.11 completes eleven of 55 children: 14,528 fragments / 512,478 bytes. Containment .8 admits the director-approved history capacity at 7d52c98e; switch, regex, trace, recognition, Unicode ordering and body suffix defects .2.1-.2.6 are owned and gated; remaining required reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.12 completes twelve of 55 children: 16,028 fragments / 554,108 bytes. Containment .8 admits the director-approved history capacity at 7d52c98e; all confirmed Dart defects .2.1-.2.7 are owned and gated; remaining required reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `DART-STARTUP-READING.1.11` completes MCP server/wire and spec parser through line 744. All 16 selected tests pass. Fourteen controls confirm discarded regex/lifecycle-E suffixes, owned by .2.6; prior evidence and other repairs remain intact.
+- `DART-STARTUP-READING.1.12` completes spec parser and staged v1 registry through line 677. All 17 selected tests pass. Ten source/native controls confirm compact argument corruption (.2.7) and outer regex truncation (existing .2.2.2); prior evidence remains intact.
 
 ## Next Action
 
-- `DART-STARTUP-READING.1.12` finishes the spec parser and reads the staged registry prefix after .1.11 commits, brief clearing and clean proof.
+- `DART-STARTUP-READING.1.13` finishes staged v1 helpers, reads Unicode labels and begins function parser/shell after .1.12 commits, brief clearing and clean proof.
 
 ## Recent Completions
+
+- `2026-09-09` — `DART-STARTUP-READING.1.12` reads 1,500 fragments / 41,630 bytes, passes 17 selected tests and owns ten lexical controls under .2.7/.2.2.2.
 
 - `2026-09-09` — `DART-STARTUP-READING.1.11` reads 1,500 fragments / 39,800 bytes, passes 16 selected tests and owns body suffix repair .2.6 with fourteen controls.
 
@@ -48,8 +50,6 @@
 - `2026-09-09` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.4` admits pending Dart ownership and closes the capacity prerequisite with canonical proof.
 
 - `2026-09-09` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.3` independently verifies capacity, evidence retention, stable lookup and the complete Dart reserve.
-
-- `2026-09-08` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.2` implements the approved capacity exception; exact canonical proof governs landing.
 
 ## History
 

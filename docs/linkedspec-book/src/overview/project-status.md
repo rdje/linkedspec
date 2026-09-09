@@ -89,12 +89,13 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed eleven of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed twelve of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
-spec loader and MCP implementation, plus the spec parser through line 744.
-This covers 14,528 fragments / 512,478 bytes. The latest 16 strict-stdio/spec-parser tests pass.
+spec loader, MCP implementation and spec parser, plus the staged v1 registry through line 677.
+This covers 16,028 fragments / 554,108 bytes. The latest 17 spec-parser/staged-registry tests pass.
 Earlier checkpoints retain the 105-fixture corpus and neutral bundle verification.
-Child `.1.12` finishes the spec parser and starts the staged registry; startup `.3.4` remains pending.
+Child `.1.13` finishes staged v1 helpers, reads Unicode labels and begins function parser/shell;
+startup `.3.4` remains pending.
 
 The embedded MCP contract preserves three distinct outcomes. A native semantic response with
 `ok: false` remains a successful transport result, with `isError: false` and its diagnostics intact.
@@ -163,6 +164,16 @@ Fourteen exact source/AST/validation/compiler controls live in `docs/knowledge/d
 Gated repair `DART-STARTUP-READING.2.6` owns complete suffix retention and diagnostic compatibility.
 Passing existing tests does not close this defect; runtime, generated carriers and other backends
 were not exercised by this probe.
+
+**Known Dart limitation — compact fluent literals:** `I.return("(")` is rewritten to `return()`
+and executes with null and `matched=false`; `I { return("(") }` correctly returns `"("`.
+A quoted `")"` instead truncates the compact argument and fails validation, while its braced
+twin succeeds. Plain and spaced calls remain valid. Gated repair `DART-STARTUP-READING.2.7`
+owns lexical argument preservation. This checkpoint also confirms authored-source truncation
+inside `/}/` and `/(})/` under existing regex repair `.2.2.2`; ordinary regex and quoted-brace
+controls execute true. All ten source/AST/compiler/native controls are reproduced in
+`docs/knowledge/dart-spec-lexical-boundary-defects.md`; generated carriers and other backends
+were not exercised by these probes.
 
 **Approved continuity capacity:** the director approved intake `DART-STARTUP-READING.4`.
 Containment `.8` and ADR0110 admit exactly 31 change-history files and a manifest of

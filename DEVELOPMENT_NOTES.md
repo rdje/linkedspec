@@ -10,6 +10,17 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-09 — compact argument extraction and outer block collection
+
+`DART-STARTUP-READING.1.12` completes spec-parser reading and staged v1 registry through line 677.
+Compact completeness skips literals, but extraction counts their parentheses. A quoted opening
+parenthesis makes extraction fail, then fallback clears the argument and remainder: return()
+compiles and produces null/matched=false. The closing-parenthesis twin truncates and rejects.
+Outer brace collection independently lacks regex state and truncates /}/ and /(})/ lifecycle
+payloads. Ten source/native controls retain six successful values; .2.7 and existing .2.2.2
+own repairs. The v1 registry constructs adapter/cache-key metadata; general v2 frozen cached
+authority remains a separate canonical owner. Existing parser/registry tests pass 17/17.
+
 ## 2026-09-09 — Dart body suffix loss precedes validation
 
 `DART-STARTUP-READING.1.11` completes MCP server/wire reading and spec parser through line 744.

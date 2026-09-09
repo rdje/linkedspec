@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / `.1.11` complete; next `.1.12`
+- Status: `active` / `.1.12` complete; next `.1.13`
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-09`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 11/55 children, 14,528/80,297 fragments and 512,478/2,471,305 bytes; twenty entries through EOF
-  plus spec_parser.dart through line 744. Exact credit and comprehension remain in each completed node.
+- Current reading: 12/55 children, 16,028/80,297 fragments and 554,108/2,471,305 bytes; twenty-one entries through EOF
+  plus staged_parser_registry.dart through line 677. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -85,7 +85,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Acceptance: Every child accounts for its exact source bytes and deltas, reconciles Knowledge before re-derivation,
     records comprehension and confirmed findings, runs necessary focused diagnostics and commits before the next child.
   Children: `.1.1-.1.55`; exact scopes and baseline evidence below, read in numeric order.
-  Verification: 11/55 children complete; `.1.1-.1.11` own exact reading/comprehension evidence, and all later children remain pending.
+  Verification: 12/55 children complete; `.1.1-.1.12` own exact reading/comprehension evidence, and all later children remain pending.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.1.1`
@@ -254,14 +254,19 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.11 - read wire and parser; own body suffix loss`
 
 - ID: `DART-STARTUP-READING.1.12`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 12 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.11` committed; empty brief and clean repository.
   Scope: `dart/lib/src/parser/spec_parser.dart` lines 745-1567; `dart/lib/src/parser/staged_parser_registry.dart` lines 1-677
   Baseline evidence: 1500 fragments / 41630 bytes; ordered range SHA-256 `279ad70c6021662ca7bc2c67131b1b6e57ddc8770d7213cb55ecebb560c57410`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Existing Dart spec-parser and staged-registry tests, and ten authored-source AST/compiler/native lexical controls; exact source ranges/current deltas and prior evidence retention; all doctrines, both histories, Knowledge freshness, mdBook rendering and staged scope.
+  Canonical trigger: `none` — bounded required reading and defect intake; no executable, contract or infrastructure change.
+  Comprehension: Completes spec-parser conditional/fluent/bare element selection, typed action selectors, blind/bare numeric indexes, allowed edge remainders, block collection, attached when/otherwise origin tracking, compact fluent completeness/extraction and lexical helpers. Staged v1 prefix defines result records, normalized sorted dispatch, fixed builtin resolve/load/compile metadata, direct parseActionBlock execution, cache-key descriptors and function-body stitch validation through failure_policy. General v2 authority has a separate owner; .1.13 resumes the remaining index/copy/equality helpers.
+  Findings: Compact I.return("(") loses its argument, becomes return() and executes null/matched=false; quoted-close truncates and rejects, while braced/plain/spaced controls succeed. New .2.7 owns extraction, coordinated with Rust .52.2. Authored /}/ and /(})/ lifecycle controls also prove outer regex-brace truncation under existing .2.2.2; ordinary regex/quoted-brace controls execute true. Exact ten-case replay lives in docs/knowledge/dart-spec-lexical-boundary-defects.md. Earlier evidence remains intact; no generated/emitted or fresh other-backend outcome.
+  Verification: Read spec-parser lines 745-1567 through EOF and staged registry lines 1-677 in complete bounded outputs. All 1,500 fragments / 41,630 bytes remain baseline-identical with pinned digest unchanged. Seventeen existing parser/registry tests pass; ten pre-repair assertions distinguish six successful values, one silent empty-call rewrite and three truncated/rejected payloads. Exact range/current-delta, retained evidence, doctrines, histories, Knowledge and rendered-book proof belongs to this commit; source repairs remain gated.
+  Commit: `DART-STARTUP-READING.1.12 - finish spec parser; own lexical defects`
 
 - ID: `DART-STARTUP-READING.1.13`
   Status: `pending`
@@ -697,11 +702,11 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Status: `pending`
   Goal: Reconcile and retain ownership of every confirmed Dart finding established during the reading.
   Dependencies: Findings from `.1`; implementation additionally requires startup `.3`, `.4` and `.5`.
-  Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`, `.2.5`, `.2.6`; further confirmed findings receive disjoint owners here.
+  Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`, `.2.5`, `.2.6`, `.2.7`; further confirmed findings receive disjoint owners here.
   Acceptance: Cross-reference existing owners for known defects; create disjoint bounded repair children here
     immediately for new confirmed defects, with mechanism, source, reproduction, acceptance and unblock conditions.
     If no new repair is needed, close this intake with an explicit complete reconciliation rather than inventing work.
-  Verification: `pending`; `.1.3` owns attached-switch omission/default replacement under `.2.1`; `.1.5` confirms regex-brace action scanning and lifecycle validation defects under `.2.2`. Reading .1.6 confirms numeric trace overflow and reset-before-failure under .2.3. Reading .1.7 confirms disconnected recognition effect validation, leaked writes after rollback and observation edge-closure bypass under .2.4. Reading .1.10 confirms MCP Unicode key-order divergence under .2.5. Reading .1.11 confirms regex/lifecycle-E body suffix loss under .2.6. No repair implementation is admitted before startup gates.
+  Verification: `pending`; `.1.3` owns attached-switch omission/default replacement under `.2.1`; `.1.5` confirms regex-brace action scanning and lifecycle validation defects under `.2.2`. Reading .1.6 confirms numeric trace overflow and reset-before-failure under .2.3. Reading .1.7 confirms disconnected recognition effect validation, leaked writes after rollback and observation edge-closure bypass under .2.4. Reading .1.10 confirms MCP Unicode key-order divergence under .2.5. Reading .1.11 confirms regex/lifecycle-E body suffix loss under .2.6. Reading .1.12 confirms compact fluent argument corruption under .2.7 and outer regex-brace truncation under existing .2.2.2. No repair implementation is admitted before startup gates.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.2.1`
@@ -748,6 +753,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Dependencies: Startup `.3`, `.4` and `.5`; coordinate `.2.2.1`.
   Acceptance: Preserve quote/regex lexical boundaries in _braceDepthDelta and audit relevant Dart outer collectors before claiming authored-source coverage. Cover normal programmatic and source compilation, native/reconstructed/generated/emitted routes, valid regex-brace controls and truly malformed blocks; retain original diagnostic/source ownership. Freeze validator-specific controls independently of .2.2.1; combined grouped-regex execution follows that action-scanner repair. Route broad public/cross-backend recurrence through startup `.54.3` rather than duplicating that closeout.
   Verification: `pending`; programmatic SpecFile bypasses the outer source collector yet rejects both /}/ and /(})/ with unbalanced braces, one unmatched close. _braceDepthDelta tracks quotes/escapes and braces but no regex state. No Dart outer collector or emitted-carrier result is inferred.
+  Reading update .1.12: Four additional authored-source controls now establish outer truncation at /}/ and /(})/: _scanLineForBraces at spec_parser.dart:1381 stops at the regex close, producing partial lifecycle code and a Raw suffix rejected by validation. Ordinary regex and quoted-brace controls execute true. This updates the earlier outer-collector uncertainty; emitted/other-backend proof remains separate. Exact replay: docs/knowledge/dart-spec-lexical-boundary-defects.md.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.2.3`
@@ -820,6 +826,14 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Verification: `pending`; parseSpec drops @unexpected after /x/ or E { return("ok") } in both header and body layouts, then validateSpec and normal compileSpec accept. The own-line, explicit/bare I and malformed action-edge controls retain Raw and reject. Both body loops preserve failed suffixes only for an empty element list, an edge-token prefix or an unsupported I remainder. Exact probe and source locations are in docs/knowledge/dart-body-suffix-omission.md. No runtime invocation, emitted carrier or fresh other-backend behavior is inferred.
   Commit: `pending`
 
+- ID: `DART-STARTUP-READING.2.7`
+  Status: `pending`
+  Goal: Preserve quoted and regex argument boundaries in Dart compact fluent extraction.
+  Dependencies: Startup `.3`, `.4` and `.5`; source finding from `.1.12`; coordinate Rust startup `.52.2` and Dart suffix retention `.2.6`.
+  Acceptance: Lock I.return("(") against its braced twin and require the authored argument to survive parsing and normal execution; lock I.return(")") against its successful braced twin. Reconcile completeness and extraction scanners across all callers, covering quoted/escaped delimiters, regexes, nesting, multiline calls, attached when conditions and truly malformed input. Never turn failed argument extraction into a valid empty call or silently consume its suffix. Preserve accepted horizontal whitespace, exact source origins, diagnostics and existing bare-call semantics. Cover parsed/reconstructed/generated/emitted carriers and public examples; use canonical verification if shared/public semantics move.
+  Verification: `pending`; six quoted/plain/spacing controls establish that compact quoted-open lowers to return(), compiles and returns null with matched=false, while its braced twin returns "(" with matched=true. Compact quoted-close truncates the argument and leaves a Raw suffix rejected by validation; its braced twin returns ")". Plain and spaced forms return "ok". _extractParenContentWithEnd counts every parenthesis without lexical state; _parseFluentChainWithRemainder replaces failed extraction with empty arguments and clears the remainder. Exact replay is in docs/knowledge/dart-spec-lexical-boundary-defects.md; no generated/emitted or fresh other-backend outcome.
+  Commit: `pending`
+
 - ID: `DART-STARTUP-READING.3`
   Status: `pending`
   Goal: Close Dart reading with exact coverage, current-delta, comprehension and child-commit proof.
@@ -845,7 +859,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.12` | `pending` | Finish the spec parser and read the staged registry prefix after .1.11 commits cleanly. |
+| 1 | `DART-STARTUP-READING.1.13` | `pending` | Finish staged v1 helpers, read Unicode labels and begin function parser/shell after .1.12 commits cleanly. |
 
 ## Decisions
 
@@ -862,10 +876,12 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Blockers
 
-- History capacity is admitted by containment .8 under ADR0110; no reading blocker remains at this boundary. Source repairs .2.1-.2.6 remain gated.
+- History capacity is admitted by containment .8 under ADR0110; no reading blocker remains at this boundary. Source repairs .2.1-.2.7 remain gated.
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-09`: `.1.12` reads 1,500 fragments / 41,630 bytes and passes 17 selected tests. Ten native/source controls establish compact argument corruption (.2.7) and outer regex-brace truncation (existing .2.2.2), with six successful controls.
 
 - `2026-09-09`: `.1.11` reads 1,500 fragments / 39,800 bytes and passes 16 selected tests. Fourteen source/validation/compiler probes distinguish four discarded invalid tails, four valid controls and six retained/rejected malformed controls; .2.6 owns repair.
 
@@ -890,6 +906,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- `2026-09-09`: `DART-STARTUP-READING.1.12 - finish spec parser; own lexical defects` closes the twelfth reading child from clean 9a86da13.
+
 - `2026-09-09`: `DART-STARTUP-READING.1.11 - read wire and parser; own body suffix loss` closes the eleventh reading child from clean 6f596d7b.
 
 - `2026-09-09`: `DART-STARTUP-READING.1.10 - read MCP runtime; own Unicode key-order gap` closes the tenth reading child from clean c7e49a55.
@@ -911,6 +929,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-09`: `.1.12` completes spec parser, reads staged v1 registry through line 677 and records exact lexical defect ownership; next .1.13.
 
 - `2026-09-09`: `.1.11` completes MCP server/wire, reads spec parser through line 744 and owns unsupported body suffix repair .2.6; next .1.12.
 

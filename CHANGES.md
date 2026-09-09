@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-09 — DART-STARTUP-READING.1.12: spec lexical boundaries and staged v1
+
+Read 1,500 fragments / 41,630 unchanged bytes through spec-parser EOF and staged registry line 677.
+All 17 selected tests pass. Ten source/native controls establish compact argument corruption (.2.7)
+and outer regex-brace truncation (existing .2.2.2). Exact replay, public limitations and v1/v2
+registry distinction are durable; repairs remain gated. Reading reaches 12/55; next .1.13.
+
 ## 2026-09-09 — DART-STARTUP-READING.1.11: MCP wire and body suffix retention
 
 Read 1,500 fragments / 39,800 unchanged bytes through MCP server/wire EOF and spec parser line 744.
