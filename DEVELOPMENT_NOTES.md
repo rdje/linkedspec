@@ -10,6 +10,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — semantic consumer evidence boundaries
+
+Dart .1.47 separates compiled outcomes, private projection oracles, public snapshot
+queries and caller-captured runtime observation. Exact static digests and malformed
+JSON controls do not close non-JSON rejection or call-correlation defects. Existing
+generated/emitted tests pass, but physical reading stops inside emitted child source
+at observation routes line 240. All 30 tests and both neutral checks pass; no runtime change.
+
 ## 2026-09-10 — approved engineering-history capacity
 
 Containment .11 and ADR0113 admit only engineering files27→28 and manifest

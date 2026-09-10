@@ -340,3 +340,15 @@ four successful controls, with all runtime values correct. Exact reproduction:
 Dart grouped-selector recurrence; new .2.22 owns regex-arrow target scanning.
 The strict compiled-identity guard detects the earlier source-correlation error;
 weakening it is not the repair. Prior .2.20/.2.21 and other owners remain intact.
+
+## September 11 compilation, projection and query consumer reading
+
+Dart .1.47 reads the complete call-projection, compilation-foundation and query
+consumer files. Call projection compares the private detached oracle and exact
+staged/generated roles without treating generated-plan metadata as execution.
+Compilation preserves parse/validation/compile/entry failure stages and source
+ceilings; textual topology assertions supplement those executable fixtures.
+Public typed/raw query proof locks 19 static digests and 26 malformed JSON cases.
+Those JSON cases do not close .2.21 non-JSON rejection evidence; earlier .2.20
+and startup .67/.70 keep separate call/source-correlation ownership. All 30
+selected tests and neutral semantic 6/20/128 pass; no API or MCP change lands.

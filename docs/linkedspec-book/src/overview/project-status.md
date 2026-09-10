@@ -89,7 +89,7 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed forty-six of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed forty-seven of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
 parser bridge, function-shell projection, bounded child-parse authority, generated rule plan,
@@ -100,9 +100,11 @@ Package inputs, action-parser/action-contract, callable-codeblock, compiled-spec
 corpus, diagnostic-output, duplicate-slot, frontend/function-trace, function-registry,
 inter-match-gap, logical-helper, receiver-mutation, MCP, native pipeline trace, primary CLI,
 progressive, punctuation-light, recognition, recursive-observation, repeated-action,
-root-selection, rule-local cursor and interpreter tests are complete. Matching tests
-reach line 86. This covers 67,028 fragments / 2,053,539 bytes. All 68 selected tests
-and the write, scalar-numeric and named-mark neutral checks pass.
+root-selection, rule-local cursor, interpreter, matching, scalar-text, self-hosted
+Unicode, call-projection, compilation-foundation and query tests are complete.
+Observation-route reading reaches line 240. This covers 68,528 fragments /
+2,104,165 bytes. The current 30-test selection and semantic/Unicode neutral checks
+pass; the preceding interpreter leaf passed 68 tests and its three neutral checks.
 
 Interpreter tests confirm explicit cursor rewinds and stack restoration, capture
 boundaries, typed values, dense nested writes, helper composition, scoped callback
@@ -119,8 +121,24 @@ write-vivification contract, with the superseded paragraph preserved as dated hi
 This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
-slots, then begin the astral capture case. The full matching suite passed; physical
-reading resumes in child `.1.47` after the approved capacity boundary below. Startup `.3.4` remains pending.
+slots, astral capture offsets and register separation. Physical reading continues
+in child `.1.48` after the clean .1.47 handoff. Startup `.3.4` remains pending.
+
+**Dart consumer reading through child 47:** matching now has complete physical
+coverage, including Unicode offsets, separate entry/local registers and bounded
+structural-regex fixtures. The scalar-text and current self-hosted Unicode grammar
+consumers are also read. Semantic tests separately check compilation outcomes,
+private staged/generated projection, and public queries over immutable snapshots:
+nineteen static response digests and twenty-six malformed JSON requests.
+
+The 30 selected tests pass, including the existing standalone emitted observation
+test, with the semantic and Unicode neutral checks. Observation-route reading ends
+at line 240 inside the emitted child program; child .1.48 reads the remainder.
+These fixture results retain the previously documented call-projection, non-JSON
+query-rejection and action-mediated observer-error limitations. Construction,
+querying and runtime observation remain separate APIs; no new MCP capability or
+runtime behavior is introduced. Reading reaches 47/55 children, 68,528 fragments /
+2,104,165 bytes; .1.48 is next after the clean committed handoff.
 
 **Approved engineering-history capacity:** the director approved collection files
 27→28 and manifest rows 26→27. Containment `.11` and ADR0113 implement those two
@@ -131,8 +149,8 @@ and aggregate limits remain unchanged. Twenty-two actual-validator checks pass.
 Dart intake `.7` closes under the director’s September 11 one-time exception:
 this capacity change uses its passing focused checks without the canonical CI
 receipt, avoiding the current workflow’s repeated dependency builds. Normal commit
-hooks remain enabled. This grants no future verification waiver; reading .1.47
-resumes after the clean capacity commit.
+hooks remain enabled. The capacity commit is `ad64f76f`; this grants no future
+verification waiver. Reading .1.47 followed that clean boundary.
 
 **Continuity capacity — approved history preservation:** the director approved one
 additional immutable archive member. Containment `.10` and ADR0112 admit exactly
@@ -166,7 +184,7 @@ in 2.25 seconds. That sample locates a pre-main wait without establishing its OS
 or a remedy. The older macOS 26.5.2 closeout does not resolve this macOS 26.6.2 observation.
 The evidence and repair criteria are logged by `SESSION-STARTUP-READING.80.0`; source
 changes remain behind the existing startup prerequisites. The intake is committed at
-`eaf4331e`; approved containment .11 precedes reading `.1.47`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
+`eaf4331e`; approved containment .11 is committed at `ad64f76f`; `.1.48` follows completed `.1.47`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
 
 **Known Dart limitation — null named selectors in reconstructed state:** a programmatically
 reconstructed target with these fields is incorrectly accepted:

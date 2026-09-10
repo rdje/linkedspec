@@ -137,3 +137,15 @@ The 21 selected query/runtime/static/observation tests include the exact
 twentieth response digest and existing invalid-event/base-isolation controls;
 neutral 6/20/128 also passes. Earlier action-wrapper identity failure remains
 Dart .2.8, and no fresh emitted-route or MCP reproduction is claimed.
+
+## September 11 generated/emitted consumer prefix
+
+Dart .1.47 reads semantic_index_runtime_observation_routes_test.dart 1-240. The complete generated-helper
+test compares direct/traced results, diagnostics, trace bytes, exact events and
+the twentieth digest; callback controls compare original error/stack identity,
+and exit_now omits the final result event. The next test starts a fresh emitted
+package and its child source, ending mid trace configuration at 240. Its remaining
+child program and parent process checks receive reading credit only in .1.48.
+The full existing test runs successfully within the 30-test selection, including
+standalone emitted direct/traced observation. This does not close the separate
+native action-mediated callback-wrapping defect .2.8 or prove an MCP route.

@@ -77,3 +77,13 @@ selection passes 68 tests. The prefix checks seek versus consume, first-authored
 tie breaking, exact duplicate-alternative selection and compiled-rule regex lists,
 then begins the astral capture fixture. Its remaining offset assertions are beyond
 this physical range and remain in .1.47. No emitted or other-runtime route is run.
+
+## September 11 matching-consumer completion
+
+Dart .1.47 reads runtime_matching_test.dart 87-256 through EOF. The remaining
+astral fixture asserts code-unit start 4 versus scalar start 3 and line/column;
+dialect/structural cases stay bounded to shipped forms, with line-suffix
+rejection, captures, separate entry/local registers and zero-progress checks.
+All eight matching tests pass within the 30-test selection. Scalar and current
+self-hosted Unicode consumers also pass; these checks do not close the existing
+regex-literal corruption owner .2.16 or admit arbitrary PCRE support.

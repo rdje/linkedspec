@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — DART-STARTUP-READING.1.47 - read matching and semantic consumer contracts
+
+Complete the seven bounded consumer ranges: 1,500 fragments / 50,626 baseline-identical
+bytes. All 30 tests and semantic/Unicode neutral checks pass, including the existing
+standalone emitted observation test. Read credit ends at observation routes line 240;
+prior defects remain open. Reading 47/55; next .1.48 after clean focused landing.
+
 ## 2026-09-10 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.11: approved engineering archive
 
 Admit exactly engineering files 27→28 and manifest lines 26→27 under ADR0113.
