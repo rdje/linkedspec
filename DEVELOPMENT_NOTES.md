@@ -10,6 +10,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — emitted proof has distinct cache and process boundaries
+
+Dart .1.49 completes the twelve-role admission consumer: one cached emitted child
+supplies direct/traced roles with inherited managed environment and successful offline
+resolution/run. Separate alias and emitter tests use fresh empty caches and fatal
+analysis. All 12 tests and semantic/typed-source/generated neutral checks pass;
+physical emitter reading ends at529, without promoting unrelated defect closure.
+
 ## 2026-09-11 — emitted observation proof and source authority
 
 Dart .1.48 reads the emitted harness through successful offline resolution, analysis,

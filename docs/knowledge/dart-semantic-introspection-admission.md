@@ -50,3 +50,16 @@ belong to .1.49. The complete existing consumer passes within the 24-test focuse
 suite; physical coverage remains distinct from execution. Neutral checks report
 current six groups / twenty exact queries / 128 mutations, rollout 9/0 and
 admission 6/0; the historical July admission counts above remain dated evidence.
+
+## September 11 admission consumer completion
+
+Dart .1.49 reads admission167-779 through EOF. Loaded/reconstructed,
+generated-plan/helper/emitted and traced roles compare exact typed events and
+twentieth digests. Query roles compare typed/raw responses, all twenty digests,
+privacy/page/budget/error/explanation, detached results and forbidden host values.
+One cached emitted Future supplies both direct/traced roles; its child uses the
+inherited managed environment and successful offline pub get/run, with no separate
+fatal-analysis or fresh-empty-cache assertion. Fresh-cache analysis proof belongs
+to the separate emitted observer, alias and emitter tests. All 12 selected tests
+and neutral semantic 6/20/128 pass. This composition remains fixture-bound and
+does not close earlier callback, query-rejection or call-correlation defects.

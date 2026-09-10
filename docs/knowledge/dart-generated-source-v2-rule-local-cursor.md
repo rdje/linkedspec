@@ -55,3 +55,16 @@ Related: [[generated-source-contract-v1]],
 [[dart-rule-local-cursor-normalization]],
 [[dart-generated-source-deferred]], and
 [[rule-local-cursor-ownership-decision]].
+
+## September 11 source-emitter consumer prefix
+
+Dart .1.49 reads source_emitter_test.dart1-529. Metadata/error JSON, deterministic
+emission and all ten family policies remain exact. The isolated caller checks v1
+rejection before a corrupt lazy Base64 payload, normal v2 payload failure, default
+and explicit roots, missing-entry diagnostics and selected-root trace fields.
+The fresh-cache family matrix resolves offline, analyzes fatally and executes
+independent emitted modules, comparing native values and covering every family.
+Reading ends inside the accepted eight-case subset setup; .1.50 owns its remaining
+consumer and fixtures. All 12 selected tests pass, including the complete emitter
+test, without granting unread suffix credit. Neutral generated-source v1 governance
+remains distinct from Dart source v2 and executes no other backend in this leaf.

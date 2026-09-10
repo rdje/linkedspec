@@ -62,3 +62,16 @@ The exact anonymous/named capture, pure, position and marker fixtures pass in th
 no new astral helper-boundary proof follows from that example. Neutral named-mark
 governance remains seven helpers/three mutations. Earlier emitted-carrier and
 Unicode admission evidence remains distinct from this focused rerun.
+
+## September 11 source-boundary alias consumer reading
+
+Dart .1.49 reads all342 lines of source_boundary_compatibility_aliases_test.dart.
+Seven aliases retain exact canonical names while preserving authored arity in
+contract resolution; an invented name retains structured unknown_helper.
+The Unicode fixture compares normal and reversed capture boundaries across native,
+JSON-reconstructed and generated-plan execution. Four independently emitted
+alias/canonical modules run in a fresh offline cache after fatal analysis and
+must return the exact expected values. All four alias tests pass within the
+12-test selection. These are source-boundary compatibility aliases, separate
+from the seven named-mark helpers; canonical ownership remains
+[[typed-source-location-runtime-rollout-plan]]. No helper behavior changes.

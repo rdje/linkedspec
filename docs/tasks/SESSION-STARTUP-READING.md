@@ -2224,7 +2224,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Goal: Split and read all 115 baseline Dart entries, including compiler/runtime, tests, commands, and package inputs.
   Reading owner: `docs/tasks/DART-STARTUP-READING.md` owns .0 decomposition, .1 reading, .2 new repair intake and .3 reading closeout; this startup node remains the prerequisite/closeout owner.
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas. DART-STARTUP-READING.3 may complete this reading node only after exact coverage/comprehension and child-commit proof; pending repairs remain owned separately.
-  Verification: Dart reading remains incomplete at 48/55 children, 70,028 fragments / 2,153,102 bytes. Dart .1.48 completes observation-route, runtime-capture, observed-index, source-foundation and static-graph consumers, then reads admission through line 166: 1,500 fragments / 48,937 baseline-identical bytes. All 24 selected tests and semantic 6/20/128 checks pass, including existing emitted execution and the twelve-role admission consumer. Earlier defects remain open; no source, runtime or MCP change. Capacities .4/.5/.6 remain committed under containment .8/.9/.10 and ADR0110/0111/0112. Startup .3/.4/.5 still gate repairs; .7 is approved and implemented by containment .11 / ADR0113 with exact history preservation; the director granted a one-time focused/receipt exception on 2026-09-11; Containment .11 is committed at ad64f76f; next Dart .1.49 after the clean .1.48 handoff.
+  Verification: Dart reading remains incomplete at 49/55 children, 71,528 fragments / 2,202,029 bytes. Dart .1.49 completes semantic admission, smoke and source-boundary alias consumers, then reads source emission through line 529: 1,500 fragments / 48,927 baseline-identical bytes. All 12 selected tests and semantic/typed-source/generated-source neutral checks pass, including fresh emitted alias and emitter callers. Prior defects remain open; no source, runtime or MCP change. Capacities .4/.5/.6 remain committed under containment .8/.9/.10 and ADR0110/0111/0112. Startup .3/.4/.5 still gate repairs; .7 is approved and implemented by containment .11 / ADR0113 with exact history preservation; the director granted a one-time focused/receipt exception on 2026-09-11; Containment .11 is committed at ad64f76f; next Dart .1.50 after the clean .1.49 handoff.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.5`
@@ -4449,7 +4449,7 @@ Startup `.3.4` stays pending until complete Dart reading; the next executable re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.49` | `pending` | Finish semantic admission, then smoke, source-boundary aliases and source-emitter prefix after clean .1.48; preserve required reading and repair gates. |
+| 1 | `DART-STARTUP-READING.1.50` | `pending` | Complete source emitter, read AST/loader/parser/validator consumers and staged-enrichment prefix after clean .1.49; preserve required reading and repair gates. |
 
 ## Reading Ledger
 

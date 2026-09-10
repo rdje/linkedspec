@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / .1.48 complete; next .1.49
+- Status: `active` / .1.49 complete; next .1.50
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-11`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 48/55 children, 70,028/80,297 fragments and 2,153,102/2,471,305 bytes; ninety-one entries through EOF
-  plus semantic_introspection_dart_admission_test.dart through line 166. Exact credit and comprehension remain in each completed node.
+- Current reading: 49/55 children, 71,528/80,297 fragments and 2,202,029/2,471,305 bytes; ninety-four entries through EOF
+  plus source_emitter_test.dart through line 529. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -833,14 +833,19 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.48 - read semantic observation and source consumers`
 
 - ID: `DART-STARTUP-READING.1.49`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 49 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.48` committed; empty brief and clean repository.
+  Activation: Clean `df34dc4cc0a88e7ece0e056581bc88a6196f1269`; prior leaf committed, brief empty, root clean and all jobs consumed.
   Scope: `dart/test/semantic_introspection_dart_admission_test.dart` lines 167-779; `dart/test/smoke_test.dart` lines 1-16; `dart/test/source_boundary_compatibility_aliases_test.dart` lines 1-342; `dart/test/source_emitter_test.dart` lines 1-529
   Baseline evidence: 1500 fragments / 48927 bytes; ordered range SHA-256 `e2a11d82a1f815d300cef855cb47bc8ecae541e94b10a673fd7aa343f8123b98`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact range/digest and full baseline identity; admission, smoke, alias and emitter consumers plus semantic/typed-source/generated-source neutral authorities; Knowledge, histories, book, all doctrines and preservation.
+  Canonical trigger: `None for this bounded required-reading leaf; no runtime, public contract or infrastructure change. Escalate if focused evidence exposes cross-cutting uncertainty.`
+  Comprehension: Admission completes loaded/reconstructed/generated/traced routes, typed/raw query equality, twenty digests, privacy/budget/error/explanation and non-interference. Its one cached emitted probe uses inherited managed environment, successful offline resolution/run and trace presence; it is distinct from fresh empty PUB_CACHE/fatal-analysis alias and emitter consumers. All seven source-boundary aliases canonicalize with authored arity preserved, retain unknown-name diagnostics and match Unicode normal/reversed captures across native/reconstructed/generated/emitted routes. Emitter prefix verifies deterministic v2 metadata/errors/minimal plan, all ten family policies, early v1 rejection before corrupt lazy payload, selected-root traces and isolated ten-family execution, then starts the eight-case subset setup through529; .1.50 owns the remaining subset/harness/fixtures.
+  Verification: Physically read admission167-380/381-580/581-779 EOF, smoke1-16 EOF, aliases1-176/177-342 EOF and emitter1-180/181-360/361-529. Exact1500 fragments/48927 bytes and digest pass; all115 baseline paths remain identical. All12 tests in four selected files pass, including fresh offline emitted alias/root/family/subset callers and the existing twelve-role admission; running complete emitter grants no unread suffix credit. Semantic6/20/128, typed-source14/0/231 with92+7 helper inventory, and generated-source v1 neutral ten-family/eight-case-subset topology checks pass; neutral ledger checks do not run other backends. Prior .2.8/.2.20/.2.21 and related owners remain open. Coverage/preservation, Knowledge/book/memory/histories, diff hygiene and all doctrines govern the focused commit.
+  Commit: `DART-STARTUP-READING.1.49 - complete admission and read source-emitter consumers`
 
 - ID: `DART-STARTUP-READING.1.50`
   Status: `pending`
@@ -1450,7 +1455,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.49` | `pending` | Finish semantic admission, then smoke, source-boundary aliases and source-emitter prefix after clean .1.48; preserve required reading and repair gates. |
+| 1 | `DART-STARTUP-READING.1.50` | `pending` | Complete source emitter, read AST/loader/parser/validator consumers and staged-enrichment prefix after clean .1.49; preserve required reading and repair gates. |
 
 ## Decisions
 
@@ -1481,6 +1486,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-11` .1.49: Dart .1.49 completes semantic admission, smoke and source-boundary alias consumers, then reads source emission through line 529: 1,500 fragments / 48,927 baseline-identical bytes. All 12 selected tests and semantic/typed-source/generated-source neutral checks pass, including fresh emitted alias and emitter callers. Prior defects remain open; no source, runtime or MCP change. Cumulative49/55,71528 fragments/2202029 bytes,94 EOF plus emitter529; no new defect or repair.
 
 - `2026-09-11` .1.48: Dart .1.48 completes observation-route, runtime-capture, observed-index, source-foundation and static-graph consumers, then reads admission through line 166: 1,500 fragments / 48,937 baseline-identical bytes. All 24 selected tests and semantic 6/20/128 checks pass, including existing emitted execution and the twelve-role admission consumer. Earlier defects remain open; no source, runtime or MCP change. Cumulative48/55,70028 fragments/2153102 bytes,91 EOF plus admission166; no new defect or repair.
 
@@ -1583,6 +1590,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- .1.49: `DART-STARTUP-READING.1.49 - complete admission and read source-emitter consumers`.
+
 - .1.48: `DART-STARTUP-READING.1.48 - read semantic observation and source consumers`.
 
 - .1.47: `DART-STARTUP-READING.1.47 - read matching and semantic consumer contracts`.
@@ -1680,6 +1689,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-11`: .1.49 completes admission/alias reading and starts emitter consumers; next .1.50 after clean focused commit. Prior evidence and repair gates remain.
 
 - `2026-09-11`: .1.48 completes semantic observation/source/static consumer reading and starts admission; next .1.49 after clean focused commit. Prior evidence and repair gates remain.
 
