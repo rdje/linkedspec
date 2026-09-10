@@ -1,7 +1,9 @@
 ---
 id: macos-rust-first-launch-validation-latency
-title: "A cold repository-local Rust test launch stalled in macOS validation before main"
+title: "Older macOS launch controls and newer pre-main waits have separate ownership"
 answers:
+  - "which task owns newer macOS Rust launch delays"
+  - "what did the September 10 relocation sample prove"
   - "which September 8 samples locate compiler and test startup waits"
   - "why did the Rust trace controls build take 55 minutes"
   - "was trace_controls looping after the cold build"
@@ -11,14 +13,14 @@ answers:
   - "why did rustc wait in dlopen during startup canonical CI"
   - "did Rust pre-main waits also occur during permitted canonical CI"
   - "which September 7 startup samples distinguish aborted and accepted CI attempts"
-date: 2026-09-08
-status: older controlled artifacts classified; newer OS samples locate pre-main waits without identifying their cause
+date: 2026-09-10
+status: older controlled artifacts classified; newer-OS causal diagnosis and conditional repair pending under startup .81
 tags: [rust, macos, syspolicyd, gatekeeper, verification, performance, FUTURE-PARITY-BACKLOG]
 evidence: "During FUTURE-PARITY-BACKLOG.19.3.3 signoff, a plain-cargo test with repository-local target but user-home registry reads finished its cold build in 55m44s after prolonged per-crate waits. More than three minutes after Cargo launched trace_controls, it had 112 KiB footprint and no test output. Process census found Cargo/test alive and macOS syspolicyd consuming substantial CPU; a one-second sample contained only _dyld_start, proving Rust test code had not begun. The exact /tmp report created by sample was consumed, deleted, and verified absent. The eventual 12/12 result is diagnostic only until rerun through LinkedSpec's managed Cargo wrapper."
 evidence_update_managed_2026_09_01: "The repository-managed root-selection driver then required 117m57s for its Rust admission test build before the binary ran 1/1 in 10.33s. A later exact managed trace command rebuilt in 2m07s, remained silent for about 98 seconds after launching the test binary, and then passed 12/12 in 2.23s. All project data for those accepted runs was routed by tools/project_data_env.sh. The large cold/warm and pre-test/execution split remains an audit input for .19.3.4.0, not a causal conclusion or permission to weaken trust checks."
 evidence_update_canonical_2026_09_02: "During the successful receipt-bound canonical run, a read-only census found an independent Claude-owned shell deleting this checkout's rust/target/debug/incremental, rust/target/es19_boot, rust/target/audit_notest, and rust/target/coldprobe directories and invoking cargo sweep --time 7. No tracked file changed, but this is direct concurrent invalidation of repository-local Rust artifacts. Separately, mcp_server_rust_dispatch stayed at 112 KiB in macOS _dyld_start for more than five minutes and then passed 3/3 in 2.43s. The exact /tmp sample report was consumed, deleted, and verified absent. Controlled serial reproduction must separate this interference from OS validation latency."
 evidence_update_closeout_2026_09_02: "Controlled managed runs reproduced two older distinct trace_controls hashes at 45.32/0.00 and 51.75/0.00 seconds for first/warm --list launches, with zero user/system CPU, no visible Rust process, and syspolicyd at 51.1-57.8% CPU. Both binaries were provenance-tagged, ad-hoc linker-signed, and slowly rejected by spctl. Ordinary managed-run files also inherit provenance. However two fresh behavior-equivalent unique isolated builds completed in 37.18 and 23.17 seconds. The first hash's explicitly signed copy and original launched in 0.44/0.45 seconds; the second wholly unmanipulated provenance-tagged linker-signed hash first-launched in 0.41 seconds, then 0.00 warm. Fresh serial compile/link/launch is therefore healthy. The delay is external per-artifact macOS policy/cache state for older contaminated artifacts, not a persistent Linkedspec source/build/storage/signing defect. No trust, xattr, cache, coverage, or workflow repair is justified; FUTURE-PARITY-BACKLOG.19.3.4.1 is not required."
-reverify: "rg -n 'Rust launch-latency finding|FUTURE-PARITY-BACKLOG.19.3.4' docs/tasks/FUTURE-PARITY-BACKLOG.15-24.md ROADMAP.md ROADMAP_V2.md docs/TASK_TREE.md"
+reverify: "rg -n '^- ID: .*(SESSION-STARTUP-READING[.]81|FUTURE-PARITY-BACKLOG[.]19[.]3[.]4)' docs/tasks/SESSION-STARTUP-READING.md docs/tasks/FUTURE-PARITY-BACKLOG.15-24.md"
 ---
 
 ## Dated startup observation — 2026-09-06
@@ -292,3 +294,50 @@ The complete canonical log is .linkedspec-data/ci-containment72-b7638e34.log: 17
 10,622,490 bytes, SHA-256 34123c7152f50ddc4ec8f93294013ae4f98465199ef9912b00a79cf01c5cf9d9.
 It passes all nine doctrines, required consumers, containment/relocation, CLI 66x2 and Phase 0
 1,032/1,032 in 1,152 wallclock seconds (Phase 0 only). The 25 optional gates/matrices were skipped.
+
+## September 10 observations and separate newer-OS ownership
+
+Startup `SESSION-STARTUP-READING.81` now owns the macOS 26.6.2 (25G83) investigation:
+.81.1 requires controlled, uninstrumented cold/warm evidence; .81.2 owns any demonstrated
+remedy or a bounded evidence-backed no-repository-repair conclusion. The older .19.3.4
+closeout remains specific to macOS 26.5.2 and does not resolve the newer observations.
+Cargo dependency invalidation is separately owned by .80 and
+[[rust-ci-pgen-missing-input-rebuilds]]. Both repairs retain the startup prerequisites.
+
+During the successful containment .10 canonical run, recognition PID 75740 / Cargo 31169
+launched at 14:30:17.853 +0200. Its 14:36:02.456 one-second sample contains all 804 frames
+at `_dyld_start` and reports 112K footprint. The complete report is
+`.linkedspec-data/scratch/containment10-recognition-75740.sample.txt`,
+32 lines / 1,083 bytes, SHA-256
+`9e806f0158d79f2721e798560d80658a154826e524bda6119ff7008689fed13c`.
+The test subsequently passed 12/12 in 28.89 seconds after a separate 3m59s build.
+
+The relocation test PID 47233 / Cargo 38554 launched at 16:28:59.269 +0200.
+Its 16:43:05.955 one-second sample, about 14m06.686s after launch, contains all 745
+frames at `_dyld_start` and reports 96K footprint. The complete report is
+`.linkedspec-data/scratch/containment10-relocation-test-47233.sample.txt`,
+32 lines / 1,057 bytes, SHA-256
+`76730304625b16b5b0a560d27826aed1eade2bfdc6e9f2dd16414e1e5dcb83c5`.
+The wait cleared; relocation passed 1/1 in 2.25 seconds after a separate 19m27s build,
+and the four other outside-cwd runtime anchors passed. Both complete sample reports
+were read, retained on the repository volume, and their jobs fully consumed.
+
+These samples locate the sampled interval before Rust test execution. They do not identify
+the OS/kernel cause, measure the whole interval continuously, or establish sampling as a
+remedy. Controlled uninstrumented runs must remain distinct from sampled observations.
+
+A preceding relocation compiler census at 14:24:33 UTC found PID 40934 at elapsed 6m39s
+with 18.74 seconds CPU time. The attempted sample returned 255 because the compiler had
+already exited; no report or stack was captured. Its fully consumed diagnostic is
+`.linkedspec-data/scratch/containment10-relocation-rustc-sample.log`, SHA-256
+`4e7a42025b5bb9f834a3a995630de9778ec040575e938a612f3fa1b4a2025718`.
+Do not infer a compiler wait location from that failed attempt.
+
+The canonical log is `.linkedspec-data/ci-containment10-e55f7703.log`,
+174,745 lines / 10,622,374 bytes, SHA-256
+`635803e368f329f50ad3a76b3a4af7b5879120a1235612780641988fd419d602`.
+All nine doctrines, mandatory consumers, storage/relocation, CLI 66x2 and Phase 0
+1,032/1,032 pass; 1,163 wallclock seconds refers to Phase 0 only. The 25 optional
+gates/matrices were skipped. Canonical capacity commit `bef5dafd` is clean and receipt-bound.
+No target/cache cleanup, recovery/purge, trust bypass, provenance removal or re-signing
+was performed as a response to these observations.

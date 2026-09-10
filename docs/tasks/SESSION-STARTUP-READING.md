@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Session continuity prerequisite to RUST-MUTATION-TESTING.1`
 - Created: `2026-09-06`
-- Last updated: `2026-09-08`
+- Last updated: `2026-09-10`
 - Owner: repo-local workflow
 - Reading baseline: `baeb984e36a94a15951cd23d4c52def5064cdaca`
 
@@ -36,7 +36,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`, `SESSION-STARTUP-READING.50`, `SESSION-STARTUP-READING.51`, `SESSION-STARTUP-READING.52`, `SESSION-STARTUP-READING.53`, `SESSION-STARTUP-READING.54`, `SESSION-STARTUP-READING.55`, `SESSION-STARTUP-READING.56`, `SESSION-STARTUP-READING.57`, `SESSION-STARTUP-READING.58`, `SESSION-STARTUP-READING.59`, `SESSION-STARTUP-READING.60`, `SESSION-STARTUP-READING.61`, `SESSION-STARTUP-READING.62`, `SESSION-STARTUP-READING.63`, `SESSION-STARTUP-READING.64`, `SESSION-STARTUP-READING.65`, `SESSION-STARTUP-READING.66`, `SESSION-STARTUP-READING.67`, `SESSION-STARTUP-READING.68`, `SESSION-STARTUP-READING.69`, `SESSION-STARTUP-READING.70`, `SESSION-STARTUP-READING.71`, `SESSION-STARTUP-READING.72`, `SESSION-STARTUP-READING.73`, `SESSION-STARTUP-READING.74`, `SESSION-STARTUP-READING.75`, `SESSION-STARTUP-READING.76`, `SESSION-STARTUP-READING.77`, `SESSION-STARTUP-READING.78`, `SESSION-STARTUP-READING.79`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`, `SESSION-STARTUP-READING.50`, `SESSION-STARTUP-READING.51`, `SESSION-STARTUP-READING.52`, `SESSION-STARTUP-READING.53`, `SESSION-STARTUP-READING.54`, `SESSION-STARTUP-READING.55`, `SESSION-STARTUP-READING.56`, `SESSION-STARTUP-READING.57`, `SESSION-STARTUP-READING.58`, `SESSION-STARTUP-READING.59`, `SESSION-STARTUP-READING.60`, `SESSION-STARTUP-READING.61`, `SESSION-STARTUP-READING.62`, `SESSION-STARTUP-READING.63`, `SESSION-STARTUP-READING.64`, `SESSION-STARTUP-READING.65`, `SESSION-STARTUP-READING.66`, `SESSION-STARTUP-READING.67`, `SESSION-STARTUP-READING.68`, `SESSION-STARTUP-READING.69`, `SESSION-STARTUP-READING.70`, `SESSION-STARTUP-READING.71`, `SESSION-STARTUP-READING.72`, `SESSION-STARTUP-READING.73`, `SESSION-STARTUP-READING.74`, `SESSION-STARTUP-READING.75`, `SESSION-STARTUP-READING.76`, `SESSION-STARTUP-READING.77`, `SESSION-STARTUP-READING.78`, `SESSION-STARTUP-READING.79`, `SESSION-STARTUP-READING.80`, `SESSION-STARTUP-READING.81`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -4329,15 +4329,117 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     nonzero/signal termination. Evidence: docs/knowledge/routing-verifier-child-signal-status-gap.md.
   Commit: `pending`
 
+- ID: `SESSION-STARTUP-READING.80`
+  Status: `pending`
+  Goal: Reuse compatible PGEN and RGX build artifacts while preserving every real-input invalidation and test.
+  Children: `.80.0`, `.80.1`, `.80.2`, `.80.3`, `.80.4`
+  Acceptance: Diagnose exact Cargo freshness reasons, repair unnecessary optional-input watches, assess recurring
+    target retention, and measure unchanged warm runs plus valid rebuild controls. Preserve the required
+    PGEN → RGX → LinkedSpec dependency chain and existing nested work. Startup latency is separately owned by .81.
+
+- ID: `SESSION-STARTUP-READING.80.0`
+  Status: `done; focused-signoff-complete`
+  Goal: Preserve the CI build-reuse and newer-OS launch findings from the preceding capacity verification.
+  Scope: Read-only evidence intake, pending repair ownership, Knowledge retrieval, book understanding and continuity.
+  Activation: Clean `bef5dafd928ca723b79eda524351a9fb5c1cf66a`; zero-byte brief; promoted canonical receipt;
+    containment .10 and every diagnostic job are complete and consumed before this task-tree-first change.
+  Acceptance: Record source and saved metadata identities, eight watches/two present files, the exact build-stage
+    baseline and its limits, successful and failed sample outcomes, and separately gated .80/.81 children.
+    Preserve all earlier task/Knowledge/history evidence, reading coverage, dependency work and source bytes;
+    return to DART-STARTUP-READING.1.37 after the focused commit and clean proof.
+  Verification tier: `focused`
+  Focused checks: Exact source/snapshot/log identities and bounded observation reconciliation; prior-node,
+    reading and no-source-change scope review; Knowledge generation/check, all nine doctrines, explicit memory,
+    both history-pressure checks, mdBook render/content review, staged scope and whitespace.
+  Canonical trigger: `none` — tracking and observed-understanding update only; no runtime, dependency,
+    CI, cache, policy, storage, capability or generated-contract implementation changes.
+  Checklist: [x] clean activation/task ownership [x] evidence and pending owners [x] Knowledge/book/live lockstep
+    [x] focused verification [x] commit/brief/clean handoff.
+  Verification: Exact source/watch/build/sample/receipt replay, prior-record preservation, Knowledge 1048/8543,
+    rendered book, memory, both history-pressure checks, all nine doctrines and final scope/whitespace pass.
+    The preceding capacity commit passes all nine doctrines, required
+    consumers, storage/relocation, CLI 66x2 and Phase 0 1,032/1,032 in 1,163 seconds (Phase 0 only);
+    its 25 optional gates/matrices remain skipped. This intake grants no startup reading credit.
+  Commit: `SESSION-STARTUP-READING.80.0 - own CI build and startup findings` — Evidence and pending repair ownership only; resume Dart .1.37.
+
+- ID: `SESSION-STARTUP-READING.80.1`
+  Status: `pending`
+  Goal: Establish exact Cargo freshness reasons and compatible cold/warm build baselines.
+  Dependencies: `.3`, `.4`, `.5`, `.80.0`.
+  Acceptance: Use supported fingerprint tracing with the installed Cargo and quiescent managed targets.
+    Separate source, generated-file availability, environment, toolchain, profile, feature and flag changes;
+    distinguish ordinary/progressive graphs, fresh emitted callers, optional disposable targets and relocation.
+    Measure build, compiler/loader wait, test startup and execution separately. Preserve all existing artifacts
+    and nested source work; the observed missing watches are not proof that every rebuild has the same cause.
+
+- ID: `SESSION-STARTUP-READING.80.2`
+  Status: `pending`
+  Goal: Correct PGEN optional-input watches and integrate only the reviewed dependency changes.
+  Dependencies: `.80.1`.
+  Acceptance: Keep edits/deletion of present files, creation of absent files, environment overrides and genuine
+    generated EBNF/regex changes visible to Cargo. Cover cold bootstrap with all generated files or their
+    directory absent; avoid self-invalidating build-output directory watches. Preserve parser availability,
+    compiler/profile/features/flags invalidation and the normal dependency chain. Prove repeated warm reuse.
+    Own upstream changes and pin integration explicitly; preserve pre-existing nested work without staging it
+    incidentally. No fake parser stubs, warning suppression, hand-edited fingerprints or freshness bypass.
+
+- ID: `SESSION-STARTUP-READING.80.3`
+  Status: `pending`
+  Goal: Assess compatible dependency-target retention in recurring drivers that currently discard fresh targets.
+  Dependencies: `.80.1`.
+  Acceptance: Measure the exact semantic, MCP and duplicate-slot driver lifecycles and their direct dependents.
+    If beneficial, retain compatible repository-derived dependency artifacts while keeping fresh caller fixtures
+    and deliberate isolation/relocation proof exact. Preserve same-volume storage, ownership and cleanup safety.
+    Close not-required only with evidence; do not attribute the main gate's rebuilds to these optional drivers.
+
+- ID: `SESSION-STARTUP-READING.80.4`
+  Status: `pending`
+  Goal: Admit measured dependency-build reuse with unchanged verification coverage.
+  Dependencies: `.80.2`, `.80.3`.
+  Acceptance: Run repeated unchanged warm commands and controlled valid-invalidation cases, then the exact
+    staged canonical gate. Account for remaining compile/startup/test costs, all flags and intentional cold
+    proofs; update book and operational guidance with measured results. Parent .80 closes only after its
+    implementation and verification are complete; the independent .81 investigation keeps its own status.
+
+- ID: `SESSION-STARTUP-READING.81`
+  Status: `pending`
+  Goal: Diagnose prolonged Rust startup on macOS 26.6.2 and resolve any demonstrated repository-controlled cause.
+  Children: `.81.1`, `.81.2`
+  Acceptance: Distinguish newer-OS evidence from the controlled macOS 26.5.2 closeout under
+    FUTURE-PARITY-BACKLOG.19.3.4. A sampled pre-main location is not an OS/kernel causal diagnosis or a repair.
+    Preserve exact tests, project-local storage and operating-system trust.
+
+- ID: `SESSION-STARTUP-READING.81.1`
+  Status: `pending`
+  Goal: Establish controlled newer-OS launch and compiler/loader evidence independently of build invalidation.
+  Dependencies: `.3`, `.4`, `.5`, `.80.0`.
+  Acceptance: Use exact immutable-artifact warm twins and fresh serial repository-local controls, recording
+    toolchain/OS, hashes, launch/build/test timing and concurrent artifact activity. Keep uninstrumented
+    measurements separate from stack samples; temporal order does not establish sampling as a remedy.
+    Reconcile the recognition and relocation samples plus the failed compiler-sample attempt. Determine
+    whether any remaining cause is repository-controlled before selecting a remedy or external limitation.
+
+- ID: `SESSION-STARTUP-READING.81.2`
+  Status: `pending; conditional on causal evidence`
+  Goal: Implement and verify only an evidence-backed newer-OS startup remedy when one is required.
+  Dependencies: `.81.1`.
+  Acceptance: Own the concrete repair before changes, preserve all tests and storage/portability guarantees,
+    and prove cold/warm behavior without weakening trust, stripping provenance, speculative re-signing,
+    shared-cache deletion or coverage reduction. If controlled current-OS evidence supports no repository
+    repair, record that bounded conclusion explicitly; the older-OS closeout alone cannot close this leaf.
+    Any necessary action outside project authority requires a concrete reviewable proposal for the director.
+
 
 ## Current Frontier
 
-Canonical admission a67a18bf and completed `DART-STARTUP-READING.0` decomposition preserve the full baseline. Approved history capacity is committed at 7d52c98e; engineering-history capacity is committed at 9c644ecb under containment .9 / ADR0111; director-approved change-history intake .6 is implemented by containment .10 / ADR0112 from clean e55f7703; resume `DART-STARTUP-READING.1.37` after its clean canonical boundary in `docs/tasks/DART-STARTUP-READING.md`.
-Startup `.3.4` remains pending until that tree proves complete Dart reading; admission itself grants no source-reading credit.
+Canonical capacity .10 is committed at `bef5dafd`; focused CI evidence intake `.80.0` owns the separate
+Cargo-reuse `.80` and newer-OS startup `.81` repairs. Their implementation remains behind startup .3/.4/.5.
+All earlier reading coverage, findings, history and rgx reading exclusion remain unchanged.
+Startup `.3.4` stays pending until complete Dart reading; the next executable reading leaf is below.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.37` | `pending` | Continue bounded Dart test reading after containment .10's clean canonical admission; source repairs remain gated. |
+| 1 | `DART-STARTUP-READING.1.37` | `pending` | Continue bounded Dart test reading after focused CI intake .80.0; source repairs remain gated. |
 
 ## Reading Ledger
 
@@ -7105,6 +7207,9 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 - `.17`–`.30` own the additional confirmed runtime/tool/public/evidence gaps preserved in intake `.31`;
   existing lifecycle debt remains under its original card and gains `.27` implementation ownership.
 
+- `.80.1-.4` own correct dependency build reuse; `.81.1/.81.2` own newer-OS startup diagnosis and conditional repair.
+  Both retain startup .3/.4/.5 prerequisites; intake .80.0 authorizes no source repair or OS mitigation.
+
 ## Verification Log
 
 - `2026-09-08` `.3.3.67`: Exact scope and independent committed-child/mode/delta/repair/Knowledge continuity audits PASS. All 66 reading children and 141 touched fact paths are durable; 34 post-Perl repair owners retain 90 pending nodes / 73 pending leaves. Final receipt-bound canonical CI governs parent landing; outcome and exact log identity are retained in the commit. Next containment .7 precedes Dart ownership/reading.
@@ -7263,6 +7368,11 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.40` | Five complete upper-map ranges; baseline and retained-generation input identity; Unicode Knowledge; memory/history/diff/nine doctrines | PASS reading and retained-proof scope; upper map complete, evaluator remains pending. |
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.41` | Exact two-file reading/baseline identity; complete Unicode coverage; callable assertion scope; Unicode/callable neutral checks; four Knowledge cards; 99-commit batch census; memory/history/diff and receipt-bound canonical gate | PASS focused reading and census; exact staged canonical receipt required before landing, with final result in the commit body. |
 | `2026-09-08` | `SESSION-STARTUP-READING.3.3.42` | Exact scoped reading/baseline identity; callable/named-mark neutral checks; Knowledge, memory, histories, diff and all doctrines | PASS focused reading; pressure maintenance owns the next clean pivot. |
+
+Current CI intake, `2026-09-10` / `SESSION-STARTUP-READING.80.0`: exact source, eight watches/two present files,
+eleven build stages, both successful samples and failed compiler-sample outcome, prior-record preservation,
+Knowledge/book/memory/history/whitespace and all nine doctrines pass. Preceding canonical `bef5dafd` passes
+CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gates skipped.
 
 ## Commit Log
 
@@ -7445,3 +7555,4 @@ Each canonical task node owns its exact `Commit` subject and retained completion
 - `2026-09-08`: `.3.3.65` completes lifecycle/trace/typed/casing reading with precise carrier proof; next `.3.3.66`.
 - `2026-09-08`: `.3.3.66` completes final Rust contract consumers; only parent closeout remains; next `.3.3.67`.
 - `2026-09-08`: `.3.3.67` closes complete Rust reading; preserves pending repairs and routes Dart capacity first; next `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7`.
+- `2026-09-10`: `.80.0` preserves CI build/watch/startup evidence, creates gated `.80` and `.81` repairs, and returns to Dart `.1.37` without implementation or reading credit.

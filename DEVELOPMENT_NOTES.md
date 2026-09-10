@@ -10,6 +10,16 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-10 — CI build invalidation and startup waits have separate owners
+
+Startup .80.0 distinguishes unconditional missing-file watches from parser
+availability cfg checks, main-target reuse from optional disposable targets, and
+elapsed build cost from test startup/execution. Eleven visible build stages total
+78m02s; exact fingerprint and warm-run proof remain under .80.1. The newer-OS
+relocation sample is pre-main, not a kernel-cause diagnosis or a sampling remedy;
+.81 owns controlled diagnosis and conditional repair. Earlier macOS conclusions
+remain bounded to their tested OS. Capacity .10 is canonical at bef5dafd.
+
 ## 2026-09-10 — one approved change-history member, with fresh provenance
 
 Containment .10 implements the director's “Granted” response to Dart intake .6.

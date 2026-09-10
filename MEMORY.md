@@ -1,14 +1,13 @@
 # MEMORY
 
-- activation_commit: `e55f7703ebc42ef6a66c385bec884b8d3692fc66` — clean focused handoff before approved containment .10.
-- latest_completed_leaf: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.10 - admit approved change-history member`.
+- activation_commit: `bef5dafd928ca723b79eda524351a9fb5c1cf66a` — clean canonical capacity handoff before CI evidence intake .80.0.
+- latest_completed_leaf: `SESSION-STARTUP-READING.80.0 - own CI build and startup findings`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: `DART-STARTUP-READING.1.37` continues exact compiled/named-mark/corpus/diagnostic/duplicate-slot test reading after containment .10's clean canonical admission.
+- next_action: `DART-STARTUP-READING.1.37` continues compiled/named-mark/corpus/diagnostic/duplicate-slot test reading after the committed CI intake.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
-- blockers: Startup `.7` blocks recovery/purge; engineering-history .5 approval is implemented under containment .9 / ADR0111; prior change-history approval remains under .8 / ADR0110. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.79` precede mutation setup; `.29` belongs to `.5`. Prior narrow exceptions stay approved; Dart .6 approval is implemented under containment .10 / ADR0112, with all earlier history preserved.
-- current_rust_warning_debt: repeated clean carriers report 1,870 `pgen` plus 26 `rgx-core` output warnings;
-  `RUST-DEPENDENCY-WARNING-ZERO.1-.7` own causal repair/pins/enforcement without suppression, after Lua intake.
+- blockers: Startup `.7` blocks recovery/purge; engineering-history .5 approval is implemented under containment .9 / ADR0111; prior change-history approval remains under .8 / ADR0110. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.81` precede mutation setup; `.29` belongs to `.5`. Prior narrow exceptions stay approved; Dart .6 approval is implemented under containment .10 / ADR0112, with all earlier history preserved.
+- current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
   and requires every exact current task ID to be unique across partitioned and unpartitioned storage.
@@ -35,7 +34,7 @@
   staged canonical signoff plus both 66/66 CLI environments and Phase 0 1,032/1,032 are green.
 - canonical_ci_execution: use approved host execution for `tools/run_ci_local.sh`; nested macOS containment
   requires it. See `docs/knowledge/project-data-process-locality-proof.md`.
-- current_rust_launch_evidence: newer-OS pre-main samples are bounded in `docs/knowledge/macos-rust-first-launch-validation-latency.md`.
+- current_rust_launch_evidence: Newer-OS controlled diagnosis/conditional repair is pending under startup .81; see `docs/knowledge/macos-rust-first-launch-validation-latency.md`.
 - current_mutation_composition_contract: `linkedspec-write-map-leaves-composition-v1` digest-binds both unchanged
   mechanisms across eight writes, six callback cases, one continuation, and 592 current composition mutations;
   Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT execute both halves through one governed recurring driver. Zero-regex
@@ -52,9 +51,10 @@
 - standing_contracts: all durable paths are repo-relative; all project data stays on the repository filesystem;
   README remains bounded; ordinary leaves use focused proof and designated infrastructure/public/push boundaries
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
-- current_engineering_notes_capacity: immutable segment `4981-a05653da7d6c` preserves 207 source lines / 32,348 bytes;
-  ADR `0111` authorizes exactly 27 collection files / 26 manifest lines; manifest is 15,618 bytes, and every byte
-  and aggregate ceiling remains unchanged.
-- current_change_history_capacity: immutable segment `4981-5a6450db0974` preserves 218 lines / 32,108 bytes;
-  ADR `0112` authorizes exactly 32 collection files / 31 manifest lines / 17,615 manifest bytes; all other limits remain unchanged.
-- latest_bootstrap_read: 2026-09-10 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading36/55, 52,028 fragments/1,599,420 bytes; .6 director approval implemented under containment .10 / ADR0112 with exact history preservation and canonical proof; next .1.37.
+- current_engineering_notes_capacity: ADR0111 admits exactly 27 collection files / 26 manifest lines; segment 4981-a05653da7d6c preserves 207 lines / 32,348 bytes.
+  Manifest is 15,618 bytes; every other ceiling remains unchanged.
+- current_change_history_capacity: ADR0112 at bef5dafd admits exactly 32 collection files / 31 manifest lines / 17,615 manifest bytes.
+  Segment 4981-5a6450db0974 preserves 218 lines / 32,108 bytes; every other ceiling remains unchanged.
+- current_ci_build_reuse: Startup .80.1-.4 own correct PGEN/RGX reuse; 11 visible test-build stages total 4,682 seconds.
+  Exact fingerprint and warm-run repair proof remain pending; source changes retain startup prerequisites.
+- latest_bootstrap_read: 2026-09-10 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart 36/55, 52,028 fragments / 1,599,420 bytes. CI intake .80.0 preserves evidence and pending .80/.81 repairs; next .1.37.

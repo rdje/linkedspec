@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.36 completes thirty-six of 55 children: 52,028 fragments / 1,599,420 bytes. Action-contract/callable tests are complete; compiled tests reach 418. All 38 tests and neutral callable checks pass, including fresh offline emitted fixture/contextual/seven-error proof. No new defect. Approved capacity at 9c644ecb and all earlier Dart/startup owners remain intact. Director-approved .6 is implemented by containment .10 / ADR0112 with exactly three controls, fresh 218-line preservation and 22 actual-validator executions; next .1.37 after clean canonical admission. Remaining reading and repairs stay open.
-- Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.36 completes thirty-six of 55 children: 52,028 fragments / 1,599,420 bytes. Action-contract/callable tests are complete; compiled tests reach 418. All 38 tests and neutral callable checks pass, including fresh offline emitted fixture/contextual/seven-error proof. No new defect. Approved capacity at 9c644ecb and all earlier Dart/startup owners remain intact. Director-approved .6 is canonically committed at bef5dafd under containment .10 / ADR0112 with exactly three controls, 218-line preservation and 22 actual-validator executions. Focused CI intake .80.0 owns pending .80/.81 performance repairs; next Dart .1.37. Remaining reading and repairs stay open.
+- Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.81` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.10` implements approved Dart intake .6 under ADR0112: files31→32, manifest lines30→31/bytes17039→17615 only. Fresh clean-source rollover preserves 218 lines / 32,108 bytes and all earlier history. Exact reconstruction and 22 actual-validator executions pass; exact staged canonical proof governs landing. Reading remains 36/55.
+- `SESSION-STARTUP-READING.80.0` records eight PGEN file watches / six absent optional inputs and eleven visible test-build stages / 78m02s. Pending .80.1-.4 own correct Cargo reuse; .81.1-.2 own newer-OS pre-main diagnosis and conditional repair. Both successful samples and the failed compiler-sample attempt retain their exact limits. No implementation or reading credit; all earlier evidence remains.
 
 ## Next Action
 
-- `DART-STARTUP-READING.1.37` continues compiled, named-mark, corpus, diagnostic and duplicate-slot test reading after containment .10's clean canonical commit and cleared brief. Existing repairs and parked ideas retain their gates.
+- `DART-STARTUP-READING.1.37` resumes bounded compiled, named-mark, corpus, diagnostic and duplicate-slot test reading after the focused intake commit and cleared brief. Existing repairs and parked ideas retain their gates.
 
 ## Recent Completions
+
+- `2026-09-10` — `SESSION-STARTUP-READING.80.0` owns Cargo reuse .80 and newer-OS startup diagnosis .81; source/watch/build/sample evidence and preceding canonical proof are preserved; no implementation or reading credit.
 
 - `2026-09-10` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.10` admits exactly three approved history controls; 218-line preservation, full reconstruction and 22 actual-validator executions pass; canonical proof governs landing.
 
@@ -48,8 +50,6 @@
 - `2026-09-10` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.9` admits engineering-history files 26→27 and manifest lines 25→26; exact history reconstruction and 22 validator executions pass; canonical proof governs landing.
 
 - `2026-09-10` — `DART-STARTUP-READING.1.24` reads 1,500 fragments / 48,312 bytes; 58 tests pass; recognition/semantic/source complete, staged entry through 306; no new runtime defect.
-
-- `2026-09-09` — `DART-STARTUP-READING.1.23` reads 1,500 fragments / 41,162 bytes; 99 tests pass; six Dart/Perl regex comparisons own .2.16 literal normalization.
 
 ## History
 

@@ -10,6 +10,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-10 — SESSION-STARTUP-READING.80.0: own CI performance findings
+
+Record the source-backed missing PGEN watches and eleven visible test-build stages
+(78m02s), with correct Cargo reuse owned by .80.1-.4. Newer macOS pre-main
+observations and conditional remediation have separate .81 ownership. Knowledge,
+book and continuity preserve the exact evidence and completed capacity receipt.
+No implementation or reading credit; Dart .1.37 resumes after focused closeout.
+
 ## 2026-09-10 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.10: approved history member
 
 ADR0112 records the director approval of exactly files 31→32, manifest lines

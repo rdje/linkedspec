@@ -111,7 +111,24 @@ The governed rollover preserves 218 complete clean-source lines / 32,108 bytes,
 with exact provenance and full reconstruction of every earlier history byte.
 Twenty-two actual-validator executions verify the boundaries. Every other ceiling
 and repair prerequisite stays unchanged. Dart intake `.6` closes; child `.1.37`
-follows the clean canonical admission. This storage change grants no reading credit.
+follows canonical capacity commit `bef5dafd`. This storage change grants no reading credit.
+
+**CI performance — diagnosed, repairs pending:** PGEN currently asks Cargo to watch
+eight generated-parser inputs even though six optional files are absent. Cargo documents
+that missing watched files can repeatedly trigger its build script. Startup `.80` owns
+exact fingerprint diagnosis, correct file creation/deletion and environment tracking,
+compatible dependency-cache reuse, and measured warm-build proof. The required
+PGEN → RGX → LinkedSpec chain and all tests remain in place. In the completed capacity
+gate, eleven visible Rust test-build stages totalled 78m02s; this is observed elapsed
+build cost, including compiler/link waits, and is not a measured saving.
+
+A separate newer macOS startup issue is owned by startup `.81`. A relocation sample about
+14 minutes after process launch showed only `_dyld_start`; the test subsequently passed
+in 2.25 seconds. That sample locates a pre-main wait without establishing its OS cause
+or a remedy. The older macOS 26.5.2 closeout does not resolve this macOS 26.6.2 observation.
+The evidence and repair criteria are logged by `SESSION-STARTUP-READING.80.0`; source
+changes remain behind the existing startup prerequisites. Dart reading continues at
+`.1.37`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
 
 **Known Dart limitation — null named selectors in reconstructed state:** a programmatically
 reconstructed target with these fields is incorrectly accepted:
