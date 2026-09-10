@@ -10,6 +10,16 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-10 — Dart casing evaluator and typed semantic owner reading
+
+Dart .1.29 completes pinned casing properties and original-rune Final Sigma
+context, then reads typed call-owner ordering and traversal setup. Existing
+startup .22 owns the unchanged empty-function guard; finite semantic fixture
+success does not prove arbitrary-action coverage. Eleven Dart tests and the
+neutral semantic six-group/twenty-query/128-mutation gate pass. All twelve
+Unicode runtime fixtures execute; generation remains .1.28/17341bbe evidence
+by source identity. All prior repairs remain gated; no new defect is established.
+
 ## 2026-09-10 — complete Dart lower mappings and continue upper table
 
 Dart .1.28 reads through Unicode mapping line 2689. Supplementary and fullwidth

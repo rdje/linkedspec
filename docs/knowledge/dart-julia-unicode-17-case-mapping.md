@@ -56,3 +56,17 @@ modules and passes twelve independent fixtures with unchanged 1563/1581
 mappings and 158/464 ranges. The 33-test Dart run remains .1.27/dfc57ce1
 evidence, retained by exact source identity. No fresh Julia or other-backend
 runtime execution, new defect, data revision or source repair is claimed.
+
+## 2026-09-10 — Dart evaluator reading completion
+
+`DART-STARTUP-READING.1.29` completes the module through line 3835.
+Upper mappings end at U+1E943. Sorted inclusive property ranges use binary
+search. Final Sigma examines the original rune sequence, skips case-ignorable
+scalars in each direction, and requires a preceding cased scalar with no
+following cased scalar. Ordinary mappings preserve unmapped runes and append
+full ordered expansions; the evaluator does not normalize or consult host casing.
+
+The fresh eleven-test Dart selection includes the casing consumer, which runs
+all twelve fixtures through direct, helper, receiver and array routes. Neutral
+regeneration remains the unchanged .1.28/17341bbe checkpoint; no fresh Julia
+or other-backend execution, generated-data change or new defect is claimed.

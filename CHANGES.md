@@ -10,6 +10,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-10 — DART-STARTUP-READING.1.29: Unicode completion and call projection
+
+Read 1,500 fragments / 37,172 baseline-identical bytes: complete Unicode
+mapping/scaffold and begin semantic call projection through 347. Eleven Dart
+tests and semantic 6/20/128 checks pass, including all twelve Unicode runtime
+fixtures. The existing empty-function guard remains startup .22-owned.
+No new defect or source change; reading reaches 29/55 and .1.30 is next.
+
 ## 2026-09-10 — DART-STARTUP-READING.1.28: Unicode mapping continuation
 
 Read Unicode mapping 1190–2689: 1,500 fragments / 38,936 baseline-identical

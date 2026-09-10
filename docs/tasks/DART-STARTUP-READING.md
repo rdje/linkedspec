@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / .1.28 complete; next .1.29
+- Status: `active` / .1.29 complete; next .1.30
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-10`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 28/55 children, 40,028/80,297 fragments and 1,248,597/2,471,305 bytes; thirty-four entries through EOF
-  plus unicode_case_mapping.dart through line 2689. Exact credit and comprehension remain in each completed node.
+- Current reading: 29/55 children, 41,528/80,297 fragments and 1,285,769/2,471,305 bytes; thirty-six entries through EOF
+  plus semantic_call_projection.dart through line 347. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -85,7 +85,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Acceptance: Every child accounts for its exact source bytes and deltas, reconciles Knowledge before re-derivation,
     records comprehension and confirmed findings, runs necessary focused diagnostics and commits before the next child.
   Children: `.1.1-.1.55`; exact scopes and baseline evidence below, read in numeric order.
-  Verification: 28/55 children complete; `.1.1-.1.28` own exact reading/comprehension evidence, and all later children remain pending.
+  Verification: 29/55 children complete; `.1.1-.1.29` own exact reading/comprehension evidence, and all later children remain pending.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.1.1`
@@ -513,14 +513,20 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.28 - read Unicode lower completion and upper mappings`
 
 - ID: `DART-STARTUP-READING.1.29`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 29 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.28` committed; empty brief and clean repository.
+  Activation: Clean `17341bbe0b8822b1130bd346e3b966089786b68a`; root status empty, brief zero bytes, and prior commit jobs consumed.
   Scope: `dart/lib/src/runtime/unicode_case_mapping.dart` lines 2690-3835; `dart/lib/src/scaffold.dart` lines 1-7; `dart/lib/src/semantic/semantic_call_projection.dart` lines 1-347
   Baseline evidence: 1500 fragments / 37172 bytes; ordered range SHA-256 `83fc2f7982759ace4650de163a5476dec075705d2189a6b7dfaa62dbecd37b44`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Eleven Dart call/static/casing tests, including all twelve Unicode fixtures through direct/helper/receiver/array paths; neutral semantic contract; exact range/current deltas, retained .1.28 Unicode generation proof, prior evidence retention, all doctrines, both histories, Knowledge freshness, rendered mdBook and staged scope.
+  Canonical trigger: `none` — bounded required reading and documentation; no source, public contract or infrastructure change.
+  Comprehension: Complete upper mappings through U+1E943, merged Cased/Case_Ignorable ranges, binary-search membership and original-rune Final Sigma context. Lowercase sigma requires a preceding cased scalar and no following cased scalar after skipping case-ignorable characters; other mappings expand fixed sequences and preserve unmapped runes. Scaffold only names the package and existing 105-fixture/CLI status. Semantic projection merges typed function and rule definitions by authored UTF-8 start, correlates call occurrences monotonically inside bounded sources, seeds function parameter shapes, traverses function and edge ActionIR, and begins owner/name/occurrence binding construction. Its three explicit helper contracts and empty-function guard remain existing bounded behavior; traversal/binding completion belongs to .1.30.
+  Findings: No new confirmed defect. The unchanged empty-function early return is already owned by SESSION-STARTUP-READING.22 and its three gated children; retain the dated zero-versus-five runtime evidence without claiming a fresh reproduction or broad call coverage from the finite fixtures. All Dart .2.1-.2.19 and earlier startup findings remain intact. No source or generated data changed.
+  Verification: Physically read Unicode mapping 2690-3835 through EOF in four complete untruncated outputs, scaffold 1-7 through EOF, and semantic call projection 1-347 in two complete outputs: 1,500 fragments / 37,172 baseline-identical bytes with unchanged ordered digest. All eleven selected Dart tests pass: four exact call/staged/generated/Unicode/detachment tests, six static graph/privacy/failure/occurrence tests, and one casing test executing all twelve fixtures on direct/helper/receiver/array routes. Fresh neutral semantic checking passes six fixture groups, twenty exact queries and 128 rejected mutations; rollout 9/0 and admission 6/0 remain unchanged governance counts. Unicode regeneration/12 neutral fixtures remain .1.28/17341bbe proof by exact source identity; no other-backend fresh execution is claimed. Full coverage reconstruction, prior-record retention, doctrines, both histories, Knowledge and rendered-book proof belong to this commit.
+  Commit: `DART-STARTUP-READING.1.29 - complete Unicode and begin semantic call projection`
 
 - ID: `DART-STARTUP-READING.1.30`
   Status: `pending`
@@ -1218,7 +1224,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.29` | `pending` | Finish Unicode mapping from 2690, read scaffold and begin semantic call projection after .1.28 commits and the brief/tree are clean; reading is 28/55. |
+| 1 | `DART-STARTUP-READING.1.30` | `pending` | Continue semantic call projection from 348 through EOF, then semantic index 1-399 after .1.29 commits and the brief/tree are clean; reading is 29/55. |
 
 ## Decisions
 
@@ -1241,6 +1247,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-10`: `.1.29` completes Unicode mapping/scaffold and reads semantic call projection through 347: 1,500 fragments / 37,172 baseline-identical bytes. Eleven Dart tests and semantic 6/20/128 checks pass; all twelve Unicode runtime fixtures pass. Existing startup .22 evidence remains owned; no new defect. Reading reaches 29/55.
 
 - `2026-09-10`: `.1.28` reads Unicode mapping 1190–2689: 1,500 fragments / 38,936 baseline-identical bytes. The lower table is complete and the upper table reaches U+A76F. Fresh generation/12 neutral fixtures pass; .1.27 runtime evidence is retained by source identity. No new defect; reading reaches 28/55.
 
@@ -1299,6 +1307,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- `.1.29`: `DART-STARTUP-READING.1.29 - complete Unicode and begin semantic call projection`.
+
 - `.1.28`: `DART-STARTUP-READING.1.28 - read Unicode lower completion and upper mappings`.
 
 - `.1.27`: `DART-STARTUP-READING.1.27 - read staged declarations and own provenance type gap`.
@@ -1354,6 +1364,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-10`: Completed .1.29 from clean 17341bbe; finished Unicode/scaffold reading, began typed call projection, retained startup .22 and all earlier findings, and routed .1.30.
 
 - `2026-09-10`: Completed .1.28 from clean dfc57ce1; completed lower-map reading, continued upper mappings, retained all prior findings and routed .1.29.
 

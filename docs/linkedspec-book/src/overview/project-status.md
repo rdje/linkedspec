@@ -89,18 +89,20 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed twenty-eight of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed twenty-nine of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
 parser bridge, function-shell projection, bounded child-parse authority, generated rule plan,
 interpreter, matching, recognition transactions, semantic observation, source location and both
-staged runtime modules, plus Unicode case mapping through line 2689. This covers 40,028 fragments /
-1,248,597 bytes. The lower table is complete; uppercase mappings reach U+A76F. Fresh regeneration
-matches the neutral data and all five backend modules, and twelve independent fixtures pass.
-The 33-test Dart run and seventeen provenance controls remain the unchanged `.1.27` checkpoint;
-this range establishes no new defect. Child `.1.29` finishes Unicode mapping from line 2690,
-reads scaffold and begins semantic call projection. Startup `.3.4` remains pending;
-all prior evidence and limitations remain intact.
+staged runtime modules, Unicode case mapping and scaffold, plus semantic call projection through
+line 347. This covers 41,528 fragments / 1,285,769 bytes. Eleven selected Dart tests pass, including
+all twelve Unicode fixtures on direct/helper/receiver/array routes. Neutral semantic checks pass
+six fixture groups, twenty exact queries and 128 rejected mutations. Unicode regeneration remains
+the unchanged `.1.28` checkpoint. The existing empty-function guard still skips rule-call projection
+and remains owned by startup `.22`; passing finite fixtures does not close that limitation.
+This range establishes no new defect. Child `.1.30` continues call projection from line 348
+through EOF, then begins semantic index. Startup `.3.4` remains pending; all prior evidence and
+limitations remain intact.
 
 The function shell checks the returned definition's text against scalar spans, reconciles staged
 body metadata and removes declarations while preserving line breaks. The private progressive

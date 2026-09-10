@@ -52,3 +52,12 @@ SemanticIndex queries return zero records without a function and five with an un
 Both snapshots compile; responses have no diagnostics and both process stderr files are empty.
 Fixtures/full responses and identity are retained in `.linkedspec-data/scratch/startup89-semantic-bindings/`.
 The independent repeated-binding failure in [[rust-semantic-repeated-binding-identity-gap]] is .66-owned.
+
+## September 10 Dart reading reconciliation
+
+`DART-STARTUP-READING.1.29` reads semantic_call_projection.dart 1-347 and
+confirms exact source identity with the intake baseline. Its function-empty
+guard still precedes action-owner traversal. The four existing call-projection
+tests and six static tests pass, but their finite fixture success does not close
+this limitation. No fresh zero-versus-five runtime census is claimed; the dated
+Dart measurement and startup .22/.22.1-.22.3 repair boundary remain intact.

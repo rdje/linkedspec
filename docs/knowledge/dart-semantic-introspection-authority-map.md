@@ -256,3 +256,21 @@ rollout and native admission remain unchanged.
 Query authority, exact static/boundary counts, the fresh detached-clone rule, and the `.10.5.4.1-.4` dependency
 split are now canonical in [[dart-semantic-query-authority-map]]; public use is recorded in
 [[dart-semantic-query-public-api]].
+
+## 2026-09-10 — bounded Dart call-projector reading
+
+`DART-STARTUP-READING.1.29` physically reads semantic_call_projection.dart
+1-347 with exact baseline identity. Typed function and rule owners merge by
+authored UTF-8 start; bounded call cursors advance monotonically through named
+source occurrences. Function parameters seed conservative shapes, and typed
+body/edge traversal begins owner-specific call and binding construction.
+The remaining traversal, inference, staged and generated implementations belong
+to .1.30; this range alone does not establish complete arbitrary-action coverage.
+
+Four existing call tests and six static tests pass in the fresh eleven-test
+selection (the eleventh runs twelve Unicode casing fixtures). Neutral semantic
+checking passes six fixture groups, twenty exact queries and 128 rejected
+mutations; rollout/admission counts remain 9/0 and 6/0. The pre-existing
+empty-function guard remains owned by startup .22, as recorded in
+[[semantic-rule-calls-empty-function-gate]]. No new defect, projection exposure,
+runtime repair, MCP capability or generated-format change is established.

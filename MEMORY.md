@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `dfc57ce191d4191b1d7e4fb957756bf35d63971b` — clean focused handoff before Dart .1.28.
-- latest_completed_leaf: `DART-STARTUP-READING.1.28 - read Unicode lower completion and upper mappings`.
+- activation_commit: `17341bbe0b8822b1130bd346e3b966089786b68a` — clean focused handoff before Dart .1.29.
+- latest_completed_leaf: `DART-STARTUP-READING.1.29 - complete Unicode and begin semantic call projection`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: `DART-STARTUP-READING.1.29` finishes Unicode mapping from 2690, reads scaffold and begins semantic call projection after the clean focused .1.28 commit.
+- next_action: `DART-STARTUP-READING.1.30` continues call projection from 348 through EOF, then semantic index 1-399 after the clean focused .1.29 commit.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: Startup `.7` blocks recovery/purge; engineering-history .5 approval is implemented under containment .9 / ADR0111; prior change-history approval remains under .8 / ADR0110. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.79` precede mutation setup; `.29` belongs to `.5`. The director approved the narrow capacity exception; other reading gates remain.
@@ -57,4 +57,4 @@
   and aggregate ceiling remains unchanged.
 - current_change_history_capacity: immutable segment `4982` is the twenty-ninth history segment; ADR `0110`
   authorizes exactly 31 collection files / 30 manifest lines / 17,039 manifest bytes; other ceilings remain unchanged.
-- latest_bootstrap_read: 2026-09-10 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading 28/55 children, 40,028 fragments / 1,248,597 bytes; Unicode mapping through 2689; fresh generation/12 neutral fixtures pass; .1.27/dfc57ce1 retains 33 runtime tests and seventeen provenance controls by source identity; no new defect; all earlier owners intact; next .1.29.
+- latest_bootstrap_read: 2026-09-10 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading 29/55 children, 41,528 fragments / 1,285,769 bytes; Unicode/scaffold complete, call projection through 347; eleven tests and semantic 6/20/128 checks pass; twelve Unicode runtime fixtures pass; no new defect; existing startup .22 and all earlier owners intact; next .1.30.
