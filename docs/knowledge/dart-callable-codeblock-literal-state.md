@@ -47,3 +47,16 @@ Construction/state remains intentionally inert. Bound-variable dispatch such as 
 Related facts: [[callable-codeblock-literal-contract]], [[dart-variadic-user-functions]],
 [[dart-callable-codeblock-dynamic-invocation]], [[rust-callable-codeblock-literal-state]],
 [[perl-callable-codeblock-literal-record]].
+
+## 2026-09-10 — complete callable consumer reading
+
+`DART-STARTUP-READING.1.36` reads all 1,080 callable contract test lines.
+They check exact neutral fields/signatures, containing Unicode spans, malformed
+literal codes, inert construction/copy/function transport, deferred dependencies
+and semantic callable shapes. All 38 selected callable/compiled/action/variadic
+tests pass, including fresh standalone offline emitted fixture/contextual/error
+execution. Neutral callable7/11/9/7/4/8 and 23 governance mutations pass.
+
+The earlier .11.5.3-pending sentence is historical: contextual final-block
+normalization is already implemented as [[dart-generic-final-codeblock-gap]]
+records. This reading changes no capability or syntax.

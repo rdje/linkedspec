@@ -63,3 +63,16 @@ Related facts: [[dart-function-registry]], [[dart-actionir-contract-resolver]],
 ## Compiler completion reading — 2026-09-09
 
 DART-STARTUP-READING.1.7 completes compiled_spec.dart through EOF. The remaining validators walk serialized payloads and specific function bodies; compilation normalizes bare edges by family, preserves named/indexed slot provenance, expands dependency patterns and projects descriptors from compiled state. Optional edge payload code selects an explicit block when present, otherwise joins its fluent calls; the separate fluent chain remains carried. The special observation closure follows explicit calls/functions but omits structural edges. [[dart-recognition-effect-integration-gap]] owns the confirmed bypass and disconnected generic classifier; 74 selected tests do not close those defects.
+
+## 2026-09-10 — compiler test prefix reading
+
+`DART-STARTUP-READING.1.36` reads compiled_spec_test.dart 1-418. Tests
+assert ordered rules, modes, dependency patterns and descriptor fields, staged
+function jobs/body ASTs and execution, edge-only parent/child regex indexes,
+last-definition replacement with validation explicitly disabled, and ordinary
+undefined-target rejection. The staged descriptor fixture helper tail remains
+.1.37 reading. All 38 selected callable/compiled/action/variadic tests pass.
+
+The separately confirmed recognition, lexical/semantic and malformed selector
+findings retain their existing repair owners. These fixtures do not establish
+complete validation of caller-constructed state.

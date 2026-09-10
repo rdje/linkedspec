@@ -56,3 +56,16 @@ of cb -> cb. Direct bound recursion retains cb identity. Nine native/SpecFile-JS
 including three successful single/sequential/different-helper controls, live in
 [[dart-callback-helper-recursion-identity-gap]]. Gated repair .2.10 owns identity retention
 and broader carrier proof; the 140 selected test passes do not cover this new boundary.
+
+## 2026-09-10 — invocation consumer and emitted proof
+
+`DART-STARTUP-READING.1.36` completes the callable contract consumer. Its
+assertions cover ordered effects, copies, dynamic stores, local returns,
+precedence, seven neutral failures, mutual recursion, sidecar consistency and
+contextual forms. One fresh offline caller executes the neutral fixture,
+contextual equivalence and all seven invalid calls; all 38 selected tests pass.
+Existing helper-mediated identity failures in .2.10 remain outside those cases.
+
+Generic contextual final-block normalization is already implemented under
+[[dart-generic-final-codeblock-gap]]; the earlier .11.5.3-pending sentence
+describes the earlier invocation milestone, not current availability.

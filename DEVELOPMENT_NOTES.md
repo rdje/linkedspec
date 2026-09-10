@@ -10,6 +10,19 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-10 — callable consumer boundaries and compiled fixture ownership
+
+Dart .1.36 completes callable tests and reads compiler tests through 418.
+Exact records, Unicode spans, inert transport, dynamic invocation, copies,
+precedence, failures and contextual metadata retain neutral coverage. One fresh
+offline caller executes the fixture, contextual forms and seven invalid calls.
+All 38 selected tests and neutral callable7/11/9/7/4/8/23 pass. Earlier .2.10
+callback identity and .2.23 malformed selector findings remain owned; no new
+defect. Current generic final blocks qualify the older milestone-pending prose.
+The governed history rollover rejects exactly files32/31, manifest31/30 lines
+and17615/17039 bytes. Exact draft restoration preserves all older bytes; a
+complete concise record fits460 lines. Dart .6 owns the next director decision.
+
 ## 2026-09-10 — nullable named-selector identity must not match absence
 
 Dart .1.35 completes validation/package/action-parser reading. Two reconstructed

@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / .1.35 complete; next .1.36
+- Status: `active` / .1.36 complete; awaiting .6 capacity decision before .1.37
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-10`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 35/55 children, 50,528/80,297 fragments and 1,551,233/2,471,305 bytes; forty-eight entries through EOF
-  plus action_contracts_test.dart through line 203. Exact credit and comprehension remain in each completed node.
+- Current reading: 36/55 children, 52,028/80,297 fragments and 1,599,420/2,471,305 bytes; fifty entries through EOF
+  plus compiled_spec_test.dart through line 418. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -85,7 +85,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Acceptance: Every child accounts for its exact source bytes and deltas, reconciles Knowledge before re-derivation,
     records comprehension and confirmed findings, runs necessary focused diagnostics and commits before the next child.
   Children: `.1.1-.1.55`; exact scopes and baseline evidence below, read in numeric order.
-  Verification: 35/55 children complete; `.1.1-.1.35` own exact reading/comprehension evidence, and all later children remain pending.
+  Verification: 36/55 children complete; `.1.1-.1.36` own exact reading/comprehension evidence, and all later children remain pending.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.1.1`
@@ -625,14 +625,20 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.35 - own null named-selector validation gap`
 
 - ID: `DART-STARTUP-READING.1.36`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 36 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.35` committed; empty brief and clean repository.
+  Activation: Clean `6cb42d876d605830bdb429236e08d553a541fd9d`; root status empty, brief zero bytes, and prior commit jobs consumed.
   Scope: `dart/test/action_contracts_test.dart` lines 204-205; `dart/test/callable_codeblock_literal_contract_test.dart` lines 1-1080; `dart/test/compiled_spec_test.dart` lines 1-418
   Baseline evidence: 1500 fragments / 48187 bytes; ordered range SHA-256 `2e49dc784db23bc6db5df83e9df7a2f327a4e28701f862cbb723b876fb0f1c32`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Actual governed history rollover/rejection, exact restoration and read-only capacity proposal; thirty-eight Dart callable-codeblock/compiled-spec/action-contract/variadic tests, including standalone offline emitted execution; neutral callable contract; exact range/current deltas, prior evidence retention, all doctrines, both histories, Knowledge freshness, rendered mdBook and staged scope.
+  Canonical trigger: `none` — bounded required reading and documentation; no source, public contract or infrastructure changes.
+  Comprehension: Contract helper tail completes function fixtures. Callable tests cover exact neutral eight-field records, fixed/rest signatures, containing Unicode spans, malformed literal diagnostics, inert construction/copies/transport, deferred dependencies and semantic signature shapes. Dynamic invocation tests cover ordered argument effects, copied parameters/results, caller-time reads, local returns, static precedence, typed failures and direct/mutual cycles across native/reconstructed/generated routes. Metadata-owned contextual final blocks preserve eager/harray/control distinctions, descriptor-v3/staged sidecars, arity diagnostics and callback lookup before value binding. One standalone caller uses a fresh local offline package cache to execute the neutral fixture, contextual forms and all seven invalid calls, then cleans its scratch. Compiler tests cover ordered rule/dependency/descriptor state, stitched function jobs and runtime, edge-only regex indexes, explicit validation bypass for last-definition replacement, and ordinary undefined-target rejection. Descriptor fixture helpers continue through 418; remaining tail belongs to .1.37.
+  Findings: No new confirmed code defect. Required history rollover rejects exactly collection32/31, manifest31/30 and17615/17039. Intake .6 owns a new director decision; the verified draft is restored and a complete concise .1.36 record fits 460 lines without changing prior history or limits. Existing .2.10 qualifies helper-mediated callback identity; .2.1/.2.2/.2.4/.2.6-.2.9 and semantic .2.20-.2.23/startup .67/.70 retain their evidence. Current generic final-block implementation is recorded in dart-generic-final-codeblock-gap; the older construction/invocation cards' historical .11.5.3-pending statements are explicitly qualified, with no capability change. The .1.35 malformed named-selector controls remain retained at unchanged source identity.
+  Verification: Physically read action-contract tests 204-205 through EOF, all callable-codeblock tests 1-1080 in five complete 216-line outputs, and compiled-spec tests 1-418 in two complete 209-line outputs: 1,500 fragments / 48,187 baseline-identical bytes with unchanged ordered digest. All 38 selected tests pass, including the fresh offline standalone caller's fixture/contextual/seven-error execution. Neutral callable contract passes 7 literals/11 calls/9 invalid literals/7 invalid calls/4 invalid declarations/8 contextual forms and 23 governance mutations. Existing counterexamples remain retained rather than freshly replayed; no other-backend or MCP result is claimed. Governed draft archives exact clean 6cb42d87 CHANGES247-457 (211 lines/31668 bytes; SHA-25655830675f67c5814a5457a3c2adabc054d918b62582312c52d791fe268b78ef4); source/hash/prior-manifest/full-draft reconstruction passes. Routing rejects precisely three capacity axes; only the verified uncommitted draft is restored. New .6 and its Knowledge card retain the proposal. Full 115-path/169-range/55-child reconstruction, prior evidence retention, doctrines, both histories, Knowledge and rendered-book proof belong to this commit.
+  Commit: `DART-STARTUP-READING.1.36 - complete callable contract test reading`
 
 - ID: `DART-STARTUP-READING.1.37`
   Status: `pending`
@@ -1345,11 +1351,22 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Verification: Director “ok for increasing the allowance” approves exactly files 26→27 and manifest lines 25→26. LIVE-DOCUMENT-PRESSURE-CONTAINMENT.9 implements from clean 4d5af8e9 under indexed ADR0111 with actual-source remeasurement, exact history preservation, 22 actual-validator executions and canonical proof. .1.24 retains the historical draft; no further slot is authorized.
   Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.9 - admit approved engineering-history member` (intake closed by its separately owned implementation)
 
+- ID: `DART-STARTUP-READING.6`
+  Status: `pending`
+  Goal: Obtain and route the next change-history member capacity decision before .1.37.
+  Dependencies: Completed .1.36 reading/intake; director decision before any additional infrastructure allowance under ADR0110.
+  Scope: Proposal/intake only; stable responsibility remains LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3. Activate a separately owned canonical implementation only after approval and a clean repository.
+  Proposal: change_history max_files31 to32, manifest max_lines30 to31 and manifest max_bytes17039 to17615. All root, segment, aggregate, ownership, route, schema and other collection limits remain unchanged; no further member is preapproved.
+  Evidence: docs/knowledge/dart-reading-second-history-capacity-blocker.md retains the actual required rollover and exact routing rejection. Clean 6cb42d87 CHANGES247-457 is 211 lines/31668 bytes, SHA-25655830675f67c5814a5457a3c2adabc054d918b62582312c52d791fe268b78ef4. Draft manifest31/17615 and collection32/48767/3543340 exceed precisely the three proposed controls; all other ceilings fit. Every prior history byte is restored; a complete concise .1.36 record leaves CHANGES460/47004 below the unchanged90% threshold.
+  Acceptance: Record the director decision. If approved, create/index an exact-limit ADR and separately owned canonical implementation, remeasure its actual source, preserve all prior history and prove actual validator boundaries before landing. If declined, retain history and obtain an alternative without archive rewriting or bypassing controls. Resume .1.37 only after a clean admitted boundary. This intake grants no source-reading credit, cleanup or parked feature activation.
+  Verification: Director decision pending. Actual rollover/rejection and exact restoration are complete; the pinned read-only proposal passes. ADR0110 explicitly requires new authority for any further increase. Completed .1.36 proof is committed first within unchanged limits.
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.36` | `pending` | Finish action-contract tests 204-205, read callable-codeblock contract tests 1-1080, then compiled-spec tests 1-418 after .1.35 commits and the brief/tree are clean; reading is 35/55. |
+| 1 | `DART-STARTUP-READING.6` | `pending` | Obtain the director decision on the exact next history member after the clean .1.36 commit; .1.37 remains next reading only after its admitted capacity boundary. |
 
 ## Decisions
 
@@ -1372,6 +1389,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-10`: `.1.36` completes callable-codeblock/action-contract tests and reads compiled tests through 418: 1,500 fragments / 48,187 baseline-identical bytes. All 38 selected tests and neutral callable7/11/9/7/4/8/23 pass, including fresh offline standalone emitted fixture/contextual/seven-error proof. Earlier findings remain intact; no new code defect. Required rollover rejects three exact history-capacity axes; the verified draft is restored and .6 owns the director decision. Reading reaches 36/55.
 
 - `2026-09-10`: `.1.35` completes validation/package/action-parser reading and contracts through 203: 1,500 fragments / 44,700 baseline-identical bytes. All 35 tests and neutral gap9/0/63/public8/15/10/34 plus duplicate7/0/59 checks pass. Ten reconstructed controls own .2.23 with two repair children: two null-name wrong-slot acceptances, six valid/rejecting controls and two provenance census inputs. Reading reaches 35/55.
 
@@ -1444,6 +1463,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- `.1.36`: `DART-STARTUP-READING.1.36 - complete callable contract test reading`.
+
 - `.1.35`: `DART-STARTUP-READING.1.35 - own null named-selector validation gap`.
 
 - `.1.34`: `DART-STARTUP-READING.1.34 - complete emitter and trace reading`.
@@ -1513,6 +1534,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-10`: Completed .1.36 from clean 6cb42d87; completed callable test reading, began compiled tests, retained prior findings and owned capacity decision .6 before .1.37.
 
 - `2026-09-10`: Completed .1.35 from clean 7f32f90b; retained prior findings, owned null named-selector validation .2.23 and routed .1.36.
 

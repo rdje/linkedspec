@@ -10,6 +10,9 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-10 — DART-STARTUP-READING.1.36: callable consumer reading
+Read 1,500 fragments / 48,187 baseline-identical bytes; all 38 selected tests and callable contract checks pass, including fresh offline emitted execution. Earlier findings remain owned; no new defect. Reading reaches 36/55. Capacity intake .6 owns the next history-member decision before .1.37; no allowance changes.
+
 ## 2026-09-10 — DART-STARTUP-READING.1.35: null named-selector validation
 
 Read 1,500 fragments / 44,700 baseline-identical bytes: complete validator,

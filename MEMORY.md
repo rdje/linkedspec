@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `7f32f90b406581233272301855a7b0c505d89bd9` — clean focused handoff before Dart .1.35.
-- latest_completed_leaf: `DART-STARTUP-READING.1.35 - own null named-selector validation gap`.
+- activation_commit: `6cb42d876d605830bdb429236e08d553a541fd9d` — clean focused handoff before Dart .1.36.
+- latest_completed_leaf: `DART-STARTUP-READING.1.36 - complete callable contract test reading`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: `DART-STARTUP-READING.1.36` finishes action-contract tests 204-205, reads callable-codeblock contract tests 1-1080, then compiled-spec tests 1-418 after the clean focused .1.35 commit.
+- next_action: `DART-STARTUP-READING.6` obtains the director decision on change-history files31→32, manifest lines30→31/bytes17039→17615; .1.37 resumes only after approved canonical capacity admission.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
-- blockers: Startup `.7` blocks recovery/purge; engineering-history .5 approval is implemented under containment .9 / ADR0111; prior change-history approval remains under .8 / ADR0110. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.79` precede mutation setup; `.29` belongs to `.5`. The director approved the narrow capacity exception; other reading gates remain.
+- blockers: Startup `.7` blocks recovery/purge; engineering-history .5 approval is implemented under containment .9 / ADR0111; prior change-history approval remains under .8 / ADR0110. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.79` precede mutation setup; `.29` belongs to `.5`. Prior narrow exceptions stay approved; new Dart .6 history-member authority is pending, with .1.36 committed within unchanged limits.
 - current_rust_warning_debt: repeated clean carriers report 1,870 `pgen` plus 26 `rgx-core` output warnings;
   `RUST-DEPENDENCY-WARNING-ZERO.1-.7` own causal repair/pins/enforcement without suppression, after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -57,4 +57,4 @@
   and aggregate ceiling remains unchanged.
 - current_change_history_capacity: immutable segment `4982` is the twenty-ninth history segment; ADR `0110`
   authorizes exactly 31 collection files / 30 manifest lines / 17,039 manifest bytes; other ceilings remain unchanged.
-- latest_bootstrap_read: 2026-09-10 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading 35/55 children, 50,528 fragments / 1,551,233 bytes; validation/package/action-parser tests complete, contract tests through 203; all 35 tests and gap/duplicate checks pass; ten reconstructed controls own null named-selector .2.23; earlier owners intact; next .1.36.
+- latest_bootstrap_read: 2026-09-10 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading36/55, 52,028 fragments/1,599,420 bytes; all38 tests/callable7/11/9/7/4/8/23 pass, including fresh offline emitted proof; no new code defect; history draft restored exactly; next .6 director decision before .1.37.

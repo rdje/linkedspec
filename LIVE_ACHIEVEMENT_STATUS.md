@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.35 completes thirty-five of 55 children: 50,528 fragments / 1,551,233 bytes. Validation/package/action-parser tests are complete; contract tests reach 203. All 35 tests and neutral gap/duplicate checks pass. Ten reconstructed controls own .2.23: two null-name wrong-slot acceptances, six valid/rejecting controls and two provenance census inputs. Approved capacity at 9c644ecb and all earlier Dart/startup owners remain intact. Next .1.36. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.36 completes thirty-six of 55 children: 52,028 fragments / 1,599,420 bytes. Action-contract/callable tests are complete; compiled tests reach 418. All 38 tests and neutral callable checks pass, including fresh offline emitted fixture/contextual/seven-error proof. No new defect. Approved capacity at 9c644ecb and all earlier Dart/startup owners remain intact. Next .6 history-member decision before .1.37; the exact rejected draft is restored and no allowance changes. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `DART-STARTUP-READING.1.35` completes validation/package/action-parser reading and contracts through 203: 1,500 fragments / 44,700 baseline-identical bytes. All 35 tests and gap/duplicate checks pass. Ten reconstructed controls own .2.23 with two repair children: two null-name wrong-slot acceptances, six valid/rejecting controls and two provenance census inputs.
+- `DART-STARTUP-READING.1.36` completes action-contract/callable tests and reads compiled tests through 418: 1,500 fragments / 48,187 baseline-identical bytes. All 38 tests and callable7/11/9/7/4/8/23 checks pass, including fresh offline emitted fixture/contextual/seven-error proof. No new code defect; earlier owners remain intact. The exact rejected history draft is restored; .6 owns the next member decision.
 
 ## Next Action
 
-- `DART-STARTUP-READING.1.36` finishes action-contract tests 204-205, reads callable-codeblock contract tests 1-1080, then compiled-spec tests 1-418 after .1.35 commits, the brief is empty and the root tree is clean.
+- `DART-STARTUP-READING.6` obtains the director decision on files31→32, manifest lines30→31/bytes17039→17615 after .1.36 commits cleanly. .1.37 resumes only after approved canonical capacity admission.
 
 ## Recent Completions
+
+- `2026-09-10` — `DART-STARTUP-READING.1.36` reads 1,500 fragments / 48,187 bytes; all 38 tests and callable contract checks pass, including fresh offline emitted execution; no new defect.
 
 - `2026-09-10` — `DART-STARTUP-READING.1.35` reads 1,500 fragments / 44,700 bytes; all 35 tests and gap/duplicate checks pass; ten reconstructed controls own null named-selector .2.23.
 
@@ -48,8 +50,6 @@
 - `2026-09-09` — `DART-STARTUP-READING.1.23` reads 1,500 fragments / 41,162 bytes; 99 tests pass; six Dart/Perl regex comparisons own .2.16 literal normalization.
 
 - `2026-09-09` — `DART-STARTUP-READING.1.22` reads 1,500 fragments / 42,836 bytes; 132 tests and structural corpus 31/31 pass; interpreter complete, matching through 900; no new defect.
-
-- `2026-09-09` — `DART-STARTUP-READING.1.21` reads 1,500 fragments / 39,933 bytes; 124 runtime and six contract tests pass; nine input-slice comparisons extend .2.14 and own .2.15.
 
 ## History
 
