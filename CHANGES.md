@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-10 — DART-STARTUP-READING.1.41: MCP consumers
+
+Read 1,500 fragments / 48,287 baseline-identical bytes; all MCP consumers
+complete, native trace imports through 3. All 17 MCP tests, neutral checks
+and binding freshness pass; no new defect. Reading 41/55; next .1.42.
+
 ## 2026-09-10 — DART-STARTUP-READING.1.40: mutation and MCP tests
 
 Read 1,500 fragments / 49,088 baseline-identical bytes; mutation/binding tests

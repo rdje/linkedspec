@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-10 — executable MCP admission seams
+
+Dart .1.41 reads and executes cancellation and hostile-native seams referenced by admission. Omitted/partial policy overlays preserve native diagnostics; explicit limits deny before native invocation. All 17 MCP tests pass; Unicode ordering remains owned.
+
 ## 2026-09-10 — mutation emission and MCP admission proof limits
 
 Dart .1.40 completes mutation/binding and all admission role bodies. The

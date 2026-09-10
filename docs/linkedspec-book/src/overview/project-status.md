@@ -89,7 +89,7 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed forty of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed forty-one of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
 parser bridge, function-shell projection, bounded child-parse authority, generated rule plan,
@@ -98,26 +98,27 @@ staged runtime modules, Unicode case mapping, scaffold, semantic call projection
 index, query, runtime/static projection, SHA-256, source emission, trace and validation.
 Package inputs, action-parser/action-contract, callable-codeblock, compiled-spec, named-mark,
 corpus, diagnostic-output, duplicate-slot, frontend/function-trace, function-registry,
-inter-match-gap, logical-helper, receiver-mutation and MCP binding tests are complete.
-MCP admission tests reach line 705. This covers 58,028 fragments / 1,784,807 bytes.
-All 16 selected tests, neutral mutation/MCP checks and binding freshness pass.
+inter-match-gap, logical-helper, receiver-mutation and all MCP tests are complete.
+Native pipeline trace reading reaches its first three import lines. This covers
+59,528 fragments / 1,833,094 bytes. All 17 selected MCP tests, neutral transport/admission
+checks and binding freshness pass.
 
-Receiver mutation has coverage for copied callback frames, original-shape traversal,
-shadowed bindings, pre-effect receiver guards, detached results and typed-state rejection.
-Its independent offline caller analyzes and directly runs one representative emitted
-continuation example. That caller does not use the stricter fatal-analysis flags or
-paired traced execution used by the separately audited gap and logical consumers.
+The focused MCP tests execute the seams referenced by admission: cancellation before
+wire emission suppresses all output and clears the active request; hostile native
+exceptions produce sanitized responses. They also check expiry, handle capacity,
+authorization copying, clock/entropy failures, chunked framing, UTF-8 identifiers,
+line limits and release on I/O failure. Sink faults are injected through the stream
+consumer; this suite does not separately inject a flush-only fault.
 
-MCP admission compares capabilities plus nineteen native query responses and checks
-raw framing, handle-state privacy, policy limits, shutdown and sanitized I/O failures.
-The cancellation-before-emission and native hostile-failure roles also require textual
-sentinels in separate focused tests; those seams are exercised in their own consumers.
-MCP remains a read-only adapter over host-registered semantic indexes. It cannot build,
-load or run a parser. The private staged-provenance materializer is not exposed by MCP.
+Policy tests distinguish adapter limits from native semantic diagnostics. For example,
+an omitted source-detail overlay leaves the native `semantic_query_source_detail_forbidden`
+diagnostic intact. An explicit stricter deployment limit denies the request before the
+native query runs. The admission host may build an observed semantic index by running
+a parser; MCP itself remains read-only over the registered snapshot.
 
 Existing Unicode canonical-key ordering and callback-identity defects remain owned.
-No new defect was confirmed. Child `.1.41` finishes admission helpers, reads the focused
-dispatch/stdio consumers and begins native trace tests; startup `.3.4` remains pending.
+No new defect was confirmed. Child `.1.42` continues native trace, primary CLI, progressive,
+zero-argument and recognition tests; startup `.3.4` remains pending.
 
 **Continuity capacity — approved history preservation:** the director approved one
 additional immutable archive member. Containment `.10` and ADR0112 admit exactly
@@ -143,7 +144,7 @@ in 2.25 seconds. That sample locates a pre-main wait without establishing its OS
 or a remedy. The older macOS 26.5.2 closeout does not resolve this macOS 26.6.2 observation.
 The evidence and repair criteria are logged by `SESSION-STARTUP-READING.80.0`; source
 changes remain behind the existing startup prerequisites. The intake is committed at
-`eaf4331e`; Dart reading continues at `.1.41`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
+`eaf4331e`; Dart reading continues at `.1.42`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
 
 **Known Dart limitation — null named selectors in reconstructed state:** a programmatically
 reconstructed target with these fields is incorrectly accepted:

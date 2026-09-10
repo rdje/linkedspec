@@ -63,3 +63,19 @@ above remain dated evidence, not a fresh complete package or ledger result. Wire
 calls the canonical helper whose uncovered Unicode ordering boundary was established in
 [[dart-mcp-unicode-key-order-gap]] under .1.10. Reading that call does not supply a new wire
 Unicode execution result; .2.5 retains affected-route proof and repair.
+
+## September 10 complete stdio-consumer reading
+
+`DART-STARTUP-READING.1.41` reads all 575 stdio-test lines. The full selected MCP
+binding/admission/dispatch/stdio group passes seventeen tests. Neutral transport is
+35/10/10/76 and the current admission ledger is 5/5 plus 6/6 complete/141; the older
+3/5 and 3/6 figures above are historical, not current rollout status.
+
+The pre-emission hook actually dispatches cancellation, proves zero output bytes and
+zero remaining active requests. A later wire cancellation leaves the flushed response
+intact. Focused sources also cover duplicate decoded keys, invalid surrogate/numeric
+forms, safe integer and UTF-8 ID budgets, the exact CRLF line maximum, overlong recovery,
+final EOF, split chunks, release and fixed I/O privacy. Sink failure uses consumer
+`addStream`; a separate flush-only fault is not injected by this suite. Admission's
+textual cancellation sentinel is backed by a separately executed consumer.
+Known Unicode canonical ordering remains owned by [[dart-mcp-unicode-key-order-gap]].

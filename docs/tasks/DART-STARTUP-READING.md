@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / .1.40 complete; next .1.41
+- Status: `active` / .1.41 complete; next .1.42
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-10`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 40/55 children, 58,028/80,297 fragments and 1,784,807/2,471,305 bytes; sixty-two entries through EOF
-  plus mcp_server_dart_admission_test.dart through line 705. Exact credit and comprehension remain in each completed node.
+- Current reading: 41/55 children, 59,528/80,297 fragments and 1,833,094/2,471,305 bytes; sixty-five entries through EOF
+  plus native_pipeline_trace_test.dart through line 3. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -705,14 +705,20 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.40 - complete mutation and MCP contract reading`
 
 - ID: `DART-STARTUP-READING.1.41`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 41 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.40` committed; empty brief and clean repository.
+  Activation: Clean `d2fa7b4d97c3ceeedef172ef2934d5ad595682ab`; prior reading committed, root clean, zero-byte brief and all jobs consumed.
   Scope: `dart/test/mcp_server_dart_admission_test.dart` lines 706-962; `dart/test/mcp_server_dart_dispatch_test.dart` lines 1-665; `dart/test/mcp_server_dart_stdio_test.dart` lines 1-575; `dart/test/native_pipeline_trace_test.dart` lines 1-3
   Baseline evidence: 1500 fragments / 48287 bytes; ordered range SHA-256 `9d0046da1a830ed022b091666b7529eee81e6f5f9bf7f19ec0522674d09662f5`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact scoped bytes/current deltas; MCP binding/admission/dispatch/stdio tests; neutral MCP transport/admission checks and binding freshness; prior evidence preservation, Knowledge, doctrines, histories, mdBook, memory and staged scope/whitespace.
+  Canonical trigger: `none` — bounded required reading and documentation; no source, contract or infrastructure changes.
+  Comprehension: Admission helpers materialize six snapshots, including host-side parser execution with three A/B observations; this is host authority, not MCP parser authority. They bind frame order, raw encoding, response digest and borrowed sink probes. Dispatch verifies cloned requests, immutable index identity, explicit policy denial before native calls, omitted/partial overlay native diagnostics, four unavailable states, copied authorization, expiration/capacity, clock overflow, bounded entropy collisions, sanitized native failures and decoded cancellation. Stdio covers duplicate decoded keys, invalid surrogate/numeric forms, lexical IDs and safe/UTF-8 limits, exact CRLF maximum, overlong recovery/final EOF, chunked responses, injected pre-emission cancellation with zero bytes/active requests, late cancellation finality, release and I/O privacy. Sink failure uses consumer addStream; there is no separate flush-only fault injection. Native trace lines 1-3 are imports only.
+  Findings: No new confirmed defect. Admission sort shares the known Unicode ordering qualification .2.5; passing fixtures add no native/wire Unicode result. Imports alone grant no native trace test-body credit. All source-repair gates remain.
+  Verification: Physically read admission 706-962 through EOF, dispatch 1-665 through EOF in 222/222/221-line outputs, stdio 1-575 through EOF in 192/192/191-line outputs, and native trace 1-3: exact 1,500 fragments / 48,287 baseline-identical bytes and ordered digest. All 17 MCP binding/admission/dispatch/stdio tests pass, including cancellation and hostile-native seams referenced by admission. Neutral transport passes 35 frames/10 raw/10 lifecycle/76 mutations, admission remains 5/5 implementations plus 6/6 runtimes complete/141 mutations, and binding freshness passes at 83,214 bytes. Other runtimes are not rerun. Full coverage/preservation, Knowledge/book/memory/histories, whitespace/staged scope and commit-hook doctrines govern the focused commit.
+  Commit: `DART-STARTUP-READING.1.41 - complete MCP dispatch and stdio reading`
 
 - ID: `DART-STARTUP-READING.1.42`
   Status: `pending`
@@ -1390,7 +1396,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.41` | `pending` | Finish MCP admission, read dispatch/stdio tests and begin native trace tests after .1.40 commit/brief/clean proof; repair gates remain. |
+| 1 | `DART-STARTUP-READING.1.42` | `pending` | Continue native trace, primary CLI, progressive, zero-argument and recognition test reading. After .1.41 commit/brief/clean proof; repair gates remain. |
 
 ## Decisions
 
@@ -1415,6 +1421,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-10`: Dart .1.41 finishes MCP admission, dispatch and stdio tests and reads three native-trace import lines: 1,500 fragments / 48,287 baseline-identical bytes. All 17 selected MCP tests, neutral transport/admission and binding freshness pass. No new defect; Unicode key ordering .2.5, earlier repairs and CI .80/.81 remain owned and gated. Reading reaches 41/55 children, 59,528 fragments / 1,833,094 bytes.
 
 - `2026-09-10`: Dart .1.40 finishes receiver-mutation and MCP binding tests and reads MCP admission through 705: 1,500 fragments / 49,088 baseline-identical bytes. All 16 selected tests pass, including the independent emitted mutation caller. Neutral mutation, MCP transport/admission and binding freshness pass; no new defect. Earlier repairs and CI .80/.81 remain owned and gated. Reading reaches 40/55 children, 58,028 fragments / 1,784,807 bytes.
 
@@ -1499,6 +1507,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- `.1.41`: `DART-STARTUP-READING.1.41 - complete MCP dispatch and stdio reading`.
+
 - `.1.40`: `DART-STARTUP-READING.1.40 - complete mutation and MCP contract reading`.
 
 - `.1.39`: `DART-STARTUP-READING.1.39 - complete gap and logical contract reading`.
@@ -1580,6 +1590,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-10`: Completed .1.41 from clean d2fa7b4d; MCP consumers complete, native trace imports through 3; next .1.42.
 
 - `2026-09-10`: Completed .1.40 from clean 5886ec15; finished mutation/binding tests and read all MCP admission role bodies; no new defect; next .1.41.
 

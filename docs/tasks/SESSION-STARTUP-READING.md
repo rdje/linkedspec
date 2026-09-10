@@ -2224,7 +2224,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Goal: Split and read all 115 baseline Dart entries, including compiler/runtime, tests, commands, and package inputs.
   Reading owner: `docs/tasks/DART-STARTUP-READING.md` owns .0 decomposition, .1 reading, .2 new repair intake and .3 reading closeout; this startup node remains the prerequisite/closeout owner.
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas. DART-STARTUP-READING.3 may complete this reading node only after exact coverage/comprehension and child-commit proof; pending repairs remain owned separately.
-  Verification: Dart reading remains incomplete at 40/55 children, 58,028 fragments / 1,784,807 bytes. Dart .1.40 finishes receiver-mutation and MCP binding tests and reads MCP admission through 705: 1,500 fragments / 49,088 baseline-identical bytes. All 16 selected tests pass, including the independent emitted mutation caller. Neutral mutation, MCP transport/admission and binding freshness pass; no new defect. Earlier repairs and CI .80/.81 remain owned and gated. Capacities .4/.5/.6 remain committed under containment .8/.9/.10 and ADR0110/0111/0112. Startup .3/.4/.5 still gate repairs; next Dart .1.41.
+  Verification: Dart reading remains incomplete at 41/55 children, 59,528 fragments / 1,833,094 bytes. Dart .1.41 finishes MCP admission, dispatch and stdio tests and reads three native-trace import lines: 1,500 fragments / 48,287 baseline-identical bytes. All 17 selected MCP tests, neutral transport/admission and binding freshness pass. No new defect; Unicode key ordering .2.5, earlier repairs and CI .80/.81 remain owned and gated. Capacities .4/.5/.6 remain committed under containment .8/.9/.10 and ADR0110/0111/0112. Startup .3/.4/.5 still gate repairs; next Dart .1.42.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.5`
@@ -4439,7 +4439,7 @@ Startup `.3.4` stays pending until complete Dart reading; the next executable re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.41` | `pending` | Continue bounded Dart MCP admission/dispatch/stdio and native trace tests after .1.40; CI intake eaf4331e and source-repair gates remain. |
+| 1 | `DART-STARTUP-READING.1.42` | `pending` | Continue native trace, primary CLI, progressive, zero-argument and recognition test reading. After .1.41 commit/brief/clean proof; repair gates remain. |
 
 ## Reading Ledger
 

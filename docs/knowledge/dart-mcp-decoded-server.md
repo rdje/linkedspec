@@ -135,3 +135,17 @@ Neutral transport remains 35/10/10/76, admission 5/5 implementations plus 6/6 ru
 with rollout complete/141; this does not rerun other runtimes. The generated binding
 is byte-fresh at 83,214 bytes. MCP remains read-only over host-registered indexes,
 separate from the private staged-provenance validation/materialization API.
+
+## September 10 complete decoded-consumer reading
+
+`DART-STARTUP-READING.1.41` finishes admission helpers and all 665 dispatch-test lines.
+All seventeen selected MCP tests pass. Dispatch separately proves native object
+identity and request clone isolation, explicit policy denial before native invocation,
+and native diagnostics under omitted/partial overlays. For example, an omitted
+source-detail overlay preserves `semantic_query_source_detail_forbidden`.
+
+Deterministic seams exercise copied authorization, expiry/reclamation, bounded entropy
+collisions, clock overflow, sanitized hostile native failures and decoded cancellation.
+Admission's observed runtime snapshot is built by the host test, outside MCP authority.
+Its local canonical sort remains subject to the existing Unicode ordering qualification
+in [[dart-mcp-unicode-key-order-gap]]; this reading adds no native/wire Unicode result.
