@@ -10,6 +10,15 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-10 — exact Dart consumer proof boundaries
+
+Dart .1.37 separates generated-plan execution and emitted-payload reconstruction
+from independent emitted compilation. Named-mark Top/Child controls do not prove
+same-label recursion; diagnostic error-object assertions do not independently
+assert stack identity or close semantic-observer .2.8. The full 105-case corpus,
+all 38 selected tests and three neutral contracts pass; reading is 37/55.
+No new defect or source change; earlier evidence remains intact.
+
 ## 2026-09-10 — CI build invalidation and startup waits have separate owners
 
 Startup .80.0 distinguishes unconditional missing-file watches from parser

@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.36 completes thirty-six of 55 children: 52,028 fragments / 1,599,420 bytes. Action-contract/callable tests are complete; compiled tests reach 418. All 38 tests and neutral callable checks pass, including fresh offline emitted fixture/contextual/seven-error proof. No new defect. Approved capacity at 9c644ecb and all earlier Dart/startup owners remain intact. Director-approved .6 is canonically committed at bef5dafd under containment .10 / ADR0112 with exactly three controls, 218-line preservation and 22 actual-validator executions. Focused CI intake .80.0 owns pending .80/.81 performance repairs; next Dart .1.37. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart .1.37 completes compiled, named-mark, corpus and diagnostic tests and reads duplicate-slot tests through 123: 1,500 fragments / 44,134 baseline-identical bytes. All 38 selected tests pass, including the 105-fixture corpus and fifteen duplicate-slot roles; named-mark 7/3, diagnostic 3/11/6/8/0/20 and duplicate-slot 5/2/6/7/0/59 neutral checks pass. No new defect; previous findings and CI .80/.81 owners retain evidence and gates. Reading is 37/55 children, 53,528 fragments / 1,643,554 bytes. Approved capacities and CI intake remain committed; next Dart .1.38. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.81` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.80.0` records eight PGEN file watches / six absent optional inputs and eleven visible test-build stages / 78m02s. Pending .80.1-.4 own correct Cargo reuse; .81.1-.2 own newer-OS pre-main diagnosis and conditional repair. Both successful samples and the failed compiler-sample attempt retain their exact limits. No implementation or reading credit; all earlier evidence remains.
+- `DART-STARTUP-READING.1.37` — Dart .1.37 completes compiled, named-mark, corpus and diagnostic tests and reads duplicate-slot tests through 123: 1,500 fragments / 44,134 baseline-identical bytes. All 38 selected tests pass, including the 105-fixture corpus and fifteen duplicate-slot roles; named-mark 7/3, diagnostic 3/11/6/8/0/20 and duplicate-slot 5/2/6/7/0/59 neutral checks pass. No new defect; previous findings and CI .80/.81 owners retain evidence and gates.
 
 ## Next Action
 
-- `DART-STARTUP-READING.1.37` resumes bounded compiled, named-mark, corpus, diagnostic and duplicate-slot test reading after the focused intake commit and cleared brief. Existing repairs and parked ideas retain their gates.
+- `DART-STARTUP-READING.1.38` continues duplicate-slot/frontend/function/gap test reading after the focused commit and cleared brief. Existing repairs and parked ideas retain their gates.
 
 ## Recent Completions
+
+- `2026-09-10` — `DART-STARTUP-READING.1.37` reads 1,500 fragments / 44,134 bytes; all 38 tests (including 105 corpus fixtures) and three neutral contracts pass; no new defect.
 
 - `2026-09-10` — `SESSION-STARTUP-READING.80.0` owns Cargo reuse .80 and newer-OS startup diagnosis .81; source/watch/build/sample evidence and preceding canonical proof are preserved; no implementation or reading credit.
 
@@ -48,8 +50,6 @@
 - `2026-09-10` — `DART-STARTUP-READING.1.25` reads 1,500 fragments / 47,254 bytes; 44 tests pass; staged enrichment through 1806; no new defect.
 
 - `2026-09-10` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.9` admits engineering-history files 26→27 and manifest lines 25→26; exact history reconstruction and 22 validator executions pass; canonical proof governs landing.
-
-- `2026-09-10` — `DART-STARTUP-READING.1.24` reads 1,500 fragments / 48,312 bytes; 58 tests pass; recognition/semantic/source complete, staged entry through 306; no new runtime defect.
 
 ## History
 

@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-10 — DART-STARTUP-READING.1.37: corpus and diagnostic tests
+
+Read 1,500 fragments / 44,134 baseline-identical bytes; compiled, named-mark,
+corpus and diagnostic tests complete, duplicate-slot through 123. All 38 tests
+(including 105 corpus fixtures) and three neutral checks pass. Preserve prior
+findings and CI owners; no new defect. Reading37/55; next .1.38.
+
 ## 2026-09-10 — SESSION-STARTUP-READING.80.0: own CI performance findings
 
 Record the source-backed missing PGEN watches and eleven visible test-build stages

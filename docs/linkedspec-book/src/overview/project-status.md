@@ -89,20 +89,26 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed thirty-six of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed thirty-seven of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
 parser bridge, function-shell projection, bounded child-parse authority, generated rule plan,
 interpreter, matching, recognition transactions, semantic observation, source location and both
 staged runtime modules, Unicode case mapping, scaffold, semantic call projection, semantic
 index, query, runtime/static projection, SHA-256, source emission, trace and validation.
-Package inputs, action-parser/action-contract and callable-codeblock tests are complete;
-compiled-spec tests reach line 418. This covers 52,028 fragments / 1,599,420 bytes. All 38
-selected callable/compiled/action/variadic tests and the neutral callable contract pass.
-A fresh standalone offline caller executes the neutral fixture, contextual final-block
-forms and all seven invalid calls. Existing callback-identity and validation limitations
-below remain separately owned. Child `.1.37` finishes compiled tests and continues named-mark,
-corpus, diagnostic and duplicate-slot test reading after the approved capacity boundary below. Startup `.3.4` remains pending.
+Package inputs, action-parser/action-contract, callable-codeblock, compiled-spec, named-mark,
+corpus and diagnostic-output tests are complete; duplicate-slot tests reach line 123.
+This covers 53,528 fragments / 1,643,554 bytes. All 38 selected tests pass, including
+the complete 105-fixture corpus and fifteen duplicate-slot admission roles. The three
+neutral named-mark, diagnostic-output and duplicate-slot checks pass as well.
+
+The named-mark consumer verifies native execution, generated-plan execution, reconstructed
+emitted state and primary-command output. Reconstruction does not independently compile
+an emitted module, and its different-label fixture does not prove recursive same-label
+mark isolation. Diagnostic tests prove caller error identity and trace separation on their
+covered paths; the semantic-observer limitation below remains separately owned. No new
+defect was confirmed in this slice. Child `.1.38` continues duplicate-slot, frontend/function
+trace and inter-match-gap test reading; startup `.3.4` remains pending.
 
 **Continuity capacity — approved history preservation:** the director approved one
 additional immutable archive member. Containment `.10` and ADR0112 admit exactly
@@ -110,8 +116,8 @@ additional immutable archive member. Containment `.10` and ADR0112 admit exactly
 The governed rollover preserves 218 complete clean-source lines / 32,108 bytes,
 with exact provenance and full reconstruction of every earlier history byte.
 Twenty-two actual-validator executions verify the boundaries. Every other ceiling
-and repair prerequisite stays unchanged. Dart intake `.6` closes; child `.1.37`
-follows canonical capacity commit `bef5dafd`. This storage change grants no reading credit.
+and repair prerequisite stays unchanged. Dart intake `.6` closes under canonical
+capacity commit `bef5dafd`. This storage change grants no reading credit.
 
 **CI performance — diagnosed, repairs pending:** PGEN currently asks Cargo to watch
 eight generated-parser inputs even though six optional files are absent. Cargo documents
@@ -127,8 +133,8 @@ A separate newer macOS startup issue is owned by startup `.81`. A relocation sam
 in 2.25 seconds. That sample locates a pre-main wait without establishing its OS cause
 or a remedy. The older macOS 26.5.2 closeout does not resolve this macOS 26.6.2 observation.
 The evidence and repair criteria are logged by `SESSION-STARTUP-READING.80.0`; source
-changes remain behind the existing startup prerequisites. Dart reading continues at
-`.1.37`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
+changes remain behind the existing startup prerequisites. The intake is committed at
+`eaf4331e`; Dart reading continues at `.1.38`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
 
 **Known Dart limitation — null named selectors in reconstructed state:** a programmatically
 reconstructed target with these fields is incorrectly accepted:

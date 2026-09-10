@@ -49,3 +49,17 @@ restores arbitrary caller failures with their stack while ordinary failures reta
 Related facts: [[diagnostic-output-neutral-contract]], [[cross-backend-diagnostic-output-drift]],
 [[dart-runtime-structured-diagnostics]], [[dart-trace-controls-sinks]], [[rust-diagnostic-output-events]],
 [[perl-diagnostic-output-events]], [[lua-diagnostic-output-events]].
+
+## September 10 complete diagnostic-consumer reading
+
+`DART-STARTUP-READING.1.37` completes all 342 lines of
+`dart/test/diagnostic_output_contract_test.dart`; its seven tests pass within the selected
+38-test suite. Native and alias paths prove ordered Unicode, quiet results, every scalar
+render row, arity rejection before effects, wrong-kind silence, events before typed exit,
+caller error-object identity and trace separation. Generated direct/traced helpers prove
+their stated outcomes; this file does not independently compile an emitted module.
+The identity assertions do not independently assert stack-object identity.
+The neutral checker passes three helpers, eleven render rows, six scenarios,
+eight complete/zero pending legs and twenty drift mutations.
+These diagnostic-sink controls do not close the distinct semantic-observer wrapping defect
+in [[dart-semantic-observer-action-failure-wrapping]].

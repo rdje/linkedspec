@@ -42,3 +42,14 @@ public Perl contracts so another symmetric omission fails.
 The real fixture wrapper also proves implicit blind-call collection: a non-repeated `AND` blind-call parent with no
 explicit return surfaces its ordered successful child values. An independent two-child regression locks that
 contract separately from the capture family.
+
+## September 10 bounded consumer reading
+
+`DART-STARTUP-READING.1.37` completes all 92 lines of
+`dart/test/complete_named_mark_contract_test.dart`. Its three tests pass in a selected
+38-test suite. The exact seven-name inventory and neutral Unicode fixture pass native,
+generated-plan, normalized-state reconstruction extracted from emitted source, and
+in-process primary CLI routes. This consumer does not compile an independent emitted
+module. Its different-label fixture does not establish same-label recursive isolation;
+that distinction remains owned by [[complete-named-mark-perl-rust-parity]].
+The neutral checker passes seven helpers and three drift mutations.

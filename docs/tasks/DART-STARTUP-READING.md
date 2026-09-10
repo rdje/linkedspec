@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / .1.36 and approved capacity intake .6 complete; next .1.37
+- Status: `active` / .1.37 complete; next .1.38
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-10`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 36/55 children, 52,028/80,297 fragments and 1,599,420/2,471,305 bytes; fifty entries through EOF
-  plus compiled_spec_test.dart through line 418. Exact credit and comprehension remain in each completed node.
+- Current reading: 37/55 children, 53,528/80,297 fragments and 1,643,554/2,471,305 bytes; fifty-four entries through EOF
+  plus duplicate_regex_slot_identity_contract_test.dart through line 123. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -641,14 +641,20 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.36 - complete callable contract test reading`
 
 - ID: `DART-STARTUP-READING.1.37`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 37 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.36` committed; empty brief and clean repository.
+  Activation: Clean `eaf4331e71bbc8e0c3f04162fb915bddc8cfea96`; intake .80.0 committed, root clean, brief zero bytes and commit jobs consumed.
   Scope: `dart/test/compiled_spec_test.dart` lines 419-478; `dart/test/complete_named_mark_contract_test.dart` lines 1-92; `dart/test/corpus_manifest_test.dart` lines 1-883; `dart/test/diagnostic_output_contract_test.dart` lines 1-342; `dart/test/duplicate_regex_slot_identity_contract_test.dart` lines 1-123
   Baseline evidence: 1500 fragments / 44134 bytes; ordered range SHA-256 `d8061f34d57331a6b1eb22b71e9db4b23ef20776e6fd224a393d33560af4e63e`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact scoped bytes/current deltas; compiled, named-mark, corpus, diagnostic and duplicate-slot Dart contracts; neutral named-mark/diagnostic/duplicate-slot checks; prior evidence preservation, Knowledge, doctrines, histories, mdBook, memory and staged whitespace/scope.
+  Canonical trigger: `none` — bounded required reading and documentation; no source, contract or infrastructure changes.
+  Comprehension: Compiled-test helpers finish function body payload/job metadata and 1-based LF source coordinates. Named-mark tests bind exactly seven names and compare the neutral Unicode fixture across native, generated-plan, emitted-state reconstruction and primary CLI routes; they do not compile an independent emitted module or prove same-label recursive isolation. Corpus tests retain concrete portmap/HLink/helper/accumulator/parser-smoke/function/vhistory shapes, full 105-fixture success, controlled scalar/aggregate/dispatch/lifecycle results, mismatch collection, named/bounded selection, dedicated corpus CLI and primary-command separation, manifest schema/count/name/directory/file rejection, and owned temporary-fixture cleanup. Diagnostic tests exercise quiet/eager aliases, scalar rendering, arity-before-effects, wrong-kind silence, immediate exit, synchronous caller error identity, trace separation and generated direct/traced outcomes. Duplicate-slot entry binds exactly fifteen roles, five fixtures and structural target/index identity, then covers native/choice/repetition/cross-target/loaded routes and begins reconstruction through line 123.
+  Findings: No new confirmed defect. All earlier Dart .2.1-.2.23 and startup owners remain pending with their exact evidence. Diagnostic-output callback proof does not close the separately owned semantic-observer wrapping gap .2.8. Current capacity is canonical at bef5dafd; CI evidence intake is committed at eaf4331e under .80.0.
+  Verification: Physically read compiled tests 419-478 through EOF, all 92 named-mark lines, corpus 1-883 in four complete outputs, diagnostic 1-342 in two complete ranges, and duplicate-slot 1-123: 1,500 fragments / 44,134 bytes with exact baseline/current identity and ordered digest. All 38 selected tests pass; the full-corpus test executes 105/105, and the duplicate consumer executes all fifteen declared roles. Neutral named-mark passes seven helpers/three mutations; diagnostic passes three helpers/eleven render cases/six scenarios/8 complete/0 pending/20 mutations; duplicate-slot passes five fixtures/two diagnostics/six runtime rows/7 complete/0 pending/59 mutations. Generated-plan execution and reconstructed emitted payload are distinct from independent emitted compilation; no new cross-backend or MCP proof is claimed. Full declared-scope reconstruction, previous evidence preservation, Knowledge, book, memory, both history checks, doctrines and staged scope/whitespace belong to this focused commit.
+  Commit: `DART-STARTUP-READING.1.37 - complete corpus and diagnostic test reading`
 
 - ID: `DART-STARTUP-READING.1.38`
   Status: `pending`
@@ -1366,7 +1372,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.37` | `pending` | Continue exact compiled, named-mark, corpus, diagnostic and duplicate-slot test reading after containment .10's clean canonical capacity admission; all repair gates remain. |
+| 1 | `DART-STARTUP-READING.1.38` | `pending` | Continue duplicate-slot, frontend/function trace and inter-match-gap test reading after the .1.37 commit and cleared brief; all repair gates remain. |
 
 ## Decisions
 
@@ -1391,6 +1397,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-10`: Dart .1.37 completes compiled, named-mark, corpus and diagnostic tests and reads duplicate-slot tests through 123: 1,500 fragments / 44,134 baseline-identical bytes. All 38 selected tests pass, including the 105-fixture corpus and fifteen duplicate-slot roles; named-mark 7/3, diagnostic 3/11/6/8/0/20 and duplicate-slot 5/2/6/7/0/59 neutral checks pass. No new defect; previous findings and CI .80/.81 owners retain evidence and gates. Reading reaches 37/55 children, 53,528 fragments / 1,643,554 bytes.
 
 - `2026-09-10`: .6 approval closes under containment .10 / ADR0112: exactly three controls, fresh clean-source reconstruction and 22 actual-validator executions; exact canonical proof precedes .1.37. Reading remains 36/55.
 
@@ -1467,6 +1475,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- `.1.37`: `DART-STARTUP-READING.1.37 - complete corpus and diagnostic test reading`.
+
 - `2026-09-10`: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.10 - admit approved change-history member` closes approved intake .6.
 
 - `.1.36`: `DART-STARTUP-READING.1.36 - complete callable contract test reading`.
@@ -1540,6 +1550,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-10`: Completed .1.37 from clean eaf4331e; finished corpus/diagnostic/compiled/named-mark tests, began duplicate-slot tests and routed .1.38; no new defect.
 
 - `2026-09-10`: Approved capacity intake .6 is implemented by containment .10 with fresh provenance and canonical proof; next .1.37.
 

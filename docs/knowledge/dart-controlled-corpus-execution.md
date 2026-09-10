@@ -84,3 +84,16 @@ A fixture must match and its output must structurally equal `[expectedJson]`; ar
 maps compare by keys/values. Per-fixture execution errors are collected, while earlier loading errors
 can abort validation. The staged-function parser is the fallback for initial `SpecParseException`.
 This reading confirms the existing harness contract and introduces no source repair.
+
+## September 10 complete corpus-test reading
+
+`DART-STARTUP-READING.1.37` completes all 883 lines of `dart/test/corpus_manifest_test.dart`.
+The selected 38-test suite passes, including this file's 105-fixture full-manifest test.
+The concrete portmap, HLink, mutation, accumulator, structural-parser, function and
+vhistory shape assertions remain unchanged. Controlled fixtures prove structural values,
+dispatch/lifecycle output, collected mismatches, named/bounded selection and dedicated
+corpus CLI behavior; the primary command rejects the corpus subcommand. Loader controls
+reject unsupported format, invalid/duplicate names, count/directory drift and missing files.
+Temporary fixtures use the managed process's repository-volume temporary directory and
+delete their owned roots in finally blocks. This is consumer reading and focused proof,
+not a new format admission or a source repair.
