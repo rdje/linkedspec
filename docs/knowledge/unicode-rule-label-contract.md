@@ -237,3 +237,22 @@ Own-line/no-ASCII-prefix controls retain Raw and reject. The cause is the body-f
 adapter's discarded remainder, not generated XID membership. [[dart-body-fluent-suffix-loss]]
 owns exact replay under existing Dart .2.6 and qualifies broad adjacent-grammar isolation
 claims for this additional route; the label classifier and prior identity evidence remain intact.
+
+## September 11 Dart classifier, identity and isolation consumer completion
+
+Dart .1.53 reads classifier1-84, identity1-416 and negative-isolation1-443 through
+EOF, then routes1-70. The classifier checks both endpoints of all806 ranges plus
+three invalid scalar sentinels, all neutral fixtures and exact prefix boundaries;
+it does not enumerate every adjacent gap. Identity proof retains artifacts,
+reconstruction, generated plans, selectors, traces and strict loading. A fresh
+empty-cache package resolves offline, analyzes with fatal warnings/infos and
+executes emitted source for all labels. Inline primary CLI covers every label;
+the file CLI selects the supplementary fixture.
+
+Eight negatives exercise four roles through programmatic and reconstructed ASTs
+with exact diagnostics. Source tests deliberately separate colon-as-header and
+newline-as-token-boundary behavior; adjacent identifier fixtures do not resolve
+the previously measured standalone body-fluent suffix omission under Dart .2.6.
+All 29 selected tests pass, and fresh neutral governance remains806 ranges,
+9 positives,8 negatives and2 distinct pairs. Whole routes-test execution adds no
+reading credit past70. No classifier, source parser or other-backend runtime change.

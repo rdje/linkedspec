@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / .1.52 complete; next .1.53
+- Status: `active` / .1.53 complete; next .1.54
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-11`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 52/55 children, 76,028/80,297 fragments and 2,342,583/2,471,305 bytes; 102 entries through EOF
-  plus trace_test.dart through line 260. Exact credit and comprehension remain in each completed node.
+- Current reading: 53/55 children, 77,528/80,297 fragments and 2,386,603/2,471,305 bytes; 108 entries through EOF
+  plus unicode_rule_label_routes_test.dart through line 70. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -85,7 +85,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Acceptance: Every child accounts for its exact source bytes and deltas, reconciles Knowledge before re-derivation,
     records comprehension and confirmed findings, runs necessary focused diagnostics and commits before the next child.
   Children: `.1.1-.1.55`; exact scopes and baseline evidence below, read in numeric order.
-  Verification: 52/55 children complete; `.1.1-.1.52` own exact reading/comprehension evidence, and .1.53-.1.55 remain pending.
+  Verification: 53/55 children complete; `.1.1-.1.53` own exact reading/comprehension evidence, and .1.54-.1.55 remain pending.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.1.1`
@@ -893,14 +893,19 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.52 - complete staged and lifecycle consumer reading`
 
 - ID: `DART-STARTUP-READING.1.53`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 53 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.52` committed; empty brief and clean repository.
+  Activation: Clean `9bd2f680500ad85f76e45656805840b282538d73`; prior leaf committed, brief empty, root clean and all jobs consumed.
   Scope: `dart/test/trace_test.dart` lines 261-269; `dart/test/typed_source_location_contract_test.dart` lines 1-420; `dart/test/unicode_case_mapping_test.dart` lines 1-58; `dart/test/unicode_rule_label_classifier_test.dart` lines 1-84; `dart/test/unicode_rule_label_identity_routes_test.dart` lines 1-416; `dart/test/unicode_rule_label_negative_isolation_test.dart` lines 1-443; `dart/test/unicode_rule_label_routes_test.dart` lines 1-70
   Baseline evidence: 1500 fragments / 44020 bytes; ordered range SHA-256 `e2e59b430e816290b10dd28f0d6aa8faed7bf523c673a86ee5532430e836a82a`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact declared ranges and full baseline identity; trace/typed-source/Unicode tests and direct typed-source/Unicode neutral authorities; Knowledge, histories, rendered book, preservation and all doctrines.
+  Canonical trigger: `none` — ordinary bounded reading and documentation; no executable, contract, infrastructure or dependency changes.
+  Comprehension: Trace tail registers teardown for managed temporary directories. Typed-source tests exercise three source entries, seven coordinate rows, six direct spans, three ordered-derived cases, detached values, four exact privacy-filtered errors and 92 projection rows plus seven aliases. Three mark/cursor/alias fixtures execute through native/reconstructed/generated-plan routes without an independent emitted module. Casing consumes all twelve neutral fixtures through direct/helper/receiver/array paths. Classifier checks metadata, both endpoints of806 ranges, sentinel denials, fixture membership/distinctness and UTF-16-safe prefix splits. Unicode identity checks artifacts, loaders, in-process CLI, selector diagnostics/traces and a fresh offline package with fatal emitted analysis/exit0 execution; the file CLI covers the supplementary label, while inline CLI covers all labels. Eight negative fixtures reject four roles on two AST trust paths with exact diagnostics; source colon/newline exceptions and adjacent identifier grammars stay explicit. Existing body-fluent suffix loss .2.6 remains outside those passing isolation fixtures. Unicode routes1-70 begins declaration/edge identity and the invalid suffix list.
+  Verification: Physically read trace261-269 EOF, typed-source1-210/211-420 EOF, casing1-58 EOF, classifier1-84 EOF, identity1-208/209-416 EOF, negative isolation1-222/223-443 EOF and routes1-70 in untruncated output. Exact1500 fragments/44020 bytes and pinned digest pass; all115 baseline paths remain identical. All29 tests in seven selected files pass, including fresh-cache emitted Unicode execution; whole routes-test execution adds no unread suffix credit. Neutral typed-source14/0/231, Unicode labels806/9/8/2 and casing1563/1581 mappings,158/464 ranges,12 fixtures pass. Coverage/preservation, Knowledge/book/memory/histories, diff hygiene and all doctrines govern the focused commit. Prior .2.3/.2.6/.2.13 defects remain open; no source or other-backend runtime change.
+  Commit: `DART-STARTUP-READING.1.53 - read typed source and Unicode consumers`
 
 - ID: `DART-STARTUP-READING.1.54`
   Status: `pending`
@@ -1470,7 +1475,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.53` | `pending` | Finish trace, read typed-source and Unicode consumers through Unicode routes70 after clean .1.52. |
+| 1 | `DART-STARTUP-READING.1.54` | `pending` | Complete Unicode routes, binding and function consumers; read write vivification through292 after clean .1.53. |
 
 ## Decisions
 
@@ -1501,6 +1506,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-11` .1.53: Dart .1.53 completes trace, typed-source, casing, classifier, identity and negative-isolation consumers, then reads Unicode routes through line 70: 1,500 fragments / 44,020 baseline-identical bytes. All 29 tests and three neutral checks pass, including fresh-cache emitted Unicode execution. Exact source and label boundaries remain distinct from previously owned fluent-suffix, helper-order and CLI defects. Cumulative53/55,77528 fragments/2386603 bytes,108 EOF plus Unicode routes70; prior source findings remain owned.
 
 - `2026-09-11` .1.52: Dart .1.52 completes staged enrichment, v1 registry and standalone lifecycle consumers, then reads trace through line 260: 1,500 fragments / 44,374 baseline-identical bytes. All 38 selected tests and staged/lifecycle neutral checks pass. Record four-route staged execution, narrow lifecycle emitted-text and malformed-twin assertions, and trace result preservation; prior defects remain open. Cumulative 52/55, 76028 fragments / 2342583 bytes, 102 EOF plus trace260; prior source findings remain owned.
 
@@ -1611,6 +1618,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- .1.53: `DART-STARTUP-READING.1.53 - read typed source and Unicode consumers`.
+
 - .1.52: `DART-STARTUP-READING.1.52 - complete staged and lifecycle consumer reading`.
 
 - .1.51: `DART-STARTUP-READING.1.51 - read staged enrichment authority consumers`.
@@ -1716,6 +1725,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-11`: .1.53 completes typed-source and core Unicode consumers; next .1.54 after clean focused commit. Preserve exact route coverage and existing defects.
 
 - `2026-09-11`: .1.52 completes staged/registry/lifecycle consumer reading and starts trace; next .1.53 after clean focused commit. Keep emitted-test and malformed-twin evidence boundaries explicit.
 

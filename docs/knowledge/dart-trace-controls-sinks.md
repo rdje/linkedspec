@@ -66,3 +66,11 @@ action/blind dispatch, lifecycle, cursor and source-boundary events remain visib
 All 38 selected tests pass, including the complete seven-test trace file.
 The temporary-file helper tail belongs to .1.53; execution gives no unread source
 credit. The separate primary-CLI overflow/reset defect .2.3 remains open.
+
+## September 11 trace consumer tail complete
+
+Dart .1.53 reads trace_test.dart 261-269 through EOF. The helper registers
+teardown to remove its temporary directory and returns its trace.log path.
+The repository wrapper supplies the project-local system temporary root.
+All 29 selected tests pass, including all seven trace tests. This completes
+physical consumer reading and leaves the separate primary-CLI .2.3 defect open.

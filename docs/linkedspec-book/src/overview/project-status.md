@@ -89,7 +89,7 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed fifty-two of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed fifty-three of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
 parser bridge, function-shell projection, bounded child-parse authority, generated rule plan,
@@ -105,8 +105,9 @@ Unicode, call-projection, compilation-foundation and query tests are complete.
 Observation-route, runtime-capture, observed-index, source-foundation and static-graph
 tests, semantic admission, smoke and source-boundary aliases are complete; emitter
 reading is complete along with AST/loader/parser/validator, staged-enrichment,
-v1 registry and lifecycle tests; trace reaches line 260. This covers 76,028
-fragments / 2,342,583 bytes. The current 38-test selection and two neutral checks pass; earlier results remain in their
+v1 registry, lifecycle, trace, typed-source, casing, classifier, label identity and
+negative-isolation tests. Unicode route reading reaches line 70. This covers 77,528
+fragments / 2,386,603 bytes. The current 29-test selection and three neutral checks pass; earlier results remain in their
 completed reading leaves.
 
 Interpreter tests confirm explicit cursor rewinds and stack restoration, capture
@@ -125,7 +126,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading continues
-in child `.1.53` after the clean .1.52 handoff. Startup `.3.4` remains pending.
+in child `.1.54` after the clean .1.53 handoff. Startup `.3.4` remains pending.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -210,7 +211,7 @@ That leaf reached line 1791, partway through production emitted admission;
 unread source credit. By child 51, reading covered 74,528 fragments / 2,298,209 bytes.
 The task container's stale36/55 rollup is corrected to these verified child records.
 
-**Dart staged, lifecycle and trace consumer reading through child 52:** the staged
+**Completed child 52 evidence:** the staged
 production test and helpers are fully read. All four routes execute twice from one
 seed and compare results, cache/resource records and fresh-authority observations.
 The emitted route requires successful analysis and execution in the existing Dart
@@ -226,9 +227,29 @@ payloads remain inert.
 
 Trace reading reaches line 260, covering level and environment controls, file reset,
 route/mirror sinks, structured events and unchanged parse results. All 38 selected
-tests and staged/lifecycle neutral checks pass. This is 52/55 children, 76,028
-fragments / 2,342,583 bytes; `.1.53` finishes the trace helper and reads typed-source
-and Unicode consumers. Existing source, provenance, budget and CLI defects stay open.
+tests and staged/lifecycle neutral checks pass. That leaf reached 52/55 children,
+76,028 fragments / 2,342,583 bytes; `.1.53` now completes the trace helper and reads
+typed-source and Unicode consumers. Existing source, provenance, budget and CLI defects stay open.
+
+**Dart typed-source and Unicode consumer reading through child 53:** source values
+retain detached coordinates and spans, authority ownership, ordered concatenation
+and four exact privacy-filtered diagnostics. The 92 helper rows and seven aliases
+remain exact. Mark, cursor and alias fixtures execute through native, reconstructed
+and generated-plan routes; this typed-source consumer has no separate emitted caller.
+
+Unicode casing checks all twelve fixtures through direct, helper, receiver and
+array operations. Label membership checks both endpoints of the 806 pinned ranges,
+neutral positive/negative cases and UTF-16-safe prefix boundaries. Identity remains
+sensitive to case and normalization. The label test builds a fresh offline package,
+requires fatal analysis, then executes emitted source for every tested label.
+
+Negative labels reject all four declaration/edge roles through programmatic and
+reconstructed ASTs. Source checks retain the colon and newline grammar exceptions.
+Inline CLI checks cover every positive label; the file CLI selects the supplementary
+label. Adjacent-grammar fixtures do not close the separately found body-fluent suffix
+loss. All 29 tests and three neutral checks pass; prior helper-order and CLI defects
+also remain open. Reading is 53/55 children, 77,528 fragments / 2,386,603 bytes;
+`.1.54` continues Unicode routes after line 70, then reads binding/function tests.
 
 **Approved engineering-history capacity:** the director approved collection files
 27→28 and manifest rows 26→27. Containment `.11` and ADR0113 implement those two
@@ -274,7 +295,7 @@ in 2.25 seconds. That sample locates a pre-main wait without establishing its OS
 or a remedy. The older macOS 26.5.2 closeout does not resolve this macOS 26.6.2 observation.
 The evidence and repair criteria are logged by `SESSION-STARTUP-READING.80.0`; source
 changes remain behind the existing startup prerequisites. The intake is committed at
-`eaf4331e`; approved containment .11 is committed at `ad64f76f`; `.1.53` follows completed `.1.52`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
+`eaf4331e`; approved containment .11 is committed at `ad64f76f`; `.1.54` follows completed `.1.53`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
 
 **Known Dart limitation — null named selectors in reconstructed state:** a programmatically
 reconstructed target with these fields is incorrectly accepted:

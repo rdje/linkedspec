@@ -10,6 +10,15 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — typed source and exact Unicode identity consumers
+
+Dart .1.53 separates private typed-source authority proof from native/reconstructed/
+generated-plan helper projection. Unicode identity tests additionally analyze and
+execute an emitted parser in a fresh offline package. Classifier checks both range
+endpoints; negative source tests retain colon/newline syntax exceptions and do not
+close standalone fluent-suffix loss. All 29 tests and three neutral checks pass.
+Physical reading reaches Unicode routes70; existing defects remain separately owned.
+
 ## 2026-09-11 — staged, lifecycle and trace consumer boundaries
 
 Dart .1.52 finishes staged production admission and v1 registry consumers. The

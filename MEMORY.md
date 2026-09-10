@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `9092add37febb1c57293d8dc2356ca36ade12379` — clean .1.51 handoff before Dart .1.52.
-- latest_completed_leaf: `DART-STARTUP-READING.1.52 - complete staged and lifecycle consumer reading`; 38 tests and two neutral checks pass.
-- active_work_unit: none; clean .1.52 handoff, with required-reading and repair gates still open.
-- next_action: Activate `DART-STARTUP-READING.1.53` from clean HEAD; finish trace and read typed-source/Unicode tests through Unicode routes70.
+- activation_commit: `9bd2f680500ad85f76e45656805840b282538d73` — clean .1.52 handoff before Dart .1.53.
+- latest_completed_leaf: `DART-STARTUP-READING.1.53 - read typed source and Unicode consumers`; 29 tests and three neutral checks pass.
+- active_work_unit: none; clean .1.53 handoff, with required-reading and repair gates still open.
+- next_action: Activate `DART-STARTUP-READING.1.54` from clean HEAD; complete Unicode routes, binding/function tests and write-vivification tests through292.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
-- in_flight_uncommitted: none; .1.52 focused proof complete; no PGEN/RGX build or full CI required for this ordinary reading leaf.
+- in_flight_uncommitted: none; .1.53 focused proof complete; no PGEN/RGX build or full CI required for this ordinary reading leaf.
 - blockers: Dart .7 closes under .11/ADR0113 with the explicit one-time verification exception; Startup `.7` blocks recovery/purge; engineering-history .5 approval is implemented under containment .9 / ADR0111; prior change-history approval remains under .8 / ADR0110. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.81` precede mutation setup; `.29` belongs to `.5`. Prior narrow exceptions stay approved; Dart .6 approval is implemented under containment .10 / ADR0112, with all earlier history preserved.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -57,4 +57,4 @@
   Segment 4981-5a6450db0974 preserves 218 lines / 32,108 bytes; every other ceiling remains unchanged.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-11 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete, formal .4 pending; Dart52/55,76028 fragments/2342583 bytes. Next .1.53; prior repairs and CI reuse remain pending.
+- latest_bootstrap_read: 2026-09-11 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete, formal .4 pending; Dart53/55,77528 fragments/2386603 bytes. Next .1.54; prior repairs and CI reuse remain pending.

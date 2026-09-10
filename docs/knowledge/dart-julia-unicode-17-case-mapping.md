@@ -70,3 +70,12 @@ The fresh eleven-test Dart selection includes the casing consumer, which runs
 all twelve fixtures through direct, helper, receiver and array routes. Neutral
 regeneration remains the unchanged .1.28/17341bbe checkpoint; no fresh Julia
 or other-backend execution, generated-data change or new defect is claimed.
+
+## September 11 Dart casing consumer reading complete
+
+Dart .1.53 reads unicode_case_mapping_test.dart 1-58 through EOF. One test checks
+the pinned metadata and all twelve fixtures through direct lower/upper functions
+and authored scalar helper, receiver and array mutation routes. All 29 selected
+Dart tests pass. Fresh neutral regeneration retains 1563/1581 mappings,158/464
+property ranges and12 fixtures; it is not a fresh Julia runtime execution.
+The separately owned Unicode helper-order defect .2.13 is unrelated to casing.

@@ -303,3 +303,12 @@ these source observations do not rerun native/generated projections.
 
 Rust private value/authority and sealed materialization source reading at startup .3.3.34-.35 now lives in
 [[rust-typed-source-authority-materialization]]; its exact sections were routed intact to stay within the per-card byte cap.
+
+## September 11 Dart consumer reading complete
+
+Dart .1.53 reads all420 typed-source test lines: detached3/7/6/3 values,
+four exact private errors,92 rows and7 aliases. Mark/cursor/alias fixtures
+execute native/reconstructed/generated-plan routes, with no emitted child
+in this consumer. All29 selected tests and neutral14/0/231 pass; existing
+Dart overflow/input-slice findings remain open. Exact reading evidence:
+docs/tasks/DART-STARTUP-READING.md, .1.53.
