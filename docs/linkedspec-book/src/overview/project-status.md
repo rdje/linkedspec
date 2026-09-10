@@ -89,17 +89,16 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed twenty-six of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed twenty-seven of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
 parser bridge, function-shell projection, bounded child-parse authority, generated rule plan,
-interpreter, matching, recognition transactions, semantic observation and source location,
-plus staged enrichment through line 3306. This covers 37,028 fragments / 1,170,180 bytes.
-The latest 44 selected staged/registry/progressive/source/matching tests and staged governance
-123/129 mutations pass. Eleven private scheduler controls expose two resource boundary defects,
-owned below under `.2.17` and `.2.18`. Child `.1.27` finishes staged enrichment from line 3307,
-reads staged_parse_job and begins Unicode case mapping. Startup `.3.4` remains pending.
-Earlier checkpoints retain their evidence and known limitations.
+interpreter, matching, recognition transactions, semantic observation, source location and both
+staged runtime modules, plus Unicode case mapping through line 1189. This covers 38,528 fragments /
+1,209,661 bytes. The latest 33 selected staged/source/matching/scalar/casing tests and Unicode
+generation with twelve neutral fixtures pass. Seventeen private/neutral validation controls expose
+six malformed provenance acceptances, owned below under `.2.19`. Child `.1.28` continues Unicode
+mapping from line 1190. Startup `.3.4` remains pending; prior evidence and limitations remain intact.
 
 The function shell checks the returned definition's text against scalar spans, reconciles staged
 body metadata and removes declarations while preserving line breaks. The private progressive
@@ -309,6 +308,16 @@ and `.2.18` owns call admission and carrier proof, both behind startup gates.
 [The staged chapter](../compiler/staged-ast-enrichment.md#known-dart-resource-boundary-limitations)
 and `docs/knowledge/dart-staged-resource-boundary-gaps.md` retain the measured cases.
 Passing existing tests does not close either defect.
+
+**Known Dart limitation — staged provenance field types:** the private staged-runtime validator accepts
+null, integer or object provenance by replacing it with string `<invalid>`. A malformed
+source_id can select an existing caller source named `<runtime>`; a derived segment repeats
+the coercion. Seventeen cases compared with the neutral validator show six mismatches and
+eleven agreeing controls, including valid literal placeholder strings. This does not prove
+that an ordinary authored parser constructs malformed records. `DART-STARTUP-READING.2.19`
+owns strict type validation and applicable entrypoint/carrier proof behind startup gates.
+[The staged chapter](../compiler/staged-ast-enrichment.md#known-dart-provenance-validation-limitation)
+and `docs/knowledge/dart-staged-provenance-type-validation-gap.md` preserve the exact evidence.
 
 **Approved continuity capacity — engineering history:** the director approved intake
 `DART-STARTUP-READING.5`. Containment .9 and ADR0111 admit one archive slot:

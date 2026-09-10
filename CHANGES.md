@@ -10,6 +10,16 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-10 — DART-STARTUP-READING.1.27: declarations and provenance types
+
+Complete both staged runtime modules and read Unicode lower mappings through
+1189: 1,500 fragments / 39,481 baseline-identical bytes. Seventeen private/
+neutral validator controls establish six malformed provenance acceptances and
+eleven agreeing cases. Own .2.19 and two gated repair children, preserve exact
+reproduction, and qualify the staged chapter and project status. All 33 selected
+tests and Unicode generation/12 neutral fixtures pass; prior resource defects
+remain owned. Reading reaches 27/55; .1.28 is next.
+
 ## 2026-09-10 — DART-STARTUP-READING.1.26: staged resource boundaries
 
 Read staged enrichment lines 1807–3306: 1,500 fragments / 43,782 baseline-identical

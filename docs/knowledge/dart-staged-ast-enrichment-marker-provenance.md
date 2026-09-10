@@ -68,3 +68,19 @@ Related: [[dart-staged-ast-enrichment-dormant-red]],
 [[dart-staged-ast-enrichment-current-depth-authority]],
 [[dart-staged-ast-enrichment-recursive-authority]], and ADRs `0056`, `0088`.
 See also [[dart-staged-ast-enrichment-carriers-admission]].
+
+## 2026-09-10 — complete declaration reading and malformed-type gap
+
+`DART-STARTUP-READING.1.27` reads all 296 lines of staged_parse_job.dart and
+completes staged_ast_enrichment.dart. Direct and derived materialization use
+SourceAuthority; live entry/local code-unit boundaries become scalar spans,
+and markers retain only detached text, logical options, provenance and origin.
+
+The helper's exact-key checks do not enforce original source_id/provenance
+string types before diagnostic placeholders are selected. Seventeen private
+validator cases compared with the neutral evaluator establish six malformed
+acceptances and eleven agreeing controls. Explicit literal placeholder strings
+remain valid. [[dart-staged-provenance-type-validation-gap]] preserves all
+records, recipes and gated .2.19 repair ownership. All 33 selected tests pass;
+no malformed authored-production route or other-backend runtime failure is
+established. The earlier valid declaration/carrier evidence remains intact.

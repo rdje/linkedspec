@@ -10,6 +10,19 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-10 — staged declaration completion and Unicode lower-map reading
+
+Dart .1.27 completes staged enrichment and inert parse-job construction. Typed
+source materialization remains the authority, but _typedDirectSpan promotes
+diagnostic placeholders before validating original source/provenance types.
+Seventeen private/neutral cases reproduce six malformed acceptances; eleven
+controls agree, including valid explicit placeholder strings. The exact recipe
+and .2.19 repair scope live in
+`docs/knowledge/dart-staged-provenance-type-validation-gap.md`. Generated Unicode
+17 lower mappings are read through U+A7A0; remaining tables/evaluator are later
+reading. All 33 selected tests and byte-identical Unicode generation/12 neutral
+fixtures pass. Prior findings and source remain unchanged.
+
 ## 2026-09-10 — staged resource helper reading and repair intake
 
 Dart .1.26 reads through staged enrichment line 3306 and reconciles source

@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `692c5363e2dbdde7def2e8b3697aa65fac737858` — clean focused handoff before Dart .1.26.
-- latest_completed_leaf: `DART-STARTUP-READING.1.26 - own staged diagnostic and call-counter boundary gaps`.
+- activation_commit: `2b8b4bd7dc29f0915e804b9aaf99c70603daf305` — clean focused handoff before Dart .1.27.
+- latest_completed_leaf: `DART-STARTUP-READING.1.27 - read staged declarations and own provenance type gap`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: `DART-STARTUP-READING.1.27` finishes staged enrichment from 3307, reads staged_parse_job and begins Unicode case mapping after the clean focused .1.26 commit.
+- next_action: `DART-STARTUP-READING.1.28` continues Unicode case mapping from 1190 after the clean focused .1.27 commit.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: Startup `.7` blocks recovery/purge; engineering-history .5 approval is implemented under containment .9 / ADR0111; prior change-history approval remains under .8 / ADR0110. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.79` precede mutation setup; `.29` belongs to `.5`. The director approved the narrow capacity exception; other reading gates remain.
@@ -57,4 +57,4 @@
   and aggregate ceiling remains unchanged.
 - current_change_history_capacity: immutable segment `4982` is the twenty-ninth history segment; ADR `0110`
   authorizes exactly 31 collection files / 30 manifest lines / 17,039 manifest bytes; other ceilings remain unchanged.
-- latest_bootstrap_read: 2026-09-10 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading 26/55 children, 37,028 fragments / 1,170,180 bytes; staged enrichment through 3306; 44 tests and staged 123/129 mutations pass; eleven private controls own diagnostic-byte and call-wrap repairs .2.17/.2.18; approved capacity remains at 9c644ecb; next .1.27.
+- latest_bootstrap_read: 2026-09-10 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading 27/55 children, 38,528 fragments / 1,209,661 bytes; both staged modules complete, Unicode mapping through 1189; 33 tests and Unicode generation/12 neutral fixtures pass; seventeen private/neutral controls own .2.19 provenance type repair; earlier owners intact; next .1.28.

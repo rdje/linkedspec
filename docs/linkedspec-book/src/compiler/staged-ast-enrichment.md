@@ -851,6 +851,32 @@ and host-seed/carrier proof. The exact reproductions are in
 establish a failure in another backend or through fresh native, reconstructed,
 generated-plan or emitted authored execution. No repair is included in this reading slice.
 
+### Known Dart provenance validation limitation
+
+The private `validateAndMaterializeStagedProvenance` API has a separate original-field
+validation gap, measured during `DART-STARTUP-READING.1.27`. This is an internal staged-runtime
+function; MCP's read-only semantic-index tools do not expose it. For example:
+
+| Caller-supplied detached record | Current Dart result | Neutral validator |
+| --- | --- | --- |
+| input:[1,3) with provenance null | Materializes é🙂 and changes provenance to string `<invalid>`. | Rejects. |
+| source_id null with caller source `<runtime>` = R🙂ST | Selects that source and materializes 🙂S at [1,3). | Rejects. |
+| Explicit string source_id `<runtime>` and provenance `<invalid>` | Preserves those strings and materializes the caller-authorized text. | Accepts. |
+
+The same helper validates derived segments, so they share the malformed-provenance
+acceptance. It chooses diagnostic fallback labels before checking the original types;
+an existing caller source can make the source-id fallback resolve successfully.
+Seventeen private/neutral cases establish six malformed acceptances and eleven agreeing
+controls. Exact-key, empty-label, offset, unknown-source and reversed-span controls still reject.
+
+Repair `DART-STARTUP-READING.2.19.1-.2.19.2` owns strict original-field checks and
+neutral/runtime/entrypoint/carrier closeout behind startup gates. The literal strings
+`<runtime>` and `<invalid>` are valid caller data; reserving them would hide the coercion
+instead of fixing it. The exact recipe is in
+`docs/knowledge/dart-staged-provenance-type-validation-gap.md`. Ordinary typed authored
+construction and malformed host input are distinct: this probe establishes no fresh
+authored-production or other-backend runtime failure.
+
 ## Current private Julia production boundary
 
 Julia `.14.7.6.0-.4` implement and admit the predeclared final-path consumer at

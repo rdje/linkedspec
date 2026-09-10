@@ -23,3 +23,19 @@ protocol tokens and is not a DSL text semantic path.
 
 Related facts: [[perl-rust-unicode-17-case-mapping]], [[unicode-17-case-contract-data]],
 [[unicode-case-mapping-cross-backend-gap]].
+
+## 2026-09-10 — opening Dart lower-map reading
+
+`DART-STARTUP-READING.1.27` reads unicode_case_mapping.dart 1–1189, through
+lower-map U+A7A0. The generated constants pin contract v1, Unicode 17.0.0 and
+logical digest 5c17653094c49a3bd69222f6e8bde5de5ebd445a121453ccb156ea540a5e3bae.
+The table includes dotted-I expansion to 0069 0307, identity entries retained
+by full casing data, and ordered Latin/Greek/Cyrillic/Armenian/Georgian/Cherokee/
+Coptic mappings. Reading does not yet cover the remaining mappings or evaluator.
+
+Managed regeneration byte-compares the neutral JSON and all five backend
+modules and passes twelve independent fixtures with unchanged 1563/1581
+mappings and 158/464 property ranges. The 33-test Dart selection separately
+runs all twelve casing fixtures through direct helpers and authored helper,
+receiver and array paths. This is fresh Dart and neutral/generation proof;
+the historical Julia and other-backend execution counts are not refreshed.
