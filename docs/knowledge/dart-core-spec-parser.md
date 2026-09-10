@@ -66,3 +66,15 @@ quoted parentheses corrupt compact fluent extraction, while regex closing braces
 lifecycle collection. Six positive controls retain their values. Exact reproduction and the
 new .2.7/existing .2.2.2 repair ownership live in [[dart-spec-lexical-boundary-defects]].
 This completes physical spec-parser reading without repairing these or the earlier suffix gap.
+
+## September 11 parser and validator consumer reading complete
+
+Dart .1.50 reads spec_parser_test.dart1-256 and spec_validator_test.dart1-244.
+The shipped-file loops parse and validate their sources. Corpus loops skip any
+source whose first significant line starts fn and require more than80 parsed
+rule files; those loops do not establish complete runtime corpus execution.
+Focused cases retain raw fallback, mode/edge/lifecycle/fluent shapes, target/slot
+validation, strict unused-rule policy and function registry collision/parameter
+checks. The two AST tests also preserve detached JSON field/mode structure.
+All54 selected tests pass; prior suffix omission, quoted-parenthesis and regex-brace
+defects remain separately owned. This reading changes no frontend behavior.

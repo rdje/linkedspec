@@ -10,6 +10,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — frontend fixture scope and staged compatibility
+
+Dart .1.50 completes emitter and frontend consumers. Parser/validator corpus checks
+skip first-significant-line function shells and do not execute the corpus; native
+resolution uses directories as non-regular surrogates. Staged prefix checks current
+public governance separately from unchanged legacy function-body v1. All 54 tests
+and three neutral checks pass; physical staged reading ends at291. No source repair.
+
 ## 2026-09-11 — emitted proof has distinct cache and process boundaries
 
 Dart .1.49 completes the twelve-role admission consumer: one cached emitted child

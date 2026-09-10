@@ -68,3 +68,14 @@ Reading ends inside the accepted eight-case subset setup; .1.50 owns its remaini
 consumer and fixtures. All 12 selected tests pass, including the complete emitter
 test, without granting unread suffix credit. Neutral generated-source v1 governance
 remains distinct from Dart source v2 and executes no other backend in this leaf.
+
+## September 11 source-emitter consumer completion
+
+Dart .1.50 reads source_emitter_test.dart 530-866 through EOF. The accepted subset
+first compares native execution with stored expected JSON, then compares all eight
+independent emitted values, metadata and plans and first-case trace fields. Its
+fresh-cache offline resolution, fatal analysis and execution each require exit0;
+the owner removes scratch afterward. The ten-family fixtures and process helper
+complete source understanding. All 54 selected tests pass, including the full
+emitter. This proves the accepted eight-case emitted subset, not all105 emitted
+fixtures, and the neutral checker rerun is governance proof only.

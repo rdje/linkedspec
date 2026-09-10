@@ -10,6 +10,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — DART-STARTUP-READING.1.50 - complete frontend and emitter consumer reading
+
+Complete emitter/AST/loader/parser/validator consumers and read staged enrichment
+through291: 1,500 fragments / 45,895 baseline-identical bytes. All 54 tests and
+three neutral checks pass. Preserve parser-only corpus exclusions, directory
+non-regular surrogates, legacy-v1/current-staged distinction and all prior defects.
+Next .1.51 after clean focused landing.
+
 ## 2026-09-11 — DART-STARTUP-READING.1.49 - complete admission and read source-emitter consumers
 
 Complete admission, smoke and source-boundary aliases, then read emitter through529:

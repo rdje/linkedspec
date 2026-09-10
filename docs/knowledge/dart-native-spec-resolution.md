@@ -33,3 +33,13 @@ The full Dart gate proves no CLI byte drift.
 
 Related facts: [[native-spec-resolution-contract]], [[rust-native-spec-resolution]],
 [[native-in-memory-backend-contract]], [[primary-cli-four-backend-matrix]].
+
+## September 11 loader consumer reading complete
+
+Dart .1.50 reads spec_loader_test.dart 1-268. All14 name,9 resolution and4 text
+cases execute through shared fixtures; non_regular entries are directories,
+not a fresh FIFO/device/symlink matrix. The composed fixture loads and runs a
+staged function while preserving requested/resolved engine identity. Parse,
+validation and missing-name errors keep their structured stages and JSON.
+All five loader tests pass within the54-test selection, and neutral14/9/4
+also passes. Scratch is managed and removed; no loader or storage behavior changes.

@@ -84,3 +84,16 @@ remain valid. [[dart-staged-provenance-type-validation-gap]] preserves all
 records, recipes and gated .2.19 repair ownership. All 33 selected tests pass;
 no malformed authored-production route or other-backend runtime failure is
 established. The earlier valid declaration/carrier evidence remains intact.
+
+## September 11 staged consumer prefix reading
+
+Dart .1.50 reads staged_ast_enrichment_contract_test.dart1-291. The prefix
+pins current neutral/public status, exact inventories, completed consumers and
+rollout. It separately executes unchanged function-body v1 with exact failure
+context and confirms that registry still rejects a general v2 job. It then
+begins dedicated assignment-node inspection; remaining assertions belong to .1.51.
+The introductory private-admission comment describes its original .0-.4 scope,
+not a current denial of the later public contract. All54 selected tests pass,
+including the complete existing staged consumer; neutral123/public129 mutations
+also pass. Whole-test execution grants no unread source credit or private
+provenance-defect .2.19 closure.
