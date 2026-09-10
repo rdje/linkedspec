@@ -120,3 +120,20 @@ result records carry both. The optional sink executes synchronously. Immutable
 derivation validates retained observations separately; record construction alone
 does not establish that contract. The selected 58 tests pass; the earlier
 action-wrapper failure remains .2.8, with no new observer defect or repair.
+
+## 2026-09-10 — immutable runtime projection reading complete
+
+`DART-STARTUP-READING.1.32` reads semantic_runtime_projection.dart 1-293 through
+EOF. Derivation rejects failed/already-observed bases, malformed event fields,
+invalid contract/input identity, missing/duplicate/nonfinal successful results,
+foreign entry rules and selector/slot pairs absent from static topology. It
+copies static records/relations, appends execution/events/observed_as evidence,
+canonicalizes it and returns a new snapshot while preserving the base.
+
+Value shapes come from static entry-rule and selected-edge facts, never from a
+host result object. Caller-retained events are evidence supplied to derivation;
+query does not execute or independently establish an execution history.
+The 21 selected query/runtime/static/observation tests include the exact
+twentieth response digest and existing invalid-event/base-isolation controls;
+neutral 6/20/128 also passes. Earlier action-wrapper identity failure remains
+Dart .2.8, and no fresh emitted-route or MCP reproduction is claimed.

@@ -39,3 +39,19 @@ the public `SemanticIndex` query methods/exports were completed by `.10.5.4.3`. 
 Related facts: [[dart-semantic-query-authority-map]], [[dart-semantic-query-public-api]],
 [[dart-semantic-introspection-authority-map]], [[semantic-introspection-neutral-contract]],
 [[rust-semantic-query-evaluator]].
+
+## 2026-09-10 — full query reading and native-domain qualification
+
+`DART-STARTUP-READING.1.32` completes the query owner. The earlier immutability
+claim describes supported plain JSON records and tested responses; it must not
+be read as a guarantee for arbitrary native objects passed to queryNeutral.
+Reading .1.31 independently confirmed that malformed non-JSON cursors can
+retain host objects or nonfinite values in rejection evidence. Exact eight-case
+proof and gated .2.21 repair belong to
+[[dart-semantic-native-rejection-immutability-gap]]; these are retained results
+at unchanged source identity, not a fresh MCP reproduction.
+
+All 21 selected query/runtime/static/observation tests and neutral 6/20/128
+checks pass at this reading boundary. The query still receives only a detached
+projection; source ceilings, structural redaction and invalid-cursor handling
+remain in that evaluator. No source or API change lands.

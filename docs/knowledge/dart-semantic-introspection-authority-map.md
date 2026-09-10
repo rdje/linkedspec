@@ -308,3 +308,19 @@ JSON controls remain detached and serializable. Dart .2.21 and two children own
 the repair and shared-constructor census. These controls do not establish an
 MCP defect, change source authority or expose the private staged validator.
 Earlier call-projection evidence and all prior owners remain intact.
+
+## 2026-09-10 — query/runtime projection complete, static failure prefix
+
+`DART-STARTUP-READING.1.32` completes query and runtime projection and reads
+semantic_static_projection.dart 1-381. The static prefix owns canonical kind
+order, detached internal oracle access and failed-compilation rule/diagnostic
+records, including the start of unknown-target decision evidence. Remaining
+failed/compiled projection and lexical correlation belong to .1.33.
+
+All 21 selected query/runtime/static/observation tests and neutral 6/20/128
+checks pass. Query uses copied projection data; observation derivation validates
+caller-retained events against static topology and creates a new index without
+executing a parser. Shapes come from static facts, not a host result object.
+Existing [[dart-semantic-native-rejection-immutability-gap]],
+[[dart-semantic-call-projection-counterexamples]] and observer error-identity
+findings retain their separate owners. No new defect or repair lands.

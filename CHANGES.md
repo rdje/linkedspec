@@ -10,6 +10,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-10 — DART-STARTUP-READING.1.32: query and runtime projection
+
+Read 1,500 fragments / 45,289 baseline-identical bytes: complete query/runtime
+projection and read static projection through 381. All 21 selected tests and
+neutral 6/20/128 checks pass. Qualify older query immutability wording with the
+existing .2.21 native rejection finding; retain every prior owner and gate.
+No new defect or source repair. Reading reaches 32/55; .1.33 is next.
+
 ## 2026-09-10 — DART-STARTUP-READING.1.31: native rejection detachment
 
 Read 1,500 fragments / 43,744 baseline-identical bytes: complete semantic index

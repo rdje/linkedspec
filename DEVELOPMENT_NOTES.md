@@ -10,6 +10,17 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-10 — query accounting and caller-observation derivation
+
+Dart .1.32 completes query/runtime projection and begins static failure
+projection. Queries page canonical captured records and report logical output
+costs. Explain reserves a decision and pages its evidence under the existing
+neutral operation; this is not a new general host-resource guarantee.
+Observation derivation validates typed caller evidence against static topology
+and copies it into a new index, using static shapes. All 21 selected tests
+and neutral 6/20/128 checks pass; earlier rejection, source/container and
+observer-identity findings retain their owners and evidence.
+
 ## 2026-09-10 — validate rejection evidence as well as query admission
 
 Dart .1.31 confirms that raw-query cursor rejection can retain native host

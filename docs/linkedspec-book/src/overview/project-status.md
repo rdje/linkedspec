@@ -89,16 +89,23 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed thirty-one of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed thirty-two of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
 parser bridge, function-shell projection, bounded child-parse authority, generated rule plan,
 interpreter, matching, recognition transactions, semantic observation, source location and both
-staged runtime modules, Unicode case mapping, scaffold, semantic call projection and semantic
-index, plus semantic query through line 668. This covers 44,528 fragments / 1,372,913 bytes.
-All 18 selected source/compilation/query tests and neutral six-group/twenty-query/128-mutation
-checks pass. Child `.1.32` finishes query from line 669, reads runtime projection and begins
-static projection. Startup `.3.4` remains pending; earlier evidence and limitations remain intact.
+staged runtime modules, Unicode case mapping, scaffold, semantic call projection, semantic
+index, query and runtime projection, plus static projection through line 381. This covers
+46,028 fragments / 1,418,202 bytes. All 21 selected query/runtime/static/observation tests
+and neutral six-group/twenty-query/128-mutation checks pass, including the existing nineteen
+static response hashes and twentieth observed-runtime hash. Child `.1.33` finishes static
+projection from line 382, reads SHA-256 and begins source emission. Startup `.3.4` remains
+pending; earlier evidence and limitations remain intact.
+
+Query operates on captured projection data and reports logical counts of returned records
+and relations. Deriving an observed index checks caller-retained events against static
+entry-rule and selector/slot evidence, then returns a new snapshot; it leaves the base index
+unchanged and does not execute a parser. This reading adds no API capability or new defect.
 
 **Known Dart limitation — native semantic rejection evidence:** `SemanticIndex.queryNeutral`
 accepts a native `Object?` request. An invalid `page.after_id` containing a caller object can

@@ -38,3 +38,19 @@ all 26 structural validation boundaries; see [[dart-semantic-query-public-api]].
 
 Related facts: [[dart-semantic-query-record-kernel]], [[dart-semantic-query-authority-map]],
 [[semantic-introspection-neutral-contract]], [[rust-semantic-query-evaluator]].
+
+## 2026-09-10 — complete traversal and accounting reading
+
+`DART-STARTUP-READING.1.32` reads the remaining query implementation through
+EOF. Breadth-first traversal tracks the first depth for each relation, removes
+visited frontier records and restores canonical relation order before paging.
+Cursor lookup operates on the filtered primary stream; reported costs count
+returned records/relations rather than scans, time or allocation.
+
+Explain reserves one record for the decision and pages its owned steps.
+Secondary explained_by relations and their depth-one cost follow those selected
+steps under the existing neutral operation. This agrees with the bounded
+accounting observation already in [[perl-semantic-query-evaluator]]; it does
+not establish a new general host-resource contract or every request boundary.
+All 21 selected tests and neutral 6/20/128 checks pass. No traversal defect,
+contract change or fresh other-backend measurement is claimed.

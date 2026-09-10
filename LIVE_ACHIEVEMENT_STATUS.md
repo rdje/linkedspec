@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.31 completes thirty-one of 55 children: 44,528 fragments / 1,372,913 bytes. Semantic index is complete; query reaches 668. All 18 tests and semantic 6/20/128 checks pass. Eight native controls own non-JSON rejection .2.21 with four defective cases and four valid JSON controls; no MCP defect inferred. Approved capacity at 9c644ecb and all earlier Dart/startup owners remain intact. Next .1.32. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.32 completes thirty-two of 55 children: 46,028 fragments / 1,418,202 bytes. Query/runtime projection is complete; static projection reaches 381. All 21 tests and semantic 6/20/128 checks pass; no new defect. Approved capacity at 9c644ecb and all earlier Dart/startup owners remain intact. Next .1.33. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `DART-STARTUP-READING.1.31` completes semantic index and reads query through 668: 1,500 fragments / 43,744 baseline-identical bytes. All 18 tests and semantic 6/20/128 checks pass. Eight native controls own rejection .2.21 with two children, four defective non-JSON cases and four valid JSON controls.
+- `DART-STARTUP-READING.1.32` completes query/runtime projection and reads static projection through 381: 1,500 fragments / 45,289 baseline-identical bytes. All 21 tests and semantic 6/20/128 checks pass; no new defect. All prior findings and repair gates remain intact.
 
 ## Next Action
 
-- `DART-STARTUP-READING.1.32` finishes semantic query from 669 through EOF, reads runtime projection through EOF and static projection 1-381 after .1.31 commits, the brief is empty and the root tree is clean.
+- `DART-STARTUP-READING.1.33` finishes static projection from 382 through EOF, reads SHA-256 through EOF and source emitter 1-55 after .1.32 commits, the brief is empty and the root tree is clean.
 
 ## Recent Completions
+
+- `2026-09-10` — `DART-STARTUP-READING.1.32` reads 1,500 fragments / 45,289 bytes; all 21 tests and semantic 6/20/128 checks pass; query/runtime projection complete; no new defect.
 
 - `2026-09-10` — `DART-STARTUP-READING.1.31` reads 1,500 fragments / 43,744 bytes; all 18 tests and semantic 6/20/128 checks pass; eight native controls own non-JSON rejection .2.21.
 
@@ -48,8 +50,6 @@
 - `2026-09-09` — `DART-STARTUP-READING.1.19` reads 1,500 fragments / 43,446 bytes; 122 tests pass; nine Dart/Perl constructor comparisons own .2.11.
 
 - `2026-09-09` — `DART-STARTUP-READING.1.18` reads 1,500 fragments / 45,330 bytes; 140 tests pass; nine callback identity controls own .2.10.
-
-- `2026-09-09` — `DART-STARTUP-READING.1.17` reads 1,500 fragments / 40,984 bytes; 124 tests pass; ten mixed-control probes own .2.9.
 
 ## History
 
