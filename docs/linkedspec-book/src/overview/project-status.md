@@ -89,20 +89,47 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed twenty-nine of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed thirty of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
 parser bridge, function-shell projection, bounded child-parse authority, generated rule plan,
 interpreter, matching, recognition transactions, semantic observation, source location and both
-staged runtime modules, Unicode case mapping and scaffold, plus semantic call projection through
-line 347. This covers 41,528 fragments / 1,285,769 bytes. Eleven selected Dart tests pass, including
-all twelve Unicode fixtures on direct/helper/receiver/array routes. Neutral semantic checks pass
-six fixture groups, twenty exact queries and 128 rejected mutations. Unicode regeneration remains
-the unchanged `.1.28` checkpoint. The existing empty-function guard still skips rule-call projection
-and remains owned by startup `.22`; passing finite fixtures does not close that limitation.
-This range establishes no new defect. Child `.1.30` continues call projection from line 348
-through EOF, then begins semantic index. Startup `.3.4` remains pending; all prior evidence and
-limitations remain intact.
+staged runtime modules, Unicode case mapping, scaffold and semantic call projection, plus semantic
+index through line 399. This covers 43,028 fragments / 1,329,169 bytes. All 28 selected semantic
+call/static/source/compilation/query tests and neutral six-group/twenty-query/128-mutation checks
+pass. Nine public-query/typed-runtime controls establish the two cases below and retain seven
+valid/arity-rejection controls. The earlier empty-function guard remains startup `.22`-owned.
+Child `.1.31` finishes semantic index from line 400 and begins semantic query. Startup `.3.4`
+remains pending; all prior evidence and limitations remain intact.
+
+**Known Dart limitations — semantic call traversal and source correlation:** a successful semantic
+query can omit an active call inside an array, or attribute an action call to same-name text in
+its regex matcher. These affect introspection evidence. Separate runtime checks produce the
+expected parsed values.
+
+```text
+fn unused(value) { return(value) }
+
+Top::
+ /trim(x)/ -> Top {
+   value = trim(" x ")
+   return(value)
+ }
+```
+
+For this pattern, the projector can cite `trim(x)` inside the matcher as the source of the
+actual `trim(" x ")` call and its binding. In the exact single-line reproduction, the wrong
+range is bytes 44–51, while the typed action RHS is bytes 70–81. With a plain `/x/` matcher
+and RHS `[trim(" x ")]`, the query omits trim and reports no binding source, although the
+typed action contains that call and runtime returns `["x"]`.
+
+Direct and nested trim calls, call-shaped quoted text and four repeated assignments retain
+their expected identities/sources. Zero/two arguments to a one-argument function reject both
+semantic construction and runtime; those controls do not reproduce the earlier Perl/Rust
+false-acceptance response. Existing startup `.67.2-.67.4` owns the array omission.
+`DART-STARTUP-READING.2.20` and its two children own regex source correlation, recurrence and
+supported-carrier/MCP proof. These nine controls use the public Dart query API and separate
+typed/runtime checks; they establish no fresh other-backend, emitted or MCP result.
 
 The function shell checks the returned definition's text against scalar spans, reconciles staged
 body metadata and removes declarations while preserving line breaks. The private progressive

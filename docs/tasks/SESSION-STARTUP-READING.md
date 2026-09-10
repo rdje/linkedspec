@@ -2224,7 +2224,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Goal: Split and read all 115 baseline Dart entries, including compiler/runtime, tests, commands, and package inputs.
   Reading owner: `docs/tasks/DART-STARTUP-READING.md` owns .0 decomposition, .1 reading, .2 new repair intake and .3 reading closeout; this startup node remains the prerequisite/closeout owner.
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas. DART-STARTUP-READING.3 may complete this reading node only after exact coverage/comprehension and child-commit proof; pending repairs remain owned separately.
-  Verification: Dart reading remains incomplete: DART-STARTUP-READING.1.29 closes 29/55 children, 41,528 fragments / 1,285,769 bytes with exact baseline identity. Unicode mapping/scaffold are complete; semantic call projection reaches 347. Eleven Dart tests, including twelve Unicode runtime fixtures, and neutral semantic 6/20/128 checks pass. Existing .22 empty-function evidence remains intact; no new defect. Dart .2.1-.2.19, startup .37/.55/.60 and FUTURE-PARITY-BACKLOG.5 retain evidence; .54.3 retains regex recurrence. Capacity .4/.5 remains committed under containment .8/.9 and ADR0110/0111. Next .1.30 completes call projection and begins semantic index after the focused clean commit. Repairs remain gated.
+  Verification: Dart reading remains incomplete: DART-STARTUP-READING.1.30 closes 30/55 children, 43,028 fragments / 1,329,169 bytes with exact baseline identity. Call projection is complete; semantic index reaches 399. All 28 semantic tests and neutral 6/20/128 checks pass. Nine public-query/typed-runtime controls extend .67 with Dart array omission and own regex source correlation under Dart .2.20; seven valid/arity-rejection controls remain distinct. Existing Dart .2.1-.2.19, startup .22/.37/.55/.60 and FUTURE-PARITY-BACKLOG.5 retain evidence; .54.3 retains regex recurrence. Capacity .4/.5 remains committed under containment .8/.9 and ADR0110/0111. Next .1.31 completes semantic index and begins query after the focused clean commit. Repairs remain gated.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.5`
@@ -4118,6 +4118,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: `pending` repair — .3.3.31 paired Rust/Perl queries emit call_signature_accepts for
     zero/two supplied arguments while the same function record requires exactly one. The builders
     unconditionally format acceptance from parameter names/count, independently of compatibility.
+  Dart .1.30 control: zero/two arguments fail semantic construction at unresolved typed contracts and separately fail runtime arity checks; exact one argument succeeds. These controls do not reproduce the Perl/Rust false-acceptance response.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.67.2`
@@ -4130,6 +4131,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: `pending` repair — .3.3.31 direct trim and nested trim calls are projected on both
     backends, but [trim(" x ")] loses its active trim call; Perl Get returns ["x"]. Rust also returns null
     binding source where Perl retains the exact array RHS. Both walkers stop on non-call container nodes.
+  Dart .1.30 recurrence: public query also omits trim inside [trim(" x ")] and returns null binding source, while typed ActionIR contains the call and direct runtime returns ["x"]. Direct/nested/string controls retain exact source; separate regex-decoy miscorrelation is owned by DART-STARTUP-READING.2.20.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.67.3`
@@ -4141,6 +4143,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     ceilings. Census all six runtime variants and supported reconstructed/generated/MCP routes; own
     every discrepancy and review any frozen-model/version impact before updating expectations.
   Verification: `pending` — neutral 6/20/128, rollout9/0/admission6/0 pass despite the paired cases.
+  Dart .1.30 census: nine public-query/typed-runtime controls add the container recurrence with seven valid/arity-rejection controls. Four same-name assignments retain suffixes 0,1,2,3 and distinct sources, so the Rust .66 identity failure is not reproduced on this Dart route. Other backends/carriers/MCP remain scoped acceptance work.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.67.4`
@@ -4327,12 +4330,12 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 ## Current Frontier
 
-Canonical admission a67a18bf and completed `DART-STARTUP-READING.0` decomposition preserve the full baseline. Approved history capacity is committed at 7d52c98e; engineering-history capacity is committed at 9c644ecb under containment .9 / ADR0111; resume `DART-STARTUP-READING.1.30` after .1.29’s clean focused commit in `docs/tasks/DART-STARTUP-READING.md`.
+Canonical admission a67a18bf and completed `DART-STARTUP-READING.0` decomposition preserve the full baseline. Approved history capacity is committed at 7d52c98e; engineering-history capacity is committed at 9c644ecb under containment .9 / ADR0111; resume `DART-STARTUP-READING.1.31` after .1.30’s clean focused commit in `docs/tasks/DART-STARTUP-READING.md`.
 Startup `.3.4` remains pending until that tree proves complete Dart reading; admission itself grants no source-reading credit.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.30` | `pending` | Continue semantic call projection from 348 through EOF, then semantic index 1-399 after .1.29 commits and the brief/tree are clean; reading is 29/55. Source repairs remain gated. |
+| 1 | `DART-STARTUP-READING.1.31` | `pending` | Finish semantic index from 400 through EOF, then read semantic query 1-668 after .1.30 commits and the brief/tree are clean; reading is 30/55. Source repairs remain gated. |
 
 ## Reading Ledger
 

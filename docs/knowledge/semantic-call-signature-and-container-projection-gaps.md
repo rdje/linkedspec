@@ -66,3 +66,17 @@ evidence and must be rebuilt against current verified code before claiming repai
 
 Fresh neutral semantic proof still passes six groups/20 exact queries/128 mutations at rollout 9/0 and
 admission 6/0. Existing exact fixture equality does not cover these counterexamples.
+
+## September 10 Dart recurrence and bounded counter-controls
+
+`DART-STARTUP-READING.1.30` adds nine public Dart query/typed-runtime controls,
+recorded in [[dart-semantic-call-projection-counterexamples]]. The array case
+reproduces omitted trim and null binding source while typed ActionIR contains
+the call and runtime returns ["x"]; startup .67.2-.67.4 retains that repair.
+
+Zero/two arguments instead reject semantic construction on unresolved contracts
+and separately reject runtime arity, while exactly one succeeds. Four same-name
+assignments keep distinct IDs/sources. These Dart controls do not reproduce the
+earlier Perl/Rust false acceptance or Rust repeated-ID cause. Separate regex
+source miscorrelation is owned by Dart .2.20. No other-backend or MCP rerun is
+claimed; the earlier paired evidence remains unchanged.

@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.29 completes twenty-nine of 55 children: 41,528 fragments / 1,285,769 bytes. Unicode/scaffold are complete; call projection reaches 347. Eleven tests and semantic 6/20/128 checks pass, including twelve Unicode runtime fixtures. Existing startup .22 evidence remains intact; no new defect. Approved capacity remains at 9c644ecb; all Dart .2.1-.2.19 and startup .37 findings stay owned and gated. Next .1.30. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.30 completes thirty of 55 children: 43,028 fragments / 1,329,169 bytes. Call projection is complete; semantic index reaches 399. All 28 tests and semantic 6/20/128 checks pass. Nine controls extend startup .67 array evidence and own .2.20 regex correlation, retaining seven valid/arity-rejection controls. Approved capacity at 9c644ecb and all earlier Dart/startup owners remain intact. Next .1.31. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `DART-STARTUP-READING.1.29` completes Unicode/scaffold and reads call projection through 347: 1,500 fragments / 37,172 baseline-identical bytes. Eleven Dart tests and semantic 6/20/128 checks pass. Existing startup .22 and all earlier findings remain owned; no new defect.
+- `DART-STARTUP-READING.1.30` completes call projection and reads semantic index through 399: 1,500 fragments / 43,400 baseline-identical bytes. All 28 tests and semantic 6/20/128 checks pass. Nine controls extend startup .67 and own regex correlation .2.20 with two children; seven valid/arity-rejection controls preserve scope.
 
 ## Next Action
 
-- `DART-STARTUP-READING.1.30` continues semantic call projection from 348 through EOF, then semantic index 1-399 after .1.29 commits, the brief is empty and the root tree is clean.
+- `DART-STARTUP-READING.1.31` finishes semantic index from 400 through EOF, then reads semantic query 1-668 after .1.30 commits, the brief is empty and the root tree is clean.
 
 ## Recent Completions
+
+- `2026-09-10` — `DART-STARTUP-READING.1.30` reads 1,500 fragments / 43,400 bytes; all 28 tests and semantic 6/20/128 checks pass; nine controls extend .67 and own regex correlation .2.20.
 
 - `2026-09-10` — `DART-STARTUP-READING.1.29` reads 1,500 fragments / 37,172 bytes; eleven tests and semantic 6/20/128 checks pass; Unicode/scaffold complete, call projection through 347; no new defect.
 
@@ -48,8 +50,6 @@
 - `2026-09-09` — `DART-STARTUP-READING.1.17` reads 1,500 fragments / 40,984 bytes; 124 tests pass; ten mixed-control probes own .2.9.
 
 - `2026-09-09` — `DART-STARTUP-READING.1.16` reads 1,500 fragments / 43,183 bytes; 100 tests pass; six observer controls own .2.8.
-
-- `2026-09-09` — `DART-STARTUP-READING.1.15` reads 1,500 fragments / 45,477 bytes; 82 tests and neutral progressive checks pass; ten controls extend startup .37 ownership.
 
 ## History
 

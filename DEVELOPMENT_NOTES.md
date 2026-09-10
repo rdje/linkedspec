@@ -10,6 +10,16 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-10 — separate semantic traversal from source correlation
+
+Dart .1.30 confirms two independently checked query cases. An array ActionIR
+contains trim and returns ["x"], but its query omits the call and binding source;
+existing startup .67 owns that recurrence. Whole-edge name scanning also selects
+trim(x) inside the regex instead of the typed action RHS; .2.20 owns correlation.
+Seven controls retain valid direct/nested/quoted/repeated behavior and reject
+wrong arities, avoiding unsupported Perl/Rust parity claims. The complete recipe,
+28 selected tests and neutral 6/20/128 proof are retained; all repairs stay gated.
+
 ## 2026-09-10 — Dart casing evaluator and typed semantic owner reading
 
 Dart .1.29 completes pinned casing properties and original-rune Final Sigma

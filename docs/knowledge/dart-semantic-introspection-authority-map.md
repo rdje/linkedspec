@@ -274,3 +274,19 @@ mutations; rollout/admission counts remain 9/0 and 6/0. The pre-existing
 empty-function guard remains owned by startup .22, as recorded in
 [[semantic-rule-calls-empty-function-gate]]. No new defect, projection exposure,
 runtime repair, MCP capability or generated-format change is established.
+
+## 2026-09-10 — call-projector completion and index value prefix
+
+`DART-STARTUP-READING.1.30` finishes call projection and reads semantic_index.dart
+1-399. The projector checks typed staged bodies and emits distinct neutral
+payload/job/result and selected generated-plan records. The index prefix defines
+immutable caller-policy, source/span, compilation, entry and generated-plan
+values; constructor/source-map reading remains in .1.31.
+
+All 28 call/static/source/compilation/query tests and neutral 6/20/128 checks
+pass. Nine public-query/typed-runtime controls independently establish the Dart
+array omission and regex-source miscorrelation, with seven valid/arity-rejection
+controls. Exact reproduction and scope belong to
+[[dart-semantic-call-projection-counterexamples]]. Existing startup .67 owns
+container traversal; new Dart .2.20 owns regex correlation. Earlier source,
+staged, query and runtime authorities remain distinct; no API or MCP change lands.

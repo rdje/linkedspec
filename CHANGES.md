@@ -10,6 +10,15 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-10 — DART-STARTUP-READING.1.30: semantic call counterexamples
+
+Read 1,500 fragments / 43,400 baseline-identical bytes: complete call projection
+and read semantic index through 399. All 28 tests and neutral 6/20/128 checks
+pass. Nine public-query/typed-runtime controls extend startup .67 with Dart
+array-call omission and own regex source correlation under .2.20 and two
+children; seven valid/arity-rejection controls preserve scope. No source repair;
+reading reaches 30/55 and .1.31 is next.
+
 ## 2026-09-10 — DART-STARTUP-READING.1.29: Unicode completion and call projection
 
 Read 1,500 fragments / 37,172 baseline-identical bytes: complete Unicode
