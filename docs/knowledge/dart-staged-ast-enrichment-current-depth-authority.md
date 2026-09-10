@@ -106,3 +106,14 @@ API prepares every job and target before invoking fresh sibling contexts, and
 copies retained output. Its compatibility scope remains separate from the
 production recursive scheduler. All 44 selected staged/registry/progressive/
 typed-source/matching tests pass; no new defect or dynamic parser API is established.
+
+## September 11 one-depth authority consumer reading
+
+Dart .1.51 reads frozen snapshot authority, eight-field cache key separation,
+numeric path ordering, fresh sibling state, detached result/failure policies and
+atomic conflict checks. Child callbacks execute again on plan-cache hits; failed
+results are not cached, and nested returned markers stay inert at one depth.
+Invalid results and conflicting plans reject before partial publication; ordered
+appends remain allowed. All19 existing staged tests pass, without new execution
+routes, public API or source changes. Production four-route reading continues in
+.1.52; running it now adds no source-reading credit for its unread suffix.

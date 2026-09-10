@@ -89,7 +89,7 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed fifty of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed fifty-one of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
 parser bridge, function-shell projection, bounded child-parse authority, generated rule plan,
@@ -105,8 +105,8 @@ Unicode, call-projection, compilation-foundation and query tests are complete.
 Observation-route, runtime-capture, observed-index, source-foundation and static-graph
 tests, semantic admission, smoke and source-boundary aliases are complete; emitter
 reading is complete along with AST/loader/parser/validator tests; staged-enrichment
-reading reaches line 291. This covers 73,028 fragments / 2,247,924 bytes. The current
-54-test selection and three neutral checks pass; earlier results remain in their
+reading reaches line 1791. This covers 74,528 fragments / 2,298,209 bytes. The current
+19-test selection and two neutral checks pass; earlier results remain in their
 completed reading leaves.
 
 Interpreter tests confirm explicit cursor rewinds and stack restoration, capture
@@ -125,7 +125,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading continues
-in child `.1.51` after the clean .1.50 handoff. Startup `.3.4` remains pending.
+in child `.1.52` after the clean .1.51 handoff. Startup `.3.4` remains pending.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -175,7 +175,7 @@ checks pass. Whole-test execution adds no unread source credit or other-backend
 execution claim. That leaf reached 49/55 children, 71,528 fragments / 2,202,029 bytes;
 prior defects and the separate PGEN/RGX build-workflow requirement remain open.
 
-**Dart frontend and emitter consumer reading through child 50:** emitter, AST,
+**Completed child 50 evidence:** emitter, AST,
 loader, parser and validator test files are fully read. The emitted eight-case
 subset checks independent execution, metadata, plans and trace against its native
 and stored expectations. Loader tests cover 14 name, 9 resolution and 4 UTF-8 cases,
@@ -187,9 +187,28 @@ Staged consumer reading reaches line 291. Its prefix checks current public
 governance alongside unchanged legacy function-body v1, then starts typed-assignment
 inspection. All 54 selected tests and generated-source, native-resolution and staged
 neutral checks pass. Running the complete staged test adds no unread source credit.
-Reading reaches 50/55 children, 73,028 fragments / 2,247,924 bytes; `.1.51` continues
-staged reading at line 292. Existing source-correlation, parser and private-provenance
+That leaf reached 50/55 children, 73,028 fragments / 2,247,924 bytes; `.1.51` now
+continues staged reading through1791. Existing source-correlation, parser and private-provenance
 defects remain owned and open.
+
+**Dart staged-enrichment consumer reading through child 51:** typed assignments
+produce inert markers, with strict annotation and recognition-path checks. The
+private validator checks source provenance internally; it is not a semantic
+introspection or MCP API. Frozen registry tests cover resolution and authority;
+plan caching still executes each child afresh. Result policies are detached, and
+conflicting stitch plans reject before callbacks or published partial changes.
+
+Recursive consumers pin breadth-first order, shared resources, cancellation,
+revoked callback contexts and source rebasing across direct and concatenated spans.
+All 19 tests and staged/typed-source neutral checks pass. Existing tiny-diagnostic
+budget, call-counter overflow and malformed-provenance-type defects remain open:
+the normal-limit fixtures do not resolve them. The emitted marker test uses the
+existing Dart package context and requires successful analysis and execution.
+
+Physical reading reaches line 1791, partway through production emitted admission;
+`.1.52` completes that test and its helpers. Whole-consumer execution grants no
+unread source credit. Reading is 51/55 children, 74,528 fragments / 2,298,209 bytes.
+The task container's stale36/55 rollup is corrected to these verified child records.
 
 **Approved engineering-history capacity:** the director approved collection files
 27→28 and manifest rows 26→27. Containment `.11` and ADR0113 implement those two
@@ -235,7 +254,7 @@ in 2.25 seconds. That sample locates a pre-main wait without establishing its OS
 or a remedy. The older macOS 26.5.2 closeout does not resolve this macOS 26.6.2 observation.
 The evidence and repair criteria are logged by `SESSION-STARTUP-READING.80.0`; source
 changes remain behind the existing startup prerequisites. The intake is committed at
-`eaf4331e`; approved containment .11 is committed at `ad64f76f`; `.1.51` follows completed `.1.50`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
+`eaf4331e`; approved containment .11 is committed at `ad64f76f`; `.1.52` follows completed `.1.51`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
 
 **Known Dart limitation — null named selectors in reconstructed state:** a programmatically
 reconstructed target with these fields is incorrectly accepted:

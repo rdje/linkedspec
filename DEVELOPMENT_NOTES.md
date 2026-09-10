@@ -10,6 +10,15 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — staged authority consumer scope
+
+Dart .1.51 reads private provenance and staged scheduler consumers through1791.
+The emitted marker harness uses the existing package context; recursive tests pin
+shared resources, atomic stitching and original-source rebasing. All19 tests and
+two neutral checks pass without closing tiny-budget, counter-overflow or provenance
+coercion defects. Four-route emitted admission setup continues in .1.52; whole-test
+execution grants no unread source credit. No parser, introspection or MCP change.
+
 ## 2026-09-11 — frontend fixture scope and staged compatibility
 
 Dart .1.50 completes emitter and frontend consumers. Parser/validator corpus checks

@@ -97,3 +97,14 @@ not a current denial of the later public contract. All54 selected tests pass,
 including the complete existing staged consumer; neutral123/public129 mutations
 also pass. Whole-test execution grants no unread source credit or private
 provenance-defect .2.19 closure.
+
+## September 11 provenance consumer reading through child 51
+
+Dart .1.51 completes exclusive assignment and eight-row provenance assertions,
+distinct ordered captures, malformed annotation denials and recognition guards.
+Native, reconstructed, generated-plan and emitted marker cases preserve the inert
+payload. The emitted marker harness uses the existing package context, with fatal
+analysis and exit0 execution, rather than an independent fresh package cache.
+All19 staged tests and neutral staged123/public129 plus typed-source14/0/231 pass.
+This is internal provenance validation, not semantic introspection or MCP access.
+The malformed-type coercion defect .2.19 remains separately owned and open.

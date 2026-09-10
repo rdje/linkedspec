@@ -111,3 +111,14 @@ remain valid. See [[dart-staged-resource-boundary-gaps]] for the exact recipes,
 numbers and .2.17/.2.18 repair decomposition. All 44 selected tests and neutral
 123/129 mutations pass; no other-backend or fresh production-carrier defect proof
 is established. Repairs remain behind startup gates.
+
+## September 11 recursive authority consumer reading
+
+Dart .1.51 reads exact neutral chain cases, breadth-first roots-before-children,
+shared steps/token/deadline/cache, revoked retained contexts, entry and callback
+safe points, atomic result limits and direct/derived diagnostic rebasing. Rebased
+concatenated spans retain ordered source segments. All19 staged tests and direct
+neutral authorities pass. Normal64-byte diagnostic truncation and ordinary call
+limits do not resolve .2.17 tiny-allowance overruns or .2.18 wrapped admission.
+Physical reading ends at1791 inside emitted production admission setup; .1.52
+owns the remainder. No scheduler, introspection or MCP behavior changes.

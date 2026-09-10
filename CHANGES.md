@@ -10,6 +10,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — DART-STARTUP-READING.1.51 - read staged enrichment authority consumers
+
+Read staged enrichment292-1791: 1,500 fragments / 50,285 baseline-identical bytes.
+All19 consumer tests and staged/typed-source neutral checks pass. Preserve private
+provenance boundaries, frozen authority, atomic policies, recursion and rebasing
+scope; prior .2.17/.2.18/.2.19 defects remain open. Correct the stale parent reading
+rollup from36/55 to verified51/55. Next .1.52 after clean focused landing.
+
 ## 2026-09-11 — DART-STARTUP-READING.1.50 - complete frontend and emitter consumer reading
 
 Complete emitter/AST/loader/parser/validator consumers and read staged enrichment
