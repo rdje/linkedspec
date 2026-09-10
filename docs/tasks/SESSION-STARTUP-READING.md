@@ -2224,7 +2224,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Goal: Split and read all 115 baseline Dart entries, including compiler/runtime, tests, commands, and package inputs.
   Reading owner: `docs/tasks/DART-STARTUP-READING.md` owns .0 decomposition, .1 reading, .2 new repair intake and .3 reading closeout; this startup node remains the prerequisite/closeout owner.
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas. DART-STARTUP-READING.3 may complete this reading node only after exact coverage/comprehension and child-commit proof; pending repairs remain owned separately.
-  Verification: Dart reading remains incomplete at 46/55 children, 67,028 fragments / 2,053,539 bytes. Dart .1.46 completes interpreter tests and reads matching through 86: 1,500 fragments / 39,292 baseline-identical bytes. All 68 selected tests and write/numeric/named-mark neutral checks pass. The stale current Knowledge answer about absent-container writes is corrected with its historical prose preserved. No new runtime defect; prior findings, CI .80/.81 and source-repair gates remain. Capacities .4/.5/.6 remain committed under containment .8/.9/.10 and ADR0110/0111/0112. Startup .3/.4/.5 still gate repairs; .7 owns the next engineering-history capacity decision before Dart .1.47.
+  Verification: Dart reading remains incomplete at 46/55 children, 67,028 fragments / 2,053,539 bytes. Dart .1.46 completes interpreter tests and reads matching through 86: 1,500 fragments / 39,292 baseline-identical bytes. All 68 selected tests and write/numeric/named-mark neutral checks pass. The stale current Knowledge answer about absent-container writes is corrected with its historical prose preserved. No new runtime defect; prior findings, CI .80/.81 and source-repair gates remain. Capacities .4/.5/.6 remain committed under containment .8/.9/.10 and ADR0110/0111/0112. Startup .3/.4/.5 still gate repairs; .7 is approved and implemented by containment .11 / ADR0113 with exact history preservation; the director granted a one-time focused/receipt exception on 2026-09-11; Dart .1.47 follows the clean capacity commit.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.5`
@@ -4336,6 +4336,8 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Acceptance: Diagnose exact Cargo freshness reasons, repair unnecessary optional-input watches, assess recurring
     target retention, and measure unchanged warm runs plus valid rebuild controls. Preserve the required
     PGEN → RGX → LinkedSpec dependency chain and existing nested work. Startup latency is separately owned by .81.
+  Director direction (2026-09-10): RGX and its PGEN dependency are submodules; build them once following a submodule update and reuse those products during ordinary LinkedSpec CI. LinkedSpec-only source/test changes must not rebuild either dependency. This is the required target lifecycle, not an implemented property of the current gate. Preserve the existing PGEN→RGX→LinkedSpec chain and all nested work; .80.1-.4 own diagnosis, implementation and proof.
+
 
 - ID: `SESSION-STARTUP-READING.80.0`
   Status: `done; focused-signoff-complete`
@@ -4371,6 +4373,8 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     distinguish ordinary/progressive graphs, fresh emitted callers, optional disposable targets and relocation.
     Measure build, compiler/loader wait, test startup and execution separately. Preserve all existing artifacts
     and nested source work; the observed missing watches are not proof that every rebuild has the same cause.
+  Direction refinement (2026-09-10): Identify every ordinary-CI dependency compilation and the exact prebuilt artifacts/configurations needed to eliminate it. Separate the explicit initial/update build from ordinary verification; record requirements for missing or incompatible prebuilt artifacts without silently adding dependency builds to ordinary CI.
+
 
 - ID: `SESSION-STARTUP-READING.80.2`
   Status: `pending`
@@ -4382,6 +4386,8 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     compiler/profile/features/flags invalidation and the normal dependency chain. Prove repeated warm reuse.
     Own upstream changes and pin integration explicitly; preserve pre-existing nested work without staging it
     incidentally. No fake parser stubs, warning suppression, hand-edited fingerprints or freshness bypass.
+  Direction refinement (2026-09-10): The acceptance target is one explicit PGEN/RGX build after the submodule update, then reuse during LinkedSpec-only work. Repair optional-input watches only if the measured mechanism requires it; do not equate watch repair with complete lifecycle enforcement. Any upstream source/pin change remains separately reviewed and preserves existing nested work.
+
 
 - ID: `SESSION-STARTUP-READING.80.3`
   Status: `pending`
@@ -4391,6 +4397,8 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     If beneficial, retain compatible repository-derived dependency artifacts while keeping fresh caller fixtures
     and deliberate isolation/relocation proof exact. Preserve same-volume storage, ownership and cleanup safety.
     Close not-required only with evidence; do not attribute the main gate's rebuilds to these optional drivers.
+  Direction refinement (2026-09-10): Recurring caller/test work must reuse the prepared PGEN/RGX products instead of repeatedly creating dependency builds. Preserve intentional isolation tests with explicit preparation and clear ownership; ordinary CI must not silently rebuild a missing dependency cache.
+
 
 - ID: `SESSION-STARTUP-READING.80.4`
   Status: `pending`
@@ -4400,6 +4408,8 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     staged canonical gate. Account for remaining compile/startup/test costs, all flags and intentional cold
     proofs; update book and operational guidance with measured results. Parent .80 closes only after its
     implementation and verification are complete; the independent .81 investigation keeps its own status.
+  Direction refinement (2026-09-10): Prove that repeated ordinary CI and a LinkedSpec-only edit compile neither PGEN nor RGX; prove an actual submodule update prepares the required dependency products once and the following run reuses them. Keep initial setup and incompatible-artifact handling explicit, maintain verification coverage, and document measured behavior before claiming the directive implemented.
+
 
 - ID: `SESSION-STARTUP-READING.81`
   Status: `pending`
@@ -4439,7 +4449,7 @@ Startup `.3.4` stays pending until complete Dart reading; the next executable re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.7` | `pending` | Director decision on exactly engineering files27→28 and manifest lines26→27; verified proposal in docs/knowledge/dart-reading-next-engineering-history-capacity.md. Resume .1.47 after clean canonical capacity admission. |
+| 1 | `DART-STARTUP-READING.1.47` | `pending` | Read the exact matching/scalar/Unicode/semantic consumer ranges after the clean containment .11 commit; preserve required-reading and repair gates. |
 
 ## Reading Ledger
 

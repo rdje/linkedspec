@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / .1.46 complete; .7 decision before .1.47
+- Status: `active` / .1.46 complete; .7 closed under containment .11
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-10`
@@ -1425,23 +1425,26 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.10 - admit approved change-history member` (intake closed by its separately owned implementation)
 
 - ID: `DART-STARTUP-READING.7`
-  Status: `pending`
+  Status: `done`
   Goal: Obtain and route the next engineering-history capacity decision before further committed reading.
   Dependencies: `.1.46` committed with empty brief and clean repository; director decision before an additional infrastructure allowance under ADR0111.
   Scope: Proposal/intake only, owned by .1.46 discovery. Stable responsibility remains LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3; a separately owned canonical implementation requires approval and a clean repository.
   Proposal: engineering_notes max_files 27 to 28 and manifest max_lines 26 to 27. The projected manifest is 16230/16384 bytes; all root, segment, aggregate, ownership, route and other controls remain unchanged. No further member is authorized.
   Acceptance: Preserve every prior history byte and complete record; verify the actual governed draft against clean-source coordinates, bytes/hash, manifest order, full history and the actual routing validator. Record the director decision; if approved, create/index an exact-limit ADR and canonical implementation. No future slot, purge or parked-feature activation is granted.
   Evidence: docs/knowledge/dart-reading-next-engineering-history-capacity.md pins the actual .1.46 rollover: clean db762cd7 DEVELOPMENT_NOTES247-457, 211 lines/24521 bytes, SHA-256 b29e3bd321a1357afe2e779c7e138986e96bef3258c4408d785fc06b11bb58f5. Draft manifest27/16230 and collection28/26074/2789760 reject exactly files28/27 and manifest lines27/26. Full archive reconstruction and all 62 prior history hashes pass; the verified uncommitted draft is restored. A complete 285-byte dated note leaves the root459/40321 with every earlier record preserved.
-  Verification: Exact source/count/hash, ordered manifest, full reconstruction, actual routing rejection and 22 production-predicate boundary executions pass. Director decision remains pending; no control or infrastructure implementation is applied.
-  Commit: `pending`
+  Verification: Director explicitly grants the proposed engineering-history capacity. Containment .11 implements exactly files27→28 and manifest lines26→27 from clean01a2159c under indexed ADR0113. Fresh source249-459, exact prior-history reconstruction and 22 production-validator executions pass; the explicit 2026-09-11 one-time focused/receipt exception governs closure. Earlier .1.46 proposal evidence remains historical; no future slot is authorized.
+  Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.11 - admit approved engineering-history member` (intake closed by its separately owned implementation)
+  Decision update (2026-09-11): On 2026-09-11 the director explicitly granted a one-time canonical-receipt exception for .11 using passing focused checks, to avoid the current gate’s repeated PGEN/RGX builds. Normal commit hooks and all nine doctrines remain enabled; no full CI, dependency build or canonical receipt is claimed. All future verification boundaries retain their existing requirements.
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.7` | `pending` | Director decision on exactly engineering files27→28 and manifest lines26→27; verified proposal in docs/knowledge/dart-reading-next-engineering-history-capacity.md. Resume .1.47 after clean canonical capacity admission. |
+| 1 | `DART-STARTUP-READING.1.47` | `pending` | Read the exact matching/scalar/Unicode/semantic consumer ranges after the clean containment .11 commit; preserve required-reading and repair gates. |
 
 ## Decisions
+
+- `2026-09-10`: Director grants the .7 engineering-history proposal. ADR0113 and containment .11 admit only files27→28/manifest lines26→27, with fresh clean-source preservation; the 2026-09-11 one-time receipt exception authorizes focused landing.
 
 - `2026-09-10`: Director “Granted” approves .6 exactly. ADR0112 and containment .10 implement three change-history controls from clean e55f7703; all prior history and other gates/limits remain.
 
@@ -1456,18 +1459,20 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Open Questions
 
-- `.7`: Approve exactly engineering_notes files27→28 and manifest rows26→27 for the next mandatory rollover? Other limits and all history remain unchanged.
+- `.7`: Director approved exactly engineering_notes files27→28 and manifest rows26→27; ADR0113/.11 implement the decision. No further capacity is preapproved.
 
 - None for source reading. The director approved .6; ADR0112 and containment .10 own its canonical implementation.
 
 ## Blockers
 
-- `.7`: Engineering history has no next member under ADR0111; the complete .1.46 note fits459/512 lines, but .1.47 waits for the exact proposal decision and canonical admission.
+- `.7`: The approved member is implemented by containment .11 / ADR0113; .1.47 resumes after its approved focused landing. Other startup/repair gates remain.
 
 - Engineering-history capacity .5 is admitted by containment .9 / ADR0111; change-history .6 is admitted by .10 / ADR0112. No capacity decision remains at this boundary. Source repairs .2.1-.2.23 remain gated.
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-10`: .7 approval closes under containment .11 / ADR0113 after exact two-control/source/history and 22-validator proof; the explicit one-time focused commit precedes .1.47. Reading remains46/55.
 
 - `2026-09-10`: Dart .1.46 completes interpreter tests and reads matching through 86: 1,500 fragments / 39,292 baseline-identical bytes. All 68 selected tests and write/numeric/named-mark neutral checks pass. The stale current Knowledge answer about absent-container writes is corrected with its historical prose preserved. No new runtime defect; prior findings, CI .80/.81 and source-repair gates remain. Reading reaches 46/55 children, 67,028 fragments / 2,053,539 bytes.
 

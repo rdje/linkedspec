@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-- Status: `done` / .10 admits approved change-history capacity; next Dart .1.37
+- Status: `done` / .11 admits approved engineering-history capacity
 - Roadmap lane: `Repository architecture / documentation sustainability`
 - Created: `2026-08-09`
-- Last updated: `2026-09-10` (.10 closes approved capacity; exact canonical evidence belongs to its commit)
+- Last updated: `2026-09-11` (.11 closes under the explicit one-time focused-verification exception)
 - Owner: repo-local workflow
 
 ## Goal
@@ -58,10 +58,10 @@ or the README `.4` adoption/closeout that installs the guard.
 ## Task Tree
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-  Status: `done` (.0-.10 complete; Dart reading remains 36/55)
+  Status: `done` (.0-.11 complete; Dart reading remains 46/55)
   Goal: Replace measured oversized routed destinations with bounded views over durable stores.
   Depends on: `README-STABILITY-POLICY.4.2`
-  Children: `.0-.10`
+  Children: `.0-.11`
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0`
   Status: `done` (2026-08-09; committed atomically at `dc8dd896` as 176/300; brief cleared; clean proof passed;
@@ -427,11 +427,28 @@ or the README `.4` adoption/closeout that installs the guard.
   Verification: Exact three-scalar registry comparison and 22 actual-validator executions pass. Governed segment 4981 preserves clean e55f7703 CHANGES lines 243-460, blob 5380069ab4de95503ce30b1f64a6730e5f545fe1, 218 lines / 32108 bytes, SHA-256 5a6450db09742fc1ac54486af8ac47eec95afbf9e7d52901dbe3912937d30de8. Every old manifest record and other history file remains exact; retained root plus the single normalized EOF separator LF and segment, and full archive queries reconstruct all source bytes. Root is 249 lines / 15374 bytes; manifest 31 / 17615; collection 32 / 48770 / 3543807. ADR0112 binds approval; complete preservation, doctrine, rendered book and exact staged canonical results belong to this commit.
   Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.10 - admit approved change-history member`
 
+- ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.11`
+  Status: `done` (2026-09-11; explicit one-time focused-verification exception)
+  Goal: Admit the director-approved twenty-eighth engineering-history member and preserve exact chronology.
+  Dependencies: Clean `01a2159c093c71d6cd15b9d1aceee5dfc3505008`; zero-byte brief; director explicitly grants DART-STARTUP-READING.7's proposal on 2026-09-10.
+  Scope: engineering_notes max_files 27 to 28 and its manifest max_lines 26 to 27; a new accepted indexed exact-limit ADR and governed rollover. Stable responsibility remains .3; every byte, root, segment, aggregate, route, verifier and prior immutable byte remains unchanged. Route concurrent PGEN/RGX build-on-update steering to existing startup .80 without implementing CI changes in this capacity leaf.
+  Acceptance: Remeasure the actual clean source and complete candidate; verify exact blob/range/hash/count, old manifest/history preservation and full chronology reconstruction. Exercise the actual routing-validator boundaries and resulting-tree checks. Record approval, close Dart intake .7, synchronize Knowledge/book/live docs, and complete the approved focused proof before commit under the explicit 2026-09-11 one-time receipt exception. Clear the brief and prove clean before returning to .1.47. No additional capacity, source-reading credit, parser repair, purge or parked feature activation.
+  Verification tier: `focused`
+  Focused checks: Exact two-scalar registry diff, actual-source/range/manifest/full-history reconstruction and prior task/Knowledge/ADR preservation; production-validator boundaries, all doctrines, both histories, Knowledge freshness, rendered mdBook and staged scope.
+  Canonical trigger: `Normally engineering-history infrastructure/parent closeout requires canonical proof; the director explicitly waived the receipt once for .11 on 2026-09-11. Future canonical and push requirements remain unchanged.`
+  Verification: Exactly two approved registry scalars change under ADR0113. Governed segment4980 preserves clean 01a2159c DEVELOPMENT_NOTES249-459, blob ebc30daf8dc84bdc1da5d60a67ff36007b14a70f, 211 lines/24521 bytes, SHA-256 b29e3bd321a1357afe2e779c7e138986e96bef3258c4408d785fc06b11bb58f5. All prior manifest records and other history files remain exact. Root reconstruction restores the single normalized EOF separator LF; full archive query matches all bytes. Root254/16165, manifest27/16230 and collection28/26078/2790043 fit unchanged other limits. All 22 actual-validator executions pass. Complete preservation and doctrine/book checks govern landing under the explicit one-time receipt exception; concurrent PGEN/RGX build-on-update direction remains pending under startup .80.
+  Execution boundary: On 2026-09-11 the director explicitly granted a one-time canonical-receipt exception for .11 using passing focused checks, to avoid the current gate’s repeated PGEN/RGX builds. Normal commit hooks and all nine doctrines remain enabled; no full CI, dependency build or canonical receipt is claimed. All future verification boundaries retain their existing requirements.
+  Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.11 - admit approved engineering-history member`
+
 ## Current Frontier
 
-This tree closes after .10's exact canonical commit, brief clearing and clean proof. Resume `DART-STARTUP-READING.1.37` in `docs/tasks/DART-STARTUP-READING.md`. Dart reading remains 36/55; startup .3.4 and all remaining reading/repair gates stay in force.
+This tree closes through .11 under the director’s explicit one-time focused-verification exception. After the commit, empty brief and clean proof, resume `DART-STARTUP-READING.1.47`. Dart reading remains 46/55; all remaining reading, repair and future canonical gates remain in force.
 
 ## Decisions
+
+- `2026-09-11`: On 2026-09-11 the director explicitly granted a one-time canonical-receipt exception for .11 using passing focused checks, to avoid the current gate’s repeated PGEN/RGX builds. Normal commit hooks and all nine doctrines remain enabled; no full CI, dependency build or canonical receipt is claimed. All future verification boundaries retain their existing requirements.
+
+- `2026-09-10`: Director explicitly grants Dart .7 engineering-history proposal: files27→28 and manifest lines26→27. .11 implements from clean01a2159c under ADR0113; all other controls/history remain. Concurrent PGEN/RGX build lifecycle is routed to startup .80.
 
 - `2026-09-10`: Director “Granted” approves Dart intake .6: change_history files 31→32, manifest lines 30→31 and bytes 17039→17615. .10 owns canonical implementation from clean e55f7703; the exception admits exactly one member and every other gate/limit remains.
 
@@ -548,14 +565,20 @@ All files and transient proof stay on the repository filesystem; no off-volume c
 
 ## Open Questions
 
+- `.11`: Resolved on 2026-09-11: the director granted the requested one-time focused-verification/receipt exception. No further allowance is authorized.
+
 - None. Exact archive boundaries are intentionally computed from each migration's clean activation source so
   `.0` does not falsely predeclare hashes for continuity entries that must land before `.1` or `.3`.
 
 ## Blockers
 
+- `.11`: None after the explicit 2026-09-11 one-time receipt exception; dependency-build lifecycle implementation remains separately owned by startup .80.
+
 - None. `.4` activated task-tree-first from verified clean `921f0507`.
 
 ## Verification Log
+
+- `2026-09-10` .11: Exactly two approved registry scalars change under ADR0113. Governed segment4980 preserves clean 01a2159c DEVELOPMENT_NOTES249-459, blob ebc30daf8dc84bdc1da5d60a67ff36007b14a70f, 211 lines/24521 bytes, SHA-256 b29e3bd321a1357afe2e779c7e138986e96bef3258c4408d785fc06b11bb58f5. All prior manifest records and other history files remain exact. Root reconstruction restores the single normalized EOF separator LF; full archive query matches all bytes. Root254/16165, manifest27/16230 and collection28/26078/2790043 fit unchanged other limits. All 22 actual-validator executions pass. Complete preservation and doctrine/book checks govern landing under the explicit 2026-09-11 one-time receipt exception; concurrent PGEN/RGX build-on-update direction remains pending under startup .80.
 
 - `2026-09-10` `.10`: director approval is bound in ADR0112. Exact three-scalar scope, clean-source suffix, old manifest/history identity and full ordered reconstruction pass; 22 actual-validator executions pass. The generated root retains both separator LFs and direct concatenation reconstructs all 47,004 source bytes. Diff hygiene then rejects a new blank EOF line; the final live root drops exactly that separator LF and the final reconstruction explicitly restores it. No immutable byte changes. The final proof is durable in docs/knowledge/dart-reading-second-history-capacity-blocker.md. All doctrine/book/preservation and exact staged canonical results govern landing.
 
@@ -665,6 +688,8 @@ brief clearing, generated-residue census, post-pointer check, and clean proof re
 
 ## Commit Log
 
+- .11: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.11 - admit approved engineering-history member`; explicit one-time focused proof, without canonical receipt.
+
 - .10: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.10 - admit approved change-history member`.
 
 - .9: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.9 - admit approved engineering-history member`.
@@ -686,6 +711,8 @@ brief clearing, generated-residue census, post-pointer check, and clean proof re
 - `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5`: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5 - compact duplicate startup chronology without losing evidence`.
 
 ## Changelog
+
+- `2026-09-11`: .11 implements exactly the approved engineering-history count controls, preserves fresh source/history, closes Dart .7 with the explicit one-time focused exception and routes .1.47 after clean landing.
 
 - `2026-09-10`: .10 implements the exact three-control approval under ADR0112, closes Dart intake .6 and routes .1.37 after clean canonical landing.
 

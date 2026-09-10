@@ -120,15 +120,19 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, then begin the astral capture case. The full matching suite passed; physical
-reading resumes in child `.1.47` after the capacity decision below. Startup `.3.4` remains pending.
+reading resumes in child `.1.47` after the approved capacity boundary below. Startup `.3.4` remains pending.
 
-**Next continuity decision — engineering-history archive:** completed reading .1.46
-is ready to commit with every older record preserved. Its mandatory draft rollover
-needs exactly two count changes: collection files 27→28 and manifest rows 26→27.
-The projected manifest remains within 16,384 bytes, and all root, segment and
-aggregate limits remain unchanged. Exact source/hash/reconstruction checks and 22
-validator boundary cases pass; the draft is restored and no limit has changed.
-`DART-STARTUP-READING.7` owns this pending decision before reading .1.47.
+**Approved engineering-history capacity:** the director approved collection files
+27→28 and manifest rows 26→27. Containment `.11` and ADR0113 implement those two
+counts. The governed rollover preserves 211 clean-source lines / 24,521 bytes with
+exact Git provenance, old manifest order and full-history reconstruction. The
+manifest is 16,230 bytes, within its unchanged 16,384-byte ceiling; all root, segment
+and aggregate limits remain unchanged. Twenty-two actual-validator checks pass.
+Dart intake `.7` closes under the director’s September 11 one-time exception:
+this capacity change uses its passing focused checks without the canonical CI
+receipt, avoiding the current workflow’s repeated dependency builds. Normal commit
+hooks remain enabled. This grants no future verification waiver; reading .1.47
+resumes after the clean capacity commit.
 
 **Continuity capacity — approved history preservation:** the director approved one
 additional immutable archive member. Containment `.10` and ADR0112 admit exactly
@@ -138,6 +142,14 @@ with exact provenance and full reconstruction of every earlier history byte.
 Twenty-two actual-validator executions verify the boundaries. Every other ceiling
 and repair prerequisite stays unchanged. Dart intake `.6` closes under canonical
 capacity commit `bef5dafd`. This storage change grants no reading credit.
+
+**Dependency-build requirement — implementation pending:** the director requires
+PGEN and RGX to be compiled once following a submodule update, then reused by
+ordinary LinkedSpec CI. Repeated verification and LinkedSpec-only source/test edits
+must compile neither dependency. Startup `.80.1-.4` own explicit initial/update
+preparation, retained artifacts and proof of that behavior; missing or incompatible
+artifacts must be handled explicitly. This archive-capacity change does not
+implement the build workflow.
 
 **CI performance — diagnosed, repairs pending:** PGEN currently asks Cargo to watch
 eight generated-parser inputs even though six optional files are absent. Cargo documents
@@ -154,7 +166,7 @@ in 2.25 seconds. That sample locates a pre-main wait without establishing its OS
 or a remedy. The older macOS 26.5.2 closeout does not resolve this macOS 26.6.2 observation.
 The evidence and repair criteria are logged by `SESSION-STARTUP-READING.80.0`; source
 changes remain behind the existing startup prerequisites. The intake is committed at
-`eaf4331e`; Dart .7 owns the capacity decision before reading `.1.47`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
+`eaf4331e`; approved containment .11 precedes reading `.1.47`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
 
 **Known Dart limitation — null named selectors in reconstructed state:** a programmatically
 reconstructed target with these fields is incorrectly accepted:

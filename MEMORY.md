@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `db762cd7b35b83243467dd117e7e965072e1ddf6` — clean .1.45 handoff before Dart .1.46.
-- latest_completed_leaf: `DART-STARTUP-READING.1.46 - complete interpreter consumer reading`.
-- active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: `DART-STARTUP-READING.7` — director decision on engineering history files27→28 and manifest lines26→27; exact proposal in docs/knowledge/dart-reading-next-engineering-history-capacity.md.
+- activation_commit: `01a2159c093c71d6cd15b9d1aceee5dfc3505008` — clean .1.46 handoff before approved containment .11.
+- latest_completed_leaf: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.11 - admit approved engineering-history member`; exact two-control/history admission under ADR0113.
+- active_work_unit: none; clean handoff after containment .11, with no source-reading credit added.
+- next_action: Activate `DART-STARTUP-READING.1.47` from clean HEAD and read its exact remaining matching/scalar/Unicode/semantic consumer ranges.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
-- in_flight_uncommitted: none in the committed handoff state; no background job remains.
-- blockers: Dart .7 capacity decision precedes .1.47; Startup `.7` blocks recovery/purge; engineering-history .5 approval is implemented under containment .9 / ADR0111; prior change-history approval remains under .8 / ADR0110. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.81` precede mutation setup; `.29` belongs to `.5`. Prior narrow exceptions stay approved; Dart .6 approval is implemented under containment .10 / ADR0112, with all earlier history preserved.
+- in_flight_uncommitted: none; .11 uses the director’s explicit 2026-09-11 one-time focused/receipt exception. No full CI, PGEN/RGX build or canonical receipt is claimed.
+- blockers: Dart .7 closes under .11/ADR0113 with the explicit one-time verification exception; Startup `.7` blocks recovery/purge; engineering-history .5 approval is implemented under containment .9 / ADR0111; prior change-history approval remains under .8 / ADR0110. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.81` precede mutation setup; `.29` belongs to `.5`. Prior narrow exceptions stay approved; Dart .6 approval is implemented under containment .10 / ADR0112, with all earlier history preserved.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -51,10 +51,10 @@
 - standing_contracts: all durable paths are repo-relative; all project data stays on the repository filesystem;
   README remains bounded; ordinary leaves use focused proof and designated infrastructure/public/push boundaries
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
-- current_engineering_notes_capacity: ADR0111 admits exactly 27 collection files / 26 manifest lines; segment 4981-a05653da7d6c preserves 207 lines / 32,348 bytes.
-  Manifest is 15,618 bytes; every other ceiling remains unchanged.
+- current_engineering_notes_capacity: ADR0113 admits28 files/27 manifest lines and preserves211 lines/24521 bytes under containment .11.
+  Manifest is16,230 bytes; all byte/root/segment/aggregate ceilings remain unchanged. All history and actual-validator proof pass.
 - current_change_history_capacity: ADR0112 at bef5dafd admits exactly 32 collection files / 31 manifest lines / 17,615 manifest bytes.
   Segment 4981-5a6450db0974 preserves 218 lines / 32,108 bytes; every other ceiling remains unchanged.
-- current_ci_build_reuse: Startup .80.1-.4 own correct PGEN/RGX reuse; 11 visible test-build stages total 4,682 seconds.
-  Exact fingerprint and warm-run repair proof remain pending; source changes retain startup prerequisites.
-- latest_bootstrap_read: 2026-09-10 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart 46/55 children, 67,028 fragments / 2,053,539 bytes. All 68 selected tests and three neutral checks pass; stale nested-write fact corrected, no new runtime defect; .7 capacity decision before .1.47.
+- current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
+  Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
+- latest_bootstrap_read: 2026-09-11 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete, formal .4 pending; Dart46/55 unchanged. .11 closes with the director’s one-time focused exception; next .1.47. CI reuse implementation remains pending.

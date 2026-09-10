@@ -8,13 +8,30 @@ answers:
   - "does local CI already retain a shared Rust target directory"
   - "which recurring drivers discard their Rust dependency targets"
   - "what task owns correct PGEN and RGX build reuse"
+  - "what PGEN RGX build lifecycle did the director require"
   - "how much Rust build time was observed during containment 10"
 date: 2026-09-10
-status: observed source and metadata mechanism; repair and measured warm reuse pending
+status: director requires build-on-submodule-update lifecycle; implementation and measured reuse remain pending
 tags: [rust, pgen, rgx, cargo, ci, performance, startup]
 evidence: "SESSION-STARTUP-READING.80.0; clean capacity commit bef5dafd; exact build.rs bytes, saved Cargo metadata, eight file observations and eleven completed build stages"
 reverify: "Replay CI_BUILD_REUSE_OBSERVATION below for the dated source and retained evidence. New Cargo fingerprint tracing and controlled warm measurements belong to SESSION-STARTUP-READING.80.1."
 ---
+
+## Director-required build lifecycle — September 10
+
+The director requires RGX and PGEN to be compiled once following a submodule
+update, with those products reused by ordinary LinkedSpec CI. A LinkedSpec-only
+source or test change must not rebuild either dependency. Startup .80.1-.4 now
+carry this explicit acceptance target; the earlier freshness diagnosis below is
+retained evidence, not the complete solution or an already implemented policy.
+
+The implementation must separate initial/update preparation from ordinary CI,
+account for the supported artifact configurations and handle missing/incompatible
+products explicitly. Ordinary CI must not quietly fall back to rebuilding them.
+Exact negative compilation controls, update-then-reuse proof and preserved test
+coverage belong to .80.4. Existing nested source/generated work stays untouched.
+The simultaneous engineering-history approval is implemented separately by
+containment .11; it does not itself change Cargo or the CI drivers.
 
 ## Observed mechanism and limits
 

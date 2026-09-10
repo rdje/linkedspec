@@ -10,6 +10,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-10 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.11: approved engineering archive
+
+Admit exactly engineering files 27→28 and manifest lines 26→27 under ADR0113.
+Preserve 211 clean-source lines / 24,521 bytes, all prior records and other limits.
+Exact source/history and 22 production-validator checks pass; the director’s
+September 11 one-time receipt exception authorizes focused landing. Record PGEN/RGX build-on-update direction under startup .80;
+no dependency or CI behavior changes. Next Dart .1.47.
+
 ## 2026-09-10 — DART-STARTUP-READING.1.46: interpreter consumers
 
 Read 1,500 fragments / 39,292 baseline-identical bytes; interpreter complete,
