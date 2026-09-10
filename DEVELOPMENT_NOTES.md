@@ -10,6 +10,17 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-10 — validate rejection evidence as well as query admission
+
+Dart .1.31 confirms that raw-query cursor rejection can retain native host
+objects because the shared copy helpers recurse through Map/List and return
+other values unchanged. Two caller-object mutations change an existing
+response's JSON encoding; plain objects and NaN prevent encoding. Four JSON
+controls remain detached and serializable. .2.21 owns the native boundary and
+a public-constructor census, preserving malformed JSON compatibility. The
+complete eight-case recipe, 18 selected tests and neutral 6/20/128 proof are
+retained; no MCP reproduction or runtime repair is inferred.
+
 ## 2026-09-10 — separate semantic traversal from source correlation
 
 Dart .1.30 confirms two independently checked query cases. An array ActionIR

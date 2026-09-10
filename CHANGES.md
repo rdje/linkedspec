@@ -10,6 +10,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-10 — DART-STARTUP-READING.1.31: native rejection detachment
+
+Read 1,500 fragments / 43,744 baseline-identical bytes: complete semantic index
+and read query through 668. All 18 tests and neutral 6/20/128 checks pass.
+Eight native controls own rejection response detachment/encoding under .2.21
+and two children: four defective non-JSON cases and four detached JSON controls.
+No MCP defect or source repair is claimed. Reading reaches 31/55; .1.32 is next.
+
 ## 2026-09-10 — DART-STARTUP-READING.1.30: semantic call counterexamples
 
 Read 1,500 fragments / 43,400 baseline-identical bytes: complete call projection

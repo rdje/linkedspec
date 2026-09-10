@@ -2224,7 +2224,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Goal: Split and read all 115 baseline Dart entries, including compiler/runtime, tests, commands, and package inputs.
   Reading owner: `docs/tasks/DART-STARTUP-READING.md` owns .0 decomposition, .1 reading, .2 new repair intake and .3 reading closeout; this startup node remains the prerequisite/closeout owner.
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas. DART-STARTUP-READING.3 may complete this reading node only after exact coverage/comprehension and child-commit proof; pending repairs remain owned separately.
-  Verification: Dart reading remains incomplete: DART-STARTUP-READING.1.30 closes 30/55 children, 43,028 fragments / 1,329,169 bytes with exact baseline identity. Call projection is complete; semantic index reaches 399. All 28 semantic tests and neutral 6/20/128 checks pass. Nine public-query/typed-runtime controls extend .67 with Dart array omission and own regex source correlation under Dart .2.20; seven valid/arity-rejection controls remain distinct. Existing Dart .2.1-.2.19, startup .22/.37/.55/.60 and FUTURE-PARITY-BACKLOG.5 retain evidence; .54.3 retains regex recurrence. Capacity .4/.5 remains committed under containment .8/.9 and ADR0110/0111. Next .1.31 completes semantic index and begins query after the focused clean commit. Repairs remain gated.
+  Verification: Dart reading remains incomplete: DART-STARTUP-READING.1.31 closes 31/55 children, 44,528 fragments / 1,372,913 bytes with exact baseline identity. Semantic index is complete; query reaches 668. All 18 tests and neutral 6/20/128 checks pass. Eight native controls own non-JSON rejection detachment/encoding under Dart .2.21 with four defective cases and four valid JSON controls; no MCP defect is inferred. Existing Dart .2.1-.2.20, startup .22/.37/.55/.60/.67 and FUTURE-PARITY-BACKLOG.5 retain evidence; .54.3 retains regex recurrence. Capacity .4/.5 remains committed under containment .8/.9 and ADR0110/0111. Next .1.32 finishes query, reads runtime projection and begins static projection after the focused clean commit. Repairs remain gated.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.5`
@@ -4330,12 +4330,12 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 ## Current Frontier
 
-Canonical admission a67a18bf and completed `DART-STARTUP-READING.0` decomposition preserve the full baseline. Approved history capacity is committed at 7d52c98e; engineering-history capacity is committed at 9c644ecb under containment .9 / ADR0111; resume `DART-STARTUP-READING.1.31` after .1.30’s clean focused commit in `docs/tasks/DART-STARTUP-READING.md`.
+Canonical admission a67a18bf and completed `DART-STARTUP-READING.0` decomposition preserve the full baseline. Approved history capacity is committed at 7d52c98e; engineering-history capacity is committed at 9c644ecb under containment .9 / ADR0111; resume `DART-STARTUP-READING.1.32` after .1.31’s clean focused commit in `docs/tasks/DART-STARTUP-READING.md`.
 Startup `.3.4` remains pending until that tree proves complete Dart reading; admission itself grants no source-reading credit.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.31` | `pending` | Finish semantic index from 400 through EOF, then read semantic query 1-668 after .1.30 commits and the brief/tree are clean; reading is 30/55. Source repairs remain gated. |
+| 1 | `DART-STARTUP-READING.1.32` | `pending` | Finish semantic query from 669 through EOF, read runtime projection through EOF and static projection 1-381 after .1.31 commits and the brief/tree are clean; reading is 31/55. Source repairs remain gated. |
 
 ## Reading Ledger
 

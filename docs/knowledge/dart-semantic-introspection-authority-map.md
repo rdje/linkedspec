@@ -290,3 +290,21 @@ controls. Exact reproduction and scope belong to
 [[dart-semantic-call-projection-counterexamples]]. Existing startup .67 owns
 container traversal; new Dart .2.20 owns regex correlation. Earlier source,
 staged, query and runtime authorities remain distinct; no API or MCP change lands.
+
+## 2026-09-10 — index construction and typed query prefix
+
+`DART-STARTUP-READING.1.31` completes semantic_index.dart and reads semantic_query.dart
+through 668. Strict copied source maps preserve UTF-8/scalar/code-unit boundaries;
+index construction captures staged compilation outcomes and detached static
+projection. Source ceilings govern disclosure; derived observation does not make
+query evaluation execute a target. Typed query values and neutral validation
+are read through cursor rejection; remaining evaluation belongs to .1.32.
+
+All 18 selected tests and neutral 6/20/128 checks pass. Eight native raw-query
+controls establish a separate rejection-evidence boundary:
+[[dart-semantic-native-rejection-immutability-gap]]. Four non-JSON cases retain
+host identity, permit serialization changes or fail JSON encoding; four ordinary
+JSON controls remain detached and serializable. Dart .2.21 and two children own
+the repair and shared-constructor census. These controls do not establish an
+MCP defect, change source authority or expose the private staged validator.
+Earlier call-projection evidence and all prior owners remain intact.

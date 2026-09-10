@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `b80acc01545fa62662e3494f040b7b29f8ca4c00` — clean focused handoff before Dart .1.30.
-- latest_completed_leaf: `DART-STARTUP-READING.1.30 - own semantic container and source-correlation findings`.
+- activation_commit: `3f21f3b084fbbd8c51ce2387ed8cc1c5bb6ffa3b` — clean focused handoff before Dart .1.31.
+- latest_completed_leaf: `DART-STARTUP-READING.1.31 - own native semantic rejection immutability gap`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: `DART-STARTUP-READING.1.31` finishes semantic index from 400 through EOF, then reads semantic query 1-668 after the clean focused .1.30 commit.
+- next_action: `DART-STARTUP-READING.1.32` finishes semantic query from 669 through EOF, reads runtime projection through EOF and static projection 1-381 after the clean focused .1.31 commit.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: Startup `.7` blocks recovery/purge; engineering-history .5 approval is implemented under containment .9 / ADR0111; prior change-history approval remains under .8 / ADR0110. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.79` precede mutation setup; `.29` belongs to `.5`. The director approved the narrow capacity exception; other reading gates remain.
@@ -57,4 +57,4 @@
   and aggregate ceiling remains unchanged.
 - current_change_history_capacity: immutable segment `4982` is the twenty-ninth history segment; ADR `0110`
   authorizes exactly 31 collection files / 30 manifest lines / 17,039 manifest bytes; other ceilings remain unchanged.
-- latest_bootstrap_read: 2026-09-10 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading 30/55 children, 43,028 fragments / 1,329,169 bytes; call projection complete, semantic index through 399; all 28 tests and semantic 6/20/128 checks pass; nine controls extend startup .67 and own regex correlation .2.20 with seven valid/arity-rejection controls; earlier owners intact; next .1.31.
+- latest_bootstrap_read: 2026-09-10 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart reading 31/55 children, 44,528 fragments / 1,372,913 bytes; semantic index complete, query through 668; all 18 tests and semantic 6/20/128 checks pass; eight native controls own non-JSON rejection .2.21 with four defective/four valid JSON cases; no MCP defect inferred; earlier owners intact; next .1.32.

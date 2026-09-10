@@ -89,18 +89,33 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed thirty of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed thirty-one of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
 parser bridge, function-shell projection, bounded child-parse authority, generated rule plan,
 interpreter, matching, recognition transactions, semantic observation, source location and both
-staged runtime modules, Unicode case mapping, scaffold and semantic call projection, plus semantic
-index through line 399. This covers 43,028 fragments / 1,329,169 bytes. All 28 selected semantic
-call/static/source/compilation/query tests and neutral six-group/twenty-query/128-mutation checks
-pass. Nine public-query/typed-runtime controls establish the two cases below and retain seven
-valid/arity-rejection controls. The earlier empty-function guard remains startup `.22`-owned.
-Child `.1.31` finishes semantic index from line 400 and begins semantic query. Startup `.3.4`
-remains pending; all prior evidence and limitations remain intact.
+staged runtime modules, Unicode case mapping, scaffold, semantic call projection and semantic
+index, plus semantic query through line 668. This covers 44,528 fragments / 1,372,913 bytes.
+All 18 selected source/compilation/query tests and neutral six-group/twenty-query/128-mutation
+checks pass. Child `.1.32` finishes query from line 669, reads runtime projection and begins
+static projection. Startup `.3.4` remains pending; earlier evidence and limitations remain intact.
+
+**Known Dart limitation — native semantic rejection evidence:** `SemanticIndex.queryNeutral`
+accepts a native `Object?` request. An invalid `page.after_id` containing a caller object can
+be rejected while that object remains in the returned response. If the object implements
+`toJson`, changing it after the query changes the existing response's later JSON serialization.
+A plain object or `double.nan` instead leaves a rejected response that fails JSON encoding.
+
+Eight native controls cover four defective non-JSON cases and four passing JSON controls.
+Ordinary nested JSON maps/lists are copied: changing the input list after rejection leaves
+the returned evidence unchanged. Integer cursors are rejected with stable evidence; a null
+cursor succeeds. The typed request's `String?` cursor cannot represent these host objects,
+and these probes do not establish an MCP defect. They concern error-response detachment,
+with no parser execution involved.
+
+`DART-STARTUP-READING.2.21` and its two children own safe native admission/rejection,
+immutability and serialization recurrence, and a census of public value constructors
+sharing the copy helpers. Existing malformed JSON behavior must remain compatible.
 
 **Known Dart limitations — semantic call traversal and source correlation:** a successful semantic
 query can omit an active call inside an array, or attribute an action call to same-name text in
