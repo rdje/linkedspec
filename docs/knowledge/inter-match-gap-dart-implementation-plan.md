@@ -170,3 +170,15 @@ All 15 selected tests pass, including the full existing gap consumer's independe
 analyzed/executed emitted stage and exact nine-role ledger. Running a whole test file
 does not grant physical-reading credit for its unread tail. No new defect is confirmed;
 the separately owned reconstructed null-name selector gap remains open.
+
+## September 10 complete gap-consumer reading
+
+`DART-STARTUP-READING.1.39` finishes lines 719-1588. The remaining source proves failed
+minimum/direct entry/unflagged behavior, exact normalized descriptor fields and v2 plans,
+typed generated error detail, the nine-role admission ledger and primary separator values.
+The independent harness creates a fresh repository-volume offline package/cache, analyzes
+ten value and two error modules with fatal diagnostics, executes paired direct/traced
+calls and checks source-aware traces before removing its owned root. It runs once in the
+standalone emitted test and again in the admission ledger. All 40 selected gap/logical/
+mutation tests pass, with current gap neutral 9/0/63 and public 8/15/10/34 unchanged.
+No reading tail remains in this consumer; earlier source defects retain separate owners.

@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / .1.38 complete; next .1.39
+- Status: `active` / .1.39 complete; next .1.40
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-10`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 38/55 children, 55,028/80,297 fragments and 1,688,963/2,471,305 bytes; fifty-eight entries through EOF
-  plus inter_match_gap_capture_contract_test.dart through line 718. Exact credit and comprehension remain in each completed node.
+- Current reading: 39/55 children, 56,528/80,297 fragments and 1,735,719/2,471,305 bytes; sixty entries through EOF
+  plus map_leaves_mutation_contract_test.dart through line 176. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -673,14 +673,20 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.38 - read identity and trace contracts`
 
 - ID: `DART-STARTUP-READING.1.39`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 39 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.38` committed; empty brief and clean repository.
+  Activation: Clean `91d59b3c434c49387f1f9a424cacdbb38f50318c`; prior reading committed, root clean, zero-byte brief and all jobs consumed.
   Scope: `dart/test/inter_match_gap_capture_contract_test.dart` lines 719-1588; `dart/test/logical_helper_contract_test.dart` lines 1-454; `dart/test/map_leaves_mutation_contract_test.dart` lines 1-176
   Baseline evidence: 1500 fragments / 46756 bytes; ordered range SHA-256 `7532ddaf24a3a8d860edd53734f8510f02aab378c648049d8004df11b9240bbe`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact scoped bytes/current deltas; gap/logical-helper/map-leaves Dart contract tests and their neutral checks; prior evidence preservation, Knowledge, doctrines, histories, mdBook, memory and staged scope/whitespace.
+  Canonical trigger: `none` — bounded required reading and documentation; no source, contract or infrastructure changes.
+  Comprehension: Gap tests finish failed-minimum, direct-entry and unflagged controls; normalized descriptors retain logical source and separate gap fields without widening legacy edges or v2 plans. Direct/traced generated failures preserve typed causal detail. The exact nine-role admission ledger includes native, reconstruction, descriptor, plan, emission, lifecycle, recursion/rollback, diagnostics and primary routes. The emitted harness creates a fresh local offline package/cache, analyzes ten value and two error modules with fatal diagnostics, executes paired direct/traced calls and verifies trace identity; it is invoked by the separate emitted test and again within the ledger. Logical tests bind seventeen typed truth rows and ten helper cases, value/effect/receiver-lazy fixtures, four invalid arities before effects, normalized/generated/primary routes and an independent analyzed caller containing three value modules plus only the not_many invalid module. Mutation-test prefix uses the zero-regex Top-to-Done scaffold, reconstructs a deliberately corrupt typed receiver while preserving surrounding compiled metadata, and begins the four-valid/fourteen-invalid/five-excluded syntax inventory through 176.
+  Findings: No new confirmed defect. All earlier .2.1-.2.23/startup evidence remains; existing nested callback identity .2.10 and malformed named-selector .2.23 are not closed by these passing fixture routes. Historical logical admission counts are explicitly qualified by the current8/0 neutral result; source changes stay gated.
+  Verification: Physically read gap 719-1588 through EOF in four complete 217/218/218/217-line outputs, logical 1-454 through EOF in two 227-line outputs, and mutation 1-176: exact 1,500 fragments/46,756 baseline-identical bytes and unchanged ordered digest. All 40 selected tests pass. Gap remains 9 complete/0 pending/63 semantic mutations plus public8/15/10/34 and Rust10/Dart10/Julia10/Lua16 admission controls; logical passes 17 truth rows/10 helper/3 effect/8 complete/0 pending/19 public/14 denials/26 mutations; mutation passes 4 valid/14 invalid/5 excluded,10 successes,8 pre-commit failures, six callback/one continuation compositions and 167 base+592 composition mutations. Independent gap/logical emitted analysis and execution are source-backed; the existing full mutation test also passes its emitted caller while unread source remains .1.40. No fresh other-backend or MCP proof is claimed. Exact full coverage, preserved evidence, Knowledge/book/memory/history/doctrines and staged scope/whitespace belong to this focused commit.
+  Commit: `DART-STARTUP-READING.1.39 - complete gap and logical contract reading`
 
 - ID: `DART-STARTUP-READING.1.40`
   Status: `pending`
@@ -1378,7 +1384,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.39` | `pending` | Continue gap, logical-helper and map-leaves test reading after .1.38 commit/brief/clean proof; repair gates remain. |
+| 1 | `DART-STARTUP-READING.1.40` | `pending` | Continue receiver-mutation and MCP binding/admission test reading after .1.39 commit/brief/clean proof; repair gates remain. |
 
 ## Decisions
 
@@ -1403,6 +1409,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-10`: Dart .1.39 completes gap and logical-helper tests and reads map-leaves mutation tests through 176: 1,500 fragments / 46,756 baseline-identical bytes. All 40 selected tests pass, including existing independent emitted consumers. Neutral gap, logical and map-leaves contracts pass; no new defect. Earlier repairs and CI .80/.81 remain owned and gated. Reading reaches 39/55 children, 56,528 fragments / 1,735,719 bytes.
 
 - `2026-09-10`: Dart .1.38 completes duplicate-slot, frontend-trace, function-registry and function-staged-trace tests; gap tests reach line 718. The 1,500 fragments / 45,409 bytes remain baseline-identical. All 15 selected tests pass, including independently analyzed/executed emitted gap modules; neutral gap 9/0/63 plus public8/15/10/34 and duplicate-slot7/0/59 pass. No new defect; earlier repairs and CI .80/.81 retain their gates. Reading reaches 38/55 children, 55,028 fragments / 1,688,963 bytes.
 
@@ -1483,6 +1491,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- `.1.39`: `DART-STARTUP-READING.1.39 - complete gap and logical contract reading`.
+
 - `.1.38`: `DART-STARTUP-READING.1.38 - read identity and trace contracts`.
 
 - `.1.37`: `DART-STARTUP-READING.1.37 - complete corpus and diagnostic test reading`.
@@ -1560,6 +1570,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-10`: Completed .1.39 from clean 91d59b3c; finished gap/logical tests and began receiver-mutation tests; no new defect; next .1.40.
 
 - `2026-09-10`: Completed .1.38 from clean 7b9df4e7; completed identity/trace/registry tests and read gap tests through 718; no new defect; next .1.39.
 

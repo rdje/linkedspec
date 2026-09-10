@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `7b9df4e722e056b6c264f1e6e7a4176bfe40bddc` — clean .1.37 handoff before Dart .1.38.
-- latest_completed_leaf: `DART-STARTUP-READING.1.38 - read identity and trace contracts`.
+- activation_commit: `91d59b3c434c49387f1f9a424cacdbb38f50318c` — clean .1.38 handoff before Dart .1.39.
+- latest_completed_leaf: `DART-STARTUP-READING.1.39 - complete gap and logical contract reading`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: `DART-STARTUP-READING.1.39` continues gap/logical-helper/map-leaves test reading after .1.38.
+- next_action: `DART-STARTUP-READING.1.40` continues receiver-mutation/MCP binding/admission test reading after .1.39.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: Startup `.7` blocks recovery/purge; engineering-history .5 approval is implemented under containment .9 / ADR0111; prior change-history approval remains under .8 / ADR0110. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.81` precede mutation setup; `.29` belongs to `.5`. Prior narrow exceptions stay approved; Dart .6 approval is implemented under containment .10 / ADR0112, with all earlier history preserved.
@@ -57,4 +57,4 @@
   Segment 4981-5a6450db0974 preserves 218 lines / 32,108 bytes; every other ceiling remains unchanged.
 - current_ci_build_reuse: Startup .80.1-.4 own correct PGEN/RGX reuse; 11 visible test-build stages total 4,682 seconds.
   Exact fingerprint and warm-run repair proof remain pending; source changes retain startup prerequisites.
-- latest_bootstrap_read: 2026-09-10 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart 38/55 children, 55,028 fragments / 1,688,963 bytes. All 15 tests and both neutral checks pass; no new defect; next .1.39.
+- latest_bootstrap_read: 2026-09-10 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart 39/55 children, 56,528 fragments / 1,735,719 bytes. All 40 tests and three neutral checks pass; no new defect; next .1.40.

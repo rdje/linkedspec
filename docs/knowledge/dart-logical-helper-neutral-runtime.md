@@ -37,3 +37,19 @@ test does not activate the separately owned explicit `{|...| ... }` literal prog
 Related facts: [[logical-helper-neutral-contract]], [[logical-helper-five-backend-audit]],
 [[cross-backend-condition-truthiness-drift]], [[dart-helper-action-surface-bridge]],
 [[rust-logical-helper-neutral-runtime]].
+
+## September 10 complete logical-consumer reading
+
+`DART-STARTUP-READING.1.39` reads all 454 lines of the logical-helper consumer. The selected
+40-test suite passes, including its independent emitted caller. The neutral checker now
+reports seventeen truth rows, ten helper cases, three effect cases, eight complete/zero
+pending legs, nineteen public documents, fourteen stale-current denials and twenty-six
+mutations; the earlier 3/5 admission count above is historical.
+
+All four invalid arities are exercised through native, reconstructed, generated direct/
+traced and primary routes. The separate offline caller is strictly analyzed and executes
+three value/effect/control modules plus only the `not_many` invalid module. Its paired
+direct/traced failure checks preserve source identity and causal arity detail; this is
+not independent emitted coverage of all four invalid cases. The typed ActionBlock truth
+row does not itself execute a portable literal. Existing callback nesting limitations
+remain owned by [[dart-callback-helper-recursion-identity-gap]]; no new defect is confirmed.

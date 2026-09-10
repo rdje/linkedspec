@@ -10,6 +10,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-10 — exact independent emitted coverage
+
+Dart .1.39 finishes the gap harness: ten value/two error modules, fresh local
+offline cache, fatal analysis and paired direct/traced proof, invoked both by
+the emitted test and admission ledger. Logical emission independently proves
+three value modules and not_many only; its four invalid cases have broader
+native/reconstructed/generated/primary proof. All 40 tests pass; no new defect.
+
 ## 2026-09-10 — distinguish source markers from independent emitted proof
 
 Dart .1.38 confirms the duplicate-slot emitted role checks source markers,
