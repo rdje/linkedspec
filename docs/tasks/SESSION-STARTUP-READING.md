@@ -2224,7 +2224,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Goal: Split and read all 115 baseline Dart entries, including compiler/runtime, tests, commands, and package inputs.
   Reading owner: `docs/tasks/DART-STARTUP-READING.md` owns .0 decomposition, .1 reading, .2 new repair intake and .3 reading closeout; this startup node remains the prerequisite/closeout owner.
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas. DART-STARTUP-READING.3 may complete this reading node only after exact coverage/comprehension and child-commit proof; pending repairs remain owned separately.
-  Verification: Dart reading remains incomplete: DART-STARTUP-READING.1.33 closes 33/55 children, 47,528 fragments / 1,461,186 bytes with exact baseline identity. Static projection/SHA-256 is complete; emitter reaches 55. All 28 tests and neutral 6/20/128 checks pass. Eight public native controls extend .70 grouped selectors and own Dart .2.22 regex-arrow correlation: four constructor failures, four valid controls and all eight runtime results correct. Existing Dart .2.1-.2.21, startup .22/.37/.55/.60/.67 and FUTURE-PARITY-BACKLOG.5 retain evidence; .54.3 retains regex recurrence. Capacity .4/.5 remains committed under containment .8/.9 and ADR0110/0111. Next .1.34 finishes emitter, reads trace and begins validation after the focused clean commit. Repairs remain gated.
+  Verification: Dart reading remains incomplete: DART-STARTUP-READING.1.34 closes 34/55 children, 49,028 fragments / 1,506,533 bytes with exact baseline identity. Emitter/trace is complete; validation reaches 355. All 27 tests, isolated emitted callers, ten-family/eight-case proof and neutral generated-source checks pass; no new defect. Existing Dart .2.1-.2.22, startup .22/.37/.55/.60/.67/.70 and FUTURE-PARITY-BACKLOG.5 retain evidence; .54.3 retains regex recurrence. Capacity .4/.5 remains committed under containment .8/.9 and ADR0110/0111. Next .1.35 finishes validation, reads package inputs and begins test-source reading after the focused clean commit. Repairs remain gated.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.5`
@@ -4332,12 +4332,12 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 ## Current Frontier
 
-Canonical admission a67a18bf and completed `DART-STARTUP-READING.0` decomposition preserve the full baseline. Approved history capacity is committed at 7d52c98e; engineering-history capacity is committed at 9c644ecb under containment .9 / ADR0111; resume `DART-STARTUP-READING.1.34` after .1.33’s clean focused commit in `docs/tasks/DART-STARTUP-READING.md`.
+Canonical admission a67a18bf and completed `DART-STARTUP-READING.0` decomposition preserve the full baseline. Approved history capacity is committed at 7d52c98e; engineering-history capacity is committed at 9c644ecb under containment .9 / ADR0111; resume `DART-STARTUP-READING.1.35` after .1.34’s clean focused commit in `docs/tasks/DART-STARTUP-READING.md`.
 Startup `.3.4` remains pending until that tree proves complete Dart reading; admission itself grants no source-reading credit.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.34` | `pending` | Finish source emitter from 56 through EOF, read trace through EOF and validation 1-355 after .1.33 commits and the brief/tree are clean; reading is 33/55. Source repairs remain gated. |
+| 1 | `DART-STARTUP-READING.1.35` | `pending` | Finish validator from 356 through EOF, read pubspec lock/manifest and action-parser tests through EOF, then action-contract tests 1-203 after .1.34 commits and the brief/tree are clean; reading is 34/55. Source repairs remain gated. |
 
 ## Reading Ledger
 

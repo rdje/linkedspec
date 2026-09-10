@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / .1.33 complete; next .1.34
+- Status: `active` / .1.34 complete; next .1.35
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-10`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 33/55 children, 47,528/80,297 fragments and 1,461,186/2,471,305 bytes; forty-two entries through EOF
-  plus source_emitter.dart through line 55. Exact credit and comprehension remain in each completed node.
+- Current reading: 34/55 children, 49,028/80,297 fragments and 1,506,533/2,471,305 bytes; forty-four entries through EOF
+  plus spec_validator.dart through line 355. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -85,7 +85,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Acceptance: Every child accounts for its exact source bytes and deltas, reconciles Knowledge before re-derivation,
     records comprehension and confirmed findings, runs necessary focused diagnostics and commits before the next child.
   Children: `.1.1-.1.55`; exact scopes and baseline evidence below, read in numeric order.
-  Verification: 33/55 children complete; `.1.1-.1.33` own exact reading/comprehension evidence, and all later children remain pending.
+  Verification: 34/55 children complete; `.1.1-.1.34` own exact reading/comprehension evidence, and all later children remain pending.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.1.1`
@@ -593,14 +593,20 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.33 - own indexed edge source-correlation failures`
 
 - ID: `DART-STARTUP-READING.1.34`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 34 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.33` committed; empty brief and clean repository.
+  Activation: Clean `df88085f2b4e794582bfcf65fcad8fc5cb9fb2d3`; root status empty, brief zero bytes, and prior commit jobs consumed.
   Scope: `dart/lib/src/source_emitter.dart` lines 56-796; `dart/lib/src/trace/trace.dart` lines 1-404; `dart/lib/src/validation/spec_validator.dart` lines 1-355
   Baseline evidence: 1500 fragments / 45347 bytes; ordered range SHA-256 `eeb90e20a592b2b167b08f10280b0b86b5778fbb3912bf0d74e37b2cb4049cea`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Twenty-seven Dart emitter/trace/frontend-validation/spec-validation tests, including isolated offline emitted callers, ten families and the accepted manifest subset; neutral generated-source contract; exact range/current deltas, prior evidence retention, all doctrines, both histories, Knowledge freshness, rendered mdBook and staged scope.
+  Canonical trigger: `none` — bounded required reading and documentation; no source, public contract or infrastructure changes.
+  Comprehension: Emitter completes stable generated errors/metadata, exact ten-family classification and label/family plans, contract-first rejection, compiled invariant checks, direct/traced execution and original diagnostic/semantic callback failure passthrough. Normalized effective SpecFile state is strict UTF-8/Base64 inside deterministic Dart source with escaped identity/label literals; lazy reconstruction follows contract validation. Ordinary generated execute accepts opaque progressive/staged seeds; the traced convenience signature retains only its declared top-rule/config/sinks, and the admitted private seeded carrier remains execute. Plan validation checks row count, order, known family and exact classification before engine execution. Trace defines numeric/alias levels, explicit environment-derived config, immutable copies of observed event/line lists, synchronous stdout/file/mirror routing and balanced scope indentation; file setup/reset is constructor behavior independent of event filtering. Validation prefix defines portable fields and check order, Unicode declarations/targets, duplicates, named regex slots, registry/signature/parameter restrictions, malformed Raw rejection and balanced lifecycle checks. Remaining edge/gap/regex/strict validation belongs to .1.35.
+  Findings: No new confirmed defect. Existing Dart .2.3 owns primary-CLI overflow/reset ordering, .2.8 owns action-mediated observer identity, .2.2 owns lifecycle/regex-brace scanning, .2.4 owns recognition effects, and .2.20-.2.22/startup .67/.70 retain semantic findings. The neutral generated-source v1 ledger is the documented shared semantic baseline, while current Dart artifacts remain v2/format2; no version movement or new traced seed capability is inferred.
+  Verification: Physically read source_emitter.dart 56-796 through EOF in three complete untruncated 247-line outputs, trace.dart 1-404 through EOF in two complete 202-line outputs, and spec_validator.dart 1-355 in two complete outputs: 1,500 fragments / 45,347 baseline-identical bytes with unchanged ordered digest. All 27 selected tests pass, including isolated offline generated caller analysis/execution, ten structural families and interpreter-first accepted eight-case manifest proof. The neutral generated-source checker passes ten families/one behavior case, Dart/Julia/Lua8/105 plus strict Rust105/105 registered breadth and census100/0/0; this static contract check is not a fresh other-backend runtime run. Prior semantic and private counterexamples are retained at unchanged source identity. Full 115-path/169-range/55-child reconstruction, prior evidence retention, doctrines, both histories, Knowledge and rendered-book proof belong to this commit.
+  Commit: `DART-STARTUP-READING.1.34 - complete emitter and trace reading`
 
 - ID: `DART-STARTUP-READING.1.35`
   Status: `pending`
@@ -1314,7 +1320,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.34` | `pending` | Finish source emitter from 56 through EOF, read trace through EOF and validation 1-355 after .1.33 commits and the brief/tree are clean; reading is 33/55. |
+| 1 | `DART-STARTUP-READING.1.35` | `pending` | Finish validator from 356 through EOF, read pubspec lock/manifest and action-parser tests through EOF, then action-contract tests 1-203 after .1.34 commits and the brief/tree are clean; reading is 34/55. |
 
 ## Decisions
 
@@ -1337,6 +1343,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-10`: `.1.34` completes emitter/trace and reads validation through 355: 1,500 fragments / 45,347 baseline-identical bytes. All 27 selected tests, isolated emitted callers, ten-family/eight-case proof and neutral generated-source checks pass. Earlier owners remain intact; no new defect or artifact-version change. Reading reaches 34/55.
 
 - `2026-09-10`: `.1.33` completes static projection/SHA-256 and reads emitter through 55: 1,500 fragments / 42,984 baseline-identical bytes. All 28 tests and semantic 6/20/128 checks pass. Eight public native controls extend startup .70 grouped evidence and own regex-arrow .2.22 with two children: four constructor failures and four valid controls; all eight runtime results agree. Reading reaches 33/55.
 
@@ -1405,6 +1413,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- `.1.34`: `DART-STARTUP-READING.1.34 - complete emitter and trace reading`.
+
 - `.1.33`: `DART-STARTUP-READING.1.33 - own indexed edge source-correlation failures`.
 
 - `.1.32`: `DART-STARTUP-READING.1.32 - complete query and runtime projection reading`.
@@ -1470,6 +1480,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-10`: Completed .1.34 from clean df88085f; finished emitter/trace reading, began validation, retained prior findings and routed .1.35.
 
 - `2026-09-10`: Completed .1.33 from clean 802582d2; retained earlier findings, extended startup .70, owned regex-arrow indexed correlation .2.22 and routed .1.34.
 

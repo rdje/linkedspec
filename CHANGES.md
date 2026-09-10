@@ -10,6 +10,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-10 — DART-STARTUP-READING.1.34: emitter and trace completion
+
+Read 1,500 fragments / 45,347 baseline-identical bytes: complete emitter/trace
+and read validation through 355. All 27 selected tests, isolated emitted callers,
+ten-family/eight-case proof and neutral generated-source checks pass. Preserve
+the shared semantic-v1/current-artifact-v2 distinction and all earlier findings.
+No new defect or source repair. Reading reaches 34/55; .1.35 is next.
+
 ## 2026-09-10 — DART-STARTUP-READING.1.33: indexed source correlation
 
 Read 1,500 fragments / 42,984 baseline-identical bytes: complete static

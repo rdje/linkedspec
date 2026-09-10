@@ -10,6 +10,17 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-10 — generated execution, trace ownership and validation order
+
+Dart .1.34 completes normalized UTF-8/Base64 source emission, exact plan
+validation, generated error/sink boundaries and explicit trace config/routing.
+Ordinary generated execute accepts private progressive/staged seeds; the traced
+convenience form retains its declared config/top-rule/sink signature. Validation
+prefix preserves ordered label/slot/registry/Raw/lifecycle checks. All 27 selected
+tests, isolated emitted callers, ten families and the eight-case subset pass;
+the neutral v1 ledger still describes semantic roles while Dart artifacts are v2.
+Earlier trace/observer/validation/semantic findings remain owned; no new defect.
+
 ## 2026-09-10 — preserve typed indexed identity before source correlation
 
 Dart .1.33 confirms whole-member arrow/name substring search can lose an

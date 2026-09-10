@@ -89,16 +89,19 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed thirty-three of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed thirty-four of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
 parser bridge, function-shell projection, bounded child-parse authority, generated rule plan,
 interpreter, matching, recognition transactions, semantic observation, source location and both
 staged runtime modules, Unicode case mapping, scaffold, semantic call projection, semantic
-index, query, runtime/static projection and SHA-256, plus source emitter through line 55.
-This covers 47,528 fragments / 1,461,186 bytes. All 28 selected static/source/compilation/call/query
-tests and neutral six-group/twenty-query/128-mutation checks pass. Child `.1.34` finishes emitter
-from line 56, reads trace and begins validation. Startup `.3.4` remains pending.
+index, query, runtime/static projection, SHA-256, source emission and trace, plus validation
+through line 355. This covers 49,028 fragments / 1,506,533 bytes. All 27 selected emitter/trace/
+validation tests pass, including isolated emitted caller analysis/execution, all ten structural
+families and the accepted eight-case manifest subset. The neutral generated-source checker
+also passes. Its shared v1 semantic baseline does not change current Dart artifact v2/format2.
+Child `.1.35` finishes validation from line 356, reads package inputs and begins test-source
+reading. Startup `.3.4` remains pending; no new defect is established in this slice.
 
 **Known Dart limitation — indexed edge correlation can reject valid sources:** semantic index
 construction fails for some grouped selectors and for arrow-like target text inside regex

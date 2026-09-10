@@ -37,3 +37,17 @@ staged/native composition and admit the full pipeline at census 57/1/2.
 
 Related facts: [[dart-full-pipeline-trace-gap]], [[dart-runtime-trace-events]],
 [[dart-trace-controls-sinks]], [[trace-cross-variant-capability-contract]].
+
+## 2026-09-10 — validation prefix and check order
+
+`DART-STARTUP-READING.1.34` reads spec_validator.dart 1-355. Validation retains
+one balanced trace scope around its ordered checks. The prefix owns nonempty
+specs, Unicode declaration/target labels, duplicate names, named-slot validity
+and uniqueness, registry collisions, variadic/final-codeblock metadata and
+parameter restrictions, malformed Raw rejection and lifecycle brace checks.
+Strict unused-rule validation remains opt-in; remaining implementations are
+read in .1.35.
+
+All 27 selected emitter/trace/frontend/spec-validation tests pass. Earlier
+lifecycle/regex-brace and recognition-effect findings remain Dart .2.2/.2.4;
+this checkpoint changes no validation behavior or accepted syntax.

@@ -58,3 +58,26 @@ Related facts: [[user-observable-backend-cli-parity-contract]],
 [[dart-backend-interpreter-first-plan]], [[rust-source-emitter-lane-split]],
 [[rust-generated-source-corpus-subset]],
 [[dart-generated-source-v2-rule-local-cursor]], [[dart-mdbook-usage-status]].
+
+## 2026-09-10 — complete emitter reading and focused caller proof
+
+`DART-STARTUP-READING.1.34` completes source_emitter.dart through 796. The
+emitter normalizes effective compiled rules/functions into strict UTF-8/Base64
+state, emits escaped identity/label literals and lazy reconstruction, and
+validates contract before payload access. Exact plan count/order/family checks
+precede execution. Diagnostic and semantic sink wrappers restore original
+callback objects/stacks when those failures reach the generated boundary;
+the earlier action-mediated semantic wrapper gap remains Dart .2.8.
+
+Ordinary generated execute accepts the opaque progressive/staged seeds described
+in [[dart-progressive-span-dispatch-carriers]] and
+[[dart-staged-ast-enrichment-carriers-admission]]. Its traced convenience form
+has the separate declared config/top-rule/sink signature; this reading does not
+claim seeded execution through that convenience form.
+
+All 27 selected emitter/trace/validation tests pass, including isolated offline
+caller analysis/execution, ten families and the accepted eight-case subset.
+The neutral checker retains its v1 semantic ledger and current census100/0/0;
+as documented in [[dart-generated-source-v2-rule-local-cursor]], current Dart
+artifacts remain v2/format2. No fresh other-backend runtime run or new defect
+is claimed.

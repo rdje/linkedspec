@@ -43,3 +43,16 @@ diagnostics/trace no-drift sweep and advances Dart to staged registry work.
 Related facts: [[dart-runtime-diagnostics-trace-split]],
 [[trace-cross-variant-capability-contract]], [[dart-runtime-structured-diagnostics]],
 [[dart-runtime-trace-events]], [[dart-diagnostics-trace-boundary]].
+
+## 2026-09-10 — complete trace owner reading
+
+`DART-STARTUP-READING.1.34` reads all 404 trace lines. Config derives explicit
+environment values only when fromEnvironment is called; numeric thresholds and
+aliases govern event filtering. The emitter copies its event/line lists for
+readers, formats nested scopes and writes synchronously to stdout/file/mirror.
+File setup/reset happens during construction, independently of later filtering.
+
+All 27 selected emitter/trace/validation tests pass. The primary CLI has a
+separate canonical trace adapter; its numeric overflow/reset-before-failure
+remains [[dart-primary-cli-trace-overflow]] under Dart .2.3. This reading does
+not merge those APIs or claim a fresh replay of that seven-case failure.
