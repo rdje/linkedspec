@@ -89,16 +89,17 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed twenty-five of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed twenty-six of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
 parser bridge, function-shell projection, bounded child-parse authority, generated rule plan,
 interpreter, matching, recognition transactions, semantic observation and source location,
-plus staged enrichment through line 1806. This covers 35,528 fragments / 1,126,398 bytes.
-The latest 44 selected staged/registry/progressive/source/matching tests pass. Frozen registry
-resolution, authority narrowing, plan caching and recursive preparation/dispatch match their
-existing documented scope; no new defect is established. Child `.1.26` continues from line 1807.
-Startup `.3.4` remains pending. Earlier checkpoints retain their evidence and known limitations.
+plus staged enrichment through line 3306. This covers 37,028 fragments / 1,170,180 bytes.
+The latest 44 selected staged/registry/progressive/source/matching tests and staged governance
+123/129 mutations pass. Eleven private scheduler controls expose two resource boundary defects,
+owned below under `.2.17` and `.2.18`. Child `.1.27` finishes staged enrichment from line 3307,
+reads staged_parse_job and begins Unicode case mapping. Startup `.3.4` remains pending.
+Earlier checkpoints retain their evidence and known limitations.
 
 The function shell checks the returned definition's text against scalar spans, reconciles staged
 body metadata and removes declarations while preserving line breaks. The private progressive
@@ -296,6 +297,18 @@ as immutable segment 4982. Independent source/hash and complete-history reconstr
 every earlier record; 22 executions of the actual capacity validator verify the boundaries.
 The exact staged canonical gate governs landing. Other root, segment and aggregate ceilings
 remain unchanged; this closed the change-history prerequisite at containment .8.
+
+**Known Dart limitation — staged resource boundaries:** a 64-byte diagnostic allowance
+retains a 188-byte truncation record; two failing siblings retain 375 bytes even though
+the remaining counter reaches zero. An exhausted call counter seeded at
+9223372036854775807 admits one more callback and wraps to -9223372036854775808.
+Eleven private recursive scheduler controls include seven valid boundary/ordinary cases;
+these probes do not establish the same failures in other backends or fresh production
+carriers. `DART-STARTUP-READING.2.17` owns diagnostic accounting/enforcement/carrier repair,
+and `.2.18` owns call admission and carrier proof, both behind startup gates.
+[The staged chapter](../compiler/staged-ast-enrichment.md#known-dart-resource-boundary-limitations)
+and `docs/knowledge/dart-staged-resource-boundary-gaps.md` retain the measured cases.
+Passing existing tests does not close either defect.
 
 **Approved continuity capacity — engineering history:** the director approved intake
 `DART-STARTUP-READING.5`. Containment .9 and ADR0111 admit one archive slot:

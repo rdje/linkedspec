@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.25 completes twenty-five of 55 children: 35,528 fragments / 1,126,398 bytes. Staged enrichment reaches 1806; all 44 selected tests pass and no new defect is established. Containment .8/.9 commit the approved history capacity, latest 9c644ecb. All confirmed Dart .2.1-.2.16 and startup .37 findings remain owned and gated; .1.26 is next. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.26 completes twenty-six of 55 children: 37,028 fragments / 1,170,180 bytes. Staged enrichment reaches 3306; all 44 selected tests and staged 123/129 mutations pass. Eleven private controls own diagnostic-byte overruns (.2.17) and call-count wrap (.2.18), with seven valid controls. Containment .8/.9 commit the approved history capacity, latest 9c644ecb. All Dart .2.1-.2.18 and startup .37 findings remain owned and gated; .1.27 is next. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `DART-STARTUP-READING.1.25` reads staged enrichment 307–1806: 1,500 fragments / 47,254 baseline-identical bytes. Frozen registry resolution, effective authority, plan caching, complete-depth preflight and recursive dispatch reconcile with existing contracts. All 44 selected tests pass; no new defect is established.
+- `DART-STARTUP-READING.1.26` reads staged enrichment 1807–3306: 1,500 fragments / 43,782 baseline-identical bytes. Eleven private scheduler controls own two resource defects and seven repair nodes. All 44 selected tests and staged neutral 123/129 mutations pass; passing finite cases do not close either gap.
 
 ## Next Action
 
-- `DART-STARTUP-READING.1.26` continues staged enrichment from line 1807 after .1.25 commits, the brief is empty and the root tree is clean.
+- `DART-STARTUP-READING.1.27` finishes staged enrichment from 3307, reads staged_parse_job and begins Unicode case mapping after .1.26 commits, the brief is empty and the root tree is clean.
 
 ## Recent Completions
+
+- `2026-09-10` — `DART-STARTUP-READING.1.26` reads 1,500 fragments / 43,782 bytes; 44 tests and staged 123/129 mutations pass; eleven private controls own diagnostic-byte and call-counter repairs .2.17/.2.18.
 
 - `2026-09-10` — `DART-STARTUP-READING.1.25` reads 1,500 fragments / 47,254 bytes; 44 tests pass; staged enrichment through 1806; no new defect.
 
@@ -48,8 +50,6 @@
 - `2026-09-09` — `DART-STARTUP-READING.1.13` reads 1,500 fragments / 48,522 bytes; 25 tests and neutral Unicode checks pass; seven body-fluent controls extend .2.6.
 
 - `2026-09-09` — `DART-STARTUP-READING.1.12` reads 1,500 fragments / 41,630 bytes, passes 17 selected tests and owns ten lexical controls under .2.7/.2.2.2.
-
-- `2026-09-09` — `DART-STARTUP-READING.1.11` reads 1,500 fragments / 39,800 bytes, passes 16 selected tests and owns body suffix repair .2.6 with fourteen controls.
 
 ## History
 

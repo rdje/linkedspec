@@ -10,6 +10,16 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-10 — DART-STARTUP-READING.1.26: staged resource boundaries
+
+Read staged enrichment lines 1807–3306: 1,500 fragments / 43,782 baseline-identical
+bytes. Eleven private recursive controls own diagnostic-byte overruns (.2.17)
+and signed-maximum call-count wrap (.2.18), with seven valid controls. Decompose
+seven gated repair nodes and publish measured limitations in the staged chapter,
+project status and a reproducible Knowledge card. All 44 selected tests and
+neutral 123/129 mutations pass; no source repair or fresh production-carrier
+defect proof is claimed. Reading reaches 26/55; .1.27 is next.
+
 ## 2026-09-10 — DART-STARTUP-READING.1.25: frozen registry and recursive dispatch
 
 Read staged enrichment lines 307–1806: 1,500 fragments / 47,254 baseline-identical

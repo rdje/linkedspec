@@ -200,7 +200,8 @@ not backend exception text. The complete current inventory is:
 Compile-time declaration failures carry the authored origin and bad operand/option. Dispatch failures also carry
 the job id, resolved identity when available, and stage chain. Child failure adds parser/top, path, provenance,
 policy, cache, and nested-diagnostic context. If the shared UTF-8 diagnostic budget is exhausted, only the bounded
-truncation record is retained.
+truncation record is retained. The current Dart implementation has a confirmed fallback-size gap;
+see [Known Dart resource boundary limitations](#known-dart-resource-boundary-limitations).
 
 ## Recursion, cancellation, and detachment
 
@@ -212,7 +213,8 @@ direct and ordered-derived text.
 Stage depth, total calls, remaining steps, result nodes, diagnostic bytes, cancellation, and absolute deadline are
 shared limits checked at dispatch entry and child safe points. Switching parser identity or advancing depth does
 not reset them. Declaration and dispatch are forbidden inside uncommitted recognition, and staged work cannot
-satisfy the already-completed parent parser's cursor progress.
+satisfy the already-completed parent parser's cursor progress. Dart call admission also has a confirmed
+signed-maximum boundary gap, described below.
 
 Results and diagnostic nodes are finite, acyclic, node-bounded plain data. Parser/registry/source/frame/
 transaction/cancellation/callback/host/path handles cannot cross the boundary. Falsey plain results such as `0`,
@@ -793,7 +795,8 @@ from `ascii:[0,2)` followed by `unicode:[1,3)` becomes:
 
 Dart does not invent one contiguous span across those sources. Retained diagnostics recursively project local
 positions and spans before the shared UTF-8 diagnostic ceiling is charged; overflow becomes the exact portable
-`staged_diagnostic_truncated` sentinel.
+`staged_diagnostic_truncated` sentinel. The fallback record itself can exceed a tiny or exhausted allowance;
+the limitation below qualifies this current behavior.
 
 Complete-depth preflight now also reserves cross-plan result targets. Multiple ordered `append_child` jobs may
 share one list. Two replace/sibling jobs may not claim one slot; append and replacement may not claim one slot;
@@ -817,6 +820,36 @@ Publishing this boundary crossed the bounded `CHANGES.md` rollover threshold. Th
 224-line record set as immutable segment `4990`; ADR `0091` advances only the finite change-history collection and
 manifest controls to 23 files / 22 records. No byte, per-file, aggregate, route, storage, or product boundary was
 weakened.
+
+### Known Dart resource boundary limitations
+
+Reading `DART-STARTUP-READING.1.26` reproduced two gaps through the admitted private
+`enrichStagedRecursively` API with frozen, already-compiled callbacks:
+
+| Caller configuration | Observed result |
+| --- | --- |
+| Diagnostic allowance 1 byte; one failing marker | Retains a 187-byte truncation diagnostic. |
+| Diagnostic allowance 64 bytes; one failing marker | Retains 188 bytes and reports zero remaining. |
+| Diagnostic allowance 64 bytes; two failing siblings | Retains 188 + 187 = 375 bytes; the second sentinel reports maximum_bytes 0. |
+| Initial calls and maximum both 9223372036854775807 | Invokes one extra callback and returns totalCalls -9223372036854775808. |
+
+Diagnostic sizes count each canonical compact UTF-8 record before any list-wrapper or
+sidecar-copy overhead. The fallback is measured but not checked again against the ceiling;
+clamping the remaining counter to zero does not make the retained bytes fit. Separately,
+call admission adds one before comparing to the maximum, allowing signed integer wrap.
+
+Seven controls remain valid: zero diagnostic allowance rejects before callback, fitting
+single/sibling diagnostics stay within 256/4096-byte grants, ordinary 31/32 call admission
+succeeds, ordinary 32/32 exhaustion rejects, and signed-maximum-minus-one admits exactly
+one final call. All 44 selected tests and the neutral 123/129 mutation checks pass for
+their covered cases.
+
+Gated repair `DART-STARTUP-READING.2.17.1-.2.17.3` owns compatible sentinel accounting,
+enforcement and supported-carrier/public proof. `.2.18.1-.2.18.2` owns safe call admission
+and host-seed/carrier proof. The exact reproductions are in
+`docs/knowledge/dart-staged-resource-boundary-gaps.md`. These private API probes do not
+establish a failure in another backend or through fresh native, reconstructed,
+generated-plan or emitted authored execution. No repair is included in this reading slice.
 
 ## Current private Julia production boundary
 

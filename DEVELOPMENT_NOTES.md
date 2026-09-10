@@ -10,6 +10,18 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-10 — staged resource helper reading and repair intake
+
+Dart .1.26 reads through staged enrichment line 3306 and reconciles source
+projection, lineage, detachment and exact-target stitching. The existing tests
+miss two measured boundaries: diagnostic fallback size is never rechecked, and
+call admission increments before comparing. Eleven independent private controls
+retain exact byte/callback/counter evidence, including seven valid cases.
+`docs/knowledge/dart-staged-resource-boundary-gaps.md` provides executable
+reproduction; .2.17/.2.18 own compatible repair and carrier proof behind startup
+gates. All 44 selected tests and staged 123/129 mutations pass. Prior findings
+remain intact; .1.27 finishes staged enrichment and begins the next files.
+
 ## 2026-09-10 — staged registry and recursive dispatch reading
 
 Dart .1.25 confirms exact frozen callback binding, deterministic plan identity,

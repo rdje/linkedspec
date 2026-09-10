@@ -90,3 +90,24 @@ and the resource/projection helper bodies. The existing 44-test selection passes
 including recursive guards, cancellation/deadlines/steps, cumulative nodes and
 diagnostic bytes, source rebasing and four production routes. No new defect is
 established; earlier authority evidence and pending repairs remain intact.
+
+## 2026-09-10 — helper audit and confirmed resource boundary gaps
+
+`DART-STARTUP-READING.1.26` reads staged_ast_enrichment.dart 1807–3306.
+Resource callbacks sanitize failure, safe points consume shared and per-job
+steps, and expired contexts reject access. Failure diagnostics preserve portable
+identity, recursively rebase local source fields and explicitly label invalid
+local ranges. Returned markers carry their producing lineage and stitch paths;
+ordered provenance containment and smaller scalar extent govern recurrence.
+Detachment and exact-target stitching preserve the existing plain-data boundary.
+
+The earlier finite green cases do not prove every resource boundary. Eleven
+private scheduler controls establish diagnostic fallback-byte overruns and
+signed-maximum call-count wrap. Tiny positive diagnostic allowances can retain
+more canonical UTF-8 bytes than granted, and a second sibling can emit another
+sentinel after remaining capacity reaches zero. An exhausted call counter at
+9223372036854775807 wraps and admits a child. Seven ordinary/boundary controls
+remain valid. See [[dart-staged-resource-boundary-gaps]] for the exact recipes,
+numbers and .2.17/.2.18 repair decomposition. All 44 selected tests and neutral
+123/129 mutations pass; no other-backend or fresh production-carrier defect proof
+is established. Repairs remain behind startup gates.

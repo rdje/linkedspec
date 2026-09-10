@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / .1.25 complete; next .1.26
+- Status: `active` / .1.26 complete; next .1.27
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-10`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 25/55 children, 35,528/80,297 fragments and 1,126,398/2,471,305 bytes; thirty-two entries through EOF
-  plus staged_ast_enrichment.dart through line 1806. Exact credit and comprehension remain in each completed node.
+- Current reading: 26/55 children, 37,028/80,297 fragments and 1,170,180/2,471,305 bytes; thirty-two entries through EOF
+  plus staged_ast_enrichment.dart through line 3306. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -85,7 +85,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Acceptance: Every child accounts for its exact source bytes and deltas, reconciles Knowledge before re-derivation,
     records comprehension and confirmed findings, runs necessary focused diagnostics and commits before the next child.
   Children: `.1.1-.1.55`; exact scopes and baseline evidence below, read in numeric order.
-  Verification: 25/55 children complete; `.1.1-.1.25` own exact reading/comprehension evidence, and all later children remain pending.
+  Verification: 26/55 children complete; `.1.1-.1.26` own exact reading/comprehension evidence, and all later children remain pending.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.1.1`
@@ -465,14 +465,20 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.25 - read frozen staged registry and recursive dispatch`
 
 - ID: `DART-STARTUP-READING.1.26`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 26 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.25` committed; empty brief and clean repository.
+  Activation: Clean `692c5363e2dbdde7def2e8b3697aa65fac737858`; root status empty, brief zero bytes, and prior commit jobs consumed.
   Scope: `dart/lib/src/runtime/staged_ast_enrichment.dart` lines 1807-3306
   Baseline evidence: 1500 fragments / 43782 bytes; ordered range SHA-256 `66adc3328ccd2542542f637e13a637bf485b6c47c53e16fcbf39d39f430aaf3c`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: 44 staged-AST, registry, progressive, typed-source and matching direct-dependent tests; exact owned range/current deltas, prior evidence retention, all doctrines, both histories, Knowledge freshness, rendered mdBook and staged scope.
+  Canonical trigger: `none` — bounded required reading and documentation; no source, public contract or infrastructure changes.
+  Comprehension: Resource admission sanitizes cancellation/clock callbacks, rechecks post-callback authority and spends shared/job steps only after validation. Failure policies copy portable diagnostics and settle fail/text/node outcomes; local source positions/spans rebase through ordered scalar provenance, with invalid local ranges explicitly marked. Returned markers retain full lineage and mapped stitch paths; recurrence requires exact tuple uniqueness and strictly smaller contained source extent. Plain detachment rejects live/cyclic/nonfinite values under node bounds. Marker discovery, exact-target matching and result-policy stitching are separate validations. Typed path/canonical JSON ordering uses Unicode scalars; snapshot helpers enforce positive ceilings and immutable ordered candidates. The range ends after _deepEqual's Map branch; .1.27 owns the final 15 lines before EOF.
+  Findings: Eleven exact private recursive scheduler controls confirm two defects: tiny positive diagnostic allowances retain fallback records larger than their remaining ceiling, including a second sentinel at zero (.2.17); a seeded exhausted signed-maximum call counter wraps and admits a callback (.2.18). Seven boundary/ordinary controls remain valid. Both repairs are decomposed, gated and reproduced in docs/knowledge/dart-staged-resource-boundary-gaps.md. No other-backend or fresh production-carrier defect proof is claimed; prior findings remain intact.
+  Verification: Physically read staged_ast_enrichment.dart 1807-3306 in six complete untruncated 250-line windows: 1,500 fragments / 43,782 baseline-identical bytes with unchanged ordered digest. All 44 selected tests pass; neutral governance passes 123 semantic/129 public mutations. The durable generator and independent byte/callback/counter assertions reproduce all eleven controls. Full 115-path/169-range/55-child reconstruction, prior-record retention, doctrines, both histories, Knowledge and rendered-book proof belong to this commit.
+  Commit: `DART-STARTUP-READING.1.26 - own staged diagnostic and call-counter boundary gaps`
 
 - ID: `DART-STARTUP-READING.1.27`
   Status: `pending`
@@ -768,11 +774,11 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Status: `pending`
   Goal: Reconcile and retain ownership of every confirmed Dart finding established during the reading.
   Dependencies: Findings from `.1`; implementation additionally requires startup `.3`, `.4` and `.5`.
-  Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`, `.2.5`, `.2.6`, `.2.7`, `.2.8`, `.2.9`, `.2.10`, `.2.11`, `.2.12`, `.2.13`, `.2.14`, `.2.15`, `.2.16`; further confirmed findings receive disjoint owners here.
+  Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`, `.2.5`, `.2.6`, `.2.7`, `.2.8`, `.2.9`, `.2.10`, `.2.11`, `.2.12`, `.2.13`, `.2.14`, `.2.15`, `.2.16`, `.2.17`, `.2.18`; further confirmed findings receive disjoint owners here.
   Acceptance: Cross-reference existing owners for known defects; create disjoint bounded repair children here
     immediately for new confirmed defects, with mechanism, source, reproduction, acceptance and unblock conditions.
     If no new repair is needed, close this intake with an explicit complete reconciliation rather than inventing work.
-  Verification: `pending`; `.1.3` owns attached-switch omission/default replacement under `.2.1`; `.1.5` confirms regex-brace action scanning and lifecycle validation defects under `.2.2`. Reading .1.6 confirms numeric trace overflow and reset-before-failure under .2.3. Reading .1.7 confirms disconnected recognition effect validation, leaked writes after rollback and observation edge-closure bypass under .2.4. Reading .1.10 confirms MCP Unicode key-order divergence under .2.5. Reading .1.11 confirms regex/lifecycle-E body suffix loss under .2.6. Reading .1.12 confirms compact fluent argument corruption under .2.7 and outer regex-brace truncation under existing .2.2.2. Reading .1.13 confirms standalone body-fluent suffix loss under existing .2.6. Reading .1.16 confirms semantic observer error/stack loss through action child calls under .2.8; startup .37 retains nested progressive authority findings from .1.15. Reading .1.17 confirms mixed-control return escape and skipped attached else under .2.9. Reading .1.18 confirms helper-name callback recursion collision and lost bound identity under .2.10. Reading .1.19 confirms hash splice pairing/order loss under .2.11, coordinated with FUTURE-PARITY-BACKLOG.5. Reading .1.20 confirms finite-number corruption (.2.12), lexical Unicode ordering (.2.13) and slice-end overflow (.2.14), with separate existing startup .55/.60 and MCP .2.5 coordination. Reading .1.21 extends .2.14 with typed-source overflow and owns input_slice zero-argument acceptance/late-reference failure under .2.15. Reading .1.23 confirms lower-unbounded quantifier rewriting of escaped literals/classes under .2.16. No repair implementation is admitted before startup gates.
+  Verification: `pending`; `.1.3` owns attached-switch omission/default replacement under `.2.1`; `.1.5` confirms regex-brace action scanning and lifecycle validation defects under `.2.2`. Reading .1.6 confirms numeric trace overflow and reset-before-failure under .2.3. Reading .1.7 confirms disconnected recognition effect validation, leaked writes after rollback and observation edge-closure bypass under .2.4. Reading .1.10 confirms MCP Unicode key-order divergence under .2.5. Reading .1.11 confirms regex/lifecycle-E body suffix loss under .2.6. Reading .1.12 confirms compact fluent argument corruption under .2.7 and outer regex-brace truncation under existing .2.2.2. Reading .1.13 confirms standalone body-fluent suffix loss under existing .2.6. Reading .1.16 confirms semantic observer error/stack loss through action child calls under .2.8; startup .37 retains nested progressive authority findings from .1.15. Reading .1.17 confirms mixed-control return escape and skipped attached else under .2.9. Reading .1.18 confirms helper-name callback recursion collision and lost bound identity under .2.10. Reading .1.19 confirms hash splice pairing/order loss under .2.11, coordinated with FUTURE-PARITY-BACKLOG.5. Reading .1.20 confirms finite-number corruption (.2.12), lexical Unicode ordering (.2.13) and slice-end overflow (.2.14), with separate existing startup .55/.60 and MCP .2.5 coordination. Reading .1.21 extends .2.14 with typed-source overflow and owns input_slice zero-argument acceptance/late-reference failure under .2.15. Reading .1.23 confirms lower-unbounded quantifier rewriting of escaped literals/classes under .2.16. Reading .1.26 confirms staged diagnostic-byte overruns under .2.17 and wrapped staged call admission under .2.18 through eleven private scheduler controls. No repair implementation is admitted before startup gates.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.2.1`
@@ -1087,6 +1093,60 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Verification: `pending`
   Commit: `pending`
 
+- ID: `DART-STARTUP-READING.2.17`
+  Status: `pending`
+  Goal: Make retained staged diagnostics obey an explicit, enforceable byte-ceiling contract.
+  Dependencies: Startup .3/.4/.5; reading .1.26; coordinate ADR0088 and FUTURE-PARITY-BACKLOG.14.7 without changing accepted history.
+  Children: `.2.17.1`, `.2.17.2`, `.2.17.3`
+  Evidence: docs/knowledge/dart-staged-resource-boundary-gaps.md owns seven private recursive scheduler controls. A 1-byte allowance retains 187 bytes; a 64-byte allowance retains 188 bytes, or 375 across two siblings after remaining capacity reaches zero. Zero is correctly rejected; 256/4096 single and 4096 sibling controls fit. _boundedDiagnostic measures the fallback but returns it without another ceiling decision, saturating the remaining counter at zero. Existing 44 tests and neutral 123/129 governance pass; no cross-backend or fresh production-carrier defect result is claimed.
+
+- ID: `DART-STARTUP-READING.2.17.1`
+  Status: `pending`
+  Goal: Reconcile hard diagnostic byte ceilings with the required truncation-sentinel fields.
+  Dependencies: Startup gates; preserve exact measured .1.26 intake.
+  Acceptance: Define the accounting unit and behavior when the governed sentinel itself cannot fit, including initial tiny positive limits, exhausted cumulative allowance, stage-chain growth, sidecar copies and diagnostic-node policy. Preserve authority narrowing; do not silently exempt unlimited fallback metadata. Audit the reference and other staged backend authorities with exact probes and route separately confirmed gaps before selecting the compatible repair.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-STARTUP-READING.2.17.2`
+  Status: `pending`
+  Goal: Enforce the selected staged diagnostic-byte contract in Dart.
+  Dependencies: `.2.17.1`.
+  Acceptance: Lock the seven intake controls and reject or represent diagnostics within the selected effective and cumulative boundary, including repeated siblings and long lineage. Preserve zero-limit validation, ordinary complete diagnostics, portable error fields and failure-policy behavior. Measure canonical UTF-8 bytes independently of the remaining counter; never treat saturation at zero as sufficient proof.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-STARTUP-READING.2.17.3`
+  Status: `pending`
+  Goal: Close staged diagnostic limits through supported carriers and public evidence.
+  Dependencies: `.2.17.2` and any separately owned contract/backend corrections from .2.17.1.
+  Acceptance: Prove native, reconstructed, generated-plan and fresh emitted routes under narrowing per-entry/caller and shared sibling/depth limits. Strengthen neutral/runtime consumers to check retained bytes, update book and Knowledge with exact scope, and run canonical closeout. Keep progressive startup .37 and ordinary source-detail policy as separate owners.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-STARTUP-READING.2.18`
+  Status: `pending`
+  Goal: Reject an exhausted staged call allowance before integer increment can wrap.
+  Dependencies: Startup .3/.4/.5; reading .1.26; coordinate existing numeric .2.12 without conflating scalar helper behavior with host resource counters.
+  Children: `.2.18.1`, `.2.18.2`
+  Evidence: docs/knowledge/dart-staged-resource-boundary-gaps.md owns four private recursive controls. Initial totalCalls=maxCalls=9223372036854775807 invokes one extra callback and returns totalCalls=-9223372036854775808. Ordinary 31/32 success, 32/32 denial before callback, and max-minus-one success remain controls. _dispatchResourceCheck adds one before comparison at staged_ast_enrichment.dart:1892, then stores the wrapped value at 1905.
+
+- ID: `DART-STARTUP-READING.2.18.1`
+  Status: `pending`
+  Goal: Make staged call admission and counter updates overflow-safe.
+  Dependencies: Startup gates.
+  Acceptance: Lock all four intake controls; compare available authority before incrementing, reject exhausted or already-exceeded counts without a child callback, and retain monotone nonnegative totals across siblings and depths. Audit adjacent staged resource arithmetic with bounded independent controls and own any distinct findings; preserve existing cancellation/deadline/step/lineage ordering.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-STARTUP-READING.2.18.2`
+  Status: `pending`
+  Goal: Close staged call-counter safety across host seeds and supported production carriers.
+  Dependencies: `.2.18.1`.
+  Acceptance: Exercise native, reconstructed, generated-plan and fresh emitted seeds with exact near-limit and exhausted counters; prove denied calls have no effects. Update direct consumers, book and Knowledge, retain startup numeric owners, and run canonical closeout without changing authored numeric semantics.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `DART-STARTUP-READING.3`
   Status: `pending`
   Goal: Close Dart reading with exact coverage, current-delta, comprehension and child-commit proof.
@@ -1123,7 +1183,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.26` | `pending` | Continue staged enrichment lines 1807–3306 after .1.25 commits and the brief/tree are clean; reading is 25/55. |
+| 1 | `DART-STARTUP-READING.1.27` | `pending` | Finish staged enrichment from 3307, read staged_parse_job and begin Unicode case mapping after .1.26 commits and the brief/tree are clean; reading is 26/55. |
 
 ## Decisions
 
@@ -1146,6 +1206,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-10`: `.1.26` reads staged enrichment 1807–3306: 1,500 fragments / 43,782 baseline-identical bytes. All 44 selected tests and neutral 123/129 mutations pass. Eleven independent private controls reproduce diagnostic-byte overruns (.2.17) and call-count wrap (.2.18), with seven valid controls; both repairs are owned. Reading reaches 26/55.
 
 - `2026-09-10`: `.1.25` reads staged enrichment 307–1806: 1,500 fragments / 47,254 baseline-identical bytes. All 44 selected tests pass; frozen resolution/cache and recursive preflight/dispatch reconcile without a new defect. Reading reaches 25/55; prior evidence and repairs remain intact.
 
@@ -1198,6 +1260,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- `.1.26`: `DART-STARTUP-READING.1.26 - own staged diagnostic and call-counter boundary gaps`.
+
 - `.1.25`: `DART-STARTUP-READING.1.25 - read frozen staged registry and recursive dispatch`.
 
 - `2026-09-10`: `DART-STARTUP-READING.1.24 - finish recognition and source authority reading` closes the twenty-fourth reading child from clean 62b02fec.
@@ -1247,6 +1311,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-10`: Completed .1.26 from clean 692c5363; owned two staged resource boundary defects and seven repair nodes, preserved all prior evidence, and routed .1.27.
 
 - `2026-09-10`: Completed .1.25 from clean canonical 9c644ecb; continued frozen staged registry and recursive dispatch reading, retained all prior owners, and routed .1.26.
 
