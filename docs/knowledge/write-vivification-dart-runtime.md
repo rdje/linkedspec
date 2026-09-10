@@ -64,3 +64,17 @@ all five valid AST rows with exact source/spans and typed segments; invalid/excl
 and runtime assertions remain in .1.55. All 43 selected tests pass, including the
 whole existing write consumer and emitted caller, but no unread suffix credit is
 granted. Neutral write governance remains105 mutations. No source change.
+
+## September 11 complete write consumer reading
+
+Dart .1.55 reads write_vivification_contract_test.dart293-767 through EOF.
+Seven exact syntax denials, four exclusions and astral spans precede eleven
+success/effect rows, sixteen structural failures, three injected expression
+failures, three read exclusions, aggregate detachment, fresh locals and bound-null
+conflicts. Injected failures originate in the diagnostic sink and preserve exception
+identity and stopped evaluation. Empty typed segments reject at runtime/emission/
+plan validation. The representative sections/title write runs after SpecFile
+reconstruction, through a generated plan and inline CLI, and in a fresh offline
+package whose pub get, analyze and emitted run each require exit0. All20 selected
+tests pass, including nine write tests; neutral write remains105 mutations.
+Physical coverage is complete; this does not close other owned runtime defects.

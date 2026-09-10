@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / .1.54 complete; next .1.55
+- Status: `active` / .1.55 complete; next .3
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-11`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 54/55 children, 79,028/80,297 fragments and 2,431,006/2,471,305 bytes; 113 entries through EOF
-  plus write_vivification_contract_test.dart through line 292. Exact credit and comprehension remain in each completed node.
+- Current reading: 55/55 children, 80,297/80,297 fragments and 2,471,305/2,471,305 bytes; all 115 entries through EOF.
+  Physical reading is complete; .3 owns the separate formal reading-parent closeout. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -85,7 +85,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Acceptance: Every child accounts for its exact source bytes and deltas, reconciles Knowledge before re-derivation,
     records comprehension and confirmed findings, runs necessary focused diagnostics and commits before the next child.
   Children: `.1.1-.1.55`; exact scopes and baseline evidence below, read in numeric order.
-  Verification: 54/55 children complete; `.1.1-.1.54` own exact reading/comprehension evidence, and .1.55 remains pending.
+  Verification: 55/55 children complete; `.1.1-.1.55` own exact reading/comprehension evidence. Keep this parent active until .3 verifies all child commits and completes canonical reading closeout.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.1.1`
@@ -923,14 +923,19 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.54 - read binding and function consumers`
 
 - ID: `DART-STARTUP-READING.1.55`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 55 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.54` committed; empty brief and clean repository.
+  Activation: Clean `d62f2463dfa21cbd2fe8d0142ebb67ffcc5e6fa6`; prior leaf committed, brief empty, root clean and all jobs consumed.
   Scope: `dart/test/write_vivification_contract_test.dart` lines 293-767; `dart/test_dormant/progressive_span_dispatch_authority_test.dart` lines 1-794
   Baseline evidence: 1269 fragments / 40299 bytes; ordered range SHA-256 `9b6f6e3fb70c306559fde67a2815ffad9a004e2c586bbd6e5f1663b2b3a25d0b`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact declared ranges and full baseline identity; write-vivification and private progressive-authority consumers, current admitted progressive consumer, direct write/progressive neutral authorities; Knowledge, histories, rendered book, preservation and all doctrines.
+  Canonical trigger: `none` — ordinary bounded reading and documentation; no executable, contract, infrastructure or dependency changes.
+  Comprehension: Write tests finish exact syntax/astral spans, eleven success/effect rows, sixteen structural failures after RHS, three identity-preserved exceptions injected through the diagnostic sink, three read exclusions, detached aggregates, fresh locals/bound-null conflicts and malformed compiled-carrier guards. The representative nested write survives reconstructed/generated/inline-CLI routes and a fresh offline emitted package with successful analysis/run and cleanup. Private progressive tests cover neutral views/grants/cancellation/chains/execution and all26 diagnostic codes, nested scalar rebasing/shared invocation counters, expired views/requests, detached/cyclic/node-limited results and one-byte diagnostic truncation. Its parent-state fixture is an isolated local copy, not an injected engine state. The authority-only test remains dormant/private; admitted carrier proof is separate. Historical RED/pending comments are superseded by current nine-leg complete governance. Startup .37 still owns nested effective-authority inheritance; passing permissive nested fixtures do not close it.
+  Verification: Physically read write293-450/451-608/609-767 EOF and dormant authority1-200/201-400/401-600/601-794 EOF in untruncated output. Exact1269 fragments/40299 bytes and digest pass. All115 baseline files remain identical; all55 children cover80297 fragments/2471305 bytes through every EOF. All20 selected tests pass: nine write, four private authority and seven admitted progressive groups, including independent existing emitted callers. Neutral write105 and progressive9/9 complete/zero pending/116 plus public60 pass. Correct stale admission-status wording while retaining its historical evidence. Coverage/preservation, Knowledge/book/memory/histories, diff hygiene and all doctrines govern this ordinary focused leaf; .3 retains canonical milestone and child-commit proof, and no repair closes here.
+  Commit: `DART-STARTUP-READING.1.55 - complete planned Dart source reading`
 
 - ID: `DART-STARTUP-READING.2`
   Status: `pending`
@@ -1480,7 +1485,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.55` | `pending` | Read write-vivification293-767 and dormant progressive authority1-794 after clean .1.54; then reconcile complete reading. |
+| 1 | `DART-STARTUP-READING.3` | `pending` | Audit every child commit and complete physical coverage, preserve all repairs, then satisfy canonical reading-closeout proof before routing Julia. |
 
 ## Decisions
 
@@ -1511,6 +1516,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-11` .1.55: Dart .1.55 completes write vivification and private progressive-authority reading: 1,269 fragments / 40,299 baseline-identical bytes. All 20 selected tests and write/progressive neutral checks pass. All 55 reading children now cover all 115 files and 2,471,305 bytes; formal .3 closeout and startup .3.4 remain pending. Existing nested-authority and other defects remain owned and open. Complete physical coverage is80297 fragments,80296 physical lines,2471305 bytes across115 EOF entries. Parent .1 and startup .3.4 await separate .3 canonical closeout; no defect remediation.
 
 - `2026-09-11` .1.54: Dart .1.54 completes Unicode routes, uniform binding, function parser/shell and variadic consumers, then reads write vivification through line 292: 1,500 fragments / 44,403 baseline-identical bytes. All 43 tests and four neutral checks pass, including the existing emitted nested-write caller. Binding and variadic generated-state proof stays distinct from independent emitted execution; prior defects remain open. Cumulative54/55,79028 fragments/2431006 bytes,113 EOF plus write292; prior source findings remain owned.
 
@@ -1625,6 +1632,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- .1.55: `DART-STARTUP-READING.1.55 - complete planned Dart source reading`.
+
 - .1.54: `DART-STARTUP-READING.1.54 - read binding and function consumers`.
 
 - .1.53: `DART-STARTUP-READING.1.53 - read typed source and Unicode consumers`.
@@ -1734,6 +1743,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-11`: .1.55 completes the 55-child physical reading plan, refreshes stale progressive admission wording and routes formal .3 closeout. Existing repairs and startup gates remain.
 
 - `2026-09-11`: .1.54 completes binding/function consumers and begins write vivification; next .1.55 after clean focused commit. Preserve exact route coverage and existing defects.
 

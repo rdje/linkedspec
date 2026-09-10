@@ -95,3 +95,20 @@ remain separate review questions; no authored or other-backend gap is inferred.
 Eighty-two selected authority/carrier/interpreter/cursor/emitter tests and neutral
 9/9/116/public60 checks pass, including existing emitted execution. Those consumers
 remain valid for their covered routes and do not close these newly combined boundaries.
+
+## September 11 private authority consumer reading complete
+
+Dart .1.55 reads all794 lines of the dormant authority consumer. Four test groups
+cover every neutral view/grant/cancellation/chain/execution row, all26 diagnostic
+codes, nested scalar rebasing and shared invocation counters, expired views and
+requests, copied registry configuration and detached/cyclic/node-bounded results.
+The one-byte child-diagnostic case preserves a one-byte replacement. Its local
+parentState copy is not passed into the invocation; engine non-interference remains
+separate admitted-carrier evidence. Default permissive nested arguments do not
+resolve startup .37's measured effective-grant/budget inheritance gap.
+
+The authority-only file remains outside ordinary/canonical discovery and the public
+umbrella; the separate seven-group carrier consumer remains admitted. The opening
+RED comment describes the historical pre-carrier step. All20 selected tests pass
+(nine write, four private authority, seven carrier); neutral progressive is9/9
+complete,zero pending,116 mutations plus public60. No source or MCP change.

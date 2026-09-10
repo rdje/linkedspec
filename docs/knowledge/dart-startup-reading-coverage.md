@@ -109,3 +109,13 @@ print(json.dumps({'baseline':ns['BASE'],'paths':len(source),'physical_lines':802
 print('PASS independently reconstructed declared Dart scopes, exact current baseline identity and every child bound/digest')
 DART_READING_COVERAGE
 ```
+
+## September 11 physical reading plan completed
+
+DART-STARTUP-READING.1.55 finishes all55 scoped children and all115 baseline files.
+All80297 fragments /2471305 bytes are physically read, with per-child comprehension
+and focused proof recorded in the tree. The independent declared-range recipe
+still reproduces every byte once, all bounds/digests and exact baseline identity.
+Formal .3 remains pending: it must verify every child commit and satisfy canonical
+milestone proof before the reading parent and startup .3.4 close. Pending repairs
+keep their exact owners; source comprehension does not establish zero defects.

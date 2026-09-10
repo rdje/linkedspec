@@ -10,6 +10,15 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — final Dart reading and private authority scope
+
+Dart .1.55 completes write syntax/evaluation/detachment and fresh emitted-package
+proof, then reads the dormant private progressive authority consumer. Permissive
+nested fixtures and isolated parent-state copies do not establish inherited narrow
+authority or engine-state integration; startup .37 remains open. All 20 selected
+tests and two neutral checks pass. Physical coverage is complete, while .3 still
+owns independent child-commit evidence and canonical reading-parent closeout.
+
 ## 2026-09-11 — binding and function consumer reading
 
 Dart .1.54 completes native/generated binding and function consumers. Retired exact

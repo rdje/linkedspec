@@ -10,6 +10,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — DART-STARTUP-READING.1.55 - complete planned Dart source reading
+
+Complete the final 1,269 fragments / 40,299 bytes of write and private progressive
+consumer reading. All 55 children now cover all 115 baseline-identical Dart files:
+80,297 fragments / 2,471,305 bytes. All 20 tests and write/progressive neutral checks
+pass. Refresh stale admission wording with historical evidence retained; existing
+nested-authority and other defects remain open. Formal .3 closeout is next.
+
 ## 2026-09-11 — DART-STARTUP-READING.1.54 - read binding and function consumers
 
 Complete Unicode routes, binding, function parser/shell and variadic tests; read

@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart .1.54 completes Unicode routes, uniform binding, function parser/shell and variadic consumers, then reads write vivification through line 292: 1,500 fragments / 44,403 baseline-identical bytes. All 43 tests and four neutral checks pass, including the existing emitted nested-write caller. Binding and variadic generated-state proof stays distinct from independent emitted execution; prior defects remain open. Reading is 54/55 children, 79,028 fragments / 2,431,006 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart .1.55 completes write vivification and private progressive-authority reading: 1,269 fragments / 40,299 baseline-identical bytes. All 20 selected tests and write/progressive neutral checks pass. All 55 reading children now cover all 115 files and 2,471,305 bytes; formal .3 closeout and startup .3.4 remain pending. Existing nested-authority and other defects remain owned and open. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.81` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `DART-STARTUP-READING.1.54` — Dart .1.54 completes Unicode routes, uniform binding, function parser/shell and variadic consumers, then reads write vivification through line 292: 1,500 fragments / 44,403 baseline-identical bytes. All 43 tests and four neutral checks pass, including the existing emitted nested-write caller. Binding and variadic generated-state proof stays distinct from independent emitted execution; prior defects remain open.
+- `DART-STARTUP-READING.1.55` — Dart .1.55 completes write vivification and private progressive-authority reading: 1,269 fragments / 40,299 baseline-identical bytes. All 20 selected tests and write/progressive neutral checks pass. All 55 reading children now cover all 115 files and 2,471,305 bytes; formal .3 closeout and startup .3.4 remain pending. Existing nested-authority and other defects remain owned and open.
 
 ## Next Action
 
-- `DART-STARTUP-READING.1.55` — complete write-vivification293-767 and dormant progressive authority1-794 after clean .1.54.
+- `DART-STARTUP-READING.3` — independently audit all child commits and full coverage, preserve repairs and satisfy canonical reading-closeout proof.
 
 ## Recent Completions
+
+- `2026-09-11` — `DART-STARTUP-READING.1.55` completes physical Dart reading: 55/55, all115 files; 20 tests and two neutral checks pass. Formal .3 remains pending.
 
 - `2026-09-11` — `DART-STARTUP-READING.1.54` reads 1,500 fragments / 44,403 bytes; 43 tests and four neutral checks pass; no new defect.
 
@@ -48,8 +50,6 @@
 - `2026-09-10` — `DART-STARTUP-READING.1.42` reads 1,500 fragments / 48,485 bytes; all 39 tests and progressive/zero-argument/recognition neutral checks pass; no new defect.
 
 - `2026-09-10` — `DART-STARTUP-READING.1.41` reads 1,500 fragments / 48,287 bytes; all 17 MCP tests, neutral transport/admission and binding freshness pass; no new defect.
-
-- `2026-09-10` — `DART-STARTUP-READING.1.40` reads 1,500 fragments / 49,088 bytes; all 16 tests, neutral mutation/MCP checks and binding freshness pass; no new defect.
 
 ## History
 
