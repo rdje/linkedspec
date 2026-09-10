@@ -34,3 +34,12 @@ before promotion to census 57/1/2.
 
 Related facts: [[dart-runtime-trace-events]], [[dart-trace-controls-sinks]],
 [[trace-cross-variant-capability-contract]], [[julia-frontend-compiler-staged-trace-events]].
+
+## September 10 complete pipeline-consumer reading
+
+`DART-STARTUP-READING.1.42` completes native pipeline test lines 4-182 after the preceding
+imports. Its four tests pass within the selected 39-test suite. One caller-owned emitter
+spans loading, frontend/function/staged work, compilation and runtime; JSON identity,
+balanced scopes, quiet disabled tracing and structured validation errors are checked.
+Scratch and routed logs use the managed temporary root and are removed by owned teardown.
+The error comparison is structured equality across calls, not exception-object identity.

@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / .1.41 complete; next .1.42
+- Status: `active` / .1.42 complete; next .1.43
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-10`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 41/55 children, 59,528/80,297 fragments and 1,833,094/2,471,305 bytes; sixty-five entries through EOF
-  plus native_pipeline_trace_test.dart through line 3. Exact credit and comprehension remain in each completed node.
+- Current reading: 42/55 children, 61,028/80,297 fragments and 1,881,579/2,471,305 bytes; sixty-nine entries through EOF
+  plus recognition_transaction_contract_test.dart through line 216. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -721,14 +721,20 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.41 - complete MCP dispatch and stdio reading`
 
 - ID: `DART-STARTUP-READING.1.42`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 42 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.41` committed; empty brief and clean repository.
+  Activation: Clean `0e832ae4e1f37091768d5335e87600522ae5c78d`; prior reading committed, root clean, zero-byte brief and all jobs consumed.
   Scope: `dart/test/native_pipeline_trace_test.dart` lines 4-182; `dart/test/primary_cli_test.dart` lines 1-303; `dart/test/progressive_span_dispatch_contract_test.dart` lines 1-614; `dart/test/punctuation_light_zero_arg_contract_test.dart` lines 1-188; `dart/test/recognition_transaction_contract_test.dart` lines 1-216
   Baseline evidence: 1500 fragments / 48485 bytes; ordered range SHA-256 `9c7110f9999de79d39fcbef6563d11e3074fa8cc0f1225ea72acde4a08d9b964`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact scoped bytes/current deltas; native trace, primary CLI, progressive, zero-argument and recognition Dart tests; neutral progressive/zero-argument/recognition contracts; prior evidence preservation, Knowledge, doctrines, histories, mdBook, memory and staged scope/whitespace.
+  Canonical trigger: `none` — bounded required reading and documentation; no source, contract or infrastructure changes.
+  Comprehension: Native pipeline tests reuse one emitter across loader/frontend/function/staged/compiler/runtime, compare compiled/result JSON and balanced scopes, keep disabled tracing quiet and preserve structured validation errors; temporary roots follow managed TMPDIR. CLI tests cover exact help/options, removed global mode, compile-before-input ordering, phase-owned malformed UTF-8, BOM/newline preservation, named lookup order, top-rule override, nested JSON, exact low trace, routed emoji reset and setup failure. Progressive consumer pins the complete neutral inventory but keeps v1 staged registry separate, requires one logical-only dedicated node, rejects malformed/static recognition forms and live transactions, starts fresh opaque host seeds, proves native/reconstructed/generated results and strictly analyzes/runs one emitted source in the current package. Punctuation aliases compare semantic ASTs with source metadata removed, retain variable/exclusion boundaries and preserve known contains-without-needle zero; emission reconstructs embedded state only. Recognition prefix pins current 138/250/58 and nine completed legs, isolates same-label invocation/mark generations and starts the eight-positive-token loop.
+  Findings: No new confirmed defect. Known trace overflow .2.3, recognition effect integration .2.4, private nested progressive authority startup .37 and contains arity backlog .5 are not closed by these covered fixtures. Progressive emission uses the current package, not a newly resolved external package; punctuation emission is state reconstruction only. All source-repair gates remain.
+  Verification: Read native trace 4-182 through EOF, primary CLI 1-303 through EOF in 152/151-line outputs, progressive 1-614 through EOF in 205/205/204-line outputs, punctuation 1-188 through EOF and recognition 1-216: exact 1,500 fragments / 48,485 baseline-identical bytes and ordered digest. All 39 selected tests pass, including progressive and existing recognition emitted consumers; unread recognition implementation remains .1.43. Progressive neutral is 9/9 complete/116 mutations plus public 6/12/10/60; punctuation is 6 standalone/4 receiver/6 invalid with exact fixture; recognition is 138 ActionIR/250 calls/58 mutations, 9/9 complete, public 3/26/45 and guide 1/14/18. No full process CLI matrix or other runtime is rerun. Full coverage/preservation, Knowledge/book/memory/histories, whitespace/staged scope and commit-hook doctrines govern this focused commit.
+  Commit: `DART-STARTUP-READING.1.42 - read trace CLI and progressive consumers`
 
 - ID: `DART-STARTUP-READING.1.43`
   Status: `pending`
@@ -1396,7 +1402,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.42` | `pending` | Continue native trace, primary CLI, progressive, zero-argument and recognition test reading. After .1.41 commit/brief/clean proof; repair gates remain. |
+| 1 | `DART-STARTUP-READING.1.43` | `pending` | Continue recognition, recursive observation and repeated-action result test reading. After .1.42 commit/brief/clean proof; repair gates remain. |
 
 ## Decisions
 
@@ -1421,6 +1427,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-10`: Dart .1.42 completes native trace, primary CLI, progressive and zero-argument tests and reads recognition through 216: 1,500 fragments / 48,485 baseline-identical bytes. All 39 selected tests and three neutral contracts pass, including independent emitted consumers. No new defect; trace .2.3, recognition .2.4, progressive startup .37 and helper-arity backlog .5 retain their repair owners. Reading reaches 42/55 children, 61,028 fragments / 1,881,579 bytes.
 
 - `2026-09-10`: Dart .1.41 finishes MCP admission, dispatch and stdio tests and reads three native-trace import lines: 1,500 fragments / 48,287 baseline-identical bytes. All 17 selected MCP tests, neutral transport/admission and binding freshness pass. No new defect; Unicode key ordering .2.5, earlier repairs and CI .80/.81 remain owned and gated. Reading reaches 41/55 children, 59,528 fragments / 1,833,094 bytes.
 
@@ -1507,6 +1515,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- `.1.42`: `DART-STARTUP-READING.1.42 - read trace CLI and progressive consumers`.
+
 - `.1.41`: `DART-STARTUP-READING.1.41 - complete MCP dispatch and stdio reading`.
 
 - `.1.40`: `DART-STARTUP-READING.1.40 - complete mutation and MCP contract reading`.
@@ -1590,6 +1600,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-10`: Completed .1.42 from clean 0e832ae4; trace/CLI/progressive/zero-argument complete, recognition through 216; next .1.43.
 
 - `2026-09-10`: Completed .1.41 from clean d2fa7b4d; MCP consumers complete, native trace imports through 3; next .1.42.
 

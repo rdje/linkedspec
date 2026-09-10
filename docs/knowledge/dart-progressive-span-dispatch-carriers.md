@@ -57,3 +57,18 @@ fixture or behavior; it promotes only Dart's private admission and rollout row.
 - Historical RED: [[dart-progressive-span-dispatch-dormant-red]].
 - Neutral model: [[progressive-span-dispatch-audit-plan]].
 - Owner: [[FUTURE-PARITY-BACKLOG.14]] `.14.6.4.2`.
+
+## September 10 complete admitted carrier-consumer reading
+
+`DART-STARTUP-READING.1.42` reads all 614 consumer lines; all seven groups pass within
+the selected 39-test suite. Current neutral proof is nine completed legs/zero pending,
+116 mutations and public 6/12/10/60; earlier pending rollout counts above are historical.
+
+The source pins the staged-registry exclusion, exclusive logical node, malformed forms,
+static recognition restriction, live-token defense, missing authority and fresh host seeds.
+Native, reconstructed and generated-plan routes share the expected detached value without
+advancing the parent cursor. A separately emitted module is strictly analyzed and directly
+executed in the current package under an owned .dart_tool directory, then removed. This is
+not fresh external package resolution or paired traced execution. Callback authority is
+provided by its host; it is absent from emitted metadata. The existing nested delegation
+qualification remains [[dart-progressive-nested-authority-gap]] under startup .37.

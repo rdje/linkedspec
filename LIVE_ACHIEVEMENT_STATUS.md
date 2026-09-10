@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart .1.41 finishes MCP admission, dispatch and stdio tests and reads three native-trace import lines: 1,500 fragments / 48,287 baseline-identical bytes. All 17 selected MCP tests, neutral transport/admission and binding freshness pass. No new defect; Unicode key ordering .2.5, earlier repairs and CI .80/.81 remain owned and gated. Reading is 41/55 children, 59,528 fragments / 1,833,094 bytes. Capacities and CI intake remain committed; next Dart .1.42. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart .1.42 completes native trace, primary CLI, progressive and zero-argument tests and reads recognition through 216: 1,500 fragments / 48,485 baseline-identical bytes. All 39 selected tests and three neutral contracts pass, including independent emitted consumers. No new defect; trace .2.3, recognition .2.4, progressive startup .37 and helper-arity backlog .5 retain their repair owners. Reading is 42/55 children, 61,028 fragments / 1,881,579 bytes. Capacities and CI intake remain committed; next Dart .1.43. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.81` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `DART-STARTUP-READING.1.41` — Dart .1.41 finishes MCP admission, dispatch and stdio tests and reads three native-trace import lines: 1,500 fragments / 48,287 baseline-identical bytes. All 17 selected MCP tests, neutral transport/admission and binding freshness pass. No new defect; Unicode key ordering .2.5, earlier repairs and CI .80/.81 remain owned and gated.
+- `DART-STARTUP-READING.1.42` — Dart .1.42 completes native trace, primary CLI, progressive and zero-argument tests and reads recognition through 216: 1,500 fragments / 48,485 baseline-identical bytes. All 39 selected tests and three neutral contracts pass, including independent emitted consumers. No new defect; trace .2.3, recognition .2.4, progressive startup .37 and helper-arity backlog .5 retain their repair owners.
 
 ## Next Action
 
-- `DART-STARTUP-READING.1.42` — Continue native trace, primary CLI, progressive, zero-argument and recognition test reading. Earlier repairs and parked ideas retain their gates.
+- `DART-STARTUP-READING.1.43` — Continue recognition, recursive observation and repeated-action result test reading. Earlier repairs and parked ideas retain their gates.
 
 ## Recent Completions
+
+- `2026-09-10` — `DART-STARTUP-READING.1.42` reads 1,500 fragments / 48,485 bytes; all 39 tests and progressive/zero-argument/recognition neutral checks pass; no new defect.
 
 - `2026-09-10` — `DART-STARTUP-READING.1.41` reads 1,500 fragments / 48,287 bytes; all 17 MCP tests, neutral transport/admission and binding freshness pass; no new defect.
 
@@ -48,8 +50,6 @@
 - `2026-09-10` — `DART-STARTUP-READING.1.30` reads 1,500 fragments / 43,400 bytes; all 28 tests and semantic 6/20/128 checks pass; nine controls extend .67 and own regex correlation .2.20.
 
 - `2026-09-10` — `DART-STARTUP-READING.1.29` reads 1,500 fragments / 37,172 bytes; eleven tests and semantic 6/20/128 checks pass; Unicode/scaffold complete, call projection through 347; no new defect.
-
-- `2026-09-10` — `DART-STARTUP-READING.1.28` reads 1,500 fragments / 38,936 bytes; fresh Unicode generation/12 neutral fixtures pass; lower table complete and upper through U+A76F; no new defect.
 
 ## History
 

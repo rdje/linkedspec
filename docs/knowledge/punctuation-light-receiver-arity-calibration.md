@@ -51,3 +51,12 @@ explicitly compares bare and parenthesized contains results and requires numeric
 claim the Perl-reference arity defect is fixed. The consumer also executes a generated plan and
 inspects emitted source, without compiling a standalone emitted child. No native test is rerun by
 this reading checkpoint; FUTURE-PARITY-BACKLOG.5 remains the existing helper-normalization owner.
+
+## September 10 Dart consumer reading
+
+`DART-STARTUP-READING.1.42` reads all 188 Dart consumer lines; its five tests pass within
+the selected 39-test suite. Standalone/terminal aliases compare typed semantic ASTs after
+removing source metadata, retain identifiers and reject excluded forms. Both missing-needle
+contains spellings are explicitly required to return zero; backlog .5 remains the repair
+owner. Native/generated-plan execution and reconstruction of emitted base64 state pass.
+This consumer does not independently analyze or execute emitted source, or invoke the CLI.

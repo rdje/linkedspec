@@ -46,3 +46,12 @@ complete shared process matrix.
 Related facts: [[canonical-primary-cli-trace-protocol]], [[dart-trace-controls-sinks]],
 [[dart-primary-cli-native-execution-canonical-json]], [[user-observable-backend-cli-parity-contract]],
 [[dart-primary-cli-closeout]].
+
+## September 10 complete adapter-consumer reading
+
+`DART-STARTUP-READING.1.42` reads all 303 primary CLI test lines. Its eleven adapter tests
+pass within the selected 39-test suite: exact help/options, removed global-mode guidance,
+compile-before-input ordering, phase-owned malformed UTF-8, BOM/newlines, named resolution,
+top-rule override/nested JSON, exact low trace, routed emoji/reset and setup failure.
+These direct adapter calls do not rerun the complete shared process matrix. Numeric
+overflow .2.3 remains owned by [[dart-primary-cli-trace-overflow]].
