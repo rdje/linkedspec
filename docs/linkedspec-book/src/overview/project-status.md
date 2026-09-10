@@ -89,7 +89,7 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed forty-seven of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed forty-eight of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
 parser bridge, function-shell projection, bounded child-parse authority, generated rule plan,
@@ -102,9 +102,10 @@ inter-match-gap, logical-helper, receiver-mutation, MCP, native pipeline trace, 
 progressive, punctuation-light, recognition, recursive-observation, repeated-action,
 root-selection, rule-local cursor, interpreter, matching, scalar-text, self-hosted
 Unicode, call-projection, compilation-foundation and query tests are complete.
-Observation-route reading reaches line 240. This covers 68,528 fragments /
-2,104,165 bytes. The current 30-test selection and semantic/Unicode neutral checks
-pass; the preceding interpreter leaf passed 68 tests and its three neutral checks.
+Observation-route, runtime-capture, observed-index, source-foundation and static-graph
+tests are also complete; admission reading reaches line 166. This covers 70,028 fragments /
+2,153,102 bytes. The current 24-test selection and semantic neutral checks pass;
+earlier matching/Unicode/interpreter consumer results remain in their completed leaves.
 
 Interpreter tests confirm explicit cursor rewinds and stack restoration, capture
 boundaries, typed values, dense nested writes, helper composition, scoped callback
@@ -122,9 +123,9 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading continues
-in child `.1.48` after the clean .1.47 handoff. Startup `.3.4` remains pending.
+in child `.1.49` after the clean .1.48 handoff. Startup `.3.4` remains pending.
 
-**Dart consumer reading through child 47:** matching now has complete physical
+**Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
 structural-regex fixtures. The scalar-text and current self-hosted Unicode grammar
 consumers are also read. Semantic tests separately check compilation outcomes,
@@ -133,12 +134,28 @@ nineteen static response digests and twenty-six malformed JSON requests.
 
 The 30 selected tests pass, including the existing standalone emitted observation
 test, with the semantic and Unicode neutral checks. Observation-route reading ends
-at line 240 inside the emitted child program; child .1.48 reads the remainder.
+at line 240 inside the emitted child program; child .1.48 now completes the remainder.
 These fixture results retain the previously documented call-projection, non-JSON
 query-rejection and action-mediated observer-error limitations. Construction,
 querying and runtime observation remain separate APIs; no new MCP capability or
-runtime behavior is introduced. Reading reaches 47/55 children, 68,528 fragments /
-2,104,165 bytes; .1.48 is next after the clean committed handoff.
+runtime behavior was introduced. That leaf reached 47/55 children, 68,528 fragments /
+2,104,165 bytes before the child 48 evidence below.
+
+**Dart semantic consumer reading through child 48:** runtime capture, observed-index
+derivation, strict source mapping and static graph tests are fully read. Observed
+snapshots validate retained event sequences against static selector/slot ownership
+and preserve the base index. Source tests cover UTF-8 and Unicode-scalar positions,
+CRLF, malformed inputs, ordered lookup, detached values and disclosure ceilings.
+Static tests distinguish the original compiler diagnostic from normalized semantic
+evidence and keep repeated lifecycle occurrences separate.
+
+All 24 selected tests pass, including the standalone emitted observer test and the
+existing twelve-role admission consumer; neutral semantic checks remain 6 fixture
+groups, 20 exact queries and 128 rejected mutations. The emitted harness requires
+successful offline resolution, analysis and child execution before comparing results.
+Physical reading stops at admission line 166; `.1.49` reads its remaining roles and
+helpers. No runtime or MCP change or prior-defect closure is inferred from these
+fixture results. Reading is 48/55 children, 70,028 fragments / 2,153,102 bytes.
 
 **Approved engineering-history capacity:** the director approved collection files
 27→28 and manifest rows 26→27. Containment `.11` and ADR0113 implement those two
@@ -184,7 +201,7 @@ in 2.25 seconds. That sample locates a pre-main wait without establishing its OS
 or a remedy. The older macOS 26.5.2 closeout does not resolve this macOS 26.6.2 observation.
 The evidence and repair criteria are logged by `SESSION-STARTUP-READING.80.0`; source
 changes remain behind the existing startup prerequisites. The intake is committed at
-`eaf4331e`; approved containment .11 is committed at `ad64f76f`; `.1.48` follows completed `.1.47`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
+`eaf4331e`; approved containment .11 is committed at `ad64f76f`; `.1.49` follows completed `.1.48`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
 
 **Known Dart limitation — null named selectors in reconstructed state:** a programmatically
 reconstructed target with these fields is incorrectly accepted:

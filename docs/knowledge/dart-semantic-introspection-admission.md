@@ -38,3 +38,15 @@ admission mutation now targets Julia, so no later backend can promote without it
 
 Related facts: [[semantic-introspection-neutral-contract]], [[dart-semantic-introspection-authority-map]],
 [[dart-semantic-query-public-api]], and [[dart-semantic-runtime-observation-authority-map]].
+
+## September 11 admission consumer prefix reading
+
+Dart .1.48 reads the admission consumer 1-166. Its dispatcher pins twelve ordered
+roles, denies repeats, awaits each role and verifies exact consumer/driver/role
+registration plus completed Dart admission/rollout. The prefix covers byte/text
+normalization, compiled/failed snapshots and direct capture, then starts loaded
+and JSON-reconstructed capture. The remaining role implementations and helpers
+belong to .1.49. The complete existing consumer passes within the 24-test focused
+suite; physical coverage remains distinct from execution. Neutral checks report
+current six groups / twenty exact queries / 128 mutations, rollout 9/0 and
+admission 6/0; the historical July admission counts above remain dated evidence.

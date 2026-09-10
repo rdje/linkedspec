@@ -352,3 +352,15 @@ Public typed/raw query proof locks 19 static digests and 26 malformed JSON cases
 Those JSON cases do not close .2.21 non-JSON rejection evidence; earlier .2.20
 and startup .67/.70 keep separate call/source-correlation ownership. All 30
 selected tests and neutral semantic 6/20/128 pass; no API or MCP change lands.
+
+## September 11 source and static consumer completion
+
+Dart .1.48 reads semantic_index_source_foundation_test.dart and
+semantic_index_static_graph_test.dart through EOF. Strict copied input,
+UTF-8/scalar/CRLF boundaries, ordered lookup, ceilings and early malformed-input
+and options diagnostics are executable checks. Static oracle comparisons keep
+native foundation failure distinct from normalized projection, remove runtime
+records before observation and distinguish repeated lifecycle occurrences.
+Detached mutation and textual forbidden-owner assertions supplement those fixtures.
+All 24 selected tests and semantic 6/20/128 pass; prior query and source-correlation
+defects remain open, with no new API claim.

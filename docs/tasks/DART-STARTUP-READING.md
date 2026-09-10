@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / .1.47 complete; next .1.48
+- Status: `active` / .1.48 complete; next .1.49
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-11`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 47/55 children, 68,528/80,297 fragments and 2,104,165/2,471,305 bytes; eighty-six entries through EOF
-  plus semantic_index_runtime_observation_routes_test.dart through line 240. Exact credit and comprehension remain in each completed node.
+- Current reading: 48/55 children, 70,028/80,297 fragments and 2,153,102/2,471,305 bytes; ninety-one entries through EOF
+  plus semantic_introspection_dart_admission_test.dart through line 166. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -818,14 +818,19 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.47 - read matching and semantic consumer contracts`
 
 - ID: `DART-STARTUP-READING.1.48`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 48 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.47` committed; empty brief and clean repository.
+  Activation: Clean `af15ee1c818ea50bd63eab84bfb9938e2ef59869`; prior leaf committed, brief empty, root clean and all jobs consumed.
   Scope: `dart/test/semantic_index_runtime_observation_routes_test.dart` lines 241-462; `dart/test/semantic_index_runtime_observation_test.dart` lines 1-284; `dart/test/semantic_index_runtime_projection_test.dart` lines 1-281; `dart/test/semantic_index_source_foundation_test.dart` lines 1-299; `dart/test/semantic_index_static_graph_test.dart` lines 1-248; `dart/test/semantic_introspection_dart_admission_test.dart` lines 1-166
   Baseline evidence: 1500 fragments / 48937 bytes; ordered range SHA-256 `8ad7fb9cc1bf8824d136e740381789ad3cb097cc6ba3bb6f0856a909e44deb07`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact range/digest and complete baseline identity; selected observation/source/static consumers and direct neutral semantic contract; Knowledge, histories, book, all doctrines and preservation.
+  Canonical trigger: `None for this bounded required-reading leaf; no runtime, public contract or infrastructure change. Escalate if focused evidence exposes cross-cutting uncertainty.`
+  Comprehension: The emitted observer harness requires exit0 for offline pub get, fatal analysis and execution, checks direct/traced result, trace/diagnostic and callback identity, validates exact events/digest/exit omission and removes its owned scratch. Native capture covers direct/loaded/reconstructed/generated-plan/traced entries and Unicode positions. Observed-index derivation locks detached base/results, malformed-event rejection and static selector ownership. Source tests check strict byte/text, scalar/CRLF coordinates, ceilings and deterministic early failures; static tests separate raw foundation diagnostics from normalized oracle evidence and occurrence-specific lifecycle shapes. Admission prefix defines exactly twelve ordered roles, verifies registration/rollout, reads source/compiled/failed/direct and starts loaded/reconstructed runtime; .1.49 owns the remainder.
+  Verification: Physically read observation routes241-462 EOF; observation1-150/151-284 EOF; projection1-155/156-281 EOF; source1-164/165-299 EOF; static1-248 EOF; admission1-166. Exact1500 fragments/48937 bytes and digest pass; all115 baseline paths remain identical. All24 tests from six selected files pass, including existing standalone emitted execution and twelve-role admission; no unread suffix credit is inferred. Neutral semantic passes6 groups/20 exact queries/128 mutations, rollout9/0 and admission6/0. Prior action-wrapped observer .2.8, non-JSON query .2.21 and source-correlation owners remain open. Coverage/preservation, Knowledge/book/memory/histories, diff hygiene and all doctrines govern the focused commit.
+  Commit: `DART-STARTUP-READING.1.48 - read semantic observation and source consumers`
 
 - ID: `DART-STARTUP-READING.1.49`
   Status: `pending`
@@ -1445,7 +1450,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.48` | `pending` | Read remaining observation routes and runtime/source/static semantic consumers after clean .1.47; preserve all reading and repair gates. |
+| 1 | `DART-STARTUP-READING.1.49` | `pending` | Finish semantic admission, then smoke, source-boundary aliases and source-emitter prefix after clean .1.48; preserve required reading and repair gates. |
 
 ## Decisions
 
@@ -1476,6 +1481,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-11` .1.48: Dart .1.48 completes observation-route, runtime-capture, observed-index, source-foundation and static-graph consumers, then reads admission through line 166: 1,500 fragments / 48,937 baseline-identical bytes. All 24 selected tests and semantic 6/20/128 checks pass, including existing emitted execution and the twelve-role admission consumer. Earlier defects remain open; no source, runtime or MCP change. Cumulative48/55,70028 fragments/2153102 bytes,91 EOF plus admission166; no new defect or repair.
 
 - `2026-09-11` .1.47: Dart .1.47 completes matching, scalar-text, self-hosted Unicode, call-projection, compilation-foundation and query consumers, then reads observation routes through240: 1,500 fragments / 50,626 baseline-identical bytes. All 30 selected tests and semantic/Unicode neutral checks pass, including the existing isolated emitted observer test. Prior query/call/observer defects remain open; no source or MCP behavior changes. Cumulative47/55,68528 fragments/2104165 bytes,86 EOF plus observation routes240; all baseline and prior-evidence checks pass.
 
@@ -1576,6 +1583,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- .1.48: `DART-STARTUP-READING.1.48 - read semantic observation and source consumers`.
+
 - .1.47: `DART-STARTUP-READING.1.47 - read matching and semantic consumer contracts`.
 
 - `.1.46`: `DART-STARTUP-READING.1.46 - complete interpreter consumer reading`.
@@ -1671,6 +1680,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-11`: .1.48 completes semantic observation/source/static consumer reading and starts admission; next .1.49 after clean focused commit. Prior evidence and repair gates remain.
 
 - `2026-09-11`: .1.47 completes matching/scalar/Unicode/semantic consumer reading through the bounded observation prefix; next .1.48 after clean focused commit. No repair or new runtime claim.
 

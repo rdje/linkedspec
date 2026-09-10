@@ -10,6 +10,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — emitted observation proof and source authority
+
+Dart .1.48 reads the emitted harness through successful offline resolution, analysis,
+child execution, event/digest comparison and cleanup. Source and static consumers
+separate strict decoding/coordinates, disclosure ceilings and native-versus-normalized
+failure evidence. All 24 tests pass, including twelve-role admission; admission source
+reading stops at 166. Prior callback/query/correlation defects remain separately owned.
+
 ## 2026-09-11 — semantic consumer evidence boundaries
 
 Dart .1.47 separates compiled outcomes, private projection oracles, public snapshot

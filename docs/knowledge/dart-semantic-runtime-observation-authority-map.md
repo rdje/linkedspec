@@ -149,3 +149,17 @@ child program and parent process checks receive reading credit only in .1.48.
 The full existing test runs successfully within the 30-test selection, including
 standalone emitted direct/traced observation. This does not close the separate
 native action-mediated callback-wrapping defect .2.8 or prove an MCP route.
+
+## September 11 observer consumer completion
+
+Dart .1.48 completes semantic_index_runtime_observation_routes_test.dart through
+462, runtime observation through 284 and runtime projection through 281. The
+emitted harness requires successful offline pub get, fatal analysis and child
+execution, then checks result/trace/diagnostic equivalence, exact events and
+twentieth digest, callback error/stack identity, exit omission and scratch cleanup.
+Native direct/loaded/reconstructed/generated/traced entries and Unicode cursor
+positions retain the same typed sink. Derived indexes reject malformed sequences
+and non-owning selector/slot pairs, detach input/output and preserve the base.
+All 24 selected tests pass, including standalone emitted observation and the
+existing admission consumer. These controlled routes do not close .2.8's
+separate action-mediated wrapper failure or establish an MCP execution surface.

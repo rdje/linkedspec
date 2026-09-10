@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — DART-STARTUP-READING.1.48 - read semantic observation and source consumers
+
+Complete five semantic consumer files and read admission through line 166: 1,500
+fragments / 48,937 baseline-identical bytes. All 24 selected tests and semantic
+6/20/128 checks pass, including existing emitted execution and twelve-role admission.
+No unread suffix credit, new defect or source change. Next .1.49 after clean landing.
+
 ## 2026-09-11 — DART-STARTUP-READING.1.47 - read matching and semantic consumer contracts
 
 Complete the seven bounded consumer ranges: 1,500 fragments / 50,626 baseline-identical

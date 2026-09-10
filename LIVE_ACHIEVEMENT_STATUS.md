@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart .1.47 completes matching, scalar-text, self-hosted Unicode, call-projection, compilation-foundation and query consumers, then reads observation routes through240: 1,500 fragments / 50,626 baseline-identical bytes. All 30 selected tests and semantic/Unicode neutral checks pass, including the existing isolated emitted observer test. Prior query/call/observer defects remain open; no source or MCP behavior changes. Reading is 47/55 children, 68,528 fragments / 2,104,165 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart .1.48 completes observation-route, runtime-capture, observed-index, source-foundation and static-graph consumers, then reads admission through line 166: 1,500 fragments / 48,937 baseline-identical bytes. All 24 selected tests and semantic 6/20/128 checks pass, including existing emitted execution and the twelve-role admission consumer. Earlier defects remain open; no source, runtime or MCP change. Reading is 48/55 children, 70,028 fragments / 2,153,102 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.81` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `DART-STARTUP-READING.1.47` — Dart .1.47 completes matching, scalar-text, self-hosted Unicode, call-projection, compilation-foundation and query consumers, then reads observation routes through240: 1,500 fragments / 50,626 baseline-identical bytes. All 30 selected tests and semantic/Unicode neutral checks pass, including the existing isolated emitted observer test. Prior query/call/observer defects remain open; no source or MCP behavior changes.
+- `DART-STARTUP-READING.1.48` — Dart .1.48 completes observation-route, runtime-capture, observed-index, source-foundation and static-graph consumers, then reads admission through line 166: 1,500 fragments / 48,937 baseline-identical bytes. All 24 selected tests and semantic 6/20/128 checks pass, including existing emitted execution and the twelve-role admission consumer. Earlier defects remain open; no source, runtime or MCP change.
 
 ## Next Action
 
-- `DART-STARTUP-READING.1.48` — activate from clean HEAD; finish observation-route reading, then runtime/source/static semantic consumers. All prior gates remain.
+- `DART-STARTUP-READING.1.49` — finish admission, then smoke, source-boundary aliases and source-emitter prefix after the clean .1.48 handoff.
 
 ## Recent Completions
+
+- `2026-09-11` — `DART-STARTUP-READING.1.48` reads 1,500 fragments / 48,937 bytes; 24 tests and semantic 6/20/128 checks pass; no new defect.
 
 - `2026-09-11` — `DART-STARTUP-READING.1.47` reads1500 fragments/50626 bytes; 30 tests and semantic/Unicode neutral checks pass; no new defect.
 
@@ -48,8 +50,6 @@
 - `2026-09-10` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.10` admits exactly three approved history controls; 218-line preservation, full reconstruction and 22 actual-validator executions pass; canonical proof governs landing.
 
 - `2026-09-10` — `DART-STARTUP-READING.1.36` reads 1,500 fragments / 48,187 bytes; all 38 tests and callable contract checks pass, including fresh offline emitted execution; no new defect.
-
-- `2026-09-10` — `DART-STARTUP-READING.1.35` reads 1,500 fragments / 44,700 bytes; all 35 tests and gap/duplicate checks pass; ten reconstructed controls own null named-selector .2.23.
 
 ## History
 
