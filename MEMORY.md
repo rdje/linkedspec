@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `4d2b242799b74db387eb5c010bb2e83bd923360b` — clean .1.44 handoff before Dart .1.45.
-- latest_completed_leaf: `DART-STARTUP-READING.1.45 - complete cursor consumer reading`.
+- activation_commit: `db762cd7b35b83243467dd117e7e965072e1ddf6` — clean .1.45 handoff before Dart .1.46.
+- latest_completed_leaf: `DART-STARTUP-READING.1.46 - complete interpreter consumer reading`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: `DART-STARTUP-READING.1.46` — Continue bounded runtime interpreter test reading from line 408.
+- next_action: `DART-STARTUP-READING.7` — director decision on engineering history files27→28 and manifest lines26→27; exact proposal in docs/knowledge/dart-reading-next-engineering-history-capacity.md.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
-- blockers: Startup `.7` blocks recovery/purge; engineering-history .5 approval is implemented under containment .9 / ADR0111; prior change-history approval remains under .8 / ADR0110. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.81` precede mutation setup; `.29` belongs to `.5`. Prior narrow exceptions stay approved; Dart .6 approval is implemented under containment .10 / ADR0112, with all earlier history preserved.
+- blockers: Dart .7 capacity decision precedes .1.47; Startup `.7` blocks recovery/purge; engineering-history .5 approval is implemented under containment .9 / ADR0111; prior change-history approval remains under .8 / ADR0110. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.81` precede mutation setup; `.29` belongs to `.5`. Prior narrow exceptions stay approved; Dart .6 approval is implemented under containment .10 / ADR0112, with all earlier history preserved.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -57,4 +57,4 @@
   Segment 4981-5a6450db0974 preserves 218 lines / 32,108 bytes; every other ceiling remains unchanged.
 - current_ci_build_reuse: Startup .80.1-.4 own correct PGEN/RGX reuse; 11 visible test-build stages total 4,682 seconds.
   Exact fingerprint and warm-run repair proof remain pending; source changes retain startup prerequisites.
-- latest_bootstrap_read: 2026-09-10 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart 45/55 children, 65,528 fragments / 2,014,247 bytes. All 75 selected tests and the neutral cursor check pass; no new defect; next .1.46.
+- latest_bootstrap_read: 2026-09-10 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart 46/55 children, 67,028 fragments / 2,053,539 bytes. All 68 selected tests and three neutral checks pass; stale nested-write fact corrected, no new runtime defect; .7 capacity decision before .1.47.

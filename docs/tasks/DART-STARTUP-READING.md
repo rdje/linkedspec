@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / .1.45 complete; next .1.46
+- Status: `active` / .1.46 complete; .7 decision before .1.47
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-10`
@@ -56,15 +56,15 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 45/55 children, 65,528/80,297 fragments and 2,014,247/2,471,305 bytes; seventy-nine entries through EOF
-  plus runtime_interpreter_test.dart through line 407. Exact credit and comprehension remain in each completed node.
+- Current reading: 46/55 children, 67,028/80,297 fragments and 2,053,539/2,471,305 bytes; eighty entries through EOF
+  plus runtime_matching_test.dart through line 86. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
 - ID: `DART-STARTUP-READING`
   Status: `active`
   Goal: Complete bounded Dart reading and durable repair intake while preserving startup prerequisite ownership.
-  Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`
+  Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`
 
 - ID: `DART-STARTUP-READING.0`
   Status: `done`
@@ -785,14 +785,22 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.45 - complete cursor consumer reading`
 
 - ID: `DART-STARTUP-READING.1.46`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 46 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.45` committed; empty brief and clean repository.
+  Activation: Clean `db762cd7b35b83243467dd117e7e965072e1ddf6`; prior reading committed, root clean, zero-byte brief and all jobs consumed.
   Scope: `dart/test/runtime_interpreter_test.dart` lines 408-1821; `dart/test/runtime_matching_test.dart` lines 1-86
   Baseline evidence: 1500 fragments / 39292 bytes; ordered range SHA-256 `3f375018241ada715ebede846b8f23a8eff225c44ab7717ee258974271afcc3f`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact scoped bytes/current deltas; runtime interpreter and matching Dart tests, plus direct-dependent contract proof when warranted by the read source; prior evidence preservation, Knowledge, doctrines, histories, mdBook, memory and staged scope/whitespace.
+  Canonical trigger: `none` — bounded required reading and documentation; no source, contract or infrastructure changes.
+  Finding ownership: This leaf owns correction of the stale current nested-write paragraph/status in dart-runtime-core-value-capture-helpers. The dated July 13 fact predates write-vivification-dart-runtime September 2; runtime_interpreter_test 732-789 now expects dense missing-root/intermediate creation. Preserve historical prose while making the current answer point to admitted write-vivification semantics; verify with the existing named regression and neutral contract. No runtime repair or scope pivot.
+  Comprehension: Interpreter suffix completes repetition lifecycle order, explicit rewind/save-restore semantics, non-consuming capture boundaries, capture slices and ordinary BMP character helpers. It covers dense missing-root/intermediate writes and detached snapshots, named captures, string/regex/numeric aliases, the 55-case scalar contract, array/hash pure-versus-mutation boundaries, value/marker controls, callback traversal and binding restoration, pure user-function argument isolation/arity/recursion diagnostics, exact selection and callable failures, absent versus zero-width matches and exact pure/position/control/anonymous/named fixtures. Matching prefix tests seek/consume, authored tie and duplicate-slot identity, compiled regex lists, and begins astral capture assertions through 86. These two consumers execute native runtime/matcher routes only; passing normal numeric/Unicode/callback cases does not close earlier overflow, astral-helper, mixed-control or callback-identity defects.
+  Capacity intake: .7 owns the next mandatory engineering archive; exact governed draft and 22 real-validator boundary checks pass, all 62 prior history files are restored, and a complete concise dated note lets this verified reading commit before waiting. No limit increase or pivot is applied.
+  Findings: Corrected the stale current core-helper fact denying dense nested-write creation; retained the superseded paragraph as dated history and routed current semantics to the admitted September authority. No new runtime defect or repair completion is inferred from passing existing fixtures.
+  Verification: Read interpreter 408-643, 644-879, 880-1115, 1116-1351, 1352-1587 and 1588-1821 EOF, then matching 1-86. Exact 1,500 fragments / 39,292 baseline-identical bytes and ordered scope digest pass. All 68 tests in the two selected files pass. Neutral write proof is 5 valid/7 invalid syntax, 11 successes, 16 structural and three evaluation failures, three read exclusions, eight compositions and 105 rejected mutations; numeric is 55 cases/18 helpers; named marks seven helpers/three mutations. The full matching file runs but its unread suffix receives no reading credit. The current July helper fact wrongly denied missing-container creation; the September write-vivification authority and existing dense-write regression establish its correction. Prior prose is retained as dated history. Full coverage/preservation, Knowledge/book/memory/histories, whitespace/staged scope and commit-hook doctrines govern the focused commit.
+  Commit: `DART-STARTUP-READING.1.46 - complete interpreter consumer reading`
 
 - ID: `DART-STARTUP-READING.1.47`
   Status: `pending`
@@ -1416,11 +1424,22 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Verification: Director “Granted” approves exactly files31→32, manifest lines30→31 and bytes17039→17615. LIVE-DOCUMENT-PRESSURE-CONTAINMENT.10 implements from clean e55f7703 under indexed ADR0112 with fresh source/range/hash/count, complete prior-history retention, 22 actual-validator executions and exact staged canonical proof. The .1.36 draft remains historical evidence; no further capacity is authorized.
   Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.10 - admit approved change-history member` (intake closed by its separately owned implementation)
 
+- ID: `DART-STARTUP-READING.7`
+  Status: `pending`
+  Goal: Obtain and route the next engineering-history capacity decision before further committed reading.
+  Dependencies: `.1.46` committed with empty brief and clean repository; director decision before an additional infrastructure allowance under ADR0111.
+  Scope: Proposal/intake only, owned by .1.46 discovery. Stable responsibility remains LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3; a separately owned canonical implementation requires approval and a clean repository.
+  Proposal: engineering_notes max_files 27 to 28 and manifest max_lines 26 to 27. The projected manifest is 16230/16384 bytes; all root, segment, aggregate, ownership, route and other controls remain unchanged. No further member is authorized.
+  Acceptance: Preserve every prior history byte and complete record; verify the actual governed draft against clean-source coordinates, bytes/hash, manifest order, full history and the actual routing validator. Record the director decision; if approved, create/index an exact-limit ADR and canonical implementation. No future slot, purge or parked-feature activation is granted.
+  Evidence: docs/knowledge/dart-reading-next-engineering-history-capacity.md pins the actual .1.46 rollover: clean db762cd7 DEVELOPMENT_NOTES247-457, 211 lines/24521 bytes, SHA-256 b29e3bd321a1357afe2e779c7e138986e96bef3258c4408d785fc06b11bb58f5. Draft manifest27/16230 and collection28/26074/2789760 reject exactly files28/27 and manifest lines27/26. Full archive reconstruction and all 62 prior history hashes pass; the verified uncommitted draft is restored. A complete 285-byte dated note leaves the root459/40321 with every earlier record preserved.
+  Verification: Exact source/count/hash, ordered manifest, full reconstruction, actual routing rejection and 22 production-predicate boundary executions pass. Director decision remains pending; no control or infrastructure implementation is applied.
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.46` | `pending` | Continue bounded runtime interpreter test reading from line 408. After .1.45 commit/brief/clean proof; repair gates remain. |
+| 1 | `DART-STARTUP-READING.7` | `pending` | Director decision on exactly engineering files27→28 and manifest lines26→27; verified proposal in docs/knowledge/dart-reading-next-engineering-history-capacity.md. Resume .1.47 after clean canonical capacity admission. |
 
 ## Decisions
 
@@ -1437,14 +1456,20 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Open Questions
 
+- `.7`: Approve exactly engineering_notes files27→28 and manifest rows26→27 for the next mandatory rollover? Other limits and all history remain unchanged.
+
 - None for source reading. The director approved .6; ADR0112 and containment .10 own its canonical implementation.
 
 ## Blockers
+
+- `.7`: Engineering history has no next member under ADR0111; the complete .1.46 note fits459/512 lines, but .1.47 waits for the exact proposal decision and canonical admission.
 
 - Engineering-history capacity .5 is admitted by containment .9 / ADR0111; change-history .6 is admitted by .10 / ADR0112. No capacity decision remains at this boundary. Source repairs .2.1-.2.23 remain gated.
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-10`: Dart .1.46 completes interpreter tests and reads matching through 86: 1,500 fragments / 39,292 baseline-identical bytes. All 68 selected tests and write/numeric/named-mark neutral checks pass. The stale current Knowledge answer about absent-container writes is corrected with its historical prose preserved. No new runtime defect; prior findings, CI .80/.81 and source-repair gates remain. Reading reaches 46/55 children, 67,028 fragments / 2,053,539 bytes.
 
 - `2026-09-10`: Dart .1.45 completes cursor admission, descriptor, execution and normalization consumers and reads interpreter tests through 407: 1,500 fragments / 41,762 baseline-identical bytes. All 75 selected tests and the neutral cursor check pass. No new defect; prior findings, CI .80/.81 and all source-repair gates remain. Reading reaches 45/55 children, 65,528 fragments / 2,014,247 bytes.
 
@@ -1539,6 +1564,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- `.1.46`: `DART-STARTUP-READING.1.46 - complete interpreter consumer reading`.
+
 - `.1.45`: `DART-STARTUP-READING.1.45 - complete cursor consumer reading`.
 
 - `.1.44`: `DART-STARTUP-READING.1.44 - complete root selection consumer reading`.
@@ -1630,6 +1657,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-10`: Completed .1.46 from clean db762cd7; interpreter complete, matching through 86; stale nested-write fact corrected and .7 capacity proposal owned before .1.47.
 
 - `2026-09-10`: Completed .1.45 from clean 4d2b2427; cursor consumers complete, interpreter through 407; next .1.46.
 

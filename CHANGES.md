@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-10 — DART-STARTUP-READING.1.46: interpreter consumers
+
+Read 1,500 fragments / 39,292 baseline-identical bytes; interpreter complete,
+matching through 86. All 68 tests and three neutral checks pass. Corrected the
+stale current nested-write Knowledge answer with history preserved. Exact next
+engineering archive proposal .7 is verified; no limits changed. Next .7 before .1.47.
+
 ## 2026-09-10 — DART-STARTUP-READING.1.45: cursor consumers
 
 Read 1,500 fragments / 41,762 baseline-identical bytes; cursor consumers complete,

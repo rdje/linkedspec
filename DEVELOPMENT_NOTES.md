@@ -10,6 +10,8 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-09-10: DART-STARTUP-READING.1.46 completes interpreter reading; 68 tests and write/numeric/mark checks pass. Corrected the stale nested-write Knowledge answer with history preserved. Exact next archive capacity is owned by .7; details remain in its task and Knowledge records.
+
 ## 2026-09-10 — cursor consumer proof
 
 Dart .1.45 completes cursor consumers and reads interpreter tests through 407. All 75 selected tests and neutral cursor governance pass. Generated-v2 execution is in-process; emitted admission remains source inspection. Descriptor reconstruction is normalized-AST recompilation, not descriptor input. Prior repairs remain open.

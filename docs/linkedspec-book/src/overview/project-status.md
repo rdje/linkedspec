@@ -89,7 +89,7 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed forty-five of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed forty-six of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
 parser bridge, function-shell projection, bounded child-parse authority, generated rule plan,
@@ -100,26 +100,35 @@ Package inputs, action-parser/action-contract, callable-codeblock, compiled-spec
 corpus, diagnostic-output, duplicate-slot, frontend/function-trace, function-registry,
 inter-match-gap, logical-helper, receiver-mutation, MCP, native pipeline trace, primary CLI,
 progressive, punctuation-light, recognition, recursive-observation, repeated-action,
-root-selection and rule-local cursor tests are complete. Interpreter tests reach line 407.
-This covers 65,528 fragments / 2,014,247 bytes. All 75 selected tests and the neutral
-cursor contract check pass.
+root-selection, rule-local cursor and interpreter tests are complete. Matching tests
+reach line 86. This covers 67,028 fragments / 2,053,539 bytes. All 68 selected tests
+and the write, scalar-numeric and named-mark neutral checks pass.
 
-Cursor policy follows each entered rule's family. For example, an AND parent can call
-an OR child that seeks past intervening text; an OR parent's seeking does not make an
-AND child seek. Live, normalized-AST and generated-v2 routes exercise all 36 family
-spellings and eight parent/child cases. Loaded traces identify policy at each entry.
+Interpreter tests confirm explicit cursor rewinds and stack restoration, capture
+boundaries, typed values, dense nested writes, helper composition, scoped callback
+bindings and structured failures. The 55-case numeric fixture and governed pure,
+position, marker and capture fixtures pass. These consumers exercise native routes;
+they do not independently build emitted parsers. Existing extreme-number, Unicode,
+control-flow and callback-identity defects remain open.
 
-Descriptor tests compare exact metadata and normalized edge order after direct
-compilation, normalized-AST reconstruction and file loading. Action edges publish
-their resolved regex index; blind edges publish null. This is an outward descriptor
-projection. These tests do not introduce a descriptor decoder or independently run an
-emitted parser module.
+**Corrected Knowledge answer — missing containers in nested writes:** the older core
+helper fact still described pre-vivification behavior. The current interpreter test
+creates `document["sections"][0]["title"] = "Intro"` from an absent root and checks
+the resulting nested structure. The Knowledge answer now points to the admitted
+write-vivification contract, with the superseded paragraph preserved as dated history.
+This correction changes documentation only.
 
-The interpreter prefix verifies collection, recursive rule-local state, child returns,
-self-closing slots, marks and repetition boundaries. The full interpreter test file
-passed, while its unread source remains assigned to later reading children. No new
-defect was confirmed. Child `.1.46` continues at interpreter line 408; startup `.3.4`
-remains pending.
+Matching tests confirm authored alternative identity for seek/consume and duplicate
+slots, then begin the astral capture case. The full matching suite passed; physical
+reading resumes in child `.1.47` after the capacity decision below. Startup `.3.4` remains pending.
+
+**Next continuity decision — engineering-history archive:** completed reading .1.46
+is ready to commit with every older record preserved. Its mandatory draft rollover
+needs exactly two count changes: collection files 27→28 and manifest rows 26→27.
+The projected manifest remains within 16,384 bytes, and all root, segment and
+aggregate limits remain unchanged. Exact source/hash/reconstruction checks and 22
+validator boundary cases pass; the draft is restored and no limit has changed.
+`DART-STARTUP-READING.7` owns this pending decision before reading .1.47.
 
 **Continuity capacity — approved history preservation:** the director approved one
 additional immutable archive member. Containment `.10` and ADR0112 admit exactly
@@ -145,7 +154,7 @@ in 2.25 seconds. That sample locates a pre-main wait without establishing its OS
 or a remedy. The older macOS 26.5.2 closeout does not resolve this macOS 26.6.2 observation.
 The evidence and repair criteria are logged by `SESSION-STARTUP-READING.80.0`; source
 changes remain behind the existing startup prerequisites. The intake is committed at
-`eaf4331e`; Dart reading continues at `.1.46`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
+`eaf4331e`; Dart .7 owns the capacity decision before reading `.1.47`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
 
 **Known Dart limitation — null named selectors in reconstructed state:** a programmatically
 reconstructed target with these fields is incorrectly accepted:

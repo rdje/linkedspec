@@ -69,3 +69,11 @@ public-alternation/native/reconstructed and Perl comparisons nevertheless prove
 literal corruption in [[dart-regex-quantifier-literal-corruption]]: the global
 lower-bound rewrite ignores escapes/classes. New .2.16 owns repair; existing
 regex-brace and other interpreter owners remain unchanged.
+
+## September 10 matching-consumer prefix reading
+
+`DART-STARTUP-READING.1.46` reads test lines 1-86. The full interpreter/matching
+selection passes 68 tests. The prefix checks seek versus consume, first-authored
+tie breaking, exact duplicate-alternative selection and compiled-rule regex lists,
+then begins the astral capture fixture. Its remaining offset assertions are beyond
+this physical range and remain in .1.47. No emitted or other-runtime route is run.

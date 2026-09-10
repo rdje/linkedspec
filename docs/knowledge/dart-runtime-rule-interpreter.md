@@ -186,3 +186,16 @@ sequential blind returns; isolated marks and BMP multibyte capture; OR miss,
 bounds and zero-progress stopping. The repetition lifecycle assertion continues
 after line 407. Passing the full test file grants no reading credit for that suffix
 and does not close any previously owned interpreter defect.
+
+## September 10 interpreter-consumer reading complete
+
+`DART-STARTUP-READING.1.46` reads 408-1821 through EOF. All 68 interpreter/matching
+tests pass. The suffix covers lifecycle order, cursor stack and anchor rewinds,
+non-consuming boundaries, capture slices, dense nested writes and typed snapshots,
+helper families, 55-case numeric contract, pure/mutating collection boundaries,
+value and marker controls, tree callbacks and restored bindings, registered-function
+isolation/recursion/arity, exact diagnostics and governed helper/capture fixtures.
+These are native execution consumers. Ordinary numeric, BMP position, switch and
+callback examples do not close the already owned extreme-value/astral/control/
+callback-identity defects. The old core-helper missing-path claim is corrected under
+this leaf with historical prose retained and current write authority linked.

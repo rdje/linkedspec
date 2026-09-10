@@ -53,3 +53,12 @@ in-process primary CLI routes. This consumer does not compile an independent emi
 module. Its different-label fixture does not establish same-label recursive isolation;
 that distinction remains owned by [[complete-named-mark-perl-rust-parity]].
 The neutral checker passes seven helpers and three drift mutations.
+
+## September 10 interpreter fixture reading complete
+
+`DART-STARTUP-READING.1.46` completes the interpreter consumer through line 1821.
+The exact anonymous/named capture, pure, position and marker fixtures pass in the
+68-test native selection. Ordinary cursor/input helpers use a BMP multibyte example;
+no new astral helper-boundary proof follows from that example. Neutral named-mark
+governance remains seven helpers/three mutations. Earlier emitted-carrier and
+Unicode admission evidence remains distinct from this focused rerun.

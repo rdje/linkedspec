@@ -12,10 +12,11 @@ answers:
   - does Dart runtime support entry_named and match_named
   - does Dart runtime support entry_map and match_map
   - does Dart runtime support capture position helpers
-date: 2026-07-13
-status: current
+date: 2026-09-10
+status: current core values and captures; nested-write semantics superseded by admitted write-vivification-v1
 tags: [dart, runtime, helpers, values, captures, DART-BACKEND-PARITY]
 evidence: "DART-BACKEND-PARITY.4.3.1 extends dart/lib/src/runtime/interpreter.dart and test/runtime_interpreter_test.dart. Focused tests prove scalar assignment, array append, hash reset/mutation, variable-held array/hash reads, non-numeric map keys, nested access reads, bare capture-name lookup, named capture maps, compact capture groups, and start/end position helper values. DART-BACKEND-PARITY.4.3.6 closes helper/value no-drift by aligning Dart nested value-path assignment with the Perl/Rust contract. FUTURE-PARITY-BACKLOG.12.1 later replaced the public typed-wrapper snapshot model with uniform bare bindings and hard-rejected exact aggregate selectors."
+evidence_update_2026_09_10: "DART-STARTUP-READING.1.46 corrects the stale current missing-container denial. runtime_interpreter_test.dart lines 732-789 assert dense missing-root/intermediate creation; 68 selected interpreter/matching tests and the 105-mutation neutral write contract pass. Prior prose is retained as dated history; current authority is write-vivification-dart-runtime."
 reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/runtime_interpreter_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings"
 ---
 
@@ -30,12 +31,16 @@ Exact `array(name)` and `hash(name)` selectors are rejected before execution.
 
 Indexed and nested reads support array indexes plus string-key map access, so
 forms such as `meta["key"]` and `payload["children"][1]["name"]` evaluate inside
-the Dart interpreter. Nested value-path assignment now mirrors the Perl/Rust
-contract: successful writes return the updated root value, missing or wrong-shape
-intermediate paths return `null` without mutation, final hash keys may be
-created, final array indexes may replace or append exactly at the current
-length, missing intermediate containers are not autovivified, and segment index
-expressions are evaluated before the RHS value expression.
+the Dart interpreter. Reads remain non-creating.
+
+Current nested writes follow [[write-vivification-dart-runtime]] and its admitted
+`linkedspec-write-vivification-v1` contract. Every segment is evaluated once, left
+to right, then the RHS once, before the post-evaluation root snapshot is read.
+An absent root or missing intermediate is created from the evaluated selectors;
+an existing wrong kind or explicitly bound null is a conflict. Array index
+`length` appends; larger indices are rejected as gaps. Success publishes once
+and returns a detached updated root; structural failure publishes no partial path.
+Completed expression side effects remain. The July behavior below is superseded.
 
 The capture-reader subset now includes `entry_named`, `match_named`,
 `entry_has`, `match_has`, `entry_map`, `match_map`, `entry_len`, `match_len`,
@@ -47,3 +52,19 @@ Related facts: [[dart-runtime-hash-helpers]], [[dart-runtime-string-numeric-help
 [[dart-runtime-rule-interpreter]], [[dart-runtime-matching-state]],
 [[typed-wrapper-quoted-name-boundaries]], [[terse-direct-access-explicit-segments]],
 [[terse-nested-value-path-assignment]], [[rust-capture-group-helper-indexing]].
+
+## Historical nested-write behavior — July 13, superseded September 2
+
+Indexed and nested reads support array indexes plus string-key map access, so
+forms such as `meta["key"]` and `payload["children"][1]["name"]` evaluate inside
+the Dart interpreter. Nested value-path assignment now mirrors the Perl/Rust
+contract: successful writes return the updated root value, missing or wrong-shape
+intermediate paths return `null` without mutation, final hash keys may be
+created, final array indexes may replace or append exactly at the current
+length, missing intermediate containers are not autovivified, and segment index
+expressions are evaluated before the RHS value expression.
+
+This paragraph is retained verbatim as historical evidence. Its non-creating write
+semantics no longer describe current Dart. The current answer above was corrected
+under `DART-STARTUP-READING.1.46` using the September authority and existing
+dense-write regression; earlier unrelated evidence is preserved.
