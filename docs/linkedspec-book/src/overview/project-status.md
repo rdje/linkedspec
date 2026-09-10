@@ -89,7 +89,7 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed forty-three of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed forty-four of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
 parser bridge, function-shell projection, bounded child-parse authority, generated rule plan,
@@ -99,28 +99,25 @@ index, query, runtime/static projection, SHA-256, source emission, trace and val
 Package inputs, action-parser/action-contract, callable-codeblock, compiled-spec, named-mark,
 corpus, diagnostic-output, duplicate-slot, frontend/function-trace, function-registry,
 inter-match-gap, logical-helper, receiver-mutation, MCP, native pipeline trace, primary CLI,
-progressive, punctuation-light, recognition and recursive-observation tests are complete.
-Repeated-action tests reach line 333. This covers 62,528 fragments / 1,926,700 bytes.
-All 22 selected tests and recognition, typed-source and repeated-action neutral checks pass.
+progressive, punctuation-light, recognition, recursive-observation, repeated-action and
+root-selection tests are complete. Cursor admission reaches line 298. This covers
+64,028 fragments / 1,972,485 bytes. All 13 selected tests and repeated-action,
+root-selection and cursor neutral checks pass.
 
-Recognition keeps match success separate from payload: a successful child may return
-`false`, zero, an empty string or null. Its authority tests cover token ownership,
-commit/rollback, cursor/boundary/mark restoration and gap state. The effect-classifier
-fixtures call the authority directly; the known production integration gap `.2.4`
-remains open.
+Entry selection uses one ordered rule: an explicit selector wins, then the first authored
+top marker, then the first authored rule. For example, selecting an unmarked `Earlier`
+rule leaves every authored marker and the descriptor unchanged. Empty sources fail
+validation; an unknown selector fails before user code. Generated contract validation
+runs before either selection failure.
 
-Recursive observation tests detached nine-field records over astral input, invocation
-identity, child-owned cursor behavior and recursion diagnostics. Recognition and observation
-each strictly analyze and directly execute a representative emitted parser in a fresh
-offline caller package. Their emitted examples do not cover every failure case.
+Repeated-action tests confirm per-hit collection, whole-rule lifecycle returns, exact
+bounds and one retained zero-width hit before stopping. Cursor tests begin the admitted
+seek/consume, child-policy, recursion and structural-order checks. Root and cursor
+emitted admission roles inspect entry-point source and metadata; this selection does
+not independently run those emitted parsers. The repeated-action consumer does.
 
-Repeated-action emission uses another fresh offline caller to compare direct and traced
-results and inspect both selected-slot trace records. It runs the emitted parser without
-a separate static-analysis command. Existing generated-family validation rejects a stale
-`or_acode` row where explicit repetition requires `rep_acode`.
-
-No new defect was confirmed. Child `.1.44` continues repeated-action results, root-rule
-selection and rule-local cursor tests; startup `.3.4` remains pending.
+No new defect was confirmed. Child `.1.45` continues cursor admission, descriptor,
+execution, normalization and interpreter tests; startup `.3.4` remains pending.
 
 **Continuity capacity — approved history preservation:** the director approved one
 additional immutable archive member. Containment `.10` and ADR0112 admit exactly
@@ -146,7 +143,7 @@ in 2.25 seconds. That sample locates a pre-main wait without establishing its OS
 or a remedy. The older macOS 26.5.2 closeout does not resolve this macOS 26.6.2 observation.
 The evidence and repair criteria are logged by `SESSION-STARTUP-READING.80.0`; source
 changes remain behind the existing startup prerequisites. The intake is committed at
-`eaf4331e`; Dart reading continues at `.1.44`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
+`eaf4331e`; Dart reading continues at `.1.45`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
 
 **Known Dart limitation — null named selectors in reconstructed state:** a programmatically
 reconstructed target with these fields is incorrectly accepted:

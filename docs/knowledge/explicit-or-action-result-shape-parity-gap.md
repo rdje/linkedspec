@@ -80,3 +80,12 @@ The emitted role creates a fresh offline caller/cache, directly runs both genera
 points, compares results and checks two selected-slot trace records before owned cleanup.
 It has no separate analyze command. Exact generated-plan validation rejects stale
 `or_acode` classification for the admitted explicit repetition fixture.
+
+## September 10 complete Dart repeated-action consumer reading
+
+`DART-STARTUP-READING.1.44` finishes lines 334-498. The remaining roles verify ordered
+native/generated selected-slot traces, repetition/pipe primary values, exact corpus
+files with trimmed runtime input, lifecycle overrides, optional/bounded/minimum results
+and one retained zero-width hit before stopping. All three tests pass within the selected
+13-test suite, including the existing offline emitted direct/traced caller. Neutral
+eight-mode/ten-special/eight-complete/zero-pending/54-mutation proof is unchanged.

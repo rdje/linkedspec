@@ -59,3 +59,14 @@ Related: [[dart-rule-local-cursor-normalization]],
 [[dart-runtime-matching-state]], [[dart-runtime-rule-interpreter]],
 [[dart-generated-source-v2-rule-local-cursor]],
 [[rule-local-cursor-ownership-decision]], and [[rust-rule-local-cursor-execution]].
+
+## September 10 cursor-admission prefix reading
+
+`DART-STARTUP-READING.1.44` reads consumer lines 1-298. The full cursor admission test
+passes within the selected 13-test suite, while remaining role bodies stay in .1.45.
+The prefix binds fifteen unique roles, seek/consume examples, normalized/loaded policy,
+descriptor identity, minimal generated family rows, obsolete-contract rejection,
+generated trace, mixed/recursive/ordered/anchored execution and the retired-option scan.
+Its emitted role inspects source only. Current neutral proof is 36 families, 18 edges,
+eight parent/child cases, 74 migration files, eight completed legs/zero pending and
+60 mutations; earlier rollout counts above are historical.

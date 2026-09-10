@@ -2224,7 +2224,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Goal: Split and read all 115 baseline Dart entries, including compiler/runtime, tests, commands, and package inputs.
   Reading owner: `docs/tasks/DART-STARTUP-READING.md` owns .0 decomposition, .1 reading, .2 new repair intake and .3 reading closeout; this startup node remains the prerequisite/closeout owner.
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas. DART-STARTUP-READING.3 may complete this reading node only after exact coverage/comprehension and child-commit proof; pending repairs remain owned separately.
-  Verification: Dart reading remains incomplete at 43/55 children, 62,528 fragments / 1,926,700 bytes. Dart .1.43 finishes recognition and recursive-observation tests and reads repeated-action results through 333: 1,500 fragments / 45,121 baseline-identical bytes. All 22 selected tests and recognition/typed-source/repeated-action neutral checks pass, including existing independent emitted consumers. No new defect; the recognition-effect integration gap .2.4 and earlier repair gates remain. Capacities .4/.5/.6 remain committed under containment .8/.9/.10 and ADR0110/0111/0112. Startup .3/.4/.5 still gate repairs; next Dart .1.44.
+  Verification: Dart reading remains incomplete at 44/55 children, 64,028 fragments / 1,972,485 bytes. Dart .1.44 completes repeated-action and root-selection admission/core/routes tests and reads cursor admission through 298: 1,500 fragments / 45,785 baseline-identical bytes. All 13 selected tests and repeated-action/root-selection/cursor neutral checks pass. No new defect; prior findings, CI .80/.81 and all source-repair gates remain. Capacities .4/.5/.6 remain committed under containment .8/.9/.10 and ADR0110/0111/0112. Startup .3/.4/.5 still gate repairs; next Dart .1.45.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.5`
@@ -4439,7 +4439,7 @@ Startup `.3.4` stays pending until complete Dart reading; the next executable re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.44` | `pending` | Continue repeated-action, root-rule selection and rule-local cursor test reading. After .1.43 commit/brief/clean proof; repair gates remain. |
+| 1 | `DART-STARTUP-READING.1.45` | `pending` | Continue cursor admission, descriptor, execution, normalization and interpreter test reading. After .1.44 commit/brief/clean proof; repair gates remain. |
 
 ## Reading Ledger
 

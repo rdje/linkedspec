@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-10 — root selection admission proof
+
+Dart .1.44 completes root selection and repeated-action consumers. Selection preserves authored identity and follows generated-contract validation. Root/cursor emitted roles inspect source; repeated-action independently executes it. All 13 tests pass; earlier repairs remain open.
+
 ## 2026-09-10 — recognition and observation proof boundaries
 
 Dart .1.43 completes recognition/observation consumers. Private effect tests remain separate from runtime integration. Their emitted examples use strict offline independent callers; repeated-action emission runs direct/traced without a separate analyzer. All 22 tests pass; existing .2.4 remains open.

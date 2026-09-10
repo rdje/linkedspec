@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart .1.43 finishes recognition and recursive-observation tests and reads repeated-action results through 333: 1,500 fragments / 45,121 baseline-identical bytes. All 22 selected tests and recognition/typed-source/repeated-action neutral checks pass, including existing independent emitted consumers. No new defect; the recognition-effect integration gap .2.4 and earlier repair gates remain. Reading is 43/55 children, 62,528 fragments / 1,926,700 bytes. Capacities and CI intake remain committed; next Dart .1.44. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart .1.44 completes repeated-action and root-selection admission/core/routes tests and reads cursor admission through 298: 1,500 fragments / 45,785 baseline-identical bytes. All 13 selected tests and repeated-action/root-selection/cursor neutral checks pass. No new defect; prior findings, CI .80/.81 and all source-repair gates remain. Reading is 44/55 children, 64,028 fragments / 1,972,485 bytes. Capacities and CI intake remain committed; next Dart .1.45. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.81` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `DART-STARTUP-READING.1.43` — Dart .1.43 finishes recognition and recursive-observation tests and reads repeated-action results through 333: 1,500 fragments / 45,121 baseline-identical bytes. All 22 selected tests and recognition/typed-source/repeated-action neutral checks pass, including existing independent emitted consumers. No new defect; the recognition-effect integration gap .2.4 and earlier repair gates remain.
+- `DART-STARTUP-READING.1.44` — Dart .1.44 completes repeated-action and root-selection admission/core/routes tests and reads cursor admission through 298: 1,500 fragments / 45,785 baseline-identical bytes. All 13 selected tests and repeated-action/root-selection/cursor neutral checks pass. No new defect; prior findings, CI .80/.81 and all source-repair gates remain.
 
 ## Next Action
 
-- `DART-STARTUP-READING.1.44` — Continue repeated-action, root-rule selection and rule-local cursor test reading. Earlier repairs and parked ideas retain their gates.
+- `DART-STARTUP-READING.1.45` — Continue cursor admission, descriptor, execution, normalization and interpreter test reading. Earlier repairs and parked ideas retain their gates.
 
 ## Recent Completions
+
+- `2026-09-10` — `DART-STARTUP-READING.1.44` reads 1,500 fragments / 45,785 bytes; all 13 tests and repeated-action/root-selection/cursor neutral checks pass; no new defect.
 
 - `2026-09-10` — `DART-STARTUP-READING.1.43` reads 1,500 fragments / 45,121 bytes; all 22 tests and recognition/typed-source/repeated-action neutral checks pass; no new defect.
 
@@ -48,8 +50,6 @@
 - `2026-09-10` — `DART-STARTUP-READING.1.32` reads 1,500 fragments / 45,289 bytes; all 21 tests and semantic 6/20/128 checks pass; query/runtime projection complete; no new defect.
 
 - `2026-09-10` — `DART-STARTUP-READING.1.31` reads 1,500 fragments / 43,744 bytes; all 18 tests and semantic 6/20/128 checks pass; eight native controls own non-JSON rejection .2.21.
-
-- `2026-09-10` — `DART-STARTUP-READING.1.30` reads 1,500 fragments / 43,400 bytes; all 28 tests and semantic 6/20/128 checks pass; nine controls extend .67 and own regex correlation .2.20.
 
 ## History
 
