@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / .1.39 complete; next .1.40
+- Status: `active` / .1.40 complete; next .1.41
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-10`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 39/55 children, 56,528/80,297 fragments and 1,735,719/2,471,305 bytes; sixty entries through EOF
-  plus map_leaves_mutation_contract_test.dart through line 176. Exact credit and comprehension remain in each completed node.
+- Current reading: 40/55 children, 58,028/80,297 fragments and 1,784,807/2,471,305 bytes; sixty-two entries through EOF
+  plus mcp_server_dart_admission_test.dart through line 705. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -689,14 +689,20 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.39 - complete gap and logical contract reading`
 
 - ID: `DART-STARTUP-READING.1.40`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 40 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.39` committed; empty brief and clean repository.
+  Activation: Clean `5886ec15b777fe059495430e29e31d67269bd9e6`; prior reading committed, root clean, zero-byte brief and all jobs consumed.
   Scope: `dart/test/map_leaves_mutation_contract_test.dart` lines 177-829; `dart/test/mcp_contract_dart_binding_test.dart` lines 1-142; `dart/test/mcp_server_dart_admission_test.dart` lines 1-705
   Baseline evidence: 1500 fragments / 49088 bytes; ordered range SHA-256 `3e97998d6e2a3be4b40a67e64370b30d81f61d499448b1545199bd5c146aad18`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact scoped bytes/current deltas; receiver-mutation and MCP binding/admission Dart tests; neutral mutation/MCP transport/admission checks and generated-binding freshness; prior evidence preservation, Knowledge, doctrines, histories, mdBook, memory and staged scope/whitespace.
+  Canonical trigger: `none` — bounded required reading and documentation; no source, contract or infrastructure changes.
+  Comprehension: Mutation tests cover typed scalar spans, original-shape traversal and copied frames, shadow binding identity, six callback/one continuation compositions, detached outputs, invalid receiver and pre-effect reentrant guards across helper routes, exact diagnostic-sink error identity and corrupt serialized receiver rejection. One representative count_keys continuation traverses native/reconstructed/generated/primary and independent offline emitted direct execution after plain analyze. Binding tests verify digest isolation, closed schema/UTF-8 budgets, 28 accepted plus seven rejected canonical frames and nested key serialization. Admission reads all twelve role bodies: twenty native identities, ten raw outcomes, ten lifecycle cases, four indistinguishable handle states, policy lowering, borrowed sinks, fixed I/O sanitization, shutdown and source authority fences. Pre-emission cancellation and native hostile-failure roles additionally assert textual sentinels in separate focused consumers; they do not execute those seams here. Helpers after 705 remain .1.41.
+  Findings: No new confirmed defect. MCP canonical-key ordering .2.5 and callback identity .2.10 remain open; passing representative fixtures do not close them. The mutation caller has plain analysis and direct execution only; strict/traced full-matrix emission is not claimed. Source repairs retain startup gates.
+  Verification: Read mutation 177-829 through EOF in three complete outputs, binding 1-142 through EOF, and admission 1-705 in three 235-line outputs; exact 1,500 fragments / 49,088 baseline-identical bytes and ordered digest. All 16 selected tests pass. Mutation neutral passes 4 valid/14 invalid/5 exclusions/10 success/8 pre-commit failures, six callback/one continuation compositions and 167+592 mutations. MCP transport passes 35 frames/10 raw/10 lifecycle/76 mutations; admission remains 5/5 implementations, 6/6 runtimes, rollout complete/141 mutations; generated binding is byte-fresh at 83,214 bytes. These neutral ledger checks do not rerun the other runtimes. Full coverage/preservation, Knowledge/book/memory/histories, whitespace and staged scope plus commit-hook doctrines govern this focused commit.
+  Commit: `DART-STARTUP-READING.1.40 - complete mutation and MCP contract reading`
 
 - ID: `DART-STARTUP-READING.1.41`
   Status: `pending`
@@ -1384,7 +1390,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.40` | `pending` | Continue receiver-mutation and MCP binding/admission test reading after .1.39 commit/brief/clean proof; repair gates remain. |
+| 1 | `DART-STARTUP-READING.1.41` | `pending` | Finish MCP admission, read dispatch/stdio tests and begin native trace tests after .1.40 commit/brief/clean proof; repair gates remain. |
 
 ## Decisions
 
@@ -1409,6 +1415,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-10`: Dart .1.40 finishes receiver-mutation and MCP binding tests and reads MCP admission through 705: 1,500 fragments / 49,088 baseline-identical bytes. All 16 selected tests pass, including the independent emitted mutation caller. Neutral mutation, MCP transport/admission and binding freshness pass; no new defect. Earlier repairs and CI .80/.81 remain owned and gated. Reading reaches 40/55 children, 58,028 fragments / 1,784,807 bytes.
 
 - `2026-09-10`: Dart .1.39 completes gap and logical-helper tests and reads map-leaves mutation tests through 176: 1,500 fragments / 46,756 baseline-identical bytes. All 40 selected tests pass, including existing independent emitted consumers. Neutral gap, logical and map-leaves contracts pass; no new defect. Earlier repairs and CI .80/.81 remain owned and gated. Reading reaches 39/55 children, 56,528 fragments / 1,735,719 bytes.
 
@@ -1491,6 +1499,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- `.1.40`: `DART-STARTUP-READING.1.40 - complete mutation and MCP contract reading`.
+
 - `.1.39`: `DART-STARTUP-READING.1.39 - complete gap and logical contract reading`.
 
 - `.1.38`: `DART-STARTUP-READING.1.38 - read identity and trace contracts`.
@@ -1570,6 +1580,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-10`: Completed .1.40 from clean 5886ec15; finished mutation/binding tests and read all MCP admission role bodies; no new defect; next .1.41.
 
 - `2026-09-10`: Completed .1.39 from clean 91d59b3c; finished gap/logical tests and began receiver-mutation tests; no new defect; next .1.40.
 

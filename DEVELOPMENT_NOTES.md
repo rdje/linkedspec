@@ -10,6 +10,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-10 — mutation emission and MCP admission proof limits
+
+Dart .1.40 completes mutation/binding and all admission role bodies. The
+mutation offline caller analyzes and directly runs one emitted example.
+Admission compares twenty native identities; cancellation-before-emission
+and hostile native failure also depend on separate focused test consumers.
+All 16 tests pass; Unicode key ordering and callback identity remain owned.
+
 ## 2026-09-10 — exact independent emitted coverage
 
 Dart .1.39 finishes the gap harness: ten value/two error modules, fresh local

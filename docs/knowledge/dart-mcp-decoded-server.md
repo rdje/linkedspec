@@ -114,3 +114,24 @@ show a U+E000/U+10000 ordering mismatch against the actual neutral byte owner. T
 canonical-byte claims for that uncovered boundary. Exact scope, source and replay live in
 [[dart-mcp-unicode-key-order-gap]]; .2.5 owns gated proof and repair. No native-produced Unicode-key
 payload, wire outcome or other-backend behavior is inferred from the injected test seam.
+
+## September 10 binding and admission consumer reading
+
+`DART-STARTUP-READING.1.40` completes all 142 binding-test lines and reads admission
+lines 1-705, including every role body; helpers remain in the next reading child.
+Sixteen selected mutation/binding/admission tests pass. Binding assertions cover
+digest/clone isolation, closed schemas, UTF-8 byte budgets and the exact 28 accepted
+plus seven rejected canonical frames. Its nested-key example does not exercise the
+known U+E000/U+10000 boundary in [[dart-mcp-unicode-key-order-gap]].
+
+Admission compares capabilities plus nineteen queries with native responses/digests,
+then proves raw framing, lifecycle, indistinguishable unavailable handles, policy
+lowering, borrowed sinks, shutdown, sanitized I/O and source authority fences.
+Pre-emission cancellation and native hostile-failure roles additionally check textual
+sentinels in separate stdio/dispatch tests; those assertions alone do not execute the
+injection seams. The corresponding focused consumers are owned by reading .1.41.
+
+Neutral transport remains 35/10/10/76, admission 5/5 implementations plus 6/6 runtimes
+with rollout complete/141; this does not rerun other runtimes. The generated binding
+is byte-fresh at 83,214 bytes. MCP remains read-only over host-registered indexes,
+separate from the private staged-provenance validation/materialization API.

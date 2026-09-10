@@ -54,3 +54,18 @@ fixture repair, not a mutation-semantic change.
 
 Related: [[map-leaves-mutation-neutral-contract]], [[write-map-leaves-neutral-composition]],
 [[write-vivification-dart-runtime]], and ADR `0036`.
+
+## September 10 complete mutation-consumer reading
+
+`DART-STARTUP-READING.1.40` finishes consumer lines 177-829 after the preceding prefix.
+All eleven mutation tests pass within the selected sixteen-test suite. Source covers
+typed scalar spans, traversal/detachment, shadow identities, six callback and one
+continuation compositions, pre-effect guards across helper families, exact diagnostic
+sink exception identity and corrupt serialized receiver rejection.
+
+The independent offline caller analyzes and directly executes one emitted
+`map_leaves!().count_keys()` example returning two. It uses plain `analyze` and no
+traced call; the earlier broad emitted-route statement is bounded to that example.
+It does not independently emit the full fixture inventory. Neutral proof remains
+167 base plus 592 composition mutations, with no contract movement. Existing callback
+identity limitations remain in [[dart-callback-helper-recursion-identity-gap]].
