@@ -32,3 +32,21 @@ execute helper/action or runtime semantics.
 
 Related facts: [[dart-core-spec-parser]], [[dart-backend-scaffold-package]],
 [[rust-strict-syntax-validation]].
+
+## 2026-09-10 — complete validator reading and reconstructed selector gap
+
+`DART-STARTUP-READING.1.35` completes all 1,072 validator lines. The tail
+checks edge ownership/targets, shared blocks, directive uniqueness/conflicts,
+loop/seek/action eligibility, named and numeric slots, lightweight regex
+structure and authored-edge-only strict unused rules. Entry selection and
+authored top markers give no strict exemption, as recorded in
+[[dart-root-rule-selection-core]]. Regex structure is a preliminary check,
+not execution of the complete backend regex dialect.
+
+The named selector path does not require a name before nullable slot lookup.
+Ten reconstructed controls establish two named/null acceptances that select
+anonymous regexes, plus six valid/rejecting controls and two additional accepted
+provenance shapes for compatibility census. Exact source causes, descriptor
+identity, runtime values and gated repair .2.23 are in
+[[dart-null-named-selector-validation-gap]]. All 35 selected validator/action/
+root/gap/duplicate tests pass; those existing tests do not cover the new defect.

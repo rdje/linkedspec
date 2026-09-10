@@ -89,19 +89,34 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed thirty-four of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed thirty-five of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
 parser bridge, function-shell projection, bounded child-parse authority, generated rule plan,
 interpreter, matching, recognition transactions, semantic observation, source location and both
 staged runtime modules, Unicode case mapping, scaffold, semantic call projection, semantic
-index, query, runtime/static projection, SHA-256, source emission and trace, plus validation
-through line 355. This covers 49,028 fragments / 1,506,533 bytes. All 27 selected emitter/trace/
-validation tests pass, including isolated emitted caller analysis/execution, all ten structural
-families and the accepted eight-case manifest subset. The neutral generated-source checker
-also passes. Its shared v1 semantic baseline does not change current Dart artifact v2/format2.
-Child `.1.35` finishes validation from line 356, reads package inputs and begins test-source
-reading. Startup `.3.4` remains pending; no new defect is established in this slice.
+index, query, runtime/static projection, SHA-256, source emission, trace and validation.
+Package inputs and action-parser tests are complete; action-contract tests reach line 203.
+This covers 50,528 fragments / 1,551,233 bytes. All 35 selected validator/action/root/gap/
+duplicate-slot tests pass, including existing emitted and primary roles; neutral gap and
+duplicate-slot checks also pass. Child `.1.36` continues action-contract, callable-codeblock
+and compiled-spec test reading. Startup `.3.4` remains pending.
+
+**Known Dart limitation — null named selectors in reconstructed state:** a programmatically
+reconstructed target with these fields is incorrectly accepted:
+
+```json
+{"label":"Child","index":0,"selector_kind":"named","authored_selector":null}
+```
+
+If Child has anonymous `/a/` and named `head=/b/` declarations, the null name selects the
+anonymous `/a/`. Moving that anonymous declaration moves the selected index too. A valid
+`Child[head]` still selects `/b/`; ordinary named, numeric and unindexed controls pass.
+Ten reconstruction controls preserve two wrong-slot acceptances, three valid selectors,
+three rejected names and two additional provenance shapes for compatibility review.
+`DART-STARTUP-READING.2.23` owns validation repair and carrier recurrence after the startup
+gates. This finding establishes a malformed SpecFile-JSON path, with no new authored
+.spec, generated/emitted, semantic-index, MCP or other-backend failure claim.
 
 **Known Dart limitation — indexed edge correlation can reject valid sources:** semantic index
 construction fails for some grouped selectors and for arrow-like target text inside regex

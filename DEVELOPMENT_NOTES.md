@@ -10,6 +10,18 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-10 — nullable named-selector identity must not match absence
+
+Dart .1.35 completes validation/package/action-parser reading. Two reconstructed
+named/null targets pass nullable equality in both validation and compilation,
+selecting anonymous /a/ at index 0 or 1. Valid head selects /b/. Ten controls
+retain three valid selectors, three rejected names and two accepted provenance
+shapes for compatibility census. New .2.23 owns the name guard and carrier
+recurrence; do not generalize to authored syntax, MCP or other backends.
+All 35 selected tests and gap9/0/63/public8/15/10/34 plus duplicate7/0/59 pass.
+Strict unused remains authored-edge-only; production dependencies remain absent.
+Earlier findings and startup repair gates remain intact.
+
 ## 2026-09-10 — generated execution, trace ownership and validation order
 
 Dart .1.34 completes normalized UTF-8/Base64 source emission, exact plan

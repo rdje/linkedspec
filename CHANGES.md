@@ -10,6 +10,15 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-10 — DART-STARTUP-READING.1.35: null named-selector validation
+
+Read 1,500 fragments / 44,700 baseline-identical bytes: complete validator,
+package inputs and action-parser tests; contracts reach 203. All 35 tests and
+gap/duplicate checks pass. Ten reconstructed controls own .2.23 with two repair
+children: null named selectors wrongly select anonymous regexes at either index.
+Six valid/rejecting controls and two provenance census inputs bound the finding.
+Prior owners remain; no source repair. Reading reaches 35/55; .1.36 is next.
+
 ## 2026-09-10 — DART-STARTUP-READING.1.34: emitter and trace completion
 
 Read 1,500 fragments / 45,347 baseline-identical bytes: complete emitter/trace

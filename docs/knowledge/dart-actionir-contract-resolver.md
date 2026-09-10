@@ -68,3 +68,15 @@ changes documentation only and establishes no new code defect.
 Related facts: [[dart-actionir-ast-parser]], [[dart-backend-scaffold-package]],
 [[dart-function-registry]], [[text-to-ast-backend-doctrine]],
 [[dart-backend-interpreter-first-plan]].
+
+## 2026-09-10 — initial action test-source reading
+
+`DART-STARTUP-READING.1.35` reads all 189 action-parser test lines and
+action-contract tests 1-203. Assertions cover typed literals/access/assignments,
+fluent and contextual trailing blocks, quoted delimiters, controls and Raw
+fallback; canonical numeric/helper mappings, nested writes, generic diagnostics,
+registry collisions, gap-family membership and exact-arity user calls. The last
+two contract helper lines remain .1.36 reading. All 35 selected validator/action/
+root/gap/duplicate tests pass. Existing switch, lexical, registry and semantic
+findings retain their separate repair owners; no stronger completeness follows
+from these selected examples.

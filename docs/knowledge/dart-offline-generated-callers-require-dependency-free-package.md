@@ -42,3 +42,14 @@ rounds and emits eight fixed-width lowercase hexadecimal words. The selected
 28 semantic tests include the existing empty/abc and neutral graph source
 identity controls. Production dependencies remain unchanged; no fresh offline
 emitted-caller run is claimed by this reading slice.
+
+## 2026-09-10 — package input reading
+
+`DART-STARTUP-READING.1.35` reads the complete 381-line lock and 10-line
+manifest. Both retain SDK >=3.9.0 <4.0.0; the manifest has no production
+dependencies and only test as a direct development dependency. The lock pins
+47 hosted packages, including transitive crypto for tooling. This preserves
+the dependency-free shipped package invariant; it does not remove test tooling.
+The fresh isolated offline source-emitter proof belongs to committed .1.34
+at 7f32f90b. This package-source checkpoint changes no dependency or cache and
+does not claim a new complete package-store audit.

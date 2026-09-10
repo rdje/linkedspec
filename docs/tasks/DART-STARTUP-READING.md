@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / .1.34 complete; next .1.35
+- Status: `active` / .1.35 complete; next .1.36
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-10`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 34/55 children, 49,028/80,297 fragments and 1,506,533/2,471,305 bytes; forty-four entries through EOF
-  plus spec_validator.dart through line 355. Exact credit and comprehension remain in each completed node.
+- Current reading: 35/55 children, 50,528/80,297 fragments and 1,551,233/2,471,305 bytes; forty-eight entries through EOF
+  plus action_contracts_test.dart through line 203. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -85,7 +85,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Acceptance: Every child accounts for its exact source bytes and deltas, reconciles Knowledge before re-derivation,
     records comprehension and confirmed findings, runs necessary focused diagnostics and commits before the next child.
   Children: `.1.1-.1.55`; exact scopes and baseline evidence below, read in numeric order.
-  Verification: 34/55 children complete; `.1.1-.1.34` own exact reading/comprehension evidence, and all later children remain pending.
+  Verification: 35/55 children complete; `.1.1-.1.35` own exact reading/comprehension evidence, and all later children remain pending.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.1.1`
@@ -609,14 +609,20 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.34 - complete emitter and trace reading`
 
 - ID: `DART-STARTUP-READING.1.35`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 35 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.34` committed; empty brief and clean repository.
+  Activation: Clean `7f32f90b406581233272301855a7b0c505d89bd9`; root status empty, brief zero bytes, and prior commit jobs consumed.
   Scope: `dart/lib/src/validation/spec_validator.dart` lines 356-1072; `dart/pubspec.lock` lines 1-381; `dart/pubspec.yaml` lines 1-10; `dart/test/action_ast_parser_test.dart` lines 1-189; `dart/test/action_contracts_test.dart` lines 1-203
   Baseline evidence: 1500 fragments / 44700 bytes; ordered range SHA-256 `2d5776c4afc82f1631de7ea0df2208c2fe899ec5059b2cf1227e7db0d969181d`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Thirty-five Dart validator/action-parser/action-contract/root/gap/duplicate-slot tests, including existing emitted and primary roles; neutral gap and duplicate-slot contracts; ten public reconstructed selector controls and exact durable replay; exact range/current deltas, prior evidence retention, all doctrines, both histories, Knowledge freshness, rendered mdBook and staged scope.
+  Canonical trigger: `none` — bounded required reading and defect intake; no source, public contract or infrastructure changes.
+  Comprehension: Validation tail keeps quoted brace-depth scanning, bare/action/blind ownership diagnostics, grouped shared-block requirements, directive uniqueness and legacy-marker conflicts, loop/seek/action eligibility, same-line adjacency exclusion, named/numeric/unindexed target resolution, lightweight escaped/class/parenthesis regex checks and authored-edge-only strict-unused analysis. Entry selection and markers grant no strict exemption. Package inputs retain SDK >=3.9.0 <4.0.0, no production dependencies, one direct test development dependency and 47 hosted locked packages. Action parser tests cover value-drop statements, literals and nested access, typed assignments, fluent/trailing contextual blocks, quoted delimiters, structured controls and explicit Raw fallback. Contract tests cover canonical numeric/helper mappings, structural writes, unknown/Raw diagnostics, reserved built-in collisions, gap-family membership and exact-arity user calls before fallback; the helper tail continues in .1.36.
+  Findings: Ten public SpecFile-JSON reconstruction/validation/compiled/descriptor/runtime controls confirm two malformed named/null acceptances selecting anonymous /a/ at index 0 or 1. Three valid selectors and three rejecting-name controls bound the defect. Numeric-null and unindexed-text provenance are separately accepted census inputs, not additional wrong-slot claims. Nullable equality in validation and compilation confuses missing names with anonymous slot IDs. New .2.23 plus two repair children own the required name guard, compatible carrier census and recurrence; all earlier Dart/startup owners remain intact.
+  Verification: Physically read validator 356-1072 through EOF in three complete 239-line outputs, lock 1-381 through EOF in two outputs, manifest 1-10 and action-parser tests 1-189 through EOF, then action-contract tests 1-203: 1,500 fragments / 44,700 baseline-identical bytes with unchanged ordered digest. All 35 selected tests pass, including existing independently emitted/primary gap and duplicate-slot roles. Neutral gap passes 9/0/63 plus public8/15/10/34; duplicate identity passes 7/0/59. Both complete tracked reproduction blocks replay; independent assertions check every reconstructed selector, diagnostic, resolved descriptor and runtime value. This defect proof does not newly cover authored syntax, emitted/generated, semantic-index/MCP or other backends. Full 115-path/169-range/55-child reconstruction, prior evidence retention, doctrines, both histories, Knowledge and rendered-book proof belong to this commit.
+  Commit: `DART-STARTUP-READING.1.35 - own null named-selector validation gap`
 
 - ID: `DART-STARTUP-READING.1.36`
   Status: `pending`
@@ -822,11 +828,11 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Status: `pending`
   Goal: Reconcile and retain ownership of every confirmed Dart finding established during the reading.
   Dependencies: Findings from `.1`; implementation additionally requires startup `.3`, `.4` and `.5`.
-  Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`, `.2.5`, `.2.6`, `.2.7`, `.2.8`, `.2.9`, `.2.10`, `.2.11`, `.2.12`, `.2.13`, `.2.14`, `.2.15`, `.2.16`, `.2.17`, `.2.18`, `.2.19`, `.2.20`, `.2.21`, `.2.22`; further confirmed findings receive disjoint owners here.
+  Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`, `.2.5`, `.2.6`, `.2.7`, `.2.8`, `.2.9`, `.2.10`, `.2.11`, `.2.12`, `.2.13`, `.2.14`, `.2.15`, `.2.16`, `.2.17`, `.2.18`, `.2.19`, `.2.20`, `.2.21`, `.2.22`, `.2.23`; further confirmed findings receive disjoint owners here.
   Acceptance: Cross-reference existing owners for known defects; create disjoint bounded repair children here
     immediately for new confirmed defects, with mechanism, source, reproduction, acceptance and unblock conditions.
     If no new repair is needed, close this intake with an explicit complete reconciliation rather than inventing work.
-  Verification: `pending`; `.1.3` owns attached-switch omission/default replacement under `.2.1`; `.1.5` confirms regex-brace action scanning and lifecycle validation defects under `.2.2`. Reading .1.6 confirms numeric trace overflow and reset-before-failure under .2.3. Reading .1.7 confirms disconnected recognition effect validation, leaked writes after rollback and observation edge-closure bypass under .2.4. Reading .1.10 confirms MCP Unicode key-order divergence under .2.5. Reading .1.11 confirms regex/lifecycle-E body suffix loss under .2.6. Reading .1.12 confirms compact fluent argument corruption under .2.7 and outer regex-brace truncation under existing .2.2.2. Reading .1.13 confirms standalone body-fluent suffix loss under existing .2.6. Reading .1.16 confirms semantic observer error/stack loss through action child calls under .2.8; startup .37 retains nested progressive authority findings from .1.15. Reading .1.17 confirms mixed-control return escape and skipped attached else under .2.9. Reading .1.18 confirms helper-name callback recursion collision and lost bound identity under .2.10. Reading .1.19 confirms hash splice pairing/order loss under .2.11, coordinated with FUTURE-PARITY-BACKLOG.5. Reading .1.20 confirms finite-number corruption (.2.12), lexical Unicode ordering (.2.13) and slice-end overflow (.2.14), with separate existing startup .55/.60 and MCP .2.5 coordination. Reading .1.21 extends .2.14 with typed-source overflow and owns input_slice zero-argument acceptance/late-reference failure under .2.15. Reading .1.23 confirms lower-unbounded quantifier rewriting of escaped literals/classes under .2.16. Reading .1.26 confirms staged diagnostic-byte overruns under .2.17 and wrapped staged call admission under .2.18 through eleven private scheduler controls. Reading .1.27 confirms malformed staged source/provenance types accepted after placeholder coercion under .2.19 through seventeen private/neutral controls. Reading .1.30 extends startup .67 with Dart container-call omission and owns regex call/source miscorrelation under .2.20 through nine public-query/typed-runtime controls. Reading .1.31 owns native non-JSON rejection response mutability/encoding under .2.21 through eight public raw-query controls, with four defective cases and four valid JSON controls. Reading .1.33 extends startup .70 with Dart grouped-selector constructor failures and owns regex-arrow selector correlation under .2.22 through eight public compiled/index/runtime controls. No repair implementation is admitted before startup gates.
+  Verification: `pending`; `.1.3` owns attached-switch omission/default replacement under `.2.1`; `.1.5` confirms regex-brace action scanning and lifecycle validation defects under `.2.2`. Reading .1.6 confirms numeric trace overflow and reset-before-failure under .2.3. Reading .1.7 confirms disconnected recognition effect validation, leaked writes after rollback and observation edge-closure bypass under .2.4. Reading .1.10 confirms MCP Unicode key-order divergence under .2.5. Reading .1.11 confirms regex/lifecycle-E body suffix loss under .2.6. Reading .1.12 confirms compact fluent argument corruption under .2.7 and outer regex-brace truncation under existing .2.2.2. Reading .1.13 confirms standalone body-fluent suffix loss under existing .2.6. Reading .1.16 confirms semantic observer error/stack loss through action child calls under .2.8; startup .37 retains nested progressive authority findings from .1.15. Reading .1.17 confirms mixed-control return escape and skipped attached else under .2.9. Reading .1.18 confirms helper-name callback recursion collision and lost bound identity under .2.10. Reading .1.19 confirms hash splice pairing/order loss under .2.11, coordinated with FUTURE-PARITY-BACKLOG.5. Reading .1.20 confirms finite-number corruption (.2.12), lexical Unicode ordering (.2.13) and slice-end overflow (.2.14), with separate existing startup .55/.60 and MCP .2.5 coordination. Reading .1.21 extends .2.14 with typed-source overflow and owns input_slice zero-argument acceptance/late-reference failure under .2.15. Reading .1.23 confirms lower-unbounded quantifier rewriting of escaped literals/classes under .2.16. Reading .1.26 confirms staged diagnostic-byte overruns under .2.17 and wrapped staged call admission under .2.18 through eleven private scheduler controls. Reading .1.27 confirms malformed staged source/provenance types accepted after placeholder coercion under .2.19 through seventeen private/neutral controls. Reading .1.30 extends startup .67 with Dart container-call omission and owns regex call/source miscorrelation under .2.20 through nine public-query/typed-runtime controls. Reading .1.31 owns native non-JSON rejection response mutability/encoding under .2.21 through eight public raw-query controls, with four defective cases and four valid JSON controls. Reading .1.33 extends startup .70 with Dart grouped-selector constructor failures and owns regex-arrow selector correlation under .2.22 through eight public compiled/index/runtime controls. Reading .1.35 confirms null named-selector provenance selecting an anonymous regex through SpecFile reconstruction under .2.23; ten controls include two wrong-slot acceptances, six valid/rejecting controls and two additional provenance census inputs. No repair implementation is admitted before startup gates.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.2.1`
@@ -1284,6 +1290,29 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Verification: `pending`
   Commit: `pending`
 
+- ID: `DART-STARTUP-READING.2.23`
+  Status: `pending`
+  Goal: Reject malformed named selector provenance before it can select an anonymous regex slot.
+  Dependencies: startup .3/.4/.5; finding from .1.35; coordinate the existing inter-match-gap and duplicate-slot identity contracts.
+  Children: `.2.23.1`, `.2.23.2`.
+  Evidence: docs/knowledge/dart-null-named-selector-validation-gap.md retains ten public SpecFile-JSON reconstruction/validation/compiled/runtime controls. Two null named selectors bind the first anonymous declaration at index 0 or 1 and execute /a/; valid head selects /b/. Three valid selectors and three rejecting malformed-name controls bound the failure. Numeric-null and unindexed-text provenance are separately accepted census inputs, not additional wrong-slot claims.
+
+- ID: `DART-STARTUP-READING.2.23.1`
+  Status: `pending`
+  Goal: Enforce the named selector's required identity at supported reconstructed and native AST boundaries.
+  Dependencies: Startup gates and the existing selector syntax/provenance contracts.
+  Acceptance: Require a valid nonempty named identity before nullable slot lookup; an anonymous slot must never satisfy a named selector. Preserve valid named/numeric/unindexed selectors, exact Unicode identity, numeric position semantics, authored order and deliberate historical carrier defaults. Lock the two anonymous-slot reorder failures plus all named-only/number/empty and valid controls. Audit selector-kind, authored-selector and index consistency, including numeric-null/unindexed-text intake, before defining additional rejection or normalization behavior; do not silently break legacy reconstructed carriers. Use the existing portable diagnostic convention and retain compiled slot identity checks.
+  Verification: `pending` repair; .1.35 confirms two malformed named acceptances, six valid/rejecting controls and two additional accepted provenance shapes.
+  Commit: `pending`
+
+- ID: `DART-STARTUP-READING.2.23.2`
+  Status: `pending`
+  Goal: Close named-selector validation repair across supported carriers and public evidence.
+  Dependencies: .2.23.1.
+  Acceptance: Prove native AST, ordinary SpecFile reconstruction, compiled/descriptor, generated-plan and independently emitted routes with independent expected target identity and runtime values. Census semantic-index/MCP registration and other backends before claiming exposure or parity, routing any findings to disjoint owners. Preserve existing gap/duplicate-slot diagnostics and all ten intake controls, update the book and Knowledge, run direct dependents and canonical proof at public closeout.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `DART-STARTUP-READING.3`
   Status: `pending`
   Goal: Close Dart reading with exact coverage, current-delta, comprehension and child-commit proof.
@@ -1320,7 +1349,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.35` | `pending` | Finish validator from 356 through EOF, read pubspec lock/manifest and action-parser tests through EOF, then action-contract tests 1-203 after .1.34 commits and the brief/tree are clean; reading is 34/55. |
+| 1 | `DART-STARTUP-READING.1.36` | `pending` | Finish action-contract tests 204-205, read callable-codeblock contract tests 1-1080, then compiled-spec tests 1-418 after .1.35 commits and the brief/tree are clean; reading is 35/55. |
 
 ## Decisions
 
@@ -1343,6 +1372,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-10`: `.1.35` completes validation/package/action-parser reading and contracts through 203: 1,500 fragments / 44,700 baseline-identical bytes. All 35 tests and neutral gap9/0/63/public8/15/10/34 plus duplicate7/0/59 checks pass. Ten reconstructed controls own .2.23 with two repair children: two null-name wrong-slot acceptances, six valid/rejecting controls and two provenance census inputs. Reading reaches 35/55.
 
 - `2026-09-10`: `.1.34` completes emitter/trace and reads validation through 355: 1,500 fragments / 45,347 baseline-identical bytes. All 27 selected tests, isolated emitted callers, ten-family/eight-case proof and neutral generated-source checks pass. Earlier owners remain intact; no new defect or artifact-version change. Reading reaches 34/55.
 
@@ -1413,6 +1444,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- `.1.35`: `DART-STARTUP-READING.1.35 - own null named-selector validation gap`.
+
 - `.1.34`: `DART-STARTUP-READING.1.34 - complete emitter and trace reading`.
 
 - `.1.33`: `DART-STARTUP-READING.1.33 - own indexed edge source-correlation failures`.
@@ -1480,6 +1513,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-10`: Completed .1.35 from clean 7f32f90b; retained prior findings, owned null named-selector validation .2.23 and routed .1.36.
 
 - `2026-09-10`: Completed .1.34 from clean df88085f; finished emitter/trace reading, began validation, retained prior findings and routed .1.35.
 
