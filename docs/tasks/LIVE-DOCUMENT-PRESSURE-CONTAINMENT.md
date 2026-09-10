@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-- Status: `done` / .9 admits approved engineering-history capacity; next Dart .1.25
+- Status: `done` / .10 admits approved change-history capacity; next Dart .1.37
 - Roadmap lane: `Repository architecture / documentation sustainability`
 - Created: `2026-08-09`
-- Last updated: `2026-09-10` (.9 closes approved capacity; exact canonical evidence belongs to its commit)
+- Last updated: `2026-09-10` (.10 closes approved capacity; exact canonical evidence belongs to its commit)
 - Owner: repo-local workflow
 
 ## Goal
@@ -58,10 +58,10 @@ or the README `.4` adoption/closeout that installs the guard.
 ## Task Tree
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-  Status: `done` (.0-.9 complete; Dart reading remains 24/55)
+  Status: `done` (.0-.10 complete; Dart reading remains 36/55)
   Goal: Replace measured oversized routed destinations with bounded views over durable stores.
   Depends on: `README-STABILITY-POLICY.4.2`
-  Children: `.0-.9`
+  Children: `.0-.10`
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0`
   Status: `done` (2026-08-09; committed atomically at `dc8dd896` as 176/300; brief cleared; clean proof passed;
@@ -415,11 +415,25 @@ or the README `.4` adoption/closeout that installs the guard.
   Verification: Exact two-scalar registry proof and 22 real-validator executions pass. Governed segment 4981 preserves clean 4d5af8e9 DEVELOPMENT_NOTES lines 247-453, blob 4e7133e7431c21095047e92338cd5aca84ac6d0e, 207 lines / 32348 bytes, SHA-256 a05653da7d6cf5c2b36c780e9322e3ab336ef97178e21876d2fb20fc74fb8be0. All prior manifest records and other history files remain exact; full query and root reconstruction pass. Root is 253 lines / 27043 bytes; manifest 26 lines / 15618 bytes; collection 27 files / 25865 lines / 2775788 bytes. ADR0111 records approval; complete preservation, doctrine, book and exact staged canonical results belong to this commit.
   Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.9 - admit approved engineering-history member`
 
+- ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.10`
+  Status: `done`
+  Goal: Admit the approved thirty-second change-history member so committed Dart reading can continue.
+  Dependencies: Clean `e55f7703ebc42ef6a66c385bec884b8d3692fc66`; zero-byte brief; director “Granted” approves DART-STARTUP-READING.6's three exact controls.
+  Scope: change_history max_files 31 to 32; manifest max_lines 30 to 31 and max_bytes 17039 to 17615; indexed exact-limit ADR and governed rollover. Stable responsibility remains .3; every other limit, owner, route, verifier, schema and prior immutable byte remains unchanged.
+  Acceptance: Remeasure actual clean source and candidate; prove source/blob/range/hash/count, old manifest/history preservation and full chronology reconstruction. Exercise actual routing-validator boundaries and resulting-tree pressure. Close approved Dart intake .6, align Knowledge/book/live docs, run exact staged canonical proof and commit before .1.37. No parser repair, purge, further capacity or parked-feature activation.
+  Verification tier: `canonical`
+  Focused checks: Exact three-scalar registry diff, source/range/manifest/full-history reconstruction and prior task/Knowledge/ADR retention; actual validator boundaries, all doctrines, both histories, Knowledge freshness, rendered mdBook and staged scope.
+  Canonical trigger: `Change-history routing infrastructure and containment-parent closeout` — exact staged canonical receipt required before commit.
+  Verification: Exact three-scalar registry comparison and 22 actual-validator executions pass. Governed segment 4981 preserves clean e55f7703 CHANGES lines 243-460, blob 5380069ab4de95503ce30b1f64a6730e5f545fe1, 218 lines / 32108 bytes, SHA-256 5a6450db09742fc1ac54486af8ac47eec95afbf9e7d52901dbe3912937d30de8. Every old manifest record and other history file remains exact; retained root plus the single normalized EOF separator LF and segment, and full archive queries reconstruct all source bytes. Root is 249 lines / 15374 bytes; manifest 31 / 17615; collection 32 / 48770 / 3543807. ADR0112 binds approval; complete preservation, doctrine, rendered book and exact staged canonical results belong to this commit.
+  Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.10 - admit approved change-history member`
+
 ## Current Frontier
 
-This tree closes after .9’s exact canonical commit, brief clearing and clean proof. Resume `DART-STARTUP-READING.1.25` in `docs/tasks/DART-STARTUP-READING.md`. Dart reading remains 24/55; startup .3.4 and all remaining reading/repair gates stay in force.
+This tree closes after .10's exact canonical commit, brief clearing and clean proof. Resume `DART-STARTUP-READING.1.37` in `docs/tasks/DART-STARTUP-READING.md`. Dart reading remains 36/55; startup .3.4 and all remaining reading/repair gates stay in force.
 
 ## Decisions
+
+- `2026-09-10`: Director “Granted” approves Dart intake .6: change_history files 31→32, manifest lines 30→31 and bytes 17039→17615. .10 owns canonical implementation from clean e55f7703; the exception admits exactly one member and every other gate/limit remains.
 
 - `2026-09-10`: Director “ok for increasing the allowance” approves Dart intake .5: engineering_notes files 26→27 and manifest lines 25→26. .9 owns implementation from clean 4d5af8e9; every other gate/limit remains.
 
@@ -543,6 +557,8 @@ All files and transient proof stay on the repository filesystem; no off-volume c
 
 ## Verification Log
 
+- `2026-09-10` `.10`: director approval is bound in ADR0112. Exact three-scalar scope, clean-source suffix, old manifest/history identity and full ordered reconstruction pass; 22 actual-validator executions pass. The generated root retains both separator LFs and direct concatenation reconstructs all 47,004 source bytes. Diff hygiene then rejects a new blank EOF line; the final live root drops exactly that separator LF and the final reconstruction explicitly restores it. No immutable byte changes. The final proof is durable in docs/knowledge/dart-reading-second-history-capacity-blocker.md. All doctrine/book/preservation and exact staged canonical results govern landing.
+
 - `2026-09-10` .9: Exact two-scalar registry/source/manifest/full-history proof and 22 real-validator executions pass. Source lines 247-453 preserve 207 lines / 32348 bytes; prior history remains byte-identical. Complete prior task/Knowledge/ADR retention, book, doctrines and receipt-bound canonical results belong to the commit.
 
 - `2026-09-09` .8: 22 real-validator executions and exact registry/source/manifest/reconstruction checks pass. Preserve 2209 prior node blocks, 1026 Knowledge Markdown paths, 109 accepted ADRs and all prior history. Book rendering and memory pass; all doctrines and exact staged canonical evidence govern landing and are recorded in the commit.
@@ -649,6 +665,8 @@ brief clearing, generated-residue census, post-pointer check, and clean proof re
 
 ## Commit Log
 
+- .10: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.10 - admit approved change-history member`.
+
 - .9: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.9 - admit approved engineering-history member`.
 
 - .8: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.8 - admit approved history member`.
@@ -668,6 +686,8 @@ brief clearing, generated-residue census, post-pointer check, and clean proof re
 - `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5`: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5 - compact duplicate startup chronology without losing evidence`.
 
 ## Changelog
+
+- `2026-09-10`: .10 implements the exact three-control approval under ADR0112, closes Dart intake .6 and routes .1.37 after clean canonical landing.
 
 - `2026-09-10`: .9 implements the two-control engineering-history approval under ADR0111, closes Dart intake .5 and routes .1.25 after clean canonical landing.
 

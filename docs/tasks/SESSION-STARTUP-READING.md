@@ -2224,7 +2224,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Goal: Split and read all 115 baseline Dart entries, including compiler/runtime, tests, commands, and package inputs.
   Reading owner: `docs/tasks/DART-STARTUP-READING.md` owns .0 decomposition, .1 reading, .2 new repair intake and .3 reading closeout; this startup node remains the prerequisite/closeout owner.
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas. DART-STARTUP-READING.3 may complete this reading node only after exact coverage/comprehension and child-commit proof; pending repairs remain owned separately.
-  Verification: Dart reading remains incomplete: DART-STARTUP-READING.1.36 closes 36/55 children, 52,028 fragments / 1,599,420 bytes with exact baseline identity. Action-contract/callable tests are complete; compiled tests reach 418. All 38 tests and neutral callable7/11/9/7/4/8/23 pass, including fresh offline emitted fixture/contextual/seven-error proof. No new defect. Existing Dart .2.1-.2.23, startup .22/.37/.55/.60/.67/.70 and FUTURE-PARITY-BACKLOG.5 retain evidence; .54.3 retains regex recurrence. Capacity .4/.5 remains committed under containment .8/.9 and ADR0110/0111. Next Dart .6 owns a director capacity decision (files31→32, manifest lines30→31/bytes17039→17615); .1.37 resumes only after approval and canonical admission. Exact rejected draft was restored; prior history and limits remain unchanged. Repairs remain gated.
+  Verification: Dart reading remains incomplete: DART-STARTUP-READING.1.36 closes 36/55 children, 52,028 fragments / 1,599,420 bytes with exact baseline identity. Action-contract/callable tests are complete; compiled tests reach 418. All 38 tests and neutral callable7/11/9/7/4/8/23 pass, including fresh offline emitted fixture/contextual/seven-error proof. No new defect. Existing Dart .2.1-.2.23, startup .22/.37/.55/.60/.67/.70 and FUTURE-PARITY-BACKLOG.5 retain evidence; .54.3 retains regex recurrence. Capacity .4/.5 remains committed under containment .8/.9 and ADR0110/0111. Director approval of Dart .6 is implemented by containment .10 / ADR0112: exactly files31→32, manifest lines30→31/bytes17039→17615. Fresh clean-source reconstruction and 22 actual-validator executions preserve every prior history byte; .1.37 resumes after clean canonical admission. Other limits remain unchanged. Repairs remain gated.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.5`
@@ -4332,12 +4332,12 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 ## Current Frontier
 
-Canonical admission a67a18bf and completed `DART-STARTUP-READING.0` decomposition preserve the full baseline. Approved history capacity is committed at 7d52c98e; engineering-history capacity is committed at 9c644ecb under containment .9 / ADR0111; resume `DART-STARTUP-READING.6` capacity decision after .1.36’s clean focused commit; .1.37 follows only after a clean admitted boundary in `docs/tasks/DART-STARTUP-READING.md`.
+Canonical admission a67a18bf and completed `DART-STARTUP-READING.0` decomposition preserve the full baseline. Approved history capacity is committed at 7d52c98e; engineering-history capacity is committed at 9c644ecb under containment .9 / ADR0111; director-approved change-history intake .6 is implemented by containment .10 / ADR0112 from clean e55f7703; resume `DART-STARTUP-READING.1.37` after its clean canonical boundary in `docs/tasks/DART-STARTUP-READING.md`.
 Startup `.3.4` remains pending until that tree proves complete Dart reading; admission itself grants no source-reading credit.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.6` | `pending` | Obtain the exact next history-member decision after .1.36 commits cleanly; .1.37 reading waits for approval/canonical admission, and source repairs remain gated. |
+| 1 | `DART-STARTUP-READING.1.37` | `pending` | Continue bounded Dart test reading after containment .10's clean canonical admission; source repairs remain gated. |
 
 ## Reading Ledger
 

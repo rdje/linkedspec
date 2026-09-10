@@ -127,6 +127,8 @@ changed* lives in git (layer D), not here.
 
 | [0111](0111-engineering-notes-twenty-seventh-member-capacity.md) | Admit exactly one approved engineering-history member: files 26→27, manifest lines 25→26 | 2026-09-10 | accepted | documentation, history, capacity, doctrine |
 
+| [0112](0112-change-history-thirty-second-member-capacity.md) | Admit exactly one approved change-history member: files 31→32, manifest lines 30→31 and bytes 17039→17615 | 2026-09-10 | accepted | documentation, history, capacity, doctrine |
+
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /
    Decision / Consequences / Links`).

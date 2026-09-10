@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / .1.36 complete; awaiting .6 capacity decision before .1.37
+- Status: `active` / .1.36 and approved capacity intake .6 complete; next .1.37
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-10`
@@ -22,7 +22,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - Existing startup repairs retain their IDs and evidence; new findings reuse those owners when applicable.
 - Repair implementation remains behind startup reading and policy gates; admission does not waive them.
 - Generics, libraries, builders, fileless MCP debugging and the approved format/language ideas remain parked.
-- Recovery/purge remains blocked by startup `.7`; capacity intakes .4/.5 own proposals only. No infrastructure increase or artifact purge is implemented in this tree.
+- Recovery/purge remains blocked by startup `.7`; capacity intakes .4/.5/.6 own proposals only. No infrastructure increase or artifact purge is implemented in this tree.
 
 ## Acceptance Criteria
 
@@ -64,7 +64,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - ID: `DART-STARTUP-READING`
   Status: `active`
   Goal: Complete bounded Dart reading and durable repair intake while preserving startup prerequisite ownership.
-  Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`
+  Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`
 
 - ID: `DART-STARTUP-READING.0`
   Status: `done`
@@ -1352,23 +1352,25 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.9 - admit approved engineering-history member` (intake closed by its separately owned implementation)
 
 - ID: `DART-STARTUP-READING.6`
-  Status: `pending`
+  Status: `done`
   Goal: Obtain and route the next change-history member capacity decision before .1.37.
   Dependencies: Completed .1.36 reading/intake; director decision before any additional infrastructure allowance under ADR0110.
   Scope: Proposal/intake only; stable responsibility remains LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3. Activate a separately owned canonical implementation only after approval and a clean repository.
   Proposal: change_history max_files31 to32, manifest max_lines30 to31 and manifest max_bytes17039 to17615. All root, segment, aggregate, ownership, route, schema and other collection limits remain unchanged; no further member is preapproved.
   Evidence: docs/knowledge/dart-reading-second-history-capacity-blocker.md retains the actual required rollover and exact routing rejection. Clean 6cb42d87 CHANGES247-457 is 211 lines/31668 bytes, SHA-25655830675f67c5814a5457a3c2adabc054d918b62582312c52d791fe268b78ef4. Draft manifest31/17615 and collection32/48767/3543340 exceed precisely the three proposed controls; all other ceilings fit. Every prior history byte is restored; a complete concise .1.36 record leaves CHANGES460/47004 below the unchanged90% threshold.
   Acceptance: Record the director decision. If approved, create/index an exact-limit ADR and separately owned canonical implementation, remeasure its actual source, preserve all prior history and prove actual validator boundaries before landing. If declined, retain history and obtain an alternative without archive rewriting or bypassing controls. Resume .1.37 only after a clean admitted boundary. This intake grants no source-reading credit, cleanup or parked feature activation.
-  Verification: Director decision pending. Actual rollover/rejection and exact restoration are complete; the pinned read-only proposal passes. ADR0110 explicitly requires new authority for any further increase. Completed .1.36 proof is committed first within unchanged limits.
-  Commit: `pending`
+  Verification: Director “Granted” approves exactly files31→32, manifest lines30→31 and bytes17039→17615. LIVE-DOCUMENT-PRESSURE-CONTAINMENT.10 implements from clean e55f7703 under indexed ADR0112 with fresh source/range/hash/count, complete prior-history retention, 22 actual-validator executions and exact staged canonical proof. The .1.36 draft remains historical evidence; no further capacity is authorized.
+  Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.10 - admit approved change-history member` (intake closed by its separately owned implementation)
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.6` | `pending` | Obtain the director decision on the exact next history member after the clean .1.36 commit; .1.37 remains next reading only after its admitted capacity boundary. |
+| 1 | `DART-STARTUP-READING.1.37` | `pending` | Continue exact compiled, named-mark, corpus, diagnostic and duplicate-slot test reading after containment .10's clean canonical capacity admission; all repair gates remain. |
 
 ## Decisions
+
+- `2026-09-10`: Director “Granted” approves .6 exactly. ADR0112 and containment .10 implement three change-history controls from clean e55f7703; all prior history and other gates/limits remain.
 
 - `2026-09-10`: Director “ok for increasing the allowance” approves .5 exactly. ADR0111 and containment .9 implement the two engineering-history count controls from clean 4d5af8e9; all other limits/gates remain.
 
@@ -1381,14 +1383,16 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Open Questions
 
-- None for source reading. The director approved .5; ADR0111 and containment .9 own its implementation.
+- None for source reading. The director approved .6; ADR0112 and containment .10 own its canonical implementation.
 
 ## Blockers
 
-- Engineering-history capacity .5 is admitted by containment .9 / ADR0111; change history remains admitted by .8 / ADR0110. No capacity blocker remains at this boundary. Source repairs .2.1-.2.16 remain gated.
+- Engineering-history capacity .5 is admitted by containment .9 / ADR0111; change-history .6 is admitted by .10 / ADR0112. No capacity decision remains at this boundary. Source repairs .2.1-.2.23 remain gated.
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-10`: .6 approval closes under containment .10 / ADR0112: exactly three controls, fresh clean-source reconstruction and 22 actual-validator executions; exact canonical proof precedes .1.37. Reading remains 36/55.
 
 - `2026-09-10`: `.1.36` completes callable-codeblock/action-contract tests and reads compiled tests through 418: 1,500 fragments / 48,187 baseline-identical bytes. All 38 selected tests and neutral callable7/11/9/7/4/8/23 pass, including fresh offline standalone emitted fixture/contextual/seven-error proof. Earlier findings remain intact; no new code defect. Required rollover rejects three exact history-capacity axes; the verified draft is restored and .6 owns the director decision. Reading reaches 36/55.
 
@@ -1463,6 +1467,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- `2026-09-10`: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.10 - admit approved change-history member` closes approved intake .6.
+
 - `.1.36`: `DART-STARTUP-READING.1.36 - complete callable contract test reading`.
 
 - `.1.35`: `DART-STARTUP-READING.1.35 - own null named-selector validation gap`.
@@ -1534,6 +1540,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-10`: Approved capacity intake .6 is implemented by containment .10 with fresh provenance and canonical proof; next .1.37.
 
 - `2026-09-10`: Completed .1.36 from clean 6cb42d87; completed callable test reading, began compiled tests, retained prior findings and owned capacity decision .6 before .1.37.
 

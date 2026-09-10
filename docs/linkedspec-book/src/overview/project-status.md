@@ -102,14 +102,16 @@ selected callable/compiled/action/variadic tests and the neutral callable contra
 A fresh standalone offline caller executes the neutral fixture, contextual final-block
 forms and all seven invalid calls. Existing callback-identity and validation limitations
 below remain separately owned. Child `.1.37` finishes compiled tests and continues named-mark,
-corpus, diagnostic and duplicate-slot test reading after the capacity decision below. Startup `.3.4` remains pending.
+corpus, diagnostic and duplicate-slot test reading after the approved capacity boundary below. Startup `.3.4` remains pending.
 
-**Continuity capacity — director decision pending:** the next history rollover needs one
-additional immutable archive member. The measured proposal is 31→32 collection files,
-30→31 manifest lines and 17,039→17,615 manifest bytes. Every prior history byte and all
-other ceilings stay unchanged. `DART-STARTUP-READING.6` owns approval and routes a separate
-canonical implementation; further reading commits await that admitted boundary.
-The completed .1.36 reading is preserved first in a concise record within current limits.
+**Continuity capacity — approved history preservation:** the director approved one
+additional immutable archive member. Containment `.10` and ADR0112 admit exactly
+31→32 collection files, 30→31 manifest lines and 17,039→17,615 manifest bytes.
+The governed rollover preserves 218 complete clean-source lines / 32,108 bytes,
+with exact provenance and full reconstruction of every earlier history byte.
+Twenty-two actual-validator executions verify the boundaries. Every other ceiling
+and repair prerequisite stays unchanged. Dart intake `.6` closes; child `.1.37`
+follows the clean canonical admission. This storage change grants no reading credit.
 
 **Known Dart limitation — null named selectors in reconstructed state:** a programmatically
 reconstructed target with these fields is incorrectly accepted:

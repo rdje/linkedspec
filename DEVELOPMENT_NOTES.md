@@ -10,6 +10,15 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-10 — one approved change-history member, with fresh provenance
+
+Containment .10 implements the director's “Granted” response to Dart intake .6.
+ADR0112 binds three scalar changes only. The governed rollover derives provenance
+from clean e55f7703; the earlier .1.36 proposal remains historical evidence.
+Full root/archive reconstruction, prior-record identity and actual validator
+boundaries verify preservation. Exact staged canonical proof governs landing;
+Dart reading stays 36/55 until .1.37 resumes after the clean commit.
+
 ## 2026-09-10 — callable consumer boundaries and compiled fixture ownership
 
 Dart .1.36 completes callable tests and reads compiler tests through 418.
