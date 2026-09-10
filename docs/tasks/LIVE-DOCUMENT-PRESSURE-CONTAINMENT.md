@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-- Status: `done` / `.8` admits approved history capacity; next Dart `.1.8`
+- Status: `done` / .9 admits approved engineering-history capacity; next Dart .1.25
 - Roadmap lane: `Repository architecture / documentation sustainability`
 - Created: `2026-08-09`
-- Last updated: `2026-09-09` (`.8` closes approved history capacity; exact canonical evidence belongs to its commit)
+- Last updated: `2026-09-10` (.9 closes approved capacity; exact canonical evidence belongs to its commit)
 - Owner: repo-local workflow
 
 ## Goal
@@ -58,10 +58,10 @@ or the README `.4` adoption/closeout that installs the guard.
 ## Task Tree
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-  Status: `done` (`.0-.8` complete; Dart reading remains 7/55)
+  Status: `done` (.0-.9 complete; Dart reading remains 24/55)
   Goal: Replace measured oversized routed destinations with bounded views over durable stores.
   Depends on: `README-STABILITY-POLICY.4.2`
-  Children: `.0-.8`
+  Children: `.0-.9`
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0`
   Status: `done` (2026-08-09; committed atomically at `dc8dd896` as 176/300; brief cleared; clean proof passed;
@@ -403,11 +403,25 @@ or the README `.4` adoption/closeout that installs the guard.
   Verification: Governed segment 4982 preserves clean f8b626f0 CHANGES lines 221-393, blob 8e1f556504159c8042676a9c49efbeb448de2bfe, 173 lines / 26767 bytes, SHA-256 c00b7a2471b553ab83c98d104a731ac521966e5219be58daa289cd012c754aa7. Independent comparison preserves all prior manifest records and other history files; full archive reconstruction passes. Exactly three registry scalars change; 22 actual validator executions reject the old measured limits and exercise equality and independent/combined overflow. Manifest is 30 lines / 17039 bytes; collection 31 files / 48525 lines / 3528243 bytes. ADR0110 records the director greenlight; exact final preservation, doctrine, book and canonical results belong to this commit.
   Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.8 - admit approved history member`
 
+- ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.9`
+  Status: `done`
+  Goal: Admit the approved additional engineering-history member so committed Dart reading can continue.
+  Dependencies: Clean `4d5af8e9669b2204db1d394ee0ab01ce190ee1c9`; zero-byte brief; director “ok for increasing the allowance” approves DART-STARTUP-READING.5's two exact controls.
+  Scope: engineering_notes max_files 26 to 27 and manifest max_lines 25 to 26; indexed exact-limit ADR and governed rollover. Stable responsibility remains .3; all byte, root, segment and aggregate ceilings, routes, verifier and prior immutable bytes remain unchanged.
+  Acceptance: Remeasure actual clean source and complete candidate; prove exact blob/range/hash/count, old manifest/history preservation and full chronology reconstruction. Exercise actual routing-validator boundaries and resulting-tree pressure. Close approved Dart intake .5, align book/Knowledge/live docs, run exact staged canonical proof and commit before reading .1.25. No parser repair, purge, further capacity or parked-feature activation.
+  Verification tier: `canonical`
+  Focused checks: Exact two-scalar registry diff, source/range/manifest/full-history reconstruction and prior task/Knowledge/ADR retention; actual validator boundaries, all doctrines, both histories, Knowledge freshness, rendered mdBook and staged scope.
+  Canonical trigger: `Engineering-history routing infrastructure and containment-parent closeout` — exact staged canonical receipt required before commit.
+  Verification: Exact two-scalar registry proof and 22 real-validator executions pass. Governed segment 4981 preserves clean 4d5af8e9 DEVELOPMENT_NOTES lines 247-453, blob 4e7133e7431c21095047e92338cd5aca84ac6d0e, 207 lines / 32348 bytes, SHA-256 a05653da7d6cf5c2b36c780e9322e3ab336ef97178e21876d2fb20fc74fb8be0. All prior manifest records and other history files remain exact; full query and root reconstruction pass. Root is 253 lines / 27043 bytes; manifest 26 lines / 15618 bytes; collection 27 files / 25865 lines / 2775788 bytes. ADR0111 records approval; complete preservation, doctrine, book and exact staged canonical results belong to this commit.
+  Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.9 - admit approved engineering-history member`
+
 ## Current Frontier
 
-This tree closes after .8’s exact canonical commit, brief clearing and clean proof. Resume `DART-STARTUP-READING.1.8` in `docs/tasks/DART-STARTUP-READING.md`. Dart reading remains 7/55; startup `.3.4` remains the reading prerequisite/closeout owner and all other startup gates stay in force.
+This tree closes after .9’s exact canonical commit, brief clearing and clean proof. Resume `DART-STARTUP-READING.1.25` in `docs/tasks/DART-STARTUP-READING.md`. Dart reading remains 24/55; startup .3.4 and all remaining reading/repair gates stay in force.
 
 ## Decisions
+
+- `2026-09-10`: Director “ok for increasing the allowance” approves Dart intake .5: engineering_notes files 26→27 and manifest lines 25→26. .9 owns implementation from clean 4d5af8e9; every other gate/limit remains.
 
 - `2026-09-09`: Director “Greenlighted !” authorizes the exact three-control proposal in DART-STARTUP-READING.4; ADR0110 and .8 implement it from clean f8b626f0. No other capacity or startup exception is granted.
 
@@ -529,6 +543,8 @@ All files and transient proof stay on the repository filesystem; no off-volume c
 
 ## Verification Log
 
+- `2026-09-10` .9: Exact two-scalar registry/source/manifest/full-history proof and 22 real-validator executions pass. Source lines 247-453 preserve 207 lines / 32348 bytes; prior history remains byte-identical. Complete prior task/Knowledge/ADR retention, book, doctrines and receipt-bound canonical results belong to the commit.
+
 - `2026-09-09` .8: 22 real-validator executions and exact registry/source/manifest/reconstruction checks pass. Preserve 2209 prior node blocks, 1026 Knowledge Markdown paths, 109 accepted ADRs and all prior history. Book rendering and memory pass; all doctrines and exact staged canonical evidence govern landing and are recorded in the commit.
 
 - `2026-09-08` `.6`: four-source Git/node/table/retained-note audit, byte-exact inverse reconstruction and corrected-reference provenance pass; metadata passes partitions 27/27, current-ID 10/10 and stable-marker controls. Final focused continuity proof belongs to its commit.
@@ -633,6 +649,8 @@ brief clearing, generated-residue census, post-pointer check, and clean proof re
 
 ## Commit Log
 
+- .9: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.9 - admit approved engineering-history member`.
+
 - .8: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.8 - admit approved history member`.
 
 - `.6`: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.6 - consolidate verified task chronology and correct historical references`.
@@ -650,6 +668,8 @@ brief clearing, generated-residue census, post-pointer check, and clean proof re
 - `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5`: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5 - compact duplicate startup chronology without losing evidence`.
 
 ## Changelog
+
+- `2026-09-10`: .9 implements the two-control engineering-history approval under ADR0111, closes Dart intake .5 and routes .1.25 after clean canonical landing.
 
 - `2026-09-09`: .8 implements the director-approved history exception under ADR0110, closes Dart intake .4 and routes .1.8 after clean canonical landing.
 

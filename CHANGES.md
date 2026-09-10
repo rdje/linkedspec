@@ -10,6 +10,15 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-10 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.9: approved engineering-history slot
+
+Admit the two approved engineering_notes controls: files 26→27 and manifest lines
+25→26, with indexed ADR0111 and governed complete-record rollover. Exact source,
+history reconstruction, old-record retention and actual validator boundaries
+verify the candidate. All byte limits remain unchanged; exact staged canonical
+proof governs landing. Dart intake .5 closes; reading .1.25 resumes after clean
+commit. Parser behavior, earlier defects and parked ideas remain unchanged.
+
 ## 2026-09-10 — DART-STARTUP-READING.1.24: recognition and source authority
 
 Read 1,500 fragments / 48,312 unchanged bytes: recognition, semantic observation

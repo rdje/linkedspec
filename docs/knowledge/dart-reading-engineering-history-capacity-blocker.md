@@ -1,16 +1,16 @@
 ---
 id: dart-reading-engineering-history-capacity-blocker
-title: Dart reading needs one additional engineering-history archive slot
+title: Dart reading engineering-history slot is approved and preserved
 answers:
   - which engineering history limits block Dart reading after child 24
   - did Dart child 24 preserve every engineering history byte
   - does the prior change history greenlight authorize another engineering history slot
   - what exact capacity proposal does DART STARTUP READING 5 own
 date: 2026-09-10
-status: proposed; director decision pending; no capacity limit changed
+status: director approved; ADR0111 implemented by containment .9 with exact canonical landing proof
 tags: [dart, startup, continuity, history, capacity, approval]
 evidence: "DART-STARTUP-READING.1.24's mandatory draft rollover preserves clean 62b02fec notes lines 249-447, 199 lines / 31079 bytes. Routing rejects only collection files 27/26 and manifest lines 26/25. The verified uncommitted rollover was restored; a concise 292-byte summary lets .1.24 land at 453 lines / 58932 bytes, with full findings in task/Knowledge/book. Only 50 bytes remain below rollover. Intake .5 owns the separate proposal."
-reverify: "Pinned draft: DART_ENGINEERING_HISTORY_PROPOSAL below. Current unapproved controls: DART_ENGINEERING_HISTORY_BOUNDARIES below. For later live pressure run both roll_document_history.pl --check commands and scripts/check_readme_stability.sh; accepted implementation must remeasure actual source and candidate."
+reverify: "Historical draft: DART_ENGINEERING_HISTORY_PROPOSAL. Exact .9 candidate/commit: ENGINEERING_HISTORY_ADMISSION and ENGINEERING_HISTORY_BOUNDARIES below. For later live pressure use both roll_document_history.pl --check commands and scripts/check_readme_stability.sh."
 ---
 
 ## Exact proposal
@@ -168,3 +168,141 @@ DART_ENGINEERING_HISTORY_BOUNDARIES
 
 Related: [[engineering-notes-twenty-sixth-member-capacity]],
 [[dart-reading-history-capacity-blocker]], [[bounded-change-notes-history-contract]].
+
+## Approved admission — 2026-09-10
+
+The director answered “ok for increasing the allowance”, approving the two
+controls above. `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.9` and indexed ADR0111
+implement that approval from clean `4d5af8e9669b2204db1d394ee0ab01ce190ee1c9`.
+The historical draft and unapproved-control recipe above retain their dated
+scope; the current admitted-candidate checks are below.
+
+Actual rollover starts at 461 lines / 59,392 bytes. It preserves clean source
+lines 247-453, blob `4e7133e7431c21095047e92338cd5aca84ac6d0e`, as
+207 lines / 32,348 bytes under SHA-256
+`a05653da7d6cf5c2b36c780e9322e3ab336ef97178e21876d2fb20fc74fb8be0`.
+The earlier draft's 199-line suffix changes because .1.24's committed record
+and .9's new note change the complete-record cut needed to reach at most 256
+lines. Both exact source selections remain independently reproducible.
+
+The admitted hot root is 253 lines / 27,043 bytes after removing one final
+separator LF; immutable bytes are untouched. Manifest: 26 lines / 15,618 bytes;
+collection: 27 files / 25,865 lines / 2,775,788 bytes. Only the two approved
+count scalars change. Every old manifest record and other history file remains
+byte-identical; dropping .9's new note and restoring that one separator LF
+reconstructs the prior hot root exactly with the new archive. The full archive
+query also matches every manifest-ordered byte.
+
+All 22 actual-validator executions pass at/below/above independent and combined
+boundaries; the measured candidate fails exactly the two former controls and
+fits the accepted ones. Focused preservation, rendered book and doctrines plus
+the exact staged canonical gate govern .9's commit. No further limit, source
+repair, purge or parked-feature activation is authorized. Dart .1.25 resumes
+only after canonical landing and clean handoff.
+
+```bash
+bash tools/project_data_run.sh python3 - <<'ENGINEERING_HISTORY_ADMISSION'
+from pathlib import Path
+import subprocess,json,hashlib,glob,re
+BASE='4d5af8e9669b2204db1d394ee0ab01ce190ee1c9'
+def git(*args):return subprocess.check_output(['git',*args])
+registry='doctrine/readme_stability/routes.jsonl';manifest='docs/history/development-notes/manifest.jsonl'
+before=git('show',BASE+':'+registry).splitlines();after=Path(registry).read_bytes().splitlines()
+assert len(before)==len(after)
+changed=0
+for a,b in zip(before,after):
+    if a==b:continue
+    old=json.loads(a);new=json.loads(b);assert old['id']==new['id']=='engineering_notes'
+    assert old['limits']['max_files']==26
+    assert old['member_limits'][manifest]=={'max_lines':25,'max_bytes':16384}
+    old['limits']['max_files']=27;old['member_limits'][manifest]['max_lines']=26
+    assert old==new;changed+=1
+assert changed==1
+old=git('show',BASE+':'+manifest).splitlines(keepends=True)
+current=Path(manifest).read_bytes();rows=current.splitlines(keepends=True)
+assert rows[2:]==old[1:]
+h=json.loads(old[0]);h['segment_count']+=1;assert json.loads(rows[0])==h
+r=json.loads(rows[1]);assert r['source_commit']==BASE and r['segment_id']=='4981'
+source=git('show',BASE+':DEVELOPMENT_NOTES.md')
+assert r['source_blob']==git('rev-parse',BASE+':DEVELOPMENT_NOTES.md').decode().strip()=='4e7133e7431c21095047e92338cd5aca84ac6d0e'
+segment=Path(r['target_path']).read_bytes()
+assert segment==b''.join(source.splitlines(keepends=True)[246:453])
+assert (r['source_start_line'],r['source_end_line'],r['line_count'],r['byte_count'])==(247,453,207,32348)
+assert hashlib.sha256(segment).hexdigest()==r['sha256']=='a05653da7d6cf5c2b36c780e9322e3ab336ef97178e21876d2fb20fc74fb8be0'
+assert len(rows)==26 and len(current)==15618
+paths=sorted(glob.glob('docs/history/development-notes/*.md'))+['DEVELOPMENT_NOTES.md',manifest]
+assert len(paths)==27
+root=Path('DEVELOPMENT_NOTES.md').read_bytes()
+marks=list(re.finditer(rb'^## ',root,re.M));assert len(marks)>=2
+assert root[marks[0].start():].startswith(b'## 2026-09-10 \xe2\x80\x94 engineering-history capacity')
+assert root[:marks[0].start()]+root[marks[1].start():]+b'\n'+segment==source
+all_archived=subprocess.check_output(['perl','tools/read_document_history.pl','--surface','engineering_notes','--all'])
+expected=b''.join(Path(json.loads(row)['target_path']).read_bytes() for row in rows[1:])
+assert all_archived==expected and all_archived.startswith(segment)
+old_paths=git('ls-tree','-r','--name-only',BASE,'--','docs/history/').decode().splitlines()
+requests=b''.join((BASE+':'+p+'\n').encode() for p in old_paths)
+batch=subprocess.check_output(['git','cat-file','--batch'],input=requests);offset=0
+for p in old_paths:
+    end=batch.index(b'\n',offset);size=int(batch[offset:end].split()[2]);offset=end+1
+    data=batch[offset:offset+size];offset+=size+1
+    if p!=manifest:assert Path(p).read_bytes()==data,p
+assert offset==len(batch)
+metrics={'files':len(paths),'lines':sum(len(Path(p).read_bytes().splitlines()) for p in paths),'bytes':sum(Path(p).stat().st_size for p in paths)}
+assert metrics=={'files':27,'lines':25865,'bytes':2775788}
+assert (len(root.splitlines()),len(root))==(253,27043)
+print(json.dumps({'source_commit':BASE,'source_blob':r['source_blob'],'source_lines':[247,453],
+'segment_bytes':len(segment),'segment_sha256':r['sha256'],'prior_history_files':len(old_paths),
+'root_lines':len(root.splitlines()),'root_bytes':len(root),'manifest_lines':len(rows),'manifest_bytes':len(current),
+'collection':metrics,'archive_reconstruction_sha256':hashlib.sha256(all_archived).hexdigest()}))
+print('PASS two-scalar-only controls, exact source and prior manifest retention, full-byte chronology reconstruction')
+
+ENGINEERING_HISTORY_ADMISSION
+```
+
+```bash
+bash tools/project_data_run.sh perl - <<'ENGINEERING_HISTORY_BOUNDARIES'
+use strict;use warnings;use JSON::PP ();
+sub read_source {my($p)=@_;open my $f,'<:raw',$p or die "$p: $!";local $/;my $s=<$f>;close $f or die $!;return $s}
+my $src=read_source('scripts/check_readme_routing_pressure.pl');
+my($fn)=$src=~/(^sub exceeds_limits \{.*?^\})/ms;die 'missing validator' unless defined $fn;
+eval($fn."\n1;") or die $@;
+my $json=JSON::PP->new->canonical(1);
+my @rs=map {$json->decode($_)} split /\n/,read_source('doctrine/readme_stability/routes.jsonl');
+my($r)=grep {$_->{type} eq 'surface' && $_->{id} eq 'engineering_notes'} @rs;
+my $manifest='docs/history/development-notes/manifest.jsonl';
+die 'approved boundary moved; remeasure' unless $r->{limits}{max_files}==27 && $r->{member_limits}{$manifest}{max_lines}==26;
+my $proposal=$json->decode($json->encode($r));
+my $l=$proposal->{limits};my $n=0;
+my @labels=('files','aggregate lines','aggregate bytes','segment.md lines','segment.md bytes');
+for my $case(-2..5) {
+ my $m={files=>$l->{max_files},lines=>$l->{max_total_lines},bytes=>$l->{max_total_bytes},
+  members=>['segment.md'],per_file=>{'segment.md'=>{lines=>$l->{max_lines_per_file},bytes=>$l->{max_bytes_per_file}}}};
+ my @slots=(\$m->{files},\$m->{lines},\$m->{bytes},\$m->{per_file}{'segment.md'}{lines},\$m->{per_file}{'segment.md'}{bytes});
+ if($case==-2){--$$_ for @slots}elsif($case==5){++$$_ for @slots}elsif($case>=0){++${$slots[$case]}}
+ my @got=map {s/ \d+\/\d+\z//r} exceeds_limits($m,$l);
+ my @want=$case==5?@labels:$case>=0?($labels[$case]):();
+ die "collection case $case: @got" unless $json->encode(\@got) eq $json->encode(\@want);++$n;
+}
+for my $path ('DEVELOPMENT_NOTES.md',$manifest) {
+ my $cap=$proposal->{member_limits}{$path};
+ for my $case(-2..2){
+  my $m={lines=>$cap->{max_lines},bytes=>$cap->{max_bytes}};
+  --$m->{$_} for $case==-2?qw(lines bytes):();
+  ++$m->{lines} if $case==0 || $case==2;++$m->{bytes} if $case==1 || $case==2;
+  my @got=map {s/ \d+\/\d+\z//r} exceeds_limits($m,$cap);
+  my @want=$case==2?qw(lines bytes):$case==0?('lines'):$case==1?('bytes'):();
+  die "$path case $case: @got" unless $json->encode(\@got) eq $json->encode(\@want);++$n;
+ }
+}
+my $m={files=>27,lines=>25865,bytes=>2775788,members=>[],per_file=>{}};
+my %old_limits=%{$r->{limits}};$old_limits{max_files}=26;
+my @old=exceeds_limits($m,\%old_limits);my @new=exceeds_limits($m,$l);
+die 'collection measured control' unless "@old" eq 'files 27/26' && !@new;
+my $mm={lines=>26,bytes=>15618};
+my %old_member=%{$r->{member_limits}{$manifest}};$old_member{max_lines}=25;
+@old=exceeds_limits($mm,\%old_member);@new=exceeds_limits($mm,$proposal->{member_limits}{$manifest});
+die 'manifest measured control' unless "@old" eq 'lines 26/25' && !@new;
+$n+=4;die "count $n" unless $n==22;
+print "PASS 22 actual validator executions; approved two-scalar controls fit measured candidate and retain every independent boundary. No registry mutation.\n";
+ENGINEERING_HISTORY_BOUNDARIES
+```

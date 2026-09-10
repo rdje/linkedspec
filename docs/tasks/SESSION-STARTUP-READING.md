@@ -2224,7 +2224,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Goal: Split and read all 115 baseline Dart entries, including compiler/runtime, tests, commands, and package inputs.
   Reading owner: `docs/tasks/DART-STARTUP-READING.md` owns .0 decomposition, .1 reading, .2 new repair intake and .3 reading closeout; this startup node remains the prerequisite/closeout owner.
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas. DART-STARTUP-READING.3 may complete this reading node only after exact coverage/comprehension and child-commit proof; pending repairs remain owned separately.
-  Verification: Dart reading remains incomplete: DART-STARTUP-READING.1.24 closes 24/55 children, 34,028 fragments / 1,079,144 bytes with exact baseline identity and 58 selected tests. Recognition, semantic observation and source location are fully read; staged entry reaches 306. Existing authorities reconcile without a new runtime defect; a stale source-authority Knowledge link is corrected. Startup .37/.55/.60, Dart .2.1-.2.16 and FUTURE-PARITY-BACKLOG.5 retain ownership; .54.3 retains regex-brace recurrence. Capacity intake .4 is closed through containment .8 / ADR0110; engineering-history .5 now requires a separate capacity decision before .1.25 continues staged execution. Earlier evidence and repairs remain intact.
+  Verification: Dart reading remains incomplete: DART-STARTUP-READING.1.24 closes 24/55 children, 34,028 fragments / 1,079,144 bytes with exact baseline identity and 58 selected tests. Recognition, semantic observation and source location are fully read; staged entry reaches 306. Existing authorities reconcile without a new runtime defect; a stale source-authority Knowledge link is corrected. Startup .37/.55/.60, Dart .2.1-.2.16 and FUTURE-PARITY-BACKLOG.5 retain ownership; .54.3 retains regex-brace recurrence. Capacity intake .4 is closed through containment .8 / ADR0110; engineering-history .5 is approved and implemented by containment .9 / ADR0111; .1.25 continues staged execution after its clean canonical commit. Earlier evidence and repairs remain intact.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.5`
@@ -4327,12 +4327,12 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 ## Current Frontier
 
-Canonical admission a67a18bf and completed `DART-STARTUP-READING.0` decomposition preserve the full baseline. Approved history capacity is committed at 7d52c98e; resolve `DART-STARTUP-READING.5` capacity after the clean .1.24 reading commit, then resume .1.25 in `docs/tasks/DART-STARTUP-READING.md`.
+Canonical admission a67a18bf and completed `DART-STARTUP-READING.0` decomposition preserve the full baseline. Approved history capacity is committed at 7d52c98e; engineering-history capacity is admitted by containment .9 / ADR0111; resume `DART-STARTUP-READING.1.25` after its clean canonical commit in `docs/tasks/DART-STARTUP-READING.md`.
 Startup `.3.4` remains pending until that tree proves complete Dart reading; admission itself grants no source-reading credit.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.5` | `pending` | Engineering-history capacity decision before .1.25; 24/55 reading children complete. Source repairs remain gated. |
+| 1 | `DART-STARTUP-READING.1.25` | `pending` | Continue staged execution from line 307 after clean canonical containment .9; 24/55 reading children complete. Source repairs remain gated. |
 
 ## Reading Ledger
 

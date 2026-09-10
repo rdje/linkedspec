@@ -97,7 +97,7 @@ interpreter, matching, recognition transactions, semantic observation and source
 plus staged enrichment through line 306. This covers 34,028 fragments / 1,079,144 bytes.
 The latest 58 selected recognition/observation/gap/source/semantic-index/staged tests pass.
 No new runtime defect is established. Child `.1.25` continues staged execution from line 307
-after the engineering-history capacity decision described below;
+after canonical admission of the approved engineering-history capacity described below;
 startup `.3.4` remains pending. Earlier checkpoints retain their evidence and known limitations.
 
 The function shell checks the returned definition's text against scalar spans, reconciles staged
@@ -297,15 +297,16 @@ every earlier record; 22 executions of the actual capacity validator verify the 
 The exact staged canonical gate governs landing. Other root, segment and aggregate ceilings
 remain unchanged; this closed the change-history prerequisite at containment .8.
 
-**Pending continuity decision — engineering history:** reading child .1.24's prescribed
-rollover preserves all earlier notes but requires one more archive slot: collection files
-26→27 and manifest lines 25→26. All byte limits still fit. The draft archive and every
-prior record were verified before restoring that uncommitted rollover. A concise new
-summary lets .1.24 commit under existing controls; its full findings remain in the
-task-tree and Knowledge cards. Only 50 bytes remain below the next mandatory rollover.
-`DART-STARTUP-READING.5` owns this separate, unapproved proposal and blocks .1.25;
-`docs/knowledge/dart-reading-engineering-history-capacity-blocker.md` preserves the
-exact measurements and replay. No parser behavior or storage limit has changed.
+**Approved continuity capacity — engineering history:** the director approved intake
+`DART-STARTUP-READING.5`. Containment .9 and ADR0111 admit one archive slot:
+collection files 26→27 and manifest lines 25→26. All byte limits remain unchanged.
+The actual rollover preserves 207 clean-source lines / 32,348 bytes, with exact
+reconstruction of every earlier note and manifest record. The retained note file
+is 253 lines / 27,043 bytes; the manifest is 26 lines / 15,618 bytes. All 22
+checks of the actual capacity validator pass. The historical proposal and current
+proof remain in `docs/knowledge/dart-reading-engineering-history-capacity-blocker.md`.
+Exact staged canonical proof governs .9's commit; Dart reading .1.25 follows its
+clean handoff. Parser behavior and prior defect owners remain unchanged.
 
 The director's exception covers capacity infrastructure only; other reading/repair gates and the
 parked authoring and format ideas remain at their current status.

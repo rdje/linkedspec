@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / `.1.24` complete; .5 awaits a capacity decision before .1.25
+- Status: `active` / .1.24 complete; .5 capacity approved and implemented; next .1.25
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-10`
@@ -1103,23 +1103,25 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.8 - admit approved history member` (proposal intake routed and closed by its separately owned implementation)
 
 - ID: `DART-STARTUP-READING.5`
-  Status: `pending`
+  Status: `done`
   Goal: Obtain and route the engineering-history capacity exception required before further committed reading.
   Dependencies: .1.24 committed with an empty brief and clean repository; director decision before additional infrastructure changes under ADR0109.
   Scope: Proposal/intake only. Stable responsibility stays LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3; after approval, create a separately owned canonical implementation from a clean repository.
   Proposal: engineering_notes max_files 26 to 27; its manifest max_lines 25 to 26. All byte, root, segment and aggregate limits, ownership, routes, verifier and prior immutable content remain unchanged.
   Evidence: docs/knowledge/dart-reading-engineering-history-capacity-blocker.md retains the exact governed draft: clean 62b02fec DEVELOPMENT_NOTES lines 249-447, 199 lines / 31079 bytes, SHA-256 dc8219d5abb8a57b27ca22971d1ae48d19b192277585cf7d98529bdfea90cf8c. The routing gate rejects precisely 27/26 files and 26/25 manifest lines; manifest 15618/16384 bytes and aggregate 25860/27000 lines, 2775501/3145728 bytes fit. The verified draft was restored before .1.24 landing; a concise current record retains full linked evidence and leaves only 50 bytes under mandatory rollover.
   Acceptance: Record the director decision. If approved, add/index an exact-limit ADR and a separately owned canonical implementation with actual-source remeasurement, immutable-history reconstruction, real-validator boundary checks and receipt-bound canonical proof; admit only these two controls. If declined, preserve history and obtain an alternative. Resume .1.25 only after a clean admitted capacity boundary; no further slot is preapproved.
-  Verification: `pending` director decision; .1.24 owns completed draft/source/retention proof and proposal preparation.
-  Commit: `pending`
+  Verification: Director “ok for increasing the allowance” approves exactly files 26→27 and manifest lines 25→26. LIVE-DOCUMENT-PRESSURE-CONTAINMENT.9 implements from clean 4d5af8e9 under indexed ADR0111 with actual-source remeasurement, exact history preservation, 22 actual-validator executions and canonical proof. .1.24 retains the historical draft; no further slot is authorized.
+  Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.9 - admit approved engineering-history member` (intake closed by its separately owned implementation)
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.5` | `pending` | Decide the exact engineering-history capacity proposal before further committed reading; .1.25 remains next source slice. |
+| 1 | `DART-STARTUP-READING.1.25` | `pending` | Continue staged execution from line 307 after containment .9 commits canonically and cleanly; reading remains 24/55. |
 
 ## Decisions
+
+- `2026-09-10`: Director “ok for increasing the allowance” approves .5 exactly. ADR0111 and containment .9 implement the two engineering-history count controls from clean 4d5af8e9; all other limits/gates remain.
 
 - `2026-09-09`: Director greenlight approves .4 exactly; ADR0110 and containment .8 implement it from clean f8b626f0. Other startup gates remain.
 
@@ -1130,11 +1132,11 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Open Questions
 
-- .5 requires a director decision for engineering_notes files 26→27 and manifest lines 25→26. Prior .4 approval covered change_history only.
+- None for source reading. The director approved .5; ADR0111 and containment .9 own its implementation.
 
 ## Blockers
 
-- Engineering-history capacity .5 blocks further committed reading after .1.24. Change-history capacity remains admitted by containment .8 / ADR0110. Source repairs .2.1-.2.16 remain gated.
+- Engineering-history capacity .5 is admitted by containment .9 / ADR0111; change history remains admitted by .8 / ADR0110. No capacity blocker remains at this boundary. Source repairs .2.1-.2.16 remain gated.
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
