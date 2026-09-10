@@ -2224,7 +2224,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Goal: Split and read all 115 baseline Dart entries, including compiler/runtime, tests, commands, and package inputs.
   Reading owner: `docs/tasks/DART-STARTUP-READING.md` owns .0 decomposition, .1 reading, .2 new repair intake and .3 reading closeout; this startup node remains the prerequisite/closeout owner.
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas. DART-STARTUP-READING.3 may complete this reading node only after exact coverage/comprehension and child-commit proof; pending repairs remain owned separately.
-  Verification: Dart reading remains incomplete at 44/55 children, 64,028 fragments / 1,972,485 bytes. Dart .1.44 completes repeated-action and root-selection admission/core/routes tests and reads cursor admission through 298: 1,500 fragments / 45,785 baseline-identical bytes. All 13 selected tests and repeated-action/root-selection/cursor neutral checks pass. No new defect; prior findings, CI .80/.81 and all source-repair gates remain. Capacities .4/.5/.6 remain committed under containment .8/.9/.10 and ADR0110/0111/0112. Startup .3/.4/.5 still gate repairs; next Dart .1.45.
+  Verification: Dart reading remains incomplete at 45/55 children, 65,528 fragments / 2,014,247 bytes. Dart .1.45 completes cursor admission, descriptor, execution and normalization consumers and reads interpreter tests through 407: 1,500 fragments / 41,762 baseline-identical bytes. All 75 selected tests and the neutral cursor check pass. No new defect; prior findings, CI .80/.81 and all source-repair gates remain. Capacities .4/.5/.6 remain committed under containment .8/.9/.10 and ADR0110/0111/0112. Startup .3/.4/.5 still gate repairs; next Dart .1.46.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.5`
@@ -4439,7 +4439,7 @@ Startup `.3.4` stays pending until complete Dart reading; the next executable re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.45` | `pending` | Continue cursor admission, descriptor, execution, normalization and interpreter test reading. After .1.44 commit/brief/clean proof; repair gates remain. |
+| 1 | `DART-STARTUP-READING.1.46` | `pending` | Continue bounded runtime interpreter test reading from line 408. After .1.45 commit/brief/clean proof; repair gates remain. |
 
 ## Reading Ledger
 

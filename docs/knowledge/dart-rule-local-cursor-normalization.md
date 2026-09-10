@@ -73,3 +73,12 @@ Related: [[dart-rule-local-cursor-preflight]],
 [[rule-local-cursor-and-bare-edge-contract]],
 [[rule-local-cursor-neutral-contract]], [[rust-rule-local-cursor-normalization]],
 and [[FUTURE-PARITY-BACKLOG]].
+
+## September 10 complete normalization-consumer reading
+
+`DART-STARTUP-READING.1.45` reads all 267 consumer lines. Five normalization tests
+pass within the 75-test selection. Exact family metadata, complete-line/header-rest
+typed bare candidates, lifecycle priority, all contract edges and ownership sets,
+diagnostic field values and JSON roundtrips are checked. Same-line regex suffixes
+do not become bare edges. Generated-v2 family classification is checked here;
+execution proof is in the adjacent execution consumer. No new defect is confirmed.

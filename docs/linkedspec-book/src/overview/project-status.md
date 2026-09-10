@@ -89,7 +89,7 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed forty-four of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed forty-five of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
 parser bridge, function-shell projection, bounded child-parse authority, generated rule plan,
@@ -99,25 +99,27 @@ index, query, runtime/static projection, SHA-256, source emission, trace and val
 Package inputs, action-parser/action-contract, callable-codeblock, compiled-spec, named-mark,
 corpus, diagnostic-output, duplicate-slot, frontend/function-trace, function-registry,
 inter-match-gap, logical-helper, receiver-mutation, MCP, native pipeline trace, primary CLI,
-progressive, punctuation-light, recognition, recursive-observation, repeated-action and
-root-selection tests are complete. Cursor admission reaches line 298. This covers
-64,028 fragments / 1,972,485 bytes. All 13 selected tests and repeated-action,
-root-selection and cursor neutral checks pass.
+progressive, punctuation-light, recognition, recursive-observation, repeated-action,
+root-selection and rule-local cursor tests are complete. Interpreter tests reach line 407.
+This covers 65,528 fragments / 2,014,247 bytes. All 75 selected tests and the neutral
+cursor contract check pass.
 
-Entry selection uses one ordered rule: an explicit selector wins, then the first authored
-top marker, then the first authored rule. For example, selecting an unmarked `Earlier`
-rule leaves every authored marker and the descriptor unchanged. Empty sources fail
-validation; an unknown selector fails before user code. Generated contract validation
-runs before either selection failure.
+Cursor policy follows each entered rule's family. For example, an AND parent can call
+an OR child that seeks past intervening text; an OR parent's seeking does not make an
+AND child seek. Live, normalized-AST and generated-v2 routes exercise all 36 family
+spellings and eight parent/child cases. Loaded traces identify policy at each entry.
 
-Repeated-action tests confirm per-hit collection, whole-rule lifecycle returns, exact
-bounds and one retained zero-width hit before stopping. Cursor tests begin the admitted
-seek/consume, child-policy, recursion and structural-order checks. Root and cursor
-emitted admission roles inspect entry-point source and metadata; this selection does
-not independently run those emitted parsers. The repeated-action consumer does.
+Descriptor tests compare exact metadata and normalized edge order after direct
+compilation, normalized-AST reconstruction and file loading. Action edges publish
+their resolved regex index; blind edges publish null. This is an outward descriptor
+projection. These tests do not introduce a descriptor decoder or independently run an
+emitted parser module.
 
-No new defect was confirmed. Child `.1.45` continues cursor admission, descriptor,
-execution, normalization and interpreter tests; startup `.3.4` remains pending.
+The interpreter prefix verifies collection, recursive rule-local state, child returns,
+self-closing slots, marks and repetition boundaries. The full interpreter test file
+passed, while its unread source remains assigned to later reading children. No new
+defect was confirmed. Child `.1.46` continues at interpreter line 408; startup `.3.4`
+remains pending.
 
 **Continuity capacity — approved history preservation:** the director approved one
 additional immutable archive member. Containment `.10` and ADR0112 admit exactly
@@ -143,7 +145,7 @@ in 2.25 seconds. That sample locates a pre-main wait without establishing its OS
 or a remedy. The older macOS 26.5.2 closeout does not resolve this macOS 26.6.2 observation.
 The evidence and repair criteria are logged by `SESSION-STARTUP-READING.80.0`; source
 changes remain behind the existing startup prerequisites. The intake is committed at
-`eaf4331e`; Dart reading continues at `.1.45`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
+`eaf4331e`; Dart reading continues at `.1.46`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
 
 **Known Dart limitation — null named selectors in reconstructed state:** a programmatically
 reconstructed target with these fields is incorrectly accepted:

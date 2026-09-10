@@ -12,8 +12,8 @@ answers:
   - does loaded Dart descriptor match direct compilation
   - how is Dart descriptor cursor policy derived
   - what tests prove Dart cursor descriptor v1
-date: 2026-07-18
-status: verified implementation and full signoff; generated-v2/public removal current, admission remains .9.1.5.6
+date: 2026-09-10
+status: admitted descriptor v1; current neutral cursor admission eight complete and zero pending with 60 mutations
 tags: [dart, descriptor, compiler, cursor, rule-family, loading, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.9.1.5.3 removes root meta.parse_mode and projects meta.cursor_contract=linkedspec-rule-local-cursor-v1. Every rule derives family, cursor_policy, edge_ownership, and ordered ownership/target/regex_index/block/fluent rows from exact mode metadata and normalized compiled action/blind tables. Handler label and rule label/line/is_top/mode retain source identity; optional source_form is omitted as non-semantic because compiled state does not retain it. Dart has no descriptor decoder: direct, normalized SpecFile-JSON, and loaded compilation project identical values, and invalid reconstructed state preserves portable validation failures. Focused proof passes 4/4 plus adjacent 18/18; complete package reaches 257/1 only at staged help, corpus 105/105, primary 30/63x2, neutral remains 68 files/34 mutations, Knowledge Map is 591/4,207, and canonical CI passes Perl admission 288, reference primary 63x2, and Phase 0 1,031/1,031 in 624 seconds."
 evidence_update_2026_07_18_public_removal: "FUTURE-PARITY-BACKLOG.9.1.5.5 preserves descriptor v1 while removing the remaining public/global overrides. Current Dart proof is 260 package tests, primary 63x2, corpus 105/105, and neutral 66 files/34 mutations."
@@ -64,3 +64,14 @@ Related: [[dart-compiled-spec-state]],
 [[dart-rule-local-cursor-execution]],
 [[outward-compiled-descriptor-four-backend-contract]], and
 [[rule-local-cursor-and-bare-edge-contract]].
+
+## September 10 complete descriptor-consumer reading
+
+`DART-STARTUP-READING.1.45` reads all 257 consumer lines. Four descriptor tests pass
+within the 75-test selection. Exact outer/meta/rule identities and ordered resolved
+edges agree across direct compilation, normalized SpecFile JSON reconstruction and
+loaded compilation. Omitted action indices resolve to zero; blind indices are null;
+optional source_form is absent. Every invalid reconstructed edge/set preserves exact
+diagnostic code/stage/field keys. This does not exercise a descriptor input decoder.
+Current neutral admission is eight completed legs/zero pending and 60 mutations;
+earlier pending downstream counts above are historical.

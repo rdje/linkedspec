@@ -175,3 +175,14 @@ The slice also reads matching 1-900; 132 selected tests and the 31-case structur
 corpus window pass, including existing generated/emitted/CLI consumers. No new
 defect or repair is claimed. Numeric conversion inventory stays .2.12; all
 earlier interpreter findings remain owned under .2.1-.2.15 and startup owners.
+
+## September 10 interpreter-consumer prefix reading
+
+`DART-STARTUP-READING.1.45` reads consumer lines 1-407, while its full file executes
+in the passing 75-test selection. The prefix covers lifecycle collection and child
+push/index conventions; leading-trivia behavior; scalar indexed reads; self-close
+slots; recursive rule-local aggregates and caller-visible undeclared mutations;
+sequential blind returns; isolated marks and BMP multibyte capture; OR miss,
+bounds and zero-progress stopping. The repetition lifecycle assertion continues
+after line 407. Passing the full test file grants no reading credit for that suffix
+and does not close any previously owned interpreter defect.

@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-10 — DART-STARTUP-READING.1.45: cursor consumers
+
+Read 1,500 fragments / 41,762 baseline-identical bytes; cursor consumers complete,
+interpreter tests through 407. All 75 tests and the neutral cursor check pass;
+no new defect. Reading 45/55; next .1.46.
+
 ## 2026-09-10 — DART-STARTUP-READING.1.44: root selection consumers
 
 Read 1,500 fragments / 45,785 baseline-identical bytes; repeated-action/root

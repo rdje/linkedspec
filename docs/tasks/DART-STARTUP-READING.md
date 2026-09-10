@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / .1.44 complete; next .1.45
+- Status: `active` / .1.45 complete; next .1.46
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-10`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 44/55 children, 64,028/80,297 fragments and 1,972,485/2,471,305 bytes; seventy-five entries through EOF
-  plus rule_local_cursor_contract_test.dart through line 298. Exact credit and comprehension remain in each completed node.
+- Current reading: 45/55 children, 65,528/80,297 fragments and 2,014,247/2,471,305 bytes; seventy-nine entries through EOF
+  plus runtime_interpreter_test.dart through line 407. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -769,14 +769,20 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.44 - complete root selection consumer reading`
 
 - ID: `DART-STARTUP-READING.1.45`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 45 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.44` committed; empty brief and clean repository.
+  Activation: Clean `4d2b242799b74db387eb5c010bb2e83bd923360b`; prior reading committed, root clean, zero-byte brief and all jobs consumed.
   Scope: `dart/test/rule_local_cursor_contract_test.dart` lines 299-456; `dart/test/rule_local_cursor_descriptor_test.dart` lines 1-257; `dart/test/rule_local_cursor_execution_test.dart` lines 1-411; `dart/test/rule_local_cursor_normalization_test.dart` lines 1-267; `dart/test/runtime_interpreter_test.dart` lines 1-407
   Baseline evidence: 1500 fragments / 41762 bytes; ordered range SHA-256 `acfee426913e8f0602f3c8d0e24984ed8845938126fad2a4903ee06830224de6`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact scoped bytes/current deltas; cursor admission/descriptor/execution/normalization and interpreter Dart tests; neutral rule-local cursor contract; prior evidence preservation, Knowledge, doctrines, histories, mdBook, memory and staged scope/whitespace.
+  Canonical trigger: `none` — bounded required reading and documentation; no source, contract or infrastructure changes.
+  Comprehension: Cursor admission finishes retired-option/CLI denial and exact diagnostic coverage after normalized reconstruction. Descriptor tests compare exact outer/meta/rule fields, authored identity and ordered resolved edges across direct/normalized-AST/loaded routes; action omitted slot becomes zero, blind slot is null, optional source_form is absent. This is an outward projection, not a descriptor decoder. Execution covers all 36 families, eight parent-child and two structural cases through live/reconstructed/generated-v2 routes; each entered rule rederives policy, generated rows contain only label/family, loaded native trace attributes consume/seek per entry, and obsolete global options are source-scanned. Normalization checks exact family metadata, typed complete-line/header-rest bare candidates, lifecycle priority, all contract edges/ownership sets, precise diagnostic fields and JSON roundtrips. These consumers do not independently compile and run emitted modules. Interpreter prefix covers lifecycle collection, child pushes and numeric payload selection, leading-trivia behavior, indexed reads, self-close slots, recursive aggregates, caller-visible undeclared mutations, sequential blind results, rule-local marks, BMP multibyte capture, OR miss/bounds/zero-progress behavior and begins the exact repetition lifecycle assertion.
+  Findings: No new confirmed defect. Cursor generated-v2 execution is in-process; emitted entry-point source inspection does not establish standalone emitted execution. Full interpreter test success grants no unread-source credit and does not close earlier defects.
+  Verification: Physically read cursor admission 299-456 EOF, descriptor 1-257 EOF, execution 1-206 and 207-411 EOF, normalization 1-267 EOF, and interpreter 1-207/208-407. Execution/normalization outputs lost at a context boundary were reread in full before granting credit. Exact 1,500 fragments / 41,762 bytes and ordered scope digest match the baseline. All 75 tests from the five selected files pass; the full interpreter test file runs, but physical reading stops at 407. Neutral cursor passes 36 family spellings/18 edges/eight parent-child/74 migration files/eight complete/zero pending/60 mutations. Existing emitted admission roles remain source-inspection proof only. Full coverage/preservation, Knowledge/book/memory/histories, whitespace/staged scope and commit-hook doctrines govern the focused commit.
+  Commit: `DART-STARTUP-READING.1.45 - complete cursor consumer reading`
 
 - ID: `DART-STARTUP-READING.1.46`
   Status: `pending`
@@ -1414,7 +1420,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.45` | `pending` | Continue cursor admission, descriptor, execution, normalization and interpreter test reading. After .1.44 commit/brief/clean proof; repair gates remain. |
+| 1 | `DART-STARTUP-READING.1.46` | `pending` | Continue bounded runtime interpreter test reading from line 408. After .1.45 commit/brief/clean proof; repair gates remain. |
 
 ## Decisions
 
@@ -1439,6 +1445,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-10`: Dart .1.45 completes cursor admission, descriptor, execution and normalization consumers and reads interpreter tests through 407: 1,500 fragments / 41,762 baseline-identical bytes. All 75 selected tests and the neutral cursor check pass. No new defect; prior findings, CI .80/.81 and all source-repair gates remain. Reading reaches 45/55 children, 65,528 fragments / 2,014,247 bytes.
 
 - `2026-09-10`: Dart .1.44 completes repeated-action and root-selection admission/core/routes tests and reads cursor admission through 298: 1,500 fragments / 45,785 baseline-identical bytes. All 13 selected tests and repeated-action/root-selection/cursor neutral checks pass. No new defect; prior findings, CI .80/.81 and all source-repair gates remain. Reading reaches 44/55 children, 64,028 fragments / 1,972,485 bytes.
 
@@ -1531,6 +1539,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- `.1.45`: `DART-STARTUP-READING.1.45 - complete cursor consumer reading`.
+
 - `.1.44`: `DART-STARTUP-READING.1.44 - complete root selection consumer reading`.
 
 - `.1.43`: `DART-STARTUP-READING.1.43 - read recognition and observation consumers`.
@@ -1620,6 +1630,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-10`: Completed .1.45 from clean 4d2b2427; cursor consumers complete, interpreter through 407; next .1.46.
 
 - `2026-09-10`: Completed .1.44 from clean f6e33821; repeated-action/root-selection complete, cursor admission through 298; next .1.45.
 

@@ -70,3 +70,16 @@ generated trace, mixed/recursive/ordered/anchored execution and the retired-opti
 Its emitted role inspects source only. Current neutral proof is 36 families, 18 edges,
 eight parent/child cases, 74 migration files, eight completed legs/zero pending and
 60 mutations; earlier rollout counts above are historical.
+
+## September 10 complete cursor-consumer reading
+
+`DART-STARTUP-READING.1.45` finishes admission 299-456 and reads execution 1-411
+through EOF. All five selected files pass 75 tests; current neutral cursor proof is
+36 families, 18 edges, eight parent/child cases, 74 migration files, eight completed
+legs/zero pending and 60 mutations. The execution consumer runs all families and
+eight parent/child plus two structural cases live, from normalized AST and through
+in-process generated-v2. Loaded native traces attribute policy per rule entry.
+Minimal generated plans carry only label/family; no inherited policy overrides exist.
+Admission completes retired-option/primary denial and reconstructed diagnostic checks.
+Emitted admission roles inspect source only; this selection does not independently
+compile and run emitted modules. Prior historical rollout evidence remains above.
