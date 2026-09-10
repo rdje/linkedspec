@@ -65,3 +65,18 @@ The verified existing Rust probe/library and CLI are reused without compiling. N
 2.551s and 3.824s; Perl queries 10.897s and 12.078s; Get 11.180s; three CLI calls 1.279/1.233/1.246s.
 Harness logical names remain startup91.spec for Rust and startup89.spec for Perl, so no full-response equality
 is claimed. Retained binaries are dated evidence and require current managed rebuilding before repair signoff.
+
+## September 10 Dart constructor-failure recurrence
+
+`DART-STARTUP-READING.1.33` adds eight public native compiled/index/runtime
+controls in [[dart-semantic-indexed-edge-correlation-gaps]]. Both
+ChildLong | Child[1] and Other | Child[1] compile to two block-bearing selector-1
+edges and execute b, but semantic index construction rejects them. The first
+group target lacks an immediately adjacent bracket; prefix overlap is not
+required for this Dart failure. Separate indexed members succeed.
+
+Existing startup .70.1/.70.3 owns this grouped recurrence. The different
+regex-arrow variants use Dart .2.22. Four constructor failures and four valid
+controls retain exact inputs/runtime results/source evidence. This checkpoint
+reruns no Perl/Rust, emitted/reconstructed or MCP route; earlier evidence
+remains unchanged and repairs stay behind startup gates.

@@ -33,3 +33,12 @@ acceptable evidence.
 
 Related facts: [[dart-generated-source-v2-rule-local-cursor]],
 [[dart-semantic-introspection-authority-map]], and [[semantic-introspection-neutral-contract]].
+
+## 2026-09-10 — complete package-internal digest reading
+
+`DART-STARTUP-READING.1.33` reads all 162 SHA-256 lines. Padding retains a
+big-endian bit count; each block expands 16 words to 64, performs masked 32-bit
+rounds and emits eight fixed-width lowercase hexadecimal words. The selected
+28 semantic tests include the existing empty/abc and neutral graph source
+identity controls. Production dependencies remain unchanged; no fresh offline
+emitted-caller run is claimed by this reading slice.

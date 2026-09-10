@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.32 completes thirty-two of 55 children: 46,028 fragments / 1,418,202 bytes. Query/runtime projection is complete; static projection reaches 381. All 21 tests and semantic 6/20/128 checks pass; no new defect. Approved capacity at 9c644ecb and all earlier Dart/startup owners remain intact. Next .1.33. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.33 completes thirty-three of 55 children: 47,528 fragments / 1,461,186 bytes. Static projection/SHA-256 is complete; emitter reaches 55. All 28 tests and semantic 6/20/128 checks pass. Eight controls extend startup .70 and own regex-arrow .2.22: four constructor failures, four valid controls and all runtime results correct. Approved capacity at 9c644ecb and all earlier Dart/startup owners remain intact. Next .1.34. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `DART-STARTUP-READING.1.32` completes query/runtime projection and reads static projection through 381: 1,500 fragments / 45,289 baseline-identical bytes. All 21 tests and semantic 6/20/128 checks pass; no new defect. All prior findings and repair gates remain intact.
+- `DART-STARTUP-READING.1.33` completes static projection/SHA-256 and reads emitter through 55: 1,500 fragments / 42,984 baseline-identical bytes. All 28 tests and semantic 6/20/128 checks pass. Eight controls extend startup .70 and own regex-arrow .2.22 with two children, four constructor failures/four valid controls and all runtime results correct.
 
 ## Next Action
 
-- `DART-STARTUP-READING.1.33` finishes static projection from 382 through EOF, reads SHA-256 through EOF and source emitter 1-55 after .1.32 commits, the brief is empty and the root tree is clean.
+- `DART-STARTUP-READING.1.34` finishes source emitter from 56 through EOF, reads trace through EOF and validation 1-355 after .1.33 commits, the brief is empty and the root tree is clean.
 
 ## Recent Completions
+
+- `2026-09-10` — `DART-STARTUP-READING.1.33` reads 1,500 fragments / 42,984 bytes; all 28 tests and semantic 6/20/128 checks pass; eight controls extend .70 and own regex-arrow .2.22.
 
 - `2026-09-10` — `DART-STARTUP-READING.1.32` reads 1,500 fragments / 45,289 bytes; all 21 tests and semantic 6/20/128 checks pass; query/runtime projection complete; no new defect.
 
@@ -48,8 +50,6 @@
 - `2026-09-09` — `DART-STARTUP-READING.1.20` reads 1,500 fragments / 41,244 bytes; 111 tests and neutral numeric 55/18 pass; 11/8/6 number/order/slice comparisons own .2.12-.2.14.
 
 - `2026-09-09` — `DART-STARTUP-READING.1.19` reads 1,500 fragments / 43,446 bytes; 122 tests pass; nine Dart/Perl constructor comparisons own .2.11.
-
-- `2026-09-09` — `DART-STARTUP-READING.1.18` reads 1,500 fragments / 45,330 bytes; 140 tests pass; nine callback identity controls own .2.10.
 
 ## History
 

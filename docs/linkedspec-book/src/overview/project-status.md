@@ -89,23 +89,53 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed thirty-two of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed thirty-three of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
 parser bridge, function-shell projection, bounded child-parse authority, generated rule plan,
 interpreter, matching, recognition transactions, semantic observation, source location and both
 staged runtime modules, Unicode case mapping, scaffold, semantic call projection, semantic
-index, query and runtime projection, plus static projection through line 381. This covers
-46,028 fragments / 1,418,202 bytes. All 21 selected query/runtime/static/observation tests
-and neutral six-group/twenty-query/128-mutation checks pass, including the existing nineteen
-static response hashes and twentieth observed-runtime hash. Child `.1.33` finishes static
-projection from line 382, reads SHA-256 and begins source emission. Startup `.3.4` remains
-pending; earlier evidence and limitations remain intact.
+index, query, runtime/static projection and SHA-256, plus source emitter through line 55.
+This covers 47,528 fragments / 1,461,186 bytes. All 28 selected static/source/compilation/call/query
+tests and neutral six-group/twenty-query/128-mutation checks pass. Child `.1.34` finishes emitter
+from line 56, reads trace and begins validation. Startup `.3.4` remains pending.
 
-Query operates on captured projection data and reports logical counts of returned records
-and relations. Deriving an observed index checks caller-retained events against static
-entry-rule and selector/slot evidence, then returns a new snapshot; it leaves the base index
-unchanged and does not execute a parser. This reading adds no API capability or new defect.
+**Known Dart limitation — indexed edge correlation can reject valid sources:** semantic index
+construction fails for some grouped selectors and for arrow-like target text inside regex
+matchers, although separate compilation and parser execution succeed. For example:
+
+```text
+Top::
+ /-> Child/ -> Child[1] { return(match_text()) }
+
+ChildLong::
+ /c/
+ /d/
+
+Other::
+ /e/
+ /f/
+
+Child::
+ /a/
+ /b/
+```
+
+The current static scanner can treat `-> Child` inside the matcher as the actual target,
+lose selector `[1]` and then fail its compiled-identity check. A mismatched `[0]` inside
+the matcher produces the same failure. A same-index decoy happens to agree; it does not
+prove that the scanner selected the correct source occurrence.
+
+The grouped forms `-> ChildLong | Child[1]` and `-> Other | Child[1]` also fail semantic
+construction because the first target lacks an adjacent bracket, although the compiled
+shared selector is 1 for both edges. Separate indexed members succeed.
+
+Eight public native controls preserve four construction failures and four successful query
+controls; every source compiles and returns its expected runtime value. Existing startup
+`.70.1/.70.3` owns grouped selectors; `DART-STARTUP-READING.2.22` and two children own regex-arrow
+correlation and recurrence. The complete reproduction uses these same rule declarations for
+all eight controls. No fresh other-backend, emitted, reconstructed or MCP result is claimed.
+Earlier limitations and their owners remain intact.
 
 **Known Dart limitation — native semantic rejection evidence:** `SemanticIndex.queryNeutral`
 accepts a native `Object?` request. An invalid `page.after_id` containing a caller object can

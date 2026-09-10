@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / .1.32 complete; next .1.33
+- Status: `active` / .1.33 complete; next .1.34
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-10`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 32/55 children, 46,028/80,297 fragments and 1,418,202/2,471,305 bytes; forty entries through EOF
-  plus semantic_static_projection.dart through line 381. Exact credit and comprehension remain in each completed node.
+- Current reading: 33/55 children, 47,528/80,297 fragments and 1,461,186/2,471,305 bytes; forty-two entries through EOF
+  plus source_emitter.dart through line 55. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -85,7 +85,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Acceptance: Every child accounts for its exact source bytes and deltas, reconciles Knowledge before re-derivation,
     records comprehension and confirmed findings, runs necessary focused diagnostics and commits before the next child.
   Children: `.1.1-.1.55`; exact scopes and baseline evidence below, read in numeric order.
-  Verification: 32/55 children complete; `.1.1-.1.32` own exact reading/comprehension evidence, and all later children remain pending.
+  Verification: 33/55 children complete; `.1.1-.1.33` own exact reading/comprehension evidence, and all later children remain pending.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.1.1`
@@ -577,14 +577,20 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.32 - complete query and runtime projection reading`
 
 - ID: `DART-STARTUP-READING.1.33`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 33 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.32` committed; empty brief and clean repository.
+  Activation: Clean `802582d27453e1e27c729c50c18bd5d19b3127cf`; root status empty, brief zero bytes, and prior commit jobs consumed.
   Scope: `dart/lib/src/semantic/semantic_static_projection.dart` lines 382-1664; `dart/lib/src/semantic/sha256.dart` lines 1-162; `dart/lib/src/source_emitter.dart` lines 1-55
   Baseline evidence: 1500 fragments / 42984 bytes; ordered range SHA-256 `cdfa9bab2bdb9a54c5384b022a6ad338b6cbc2270e520f2724562c92858f9faa`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Twenty-eight Dart static/source/compilation/call/query tests and neutral semantic contract; eight public native compiled/index/runtime controls and durable recipe; exact range/current deltas, prior evidence retention, all doctrines, both histories, Knowledge freshness, rendered mdBook and staged scope.
+  Canonical trigger: `none` — bounded required reading, diagnostic intake and documentation; no source, public contract or infrastructure changes.
+  Comprehension: Static completion normalizes missing-target failures, joins authored rule/member/edge/lifecycle identity to compiled owners, emits canonical graph/source/decision evidence and extends call/staged/generated projection. Action-edge guards require compiled selector agreement; grouped or regex-decoy target substring scanning can lose the authored selector before that guard. Regex slots retain authored self/standalone ownership; lifecycle payload count/marker checks reject mismatched joins. Member ranges track delimiters/quotes/leading regex, while explicit target scanning searches whole-member arrow/name substrings. Typed return shapes retain literals, containers and codeblock signatures; rule shape prefers whole-rule E then known edge shape, wrapping repetition. IDs escape exact UTF-8 bytes before canonical rank/order sorting. Dependency-free SHA-256 pads exact bytes, expands 64 words and masks 32-bit rounds; existing vectors and graph source identity remain selected proof. Emitter prefix defines generated v2/format2, diagnostic callback identity wrapper and begins the semantic counterpart; completion belongs to .1.34.
+  Findings: Eight public native compiled/index/runtime controls establish four semantic constructor failures while every source compiles and executes its expected input. Shared-selector groups with both prefix/non-prefix targets extend existing startup .70.1/.70.3; regex-arrow absent/mismatched selector decoys are owned by new .2.22 and two children. Four separate/clean/same-index/direct controls preserve correct query source forms and byte spans. The strict identity guard exposes the earlier source-correlation error; do not weaken it. All earlier .2.1-.2.21/startup findings remain intact. No raw-query, UTF-8-constructor, observed/emitted/reconstructed, other-backend or MCP reproduction is claimed.
+  Verification: Physically read semantic_static_projection.dart 382-1664 through EOF in six complete untruncated outputs, sha256.dart 1-162 through EOF, and source_emitter.dart 1-55 in complete outputs: 1,500 fragments / 42,984 baseline-identical bytes with unchanged ordered digest. All 28 selected tests and neutral semantic six-group/twenty-query/128-mutation checks pass at unchanged rollout9/0/admission6/0. Both complete eight-case recipe blocks replay; independent assertions verify compiled target/index/block facts, exact constructor failures, all eight runtime values and successful query source forms/member text/UTF-8 spans. Full 115-path/169-range/55-child reconstruction, prior evidence retention, doctrines, both histories, Knowledge and rendered-book proof belong to this commit.
+  Commit: `DART-STARTUP-READING.1.33 - own indexed edge source-correlation failures`
 
 - ID: `DART-STARTUP-READING.1.34`
   Status: `pending`
@@ -810,11 +816,11 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Status: `pending`
   Goal: Reconcile and retain ownership of every confirmed Dart finding established during the reading.
   Dependencies: Findings from `.1`; implementation additionally requires startup `.3`, `.4` and `.5`.
-  Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`, `.2.5`, `.2.6`, `.2.7`, `.2.8`, `.2.9`, `.2.10`, `.2.11`, `.2.12`, `.2.13`, `.2.14`, `.2.15`, `.2.16`, `.2.17`, `.2.18`, `.2.19`, `.2.20`, `.2.21`; further confirmed findings receive disjoint owners here.
+  Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`, `.2.5`, `.2.6`, `.2.7`, `.2.8`, `.2.9`, `.2.10`, `.2.11`, `.2.12`, `.2.13`, `.2.14`, `.2.15`, `.2.16`, `.2.17`, `.2.18`, `.2.19`, `.2.20`, `.2.21`, `.2.22`; further confirmed findings receive disjoint owners here.
   Acceptance: Cross-reference existing owners for known defects; create disjoint bounded repair children here
     immediately for new confirmed defects, with mechanism, source, reproduction, acceptance and unblock conditions.
     If no new repair is needed, close this intake with an explicit complete reconciliation rather than inventing work.
-  Verification: `pending`; `.1.3` owns attached-switch omission/default replacement under `.2.1`; `.1.5` confirms regex-brace action scanning and lifecycle validation defects under `.2.2`. Reading .1.6 confirms numeric trace overflow and reset-before-failure under .2.3. Reading .1.7 confirms disconnected recognition effect validation, leaked writes after rollback and observation edge-closure bypass under .2.4. Reading .1.10 confirms MCP Unicode key-order divergence under .2.5. Reading .1.11 confirms regex/lifecycle-E body suffix loss under .2.6. Reading .1.12 confirms compact fluent argument corruption under .2.7 and outer regex-brace truncation under existing .2.2.2. Reading .1.13 confirms standalone body-fluent suffix loss under existing .2.6. Reading .1.16 confirms semantic observer error/stack loss through action child calls under .2.8; startup .37 retains nested progressive authority findings from .1.15. Reading .1.17 confirms mixed-control return escape and skipped attached else under .2.9. Reading .1.18 confirms helper-name callback recursion collision and lost bound identity under .2.10. Reading .1.19 confirms hash splice pairing/order loss under .2.11, coordinated with FUTURE-PARITY-BACKLOG.5. Reading .1.20 confirms finite-number corruption (.2.12), lexical Unicode ordering (.2.13) and slice-end overflow (.2.14), with separate existing startup .55/.60 and MCP .2.5 coordination. Reading .1.21 extends .2.14 with typed-source overflow and owns input_slice zero-argument acceptance/late-reference failure under .2.15. Reading .1.23 confirms lower-unbounded quantifier rewriting of escaped literals/classes under .2.16. Reading .1.26 confirms staged diagnostic-byte overruns under .2.17 and wrapped staged call admission under .2.18 through eleven private scheduler controls. Reading .1.27 confirms malformed staged source/provenance types accepted after placeholder coercion under .2.19 through seventeen private/neutral controls. Reading .1.30 extends startup .67 with Dart container-call omission and owns regex call/source miscorrelation under .2.20 through nine public-query/typed-runtime controls. Reading .1.31 owns native non-JSON rejection response mutability/encoding under .2.21 through eight public raw-query controls, with four defective cases and four valid JSON controls. No repair implementation is admitted before startup gates.
+  Verification: `pending`; `.1.3` owns attached-switch omission/default replacement under `.2.1`; `.1.5` confirms regex-brace action scanning and lifecycle validation defects under `.2.2`. Reading .1.6 confirms numeric trace overflow and reset-before-failure under .2.3. Reading .1.7 confirms disconnected recognition effect validation, leaked writes after rollback and observation edge-closure bypass under .2.4. Reading .1.10 confirms MCP Unicode key-order divergence under .2.5. Reading .1.11 confirms regex/lifecycle-E body suffix loss under .2.6. Reading .1.12 confirms compact fluent argument corruption under .2.7 and outer regex-brace truncation under existing .2.2.2. Reading .1.13 confirms standalone body-fluent suffix loss under existing .2.6. Reading .1.16 confirms semantic observer error/stack loss through action child calls under .2.8; startup .37 retains nested progressive authority findings from .1.15. Reading .1.17 confirms mixed-control return escape and skipped attached else under .2.9. Reading .1.18 confirms helper-name callback recursion collision and lost bound identity under .2.10. Reading .1.19 confirms hash splice pairing/order loss under .2.11, coordinated with FUTURE-PARITY-BACKLOG.5. Reading .1.20 confirms finite-number corruption (.2.12), lexical Unicode ordering (.2.13) and slice-end overflow (.2.14), with separate existing startup .55/.60 and MCP .2.5 coordination. Reading .1.21 extends .2.14 with typed-source overflow and owns input_slice zero-argument acceptance/late-reference failure under .2.15. Reading .1.23 confirms lower-unbounded quantifier rewriting of escaped literals/classes under .2.16. Reading .1.26 confirms staged diagnostic-byte overruns under .2.17 and wrapped staged call admission under .2.18 through eleven private scheduler controls. Reading .1.27 confirms malformed staged source/provenance types accepted after placeholder coercion under .2.19 through seventeen private/neutral controls. Reading .1.30 extends startup .67 with Dart container-call omission and owns regex call/source miscorrelation under .2.20 through nine public-query/typed-runtime controls. Reading .1.31 owns native non-JSON rejection response mutability/encoding under .2.21 through eight public raw-query controls, with four defective cases and four valid JSON controls. Reading .1.33 extends startup .70 with Dart grouped-selector constructor failures and owns regex-arrow selector correlation under .2.22 through eight public compiled/index/runtime controls. No repair implementation is admitted before startup gates.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.2.1`
@@ -1250,6 +1256,28 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Verification: `pending`
   Commit: `pending`
 
+- ID: `DART-STARTUP-READING.2.22`
+  Status: `pending`
+  Goal: Preserve valid indexed action-edge identity when a regex contains arrow-like target text.
+  Dependencies: startup .3/.4/.5; coordinate .2.20 lexical source correlation and SESSION-STARTUP-READING.70 grouped-selector repair.
+  Children: `.2.22.1`, `.2.22.2`.
+  Verification: .1.33 eight public native index/compiled/runtime controls establish two regex-arrow construction failures and two grouped-selector failures owned by startup .70, with four valid controls. All eight sources compile and execute to the exact selected input. The index rejects /-> Child/ and /-> Child[0]/ followed by real -> Child[1], because the static helper selects the first arrow/name substring and returns no explicit selector; its strict compiled identity guard then throws semantic_static_correlation_failed. No other-backend/MCP proof is claimed.
+
+- ID: `DART-STARTUP-READING.2.22.1`
+  Status: `pending`
+  Goal: Correlate explicit edge selectors using authored target identity and lexical occurrence.
+  Acceptance: Exclude arrows, labels and brackets inside regex/string literals when locating the actual target selector; prefer retained typed source ownership over whole-member substring searches. Preserve the compiled identity guard, direct/indexed distinctions, exact spans, Unicode labels and no-silent-fallback behavior. Coordinate shared-selector groups with startup .70.1 and call-source lexical handling with .2.20.1; keep these distinct findings and controls.
+  Verification: `pending` repair; .1.33 preserves two regex failures, two grouped failures and four valid public native controls.
+  Commit: `pending`
+
+- ID: `DART-STARTUP-READING.2.22.2`
+  Status: `pending`
+  Goal: Close indexed semantic source-correlation recurrence and public evidence.
+  Dependencies: .2.22.1; coordinate startup .70.3.
+  Acceptance: Compare parsed/compiled selectors, public source/UTF-8 index construction, typed/raw query facts and exact source ranges; include arrow/label/bracket decoys, escaped delimiters/classes and prefix/repeated targets. Check supported MCP registration/query and other backends before claiming parity; own discrepancies. Preserve runtime results and all eight controls, update book/Knowledge and run canonical proof at public closeout.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `DART-STARTUP-READING.3`
   Status: `pending`
   Goal: Close Dart reading with exact coverage, current-delta, comprehension and child-commit proof.
@@ -1286,7 +1314,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.33` | `pending` | Finish static projection from 382 through EOF, read SHA-256 through EOF and source emitter 1-55 after .1.32 commits and the brief/tree are clean; reading is 32/55. |
+| 1 | `DART-STARTUP-READING.1.34` | `pending` | Finish source emitter from 56 through EOF, read trace through EOF and validation 1-355 after .1.33 commits and the brief/tree are clean; reading is 33/55. |
 
 ## Decisions
 
@@ -1309,6 +1337,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-10`: `.1.33` completes static projection/SHA-256 and reads emitter through 55: 1,500 fragments / 42,984 baseline-identical bytes. All 28 tests and semantic 6/20/128 checks pass. Eight public native controls extend startup .70 grouped evidence and own regex-arrow .2.22 with two children: four constructor failures and four valid controls; all eight runtime results agree. Reading reaches 33/55.
 
 - `2026-09-10`: `.1.32` completes query/runtime projection and reads static projection through 381: 1,500 fragments / 45,289 baseline-identical bytes. All 21 selected tests and semantic 6/20/128 checks pass. Earlier Dart .2.21/.2.20/.2.8, startup .67 and all other findings retain evidence; no new defect. Reading reaches 32/55.
 
@@ -1375,6 +1405,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- `.1.33`: `DART-STARTUP-READING.1.33 - own indexed edge source-correlation failures`.
+
 - `.1.32`: `DART-STARTUP-READING.1.32 - complete query and runtime projection reading`.
 
 - `.1.31`: `DART-STARTUP-READING.1.31 - own native semantic rejection immutability gap`.
@@ -1438,6 +1470,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-10`: Completed .1.33 from clean 802582d2; retained earlier findings, extended startup .70, owned regex-arrow indexed correlation .2.22 and routed .1.34.
 
 - `2026-09-10`: Completed .1.32 from clean 26ea4d8e; finished query/runtime projection, began failed static projection, retained earlier findings and routed .1.33.
 

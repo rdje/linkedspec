@@ -10,6 +10,16 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-10 — preserve typed indexed identity before source correlation
+
+Dart .1.33 confirms whole-member arrow/name substring search can lose an
+accepted selector before the static compiled-identity guard. Grouped selector
+failures extend startup .70; regex-arrow decoys belong to .2.22. Keep the guard
+and repair source correlation. Eight public native compiled/index/runtime
+controls retain four failures and four valid controls, with every runtime value
+correct. Exact source-form/member/span assertions, 28 selected tests and neutral
+6/20/128 checks pass. Earlier findings remain owned; no source repair lands.
+
 ## 2026-09-10 — query accounting and caller-observation derivation
 
 Dart .1.32 completes query/runtime projection and begins static failure

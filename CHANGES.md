@@ -10,6 +10,15 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-10 — DART-STARTUP-READING.1.33: indexed source correlation
+
+Read 1,500 fragments / 42,984 baseline-identical bytes: complete static
+projection/SHA-256 and read emitter through 55. All 28 tests and neutral
+6/20/128 checks pass. Eight public native controls extend startup .70 grouped
+selectors and own regex-arrow correlation .2.22 with two children: four index
+failures, four valid controls and all runtime values correct. No source repair;
+reading reaches 33/55 and .1.34 is next.
+
 ## 2026-09-10 — DART-STARTUP-READING.1.32: query and runtime projection
 
 Read 1,500 fragments / 45,289 baseline-identical bytes: complete query/runtime

@@ -324,3 +324,19 @@ executing a parser. Shapes come from static facts, not a host result object.
 Existing [[dart-semantic-native-rejection-immutability-gap]],
 [[dart-semantic-call-projection-counterexamples]] and observer error-identity
 findings retain their separate owners. No new defect or repair lands.
+
+## 2026-09-10 — static projection complete and indexed-target failures
+
+`DART-STARTUP-READING.1.33` completes static projection and SHA-256, then reads
+source_emitter.dart through 55. Static projection correlates compiled rule,
+edge, slot and lifecycle owners with source members, normalizes failed targets
+and emits canonical graph/decision evidence before call/staged extension.
+Source identities retain exact UTF-8 escaping and source-map coordinates.
+
+All 28 selected semantic tests and neutral 6/20/128 checks pass. Eight public
+native compiled/index/runtime controls establish four constructor failures and
+four successful controls, with all runtime values correct. Exact reproduction:
+[[dart-semantic-indexed-edge-correlation-gaps]]. Existing startup .70 owns the
+Dart grouped-selector recurrence; new .2.22 owns regex-arrow target scanning.
+The strict compiled-identity guard detects the earlier source-correlation error;
+weakening it is not the repair. Prior .2.20/.2.21 and other owners remain intact.
