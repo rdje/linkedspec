@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.27 completes twenty-seven of 55 children: 38,528 fragments / 1,209,661 bytes. Both staged modules are complete and Unicode mapping reaches 1189; all 33 selected tests and Unicode generation/12 neutral fixtures pass. Seventeen private/neutral controls own six malformed provenance acceptances under .2.19 with eleven agreeing controls. Approved capacity remains at 9c644ecb. All Dart .2.1-.2.19 and startup .37 findings remain owned and gated; .1.28 is next. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.28 completes twenty-eight of 55 children: 40,028 fragments / 1,248,597 bytes. Unicode mapping reaches 2689; lower table complete and upper through U+A76F. Fresh generation/12 neutral fixtures pass; .1.27/dfc57ce1 retains 33 runtime tests and seventeen provenance controls by unchanged source identity. No new defect. Approved capacity remains at 9c644ecb; all Dart .2.1-.2.19 and startup .37 findings stay owned and gated. Next .1.29. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `DART-STARTUP-READING.1.27` completes staged enrichment and parse-job declarations and reads Unicode mapping through 1189: 1,500 fragments / 39,481 baseline-identical bytes. Seventeen private/neutral controls own provenance type validation .2.19 and two children. All 33 selected tests and Unicode generation/12 neutral fixtures pass; prior findings remain intact.
+- `DART-STARTUP-READING.1.28` reads Unicode mapping 1190–2689: 1,500 fragments / 38,936 baseline-identical bytes. Lower mappings are complete; upper mappings reach U+A76F. Fresh generation and twelve independent fixtures pass. No new defect; .1.27 runtime evidence and all prior findings remain intact.
 
 ## Next Action
 
-- `DART-STARTUP-READING.1.28` continues Unicode case mapping from 1190 after .1.27 commits, the brief is empty and the root tree is clean.
+- `DART-STARTUP-READING.1.29` finishes Unicode mapping from 2690, reads scaffold and begins semantic call projection after .1.28 commits, the brief is empty and the root tree is clean.
 
 ## Recent Completions
+
+- `2026-09-10` — `DART-STARTUP-READING.1.28` reads 1,500 fragments / 38,936 bytes; fresh Unicode generation/12 neutral fixtures pass; lower table complete and upper through U+A76F; no new defect.
 
 - `2026-09-10` — `DART-STARTUP-READING.1.27` reads 1,500 fragments / 39,481 bytes; 33 tests and Unicode generation/12 neutral fixtures pass; seventeen private/neutral controls own .2.19 provenance type repair.
 
@@ -48,8 +50,6 @@
 - `2026-09-09` — `DART-STARTUP-READING.1.15` reads 1,500 fragments / 45,477 bytes; 82 tests and neutral progressive checks pass; ten controls extend startup .37 ownership.
 
 - `2026-09-09` — `DART-STARTUP-READING.1.14` reads 1,500 fragments / 44,607 bytes; 24 function/progressive tests pass, including emitted analysis/execution.
-
-- `2026-09-09` — `DART-STARTUP-READING.1.13` reads 1,500 fragments / 48,522 bytes; 25 tests and neutral Unicode checks pass; seven body-fluent controls extend .2.6.
 
 ## History
 

@@ -10,6 +10,15 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-10 — DART-STARTUP-READING.1.28: Unicode mapping continuation
+
+Read Unicode mapping 1190–2689: 1,500 fragments / 38,936 baseline-identical
+bytes. Lower mappings are complete and upper mappings reach U+A76F. Fresh
+regeneration matches neutral data and all five backend modules; twelve
+independent fixtures pass. Retain .1.27 runtime evidence by exact source
+identity and preserve all earlier findings. No new defect or source change;
+reading reaches 28/55 and .1.29 is next.
+
 ## 2026-09-10 — DART-STARTUP-READING.1.27: declarations and provenance types
 
 Complete both staged runtime modules and read Unicode lower mappings through

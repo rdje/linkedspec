@@ -39,3 +39,20 @@ mappings and 158/464 property ranges. The 33-test Dart selection separately
 runs all twelve casing fixtures through direct helpers and authored helper,
 receiver and array paths. This is fresh Dart and neutral/generation proof;
 the historical Julia and other-backend execution counts are not refreshed.
+
+## 2026-09-10 — Dart lower-map completion and upper-map continuation
+
+`DART-STARTUP-READING.1.28` reads unicode_case_mapping.dart 1190–2689:
+1,500 fragments / 38,936 baseline-identical bytes. This completes the lower
+table through U+1E921 and reads upper mappings through U+A76F. The fullwidth
+and supplementary mappings remain pinned data. Upper mappings include sharp-s
+to 0053 0053, U+0149 to 02BC 004E, and ordered Greek combining sequences.
+Both lowercase sigma forms map to U+03A3. Full casing is not an inverse or a
+normalization operation; contextual lowercase Final Sigma remains evaluator
+behavior, whose physical Dart reading belongs to .1.29.
+
+Fresh managed regeneration byte-compares the neutral artifact and all five
+modules and passes twelve independent fixtures with unchanged 1563/1581
+mappings and 158/464 ranges. The 33-test Dart run remains .1.27/dfc57ce1
+evidence, retained by exact source identity. No fresh Julia or other-backend
+runtime execution, new defect, data revision or source repair is claimed.

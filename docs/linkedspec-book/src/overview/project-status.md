@@ -89,16 +89,18 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed twenty-seven of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed twenty-eight of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
 parser bridge, function-shell projection, bounded child-parse authority, generated rule plan,
 interpreter, matching, recognition transactions, semantic observation, source location and both
-staged runtime modules, plus Unicode case mapping through line 1189. This covers 38,528 fragments /
-1,209,661 bytes. The latest 33 selected staged/source/matching/scalar/casing tests and Unicode
-generation with twelve neutral fixtures pass. Seventeen private/neutral validation controls expose
-six malformed provenance acceptances, owned below under `.2.19`. Child `.1.28` continues Unicode
-mapping from line 1190. Startup `.3.4` remains pending; prior evidence and limitations remain intact.
+staged runtime modules, plus Unicode case mapping through line 2689. This covers 40,028 fragments /
+1,248,597 bytes. The lower table is complete; uppercase mappings reach U+A76F. Fresh regeneration
+matches the neutral data and all five backend modules, and twelve independent fixtures pass.
+The 33-test Dart run and seventeen provenance controls remain the unchanged `.1.27` checkpoint;
+this range establishes no new defect. Child `.1.29` finishes Unicode mapping from line 2690,
+reads scaffold and begins semantic call projection. Startup `.3.4` remains pending;
+all prior evidence and limitations remain intact.
 
 The function shell checks the returned definition's text against scalar spans, reconciles staged
 body metadata and removes declarations while preserving line breaks. The private progressive

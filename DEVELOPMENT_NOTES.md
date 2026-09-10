@@ -10,6 +10,16 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-10 — complete Dart lower mappings and continue upper table
+
+Dart .1.28 reads through Unicode mapping line 2689. Supplementary and fullwidth
+lower mappings remain fixed data; upper expansions preserve ordered scalar
+sequences, including sharp-s and Greek combining forms. The remaining upper
+table, properties and contextual evaluator belong to .1.29. Fresh managed
+generation/12 neutral fixtures pass; the unchanged .1.27/dfc57ce1 source retains
+its 33 runtime tests and seventeen provenance controls. No new defect or
+generated-data revision is established; all existing repairs remain gated.
+
 ## 2026-09-10 — staged declaration completion and Unicode lower-map reading
 
 Dart .1.27 completes staged enrichment and inert parse-job construction. Typed
