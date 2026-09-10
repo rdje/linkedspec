@@ -89,7 +89,7 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed thirty-seven of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed thirty-eight of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
 parser bridge, function-shell projection, bounded child-parse authority, generated rule plan,
@@ -97,18 +97,22 @@ interpreter, matching, recognition transactions, semantic observation, source lo
 staged runtime modules, Unicode case mapping, scaffold, semantic call projection, semantic
 index, query, runtime/static projection, SHA-256, source emission, trace and validation.
 Package inputs, action-parser/action-contract, callable-codeblock, compiled-spec, named-mark,
-corpus and diagnostic-output tests are complete; duplicate-slot tests reach line 123.
-This covers 53,528 fragments / 1,643,554 bytes. All 38 selected tests pass, including
-the complete 105-fixture corpus and fifteen duplicate-slot admission roles. The three
-neutral named-mark, diagnostic-output and duplicate-slot checks pass as well.
+corpus, diagnostic-output, duplicate-slot, frontend/function-trace and function-registry
+tests are complete; inter-match-gap tests reach line 718. This covers 55,028 fragments /
+1,688,963 bytes. All 15 selected tests and the neutral gap/duplicate-slot checks pass.
 
-The named-mark consumer verifies native execution, generated-plan execution, reconstructed
-emitted state and primary-command output. Reconstruction does not independently compile
-an emitted module, and its different-label fixture does not prove recursive same-label
-mark isolation. Diagnostic tests prove caller error identity and trace separation on their
-covered paths; the semantic-observer limitation below remains separately owned. No new
-defect was confirmed in this slice. Child `.1.38` continues duplicate-slot, frontend/function
-trace and inter-match-gap test reading; startup `.3.4` remains pending.
+Duplicate-slot tests cover descriptor and reconstructed identities, native/generated traces,
+primary-command output and malformed-state diagnostics. Their emitted-source role checks
+source markers. The gap consumer independently analyzes and executes emitted modules.
+These are different kinds of proof. Earlier named-mark recursion and semantic-observer error
+limits remain recorded with their owners; passing authored selectors does not resolve the
+reconstructed null-name limitation below.
+
+The read gap tests cover Unicode and empty spans, stable named selectors after reordering,
+lifecycle ordering, child cursor boundaries, nested isolation and recognition rollback.
+Current gap governance is nine complete/zero pending; older Dart-only admission notes
+describe their dated boundary. No new defect was confirmed. Child `.1.39` continues gap,
+logical-helper and map-leaves test reading; startup `.3.4` remains pending.
 
 **Continuity capacity — approved history preservation:** the director approved one
 additional immutable archive member. Containment `.10` and ADR0112 admit exactly
@@ -134,7 +138,7 @@ in 2.25 seconds. That sample locates a pre-main wait without establishing its OS
 or a remedy. The older macOS 26.5.2 closeout does not resolve this macOS 26.6.2 observation.
 The evidence and repair criteria are logged by `SESSION-STARTUP-READING.80.0`; source
 changes remain behind the existing startup prerequisites. The intake is committed at
-`eaf4331e`; Dart reading continues at `.1.38`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
+`eaf4331e`; Dart reading continues at `.1.39`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
 
 **Known Dart limitation — null named selectors in reconstructed state:** a programmatically
 reconstructed target with these fields is incorrectly accepted:

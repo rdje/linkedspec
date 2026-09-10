@@ -39,3 +39,14 @@ Related: [[duplicate-regex-slot-identity-contract]],
 [[duplicate-regex-slot-identity-cross-backend-audit]],
 [[rust-duplicate-regex-slot-identity-admission]], and
 [[FUTURE-PARITY-BACKLOG]].
+
+## September 10 complete duplicate-slot consumer reading
+
+`DART-STARTUP-READING.1.38` finishes lines 124-477 of the Dart consumer after .1.37's
+prefix. All fifteen declared roles pass within the selected 15-test suite. The emitted
+source role asserts v2/identity/payload markers and absence of text-identity spelling;
+it does not independently compile emitted Dart. Direct/generated trace roles execute
+the existing runtime and compare structural target/index sequences. Invalid-state tests
+cover source validation, compiled validation, runtime, generated-plan and emitter rejection,
+plus explicit ordered cross-target mismatch. The neutral checker remains 7 complete/0
+pending with 59 drift mutations; no capability or generated-format change occurs.

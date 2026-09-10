@@ -2224,7 +2224,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Goal: Split and read all 115 baseline Dart entries, including compiler/runtime, tests, commands, and package inputs.
   Reading owner: `docs/tasks/DART-STARTUP-READING.md` owns .0 decomposition, .1 reading, .2 new repair intake and .3 reading closeout; this startup node remains the prerequisite/closeout owner.
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas. DART-STARTUP-READING.3 may complete this reading node only after exact coverage/comprehension and child-commit proof; pending repairs remain owned separately.
-  Verification: Dart reading remains incomplete at 37/55 children, 53,528 fragments / 1,643,554 bytes. Dart .1.37 completes compiled, named-mark, corpus and diagnostic tests and reads duplicate-slot tests through 123: 1,500 fragments / 44,134 baseline-identical bytes. All 38 selected tests pass, including the 105-fixture corpus and fifteen duplicate-slot roles; named-mark 7/3, diagnostic 3/11/6/8/0/20 and duplicate-slot 5/2/6/7/0/59 neutral checks pass. No new defect; previous findings and CI .80/.81 owners retain evidence and gates. Capacity .4/.5/.6 is committed under containment .8/.9/.10 and ADR0110/0111/0112. Startup .3/.4/.5 still gate repairs; next Dart .1.38.
+  Verification: Dart reading remains incomplete at 38/55 children, 55,028 fragments / 1,688,963 bytes. Dart .1.38 completes duplicate-slot, frontend-trace, function-registry and function-staged-trace tests; gap tests reach line 718. The 1,500 fragments / 45,409 bytes remain baseline-identical. All 15 selected tests pass, including independently analyzed/executed emitted gap modules; neutral gap 9/0/63 plus public8/15/10/34 and duplicate-slot7/0/59 pass. No new defect; earlier repairs and CI .80/.81 retain their gates. Capacities .4/.5/.6 remain committed under containment .8/.9/.10 and ADR0110/0111/0112. Startup .3/.4/.5 still gate repairs; next Dart .1.39.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.5`
@@ -4439,7 +4439,7 @@ Startup `.3.4` stays pending until complete Dart reading; the next executable re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.38` | `pending` | Continue bounded Dart test reading after .1.37; CI intake .80.0 is committed at eaf4331e and source repairs remain gated. |
+| 1 | `DART-STARTUP-READING.1.39` | `pending` | Continue bounded Dart tests after .1.38; CI intake eaf4331e and all source-repair gates remain. |
 
 ## Reading Ledger
 

@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / .1.37 complete; next .1.38
+- Status: `active` / .1.38 complete; next .1.39
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-10`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 37/55 children, 53,528/80,297 fragments and 1,643,554/2,471,305 bytes; fifty-four entries through EOF
-  plus duplicate_regex_slot_identity_contract_test.dart through line 123. Exact credit and comprehension remain in each completed node.
+- Current reading: 38/55 children, 55,028/80,297 fragments and 1,688,963/2,471,305 bytes; fifty-eight entries through EOF
+  plus inter_match_gap_capture_contract_test.dart through line 718. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -657,14 +657,20 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.37 - complete corpus and diagnostic test reading`
 
 - ID: `DART-STARTUP-READING.1.38`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 38 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.37` committed; empty brief and clean repository.
+  Activation: Clean `7b9df4e722e056b6c264f1e6e7a4176bfe40bddc`; previous reading committed, root clean, brief zero bytes and all jobs consumed.
   Scope: `dart/test/duplicate_regex_slot_identity_contract_test.dart` lines 124-477; `dart/test/frontend_compiler_trace_test.dart` lines 1-112; `dart/test/function_registry_test.dart` lines 1-111; `dart/test/function_staged_trace_test.dart` lines 1-205; `dart/test/inter_match_gap_capture_contract_test.dart` lines 1-718
   Baseline evidence: 1500 fragments / 45409 bytes; ordered range SHA-256 `9e400f77481ca5ab9761503708762a188b01158025859d6ea88c923ca566962b`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact scoped bytes/current deltas; duplicate-slot/frontend/function-registry/function-staged/gap Dart tests; neutral gap and duplicate-slot checks; prior evidence preservation, Knowledge, doctrines, histories, mdBook, memory and staged scope/whitespace.
+  Canonical trigger: `none` — bounded required reading and documentation; no source, contract or infrastructure changes.
+  Comprehension: Duplicate-slot tests complete reconstructed state, detached descriptor target/index identities, emitted source markers, direct generated values, ordered/choice and file-routed generated trace roles, primary JSON output, malformed compiled-state rejection across runtime/emitter/plan validation, and ordered cross-target mismatch diagnostics. The emitted-source role checks strings; it does not independently compile that output. Frontend traces assert exact event order, quiet identical JSON and balanced failures with equal error type/text. Registry fixtures retain ordered zero/fixed-arity entries, body jobs and stitched AST, distinguish unknown name from arity mismatch, and reject duplicate names. Function traces assert topic coverage, stack-balanced entry/exit, quiet AST identity and unwrapped projection/resolve diagnostics. Gap tests through 718 cover named/anonymous Unicode declarations, stable selectors under reorder, directive eligibility, source-aware static errors and preserved legacy descriptor shapes; native cases cover prefix/interstitial/tail spans, falsey children, LS preselection, child cursor boundaries, nested isolation, recognition rollback, terminal hooks, unavailable context and cursor regression. The failed-minimum assertion continues in .1.39.
+  Findings: No new confirmed defect. All earlier .2.1-.2.23/startup owners remain with their evidence; passing authored selector cases do not close reconstructed null-name .2.23. The historical Dart gap plan is explicitly qualified by current neutral9/0 and recurring-governance authority. CI intake stays committed at eaf4331e; source repairs remain gated.
+  Verification: Physically read duplicate-slot 124-477 through EOF in two complete 177-line outputs; all frontend 112 / registry 111 / function-staged 205 lines; gap 1-718 in complete 239/239/240-line outputs. Exact 1,500 fragments / 45,409 bytes and ordered range digest match baseline/current source. All 15 selected tests pass, including existing fifteen-role duplicate and nine-role gap ledgers plus independently analyzed/executed gap emitted modules. Neutral gap reports 8 positive/10 negative fixtures,3 sources,16 transitions,10 segmentation cases,9 diagnostics,9 complete/0 pending/63 semantic mutations, public8/15/10/34 and Rust10/Dart10/Julia10/Lua16 admission mutations; duplicate reports 5 fixtures/2 diagnostics/6 runtimes/7 complete/0 pending/59 mutations. Current gap rollout qualifies the earlier Dart admission narrative; no standalone duplicate emission compilation, new cross-backend or MCP run is claimed. Full coverage, retained evidence, Knowledge/book/memory/history/doctrine and staged-scope checks belong to this focused commit.
+  Commit: `DART-STARTUP-READING.1.38 - read identity and trace contracts`
 
 - ID: `DART-STARTUP-READING.1.39`
   Status: `pending`
@@ -1372,7 +1378,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.38` | `pending` | Continue duplicate-slot, frontend/function trace and inter-match-gap test reading after the .1.37 commit and cleared brief; all repair gates remain. |
+| 1 | `DART-STARTUP-READING.1.39` | `pending` | Continue gap, logical-helper and map-leaves test reading after .1.38 commit/brief/clean proof; repair gates remain. |
 
 ## Decisions
 
@@ -1397,6 +1403,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-10`: Dart .1.38 completes duplicate-slot, frontend-trace, function-registry and function-staged-trace tests; gap tests reach line 718. The 1,500 fragments / 45,409 bytes remain baseline-identical. All 15 selected tests pass, including independently analyzed/executed emitted gap modules; neutral gap 9/0/63 plus public8/15/10/34 and duplicate-slot7/0/59 pass. No new defect; earlier repairs and CI .80/.81 retain their gates. Reading reaches 38/55 children, 55,028 fragments / 1,688,963 bytes.
 
 - `2026-09-10`: Dart .1.37 completes compiled, named-mark, corpus and diagnostic tests and reads duplicate-slot tests through 123: 1,500 fragments / 44,134 baseline-identical bytes. All 38 selected tests pass, including the 105-fixture corpus and fifteen duplicate-slot roles; named-mark 7/3, diagnostic 3/11/6/8/0/20 and duplicate-slot 5/2/6/7/0/59 neutral checks pass. No new defect; previous findings and CI .80/.81 owners retain evidence and gates. Reading reaches 37/55 children, 53,528 fragments / 1,643,554 bytes.
 
@@ -1475,6 +1483,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- `.1.38`: `DART-STARTUP-READING.1.38 - read identity and trace contracts`.
+
 - `.1.37`: `DART-STARTUP-READING.1.37 - complete corpus and diagnostic test reading`.
 
 - `2026-09-10`: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.10 - admit approved change-history member` closes approved intake .6.
@@ -1550,6 +1560,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-10`: Completed .1.38 from clean 7b9df4e7; completed identity/trace/registry tests and read gap tests through 718; no new defect; next .1.39.
 
 - `2026-09-10`: Completed .1.37 from clean eaf4331e; finished corpus/diagnostic/compiled/named-mark tests, began duplicate-slot tests and routed .1.38; no new defect.
 

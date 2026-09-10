@@ -51,3 +51,15 @@ read in .1.35.
 All 27 selected emitter/trace/frontend/spec-validation tests pass. Earlier
 lifecycle/regex-brace and recognition-effect findings remain Dart .2.2/.2.4;
 this checkpoint changes no validation behavior or accepted syntax.
+
+## September 10 complete frontend and function-trace test reading
+
+`DART-STARTUP-READING.1.38` reads all 112 frontend-trace lines and 205 function-staged-trace
+lines. The selected 15-test suite passes their three and four tests, respectively, plus
+the two complete function-registry tests. Frontend proof compares exact event order and
+JSON results; staged proof checks required topics and a stack-balanced scope sequence.
+Quiet calls stay identical. Error controls compare independently produced runtime types
+and text, not object identity across separate invocations. Projection errors retain their
+own diagnostic. Registry fixtures cover ordered zero/fixed-arity entries, staged sidecars,
+unknown versus wrong-arity calls and duplicate-name rejection; variadic metadata keeps its
+separate existing coverage in [[dart-function-registry]].

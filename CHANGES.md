@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-10 — DART-STARTUP-READING.1.38: identity and trace tests
+
+Read 1,500 fragments / 45,409 baseline-identical bytes; duplicate-slot and
+frontend/function/registry tests complete, gap tests through 718. All 15 selected
+tests and both neutral contracts pass, including independent emitted gap proof.
+No new defect; reading 38/55; earlier repairs remain owned; next .1.39.
+
 ## 2026-09-10 — DART-STARTUP-READING.1.37: corpus and diagnostic tests
 
 Read 1,500 fragments / 44,134 baseline-identical bytes; compiled, named-mark,

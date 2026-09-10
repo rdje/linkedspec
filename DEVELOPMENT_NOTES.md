@@ -10,6 +10,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-10 — distinguish source markers from independent emitted proof
+
+Dart .1.38 confirms the duplicate-slot emitted role checks source markers,
+while the gap consumer independently analyzes and executes its emitted modules.
+Trace failures compare type/text across separate calls; exact caller-object
+identity is a different assertion. Current gap 9/0 qualifies dated Dart-only
+admission prose. All 15 tests and gap/duplicate neutral checks pass; no new defect.
+
 ## 2026-09-10 — exact Dart consumer proof boundaries
 
 Dart .1.37 separates generated-plan execution and emitted-payload reconstruction

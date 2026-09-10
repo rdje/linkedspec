@@ -27,8 +27,8 @@ answers:
   - "does Dart execute inter match gaps natively"
   - "how does Dart restore gap state on recognition rollback"
   - "when are Dart gap accessors available"
-date: 2026-08-15
-status: private Dart inter-match gap capture admitted through INTER-MATCH-GAP-CAPTURE.4.5 across all nine roles; outward surfaces and later runtimes remain pending
+date: 2026-09-10
+status: Dart admitted across nine roles; historical admission boundaries retained; current recurrence/public language 9 complete/0 pending, with separate outward guards
 tags: [capture, segmentation, dart, parser, lifecycle, transaction, generated-source, emitted-source, admission]
 evidence: "INTER-MATCH-GAP-CAPTURE.4.0 starts from clean atomic-232 commit 2800e7c3. Repository-routed probes show numeric syntax works while named declarations, named selectors, and capture_gaps remain raw invalid syntax; all four private accessors reach exact unknown_helper diagnostics. Trace proves repeated Dart rules currently execute LS before regex selection. Focused parser/compiler/runtime/transaction/emitter/primary proof passes 123 tests. The complete Dart gate passes format 101/0, strict analysis, 400/400 tests, storage 22 Directory.systemTemp owners / 47 packages, CLI 66x2, and corpus 105/105. Leaves .4.1-.4.5 separately own authored/static metadata and dormancy, native recognition state, reconstructed/descriptor/generated-plan carriers, independently analyzed emitted source, then primary/nine-role admission. No Dart behavior, rollout, generated format, facade/schema/MCP, capability, README, or public claim moves in .4.0."
 evidence_update_2026_08_15_metadata: "INTER-MATCH-GAP-CAPTURE.4.1 activates from clean atomic-233 commit e40de948. Checker-first final-path RED is exactly absent parseSpec(sourceId:) and SpecFile.sourceId. GREEN adds pinned-Unicode named/anonymous declaration order, unindexed/numeric/named authorship, source-aware static diagnostics, directive eligibility, logical source identity through ordinary/staged/loaded/JSON routes, compiled slot/directive rows, and five-field edge provenance. The explicit dormant consumer passes 1/1; ordinary Dart remains 400 plus one intended skip; neutral governance remains 3/6/56 plus ten Rust admission and ten Dart dormancy mutations. Descriptor resolved_edges, generated plan v2, native state/accessors, facade, canonical/recurring routes, rollout, and outward claims do not move."
@@ -153,3 +153,20 @@ outward surface stay pending.
 
 Related: [[inter-match-gap-executable-contract-plan]], [[inter-match-gap-recurring-governance]],
 [[inter-match-gap-rust-implementation-plan]], [[dart-project-data-ssd-storage]], ADR `0045`, and ADR `0074`.
+
+## September 10 current-status qualification and consumer reading
+
+The earlier Dart-only admission and pending-later-runtime prose above describes its dated
+August15 boundary. Current neutral governance is 9 complete/0 pending with 63 semantic
+mutations; public controls are 8 documents/15 stale-current denials/10 outward guards/34
+mutations. [[inter-match-gap-recurring-governance]] owns the current all-six-runtime
+recurrence and public-language boundary; facade/schema/CLI/README guards remain distinct.
+
+`DART-STARTUP-READING.1.38` reads this consumer through line 718: authored/static metadata,
+selector reorder, source identity, typed errors, Unicode/empty native gaps, lifecycle,
+child cursors, nested owners, rollback, terminal tails and unavailable/regression outcomes.
+The failed-minimum assertion and later carrier/emitted-role source remain in .1.39.
+All 15 selected tests pass, including the full existing gap consumer's independently
+analyzed/executed emitted stage and exact nine-role ledger. Running a whole test file
+does not grant physical-reading credit for its unread tail. No new defect is confirmed;
+the separately owned reconstructed null-name selector gap remains open.
