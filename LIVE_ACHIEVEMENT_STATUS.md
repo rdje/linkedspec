@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart .1.51 reads staged enrichment tests292-1791: 1,500 fragments / 50,285 baseline-identical bytes. All 19 tests and staged/typed-source neutral checks pass, covering private provenance, frozen authority, atomic stitching, recursive budgets and rebasing. Prior .2.17/.2.18/.2.19 defects remain open; whole-consumer execution adds no unread source credit or MCP exposure. Reading is 51/55 children, 74,528 fragments / 2,298,209 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart .1.52 completes staged enrichment, v1 registry and standalone lifecycle consumers, then reads trace through line 260: 1,500 fragments / 44,374 baseline-identical bytes. All 38 selected tests and staged/lifecycle neutral checks pass. Record four-route staged execution, narrow lifecycle emitted-text and malformed-twin assertions, and trace result preservation; prior defects remain open. Reading is 52/55 children, 76,028 fragments / 2,342,583 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.81` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `DART-STARTUP-READING.1.51` — Dart .1.51 reads staged enrichment tests292-1791: 1,500 fragments / 50,285 baseline-identical bytes. All 19 tests and staged/typed-source neutral checks pass, covering private provenance, frozen authority, atomic stitching, recursive budgets and rebasing. Prior .2.17/.2.18/.2.19 defects remain open; whole-consumer execution adds no unread source credit or MCP exposure.
+- `DART-STARTUP-READING.1.52` — Dart .1.52 completes staged enrichment, v1 registry and standalone lifecycle consumers, then reads trace through line 260: 1,500 fragments / 44,374 baseline-identical bytes. All 38 selected tests and staged/lifecycle neutral checks pass. Record four-route staged execution, narrow lifecycle emitted-text and malformed-twin assertions, and trace result preservation; prior defects remain open.
 
 ## Next Action
 
-- `DART-STARTUP-READING.1.52` — complete staged/registry/lifecycle consumers and read trace through260 after clean .1.51.
+- `DART-STARTUP-READING.1.53` — finish trace and read typed-source/Unicode tests through Unicode routes70 after clean .1.52.
 
 ## Recent Completions
+
+- `2026-09-11` — `DART-STARTUP-READING.1.52` reads 1,500 fragments / 44,374 bytes; 38 tests and two neutral checks pass; no new defect.
 
 - `2026-09-11` — `DART-STARTUP-READING.1.51` reads 1,500 fragments / 50,285 bytes; 19 tests and two neutral checks pass; prior defects remain open.
 
@@ -48,8 +50,6 @@
 - `2026-09-10` — `DART-STARTUP-READING.1.39` reads 1,500 fragments / 46,756 bytes; all 40 tests and gap/logical/mutation neutral checks pass; no new defect.
 
 - `2026-09-10` — `DART-STARTUP-READING.1.38` reads 1,500 fragments / 45,409 bytes; all 15 tests and gap/duplicate neutral checks pass, including independent emitted gap proof; no new defect.
-
-- `2026-09-10` — `DART-STARTUP-READING.1.37` reads 1,500 fragments / 44,134 bytes; all 38 tests (including 105 corpus fixtures) and three neutral contracts pass; no new defect.
 
 ## History
 

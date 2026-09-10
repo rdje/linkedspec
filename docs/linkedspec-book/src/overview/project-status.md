@@ -89,7 +89,7 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed fifty-one of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed fifty-two of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
 parser bridge, function-shell projection, bounded child-parse authority, generated rule plan,
@@ -104,9 +104,9 @@ root-selection, rule-local cursor, interpreter, matching, scalar-text, self-host
 Unicode, call-projection, compilation-foundation and query tests are complete.
 Observation-route, runtime-capture, observed-index, source-foundation and static-graph
 tests, semantic admission, smoke and source-boundary aliases are complete; emitter
-reading is complete along with AST/loader/parser/validator tests; staged-enrichment
-reading reaches line 1791. This covers 74,528 fragments / 2,298,209 bytes. The current
-19-test selection and two neutral checks pass; earlier results remain in their
+reading is complete along with AST/loader/parser/validator, staged-enrichment,
+v1 registry and lifecycle tests; trace reaches line 260. This covers 76,028
+fragments / 2,342,583 bytes. The current 38-test selection and two neutral checks pass; earlier results remain in their
 completed reading leaves.
 
 Interpreter tests confirm explicit cursor rewinds and stack restoration, capture
@@ -125,7 +125,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading continues
-in child `.1.52` after the clean .1.51 handoff. Startup `.3.4` remains pending.
+in child `.1.53` after the clean .1.52 handoff. Startup `.3.4` remains pending.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -191,7 +191,7 @@ That leaf reached 50/55 children, 73,028 fragments / 2,247,924 bytes; `.1.51` no
 continues staged reading through1791. Existing source-correlation, parser and private-provenance
 defects remain owned and open.
 
-**Dart staged-enrichment consumer reading through child 51:** typed assignments
+**Completed child 51 evidence:** typed assignments
 produce inert markers, with strict annotation and recognition-path checks. The
 private validator checks source provenance internally; it is not a semantic
 introspection or MCP API. Frozen registry tests cover resolution and authority;
@@ -205,10 +205,30 @@ budget, call-counter overflow and malformed-provenance-type defects remain open:
 the normal-limit fixtures do not resolve them. The emitted marker test uses the
 existing Dart package context and requires successful analysis and execution.
 
-Physical reading reaches line 1791, partway through production emitted admission;
-`.1.52` completes that test and its helpers. Whole-consumer execution grants no
-unread source credit. Reading is 51/55 children, 74,528 fragments / 2,298,209 bytes.
+That leaf reached line 1791, partway through production emitted admission;
+`.1.52` now completes that test and its helpers. Whole-consumer execution grants no
+unread source credit. By child 51, reading covered 74,528 fragments / 2,298,209 bytes.
 The task container's stale36/55 rollup is corrected to these verified child records.
+
+**Dart staged, lifecycle and trace consumer reading through child 52:** the staged
+production test and helpers are fully read. All four routes execute twice from one
+seed and compare results, cache/resource records and fresh-authority observations.
+The emitted route requires successful analysis and execution in the existing Dart
+package context. The separate v1 function-body registry tests retain stable queue
+order, detached body stitching and structured resolve/compile/stitch failures.
+
+Lifecycle twins preserve opening lines, authored source and normalized payloads.
+Duplicate blocks execute in authored order through native, reconstructed and
+generated-plan routes. This Dart test only checks that emitted text is nonempty;
+it does not run that emitted module. Malformed twins require matching exception
+types and nonempty messages, not equality of every diagnostic field. Legacy plain
+payloads remain inert.
+
+Trace reading reaches line 260, covering level and environment controls, file reset,
+route/mirror sinks, structured events and unchanged parse results. All 38 selected
+tests and staged/lifecycle neutral checks pass. This is 52/55 children, 76,028
+fragments / 2,342,583 bytes; `.1.53` finishes the trace helper and reads typed-source
+and Unicode consumers. Existing source, provenance, budget and CLI defects stay open.
 
 **Approved engineering-history capacity:** the director approved collection files
 27→28 and manifest rows 26→27. Containment `.11` and ADR0113 implement those two
@@ -254,7 +274,7 @@ in 2.25 seconds. That sample locates a pre-main wait without establishing its OS
 or a remedy. The older macOS 26.5.2 closeout does not resolve this macOS 26.6.2 observation.
 The evidence and repair criteria are logged by `SESSION-STARTUP-READING.80.0`; source
 changes remain behind the existing startup prerequisites. The intake is committed at
-`eaf4331e`; approved containment .11 is committed at `ad64f76f`; `.1.52` follows completed `.1.51`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
+`eaf4331e`; approved containment .11 is committed at `ad64f76f`; `.1.53` follows completed `.1.52`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
 
 **Known Dart limitation — null named selectors in reconstructed state:** a programmatically
 reconstructed target with these fields is incorrectly accepted:

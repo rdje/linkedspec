@@ -69,3 +69,12 @@ ordered list equality, map/signature equality and contextual phase diagnostics c
 job/path/parser/top/payload/span/failure-policy detail. This completes physical v1 registry
 reading. The 25-test registry/Unicode/function selection passes; general v2 runtime proof
 remains owned separately.
+
+## September 11 v1 registry consumer reading complete
+
+Dart .1.52 reads staged_parser_registry_test.dart 1-425 through EOF. Six tests
+cover stable source-order queues, exact builtin resolution/compiled/cache metadata,
+body_ast stitching without mutating the original SpecFile, composed function-shell
+dispatch and resolve/compile/stitch failure context. The cache object is a v1
+descriptor; these tests do not exercise the separate general-v2 plan cache.
+All 38 selected tests pass. No registry, authoring or MCP behavior changes.

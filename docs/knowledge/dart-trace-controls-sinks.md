@@ -56,3 +56,13 @@ All 27 selected emitter/trace/validation tests pass. The primary CLI has a
 separate canonical trace adapter; its numeric overflow/reset-before-failure
 remains [[dart-primary-cli-trace-overflow]] under Dart .2.3. This reading does
 not merge those APIs or claim a fresh replay of that seven-case failure.
+
+## September 11 trace consumer reading through line 260
+
+Dart .1.52 reads trace_test.dart 1-260. Level aliases/numeric thresholds,
+environment configuration, reset/route/mirror sinks and structured scope/decision/
+log/dump events are checked. Native traced and untraced JSON results match while
+action/blind dispatch, lifecycle, cursor and source-boundary events remain visible.
+All 38 selected tests pass, including the complete seven-test trace file.
+The temporary-file helper tail belongs to .1.53; execution gives no unread source
+credit. The separate primary-CLI overflow/reset defect .2.3 remains open.

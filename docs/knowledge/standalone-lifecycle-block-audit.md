@@ -130,3 +130,16 @@ other backend carrier results are unchanged. Fresh neutral checking passes nine
 placements, four duplicate forms, six ownership cases, three malformed twins and
 fourteen mutations. No new native or six-runtime matrix run is claimed, and the
 separately measured Rust lexical repairs `.52`–`.54` remain pending.
+
+## September 11 Dart consumer boundaries
+
+Dart .1.52 reads standalone_lifecycle_block_contract_test.dart 1-207 through EOF.
+Placement/provenance twins compare opening lines, authored source and normalized
+payloads. Duplicate cases execute through native, SpecFile-JSON reconstructed and
+generated-plan routes. This Dart consumer only requires nonempty emitted source;
+it does not independently analyze or execute that emitted module. Malformed twins
+compare exception runtime types and nonempty messages, not exact diagnostic fields.
+Legacy reconstructed plain blocks remain inert. All 38 selected Dart tests pass,
+including these six lifecycle tests; neutral governance remains 9 placements,
+4 duplicates,6 ownership cases,3 malformed twins and14 mutations. This bounded
+rerun adds no other-backend execution claim and closes no prior lexical defect.

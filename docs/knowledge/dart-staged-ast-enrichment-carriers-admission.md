@@ -66,3 +66,16 @@ Related: [[dart-staged-ast-enrichment-recursive-authority]],
 [[julia-staged-ast-enrichment-marker-provenance]],
 [[general-staged-ast-enrichment-neutral-contract]], and ADR
 `0088`.
+
+## September 11 production consumer reading complete
+
+Dart .1.52 reads staged_ast_enrichment_contract_test.dart 1792-2399 through EOF.
+The emitted carrier is analyzed with fatal warnings/infos, then executed with
+exit0 before its JSON record is compared with native, reconstructed and generated
+routes. It uses the existing Dart package context. Each route invokes one seed
+twice; helpers assert two starts/callbacks, equal outcomes and per-call cache
+miss/hit/entry and total-call values, then project cancellation/clock identities
+and counts for route comparison. Logical JSON and emitted source deny the listed
+host-authority tokens. All 38 selected tests pass, including the 19-test staged
+consumer, and staged123/public129 neutral checks pass. This completes physical
+consumer reading without closing the separately owned .2.17/.2.18/.2.19 defects.

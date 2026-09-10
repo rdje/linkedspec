@@ -10,6 +10,15 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — staged, lifecycle and trace consumer boundaries
+
+Dart .1.52 finishes staged production admission and v1 registry consumers. The
+four-route staged harness analyzes and executes emitted source in its package
+context. Lifecycle duplicates execute through native/reconstructed/generated-plan
+routes; emitted source is only checked nonempty, and malformed twins compare
+exception types with nonempty messages. Trace tests preserve parse output while
+checking sinks and events. All 38 tests and two neutral checks pass; no runtime change.
+
 ## 2026-09-11 — staged authority consumer scope
 
 Dart .1.51 reads private provenance and staged scheduler consumers through1791.

@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / .1.51 complete; next .1.52
+- Status: `active` / .1.52 complete; next .1.53
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-11`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 51/55 children, 74,528/80,297 fragments and 2,298,209/2,471,305 bytes; ninety-nine entries through EOF
-  plus staged_ast_enrichment_contract_test.dart through line 1791. Exact credit and comprehension remain in each completed node.
+- Current reading: 52/55 children, 76,028/80,297 fragments and 2,342,583/2,471,305 bytes; 102 entries through EOF
+  plus trace_test.dart through line 260. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -85,7 +85,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Acceptance: Every child accounts for its exact source bytes and deltas, reconciles Knowledge before re-derivation,
     records comprehension and confirmed findings, runs necessary focused diagnostics and commits before the next child.
   Children: `.1.1-.1.55`; exact scopes and baseline evidence below, read in numeric order.
-  Verification: 51/55 children complete; `.1.1-.1.51` own exact reading/comprehension evidence, and .1.52-.1.55 remain pending.
+  Verification: 52/55 children complete; `.1.1-.1.52` own exact reading/comprehension evidence, and .1.53-.1.55 remain pending.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.1.1`
@@ -878,14 +878,19 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.51 - read staged enrichment authority consumers`
 
 - ID: `DART-STARTUP-READING.1.52`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 52 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.51` committed; empty brief and clean repository.
+  Activation: Clean `9092add37febb1c57293d8dc2356ca36ade12379`; prior leaf committed, brief empty, root clean and all jobs consumed.
   Scope: `dart/test/staged_ast_enrichment_contract_test.dart` lines 1792-2399; `dart/test/staged_parser_registry_test.dart` lines 1-425; `dart/test/standalone_lifecycle_block_contract_test.dart` lines 1-207; `dart/test/trace_test.dart` lines 1-260
   Baseline evidence: 1500 fragments / 44374 bytes; ordered range SHA-256 `af4afe6ffa013327537799d74b93095449f46cf6d6238a6bbf316a8345f702e9`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact declared ranges and full baseline identity; staged enrichment/registry/lifecycle/trace tests and direct staged/lifecycle neutral authorities and trace API contract reconciliation; Knowledge, histories, rendered book, preservation and all doctrines.
+  Canonical trigger: `none` — ordinary bounded reading and documentation; no executable, contract, infrastructure or dependency changes.
+  Comprehension: Staged production admission requires fatal emitted-source analysis and successful execution in the existing package context, comparing native/reconstructed/generated/emitted records for two calls per seed. Helpers expose fresh authority starts, callback/cache/resource counters and identity projections, with no serialized host authority. V1 registry tests cover stable queues, exact cache descriptors, immutable body_ast stitching and resolve/compile/stitch errors; they do not implement v2 scheduling. Lifecycle twins preserve authored source/opening lines, normalized payloads and duplicate order through native/reconstructed/generated-plan execution; emitted source is only checked nonempty, and malformed twins compare exception type/nonempty messages. Legacy plain payloads remain inert. Trace tests cover level aliases, filtering, environment controls, reset/route/mirror, structured events and unchanged parse results with action/blind/cursor/boundary trace detail; the temporary-file helper tail belongs to .1.53.
+  Verification: Physically read staged1792-1991/1992-2191/2192-2399 EOF, registry1-220/221-425 EOF, lifecycle1-207 EOF and trace1-130/131-260 in untruncated output. Exact 1500 fragments / 44374 bytes and digest pass; all 115 baseline paths remain identical. All 38 tests in four selected files pass, including complete existing staged emitted admission and trace consumer; no unread tail credit. Neutral staged123/public129 and lifecycle9/4/6/3 with14 mutations pass. Coverage/preservation, Knowledge/book/memory/histories, diff hygiene and all doctrines govern the focused commit. No fresh other-backend execution or closure of prior defects.
+  Commit: `DART-STARTUP-READING.1.52 - complete staged and lifecycle consumer reading`
 
 - ID: `DART-STARTUP-READING.1.53`
   Status: `pending`
@@ -1465,7 +1470,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.52` | `pending` | Complete staged enrichment, registry and lifecycle consumers; read trace through260 after clean .1.51. |
+| 1 | `DART-STARTUP-READING.1.53` | `pending` | Finish trace, read typed-source and Unicode consumers through Unicode routes70 after clean .1.52. |
 
 ## Decisions
 
@@ -1496,6 +1501,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-11` .1.52: Dart .1.52 completes staged enrichment, v1 registry and standalone lifecycle consumers, then reads trace through line 260: 1,500 fragments / 44,374 baseline-identical bytes. All 38 selected tests and staged/lifecycle neutral checks pass. Record four-route staged execution, narrow lifecycle emitted-text and malformed-twin assertions, and trace result preservation; prior defects remain open. Cumulative 52/55, 76028 fragments / 2342583 bytes, 102 EOF plus trace260; prior source findings remain owned.
 
 - `2026-09-11` .1.51: Dart .1.51 reads staged enrichment tests292-1791: 1,500 fragments / 50,285 baseline-identical bytes. All 19 tests and staged/typed-source neutral checks pass, covering private provenance, frozen authority, atomic stitching, recursive budgets and rebasing. Prior .2.17/.2.18/.2.19 defects remain open; whole-consumer execution adds no unread source credit or MCP exposure. Cumulative51/55,74528 fragments/2298209 bytes,99 EOF plus staged1791. Parent .1 verification had remained at36/55 despite completed children; this leaf corrects that current rollup, preserving all child evidence.
 
@@ -1604,6 +1611,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- .1.52: `DART-STARTUP-READING.1.52 - complete staged and lifecycle consumer reading`.
+
 - .1.51: `DART-STARTUP-READING.1.51 - read staged enrichment authority consumers`.
 
 - .1.50: `DART-STARTUP-READING.1.50 - complete frontend and emitter consumer reading`.
@@ -1707,6 +1716,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-11`: .1.52 completes staged/registry/lifecycle consumer reading and starts trace; next .1.53 after clean focused commit. Keep emitted-test and malformed-twin evidence boundaries explicit.
 
 - `2026-09-11`: .1.51 reads staged authority consumers through1791; next .1.52 after clean focused commit. Synchronize parent coverage; prior findings and repair gates remain.
 
