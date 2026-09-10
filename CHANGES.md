@@ -10,6 +10,15 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-10 — DART-STARTUP-READING.1.25: frozen registry and recursive dispatch
+
+Read staged enrichment lines 307–1806: 1,500 fragments / 47,254 baseline-identical
+bytes. Frozen resolution, effective authority, plan caching and recursive
+preflight/dispatch reconcile with their existing scope. All 44 selected tests
+pass; no new defect is established. Preserve prior findings, exact coverage and
+book/live alignment; .1.26 follows the focused clean commit. The approved
+engineering-history prerequisite is committed canonically at 9c644ecb.
+
 ## 2026-09-10 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.9: approved engineering-history slot
 
 Admit the two approved engineering_notes controls: files 26→27 and manifest lines

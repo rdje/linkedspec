@@ -10,6 +10,15 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-10 — staged registry and recursive dispatch reading
+
+Dart .1.25 confirms exact frozen callback binding, deterministic plan identity,
+complete-depth target reservation, expiring callback authority and bounded
+recursive settlement through line 1806. All 44 selected tests pass. Existing
+one-depth and production recursive contracts stay distinct; no new defect is
+established. Detailed reconciliation is in the staged current-depth and recursive
+Knowledge cards; .1.26 owns the remaining helper bodies.
+
 ## 2026-09-10 — engineering-history capacity preserves exact chronology
 
 Containment .9 implements the director-approved files 26→27 and manifest lines

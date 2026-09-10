@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / .1.24 complete; .5 capacity approved and implemented; next .1.25
+- Status: `active` / .1.25 complete; next .1.26
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-10`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 24/55 children, 34,028/80,297 fragments and 1,079,144/2,471,305 bytes; thirty-two entries through EOF
-  plus staged_ast_enrichment.dart through line 306. Exact credit and comprehension remain in each completed node.
+- Current reading: 25/55 children, 35,528/80,297 fragments and 1,126,398/2,471,305 bytes; thirty-two entries through EOF
+  plus staged_ast_enrichment.dart through line 1806. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -85,7 +85,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Acceptance: Every child accounts for its exact source bytes and deltas, reconciles Knowledge before re-derivation,
     records comprehension and confirmed findings, runs necessary focused diagnostics and commits before the next child.
   Children: `.1.1-.1.55`; exact scopes and baseline evidence below, read in numeric order.
-  Verification: 24/55 children complete; `.1.1-.1.24` own exact reading/comprehension evidence, and all later children remain pending.
+  Verification: 25/55 children complete; `.1.1-.1.25` own exact reading/comprehension evidence, and all later children remain pending.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.1.1`
@@ -449,14 +449,20 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.24 - finish recognition and source authority reading`
 
 - ID: `DART-STARTUP-READING.1.25`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 25 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.24` committed; empty brief and clean repository.
+  Activation: Clean `9c644ecb6de2dd2009f886f3fd0342dfc1c82947` after canonical containment .9; root status empty and brief zero bytes.
   Scope: `dart/lib/src/runtime/staged_ast_enrichment.dart` lines 307-1806
   Baseline evidence: 1500 fragments / 47254 bytes; ordered range SHA-256 `bf43c5c6f0b58628cc87531c45964101688d5d41528c3d4f7c0234980573a40f`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: 44 staged-AST, registry, progressive, typed-source and matching direct-dependent tests; exact owned range/current deltas, prior evidence retention, all doctrines, both histories, Knowledge freshness, rendered mdBook and staged scope.
+  Canonical trigger: `none` — bounded required reading and documentation; no source, public contract or infrastructure changes.
+  Comprehension: Execution state consumes completion before dispatch, rejects live recognition transactions and sanitizes outcome-sink failures. Frozen snapshots require exact opaque callback bindings and replace logical callback names before hashing. Resolution rejects alias/relative collisions and ambiguities, then uses ordered frozen roots/providers without loading. Effective authority checks versions/top, intersects capabilities/policies and narrows all ceilings; cache keys normalize the eight identity fields and cache callbacks only. Both schedulers prepare and reserve a complete depth before callbacks. Recursive dispatch checks shared resources, expires callback contexts on return/throw, detaches and node-bounds success, settles bounded failures, and queues returned markers with their full lineage for the next depth. This range ends after the per-plan recursive loop; .1.26 resumes its return and resource/projection helpers.
+  Findings: No new confirmed defect in this range. The compatible one-depth API and production recursive authority remain distinct; reading does not admit dynamic loading, parser builders or a new serialization route. Existing Dart .2.1-.2.16 and startup owners retain their evidence.
+  Verification: Physically read staged_ast_enrichment.dart 307-1806 in six complete, untruncated 250-line outputs: 1,500 fragments / 47,254 baseline-identical bytes with unchanged ordered digest. All 44 selected tests pass, including exact recursive predicates, breadth-first execution, shared bounds, diagnostic rebasing and existing four-route carrier proof. Full plan reconstruction retains 115 paths / 169 ranges / all 55 child bounds. Prior-record retention, doctrines, both histories, Knowledge and rendered-book results belong to this commit.
+  Commit: `DART-STARTUP-READING.1.25 - read frozen staged registry and recursive dispatch`
 
 - ID: `DART-STARTUP-READING.1.26`
   Status: `pending`
@@ -1117,7 +1123,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.25` | `pending` | Continue staged execution from line 307 after containment .9 commits canonically and cleanly; reading remains 24/55. |
+| 1 | `DART-STARTUP-READING.1.26` | `pending` | Continue staged enrichment lines 1807–3306 after .1.25 commits and the brief/tree are clean; reading is 25/55. |
 
 ## Decisions
 
@@ -1140,6 +1146,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-10`: `.1.25` reads staged enrichment 307–1806: 1,500 fragments / 47,254 baseline-identical bytes. All 44 selected tests pass; frozen resolution/cache and recursive preflight/dispatch reconcile without a new defect. Reading reaches 25/55; prior evidence and repairs remain intact.
 
 - `2026-09-10`: `.1.24` reads 1,500 fragments / 48,312 bytes, completing recognition, semantic observation and source location plus staged entry through 306; 58 tests pass. No new runtime defect; one stale Knowledge link corrected; prior owners remain intact.
 
@@ -1190,6 +1198,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- `.1.25`: `DART-STARTUP-READING.1.25 - read frozen staged registry and recursive dispatch`.
+
 - `2026-09-10`: `DART-STARTUP-READING.1.24 - finish recognition and source authority reading` closes the twenty-fourth reading child from clean 62b02fec.
 
 - `2026-09-09`: `DART-STARTUP-READING.1.23 - finish matching; own regex literal normalization` closes the twenty-third reading child from clean f9020412.
@@ -1237,6 +1247,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-10`: Completed .1.25 from clean canonical 9c644ecb; continued frozen staged registry and recursive dispatch reading, retained all prior owners, and routed .1.26.
 
 - `2026-09-10`: `.1.24` completes three runtime files and reads staged entry through 306. Reading is 24/55; .5 owns engineering-history capacity before .1.25; no new runtime repair intake.
 

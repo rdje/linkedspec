@@ -16,6 +16,8 @@ answers:
   - "how are Dart staged child results detached"
   - "does Dart recursively execute returned staged markers"
   - "what does FUTURE-PARITY-BACKLOG 14.7.5.2 implement"
+  - "can a Dart staged execution state be retried after an error"
+  - "how does Dart sanitize frozen staged callback identity"
 date: 2026-08-26
 status: current compatible one-depth API; superseded by private recursive authority under FUTURE-PARITY-BACKLOG.14.7.5.3
 tags: [dart, staged-parsing, parse-job, registry, cache, result-policy, failure-policy, detachment, private]
@@ -88,3 +90,19 @@ typed snapshot errors. This private seed is not serialized and does not admit
 the proposed parser builder. The selected 58 tests pass; .1.25 continues the
 state and execution implementation. Existing one-depth and recursive owners
 retain their separate contracts and earlier evidence.
+
+## 2026-09-10 — frozen registry and current-depth dispatch reconciled
+
+`DART-STARTUP-READING.1.25` reads staged_ast_enrichment.dart 307–1806.
+Completion is single-use even when transaction rejection or an outcome-sink error
+ends it. The snapshot consumes exact callback bindings and replaces their logical
+names with the opaque callback sentinel before hashing. Alias/declaring-relative
+collisions reject before ordered frozen roots/providers are considered.
+
+Selected top and exact versions precede effective capability/policy intersections
+and ceiling minima. Cache identity normalizes its eight fields, including scalar-
+sorted capabilities; only immutable callback plans are retained. The one-depth
+API prepares every job and target before invoking fresh sibling contexts, and
+copies retained output. Its compatibility scope remains separate from the
+production recursive scheduler. All 44 selected staged/registry/progressive/
+typed-source/matching tests pass; no new defect or dynamic parser API is established.

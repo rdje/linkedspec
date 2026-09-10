@@ -70,3 +70,23 @@ Related: [[dart-staged-ast-enrichment-current-depth-authority]],
 [[general-staged-ast-enrichment-neutral-contract]],
 [[typed-source-location-cursor-algebra-direction]],
 [[dart-staged-ast-enrichment-carriers-admission]], and ADR `0088`.
+
+## 2026-09-10 — recursive preparation and dispatch reconciled
+
+`DART-STARTUP-READING.1.25` reads staged_ast_enrichment.dart 307–1806.
+The recursive scheduler prepares, typed-sorts and reserves each complete depth.
+A static lineage failure with policy `fail` rejects before callback one. Target
+reservation rejects duplicate non-append destinations, overlapping replacement
+claims and replacement of queued markers; compatible ordered appends remain valid.
+
+The per-plan loop checks shared resources before dispatch, verifies cached plan
+identity and expires callback context in `finally`. Typed callback errors become
+portable diagnostics; successful callbacks undergo a second resource check and
+plain-data detachment under the smaller per-entry and remaining node ceilings.
+Bounded failures settle through the selected policy. Successful results spend
+cumulative nodes and queue nested markers with extended lineage for the next
+depth before stitching. This range stops after that loop; .1.26 owns its return
+and the resource/projection helper bodies. The existing 44-test selection passes,
+including recursive guards, cancellation/deadlines/steps, cumulative nodes and
+diagnostic bytes, source rebasing and four production routes. No new defect is
+established; earlier authority evidence and pending repairs remain intact.

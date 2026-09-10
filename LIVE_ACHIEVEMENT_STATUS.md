@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.24 completes twenty-four of 55 children: 34,028 fragments / 1,079,144 bytes. Containment .8 admits the director-approved history capacity at 7d52c98e; all confirmed Dart defects .2.1-.2.16 and startup .37 nested-authority findings are owned and gated; engineering-history .5 is approved and implemented under containment .9 / ADR0111; .1.25 resumes after clean canonical landing. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading .1.25 completes twenty-five of 55 children: 35,528 fragments / 1,126,398 bytes. Staged enrichment reaches 1806; all 44 selected tests pass and no new defect is established. Containment .8/.9 commit the approved history capacity, latest 9c644ecb. All confirmed Dart .2.1-.2.16 and startup .37 findings remain owned and gated; .1.26 is next. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.79` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.9` admits the two approved engineering-history count controls under ADR0111. Governed rollover preserves 207 lines / 32,348 bytes; every earlier history byte and manifest record is exact. All 22 validator executions pass; exact staged canonical evidence belongs to the commit. Dart reading remains 24/55.
+- `DART-STARTUP-READING.1.25` reads staged enrichment 307–1806: 1,500 fragments / 47,254 baseline-identical bytes. Frozen registry resolution, effective authority, plan caching, complete-depth preflight and recursive dispatch reconcile with existing contracts. All 44 selected tests pass; no new defect is established.
 
 ## Next Action
 
-- `DART-STARTUP-READING.1.25` continues staged execution from line 307 after .9's canonical commit, zero-byte brief and clean proof.
+- `DART-STARTUP-READING.1.26` continues staged enrichment from line 1807 after .1.25 commits, the brief is empty and the root tree is clean.
 
 ## Recent Completions
+
+- `2026-09-10` — `DART-STARTUP-READING.1.25` reads 1,500 fragments / 47,254 bytes; 44 tests pass; staged enrichment through 1806; no new defect.
 
 - `2026-09-10` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.9` admits engineering-history files 26→27 and manifest lines 25→26; exact history reconstruction and 22 validator executions pass; canonical proof governs landing.
 
@@ -48,8 +50,6 @@
 - `2026-09-09` — `DART-STARTUP-READING.1.12` reads 1,500 fragments / 41,630 bytes, passes 17 selected tests and owns ten lexical controls under .2.7/.2.2.2.
 
 - `2026-09-09` — `DART-STARTUP-READING.1.11` reads 1,500 fragments / 39,800 bytes, passes 16 selected tests and owns body suffix repair .2.6 with fourteen controls.
-
-- `2026-09-09` — `DART-STARTUP-READING.1.10` reads 1,500 fragments / 61,935 bytes, passes 11 selected tests and owns canonical Unicode ordering .2.5.
 
 ## History
 

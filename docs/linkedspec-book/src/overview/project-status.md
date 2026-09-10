@@ -89,16 +89,16 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed twenty-four of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed twenty-five of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
 parser bridge, function-shell projection, bounded child-parse authority, generated rule plan,
 interpreter, matching, recognition transactions, semantic observation and source location,
-plus staged enrichment through line 306. This covers 34,028 fragments / 1,079,144 bytes.
-The latest 58 selected recognition/observation/gap/source/semantic-index/staged tests pass.
-No new runtime defect is established. Child `.1.25` continues staged execution from line 307
-after canonical admission of the approved engineering-history capacity described below;
-startup `.3.4` remains pending. Earlier checkpoints retain their evidence and known limitations.
+plus staged enrichment through line 1806. This covers 35,528 fragments / 1,126,398 bytes.
+The latest 44 selected staged/registry/progressive/source/matching tests pass. Frozen registry
+resolution, authority narrowing, plan caching and recursive preparation/dispatch match their
+existing documented scope; no new defect is established. Child `.1.26` continues from line 1807.
+Startup `.3.4` remains pending. Earlier checkpoints retain their evidence and known limitations.
 
 The function shell checks the returned definition's text against scalar spans, reconciles staged
 body metadata and removes declarations while preserving line breaks. The private progressive
@@ -301,12 +301,13 @@ remain unchanged; this closed the change-history prerequisite at containment .8.
 `DART-STARTUP-READING.5`. Containment .9 and ADR0111 admit one archive slot:
 collection files 26→27 and manifest lines 25→26. All byte limits remain unchanged.
 The actual rollover preserves 207 clean-source lines / 32,348 bytes, with exact
-reconstruction of every earlier note and manifest record. The retained note file
-is 253 lines / 27,043 bytes; the manifest is 26 lines / 15,618 bytes. All 22
+reconstruction of every earlier note and manifest record. At the capacity checkpoint, the retained note file
+was 253 lines / 27,043 bytes; the manifest is 26 lines / 15,618 bytes. All 22
 checks of the actual capacity validator pass. The historical proposal and current
 proof remain in `docs/knowledge/dart-reading-engineering-history-capacity-blocker.md`.
-Exact staged canonical proof governs .9's commit; Dart reading .1.25 follows its
-clean handoff. Parser behavior and prior defect owners remain unchanged.
+Containment .9 committed at 9c644ecb with exact canonical proof: all nine doctrines,
+both CLI environments at 66/66, and Phase 0 at 1,032/1,032. Its clean handoff resumed
+Dart reading. Parser behavior and prior defect owners remain unchanged.
 
 The director's exception covers capacity infrastructure only; other reading/repair gates and the
 parked authoring and format ideas remain at their current status.
