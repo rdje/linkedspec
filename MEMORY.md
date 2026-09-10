@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `0e832ae4e1f37091768d5335e87600522ae5c78d` — clean .1.41 handoff before Dart .1.42.
-- latest_completed_leaf: `DART-STARTUP-READING.1.42 - read trace CLI and progressive consumers`.
+- activation_commit: `c162a5d7e576f3afe355decfa97189c2cf318a5d` — clean .1.42 handoff before Dart .1.43.
+- latest_completed_leaf: `DART-STARTUP-READING.1.43 - read recognition and observation consumers`.
 - active_work_unit: none; required reading and owned repairs remain in `docs/tasks/SESSION-STARTUP-READING.md`.
-- next_action: `DART-STARTUP-READING.1.43` — Continue recognition, recursive observation and repeated-action result test reading.
+- next_action: `DART-STARTUP-READING.1.44` — Continue repeated-action, root-rule selection and rule-local cursor test reading.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none in the committed handoff state; no background job remains.
 - blockers: Startup `.7` blocks recovery/purge; engineering-history .5 approval is implemented under containment .9 / ADR0111; prior change-history approval remains under .8 / ADR0110. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.81` precede mutation setup; `.29` belongs to `.5`. Prior narrow exceptions stay approved; Dart .6 approval is implemented under containment .10 / ADR0112, with all earlier history preserved.
@@ -57,4 +57,4 @@
   Segment 4981-5a6450db0974 preserves 218 lines / 32,108 bytes; every other ceiling remains unchanged.
 - current_ci_build_reuse: Startup .80.1-.4 own correct PGEN/RGX reuse; 11 visible test-build stages total 4,682 seconds.
   Exact fingerprint and warm-run repair proof remain pending; source changes retain startup prerequisites.
-- latest_bootstrap_read: 2026-09-10 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart 42/55 children, 61,028 fragments / 1,881,579 bytes. All 39 selected tests and three neutral contracts pass; no new defect; next .1.43.
+- latest_bootstrap_read: 2026-09-10 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; formal .4 pending; Dart 43/55 children, 62,528 fragments / 1,926,700 bytes. All 22 selected tests and three neutral contracts pass; no new defect; next .1.44.

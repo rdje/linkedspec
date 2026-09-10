@@ -89,7 +89,7 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed forty-two of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed forty-three of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
 parser bridge, function-shell projection, bounded child-parse authority, generated rule plan,
@@ -99,28 +99,28 @@ index, query, runtime/static projection, SHA-256, source emission, trace and val
 Package inputs, action-parser/action-contract, callable-codeblock, compiled-spec, named-mark,
 corpus, diagnostic-output, duplicate-slot, frontend/function-trace, function-registry,
 inter-match-gap, logical-helper, receiver-mutation, MCP, native pipeline trace, primary CLI,
-progressive and punctuation-light tests are complete. Recognition tests reach line 216.
-This covers 61,028 fragments / 1,881,579 bytes. All 39 selected tests and the progressive,
-punctuation-light and recognition neutral checks pass.
+progressive, punctuation-light, recognition and recursive-observation tests are complete.
+Repeated-action tests reach line 333. This covers 62,528 fragments / 1,926,700 bytes.
+All 22 selected tests and recognition, typed-source and repeated-action neutral checks pass.
 
-Native tracing uses the same caller-owned emitter across loading, compilation and runtime,
-with balanced scopes and unchanged results. The primary CLI has a separate canonical
-trace protocol; its focused tests cover option errors, source/input failure ordering,
-Unicode loading, top-rule selection, nested JSON and routed emoji output.
+Recognition keeps match success separate from payload: a successful child may return
+`false`, zero, an empty string or null. Its authority tests cover token ownership,
+commit/rollback, cursor/boundary/mark restoration and gap state. The effect-classifier
+fixtures call the authority directly; the known production integration gap `.2.4`
+remains open.
 
-Progressive dispatch carries only logical parser/rule/span identity in generated data.
-A trusted host supplies the compiled callback registry and limits. Its consumer strictly
-analyzes and runs one emitted module inside the current Dart package; it does not resolve
-a fresh external caller package. Known nested authority limits remain under startup `.37`.
+Recursive observation tests detached nine-field records over astral input, invocation
+identity, child-owned cursor behavior and recursion diagnostics. Recognition and observation
+each strictly analyze and directly execute a representative emitted parser in a fresh
+offline caller package. Their emitted examples do not cover every failure case.
 
-Punctuation-light tests establish alias equivalence and reconstruct state embedded in
-emitted source; they do not independently run that emitted source. Both `values.contains`
-and `values.contains()` currently return zero without a needle. That known helper-arity
-defect remains owned by backlog `.5`, independently of the spelling equivalence.
+Repeated-action emission uses another fresh offline caller to compare direct and traced
+results and inspect both selected-slot trace records. It runs the emitted parser without
+a separate static-analysis command. Existing generated-family validation rejects a stale
+`or_acode` row where explicit repetition requires `rep_acode`.
 
-No new defect was confirmed. Trace-overflow and recognition-effect repairs remain open.
-Child `.1.43` continues recognition, recursive observation and repeated-action tests;
-startup `.3.4` remains pending.
+No new defect was confirmed. Child `.1.44` continues repeated-action results, root-rule
+selection and rule-local cursor tests; startup `.3.4` remains pending.
 
 **Continuity capacity — approved history preservation:** the director approved one
 additional immutable archive member. Containment `.10` and ADR0112 admit exactly
@@ -146,7 +146,7 @@ in 2.25 seconds. That sample locates a pre-main wait without establishing its OS
 or a remedy. The older macOS 26.5.2 closeout does not resolve this macOS 26.6.2 observation.
 The evidence and repair criteria are logged by `SESSION-STARTUP-READING.80.0`; source
 changes remain behind the existing startup prerequisites. The intake is committed at
-`eaf4331e`; Dart reading continues at `.1.43`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
+`eaf4331e`; Dart reading continues at `.1.44`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
 
 **Known Dart limitation — null named selectors in reconstructed state:** a programmatically
 reconstructed target with these fields is incorrectly accepted:

@@ -96,3 +96,17 @@ The stale typed-source link now targets the existing rollout card; its Dart
 section owns private authority/source/scalar identities, exact code-unit
 boundaries and ordered owned-span concatenation. This core reconciliation does
 not repair the caller arithmetic in [[dart-input-slice-boundary-gaps]].
+
+## September 10 complete transaction-consumer reading
+
+`DART-STARTUP-READING.1.43` finishes test lines 217-919. All 22 selected recognition/
+observation/repeated-action tests pass. Current neutral proof is 138 ActionIR/250 calls/
+58 mutations, nine completed legs, public 3/26/45 and guide 1/14/18; older backend
+availability and rollout counts above are historical.
+
+The remaining source covers match/payload separation, token ownership and terminal
+restoration, gap snapshots/diagnostics, dedicated non-eager nodes and a strict offline
+independent emitted caller preserving false. Effect and progress fixtures invoke private
+authority methods directly. They do not close [[dart-recognition-effect-integration-gap]]
+or demonstrate a connected production effect graph. The emitted case is direct only;
+no complete emitted failure matrix or traced call is present in this consumer.

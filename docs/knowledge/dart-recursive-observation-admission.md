@@ -15,8 +15,8 @@ answers:
   - "does reconstructed Dart execution preserve recursive observation"
   - "is Dart recursive observation admitted in canonical CI"
   - "does Dart recursive observation change the public facade"
-date: 2026-08-12
-status: current private Dart admission; Julia Lua and recurrence current; public closeout pending
+date: 2026-09-10
+status: current private Dart admission; runtime recurrence and public no-drift complete; known effect integration gap remains owned
 tags: [dart, source-location, recursion, observation, generated-source, admission, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.14.4.4 adds dedicated ActionObserveRecognitionExpr parsing and serialization, compiler-wide static and transaction-effect validation, direct-parent and rejected-attempt identity in the existing RecognitionInvocationAuthority, pending-child observation scopes, ephemeral runtime completions, detached typed record construction, and action-edge single dispatch. dart/test/recursive_observation_contract_test.dart passes seven final-path cases across native, serialized reconstruction, generated-plan, and independently analyzed/executed emitted source. An astral-input case proves UTF-16 code-unit registers become Unicode-scalar positions only through SourceAuthority projection. The typed-source checker records Perl, Rust, and Dart on the still-pending recursive_observation row at 8 complete / 6 pending / 73 mutations. Recognition remains 129 current + four dedicated transaction nodes / 246 calls / 58 mutations because observation closes through the existing binding_write effect rather than widening its public inventory. Definitive signoff passes all eight doctrines, repository containment and relocation, CLI 66/66 in both option environments, RAM 57%, Phase 0 1,031/1,031 in 752 seconds, and the complete six-runtime typed-source opt-in through the exact local-CI success marker with exit 0."
 reverify: "cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/recursive_observation_contract_test.dart test/recognition_transaction_contract_test.dart test/typed_source_location_contract_test.dart test/repeated_action_result_contract_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings && cd .. && bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py && bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py && perl tools/check_language_capability_coverage.pl"
@@ -58,3 +58,17 @@ public helper or typed value, schema field/version, semantic/MCP projection, CLI
 ## Reading qualification — 2026-09-09
 
 DART-STARTUP-READING.1.7 confirms a limit to the earlier compiler-wide claim: action/blind transitions are absent from the special observation effect graph. Ordinary call(Observer) is rejected, but both structural routes compile and enter the same Observer lifecycle during recognize_once. The eight native/authority controls in [[dart-recognition-effect-integration-gap]] also show a generic binding write survives rollback. DART-STARTUP-READING.2.4 owns gated repair; no generated/emitted or other-backend result is inferred from this new probe.
+
+## September 10 complete observation-consumer reading
+
+`DART-STARTUP-READING.1.43` reads all 464 consumer lines; its seven tests pass within
+the selected 22-test suite. Typed-source governance is now 14 complete/zero pending/
+231 mutations; earlier pending public/rollout statements above are historical.
+
+Source covers five static failures, detached nine-field astral records with fresh IDs,
+failed and zero-regex children, action-edge entry versus child-local match/cursor state,
+ordinary recursion cutoff, direct/mutual rejection and aborted diagnostic text.
+Failure predicates check text, not exception identity or every aborted record field.
+A fresh offline caller strictly analyzes and directly executes the accepted false/astral
+example; emitted failure and traced matrices are not claimed. The observation effect
+qualification remains [[dart-recognition-effect-integration-gap]] and .2.4.

@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-10 — DART-STARTUP-READING.1.43: recognition and observation
+
+Read 1,500 fragments / 45,121 baseline-identical bytes; recognition/observation
+complete, repeated-action through 333. All 22 tests and three neutral checks
+pass; no new defect. Reading 43/55; effect integration stays open; next .1.44.
+
 ## 2026-09-10 — DART-STARTUP-READING.1.42: trace CLI and carriers
 
 Read 1,500 fragments / 48,485 baseline-identical bytes; trace/CLI/progressive/

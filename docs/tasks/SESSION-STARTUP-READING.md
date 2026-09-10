@@ -2224,7 +2224,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Goal: Split and read all 115 baseline Dart entries, including compiler/runtime, tests, commands, and package inputs.
   Reading owner: `docs/tasks/DART-STARTUP-READING.md` owns .0 decomposition, .1 reading, .2 new repair intake and .3 reading closeout; this startup node remains the prerequisite/closeout owner.
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas. DART-STARTUP-READING.3 may complete this reading node only after exact coverage/comprehension and child-commit proof; pending repairs remain owned separately.
-  Verification: Dart reading remains incomplete at 42/55 children, 61,028 fragments / 1,881,579 bytes. Dart .1.42 completes native trace, primary CLI, progressive and zero-argument tests and reads recognition through 216: 1,500 fragments / 48,485 baseline-identical bytes. All 39 selected tests and three neutral contracts pass, including independent emitted consumers. No new defect; trace .2.3, recognition .2.4, progressive startup .37 and helper-arity backlog .5 retain their repair owners. Capacities .4/.5/.6 remain committed under containment .8/.9/.10 and ADR0110/0111/0112. Startup .3/.4/.5 still gate repairs; next Dart .1.43.
+  Verification: Dart reading remains incomplete at 43/55 children, 62,528 fragments / 1,926,700 bytes. Dart .1.43 finishes recognition and recursive-observation tests and reads repeated-action results through 333: 1,500 fragments / 45,121 baseline-identical bytes. All 22 selected tests and recognition/typed-source/repeated-action neutral checks pass, including existing independent emitted consumers. No new defect; the recognition-effect integration gap .2.4 and earlier repair gates remain. Capacities .4/.5/.6 remain committed under containment .8/.9/.10 and ADR0110/0111/0112. Startup .3/.4/.5 still gate repairs; next Dart .1.44.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.5`
@@ -4439,7 +4439,7 @@ Startup `.3.4` stays pending until complete Dart reading; the next executable re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.43` | `pending` | Continue recognition, recursive observation and repeated-action result test reading. After .1.42 commit/brief/clean proof; repair gates remain. |
+| 1 | `DART-STARTUP-READING.1.44` | `pending` | Continue repeated-action, root-rule selection and rule-local cursor test reading. After .1.43 commit/brief/clean proof; repair gates remain. |
 
 ## Reading Ledger
 

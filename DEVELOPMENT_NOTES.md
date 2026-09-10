@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-10 — recognition and observation proof boundaries
+
+Dart .1.43 completes recognition/observation consumers. Private effect tests remain separate from runtime integration. Their emitted examples use strict offline independent callers; repeated-action emission runs direct/traced without a separate analyzer. All 22 tests pass; existing .2.4 remains open.
+
 ## 2026-09-10 — distinct Dart emission consumers
 
 Dart .1.42 proves progressive emission by strict analysis/direct execution inside the current package. Punctuation-light emission only reconstructs embedded state and explicitly preserves the owned contains arity defect. All 39 selected tests pass; existing trace/recognition/progressive repairs remain open.

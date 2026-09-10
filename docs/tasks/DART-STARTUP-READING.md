@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / .1.42 complete; next .1.43
+- Status: `active` / .1.43 complete; next .1.44
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-10`
@@ -56,8 +56,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Ordered range SHA-256: `68844356bf68df29531e689ff80fd06be16059621c678c4c8dbaa0b9adcb398f`.
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
-- Current reading: 42/55 children, 61,028/80,297 fragments and 1,881,579/2,471,305 bytes; sixty-nine entries through EOF
-  plus recognition_transaction_contract_test.dart through line 216. Exact credit and comprehension remain in each completed node.
+- Current reading: 43/55 children, 62,528/80,297 fragments and 1,926,700/2,471,305 bytes; seventy-one entries through EOF
+  plus repeated_action_result_contract_test.dart through line 333. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -737,14 +737,20 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.1.42 - read trace CLI and progressive consumers`
 
 - ID: `DART-STARTUP-READING.1.43`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Dart group 43 and reconcile its source evidence.
   Dependencies: `DART-STARTUP-READING.1.42` committed; empty brief and clean repository.
+  Activation: Clean `c162a5d7e576f3afe355decfa97189c2cf318a5d`; prior reading committed, root clean, zero-byte brief and all jobs consumed.
   Scope: `dart/test/recognition_transaction_contract_test.dart` lines 217-919; `dart/test/recursive_observation_contract_test.dart` lines 1-464; `dart/test/repeated_action_result_contract_test.dart` lines 1-333
   Baseline evidence: 1500 fragments / 45121 bytes; ordered range SHA-256 `f3d235974eaaeeea66058678ef238f7dc59b2f2ae3cbbebfdf45d2bd0f0c7ba9`.
   Acceptance: Read every owned byte, inspect current deltas, reconcile canonical Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Exact scoped bytes/current deltas; recognition, recursive observation and repeated-action result Dart tests; neutral recognition/typed-source/repeated-action contracts; prior evidence preservation, Knowledge, doctrines, histories, mdBook, memory and staged scope/whitespace.
+  Canonical trigger: `none` — bounded required reading and documentation; no source, contract or infrastructure changes.
+  Comprehension: Recognition tests separate eight positive match/payload cases, cursor/boundary/mark commit/rollback, invocation-local gap snapshots and exact gap diagnostics; token escape, missing/repeated attempts, cross-owner use, nested checkpoint, reuse, discard and unwind restore/invalidate. Dedicated nodes retain unevaluated static children; effect and progress fixtures call authority methods directly. Native/reconstructed/generated false payloads and a strict offline independently resolved emitted caller pass. Recursive observation tests one non-eager node, five static failures, detached nine-field astral records, fresh invocation IDs, failed/zero-regex/action-edge child semantics, ordinary recursion cutoff, direct/mutual rejection and aborted diagnostic text. Its independently resolved offline emitted caller strictly analyzes one accepted false/astral case, without traced or failure-case emission. Repeated-action prefix binds fifteen unique role names, repetition metadata/eight modes/special cases, loaded/reconstructed/descriptor paths, and a fresh offline emitted caller with paired direct/traced results, two selected-slot trace records and stale-family rejection. That caller has no separate analyze command; remaining role bodies after 333 belong to .1.44.
+  Findings: No new confirmed defect. Direct authority effect tests do not close production integration .2.4. Observation failure assertions inspect diagnostic text, not exception-object identity or every aborted observation record. Accepted emitted examples do not independently cover the complete failure matrix. All source-repair gates remain.
+  Verification: Read recognition 217-919 through EOF in 235/234/234-line outputs, recursive observation 1-464 through EOF in two 232-line outputs, and repeated-action 1-333 in 167/166-line outputs: exact 1,500 fragments / 45,121 baseline-identical bytes and ordered digest. All 22 selected tests pass, including the three emitted consumers. Recognition neutral remains 138/250/58 with 9/9 complete, public 3/26/45 and guide 1/14/18; typed source is 14 complete/0 pending/231 mutations; repeated-action is eight modes/ten special/eight complete/zero pending/54 mutations. No other runtime or full CLI matrix is rerun. Full coverage/preservation, Knowledge/book/memory/histories, whitespace/staged scope and commit-hook doctrines govern the focused commit.
+  Commit: `DART-STARTUP-READING.1.43 - read recognition and observation consumers`
 
 - ID: `DART-STARTUP-READING.1.44`
   Status: `pending`
@@ -1402,7 +1408,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.43` | `pending` | Continue recognition, recursive observation and repeated-action result test reading. After .1.42 commit/brief/clean proof; repair gates remain. |
+| 1 | `DART-STARTUP-READING.1.44` | `pending` | Continue repeated-action, root-rule selection and rule-local cursor test reading. After .1.43 commit/brief/clean proof; repair gates remain. |
 
 ## Decisions
 
@@ -1427,6 +1433,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-10`: Dart .1.43 finishes recognition and recursive-observation tests and reads repeated-action results through 333: 1,500 fragments / 45,121 baseline-identical bytes. All 22 selected tests and recognition/typed-source/repeated-action neutral checks pass, including existing independent emitted consumers. No new defect; the recognition-effect integration gap .2.4 and earlier repair gates remain. Reading reaches 43/55 children, 62,528 fragments / 1,926,700 bytes.
 
 - `2026-09-10`: Dart .1.42 completes native trace, primary CLI, progressive and zero-argument tests and reads recognition through 216: 1,500 fragments / 48,485 baseline-identical bytes. All 39 selected tests and three neutral contracts pass, including independent emitted consumers. No new defect; trace .2.3, recognition .2.4, progressive startup .37 and helper-arity backlog .5 retain their repair owners. Reading reaches 42/55 children, 61,028 fragments / 1,881,579 bytes.
 
@@ -1515,6 +1523,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- `.1.43`: `DART-STARTUP-READING.1.43 - read recognition and observation consumers`.
+
 - `.1.42`: `DART-STARTUP-READING.1.42 - read trace CLI and progressive consumers`.
 
 - `.1.41`: `DART-STARTUP-READING.1.41 - complete MCP dispatch and stdio reading`.
@@ -1600,6 +1610,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-10`: Completed .1.43 from clean c162a5d7; recognition/observation complete, repeated-action through 333; next .1.44.
 
 - `2026-09-10`: Completed .1.42 from clean 0e832ae4; trace/CLI/progressive/zero-argument complete, recognition through 216; next .1.43.
 

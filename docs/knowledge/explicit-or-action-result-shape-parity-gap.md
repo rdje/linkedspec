@@ -67,3 +67,16 @@ the primary matrix alone.
 Related: [[duplicate-regex-slot-identity-contract]],
 [[blind-call-collection-shape]], [[handler-ir-design]],
 [[spec-rule-mode-semantics-map]], ADR `0048`, and [[FUTURE-PARITY-BACKLOG]].
+
+## September 10 Dart admission-prefix reading
+
+`DART-STARTUP-READING.1.43` reads consumer lines 1-333; the full three-test consumer
+passes within the selected 22-test suite. Neutral proof remains eight modes, ten special
+cases, eight completed legs/zero pending and 54 mutations. Prefix source binds all fifteen
+unique role names and covers metadata, native modes/special cases, loading, reconstruction
+and descriptor projection; later role bodies remain the next reading child.
+
+The emitted role creates a fresh offline caller/cache, directly runs both generated entry
+points, compares results and checks two selected-slot trace records before owned cleanup.
+It has no separate analyze command. Exact generated-plan validation rejects stale
+`or_acode` classification for the admitted explicit repetition fixture.
