@@ -10,6 +10,15 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — binding and function consumer reading
+
+Dart .1.54 completes native/generated binding and function consumers. Retired exact
+selectors fail through dead/unused and constructed generated state; mutation results
+remain detached. Function shells remain spec-owned. Variadic generated evidence
+reconstructs the emitted payload rather than launching a child module. Write reading
+covers neutral adapters, corrupted carrier construction and valid AST assertions
+through292. All 43 tests and four neutral checks pass; no source change or defect closure.
+
 ## 2026-09-11 — typed source and exact Unicode identity consumers
 
 Dart .1.53 separates private typed-source authority proof from native/reconstructed/

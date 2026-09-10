@@ -2224,7 +2224,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Goal: Split and read all 115 baseline Dart entries, including compiler/runtime, tests, commands, and package inputs.
   Reading owner: `docs/tasks/DART-STARTUP-READING.md` owns .0 decomposition, .1 reading, .2 new repair intake and .3 reading closeout; this startup node remains the prerequisite/closeout owner.
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas. DART-STARTUP-READING.3 may complete this reading node only after exact coverage/comprehension and child-commit proof; pending repairs remain owned separately.
-  Verification: Dart reading remains incomplete at 53/55 children, 77,528 fragments / 2,386,603 bytes. Dart .1.53 completes trace, typed-source, casing, classifier, identity and negative-isolation consumers, then reads Unicode routes through line 70: 1,500 fragments / 44,020 baseline-identical bytes. All 29 tests and three neutral checks pass, including fresh-cache emitted Unicode execution. Exact source and label boundaries remain distinct from previously owned fluent-suffix, helper-order and CLI defects. Capacities .4/.5/.6 remain committed under containment .8/.9/.10 and ADR0110/0111/0112. Startup .3/.4/.5 still gate repairs; .7 is approved and implemented by containment .11 / ADR0113 with exact history preservation; the director granted a one-time focused/receipt exception on 2026-09-11; Containment .11 is committed at ad64f76f; next Dart .1.54 after the clean .1.53 handoff.
+  Verification: Dart reading remains incomplete at 54/55 children, 79,028 fragments / 2,431,006 bytes. Dart .1.54 completes Unicode routes, uniform binding, function parser/shell and variadic consumers, then reads write vivification through line 292: 1,500 fragments / 44,403 baseline-identical bytes. All 43 tests and four neutral checks pass, including the existing emitted nested-write caller. Binding and variadic generated-state proof stays distinct from independent emitted execution; prior defects remain open. Capacities .4/.5/.6 remain committed under containment .8/.9/.10 and ADR0110/0111/0112. Startup .3/.4/.5 still gate repairs; .7 is approved and implemented by containment .11 / ADR0113 with exact history preservation; the director granted a one-time focused/receipt exception on 2026-09-11; Containment .11 is committed at ad64f76f; next Dart .1.55 after the clean .1.54 handoff.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.5`
@@ -4449,7 +4449,7 @@ Startup `.3.4` stays pending until complete Dart reading; the next executable re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.1.54` | `pending` | Complete Unicode routes, binding and function consumers; read write vivification through292 after clean .1.53. |
+| 1 | `DART-STARTUP-READING.1.55` | `pending` | Read write-vivification293-767 and dormant progressive authority1-794 after clean .1.54; then reconcile complete reading. |
 
 ## Reading Ledger
 

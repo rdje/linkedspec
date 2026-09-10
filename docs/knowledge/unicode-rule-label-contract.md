@@ -256,3 +256,11 @@ the previously measured standalone body-fluent suffix omission under Dart .2.6.
 All 29 selected tests pass, and fresh neutral governance remains806 ranges,
 9 positives,8 negatives and2 distinct pairs. Whole routes-test execution adds no
 reading credit past70. No classifier, source parser or other-backend runtime change.
+
+## September 11 Dart native-route consumer tail complete
+
+Dart .1.54 reads unicode_rule_label_routes_test.dart 71-259 through EOF. Whole
+invalid declaration/edge tokens retain rejection, and programmatic declaration/
+action/blind/bare plus reconstructed header/action routes preserve exact diagnostics.
+All 43 selected tests pass; neutral label governance remains806/9/8/2.
+No label policy, source repair or other-backend runtime change follows.

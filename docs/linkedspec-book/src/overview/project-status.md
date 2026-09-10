@@ -89,7 +89,7 @@ capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading c
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
-Physical Dart reading has completed fifty-three of 55 children, including the complete ActionIR parser,
+Physical Dart reading has completed fifty-four of 55 children, including the complete ActionIR parser,
 callable normalization, function registry, spec AST, both CLI adapters, compiler, corpus runner,
 spec loader, MCP implementation, spec parser, staged v1 registry, Unicode classifier, function
 parser bridge, function-shell projection, bounded child-parse authority, generated rule plan,
@@ -106,8 +106,9 @@ Observation-route, runtime-capture, observed-index, source-foundation and static
 tests, semantic admission, smoke and source-boundary aliases are complete; emitter
 reading is complete along with AST/loader/parser/validator, staged-enrichment,
 v1 registry, lifecycle, trace, typed-source, casing, classifier, label identity and
-negative-isolation tests. Unicode route reading reaches line 70. This covers 77,528
-fragments / 2,386,603 bytes. The current 29-test selection and three neutral checks pass; earlier results remain in their
+negative-isolation, Unicode routes, binding, function parser/shell and variadic tests.
+Write-vivification reading reaches line 292. This covers 79,028 fragments / 2,431,006
+bytes. The current 43-test selection and four neutral checks pass; earlier results remain in their
 completed reading leaves.
 
 Interpreter tests confirm explicit cursor rewinds and stack restoration, capture
@@ -126,7 +127,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading continues
-in child `.1.54` after the clean .1.53 handoff. Startup `.3.4` remains pending.
+in child `.1.55` after the clean .1.54 handoff. Startup `.3.4` remains pending.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -231,7 +232,7 @@ tests and staged/lifecycle neutral checks pass. That leaf reached 52/55 children
 76,028 fragments / 2,342,583 bytes; `.1.53` now completes the trace helper and reads
 typed-source and Unicode consumers. Existing source, provenance, budget and CLI defects stay open.
 
-**Dart typed-source and Unicode consumer reading through child 53:** source values
+**Completed child 53 evidence:** source values
 retain detached coordinates and spans, authority ownership, ordered concatenation
 and four exact privacy-filtered diagnostics. The 92 helper rows and seven aliases
 remain exact. Mark, cursor and alias fixtures execute through native, reconstructed
@@ -248,8 +249,28 @@ reconstructed ASTs. Source checks retain the colon and newline grammar exception
 Inline CLI checks cover every positive label; the file CLI selects the supplementary
 label. Adjacent-grammar fixtures do not close the separately found body-fluent suffix
 loss. All 29 tests and three neutral checks pass; prior helper-order and CLI defects
-also remain open. Reading is 53/55 children, 77,528 fragments / 2,386,603 bytes;
-`.1.54` continues Unicode routes after line 70, then reads binding/function tests.
+also remain open. That leaf reached 53/55 children, 77,528 fragments / 2,386,603 bytes;
+`.1.54` now completes Unicode routes and reads binding/function tests.
+
+**Dart binding and function consumer reading through child 54:** exact retired
+selectors reject even in dead branches, unused functions and constructed generated
+payloads. Retained constructors, detached mutation results, mutable/pure split,
+kind diagnostics, recursive local bindings and rule-call precedence pass native
+and generated-plan tests.
+
+The function parser executes the owning specification and composes staged bodies;
+the shell requires returned definition nodes and rejects inconsistent sidecars.
+Fixed v1 and variadic v2 records preserve their distinct fields. Variadic arguments
+evaluate once in order, rest arrays are fresh, and arity/keyword failures remain
+distinct. This test decodes and executes reconstructed emitted state; it does not
+launch a separate emitted module.
+
+Write-vivification reading reaches line 292 after the neutral fixture adapters,
+malformed-carrier constructor and five valid typed-AST cases. All 43 selected tests
+and four neutral checks pass, including the complete existing emitted nested-write
+consumer. Running that test adds no unread suffix credit. Reading reaches 54/55
+children, 79,028 fragments / 2,431,006 bytes. `.1.55` completes write tests and the
+dormant progressive-authority consumer. Existing repairs remain owned and open.
 
 **Approved engineering-history capacity:** the director approved collection files
 27→28 and manifest rows 26→27. Containment `.11` and ADR0113 implement those two
@@ -295,7 +316,7 @@ in 2.25 seconds. That sample locates a pre-main wait without establishing its OS
 or a remedy. The older macOS 26.5.2 closeout does not resolve this macOS 26.6.2 observation.
 The evidence and repair criteria are logged by `SESSION-STARTUP-READING.80.0`; source
 changes remain behind the existing startup prerequisites. The intake is committed at
-`eaf4331e`; approved containment .11 is committed at `ad64f76f`; `.1.54` follows completed `.1.53`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
+`eaf4331e`; approved containment .11 is committed at `ad64f76f`; `.1.55` follows completed `.1.54`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
 
 **Known Dart limitation — null named selectors in reconstructed state:** a programmatically
 reconstructed target with these fields is incorrectly accepted:

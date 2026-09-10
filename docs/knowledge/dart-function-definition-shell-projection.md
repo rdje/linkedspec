@@ -89,3 +89,14 @@ typed declaration failures receive specific diagnostics before the generic fallb
 The selected shell/parser/registry plus progressive authority/carrier tests pass 24/24.
 This completes physical shell reading without changing its input contract or admitting a
 generic builder. Earlier source and projection evidence remains intact.
+
+## September 11 function parser and shell consumers complete
+
+Dart .1.54 reads user_function_definition_parser_test.dart1-93 and
+user_function_definition_shell_test.dart1-210 through EOF. Four parser tests execute
+the owning spec, compose staged bodies, admit ordinary sources and normalize output
+wrappers. Three shell tests preserve source lines and normalized job identity,
+reject malformed/drifting sidecars and reject a leading fn source when no returned
+nodes are supplied. Their synthetic fixture helpers use ASCII source coordinates;
+they do not add independent astral span proof. All 43 selected tests pass.
+No raw scanner, builder or MCP parser-construction feature is introduced.

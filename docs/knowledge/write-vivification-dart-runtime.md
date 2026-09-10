@@ -53,3 +53,14 @@ primary CLI. Reads remain unchanged and non-creating. Dart `map_leaves!` has sin
 Related: [[write-vivification-neutral-contract]], [[terse-nested-value-path-assignment]],
 [[write-vivification-perl-reference]], [[write-vivification-rust-runtime]],
 [[write-map-leaves-neutral-composition]], [[map-leaves-mutation-dart-runtime]], and ADR `0036`.
+
+## September 11 write consumer prefix reading
+
+Dart .1.54 reads write_vivification_contract_test.dart1-292. Neutral literal,
+effect-marker and diagnostic helpers preserve fixture expressions and their order.
+The malformed-carrier helper retains all surrounding compiled state while replacing
+the nested-write segment list with empty. The first test pins syntax inventory and
+all five valid AST rows with exact source/spans and typed segments; invalid/excluded
+and runtime assertions remain in .1.55. All 43 selected tests pass, including the
+whole existing write consumer and emitted caller, but no unread suffix credit is
+granted. Neutral write governance remains105 mutations. No source change.

@@ -10,6 +10,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — DART-STARTUP-READING.1.54 - read binding and function consumers
+
+Complete Unicode routes, binding, function parser/shell and variadic tests; read
+write vivification through292. All 1,500 fragments / 44,403 bytes remain identical.
+All 43 tests and four neutral checks pass, including existing emitted nested-write
+execution. Record detached bindings, shell ownership and fixed/variadic signatures;
+separate emitted-payload reconstruction from independent execution. Next .1.55.
+
 ## 2026-09-11 — DART-STARTUP-READING.1.53 - read typed source and Unicode consumers
 
 Complete trace, typed-source, casing, classifier, identity and negative-isolation

@@ -31,3 +31,13 @@ all extras under the rest name. Empty, nested, hash, boolean, and null values pr
 `emitDartSourceV2` needs no host-specific rest logic: `SpecFile.toJson()` emits the v1/v2 union into its strict
 UTF-8/Base64 payload, and the generated library reconstructs `SpecFile.fromJson()` before compiling and executing
 the same runtime. The neutral fixture passes both direct generated-plan execution and this serialization round-trip.
+
+## September 11 variadic consumer reading complete
+
+Dart .1.54 reads variadic_user_function_contract_test.dart1-229 through EOF. Six
+tests preserve the exact fixed-v1/variadic-v2 record union, staged signatures and
+descriptor keys; execute the neutral fixture; check once-only left-to-right argument
+effects, fresh rest arrays, fixed/minimum arity errors, malformed rest declarations
+and typed keyword rejection. Generated proof executes a plan, decodes the emitted
+Base64 SpecFile payload and recompiles/runs it; it does not launch an independent
+emitted module. All 43 selected tests and callable3/9/7 neutral governance pass.

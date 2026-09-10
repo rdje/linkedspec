@@ -42,3 +42,14 @@ dispatch is deleted under `FUTURE-PARITY-BACKLOG.12.1.8.3.1`.
 Related facts: [[uniform-binding-neutral-contract]], [[perl-uniform-binding-runtime]],
 [[rust-uniform-binding-runtime]], [[dart-runtime-core-value-capture-helpers]],
 [[spec-facing-aggregate-selector-retirement-inventory]], [[dart-aggregate-selector-compile-rejection]].
+
+## September 11 uniform-binding consumer reading complete
+
+Dart .1.54 reads uniform_binding_contract_test.dart 1-487 through EOF. Exact
+selector rejection includes dead branches, fluent payloads, unused functions and
+constructed generated boundaries. Retained constructors, detached array/harray
+updates, static rule precedence, mutable/pure split, dropped values, kind failures,
+set continuations, recursive locals and empty rule accumulators execute through
+native and generated-plan helpers. This file has no independent emitted caller.
+All 43 selected tests pass; neutral11 migrations/7 executions/6 invalid selectors/
+8 constructors also passes. Prior runtime findings remain separately owned.
