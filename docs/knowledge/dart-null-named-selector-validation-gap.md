@@ -187,3 +187,13 @@ DART135_VERIFY
 
 Related: [[dart-frontend-validation]], [[dart-duplicate-regex-slot-identity-admission]],
 [[inter-match-gap-executable-contract-plan]], [[dart-semantic-indexed-edge-correlation-gaps]].
+
+## September 11 — independent Julia counterpart evidence
+
+Julia .1.33 reproduces the same ten selector configurations through Julia public
+JSON reconstruction/validation/compilation/descriptor/runtime APIs. Its two
+named/null inputs also resolve anonymous indices0/1; eight comparisons retain
+their separate validity/provenance census roles. Julia .2.23.1/.2 owns repair and
+recurrence, coordinated with this existing Dart owner. This is fresh Julia96
+assertion evidence, not a fresh Dart run: see
+[[julia-null-selector-and-identifier-validation-gaps]].

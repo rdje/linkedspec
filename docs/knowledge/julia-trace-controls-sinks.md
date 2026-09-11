@@ -54,3 +54,12 @@ Related facts: [[julia-runtime-structured-diagnostics]],
 [[dart-trace-controls-sinks]],
 [[trace-cross-variant-capability-contract]], [[julia-frontend-compiler-staged-trace-events]],
 [[julia-primary-cli-failure-trace-routing]], [[julia-canonical-primary-cli-trace]].
+
+## September 11 — native trace source reading complete
+
+Julia .1.33 reads all424 lines of Trace.jl. Config parsing precedes emitter-owned
+file preparation; malformed oversized decimal text and invalid sink preserve a
+selected reset-file sentinel. Valid quiet/reset intentionally truncates it. Twelve
+native controls and existing trace43/frontend trace28 pass. Exact replay and
+limits are in [[julia-null-selector-and-identifier-validation-gaps]]; this does not
+claim primary CLI proof or general acceptance of arbitrary host integer types.

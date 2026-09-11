@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia identity guards require present names and full strings
+
+Nullable selector equality treats anonymous absence as a name; reordered slots
+move the erroneous selection. A terminal LF passes the host dollar anchor and
+bypasses exact reserved-name checks. Reconstructed native controls isolate both;
+trace config parsing precedes file preparation and preserves invalid-input files.
+
 ## 2026-09-11 — Julia projection checks must bind metadata to source
 
 Matching scalar text does not verify its claimed lines; equal sidecars can all

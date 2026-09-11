@@ -54,3 +54,13 @@ Three malformed rejections have identical traced/quiet errors; five comparisons
 include correct genuine-EOF rejection. Julia .2.21.3 owns this distinct downstream
 repair, coordinated with .2.21.1/.2. Exact evidence and replay are in
 [[julia-function-projection-metadata-gaps]]. Existing validator23 remains green.
+
+## September 11 — validator reading complete
+
+Julia .1.33 completes641-1047. Reconstructed named/null selectors resolve anonymous
+slots through nullable equality at797/848; moving the declaration moves the wrong
+index. The identifier regex at1002-1004 admits terminal LF, letting reserved names
+with LF pass exact namespace checks. New .2.23/.2.24 own distinct repair/recurrence
+leaves. Ten selector96 and ten identifier54 assertions, with exact valid/rejected
+comparisons, are in [[julia-null-selector-and-identifier-validation-gaps]]. Existing
+validator23 and larger gap/duplicate matrices remain passing finite evidence.

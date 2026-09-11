@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 32/52 owned groups; its thirty-third reading child is next, with approved ADR0115 capacity in place.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 33/52 owned groups; its thirty-fourth reading child is next, with approved ADR0115 capacity in place.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,12 +297,29 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 32/52 groups complete:** the Unicode label classifier and
-function-definition projection are complete; validator reading reaches line640.
-Coverage is 46,425 lines /1,612,089 bytes and forty-one complete files. Existing
-frontend, staged, classifier and callable checks pass 2,536 assertions; metadata,
-lifecycle and classifier controls pass 118. The remaining validator and trace
-source are next. Exact scopes remain in `docs/tasks/JULIA-STARTUP-READING.md`.
+**Julia reading is 33/52 groups complete:** validator and native trace source
+are complete; callable-codeblock test reading reaches line669. Coverage is
+47,925 lines /1,665,590 bytes and forty-three complete files. Existing frontend,
+trace, callable and gap checks pass 1,201 assertions; selector, identifier and
+trace controls pass 162. The next five test ranges are recorded in
+`docs/tasks/JULIA-STARTUP-READING.md`.
+
+**Known Julia limitation — null named selectors:** a reconstructed target with
+`selector_kind: named` and `authored_selector: null` can select an anonymous regex.
+Moving that anonymous declaration changes the erroneously selected slot. Valid
+named `head` and numeric selectors still select the expected declaration; a null
+name rejects when every declaration is named. Julia `.2.23.1/.2` own identity
+validation and supported-carrier/public proof, coordinated with Dart `.2.23`.
+This is a reconstructed-state boundary, not an authored `Child[head]` failure.
+
+**Known Julia limitation — terminal newline in identifiers:** reconstructed
+function names such as `normal\n` and `return\n`, and parameters such as
+`value\n` and `ctx\n`, can pass validation with an actual final LF. That newline
+also bypasses exact reserved-name checks. Julia `.2.24.1/.2` own complete ASCII
+identifier validation without trimming and supported-route proof. The measured
+boundary is validation; downstream execution of these carriers is not established.
+Exact controls for both findings and native trace preflight:
+`docs/knowledge/julia-null-selector-and-identifier-validation-gaps.md`.
 
 **Known Julia limitation — projected function metadata:** caller-supplied function
 AST nodes can carry `version: true`, `arity: true`, payload `version: 99` or no
@@ -688,8 +705,8 @@ SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` sti
 own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
-Julia has read thirty-two of 52 exact groups across 95 baseline entries;
-its thirty-third physical reading child is next, followed by the remaining Lua/supporting
+Julia has read thirty-three of 52 exact groups across 95 baseline entries;
+its thirty-fourth physical reading child is next, followed by the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,

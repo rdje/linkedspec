@@ -51,3 +51,13 @@ Related facts: [[callable-codeblock-literal-contract]], [[julia-callable-codeblo
 [[julia-variadic-user-functions]], [[julia-generated-source-scaffold]],
 [[julia-callable-codeblock-dynamic-invocation]], [[dart-callable-codeblock-literal-state]],
 [[rust-callable-codeblock-literal-state]].
+
+## September 11 — callable consumer reading prefix
+
+Julia .1.33 reads callable_codeblock_literal_contract_test1-669: helper setup, all
+dynamic invocation tests and the contextual prefix through invalid declarations.
+It verifies call-result typing, order/copies, cleanup, recursion and independently
+loaded emitted roles. Remaining contextual and construction source stays unread
+after669, even though all482 assertions pass in the focused replay. Existing
+selector .2.1 and callback identity .2.8 remain open; exact proof is in
+[[julia-null-selector-and-identifier-validation-gaps]].

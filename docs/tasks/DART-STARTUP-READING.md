@@ -1410,6 +1410,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Dependencies: startup .3/.4/.5; finding from .1.35; coordinate the existing inter-match-gap and duplicate-slot identity contracts.
   Children: `.2.23.1`, `.2.23.2`.
   Evidence: docs/knowledge/dart-null-named-selector-validation-gap.md retains ten public SpecFile-JSON reconstruction/validation/compiled/runtime controls. Two null named selectors bind the first anonymous declaration at index 0 or 1 and execute /a/; valid head selects /b/. Three valid selectors and three rejecting malformed-name controls bound the failure. Numeric-null and unindexed-text provenance are separately accepted census inputs, not additional wrong-slot claims.
+  Additional evidence: Julia .1.33 independently reproduces the same ten configurations with96 assertions. JULIA-STARTUP-READING.2.23.1/.2 owns its null-name repair and supported-carrier recurrence; existing Dart evidence remains unchanged and no fresh Dart run is claimed. See docs/knowledge/julia-null-selector-and-identifier-validation-gaps.md.
 
 - ID: `DART-STARTUP-READING.2.23.1`
   Status: `pending`
@@ -1567,7 +1568,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.33` | `pending` | Read Validator641-1047, Trace1-424 and callable-codeblock test1-669 after clean .1.32; reconcile focused proof and preserve repairs. |
+| 1 | `JULIA-STARTUP-READING.1.34` | `pending` | Read callable-codeblock670-1012, named-mark1-94, diagnostic1-310, duplicate-slot1-434 and gap1-319 tests after clean .1.33; reconcile focused proof and preserve repairs. |
 
 ## Decisions
 
