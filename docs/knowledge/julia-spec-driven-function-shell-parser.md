@@ -54,3 +54,8 @@ explicit parser source constructs a separate parser. Function-shell7 and fronten
 staged-trace28 assertions pass. The final helper suffix remains unread for .1.12;
 99/920 counts above are historical, while current corpus ownership records105.
 Focused replay: `docs/knowledge/julia-staged-function-body-registry.md`.
+
+Julia .1.12 subsequently reads the final18 lines: ancestor search terminates at the
+filesystem root; a failed match is accepted only when the remaining character
+suffix is whitespace or the reported character cursor has reached the source end.
+This completes physical reading of the249-line parser, without changing behavior.

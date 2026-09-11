@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia progressive authority gaps
+
+Nested requests check view expiry but re-use caller-supplied grants and invocation
+steps; the active child can regain wider ceilings despite zero local budget.
+Direct caps work in controls. Identity/top/fingerprint dollar anchors admit final
+LF; neutral fullmatch rejects it. Startup .37 and Julia .2.5 own bounded repairs.
+
 ## 2026-09-11 — Julia wire and narrow staged parsing
 
 Wire scanning precedes JSON3 decoding and restores exact numeric token kinds.

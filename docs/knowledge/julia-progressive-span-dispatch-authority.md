@@ -27,7 +27,7 @@ reverify:
 # Private Julia progressive authority
 
 This core is executable trusted-host authority, not authored Julia progressive behavior. A host supplies only
-already-compiled callbacks and decoded source snapshots. Authored execution will eventually select a logical
+already-compiled callbacks and decoded source snapshots. The admitted private authored carrier selects a logical
 parser identity, one allowed top rule, and an exact direct span; it never receives registry mutation, path
 resolution, loading, compilation, source-authority, or parent-register access.
 
@@ -49,3 +49,13 @@ Related facts: [[progressive-span-dispatch-audit-plan]],
 [[julia-progressive-span-dispatch-dormant-red]], [[typed-source-location-cursor-algebra-direction]], and
 [[julia-recognition-transaction-private-authority]]. Current carriers: [[julia-progressive-span-dispatch-carriers]].
 Admission: [[julia-progressive-span-dispatch-admission]].
+
+## September 11 complete authority reading
+
+Julia .1.12 reads all1367 lines of `julia/src/runtime/BoundedChildParseAuthority.jl`.
+The existing authority210/carrier62 tests pass. Fresh30 nested/14 direct-limit/20
+pattern assertions isolate gaps in inherited effective authority and complete
+identity matching; neutral pattern12 outcomes reject terminal LF. Direct cost,
+result-node and diagnostic-byte limits work in the measured controls. Prior broad
+narrowing statements must be read with these pending boundaries. Exact mechanism,
+replay and startup .37 / Julia .2.5 ownership: [[julia-progressive-authority-boundary-gaps]].

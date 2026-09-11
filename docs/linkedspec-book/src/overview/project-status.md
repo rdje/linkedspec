@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 11/52 owned groups; its twelfth reading child is next, with approved ADR0115 capacity in place.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 12/52 owned groups; its thirteenth reading child is next, with approved ADR0115 capacity in place.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,12 +297,28 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 11/52 groups complete:** the MCP wire parser and narrow staged
-function-body registry are fully read; the function-definition parser is read
-through line 231. Cumulative coverage is 14,925 lines /601,796 bytes and twenty
-complete files. Exact scopes remain in `docs/tasks/JULIA-STARTUP-READING.md`.
-Existing registry, descriptor, trace, function-parser, stdio and variadic suites
-pass 327 assertions. Neutral staged and transport checks also pass.
+**Julia reading is 12/52 groups complete:** the function-definition parser and
+bounded child-parser authority are fully read; Interpreter is read through line 115.
+Cumulative coverage is 16,425 lines /647,482 bytes and twenty-two complete files.
+Exact scopes remain in `docs/tasks/JULIA-STARTUP-READING.md`. The existing progressive
+authority and carrier suites pass 272 assertions; targeted native probes add 64,
+and 12 neutral pattern comparisons pass. Progressive governance remains green.
+
+**Known Julia limitation — nested progressive authority:** a child whose one-step
+allowance has been consumed can still make a nested call against the larger shared
+invocation budget. A nested request can also supply wider grants: one probe expands
+`max_steps` from 2 to 100 and `max_result_nodes` from 1 to 100, and gains an extra capability.
+A control that requires the extra capability without widening grants is rejected.
+Startup `.37.1` owns inherited grants and child budgets across runtimes. Direct
+cost and result-node limits reject the tested over-limit inputs; they do not establish
+correct inheritance. Diagnostic bytes are capped, while source-detail review stays
+with `.37.2`.
+
+Progressive parser IDs, top-rule names and fingerprints also accept a forbidden
+final newline in the private registry/dispatch API. The neutral validator rejects
+it. Julia `.2.5.1/.2.5.2` own complete matching and supported-route proof. These
+private callback probes do not claim fresh authored or emitted reproduction.
+Exact examples, outcomes and replay: `docs/knowledge/julia-progressive-authority-boundary-gaps.md`.
 
 The narrow function-body path dispatches `actionir-body.spec` / `action_block`,
 validates function metadata and stitches `body_ast` into a new spec. Its per-job
@@ -473,8 +489,8 @@ SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` sti
 own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
-Julia has read eleven of 52 exact groups across 95 baseline entries;
-its twelfth physical reading child is next, followed by the remaining Lua/supporting
+Julia has read twelve of 52 exact groups across 95 baseline entries;
+its thirteenth physical reading child is next, followed by the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,

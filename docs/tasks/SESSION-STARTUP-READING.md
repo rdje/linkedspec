@@ -2233,7 +2233,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas.
   Children: `.3.5.0` owns decomposition; JULIA-STARTUP-READING.1 owns 52 reading children and .3 owns closeout.
   Reading owner: `docs/tasks/JULIA-STARTUP-READING.md` retains exact scope/digest, comprehension and repair evidence. This startup node remains the prerequisite owner.
-  Verification: Julia .1.11 completes McpWire and StagedParserRegistry and reads UserFunctionDefinitionParser through 231: 11/52 groups, 14,925 fragments /601,796 bytes and twenty complete files. Existing registry39/descriptor28/trace28/function-parser7/stdio170/variadic55 assertions pass (327 total); neutral staged123/public129 and MCP35/10/10/76 pass. Narrow function-body adapter and general-v2 authority remain separate; source-driven shell parsing and strict wire framing reconcile with Knowledge. All source, prior evidence, repairs and ADR0115 controls remain. Julia .1.12 is next; no full component/canonical gate or dependency build. Exact plan and all source identities remain frozen in the Julia owner.
+  Verification: Julia .1.12 completes UserFunctionDefinitionParser and BoundedChildParseAuthority and reads Interpreter through115: 12/52 groups, 16,425 fragments /647,482 bytes and twenty-two complete files. Existing authority210/carrier62 and native64 diagnostic assertions pass; neutral pattern12 and progressive116/public60 pass. Startup .37.1/.37.2 retain nested grant/budget and diagnostic review; Julia .2.5.1/.2.5.2 own progressive pattern full matching. Direct cost/result/diagnostic limits work in the measured controls. All source, earlier evidence, repairs and ADR0115 controls remain. Julia .1.13 is next; no full component/canonical gate or dependency build. Exact plan and all source identities remain frozen in the Julia owner.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.5.0`
@@ -3039,6 +3039,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: `pending` — `.3.2.39` reproduces both cases through the existing Perl private authority;
     the combined authority/carrier suite passes 138 tests and does not establish these enforced boundaries.
   Reading update: Dart .1.15 adds ten private-authority controls in docs/knowledge/dart-progressive-nested-authority-gap.md. Direct cost/result bounds reject, but a nested call runs after the parent callback reports zero remaining steps; widened caller inputs regain extra capability and max_steps/result_nodes 100. Own inherited effective grants and per-child remaining budget, with independent cross-runtime expectations and bounded repair children before implementation.
+  Julia reading update: Julia .1.12 adds30 nested and14 direct-limit assertions: direct cost/result caps reject, but nested dispatch runs with parent remaining_steps zero and widened inputs regain extra capability plus100 step/result ceilings. Exact mechanism and replay: docs/knowledge/julia-progressive-authority-boundary-gaps.md; existing .37.1 owns repair decomposition.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.37.2`
@@ -3052,6 +3053,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: `pending` — `.3.2.39` roots the unbounded raw child-error copy in dispatch and records the
     separate callback-view observation without assuming it alone establishes an exposure defect.
   Reading update: Dart .1.15 confirms the eight-byte diagnostic limit while a raw callback failure retains source prefix owned-pr at detail none. The callback can read its supplied input. Preserve these separate observations and resolve input-versus-outward detail authority; no exposure conclusion is inferred from input access alone. Exact ten-case replay is in docs/knowledge/dart-progressive-nested-authority-gap.md.
+  Julia reading update: Julia .1.12 confirms the eight-byte diagnostic cap and supplied-input visibility. Throwing a source string renders with an opening quote before truncation; the exact retained prefix is a quote plus owned-p. Preserve source-detail interpretation as pending; replay is in docs/knowledge/julia-progressive-authority-boundary-gaps.md.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.37.3`

@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.12 - read child authority and own boundary repairs
+
+Read child authority, function-parser suffix and Interpreter prefix:1,500 lines.
+Existing authority210/carrier62 and64 native/12 neutral diagnostics pass; progressive
+116/public60 stays green. Own pattern repair .2.5 and extend startup .37 with Julia
+nested-budget/grant evidence. All source and earlier evidence remain; next .1.13.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.11 - read wire and staged function parser paths
 
 Read wire/staged registry and function-parser prefix:1,500 fragments /52,503 bytes.
