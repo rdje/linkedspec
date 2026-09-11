@@ -50,3 +50,13 @@ recognition by this resolver does not establish complete generic builtin-arity e
 Explicit/contextual callable bodies stay deferred for eager helper dependencies. Attached switches, however,
 can omit retained body content from contract traversal: [[julia-attached-switch-body-omission]] owns exact
 causal evidence and pending repair .2.2. Existing parser 74 / resolver 40 and callable 482 assertions pass.
+
+## September 11 complete parser/resolver consumer reading (.1.42)
+
+The main parser testset1136–1264 passes 74 assertions; resolver1266–1331 passes
+40. Typed literals, nested writes, assignment receivers, trailing blocks and
+attached controls are checked structurally. Resolver checks canonical aliases,
+assignment families, unknown/raw diagnostics and builtin-name collisions.
+Parsing a switch node does not prove complete body traversal or execution;
+[[julia-attached-switch-body-omission]] remains open. No new arity or callable
+selector guarantee follows. Replay: [[julia-runtime-rule-interpreter]], .1.42.

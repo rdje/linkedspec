@@ -2233,7 +2233,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas.
   Children: `.3.5.0` owns decomposition; JULIA-STARTUP-READING.1 owns 52 reading children and .3 owns closeout.
   Reading owner: `docs/tasks/JULIA-STARTUP-READING.md` retains exact scope/digest, comprehension and repair evidence. This startup node remains the prerequisite owner.
-  Verification: Julia .1.41 completes cursor execution/normalization/options and reads runtests1–964:41/52 groups,59925 lines/2096851 bytes and67 complete files. Cursor104/353/53 and complete main-prefix145 pass655 assertions. Neutral cursor74files/8/0/60 passes; independent ten-family primary CLI process proof passes. The governed notes rollover preserves212 lines/13215 bytes from clean523c14ecb source244–455, prior records and exact archived queries. All repairs remain open; .1.42 continues runtests965–2464. Exact plan and all source identities remain frozen in the Julia owner.
+  Verification: Julia .1.42 reads runtests965–2464: 42/52 groups, 61425 lines/2149604 bytes and 67 complete files. Ten complete testsets pass 419 assertions across CLI failure/trace, ActionIR, registries, compiled descriptors, matching, interpreter and core values. Neutral staged123/public129, binding11/7/6/8 and write-vivification105 checks pass. Descriptor fixtures construct neutral definition dictionaries; this replay excludes incomplete string/numeric tests. All repairs remain open; .1.43 continues runtests2465–3964. Exact plan and all source identities remain frozen in the Julia owner.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.5.0`

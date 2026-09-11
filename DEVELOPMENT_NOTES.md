@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Staged descriptor fixtures retain precise producer coverage
+
+The main descriptor fixture constructs neutral function dictionaries before
+projection, compilation and runtime; it does not execute the source producer.
+Ten complete testsets pass 419 assertions. Partial string/numeric tests remain
+outside this replay, and all existing repair owners retain their prerequisites.
+
 ## 2026-09-11 — Cursor and CLI consumers preserve their test boundaries
 
 Cursor normalization/execution/options pass510 assertions; complete main-prefix

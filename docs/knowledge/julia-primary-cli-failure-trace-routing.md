@@ -61,3 +61,13 @@ Related facts: [[julia-primary-cli-native-execution-canonical-json]],
 [[julia-global-cli-61-audit]], [[julia-canonical-primary-cli-trace]],
 [[julia-global-cursor-option-removal]].
 See also [[julia-primary-cli-process-conformance]].
+
+## September 11 complete failure/trace consumer reading (.1.42)
+
+The 965–1134 suffix completes the testset begun by .1.41. Fresh 71 assertions
+preserve phase-specific headings, compilation before deferred input IO, fatal
+classification, saturated numeric trace levels and UTF-8 field escaping. The
+sink matrix checks stdout/route/mirror, selected or empty files, reset/append,
+quiet and emoji behavior, with trace-file failure mapped to compilation. This
+is in-process coverage; .1.41 separately verified the ten-family process check.
+Replay: [[julia-runtime-rule-interpreter]], .1.42 below.

@@ -54,3 +54,12 @@ arity or a variadic signature's minimum; the name does not imply fixed-only reso
 and parameter-kind metadata. Descriptor versions distinguish fixed v1, variadic v2 and parameter-kind v3.
 The unchanged registry 23 and variadic 55 assertions pass again alongside compiled-state/root controls;
 replay and exact scope are [[julia-compiled-spec-state]]. This completes reading, not deferred repair work.
+
+## September 11 registry consumer reading (.1.42)
+
+The complete testset1333–1410 passes 23 assertions. It preserves source order,
+zero-based indices, parse-job identity and fixed-arity resolution, then checks
+immutable body stitching, duplicate rejection and registered arity diagnostics
+before unknown-helper fallback. These fixed examples do not replace the separate
+variadic or parameter-kind consumers. Exact combined replay is in
+[[julia-runtime-rule-interpreter]], .1.42 below.

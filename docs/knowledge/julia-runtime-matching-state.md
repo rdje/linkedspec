@@ -79,3 +79,13 @@ JULIA_READ19_SUITE
 bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py
 bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py
 ```
+
+## September 11 complete matching consumer reading (.1.42)
+
+The main testset1753–1881 passes 60 assertions. Earliest/source-order alternative
+identity, consume anchoring, full versus compact capture vectors, named groups,
+UTF-8 code-unit/character positions, PCRE recursion/flags and immutable entry/local
+registers are all explicit. Zero-progress, cursor/capture updates and mismatched
+input or invalid UTF-8 boundary guards are checked separately. Selected-slot
+mode-preflight repair .2.12 remains open. Replay is in
+[[julia-runtime-rule-interpreter]], .1.42 below.

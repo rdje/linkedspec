@@ -44,3 +44,12 @@ Related facts: [[julia-runtime-rule-interpreter]], [[julia-runtime-matching-stat
 [[julia-runtime-string-numeric-helpers]],
 [[dart-runtime-core-value-capture-helpers]], [[terse-nested-value-path-assignment]],
 [[terse-direct-access-explicit-segments]], [[write-vivification-julia-runtime]].
+
+## September 11 complete core-value consumer reading (.1.42)
+
+Testset2180–2343 passes four aggregate assertions for typed stores/shapes, copied
+values, successive detached nested-write roots and multibyte capture fields.
+Its nested-write case includes a newly created intermediate array, but is a
+representative success case; neutral write-vivification separately passes 105
+mutation controls and binding passes11/7/6/8. This is not a fresh all-runtime
+admission. Replay: [[julia-runtime-rule-interpreter]], .1.42 below.

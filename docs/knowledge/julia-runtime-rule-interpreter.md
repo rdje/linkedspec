@@ -44,3 +44,34 @@ Related facts: [[julia-runtime-matching-state]], [[julia-compiled-spec-state]],
 [[julia-runtime-core-value-capture-helpers]], [[julia-runtime-string-numeric-helpers]],
 [[dart-runtime-rule-interpreter]],
 [[spec-lifecycle-retv-order]], [[julia-backend-interpreter-first-plan]].
+
+## September 11 complete interpreter consumer and .1.42 replay
+
+The interpreter testset1883–2178 passes 39 assertions. It covers repeated matches
+and output wrapping, action/explicit/passive calls, blind AND/OR, bounded and
+zero-width repetition, lifecycle order, same-position recursion cutoff, local
+resets versus inherited mutations, indexed child push forms and error boundaries.
+These are representative cases; the independent recognition/callback/selector
+repairs retain their original owners and startup prerequisites.
+
+The whole .1.42 reading range is main965–2464 (1500 lines/52753 bytes). Complete
+testsets906–2343 pass CLI71, parser74, resolver40, registry23, staged39, compiled41,
+descriptor28, matching60, interpreter39 and core4: 419 assertions. The harness
+retains original filename/line positions and helper definitions, blanks earlier
+separate consumer includes and prefix testsets, ending at the last complete body.
+It does not parse or execute the string/numeric testset2345–2568; that source is
+only read through2464 here, including eager logical evaluation, diagnostics and
+explicit exit. The initial ad-hoc command had an extra closing parenthesis and
+failed before tests; the corrected command below passes unchanged source.
+
+```bash
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; source=readlines("julia/test/runtests.jl"; keep=true); source[12:136].="\n"; source[471:904].="\n"; include_string(Main, join(source[1:2343]), joinpath(pwd(),"julia/test/runtests.jl"))'
+bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py
+bash tools/run_python_project_data.sh tools/check_uniform_binding_contract.py
+bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py
+```
+
+Neutral staged governance passes 123 mutations plus public129, binding passes
+11 migrations/7 executions/6 invalid selectors/8 constructors, and frozen write
+vivification passes 105 rejected mutations. Runtime fixtures use repository-routed
+temporary storage; this is a focused reading checkpoint, not a complete gate.

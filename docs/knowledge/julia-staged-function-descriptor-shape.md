@@ -38,3 +38,17 @@ No production projection change was required. This is a shape/no-drift proof, no
 Related facts: [[julia-compiled-spec-state]], [[julia-user-function-registry]],
 [[julia-staged-function-body-registry]], [[julia-user-function-runtime-execution]],
 [[dart-staged-function-descriptor-shape]], [[function-body-staged-prototype-proof]].
+
+## September 11 complete consumer reading (.1.42)
+
+Main testsets1412–1751 pass legacy staged registry39, compiled state41 and
+staged descriptor28 assertions. They preserve ordered jobs, eight-part cache
+identity, resolve/compile/result-field diagnostics, dependency edges, redefinition
+behavior, normalized job paths and source-slice provenance through execution.
+
+The descriptor fixture's `_definition_node` helper constructs the neutral
+function dictionaries from source text and offsets. It exercises their projection,
+stitching, descriptor and runtime; it does not run the spec-defined function-shell
+producer. The earlier description refers to the producer's neutral shape. Neither
+this fixture nor its green result closes projected-metadata repair .2.22 or the
+other startup repairs. Replay: [[julia-runtime-rule-interpreter]], .1.42 below.
