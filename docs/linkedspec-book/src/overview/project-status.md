@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 42/52 owned groups. ADR0116 admits the finite evidence allowance; ADR0115 remains limited to history.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 43/52 owned groups. ADR0116 admits the finite evidence allowance; ADR0115 remains limited to history.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,16 +297,16 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 42/52 groups complete:** the main test file is read through
-line 2464, bringing coverage to 61,425 lines / 2,149,604 bytes and sixty-seven
-complete files. Ten complete testsets pass 419 assertions across CLI failures
-and trace routing, action parsing and contracts, staged functions, compiled
-descriptors, regex matching, rule execution and typed values/captures.
-Staged descriptor tests construct neutral definition dictionaries before
-projection and execution; they do not independently test the source producer.
-Neutral staged, binding and write-vivification checks also pass. These bounded
-results preserve every existing limitation. String and numeric helper tests
-continue into `.1.43`, which starts at line 2465.
+**Julia reading is 43/52 groups complete:** the main test file is read through
+line 3964, bringing coverage to 62,925 lines / 2,196,720 bytes and sixty-seven
+complete files. Sixteen complete testsets pass 138 assertions across helper
+values and mutations, captures, controls, functions, diagnostics and native trace.
+They distinguish copied values from mutations, absent from zero-width matches,
+and block-local returns from rule returns. The frontend trace fixture executes
+the function-source parser, complementing the separate descriptor-shape fixture.
+Scalar, binding, typed-source and logical contract checks also pass. These are
+bounded results; every existing limitation remains open. `.1.44` continues the
+main spec-parser tests and semantic-call consumers.
 
 **Approved Julia evidence capacity:** the director granted Knowledge lines
 72,000→79,000 and decision-record lines12,000→13,000 under ADR0116. The finite

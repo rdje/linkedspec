@@ -47,3 +47,12 @@ execution context. The existing registered-function suite passes nine assertions
 full focused replay lives in [[julia-callable-codeblock-dynamic-invocation]].
 This differs from scoped dynamic codeblock parameters and does not repair the
 helper callback identity gap owned by Julia .2.8.
+
+## September 11 complete registered-function consumer reading (.1.43)
+
+Testset3066–3218 passes9 assertions. Eager argument assignments affect caller
+state even for dropped results; local body variables and aggregate parameters
+stay isolated, missing caller bindings are not captured, and returned values
+feed receiver chains. Direct/mutual recursion retains cycle diagnostics; fixed
+arity errors remain distinct. These examples do not close callback .2.8.
+Replay: [[julia-runtime-array-helpers]], .1.43 below.

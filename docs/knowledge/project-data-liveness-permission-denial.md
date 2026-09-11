@@ -72,3 +72,12 @@ for PID 76199 during a managed documentation correction. The command exited zero
 intended edit was independently verified before staging. The actual resulting PGID was not
 captured, so this recurrence adds no new causal conclusion; existing `.7` ownership and the
 recovery/purge restriction remain unchanged. `.3.3.27` preserves this bounded observation.
+
+September 11 `JULIA-STARTUP-READING.1.43` repeated the warning for child18745
+during the managed mdBook build. The build exited0 and rendered output was
+checked. The original final PGID was not captured; no group-failure or successful
+establishment claim follows. The documented follow-up control reports PID/PGID
+34421 with group_matches_pid1; read-only listing reports found0/removed0/skipped0.
+The unchanged wrapper still records child_pid as group identity without a check.
+Startup .7 already owns establishment/failure coverage and remains pending; no
+recovery/purge or deletion probe ran. This adds a recurrence, not a new cause.

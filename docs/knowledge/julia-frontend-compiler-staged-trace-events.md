@@ -48,3 +48,14 @@ without trace or corpus drift.
 Related facts: [[julia-trace-controls-sinks]], [[julia-runtime-trace-events]],
 [[julia-diagnostics-trace-boundary]], [[julia-primary-cli-mechanism-audit]],
 [[trace-cross-variant-capability-contract]].
+
+## September 11 complete frontend trace consumer reading (.1.43)
+
+Testset3832–3938 passes28 assertions. It compares traced/untraced AST/descriptor
+state, checks balanced parse scopes and failed edge-validation events, and runs
+parse_spec_with_staged_user_function_definitions on a corpus source fixture. That
+executes the function-shell producer, complementing .1.42's dictionary-constructed
+descriptor fixture. Staged phase topics, quiet behavior and routed file output
+remain exact; the earlier1019 total is historical. This bounded sample does not
+close function metadata/identifier repairs. Exact combined replay is in
+[[julia-runtime-array-helpers]], .1.43 below.

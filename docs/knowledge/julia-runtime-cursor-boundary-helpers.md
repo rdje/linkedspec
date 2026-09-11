@@ -88,3 +88,13 @@ bash tools/run_python_project_data.sh tools/check_logical_helper_contract.py
 bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py
 bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py
 ```
+
+## September 11 complete mark and cursor consumer reading (.1.43)
+
+Anonymous/named fixtures2860–2924 pass2, mark scope2926–2969 passes3 and cursor
+controls3297–3528 passes17 assertions. They preserve character projection, local
+named marks, LIFO restoration without binding rollback, empty-stack no-op,
+entry/local rewind separation and progressive anonymous take anchors. Earliest
+usable boundary stays unconsumed; EOF fallback differs from unresolved-rule
+no-op. Wrong input_slice arity/count repair .2.11 remains open. Exact replay
+and neutral typed231 proof: [[julia-runtime-array-helpers]], .1.43 below.

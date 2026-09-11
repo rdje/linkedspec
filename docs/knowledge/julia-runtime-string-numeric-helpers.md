@@ -61,3 +61,12 @@ Existing text5/numeric4/string-numeric14 and adjacent aggregate/uniform/mutation
 suites remain green. Exact selected replay is in [[julia-runtime-array-helpers]].
 Regex handling retains imsx flags (g/o ignored), guarded substitution writeback
 and capture expansion; this reading closes no pending regex or numeric repair.
+
+## September 11 complete main consumer reading (.1.43)
+
+The suffix2465–2568 finishes the main string/numeric testset; all14 assertions
+pass. It covers explicit/default exit, regex substitution writeback/flags/capture
+expansion, unchanged pure substring receivers, numeric aliases and representative
+invalid operands. The prefix also proves eager logical arguments and diagnostic
+sink events. Scalar55/18 and logical8/0/26 checks pass; magnitude/slice repairs
+.2.9/.2.10 remain open. Replay: [[julia-runtime-array-helpers]], .1.43 below.

@@ -23,3 +23,11 @@ LinkedSpec contract. Code must not infer presence from a zero span or empty capt
 
 - Owner: [[FUTURE-PARITY-BACKLOG]] `.1.6.1.2.2.2.3`.
 - Governed source: `capability_conformance/fixtures/capability_position_helper_surface.spec`.
+
+## September 11 paired position consumer reading (.1.43)
+
+The complete position2779–2826 and zero-width2828–2843 fixtures each pass one
+aggregate assertion. Absent local registers retain null span/length/group values,
+empty containers and one-based line defaults; a present empty match has empty
+text, zero span/length and presence1. Offsets cannot serve as a presence flag.
+Exact combined replay: [[julia-runtime-array-helpers]], .1.43 below.

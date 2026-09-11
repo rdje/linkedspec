@@ -94,3 +94,13 @@ JULIA_READING15
 bash tools/run_python_project_data.sh tools/check_progressive_span_dispatch_contract.py
 bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py
 ```
+
+## September 11 complete control and tree consumer reading (.1.43)
+
+Controls2971–3064 and tree callbacks3220–3295 pass6 and2 assertions. They compare
+block/rule return boundaries, attached and marker branches, immediate with scopes,
+iteration and callable-arity guards, sorted harray versus indexed array traversal,
+restored callback bindings and persistent unrelated effects. Nonaggregate reduce
+skips both initializer and callback. Attached-switch .2.2 and helper-callback
+identity .2.8 remain open; selected returning branches do not close omitted-body
+coverage. Replay: [[julia-runtime-array-helpers]], .1.43 below.

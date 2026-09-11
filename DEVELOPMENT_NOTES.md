@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Helper and trace consumers preserve independent state boundaries
+
+Tests distinguish copied harray updates from index mutation, zero-width presence
+from absent matches, and block-local returns from rule returns. Frontend trace
+executes the function-source parser separately from dictionary-based descriptor
+fixtures. Focused 138 assertions pass; all existing repair owners remain open.
+
 ## 2026-09-11 — Staged descriptor fixtures retain precise producer coverage
 
 The main descriptor fixture constructs neutral function dictionaries before

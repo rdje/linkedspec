@@ -63,3 +63,12 @@ selected reset-file sentinel. Valid quiet/reset intentionally truncates it. Twel
 native controls and existing trace43/frontend trace28 pass. Exact replay and
 limits are in [[julia-null-selector-and-identifier-validation-gaps]]; this does not
 claim primary CLI proof or general acceptance of arbitrary host integer types.
+
+## September 11 complete native trace consumer reading (.1.43)
+
+Testset3605–3830 passes43 assertions. Named/numeric levels, environment config,
+route/mirror/reset, event order and scope indentation are checked independently
+of runtime output. Traced/untraced results agree for ordinary, action/blind and
+recursion cases; cursor and capture topic details retain their identities. This
+is native trace, distinct from the primary canonical recorder. Existing trace
+validation qualifications remain. Replay: [[julia-runtime-array-helpers]], .1.43.

@@ -83,3 +83,14 @@ JULIA_GROUP13_PROOF
 bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py
 bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py
 ```
+
+## September 11 complete diagnostic consumer reading (.1.43)
+
+Testset3530–3603 passes7 assertions. Source identity does not alter successful
+output. An absent selected entry reports select_entry_rule/entry_rule_not_found;
+a failed child retains runtime_execution, Child and its handler label while
+showerror preserves the message. The synthetic /specs paths are diagnostic text,
+not filesystem inputs. Earlier CLI-field rendering is historical: current primary
+errors are phase-only; rich native diagnostics remain separate. This fixture does
+not close observer/diagnostic sink or byte-retention repairs. Replay is in
+[[julia-runtime-array-helpers]], .1.43 below.

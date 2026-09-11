@@ -82,3 +82,34 @@ JULIA_READING17
 bash tools/run_python_project_data.sh tools/check_scalar_numeric_contract.py
 bash tools/run_python_project_data.sh tools/check_uniform_binding_contract.py
 ```
+
+## September 11 complete aggregate consumers and .1.43 replay
+
+Array2570–2663 and harray2665–2733 pass two and one aggregate assertions. They
+preserve copied pipelines, explicit flatten splicing, empty split fields and
+updated array-end mutation results. Harray statement set_key mutates its binding;
+value and receiver set_key return copies; explicit index assignment publishes
+an updated root. These intentionally different outcomes are checked together.
+
+The exact main reading range2465–3964 is1500 lines/47116 bytes. Sixteen complete
+testsets2345–3938 pass138 assertions: string14, array2, harray1, pure1, position1,
+zero-width1, marker1, captures2, marks3, controls6, functions9, tree2, cursor17,
+diagnostics7, native trace43 and frontend trace28. Fixtures named exhaustive are
+fixed governed examples, not exhaustive tests of all input values or magnitudes.
+Spec-parser3940–4119 is only read through3964 and excluded from this replay.
+
+The in-memory harness preserves source filename and line numbers, skips separate
+consumer includes and earlier main testsets, and uses existing helpers only.
+All temporary fixtures follow repository-routed storage. No complete component
+gate, other runtime execution or repair closure is claimed.
+
+```bash
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; source=readlines("julia/test/runtests.jl"; keep=true); source[12:136].="\n"; source[471:2343].="\n"; include_string(Main, join(source[1:3938]), joinpath(pwd(),"julia/test/runtests.jl"))'
+bash tools/run_python_project_data.sh tools/check_scalar_numeric_contract.py
+bash tools/run_python_project_data.sh tools/check_uniform_binding_contract.py
+bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py
+bash tools/run_python_project_data.sh tools/check_logical_helper_contract.py
+```
+
+Neutral scalar55 cases/18 helpers, binding11/7/6/8, typed14 complete/0 pending
+and231 drift controls, and logical8 complete/0 pending/26 drift controls pass.
