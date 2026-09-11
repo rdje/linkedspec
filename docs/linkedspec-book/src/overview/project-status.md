@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 37/52 owned groups. ADR0116 admits the approved finite evidence allowance before the thirty-eighth reading child; ADR0115 remains limited to history.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 38/52 owned groups. ADR0116 admits the finite evidence allowance; ADR0115 remains limited to history.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,13 +297,17 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 37/52 groups complete:** MCP admission and dispatch consumers
-are fully read; stdio test reading reaches line229. Coverage is53,925 lines
-/1,880,598 bytes and fifty-three complete files. All four MCP consumers pass625
-assertions, including the actual focused cancellation and native-failure owners
-referenced by admission checks. Neutral transport, admission and generated-binding
-freshness checks pass. Native/MCP equality across20 cases does not close the
-separate semantic-budget finding. **Approved Julia evidence capacity:** the director granted Knowledge lines
+**Julia reading is 38/52 groups complete:** stdio, progressive-dispatch and
+punctuation consumers are fully read; recognition test reading reaches line469.
+Coverage is55,425 lines /1,938,280 bytes and fifty-six complete files. The four
+consumers pass494 assertions, with their neutral transport, progressive,
+recognition and punctuation checks. Progressive executes a freshly included
+emitted module with caller authority; punctuation reconstructs emitted payload
+data. Recognition's private token and mark controls preserve falsey values and
+detached state but do not resolve the effect-integration or late-preflight defects.
+All previously owned limitations remain open; reading `.1.39` is next.
+
+**Approved Julia evidence capacity:** the director granted Knowledge lines
 72,000→79,000 and decision-record lines12,000→13,000 under ADR0116. The finite
 reserve covers15 remaining reading slices plus five support/closeout units,
 with room for three governing decisions. All file-count, byte, member, task,
@@ -312,7 +316,7 @@ Twenty threshold and24 authorization executions exercise the actual validators,
 and the complete candidate plus reserve fits the approved controls. The explicit
 focused-verification exception applies only to containment `.13`; normal hooks
 and future canonical/push requirements remain. No dependency build or additional
-reading credit is claimed. Reading `.1.38` resumes after the clean capacity commit.
+reading credit is claimed. Capacity commit `30723f0f0` restored the reading frontier; current progress is above.
 The original proposal remains in `docs/tasks/JULIA-STARTUP-READING.md`; accepted
 authority is `docs/decisions/0116-approved-julia-evidence-capacity.md`, with replay
 in `docs/knowledge/julia-evidence-capacity-admission.md`.
@@ -731,8 +735,8 @@ SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` sti
 own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
-Julia has read thirty-seven of 52 exact groups across 95 baseline entries;
-approved ADR0116 capacity permits its thirty-eighth reading child after clean landing, followed by the remaining Lua/supporting
+Julia has read thirty-eight of 52 exact groups across 95 baseline entries;
+its thirty-ninth child follows, with the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,

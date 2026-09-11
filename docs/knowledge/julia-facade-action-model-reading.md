@@ -67,3 +67,16 @@ startup .41.7's existing locality-teaching repair. They were not executed unmana
 historical and points to current compilation/runtime evidence, preserving its
 punctuation rules. No implementation, contract, fixture, complete component gate,
 canonical CI or PGEN/RGX build changes accompany this reading checkpoint.
+
+## September 11 punctuation reading credit
+
+Julia .1.38 now reads the complete167-line /6,023-byte punctuation consumer in
+its numeric owner, SHA8c1d43630241ea69dea644c8c08b00b018be007c7781fe90d9dc793c5b52cd01.
+Fresh execution again passes55 assertions plus neutral6 standalone /4 receiver
+/6 invalid cases. Semantic comparison removes five source metadata fields;
+`next` remains a variable in value position. Terminal receiver aliases carry no
+arguments, retained identifiers stay variables and excluded forms retain their
+specific raw-expression reasons. Native/generated-plan equality and decoded
+emitted-payload recompilation preserve the historical route distinction above.
+The missing-needle zero result remains a documented preexisting arity obligation,
+not a corrected behavior. Combined replay: [[julia-progressive-span-dispatch-admission]].

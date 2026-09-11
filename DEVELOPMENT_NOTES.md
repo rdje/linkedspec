@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Consumer source preserves distinct authority and emitted proofs
+
+Progressive creates an independent emitted host with caller-supplied authority;
+punctuation reconstructs the emitted payload and recompiles it. Private recognition
+fixtures preserve falsey payloads and detached marks, while effect integration and
+late attempt preflight remain separate repairs. All494 focused assertions pass.
+
 ## 2026-09-11 — Approved finite evidence capacity preserves retrieval
 
 ADR0116 records the director’s Granted answer to both line controls and .13-only

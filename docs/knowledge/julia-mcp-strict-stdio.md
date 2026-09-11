@@ -61,3 +61,19 @@ current .1.10 evidence is53/145. The pattern and precedence defects discovered
 there remain owned and do not invalidate the exact existing170-assertion scope.
 See [[julia-mcp-pattern-terminal-newline-gap]] and [[perl-mcp-validation-error-order-drift]].
 2026-09-11 Julia .1.37 exact reading and focused replay: `docs/tasks/JULIA-STARTUP-READING.md`, section `Reading evidence .1.37`.
+
+## September 11 complete stdio-consumer reading
+
+Julia .1.38 reads `julia/test/mcp_server_julia_stdio_test.jl`230–656 to EOF:
+427 fragments /16,742 bytes, SHAd42cdb7e62c8933b86319a0a0573c98a3d056f5e31dee641fc6a53cd8c7066d0.
+Together with .1.37, every source line is now read. All170 existing assertions
+pass: ten neutral raw classifications, escaped-key collisions, number/ID kinds,
+64/65-character IDs, inclusive line limits, CRLF/final EOF, malformed/oversized
+frame recovery, chunked discovery/list/capability/query responses, cancellation
+before emission, late cancellation, hostile read/write/flush/log and argument
+preflight. Caller-open and released-state assertions retain their exact cases.
+Static forbidden-string checks constrain the production surface but do not
+constitute a complete sandbox or effect proof. The current terminal-LF and
+validation-precedence findings remain separately owned. Neutral transport stays
+35 frames /10 raw inputs /10 lifecycle cases /76 rejected mutations. The complete
+focused command is in [[julia-progressive-span-dispatch-admission]] below.

@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `JULIA-STARTUP-READING`
-- Status: `active` / reading 37/52; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity, matching, staged, diagnostic, static, entry and selector-projection and member-suffix and literal-boundary and projection-metadata and selector/identifier repairs and diagnostic fixture correction pending
+- Status: `active` / reading 38/52; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity, matching, staged, diagnostic, static, entry and selector-projection and member-suffix and literal-boundary and projection-metadata and selector/identifier repairs and diagnostic fixture correction pending
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.5`
 - Created: `2026-09-11`
 - Last updated: `2026-09-11`
@@ -43,7 +43,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Inventory SHA-256: `ca3cff4fe4c0e162448d6dbac82d89898673023951afaeced17d5b9a838ccd10`.
 - Ordered range SHA-256: `fde325f80ae7b56c5890d149fbc965c09890890e963a1fa9aab08e8c9d962337`.
 - Line coordinates are one-based, inclusive LF physical lines. Every child pins its range digest.
-- Current physical reading: 37/52 children, 53,925/75,984 lines and 1,880,598/2,693,170 bytes; fifty-three complete files.
+- Current physical reading: 38/52 children, 55,425/75,984 lines and 1,938,280/2,693,170 bytes; fifty-six complete files.
 - Exact replay and capacity assessment: `docs/knowledge/julia-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -59,7 +59,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Dependencies: Startup .3.5.0 decomposition committed; each child starts from a clean prior handoff.
   Children: `.1.1-.1.52`, with exact scopes below.
   Acceptance: Every child records physical coverage, comprehension, Knowledge reconciliation, findings and focused proof before its commit. Retain all current-delta and interrupted-range evidence.
-  Verification: Julia .1.37 completes MCP admission and dispatch consumers and reads stdio1-229: 37/52 groups, 53,925 fragments /1,880,598 bytes and fifty-three complete files. Existing binding53/dispatch145/stdio170/admission257 pass625 assertions, including the actual focused owners referenced by admission markers. Neutral transport35/10/10/76, admission5/5/6/6/141 and check-only generated binding120030 bytes pass. Source distinguishes all20 native identity cases, real registry/lifecycle proof and focused cancellation/failure seams. Stdio source after229 remains unread. No new confirmed defect or closure; Julia patterns .2.4, shared precedence .36, budget .82 and all prior repairs remain. Knowledge72065/72000 initially blocked landing;68 checkpoint lines are preserved exactly in the task with three card pointers, reaching72000. Julia .5 owns finite capacity planning before .1.38; no full component/canonical gate or dependency build ran.
+  Verification: Julia .1.38 completes stdio, progressive-dispatch and punctuation consumers and reads recognition1–469:38/52 groups,55425 lines/1938280 bytes and56 complete files. Fresh stdio170/progressive62/punctuation55/recognition207 pass494 assertions; neutral transport35/10/10/76, progressive9/9/116 plus public6/12/10/60, recognition138/250/58 plus public3/26/45 and guide1/14/18, and punctuation6/4/6 pass. Emitted progressive execution is independent; punctuation reconstructs emitted payload data. Private recognition controls do not close effect/preflight defects. All prior repairs remain open; .1.39 is next.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.1.1`
@@ -692,14 +692,21 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Commit: `JULIA-STARTUP-READING.1.37 - complete MCP admission and dispatch consumer reading`
 
 - ID: `JULIA-STARTUP-READING.1.38`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Julia group 38 and reconcile its source evidence.
   Dependencies: `JULIA-STARTUP-READING.1.37` committed; empty brief and clean repository.
+  Activation commit: `30723f0f08b0e12f5e425058b87435e801876633`.
+  Verification tier: `focused`
+  Focused checks: Exact four-range/source coverage, relevant stdio/progressive/punctuation/recognition consumers and neutral direct dependents, prior evidence preservation, Knowledge, memory, both history checks, rendered book and normal doctrines.
+  Canonical trigger: `none` — bounded startup reading/evidence only, no production, dependency, infrastructure or contract change.
   Scope: `julia/test/mcp_server_julia_stdio_test.jl` lines 230-656; `julia/test/progressive_span_dispatch_contract_test.jl` lines 1-437; `julia/test/punctuation_light_zero_arg_contract_test.jl` lines 1-167; `julia/test/recognition_transaction_contract_test.jl` lines 1-469
   Baseline evidence: 1500 fragments / 57682 bytes; ordered range SHA-256 `afac43325ace4e0249c3a282589951a82f6ad188d8a17ade2ee865d12972bcd8`.
   Acceptance: Physically read every owned byte, inspect current deltas, reconcile Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit. Do not count truncated output or unread consumer suffixes.
-  Verification: `pending`
-  Commit: `pending`
+  Comprehension: Stdio covers neutral raw classes, exact lexical IDs/numbers, frame limits/recovery, canonical chunked responses, cancellation and sanitized hostile I/O while retaining caller ownership. Progressive proves dedicated logical AST, defensive transaction exclusion and fresh native/reconstructed/generated/independently included emitted authority. Punctuation compares semantic aliases and emitted-payload reconstruction. Recognition prefix covers private invocation/generation isolation, detached marks, falsey positive tokens, state restoration, escapes and missing attempts; repeated-attempt setup ends at469.
+  Knowledge: Dated evidence appends to julia-mcp-strict-stdio, julia-progressive-span-dispatch-admission, julia-facade-action-model-reading and julia-recognition-transaction-admission; their existing bytes and historical admission counts remain intact. The progressive home holds the exact combined replay and current neutral counts.
+  Findings: No new confirmed defect or closure. Julia .2.3/.2.7 effect and preflight, .2.4/.2.5 patterns, shared .36/.37/.82 and all prior repairs remain. The emitted route distinction and private-authority test limits remain explicit. No full component/canonical gate or dependency build.
+  Verification: Seven untruncated windows read1500 fragments /57682 baseline-identical bytes; ordered SHAafac43325ace4e0249c3a282589951a82f6ad188d8a17ade2ee865d12972bcd8. Raw ranges: stdio427/16742/SHAd42cdb7e62c8933b86319a0a0573c98a3d056f5e31dee641fc6a53cd8c7066d0; progressive437/17357/SHA62deb068c34a67e71ef26b693c9097a11c2b54ef844f3988c19d4f3dbe1760e1; punctuation167/6023/SHA8c1d43630241ea69dea644c8c08b00b018be007c7781fe90d9dc793c5b52cd01; recognition469/17560/SHAe354ec05859fd8bf3cdb8970b608d7fb999826ee4f01d15dbbe3a02fdc2c44ad. Fresh494 assertions and all selected neutral checks pass. Exact coverage, prior source/nodes/facts/history, Knowledge, memory, both pressure checks, rendered book and normal doctrines govern landing.
+  Commit: `JULIA-STARTUP-READING.1.38 - read stdio progressive and recognition consumers`
   Additional dependency (.1.37): .5 must resolve exhausted Knowledge capacity before activation.
 
 - ID: `JULIA-STARTUP-READING.1.39`
@@ -1588,7 +1595,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.38` | `pending` | Resume after the verified containment .13 commit, empty brief and clean proof; ADR0116 resolves the .5 capacity dependency. |
+| 1 | `JULIA-STARTUP-READING.1.39` | `pending` | Read recognition470–800, recursive observation1–381, repeated results1–444 and root admission1–344 after the clean .1.38 commit. |
 
 ## Decisions
 
@@ -1619,6 +1626,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Source repairs retain startup prerequisites; those dependencies do not block source reading.
 
 ## Verification Log
+
+- `2026-09-11` .1.38: Julia .1.38 completes stdio, progressive-dispatch and punctuation consumers and reads recognition1–469:38/52 groups,55425 lines/1938280 bytes and56 complete files. Fresh stdio170/progressive62/punctuation55/recognition207 pass494 assertions; neutral transport35/10/10/76, progressive9/9/116 plus public6/12/10/60, recognition138/250/58 plus public3/26/45 and guide1/14/18, and punctuation6/4/6 pass. Emitted progressive execution is independent; punctuation reconstructs emitted payload data. Private recognition controls do not close effect/preflight defects. All prior repairs remain open; .1.39 is next.
 
 - `2026-09-11` .5 disposition: Containment .13 changes two exact registry scalars under ADR0116;20 production threshold and24 authorization controls pass. Prior evidence and complete actual-plus-reserve checks govern landing with normal doctrines and the explicit .13-only focused exception. Reading remains37/52; .1.38 is next.
 
@@ -1685,6 +1694,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Commit Log
 
+- `2026-09-11` .1.38: `JULIA-STARTUP-READING.1.38 - read stdio progressive and recognition consumers`.
+
 - `2026-09-11` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.13 - admit approved Julia evidence capacity` resolves .5 and restores .1.38 after clean landing.
 
 - `.5.1`: `JULIA-STARTUP-READING.5.1 - propose finite Julia evidence capacity`.
@@ -1739,6 +1750,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Decomposition: `SESSION-STARTUP-READING.3.5.0 - freeze exact bounded Julia reading plan`.
 
 ## Changelog
+
+- `2026-09-11` .1.38: Complete three consumer files and recognition1–469;38/52 groups and56 complete files. Preserve all repairs and resume .1.39.
 
 - `2026-09-11`: Close .5 through director-approved containment .13 / ADR0116; preserve the .5.1 proposal and all reading/repair evidence.
 

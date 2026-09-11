@@ -41,3 +41,22 @@ Neutral rollout, recurring composition, and final public no-drift are complete a
 - Private authority: [[julia-recognition-transaction-private-authority]].
 - Integration: [[julia-recognition-transaction-integration]].
 - Owner: [[FUTURE-PARITY-BACKLOG.14]] `.14.3.5.3`.
+
+## September 11 recognition-consumer prefix reading
+
+Julia .1.38 reads `julia/test/recognition_transaction_contract_test.jl`1–469:
+469 fragments /17,560 bytes, SHAe354ec05859fd8bf3cdb8970b608d7fb999826ee4f01d15dbbe3a02fdc2c44ad.
+The prefix defines portable fixture/diagnostic helpers, independently included
+emitted-module execution and exact current inventory. Current counts supersede
+the dated133/246 snapshot above:138 ActionIR rows /250 calls /58 mutations,
+rollout9/9, public sequence3/26/45 and capability guide1/14/18. All207 existing
+consumer assertions pass, but source after469 remains owned by the next group.
+
+Physically read test bodies cover invocation/generation isolation, same-label
+marks, detached snapshot mutation, eight positive token fixtures with distinct
+falsey staged payloads, commit/rollback frame state, token-escape diagnostics and
+missing-attempt rejection. The range stops while setting up a repeated-attempt
+case. These are direct private-authority controls; they do not close executable
+effect-graph coverage or child-before-token-preflight defects. Those remain
+[[julia-recognition-effect-integration-gap]] and [[julia-recognition-attempt-preflight-gap]].
+The complete focused replay is in [[julia-progressive-span-dispatch-admission]].

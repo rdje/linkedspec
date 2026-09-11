@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.38 - read stdio progressive and recognition consumers
+
+Read1500 fragments /57682 bytes, reaching38/52 groups and56 complete files.
+Stdio170/progressive62/punctuation55/recognition207 pass494 assertions; four
+neutral checks pass. Preserve emitted-route distinctions and all repair ownership;
+recognition source after469 remains for .1.39.
+
 ## 2026-09-11 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.13 - admit approved Julia evidence capacity
 
 Admit Knowledge72000→79000 and decisions12000→13000 under explicit approval and ADR0116.

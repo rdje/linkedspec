@@ -47,3 +47,45 @@ Their dated historical evidence remains intact.
 - Four carriers: [[julia-progressive-span-dispatch-carriers]].
 - Historical RED: [[julia-progressive-span-dispatch-dormant-red]].
 - Owner: [[FUTURE-PARITY-BACKLOG.14]] `.14.6.5.3`.
+
+## September 11 complete carrier-consumer reading
+
+Julia .1.38 reads all437 lines /17,357 bytes of the admitted carrier consumer,
+SHA62deb068c34a67e71ef26b693c9097a11c2b54ef844f3988c19d4f3dbe1760e1.
+All62 assertions pass across seven groups. The authored dispatch is exactly one
+dedicated node with logical identity/span fields and no serialized authority;
+malformed literal/residual/recognition-reachable forms reject. Live transaction
+rejection, missing authority, repeated native use, reconstructed source and
+validated generated-plan execution retain their own positive/negative controls.
+The emitted carrier creates a fresh host Module, includes emitted source and
+executes its exported function with a caller-supplied seed. Metadata identity and
+absence of registry/fingerprint/token objects are checked separately. This is an
+independent emitted-module route, unlike the punctuation consumer's payload
+reconstruction. Discovery and canonical path markers are each counted once.
+
+The earlier admission counts above are dated. Current neutral truth is9/9/116,
+with public6 documents /12 forbidden terms /10 outward paths /60 mutations.
+The separate dormant authority consumer is not included by this reading run.
+Nested authority and complete-pattern repairs remain under startup .37 and
+Julia .2.5; no runtime repair or full component/canonical gate is claimed.
+
+### Focused .1.38 replay
+
+```bash
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no - <<'JULIA_READING38'
+using LinkedSpecJulia, JSON3, Test
+const REPO_ROOT=pwd()
+include("julia/test/mcp_server_julia_stdio_test.jl")
+include("julia/test/progressive_span_dispatch_contract_test.jl")
+include("julia/test/punctuation_light_zero_arg_contract_test.jl")
+include("julia/test/recognition_transaction_contract_test.jl")
+JULIA_READING38
+bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py
+bash tools/run_python_project_data.sh tools/check_progressive_span_dispatch_contract.py
+bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py
+bash tools/run_python_project_data.sh tools/check_punctuation_light_zero_arg_contract.py
+```
+
+Fresh native counts are170+62+55+207=494. Whole-consumer execution grants no
+reading credit beyond .1.38's four frozen ranges; recognition after469 remains
+unread. All source and previously owned findings remain unchanged.
