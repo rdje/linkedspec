@@ -79,3 +79,12 @@ Related: [[julia-staged-ast-enrichment-current-depth-authority]],
 [[julia-staged-ast-enrichment-carriers-admission]],
 [[general-staged-ast-enrichment-neutral-contract]],
 [[general-staged-ast-current-boundary]].
+
+## 2026-09-11 — lineage and source projection reading
+
+Julia .1.21 reads recursive authority validation, complete source-segment extent
+checks, exact tuple/nondecreasing lineage diagnostics, and direct/ordered-derived
+position/span/diagnostic rebasing through the plan-preparation prefix. Extent
+accumulation checks representable bounds before addition. Existing491 consumer
+assertions pass; recursive scheduling suffix remains unread. Registry patterns have
+separate confirmed gaps under .2.13: [[julia-staged-registry-pattern-boundaries]].

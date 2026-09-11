@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia staged registry pattern boundaries
+
+Dollar-anchored staged occursin admits final LF; parser components reject valid
+neutral digit starts, and nondefault allowed tops lack pattern validation.
+Six malformed snapshots still dispatch, while neutral checks reject them.
+Private authority proof and exact replay own .2.13; existing491 remains finite.
+
 ## 2026-09-11 — Julia source values and staged authority seeds
 
 Decoded source tables own exact scalar/codeunit conversions; event construction

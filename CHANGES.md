@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.21 - read staged resolution and own registry pattern validation
+
+Read StagedAstEnrichment489-1988: exact1,500 fragments /56,058 bytes.
+Existing491 plus36 Julia/14 neutral diagnostic assertions and governed checks
+pass. Own staged registry/cache pattern and all-top validation repair .2.13;
+preserve all source, prior evidence, history, public limitations and repair gates.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.20 - read source authorities and staged execution seeds
 
 Complete transaction, semantic event and source-location authorities; read staged

@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `JULIA-STARTUP-READING`
-- Status: `active` / reading 20/52; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity and matching repairs pending
+- Status: `active` / reading 21/52; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity, matching and staged repairs pending
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.5`
 - Created: `2026-09-11`
 - Last updated: `2026-09-11`
@@ -43,7 +43,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Inventory SHA-256: `ca3cff4fe4c0e162448d6dbac82d89898673023951afaeced17d5b9a838ccd10`.
 - Ordered range SHA-256: `fde325f80ae7b56c5890d149fbc965c09890890e963a1fa9aab08e8c9d962337`.
 - Line coordinates are one-based, inclusive LF physical lines. Every child pins its range digest.
-- Current physical reading: 20/52 children, 28,425/75,984 lines and 1,031,542/2,693,170 bytes; twenty-seven complete files.
+- Current physical reading: 21/52 children, 29,925/75,984 lines and 1,087,600/2,693,170 bytes; twenty-seven complete files.
 - Exact replay and capacity assessment: `docs/knowledge/julia-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -59,7 +59,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Dependencies: Startup .3.5.0 decomposition committed; each child starts from a clean prior handoff.
   Children: `.1.1-.1.52`, with exact scopes below.
   Acceptance: Every child records physical coverage, comprehension, Knowledge reconciliation, findings and focused proof before its commit. Retain all current-delta and interrupted-range evidence.
-  Verification: Julia .1.20 completes RecognitionTransaction, SemanticObservation and SourceLocation and reads StagedAstEnrichment1-488: 20/52 groups, 28,425 fragments /1,031,542 bytes and twenty-seven complete files. Existing recognition207/typed127/observation66/routes51/staged491 assertions pass (942 plus helper-selection1); neutral typed231, semantic6/20/128 and staged123/public129 pass. Two isolated-harness omissions are corrected by the saved complete dependency-order recipe. No new defect is established; all prior repairs, source, history and ADR0115 controls remain. Julia .1.21 is next; no full component/canonical gate or dependency build.
+  Verification: Julia .1.21 reads StagedAstEnrichment489-1988: 21/52 groups, 29,925 fragments /1,087,600 bytes and twenty-seven complete files. Existing staged491, diagnostic Julia36/neutral14 and neutral123/public129 checks pass. Registry/cache patterns admit trailing LF, reject valid digit-led parser components and omit nondefault top validation; .2.13 owns repair. No source or prior repair changes; history and ADR0115 controls remain. Julia .1.22 is next; no full component/canonical gate or dependency build.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.1.1`
@@ -403,14 +403,21 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Commit: `JULIA-STARTUP-READING.1.20 - read source authorities and staged execution seeds`.
 
 - ID: `JULIA-STARTUP-READING.1.21`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Julia group 21 and reconcile its source evidence.
   Dependencies: `JULIA-STARTUP-READING.1.20` committed; empty brief and clean repository.
   Scope: `julia/src/runtime/StagedAstEnrichment.jl` lines 489-1988
   Baseline evidence: 1500 fragments / 56058 bytes; ordered range SHA-256 `38226654b3d608086ed3fc0bf96e8be319b6a987bb00fb43b4ec19cd1953652f`.
+  Activation commit: `bd95e0fee7556b5e41d7899b7fcb437a2e3f0028`.
+  Verification tier: `focused`
+  Focused checks: Exact source/range reconstruction; existing staged491 consumer and private registry/cache diagnostics; neutral pattern and staged/public checks; prior-task/source/history preservation, Knowledge, memory, book and normal doctrines.
+  Canonical trigger: `none` — ordinary source-reading and repair intake; no source, public contract, format, infrastructure or dependency change.
   Acceptance: Physically read every owned byte, inspect current deltas, reconcile Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit. Do not count truncated output or unread consumer suffixes.
-  Verification: `pending`
-  Commit: `pending`
+  Comprehension: Owns copied finite acyclic data and canonical snapshot hashing with opaque callback normalization; freezes exact callback bindings and immutable logical collections. Pure alias/relative/root/provider selection precedes selected-top job identity; version/top/capability/policy intersections and minimum ceilings narrow authority. Cache retains callback plans under eight-field identity, not child results. Typed path/provenance ordering, bounded active-lineage extents, direct/derived source rebasing, plan preparation/cache and stitch-target preflight are read; settlement/scheduler suffix remains unread.
+  Knowledge: Existing staged current-depth/recursive cards retain architecture and dated history. Bounded docs/knowledge/julia-staged-registry-pattern-boundaries.md owns full source-reading conclusions and exact diagnostic replay.
+  Findings: New .2.13 owns trailing-LF admission, neutral-valid digit-component rejection and missing nondefault allowed-top validation. Six malformed host snapshots freeze and dispatch; four malformed cache fields hash. This is private registry/current-depth proof, not fresh authored/emitted malformed reproduction. All prior repairs remain open.
+  Verification: Six untruncated windows cover1500 fragments /56058 baseline-identical bytes with ordered SHA38226654b3d608086ed3fc0bf96e8be319b6a987bb00fb43b4ec19cd1953652f. Existing staged491 plus Julia36 diagnostic assertions pass; neutral14 targeted and123/public129 governed mutations pass. Initial diagnostic callback used a raw Dict instead of the required success wrapper; corrected complete recipe passes with no repeated-assertion credit. Neutral harness wrapper/exception-class omissions are corrected in the saved recipe. All jobs consumed; exact coverage/prior-node/source/history, Knowledge, memory, histories, rendered book and all normal doctrines govern landing. No unread-source credit, full component/canonical gate or dependency build.
+  Commit: `JULIA-STARTUP-READING.1.21 - read staged resolution and own registry pattern validation`.
 
 - ID: `JULIA-STARTUP-READING.1.22`
   Status: `pending`
@@ -727,7 +734,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Goal: Preserve disjoint repair ownership for every confirmed Julia finding.
   Dependencies: Findings from .1; source repair additionally requires startup .3/.4/.5.
   Acceptance: Reuse exact existing startup owners when applicable; otherwise add bounded repair children with source mechanism, reproduction, acceptance and unblock conditions. No finding is closed by reading alone.
-  Children: .2.1 callable-body selector validation; .2.2 attached-switch body/duplicate-default validation; .2.3 recognition-effect integration; .2.4 MCP pattern full matching; .2.5 progressive identity full matching; .2.6 semantic callback action passthrough; .2.7 recognition attempt preflight; .2.8 helper callback recursion identity; .2.9 numeric boundaries; .2.10 safe slice/drop arithmetic; .2.11 input_slice arity; .2.12 selected-slot mode preflight. Nested authority and diagnostic review retain startup .37.1/.37.2. Prior README findings retain startup .41.2/.41.3/.41.7.
+  Children: .2.1 callable-body selector validation; .2.2 attached-switch body/duplicate-default validation; .2.3 recognition-effect integration; .2.4 MCP pattern full matching; .2.5 progressive identity full matching; .2.6 semantic callback action passthrough; .2.7 recognition attempt preflight; .2.8 helper callback recursion identity; .2.9 numeric boundaries; .2.10 safe slice/drop arithmetic; .2.11 input_slice arity; .2.12 selected-slot mode preflight; .2.13 staged pattern validation. Nested authority and diagnostic review retain startup .37.1/.37.2. Prior README findings retain startup .41.2/.41.3/.41.7.
   Verification: `pending` repairs; .1.3 owns the callable-body selector gap, and .1.4 confirms attached-switch projection omission and default replacement. Earlier documentation and helper-arity owners remain intact.
   Commit: `pending`
 
@@ -1061,6 +1068,32 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Verification: `pending`
   Commit: `pending`
 
+- ID: `JULIA-STARTUP-READING.2.13`
+  Status: `pending`
+  Goal: Align staged registry and cache identity validation with the complete neutral patterns.
+  Dependencies: Startup .3/.4/.5; .1.21 diagnostic intake.
+  Evidence: StagedAstEnrichment619-626 uses dollar-anchored occursin, admitting trailing LF in parser/top/digest fields and rejecting neutral-valid digit-led components. Registry construction omits pattern checks for nondefault allowed tops. Six malformed snapshots freeze and dispatch; four malformed cache fields hash successfully. Exact36 Julia/14 neutral assertions live in docs/knowledge/julia-staged-registry-pattern-boundaries.md.
+  Children: .2.13.1 pattern/all-top repair; .2.13.2 supported-boundary recurrence.
+  Acceptance: Reject complete malformed identities and every invalid allowed top before callback execution while preserving neutral-valid digit components, valid selected defaults, deterministic identity/cache behavior and frozen caller authority. Do not conflate this private host boundary with MCP .2.4 or progressive .2.5.
+  Verification: `pending` repair; no new authored or generated/emitted malformed reproduction claimed.
+  Commit: `pending`
+
+- ID: `JULIA-STARTUP-READING.2.13.1`
+  Status: `pending`
+  Goal: Use complete neutral-equivalent staged patterns and validate all allowed tops.
+  Dependencies: Startup prerequisites and .1.21 committed.
+  Acceptance: Add independent RED/GREEN trailing LF/CRLF, embedded newline, digit-led component, invalid nondefault top and valid identity/digest controls. Validate snapshot, direct resolution, options, job and cache boundaries at their owning diagnostics before callback execution. Preserve exact existing fixture digests and lookup ordering; no trimming or silent normalization of malformed fields.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-STARTUP-READING.2.13.2`
+  Status: `pending`
+  Goal: Recur staged validation through supported host seed and runtime carriers.
+  Dependencies: .2.13.1 and startup prerequisites.
+  Acceptance: Prove private registry/cache/current-depth and fresh native/reconstructed/generated-plan/emitted seed rejection before callback entry, with exact neutral-valid identity controls. Census corresponding backend validators without assuming parity, route confirmed defects to owners, update public limitations and run designated canonical admission/public proof.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `JULIA-STARTUP-READING.3`
   Status: `pending`
   Goal: Independently close Julia reading and route Lua startup reading.
@@ -1095,7 +1128,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.21` | `pending` | Read StagedAstEnrichment489-1988 after clean .1.20; reconcile bounded authority proof and preserve all repairs. |
+| 1 | `JULIA-STARTUP-READING.1.22` | `pending` | Read staged enrichment1989-2809, declarations1-336 and UnicodeCaseMapping1-343 after clean .1.21; reconcile focused proof and preserve repairs. |
 
 ## Decisions
 
@@ -1118,6 +1151,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Source repairs retain startup prerequisites; those dependencies do not block source reading.
 
 ## Verification Log
+
+- `2026-09-11` .1.21: Julia .1.21 reads StagedAstEnrichment489-1988: 21/52 groups, 29,925 fragments /1,087,600 bytes and twenty-seven complete files. Existing staged491, diagnostic Julia36/neutral14 and neutral123/public129 checks pass. Registry/cache patterns admit trailing LF, reject valid digit-led parser components and omit nondefault top validation; .2.13 owns repair. No source or prior repair changes; history and ADR0115 controls remain. Julia .1.22 is next; no full component/canonical gate or dependency build.
 
 - `2026-09-11` .1.20: Julia .1.20 completes RecognitionTransaction, SemanticObservation and SourceLocation and reads StagedAstEnrichment1-488: 20/52 groups, 28,425 fragments /1,031,542 bytes and twenty-seven complete files. Existing recognition207/typed127/observation66/routes51/staged491 assertions pass (942 plus helper-selection1); neutral typed231, semantic6/20/128 and staged123/public129 pass. Two isolated-harness omissions are corrected by the saved complete dependency-order recipe. No new defect is established; all prior repairs, source, history and ADR0115 controls remain. Julia .1.21 is next; no full component/canonical gate or dependency build.
 - `2026-09-11` .1.19: Julia .1.19 completes Interpreter and Matching and reads RecognitionTransaction1-821: 19/52 groups, 26,925 fragments /983,846 bytes and twenty-four complete files. Existing matching60/diagnostics7/slots121/recognition207/gap319 assertions pass (714 plus selection1); low-level selected-slot mode diagnostic28 isolates miss-before-validation. New .2.12 owns mode preflight; startup .38 retains transaction misuse census despite the positive Julia invalidation guard. Neutral recognition138/250/58 and gap63/public34 pass. All prior repairs, source, history and ADR0115 controls remain. Julia .1.20 is next; no full component/canonical gate or dependency build.

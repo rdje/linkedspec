@@ -95,3 +95,13 @@ state and validates placeholder callbacks without invoking the factory; each sta
 requires exact factory keys and creates fresh execution state. The actual resolution/
 cache/preflight/stitching suffix remains unread. Focused replay and current limits:
 [[julia-source-value-authority-reading]]. No registry policy or runtime behavior changes.
+
+## 2026-09-11 — resolution and plan-prefix reading
+
+Julia .1.21 reads StagedAstEnrichment489-1988: copied plain data, frozen logical
+registry/hash, exact callback binding, pure priority resolution, narrowing authority,
+selected-top job identity, plan-only cache, typed ordering and stitch-target prefix.
+The earlier491 assertions pass but omit confirmed pattern/all-top failures now
+owned by Julia .2.13. Exact36 Julia/14 neutral controls and source conclusions:
+[[julia-staged-registry-pattern-boundaries]]. Settlement/scheduler suffix remains
+unread; no prior repair or public admission is closed by this reading.

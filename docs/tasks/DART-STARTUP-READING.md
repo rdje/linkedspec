@@ -1566,7 +1566,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.21` | `pending` | Read StagedAstEnrichment489-1988 after clean .1.20; reconcile bounded authority proof and preserve all repairs. |
+| 1 | `JULIA-STARTUP-READING.1.22` | `pending` | Read staged enrichment1989-2809, declarations1-336 and UnicodeCaseMapping1-343 after clean .1.21; reconcile focused proof and preserve repairs. |
 
 ## Decisions
 

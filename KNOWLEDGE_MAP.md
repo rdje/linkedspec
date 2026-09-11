@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1068** facts · **8646** question keys.
+> **1069** facts · **8650** question keys.
 
 ## Questions → fact
 
@@ -1495,6 +1495,9 @@
 - "does Julia source-only semantic_index invoke the parser" -> [julia-semantic-introspection-authority-map](docs/knowledge/julia-semantic-introspection-authority-map.md) · 2026-07-23 · reverify: `bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia,Test; include(\"julia/test/semantic_index_source_foundation_test.jl\"); include(\"julia/test/semantic_index_compilation_foundation_test.jl\"); include(\"julia/test/semantic_index_static_graph_test.jl\"); include(\"julia/test/semantic_index_static_remaining_test.jl\"); include(\"julia/test/semantic_index_call_core_test.jl\"); include(\"julia/test/semantic_index_call_staged_test.jl\")'; rg -n 'semantic_index|_semantic_call_add_staged_artifacts|_semantic_call_validate_staged_authority|_semantic_call_add_generated_plan|semantic_query|SemanticQuery|regex_slot_selected|diagnostic_output_sink' julia/src`
 - "does Julia staged AST enrichment preserve generated source v2" -> [julia-staged-ast-enrichment-carriers-admission](docs/knowledge/julia-staged-ast-enrichment-carriers-admission.md) · 2026-08-27
 - "does Julia staged AST enrichment run after the parent parse" -> [julia-staged-ast-enrichment-carriers-admission](docs/knowledge/julia-staged-ast-enrichment-carriers-admission.md) · 2026-08-27
+- "does Julia staged parser identity accept digit-led path components" -> [julia-staged-registry-pattern-boundaries](docs/knowledge/julia-staged-registry-pattern-boundaries.md) · 2026-09-11 · reverify: `Run the exact managed recipes below; source coverage is independently reconstructed by julia-startup-reading-coverage.`
+- "does Julia staged registry reject trailing newlines in identities and digests" -> [julia-staged-registry-pattern-boundaries](docs/knowledge/julia-staged-registry-pattern-boundaries.md) · 2026-09-11 · reverify: `Run the exact managed recipes below; source coverage is independently reconstructed by julia-startup-reading-coverage.`
+- "does Julia staged registry validate every allowed top rule" -> [julia-staged-registry-pattern-boundaries](docs/knowledge/julia-staged-registry-pattern-boundaries.md) · 2026-09-11 · reverify: `Run the exact managed recipes below; source coverage is independently reconstructed by julia-startup-reading-coverage.`
 - "does Julia statement set_key mutate named hashes" -> [julia-runtime-hash-helpers](docs/knowledge/julia-runtime-hash-helpers.md) · 2026-07-13 · reverify: `bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()' && bash tools/run_julia_project_data.sh --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --case terse_2_3_4_deep_pure_helper_composition`
 - "does Julia static projection expose query trace or runtime observations" -> [julia-semantic-static-projection-plan](docs/knowledge/julia-semantic-static-projection-plan.md) · 2026-07-22 · reverify: `bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py && bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia,Test; include(\"julia/test/semantic_index_source_foundation_test.jl\"); include(\"julia/test/semantic_index_compilation_foundation_test.jl\"); include(\"julia/test/semantic_index_static_graph_test.jl\"); include(\"julia/test/semantic_index_static_remaining_test.jl\")'`
 - "does Julia still accept an explicit global parse mode" -> [julia-rule-local-cursor-execution](docs/knowledge/julia-rule-local-cursor-execution.md) · 2026-07-18 · reverify: `bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using Test, JSON3, LinkedSpecJulia; const REPO_ROOT=pwd(); include(\"julia/test/rule_local_cursor_execution_test.jl\")' && bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py`
@@ -7759,6 +7762,7 @@
 - "which task owns Julia recognition effect integration" -> [julia-recognition-effect-integration-gap](docs/knowledge/julia-recognition-effect-integration-gap.md) · 2026-09-11
 - "which task owns Julia selected-slot mode preflight" -> [julia-selected-slot-mode-validation-gap](docs/knowledge/julia-selected-slot-mode-validation-gap.md) · 2026-09-11 · reverify: `Run the managed direct-matcher assertion fence below; it pins pre-repair behavior.`
 - "which task owns Julia semantic callback exception identity loss" -> [julia-semantic-observer-action-failure-wrapping](docs/knowledge/julia-semantic-observer-action-failure-wrapping.md) · 2026-09-11 · reverify: `Run the managed JULIA_OBSERVER_ACTION14 fence below; assertions describe the current pre-repair boundary.`
+- "which task owns Julia staged registry pattern repairs" -> [julia-staged-registry-pattern-boundaries](docs/knowledge/julia-staged-registry-pattern-boundaries.md) · 2026-09-11 · reverify: `Run the exact managed recipes below; source coverage is independently reconstructed by julia-startup-reading-coverage.`
 - "which task owns Lua callable codeblock variables" -> [lua-runtime-block-control-callback-split](docs/knowledge/lua-runtime-block-control-callback-split.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && bash tools/run_python_project_data.sh tools/check_punctuation_light_zero_arg_contract.py && perl tools/check_capability_conformance.pl && rg -n 'LUA-BACKEND-PARITY.4.3.6.6|callback: codeblock|FUTURE-PARITY-BACKLOG.11.8' docs/tasks/LUA-BACKEND-PARITY.md docs/tasks/FUTURE-PARITY-BACKLOG.md`
 - "which task owns MCP final EOF payload size enforcement" -> [rust-mcp-final-eof-byte-limit-gap](docs/knowledge/rust-mcp-final-eof-byte-limit-gap.md) · 2026-09-07 · reverify: `Recreate the twelve valid padded discover_request cases below from the frozen bundle and execute public Rust McpServer::serve_stdio and Perl MCPServer::serve_stdio with caller-owned memory streams and repository-local managed tools.`
 - "which task owns Perl comment and newline statement loss" -> [perl-comment-newline-lowering-drift](docs/knowledge/perl-comment-newline-lowering-drift.md) · 2026-09-06 · reverify: `Run the two repository-managed commands under Reverify; inspect result and context_error, not merely wrapper_returned or process exit.`
@@ -12009,6 +12013,15 @@ _Julia preserves neutral staged function descriptor shape through runtime_
 - **evidence:** `JULIA-BACKEND-PARITY.5.3 adds a 20-assertion testset in julia/test/runtests.jl. It builds two functions from neutral spec-returned function_definition nodes, dispatches and stitches their body jobs, compiles the spec, asserts parsed/registry/descriptor shape, and executes the same compiled state. Full Pkg.test() passes with 691 assertions.`
 - **reverify:** `bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()'`
 - **source:** [`docs/knowledge/julia-staged-function-descriptor-shape.md`](docs/knowledge/julia-staged-function-descriptor-shape.md)
+
+### julia-staged-registry-pattern-boundaries
+_Julia staged registry pattern validation diverges from the neutral authority_
+
+- **answers:** does Julia staged registry reject trailing newlines in identities and digests | does Julia staged registry validate every allowed top rule | does Julia staged parser identity accept digit-led path components | which task owns Julia staged registry pattern repairs
+- **date:** 2026-09-11 · **status:** confirmed private boundary defects; JULIA-STARTUP-READING.2.13 repair pending
+- **evidence:** `JULIA-STARTUP-READING.1.21; activation bd95e0fee7556b5e41d7899b7fcb437a2e3f0028; StagedAstEnrichment489-1988 read physically in six untruncated windows.`
+- **reverify:** `Run the exact managed recipes below; source coverage is independently reconstructed by julia-startup-reading-coverage.`
+- **source:** [`docs/knowledge/julia-staged-registry-pattern-boundaries.md`](docs/knowledge/julia-staged-registry-pattern-boundaries.md)
 
 ### julia-starter-corpus-batch
 _Julia starter corpus batch passes the first 40 manifest fixtures unchanged_
