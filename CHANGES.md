@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.35 - complete gap consumer reading and begin logical helper tests
+
+Read1,500 fragments /48,303 bytes, reaching35/52 groups and48 complete files.
+Complete gap319 and logical232 consumers pass551 assertions; neutral gap/logical
+checks pass. Preserve typed truth/independent emission distinctions, all prior
+repairs and exact source/history; synchronize Knowledge, book and clean pointers.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.34 - read contract consumers and preserve callable diagnostic coverage
 
 Read1,500 fragments /55,896 bytes, reaching34/52 groups and47 complete files.

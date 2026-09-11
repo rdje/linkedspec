@@ -61,3 +61,33 @@ hash are false; other values are true. Eager helper semantics remain separate fr
 lazy control selection. The current neutral consumer passes232 assertions;
 neutral governance remains8/0 with26 drift mutations. Exact focused replay is in
 [[julia-runtime-cursor-boundary-helpers]]. No logical contract change is made.
+
+## 2026-09-11 — consumer prefix reading at Julia .1.35
+
+Lines1-196 of `julia/test/logical_helper_contract_test.jl` are physically read:
+196 fragments /7,009 baseline-identical bytes, raw SHA-256
+cc7748291c7221d01794b9eeaba2268abce51c75d654f971ee22034ec6a6d19c.
+Source after196 remains unread. This prefix loads the neutral authority, reconstructs
+normalized SpecFile JSON from emitted payloads, maps typed truth values, checks exact
+native/generated arity diagnostics, routes primary execution and prepares an offline
+emitted host. Its codeblock truth row explicitly constructs an ActionBlock with a
+failing body; it does not itself construct a callable literal. This is the historical
+representation qualification already stated above, not a newly found runtime defect.
+
+The complete consumer freshly passes232 assertions as focused compatibility proof;
+execution of its suffix grants no physical reading credit. Together with the complete
+gap consumer319, this slice passes551 assertions. Neutral logical governance remains
+17 truth rows /10 helper rows /3 effect rows,8 complete /0 pending,19 public documents,
+14 stale-current denials and26 mutations. No full backend/canonical gate or dependency
+build runs. All prior repair owners and source contracts remain unchanged.
+
+```bash
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no - <<'JULIA_GROUP35_EXISTING'
+using LinkedSpecJulia,JSON3,Test
+const REPO_ROOT=pwd()
+include("julia/test/inter_match_gap_capture_contract_test.jl")
+include("julia/test/logical_helper_contract_test.jl")
+JULIA_GROUP35_EXISTING
+bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py
+bash tools/run_python_project_data.sh tools/check_logical_helper_contract.py
+```

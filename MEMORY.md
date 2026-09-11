@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `148606661bbeb4c505196cbcfab870b5ac81872a` — clean thirty-third Julia reading handoff.
-- latest_completed_leaf: `JULIA-STARTUP-READING.1.34 - read contract consumers and preserve callable diagnostic coverage`; exact thirty-fourth group and focused proof complete; prior repairs remain pending.
-- active_work_unit: none; `JULIA-STARTUP-READING.1.35` is next.
-- next_action: Activate Julia .1.35 from clean HEAD; read gap-test320-1623 and logical-helper test1-196, reconcile proof, then commit.
+- activation_commit: `53641fcac40f63cf5cecbd884ce769d70525ea97` — clean thirty-fourth Julia reading handoff.
+- latest_completed_leaf: `JULIA-STARTUP-READING.1.35 - complete gap consumer reading and begin logical helper tests`; exact group and focused proof complete; prior repairs remain pending.
+- active_work_unit: none; `JULIA-STARTUP-READING.1.36` is next.
+- next_action: Activate Julia .1.36 from clean HEAD; read logical197-387, map-leaves1-905, MCP binding1-100 and admission1-304; verify and commit.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
-- in_flight_uncommitted: none; no running jobs. Julia .2.1-.2.25, shared budget .82 and all prior repairs remain pending.
+- in_flight_uncommitted: none; no running jobs. Julia .2.1-.2.25, shared budget .82, book .41.9 and all prior repairs remain pending.
 - blockers: No current reading blocker. Startup prerequisites and all repairs remain; ADR0115 is finite capacity with a containment-.12-only exception.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -57,4 +57,4 @@
   Segment 4979-6e4108166552 preserves 213 lines /12545 bytes; all other controls remain unchanged. Proportionate governance: ADR0115.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-11 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart read; Julia 34/52 groups, 49425/75984 lines, 1721486/2693170 bytes, forty-seven complete files. Lua/supporting code, formal book .4 and policy .5 remain.
+- latest_bootstrap_read: 2026-09-11 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart read; Julia 35/52 groups, 50925/75984 lines, 1769789/2693170 bytes, forty-eight complete files. Lua/supporting code, formal book .4 and policy .5 remain.

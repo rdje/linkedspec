@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Complete Julia gap evidence and logical truth representation
+
+Gap source distinguishes detached metadata, native lifecycle/rollback, normalized
+carriers, fresh emitted host and exact nine-role admission. Logical truth uses
+an explicit ActionBlock fixture; callable literals remain a separate representation.
+The full two-consumer proof passes551 assertions; no defect is closed by reading.
+
 ## 2026-09-11 — Julia consumer labels require concrete exercised values
 
 The diagnostic codeblock row actually constructs an eager block; actual literal

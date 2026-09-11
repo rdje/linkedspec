@@ -179,3 +179,29 @@ helper, and typed-source outward surfaces do not gain authority during the priva
 - Existing Julia storage boundary: [[julia-project-data-ssd-storage]]
 - Decision: ADR `0045`
 - Task owner: `docs/tasks/INTER-MATCH-GAP-CAPTURE.md`
+
+## 2026-09-11 — complete consumer source reading
+
+Julia reading .1.35 completes `julia/test/inter_match_gap_capture_contract_test.jl`
+with lines320-1623:1,304 fragments /41,294 baseline-identical bytes, raw SHA-256
+1d72252b917043300ea0a1c27eddcae4d04151dc2204034d58fd2f7fbf1db850.
+Together with logical-helper1-196, the group reads1,500 fragments /48,303 bytes;
+ordered range SHA607ea66a1461b2b143e4b7715c52a12da5ed7ad85949c26f61b0c34e37e7f080.
+Cumulative credit is35/52 groups,50,925 lines /1,769,789 bytes and48 complete files.
+
+The completed source separately asserts logical loaded/primary identities and ten
+static diagnostic cases; native prefix/interstitial/tail and empty scalar spans;
+child-extended cursor commitment, nested state, rollback, terminal modes, failed
+minimums, direct-entry absence, arity and unavailable/regressing context. Detached
+descriptor mutation cannot change compiled metadata. Normalized reconstruction and
+generated direct/traced routes preserve values and generated diagnostic identity.
+
+The emitted matrix uses ten value and two failure modules in a managed fresh offline
+host, compares direct/traced results and plans, inspects traces, and verifies cleanup.
+The separate nine-role ledger additionally checks declared order and exact-once
+execution, with actual module loading and an exact primary CLI result. The existing
+consumer passes105/33/46/105/30 assertions (319). Neutral governance is currently
+9 complete /0 pending with63 semantic mutations and public8/15/10/34; prior rollout
+counts above are dated implementation stages. Finite covered cases do not close the
+known recognition-effect .2.3 or null-selector .2.23 repairs, or any other owner.
+The exact shared focused command is appended to [[julia-logical-helper-execution]].
