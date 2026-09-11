@@ -89,3 +89,18 @@ across twelve direct/helper/receiver/array fixtures. Fresh neutral regeneration
 byte-compares all modules and preserves1563/1581 mappings,158/464 ranges and12
 fixtures. No remaining-table/evaluator reading credit or new other-backend
 runtime proof is claimed. Replay: [[julia-staged-diagnostic-byte-boundaries]].
+
+## 2026-09-11 — Julia lower completion and upper prefix
+
+Julia .1.23 reads UnicodeCaseMapping344-1843, completing lower mappings through
+U+1E921 and opening upper mappings through U+03B7. Fullwidth/supplementary
+ranges and retained identity rows remain pinned. Upper sharp-s expands to SS;
+U+0149 expands to 02BC/004E, U+01F0 to 004A/030C, and Greek expansions retain
+ordered combining scalars. Directional casing is neither an inverse nor a
+normalization operation. Remaining upper/property/evaluator source is unread.
+
+Fresh managed Unicode regeneration byte-compares the neutral artifact and all
+five modules, preserving1563/1581 mappings,158/464 ranges and12 fixtures. The
+39 Julia casing assertions remain .1.22/194265ff4 evidence against unchanged
+source; no fresh runtime, other-backend execution or new defect is claimed.
+Reverify: bash tools/run_python_project_data.sh tools/check_unicode_case_contract.py.

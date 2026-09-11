@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 22/52 owned groups; its twenty-third reading child is next, with approved ADR0115 capacity in place.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 23/52 owned groups; its twenty-fourth reading child is next, with approved ADR0115 capacity in place.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,20 +297,21 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 22/52 groups complete:** staged enrichment and parse-job
-declarations are fully read, together with the first 343 lines of generated
-Unicode casing data. Cumulative coverage is 31,425 lines /1,137,243 bytes and
-twenty-nine complete files. Exact scopes remain in
-`docs/tasks/JULIA-STARTUP-READING.md`. Existing casing, typed-source and staged
-suites pass 657 assertions; 51 resource assertions establish the boundary below.
-Neutral regeneration, typed-source and staged/public checks pass. Earlier repair
-tasks remain open, including registry validation.
+**Julia reading is 23/52 groups complete:** the generated Unicode lower-case
+table is fully read, and upper-case mappings are read through U+03B7. Cumulative
+coverage is 32,925 lines /1,178,390 bytes and twenty-nine complete files. Exact
+scopes remain in `docs/tasks/JULIA-STARTUP-READING.md`. Fresh Unicode regeneration
+matches the neutral artifact and all backend modules, with 1,563 lower mappings,
+1,581 upper mappings, 158/464 property ranges and twelve fixtures. The previous
+checkpoint's 39 Julia casing assertions remain evidence against unchanged source.
 
-Staged enrichment copies the parent AST, reserves each depth's targets before
-callbacks, detaches child results and queues only newly returned markers. Child
-contexts expire after callbacks. Parse-job declaration materializes text from
-live typed source ranges and produces inert logical markers. Unicode mappings
-remain pinned to version 17.0.0; the table/evaluator suffix is still unread.
+Full casing can expand one character into several: upper-case sharp-s becomes
+`SS`, and U+01F0 becomes `J` followed by a combining caron. Lower and upper
+mappings are directional, not inverse operations or text normalization. The
+remaining upper table, contextual properties and evaluator await reading. Source
+evidence: `docs/knowledge/dart-julia-unicode-17-case-mapping.md`. No new defect
+or repair closure follows from this table-reading slice; all limitations below
+retain their task owners.
 
 **Known Julia limitation — staged diagnostic byte limits:** a one-byte allowance
 can retain a 187-byte truncation record; a 64-byte allowance can retain 375 bytes
@@ -611,8 +612,8 @@ SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` sti
 own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
-Julia has read twenty-two of 52 exact groups across 95 baseline entries;
-its twenty-third physical reading child is next, followed by the remaining Lua/supporting
+Julia has read twenty-three of 52 exact groups across 95 baseline entries;
+its twenty-fourth physical reading child is next, followed by the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,

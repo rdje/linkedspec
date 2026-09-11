@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia Unicode lower completion and upper prefix
+
+Lower data reaches U+1E921; upper prefix includes sharp-s, modifier-apostrophe
+and combining-sequence expansions. Directional casing maps are not inverses or
+normalization. Pinned regeneration passes; remaining upper/property/evaluator
+source is unread, and previous casing39 remains bounded unchanged-source proof.
+
 ## 2026-09-11 — Julia staged diagnostic bytes and call admission
 
 Diagnostic fallback can exceed its allowance and recur after exhaustion; measured

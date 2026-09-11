@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.23 - read complete Unicode lower mappings and upper prefix
+
+Read UnicodeCaseMapping344-1843: exact1,500 fragments /41,147 bytes. Lower
+mappings are complete; upper mappings reach U+03B7. Fresh Unicode regeneration
+preserves all modules/counts/fixtures. Retain prior casing39 evidence, every
+repair owner, source identity, history and synchronized book/resume pointers.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.22 - complete staged reading and own diagnostic byte retention
 
 Complete staged authority/declaration reading and open Unicode lower mappings:

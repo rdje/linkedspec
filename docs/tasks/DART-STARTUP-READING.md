@@ -1567,7 +1567,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.23` | `pending` | Read UnicodeCaseMapping344-1843 after clean .1.22; reconcile generated data and preserve every pending repair. |
+| 1 | `JULIA-STARTUP-READING.1.24` | `pending` | Read UnicodeCaseMapping1844-3343 after clean .1.23; reconcile generated data and preserve every pending repair. |
 
 ## Decisions
 
