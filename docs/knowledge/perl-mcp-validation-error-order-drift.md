@@ -7,9 +7,10 @@ answers:
   - "do Perl MCP decoded and stdio dispatch use the documented validation order"
   - "which task owns competing MCP validation error precedence"
   - "does Rust MCP also check method and version before complete metadata"
+  - "does Julia MCP preserve the documented competing metadata error order"
 date: 2026-09-07
 status: confirmed-open
-tags: [perl, rust, mcp, validation, metadata, protocol, SESSION-STARTUP-READING]
+tags: [perl, rust, julia, mcp, validation, metadata, protocol, SESSION-STARTUP-READING]
 evidence: "SESSION-STARTUP-READING.3.2.38: six public decoded controls, repeated across decoded and in-memory stdio routes; MCPServer.pm 186–230 and ADR 0055 section 6. Existing three MCP suites pass 31 top-level tests."
 reverify: "Run the managed public decoded/stdio probe below and compare the result table with ADR 0055 section 6."
 ---
@@ -82,4 +83,34 @@ my $wire=LinkedSpec::MCPServer->new;my $status=$wire->serve_stdio(input=>$in,out
 my @wire=map {$json->decode($_)} split /\n/,$output;die 'response count drift' unless @wire==@cases;
 for my $i (0..$#cases){die 'decoded/wire drift' unless $json->encode($direct[$i]) eq $json->encode($wire[$i]);print $json->encode({case=>$cases[$i][0],decoded_code=>$direct[$i]{error}{code},stdio_code=>$wire[$i]{error}{code}}),"\n"}
 PERL
+```
+
+## September 11 Julia executable reconciliation
+
+`JULIA-STARTUP-READING.1.10` reads the complete decoded server. Six equivalent public
+controls produce exactly the same error-code sequence as the table above:
+`-32602, -32601, -32022, -32602, -32601, -32022`. All six complete responses agree
+between decoded dispatch and caller-owned in-memory stdio (12 assertions). The
+method/version checks precede complete schema validation at `julia/src/mcp/McpServer.jl:281-300`.
+This is fresh Julia evidence for the existing `.36.1` census, not a repair or an
+inferred other-runtime result. Pattern matching has a separate Julia `.2.4` owner.
+
+```bash
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no - <<'JULIA_MCP_ORDER'
+using LinkedSpecJulia,JSON3,Test
+meta(version;caps=true)=caps ? Dict{String,Any}("io.modelcontextprotocol/protocolVersion"=>version,"io.modelcontextprotocol/clientCapabilities"=>Dict{String,Any}()) : Dict{String,Any}("io.modelcontextprotocol/protocolVersion"=>version)
+cases=[("known_missing","tools/list",Dict{String,Any}(),-32602), ("unknown_missing","resources/list",Dict{String,Any}(),-32601), ("old_missing_caps","tools/list",Dict("_meta"=>meta("2025-11-25";caps=false)),-32022), ("current_missing_caps","tools/list",Dict("_meta"=>meta("2026-07-28";caps=false)),-32602), ("unknown_old","resources/list",Dict("_meta"=>meta("2025-11-25")),-32601), ("known_old","tools/list",Dict("_meta"=>meta("2025-11-25")),-32022)]
+@testset "Julia mixed-error precedence evidence" begin
+ server=McpServer();auth=UInt8[0x61]
+ for (id,(name,method,params,expected)) in enumerate(cases)
+  request=Dict{String,Any}("id"=>id,"jsonrpc"=>"2.0","method"=>method,"params"=>params)
+  response=dispatch_mcp(server,request,auth)
+  @test response["error"]["code"]==expected
+  out=IOBuffer();wire=McpServer();serve_mcp_stdio!(wire,IOBuffer(JSON3.write(request)*"\n"),out,auth)
+  @test JSON3.read(String(take!(out)),Dict{String,Any})==response
+  println(JSON3.write(Dict("case"=>name,"error"=>response["error"]["code"])))
+ end
+ shutdown_mcp!(server)
+end
+JULIA_MCP_ORDER
 ```

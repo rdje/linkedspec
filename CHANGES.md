@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.10 - read MCP runtime and own pattern validation repair
+
+Read MCP runtime/server and wire prefix:1,500 fragments /65,039 bytes.
+Existing MCP368 plus native32/neutral8 diagnostics confirm pattern and precedence
+boundaries. Own Julia .2.4 repair; reuse startup .36; synchronize Knowledge/book
+and exact current frontiers. All source and prior evidence remain; next .1.11.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.9 - read generated MCP contract data
 
 Read 630 generated-data fragments /65,520 baseline-identical bytes.

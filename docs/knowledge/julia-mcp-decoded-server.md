@@ -90,3 +90,17 @@ assert len(raw)==82882 and len(bundle['canonical_frames'])==35 and len(bundle['s
 print('PASS current generated MCP bundle identity and shape:',len(raw),expected)
 PY_MCP_DECODE9
 ```
+
+## September 11 executable consumer reading
+
+Julia .1.10 fully reads `julia/src/mcp/McpContractRuntime.jl` and
+`julia/src/mcp/McpServer.jl`. Runtime loading digest-checks the embedded bundle;
+JSON cloning rejects cycles, nonfinite numbers and duplicate normalized keys.
+Host registration copies authorization into a digest and binds random opaque
+handles to native immutable indexes, monotonic expiry and lower-only limits.
+Preparation, active-request cancellation and shutdown preserve separate lifecycles.
+Existing binding53/dispatch145/stdio170 pass (368 assertions). The check-only
+generator remains120030 bytes and neutral transport35/10/10/76 passes.
+Targeted pattern20 and precedence12 probes identify uncovered boundaries; exact
+replay and repair ownership live in `docs/knowledge/julia-mcp-pattern-terminal-newline-gap.md`
+and `docs/knowledge/perl-mcp-validation-error-order-drift.md`. Neither defect is closed.

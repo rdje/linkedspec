@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `JULIA-STARTUP-READING`
-- Status: `active` / reading 6/52; selector and switch repairs pending
+- Status: `active` / reading 10/52; selector, switch, recognition and MCP pattern repairs pending
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.5`
 - Created: `2026-09-11`
 - Last updated: `2026-09-11`
@@ -43,7 +43,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Inventory SHA-256: `ca3cff4fe4c0e162448d6dbac82d89898673023951afaeced17d5b9a838ccd10`.
 - Ordered range SHA-256: `fde325f80ae7b56c5890d149fbc965c09890890e963a1fa9aab08e8c9d962337`.
 - Line coordinates are one-based, inclusive LF physical lines. Every child pins its range digest.
-- Current physical reading: 6/52 children, 8,571/75,984 lines and 296,130/2,693,170 bytes; twelve complete files.
+- Current physical reading: 10/52 children, 13,425/75,984 lines and 549,293/2,693,170 bytes; eighteen complete files.
 - Exact replay and capacity assessment: `docs/knowledge/julia-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -59,7 +59,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Dependencies: Startup .3.5.0 decomposition committed; each child starts from a clean prior handoff.
   Children: `.1.1-.1.52`, with exact scopes below.
   Acceptance: Every child records physical coverage, comprehension, Knowledge reconciliation, findings and focused proof before its commit. Retain all current-delta and interrupted-range evidence.
-  Verification: Julia .1.9 reads McpContract lines 373-1002: 9/52 groups, 11,925 fragments /484,254 bytes and fifteen complete files. Check-only generation confirms 120,030 source bytes; independent decoding verifies the 82,882-byte bundle digest. Existing binding tests pass 53 assertions and neutral transport passes 35 frames /10 raw inputs /10 lifecycle cases /76 rejected mutations. Generated schema, frame and policy data reconcile with their neutral authority. All source, prior evidence, repairs and ADR0115 controls remain. Julia .1.10 is next; no full component/canonical gate or dependency build.
+  Verification: Julia .1.10 completes McpContract, McpContractRuntime and McpServer, and reads McpWire through 55: 10/52 groups, 13,425 fragments /549,293 bytes and eighteen complete files. Existing MCP binding53/dispatch145/stdio170 pass (368 assertions); native pattern20 and order12 diagnostics plus neutral pattern8 outcomes isolate the documented boundaries. Pending Julia .2.4.1/.2.4.2 own full-pattern matching; startup .36 retains validation precedence. Generator and neutral transport35/10/10/76 remain green. All source, prior evidence, repairs and ADR0115 controls remain. Julia .1.11 is next; no full component/canonical gate or dependency build.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.1.1`
@@ -216,14 +216,21 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Commit: `JULIA-STARTUP-READING.1.9 - read generated MCP contract data`.
 
 - ID: `JULIA-STARTUP-READING.1.10`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Julia group 10 and reconcile its source evidence.
   Dependencies: `JULIA-STARTUP-READING.1.9` committed; empty brief and clean repository.
   Scope: `julia/src/mcp/McpContract.jl` lines 1003-1159; `julia/src/mcp/McpContractRuntime.jl` lines 1-462; `julia/src/mcp/McpServer.jl` lines 1-826; `julia/src/mcp/McpWire.jl` lines 1-55
   Baseline evidence: 1500 fragments / 65039 bytes; ordered range SHA-256 `7d5bde5484ffd4f8d8785281363543a87af6ec9580aa0797c2f429dbe69edd48`.
+  Activation commit: `9431f6c8aeac4b95933c3683b5fa77bf5054acb0`.
+  Verification tier: `focused`
+  Focused checks: Exact bounded reading and baseline reconstruction; existing MCP binding/dispatch/stdio suites, native/neutral pattern and decoded/wire precedence probes, check-only generator and neutral transport; Knowledge, memory, histories, rendered book, evidence preservation and normal doctrines.
+  Canonical trigger: `none` — ordinary source reading and repair intake; no executable, frozen contract, infrastructure or dependency change.
   Acceptance: Physically read every owned byte, inspect current deltas, reconcile Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit. Do not count truncated output or unread consumer suffixes.
-  Verification: `pending`
-  Commit: `pending`
+  Comprehension: Generated data finishes the neutral payload and source digests. ContractRuntime verifies the embedded bundle, clones JSON with depth/cycle/key guards, validates the frozen schema subset, sorts canonical object keys and emits sanitized cloned responses. Server registration uses random opaque handles, copied auth digests, bounded monotonic lifetime/capacity and lower-only native budgets; dispatch orders envelope/method/version/schema/lookup/native execution and tracks preparation/cancellation/shutdown. Dollar-anchored occursin admits one final LF in handle/digest schema patterns while host handle validation rejects its length. Wire1-55 defines frame constants, tokens and containers; its scanner remains .1.11.
+  Knowledge: New julia-mcp-pattern-terminal-newline-gap card contains exact native/neutral replay; existing perl-mcp-validation-error-order-drift card gains Julia public decoded/stdio evidence. Current MCP runtime understanding and finite suite counts reconcile with decoded-server Knowledge.
+  Findings: Julia .2.4.1/.2.4.2 own complete-pattern repair and public recurrence; startup .36.1 retains the existing shared precedence owner. No repair is closed. Current metadata and secondary roadmap pointers are reconciled with exact reading totals; historical records remain intact.
+  Verification: Four untruncated owned ranges total1500 fragments /65039 baseline-identical bytes, digest7d5bde5484ffd4f8d8785281363543a87af6ec9580aa0797c2f429dbe69edd48. Existing binding53/dispatch145/stdio170 pass (368); native pattern20 and order12 assertions compare complete decoded/stdio responses, and eight neutral outcomes reject every nonempty suffix. Generator remains120030 bytes and neutral transport35/10/10/76 passes. Exact coverage/source/task/history preservation, focused continuity/book and normal doctrines govern landing. No unread-source credit, complete Julia/canonical gate or dependency build.
+  Commit: `JULIA-STARTUP-READING.1.10 - read MCP runtime and own pattern validation repair`.
 
 - ID: `JULIA-STARTUP-READING.1.11`
   Status: `pending`
@@ -650,7 +657,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Goal: Preserve disjoint repair ownership for every confirmed Julia finding.
   Dependencies: Findings from .1; source repair additionally requires startup .3/.4/.5.
   Acceptance: Reuse exact existing startup owners when applicable; otherwise add bounded repair children with source mechanism, reproduction, acceptance and unblock conditions. No finding is closed by reading alone.
-  Children: .2.1 callable-body selector validation; .2.2 attached-switch body/duplicate-default validation; .2.3 recognition-effect integration. Prior README findings retain startup .41.2/.41.3/.41.7.
+  Children: .2.1 callable-body selector validation; .2.2 attached-switch body/duplicate-default validation; .2.3 recognition-effect integration; .2.4 MCP pattern full matching. Prior README findings retain startup .41.2/.41.3/.41.7.
   Verification: `pending` repairs; .1.3 owns the callable-body selector gap, and .1.4 confirms attached-switch projection omission and default replacement. Earlier documentation and helper-arity owners remain intact.
   Commit: `pending`
 
@@ -740,6 +747,32 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Verification: `pending`
   Commit: `pending`
 
+- ID: `JULIA-STARTUP-READING.2.4`
+  Status: `pending`
+  Goal: Make Julia MCP schema pattern matching enforce the exact frozen string boundary.
+  Dependencies: Startup .3/.4/.5; .1.10 intake committed.
+  Evidence: The handle and content-digest schema patterns use occursin with a terminal dollar anchor. A trailing LF passes both patterns, while the neutral validator rejects it. Public decoded and stdio calls with a 43-character handle plus LF return handle_unavailable instead of invalid_params; the separate host handle validator rejects its length. Exact replay is in docs/knowledge/julia-mcp-pattern-terminal-newline-gap.md.
+  Children: .2.4.1 complete-match repair; .2.4.2 public/carrier recurrence.
+  Acceptance: Preserve the normative schema/generator bytes and implement complete pattern matching for both frozen patterns. Reject malformed handles before lookup, preserve valid values and URI-prefix semantics, and keep error precedence ownership separate under startup .36.
+  Verification: `pending` repair; .1.10 has native/public20 and independent-neutral8 diagnostic outcomes.
+  Commit: `pending`
+
+- ID: `JULIA-STARTUP-READING.2.4.1`
+  Status: `pending`
+  Goal: Repair both Julia MCP pattern boundaries with independent negative controls.
+  Dependencies: .2.4; startup reading and policy prerequisites.
+  Acceptance: Add RED/GREEN controls for exact valid strings, terminal LF/CRLF, extra ASCII, non-ASCII and embedded line breaks. Reconcile the neutral full-match authority and source length/alphabet requirements; ensure handles and digest-bearing sourceReference values agree across the runtime validator and applicable host APIs. Do not regenerate or weaken expected schemas to accept the defect.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-STARTUP-READING.2.4.2`
+  Status: `pending`
+  Goal: Prove repaired pattern handling through decoded and stdio MCP and close public claims.
+  Dependencies: .2.4.1; startup reading and policy prerequisites.
+  Acceptance: Use public requests with valid, unknown and malformed handles; prove invalid_params precedes lookup/native dispatch for malformed input, exact decoded/wire response identity, valid registration/revocation behavior and digest-schema rejection. Run direct-dependent binding/dispatch/stdio, neutral/admission and required canonical boundary proof; update Knowledge/book without closing startup .36 or unrelated defects.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `JULIA-STARTUP-READING.3`
   Status: `pending`
   Goal: Independently close Julia reading and route Lua startup reading.
@@ -774,7 +807,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.10` | `pending` | Complete McpContract, read McpContractRuntime and McpServer, and begin McpWire after clean .1.9. |
+| 1 | `JULIA-STARTUP-READING.1.11` | `pending` | Finish McpWire56-672, read StagedParserRegistry1-652 and UserFunctionDefinitionParser1-231 after clean .1.10. |
 
 ## Decisions
 
@@ -798,6 +831,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Verification Log
 
+- `2026-09-11` .1.10: Julia .1.10 completes McpContract, McpContractRuntime and McpServer, and reads McpWire through 55: 10/52 groups, 13,425 fragments /549,293 bytes and eighteen complete files. Existing MCP binding53/dispatch145/stdio170 pass (368 assertions); native pattern20 and order12 diagnostics plus neutral pattern8 outcomes isolate the documented boundaries. Pending Julia .2.4.1/.2.4.2 own full-pattern matching; startup .36 retains validation precedence. Generator and neutral transport35/10/10/76 remain green. All source, prior evidence, repairs and ADR0115 controls remain. Julia .1.11 is next; no full component/canonical gate or dependency build.
 - `2026-09-11` .1.9: Julia .1.9 reads McpContract lines 373-1002: 9/52 groups, 11,925 fragments /484,254 bytes and fifteen complete files. Check-only generation confirms 120,030 source bytes; independent decoding verifies the 82,882-byte bundle digest. Existing binding tests pass 53 assertions and neutral transport passes 35 frames /10 raw inputs /10 lifecycle cases /76 rejected mutations. Generated schema, frame and policy data reconcile with their neutral authority. All source, prior evidence, repairs and ADR0115 controls remain. Julia .1.10 is next; no full component/canonical gate or dependency build.
 - `2026-09-11` .1.8: Julia .1.8 completes CorpusManifest and SpecLoader, and reads McpContract through 372: 8/52 groups, 11,295 fragments /418,734 bytes and fifteen complete files. Existing controlled-corpus58, loader82, MCP-binding53 and cursor-option53 assertions pass (246 total); the generator verifies120,030 source bytes and neutral resolution remains14/9/4. Corpus selection/loading, historical counts and removed-option teaching reconcile with current source. All source, prior evidence, repairs and ADR0115 controls remain. Julia .1.9 is next; no complete component/canonical gate or dependency build.
 - `2026-09-11` .1.7: Julia .1.7 completes CompiledSpec and reads CorpusManifest through 161: 7/52 groups, 10,071 fragments /353,238 bytes and thirteen complete files. Existing recognition207, observation30, mutation496, write406 and manifest20 assertions pass (1,159 total); native/causal25 and reference11 diagnostic assertions isolate forbidden recognition writes and omitted structural observation edges. Pending .2.3.1-.2.3.3 own graph reconciliation, enforcement and carrier proof; reference E-only omission stays startup .27-owned. All sources, prior evidence, repairs and ADR0115 controls remain. Julia .1.8 is next; no complete component/canonical gate or dependency build.
@@ -814,6 +848,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Commit Log
 
+- `2026-09-11` .1.10: `JULIA-STARTUP-READING.1.10 - read MCP runtime and own pattern validation repair`.
+- Reconciled .1.7-.1.9 commit references: `3a4073ab3d458e51ce3596daf8198441e765abdd`, `1fa6cab75558de3339e17ecd799b51f0ced5b468`, `9431f6c8aeac4b95933c3683b5fa77bf5054acb0`; exact subjects/evidence remain in their done nodes and Git.
 - `2026-09-11` .1.6: `JULIA-STARTUP-READING.1.6 - read function registry CLI and compiled state`.
 - `2026-09-11` .1.5: `JULIA-STARTUP-READING.1.5 - read parser and callable normalization`.
 - `2026-09-11` .1.4: `JULIA-STARTUP-READING.1.4 - read contracts and own attached switch omission`.
@@ -827,6 +863,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Changelog
 
+- `2026-09-11` .1.10: Completes MCP runtime/server reading, owns pattern repair and reuses precedence repair; reconciles current metadata/frontiers while preserving earlier node evidence.
 - `2026-09-11` .1.6: .1.6 completes registry/CLI reading and the first compiled-state range, reconciles current facts and keeps all repairs open.
 - `2026-09-11` .1.5: .1.5 completes parser/normalizer reading and qualifies registry/traversal facts without changing source or closing defects.
 - `2026-09-11` .1.4: .1.4 completes the fourth exact reading group, reconciles current pointers and owns the switch finding without source repair.

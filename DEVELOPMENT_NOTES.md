@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia MCP validation boundaries
+
+Dollar-anchored occursin admits a final LF in handle/digest schema strings; host
+handle length rejects it, but public lookup reports unavailable. Neutral fullmatch
+rejects the malformed input. Decoded/stdio probes agree; separate metadata-order
+controls reuse startup .36. Julia .2.4 owns repair after startup prerequisites.
+
 ## 2026-09-11 — Julia generated MCP data authority
 
 Base64 literals embed canonical frame/schema data and neutral transport policy.

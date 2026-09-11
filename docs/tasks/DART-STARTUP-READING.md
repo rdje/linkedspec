@@ -1566,7 +1566,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.10` | `pending` | Complete McpContract, read McpContractRuntime and McpServer, and begin McpWire after clean .1.9. |
+| 1 | `JULIA-STARTUP-READING.1.11` | `pending` | Finish McpWire56-672, read StagedParserRegistry1-652 and UserFunctionDefinitionParser1-231 after clean .1.10. |
 
 ## Decisions
 
