@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `JULIA-STARTUP-READING`
-- Status: `active` / reading 36/52; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity, matching, staged, diagnostic, static, entry and selector-projection and member-suffix and literal-boundary and projection-metadata and selector/identifier repairs and diagnostic fixture correction pending
+- Status: `active` / reading 37/52; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity, matching, staged, diagnostic, static, entry and selector-projection and member-suffix and literal-boundary and projection-metadata and selector/identifier repairs and diagnostic fixture correction pending
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.5`
 - Created: `2026-09-11`
 - Last updated: `2026-09-11`
@@ -43,7 +43,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Inventory SHA-256: `ca3cff4fe4c0e162448d6dbac82d89898673023951afaeced17d5b9a838ccd10`.
 - Ordered range SHA-256: `fde325f80ae7b56c5890d149fbc965c09890890e963a1fa9aab08e8c9d962337`.
 - Line coordinates are one-based, inclusive LF physical lines. Every child pins its range digest.
-- Current physical reading: 36/52 children, 52,425/75,984 lines and 1,825,930/2,693,170 bytes; fifty-one complete files.
+- Current physical reading: 37/52 children, 53,925/75,984 lines and 1,880,598/2,693,170 bytes; fifty-three complete files.
 - Exact replay and capacity assessment: `docs/knowledge/julia-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -51,7 +51,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - ID: `JULIA-STARTUP-READING`
   Status: `active`
   Goal: Complete bounded Julia reading and maintain precise ownership of all findings.
-  Children: `.1`, `.2`, `.3`, `.4`
+  Children: `.1`, `.2`, `.3`, `.4`, `.5`
 
 - ID: `JULIA-STARTUP-READING.1`
   Status: `active`
@@ -59,7 +59,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Dependencies: Startup .3.5.0 decomposition committed; each child starts from a clean prior handoff.
   Children: `.1.1-.1.52`, with exact scopes below.
   Acceptance: Every child records physical coverage, comprehension, Knowledge reconciliation, findings and focused proof before its commit. Retain all current-delta and interrupted-range evidence.
-  Verification: Julia .1.36 completes logical-helper, map-leaves mutation and MCP binding consumers and reads MCP admission1-304: 36/52 groups, 52,425 fragments /1,825,930 bytes and fifty-one complete files. Existing logical232/map-leaves496/binding53/admission257 pass1038 assertions. Neutral mutation167/592, write105, logical8/0/26, MCP admission5/5/6/6/141 and transport35/10/10/76 pass. Exact source distinguishes all in-process logical arity rows from one emitted negative and the map-leaves18-row plus set_key guard controls. Admission source after304 remains unread. No new confirmed defect or closure; prior repairs and source/history remain. Julia .1.37 is next; no full component/canonical gate or dependency build ran.
+  Verification: Julia .1.37 completes MCP admission and dispatch consumers and reads stdio1-229: 37/52 groups, 53,925 fragments /1,880,598 bytes and fifty-three complete files. Existing binding53/dispatch145/stdio170/admission257 pass625 assertions, including the actual focused owners referenced by admission markers. Neutral transport35/10/10/76, admission5/5/6/6/141 and check-only generated binding120030 bytes pass. Source distinguishes all20 native identity cases, real registry/lifecycle proof and focused cancellation/failure seams. Stdio source after229 remains unread. No new confirmed defect or closure; Julia patterns .2.4, shared precedence .36, budget .82 and all prior repairs remain. Knowledge72065/72000 initially blocked landing;68 checkpoint lines are preserved exactly in the task with three card pointers, reaching72000. Julia .5 owns finite capacity planning before .1.38; no full component/canonical gate or dependency build ran.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.1.1`
@@ -675,14 +675,21 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Commit: `JULIA-STARTUP-READING.1.36 - read logical mutation and MCP contract consumers`
 
 - ID: `JULIA-STARTUP-READING.1.37`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Julia group 37 and reconcile its source evidence.
   Dependencies: `JULIA-STARTUP-READING.1.36` committed; empty brief and clean repository.
   Scope: `julia/test/mcp_server_julia_admission_test.jl` lines 305-930; `julia/test/mcp_server_julia_dispatch_test.jl` lines 1-645; `julia/test/mcp_server_julia_stdio_test.jl` lines 1-229
   Baseline evidence: 1500 fragments / 54668 bytes; ordered range SHA-256 `772640d8801fe9ded328f607342886dd284383527fdf5f0397904265f706defb`.
+  Activation commit: `fa4045540c229c6290131e88b96f383dbf7842af`.
+  Verification tier: `focused`
+  Focused checks: Exact owned source reconstruction; complete MCP binding/dispatch/stdio/admission consumers and neutral direct-dependent proof; Knowledge, prior evidence, memory, histories, rendered book and normal doctrines.
+  Canonical trigger: `none` — ordinary source reading without production or contract changes.
   Acceptance: Physically read every owned byte, inspect current deltas, reconcile Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit. Do not count truncated output or unread consumer suffixes.
-  Verification: `pending`
-  Commit: `pending`
+  Comprehension: Admission completes12 exact roles, all20 native identity/digest cases, raw inputs, real capacity/expiry, unavailable states, policy and hostile I/O; marker checks for two private seams compose with actual focused dispatch/stdio execution. Dispatch covers copied authorization, policy/default/partial precedence, request immutability, bounded entropy/clock/collision failures, cancellation and opacity. Stdio prefix defines chunked/failing I/O, canonical/raw framing and pre-emission seam; source after229 remains unread.
+  Knowledge: Three existing MCP cards retain direct pointers to this task's Reading evidence .1.37 section. All68 new checkpoint lines are preserved there byte-exact, SHA1197c7e2f1564872268a6d2dbd3f863ed2adc9404d9ba791c558207ec595c7ce; all prior card bytes remain unchanged.
+  Findings: No new confirmed defect or closure. Julia .2.1-.2.25, shared precedence .36/budget .82, book search .41.9 and all prior repairs remain pending. Finite identity equality and single-failure fixtures retain their bounded scope. Normal commit initially failed Knowledge aggregate72065/72000 while eight other doctrines passed. Checkpoint detail belongs to layer B; exact relocation plus three retrieval pointers reaches72000 with unchanged limits. .5 owns the finite remaining-activity capacity plan.
+  Verification: Seven untruncated windows read1500 fragments /54668 baseline-identical bytes, ordered SHA772640d8801fe9ded328f607342886dd284383527fdf5f0397904265f706defb. Raw ranges: admission626/23220/SHA76f550580c97f75ebcd560a1980c132c77a8a79e48bb1f16d505419062eaf112; dispatch645/24566/SHA055171759c005b157e6353a05a0137944e72b7cf01bb6f861ff5eefb2c30cbee; stdio229/6882/SHAf31bc97019c1aeeb35fa294259e601a222b78aa977060e0edaec00160eb2a400. Binding53/dispatch145/stdio170/admission257 pass625; neutral transport35/10/10/76/admission5/5/6/6/141 and check-only generator120030 pass. Exact coverage, prior source/nodes/facts/history, Knowledge, memory, both history pressure checks, rendered book and normal doctrines govern landing.
+  Commit: `JULIA-STARTUP-READING.1.37 - complete MCP admission and dispatch consumer reading`
 
 - ID: `JULIA-STARTUP-READING.1.38`
   Status: `pending`
@@ -693,6 +700,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Acceptance: Physically read every owned byte, inspect current deltas, reconcile Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit. Do not count truncated output or unread consumer suffixes.
   Verification: `pending`
   Commit: `pending`
+  Additional dependency (.1.37): .5 must resolve exhausted Knowledge capacity before activation.
 
 - ID: `JULIA-STARTUP-READING.1.39`
   Status: `pending`
@@ -1553,13 +1561,24 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Verification: `pending` coverage repair; .1.34 owns the actual-literal positive controls.
   Commit: `pending`
 
+- ID: `JULIA-STARTUP-READING.5`
+  Status: `pending`
+  Goal: Resolve Knowledge capacity for the finite remaining Julia reading activity without discarding unique evidence.
+  Dependencies: .1.37 committed with clean repository and empty brief; retain all startup prerequisites.
+  Evidence: The .1.37 normal hook rejects Knowledge aggregate72065/72000 lines; clean .1.36 was71997. Routing68 lines of new reading-checkpoint detail to this owning task and retaining three fact-card pointers permits exact72000-line landing without changing controls.
+  Acceptance: Measure all Knowledge/task/map controls and the remaining15 reading children plus bounded closeout/capacity work. Prove existing evidence and question retrieval survive; assess lawful deduplication/routing first. If more capacity is required, prepare exact old/new limit objects, finite forecast and required director decision before infrastructure implementation. Do not infer a verification exception from ADR0115; make any proposed exception explicit. Resume .1.38 only after verified capacity disposition.
+  Verification: `pending`
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.37` | `pending` | Read MCP admission305-930, dispatch1-645 and stdio1-229 after clean .1.36; reconcile focused proof and preserve repairs. |
+| 1 | `JULIA-STARTUP-READING.5` | `pending` | Plan finite remaining-Julia Knowledge capacity from clean .1.37 before .1.38; preserve evidence and prepare any required director decision. |
 
 ## Decisions
+
+- `2026-09-11` .1.37: The first normal hook catches Knowledge72065/72000. Preserve all68 new checkpoint lines exactly under Reading evidence .1.37 and replace only those uncommitted additions with three direct card pointers. This restores72000 without altering old evidence or any control. .5 owns a coherent remaining-Julia capacity plan before further source reading.
 
 - `2026-09-11` .4 closeout: The director answers YES to .12 capacity and its one-time focused exception. ADR0115 implements the finite allowance and records proportionate governance.
 
@@ -1573,6 +1592,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Blockers
 
+- `2026-09-11` .1.37: Knowledge uses its72000-line ceiling after exact checkpoint routing. .5 is the next bounded capacity-planning leaf; .1.38 awaits its disposition. ADR0115 covers history only and grants no new exception.
+
 - `2026-09-11` .4 closeout: The .12 capacity decision below is resolved by ADR0115 and verified admission. Julia .1.4 resumes; actual per-leaf pressure checks remain.
 
 - `2026-09-11`: Pending .12 needs the six exact capacity controls and explicit proposed one-time canonical-receipt boundary. After this intake CHANGES is 455 lines; the next ordinary seven-line reading record would require a disallowed archive.
@@ -1580,6 +1601,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Source repairs retain startup prerequisites; those dependencies do not block source reading.
 
 ## Verification Log
+
+- `2026-09-11` .1.37: Julia .1.37 completes MCP admission and dispatch consumers and reads stdio1-229: 37/52 groups, 53,925 fragments /1,880,598 bytes and fifty-three complete files. Existing binding53/dispatch145/stdio170/admission257 pass625 assertions, including the actual focused owners referenced by admission markers. Neutral transport35/10/10/76, admission5/5/6/6/141 and check-only generated binding120030 bytes pass. Source distinguishes all20 native identity cases, real registry/lifecycle proof and focused cancellation/failure seams. Stdio source after229 remains unread. No new confirmed defect or closure; Julia patterns .2.4, shared precedence .36, budget .82 and all prior repairs remain. Knowledge72065/72000 initially blocked landing;68 checkpoint lines are preserved exactly in the task with three card pointers, reaching72000. Julia .5 owns finite capacity planning before .1.38; no full component/canonical gate or dependency build ran.
 
 - `2026-09-11` .1.36: Julia .1.36 completes logical-helper, map-leaves mutation and MCP binding consumers and reads MCP admission1-304: 36/52 groups, 52,425 fragments /1,825,930 bytes and fifty-one complete files. Existing logical232/map-leaves496/binding53/admission257 pass1038 assertions. Neutral mutation167/592, write105, logical8/0/26, MCP admission5/5/6/6/141 and transport35/10/10/76 pass. Exact source distinguishes all in-process logical arity rows from one emitted negative and the map-leaves18-row plus set_key guard controls. Admission source after304 remains unread. No new confirmed defect or closure; prior repairs and source/history remain. Julia .1.37 is next; no full component/canonical gate or dependency build ran.
 
@@ -1640,6 +1663,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Commit Log
 
+- `.1.37`: `JULIA-STARTUP-READING.1.37 - complete MCP admission and dispatch consumer reading`.
+
 - `.1.36`: `JULIA-STARTUP-READING.1.36 - read logical mutation and MCP contract consumers`.
 
 - `.1.35`: `JULIA-STARTUP-READING.1.35 - complete gap consumer reading and begin logical helper tests`.
@@ -1689,6 +1714,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Changelog
 
+- `2026-09-11`: Completed .1.37 from cleanfa4045540; MCP admission/dispatch complete, stdio prefix read,625 assertions and neutral/binding checks pass; exact Knowledge checkpoint routing resolves the initial hook overflow, all prior evidence/repairs remain and .5 capacity planning precedes .1.38.
+
 - `2026-09-11`: Completed .1.36 from clean621551193; logical/mutation/binding complete, MCP admission prefix read,1038 existing assertions and neutral checks pass, prior evidence/repairs retained and .1.37 next.
 
 - `2026-09-11`: Completed .1.35 from clean53641fcac; gap consumer complete/logical prefix read,551 existing assertions and neutral checks pass, all prior evidence/repair owners retained and .1.36 next.
@@ -1734,3 +1761,81 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - `2026-09-11`: .1.2 completes six files cumulatively and the first typed ActionAst range; prior repairs remain pending.
 - `2026-09-11`: .1.1 closes the first exact source-reading group and routes existing public-teaching repairs.
 - `2026-09-11`: Created bounded Julia reading ownership with 52 pending source children and explicit repair, closeout and capacity owners.
+
+## Reading evidence .1.37
+
+This checkpoint-specific evidence is owned here; the existing Knowledge cards retain direct retrieval pointers. Original dated facts are unchanged.
+
+Source card: `docs/knowledge/julia-mcp-implementation-admission.md`
+
+## 2026-09-11 — complete admission and dispatch reading at .1.37
+
+Admission305-930 completes the consumer:626 fragments /23,220 baseline-identical
+bytes, SHA76f550580c97f75ebcd560a1980c132c77a8a79e48bb1f16d505419062eaf112.
+Together with dispatch1-645 and stdio1-229, the group reads1,500 fragments
+/54,668 bytes in seven untruncated windows, ordered SHA
+772640d8801fe9ded328f607342886dd284383527fdf5f0397904265f706defb.
+Cumulative credit is37/52 groups,53,925 lines /1,880,598 bytes and53 complete files.
+The stdio suffix remains unread; admission and dispatch are complete.
+
+The twelve ordered admission roles compare all20 capabilities/query cases with
+native payloads, canonical text and frozen digests; exercise raw wire outcomes,
+real registry capacity/expiry, all unavailable states, lower-only policy, late
+cancellation, EOF and hostile I/O sanitation; and check authority/export fences.
+Pre-emission cancellation and injected native failure additionally check source
+markers in their focused stdio/dispatch owners. This slice runs those actual
+consumers too, rather than treating marker presence as execution of their bodies.
+
+Existing binding53/dispatch145/stdio170/admission257 pass625 assertions. Neutral
+transport35/10/10/76 and admission5/5 implementations /6/6 runtimes /141 mutations
+pass; the check-only Julia generator remains byte-fresh at120030 bytes. Finite
+native/MCP identity does not resolve the independent shared budget .82 finding;
+Julia .2.4, startup .36 and all other repairs remain pending. No source, generated
+format, contract or dependency changes; no full backend/canonical gate runs.
+
+```bash
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no - <<'JULIA_GROUP37_EXISTING'
+using LinkedSpecJulia,JSON3,Test
+const REPO_ROOT=pwd()
+include("julia/test/mcp_contract_julia_binding_test.jl")
+include("julia/test/mcp_server_julia_dispatch_test.jl")
+include("julia/test/mcp_server_julia_stdio_test.jl")
+include("julia/test/mcp_server_julia_admission_test.jl")
+JULIA_GROUP37_EXISTING
+bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py
+bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py
+bash tools/run_python_project_data.sh tools/generate_julia_mcp_contract.py
+```
+
+Source card: `docs/knowledge/julia-mcp-decoded-server.md`
+
+## September 11 complete dispatch-consumer reading
+
+Julia .1.37 physically reads all645 lines /24,566 bytes of the dispatch consumer,
+SHA055171759c005b157e6353a05a0137944e72b7cf01bb6f861ff5eefb2c30cbee.
+It checks request immutability, fresh native identity/call counts, explicit lower-only
+policy versus omitted/partial native diagnostics, unavailable states, bounded
+registration/capacity/shutdown, copied authorization, entropy/clock/collision errors,
+opaque public state and source authority fences. Private injected native failures
+are sanitized; cancellation during preparation suppresses the response and releases
+active state, while late cancellation preserves the completed result.
+
+The canonical static rows are separate single-failure cases. They do not settle
+combined validation precedence under startup .36, terminal-LF schema matching under
+Julia .2.4, or semantic-budget correctness under startup .82. The complete focused
+MCP command is appended to [[julia-mcp-implementation-admission]]. All prior evidence
+and repair ownership remain unchanged.
+
+Source card: `docs/knowledge/julia-mcp-strict-stdio.md`
+
+## September 11 stdio-consumer prefix reading
+
+Julia .1.37 reads `julia/test/mcp_server_julia_stdio_test.jl`1-229:
+229 fragments /6,882 baseline-identical bytes,
+SHAf31bc97019c1aeeb35fa294259e601a222b78aa977060e0edaec00160eb2a400.
+The prefix loads canonical fixtures and defines chunk-width-aware input, immediate
+and later input failures, independent write/flush failures, caller-open state,
+canonical frame/raw encoding and the deterministic before_wire_emit server seam.
+Test bodies after229 remain unread. The complete stdio consumer runs with dispatch,
+binding and admission as direct-dependent focused proof, not additional reading
+credit. Exact replay is in [[julia-mcp-implementation-admission]].

@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — MCP admission composes with executable focused seams
+
+Admission checks source markers for pre-emission cancellation and native failure;
+this slice executes the actual stdio/dispatch consumers as well. All20 native/MCP
+identity cases remain finite equality proof, preserving shared budget .82 ownership.
+MCP625 passes; Knowledge overflow72065/72000 resolves by exact task routing; .5 owns capacity.
+
 ## 2026-09-11 — Julia consumer proof retains exact exercised roles
 
 Logical arity rows have complete in-process coverage and one emitted negative.

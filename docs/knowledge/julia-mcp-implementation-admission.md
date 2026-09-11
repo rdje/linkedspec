@@ -95,3 +95,4 @@ bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.p
 bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py
 bash tools/run_python_project_data.sh tools/check_logical_helper_contract.py
 ```
+2026-09-11 Julia .1.37 exact reading and focused replay: `docs/tasks/JULIA-STARTUP-READING.md`, section `Reading evidence .1.37`.

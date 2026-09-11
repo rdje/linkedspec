@@ -60,3 +60,4 @@ The earlier48/139 binding/dispatch counts above describe their original admissio
 current .1.10 evidence is53/145. The pattern and precedence defects discovered
 there remain owned and do not invalidate the exact existing170-assertion scope.
 See [[julia-mcp-pattern-terminal-newline-gap]] and [[perl-mcp-validation-error-order-drift]].
+2026-09-11 Julia .1.37 exact reading and focused replay: `docs/tasks/JULIA-STARTUP-READING.md`, section `Reading evidence .1.37`.

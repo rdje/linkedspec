@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 36/52 owned groups; its thirty-seventh reading child is next, with approved ADR0115 capacity in place.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 37/52 owned groups. Knowledge capacity planning `.5` now precedes the thirty-eighth reading child; ADR0115 remains limited to history.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,15 +297,16 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 36/52 groups complete:** logical-helper, map-leaves mutation
-and MCP binding consumers are fully read; MCP admission reading reaches line304.
-Coverage is 52,425 lines /1,825,930 bytes and fifty-one complete files.
-The four consumers pass1,038 assertions, and their neutral checks pass.
-Logical arity failures cover all in-process rows and one independently emitted
-negative. Mutation tests preserve receiver identity, atomicity, copied aggregates,
-pre-operand guards and typed carriers. MCP admission runs completely as focused
-proof while the remaining source still awaits reading. The next three MCP ranges
-are recorded in `docs/tasks/JULIA-STARTUP-READING.md`.
+**Julia reading is 37/52 groups complete:** MCP admission and dispatch consumers
+are fully read; stdio test reading reaches line229. Coverage is53,925 lines
+/1,880,598 bytes and fifty-three complete files. All four MCP consumers pass625
+assertions, including the actual focused cancellation and native-failure owners
+referenced by admission checks. Neutral transport, admission and generated-binding
+freshness checks pass. Native/MCP equality across20 cases does not close the
+separate semantic-budget finding. Knowledge has reached its existing line ceiling. The next owned step is `.5`,
+a finite capacity plan preserving all evidence before the remaining stdio,
+progressive, punctuation and recognition reading ranges. The completed checkpoint
+is retained in `docs/tasks/JULIA-STARTUP-READING.md` with Knowledge retrieval pointers.
 
 The book build also reports a search index above10 MB. Startup `.41.9` owns
 measurement and correction of that growth while preserving useful search and
@@ -721,8 +722,8 @@ SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` sti
 own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
-Julia has read thirty-six of 52 exact groups across 95 baseline entries;
-its thirty-seventh physical reading child is next, followed by the remaining Lua/supporting
+Julia has read thirty-seven of 52 exact groups across 95 baseline entries;
+capacity planning `.5` precedes its thirty-eighth reading child, followed by the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,

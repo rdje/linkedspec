@@ -104,3 +104,4 @@ generator remains120030 bytes and neutral transport35/10/10/76 passes.
 Targeted pattern20 and precedence12 probes identify uncovered boundaries; exact
 replay and repair ownership live in `docs/knowledge/julia-mcp-pattern-terminal-newline-gap.md`
 and `docs/knowledge/perl-mcp-validation-error-order-drift.md`. Neither defect is closed.
+2026-09-11 Julia .1.37 exact reading and focused replay: `docs/tasks/JULIA-STARTUP-READING.md`, section `Reading evidence .1.37`.
