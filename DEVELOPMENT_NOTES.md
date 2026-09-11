@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia upper-case completion and contextual properties
+
+Upper data reaches U+1E943, preserving ligature and combining expansions.
+Cased-property intervals include more than changed mapping entries; all158 are
+read. Ignorable-property prefix ends at U+0605; contextual evaluator is still
+unread. Fresh pinned regeneration passes without new runtime assertion credit.
+
 ## 2026-09-11 — Julia Unicode lower completion and upper prefix
 
 Lower data reaches U+1E921; upper prefix includes sharp-s, modifier-apostrophe

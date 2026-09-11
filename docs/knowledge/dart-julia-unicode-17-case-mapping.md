@@ -104,3 +104,16 @@ five modules, preserving1563/1581 mappings,158/464 ranges and12 fixtures. The
 39 Julia casing assertions remain .1.22/194265ff4 evidence against unchanged
 source; no fresh runtime, other-backend execution or new defect is claimed.
 Reverify: bash tools/run_python_project_data.sh tools/check_unicode_case_contract.py.
+
+## 2026-09-11 — Julia upper completion and contextual property prefix
+
+Julia .1.24 reads UnicodeCaseMapping1844-3343, completing upper mappings
+through U+1E943. Both sigma forms map to U+03A3; Greek ordered combining/iota
+expansions, Latin/Armenian ligatures and supplementary mappings remain pinned.
+All158 sorted inclusive cased ranges are read through U+1F189. Case-ignorable
+ranges are read through U+0605; the rest and contextual evaluator remain unread.
+Property membership is distinct from whether upper/lower conversion changes a
+character. Fresh managed regeneration preserves every module,1563/1581 mappings,
+158/464 ranges and12 fixtures. Casing39 remains .1.22/194265ff4 evidence against
+unchanged source; no new runtime, data revision or defect is claimed.
+Reverify: bash tools/run_python_project_data.sh tools/check_unicode_case_contract.py.
