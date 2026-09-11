@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.49 reads staged-enrichment800–2299: 49/52 groups, 71925 lines/2542120 bytes and 84 complete files. Fifteen complete testsets pass450 assertions; staged123/public129 and typed14/0/231 checks pass. A separate22-assertion diagnostic shows the deepcopy isolation check passes deliberately aliased results, while mutations of eight actual returned ASTs preserve their siblings. New .2.26 owns permanent coverage correction and counterpart audit; no runtime alias defect is established. All prior repairs remain open; .1.50 completes staged and continues lifecycle/source/Unicode consumers. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.50 completes staged/lifecycle/typed-source/classifier/Unicode-identity consumers and reads negative-isolation1–218: 50/52 groups, 73425 lines/2596767 bytes and 89 complete files. Complete staged491, lifecycle103, typed127, classifier1674 and identity130 pass2525 assertions, including fresh emitted Unicode execution. Neutral staged123/public129, typed14/0/231, Unicode806/9/8/2 and lifecycle14 checks pass. Carrier and diagnostic boundaries are qualified; all prior repairs including .2.26 remain open. .1.51 completes Unicode and continues binding/variadic/write consumers. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.82` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `JULIA-STARTUP-READING.1.49 - read staged authority and own isolation test gap` — Julia .1.49 reads staged-enrichment800–2299: 49/52 groups, 71925 lines/2542120 bytes and 84 complete files. Fifteen complete testsets pass450 assertions; staged123/public129 and typed14/0/231 checks pass. A separate22-assertion diagnostic shows the deepcopy isolation check passes deliberately aliased results, while mutations of eight actual returned ASTs preserve their siblings. New .2.26 owns permanent coverage correction and counterpart audit; no runtime alias defect is established. All prior repairs remain open; .1.50 completes staged and continues lifecycle/source/Unicode consumers.
+- `JULIA-STARTUP-READING.1.50 - complete staged source and Unicode identity reading` — Julia .1.50 completes staged/lifecycle/typed-source/classifier/Unicode-identity consumers and reads negative-isolation1–218: 50/52 groups, 73425 lines/2596767 bytes and 89 complete files. Complete staged491, lifecycle103, typed127, classifier1674 and identity130 pass2525 assertions, including fresh emitted Unicode execution. Neutral staged123/public129, typed14/0/231, Unicode806/9/8/2 and lifecycle14 checks pass. Carrier and diagnostic boundaries are qualified; all prior repairs including .2.26 remain open. .1.51 completes Unicode and continues binding/variadic/write consumers.
 
 ## Next Action
 
-- `JULIA-STARTUP-READING.1.50` — Complete staged and continue lifecycle/source/Unicode consumers after the clean .1.49 commit.
+- `JULIA-STARTUP-READING.1.51` — Complete Unicode and continue binding/variadic/write consumers after the clean .1.50 commit.
 
 ## Recent Completions
+
+- `2026-09-11` — `JULIA-STARTUP-READING.1.50` reads1500 fragments/54647 bytes;2525 complete-consumer assertions and four neutral checks pass; all repairs remain open.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.49` reads1500 fragments/62034 bytes;450 existing/22 diagnostic assertions and neutral checks pass; .2.26 owns isolation test correction.
 
@@ -48,8 +50,6 @@
 - `2026-09-11` — `JULIA-STARTUP-READING.5.1` commits a finite two-scalar evidence-capacity proposal and explicit .13-only verification request; all limits remain unchanged pending director approval.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.37` reads1,500 fragments /54,668 bytes;625 MCP assertions and neutral/generator checks pass; all repair owners remain.
-
-- `2026-09-11` — `JULIA-STARTUP-READING.1.36` reads1,500 fragments /56,141 bytes;1038 existing assertions and neutral mutation/logical/MCP checks pass; all repairs remain open.
 
 ## History
 

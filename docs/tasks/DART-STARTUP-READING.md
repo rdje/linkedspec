@@ -1568,7 +1568,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.50` | `pending` | Continue Julia staged/lifecycle/source/Unicode reading after the clean .1.49 commit; Dart repairs retain their startup prerequisites. |
+| 1 | `JULIA-STARTUP-READING.1.51` | `pending` | Complete Julia Unicode and continue binding/variadic/write reading after clean .1.50; Dart repairs retain their startup prerequisites. |
 
 ## Decisions
 

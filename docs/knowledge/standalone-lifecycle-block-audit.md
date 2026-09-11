@@ -143,3 +143,15 @@ Legacy reconstructed plain blocks remain inert. All 38 selected Dart tests pass,
 including these six lifecycle tests; neutral governance remains 9 placements,
 4 duplicates,6 ownership cases,3 malformed twins and14 mutations. This bounded
 rerun adds no other-backend execution claim and closes no prior lexical defect.
+
+## September 11 — Julia consumer reading complete .1.50
+
+All155 lines are read. The103 assertions compare explicit/bare normalization,
+opening lines, authored source and source-stripped ActionIR. Four duplicate forms
+execute native, SpecFile-JSON reconstructed and generated-plan carriers. Emitted
+source is checked only for nonemptiness in this consumer; no emitted execution
+claim follows here. Malformed twins compare exception types and nonempty text,
+not exact diagnostic fields. Reconstructed legacy plain blocks remain inert in
+both native and generated-plan execution. Neutral14 mutations pass. Existing
+lexical repair owners stay open; no other-backend matrix is rerun. Replay lives
+in [[julia-source-value-authority-reading]] .1.50.

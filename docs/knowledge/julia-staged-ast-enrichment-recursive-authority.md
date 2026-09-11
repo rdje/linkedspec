@@ -124,3 +124,13 @@ bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history
 bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py
 bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py
 ```
+
+## September 11 — staged consumer reading complete .1.50
+
+Reading2300–2568 reaches EOF. Remaining tests pin cumulative node/work ceilings,
+pre-callback denials, cancellation/deadline safe points and direct/derived child
+source projection. Invalid local ranges return the projection sentinel. The tiny
+diagnostic fixture checks its truncation code and exhausted accounting only; it
+does not close the measured retained-byte gap .2.14. Fresh complete consumer491
+assertions pass. The ineffective isolation assertion remains owned by .2.26.
+Complete focused replay is in [[julia-source-value-authority-reading]] .1.50.

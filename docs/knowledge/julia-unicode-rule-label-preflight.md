@@ -147,3 +147,16 @@ are rejected before Int conversion. All1674 existing classifier assertions and s
 additional integer/prefix boundaries pass. Exact ranges and focused replay are in
 [[julia-function-projection-metadata-gaps]]; this reading does not change the pinned
 Unicode17 contract or close any existing parser repair.
+
+## September 11 — classifier and identity consumer reading .1.50
+
+Classifier1–62 and identity1–347 are fully read. Classifier1674 and identity130
+assertions pass, including actual fresh offline emitted-host execution. Ten exact
+labels retain ordering, map keys, JSON/descriptor identity, primary-command and
+strict-loader behavior, selector diagnostics and trace spelling. Neutral pinned
+Unicode17 regeneration remains806 ranges/9 positives/8 negatives/2 distinct pairs.
+The classifier suite checks all endpoints and neutral fixtures, not an exhaustive
+fresh scalar census. Negative-isolation1–218 is physically read through its first
+complete external AST trust matrix and a partial source-token test; it is excluded
+from this execution. .1.51 owns its suffix and native-route consumer. Earlier
+adjacent-grammar findings remain open. Exact replay: [[julia-source-value-authority-reading]].

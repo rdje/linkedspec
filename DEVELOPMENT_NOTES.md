@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Lifecycle and typed-source carrier proof differs from Unicode emitted execution
+
+Lifecycle and typed-source consumers execute native/reconstructed/generated-plan
+results; lifecycle requires only nonempty emitted source. Unicode identity executes
+a fresh emitted host, exact labels, selectors and traces. Staged491 remains green
+with .2.14 byte accounting and .2.26 permanent isolation-test corrections open.
+
 ## 2026-09-11 — Mutating a copy does not test returned-result isolation
 
 Staged consumer859–861 passes deliberately aliased results because it mutates a

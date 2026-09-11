@@ -85,3 +85,28 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py
 bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py
 ```
+
+## September 11 — typed-source consumer reading complete .1.50
+
+All449 lines are read. Fresh127 assertions cover3 sources,7 positions,6 direct
+spans,3 ordered-derived texts, copied input authority and four private diagnostics.
+The returned projection-row record is actually mutated and fetched again, unlike
+the separate staged-copy gap. Exact92 rows and7 alias metadata are checked; named
+marks, cursor save/rewind/restore and selected alias fixtures execute native,
+SpecFile-JSON reconstructed and generated-plan routes. This consumer does not
+execute emitted source or every helper spelling merely by comparing its catalog.
+The separate alias consumer's emitted proof remains in its existing fact home.
+
+At activation198e40a108054e0e1a4dffa833bedcdcd4b1f741, complete staged491,
+lifecycle103, typed127, classifier1674 and identity130 pass2525 assertions.
+The last includes a fresh emitted host. Four neutral checks pass staged123/public129,
+typed14/0/231, Unicode806/9/8/2 and lifecycle14. All source bytes and contracts
+remain unchanged; no package/canonical or other-backend execution is claimed.
+
+```bash
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include("julia/test/staged_ast_enrichment_contract_test.jl"); include("julia/test/standalone_lifecycle_block_contract_test.jl"); include("julia/test/typed_source_location_contract_test.jl"); include("julia/test/unicode_rule_label_classifier_test.jl"); include("julia/test/unicode_rule_label_identity_routes_test.jl")'
+bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py
+bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py
+bash tools/run_python_project_data.sh tools/check_unicode_rule_label_contract.py
+bash tools/run_python_project_data.sh tools/check_standalone_lifecycle_block_contract.py
+```
