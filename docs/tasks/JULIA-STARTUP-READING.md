@@ -1562,14 +1562,14 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.5`
-  Status: `active`
+  Status: `done` (approved disposition implemented by containment .13)
   Goal: Resolve Knowledge and governing-decision capacity for the finite remaining Julia reading activity without discarding unique evidence.
   Dependencies: .1.37 committed with clean repository and empty brief; retain all startup prerequisites.
   Evidence: The .1.37 normal hook rejects Knowledge aggregate72065/72000 lines; clean .1.36 was71997. Routing68 lines of new reading-checkpoint detail to this owning task and retaining three fact-card pointers permits exact72000-line landing without changing controls.
   Acceptance: Measure all Knowledge/decision/task/map controls and the remaining15 reading children plus bounded closeout/capacity work. Prove existing evidence and question retrieval survive; assess lawful deduplication/routing first. If more capacity is required, prepare exact old/new limit objects, finite forecast and required director decision before infrastructure implementation. Do not infer a verification exception from ADR0115; make any proposed exception explicit. Resume .1.38 only after verified capacity disposition.
   Children: .5.1 owns the concrete finite proposal; containment .13 implements only after the required director decision.
-  Verification: .5.1 proposal complete; director decision and .13 implementation remain pending. The proposal specifies two scalars and explicit .13-only focused exception; no increase has been applied.
-  Commit: `pending`
+  Verification: Director approval Granted covers both exact limits and the .13-only focused exception. ADR0116 / containment .13 implement the two-scalar transition with production threshold/authorization, preservation and full reserve proof. No runtime or reading completion is implied; .1.38 resumes after the clean implementation boundary.
+  Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.13 - admit approved Julia evidence capacity`
 
 - ID: `JULIA-STARTUP-READING.5.1`
   Status: `done`
@@ -1588,9 +1588,11 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.13` | `pending` | Await director decision on the Julia .5.1 proposal Knowledge72000→79000 and decisions12000→13000 and .13-only focused exception; implement only after approval, then resume .1.38. |
+| 1 | `JULIA-STARTUP-READING.1.38` | `pending` | Resume after the verified containment .13 commit, empty brief and clean proof; ADR0116 resolves the .5 capacity dependency. |
 
 ## Decisions
+
+- `2026-09-11` .5 disposition: The director answered Granted to the complete .5.1 proposal. ADR0116 records both exact aggregate line limits and the .13-only focused exception; containment .13 implements and verifies the approved boundary. The historical proposal below remains unchanged.
 
 - `2026-09-11` .1.37: The first normal hook catches Knowledge72065/72000. Preserve all68 new checkpoint lines exactly under Reading evidence .1.37 and replace only those uncommitted additions with three direct card pointers. This restores72000 without altering old evidence or any control. .5 owns a coherent remaining-Julia capacity plan before further source reading.
 
@@ -1606,6 +1608,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Blockers
 
+- Current .5 blocker resolved by director-approved ADR0116 / containment .13. Julia .1.38 may resume after the clean commit; older capacity observations below are historical.
+
 - `2026-09-11` .1.37: Knowledge uses its72000-line ceiling after exact checkpoint routing. .5 is the next bounded capacity-planning leaf; .1.38 awaits its disposition. ADR0115 covers history only and grants no new exception.
 
 - `2026-09-11` .4 closeout: The .12 capacity decision below is resolved by ADR0115 and verified admission. Julia .1.4 resumes; actual per-leaf pressure checks remain.
@@ -1615,6 +1619,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Source repairs retain startup prerequisites; those dependencies do not block source reading.
 
 ## Verification Log
+
+- `2026-09-11` .5 disposition: Containment .13 changes two exact registry scalars under ADR0116;20 production threshold and24 authorization controls pass. Prior evidence and complete actual-plus-reserve checks govern landing with normal doctrines and the explicit .13-only focused exception. Reading remains37/52; .1.38 is next.
 
 - `2026-09-11` .5.1: Julia .5.1 prepares two finite evidence-capacity controls for containment .13: Knowledge lines72000→79000 and decision lines12000→13000, with an explicit .13-only focused-verification request awaiting the director. No limit or exception is applied. The36 unconstrained reading commits add5279 Knowledge lines/315921 bytes/25 files, peak316/17674/1;20 finite units project78320 lines, while all other controls retain capacity. Decision records11997/12000 require a486-line reserve; full current-plus-reserve proof fits both proposed ceilings. Julia reading remains37/52 groups,53925 lines/1880598 bytes and53 complete files; .1.38 awaits verified capacity disposition. All source, prior evidence and repairs remain unchanged.
 
@@ -1679,6 +1685,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Commit Log
 
+- `2026-09-11` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.13 - admit approved Julia evidence capacity` resolves .5 and restores .1.38 after clean landing.
+
 - `.5.1`: `JULIA-STARTUP-READING.5.1 - propose finite Julia evidence capacity`.
 
 - `.1.37`: `JULIA-STARTUP-READING.1.37 - complete MCP admission and dispatch consumer reading`.
@@ -1731,6 +1739,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Decomposition: `SESSION-STARTUP-READING.3.5.0 - freeze exact bounded Julia reading plan`.
 
 ## Changelog
+
+- `2026-09-11`: Close .5 through director-approved containment .13 / ADR0116; preserve the .5.1 proposal and all reading/repair evidence.
 
 - `2026-09-11`: Completed .5.1 from cleand06a6f7ff; proposed finite Knowledge capacity and .13-only verification exception are reviewable in the Julia .5.1 proposal; no limits change and director decision remains pending.
 

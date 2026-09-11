@@ -135,6 +135,8 @@ changed* lives in git (layer D), not here.
 
 | [0115](0115-julia-reading-history-capacity.md) | Admit four archive slots per history for remaining Julia reading; six exact controls and an explicit one-time focused exception | 2026-09-11 | accepted | documentation, history, capacity, verification |
 
+| [0116](0116-approved-julia-evidence-capacity.md) | Admit finite Julia Knowledge and decision line capacity; exact two-scalar approval and .13-only focused exception | 2026-09-11 | accepted | documentation, knowledge, capacity, verification |
+
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /
    Decision / Consequences / Links`).

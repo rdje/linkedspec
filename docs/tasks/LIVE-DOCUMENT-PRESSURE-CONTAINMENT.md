@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-- Status: `active` / .13 Knowledge capacity awaiting director decision
+- Status: `done` / .13 approved finite Julia evidence capacity
 - Roadmap lane: `Repository architecture / documentation sustainability`
 - Created: `2026-08-09`
-- Last updated: `2026-09-11` (.13 proposal intake; .12 remains complete)
+- Last updated: `2026-09-11` (.13 approved implementation; prior leaves remain complete)
 - Owner: repo-local workflow
 
 ## Goal
@@ -58,7 +58,7 @@ or the README `.4` adoption/closeout that installs the guard.
 ## Task Tree
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-  Status: `active` (.0-.12 complete; .13 awaits decision; Julia reading37/52)
+  Status: `done` (.0-.13 complete; Julia reading37/52)
   Goal: Replace measured oversized routed destinations with bounded views over durable stores.
   Depends on: `README-STABILITY-POLICY.4.2`
   Children: `.0-.13`
@@ -454,18 +454,23 @@ or the README `.4` adoption/closeout that installs the guard.
   Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.12 - admit approved Julia history capacity`
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.13`
-  Status: `pending`
+  Status: `done` (2026-09-11; explicit .13-only focused exception)
   Goal: Implement only the approved finite Julia Knowledge/decision capacity disposition.
   Dependencies: JULIA-STARTUP-READING.5.1 committed; explicit director decision on exact controls and any .13-only verification exception; clean handoff.
-  Scope: Proposed knowledge_cards.max_total_lines72000→79000 and decisions.max_total_lines12000→13000; every other registry scalar, contract, member, guard, source and history byte remains unchanged. A newly added accepted/indexed execution ADR is required before the change.
+  Scope: Director-approved knowledge_cards.max_total_lines72000→79000 and decisions.max_total_lines12000→13000; every other registry scalar, contract, member, guard, source and history byte remains unchanged. A newly added accepted/indexed execution ADR is required before the change.
   Acceptance: Preserve all cards/questions and exact source/task/history evidence. Recompute the entire finite remaining-Julia reserve; exercise actual inclusive/overflow and authorization validators, all nine normal doctrines, Knowledge, memory, both history checks and rendered book. Canonical receipt remains required unless the director explicitly approves the proposed .13-only focused exception; no later or push waiver and no unauthorized dependency builds. Close Julia .5 only after verified landing and resume .1.38 from clean HEAD.
   Proposal: docs/tasks/JULIA-STARTUP-READING.md, section Capacity proposal .5.1.
-  Verification: `pending`; no increase or exception is authorized by intake.
-  Commit: `pending`
+  Activation commit: `63523d44898f6831e7c450786d1ac5a3f0a64015`.
+  Authorization: The director answered Granted to both exact line-limit transitions and the .13-only focused exception on 2026-09-11; ADR0116 records the accepted execution decision.
+  Verification tier: `focused`
+  Focused checks: Exact two-scalar and prior source/card/question/task/history preservation; full actual-plus-reserve census; production threshold and authorization controls; Knowledge, memory, both history checks, rendered book and all nine normal doctrines.
+  Canonical trigger: Explicit director-approved exception for containment .13 only, including execution before full codebase reading; no standing gate change, later milestone or push waiver, canonical CI or dependency build.
+  Verification: Exact two-scalar registry transition;20 actual production threshold and24 authorization executions pass. Prior source/guard/card/decision/history bytes, old question rows and unrelated task nodes remain exact. The full current-plus-reserve census passes all four stores and unchanged member controls. Knowledge, memory, both history pressure checks, rendered book and all nine normal doctrines govern landing; no canonical CI or dependency build. Reproducible proof: docs/knowledge/julia-evidence-capacity-admission.md.
+  Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.13 - admit approved Julia evidence capacity`
 
 ## Current Frontier
 
-Pending .13 awaits the director decision on the committed Julia .5.1 proposal. Julia .1.38 remains gated on capacity disposition.
+Complete through .13 under director-approved ADR0116. After the verified commit, empty brief and clean proof, resume `JULIA-STARTUP-READING.1.38` in its separate active reading tree.
 
 Historical .12 handoff (preserved):
 Complete through .12. After the verified commit, empty brief and clean proof,
@@ -474,6 +479,8 @@ resume `JULIA-STARTUP-READING.1.4` in its separate active reading tree.
 Historical .11 handoff (preserved): This tree closes through .11 under the director’s explicit one-time focused-verification exception. After the commit, empty brief and clean proof, resume `DART-STARTUP-READING.1.47`. Dart reading remains 46/55; all remaining reading, repair and future canonical gates remain in force.
 
 ## Decisions
+
+- `2026-09-11` .13: Director answer Granted authorizes both exact line-limit increases and the .13-only focused exception. ADR0116 is the accepted indexed execution authority; no later or push waiver follows.
 
 - `2026-09-11` .12: ADR0115 records proportionate governance: retain rules, clear ownership and evidence; plan bounded capacity across coherent work to avoid repeated administrative interruptions.
 
@@ -611,6 +618,8 @@ All files and transient proof stay on the repository filesystem; no off-volume c
 
 ## Verification Log
 
+- `2026-09-11` .13: Exact two-scalar scope,20 production threshold and24 authorization executions pass; prior evidence preservation and the full current-plus-reserve census are replayable from docs/knowledge/julia-evidence-capacity-admission.md. Normal doctrines/book/history/memory govern landing.
+
 - `2026-09-11` .12: Approved containment .12 / ADR0115 admits four extra archive slots per history through six exact limits. The governed change-history rollover preserves 217 lines /13,128 bytes from clean 107170da7; all prior history and unrelated controls remain exact. Production-validator proof passes 44 threshold and 22 authorization cases under the explicit one-time focused exception. Julia reading remains 3/52 groups and seven complete files; .1.4 is next. All parser repairs, startup prerequisites and future canonical/push requirements remain.
 
 - `2026-09-10` .11: Exactly two approved registry scalars change under ADR0113. Governed segment4980 preserves clean 01a2159c DEVELOPMENT_NOTES249-459, blob ebc30daf8dc84bdc1da5d60a67ff36007b14a70f, 211 lines/24521 bytes, SHA-256 b29e3bd321a1357afe2e779c7e138986e96bef3258c4408d785fc06b11bb58f5. All prior manifest records and other history files remain exact. Root reconstruction restores the single normalized EOF separator LF; full archive query matches all bytes. Root254/16165, manifest27/16230 and collection28/26078/2790043 fit unchanged other limits. All 22 actual-validator executions pass. Complete preservation and doctrine/book checks govern landing under the explicit 2026-09-11 one-time receipt exception; concurrent PGEN/RGX build-on-update direction remains pending under startup .80.
@@ -723,6 +732,8 @@ brief clearing, generated-residue census, post-pointer check, and clean proof re
 
 ## Commit Log
 
+- `2026-09-11` .13: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.13 - admit approved Julia evidence capacity`; clean activation 63523d44898f6831e7c450786d1ac5a3f0a64015.
+
 - `2026-09-11` .12: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.12 - admit approved Julia history capacity`.
 
 - .11: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.11 - admit approved engineering-history member`; explicit one-time focused proof, without canonical receipt.
@@ -748,6 +759,8 @@ brief clearing, generated-residue census, post-pointer check, and clean proof re
 - `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5`: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5 - compact duplicate startup chronology without losing evidence`.
 
 ## Changelog
+
+- `2026-09-11` .13: Implement approved finite Julia Knowledge and decision line capacity under ADR0116; close Julia .5 and restore .1.38 after clean landing.
 
 - `2026-09-11` .12: .12 implements the finite Julia allowance, preserves exact history and returns the frontier to Julia .1.4.
 

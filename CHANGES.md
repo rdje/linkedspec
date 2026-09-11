@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.13 - admit approved Julia evidence capacity
+
+Admit Knowledge72000→79000 and decisions12000→13000 under explicit approval and ADR0116.
+Only two registry scalars change;20 threshold/24 authorization cases and full
+reserve/preservation checks pass. Normal doctrines remain enabled under the .13-only
+focused exception; Julia .5 closes and .1.38 resumes after the clean commit.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.5.1 - propose finite Julia evidence capacity
 
 Propose Knowledge lines72000→79000 and decision lines12000→13000 for20 finite remaining-Julia units.

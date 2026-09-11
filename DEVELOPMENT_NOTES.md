@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Approved finite evidence capacity preserves retrieval
+
+ADR0116 records the director’s Granted answer to both line controls and .13-only
+focused validation. Production functions test inclusive limits and unauthorized
+changes on detached inputs; full candidate-plus-reserve checks retain readable
+facts, prior source/history and all other controls. Future canonical gates remain.
+
 ## 2026-09-11 — Finite Knowledge reserve follows measured Julia growth
 
 The36 unconstrained reading slices peak at316 Knowledge lines/17674 bytes/one card.
