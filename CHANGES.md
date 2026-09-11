@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.1 - read package manifests and README examples
+
+Read 1,071 fragments /65,410 bytes with exact baseline coverage. Seven authored
+README examples, primary JSON output and semantic governance pass. Route concrete
+stale-status and bare-command guidance to existing startup .41 owners; preserve
+all source/repair evidence. Julia .1.2 follows the committed reading checkpoint.
+
 ## 2026-09-11 — SESSION-STARTUP-READING.3.5.0 - freeze exact bounded Julia reading plan
 
 Own all 95 Julia files in52 bounded children /146 exact ranges:75,984 lines and

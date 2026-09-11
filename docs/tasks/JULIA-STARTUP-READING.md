@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `JULIA-STARTUP-READING`
-- Status: `active` / exact plan frozen; no source reading credited
+- Status: `active` / reading 1/52; repairs remain owned
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.5`
 - Created: `2026-09-11`
 - Last updated: `2026-09-11`
@@ -43,7 +43,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Inventory SHA-256: `ca3cff4fe4c0e162448d6dbac82d89898673023951afaeced17d5b9a838ccd10`.
 - Ordered range SHA-256: `fde325f80ae7b56c5890d149fbc965c09890890e963a1fa9aab08e8c9d962337`.
 - Line coordinates are one-based, inclusive LF physical lines. Every child pins its range digest.
-- Current physical reading: 0/52 children,0/75,984 lines and 0/2,693,170 bytes.
+- Current physical reading: 1/52 children, 1,071/75,984 lines and 65,410/2,693,170 bytes; two complete files.
 - Exact replay and capacity assessment: `docs/knowledge/julia-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -54,23 +54,30 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Children: `.1`, `.2`, `.3`, `.4`
 
 - ID: `JULIA-STARTUP-READING.1`
-  Status: `pending`
+  Status: `active`
   Goal: Read and understand all 52 exact Julia groups in numeric order.
   Dependencies: Startup .3.5.0 decomposition committed; each child starts from a clean prior handoff.
   Children: `.1.1-.1.52`, with exact scopes below.
   Acceptance: Every child records physical coverage, comprehension, Knowledge reconciliation, findings and focused proof before its commit. Retain all current-delta and interrupted-range evidence.
-  Verification: `pending`
+  Verification: Julia .1.1 completes the manifests and README lines 1–963: 1/52 groups, 1,071 fragments / 65,410 bytes and two complete files. Seven exact README examples and the primary JSON example pass on Julia 1.12.7; semantic governance remains 6/20/128, rollout 9/9 and admission 6/6. Existing startup .41.2/.41.3/.41.7 own the stale status and unmanaged-command guidance. All sources, prior repairs and Dart gate failures remain unchanged. Julia .1.2 is next; .4 owns future capacity pressure.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.1.1`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Julia group 1 and reconcile its source evidence.
   Dependencies: `SESSION-STARTUP-READING.3.5.0` committed; empty brief and clean repository.
   Scope: `julia/Manifest.toml` lines 1-88; `julia/Project.toml` lines 1-20; `julia/README.md` lines 1-963
   Baseline evidence: 1071 fragments / 65410 bytes; ordered range SHA-256 `725354d673b21f42b20d33a74b82bd9535d39a13c9eb1b6d8cead4ae3c998e2c`.
+  Activation commit: `f0f11f45986ee231b0b02a43d88cfac2137caf22`.
+  Verification tier: `focused`
+  Focused checks: Exact bounded source reading and baseline identity; manifest/package loading and documented native entry smoke through the managed Julia wrapper; Knowledge reconciliation, memory, both histories, rendered book, scope/whitespace and normal doctrines.
+  Canonical trigger: `none` — ordinary source-reading evidence; no source, public contract, gate, dependency or infrastructure change.
   Acceptance: Physically read every owned byte, inspect current deltas, reconcile Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit. Do not count truncated output or unread consumer suffixes.
-  Verification: `pending`
-  Commit: `pending`
+  Comprehension: Package metadata locks five external source trees and four direct dependencies, with package-relative manifest identity and Julia 1.12 compatibility. README spans staged rule/function compilation, immutable semantic source/query/observation ownership, caller-authorized read-only MCP, native/generated callbacks, callable/contextual codeblocks, eager logical truthiness, managed depot commands, progressive loading, diagnostics/trace and historical rollout chronology. It distinguishes no-file native source compilation from an MCP adapter over host-created indexes. The final six README lines remain unread for .1.2.
+  Knowledge: Reconciled Julia package, depot, local gate, mdBook usage, and startup public-teaching facts; dated current evidence is in docs/knowledge/julia-package-readme-reading.md.
+  Findings: Reuse startup .41.2/.41.3/.41.7 for exact README status/privacy/locality teaching; no new runtime defect or completed repair. No duplicate repair root.
+  Verification: Physically read Manifest 1–88, Project 1–20 and README 1–963 in eight untruncated windows; exact 1071-fragment/65410-byte digest and baseline identity pass. Managed Julia 1.12.7 loads matching package metadata; seven exact README fences pass; documented primary output is exact canonical JSON with empty stderr. Semantic 6/20/128, rollout 9/9 and admission 6/6 pass. No full component/canonical gate or dependency build; continuity, book and normal doctrine proof accompany this commit.
+  Commit: `JULIA-STARTUP-READING.1.1 - read package manifests and README examples`.
 
 - ID: `JULIA-STARTUP-READING.1.2`
   Status: `pending`
@@ -587,7 +594,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Goal: Preserve disjoint repair ownership for every confirmed Julia finding.
   Dependencies: Findings from .1; source repair additionally requires startup .3/.4/.5.
   Acceptance: Reuse exact existing startup owners when applicable; otherwise add bounded repair children with source mechanism, reproduction, acceptance and unblock conditions. No finding is closed by reading alone.
-  Verification: `pending`; no Julia reading finding is asserted by decomposition.
+  Verification: `pending`; .1.1 routes exact README claim/locality corrections to existing startup .41.2/.41.3/.41.7. No duplicate Julia repair child or runtime failure.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.3`
@@ -610,7 +617,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.1` | `pending` | Read the first owned group only after the decomposition commit is clean and resulting evidence pressure fits. |
+| 1 | `JULIA-STARTUP-READING.1.2` | `pending` | Read the remaining README, tiny CLI delegates, facade and first ActionAst range from a clean .1.1 checkpoint. |
 
 ## Decisions
 
@@ -628,12 +635,15 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Verification Log
 
+- `2026-09-11` .1.1: Julia .1.1 completes the manifests and README lines 1–963: 1/52 groups, 1,071 fragments / 65,410 bytes and two complete files. Seven exact README examples and the primary JSON example pass on Julia 1.12.7; semantic governance remains 6/20/128, rollout 9/9 and admission 6/6. Existing startup .41.2/.41.3/.41.7 own the stale status and unmanaged-command guidance. All sources, prior repairs and Dart gate failures remain unchanged. Julia .1.2 is next; .4 owns future capacity pressure.
 - `2026-09-11`: Startup .3.5.0 independently reconstructs all 95 baseline-identical paths,52 groups,146 ranges and every byte once; all child bounds/digests pass. No physical-reading credit.
 
 ## Commit Log
 
+- .1.1: `JULIA-STARTUP-READING.1.1 - read package manifests and README examples`.
 - Decomposition: `SESSION-STARTUP-READING.3.5.0 - freeze exact bounded Julia reading plan`.
 
 ## Changelog
 
+- `2026-09-11`: .1.1 closes the first exact source-reading group and routes existing public-teaching repairs.
 - `2026-09-11`: Created bounded Julia reading ownership with 52 pending source children and explicit repair, closeout and capacity owners.

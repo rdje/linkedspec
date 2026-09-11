@@ -1566,7 +1566,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.1` | `pending` | Read the first exact Julia group after the clean decomposition commit; no physical Julia reading credit yet. |
+| 1 | `JULIA-STARTUP-READING.1.2` | `pending` | Read the remaining README, tiny CLI delegates, facade and first ActionAst range from a clean .1.1 checkpoint. |
 
 ## Decisions
 

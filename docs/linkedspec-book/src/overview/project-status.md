@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has 52 owned groups; its first physical reading child is next.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 1/52 owned groups; its second physical reading child is next.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -273,18 +273,25 @@ consumer. Running that test adds no unread suffix credit. That leaf reached 54/5
 children, 79,028 fragments / 2,431,006 bytes. `.1.55` now completes write tests and
 the dormant progressive-authority consumer. Existing repairs remain owned and open.
 
-**Julia reading is planned, with no source-reading credit yet:** startup .3.5.0
-owns 95 baseline-identical files,75,984 physical lines and 2,693,170 bytes through 52
-bounded children and 146 exact source ranges. Every byte is independently accounted
-for once; each child fits 1,500 fragments and 65,536 bytes. Julia's execution tree
-lives in `docs/tasks/JULIA-STARTUP-READING.md`, with exact digests and replay in
-`docs/knowledge/julia-startup-reading-coverage.md`.
+**Julia reading has started:** the first of 52 bounded groups is complete: both
+package manifests and README lines 1–963, totaling 1,071 lines /65,410 bytes.
+Two files are complete; the remaining README lines belong to the next group.
+The full plan still covers all 95 baseline-identical files through 146 exact
+ranges. Its owner is `docs/tasks/JULIA-STARTUP-READING.md`.
 
-The first child reads the package manifests and the initial README range. Source
-reading, comprehension, relevant diagnostics and per-child commits still lie ahead.
-The new bounded task member fits existing limits. Future evidence/history pressure
-is owned by Julia .4 before any required rollover exceeds capacity; no new archive
-slot, capacity increase or Julia milestone exception is preapproved.
+Seven exact README examples pass on Julia 1.12.7, including native source
+compilation, semantic queries, execution observation, and authorized MCP access.
+The primary example produces exactly `{"a":1,"b":2}`. This is focused example
+evidence; it does not claim a complete Julia gate or implementation audit.
+Native callers can compile a source string without a physical specification.
+MCP continues to accept indexes created by its host; parser-builder ideas remain parked.
+
+The README mixes current APIs with older pending milestones and contains bare
+corpus commands that bypass the managed wrapper. Existing startup .41.2/.41.3/.41.7
+own the exact corrections and claim checks. The source and pending repairs remain
+unchanged. Evidence and replay live in `docs/knowledge/julia-package-readme-reading.md`.
+Future evidence/history pressure remains owned by Julia .4 before a required
+rollover; no new capacity or Julia milestone exception is preapproved.
 
 **Independent Dart audit and current verification blockers:** all 55 reading
 commits retain exact scopes, comprehension, verification records and first-parent
@@ -321,8 +328,8 @@ SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` sti
 own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
-Julia is now decomposed into 52 exact reading groups across 95 baseline entries;
-its first physical reading child is next, followed by the remaining Lua/supporting
+Julia has read the first of 52 exact groups across 95 baseline entries;
+its second physical reading child is next, followed by the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,
@@ -353,7 +360,7 @@ All 20 selected tests and write/progressive neutral checks pass. Current progres
 governance is nine complete rollout legs, zero pending, 116 contract mutations and
 60 public mutations. The old admission card's pending wording is now explicitly
 historical. The .3.1/.3.2 audit verifies every child commit and ADR0114 closes
-startup `.3.4` reading. Julia decomposition is complete; physical reading is next. Existing defects and the remaining codebase/book/policy
+startup `.3.4` reading. Julia reading is 1/52; .1.2 is next. Existing defects and the remaining codebase/book/policy
 prerequisites remain open.
 
 **Approved engineering-history capacity:** the director approved collection files
@@ -400,7 +407,7 @@ in 2.25 seconds. That sample locates a pre-main wait without establishing its OS
 or a remedy. The older macOS 26.5.2 closeout does not resolve this macOS 26.6.2 observation.
 The evidence and repair criteria are logged by `SESSION-STARTUP-READING.80.0`; source
 changes remain behind the existing startup prerequisites. The intake is committed at
-`eaf4331e`; approved containment .11 is committed at `ad64f76f`; Dart reading closes under `.3.2` / ADR0114; Julia .1.1 is next after completed decomposition. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
+`eaf4331e`; approved containment .11 is committed at `ad64f76f`; Dart reading closes under `.3.2` / ADR0114; Julia .1.1 reading is complete and .1.2 is next. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
 
 **Known Dart limitation — null named selectors in reconstructed state:** a programmatically
 reconstructed target with these fields is incorrectly accepted:

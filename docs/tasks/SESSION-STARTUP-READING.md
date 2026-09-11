@@ -2233,7 +2233,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas.
   Children: `.3.5.0` owns decomposition; JULIA-STARTUP-READING.1 owns 52 reading children and .3 owns closeout.
   Reading owner: `docs/tasks/JULIA-STARTUP-READING.md` retains exact scope/digest, comprehension and repair evidence. This startup node remains the prerequisite owner.
-  Verification: Startup .3.5.0 freezes Julia reading into 52 owned children / 146 ranges across all 95 baseline-identical files: 75,984 lines / 2,693,170 bytes. Independent reconstruction verifies every byte and range digest; physical Julia reading remains 0/52. A separate bounded JULIA-STARTUP-READING member fits existing controls; .4 owns future history/capacity pressure. Dart reading is closed under ADR0114, with all 69 repairs and its failed gate retained. Next Julia .1.1 reads the manifests and first README range. No Julia consumer or source behavior is verified by inventory alone.
+  Verification: Julia .1.1 completes the manifests and README lines 1–963: 1/52 groups, 1,071 fragments / 65,410 bytes and two complete files. Seven exact README examples and the primary JSON example pass on Julia 1.12.7; semantic governance remains 6/20/128, rollout 9/9 and admission 6/6. Existing startup .41.2/.41.3/.41.7 own the stale status and unmanaged-command guidance. All sources, prior repairs and Dart gate failures remain unchanged. Julia .1.2 is next; .4 owns future capacity pressure. Exact plan and all source identities remain frozen in the Julia owner.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.5.0`
@@ -3191,6 +3191,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     current uniform bare-value reads; these comments must not describe future or always-undef behavior.
     Qualify semantic_index.rs comments that call source-detail queries future work or assign source
     filtering/query to later leaves; the same file now exposes capabilities/query/observation derivation.
+    Julia .1.1 additionally identifies julia/README.md lines 474–475 claiming root topology awaits .4.3 despite its admitted top summary. Qualify this current-tense residue with the original milestones intact.
   Verification: `pending` — current guides still describe Julia/Lua v1 adapters and future named selectors;
     the cursor contract's current reader/marker coverage does not enforce those paragraphs.
   Commit: `pending`
@@ -3209,6 +3210,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     Evidence: docs/knowledge/rust-semantic-runtime-observation.md, startup .3.3.61.
     Also distinguish the composed admission consumer's two emitted-labelled helper routes from independent
     compiled modules; its traced wrappers disable text tracing. Evidence: rust-semantic-introspection-admission Knowledge, .3.3.62.
+    Julia .1.1 adds julia/README.md lines 169–207, 243–250 and 311–338: separate historical query/runtime/emitted-boundary snapshots from current complete APIs. Seven exact README examples pass while the finite marker/denial checker accepts those surrounding statements. See julia-package-readme-reading Knowledge.
   Verification: `pending` — descriptor reference lines 96–99 contradict current semantic admission while
     existing public marker/denial checks pass; full handoff reading finds mixed historical/current wording.
   Commit: `pending`
@@ -3277,6 +3279,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     Replace TOOLBOX section 4.10's two current 68-mutation claims with the canonical MCP transport
     authority or dated evidence: the unchanged September 7 canonical checker reports 76. Preserve
     genuinely historical 68-count milestones and do not infer an optional matrix rerun from that check.
+    Julia .1.1 adds exact bare corpus commands in julia/README.md lines 515 and 963; route them through tools/run_julia_project_data.sh. No unmanaged execution or off-volume write was performed or inferred by this reading. Preserve dated counts while repairing copyable current guidance.
   Verification: `pending` — local-CI prose says full gate for every behavior change and default toolchain
     independence; current canonical gate runs mandatory backend admissions and reports 20 capabilities/100 states.
   Commit: `pending`
@@ -4464,7 +4467,7 @@ Startup `.3.4` stays pending until complete Dart reading; the next executable re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.1` | `pending` | Read the first exact Julia group after the clean decomposition commit; no physical Julia reading credit yet. |
+| 1 | `JULIA-STARTUP-READING.1.2` | `pending` | Read the remaining README, tiny CLI delegates, facade and first ActionAst range from a clean .1.1 checkpoint. |
 
 ## Reading Ledger
 
