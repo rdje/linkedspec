@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 10/52 owned groups; its eleventh reading child is next, with approved ADR0115 capacity in place.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 11/52 owned groups; its twelfth reading child is next, with approved ADR0115 capacity in place.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,11 +297,20 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 10/52 groups complete:** the generated MCP binding, contract
-runtime and server are fully read; McpWire is read through line 55. Cumulative
-coverage is 13,425 lines /549,293 bytes and eighteen complete files. Exact scopes
-remain in `docs/tasks/JULIA-STARTUP-READING.md`. Existing MCP binding, decoded
-server and stdio suites pass 368 assertions; targeted native probes add 32.
+**Julia reading is 11/52 groups complete:** the MCP wire parser and narrow staged
+function-body registry are fully read; the function-definition parser is read
+through line 231. Cumulative coverage is 14,925 lines /601,796 bytes and twenty
+complete files. Exact scopes remain in `docs/tasks/JULIA-STARTUP-READING.md`.
+Existing registry, descriptor, trace, function-parser, stdio and variadic suites
+pass 327 assertions. Neutral staged and transport checks also pass.
+
+The narrow function-body path dispatches `actionir-body.spec` / `action_block`,
+validates function metadata and stitches `body_ast` into a new spec. Its per-job
+cache-key record does not imply a stored parser cache. General assignment-form
+`parse_job(...)` uses the separately admitted frozen-registry scheduler. Function
+shells are parsed by executing the checked-in definition spec; the default compiled
+shell parser is cached. Evidence: `docs/knowledge/julia-staged-function-body-registry.md`
+and `docs/knowledge/julia-spec-driven-function-shell-parser.md`.
 
 The MCP binding embeds canonical frames, schemas and transport policy as generated
 data. Its generator still reproduces 120,030 source bytes exactly; neutral transport
@@ -464,8 +473,8 @@ SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` sti
 own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
-Julia has read ten of 52 exact groups across 95 baseline entries;
-its eleventh physical reading child is next, followed by the remaining Lua/supporting
+Julia has read eleven of 52 exact groups across 95 baseline entries;
+its twelfth physical reading child is next, followed by the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,

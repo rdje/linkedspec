@@ -49,3 +49,14 @@ unchanged closeout `.10.9.5.4` are complete.
 Related facts: [[julia-native-mcp-server-plan]], [[julia-mcp-decoded-server]],
 [[mcp-2026-07-28-stdio-contract]], [[mcp-native-server-topology]], and
 [[mcp-implementation-admission-ledger]].
+
+## September 11 physical wire reconciliation
+
+Julia .1.11 finishes all672 lines of `julia/src/mcp/McpWire.jl`; the existing
+stdio170 assertions pass. The scanner and JSON3 traversal reconcile numeric
+lexemes before dispatch; bounded chunks drain overlong frames and resume at LF.
+CRLF strips one delimiter CR, while a complete final EOF payload is decoded as-is.
+The earlier48/139 binding/dispatch counts above describe their original admission;
+current .1.10 evidence is53/145. The pattern and precedence defects discovered
+there remain owned and do not invalidate the exact existing170-assertion scope.
+See [[julia-mcp-pattern-terminal-newline-gap]] and [[perl-mcp-validation-error-order-drift]].

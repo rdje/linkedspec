@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.11 - read wire and staged function parser paths
+
+Read wire/staged registry and function-parser prefix:1,500 fragments /52,503 bytes.
+Existing registry39/descriptor28/trace28/parser7/stdio170/variadic55 assertions
+and neutral staged/public/MCP checks pass. Reconcile narrow/general staged paths
+and current source-driven parsing facts; all repairs remain. Next Julia .1.12.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.10 - read MCP runtime and own pattern validation repair
 
 Read MCP runtime/server and wire prefix:1,500 fragments /65,039 bytes.

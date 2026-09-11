@@ -44,3 +44,13 @@ This closes the function-shell batch. `JULIA-BACKEND-PARITY.6.3` has since indep
 Related facts: [[julia-full-corpus-gate]], [[julia-user-function-definition-projection]], [[julia-controlled-corpus-execution]],
 [[julia-staged-function-body-registry]], [[julia-user-function-runtime-execution]],
 [[spec-defined-user-function-definition-parser]], [[native-in-memory-backend-contract]].
+
+## September 11 source-reading reconciliation
+
+Julia .1.11 reads `julia/src/parser/UserFunctionDefinitionParser.jl` through231.
+The checked-in spec executes in memory, then its returned nodes enter projection
+and staged body stitching. Default parser construction is cached behind a lock;
+explicit parser source constructs a separate parser. Function-shell7 and frontend/
+staged-trace28 assertions pass. The final helper suffix remains unread for .1.12;
+99/920 counts above are historical, while current corpus ownership records105.
+Focused replay: `docs/knowledge/julia-staged-function-body-registry.md`.

@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.10 completes McpContract, McpContractRuntime and McpServer, and reads McpWire through 55: 10/52 groups, 13,425 fragments /549,293 bytes and eighteen complete files. Existing MCP binding53/dispatch145/stdio170 pass (368 assertions); native pattern20 and order12 diagnostics plus neutral pattern8 outcomes isolate the documented boundaries. Pending Julia .2.4.1/.2.4.2 own full-pattern matching; startup .36 retains validation precedence. Generator and neutral transport35/10/10/76 remain green. All source, prior evidence, repairs and ADR0115 controls remain. Julia .1.11 is next; no full component/canonical gate or dependency build. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.11 completes McpWire and StagedParserRegistry and reads UserFunctionDefinitionParser through 231: 11/52 groups, 14,925 fragments /601,796 bytes and twenty complete files. Existing registry39/descriptor28/trace28/function-parser7/stdio170/variadic55 assertions pass (327 total); neutral staged123/public129 and MCP35/10/10/76 pass. Narrow function-body adapter and general-v2 authority remain separate; source-driven shell parsing and strict wire framing reconcile with Knowledge. All source, prior evidence, repairs and ADR0115 controls remain. Julia .1.12 is next; no full component/canonical gate or dependency build. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.81` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `JULIA-STARTUP-READING.1.10 - read MCP runtime and own pattern validation repair` — Julia .1.10 completes McpContract, McpContractRuntime and McpServer, and reads McpWire through 55: 10/52 groups, 13,425 fragments /549,293 bytes and eighteen complete files. Existing MCP binding53/dispatch145/stdio170 pass (368 assertions); native pattern20 and order12 diagnostics plus neutral pattern8 outcomes isolate the documented boundaries. Pending Julia .2.4.1/.2.4.2 own full-pattern matching; startup .36 retains validation precedence. Generator and neutral transport35/10/10/76 remain green. All source, prior evidence, repairs and ADR0115 controls remain. Julia .1.11 is next; no full component/canonical gate or dependency build.
+- `JULIA-STARTUP-READING.1.11 - read wire and staged function parser paths` — Julia .1.11 completes McpWire and StagedParserRegistry and reads UserFunctionDefinitionParser through 231: 11/52 groups, 14,925 fragments /601,796 bytes and twenty complete files. Existing registry39/descriptor28/trace28/function-parser7/stdio170/variadic55 assertions pass (327 total); neutral staged123/public129 and MCP35/10/10/76 pass. Narrow function-body adapter and general-v2 authority remain separate; source-driven shell parsing and strict wire framing reconcile with Knowledge. All source, prior evidence, repairs and ADR0115 controls remain. Julia .1.12 is next; no full component/canonical gate or dependency build.
 
 ## Next Action
 
-- `JULIA-STARTUP-READING.1.11` — Finish McpWire56-672, read StagedParserRegistry1-652 and UserFunctionDefinitionParser1-231 after clean .1.10.
+- `JULIA-STARTUP-READING.1.12` — Finish UserFunctionDefinitionParser232-249, read BoundedChildParseAuthority1-1367 and Interpreter1-115 after clean .1.11.
 
 ## Recent Completions
+
+- `2026-09-11` — `JULIA-STARTUP-READING.1.11` reads1,500 fragments /52,503 bytes;327 existing assertions and neutral staged/public/MCP checks pass; no repair closed.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.10` reads1,500 fragments /65,039 bytes;368 existing assertions and32 native/eight neutral diagnostics pass; MCP pattern repair remains open.
 
@@ -48,8 +50,6 @@
 - `2026-09-11` — `DART-STARTUP-READING.3.2` / ADR0114 close only verified Dart reading under delegated authority; all69 repairs and failed Dart gate remain. Julia decomposition is next.
 
 - `2026-09-11` — `DART-STARTUP-READING.3.1` audits 55 commits/115 files; runtime diagnostics pass461/25-47/66x2/105, while format/analyzer fail and .2.24/.2.25 own repairs. .3.2 decision pending.
-
-- `2026-09-11` — `DART-STARTUP-READING.1.55` completes physical Dart reading: 55/55, all115 files; 20 tests and two neutral checks pass. Formal .3 remains pending.
 
 ## History
 

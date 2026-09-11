@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia wire and narrow staged parsing
+
+Wire scanning precedes JSON3 decoding and restores exact numeric token kinds.
+The function-body registry builds cache identity per job without storing plans;
+its built-in adapter stays separate from admitted general-v2 frozen authority.
+Function shells execute the checked-in definition spec; default parsing is cached.
+
 ## 2026-09-11 — Julia MCP validation boundaries
 
 Dollar-anchored occursin admits a final LF in handle/digest schema strings; host

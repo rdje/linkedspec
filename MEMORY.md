@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `9431f6c8aeac4b95933c3683b5fa77bf5054acb0` — clean ninth Julia reading handoff.
-- latest_completed_leaf: `JULIA-STARTUP-READING.1.10 - read MCP runtime and own pattern validation repair`; exact tenth group and focused proof complete; prior repairs remain pending.
-- active_work_unit: none; `JULIA-STARTUP-READING.1.11` is next.
-- next_action: Activate Julia .1.11 from clean HEAD; finish McpWire, read StagedParserRegistry and begin UserFunctionDefinitionParser, verify and commit.
+- activation_commit: `88fce698f07b6a77955c22f33e8cc38677f5c341` — clean tenth Julia reading handoff.
+- latest_completed_leaf: `JULIA-STARTUP-READING.1.11 - read wire and staged function parser paths`; exact eleventh group and focused proof complete; prior repairs remain pending.
+- active_work_unit: none; `JULIA-STARTUP-READING.1.12` is next.
+- next_action: Activate Julia .1.12 from clean HEAD; finish UserFunctionDefinitionParser, read BoundedChildParseAuthority and begin Interpreter, verify and commit.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none; no running jobs. Julia .2.1/.2.2/.2.3/.2.4 and all prior repairs remain pending.
 - blockers: No current reading blocker. Startup prerequisites and all repairs remain; ADR0115 is finite capacity with a containment-.12-only exception.
@@ -57,4 +57,4 @@
   Segment 4980-f04b37b1dab6 preserves 217 lines /13128 bytes; all other controls remain unchanged. Proportionate governance: ADR0115.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-11 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart read; Julia 10/52 groups, 13425/75984 lines, 549293/2693170 bytes, eighteen complete files. Lua/supporting code, formal book .4 and policy .5 remain.
+- latest_bootstrap_read: 2026-09-11 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart read; Julia 11/52 groups, 14925/75984 lines, 601796/2693170 bytes, twenty complete files. Lua/supporting code, formal book .4 and policy .5 remain.
