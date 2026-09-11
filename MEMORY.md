@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `d9e63456a8ddf3616a8da20a54f720b410023435` — clean Julia .1.50 handoff.
-- latest_completed_leaf: `JULIA-STARTUP-READING.1.51 - complete Unicode binding and variadic consumer reading`; exact reading and focused proof.
-- active_work_unit: `JULIA-STARTUP-READING.1.52` — next final Julia source-reading group.
-- next_action: Read .1.52 write and dormant progressive-authority ranges from clean .1.51; independent Julia .3 closeout still follows.
+- activation_commit: `ddf175b01553f886102d4e6eeff2f6759a22e52c` — clean Julia .1.51 handoff.
+- latest_completed_leaf: `JULIA-STARTUP-READING.1.52 - finish Julia source reading and own parent-state test gap`; exact reading and focused proof.
+- active_work_unit: `JULIA-STARTUP-READING.3` — next independent Julia reading closeout.
+- next_action: Verify all52 child commits, exact coverage and repair ownership under .3; resolve its closeout verification boundary before Lua.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none; this pointer describes the intended clean committed handoff.
 - blockers: none for Julia reading; ADR0116 admits Knowledge79000 and decisions13000 lines with a .13-only focused exception.
@@ -57,4 +57,4 @@
   Segment 4979-6e4108166552 preserves 213 lines /12545 bytes; all other controls remain unchanged. Proportionate governance: ADR0115.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-11 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart read; Julia 51/52 groups, 74925/75984 lines, 2652127/2693170 bytes, ninety-three complete files. Lua/supporting code, formal book .4 and policy .5 remain.
+- latest_bootstrap_read: 2026-09-11 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart read; Julia 52/52 groups, 75984/75984 lines, 2693170/2693170 bytes, all95 complete files. Lua/supporting code, formal book .4 and policy .5 remain.

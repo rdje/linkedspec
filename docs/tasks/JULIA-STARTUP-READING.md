@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `JULIA-STARTUP-READING`
-- Status: `active` / reading 51/52; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity, matching, staged, diagnostic, static, entry and selector-projection and member-suffix and literal-boundary and projection-metadata and selector/identifier repairs and diagnostic/isolation fixture corrections pending
+- Status: `active` / reading 52/52; independent closeout pending; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity, matching, staged, diagnostic, static, entry and selector-projection and member-suffix and literal-boundary and projection-metadata and selector/identifier repairs and diagnostic/isolation fixture corrections pending
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.5`
 - Created: `2026-09-11`
 - Last updated: `2026-09-11`
@@ -43,7 +43,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Inventory SHA-256: `ca3cff4fe4c0e162448d6dbac82d89898673023951afaeced17d5b9a838ccd10`.
 - Ordered range SHA-256: `fde325f80ae7b56c5890d149fbc965c09890890e963a1fa9aab08e8c9d962337`.
 - Line coordinates are one-based, inclusive LF physical lines. Every child pins its range digest.
-- Current physical reading: 51/52 children, 74,925/75,984 lines and 2,652,127/2,693,170 bytes; ninety-three complete files.
+- Current physical reading: 52/52 children, 75,984/75,984 lines and 2,693,170/2,693,170 bytes; all95 complete files.
 - Exact replay and capacity assessment: `docs/knowledge/julia-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -59,7 +59,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Dependencies: Startup .3.5.0 decomposition committed; each child starts from a clean prior handoff.
   Children: `.1.1-.1.52`, with exact scopes below.
   Acceptance: Every child records physical coverage, comprehension, Knowledge reconciliation, findings and focused proof before its commit. Retain all current-delta and interrupted-range evidence.
-  Verification: Julia .1.51 completes Unicode negative/routes, binding and variadic consumers, then reads write-vivification1–453: 51/52 groups, 74925 lines/2652127 bytes and 93 complete files. Classifier1674, routes81, negative1946, binding61, variadic55 and three complete write testsets362 pass4179 assertions. Neutral Unicode806/9/8/2, binding11/7/6/8, callable3/9/7 and write105 checks pass. Variadic emitted evidence is payload reconstruction, not independent host execution. All repairs remain open; .1.52 completes write and dormant progressive-authority reading.
+  Verification: Julia .1.52 completes write and dormant progressive-authority consumers: all52/52 groups, 75984 lines/2693170 bytes and95 files are physically read. Complete write406, authority210 and admitted carrier62 pass678 assertions; write105, progressive116/public60 and typed14/0/231 checks pass. Four parent-state fixture comparisons observe no dispatched state; new .2.27 owns actual-state coverage, with14 diagnostic/selection controls alongside184 existing assertions. Actual native cursor proof remains valid; no runtime corruption is reproduced. All repairs remain open; independent .3 closeout and Lua/supporting reading still follow.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.1.1`
@@ -931,21 +931,28 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Commit: `JULIA-STARTUP-READING.1.51 - complete Unicode binding and variadic consumer reading`
 
 - ID: `JULIA-STARTUP-READING.1.52`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Julia group 52 and reconcile its source evidence.
   Dependencies: `JULIA-STARTUP-READING.1.51` committed; empty brief and clean repository.
+  Activation commit: `ddf175b01553f886102d4e6eeff2f6759a22e52c`.
+  Verification tier: `focused`
+  Focused checks: Exact final two-range/source coverage, complete write and dormant progressive-authority consumers with neutral direct dependents, prior source/task/fact/history preservation, Knowledge/memory, both history checks, rendered book and normal doctrines.
+  Canonical trigger: `none` — bounded startup reading/evidence; independent parent closeout remains .3 and no production, dependency, infrastructure or contract changes.
   Scope: `julia/test/write_vivification_contract_test.jl` lines 454-659; `julia/test_dormant/progressive_span_dispatch_authority_test.jl` lines 1-853
   Baseline evidence: 1059 fragments / 41043 bytes; ordered range SHA-256 `37a0286dea1b9ed8e5dfb7388ef5fd0ce9c0f0899819a13bcdb103ba4bc13e9c`.
   Acceptance: Physically read every owned byte, inspect current deltas, reconcile Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit. Do not count truncated output or unread consumer suffixes.
-  Verification: `pending`
-  Commit: `pending`
+  Comprehension: Completes write injected-error identity, noncreating reads, actual initial/RHS/result/binding mutations, invocation absence/null, malformed-carrier boundaries and fresh emitted-module/CLI execution. Progressive authority derives all view/grant/cancellation/chain/execution rows and26 diagnostic contexts; nested scalar rebasing, shared resource charges, retained-view/request expiry, copied registry/result inputs and finite/node/UTF8 limits are exercised. Authority discovery remains dormant and private; final-path carrier is admitted despite the old source comment describing its former RED stage.
+  Knowledge: New progressive-parent-state-test-gap card owns exact observation mechanism and probe. Append write and progressive authority/carrier reading boundaries; write home retains full678 replay. Existing nested-grant and pattern repairs stay qualified.
+  Findings: Four authority execution-row assertions compare a fixture copy never supplied to dispatch, so they cannot detect runtime parent-state mutation. New .2.27 owns actual supported-carrier state snapshots and mutation rejection controls after startup prerequisites. Separate admitted native cursor_char_offset0 proof remains valid. No runtime corruption, new authority defect or prior repair closure is inferred.
+  Verification: Six bounded untruncated windows cover1059 fragments/41043 baseline-identical bytes; ordered SHA37a0286dea1b9ed8e5dfb7388ef5fd0ce9c0f0899819a13bcdb103ba4bc13e9c. Full write406/authority210/carrier62 pass678 assertions. Separate fully read first authority testset184 plus12 row controls and2 selection checks pass198; the matrix summary is196. Neutral write105, progressive116/public60 and typed14/0/231 pass. Exact95-source/52-scope reconstruction remains unchanged; independent closeout of .1/startup .3.5 belongs exclusively to .3. 606 prior task nodes, three prior card prefixes, all hot/history suffixes and26 prior plus1 new rendered limitation headings pass. Knowledge73515/79000 lines, tasks84590/88000 and decisions12090/13000 fit; changes391/23492 and notes326/18456 need no rollover. Both history checks, Knowledge/memory and rendered book pass; normal doctrines govern landing.
+  Commit: `JULIA-STARTUP-READING.1.52 - finish Julia source reading and own parent-state test gap`
 
 - ID: `JULIA-STARTUP-READING.2`
   Status: `pending`
   Goal: Preserve disjoint repair ownership for every confirmed Julia finding.
   Dependencies: Findings from .1; source repair additionally requires startup .3/.4/.5.
   Acceptance: Reuse exact existing startup owners when applicable; otherwise add bounded repair children with source mechanism, reproduction, acceptance and unblock conditions. No finding is closed by reading alone.
-  Children: .2.1 callable-body selector validation; .2.2 attached-switch body/duplicate-default validation; .2.3 recognition-effect integration; .2.4 MCP pattern full matching; .2.5 progressive identity full matching; .2.6 semantic callback action passthrough; .2.7 recognition attempt preflight; .2.8 helper callback recursion identity; .2.9 numeric boundaries; .2.10 safe slice/drop arithmetic; .2.11 input_slice arity; .2.12 selected-slot mode preflight; .2.13 staged pattern validation; .2.14 diagnostic byte retention; .2.15 semantic regex call source; .2.16 mixed slot correlation; .2.17 conditional entry explanation; .2.18 authored edge selector identity; .2.19 unparsed member suffix retention; .2.20 compact argument lexical boundaries; .2.21 outer regex-brace scanning; .2.22 projected function metadata authority; .2.23 null named selectors; .2.24 complete function identifiers; .2.25 diagnostic callable-literal regression coverage; .2.26 actual returned-result isolation coverage. Nested authority and diagnostic review retain startup .37.1/.37.2. Prior README findings retain startup .41.2/.41.3/.41.7.
+  Children: .2.1 callable-body selector validation; .2.2 attached-switch body/duplicate-default validation; .2.3 recognition-effect integration; .2.4 MCP pattern full matching; .2.5 progressive identity full matching; .2.6 semantic callback action passthrough; .2.7 recognition attempt preflight; .2.8 helper callback recursion identity; .2.9 numeric boundaries; .2.10 safe slice/drop arithmetic; .2.11 input_slice arity; .2.12 selected-slot mode preflight; .2.13 staged pattern validation; .2.14 diagnostic byte retention; .2.15 semantic regex call source; .2.16 mixed slot correlation; .2.17 conditional entry explanation; .2.18 authored edge selector identity; .2.19 unparsed member suffix retention; .2.20 compact argument lexical boundaries; .2.21 outer regex-brace scanning; .2.22 projected function metadata authority; .2.23 null named selectors; .2.24 complete function identifiers; .2.25 diagnostic callable-literal regression coverage; .2.26 actual returned-result isolation coverage; .2.27 progressive parent-state evidence coverage. Nested authority and diagnostic review retain startup .37.1/.37.2. Prior README findings retain startup .41.2/.41.3/.41.7.
   Verification: `pending` repairs; .1.3 owns the callable-body selector gap, and .1.4 confirms attached-switch projection omission and default replacement. Earlier documentation and helper-arity owners remain intact.
   Commit: `pending`
 
@@ -1691,11 +1698,20 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Verification: `pending` coverage repair; .1.49 owns22 diagnostic/selection assertions plus the164-assertion existing prefix in the same process. Replay: docs/knowledge/julia-staged-result-isolation-test-gap.md.
   Commit: `pending`
 
+- ID: `JULIA-STARTUP-READING.2.27`
+  Status: `pending`
+  Goal: Make progressive parent-state evidence observe the execution state under dispatch and reject disconnected fixture assertions.
+  Dependencies: Startup .3/.4/.5 and .1.52 committed; preserve progressive authority/carrier contracts and discovery boundaries.
+  Evidence: test_dormant/progressive_span_dispatch_authority_test348 constructs a fresh parent_before copy; its sole later use at380 compares parent_after. Neither invocation configuration nor callback receives that object. Four row controls show independently changed state is invisible to the predicate, while the admitted carrier separately asserts actual native cursor_char_offset0 at351. This is a test-coverage gap; no runtime parent-state corruption is reproduced.
+  Acceptance: Qualify or remove the disconnected assertion as runtime evidence; add focused supported-carrier checks that snapshot actual parent cursor/boundary/mark/variable/capture state across successful and failing dispatch where the neutral contract requires preservation. Prove the observation predicate rejects deliberate mutation of its actual observed state, including non-cursor fields; keep authority/resource changes separately expected. Audit corresponding peer fixtures and own any gaps. Preserve historical evidence, precise current carrier guarantees and the book; no dormant/admission or runtime change without separately owned justification and reproduction. Run focused progressive/carrier and neutral proof after startup prerequisites.
+  Verification: `pending` repair; .1.52 executes184 existing matrix assertions plus12 row controls and2 selection checks. Exact replay and limits: docs/knowledge/julia-progressive-parent-state-test-gap.md.
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.52` | `pending` | Complete write and dormant progressive-authority reading after clean .1.51. |
+| 1 | `JULIA-STARTUP-READING.3` | `pending` | Independently verify all52 child commits, source coverage, repair ownership and closeout boundary before routing Lua. |
 
 ## Decisions
 
@@ -1726,6 +1742,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Source repairs retain startup prerequisites; those dependencies do not block source reading.
 
 ## Verification Log
+
+- `2026-09-11` .1.52: Julia .1.52 completes write and dormant progressive-authority consumers: all52/52 groups, 75984 lines/2693170 bytes and95 files are physically read. Complete write406, authority210 and admitted carrier62 pass678 assertions; write105, progressive116/public60 and typed14/0/231 checks pass. Four parent-state fixture comparisons observe no dispatched state; new .2.27 owns actual-state coverage, with14 diagnostic/selection controls alongside184 existing assertions. Actual native cursor proof remains valid; no runtime corruption is reproduced. All repairs remain open; independent .3 closeout and Lua/supporting reading still follow.
 
 - `2026-09-11` .1.51: Julia .1.51 completes Unicode negative/routes, binding and variadic consumers, then reads write-vivification1–453: 51/52 groups, 74925 lines/2652127 bytes and 93 complete files. Classifier1674, routes81, negative1946, binding61, variadic55 and three complete write testsets362 pass4179 assertions. Neutral Unicode806/9/8/2, binding11/7/6/8, callable3/9/7 and write105 checks pass. Variadic emitted evidence is payload reconstruction, not independent host execution. All repairs remain open; .1.52 completes write and dormant progressive-authority reading.
 
@@ -1820,6 +1838,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Commit Log
 
+- `2026-09-11` .1.52: `JULIA-STARTUP-READING.1.52 - finish Julia source reading and own parent-state test gap`.
+
 - `2026-09-11` .1.51: `JULIA-STARTUP-READING.1.51 - complete Unicode binding and variadic consumer reading`.
 
 - `2026-09-11` .1.50: `JULIA-STARTUP-READING.1.50 - complete staged source and Unicode identity reading`.
@@ -1902,6 +1922,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Decomposition: `SESSION-STARTUP-READING.3.5.0 - freeze exact bounded Julia reading plan`.
 
 ## Changelog
+
+- `2026-09-11` .1.52: Complete all95 Julia files/52 groups. Own progressive disconnected parent-state test gap under .2.27; preserve every earlier repair. Independent .3 closeout follows.
 
 - `2026-09-11` .1.51: Complete Unicode/binding/variadic consumers and write1–453;51/52 groups and93 complete files. Preserve all repairs; final group .1.52 follows.
 

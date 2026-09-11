@@ -59,3 +59,17 @@ identity matching; neutral pattern12 outcomes reject terminal LF. Direct cost,
 result-node and diagnostic-byte limits work in the measured controls. Prior broad
 narrowing statements must be read with these pending boundaries. Exact mechanism,
 replay and startup .37 / Julia .2.5 ownership: [[julia-progressive-authority-boundary-gaps]].
+
+## September 11 — dormant authority consumer reading complete .1.52
+
+All853 lines are read. Fresh210 assertions cover the exact matrix, nested rebasing,
+view/request expiry, copied registry input, actual child-result seed mutation,
+node limits, UTF8 diagnostic truncation, cycles/nonfinite rejection and unchanged
+private/dormant discovery. The old final-path RED comment describes its historical
+stage; that separate carrier is admitted and freshly passes62 assertions.
+Four parent_before/parent_after row checks observe only a disconnected fixture
+copy. Julia .2.27 owns actual-state coverage; [[julia-progressive-parent-state-test-gap]]
+records the mechanism,14 added diagnostics and184 existing matrix assertions.
+Earlier nested-grant and pattern gaps retain startup .37 and Julia .2.5. The broad
+statement that the matrix covers execution rows does not turn fixture comparisons
+into integration state-isolation proof. Full replay: [[write-vivification-julia-runtime]] .1.52.

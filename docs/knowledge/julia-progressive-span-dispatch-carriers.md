@@ -67,3 +67,13 @@ nested grant/budget inheritance defects. Static effect claims are limited by
 token defense does not close the structural effect-classification gap. Current
 neutral progressive rollout is 9/9 with 116 contract and 60 public mutations; older
 5/9/106 and 7/9/112 snapshots above are dated history. No repair is closed here.
+
+## September 11 — actual cursor proof retained during authority test audit
+
+Julia .1.52 reruns all62 admitted assertions alongside the complete210 authority
+matrix. The native carrier explicitly checks actual cursor_char_offset0 at351;
+it remains valid. The separate authority matrix's parent-state fixture assertion
+is disconnected from dispatch and cannot establish broader register preservation.
+Julia .2.27 owns stronger actual-state and mutation-rejection coverage. Exact scope:
+[[julia-progressive-parent-state-test-gap]]. No carrier, discovery, runtime or
+authority repair is changed or closed by this source-reading checkpoint.

@@ -1568,7 +1568,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.52` | `pending` | Complete Julia write and dormant progressive-authority reading after clean .1.51; Dart repairs retain their startup prerequisites. |
+| 1 | `JULIA-STARTUP-READING.3` | `pending` | Independently close Julia reading after clean .1.52, then route Lua; Dart repairs retain their startup prerequisites. |
 
 ## Decisions
 

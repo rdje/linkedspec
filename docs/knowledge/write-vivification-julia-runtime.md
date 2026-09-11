@@ -78,3 +78,27 @@ bash tools/run_python_project_data.sh tools/check_uniform_binding_contract.py
 bash tools/run_python_project_data.sh tools/check_callable_signature_contract.py
 bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py
 ```
+
+## September 11 — write consumer reading complete .1.52
+
+Reading454–659 reaches EOF. Injected expression failures preserve exact exception
+identity and stop later effects; reads remain noncreating. The detachment fixture
+mutates actual initial/RHS/binding/result paths, while fresh function calls distinguish
+absence from bound null. Malformed typed states reject through validation, engine,
+emission and plan boundaries. Reconstructed/native/generated-plan/CLI results and
+a freshly included emitted module agree; this emitted route is an isolated module
+in the same process, distinct from the separate offline-host emitter suite.
+
+At activationddf175b01553f886102d4e6eeff2f6759a22e52c, complete write406,
+dormant progressive authority210 and admitted carrier62 pass678 assertions.
+Neutral write105, progressive116/public60 and typed14/0/231 pass. Separate
+parent-state diagnostic evidence belongs to [[julia-progressive-parent-state-test-gap]].
+No whole package, canonical or other-backend execution is claimed. All95 Julia
+files are read; independent .3 closeout and remaining startup prerequisites follow.
+
+```bash
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include("julia/test/write_vivification_contract_test.jl"); include("julia/test_dormant/progressive_span_dispatch_authority_test.jl"); include("julia/test/progressive_span_dispatch_contract_test.jl")'
+bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py
+bash tools/run_python_project_data.sh tools/check_progressive_span_dispatch_contract.py
+bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py
+```

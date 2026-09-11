@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.51 completes Unicode negative/routes, binding and variadic consumers, then reads write-vivification1–453: 51/52 groups, 74925 lines/2652127 bytes and 93 complete files. Classifier1674, routes81, negative1946, binding61, variadic55 and three complete write testsets362 pass4179 assertions. Neutral Unicode806/9/8/2, binding11/7/6/8, callable3/9/7 and write105 checks pass. Variadic emitted evidence is payload reconstruction, not independent host execution. All repairs remain open; .1.52 completes write and dormant progressive-authority reading. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.52 completes write and dormant progressive-authority consumers: all52/52 groups, 75984 lines/2693170 bytes and95 files are physically read. Complete write406, authority210 and admitted carrier62 pass678 assertions; write105, progressive116/public60 and typed14/0/231 checks pass. Four parent-state fixture comparisons observe no dispatched state; new .2.27 owns actual-state coverage, with14 diagnostic/selection controls alongside184 existing assertions. Actual native cursor proof remains valid; no runtime corruption is reproduced. All repairs remain open; independent .3 closeout and Lua/supporting reading still follow. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.82` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `JULIA-STARTUP-READING.1.51 - complete Unicode binding and variadic consumer reading` — Julia .1.51 completes Unicode negative/routes, binding and variadic consumers, then reads write-vivification1–453: 51/52 groups, 74925 lines/2652127 bytes and 93 complete files. Classifier1674, routes81, negative1946, binding61, variadic55 and three complete write testsets362 pass4179 assertions. Neutral Unicode806/9/8/2, binding11/7/6/8, callable3/9/7 and write105 checks pass. Variadic emitted evidence is payload reconstruction, not independent host execution. All repairs remain open; .1.52 completes write and dormant progressive-authority reading.
+- `JULIA-STARTUP-READING.1.52 - finish Julia source reading and own parent-state test gap` — Julia .1.52 completes write and dormant progressive-authority consumers: all52/52 groups, 75984 lines/2693170 bytes and95 files are physically read. Complete write406, authority210 and admitted carrier62 pass678 assertions; write105, progressive116/public60 and typed14/0/231 checks pass. Four parent-state fixture comparisons observe no dispatched state; new .2.27 owns actual-state coverage, with14 diagnostic/selection controls alongside184 existing assertions. Actual native cursor proof remains valid; no runtime corruption is reproduced. All repairs remain open; independent .3 closeout and Lua/supporting reading still follow.
 
 ## Next Action
 
-- `JULIA-STARTUP-READING.1.52` — Complete write and dormant progressive-authority reading after clean .1.51.
+- `JULIA-STARTUP-READING.3` — Independently verify all52 child commits, exact coverage and repair ownership; resolve its required closeout verification boundary before routing Lua.
 
 ## Recent Completions
+
+- `2026-09-11` — `JULIA-STARTUP-READING.1.52` finishes all95 Julia files/52 groups;678 assertions and neutral checks pass; .2.27 owns parent-state test coverage.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.51` reads1500 fragments/55360 bytes;4179 assertions and four neutral checks pass; all repairs remain open.
 
@@ -48,8 +50,6 @@
 - `2026-09-11` — `JULIA-STARTUP-READING.1.38` reads1500 fragments /57682 bytes;494 existing assertions and four neutral checks pass; all repair owners remain.
 
 - `2026-09-11` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.13` admits the two approved Julia evidence line limits under ADR0116;20 threshold/24 authorization controls and complete preservation/reserve proof pass.
-
-- `2026-09-11` — `JULIA-STARTUP-READING.5.1` commits a finite two-scalar evidence-capacity proposal and explicit .13-only verification request; all limits remain unchanged pending director approval.
 
 ## History
 

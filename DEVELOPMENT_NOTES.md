@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Progressive parent-state fixture copies are not execution observations
+
+Authority consumer348/380 copies and compares a fixture never supplied to dispatch.
+Four row controls cannot make that predicate observe independent state mutation;
+the admitted carrier separately checks actual cursor0. Julia .2.27 owns actual
+state snapshots and mutation controls; no runtime corruption is reproduced.
+
 ## 2026-09-11 — Variadic emitted payload reconstruction has a precise carrier boundary
 
 The variadic consumer decodes emitted JSON, reconstructs SpecFile and executes

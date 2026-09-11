@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 51/52 owned groups. ADR0116 admits the finite evidence allowance; ADR0115 remains limited to history.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read all 52 owned groups; independent closeout remains pending. ADR0116 admits the finite evidence allowance; ADR0115 remains limited to history.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,18 +297,19 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 51/52 groups complete:** coverage reaches 74,925 lines /
-2,652,127 bytes and ninety-three complete files. The selected Unicode, binding,
-variadic and completed write-prefix tests pass 4,179 assertions. Invalid rule labels
-are checked before external AST artifact construction; selectors, loader errors and
-primary output retain exact identity and path-redaction behavior. Binding updates
-keep saved results detached, while registered rules retain ambiguous `push` priority.
-Variadic tests verify fixed/rest signatures, left-to-right argument evaluation and
-fresh rest arrays. Their emitted-source check reconstructs and executes its encoded
-payload; independent emitted-host evidence belongs to the separate carrier suites.
-Write reading covers ordered successful construction and typed structural failures.
-Its expression-failure test is partial; `.1.52` completes write and the dormant
-progressive-authority consumer. All earlier limitations remain open below.
+**Julia reading is 52/52 groups complete; independent closeout is pending:** all
+75,984 lines / 2,693,170 bytes across 95 files are physically read. Complete write,
+progressive authority and admitted carrier tests pass 678 assertions. Write tests
+mutate actual initial, RHS, binding and result values, preserve injected error
+identity, keep reads noncreating and execute a fresh emitted module plus the CLI.
+Progressive tests cover source rebasing, view expiry and shared resource charges.
+Reading found disconnected parent-state fixture comparisons; `.2.27` owns stronger
+coverage below. The admitted carrier's actual cursor check remains valid. No runtime
+parent-state corruption is established, and earlier authority limitations remain.
+The private authority consumer stays outside ordinary/canonical discovery; its
+final-path carrier remains admitted. Independent `.3` verifies source coverage and
+all 52 child commits before closing Julia reading and routing Lua. Full codebase,
+formal book and policy prerequisites are still incomplete.
 
 **Approved Julia evidence capacity:** the director granted Knowledge lines
 72,000→79,000 and decision-record lines12,000→13,000 under ADR0116. The finite
@@ -336,6 +337,14 @@ Julia `.2.25` owns the permanent fixture correction and counterpart audit.
 At reading group34, the change-history rollover preserved 213 committed lines
 /12,545 bytes in segment4979 and retained a251-line hot log; all prior archive bytes and
 query order remain exact within the existing ADR0115 limits.
+
+**Known Julia limitation — progressive parent-state test coverage:** the private
+authority matrix compares a copied parent-state fixture that dispatch never receives.
+Those four assertions check fixture consistency and cannot detect runtime register
+mutation. The admitted carrier separately verifies the actual native cursor remains
+zero. Julia `.2.27` owns observed parent-state checks across supported carriers and a
+mutation control that the same predicate rejects. No runtime corruption was reproduced;
+all existing progressive authority repairs remain open.
 
 **Known Julia limitation — staged result isolation test coverage:** the permanent
 carrier test mutates a copy of a result. That assertion also passes when all eight
@@ -747,8 +756,8 @@ SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` sti
 own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
-Julia has read fifty-one of 52 exact groups across 95 baseline entries;
-its final source-reading child follows, with the remaining Lua/supporting
+Julia has read all 52 exact groups across 95 baseline entries;
+its independent reading-closeout audit follows, with the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,
