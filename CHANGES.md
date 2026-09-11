@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.2 - read facade and typed action model
+
+Read the exact 1,500-fragment /38,998-byte group; cumulative Julia reading is
+2/52 groups and six complete files. All public names resolve, both CLI help
+paths and 55 punctuation assertions pass. Preserve known helper drift and
+extend existing README-command repair ownership; source files stay unchanged.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.1 - read package manifests and README examples
 
 Read 1,071 fragments /65,410 bytes with exact baseline coverage. Seven authored

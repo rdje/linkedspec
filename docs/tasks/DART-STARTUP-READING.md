@@ -1566,7 +1566,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.2` | `pending` | Read the remaining README, tiny CLI delegates, facade and first ActionAst range from a clean .1.1 checkpoint. |
+| 1 | `JULIA-STARTUP-READING.1.3` | `pending` | Read the remaining ActionAst and first ActionContracts range from a clean .1.2 checkpoint. |
 
 ## Decisions
 

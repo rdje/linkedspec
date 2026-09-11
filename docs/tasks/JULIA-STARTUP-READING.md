@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `JULIA-STARTUP-READING`
-- Status: `active` / reading 1/52; repairs remain owned
+- Status: `active` / reading 2/52; repairs remain owned
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.5`
 - Created: `2026-09-11`
 - Last updated: `2026-09-11`
@@ -43,7 +43,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Inventory SHA-256: `ca3cff4fe4c0e162448d6dbac82d89898673023951afaeced17d5b9a838ccd10`.
 - Ordered range SHA-256: `fde325f80ae7b56c5890d149fbc965c09890890e963a1fa9aab08e8c9d962337`.
 - Line coordinates are one-based, inclusive LF physical lines. Every child pins its range digest.
-- Current physical reading: 1/52 children, 1,071/75,984 lines and 65,410/2,693,170 bytes; two complete files.
+- Current physical reading: 2/52 children, 2,571/75,984 lines and 104,408/2,693,170 bytes; six complete files.
 - Exact replay and capacity assessment: `docs/knowledge/julia-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -59,7 +59,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Dependencies: Startup .3.5.0 decomposition committed; each child starts from a clean prior handoff.
   Children: `.1.1-.1.52`, with exact scopes below.
   Acceptance: Every child records physical coverage, comprehension, Knowledge reconciliation, findings and focused proof before its commit. Retain all current-delta and interrupted-range evidence.
-  Verification: Julia .1.1 completes the manifests and README lines 1–963: 1/52 groups, 1,071 fragments / 65,410 bytes and two complete files. Seven exact README examples and the primary JSON example pass on Julia 1.12.7; semantic governance remains 6/20/128, rollout 9/9 and admission 6/6. Existing startup .41.2/.41.3/.41.7 own the stale status and unmanaged-command guidance. All sources, prior repairs and Dart gate failures remain unchanged. Julia .1.2 is next; .4 owns future capacity pressure.
+  Verification: Julia .1.2 finishes README, both command delegates and the facade, and reads ActionAst through line 964: 2/52 groups, 2,571 fragments /104,408 bytes and six complete files. All 452 public names are defined; both CLI help paths, 55 punctuation assertions and neutral 6/4/6 pass. The existing missing-needle contains defect remains under backlog .5; startup .41.7 owns the remaining bare README commands. Sources, Dart failures and all repairs stay unchanged. Julia .1.3 is next; .4 owns future capacity pressure.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.1.1`
@@ -80,14 +80,21 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Commit: `JULIA-STARTUP-READING.1.1 - read package manifests and README examples`.
 
 - ID: `JULIA-STARTUP-READING.1.2`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Julia group 2 and reconcile its source evidence.
   Dependencies: `JULIA-STARTUP-READING.1.1` committed; empty brief and clean repository.
   Scope: `julia/README.md` lines 964-969; `julia/bin/corpus_runner.jl` lines 1-5; `julia/bin/linkedspec_julia.jl` lines 1-5; `julia/src/LinkedSpecJulia.jl` lines 1-520; `julia/src/action/ActionAst.jl` lines 1-964
   Baseline evidence: 1500 fragments / 38998 bytes; ordered range SHA-256 `102f0726d6ff496e806c63dcd6656b52fdcb4b7e2db3fcd7507a9da2adf33ff7`.
+  Activation commit: `2f3129f880f6a1481daf23eeec982a57c631bb81`.
+  Verification tier: `focused`
+  Focused checks: Exact bounded reading and baseline identity; focused native ActionIR/parser tests and entrypoint smoke through managed Julia; Knowledge, memory, histories, rendered book, scope/whitespace and normal doctrines.
+  Canonical trigger: `none` — ordinary reading evidence with no source, contract, dependency, gate or infrastructure change.
   Acceptance: Physically read every owned byte, inspect current deltas, reconcile Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit. Do not count truncated output or unread consumer suffixes.
-  Verification: `pending`
-  Commit: `pending`
+  Comprehension: The two five-line commands delegate to one native module; its 37 includes assemble tracing, source/action parsing, compiled/runtime authorities, generated source, semantic projection/query and MCP before native loading/CLI. Stable status helpers retain repo-relative entrypoint data. The ActionAst prefix defines typed source spans, statements/calls, recognition and progressive operations, inert staged text/options declarations, variable/access/write nodes, aggregates and explicit/contextual callable bodies, scalar/nested assignments, receiver mutation/continuation and control nodes. Immediate vector copies do not imply recursive AST immutability; tuple-backed staged sequences retain typed logical data. The switch struct continues in .1.3. Separately inspected punctuation proof removes source metadata for alias AST equality, preserves exclusions/known contains drift and reconstructs emitted JSON without independent emitted-module execution.
+  Knowledge: Reconciled action AST/parser, frontend JSON, helper contracts and receiver-arity facts; current boundary is docs/knowledge/julia-facade-action-model-reading.md. The parser fact now labels its original structural-only stage historical.
+  Findings: No new runtime defect. Preserve FUTURE-PARITY-BACKLOG.5 contains-arity ownership and extend existing startup .41.7 to README lines 964–965; no unmanaged command ran.
+  Verification: Five exact ranges read untruncated: 1500 fragments /38998 baseline-identical bytes, child digest 102f0726d6ff496e806c63dcd6656b52fdcb4b7e2db3fcd7507a9da2adf33ff7. Managed Julia 1.12.7 defines all 452 public names; package entrypoint assertions and both help exits pass. Existing punctuation consumer 55/55 and neutral 6 standalone/4 receiver/6 invalid pass. No full component/canonical gate, dependency build, emitted child or later reading credit. Source/old-evidence preservation, Knowledge, memory, histories, rendered book and normal doctrines accompany the commit.
+  Commit: `JULIA-STARTUP-READING.1.2 - read facade and typed action model`.
 
 - ID: `JULIA-STARTUP-READING.1.3`
   Status: `pending`
@@ -617,7 +624,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.2` | `pending` | Read the remaining README, tiny CLI delegates, facade and first ActionAst range from a clean .1.1 checkpoint. |
+| 1 | `JULIA-STARTUP-READING.1.3` | `pending` | Read the remaining ActionAst and first ActionContracts range from a clean .1.2 checkpoint. |
 
 ## Decisions
 
@@ -635,15 +642,18 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Verification Log
 
+- `2026-09-11` .1.2: Julia .1.2 finishes README, both command delegates and the facade, and reads ActionAst through line 964: 2/52 groups, 2,571 fragments /104,408 bytes and six complete files. All 452 public names are defined; both CLI help paths, 55 punctuation assertions and neutral 6/4/6 pass. The existing missing-needle contains defect remains under backlog .5; startup .41.7 owns the remaining bare README commands. Sources, Dart failures and all repairs stay unchanged. Julia .1.3 is next; .4 owns future capacity pressure.
 - `2026-09-11` .1.1: Julia .1.1 completes the manifests and README lines 1–963: 1/52 groups, 1,071 fragments / 65,410 bytes and two complete files. Seven exact README examples and the primary JSON example pass on Julia 1.12.7; semantic governance remains 6/20/128, rollout 9/9 and admission 6/6. Existing startup .41.2/.41.3/.41.7 own the stale status and unmanaged-command guidance. All sources, prior repairs and Dart gate failures remain unchanged. Julia .1.2 is next; .4 owns future capacity pressure.
 - `2026-09-11`: Startup .3.5.0 independently reconstructs all 95 baseline-identical paths,52 groups,146 ranges and every byte once; all child bounds/digests pass. No physical-reading credit.
 
 ## Commit Log
 
+- .1.2: `JULIA-STARTUP-READING.1.2 - read facade and typed action model`.
 - .1.1: `JULIA-STARTUP-READING.1.1 - read package manifests and README examples`.
 - Decomposition: `SESSION-STARTUP-READING.3.5.0 - freeze exact bounded Julia reading plan`.
 
 ## Changelog
 
+- `2026-09-11`: .1.2 completes six files cumulatively and the first typed ActionAst range; prior repairs remain pending.
 - `2026-09-11`: .1.1 closes the first exact source-reading group and routes existing public-teaching repairs.
 - `2026-09-11`: Created bounded Julia reading ownership with 52 pending source children and explicit repair, closeout and capacity owners.

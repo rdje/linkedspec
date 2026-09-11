@@ -2233,7 +2233,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas.
   Children: `.3.5.0` owns decomposition; JULIA-STARTUP-READING.1 owns 52 reading children and .3 owns closeout.
   Reading owner: `docs/tasks/JULIA-STARTUP-READING.md` retains exact scope/digest, comprehension and repair evidence. This startup node remains the prerequisite owner.
-  Verification: Julia .1.1 completes the manifests and README lines 1–963: 1/52 groups, 1,071 fragments / 65,410 bytes and two complete files. Seven exact README examples and the primary JSON example pass on Julia 1.12.7; semantic governance remains 6/20/128, rollout 9/9 and admission 6/6. Existing startup .41.2/.41.3/.41.7 own the stale status and unmanaged-command guidance. All sources, prior repairs and Dart gate failures remain unchanged. Julia .1.2 is next; .4 owns future capacity pressure. Exact plan and all source identities remain frozen in the Julia owner.
+  Verification: Julia .1.2 finishes README, both command delegates and the facade, and reads ActionAst through line 964: 2/52 groups, 2,571 fragments /104,408 bytes and six complete files. All 452 public names are defined; both CLI help paths, 55 punctuation assertions and neutral 6/4/6 pass. The existing missing-needle contains defect remains under backlog .5; startup .41.7 owns the remaining bare README commands. Sources, Dart failures and all repairs stay unchanged. Julia .1.3 is next; .4 owns future capacity pressure. Exact plan and all source identities remain frozen in the Julia owner.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.5.0`
@@ -3280,6 +3280,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     authority or dated evidence: the unchanged September 7 canonical checker reports 76. Preserve
     genuinely historical 68-count milestones and do not infer an optional matrix rerun from that check.
     Julia .1.1 adds exact bare corpus commands in julia/README.md lines 515 and 963; route them through tools/run_julia_project_data.sh. No unmanaged execution or off-volume write was performed or inferred by this reading. Preserve dated counts while repairing copyable current guidance.
+    Julia .1.2 completes README reading and adds the same bare-command defect at lines 964–965; both managed help paths pass. See julia-facade-action-model-reading Knowledge.
   Verification: `pending` — local-CI prose says full gate for every behavior change and default toolchain
     independence; current canonical gate runs mandatory backend admissions and reports 20 capabilities/100 states.
   Commit: `pending`
@@ -4467,7 +4468,7 @@ Startup `.3.4` stays pending until complete Dart reading; the next executable re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.2` | `pending` | Read the remaining README, tiny CLI delegates, facade and first ActionAst range from a clean .1.1 checkpoint. |
+| 1 | `JULIA-STARTUP-READING.1.3` | `pending` | Read the remaining ActionAst and first ActionContracts range from a clean .1.2 checkpoint. |
 
 ## Reading Ledger
 

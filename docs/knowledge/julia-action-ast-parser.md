@@ -33,9 +33,11 @@ parsed as a complete statement; expression/value-position `next` remains a varia
 identifier becomes the existing empty-argument fluent call only in the final chain segment. Intermediate receiver
 segments, condition headers, general calls, and trailing-block receivers retain their parenthesized grammar.
 
-This was a structural parsing boundary only at `.3.1`. Julia helper-contract resolution has since landed in
-`JULIA-BACKEND-PARITY.3.2`; the user-function registry over these nodes, parsed-spec compilation, helper runtime
-semantics, and corpus fixture execution remain later `JULIA-BACKEND-PARITY.3.x` / `.4.x` leaves.
+At the historical `.3.1` milestone this was a structural parsing boundary only, with registry, compilation,
+runtime and corpus work scheduled in subsequent `.3.x` / `.4.x` leaves. Those mechanisms now exist; the
+September 11 reading and focused consumer evidence is in [[julia-facade-action-model-reading]], and current
+package/README examples are in [[julia-package-readme-reading]]. This clarification grants no complete gate
+or resolution of the independently owned helper-arity drift.
 
 Related facts: [[julia-user-function-definition-projection]], [[julia-frontend-validation]],
 [[julia-core-spec-parser]], [[julia-actionir-contract-resolver]], [[dart-actionir-ast-parser]],

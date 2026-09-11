@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia facade and ActionIR data boundary
+
+The facade assembles 37 includes; tiny command adapters delegate to its runtime.
+Typed ActionIR constructors copy immediate fields but vector-bearing structs
+are not recursively immutable. Existing syntax tests compare normalized ASTs
+and preserve missing-needle contains behavior; backlog .5 remains its owner.
+
 ## 2026-09-11 — Julia package and current README evidence
 
 Managed Julia 1.12.7 loads the 0.1.0 package and executes seven exact source
