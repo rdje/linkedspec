@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `JULIA-STARTUP-READING`
-- Status: `active` / reading 40/52; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity, matching, staged, diagnostic, static, entry and selector-projection and member-suffix and literal-boundary and projection-metadata and selector/identifier repairs and diagnostic fixture correction pending
+- Status: `active` / reading 41/52; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity, matching, staged, diagnostic, static, entry and selector-projection and member-suffix and literal-boundary and projection-metadata and selector/identifier repairs and diagnostic fixture correction pending
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.5`
 - Created: `2026-09-11`
 - Last updated: `2026-09-11`
@@ -43,7 +43,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Inventory SHA-256: `ca3cff4fe4c0e162448d6dbac82d89898673023951afaeced17d5b9a838ccd10`.
 - Ordered range SHA-256: `fde325f80ae7b56c5890d149fbc965c09890890e963a1fa9aab08e8c9d962337`.
 - Line coordinates are one-based, inclusive LF physical lines. Every child pins its range digest.
-- Current physical reading: 40/52 children, 58,425/75,984 lines and 2,044,112/2,693,170 bytes; sixty-four complete files.
+- Current physical reading: 41/52 children, 59,925/75,984 lines and 2,096,851/2,693,170 bytes; sixty-seven complete files.
 - Exact replay and capacity assessment: `docs/knowledge/julia-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -59,7 +59,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Dependencies: Startup .3.5.0 decomposition committed; each child starts from a clean prior handoff.
   Children: `.1.1-.1.52`, with exact scopes below.
   Acceptance: Every child records physical coverage, comprehension, Knowledge reconciliation, findings and focused proof before its commit. Retain all current-delta and interrupted-range evidence.
-  Verification: Julia .1.40 completes root admission/core/routes and cursor admission/descriptor, then reads cursor execution1–109:40/52 groups,58425 lines/2044112 bytes and64 complete files. Root137/79/57, cursor104/917/104 and source-emitter65 pass1463 assertions. Neutral root7/0/54, cursor74files/8/0/60 and generated-contract checks pass. Loaded descriptor source IDs remain intentional; cursor emitted-text checks are distinct from actual emitted execution. All prior repairs remain open; .1.41 follows with a governed engineering-notes rollover.
+  Verification: Julia .1.41 completes cursor execution/normalization/options and reads runtests1–964:41/52 groups,59925 lines/2096851 bytes and67 complete files. Cursor104/353/53 and complete main-prefix145 pass655 assertions. Neutral cursor74files/8/0/60 passes; independent ten-family primary CLI process proof passes. The governed notes rollover preserves212 lines/13215 bytes from clean523c14ecb source244–455, prior records and exact archived queries. All repairs remain open; .1.42 continues runtests965–2464.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.1.1`
@@ -744,14 +744,21 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Commit: `JULIA-STARTUP-READING.1.40 - read root and cursor contract consumers`
 
 - ID: `JULIA-STARTUP-READING.1.41`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Julia group 41 and reconcile its source evidence.
   Dependencies: `JULIA-STARTUP-READING.1.40` committed; empty brief and clean repository.
+  Activation commit: `523c14ecb1b0e1cd20a7cf19481020e8161d48f7`.
+  Verification tier: `focused`
+  Focused checks: Exact four-range/source coverage, cursor execution/normalization/options and relevant main-test prefix checks, neutral direct dependents, governed notes rollover with source/hash/query preservation, prior evidence, Knowledge, memory, both history checks, rendered book and normal doctrines.
+  Canonical trigger: `none` — bounded startup reading/evidence and already-governed history rollover; no production, dependency, infrastructure or contract change.
   Scope: `julia/test/rule_local_cursor_execution_test.jl` lines 110-288; `julia/test/rule_local_cursor_normalization_test.jl` lines 1-198; `julia/test/rule_local_cursor_option_removal_test.jl` lines 1-159; `julia/test/runtests.jl` lines 1-964
   Baseline evidence: 1500 fragments / 52739 bytes; ordered range SHA-256 `34807cdd7369669c856af84f11fcbfb01556a57b857e7dd2fec82541c1126e01`.
   Acceptance: Physically read every owned byte, inspect current deltas, reconcile Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit. Do not count truncated output or unread consumer suffixes.
-  Verification: `pending`
-  Commit: `pending`
+  Comprehension: Execution completes eight parent/child fixtures, two structural cases, all36 family spellings and normalized/generated routes; fresh checks preserve AND consumption and compact-pipe OR classification. Normalization reads18 edges/six ownership sets, typed bare provenance, exact portable diagnostics and JSON roundtrips. Removed globals fail before malformed source/missing input while low-level match primitives and top-rule survive. Main1–964 reads package includes/helpers, Unicode/scalars, CLI loading/canonical output and a partial failure/trace testset; only complete main testsets1–904 execute in the bounded harness.
+  Knowledge: Append exact reading and focused replay to cursor execution/normalization/option-removal and primary CLI execution homes. History-capacity home records clean-source rollover and exact old-manifest/archive/query preservation. Earlier dated claims and all repair evidence remain.
+  Findings: No new confirmed defect or closure. Main suite inclusion does not grant unread consumer coverage; its failure/trace testset is incomplete at964. All existing Julia/shared repairs remain open and startup-gated; no full component/canonical run or dependency build.
+  Verification: Eight untruncated windows read1500 fragments/52739 baseline-identical bytes; ordered SHA34807cdd7369669c856af84f11fcbfb01556a57b857e7dd2fec82541c1126e01. Raw ranges: execution179/6105/SHAb062769ab1a0337286e9e8caa4e7c18615733e3c3cb4c3086af7b608ccc4d610; normalization198/8161/SHA7ae9cfe6061b66614776373a16ea073f3f12b416d78d0e5685cf2f9f76283ca3; options159/5464/SHA9a16280ac4c161126a6342cfe80f20bef6d6d92257aa6b8d6f9ef7150c7cee10; runtests964/33009/SHA4669a6505c630208005575dfda2f5e52ebc0ab9f3c2dee3f8da6116f9eb18d96. Focused655 assertions, neutral cursor74files/8/0/60 and independent ten-family primary CLI process proof pass. Governed notes archive212 lines/13215 bytes from source244–455 of523c14ecb; old records/segments unchanged and exact archived query26222 lines/2783761 bytes, SHA2f8ae3451e12a0b57fab8effa7bdcdb74ec2854d26a398c8734ccf3490ab440d. Exact all95-source/52-scope coverage passes;606 unchanged prior task nodes, five append-only fact prefixes and all25 rendered limitation headings remain. Knowledge72599/79000 lines; decisions12090/13000. Notes249/14035, manifest29/17454 and changes314/19035 fit unchanged controls. Knowledge/memory, both pressure checks, rendered book and normal doctrines govern landing.
+  Commit: `JULIA-STARTUP-READING.1.41 - read cursor and primary CLI test boundaries`
 
 - ID: `JULIA-STARTUP-READING.1.42`
   Status: `pending`
@@ -1609,7 +1616,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.41` | `pending` | Finish cursor execution, read normalization/options and runtests1–964 after the clean .1.40 commit; run the governed notes rollover in that slice. |
+| 1 | `JULIA-STARTUP-READING.1.42` | `pending` | Continue runtests965–2464 after the clean .1.41 reading and notes-rollover commit; all repairs retain startup prerequisites. |
 
 ## Decisions
 
@@ -1640,6 +1647,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Source repairs retain startup prerequisites; those dependencies do not block source reading.
 
 ## Verification Log
+
+- `2026-09-11` .1.41: Julia .1.41 completes cursor execution/normalization/options and reads runtests1–964:41/52 groups,59925 lines/2096851 bytes and67 complete files. Cursor104/353/53 and complete main-prefix145 pass655 assertions. Neutral cursor74files/8/0/60 passes; independent ten-family primary CLI process proof passes. The governed notes rollover preserves212 lines/13215 bytes from clean523c14ecb source244–455, prior records and exact archived queries. All repairs remain open; .1.42 continues runtests965–2464.
 
 - `2026-09-11` .1.40: Julia .1.40 completes root admission/core/routes and cursor admission/descriptor, then reads cursor execution1–109:40/52 groups,58425 lines/2044112 bytes and64 complete files. Root137/79/57, cursor104/917/104 and source-emitter65 pass1463 assertions. Neutral root7/0/54, cursor74files/8/0/60 and generated-contract checks pass. Loaded descriptor source IDs remain intentional; cursor emitted-text checks are distinct from actual emitted execution. All prior repairs remain open; .1.41 follows with a governed engineering-notes rollover.
 
@@ -1712,6 +1721,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Commit Log
 
+- `2026-09-11` .1.41: `JULIA-STARTUP-READING.1.41 - read cursor and primary CLI test boundaries`.
+
 - `2026-09-11` .1.40: `JULIA-STARTUP-READING.1.40 - read root and cursor contract consumers`.
 
 - `2026-09-11` .1.39: `JULIA-STARTUP-READING.1.39 - read recognition observation and repeated-result consumers`.
@@ -1772,6 +1783,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Decomposition: `SESSION-STARTUP-READING.3.5.0 - freeze exact bounded Julia reading plan`.
 
 ## Changelog
+
+- `2026-09-11` .1.41: Complete three cursor consumers and runtests1–964;41/52 groups and67 complete files. Governed notes rollover preserves all evidence; .1.42 follows.
 
 - `2026-09-11` .1.40: Complete five root/cursor files plus execution1–109;40/52 groups and64 complete files. Preserve all repairs; .1.41 includes the next governed notes rollover.
 

@@ -59,3 +59,14 @@ Related: [[julia-rule-local-cursor-execution]],
 [[julia-root-rule-selection-routes]], and
 [[julia-rule-local-cursor-admission]],
 [[rule-local-cursor-and-bare-edge-contract]].
+
+## September 11 complete consumer reading (.1.41)
+
+All159 source lines are read and all53 existing assertions pass. Static owner
+checks accompany runtime snake/camel keyword rejection, normalized option-name
+diagnostics, loaded source identity, missing-corpus rejection and CLI precedence
+over malformed source/missing input. Low-level matching remains available; help
+and medium request trace omit the retired global while top-rule selection works.
+The separate ten-family primary process checker also passes. This is a focused
+checkpoint, not a fresh complete-package or six-runtime signoff. Replay lives in
+[[julia-primary-cli-native-execution-canonical-json]], .1.41 below.

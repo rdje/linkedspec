@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 40/52 owned groups. ADR0116 admits the finite evidence allowance; ADR0115 remains limited to history.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 41/52 owned groups. ADR0116 admits the finite evidence allowance; ADR0115 remains limited to history.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,16 +297,17 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 40/52 groups complete:** root-selection admission, core and
-routes plus cursor admission and descriptor consumers are fully read. Cursor
-execution reading reaches line109. Coverage is58,425 lines /2,044,112 bytes and
-sixty-four complete files. Root, cursor and source-emitter consumers pass1,463
-assertions, with neutral root, cursor and generated-contract checks.
-Loaded descriptor comparison intentionally accounts for logical source identity;
-root selection preserves authored flags and definition order. Cursor admission's
-emitted-text checks remain distinct from actual emitted execution in the separate
-source-emitter and root-route consumers. All existing limitations remain open;
-`.1.41` continues cursor and main-test reading.
+**Julia reading is 41/52 groups complete:** cursor execution, normalization and
+option-removal consumers are fully read; the main test file is read through line 964.
+Coverage is 59,925 lines / 2,096,851 bytes and sixty-seven complete files. The three
+cursor consumers pass 510 assertions; complete main-prefix testsets pass 145.
+They preserve typed bare-edge ownership, rule-derived seek/consume, targeted
+rejection of global overrides, exact CLI loading, canonical JSON and routed trace.
+The neutral cursor check passes all 60 drift controls; the independent ten-family
+CLI process check also passes. These are bounded tests;
+the main failure/trace testset continues into `.1.42`, starting at line 965.
+All existing limitations remain open. The governed engineering-notes rollover
+preserves 212 committed lines exactly and retains all earlier history.
 
 **Approved Julia evidence capacity:** the director granted Knowledge lines
 72,000→79,000 and decision-record lines12,000→13,000 under ADR0116. The finite

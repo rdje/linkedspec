@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.41 - read cursor and primary CLI test boundaries
+
+Read1500 fragments/52739 bytes, reaching41/52 groups and67 complete files.
+Cursor104/353/53 and complete main-prefix145 pass655 assertions; neutral cursor
+checks pass. Governed notes rollover preserves212 lines/13215 bytes, all older
+records and exact query reconstruction. All repairs remain; runtests965 is next.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.40 - read root and cursor contract consumers
 
 Read1500 fragments /52652 bytes, reaching40/52 groups and64 complete files.

@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `8c85f89341a9ad3f8225d1bd4bc8c9218b1c52f4` — clean Julia .1.39 handoff.
-- latest_completed_leaf: `JULIA-STARTUP-READING.1.40 - read root and cursor contract consumers`; exact reading and focused proof.
-- active_work_unit: `JULIA-STARTUP-READING.1.41` — pending after the verified .1.40 handoff.
-- next_action: Read Julia .1.41 cursor/runtests ranges from the clean .1.40 commit; include the required governed engineering-notes rollover.
+- activation_commit: `523c14ecb1b0e1cd20a7cf19481020e8161d48f7` — clean Julia .1.41 activation; derive its landed commit from Git.
+- latest_completed_leaf: `JULIA-STARTUP-READING.1.41 - read cursor and primary CLI test boundaries`; exact reading, focused proof and notes rollover.
+- active_work_unit: `JULIA-STARTUP-READING.1.42` — pending main-test continuation after clean .1.41.
+- next_action: Read runtests965–2464 under .1.42 after verifying the .1.41 commit, zero-byte brief and clean tree.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
-- in_flight_uncommitted: none; .1.40 is committed and no jobs remain.
+- in_flight_uncommitted: none after the .1.41 commit; source and all prior repair owners remain.
 - blockers: none for Julia reading; ADR0116 admits Knowledge79000 and decisions13000 lines with a .13-only focused exception.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -52,9 +52,9 @@
   README remains bounded; ordinary leaves use focused proof and designated infrastructure/public/push boundaries
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
 - current_engineering_notes_capacity: ADR0115 admits 32 files /31 manifest lines /18678 manifest bytes for finite remaining Julia reading.
-  Current manifest is 16842 bytes after exact213-line segment4979 rollover; root/segment/aggregate limits and all prior history remain unchanged.
+  Current manifest is 17454 bytes after exact212-line segment4978 rollover; root/segment/aggregate limits and all prior history remain unchanged.
 - current_change_history_capacity: ADR0115 admits 36 files /35 manifest lines /19919 manifest bytes; current collection uses 34 files /18767 manifest bytes.
   Segment 4979-6e4108166552 preserves 213 lines /12545 bytes; all other controls remain unchanged. Proportionate governance: ADR0115.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-11 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart read; Julia 40/52 groups, 58425/75984 lines, 2044112/2693170 bytes, sixty-four complete files. Lua/supporting code, formal book .4 and policy .5 remain.
+- latest_bootstrap_read: 2026-09-11 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart read; Julia 41/52 groups, 59925/75984 lines, 2096851/2693170 bytes, sixty-seven complete files. Lua/supporting code, formal book .4 and policy .5 remain.

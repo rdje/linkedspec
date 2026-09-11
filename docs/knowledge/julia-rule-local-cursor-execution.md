@@ -72,3 +72,14 @@ whole-consumer execution does not advance that source credit. Historical v1
 isolation prose above is superseded by the already recorded v2 removal; current
 root/cursor neutral states are7/7/54 and74files/8/8/60. Combined replay:
 [[julia-rule-local-cursor-admission]], Focused .1.40 replay.
+
+## September 11 complete consumer reading (.1.41)
+
+The 110–288 suffix finishes the consumer begun by .1.40. Eight parent/child
+fixtures and two structural fixtures execute live and normalized; all36 authored
+family spellings preserve seek/consume. A consume failure may return nothing or
+the expected minimum-count diagnostic, as the fixture explicitly permits. Loaded
+parent/child trace retains each rule's policy. Generated v2 separately proves
+AND rejects a seeking prefix and compact pipe is OR/default. Fresh proof is104
+assertions. This does not close any startup repair or count unread main tests.
+The exact combined .1.41 replay lives in [[julia-primary-cli-native-execution-canonical-json]].

@@ -60,3 +60,34 @@ nested sorted JSON, exact help/status/error outputs, compilation-before-input or
 trace behavior. This is bounded process conformance, not a complete package or cross-backend run.
 Replay: `bash tools/check_julia_primary_cli.sh`; complementary native compiled/registry checks are
 [[julia-compiled-spec-state]]. Canonical trace authority remains [[julia-canonical-primary-cli-trace]].
+
+## September 11 main-test prefix reading and focused replay (.1.41)
+
+`runtests.jl`1–964 is read; the first50 includes name separate consumers and
+grant no additional source-reading credit. Helpers retain structured function
+sidecars/source spans and corpus fixtures. The complete testsets through904
+pass145 assertions: routed temporary root2, Unicode casing39, scalar text5,
+scalar numeric4, scaffold19, argument/loading56 and execution/canonical JSON20.
+Loading verifies exact shared help, deterministic nonrecursive resolution, raw
+invalid UTF-8 rejection and repository-derived fixtures. Execution verifies
+sorted nested JSON, non-string key rejection, explicit root, AND consume, staged
+functions and exact routed/reset trace. The failure/trace testset906–1134 is only
+read through964 here and is excluded from this bounded execution. Its remaining
+source belongs to .1.42. Existing numeric/trace/other repair owners stay open.
+
+The unchanged cursor consumers add104 execution,353 normalization and53 removal
+assertions:655 total. The following in-memory harness preserves source line
+coordinates and filename, blanks only the separate consumer includes, then runs
+the three selected consumers explicitly. It creates no source file or broad-suite
+claim. Runtime temporary data follows the managed wrapper's repository storage.
+
+```bash
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; source=readlines("julia/test/runtests.jl"; keep=true); source[18:67].="\n"; include_string(Main, join(source[1:904]), joinpath(pwd(),"julia/test/runtests.jl")); include("julia/test/rule_local_cursor_execution_test.jl"); include("julia/test/rule_local_cursor_normalization_test.jl"); include("julia/test/rule_local_cursor_option_removal_test.jl")'
+bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py
+bash tools/check_julia_primary_cli.sh
+```
+
+The independent ten-family process checker passes. Neutral cursor governance is
+74 migration files,8 complete/0 pending and60 rejected drift mutations; it retains
+36 family spellings,18 edges,8 parent/child cases,15 Julia roles and six recurring
+legs. Reading and focused results do not execute every recurring runtime leg.

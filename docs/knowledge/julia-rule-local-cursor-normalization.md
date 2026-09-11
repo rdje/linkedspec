@@ -74,3 +74,13 @@ Related: [[julia-rule-local-cursor-preflight]],
 [[rule-local-cursor-and-bare-edge-contract]],
 [[rule-local-cursor-neutral-contract]], [[dart-rule-local-cursor-normalization]],
 and [[FUTURE-PARITY-BACKLOG]].
+
+## September 11 complete consumer reading (.1.41)
+
+All198 source lines are read. Fresh353 assertions preserve36 family rows,18 edge
+rows, six ownership sets, diagnostic field sets and JSON reconstruction. Bare
+authored omission remains nullable in the AST and lowers to action index0; blind
+ownership retains its separate table. Full physical lines/header rest/multiline
+candidates are distinguished from a same-line regex suffix. This is normalization
+evidence, not a new rollout or repair closure. Exact replay is in
+[[julia-primary-cli-native-execution-canonical-json]], .1.41 below.

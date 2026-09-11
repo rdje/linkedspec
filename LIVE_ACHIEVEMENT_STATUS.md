@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.40 completes root admission/core/routes and cursor admission/descriptor, then reads cursor execution1–109:40/52 groups,58425 lines/2044112 bytes and64 complete files. Root137/79/57, cursor104/917/104 and source-emitter65 pass1463 assertions. Neutral root7/0/54, cursor74files/8/0/60 and generated-contract checks pass. Loaded descriptor source IDs remain intentional; cursor emitted-text checks are distinct from actual emitted execution. All prior repairs remain open; .1.41 follows with a governed engineering-notes rollover. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.41 completes cursor execution/normalization/options and reads runtests1–964:41/52 groups,59925 lines/2096851 bytes and67 complete files. Cursor104/353/53 and complete main-prefix145 pass655 assertions. Neutral cursor74files/8/0/60 passes; independent ten-family primary CLI process proof passes. The governed notes rollover preserves212 lines/13215 bytes from clean523c14ecb source244–455, prior records and exact archived queries. All repairs remain open; .1.42 continues runtests965–2464. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.82` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `JULIA-STARTUP-READING.1.40 - read root and cursor contract consumers` — Julia .1.40 completes root admission/core/routes and cursor admission/descriptor, then reads cursor execution1–109:40/52 groups,58425 lines/2044112 bytes and64 complete files. Root137/79/57, cursor104/917/104 and source-emitter65 pass1463 assertions. Neutral root7/0/54, cursor74files/8/0/60 and generated-contract checks pass. Loaded descriptor source IDs remain intentional; cursor emitted-text checks are distinct from actual emitted execution. All prior repairs remain open; .1.41 follows with a governed engineering-notes rollover.
+- `JULIA-STARTUP-READING.1.41 - read cursor and primary CLI test boundaries` — Julia .1.41 completes cursor execution/normalization/options and reads runtests1–964:41/52 groups,59925 lines/2096851 bytes and67 complete files. Cursor104/353/53 and complete main-prefix145 pass655 assertions. Neutral cursor74files/8/0/60 passes; independent ten-family primary CLI process proof passes. The governed notes rollover preserves212 lines/13215 bytes from clean523c14ecb source244–455, prior records and exact archived queries. All repairs remain open; .1.42 continues runtests965–2464.
 
 ## Next Action
 
-- `JULIA-STARTUP-READING.1.41` — Continue cursor/runtests reading after the clean .1.40 commit; include the governed engineering-notes rollover.
+- `JULIA-STARTUP-READING.1.42` — Continue runtests965–2464 after the clean .1.41 commit.
 
 ## Recent Completions
+
+- `2026-09-11` — `JULIA-STARTUP-READING.1.41` reads1500 fragments/52739 bytes;655 assertions and neutral cursor pass; exact212-line notes rollover preserves history.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.40` reads1500 fragments /52652 bytes;1463 existing assertions and root/cursor/generated checks pass; all repairs remain open.
 
@@ -48,8 +50,6 @@
 - `2026-09-11` — `JULIA-STARTUP-READING.1.29` reads1,500 fragments /50,139 bytes;454 existing and99 selector assertions pass; authored-selector repair .2.18 remains open.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.28` reads1,500 fragments /51,153 bytes;1,286 existing and67 diagnostic assertions pass; mixed-slot and entry repairs .2.16/.2.17 remain open.
-
-- `2026-09-11` — `JULIA-STARTUP-READING.1.27` reads1,500 fragments /52,508 bytes;1,063 existing and26 budget assertions plus six neutral comparisons pass; shared .82 remains open.
 
 ## History
 

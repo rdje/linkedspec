@@ -287,3 +287,55 @@ for my $id(qw(change_history engineering_notes)) {
 die "authorization count $auth_count" unless $auth_count==22;
 print "PASS $limits_count actual threshold executions and $auth_count actual governance executions; detached inputs only, no registry/index/ADR mutation.\n";
 ```
+
+# Julia .1.41 governed engineering-notes rollover
+
+The ordinary reading slice prepends seven lines: notes455→462, requiring the
+existing tool to roll source244–455 of clean523c14ecb1b0e1cd20a7cf19481020e8161d48f7,
+blob946da53fdf716210957ab20ab17b1806398e29b4. Segment4978-60c526ee0cd8 preserves
+212 lines/13215 bytes, SHA60c526ee0cd898663095b552894a065ead05aa436aa815bd18813f75e073461c.
+One final separator LF is removed only from the hot root and restored explicitly
+for source reconstruction. Root is249 lines/14035 bytes; manifest29/17454. All
+prior manifest records and archive bytes remain exact. The ordered archive query
+is26222 lines/2783761 bytes, SHA2f8ae3451e12a0b57fab8effa7bdcdb74ec2854d26a398c8734ccf3490ab440d.
+No policy limit or authority changes. This is a routine rollover within ADR0115,
+not another capacity admission or verification exception.
+
+Run the following through `bash tools/project_data_run.sh python3 <script>` from
+the repository. It selects the dated .1.41 commit after landing; later archived
+queries must preserve that snapshot's bytes as a suffix.
+
+```python
+from pathlib import Path
+import subprocess,json,hashlib,re
+BASE='523c14ecb1b0e1cd20a7cf19481020e8161d48f7'
+SUBJECT='JULIA-STARTUP-READING.1.41 - read cursor and primary CLI test boundaries'
+def git(*args): return subprocess.check_output(['git',*args])
+commits=[l.split(' ',1)[0] for l in git('log','--format=%H %s','--fixed-strings','--grep='+SUBJECT).decode().splitlines() if l.split(' ',1)[1]==SUBJECT]
+assert len(commits)<=1
+SNAP=commits[0] if commits else None
+if SNAP: assert git('rev-parse',SNAP+'^').decode().strip()==BASE
+def old(p): return git('show',BASE+':'+p)
+def snap(p): return git('show',SNAP+':'+p) if SNAP else Path(p).read_bytes()
+mp='docs/history/development-notes/manifest.jsonl';root='DEVELOPMENT_NOTES.md'
+a=old(mp).splitlines(keepends=True);b=snap(mp).splitlines(keepends=True)
+assert b[2:]==a[1:]
+x,y=json.loads(a[0]),json.loads(b[0])
+assert y.pop('segment_count')==x.pop('segment_count')+1 and x==y
+r=json.loads(b[1]);assert (r['source_start_line'],r['source_end_line'])==(244,455)
+assert r['source_commit']==BASE and r['source_blob']==git('rev-parse',BASE+':'+root).decode().strip()
+source=old(root);part=b''.join(source.splitlines(keepends=True)[243:455])
+assert snap(r['target_path'])==part
+assert (len(part.splitlines()),len(part),hashlib.sha256(part).hexdigest())==(212,13215,r['sha256'])
+for row in a[1:]:
+ p=json.loads(row)['target_path'];assert snap(p)==old(p)==Path(p).read_bytes()
+current=snap(root);first=re.search(br'^## ',current,re.M).start()
+second=re.search(br'^## ',current[first+3:],re.M).start()+first+3
+assert current[:first]+current[second:]+b'\n'+part==source
+assert (len(current.splitlines()),len(current),len(b),len(snap(mp)))==(249,14035,29,17454)
+query=part+b''.join(old(json.loads(row)['target_path']) for row in a[1:])
+assert (len(query.splitlines()),len(query),hashlib.sha256(query).hexdigest())==(26222,2783761,'2f8ae3451e12a0b57fab8effa7bdcdb74ec2854d26a398c8734ccf3490ab440d')
+now=subprocess.check_output(['perl','tools/read_document_history.pl','--surface','engineering_notes','--all'])
+assert now.endswith(query) and (SNAP is not None or now==query)
+print('PASS .1.41 exact committed source, one restored separator LF, all prior manifest/archive bytes and ordered query')
+```
