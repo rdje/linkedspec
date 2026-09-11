@@ -26,7 +26,7 @@ limits, then passes already-decoded JSON-like requests to `dispatch_mcp`. The se
 load source or paths, compile or execute, enable trace, open a file, start a process, use a socket, or retain a
 semantic response cache.
 
-`tools/generate_julia_mcp_contract.py` renders the stable 119,538-byte Base64-only `McpContract.jl` from the same
+`tools/generate_julia_mcp_contract.py` renders the Base64-only `McpContract.jl` from the same
 digest-verified neutral bundle as Perl, Rust, and Dart. `McpContractRuntime.jl` verifies the decoded canonical
 bundle SHA before JSON3, implements the frozen schema profile, clones JSON-like values, owns recursive key-sorted
 canonical JSON, and constructs Julia-identity responses without runtime artifact reads. `McpServer.jl` owns the
@@ -50,3 +50,15 @@ recurring leaves subsequently complete the formal 5/5 implementation + 6/6 runti
 Related facts: [[julia-native-mcp-server-plan]], [[julia-mcp-strict-stdio]], [[julia-semantic-query-public-api]],
 [[mcp-2026-07-28-stdio-contract]], [[mcp-native-server-topology]], and
 [[mcp-implementation-admission-ledger]].
+
+September 11 `JULIA-STARTUP-READING.1.8` reads generated `McpContract.jl:1-372`, including
+format 1, the canonical bundle digest and encoded frame/schema literals. The unchanged generator's
+check-only mode confirms 120,030 current source bytes are byte-fresh; the old 119,538 count belongs
+to the earlier admission. Existing binding/runtime tests pass 53 assertions, including clone isolation,
+canonical frame classification, schema closure and recursive JSON ordering. The owning suffix and
+runtime/server physical reading remain pending; these finite tests grant no additional reading or
+server signoff credit. Exact replay lives in [[julia-controlled-corpus-execution]].
+
+```bash
+bash tools/run_python_project_data.sh tools/generate_julia_mcp_contract.py
+```

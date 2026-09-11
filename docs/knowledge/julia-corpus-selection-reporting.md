@@ -28,7 +28,7 @@ separate or `--flag=value` form. Bounded execute mode prints one `PASS <name>` o
 selected fixture followed by a passed/failed summary. Exit `0` means all selected fixtures passed, exit `1` means
 one or more selected fixtures failed, and exit `2` means invalid arguments or corpus/selection validation failed.
 
-Validation-only behavior remains the default. Bare `--execute` now runs the complete 99-fixture corpus. Offset-only
+Validation-only behavior remains the default. Bare `--execute` runs the complete validated manifest (105 fixtures at the September 11 reading intake). Offset-only
 execution runs from the selected zero-based offset to the manifest end. Named and bounded forms remain available
 for diagnostics, and complete manifest validation always happens before selection.
 
@@ -39,10 +39,14 @@ production or fixture correction.
 Examples:
 
 ```bash
-julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --case proof_edge_array_literal
-julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --offset 0 --limit 10
-julia --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --case proof_edge_array_literal
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --offset 0 --limit 10
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute
 ```
 
 Related facts: [[julia-full-corpus-gate]], [[julia-starter-corpus-batch]], [[julia-middle-corpus-batch]], [[julia-controlled-corpus-execution]], [[julia-corpus-manifest-io]],
 [[dart-controlled-corpus-execution]], [[variant-specific-cli-requirement]].
+
+September 11 `.1.8` rereads the complete selector/runner and replays 58 controlled-execution assertions,
+including ordered names, duplicate/missing rejection, offset/limit bounds, required execute mode, exact
+reporting exits and continuation after failures. Replay: [[julia-controlled-corpus-execution]].

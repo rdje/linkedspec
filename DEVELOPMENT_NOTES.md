@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia loader and corpus execution boundaries
+
+Corpus validation precedes ordered selection and retains per-fixture failures;
+file loading attributes exact resolution, decoding, parse, validation and compile
+stages. Global cursor options remain rejected. Generated MCP data is byte-fresh;
+physical reading of its prefix does not close the remaining literals or consumers.
+
 ## 2026-09-11 — Julia recognition effect integration gap
 
 The neutral classifier rejects binding_write but has no production caller;

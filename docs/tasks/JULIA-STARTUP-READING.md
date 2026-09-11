@@ -59,7 +59,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Dependencies: Startup .3.5.0 decomposition committed; each child starts from a clean prior handoff.
   Children: `.1.1-.1.52`, with exact scopes below.
   Acceptance: Every child records physical coverage, comprehension, Knowledge reconciliation, findings and focused proof before its commit. Retain all current-delta and interrupted-range evidence.
-  Verification: Julia .1.7 completes CompiledSpec and reads CorpusManifest through 161: 7/52 groups, 10,071 fragments /353,238 bytes and thirteen complete files. Existing recognition207, observation30, mutation496, write406 and manifest20 assertions pass (1,159 total); native/causal25 and reference11 diagnostic assertions isolate forbidden recognition writes and omitted structural observation edges. Pending .2.3.1-.2.3.3 own graph reconciliation, enforcement and carrier proof; reference E-only omission stays startup .27-owned. All sources, prior evidence, repairs and ADR0115 controls remain. Julia .1.8 is next; no complete component/canonical gate or dependency build.
+  Verification: Julia .1.8 completes CorpusManifest and SpecLoader, and reads McpContract through 372: 8/52 groups, 11,295 fragments /418,734 bytes and fifteen complete files. Existing controlled-corpus58, loader82, MCP-binding53 and cursor-option53 assertions pass (246 total); the generator verifies120,030 source bytes and neutral resolution remains14/9/4. Corpus selection/loading, historical counts and removed-option teaching reconcile with current source. All source, prior evidence, repairs and ADR0115 controls remain. Julia .1.9 is next; no complete component/canonical gate or dependency build.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.1.1`
@@ -182,14 +182,21 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Commit: `JULIA-STARTUP-READING.1.7 - read compiler and own recognition effect repair`.
 
 - ID: `JULIA-STARTUP-READING.1.8`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Julia group 8 and reconcile its source evidence.
   Dependencies: `JULIA-STARTUP-READING.1.7` committed; empty brief and clean repository.
   Scope: `julia/src/corpus/CorpusManifest.jl` lines 162-626; `julia/src/io/SpecLoader.jl` lines 1-387; `julia/src/mcp/McpContract.jl` lines 1-372
   Baseline evidence: 1224 fragments / 65496 bytes; ordered range SHA-256 `80857a09d16e202d83c90ff1a21e51c5bdf6b61782a137ad946c3cdcad39c136`.
+  Activation commit: `3a4073ab3d458e51ce3596daf8198441e765abdd`.
+  Verification tier: `focused`
+  Focused checks: Exact physical source/range replay; existing controlled-corpus, loader, MCP binding and removed-option suites; check-only MCP generator and neutral resolution; Knowledge, memory, histories, rendered book, preservation and normal doctrines.
+  Canonical trigger: `none` — ordinary source-reading and factual reconciliation; no executable, contract, infrastructure or dependency change.
   Acceptance: Physically read every owned byte, inspect current deltas, reconcile Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit. Do not count truncated output or unread consumer suffixes.
-  Verification: `pending`
-  Commit: `pending`
+  Comprehension: Corpus execution validates the complete manifest before selecting named or bounded ordered fixtures, compares wrapped output and retains detached values, cursor, trace and diagnostics across per-fixture failures; CLI exits distinguish execution failures from validation/usage. SpecLoader validates portable names/exact paths, de-duplicates ordered candidates, selects the first regular file and preserves UTF-8/BOM bytes before attributed parse/validate/compile stages; absolute requests use basename source identity. McpContract prefix contains generated format/digest/Base64 frame/schema data, with consumers and remaining literals still unread.
+  Knowledge: Reconcile controlled-corpus signature with the removed global cursor contract, use managed example commands, qualify historical99 counts and generated119538-byte evidence, and preserve named-loader authority. Exact combined replay is in docs/knowledge/julia-controlled-corpus-execution.md; current generated binding is120030 bytes.
+  Findings: No new confirmed runtime defect or repair closure. Existing selector/switch/recognition and all prior backend/startup repairs remain pending.
+  Verification: Three untruncated owned ranges total1224 fragments /65496 baseline-identical bytes, digest80857a09d16e202d83c90ff1a21e51c5bdf6b61782a137ad946c3cdcad39c136. Controlled corpus58, loader34+24+10+6+8, MCP53 and removed-option53 pass (246 plus selected-set equality1). Check-only generator is byte-fresh120030; neutral resolution14/9/4 passes. Exact coverage/source/task/history preservation and focused continuity/book/doctrine checks govern landing; no future reading credit, full Julia/canonical gate or dependency build.
+  Commit: `JULIA-STARTUP-READING.1.8 - read corpus loader and MCP binding prefix`.
 
 - ID: `JULIA-STARTUP-READING.1.9`
   Status: `pending`
@@ -760,7 +767,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.8` | `pending` | Complete CorpusManifest, SpecLoader and McpContract in .1.8 after clean .1.7. |
+| 1 | `JULIA-STARTUP-READING.1.9` | `pending` | Continue generated McpContract lines373-1002 after clean .1.8. |
 
 ## Decisions
 
@@ -784,6 +791,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Verification Log
 
+- `2026-09-11` .1.8: Julia .1.8 completes CorpusManifest and SpecLoader, and reads McpContract through 372: 8/52 groups, 11,295 fragments /418,734 bytes and fifteen complete files. Existing controlled-corpus58, loader82, MCP-binding53 and cursor-option53 assertions pass (246 total); the generator verifies120,030 source bytes and neutral resolution remains14/9/4. Corpus selection/loading, historical counts and removed-option teaching reconcile with current source. All source, prior evidence, repairs and ADR0115 controls remain. Julia .1.9 is next; no complete component/canonical gate or dependency build.
 - `2026-09-11` .1.7: Julia .1.7 completes CompiledSpec and reads CorpusManifest through 161: 7/52 groups, 10,071 fragments /353,238 bytes and thirteen complete files. Existing recognition207, observation30, mutation496, write406 and manifest20 assertions pass (1,159 total); native/causal25 and reference11 diagnostic assertions isolate forbidden recognition writes and omitted structural observation edges. Pending .2.3.1-.2.3.3 own graph reconciliation, enforcement and carrier proof; reference E-only omission stays startup .27-owned. All sources, prior evidence, repairs and ADR0115 controls remain. Julia .1.8 is next; no complete component/canonical gate or dependency build.
 - `2026-09-11` .1.6: Julia .1.6 completes FunctionRegistry and the primary CLI, and reads CompiledSpec through 521: 6/52 groups, 8,571 fragments /296,130 bytes and twelve complete files. Registry 23, compiled state 41, root selection 79 and variadic 55 assertions pass (198 total); the ten-family primary CLI process checker passes. Canonical phase traces remain separate from native internal traces; current registry metadata and compiled-state boundaries reconcile with Knowledge. All source, earlier evidence, pending repairs and ADR0115 controls remain; Julia .1.7 is next, with no complete component/canonical gate or dependency build.
 - `2026-09-11` .1.5: Julia .1.5 completes ActionParser and CallableContract, and reads FunctionRegistry through 94: 5/52 groups, 7,071 fragments /248,648 bytes and ten complete files. Existing contextual 118 / registry 23 / variadic 55 assertions pass (196 total); eight native normalization outcomes also pass, including idempotence for all four valid forms. Normalization traverses retained switch and callable bodies, so prior selector/contract visitor gaps remain precisely scoped and repair-owned. Staged/progressive/nested-write facts and registry metadata reconcile with current source. All source, earlier evidence and ADR0115 controls remain; Julia .1.6 is next, with no complete component/canonical gate or dependency build.

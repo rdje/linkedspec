@@ -1566,7 +1566,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.8` | `pending` | Complete CorpusManifest, SpecLoader and McpContract in .1.8 after clean .1.7. |
+| 1 | `JULIA-STARTUP-READING.1.9` | `pending` | Continue generated McpContract lines373-1002 after clean .1.8. |
 
 ## Decisions
 

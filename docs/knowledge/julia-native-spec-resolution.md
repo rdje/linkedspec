@@ -36,3 +36,12 @@ missing-name JSON. The full Julia gate and 61x2 CLI proof establish adapter no-d
 Related facts: [[native-spec-resolution-contract]], [[rust-native-spec-resolution]],
 [[dart-native-spec-resolution]], [[native-in-memory-backend-contract]],
 [[primary-cli-four-backend-matrix]].
+
+September 11 `JULIA-STARTUP-READING.1.8` fully reads `SpecLoader.jl` and replays all five
+existing testsets: 34 name, 24 resolution/file-kind, 10 strict UTF-8, 6 pipeline/identity and 8 structured
+failure assertions pass (82 total). The independent neutral checker remains 14/9/4. Exact replay is
+in [[julia-controlled-corpus-execution]]. Candidate de-duplication preserves first occurrence;
+non-regular candidates do not prevent selecting a later regular file. Loading preserves decoded text;
+a leading BOM is explicitly rejected during composed parsing. Fatal interrupt/out-of-memory/stack
+errors rethrow rather than becoming a structured pipeline error. Absolute path requests use the
+basename as logical source identity while the resolved path remains attached to the loaded engine.

@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.8 - read corpus loader and MCP binding prefix
+
+Read corpus/loader and generated binding prefix:1,224 fragments /65,496 bytes.
+Existing corpus58, loader82, binding53 and option53 assertions pass; generator
+is byte-fresh120,030 and neutral resolution14/9/4 passes. Reconcile current facts,
+book/frontiers; preserve prior source/repair/history. Next Julia .1.9 after commit.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.7 - read compiler and own recognition effect repair
 
 Read compiler suffix and corpus prefix: 1,500 fragments /57,108 bytes.
