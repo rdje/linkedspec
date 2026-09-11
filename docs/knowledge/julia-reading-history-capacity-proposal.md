@@ -8,7 +8,7 @@ answers:
   - does the Julia capacity proposal change aggregate or live-document limits
   - what verification decision blocks Julia history-capacity implementation
 date: 2026-09-11
-status: proposal prepared; no limit increase or verification exception authorized
+status: historical proposal; implemented under ADR0115 and containment .12 with explicit director approval
 tags: [julia, history, capacity, continuity, proposal, verification]
 evidence: "JULIA-STARTUP-READING.4.1 starts from clean 6308ff4e2 after three committed reading children. Both archive collections are full. Independent Python and extracted production-Perl function simulations agree on four rollovers each for 55 future records of 14 lines/2048 bytes. All prior manifest/archive bytes and whole-history query hashes are verified. Six exact limit changes are proposed under pending containment .12; no registry/history/CI/source mutation."
 reverify:
@@ -17,7 +17,11 @@ reverify:
   - "perl tools/roll_document_history.pl --surface engineering_notes --check"
 ---
 
-# Decision ready for review
+# Historical proposal — resolved by approved admission
+
+The director answered YES to the six controls and one-time focused exception.
+Containment .12 implements ADR0115; evidence: [[julia-reading-history-capacity-admission]].
+The proposal below retains its dated models; its pending-decision wording is historical.
 
 Recommend four additional archive slots in each history collection, with only
 their manifest line/byte limits enlarged enough to index those slots. This is a

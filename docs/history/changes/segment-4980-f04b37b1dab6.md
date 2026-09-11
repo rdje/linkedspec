@@ -1,0 +1,217 @@
+## 2026-09-10 — DART-STARTUP-READING.1.34: emitter and trace completion
+
+Read 1,500 fragments / 45,347 baseline-identical bytes: complete emitter/trace
+and read validation through 355. All 27 selected tests, isolated emitted callers,
+ten-family/eight-case proof and neutral generated-source checks pass. Preserve
+the shared semantic-v1/current-artifact-v2 distinction and all earlier findings.
+No new defect or source repair. Reading reaches 34/55; .1.35 is next.
+
+## 2026-09-10 — DART-STARTUP-READING.1.33: indexed source correlation
+
+Read 1,500 fragments / 42,984 baseline-identical bytes: complete static
+projection/SHA-256 and read emitter through 55. All 28 tests and neutral
+6/20/128 checks pass. Eight public native controls extend startup .70 grouped
+selectors and own regex-arrow correlation .2.22 with two children: four index
+failures, four valid controls and all runtime values correct. No source repair;
+reading reaches 33/55 and .1.34 is next.
+
+## 2026-09-10 — DART-STARTUP-READING.1.32: query and runtime projection
+
+Read 1,500 fragments / 45,289 baseline-identical bytes: complete query/runtime
+projection and read static projection through 381. All 21 selected tests and
+neutral 6/20/128 checks pass. Qualify older query immutability wording with the
+existing .2.21 native rejection finding; retain every prior owner and gate.
+No new defect or source repair. Reading reaches 32/55; .1.33 is next.
+
+## 2026-09-10 — DART-STARTUP-READING.1.31: native rejection detachment
+
+Read 1,500 fragments / 43,744 baseline-identical bytes: complete semantic index
+and read query through 668. All 18 tests and neutral 6/20/128 checks pass.
+Eight native controls own rejection response detachment/encoding under .2.21
+and two children: four defective non-JSON cases and four detached JSON controls.
+No MCP defect or source repair is claimed. Reading reaches 31/55; .1.32 is next.
+
+## 2026-09-10 — DART-STARTUP-READING.1.30: semantic call counterexamples
+
+Read 1,500 fragments / 43,400 baseline-identical bytes: complete call projection
+and read semantic index through 399. All 28 tests and neutral 6/20/128 checks
+pass. Nine public-query/typed-runtime controls extend startup .67 with Dart
+array-call omission and own regex source correlation under .2.20 and two
+children; seven valid/arity-rejection controls preserve scope. No source repair;
+reading reaches 30/55 and .1.31 is next.
+
+## 2026-09-10 — DART-STARTUP-READING.1.29: Unicode completion and call projection
+
+Read 1,500 fragments / 37,172 baseline-identical bytes: complete Unicode
+mapping/scaffold and begin semantic call projection through 347. Eleven Dart
+tests and semantic 6/20/128 checks pass, including all twelve Unicode runtime
+fixtures. The existing empty-function guard remains startup .22-owned.
+No new defect or source change; reading reaches 29/55 and .1.30 is next.
+
+## 2026-09-10 — DART-STARTUP-READING.1.28: Unicode mapping continuation
+
+Read Unicode mapping 1190–2689: 1,500 fragments / 38,936 baseline-identical
+bytes. Lower mappings are complete and upper mappings reach U+A76F. Fresh
+regeneration matches neutral data and all five backend modules; twelve
+independent fixtures pass. Retain .1.27 runtime evidence by exact source
+identity and preserve all earlier findings. No new defect or source change;
+reading reaches 28/55 and .1.29 is next.
+
+## 2026-09-10 — DART-STARTUP-READING.1.27: declarations and provenance types
+
+Complete both staged runtime modules and read Unicode lower mappings through
+1189: 1,500 fragments / 39,481 baseline-identical bytes. Seventeen private/
+neutral validator controls establish six malformed provenance acceptances and
+eleven agreeing cases. Own .2.19 and two gated repair children, preserve exact
+reproduction, and qualify the staged chapter and project status. All 33 selected
+tests and Unicode generation/12 neutral fixtures pass; prior resource defects
+remain owned. Reading reaches 27/55; .1.28 is next.
+
+## 2026-09-10 — DART-STARTUP-READING.1.26: staged resource boundaries
+
+Read staged enrichment lines 1807–3306: 1,500 fragments / 43,782 baseline-identical
+bytes. Eleven private recursive controls own diagnostic-byte overruns (.2.17)
+and signed-maximum call-count wrap (.2.18), with seven valid controls. Decompose
+seven gated repair nodes and publish measured limitations in the staged chapter,
+project status and a reproducible Knowledge card. All 44 selected tests and
+neutral 123/129 mutations pass; no source repair or fresh production-carrier
+defect proof is claimed. Reading reaches 26/55; .1.27 is next.
+
+## 2026-09-10 — DART-STARTUP-READING.1.25: frozen registry and recursive dispatch
+
+Read staged enrichment lines 307–1806: 1,500 fragments / 47,254 baseline-identical
+bytes. Frozen resolution, effective authority, plan caching and recursive
+preflight/dispatch reconcile with their existing scope. All 44 selected tests
+pass; no new defect is established. Preserve prior findings, exact coverage and
+book/live alignment; .1.26 follows the focused clean commit. The approved
+engineering-history prerequisite is committed canonically at 9c644ecb.
+
+## 2026-09-10 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.9: approved engineering-history slot
+
+Admit the two approved engineering_notes controls: files 26→27 and manifest lines
+25→26, with indexed ADR0111 and governed complete-record rollover. Exact source,
+history reconstruction, old-record retention and actual validator boundaries
+verify the candidate. All byte limits remain unchanged; exact staged canonical
+proof governs landing. Dart intake .5 closes; reading .1.25 resumes after clean
+commit. Parser behavior, earlier defects and parked ideas remain unchanged.
+
+## 2026-09-10 — DART-STARTUP-READING.1.24: recognition and source authority
+
+Read 1,500 fragments / 48,312 unchanged bytes: recognition, semantic observation
+and source location through EOF, staged entry through 306. All 58 selected tests
+pass. Existing authorities reconcile; a stale Knowledge link is corrected.
+Reading is 24/55; prior defects remain owned and gated. Exact draft engineering-history
+rollover preserves every prior byte but needs files 26→27 and manifest lines 25→26.
+Intake .5 owns the unapproved proposal. Restoring only that verified draft and shortening
+the new engineering summary lets .1.24 land; 50 bytes remain below required rollover.
+
+## 2026-09-09 — DART-STARTUP-READING.1.23: regex literal normalization
+
+Read 1,500 fragments / 41,162 unchanged bytes: matching through EOF and
+recognition through 483. All 99 selected tests pass. Six public Dart/Perl
+controls prove three escaped-literal/class corruptions with three agreements;
+.2.16 owns lexical normalization and carriers. Reading is 23/55; next .1.24.
+
+## 2026-09-09 — DART-STARTUP-READING.1.22: interpreter completion and matching
+
+Read 1,500 fragments / 42,836 unchanged bytes: interpreter through EOF and
+matching through 900. All 132 selected tests and structural corpus 31/31 pass.
+Existing write, callable, staged and structural authorities reconcile without
+a new defect. Reading is 22/55; next .1.23; prior repairs remain owned.
+
+## 2026-09-09 — DART-STARTUP-READING.1.21: input-slice boundaries
+
+Read 1,500 fragments / 39,933 unchanged bytes through interpreter line 9674.
+All 124 runtime and six contract tests pass. Nine native/reconstructed and Perl
+facade/source controls extend .2.14 typed slice overflow and own .2.15 arity.
+Book/KM retain exact limitations and replay. Reading is 21/55; next .1.22.
+
+## 2026-09-09 — DART-STARTUP-READING.1.20: value-helper boundaries
+
+Read 1,500 fragments / 41,244 unchanged bytes through interpreter line 8174.
+The corrected 111-test selection and neutral numeric 55/18 pass. Eleven number,
+eight Unicode-order and six slice comparisons own .2.12-.2.14 with exact
+native/reconstructed and Perl facade/source evidence. Book limitations and prior
+owners remain durable. Reading reaches 20/55; next .1.21. No executable change.
+
+## 2026-09-09 — DART-STARTUP-READING.1.19: hash splice pairing
+
+Read 1,500 fragments / 43,446 unchanged bytes through interpreter line 6674.
+All 122 selected tests pass. Nine native/reconstructed hash cases and nine Perl
+facade/source comparisons own Dart splice pairing/order repair under .2.11;
+FUTURE-PARITY-BACKLOG.5 retains existing helper caveats. Exact replay and book
+limitation are durable. Reading reaches 19/55; next .1.20. No executable change.
+
+## 2026-09-09 — DART-STARTUP-READING.1.18: callback recursion identity
+
+Read 1,500 fragments / 45,330 unchanged bytes through interpreter line 5174.
+All 140 selected tests pass. Nine native/reconstructed controls expose false nested-helper
+callback cycles and lost bound callback identity. New .2.10 owns repair/carrier proof;
+exact replay and book limitation are durable. Reading reaches 18/55, next .1.19.
+No executable change.
+
+## 2026-09-09 — DART-STARTUP-READING.1.17: mixed value-control execution
+
+Read 1,500 fragments / 40,984 unchanged bytes through interpreter line 3674.
+All 124 selected tests pass. Ten native/reconstructed controls show attached controls
+inside marker value ranges can escape local returns or skip else. New .2.9 owns repair
+and carrier proof; exact replay and the book limitation are durable. Reading reaches
+17/55, next .1.18. No executable change.
+
+## 2026-09-09 — DART-STARTUP-READING.1.16: rule execution and observer error identity
+
+Read 1,500 fragments / 43,183 unchanged bytes through interpreter line 2174.
+All 100 selected tests pass. Six public native controls show action-mediated child
+observation replaces the original callback error/stack; direct/blind/final controls preserve
+them. New .2.8 owns repair and carrier/cleanup proof. Exact replay and book limitation are
+durable; reading reaches 16/55, next .1.17. No executable change.
+
+## 2026-09-09 — DART-STARTUP-READING.1.15: dispatch, runtime and nested authority
+
+Read 1,500 fragments / 45,477 unchanged bytes through bounded authority/generated-plan EOF
+and interpreter line 674. All 82 selected tests and neutral progressive checks pass.
+Ten private-authority controls confirm missing nested budget/grant inheritance; existing startup
+.37.1/.37.2 own repair/diagnostic review. Exact replay and book limitation are durable.
+Reading reaches 15/55; next .1.16. No executable or policy change.
+
+## 2026-09-09 — DART-STARTUP-READING.1.14: function projection and bounded source authority
+
+Read 1,500 fragments / 44,607 unchanged bytes through function-shell EOF and bounded authority
+line 746. All 24 selected function/progressive tests pass, including emitted analysis/execution.
+No new confirmed defect; Knowledge, book, roadmap and live pointers agree at 14/55.
+Existing repairs stay gated; next .1.15 completes authority and begins runtime reading.
+
+## 2026-09-09 — DART-STARTUP-READING.1.13: Unicode, function bridge and fluent suffixes
+
+Read 1,500 fragments / 48,522 unchanged bytes through staged registry/Unicode/function parser EOF
+and shell line 252. All 25 selected tests and neutral Unicode checks pass. Seven source/AST/
+validation/compiler controls confirm body-fluent suffix loss, extending existing .2.6.
+Exact replay, public limitation and prior evidence are durable; reading reaches 13/55, next .1.14.
+
+## 2026-09-09 — DART-STARTUP-READING.1.12: spec lexical boundaries and staged v1
+
+Read 1,500 fragments / 41,630 unchanged bytes through spec-parser EOF and staged registry line 677.
+All 17 selected tests pass. Ten source/native controls establish compact argument corruption (.2.7)
+and outer regex-brace truncation (existing .2.2.2). Exact replay, public limitations and v1/v2
+registry distinction are durable; repairs remain gated. Reading reaches 12/55; next .1.13.
+
+## 2026-09-09 — DART-STARTUP-READING.1.11: MCP wire and body suffix retention
+
+Read 1,500 fragments / 39,800 unchanged bytes through MCP server/wire EOF and spec parser line 744.
+All 16 selected tests pass. Fourteen source/validation/compiler controls confirm discarded regex/E
+suffixes, with valid and retained/rejected controls. Repair .2.6 is owned and gated; exact replay,
+public limitation and earlier evidence remain durable. Reading reaches 11/55; next .1.12.
+
+## 2026-09-09 — DART-STARTUP-READING.1.10: MCP runtime and Unicode key order
+
+Read 1,500 fragments / 61,935 unchanged bytes through generated bundle/runtime EOF and server line 1019.
+All 11 selected tests pass. Four helper controls and one injected public-dispatch probe confirm
+canonical U+E000/U+10000 ordering divergence with equal JSON values. Repair .2.5 is owned and gated;
+exact replay, public limitation and prior evidence are durable. Reading reaches 10/55; next .1.11.
+
+## 2026-09-09 — DART-STARTUP-READING.1.9: generated MCP contract reading
+
+Read all 65,536 owned bytes of the first generated bundle window, retaining exact baseline identity.
+Four binding tests, neutral 35/10/10/76 validation, generator freshness and embedded-value equality pass.
+Dated facts and public outcome distinctions retain prior evidence. Reading reaches 9/55; no new
+defect is confirmed. Next .1.10 finishes the bundle and reads its runtime/server.

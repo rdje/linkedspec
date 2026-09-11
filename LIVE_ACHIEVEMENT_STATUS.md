@@ -5,7 +5,7 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia reading remains 3/52 groups, 4,071 fragments /145,809 bytes and seven complete files. Julia .4.1 prepares four extra archive slots per history for the remaining reading/closeout envelope; six proposed controls leave root, segment and aggregate limits unchanged. Independent models agree on eight rollovers and preserve all history. Pending containment .12 owns implementation and its requested one-time canonical exception; approval is not assumed. Julia .1.4 waits behind that decision. The callable selector gap and all prior repairs remain open. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Approved containment .12 / ADR0115 admits four extra archive slots per history through six exact limits. The governed change-history rollover preserves 217 lines /13,128 bytes from clean 107170da7; all prior history and unrelated controls remain exact. Production-validator proof passes 44 threshold and 22 authorization cases under the explicit one-time focused exception. Julia reading remains 3/52 groups and seven complete files; .1.4 is next. All parser repairs, startup prerequisites and future canonical/push requirements remain. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.81` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
@@ -15,9 +15,11 @@
 
 ## Next Action
 
-- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.12` — await exact capacity/verification decision, then implement and commit its reviewed boundary before Julia .1.4.
+- `JULIA-STARTUP-READING.1.4` — finish ActionContracts and begin ActionParser after the clean approved capacity boundary.
 
 ## Recent Completions
+
+- `2026-09-11` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.12` admits six approved limits; exact 217-line rollover and 66 actual-validator executions pass under the one-time focused exception.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.4.1` prepares six exact history limits; two independent 55-record models agree. No implementation or exception grant.
 
@@ -48,8 +50,6 @@
 - `2026-09-11` — `DART-STARTUP-READING.1.49` reads 1,500 fragments / 48,927 bytes; 12 tests and three neutral checks pass; no new defect.
 
 - `2026-09-11` — `DART-STARTUP-READING.1.48` reads 1,500 fragments / 48,937 bytes; 24 tests and semantic 6/20/128 checks pass; no new defect.
-
-- `2026-09-11` — `DART-STARTUP-READING.1.47` reads1500 fragments/50626 bytes; 30 tests and semantic/Unicode neutral checks pass; no new defect.
 
 ## History
 

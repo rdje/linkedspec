@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 3/52 owned groups; a bounded history-capacity decision precedes its fourth reading child.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 3/52 owned groups; approved containment .12 clears the way for its fourth reading child.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -273,25 +273,29 @@ consumer. Running that test adds no unread suffix credit. That leaf reached 54/5
 children, 79,028 fragments / 2,431,006 bytes. `.1.55` now completes write tests and
 the dormant progressive-authority consumer. Existing repairs remain owned and open.
 
-**Current continuation boundary — Julia history capacity:** the first three
-reading groups and their findings are committed. Both history collections have
-used every permitted archive slot. The prepared proposal adds four slots to each,
-with only six indexing limits changed: changes files 32→36, manifest lines 31→35
-and bytes 17,615→19,919; engineering files 28→32, manifest lines 27→31 and
-bytes 16,384→18,678. Root, segment and aggregate limits remain unchanged.
+**Approved Julia history capacity:** ADR0115 admits four additional archive
+slots per history through six exact controls: changes files 32→36, manifest
+lines 31→35 and bytes 17,615→19,919; engineering files 28→32, manifest lines
+27→31 and bytes 16,384→18,678. Root, segment and aggregate limits remain unchanged.
 
-Two independent models, one using the actual rollover functions, agree on the
-55-record planning envelope and preserve every existing byte. This provides a
-finite allowance for remaining Julia reading and closeout; runtime repairs and
-later activities are outside it. The worst-case engineering line forecast leaves
-24 aggregate lines, so each actual candidate remains subject to the existing gate.
-The proposal is `docs/knowledge/julia-reading-history-capacity-proposal.md`.
+Containment .12 preserves 217 lines /13,128 bytes from the exact clean change
+history, with every earlier archive and manifest record retained. The resulting
+collections use 33/36 and 28/32 permitted files. Production-validator proof covers
+44 threshold executions and 22 authorization executions. The director explicitly
+granted the one-time focused-verification exception; normal hooks remain enabled.
+Julia .1.4 is next after the verified capacity commit.
 
-Pending containment .12 owns implementation. It also requests one explicit
-canonical-receipt exception using exact preservation, actual-validator and normal
-doctrine proof, respecting the PGEN/RGX build-on-update directive. Earlier Dart
-exceptions do not authorize it. No capacity or verification waiver is assumed;
-Julia .1.4 follows the reviewed and committed capacity boundary.
+The allowance covers the finite remaining-Julia reading and closeout envelope.
+Each actual candidate remains measured against the existing limits. The director
+clarified the guiding principle: rules are essential for order and continuity,
+and should support feature delivery through proportionate checks and bounded,
+evidence-backed adjustments. Planning capacity across a coherent activity avoids
+repeated administrative interruptions.
+
+Markdown remains the editable documentation source, with mdBook-generated HTML
+for reading and review. No format migration is part of this capacity change.
+Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
+decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
 **Julia reading is 3/52 groups complete:** ActionAst is now fully read and
 ActionContracts is read through line 766. Cumulative coverage is 4,071 lines /
@@ -360,7 +364,7 @@ own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran f
 this reading closure; normal commit hooks remain enabled.
 
 Julia has read three of 52 exact groups across 95 baseline entries;
-its fourth physical reading child waits behind the capacity decision, followed by the remaining Lua/supporting
+its fourth physical reading child follows approved containment .12, followed by the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,
@@ -391,7 +395,7 @@ All 20 selected tests and write/progressive neutral checks pass. Current progres
 governance is nine complete rollout legs, zero pending, 116 contract mutations and
 60 public mutations. The old admission card's pending wording is now explicitly
 historical. The .3.1/.3.2 audit verifies every child commit and ADR0114 closes
-startup `.3.4` reading. Julia reading stays 3/52; containment .12 precedes .1.4. Existing defects and the remaining codebase/book/policy
+startup `.3.4` reading. Julia reading stays 3/52; approved containment .12 clears the way for .1.4. Existing defects and the remaining codebase/book/policy
 prerequisites remain open.
 
 **Approved engineering-history capacity:** the director approved collection files
@@ -438,7 +442,7 @@ in 2.25 seconds. That sample locates a pre-main wait without establishing its OS
 or a remedy. The older macOS 26.5.2 closeout does not resolve this macOS 26.6.2 observation.
 The evidence and repair criteria are logged by `SESSION-STARTUP-READING.80.0`; source
 changes remain behind the existing startup prerequisites. The intake is committed at
-`eaf4331e`; approved containment .11 is committed at `ad64f76f`; Dart reading closes under `.3.2` / ADR0114; Julia .1.3 reading is complete; containment .12 decision precedes .1.4. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
+`eaf4331e`; approved containment .11 is committed at `ad64f76f`; Dart reading closes under `.3.2` / ADR0114; Julia .1.3 reading is complete; approved containment .12 clears the way for .1.4. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
 
 **Known Dart limitation — null named selectors in reconstructed state:** a programmatically
 reconstructed target with these fields is incorrectly accepted:

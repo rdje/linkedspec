@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-- Status: `pending` / .12 Julia history allowance proposed; .11 remains complete
+- Status: `done` / .12 approved finite Julia history allowance
 - Roadmap lane: `Repository architecture / documentation sustainability`
 - Created: `2026-08-09`
-- Last updated: `2026-09-11` (.12 proposed by Julia .4.1; no implementation authorization assumed)
+- Last updated: `2026-09-11` (.12 verified under the explicit one-time focused exception)
 - Owner: repo-local workflow
 
 ## Goal
@@ -58,7 +58,7 @@ or the README `.4` adoption/closeout that installs the guard.
 ## Task Tree
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-  Status: `pending` (.0-.11 complete; .12 awaits decision; Julia reading remains 3/52)
+  Status: `done` (.0-.12 complete; Julia reading remains 3/52)
   Goal: Replace measured oversized routed destinations with bounded views over durable stores.
   Depends on: `README-STABILITY-POLICY.4.2`
   Children: `.0-.12`
@@ -441,23 +441,30 @@ or the README `.4` adoption/closeout that installs the guard.
   Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.11 - admit approved engineering-history member`
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.12`
-  Status: `pending`
+  Status: `done` (explicit one-time focused-verification exception)
   Goal: Admit one finite remaining-Julia history allowance under the exact reviewed decision.
-  Dependencies: Clean JULIA-STARTUP-READING.4.1; director decision on six proposed capacity controls and the explicit one-time canonical-receipt boundary. No earlier exception grants this leaf.
+  Dependencies: Clean `107170da748f7f89d9cbdb26d4a6df888a067077`; director explicitly answered YES to the six-limit proposal and one-time focused-verification exception for .12 on 2026-09-11.
+  Activation commit: `107170da748f7f89d9cbdb26d4a6df888a067077`.
+  Verification tier: `focused`
+  Focused checks: Exact six-scalar registry comparison; actual routing-validator limit and authorization boundaries; immutable history/source reconstruction; all nine normal doctrines, Knowledge, memory, both history checks and rendered mdBook.
+  Canonical trigger: `Normally history infrastructure requires canonical proof; the director explicitly grants a one-time focused/receipt exception for .12 only. Future canonical and push requirements remain unchanged.`
   Scope: change_history max_files 32→36 and its manifest max_lines 31→35/max_bytes 17615→19919; engineering_notes max_files 28→32 and its manifest max_lines 27→31/max_bytes 16384→18678. Every root, segment, aggregate, owner, route, lifecycle, verifier, schema and historical byte remains unchanged.
   Acceptance: Add accepted indexed exact old/new limit ADR(s), remeasure current inputs, change only the six authorized registry scalars, and prove old-source/manifest/archive/query preservation. Exercise the actual routing validator for unchanged rejection and exact authorized admission boundaries, both histories, Knowledge, memory, rendered book and all nine normal doctrines. Only use the proposed focused/receipt exception if explicitly granted; otherwise canonical infrastructure proof remains required. Perform governed rollovers only when required, preserving their exact records and source coordinates. Commit clean, clear brief, close Julia .4 and resume .1.4; no future/push waiver, parser repair, CI change or dependency build authorization.
-  Verification: `pending`. Proposal: docs/knowledge/julia-reading-history-capacity-proposal.md; independent 55-record dual-axis models give four rollovers per surface within unchanged aggregate limits. The receipt exception is requested, not granted.
-  Commit: `pending`
+  Verification: Exactly six approved registry scalars change under ADR0115. New segment 4980-f04b37b1dab6 preserves clean 107170da7 CHANGES lines 239-455, blob 5874d5cb391064543217d41e1d2ab5e5cf6bb686, 217 lines/13128 bytes and SHA-256 f04b37b1dab6628be794d952afa082fec6ff5b244c999081267f882673cbd4fe. Every prior manifest record and archive remains exact; full root reconstruction restores one normalized terminal LF. Roots are 248/14891 and 396/24673; collections 33/48987/3557028 and 28/26220/2798551. Actual production functions pass 44 threshold and 22 authorization/mutation executions on detached inputs. docs/knowledge/julia-reading-history-capacity-admission.md holds self-contained recipes. Prior reading/repair evidence and all source identities remain; histories, Knowledge, memory, rendered book and all nine normal doctrines govern focused admission.
+  Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.12 - admit approved Julia history capacity`
 
 ## Current Frontier
 
-| Order | Leaf | Status | Why next |
-| --- | --- | --- | --- |
-| 1 | `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.12` | `pending` | Exact Julia history proposal awaits capacity and verification authorization. |
+Complete through .12. After the verified commit, empty brief and clean proof,
+resume `JULIA-STARTUP-READING.1.4` in its separate active reading tree.
 
 Historical .11 handoff (preserved): This tree closes through .11 under the director’s explicit one-time focused-verification exception. After the commit, empty brief and clean proof, resume `DART-STARTUP-READING.1.47`. Dart reading remains 46/55; all remaining reading, repair and future canonical gates remain in force.
 
 ## Decisions
+
+- `2026-09-11` .12: ADR0115 records proportionate governance: retain rules, clear ownership and evidence; plan bounded capacity across coherent work to avoid repeated administrative interruptions.
+
+- `2026-09-11`: The director explicitly answers YES to the six proposed limits and one-time focused-verification exception for .12. Normal hooks and all nine doctrines remain enabled; no full CI, dependency build or future/push waiver.
 
 - `2026-09-11`: On 2026-09-11 the director explicitly granted a one-time canonical-receipt exception for .11 using passing focused checks, to avoid the current gate’s repeated PGEN/RGX builds. Normal commit hooks and all nine doctrines remain enabled; no full CI, dependency build or canonical receipt is claimed. All future verification boundaries retain their existing requirements.
 
@@ -591,6 +598,8 @@ All files and transient proof stay on the repository filesystem; no off-volume c
 
 ## Verification Log
 
+- `2026-09-11` .12: Approved containment .12 / ADR0115 admits four extra archive slots per history through six exact limits. The governed change-history rollover preserves 217 lines /13,128 bytes from clean 107170da7; all prior history and unrelated controls remain exact. Production-validator proof passes 44 threshold and 22 authorization cases under the explicit one-time focused exception. Julia reading remains 3/52 groups and seven complete files; .1.4 is next. All parser repairs, startup prerequisites and future canonical/push requirements remain.
+
 - `2026-09-10` .11: Exactly two approved registry scalars change under ADR0113. Governed segment4980 preserves clean 01a2159c DEVELOPMENT_NOTES249-459, blob ebc30daf8dc84bdc1da5d60a67ff36007b14a70f, 211 lines/24521 bytes, SHA-256 b29e3bd321a1357afe2e779c7e138986e96bef3258c4408d785fc06b11bb58f5. All prior manifest records and other history files remain exact. Root reconstruction restores the single normalized EOF separator LF; full archive query matches all bytes. Root254/16165, manifest27/16230 and collection28/26078/2790043 fit unchanged other limits. All 22 actual-validator executions pass. Complete preservation and doctrine/book checks govern landing under the explicit 2026-09-11 one-time receipt exception; concurrent PGEN/RGX build-on-update direction remains pending under startup .80.
 
 - `2026-09-10` `.10`: director approval is bound in ADR0112. Exact three-scalar scope, clean-source suffix, old manifest/history identity and full ordered reconstruction pass; 22 actual-validator executions pass. The generated root retains both separator LFs and direct concatenation reconstructs all 47,004 source bytes. Diff hygiene then rejects a new blank EOF line; the final live root drops exactly that separator LF and the final reconstruction explicitly restores it. No immutable byte changes. The final proof is durable in docs/knowledge/dart-reading-second-history-capacity-blocker.md. All doctrine/book/preservation and exact staged canonical results govern landing.
@@ -701,6 +710,8 @@ brief clearing, generated-residue census, post-pointer check, and clean proof re
 
 ## Commit Log
 
+- `2026-09-11` .12: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.12 - admit approved Julia history capacity`.
+
 - .11: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.11 - admit approved engineering-history member`; explicit one-time focused proof, without canonical receipt.
 
 - .10: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.10 - admit approved change-history member`.
@@ -724,6 +735,8 @@ brief clearing, generated-residue census, post-pointer check, and clean proof re
 - `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5`: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5 - compact duplicate startup chronology without losing evidence`.
 
 ## Changelog
+
+- `2026-09-11` .12: .12 implements the finite Julia allowance, preserves exact history and returns the frontier to Julia .1.4.
 
 - `2026-09-11`: .11 implements exactly the approved engineering-history count controls, preserves fresh source/history, closes Dart .7 with the explicit one-time focused exception and routes .1.47 after clean landing.
 

@@ -4468,7 +4468,7 @@ Startup `.3.4` stays pending until complete Dart reading; the next executable re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.12` | `pending` | Await the exact capacity and one-time verification decision; no registry change before authorization. Julia .1.4 follows its clean admission. |
+| 1 | `JULIA-STARTUP-READING.1.4` | `pending` | Finish ActionContracts and begin ActionParser after the clean approved capacity boundary. |
 
 ## Reading Ledger
 

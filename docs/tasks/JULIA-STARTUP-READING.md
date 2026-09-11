@@ -646,13 +646,13 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.4`
-  Status: `active`
+  Status: `done`
   Goal: Resolve evidence or history capacity before it blocks a safely committed Julia slice.
   Dependencies: Fresh resulting-tree/mandatory-rollover projection and clean prior reading checkpoint.
   Acceptance: Preserve existing evidence and all limits; route changing detail to its canonical owner. If a capacity increase is actually required, prepare exact old/new controls, source and immutable-history preservation proof, finite projected need and the required director decision before infrastructure implementation. Current history collections have no free member slots; no later archive slot is preapproved.
-  Children: .4.1 prepares the proposal; pending LIVE-DOCUMENT-PRESSURE-CONTAINMENT.12 owns exact implementation/admission. Resume .1.4 only after that clean boundary.
-  Verification: `pending` capacity decision; exact proposal and independent models are committed by .4.1. No allowance or future canonical exception is assumed.
-  Commit: `pending`
+  Children: .4.1 proposal; containment .12 implements approved capacity under ADR0115. Julia .1.4 resumes after its clean admission.
+  Verification: Containment .12 admits the six approved limits with exact history preservation, 44 actual threshold and 22 actual authorization executions, normal doctrines and the explicit .12-only focused exception. Implementation proof: docs/knowledge/julia-reading-history-capacity-admission.md. All .1 source children and .2 repairs remain unchanged.
+  Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.12 - admit approved Julia history capacity`.
 
 - ID: `JULIA-STARTUP-READING.4.1`
   Status: `done`
@@ -671,9 +671,11 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.12` | `pending` | Await the exact capacity and one-time verification decision; no registry change before authorization. Julia .1.4 follows its clean admission. |
+| 1 | `JULIA-STARTUP-READING.1.4` | `pending` | Finish ActionContracts and begin ActionParser after the clean approved capacity boundary. |
 
 ## Decisions
+
+- `2026-09-11` .4 closeout: The director answers YES to .12 capacity and its one-time focused exception. ADR0115 implements the finite allowance and records proportionate governance.
 
 - `2026-09-11`: Prepare one finite remaining-Julia allowance, with all other ceilings unchanged; record the proposed verification exception before asking. Earlier waivers do not extend automatically.
 - `2026-09-11`: Keep Julia execution evidence in this separate bounded member; the startup file has insufficient room for the full plan. No aggregate/member/control change.
@@ -685,11 +687,15 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Blockers
 
+- `2026-09-11` .4 closeout: The .12 capacity decision below is resolved by ADR0115 and verified admission. Julia .1.4 resumes; actual per-leaf pressure checks remain.
+
 - `2026-09-11`: Pending .12 needs the six exact capacity controls and explicit proposed one-time canonical-receipt boundary. After this intake CHANGES is 455 lines; the next ordinary seven-line reading record would require a disallowed archive.
 - None for the first reading group at decomposition. Later mandatory rollovers require .4 before exceeding unchanged history limits.
 - Source repairs retain startup prerequisites; those dependencies do not block source reading.
 
 ## Verification Log
+
+- `2026-09-11` .4 closeout: Approved containment .12 / ADR0115 admits four extra archive slots per history through six exact limits. The governed change-history rollover preserves 217 lines /13,128 bytes from clean 107170da7; all prior history and unrelated controls remain exact. Production-validator proof passes 44 threshold and 22 authorization cases under the explicit one-time focused exception. Julia reading remains 3/52 groups and seven complete files; .1.4 is next. All parser repairs, startup prerequisites and future canonical/push requirements remain.
 
 - `2026-09-11` .4.1: Julia reading remains 3/52 groups, 4,071 fragments /145,809 bytes and seven complete files. Julia .4.1 prepares four extra archive slots per history for the remaining reading/closeout envelope; six proposed controls leave root, segment and aggregate limits unchanged. Independent models agree on eight rollovers and preserve all history. Pending containment .12 owns implementation and its requested one-time canonical exception; approval is not assumed. Julia .1.4 waits behind that decision. The callable selector gap and all prior repairs remain open.
 - `2026-09-11` .1.3: Julia .1.3 completes ActionAst and reads ActionContracts through 766: 3/52 groups, 4,071 fragments /145,809 bytes and seven complete files. Twenty causal controls prove callable bodies bypass retired array/hash selector validation across native, reconstructed, generated-plan and in-process emitted-module routes; .2.1.1/.2.1.2 own repair. Existing uniform-binding 61 and projection/alias 8 pass without closing the gap. All source bytes and prior repairs remain. Julia .1.4 is next, with .4 capacity intake before history rollover.
@@ -699,6 +705,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Commit Log
 
+- `2026-09-11` .4 closeout: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.12 - admit approved Julia history capacity`.
+
 - .4.1: `JULIA-STARTUP-READING.4.1 - prepare finite history capacity and verification decision`.
 - .1.3: `JULIA-STARTUP-READING.1.3 - read action projection and own callable selector gap`.
 - .1.2: `JULIA-STARTUP-READING.1.2 - read facade and typed action model`.
@@ -706,6 +714,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Decomposition: `SESSION-STARTUP-READING.3.5.0 - freeze exact bounded Julia reading plan`.
 
 ## Changelog
+
+- `2026-09-11` .4 closeout: Approved containment .12 closes .4; no reading credit or defect status changes.
 
 - `2026-09-11`: .4.1 prepares the exact proposal and routes pending containment .12; no capacity or source change.
 - `2026-09-11`: .1.3 completes the third reading group and owns the confirmed callable-body selector defect under .2.1.

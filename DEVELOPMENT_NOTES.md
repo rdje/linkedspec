@@ -10,6 +10,15 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Approved finite Julia history admission
+
+The approved allowance changes six scalars and preserves every other control.
+Rollover archives only complete clean-HEAD suffix records with exact provenance.
+Independent preservation and real-validator limit/authorization mutations verify
+the admission; the original dual-axis forecast remains reproducible.
+ADR0115 records the explicit one-time focused exception for .12 only.
+PGEN/RGX builds and startup .80 implementation remain outside this change.
+
 ## 2026-09-11 — Finite dual-axis Julia history envelope
 
 The largest prior Dart reading records are 10 change lines/669 bytes and 13 note

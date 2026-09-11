@@ -133,6 +133,8 @@ changed* lives in git (layer D), not here.
 
 | [0114](0114-dart-reading-closeout-verification-exception.md) | Close verified Dart source reading under the director's delegated one-time decision; retain failed gates and all repair obligations | 2026-09-11 | accepted | reading, verification, continuity |
 
+| [0115](0115-julia-reading-history-capacity.md) | Admit four archive slots per history for remaining Julia reading; six exact controls and an explicit one-time focused exception | 2026-09-11 | accepted | documentation, history, capacity, verification |
+
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /
    Decision / Consequences / Links`).

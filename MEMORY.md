@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `6308ff4e2426de216cf702b86107e4ebda33a026` — clean third Julia reading handoff before planned capacity intake.
-- latest_completed_leaf: `JULIA-STARTUP-READING.4.1 - prepare finite history capacity and verification decision`; exact proposal and preservation/model proof complete; no limit or verification exception granted.
-- active_work_unit: none; proposal committed. Pending `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.12` requires the explicit decision.
-- next_action: Obtain the reviewed six-limit capacity and one-time canonical-receipt decision for containment .12; implement only its approved boundary, commit clean, then resume Julia .1.4.
+- activation_commit: `107170da748f7f89d9cbdb26d4a6df888a067077` — clean committed Julia capacity proposal before approved .12 implementation.
+- latest_completed_leaf: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.12 - admit approved Julia history capacity`; exact six-scalar admission, preserved history and approved one-time focused exception.
+- active_work_unit: none; containment .12 and Julia .4 complete; `JULIA-STARTUP-READING.1.4` is next.
+- next_action: Activate Julia .1.4 from clean HEAD; read ActionContracts 767-1128 and ActionParser 1-1138, verify and commit. Use the approved finite capacity and existing per-leaf checks.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
-- in_flight_uncommitted: none; no running jobs. Awaiting director decision; exact proposal, models and pending implementation are durable.
-- blockers: Containment .12 awaits the exact Julia history allowance and proposed one-time receipt exception; after intake CHANGES 455/512 lines leaves five below mandatory rollover. No source/registry/CI change or automatic waiver. Existing startup prerequisites and every Dart/Julia repair remain; prior accepted capacity and reading exceptions retain their original scope.
+- in_flight_uncommitted: none; no running jobs. All work is committed; existing Julia/Dart defects remain repair-owned.
+- blockers: No capacity blocker for Julia .1.4. Remaining startup prerequisites and all Dart/Julia repairs retain their scope; ADR0115 grants the finite six-limit allowance and .12-only focused exception.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -51,10 +51,10 @@
 - standing_contracts: all durable paths are repo-relative; all project data stays on the repository filesystem;
   README remains bounded; ordinary leaves use focused proof and designated infrastructure/public/push boundaries
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
-- current_engineering_notes_capacity: ADR0113 admits28 files/27 manifest lines and preserves211 lines/24521 bytes under containment .11.
-  Manifest is16,230 bytes; all byte/root/segment/aggregate ceilings remain unchanged. All history and actual-validator proof pass.
-- current_change_history_capacity: ADR0112 at bef5dafd admits exactly 32 collection files / 31 manifest lines / 17,615 manifest bytes.
-  Segment 4981-5a6450db0974 preserves 218 lines / 32,108 bytes; every other ceiling remains unchanged.
+- current_engineering_notes_capacity: ADR0115 admits 32 files /31 manifest lines /18678 manifest bytes for finite remaining Julia reading.
+  Current manifest is 16230 bytes; root/segment/aggregate limits and all prior history remain unchanged.
+- current_change_history_capacity: ADR0115 admits 36 files /35 manifest lines /19919 manifest bytes; current collection uses 33 files.
+  Segment 4980-f04b37b1dab6 preserves 217 lines /13128 bytes; all other controls remain unchanged. Proportionate governance: ADR0115.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
 - latest_bootstrap_read: 2026-09-11 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart read; Julia 3/52 groups, 4071/75984 lines, 145809/2693170 bytes, seven complete files. Lua/supporting code, formal book .4 and policy .5 remain.
