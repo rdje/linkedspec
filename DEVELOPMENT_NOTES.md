@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia projection checks must bind metadata to source
+
+Matching scalar text does not verify its claimed lines; equal sidecars can all
+carry the same false location. Bool enters an Integer projection helper, while
+payload version is unchecked. Compact regex braces independently fail a
+quote-only validator after parsing preserves full code. Repairs remain owned.
+
 ## 2026-09-11 — Julia lexical stages require distinct repair ownership
 
 A body adapter drops helper remainders; compact extraction counts quoted

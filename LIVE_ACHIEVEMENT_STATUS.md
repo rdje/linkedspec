@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.31 completes spec/Parser and reads all806 UnicodeRuleLabel ranges through822: 31/52 groups, 44,925 fragments /1,557,946 bytes and thirty-nine complete files. Fresh Unicode1755/frontend224 and lexical116 assertions pass; selection1 is separate. Body-fluent adapter loss extends .2.19, compact quoted arguments belong to .2.20 and outer regex-brace truncation to .2.21. Eighteen controls distinguish seven limitations from eleven comparisons; unterminated blocks still reject. Shared .52.2/.54.3 retain counterpart ownership. Neutral Unicode806/9/8/2 passes. All prior repairs, source, history and ADR0115 controls remain. Julia .1.32 is next; classifier functions remain unread and no full component/canonical gate or dependency build ran. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.32 completes UnicodeRuleLabel and UserFunctionDefinitionShell and reads Validator1-640: 32/52 groups, 46,425 fragments /1,612,089 bytes and forty-one complete files. Fresh frontend/staged/callable/classifier2536 and diagnostic118 assertions pass; selection1 is separate. Five malformed projected metadata cases reach runtime under new .2.22.1-.3; three compact regex-brace cases isolate downstream balance .2.21.3. Thirteen metadata and eight lifecycle controls preserve valid and rejecting comparisons. Neutral callable3/9/7 passes. All prior repairs, source, history and ADR0115 controls remain. Julia .1.33 is next; no full component/canonical gate or dependency build ran. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.82` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `JULIA-STARTUP-READING.1.31 - complete parser reading and own literal boundary repairs` — Julia .1.31 completes spec/Parser and reads all806 UnicodeRuleLabel ranges through822: 31/52 groups, 44,925 fragments /1,557,946 bytes and thirty-nine complete files. Fresh Unicode1755/frontend224 and lexical116 assertions pass; selection1 is separate. Body-fluent adapter loss extends .2.19, compact quoted arguments belong to .2.20 and outer regex-brace truncation to .2.21. Eighteen controls distinguish seven limitations from eleven comparisons; unterminated blocks still reject. Shared .52.2/.54.3 retain counterpart ownership. Neutral Unicode806/9/8/2 passes. All prior repairs, source, history and ADR0115 controls remain. Julia .1.32 is next; classifier functions remain unread and no full component/canonical gate or dependency build ran.
+- `JULIA-STARTUP-READING.1.32 - complete function projection reading and own metadata validation gaps` — Julia .1.32 completes UnicodeRuleLabel and UserFunctionDefinitionShell and reads Validator1-640: 32/52 groups, 46,425 fragments /1,612,089 bytes and forty-one complete files. Fresh frontend/staged/callable/classifier2536 and diagnostic118 assertions pass; selection1 is separate. Five malformed projected metadata cases reach runtime under new .2.22.1-.3; three compact regex-brace cases isolate downstream balance .2.21.3. Thirteen metadata and eight lifecycle controls preserve valid and rejecting comparisons. Neutral callable3/9/7 passes. All prior repairs, source, history and ADR0115 controls remain. Julia .1.33 is next; no full component/canonical gate or dependency build ran.
 
 ## Next Action
 
-- `JULIA-STARTUP-READING.1.32` — Read UnicodeRuleLabel823-872, UserFunctionDefinitionShell1-810 and Validator1-640 after clean .1.31; preserve repairs.
+- `JULIA-STARTUP-READING.1.33` — Read Validator641-1047, Trace1-424 and callable-codeblock test1-669 after clean .1.32; preserve repairs.
 
 ## Recent Completions
+
+- `2026-09-11` — `JULIA-STARTUP-READING.1.32` reads1,500 fragments /54,143 bytes;2536 existing/118 diagnostic assertions plus selection1 pass; metadata .2.22 and balance .2.21.3 remain repair-owned.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.31` reads1,500 fragments /40,694 bytes;1979 existing/116 lexical assertions plus selection1 pass; .2.19-.2.21 remain repair-owned.
 
@@ -48,8 +50,6 @@
 - `2026-09-11` — `JULIA-STARTUP-READING.1.18` reads1,500 fragments /47,712 bytes;886 existing,174 Julia and44 Perl assertions pass; input_slice arity remains repair-owned.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.17` reads1,500 fragments /47,705 bytes;585 existing,128 Julia and64 Perl diagnostic assertions pass; numeric/range repairs .2.9/.2.10 remain open.
-
-- `2026-09-11` — `JULIA-STARTUP-READING.1.16` reads 1,500 fragments /47,167 bytes;992 existing and84 diagnostic assertions pass; callback identity repair .2.8 remains open.
 
 ## History
 

@@ -138,3 +138,12 @@ pass1674; parser/validator route7/54/8/8/4 adds81, for1755. Original frontend224
 adds a separate selection assertion. New body-fluent Unicode truncation belongs
 to its distinct method grammar and adapter, not the pinned rule-label ranges.
 Exact contrasts and repair ownership are [[julia-spec-lexical-boundary-defects]].
+
+## September 11 — classifier source reading complete
+
+Julia .1.32 reads823-872, completing the table delimiter and binary-search,
+whole-label and scalar-safe prefix functions. Out-of-range arbitrary-size integers
+are rejected before Int conversion. All1674 existing classifier assertions and six
+additional integer/prefix boundaries pass. Exact ranges and focused replay are in
+[[julia-function-projection-metadata-gaps]]; this reading does not change the pinned
+Unicode17 contract or close any existing parser repair.

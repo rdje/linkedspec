@@ -43,3 +43,14 @@ source retention under Julia .2.19, not permission to weaken validation or treat
 unknown suffixes as comments. Exact evidence is [[julia-parser-member-suffix-loss]].
 The unchanged validator testset passes23 assertions inside focused frontend224;
 adjacent standalone-lifecycle103 preserves its accepted compatibility boundary.
+
+## September 11 — validator prefix and downstream regex balance
+
+Julia .1.32 reads Validator1-640. Quiet/traced validation follows the same ordered
+checks; duplicate namespaces, signatures, retained raw syntax and gap eligibility
+are covered before the unfinished edge-structure suffix. Compact lifecycle regex
+braces retain full action source but fail the quote-only balance counter at437-460.
+Three malformed rejections have identical traced/quiet errors; five comparisons
+include correct genuine-EOF rejection. Julia .2.21.3 owns this distinct downstream
+repair, coordinated with .2.21.1/.2. Exact evidence and replay are in
+[[julia-function-projection-metadata-gaps]]. Existing validator23 remains green.

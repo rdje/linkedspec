@@ -133,3 +133,12 @@ bash tools/run_python_project_data.sh tools/check_unicode_rule_label_contract.py
 
 The original frontend selection is the second managed block of
 [[julia-parser-member-suffix-loss]]; it was rerun unchanged for this slice.
+
+## September 11 — distinct downstream balance owner
+
+Julia .1.32 isolates compact lifecycle calls that preserve their entire regex-brace
+action source before validation. The quote-only Validator437-460 counter rejects
+three regex cases; trace identifies balanced_lifecycle_blocks. New .2.21.3 owns
+that repair, and .2.21.2 now requires it alongside outer scanner .2.21.1. Exact39
+assertions and five comparisons, including genuine EOF rejection, live in
+[[julia-function-projection-metadata-gaps]]. Prior outer-parser evidence remains.

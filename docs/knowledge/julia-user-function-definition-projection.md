@@ -48,3 +48,14 @@ explicit parser source constructs a separate parser. Function-shell7 and fronten
 staged-trace28 assertions pass. The final helper suffix remains unread for .1.12;
 99/920 counts above are historical, while current corpus ownership records105.
 Focused replay: `docs/knowledge/julia-staged-function-body-registry.md`.
+
+## September 11 — projection reading and malformed metadata boundaries
+
+Julia .1.32 reads all810 lines of UserFunctionDefinitionShell.jl. Scalar text,
+containment and sidecar agreement are validated, but source-derived line bounds,
+exact Boolean exclusion and payload versions have gaps. Five malformed metadata
+controls still stage/compile/execute; seven invalid comparisons reject and the
+clean node succeeds. Repair .2.22.1-.3 and complete118-assertion diagnostic replay
+are in [[julia-function-projection-metadata-gaps]]. Existing projection27 plus
+source-parser7, registry39 and broader frontend/callable checks remain positive
+finite evidence, not universal projection validation.

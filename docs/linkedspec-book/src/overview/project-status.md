@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 31/52 owned groups; its thirty-second reading child is next, with approved ADR0115 capacity in place.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 32/52 owned groups; its thirty-third reading child is next, with approved ADR0115 capacity in place.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,12 +297,27 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 31/52 groups complete:** the specification parser and all
-806 Unicode rule-label ranges are read. Coverage is 44,925 lines /1,557,946 bytes
-and thirty-nine complete files. The classifier functions after the range table
-remain next. Existing Unicode and frontend checks pass 1,979 assertions;
-eighteen lexical controls pass 116 assertions. Exact scopes remain in
-`docs/tasks/JULIA-STARTUP-READING.md`.
+**Julia reading is 32/52 groups complete:** the Unicode label classifier and
+function-definition projection are complete; validator reading reaches line640.
+Coverage is 46,425 lines /1,612,089 bytes and forty-one complete files. Existing
+frontend, staged, classifier and callable checks pass 2,536 assertions; metadata,
+lifecycle and classifier controls pass 118. The remaining validator and trace
+source are next. Exact scopes remain in `docs/tasks/JULIA-STARTUP-READING.md`.
+
+**Known Julia limitation — projected function metadata:** caller-supplied function
+AST nodes can carry `version: true`, `arity: true`, payload `version: 99` or no
+payload version through staging, compilation and execution. Mutually consistent
+line99 metadata is also accepted for a function actually on line1. Ordinary source
+parsing emits the valid comparison node. Julia `.2.22.1-.3` own strict metadata,
+source-derived coordinates and supported-carrier/public proof. Exact controls:
+`docs/knowledge/julia-function-projection-metadata-gaps.md`.
+
+**Known Julia limitation — lifecycle regex balance validation:** compact
+`I.return(matches("{", /{/))` preserves complete code but fails brace validation.
+The validator counts regex braces as structural braces; quoted braces and the
+ordinary regex comparison succeed. Julia `.2.21.3` owns this distinct downstream
+repair, required alongside outer collection `.2.21.1` before `.2.21.2` recurrence.
+The exact diagnostic replay above also preserves genuine missing-brace rejection.
 
 **Known Julia limitation — compact literal arguments:** `I.return("(")` can
 be rewritten to `return()` and produce null, while `I.return(")")` truncates
@@ -673,8 +688,8 @@ SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` sti
 own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
-Julia has read thirty-one of 52 exact groups across 95 baseline entries;
-its thirty-second physical reading child is next, followed by the remaining Lua/supporting
+Julia has read thirty-two of 52 exact groups across 95 baseline entries;
+its thirty-third physical reading child is next, followed by the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,
@@ -705,7 +720,8 @@ All 20 selected tests and write/progressive neutral checks pass. Current progres
 governance is nine complete rollout legs, zero pending, 116 contract mutations and
 60 public mutations. The old admission card's pending wording is now explicitly
 historical. The .3.1/.3.2 audit verifies every child commit and ADR0114 closes
-startup `.3.4` reading. Julia reading stays 3/52; approved containment .12 clears the way for .1.4. Existing defects and the remaining codebase/book/policy
+startup `.3.4` reading. Approved containment .12 enabled Julia .1.4; current Julia
+reading progress is tracked above. Existing defects and the remaining codebase/book/policy
 prerequisites remain open.
 
 **Approved engineering-history capacity:** the director approved collection files
@@ -752,7 +768,7 @@ in 2.25 seconds. That sample locates a pre-main wait without establishing its OS
 or a remedy. The older macOS 26.5.2 closeout does not resolve this macOS 26.6.2 observation.
 The evidence and repair criteria are logged by `SESSION-STARTUP-READING.80.0`; source
 changes remain behind the existing startup prerequisites. The intake is committed at
-`eaf4331e`; approved containment .11 is committed at `ad64f76f`; Dart reading closes under `.3.2` / ADR0114; Julia .1.3 reading is complete; approved containment .12 clears the way for .1.4. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
+`eaf4331e`; approved containment .11 is committed at `ad64f76f`; Dart reading closes under `.3.2` / ADR0114; approved containment .12 enabled Julia .1.4, and current reading progress is tracked above. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
 
 **Known Dart limitation — null named selectors in reconstructed state:** a programmatically
 reconstructed target with these fields is incorrectly accepted:

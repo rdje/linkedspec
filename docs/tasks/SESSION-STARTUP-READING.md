@@ -2233,7 +2233,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas.
   Children: `.3.5.0` owns decomposition; JULIA-STARTUP-READING.1 owns 52 reading children and .3 owns closeout.
   Reading owner: `docs/tasks/JULIA-STARTUP-READING.md` retains exact scope/digest, comprehension and repair evidence. This startup node remains the prerequisite owner.
-  Verification: Julia .1.31 completes spec/Parser and reads all806 UnicodeRuleLabel ranges through822: 31/52 groups, 44,925 fragments /1,557,946 bytes and thirty-nine complete files. Fresh Unicode1755/frontend224 and lexical116 assertions pass; selection1 is separate. Body-fluent adapter loss extends .2.19, compact quoted arguments belong to .2.20 and outer regex-brace truncation to .2.21. Eighteen controls distinguish seven limitations from eleven comparisons; unterminated blocks still reject. Shared .52.2/.54.3 retain counterpart ownership. Neutral Unicode806/9/8/2 passes. All prior repairs, source, history and ADR0115 controls remain. Julia .1.32 is next; classifier functions remain unread and no full component/canonical gate or dependency build ran. Exact plan and all source identities remain frozen in the Julia owner.
+  Verification: Julia .1.32 completes UnicodeRuleLabel and UserFunctionDefinitionShell and reads Validator1-640: 32/52 groups, 46,425 fragments /1,612,089 bytes and forty-one complete files. Fresh frontend/staged/callable/classifier2536 and diagnostic118 assertions pass; selection1 is separate. Five malformed projected metadata cases reach runtime under new .2.22.1-.3; three compact regex-brace cases isolate downstream balance .2.21.3. Thirteen metadata and eight lifecycle controls preserve valid and rejecting comparisons. Neutral callable3/9/7 passes. All prior repairs, source, history and ADR0115 controls remain. Julia .1.33 is next; no full component/canonical gate or dependency build ran. Exact plan and all source identities remain frozen in the Julia owner.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.5.0`
@@ -3555,6 +3555,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: `pending`; Dart reading .1.5 confirms separate grouped-regex action scanning and lifecycle balance failures. DART-STARTUP-READING.2.2.1/.2.2.2 own their fixes; exact public AST/programmatic controls are in docs/knowledge/dart-regex-brace-scanner-defects.md. No other-backend or emitted outcome is inferred.
   Additional evidence: Julia .1.31 confirms outer source closes at a regex brace before ordinary compilation. JULIA-STARTUP-READING.2.21.1/.2 owns outer scanner repair, downstream balance audit and public recurrence. Explicit/shorthand unterminated controls still reject; exact evidence is docs/knowledge/julia-spec-lexical-boundary-defects.md.
   Commit: `pending`
+  Additional evidence: Julia .1.32 isolates three compact regex-brace inputs with full retained action source and identical quiet/traced balance rejection. JULIA-STARTUP-READING.2.21.3 owns downstream Validator437-460 repair; existing .2.21.2 now requires it as well as .2.21.1. Exact evidence: docs/knowledge/julia-function-projection-metadata-gaps.md.
 
 - ID: `SESSION-STARTUP-READING.55`
   Status: `pending`
