@@ -78,3 +78,14 @@ excluded from this slice's bounded replay. Earlier491-assertion carrier evidence
 is preserved as historical proof; this slice claims61 prefix assertions only.
 Neutral staged123/public129 checks pass. Replay and the explicit734 boundary are
 in [[julia-generated-source-v2-rule-local-cursor]]. All repairs remain open.
+
+## 2026-09-11 — returned-result isolation claim requires a stronger test
+
+Julia .1.49 confirms that consumer859–861 mutates a deepcopy, so that assertion
+passes even with eight deliberately aliased results. The earlier cross-result
+mutation-isolation claim is not established by that check. Direct mutations of
+all eight actual returned AST kind fields preserve their seven siblings in the
+fresh diagnostic; no runtime alias defect is established. Julia .2.26 owns the
+permanent coverage correction and counterpart audit. Exact22 added diagnostic/
+selection assertions and164 existing-prefix assertions are recorded in
+[[julia-staged-result-isolation-test-gap]]. All prior runtime repairs remain open.

@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.49 - read staged authority and own isolation test gap
+
+Read1500 fragments/62034 bytes, reaching49/52 groups;450 existing assertions and
+22 added diagnostic/selection controls pass. A deepcopy probe falsely accepts
+shared results; actual eight-AST mutations isolate in the measured fixture.
+Own permanent test correction under .2.26 and preserve all earlier repairs.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.48 - read emitter loader and staged marker consumers
 
 Read1500 fragments/55261 bytes, reaching48/52 groups and84 complete files.

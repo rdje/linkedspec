@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `2261c7a496db8cdbf453e70c285130a8ea194d58` — clean Julia .1.48 activation base.
-- latest_completed_leaf: `JULIA-STARTUP-READING.1.48 - read emitter loader and staged marker consumers`; exact reading and focused proof.
-- active_work_unit: `JULIA-STARTUP-READING.1.49` — next pending staged-enrichment reading.
-- next_action: Activate .1.49 from clean HEAD, read staged-enrichment800–2299 and run focused covered consumers.
+- activation_commit: `47ea423f55797ff352e720bbadc415babd0741e3` — clean Julia .1.49 activation base.
+- latest_completed_leaf: `JULIA-STARTUP-READING.1.49 - read staged authority and own isolation test gap`; exact reading and focused proof.
+- active_work_unit: `JULIA-STARTUP-READING.1.50` — next pending staged/lifecycle/source/Unicode reading.
+- next_action: Activate .1.50 from clean HEAD; finish staged and read its lifecycle/source/Unicode ranges; .2.26 owns isolation coverage.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none; completed reading/evidence is committed.
 - blockers: none for Julia reading; ADR0116 admits Knowledge79000 and decisions13000 lines with a .13-only focused exception.
@@ -57,4 +57,4 @@
   Segment 4979-6e4108166552 preserves 213 lines /12545 bytes; all other controls remain unchanged. Proportionate governance: ADR0115.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-11 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart read; Julia 48/52 groups, 70425/75984 lines, 2480086/2693170 bytes, eighty-four complete files. Lua/supporting code, formal book .4 and policy .5 remain.
+- latest_bootstrap_read: 2026-09-11 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart read; Julia 49/52 groups, 71925/75984 lines, 2542120/2693170 bytes, eighty-four complete files. Lua/supporting code, formal book .4 and policy .5 remain.

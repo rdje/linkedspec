@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 48/52 owned groups. ADR0116 admits the finite evidence allowance; ADR0115 remains limited to history.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 49/52 owned groups. ADR0116 admits the finite evidence allowance; ADR0115 remains limited to history.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,18 +297,18 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 48/52 groups complete:** emitter and loader consumers are
-fully read; staged-enrichment reading reaches line 799. Coverage is 70,425 lines
-/ 2,480,086 bytes and eighty-four complete files. Selected tests pass 208 assertions.
-Fresh emitted hosts execute the eight accepted corpus fixtures and all ten rule
-families. An old generated format is rejected before its corrupt payload can be
-decoded; current-format corrupt payloads report a compile/load failure instead.
-Loader tests preserve ordered resolution, exact UTF-8 and structured failure stages.
-Three complete staged testsets cover unchanged function-body v1, dedicated
-assignment-form `parse_job` lowering and detached markers across four carriers.
-An inert marker is distinct from enrichment through an execution seed. That
-production-route test is only partially read and receives no complete-suite credit
-here. All repairs remain open; `.1.49` continues staged-enrichment consumers.
+**Julia reading is 49/52 groups complete:** staged-enrichment reading reaches
+line 2299. Coverage is 71,925 lines / 2,542,120 bytes and eighty-four complete
+files. Fifteen complete testsets pass 450 assertions, covering fresh production
+authority, provenance, frozen selection, cache identity, atomic stitching and
+breadth-first recurrence. Sibling contexts start empty; returned markers stay
+inert in the one-depth API and execute only through the recursive entrypoint.
+Reading also found an ineffective result-isolation assertion: it mutates a copy.
+The controlled alias counterexample and actual returned-result checks are recorded
+under the new `.2.26` coverage repair below. No runtime aliasing defect is established
+by that probe. Existing registry, diagnostic and recognition limitations remain.
+The recursive-denial testset is partial; `.1.50` completes staged reading and
+continues lifecycle, source and Unicode consumers.
 
 **Approved Julia evidence capacity:** the director granted Knowledge lines
 72,000→79,000 and decision-record lines12,000→13,000 under ADR0116. The finite
@@ -336,6 +336,15 @@ Julia `.2.25` owns the permanent fixture correction and counterpart audit.
 At reading group34, the change-history rollover preserved 213 committed lines
 /12,545 bytes in segment4979 and retained a251-line hot log; all prior archive bytes and
 query order remain exact within the existing ADR0115 limits.
+
+**Known Julia limitation — staged result isolation test coverage:** the permanent
+carrier test mutates a copy of a result. That assertion also passes when all eight
+results deliberately share one object, so it does not prove their independence.
+Fresh direct mutations of the eight actual returned ASTs preserve the other seven
+results in this fixture; no runtime aliasing defect was found by that control.
+Julia `.2.26` owns direct-result regression tests, further nested/fresh-execution
+checks and a counterpart audit. The existing broad isolation claim stays qualified
+until that repair is verified.
 
 **Known Julia limitation — null named selectors:** a reconstructed target with
 `selector_kind: named` and `authored_selector: null` can select an anonymous regex.
@@ -738,8 +747,8 @@ SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` sti
 own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
-Julia has read forty-eight of 52 exact groups across 95 baseline entries;
-its forty-ninth child follows, with the remaining Lua/supporting
+Julia has read forty-nine of 52 exact groups across 95 baseline entries;
+its fiftieth child follows, with the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,

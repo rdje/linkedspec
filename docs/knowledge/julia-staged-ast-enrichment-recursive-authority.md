@@ -98,3 +98,29 @@ record size: tiny ceilings and exhaustion can retain an oversized sentinel. Juli
 .2.14 owns repair with Dart .2.17.1 accounting coordination. Exact51 resource
 assertions,657 existing assertions and byte counts:
 [[julia-staged-diagnostic-byte-boundaries]]. No repair is closed.
+
+## 2026-09-11 — staged authority consumer reading .1.49
+
+Julia .1.49 reads consumer800–2299 and completes the breadth-first testset through
+2203. Callback observations pin depth order, inherited chain lengths, fresh local
+state, shared cancellation/deadline/work and exact four-call resource totals.
+Returned markers map through replace/sibling/append destinations; retained context
+safe-point access rejects after callback completion. The next denial testset starts
+2205 and is only partially read, so it is excluded from this focused replay.
+
+From activation47ea423f55797ff352e720bbadc415babd0741e3, the first fifteen complete
+testsets pass450 assertions. The harness adds only the enclosing end after2203.
+Neutral staged checks pass123/public129 mutations and typed source14/0/231. Separate
+isolation diagnostics add22 checks alongside164 existing prefix assertions and
+show the permanent deepcopy assertion misses aliases; actual returned AST-kind
+mutations isolate correctly. Julia .2.26 owns that coverage repair, with exact
+replay in [[julia-staged-result-isolation-test-gap]]. Existing .2.3/.2.13/.2.14 and
+all prior owners remain open. No full staged-suite, package or canonical gate runs.
+Current exact assignment-form authoring is public through the admitted seed route;
+the older private-only authoring statements above describe its historical stage.
+
+```bash
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; source=readlines("julia/test/staged_ast_enrichment_contract_test.jl";keep=true); include_string(Main,join(source[1:2203])*"\nend\n",joinpath(pwd(),"julia/test/staged_ast_enrichment_contract_test.jl"))'
+bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py
+bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py
+```

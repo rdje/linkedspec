@@ -114,3 +114,15 @@ still undergo cycle/plain-data and deep live-key validation. The one-depth API
 has no recursive invocation-resource argument. Recursive diagnostic retention
 has separately measured gaps: [[julia-staged-diagnostic-byte-boundaries]].
 Existing staged491 passes; registry .2.13 and diagnostic .2.14 remain open.
+
+## 2026-09-11 — staged authority consumer reading .1.49
+
+Julia .1.49 completes consumer tests for frozen candidate resolution and narrowing,
+missing/extra callbacks, job/cache identity, typed queue order and four result/three
+failure policies. Whole-depth preflight rejects invalid targets before callbacks;
+siblings start with empty local state, child failures rerun despite a cached plan,
+failed publication leaves the parent unchanged and returned markers remain inert
+on this entrypoint. Direct result-detachment controls cover finite nodes, actual
+cycles and live keys inside markers. They are distinct from the flawed cross-run
+carrier deepcopy assertion now owned by .2.26. Fifteen complete testsets pass450;
+replay is in [[julia-staged-ast-enrichment-recursive-authority]]. All repairs remain.

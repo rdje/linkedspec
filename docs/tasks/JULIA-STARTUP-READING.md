@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `JULIA-STARTUP-READING`
-- Status: `active` / reading 48/52; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity, matching, staged, diagnostic, static, entry and selector-projection and member-suffix and literal-boundary and projection-metadata and selector/identifier repairs and diagnostic fixture correction pending
+- Status: `active` / reading 49/52; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity, matching, staged, diagnostic, static, entry and selector-projection and member-suffix and literal-boundary and projection-metadata and selector/identifier repairs and diagnostic/isolation fixture corrections pending
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.5`
 - Created: `2026-09-11`
 - Last updated: `2026-09-11`
@@ -43,7 +43,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Inventory SHA-256: `ca3cff4fe4c0e162448d6dbac82d89898673023951afaeced17d5b9a838ccd10`.
 - Ordered range SHA-256: `fde325f80ae7b56c5890d149fbc965c09890890e963a1fa9aab08e8c9d962337`.
 - Line coordinates are one-based, inclusive LF physical lines. Every child pins its range digest.
-- Current physical reading: 48/52 children, 70,425/75,984 lines and 2,480,086/2,693,170 bytes; eighty-four complete files.
+- Current physical reading: 49/52 children, 71,925/75,984 lines and 2,542,120/2,693,170 bytes; eighty-four complete files.
 - Exact replay and capacity assessment: `docs/knowledge/julia-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -59,7 +59,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Dependencies: Startup .3.5.0 decomposition committed; each child starts from a clean prior handoff.
   Children: `.1.1-.1.52`, with exact scopes below.
   Acceptance: Every child records physical coverage, comprehension, Knowledge reconciliation, findings and focused proof before its commit. Retain all current-delta and interrupted-range evidence.
-  Verification: Julia .1.48 completes emitter/loader consumers and reads staged-enrichment1–799: 48/52 groups, 70425 lines/2480086 bytes and 84 complete files. Emitter65, loader82 and three complete staged testsets61 pass 208 assertions. Actual emitted hosts cover eight accepted corpus fixtures, ten families, format-before-payload rejection and corrupt payload errors. Neutral generated, native-resolution14/9/4 and staged123/public129 checks pass. Production enrichment test bodies remain partial; all repairs remain open and .1.49 continues staged800–2299.
+  Verification: Julia .1.49 reads staged-enrichment800–2299: 49/52 groups, 71925 lines/2542120 bytes and 84 complete files. Fifteen complete testsets pass450 assertions; staged123/public129 and typed14/0/231 checks pass. A separate22-assertion diagnostic shows the deepcopy isolation check passes deliberately aliased results, while mutations of eight actual returned ASTs preserve their siblings. New .2.26 owns permanent coverage correction and counterpart audit; no runtime alias defect is established. All prior repairs remain open; .1.50 completes staged and continues lifecycle/source/Unicode consumers.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.1.1`
@@ -880,14 +880,21 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Commit: `JULIA-STARTUP-READING.1.48 - read emitter loader and staged marker consumers`
 
 - ID: `JULIA-STARTUP-READING.1.49`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Julia group 49 and reconcile its source evidence.
   Dependencies: `JULIA-STARTUP-READING.1.48` committed; empty brief and clean repository.
+  Activation commit: `47ea423f55797ff352e720bbadc415babd0741e3`.
+  Verification tier: `focused`
+  Focused checks: Exact staged range/source coverage, complete covered staged testsets and neutral direct dependents, prior source/task/fact/history preservation, Knowledge/memory, both history checks, rendered book and normal doctrines.
+  Canonical trigger: `none` — bounded startup reading/evidence; no production, dependency, infrastructure or contract change.
   Scope: `julia/test/staged_ast_enrichment_contract_test.jl` lines 800-2299
   Baseline evidence: 1500 fragments / 62034 bytes; ordered range SHA-256 `392dad07b63af70a34619bae3739bda164187fd9ee28bf749e065de702af0a4c`.
   Acceptance: Physically read every owned byte, inspect current deltas, reconcile Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit. Do not count truncated output or unread consumer suffixes.
-  Verification: `pending`
-  Commit: `pending`
+  Comprehension: Completes four-carrier fresh-seed execution, typed direct/derived provenance and invalid annotation checks; frozen resolution/narrowing, callback binding and logical cache identities; complete-depth target preflight, four stitching/three failure policies, fresh sibling contexts, noncached child failures, finite/cyclic/live-key result checks and private/registered consumer boundaries. Breadth-first callbacks inherit lineage, share cumulative resources and map returned markers through all stitch destinations. Recursive-denial test begins2205 and remains partial through2299.
+  Knowledge: New staged-result-isolation-test-gap card records exact source mechanism, aliased control and actual eight-result mutation replay. Qualify the carrier card's historical cross-result claim and append bounded source/test evidence to marker, current-depth and recursive homes. Recursive home records the fifteen-testset450 replay; no incomplete denial suffix is executed.
+  Findings: Confirmed test-coverage gap at staged consumer859–861: mutating deepcopy(first(all_values)) cannot detect aliases among returned values. It passes eight deliberately shared results. Actual AST roots are distinct and direct mutations preserve all seven siblings in the controlled eight-result fixture. New .2.26 owns direct-result, nested/fresh-execution and counterpart coverage after startup prerequisites. No runtime aliasing defect or prior repair closure is inferred. Diagnostic-byte .2.14, registry .2.13 and recognition .2.3 qualifications remain.
+  Verification: Eight bounded untruncated windows cover1500 fragments/62034 baseline-identical bytes; raw SHA9db8a360028c476e4680da132c39f8b7452ce151393ecbd166116cc52476dcdd; ordered SHA392dad07b63af70a34619bae3739bda164187fd9ee28bf749e065de702af0a4c. Staged1–2203 plus only the enclosing end executes15 complete testsets/450 assertions. Separate1–931 diagnostic adds21 assertions plus one anchor check to164 existing assertions (nested summary185); aliased false pass and eight real AST mutation controls both confirmed. Neutral staged123/public129 and typed14/0/231 pass. All95-source/52-scope reconstruction and605 prior task nodes, four prior card prefixes, hot/history suffixes and25 prior rendered limitation headings pass; one new repair/card/callout is owned. Knowledge73271/79000 lines, tasks84542/88000 and decisions12090/13000 fit; changes370/22290 and notes305/17203 need no rollover. Both pressure checks, Knowledge/memory and rendered book pass; normal doctrines govern landing.
+  Commit: `JULIA-STARTUP-READING.1.49 - read staged authority and own isolation test gap`
 
 - ID: `JULIA-STARTUP-READING.1.50`
   Status: `pending`
@@ -924,7 +931,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Goal: Preserve disjoint repair ownership for every confirmed Julia finding.
   Dependencies: Findings from .1; source repair additionally requires startup .3/.4/.5.
   Acceptance: Reuse exact existing startup owners when applicable; otherwise add bounded repair children with source mechanism, reproduction, acceptance and unblock conditions. No finding is closed by reading alone.
-  Children: .2.1 callable-body selector validation; .2.2 attached-switch body/duplicate-default validation; .2.3 recognition-effect integration; .2.4 MCP pattern full matching; .2.5 progressive identity full matching; .2.6 semantic callback action passthrough; .2.7 recognition attempt preflight; .2.8 helper callback recursion identity; .2.9 numeric boundaries; .2.10 safe slice/drop arithmetic; .2.11 input_slice arity; .2.12 selected-slot mode preflight; .2.13 staged pattern validation; .2.14 diagnostic byte retention; .2.15 semantic regex call source; .2.16 mixed slot correlation; .2.17 conditional entry explanation; .2.18 authored edge selector identity; .2.19 unparsed member suffix retention; .2.20 compact argument lexical boundaries; .2.21 outer regex-brace scanning; .2.22 projected function metadata authority; .2.23 null named selectors; .2.24 complete function identifiers; .2.25 diagnostic callable-literal regression coverage. Nested authority and diagnostic review retain startup .37.1/.37.2. Prior README findings retain startup .41.2/.41.3/.41.7.
+  Children: .2.1 callable-body selector validation; .2.2 attached-switch body/duplicate-default validation; .2.3 recognition-effect integration; .2.4 MCP pattern full matching; .2.5 progressive identity full matching; .2.6 semantic callback action passthrough; .2.7 recognition attempt preflight; .2.8 helper callback recursion identity; .2.9 numeric boundaries; .2.10 safe slice/drop arithmetic; .2.11 input_slice arity; .2.12 selected-slot mode preflight; .2.13 staged pattern validation; .2.14 diagnostic byte retention; .2.15 semantic regex call source; .2.16 mixed slot correlation; .2.17 conditional entry explanation; .2.18 authored edge selector identity; .2.19 unparsed member suffix retention; .2.20 compact argument lexical boundaries; .2.21 outer regex-brace scanning; .2.22 projected function metadata authority; .2.23 null named selectors; .2.24 complete function identifiers; .2.25 diagnostic callable-literal regression coverage; .2.26 actual returned-result isolation coverage. Nested authority and diagnostic review retain startup .37.1/.37.2. Prior README findings retain startup .41.2/.41.3/.41.7.
   Verification: `pending` repairs; .1.3 owns the callable-body selector gap, and .1.4 confirms attached-switch projection omission and default replacement. Earlier documentation and helper-arity owners remain intact.
   Commit: `pending`
 
@@ -1661,11 +1668,20 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Verification: Exact clean .1.37 census,36-commit blob and independent numstat line census, Model A6320/Model B4472, decision reserve486 lines/30000 bytes/3 records and full actual-candidate-plus-reserve proof pass. Registry, guards, all Julia source, existing Knowledge cards/questions, task nodes and immutable history remain unchanged except owned current pointers/new proposal intake. Knowledge stays72000; every non-line control stays unchanged. Knowledge regeneration, memory, both pressure checks, rendered book and all normal doctrines govern landing; no canonical gate or dependency build.
   Commit: `JULIA-STARTUP-READING.5.1 - propose finite Julia evidence capacity`
 
+- ID: `JULIA-STARTUP-READING.2.26`
+  Status: `pending`
+  Goal: Make staged carrier isolation proof mutate actual returned results and reject aliased-result controls.
+  Dependencies: Startup .3/.4/.5 and .1.49 committed; preserve staged/runtime contracts.
+  Evidence: staged_ast_enrichment_contract_test859-861 deepcopies first(all_values) before mutation, so its unchanged-original assertion passes even for eight references to one shared result. An instrumented existing four-carrier fixture confirms that false pass and separately mutates each of eight actual returned AST kind fields: all seven siblings remain equal to their snapshots. This is a confirmed permanent-test gap, not a confirmed runtime aliasing defect.
+  Acceptance: Replace or supplement the ineffective deepcopy probe with direct nested mutations of actual returned values across both runs of all four carriers; prove unaffected siblings and subsequent fresh execution. Include a deliberate aliased-result control that the isolation predicate rejects. Cover relevant mutable AST/sidecar/diagnostic/resource branches with justified independent assertions, audit analogous counterpart tests and route any gaps to bounded owners. Preserve historical evidence, qualify prior cross-result claims and update the book. Run focused staged/carrier and neutral proof; runtime changes require their own reproduced defect.
+  Verification: `pending` coverage repair; .1.49 owns22 diagnostic/selection assertions plus the164-assertion existing prefix in the same process. Replay: docs/knowledge/julia-staged-result-isolation-test-gap.md.
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.49` | `pending` | Continue staged-enrichment800–2299 after the clean .1.48 commit. |
+| 1 | `JULIA-STARTUP-READING.1.50` | `pending` | Complete staged and continue lifecycle/source/Unicode consumers after the clean .1.49 commit. |
 
 ## Decisions
 
@@ -1696,6 +1712,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Source repairs retain startup prerequisites; those dependencies do not block source reading.
 
 ## Verification Log
+
+- `2026-09-11` .1.49: Julia .1.49 reads staged-enrichment800–2299: 49/52 groups, 71925 lines/2542120 bytes and 84 complete files. Fifteen complete testsets pass450 assertions; staged123/public129 and typed14/0/231 checks pass. A separate22-assertion diagnostic shows the deepcopy isolation check passes deliberately aliased results, while mutations of eight actual returned ASTs preserve their siblings. New .2.26 owns permanent coverage correction and counterpart audit; no runtime alias defect is established. All prior repairs remain open; .1.50 completes staged and continues lifecycle/source/Unicode consumers.
 
 - `2026-09-11` .1.48: Julia .1.48 completes emitter/loader consumers and reads staged-enrichment1–799: 48/52 groups, 70425 lines/2480086 bytes and 84 complete files. Emitter65, loader82 and three complete staged testsets61 pass 208 assertions. Actual emitted hosts cover eight accepted corpus fixtures, ten families, format-before-payload rejection and corrupt payload errors. Neutral generated, native-resolution14/9/4 and staged123/public129 checks pass. Production enrichment test bodies remain partial; all repairs remain open and .1.49 continues staged800–2299.
 
@@ -1784,6 +1802,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Commit Log
 
+- `2026-09-11` .1.49: `JULIA-STARTUP-READING.1.49 - read staged authority and own isolation test gap`.
+
 - `2026-09-11` .1.48: `JULIA-STARTUP-READING.1.48 - read emitter loader and staged marker consumers`.
 
 - `2026-09-11` .1.47: `JULIA-STARTUP-READING.1.47 - read static admission and source alias consumers`.
@@ -1860,6 +1880,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Decomposition: `SESSION-STARTUP-READING.3.5.0 - freeze exact bounded Julia reading plan`.
 
 ## Changelog
+
+- `2026-09-11` .1.49: Read staged800–2299;49/52 groups and84 complete files. Own confirmed isolation test gap under .2.26, preserve all prior repairs; .1.50 follows.
 
 - `2026-09-11` .1.48: Complete emitter/loader consumers and staged1–799;48/52 groups and84 complete files. Preserve all repair and partial-production boundaries; .1.49 follows.
 

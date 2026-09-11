@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Mutating a copy does not test returned-result isolation
+
+Staged consumer859–861 passes deliberately aliased results because it mutates a
+new deepcopy. Direct mutations of each actual returned AST preserve its siblings;
+this is a permanent-test gap, not a proven runtime alias defect. Julia .2.26 owns
+correction and counterpart audit; source-gated repair and exact evidence remain.
+
 ## 2026-09-11 — Emitter and staged-prefix tests preserve separate boundaries
 
 Emitted hosts prove eight accepted fixtures, ten families and format-before-payload

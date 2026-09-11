@@ -92,3 +92,14 @@ Fresh bounded prefix proof passes61 assertions. It does not execute the producti
 route test beginning736 or the unread later provenance/rejection test bodies.
 All recognition, diagnostic and registry repairs remain open. Exact replay:
 [[julia-generated-source-v2-rule-local-cursor]].
+
+## 2026-09-11 — staged authority consumer reading .1.49
+
+Julia .1.49 reads consumer800–2299. Complete provenance tests validate neutral
+records, reject copied-text smuggling and preserve Unicode direct spans plus
+ordered equal-capture segments. Invalid annotation/residual forms and the covered
+recognition-reachable marker reject; existing recognition-effect .2.3 and registry
+.2.13 gaps remain open. These fixture controls do not establish all recognition
+integration. Fifteen complete testsets through2203 pass450; bounded replay is in
+[[julia-staged-ast-enrichment-recursive-authority]]. New isolation-test qualification:
+[[julia-staged-result-isolation-test-gap]].
