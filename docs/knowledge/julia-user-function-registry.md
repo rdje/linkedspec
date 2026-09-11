@@ -1,6 +1,6 @@
 ---
 id: julia-user-function-registry
-title: Julia user-function registry preserves staged sidecars and resolves exact-arity calls before helper fallback
+title: Julia user-function registry preserves staged sidecars and callable metadata
 answers:
   - where is the Julia user function registry
   - how does Julia preserve function body parse jobs
@@ -14,7 +14,7 @@ evidence: "JULIA-BACKEND-PARITY.3.3 adds julia/src/action/FunctionRegistry.jl an
 reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()'"
 ---
 
-## Fact
+## Historical implementation boundary
 
 Julia's user-function registry lives in `julia/src/action/FunctionRegistry.jl`.
 
@@ -38,3 +38,12 @@ Related facts: [[julia-actionir-contract-resolver]], [[julia-user-function-defin
 [[julia-staged-function-body-registry]], [[julia-staged-function-descriptor-shape]],
 [[julia-user-function-runtime-execution]],
 [[text-to-ast-backend-doctrine]].
+
+## September 11 reading reconciliation
+
+The first 94 lines preserve source order and zero-based entry indices, reject duplicate names, and expose
+existing body jobs without executing them. Complete callable normalization was also read: it preserves the
+definition and sidecars while rebuilding normalized body_ast through the complete registry.
+The original exact-arity description above predates fixed/variadic signatures. Current arity and keyword
+behavior is [[julia-variadic-user-functions]]; this reading runs its 55 assertions plus 23 registry assertions.
+Registry resolution/stitching suffix reading remains the next child; these tests grant no unread-source credit.

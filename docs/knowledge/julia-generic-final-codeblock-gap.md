@@ -7,7 +7,8 @@ answers:
   - "where does Julia hard code receiver trailing block names"
   - "does Julia distinguish attached and parenthesized contextual blocks"
   - "what owns FUTURE-PARITY-BACKLOG 11.6.3"
-date: 2026-07-30
+  - "does Julia callable normalization visit complete switch and deferred bodies"
+date: 2026-09-11
 status: current implementation; completed by FUTURE-PARITY-BACKLOG.11.6.3
 tags: [julia, actionir, codeblock, callable-contract, trailing-block, user-functions, generated-source, FUTURE-PARITY-BACKLOG]
 evidence: "Baseline probes on clean bc85c0fa exposed missing fixed_params/codeblock_param/parameter_kinds projection, a four-name receiver parser allowlist, and no codeblock_argument normalizer. FUTURE-PARITY-BACKLOG.11.6.3 now preserves final-only metadata through definition/staged/registry/descriptor/semantic state, parses receiver attachment generically, and applies one post-registry CallableContract.jl pass. Focused proof passes 125 dynamic + 118 contextual + 239 construction assertions across native, reconstructed, generated-plan, and freshly loaded emitted Julia; the complete package passes."
@@ -38,3 +39,51 @@ and execute through the same interpreter. No Julia closure, host callback, or se
 Related facts: [[final-codeblock-parameter-declaration]], [[julia-callable-codeblock-dynamic-invocation]],
 [[dart-generic-final-codeblock-gap]], [[rust-generic-final-codeblock-normalization]],
 [[julia-user-function-definition-projection]], [[julia-user-function-registry]].
+
+## September 11 source traversal reconciliation
+
+Full CallableContract reading shows normalization descends through the complete retained switch body and
+its extracted branches, as well as explicit/contextual callable bodies. It recursively normalizes arguments
+before testing a final eager block against helper/receiver or registered-user metadata. Known bounds admit
+only the declared pre-block arity; an undeclared attached block rejects, while an ordinary parenthesized
+block without a final-block contract stays eager. A promoted contextual argument carries a zero-positional
+signature and the original body/source spans.
+
+Eight direct native outcomes below reject the unknown attached helper and admit valid with blocks in direct,
+omitted-switch-body, explicit-callable and contextual-body locations. The four valid forms are idempotent.
+These controls qualify the separate [[julia-attached-switch-body-omission]] and
+[[julia-callable-selector-validation-gap]] findings; neither defect is repaired by this reading.
+Existing contextual 118 / registry 23 / variadic 55 assertions also pass. No component/canonical gate is claimed.
+
+Replay the following code with the managed Julia wrapper:
+
+```bash
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no - <<'NORMALIZER_REPLAY'
+using LinkedSpecJulia, JSON3
+for good in (false,true)
+    call=(good ? "with" : "mystery_probe")*"() { return(1) }"
+    sources=[call,
+        "switch(1) { case(1) { return(7) }; "*call*" }",
+        "callback = {|| "*call*" }",
+        "with() { "*call*" }"]
+    for (index,source) in enumerate(sources)
+        block=parse_action_block(source)
+        error_message=nothing
+        try
+            LinkedSpecJulia.normalize_action_block_final_codeblocks!(block,empty_user_function_registry())
+        catch error
+            error_message=sprint(showerror,error)
+        end
+        if good
+            @assert error_message===nothing (index,error_message)
+            first=to_json(block)
+            LinkedSpecJulia.normalize_action_block_final_codeblocks!(block,empty_user_function_registry())
+            @assert to_json(block)==first index
+        else
+            @assert error_message=="callable_contract_rejected: helper 'mystery_probe' does not declare a final codeblock parameter" (index,error_message)
+        end
+        println(JSON3.write(Dict("case"=>index,"valid"=>good,"error"=>error_message)))
+    end
+end
+NORMALIZER_REPLAY
+```

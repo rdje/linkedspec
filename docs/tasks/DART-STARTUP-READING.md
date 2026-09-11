@@ -1566,7 +1566,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.5` | `pending` | Read the next ActionParser range, CallableContract and FunctionRegistry prefix after clean .1.4. |
+| 1 | `JULIA-STARTUP-READING.1.6` | `pending` | Finish FunctionRegistry, read the primary CLI and begin CompiledSpec after clean .1.5. |
 
 ## Decisions
 

@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.4 completes ActionContracts and reads ActionParser through 1138: 4/52 groups, 5,571 fragments /197,138 bytes and eight complete files. Existing parser 74 / resolver 40 / callable 482 assertions pass. Five four-carrier switch controls and ten causal resolver cases confirm retained-body omission and last-default replacement; .2.2.1/.2.2.2 own normative reconciliation, repair and carrier/public proof. The shared Perl oracle qualifies non-branch behavior; its initial E-only carrier reuses startup .27. All source bytes, prior repairs and approved ADR0115 capacity remain. Julia .1.5 is next; no complete component/canonical gate or dependency build. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.5 completes ActionParser and CallableContract, and reads FunctionRegistry through 94: 5/52 groups, 7,071 fragments /248,648 bytes and ten complete files. Existing contextual 118 / registry 23 / variadic 55 assertions pass (196 total); eight native normalization outcomes also pass, including idempotence for all four valid forms. Normalization traverses retained switch and callable bodies, so prior selector/contract visitor gaps remain precisely scoped and repair-owned. Staged/progressive/nested-write facts and registry metadata reconcile with current source. All source, earlier evidence and ADR0115 controls remain; Julia .1.6 is next, with no complete component/canonical gate or dependency build. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.81` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `JULIA-STARTUP-READING.1.4 - read contracts and own attached switch omission` — Julia .1.4 completes ActionContracts and reads ActionParser through 1138: 4/52 groups, 5,571 fragments /197,138 bytes and eight complete files. Existing parser 74 / resolver 40 / callable 482 assertions pass. Five four-carrier switch controls and ten causal resolver cases confirm retained-body omission and last-default replacement; .2.2.1/.2.2.2 own normative reconciliation, repair and carrier/public proof. The shared Perl oracle qualifies non-branch behavior; its initial E-only carrier reuses startup .27. All source bytes, prior repairs and approved ADR0115 capacity remain. Julia .1.5 is next; no complete component/canonical gate or dependency build.
+- `JULIA-STARTUP-READING.1.5 - read parser and callable normalization` — Julia .1.5 completes ActionParser and CallableContract, and reads FunctionRegistry through 94: 5/52 groups, 7,071 fragments /248,648 bytes and ten complete files. Existing contextual 118 / registry 23 / variadic 55 assertions pass (196 total); eight native normalization outcomes also pass, including idempotence for all four valid forms. Normalization traverses retained switch and callable bodies, so prior selector/contract visitor gaps remain precisely scoped and repair-owned. Staged/progressive/nested-write facts and registry metadata reconcile with current source. All source, earlier evidence and ADR0115 controls remain; Julia .1.6 is next, with no complete component/canonical gate or dependency build.
 
 ## Next Action
 
-- `JULIA-STARTUP-READING.1.5` — continue ActionParser, read CallableContract and the FunctionRegistry prefix from a clean fourth-group commit.
+- `JULIA-STARTUP-READING.1.6` — finish FunctionRegistry, read the primary CLI and begin CompiledSpec from a clean fifth-group commit.
 
 ## Recent Completions
+
+- `2026-09-11` — `JULIA-STARTUP-READING.1.5` reads 1,500 fragments /51,510 bytes; 196 existing assertions and eight native normalization outcomes pass; no repair closed.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.4` reads 1,500 fragments / 51,329 bytes; 596 existing assertions pass; switch defect repair-owned with exact causal/carrier/reference proof.
 
@@ -35,7 +37,7 @@
 
 - `2026-09-11` — `DART-STARTUP-READING.3.2` / ADR0114 close only verified Dart reading under delegated authority; all69 repairs and failed Dart gate remain. Julia decomposition is next.
 
-- `2026-09-11` — `DART-STARTUP-READING.3.1` audits55 commits/115 files; runtime diagnostics pass461/25-47/66x2/105, while format/analyzer fail and .2.24/.2.25 own repairs. .3.2 decision pending.
+- `2026-09-11` — `DART-STARTUP-READING.3.1` audits 55 commits/115 files; runtime diagnostics pass461/25-47/66x2/105, while format/analyzer fail and .2.24/.2.25 own repairs. .3.2 decision pending.
 
 - `2026-09-11` — `DART-STARTUP-READING.1.55` completes physical Dart reading: 55/55, all115 files; 20 tests and two neutral checks pass. Formal .3 remains pending.
 
@@ -48,8 +50,6 @@
 - `2026-09-11` — `DART-STARTUP-READING.1.51` reads 1,500 fragments / 50,285 bytes; 19 tests and two neutral checks pass; prior defects remain open.
 
 - `2026-09-11` — `DART-STARTUP-READING.1.50` reads 1,500 fragments / 45,895 bytes; 54 tests and three neutral checks pass; no new defect.
-
-- `2026-09-11` — `DART-STARTUP-READING.1.49` reads 1,500 fragments / 48,927 bytes; 12 tests and three neutral checks pass; no new defect.
 
 ## History
 

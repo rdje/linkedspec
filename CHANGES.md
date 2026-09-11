@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.5 - read parser and callable normalization
+
+Complete parser/normalizer reading and the registry prefix: 1,500 fragments /
+51,510 bytes. Existing contextual 118 / registry 23 / variadic 55 and eight native
+normalization outcomes pass. Reconcile current facts/book; preserve prior repair,
+source and history evidence. Next Julia .1.6 after the clean fifth-group commit.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.4 - read contracts and own attached switch omission
 
 Read 1,500 fragments / 51,329 bytes; parser/resolver/callable 596 assertions pass.

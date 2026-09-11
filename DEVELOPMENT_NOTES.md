@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia normalization traversal is distinct from validation
+
+Callable normalization visits retained switch bodies, extracted branches and
+explicit/contextual callable bodies. Four unknown attached helpers reject there;
+four valid with forms normalize idempotently. The separate selector/contract
+visitor defects remain open; registry arity facts now point to variadic support.
+
 ## 2026-09-11 — Julia switch projection versus retained source
 
 Attached-switch extraction drops semantic coverage despite retaining the full body.
