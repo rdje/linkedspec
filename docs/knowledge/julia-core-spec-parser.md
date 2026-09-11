@@ -34,3 +34,18 @@ This is source parsing only. Frontend validation and strict syntax have since la
 Related facts: [[julia-frontend-ast-json-contract]], [[julia-frontend-validation]],
 [[julia-user-function-definition-projection]], [[dart-core-spec-parser]], [[julia-corpus-manifest-io]],
 [[text-to-ast-backend-doctrine]].
+
+## 2026-09-11 — parser prefix reading and complete-consumption limitation
+
+Julia .1.30 reads Parser1-692. Unicode-label header scans, grouped action selectors,
+numeric/named/invalid selector classification, bare/blind edges, trace cleanup,
+bounded modes and inline/body collection are fully read. The single-element
+dispatcher body and remaining scanner helpers are still unread.
+
+Both collection loops conditionally discard a remainder after a recognized member.
+Inline/body action-edge and E suffix controls lose unsupported text and pass default
+and strict validation; I/arrow/separate-raw controls preserve and reject their text.
+The exact self-target controls avoid unrelated strict unused-rule rejection. Julia
+.2.19 owns source-retention repair; [[julia-parser-member-suffix-loss]] preserves
+54 assertions including four explicit-return comparisons. Original parser185 and
+adjacent validator23/AST16/lifecycle103 pass327 existing assertions plus selection1.

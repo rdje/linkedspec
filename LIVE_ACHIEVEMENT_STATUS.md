@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.29 completes SemanticStaticProjection and SourceEmitter and reads spec/Ast1-101: 29/52 groups, 41,925 fragments /1,469,930 bytes and thirty-seven complete files. Fresh emitter65/semantic389 and seven selector controls99 assertions pass. Regex/action/label-substring decoys make typed unindexed edges report indexed metadata and selects_regex relations; Julia .2.18 owns typed projection and supported-route/public repair. Both neutral semantic6/20/128 and generated-source checks pass. All prior repairs, source, history and ADR0115 controls remain. Julia .1.30 is next; no full component/canonical gate or dependency build. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.30 completes spec/Ast and reads spec/Parser1-692: 30/52 groups, 43,425 fragments /1,517,252 bytes and thirty-eight complete files. Fresh original frontend224 plus lifecycle103 and suffix54 assertions pass; one exact test-selection assertion is separate. Unsupported inline/body/E suffixes disappear before default/strict validation; I/arrow/separate-raw controls reject. Julia .2.19 owns complete member consumption and supported-route/public repair. Explicit-return comparison corrects a probe expectation without a runtime defect. All prior repairs, source, history and ADR0115 controls remain. Julia .1.31 is next; no full component/canonical gate or dependency build. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.82` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `JULIA-STARTUP-READING.1.29 - complete semantic and emitter reading and own selector projection` — Julia .1.29 completes SemanticStaticProjection and SourceEmitter and reads spec/Ast1-101: 29/52 groups, 41,925 fragments /1,469,930 bytes and thirty-seven complete files. Fresh emitter65/semantic389 and seven selector controls99 assertions pass. Regex/action/label-substring decoys make typed unindexed edges report indexed metadata and selects_regex relations; Julia .2.18 owns typed projection and supported-route/public repair. Both neutral semantic6/20/128 and generated-source checks pass. All prior repairs, source, history and ADR0115 controls remain. Julia .1.30 is next; no full component/canonical gate or dependency build.
+- `JULIA-STARTUP-READING.1.30 - read frontend state and own discarded member suffixes` — Julia .1.30 completes spec/Ast and reads spec/Parser1-692: 30/52 groups, 43,425 fragments /1,517,252 bytes and thirty-eight complete files. Fresh original frontend224 plus lifecycle103 and suffix54 assertions pass; one exact test-selection assertion is separate. Unsupported inline/body/E suffixes disappear before default/strict validation; I/arrow/separate-raw controls reject. Julia .2.19 owns complete member consumption and supported-route/public repair. Explicit-return comparison corrects a probe expectation without a runtime defect. All prior repairs, source, history and ADR0115 controls remain. Julia .1.31 is next; no full component/canonical gate or dependency build.
 
 ## Next Action
 
-- `JULIA-STARTUP-READING.1.30` — Read spec/Ast102-909 and spec/Parser1-692 after clean .1.29; preserve repairs.
+- `JULIA-STARTUP-READING.1.31` — Read spec/Parser693-1370 and spec/UnicodeRuleLabel1-822 after clean .1.30; preserve repairs.
 
 ## Recent Completions
+
+- `2026-09-11` — `JULIA-STARTUP-READING.1.30` reads1,500 fragments /47,322 bytes;327 existing and54 suffix/return assertions plus selection1 pass; source-loss repair .2.19 remains open.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.29` reads1,500 fragments /50,139 bytes;454 existing and99 selector assertions pass; authored-selector repair .2.18 remains open.
 
@@ -48,8 +50,6 @@
 - `2026-09-11` — `JULIA-STARTUP-READING.1.16` reads 1,500 fragments /47,167 bytes;992 existing and84 diagnostic assertions pass; callback identity repair .2.8 remains open.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.15` reads 1,500 fragments /50,914 bytes;793 existing and80 diagnostic assertions pass; recognition-token repair .2.7 remains open.
-
-- `2026-09-11` — `JULIA-STARTUP-READING.1.14` reads 1,500 fragments /49,525 bytes;176 existing and108 diagnostic assertions pass; observer repair .2.6 remains open.
 
 ## History
 

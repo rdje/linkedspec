@@ -32,3 +32,14 @@ files plus rule-only corpus `input.spec` files. `JULIA-BACKEND-PARITY.2.4` has s
 
 Related facts: [[julia-core-spec-parser]], [[julia-frontend-ast-json-contract]],
 [[julia-user-function-definition-projection]], [[dart-frontend-validation]], [[text-to-ast-backend-doctrine]].
+
+## 2026-09-11 — strict validation cannot inspect discarded parser suffixes
+
+Julia .1.30's self-target controls pass default and strict validation after their
+unsupported action-edge or E suffixes disappear from parsed state. Initial strict
+unused-rule rejection on a regex-only source would mask this loss. Retained raw I,
+arrow and separate-line controls reject with the original text. This is parser
+source retention under Julia .2.19, not permission to weaken validation or treat
+unknown suffixes as comments. Exact evidence is [[julia-parser-member-suffix-loss]].
+The unchanged validator testset passes23 assertions inside focused frontend224;
+adjacent standalone-lifecycle103 preserves its accepted compatibility boundary.

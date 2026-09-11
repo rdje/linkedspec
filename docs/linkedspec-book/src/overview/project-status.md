@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 29/52 owned groups; its thirtieth reading child is next, with approved ADR0115 capacity in place.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 30/52 owned groups; its thirty-first reading child is next, with approved ADR0115 capacity in place.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,13 +297,21 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 29/52 groups complete:** static semantic projection and
-source emission are fully read, followed by the specification AST through line 101.
-Coverage is 41,925 lines /1,469,930 bytes and thirty-seven complete files.
-The emitter preserves effective ordered state as canonical JSON with ASCII-hex
-UTF-8 payload and identity, then validates the generated contract before loading.
-Existing emitter and semantic checks pass 454 assertions; seven selector controls
-pass 99 assertions. Exact scopes remain in `docs/tasks/JULIA-STARTUP-READING.md`.
+**Julia reading is 30/52 groups complete:** the specification AST is fully
+read, followed by its parser through line 692. Coverage is 43,425 lines
+/1,517,252 bytes and thirty-eight complete files. Typed state preserves authored
+selectors separately from resolved indices and rejects booleans in JSON integer
+fields. Existing frontend and lifecycle checks pass 327 assertions; suffix and
+return controls pass 54 assertions. Exact scopes remain in
+`docs/tasks/JULIA-STARTUP-READING.md`.
+
+**Known Julia limitation — discarded member suffixes:** unsupported text after
+an action edge or `E` lifecycle block can disappear during parsing. For example,
+`/x/ -> Top { return("ok") } garbage` loses `garbage` and can pass both default
+and strict validation. Inline headers have the same gap. The measured `I`,
+malformed-arrow and separate-raw-line controls retain their text and reject it.
+Julia `.2.19.1/.2` own complete member consumption and supported-route/public
+proof. Exact controls and mechanism: `docs/knowledge/julia-parser-member-suffix-loss.md`.
 
 **Known Julia limitation — authored edge selectors:** text such as `Child[0]`
 inside a regex or action string can make a direct `-> Child` edge appear indexed
@@ -651,8 +659,8 @@ SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` sti
 own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
-Julia has read twenty-nine of 52 exact groups across 95 baseline entries;
-its thirtieth physical reading child is next, followed by the remaining Lua/supporting
+Julia has read thirty of 52 exact groups across 95 baseline entries;
+its thirty-first physical reading child is next, followed by the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,

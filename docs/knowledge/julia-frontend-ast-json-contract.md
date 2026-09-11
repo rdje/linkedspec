@@ -34,3 +34,18 @@ spec-shaped user-function shell nodes into `FunctionDefinition` records with nor
 Related facts: [[julia-core-spec-parser]], [[julia-frontend-validation]],
 [[julia-user-function-definition-projection]], [[julia-corpus-manifest-io]],
 [[dart-frontend-ast-json-contract]], [[dart-core-spec-parser]], [[text-to-ast-backend-doctrine]].
+
+## 2026-09-11 — full AST physical reading and focused JSON recurrence
+
+Julia .1.30 completes Ast102-909 after .1.29's1-101 prefix. Source/staged spans,
+callable signatures, function sidecars, rule/body variants and selector identity
+are fully read. EdgeTarget keeps authored kind/value independently of resolved
+index; JSON projection retains both. Integer readers explicitly exclude Bool;
+optional arrays/maps/strings and omitted source identity follow their typed
+null/default handling. Data construction is separate from compiler validation.
+
+The unchanged Spec AST JSON contract passes16 assertions through exact top-level
+selection, alongside parser185/validator23. The independent selection assertion
+checks five original helpers and all three original testsets. Additional lifecycle
+proof passes103; no full package gate ran. Replay and the separate parser source-
+loss limitation are preserved in [[julia-parser-member-suffix-loss]].

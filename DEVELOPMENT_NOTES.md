@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia source retention precedes strict validation
+
+Unsupported suffixes disappear after recognized members unless a narrow raw
+retention condition holds. Strict validation cannot reject bytes already lost;
+self-target controls avoid unrelated unused-rule rejection. Typed AST preserves
+selectors and JSON boundaries; explicit rule return correctly precedes E.
+
 ## 2026-09-11 — Julia authored selectors and generated state
 
 Whole-member substring matching overrides typed unindexed selector identity,
