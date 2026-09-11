@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.4 - read contracts and own attached switch omission
+
+Read 1,500 fragments / 51,329 bytes; parser/resolver/callable 596 assertions pass.
+Own attached-switch omission/default replacement under .2.2 with exact five-case
+four-carrier, ten causal and five Perl controls. Reconcile current claims/pointers;
+preserve source, approved capacity and history. Next Julia .1.5.
+
 ## 2026-09-11 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.12 - admit approved Julia history capacity
 
 Admit the six director-approved collection and manifest limits under ADR0115.

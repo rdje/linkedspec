@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `JULIA-STARTUP-READING`
-- Status: `active` / reading 3/52; callable-selector repair pending
+- Status: `active` / reading 4/52; selector and switch repairs pending
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.5`
 - Created: `2026-09-11`
 - Last updated: `2026-09-11`
@@ -43,7 +43,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Inventory SHA-256: `ca3cff4fe4c0e162448d6dbac82d89898673023951afaeced17d5b9a838ccd10`.
 - Ordered range SHA-256: `fde325f80ae7b56c5890d149fbc965c09890890e963a1fa9aab08e8c9d962337`.
 - Line coordinates are one-based, inclusive LF physical lines. Every child pins its range digest.
-- Current physical reading: 3/52 children, 4,071/75,984 lines and 145,809/2,693,170 bytes; seven complete files.
+- Current physical reading: 4/52 children, 5,571/75,984 lines and 197,138/2,693,170 bytes; eight complete files.
 - Exact replay and capacity assessment: `docs/knowledge/julia-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -59,7 +59,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Dependencies: Startup .3.5.0 decomposition committed; each child starts from a clean prior handoff.
   Children: `.1.1-.1.52`, with exact scopes below.
   Acceptance: Every child records physical coverage, comprehension, Knowledge reconciliation, findings and focused proof before its commit. Retain all current-delta and interrupted-range evidence.
-  Verification: Julia .1.3 completes ActionAst and reads ActionContracts through 766: 3/52 groups, 4,071 fragments /145,809 bytes and seven complete files. Twenty causal controls prove callable bodies bypass retired array/hash selector validation across native, reconstructed, generated-plan and in-process emitted-module routes; .2.1.1/.2.1.2 own repair. Existing uniform-binding 61 and projection/alias 8 pass without closing the gap. All source bytes and prior repairs remain. Julia .1.4 is next, with .4 capacity intake before history rollover.
+  Verification: Julia .1.4 completes ActionContracts and reads ActionParser through 1138: 4/52 groups, 5,571 fragments /197,138 bytes and eight complete files. Existing parser 74 / resolver 40 / callable 482 assertions pass. Five four-carrier switch controls and ten causal resolver cases confirm retained-body omission and last-default replacement; .2.2.1/.2.2.2 own normative reconciliation, repair and carrier/public proof. The shared Perl oracle qualifies non-branch behavior; its initial E-only carrier reuses startup .27. All source bytes, prior repairs and approved ADR0115 capacity remain. Julia .1.5 is next; no complete component/canonical gate or dependency build.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.1.1`
@@ -114,14 +114,21 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Commit: `JULIA-STARTUP-READING.1.3 - read action projection and own callable selector gap`.
 
 - ID: `JULIA-STARTUP-READING.1.4`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Julia group 4 and reconcile its source evidence.
   Dependencies: `JULIA-STARTUP-READING.1.3` committed; empty brief and clean repository.
   Scope: `julia/src/action/ActionContracts.jl` lines 767-1128; `julia/src/action/ActionParser.jl` lines 1-1138
   Baseline evidence: 1500 fragments / 51329 bytes; ordered range SHA-256 `f843c537312ac86af4aa48af1c6b5a1019a10e24c11db64c325fcf6afea3a0e7`.
+  Activation commit: `4ad1e3cd2eab98aa324e0e90568952a477e62eba`.
+  Verification tier: `focused`
+  Focused checks: Exact owned reading and baseline identity; native contract/parser direct-dependent controls through managed Julia; Knowledge, memory, histories, rendered book, source/evidence preservation and normal doctrines.
+  Canonical trigger: `none` — ordinary reading evidence; no source, contract, dependency, gate or infrastructure change.
   Acceptance: Physically read every owned byte, inspect current deltas, reconcile Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit. Do not count truncated output or unread consumer suffixes.
-  Verification: `pending`
-  Commit: `pending`
+  Comprehension: ActionContracts completes structural set/push/set-key/nested-write traversal, eager containers/blocks/control bodies, deferred callable dependencies, fixed/variadic registered-call arity and keyword rejection, callable-binding priority and canonical helper families. Its attached-switch visitor prefers extracted branches over the retained body. ActionParser1-1138 covers typed Unicode diagnostics, statement precedence and bare-next context, the sole map_leaves! receiver grammar, brace/callable fixed-rest classification, literals, typed attached controls, helper/static-recognition calls and the nested-access prefix. Switch branch extraction discards non-branches and replaces earlier defaults. Parser suffix and consumers remain for later children; supporting runtime/Perl diagnostics receive no advance credit.
+  Knowledge: Current contract/callable claims reconciled; docs/knowledge/julia-attached-switch-body-omission.md records exact mechanism, outcomes, caveats and self-contained replay.
+  Findings: Pending .2.2/.2.2.1/.2.2.2 own switch repair; existing .2.1 selector and startup .27 lifecycle owners remain. Current pointers also correct stale pre-approval capacity wording without altering historical evidence.
+  Verification: Both exact owned ranges total 1,500 fragments / 51,329 baseline-identical bytes, digest f843c537312ac86af4aa48af1c6b5a1019a10e24c11db64c325fcf6afea3a0e7. Existing parser 74 / resolver 40 and callable 125 + 118 + 239 assertions pass (596 total). Five asserted AST/resolver/four-carrier outcomes, ten before/after diagnostic cases and five exact shared-source Perl outcomes pass. Emitted Julia loads fresh modules in the same process; compile success is distinguished from resolver diagnostics and Perl lazy handler failure. Toolbox descriptor/source isolates the initial E-only non-execution as existing startup .27, excluded from switch parity. Exact source/coverage, prior task/evidence/history preservation, Knowledge, memory, histories, rendered book and all normal doctrines govern the commit; no source/test change, complete component/canonical gate or dependency build.
+  Commit: `JULIA-STARTUP-READING.1.4 - read contracts and own attached switch omission`.
 
 - ID: `JULIA-STARTUP-READING.1.5`
   Status: `pending`
@@ -608,8 +615,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Goal: Preserve disjoint repair ownership for every confirmed Julia finding.
   Dependencies: Findings from .1; source repair additionally requires startup .3/.4/.5.
   Acceptance: Reuse exact existing startup owners when applicable; otherwise add bounded repair children with source mechanism, reproduction, acceptance and unblock conditions. No finding is closed by reading alone.
-  Children: .2.1 (callable-body selector validation); prior README findings retain startup .41.2/.41.3/.41.7.
-  Verification: `pending` repair; .1.3 confirms the callable-body gap and routes two bounded repair children. Earlier documentation and helper-arity owners remain intact.
+  Children: .2.1 callable-body selector validation; .2.2 attached-switch body/duplicate-default validation. Prior README findings retain startup .41.2/.41.3/.41.7.
+  Verification: `pending` repairs; .1.3 owns the callable-body selector gap, and .1.4 confirms attached-switch projection omission and default replacement. Earlier documentation and helper-arity owners remain intact.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.2.1`
@@ -634,6 +641,32 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Goal: Close reconstructed/generated selector validation and public claim coverage after the visitor repair.
   Dependencies: .2.1.1; source-reading and policy prerequisites.
   Acceptance: Prove native, normalized SpecFile, caller-constructed compiled state, generated-plan validation/execution and independently loaded emitted routes reject forbidden callable-body selectors before effects. Preserve valid deferred callbacks and source-v2 identity, run direct-dependent selector/callable/contextual suites plus appropriate admission proof, and reconcile the book/Knowledge claim against actual coverage.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-STARTUP-READING.2.2`
+  Status: `pending`
+  Goal: Preserve complete authored attached-switch content and diagnose invalid branch structure.
+  Dependencies: .1.4 diagnostic intake; source repairs retain startup .3/.4/.5.
+  Evidence: ActionParser906 extracts only cases/default and replaces each earlier default; ActionContracts871 prefers that projection over the complete retained body. Runtime Interpreter3110 selects only extracted branches. Five controlled sources reproduce lost diagnostics/content and last-default replacement across native, normalized SpecFile, generated-plan and in-process emitted-module routes. A process-local full-body visitor restores lost diagnostics in ten asserted before/after cases; no repository source changed.
+  Children: .2.2.1 resolves and implements complete-body/duplicate-default validation; .2.2.2 closes carrier and public evidence.
+  Acceptance: Preserve valid first-match/default and marker-switch behavior; resolve non-branch placement and duplicate-default diagnostics against the current control contract and exact Perl oracle before implementation. No authored statement may silently disappear from semantic accounting.
+  Verification: `pending` repair; intake evidence: docs/knowledge/julia-attached-switch-body-omission.md.
+  Commit: `pending`
+
+- ID: `JULIA-STARTUP-READING.2.2.1`
+  Status: `pending`
+  Goal: Resolve and repair attached-switch body coverage and duplicate-default handling.
+  Dependencies: Startup .3/.4/.5; complete parser/validation/runtime reading; .1.4 intake committed.
+  Acceptance: Establish the exact normative rule and reference behavior for leading/interleaved/trailing non-branches, duplicate defaults, nested switches and empty/malformed bodies. Add RED/GREEN diagnostic/source-span and no-side-effect controls; require complete source coverage or explicit rejection while preserving valid attached/marker and lazy value-form controls. Keep eager switch validation distinct from deferred callable dependencies.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-STARTUP-READING.2.2.2`
+  Status: `pending`
+  Goal: Verify repaired attached-switch invariants across supported carriers and public claims.
+  Dependencies: .2.2.1; source-reading/policy prerequisites.
+  Acceptance: Cover native, normalized/reconstructed and caller-constructed state, generated-plan validation/execution and independently loaded emitted output; reject invalid structure before effects. Run direct-dependent control suites and required admission proof, preserve valid first-match/default behavior, and reconcile book/Knowledge against the exact tested routes.
   Verification: `pending`
   Commit: `pending`
 
@@ -671,7 +704,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.4` | `pending` | Finish ActionContracts and begin ActionParser after the clean approved capacity boundary. |
+| 1 | `JULIA-STARTUP-READING.1.5` | `pending` | Read the next ActionParser range, CallableContract and FunctionRegistry prefix after clean .1.4. |
 
 ## Decisions
 
@@ -695,6 +728,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Verification Log
 
+- `2026-09-11` .1.4: Julia .1.4 completes ActionContracts and reads ActionParser through 1138: 4/52 groups, 5,571 fragments /197,138 bytes and eight complete files. Existing parser 74 / resolver 40 / callable 482 assertions pass. Five four-carrier switch controls and ten causal resolver cases confirm retained-body omission and last-default replacement; .2.2.1/.2.2.2 own normative reconciliation, repair and carrier/public proof. The shared Perl oracle qualifies non-branch behavior; its initial E-only carrier reuses startup .27. All source bytes, prior repairs and approved ADR0115 capacity remain. Julia .1.5 is next; no complete component/canonical gate or dependency build.
 - `2026-09-11` .4 closeout: Approved containment .12 / ADR0115 admits four extra archive slots per history through six exact limits. The governed change-history rollover preserves 217 lines /13,128 bytes from clean 107170da7; all prior history and unrelated controls remain exact. Production-validator proof passes 44 threshold and 22 authorization cases under the explicit one-time focused exception. Julia reading remains 3/52 groups and seven complete files; .1.4 is next. All parser repairs, startup prerequisites and future canonical/push requirements remain.
 
 - `2026-09-11` .4.1: Julia reading remains 3/52 groups, 4,071 fragments /145,809 bytes and seven complete files. Julia .4.1 prepares four extra archive slots per history for the remaining reading/closeout envelope; six proposed controls leave root, segment and aggregate limits unchanged. Independent models agree on eight rollovers and preserve all history. Pending containment .12 owns implementation and its requested one-time canonical exception; approval is not assumed. Julia .1.4 waits behind that decision. The callable selector gap and all prior repairs remain open.
@@ -705,6 +739,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Commit Log
 
+- `2026-09-11` .1.4: `JULIA-STARTUP-READING.1.4 - read contracts and own attached switch omission`.
 - `2026-09-11` .4 closeout: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.12 - admit approved Julia history capacity`.
 
 - .4.1: `JULIA-STARTUP-READING.4.1 - prepare finite history capacity and verification decision`.
@@ -715,6 +750,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Changelog
 
+- `2026-09-11` .1.4: .1.4 completes the fourth exact reading group, reconciles current pointers and owns the switch finding without source repair.
 - `2026-09-11` .4 closeout: Approved containment .12 closes .4; no reading credit or defect status changes.
 
 - `2026-09-11`: .4.1 prepares the exact proposal and routes pending containment .12; no capacity or source change.

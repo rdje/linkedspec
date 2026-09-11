@@ -35,9 +35,18 @@ explicit diagnostics.
 `julia/src/spec/Validator.jl` shares the same current-name table for user-function registry collision checks, so
 validation no longer maintains a second helper list.
 
-When callers pass `function_registry`, the resolver checks exact-arity user calls before helper fallback and records
+**Historical .3.3 boundary:** when callers pass `function_registry`, the resolver checked exact-arity user calls before helper fallback and recorded
 them as `family = "user_function"`. If the name is registered but the arity is wrong, the resolver emits
 `user_function_arity_mismatch` instead of treating the call as an unknown helper.
 
 Related facts: [[julia-action-ast-parser]], [[julia-user-function-registry]],
 [[dart-actionir-contract-resolver]], [[dart-actionir-ast-parser]], [[text-to-ast-backend-doctrine]].
+
+## September 11 source reconciliation
+
+Current registered calls classify first with fixed or variadic minimum arity and keyword rejection; callable
+bindings resolve next, then canonical helper fallback. Known builtins record argument counts and families;
+recognition by this resolver does not establish complete generic builtin-arity enforcement.
+Explicit/contextual callable bodies stay deferred for eager helper dependencies. Attached switches, however,
+can omit retained body content from contract traversal: [[julia-attached-switch-body-omission]] owns exact
+causal evidence and pending repair .2.2. Existing parser 74 / resolver 40 and callable 482 assertions pass.

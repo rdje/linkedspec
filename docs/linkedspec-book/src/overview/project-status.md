@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 3/52 owned groups; approved containment .12 clears the way for its fourth reading child.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 4/52 owned groups; its fifth reading child is next, with approved ADR0115 capacity in place.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -283,7 +283,7 @@ history, with every earlier archive and manifest record retained. The resulting
 collections use 33/36 and 28/32 permitted files. Production-validator proof covers
 44 threshold executions and 22 authorization executions. The director explicitly
 granted the one-time focused-verification exception; normal hooks remain enabled.
-Julia .1.4 is next after the verified capacity commit.
+Julia .1.4 followed that verified capacity commit; current reading progress is below.
 
 The allowance covers the finite remaining-Julia reading and closeout envelope.
 Each actual candidate remains measured against the existing limits. The director
@@ -297,12 +297,38 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 3/52 groups complete:** ActionAst is now fully read and
-ActionContracts is read through line 766. Cumulative coverage is 4,071 lines /
-145,809 bytes and seven complete files. Exact scopes remain in
-`docs/tasks/JULIA-STARTUP-READING.md`. Existing package/README, facade and CLI
-checks remain recorded; this slice adds 61 binding and eight projection/alias
-assertions, all passing. No complete Julia gate is claimed.
+**Julia reading is 4/52 groups complete:** ActionContracts is now fully read;
+ActionParser is read through line 1138. Cumulative coverage is 5,571 lines / 197,138
+bytes and eight complete files. Exact scopes remain in
+`docs/tasks/JULIA-STARTUP-READING.md`. The fourth group passes 74 parser, 40 resolver
+and 482 callable assertions (596 total). No complete Julia gate is claimed.
+
+**Known Julia limitation — attached-switch body coverage:** Julia can retain a
+statement in the full AST body while excluding it from the branches visited by
+contract resolution and runtime selection. A later default replaces an earlier one.
+For example, inside a working edge handler:
+
+```text
+result = 0
+switch(1) {
+    default() { mystery_probe(1) }
+    default() { result = 9 }
+}
+return(result)
+```
+
+Julia currently returns 9 with no resolver diagnostic; the earlier unknown call
+has disappeared from the extracted branch model. Five controlled sources reproduce
+this mechanism on native, reconstructed, generated-plan and freshly included emitted
+routes. A process-local full-body visitor restores the missing diagnostics.
+Emitted modules were loaded in the same process; this is not independent child-process proof.
+
+The same source reports a lazy handler compilation error on Perl. Both backends
+skip the tested non-branch statements, so the repair first needs an exact rule for
+allowed body structure. Julia .2.2.1/.2.2.2 own that reconciliation, implementation
+and carrier/public verification after startup prerequisites. No runtime repair is
+claimed. Exact examples and replay:
+`docs/knowledge/julia-attached-switch-body-omission.md`.
 
 **Known Julia validation gap — selectors inside callable bodies:** an ordinary
 `array(items)` or `hash(items)` rejects as a retired selector. The same invalid
@@ -326,7 +352,7 @@ prerequisites. Evidence and replay are in
 
 Native source strings and host-created semantic indexes remain supported; MCP
 authoring proposals remain parked. Existing helper and README repairs stay open,
-and Julia .4 owns history capacity before the next required rollover.
+with finite remaining-reading history capacity admitted by ADR0115.
 
 **Independent Dart audit and current verification blockers:** all 55 reading
 commits retain exact scopes, comprehension, verification records and first-parent
@@ -363,8 +389,8 @@ SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` sti
 own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
-Julia has read three of 52 exact groups across 95 baseline entries;
-its fourth physical reading child follows approved containment .12, followed by the remaining Lua/supporting
+Julia has read four of 52 exact groups across 95 baseline entries;
+its fifth physical reading child is next, followed by the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,

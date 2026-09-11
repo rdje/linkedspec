@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `107170da748f7f89d9cbdb26d4a6df888a067077` — clean committed Julia capacity proposal before approved .12 implementation.
-- latest_completed_leaf: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.12 - admit approved Julia history capacity`; exact six-scalar admission, preserved history and approved one-time focused exception.
-- active_work_unit: none; containment .12 and Julia .4 complete; `JULIA-STARTUP-READING.1.4` is next.
-- next_action: Activate Julia .1.4 from clean HEAD; read ActionContracts 767-1128 and ActionParser 1-1138, verify and commit. Use the approved finite capacity and existing per-leaf checks.
+- activation_commit: `4ad1e3cd2eab98aa324e0e90568952a477e62eba` — clean approved capacity handoff before Julia fourth reading group.
+- latest_completed_leaf: `JULIA-STARTUP-READING.1.4 - read contracts and own attached switch omission`; exact fourth group and focused proof complete; switch repair pending.
+- active_work_unit: none; `JULIA-STARTUP-READING.1.5` is next.
+- next_action: Activate Julia .1.5 from clean HEAD; read next ActionParser range, CallableContract and FunctionRegistry prefix, verify and commit.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
-- in_flight_uncommitted: none; no running jobs. All work is committed; existing Julia/Dart defects remain repair-owned.
-- blockers: No capacity blocker for Julia .1.4. Remaining startup prerequisites and all Dart/Julia repairs retain their scope; ADR0115 grants the finite six-limit allowance and .12-only focused exception.
+- in_flight_uncommitted: none; no running jobs. Julia .2.1/.2.2 and all prior repairs remain pending.
+- blockers: No current reading blocker. Startup prerequisites and all repairs remain; ADR0115 is finite capacity with a containment-.12-only exception.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -57,4 +57,4 @@
   Segment 4980-f04b37b1dab6 preserves 217 lines /13128 bytes; all other controls remain unchanged. Proportionate governance: ADR0115.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-11 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart read; Julia 3/52 groups, 4071/75984 lines, 145809/2693170 bytes, seven complete files. Lua/supporting code, formal book .4 and policy .5 remain.
+- latest_bootstrap_read: 2026-09-11 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart read; Julia 4/52 groups, 5571/75984 lines, 197138/2693170 bytes, eight complete files. Lua/supporting code, formal book .4 and policy .5 remain.

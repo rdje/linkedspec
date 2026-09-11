@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia switch projection versus retained source
+
+Attached-switch extraction drops semantic coverage despite retaining the full body.
+Process-local full-body resolution restores missing diagnostics; last default wins
+at runtime. Perl also skips tested non-branches, requiring normative reconciliation.
+Its E-only probe reuses startup .27; the shared edge-handler positive returns 7.
+
 ## 2026-09-11 — Approved finite Julia history admission
 
 The approved allowance changes six scalars and preserves every other control.

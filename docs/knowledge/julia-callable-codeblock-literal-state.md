@@ -30,7 +30,9 @@ variadic user-function signature whose rest name is null.
 
 Literal and body spans are half-open Unicode character offsets in the containing ActionIR source. Nested literals
 retain the same coordinate space. The retained body is typed ActionIR, not Julia source, and is a deferred leaf
-for eager helper/dependency and removed-selector scans. Runtime construction returns a recursively copied plain
+for eager helper/dependency scans. The skipped removed-selector scan is a current validation defect, owned by
+Julia .2.1 and [[julia-callable-selector-validation-gap]], rather than part of the intended inert-construction
+contract. Runtime construction returns a recursively copied plain
 dictionary, captures no environment, and never executes body mutations, calls, or `retv` reads.
 
 The ordinary compiled ActionIR payload carries the record. User functions can receive and return it as ordinary
@@ -41,7 +43,9 @@ the exact fixed/rest callable signature.
 
 Construction/state remains intentionally inert. Bound-variable dispatch such as `cb(args)` is now implemented by
 `FUTURE-PARITY-BACKLOG.11.6.2` without changing the stored record; generic attached/parenthesized final blocks
-remain `.11.6.3`.
+were next under `.11.6.3` at the original construction milestone. That normalization is now implemented:
+[[julia-generic-final-codeblock-gap]] records the current seam. September 11 focused replay passes all
+125 invocation, 118 contextual and 239 construction assertions; it does not close the selector defect.
 
 Related facts: [[callable-codeblock-literal-contract]], [[julia-callable-codeblock-construction-gap]],
 [[julia-variadic-user-functions]], [[julia-generated-source-scaffold]],

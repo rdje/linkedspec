@@ -2233,7 +2233,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas.
   Children: `.3.5.0` owns decomposition; JULIA-STARTUP-READING.1 owns 52 reading children and .3 owns closeout.
   Reading owner: `docs/tasks/JULIA-STARTUP-READING.md` retains exact scope/digest, comprehension and repair evidence. This startup node remains the prerequisite owner.
-  Verification: Julia .1.3 completes ActionAst and reads ActionContracts through 766: 3/52 groups, 4,071 fragments /145,809 bytes and seven complete files. Twenty causal controls prove callable bodies bypass retired array/hash selector validation across native, reconstructed, generated-plan and in-process emitted-module routes; .2.1.1/.2.1.2 own repair. Existing uniform-binding 61 and projection/alias 8 pass without closing the gap. All source bytes and prior repairs remain. Julia .1.4 is next, with .4 capacity intake before history rollover. Exact plan and all source identities remain frozen in the Julia owner.
+  Verification: Julia .1.4 completes ActionContracts and reads ActionParser through 1138: 4/52 groups, 5,571 fragments /197,138 bytes and eight complete files. Existing parser 74 / resolver 40 / callable 482 assertions pass. Five four-carrier switch controls and ten causal resolver cases confirm retained-body omission and last-default replacement; .2.2.1/.2.2.2 own normative reconciliation, repair and carrier/public proof. The shared Perl oracle qualifies non-branch behavior; its initial E-only carrier reuses startup .27. All source bytes, prior repairs and approved ADR0115 capacity remain. Julia .1.5 is next; no complete component/canonical gate or dependency build. Exact plan and all source identities remain frozen in the Julia owner.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.5.0`
@@ -4468,7 +4468,7 @@ Startup `.3.4` stays pending until complete Dart reading; the next executable re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.4` | `pending` | Finish ActionContracts and begin ActionParser after the clean approved capacity boundary. |
+| 1 | `JULIA-STARTUP-READING.1.5` | `pending` | Read the next ActionParser range, CallableContract and FunctionRegistry prefix after clean .1.4. |
 
 ## Reading Ledger
 
