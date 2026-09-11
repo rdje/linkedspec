@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia matcher decoys and semantic source ownership
+
+The whole-member call scanner refuses regex starts followed by group syntax
+or whitespace, then selects a call-shaped matcher substring for a typed action.
+Plain regex, nested calls, arity and repeated-binding controls isolate the gap.
+Outcome/source reading preserves strict UTF-8, detached state and exact ceilings.
+
 ## 2026-09-11 — Julia contextual casing and typed semantic provenance
 
 Final Sigma reads original code points against pinned cased/ignorable ranges.

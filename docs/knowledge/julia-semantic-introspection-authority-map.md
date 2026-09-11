@@ -327,3 +327,21 @@ Implementation is dependency-ordered under `.10.6`: Unicode rule-label closure; 
 graph/privacy/failure projection; calls/bindings/staged/generated projection; typed and raw query; runtime
 observation across every route; and one exact 12-role Julia admission consumer. None of these facts promotes Julia
 rollout or admission by itself.
+
+## 2026-09-11 — outcome and source prefix reading
+
+Julia .1.26 completes SemanticCompilationOutcome1-472 and reads SemanticIndex1-513.
+Ordinary staged parse/validation/compilation/entry/plan failures become detached
+outcomes; InterruptException, OutOfMemoryError and StackOverflowError rethrow.
+Native portable diagnostics preserve their code/stage/fields; fallback failures
+retain only their governed message and optional source line. Failed entry/plan
+construction does not expose the compiled candidate as an accepted snapshot.
+
+The index validates/copies strict UTF-8 text or byte input, retains caller logical
+identity, suppresses ordinary property access and redacts display. Source maps
+freeze byte/scalar/line/column boundaries in tuples; exact range mapping rejects
+interior UTF-8 boundaries and applies disclosure ceilings before reading source.
+Option validation starts in this prefix; remaining option/integer/error-freezing
+source is unread. Fresh nine-suite semantic proof passes1063 assertions. New
+regex-source counterexamples are separate projection evidence under Julia .2.15:
+[[julia-semantic-regex-call-source-gap]]. No whole-project or repair closure follows.

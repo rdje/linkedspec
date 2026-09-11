@@ -2233,7 +2233,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas.
   Children: `.3.5.0` owns decomposition; JULIA-STARTUP-READING.1 owns 52 reading children and .3 owns closeout.
   Reading owner: `docs/tasks/JULIA-STARTUP-READING.md` retains exact scope/digest, comprehension and repair evidence. This startup node remains the prerequisite owner.
-  Verification: Julia .1.25 completes UnicodeCaseMapping and reads SemanticCallProjection1-1011: 25/52 groups, 35,925 fragments /1,264,877 bytes and thirty complete files. Final Sigma uses original code points and generated properties; call projection retains typed ownership, staged authority and deterministic call/binding evidence. Fresh casing39 plus semantic530 assertions pass, alongside Unicode regeneration and semantic6/20/128. The unchanged empty-function guard remains startup .22-owned; all prior repairs, source, history and ADR0115 controls remain. Julia .1.26 is next; no full component/canonical gate or dependency build. Exact plan and all source identities remain frozen in the Julia owner.
+  Verification: Julia .1.26 completes SemanticCallProjection and SemanticCompilationOutcome and reads SemanticIndex1-513: 26/52 groups, 37,425 fragments /1,316,130 bytes and thirty-two complete files. Fresh semantic1,063 and diagnostic92 assertions pass; three public queries cite grouped/whitespace matcher text for real action calls. New Julia .2.15 owns source correlation; startup .67.2 retains the null aggregate binding source despite correct Julia array-call traversal. Neutral semantic6/20/128 passes. All prior repairs, source, history and ADR0115 controls remain. Julia .1.27 is next; no full component/canonical gate or dependency build. Exact plan and all source identities remain frozen in the Julia owner.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.5.0`
@@ -4158,6 +4158,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     backends, but [trim(" x ")] loses its active trim call; Perl Get returns ["x"]. Rust also returns null
     binding source where Perl retains the exact array RHS. Both walkers stop on non-call container nodes.
   Dart .1.30 recurrence: public query also omits trim inside [trim(" x ")] and returns null binding source, while typed ActionIR contains the call and direct runtime returns ["x"]. Direct/nested/string controls retain exact source; separate regex-decoy miscorrelation is owned by DART-STARTUP-READING.2.20.
+  Julia .1.26 recurrence: public query retains trim inside [trim(" x ")] and separate runtime returns ["x"], but the binding source is null. Preserve binding RHS source independently of outer emitted calls. Exact92-assertion controls in docs/knowledge/julia-semantic-regex-call-source-gap.md do not reproduce wrong-arity acceptance or repeated-binding identity; distinct regex miscorrelation belongs to Julia .2.15.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.67.3`

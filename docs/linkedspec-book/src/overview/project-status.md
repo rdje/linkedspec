@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 25/52 owned groups; its twenty-sixth reading child is next, with approved ADR0115 capacity in place.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 26/52 owned groups; its twenty-seventh reading child is next, with approved ADR0115 capacity in place.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,24 +297,27 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 25/52 groups complete:** the complete Unicode casing module
-and the first 1,011 lines of semantic call projection are read. Cumulative
-coverage is 35,925 lines /1,264,877 bytes and thirty complete files. Exact scopes
-remain in `docs/tasks/JULIA-STARTUP-READING.md`. Fresh checks pass 39 casing and
-530 semantic foundation/projection assertions, Unicode regeneration and all
-six neutral semantic fixture groups, twenty queries and 128 rejected mutations.
+**Julia reading is 26/52 groups complete:** semantic call projection and
+compilation outcomes are fully read, with the source-index prefix through line
+513. Cumulative coverage is 37,425 lines /1,316,130 bytes and thirty-two complete
+files. The index copies strict UTF-8 source, applies disclosure ceilings and
+keeps compiler state behind detached accessors. Exact scopes remain in
+`docs/tasks/JULIA-STARTUP-READING.md`. All 1,063 existing semantic assertions,
+92 diagnostic assertions and the neutral semantic contract checks pass.
 
-Contextual final sigma examines the original code points, skips case-ignorable
-characters and requires a preceding cased character with no following cased
-character. The evaluator preserves ordered full mappings without normalization.
-Semantic projection validates retained staged function and generated-plan
-metadata, then records typed calls and bindings in deterministic order. It does
-not execute target code. The known empty-function guard still suppresses rule
-call projection and remains owned by startup `.22`; passing fixture checks do
-not close that limitation. Remaining semantic correlation and shape source is
-unread. Source evidence: `docs/knowledge/dart-julia-unicode-17-case-mapping.md`,
-`docs/knowledge/julia-semantic-call-staged-projection-plan.md`, and
-`docs/knowledge/semantic-rule-calls-empty-function-gate.md`. All prior repairs remain open.
+**Known Julia limitation — semantic call source correlation:** an action's
+`trim(" x ")` call can cite `trim(x)` inside a preceding grouped or
+whitespace-prefixed regex. For `/(trim(x))/`, the query cites matcher bytes
+45–52 while the real typed action occupies bytes 72–83. Separate execution
+returns the expected `"x"`; the defect is the call and binding source evidence.
+Julia `.2.15.1/.2` own implementation and supported-route/public proof.
+
+The plain `/trim(x)/` control cites the correct action. Julia also retains calls
+inside arrays and rejects wrong arity in the measured controls; four repeated
+assignments preserve distinct binding identities. An aggregate binding still has
+no RHS source, which remains owned by startup `.67.2`. These controls do not
+close the existing empty-function guard or other pending semantic repairs.
+Exact sources, root cause and replay: `docs/knowledge/julia-semantic-regex-call-source-gap.md`.
 
 **Known Julia limitation — staged diagnostic byte limits:** a one-byte allowance
 can retain a 187-byte truncation record; a 64-byte allowance can retain 375 bytes
@@ -615,8 +618,8 @@ SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` sti
 own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
-Julia has read twenty-five of 52 exact groups across 95 baseline entries;
-its twenty-sixth physical reading child is next, followed by the remaining Lua/supporting
+Julia has read twenty-six of 52 exact groups across 95 baseline entries;
+its twenty-seventh physical reading child is next, followed by the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,

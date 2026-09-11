@@ -80,3 +80,18 @@ assignments keep distinct IDs/sources. These Dart controls do not reproduce the
 earlier Perl/Rust false acceptance or Rust repeated-ID cause. Separate regex
 source miscorrelation is owned by Dart .2.20. No other-backend or MCP rerun is
 claimed; the earlier paired evidence remains unchanged.
+
+## September 11 Julia controls and remaining binding-source defect
+
+Julia .1.26 runs twelve public-query and separate typed/runtime controls,92
+assertions, in [[julia-semantic-regex-call-source-gap]]. The Julia array walker
+retains trim inside [trim(" x ")] and runtime returns ["x"]. Its aggregate binding
+source is still null because the statement projector receives no outer emitted
+call from the aggregate visitor. Existing startup .67.2 retains this source
+repair; it requires RHS source independently of outer call emission.
+
+Zero/two arguments reject contracts, semantic construction and separate runtime;
+one succeeds. Four same-name assignments retain distinct IDs/excerpts. These
+controls do not reproduce false arity acceptance or repeated-binding identity.
+Grouped/whitespace matcher-source miscorrelation belongs to Julia .2.15, with
+its own positive plain-regex control. No counterpart or transport rerun is claimed.

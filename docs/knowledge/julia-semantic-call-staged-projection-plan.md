@@ -196,3 +196,16 @@ include("julia/test/semantic_index_call_staged_test.jl")
 bash tools/run_python_project_data.sh tools/check_unicode_case_contract.py
 bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py
 ```
+
+## 2026-09-11 — call projector reading complete with source counterexamples
+
+Julia .1.26 completes SemanticCallProjection1012-1526. Typed function bodies
+are reparsed, final-codeblock normalized, compared to retained staged JSON and
+contract-resolved. A unique authored shell must enclose the exact staged body
+span. Shapes use a bounded fixed point over direct return/assignment statements;
+unsupported expressions remain unknown. The full-member occurrence scanner has
+a confirmed grouped/whitespace regex-start gap: three public queries cite matcher
+text for real action calls. Earlier claims about ignoring regex literals apply
+only to their tested forms, not every valid regex. Exact92-assertion counterexamples
+and repair .2.15 are in [[julia-semantic-regex-call-source-gap]]. All nine existing
+semantic suites still pass1063; this does not close the defect.

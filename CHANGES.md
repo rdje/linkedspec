@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.26 - read semantic source authority and own regex call correlation
+
+Read1,500 fragments /51,253 bytes, reaching26/52 groups and32 complete files.
+Existing semantic1,063 and diagnostic92 assertions pass; three matcher decoys
+misattribute call/binding source. Own .2.15, extend startup .67.2 for null
+aggregate source and preserve all prior source/history/repair evidence.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.25 - complete Unicode evaluator and read semantic call projection
 
 Read the Unicode evaluator and semantic call prefix:1,500 fragments /45,333
