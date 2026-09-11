@@ -60,3 +60,20 @@ Related facts: [[user-observable-backend-cli-parity-contract]], [[julia-backend-
 [[julia-generated-source-family-plan]], [[julia-scoped-parity-no-drift]].
 See also [[julia-variadic-user-functions]].
 Current cursor-specific artifact behavior: [[julia-generated-source-v2-rule-local-cursor]].
+
+## 2026-09-11 — complete source-emitter reading and focused recurrence
+
+Julia .1.29 reads all848 SourceEmitter lines, preserving exact baseline bytes.
+The current emitter checks source identity, compiled slot/mutation contracts and
+ordered ten-family plan; effective function/rule state is canonical JSON encoded
+as ASCII hex. Emitted modules validate v2 identity before loading their normalized
+AST and invoke native compilation; generated execution derives cursor/family
+policy from the validated plan and forwards invocation-local authorities/sinks.
+The compatibility adapter remains current v2 with inline identity.
+
+Fresh source_emitter_test.jl passes65 assertions: accepted subset13, family/direct32
+and scaffold20, including independent managed generated hosts. Four static semantic
+suites add389, for454 existing assertions. Neutral generated contract/census and
+semantic6/20/128 remain unchanged. This finite recurrence does not close previously
+owned runtime/callback/semantic defects. Exact managed composition is preserved in
+[[julia-semantic-authored-selector-gap]]; spec AST reading beyond101 remains pending.

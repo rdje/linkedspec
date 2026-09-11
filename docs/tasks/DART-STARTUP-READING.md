@@ -1567,7 +1567,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.29` | `pending` | Read SemanticStaticProjection955-1505, SourceEmitter1-848 and spec/Ast1-101 after clean .1.28; reconcile focused proof and preserve repairs. |
+| 1 | `JULIA-STARTUP-READING.1.30` | `pending` | Read spec/Ast102-909 and spec/Parser1-692 after clean .1.29; reconcile focused proof and preserve repairs. |
 
 ## Decisions
 

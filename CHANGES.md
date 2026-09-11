@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.29 - complete semantic and emitter reading and own selector projection
+
+Read1,500 fragments /50,139 bytes, reaching29/52 groups and37 complete files.
+Emitter65/semantic389 and selector99 assertions pass. Three decoys expose
+incorrect indexed metadata from typed unindexed edges; own .2.18 repair and
+preserve earlier source/history/evidence with synchronized book and pointers.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.28 - read semantic projections and own mixed slot and entry gaps
 
 Read1,500 fragments /51,153 bytes, reaching28/52 groups and35 complete files.

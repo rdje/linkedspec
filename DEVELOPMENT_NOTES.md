@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia authored selectors and generated state
+
+Whole-member substring matching overrides typed unindexed selector identity,
+creating incorrect source forms, target shapes and selects_regex relations.
+Static/emitter reading completes; generated state retains canonical JSON,
+ASCII-hex Unicode identity and contract-first validation. Repair .2.18 stays open.
+
 ## 2026-09-11 — Julia static slot and entry evidence gates
 
 Filtering authored parent matchers before comparing the unfiltered compiled

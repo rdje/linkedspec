@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.28 completes SemanticQuery and SemanticRuntimeProjection and reads SemanticStaticProjection1-954: 28/52 groups, 40,425 fragments /1,419,791 bytes and thirty-five complete files. Fresh semantic1,286 and diagnostic67 assertions pass. Valid mixed parent/structural slot order can reject semantic construction; single-rule or unused-function sources omit entry explanations. Julia .2.16/.2.17 own separate implementation and public proof. Missing-rule and out-of-range-slot diagnostics remain distinct under startup .23. Neutral semantic6/20/128 passes. All prior repairs, source, history and ADR0115 controls remain. Julia .1.29 is next; no full component/canonical gate or dependency build. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.29 completes SemanticStaticProjection and SourceEmitter and reads spec/Ast1-101: 29/52 groups, 41,925 fragments /1,469,930 bytes and thirty-seven complete files. Fresh emitter65/semantic389 and seven selector controls99 assertions pass. Regex/action/label-substring decoys make typed unindexed edges report indexed metadata and selects_regex relations; Julia .2.18 owns typed projection and supported-route/public repair. Both neutral semantic6/20/128 and generated-source checks pass. All prior repairs, source, history and ADR0115 controls remain. Julia .1.30 is next; no full component/canonical gate or dependency build. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.82` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `JULIA-STARTUP-READING.1.28 - read semantic projections and own mixed slot and entry gaps` — Julia .1.28 completes SemanticQuery and SemanticRuntimeProjection and reads SemanticStaticProjection1-954: 28/52 groups, 40,425 fragments /1,419,791 bytes and thirty-five complete files. Fresh semantic1,286 and diagnostic67 assertions pass. Valid mixed parent/structural slot order can reject semantic construction; single-rule or unused-function sources omit entry explanations. Julia .2.16/.2.17 own separate implementation and public proof. Missing-rule and out-of-range-slot diagnostics remain distinct under startup .23. Neutral semantic6/20/128 passes. All prior repairs, source, history and ADR0115 controls remain. Julia .1.29 is next; no full component/canonical gate or dependency build.
+- `JULIA-STARTUP-READING.1.29 - complete semantic and emitter reading and own selector projection` — Julia .1.29 completes SemanticStaticProjection and SourceEmitter and reads spec/Ast1-101: 29/52 groups, 41,925 fragments /1,469,930 bytes and thirty-seven complete files. Fresh emitter65/semantic389 and seven selector controls99 assertions pass. Regex/action/label-substring decoys make typed unindexed edges report indexed metadata and selects_regex relations; Julia .2.18 owns typed projection and supported-route/public repair. Both neutral semantic6/20/128 and generated-source checks pass. All prior repairs, source, history and ADR0115 controls remain. Julia .1.30 is next; no full component/canonical gate or dependency build.
 
 ## Next Action
 
-- `JULIA-STARTUP-READING.1.29` — Read SemanticStaticProjection955-1505, SourceEmitter1-848 and spec/Ast1-101 after clean .1.28; preserve repairs.
+- `JULIA-STARTUP-READING.1.30` — Read spec/Ast102-909 and spec/Parser1-692 after clean .1.29; preserve repairs.
 
 ## Recent Completions
+
+- `2026-09-11` — `JULIA-STARTUP-READING.1.29` reads1,500 fragments /50,139 bytes;454 existing and99 selector assertions pass; authored-selector repair .2.18 remains open.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.28` reads1,500 fragments /51,153 bytes;1,286 existing and67 diagnostic assertions pass; mixed-slot and entry repairs .2.16/.2.17 remain open.
 
@@ -48,8 +50,6 @@
 - `2026-09-11` — `JULIA-STARTUP-READING.1.15` reads 1,500 fragments /50,914 bytes;793 existing and80 diagnostic assertions pass; recognition-token repair .2.7 remains open.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.14` reads 1,500 fragments /49,525 bytes;176 existing and108 diagnostic assertions pass; observer repair .2.6 remains open.
-
-- `2026-09-11` — `JULIA-STARTUP-READING.1.13` reads1,500 fragments /46,530 bytes;743 existing assertions and neutral checks pass; governed notes rollover preserves213 lines exactly.
 
 ## History
 

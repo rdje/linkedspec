@@ -185,3 +185,20 @@ not_explainable. Julia .2.16/.2.17 own separate repairs, including entry contrac
 hash impact before any model revision. Exact seven controls/67 assertions and
 fresh eleven-suite1286 proof are in [[julia-semantic-static-correlation-gaps]].
 Remaining static scanner/shape/canonicalization source remains unread.
+
+## 2026-09-11 — static helper reading completes; authored selectors remain incorrect
+
+Julia .1.29 completes StaticProjection955-1505. Member ranges track leading
+regex escapes, quoted strings and delimiter depth; shape helpers infer bounded
+literal/container/callable information without execution. Canonical kind/order
+sorting, strict-byte name escaping and recursive frozen/detached conversion are
+fully read. The entry-explanation builder does not remove its caller's .2.17 gate.
+
+The explicit-index helper searches the complete member for a label/index
+substring instead of using retained authored selector kind. Three regex/action/
+label-substring controls project unindexed compiled edges as indexed with false
+regex-slot shape and selects_regex relations. Four comparisons preserve actual
+zero/nonzero or omitted spelling. Julia .2.18 owns repair; exact seven controls/
+99 assertions are in [[julia-semantic-authored-selector-gap]]. The four existing
+source/outcome/static suites pass389 again. Earlier mixed-slot and entry repairs,
+shared budgets and every prior owner remain pending.
