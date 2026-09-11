@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.51 - complete Unicode binding and variadic consumer reading
+
+Read1500 fragments/55360 bytes, reaching51/52 groups and93 complete files.
+Unicode/binding/variadic and complete write-prefix tests pass4179 assertions;
+four neutral checks pass. Qualify variadic emitted-payload evidence and preserve
+all repairs; final source-reading group .1.52 follows.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.50 - complete staged source and Unicode identity reading
 
 Read1500 fragments/54647 bytes, reaching50/52 groups and89 complete files.

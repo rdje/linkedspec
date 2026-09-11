@@ -37,3 +37,17 @@ same runtime. The neutral fixture passes both direct generated-plan execution an
 Related facts: [[variadic-user-function-contract]], [[julia-user-function-definition-projection]],
 [[julia-user-function-registry]], [[julia-user-function-runtime-execution]], [[julia-generated-source-scaffold]],
 [[dart-variadic-user-functions]], [[rust-variadic-user-functions]].
+
+## September 11 — consumer reading and emitted-carrier qualification .1.51
+
+All181 lines are read and55 assertions pass. Fixed/v2 signature unions and exact
+staged/descriptor fields survive generated plans and emitted payload reconstruction.
+The latter extracts _COMPILED_SPEC_JSON_HEX, decodes SpecFile, recompiles and runs
+the native engine; this consumer never independently loads the emitted module.
+The historical independently-emitted wording in the generated-v2 update above
+is therefore too broad for this permanent target. General emitted-host evidence
+lives in the separate source-emitter suite; no new variadic host proof is claimed.
+Arguments execute once left-to-right; independent calls receive fresh rest arrays.
+Malformed definitions, fixed/minimum arity and keyword-resolution errors retain
+their covered boundaries. Neutral3 definitions/9 calls/7 invalid definitions pass.
+Previously owned callable/identifier repairs stay open. Replay: [[write-vivification-julia-runtime]].

@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Variadic emitted payload reconstruction has a precise carrier boundary
+
+The variadic consumer decodes emitted JSON, reconstructs SpecFile and executes
+the resulting native engine. It does not load that emitted module independently.
+Exact signature/argument/rest evidence remains valid; old broader carrier wording
+is qualified in its canonical fact. All source and existing repair owners remain.
+
 ## 2026-09-11 — Lifecycle and typed-source carrier proof differs from Unicode emitted execution
 
 Lifecycle and typed-source consumers execute native/reconstructed/generated-plan

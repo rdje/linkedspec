@@ -41,3 +41,15 @@ Lua supports the bare replacements. Julia's selector recognition and runtime dis
 Related facts: [[uniform-binding-neutral-contract]], [[perl-uniform-binding-runtime]],
 [[rust-uniform-binding-runtime]], [[dart-uniform-binding-runtime]],
 [[julia-runtime-core-value-capture-helpers]], [[spec-facing-aggregate-selector-retirement-inventory]].
+
+## September 11 — complete consumer reading .1.51
+
+All465 lines are read. Fresh61 assertions lock retired selector rejection in
+authored/dead/unused and constructed generated-state routes; retained constructors,
+detached successive updates, mutable/pure split, collection rebinding, kind-error
+fields, set continuation, recursive invocation scope and empty accumulators run
+native and generated-plan paths. Static registered rules retain ambiguous push
+priority. No independently emitted module is executed by this consumer. Neutral
+11 migrations/7 executions/6 invalid selectors/8 constructors pass. Existing
+callback, function-scope and selector repairs remain open; the positive fixtures
+do not prove every composition. Replay: [[write-vivification-julia-runtime]] .1.51.

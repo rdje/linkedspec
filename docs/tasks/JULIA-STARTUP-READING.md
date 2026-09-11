@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `JULIA-STARTUP-READING`
-- Status: `active` / reading 50/52; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity, matching, staged, diagnostic, static, entry and selector-projection and member-suffix and literal-boundary and projection-metadata and selector/identifier repairs and diagnostic/isolation fixture corrections pending
+- Status: `active` / reading 51/52; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity, matching, staged, diagnostic, static, entry and selector-projection and member-suffix and literal-boundary and projection-metadata and selector/identifier repairs and diagnostic/isolation fixture corrections pending
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.5`
 - Created: `2026-09-11`
 - Last updated: `2026-09-11`
@@ -43,7 +43,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Inventory SHA-256: `ca3cff4fe4c0e162448d6dbac82d89898673023951afaeced17d5b9a838ccd10`.
 - Ordered range SHA-256: `fde325f80ae7b56c5890d149fbc965c09890890e963a1fa9aab08e8c9d962337`.
 - Line coordinates are one-based, inclusive LF physical lines. Every child pins its range digest.
-- Current physical reading: 50/52 children, 73,425/75,984 lines and 2,596,767/2,693,170 bytes; eighty-nine complete files.
+- Current physical reading: 51/52 children, 74,925/75,984 lines and 2,652,127/2,693,170 bytes; ninety-three complete files.
 - Exact replay and capacity assessment: `docs/knowledge/julia-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -59,7 +59,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Dependencies: Startup .3.5.0 decomposition committed; each child starts from a clean prior handoff.
   Children: `.1.1-.1.52`, with exact scopes below.
   Acceptance: Every child records physical coverage, comprehension, Knowledge reconciliation, findings and focused proof before its commit. Retain all current-delta and interrupted-range evidence.
-  Verification: Julia .1.50 completes staged/lifecycle/typed-source/classifier/Unicode-identity consumers and reads negative-isolation1–218: 50/52 groups, 73425 lines/2596767 bytes and 89 complete files. Complete staged491, lifecycle103, typed127, classifier1674 and identity130 pass2525 assertions, including fresh emitted Unicode execution. Neutral staged123/public129, typed14/0/231, Unicode806/9/8/2 and lifecycle14 checks pass. Carrier and diagnostic boundaries are qualified; all prior repairs including .2.26 remain open. .1.51 completes Unicode and continues binding/variadic/write consumers.
+  Verification: Julia .1.51 completes Unicode negative/routes, binding and variadic consumers, then reads write-vivification1–453: 51/52 groups, 74925 lines/2652127 bytes and 93 complete files. Classifier1674, routes81, negative1946, binding61, variadic55 and three complete write testsets362 pass4179 assertions. Neutral Unicode806/9/8/2, binding11/7/6/8, callable3/9/7 and write105 checks pass. Variadic emitted evidence is payload reconstruction, not independent host execution. All repairs remain open; .1.52 completes write and dormant progressive-authority reading.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.1.1`
@@ -914,14 +914,21 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Commit: `JULIA-STARTUP-READING.1.50 - complete staged source and Unicode identity reading`
 
 - ID: `JULIA-STARTUP-READING.1.51`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Julia group 51 and reconcile its source evidence.
   Dependencies: `JULIA-STARTUP-READING.1.50` committed; empty brief and clean repository.
+  Activation commit: `d9e63456a8ddf3616a8da20a54f720b410023435`.
+  Verification tier: `focused`
+  Focused checks: Exact five-range/source coverage, complete Unicode/binding/variadic consumers and neutral direct dependents, prior source/task/fact/history preservation, Knowledge/memory, both history checks, rendered book and normal doctrines.
+  Canonical trigger: `none` — bounded startup reading/evidence; no production, dependency, infrastructure or contract change.
   Scope: `julia/test/unicode_rule_label_negative_isolation_test.jl` lines 219-456; `julia/test/unicode_rule_label_routes_test.jl` lines 1-163; `julia/test/uniform_binding_contract_test.jl` lines 1-465; `julia/test/variadic_user_function_contract_test.jl` lines 1-181; `julia/test/write_vivification_contract_test.jl` lines 1-453
   Baseline evidence: 1500 fragments / 55360 bytes; ordered range SHA-256 `d1dc28e662a03774d9df789ad105aba2c9eb250aa94e24cc999e19eca54d05a3`.
   Acceptance: Physically read every owned byte, inspect current deltas, reconcile Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit. Do not count truncated output or unread consumer suffixes.
-  Verification: `pending`
-  Commit: `pending`
+  Comprehension: Completes eight-negative trust/role/artifact matrix, source-token boundary and selector/loader/primary redaction tests, plus adjacent-grammar isolation and parser/validator routes. Binding tests reject retired selectors in dead and unused contexts and constructed generated state, while native/generated mutations retain detached updates and static rule precedence. Variadic v1/v2 unions, left-to-right arguments, fresh rest arrays and rejection cases retain typed signatures through generated plans and emitted-payload reconstruction. Write prefix covers frozen AST/spans, eleven ordered successes and sixteen structural failures; expression-failure consumer remains partial through453.
+  Knowledge: Append current boundaries to Unicode preflight, Julia binding, variadic and write homes; write home retains exact selected replay. Qualify the historical variadic independently-emitted wording with the actual payload reconstruction mechanism.
+  Findings: No new runtime defect or prior repair closure. Existing binding/callable/identifier and all other repairs retain their owners. Partial write expression-failure test is excluded from this execution.
+  Verification: Ten bounded untruncated source windows cover1500 fragments/55360 baseline-identical bytes; ordered SHAd1dc28e662a03774d9df789ad105aba2c9eb250aa94e24cc999e19eca54d05a3. Classifier1674, routes81, negative1946, binding61, variadic55 and write1–390 plus only enclosing end362 pass4179 assertions. Neutral Unicode806/9/8/2, binding11/7/6/8, callable3/9/7 and write105 pass. Exact95-source/52-scope reconstruction remains unchanged; 607 prior task nodes, four old card prefixes, hot/history suffixes and26 rendered limitation headings are preserved. Knowledge73393/79000 lines, tasks84568/88000 and decisions12090/13000 fit; changes384/23076 and notes319/18045 require no rollover. Both history checks, Knowledge/memory and rendered book pass; normal doctrines govern landing.
+  Commit: `JULIA-STARTUP-READING.1.51 - complete Unicode binding and variadic consumer reading`
 
 - ID: `JULIA-STARTUP-READING.1.52`
   Status: `pending`
@@ -1688,7 +1695,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.51` | `pending` | Complete Unicode and continue binding/variadic/write reading after the clean .1.50 commit. |
+| 1 | `JULIA-STARTUP-READING.1.52` | `pending` | Complete write and dormant progressive-authority reading after clean .1.51. |
 
 ## Decisions
 
@@ -1719,6 +1726,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Source repairs retain startup prerequisites; those dependencies do not block source reading.
 
 ## Verification Log
+
+- `2026-09-11` .1.51: Julia .1.51 completes Unicode negative/routes, binding and variadic consumers, then reads write-vivification1–453: 51/52 groups, 74925 lines/2652127 bytes and 93 complete files. Classifier1674, routes81, negative1946, binding61, variadic55 and three complete write testsets362 pass4179 assertions. Neutral Unicode806/9/8/2, binding11/7/6/8, callable3/9/7 and write105 checks pass. Variadic emitted evidence is payload reconstruction, not independent host execution. All repairs remain open; .1.52 completes write and dormant progressive-authority reading.
 
 - `2026-09-11` .1.50: Julia .1.50 completes staged/lifecycle/typed-source/classifier/Unicode-identity consumers and reads negative-isolation1–218: 50/52 groups, 73425 lines/2596767 bytes and 89 complete files. Complete staged491, lifecycle103, typed127, classifier1674 and identity130 pass2525 assertions, including fresh emitted Unicode execution. Neutral staged123/public129, typed14/0/231, Unicode806/9/8/2 and lifecycle14 checks pass. Carrier and diagnostic boundaries are qualified; all prior repairs including .2.26 remain open. .1.51 completes Unicode and continues binding/variadic/write consumers.
 
@@ -1811,6 +1820,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Commit Log
 
+- `2026-09-11` .1.51: `JULIA-STARTUP-READING.1.51 - complete Unicode binding and variadic consumer reading`.
+
 - `2026-09-11` .1.50: `JULIA-STARTUP-READING.1.50 - complete staged source and Unicode identity reading`.
 
 - `2026-09-11` .1.49: `JULIA-STARTUP-READING.1.49 - read staged authority and own isolation test gap`.
@@ -1891,6 +1902,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Decomposition: `SESSION-STARTUP-READING.3.5.0 - freeze exact bounded Julia reading plan`.
 
 ## Changelog
+
+- `2026-09-11` .1.51: Complete Unicode/binding/variadic consumers and write1–453;51/52 groups and93 complete files. Preserve all repairs; final group .1.52 follows.
 
 - `2026-09-11` .1.50: Complete staged/lifecycle/source/classifier/identity reading and negative1–218;50/52 groups and89 complete files. All repairs remain open; .1.51 follows.
 

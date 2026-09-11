@@ -55,3 +55,26 @@ storage channel. Receiver-identity rejection remains the separate mutation guard
 The existing write consumer passes406 assertions; exact adjacent typed/diagnostic/
 logical/capture proof is recorded in [[julia-runtime-cursor-boundary-helpers]].
 No new nested-write failure was established and no repair is closed by reading.
+
+## September 11 — write consumer prefix reading .1.51
+
+Reading1–453 completes AST/syntax, success and structural-failure testsets through390.
+Typed path expressions and scalar source spans match the neutral fixture; eleven
+successes check exact segment/RHS event order and post-evaluation binding effects.
+Sixteen structural failures check diagnostic fields, authored segment spans and
+completed RHS effects. The expression-failure test392–465 is partially read and
+excluded from execution; no later write test is credited by this prefix run.
+
+At activationd9e63456a8ddf3616a8da20a54f720b410023435, classifier1674, routes81,
+negative1946, binding61, variadic55 and write-prefix362 pass4179 assertions.
+Neutral Unicode806/9/8/2, binding11/7/6/8, callable3/9/7 and write105 pass.
+All source and previous repair owners remain unchanged; no full write, package,
+canonical or other-backend execution is claimed.
+
+```bash
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include("julia/test/unicode_rule_label_classifier_test.jl"); include("julia/test/unicode_rule_label_routes_test.jl"); include("julia/test/unicode_rule_label_negative_isolation_test.jl"); include("julia/test/uniform_binding_contract_test.jl"); include("julia/test/variadic_user_function_contract_test.jl"); source=readlines("julia/test/write_vivification_contract_test.jl";keep=true); include_string(Main,join(source[1:390])*"\nend\n",joinpath(pwd(),"julia/test/write_vivification_contract_test.jl"))'
+bash tools/run_python_project_data.sh tools/check_unicode_rule_label_contract.py
+bash tools/run_python_project_data.sh tools/check_uniform_binding_contract.py
+bash tools/run_python_project_data.sh tools/check_callable_signature_contract.py
+bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py
+```

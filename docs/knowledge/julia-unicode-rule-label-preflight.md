@@ -160,3 +160,16 @@ fresh scalar census. Negative-isolation1–218 is physically read through its fi
 complete external AST trust matrix and a partial source-token test; it is excluded
 from this execution. .1.51 owns its suffix and native-route consumer. Earlier
 adjacent-grammar findings remain open. Exact replay: [[julia-source-value-authority-reading]].
+
+## September 11 — negative and native route consumer reading .1.51
+
+Negative219–456 and routes1–163 complete both consumers. Exact eight-invalid
+label matrices cover four declaration/edge roles, programmatic/reconstructed
+trust and five validation/artifact attempts. The completed source-token tests
+preserve legitimate colon/newline syntax boundaries; invalid selector identities
+and path-redacted loader/primary errors remain exact. Adjacent function, action,
+lifecycle, mark, regex and bounded-mode grammars keep separate policies. They do
+not close the already measured identifier-terminal-LF or fluent lexical gaps.
+Classifier1674, native routes81 and negative1946 pass3701 assertions. All identity
+consumer source was read in .1.50; its130 assertions are not repeated here.
+Neutral Unicode806/9/8/2 passes. Replay: [[write-vivification-julia-runtime]] .1.51.
