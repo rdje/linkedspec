@@ -62,3 +62,15 @@ admission remains pending in `.10.6.7`.
 Related facts: [[julia-semantic-runtime-observation-authority-map]],
 [[julia-semantic-runtime-observation-direct-capture]], [[julia-semantic-query-public-api]],
 [[semantic-introspection-neutral-contract]].
+
+## 2026-09-11 — runtime projection reading complete
+
+Julia .1.28 reads SemanticRuntimeProjection1-329 through EOF. It validates the
+compiled/unobserved base, closed typed slot/result fields, exactly one successful
+final selected-entry result, and existing selecting-edge/slot topology. Input
+identity uses an exact byte length plus lowercase hexadecimal classification,
+not a newline-sensitive regex end anchor. Source and shapes come from retained
+static owners; derivation builds a fresh frozen projection without execution.
+Fresh capture66 and projection157 compose with the nine semantic suites at1286.
+Prior action-observer wrapping .2.6 remains open; finite derivation proof does
+not close it. Replay: [[julia-semantic-static-correlation-gaps]].

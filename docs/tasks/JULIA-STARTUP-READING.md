@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `JULIA-STARTUP-READING`
-- Status: `active` / reading 27/52; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity, matching, staged and diagnostic repairs pending
+- Status: `active` / reading 28/52; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity, matching, staged, diagnostic, static and entry repairs pending
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.5`
 - Created: `2026-09-11`
 - Last updated: `2026-09-11`
@@ -43,7 +43,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Inventory SHA-256: `ca3cff4fe4c0e162448d6dbac82d89898673023951afaeced17d5b9a838ccd10`.
 - Ordered range SHA-256: `fde325f80ae7b56c5890d149fbc965c09890890e963a1fa9aab08e8c9d962337`.
 - Line coordinates are one-based, inclusive LF physical lines. Every child pins its range digest.
-- Current physical reading: 27/52 children, 38,925/75,984 lines and 1,368,638/2,693,170 bytes; thirty-three complete files.
+- Current physical reading: 28/52 children, 40,425/75,984 lines and 1,419,791/2,693,170 bytes; thirty-five complete files.
 - Exact replay and capacity assessment: `docs/knowledge/julia-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -59,7 +59,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Dependencies: Startup .3.5.0 decomposition committed; each child starts from a clean prior handoff.
   Children: `.1.1-.1.52`, with exact scopes below.
   Acceptance: Every child records physical coverage, comprehension, Knowledge reconciliation, findings and focused proof before its commit. Retain all current-delta and interrupted-range evidence.
-  Verification: Julia .1.27 completes SemanticIndex and reads SemanticQuery1-1370: 27/52 groups, 38,925 fragments /1,368,638 bytes and thirty-three complete files. Fresh semantic1,063 and budget26 assertions pass; six full Julia/neutral responses agree while exposing explain relation/depth overruns and a premature page-budget warning. Shared startup .82.1-.82.4 own contract expectations, neutral repair, bounded backend implementation and transport/public proof. Neutral semantic6/20/128 passes. All prior repairs, source, history and ADR0115 controls remain. Julia .1.28 is next; no full component/canonical gate or dependency build.
+  Verification: Julia .1.28 completes SemanticQuery and SemanticRuntimeProjection and reads SemanticStaticProjection1-954: 28/52 groups, 40,425 fragments /1,419,791 bytes and thirty-five complete files. Fresh semantic1,286 and diagnostic67 assertions pass. Valid mixed parent/structural slot order can reject semantic construction; single-rule or unused-function sources omit entry explanations. Julia .2.16/.2.17 own separate implementation and public proof. Missing-rule and out-of-range-slot diagnostics remain distinct under startup .23. Neutral semantic6/20/128 passes. All prior repairs, source, history and ADR0115 controls remain. Julia .1.29 is next; no full component/canonical gate or dependency build.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.1.1`
@@ -522,14 +522,21 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Commit: `JULIA-STARTUP-READING.1.27 - read query policy and own shared budget contract gaps`.
 
 - ID: `JULIA-STARTUP-READING.1.28`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Julia group 28 and reconcile its source evidence.
   Dependencies: `JULIA-STARTUP-READING.1.27` committed; empty brief and clean repository.
   Scope: `julia/src/semantic/SemanticQuery.jl` lines 1371-1587; `julia/src/semantic/SemanticRuntimeProjection.jl` lines 1-329; `julia/src/semantic/SemanticStaticProjection.jl` lines 1-954
   Baseline evidence: 1500 fragments / 51153 bytes; ordered range SHA-256 `d7d30edd5c05d59c1a8fe97eea8ec1067d24077c0cbcb85d4af6d19a8eb870c6`.
+  Activation commit: `76a5299483e47b6494e8353c9b040b504be03760`.
+  Verification tier: `focused`
+  Focused checks: Exact source/range reconstruction; eleven existing semantic source/outcome/static/call/query/observation suites; seven independent typed/runtime/public controls; neutral contract; prior-task/source/history preservation, Knowledge, memory, book and normal doctrines.
+  Canonical trigger: `none` — ordinary source-reading/defect-intake evidence; no source, normative public contract, format, infrastructure or dependency change.
   Acceptance: Physically read every owned byte, inspect current deltas, reconcile Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit. Do not count truncated output or unread consumer suffixes.
-  Verification: `pending`
-  Commit: `pending`
+  Comprehension: Completes rejected-query envelopes, cursor freezing, raw/typed checked integer conversion and distinct immutable object/array conversion. Runtime derivation validates compiled/unobserved base, typed closed event topology, final entry/result and exact byte/hex input identity; source/shapes derive from retained static slots/edges/rules and produce a fresh frozen index without target execution. Static prefix builds compiled/failed graphs, preserves native/fallback diagnostics, correlates typed edge/lifecycle ownership and grouped authored members, and defines exact line ranges. Mixed slot filtering is incorrectly paired with an unfiltered compiled prefix; entry explanations depend on unrelated function/rule-count gates. Remaining static scanner/shape/canonicalization helpers are unread.
+  Knowledge: New docs/knowledge/julia-semantic-static-correlation-gaps.md preserves all seven sources and67-assertion replay. Existing static-plan, observation-derivation, query-public and native-failure facts gain dated evidence without erasing earlier claims.
+  Findings: New .2.16.1/.2 own mixed-slot correlation; .2.17.1/.2 own entry-explanation contract impact and implementation. Startup .23 receives positive Julia failure-class evidence, not closure. Shared .82, Julia .2.15 and every earlier repair remain pending. No other-backend, reconstructed/emitted or MCP recurrence is claimed.
+  Verification: Seven untruncated windows read1500 fragments /51153 baseline-identical bytes, ordered SHAd7d30edd5c05d59c1a8fe97eea8ec1067d24077c0cbcb85d4af6d19a8eb870c6. Raw query suffix0e0e63c64166b1b5f9d7ec5386ab473a5eafd10d4bdb6c45cef8933dececb784 (6608 bytes), runtime0c7c4ffc995a93bfa380ce4cb25af704f761b7477b5fa5ea0dee46f6dfa87742 (11909), static prefix12abc5788001cfa8b7a248c6c3290359993f0bbe50d6d38bf3b7afe80a03e38d (32636). Eleven existing suites pass1286, including observation66/projection157; seven public/typed/runtime controls pass67 with three limitation cases and four comparisons. Exact saved-fence replay grants no duplicate credit. Neutral semantic6/20/128 remains rollout9/0/admission6/0. Exact coverage/prior-node/source/history, Knowledge, memory, histories, rendered book and normal doctrines govern landing. No full component/canonical gate or dependency build.
+  Commit: `JULIA-STARTUP-READING.1.28 - read semantic projections and own mixed slot and entry gaps`.
 
 - ID: `JULIA-STARTUP-READING.1.29`
   Status: `pending`
@@ -776,7 +783,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Goal: Preserve disjoint repair ownership for every confirmed Julia finding.
   Dependencies: Findings from .1; source repair additionally requires startup .3/.4/.5.
   Acceptance: Reuse exact existing startup owners when applicable; otherwise add bounded repair children with source mechanism, reproduction, acceptance and unblock conditions. No finding is closed by reading alone.
-  Children: .2.1 callable-body selector validation; .2.2 attached-switch body/duplicate-default validation; .2.3 recognition-effect integration; .2.4 MCP pattern full matching; .2.5 progressive identity full matching; .2.6 semantic callback action passthrough; .2.7 recognition attempt preflight; .2.8 helper callback recursion identity; .2.9 numeric boundaries; .2.10 safe slice/drop arithmetic; .2.11 input_slice arity; .2.12 selected-slot mode preflight; .2.13 staged pattern validation; .2.14 diagnostic byte retention; .2.15 semantic regex call source. Nested authority and diagnostic review retain startup .37.1/.37.2. Prior README findings retain startup .41.2/.41.3/.41.7.
+  Children: .2.1 callable-body selector validation; .2.2 attached-switch body/duplicate-default validation; .2.3 recognition-effect integration; .2.4 MCP pattern full matching; .2.5 progressive identity full matching; .2.6 semantic callback action passthrough; .2.7 recognition attempt preflight; .2.8 helper callback recursion identity; .2.9 numeric boundaries; .2.10 safe slice/drop arithmetic; .2.11 input_slice arity; .2.12 selected-slot mode preflight; .2.13 staged pattern validation; .2.14 diagnostic byte retention; .2.15 semantic regex call source; .2.16 mixed slot correlation; .2.17 conditional entry explanation. Nested authority and diagnostic review retain startup .37.1/.37.2. Prior README findings retain startup .41.2/.41.3/.41.7.
   Verification: `pending` repairs; .1.3 owns the callable-body selector gap, and .1.4 confirms attached-switch projection omission and default replacement. Earlier documentation and helper-arity owners remain intact.
   Commit: `pending`
 
@@ -1196,6 +1203,58 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Verification: `pending`
   Commit: `pending`
 
+- ID: `JULIA-STARTUP-READING.2.16`
+  Status: `pending`
+  Goal: Correlate mixed structural regex slots and cross-rule parent matchers without positional mismatch.
+  Dependencies: Startup .3/.4/.5 and .1.28 diagnostic intake.
+  Evidence: Top with /a/ -> Child before standalone /b/ compiles and executes to "a" but semantic_index rejects authored/compiled regex-slot identity. Reversing these members permits semantic construction. SemanticStaticProjection748-769 filters parent matchers from authored slots then compares retained slots against the unfiltered compiled.regex_patterns prefix.
+  Children: .2.16.1 implementation and independent ordering proof; .2.16.2 supported-route/public proof.
+  Acceptance: Correlate by actual typed slot ownership and preserve both authored identity and runtime index semantics. Do not delete compiler matcher evidence or adapt expected order to conceal the mismatch. Keep ordinary/duplicate/self-indexed and cross-rule cases correct.
+  Verification: `pending` repair; exact .1.28 controls remain dated diagnostic evidence.
+  Commit: `pending`
+
+- ID: `JULIA-STARTUP-READING.2.16.1`
+  Status: `pending`
+  Goal: Repair mixed Julia static regex-slot source/identity correlation.
+  Dependencies: Startup prerequisites and .1.28 committed.
+  Acceptance: Add independent RED/GREEN parent-first/slot-first/interleaved/multiple-parent/duplicate-pattern/self-indexed controls, comparing authored ranges and typed compiled target indices with public semantic records/relations. Preserve runtime values and every existing fixture digest; split any required shared slot-contract decision before implementation.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-STARTUP-READING.2.16.2`
+  Status: `pending`
+  Goal: Recur mixed-slot semantic construction through supported carriers and transport.
+  Dependencies: .2.16.1 and startup prerequisites.
+  Acceptance: Verify native typed/raw-neutral queries, supported reconstructed/generated/observed indexes and MCP with independent slot/source expectations. Census counterparts without assumed parity, update public/Knowledge evidence and run designated canonical admission/public proof before closure.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-STARTUP-READING.2.17`
+  Status: `pending`
+  Goal: Make semantic entry-explanation availability independent of unrelated function and rule-count gates.
+  Dependencies: Startup .3/.4/.5 and .1.28 diagnostic intake; coordinate startup .22 without conflating reverse guards.
+  Evidence: SemanticStaticProjection399 gates entry explanation on an empty function list and more than one compiled rule. A two-rule source exposes an entry decision; prepending an unused function removes it. A single-rule source also has no entry decision despite retaining a selected entry.
+  Children: .2.17.1 contract-impact audit and implementation; .2.17.2 supported-route/public proof.
+  Acceptance: Preserve selected entry authority and exact truthful explanation for the agreed supported surface; audit frozen model/hash impact before removing fixture-shaped conditions. Document any deliberate contract boundary explicitly instead of leaving unrelated source shape to decide explainability.
+  Verification: `pending` repair/contract reconciliation; no silent model expansion is authorized by the intake.
+  Commit: `pending`
+
+- ID: `JULIA-STARTUP-READING.2.17.1`
+  Status: `pending`
+  Goal: Audit and repair conditional Julia entry-explanation projection.
+  Dependencies: Startup prerequisites and .1.28 committed.
+  Acceptance: Freeze one-rule/multi-rule/unused-function/interleaved-function and explicit/default/marker selector expectations from real entry authority. Own any neutral model/hash migration separately before implementation; add independent RED/GREEN list/explain evidence and retain function-call/staged projection without adding fabricated decisions.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-STARTUP-READING.2.17.2`
+  Status: `pending`
+  Goal: Close entry-explanation recurrence across supported semantic carriers and MCP.
+  Dependencies: .2.17.1 and startup prerequisites.
+  Acceptance: Recur exact entry decisions and source evidence through typed/raw-neutral queries, supported generated/reconstructed/observed and transport paths. Census counterparts, preserve budgets/privacy/immutability, update public limits and run designated canonical proof before declaring closure.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `JULIA-STARTUP-READING.3`
   Status: `pending`
   Goal: Independently close Julia reading and route Lua startup reading.
@@ -1230,7 +1289,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.28` | `pending` | Read SemanticQuery1371-1587, SemanticRuntimeProjection1-329 and SemanticStaticProjection1-954 after clean .1.27; reconcile focused proof and preserve repairs. |
+| 1 | `JULIA-STARTUP-READING.1.29` | `pending` | Read SemanticStaticProjection955-1505, SourceEmitter1-848 and spec/Ast1-101 after clean .1.28; reconcile focused proof and preserve repairs. |
 
 ## Decisions
 
@@ -1253,6 +1312,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Source repairs retain startup prerequisites; those dependencies do not block source reading.
 
 ## Verification Log
+
+- `2026-09-11` .1.28: Julia .1.28 completes SemanticQuery and SemanticRuntimeProjection and reads SemanticStaticProjection1-954: 28/52 groups, 40,425 fragments /1,419,791 bytes and thirty-five complete files. Fresh semantic1,286 and diagnostic67 assertions pass. Valid mixed parent/structural slot order can reject semantic construction; single-rule or unused-function sources omit entry explanations. Julia .2.16/.2.17 own separate implementation and public proof. Missing-rule and out-of-range-slot diagnostics remain distinct under startup .23. Neutral semantic6/20/128 passes. All prior repairs, source, history and ADR0115 controls remain. Julia .1.29 is next; no full component/canonical gate or dependency build.
 
 - `2026-09-11` .1.27: Julia .1.27 completes SemanticIndex and reads SemanticQuery1-1370: 27/52 groups, 38,925 fragments /1,368,638 bytes and thirty-three complete files. Fresh semantic1,063 and budget26 assertions pass; six full Julia/neutral responses agree while exposing explain relation/depth overruns and a premature page-budget warning. Shared startup .82.1-.82.4 own contract expectations, neutral repair, bounded backend implementation and transport/public proof. Neutral semantic6/20/128 passes. All prior repairs, source, history and ADR0115 controls remain. Julia .1.28 is next; no full component/canonical gate or dependency build.
 
@@ -1295,6 +1356,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Commit Log
 
+- `.1.28`: `JULIA-STARTUP-READING.1.28 - read semantic projections and own mixed slot and entry gaps`.
+
 - `.1.27`: `JULIA-STARTUP-READING.1.27 - read query policy and own shared budget contract gaps`.
 
 - `.1.26`: `JULIA-STARTUP-READING.1.26 - read semantic source authority and own regex call correlation`.
@@ -1325,6 +1388,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Decomposition: `SESSION-STARTUP-READING.3.5.0 - freeze exact bounded Julia reading plan`.
 
 ## Changelog
+
+- `2026-09-11`: Completed .1.28 from clean 76a52994; query/observation projection and static prefix read, .2.16/.2.17 repair-owned, startup .23 evidence preserved and .1.29 next.
 
 - `2026-09-11`: Completed .1.27 from clean 7b43a264; query reading and paired budget evidence open shared startup .82, preserve all prior source/repairs and route .1.28.
 

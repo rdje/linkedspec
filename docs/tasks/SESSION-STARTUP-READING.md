@@ -2233,7 +2233,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas.
   Children: `.3.5.0` owns decomposition; JULIA-STARTUP-READING.1 owns 52 reading children and .3 owns closeout.
   Reading owner: `docs/tasks/JULIA-STARTUP-READING.md` retains exact scope/digest, comprehension and repair evidence. This startup node remains the prerequisite owner.
-  Verification: Julia .1.27 completes SemanticIndex and reads SemanticQuery1-1370: 27/52 groups, 38,925 fragments /1,368,638 bytes and thirty-three complete files. Fresh semantic1,063 and budget26 assertions pass; six full Julia/neutral responses agree while exposing explain relation/depth overruns and a premature page-budget warning. Shared startup .82.1-.82.4 own contract expectations, neutral repair, bounded backend implementation and transport/public proof. Neutral semantic6/20/128 passes. All prior repairs, source, history and ADR0115 controls remain. Julia .1.28 is next; no full component/canonical gate or dependency build. Exact plan and all source identities remain frozen in the Julia owner.
+  Verification: Julia .1.28 completes SemanticQuery and SemanticRuntimeProjection and reads SemanticStaticProjection1-954: 28/52 groups, 40,425 fragments /1,419,791 bytes and thirty-five complete files. Fresh semantic1,286 and diagnostic67 assertions pass. Valid mixed parent/structural slot order can reject semantic construction; single-rule or unused-function sources omit entry explanations. Julia .2.16/.2.17 own separate implementation and public proof. Missing-rule and out-of-range-slot diagnostics remain distinct under startup .23. Neutral semantic6/20/128 passes. All prior repairs, source, history and ADR0115 controls remain. Julia .1.29 is next; no full component/canonical gate or dependency build. Exact plan and all source identities remain frozen in the Julia owner.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.5.0`
@@ -2687,6 +2687,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     and an undefined-target warning. The bare missing-rule control retains correct code, span, and explanation.
     .3.3.32 Rust missing-rule and out-of-range-slot controls retain correct distinct diagnostics; the
     latter is caught by resolve_selector before slot-failure normalization. Token-use acceptance is .68.
+  Julia .1.28 controls: bare Missing preserves native bare_edge_target_undefined and truthful unknown_rule_reference/source/dependency evidence; Child[9] preserves regex_slot_index_out_of_range/resolve_selector and exact authored source without a fabricated decision. The selector guard precedes failure normalization. Exact67-assertion controls live in docs/knowledge/julia-semantic-static-correlation-gaps.md; no Perl repair or full failure-class closure is claimed.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.24`

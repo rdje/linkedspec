@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 27/52 owned groups; its twenty-eighth reading child is next, with approved ADR0115 capacity in place.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 28/52 owned groups; its twenty-ninth reading child is next, with approved ADR0115 capacity in place.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,14 +297,28 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 27/52 groups complete:** source-index validation is fully
-read, followed by semantic query policy and evaluation through line 1,370.
-Coverage is 38,925 lines /1,368,638 bytes and thirty-three complete files.
-The query consumes a detached semantic projection, applies source redaction,
-pages the primary stream and reports logical costs. Existing semantic checks
-pass 1,063 assertions; six budget controls pass 26 assertions and match the
-neutral evaluator's complete responses. Exact scopes remain in
+**Julia reading is 28/52 groups complete:** query and runtime-observation
+projection are fully read, followed by static projection through line 954.
+Coverage is 40,425 lines /1,419,791 bytes and thirty-five complete files.
+Observation derivation checks typed events against static rule/edge/slot
+ownership and creates a fresh index. Existing semantic checks pass 1,286
+assertions; seven static controls pass 67 assertions. Exact scopes remain in
 `docs/tasks/JULIA-STARTUP-READING.md`.
+
+**Known Julia limitation — mixed regex-slot correlation:** a valid rule with a
+cross-rule matcher before a standalone structural slot executes normally but
+can fail semantic-index construction. The projector compares filtered authored
+slots against an unfiltered compiled-pattern prefix. Reversing those members
+succeeds in the measured control. Julia `.2.16.1/.2` own implementation and
+supported-route/public proof.
+
+**Known Julia limitation — conditional entry explanations:** a two-rule source
+can explain its entry selection, while adding an unused function removes that
+decision. A single-rule source also returns `not_explainable` despite retaining
+the selected entry. Julia `.2.17.1/.2` own contract-impact review and repair.
+The missing-rule and out-of-range-slot controls preserve distinct truthful
+failure diagnostics; these do not close the separate Perl failure repair.
+Exact sources and causal proof: `docs/knowledge/julia-semantic-static-correlation-gaps.md`.
 
 **Known shared limitation — semantic query budgets:** Julia and the neutral
 evaluator can return two explanation relations with `max_relations=1`, or
@@ -629,8 +643,8 @@ SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` sti
 own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
-Julia has read twenty-seven of 52 exact groups across 95 baseline entries;
-its twenty-eighth physical reading child is next, followed by the remaining Lua/supporting
+Julia has read twenty-eight of 52 exact groups across 95 baseline entries;
+its twenty-ninth physical reading child is next, followed by the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,

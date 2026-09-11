@@ -168,3 +168,20 @@ dependency-eligible leaf only after the closeout commit is clean.
 See [[julia-semantic-introspection-authority-map]], [[semantic-introspection-neutral-contract]],
 [[semantic-introspection-static-rule-authority]], [[perl-semantic-static-projection]],
 [[rust-semantic-static-projection]], and [[dart-semantic-introspection-authority-map]].
+
+## 2026-09-11 — static prefix reading exposes mixed-slot and entry gates
+
+Julia .1.28 reads SemanticStaticProjection1-954. The compiled/failed graph
+builders retain typed edge/lifecycle identity, source references, canonical
+relation families and native failure normalization. However, parent matcher
+exclusion is not correct for every mixed rule: filtered authored structural
+slots are compared against the unfiltered compiled-pattern prefix at762. A valid
+parent-first rule executes but semantic construction rejects; reversing members
+succeeds. Earlier fixture proof did not cover this same-rule ordering.
+
+Entry explanations are conditional on no functions and multiple compiled rules
+at399. Single-rule and unused-function controls retain selected Top but return
+not_explainable. Julia .2.16/.2.17 own separate repairs, including entry contract/
+hash impact before any model revision. Exact seven controls/67 assertions and
+fresh eleven-suite1286 proof are in [[julia-semantic-static-correlation-gaps]].
+Remaining static scanner/shape/canonicalization source remains unread.

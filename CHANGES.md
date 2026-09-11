@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.28 - read semantic projections and own mixed slot and entry gaps
+
+Read1,500 fragments /51,153 bytes, reaching28/52 groups and35 complete files.
+Semantic1,286 and diagnostic67 assertions pass. Own mixed-slot correlation
+and conditional entry explanation as .2.16/.2.17; preserve distinct failure
+evidence, all prior repairs/source/history and synchronized book/pointers.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.27 - read query policy and own shared budget contract gaps
 
 Read1,500 fragments /52,508 bytes, reaching27/52 groups and33 complete files.

@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia static slot and entry evidence gates
+
+Filtering authored parent matchers before comparing the unfiltered compiled
+pattern prefix rejects a valid mixed-order source. Entry explanations depend
+on absent functions and multiple rules. Separate failure controls preserve
+missing-rule versus out-of-range-slot evidence; all repairs remain task-owned.
+
 ## 2026-09-11 — Shared semantic budget and paging inconsistencies
 
 Explain limits records but omits relation/depth bounds; page selection flags

@@ -68,3 +68,14 @@ for my $case (['token_escape',$escape,'recognition_token_escape'],['missing_rule
 }
 STARTUP48_EXACT_FAILURES
 ```
+
+## September 11 Julia failure-class controls
+
+Julia .1.28 adds the exact bare Missing and existing Child[9] controls in
+[[julia-semantic-static-correlation-gaps]]. Missing preserves native
+bare_edge_target_undefined and the intended unknown_rule_reference record, exact
+source and truthful dependency explanation. Child[9] instead preserves
+regex_slot_index_out_of_range/resolve_selector in native/projected diagnostics,
+with exact authored source and no decision/explanation rows. Its selector guard
+precedes the broader normalization branch. These are positive Julia controls
+under startup .23, not a Perl repair or complete failure-class census.

@@ -82,3 +82,14 @@ while exposing unchecked explain relation/depth costs and a premature list-page
 budget warning. Existing immutability/fixture success does not close those
 boundaries. Shared startup .82 owns the repair in
 [[semantic-query-budget-contract-gaps]]; query remains target-execution-free.
+
+## 2026-09-11 — query helper reading complete
+
+Julia .1.28 completes SemanticQuery1371-1587 through EOF. Rejected requests
+return empty streams/zero costs; raw cursor evidence is frozen or discarded if
+its host type is unsupported. Typed/raw integer paths reject Bool and translate
+unsupported Int conversion; separate tuple-backed object/array wrappers preserve
+empty-container identity and thaw to fresh JSON values. Existing query and
+observation composition passes1286. Shared budget .82 and all source/projection
+repairs remain pending; helper reading does not expand those finite assertions.
+Replay: [[julia-semantic-static-correlation-gaps]].
