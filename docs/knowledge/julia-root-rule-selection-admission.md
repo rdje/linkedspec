@@ -54,3 +54,22 @@ Related: [[julia-root-rule-selection-routes]],
 [[julia-root-rule-selection-core]], [[julia-rule-local-cursor-admission]],
 [[root-rule-selection-precedence]], and
 [[dart-root-rule-selection-admission]].
+
+## September 11 admission-prefix reading
+
+Julia .1.39 reads1–344:344 fragments /12,024 bytes,
+SHA8f5c77e6e0b70bdc713bea0de7de3a436540e9a242b681049a2876b6695a34af.
+The prefix defines entry-lifecycle selection witnesses, canonical trace source,
+empty/marked/markerless compiled fixtures and fresh included emitted-parser hosts.
+Twelve complete role bodies cover neutral selection/failure/strict rows, native,
+loaded, reconstructed, generated direct/traced, emitted direct/traced,
+descriptor and diagnostics; the runtime-trace body only begins at the boundary.
+Descriptor tests preserve authored top flags and omit invocation-specific chosen
+entry state. The stale generated contract rejects before an unknown root selector.
+The trace/primary/request-trace suffix and final role dispatch remain unread.
+
+Current neutral governance supersedes the dated5/7/39 admission snapshot above:
+eight selections /three failures /three strict cases, five backends,7/7 complete,
+24 public documents /18 forbidden claims /54 mutations. Focused replay is in
+[[julia-recursive-observation-admission]]; source-reading credit remains bounded
+separately from complete consumer execution. All existing repairs remain open.

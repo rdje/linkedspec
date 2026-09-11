@@ -74,3 +74,47 @@ claims are limited by that open repair. The original203-assertion and rollout5/9
 snapshots are dated admission history; current neutral recognition is138/250/58,
 rollout9/9, and typed source is14/0/231. Current focused replay lives in
 [[julia-runtime-structured-diagnostics]]. No repair is closed by this reading.
+
+## September 11 complete observation-consumer reading
+
+Julia .1.39 reads all381 lines /13,435 bytes of the observation consumer,
+SHAf2a167b6d5014fdef9f5f7c00db07fd4f236b851856016236fe8163cae2cc11b.
+The module isolates its fixtures/helpers. Dedicated-node checks exclude eager
+Child calls; malformed targets/operands and explicit rule/function-reachable
+observation writes reject. They retain the structural-edge limitation above.
+A false payload and exact nine-field observation agree across native,
+reconstructed, generated-plan and freshly included emitted-module routes.
+Mutating returned nested positions does not affect the next parse.
+
+The scalar-position emoji fixture, failed child, zero-regex coordinator and
+action-edge parent-entry/local-match distinction are explicit value controls.
+Ordinary nested recursion keeps its existing cutoff; direct/mutual observed
+nonprogress and aborted recognition retain typed diagnostics. The aborted test
+asserts the diagnostic text, not a complete outward aborted observation record.
+No broader coverage or repair closure follows. Current typed-source governance
+is14/0/231, with recognition138/250/58; old admission snapshots stay dated.
+
+### Focused .1.39 replay
+
+```bash
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no - <<'JULIA_READING39'
+using LinkedSpecJulia, JSON3, Test
+const REPO_ROOT=pwd()
+include("julia/test/recognition_transaction_contract_test.jl")
+include("julia/test/recursive_observation_contract_test.jl")
+include("julia/test/repeated_action_result_contract_test.jl")
+include("julia/test/root_rule_selection_admission_test.jl")
+include("julia/test/typed_source_location_contract_test.jl")
+JULIA_READING39
+bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py
+bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py
+bash tools/run_python_project_data.sh tools/check_repeated_action_result_contract.py
+bash tools/run_python_project_data.sh tools/check_root_rule_selection_contract.py
+```
+
+Whole-consumer execution grants no extra reading credit. Root-admission source
+after344 and the separately executed typed-source consumer retain their own
+numeric reading owners; no full component/canonical gate or dependency build runs.
+
+The fresh .1.39 run passes207 recognition +30 observation +162 repeated-result
++137 root-admission +127 typed-source assertions,663 total, and all four neutral checks.

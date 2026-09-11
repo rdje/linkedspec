@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Recognition and observation tests retain their exact coverage
+
+Recognition graph/progress fixtures call private validators directly; production
+effect closure remains separately repair-owned. Observation validates detached
+multibyte records and typed diagnostics; repeated results use an offline emitted
+process. Root entry returns isolate selection before matching. Focused663 pass.
+
 ## 2026-09-11 — Consumer source preserves distinct authority and emitted proofs
 
 Progressive creates an independent emitted host with caller-supplied authority;

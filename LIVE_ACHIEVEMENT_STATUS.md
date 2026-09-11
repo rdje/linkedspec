@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.38 completes stdio, progressive-dispatch and punctuation consumers and reads recognition1–469:38/52 groups,55425 lines/1938280 bytes and56 complete files. Fresh stdio170/progressive62/punctuation55/recognition207 pass494 assertions; neutral transport35/10/10/76, progressive9/9/116 plus public6/12/10/60, recognition138/250/58 plus public3/26/45 and guide1/14/18, and punctuation6/4/6 pass. Emitted progressive execution is independent; punctuation reconstructs emitted payload data. Private recognition controls do not close effect/preflight defects. All prior repairs remain open; .1.39 is next. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.39 completes recognition, recursive-observation and repeated-result consumers and reads root admission1–344:39/52 groups,56925 lines/1991460 bytes and59 complete files. Recognition207/observation30/repeated162/root137/typed127 pass663 assertions; neutral recognition138/250/58, typed14/0/231, repeated8/0/54 and root7/0/54 pass. Source distinguishes direct private effect validation, detached observation, offline emitted repetition and entry-lifecycle root selection. Root source after344 remains unread. All prior repairs remain open; .1.40 is next. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.82` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `JULIA-STARTUP-READING.1.38 - read stdio progressive and recognition consumers` — Julia .1.38 completes stdio, progressive-dispatch and punctuation consumers and reads recognition1–469:38/52 groups,55425 lines/1938280 bytes and56 complete files. Fresh stdio170/progressive62/punctuation55/recognition207 pass494 assertions; neutral transport35/10/10/76, progressive9/9/116 plus public6/12/10/60, recognition138/250/58 plus public3/26/45 and guide1/14/18, and punctuation6/4/6 pass. Emitted progressive execution is independent; punctuation reconstructs emitted payload data. Private recognition controls do not close effect/preflight defects. All prior repairs remain open; .1.39 is next.
+- `JULIA-STARTUP-READING.1.39 - read recognition observation and repeated-result consumers` — Julia .1.39 completes recognition, recursive-observation and repeated-result consumers and reads root admission1–344:39/52 groups,56925 lines/1991460 bytes and59 complete files. Recognition207/observation30/repeated162/root137/typed127 pass663 assertions; neutral recognition138/250/58, typed14/0/231, repeated8/0/54 and root7/0/54 pass. Source distinguishes direct private effect validation, detached observation, offline emitted repetition and entry-lifecycle root selection. Root source after344 remains unread. All prior repairs remain open; .1.40 is next.
 
 ## Next Action
 
-- `JULIA-STARTUP-READING.1.39` — Continue the four exact consumer ranges after the clean .1.38 commit and empty brief.
+- `JULIA-STARTUP-READING.1.40` — Continue root and cursor consumer reading after the clean .1.39 commit and empty brief.
 
 ## Recent Completions
+
+- `2026-09-11` — `JULIA-STARTUP-READING.1.39` reads1500 fragments /53180 bytes;663 existing assertions and four neutral checks pass; all repairs remain open.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.38` reads1500 fragments /57682 bytes;494 existing assertions and four neutral checks pass; all repair owners remain.
 
@@ -48,8 +50,6 @@
 - `2026-09-11` — `JULIA-STARTUP-READING.1.27` reads1,500 fragments /52,508 bytes;1,063 existing and26 budget assertions plus six neutral comparisons pass; shared .82 remains open.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.26` reads1,500 fragments /51,253 bytes;1,063 existing and92 diagnostic assertions pass; semantic source repair .2.15 remains open.
-
-- `2026-09-11` — `JULIA-STARTUP-READING.1.25` reads1,500 fragments /45,333 bytes;569 existing assertions and neutral checks pass; casing evaluator complete, all repairs open.
 
 ## History
 

@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `30723f0f08b0e12f5e425058b87435e801876633` — clean containment .13 capacity handoff.
-- latest_completed_leaf: `JULIA-STARTUP-READING.1.38 - read stdio progressive and recognition consumers`; exact reading and focused proof.
-- active_work_unit: `JULIA-STARTUP-READING.1.39` — pending after the verified .1.38 handoff.
-- next_action: Read Julia .1.39 recognition, observation, repeated-result and root-admission ranges from the clean .1.38 commit.
+- activation_commit: `b5a62f7447ec6eb33c2cbfad2fa98ad0446c302b` — clean Julia .1.38 handoff.
+- latest_completed_leaf: `JULIA-STARTUP-READING.1.39 - read recognition observation and repeated-result consumers`; exact reading and focused proof.
+- active_work_unit: `JULIA-STARTUP-READING.1.40` — pending after the verified .1.39 handoff.
+- next_action: Read the six Julia .1.40 root/cursor consumer ranges from the clean .1.39 commit and verify focused evidence.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
-- in_flight_uncommitted: none; .1.38 is committed and no jobs remain.
+- in_flight_uncommitted: none; .1.39 is committed and no jobs remain.
 - blockers: none for Julia reading; ADR0116 admits Knowledge79000 and decisions13000 lines with a .13-only focused exception.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -57,4 +57,4 @@
   Segment 4979-6e4108166552 preserves 213 lines /12545 bytes; all other controls remain unchanged. Proportionate governance: ADR0115.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-11 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart read; Julia 38/52 groups, 55425/75984 lines, 1938280/2693170 bytes, fifty-six complete files. Lua/supporting code, formal book .4 and policy .5 remain.
+- latest_bootstrap_read: 2026-09-11 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart read; Julia 39/52 groups, 56925/75984 lines, 1991460/2693170 bytes, fifty-nine complete files. Lua/supporting code, formal book .4 and policy .5 remain.

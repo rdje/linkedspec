@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 38/52 owned groups. ADR0116 admits the finite evidence allowance; ADR0115 remains limited to history.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 39/52 owned groups. ADR0116 admits the finite evidence allowance; ADR0115 remains limited to history.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,15 +297,16 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 38/52 groups complete:** stdio, progressive-dispatch and
-punctuation consumers are fully read; recognition test reading reaches line469.
-Coverage is55,425 lines /1,938,280 bytes and fifty-six complete files. The four
-consumers pass494 assertions, with their neutral transport, progressive,
-recognition and punctuation checks. Progressive executes a freshly included
-emitted module with caller authority; punctuation reconstructs emitted payload
-data. Recognition's private token and mark controls preserve falsey values and
-detached state but do not resolve the effect-integration or late-preflight defects.
-All previously owned limitations remain open; reading `.1.39` is next.
+**Julia reading is 39/52 groups complete:** recognition, recursive-observation
+and repeated-result consumers are fully read; root-selection admission reading
+reaches line344. Coverage is56,925 lines /1,991,460 bytes and fifty-nine complete
+files. The selected consumers and typed-source dependent pass663 assertions;
+neutral recognition, typed-source, repeated-result and root-selection checks pass.
+Recognition's graph fixtures call private validators directly, so the production
+effect-integration gap remains open. Observation proves detached multibyte records;
+repetition uses an independent offline emitted process. Entry-lifecycle returns
+make root selection observable before matching. All existing limitations remain
+open; `.1.40` continues root and cursor reading.
 
 **Approved Julia evidence capacity:** the director granted Knowledge lines
 72,000→79,000 and decision-record lines12,000→13,000 under ADR0116. The finite
@@ -735,8 +736,8 @@ SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` sti
 own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
-Julia has read thirty-eight of 52 exact groups across 95 baseline entries;
-its thirty-ninth child follows, with the remaining Lua/supporting
+Julia has read thirty-nine of 52 exact groups across 95 baseline entries;
+its fortieth child follows, with the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,

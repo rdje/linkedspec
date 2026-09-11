@@ -60,3 +60,18 @@ case. These are direct private-authority controls; they do not close executable
 effect-graph coverage or child-before-token-preflight defects. Those remain
 [[julia-recognition-effect-integration-gap]] and [[julia-recognition-attempt-preflight-gap]].
 The complete focused replay is in [[julia-progressive-span-dispatch-admission]].
+
+## September 11 complete recognition-consumer reading
+
+Julia .1.39 reads470–800 to EOF:331 fragments /12,310 bytes,
+SHA12de008b2f3af64b9743a912a44b93125e9b2c217b559a4d105645cccf69b877.
+With .1.38, all800 lines are physically read. The suffix covers repeated attempts,
+cross-invocation/source tokens, terminal reuse, forbidden nesting, discard and
+unwind diagnostics. Authored lowering retains four dedicated non-eager nodes;
+there is no eager generic Child call inside the attempt AST. Six effect graphs
+and eight progress fixtures call private validators directly, so their green
+results do not prove production effect-graph integration. Native, reconstructed,
+generated-plan and fresh included emitted-module routes preserve a staged false
+payload. The ordinary cursor twin remains separate. All existing effect/preflight
+and restoration repairs remain open. Combined replay is in
+[[julia-recursive-observation-admission]], Focused .1.39 replay.

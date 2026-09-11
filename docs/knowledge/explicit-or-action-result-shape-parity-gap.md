@@ -89,3 +89,22 @@ files with trimmed runtime input, lifecycle overrides, optional/bounded/minimum 
 and one retained zero-width hit before stopping. All three tests pass within the selected
 13-test suite, including the existing offline emitted direct/traced caller. Neutral
 eight-mode/ten-special/eight-complete/zero-pending/54-mutation proof is unchanged.
+
+## September 11 complete Julia repeated-result consumer reading
+
+Julia .1.39 reads all444 lines /15,411 bytes,
+SHA9e7b786ee83de35cec26b58e8d24d92c562abd12063fe5b13fd1fd10d3d89b5e.
+The exact15-role map is checked against unique declared roles and executes each
+once. Eight modes and ten special rows retain native metadata/results/positions,
+loading, reconstruction, descriptors, lifecycle authority, bounds and progress.
+The general special loop excludes blind rows; blind metadata has a distinct
+check. This does not imply every special row executes through every carrier.
+
+Fresh emitted source runs direct and traced functions in an independent offline
+Julia process with a private depot layered over repository-managed dependencies.
+Owned temporary files and selected-slot traces are cleaned by the directory
+scope. Generated direct covers all mode rows; selected trace, primary and exact
+corpus roles preserve their narrower examples. Stale or_acode plans reject;
+zero-width bounded repetition retains one Z result and then stops. Neutral
+8 modes /10 special /8 complete /0 pending /54 mutations remain current.
+Combined focused replay: [[julia-recursive-observation-admission]].
