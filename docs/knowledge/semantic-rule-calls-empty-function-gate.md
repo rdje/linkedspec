@@ -61,3 +61,11 @@ guard still precedes action-owner traversal. The four existing call-projection
 tests and six static tests pass, but their finite fixture success does not close
 this limitation. No fresh zero-versus-five runtime census is claimed; the dated
 Dart measurement and startup .22/.22.1-.22.3 repair boundary remain intact.
+
+## September 11 Julia reading reconciliation
+
+Julia .1.25 reads SemanticCallProjection1-1011 and confirms baseline identity.
+The function-empty return still precedes rule action-owner traversal. The six
+existing semantic source/outcome/static/call suites pass530 assertions, but
+finite fixture success does not close startup .22/.22.1-.22.3. No fresh
+zero-versus-five census or source repair is claimed; earlier observations remain.

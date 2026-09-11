@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia contextual casing and typed semantic provenance
+
+Final Sigma reads original code points against pinned cased/ignorable ranges.
+Semantic projection validates staged payload/job/signature and retained plan
+identity before typed call/binding evidence. The known function-empty guard
+still precedes rule traversal; fixture success grants no closure or suffix credit.
+
 ## 2026-09-11 — Julia upper-case completion and contextual properties
 
 Upper data reaches U+1E943, preserving ligature and combining expansions.

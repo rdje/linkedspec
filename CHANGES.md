@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.25 - complete Unicode evaluator and read semantic call projection
+
+Read the Unicode evaluator and semantic call prefix:1,500 fragments /45,333
+bytes. Coverage reaches25/52 and thirty files. Fresh casing39/semantic530,
+Unicode regeneration and semantic6/20/128 pass. Preserve startup .22, all
+repairs, exact source/history and synchronized book/resume pointers.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.24 - complete Unicode upper mappings and read property ranges
 
 Read UnicodeCaseMapping1844-3343: exact1,500 fragments /41,154 bytes. Both

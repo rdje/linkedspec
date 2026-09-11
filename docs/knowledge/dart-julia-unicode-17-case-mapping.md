@@ -117,3 +117,14 @@ character. Fresh managed regeneration preserves every module,1563/1581 mappings,
 158/464 ranges and12 fixtures. Casing39 remains .1.22/194265ff4 evidence against
 unchanged source; no new runtime, data revision or defect is claimed.
 Reverify: bash tools/run_python_project_data.sh tools/check_unicode_case_contract.py.
+
+## 2026-09-11 — Julia evaluator reading complete
+
+Julia .1.25 reads UnicodeCaseMapping3344-3832 through EOF, completing all464
+case-ignorable ranges through U+E01EF and the evaluator. Sorted inclusive ranges
+use binary search. Final Sigma scans the original code points, skips ignorable
+characters and requires preceding cased/no following cased context. Ordered
+full mappings preserve unmapped code points without normalization or host casing.
+Fresh casing39 and selection1 pass, including all twelve direct/helper/receiver/
+array fixtures. Fresh regeneration preserves all modules,1563/1581 mappings and
+158/464 ranges. The managed replay is in [[julia-semantic-call-staged-projection-plan]].

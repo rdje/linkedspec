@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 24/52 owned groups; its twenty-fifth reading child is next, with approved ADR0115 capacity in place.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 25/52 owned groups; its twenty-sixth reading child is next, with approved ADR0115 capacity in place.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,20 +297,24 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 24/52 groups complete:** both generated casing tables and
-all 158 cased-property ranges are fully read. Case-ignorable ranges are read
-through U+0605. Cumulative coverage is 34,425 lines /1,219,544 bytes and
-twenty-nine complete files. Exact scopes remain in
-`docs/tasks/JULIA-STARTUP-READING.md`. Fresh Unicode regeneration matches all
-backend modules and the twelve fixtures; the 39 Julia casing assertions from
-checkpoint 22 remain evidence against unchanged source.
+**Julia reading is 25/52 groups complete:** the complete Unicode casing module
+and the first 1,011 lines of semantic call projection are read. Cumulative
+coverage is 35,925 lines /1,264,877 bytes and thirty complete files. Exact scopes
+remain in `docs/tasks/JULIA-STARTUP-READING.md`. Fresh checks pass 39 casing and
+530 semantic foundation/projection assertions, Unicode regeneration and all
+six neutral semantic fixture groups, twenty queries and 128 rejected mutations.
 
-Upper-case mappings include ordered multi-character expansions and map both Greek
-sigma forms to capital sigma. Cased-property membership is broader than the set
-of characters changed by conversion; the contextual casing rules use separate
-property ranges. The remaining case-ignorable ranges and evaluator await reading.
-Source evidence: `docs/knowledge/dart-julia-unicode-17-case-mapping.md`. All
-previous limitations and repair tasks remain open.
+Contextual final sigma examines the original code points, skips case-ignorable
+characters and requires a preceding cased character with no following cased
+character. The evaluator preserves ordered full mappings without normalization.
+Semantic projection validates retained staged function and generated-plan
+metadata, then records typed calls and bindings in deterministic order. It does
+not execute target code. The known empty-function guard still suppresses rule
+call projection and remains owned by startup `.22`; passing fixture checks do
+not close that limitation. Remaining semantic correlation and shape source is
+unread. Source evidence: `docs/knowledge/dart-julia-unicode-17-case-mapping.md`,
+`docs/knowledge/julia-semantic-call-staged-projection-plan.md`, and
+`docs/knowledge/semantic-rule-calls-empty-function-gate.md`. All prior repairs remain open.
 
 **Known Julia limitation — staged diagnostic byte limits:** a one-byte allowance
 can retain a 187-byte truncation record; a 64-byte allowance can retain 375 bytes
@@ -611,8 +615,8 @@ SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` sti
 own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
-Julia has read twenty-four of 52 exact groups across 95 baseline entries;
-its twenty-fifth physical reading child is next, followed by the remaining Lua/supporting
+Julia has read twenty-five of 52 exact groups across 95 baseline entries;
+its twenty-sixth physical reading child is next, followed by the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,
