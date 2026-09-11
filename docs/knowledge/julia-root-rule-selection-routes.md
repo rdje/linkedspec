@@ -58,3 +58,20 @@ Related: [[julia-root-rule-selection-core]], [[julia-generated-source-scaffold]]
 [[julia-generated-source-v2-rule-local-cursor]],
 [[julia-global-cursor-option-removal]],
 [[dart-root-rule-selection-routes]], and [[rust-root-rule-selection-routes]].
+
+## September 11 complete route-consumer reading
+
+Julia .1.40 reads all351 lines /12,140 bytes,
+SHAe372a37958babe7a94277da320bf26caa397565b4e05b5e81ec213a3e05b5b98.
+Loaded versus inline descriptors intentionally adjust only logical slot/gap source
+IDs; normalized reconstruction retains inline identity exactly. Generated success
+and failure traces record invocation-local requested/effective/basis without
+changing the two-field plan. Exact unknown/empty projections and stale-row-count
+precedence remain distinct. The emitted markerless parser executes default,
+explicit and traced entry in an independent offline Julia process; its private
+depot, source and runner stay under the managed temporary directory.
+
+The old pending topology prose describes the route milestone. Current root
+admission is complete at7/7/54, and generated output remains v2/format2. This
+reading changes no route or source. Combined replay:
+[[julia-rule-local-cursor-admission]], Focused .1.40 replay.

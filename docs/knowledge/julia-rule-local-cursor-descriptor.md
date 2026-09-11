@@ -56,3 +56,19 @@ Related: [[julia-rule-local-cursor-normalization]], [[julia-rule-local-cursor-ex
 [[julia-rule-local-cursor-preflight]], [[dart-rule-local-cursor-descriptor]],
 [[outward-compiled-descriptor-four-backend-contract]], and [[rule-local-cursor-neutral-contract]].
 Generated artifact behavior: [[julia-generated-source-v2-rule-local-cursor]].
+
+## September 11 complete descriptor-consumer reading
+
+Julia .1.40 reads all232 lines /9,539 bytes,
+SHA6f6517fe69ea1c49ab18867fd11958af5ea5b5403deeeb05d579941c5970fc46.
+All36 family rows compare normalized/direct descriptors, exact root and rule
+keys, slot provenance, empty gaps/edge tables and derived policy. Valid semantic
+edge rows preserve ordered ownership/target/index/block/fluent data; bare source
+form stays omitted. Invalid normalized edges retain exact portable field sets.
+
+Current loaded comparison intentionally changes logical source IDs from inline
+to descriptor.spec before structural equality; the earlier byte-identical loaded
+claim predates slot/gap provenance. Direct normalized JSON bytes still agree,
+and loaded AND behavior is checked for both matching and prefixed input. No
+outward descriptor decoder is introduced. Combined replay:
+[[julia-rule-local-cursor-admission]], Focused .1.40 replay.

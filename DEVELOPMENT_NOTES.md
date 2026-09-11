@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Cursor admission preserves independent emitted evidence
+
+Cursor admission checks emitted text, while source-emitter and root-route tests
+execute fresh emitted modules/processes. Loaded descriptor equality adjusts only
+logical slot/gap source IDs; normalized byte equality remains exact. Focused1463
+pass. Notes reach455 lines; the next seven-line record requires governed rollover.
+
 ## 2026-09-11 — Recognition and observation tests retain their exact coverage
 
 Recognition graph/progress fixtures call private validators directly; production

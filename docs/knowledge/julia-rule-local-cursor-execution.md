@@ -60,3 +60,15 @@ Related: [[julia-rule-local-cursor-normalization]], [[julia-rule-local-cursor-de
 [[julia-rule-local-cursor-preflight]],
 [[julia-runtime-rule-interpreter]], [[julia-runtime-matching-state]],
 [[dart-rule-local-cursor-execution]], and [[rust-rule-local-cursor-execution]].
+
+## September 11 execution-consumer prefix reading
+
+Julia .1.40 reads1–109:109 fragments /2,054 bytes,
+SHA05d1b9381eb3a34148a5d7444cf62a7ed25b6c3484a77638c777dd1c90e72ca5.
+This is the complete eight-row parent/child fixture tuple: both policy directions
+for blind, action, explicit-call and recursive entry, with asymmetric inputs and
+expected values. The executable test bodies after109 remain unread until .1.41;
+whole-consumer execution does not advance that source credit. Historical v1
+isolation prose above is superseded by the already recorded v2 removal; current
+root/cursor neutral states are7/7/54 and74files/8/8/60. Combined replay:
+[[julia-rule-local-cursor-admission]], Focused .1.40 replay.

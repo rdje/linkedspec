@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `JULIA-STARTUP-READING`
-- Status: `active` / reading 39/52; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity, matching, staged, diagnostic, static, entry and selector-projection and member-suffix and literal-boundary and projection-metadata and selector/identifier repairs and diagnostic fixture correction pending
+- Status: `active` / reading 40/52; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity, matching, staged, diagnostic, static, entry and selector-projection and member-suffix and literal-boundary and projection-metadata and selector/identifier repairs and diagnostic fixture correction pending
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.5`
 - Created: `2026-09-11`
 - Last updated: `2026-09-11`
@@ -43,7 +43,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Inventory SHA-256: `ca3cff4fe4c0e162448d6dbac82d89898673023951afaeced17d5b9a838ccd10`.
 - Ordered range SHA-256: `fde325f80ae7b56c5890d149fbc965c09890890e963a1fa9aab08e8c9d962337`.
 - Line coordinates are one-based, inclusive LF physical lines. Every child pins its range digest.
-- Current physical reading: 39/52 children, 56,925/75,984 lines and 1,991,460/2,693,170 bytes; fifty-nine complete files.
+- Current physical reading: 40/52 children, 58,425/75,984 lines and 2,044,112/2,693,170 bytes; sixty-four complete files.
 - Exact replay and capacity assessment: `docs/knowledge/julia-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -59,7 +59,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Dependencies: Startup .3.5.0 decomposition committed; each child starts from a clean prior handoff.
   Children: `.1.1-.1.52`, with exact scopes below.
   Acceptance: Every child records physical coverage, comprehension, Knowledge reconciliation, findings and focused proof before its commit. Retain all current-delta and interrupted-range evidence.
-  Verification: Julia .1.39 completes recognition, recursive-observation and repeated-result consumers and reads root admission1–344:39/52 groups,56925 lines/1991460 bytes and59 complete files. Recognition207/observation30/repeated162/root137/typed127 pass663 assertions; neutral recognition138/250/58, typed14/0/231, repeated8/0/54 and root7/0/54 pass. Source distinguishes direct private effect validation, detached observation, offline emitted repetition and entry-lifecycle root selection. Root source after344 remains unread. All prior repairs remain open; .1.40 is next.
+  Verification: Julia .1.40 completes root admission/core/routes and cursor admission/descriptor, then reads cursor execution1–109:40/52 groups,58425 lines/2044112 bytes and64 complete files. Root137/79/57, cursor104/917/104 and source-emitter65 pass1463 assertions. Neutral root7/0/54, cursor74files/8/0/60 and generated-contract checks pass. Loaded descriptor source IDs remain intentional; cursor emitted-text checks are distinct from actual emitted execution. All prior repairs remain open; .1.41 follows with a governed engineering-notes rollover.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.1.1`
@@ -727,14 +727,21 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Commit: `JULIA-STARTUP-READING.1.39 - read recognition observation and repeated-result consumers`
 
 - ID: `JULIA-STARTUP-READING.1.40`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Julia group 40 and reconcile its source evidence.
   Dependencies: `JULIA-STARTUP-READING.1.39` committed; empty brief and clean repository.
+  Activation commit: `8c85f89341a9ad3f8225d1bd4bc8c9218b1c52f4`.
+  Verification tier: `focused`
+  Focused checks: Exact six-range/source coverage, root-selection and cursor consumers with neutral direct dependents, prior evidence, Knowledge, memory, both history checks, rendered book and normal doctrines.
+  Canonical trigger: `none` — bounded startup reading/evidence only; no production, dependency, infrastructure or contract change.
   Scope: `julia/test/root_rule_selection_admission_test.jl` lines 345-513; `julia/test/root_rule_selection_core_test.jl` lines 1-217; `julia/test/root_rule_selection_routes_test.jl` lines 1-351; `julia/test/rule_local_cursor_contract_test.jl` lines 1-422; `julia/test/rule_local_cursor_descriptor_test.jl` lines 1-232; `julia/test/rule_local_cursor_execution_test.jl` lines 1-109
   Baseline evidence: 1500 fragments / 52652 bytes; ordered range SHA-256 `d36bb12c8c3293220c7cba6454377e5280e9acd23e10ed50a382ec661e2b67cb`.
   Acceptance: Physically read every owned byte, inspect current deltas, reconcile Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit. Do not count truncated output or unread consumer suffixes.
-  Verification: `pending`
-  Commit: `pending`
+  Comprehension: Root admission finishes exact runtime/primary/request-trace roles; core preserves structure/selection/strict-edge separation; loaded/normalized/generated/emitted routes preserve authored state and portable selection failure identity. Cursor admission executes fifteen roles and all portable diagnostics. Descriptor covers36 families, semantic edges, exact keys, logical source provenance and loaded consume behavior. Execution prefix is the eight-row parent/child fixture tuple; test bodies after109 remain unread.
+  Knowledge: Dated evidence appends to root-rule-selection admission/core/routes and rule-local-cursor admission/descriptor/execution homes. The cursor admission home records the exact combined replay and emitted-marker versus actual-execution distinction. Earlier rollout and loaded-descriptor claims remain as qualified dated evidence.
+  Findings: No new confirmed defect or closure. Loaded descriptors intentionally change logical source IDs; this is not runtime drift. The cursor emitted role checks text while separate source-emitter and root-route tests execute fresh emitted modules/processes. All prior repairs remain open. No full component/canonical gate or dependency build.
+  Verification: Eight untruncated source windows read1500 fragments /52652 baseline-identical bytes; ordered SHAd36bb12c8c3293220c7cba6454377e5280e9acd23e10ed50a382ec661e2b67cb. Raw ranges: root-admission169/5648/SHA5caaca2230b102711df8a2e845b983cdf5676053f26f3edae7d9a9ac7415c6a8; root-core217/8434/SHAe90864e5af1b41370c3077bba5fbdd1917837ae7457bd5815078b5027d3b4c09; root-routes351/12140/SHAe372a37958babe7a94277da320bf26caa397565b4e05b5e81ec213a3e05b5b98; cursor-contract422/14837/SHA73a511cff9adfbf24bdf98dfe009425b9682d42a6ece580e3dfe6c96b9922a9a; descriptor232/9539/SHA6f6517fe69ea1c49ab18867fd11958af5ea5b5403deeeb05d579941c5970fc46; execution109/2054/SHA05d1b9381eb3a34148a5d7444cf62a7ed25b6c3484a77638c777dd1c90e72ca5. Root137+79+57, cursor104+917+104 and emitter65 pass1463 assertions. Neutral root/cursor/generated checks pass. Exact coverage, prior source/nodes/facts/history, Knowledge, memory, both pressure checks, rendered book and normal doctrines govern landing.
+  Commit: `JULIA-STARTUP-READING.1.40 - read root and cursor contract consumers`
 
 - ID: `JULIA-STARTUP-READING.1.41`
   Status: `pending`
@@ -1602,7 +1609,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.40` | `pending` | Finish root admission, read root core/routes and begin cursor contract/descriptor/execution ranges after the clean .1.39 commit. |
+| 1 | `JULIA-STARTUP-READING.1.41` | `pending` | Finish cursor execution, read normalization/options and runtests1–964 after the clean .1.40 commit; run the governed notes rollover in that slice. |
 
 ## Decisions
 
@@ -1633,6 +1640,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Source repairs retain startup prerequisites; those dependencies do not block source reading.
 
 ## Verification Log
+
+- `2026-09-11` .1.40: Julia .1.40 completes root admission/core/routes and cursor admission/descriptor, then reads cursor execution1–109:40/52 groups,58425 lines/2044112 bytes and64 complete files. Root137/79/57, cursor104/917/104 and source-emitter65 pass1463 assertions. Neutral root7/0/54, cursor74files/8/0/60 and generated-contract checks pass. Loaded descriptor source IDs remain intentional; cursor emitted-text checks are distinct from actual emitted execution. All prior repairs remain open; .1.41 follows with a governed engineering-notes rollover.
 
 - `2026-09-11` .1.39: Julia .1.39 completes recognition, recursive-observation and repeated-result consumers and reads root admission1–344:39/52 groups,56925 lines/1991460 bytes and59 complete files. Recognition207/observation30/repeated162/root137/typed127 pass663 assertions; neutral recognition138/250/58, typed14/0/231, repeated8/0/54 and root7/0/54 pass. Source distinguishes direct private effect validation, detached observation, offline emitted repetition and entry-lifecycle root selection. Root source after344 remains unread. All prior repairs remain open; .1.40 is next.
 
@@ -1703,6 +1712,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Commit Log
 
+- `2026-09-11` .1.40: `JULIA-STARTUP-READING.1.40 - read root and cursor contract consumers`.
+
 - `2026-09-11` .1.39: `JULIA-STARTUP-READING.1.39 - read recognition observation and repeated-result consumers`.
 
 - `2026-09-11` .1.38: `JULIA-STARTUP-READING.1.38 - read stdio progressive and recognition consumers`.
@@ -1761,6 +1772,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Decomposition: `SESSION-STARTUP-READING.3.5.0 - freeze exact bounded Julia reading plan`.
 
 ## Changelog
+
+- `2026-09-11` .1.40: Complete five root/cursor files plus execution1–109;40/52 groups and64 complete files. Preserve all repairs; .1.41 includes the next governed notes rollover.
 
 - `2026-09-11` .1.39: Complete recognition, observation and repeated-result consumers plus root admission1–344;39/52 groups and59 complete files. Preserve all repairs; .1.40 follows.
 

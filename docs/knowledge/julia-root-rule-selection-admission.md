@@ -73,3 +73,14 @@ eight selections /three failures /three strict cases, five backends,7/7 complete
 24 public documents /18 forbidden claims /54 mutations. Focused replay is in
 [[julia-recursive-observation-admission]]; source-reading credit remains bounded
 separately from complete consumer execution. All existing repairs remain open.
+
+## September 11 complete root-admission reading
+
+Julia .1.40 reads345–513 to EOF:169 fragments /5,648 bytes,
+SHA5caaca2230b102711df8a2e845b983cdf5676053f26f3edae7d9a9ac7415c6a8.
+The suffix finishes generated runtime-failure attribution, exact primary values
+and generic missing-root output, canonical default request-trace bytes and escaped
+newline-selector failure trace/reset from a temporary working directory. The
+final map validates unique declared roles and executes all15 once. Combined with
+.1.39, all513 source lines are read; current neutral rollout remains7/7/54.
+The complete .1.40 replay lives in [[julia-rule-local-cursor-admission]].

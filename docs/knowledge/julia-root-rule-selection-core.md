@@ -41,3 +41,17 @@ the separate route fact; final rollout must not be inferred from this core fact.
 
 Related: [[julia-root-rule-selection-preflight]], [[root-rule-selection-precedence]],
 [[julia-root-rule-selection-routes]], [[dart-root-rule-selection-core]], and [[rust-root-rule-selection-core]].
+
+## September 11 complete core-consumer reading
+
+Julia .1.40 reads all217 lines /8,434 bytes,
+SHAe90864e5af1b41370c3077bba5fbdd1917837ae7457bd5815078b5027d3b4c09.
+The eight neutral selection rows assert exact basis and unchanged authored flags;
+three failures assert code/stage/fields. Empty/comment-only envelopes remain
+separate from malformed non-rule text. Native and descriptor cases retain marked,
+markerless and explicit selection, structural-zero precedence and authored-only
+strict-unused edges. Core value fixtures use E returns; the independently read
+admission consumer uses I returns as stronger entry-selection witnesses.
+The old4/7/34 snapshot is dated; current neutral admission is7/7/54. Source,
+selection semantics and all existing repairs remain unchanged. Focused replay:
+[[julia-rule-local-cursor-admission]], Focused .1.40 replay.

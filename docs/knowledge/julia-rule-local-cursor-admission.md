@@ -41,3 +41,48 @@ Related: [[rule-local-cursor-neutral-contract]],
 [[julia-rule-local-cursor-descriptor]],
 [[julia-generated-source-v2-rule-local-cursor]], and
 [[julia-global-cursor-option-removal]].
+
+## September 11 complete cursor-admission reading
+
+Julia .1.40 reads all422 lines /14,837 bytes,
+SHA73a511cff9adfbf24bdf98dfe009425b9682d42a6ece580e3dfe6c96b9922a9a.
+Fifteen unique declared roles execute once and aggregate the full portable
+error-code set. Native seek/consume, mixed child entry, recursion, ordered
+landmarks and anchored choice retain their exact values. Normalized/loaded/
+descriptor and generated-plan direct/trace checks remain separate. Retired option
+checks combine source markers with actual engine aliases and CLI rejection/help.
+
+The `emitted_source_v2` role checks emitted text and absent serialized options;
+it does not execute that emitted module itself. The separate source-emitter
+consumer supplies actual all-family emitted execution, and the root-route
+consumer runs an independent emitted host in this focused slice. Current neutral
+truth supersedes the old5/8/44 snapshot:74 migration files,8/8 complete and60
+mutations, with30 public documents /28 forbidden claims. All prior repairs remain.
+
+### Focused .1.40 replay
+
+```bash
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no - <<'JULIA_READING40'
+using LinkedSpecJulia, JSON3, Test
+const REPO_ROOT=pwd()
+const DESCRIPTOR_CONTRACT=JSON3.read(read("capability_conformance/outward_descriptor_contract.json",String),Dict{String,Any})
+include("julia/test/root_rule_selection_admission_test.jl")
+include("julia/test/root_rule_selection_core_test.jl")
+include("julia/test/root_rule_selection_routes_test.jl")
+include("julia/test/rule_local_cursor_contract_test.jl")
+include("julia/test/rule_local_cursor_descriptor_test.jl")
+include("julia/test/rule_local_cursor_execution_test.jl")
+JULIA_READING40
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using Test, JSON3, LinkedSpecJulia; const REPO_ROOT=pwd(); include("julia/test/source_emitter_test.jl")'
+bash tools/run_python_project_data.sh tools/check_root_rule_selection_contract.py
+bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py
+perl tools/check_generated_source_contract.pl
+```
+
+Complete consumer execution grants no reading credit to the cursor-execution
+suffix after109 or the separately selected source-emitter file. No full component
+or canonical gate, dependency build, source change or repair closure is claimed.
+
+Fresh .1.40 results are root137+79+57, cursor104+917+104 and source-emitter65,
+1,463 assertions total. Root7/7/54, cursor74files/8/8/60 and the unchanged
+generated-contract checker pass; no old component-gate result is reused as fresh proof.
