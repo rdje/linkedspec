@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `JULIA-STARTUP-READING`
-- Status: `active` / reading 47/52; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity, matching, staged, diagnostic, static, entry and selector-projection and member-suffix and literal-boundary and projection-metadata and selector/identifier repairs and diagnostic fixture correction pending
+- Status: `active` / reading 48/52; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity, matching, staged, diagnostic, static, entry and selector-projection and member-suffix and literal-boundary and projection-metadata and selector/identifier repairs and diagnostic fixture correction pending
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.5`
 - Created: `2026-09-11`
 - Last updated: `2026-09-11`
@@ -43,7 +43,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Inventory SHA-256: `ca3cff4fe4c0e162448d6dbac82d89898673023951afaeced17d5b9a838ccd10`.
 - Ordered range SHA-256: `fde325f80ae7b56c5890d149fbc965c09890890e963a1fa9aab08e8c9d962337`.
 - Line coordinates are one-based, inclusive LF physical lines. Every child pins its range digest.
-- Current physical reading: 47/52 children, 68,925/75,984 lines and 2,424,825/2,693,170 bytes; eighty-two complete files.
+- Current physical reading: 48/52 children, 70,425/75,984 lines and 2,480,086/2,693,170 bytes; eighty-four complete files.
 - Exact replay and capacity assessment: `docs/knowledge/julia-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -59,7 +59,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Dependencies: Startup .3.5.0 decomposition committed; each child starts from a clean prior handoff.
   Children: `.1.1-.1.52`, with exact scopes below.
   Acceptance: Every child records physical coverage, comprehension, Knowledge reconciliation, findings and focused proof before its commit. Retain all current-delta and interrupted-range evidence.
-  Verification: Julia .1.47 completes static graph/remaining targets, semantic admission and source-alias consumers, then reads emitter1–65: 47/52 groups, 68925 lines/2424825 bytes and 82 complete files. Static70/99, admission416 and aliases141 pass 726 assertions, including twelve ordered roles, all twenty query hashes and actual emitted execution. Neutral semantic6/20/128, typed14/0/231 and language250/105+1/126 pass. Positive fixtures do not close mixed-slot, entry, selector, callback or budget repairs. Emitter reading remains partial; .1.48 continues emitter/loader/staged consumers.
+  Verification: Julia .1.48 completes emitter/loader consumers and reads staged-enrichment1–799: 48/52 groups, 70425 lines/2480086 bytes and 84 complete files. Emitter65, loader82 and three complete staged testsets61 pass 208 assertions. Actual emitted hosts cover eight accepted corpus fixtures, ten families, format-before-payload rejection and corrupt payload errors. Neutral generated, native-resolution14/9/4 and staged123/public129 checks pass. Production enrichment test bodies remain partial; all repairs remain open and .1.49 continues staged800–2299.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.1.1`
@@ -863,14 +863,21 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Commit: `JULIA-STARTUP-READING.1.47 - read static admission and source alias consumers`
 
 - ID: `JULIA-STARTUP-READING.1.48`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Julia group 48 and reconcile its source evidence.
   Dependencies: `JULIA-STARTUP-READING.1.47` committed; empty brief and clean repository.
+  Activation commit: `2261c7a496db8cdbf453e70c285130a8ea194d58`.
+  Verification tier: `focused`
+  Focused checks: Exact three-range/source coverage, complete emitter/loader and bounded staged consumers with neutral direct dependents, prior source/task/fact/history preservation, Knowledge/memory, both history checks, rendered book and normal doctrines.
+  Canonical trigger: `none` — bounded startup reading/evidence; no production, dependency, infrastructure or contract change.
   Scope: `julia/test/source_emitter_test.jl` lines 66-594; `julia/test/spec_loader_test.jl` lines 1-172; `julia/test/staged_ast_enrichment_contract_test.jl` lines 1-799
   Baseline evidence: 1500 fragments / 55261 bytes; ordered range SHA-256 `b4a720ab1e7e8c8f73e6a1d8df05b7a51e6cba6a31b02dca402fab037749b602`.
   Acceptance: Physically read every owned byte, inspect current deltas, reconcile Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit. Do not count truncated output or unread consumer suffixes.
-  Verification: `pending`
-  Commit: `pending`
+  Comprehension: Emitter tests execute eight accepted corpus fixtures and all ten family routes in isolated Julia hosts, compare minimal plan/native values, derive cursor policy, reject four plan mutations and enforce old-format rejection before corrupt payload decoding. Deterministic Unicode/hex identities, missing-entry and malformed-payload diagnostics are distinct. Loader consumes name/resolution/file-kind/UTF-8 fixtures, compiles a function-bearing source and preserves engine identity and structured failure stages. Staged helpers define inert markers, registry/recursive authority and fresh-seed fixtures. Three complete testsets pin neutral/v1 compatibility, exclusive typed assignment lowering and four detached marker carriers; the production-route test begins at736 and remains partial through799.
+  Knowledge: Append complete emitter/loader consumer evidence to generated-v2 and native-resolution homes; append bounded marker/production-prefix reading to staged marker and carrier homes. Generated-v2 home records the exact208-assertion replay and three neutral checks. Existing diagnostic, registry, recognition and authority repair cards remain authoritative.
+  Findings: No new confirmed defect or closure. Eight emitted corpus fixtures are the governed accepted subset, not a fresh105-fixture generated run. Ten-family outputs compare generated execution with native results. The legacy v1 resolver rejects general-v2 jobs while the separate seeded enrichment route owns them. Prefix replay runs staged1–734 with only the enclosing testset closed by the harness; it excludes the partially read production-route test and all unread suffixes. No completed production-carrier or491-assertion staged-suite proof is claimed here.
+  Verification: Eight bounded untruncated source windows cover1500 fragments/55261 baseline-identical bytes; ordered SHAb4a720ab1e7e8c8f73e6a1d8df05b7a51e6cba6a31b02dca402fab037749b602. Raw ranges: emitter529/19713/SHA9319f427833142b268f4d049c737f83a7070e7bcab5f9da31bd2ac3185bb096a; loader172/6374/SHAbf350f9d1cd2e5597eb36f8c8ecb631a721d1b046a76af42569ad1304b789800; staged799/29174/SHAd170da970723ad011cf5ba69a16d25389dd231de5451692bb0d8a88889bc79eb. Emitter13/32/20, loader34/24/10/6/8 and staged-prefix61 pass208 assertions, including actual emitted-host checks. Generated-source v1/10-family governance, native-resolution14/9/4 and staged123/public129 pass. All95-source/52-scope reconstruction and606 prior task nodes, four prior card prefixes, hot/history suffixes and25 rendered limitation headings pass. Knowledge73136/79000 lines, tasks84520/88000 and decisions12090/13000 fit; changes363/21881 and notes298/16800 need no rollover. Both pressure checks, Knowledge/memory and rendered book pass; normal doctrines govern landing.
+  Commit: `JULIA-STARTUP-READING.1.48 - read emitter loader and staged marker consumers`
 
 - ID: `JULIA-STARTUP-READING.1.49`
   Status: `pending`
@@ -1658,7 +1665,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.48` | `pending` | Continue emitter/loader/staged consumers after the clean .1.47 commit. |
+| 1 | `JULIA-STARTUP-READING.1.49` | `pending` | Continue staged-enrichment800–2299 after the clean .1.48 commit. |
 
 ## Decisions
 
@@ -1689,6 +1696,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Source repairs retain startup prerequisites; those dependencies do not block source reading.
 
 ## Verification Log
+
+- `2026-09-11` .1.48: Julia .1.48 completes emitter/loader consumers and reads staged-enrichment1–799: 48/52 groups, 70425 lines/2480086 bytes and 84 complete files. Emitter65, loader82 and three complete staged testsets61 pass 208 assertions. Actual emitted hosts cover eight accepted corpus fixtures, ten families, format-before-payload rejection and corrupt payload errors. Neutral generated, native-resolution14/9/4 and staged123/public129 checks pass. Production enrichment test bodies remain partial; all repairs remain open and .1.49 continues staged800–2299.
 
 - `2026-09-11` .1.47: Julia .1.47 completes static graph/remaining targets, semantic admission and source-alias consumers, then reads emitter1–65: 47/52 groups, 68925 lines/2424825 bytes and 82 complete files. Static70/99, admission416 and aliases141 pass 726 assertions, including twelve ordered roles, all twenty query hashes and actual emitted execution. Neutral semantic6/20/128, typed14/0/231 and language250/105+1/126 pass. Positive fixtures do not close mixed-slot, entry, selector, callback or budget repairs. Emitter reading remains partial; .1.48 continues emitter/loader/staged consumers.
 
@@ -1775,6 +1784,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Commit Log
 
+- `2026-09-11` .1.48: `JULIA-STARTUP-READING.1.48 - read emitter loader and staged marker consumers`.
+
 - `2026-09-11` .1.47: `JULIA-STARTUP-READING.1.47 - read static admission and source alias consumers`.
 
 - `2026-09-11` .1.46: `JULIA-STARTUP-READING.1.46 - read runtime observation and source consumers`.
@@ -1849,6 +1860,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Decomposition: `SESSION-STARTUP-READING.3.5.0 - freeze exact bounded Julia reading plan`.
 
 ## Changelog
+
+- `2026-09-11` .1.48: Complete emitter/loader consumers and staged1–799;48/52 groups and84 complete files. Preserve all repair and partial-production boundaries; .1.49 follows.
 
 - `2026-09-11` .1.47: Complete static/admission/alias consumers;47/52 groups and82 complete files. Preserve all repair and metadata/execution boundaries; .1.48 follows.
 

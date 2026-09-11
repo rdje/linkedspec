@@ -45,3 +45,13 @@ non-regular candidates do not prevent selecting a later regular file. Loading pr
 a leading BOM is explicitly rejected during composed parsing. Fatal interrupt/out-of-memory/stack
 errors rethrow rather than becoming a structured pipeline error. Absolute path requests use the
 basename as logical source identity while the resolved path remains attached to the loaded engine.
+
+## 2026-09-11 — emitter loader and staged-prefix reading .1.48
+
+Julia .1.48 physically reads the complete loader consumer1–172. All five existing
+testsets freshly pass34/24/10/6/8 assertions:82 total. The14/9/4 shared cases cover
+named validation, ordered resolution/file kinds and exact UTF-8; a function-bearing
+source composes loading/compilation/execution with engine identity. Parse versus
+validation attribution and missing-name JSON stay exact. All fixtures use managed
+repository-local scratch. No CLI/full-package or other-backend execution is implied.
+Replay with emitter/staged-prefix consumers: [[julia-generated-source-v2-rule-local-cursor]].

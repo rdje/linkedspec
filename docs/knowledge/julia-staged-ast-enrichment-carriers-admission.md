@@ -67,3 +67,14 @@ Related: [[julia-staged-ast-enrichment-recursive-authority]],
 [[staged-consumer-current-projection-lockstep]],
 [[dart-staged-ast-enrichment-carriers-admission]],
 [[general-staged-ast-enrichment-neutral-contract]], and ADR `0088`.
+
+## 2026-09-11 — emitter loader and staged-prefix reading .1.48
+
+Julia .1.48 reads consumer1–799, including production helper definitions and the
+production-route test prefix736–799. Those helpers build fresh host callback,
+cancellation and clock fixtures, while four marker-only carriers are completely
+read and executed. The production test's assertions after799 remain unread and
+excluded from this slice's bounded replay. Earlier491-assertion carrier evidence
+is preserved as historical proof; this slice claims61 prefix assertions only.
+Neutral staged123/public129 checks pass. Replay and the explicit734 boundary are
+in [[julia-generated-source-v2-rule-local-cursor]]. All repairs remain open.

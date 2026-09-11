@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.48 - read emitter loader and staged marker consumers
+
+Read1500 fragments/55261 bytes, reaching48/52 groups and84 complete files.
+Emitter65, loader82 and staged-prefix61 pass208 assertions; three neutral checks
+pass. Preserve accepted-subset/full-corpus and inert-marker/seeded-enrichment
+distinctions, every repair and the partially read production-route test boundary.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.47 - read static admission and source alias consumers
 
 Read1500 fragments/56328 bytes, reaching47/52 groups and82 complete files.

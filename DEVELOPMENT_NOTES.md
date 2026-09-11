@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Emitter and staged-prefix tests preserve separate boundaries
+
+Emitted hosts prove eight accepted fixtures, ten families and format-before-payload
+rejection. Loader tests preserve14/9/4 neutral cases. Staged1–734 executes three
+complete testsets while production-route reading remains partial through799.
+Focused208 assertions pass; no full staged-suite or repair closure follows.
+
 ## 2026-09-11 — Static fixtures and admission preserve bounded guarantees
 
 Private projection retains source correlation while public query applies ceilings.

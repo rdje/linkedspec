@@ -80,3 +80,15 @@ materialization; entry/local whole matches and participating capture ranges
 remain distinct. Markers retain only detached logical options/text/provenance.
 Existing typed127/staged491 pass with neutral checks; no source change or
 recognition-effect repair is inferred. Replay: [[julia-staged-diagnostic-byte-boundaries]].
+
+## 2026-09-11 — emitter loader and staged-prefix reading .1.48
+
+Julia .1.48 reads consumer1–799. The complete first three testsets through734 pin
+neutral/v1 compatibility, exclusive assignment lowering to one dedicated typed
+node, and equal detached inert markers across native/reconstructed/generated/
+fresh-emitted routes. The legacy function-body v1 resolver still rejects general
+v2 jobs; the separate seeded enrichment mechanism owns general-v2 execution.
+Fresh bounded prefix proof passes61 assertions. It does not execute the production
+route test beginning736 or the unread later provenance/rejection test bodies.
+All recognition, diagnostic and registry repairs remain open. Exact replay:
+[[julia-generated-source-v2-rule-local-cursor]].

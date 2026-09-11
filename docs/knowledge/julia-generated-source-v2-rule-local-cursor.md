@@ -61,3 +61,29 @@ Related: [[julia-generated-source-scaffold]], [[julia-generated-source-family-pl
 [[julia-semantic-runtime-observation-generated-routes]],
 [[dart-generated-source-v2-rule-local-cursor]], [[rust-generated-source-v2-rule-local-cursor]], and
 [[perl-generated-source-contract-v2]].
+
+## 2026-09-11 — emitter loader and staged-prefix reading .1.48
+
+Julia .1.48 completes emitter66–594 after .1.47 read1–65. Existing emitter tests
+pass13 accepted-subset,32 family-plan and20 scaffold assertions:65 total. Actual
+isolated hosts execute all eight accepted fixtures against their expected output,
+and ten families against native execution. Four plan mutations reject; an old v1
+contract wins over invalid hex, while a current v2 corrupt payload produces the
+compile/load error. Unicode/hex identity, deterministic output and missing entry
+remain exact. Eight emitted fixtures are not a fresh105-fixture generated run.
+
+From activation2261c7a496db8cdbf453e70c285130a8ea194d58, the replay below passes
+emitter65, loader82 and staged-prefix61:208 assertions. Staged consumer1–734 has
+three complete nested testsets; the harness adds only the enclosing end. It does
+not execute the production-route test beginning736 or any unread suffix. Physical
+reading separately reaches799. Neutral generated governance remains v1/10 families
+with census100/0/0; native resolution is14/9/4 and staged mutations are123/public129.
+These checker counts do not imply fresh execution of all runtimes. No production,
+format, dependency, full-package or canonical-gate change is part of this leaf.
+
+```bash
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include("julia/test/source_emitter_test.jl"); include("julia/test/spec_loader_test.jl"); source=readlines("julia/test/staged_ast_enrichment_contract_test.jl"; keep=true); include_string(Main, join(source[1:734])*"\nend\n", joinpath(pwd(),"julia/test/staged_ast_enrichment_contract_test.jl"))'
+bash tools/project_data_run.sh perl tools/check_generated_source_contract.pl
+bash tools/project_data_run.sh perl tools/check_native_spec_resolution_contract.pl
+bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py
+```

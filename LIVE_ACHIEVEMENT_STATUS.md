@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.47 completes static graph/remaining targets, semantic admission and source-alias consumers, then reads emitter1–65: 47/52 groups, 68925 lines/2424825 bytes and 82 complete files. Static70/99, admission416 and aliases141 pass 726 assertions, including twelve ordered roles, all twenty query hashes and actual emitted execution. Neutral semantic6/20/128, typed14/0/231 and language250/105+1/126 pass. Positive fixtures do not close mixed-slot, entry, selector, callback or budget repairs. Emitter reading remains partial; .1.48 continues emitter/loader/staged consumers. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.48 completes emitter/loader consumers and reads staged-enrichment1–799: 48/52 groups, 70425 lines/2480086 bytes and 84 complete files. Emitter65, loader82 and three complete staged testsets61 pass 208 assertions. Actual emitted hosts cover eight accepted corpus fixtures, ten families, format-before-payload rejection and corrupt payload errors. Neutral generated, native-resolution14/9/4 and staged123/public129 checks pass. Production enrichment test bodies remain partial; all repairs remain open and .1.49 continues staged800–2299. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.82` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `JULIA-STARTUP-READING.1.47 - read static admission and source alias consumers` — Julia .1.47 completes static graph/remaining targets, semantic admission and source-alias consumers, then reads emitter1–65: 47/52 groups, 68925 lines/2424825 bytes and 82 complete files. Static70/99, admission416 and aliases141 pass 726 assertions, including twelve ordered roles, all twenty query hashes and actual emitted execution. Neutral semantic6/20/128, typed14/0/231 and language250/105+1/126 pass. Positive fixtures do not close mixed-slot, entry, selector, callback or budget repairs. Emitter reading remains partial; .1.48 continues emitter/loader/staged consumers.
+- `JULIA-STARTUP-READING.1.48 - read emitter loader and staged marker consumers` — Julia .1.48 completes emitter/loader consumers and reads staged-enrichment1–799: 48/52 groups, 70425 lines/2480086 bytes and 84 complete files. Emitter65, loader82 and three complete staged testsets61 pass 208 assertions. Actual emitted hosts cover eight accepted corpus fixtures, ten families, format-before-payload rejection and corrupt payload errors. Neutral generated, native-resolution14/9/4 and staged123/public129 checks pass. Production enrichment test bodies remain partial; all repairs remain open and .1.49 continues staged800–2299.
 
 ## Next Action
 
-- `JULIA-STARTUP-READING.1.48` — Continue emitter, loader and staged consumer ranges after the clean .1.47 commit.
+- `JULIA-STARTUP-READING.1.49` — Continue staged-enrichment800–2299 after the clean .1.48 commit.
 
 ## Recent Completions
+
+- `2026-09-11` — `JULIA-STARTUP-READING.1.48` reads1500 fragments/55261 bytes;208 emitter/loader/staged-prefix assertions and neutral checks pass; all repairs remain open.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.47` reads1500 fragments/56328 bytes;726 static/admission/alias assertions and neutral checks pass; all repairs remain open.
 
@@ -48,8 +50,6 @@
 - `2026-09-11` — `JULIA-STARTUP-READING.1.36` reads1,500 fragments /56,141 bytes;1038 existing assertions and neutral mutation/logical/MCP checks pass; all repairs remain open.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.35` reads1,500 fragments /48,303 bytes;551 existing assertions and neutral gap/logical checks pass; all repair owners remain.
-
-- `2026-09-11` — `JULIA-STARTUP-READING.1.34` reads1,500 fragments /55,896 bytes;1017 existing/12 literal diagnostic assertions pass; .2.25 owns test coverage and exact213-line history rollover is preserved.
 
 ## History
 

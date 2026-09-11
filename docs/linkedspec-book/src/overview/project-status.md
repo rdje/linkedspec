@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 47/52 owned groups. ADR0116 admits the finite evidence allowance; ADR0115 remains limited to history.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 48/52 owned groups. ADR0116 admits the finite evidence allowance; ADR0115 remains limited to history.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,19 +297,18 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 47/52 groups complete:** static projection, semantic admission
-and source-alias consumers are fully read; emitter reading reaches line 65.
-Coverage is 68,925 lines / 2,424,825 bytes and eighty-two complete files.
-Four selected suites pass 726 assertions. The admission consumer executes twelve
-ordered roles, checks all twenty query hashes and runs emitted code in a separate
-Julia process. Seven source aliases match their canonical helpers across native,
-loaded, reconstructed, generated and freshly emitted execution. For example,
-`capture_len_from_rule_start()` matches `capture_slice_len()` on Unicode input;
-these tests also preserve absent results for reversed capture spans.
-Private static source references retain correlation evidence; public queries apply
-the requested disclosure ceiling. Passing fixtures do not close the mixed-slot,
-entry, selector, callback or budget limitations below. All repairs remain open;
-`.1.48` continues emitter, loader and staged consumers.
+**Julia reading is 48/52 groups complete:** emitter and loader consumers are
+fully read; staged-enrichment reading reaches line 799. Coverage is 70,425 lines
+/ 2,480,086 bytes and eighty-four complete files. Selected tests pass 208 assertions.
+Fresh emitted hosts execute the eight accepted corpus fixtures and all ten rule
+families. An old generated format is rejected before its corrupt payload can be
+decoded; current-format corrupt payloads report a compile/load failure instead.
+Loader tests preserve ordered resolution, exact UTF-8 and structured failure stages.
+Three complete staged testsets cover unchanged function-body v1, dedicated
+assignment-form `parse_job` lowering and detached markers across four carriers.
+An inert marker is distinct from enrichment through an execution seed. That
+production-route test is only partially read and receives no complete-suite credit
+here. All repairs remain open; `.1.49` continues staged-enrichment consumers.
 
 **Approved Julia evidence capacity:** the director granted Knowledge lines
 72,000→79,000 and decision-record lines12,000→13,000 under ADR0116. The finite
@@ -739,8 +738,8 @@ SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` sti
 own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
-Julia has read forty-seven of 52 exact groups across 95 baseline entries;
-its forty-eighth child follows, with the remaining Lua/supporting
+Julia has read forty-eight of 52 exact groups across 95 baseline entries;
+its forty-ninth child follows, with the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,
