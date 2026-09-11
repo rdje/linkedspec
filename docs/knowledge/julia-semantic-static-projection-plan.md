@@ -202,3 +202,16 @@ zero/nonzero or omitted spelling. Julia .2.18 owns repair; exact seven controls/
 99 assertions are in [[julia-semantic-authored-selector-gap]]. The four existing
 source/outcome/static suites pass389 again. Earlier mixed-slot and entry repairs,
 shared budgets and every prior owner remain pending.
+
+## 2026-09-11 — static admission and alias consumer reading .1.47
+
+Julia .1.47 completes static-graph110–239 after .1.46 read1–109, and reads the
+remaining-target consumer1–327. Graph70 and remaining99 assertions pass: exact
+12/14/7 graph identity, five target shapes, duplicate Child slots separated from
+compiled Top parent matchers, repetition normalization, lifecycle occurrences,
+native-versus-neutral diagnostics and frozen/detached storage. The private proof
+seam retains complete source correlation even below a text ceiling; public query
+applies requested disclosure beneath the construction ceiling. The old private
+privacy wording does not mean the private source table itself lacks excerpts.
+Mixed-slot .2.16, entry .2.17, selector .2.18 and shared budget .82 remain open.
+Four selected suites pass726; replay is in [[julia-semantic-introspection-admission]].

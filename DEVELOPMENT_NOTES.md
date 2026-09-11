@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Static fixtures and admission preserve bounded guarantees
+
+Private projection retains source correlation while public query applies ceilings.
+Twelve admission roles execute once and match all twenty fixture hashes; known
+projection/budget gaps remain. Alias metadata tests cover arities0/1 separately
+from normal/reversed runtime fixtures. Focused726 assertions pass.
+
 ## 2026-09-11 — Observed snapshots and emitted execution retain distinct proof
 
 Runtime observation tests execute fresh modules and a separate Julia process.

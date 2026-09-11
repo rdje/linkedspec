@@ -73,3 +73,15 @@ that compatibility projections use the existing source authority and preserve
 Unicode-scalar external coordinates. This current result does not relabel the
 original141-assertion alias proof as a fresh rerun. Focused replay:
 [[julia-runtime-structured-diagnostics]].
+
+## 2026-09-11 — static admission and alias consumer reading .1.47
+
+Julia .1.47 physically reads the complete alias consumer1–289 and freshly reruns
+all141 assertions. Seven exact alias/canonical pairs resolve their source and
+canonical names at arities0/1; those checks describe contract metadata rather
+than runtime admission of both arities. Normal/reversed Unicode capture fixtures
+execute native, loaded, emitted-payload-reconstructed, generated-plan and freshly
+included emitted routes. Captured values, absent reversed spans, named maps,
+logical identities and unknown-helper diagnostics stay exact. Current typed
+rollout14/0/231 and language250/105+1/126 pass without a new rollout change.
+Four selected suites pass726; replay is in [[julia-semantic-introspection-admission]].

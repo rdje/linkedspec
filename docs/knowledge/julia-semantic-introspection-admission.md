@@ -42,3 +42,32 @@ native admission 4/6.
 
 Related facts: [[semantic-introspection-neutral-contract]], [[julia-semantic-introspection-authority-map]],
 [[julia-semantic-query-public-api]], and [[julia-semantic-runtime-observation-authority-map]].
+
+## 2026-09-11 — static admission and alias consumer reading .1.47
+
+Julia .1.47 physically reads the complete admission consumer1–689. Fresh416
+assertions execute the exact twelve-role list once in order. Direct observations
+feed later runtime queries; loaded/reconstructed/generated helpers, fresh modules,
+standalone emitted hosts and enabled trace converge on the same event digest.
+All twenty typed/raw responses match the neutral hashes; public source privacy,
+page/budget/error/explanation fixtures, detached JSON and host-token denials pass.
+The positive fixtures do not cover the known mixed-slot, entry, authored-selector,
+action-callback or combined-budget counterexamples; all repair owners remain open.
+Static source-token checks are not universal dynamic non-execution instrumentation.
+
+From activation8ff4859b42c912dca4846df95361be49b7a93048, the exact replay below
+passes graph70, remaining99, admission416 and aliases141:726 assertions. Current
+semantic governance is6 groups/20 queries/128 mutations, rollout9 complete/0 pending
+and admission6 complete/0 pending; the original5/9 and4/6 paragraphs above are
+historical. Typed governance passes14/0/231, and language coverage reports250 call
+names,105 corpus plus one named-mark fixture and126 public Perl contracts. These
+checker counts are not a fresh execution of all backends. No admission state,
+production code, canonical gate or dependency build changes in this reading leaf.
+Emitter1–65 remains partial, with no complete emitter-consumer credit here.
+
+```bash
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include("julia/test/semantic_index_static_graph_test.jl"); include("julia/test/semantic_index_static_remaining_test.jl"); include("julia/test/semantic_introspection_julia_admission_test.jl"); include("julia/test/source_boundary_compatibility_aliases_test.jl")'
+bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py
+bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py
+bash tools/project_data_run.sh perl tools/check_language_capability_coverage.pl
+```

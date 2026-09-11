@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.47 - read static admission and source alias consumers
+
+Read1500 fragments/56328 bytes, reaching47/52 groups and82 complete files.
+Static, admission and alias suites pass726 assertions; semantic, typed-source
+and language checks pass. Preserve every open repair, private/public source
+boundaries and the distinction between alias metadata and actual execution.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.46 - read runtime observation and source consumers
 
 Read1500 fragments/55751 bytes, reaching46/52 groups and78 complete files.
