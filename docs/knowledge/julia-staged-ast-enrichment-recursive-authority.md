@@ -88,3 +88,13 @@ position/span/diagnostic rebasing through the plan-preparation prefix. Extent
 accumulation checks representable bounds before addition. Existing491 consumer
 assertions pass; recursive scheduling suffix remains unread. Registry patterns have
 separate confirmed gaps under .2.13: [[julia-staged-registry-pattern-boundaries]].
+
+## 2026-09-11 — complete scheduler reading and bounded-byte correction
+
+Julia .1.22 completes the scheduler and settlement source. The returned-marker
+queue, fresh expiring context and guarded maximum-call admission are verified.
+However, the earlier bounded-diagnostic description is limited by actual retained
+record size: tiny ceilings and exhaustion can retain an oversized sentinel. Julia
+.2.14 owns repair with Dart .2.17.1 accounting coordination. Exact51 resource
+assertions,657 existing assertions and byte counts:
+[[julia-staged-diagnostic-byte-boundaries]]. No repair is closed.

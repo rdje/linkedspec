@@ -193,3 +193,11 @@ Related: [[dart-staged-ast-enrichment-recursive-authority]],
 [[dart-staged-ast-enrichment-current-depth-authority]],
 [[general-staged-ast-enrichment-neutral-contract]],
 [[dart-progressive-nested-authority-gap]].
+
+## 2026-09-11 — separate Julia confirmation
+
+Julia .1.22 independently measures the same retained-byte overruns, while its
+maximum-call admission correctly rejects before callbacks. Julia .2.14 owns
+backend repair and coordinates the shared accounting decision with Dart .2.17.1.
+The original Dart observations and .2.18 remain unchanged. Exact Julia replay:
+[[julia-staged-diagnostic-byte-boundaries]].

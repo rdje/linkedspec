@@ -71,3 +71,12 @@ The current admitted consumer passes 491 assertions and the neutral/public check
 pass 123/129 mutations. Historical static effect claims remain qualified by
 [[julia-recognition-effect-integration-gap]]; no repair or new carrier admission
 is inferred from this source reading.
+
+## 2026-09-11 — complete declaration source reading
+
+Julia .1.22 completes StagedParseJobDeclaration1-336. Exact direct/derived keys
+and Int endpoints pass through typed source ownership, range conversion and
+materialization; entry/local whole matches and participating capture ranges
+remain distinct. Markers retain only detached logical options/text/provenance.
+Existing typed127/staged491 pass with neutral checks; no source change or
+recognition-effect repair is inferred. Replay: [[julia-staged-diagnostic-byte-boundaries]].

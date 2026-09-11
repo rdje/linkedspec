@@ -105,3 +105,12 @@ The earlier491 assertions pass but omit confirmed pattern/all-top failures now
 owned by Julia .2.13. Exact36 Julia/14 neutral controls and source conclusions:
 [[julia-staged-registry-pattern-boundaries]]. Settlement/scheduler suffix remains
 unread; no prior repair or public admission is closed by this reading.
+
+## 2026-09-11 — complete one-depth settlement reading
+
+Julia .1.22 completes target collision/reservation, detachment, stitching and
+one-depth execution. Marker nodes count atomically but their copied contents
+still undergo cycle/plain-data and deep live-key validation. The one-depth API
+has no recursive invocation-resource argument. Recursive diagnostic retention
+has separately measured gaps: [[julia-staged-diagnostic-byte-boundaries]].
+Existing staged491 passes; registry .2.13 and diagnostic .2.14 remain open.

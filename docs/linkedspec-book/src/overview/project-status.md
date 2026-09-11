@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 21/52 owned groups; its twenty-second reading child is next, with approved ADR0115 capacity in place.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 22/52 owned groups; its twenty-third reading child is next, with approved ADR0115 capacity in place.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,21 +297,34 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 21/52 groups complete:** StagedAstEnrichment is read through
-line 1988, covering registry resolution, authority checks, identities, plan caching,
-source rebasing and the start of stitch validation. Cumulative coverage is 29,925
-lines /1,087,600 bytes and twenty-seven complete files. Exact scopes remain in
-`docs/tasks/JULIA-STARTUP-READING.md`. The existing staged suite passes 491 assertions;
-36 additional Julia assertions and 14 neutral controls establish the limitations
-below. Governed staged/public checks pass. All earlier repair tasks remain open.
+**Julia reading is 22/52 groups complete:** staged enrichment and parse-job
+declarations are fully read, together with the first 343 lines of generated
+Unicode casing data. Cumulative coverage is 31,425 lines /1,137,243 bytes and
+twenty-nine complete files. Exact scopes remain in
+`docs/tasks/JULIA-STARTUP-READING.md`. Existing casing, typed-source and staged
+suites pass 657 assertions; 51 resource assertions establish the boundary below.
+Neutral regeneration, typed-source and staged/public checks pass. Earlier repair
+tasks remain open, including registry validation.
 
-Staged dispatch selects only from caller-prepared registry outcomes. Entry grants
-intersect caller capabilities and policies, and numeric ceilings take the minimum.
-The selected top rule participates in job identity. Cached plans retain compiled
-callbacks and identity, without storing child results. Recursive lineage checks
-compare exact parser/top/payload/provenance tuples and require smaller contained
-source regions for same-parser recurrence. Remaining stitching and scheduling
-source is pending physical reading; passing consumer tests give no unread credit.
+Staged enrichment copies the parent AST, reserves each depth's targets before
+callbacks, detaches child results and queues only newly returned markers. Child
+contexts expire after callbacks. Parse-job declaration materializes text from
+live typed source ranges and produces inert logical markers. Unicode mappings
+remain pinned to version 17.0.0; the table/evaluator suffix is still unread.
+
+**Known Julia limitation — staged diagnostic byte limits:** a one-byte allowance
+can retain a 187-byte truncation record; a 64-byte allowance can retain 375 bytes
+across two siblings. Returning a remaining allowance of zero does not make those
+records fit. Julia `.2.14.1-.3` coordinate the accounting decision with Dart's
+existing `.2.17.1`, then own implementation and carrier proof. The measurements
+exclude list wrappers and duplicate sidecar copies, so even that narrower count
+overruns the allowance. This is private recursive-host API evidence.
+
+Julia correctly rejects an exhausted staged call count before invoking a callback,
+including at the maximum integer boundary. A single remaining call still succeeds.
+This positive control does not resolve the separately tracked Rust/Dart call-count
+failures. Source conclusions, exact byte table and focused replay:
+`docs/knowledge/julia-staged-diagnostic-byte-boundaries.md`.
 
 **Known Julia limitation — staged registry validation:** a trailing newline in a
 host-supplied parser identity, digest or top name can pass validation and reach a
@@ -598,8 +611,8 @@ SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` sti
 own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
-Julia has read twenty-one of 52 exact groups across 95 baseline entries;
-its twenty-second physical reading child is next, followed by the remaining Lua/supporting
+Julia has read twenty-two of 52 exact groups across 95 baseline entries;
+its twenty-third physical reading child is next, followed by the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,

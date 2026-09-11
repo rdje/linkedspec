@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.22 - complete staged reading and own diagnostic byte retention
+
+Complete staged authority/declaration reading and open Unicode lower mappings:
+exact1,500 fragments /49,643 bytes. Existing657 and diagnostic51 assertions plus
+neutral checks pass. Own diagnostic retention under .2.14 with shared Dart policy
+coordination; preserve positive call exhaustion, source, history and prior repairs.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.21 - read staged resolution and own registry pattern validation
 
 Read StagedAstEnrichment489-1988: exact1,500 fragments /56,058 bytes.

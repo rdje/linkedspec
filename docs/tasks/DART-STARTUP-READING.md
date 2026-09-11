@@ -1272,6 +1272,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Goal: Reconcile hard diagnostic byte ceilings with the required truncation-sentinel fields.
   Dependencies: Startup gates; preserve exact measured .1.26 intake.
   Acceptance: Define the accounting unit and behavior when the governed sentinel itself cannot fit, including initial tiny positive limits, exhausted cumulative allowance, stage-chain growth, sidecar copies and diagnostic-node policy. Preserve authority narrowing; do not silently exempt unlimited fallback metadata. Audit the reference and other staged backend authorities with exact probes and route separately confirmed gaps before selecting the compatible repair.
+  Additional evidence: Julia .1.22 independently confirms the same187/188/375-byte retained overruns and correct maximum-call rejection. Julia .2.14 depends on this shared accounting decision and owns its backend implementation/carrier proof; docs/knowledge/julia-staged-diagnostic-byte-boundaries.md preserves exact controls. Original Dart measurements and .2.18 call repair remain unchanged.
   Verification: `pending`
   Commit: `pending`
 
@@ -1566,7 +1567,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.22` | `pending` | Read staged enrichment1989-2809, declarations1-336 and UnicodeCaseMapping1-343 after clean .1.21; reconcile focused proof and preserve repairs. |
+| 1 | `JULIA-STARTUP-READING.1.23` | `pending` | Read UnicodeCaseMapping344-1843 after clean .1.22; reconcile generated data and preserve every pending repair. |
 
 ## Decisions
 

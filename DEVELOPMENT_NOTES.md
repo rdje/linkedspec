@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia staged diagnostic bytes and call admission
+
+Diagnostic fallback can exceed its allowance and recur after exhaustion; measured
+187/188/375-byte controls now own .2.14 repair. Julia checks call exhaustion before
+increment, including the maximum integer boundary. Declaration uses exact typed
+source materialization; Unicode17 prefix and regeneration retain pinned data.
+
 ## 2026-09-11 — Julia staged registry pattern boundaries
 
 Dollar-anchored staged occursin admits final LF; parser components reject valid

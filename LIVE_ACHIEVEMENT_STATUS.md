@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.21 reads StagedAstEnrichment489-1988: 21/52 groups, 29,925 fragments /1,087,600 bytes and twenty-seven complete files. Existing staged491, diagnostic Julia36/neutral14 and neutral123/public129 checks pass. Registry/cache patterns admit trailing LF, reject valid digit-led parser components and omit nondefault top validation; .2.13 owns repair. No source or prior repair changes; history and ADR0115 controls remain. Julia .1.22 is next; no full component/canonical gate or dependency build. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.22 completes StagedAstEnrichment/Declaration and reads UnicodeCaseMapping1-343: 22/52 groups, 31,425 fragments /1,137,243 bytes and twenty-nine complete files. Existing casing39/typed127/staged491 assertions pass657 plus selection1; private diagnostic/call51 and neutral Unicode/typed231/staged123/public129 checks pass. Three diagnostic-byte overruns now have .2.14 repair ownership coordinated with Dart .2.17.1; maximum call exhaustion correctly rejects. All prior repairs, source, history and ADR0115 controls remain. Julia .1.23 is next; no full component/canonical gate or dependency build. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.81` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `JULIA-STARTUP-READING.1.21 - read staged resolution and own registry pattern validation` — Julia .1.21 reads StagedAstEnrichment489-1988: 21/52 groups, 29,925 fragments /1,087,600 bytes and twenty-seven complete files. Existing staged491, diagnostic Julia36/neutral14 and neutral123/public129 checks pass. Registry/cache patterns admit trailing LF, reject valid digit-led parser components and omit nondefault top validation; .2.13 owns repair. No source or prior repair changes; history and ADR0115 controls remain. Julia .1.22 is next; no full component/canonical gate or dependency build.
+- `JULIA-STARTUP-READING.1.22 - complete staged reading and own diagnostic byte retention` — Julia .1.22 completes StagedAstEnrichment/Declaration and reads UnicodeCaseMapping1-343: 22/52 groups, 31,425 fragments /1,137,243 bytes and twenty-nine complete files. Existing casing39/typed127/staged491 assertions pass657 plus selection1; private diagnostic/call51 and neutral Unicode/typed231/staged123/public129 checks pass. Three diagnostic-byte overruns now have .2.14 repair ownership coordinated with Dart .2.17.1; maximum call exhaustion correctly rejects. All prior repairs, source, history and ADR0115 controls remain. Julia .1.23 is next; no full component/canonical gate or dependency build.
 
 ## Next Action
 
-- `JULIA-STARTUP-READING.1.22` — Read staged enrichment1989-2809, declarations1-336 and UnicodeCaseMapping1-343 after clean .1.21; preserve repairs.
+- `JULIA-STARTUP-READING.1.23` — Read UnicodeCaseMapping344-1843 after clean .1.22; preserve every pending repair.
 
 ## Recent Completions
+
+- `2026-09-11` — `JULIA-STARTUP-READING.1.22` reads1,500 fragments /49,643 bytes;657 existing and51 resource assertions pass; diagnostic-byte repair .2.14 remains open.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.21` reads1,500 fragments /56,058 bytes;491 existing plus36 Julia/14 neutral diagnostics pass; staged registry repair .2.13 remains open.
 
@@ -48,8 +50,6 @@
 - `2026-09-11` — `JULIA-STARTUP-READING.1.8` reads1,224 fragments /65,496 bytes;246 existing assertions, byte-fresh MCP binding and neutral14/9/4 pass; no repair closed.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.7` reads 1,500 fragments /57,108 bytes; 1,159 existing assertions and 36 diagnostic assertions pass; recognition repair .2.3 remains open.
-
-- `2026-09-11` — `JULIA-STARTUP-READING.1.6` reads 1,500 fragments /47,482 bytes; 198 selected suite assertions and ten CLI process families pass; no repair closed.
 
 ## History
 
