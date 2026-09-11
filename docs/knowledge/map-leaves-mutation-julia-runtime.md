@@ -56,3 +56,15 @@ the outgoing edge selects and matches `Done`'s regex. A regex owned by `Top` wou
 
 Related: [[map-leaves-mutation-neutral-contract]], [[write-map-leaves-neutral-composition]],
 [[write-vivification-julia-runtime]], and ADR `0036`.
+
+## September 11 traversal and publication reading
+
+Julia .1.16 reads receiver existence/kind checks, original-shape copying, identity
+guard activation, sorted harray/ordered array traversal, detached callback frames,
+one complete root publication, guard release and ordinary fluent continuation.
+Callback scopes restore copied values and binding identities in reverse order.
+The existing mutation suite passes 496 assertions; neutral base/composition167/592
+and write105 remain green. No mutation source or guard changed. The new false
+recursion finding concerns nonbang final-codeblock helper identity, independently
+owned by Julia .2.8 and [[julia-callback-helper-recursion-identity-gap]].
+Historical pending-admission wording above predates current .19.7/.19.8/.19.9.

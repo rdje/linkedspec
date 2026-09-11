@@ -36,3 +36,14 @@ diagnostic stage is `user_function_call` and whose message includes the cycle pa
 Related facts: [[julia-user-function-registry]], [[julia-staged-function-body-registry]],
 [[julia-variadic-user-functions]], [[dart-user-function-runtime-execution]], [[rust-user-function-runtime-parity]],
 [[terse-user-defined-functions-mvp-contract]].
+
+## September 11 frame/cache reconciliation
+
+Julia .1.16 reads the execution frame and body-cache owner. Function calls save
+and replace variables, arrays, hashes and binding identities together; fixed/rest
+parameters receive fresh identities and caller state restores in finally. Body
+source is parsed and final-block-normalized once per registry index in the current
+execution context. The existing registered-function suite passes nine assertions;
+full focused replay lives in [[julia-callable-codeblock-dynamic-invocation]].
+This differs from scoped dynamic codeblock parameters and does not repair the
+helper callback identity gap owned by Julia .2.8.

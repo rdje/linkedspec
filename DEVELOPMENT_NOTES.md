@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia helper callback recursion identity
+
+The callable executor tracks the supplied name; with/tree dispatch supplies the
+helper name, colliding across distinct nested callbacks and losing bound names.
+Native/reconstructed controls distinguish four false cycles and one wrong cycle
+identity from valid single/sequential/mixed calls. Exact repair owner is .2.8.
+
 ## 2026-09-11 — Julia recognition attempt preflight
 
 RecognizeOnce executes its child before token lookup and authority validation.

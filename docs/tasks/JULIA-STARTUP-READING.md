@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `JULIA-STARTUP-READING`
-- Status: `active` / reading 15/52; selector, switch, recognition, pattern, observer and token repairs pending
+- Status: `active` / reading 16/52; selector, switch, recognition, pattern, observer, token and callback repairs pending
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.5`
 - Created: `2026-09-11`
 - Last updated: `2026-09-11`
@@ -43,7 +43,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Inventory SHA-256: `ca3cff4fe4c0e162448d6dbac82d89898673023951afaeced17d5b9a838ccd10`.
 - Ordered range SHA-256: `fde325f80ae7b56c5890d149fbc965c09890890e963a1fa9aab08e8c9d962337`.
 - Line coordinates are one-based, inclusive LF physical lines. Every child pins its range digest.
-- Current physical reading: 15/52 children, 20,925/75,984 lines and 794,451/2,693,170 bytes; twenty-two complete files.
+- Current physical reading: 16/52 children, 22,425/75,984 lines and 841,618/2,693,170 bytes; twenty-two complete files.
 - Exact replay and capacity assessment: `docs/knowledge/julia-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -59,7 +59,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Dependencies: Startup .3.5.0 decomposition committed; each child starts from a clean prior handoff.
   Children: `.1.1-.1.52`, with exact scopes below.
   Acceptance: Every child records physical coverage, comprehension, Knowledge reconciliation, findings and focused proof before its commit. Retain all current-delta and interrupted-range evidence.
-  Verification: Julia .1.15 reads Interpreter3116-4615: 15/52 groups, 20,925 fragments /794,451 bytes and twenty-two complete files. Existing marker1/control6/function9/cursor17/progressive62/staged491/recognition207 assertions pass (793 plus selection1); token preflight diagnostic80 proves child execution before missing/repeated/post-commit rejection across four public routes. Neutral progressive116/public60, staged123/public129 and recognition138/250/58 pass. New .2.7.1/.2.7.2 own preflight and static-sequence/carrier recurrence; all prior repairs, source, history and ADR0115 controls remain. Julia .1.16 is next; no full component/canonical gate or dependency build.
+  Verification: Julia .1.16 reads Interpreter4616-6115: 16/52 groups, 22,425 fragments /841,618 bytes and twenty-two complete files. Existing array2/hash1/function9/tree2/callable125/contextual118/construction239/mutation496 assertions pass (992 plus selection1); nine native/reconstructed callback cases pass84 diagnostic assertions. New .2.8.1/.2.8.2 own false helper-name recursion and lost bound callback identity. Neutral callable23, mutation167+592 and write105 checks pass. All prior repairs, source, history and ADR0115 controls remain. Julia .1.17 is next; no full component/canonical gate or dependency build.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.1.1`
@@ -318,14 +318,21 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Commit: `JULIA-STARTUP-READING.1.15 - read control dispatch and own token preflight repair`.
 
 - ID: `JULIA-STARTUP-READING.1.16`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Julia group 16 and reconcile its source evidence.
   Dependencies: `JULIA-STARTUP-READING.1.15` committed; empty brief and clean repository.
   Scope: `julia/src/runtime/Interpreter.jl` lines 4616-6115
   Baseline evidence: 1500 fragments / 47167 bytes; ordered range SHA-256 `7d4512f98e5f1be18f67db7b2c2c70d445da22d7cc6edafe6d8bcffe2804b463`.
+  Activation commit: `bfd68cd6ec4dc3a8801ea51e12f2d666f735b275`.
+  Verification tier: `focused`
+  Focused checks: Exact bounded source/range reconstruction; existing array/hash/function/tree/callable/contextual/construction/map-mutation suites; native/reconstructed callback identity diagnostic; neutral callable/mutation/write checks; exact probe preservation/cleanup, source/prior-task/history, Knowledge, memory, book and normal doctrines.
+  Canonical trigger: `none` — ordinary reading and defect intake; no source, contract, format, infrastructure or dependency change.
   Acceptance: Physically read every owned byte, inspect current deltas, reconcile Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit. Do not count truncated output or unread consumer suffixes.
-  Verification: `pending`
-  Commit: `pending`
+  Comprehension: Completes ordinary helper fallback and bound-codeblock validation, eager ordered/copied arguments, arity/cycle checks, cached body execution and reverse scoped-binding restoration. Helper names incorrectly become callback recursion identities. User functions instead replace all three stores and binding identities, normalize/cache body source and restore caller state in finally. Inline branches remain lazy; with callbacks resolve before scoped value installation. Set/push guard the target before operands/child dispatch; aggregate constructors retain splice behavior. Helper-family sets lead into map_leaves! original-shape traversal with detached frames, atomic publication, guard release and post-commit continuation. Fluent execution handles leading array-end mutation, lazy coalesce, receiver with/tree and helper projections; the tree reduce suffix continues in .1.17.
+  Knowledge: Dynamic-callable and user-function cards now record exact scope/cache differences and qualify old generic-normalization status. Map-mutation fact reconciles current source and496-assertion proof. docs/knowledge/julia-callback-helper-recursion-identity-gap.md owns exact diagnostic and separate repair.
+  Findings: New .2.8/.2.8.1/.2.8.2 own false same-helper recursion and helper-mediated bound callback identity. Four nested anonymous cases reject as with→with/map_leaves→map_leaves; direct cb recursion correctly reports cb→cb while helper-mediated cb reports with→with. Single, sequential and mixed map/reduce controls succeed on native and SpecFile-JSON routes. No unbounded escape, repeated-body count, enabled trace or fresh emitted defect proof. Dart .2.10 and dated Lua identity evidence remain separate.
+  Verification: Six untruncated windows cover1500 fragments /47167 baseline-identical bytes; ordered-range digest7d4512f98e5f1be18f67db7b2c2c70d445da22d7cc6edafe6d8bcffe2804b463 and raw SHA8f184e3932db3eeec4f415e24172b8aef2c9fd920903a7922ae12166bc471872. Existing array2/hash1/function9/tree2/callable125/contextual118/construction239/mutation496 pass (992 plus selected-set equality1). Diagnostic84 spans18 outcomes; initial raw-string JSON encoding failed before runtime and direct literal rows corrected the harness. Neutral callable23, mutation167+592 and write105 pass. Exact executed probe is copied into the fact and its single scratch file safely removed with absence verified. Exact source/coverage/prior-node/history, Knowledge, memory, bounded histories, book and normal doctrines govern landing; no unread-source credit, complete backend/canonical gate or dependency build.
+  Commit: `JULIA-STARTUP-READING.1.16 - read callable execution and own callback identity repair`.
 
 - ID: `JULIA-STARTUP-READING.1.17`
   Status: `pending`
@@ -692,7 +699,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Goal: Preserve disjoint repair ownership for every confirmed Julia finding.
   Dependencies: Findings from .1; source repair additionally requires startup .3/.4/.5.
   Acceptance: Reuse exact existing startup owners when applicable; otherwise add bounded repair children with source mechanism, reproduction, acceptance and unblock conditions. No finding is closed by reading alone.
-  Children: .2.1 callable-body selector validation; .2.2 attached-switch body/duplicate-default validation; .2.3 recognition-effect integration; .2.4 MCP pattern full matching; .2.5 progressive identity full matching; .2.6 semantic callback action passthrough; .2.7 recognition attempt preflight. Nested authority and diagnostic review retain startup .37.1/.37.2. Prior README findings retain startup .41.2/.41.3/.41.7.
+  Children: .2.1 callable-body selector validation; .2.2 attached-switch body/duplicate-default validation; .2.3 recognition-effect integration; .2.4 MCP pattern full matching; .2.5 progressive identity full matching; .2.6 semantic callback action passthrough; .2.7 recognition attempt preflight; .2.8 helper callback recursion identity. Nested authority and diagnostic review retain startup .37.1/.37.2. Prior README findings retain startup .41.2/.41.3/.41.7.
   Verification: `pending` repairs; .1.3 owns the callable-body selector gap, and .1.4 confirms attached-switch projection omission and default replacement. Earlier documentation and helper-arity owners remain intact.
   Commit: `pending`
 
@@ -886,6 +893,32 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Verification: `pending`
   Commit: `pending`
 
+- ID: `JULIA-STARTUP-READING.2.8`
+  Status: `pending`
+  Goal: Keep callback recursion identity separate from helper names.
+  Dependencies: Startup .3/.4/.5; .1.16 diagnostic intake.
+  Evidence: Interpreter4750/4776 uses supplied name as active-codeblock identity; helper/receiver with passes with at5141/6039, and tree callbacks carry method at6080. Four distinct nested callback cases falsely reject; bound cb recursion through with reports with→with instead of cb→cb. Nine native/SpecFile-JSON controls pass84 assertions.
+  Children: .2.8.1 callback identity repair; .2.8.2 supported-route and public recurrence.
+  Acceptance: Distinct anonymous callbacks may nest without false recursion; a callback passed by variable retains its binding identity and true direct/mutual/helper-mediated recursion remains bounded with exact ordered diagnostics. Preserve dynamic scope, three-store restoration and separate map_leaves! receiver-write identities. Dart .2.10 is a separate backend owner; dated Lua behavior is comparison evidence only.
+  Verification: `pending` repair; docs/knowledge/julia-callback-helper-recursion-identity-gap.md owns exact replay and limitations.
+  Commit: `pending`
+
+- ID: `JULIA-STARTUP-READING.2.8.1`
+  Status: `pending`
+  Goal: Repair helper/receiver/tree callback identities at the shared executor seam.
+  Dependencies: Startup .3/.4/.5; .1.16 committed; relevant source fully read.
+  Acceptance: Inventory anonymous, contextual, literal and bound-variable callback origins; preserve the originating binding identity through helper dispatch without assigning helper names to anonymous values. Add RED/GREEN same-helper/mixed-helper nesting and true direct/mutual/helper-mediated recursion controls, including copied/restored scopes after failure. Do not weaken recursion protection or receiver mutation guards.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-STARTUP-READING.2.8.2`
+  Status: `pending`
+  Goal: Verify callback identity across supported carriers and reconcile public claims.
+  Dependencies: .2.8.1; startup prerequisites.
+  Acceptance: Exercise native, reconstructed, generated-plan and fresh isolated emitted direct/traced routes with exact values, ordered cycles, parameter restoration and unrelated effects. Keep final-block normalization, callable signatures, source formats and map_leaves! behavior unchanged; run designated canonical public/admission proof and update book/Knowledge before closure.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `JULIA-STARTUP-READING.3`
   Status: `pending`
   Goal: Independently close Julia reading and route Lua startup reading.
@@ -920,7 +953,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.16` | `pending` | Read Interpreter4616-6115 after clean .1.15; keep all repair prerequisites and evidence intact. |
+| 1 | `JULIA-STARTUP-READING.1.17` | `pending` | Read Interpreter6116-7615 after clean .1.16; keep all repair prerequisites and evidence intact. |
 
 ## Decisions
 
@@ -944,6 +977,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Verification Log
 
+- `2026-09-11` .1.16: Julia .1.16 reads Interpreter4616-6115: 16/52 groups, 22,425 fragments /841,618 bytes and twenty-two complete files. Existing array2/hash1/function9/tree2/callable125/contextual118/construction239/mutation496 assertions pass (992 plus selection1); nine native/reconstructed callback cases pass84 diagnostic assertions. New .2.8.1/.2.8.2 own false helper-name recursion and lost bound callback identity. Neutral callable23, mutation167+592 and write105 checks pass. All prior repairs, source, history and ADR0115 controls remain. Julia .1.17 is next; no full component/canonical gate or dependency build.
 - `2026-09-11` .1.15: Julia .1.15 reads Interpreter3116-4615: 15/52 groups, 20,925 fragments /794,451 bytes and twenty-two complete files. Existing marker1/control6/function9/cursor17/progressive62/staged491/recognition207 assertions pass (793 plus selection1); token preflight diagnostic80 proves child execution before missing/repeated/post-commit rejection across four public routes. Neutral progressive116/public60, staged123/public129 and recognition138/250/58 pass. New .2.7.1/.2.7.2 own preflight and static-sequence/carrier recurrence; all prior repairs, source, history and ADR0115 controls remain. Julia .1.16 is next; no full component/canonical gate or dependency build.
 - `2026-09-11` .1.14: Julia .1.14 reads Interpreter1616-3115: 14/52 groups, 19,425 fragments /743,537 bytes and twenty-two complete files. Existing rule39/control6/emitter65/capture66 assertions pass (176 plus selection1); the 108-assertion public observer diagnostic isolates action-child exception identity loss across four routes. Neutral semantic6/20/128, rollout9/0 and admission6/0 pass. New .2.6.1/.2.6.2 own passthrough repair and supported-route recurrence; all prior repairs, source, evidence and ADR0115 controls remain. Julia .1.15 is next; no full component/canonical gate or dependency build.
 - `2026-09-11` .1.13: Julia .1.13 reads Interpreter116-1615: 13/52 groups, 17,925 fragments /694,012 bytes and twenty-two complete files. Existing diagnostics7/typed127/recognition207/observation30/gap319/options53 assertions pass (743); neutral typed231 and recognition138/250/58 pass. Runtime state, recognition/gap adapters and typed projections reconcile with Knowledge while effect repair .2.3 remains open. Governed notes rollover preserves213 lines/12898 bytes as segment4979; prior history and ADR0115 limits remain unchanged. Julia .1.14 is next; no full component/canonical gate or dependency build.
@@ -966,6 +1000,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Commit Log
 
+- `2026-09-11` .1.16: `JULIA-STARTUP-READING.1.16 - read callable execution and own callback identity repair`.
 - `2026-09-11` .1.15: `JULIA-STARTUP-READING.1.15 - read control dispatch and own token preflight repair`.
 - `2026-09-11` .1.14: `JULIA-STARTUP-READING.1.14 - read rule execution and own observer passthrough repair`.
 - `2026-09-11` .1.13: `JULIA-STARTUP-READING.1.13 - read runtime state and source projections`.
@@ -986,6 +1021,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Changelog
 
+- `2026-09-11` .1.16: Reads callable/scope/mutation/fluent execution and owns helper callback recursion identity repair; prior defects remain open.
 - `2026-09-11` .1.15: Reads value/control/helper dispatch and owns recognition-token preflight repair; earlier defects remain open.
 - `2026-09-11` .1.14: Reads rule/action execution, owns observer passthrough repair and qualifies historical callback claims.
 - `2026-09-11` .1.13: Reads runtime state/projections, reconciles historical claims, and preserves exact notes history through the governed rollover.

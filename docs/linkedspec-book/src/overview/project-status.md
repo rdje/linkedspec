@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 15/52 owned groups; its sixteenth reading child is next, with approved ADR0115 capacity in place.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 16/52 owned groups; its seventeenth reading child is next, with approved ADR0115 capacity in place.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,11 +297,22 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 15/52 groups complete:** Interpreter is read through line 4615.
-Cumulative coverage is 20,925 lines /794,451 bytes and twenty-two complete files.
-Exact scopes remain in `docs/tasks/JULIA-STARTUP-READING.md`. Selected control,
-function, cursor, progressive, staged and recognition suites pass 793 assertions;
-the new token preflight diagnostic passes 80. Neutral governance remains green.
+**Julia reading is 16/52 groups complete:** Interpreter is read through line 6115.
+Cumulative coverage is 22,425 lines /841,618 bytes and twenty-two complete files.
+Exact scopes remain in `docs/tasks/JULIA-STARTUP-READING.md`. Selected aggregate,
+function, tree, callable and receiver-mutation suites pass 992 assertions; the new
+callback identity diagnostic passes 84. Neutral governance remains green.
+
+**Known Julia limitation — distinct callbacks can look recursive:** nested helper
+or receiver `with` callbacks currently reject with the cycle `with → with`, even
+when they are different anonymous blocks. Nested `map_leaves` callbacks similarly
+reject as `map_leaves → map_leaves`. Single calls, sequential calls, and a map
+callback containing a reduce callback succeed. A bound `cb` that calls itself
+through `with(v, cb)` is rejected, but the reported cycle loses its binding name.
+Julia `.2.8.1/.2.8.2` own callback identity and supported-route proof. Native and
+reconstructed sources agree; fresh generated/emitted defect reproduction remains
+pending. The separate `map_leaves!` receiver-write guard remains unchanged.
+Exact examples and replay: `docs/knowledge/julia-callback-helper-recursion-identity-gap.md`.
 
 **Known Julia limitation — recognition checks happen after the child runs:**
 `recognize_once(tx, call(Child))` enters Child before checking whether `tx` exists
@@ -522,8 +533,8 @@ SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` sti
 own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
-Julia has read fifteen of 52 exact groups across 95 baseline entries;
-its sixteenth physical reading child is next, followed by the remaining Lua/supporting
+Julia has read sixteen of 52 exact groups across 95 baseline entries;
+its seventeenth physical reading child is next, followed by the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,
