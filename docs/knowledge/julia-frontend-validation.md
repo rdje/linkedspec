@@ -64,3 +64,13 @@ with LF pass exact namespace checks. New .2.23/.2.24 own distinct repair/recurre
 leaves. Ten selector96 and ten identifier54 assertions, with exact valid/rejected
 comparisons, are in [[julia-null-selector-and-identifier-validation-gaps]]. Existing
 validator23 and larger gap/duplicate matrices remain passing finite evidence.
+
+## September 11 complete main validator consumer reading (.1.44)
+
+Testset4121–4217 passes23 assertions and validates the current shipped/rule-only
+corpus loop. Markerless entry is explicitly accepted; the earlier top-marker
+presence description is historical. Duplicate namespaces, mixed ownership, target
+indices, raw/regex failures, strict unused rules and function/parameter conflicts
+are covered by representative controls. Parser-discarded suffixes, reconstructed
+null selectors and terminal-LF identifiers remain separately repair-owned.
+Replay: [[julia-full-corpus-gate]], .1.44 below.

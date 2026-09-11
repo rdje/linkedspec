@@ -96,3 +96,14 @@ const REPO_ROOT=pwd()
 include("julia/test/rule_local_cursor_option_removal_test.jl")
 JULIA_GROUP8_OPTIONS
 ```
+
+## September 11 complete controlled-execution consumer reading (.1.44)
+
+Main4385–4728 passes58 assertions. Six controlled success fixtures retain wrapped
+output, source identity and boundary trace; runtime failures and output mismatches
+remain distinct and do not stop later fixtures. Named order, bounded/capped/offset
+selection, duplicate/missing/conflicting selectors and CLI exits0/1/2 are covered.
+The custom function parser builds one neutral wrap dictionary; the default
+source-producer route is independently exercised by the function/corpus tests.
+Managed temporary directories are repository-local. Replay is in
+[[julia-full-corpus-gate]], .1.44 below.

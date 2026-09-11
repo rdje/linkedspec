@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Main and semantic consumers retain their separate authorities
+
+Main parser loops skip function shells; separate spec-defined parsing and full
+corpus execution cover those routes. AST JSON roundtrip proves shape, not full
+validity. Semantic core retains18/16 exact identity but its assigned-regex fixture
+does not close source-correlation repair .2.15. Focused475 assertions pass.
+
 ## 2026-09-11 — Helper and trace consumers preserve independent state boundaries
 
 Tests distinguish copied harray updates from index mutation, zero-width presence

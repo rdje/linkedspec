@@ -54,3 +54,12 @@ end
 @test seen==selected
 JULIA_CORPUS_IO_REPLAY
 ```
+
+## September 11 complete manifest consumer reading (.1.44)
+
+Main4317–4383 passes20 assertions for the current105-fixture manifest, validation
+reporting, format/name/duplicate/count mismatches, missing/stale directories and
+missing/malformed expected JSON. Unlike the earlier .1.7 intake, .1.44 also runs
+the existing complete native corpus testset at105/105. Both retain exact manifest
+order and checked-in outputs; neither is a fresh all-backend or package signoff.
+Replay: [[julia-full-corpus-gate]], .1.44 below.

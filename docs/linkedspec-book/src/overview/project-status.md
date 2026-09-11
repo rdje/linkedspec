@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 43/52 owned groups. ADR0116 admits the finite evidence allowance; ADR0115 remains limited to history.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 44/52 owned groups. ADR0116 admits the finite evidence allowance; ADR0115 remains limited to history.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,16 +297,16 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 43/52 groups complete:** the main test file is read through
-line 3964, bringing coverage to 62,925 lines / 2,196,720 bytes and sixty-seven
-complete files. Sixteen complete testsets pass 138 assertions across helper
-values and mutations, captures, controls, functions, diagnostics and native trace.
-They distinguish copied values from mutations, absent from zero-width matches,
-and block-local returns from rule returns. The frontend trace fixture executes
-the function-source parser, complementing the separate descriptor-shape fixture.
-Scalar, binding, typed-source and logical contract checks also pass. These are
-bounded results; every existing limitation remains open. `.1.44` continues the
-main spec-parser tests and semantic-call consumers.
+**Julia reading is 44/52 groups complete:** the main test file and semantic
+call-core consumer are fully read; staged-call reading reaches line 42. Coverage
+is 64,425 lines / 2,252,996 bytes and sixty-nine complete files. The final main
+and call-core testsets pass 475 assertions, including exact execution of all 105
+native corpus fixtures. Semantic contract checks also pass.
+The corpus tests distinguish custom function dictionaries from the spec-defined
+function parser. AST serialization proves roundtrip shape, separately from
+validation. Call-source tests preserve exact occurrences and Unicode evidence;
+the known regex correlation gap remains open under `.2.15`, as do all other
+limitations. `.1.45` continues staged, query and observation consumers.
 
 **Approved Julia evidence capacity:** the director granted Knowledge lines
 72,000→79,000 and decision-record lines12,000→13,000 under ADR0116. The finite

@@ -62,3 +62,20 @@ the next no-change composition task.
 
 See [[julia-semantic-call-staged-projection-plan]], [[julia-semantic-introspection-authority-map]],
 [[semantic-introspection-staged-artifact-schema]], and [[semantic-introspection-neutral-contract]].
+
+## September 11 complete call-core consumer reading (.1.44)
+
+All408 source lines are read and79 existing assertions pass. Filtering staged/
+generated records and materializing source references yields the exact18/16
+neutral target; current full projection retains the separate four-record/nine-
+relation addition. Tests preserve authored/outer-before-inner occurrence order,
+Unicode bytes versus scalar columns, conservative rest shapes, detached copies,
+immutable tuple owners and private API boundaries. Static forbidden-token checks
+are source guards, not dynamic instrumentation of every possible execution path.
+
+The assigned `/trim(fake())/i` fixture proves its tested lexical context. Earlier
+general regex-skipping claims are qualified by the grouped/whitespace source
+correlation counterexamples in [[julia-semantic-regex-call-source-gap]], owned
+by .2.15. The passing79 does not close that defect or promote semantic admission.
+Staged consumer1–42 only begins reconstruction helpers; its tests remain unread.
+Exact main396/core79 and neutral replay: [[julia-full-corpus-gate]], .1.44 above.

@@ -42,3 +42,33 @@ See also [[julia-primary-cli-process-conformance]].
 The September 11 reading intake revalidates the current 105-fixture loader (20 manifest IO assertions),
 not full execution. See [[julia-corpus-manifest-io]] for the exact bounded replay. The older 99-case
 admission remains historical evidence and must not be presented as today's manifest size.
+
+## September 11 main consumer completion and current105 native proof (.1.44)
+
+The main test file is now physically read through5014 EOF. Its final18 testsets
+pass396 assertions: parser185, validation23, projection27, source-parser7,
+manifest20, controlled58, starter6, middle6, capture6, logical6, mutation/trivia7,
+recursive3, structural4, lib-reader4, shipped6, function4, full-corpus8 and AST16.
+The complete corpus test executes all105 fixtures in exact manifest order and
+compares every wrapped output to its checked-in expected value. Historical
+subwindows and selected shipped cases remain separately checked; their results
+are not counted as additional unique fixtures. Earlier99 counts stay historical.
+
+The final main testsets run without the separate includes or earlier main bodies.
+Original filename/line coordinates and helpers are retained. This is complete
+native corpus execution inside focused reading proof, not the full package gate,
+independent primary processes, generated carriers or other runtime backends.
+The separate read-through-EOF semantic call-core consumer adds79 assertions
+(475 total). Staged-call1–42 is helper setup only and receives no executed-test
+claim here. Its continuation remains .1.45.
+
+```bash
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; source=readlines("julia/test/runtests.jl"; keep=true); source[12:136].="\n"; source[471:3938].="\n"; include_string(Main, join(source), joinpath(pwd(),"julia/test/runtests.jl"))'
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include("julia/test/semantic_index_call_core_test.jl")'
+bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py
+```
+
+Neutral semantics remains6 fixture groups/20 exact queries/128 rejected mutations,
+with9 complete/0 pending rollout and6 complete/0 pending admission. All startup
+repairs remain open; exact positive fixture output is not a universal defect-free
+claim. Source identity and three reading ranges remain frozen in the task owner.

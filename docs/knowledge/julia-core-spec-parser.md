@@ -63,3 +63,13 @@ Exact18-case116-assertion native proof is [[julia-spec-lexical-boundary-defects]
 Fresh original frontend224 plus selection1 and Unicode1755 pass. Earlier .2.19
 inline/body/E evidence remains intact; no production repair, wider grammar or
 fresh CLI/emitted/MCP recurrence is claimed.
+
+## September 11 complete main parser consumer reading (.1.44)
+
+Main3940–4119 passes185 assertions across mode/header/body, edge/fluent/lifecycle,
+quoted-brace and fallback cases plus current shipped and rule-only corpus sources.
+The loop explicitly skips sources beginning with a function; separate producer
+and corpus testsets cover that path. These positive cases do not close parser
+suffix/literal/regex repairs .2.19–.2.21. Final AST JSON testset4936–5014 passes16
+structural roundtrip assertions; it does not validate or execute its hand-built
+sidecars. Exact replay: [[julia-full-corpus-gate]], .1.44 below.

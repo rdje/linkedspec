@@ -59,3 +59,14 @@ clean node succeeds. Repair .2.22.1-.3 and complete118-assertion diagnostic repl
 are in [[julia-function-projection-metadata-gaps]]. Existing projection27 plus
 source-parser7, registry39 and broader frontend/callable checks remain positive
 finite evidence, not universal projection validation.
+
+## September 11 complete projection and source-parser consumers (.1.44)
+
+Main4219–4294 passes27 projection assertions using helper-constructed neutral
+dictionaries: newline-preserving extraction, normalized indices/jobs, malformed
+node and text-drift rejection, and flattened output shapes. The independent
+4296–4315 producer test passes7 assertions by executing the checked-in parser
+over a corpus source and checking exact returned names/body text plus stitched
+functions. These routes remain distinct from the controlled corpus callback,
+which supplies its own function dictionary. Metadata repair .2.22 stays open.
+Exact replay: [[julia-full-corpus-gate]], .1.44 below.
