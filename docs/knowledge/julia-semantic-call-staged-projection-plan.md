@@ -209,3 +209,13 @@ text for real action calls. Earlier claims about ignoring regex literals apply
 only to their tested forms, not every valid regex. Exact92-assertion counterexamples
 and repair .2.15 are in [[julia-semantic-regex-call-source-gap]]. All nine existing
 semantic suites still pass1063; this does not close the defect.
+
+## 2026-09-11 — semantic consumer reading .1.45
+
+Julia .1.45 completes the staged-call consumer43–311 after .1.44 read1–42.
+The full62-assertion suite checks exact22/25/10 provenance, normalized payload/job/
+result and selected generated-plan fields, private sidecar corruption and plan
+contract/identity/order/entry rejection. Static forbidden-source checks and frozen
+owner assertions remain distinct from executing every possible target callback.
+Core79 plus compilation/query dependents compose759 assertions; replay is in
+[[julia-semantic-query-public-api]]. Existing source/projection repairs stay open.

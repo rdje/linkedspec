@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Semantic consumer proof stays bounded to its fixtures
+
+Compilation, staged provenance and query consumers pass759 assertions together.
+Nineteen static hashes exclude runtime events; source-token guards do not prove
+all dynamic non-execution. The malformed-operation callback remains uncalled.
+Shared budget .82 and every prior repair remain open despite positive fixtures.
+
 ## 2026-09-11 — Main and semantic consumers retain their separate authorities
 
 Main parser loops skip function shells; separate spec-defined parsing and full

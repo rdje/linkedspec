@@ -93,3 +93,25 @@ empty-container identity and thaw to fresh JSON values. Existing query and
 observation composition passes1286. Shared budget .82 and all source/projection
 repairs remain pending; helper reading does not expand those finite assertions.
 Replay: [[julia-semantic-static-correlation-gaps]].
+
+## 2026-09-11 — semantic consumer reading .1.45
+
+Julia .1.45 reads the complete public consumer1–293 and its kernel/traversal
+consumers. Public315 assertions check19 typed/raw exact hashes,26 malformed raw
+boundaries, Bool-as-integer rejection, JSON3 input, caller-input preservation,
+interleaving and fresh detached output. A callback supplied as the raw operation
+is rejected without invocation; static deny-token tests are separate evidence.
+The twentieth runtime-events query is excluded by these static fixture loops.
+Shared budget .82 and every prior repair remain open. Observation-routes1–149
+is only partial physical reading and receives no complete-route test credit here.
+
+From activation500fc3feaf78b91005f58c3f46138e3bc293ddc3, this exact replay passes
+compilation85, core79, staged62, kernel100, traversal118 and public315:759 total.
+The neutral checker passes6 fixture groups/20 queries/128 rejected mutations,
+rollout9 complete/0 pending and admission6 complete/0 pending. This is focused
+consumer proof, not a complete package, other-backend or canonical CI execution.
+
+```bash
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include("julia/test/semantic_index_compilation_foundation_test.jl"); include("julia/test/semantic_index_call_core_test.jl"); include("julia/test/semantic_index_call_staged_test.jl"); include("julia/test/semantic_index_query_kernel_test.jl"); include("julia/test/semantic_index_query_traversal_test.jl"); include("julia/test/semantic_index_query_public_test.jl")'
+bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py
+```

@@ -355,3 +355,12 @@ within validated boundaries, and detached diagnostic tuples convert to fresh
 JSON values. All source-index bytes remain baseline-identical. Query prefix
 reading and shared budget inconsistencies are separately preserved in
 [[semantic-query-budget-contract-gaps]], owned by startup .82.
+
+## 2026-09-11 — semantic consumer reading .1.45
+
+Julia .1.45 physically reads the complete compilation-foundation consumer1–329.
+Its85 assertions check compiled/failed snapshots, authority flags, authored order,
+entry and plan values, failure classification, detached JSON and private display.
+Source occurrence-count/deny checks guard construction topology; they are not
+universal dynamic instrumentation. Six selected semantic suites pass759 together;
+exact replay is in [[julia-semantic-query-public-api]]. All repairs stay open.

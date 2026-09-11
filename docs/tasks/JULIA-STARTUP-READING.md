@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `JULIA-STARTUP-READING`
-- Status: `active` / reading 44/52; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity, matching, staged, diagnostic, static, entry and selector-projection and member-suffix and literal-boundary and projection-metadata and selector/identifier repairs and diagnostic fixture correction pending
+- Status: `active` / reading 45/52; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity, matching, staged, diagnostic, static, entry and selector-projection and member-suffix and literal-boundary and projection-metadata and selector/identifier repairs and diagnostic fixture correction pending
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.5`
 - Created: `2026-09-11`
 - Last updated: `2026-09-11`
@@ -43,7 +43,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Inventory SHA-256: `ca3cff4fe4c0e162448d6dbac82d89898673023951afaeced17d5b9a838ccd10`.
 - Ordered range SHA-256: `fde325f80ae7b56c5890d149fbc965c09890890e963a1fa9aab08e8c9d962337`.
 - Line coordinates are one-based, inclusive LF physical lines. Every child pins its range digest.
-- Current physical reading: 44/52 children, 64,425/75,984 lines and 2,252,996/2,693,170 bytes; sixty-nine complete files.
+- Current physical reading: 45/52 children, 65,925/75,984 lines and 2,312,746/2,693,170 bytes; seventy-four complete files.
 - Exact replay and capacity assessment: `docs/knowledge/julia-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -59,7 +59,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Dependencies: Startup .3.5.0 decomposition committed; each child starts from a clean prior handoff.
   Children: `.1.1-.1.52`, with exact scopes below.
   Acceptance: Every child records physical coverage, comprehension, Knowledge reconciliation, findings and focused proof before its commit. Retain all current-delta and interrupted-range evidence.
-  Verification: Julia .1.44 finishes runtests and semantic call-core consumers, then reads staged-call1–42: 44/52 groups, 64425 lines/2252996 bytes and 69 complete files. Main396 and semantic core79 pass475 assertions, including exact105/105 native corpus output. Neutral semantic6/20/128 remains rollout9/0 and admission6/0. Core projection preserves18/16 identity and detached source evidence; its regex fixture does not close .2.15. AST JSON roundtrip is distinct from source/metadata validation. All repairs remain open; .1.45 continues staged/query/observation consumers.
+  Verification: Julia .1.45 completes staged-call, compilation and three query consumers, then reads observation-routes1–149: 45/52 groups, 65925 lines/2312746 bytes and 74 complete files. Six suites pass759 assertions: compilation85, call core79, staged62, kernel100, traversal118 and public315. Neutral semantic6/20/128 remains rollout9/0 and admission6/0. Static hashes and rejected-request fixtures do not close shared budget .82 or other repairs. Runtime-route bodies remain partial; .1.46 continues observation/source/static consumers.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.1.1`
@@ -812,14 +812,21 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Commit: `JULIA-STARTUP-READING.1.44 - finish main tests and read semantic call core`
 
 - ID: `JULIA-STARTUP-READING.1.45`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Julia group 45 and reconcile its source evidence.
   Dependencies: `JULIA-STARTUP-READING.1.44` committed; empty brief and clean repository.
+  Activation commit: `500fc3feaf78b91005f58c3f46138e3bc293ddc3`.
+  Verification tier: `focused`
+  Focused checks: Exact six-range/source coverage, complete staged/compilation/query consumers and neutral direct dependents, prior source/task/fact/history preservation, Knowledge/memory, both history checks, rendered book and normal doctrines.
+  Canonical trigger: `none` — bounded startup reading/evidence; no production, dependency, infrastructure or contract change.
   Scope: `julia/test/semantic_index_call_staged_test.jl` lines 43-311; `julia/test/semantic_index_compilation_foundation_test.jl` lines 1-329; `julia/test/semantic_index_query_kernel_test.jl` lines 1-264; `julia/test/semantic_index_query_public_test.jl` lines 1-293; `julia/test/semantic_index_query_traversal_test.jl` lines 1-196; `julia/test/semantic_index_runtime_observation_routes_test.jl` lines 1-149
   Baseline evidence: 1500 fragments / 59750 bytes; ordered range SHA-256 `eddbaaf9a7df865c269b3d8f30cafa8c4e50cf03ef4e0a4da7eccdfea7c02588`.
   Acceptance: Physically read every owned byte, inspect current deltas, reconcile Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit. Do not count truncated output or unread consumer suffixes.
-  Verification: `pending`
-  Commit: `pending`
+  Comprehension: Staged projection checks exact22-record/25-relation/10-source-reference provenance, sidecar corruption and generated-plan identity/order. Compilation retains typed accepted/failed authorities, detached diagnostics and authored function/rule order; fatal exception classification is separate from ordinary fallback. Kernel/traversal/public tests compose19 exact static hashes,26 malformed raw boundaries, Bool rejection, source ceilings, canonical traversal/costs and detached typed/JSON values. Observation-routes1–149 defines capture/host-process helpers and begins generated helper checks; the suffix is unread.
+  Knowledge: Append bounded consumer evidence to semantic authority, staged-call, kernel, traversal and public-query homes. Public-query home records the exact six-suite759 replay; source-reading coverage retains the all95-source/52-scope reconstruction. Shared budget .82 qualifications remain authoritative.
+  Findings: No new runtime defect or repair closure. Source-token occurrence/deny assertions are static guards, not universal dynamic no-execution instrumentation; the public callback-operation fixture separately proves its callback stays uncalled. Nineteen static hashes exclude the twentieth runtime-events query and do not cover the known combined-budget gaps. Correct the stale forty/forty-first current summary in the book under this leaf's synchronization scope; preserve historical evidence and all25 limitation headings.
+  Verification: Ten bounded untruncated source windows cover1500 fragments/59750 baseline-identical bytes; ordered SHAeddbaaf9a7df865c269b3d8f30cafa8c4e50cf03ef4e0a4da7eccdfea7c02588. Raw ranges: staged269/10890/SHA24b6b1b20c5f90047c147ecb45e343d4a92b5ea9de886a082a2c93e4c81fc830; compilation329/13508/SHA3217ca8e7e8bafa422bcaed838b7688c6caa68f8cef1d477a702592c5aab4d0d; kernel264/10536/SHA7f6f572345cbb6444e84f5fcd65be6ffdc82280d1630c70c9abc32b87e4ca780; public293/10858/SHAa46bf96a50e903990839b03a64ca3cc3ea9bf205f8d346bb446eef28bc6a5eae; traversal196/8777/SHA0ffb29b1978c78473eafc203df4892abc8099856aeef253a967c02e71e0b84d2; routes149/5181/SHA66fe542cd24b84c21bc5f08c698b11dbcc29e4ce749a5799f2862866247d6486. All six complete selected suites pass759 assertions; neutral semantic6/20/128, rollout9/0 and admission6/0 pass. All95-source/52-scope reconstruction and606 prior task nodes, five prior card prefixes, hot/history suffixes and25 rendered limitation headings pass. Knowledge72967/79000 lines, tasks84481/88000 and decisions12090/13000 fit; changes342/20655 and notes277/15623 need no rollover. Both pressure checks, Knowledge/memory and rendered book pass; normal doctrines govern landing.
+  Commit: `JULIA-STARTUP-READING.1.45 - read semantic compilation and query consumers`
 
 - ID: `JULIA-STARTUP-READING.1.46`
   Status: `pending`
@@ -1637,7 +1644,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.45` | `pending` | Continue staged-call43–311, compilation/query consumers and observation-routes1–149 after the clean .1.44 commit. |
+| 1 | `JULIA-STARTUP-READING.1.46` | `pending` | Continue observation/source/static consumers after the clean .1.45 commit. |
 
 ## Decisions
 
@@ -1668,6 +1675,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Source repairs retain startup prerequisites; those dependencies do not block source reading.
 
 ## Verification Log
+
+- `2026-09-11` .1.45: Julia .1.45 completes staged-call, compilation and three query consumers, then reads observation-routes1–149: 45/52 groups, 65925 lines/2312746 bytes and 74 complete files. Six suites pass759 assertions: compilation85, call core79, staged62, kernel100, traversal118 and public315. Neutral semantic6/20/128 remains rollout9/0 and admission6/0. Static hashes and rejected-request fixtures do not close shared budget .82 or other repairs. Runtime-route bodies remain partial; .1.46 continues observation/source/static consumers.
 
 - `2026-09-11` .1.44: Julia .1.44 finishes runtests and semantic call-core consumers, then reads staged-call1–42: 44/52 groups, 64425 lines/2252996 bytes and 69 complete files. Main396 and semantic core79 pass475 assertions, including exact105/105 native corpus output. Neutral semantic6/20/128 remains rollout9/0 and admission6/0. Core projection preserves18/16 identity and detached source evidence; its regex fixture does not close .2.15. AST JSON roundtrip is distinct from source/metadata validation. All repairs remain open; .1.45 continues staged/query/observation consumers.
 
@@ -1748,6 +1757,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Commit Log
 
+- `2026-09-11` .1.45: `JULIA-STARTUP-READING.1.45 - read semantic compilation and query consumers`.
+
 - `2026-09-11` .1.44: `JULIA-STARTUP-READING.1.44 - finish main tests and read semantic call core`.
 
 - `2026-09-11` .1.43: `JULIA-STARTUP-READING.1.43 - read helper capture and native trace consumers`.
@@ -1816,6 +1827,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Decomposition: `SESSION-STARTUP-READING.3.5.0 - freeze exact bounded Julia reading plan`.
 
 ## Changelog
+
+- `2026-09-11` .1.45: Complete staged/compilation/query consumers;45/52 groups and74 complete files. Preserve all repairs and correct stale current book summary; .1.46 follows.
 
 - `2026-09-11` .1.44: Finish main and semantic core consumers; 44/52 groups and 69 complete files. Preserve all repairs and exact105 native outputs; .1.45 follows.
 

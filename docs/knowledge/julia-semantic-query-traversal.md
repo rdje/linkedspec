@@ -81,3 +81,12 @@ Exact26 native diagnostic assertions, paired response equality, source mechanism
 and shared repair .82 are in [[semantic-query-budget-contract-gaps]]. The nine
 existing suites still pass1063. They do not establish the missing combined-limit
 contract. No source, fixture-hash or other-backend behavior change is claimed.
+
+## 2026-09-11 — semantic consumer reading .1.45
+
+Julia .1.45 reads the complete traversal consumer1–196. Its118 assertions cover
+ten completion hashes, all19 static hashes together, canonical incoming/both
+relations, logical costs, page/cursor errors, budget prefixes and detached values.
+The explanation test reserves a decision under max_records1; it does not cover
+the known relation/depth combined-budget counterexamples. Those remain startup
+.82 work. Six selected suites pass759; replay is in [[julia-semantic-query-public-api]].

@@ -73,3 +73,13 @@ JSON conversion detaches them. The kernel handles every operation and canonical
 primary stream; final normalization/freezing helpers remain unread. Nine existing
 suites pass1063 assertions. Matching fixtures do not cover the paired budget
 counterexamples in [[semantic-query-budget-contract-gaps]]; shared .82 owns them.
+
+## 2026-09-11 — semantic consumer reading .1.45
+
+Julia .1.45 physically reads the complete kernel consumer1–264. Its100 assertions
+check nine exact response hashes, source ceilings and redaction, nested immutable
+values/fresh JSON, typed Bool rejection and public/private name boundaries.
+The materialization count and forbidden implementation tokens are static source
+checks. Public query uses this evaluator; the old private-only historical framing
+does not describe current exports. Six selected suites pass759; replay is in
+[[julia-semantic-query-public-api]]. Shared budget .82 remains open.
