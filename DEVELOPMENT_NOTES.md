@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia primary phase tracing and native execution
+
+The primary command emits canonical phase records separately from rich native
+tracing; named/file requests reuse loaded compiled state before deferred input IO.
+Registry stitching preserves signature/parameter metadata. Exact source reading
+and existing focused suites reconcile these owners without closing known repairs.
+
 ## 2026-09-11 — Julia normalization traversal is distinct from validation
 
 Callable normalization visits retained switch bodies, extracted branches and

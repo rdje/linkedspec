@@ -47,3 +47,10 @@ definition and sidecars while rebuilding normalized body_ast through the complet
 The original exact-arity description above predates fixed/variadic signatures. Current arity and keyword
 behavior is [[julia-variadic-user-functions]]; this reading runs its 55 assertions plus 23 registry assertions.
 Registry resolution/stitching suffix reading remains the next child; these tests grant no unread-source credit.
+
+The subsequent `.1.6` completes lines 95–235. `resolve_exact_user_function` accepts either a fixed exact
+arity or a variadic signature's minimum; the name does not imply fixed-only resolution. Stitching requires
+`replace_field`/`body_ast`, rejects a missing job, and returns a new SpecFile while retaining source, signature
+and parameter-kind metadata. Descriptor versions distinguish fixed v1, variadic v2 and parameter-kind v3.
+The unchanged registry 23 and variadic 55 assertions pass again alongside compiled-state/root controls;
+replay and exact scope are [[julia-compiled-spec-state]]. This completes reading, not deferred repair work.

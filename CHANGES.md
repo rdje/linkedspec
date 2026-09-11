@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.6 - read function registry CLI and compiled state
+
+Read registry/CLI and compiled-state prefix: 1,500 fragments /47,482 bytes.
+Registry23, compiled41, root79 and variadic55 pass; ten CLI process families pass.
+Reconcile trace/metadata facts and current book/frontiers; all earlier source,
+repair and history evidence remain. Next Julia .1.7 after the sixth-group commit.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.5 - read parser and callable normalization
 
 Complete parser/normalizer reading and the registry prefix: 1,500 fragments /

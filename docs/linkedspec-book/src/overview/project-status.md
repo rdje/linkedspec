@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 5/52 owned groups; its sixth reading child is next, with approved ADR0115 capacity in place.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 6/52 owned groups; its seventh reading child is next, with approved ADR0115 capacity in place.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,11 +297,19 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 5/52 groups complete:** ActionParser and CallableContract
-are now fully read; FunctionRegistry is read through line 94. Cumulative coverage
-is 7,071 lines /248,648 bytes and ten complete files. Exact scopes remain in
-`docs/tasks/JULIA-STARTUP-READING.md`. The fifth group passes 118 contextual,
-23 registry and 55 variadic assertions (196 total). No complete Julia gate is claimed.
+**Julia reading is 6/52 groups complete:** FunctionRegistry and the primary CLI
+are fully read; CompiledSpec is read through line 521. Cumulative coverage is
+8,571 lines /296,130 bytes and twelve complete files. Exact scopes remain in
+`docs/tasks/JULIA-STARTUP-READING.md`. The sixth group passes 23 registry,
+41 compiled-state, 79 root-selection and 55 variadic assertions. The ten-family
+primary process checker also passes; no complete Julia gate is claimed.
+
+The primary command compiles before opening a deferred input file, reports a
+stable failing phase, and writes the direct result as recursively sorted JSON.
+Its canonical phase traces are separate from the rich events available to native
+embedding callers. Registry stitching retains fixed/variadic signatures and
+contextual parameter metadata. Evidence and focused replay:
+`docs/knowledge/julia-compiled-spec-state.md`.
 
 Callable normalization already visits retained switch bodies and explicit/contextual
 callable bodies. Eight native controls reject undeclared attached helper blocks at
@@ -396,8 +404,8 @@ SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` sti
 own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
-Julia has read five of 52 exact groups across 95 baseline entries;
-its sixth physical reading child is next, followed by the remaining Lua/supporting
+Julia has read six of 52 exact groups across 95 baseline entries;
+its seventh physical reading child is next, followed by the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,

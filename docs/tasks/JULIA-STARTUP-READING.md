@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `JULIA-STARTUP-READING`
-- Status: `active` / reading 5/52; selector and switch repairs pending
+- Status: `active` / reading 6/52; selector and switch repairs pending
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.5`
 - Created: `2026-09-11`
 - Last updated: `2026-09-11`
@@ -43,7 +43,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Inventory SHA-256: `ca3cff4fe4c0e162448d6dbac82d89898673023951afaeced17d5b9a838ccd10`.
 - Ordered range SHA-256: `fde325f80ae7b56c5890d149fbc965c09890890e963a1fa9aab08e8c9d962337`.
 - Line coordinates are one-based, inclusive LF physical lines. Every child pins its range digest.
-- Current physical reading: 5/52 children, 7,071/75,984 lines and 248,648/2,693,170 bytes; ten complete files.
+- Current physical reading: 6/52 children, 8,571/75,984 lines and 296,130/2,693,170 bytes; twelve complete files.
 - Exact replay and capacity assessment: `docs/knowledge/julia-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -59,7 +59,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Dependencies: Startup .3.5.0 decomposition committed; each child starts from a clean prior handoff.
   Children: `.1.1-.1.52`, with exact scopes below.
   Acceptance: Every child records physical coverage, comprehension, Knowledge reconciliation, findings and focused proof before its commit. Retain all current-delta and interrupted-range evidence.
-  Verification: Julia .1.5 completes ActionParser and CallableContract, and reads FunctionRegistry through 94: 5/52 groups, 7,071 fragments /248,648 bytes and ten complete files. Existing contextual 118 / registry 23 / variadic 55 assertions pass (196 total); eight native normalization outcomes also pass, including idempotence for all four valid forms. Normalization traverses retained switch and callable bodies, so prior selector/contract visitor gaps remain precisely scoped and repair-owned. Staged/progressive/nested-write facts and registry metadata reconcile with current source. All source, earlier evidence and ADR0115 controls remain; Julia .1.6 is next, with no complete component/canonical gate or dependency build.
+  Verification: Julia .1.6 completes FunctionRegistry and the primary CLI, and reads CompiledSpec through 521: 6/52 groups, 8,571 fragments /296,130 bytes and twelve complete files. Registry 23, compiled state 41, root selection 79 and variadic 55 assertions pass (198 total); the ten-family primary CLI process checker passes. Canonical phase traces remain separate from native internal traces; current registry metadata and compiled-state boundaries reconcile with Knowledge. All source, earlier evidence, pending repairs and ADR0115 controls remain; Julia .1.7 is next, with no complete component/canonical gate or dependency build.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.1.1`
@@ -148,14 +148,21 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Commit: `JULIA-STARTUP-READING.1.5 - read parser and callable normalization`.
 
 - ID: `JULIA-STARTUP-READING.1.6`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Julia group 6 and reconcile its source evidence.
   Dependencies: `JULIA-STARTUP-READING.1.5` committed; empty brief and clean repository.
   Scope: `julia/src/action/FunctionRegistry.jl` lines 95-235; `julia/src/cli/LinkedSpecJuliaCli.jl` lines 1-838; `julia/src/compiler/CompiledSpec.jl` lines 1-521
   Baseline evidence: 1500 fragments / 47482 bytes; ordered range SHA-256 `28d2afda026ea2191355ea3ed8b2370f8e836bdb953834a27427696514ebbdda`.
+  Activation commit: `a858b781d8befc5cf5ba3af2932e4e9877d6fcf3`.
+  Verification tier: `focused`
+  Focused checks: Exact bounded reading/baseline reconstruction; managed registry/compiled-state/root/variadic tests and ten-family primary CLI process conformance; Knowledge, memory, histories, rendered book, source/evidence preservation and normal doctrines.
+  Canonical trigger: `none` — ordinary source-reading evidence; no runtime, public contract, dependency, gate or infrastructure change.
   Acceptance: Physically read every owned byte, inspect current deltas, reconcile Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit. Do not count truncated output or unread consumer suffixes.
-  Verification: `pending`
-  Commit: `pending`
+  Comprehension: Registry resolution accepts fixed exact or variadic minimum arities and preserves definition metadata while stitching body_ast into a new SpecFile. Descriptor version 1/2/3 follows fixed/signature/parameter-kind shape. The primary CLI separates usage exit 2 from compile/input/invoke exit 1, compiles before deferred input IO, delegates named/file loading, and serializes the direct runtime value with recursive key sorting. run_cli emits independent canonical phase traces; the internal execute helper retains native tracing. CompiledSpec1-521 defines typed rule/edge/slot/gap/payload state, ordered entry selection and errors, selector validation with deferred parse-failure timing, and nested-write carrier traversal; receiver-mutation validation continues in .1.7.
+  Knowledge: Reconciled registry, CLI argument/loading, native execution/canonical trace, compiled-state and root-selection facts. Exact focused replay is in docs/knowledge/julia-compiled-spec-state.md. All three supplied policy files retain the hashes recorded in startup .31; their adoption/update review stays .5-owned.
+  Findings: No new confirmed defect or repair closure. Existing callable selector .2.1, attached-switch .2.2 and all prior startup/Dart repairs remain pending.
+  Verification: Untruncated windows cover all three owned ranges: 1500 fragments /47482 baseline-identical bytes, digest 28d2afda026ea2191355ea3ed8b2370f8e836bdb953834a27427696514ebbdda. Independent 95-path/146-range reconstruction passes; registry23, compiled41, root79 and variadic55 pass (198 assertions plus the selected-set equality assertion). The unchanged ten-family primary CLI process checker passes exact output/status and routed/mirrored trace checks. Supporting test parsing/execution grants no future reading credit. All source bytes and earlier evidence remain; standard continuity/Knowledge/history/book/doctrine checks govern landing. No complete backend/canonical gate or dependency build ran.
+  Commit: `JULIA-STARTUP-READING.1.6 - read function registry CLI and compiled state`.
 
 - ID: `JULIA-STARTUP-READING.1.7`
   Status: `pending`
@@ -712,7 +719,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.6` | `pending` | Finish FunctionRegistry, read the primary CLI and begin CompiledSpec after clean .1.5. |
+| 1 | `JULIA-STARTUP-READING.1.7` | `pending` | Continue CompiledSpec through 1860 and begin CorpusManifest through 161 after clean .1.6. |
 
 ## Decisions
 
@@ -736,6 +743,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Verification Log
 
+- `2026-09-11` .1.6: Julia .1.6 completes FunctionRegistry and the primary CLI, and reads CompiledSpec through 521: 6/52 groups, 8,571 fragments /296,130 bytes and twelve complete files. Registry 23, compiled state 41, root selection 79 and variadic 55 assertions pass (198 total); the ten-family primary CLI process checker passes. Canonical phase traces remain separate from native internal traces; current registry metadata and compiled-state boundaries reconcile with Knowledge. All source, earlier evidence, pending repairs and ADR0115 controls remain; Julia .1.7 is next, with no complete component/canonical gate or dependency build.
 - `2026-09-11` .1.5: Julia .1.5 completes ActionParser and CallableContract, and reads FunctionRegistry through 94: 5/52 groups, 7,071 fragments /248,648 bytes and ten complete files. Existing contextual 118 / registry 23 / variadic 55 assertions pass (196 total); eight native normalization outcomes also pass, including idempotence for all four valid forms. Normalization traverses retained switch and callable bodies, so prior selector/contract visitor gaps remain precisely scoped and repair-owned. Staged/progressive/nested-write facts and registry metadata reconcile with current source. All source, earlier evidence and ADR0115 controls remain; Julia .1.6 is next, with no complete component/canonical gate or dependency build.
 - `2026-09-11` .1.4: Julia .1.4 completes ActionContracts and reads ActionParser through 1138: 4/52 groups, 5,571 fragments /197,138 bytes and eight complete files. Existing parser 74 / resolver 40 / callable 482 assertions pass. Five four-carrier switch controls and ten causal resolver cases confirm retained-body omission and last-default replacement; .2.2.1/.2.2.2 own normative reconciliation, repair and carrier/public proof. The shared Perl oracle qualifies non-branch behavior; its initial E-only carrier reuses startup .27. All source bytes, prior repairs and approved ADR0115 capacity remain. Julia .1.5 is next; no complete component/canonical gate or dependency build.
 - `2026-09-11` .4 closeout: Approved containment .12 / ADR0115 admits four extra archive slots per history through six exact limits. The governed change-history rollover preserves 217 lines /13,128 bytes from clean 107170da7; all prior history and unrelated controls remain exact. Production-validator proof passes 44 threshold and 22 authorization cases under the explicit one-time focused exception. Julia reading remains 3/52 groups and seven complete files; .1.4 is next. All parser repairs, startup prerequisites and future canonical/push requirements remain.
@@ -748,6 +756,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Commit Log
 
+- `2026-09-11` .1.6: `JULIA-STARTUP-READING.1.6 - read function registry CLI and compiled state`.
 - `2026-09-11` .1.5: `JULIA-STARTUP-READING.1.5 - read parser and callable normalization`.
 - `2026-09-11` .1.4: `JULIA-STARTUP-READING.1.4 - read contracts and own attached switch omission`.
 - `2026-09-11` .4 closeout: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.12 - admit approved Julia history capacity`.
@@ -760,6 +769,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Changelog
 
+- `2026-09-11` .1.6: .1.6 completes registry/CLI reading and the first compiled-state range, reconciles current facts and keeps all repairs open.
 - `2026-09-11` .1.5: .1.5 completes parser/normalizer reading and qualifies registry/traversal facts without changing source or closing defects.
 - `2026-09-11` .1.4: .1.4 completes the fourth exact reading group, reconciles current pointers and owns the switch finding without source repair.
 - `2026-09-11` .4 closeout: Approved containment .12 closes .4; no reading credit or defect status changes.

@@ -45,3 +45,18 @@ Related facts: [[julia-primary-cli-arguments-resolution-loading]],
 [[julia-primary-cli-mechanism-audit]], [[julia-frontend-compiler-staged-trace-events]],
 [[user-observable-backend-cli-parity-contract]], [[native-in-memory-backend-contract]],
 [[julia-primary-cli-failure-trace-routing]], [[julia-global-cursor-option-removal]].
+
+## September 11 source-reading reconciliation
+
+`JULIA-STARTUP-READING.1.6` reads the complete 838-line primary adapter. The earlier single-emitter
+description applies to its internal `_execute_primary_cli_request` helper. Current public `run_cli` constructs
+an independent canonical trace and calls compile/invoke without that native emitter. Named/file requests
+reuse `LoadedCompiledSpec`; inline requests parse and compile in the adapter. Both finish compilation before
+deferred input loading. Canonical trace write/reset failure becomes the stable compilation-failure boundary.
+Fatal errors rethrow at the outer operational catches; this does not certify every nested IO/trace catch.
+
+The direct-value recursive writer remains current. The unchanged ten-family process checker freshly proves
+nested sorted JSON, exact help/status/error outputs, compilation-before-input ordering and routed/mirrored
+trace behavior. This is bounded process conformance, not a complete package or cross-backend run.
+Replay: `bash tools/check_julia_primary_cli.sh`; complementary native compiled/registry checks are
+[[julia-compiled-spec-state]]. Canonical trace authority remains [[julia-canonical-primary-cli-trace]].
