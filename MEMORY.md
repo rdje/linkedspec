@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `d62f2463dfa21cbd2fe8d0142ebb67ffcc5e6fa6` — clean .1.54 handoff before Dart .1.55.
-- latest_completed_leaf: `DART-STARTUP-READING.1.55 - complete planned Dart source reading`; 20 tests and two neutral checks pass.
-- active_work_unit: none; clean .1.55 handoff; formal Dart .3 reading closeout and startup repair gates remain open.
-- next_action: Activate `DART-STARTUP-READING.3` from clean HEAD; audit all child commits and complete coverage, then satisfy canonical milestone proof.
+- activation_commit: `1f8f226f0c34d77e21886ccfc3163c2992359deb` — clean .1.55 handoff before Dart .3.1 audit.
+- latest_completed_leaf: `DART-STARTUP-READING.3.1 - audit committed Dart reading and gate failures`; coverage/commits pass; component format/analyzer failures owned.
+- active_work_unit: none; .3.1 audit committed; .3.2 reading closeout awaits an explicit verification decision.
+- next_action: Obtain the exact `DART-STARTUP-READING.3.2` reading-only exception or satisfy its canonical/component proof; proposal and repair owners are durable.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
-- in_flight_uncommitted: none; all physical Dart reading is committed; formal .3 closeout is next. No PGEN/RGX build or full CI ran in this ordinary leaf.
-- blockers: Dart .7 closes under .11/ADR0113 with the explicit one-time verification exception; Startup `.7` blocks recovery/purge; engineering-history .5 approval is implemented under containment .9 / ADR0111; prior change-history approval remains under .8 / ADR0110. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.81` precede mutation setup; `.29` belongs to `.5`. Prior narrow exceptions stay approved; Dart .6 approval is implemented under containment .10 / ADR0112, with all earlier history preserved.
+- in_flight_uncommitted: none; no running jobs. .3.2 decision pending; full Dart gate is failed, and no new exception is granted.
+- blockers: Dart .3.2 verification decision pending; .2.24/.2.25 own format/SDK repairs. Dart .7 closes under .11/ADR0113 with the explicit one-time verification exception; Startup `.7` blocks recovery/purge; engineering-history .5 approval is implemented under containment .9 / ADR0111; prior change-history approval remains under .8 / ADR0110. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.81` precede mutation setup; `.29` belongs to `.5`. Prior narrow exceptions stay approved; Dart .6 approval is implemented under containment .10 / ADR0112, with all earlier history preserved.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -57,4 +57,4 @@
   Segment 4981-5a6450db0974 preserves 218 lines / 32,108 bytes; every other ceiling remains unchanged.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-11 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; Dart physical55/55,80297 fragments/2471305 bytes. Formal Dart .3/startup .3.4 and book .4 remain pending; next .3.
+- latest_bootstrap_read: 2026-09-11 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust complete; Dart physical55/55 and independent .3.1 audit complete. Formal Dart .3.2/startup .3.4 await decision; book .4 and further reading remain.

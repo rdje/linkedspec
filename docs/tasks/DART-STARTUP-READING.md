@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / .1.55 complete; next .3
+- Status: `active` / .3.1 audit complete; .3.2 verification decision pending
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-11`
@@ -941,11 +941,11 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Status: `pending`
   Goal: Reconcile and retain ownership of every confirmed Dart finding established during the reading.
   Dependencies: Findings from `.1`; implementation additionally requires startup `.3`, `.4` and `.5`.
-  Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`, `.2.5`, `.2.6`, `.2.7`, `.2.8`, `.2.9`, `.2.10`, `.2.11`, `.2.12`, `.2.13`, `.2.14`, `.2.15`, `.2.16`, `.2.17`, `.2.18`, `.2.19`, `.2.20`, `.2.21`, `.2.22`, `.2.23`; further confirmed findings receive disjoint owners here.
+  Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`, `.2.5`, `.2.6`, `.2.7`, `.2.8`, `.2.9`, `.2.10`, `.2.11`, `.2.12`, `.2.13`, `.2.14`, `.2.15`, `.2.16`, `.2.17`, `.2.18`, `.2.19`, `.2.20`, `.2.21`, `.2.22`, `.2.23`, `.2.24`, `.2.25`; further confirmed findings receive disjoint owners here.
   Acceptance: Cross-reference existing owners for known defects; create disjoint bounded repair children here
     immediately for new confirmed defects, with mechanism, source, reproduction, acceptance and unblock conditions.
     If no new repair is needed, close this intake with an explicit complete reconciliation rather than inventing work.
-  Verification: `pending`; `.1.3` owns attached-switch omission/default replacement under `.2.1`; `.1.5` confirms regex-brace action scanning and lifecycle validation defects under `.2.2`. Reading .1.6 confirms numeric trace overflow and reset-before-failure under .2.3. Reading .1.7 confirms disconnected recognition effect validation, leaked writes after rollback and observation edge-closure bypass under .2.4. Reading .1.10 confirms MCP Unicode key-order divergence under .2.5. Reading .1.11 confirms regex/lifecycle-E body suffix loss under .2.6. Reading .1.12 confirms compact fluent argument corruption under .2.7 and outer regex-brace truncation under existing .2.2.2. Reading .1.13 confirms standalone body-fluent suffix loss under existing .2.6. Reading .1.16 confirms semantic observer error/stack loss through action child calls under .2.8; startup .37 retains nested progressive authority findings from .1.15. Reading .1.17 confirms mixed-control return escape and skipped attached else under .2.9. Reading .1.18 confirms helper-name callback recursion collision and lost bound identity under .2.10. Reading .1.19 confirms hash splice pairing/order loss under .2.11, coordinated with FUTURE-PARITY-BACKLOG.5. Reading .1.20 confirms finite-number corruption (.2.12), lexical Unicode ordering (.2.13) and slice-end overflow (.2.14), with separate existing startup .55/.60 and MCP .2.5 coordination. Reading .1.21 extends .2.14 with typed-source overflow and owns input_slice zero-argument acceptance/late-reference failure under .2.15. Reading .1.23 confirms lower-unbounded quantifier rewriting of escaped literals/classes under .2.16. Reading .1.26 confirms staged diagnostic-byte overruns under .2.17 and wrapped staged call admission under .2.18 through eleven private scheduler controls. Reading .1.27 confirms malformed staged source/provenance types accepted after placeholder coercion under .2.19 through seventeen private/neutral controls. Reading .1.30 extends startup .67 with Dart container-call omission and owns regex call/source miscorrelation under .2.20 through nine public-query/typed-runtime controls. Reading .1.31 owns native non-JSON rejection response mutability/encoding under .2.21 through eight public raw-query controls, with four defective cases and four valid JSON controls. Reading .1.33 extends startup .70 with Dart grouped-selector constructor failures and owns regex-arrow selector correlation under .2.22 through eight public compiled/index/runtime controls. Reading .1.35 confirms null named-selector provenance selecting an anonymous regex through SpecFile reconstruction under .2.23; ten controls include two wrong-slot acceptances, six valid/rejecting controls and two additional provenance census inputs. No repair implementation is admitted before startup gates.
+  Verification: `pending`; `.1.3` owns attached-switch omission/default replacement under `.2.1`; `.1.5` confirms regex-brace action scanning and lifecycle validation defects under `.2.2`. Reading .1.6 confirms numeric trace overflow and reset-before-failure under .2.3. Reading .1.7 confirms disconnected recognition effect validation, leaked writes after rollback and observation edge-closure bypass under .2.4. Reading .1.10 confirms MCP Unicode key-order divergence under .2.5. Reading .1.11 confirms regex/lifecycle-E body suffix loss under .2.6. Reading .1.12 confirms compact fluent argument corruption under .2.7 and outer regex-brace truncation under existing .2.2.2. Reading .1.13 confirms standalone body-fluent suffix loss under existing .2.6. Reading .1.16 confirms semantic observer error/stack loss through action child calls under .2.8; startup .37 retains nested progressive authority findings from .1.15. Reading .1.17 confirms mixed-control return escape and skipped attached else under .2.9. Reading .1.18 confirms helper-name callback recursion collision and lost bound identity under .2.10. Reading .1.19 confirms hash splice pairing/order loss under .2.11, coordinated with FUTURE-PARITY-BACKLOG.5. Reading .1.20 confirms finite-number corruption (.2.12), lexical Unicode ordering (.2.13) and slice-end overflow (.2.14), with separate existing startup .55/.60 and MCP .2.5 coordination. Reading .1.21 extends .2.14 with typed-source overflow and owns input_slice zero-argument acceptance/late-reference failure under .2.15. Reading .1.23 confirms lower-unbounded quantifier rewriting of escaped literals/classes under .2.16. Reading .1.26 confirms staged diagnostic-byte overruns under .2.17 and wrapped staged call admission under .2.18 through eleven private scheduler controls. Reading .1.27 confirms malformed staged source/provenance types accepted after placeholder coercion under .2.19 through seventeen private/neutral controls. Reading .1.30 extends startup .67 with Dart container-call omission and owns regex call/source miscorrelation under .2.20 through nine public-query/typed-runtime controls. Reading .1.31 owns native non-JSON rejection response mutability/encoding under .2.21 through eight public raw-query controls, with four defective cases and four valid JSON controls. Reading .1.33 extends startup .70 with Dart grouped-selector constructor failures and owns regex-arrow selector correlation under .2.22 through eight public compiled/index/runtime controls. Reading .1.35 confirms null named-selector provenance selecting an anonymous regex through SpecFile reconstruction under .2.23; ten controls include two wrong-slot acceptances, six valid/rejecting controls and two additional provenance census inputs. Closeout audit .3.1 additionally owns current formatter drift/non-writing gate under .2.24 and deprecated structural-regex adapters under .2.25. No repair implementation is admitted before startup gates.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.2.1`
@@ -1426,14 +1426,90 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Verification: `pending`
   Commit: `pending`
 
-- ID: `DART-STARTUP-READING.3`
+- ID: `DART-STARTUP-READING.2.24`
   Status: `pending`
+  Goal: Restore Dart formatter compatibility and make format verification non-mutating.
+  Dependencies: Startup .3/.4/.5 before source or gate repair; discovered by .3.1 component verification.
+  Children: `.2.24.1`, `.2.24.2`.
+  Evidence: Dart 3.13.3 / dart_style 3.1.13 rejects six baseline-identical tests; tools/run_dart_local.sh writes those files before exiting1. Exact original/formatted hashes and non-writing replay live in docs/knowledge/dart-component-gate-sdk-compatibility.md. Both diagnostic writes were restored byte-for-byte; no source repair is claimed.
+
+- ID: `DART-STARTUP-READING.2.24.1`
+  Status: `pending`
+  Goal: Apply and verify the six owned formatter corrections.
+  Dependencies: Startup reading and policy prerequisites.
+  Acceptance: Reproduce with the supported SDK and explicit package language3.9; inspect every edit and preserve strings/comments and executable tokens. Format only the six confirmed test files, account for baseline deltas, verify zero-change repeat formatting and relevant generated-source/contract tests. Keep runtime behavior, SDK constraints, analyzer severity and parser contracts unchanged.
+  Verification: `pending` repair; .3.1 retains exact six-file hashes and non-writing reproduction.
+  Commit: `pending`
+
+- ID: `DART-STARTUP-READING.2.24.2`
+  Status: `pending`
+  Goal: Ensure the Dart format gate reports drift without modifying the workspace.
+  Dependencies: .2.24.1; gate change is separately owned infrastructure.
+  Acceptance: Use the formatter's non-writing verification mode while retaining failure on drift. Prove a deliberately unformatted repository-local fixture fails with bytes unchanged, a formatted fixture passes, and the real package is unchanged by both focused and complete gate execution. Preserve all remaining gate stages and storage containment; run canonical infrastructure proof under the applicable dependency-build policy.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-STARTUP-READING.2.25`
+  Status: `pending`
+  Goal: Remove deprecated SDK interface implementation from structural regex adapters.
+  Dependencies: Startup .3/.4/.5; finding from .3.1 strict analyzer.
+  Children: `.2.25.1`, `.2.25.2`, `.2.25.3`.
+  Evidence: Strict Dart3.13.3 analysis exits2 with deprecated_implement at matching.dart:725:42 and1173:47. Installed SDK lib/core/regexp.dart marks RegExp and RegExpMatch implementation deprecated, with future final classes and Pattern/Match alternatives. Exact source/SDK evidence lives in docs/knowledge/dart-component-gate-sdk-compatibility.md; no current execution failure is inferred.
+
+- ID: `DART-STARTUP-READING.2.25.1`
+  Status: `pending`
+  Goal: Freeze structural regex adapter and caller compatibility before migration.
+  Acceptance: Inventory compileRuntimeRegex and all public/internal return, parameter and match consumers, including pattern identity, options, named groups, alternations and capture provenance. Define an adapter/composition boundary compatible with supported SDKs and existing source/reconstructed/generated/emitted routes. Preserve the bounded shipped structural-PCRE contract; if a public signature must change, obtain an explicit contract decision before implementation. Do not suppress warnings or silently downgrade the SDK.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-STARTUP-READING.2.25.2`
+  Status: `pending`
+  Goal: Migrate structural regex and match adapters without deprecated implementation.
+  Dependencies: .2.25.1 compatibility decision.
+  Acceptance: Implement the agreed adapter boundary with exact captures, named groups, code-unit/scalar offsets, ordered alternatives, zero-progress behavior and staged provenance intact. Cover both ordinary SDK regexes and every supported structural family plus negative controls. Strict analysis must pass with fatal infos/warnings; no warning suppression or capability broadening.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-STARTUP-READING.2.25.3`
+  Status: `pending`
+  Goal: Close SDK adapter repair across supported callers and the complete Dart gate.
+  Dependencies: .2.25.2 and .2.24 repairs.
+  Acceptance: Run the complete Dart gate with every stage enabled, independently emitted/generated callers and relevant structural, Unicode, capture, staged and CLI contracts. Reconcile public signatures and book/Knowledge, prove zero unexpected source deltas and route any other-backend findings. Canonical admission remains required at this contract/infrastructure boundary under the applicable dependency-build policy.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `DART-STARTUP-READING.3`
+  Status: `active`
   Goal: Close Dart reading with exact coverage, current-delta, comprehension and child-commit proof.
   Dependencies: `.0` and every `.1` child complete; all findings durably owned under `.2` or existing trees.
   Acceptance: Independently prove complete baseline/current coverage and all child commits; preserve every
     pending repair, complete only startup `.3.4` reading, and route startup Julia `.3.5`.
     Pending repairs keep this tree open; reading closeout is not defect remediation.
-  Verification: `pending`; canonical milestone proof is required before reading-parent closeout.
+  Children: `.3.1` independent committed-reading audit; `.3.2` canonical reading-parent closeout.
+  Verification: `in progress`; .3.1 commits passing source/commit proof and explicitly failed component format/analyzer results without closing reading parents. Canonical milestone proof remains mandatory under .3.2; the earlier containment .11 exception does not extend to this boundary.
+  Commit: `pending`
+
+- ID: `DART-STARTUP-READING.3.1`
+  Status: `done`
+  Goal: Independently verify and durably commit complete Dart reading evidence before the separate canonical closeout.
+  Dependencies: .0 and all55 .1 children committed; all findings already have repair owners.
+  Activation: Clean `1f8f226f0c34d77e21886ccfc3163c2992359deb`; prior leaf committed, brief empty, root clean and all jobs consumed.
+  Scope: Exact source coverage/mode/blob/current-delta census; unique child commits, committed metadata and activation boundaries; retained repair/Knowledge evidence; complete Dart component gate and proposal for .3.2 closeout.
+  Acceptance: Verify every child commit and all115 baseline entries independently; retain every pending repair and source finding; run the unchanged complete Dart component gate without building PGEN/RGX; record a concrete .3.2 closeout and any unresolved canonical-policy conflict. Commit audit evidence before requesting a separate exception. Do not complete .1, .3 or startup .3.4 here.
+  Verification tier: `focused`
+  Focused checks: Independent coverage/commit/activation/mode/blob/delta/repair/Knowledge audits; complete tools/run_dart_local.sh component gate, dormant authority proof from .1.55; all doctrines, both histories, Knowledge generation, rendered book and exact preservation.
+  Canonical trigger: `none` — preparatory reading-evidence audit only; .3.2 retains the canonical milestone and parent-status changes. No source, gate, dependency, infrastructure or public contract change.
+  Verification: All55 unique committed children retain exact scope, comprehension, verification fields and first-parent MEMORY activation; every child/current Dart tree retains baseline modes/blobs. Independent coverage is115 files/80296 physical lines/80297 fragments/2471305 bytes. All100 touched Knowledge cards and62 prior pending repair nodes remain exact. The unchanged full Dart gate FAILS at formatting (six tests, exit1); strict analyzer separately FAILS with two deprecated_implement warnings (exit2). Mechanisms and exact restored-byte hashes are durable, with new .2.24/.2.25 repair owners. Remaining original stages independently PASS461 tests, storage25/47, CLI66x2 and corpus105; dormant authority proof remains the committed four-group .1.55 result. This is not complete-gate success. Doctrine/history/Knowledge/book/preservation checks govern this documentation audit. No source/gate/pin changes, PGEN/RGX build or canonical CI; .3.2 retains its explicit decision boundary.
+  Commit: `DART-STARTUP-READING.3.1 - audit committed Dart reading and gate failures`
+
+- ID: `DART-STARTUP-READING.3.2`
+  Status: `pending`
+  Goal: Close Dart reading from independently committed evidence and route Julia startup reading.
+  Dependencies: .3.1 committed; receipt-bound canonical proof or a newly explicit director exception for this exact boundary.
+  Acceptance: Reverify .3.1 audit against clean HEAD; complete only reading container .1, this .3 closeout and startup .3.4, preserve all pending repairs and route startup .3.5 Julia decomposition. Synchronize all current pointers and book. Existing one-time containment .11 waiver grants no authorization here; do not silently rebuild PGEN/RGX contrary to the director's build-on-update requirement.
+  Proposal: One-time reading-only exception: accept the committed .3.1 source/commit audit plus separately passing runtime/storage/CLI/corpus diagnostics to close only Dart .1/.3/startup .3.4 and route Julia. Waive canonical receipt and green complete Dart gate for this reading boundary only; keep six-file formatting and two-warning adapter repair .2.24/.2.25 pending behind startup .3/.4/.5. Do not rebuild PGEN/RGX, change source/gates, close defects, waive future admission/push proof or extend the earlier containment exception. The alternative requires authorized repair sequencing and dependency-compatible canonical proof before closeout.
+  Verification: `pending`; no exception granted. Canonical milestone and successful complete Dart proof remain unsatisfied. The preparatory audit is committed separately before requesting this decision.
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.4`
@@ -1485,7 +1561,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.3` | `pending` | Audit every child commit and complete physical coverage, preserve all repairs, then satisfy canonical reading-closeout proof before routing Julia. |
+| 1 | `DART-STARTUP-READING.3.2` | `pending` | Obtain the exact reading-only verification exception or satisfy canonical and complete Dart proof; keep all repairs open before routing Julia. |
 
 ## Decisions
 
@@ -1504,11 +1580,15 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Open Questions
 
+- .3.2 requires the director decision on its concrete reading-only exception. The earlier containment .11 waiver does not apply. Source/commit proof passes; format/analyzer failures remain repair-owned.
+
 - `.7`: Director approved exactly engineering_notes files27→28 and manifest rows26→27; ADR0113/.11 implement the decision. No further capacity is preapproved.
 
 - None for source reading. The director approved .6; ADR0112 and containment .10 own its canonical implementation.
 
 ## Blockers
+
+- .3.2: canonical milestone proof conflicts with the still-unimplemented build-on-update policy; the complete Dart gate also has diagnosed format/analyzer failures under .2.24/.2.25. Reading-only exception is proposed, not granted. No PGEN/RGX rebuild or source repair is authorized by this audit.
 
 - `.7`: The approved member is implemented by containment .11 / ADR0113; .1.47 resumes after its approved focused landing. Other startup/repair gates remain.
 
@@ -1516,6 +1596,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-11` .3.1: Dart .3.1 independently verifies all 55 reading commits and 115 baseline-identical files: 80,297 fragments / 2,471,305 bytes. All 100 touched Knowledge cards and 62 prior repair nodes are preserved. Separate diagnostics pass 461 tests, storage25/47, CLI66 twice and corpus105; the complete Dart gate fails formatting in six tests and strict analysis reports two SDK deprecations. New .2.24/.2.25 own repairs. Formal .3.2 and startup .3.4 await a separate verification decision. Exact audit digests and replay live in docs/knowledge/dart-reading-commit-closeout-audit.md; diagnosed gate evidence is in dart-component-gate-sdk-compatibility.md. No full-gate pass or reading-parent completion is claimed.
 
 - `2026-09-11` .1.55: Dart .1.55 completes write vivification and private progressive-authority reading: 1,269 fragments / 40,299 baseline-identical bytes. All 20 selected tests and write/progressive neutral checks pass. All 55 reading children now cover all 115 files and 2,471,305 bytes; formal .3 closeout and startup .3.4 remain pending. Existing nested-authority and other defects remain owned and open. Complete physical coverage is80297 fragments,80296 physical lines,2471305 bytes across115 EOF entries. Parent .1 and startup .3.4 await separate .3 canonical closeout; no defect remediation.
 
@@ -1632,6 +1714,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- .3.1: `DART-STARTUP-READING.3.1 - audit committed Dart reading and gate failures`.
+
 - .1.55: `DART-STARTUP-READING.1.55 - complete planned Dart source reading`.
 
 - .1.54: `DART-STARTUP-READING.1.54 - read binding and function consumers`.
@@ -1743,6 +1827,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-11`: .3.1 audits all reading commits, owns .2.24/.2.25 gate repairs and presents the exact .3.2 reading-only exception; all prior reading/repair evidence remains.
 
 - `2026-09-11`: .1.55 completes the 55-child physical reading plan, refreshes stale progressive admission wording and routes formal .3 closeout. Existing repairs and startup gates remain.
 

@@ -10,6 +10,15 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Dart reading audit and component failures
+
+Dart .3.1 verifies exact committed scopes/comprehension and first-parent activation
+for all55 children. Full component verification stops at formatter writes; restored
+hashes and non-writing replay isolate six tests. Strict analysis separately finds
+two SDK-deprecated regex adapter implementations. All remaining stages pass; no
+complete-gate success is claimed. Repair owners .2.24/.2.25 and the exact .3.2
+reading-only exception proposal preserve the distinction between reading and signoff.
+
 ## 2026-09-11 — final Dart reading and private authority scope
 
 Dart .1.55 completes write syntax/evaluation/detachment and fresh emitted-package

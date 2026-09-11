@@ -343,7 +343,7 @@ once in canonical CI and once after Rust in the rooted route, and promotes only 
 rejects 63 semantic mutations at rollout 9 complete / 0 pending plus ten Rust, ten Dart, ten Julia, and sixteen
 Lua admission mutations;
 ADR `0074` explains the additional Dart regression guard. Maintained Dart commands use
-`tools/run_dart_project_data.sh` or `tools/run_dart_local.sh`; the storage oracle locks 23 temporary owners and 47
+`tools/run_dart_project_data.sh` or `tools/run_dart_local.sh`; the current storage oracle locks 25 temporary owners and 47
 packages on repository storage. Shared Lua `.6.5` removes the final runtime skips by executing its same
 392-assertion consumer on PUC Lua and LuaJIT. Recurring proof is current under `.7.1`; `.7.2` admits public
 no-drift and exactly four shared gap calls without moving any outward surface.
@@ -1030,10 +1030,10 @@ The Dart backend has its own focused local gate:
 bash tools/run_dart_local.sh
 ```
 
-It runs Dart formatting, strict analyzer checks, all 337 Dart package tests, a repository-filesystem storage oracle,
+It runs Dart formatting, strict analyzer checks, the complete Dart package test suite, a repository-filesystem storage oracle,
 shared primary-CLI help, a bounded corpus-runner smoke, all 66 primary cases in default and POSIX environments,
-and the full 105-fixture corpus execution. The storage oracle locks all 18 temporary owners and all 47 hosted
-lockfile packages offline; the separate corpus runner remains the 105-fixture owner.
+and the full 105-fixture corpus execution. The storage oracle locks all 25 temporary owners and all 47 hosted
+lockfile packages offline; the separate corpus runner remains the 105-fixture owner. **Current failure:** the September 11 check fails formatting and strict analysis; [current results and repair owners](../overview/project-status.md) distinguish the passing runtime diagnostics. For non-writing diagnosis, run `bash tools/run_dart_project_data.sh format --output=none --set-exit-if-changed --language-version=3.9 dart` from the repository root.
 `FUTURE-PARITY-BACKLOG.1.5.3.4` closes the recurring backend gate and Dart primary-command no-drift, while
 `PROJECT-DATA-SSD-ROOTING.2.3` adds the storage proof. The canonical local
 gate does not require a Dart SDK by default. When a checkout has

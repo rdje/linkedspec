@@ -10,6 +10,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — DART-STARTUP-READING.3.1 - audit committed Dart reading and gate failures
+
+Independently verify all55 child commits,115 baseline-identical files,100 Knowledge
+cards and62 prior repair nodes. Runtime diagnostics pass461 tests,storage25/47,
+CLI66x2 and corpus105; complete gate fails six-file formatting and strict analysis
+(two SDK adapter warnings). Own .2.24/.2.25 repairs and preserve exact hashes.
+No source/gate/pin change. .3.2 reading-only verification decision remains pending.
+
 ## 2026-09-11 — DART-STARTUP-READING.1.55 - complete planned Dart source reading
 
 Complete the final 1,269 fragments / 40,299 bytes of write and private progressive

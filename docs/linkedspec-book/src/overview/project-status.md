@@ -85,7 +85,7 @@ Implementation `.7.2` passed canonical verification and landed at 4489f5e9. Inde
 `.7.3` confirms exact controls, retained task and Knowledge evidence, unchanged historical bytes,
 and stable retrieval. Recomputing the full planning allowances from the current population still fits
 both aggregate and per-file limits. Canonical admission `.7.4` landed at a67a18bf and closed the
-capacity prerequisite. `DART-STARTUP-READING.0` now defines 55 pending reading children in
+capacity prerequisite. `DART-STARTUP-READING.0` initially defined 55 pending reading children in
 `docs/tasks/DART-STARTUP-READING.md`: 169 exact ranges cover all 115 Dart paths and 2,471,305
 bytes. Each child fits 1,500 line fragments and 65,536 bytes; the oversized source line uses two
 UTF-8-safe byte windows. Independent reconstruction verifies every byte exactly once.
@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-formal Dart `.3` closeout follows clean .1.55. Startup `.3.4` remains pending.
+the independent .3.1 audit is complete and formal .3.2 awaits its verification decision. Startup `.3.4` remains pending.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -273,6 +273,39 @@ consumer. Running that test adds no unread suffix credit. That leaf reached 54/5
 children, 79,028 fragments / 2,431,006 bytes. `.1.55` now completes write tests and
 the dormant progressive-authority consumer. Existing repairs remain owned and open.
 
+**Independent Dart audit and current verification blockers:** all 55 reading
+commits retain exact scopes, comprehension, verification records and first-parent
+activation pointers. Every source mode/blob remains baseline-identical across
+those commits and the current tree. All 100 touched Knowledge cards and all 62
+earlier pending repair nodes remain intact.
+
+The complete Dart gate currently fails. Dart 3.13.3 / formatter 3.1.13 wants to
+reformat six test files; its current check writes files before returning failure.
+The diagnostic changes were restored byte-for-byte. Repair `.2.24` owns the six
+format corrections and a separately verified non-writing gate.
+
+Strict analysis also rejects two deprecated SDK interface implementations:
+`_StructuralRegExp implements RegExp` and `_StructuralRegExpMatch implements
+RegExpMatch`. Repair `.2.25` owns caller/signature review, compatible adapter
+migration and full regression admission. No diagnostic suppression, SDK downgrade
+or parser behavior change is made in this audit.
+
+Running the remaining stages separately passes 461 package tests, storage checks
+for 25 temporary owners and 47 packages, both 66-case CLI environments, and all 105
+corpus fixtures. Those results do not make the full gate green. The separate four
+private authority groups passed in committed child55 and remain outside ordinary
+discovery.
+
+Formal reading closeout `.3.2` is pending a precise decision: accept this source/
+commit audit and the passing runtime diagnostics for the reading milestone alone,
+without canonical CI or a green complete Dart gate, while retaining every repair
+and subsequent startup gate. This is a proposal, not approval. Canonical CI still
+uses dependency builds that conflict with the director's build-on-update requirement;
+startup `.80.1-.4` own that implementation. Julia reading follows only after this
+boundary is resolved. Exact evidence lives in
+`docs/knowledge/dart-reading-commit-closeout-audit.md` and
+`docs/knowledge/dart-component-gate-sdk-compatibility.md`.
+
 **Dart physical source reading is complete:** child 55 finishes all 115 baseline
 files: 80,296 physical lines, 80,297 reading fragments and 2,471,305 bytes. The
 one-fragment difference comes from the documented split of an oversized source
@@ -296,9 +329,9 @@ the admitted carrier test runs separately.
 All 20 selected tests and write/progressive neutral checks pass. Current progressive
 governance is nine complete rollout legs, zero pending, 116 contract mutations and
 60 public mutations. The old admission card's pending wording is now explicitly
-historical. Formal Dart reading closeout `.3` must still verify every child commit
-and satisfy its canonical milestone requirement before startup `.3.4` closes and
-Julia reading begins. Existing defects and the remaining codebase/book/policy
+historical. The separate .3.1 audit now verifies every child commit. Formal .3.2
+still requires its verification decision before startup `.3.4` closes and Julia
+reading begins. Existing defects and the remaining codebase/book/policy
 prerequisites remain open.
 
 **Approved engineering-history capacity:** the director approved collection files
@@ -345,7 +378,7 @@ in 2.25 seconds. That sample locates a pre-main wait without establishing its OS
 or a remedy. The older macOS 26.5.2 closeout does not resolve this macOS 26.6.2 observation.
 The evidence and repair criteria are logged by `SESSION-STARTUP-READING.80.0`; source
 changes remain behind the existing startup prerequisites. The intake is committed at
-`eaf4331e`; approved containment .11 is committed at `ad64f76f`; formal Dart `.3` follows completed `.1.55`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
+`eaf4331e`; approved containment .11 is committed at `ad64f76f`; formal Dart `.3.2` awaits its verification decision after completed `.3.1`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
 
 **Known Dart limitation — null named selectors in reconstructed state:** a programmatically
 reconstructed target with these fields is incorrectly accepted:

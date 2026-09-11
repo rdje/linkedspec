@@ -9,9 +9,9 @@ answers:
   - "what does DART-BACKEND-PARITY.6.4 prove"
   - "does the Dart local gate prove project data stays on repository storage"
 date: 2026-07-27
-status: current
+status: gate definition current; September11 verification fails formatting and strict analysis
 tags: [dart, ci, verification, corpus, DART-BACKEND-PARITY]
-evidence: "FUTURE-PARITY-BACKLOG.1.5.3.4 makes tools/run_dart_local.sh recurring. PROJECT-DATA-SSD-ROOTING.2.3 adds repository-filesystem storage proof. Current proof is format, strict analyzer, 337 tests, 18-owner/47-package offline storage oracle, primary help, bounded corpus smoke, 66/66 default, 66/66 POSIX, and 105/105 corpus."
+evidence: "FUTURE-PARITY-BACKLOG.1.5.3.4 makes tools/run_dart_local.sh recurring. PROJECT-DATA-SSD-ROOTING.2.3 adds repository-filesystem storage proof. Historical admission proof was format, strict analyzer,337 tests,18-owner/47-package storage and CLI/corpus. Current September11 complete gate fails format/analyzer; separate remaining stages pass461 tests,25/47 storage,CLI66 twice,corpus105."
 reverify: "rg -n 'LINKEDSPEC_RUN_DART|run_dart_local' tools/run_ci_local.sh tools/run_dart_local.sh README.md docs/linkedspec-book/src/development/local-ci-and-regression.md && bash tools/run_dart_local.sh"
 ---
 
@@ -23,7 +23,7 @@ bash tools/run_dart_local.sh
 
 The script runs the routed Dart formatter, strict analyzer, and package tests, shared primary-CLI help, a bounded
 `bin/corpus_runner.dart` smoke, both 66-case primary environments, and the full checked-in 105-fixture corpus
-execution. It also runs the 18-owner/47-package storage oracle after package tests.
+execution. It also runs the current25-owner/47-package storage oracle after package tests.
 
 The canonical local CI gate remains Perl/core-only unless explicitly opted in:
 
@@ -38,3 +38,11 @@ opt-in command that includes the green Dart corpus gate.
 Related facts: [[dart-controlled-corpus-execution]], [[dart-primary-cli-boundary]],
 [[dart-backend-scaffold-package]], [[phase0-regression-structure]], [[dart-primary-cli-closeout]],
 [[dart-project-data-ssd-storage]], [[project-data-process-locality-proof]].
+
+## September11 current verification result
+
+[[dart-component-gate-sdk-compatibility]] supersedes historical green/count claims:
+the unchanged complete gate fails six-file formatting and separate strict analysis
+reports two SDK-deprecated interface implementations. Remaining stages independently
+pass461 tests,25/47 storage,CLI66x2 and105 corpus. Repairs .2.24/.2.25 remain pending;
+do not infer complete-gate success from those diagnostic passes.

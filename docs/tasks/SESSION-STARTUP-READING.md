@@ -2224,7 +2224,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Goal: Split and read all 115 baseline Dart entries, including compiler/runtime, tests, commands, and package inputs.
   Reading owner: `docs/tasks/DART-STARTUP-READING.md` owns .0 decomposition, .1 reading, .2 new repair intake and .3 reading closeout; this startup node remains the prerequisite/closeout owner.
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas. DART-STARTUP-READING.3 may complete this reading node only after exact coverage/comprehension and child-commit proof; pending repairs remain owned separately.
-  Verification: Dart physical reading is complete at 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .1.55 completes write vivification and private progressive-authority reading: 1,269 fragments / 40,299 baseline-identical bytes. All 20 selected tests and write/progressive neutral checks pass. All 55 reading children now cover all 115 files and 2,471,305 bytes; formal .3 closeout and startup .3.4 remain pending. Existing nested-authority and other defects remain owned and open. Capacities .4/.5/.6 remain committed under containment .8/.9/.10 and ADR0110/0111/0112. Startup .3/.4/.5 still gate repairs; .7 is approved and implemented by containment .11 / ADR0113 with exact history preservation; the director granted a one-time focused/receipt exception on 2026-09-11; Containment .11 is committed at ad64f76f; next Dart .3 formal closeout after the clean .1.55 handoff.
+  Verification: Dart physical reading is complete at 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .3.1 independently verifies all 55 reading commits and 115 baseline-identical files: 80,297 fragments / 2,471,305 bytes. All 100 touched Knowledge cards and 62 prior repair nodes are preserved. Separate diagnostics pass 461 tests, storage25/47, CLI66 twice and corpus105; the complete Dart gate fails formatting in six tests and strict analysis reports two SDK deprecations. New .2.24/.2.25 own repairs. Formal .3.2 and startup .3.4 await a separate verification decision. Capacities .4/.5/.6 remain committed under containment .8/.9/.10 and ADR0110/0111/0112. Startup .3/.4/.5 still gate repairs; .7 is approved and implemented by containment .11 / ADR0113 with exact history preservation; the director granted a one-time focused/receipt exception on 2026-09-11; Containment .11 is committed at ad64f76f; next Dart .3.2 verification decision after the committed .3.1 audit.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.5`
@@ -4449,7 +4449,7 @@ Startup `.3.4` stays pending until complete Dart reading; the next executable re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.3` | `pending` | Audit every child commit and complete physical coverage, preserve all repairs, then satisfy canonical reading-closeout proof before routing Julia. |
+| 1 | `DART-STARTUP-READING.3.2` | `pending` | Obtain the exact reading-only verification exception or satisfy canonical and complete Dart proof; keep all repairs open before routing Julia. |
 
 ## Reading Ledger
 
