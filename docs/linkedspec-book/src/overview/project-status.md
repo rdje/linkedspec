@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1 audit is complete and formal .3.2 awaits its verification decision. Startup `.3.4` remains pending.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia decomposition is next.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -296,13 +296,22 @@ corpus fixtures. Those results do not make the full gate green. The separate fou
 private authority groups passed in committed child55 and remain outside ordinary
 discovery.
 
-Formal reading closeout `.3.2` is pending a precise decision: accept this source/
-commit audit and the passing runtime diagnostics for the reading milestone alone,
-without canonical CI or a green complete Dart gate, while retaining every repair
-and subsequent startup gate. This is a proposal, not approval. Canonical CI still
-uses dependency builds that conflict with the director's build-on-update requirement;
-startup `.80.1-.4` own that implementation. Julia reading follows only after this
-boundary is resolved. Exact evidence lives in
+**Dart reading is formally complete under ADR0114:** the director delegated this
+decision to the engineer. The selected course closes only the verified reading
+milestone on the independently rechecked source/commit audit and committed runtime
+diagnostics. All 25 repair roots / 69 pending nodes retain their exact evidence
+and acceptance criteria. The Dart component gate remains failed.
+
+This one-time reading exception permits no runtime signoff, defect closure,
+dependency rebuild, weakened gate or future verification waiver. Formatting and
+SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` still
+own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
+this reading closure; normal commit hooks remain enabled.
+
+The next step is to decompose and read the 95 Julia baseline entries, followed by
+the remaining Lua/supporting-code, book and policy prerequisites. This completes
+Dart reading without treating known failures as resolved. The decision and evidence
+live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,
 `docs/knowledge/dart-reading-commit-closeout-audit.md` and
 `docs/knowledge/dart-component-gate-sdk-compatibility.md`.
 
@@ -329,9 +338,8 @@ the admitted carrier test runs separately.
 All 20 selected tests and write/progressive neutral checks pass. Current progressive
 governance is nine complete rollout legs, zero pending, 116 contract mutations and
 60 public mutations. The old admission card's pending wording is now explicitly
-historical. The separate .3.1 audit now verifies every child commit. Formal .3.2
-still requires its verification decision before startup `.3.4` closes and Julia
-reading begins. Existing defects and the remaining codebase/book/policy
+historical. The .3.1/.3.2 audit verifies every child commit and ADR0114 closes
+startup `.3.4` reading. Julia reading is next. Existing defects and the remaining codebase/book/policy
 prerequisites remain open.
 
 **Approved engineering-history capacity:** the director approved collection files
@@ -378,7 +386,7 @@ in 2.25 seconds. That sample locates a pre-main wait without establishing its OS
 or a remedy. The older macOS 26.5.2 closeout does not resolve this macOS 26.6.2 observation.
 The evidence and repair criteria are logged by `SESSION-STARTUP-READING.80.0`; source
 changes remain behind the existing startup prerequisites. The intake is committed at
-`eaf4331e`; approved containment .11 is committed at `ad64f76f`; formal Dart `.3.2` awaits its verification decision after completed `.3.1`. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
+`eaf4331e`; approved containment .11 is committed at `ad64f76f`; Dart reading closes under `.3.2` / ADR0114; Julia decomposition is next. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
 
 **Known Dart limitation — null named selectors in reconstructed state:** a programmatically
 reconstructed target with these fields is incorrectly accepted:

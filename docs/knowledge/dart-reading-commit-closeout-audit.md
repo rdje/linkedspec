@@ -6,8 +6,9 @@ answers:
   - which commit is the complete physical Dart reading checkpoint
   - does completed Dart reading mean the component gate passes
   - how are Dart reading repairs preserved at closeout
+  - why did Dart reading close while its component gate remained failed
 date: 2026-09-11
-status: preparatory audit complete; formal reading closeout requires a separate verification decision
+status: reading formally closed under delegated ADR0114; audit and pending runtime repairs remain distinct
 tags: [dart, startup, reading, audit, continuity]
 evidence: "DART-STARTUP-READING.3.1 independently checks all 55 child commits at physical checkpoint 1f8f226f: exact scopes, comprehension, verification metadata, first-parent activation and unchanged Dart trees. All115 baseline paths/ 80296 physical lines/ 80297 fragments/ 2471305 bytes, 100 touched Knowledge cards and 62 prior pending repair nodes remain accounted for. Component formatting and strict analysis fail separately; this audit does not close reading parents or repair defects."
 reverify: "Run DART_READING_COMMIT_AUDIT below; the frozen checkpoint is intentional, and later source or repair deltas must be reconciled explicitly."
@@ -37,6 +38,8 @@ not a claim that the full codebase has been read or Dart has zero defects.
 | Git Dart mode/blob/path records, NUL-delimited | `91abbc7adc036b6a6b244c35925de6b935de66e6275cc1d68f887462d163f1df` |
 | 100 Knowledge path/size/hash records | `57e6b394938f06094db490ee6962dbf9c7de086f1a7c0cfd6c189b408ac357bc` |
 | 62 prior repair ID/body-hash records | `24bfefe28a06bd6bc0b7bba14c6893965a5a12c314cfe8ab59b1d5372e2c0af5` |
+
+## Historical audit checkpoint before the delegated decision
 
 [[dart-component-gate-sdk-compatibility]] records the failed format/strict-analysis
 stages and separate remaining-stage diagnostics. Dart `.1`, `.3` and startup `.3.4`
@@ -130,3 +133,17 @@ print(json.dumps({k:v for k,v in report.items() if k not in ['reading_commits','
 print('PASS exact coverage; all 55 unique committed scopes/comprehension/proof/first-parent activation boundaries; all 55 Dart trees baseline-identical; current source and pending repair/Knowledge continuity.')
 DART_READING_COMMIT_AUDIT
 ```
+
+## September11 delegated reading closeout
+
+The director explicitly delegates the .3.2 decision to the engineer. ADR0114 selects
+the bounded reading-only exception and .3.2 reexecutes this committed audit from
+clean28329ce13. All55 child records,100 touched Knowledge cards and baseline source
+modes/blobs remain exact. The complete current pending repair inventory is25 roots /
+69 nodes, all unchanged; ordered ID/body-hash records have SHA256
+aad0e43b150c3b94505848d51cd49b3d153740974f08881cc49de38ae9063126.
+
+Only Dart reading .1/.3 and startup .3.4 close. Julia .3.5 decomposition is next.
+The complete Dart gate remains failed under .2.24/.2.25; earlier diagnostic passes
+are reused on unchanged source and do not confer runtime signoff. No canonical
+receipt, PGEN/RGX build, policy/gate change, defect closure or future waiver.

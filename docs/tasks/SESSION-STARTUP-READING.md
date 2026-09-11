@@ -2220,12 +2220,12 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.3.67 - close Rust reading with exact coverage and durable repair ownership`
 
 - ID: `SESSION-STARTUP-READING.3.4`
-  Status: `pending`
+  Status: `done`
   Goal: Split and read all 115 baseline Dart entries, including compiler/runtime, tests, commands, and package inputs.
   Reading owner: `docs/tasks/DART-STARTUP-READING.md` owns .0 decomposition, .1 reading, .2 new repair intake and .3 reading closeout; this startup node remains the prerequisite/closeout owner.
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas. DART-STARTUP-READING.3 may complete this reading node only after exact coverage/comprehension and child-commit proof; pending repairs remain owned separately.
-  Verification: Dart physical reading is complete at 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .3.1 independently verifies all 55 reading commits and 115 baseline-identical files: 80,297 fragments / 2,471,305 bytes. All 100 touched Knowledge cards and 62 prior repair nodes are preserved. Separate diagnostics pass 461 tests, storage25/47, CLI66 twice and corpus105; the complete Dart gate fails formatting in six tests and strict analysis reports two SDK deprecations. New .2.24/.2.25 own repairs. Formal .3.2 and startup .3.4 await a separate verification decision. Capacities .4/.5/.6 remain committed under containment .8/.9/.10 and ADR0110/0111/0112. Startup .3/.4/.5 still gate repairs; .7 is approved and implemented by containment .11 / ADR0113 with exact history preservation; the director granted a one-time focused/receipt exception on 2026-09-11; Containment .11 is committed at ad64f76f; next Dart .3.2 verification decision after the committed .3.1 audit.
-  Commit: `pending`
+  Verification: Dart physical reading is complete at 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart reading closes under .3.2 / ADR0114, exercising the director's explicit delegated decision for this reading-only boundary. Independent proof covers all 55 commits, 115 baseline-identical files, 80,297 fragments and 2,471,305 bytes. All 25 repair roots / 69 pending nodes remain open. Committed diagnostics pass 461 tests, storage25/47, CLI66 twice and corpus105; the full Dart gate remains failed on formatting and two SDK warnings. No canonical CI or PGEN/RGX build ran. Next is startup .3.5 Julia decomposition. Capacities .4/.5/.6 remain committed under containment .8/.9/.10 and ADR0110/0111/0112. Startup .3/.4/.5 still gate repairs; .7 is approved and implemented by containment .11 / ADR0113 with exact history preservation; the director granted a one-time focused/receipt exception on 2026-09-11; Containment .11 is committed at ad64f76f; Dart .3.2 / ADR0114 now close only this reading prerequisite; next .3.5 Julia decomposition.
+  Commit: `DART-STARTUP-READING.3.2 - close verified Dart reading under delegated decision` (cross-tree reading closeout)
 
 - ID: `SESSION-STARTUP-READING.3.5`
   Status: `pending`
@@ -4449,7 +4449,7 @@ Startup `.3.4` stays pending until complete Dart reading; the next executable re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.3.2` | `pending` | Obtain the exact reading-only verification exception or satisfy canonical and complete Dart proof; keep all repairs open before routing Julia. |
+| 1 | `SESSION-STARTUP-READING.3.5` | `pending` | Decompose the 95 baseline Julia entries with exact current-delta and capacity accounting; Dart reading is closed and all repairs retain their gates. |
 
 ## Reading Ledger
 

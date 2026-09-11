@@ -10,6 +10,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — source-reading closure and runtime signoff
+
+ADR0114 records the engineer's decision under explicit director delegation: finish
+the verified Dart reading milestone and continue required reading. All69 repair
+nodes remain pending, including formatter/gate and SDK-adapter repairs; passing
+runtime diagnostics do not erase failed format/analysis. The exception applies
+only to .3.2 and changes no future implementation, admission or push requirements.
+
 ## 2026-09-11 — Dart reading audit and component failures
 
 Dart .3.1 verifies exact committed scopes/comprehension and first-parent activation

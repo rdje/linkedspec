@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `DART-STARTUP-READING`
-- Status: `active` / .3.1 audit complete; .3.2 verification decision pending
+- Status: `active` / reading closed under .3.2 / ADR0114; 25 repair roots remain open
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
 - Last updated: `2026-09-11`
@@ -57,7 +57,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Every child pins its own ordered range digest; the independent declared-scope audit is in
   `docs/knowledge/dart-startup-reading-coverage.md`. Decomposition itself grants no physical-reading credit.
 - Current reading: 55/55 children, 80,297/80,297 fragments and 2,471,305/2,471,305 bytes; all 115 entries through EOF.
-  Physical reading is complete; .3 owns the separate formal reading-parent closeout. Exact credit and comprehension remain in each completed node.
+  Physical and formal reading are complete under .3.2 / ADR0114; all repair work remains separately open. Exact credit and comprehension remain in each completed node.
 
 ## Task Tree
 
@@ -79,14 +79,14 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.0 - freeze exact bounded Dart reading children`
 
 - ID: `DART-STARTUP-READING.1`
-  Status: `active`
+  Status: `done`
   Goal: Read and understand the entire owned Dart scope through the bounded children defined by `.0`.
   Dependencies: `.0`; never execute this broad node as one reading slice.
   Acceptance: Every child accounts for its exact source bytes and deltas, reconciles Knowledge before re-derivation,
     records comprehension and confirmed findings, runs necessary focused diagnostics and commits before the next child.
   Children: `.1.1-.1.55`; exact scopes and baseline evidence below, read in numeric order.
-  Verification: 55/55 children complete; `.1.1-.1.55` own exact reading/comprehension evidence. Keep this parent active until .3 verifies all child commits and completes canonical reading closeout.
-  Commit: `pending`
+  Verification: 55/55 children complete; `.1.1-.1.55` own exact reading/comprehension evidence. Independent .3.1/.3.2 audit verifies every child commit; .3.2 closes this reading container under the director-delegated one-time ADR0114 exception. Runtime gate failures and all repairs remain open.
+  Commit: `DART-STARTUP-READING.3.2 - close verified Dart reading under delegated decision` (reading-container closure)
 
 - ID: `DART-STARTUP-READING.1.1`
   Status: `done`
@@ -1480,15 +1480,15 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.3`
-  Status: `active`
+  Status: `done`
   Goal: Close Dart reading with exact coverage, current-delta, comprehension and child-commit proof.
   Dependencies: `.0` and every `.1` child complete; all findings durably owned under `.2` or existing trees.
   Acceptance: Independently prove complete baseline/current coverage and all child commits; preserve every
     pending repair, complete only startup `.3.4` reading, and route startup Julia `.3.5`.
     Pending repairs keep this tree open; reading closeout is not defect remediation.
-  Children: `.3.1` independent committed-reading audit; `.3.2` canonical reading-parent closeout.
-  Verification: `in progress`; .3.1 commits passing source/commit proof and explicitly failed component format/analyzer results without closing reading parents. Canonical milestone proof remains mandatory under .3.2; the earlier containment .11 exception does not extend to this boundary.
-  Commit: `pending`
+  Children: `.3.1` independent committed-reading audit; `.3.2` reading-parent closeout under ADR0114.
+  Verification: .3.1 audit is committed at 28329ce13; .3.2 independently reexecutes it and preserves all69 pending repair nodes. The engineer exercises the director's explicit delegated authority under ADR0114 for this one-time focused reading closeout. The complete Dart gate remains failed; no canonical receipt, defect closure or new source-reading credit beyond the55 children is claimed. Startup .3.4 closes and .3.5 Julia decomposition is next.
+  Commit: `DART-STARTUP-READING.3.2 - close verified Dart reading under delegated decision` (reading-closeout container)
 
 - ID: `DART-STARTUP-READING.3.1`
   Status: `done`
@@ -1504,13 +1504,18 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `DART-STARTUP-READING.3.1 - audit committed Dart reading and gate failures`
 
 - ID: `DART-STARTUP-READING.3.2`
-  Status: `pending`
+  Status: `done`
   Goal: Close Dart reading from independently committed evidence and route Julia startup reading.
-  Dependencies: .3.1 committed; receipt-bound canonical proof or a newly explicit director exception for this exact boundary.
+  Dependencies: .3.1 committed; director explicitly delegates this decision and the engineer selects the bounded ADR0114 exception for this exact reading boundary.
   Acceptance: Reverify .3.1 audit against clean HEAD; complete only reading container .1, this .3 closeout and startup .3.4, preserve all pending repairs and route startup .3.5 Julia decomposition. Synchronize all current pointers and book. Existing one-time containment .11 waiver grants no authorization here; do not silently rebuild PGEN/RGX contrary to the director's build-on-update requirement.
   Proposal: One-time reading-only exception: accept the committed .3.1 source/commit audit plus separately passing runtime/storage/CLI/corpus diagnostics to close only Dart .1/.3/startup .3.4 and route Julia. Waive canonical receipt and green complete Dart gate for this reading boundary only; keep six-file formatting and two-warning adapter repair .2.24/.2.25 pending behind startup .3/.4/.5. Do not rebuild PGEN/RGX, change source/gates, close defects, waive future admission/push proof or extend the earlier containment exception. The alternative requires authorized repair sequencing and dependency-compatible canonical proof before closeout.
-  Verification: `pending`; no exception granted. Canonical milestone and successful complete Dart proof remain unsatisfied. The preparatory audit is committed separately before requesting this decision.
-  Commit: `pending`
+  Activation: Clean `28329ce13af062eb431cdcff783aac2ca41192ba`; .3.1 committed, root clean, empty brief and no running jobs.
+  Decision authority: On 2026-09-11 the director explicitly delegated this closeout decision to the engineer. Choose the proposed one-time reading-only exception on the independently committed audit; ADR0114 records the rationale and limits. The failed Dart gate and every repair owner remain open; no dependency rebuild, source repair or standing-policy change.
+  Verification tier: `focused`
+  Focused checks: Reexecute the committed reading audit; verify all69 pending Dart repair nodes and all55 child records unchanged; confirm no source/tool/gate/pin delta; all doctrines, Knowledge synchronization, both histories, rendered book and exact prior-evidence preservation. Reuse the unchanged .3.1 component diagnostics without claiming a full-gate pass.
+  Canonical trigger: Reading-parent closeout; the engineer exercises the director's explicit delegated authority for this one-time exception under ADR0114. No canonical receipt or complete Dart gate success is claimed; all future admission, repair and push boundaries retain existing requirements.
+  Verification: The committed audit reexecutes successfully: all55 reading commits/scopes/comprehension/proof/first-parent activations,115 source modes/blobs and exact80297 fragments/2471305 bytes remain verified. All100 touched Knowledge cards and all69 pending repair nodes retain exact checkpoint bytes; ordered69-node SHA256 aad0e43b150c3b94505848d51cd49b3d153740974f08881cc49de38ae9063126. Reuse the unchanged .3.1 passing461 tests/storage25-47/CLI66x2/corpus105 diagnostics and explicitly failed format/analyzer results. Only reading parents .1/.3 and startup .3.4 close. Normal doctrine, history, Knowledge, rendered book, current-pointer and exact prior-evidence checks govern this commit. No canonical CI, receipt, PGEN/RGX build, source/gate/pin change or defect closure. ADR0114 does not waive a later gate or push.
+  Commit: `DART-STARTUP-READING.3.2 - close verified Dart reading under delegated decision`
 
 - ID: `DART-STARTUP-READING.4`
   Status: `done`
@@ -1561,9 +1566,11 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `DART-STARTUP-READING.3.2` | `pending` | Obtain the exact reading-only verification exception or satisfy canonical and complete Dart proof; keep all repairs open before routing Julia. |
+| 1 | `SESSION-STARTUP-READING.3.5` | `pending` | Decompose the 95 baseline Julia entries with exact current-delta and capacity accounting; Dart reading is closed and all repairs retain their gates. |
 
 ## Decisions
+
+- `2026-09-11`: The director delegates the .3.2 decision to the engineer. ADR0114 accepts the one-time reading-only exception on reverified source/commit evidence, keeps the complete Dart gate failed and every repair mandatory, and routes Julia. This is separate from the earlier .11 capacity exception.
 
 - `2026-09-10`: Director grants the .7 engineering-history proposal. ADR0113 and containment .11 admit only files27→28/manifest lines26→27, with fresh clean-source preservation; the 2026-09-11 one-time receipt exception authorizes focused landing.
 
@@ -1580,6 +1587,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Open Questions
 
+- `2026-09-11` resolution: .3.2 is decided under the director's explicit delegation and ADR0114. The earlier request below is historical; no closeout answer remains outstanding.
+
 - .3.2 requires the director decision on its concrete reading-only exception. The earlier containment .11 waiver does not apply. Source/commit proof passes; format/analyzer failures remain repair-owned.
 
 - `.7`: Director approved exactly engineering_notes files27→28 and manifest rows26→27; ADR0113/.11 implement the decision. No further capacity is preapproved.
@@ -1587,6 +1596,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - None for source reading. The director approved .6; ADR0112 and containment .10 own its canonical implementation.
 
 ## Blockers
+
+- `2026-09-11` resolution: ADR0114 closes only the reading boundary. The .3.2 hold described below is historical; format/SDK repairs .2.24/.2.25 and build-on-update .80 remain required at their existing startup/admission gates.
 
 - .3.2: canonical milestone proof conflicts with the still-unimplemented build-on-update policy; the complete Dart gate also has diagnosed format/analyzer failures under .2.24/.2.25. Reading-only exception is proposed, not granted. No PGEN/RGX rebuild or source repair is authorized by this audit.
 
@@ -1596,6 +1607,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - Repair implementation remains gated by required reading and policy adoption; this does not block reading.
 
 ## Verification Log
+
+- `2026-09-11` .3.2: Dart reading closes under .3.2 / ADR0114, exercising the director's explicit delegated decision for this reading-only boundary. Independent proof covers all 55 commits, 115 baseline-identical files, 80,297 fragments and 2,471,305 bytes. All 25 repair roots / 69 pending nodes remain open. Committed diagnostics pass 461 tests, storage25/47, CLI66 twice and corpus105; the full Dart gate remains failed on formatting and two SDK warnings. No canonical CI or PGEN/RGX build ran. Next is startup .3.5 Julia decomposition. All69 repair bodies remain exact; all55 child and100 touched Knowledge records are preserved; all source modes/blobs are unchanged.
 
 - `2026-09-11` .3.1: Dart .3.1 independently verifies all 55 reading commits and 115 baseline-identical files: 80,297 fragments / 2,471,305 bytes. All 100 touched Knowledge cards and 62 prior repair nodes are preserved. Separate diagnostics pass 461 tests, storage25/47, CLI66 twice and corpus105; the complete Dart gate fails formatting in six tests and strict analysis reports two SDK deprecations. New .2.24/.2.25 own repairs. Formal .3.2 and startup .3.4 await a separate verification decision. Exact audit digests and replay live in docs/knowledge/dart-reading-commit-closeout-audit.md; diagnosed gate evidence is in dart-component-gate-sdk-compatibility.md. No full-gate pass or reading-parent completion is claimed.
 
@@ -1714,6 +1727,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 ## Commit Log
 
+- .3.2: `DART-STARTUP-READING.3.2 - close verified Dart reading under delegated decision`.
+
 - .3.1: `DART-STARTUP-READING.3.1 - audit committed Dart reading and gate failures`.
 
 - .1.55: `DART-STARTUP-READING.1.55 - complete planned Dart source reading`.
@@ -1827,6 +1842,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 - `DART-STARTUP-READING.1.1 - read Dart entrypoints and initial ActionIR declarations` closes the first exact source-reading child.
 
 ## Changelog
+
+- `2026-09-11`: .3.2 / ADR0114 close verified Dart reading under delegated authority and route Julia. Failed gates, all69 pending repair nodes and future canonical requirements remain.
 
 - `2026-09-11`: .3.1 audits all reading commits, owns .2.24/.2.25 gate repairs and presents the exact .3.2 reading-only exception; all prior reading/repair evidence remains.
 

@@ -131,6 +131,8 @@ changed* lives in git (layer D), not here.
 
 | [0113](0113-engineering-notes-twenty-eighth-member-capacity.md) | Admit exactly one approved engineering-history member: files 27→28, manifest lines 26→27 | 2026-09-10 | accepted | documentation, history, capacity, doctrine |
 
+| [0114](0114-dart-reading-closeout-verification-exception.md) | Close verified Dart source reading under the director's delegated one-time decision; retain failed gates and all repair obligations | 2026-09-11 | accepted | reading, verification, continuity |
+
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /
    Decision / Consequences / Links`).

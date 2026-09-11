@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart .3.1 independently verifies all 55 reading commits and 115 baseline-identical files: 80,297 fragments / 2,471,305 bytes. All 100 touched Knowledge cards and 62 prior repair nodes are preserved. Separate diagnostics pass 461 tests, storage25/47, CLI66 twice and corpus105; the complete Dart gate fails formatting in six tests and strict analysis reports two SDK deprecations. New .2.24/.2.25 own repairs. Formal .3.2 and startup .3.4 await a separate verification decision. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading closes under .3.2 / ADR0114, exercising the director's explicit delegated decision for this reading-only boundary. Independent proof covers all 55 commits, 115 baseline-identical files, 80,297 fragments and 2,471,305 bytes. All 25 repair roots / 69 pending nodes remain open. Committed diagnostics pass 461 tests, storage25/47, CLI66 twice and corpus105; the full Dart gate remains failed on formatting and two SDK warnings. No canonical CI or PGEN/RGX build ran. Next is startup .3.5 Julia decomposition. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.81` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `DART-STARTUP-READING.3.1` — Dart .3.1 independently verifies all 55 reading commits and 115 baseline-identical files: 80,297 fragments / 2,471,305 bytes. All 100 touched Knowledge cards and 62 prior repair nodes are preserved. Separate diagnostics pass 461 tests, storage25/47, CLI66 twice and corpus105; the complete Dart gate fails formatting in six tests and strict analysis reports two SDK deprecations. New .2.24/.2.25 own repairs. Formal .3.2 and startup .3.4 await a separate verification decision.
+- `DART-STARTUP-READING.3.2` — Dart reading closes under .3.2 / ADR0114, exercising the director's explicit delegated decision for this reading-only boundary. Independent proof covers all 55 commits, 115 baseline-identical files, 80,297 fragments and 2,471,305 bytes. All 25 repair roots / 69 pending nodes remain open. Committed diagnostics pass 461 tests, storage25/47, CLI66 twice and corpus105; the full Dart gate remains failed on formatting and two SDK warnings. No canonical CI or PGEN/RGX build ran. Next is startup .3.5 Julia decomposition.
 
 ## Next Action
 
-- `DART-STARTUP-READING.3.2` — obtain its exact reading-only verification exception or satisfy canonical and complete Dart proof; all repair owners remain open.
+- `SESSION-STARTUP-READING.3.5` — inventory and decompose95 Julia entries before source reading, preserving all Dart repairs and existing limits.
 
 ## Recent Completions
+
+- `2026-09-11` — `DART-STARTUP-READING.3.2` / ADR0114 close only verified Dart reading under delegated authority; all69 repairs and failed Dart gate remain. Julia decomposition is next.
 
 - `2026-09-11` — `DART-STARTUP-READING.3.1` audits55 commits/115 files; runtime diagnostics pass461/25-47/66x2/105, while format/analyzer fail and .2.24/.2.25 own repairs. .3.2 decision pending.
 
@@ -48,8 +50,6 @@
 - `2026-09-10` — `DART-STARTUP-READING.1.44` reads 1,500 fragments / 45,785 bytes; all 13 tests and repeated-action/root-selection/cursor neutral checks pass; no new defect.
 
 - `2026-09-10` — `DART-STARTUP-READING.1.43` reads 1,500 fragments / 45,121 bytes; all 22 tests and recognition/typed-source/repeated-action neutral checks pass; no new defect.
-
-- `2026-09-10` — `DART-STARTUP-READING.1.42` reads 1,500 fragments / 48,485 bytes; all 39 tests and progressive/zero-argument/recognition neutral checks pass; no new defect.
 
 ## History
 

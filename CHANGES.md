@@ -10,6 +10,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — DART-STARTUP-READING.3.2 - close verified Dart reading under delegated decision
+
+Reverify all55 reading commits and115 baseline-identical files; preserve all69
+pending repair nodes and100 touched Knowledge cards. Under the director's explicit
+delegation, ADR0114 closes only Dart reading and startup .3.4 on focused evidence.
+The full Dart gate remains failed; no runtime signoff, canonical receipt or
+dependency build is claimed. Julia .3.5 decomposition follows the clean commit.
+
 ## 2026-09-11 — DART-STARTUP-READING.3.1 - audit committed Dart reading and gate failures
 
 Independently verify all55 child commits,115 baseline-identical files,100 Knowledge
