@@ -10,13 +10,20 @@ answers:
   - "which array and hash constructors remain valid on Julia"
   - "where was Julia selector compatibility dispatch removed"
 date: 2026-07-12
-status: current
+status: historical retirement proof; callable-body validation gap remains open
 tags: [julia, actionir, compiler, generated-source, bindings, retirement, diagnostics, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.12.1.8.4 adds recursive typed-ActionIR detection in julia/src/action/ActionAst.jl and whole-CompiledSpec validation in julia/src/compiler/CompiledSpec.jl. Normal compilation, dead control bodies, valid deferred fluent calls, unused function bodies, generated emission, generated-plan validation, and caller-constructed compiled payloads reject exact selectors. Selector-specific runtime reads, set/push/receiver targets, split/transform wrappers, and target recognizers are deleted. The focused suite passes 59/59 across all six neutral invalid cases and all eight retained constructor/literal classes. The authoritative gate passes 1,339 package assertions, CLI 61x2, and 105 corpus; the recurring executable scan is zero-positive/15 classified."
 reverify: "bash tools/run_julia_local.sh"
 ---
 
 # Julia aggregate-selector compile rejection
+
+**Current limitation, September 11:** explicit and contextual callable bodies bypass the recursive selector
+visitor. Native, reconstructed, generated-plan and separately included emitted-module controls all accept
+forbidden array/hash selectors. JULIA-STARTUP-READING.2.1 owns the repair; exact causal evidence is in
+[[julia-callable-selector-validation-gap]]. The original retirement proof below predates callable-body coverage.
+
+## Historical retirement milestone
 
 Julia rejects the removed exact one-bare-identifier `array` and `hash` call shapes before execution with
 `aggregate_selector_removed surface=<surface> identifier=<name> replacement=<name>`.

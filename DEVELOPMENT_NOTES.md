@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia deferred-body structural validation gap
+
+The selector visitor groups explicit/contextual callables with inert error nodes
+and skips their typed bodies. Compile/emission/plan validators reuse this visitor.
+Process-local body descent rejects all eight forbidden controls while computed
+constructors retain all four routes. Deferred helper resolution need not change.
+
 ## 2026-09-11 — Julia facade and ActionIR data boundary
 
 The facade assembles 37 includes; tiny command adapters delegate to its runtime.

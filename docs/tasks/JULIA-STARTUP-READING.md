@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `JULIA-STARTUP-READING`
-- Status: `active` / reading 2/52; repairs remain owned
+- Status: `active` / reading 3/52; callable-selector repair pending
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.5`
 - Created: `2026-09-11`
 - Last updated: `2026-09-11`
@@ -43,7 +43,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Inventory SHA-256: `ca3cff4fe4c0e162448d6dbac82d89898673023951afaeced17d5b9a838ccd10`.
 - Ordered range SHA-256: `fde325f80ae7b56c5890d149fbc965c09890890e963a1fa9aab08e8c9d962337`.
 - Line coordinates are one-based, inclusive LF physical lines. Every child pins its range digest.
-- Current physical reading: 2/52 children, 2,571/75,984 lines and 104,408/2,693,170 bytes; six complete files.
+- Current physical reading: 3/52 children, 4,071/75,984 lines and 145,809/2,693,170 bytes; seven complete files.
 - Exact replay and capacity assessment: `docs/knowledge/julia-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -59,7 +59,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Dependencies: Startup .3.5.0 decomposition committed; each child starts from a clean prior handoff.
   Children: `.1.1-.1.52`, with exact scopes below.
   Acceptance: Every child records physical coverage, comprehension, Knowledge reconciliation, findings and focused proof before its commit. Retain all current-delta and interrupted-range evidence.
-  Verification: Julia .1.2 finishes README, both command delegates and the facade, and reads ActionAst through line 964: 2/52 groups, 2,571 fragments /104,408 bytes and six complete files. All 452 public names are defined; both CLI help paths, 55 punctuation assertions and neutral 6/4/6 pass. The existing missing-needle contains defect remains under backlog .5; startup .41.7 owns the remaining bare README commands. Sources, Dart failures and all repairs stay unchanged. Julia .1.3 is next; .4 owns future capacity pressure.
+  Verification: Julia .1.3 completes ActionAst and reads ActionContracts through 766: 3/52 groups, 4,071 fragments /145,809 bytes and seven complete files. Twenty causal controls prove callable bodies bypass retired array/hash selector validation across native, reconstructed, generated-plan and in-process emitted-module routes; .2.1.1/.2.1.2 own repair. Existing uniform-binding 61 and projection/alias 8 pass without closing the gap. All source bytes and prior repairs remain. Julia .1.4 is next, with .4 capacity intake before history rollover.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.1.1`
@@ -97,14 +97,21 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Commit: `JULIA-STARTUP-READING.1.2 - read facade and typed action model`.
 
 - ID: `JULIA-STARTUP-READING.1.3`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Julia group 3 and reconcile its source evidence.
   Dependencies: `JULIA-STARTUP-READING.1.2` committed; empty brief and clean repository.
   Scope: `julia/src/action/ActionAst.jl` lines 965-1698; `julia/src/action/ActionContracts.jl` lines 1-766
   Baseline evidence: 1500 fragments / 41401 bytes; ordered range SHA-256 `baad93ccbbfbb2c116e6adb15afd3ecf2b8d95e7e11565e4f0a529aec454b900`.
+  Activation commit: `3fe9346d3dd62f59b32ab1aa4a49d7044e4a5370`.
+  Verification tier: `focused`
+  Focused checks: Exact bounded reading/baseline identity; native AST JSON and contract-resolution controls through managed Julia; Knowledge, memory, histories, rendered book, scope/whitespace and normal doctrines.
+  Canonical trigger: `none` — ordinary reading evidence; no source, public contract, dependency, gate or infrastructure change.
   Acceptance: Physically read every owned byte, inspect current deltas, reconcile Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit. Do not count truncated output or unread consumer suffixes.
-  Verification: `pending`
-  Commit: `pending`
+  Comprehension: ActionAst completes switch/case/default/raw nodes, recursively searches structural expressions for retired one-bare-variable selectors, and emits fresh JSON for every typed family with exact optional fields, callable source_text/signature/body and receiver mutation continuation. Its selector visitor skips explicit/contextual callable bodies, creating the confirmed .2.1 gap. ActionContracts defines typed resolution/diagnostic output, public entrypoints, canonical numeric/control/source-boundary aliases and helper-family sets; the visitor prefix distinguishes grammar-owned intrinsics from ordinary helper calls. The fluent visitor and remaining resolver continue in .1.4. Supporting compiler/emitter and contract-visitor ranges were inspected only for diagnosis and receive no advance credit.
+  Knowledge: Reconciled selector retirement, action contract resolution and staged marker facts; docs/knowledge/julia-callable-selector-validation-gap.md owns exact causal evidence and replay. Original selector admission is now explicitly historical with its current limitation.
+  Findings: Confirmed callable-body selector validation defect owns pending .2.1/.2.1.1/.2.1.2; no repair or broader backend conclusion.
+  Verification: Exact two owned ranges total 1500 fragments /41401 baseline-identical bytes, digest baad93ccbbfbb2c116e6adb15afd3ecf2b8d95e7e11565e4f0a529aec454b900. Twenty asserted two-family/five-form/before-after controls bind the skipped callable branch causally while valid computed constructors remain supported; all four array-source Perl Get controls reject. Existing uniform-binding 61/61 and projection/alias 8/8 pass. Emitted controls load fresh modules in one process, not child processes. Diagnostic body descent is process-local; repository sources/tests/formats unchanged. Coverage, preservation, Knowledge, memory, histories, book and normal doctrines accompany the commit; no complete component/canonical gate or dependency build.
+  Commit: `JULIA-STARTUP-READING.1.3 - read action projection and own callable selector gap`.
 
 - ID: `JULIA-STARTUP-READING.1.4`
   Status: `pending`
@@ -601,7 +608,33 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Goal: Preserve disjoint repair ownership for every confirmed Julia finding.
   Dependencies: Findings from .1; source repair additionally requires startup .3/.4/.5.
   Acceptance: Reuse exact existing startup owners when applicable; otherwise add bounded repair children with source mechanism, reproduction, acceptance and unblock conditions. No finding is closed by reading alone.
-  Verification: `pending`; .1.1 routes exact README claim/locality corrections to existing startup .41.2/.41.3/.41.7. No duplicate Julia repair child or runtime failure.
+  Children: .2.1 (callable-body selector validation); prior README findings retain startup .41.2/.41.3/.41.7.
+  Verification: `pending` repair; .1.3 confirms the callable-body gap and routes two bounded repair children. Earlier documentation and helper-arity owners remain intact.
+  Commit: `pending`
+
+- ID: `JULIA-STARTUP-READING.2.1`
+  Status: `pending`
+  Goal: Reject removed aggregate selectors inside explicit and contextual callable bodies before execution.
+  Dependencies: Startup .3/.4/.5; .1.3 preserves the exact current defect and reference controls.
+  Children: .2.1.1, .2.1.2
+  Acceptance: Preserve deferred execution and binding semantics while applying structural selector retirement recursively through every callable body and all compiled/generated entry routes. Do not weaken the existing selector contract or treat alias tests as repair proof.
+  Verification: Pending repair; .1.3 proves both array/hash direct controls reject, while inert/called/contextual callable forms compile across all four measured carriers. Twenty asserted outcomes isolate body descent as causal; both computed controls remain valid. Perl Get rejects all four array sources. Existing uniform-binding61 remains green. Exact mechanisms/replay: docs/knowledge/julia-callable-selector-validation-gap.md.
+  Commit: `pending`
+
+- ID: `JULIA-STARTUP-READING.2.1.1`
+  Status: `pending`
+  Goal: Repair structural selector descent through literal and contextual codeblock bodies.
+  Dependencies: Startup .3/.4/.5; exact .1.3 diagnostic intake committed.
+  Acceptance: Read the complete normalization/validation path first. Traverse typed callable bodies for forbidden structural selectors without executing them or promoting deferred helper dependencies. Cover array/hash, nested literals, unused/dead bodies, parameters, valid literal/computed constructors and precise source diagnostics with RED/GREEN tests; preserve unrelated late-bound behavior.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-STARTUP-READING.2.1.2`
+  Status: `pending`
+  Goal: Close reconstructed/generated selector validation and public claim coverage after the visitor repair.
+  Dependencies: .2.1.1; source-reading and policy prerequisites.
+  Acceptance: Prove native, normalized SpecFile, caller-constructed compiled state, generated-plan validation/execution and independently loaded emitted routes reject forbidden callable-body selectors before effects. Preserve valid deferred callbacks and source-v2 identity, run direct-dependent selector/callable/contextual suites plus appropriate admission proof, and reconcile the book/Knowledge claim against actual coverage.
+  Verification: `pending`
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.3`
@@ -624,7 +657,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.3` | `pending` | Read the remaining ActionAst and first ActionContracts range from a clean .1.2 checkpoint. |
+| 1 | `JULIA-STARTUP-READING.1.4` | `pending` | Read remaining ActionContracts and first ActionParser range after clean .1.3; preserve room for capacity intake. |
 
 ## Decisions
 
@@ -642,18 +675,21 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Verification Log
 
+- `2026-09-11` .1.3: Julia .1.3 completes ActionAst and reads ActionContracts through 766: 3/52 groups, 4,071 fragments /145,809 bytes and seven complete files. Twenty causal controls prove callable bodies bypass retired array/hash selector validation across native, reconstructed, generated-plan and in-process emitted-module routes; .2.1.1/.2.1.2 own repair. Existing uniform-binding 61 and projection/alias 8 pass without closing the gap. All source bytes and prior repairs remain. Julia .1.4 is next, with .4 capacity intake before history rollover.
 - `2026-09-11` .1.2: Julia .1.2 finishes README, both command delegates and the facade, and reads ActionAst through line 964: 2/52 groups, 2,571 fragments /104,408 bytes and six complete files. All 452 public names are defined; both CLI help paths, 55 punctuation assertions and neutral 6/4/6 pass. The existing missing-needle contains defect remains under backlog .5; startup .41.7 owns the remaining bare README commands. Sources, Dart failures and all repairs stay unchanged. Julia .1.3 is next; .4 owns future capacity pressure.
 - `2026-09-11` .1.1: Julia .1.1 completes the manifests and README lines 1–963: 1/52 groups, 1,071 fragments / 65,410 bytes and two complete files. Seven exact README examples and the primary JSON example pass on Julia 1.12.7; semantic governance remains 6/20/128, rollout 9/9 and admission 6/6. Existing startup .41.2/.41.3/.41.7 own the stale status and unmanaged-command guidance. All sources, prior repairs and Dart gate failures remain unchanged. Julia .1.2 is next; .4 owns future capacity pressure.
 - `2026-09-11`: Startup .3.5.0 independently reconstructs all 95 baseline-identical paths,52 groups,146 ranges and every byte once; all child bounds/digests pass. No physical-reading credit.
 
 ## Commit Log
 
+- .1.3: `JULIA-STARTUP-READING.1.3 - read action projection and own callable selector gap`.
 - .1.2: `JULIA-STARTUP-READING.1.2 - read facade and typed action model`.
 - .1.1: `JULIA-STARTUP-READING.1.1 - read package manifests and README examples`.
 - Decomposition: `SESSION-STARTUP-READING.3.5.0 - freeze exact bounded Julia reading plan`.
 
 ## Changelog
 
+- `2026-09-11`: .1.3 completes the third reading group and owns the confirmed callable-body selector defect under .2.1.
 - `2026-09-11`: .1.2 completes six files cumulatively and the first typed ActionAst range; prior repairs remain pending.
 - `2026-09-11`: .1.1 closes the first exact source-reading group and routes existing public-teaching repairs.
 - `2026-09-11`: Created bounded Julia reading ownership with 52 pending source children and explicit repair, closeout and capacity owners.

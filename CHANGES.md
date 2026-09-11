@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.3 - read action projection and own callable selector gap
+
+Read 1,500 fragments /41,401 bytes and isolate callable-body selector omission.
+Twenty causal outcomes prove native/reconstructed/generated/emitted exposure;
+.2.1.1/.2.1.2 own repair. Existing binding61 and projection8 pass. Preserve all
+source and prior evidence; update current public limitations and next reading.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.2 - read facade and typed action model
 
 Read the exact 1,500-fragment /38,998-byte group; cumulative Julia reading is

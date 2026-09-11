@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `2f3129f880f6a1481daf23eeec982a57c631bb81` — clean first Julia reading handoff.
-- latest_completed_leaf: `JULIA-STARTUP-READING.1.2 - read facade and typed action model`; exact second Julia group and focused proof complete; existing helper/teaching repairs retained.
-- active_work_unit: none; Julia .1.2 complete; `JULIA-STARTUP-READING.1.3` is next.
-- next_action: Activate `JULIA-STARTUP-READING.1.3` from clean HEAD, read remaining ActionAst and first ActionContracts scope, verify and commit.
+- activation_commit: `3fe9346d3dd62f59b32ab1aa4a49d7044e4a5370` — clean second Julia reading handoff.
+- latest_completed_leaf: `JULIA-STARTUP-READING.1.3 - read action projection and own callable selector gap`; third exact group read; new repair .2.1 remains pending.
+- active_work_unit: none; Julia .1.3 complete; `JULIA-STARTUP-READING.1.4` is next.
+- next_action: Activate `JULIA-STARTUP-READING.1.4` from clean HEAD, read remaining ActionContracts/first ActionParser, verify and commit; retain capacity-intake headroom.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
-- in_flight_uncommitted: none; no running jobs. Source and pending repair state remain intact.
+- in_flight_uncommitted: none; no running jobs. Julia .2.1 owns the unfixed selector gap; all prior repair/source state remains.
 - blockers: Julia .4 owns future history/capacity pressure; initial reading fits. Dart reading decision closed by ADR0114; .2.24/.2.25 still own format/SDK repairs. Dart .7 closes under .11/ADR0113 with the explicit one-time verification exception; Startup `.7` blocks recovery/purge; engineering-history .5 approval is implemented under containment .9 / ADR0111; prior change-history approval remains under .8 / ADR0110. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.81` precede mutation setup; `.29` belongs to `.5`. Prior narrow exceptions stay approved; Dart .6 approval is implemented under containment .10 / ADR0112, with all earlier history preserved.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -57,4 +57,4 @@
   Segment 4981-5a6450db0974 preserves 218 lines / 32,108 bytes; every other ceiling remains unchanged.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-11 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart read; Julia 2/52 groups, 2571/75984 lines, 104408/2693170 bytes, six complete files. Lua/supporting code, formal book .4 and policy .5 remain.
+- latest_bootstrap_read: 2026-09-11 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart read; Julia 3/52 groups, 4071/75984 lines, 145809/2693170 bytes, seven complete files. Lua/supporting code, formal book .4 and policy .5 remain.
