@@ -51,3 +51,19 @@ Related facts: [[julia-progressive-span-dispatch-authority]],
 [[julia-progressive-span-dispatch-dormant-red]], [[julia-progressive-span-dispatch-admission]],
 [[progressive-span-dispatch-audit-plan]], and
 [[julia-recognition-transaction-integration]].
+
+## September 11 reading qualification
+
+Julia .1.15 reads the exclusive dispatch assignment and its immediate runtime
+adapter in Interpreter3611-3730. The receiver-write guard runs before dispatch;
+absent host authority fails, the span value is copied, live recognition tokens are
+reported to the private authority, and the detached child result is stored only
+after successful dispatch. The existing four-carrier consumer passes 62 assertions.
+
+The earlier claim that nested calls share narrowing authority is limited by
+[[julia-progressive-authority-boundary-gaps]]: startup .37.1 owns the confirmed
+nested grant/budget inheritance defects. Static effect claims are limited by
+[[julia-recognition-effect-integration-gap]], owned by Julia .2.3. The direct live-
+token defense does not close the structural effect-classification gap. Current
+neutral progressive rollout is 9/9 with 116 contract and 60 public mutations; older
+5/9/106 and 7/9/112 snapshots above are dated history. No repair is closed here.

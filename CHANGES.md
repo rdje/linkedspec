@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.15 - read control dispatch and own token preflight repair
+
+Read Interpreter3116-4615: 1,500 fragments /50,914 baseline-identical bytes.
+Existing controls/functions/cursor/progressive/staged/recognition793 and token
+preflight80 assertions pass; neutral checks pass. Own pre-child token validation
+under .2.7 and qualify prior Knowledge/book claims; source remains unchanged.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.14 - read rule execution and own observer passthrough repair
 
 Read Interpreter1616-3115: 1,500 fragments /49,525 baseline-identical bytes.

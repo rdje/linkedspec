@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.14 reads Interpreter1616-3115: 14/52 groups, 19,425 fragments /743,537 bytes and twenty-two complete files. Existing rule39/control6/emitter65/capture66 assertions pass (176 plus selection1); the 108-assertion public observer diagnostic isolates action-child exception identity loss across four routes. Neutral semantic6/20/128, rollout9/0 and admission6/0 pass. New .2.6.1/.2.6.2 own passthrough repair and supported-route recurrence; all prior repairs, source, evidence and ADR0115 controls remain. Julia .1.15 is next; no full component/canonical gate or dependency build. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.15 reads Interpreter3116-4615: 15/52 groups, 20,925 fragments /794,451 bytes and twenty-two complete files. Existing marker1/control6/function9/cursor17/progressive62/staged491/recognition207 assertions pass (793 plus selection1); token preflight diagnostic80 proves child execution before missing/repeated/post-commit rejection across four public routes. Neutral progressive116/public60, staged123/public129 and recognition138/250/58 pass. New .2.7.1/.2.7.2 own preflight and static-sequence/carrier recurrence; all prior repairs, source, history and ADR0115 controls remain. Julia .1.16 is next; no full component/canonical gate or dependency build. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.81` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `JULIA-STARTUP-READING.1.14 - read rule execution and own observer passthrough repair` — Julia .1.14 reads Interpreter1616-3115: 14/52 groups, 19,425 fragments /743,537 bytes and twenty-two complete files. Existing rule39/control6/emitter65/capture66 assertions pass (176 plus selection1); the 108-assertion public observer diagnostic isolates action-child exception identity loss across four routes. Neutral semantic6/20/128, rollout9/0 and admission6/0 pass. New .2.6.1/.2.6.2 own passthrough repair and supported-route recurrence; all prior repairs, source, evidence and ADR0115 controls remain. Julia .1.15 is next; no full component/canonical gate or dependency build.
+- `JULIA-STARTUP-READING.1.15 - read control dispatch and own token preflight repair` — Julia .1.15 reads Interpreter3116-4615: 15/52 groups, 20,925 fragments /794,451 bytes and twenty-two complete files. Existing marker1/control6/function9/cursor17/progressive62/staged491/recognition207 assertions pass (793 plus selection1); token preflight diagnostic80 proves child execution before missing/repeated/post-commit rejection across four public routes. Neutral progressive116/public60, staged123/public129 and recognition138/250/58 pass. New .2.7.1/.2.7.2 own preflight and static-sequence/carrier recurrence; all prior repairs, source, history and ADR0115 controls remain. Julia .1.16 is next; no full component/canonical gate or dependency build.
 
 ## Next Action
 
-- `JULIA-STARTUP-READING.1.15` — Read Interpreter3116-4615 after clean .1.14; keep all repair prerequisites and evidence intact.
+- `JULIA-STARTUP-READING.1.16` — Read Interpreter4616-6115 after clean .1.15; keep all repair prerequisites and evidence intact.
 
 ## Recent Completions
+
+- `2026-09-11` — `JULIA-STARTUP-READING.1.15` reads 1,500 fragments /50,914 bytes;793 existing and80 diagnostic assertions pass; recognition-token repair .2.7 remains open.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.14` reads 1,500 fragments /49,525 bytes;176 existing and108 diagnostic assertions pass; observer repair .2.6 remains open.
 
@@ -48,8 +50,6 @@
 - `2026-09-11` — `JULIA-STARTUP-READING.1.3` reads 1,500 fragments /41,401 bytes; owns callable selector gap with 20 causal outcomes and 69 passing focused assertions.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.2` reads 1,500 fragments /38,998 bytes; 452 names, two help paths and 55 punctuation assertions pass.
-
-- `2026-09-11` — `JULIA-STARTUP-READING.1.1` reads 1,071 fragments /65,410 bytes; seven README examples, primary output and semantic checker pass.
 
 ## History
 

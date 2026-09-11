@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia recognition attempt preflight
+
+RecognizeOnce executes its child before token lookup and authority validation.
+One-character Child controls prove execution before missing-token rejection and
+a second match before repeated/post-commit rejection through four public routes.
+Repair .2.7 owns preflight and static-sequence/carrier proof; replay is durable.
+
 ## 2026-09-11 — Julia action callback identity boundary
 
 The sink marks the original callback error, but an enclosing action catch wraps

@@ -59,3 +59,15 @@ Related: [[julia-staged-ast-enrichment-dormant-red]], [[general-staged-ast-enric
 [[julia-staged-ast-enrichment-current-depth-authority]],
 [[julia-staged-ast-enrichment-recursive-authority]], [[typed-source-location-runtime-rollout-plan]],
 [[julia-progressive-span-dispatch-carriers]], and [[julia-staged-ast-enrichment-carriers-admission]].
+
+## September 11 runtime-dispatch reading
+
+Julia .1.15 reads the ActionStagedParseJobExpr branch in Interpreter3665-3688.
+Its receiver-write guard precedes marker construction, which receives the live
+source authority, match registers, logical origin, frozen text plan and options.
+The result is copied into the target binding. This branch constructs an inert
+marker; actual enrichment follows parent execution through the separate authority.
+The current admitted consumer passes 491 assertions and the neutral/public checks
+pass 123/129 mutations. Historical static effect claims remain qualified by
+[[julia-recognition-effect-integration-gap]]; no repair or new carrier admission
+is inferred from this source reading.

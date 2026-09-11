@@ -1566,7 +1566,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.15` | `pending` | Read Interpreter3116-4615 after clean .1.14; keep all repair prerequisites and evidence intact. |
+| 1 | `JULIA-STARTUP-READING.1.16` | `pending` | Read Interpreter4616-6115 after clean .1.15; keep all repair prerequisites and evidence intact. |
 
 ## Decisions
 

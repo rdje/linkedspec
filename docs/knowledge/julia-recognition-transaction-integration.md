@@ -69,3 +69,14 @@ claims are limited by that open repair. The original203-assertion and rollout5/9
 snapshots are dated admission history; current neutral recognition is138/250/58,
 rollout9/9, and typed source is14/0/231. Current focused replay lives in
 [[julia-runtime-structured-diagnostics]]. No repair is closed by this reading.
+
+## September 11 attempt-order qualification
+
+Julia .1.15 reads RecognizeOnce dispatch and confirms that the requested child
+runs before token lookup and attempt-state validation. Missing tokens and repeated
+or post-commit attempts therefore emit child slot events before rejection through
+all four measured native/generated-plan conveniences. Existing recognition 207 and
+neutral 138/250/58 remain green. [[julia-recognition-attempt-preflight-gap]] owns
+80 exact diagnostic assertions and repair .2.7; static effect repair .2.3 and
+startup .38 stale-snapshot restoration remain distinct. The earlier one-attempt
+contract is not proven by tests of the standalone authority alone.
