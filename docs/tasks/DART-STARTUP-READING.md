@@ -1566,7 +1566,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.5` | `pending` | Decompose the 95 baseline Julia entries with exact current-delta and capacity accounting; Dart reading is closed and all repairs retain their gates. |
+| 1 | `JULIA-STARTUP-READING.1.1` | `pending` | Read the first exact Julia group after the clean decomposition commit; no physical Julia reading credit yet. |
 
 ## Decisions
 

@@ -10,6 +10,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia scope and evidence capacity
+
+The 572-line minimum Julia plan exceeds startup member headroom; a separate639-line
+member holds52 exact groups without raising limits. Forecast against55 actual Dart
+reading commits and recheck each resulting candidate. Current history collections
+have no spare member slots; Julia .4 owns disposition before a required rollover.
+Enumeration and successful range reconstruction do not establish comprehension.
+
 ## 2026-09-11 — source-reading closure and runtime signoff
 
 ADR0114 records the engineer's decision under explicit director delegation: finish

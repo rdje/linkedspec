@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Dart reading closes under .3.2 / ADR0114, exercising the director's explicit delegated decision for this reading-only boundary. Independent proof covers all 55 commits, 115 baseline-identical files, 80,297 fragments and 2,471,305 bytes. All 25 repair roots / 69 pending nodes remain open. Committed diagnostics pass 461 tests, storage25/47, CLI66 twice and corpus105; the full Dart gate remains failed on formatting and two SDK warnings. No canonical CI or PGEN/RGX build ran. Next is startup .3.5 Julia decomposition. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Startup .3.5.0 freezes Julia reading into 52 owned children / 146 ranges across all 95 baseline-identical files: 75,984 lines / 2,693,170 bytes. Independent reconstruction verifies every byte and range digest; physical Julia reading remains 0/52. A separate bounded JULIA-STARTUP-READING member fits existing controls; .4 owns future history/capacity pressure. Dart reading is closed under ADR0114, with all 69 repairs and its failed gate retained. Next Julia .1.1 reads the manifests and first README range. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.81` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `DART-STARTUP-READING.3.2` — Dart reading closes under .3.2 / ADR0114, exercising the director's explicit delegated decision for this reading-only boundary. Independent proof covers all 55 commits, 115 baseline-identical files, 80,297 fragments and 2,471,305 bytes. All 25 repair roots / 69 pending nodes remain open. Committed diagnostics pass 461 tests, storage25/47, CLI66 twice and corpus105; the full Dart gate remains failed on formatting and two SDK warnings. No canonical CI or PGEN/RGX build ran. Next is startup .3.5 Julia decomposition.
+- `SESSION-STARTUP-READING.3.5.0` — Startup .3.5.0 freezes Julia reading into 52 owned children / 146 ranges across all 95 baseline-identical files: 75,984 lines / 2,693,170 bytes. Independent reconstruction verifies every byte and range digest; physical Julia reading remains 0/52. A separate bounded JULIA-STARTUP-READING member fits existing controls; .4 owns future history/capacity pressure. Dart reading is closed under ADR0114, with all 69 repairs and its failed gate retained. Next Julia .1.1 reads the manifests and first README range.
 
 ## Next Action
 
-- `SESSION-STARTUP-READING.3.5` — inventory and decompose95 Julia entries before source reading, preserving all Dart repairs and existing limits.
+- `JULIA-STARTUP-READING.1.1` — physically read the first exact manifests/README group; check resulting evidence pressure before each new leaf.
 
 ## Recent Completions
+
+- `2026-09-11` — `SESSION-STARTUP-READING.3.5.0` freezes95 files/52 groups/146 ranges;0/52 physically read; future capacity belongs to Julia .4.
 
 - `2026-09-11` — `DART-STARTUP-READING.3.2` / ADR0114 close only verified Dart reading under delegated authority; all69 repairs and failed Dart gate remain. Julia decomposition is next.
 
@@ -48,8 +50,6 @@
 - `2026-09-10` — `DART-STARTUP-READING.1.45` reads 1,500 fragments / 41,762 bytes; all 75 tests and the neutral cursor check pass; no new defect.
 
 - `2026-09-10` — `DART-STARTUP-READING.1.44` reads 1,500 fragments / 45,785 bytes; all 13 tests and repeated-action/root-selection/cursor neutral checks pass; no new defect.
-
-- `2026-09-10` — `DART-STARTUP-READING.1.43` reads 1,500 fragments / 45,121 bytes; all 22 tests and recognition/typed-source/repeated-action neutral checks pass; no new defect.
 
 ## History
 

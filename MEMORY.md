@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `28329ce13af062eb431cdcff783aac2ca41192ba` — clean .3.1 audit before .3.2 reading closeout.
-- latest_completed_leaf: `DART-STARTUP-READING.3.2 - close verified Dart reading under delegated decision`; reverified reading audit and all69 pending repair nodes.
-- active_work_unit: none; Dart reading closed under ADR0114; startup .3.5 Julia decomposition is next.
-- next_action: Activate `SESSION-STARTUP-READING.3.5` from clean HEAD; inventory and decompose all95 Julia entries within current evidence limits before source reading.
+- activation_commit: `a2788b95369964880534d4d7b1d0e31b106bc023` — clean Dart reading handoff before Julia inventory.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.5.0 - freeze exact bounded Julia reading plan`; exact 95-file inventory and 52 owned groups; no Julia reading credit.
+- active_work_unit: none; Julia decomposition complete; `JULIA-STARTUP-READING.1.1` is next.
+- next_action: Activate `JULIA-STARTUP-READING.1.1` from clean HEAD; read its exact manifests/README scope in bounded outputs and commit before the next child.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
-- in_flight_uncommitted: none; no running jobs. The one-time reading decision is complete; Dart gate failures remain repair-owned.
-- blockers: Dart reading decision closed by ADR0114; .2.24/.2.25 still own format/SDK repairs. Dart .7 closes under .11/ADR0113 with the explicit one-time verification exception; Startup `.7` blocks recovery/purge; engineering-history .5 approval is implemented under containment .9 / ADR0111; prior change-history approval remains under .8 / ADR0110. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.81` precede mutation setup; `.29` belongs to `.5`. Prior narrow exceptions stay approved; Dart .6 approval is implemented under containment .10 / ADR0112, with all earlier history preserved.
+- in_flight_uncommitted: none; no running jobs. Julia plan is durable; all source repairs and later verification requirements remain.
+- blockers: Julia .4 owns future history/capacity pressure; initial reading fits. Dart reading decision closed by ADR0114; .2.24/.2.25 still own format/SDK repairs. Dart .7 closes under .11/ADR0113 with the explicit one-time verification exception; Startup `.7` blocks recovery/purge; engineering-history .5 approval is implemented under containment .9 / ADR0111; prior change-history approval remains under .8 / ADR0110. Startup repairs `.7`–`.30`, `.32`–`.47`, `.49`–`.81` precede mutation setup; `.29` belongs to `.5`. Prior narrow exceptions stay approved; Dart .6 approval is implemented under containment .10 / ADR0112, with all earlier history preserved.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -57,4 +57,4 @@
   Segment 4981-5a6450db0974 preserves 218 lines / 32,108 bytes; every other ceiling remains unchanged.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-11 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart reading complete; Dart .3.2 closes under ADR0114. Next Julia .3.5; Lua/supporting code, formal book .4 and policy .5 remain.
+- latest_bootstrap_read: 2026-09-11 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart read; Julia planned52 groups/95 files/75984 lines/2693170 bytes, physically0/52. Lua/supporting code, formal book .4 and policy .5 remain.

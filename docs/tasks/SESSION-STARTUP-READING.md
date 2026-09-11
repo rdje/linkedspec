@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Session continuity prerequisite to RUST-MUTATION-TESTING.1`
 - Created: `2026-09-06`
-- Last updated: `2026-09-10`
+- Last updated: `2026-09-11`
 - Owner: repo-local workflow
 - Reading baseline: `baeb984e36a94a15951cd23d4c52def5064cdaca`
 
@@ -2228,11 +2228,26 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `DART-STARTUP-READING.3.2 - close verified Dart reading under delegated decision` (cross-tree reading closeout)
 
 - ID: `SESSION-STARTUP-READING.3.5`
-  Status: `pending`
+  Status: `active`
   Goal: Split and read all 95 baseline Julia entries, including compiler/runtime, tests, commands, and package inputs.
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas.
-  Verification: `pending`
+  Children: `.3.5.0` owns decomposition; JULIA-STARTUP-READING.1 owns 52 reading children and .3 owns closeout.
+  Reading owner: `docs/tasks/JULIA-STARTUP-READING.md` retains exact scope/digest, comprehension and repair evidence. This startup node remains the prerequisite owner.
+  Verification: Startup .3.5.0 freezes Julia reading into 52 owned children / 146 ranges across all 95 baseline-identical files: 75,984 lines / 2,693,170 bytes. Independent reconstruction verifies every byte and range digest; physical Julia reading remains 0/52. A separate bounded JULIA-STARTUP-READING member fits existing controls; .4 owns future history/capacity pressure. Dart reading is closed under ADR0114, with all 69 repairs and its failed gate retained. Next Julia .1.1 reads the manifests and first README range. No Julia consumer or source behavior is verified by inventory alone.
   Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.5.0`
+  Status: `done`
+  Goal: Inventory and plan exact bounded Julia source reading within governed evidence capacity.
+  Dependencies: Dart reading .3.2 committed under ADR0114; root clean, empty brief and all jobs consumed.
+  Activation: Clean `a2788b95369964880534d4d7b1d0e31b106bc023`.
+  Scope: The 95 Git-baseline Julia entries at baeb984e36a94a15951cd23d4c52def5064cdaca, every current membership/mode/blob delta, and task/Knowledge/history capacity needed for bounded reading.
+  Acceptance: Reconstruct exact inventory and a disjoint complete range plan under1500 fragments/65536 bytes per child, with UTF-8-safe oversized-line handling. Measure current and projected evidence limits before adding reading children. Freeze navigable ownership if the plan fits; otherwise preserve a concrete bounded capacity proposal and its unblock conditions without raising limits or discarding evidence. Grant no physical source-reading credit; preserve all prior startup/Dart repairs and parked activities.
+  Verification tier: `focused`
+  Focused checks: Independent Git inventory/mode/blob/current-delta and range-coverage/digest audits; actual routing-pressure and projection census; both histories, all doctrines, Knowledge, rendered book and prior-evidence preservation.
+  Canonical trigger: `none` — bounded source-reading inventory/decomposition or capacity proposal only; no source, runtime, dependency, infrastructure or control change. A capacity implementation or later milestone retains its own required boundary.
+  Verification: All 95 Julia baseline modes/blobs/current bytes remain exact;52 groups /146 inclusive ranges independently reconstruct 75984 lines/2693170 bytes exactly once, with all child bounds/digests. No empty entry or oversized-line split. New 639-line/48991-byte Julia member preserves startup member space and stays within unchanged aggregate/member controls. Compared 55 Dart reading commits forecast 1144 task lines/245095 bytes,5490 Knowledge lines/377493 bytes and 387 map lines/77475 bytes; current resulting controls and history checks pass, but future history rollovers have no free member slots and remain explicitly owned by Julia .4. All prior task/Knowledge/ADR/history evidence and source bytes remain; book and pointers distinguish plan 0/52 from physical reading. No runtime/component gate, canonical CI or dependency build is claimed.
+  Commit: `SESSION-STARTUP-READING.3.5.0 - freeze exact bounded Julia reading plan`
 
 - ID: `SESSION-STARTUP-READING.3.6`
   Status: `pending`
@@ -4449,7 +4464,7 @@ Startup `.3.4` stays pending until complete Dart reading; the next executable re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.5` | `pending` | Decompose the 95 baseline Julia entries with exact current-delta and capacity accounting; Dart reading is closed and all repairs retain their gates. |
+| 1 | `JULIA-STARTUP-READING.1.1` | `pending` | Read the first exact Julia group after the clean decomposition commit; no physical Julia reading credit yet. |
 
 ## Reading Ledger
 
@@ -7185,6 +7200,8 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Decisions
 
+- `2026-09-11`: .3.5.0 uses a separate bounded Julia member because the 572-line minimum plan exceeds startup member headroom. All 52 scopes are fixed before reading; no limit increase or source-reading credit. Future history capacity belongs to JULIA-STARTUP-READING.4.
+
 - `2026-09-06`: The director explicitly excluded `rgx` from this reading pass; the exclusion includes its nested
   dependencies and does not remove first-party Rust code or tests from scope.
 - `2026-09-06`: After being asked to choose between a reading checkpoint and keeping every file unchanged, the
@@ -7221,6 +7238,8 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
   Both retain startup .3/.4/.5 prerequisites; intake .80.0 authorizes no source repair or OS mitigation.
 
 ## Verification Log
+
+- `2026-09-11` .3.5.0: Startup .3.5.0 freezes Julia reading into 52 owned children / 146 ranges across all 95 baseline-identical files: 75,984 lines / 2,693,170 bytes. Independent reconstruction verifies every byte and range digest; physical Julia reading remains 0/52. A separate bounded JULIA-STARTUP-READING member fits existing controls; .4 owns future history/capacity pressure. Dart reading is closed under ADR0114, with all 69 repairs and its failed gate retained. Next Julia .1.1 reads the manifests and first README range.
 
 - `2026-09-08` `.3.3.67`: Exact scope and independent committed-child/mode/delta/repair/Knowledge continuity audits PASS. All 66 reading children and 141 touched fact paths are durable; 34 post-Perl repair owners retain 90 pending nodes / 73 pending leaves. Final receipt-bound canonical CI governs parent landing; outcome and exact log identity are retained in the commit. Next containment .7 precedes Dart ownership/reading.
 
@@ -7386,9 +7405,13 @@ CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gate
 
 ## Commit Log
 
+- .3.5.0: `SESSION-STARTUP-READING.3.5.0 - freeze exact bounded Julia reading plan`.
+
 Each canonical task node owns its exact `Commit` subject and retained completion note. Query landed history with `git log --all --format="%h %s" --fixed-strings --grep="SESSION-STARTUP-READING."`; this replaces the proven duplicate 102-row table.
 
 ## Changelog
+
+- `2026-09-11`: .3.5.0 freezes the exact 52-child Julia plan and capacity ownership; first reading is JULIA-STARTUP-READING.1.1.
 
 - `2026-09-06`: Created the owning leaf before any checkpoint edits; recorded baseline coverage and the remaining reading sequence.
 - `2026-09-06`: Completed the focused checkpoint and synchronized continuity; remaining reading starts at `.2`.

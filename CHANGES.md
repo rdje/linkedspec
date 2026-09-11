@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — SESSION-STARTUP-READING.3.5.0 - freeze exact bounded Julia reading plan
+
+Own all 95 Julia files in52 bounded children /146 exact ranges:75,984 lines and
+2,693,170 baseline-identical bytes. Independent coverage/digests and current
+capacity pass; no physical reading credit. New bounded Julia tree and .4 capacity
+owner preserve existing limits, history and repairs. First source group is next.
+
 ## 2026-09-11 — DART-STARTUP-READING.3.2 - close verified Dart reading under delegated decision
 
 Reverify all55 reading commits and115 baseline-identical files; preserve all69
