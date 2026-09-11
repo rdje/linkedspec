@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 33/52 owned groups; its thirty-fourth reading child is next, with approved ADR0115 capacity in place.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 34/52 owned groups; its thirty-fifth reading child is next, with approved ADR0115 capacity in place.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,12 +297,24 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 33/52 groups complete:** validator and native trace source
-are complete; callable-codeblock test reading reaches line669. Coverage is
-47,925 lines /1,665,590 bytes and forty-three complete files. Existing frontend,
-trace, callable and gap checks pass 1,201 assertions; selector, identifier and
-trace controls pass 162. The next five test ranges are recorded in
-`docs/tasks/JULIA-STARTUP-READING.md`.
+**Julia reading is 34/52 groups complete:** callable, named-mark, diagnostic and
+duplicate-slot consumers are fully read; gap-test reading reaches line319.
+Coverage is 49,425 lines /1,721,486 bytes and forty-seven complete files.
+The book build also reports a search index above10 MB. Startup `.41.9` owns
+measurement and correction of that growth while preserving useful search and
+complete documentation; query performance has not yet been measured.
+The five existing consumers pass 1,017 assertions; actual callable diagnostic
+controls pass 12. Remaining gap tests and the logical-helper test prefix are next.
+Exact ranges and replay: `docs/knowledge/julia-contract-consumer-reading.md`.
+
+**Julia diagnostic coverage correction is pending:** the existing codeblock render
+row uses an eager block. A separate actual callable literal produces an empty
+print event and keeps its body deferred in native and generated-plan execution.
+Julia `.2.25` owns the permanent fixture correction and counterpart audit.
+
+The required change-history rollover preserves 213 committed lines /12,545 bytes
+in segment4979. The current change log is251 lines; all prior archive bytes and
+query order remain exact within the existing ADR0115 limits.
 
 **Known Julia limitation — null named selectors:** a reconstructed target with
 `selector_kind: named` and `authored_selector: null` can select an anonymous regex.
@@ -705,8 +717,8 @@ SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` sti
 own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
-Julia has read thirty-three of 52 exact groups across 95 baseline entries;
-its thirty-fourth physical reading child is next, followed by the remaining Lua/supporting
+Julia has read thirty-four of 52 exact groups across 95 baseline entries;
+its thirty-fifth physical reading child is next, followed by the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,

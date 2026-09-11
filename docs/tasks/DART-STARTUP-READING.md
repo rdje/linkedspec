@@ -1568,7 +1568,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.34` | `pending` | Read callable-codeblock670-1012, named-mark1-94, diagnostic1-310, duplicate-slot1-434 and gap1-319 tests after clean .1.33; reconcile focused proof and preserve repairs. |
+| 1 | `JULIA-STARTUP-READING.1.35` | `pending` | Read gap-test320-1623 and logical-helper test1-196 after clean .1.34; reconcile focused proof and preserve repairs. |
 
 ## Decisions
 

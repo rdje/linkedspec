@@ -51,3 +51,12 @@ Related: [[duplicate-regex-slot-identity-contract]],
 [[julia-runtime-matching-state]], [[julia-runtime-rule-interpreter]],
 [[julia-generated-source-v2-rule-local-cursor]], and
 [[FUTURE-PARITY-BACKLOG]].
+
+## September 11 — duplicate-slot consumer read and named-identity limitation
+
+Julia .1.34 reads all434 lines of the isolated15-role consumer;121 assertions pass
+including independent emitted loading, trace identity and invalid compiled-index
+boundaries. These finite index checks do not reject reconstructed named/null
+provenance selecting an anonymous slot; Julia .2.23 remains pending under
+[[julia-null-selector-and-identifier-validation-gaps]]. Exact current consumer
+reading and replay: [[julia-contract-consumer-reading]].

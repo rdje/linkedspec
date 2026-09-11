@@ -2233,7 +2233,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas.
   Children: `.3.5.0` owns decomposition; JULIA-STARTUP-READING.1 owns 52 reading children and .3 owns closeout.
   Reading owner: `docs/tasks/JULIA-STARTUP-READING.md` retains exact scope/digest, comprehension and repair evidence. This startup node remains the prerequisite owner.
-  Verification: Julia .1.33 completes Validator and Trace and reads callable-codeblock tests1-669: 33/52 groups, 47,925 fragments /1,665,590 bytes and forty-three complete files. Fresh frontend/trace/callable/gap1201 and diagnostic162 assertions pass; selection1 is separate. Reconstructed named/null selectors wrongly choose anonymous slots under .2.23; terminal-LF function/parameter names bypass full identifier checks under .2.24. Native trace invalid-config controls preserve a reset-file sentinel. Neutral callable23 mutations, gap9/0/63 plus public8/15/10/34 and duplicate7/0/59 pass. All prior repairs, source, history and ADR0115 controls remain. Julia .1.34 is next; no full component/canonical gate or dependency build ran. Exact plan and all source identities remain frozen in the Julia owner.
+  Verification: Julia .1.34 completes callable, named-mark, diagnostic and duplicate-slot consumers and reads gap tests1-319: 34/52 groups, 49,425 fragments /1,721,486 bytes and forty-seven complete files. Five existing consumers pass1017 assertions; actual callable diagnostic controls pass12. The diagnostic codeblock fixture uses an eager block; .2.25 owns permanent typed-literal coverage while native/generated literal printing is correct and inert. All five neutral checks pass. Governed CHANGES rollover preserves213 clean lines/12545 bytes in4979-6e4108166552; root251 lines and collection34 files remain within unchanged ADR0115. All prior repairs and source/history evidence remain. Julia .1.35 is next; no full component/canonical gate or dependency build ran. Exact plan and all source identities remain frozen in the Julia owner.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.5.0`
@@ -3145,7 +3145,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `pending`
   Goal: Reconcile the completely read mdBook with current executable contracts and prevent the measured claim gaps.
   Dependencies: `.3`/`.4`/`.5`.
-  Children: `.41.1`, `.41.2`, `.41.3`, `.41.4`, `.41.5`, `.41.6`, `.41.7`, `.41.8`
+  Children: `.41.1`, `.41.2`, `.41.3`, `.41.4`, `.41.5`, `.41.6`, `.41.7`, `.41.8`, `.41.9`
   Acceptance: Preserve dated historical evidence while correcting claims presented as current. Every child
     owns bounded authoring and executable claim checks; split implementation before editing if it exceeds
     one safe slice. Coordinate existing .28/.29/.30 and runtime repair owners without double-closing them.
@@ -3298,6 +3298,17 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     decisions, examples, and actual checker coverage. Preserve historical counts as dated observations.
     Render and inspect the book, run exact public/cross-runtime and canonical proof, and close .41 only
     when every child and every confirmed public claim defect has its completed repair evidence.
+  Verification: `pending`
+  Commit: `pending`
+  Additional dependency (Julia .1.34): .41.9 owns the measured mdBook search-index warning; whole-book closure includes its bounded repair and search-usability proof.
+
+- ID: `SESSION-STARTUP-READING.41.9`
+  Status: `pending`
+  Goal: Resolve measured mdBook search-index growth while preserving useful public search and complete documentation.
+  Dependencies: `.3`/`.4`/`.5`; coordinate .41.8 and existing document-containment owners.
+  Evidence: Julia .1.34 book build succeeds but warns at10001369 decoded search bytes;913 section records,7830230 inverted-index bytes and2109423 document-store bytes. Largest bodies include Project Status Ongoing91038 and Documentation pressure containment76931 bytes. No search latency or functional failure is yet measured.
+  Acceptance: Establish representative query correctness, payload/transfer and browser parse/search measurements using repository-local artifacts. Decompose before implementation if needed; select a bounded content/search strategy that preserves navigable historical evidence and current teaching. Verify relevant queries and rendered links, document before/after measurements and recurrence ownership, and run the warranted canonical boundary for any public/configuration/mechanical change. Do not merely suppress the warning or infer a speedup from bytes alone.
+  Knowledge: docs/knowledge/julia-contract-consumer-reading.md contains dated measurement and replay.
   Verification: `pending`
   Commit: `pending`
 

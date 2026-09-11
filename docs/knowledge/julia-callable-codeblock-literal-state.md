@@ -61,3 +61,12 @@ loaded emitted roles. Remaining contextual and construction source stays unread
 after669, even though all482 assertions pass in the focused replay. Existing
 selector .2.1 and callback identity .2.8 remain open; exact proof is in
 [[julia-null-selector-and-identifier-validation-gaps]].
+
+## September 11 — callable consumer reading complete
+
+Julia .1.34 reads670-1012, completing contextual failures, exact literal fields,
+containing/nested Unicode spans, inert construction, function transport and
+semantic signatures. All482 callable assertions pass. A separate12-assertion
+diagnostic probe confirms actual callable printing stays inert in native/generated
+execution; permanent test coverage is owned by .2.25. See
+[[julia-contract-consumer-reading]]. Prior runtime repairs remain pending.

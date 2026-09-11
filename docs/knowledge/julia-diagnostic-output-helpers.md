@@ -64,3 +64,12 @@ history, but the current 105/105 corpus no longer has either failure.
 Related facts: [[diagnostic-output-neutral-contract]], [[cross-backend-diagnostic-output-drift]],
 [[julia-diagnostics-trace-boundary]], [[dart-diagnostic-output-events]], [[rust-diagnostic-output-events]],
 [[perl-diagnostic-output-events]], [[lua-diagnostic-output-events]].
+
+## September 11 — diagnostic consumer reading and literal coverage
+
+Julia .1.34 reads all310 lines and passes82 existing assertions. Its scalar renderer
+maps the codeblock row to an eager block_value at34-49. Separate direct/generated
+controls use an actual codeblock_literal, retain state=before and one empty print
+event, passing12 assertions with eager comparisons. Runtime behavior is correct
+for those controls; .2.25 owns the permanent fixture correction and counterpart
+audit. Exact proof: [[julia-contract-consumer-reading]].

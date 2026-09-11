@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia consumer labels require concrete exercised values
+
+The diagnostic codeblock row actually constructs an eager block; actual literal
+native/generated controls remain inert and render the correct empty event.
+Fixture correction .2.25 keeps that proof permanent. Contract roles stay distinct;
+change-history rollover preserves213 exact clean lines within existing limits.
+
 ## 2026-09-11 — Julia identity guards require present names and full strings
 
 Nullable selector equality treats anonymous absence as a name; reordered slots

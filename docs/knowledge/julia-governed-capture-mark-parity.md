@@ -42,3 +42,11 @@ unchanged contract on both ABIs; `.17.5` admits all seven at 246 shared names an
 The real fixture wrapper also proves implicit blind-call collection: a non-repeated `AND` blind-call parent with no
 explicit return surfaces its ordered successful child values. An independent two-child regression locks that
 contract separately from the capture family.
+
+## September 11 — complete named-mark consumer read
+
+Julia .1.34 reads all94 lines of the complete named-mark consumer. Its13 assertions
+pass exact seven-name inventory, native, generated-plan, emitted-state JSON
+reconstruction and inline primary-command results. This file does not independently
+load an emitted module; that stronger role belongs to separate consumers. Exact
+reading and replay: [[julia-contract-consumer-reading]].

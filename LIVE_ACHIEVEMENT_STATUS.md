@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.33 completes Validator and Trace and reads callable-codeblock tests1-669: 33/52 groups, 47,925 fragments /1,665,590 bytes and forty-three complete files. Fresh frontend/trace/callable/gap1201 and diagnostic162 assertions pass; selection1 is separate. Reconstructed named/null selectors wrongly choose anonymous slots under .2.23; terminal-LF function/parameter names bypass full identifier checks under .2.24. Native trace invalid-config controls preserve a reset-file sentinel. Neutral callable23 mutations, gap9/0/63 plus public8/15/10/34 and duplicate7/0/59 pass. All prior repairs, source, history and ADR0115 controls remain. Julia .1.34 is next; no full component/canonical gate or dependency build ran. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.34 completes callable, named-mark, diagnostic and duplicate-slot consumers and reads gap tests1-319: 34/52 groups, 49,425 fragments /1,721,486 bytes and forty-seven complete files. Five existing consumers pass1017 assertions; actual callable diagnostic controls pass12. The diagnostic codeblock fixture uses an eager block; .2.25 owns permanent typed-literal coverage while native/generated literal printing is correct and inert. All five neutral checks pass. Governed CHANGES rollover preserves213 clean lines/12545 bytes in4979-6e4108166552; root251 lines and collection34 files remain within unchanged ADR0115. All prior repairs and source/history evidence remain. Julia .1.35 is next; no full component/canonical gate or dependency build ran. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.82` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `JULIA-STARTUP-READING.1.33 - complete validator and trace reading and own identity validation gaps` — Julia .1.33 completes Validator and Trace and reads callable-codeblock tests1-669: 33/52 groups, 47,925 fragments /1,665,590 bytes and forty-three complete files. Fresh frontend/trace/callable/gap1201 and diagnostic162 assertions pass; selection1 is separate. Reconstructed named/null selectors wrongly choose anonymous slots under .2.23; terminal-LF function/parameter names bypass full identifier checks under .2.24. Native trace invalid-config controls preserve a reset-file sentinel. Neutral callable23 mutations, gap9/0/63 plus public8/15/10/34 and duplicate7/0/59 pass. All prior repairs, source, history and ADR0115 controls remain. Julia .1.34 is next; no full component/canonical gate or dependency build ran.
+- `JULIA-STARTUP-READING.1.34 - read contract consumers and preserve callable diagnostic coverage` — Julia .1.34 completes callable, named-mark, diagnostic and duplicate-slot consumers and reads gap tests1-319: 34/52 groups, 49,425 fragments /1,721,486 bytes and forty-seven complete files. Five existing consumers pass1017 assertions; actual callable diagnostic controls pass12. The diagnostic codeblock fixture uses an eager block; .2.25 owns permanent typed-literal coverage while native/generated literal printing is correct and inert. All five neutral checks pass. Governed CHANGES rollover preserves213 clean lines/12545 bytes in4979-6e4108166552; root251 lines and collection34 files remain within unchanged ADR0115. All prior repairs and source/history evidence remain. Julia .1.35 is next; no full component/canonical gate or dependency build ran.
 
 ## Next Action
 
-- `JULIA-STARTUP-READING.1.34` — Read its five exact callable/named-mark/diagnostic/duplicate/gap test ranges after clean .1.33; preserve repairs.
+- `JULIA-STARTUP-READING.1.35` — Read gap-test320-1623 and logical-helper test1-196 after clean .1.34; preserve repairs.
 
 ## Recent Completions
+
+- `2026-09-11` — `JULIA-STARTUP-READING.1.34` reads1,500 fragments /55,896 bytes;1017 existing/12 literal diagnostic assertions pass; .2.25 owns test coverage and exact213-line history rollover is preserved.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.33` reads1,500 fragments /53,501 bytes;1201 existing/162 diagnostic assertions plus selection1 pass; null-selector .2.23 and identifier .2.24 remain repair-owned.
 
@@ -48,8 +50,6 @@
 - `2026-09-11` — `JULIA-STARTUP-READING.1.20` reads1,500 fragments /47,696 bytes;942 existing assertions and neutral checks pass; three source authorities complete, all repairs open.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.19` reads1,500 fragments /46,811 bytes;714 existing and28 mode diagnostic assertions pass; interpreter/matching complete, repair .2.12 open.
-
-- `2026-09-11` — `JULIA-STARTUP-READING.1.18` reads1,500 fragments /47,712 bytes;886 existing,174 Julia and44 Perl assertions pass; input_slice arity remains repair-owned.
 
 ## History
 

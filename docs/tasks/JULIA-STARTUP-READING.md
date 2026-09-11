@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `JULIA-STARTUP-READING`
-- Status: `active` / reading 33/52; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity, matching, staged, diagnostic, static, entry and selector-projection and member-suffix and literal-boundary and projection-metadata and selector/identifier repairs pending
+- Status: `active` / reading 34/52; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity, matching, staged, diagnostic, static, entry and selector-projection and member-suffix and literal-boundary and projection-metadata and selector/identifier repairs and diagnostic fixture correction pending
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.5`
 - Created: `2026-09-11`
 - Last updated: `2026-09-11`
@@ -43,7 +43,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Inventory SHA-256: `ca3cff4fe4c0e162448d6dbac82d89898673023951afaeced17d5b9a838ccd10`.
 - Ordered range SHA-256: `fde325f80ae7b56c5890d149fbc965c09890890e963a1fa9aab08e8c9d962337`.
 - Line coordinates are one-based, inclusive LF physical lines. Every child pins its range digest.
-- Current physical reading: 33/52 children, 47,925/75,984 lines and 1,665,590/2,693,170 bytes; forty-three complete files.
+- Current physical reading: 34/52 children, 49,425/75,984 lines and 1,721,486/2,693,170 bytes; forty-seven complete files.
 - Exact replay and capacity assessment: `docs/knowledge/julia-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -59,7 +59,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Dependencies: Startup .3.5.0 decomposition committed; each child starts from a clean prior handoff.
   Children: `.1.1-.1.52`, with exact scopes below.
   Acceptance: Every child records physical coverage, comprehension, Knowledge reconciliation, findings and focused proof before its commit. Retain all current-delta and interrupted-range evidence.
-  Verification: Julia .1.33 completes Validator and Trace and reads callable-codeblock tests1-669: 33/52 groups, 47,925 fragments /1,665,590 bytes and forty-three complete files. Fresh frontend/trace/callable/gap1201 and diagnostic162 assertions pass; selection1 is separate. Reconstructed named/null selectors wrongly choose anonymous slots under .2.23; terminal-LF function/parameter names bypass full identifier checks under .2.24. Native trace invalid-config controls preserve a reset-file sentinel. Neutral callable23 mutations, gap9/0/63 plus public8/15/10/34 and duplicate7/0/59 pass. All prior repairs, source, history and ADR0115 controls remain. Julia .1.34 is next; no full component/canonical gate or dependency build ran.
+  Verification: Julia .1.34 completes callable, named-mark, diagnostic and duplicate-slot consumers and reads gap tests1-319: 34/52 groups, 49,425 fragments /1,721,486 bytes and forty-seven complete files. Five existing consumers pass1017 assertions; actual callable diagnostic controls pass12. The diagnostic codeblock fixture uses an eager block; .2.25 owns permanent typed-literal coverage while native/generated literal printing is correct and inert. All five neutral checks pass. Governed CHANGES rollover preserves213 clean lines/12545 bytes in4979-6e4108166552; root251 lines and collection34 files remain within unchanged ADR0115. All prior repairs and source/history evidence remain. Julia .1.35 is next; no full component/canonical gate or dependency build ran.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.1.1`
@@ -624,14 +624,21 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Commit: `JULIA-STARTUP-READING.1.33 - complete validator and trace reading and own identity validation gaps`.
 
 - ID: `JULIA-STARTUP-READING.1.34`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Julia group 34 and reconcile its source evidence.
   Dependencies: `JULIA-STARTUP-READING.1.33` committed; empty brief and clean repository.
   Scope: `julia/test/callable_codeblock_literal_contract_test.jl` lines 670-1012; `julia/test/complete_named_mark_contract_test.jl` lines 1-94; `julia/test/diagnostic_output_contract_test.jl` lines 1-310; `julia/test/duplicate_regex_slot_identity_contract_test.jl` lines 1-434; `julia/test/inter_match_gap_capture_contract_test.jl` lines 1-319
   Baseline evidence: 1500 fragments / 55896 bytes; ordered range SHA-256 `8e34677c9b2e371c510b70845f6215389eab67c0bdbf9aa5cf86ccd3fcc9be04`.
+  Activation commit: `148606661bbeb4c505196cbcfab870b5ac81872a`.
+  Verification tier: `focused`
+  Focused checks: Exact source/range reconstruction; named-mark, diagnostic, callable, duplicate-slot and gap consumers with direct-dependent neutral proof; exact governed change-history rollover, Knowledge, prior-source/task/history preservation, memory, book and normal doctrines.
+  Canonical trigger: `none` — ordinary source-reading evidence and governed rollover within existing limits; no source, contract, format, infrastructure or dependency change.
   Acceptance: Physically read every owned byte, inspect current deltas, reconcile Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit. Do not count truncated output or unread consumer suffixes.
-  Verification: `pending`
-  Commit: `pending`
+  Comprehension: Completes contextual failure/constructed callable records, Unicode spans, inert transport and semantic signatures; exact named-mark inventory and native/plan/reconstructed/primary roles; diagnostic event/arity/identity/exit/generated roles; all15 duplicate-slot roles and index failures. Gap prefix covers offline managed emitted-host setup, authored/compiled named/numeric/unindexed identity, reorder and eligibility examples; source after319 remains unread.
+  Knowledge: docs/knowledge/julia-contract-consumer-reading.md preserves exact ranges,1017 existing/12 actual-literal assertions and213-line history reconstruction. Four prior consumer cards gain dated append-only qualification; named-mark reconstruction is distinguished from actual emitted loading.
+  Findings: .2.25 owns the diagnostic fixture's eager block mislabeled codeblock; actual callable native/generated print behavior is correct and inert. No new runtime defect or repair closure. Prior .2.1/.2.8/.2.23 and all other repairs remain. Required governed history rollover changes no limits or infrastructure. Startup .41.9 additionally owns the newly measured large book search index; successful rendering does not prove search usability.
+  Verification: Eight untruncated windows read1500 fragments /55896 baseline-identical bytes, ordered SHA8e34677c9b2e371c510b70845f6215389eab67c0bdbf9aa5cf86ccd3fcc9be04. Raw five range SHAs/counts are in the linked consumer card. Callable482/named13/diagnostic82/duplicate121/gap319 pass1017; diagnostic12 includes helper selection and four direct/generated comparisons. Neutral named7/3, diagnostic3/11/6/8/20, callable23 mutations, gap9/0/63/public8/15/10/34 and duplicate7/0/59 pass. CHANGES clean148606661 lines246-458/blob95f1909a preserve213 lines/12545 bytes/SHA6e41081665523985eebc3e6f93a0070419e90be21f2f02898b4d8f25844ae35b in4979; exact source/old manifest/query proof passes, root251/15237, manifest33/18767, collection34/49204/3570495. Prior nodes/source/history, coverage, Knowledge, memory, histories, rendered book and normal doctrines govern landing; no full component/canonical gate or dependency build.
+  Commit: `JULIA-STARTUP-READING.1.34 - read contract consumers and preserve callable diagnostic coverage`.
 
 - ID: `JULIA-STARTUP-READING.1.35`
   Status: `pending`
@@ -818,7 +825,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Goal: Preserve disjoint repair ownership for every confirmed Julia finding.
   Dependencies: Findings from .1; source repair additionally requires startup .3/.4/.5.
   Acceptance: Reuse exact existing startup owners when applicable; otherwise add bounded repair children with source mechanism, reproduction, acceptance and unblock conditions. No finding is closed by reading alone.
-  Children: .2.1 callable-body selector validation; .2.2 attached-switch body/duplicate-default validation; .2.3 recognition-effect integration; .2.4 MCP pattern full matching; .2.5 progressive identity full matching; .2.6 semantic callback action passthrough; .2.7 recognition attempt preflight; .2.8 helper callback recursion identity; .2.9 numeric boundaries; .2.10 safe slice/drop arithmetic; .2.11 input_slice arity; .2.12 selected-slot mode preflight; .2.13 staged pattern validation; .2.14 diagnostic byte retention; .2.15 semantic regex call source; .2.16 mixed slot correlation; .2.17 conditional entry explanation; .2.18 authored edge selector identity; .2.19 unparsed member suffix retention; .2.20 compact argument lexical boundaries; .2.21 outer regex-brace scanning; .2.22 projected function metadata authority; .2.23 null named selectors; .2.24 complete function identifiers. Nested authority and diagnostic review retain startup .37.1/.37.2. Prior README findings retain startup .41.2/.41.3/.41.7.
+  Children: .2.1 callable-body selector validation; .2.2 attached-switch body/duplicate-default validation; .2.3 recognition-effect integration; .2.4 MCP pattern full matching; .2.5 progressive identity full matching; .2.6 semantic callback action passthrough; .2.7 recognition attempt preflight; .2.8 helper callback recursion identity; .2.9 numeric boundaries; .2.10 safe slice/drop arithmetic; .2.11 input_slice arity; .2.12 selected-slot mode preflight; .2.13 staged pattern validation; .2.14 diagnostic byte retention; .2.15 semantic regex call source; .2.16 mixed slot correlation; .2.17 conditional entry explanation; .2.18 authored edge selector identity; .2.19 unparsed member suffix retention; .2.20 compact argument lexical boundaries; .2.21 outer regex-brace scanning; .2.22 projected function metadata authority; .2.23 null named selectors; .2.24 complete function identifiers; .2.25 diagnostic callable-literal regression coverage. Nested authority and diagnostic review retain startup .37.1/.37.2. Prior README findings retain startup .41.2/.41.3/.41.7.
   Verification: `pending` repairs; .1.3 owns the callable-body selector gap, and .1.4 confirms attached-switch projection omission and default replacement. Earlier documentation and helper-arity owners remain intact.
   Commit: `pending`
 
@@ -1523,11 +1530,20 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Verification: `pending`
   Commit: `pending`
 
+- ID: `JULIA-STARTUP-READING.2.25`
+  Status: `pending`
+  Goal: Make the diagnostic codeblock render fixture exercise an actual callable literal.
+  Dependencies: Startup .3/.4/.5 and .1.34 committed; preserve diagnostic and callable contracts.
+  Evidence: diagnostic_output_contract_test34-49 maps its codeblock row to { return(undef) }, parsed as block_value. Native direct/generated probes of {|| state = "wrong"; return("never") } instead produce an empty print event while preserving state=before, confirming correct runtime behavior but missing permanent typed-literal coverage.
+  Acceptance: Replace or supplement the misleading test expression with a typed callable value, assert its AST/runtime kind and no body execution, retain eager-block comparison, exact event/value and generated sink behavior. Audit counterpart fixture renderers with their own tools; preserve shared contracts and avoid claiming a runtime repair from a test correction. Run focused diagnostic/callable proof and update public coverage wording.
+  Verification: `pending` coverage repair; .1.34 owns the actual-literal positive controls.
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.34` | `pending` | Read callable-codeblock670-1012, named-mark1-94, diagnostic1-310, duplicate-slot1-434 and gap1-319 tests after clean .1.33; reconcile focused proof and preserve repairs. |
+| 1 | `JULIA-STARTUP-READING.1.35` | `pending` | Read gap-test320-1623 and logical-helper test1-196 after clean .1.34; reconcile focused proof and preserve repairs. |
 
 ## Decisions
 
@@ -1550,6 +1566,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Source repairs retain startup prerequisites; those dependencies do not block source reading.
 
 ## Verification Log
+
+- `2026-09-11` .1.34: Julia .1.34 completes callable, named-mark, diagnostic and duplicate-slot consumers and reads gap tests1-319: 34/52 groups, 49,425 fragments /1,721,486 bytes and forty-seven complete files. Five existing consumers pass1017 assertions; actual callable diagnostic controls pass12. The diagnostic codeblock fixture uses an eager block; .2.25 owns permanent typed-literal coverage while native/generated literal printing is correct and inert. All five neutral checks pass. Governed CHANGES rollover preserves213 clean lines/12545 bytes in4979-6e4108166552; root251 lines and collection34 files remain within unchanged ADR0115. All prior repairs and source/history evidence remain. Julia .1.35 is next; no full component/canonical gate or dependency build ran.
 
 - `2026-09-11` .1.33: Julia .1.33 completes Validator and Trace and reads callable-codeblock tests1-669: 33/52 groups, 47,925 fragments /1,665,590 bytes and forty-three complete files. Fresh frontend/trace/callable/gap1201 and diagnostic162 assertions pass; selection1 is separate. Reconstructed named/null selectors wrongly choose anonymous slots under .2.23; terminal-LF function/parameter names bypass full identifier checks under .2.24. Native trace invalid-config controls preserve a reset-file sentinel. Neutral callable23 mutations, gap9/0/63 plus public8/15/10/34 and duplicate7/0/59 pass. All prior repairs, source, history and ADR0115 controls remain. Julia .1.34 is next; no full component/canonical gate or dependency build ran.
 
@@ -1604,6 +1622,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Commit Log
 
+- `.1.34`: `JULIA-STARTUP-READING.1.34 - read contract consumers and preserve callable diagnostic coverage`.
+
 - `.1.33`: `JULIA-STARTUP-READING.1.33 - complete validator and trace reading and own identity validation gaps`.
 
 - `.1.32`: `JULIA-STARTUP-READING.1.32 - complete function projection reading and own metadata validation gaps`.
@@ -1646,6 +1666,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Decomposition: `SESSION-STARTUP-READING.3.5.0 - freeze exact bounded Julia reading plan`.
 
 ## Changelog
+
+- `2026-09-11`: Completed .1.34 from clean148606661; four consumers complete/gap prefix read, diagnostic fixture correction .2.25 owned, exact213-line change-history rollover preserved, all prior evidence retained and .1.35 next.
 
 - `2026-09-11`: Completed .1.33 from clean a08a3db7e; validator/trace complete and callable tests read through669, null-selector .2.23 and identifier .2.24 repairs owned, prior evidence preserved and .1.34 next.
 
