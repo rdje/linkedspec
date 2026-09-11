@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `f9d5b78553cb3e9b5441ede8e0cf2bdec89fc033` — clean eleventh Julia reading handoff.
-- latest_completed_leaf: `JULIA-STARTUP-READING.1.12 - read child authority and own boundary repairs`; exact twelfth group and focused proof complete; prior repairs remain pending.
-- active_work_unit: none; `JULIA-STARTUP-READING.1.13` is next.
-- next_action: Activate Julia .1.13 from clean HEAD; read Interpreter116-1615, verify, apply the governed history rollover when required, and commit.
+- activation_commit: `ba485700ca257c8d0480eac47c602e39a36bc25b` — clean twelfth Julia reading handoff.
+- latest_completed_leaf: `JULIA-STARTUP-READING.1.13 - read runtime state and source projections`; exact thirteenth group and focused proof complete; prior repairs remain pending.
+- active_work_unit: none; `JULIA-STARTUP-READING.1.14` is next.
+- next_action: Activate Julia .1.14 from clean HEAD; read Interpreter1616-3115, reconcile Knowledge and focused proof, then commit.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none; no running jobs. Julia .2.1-.2.5 and all prior repairs remain pending.
 - blockers: No current reading blocker. Startup prerequisites and all repairs remain; ADR0115 is finite capacity with a containment-.12-only exception.
@@ -52,9 +52,9 @@
   README remains bounded; ordinary leaves use focused proof and designated infrastructure/public/push boundaries
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
 - current_engineering_notes_capacity: ADR0115 admits 32 files /31 manifest lines /18678 manifest bytes for finite remaining Julia reading.
-  Current manifest is 16230 bytes; root/segment/aggregate limits and all prior history remain unchanged.
+  Current manifest is 16842 bytes after exact213-line segment4979 rollover; root/segment/aggregate limits and all prior history remain unchanged.
 - current_change_history_capacity: ADR0115 admits 36 files /35 manifest lines /19919 manifest bytes; current collection uses 33 files.
   Segment 4980-f04b37b1dab6 preserves 217 lines /13128 bytes; all other controls remain unchanged. Proportionate governance: ADR0115.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-11 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart read; Julia 12/52 groups, 16425/75984 lines, 647482/2693170 bytes, twenty-two complete files. Lua/supporting code, formal book .4 and policy .5 remain.
+- latest_bootstrap_read: 2026-09-11 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart read; Julia 13/52 groups, 17925/75984 lines, 694012/2693170 bytes, twenty-two complete files. Lua/supporting code, formal book .4 and policy .5 remain.

@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `JULIA-STARTUP-READING`
-- Status: `active` / reading 12/52; selector, switch, recognition and MCP/progressive pattern repairs pending
+- Status: `active` / reading 13/52; selector, switch, recognition and MCP/progressive pattern repairs pending
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.5`
 - Created: `2026-09-11`
 - Last updated: `2026-09-11`
@@ -43,7 +43,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Inventory SHA-256: `ca3cff4fe4c0e162448d6dbac82d89898673023951afaeced17d5b9a838ccd10`.
 - Ordered range SHA-256: `fde325f80ae7b56c5890d149fbc965c09890890e963a1fa9aab08e8c9d962337`.
 - Line coordinates are one-based, inclusive LF physical lines. Every child pins its range digest.
-- Current physical reading: 12/52 children, 16,425/75,984 lines and 647,482/2,693,170 bytes; twenty-two complete files.
+- Current physical reading: 13/52 children, 17,925/75,984 lines and 694,012/2,693,170 bytes; twenty-two complete files.
 - Exact replay and capacity assessment: `docs/knowledge/julia-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -59,7 +59,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Dependencies: Startup .3.5.0 decomposition committed; each child starts from a clean prior handoff.
   Children: `.1.1-.1.52`, with exact scopes below.
   Acceptance: Every child records physical coverage, comprehension, Knowledge reconciliation, findings and focused proof before its commit. Retain all current-delta and interrupted-range evidence.
-  Verification: Julia .1.12 completes UserFunctionDefinitionParser and BoundedChildParseAuthority and reads Interpreter through115: 12/52 groups, 16,425 fragments /647,482 bytes and twenty-two complete files. Existing authority210/carrier62 and native64 diagnostic assertions pass; neutral pattern12 and progressive116/public60 pass. Startup .37.1/.37.2 retain nested grant/budget and diagnostic review; Julia .2.5.1/.2.5.2 own progressive pattern full matching. Direct cost/result/diagnostic limits work in the measured controls. All source, earlier evidence, repairs and ADR0115 controls remain. Julia .1.13 is next; no full component/canonical gate or dependency build.
+  Verification: Julia .1.13 reads Interpreter116-1615: 13/52 groups, 17,925 fragments /694,012 bytes and twenty-two complete files. Existing diagnostics7/typed127/recognition207/observation30/gap319/options53 assertions pass (743); neutral typed231 and recognition138/250/58 pass. Runtime state, recognition/gap adapters and typed projections reconcile with Knowledge while effect repair .2.3 remains open. Governed notes rollover preserves213 lines/12898 bytes as segment4979; prior history and ADR0115 limits remain unchanged. Julia .1.14 is next; no full component/canonical gate or dependency build.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.1.1`
@@ -267,14 +267,21 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Commit: `JULIA-STARTUP-READING.1.12 - read child authority and own boundary repairs`.
 
 - ID: `JULIA-STARTUP-READING.1.13`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Julia group 13 and reconcile its source evidence.
   Dependencies: `JULIA-STARTUP-READING.1.12` committed; empty brief and clean repository.
   Scope: `julia/src/runtime/Interpreter.jl` lines 116-1615
   Baseline evidence: 1500 fragments / 46530 bytes; ordered range SHA-256 `16a40fcfac63e5a0917aeb1e75e49a62f54cb5b4fcfa2c89d9081c297b0eb344`.
+  Activation commit: `ba485700ca257c8d0480eac47c602e39a36bc25b`.
+  Verification tier: `focused`
+  Focused checks: Exact source/range reconstruction; existing diagnostics, typed source, recognition, observation, gap and removed-option suites; neutral typed/recognition checks; governed rollover source/blob/hash/full-query preservation; Knowledge, memory, histories, rendered book and normal doctrines.
+  Canonical trigger: `none` — ordinary reading and existing governed history rollover; no source, contract, registry limit, infrastructure or dependency change.
   Acceptance: Physically read every owned byte, inspect current deltas, reconcile Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit. Do not count truncated output or unread consumer suffixes.
-  Verification: `pending`
-  Commit: `pending`
+  Comprehension: Interpreter116-1615 completes diagnostic construction and defines portable slot-identity errors, event/result records and engine validation of removed options, private seeds, regex slots and serialized mutation state. Every context starts fresh source/recognition authorities, stores, identity maps, frame stacks, caches and sinks. Recognition adapters snapshot cursor/boundary/marks, preserve primary unwind failures and isolated mark buckets; observation and gap adapters retain invocation/entry-slot identity and typed detached records. Compatibility projections convert codeunits/scalars through SourceLocation and return absence for its typed failures. Trace wrappers, flow records and initial leading-trivia cursor complete the range; execution methods remain later reading.
+  Knowledge: Structured runtime diagnostics now carries focused replay and exact state/projection boundaries. Recognition integration/observation and pre-typed alias cards explicitly qualify historical counts and the known effect-integration gap.
+  Findings: No new confirmed runtime defect or repair closure. Existing .2.3 and all other repairs remain. The normal notes rollover consumes one already-approved archive slot without changing limits or immutable prior bytes.
+  Verification: Six untruncated windows cover1500 fragments /46530 baseline-identical bytes, digest16a40fcfac63e5a0917aeb1e75e49a62f54cb5b4fcfa2c89d9081c297b0eb344. Diagnostics7, typed127, recognition207, observation30, gap105+33+46+105+30 and options53 pass (743 plus selected-set equality1). Neutral typed14/0/231 and recognition138/250/58 pass. Notes segment4979 preserves clean source247-459, blob0a3d47254f94d368bf67186f98ca837e1246b8dc,213 lines/12898 bytes/SHA63966e071583c27d1bd80cfbad47b49f0aa5c535bfb70aa27af8cb2b2f760046. Exact root-plus-record and full archive-query reconstruction pass, restoring the one separator LF removed only from the hot root for whitespace hygiene; current root252 lines/15589 bytes, manifest28 lines/16842 bytes, collection29 files. Full coverage/source/prior-task/history preservation and focused continuity/book/doctrine checks govern landing; no unread-source credit, full backend/canonical gate or dependency build.
+  Commit: `JULIA-STARTUP-READING.1.13 - read runtime state and source projections`.
 
 - ID: `JULIA-STARTUP-READING.1.14`
   Status: `pending`
@@ -847,7 +854,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.13` | `pending` | Read Interpreter116-1615 after clean .1.12; apply the governed history rollover if required. |
+| 1 | `JULIA-STARTUP-READING.1.14` | `pending` | Read Interpreter1616-3115 after clean .1.13; keep all repair prerequisites and evidence intact. |
 
 ## Decisions
 
@@ -871,6 +878,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Verification Log
 
+- `2026-09-11` .1.13: Julia .1.13 reads Interpreter116-1615: 13/52 groups, 17,925 fragments /694,012 bytes and twenty-two complete files. Existing diagnostics7/typed127/recognition207/observation30/gap319/options53 assertions pass (743); neutral typed231 and recognition138/250/58 pass. Runtime state, recognition/gap adapters and typed projections reconcile with Knowledge while effect repair .2.3 remains open. Governed notes rollover preserves213 lines/12898 bytes as segment4979; prior history and ADR0115 limits remain unchanged. Julia .1.14 is next; no full component/canonical gate or dependency build.
 - `2026-09-11` .1.12: Julia .1.12 completes UserFunctionDefinitionParser and BoundedChildParseAuthority and reads Interpreter through115: 12/52 groups, 16,425 fragments /647,482 bytes and twenty-two complete files. Existing authority210/carrier62 and native64 diagnostic assertions pass; neutral pattern12 and progressive116/public60 pass. Startup .37.1/.37.2 retain nested grant/budget and diagnostic review; Julia .2.5.1/.2.5.2 own progressive pattern full matching. Direct cost/result/diagnostic limits work in the measured controls. All source, earlier evidence, repairs and ADR0115 controls remain. Julia .1.13 is next; no full component/canonical gate or dependency build.
 - `2026-09-11` .1.11: Julia .1.11 completes McpWire and StagedParserRegistry and reads UserFunctionDefinitionParser through 231: 11/52 groups, 14,925 fragments /601,796 bytes and twenty complete files. Existing registry39/descriptor28/trace28/function-parser7/stdio170/variadic55 assertions pass (327 total); neutral staged123/public129 and MCP35/10/10/76 pass. Narrow function-body adapter and general-v2 authority remain separate; source-driven shell parsing and strict wire framing reconcile with Knowledge. All source, prior evidence, repairs and ADR0115 controls remain. Julia .1.12 is next; no full component/canonical gate or dependency build.
 - `2026-09-11` .1.10: Julia .1.10 completes McpContract, McpContractRuntime and McpServer, and reads McpWire through 55: 10/52 groups, 13,425 fragments /549,293 bytes and eighteen complete files. Existing MCP binding53/dispatch145/stdio170 pass (368 assertions); native pattern20 and order12 diagnostics plus neutral pattern8 outcomes isolate the documented boundaries. Pending Julia .2.4.1/.2.4.2 own full-pattern matching; startup .36 retains validation precedence. Generator and neutral transport35/10/10/76 remain green. All source, prior evidence, repairs and ADR0115 controls remain. Julia .1.11 is next; no full component/canonical gate or dependency build.
@@ -890,6 +898,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Commit Log
 
+- `2026-09-11` .1.13: `JULIA-STARTUP-READING.1.13 - read runtime state and source projections`.
 - `2026-09-11` .1.12: `JULIA-STARTUP-READING.1.12 - read child authority and own boundary repairs`.
 - `2026-09-11` .1.11: `JULIA-STARTUP-READING.1.11 - read wire and staged function parser paths`.
 - `2026-09-11` .1.10: `JULIA-STARTUP-READING.1.10 - read MCP runtime and own pattern validation repair`.
@@ -907,6 +916,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Changelog
 
+- `2026-09-11` .1.13: Reads runtime state/projections, reconciles historical claims, and preserves exact notes history through the governed rollover.
 - `2026-09-11` .1.12: Completes child-authority reading, extends startup .37 with Julia evidence and owns progressive identity matching under .2.5.
 - `2026-09-11` .1.11: Completes wire and narrow staged-registry reading; reconciles the separate general-v2 boundary and keeps all repairs open.
 - `2026-09-11` .1.10: Completes MCP runtime/server reading, owns pattern repair and reuses precedence repair; reconciles current metadata/frontiers while preserving earlier node evidence.

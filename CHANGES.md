@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.13 - read runtime state and source projections
+
+Read Interpreter116-1615:1,500 fragments /46,530 baseline-identical bytes.
+Existing diagnostics7/typed127/recognition207/observation30/gap319/options53
+assertions pass; neutral typed231 and recognition58 remain green. Reconcile
+current Knowledge/book, preserve history by governed rollover; next .1.14.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.12 - read child authority and own boundary repairs
 
 Read child authority, function-parser suffix and Interpreter prefix:1,500 lines.

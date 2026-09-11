@@ -15,7 +15,7 @@ answers:
   - "where does Julia store source cursor mark and match offsets"
   - "do Julia loaded generated and emitted parsers use the same helper interpreter"
 date: 2026-08-07
-status: alias parity implemented by FUTURE-PARITY-BACKLOG.14.2.4.0.1; typed source remains pending
+status: alias parity current; original pre-typed admission snapshot historical
 tags: [julia, source-location, helpers, aliases, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.14.2.4.0 retrieves ADR 0056, the neutral contract/checker, Julia authority cards, exact source/tests/drivers, prior runtime precedents, and the sole-facing book before probing. One repository-routed Julia command proves all 92 canonical source-boundary rows are unique and known but zero of seven aliases is known or canonicalized. Each authored alias executes far enough to throw RuntimeInterpreterException at runtime_execution with unsupported runtime helper '<name>' in rule Top. Julia source and tests contain none of the seven spellings. The unchanged loader/generated/cursor/named-mark composition passes 82/65/104/13. The audit therefore splits alias parity .14.2.4.0.1 before dormant typed RED .14.2.4.0.2 without production or neutral 6/8/40 movement."
 evidence_update_2026_08_07_signoff: "Complete Julia package, project-data storage 18 owners/5 locked package trees, primary CLI 66x2, and corpus 105/105 pass. The neutral contract stays 6/8/40 and language coverage stays 246/105+1/122. The sole-facing book already leaves Julia pending, builds 79 files/14164 KiB, and preserves separate generated paragraphs without source changes. Knowledge Map is 787/6450 and all seven doctrines pass. Definitive canonical CI exits 0 after capability 80/0/0, typed Perl 10 plus Rust/Dart 4/4, composed semantic/MCP, six-family containment, moved/outside-CWD execution, CLI 66x2, RAM 79%, Phase 0 1031/1031, and the exact local-CI pass marker."
@@ -63,3 +63,13 @@ implementation/admission while continuing to recommend the canonical spellings f
 - Neutral plan: [[typed-source-location-neutral-contract-plan]].
 - Runtime rollout: [[typed-source-location-runtime-rollout-plan]].
 - Runtime state: [[julia-runtime-matching-state]] and [[julia-runtime-cursor-boundary-helpers]].
+
+## September 11 current projection boundary
+
+The pending typed-source rollout paragraphs above describe the original alias-only
+admission. Current neutral typed governance is14 complete/0 pending/231 mutations;
+Julia's existing typed127 assertions pass in .1.13. Runtime source reading confirms
+that compatibility projections use the existing source authority and preserve
+Unicode-scalar external coordinates. This current result does not relabel the
+original141-assertion alias proof as a fresh rerun. Focused replay:
+[[julia-runtime-structured-diagnostics]].

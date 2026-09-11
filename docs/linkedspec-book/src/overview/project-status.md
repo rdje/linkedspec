@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 12/52 owned groups; its thirteenth reading child is next, with approved ADR0115 capacity in place.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 13/52 owned groups; its fourteenth reading child is next, with approved ADR0115 capacity in place.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,12 +297,20 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 12/52 groups complete:** the function-definition parser and
-bounded child-parser authority are fully read; Interpreter is read through line 115.
-Cumulative coverage is 16,425 lines /647,482 bytes and twenty-two complete files.
-Exact scopes remain in `docs/tasks/JULIA-STARTUP-READING.md`. The existing progressive
-authority and carrier suites pass 272 assertions; targeted native probes add 64,
-and 12 neutral pattern comparisons pass. Progressive governance remains green.
+**Julia reading is 13/52 groups complete:** Interpreter is read through line 1615.
+Cumulative coverage is 17,925 lines /694,012 bytes and twenty-two complete files.
+Exact scopes remain in `docs/tasks/JULIA-STARTUP-READING.md`. The selected diagnostic,
+typed-source, recognition, observation, gap and removed-option suites pass 743
+assertions; neutral typed-source and recognition governance also pass.
+
+Each execution context creates fresh stores and source/recognition authority.
+Recognition snapshots contain cursor, capture boundary and invocation marks;
+bindings remain outside rollback. Gap and observation adapters preserve entry-slot
+and invocation identity while projecting UTF-8 code-unit registers to detached
+Unicode-scalar records. Compatibility helpers return absence for invalid typed
+source projections. These adapters do not close the effect-validation gap below.
+Evidence: `docs/knowledge/julia-runtime-structured-diagnostics.md` and
+`docs/knowledge/julia-recognition-effect-integration-gap.md`.
 
 **Known Julia limitation — nested progressive authority:** a child whose one-step
 allowance has been consumed can still make a nested call against the larger shared
@@ -489,8 +497,8 @@ SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` sti
 own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
-Julia has read twelve of 52 exact groups across 95 baseline entries;
-its thirteenth physical reading child is next, followed by the remaining Lua/supporting
+Julia has read thirteen of 52 exact groups across 95 baseline entries;
+its fourteenth physical reading child is next, followed by the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,

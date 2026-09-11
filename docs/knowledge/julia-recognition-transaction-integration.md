@@ -57,3 +57,15 @@ guard, and Phase 0 at 1,031/1,031 in 731 seconds.
 - Admission: [[julia-recognition-transaction-admission]].
 - Dart precedent: [[dart-recognition-transaction-dormant-red]].
 - Owner: [[FUTURE-PARITY-BACKLOG.14]] `.14.3.5.2-.3`.
+
+## September 11 effect-coverage qualification
+
+Julia .1.13 reads the runtime frame/observation/rollback adapters through Interpreter1615.
+The fresh recognition207/observation30/gap319/typed127 suites pass. The standalone
+classifier and the tested explicit-call graphs do not prove full production effect
+closure: [[julia-recognition-effect-integration-gap]] records missing structural
+edges and forbidden binding persistence, owned by Julia .2.3. Earlier broad effect
+claims are limited by that open repair. The original203-assertion and rollout5/9
+snapshots are dated admission history; current neutral recognition is138/250/58,
+rollout9/9, and typed source is14/0/231. Current focused replay lives in
+[[julia-runtime-structured-diagnostics]]. No repair is closed by this reading.
