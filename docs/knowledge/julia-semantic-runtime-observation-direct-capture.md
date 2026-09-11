@@ -12,7 +12,7 @@ answers:
   - "do fresh emitted Julia parser wrappers accept semantic_observation_sink"
   - "does Julia runtime observation derive a semantic index yet"
 date: 2026-07-23
-status: current typed capture through native, validated generated-plan, and fresh emitted wrappers; parent composition closed
+status: typed capture admitted; historical passthrough proof is limited by open action callback repair .2.6
 tags: [julia, semantic-introspection, runtime, observation, trace, diagnostics, generated-source]
 evidence: julia/src/runtime/SemanticObservation.jl; julia/src/runtime/Interpreter.jl; julia/src/source/SourceEmitter.jl; julia/src/LinkedSpecJulia.jl; julia/test/semantic_index_runtime_observation_test.jl; julia/test/semantic_index_runtime_observation_routes_test.jl; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.6.6.1 and .10.6.6.3
 last_verified: 2026-07-26
@@ -22,6 +22,16 @@ reverify:
 ---
 
 # Julia typed runtime semantic observation capture
+
+**Current qualification (2026-09-11):** historical callback identity evidence below
+covers the tested direct/final seams. A callback thrown from a Child slot inside
+Top `I { return(call(Child)) }` loses identity at the action-block catch, then is
+translated again by generated-plan execution. `.2.6.1/.2.6.2` own repair and carrier
+recurrence; see [[julia-semantic-observer-action-failure-wrapping]]. This diagnostic
+covers native and validated-plan direct/traced conveniences with tracing disabled;
+it grants no new enabled-trace, original-backtrace or fresh-emitted defect proof.
+The dated rollout/admission counts below are historical, not current pending state.
+
 
 `LinkedSpecJulia` exports contract `linkedspec-semantic-execution-observation-v1`, the closed
 `RuntimeSemanticRegexSlotSelected` / `RuntimeSemanticRuleResult` kind vocabulary, immutable
@@ -66,3 +76,37 @@ or native admission 3/6. Exact Julia admission remains pending in `.10.6.7`.
 Related facts: [[julia-semantic-runtime-observation-authority-map]], [[julia-semantic-query-public-api]],
 [[julia-semantic-runtime-observation-generated-routes]], [[julia-semantic-runtime-observation-derivation]],
 [[semantic-introspection-neutral-contract]].
+
+## Reading reconciliation at Julia .1.14
+
+Interpreter1616-3115 selects root and family before rule execution, restores local
+bindings/marks/recognition frames and registers on unwind, and memoizes action
+child dispatch. Regex identity is recorded before acceptance effects; the absent
+semantic sink returns before event construction or hashing. Final observation is
+emitted after RuntimeParseResult construction. The action catch qualification above
+is the new confirmed gap; the remaining attached-switch body begins after this range.
+
+Focused replay for the existing direct-dependent suites (176 assertions plus one
+selected-set equality), without the complete component or canonical gate:
+
+```bash
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no - <<'JULIA_RULE_READING14'
+using LinkedSpecJulia, JSON3, Test
+const REPO_ROOT = pwd()
+const selected = Set(["Runtime rule interpreter", "Runtime value blocks controls and trailing blocks"])
+const seen = Set{String}()
+for expression in Meta.parseall(read("julia/test/runtests.jl", String)).args
+    expression isa Expr || continue
+    if expression.head == :function
+        Core.eval(Main, expression)
+    elseif expression.head == :macrocall && expression.args[1] == Symbol("@testset") && expression.args[3] in selected
+        Core.eval(Main, expression)
+        push!(seen, expression.args[3])
+    end
+end
+@test seen == selected
+include("julia/test/source_emitter_test.jl")
+include("julia/test/semantic_index_runtime_observation_test.jl")
+JULIA_RULE_READING14
+bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py
+```

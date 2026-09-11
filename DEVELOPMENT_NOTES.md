@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia action callback identity boundary
+
+The sink marks the original callback error, but an enclosing action catch wraps
+it before outer identity-based passthrough. Native execution returns a runtime
+error; generated plans translate it again. Direct/blind/final controls preserve
+identity. Exact 24-route replay and gated repair live under Julia .2.6.
+
 ## 2026-09-11 — Julia execution state and typed adapters
 
 Runtime construction validates compiled identities and creates fresh stores,

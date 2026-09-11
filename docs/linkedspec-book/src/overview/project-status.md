@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 13/52 owned groups; its fourteenth reading child is next, with approved ADR0115 capacity in place.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 14/52 owned groups; its fifteenth reading child is next, with approved ADR0115 capacity in place.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,11 +297,24 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 13/52 groups complete:** Interpreter is read through line 1615.
-Cumulative coverage is 17,925 lines /694,012 bytes and twenty-two complete files.
-Exact scopes remain in `docs/tasks/JULIA-STARTUP-READING.md`. The selected diagnostic,
-typed-source, recognition, observation, gap and removed-option suites pass 743
-assertions; neutral typed-source and recognition governance also pass.
+**Julia reading is 14/52 groups complete:** Interpreter is read through line 3115.
+Cumulative coverage is 19,425 lines /743,537 bytes and twenty-two complete files.
+Exact scopes remain in `docs/tasks/JULIA-STARTUP-READING.md`. Selected rule, control,
+source-emitter and semantic-capture suites pass 176 assertions; the new callback
+composition diagnostic passes 108. Neutral semantic governance remains green.
+
+**Known Julia limitation — observer errors inside action calls:** if
+`I { return(call(Child)) }` enters a child with a regex, and the semantic observer
+throws at that child’s selected-slot event, the enclosing action replaces the
+caller’s exception with `RuntimeInterpreterException`. Validated generated plans
+translate it again into `GeneratedSourceException`. Direct Top callbacks, blind
+child dispatch and final-result callbacks preserve the original object in the
+measured controls. Nonthrowing callbacks still return the expected `ok` value.
+Julia `.2.6.1/.2.6.2` own passthrough repair and broader route verification. These
+probes use native and generated-plan conveniences with tracing disabled; enabled
+trace closure, callback backtraces and fresh emitted defect reproduction remain
+pending. Exact sources, outcomes and replay:
+`docs/knowledge/julia-semantic-observer-action-failure-wrapping.md`.
 
 Each execution context creates fresh stores and source/recognition authority.
 Recognition snapshots contain cursor, capture boundary and invocation marks;
@@ -497,8 +510,8 @@ SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` sti
 own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
-Julia has read thirteen of 52 exact groups across 95 baseline entries;
-its fourteenth physical reading child is next, followed by the remaining Lua/supporting
+Julia has read fourteen of 52 exact groups across 95 baseline entries;
+its fifteenth physical reading child is next, followed by the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,

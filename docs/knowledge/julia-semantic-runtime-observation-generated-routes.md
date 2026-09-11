@@ -10,7 +10,7 @@ answers:
   - "does Julia generated semantic observation change parser results or trace bytes"
   - "does Julia emitted exit produce a final semantic result event"
 date: 2026-07-23
-status: current generated-plan and fresh-emitted direct/traced propagation; parent composition closed
+status: generated/emitted propagation admitted; open action callback gap limits historical passthrough proof
 tags: [julia, semantic-introspection, runtime, observation, generated-source, trace, diagnostics]
 evidence: julia/src/source/SourceEmitter.jl; julia/test/semantic_index_runtime_observation_routes_test.jl; docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.6.6.3
 last_verified: 2026-07-26
@@ -20,6 +20,16 @@ reverify:
 ---
 
 # Julia generated and emitted runtime observation routes
+
+**Current qualification (2026-09-11):** historical callback identity evidence below
+covers the tested direct/final seams. A callback thrown from a Child slot inside
+Top `I { return(call(Child)) }` loses identity at the action-block catch, then is
+translated again by generated-plan execution. `.2.6.1/.2.6.2` own repair and carrier
+recurrence; see [[julia-semantic-observer-action-failure-wrapping]]. This diagnostic
+covers native and validated-plan direct/traced conveniences with tracing disabled;
+it grants no new enabled-trace, original-backtrace or fresh-emitted defect proof.
+The dated rollout/admission counts below are historical, not current pending state.
+
 
 The public validated generated-plan helpers and fresh modules produced by `emit_julia_source_v2` accept the same
 optional invocation-local `semantic_observation_sink`. Emitted `execute` forwards it to
