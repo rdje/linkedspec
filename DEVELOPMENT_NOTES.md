@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia source values and staged authority seeds
+
+Decoded source tables own exact scalar/codeunit conversions; event construction
+leaves topology validation to derivation. Staged seeds validate logical data with
+placeholders before factory invocation and create fresh execution state. Focused
+observation routes require both ordinary query-digest and direct-capture helpers.
+
 ## 2026-09-11 — selected-slot validation and recognition prefix
 
 Selected-slot matching returns on regex miss before normalizing mode; ordinary

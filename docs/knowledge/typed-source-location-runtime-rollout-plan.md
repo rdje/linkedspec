@@ -312,3 +312,5 @@ execute native/reconstructed/generated-plan routes, with no emitted child
 in this consumer. All29 selected tests and neutral14/0/231 pass; existing
 Dart overflow/input-slice findings remain open. Exact reading evidence:
 docs/tasks/DART-STARTUP-READING.md, .1.53.
+
+Current Julia complete source-value reading and focused replay: [[julia-source-value-authority-reading]].

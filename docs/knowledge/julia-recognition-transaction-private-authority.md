@@ -76,3 +76,11 @@ and carrier census. Existing recognition207 and gap319 assertions pass. Historic
 203-assertion/rollout5/9 counts above remain dated; current neutral recognition is
 138/250/58 at9/9. Runtime effect closure .2.3 and attempt preflight .2.7 are still
 open. Exact selected replay is in [[julia-runtime-matching-state]].
+
+## 2026-09-11 — terminal/effect suffix reading complete
+
+Julia .1.20 reads822-1057 through EOF. Commit preserves staged state and payload;
+rollback/escape/discard restore then invalidate, and LIFO leave retires an abandoned
+active token after restoration. Fixed-point effects and cursor-only progress remain
+private authorities, with runtime effect/attempt gaps still .2.3/.2.7-owned. Exact
+combined source comprehension and focused replay: [[julia-source-value-authority-reading]].

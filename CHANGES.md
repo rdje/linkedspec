@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.20 - read source authorities and staged execution seeds
+
+Complete transaction, semantic event and source-location authorities; read staged
+seed code through488. Exact1,500 fragments /47,696 bytes and942 existing assertions
+pass with neutral checks. Preserve corrected focused harness dependencies, bounded
+source-value Knowledge, book alignment and all pending repairs/source/history.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.19 - complete matching reading and own selected-slot mode validation
 
 Complete Interpreter/Matching and read RecognitionTransaction1-821: 1,500

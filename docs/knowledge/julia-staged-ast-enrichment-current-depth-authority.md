@@ -84,3 +84,14 @@ Related: [[julia-staged-ast-enrichment-marker-provenance]],
 [[general-staged-ast-enrichment-neutral-contract]],
 [[general-staged-ast-current-boundary]],
 [[julia-progressive-span-dispatch-authority]], and ADR `0088`.
+
+## 2026-09-11 — private seed and safe-point prefix reading
+
+Julia .1.20 reads StagedAstEnrichment1-488. Runtime context views reject expired
+access, cancellation callbacks require Bool and clock callbacks require nonnegative
+representable integers. Safe points validate cost, then cancellation/deadline/budget,
+and subtract from both cumulative and job budgets. Seed creation owns copied logical
+state and validates placeholder callbacks without invoking the factory; each start
+requires exact factory keys and creates fresh execution state. The actual resolution/
+cache/preflight/stitching suffix remains unread. Focused replay and current limits:
+[[julia-source-value-authority-reading]]. No registry policy or runtime behavior changes.

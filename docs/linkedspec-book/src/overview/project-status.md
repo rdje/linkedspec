@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 19/52 owned groups; its twentieth reading child is next, with approved ADR0115 capacity in place.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 20/52 owned groups; its twenty-first reading child is next, with approved ADR0115 capacity in place.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,12 +297,22 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 19/52 groups complete:** Interpreter and Matching are fully read;
-RecognitionTransaction is read through line 821. Cumulative coverage is 26,925
-lines /983,846 bytes and twenty-four complete files. Exact scopes remain in
-`docs/tasks/JULIA-STARTUP-READING.md`. Selected matching, diagnostic, duplicate-slot,
-recognition and gap suites pass 714 assertions; a new mode-validation diagnostic
-passes 28. Neutral recognition and gap checks also pass.
+**Julia reading is 20/52 groups complete:** transaction, semantic event and source-
+location authorities are fully read; StagedAstEnrichment is read through line 488.
+Cumulative coverage is 28,425 lines /1,031,542 bytes and twenty-seven complete files.
+Exact scopes remain in `docs/tasks/JULIA-STARTUP-READING.md`. Selected recognition,
+typed-source, semantic observation and staged-enrichment suites pass 942 assertions,
+including existing generated and isolated emitted observation routes. Neutral
+source, semantic and staged checks also pass. All previously identified gaps below
+remain open; source comprehension does not close their repair tasks.
+
+The source authority owns decoded text and exact character/codeunit coordinate
+tables. Semantic events carry immutable scalar facts; observed-index derivation
+validates how those facts fit together. Staged seeds validate copied logical
+registry/options without calling the host factory and create fresh execution state
+for each invocation. The remainder of staged resolution and stitching is still
+pending physical reading. Detailed source evidence and focused replay:
+`docs/knowledge/julia-source-value-authority-reading.md`.
 
 **Known Julia limitation — low-level selected-slot mode validation:** with pattern
 `x`, `match_runtime_regex_slot` rejects mode `"scan"` when input is `"x"`, but returns
@@ -579,8 +589,8 @@ SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` sti
 own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
-Julia has read nineteen of 52 exact groups across 95 baseline entries;
-its twentieth physical reading child is next, followed by the remaining Lua/supporting
+Julia has read twenty of 52 exact groups across 95 baseline entries;
+its twenty-first physical reading child is next, followed by the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,
