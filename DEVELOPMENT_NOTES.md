@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia generated MCP data authority
+
+Base64 literals embed canonical frame/schema data and neutral transport policy.
+The unchanged generator compares exact source bytes; independent decoding checks
+the canonical bundle digest. These proofs and finite binding tests do not grant
+reading credit to the remaining literal suffix or executable MCP consumers.
+
 ## 2026-09-11 — Julia loader and corpus execution boundaries
 
 Corpus validation precedes ordered selection and retains per-fixture failures;

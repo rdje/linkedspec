@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.9 - read generated MCP contract data
+
+Read 630 generated-data fragments /65,520 baseline-identical bytes.
+Generator/digest proof, 53 Julia binding assertions and neutral transport
+35/10/10/76 pass. Preserve source, prior evidence and repairs; synchronize
+Knowledge/book/frontiers. Next Julia .1.10 after the clean ninth-group commit.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.8 - read corpus loader and MCP binding prefix
 
 Read corpus/loader and generated binding prefix:1,224 fragments /65,496 bytes.

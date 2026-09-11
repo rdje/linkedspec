@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 8/52 owned groups; its ninth reading child is next, with approved ADR0115 capacity in place.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 9/52 owned groups; its tenth reading child is next, with approved ADR0115 capacity in place.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,12 +297,17 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 8/52 groups complete:** CorpusManifest and SpecLoader are
-fully read; generated McpContract is read through line 372. Cumulative coverage
-is 11,295 lines /418,734 bytes and fifteen complete files. Exact scopes remain in
-`docs/tasks/JULIA-STARTUP-READING.md`. The eighth group passes 246 existing corpus,
-loader, MCP-binding and cursor-option assertions. The current generated MCP
-binding is byte-for-byte fresh. No full Julia gate or defect closure is claimed.
+**Julia reading is 9/52 groups complete:** generated McpContract is read through
+line 1002. Cumulative coverage is 11,925 lines /484,254 bytes and fifteen complete
+files. Exact scopes remain in `docs/tasks/JULIA-STARTUP-READING.md`. The ninth group
+passes 53 existing Julia binding assertions and the neutral transport checker:
+35 frames, 10 raw inputs, 10 lifecycle cases and 76 rejected mutations.
+
+The MCP binding embeds canonical frames, schemas and transport policy as generated
+data. The generator reproduces its 120,030 source bytes exactly, and independent
+decoding verifies the 82,882-byte bundle digest. Executable consumer reading
+continues in the next group. Evidence: `docs/knowledge/julia-mcp-decoded-server.md`.
+No full Julia gate or defect closure is claimed.
 
 Corpus execution validates all 105 current fixtures before selecting requested
 names or an offset/limit window. Named results retain caller order; a failing
@@ -444,8 +449,8 @@ SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` sti
 own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
-Julia has read eight of 52 exact groups across 95 baseline entries;
-its ninth physical reading child is next, followed by the remaining Lua/supporting
+Julia has read nine of 52 exact groups across 95 baseline entries;
+its tenth physical reading child is next, followed by the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,

@@ -62,3 +62,31 @@ server signoff credit. Exact replay lives in [[julia-controlled-corpus-execution
 ```bash
 bash tools/run_python_project_data.sh tools/generate_julia_mcp_contract.py
 ```
+
+September 11 `.1.9` extends physical binding reading through line 1002. The neutral checker
+passes 35 canonical frames (28 accepted /7 rejected), 10 raw inputs, 10 lifecycle cases and 76 rejected
+mutations; the existing Julia binding suite passes 53. Independent decoding confirms an 82,882-byte
+UTF-8 bundle, 35 canonical frame entries and 48 schema definitions, with SHA-256
+`a1d2857c57ef93ea0e62403977105fdf6380f6fcb4d7a89ed5749c1bfdd64001`.
+Whole-bundle mechanical proof does not imply physical reading of its remaining generated suffix.
+
+```bash
+bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no - <<'JULIA_GROUP9_BINDING'
+using LinkedSpecJulia, Test
+const REPO_ROOT=pwd()
+include("julia/test/mcp_contract_julia_binding_test.jl")
+JULIA_GROUP9_BINDING
+bash tools/project_data_run.sh python3 - <<'PY_MCP_DECODE9'
+from pathlib import Path
+import re,base64,hashlib,json
+s=Path('julia/src/mcp/McpContract.jl').read_text()
+payload=re.search(r'const _MCP_BUNDLE_BASE64 = string\(\n(.*?)\n\)',s,re.S).group(1)
+raw=base64.b64decode(''.join(re.findall(r'"([A-Za-z0-9+/=]+)"',payload)),validate=True)
+expected=re.search(r'_MCP_BUNDLE_SHA256 = "([0-9a-f]+)"',s).group(1)
+assert hashlib.sha256(raw).hexdigest()==expected
+bundle=json.loads(raw)
+assert len(raw)==82882 and len(bundle['canonical_frames'])==35 and len(bundle['schema']['$defs'])==48
+print('PASS current generated MCP bundle identity and shape:',len(raw),expected)
+PY_MCP_DECODE9
+```

@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.8 completes CorpusManifest and SpecLoader, and reads McpContract through 372: 8/52 groups, 11,295 fragments /418,734 bytes and fifteen complete files. Existing controlled-corpus58, loader82, MCP-binding53 and cursor-option53 assertions pass (246 total); the generator verifies120,030 source bytes and neutral resolution remains14/9/4. Corpus selection/loading, historical counts and removed-option teaching reconcile with current source. All source, prior evidence, repairs and ADR0115 controls remain. Julia .1.9 is next; no complete component/canonical gate or dependency build. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.9 reads McpContract lines 373-1002: 9/52 groups, 11,925 fragments /484,254 bytes and fifteen complete files. Check-only generation confirms 120,030 source bytes; independent decoding verifies the 82,882-byte bundle digest. Existing binding tests pass 53 assertions and neutral transport passes 35 frames /10 raw inputs /10 lifecycle cases /76 rejected mutations. Generated schema, frame and policy data reconcile with their neutral authority. All source, prior evidence, repairs and ADR0115 controls remain. Julia .1.10 is next; no full component/canonical gate or dependency build. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.81` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `JULIA-STARTUP-READING.1.8 - read corpus loader and MCP binding prefix` — Julia .1.8 completes CorpusManifest and SpecLoader, and reads McpContract through 372: 8/52 groups, 11,295 fragments /418,734 bytes and fifteen complete files. Existing controlled-corpus58, loader82, MCP-binding53 and cursor-option53 assertions pass (246 total); the generator verifies120,030 source bytes and neutral resolution remains14/9/4. Corpus selection/loading, historical counts and removed-option teaching reconcile with current source. All source, prior evidence, repairs and ADR0115 controls remain. Julia .1.9 is next; no complete component/canonical gate or dependency build.
+- `JULIA-STARTUP-READING.1.9 - read generated MCP contract data` — Julia .1.9 reads McpContract lines 373-1002: 9/52 groups, 11,925 fragments /484,254 bytes and fifteen complete files. Check-only generation confirms 120,030 source bytes; independent decoding verifies the 82,882-byte bundle digest. Existing binding tests pass 53 assertions and neutral transport passes 35 frames /10 raw inputs /10 lifecycle cases /76 rejected mutations. Generated schema, frame and policy data reconcile with their neutral authority. All source, prior evidence, repairs and ADR0115 controls remain. Julia .1.10 is next; no full component/canonical gate or dependency build.
 
 ## Next Action
 
-- `JULIA-STARTUP-READING.1.9` — Continue generated McpContract lines373-1002 after clean .1.8.
+- `JULIA-STARTUP-READING.1.10` — Complete McpContract, read McpContractRuntime and McpServer, and begin McpWire after clean .1.9.
 
 ## Recent Completions
+
+- `2026-09-11` — `JULIA-STARTUP-READING.1.9` reads 630 fragments /65,520 bytes; generator/digest, 53 binding assertions and neutral transport 35/10/10/76 pass; no repair closed.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.8` reads1,224 fragments /65,496 bytes;246 existing assertions, byte-fresh MCP binding and neutral14/9/4 pass; no repair closed.
 
@@ -48,8 +50,6 @@
 - `2026-09-11` — `DART-STARTUP-READING.1.55` completes physical Dart reading: 55/55, all115 files; 20 tests and two neutral checks pass. Formal .3 remains pending.
 
 - `2026-09-11` — `DART-STARTUP-READING.1.54` reads 1,500 fragments / 44,403 bytes; 43 tests and four neutral checks pass; no new defect.
-
-- `2026-09-11` — `DART-STARTUP-READING.1.53` reads 1,500 fragments / 44,020 bytes; 29 tests and three neutral checks pass; no new defect.
 
 ## History
 
