@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia numeric and range boundary mechanisms
+
+Integer literal parsing can throw; result normalization loses large finite
+floats, while integer addition and abs wrap before normalization. Range helpers
+add counts before clipping, causing wrong slices or BoundsError. Paired Julia
+and Perl controls isolate these from portable text spelling under startup .55.2.
+
 ## 2026-09-11 — Julia helper callback recursion identity
 
 The callable executor tracks the supplied name; with/tree dispatch supplies the

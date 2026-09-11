@@ -55,3 +55,13 @@ and scalar-text conversion saturate; integer addition wraps and abs(min-int) rem
 negative. .2.12 owns Dart repair alongside startup .55 numeric/text work. Fresh neutral
 55/18 and the existing Dart fixture still pass; they do not cover these magnitude
 boundaries or promise arbitrary-precision arithmetic. Unicode-digit .20 remains separate.
+
+## 2026-09-11 — Julia finite-range exception beyond the admitted fixture
+
+Julia .1.17 adds [[julia-large-number-and-slice-boundaries]]: native/reconstructed
+source rejects a large integer literal, loses valid large integral-float helper
+results, wraps max-int addition and leaves abs(min-int) negative. Perl Get preserves
+the tested magnitudes;128 Julia and64 Perl assertions pin these boundaries and
+ordinary controls. Julia .2.9 owns its numeric repair; startup .55.2 retains text
+spelling and .20 Unicode grammar. The unchanged neutral55/18 and Julia numeric
+fixture still pass and do not establish correctness across this larger domain.

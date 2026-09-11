@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 16/52 owned groups; its seventeenth reading child is next, with approved ADR0115 capacity in place.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 17/52 owned groups; its eighteenth reading child is next, with approved ADR0115 capacity in place.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,11 +297,30 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 16/52 groups complete:** Interpreter is read through line 6115.
-Cumulative coverage is 22,425 lines /841,618 bytes and twenty-two complete files.
-Exact scopes remain in `docs/tasks/JULIA-STARTUP-READING.md`. Selected aggregate,
-function, tree, callable and receiver-mutation suites pass 992 assertions; the new
-callback identity diagnostic passes 84. Neutral governance remains green.
+**Julia reading is 17/52 groups complete:** Interpreter is read through line 7615.
+Cumulative coverage is 23,925 lines /889,323 bytes and twenty-two complete files.
+Exact scopes remain in `docs/tasks/JULIA-STARTUP-READING.md`. Selected scalar,
+aggregate, tree, uniform-binding and receiver-mutation suites pass 585 assertions;
+the numeric/range diagnostic passes 128 Julia and 64 Perl reference assertions.
+Neutral numeric and uniform-binding checks also pass.
+
+**Known Julia limitation — large numeric values:** the integer literal
+`100000000000000000000` throws during compilation. Its decimal spelling
+`100000000000000000000.0` succeeds directly, but adding zero returns `nothing`.
+Adding one to `9223372036854775807` wraps negative, and `num_abs` leaves the minimum
+signed integer negative. Perl preserves the tested magnitudes. Julia `.2.9.1-.3`
+own literal, conversion and arithmetic repair with explicit supported limits;
+this does not promise arbitrary precision. Decimal-versus-scientific string
+spelling remains separately owned by startup `.55.2`.
+
+**Known Julia limitation — large slice counts:** with the valid integer count
+`9223372036854775807`, `drop_front([1,2], count)` throws a bounds error, while
+`slice([1,2], 1, count)` returns `[]` and `substr("ab", 1, count)` returns empty text.
+Perl returns `[]`, `[2]` and `"b"`, respectively. Count `2` works on both runtimes.
+Julia `.2.10.1/.2` own safe bounds arithmetic. These numeric and range failures
+are confirmed on native and reconstructed Julia sources; fresh generated/emitted
+Julia proof remains pending. Exact comparisons and replay:
+`docs/knowledge/julia-large-number-and-slice-boundaries.md`.
 
 **Known Julia limitation — distinct callbacks can look recursive:** nested helper
 or receiver `with` callbacks currently reject with the cycle `with → with`, even
@@ -533,8 +552,8 @@ SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` sti
 own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
-Julia has read sixteen of 52 exact groups across 95 baseline entries;
-its seventeenth physical reading child is next, followed by the remaining Lua/supporting
+Julia has read seventeen of 52 exact groups across 95 baseline entries;
+its eighteenth physical reading child is next, followed by the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,

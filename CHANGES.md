@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.17 - read helper boundaries and own numeric and range repairs
+
+Read Interpreter6116-7615: 1,500 fragments /47,705 baseline-identical bytes.
+Existing helper/mutation585, Julia boundary128 and Perl reference64 assertions
+pass; neutral numeric/uniform checks pass. Own numeric loss/wrapping and range
+overflow under .2.9/.2.10, synchronize book and preserve all source/history.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.16 - read callable execution and own callback identity repair
 
 Read Interpreter4616-6115: 1,500 fragments /47,167 baseline-identical bytes.

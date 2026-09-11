@@ -2233,7 +2233,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas.
   Children: `.3.5.0` owns decomposition; JULIA-STARTUP-READING.1 owns 52 reading children and .3 owns closeout.
   Reading owner: `docs/tasks/JULIA-STARTUP-READING.md` retains exact scope/digest, comprehension and repair evidence. This startup node remains the prerequisite owner.
-  Verification: Julia .1.16 reads Interpreter4616-6115: 16/52 groups, 22,425 fragments /841,618 bytes and twenty-two complete files. Existing array2/hash1/function9/tree2/callable125/contextual118/construction239/mutation496 assertions pass (992 plus selection1); nine native/reconstructed callback cases pass84 diagnostic assertions. New .2.8.1/.2.8.2 own false helper-name recursion and lost bound callback identity. Neutral callable23, mutation167+592 and write105 checks pass. All prior repairs, source, history and ADR0115 controls remain. Julia .1.17 is next; no full component/canonical gate or dependency build. Exact plan and all source identities remain frozen in the Julia owner.
+  Verification: Julia .1.17 reads Interpreter6116-7615: 17/52 groups, 23,925 fragments /889,323 bytes and twenty-two complete files. Existing scalar-text5/numeric4/string-numeric14/array2/hash1/tree2/uniform61/mutation496 assertions pass (585 plus selection1); numeric/range diagnostics pass128 Julia and64 Perl assertions. New .2.9/.2.10 own finite-number loss/wrapping and unsafe range arithmetic; startup .55.2/.60.2 retain cross-backend coordination. Neutral numeric55/18 and uniform11/7/6/8 pass. All prior repairs, source, history and ADR0115 controls remain. Julia .1.18 is next; no full component/canonical gate or dependency build. Exact plan and all source identities remain frozen in the Julia owner.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.5.0`
@@ -3596,6 +3596,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     "1e+20" on Perl, with successful execution and no errors. The scalar-text fixture says shortest stable
     decimal text but its numeric examples are only -0.0, 1.0 and 1.25; it does not establish this magnitude.
     Current Rust to_scalar_text formats finite f64 directly, while Perl cat lowering stringifies the host value.
+    Julia .1.17 adds decimal-literal cat(100000000000000000000.0, "") as full decimal versus Perl scientific text; exact paired controls remain in docs/knowledge/julia-large-number-and-slice-boundaries.md. Julia .2.9 separately owns numeric value preservation.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.55.3`
@@ -3845,8 +3846,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Acceptance: Add independent exact-value regressions for helper and receiver forms, exercise direct,
     serialized/generated/emitted/standalone consumers, and inspect adjacent take/drop slicing arithmetic.
     Probe remaining backends with bounded inputs; fix or task-own every measured discrepancy.
-  Verification: `pending` — current evidence is primary Rust and public Perl; large-count Perl execution
-    and generated/native structured carriers are not credited by captured diagnostic source.
+  Verification: `pending` — the original .60 intake measured primary Rust and public Perl; its captured
+    diagnostic source alone did not credit large-count Perl execution or structured carriers.
+    Julia .1.17 adds native/reconstructed and executed Perl large-count controls: drop_front throws and slice/substr truncate incorrectly in Julia while the paired Perl controls succeed. Julia .2.10 owns repair; exact replay and carrier limitations live in docs/knowledge/julia-large-number-and-slice-boundaries.md.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.60.3`

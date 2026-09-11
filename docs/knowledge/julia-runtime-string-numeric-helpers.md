@@ -33,8 +33,9 @@ min/max/clamp, sum/average/median/range reducers, numeric comparisons, terse wor
 aliases, and arithmetic/comparison symbol callees. Runtime numeric conversion
 accepts finite numbers and numeric-looking strings, rejects booleans and
 aggregate values, normalizes integral results to Julia `Int`, and returns
-`nothing` for invalid operands, bounds, modulo, overflow conversions, or zero
-divisors.
+`nothing` for invalid operands, bounds, modulo, failed integral conversions, or
+zero divisors. This describes covered conversion paths, not safe arithmetic at
+every magnitude; the September qualification below supersedes that broader inference.
 
 Compatible string and number receiver chains prepend the current receiver to
 the same helper call, so function and fluent forms cannot drift. Array-aware
@@ -44,3 +45,19 @@ Related facts: [[julia-runtime-core-value-capture-helpers]], [[julia-runtime-arr
 [[julia-runtime-rule-interpreter]], [[dart-runtime-string-numeric-helpers]],
 [[terse-string-receiver-value-chains]], [[terse-number-receiver-value-chains]],
 [[terse-string-comparison-bridge-contract]], [[terse-numeric-comparison-symbol-callees]].
+
+## 2026-09-11 — numeric conversion and slice limits
+
+Julia .1.17 physically reads Interpreter6116-7615. Strict numeric adapters reject
+booleans/aggregates, but arithmetic can wrap before normalization, and integral
+Float64 results outside Int range become nothing. Integer-literal parsing can
+throw before runtime. [[julia-large-number-and-slice-boundaries]] preserves 128
+native/reconstructed and 64 Perl assertions; Julia .2.9 owns these defects.
+The same paired diagnostic proves unsafe substring/count arithmetic under .2.10.
+Large float scalar text preserves magnitude via BigInt but uses decimal spelling;
+startup .55.2 retains its comparison with Perl scientific spelling.
+
+Existing text5/numeric4/string-numeric14 and adjacent aggregate/uniform/mutation
+suites remain green. Exact selected replay is in [[julia-runtime-array-helpers]].
+Regex handling retains imsx flags (g/o ignored), guarded substitution writeback
+and capture expansion; this reading closes no pending regex or numeric repair.
