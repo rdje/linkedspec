@@ -57,3 +57,22 @@ remains deliberately unexported.
 - Integration: [[julia-recognition-transaction-integration]].
 - Admission: [[julia-recognition-transaction-admission]].
 - Owner: [[FUTURE-PARITY-BACKLOG.14]] `.14.3.5.1`.
+
+## 2026-09-11 — authority prefix and current limits
+
+Julia .1.19 reads RecognitionTransaction1-821; commit/rollback/effect/progress
+implementation continues in .1.20 and gains no credit here. The prefix owns copied
+sorted frame marks, source-local authority and guarded monotonic generations,
+parent invocation identity, optional gap state and detached entry-slot projections.
+Gap candidates install before LS, commit after LE only without cursor regression,
+and clear before IT; successful tails retain the parse cursor. Checkpoints copy
+frame/gap state and reject any active nested transaction; attempt stages state and
+separates match presence from falsey payloads.
+
+_restore_and_invalidate! returns immediately for an invalidated token before
+restoring frame/gap state. Like the dated Rust comparison, this excludes the exact
+Perl stale-snapshot helper mechanism; startup .38 retains its broader behavioral
+and carrier census. Existing recognition207 and gap319 assertions pass. Historical
+203-assertion/rollout5/9 counts above remain dated; current neutral recognition is
+138/250/58 at9/9. Runtime effect closure .2.3 and attempt preflight .2.7 are still
+open. Exact selected replay is in [[julia-runtime-matching-state]].

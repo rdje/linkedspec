@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 18/52 owned groups; its nineteenth reading child is next, with approved ADR0115 capacity in place.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 19/52 owned groups; its twentieth reading child is next, with approved ADR0115 capacity in place.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,12 +297,22 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 18/52 groups complete:** Interpreter is read through line 9115.
-Cumulative coverage is 25,425 lines /937,035 bytes and twenty-two complete files.
-Exact scopes remain in `docs/tasks/JULIA-STARTUP-READING.md`. Selected capture,
-cursor, diagnostic, logical, typed-source and nested-write suites pass 886
-assertions. Input-slice diagnostics pass 174 Julia and 44 Perl assertions;
-neutral logical, typed-source and write checks also pass.
+**Julia reading is 19/52 groups complete:** Interpreter and Matching are fully read;
+RecognitionTransaction is read through line 821. Cumulative coverage is 26,925
+lines /983,846 bytes and twenty-four complete files. Exact scopes remain in
+`docs/tasks/JULIA-STARTUP-READING.md`. Selected matching, diagnostic, duplicate-slot,
+recognition and gap suites pass 714 assertions; a new mode-validation diagnostic
+passes 28. Neutral recognition and gap checks also pass.
+
+**Known Julia limitation — low-level selected-slot mode validation:** with pattern
+`x`, `match_runtime_regex_slot` rejects mode `"scan"` when input is `"x"`, but returns
+a normal miss on `"y"`. A non-mode integer has the same input-dependent behavior.
+The ordinary matcher rejects both malformed modes on either input. Julia `.2.12.1/.2`
+own validation before regex execution and direct-dependent proof. Valid seek/consume
+controls remain correct. This concerns the exported low-level matching API; normal
+parser execution uses valid rule-local modes, and the removed global parser-mode
+option remains unsupported. Exact replay:
+`docs/knowledge/julia-selected-slot-mode-validation-gap.md`.
 
 **Known Julia limitation — input_slice argument handling:** use the documented
 `input_slice(start, length)` or `input_text()` for the whole input. Julia currently
@@ -569,8 +579,8 @@ SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` sti
 own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
-Julia has read eighteen of 52 exact groups across 95 baseline entries;
-its nineteenth physical reading child is next, followed by the remaining Lua/supporting
+Julia has read nineteen of 52 exact groups across 95 baseline entries;
+its twentieth physical reading child is next, followed by the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,

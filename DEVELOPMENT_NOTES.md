@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — selected-slot validation and recognition prefix
+
+Selected-slot matching returns on regex miss before normalizing mode; ordinary
+matching validates first. Exact hit/miss controls own .2.12 repair. Recognition
+restoration first excludes invalidated tokens, preserving the existing separate
+Perl stale-snapshot repair and all-runtime census under startup .38.
+
 ## 2026-09-11 — Julia typed slicing and count conversion boundaries
 
 Typed input slicing clips integer widths before addition, unlike array/string

@@ -1566,7 +1566,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.19` | `pending` | Complete Interpreter9116-9285 and Matching1-509; read RecognitionTransaction1-821 after clean .1.18. |
+| 1 | `JULIA-STARTUP-READING.1.20` | `pending` | Complete RecognitionTransaction822-1057, SemanticObservation1-130 and SourceLocation1-646; read StagedAstEnrichment1-488. |
 
 ## Decisions
 

@@ -2233,7 +2233,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas.
   Children: `.3.5.0` owns decomposition; JULIA-STARTUP-READING.1 owns 52 reading children and .3 owns closeout.
   Reading owner: `docs/tasks/JULIA-STARTUP-READING.md` retains exact scope/digest, comprehension and repair evidence. This startup node remains the prerequisite owner.
-  Verification: Julia .1.18 reads Interpreter7616-9115: 18/52 groups, 25,425 fragments /937,035 bytes and twenty-two complete files. Existing core4/capture2/scope3/cursor17/marks13/diagnostic82/logical232/typed127/write406 assertions pass (886 plus selection1); slice diagnostics pass174 Julia and44 Perl assertions. Typed integer clipping is correct; new .2.11 owns input_slice arity, .2.9 retains float conversion and startup .60.2 owns measured reference count fallbacks. Neutral logical26/typed231/write105 mutations pass. All prior repairs, source, history and ADR0115 controls remain. Julia .1.19 is next; no full component/canonical gate or dependency build. Exact plan and all source identities remain frozen in the Julia owner.
+  Verification: Julia .1.19 completes Interpreter and Matching and reads RecognitionTransaction1-821: 19/52 groups, 26,925 fragments /983,846 bytes and twenty-four complete files. Existing matching60/diagnostics7/slots121/recognition207/gap319 assertions pass (714 plus selection1); low-level selected-slot mode diagnostic28 isolates miss-before-validation. New .2.12 owns mode preflight; startup .38 retains transaction misuse census despite the positive Julia invalidation guard. Neutral recognition138/250/58 and gap63/public34 pass. All prior repairs, source, history and ADR0115 controls remain. Julia .1.20 is next; no full component/canonical gate or dependency build. Exact plan and all source identities remain frozen in the Julia owner.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.5.0`
@@ -3085,6 +3085,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     current state, while four cross-frame/source cases restore cursor/boundary/marks to the old checkpoint.
     .3.3.27 Rust source comparison finds an early invalidated-status return before snapshot restoration;
     this excludes the exact Perl mechanism in that helper, not the pending behavioral/runtime census.
+    Julia .1.19 reads RecognitionTransaction633-648: _restore_and_invalidate! returns immediately for invalidated tokens before changing frame/gap snapshots, likewise excluding the exact Perl helper mechanism. This source comparison does not close the separate all-runtime behavioral or authored/carrier census.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.38.2`

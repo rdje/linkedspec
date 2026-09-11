@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.18 reads Interpreter7616-9115: 18/52 groups, 25,425 fragments /937,035 bytes and twenty-two complete files. Existing core4/capture2/scope3/cursor17/marks13/diagnostic82/logical232/typed127/write406 assertions pass (886 plus selection1); slice diagnostics pass174 Julia and44 Perl assertions. Typed integer clipping is correct; new .2.11 owns input_slice arity, .2.9 retains float conversion and startup .60.2 owns measured reference count fallbacks. Neutral logical26/typed231/write105 mutations pass. All prior repairs, source, history and ADR0115 controls remain. Julia .1.19 is next; no full component/canonical gate or dependency build. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.19 completes Interpreter and Matching and reads RecognitionTransaction1-821: 19/52 groups, 26,925 fragments /983,846 bytes and twenty-four complete files. Existing matching60/diagnostics7/slots121/recognition207/gap319 assertions pass (714 plus selection1); low-level selected-slot mode diagnostic28 isolates miss-before-validation. New .2.12 owns mode preflight; startup .38 retains transaction misuse census despite the positive Julia invalidation guard. Neutral recognition138/250/58 and gap63/public34 pass. All prior repairs, source, history and ADR0115 controls remain. Julia .1.20 is next; no full component/canonical gate or dependency build. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.81` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `JULIA-STARTUP-READING.1.18 - read capture and storage boundaries and own input slice arity` — Julia .1.18 reads Interpreter7616-9115: 18/52 groups, 25,425 fragments /937,035 bytes and twenty-two complete files. Existing core4/capture2/scope3/cursor17/marks13/diagnostic82/logical232/typed127/write406 assertions pass (886 plus selection1); slice diagnostics pass174 Julia and44 Perl assertions. Typed integer clipping is correct; new .2.11 owns input_slice arity, .2.9 retains float conversion and startup .60.2 owns measured reference count fallbacks. Neutral logical26/typed231/write105 mutations pass. All prior repairs, source, history and ADR0115 controls remain. Julia .1.19 is next; no full component/canonical gate or dependency build.
+- `JULIA-STARTUP-READING.1.19 - complete matching reading and own selected-slot mode validation` — Julia .1.19 completes Interpreter and Matching and reads RecognitionTransaction1-821: 19/52 groups, 26,925 fragments /983,846 bytes and twenty-four complete files. Existing matching60/diagnostics7/slots121/recognition207/gap319 assertions pass (714 plus selection1); low-level selected-slot mode diagnostic28 isolates miss-before-validation. New .2.12 owns mode preflight; startup .38 retains transaction misuse census despite the positive Julia invalidation guard. Neutral recognition138/250/58 and gap63/public34 pass. All prior repairs, source, history and ADR0115 controls remain. Julia .1.20 is next; no full component/canonical gate or dependency build.
 
 ## Next Action
 
-- `JULIA-STARTUP-READING.1.19` — Complete Interpreter9116-9285 and Matching1-509; read RecognitionTransaction1-821 after clean .1.18.
+- `JULIA-STARTUP-READING.1.20` — Complete RecognitionTransaction822-1057, SemanticObservation1-130 and SourceLocation1-646; read StagedAstEnrichment1-488.
 
 ## Recent Completions
+
+- `2026-09-11` — `JULIA-STARTUP-READING.1.19` reads1,500 fragments /46,811 bytes;714 existing and28 mode diagnostic assertions pass; interpreter/matching complete, repair .2.12 open.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.18` reads1,500 fragments /47,712 bytes;886 existing,174 Julia and44 Perl assertions pass; input_slice arity remains repair-owned.
 
@@ -48,8 +50,6 @@
 - `2026-09-11` — `JULIA-STARTUP-READING.1.5` reads 1,500 fragments /51,510 bytes; 196 existing assertions and eight native normalization outcomes pass; no repair closed.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.4` reads 1,500 fragments / 51,329 bytes; 596 existing assertions pass; switch defect repair-owned with exact causal/carrier/reference proof.
-
-- `2026-09-11` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.12` admits six approved limits; exact 217-line rollover and 66 actual-validator executions pass under the one-time focused exception.
 
 ## History
 

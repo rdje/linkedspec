@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `JULIA-STARTUP-READING`
-- Status: `active` / reading 18/52; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds and arity repairs pending
+- Status: `active` / reading 19/52; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity and matching repairs pending
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.5`
 - Created: `2026-09-11`
 - Last updated: `2026-09-11`
@@ -43,7 +43,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Inventory SHA-256: `ca3cff4fe4c0e162448d6dbac82d89898673023951afaeced17d5b9a838ccd10`.
 - Ordered range SHA-256: `fde325f80ae7b56c5890d149fbc965c09890890e963a1fa9aab08e8c9d962337`.
 - Line coordinates are one-based, inclusive LF physical lines. Every child pins its range digest.
-- Current physical reading: 18/52 children, 25,425/75,984 lines and 937,035/2,693,170 bytes; twenty-two complete files.
+- Current physical reading: 19/52 children, 26,925/75,984 lines and 983,846/2,693,170 bytes; twenty-four complete files.
 - Exact replay and capacity assessment: `docs/knowledge/julia-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -59,7 +59,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Dependencies: Startup .3.5.0 decomposition committed; each child starts from a clean prior handoff.
   Children: `.1.1-.1.52`, with exact scopes below.
   Acceptance: Every child records physical coverage, comprehension, Knowledge reconciliation, findings and focused proof before its commit. Retain all current-delta and interrupted-range evidence.
-  Verification: Julia .1.18 reads Interpreter7616-9115: 18/52 groups, 25,425 fragments /937,035 bytes and twenty-two complete files. Existing core4/capture2/scope3/cursor17/marks13/diagnostic82/logical232/typed127/write406 assertions pass (886 plus selection1); slice diagnostics pass174 Julia and44 Perl assertions. Typed integer clipping is correct; new .2.11 owns input_slice arity, .2.9 retains float conversion and startup .60.2 owns measured reference count fallbacks. Neutral logical26/typed231/write105 mutations pass. All prior repairs, source, history and ADR0115 controls remain. Julia .1.19 is next; no full component/canonical gate or dependency build.
+  Verification: Julia .1.19 completes Interpreter and Matching and reads RecognitionTransaction1-821: 19/52 groups, 26,925 fragments /983,846 bytes and twenty-four complete files. Existing matching60/diagnostics7/slots121/recognition207/gap319 assertions pass (714 plus selection1); low-level selected-slot mode diagnostic28 isolates miss-before-validation. New .2.12 owns mode preflight; startup .38 retains transaction misuse census despite the positive Julia invalidation guard. Neutral recognition138/250/58 and gap63/public34 pass. All prior repairs, source, history and ADR0115 controls remain. Julia .1.20 is next; no full component/canonical gate or dependency build.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.1.1`
@@ -369,14 +369,21 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Commit: `JULIA-STARTUP-READING.1.18 - read capture and storage boundaries and own input slice arity`.
 
 - ID: `JULIA-STARTUP-READING.1.19`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Julia group 19 and reconcile its source evidence.
   Dependencies: `JULIA-STARTUP-READING.1.18` committed; empty brief and clean repository.
   Scope: `julia/src/runtime/Interpreter.jl` lines 9116-9285; `julia/src/runtime/Matching.jl` lines 1-509; `julia/src/runtime/RecognitionTransaction.jl` lines 1-821
   Baseline evidence: 1500 fragments / 46811 bytes; ordered range SHA-256 `197da31645415eaf6d9ea4669e3f53191264bb96a47e0921e29b738e108df89f`.
+  Activation commit: `c746951cf298f103e48d1b20c6510c425109ca5c`.
+  Verification tier: `focused`
+  Focused checks: Exact source/range reconstruction; existing matching/diagnostic/duplicate-slot/recognition/gap suites; direct matcher invalid-mode diagnostic; neutral recognition/gap checks; prior-task/source/history preservation, Knowledge, memory, book and normal doctrines.
+  Canonical trigger: `none` — ordinary reading and defect intake; no source, contract, format, infrastructure or dependency change.
   Acceptance: Physically read every owned byte, inspect current deltas, reconcile Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit. Do not count truncated output or unread consumer suffixes.
-  Verification: `pending`
-  Commit: `pending`
+  Comprehension: Completes interpreter diagnostic/event/result serialization and all matching code. Native PCRE alternatives preserve authored slots, earliest-position/source-order ties and consume-at-cursor selection. Full/compact/named captures remain distinct; only live regex offsets grant staged capture provenance. UTF-8 offset checks, character/LF projections and immutable register replacement preserve child entry/local separation. Recognition authority prefixes own copied frame marks, monotonic source/invocation/token generations, parent/entry-slot identity, gap candidates/tails and snapshot-backed checkpoint/attempt state. Active misuse restores before invalidation; invalidated-token restoration is an early no-op. Commit and effect/progress suffixes continue in .1.20.
+  Knowledge: Matching and private-authority cards now preserve exact complete/prefix coverage, focused replay and historical-count qualifications. docs/knowledge/julia-selected-slot-mode-validation-gap.md owns the new public low-level API diagnostic; source comparison is added to existing startup .38.1 without closing behavioral census.
+  Findings: New .2.12.1/.2 own selected-slot mode preflight: invalid scan/integer7 rejects on x but silently misses on y for pattern x, while ordinary runtime_match rejects both. Four valid seek/consume controls remain correct. This does not reintroduce global parser mode or prove an authored failure. No new transaction failure or source repair; existing effects .2.3, attempt preflight .2.7 and startup .38 remain open.
+  Verification: Seven untruncated windows cover1500 fragments /46811 baseline-identical bytes across Interpreter9116-9285, Matching1-509 and RecognitionTransaction1-821; ordered SHA197da31645415eaf6d9ea4669e3f53191264bb96a47e0921e29b738e108df89f. Existing matching60/diagnostics7/slots121/recognition207/gap319 pass714 plus selection1; direct mode diagnostic28 covers8 malformed and4 valid controls. Neutral recognition138/250/58 and gap63/public34 pass. Exact source/coverage/prior-node/history, Knowledge, memory, bounded histories, book and normal doctrines govern landing. No unread-source credit, full component/canonical gate or dependency build.
+  Commit: `JULIA-STARTUP-READING.1.19 - complete matching reading and own selected-slot mode validation`.
 
 - ID: `JULIA-STARTUP-READING.1.20`
   Status: `pending`
@@ -713,7 +720,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Goal: Preserve disjoint repair ownership for every confirmed Julia finding.
   Dependencies: Findings from .1; source repair additionally requires startup .3/.4/.5.
   Acceptance: Reuse exact existing startup owners when applicable; otherwise add bounded repair children with source mechanism, reproduction, acceptance and unblock conditions. No finding is closed by reading alone.
-  Children: .2.1 callable-body selector validation; .2.2 attached-switch body/duplicate-default validation; .2.3 recognition-effect integration; .2.4 MCP pattern full matching; .2.5 progressive identity full matching; .2.6 semantic callback action passthrough; .2.7 recognition attempt preflight; .2.8 helper callback recursion identity; .2.9 numeric boundaries; .2.10 safe slice/drop arithmetic; .2.11 input_slice arity. Nested authority and diagnostic review retain startup .37.1/.37.2. Prior README findings retain startup .41.2/.41.3/.41.7.
+  Children: .2.1 callable-body selector validation; .2.2 attached-switch body/duplicate-default validation; .2.3 recognition-effect integration; .2.4 MCP pattern full matching; .2.5 progressive identity full matching; .2.6 semantic callback action passthrough; .2.7 recognition attempt preflight; .2.8 helper callback recursion identity; .2.9 numeric boundaries; .2.10 safe slice/drop arithmetic; .2.11 input_slice arity; .2.12 selected-slot mode preflight. Nested authority and diagnostic review retain startup .37.1/.37.2. Prior README findings retain startup .41.2/.41.3/.41.7.
   Verification: `pending` repairs; .1.3 owns the callable-body selector gap, and .1.4 confirms attached-switch projection omission and default replacement. Earlier documentation and helper-arity owners remain intact.
   Commit: `pending`
 
@@ -1021,6 +1028,32 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Verification: `pending`
   Commit: `pending`
 
+- ID: `JULIA-STARTUP-READING.2.12`
+  Status: `pending`
+  Goal: Validate selected-slot matching mode independently of regex success.
+  Dependencies: Startup .3/.4/.5; .1.19 diagnostic intake.
+  Evidence: Exported match_runtime_regex_slot in Matching175-205 matches first and returns nothing on miss before _normalize_parse_mode. Both scan and integer7 therefore reject for input x but silently miss for y with pattern x. Ordinary runtime_match rejects both inputs; four valid seek/consume controls remain correct. docs/knowledge/julia-selected-slot-mode-validation-gap.md preserves28 assertions.
+  Children: .2.12.1 preflight repair; .2.12.2 direct-dependent/public proof.
+  Acceptance: Invalid mode names/kinds fail before regex execution on every valid selected slot, preserving legitimate no-match, seek/consume behavior, authored slot identity and established index/cursor diagnostic precedence. This low-level matcher parameter is separate from the removed global engine/CLI parse mode.
+  Verification: `pending` repair.
+  Commit: `pending`
+
+- ID: `JULIA-STARTUP-READING.2.12.1`
+  Status: `pending`
+  Goal: Normalize the low-level selected-slot mode before matching.
+  Dependencies: Startup prerequisites and .1.19 committed.
+  Acceptance: Add independent RED/GREEN invalid-name and invalid-kind hit/miss cases, empty input and valid-mode controls. Establish index/cursor precedence from existing matcher contracts, then reuse the shared normalizer before matching; preserve every valid regex and structural identity result.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-STARTUP-READING.2.12.2`
+  Status: `pending`
+  Goal: Recur matching preflight and its callers without reintroducing global mode.
+  Dependencies: .2.12.1 and startup prerequisites.
+  Acceptance: Prove exported ordinary/selected matcher agreement, duplicate authored slots, compiled rule-local seek/consume callers and existing generated/emitted carriers. Reconcile matching documentation and tests; run designated canonical proof only where public/admission scope requires it. Keep the parser/CLI global mode removal intact.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `JULIA-STARTUP-READING.3`
   Status: `pending`
   Goal: Independently close Julia reading and route Lua startup reading.
@@ -1055,7 +1088,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.19` | `pending` | Complete Interpreter9116-9285 and Matching1-509; read RecognitionTransaction1-821 after clean .1.18. |
+| 1 | `JULIA-STARTUP-READING.1.20` | `pending` | Complete RecognitionTransaction822-1057, SemanticObservation1-130 and SourceLocation1-646; read StagedAstEnrichment1-488. |
 
 ## Decisions
 
@@ -1079,6 +1112,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Verification Log
 
+- `2026-09-11` .1.19: Julia .1.19 completes Interpreter and Matching and reads RecognitionTransaction1-821: 19/52 groups, 26,925 fragments /983,846 bytes and twenty-four complete files. Existing matching60/diagnostics7/slots121/recognition207/gap319 assertions pass (714 plus selection1); low-level selected-slot mode diagnostic28 isolates miss-before-validation. New .2.12 owns mode preflight; startup .38 retains transaction misuse census despite the positive Julia invalidation guard. Neutral recognition138/250/58 and gap63/public34 pass. All prior repairs, source, history and ADR0115 controls remain. Julia .1.20 is next; no full component/canonical gate or dependency build.
 - `2026-09-11` .1.18: Julia .1.18 reads Interpreter7616-9115: 18/52 groups, 25,425 fragments /937,035 bytes and twenty-two complete files. Existing core4/capture2/scope3/cursor17/marks13/diagnostic82/logical232/typed127/write406 assertions pass (886 plus selection1); slice diagnostics pass174 Julia and44 Perl assertions. Typed integer clipping is correct; new .2.11 owns input_slice arity, .2.9 retains float conversion and startup .60.2 owns measured reference count fallbacks. Neutral logical26/typed231/write105 mutations pass. All prior repairs, source, history and ADR0115 controls remain. Julia .1.19 is next; no full component/canonical gate or dependency build.
 - `2026-09-11` .1.17: Julia .1.17 reads Interpreter6116-7615: 17/52 groups, 23,925 fragments /889,323 bytes and twenty-two complete files. Existing scalar-text5/numeric4/string-numeric14/array2/hash1/tree2/uniform61/mutation496 assertions pass (585 plus selection1); numeric/range diagnostics pass128 Julia and64 Perl assertions. New .2.9/.2.10 own finite-number loss/wrapping and unsafe range arithmetic; startup .55.2/.60.2 retain cross-backend coordination. Neutral numeric55/18 and uniform11/7/6/8 pass. All prior repairs, source, history and ADR0115 controls remain. Julia .1.18 is next; no full component/canonical gate or dependency build.
 - `2026-09-11` .1.16: Julia .1.16 reads Interpreter4616-6115: 16/52 groups, 22,425 fragments /841,618 bytes and twenty-two complete files. Existing array2/hash1/function9/tree2/callable125/contextual118/construction239/mutation496 assertions pass (992 plus selection1); nine native/reconstructed callback cases pass84 diagnostic assertions. New .2.8.1/.2.8.2 own false helper-name recursion and lost bound callback identity. Neutral callable23, mutation167+592 and write105 checks pass. All prior repairs, source, history and ADR0115 controls remain. Julia .1.17 is next; no full component/canonical gate or dependency build.
@@ -1104,6 +1138,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Commit Log
 
+- `2026-09-11` .1.19: `JULIA-STARTUP-READING.1.19 - complete matching reading and own selected-slot mode validation`.
 - `2026-09-11` .1.18: `JULIA-STARTUP-READING.1.18 - read capture and storage boundaries and own input slice arity`.
 - `2026-09-11` .1.17: `JULIA-STARTUP-READING.1.17 - read helper boundaries and own numeric and range repairs`.
 - `2026-09-11` .1.16: `JULIA-STARTUP-READING.1.16 - read callable execution and own callback identity repair`.
@@ -1127,6 +1162,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Changelog
 
+- `2026-09-11` .1.19: Completes interpreter/matching reading, owns selected-slot mode preflight and preserves authority-prefix comprehension with prior repairs intact.
 - `2026-09-11` .1.18: Reads capture/storage boundaries, owns input_slice arity and extends conversion/reference-count review; preserves correct typed integer clipping.
 - `2026-09-11` .1.17: Reads helper boundaries, owns separate numeric/range repairs and reconciles current split teaching; all prior repairs remain open.
 - `2026-09-11` .1.16: Reads callable/scope/mutation/fluent execution and owns helper callback recursion identity repair; prior defects remain open.

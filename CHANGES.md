@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.19 - complete matching reading and own selected-slot mode validation
+
+Complete Interpreter/Matching and read RecognitionTransaction1-821: 1,500
+fragments /46,811 baseline-identical bytes. Existing714 and mode diagnostic28
+assertions plus neutral checks pass. Own input-dependent mode validation under
+.2.12, reconcile authority limits and preserve exact prior source/history.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.18 - read capture and storage boundaries and own input slice arity
 
 Read Interpreter7616-9115: 1,500 fragments /47,712 baseline-identical bytes.
