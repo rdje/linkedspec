@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.37 completes MCP admission and dispatch consumers and reads stdio1-229: 37/52 groups, 53,925 fragments /1,880,598 bytes and fifty-three complete files. Existing binding53/dispatch145/stdio170/admission257 pass625 assertions, including the actual focused owners referenced by admission markers. Neutral transport35/10/10/76, admission5/5/6/6/141 and check-only generated binding120030 bytes pass. Source distinguishes all20 native identity cases, real registry/lifecycle proof and focused cancellation/failure seams. Stdio source after229 remains unread. No new confirmed defect or closure; Julia patterns .2.4, shared precedence .36, budget .82 and all prior repairs remain. Knowledge72065/72000 initially blocked landing;68 checkpoint lines are preserved exactly in the task with three card pointers, reaching72000. Julia .5 owns finite capacity planning before .1.38; no full component/canonical gate or dependency build ran. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .5.1 prepares two finite evidence-capacity controls for containment .13: Knowledge lines72000→79000 and decision lines12000→13000, with an explicit .13-only focused-verification request awaiting the director. No limit or exception is applied. The36 unconstrained reading commits add5279 Knowledge lines/315921 bytes/25 files, peak316/17674/1;20 finite units project78320 lines, while all other controls retain capacity. Decision records11997/12000 require a486-line reserve; full current-plus-reserve proof fits both proposed ceilings. Julia reading remains37/52 groups,53925 lines/1880598 bytes and53 complete files; .1.38 awaits verified capacity disposition. All source, prior evidence and repairs remain unchanged. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.82` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `JULIA-STARTUP-READING.1.37 - complete MCP admission and dispatch consumer reading` — Julia .1.37 completes MCP admission and dispatch consumers and reads stdio1-229: 37/52 groups, 53,925 fragments /1,880,598 bytes and fifty-three complete files. Existing binding53/dispatch145/stdio170/admission257 pass625 assertions, including the actual focused owners referenced by admission markers. Neutral transport35/10/10/76, admission5/5/6/6/141 and check-only generated binding120030 bytes pass. Source distinguishes all20 native identity cases, real registry/lifecycle proof and focused cancellation/failure seams. Stdio source after229 remains unread. No new confirmed defect or closure; Julia patterns .2.4, shared precedence .36, budget .82 and all prior repairs remain. Knowledge72065/72000 initially blocked landing;68 checkpoint lines are preserved exactly in the task with three card pointers, reaching72000. Julia .5 owns finite capacity planning before .1.38; no full component/canonical gate or dependency build ran.
+- `JULIA-STARTUP-READING.5.1 - propose finite Julia evidence capacity` — Julia .5.1 prepares two finite evidence-capacity controls for containment .13: Knowledge lines72000→79000 and decision lines12000→13000, with an explicit .13-only focused-verification request awaiting the director. No limit or exception is applied. The36 unconstrained reading commits add5279 Knowledge lines/315921 bytes/25 files, peak316/17674/1;20 finite units project78320 lines, while all other controls retain capacity. Decision records11997/12000 require a486-line reserve; full current-plus-reserve proof fits both proposed ceilings. Julia reading remains37/52 groups,53925 lines/1880598 bytes and53 complete files; .1.38 awaits verified capacity disposition. All source, prior evidence and repairs remain unchanged.
 
 ## Next Action
 
-- `JULIA-STARTUP-READING.5` — Plan finite remaining-Julia Knowledge capacity from clean .1.37 before .1.38; preserve evidence and prepare any required director decision.
+- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.13` — Await director decision on the Julia .5.1 proposal Knowledge72000→79000 and decisions12000→13000 and .13-only focused exception; apply only after approval, then resume Julia .1.38.
 
 ## Recent Completions
+
+- `2026-09-11` — `JULIA-STARTUP-READING.5.1` commits a finite two-scalar evidence-capacity proposal and explicit .13-only verification request; all limits remain unchanged pending director approval.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.37` reads1,500 fragments /54,668 bytes;625 MCP assertions and neutral/generator checks pass; all repair owners remain.
 
@@ -48,8 +50,6 @@
 - `2026-09-11` — `JULIA-STARTUP-READING.1.24` reads1,500 fragments /41,154 bytes; Unicode regeneration passes; both mappings and cased ranges read, all repairs open.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.23` reads1,500 fragments /41,147 bytes; neutral Unicode regeneration passes; lower mapping complete, upper prefix read, all repairs open.
-
-- `2026-09-11` — `JULIA-STARTUP-READING.1.22` reads1,500 fragments /49,643 bytes;657 existing and51 resource assertions pass; diagnostic-byte repair .2.14 remains open.
 
 ## History
 

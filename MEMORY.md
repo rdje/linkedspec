@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `fa4045540c229c6290131e88b96f383dbf7842af` — clean thirty-sixth Julia reading handoff.
-- latest_completed_leaf: `JULIA-STARTUP-READING.1.37 - complete MCP admission and dispatch consumer reading`; exact group and focused proof complete; prior repairs remain pending.
-- active_work_unit: none; `JULIA-STARTUP-READING.5` is next before .1.38.
-- next_action: Activate Julia .5 from clean HEAD; measure finite remaining-activity Knowledge need and prepare any required capacity decision before .1.38.
+- activation_commit: `d06a6f7ff32934271ab041f7d1bac12d0f479a39` — clean Julia .1.37 reading handoff.
+- latest_completed_leaf: `JULIA-STARTUP-READING.5.1 - propose finite Julia evidence capacity`; measured, verified proposal; implementation awaits the director.
+- active_work_unit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.13` — pending explicit capacity/verification decision.
+- next_action: Obtain director decision on the Julia .5.1 proposal Knowledge72000→79000, decisions12000→13000 and .13-only focused exception; if approved implement exact controls, then resume Julia .1.38.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
-- in_flight_uncommitted: none; no running jobs. Julia .2.1-.2.25, shared budget .82, book .41.9 and all prior repairs remain pending.
-- blockers: Knowledge at72000/72000 lines after exact .1.37 checkpoint routing; .5 owns capacity disposition. Startup prerequisites and repairs remain.
+- in_flight_uncommitted: none; no running jobs. The concrete proposal is committed; no limit or exception has been applied.
+- blockers: Knowledge72000/72000 and decisions11997/12000; the Julia .5.1 proposal awaits the required director decision. .13 implementation and Julia .1.38 remain gated.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

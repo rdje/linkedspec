@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.5.1 - propose finite Julia evidence capacity
+
+Propose Knowledge lines72000→79000 and decision lines12000→13000 for20 finite remaining-Julia units.
+Two growth models and a three-decision reserve fit; unchanged file/byte/task/map controls retain all
+source, cards, history and current ceilings. the Julia .5.1 proposal/.13 await explicit director
+approval, including a .13-only focused-verification exception; no limit is applied.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.37 - complete MCP admission and dispatch consumer reading
 
 Read1,500 fragments /54,668 bytes, reaching37/52 groups and53 complete files.

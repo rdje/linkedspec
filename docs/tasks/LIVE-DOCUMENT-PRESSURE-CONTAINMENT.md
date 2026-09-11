@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-- Status: `done` / .12 approved finite Julia history allowance
+- Status: `active` / .13 Knowledge capacity awaiting director decision
 - Roadmap lane: `Repository architecture / documentation sustainability`
 - Created: `2026-08-09`
-- Last updated: `2026-09-11` (.12 verified under the explicit one-time focused exception)
+- Last updated: `2026-09-11` (.13 proposal intake; .12 remains complete)
 - Owner: repo-local workflow
 
 ## Goal
@@ -58,10 +58,10 @@ or the README `.4` adoption/closeout that installs the guard.
 ## Task Tree
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-  Status: `done` (.0-.12 complete; Julia reading remains 3/52)
+  Status: `active` (.0-.12 complete; .13 awaits decision; Julia reading37/52)
   Goal: Replace measured oversized routed destinations with bounded views over durable stores.
   Depends on: `README-STABILITY-POLICY.4.2`
-  Children: `.0-.12`
+  Children: `.0-.13`
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0`
   Status: `done` (2026-08-09; committed atomically at `dc8dd896` as 176/300; brief cleared; clean proof passed;
@@ -453,8 +453,21 @@ or the README `.4` adoption/closeout that installs the guard.
   Verification: Exactly six approved registry scalars change under ADR0115. New segment 4980-f04b37b1dab6 preserves clean 107170da7 CHANGES lines 239-455, blob 5874d5cb391064543217d41e1d2ab5e5cf6bb686, 217 lines/13128 bytes and SHA-256 f04b37b1dab6628be794d952afa082fec6ff5b244c999081267f882673cbd4fe. Every prior manifest record and archive remains exact; full root reconstruction restores one normalized terminal LF. Roots are 248/14891 and 396/24673; collections 33/48987/3557028 and 28/26220/2798551. Actual production functions pass 44 threshold and 22 authorization/mutation executions on detached inputs. docs/knowledge/julia-reading-history-capacity-admission.md holds self-contained recipes. Prior reading/repair evidence and all source identities remain; histories, Knowledge, memory, rendered book and all nine normal doctrines govern focused admission.
   Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.12 - admit approved Julia history capacity`
 
+- ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.13`
+  Status: `pending`
+  Goal: Implement only the approved finite Julia Knowledge/decision capacity disposition.
+  Dependencies: JULIA-STARTUP-READING.5.1 committed; explicit director decision on exact controls and any .13-only verification exception; clean handoff.
+  Scope: Proposed knowledge_cards.max_total_lines72000→79000 and decisions.max_total_lines12000→13000; every other registry scalar, contract, member, guard, source and history byte remains unchanged. A newly added accepted/indexed execution ADR is required before the change.
+  Acceptance: Preserve all cards/questions and exact source/task/history evidence. Recompute the entire finite remaining-Julia reserve; exercise actual inclusive/overflow and authorization validators, all nine normal doctrines, Knowledge, memory, both history checks and rendered book. Canonical receipt remains required unless the director explicitly approves the proposed .13-only focused exception; no later or push waiver and no unauthorized dependency builds. Close Julia .5 only after verified landing and resume .1.38 from clean HEAD.
+  Proposal: docs/tasks/JULIA-STARTUP-READING.md, section Capacity proposal .5.1.
+  Verification: `pending`; no increase or exception is authorized by intake.
+  Commit: `pending`
+
 ## Current Frontier
 
+Pending .13 awaits the director decision on the committed Julia .5.1 proposal. Julia .1.38 remains gated on capacity disposition.
+
+Historical .12 handoff (preserved):
 Complete through .12. After the verified commit, empty brief and clean proof,
 resume `JULIA-STARTUP-READING.1.4` in its separate active reading tree.
 

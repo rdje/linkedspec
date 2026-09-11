@@ -1562,19 +1562,33 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.5`
-  Status: `pending`
-  Goal: Resolve Knowledge capacity for the finite remaining Julia reading activity without discarding unique evidence.
+  Status: `active`
+  Goal: Resolve Knowledge and governing-decision capacity for the finite remaining Julia reading activity without discarding unique evidence.
   Dependencies: .1.37 committed with clean repository and empty brief; retain all startup prerequisites.
   Evidence: The .1.37 normal hook rejects Knowledge aggregate72065/72000 lines; clean .1.36 was71997. Routing68 lines of new reading-checkpoint detail to this owning task and retaining three fact-card pointers permits exact72000-line landing without changing controls.
-  Acceptance: Measure all Knowledge/task/map controls and the remaining15 reading children plus bounded closeout/capacity work. Prove existing evidence and question retrieval survive; assess lawful deduplication/routing first. If more capacity is required, prepare exact old/new limit objects, finite forecast and required director decision before infrastructure implementation. Do not infer a verification exception from ADR0115; make any proposed exception explicit. Resume .1.38 only after verified capacity disposition.
-  Verification: `pending`
+  Acceptance: Measure all Knowledge/decision/task/map controls and the remaining15 reading children plus bounded closeout/capacity work. Prove existing evidence and question retrieval survive; assess lawful deduplication/routing first. If more capacity is required, prepare exact old/new limit objects, finite forecast and required director decision before infrastructure implementation. Do not infer a verification exception from ADR0115; make any proposed exception explicit. Resume .1.38 only after verified capacity disposition.
+  Children: .5.1 owns the concrete finite proposal; containment .13 implements only after the required director decision.
+  Verification: .5.1 proposal complete; director decision and .13 implementation remain pending. The proposal specifies two scalars and explicit .13-only focused exception; no increase has been applied.
   Commit: `pending`
+
+- ID: `JULIA-STARTUP-READING.5.1`
+  Status: `done`
+  Goal: Prepare a concrete finite Knowledge and governing-decision capacity proposal for the remaining Julia activity.
+  Dependencies: .1.37 committed; clean repository and empty brief.
+  Activation commit: `d06a6f7ff32934271ab041f7d1bac12d0f479a39`.
+  Verification tier: `focused`
+  Focused checks: Exact registry census, reading-history growth and independent remaining-activity forecast, source/evidence preservation, Knowledge, memory, both history checks, rendered book and normal doctrines.
+  Canonical trigger: `none` — proposal and decision preparation only; no limit, source, gate, dependency or infrastructure change.
+  Acceptance: Identify exact old/new controls, prove why lawful routing alone cannot preserve continued Knowledge retrieval, bound remaining reading and closeout needs, compare proportional verification options and retain the required director decision. Do not implement unapproved capacity or imply an inherited exception.
+  Proposal: docs/tasks/JULIA-STARTUP-READING.md, section Capacity proposal .5.1, tracked under its task owner because both fact and decision collections are full; implementation .13 awaits explicit director approval and a newly added accepted execution ADR.
+  Verification: Exact clean .1.37 census,36-commit blob and independent numstat line census, Model A6320/Model B4472, decision reserve486 lines/30000 bytes/3 records and full actual-candidate-plus-reserve proof pass. Registry, guards, all Julia source, existing Knowledge cards/questions, task nodes and immutable history remain unchanged except owned current pointers/new proposal intake. Knowledge stays72000; every non-line control stays unchanged. Knowledge regeneration, memory, both pressure checks, rendered book and all normal doctrines govern landing; no canonical gate or dependency build.
+  Commit: `JULIA-STARTUP-READING.5.1 - propose finite Julia evidence capacity`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.5` | `pending` | Plan finite remaining-Julia Knowledge capacity from clean .1.37 before .1.38; preserve evidence and prepare any required director decision. |
+| 1 | `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.13` | `pending` | Await director decision on the Julia .5.1 proposal Knowledge72000→79000 and decisions12000→13000 and .13-only focused exception; implement only after approval, then resume .1.38. |
 
 ## Decisions
 
@@ -1601,6 +1615,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Source repairs retain startup prerequisites; those dependencies do not block source reading.
 
 ## Verification Log
+
+- `2026-09-11` .5.1: Julia .5.1 prepares two finite evidence-capacity controls for containment .13: Knowledge lines72000→79000 and decision lines12000→13000, with an explicit .13-only focused-verification request awaiting the director. No limit or exception is applied. The36 unconstrained reading commits add5279 Knowledge lines/315921 bytes/25 files, peak316/17674/1;20 finite units project78320 lines, while all other controls retain capacity. Decision records11997/12000 require a486-line reserve; full current-plus-reserve proof fits both proposed ceilings. Julia reading remains37/52 groups,53925 lines/1880598 bytes and53 complete files; .1.38 awaits verified capacity disposition. All source, prior evidence and repairs remain unchanged.
 
 - `2026-09-11` .1.37: Julia .1.37 completes MCP admission and dispatch consumers and reads stdio1-229: 37/52 groups, 53,925 fragments /1,880,598 bytes and fifty-three complete files. Existing binding53/dispatch145/stdio170/admission257 pass625 assertions, including the actual focused owners referenced by admission markers. Neutral transport35/10/10/76, admission5/5/6/6/141 and check-only generated binding120030 bytes pass. Source distinguishes all20 native identity cases, real registry/lifecycle proof and focused cancellation/failure seams. Stdio source after229 remains unread. No new confirmed defect or closure; Julia patterns .2.4, shared precedence .36, budget .82 and all prior repairs remain. Knowledge72065/72000 initially blocked landing;68 checkpoint lines are preserved exactly in the task with three card pointers, reaching72000. Julia .5 owns finite capacity planning before .1.38; no full component/canonical gate or dependency build ran.
 
@@ -1663,6 +1679,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Commit Log
 
+- `.5.1`: `JULIA-STARTUP-READING.5.1 - propose finite Julia evidence capacity`.
+
 - `.1.37`: `JULIA-STARTUP-READING.1.37 - complete MCP admission and dispatch consumer reading`.
 
 - `.1.36`: `JULIA-STARTUP-READING.1.36 - read logical mutation and MCP contract consumers`.
@@ -1713,6 +1731,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Decomposition: `SESSION-STARTUP-READING.3.5.0 - freeze exact bounded Julia reading plan`.
 
 ## Changelog
+
+- `2026-09-11`: Completed .5.1 from cleand06a6f7ff; proposed finite Knowledge capacity and .13-only verification exception are reviewable in the Julia .5.1 proposal; no limits change and director decision remains pending.
 
 - `2026-09-11`: Completed .1.37 from cleanfa4045540; MCP admission/dispatch complete, stdio prefix read,625 assertions and neutral/binding checks pass; exact Knowledge checkpoint routing resolves the initial hook overflow, all prior evidence/repairs remain and .5 capacity planning precedes .1.38.
 
@@ -1839,3 +1859,178 @@ canonical frame/raw encoding and the deterministic before_wire_emit server seam.
 Test bodies after229 remain unread. The complete stdio consumer runs with dispatch,
 binding and admission as direct-dependent focused proof, not additional reading
 credit. Exact replay is in [[julia-mcp-implementation-admission]].
+
+## Capacity proposal .5.1
+
+### Proposed finite Julia Knowledge and decision capacity
+
+- Date: 2026-09-11
+- Status: proposed; not an accepted execution authorization
+- Owner: `JULIA-STARTUP-READING.5.1`; implementation `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.13`
+
+### Context and preserved landing
+
+At clean `d06a6f7ff32934271ab041f7d1bac12d0f479a39`, Julia reading is37/52 groups:
+53,925 baseline lines /1,880,598 bytes and53 complete files. Fifteen reading children
+remain, followed by independent closeout. Full codebase reading is still No.
+
+The first .1.37 hook rejected72,065 Knowledge lines against72,000. Its68 newly added
+reading-checkpoint lines belong to layer B and were retained byte-exact under
+`Reading evidence .1.37` in `docs/tasks/JULIA-STARTUP-READING.md`. Three direct card
+pointers preserve retrieval. The relocated bytes have SHA-256
+1197c7e2f1564872268a6d2dbd3f863ed2adc9404d9ba791c558207ec595c7ce.
+All previous card bytes, source, archive bytes and controls remain unchanged; the
+normal commit passes all nine doctrines at exactly72,000 Knowledge lines.
+
+That one legitimate routing correction provides no remaining Knowledge line capacity.
+Further new structural findings require readable, question-indexed fact records.
+Moving those facts into arbitrary task prose or hiding files from the census would
+not establish a controlled Knowledge reserve. Splitting cards cannot reduce aggregate
+lines. No sufficient removable duplication has been established; deleting unique
+facts or packing prose into dense lines is not an acceptable capacity plan.
+
+### Finite need and two calculations
+
+Use the36 unconstrained reading commits `.1.1-.1.36`, ending at
+`fa4045540c229c6290131e88b96f383dbf7842af`; exclude intervening capacity commits.
+They add5,279 Knowledge lines /315,921 bytes /25 files. Largest per-slice net growth
+is316 lines /17,674 bytes /one file. The last ten add1,928 Knowledge lines.
+The cap-constrained .1.37 routing is deliberately not a predictor of normal growth.
+
+Reserve20 units:15 remaining reading children, this proposal, approved admission,
+independent coverage audit, reading closeout and one contingency. Closeout must
+create any needed bounded children before implementation. This reserve includes
+current proposal and admission evidence; it does not authorize runtime repairs,
+Lua reading, unlimited future work or an automatic later increase.
+
+Model A charges the observed per-unit maxima to all20 units:6,320 Knowledge lines.
+Model B uses the last-ten reading mean for15 children plus five peak-sized support
+units:15×192.8 +5×316 =4,472 lines. Choose the larger6,320-line reserve and round
+the aggregate ceiling to79,000, leaving680 lines above Model A. These are explicit
+planning allowances, not bounds on unknown future findings; remeasure every slice.
+
+| Store at clean .1.37 | Current | Model A reserve | Projected | Ceiling |
+| --- | ---: | ---: | ---: | ---: |
+| Knowledge files | 1080 | 20 | 1100 | 1152, unchanged |
+| Knowledge lines | 72000 | 6320 | 78320 | **79000 proposed** |
+| Knowledge bytes | 5731518 | 353480 | 6084998 | 6291456, unchanged |
+| Task files | 103 | 2 planning slots | 105 | 128, unchanged |
+| Task lines | 84146 | 1440 | 85586 | 88000, unchanged |
+| Task bytes | 8817309 | 197500 | 9014809 | 9437184, unchanged |
+| Generated map lines | 18266 | 320 | 18586 | 20000, unchanged |
+| Generated map bytes | 5586062 | 72120 | 5658182 | 8388608, unchanged |
+| Decision files | 116 | 3 | 119 | 128, unchanged |
+| Decision lines | 11997 | 486 | 12483 | **13000 proposed** |
+| Decision bytes | 882469 | 30000 | 912469 | 2097152, unchanged |
+
+The task/map reserves use their respective observed36-slice per-unit maxima:
+72 lines /9,875 bytes for tasks and16 lines /3,606 bytes for the generated map.
+All member limits remain enforced. The final candidate must also fit after adding
+the complete reserve again, a conservative check that includes proposal overhead twice.
+Existing history capacity remains governed solely by ADR0115 and actual rollovers.
+
+### Proposed exact decision
+
+Authorize only these capacity changes before the remaining startup reading, with a
+newly added accepted/indexed execution ADR after the director's answer:
+
+- Routed surface: `knowledge_cards`
+- Previous routed limits: `{"max_bytes_per_file":65536,"max_files":1152,"max_lines_per_file":512,"max_total_bytes":6291456,"max_total_lines":72000}`
+- Proposed routed limits: `{"max_bytes_per_file":65536,"max_files":1152,"max_lines_per_file":512,"max_total_bytes":6291456,"max_total_lines":79000}`
+
+- Routed surface: `decisions`
+- Previous routed limits: `{"max_bytes_per_file":65536,"max_files":128,"max_lines_per_file":640,"max_total_bytes":2097152,"max_total_lines":12000}`
+- Proposed routed limits: `{"max_bytes_per_file":65536,"max_files":128,"max_lines_per_file":640,"max_total_bytes":2097152,"max_total_lines":13000}`
+
+The complete census also finds decision records at11,997/12,000 lines before this
+proposal. Adding a164-line proposed ADR plus two index lines would reach12,163,
+so the complete proposal is retained in this task owner and no new decision file
+is created before approval. Existing decision bytes and index remain unchanged.
+The five recent capacity ADRs0110/0111/0112/0113/0115 use59/65/62/76/96 lines;
+reserve three future decision records at160 lines each plus six index lines.
+The resulting12,483-line projection fits13,000 with517 lines of margin. Decision
+files project116+3=119/128 and bytes remain below the unchanged2,097,152 ceiling
+with a30,000-byte allowance. Per-record640-line /65,536-byte ceilings remain.
+This reserve covers the accepted execution decision and bounded capacity/closeout
+contingencies in the same Julia activity, not unrelated future decisions.
+
+Only the two `max_total_lines` fields change. Keep member512-line /65,536-byte limits, file count,
+aggregate bytes, all map/task/history/README controls, routing owner/lifecycle,
+verifier, guard code, source and immutable evidence unchanged. Stable responsibility
+remains `docs/knowledge/` and `docs/decisions/INDEX.md`, with containment .13 owning the exact transition.
+This proposal itself changes no limit and grants no source-reading completion.
+
+### Proposed .13-only verification exception
+
+README_POLICY requires a newly accepted indexed decision for a routed-limit increase;
+COMMIT.md and ADR0073 otherwise require canonical receipt-bound CI for infrastructure.
+The director's build-on-submodule-update requirement remains under startup .80;
+ADR0115's focused exception applies only to .12 and is not inherited here.
+
+Request an explicit exception for containment .13 only: change the two reviewed
+registry scalars and their decision/continuity records before full codebase reading;
+run actual inclusive/overflow and unauthorized-change validator controls, exact
+two-scalar/source/history/question preservation, full current-plus-reserve census,
+all nine normal doctrines, Knowledge synchronization, memory, both history pressure
+checks and rendered-book verification. No full canonical CI or dependency build at
+this narrow boundary. No standing hook/policy change, later milestone exception or
+push waiver follows. If the exception is not approved, canonical requirements remain
+in force and must be reconciled with the director's dependency-build constraint.
+
+### Implementation and handoff
+
+1. Record the explicit director decision and add a new accepted execution ADR.
+2. Containment .13 applies the exact reviewed scalars, recomputes every affected
+   control and finite reserve, and runs the approved verification tier with normal hooks.
+3. Commit the verified boundary, clear the brief and verify clean. Close Julia .5
+   only then; activate `.1.38` and continue PNT. All existing defects remain repair-owned.
+
+Before approval the proposal may be declined without any capacity rollback.
+After admission, restoring the old limit requires the resulting population to fit;
+never delete evidence or partially revert governance to force such a rollback.
+
+### Reproducible census and forecast
+
+```bash
+bash tools/project_data_run.sh python3 - <<'JULIA_KNOWLEDGE_CAPACITY'
+from pathlib import Path
+import glob,json
+records=[json.loads(x) for x in Path('doctrine/readme_stability/routes.jsonl').read_text().splitlines()]
+reserve={'knowledge_cards':{'files':20,'lines':6320,'bytes':353480},
+ 'task_evidence':{'files':2,'lines':1440,'bytes':197500},
+ 'knowledge_map':{'lines':320,'bytes':72120},
+ 'decisions':{'files':3,'lines':486,'bytes':30000}}
+for name,extra in reserve.items():
+ r=next(x for x in records if x.get('type')=='surface' and x.get('id')==name)
+ paths=sorted({p for pattern in r['members'] for p in glob.glob(pattern)})
+ assert all(Path(p).is_file() and not Path(p).is_symlink() for p in paths)
+ values={p:Path(p).read_bytes() for p in paths}
+ current={'files':len(paths),'lines':sum(v.count(b'\n') for v in values.values()),'bytes':sum(map(len,values.values()))}
+ limits=dict(r['limits'])
+ if name=='knowledge_cards':
+  assert limits=={'max_files':1152,'max_lines_per_file':512,'max_bytes_per_file':65536,'max_total_lines':72000,'max_total_bytes':6291456}
+  limits['max_total_lines']=79000
+ if name=='decisions':
+  assert limits=={'max_files':128,'max_lines_per_file':640,'max_bytes_per_file':65536,'max_total_lines':12000,'max_total_bytes':2097152}
+  limits['max_total_lines']=13000
+ for p,v in values.items():
+  override=r['member_limits'].get(p,{})
+  lc=override.get('max_lines',limits.get('max_lines_per_file',limits.get('max_lines')))
+  bc=override.get('max_bytes',limits.get('max_bytes_per_file',limits.get('max_bytes')))
+  assert v.count(b'\n')<=lc and len(v)<=bc,p
+ projected={}
+ for field,amount in extra.items():
+  key='max_'+field if name=='knowledge_map' else 'max_files' if field=='files' else 'max_total_'+field
+  projected[field]=current[field]+amount
+  assert projected[field]<=limits[key],(name,field,projected[field],limits[key])
+ print(name,json.dumps({'current':current,'reserve':extra,'projected':projected},sort_keys=True))
+assert 20*316==6320 and 15*1928//10+5*316==4472
+print('PASS actual candidate plus full finite reserve under the proposed two-scalar limits.')
+JULIA_KNOWLEDGE_CAPACITY
+```
+
+The historical sample is independently reproducible with `git log` restricted to
+subjects `JULIA-STARTUP-READING.1.1` through `.1.36` at the fixed sample commit, then
+summing per-commit parent/child blob line/byte deltas for registered Knowledge,
+task and generated-map paths. The proposal leaf records fresh execution of both
+that blob census and an independent `git diff --numstat` line census.

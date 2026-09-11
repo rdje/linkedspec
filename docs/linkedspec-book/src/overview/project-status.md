@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 37/52 owned groups. Knowledge capacity planning `.5` now precedes the thirty-eighth reading child; ADR0115 remains limited to history.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 37/52 owned groups. Knowledge proposal the Julia .5.1 proposal awaits the director before the thirty-eighth reading child; ADR0115 remains limited to history.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -303,10 +303,14 @@ are fully read; stdio test reading reaches line229. Coverage is53,925 lines
 assertions, including the actual focused cancellation and native-failure owners
 referenced by admission checks. Neutral transport, admission and generated-binding
 freshness checks pass. Native/MCP equality across20 cases does not close the
-separate semantic-budget finding. Knowledge has reached its existing line ceiling. The next owned step is `.5`,
-a finite capacity plan preserving all evidence before the remaining stdio,
-progressive, punctuation and recognition reading ranges. The completed checkpoint
-is retained in `docs/tasks/JULIA-STARTUP-READING.md` with Knowledge retrieval pointers.
+separate semantic-budget finding. The Julia `.5.1` proposal addresses two exhausted evidence stores:
+Knowledge lines72,000→79,000 and decision-record lines12,000→13,000. It reserves
+the remaining15 reading slices plus five support/closeout units, with room for
+three governing decisions. File count, bytes, member, task and generated-map
+limits stay unchanged. The complete proposal and its `.13`-only focused-verification
+request await the director; no limit or exception has been applied. The reviewable
+plan is retained under `Capacity proposal .5.1` in `docs/tasks/JULIA-STARTUP-READING.md`.
+Reading `.1.38` resumes after verified capacity disposition.
 
 The book build also reports a search index above10 MB. Startup `.41.9` owns
 measurement and correction of that growth while preserving useful search and
@@ -723,7 +727,7 @@ own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran f
 this reading closure; normal commit hooks remain enabled.
 
 Julia has read thirty-seven of 52 exact groups across 95 baseline entries;
-capacity planning `.5` precedes its thirty-eighth reading child, followed by the remaining Lua/supporting
+the director decision on the Julia .5.1 proposal precedes its thirty-eighth reading child, followed by the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,

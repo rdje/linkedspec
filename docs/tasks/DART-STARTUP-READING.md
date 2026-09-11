@@ -1568,7 +1568,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.5` | `pending` | Plan finite remaining-Julia Knowledge capacity from clean .1.37 before .1.38; preserve evidence and prepare any required director decision. |
+| 1 | `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.13` | `pending` | Await director decision on the Julia .5.1 proposal Knowledge72000→79000 and decisions12000→13000 and .13-only focused exception; implement only after approval, then resume Julia .1.38. |
 
 ## Decisions
 

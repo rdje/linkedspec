@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Finite Knowledge reserve follows measured Julia growth
+
+The36 unconstrained reading slices peak at316 Knowledge lines/17674 bytes/one card.
+Twenty units reserve6320 lines versus4472 under the recent-mean model;79000 retains
+680 lines of margin. Decision reserve486 fits13000; all other controls stay unchanged.
+The proposed .13-only exception is explicit and does not inherit ADR0115 authority.
+
 ## 2026-09-11 — MCP admission composes with executable focused seams
 
 Admission checks source markers for pre-emission cancellation and native failure;
