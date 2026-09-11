@@ -59,7 +59,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Dependencies: Startup .3.5.0 decomposition committed; each child starts from a clean prior handoff.
   Children: `.1.1-.1.52`, with exact scopes below.
   Acceptance: Every child records physical coverage, comprehension, Knowledge reconciliation, findings and focused proof before its commit. Retain all current-delta and interrupted-range evidence.
-  Verification: Julia .1.6 completes FunctionRegistry and the primary CLI, and reads CompiledSpec through 521: 6/52 groups, 8,571 fragments /296,130 bytes and twelve complete files. Registry 23, compiled state 41, root selection 79 and variadic 55 assertions pass (198 total); the ten-family primary CLI process checker passes. Canonical phase traces remain separate from native internal traces; current registry metadata and compiled-state boundaries reconcile with Knowledge. All source, earlier evidence, pending repairs and ADR0115 controls remain; Julia .1.7 is next, with no complete component/canonical gate or dependency build.
+  Verification: Julia .1.7 completes CompiledSpec and reads CorpusManifest through 161: 7/52 groups, 10,071 fragments /353,238 bytes and thirteen complete files. Existing recognition207, observation30, mutation496, write406 and manifest20 assertions pass (1,159 total); native/causal25 and reference11 diagnostic assertions isolate forbidden recognition writes and omitted structural observation edges. Pending .2.3.1-.2.3.3 own graph reconciliation, enforcement and carrier proof; reference E-only omission stays startup .27-owned. All sources, prior evidence, repairs and ADR0115 controls remain. Julia .1.8 is next; no complete component/canonical gate or dependency build.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.1.1`
@@ -165,14 +165,21 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Commit: `JULIA-STARTUP-READING.1.6 - read function registry CLI and compiled state`.
 
 - ID: `JULIA-STARTUP-READING.1.7`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Julia group 7 and reconcile its source evidence.
   Dependencies: `JULIA-STARTUP-READING.1.6` committed; empty brief and clean repository.
   Scope: `julia/src/compiler/CompiledSpec.jl` lines 522-1860; `julia/src/corpus/CorpusManifest.jl` lines 1-161
   Baseline evidence: 1500 fragments / 57108 bytes; ordered range SHA-256 `5699c12ffd786ae5a813d86ae2696b2f6d5114967e496777f49b02c002aaa89e`.
+  Activation commit: `e2f8edeceeaf5b59d5efa2ccc2ebe93dcb2fcc70`.
+  Verification tier: `focused`
+  Focused checks: Exact source/range reconstruction; existing recognition/observation/mutation/write/manifest suites; native causal and reference diagnostic controls; neutral recognition checker; Knowledge, memory, histories, rendered book and normal doctrines.
+  Canonical trigger: `none` — ordinary reading and repair intake; no executable contract, infrastructure or dependency change.
   Acceptance: Physically read every owned byte, inspect current deltas, reconcile Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit. Do not count truncated output or unread consumer suffixes.
-  Verification: `pending`
-  Commit: `pending`
+  Comprehension: Compiler validation traverses action payload carriers for nested writes and receiver mutation, normalizes ordered rule/edge/slot state and builds last-definition rule order and dependency regexes. The observation/progressive effect collectors use action expressions and call fixed points; action/blind targets are absent from the former, demonstrated by add/remove-edge causal controls. Generic recognition classification has no production caller in the source census. Descriptors serialize compiled structures; CorpusManifest1-161 defines typed records, result helpers and the CLI parser prefix.
+  Knowledge: New recognition-effect integration card records exact native, causal, neutral and Perl-reference replay. Corpus cards distinguish historical 99-case admission from current 105-fixture validation. Existing Perl lifecycle card extends the same no-edge E-only mode matrix.
+  Findings: Confirmed recognition binding-write persistence and structural observation-edge omission are owned by .2.3.1-.2.3.3; no repair is claimed. Perl ordinary E-only omission reuses startup .27.1-.27.3. Diagnostic extraction initially required correcting whitespace matching; final 11-assertion reference replay passes.
+  Verification: Two untruncated owned ranges total 1500 fragments /57108 baseline-identical bytes, digest 5699c12ffd786ae5a813d86ae2696b2f6d5114967e496777f49b02c002aaa89e. Recognition207, observation30, mutation496, write406 and manifest20 pass (1159 plus selected-set equality1); native17 plus causal8 and reference11 diagnostics pass. Neutral checker remains138 nodes/250calls/58mutations. Independent full coverage replay, prior source/task/history preservation and focused continuity/book/doctrine checks govern landing. No future reading credit, full Julia/canonical gate or dependency build.
+  Commit: `JULIA-STARTUP-READING.1.7 - read compiler and own recognition effect repair`.
 
 - ID: `JULIA-STARTUP-READING.1.8`
   Status: `pending`
@@ -629,7 +636,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Goal: Preserve disjoint repair ownership for every confirmed Julia finding.
   Dependencies: Findings from .1; source repair additionally requires startup .3/.4/.5.
   Acceptance: Reuse exact existing startup owners when applicable; otherwise add bounded repair children with source mechanism, reproduction, acceptance and unblock conditions. No finding is closed by reading alone.
-  Children: .2.1 callable-body selector validation; .2.2 attached-switch body/duplicate-default validation. Prior README findings retain startup .41.2/.41.3/.41.7.
+  Children: .2.1 callable-body selector validation; .2.2 attached-switch body/duplicate-default validation; .2.3 recognition-effect integration. Prior README findings retain startup .41.2/.41.3/.41.7.
   Verification: `pending` repairs; .1.3 owns the callable-body selector gap, and .1.4 confirms attached-switch projection omission and default replacement. Earlier documentation and helper-arity owners remain intact.
   Commit: `pending`
 
@@ -685,6 +692,40 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Verification: `pending`
   Commit: `pending`
 
+- ID: `JULIA-STARTUP-READING.2.3`
+  Status: `pending`
+  Goal: Enforce forbidden recognition effects before executing recognized child rules.
+  Dependencies: Startup .3/.4/.5; .1.7 diagnostic intake.
+  Evidence: Native Julia controls reject explicit call(Observer) but admit action/blind edges entering its observation-writing lifecycle. A recognized child writes seen=1 and rollback leaves [true,1]; the pure twin leaves [true,0]. classify_effects occurs only in its definition and direct fixture tests, while compiler special-effect closure omits structural rule edges. Bindings are outside the intended cursor/boundary/mark snapshot.
+  Children: .2.3.1 graph/contract reconciliation; .2.3.2 executable enforcement; .2.3.3 carrier/public proof.
+  Acceptance: Reject the closed forbidden effect vocabulary before effects, including transitive structural and explicit calls, without silently widening rollback to arbitrary bindings. Preserve pure recognition, false payloads, marks and cursor-only progress. No repair is implied by reading or passing the isolated classifier fixtures.
+  Verification: Pending repair; native diagnostic controls and source census belong to .1.7. The independent Dart defect remains under DART-STARTUP-READING.2.4.
+  Commit: `pending`
+
+- ID: `JULIA-STARTUP-READING.2.3.1`
+  Status: `pending`
+  Goal: Reconcile the neutral recognition effect vocabulary with every Julia executable path.
+  Dependencies: Startup .3/.4/.5; full compiler/runtime/authority reading; .1.7 intake committed.
+  Acceptance: Enumerate AST/helper effects and actual edge dispatch semantics, ordinary and structural rule calls, functions, callable blocks and generated carriers. Distinguish forbidden writes from allowed frame state, validate unknown/raw failures and compare existing reference behavior. Derive graph membership from executable producers; preserve the original admission and diagnostic evidence.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-STARTUP-READING.2.3.2`
+  Status: `pending`
+  Goal: Integrate complete recognition-effect validation before recognized execution.
+  Dependencies: .2.3.1; source-reading/policy prerequisites.
+  Acceptance: Add RED/GREEN direct and transitive forbidden-effect tests, including observed action/blind-edge gaps and persistent binding writes. Cover recursive rule/function paths, callable invocation, unknown effects and timing before operands or IO. Preserve pure actions, payload falsehood, explicit commit/rollback, invocation-local marks and progress; keep unrelated observation and progressive contracts compatible.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-STARTUP-READING.2.3.3`
+  Status: `pending`
+  Goal: Verify recognition-effect enforcement across supported carriers and reconcile public claims.
+  Dependencies: .2.3.2; source-reading/policy prerequisites.
+  Acceptance: Prove native, reconstructed, caller-constructed compiled, generated-plan and independently loaded emitted routes reject before effects. Exercise all neutral rejected families and pure controls, direct-dependent recognition/observation/staged tests and required canonical admission. Update Knowledge and the book to the exact proven scope without closing other backend repairs.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `JULIA-STARTUP-READING.3`
   Status: `pending`
   Goal: Independently close Julia reading and route Lua startup reading.
@@ -719,7 +760,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.7` | `pending` | Continue CompiledSpec through 1860 and begin CorpusManifest through 161 after clean .1.6. |
+| 1 | `JULIA-STARTUP-READING.1.8` | `pending` | Complete CorpusManifest, SpecLoader and McpContract in .1.8 after clean .1.7. |
 
 ## Decisions
 
@@ -743,6 +784,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Verification Log
 
+- `2026-09-11` .1.7: Julia .1.7 completes CompiledSpec and reads CorpusManifest through 161: 7/52 groups, 10,071 fragments /353,238 bytes and thirteen complete files. Existing recognition207, observation30, mutation496, write406 and manifest20 assertions pass (1,159 total); native/causal25 and reference11 diagnostic assertions isolate forbidden recognition writes and omitted structural observation edges. Pending .2.3.1-.2.3.3 own graph reconciliation, enforcement and carrier proof; reference E-only omission stays startup .27-owned. All sources, prior evidence, repairs and ADR0115 controls remain. Julia .1.8 is next; no complete component/canonical gate or dependency build.
 - `2026-09-11` .1.6: Julia .1.6 completes FunctionRegistry and the primary CLI, and reads CompiledSpec through 521: 6/52 groups, 8,571 fragments /296,130 bytes and twelve complete files. Registry 23, compiled state 41, root selection 79 and variadic 55 assertions pass (198 total); the ten-family primary CLI process checker passes. Canonical phase traces remain separate from native internal traces; current registry metadata and compiled-state boundaries reconcile with Knowledge. All source, earlier evidence, pending repairs and ADR0115 controls remain; Julia .1.7 is next, with no complete component/canonical gate or dependency build.
 - `2026-09-11` .1.5: Julia .1.5 completes ActionParser and CallableContract, and reads FunctionRegistry through 94: 5/52 groups, 7,071 fragments /248,648 bytes and ten complete files. Existing contextual 118 / registry 23 / variadic 55 assertions pass (196 total); eight native normalization outcomes also pass, including idempotence for all four valid forms. Normalization traverses retained switch and callable bodies, so prior selector/contract visitor gaps remain precisely scoped and repair-owned. Staged/progressive/nested-write facts and registry metadata reconcile with current source. All source, earlier evidence and ADR0115 controls remain; Julia .1.6 is next, with no complete component/canonical gate or dependency build.
 - `2026-09-11` .1.4: Julia .1.4 completes ActionContracts and reads ActionParser through 1138: 4/52 groups, 5,571 fragments /197,138 bytes and eight complete files. Existing parser 74 / resolver 40 / callable 482 assertions pass. Five four-carrier switch controls and ten causal resolver cases confirm retained-body omission and last-default replacement; .2.2.1/.2.2.2 own normative reconciliation, repair and carrier/public proof. The shared Perl oracle qualifies non-branch behavior; its initial E-only carrier reuses startup .27. All source bytes, prior repairs and approved ADR0115 capacity remain. Julia .1.5 is next; no complete component/canonical gate or dependency build.

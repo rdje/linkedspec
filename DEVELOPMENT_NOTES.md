@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia recognition effect integration gap
+
+The neutral classifier rejects binding_write but has no production caller;
+observation validation omits structural edges. Native writes survive rollback.
+Add/remove-edge controls isolate graph coverage; .2.3 owns enforcement before
+execution. Reference E-only output remains qualified by existing startup .27.
+
 ## 2026-09-11 — Julia primary phase tracing and native execution
 
 The primary command emits canonical phase records separately from rich native

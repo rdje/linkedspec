@@ -2233,7 +2233,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas.
   Children: `.3.5.0` owns decomposition; JULIA-STARTUP-READING.1 owns 52 reading children and .3 owns closeout.
   Reading owner: `docs/tasks/JULIA-STARTUP-READING.md` retains exact scope/digest, comprehension and repair evidence. This startup node remains the prerequisite owner.
-  Verification: Julia .1.6 completes FunctionRegistry and the primary CLI, and reads CompiledSpec through 521: 6/52 groups, 8,571 fragments /296,130 bytes and twelve complete files. Registry 23, compiled state 41, root selection 79 and variadic 55 assertions pass (198 total); the ten-family primary CLI process checker passes. Canonical phase traces remain separate from native internal traces; current registry metadata and compiled-state boundaries reconcile with Knowledge. All source, earlier evidence, pending repairs and ADR0115 controls remain; Julia .1.7 is next, with no complete component/canonical gate or dependency build. Exact plan and all source identities remain frozen in the Julia owner.
+  Verification: Julia .1.7 completes CompiledSpec and reads CorpusManifest through 161: 7/52 groups, 10,071 fragments /353,238 bytes and thirteen complete files. Existing recognition207, observation30, mutation496, write406 and manifest20 assertions pass (1,159 total); native/causal25 and reference11 diagnostic assertions isolate forbidden recognition writes and omitted structural observation edges. Pending .2.3.1-.2.3.3 own graph reconciliation, enforcement and carrier proof; reference E-only omission stays startup .27-owned. All sources, prior evidence, repairs and ADR0115 controls remain. Julia .1.8 is next; no complete component/canonical gate or dependency build. Exact plan and all source identities remain frozen in the Julia owner.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.5.0`
@@ -2759,7 +2759,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     controls. Keep rule entry distinct from mode-driven matching. Do not label Julia wrong or impose a blanket
     own-regex prohibition from the existing Perl failure; ask the director if normative intent remains unresolved.
     Define the required handler/return cases and bounded implementation children before changing behavior.
-  Verification: `pending` — the existing lifecycle drift card already records the debt; `.31` reverified it.
+  Verification: `pending` — the existing lifecycle drift card records the debt; `.31` reverified it. Julia .1.7 adds the no-edge Child:AND E-only case: generated source has no authored E write/return; exact reference controls live in docs/knowledge/julia-recognition-effect-integration-gap.md.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.27.2`

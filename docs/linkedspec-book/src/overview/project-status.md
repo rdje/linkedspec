@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 6/52 owned groups; its seventh reading child is next, with approved ADR0115 capacity in place.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 7/52 owned groups; its eighth reading child is next, with approved ADR0115 capacity in place.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,12 +297,44 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 6/52 groups complete:** FunctionRegistry and the primary CLI
-are fully read; CompiledSpec is read through line 521. Cumulative coverage is
-8,571 lines /296,130 bytes and twelve complete files. Exact scopes remain in
-`docs/tasks/JULIA-STARTUP-READING.md`. The sixth group passes 23 registry,
-41 compiled-state, 79 root-selection and 55 variadic assertions. The ten-family
-primary process checker also passes; no complete Julia gate is claimed.
+**Julia reading is 7/52 groups complete:** CompiledSpec is fully read and
+CorpusManifest is read through line 161. Cumulative coverage is 10,071 lines /
+353,238 bytes and thirteen complete files. Exact scopes remain in
+`docs/tasks/JULIA-STARTUP-READING.md`. The seventh group passes 1,159 existing
+recognition, observation, mutation, write and manifest assertions, plus 25 native
+and causal diagnostic assertions and 11 Perl reference assertions. The current
+manifest validates 105 fixtures; this slice does not rerun full corpus execution.
+
+**Known Julia limitation — recognition effect enforcement:** a recognized child
+can currently write a binding, and recognition rollback does not undo that write.
+For example, this native Julia source returns `[true,1]`:
+
+```text
+Top::
+ I {
+  seen = 0
+  tx = recognition_checkpoint()
+  matched = recognize_once(tx, call(Child))
+  recognition_rollback(tx)
+  return(array(matched, seen))
+ }
+Child:AND
+ /x/
+ E { set(seen, 1); return(false) }
+```
+
+Recognition should reject this forbidden effect before entering the child.
+Replacing the child E body with `return(false)` leaves `[true,0]` and provides a
+pure control. The Perl reference rejects the writing recognition case at compile
+time. Its ordinary E-only call has a separate known handler omission, so that
+result does not establish value parity with Julia.
+
+Julia also misses observation effects reached through structural action or blind
+edges, although equivalent explicit calls reject them. Lifecycle records and an
+in-process add/remove-edge control establish the missing graph connection.
+Repair `.2.3.1-.2.3.3` owns graph reconciliation, enforcement and supported-carrier
+proof after startup prerequisites. Existing passing suites do not close this gap.
+Exact evidence and replay: `docs/knowledge/julia-recognition-effect-integration-gap.md`.
 
 The primary command compiles before opening a deferred input file, reports a
 stable failing phase, and writes the direct result as recursively sorted JSON.
@@ -404,8 +436,8 @@ SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` sti
 own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
-Julia has read six of 52 exact groups across 95 baseline entries;
-its seventh physical reading child is next, followed by the remaining Lua/supporting
+Julia has read seven of 52 exact groups across 95 baseline entries;
+its eighth physical reading child is next, followed by the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,

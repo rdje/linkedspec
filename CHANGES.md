@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.7 - read compiler and own recognition effect repair
+
+Read compiler suffix and corpus prefix: 1,500 fragments /57,108 bytes.
+Existing suites pass1,159 assertions; native/causal25 and reference11 isolate
+recognition effect gaps. Own repair .2.3, reconcile corpus and E-handler facts,
+and sync book/frontiers. Preserve source/history; next Julia .1.8 after commit.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.6 - read function registry CLI and compiled state
 
 Read registry/CLI and compiled-state prefix: 1,500 fragments /47,482 bytes.

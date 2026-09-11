@@ -43,3 +43,9 @@ in `perl/LinkedSpec/HandlerVariantEmitter.pm` at 100–115 returns undef without
 `perl/LinkedSpec/SpecEntry.pm` at 143–186 and 287–295 passes E code without a usable handler for that shape.
 Julia's mode execution retains its own regex. These bounded observations require reconciling the intended
 mode/lifecycle contract; they do not establish that Julia is wrong or authorize implicit self-matching changes.
+
+Julia reading `.1.7` also probes a no-edge `Child:AND /x/ E { set(seen, 1); return(false) }`.
+The generated Child retains its preamble and declaration but omits the authored E write/return;
+`SpecEntry.pm:198` requires action code or an I body for the single-regex AND variant. This extends
+the concrete mode matrix of existing startup `.27.1-.27.3`, without a new repair root or parity claim.
+Exact reference and generated-source controls: [[julia-recognition-effect-integration-gap]].
