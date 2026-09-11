@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia typed slicing and count conversion boundaries
+
+Typed input slicing clips integer widths before addition, unlike array/string
+slices. Missing/extra input_slice operands bypass arity enforcement, and large
+float counts throw during Int conversion. Perl scientific-count fallback has
+separate host substr/drop semantics; startup .60.2 owns normative review/repair.
+
 ## 2026-09-11 — Julia numeric and range boundary mechanisms
 
 Integer literal parsing can throw; result normalization loses large finite

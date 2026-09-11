@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.18 - read capture and storage boundaries and own input slice arity
+
+Read Interpreter7616-9115: 1,500 fragments /47,712 baseline-identical bytes.
+Existing capture/storage886 and slice diagnostics174 Julia/44 Perl pass with
+neutral checks. Own input_slice arity under .2.11, extend numeric/count review
+and preserve correct typed integer clipping, book alignment and source/history.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.17 - read helper boundaries and own numeric and range repairs
 
 Read Interpreter6116-7615: 1,500 fragments /47,705 baseline-identical bytes.

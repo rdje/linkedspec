@@ -37,3 +37,15 @@ failed its 65,536-byte gate. This focused card preserves the new detail; the ori
 and replaces its long duplicated reverify recipe with the existing six-authority composition driver.
 That 33-line driver was read completely; this checkpoint does not claim a newly executed combined run.
 No limits, checker, runtime, public-book, or contract changed.
+
+## 2026-09-11 — measured floating-count fallback boundary
+
+Julia reading .1.18 compares input_slice(1,100000000000000000000.0) on xabc.
+Perl Get returns ab; call_spec_handler_subst and captured generated source retain
+SourceLocation::Runtime::source_slice_text. SourceLocation558-571 and a direct
+host control confirm scientific string 1e+20 fails the typed ASCII-integer guard,
+then host substr returns that same partial suffix. Generated drop_front instead
+rejects scientific spelling and resets the count to zero. These results are
+compatibility behavior, not a newly accepted count contract. Startup .60.2 now
+explicitly owns count-kind/range reconciliation and repair or early rejection.
+Exact paired diagnostics: [[julia-input-slice-arity-and-count-boundaries]].

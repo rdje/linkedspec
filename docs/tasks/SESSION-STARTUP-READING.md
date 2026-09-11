@@ -2233,7 +2233,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas.
   Children: `.3.5.0` owns decomposition; JULIA-STARTUP-READING.1 owns 52 reading children and .3 owns closeout.
   Reading owner: `docs/tasks/JULIA-STARTUP-READING.md` retains exact scope/digest, comprehension and repair evidence. This startup node remains the prerequisite owner.
-  Verification: Julia .1.17 reads Interpreter6116-7615: 17/52 groups, 23,925 fragments /889,323 bytes and twenty-two complete files. Existing scalar-text5/numeric4/string-numeric14/array2/hash1/tree2/uniform61/mutation496 assertions pass (585 plus selection1); numeric/range diagnostics pass128 Julia and64 Perl assertions. New .2.9/.2.10 own finite-number loss/wrapping and unsafe range arithmetic; startup .55.2/.60.2 retain cross-backend coordination. Neutral numeric55/18 and uniform11/7/6/8 pass. All prior repairs, source, history and ADR0115 controls remain. Julia .1.18 is next; no full component/canonical gate or dependency build. Exact plan and all source identities remain frozen in the Julia owner.
+  Verification: Julia .1.18 reads Interpreter7616-9115: 18/52 groups, 25,425 fragments /937,035 bytes and twenty-two complete files. Existing core4/capture2/scope3/cursor17/marks13/diagnostic82/logical232/typed127/write406 assertions pass (886 plus selection1); slice diagnostics pass174 Julia and44 Perl assertions. Typed integer clipping is correct; new .2.11 owns input_slice arity, .2.9 retains float conversion and startup .60.2 owns measured reference count fallbacks. Neutral logical26/typed231/write105 mutations pass. All prior repairs, source, history and ADR0115 controls remain. Julia .1.19 is next; no full component/canonical gate or dependency build. Exact plan and all source identities remain frozen in the Julia owner.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.5.0`
@@ -3849,6 +3849,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: `pending` — the original .60 intake measured primary Rust and public Perl; its captured
     diagnostic source alone did not credit large-count Perl execution or structured carriers.
     Julia .1.17 adds native/reconstructed and executed Perl large-count controls: drop_front throws and slice/substr truncate incorrectly in Julia while the paired Perl controls succeed. Julia .2.10 owns repair; exact replay and carrier limitations live in docs/knowledge/julia-large-number-and-slice-boundaries.md.
+    Julia .1.18 confirms safe typed clipping at Int maximum but conversion failure for Float64 1e20. Perl falls back to host substr and returns ab for input_slice(1,1e20) on xabc; its drop_front instead treats scientific spelling as invalid and leaves [1,2]. This owner must reconcile accepted count kinds/ranges and repair or explicitly reject unsafe fallback behavior; exact causal replay is in docs/knowledge/julia-input-slice-arity-and-count-boundaries.md. Julia .2.9 owns conversion, .2.11 arity.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.60.3`

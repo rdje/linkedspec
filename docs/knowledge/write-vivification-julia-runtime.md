@@ -41,3 +41,17 @@ and source-emission boundaries.
 Related: [[write-vivification-neutral-contract]], [[terse-nested-value-path-assignment]],
 [[julia-runtime-core-value-capture-helpers]], [[write-vivification-receiver-mutation-direction]],
 and ADR `0036`.
+
+## 2026-09-11 — exact publication and read-path reading
+
+Julia .1.18 reads Interpreter7616-9115, including nested-write implementation.
+Segments and RHS run before root lookup/copy; selector validation then precedes
+isolated dense construction. Missing storage creates the first selected kind;
+existing wrong-kind/null containers fail, and only successful construction is
+published. Structured failures preserve segment index, evaluated prefix path and
+authored Unicode span. Reads use separate non-creating traversal. Bare-store
+publication clears older typed stores, while an existing root retains its selected
+storage channel. Receiver-identity rejection remains the separate mutation guard.
+The existing write consumer passes406 assertions; exact adjacent typed/diagnostic/
+logical/capture proof is recorded in [[julia-runtime-cursor-boundary-helpers]].
+No new nested-write failure was established and no repair is closed by reading.

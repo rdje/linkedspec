@@ -45,3 +45,46 @@ Related facts: [[julia-runtime-matching-state]], [[julia-runtime-rule-interprete
 [[julia-runtime-value-control-tree-helpers]], [[julia-runtime-diagnostics-trace-split]],
 [[cursor-boundary-lookahead-helper]],
 [[dart-runtime-backtrack-cursor-helpers]].
+
+## 2026-09-11 — current typed adapters and exact source reading
+
+Julia .1.18 reads Interpreter7616-9115. Anonymous/named capture projection validates
+typed same-source spans before advancing marks. Named arguments stay symbolic;
+mark_copy deletes a target when its source mark is absent. Cursor changes update
+both live and register state, while boundary lookahead selects the earliest usable
+rule without consuming that boundary and falls back to EOF only for usable rules.
+
+The historical overflow-safe input-slicing statement is now measured at Int maximum:
+width is clipped to remaining source length before addition. Separate wrong-arity
+and large-float conversion failures remain open in
+[[julia-input-slice-arity-and-count-boundaries]]. Portable authoring uses exactly
+input_slice(start, length), or input_text() for the whole input.
+
+Exact focused replay (886 assertions plus one selection equality):
+
+```bash
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no - <<'JULIA_READ18_SUITE'
+using LinkedSpecJulia, JSON3, Test
+const REPO_ROOT=pwd()
+const CORPUS_ROOT=joinpath(REPO_ROOT,"tests","corpus")
+const selected=Set(["Runtime core value stores and capture helpers","Governed anonymous and named capture fixtures","Named capture mark scope and character projection","Runtime cursor controls and boundary capture"])
+const seen=Set{String}()
+for expression in Meta.parseall(read("julia/test/runtests.jl",String)).args
+ expression isa Expr || continue
+ if expression.head==:function
+  Core.eval(Main,expression)
+ elseif expression.head==:macrocall && expression.args[1]==Symbol("@testset") && expression.args[3] in selected
+  Core.eval(Main,expression);push!(seen,expression.args[3])
+ end
+end
+@test seen==selected
+include("julia/test/complete_named_mark_contract_test.jl")
+include("julia/test/diagnostic_output_contract_test.jl")
+include("julia/test/logical_helper_contract_test.jl")
+include("julia/test/typed_source_location_contract_test.jl")
+include("julia/test/write_vivification_contract_test.jl")
+JULIA_READ18_SUITE
+bash tools/run_python_project_data.sh tools/check_logical_helper_contract.py
+bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py
+bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py
+```

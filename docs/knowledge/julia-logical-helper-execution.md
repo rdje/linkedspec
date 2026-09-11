@@ -29,8 +29,9 @@ typed policy used by those helpers and by lazy conditions:
 - an inert typed codeblock is true without invocation.
 
 The original codeblock truthiness row was proven with a parsed `ActionBlock` at the runtime boundary. Julia now
-also constructs exact inert callable-codeblock literals under `FUTURE-PARITY-BACKLOG.11.6.1`; construction does
-not imply dynamic invocation, which remains `.11.6.2`.
+also constructs exact inert callable-codeblock literals under `FUTURE-PARITY-BACKLOG.11.6.1`; construction did
+not by itself imply dynamic invocation; the later `.11.6.2` implementation is now
+current, with the separate callback-identity gap owned by Julia startup `.2.8`.
 
 Direct call dispatch preserves static precedence by resolving registered user functions first. For built-in
 logical calls it then validates one-plus positional `and`/`or` and exact-one positional `not` before evaluating
@@ -52,3 +53,11 @@ trace probes isolated Perl's compile-once Regex flag `o`, which a later dedicate
 Related facts: [[logical-helper-neutral-contract]], [[logical-helper-five-backend-audit]],
 [[cross-backend-condition-truthiness-drift]], [[julia-generated-source-scaffold]],
 [[julia-helper-regex-flag-normalization]], [[julia-callable-codeblock-literal-state]].
+
+## 2026-09-11 — current truth seam reading
+
+Julia .1.18 reads _runtime_truthy: null, false, numeric zero and empty string/array/
+hash are false; other values are true. Eager helper semantics remain separate from
+lazy control selection. The current neutral consumer passes232 assertions;
+neutral governance remains8/0 with26 drift mutations. Exact focused replay is in
+[[julia-runtime-cursor-boundary-helpers]]. No logical contract change is made.
