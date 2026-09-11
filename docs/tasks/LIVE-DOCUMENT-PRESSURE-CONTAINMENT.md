@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-- Status: `done` / .11 admits approved engineering-history capacity
+- Status: `pending` / .12 Julia history allowance proposed; .11 remains complete
 - Roadmap lane: `Repository architecture / documentation sustainability`
 - Created: `2026-08-09`
-- Last updated: `2026-09-11` (.11 closes under the explicit one-time focused-verification exception)
+- Last updated: `2026-09-11` (.12 proposed by Julia .4.1; no implementation authorization assumed)
 - Owner: repo-local workflow
 
 ## Goal
@@ -58,10 +58,10 @@ or the README `.4` adoption/closeout that installs the guard.
 ## Task Tree
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-  Status: `done` (.0-.11 complete; Dart reading remains 46/55)
+  Status: `pending` (.0-.11 complete; .12 awaits decision; Julia reading remains 3/52)
   Goal: Replace measured oversized routed destinations with bounded views over durable stores.
   Depends on: `README-STABILITY-POLICY.4.2`
-  Children: `.0-.11`
+  Children: `.0-.12`
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0`
   Status: `done` (2026-08-09; committed atomically at `dc8dd896` as 176/300; brief cleared; clean proof passed;
@@ -440,9 +440,22 @@ or the README `.4` adoption/closeout that installs the guard.
   Execution boundary: On 2026-09-11 the director explicitly granted a one-time canonical-receipt exception for .11 using passing focused checks, to avoid the current gate’s repeated PGEN/RGX builds. Normal commit hooks and all nine doctrines remain enabled; no full CI, dependency build or canonical receipt is claimed. All future verification boundaries retain their existing requirements.
   Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.11 - admit approved engineering-history member`
 
+- ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.12`
+  Status: `pending`
+  Goal: Admit one finite remaining-Julia history allowance under the exact reviewed decision.
+  Dependencies: Clean JULIA-STARTUP-READING.4.1; director decision on six proposed capacity controls and the explicit one-time canonical-receipt boundary. No earlier exception grants this leaf.
+  Scope: change_history max_files 32→36 and its manifest max_lines 31→35/max_bytes 17615→19919; engineering_notes max_files 28→32 and its manifest max_lines 27→31/max_bytes 16384→18678. Every root, segment, aggregate, owner, route, lifecycle, verifier, schema and historical byte remains unchanged.
+  Acceptance: Add accepted indexed exact old/new limit ADR(s), remeasure current inputs, change only the six authorized registry scalars, and prove old-source/manifest/archive/query preservation. Exercise the actual routing validator for unchanged rejection and exact authorized admission boundaries, both histories, Knowledge, memory, rendered book and all nine normal doctrines. Only use the proposed focused/receipt exception if explicitly granted; otherwise canonical infrastructure proof remains required. Perform governed rollovers only when required, preserving their exact records and source coordinates. Commit clean, clear brief, close Julia .4 and resume .1.4; no future/push waiver, parser repair, CI change or dependency build authorization.
+  Verification: `pending`. Proposal: docs/knowledge/julia-reading-history-capacity-proposal.md; independent 55-record dual-axis models give four rollovers per surface within unchanged aggregate limits. The receipt exception is requested, not granted.
+  Commit: `pending`
+
 ## Current Frontier
 
-This tree closes through .11 under the director’s explicit one-time focused-verification exception. After the commit, empty brief and clean proof, resume `DART-STARTUP-READING.1.47`. Dart reading remains 46/55; all remaining reading, repair and future canonical gates remain in force.
+| Order | Leaf | Status | Why next |
+| --- | --- | --- | --- |
+| 1 | `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.12` | `pending` | Exact Julia history proposal awaits capacity and verification authorization. |
+
+Historical .11 handoff (preserved): This tree closes through .11 under the director’s explicit one-time focused-verification exception. After the commit, empty brief and clean proof, resume `DART-STARTUP-READING.1.47`. Dart reading remains 46/55; all remaining reading, repair and future canonical gates remain in force.
 
 ## Decisions
 

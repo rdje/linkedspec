@@ -10,6 +10,15 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Finite dual-axis Julia history envelope
+
+The largest prior Dart reading records are 10 change lines/669 bytes and 13 note
+lines/1411 bytes. Model 55 future records at 14 lines/2048 bytes each; byte pressure
+triggers later rollovers before line pressure, so both axes must be simulated.
+Four slots each suffice in that envelope; engineering aggregate forecast 26976
+leaves 24 lines. The proposal changes six indexing controls only; source-function
+cross-check and every byte reconstruction pass. No new CI exception is assumed.
+
 ## 2026-09-11 — Julia deferred-body structural validation gap
 
 The selector visitor groups explicit/contextual callables with inert error nodes

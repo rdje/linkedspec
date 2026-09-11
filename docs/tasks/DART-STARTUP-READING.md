@@ -1566,7 +1566,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.4` | `pending` | Read remaining ActionContracts and first ActionParser range after clean .1.3; preserve room for capacity intake. |
+| 1 | `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.12` | `pending` | Await the exact capacity and one-time verification decision; no registry change before authorization. Julia .1.4 follows its clean admission. |
 
 ## Decisions
 

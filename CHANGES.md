@@ -10,6 +10,18 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.4.1 - prepare finite history capacity and verification decision
+
+Prepare a finite allowance for remaining Julia reading and closeout.
+Independent Python and production-Perl models agree on four rollovers per history.
+Propose change files 32→36 and manifest lines 31→35 /bytes 17615→19919.
+Propose engineering files 28→32 and manifest lines 27→31 /bytes 16384→18678.
+Every root, segment, aggregate, route and verifier limit remains unchanged.
+Prior manifest/archive bytes and archived-history query hashes are verified.
+The 55-record, 14-line/2-KiB envelope remains a forecast, with per-leaf checks.
+Containment .12 owns implementation and its requested one-time receipt exception.
+No allowance is granted; Julia .1.4 resumes after that reviewed clean boundary.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.3 - read action projection and own callable selector gap
 
 Read 1,500 fragments /41,401 bytes and isolate callable-body selector omission.
