@@ -62,3 +62,14 @@ four doctrines, and exact 1,613,088-KiB cleanup preserving 517 Pgen artifacts pl
 Related facts: [[julia-semantic-query-traversal]], [[julia-semantic-query-public-api]],
 [[julia-semantic-query-authority-map]], [[julia-semantic-static-projection-plan]],
 [[julia-semantic-call-staged-projection-plan]], [[semantic-introspection-neutral-contract]].
+
+## 2026-09-11 — query prefix reading and fresh composition
+
+Julia .1.27 physically reads SemanticQuery1-1370. Typed constructors and raw
+validation converge on one detached projection, with exact request/nested keys,
+ordered filters, duplicate rejection, integer/Boolean distinctions and source
+policy checks. Tuple-backed response values use distinct object/array wrappers;
+JSON conversion detaches them. The kernel handles every operation and canonical
+primary stream; final normalization/freezing helpers remain unread. Nine existing
+suites pass1063 assertions. Matching fixtures do not cover the paired budget
+counterexamples in [[semantic-query-budget-contract-gaps]]; shared .82 owns them.

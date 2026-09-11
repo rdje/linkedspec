@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.26 completes SemanticCallProjection and SemanticCompilationOutcome and reads SemanticIndex1-513: 26/52 groups, 37,425 fragments /1,316,130 bytes and thirty-two complete files. Fresh semantic1,063 and diagnostic92 assertions pass; three public queries cite grouped/whitespace matcher text for real action calls. New Julia .2.15 owns source correlation; startup .67.2 retains the null aggregate binding source despite correct Julia array-call traversal. Neutral semantic6/20/128 passes. All prior repairs, source, history and ADR0115 controls remain. Julia .1.27 is next; no full component/canonical gate or dependency build. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
-- Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.81` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.27 completes SemanticIndex and reads SemanticQuery1-1370: 27/52 groups, 38,925 fragments /1,368,638 bytes and thirty-three complete files. Fresh semantic1,063 and budget26 assertions pass; six full Julia/neutral responses agree while exposing explain relation/depth overruns and a premature page-budget warning. Shared startup .82.1-.82.4 own contract expectations, neutral repair, bounded backend implementation and transport/public proof. Neutral semantic6/20/128 passes. All prior repairs, source, history and ADR0115 controls remain. Julia .1.28 is next; no full component/canonical gate or dependency build. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+- Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.82` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `JULIA-STARTUP-READING.1.26 - read semantic source authority and own regex call correlation` — Julia .1.26 completes SemanticCallProjection and SemanticCompilationOutcome and reads SemanticIndex1-513: 26/52 groups, 37,425 fragments /1,316,130 bytes and thirty-two complete files. Fresh semantic1,063 and diagnostic92 assertions pass; three public queries cite grouped/whitespace matcher text for real action calls. New Julia .2.15 owns source correlation; startup .67.2 retains the null aggregate binding source despite correct Julia array-call traversal. Neutral semantic6/20/128 passes. All prior repairs, source, history and ADR0115 controls remain. Julia .1.27 is next; no full component/canonical gate or dependency build.
+- `JULIA-STARTUP-READING.1.27 - read query policy and own shared budget contract gaps` — Julia .1.27 completes SemanticIndex and reads SemanticQuery1-1370: 27/52 groups, 38,925 fragments /1,368,638 bytes and thirty-three complete files. Fresh semantic1,063 and budget26 assertions pass; six full Julia/neutral responses agree while exposing explain relation/depth overruns and a premature page-budget warning. Shared startup .82.1-.82.4 own contract expectations, neutral repair, bounded backend implementation and transport/public proof. Neutral semantic6/20/128 passes. All prior repairs, source, history and ADR0115 controls remain. Julia .1.28 is next; no full component/canonical gate or dependency build.
 
 ## Next Action
 
-- `JULIA-STARTUP-READING.1.27` — Read SemanticIndex514-643 and SemanticQuery1-1370 after clean .1.26; preserve repairs.
+- `JULIA-STARTUP-READING.1.28` — Read SemanticQuery1371-1587, SemanticRuntimeProjection1-329 and SemanticStaticProjection1-954 after clean .1.27; preserve repairs.
 
 ## Recent Completions
+
+- `2026-09-11` — `JULIA-STARTUP-READING.1.27` reads1,500 fragments /52,508 bytes;1,063 existing and26 budget assertions plus six neutral comparisons pass; shared .82 remains open.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.26` reads1,500 fragments /51,253 bytes;1,063 existing and92 diagnostic assertions pass; semantic source repair .2.15 remains open.
 
@@ -48,8 +50,6 @@
 - `2026-09-11` — `JULIA-STARTUP-READING.1.13` reads1,500 fragments /46,530 bytes;743 existing assertions and neutral checks pass; governed notes rollover preserves213 lines exactly.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.12` reads1,500 fragments /45,686 bytes;272 existing assertions plus64 native/12 neutral diagnostics pass; startup .37 and Julia .2.5 retain repairs.
-
-- `2026-09-11` — `JULIA-STARTUP-READING.1.11` reads1,500 fragments /52,503 bytes;327 existing assertions and neutral staged/public/MCP checks pass; no repair closed.
 
 ## History
 

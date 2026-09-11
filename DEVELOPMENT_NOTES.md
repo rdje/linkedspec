@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Shared semantic budget and paging inconsistencies
+
+Explain limits records but omits relation/depth bounds; page selection flags
+the whole remaining stream before taking a smaller page. Six complete Julia
+and neutral responses match, demonstrating why parity alone cannot sign off
+the declared budget contract. Shared .82 owns independent repair expectations.
+
 ## 2026-09-11 — Julia matcher decoys and semantic source ownership
 
 The whole-member call scanner refuses regex starts followed by group syntax

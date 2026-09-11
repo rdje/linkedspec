@@ -345,3 +345,13 @@ Option validation starts in this prefix; remaining option/integer/error-freezing
 source is unread. Fresh nine-suite semantic proof passes1063 assertions. New
 regex-source counterexamples are separate projection evidence under Julia .2.15:
 [[julia-semantic-regex-call-source-gap]]. No whole-project or repair closure follows.
+
+## 2026-09-11 — source-index reading complete
+
+Julia .1.27 reads SemanticIndex514-643 through EOF. Logical/entry identity is
+validated and copied; source coordinate conversion rejects Bool and translates
+Int overflow/inexact failures to governed range errors. Byte lookup remains
+within validated boundaries, and detached diagnostic tuples convert to fresh
+JSON values. All source-index bytes remain baseline-identical. Query prefix
+reading and shared budget inconsistencies are separately preserved in
+[[semantic-query-budget-contract-gaps]], owned by startup .82.

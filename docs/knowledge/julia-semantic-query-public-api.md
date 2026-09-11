@@ -72,3 +72,13 @@ Query itself still cannot execute, trace, install a sink, hash input, or inspect
 Related facts: [[julia-semantic-query-authority-map]], [[julia-semantic-query-kernel]],
 [[julia-semantic-query-traversal]], [[julia-semantic-introspection-authority-map]],
 [[semantic-introspection-neutral-contract]].
+
+## 2026-09-11 — public query budget limitations
+
+Julia .1.27 reads the public/typed/raw-neutral query prefix through1370. Fresh
+public and its eight dependent semantic suites pass1063 assertions. Separate
+six-case public controls pass26 assertions and equal the neutral evaluator,
+while exposing unchecked explain relation/depth costs and a premature list-page
+budget warning. Existing immutability/fixture success does not close those
+boundaries. Shared startup .82 owns the repair in
+[[semantic-query-budget-contract-gaps]]; query remains target-execution-free.

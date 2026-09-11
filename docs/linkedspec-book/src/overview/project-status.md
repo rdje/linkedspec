@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 26/52 owned groups; its twenty-seventh reading child is next, with approved ADR0115 capacity in place.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 27/52 owned groups; its twenty-eighth reading child is next, with approved ADR0115 capacity in place.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,13 +297,24 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 26/52 groups complete:** semantic call projection and
-compilation outcomes are fully read, with the source-index prefix through line
-513. Cumulative coverage is 37,425 lines /1,316,130 bytes and thirty-two complete
-files. The index copies strict UTF-8 source, applies disclosure ceilings and
-keeps compiler state behind detached accessors. Exact scopes remain in
-`docs/tasks/JULIA-STARTUP-READING.md`. All 1,063 existing semantic assertions,
-92 diagnostic assertions and the neutral semantic contract checks pass.
+**Julia reading is 27/52 groups complete:** source-index validation is fully
+read, followed by semantic query policy and evaluation through line 1,370.
+Coverage is 38,925 lines /1,368,638 bytes and thirty-three complete files.
+The query consumes a detached semantic projection, applies source redaction,
+pages the primary stream and reports logical costs. Existing semantic checks
+pass 1,063 assertions; six budget controls pass 26 assertions and match the
+neutral evaluator's complete responses. Exact scopes remain in
+`docs/tasks/JULIA-STARTUP-READING.md`.
+
+**Known shared limitation — semantic query budgets:** Julia and the neutral
+evaluator can return two explanation relations with `max_relations=1`, or
+explanation depth one with `max_depth=0`, while reporting completion without a
+warning. A one-record list page can also report that a two-record budget was
+reached. Shared startup `.82.1-.4` own explicit contract expectations, neutral
+repair, bounded backend implementation and transport/public proof. Agreement
+with the neutral evaluator does not close these inconsistencies. This is fresh
+Julia/neutral evidence; the other native backends still require their own census.
+Exact requests and causal proof: `docs/knowledge/semantic-query-budget-contract-gaps.md`.
 
 **Known Julia limitation — semantic call source correlation:** an action's
 `trim(" x ")` call can cite `trim(x)` inside a preceding grouped or
@@ -618,8 +629,8 @@ SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` sti
 own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
-Julia has read twenty-six of 52 exact groups across 95 baseline entries;
-its twenty-seventh physical reading child is next, followed by the remaining Lua/supporting
+Julia has read twenty-seven of 52 exact groups across 95 baseline entries;
+its twenty-eighth physical reading child is next, followed by the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,

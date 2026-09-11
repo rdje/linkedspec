@@ -160,6 +160,15 @@ Set a small page with `{"page":{"after_id":null,"limit":2}}`. If `page.complete`
 reaching `max_records`, `max_relations`, or `max_depth` returns a deterministic prefix, leaves `complete` false,
 and adds `semantic_query_budget_exceeded` with logical cost—not host timing or allocation data.
 
+Current limitation: Julia and the neutral evaluator do not fully enforce these
+boundaries. `explain` can exceed `max_relations` or `max_depth` without a warning;
+a list page can report `max_records` reached before its returned logical cost
+reaches that limit. Shared startup `.82.1-.4` own contract reconciliation and
+repair across the neutral evaluator, measured native backends and MCP. The exact
+six-case evidence is in `docs/knowledge/semantic-query-budget-contract-gaps.md`.
+Other backend recurrence is pending; matching the current oracle does not prove
+these boundaries correct.
+
 ### Runtime observation — capture first, query second
 
 Normal execution may receive an optional typed observation sink. After the invocation succeeds, pass the completed

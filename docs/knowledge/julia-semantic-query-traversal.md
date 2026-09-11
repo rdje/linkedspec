@@ -67,3 +67,17 @@ all Julia package/registry caches and the 517 Pgen evidence artifacts.
 Related facts: [[julia-semantic-query-kernel]], [[julia-semantic-query-authority-map]],
 [[julia-semantic-query-public-api]], [[julia-semantic-static-projection-plan]],
 [[semantic-introspection-neutral-contract]].
+
+## 2026-09-11 — bounded budget claims corrected by combined controls
+
+Julia .1.27 completes physical reading of paging/BFS/kernel policy through1370.
+Canonical filtered traversal and source redaction remain unchanged. The earlier
+page-only/no-diagnostic statement is limited by an untested combined boundary:
+page.limit1 plus max_records2 emits one record yet warns that max_records was
+reached. Explain also emits two relations under max_relations1 and depth1 under
+max_depth0 without a warning. All six full responses match the neutral evaluator.
+
+Exact26 native diagnostic assertions, paired response equality, source mechanisms
+and shared repair .82 are in [[semantic-query-budget-contract-gaps]]. The nine
+existing suites still pass1063. They do not establish the missing combined-limit
+contract. No source, fixture-hash or other-backend behavior change is claimed.
