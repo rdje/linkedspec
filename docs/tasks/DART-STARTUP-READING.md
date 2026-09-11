@@ -1568,7 +1568,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.46` | `pending` | Continue Julia observation/source/static reading after the clean .1.45 commit; Dart repairs retain their startup prerequisites. |
+| 1 | `JULIA-STARTUP-READING.1.47` | `pending` | Continue Julia static/admission/source reading after the clean .1.46 commit; Dart repairs retain their startup prerequisites. |
 
 ## Decisions
 

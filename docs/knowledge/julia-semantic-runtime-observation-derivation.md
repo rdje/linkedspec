@@ -74,3 +74,28 @@ static owners; derivation builds a fresh frozen projection without execution.
 Fresh capture66 and projection157 compose with the nine semantic suites at1286.
 Prior action-observer wrapping .2.6 remains open; finite derivation proof does
 not close it. Replay: [[julia-semantic-static-correlation-gaps]].
+
+## 2026-09-11 — observation and source consumer reading .1.46
+
+Julia .1.46 physically reads the complete runtime-projection consumer1–356.
+Its157 assertions check the twentieth typed/raw digest, three exact observed_as
+evidence links, caller-vector/JSON isolation and an unchanged base. Twenty-four
+malformed sequences reject; separate controls reject unrelated selecting edges
+and failed/already-observed bases. Static source-token denials remain distinct
+from dynamic instrumentation. All action-observer, budget and other repairs remain
+open; static-graph reading stops at109 without complete-consumer credit.
+
+From activation0ca6e996a8c9977f5110aaeb1593e4604eaaa708, the exact replay below
+passes kernel100, capture66, projection157, generated/emitted routes51 and source135:
+509 assertions including the actual isolated emitted host. Neutral semantic is
+6 groups/20 queries/128 mutations, rollout9/0 and admission6/0. The generated
+checker passes v1/10 families, one behavior case and its unchanged census100/0/0;
+its census is not a new execution of every backend. An initial mistaken Python
+checker path was rejected before execution; the existing Perl checker is the
+canonical command. No full package/canonical gate or dependency build ran.
+
+```bash
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include("julia/test/semantic_index_query_kernel_test.jl"); include("julia/test/semantic_index_runtime_observation_test.jl"); include("julia/test/semantic_index_runtime_projection_test.jl"); include("julia/test/semantic_index_runtime_observation_routes_test.jl"); include("julia/test/semantic_index_source_foundation_test.jl")'
+bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py
+bash tools/project_data_run.sh perl tools/check_generated_source_contract.pl
+```

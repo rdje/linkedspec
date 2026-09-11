@@ -364,3 +364,13 @@ entry and plan values, failure classification, detached JSON and private display
 Source occurrence-count/deny checks guard construction topology; they are not
 universal dynamic instrumentation. Six selected semantic suites pass759 together;
 exact replay is in [[julia-semantic-query-public-api]]. All repairs stay open.
+
+## 2026-09-11 — observation and source consumer reading .1.46
+
+Julia .1.46 physically reads the complete source-foundation consumer1–276.
+Its135 assertions cover copied text/bytes, malformed Unicode, logical options,
+UTF-8 byte/scalar/CRLF/combining spans, ceilings, occurrence lookup and detached
+errors. Invalid grammar now yields a failed-compilation snapshot with usable
+source accessors; the earlier source-only/no-parser stage is historical. Boundary
+and Bool/overflow rejection remain exact. Five selected suites pass509; replay is
+in [[julia-semantic-runtime-observation-derivation]]. No repair closes.

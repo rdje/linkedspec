@@ -69,3 +69,13 @@ generated source, runtime behavior, rollout 4/9, or native admission 3/6; exact 
 Related facts: [[julia-semantic-runtime-observation-direct-capture]],
 [[julia-semantic-runtime-observation-derivation]], [[julia-semantic-runtime-observation-authority-map]],
 [[julia-generated-source-v2-rule-local-cursor]].
+
+## 2026-09-11 — observation and source consumer reading .1.46
+
+Julia .1.46 completes routes150–489 after .1.45 read1–149. Its51 assertions execute
+public generated helpers, a fresh emitted module and a separate Julia host with
+repository-local scratch/depot state. Direct/traced values, trace/diagnostic
+independence, exact event digest, callback identity and exit-without-final behavior
+pass; deterministic emitted text retains contract v2/format2. These callback
+fixtures cover direct seams, not the known action-mediated failure. Five selected
+suites pass509; replay is in [[julia-semantic-runtime-observation-derivation]].

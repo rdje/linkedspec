@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 45/52 owned groups. ADR0116 admits the finite evidence allowance; ADR0115 remains limited to history.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read 46/52 owned groups. ADR0116 admits the finite evidence allowance; ADR0115 remains limited to history.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,17 +297,18 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is 45/52 groups complete:** staged-call, compilation and all
-three query consumers are fully read; observation-route reading reaches line 149.
-Coverage is 65,925 lines / 2,312,746 bytes and seventy-four complete files.
-Six selected suites pass 759 assertions. They cover typed compilation outcomes,
-22-record/25-relation staged provenance, nineteen exact static query responses,
-twenty-six rejected raw requests, source ceilings and detached values.
-For example, a Boolean page limit is rejected as an invalid integer, and changing
-a returned JSON dictionary leaves subsequent responses unchanged. These finite
-checks do not close the combined-budget limitation below or other pending repairs.
-Static source-token guards are distinct from dynamic callback tests. Runtime-route
-reading is partial; `.1.46` continues observation, source and static consumers.
+**Julia reading is 46/52 groups complete:** observation routes, runtime capture,
+observed projection and source-foundation consumers are fully read. Static-graph
+reading reaches line 109. Coverage is 67,425 lines / 2,368,497 bytes and
+seventy-eight complete files. Five selected suites pass 509 assertions, including
+actual generated-module execution in a fresh module and a separate Julia process.
+For input `ab\n`, the covered parser emits two slot events and a final success;
+a separate immediate-exit fixture keeps one slot event and omits the final success.
+Typed and raw queries over the derived snapshot match the twentieth canonical
+digest, while the base snapshot stays unchanged. Source tests distinguish UTF-8
+byte boundaries from scalar offsets and reject boundaries inside an emoji.
+Direct callback tests do not close the child-inside-action limitation below.
+All repairs remain open; `.1.47` continues static, admission and source consumers.
 
 **Approved Julia evidence capacity:** the director granted Knowledge lines
 72,000→79,000 and decision-record lines12,000→13,000 under ADR0116. The finite
@@ -737,8 +738,8 @@ SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` sti
 own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
-Julia has read forty-five of 52 exact groups across 95 baseline entries;
-its forty-sixth child follows, with the remaining Lua/supporting
+Julia has read forty-six of 52 exact groups across 95 baseline entries;
+its forty-seventh child follows, with the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,

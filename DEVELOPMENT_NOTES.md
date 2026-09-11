@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Observed snapshots and emitted execution retain distinct proof
+
+Runtime observation tests execute fresh modules and a separate Julia process.
+Derived snapshots match the twentieth query digest without mutating the base.
+Direct callback identity and warmed helper allocations are finite controls;
+child-inside-action repair .2.6 remains open. Focused509 assertions pass.
+
 ## 2026-09-11 — Semantic consumer proof stays bounded to its fixtures
 
 Compilation, staged provenance and query consumers pass759 assertions together.

@@ -110,3 +110,14 @@ include("julia/test/semantic_index_runtime_observation_test.jl")
 JULIA_RULE_READING14
 bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py
 ```
+
+## 2026-09-11 — observation and source consumer reading .1.46
+
+Julia .1.46 physically reads the complete capture consumer1–419. Its66 assertions
+cover exact immutable event fields, direct/loaded/reconstructed/generated entries,
+trace/diagnostic independence, Unicode scalar positions and UTF-8 input identity.
+Warmed absent-sink helpers allocate zero bytes in these controls; this does not
+measure total runtime overhead. Direct callback/diagnostic-wrapper identity and
+exit/missing-entry event omission are covered. Child-inside-action .2.6 remains
+open. Five complete selected suites pass509; exact replay is in
+[[julia-semantic-runtime-observation-derivation]].

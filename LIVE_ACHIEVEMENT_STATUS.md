@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.45 completes staged-call, compilation and three query consumers, then reads observation-routes1–149: 45/52 groups, 65925 lines/2312746 bytes and 74 complete files. Six suites pass759 assertions: compilation85, call core79, staged62, kernel100, traversal118 and public315. Neutral semantic6/20/128 remains rollout9/0 and admission6/0. Static hashes and rejected-request fixtures do not close shared budget .82 or other repairs. Runtime-route bodies remain partial; .1.46 continues observation/source/static consumers. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.46 completes observation routes, capture, projection and source-foundation consumers, then reads static-graph1–109: 46/52 groups, 67425 lines/2368497 bytes and 78 complete files. Kernel100, capture66, projection157, routes51 and source135 pass 509 assertions, including fresh emitted modules and an isolated Julia host. Neutral semantic6/20/128 and generated-source governance pass. Runtime events match the twentieth digest; action-callback .2.6 and shared budget .82 remain open with every other repair. Static-graph reading is partial; .1.47 continues static/admission/source consumers. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.82` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `JULIA-STARTUP-READING.1.45 - read semantic compilation and query consumers` — Julia .1.45 completes staged-call, compilation and three query consumers, then reads observation-routes1–149: 45/52 groups, 65925 lines/2312746 bytes and 74 complete files. Six suites pass759 assertions: compilation85, call core79, staged62, kernel100, traversal118 and public315. Neutral semantic6/20/128 remains rollout9/0 and admission6/0. Static hashes and rejected-request fixtures do not close shared budget .82 or other repairs. Runtime-route bodies remain partial; .1.46 continues observation/source/static consumers.
+- `JULIA-STARTUP-READING.1.46 - read runtime observation and source consumers` — Julia .1.46 completes observation routes, capture, projection and source-foundation consumers, then reads static-graph1–109: 46/52 groups, 67425 lines/2368497 bytes and 78 complete files. Kernel100, capture66, projection157, routes51 and source135 pass 509 assertions, including fresh emitted modules and an isolated Julia host. Neutral semantic6/20/128 and generated-source governance pass. Runtime events match the twentieth digest; action-callback .2.6 and shared budget .82 remain open with every other repair. Static-graph reading is partial; .1.47 continues static/admission/source consumers.
 
 ## Next Action
 
-- `JULIA-STARTUP-READING.1.46` — Continue observation, source and static consumer ranges after the clean .1.45 commit.
+- `JULIA-STARTUP-READING.1.47` — Continue static, admission and source consumer ranges after the clean .1.46 commit.
 
 ## Recent Completions
+
+- `2026-09-11` — `JULIA-STARTUP-READING.1.46` reads1500 fragments/55751 bytes;509 semantic assertions, isolated emitted-host and neutral checks pass; all repairs remain open.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.45` reads1500 fragments/59750 bytes;759 semantic assertions and neutral governance pass; all repairs remain open.
 
@@ -48,8 +50,6 @@
 - `2026-09-11` — `JULIA-STARTUP-READING.1.34` reads1,500 fragments /55,896 bytes;1017 existing/12 literal diagnostic assertions pass; .2.25 owns test coverage and exact213-line history rollover is preserved.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.33` reads1,500 fragments /53,501 bytes;1201 existing/162 diagnostic assertions plus selection1 pass; null-selector .2.23 and identifier .2.24 remain repair-owned.
-
-- `2026-09-11` — `JULIA-STARTUP-READING.1.32` reads1,500 fragments /54,143 bytes;2536 existing/118 diagnostic assertions plus selection1 pass; metadata .2.22 and balance .2.21.3 remain repair-owned.
 
 ## History
 

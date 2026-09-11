@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-11 — JULIA-STARTUP-READING.1.46 - read runtime observation and source consumers
+
+Read1500 fragments/55751 bytes, reaching46/52 groups and78 complete files.
+Five suites pass509 assertions, including actual isolated emitted execution;
+semantic/generated governance passes. Preserve direct/action callback and source
+coordinate distinctions, every open repair and the partial static-graph boundary.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.45 - read semantic compilation and query consumers
 
 Read1500 fragments/59750 bytes, reaching45/52 groups and74 complete files.
