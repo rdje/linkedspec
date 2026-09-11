@@ -125,3 +125,16 @@ The remaining dependency order is exact: completed `.2` owns positive/distinct d
 `.3` owns exhaustive negative rejection plus adjacent-grammar isolation. `.4` composes complete Julia/canonical
 proof and closes without semantic promotion. Julia semantic construction and the `Töp` privacy fixture remain
 unadmitted until that full route closure; this Unicode work does not move semantic rollout or native admission.
+
+## 2026-09-11 — all range rows physically read; classifier suffix still pending
+
+Julia .1.31 reads UnicodeRuleLabel1-822, including metadata and all806 pinned
+XID_Continue intervals from ASCII digits through U+E01EF. The final delimiter and
+classifier/prefix functions823-872 remain owned by .1.32; executing their tests
+adds no unread-source credit. Neutral regeneration preserves exact806/9/8/2.
+
+Fresh classifier metadata/boundary1619, complete-label23 and prefix32 assertions
+pass1674; parser/validator route7/54/8/8/4 adds81, for1755. Original frontend224
+adds a separate selection assertion. New body-fluent Unicode truncation belongs
+to its distinct method grammar and adapter, not the pinned rule-label ranges.
+Exact contrasts and repair ownership are [[julia-spec-lexical-boundary-defects]].

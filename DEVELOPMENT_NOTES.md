@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia lexical stages require distinct repair ownership
+
+A body adapter drops helper remainders; compact extraction counts quoted
+parentheses despite its separate literal-aware completeness scan; outer brace
+collection lacks regex state. EOF retains enough source for balance rejection.
+All806 Unicode ranges are read, with classifier functions still next.
+
 ## 2026-09-11 — Julia source retention precedes strict validation
 
 Unsupported suffixes disappear after recognized members unless a narrow raw

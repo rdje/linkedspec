@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `JULIA-STARTUP-READING`
-- Status: `active` / reading 30/52; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity, matching, staged, diagnostic, static, entry and selector-projection and member-suffix repairs pending
+- Status: `active` / reading 31/52; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity, matching, staged, diagnostic, static, entry and selector-projection and member-suffix and literal-boundary repairs pending
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.5`
 - Created: `2026-09-11`
 - Last updated: `2026-09-11`
@@ -43,7 +43,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Inventory SHA-256: `ca3cff4fe4c0e162448d6dbac82d89898673023951afaeced17d5b9a838ccd10`.
 - Ordered range SHA-256: `fde325f80ae7b56c5890d149fbc965c09890890e963a1fa9aab08e8c9d962337`.
 - Line coordinates are one-based, inclusive LF physical lines. Every child pins its range digest.
-- Current physical reading: 30/52 children, 43,425/75,984 lines and 1,517,252/2,693,170 bytes; thirty-eight complete files.
+- Current physical reading: 31/52 children, 44,925/75,984 lines and 1,557,946/2,693,170 bytes; thirty-nine complete files.
 - Exact replay and capacity assessment: `docs/knowledge/julia-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -59,7 +59,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Dependencies: Startup .3.5.0 decomposition committed; each child starts from a clean prior handoff.
   Children: `.1.1-.1.52`, with exact scopes below.
   Acceptance: Every child records physical coverage, comprehension, Knowledge reconciliation, findings and focused proof before its commit. Retain all current-delta and interrupted-range evidence.
-  Verification: Julia .1.30 completes spec/Ast and reads spec/Parser1-692: 30/52 groups, 43,425 fragments /1,517,252 bytes and thirty-eight complete files. Fresh original frontend224 plus lifecycle103 and suffix54 assertions pass; one exact test-selection assertion is separate. Unsupported inline/body/E suffixes disappear before default/strict validation; I/arrow/separate-raw controls reject. Julia .2.19 owns complete member consumption and supported-route/public repair. Explicit-return comparison corrects a probe expectation without a runtime defect. All prior repairs, source, history and ADR0115 controls remain. Julia .1.31 is next; no full component/canonical gate or dependency build.
+  Verification: Julia .1.31 completes spec/Parser and reads all806 UnicodeRuleLabel ranges through822: 31/52 groups, 44,925 fragments /1,557,946 bytes and thirty-nine complete files. Fresh Unicode1755/frontend224 and lexical116 assertions pass; selection1 is separate. Body-fluent adapter loss extends .2.19, compact quoted arguments belong to .2.20 and outer regex-brace truncation to .2.21. Eighteen controls distinguish seven limitations from eleven comparisons; unterminated blocks still reject. Shared .52.2/.54.3 retain counterpart ownership. Neutral Unicode806/9/8/2 passes. All prior repairs, source, history and ADR0115 controls remain. Julia .1.32 is next; classifier functions remain unread and no full component/canonical gate or dependency build ran.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.1.1`
@@ -573,14 +573,21 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Commit: `JULIA-STARTUP-READING.1.30 - read frontend state and own discarded member suffixes`.
 
 - ID: `JULIA-STARTUP-READING.1.31`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Julia group 31 and reconcile its source evidence.
   Dependencies: `JULIA-STARTUP-READING.1.30` committed; empty brief and clean repository.
   Scope: `julia/src/spec/Parser.jl` lines 693-1370; `julia/src/spec/UnicodeRuleLabel.jl` lines 1-822
   Baseline evidence: 1500 fragments / 40694 bytes; ordered range SHA-256 `778dbe14584f490c8ce5a2dc306f0dcafb4390a8d05bd1443280abfc4704cc61`.
+  Activation commit: `71f7b176ac7e1b7847688b81b32e11f3adc340db`.
+  Verification tier: `focused`
+  Focused checks: Exact source/range reconstruction; existing Unicode classifier/routes and original frontend testsets with exact helper selection; eighteen lexical controls, neutral Unicode regeneration; prior-task/source/history preservation, Knowledge, memory, book and normal doctrines.
+  Canonical trigger: `none` — ordinary source-reading evidence; no source, contract, format, infrastructure or dependency change.
   Acceptance: Physically read every owned byte, inspect current deltas, reconcile Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit. Do not count truncated output or unread consumer suffixes.
-  Verification: `pending`
-  Commit: `pending`
+  Comprehension: Completes named/ordinary regex, action/blind/bare edge, lifecycle, capture/split/conditional/fluent member dispatch; attached conditions and block remainder origins; standalone I normalization; brace/parenthesis/quote/regex helper roles and byte/scalar substring handling. Body fluents discard returned suffixes, compact extraction counts literal parentheses, and outer brace scanning lacks regex state. EOF preserves source for downstream balance rejection. Unicode17 contract metadata and all806 XID_Continue ranges from ASCII digits through E01EF are read; the closing delimiter and classifier functions after822 are unread.
+  Knowledge: New docs/knowledge/julia-spec-lexical-boundary-defects.md preserves exact18-case116-assertion replay, positive EOF boundaries and1979 existing assertions. Parser and Unicode facts gain dated evidence; .2.19 source-loss evidence and shared .52.2/.54.3 are extended without erasing prior claims.
+  Findings: .2.19/.2.19.1 now cover lower body-fluent adapter loss and empty/partial methods; new .2.20.1/.2 own compact argument lexical state and .2.21.1/.2 own outer regex braces/downstream balance/public proof. No new missing-brace acceptance defect: both EOF twins reject. All prior Julia/shared/startup repairs remain pending; no CLI/MCP/emitted or fresh counterpart diagnostic result is claimed.
+  Verification: Seven untruncated windows read1500 fragments /40694 baseline-identical bytes, ordered SHA778dbe14584f490c8ce5a2dc306f0dcafb4390a8d05bd1443280abfc4704cc61. Raw parser suffix3feb5b1f5a1e2d9b153da8599dad8bb8e3310c9b804988a8a5dae1ef40f4bff8 (21600 bytes), Unicode prefixb9f0f446cce6c07ab757ed6097afa9c807c85993b872684277719b95f1013a13 (19094). Classifier1674/routes81 plus original parser185/validator23/AST16 pass1979 existing assertions; selection1 is separate. Eighteen lexical controls pass116 with seven limitation cases and eleven comparisons. Neutral Unicode806/9/8/2 regenerates exact modules. Coverage/prior-node/source/history, Knowledge, memory, histories, rendered book and normal doctrines govern landing. No full component/canonical gate or dependency build.
+  Commit: `JULIA-STARTUP-READING.1.31 - complete parser reading and own literal boundary repairs`.
 
 - ID: `JULIA-STARTUP-READING.1.32`
   Status: `pending`
@@ -797,7 +804,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Goal: Preserve disjoint repair ownership for every confirmed Julia finding.
   Dependencies: Findings from .1; source repair additionally requires startup .3/.4/.5.
   Acceptance: Reuse exact existing startup owners when applicable; otherwise add bounded repair children with source mechanism, reproduction, acceptance and unblock conditions. No finding is closed by reading alone.
-  Children: .2.1 callable-body selector validation; .2.2 attached-switch body/duplicate-default validation; .2.3 recognition-effect integration; .2.4 MCP pattern full matching; .2.5 progressive identity full matching; .2.6 semantic callback action passthrough; .2.7 recognition attempt preflight; .2.8 helper callback recursion identity; .2.9 numeric boundaries; .2.10 safe slice/drop arithmetic; .2.11 input_slice arity; .2.12 selected-slot mode preflight; .2.13 staged pattern validation; .2.14 diagnostic byte retention; .2.15 semantic regex call source; .2.16 mixed slot correlation; .2.17 conditional entry explanation; .2.18 authored edge selector identity; .2.19 unparsed member suffix retention. Nested authority and diagnostic review retain startup .37.1/.37.2. Prior README findings retain startup .41.2/.41.3/.41.7.
+  Children: .2.1 callable-body selector validation; .2.2 attached-switch body/duplicate-default validation; .2.3 recognition-effect integration; .2.4 MCP pattern full matching; .2.5 progressive identity full matching; .2.6 semantic callback action passthrough; .2.7 recognition attempt preflight; .2.8 helper callback recursion identity; .2.9 numeric boundaries; .2.10 safe slice/drop arithmetic; .2.11 input_slice arity; .2.12 selected-slot mode preflight; .2.13 staged pattern validation; .2.14 diagnostic byte retention; .2.15 semantic regex call source; .2.16 mixed slot correlation; .2.17 conditional entry explanation; .2.18 authored edge selector identity; .2.19 unparsed member suffix retention; .2.20 compact argument lexical boundaries; .2.21 outer regex-brace scanning. Nested authority and diagnostic review retain startup .37.1/.37.2. Prior README findings retain startup .41.2/.41.3/.41.7.
   Verification: `pending` repairs; .1.3 owns the callable-body selector gap, and .1.4 confirms attached-switch projection omission and default replacement. Earlier documentation and helper-arity owners remain intact.
   Commit: `pending`
 
@@ -1302,6 +1309,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Evidence: Parser555-560 and650-655 retain an unparsed remainder only for an empty member, arrow token or unsupported I-lifecycle remainder. A valid self edge followed by garbage loses that suffix and passes strict validation; I suffixes remain raw and fail. Both inline and body loops require repair.
   Children: .2.19.1 complete member-consumption repair; .2.19.2 supported-route/public proof.
   Acceptance: Every authored non-comment byte must have a parsed or exact rejected-syntax owner. Preserve valid comments, recognized continuations and deliberate standalone-lifecycle compatibility; retain precise source/line diagnostics and do not weaken strict checks to bless discarded input.
+  Additional evidence: .1.31 reads Parser871-878: the body-fluent adapter discards the helper remainder before either body loop can retain it. .Töp() yields method T, .öp() yields an empty method, and hyphen/unknown suffixes compile after loss. The host-word adapter prefix differs from the ASCII method scanner; standalone raw tails still reject.
   Verification: `pending` repair; .1.30 owns bounded counterexamples and focused frontend recurrence.
   Commit: `pending`
 
@@ -1310,6 +1318,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Goal: Repair both Julia inline and body remainder-retention paths.
   Dependencies: Startup prerequisites and .1.30 committed.
   Acceptance: Add independent RED/GREEN regex, action-edge, fluent, lifecycle and block suffix controls; cover inline/body/multiline routes, valid comments and recognized continuations. Unsupported suffixes must survive to exact validation failure without dropping bytes, creating partial successful syntax or changing legitimate lifecycle/header behavior.
+  Additional acceptance: Propagate body-fluent helper remainders before repairing the outer loops; reject empty or partial method identities without widening the established method grammar. Cover .Töp(), .öp(), hyphen and unknown-tail controls from .1.31.
   Verification: `pending`
   Commit: `pending`
 
@@ -1318,6 +1327,58 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Goal: Close malformed-suffix recurrence across Julia public construction and generated routes.
   Dependencies: .2.19.1 and startup prerequisites.
   Acceptance: Recur default/strict validation, ordinary/staged compilation, loader/CLI, semantic construction and supported generated/reconstructed consumers with exact failure/no execution evidence; census counterparts under separate owners, retain valid examples, update the book and run designated canonical proof before closure.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-STARTUP-READING.2.20`
+  Status: `pending`
+  Goal: Preserve quoted and regex delimiters during compact fluent argument extraction.
+  Dependencies: Startup .3/.4/.5 and .1.31; coordinate Rust startup .52.2 and Dart .2.7.
+  Evidence: Parser1280-1299 counts quoted parentheses while the separate completeness scanner skips literals. Parser1257-1258 turns failed extraction into empty arguments/remainder: I.return("(") becomes return() and yields null; I.return(")") truncates and rejects. Braced twins return the literal correctly.
+  Children: .2.20.1 lexical extraction repair; .2.20.2 supported-route/public proof.
+  Acceptance: Preserve full argument boundaries and malformed text without empty-call substitution; keep legitimate quoted/regex/nested/multiline behavior and exact source diagnostics.
+  Verification: `pending` repair; .1.31 owns native controls.
+  Commit: `pending`
+
+- ID: `JULIA-STARTUP-READING.2.20.1`
+  Status: `pending`
+  Goal: Repair compact Julia fluent lexical extraction and failed-extraction retention.
+  Dependencies: Startup prerequisites and .1.31 committed.
+  Acceptance: Add independent RED/GREEN quoted open/close, escapes, regex delimiters, nested calls, attached conditions and multiline/malformed endings across every caller. Preserve full arguments and exact failures; coordinate .2.19 so forwarded remainders cannot still disappear.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-STARTUP-READING.2.20.2`
+  Status: `pending`
+  Goal: Close compact lexical recurrence through supported Julia consumers and public examples.
+  Dependencies: .2.20.1 and startup prerequisites.
+  Acceptance: Recur lifecycle/edge/continuation native, staged, generated/reconstructed, loader/CLI and semantic outcomes; coordinate counterpart repairs, update examples and run designated canonical proof before closure.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-STARTUP-READING.2.21`
+  Status: `pending`
+  Goal: Preserve regex-literal braces through Julia outer rule-block collection.
+  Dependencies: Startup .3/.4/.5 and .1.31; coordinate shared startup .54.3 and adjacent lifecycle scanners.
+  Evidence: Parser1205-1239 has quoted-string state but no regex state. I { return(matches("}", /}/)) } closes outer source at the regex brace, retains raw /)) } and fails compilation; ordinary /x/ executes true. Unterminated explicit/shorthand blocks remain rejected by balance validation.
+  Children: .2.21.1 lexical block scanner repair; .2.21.2 supported-route/public proof.
+  Acceptance: Preserve regex braces without confusing division, strings, nesting or malformed delimiters. Keep full source/line evidence and existing EOF rejection; audit downstream balance owners instead of repairing only the first failure.
+  Verification: `pending` repair; .1.31 owns native source evidence.
+  Commit: `pending`
+
+- ID: `JULIA-STARTUP-READING.2.21.1`
+  Status: `pending`
+  Goal: Repair Julia outer block lexical brace tracking and audit downstream balance owners.
+  Dependencies: Startup prerequisites and .1.31 committed.
+  Acceptance: Add independent RED/GREEN ungrouped/grouped/class/escaped regex braces, quoted braces, nested blocks, division and multiline/malformed input. Preserve exact outer bodies and diagnostics; own distinct downstream defects before claiming native repair.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `JULIA-STARTUP-READING.2.21.2`
+  Status: `pending`
+  Goal: Close regex-brace recurrence across supported Julia routes and shared public teaching.
+  Dependencies: .2.21.1, startup prerequisites and shared .54.3 coordination.
+  Acceptance: Recur compiled/runtime, generated/reconstructed, staged, loader/CLI and semantic valid/invalid outcomes; coordinate counterparts, preserve EOF/quote/ordinary-regex controls, update the book and run designated canonical proof before closure.
   Verification: `pending`
   Commit: `pending`
 
@@ -1355,7 +1416,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.31` | `pending` | Read spec/Parser693-1370 and spec/UnicodeRuleLabel1-822 after clean .1.30; reconcile focused proof and preserve repairs. |
+| 1 | `JULIA-STARTUP-READING.1.32` | `pending` | Read UnicodeRuleLabel823-872, UserFunctionDefinitionShell1-810 and Validator1-640 after clean .1.31; reconcile focused proof and preserve repairs. |
 
 ## Decisions
 
@@ -1378,6 +1439,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Source repairs retain startup prerequisites; those dependencies do not block source reading.
 
 ## Verification Log
+
+- `2026-09-11` .1.31: Julia .1.31 completes spec/Parser and reads all806 UnicodeRuleLabel ranges through822: 31/52 groups, 44,925 fragments /1,557,946 bytes and thirty-nine complete files. Fresh Unicode1755/frontend224 and lexical116 assertions pass; selection1 is separate. Body-fluent adapter loss extends .2.19, compact quoted arguments belong to .2.20 and outer regex-brace truncation to .2.21. Eighteen controls distinguish seven limitations from eleven comparisons; unterminated blocks still reject. Shared .52.2/.54.3 retain counterpart ownership. Neutral Unicode806/9/8/2 passes. All prior repairs, source, history and ADR0115 controls remain. Julia .1.32 is next; classifier functions remain unread and no full component/canonical gate or dependency build ran.
 
 - `2026-09-11` .1.30: Julia .1.30 completes spec/Ast and reads spec/Parser1-692: 30/52 groups, 43,425 fragments /1,517,252 bytes and thirty-eight complete files. Fresh original frontend224 plus lifecycle103 and suffix54 assertions pass; one exact test-selection assertion is separate. Unsupported inline/body/E suffixes disappear before default/strict validation; I/arrow/separate-raw controls reject. Julia .2.19 owns complete member consumption and supported-route/public repair. Explicit-return comparison corrects a probe expectation without a runtime defect. All prior repairs, source, history and ADR0115 controls remain. Julia .1.31 is next; no full component/canonical gate or dependency build.
 
@@ -1426,6 +1489,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Commit Log
 
+- `.1.31`: `JULIA-STARTUP-READING.1.31 - complete parser reading and own literal boundary repairs`.
+
 - `.1.30`: `JULIA-STARTUP-READING.1.30 - read frontend state and own discarded member suffixes`.
 
 - `.1.29`: `JULIA-STARTUP-READING.1.29 - complete semantic and emitter reading and own selector projection`.
@@ -1462,6 +1527,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Decomposition: `SESSION-STARTUP-READING.3.5.0 - freeze exact bounded Julia reading plan`.
 
 ## Changelog
+
+- `2026-09-11`: Completed .1.31 from clean 71f7b176a; parser/all Unicode ranges read, .2.19 extended and .2.20/.2.21 owned, all prior evidence preserved and .1.32 next.
 
 - `2026-09-11`: Completed .1.30 from clean d8956a25e; AST/parser prefix read, source-loss repair .2.19 owned, prior evidence preserved and .1.31 next.
 

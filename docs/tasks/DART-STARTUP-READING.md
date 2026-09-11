@@ -1567,7 +1567,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.31` | `pending` | Read spec/Parser693-1370 and spec/UnicodeRuleLabel1-822 after clean .1.30; reconcile focused proof and preserve repairs. |
+| 1 | `JULIA-STARTUP-READING.1.32` | `pending` | Read UnicodeRuleLabel823-872, UserFunctionDefinitionShell1-810 and Validator1-640 after clean .1.31; reconcile focused proof and preserve repairs. |
 
 ## Decisions
 

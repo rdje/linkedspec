@@ -157,3 +157,13 @@ finite controls preserve legitimate lifecycle compatibility without closing .2.1
 bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include("julia/test/standalone_lifecycle_block_contract_test.jl")'
 bash tools/run_python_project_data.sh tools/check_standalone_lifecycle_block_contract.py
 ```
+
+## 2026-09-11 — earlier body-fluent adapter loss
+
+Julia .1.31 completes parser reading and finds Parser871-878 discards the fluent
+helper remainder before either outer loop can retain it. Unicode, hyphen and
+unknown-tail controls compile with partial methods; .öp() produces an empty method.
+Existing .2.19/.2.19.1 now explicitly own both boundaries and empty/partial identity
+rejection. The prior54 assertions remain unchanged. Fresh18-case116-assertion
+proof, separate compact/regex owners and correct EOF rejection are preserved in
+[[julia-spec-lexical-boundary-defects]].

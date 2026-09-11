@@ -49,3 +49,17 @@ The exact self-target controls avoid unrelated strict unused-rule rejection. Jul
 .2.19 owns source-retention repair; [[julia-parser-member-suffix-loss]] preserves
 54 assertions including four explicit-return comparisons. Original parser185 and
 adjacent validator23/AST16/lifecycle103 pass327 existing assertions plus selection1.
+
+## 2026-09-11 — parser completion distinguishes three lexical owners
+
+Julia .1.31 completes Parser693-1370. Single-member dispatch, attached conditions,
+standalone-I normalization, block origins, brace/parenthesis/literal helpers and
+UTF-8-safe substring operations are fully read. The body-fluent adapter discards
+an already-returned suffix; compact extraction counts literal parentheses and can
+substitute an empty call; outer block depth ignores regex state. These belong to
+.2.19, .2.20 and .2.21 respectively. EOF still retains source for balance rejection.
+
+Exact18-case116-assertion native proof is [[julia-spec-lexical-boundary-defects]].
+Fresh original frontend224 plus selection1 and Unicode1755 pass. Earlier .2.19
+inline/body/E evidence remains intact; no production repair, wider grammar or
+fresh CLI/emitted/MCP recurrence is claimed.
