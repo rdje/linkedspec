@@ -68,3 +68,20 @@ and write105 remain green. No mutation source or guard changed. The new false
 recursion finding concerns nonbang final-codeblock helper identity, independently
 owned by Julia .2.8 and [[julia-callback-helper-recursion-identity-gap]].
 Historical pending-admission wording above predates current .19.7/.19.8/.19.9.
+
+## 2026-09-11 — complete permanent consumer reading at Julia .1.36
+
+The complete905-line /35,332-byte test is physically read, baseline-identical:
+SHA2e456b02331745a4fd0aa6c85b809dfb14a9f9b5e1b5d9b7f968172cf82571b7.
+It binds all4 valid/14 invalid/5 excluded syntax cases,10 success and8 failure rows,
+exact source spans, typed carriers, original root-kind traversal, copied frames,
+atomic callback failure, unrelated effects, guard release, post-commit continuation,
+detachment, shadow identity and nested-write/nonbang composition. The eighteen-row
+pre-operand guard loop is supplemented by a separate set_key guard control.
+
+Receiver-source and chain-kind corruption are rejected at validation, native-engine,
+emission and generated-plan boundaries. Reconstructed typed state runs natively,
+through the generated plan, primary CLI and an actually loaded emitted module;
+cleanup is asserted. Those are finite controls, not closure of the independent
+nonbang callback-identity .2.8 or any prior repair. Neutral base/composition167/592
+and write105 remain unchanged. Group replay is in [[julia-mcp-implementation-admission]].

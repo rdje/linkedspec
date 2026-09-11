@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `JULIA-STARTUP-READING`
-- Status: `active` / reading 35/52; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity, matching, staged, diagnostic, static, entry and selector-projection and member-suffix and literal-boundary and projection-metadata and selector/identifier repairs and diagnostic fixture correction pending
+- Status: `active` / reading 36/52; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity, matching, staged, diagnostic, static, entry and selector-projection and member-suffix and literal-boundary and projection-metadata and selector/identifier repairs and diagnostic fixture correction pending
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.5`
 - Created: `2026-09-11`
 - Last updated: `2026-09-11`
@@ -43,7 +43,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Inventory SHA-256: `ca3cff4fe4c0e162448d6dbac82d89898673023951afaeced17d5b9a838ccd10`.
 - Ordered range SHA-256: `fde325f80ae7b56c5890d149fbc965c09890890e963a1fa9aab08e8c9d962337`.
 - Line coordinates are one-based, inclusive LF physical lines. Every child pins its range digest.
-- Current physical reading: 35/52 children, 50,925/75,984 lines and 1,769,789/2,693,170 bytes; forty-eight complete files.
+- Current physical reading: 36/52 children, 52,425/75,984 lines and 1,825,930/2,693,170 bytes; fifty-one complete files.
 - Exact replay and capacity assessment: `docs/knowledge/julia-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -59,7 +59,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Dependencies: Startup .3.5.0 decomposition committed; each child starts from a clean prior handoff.
   Children: `.1.1-.1.52`, with exact scopes below.
   Acceptance: Every child records physical coverage, comprehension, Knowledge reconciliation, findings and focused proof before its commit. Retain all current-delta and interrupted-range evidence.
-  Verification: Julia .1.35 completes gap-capture consumer reading and reads logical-helper tests1-196: 35/52 groups, 50,925 fragments /1,769,789 bytes and forty-eight complete files. Complete gap319 and logical232 consumers pass551 assertions. Neutral gap9/0/63 with public8/15/10/34 and logical8/0 with26 mutations pass. Physical source distinguishes independent emitted-host/role-ledger proof and the logical ActionBlock truth fixture; source after logical196 remains unread. No new confirmed defect or repair closure. All prior repairs, source/history and ADR0115 controls remain. Julia .1.36 is next; no full component/canonical gate or dependency build ran.
+  Verification: Julia .1.36 completes logical-helper, map-leaves mutation and MCP binding consumers and reads MCP admission1-304: 36/52 groups, 52,425 fragments /1,825,930 bytes and fifty-one complete files. Existing logical232/map-leaves496/binding53/admission257 pass1038 assertions. Neutral mutation167/592, write105, logical8/0/26, MCP admission5/5/6/6/141 and transport35/10/10/76 pass. Exact source distinguishes all in-process logical arity rows from one emitted negative and the map-leaves18-row plus set_key guard controls. Admission source after304 remains unread. No new confirmed defect or closure; prior repairs and source/history remain. Julia .1.37 is next; no full component/canonical gate or dependency build ran.
   Commit: `pending`
 
 - ID: `JULIA-STARTUP-READING.1.1`
@@ -658,14 +658,21 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Commit: `JULIA-STARTUP-READING.1.35 - complete gap consumer reading and begin logical helper tests`
 
 - ID: `JULIA-STARTUP-READING.1.36`
-  Status: `pending`
+  Status: `done`
   Goal: Read bounded Julia group 36 and reconcile its source evidence.
   Dependencies: `JULIA-STARTUP-READING.1.35` committed; empty brief and clean repository.
   Scope: `julia/test/logical_helper_contract_test.jl` lines 197-387; `julia/test/map_leaves_mutation_contract_test.jl` lines 1-905; `julia/test/mcp_contract_julia_binding_test.jl` lines 1-100; `julia/test/mcp_server_julia_admission_test.jl` lines 1-304
   Baseline evidence: 1500 fragments / 56141 bytes; ordered range SHA-256 `bfa4c4f3f08c79eea5116e2868c09196594d5a49493ca465ec9150549e6ee8ce`.
+  Activation commit: `621551193613262b2b12bf679b1884aa4850cfc4`.
+  Verification tier: `focused`
+  Focused checks: Exact owned source reconstruction; complete logical/map-leaves/MCP consumers and neutral direct-dependent proof; Knowledge, prior evidence, memory, histories, rendered book and normal doctrines.
+  Canonical trigger: `none` — ordinary source reading without production or contract changes.
   Acceptance: Physically read every owned byte, inspect current deltas, reconcile Knowledge and own confirmed repairs; record comprehension and relevant focused proof before commit. Do not count truncated output or unread consumer suffixes.
-  Verification: `pending`
-  Commit: `pending`
+  Comprehension: Logical completion checks all in-process invalid arities and primary failure text, plus three positive/one negative offline emitted modules. Map-leaves consumer proves typed source/AST, stable success/failure rows, atomicity, unrelated effects, guard release, continuation timing, copied aggregates, shadow identity,18 pre-operand rows plus set_key, malformed carriers and actual emitted loading. MCP binding covers clone/schema/canonical JSON; admission prefix owns role/fixture inventories, observed semantic indexes, hostile I/O and raw framing. Admission suffix remains unread.
+  Knowledge: Append exact ranges and current proof to docs/knowledge/julia-logical-helper-execution.md, docs/knowledge/map-leaves-mutation-julia-runtime.md and docs/knowledge/julia-mcp-implementation-admission.md; prior dated evidence is preserved.
+  Findings: No new confirmed defect or closure. Julia .2.1-.2.25, shared budget .82, book search .41.9 and all prior repairs remain pending; finite MCP handle tests do not cover terminal-LF .2.4.
+  Verification: Seven untruncated windows read1500 fragments /56141 baseline-identical bytes, ordered SHAbfa4c4f3f08c79eea5116e2868c09196594d5a49493ca465ec9150549e6ee8ce. Exact four raw range identities/counts are appended to the three linked fact cards. Existing logical232/map-leaves496/binding53/admission257 pass1038 assertions. Neutral mutation4/14/5/10/8/167/592, write105, logical17/10/3/8/0/19/14/26, MCP admission5/5/6/6/141 and transport35/10/10/76 pass. Exact coverage, prior source/nodes/facts/history, Knowledge, memory, both history pressure checks, rendered book and normal doctrines govern landing.
+  Commit: `JULIA-STARTUP-READING.1.36 - read logical mutation and MCP contract consumers`
 
 - ID: `JULIA-STARTUP-READING.1.37`
   Status: `pending`
@@ -1550,7 +1557,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.36` | `pending` | Read logical-helper197-387, map-leaves1-905, MCP binding1-100 and MCP admission1-304 after clean .1.35; reconcile focused proof and preserve repairs. |
+| 1 | `JULIA-STARTUP-READING.1.37` | `pending` | Read MCP admission305-930, dispatch1-645 and stdio1-229 after clean .1.36; reconcile focused proof and preserve repairs. |
 
 ## Decisions
 
@@ -1573,6 +1580,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Source repairs retain startup prerequisites; those dependencies do not block source reading.
 
 ## Verification Log
+
+- `2026-09-11` .1.36: Julia .1.36 completes logical-helper, map-leaves mutation and MCP binding consumers and reads MCP admission1-304: 36/52 groups, 52,425 fragments /1,825,930 bytes and fifty-one complete files. Existing logical232/map-leaves496/binding53/admission257 pass1038 assertions. Neutral mutation167/592, write105, logical8/0/26, MCP admission5/5/6/6/141 and transport35/10/10/76 pass. Exact source distinguishes all in-process logical arity rows from one emitted negative and the map-leaves18-row plus set_key guard controls. Admission source after304 remains unread. No new confirmed defect or closure; prior repairs and source/history remain. Julia .1.37 is next; no full component/canonical gate or dependency build ran.
 
 - `2026-09-11` .1.35: Julia .1.35 completes gap-capture consumer reading and reads logical-helper tests1-196: 35/52 groups, 50,925 fragments /1,769,789 bytes and forty-eight complete files. Complete gap319 and logical232 consumers pass551 assertions. Neutral gap9/0/63 with public8/15/10/34 and logical8/0 with26 mutations pass. Physical source distinguishes independent emitted-host/role-ledger proof and the logical ActionBlock truth fixture; source after logical196 remains unread. No new confirmed defect or repair closure. All prior repairs, source/history and ADR0115 controls remain. Julia .1.36 is next; no full component/canonical gate or dependency build ran.
 
@@ -1631,6 +1640,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Commit Log
 
+- `.1.36`: `JULIA-STARTUP-READING.1.36 - read logical mutation and MCP contract consumers`.
+
 - `.1.35`: `JULIA-STARTUP-READING.1.35 - complete gap consumer reading and begin logical helper tests`.
 
 - `.1.34`: `JULIA-STARTUP-READING.1.34 - read contract consumers and preserve callable diagnostic coverage`.
@@ -1677,6 +1688,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Decomposition: `SESSION-STARTUP-READING.3.5.0 - freeze exact bounded Julia reading plan`.
 
 ## Changelog
+
+- `2026-09-11`: Completed .1.36 from clean621551193; logical/mutation/binding complete, MCP admission prefix read,1038 existing assertions and neutral checks pass, prior evidence/repairs retained and .1.37 next.
 
 - `2026-09-11`: Completed .1.35 from clean53641fcac; gap consumer complete/logical prefix read,551 existing assertions and neutral checks pass, all prior evidence/repair owners retained and .1.36 next.
 

@@ -50,3 +50,48 @@ planning `.10.9.6.0` follows after the clean closeout commit.
 
 Related facts: [[mcp-implementation-admission-ledger]], [[julia-native-mcp-server-plan]],
 [[julia-mcp-decoded-server]], [[julia-mcp-strict-stdio]], and [[mcp-2026-07-28-stdio-contract]].
+
+## 2026-09-11 — binding completion and admission-prefix reading
+
+Julia reading .1.36 reads the complete MCP binding consumer1-100 (4,365 bytes,
+SHAebc3cd9ea9751f179151cb4e8133ceba21f7125067236361753a499741193bef)
+and admission1-304 (9,517 bytes,
+SHAb5b0ed57d2027e9939bf06ed28cbcf55b98c5d8b836826a010b8786a5a68b11d).
+Admission source after304 remains unread. The binding checks clone isolation,
+embedded bundle shape, exact canonical-frame classifications, closed objects,
+UTF-8 size constraints, recursively sorted JSON and nonfinite rejection. Its
+finite handle-length pair does not cover or close terminal-LF repair .2.4.
+
+Admission's read prefix declares12 roles,10 raw inputs,10 lifecycle IDs, four
+handle states and four policy IDs; it constructs caller semantic indexes, including
+observed runtime events, and defines hostile I/O doubles, frame identity/digest,
+request overlays and raw encodings. Later role implementations are not yet read.
+The full consumer nevertheless executes as focused compatibility proof:257 fresh
+assertions. The178 assertion and4/5,4/6 counts above are dated earlier admission
+boundaries; today's neutral ledger is5/5 implementations,6/6 runtimes,141 mutations.
+Transport remains35 frames /10 raw /10 lifecycle cases with76 mutations.
+
+Together with logical197-387 and map-leaves1-905, this group reads1,500 fragments
+/56,141 baseline-identical bytes, ordered SHA
+bfa4c4f3f08c79eea5116e2868c09196594d5a49493ca465ec9150549e6ee8ce.
+Cumulative credit is36/52 groups,52,425 lines /1,825,930 bytes and51 complete files.
+Seven untruncated windows grant no admission-suffix reading credit. Existing logical232,
+map-leaves496, binding53 and admission257 pass1,038 assertions. All prior repairs,
+including MCP patterns, callback identity and semantic-budget boundaries, remain open.
+No source/contract change, full backend/canonical gate or dependency build occurs.
+
+```bash
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no - <<'JULIA_GROUP36_EXISTING'
+using LinkedSpecJulia,JSON3,Test
+const REPO_ROOT=pwd()
+include("julia/test/logical_helper_contract_test.jl")
+include("julia/test/map_leaves_mutation_contract_test.jl")
+include("julia/test/mcp_contract_julia_binding_test.jl")
+include("julia/test/mcp_server_julia_admission_test.jl")
+JULIA_GROUP36_EXISTING
+bash tools/run_python_project_data.sh tools/check_map_leaves_mutation_contract.py
+bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py
+bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py
+bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py
+bash tools/run_python_project_data.sh tools/check_logical_helper_contract.py
+```

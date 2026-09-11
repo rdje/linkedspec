@@ -91,3 +91,16 @@ JULIA_GROUP35_EXISTING
 bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py
 bash tools/run_python_project_data.sh tools/check_logical_helper_contract.py
 ```
+
+## 2026-09-11 — consumer completion at Julia .1.36
+
+Logical-helper197-387 completes the source:191 fragments /6,927 baseline-identical
+bytes, raw SHA75993c371ca6f55849683fed70613a84f135a65d017b9939b25be7e1f2d4da89.
+Every invalid-arity row exercises native, normalized and generated direct/traced
+routes with exact structured failure and pre-effect checks, plus primary exit/text.
+The separate offline emitted host loads three positive modules and the not-many
+negative module, checks direct/traced equality and positive source identities,
+and verifies matching generated errors without operand effects. This is narrower
+than claiming every invalid row has its own emitted module. The earlier ActionBlock
+truth-row qualification remains. The complete group replay is in
+[[julia-mcp-implementation-admission]]; no production or logical contract changes.

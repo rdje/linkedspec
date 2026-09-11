@@ -1568,7 +1568,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.36` | `pending` | Read logical-helper197-387, map-leaves1-905, MCP binding1-100 and MCP admission1-304 after clean .1.35; reconcile focused proof and preserve repairs. |
+| 1 | `JULIA-STARTUP-READING.1.37` | `pending` | Read MCP admission305-930, dispatch1-645 and stdio1-229 after clean .1.36; reconcile focused proof and preserve repairs. |
 
 ## Decisions
 

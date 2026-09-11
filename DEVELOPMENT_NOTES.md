@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-11 — Julia consumer proof retains exact exercised roles
+
+Logical arity rows have complete in-process coverage and one emitted negative.
+Mutation guards include18 loop rows plus set_key; typed carrier/identity/atomicity
+checks remain intact. MCP admission executes257 assertions while its read prefix
+stops at304; finite binding patterns do not close terminal-LF repair .2.4.
+
 ## 2026-09-11 — Complete Julia gap evidence and logical truth representation
 
 Gap source distinguishes detached metadata, native lifecycle/rollback, normalized

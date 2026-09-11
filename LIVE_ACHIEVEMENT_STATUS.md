@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.35 completes gap-capture consumer reading and reads logical-helper tests1-196: 35/52 groups, 50,925 fragments /1,769,789 bytes and forty-eight complete files. Complete gap319 and logical232 consumers pass551 assertions. Neutral gap9/0/63 with public8/15/10/34 and logical8/0 with26 mutations pass. Physical source distinguishes independent emitted-host/role-ledger proof and the logical ActionBlock truth fixture; source after logical196 remains unread. No new confirmed defect or repair closure. All prior repairs, source/history and ADR0115 controls remain. Julia .1.36 is next; no full component/canonical gate or dependency build ran. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .1.36 completes logical-helper, map-leaves mutation and MCP binding consumers and reads MCP admission1-304: 36/52 groups, 52,425 fragments /1,825,930 bytes and fifty-one complete files. Existing logical232/map-leaves496/binding53/admission257 pass1038 assertions. Neutral mutation167/592, write105, logical8/0/26, MCP admission5/5/6/6/141 and transport35/10/10/76 pass. Exact source distinguishes all in-process logical arity rows from one emitted negative and the map-leaves18-row plus set_key guard controls. Admission source after304 remains unread. No new confirmed defect or closure; prior repairs and source/history remain. Julia .1.37 is next; no full component/canonical gate or dependency build ran. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.82` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `JULIA-STARTUP-READING.1.35 - complete gap consumer reading and begin logical helper tests` — Julia .1.35 completes gap-capture consumer reading and reads logical-helper tests1-196: 35/52 groups, 50,925 fragments /1,769,789 bytes and forty-eight complete files. Complete gap319 and logical232 consumers pass551 assertions. Neutral gap9/0/63 with public8/15/10/34 and logical8/0 with26 mutations pass. Physical source distinguishes independent emitted-host/role-ledger proof and the logical ActionBlock truth fixture; source after logical196 remains unread. No new confirmed defect or repair closure. All prior repairs, source/history and ADR0115 controls remain. Julia .1.36 is next; no full component/canonical gate or dependency build ran.
+- `JULIA-STARTUP-READING.1.36 - read logical mutation and MCP contract consumers` — Julia .1.36 completes logical-helper, map-leaves mutation and MCP binding consumers and reads MCP admission1-304: 36/52 groups, 52,425 fragments /1,825,930 bytes and fifty-one complete files. Existing logical232/map-leaves496/binding53/admission257 pass1038 assertions. Neutral mutation167/592, write105, logical8/0/26, MCP admission5/5/6/6/141 and transport35/10/10/76 pass. Exact source distinguishes all in-process logical arity rows from one emitted negative and the map-leaves18-row plus set_key guard controls. Admission source after304 remains unread. No new confirmed defect or closure; prior repairs and source/history remain. Julia .1.37 is next; no full component/canonical gate or dependency build ran.
 
 ## Next Action
 
-- `JULIA-STARTUP-READING.1.36` — Read logical-helper197-387, map-leaves1-905, MCP binding1-100 and MCP admission1-304 after clean .1.35; reconcile focused proof and preserve repairs.
+- `JULIA-STARTUP-READING.1.37` — Read MCP admission305-930, dispatch1-645 and stdio1-229 after clean .1.36; reconcile focused proof and preserve repairs.
 
 ## Recent Completions
+
+- `2026-09-11` — `JULIA-STARTUP-READING.1.36` reads1,500 fragments /56,141 bytes;1038 existing assertions and neutral mutation/logical/MCP checks pass; all repairs remain open.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.35` reads1,500 fragments /48,303 bytes;551 existing assertions and neutral gap/logical checks pass; all repair owners remain.
 
@@ -48,8 +50,6 @@
 - `2026-09-11` — `JULIA-STARTUP-READING.1.22` reads1,500 fragments /49,643 bytes;657 existing and51 resource assertions pass; diagnostic-byte repair .2.14 remains open.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.21` reads1,500 fragments /56,058 bytes;491 existing plus36 Julia/14 neutral diagnostics pass; staged registry repair .2.13 remains open.
-
-- `2026-09-11` — `JULIA-STARTUP-READING.1.20` reads1,500 fragments /47,696 bytes;942 existing assertions and neutral checks pass; three source authorities complete, all repairs open.
 
 ## History
 
