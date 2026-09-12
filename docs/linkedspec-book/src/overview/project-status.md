@@ -329,12 +329,12 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (20/51 groups):** the complete
+**Lua source reading is underway (21/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first twenty groups physically read 25,651 fragments /1,025,260 bytes,
+ownership. The first 21 groups physically read 27,151 fragments /1,079,821 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
@@ -342,7 +342,7 @@ also cover the complete generated MCP module, contract runtime, decoded server,
 wire, primary CLI, private recognition transaction module and its runtime adapter,
 scoped binding, scalar numeric, compilation outcome, semantic index, observation
 and query, both complete semantic projectors, SHA hashing, the complete emitter and
-typed-source modules, plus the spec AST prefix. The remaining 31 groups require
+typed-source modules and spec AST, plus the loader prefix. The remaining 30 groups require
 their own reading and verified commits; source reading does not close the limitations below.
 
 **Generated Lua MCP binding:** the current 83,166-byte module matches its neutral
@@ -402,6 +402,18 @@ Lua routes and the independent Perl facade, with exact lowering captured in the
 reference generated source. These bounded results do not close the earlier PUC
 observation failures or establish declared PUC5.4 conformance.
 
+**Lua AST and loader verification:** the unchanged descriptor suite passes 912
+assertions and root-route suite passes 106 on each installed host, 2,036 total.
+Existing loaded, reconstructed, generated and emitted controls retain their exact
+results. The new AST boundary observations below exercise native constructors and
+host-created typed JSON inputs; they do not demonstrate failures from valid
+serialized JSON or ordinary authored specs.
+
+One managed PUC run emitted the already tracked process-group setup warning before
+passing. The original group was not captured; a later matching-group control and
+empty run census do not establish it retrospectively. Startup `.7` retains the
+wrapper repair, and the test result does not certify process-lifecycle correctness.
+
 **Approved Lua evidence capacity:** the director explicitly approved the complete
 Lua proposal under ADR0118. Containment `.14` implements exactly these eleven
 controls for 51 reading groups plus six support slots:
@@ -430,11 +442,32 @@ The director also granted one containment `.14` exception for this bounded capac
 implementation before full codebase reading, using focused proof and normal hooks
 without canonical CI/receipt. Later milestone, repair and push requirements remain;
 dependency build-on-update implementation stays separately owned. Lua source reading
-is 20/51; the next group reads the spec AST suffix and loader prefix. The installed-host
-test failures below remain open.
+is 21/51; the next group reads the loader suffix, spec parser and validator prefix.
+The installed-host test failures below remain open.
 All known limitations below retain their repair owners.
 Exact admission and replay: `docs/knowledge/lua-reading-evidence-capacity-admission.md`.
 The historical proposal remains in `docs/knowledge/lua-reading-evidence-capacity-proposal.md`.
+
+**Known Lua AST validation limitation — false fields receive defaults:**
+`spec_ast.spec_file({rules={}, functions=false})` constructs an empty functions list,
+while equivalent JSON reconstruction rejects false as the wrong type. The same
+problem affects native action/blind/bare edge fluent-chain lists and both edge
+selector-kind fields. Omitted values and valid defaults remain supported; true
+and zero reject. Lua `.2.22.1/.2.22.2` own absence-only construction and independent
+native/reconstructed proof without changing valid selector semantics.
+
+**Known Lua AST validation limitation — typed JSON copying can lose invalid members:**
+a host-created typed array containing index 1 and index 3 is malformed because index 2
+is absent. Native SpecFile construction rejects such a rules array, but from_json
+currently copies only its first rule. Function body payload and body AST copying
+similarly discard sparse or extra-key members, and accept host infinity until JSON
+encoding fails. These inputs are deliberately altered typed tables or host numbers;
+valid serialized JSON cannot express the malformed array shape or infinity.
+Lua `.2.23.1/.2.23.2/.2.23.3` own complete array checks, finite payload validation
+and independent proof. Valid false and nested null remain preserved, cycles reject,
+and optional outer-null normalization remains distinct from nested payload values.
+No ordinary-spec runtime loss is established. Exact scope and reproduction:
+`docs/knowledge/lua-spec-ast-loader-reading-and-validation-gaps.md`.
 
 **Known Lua generated validation limitation — false contract selects the default:**
 `validate_generated_rule_plan_v2(compiled, plan, identity, false)` accepts the

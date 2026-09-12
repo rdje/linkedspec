@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Validate typed inputs before copying away invalid evidence
+
+- Native constructor density checks cannot protect JSON decoders that have already copied only an array prefix; all original keys must be checked.
+- Function payload cloning preserves false/nested null and rejects cycles, but drops invalid array tails and retains non-finite host numbers until encoding fails.
+- A successful descriptor suite and a later matching process group do not establish the original warned child group; existing startup .7 retains the unresolved setup boundary.
+- LUA-STARTUP-READING.1.21 preserves exact scope and two-host replay in docs/knowledge/lua-spec-ast-loader-reading-and-validation-gaps.md.
+
 ## 2026-09-13 — Separate absent defaults, rejected coordinates and bounded slice arithmetic
 
 - False is a supplied value: generated options and optional contract parameters currently erase it before their established type checks.

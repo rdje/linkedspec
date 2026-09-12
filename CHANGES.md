@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua AST and loader reading with validation repair ownership
+
+- Read two ranges /1,500 fragments /54,561 bytes; cumulative 21/51, 27,151 fragments /1,079,821 bytes.
+- Descriptor912 and root-route106 assertions pass per installed host; 208 complete AST boundary observations agree across hosts.
+- Own native false defaults and typed JSON membership/finite validation under .2.22/.2.23; retain stale guidance .2.1 and the known group-setup warning under startup .7.
+- LUA-STARTUP-READING.1.21 records unchanged source, qualified neutral proof and independent group/census controls; earlier failures remain; next .1.22.
+
 ## 2026-09-13 — Lua emitter and typed-source reading with boundary repair ownership
 
 - Read four ranges /1,500 fragments /54,002 bytes; cumulative 20/51, 25,651 fragments /1,025,260 bytes.

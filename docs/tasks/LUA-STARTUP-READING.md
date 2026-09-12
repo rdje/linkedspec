@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LUA-STARTUP-READING`
-- Status: `active` / approved capacity; source reading 20/51
+- Status: `active` / approved capacity; source reading 21/51
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.6`
 - Created: `2026-09-12`
 - Last updated: `2026-09-13`
@@ -45,7 +45,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - Ordered range SHA-256: `81c58b8319def28af518fb134a3787513fe746f0f0f73bcacb0e20b9ede1c9d6`.
 - Child-summary SHA-256: `f56ecac262800bd3cc1e6bba0cc25bfe22f095c3dfee41f1c6595d4200145290`.
 - Coordinates are one-based inclusive LF physical lines or absolute file bytes; both byte windows decode as UTF-8.
-- Current physical reading: 20/51 children, 25,651/71,269 fragments and 1,025,260/2,732,450 bytes.
+- Current physical reading: 21/51 children, 27,151/71,269 fragments and 1,079,821/2,732,450 bytes.
 - Exact independent replay and capacity evidence: `docs/knowledge/lua-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -390,14 +390,21 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `LUA-STARTUP-READING.1.20 - read emitter and typed sources and own boundary repairs`
 
 - ID: `LUA-STARTUP-READING.1.21`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `31ebbc2e414e035414845551b045c7002bf5df29`.
+  Verification tier: `focused`
+  Focused checks: Exact bounded reading/baseline identity; spec AST/loader Knowledge reconciliation and selected reconstruction/resolution consumers; memory, Knowledge, both histories, rendered book and normal doctrines.
+  Canonical trigger: Ordinary source-reading evidence; no runtime, generated-format or contract change. Later closeout and push retain canonical prerequisites.
   Goal: Read and understand group 21: spec_ast.lua through spec_loader.lua.
   Scope: `lua/src/linkedspec/spec_ast.lua` lines 116-1183; `lua/src/linkedspec/spec_loader.lua` lines 1-432
   Baseline evidence: 1500 fragments / 54561 bytes; ordered range SHA-256 `e4df52ef54026c29fb3b399c526d674d5b4c3201edbd796791d8cd7cda4be111`.
   Dependencies: .1.20 committed with clean handoff.
   Acceptance: Read every scoped byte without truncation; record comprehension, Knowledge and repair reconciliation, focused proof and a clean per-leaf commit.
-  Verification: `pending`
-  Commit: `pending`
+  Physical reading: All eight windows consumed without truncation: AST116–315,316–515,516–715,716–915,916–1115,1116–1183; loader1–216,217–432. The two ranges total 1,500 fragments /54,561 bytes. Exact scope, comprehension and replay live in docs/knowledge/lua-spec-ast-loader-reading-and-validation-gaps.md.
+  Comprehension: Primitive/node/list construction, callable and staged metadata, all body projections, typed JSON reconstruction and optional normalization; deterministic named/path resolution, strict source loading, request/source trace and exact pipeline error mapping.
+  Findings: New .2.22/.2.23 own native false-field defaults and complete typed JSON validation; .2.1 gains stale guidance locations. Startup .7 retains the known child-group warning and its unresolved original PGID; subsequent control and empty listing do not close repair.
+  Verification: Lua .1.21 completes spec AST reading and reads the loader prefix in eight complete windows: 1,500 fragments /54,561 bytes; cumulative 21/51, 27,151 fragments /1,079,821 bytes. All 99 Lua sources remain baseline-identical; 38 files are fully read. Descriptor912 and root-route106 assertions pass per installed host, 2,036 total. The 208 complete observations locate native false-field defaults and typed JSON array/payload validation gaps under new .2.22/.2.23 repair/proof owners; .2.1 retains stale guidance. Startup .7 records the known process-group warning with independent matching-group and empty read-only census controls, without claiming the original group was established. Neutral resolution14/9/4 and cursor8/0/60 pass as governance. All twenty-three Lua repair roots and prior PUC observation failures remain open. Next .1.22 reads the loader suffix, spec parser and validator prefix; named arguments and startup/ADR0118 prerequisites remain unchanged. Exact preservation, memory, Knowledge, both histories, rendered book and normal hooks govern this reading/evidence commit.
+  Commit: `LUA-STARTUP-READING.1.21 - read AST and loader and own validation boundaries`
 
 - ID: `LUA-STARTUP-READING.1.22`
   Status: `pending`
@@ -702,7 +709,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - ID: `LUA-STARTUP-READING.2`
   Status: `pending`
   Goal: Own every newly confirmed Lua defect or coverage gap without losing existing shared repair ownership.
-  Children: `.2.1` owns README status; `.2.2` primary identity; `.2.3` native error safety; `.2.4` executable diagnostic teaching; `.2.5` complete quoted-literal parsing; `.2.6` harray pair completeness; `.2.7` complete switch contract diagnostics; `.2.8` iteration/options/matching-cursor validation; `.2.9` false delimiter preservation; `.2.10` whole child-result false preservation; `.2.11` exact representable integer JSON encoding; `.2.12` finite private recognition coordinates and progress; `.2.13` scalar/reducer and typed-slice integer overflow; `.2.14` semantic diagnostic null preservation; `.2.15` rejected semantic query false evidence; `.2.16` mixed structural-slot correlation; `.2.17` regex-aware call source correlation; `.2.18` explicit child-slot runtime match ownership; `.2.19` conditional entry-explanation coverage; `.2.20` explicit generated-contract validation; `.2.21` finite typed-source diagnostic coordinates.
+  Children: `.2.1` owns README status; `.2.2` primary identity; `.2.3` native error safety; `.2.4` executable diagnostic teaching; `.2.5` complete quoted-literal parsing; `.2.6` harray pair completeness; `.2.7` complete switch contract diagnostics; `.2.8` iteration/options/matching-cursor validation; `.2.9` false delimiter preservation; `.2.10` whole child-result false preservation; `.2.11` exact representable integer JSON encoding; `.2.12` finite private recognition coordinates and progress; `.2.13` scalar/reducer and typed-slice integer overflow; `.2.14` semantic diagnostic null preservation; `.2.15` rejected semantic query false evidence; `.2.16` mixed structural-slot correlation; `.2.17` regex-aware call source correlation; `.2.18` explicit child-slot runtime match ownership; `.2.19` conditional entry-explanation coverage; `.2.20` explicit generated-contract validation; `.2.21` finite typed-source diagnostic coordinates; `.2.22` native AST false-field defaults; `.2.23` typed JSON array and payload validation.
   Acceptance: Define concrete causal evidence, affected behavior and repair/verification children before implementing any finding; preserve startup prerequisites and all earlier owners.
   Verification: `pending`
   Commit: `pending`
@@ -717,6 +724,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Reading .1.9 extension: lua-runtime-builtin-final-codeblocks-with and lua-runtime-eager-block-values retain future explicit-callable prose despite the current common executor and emitted-identity admission. Include these exact current-guidance corrections; keep the original dated implementation evidence intact.
   Reading .1.15 extension: recognition_transaction.lua header lines 3–4 still describes future runtime consumption despite the integrated adapter and current 246-assertion admitted consumer on both hosts. Correct or explicitly date this source comment under the existing guidance repair; preserve the private facade boundary and historical integration evidence.
   Reading .1.17 extension: semantic_index.lua header line3 still calls generated observation propagation a later owner; lua-semantic-query-public-api retains present-tense pending-generated/observation wording despite its current-complete metadata and implemented generated-route consumer. Correct or explicitly date these exact claims under the existing guidance repair, preserving original stage-specific counts and chronology.
+  Reading .1.21 extension: lua-frontend-ast-json-contract and lua-frontend-validation still label dated 60/60 evidence as the current full gate; lua-native-spec-resolution ends with descriptors/full trace active despite later closeout; lua-rule-local-cursor-descriptor retains generated-v1 and staged outer-option body guidance superseded by the current v2/removed-option owners. Correct or explicitly date these precise claims, retaining all historic counts and current supported-PUC limitations.
   Source: docs/knowledge/lua-readme-reading-and-status-drift.md retains exact dated bytes, locations and commands.
   Children: `.2.1.1`, `.2.1.2`
   Dependencies: Startup .3/.4/.5 and the complete Lua README reading before source-document repair.
@@ -1366,6 +1374,62 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Verification: `pending`
   Commit: `pending`
 
+- ID: `LUA-STARTUP-READING.2.22`
+  Status: `pending`
+  Goal: Reject explicitly false source-AST fields before applying constructor defaults.
+  Dependencies: Startup .3/.4/.5 and supported-PUC .2.2.
+  Acceptance: Bound six observed field surfaces under .2.22.1/.2.22.2; align native validation with established reconstruction types without changing valid defaults, selector semantics, source identity, generated formats or named-argument plans.
+  Verification: .1.21: EdgeTarget/BareEdgeTarget selector_kind, action/blind/bare fluent_chain and SpecFile.functions accept false as their default in native constructors; equivalent JSON reconstruction rejects it. Seventy-two complete observations per host retain absent/valid and other type controls. Exact replay: docs/knowledge/lua-spec-ast-loader-reading-and-validation-gaps.md.
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.22.1`
+  Status: `pending`
+  Goal: Use nil-only defaulting for source-AST selector and optional list fields.
+  Dependencies: Parent .2.22 prerequisites.
+  Acceptance: Correct both selector_kind defaults and three fluent-chain plus functions defaults. Preserve the distinction between optional fields and supplied false; retain dense list copying, existing type messages, valid absent/current values and reconstruction behavior. Census adjacent constructor defaults before closure.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.22.2`
+  Status: `pending`
+  Goal: Independently verify native/reconstructed AST field validation.
+  Dependencies: .2.22.1 committed cleanly.
+  Acceptance: Cover omission, false, other wrong types and valid values on declared PUC/LuaJIT for all six fields; compare exact typed projections and diagnostics. Preserve parsed/reconstructed/loaded/generated behavior through existing consumers and update book/Knowledge before closing.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.23`
+  Status: `pending`
+  Goal: Validate complete typed JSON shapes and finite payloads before AST copying or reconstruction.
+  Dependencies: Startup .3/.4/.5 and supported-PUC .2.2; preserve .2.11 integer encoding and .2.21 coordinate-error scope.
+  Acceptance: Own dense-array repair .2.23.1, finite-payload repair .2.23.2 and independent proof .2.23.3. Inputs are deliberately altered host typed tables or non-finite host numbers; no valid serialized JSON, ordinary-spec data loss or runtime execution consequence is demonstrated.
+  Verification: .1.21: clone_json copies only the length-selected array prefix and returns numbers unchecked; both function payload fields lose extra/hole members or retain infinity until encoding fails. from_json list helpers use ipairs and discard malformed rules-array tails while native construction rejects them. Exact two-host observations retain false/nested null and cyclic rejection controls.
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.23.1`
+  Status: `pending`
+  Goal: Reject malformed typed-array membership before payload copying and JSON list decoding.
+  Dependencies: Parent .2.23 prerequisites.
+  Acceptance: Validate dense one-based integer keys before clone_json array traversal and both JSON string/object list decoders. Reject holes/extra keys without dropping evidence or mutating callers; preserve valid arrays, order, JSON identity, shared acyclic values and existing cycle rejection.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.23.2`
+  Status: `pending`
+  Goal: Reject non-finite numeric AST payload values before retaining or projecting them.
+  Dependencies: Parent .2.23 prerequisites.
+  Acceptance: Bound finite validation in clone_json for FunctionDefinition.body_payload/body_ast and nested typed JSON values, including direct and from_json callers. Preserve representable finite values and scalar false; keep numeric encoding .2.11 and source-coordinate .2.21 repairs distinct. Census adjacent scalar metadata separately before widening scope.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.23.3`
+  Status: `pending`
+  Goal: Independently verify complete AST payload/list validation and supported carriers.
+  Dependencies: .2.23.1/.2.23.2 committed cleanly.
+  Acceptance: Exercise native/from_json/serialization boundaries for both payload fields and string/object list consumers with valid dense, sparse, extra-key, cyclic, shared, finite and non-finite inputs on supported hosts. Retain existing optional outer-null normalization and nested null/false values; establish any broader reachability before claims. Preserve descriptor/root/load/generated consumers and synchronize book/Knowledge.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `LUA-STARTUP-READING.3`
   Status: `pending`
   Goal: Independently close Lua reading and route the remaining supporting-code lanes.
@@ -1448,7 +1512,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.21` | `pending` | Read the spec AST suffix and loader prefix after clean .1.20; preserve all generated, coordinate, slicing, semantic and host-failure repairs plus parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.22` | `pending` | Read the loader suffix, spec parser and validator prefix after clean .1.21; preserve all AST, generated, coordinate, semantic and process/runtime repairs plus parked named arguments. |
 
 ## Decisions
 
@@ -1466,9 +1530,11 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Blockers
 
-- None for bounded Lua .1.21 reading after clean .1.20. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
+- None for bounded Lua .1.22 reading after clean .1.21. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
 
 ## Verification Log
+
+- `2026-09-13` .1.21: Lua .1.21 completes spec AST reading and reads the loader prefix in eight complete windows: 1,500 fragments /54,561 bytes; cumulative 21/51, 27,151 fragments /1,079,821 bytes. All 99 Lua sources remain baseline-identical; 38 files are fully read. Descriptor912 and root-route106 assertions pass per installed host, 2,036 total. The 208 complete observations locate native false-field defaults and typed JSON array/payload validation gaps under new .2.22/.2.23 repair/proof owners; .2.1 retains stale guidance. Startup .7 records the known process-group warning with independent matching-group and empty read-only census controls, without claiming the original group was established. Neutral resolution14/9/4 and cursor8/0/60 pass as governance. All twenty-three Lua repair roots and prior PUC observation failures remain open. Next .1.22 reads the loader suffix, spec parser and validator prefix; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
 - `2026-09-13` .1.20: Lua .1.20 completes emitter and typed-source reading and reads the spec AST prefix in eight complete windows: 1,500 fragments /54,002 bytes; cumulative 20/51, 25,651 fragments /1,025,260 bytes. All 99 Lua sources remain baseline-identical; 37 files are fully read. Typed240 and generated106 assertions pass per installed host, 692 total. The 112 complete observations and six fresh Perl facade/lowering/source controls locate generated false defaults, rejected-coordinate diagnostic serialization and PUC typed-slice overflow. Lua .2.8.9/.10 and .2.13.3/.4 extend existing owners; .2.20/.2.21 add contract and diagnostic repair/proof; shared .60.2 retains floating-count policy. Neutral typed14/0/231 and generated-source governance pass without fresh six-runtime admission. All twenty-one Lua repair roots and prior PUC observation failures remain open. Next .1.21 reads the spec AST suffix and loader prefix; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
@@ -1518,6 +1584,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Commit Log
 
+- `2026-09-13` .1.21: `LUA-STARTUP-READING.1.21 - read AST and loader and own validation boundaries` closes reading child21 from clean 31ebbc2e4.
+
 - `2026-09-13` .1.20: `LUA-STARTUP-READING.1.20 - read emitter and typed sources and own boundary repairs` closes the twentieth reading child from clean 028d4158e.
 
 - `2026-09-13` .1.19: `LUA-STARTUP-READING.1.19 - complete static and SHA reading and own conditional entry repair` closes the nineteenth reading child from clean 1d569ea18.
@@ -1565,6 +1633,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 - `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` owns creation of this plan.
 
 ## Changelog
+
+- `2026-09-13`: .1.21 completes AST reading and reads the loader prefix; .2.22/.2.23 own bounded validation repairs, .2.1 stale guidance and startup .7 the known process warning. Reading is 21/51; next .1.22.
 
 - `2026-09-13`: .1.20 completes emitter/typed-source reading, reads the AST prefix and owns generated/default, rejected-coordinate and typed-slice repairs. Reading is 20/51; next .1.21.
 

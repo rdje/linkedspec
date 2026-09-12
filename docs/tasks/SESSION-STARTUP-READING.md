@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 20/51; .1.21 follows the twentieth child; .2.1-.2.21 own twenty-one concrete repairs, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 21/51; .1.22 follows child21; .2.1-.2.23 own twenty-three concrete repairs, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.20 completes emitter and typed-source reading and reads the spec AST prefix in eight complete windows: 1,500 fragments /54,002 bytes; cumulative 20/51, 25,651 fragments /1,025,260 bytes. All 99 Lua sources remain baseline-identical; 37 files are fully read. Typed240 and generated106 assertions pass per installed host, 692 total. The 112 complete observations and six fresh Perl facade/lowering/source controls locate generated false defaults, rejected-coordinate diagnostic serialization and PUC typed-slice overflow. Lua .2.8.9/.10 and .2.13.3/.4 extend existing owners; .2.20/.2.21 add contract and diagnostic repair/proof; shared .60.2 retains floating-count policy. Neutral typed14/0/231 and generated-source governance pass without fresh six-runtime admission. All twenty-one Lua repair roots and prior PUC observation failures remain open. Next .1.21 reads the spec AST suffix and loader prefix; named arguments and startup/ADR0118 prerequisites remain unchanged.
+  Verification: Lua .1.21 completes spec AST reading and reads the loader prefix in eight complete windows: 1,500 fragments /54,561 bytes; cumulative 21/51, 27,151 fragments /1,079,821 bytes. All 99 Lua sources remain baseline-identical; 38 files are fully read. Descriptor912 and root-route106 assertions pass per installed host, 2,036 total. The 208 complete observations locate native false-field defaults and typed JSON array/payload validation gaps under new .2.22/.2.23 repair/proof owners; .2.1 retains stale guidance. Startup .7 records the known process-group warning with independent matching-group and empty read-only census controls, without claiming the original group was established. Neutral resolution14/9/4 and cursor8/0/60 pass as governance. All twenty-three Lua repair roots and prior PUC observation failures remain open. Next .1.22 reads the loader suffix, spec parser and validator prefix; named arguments and startup/ADR0118 prerequisites remain unchanged.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -2364,6 +2364,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     establishment with controlled evidence, and retain scratch if the group identity cannot be established.
     Update Toolbox/book/KM claims, run focused lifecycle/storage/dependent checks and exact canonical proof.
     Split into bounded children before implementation if needed; reading prerequisites remain mandatory.
+  Reading Lua .1.21 recurrence: The managed PUC descriptor run emits child setpgid EPERM for child47639 then passes 912 assertions and exits0. Its original PGID was not captured. A separate control has matching PID/PGID50782 and read-only listing finds zero runs; neither retroactively proves the original group. Existing establishment/failure repair and recovery/purge restrictions remain. Evidence: docs/knowledge/lua-spec-ast-loader-reading-and-validation-gaps.md.
   Verification: `pending`
   Commit: `pending`
 
@@ -4605,7 +4606,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.21` | `pending` | Read the spec AST suffix and loader prefix after clean .1.20; preserve all generated, coordinate, slicing, semantic and host-failure repairs plus parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.22` | `pending` | Read the loader suffix, spec parser and validator prefix after clean .1.21; preserve all AST, generated, coordinate, semantic and process/runtime repairs plus parked named arguments. |
 
 ## Reading Ledger
 
