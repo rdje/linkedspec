@@ -1568,7 +1568,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.6` | `pending` | Julia reading closes under ADR0117; define Lua ranges next. All Dart repairs retain their startup prerequisites. |
+| 1 | `LUA-STARTUP-READING.4.1` | `pending` | Exact Lua reading plan is frozen; resolve coherent evidence capacity next. All existing repairs retain their prerequisites. |
 
 ## Decisions
 

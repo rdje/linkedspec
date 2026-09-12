@@ -314,6 +314,19 @@ while preserving all repairs, normal hooks and later verification/push requireme
 Dependency build reuse remains separately owned. Lua and supporting-code reading,
 formal book reconciliation and policy prerequisites still follow.
 
+**Lua source reading is planned, with comprehension still pending:** the complete
+99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
+reading groups include generated tables, native adapters and both-ABI tests.
+Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
+per-window total is 71,269 fragments. The independent range audit proves complete
+ownership; each group still requires physical reading and its own verified commit.
+
+The plan fits current documentation limits. Comparable Julia reading growth exceeds
+remaining Knowledge capacity, so Lua `.4.1` prepares a coherent activity-sized
+capacity disposition before reading begins. This changes no parser behavior or
+verification policy. All known limitations below retain their repair owners.
+Exact source ownership and replay: `docs/knowledge/lua-startup-reading-coverage.md`.
+
 **Approved Julia evidence capacity:** the director granted Knowledge lines
 72,000→79,000 and decision-record lines12,000→13,000 under ADR0116. The finite
 reserve covers15 remaining reading slices plus five support/closeout units,

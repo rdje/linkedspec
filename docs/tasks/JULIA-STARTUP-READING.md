@@ -1741,7 +1741,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.6` | `pending` | Define exact bounded Lua source-reading ownership from the clean approved Julia closeout. |
+| 1 | `LUA-STARTUP-READING.4.1` | `pending` | Exact Lua reading plan is frozen; resolve coherent evidence capacity next. All existing repairs retain their prerequisites. |
 
 ## Decisions
 

@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1083** facts · **8723** question keys.
+> **1084** facts · **8729** question keys.
 
 ## Questions → fact
 
@@ -3105,6 +3105,7 @@
 - "how are null arrays hashes codeblocks booleans and numbers rendered in diagnostic output" -> [diagnostic-output-neutral-contract](docs/knowledge/diagnostic-output-neutral-contract.md) · 2026-07-16 · reverify: `bash tools/check_diagnostic_output_five_backend.sh`
 - "how are ordinary Lua harray helpers routed" -> [lua-runtime-harray-helper-closeout](docs/knowledge/lua-runtime-harray-helper-closeout.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_uniform_binding_mutation_result_surface.py && bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py && perl tools/check_capability_conformance.pl && rg -n 'local HASH_HELPERS|local PURE_HASH_HELPERS|evaluate_hash_helper|execute_hash_set_key_statement' lua/src/linkedspec/action_contracts.lua lua/src/linkedspec/interpreter.lua`
 - "how are oversized Dart source lines split for reading" -> [dart-startup-reading-coverage](docs/knowledge/dart-startup-reading-coverage.md) · 2026-09-09
+- "how are oversized Lua source lines split for reading" -> [lua-startup-reading-coverage](docs/knowledge/lua-startup-reading-coverage.md) · 2026-09-12
 - "how are portable generated trace roles exposed in Rust" -> [rust-generated-source-v1-result-projection](docs/knowledge/rust-generated-source-v1-result-projection.md) · 2026-09-07 · reverify: `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter generated_source_v2_neutral_plan_and_trace_roles_are_exact; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test trace_controls; rg -n 'execute_generated_value_with_plan|execute_generated_with_plan_context|generated_rule_enter|generated_family_decision|generated_rule_exit' rust/linkedspec-runtime/src/engine.rs rust/linkedspec-runtime/src/source_emitter.rs`
 - "how are prefix interstitial and tail gaps defined" -> [inter-match-gap-executable-contract-plan](docs/knowledge/inter-match-gap-executable-contract-plan.md) · 2026-08-16 · reverify: `bash tools/check_inter_match_gap_capture_six_runtime.sh && prove -Iperl t/inter_match_gap_capture_perl_contract.t && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test inter_match_gap_capture_contract`
 - "how are progressive dispatch cycles and progress checked" -> [progressive-span-dispatch-audit-plan](docs/knowledge/progressive-span-dispatch-audit-plan.md) · 2026-08-17
@@ -3301,6 +3302,7 @@
 - "how do I verify Rust project data stays on the repository filesystem" -> [rust-project-data-ssd-storage](docs/knowledge/rust-project-data-ssd-storage.md) · 2026-09-07 · reverify: `bash tools/test_rust_project_data_storage.sh && bash tools/run_rust_local.sh && bash tools/run_cargo_local.sh fetch --manifest-path rust/Cargo.toml --locked --offline`
 - "how do I verify exact Dart startup reading coverage" -> [dart-startup-reading-coverage](docs/knowledge/dart-startup-reading-coverage.md) · 2026-09-09
 - "how do I verify exact Julia reading coverage" -> [julia-startup-reading-coverage](docs/knowledge/julia-startup-reading-coverage.md) · 2026-09-11
+- "how do I verify exact Lua reading coverage" -> [lua-startup-reading-coverage](docs/knowledge/lua-startup-reading-coverage.md) · 2026-09-12
 - "how do I verify task and Knowledge boundaries at their exact limits" -> [dart-reading-capacity-controls](docs/knowledge/dart-reading-capacity-controls.md) · 2026-09-08
 - "how do I write a Perl delimiter capture_slice example with a no-regex top wrapper" -> [perl-capture-slice-delimiter-seek-boundary](docs/knowledge/perl-capture-slice-delimiter-seek-boundary.md) · 2026-07-08 · reverify: `perl -Iperl -MLinkedSpec -MJSON::PP -e 'my $J=JSON::PP->new->canonical(1)->allow_nonref(1); my $s=q{Top::\\n -> Body .push\\n LX { return(copy(array(Top))) }\\n\\nBody: /BEGIN/ /END/\\n -> Body[1] { return(hash(\"body\", trim(capture_slice()))) }\\n}; for my $mode (qw(seek consume)) { my $p=LinkedSpec::Get(\\$s, top_rule=>\"Top\", parse_mode=>$mode); my $input=\"BEGIN body END\"; print \"$mode=\",$J->encode($p->(\\$input)),\"\\n\" }'`
 - "how do I write a current bounded recognition transaction" -> [cursor-transaction-authored-contract](docs/knowledge/cursor-transaction-authored-contract.md) · 2026-08-10 · reverify: `bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py && rg -n 'recognition_checkpoint|recognize_once|recognition_commit|recognition_rollback|pure_value|cursor-only' docs/decisions/0056-typed-source-location-and-cursor-algebra.md docs/tasks/FUTURE-PARITY-BACKLOG.14.md docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md`
@@ -4009,6 +4011,7 @@
 - "how is Lua repeated action result behavior admitted on PUC Lua and LuaJIT" -> [explicit-or-action-result-shape-parity-gap](docs/knowledge/explicit-or-action-result-shape-parity-gap.md) · 2026-07-20 · reverify: `bash tools/check_repeated_action_result_five_backend.sh`
 - "how is Lua runtime diagnostics and trace work split" -> [lua-runtime-diagnostics-trace-split](docs/knowledge/lua-runtime-diagnostics-trace-split.md) · 2026-07-15 · reverify: `rg -n 'LUA-BACKEND-PARITY\\.4\\.4|LUA-BACKEND-PARITY\\.5\\.3' docs/tasks/LUA-BACKEND-PARITY.md && rg -n 'DART-BACKEND-PARITY\\.4\\.5|JULIA-BACKEND-PARITY\\.4\\.5' docs/tasks/{DART,JULIA}-BACKEND-PARITY.md`
 - "how is Lua runtime helper work split" -> [lua-runtime-helper-family-split](docs/knowledge/lua-runtime-helper-family-split.md) · 2026-07-11 · reverify: `bash scripts/check_task_tree_metadata.sh && bash scripts/check_doctrines.sh`
+- "how is Lua startup reading decomposed" -> [lua-startup-reading-coverage](docs/knowledge/lua-startup-reading-coverage.md) · 2026-09-12
 - "how is Perl CLI named spec resolution tested" -> [perl-primary-cli-success-conformance](docs/knowledge/perl-primary-cli-success-conformance.md) · 2026-07-10 · reverify: `PERL5LIB= perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec && POSIXLY_CORRECT=1 PERL5LIB= perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec`
 - "how is Perl repeated action result behavior admitted" -> [explicit-or-action-result-shape-parity-gap](docs/knowledge/explicit-or-action-result-shape-parity-gap.md) · 2026-07-20 · reverify: `bash tools/check_repeated_action_result_five_backend.sh`
 - "how is README growth enforced" -> [readme-stability-policy](docs/knowledge/readme-stability-policy.md) · 2026-07-29
@@ -4338,6 +4341,7 @@
 - "how many warnings does pgen currently emit" -> [rust-dependency-warning-baseline](docs/knowledge/rust-dependency-warning-baseline.md) · 2026-09-04 · reverify: `bash tools/run_ci_local.sh`
 - "how much LinkedSpec data was found on the internal temporary filesystem" -> [project-data-ssd-storage-locality](docs/knowledge/project-data-ssd-storage-locality.md) · 2026-07-28 · reverify: `bash scripts/check_project_data_storage_locality.sh && bash scripts/check_doctrines.sh && bash tools/project_data_run.sh --list`
 - "how much Rust build time was observed during containment 10" -> [rust-ci-pgen-missing-input-rebuilds](docs/knowledge/rust-ci-pgen-missing-input-rebuilds.md) · 2026-09-10 · reverify: `Replay CI_BUILD_REUSE_OBSERVATION below for the dated source and retained evidence. New Cargo fingerprint tracing and controlled warm measurements belong to SESSION-STARTUP-READING.80.1.`
+- "how much evidence did the comparable Julia reading run add" -> [lua-startup-reading-coverage](docs/knowledge/lua-startup-reading-coverage.md) · 2026-09-12
 - "how much space did the July 17 artifact cleanup reclaim" -> [repo-generated-artifact-cleanup-boundary](docs/knowledge/repo-generated-artifact-cleanup-boundary.md) · 2026-07-26 · reverify: `git check-ignore -v rust/target docs/linkedspec-book/book dart/.dart_tool .linkedspec-data; git ls-files rust/target docs/linkedspec-book/book dart/.dart_tool .linkedspec-data; bash tools/test_tool_project_data_storage.sh`
 - "how much space does complete Dart reading ownership need" -> [startup-task-chronology-compaction](docs/knowledge/startup-task-chronology-compaction.md) · 2026-09-08
 - "how much task and Knowledge capacity remained after Rust reading" -> [startup-task-chronology-compaction](docs/knowledge/startup-task-chronology-compaction.md) · 2026-09-08
@@ -7456,6 +7460,7 @@
 - "which bang methods are allowed in version one" -> [map-leaves-mutation-neutral-contract](docs/knowledge/map-leaves-mutation-neutral-contract.md) · 2026-09-07 · reverify: `bash tools/check_mutation_six_runtime.sh && bash tools/run_python_project_data.sh tools/check_map_leaves_mutation_contract.py`
 - "which baseline and digests govern Dart source reading" -> [dart-startup-reading-coverage](docs/knowledge/dart-startup-reading-coverage.md) · 2026-09-09
 - "which baseline and digests govern Julia source reading" -> [julia-startup-reading-coverage](docs/knowledge/julia-startup-reading-coverage.md) · 2026-09-11
+- "which baseline and digests govern Lua source reading" -> [lua-startup-reading-coverage](docs/knowledge/lua-startup-reading-coverage.md) · 2026-09-12
 - "which callable-codeblock backends are publicly current" -> [callable-codeblock-four-backend-public-closeout](docs/knowledge/callable-codeblock-four-backend-public-closeout.md) · 2026-08-01 · reverify: `bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && perl tools/check_capability_conformance.pl`
 - "which canonical CI switch runs repeated action result parity" -> [explicit-or-action-result-shape-parity-gap](docs/knowledge/explicit-or-action-result-shape-parity-gap.md) · 2026-07-20 · reverify: `bash tools/check_repeated_action_result_five_backend.sh`
 - "which capability exclusions are stale and must be removed" -> [capability-exclusion-freshness-model](docs/knowledge/capability-exclusion-freshness-model.md) · 2026-08-01 · reverify: `perl tools/check_capability_conformance.pl && rg -n 'legacy.perl_plugin_registry|disposition|retention_authority' capability_conformance/manifest.json && ! rg -n 'future.general_parse_job_authoring|future.semantic_introspection_mcp|future.rule_local_cursor_and_bare_edges' capability_conformance/manifest.json`
@@ -7643,6 +7648,7 @@
 - "which outward descriptor metadata variant does Perl use" -> [outward-compiled-descriptor-four-backend-contract](docs/knowledge/outward-compiled-descriptor-four-backend-contract.md) · 2026-07-18 · reverify: `cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test descriptor_test && cd dart && bash ../tools/run_dart_project_data.sh test test/compiled_spec_test.dart && cd .. && perl -Iperl t/phase0_regression.t`
 - "which outward surfaces reject progressive span dispatch" -> [progressive-span-dispatch-public-no-drift](docs/knowledge/progressive-span-dispatch-public-no-drift.md) · 2026-08-25
 - "which owner handles Julia reading capacity and history pressure" -> [julia-startup-reading-coverage](docs/knowledge/julia-startup-reading-coverage.md) · 2026-09-11
+- "which owner handles Lua reading evidence capacity" -> [lua-startup-reading-coverage](docs/knowledge/lua-startup-reading-coverage.md) · 2026-09-12
 - "which parse_job options are required" -> [portable-parse-job-public-authoring](docs/knowledge/portable-parse-job-public-authoring.md) · 2026-08-28
 - "which parse_job options must be literal in Perl" -> [perl-staged-ast-enrichment-marker-provenance](docs/knowledge/perl-staged-ast-enrichment-marker-provenance.md) · 2026-08-26
 - "which parse_job result and failure policies are public" -> [portable-parse-job-public-authoring](docs/knowledge/portable-parse-job-public-authoring.md) · 2026-08-28
@@ -13674,6 +13680,14 @@ _Lua staged-function runtime closes as one owned native pipeline_
 - **evidence:** `LUA-BACKEND-PARITY.5.1.5 audits source, exports, tests, public docs, task state, and Knowledge Map. .5.1.1-.5 close at 146/146 on PUC Lua and LuaJIT with status runtime-user-functions-contextual-codeblock-v1; .5.2 activates.`
 - **reverify:** `bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_callable_signature_contract.py && bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py`
 - **source:** [`docs/knowledge/lua-staged-function-runtime-closeout.md`](docs/knowledge/lua-staged-function-runtime-closeout.md)
+
+### lua-startup-reading-coverage
+_Lua startup reading owns every baseline byte in 51 bounded children_
+
+- **answers:** how is Lua startup reading decomposed | how do I verify exact Lua reading coverage | which baseline and digests govern Lua source reading | how are oversized Lua source lines split for reading | which owner handles Lua reading evidence capacity | how much evidence did the comparable Julia reading run add
+- **date:** 2026-09-12 · **status:** exact plan frozen; physical reading pending; capacity disposition next
+- **evidence:** `Startup .3.6.0 owns 99 baseline-identical files / 71268 physical lines / 2732450 bytes in 51 children and 149 ranges. Two byte windows split one generated MCP line, producing 71269 fragments without overlap. Lua .4.1 owns activity-sized capacity disposition before source reading.`
+- **source:** [`docs/knowledge/lua-startup-reading-coverage.md`](docs/knowledge/lua-startup-reading-coverage.md)
 
 ### lua-statement-regex-mutation
 _Lua distinguishes dropped scalar regex mutation from pure substr slicing_

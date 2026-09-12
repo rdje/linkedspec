@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-12 — SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake
+
+Freeze 51 Lua reading children covering all 99 baseline files and 149 ranges.
+Independent byte/fragment/UTF-8 audits pass; source comprehension remains pending.
+Compare committed Julia evidence growth and own coherent Lua capacity under .4.1.
+All source, earlier reading, repairs and existing controls remain unchanged.
+
 ## 2026-09-12 — JULIA-STARTUP-READING.3.2 - close verified Julia reading under approved exception
 
 Explicit ADR0117 approval closes only Julia reading parents after exact audit

@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `d62999c12e4ec545d49d01f26e4423ad684f5270` — clean Julia .3.1 independent audit.
-- latest_completed_leaf: `JULIA-STARTUP-READING.3.2 - close verified Julia reading under approved exception`; exact independent audit reverified under ADR0117.
-- active_work_unit: `SESSION-STARTUP-READING.3.6` — next Lua startup-reading decomposition.
-- next_action: Define bounded Lua source-reading ownership and capacity from clean Julia closeout; preserve all repairs and remaining startup prerequisites.
+- activation_commit: `9824c097148235268964acbdf47984d9933753a8` — clean approved Julia reading closeout.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake`; independent exact-range and comparable-growth audits pass.
+- active_work_unit: `LUA-STARTUP-READING.4.1` — next coherent Lua evidence-capacity disposition.
+- next_action: Prepare the complete 51-child Lua capacity proposal from the frozen scopes and measured Julia reference; preserve all repairs and remaining startup prerequisites.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none; this pointer describes the intended clean committed handoff.
-- blockers: none for Lua decomposition; ADR0117 explicitly closes Julia reading only, while repairs and .80 build reuse retain startup prerequisites.
+- blockers: none for Lua .4.1 assessment; source-reading activation awaits coherent capacity disposition, with no inferred increase or canonical exception.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -57,4 +57,4 @@
   Segment 4979-6e4108166552 preserves 213 lines /12545 bytes; all other controls remain unchanged. Proportionate governance: ADR0115.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-12 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart/Julia reading closed; Julia 52/52 groups, 75984/75984 lines, 2693170/2693170 bytes, all95 complete files. Lua/supporting code, formal book .4 and policy .5 remain.
+- latest_bootstrap_read: 2026-09-12 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart/Julia reading closed; Lua plan 0/51, 99 files / 71269 fragments / 2732450 bytes. Supporting code, formal book .4 and policy .5 remain.

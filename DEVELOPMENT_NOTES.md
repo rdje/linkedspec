@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-12 — Lua reading needs coherent evidence capacity before source activation
+
+The exact Lua plan fits current limits, but comparable Julia reading adds 6615
+Knowledge lines against 5267 available at activation. Lua .4.1 owns the complete
+capacity disposition. Count newly prepended history records: hot-root net diffs
+subtract rollovers and understate future evidence growth.
+
 ## 2026-09-12 — Explicit Julia reading approval preserves repair and verification boundaries
 
 ADR0117 accepts the committed audit and passing unchanged Julia component gate

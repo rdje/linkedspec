@@ -2250,11 +2250,26 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.5.0 - freeze exact bounded Julia reading plan`
 
 - ID: `SESSION-STARTUP-READING.3.6`
-  Status: `pending`
+  Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
+  Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4.1 owns coherent activity-capacity disposition before reading.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: `pending`
+  Verification: Lua decomposition freezes 51 pending reading children across 99 baseline-identical files: 71,268 physical lines, 71,269 fragments and 2,732,450 bytes. The independent 149-range audit includes two UTF-8-safe byte windows for an oversized generated MCP line. No source comprehension is claimed. The current plan fits unchanged limits; comparable Julia reading growth exceeds remaining Knowledge capacity. LUA-STARTUP-READING.4.1 prepares a coherent capacity disposition before reading. All previous reading, repairs and verification requirements remain intact.
   Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.6.0`
+  Status: `done`
+  Goal: Inventory all Lua inputs and freeze bounded reading ownership with a measured evidence-capacity plan.
+  Activation commit: `9824c097148235268964acbdf47984d9933753a8`.
+  Dependencies: Julia reading closeout committed under ADR0117; clean tree, zero-byte brief and no unconsumed jobs.
+  Scope: All 99 Lua entries at baseline baeb984e36a94a15951cd23d4c52def5064cdaca, current membership/mode/blob deltas and required task/Knowledge/history capacity.
+  Acceptance: Independently reconstruct every baseline byte through disjoint ranges bounded by 1500 fragments and 65536 bytes per child. Preserve generated data and UTF-8 boundaries. Freeze concrete children if the resulting plan fits; otherwise retain exact inventory, a concrete proposal and unblock conditions. Measure future evidence using actual comparable commits. Grant no physical reading credit, repair closure, capacity increase or later verification exception.
+  Verification tier: `focused`
+  Focused checks: Exact inventory/current-delta and independent range/digest audits; current and forecast routing capacity; old task/card/source/history preservation; Knowledge, memory, both histories, book rendering and all normal doctrines.
+  Canonical trigger: `none` — source-reading inventory/decomposition and capacity proposal only. Any later infrastructure implementation or reading closeout retains its own required verification boundary.
+  Verification: Lua decomposition freezes 51 pending reading children across 99 baseline-identical files: 71,268 physical lines, 71,269 fragments and 2,732,450 bytes. The independent 149-range audit includes two UTF-8-safe byte windows for an oversized generated MCP line. No source comprehension is claimed. The current plan fits unchanged limits; comparable Julia reading growth exceeds remaining Knowledge capacity. LUA-STARTUP-READING.4.1 prepares a coherent capacity disposition before reading. All previous reading, repairs and verification requirements remain intact. Independent replay preserves exact inventory/range/child-summary digests, all bounds, complete EOF coverage and zero reading credit. Comparable 52-commit audit reproduces Knowledge 6615 lines / 402364 bytes / 27 files and complete new history records (364 change lines / 365 note lines), excluding rollover subtraction. Preservation passes 2371 prior task nodes and 2205 source/card/decision/history/control files, exact history suffixes, four current Lua frontiers and all 27 rendered limitations. Knowledge generation (1084 facts / 8729 keys), explicit memory, both histories, book build and diff checks pass. Resulting Knowledge is 1085 files / 73927 lines / 5854640 bytes; tasks 104 files / 85296 lines / 8953769 bytes before this same-line result update. All collection/member limits remain unchanged and pass; normal doctrine hooks govern landing.
+  Commit: `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake`
 
 - ID: `SESSION-STARTUP-READING.3.7`
   Status: `pending`
@@ -4530,7 +4545,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.6` | `pending` | Define and read all 99 baseline Lua entries through bounded committed source ranges. |
+| 1 | `LUA-STARTUP-READING.4.1` | `pending` | Size coherent Lua evidence capacity from the exact frozen 51-child plan before source reading. |
 
 ## Reading Ledger
 
@@ -7308,6 +7323,8 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- `2026-09-12` .3.6.0: Lua decomposition freezes 51 pending reading children across 99 baseline-identical files: 71,268 physical lines, 71,269 fragments and 2,732,450 bytes. The independent 149-range audit includes two UTF-8-safe byte windows for an oversized generated MCP line. No source comprehension is claimed. The current plan fits unchanged limits; comparable Julia reading growth exceeds remaining Knowledge capacity. LUA-STARTUP-READING.4.1 prepares a coherent capacity disposition before reading. All previous reading, repairs and verification requirements remain intact.
+
 - `2026-09-11` .3.5.0: Startup .3.5.0 freezes Julia reading into 52 owned children / 146 ranges across all 95 baseline-identical files: 75,984 lines / 2,693,170 bytes. Independent reconstruction verifies every byte and range digest; physical Julia reading remains 0/52. A separate bounded JULIA-STARTUP-READING member fits existing controls; .4 owns future history/capacity pressure. Dart reading is closed under ADR0114, with all 69 repairs and its failed gate retained. Next Julia .1.1 reads the manifests and first README range.
 
 - `2026-09-08` `.3.3.67`: Exact scope and independent committed-child/mode/delta/repair/Knowledge continuity audits PASS. All 66 reading children and 141 touched fact paths are durable; 34 post-Perl repair owners retain 90 pending nodes / 73 pending leaves. Final receipt-bound canonical CI governs parent landing; outcome and exact log identity are retained in the commit. Next containment .7 precedes Dart ownership/reading.
@@ -7474,11 +7491,15 @@ CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gate
 
 ## Commit Log
 
+- `2026-09-12` .3.6.0: `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake`.
+
 - .3.5.0: `SESSION-STARTUP-READING.3.5.0 - freeze exact bounded Julia reading plan`.
 
 Each canonical task node owns its exact `Commit` subject and retained completion note. Query landed history with `git log --all --format="%h %s" --fixed-strings --grep="SESSION-STARTUP-READING."`; this replaces the proven duplicate 102-row table.
 
 ## Changelog
+
+- `2026-09-12` .3.6.0: Freeze exact Lua reading ownership and route the measured capacity intake; all prior evidence and repairs remain.
 
 - `2026-09-11`: .3.5.0 freezes the exact 52-child Julia plan and capacity ownership; first reading is JULIA-STARTUP-READING.1.1.
 

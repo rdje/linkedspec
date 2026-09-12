@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .3.2 closes all 52 reading groups under explicit ADR0117 approval. Audit d62999c12 and its fresh replay verify 95 baseline-identical files (75,984 lines / 2,693,170 bytes), 52 committed scopes and activations, 122 fact cards and 80 pending repair nodes. Recorded component proof passes 12,903 assertions, storage checks for 22 owners and five package trees, primary CLI conformance and 105 corpus fixtures. All repairs and later verification requirements remain open. Lua startup .3.6 decomposition is next; full-codebase reading, formal book reconciliation and policy review remain incomplete. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl, Rust, Dart and Julia reading are complete. Canonical capacity admission is complete at a67a18bf. Lua decomposition freezes 51 pending reading children across 99 baseline-identical files: 71,268 physical lines, 71,269 fragments and 2,732,450 bytes. The independent 149-range audit includes two UTF-8-safe byte windows for an oversized generated MCP line. No source comprehension is claimed. The current plan fits unchanged limits; comparable Julia reading growth exceeds remaining Knowledge capacity. LUA-STARTUP-READING.4.1 prepares a coherent capacity disposition before reading. All previous reading, repairs and verification requirements remain intact. Dart reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.82` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `JULIA-STARTUP-READING.3.2 - close verified Julia reading under approved exception` — Julia .3.2 closes all 52 reading groups under explicit ADR0117 approval. Audit d62999c12 and its fresh replay verify 95 baseline-identical files (75,984 lines / 2,693,170 bytes), 52 committed scopes and activations, 122 fact cards and 80 pending repair nodes. Recorded component proof passes 12,903 assertions, storage checks for 22 owners and five package trees, primary CLI conformance and 105 corpus fixtures. All repairs and later verification requirements remain open. Lua startup .3.6 decomposition is next; full-codebase reading, formal book reconciliation and policy review remain incomplete.
+- `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` — Lua decomposition freezes 51 pending reading children across 99 baseline-identical files: 71,268 physical lines, 71,269 fragments and 2,732,450 bytes. The independent 149-range audit includes two UTF-8-safe byte windows for an oversized generated MCP line. No source comprehension is claimed. The current plan fits unchanged limits; comparable Julia reading growth exceeds remaining Knowledge capacity. LUA-STARTUP-READING.4.1 prepares a coherent capacity disposition before reading. All previous reading, repairs and verification requirements remain intact.
 
 ## Next Action
 
-- `SESSION-STARTUP-READING.3.6` — Define exact bounded Lua source-reading ranges after the clean approved Julia closeout.
+- `LUA-STARTUP-READING.4.1` — Prepare the measured activity-sized capacity disposition before source reading.
 
 ## Recent Completions
+
+- `2026-09-12` — `SESSION-STARTUP-READING.3.6.0` freezes 51 exact Lua children / 149 ranges; no source-reading credit; .4.1 owns coherent capacity disposition.
 
 - `2026-09-12` — `JULIA-STARTUP-READING.3.2` closes verified Julia reading under explicit ADR0117 approval; all80 repair nodes remain unchanged; Lua .3.6 follows.
 
@@ -48,8 +50,6 @@
 - `2026-09-11` — `JULIA-STARTUP-READING.1.41` reads1500 fragments/52739 bytes;655 assertions and neutral cursor pass; exact212-line notes rollover preserves history.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.40` reads1500 fragments /52652 bytes;1463 existing assertions and root/cursor/generated checks pass; all repairs remain open.
-
-- `2026-09-11` — `JULIA-STARTUP-READING.1.39` reads1500 fragments /53180 bytes;663 existing assertions and four neutral checks pass; all repairs remain open.
 
 ## History
 
