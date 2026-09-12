@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Preserve delimiter evidence until syntax validation is complete
+
+- Returning accumulated edge code at EOF loses the missing outer close; converting failed fluent extraction to empty args also erases invalid input.
+- Correct compact literal extraction does not protect a quote-only outer brace scanner or the separate lifecycle balance validator.
+- Multiline quote state must survive physical-line scanning; compact controls preserve the intended strings while braced forms truncate or retain a closing brace in ActionIR.
+- LUA-STARTUP-READING.1.22 preserves exact boundaries and typed matches controls in docs/knowledge/lua-spec-parser-validator-reading-and-lexical-gaps.md.
+
 ## 2026-09-13 — Validate typed inputs before copying away invalid evidence
 
 - Native constructor density checks cannot protect JSON decoders that have already copied only an array prefix; all original keys must be checked.

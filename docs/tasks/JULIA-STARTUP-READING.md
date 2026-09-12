@@ -1741,7 +1741,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.22` | `pending` | Read the loader suffix, spec parser and validator prefix after clean .1.21; preserve all AST, generated, coordinate, semantic and process/runtime repairs plus parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.23` | `pending` | Read the validator suffix and staged AST enrichment prefix after clean .1.22; preserve all lexical, AST, generated, semantic and process/runtime repairs plus parked named arguments. |
 
 ## Decisions
 

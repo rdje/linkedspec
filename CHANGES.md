@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua source parser reading and lexical completeness ownership
+
+- Read three ranges /1,500 fragments /44,459 bytes; cumulative 22/51, 28,651 fragments /1,124,280 bytes.
+- Root99 and standalone109 assertions pass per installed host; 88 complete parser/runtime/option observations agree across hosts.
+- Own unfinished blocks/fluents, separate regex scanners and multiline quote state under .2.24; extend .2.8 parser/loaded options and shared .54.3 recurrence.
+- LUA-STARTUP-READING.1.22 records exact source and positive controls, qualified neutral proof and unchanged earlier failures; next .1.23.
+
 ## 2026-09-13 — Lua AST and loader reading with validation repair ownership
 
 - Read two ranges /1,500 fragments /54,561 bytes; cumulative 21/51, 27,151 fragments /1,079,821 bytes.

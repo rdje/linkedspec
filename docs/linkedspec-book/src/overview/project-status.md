@@ -329,12 +329,12 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (21/51 groups):** the complete
+**Lua source reading is underway (22/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first 21 groups physically read 27,151 fragments /1,079,821 bytes,
+ownership. The first 22 groups physically read 28,651 fragments /1,124,280 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
@@ -342,7 +342,8 @@ also cover the complete generated MCP module, contract runtime, decoded server,
 wire, primary CLI, private recognition transaction module and its runtime adapter,
 scoped binding, scalar numeric, compilation outcome, semantic index, observation
 and query, both complete semantic projectors, SHA hashing, the complete emitter and
-typed-source modules and spec AST, plus the loader prefix. The remaining 30 groups require
+typed-source modules, spec AST, loader and spec parser, plus the validator prefix.
+The remaining 29 groups require
 their own reading and verified commits; source reading does not close the limitations below.
 
 **Generated Lua MCP binding:** the current 83,166-byte module matches its neutral
@@ -414,6 +415,12 @@ passing. The original group was not captured; a later matching-group control and
 empty run census do not establish it retrospectively. Startup `.7` retains the
 wrapper repair, and the test result does not certify process-lifecycle correctness.
 
+**Lua source parser verification:** the unchanged root-core and standalone-block
+suites pass 99 and 109 assertions per installed host, 416 total. Additional direct
+parser/compiler/runtime cases expose the lexical limits below. Compact quoted
+parentheses and whitespace remain valid. These tests leave malformed-source
+reconstructed/generated/emitted coverage to the repair verification owners.
+
 **Approved Lua evidence capacity:** the director explicitly approved the complete
 Lua proposal under ADR0118. Containment `.14` implements exactly these eleven
 controls for 51 reading groups plus six support slots:
@@ -442,11 +449,48 @@ The director also granted one containment `.14` exception for this bounded capac
 implementation before full codebase reading, using focused proof and normal hooks
 without canonical CI/receipt. Later milestone, repair and push requirements remain;
 dependency build-on-update implementation stays separately owned. Lua source reading
-is 21/51; the next group reads the loader suffix, spec parser and validator prefix.
+is 22/51; the next group reads the validator suffix and staged AST enrichment prefix.
 The installed-host test failures below remain open.
 All known limitations below retain their repair owners.
 Exact admission and replay: `docs/knowledge/lua-reading-evidence-capacity-admission.md`.
 The historical proposal remains in `docs/knowledge/lua-reading-evidence-capacity-proposal.md`.
+
+**Known Lua syntax limitation — unfinished edge blocks and fluents can execute:**
+with Done defined before Top, this missing closing brace is currently accepted and
+returns 7 on input `x`:
+
+```text
+Done:
+ /x/
+Top::
+ -> Done { return(7)
+```
+
+Unclosed blind and bare-edge handlers behave similarly. Explicit `I {` and
+standalone `{` forms already reject their missing closing braces. An unfinished
+`-> Done.return(7` instead loses the argument and becomes an empty `return()`.
+Blind, bare, lifecycle and body fluent forms also accept this unfinished call.
+Lua `.2.24.1/.2.24.2` own complete delimiter rejection and preserved source evidence;
+valid closed forms and compact quoted-parenthesis calls must remain unchanged.
+
+**Known Lua lexical limitation — regex braces encounter two scanners:**
+`I { return(matches("}", /}/)) }` closes its outer block inside the regex, then
+fails compilation on the remaining text. The compact
+`I.return(matches("}", /}/))` preserves the complete action but fails the separate
+lifecycle balance check. Lua `.2.24.3/.2.24.4` own outer collection and downstream
+validation, coordinated with the shared cross-backend regex repair.
+`matches("x", /x/)` remains valid. Lua requires a typed regex operand; substituting
+a quoted string as the pattern returns false and is not a portable workaround.
+
+**Known Lua lexical limitation — braced multiline strings lose quote state:**
+a compact return call preserves a quoted string containing a physical newline,
+including a brace on the following line. The equivalent braced block can close
+inside that string or retain an extra outer brace in its ActionIR, causing a compile
+or runtime failure. The scanner currently restarts quote handling on each line.
+Lua `.2.24.5` owns state across lines and accurate remainder locations; `.2.24.6`
+owns independent source, diagnostic and supported-carrier proof for the complete
+lexical repair group. Exact examples and current outcomes:
+`docs/knowledge/lua-spec-parser-validator-reading-and-lexical-gaps.md`.
 
 **Known Lua AST validation limitation — false fields receive defaults:**
 `spec_ast.spec_file({rules={}, functions=false})` constructs an empty functions list,
@@ -709,6 +753,12 @@ Omission and empty tables are valid; true, zero and text reject with the establi
 table errors. Lua `.2.8.9/.2.8.10` own absent-only defaults and independent route
 proof, preserving successful parse values and callback identity. Exact evidence:
 `docs/knowledge/lua-emitter-source-location-reading-and-boundary-gaps.md`.
+
+Parser and loaded-engine options have the same false-default problem.
+`parse_spec(source, false)` and both loaded-engine creation forms accept defaults,
+while true, zero and text reject with the existing parse/loader errors. Lua
+`.2.8.11/.2.8.12` own absence-only handling and independent proof, preserving
+source identity, trace validation, caller option copies and successful loaded values.
 
 **Known Lua limitation — nested parser step budget:** when a parent callback has
 consumed its one-step allowance, its nested callback can still run against the

@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 21/51; .1.22 follows child21; .2.1-.2.23 own twenty-three concrete repairs, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 22/51; .1.23 follows child 22; .2.1-.2.24 own twenty-four concrete repair roots, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.21 completes spec AST reading and reads the loader prefix in eight complete windows: 1,500 fragments /54,561 bytes; cumulative 21/51, 27,151 fragments /1,079,821 bytes. All 99 Lua sources remain baseline-identical; 38 files are fully read. Descriptor912 and root-route106 assertions pass per installed host, 2,036 total. The 208 complete observations locate native false-field defaults and typed JSON array/payload validation gaps under new .2.22/.2.23 repair/proof owners; .2.1 retains stale guidance. Startup .7 records the known process-group warning with independent matching-group and empty read-only census controls, without claiming the original group was established. Neutral resolution14/9/4 and cursor8/0/60 pass as governance. All twenty-three Lua repair roots and prior PUC observation failures remain open. Next .1.22 reads the loader suffix, spec parser and validator prefix; named arguments and startup/ADR0118 prerequisites remain unchanged.
+  Verification: Lua .1.22 completes loader and spec parser reading and reads the validator prefix in eight complete windows: 1,500 fragments /44,459 bytes; cumulative 22/51, 28,651 fragments /1,124,280 bytes. All 99 Lua sources remain baseline-identical; 40 files are fully read. Root99 and standalone109 assertions pass per installed host, 416 total. The 88 complete observations locate unfinished edge blocks, argument-erasing fluents, distinct outer/validator regex handling and multiline quote-state loss under .2.24 with six bounded repair/proof children. Parser/loaded-engine false options extend .2.8.11/.12; .2.1 retains stale guidance and shared .54.3 now includes Lua regex recurrence. Neutral root7/0/54 and standalone14 mutations pass as governance. All twenty-four Lua repair roots and earlier failures remain open. Next .1.23 reads the validator suffix and staged AST enrichment prefix; named arguments and startup/ADR0118 prerequisites remain unchanged.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -3599,7 +3599,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING.54.3`
   Status: `pending`
   Goal: Close regex-brace public teaching and recurring parity after the concrete scanner repairs.
-  Dependencies: `.54.1`, `.54.2`, and `DART-STARTUP-READING.2.2`; reconcile `.9` without treating its distinct scanner as already repaired.
+  Dependencies: `.54.1`, `.54.2`, `DART-STARTUP-READING.2.2`, and Lua .2.24.3/.2.24.4; reconcile `.9` without treating its distinct scanner as already repaired.
   Acceptance: Reverify portable authority and every supported backend/carrier, own any further gaps before
     admitting broader parity, publish worked regex-brace examples and negatives, and run required canonical
     boundary proof. Preserve dated pre-repair controls and exact recurrence ownership.
@@ -3607,6 +3607,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Additional evidence: Julia .1.31 confirms outer source closes at a regex brace before ordinary compilation. JULIA-STARTUP-READING.2.21.1/.2 owns outer scanner repair, downstream balance audit and public recurrence. Explicit/shorthand unterminated controls still reject; exact evidence is docs/knowledge/julia-spec-lexical-boundary-defects.md.
   Commit: `pending`
   Additional evidence: Julia .1.32 isolates three compact regex-brace inputs with full retained action source and identical quiet/traced balance rejection. JULIA-STARTUP-READING.2.21.3 owns downstream Validator437-460 repair; existing .2.21.2 now requires it as well as .2.21.1. Exact evidence: docs/knowledge/julia-function-projection-metadata-gaps.md.
+  Additional evidence: Lua .1.22 confirms plain/grouped regex outer truncation and a complete compact regex expression rejected by quote-only lifecycle balancing. LUA-STARTUP-READING.2.24.3/.4 own separate parser/validator repairs and .2.24.6 carrier proof. Compact quoted parentheses/spaces succeed; a quoted string passed as matches pattern correctly returns false under Lua's typed-regex contract. Exact evidence: docs/knowledge/lua-spec-parser-validator-reading-and-lexical-gaps.md.
 
 - ID: `SESSION-STARTUP-READING.55`
   Status: `pending`
@@ -4606,7 +4607,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.22` | `pending` | Read the loader suffix, spec parser and validator prefix after clean .1.21; preserve all AST, generated, coordinate, semantic and process/runtime repairs plus parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.23` | `pending` | Read the validator suffix and staged AST enrichment prefix after clean .1.22; preserve all lexical, AST, generated, semantic and process/runtime repairs plus parked named arguments. |
 
 ## Reading Ledger
 
