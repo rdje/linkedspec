@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-12 — Generated payload identity and bounded reading credit
+
+- The suffix completes tool and semantic schemas, four native/projected semantic fixtures and the source digest map.
+- An independent standard-library replay verifies embedded values and hashes without importing the generator or validator.
+- The generated JSON literal is fully read; the final two module bytes remain owned by the next group, preserving exact scope accounting.
+- LUA-STARTUP-READING.1.13 retains prior native evidence and all repair prerequisites; .1.14 reads the MCP runtime/server sources.
+
 ## 2026-09-12 — Generated binding proof and physical reading boundaries
 
 - The shared literal includes all backend identities, schemas and transport/semantic result examples intentionally.

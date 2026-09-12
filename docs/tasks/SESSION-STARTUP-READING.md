@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 12/51; .1.13 follows the twelfth child; .2.1-.2.11 own eleven concrete repairs; .28.7 owns the baseline public-check failure.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 13/51; .1.14 follows the thirteenth child; .2.1-.2.11 own eleven concrete repairs; .28.7 owns the baseline public-check failure.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.12 reads generated MCP bytes 261–65796 in eight complete windows: one fragment /65,536 bytes; cumulative 12/51, 15,150 fragments /645,813 bytes. All 99 Lua sources remain baseline-identical. The 83,166-byte generated module is byte-fresh; both installed hosts pass 116 binding assertions each, 232 total. Admission governance rejects 141 mutations. The stale tree aggregate is corrected from completed-node totals. All eleven local repair roots and startup .37.1/.28.7 remain pending; the public-selector failure stays open. No declared PUC 5.4, full server, full gate or corpus pass is claimed. Next .1.13 reads the remaining generated payload bytes; startup prerequisites and ADR0118 remain.
+  Verification: Lua .1.13 reads generated MCP bytes 65797–83164 in three complete windows: one fragment /17,368 bytes; cumulative 13/51, 15,151 fragments /663,181 bytes. All 99 Lua sources remain baseline-identical. Independent reconciliation matches the canonical bundle, seven artifact digests, three embedded artifact values, 35 frames and four payload digests. Generator comparison and neutral transport validation pass, including 76 rejected mutations. The prior leaf retains the latest 232 native binding assertions; no new native run is counted. All eleven local repair roots and startup .37.1/.28.7 remain pending; the public-selector failure stays open. Next .1.14 reads the final module line, contract runtime, server and wire prefix; startup prerequisites and ADR0118 remain.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -4569,7 +4569,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.13` | `pending` | Read generated MCP bytes 65797–83164 in complete bounded windows after clean .1.12; preserve eleven Lua repairs and startup .37.1/.28.7. |
+| 1 | `LUA-STARTUP-READING.1.14` | `pending` | Read the final generated module line, contract runtime, decoded server and wire prefix after clean .1.13; preserve all existing repair owners. |
 
 ## Reading Ledger
 

@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-12 — Lua generated MCP payload completion
+
+- Read bytes 65797–83164 in three complete windows; cumulative 13/51, 15,151 fragments /663,181 bytes.
+- Independently reconcile canonical bundle, seven artifact digests, three embedded values, 35 frames and four payload digests.
+- Generator and materializer comparison pass; neutral transport rejects 76 mutations; prior native proof remains dated separately.
+- Owner: LUA-STARTUP-READING.1.13; preserve all repairs; next .1.14; replay in docs/knowledge/lua-generated-mcp-payload-completion-reading.md.
+
 ## 2026-09-12 — Lua generated MCP first byte-range reading
 
 - Read bytes 261–65796 in eight complete windows; cumulative 12/51, 15,150 fragments /645,813 bytes.

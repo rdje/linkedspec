@@ -314,15 +314,15 @@ while preserving all repairs, normal hooks and later verification/push requireme
 Dependency build reuse remains separately owned. Lua and supporting-code reading,
 formal book reconciliation and policy prerequisites still follow.
 
-**Lua source reading is underway (12/51 groups):** the complete
+**Lua source reading is underway (13/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first twelve groups physically read 15,150 fragments /645,813 bytes,
+ownership. The first thirteen groups physically read 15,151 fragments /663,181 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority, compiled state and corpus modules,
-the complete facade, interpreter, JSON and matching, plus the MCP header and first 65,536 payload-field bytes. The remaining 39 groups require their own
+the complete facade, interpreter, JSON and matching, plus the MCP header and complete generated payload. The final module line and remaining 38 groups require their own
 reading and verified commits; source reading does not close the limitations below.
 
 **Generated Lua MCP binding:** the current 83,166-byte module matches its neutral
@@ -333,6 +333,10 @@ These checks validate the generated binding; remaining source reading and comple
 server verification retain their own work. The contract keeps numeric request IDs
 within ±9,007,199,254,740,991; the larger host-integer encoding limitation below
 does not widen that request domain.
+Independent reconciliation also matches all seven source-artifact digests, the
+complete 35-frame dictionary and four semantic payload digests. The neutral
+transport checker passes 76 rejection cases. These are data and contract checks;
+the two-host binding counts above remain the preceding leaf’s native results.
 
 **Approved Lua evidence capacity:** the director explicitly approved the complete
 Lua proposal under ADR0118. Containment `.14` implements exactly these eleven
@@ -362,7 +366,7 @@ The director also granted one containment `.14` exception for this bounded capac
 implementation before full codebase reading, using focused proof and normal hooks
 without canonical CI/receipt. Later milestone, repair and push requirements remain;
 dependency build-on-update implementation stays separately owned. Lua source reading
-is 12/51; the next group continues the oversized generated MCP payload.
+is 13/51; the next group reads the module ending, contract runtime, server and wire prefix.
 All known limitations below retain their repair owners.
 Exact admission and replay: `docs/knowledge/lua-reading-evidence-capacity-admission.md`.
 The historical proposal remains in `docs/knowledge/lua-reading-evidence-capacity-proposal.md`.
