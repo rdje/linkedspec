@@ -314,15 +314,15 @@ while preserving all repairs, normal hooks and later verification/push requireme
 Dependency build reuse remains separately owned. Lua and supporting-code reading,
 formal book reconciliation and policy prerequisites still follow.
 
-**Lua source reading is underway (7/51 groups):** the complete
+**Lua source reading is underway (8/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first seven groups physically read 9,945 fragments /395,987 bytes,
+ownership. The first eight groups physically read 11,445 fragments /448,121 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority, compiled state and corpus modules,
-the complete facade and the interpreter prefix. The remaining 44 groups require their own
+the complete facade and the interpreter through helper/capture dispatch. The remaining 43 groups require their own
 reading and verified commits; source reading does not close the limitations below.
 
 **Approved Lua evidence capacity:** the director explicitly approved the complete
@@ -353,10 +353,30 @@ The director also granted one containment `.14` exception for this bounded capac
 implementation before full codebase reading, using focused proof and normal hooks
 without canonical CI/receipt. Later milestone, repair and push requirements remain;
 dependency build-on-update implementation stays separately owned. Lua source reading
-is 7/51; the next group continues interpreter reading.
+is 8/51; the next group continues interpreter reading.
 All known limitations below retain their repair owners.
 Exact admission and replay: `docs/knowledge/lua-reading-evidence-capacity-admission.md`.
 The historical proposal remains in `docs/knowledge/lua-reading-evidence-capacity-proposal.md`.
+
+**Known Lua helper limitation — false delimiter differs by route:**
+`join_values(false,["a","b"])` returns `"a0b"`, but
+`["a","b"].join_values(false)` returns `"ab"`. Similarly, pure
+`split("a0b",false)` returns `["a","b"]`, while mutable
+`split(parts,"a0b",false)` stores `["a","0","b"]`.
+Receiver join and mutable split replace evaluated false with an empty delimiter
+before scalar conversion. True, numeric zero and tested string delimiters agree
+between their corresponding routes. Lua `.2.9.1` owns the bounded defaulting repair
+and `.2.9.2` independent supported-route proof. Corrected helper controls pass
+on installed PUC5.5.1 and LuaJIT; declared PUC5.4 remains separately owned.
+Exact proof: `docs/knowledge/lua-interpreter-helper-reading-and-false-delimiter-gap.md`.
+
+**Known public verification limitation — selector example context and census:**
+the public selector checker fails on existing committed book inputs. It finds 35
+references against its pinned32 and treats one documented rejected Julia example
+as unclassified because a blank line separates the fence from its context.
+Startup `.28.7.1/.28.7.2` own the example/census repair and independent proof;
+this is a failed baseline check, not renewed public admission. The example and
+its separately owned Julia runtime defect remain documented below.
 
 **Known Lua option limitation — false iteration setting becomes the default:**
 `runtime_engine(compiled, {max_iterations=false})` silently chooses 10,000.

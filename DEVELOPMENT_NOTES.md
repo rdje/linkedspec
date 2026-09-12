@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-12 — Lua false delimiter preservation and explicit failed public-check evidence
+
+- Receiver join and mutable split replace evaluated false with an empty delimiter; pure functions retain its scalar text0.
+- Matched nonfalse controls pass on both installed hosts; .2.9 owns absence-only handling and independent supported-route proof.
+- Quoted harray keys fix the reading fixture; dynamic bare keys explain the collision without a new production defect.
+- Baseline public-selector check sees35 references against32 and drops context around one rejected Julia example; .28.7 owns both dimensions.
+
 ## 2026-09-12 — Lua iteration options must distinguish absent from explicitly false
 
 - The or-default precedes positive-integer validation: false becomes10000 while true/zero/negative/fraction/string reject.

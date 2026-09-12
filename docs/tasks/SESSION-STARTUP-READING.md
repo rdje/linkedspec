@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 7/51; .1.8 follows the seventh child; .2.1-.2.8 own eight concrete repairs.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 8/51; .1.9 follows the eighth child; .2.1-.2.9 own nine concrete repairs; .28.7 owns the baseline public-check failure.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.7 reads two exact ranges in ten windows: 1,500 fragments /53,644 bytes; cumulative 7/51, 9,945 fragments /395,987 bytes. All 99 Lua sources remain baseline-identical. Native facade/runtime controls pass 27 per installed host, 54 total; both managed runs and cleanup are consumed. Explicit false max_iterations silently selects 10000; .2.8 owns absence-only defaulting and independent route proof. .2.1 also owns stale runtime-card mode/write/callable guidance. Write 105 and logical 26 mutations pass. All eight local repair roots and startup .37.1 remain pending; no declared PUC 5.4, full gate or corpus pass is claimed. Next .1.8; startup prerequisites and ADR0118 remain.
+  Verification: Lua .1.8 reads interpreter1417–2916 in nine complete windows: 1,500 fragments /52,134 bytes; cumulative 8/51, 11,445 fragments /448,121 bytes. All 99 Lua sources remain baseline-identical. Corrected native helper controls pass22 per installed host, 44 total; false join/split delimiter differences gain .2.9 repair and independent proof. Named-mark7/3 and mutation-result54/12/9 checks pass. Additional public-selector checking fails on unchanged baseline inputs: 35 references against32 and one misclassified negative example; startup .28.7 owns repair/proof. All nine local repair roots and startup .37.1 remain pending; no declared PUC5.4, full gate or corpus pass is claimed. Next .1.9; startup prerequisites and ADR0118 remain.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -2801,7 +2801,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `pending`
   Goal: Correct demonstrated public teaching drift and cover the real claims in the relevant checkers.
   Dependencies: `.3`/`.4`/`.5`.
-  Children: `.28.1`, `.28.2`, `.28.3`, `.28.4`, `.28.5`, `.28.6`
+  Children: `.28.1`, `.28.2`, `.28.3`, `.28.4`, `.28.5`, `.28.6`, `.28.7`
 
 - ID: `SESSION-STARTUP-READING.28.1`
   Status: `pending`
@@ -2856,6 +2856,28 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     Cover the actual false process-exit paragraph and controlled variants in diagnostic public checks;
     preserve immediate parse termination, event ordering, host continuation, and exception identity.
   Verification: `pending` — Perl throws RuntimeExitNow and the host continues; the current public checker passes.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.28.7`
+  Status: `pending`
+  Goal: Restore precise public aggregate-selector checking for documented negative examples and the actual reference census.
+  Dependencies: `.3`/`.4`/`.5`; retain `.28.2` as the distinct false-current-prose repair.
+  Children: `.28.7.1`, `.28.7.2`
+  Evidence: Lua reading .1.8 confirms the production checker fails unchanged f80a2bde inputs: 62 public files, 35 exact references against expected32, and one unclassified fenced Julia invalid example at project-status.md:857. All public bytes match that HEAD or its rgx gitlink; no source repair is made. See docs/knowledge/lua-interpreter-helper-reading-and-false-delimiter-gap.md.
+
+- ID: `SESSION-STARTUP-READING.28.7.1`
+  Status: `pending`
+  Goal: Reconcile every current selector reference and teach/check negative example context without weakening authoring rejection.
+  Acceptance: Audit all 35 observed references and any subsequent delta, distinguish rejected examples from positive authoring, and repair the bounded context/census contract with explicit evidence. Preserve the Julia callable-body defect example and its repair owner; do not delete evidence or merely raise a counter. Keep executable selector rejection, migration contrasts and source scanner behavior intact.
+  Verification: `pending` — sentence_at stops at blank lines around the fenced example; a second baseline census mismatch would remain after only correcting its context.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.28.7.2`
+  Status: `pending`
+  Goal: Independently verify public selector examples, census and rejection behavior after the bounded repair.
+  Dependencies: `.28.7.1`.
+  Acceptance: Exercise actual fenced and inline historical/rejected examples, blank-line/wrapped context variants, added/removed reference census mutations and genuine positive authoring mutations. Run the unmodified production check, its direct dependents and canonical admission at the appropriate boundary; synchronize current book/Knowledge claims while retaining dated failed evidence.
+  Verification: `pending`
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.29`
@@ -4547,7 +4569,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.8` | `pending` | Read interpreter1417-2916 after clean .1.7; preserve all eight Lua repairs and startup .37.1. |
+| 1 | `LUA-STARTUP-READING.1.9` | `pending` | Read interpreter2917-4416 after clean .1.8; preserve nine Lua repairs and startup .37.1/.28.7. |
 
 ## Reading Ledger
 

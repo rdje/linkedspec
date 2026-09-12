@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-12 — LUA-STARTUP-READING.1.8: helper reading and false delimiter ownership
+
+- Read exact interpreter1417-2916 /1,500 fragments /52,134 bytes in nine windows; cumulative8/51; all Lua source unchanged.
+- Corrected native helper controls pass22 per installed host; .2.9 owns receiver join and mutable split false-delimiter repair.
+- Named-mark7/3 and mutation-result54/12/9 checks pass; unchanged-baseline public-selector failure gains startup .28.7 repair/proof.
+- Resolve the unquoted fixed-key fixture through the dynamic-key contract; preserve prior evidence and synchronize book/frontiers to .1.9.
+
 ## 2026-09-12 — LUA-STARTUP-READING.1.7: interpreter prefix and iteration option ownership
 
 - Read both exact scopes /1,500 fragments /53,644 bytes in ten windows; cumulative 7/51 with all Lua source unchanged.

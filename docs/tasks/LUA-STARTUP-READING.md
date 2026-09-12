@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LUA-STARTUP-READING`
-- Status: `active` / approved capacity; source reading 7/51
+- Status: `active` / approved capacity; source reading 8/51
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.6`
 - Created: `2026-09-12`
 - Last updated: `2026-09-12`
@@ -180,14 +180,20 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `LUA-STARTUP-READING.1.7 - read interpreter prefix and own iteration option validation`
 
 - ID: `LUA-STARTUP-READING.1.8`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `f80a2bde7684d31df9655273023b179e98d64e58`.
+  Verification tier: `focused`
+  Focused checks: Exact complete reading and baseline/range reconstruction; canonical interpreter/control/string/array reconciliation and selected direct-dependent proof; memory, Knowledge, histories, rendered book and normal doctrines.
+  Canonical trigger: Ordinary source-reading evidence; no runtime or source change. Closeout and push retain existing prerequisites.
   Goal: Read and understand group 8: interpreter.lua.
   Scope: `lua/src/linkedspec/interpreter.lua` lines 1417-2916
   Baseline evidence: 1500 fragments / 52134 bytes; ordered range SHA-256 `7ddf7c6ea7587c413f14adc04d4a6c36b2d1f0ad2bea9ca73b656a3f9627b00f`.
   Dependencies: .1.7 committed with clean handoff.
   Acceptance: Read every scoped byte without truncation; record comprehension, Knowledge and repair reconciliation, focused proof and a clean per-leaf commit.
-  Verification: `pending`
-  Commit: `pending`
+  Physical reading: All 1500 scoped fragments /52134 bytes read in nine complete windows; exact range SHA and full comprehension are recorded in docs/knowledge/lua-interpreter-helper-reading-and-false-delimiter-gap.md. Corrected fixtures distinguish valid false values from documented dynamic harray keys.
+  Findings: .2.9/.2.9.1/.2.9.2 own receiver join and mutable split false-delimiter fallback. Startup .28.7/.28.7.1/.28.7.2 own the independently confirmed unchanged-baseline public-selector context/census failure; all implementation remains prerequisite-gated.
+  Verification: Lua .1.8 reads interpreter1417–2916 in nine complete windows: 1,500 fragments /52,134 bytes; cumulative 8/51, 11,445 fragments /448,121 bytes. All 99 Lua sources remain baseline-identical. Corrected native helper controls pass22 per installed host, 44 total; false join/split delimiter differences gain .2.9 repair and independent proof. Named-mark7/3 and mutation-result54/12/9 checks pass. Additional public-selector checking fails on unchanged baseline inputs: 35 references against32 and one misclassified negative example; startup .28.7 owns repair/proof. All nine local repair roots and startup .37.1 remain pending; no declared PUC5.4, full gate or corpus pass is claimed. Next .1.9; startup prerequisites and ADR0118 remain. Independent source/range reconstruction and exact replay bytes pass. Preserve 1,380 prior source/card/decision/history files, 2,452 unchanged prior task nodes and all59 prior Known headings; exactly six pending repair nodes are added. Knowledge1094/8792, memory60, histories270/417 (notes warning, no rollover) and rendered book pass. Normal hooks govern landing.
+  Commit: `LUA-STARTUP-READING.1.8 - read interpreter helpers and own false delimiter repair`
 
 - ID: `LUA-STARTUP-READING.1.9`
   Status: `pending`
@@ -622,7 +628,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - ID: `LUA-STARTUP-READING.2`
   Status: `pending`
   Goal: Own every newly confirmed Lua defect or coverage gap without losing existing shared repair ownership.
-  Children: `.2.1` owns README status; `.2.2` primary identity; `.2.3` native error safety; `.2.4` executable diagnostic teaching; `.2.5` complete quoted-literal parsing; `.2.6` harray pair completeness; `.2.7` complete switch contract diagnostics; `.2.8` explicit iteration-option validation.
+  Children: `.2.1` owns README status; `.2.2` primary identity; `.2.3` native error safety; `.2.4` executable diagnostic teaching; `.2.5` complete quoted-literal parsing; `.2.6` harray pair completeness; `.2.7` complete switch contract diagnostics; `.2.8` explicit iteration-option validation; `.2.9` false delimiter preservation.
   Acceptance: Define concrete causal evidence, affected behavior and repair/verification children before implementing any finding; preserve startup prerequisites and all earlier owners.
   Verification: `pending`
   Commit: `pending`
@@ -847,6 +853,33 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Verification: `pending`
   Commit: `pending`
 
+- ID: `LUA-STARTUP-READING.2.9`
+  Status: `pending`
+  Goal: Preserve explicitly false delimiters in receiver join and mutable split as their pure function equivalents do.
+  Evidence: Reading .1.8 runs both native hosts: join_values(false,["a","b"]) gives a0b while ["a","b"].join_values(false) gives ab; split("a0b",false) gives["a","b"] while split(parts,"a0b",false) stores["a","0","b"]. Matching true/0/string/empty controls agree. Interpreter1930-1931 and2260-2261 use an and/or empty-string fallback that replaces an evaluated false argument before shared scalar conversion. Canonical function/receiver and pure/mutable policies require the same delimiter semantics.
+  Children: `.2.9.1`, `.2.9.2`
+  Dependencies: Startup .3/.4/.5 and existing declared-runtime repair .2.2 for supported PUC proof.
+  Acceptance: Default only for an absent delimiter expression, preserve false through scalar conversion, evaluate explicit delimiter expressions once and retain current pure/mutable/receiver result and copy behavior. Keep invalid iteration-option repair .2.8 separate because false is valid here.
+  Verification: `pending`; exact native replay and paired controls are owned by docs/knowledge/lua-interpreter-helper-reading-and-false-delimiter-gap.md.
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.9.1`
+  Status: `pending`
+  Goal: Correct the two delimiter expression fallbacks without changing helper semantics.
+  Scope: evaluate_array_values receiver join and evaluate_mutable_split in lua/src/linkedspec/interpreter.lua; focused function/receiver and pure/mutable tests plus user guidance.
+  Dependencies: Parent .2.9 prerequisites.
+  Acceptance: Show both false cases RED/GREEN on supported hosts; retain omitted/true/zero/string/empty delimiters, exact source/target values and detached results. Preserve single evaluation for a computed false delimiter and run interpreter syntax checks without adding top-level locals unnecessarily.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.9.2`
+  Status: `pending`
+  Goal: Independently verify false delimiter parity across supported Lua carriers.
+  Dependencies: .2.9.1 committed cleanly.
+  Acceptance: Use independently chosen literal and computed-false delimiters through native, reconstructed and applicable generated/emitted carriers on supported PUC and LuaJIT. Verify function/receiver equality, pure/mutable equality, exact once-only effects and unchanged source/target copy semantics; close only after public guidance and required proof agree.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `LUA-STARTUP-READING.3`
   Status: `pending`
   Goal: Independently close Lua reading and route the remaining supporting-code lanes.
@@ -929,7 +962,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.8` | `pending` | Read interpreter1417-2916 after clean .1.7; preserve all eight Lua repairs and startup .37.1. |
+| 1 | `LUA-STARTUP-READING.1.9` | `pending` | Read interpreter2917-4416 after clean .1.8; preserve nine Lua repairs and startup .37.1/.28.7. |
 
 ## Decisions
 
@@ -947,9 +980,11 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Blockers
 
-- None for Lua .1.8 after the clean .1.7 commit. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
+- None for Lua .1.9 after the clean .1.8 commit. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
 
 ## Verification Log
+
+- `2026-09-12` .1.8: Lua .1.8 reads interpreter1417–2916 in nine complete windows: 1,500 fragments /52,134 bytes; cumulative 8/51, 11,445 fragments /448,121 bytes. All 99 Lua sources remain baseline-identical. Corrected native helper controls pass22 per installed host, 44 total; false join/split delimiter differences gain .2.9 repair and independent proof. Named-mark7/3 and mutation-result54/12/9 checks pass. Additional public-selector checking fails on unchanged baseline inputs: 35 references against32 and one misclassified negative example; startup .28.7 owns repair/proof. All nine local repair roots and startup .37.1 remain pending; no declared PUC5.4, full gate or corpus pass is claimed. Next .1.9; startup prerequisites and ADR0118 remain.
 
 - `2026-09-12` .1.7: Lua .1.7 reads two exact ranges in ten windows: 1,500 fragments /53,644 bytes; cumulative 7/51, 9,945 fragments /395,987 bytes. All 99 Lua sources remain baseline-identical. Native facade/runtime controls pass 27 per installed host, 54 total; both managed runs and cleanup are consumed. Explicit false max_iterations silently selects 10000; .2.8 owns absence-only defaulting and independent route proof. .2.1 also owns stale runtime-card mode/write/callable guidance. Write 105 and logical 26 mutations pass. All eight local repair roots and startup .37.1 remain pending; no declared PUC 5.4, full gate or corpus pass is claimed. Next .1.8; startup prerequisites and ADR0118 remain.
 
@@ -973,6 +1008,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Commit Log
 
+- `2026-09-12` .1.8: LUA-STARTUP-READING.1.8 - read interpreter helpers and own false delimiter repair
+
 - `2026-09-12` .1.7: `LUA-STARTUP-READING.1.7 - read interpreter prefix and own iteration option validation`.
 
 - `2026-09-12` .1.6: `LUA-STARTUP-READING.1.6 - read compiled state corpus and facade boundaries`.
@@ -994,6 +1031,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 - `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` owns creation of this plan.
 
 ## Changelog
+
+- `2026-09-12` .1.8: Read group eight; own false delimiter repair and baseline public-check repair, preserve source/evidence and advance to .1.9.
 
 - `2026-09-12` .1.7: Complete facade and interpreter prefix reading; own explicit iteration-option validation with two children, extend stale canonical guidance ownership and advance .1.8.
 
