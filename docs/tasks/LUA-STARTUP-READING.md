@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LUA-STARTUP-READING`
-- Status: `active` / approved capacity; source reading 0/51
+- Status: `active` / approved capacity; source reading 1/51
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.6`
 - Created: `2026-09-12`
 - Last updated: `2026-09-12`
@@ -45,7 +45,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - Ordered range SHA-256: `81c58b8319def28af518fb134a3787513fe746f0f0f73bcacb0e20b9ede1c9d6`.
 - Child-summary SHA-256: `f56ecac262800bd3cc1e6bba0cc25bfe22f095c3dfee41f1c6595d4200145290`.
 - Coordinates are one-based inclusive LF physical lines or absolute file bytes; both byte windows decode as UTF-8.
-- Current physical reading: 0/51 children, 0/71,269 fragments and 0/2,732,450 bytes.
+- Current physical reading: 1/51 children, 945/71,269 fragments and 65,532/2,732,450 bytes.
 - Exact independent replay and capacity evidence: `docs/knowledge/lua-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -65,14 +65,21 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `pending`
 
 - ID: `LUA-STARTUP-READING.1.1`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `0bf9218e359fda81ff5a4ed412ebe014546f12ee`.
+  Verification tier: `focused`
+  Focused checks: Exact scoped source/range identity, complete untruncated reading and Knowledge reconciliation; selected documentation contracts, resulting pressure, memory, Knowledge, both histories, rendered book and normal doctrines.
+  Canonical trigger: Ordinary source-reading documentation leaf; no source/runtime change. Later reading closeout and push retain their canonical prerequisites.
   Goal: Read and understand group 1: README.md.
   Scope: `lua/README.md` lines 1-945
   Baseline evidence: 945 fragments / 65532 bytes; ordered range SHA-256 `cd9b7c3a88e7a87a74155f4c7f14b8a3fbf260dcbb0a1ff196a03769e59c505b`.
   Dependencies: .4 capacity disposition and startup .3.6.0 commit.
   Acceptance: Read every scoped byte without truncation; record comprehension, Knowledge and repair reconciliation, focused proof and a clean per-leaf commit.
-  Verification: `pending`
-  Commit: `pending`
+  Physical reading: Six untruncated windows: 1-160,161-320,321-480,481-640,641-800,801-945; all 945 LF fragments /65,532 bytes. Concatenation SHA-256 ac6176bb87a5c39cc13cbad39a5c4c0a6d2450872e68b0db92993c0d06f136d0; original scope/range digest unchanged.
+  Comprehension: Per-rule cursor/repetition and lifecycle ownership; immutable semantic queries versus runtime observation; strict same-process MCP; staged/native/compiled/loaded composition; copied helpers versus mutations; eager logical versus lazy controls; typed dynamic codeblocks; Unicode capture/cursor/AST coordinates; CLI versus corpus execution and exact entry precedence. Canonical reconciliation and window evidence: docs/knowledge/lua-readme-reading-and-status-drift.md.
+  Findings: .2.1/.2.1.1/.2.1.2 own the obsolete 176/177 current-failure prose, bounded correction and independent verification; all remain pending behind startup prerequisites. No new runtime defect or full-gate pass is claimed.
+  Verification: Lua .1.1 reads README lines 1–945 completely: 945 fragments /65,532 bytes across six exact windows. Root selection 139 and logical helpers 359 pass per ABI; neutral root 54 / logical 26 mutations pass. Reading is 1/51; .2.1 owns stale present-tense gate guidance with repair and independent-verification children. All 99 Lua files remain baseline-identical; .1.2 is next. ADR0118 capacity, startup prerequisites and all earlier repairs remain. Dated six-window replay and complete current source/range proof pass. Selected proof totals 996 assertions; Knowledge, memory, both histories, candidate pressure and rendered book pass. Preservation verifies 1,372 prior Lua/card/decision/history files, 2,429 unchanged prior task nodes, exactly three new pending repairs, all 50 earlier known-limitation headings, frozen registry/policies and exact history suffixes. Knowledge is 1,087 facts / 8,745 keys; memory is 60 lines; histories are 433/368 lines without required rollover. All normal doctrine hooks govern landing.
+  Commit: `LUA-STARTUP-READING.1.1 - read Lua README prefix and own stale gate guidance`
 
 - ID: `LUA-STARTUP-READING.1.2`
   Status: `pending`
@@ -577,7 +584,36 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - ID: `LUA-STARTUP-READING.2`
   Status: `pending`
   Goal: Own every newly confirmed Lua defect or coverage gap without losing existing shared repair ownership.
+  Children: `.2.1` owns README current-versus-historical status correction.
   Acceptance: Define concrete causal evidence, affected behavior and repair/verification children before implementing any finding; preserve startup prerequisites and all earlier owners.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.1`
+  Status: `pending`
+  Goal: Correct the Lua README's stale present-tense staged gate claim while preserving historical evidence.
+  Evidence: Reading .1.1 finds lua/README.md lines 656-657 still saying the complete gate remains at staged 176/177. Canonical lua-root-rule-selection-preflight records superseding July 19 admission at 177/177 per ABI, and lua-callable-codeblock-emitted-route-identity records later complete 177/177 with CLI 66x2. The current 139 root and 359 logical assertions per ABI pass; no new full-gate result or runtime failure is inferred.
+  Source: docs/knowledge/lua-readme-reading-and-status-drift.md retains exact dated bytes, locations and commands.
+  Children: `.2.1.1`, `.2.1.2`
+  Dependencies: Startup .3/.4/.5 and the complete Lua README reading before source-document repair.
+  Acceptance: Remove the false current failure projection, distinguish historical counts from current guidance, preserve useful unique history through canonical pointers, and independently verify the resulting public wording and native command examples.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.1.1`
+  Status: `pending`
+  Goal: Repair the exact stale Lua README status and reconcile nearby historical rollout wording.
+  Scope: lua/README.md logical-helper gate paragraph and directly related current-versus-historical status guidance; public book and canonical evidence pointers.
+  Dependencies: Parent .2.1 prerequisites; .1.2 completes the README; current evidence retrieval before claiming any contemporary suite count.
+  Acceptance: Replace the obsolete 176/177 current-failure statement with accurate dated evidence or stable command guidance. Audit nearby present-tense counts against their canonical owners without treating earlier passing counts as freshly measured signoff. Preserve source examples, distinct proof scope and unique history. Run changed-document public contract checks, book render and relevant two-ABI command proof.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.1.2`
+  Status: `pending`
+  Goal: Independently verify and close the Lua README status correction.
+  Dependencies: .2.1.1 committed cleanly.
+  Acceptance: Compare the original dated statement with the corrected rendered guidance, confirm no stale failure is presented as current and no unsupported pass is substituted, preserve historical provenance and all other known limitations, verify applicable public contracts and close .2.1 only on evidence.
   Verification: `pending`
   Commit: `pending`
 
@@ -663,7 +699,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.1` | `pending` | Read the first exact Lua README range after clean ADR0118 capacity admission. |
+| 1 | `LUA-STARTUP-READING.1.2` | `pending` | Read README lines 946–1377, commands, three native modules and the next exact AST ranges after .1.1 commits cleanly. |
 
 ## Decisions
 
@@ -681,9 +717,11 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Blockers
 
-- None for Lua .1.1 after clean admission. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
+- None for Lua .1.2 after the clean .1.1 commit. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
 
 ## Verification Log
+
+- `2026-09-12` .1.1: Lua .1.1 reads README lines 1–945 completely: 945 fragments /65,532 bytes across six exact windows. Root selection 139 and logical helpers 359 pass per ABI; neutral root 54 / logical 26 mutations pass. Reading is 1/51; .2.1 owns stale present-tense gate guidance with repair and independent-verification children. All 99 Lua files remain baseline-identical; .1.2 is next. ADR0118 capacity, startup prerequisites and all earlier repairs remain.
 
 - `2026-09-12` .4.2: Explicit ADR0118 approval admits exactly eleven finite Lua evidence controls and the .14-only focused/receipt exception. The complete actual-plus-57-unit reserve fits; independent and production history models agree on four rollovers per collection. Actual routing functions pass 125 threshold and 54 authorization cases. Previous source, cards, decisions, task evidence and immutable history remain exact. Lua .4/.4.2 close; source reading remains 0/51 and .1.1 follows the clean commit. Later verification and startup repair prerequisites remain unchanged.
 
@@ -693,6 +731,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Commit Log
 
+- `2026-09-12` .1.1: `LUA-STARTUP-READING.1.1 - read Lua README prefix and own stale gate guidance`.
+
 - `2026-09-12` .4.2: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.14 - admit approved Lua reading evidence capacity` closes .4/.4.2 without source-reading credit.
 
 - `2026-09-12` .4.1: `LUA-STARTUP-READING.4.1 - propose finite Lua evidence capacity and verification boundary`.
@@ -700,6 +740,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 - `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` owns creation of this plan.
 
 ## Changelog
+
+- `2026-09-12` .1.1: Read the first exact Lua group, own stale README gate guidance and advance .1.2 without source changes.
 
 - `2026-09-12` .4.2: Resolve approved capacity and route the first exact Lua reading child after clean admission.
 

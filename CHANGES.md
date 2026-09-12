@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-12 — LUA-STARTUP-READING.1.1: exact README prefix reading
+
+- Read all 945 fragments/65,532 bytes in six untruncated windows; retain baseline/range identity and comprehension.
+- Own stale current-tense 176/177 gate guidance under .2.1/.2.1.1/.2.1.2; preserve all source and earlier evidence.
+- Root139 and logical 359 pass per ABI (996 total); neutral root 54 / logical 26 mutations pass. No complete gate claim.
+- Synchronize book/current frontiers, including a stale ROADMAP_V2 Julia6/52 resume sentence; next Lua .1.2.
+
 ## 2026-09-12 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.14 - admit approved Lua reading evidence capacity
 
 Implement exactly eleven director-approved Lua evidence controls under ADR0118.

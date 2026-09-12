@@ -314,12 +314,13 @@ while preserving all repairs, normal hooks and later verification/push requireme
 Dependency build reuse remains separately owned. Lua and supporting-code reading,
 formal book reconciliation and policy prerequisites still follow.
 
-**Lua source reading is planned, with comprehension still pending:** the complete
+**Lua source reading is underway (1/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership; each group still requires physical reading and its own verified commit.
+ownership. The first group physically reads README lines 1–945 (945 fragments /65,532 bytes)
+in six complete windows; the remaining 50 groups still require their own reading and verified commits.
 
 **Approved Lua evidence capacity:** the director explicitly approved the complete
 Lua proposal under ADR0118. Containment `.14` implements exactly these eleven
@@ -349,10 +350,17 @@ The director also granted one containment `.14` exception for this bounded capac
 implementation before full codebase reading, using focused proof and normal hooks
 without canonical CI/receipt. Later milestone, repair and push requirements remain;
 dependency build-on-update implementation stays separately owned. Lua source reading
-is still 0/51; the first exact reading group follows the clean admission commit.
+is 1/51; the next group completes the README and enters the native/AST sources.
 All known limitations below retain their repair owners.
 Exact admission and replay: `docs/knowledge/lua-reading-evidence-capacity-admission.md`.
 The historical proposal remains in `docs/knowledge/lua-reading-evidence-capacity-proposal.md`.
+
+**Known Lua documentation limitation — obsolete gate status:** the backend README
+still presents an earlier `176/177` help failure as current. Dated admission records
+already supersede that failure; the first reading slice freshly passes root 139 and
+logical 359 assertions on each ABI, without claiming a new complete gate run.
+Lua `.2.1.1` owns the wording correction and `.2.1.2` independent verification after
+startup prerequisites. Exact evidence: `docs/knowledge/lua-readme-reading-and-status-drift.md`.
 
 **Approved Julia evidence capacity:** the director granted Knowledge lines
 72,000→79,000 and decision-record lines12,000→13,000 under ADR0116. The finite

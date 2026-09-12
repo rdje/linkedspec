@@ -1568,7 +1568,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.1` | `pending` | Begin exact Lua source reading after clean approved capacity admission; all previous repairs remain owned. |
+| 1 | `LUA-STARTUP-READING.1.2` | `pending` | Continue exact Lua group 2 after clean .1.1; its documentation repair and all previous repairs remain owned. |
 
 ## Decisions
 

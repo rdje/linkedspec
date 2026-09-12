@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-12 — Lua README reading distinguishes dated proof from current status
+
+- Six exact windows cover lines 1–945; comprehension and replay live in lua-readme-reading-and-status-drift.
+- Canonical July 19 / August 1 records supersede README's present-tense staged help failure; .2.1 owns repair/verification.
+- Selected root/logical proof is 139+359 assertions on each ABI; neutral public guards pass 54/26 mutations.
+- Preserve historical counts as dated evidence; correct the current ROADMAP_V2 resume drift while advancing Lua .1.2.
+
 ## 2026-09-12 — Approved Lua capacity preserves all prior evidence and scoped verification
 
 ADR0118 records explicit approval for the eleven controls and .14-only exception.
