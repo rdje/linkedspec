@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-12 — LUA-STARTUP-READING.1.4: parser completion and private authority prefix
+
+- Read two exact ranges /1,500 fragments /58,518 bytes in nine windows; cumulative 4/51; source baseline unchanged.
+- Own silently lost harray members and projected-switch diagnostic omissions under .2.6/.2.7 with repair/proof children.
+- Selected authority 272 plus parser 13 pass per measured runtime; progressive 116/public60 and write105 mutations pass.
+- Preserve Lua runtime full-body validation as a distinct boundary, synchronize book/frontiers and advance .1.5.
+
 ## 2026-09-12 — LUA-STARTUP-READING.1.3: contracts and parser prefix reading
 
 - Read three exact ranges /1,500 fragments /50,175 bytes in nine windows; cumulative 3/51 with all source unchanged.

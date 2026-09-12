@@ -314,14 +314,15 @@ while preserving all repairs, normal hooks and later verification/push requireme
 Dependency build reuse remains separately owned. Lua and supporting-code reading,
 formal book reconciliation and policy prerequisites still follow.
 
-**Lua source reading is underway (3/51 groups):** the complete
+**Lua source reading is underway (4/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first three groups physically read 3,945 fragments /170,028 bytes,
+ownership. The first four groups physically read 5,445 fragments /228,546 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
-constructors, call names, contracts and the parser prefix. The remaining 48 groups require their own
+constructors, call names, contracts, the complete parser and the bounded-authority
+prefix. The remaining 47 groups require their own
 reading and verified commits; source reading does not close the limitations below.
 
 **Approved Lua evidence capacity:** the director explicitly approved the complete
@@ -352,7 +353,7 @@ The director also granted one containment `.14` exception for this bounded capac
 implementation before full codebase reading, using focused proof and normal hooks
 without canonical CI/receipt. Later milestone, repair and push requirements remain;
 dependency build-on-update implementation stays separately owned. Lua source reading
-is 3/51; the next group finishes the parser and enters bounded-child authority.
+is 4/51; the next group finishes bounded-child authority and enters compiled state.
 All known limitations below retain their repair owners.
 Exact admission and replay: `docs/knowledge/lua-reading-evidence-capacity-admission.md`.
 The historical proposal remains in `docs/knowledge/lua-reading-evidence-capacity-proposal.md`.
@@ -410,6 +411,25 @@ route verification. Valid escaped/opposite quotes, pattern backslashes and Unico
 spans pass the current focused controls. No implicit string concatenation is admitted.
 Exact evidence and a native-free replay:
 `docs/knowledge/lua-contract-parser-reading-and-string-boundary-gap.md`.
+
+**Known Lua parser limitation — harray members can disappear:** mixed brace forms
+such as `{ key: 1, unknown_helper() }` are accepted as a one-entry harray. The parser
+retains only comma-separated members containing a key/value separator, so the other
+source has no semantic node or diagnostic. Leading, middle, trailing and scalar
+pairless controls reproduce this. Lua `.2.6.1` owns complete pair recognition and
+`.2.6.2` independent supported-route verification; valid harrays and eager blocks
+retain their existing syntax.
+
+**Known Lua contract limitation — incomplete switch diagnostics:** attached switches
+retain a complete body, but static contract resolution visits the extracted cases
+and final default. A trailing unknown call or a replaced earlier default can therefore
+lose its diagnostic while resolution reports success. Resolving the retained body
+exposes it. Lua runtime validation separately checks every body statement and rejects
+invalid branches/duplicate defaults before evaluating the subject. This reading
+confirms that runtime source boundary without claiming fresh carrier execution.
+Lua `.2.7.1` owns complete static diagnostics and `.2.7.2` independent static/runtime
+verification. Exact evidence and selected authority/parser replay:
+`docs/knowledge/lua-parser-authority-reading-and-member-omission.md`.
 
 **Approved Julia evidence capacity:** the director granted Knowledge lines
 72,000→79,000 and decision-record lines12,000→13,000 under ADR0116. The finite

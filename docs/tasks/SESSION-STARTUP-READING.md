@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 3/51; .1.4 follows the third child; .2.1-.2.5 own five concrete repairs.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 4/51; .1.5 follows the fourth child; .2.1-.2.7 own seven concrete repairs.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.3 reads three exact ranges in nine windows: 1,500 fragments /50,175 bytes; cumulative 3/51, 3,945 fragments /170,028 bytes. All 99 Lua sources remain baseline-identical. Pure parser/contract controls pass 32 per measured runtime (PUC 5.5.1 and LuaJIT); six malformed-string acceptances per runtime have an exact cause and .2.5 repair/verification ownership. Inventory 250/105+1/126, signature 3/9/7, callable 23 mutations and punctuation 6/4/6 pass. All five Lua repair owners remain pending; no native build, declared 5.4 conformance or full component gate is claimed. Next .1.4; startup prerequisites and ADR0118 remain.
+  Verification: Lua .1.4 reads two exact ranges in nine windows: 1,500 fragments /58,518 bytes; cumulative 4/51, 5,445 fragments /228,546 bytes. All 99 Lua sources remain baseline-identical. Selected authority 272 plus parser 13 controls pass per measured runtime, 570 total; the facade assertion is explicitly excluded. .2.6 owns lost pairless harray members and .2.7 incomplete switch contract diagnostics; runtime switch source separately validates the complete body. Progressive 116/public 60 and write 105 mutations pass. All seven Lua repair owners remain pending; no declared 5.4 conformance, native build or full gate is claimed. Next .1.5; startup prerequisites and ADR0118 remain.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -4546,7 +4546,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.4` | `pending` | Continue exact Lua group 4 after clean .1.3; all five Lua repair owners and earlier repairs remain. |
+| 1 | `LUA-STARTUP-READING.1.5` | `pending` | Continue exact Lua group 5 after clean .1.4; all seven Lua repair owners and earlier repairs remain. |
 
 ## Reading Ledger
 

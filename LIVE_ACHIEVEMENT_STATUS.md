@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl, Rust, Dart and Julia reading are complete. Canonical capacity admission is complete at a67a18bf. Lua .1.3 reads three exact ranges in nine windows: 1,500 fragments /50,175 bytes; cumulative 3/51, 3,945 fragments /170,028 bytes. All 99 Lua sources remain baseline-identical. Pure parser/contract controls pass 32 per measured runtime (PUC 5.5.1 and LuaJIT); six malformed-string acceptances per runtime have an exact cause and .2.5 repair/verification ownership. Inventory 250/105+1/126, signature 3/9/7, callable 23 mutations and punctuation 6/4/6 pass. All five Lua repair owners remain pending; no native build, declared 5.4 conformance or full component gate is claimed. Next .1.4; startup prerequisites and ADR0118 remain. Dart reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl, Rust, Dart and Julia reading are complete. Canonical capacity admission is complete at a67a18bf. Lua .1.4 reads two exact ranges in nine windows: 1,500 fragments /58,518 bytes; cumulative 4/51, 5,445 fragments /228,546 bytes. All 99 Lua sources remain baseline-identical. Selected authority 272 plus parser 13 controls pass per measured runtime, 570 total; the facade assertion is explicitly excluded. .2.6 owns lost pairless harray members and .2.7 incomplete switch contract diagnostics; runtime switch source separately validates the complete body. Progressive 116/public 60 and write 105 mutations pass. All seven Lua repair owners remain pending; no declared 5.4 conformance, native build or full gate is claimed. Next .1.5; startup prerequisites and ADR0118 remain. Dart reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.82` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `LUA-STARTUP-READING.1.3 - read action contracts and own complete string boundary repair` — Lua .1.3 reads three exact ranges in nine windows: 1,500 fragments /50,175 bytes; cumulative 3/51, 3,945 fragments /170,028 bytes. All 99 Lua sources remain baseline-identical. Pure parser/contract controls pass 32 per measured runtime (PUC 5.5.1 and LuaJIT); six malformed-string acceptances per runtime have an exact cause and .2.5 repair/verification ownership. Inventory 250/105+1/126, signature 3/9/7, callable 23 mutations and punctuation 6/4/6 pass. All five Lua repair owners remain pending; no native build, declared 5.4 conformance or full component gate is claimed. Next .1.4; startup prerequisites and ADR0118 remain.
+- `LUA-STARTUP-READING.1.4 - read parser and authority and own member accounting gaps` — Lua .1.4 reads two exact ranges in nine windows: 1,500 fragments /58,518 bytes; cumulative 4/51, 5,445 fragments /228,546 bytes. All 99 Lua sources remain baseline-identical. Selected authority 272 plus parser 13 controls pass per measured runtime, 570 total; the facade assertion is explicitly excluded. .2.6 owns lost pairless harray members and .2.7 incomplete switch contract diagnostics; runtime switch source separately validates the complete body. Progressive 116/public 60 and write 105 mutations pass. All seven Lua repair owners remain pending; no declared 5.4 conformance, native build or full gate is claimed. Next .1.5; startup prerequisites and ADR0118 remain.
 
 ## Next Action
 
-- `LUA-STARTUP-READING.1.4` — Read the exact parser suffix and bounded-child authority prefix; preserve all repair owners; verify and commit.
+- `LUA-STARTUP-READING.1.5` — Read the exact authority suffix and compiled-spec prefix; preserve all repairs; check required history rollover, verify and commit.
 
 ## Recent Completions
+
+- `2026-09-12` — `LUA-STARTUP-READING.1.4` reads 1,500 fragments/58,518 bytes; 570 selected controls pass; .2.6/.2.7 own member/diagnostic accounting; next .1.5.
 
 - `2026-09-12` — `LUA-STARTUP-READING.1.3` reads 1,500 fragments/50,175 bytes; 64 valid controls pass; .2.5 owns malformed quoted literals; next .1.4.
 
@@ -48,8 +50,6 @@
 - `2026-09-11` — `JULIA-STARTUP-READING.1.47` reads1500 fragments/56328 bytes;726 static/admission/alias assertions and neutral checks pass; all repairs remain open.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.46` reads1500 fragments/55751 bytes;509 semantic assertions, isolated emitted-host and neutral checks pass; all repairs remain open.
-
-- `2026-09-11` — `JULIA-STARTUP-READING.1.45` reads1500 fragments/59750 bytes;759 semantic assertions and neutral governance pass; all repairs remain open.
 
 ## History
 

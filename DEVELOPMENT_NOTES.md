@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-12 — Lua must account for every authored aggregate and control member
+
+- Harray classification skips pairless comma members; switch contract traversal skips retained non-projected bodies.
+- Direct full-body resolution exposes the latter; Lua runtime already validates full switch structure before its subject.
+- Exact dormant-authority extraction excludes only the facade import/assertion, retaining 272 assertions per host.
+- Opaque registry/invocation/seed reading and 13 parser controls remain qualified to measured PUC5.5.1 and LuaJIT.
+
 ## 2026-09-12 — Lua parser must consume one complete quoted literal
 
 - First/last delimiter equality accepts adjacent literals and escaped-final-quote truncation as valid strings.

@@ -45,7 +45,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - Ordered range SHA-256: `81c58b8319def28af518fb134a3787513fe746f0f0f73bcacb0e20b9ede1c9d6`.
 - Child-summary SHA-256: `f56ecac262800bd3cc1e6bba0cc25bfe22f095c3dfee41f1c6595d4200145290`.
 - Coordinates are one-based inclusive LF physical lines or absolute file bytes; both byte windows decode as UTF-8.
-- Current physical reading: 3/51 children, 3,945/71,269 fragments and 170,028/2,732,450 bytes.
+- Current physical reading: 4/51 children, 5,445/71,269 fragments and 228,546/2,732,450 bytes.
 - Exact independent replay and capacity evidence: `docs/knowledge/lua-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -115,14 +115,20 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `LUA-STARTUP-READING.1.3 - read action contracts and own complete string boundary repair`
 
 - ID: `LUA-STARTUP-READING.1.4`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `344f4503b3601bf3349af6124fe1225af0322aa4`.
+  Verification tier: `focused`
+  Focused checks: Exact complete reading, baseline/range reconstruction, canonical parser/bounded-authority reconciliation and selected direct-dependent proof; memory, Knowledge, histories, rendered book and normal doctrines.
+  Canonical trigger: Ordinary source-reading evidence; no source/runtime change. Closeout and push retain existing prerequisites.
   Goal: Read and understand group 4: action_parser.lua through bounded_child_parse_authority.lua.
   Scope: `lua/src/linkedspec/action_parser.lua` lines 723-1627; `lua/src/linkedspec/bounded_child_parse_authority.lua` lines 1-595
   Baseline evidence: 1500 fragments / 58518 bytes; ordered range SHA-256 `b48fca781d6ab629076a66a214be4b0e1fb9b56f8142477a0e224bf0b5e3fbc4`.
   Dependencies: .1.3 committed with clean handoff.
   Acceptance: Read every scoped byte without truncation; record comprehension, Knowledge and repair reconciliation, focused proof and a clean per-leaf commit.
-  Verification: `pending`
-  Commit: `pending`
+  Physical reading: Both scoped ranges in nine untruncated windows; 1,500 fragments /58,518 bytes and frozen range SHA unchanged. Parser completes; authority suffix remains .1.5-owned. Exact comprehension, source-qualified runtime inspection and self-contained probes are in docs/knowledge/lua-parser-authority-reading-and-member-omission.md.
+  Findings: .2.6/.2.6.1/.2.6.2 own harray pair completeness; .2.7/.2.7.1/.2.7.2 own switch static diagnostic accounting. Direct retained-body resolution isolates the latter without mutation. Existing Lua runtime full-body validation distinguishes this from Dart/Julia execution defects. All earlier repairs remain pending.
+  Verification: Lua .1.4 reads two exact ranges in nine windows: 1,500 fragments /58,518 bytes; cumulative 4/51, 5,445 fragments /228,546 bytes. All 99 Lua sources remain baseline-identical. Selected authority 272 plus parser 13 controls pass per measured runtime, 570 total; the facade assertion is explicitly excluded. .2.6 owns lost pairless harray members and .2.7 incomplete switch contract diagnostics; runtime switch source separately validates the complete body. Progressive 116/public 60 and write 105 mutations pass. All seven Lua repair owners remain pending; no declared 5.4 conformance, native build or full gate is claimed. Next .1.5; startup prerequisites and ADR0118 remain. Independent reconstruction passes all 99 sources/51 groups/149 ranges; both retained probe recipes equal the executed bytes. Preservation retains 1,375 prior source/card/decision/history files, 2,444 unchanged task nodes, all 55 prior Known headings and exact history suffixes/preambles/query; exactly six pending repair nodes are added. Knowledge is 1,090 facts/8,767 keys; memory 60 lines, histories 454/389 lines and rendered book pass. Normal doctrine hooks enforce resulting-tree pressure at landing.
+  Commit: `LUA-STARTUP-READING.1.4 - read parser and authority and own member accounting gaps`
 
 - ID: `LUA-STARTUP-READING.1.5`
   Status: `pending`
@@ -597,7 +603,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - ID: `LUA-STARTUP-READING.2`
   Status: `pending`
   Goal: Own every newly confirmed Lua defect or coverage gap without losing existing shared repair ownership.
-  Children: `.2.1` owns README status; `.2.2` primary identity; `.2.3` native error safety; `.2.4` executable diagnostic teaching; `.2.5` complete quoted-literal parsing.
+  Children: `.2.1` owns README status; `.2.2` primary identity; `.2.3` native error safety; `.2.4` executable diagnostic teaching; `.2.5` complete quoted-literal parsing; `.2.6` harray pair completeness; `.2.7` complete switch contract diagnostics.
   Acceptance: Define concrete causal evidence, affected behavior and repair/verification children before implementing any finding; preserve startup prerequisites and all earlier owners.
   Verification: `pending`
   Commit: `pending`
@@ -739,6 +745,60 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Verification: `pending`
   Commit: `pending`
 
+- ID: `LUA-STARTUP-READING.2.6`
+  Status: `pending`
+  Goal: Reject incomplete harray literal members instead of silently losing authored content.
+  Evidence: .1.4 pure parser/resolver probes on measured PUC 5.5.1 and LuaJIT accept both { key: 1, mystery_probe() } and { mystery_probe(), key: 1 } as one-entry hash_literal values with ok=true and no mystery_probe AST node or diagnostic. The lone { mystery_probe() } control retains a block and unknown_helper. action_parser.lua's brace classifier appends only comma parts containing a separator and returns a hash as soon as any pair exists, silently skipping other parts.
+  Children: `.2.6.1`, `.2.6.2`
+  Dependencies: Startup .3/.4/.5 before source repair; .2.2 for declared-primary conformance.
+  Acceptance: Account for every authored literal member or produce a precise diagnostic; preserve empty and valid colon harrays, eager blocks, nested values, helper hash construction and retired fat-arrow guidance. Do not invent mixed block/harray syntax.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.6.1`
+  Status: `pending`
+  Goal: Enforce complete pair recognition in Lua brace literals.
+  Scope: action_parser.lua brace classification and direct parser/contract regression controls.
+  Dependencies: Parent .2.6 prerequisites.
+  Acceptance: Reject leading, middle and trailing pairless items without dropping source; preserve exact offending spans and valid nested key/value expressions. Exercise malformed helper, scalar and nested members plus empty/valid harray and eager-block controls on both supported runtimes.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.6.2`
+  Status: `pending`
+  Goal: Independently verify harray member completeness and close its repair.
+  Dependencies: .2.6.1 committed cleanly; declared-primary identity available.
+  Acceptance: Repeat exact source controls through direct ActionIR and supported compiled/reconstructed/generated entrypoints, prove no semantic member is lost, preserve existing valid harray semantics and update the public limitation after component proof.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.7`
+  Status: `pending`
+  Goal: Make Lua switch contract diagnostics account for the complete retained authored body.
+  Evidence: .1.4 retains a trailing unknown call or an earlier default body in control_switch.body, but action_contracts.lua visits only extracted cases/final default when present, returning ok=true with no unknown_helper. Directly resolving the retained body exposes that diagnostic. Parser projection and resolver selection are the exact mechanism. Runtime execute_attached_switch instead validates the entire body before evaluating its subject and rejects non-branches/duplicate defaults; this is a static diagnostic gap, not a reproduced runtime omission.
+  Children: `.2.7.1`, `.2.7.2`
+  Dependencies: Startup .3/.4/.5 before source repair; preserve Lua's existing complete runtime validation and separate Dart/Julia owners.
+  Acceptance: Return complete source-attributed static diagnostics or explicit structural rejection without double-counting valid branches. Preserve valid attached/marker/value controls and runtime preflight-before-subject behavior; no inferred cross-backend execution change.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.7.1`
+  Status: `pending`
+  Goal: Reconcile switch projection with complete ActionIR contract traversal.
+  Scope: action_contracts.lua control_switch traversal, necessary parser projection invariants and focused diagnostic tests.
+  Dependencies: Parent .2.7 prerequisites.
+  Acceptance: Preserve diagnostics for leading/interleaved/trailing non-branches and every duplicate default, including caller-constructed nodes; valid branch contracts appear once in authored order. Keep existing structural/runtime policy and exact Unicode spans.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.7.2`
+  Status: `pending`
+  Goal: Independently verify complete switch diagnostics and unchanged runtime validation.
+  Dependencies: .2.7.1 committed cleanly; .2.2 for supported primary runtime proof.
+  Acceptance: Reexecute the exact diagnostic controls, valid attached/marker/lazy cases and malformed runtime preflight controls on supported carriers. Prove invalid bodies remain rejected before subject effects, retain source diagnostics and update public claims only after verification.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `LUA-STARTUP-READING.3`
   Status: `pending`
   Goal: Independently close Lua reading and route the remaining supporting-code lanes.
@@ -821,7 +881,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.4` | `pending` | Read the exact parser suffix and bounded-child authority prefix after clean .1.3; preserve all five Lua repair owners. |
+| 1 | `LUA-STARTUP-READING.1.5` | `pending` | Read the exact bounded-child authority suffix and compiled-spec prefix after clean .1.4; preserve all seven Lua repair owners. |
 
 ## Decisions
 
@@ -839,9 +899,11 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Blockers
 
-- None for Lua .1.4 after the clean .1.3 commit. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
+- None for Lua .1.5 after the clean .1.4 commit. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
 
 ## Verification Log
+
+- `2026-09-12` .1.4: Lua .1.4 reads two exact ranges in nine windows: 1,500 fragments /58,518 bytes; cumulative 4/51, 5,445 fragments /228,546 bytes. All 99 Lua sources remain baseline-identical. Selected authority 272 plus parser 13 controls pass per measured runtime, 570 total; the facade assertion is explicitly excluded. .2.6 owns lost pairless harray members and .2.7 incomplete switch contract diagnostics; runtime switch source separately validates the complete body. Progressive 116/public 60 and write 105 mutations pass. All seven Lua repair owners remain pending; no declared 5.4 conformance, native build or full gate is claimed. Next .1.5; startup prerequisites and ADR0118 remain.
 
 - `2026-09-12` .1.3: Lua .1.3 reads three exact ranges in nine windows: 1,500 fragments /50,175 bytes; cumulative 3/51, 3,945 fragments /170,028 bytes. All 99 Lua sources remain baseline-identical. Pure parser/contract controls pass 32 per measured runtime (PUC 5.5.1 and LuaJIT); six malformed-string acceptances per runtime have an exact cause and .2.5 repair/verification ownership. Inventory 250/105+1/126, signature 3/9/7, callable 23 mutations and punctuation 6/4/6 pass. All five Lua repair owners remain pending; no native build, declared 5.4 conformance or full component gate is claimed. Next .1.4; startup prerequisites and ADR0118 remain.
 
@@ -857,6 +919,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Commit Log
 
+- `2026-09-12` .1.4: `LUA-STARTUP-READING.1.4 - read parser and authority and own member accounting gaps`.
+
 - `2026-09-12` .1.3: `LUA-STARTUP-READING.1.3 - read action contracts and own complete string boundary repair`.
 
 - `2026-09-12` .1.2: `LUA-STARTUP-READING.1.2 - read native and AST sources and own confirmed Lua defects`.
@@ -870,6 +934,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 - `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` owns creation of this plan.
 
 ## Changelog
+
+- `2026-09-12` .1.4: Complete parser reading and read authority prefix; own harray and static-switch accounting repairs, preserve all earlier evidence and advance .1.5.
 
 - `2026-09-12` .1.3: Read contracts and parser prefix; own exact complete-string recognition repair; preserve all prior source/evidence and advance .1.4.
 
