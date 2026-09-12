@@ -1568,7 +1568,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.9` | `pending` | Read interpreter2917-4416 after clean .1.8; preserve nine Lua repairs and startup .37.1/.28.7. |
+| 1 | `LUA-STARTUP-READING.1.10` | `pending` | Read interpreter 4417-5634 and JSON 1-282 after clean .1.9; preserve ten Lua repairs and startup .37.1/.28.7. |
 
 ## Decisions
 

@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-12 — LUA-STARTUP-READING.1.9: callable dispatch and child false preservation
+
+- Read exact interpreter 2917-4416 /1500 fragments /58443 bytes in nine windows; cumulative 9/51; all Lua source unchanged.
+- Both installed hosts pass 449 callable assertions plus 26 valid controls; .2.10 owns false whole-child push repair/proof.
+- Neutral callable23 and uniform11/7/6/8 checks pass; all four native outcomes and cleanup are consumed.
+- Extend .2.1 to stale explicit-callable guidance, retain the earlier public-check failure and sync book/frontiers to .1.10.
+
 ## 2026-09-12 — LUA-STARTUP-READING.1.8: helper reading and false delimiter ownership
 
 - Read exact interpreter1417-2916 /1,500 fragments /52,134 bytes in nine windows; cumulative8/51; all Lua source unchanged.

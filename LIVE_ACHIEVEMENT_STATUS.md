@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl, Rust, Dart and Julia reading are complete. Canonical capacity admission is complete at a67a18bf. Lua .1.8 reads interpreter1417–2916 in nine complete windows: 1,500 fragments /52,134 bytes; cumulative 8/51, 11,445 fragments /448,121 bytes. All 99 Lua sources remain baseline-identical. Corrected native helper controls pass22 per installed host, 44 total; false join/split delimiter differences gain .2.9 repair and independent proof. Named-mark7/3 and mutation-result54/12/9 checks pass. Additional public-selector checking fails on unchanged baseline inputs: 35 references against32 and one misclassified negative example; startup .28.7 owns repair/proof. All nine local repair roots and startup .37.1 remain pending; no declared PUC5.4, full gate or corpus pass is claimed. Next .1.9; startup prerequisites and ADR0118 remain. Dart reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl, Rust, Dart and Julia reading are complete. Canonical capacity admission is complete at a67a18bf. Lua .1.9 reads interpreter 2917–4416 in nine complete windows: 1,500 fragments /58,443 bytes; cumulative 9/51, 12,945 fragments /506,564 bytes. All 99 Lua sources remain baseline-identical. Both installed hosts pass 449 callable assertions plus 26 valid controls, 950 total; separate false whole-child push observations gain .2.10 repair/proof. Neutral callable23 mutations and uniform11/7/6/8 checks pass. Existing .2.1 gains stale explicit-callable guidance correction. All ten local repairs and startup .37.1/.28.7 remain pending; the earlier public-selector baseline failure is still open. No declared PUC 5.4, full gate or corpus pass is claimed. Next .1.10; startup prerequisites and ADR0118 remain. Dart reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.82` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `LUA-STARTUP-READING.1.8 - read interpreter helpers and own false delimiter repair` — Lua .1.8 reads interpreter1417–2916 in nine complete windows: 1,500 fragments /52,134 bytes; cumulative 8/51, 11,445 fragments /448,121 bytes. All 99 Lua sources remain baseline-identical. Corrected native helper controls pass22 per installed host, 44 total; false join/split delimiter differences gain .2.9 repair and independent proof. Named-mark7/3 and mutation-result54/12/9 checks pass. Additional public-selector checking fails on unchanged baseline inputs: 35 references against32 and one misclassified negative example; startup .28.7 owns repair/proof. All nine local repair roots and startup .37.1 remain pending; no declared PUC5.4, full gate or corpus pass is claimed. Next .1.9; startup prerequisites and ADR0118 remain.
+- `LUA-STARTUP-READING.1.9 - read callable dispatch and own false child push repair` — Lua .1.9 reads interpreter 2917–4416 in nine complete windows: 1,500 fragments /58,443 bytes; cumulative 9/51, 12,945 fragments /506,564 bytes. All 99 Lua sources remain baseline-identical. Both installed hosts pass 449 callable assertions plus 26 valid controls, 950 total; separate false whole-child push observations gain .2.10 repair/proof. Neutral callable23 mutations and uniform11/7/6/8 checks pass. Existing .2.1 gains stale explicit-callable guidance correction. All ten local repairs and startup .37.1/.28.7 remain pending; the earlier public-selector baseline failure is still open. No declared PUC 5.4, full gate or corpus pass is claimed. Next .1.10; startup prerequisites and ADR0118 remain.
 
 ## Next Action
 
-- `LUA-STARTUP-READING.1.9` — Read exact interpreter2917-4416; preserve repair evidence, verify and commit.
+- `LUA-STARTUP-READING.1.10` — Read exact interpreter 4417-5634 and JSON 1-282; preserve repair evidence, verify and commit.
 
 ## Recent Completions
+
+- `2026-09-12` — `LUA-STARTUP-READING.1.9` reads 1500 fragments/58443 bytes;950 callable/native controls pass; .2.10 owns false child push and .2.1 stale callable guidance; next .1.10.
 
 - `2026-09-12` — `LUA-STARTUP-READING.1.8` reads 1,500 fragments/52,134 bytes; 44 valid controls pass; .2.9 owns false delimiters and startup .28.7 the baseline public-check failure; next .1.9.
 
@@ -48,8 +50,6 @@
 - `2026-09-11` — `JULIA-STARTUP-READING.1.52` finishes all95 Julia files/52 groups;678 assertions and neutral checks pass; .2.27 owns parent-state test coverage.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.51` reads1500 fragments/55360 bytes;4179 assertions and four neutral checks pass; all repairs remain open.
-
-- `2026-09-11` — `JULIA-STARTUP-READING.1.50` reads1500 fragments/54647 bytes;2525 complete-consumer assertions and four neutral checks pass; all repairs remain open.
 
 ## History
 

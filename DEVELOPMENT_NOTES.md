@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-12 — Lua whole-child selection must not use result truthiness
+
+- Whole-result push selects indexing when child.value is false; scalar indexing then appends null to either target form.
+- Direct call, ordinary push and indexed false controls isolate the defect; true/zero/empty/array/harray/null controls pass.
+- The unchanged449-assertion callable consumer passes on both hosts; typed frame, emitted and recursion behavior remain covered.
+- Existing .2.1 owns future-callable wording in older with/eager-block cards; source repairs remain startup-gated.
+
 ## 2026-09-12 — Lua false delimiter preservation and explicit failed public-check evidence
 
 - Receiver join and mutable split replace evaluated false with an empty delimiter; pure functions retain its scalar text0.

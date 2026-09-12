@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 8/51; .1.9 follows the eighth child; .2.1-.2.9 own nine concrete repairs; .28.7 owns the baseline public-check failure.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 9/51; .1.10 follows the ninth child; .2.1-.2.10 own ten concrete repairs; .28.7 owns the baseline public-check failure.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.8 reads interpreter1417–2916 in nine complete windows: 1,500 fragments /52,134 bytes; cumulative 8/51, 11,445 fragments /448,121 bytes. All 99 Lua sources remain baseline-identical. Corrected native helper controls pass22 per installed host, 44 total; false join/split delimiter differences gain .2.9 repair and independent proof. Named-mark7/3 and mutation-result54/12/9 checks pass. Additional public-selector checking fails on unchanged baseline inputs: 35 references against32 and one misclassified negative example; startup .28.7 owns repair/proof. All nine local repair roots and startup .37.1 remain pending; no declared PUC5.4, full gate or corpus pass is claimed. Next .1.9; startup prerequisites and ADR0118 remain.
+  Verification: Lua .1.9 reads interpreter 2917–4416 in nine complete windows: 1,500 fragments /58,443 bytes; cumulative 9/51, 12,945 fragments /506,564 bytes. All 99 Lua sources remain baseline-identical. Both installed hosts pass 449 callable assertions plus 26 valid controls, 950 total; separate false whole-child push observations gain .2.10 repair/proof. Neutral callable23 mutations and uniform11/7/6/8 checks pass. Existing .2.1 gains stale explicit-callable guidance correction. All ten local repairs and startup .37.1/.28.7 remain pending; the earlier public-selector baseline failure is still open. No declared PUC 5.4, full gate or corpus pass is claimed. Next .1.10; startup prerequisites and ADR0118 remain.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -4569,7 +4569,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.9` | `pending` | Read interpreter2917-4416 after clean .1.8; preserve nine Lua repairs and startup .37.1/.28.7. |
+| 1 | `LUA-STARTUP-READING.1.10` | `pending` | Read interpreter 4417-5634 and JSON 1-282 after clean .1.9; preserve ten Lua repairs and startup .37.1/.28.7. |
 
 ## Reading Ledger
 

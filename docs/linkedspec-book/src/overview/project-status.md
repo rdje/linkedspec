@@ -314,15 +314,15 @@ while preserving all repairs, normal hooks and later verification/push requireme
 Dependency build reuse remains separately owned. Lua and supporting-code reading,
 formal book reconciliation and policy prerequisites still follow.
 
-**Lua source reading is underway (8/51 groups):** the complete
+**Lua source reading is underway (9/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first eight groups physically read 11,445 fragments /448,121 bytes,
+ownership. The first nine groups physically read 12,945 fragments /506,564 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority, compiled state and corpus modules,
-the complete facade and the interpreter through helper/capture dispatch. The remaining 43 groups require their own
+the complete facade and the interpreter through callable/statement dispatch. The remaining 42 groups require their own
 reading and verified commits; source reading does not close the limitations below.
 
 **Approved Lua evidence capacity:** the director explicitly approved the complete
@@ -353,10 +353,21 @@ The director also granted one containment `.14` exception for this bounded capac
 implementation before full codebase reading, using focused proof and normal hooks
 without canonical CI/receipt. Later milestone, repair and push requirements remain;
 dependency build-on-update implementation stays separately owned. Lua source reading
-is 8/51; the next group continues interpreter reading.
+is 9/51; the next group finishes interpreter reading and begins JSON.
 All known limitations below retain their repair owners.
 Exact admission and replay: `docs/knowledge/lua-reading-evidence-capacity-admission.md`.
 The historical proposal remains in `docs/knowledge/lua-reading-evidence-capacity-proposal.md`.
+
+**Known Lua child-push limitation — whole false becomes null:**
+when `Child` returns `false`, `push(Child)` and `push(Child,items)` append
+`null`. Direct `call(Child)`, ordinary `push(items,call(Child))` and indexed child
+pushes preserve false. Tested whole true, zero, empty string, array, harray and
+null results also preserve their values. The whole/indexed selection incorrectly
+uses the child value's truthiness; scalar indexing then produces null.
+Lua `.2.10.1` owns the selection repair and `.2.10.2` independent carrier and
+cached-edge proof. Both installed hosts reproduce the defect; the separate
+callable consumer passes 449 assertions per host. Exact evidence:
+`docs/knowledge/lua-interpreter-callable-reading-and-child-false-gap.md`.
 
 **Known Lua helper limitation — false delimiter differs by route:**
 `join_values(false,["a","b"])` returns `"a0b"`, but
