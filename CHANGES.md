@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-12 — LUA-STARTUP-READING.1.3: contracts and parser prefix reading
+
+- Read three exact ranges /1,500 fragments /50,175 bytes in nine windows; cumulative 3/51 with all source unchanged.
+- Locate malformed adjacent-string and escaped-terminator acceptance; .2.5 owns repair and independent proof.
+- Pure parser/resolver controls pass 32 per measured runtime; neutral inventory, signature, callable and punctuation pass.
+- Preserve prior evidence, qualify installed PUC identity, synchronize book/current frontiers and advance .1.4.
+
 ## 2026-09-12 — LUA-STARTUP-READING.1.2: native and ActionIR reading
 
 - Read eight complete scopes /1,500 fragments /54,321 bytes; cumulative 2/51; preserve every Lua source.

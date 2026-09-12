@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-12 — Lua parser must consume one complete quoted literal
+
+- First/last delimiter equality accepts adjacent literals and escaped-final-quote truncation as valid strings.
+- Calls, arrays and assignments inherit that acceptance; .2.5 owns escape-aware recognition and supported-route proof.
+- Separate 32-control pure-module checks verify contextual/inert traversal, aliases, signatures and Unicode spans.
+- Direct managed Lua modules avoid native builds; measured 5.5.1 observations do not establish declared 5.4 conformance.
+
 ## 2026-09-12 — Lua native error formatting requires Lua API conversions
 
 - luaL_error uses Lua formatting: unsupported %lu leaves its numeric argument for a following %s on 5.5.1.

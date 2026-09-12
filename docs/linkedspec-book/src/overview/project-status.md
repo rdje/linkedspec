@@ -314,14 +314,14 @@ while preserving all repairs, normal hooks and later verification/push requireme
 Dependency build reuse remains separately owned. Lua and supporting-code reading,
 formal book reconciliation and policy prerequisites still follow.
 
-**Lua source reading is underway (2/51 groups):** the complete
+**Lua source reading is underway (3/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first two groups physically read 2,445 fragments /119,853 bytes,
+ownership. The first three groups physically read 3,945 fragments /170,028 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
-constructors and the call-name prefix. The remaining 49 groups require their own
+constructors, call names, contracts and the parser prefix. The remaining 48 groups require their own
 reading and verified commits; source reading does not close the limitations below.
 
 **Approved Lua evidence capacity:** the director explicitly approved the complete
@@ -352,7 +352,7 @@ The director also granted one containment `.14` exception for this bounded capac
 implementation before full codebase reading, using focused proof and normal hooks
 without canonical CI/receipt. Later milestone, repair and push requirements remain;
 dependency build-on-update implementation stays separately owned. Lua source reading
-is 2/51; the next group reads the call-name suffix, contracts and parser prefix.
+is 3/51; the next group finishes the parser and enters bounded-child authority.
 All known limitations below retain their repair owners.
 Exact admission and replay: `docs/knowledge/lua-reading-evidence-capacity-admission.md`.
 The historical proposal remains in `docs/knowledge/lua-reading-evidence-capacity-proposal.md`.
@@ -399,6 +399,17 @@ references: `docs/knowledge/lua-native-readme-and-action-ast-reading.md`.
 Separately sampled native import waits stop in macOS `dlopen/mapSegments/fcntl`;
 startup `.81.1` retains controlled loader diagnosis. A stack location and concurrent
 system-service CPU use do not establish an operating-system cause or remedy.
+
+**Known Lua parser limitation — incomplete quoted-literal validation:** adjacent
+`"a" "b"` or `'a' 'b'` literals are accepted as one string containing their interior
+quote characters. An escaped final quote without an actual closing delimiter is
+also accepted. Calls, arrays and assignments inherit the same incorrect successful
+contract resolution. The literal recognizer checks only its first and last delimiter.
+Lua `.2.5.1` owns complete escape-aware recognition and `.2.5.2` independent supported
+route verification. Valid escaped/opposite quotes, pattern backslashes and Unicode
+spans pass the current focused controls. No implicit string concatenation is admitted.
+Exact evidence and a native-free replay:
+`docs/knowledge/lua-contract-parser-reading-and-string-boundary-gap.md`.
 
 **Approved Julia evidence capacity:** the director granted Knowledge lines
 72,000→79,000 and decision-record lines12,000→13,000 under ADR0116. The finite
