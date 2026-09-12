@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 4/51; .1.5 follows the fourth child; .2.1-.2.7 own seven concrete repairs.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 5/51; .1.6 follows the fifth child; .2.1-.2.7 own seven concrete repairs.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.4 reads two exact ranges in nine windows: 1,500 fragments /58,518 bytes; cumulative 4/51, 5,445 fragments /228,546 bytes. All 99 Lua sources remain baseline-identical. Selected authority 272 plus parser 13 controls pass per measured runtime, 570 total; the facade assertion is explicitly excluded. .2.6 owns lost pairless harray members and .2.7 incomplete switch contract diagnostics; runtime switch source separately validates the complete body. Progressive 116/public 60 and write 105 mutations pass. All seven Lua repair owners remain pending; no declared 5.4 conformance, native build or full gate is claimed. Next .1.5; startup prerequisites and ADR0118 remain.
+  Verification: Lua .1.5 reads two exact ranges in nine windows: 1,500 fragments /55,335 bytes; cumulative 5/51, 6,945 fragments /283,881 bytes. All 99 Lua sources remain baseline-identical. Selected authority 272 plus 17 valid controls pass per installed runtime, 578 total; the facade assertion is excluded. The zero-parent-step nested callback observation joins existing startup .37.1; the one-step control and compiled snapshots pass. Progressive 116/public60 and selector 0/20 pass. All seven Lua repair roots remain pending; no declared 5.4 conformance, native build or full gate is claimed. Next .1.6; startup prerequisites and ADR0118 remain.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -3056,6 +3056,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     the combined authority/carrier suite passes 138 tests and does not establish these enforced boundaries.
   Reading update: Dart .1.15 adds ten private-authority controls in docs/knowledge/dart-progressive-nested-authority-gap.md. Direct cost/result bounds reject, but a nested call runs after the parent callback reports zero remaining steps; widened caller inputs regain extra capability and max_steps/result_nodes 100. Own inherited effective grants and per-child remaining budget, with independent cross-runtime expectations and bounded repair children before implementation.
   Julia reading update: Julia .1.12 adds30 nested and14 direct-limit assertions: direct cost/result caps reject, but nested dispatch runs with parent remaining_steps zero and widened inputs regain extra capability plus100 step/result ceilings. Exact mechanism and replay: docs/knowledge/julia-progressive-authority-boundary-gaps.md; existing .37.1 owns repair decomposition.
+  Lua reading update: Lua .1.5 compares unchanged one-step/two-step callback limits on PUC5.5.1 and LuaJIT. A nested callback runs at parent remaining_steps zero; the one-step-left control succeeds and both shared counters charge correctly. dispatch_nested forwards the shared invocation without the parent remaining snapshot. Exact replay and source locations: docs/knowledge/lua-authority-compiled-reading-and-nested-step-gap.md. Existing cross-runtime repair decomposition remains pending.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.37.2`
@@ -4546,7 +4547,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.5` | `pending` | Continue exact Lua group 5 after clean .1.4; all seven Lua repair owners and earlier repairs remain. |
+| 1 | `LUA-STARTUP-READING.1.6` | `pending` | Read compiled-state suffix, corpus modules and facade prefix after clean .1.5; preserve all seven Lua repairs and startup .37.1. |
 
 ## Reading Ledger
 

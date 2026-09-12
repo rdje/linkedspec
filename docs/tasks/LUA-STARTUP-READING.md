@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LUA-STARTUP-READING`
-- Status: `active` / approved capacity; source reading 1/51
+- Status: `active` / approved capacity; source reading 5/51
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.6`
 - Created: `2026-09-12`
 - Last updated: `2026-09-12`
@@ -45,7 +45,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - Ordered range SHA-256: `81c58b8319def28af518fb134a3787513fe746f0f0f73bcacb0e20b9ede1c9d6`.
 - Child-summary SHA-256: `f56ecac262800bd3cc1e6bba0cc25bfe22f095c3dfee41f1c6595d4200145290`.
 - Coordinates are one-based inclusive LF physical lines or absolute file bytes; both byte windows decode as UTF-8.
-- Current physical reading: 4/51 children, 5,445/71,269 fragments and 228,546/2,732,450 bytes.
+- Current physical reading: 5/51 children, 6,945/71,269 fragments and 283,881/2,732,450 bytes.
 - Exact independent replay and capacity evidence: `docs/knowledge/lua-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -131,14 +131,21 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `LUA-STARTUP-READING.1.4 - read parser and authority and own member accounting gaps`
 
 - ID: `LUA-STARTUP-READING.1.5`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `88da6dccce9a8cde785535d1ebe344a028af74ab`.
+  Verification tier: `focused`
+  Focused checks: Exact complete reading and baseline/range reconstruction; canonical authority/compiled-state reconciliation and selected direct-dependent proof; memory, Knowledge, required chronology rollover, rendered book and normal doctrines.
+  Canonical trigger: Ordinary source-reading evidence and required bounded chronology rollover; no source/runtime change. Closeout and push retain their existing prerequisites.
   Goal: Read and understand group 5: bounded_child_parse_authority.lua through compiled_spec.lua.
   Scope: `lua/src/linkedspec/bounded_child_parse_authority.lua` lines 596-1206; `lua/src/linkedspec/compiled_spec.lua` lines 1-889
   Baseline evidence: 1500 fragments / 55335 bytes; ordered range SHA-256 `ac55758901370f425dfde54ee7124efb90a4c5472ec551136883b38c61d3dfc7`.
   Dependencies: .1.4 committed with clean handoff.
   Acceptance: Read every scoped byte without truncation; record comprehension, Knowledge and repair reconciliation, focused proof and a clean per-leaf commit.
-  Verification: `pending`
-  Commit: `pending`
+  Physical reading: Both exact scopes in nine complete untruncated windows; authority finishes and compiled-state suffix remains .1.6-owned. Scope, comprehension, canonical reconciliation and self-contained proof: docs/knowledge/lua-authority-compiled-reading-and-nested-step-gap.md.
+  Findings: Existing startup .37.1 now records the Lua zero-parent-step nested callback observation and positive control; no duplicate repair root. Compiled order, copied child regex and descriptor/source snapshots pass. Preserve .2.1-.2.7 and all source prerequisites.
+  Communication: Director requests factual local parser/compiler descriptions following a reported UI notice; its platform cause is not established.
+  Verification: Lua .1.5 reads two exact ranges in nine windows: 1,500 fragments /55,335 bytes; cumulative 5/51, 6,945 fragments /283,881 bytes. All 99 Lua sources remain baseline-identical. Selected authority 272 plus 17 valid controls pass per installed runtime, 578 total; the facade assertion is excluded. The zero-parent-step nested callback observation joins existing startup .37.1; the one-step control and compiled snapshots pass. Progressive 116/public60 and selector 0/20 pass. All seven Lua repair roots remain pending; no declared 5.4 conformance, native build or full gate is claimed. Next .1.6; startup prerequisites and ADR0118 remain. Independent reconstruction passes 99 sources/51 groups/149 ranges and exact replay bytes. Preservation retains 1,375 prior source/card/decision/history files, 2,450 unchanged task nodes, all 57 prior Known headings and exact history reconstruction; no new repair node. Required rollover archives 211 lines/12,694 bytes from clean source into segment4978; current root249, notes396, manifest34/19343 and collection35/38 fit. One live-root terminal separator is restored explicitly in reconstruction. Knowledge1091/8773, memory60, histories, diff hygiene and book pass; normal hooks govern landing.
+  Commit: `LUA-STARTUP-READING.1.5 - read authority and compiled state and record nested step gap`
 
 - ID: `LUA-STARTUP-READING.1.6`
   Status: `pending`
@@ -881,7 +888,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.5` | `pending` | Read the exact bounded-child authority suffix and compiled-spec prefix after clean .1.4; preserve all seven Lua repair owners. |
+| 1 | `LUA-STARTUP-READING.1.6` | `pending` | Read compiled-state suffix, corpus modules and facade prefix after clean .1.5; preserve all seven Lua repairs and startup .37.1. |
 
 ## Decisions
 
@@ -899,9 +906,11 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Blockers
 
-- None for Lua .1.5 after the clean .1.4 commit. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
+- None for Lua .1.6 after the clean .1.5 commit. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
 
 ## Verification Log
+
+- `2026-09-12` .1.5: Lua .1.5 reads two exact ranges in nine windows: 1,500 fragments /55,335 bytes; cumulative 5/51, 6,945 fragments /283,881 bytes. All 99 Lua sources remain baseline-identical. Selected authority 272 plus 17 valid controls pass per installed runtime, 578 total; the facade assertion is excluded. The zero-parent-step nested callback observation joins existing startup .37.1; the one-step control and compiled snapshots pass. Progressive 116/public60 and selector 0/20 pass. All seven Lua repair roots remain pending; no declared 5.4 conformance, native build or full gate is claimed. Next .1.6; startup prerequisites and ADR0118 remain.
 
 - `2026-09-12` .1.4: Lua .1.4 reads two exact ranges in nine windows: 1,500 fragments /58,518 bytes; cumulative 4/51, 5,445 fragments /228,546 bytes. All 99 Lua sources remain baseline-identical. Selected authority 272 plus parser 13 controls pass per measured runtime, 570 total; the facade assertion is explicitly excluded. .2.6 owns lost pairless harray members and .2.7 incomplete switch contract diagnostics; runtime switch source separately validates the complete body. Progressive 116/public 60 and write 105 mutations pass. All seven Lua repair owners remain pending; no declared 5.4 conformance, native build or full gate is claimed. Next .1.5; startup prerequisites and ADR0118 remain.
 
@@ -919,6 +928,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Commit Log
 
+- `2026-09-12` .1.5: `LUA-STARTUP-READING.1.5 - read authority and compiled state and record nested step gap`.
+
 - `2026-09-12` .1.4: `LUA-STARTUP-READING.1.4 - read parser and authority and own member accounting gaps`.
 
 - `2026-09-12` .1.3: `LUA-STARTUP-READING.1.3 - read action contracts and own complete string boundary repair`.
@@ -934,6 +945,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 - `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` owns creation of this plan.
 
 ## Changelog
+
+- `2026-09-12` .1.5: Complete authority reading and compiled-state prefix; extend existing .37.1 with measured Lua budget evidence, preserve all prior repairs and advance .1.6.
 
 - `2026-09-12` .1.4: Complete parser reading and read authority prefix; own harray and static-switch accounting repairs, preserve all earlier evidence and advance .1.5.
 

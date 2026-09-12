@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `344f4503b3601bf3349af6124fe1225af0322aa4` — clean third Lua reading commit.
-- latest_completed_leaf: `LUA-STARTUP-READING.1.4 - read parser and authority and own member accounting gaps`; cumulative 4/51; 570 selected controls pass.
-- active_work_unit: `LUA-STARTUP-READING.1.5` — next exact bounded-authority/compiled-spec reading child.
-- next_action: Read every exact .1.5 byte; preserve all .2.1-.2.7 repairs and qualified proof; check required history rollover, verify and commit.
+- activation_commit: `88da6dccce9a8cde785535d1ebe344a028af74ab` — clean fourth Lua reading commit.
+- latest_completed_leaf: `LUA-STARTUP-READING.1.5 - read authority and compiled state and record nested step gap`; cumulative 5/51; 578 selected valid controls pass.
+- active_work_unit: `LUA-STARTUP-READING.1.6` — next exact compiled-state/corpus/facade reading child.
+- next_action: Read every exact .1.6 byte; preserve .2.1-.2.7 and startup .37.1 repairs; verify, sync evidence/book and commit.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
-- in_flight_uncommitted: none; all selected authority/parser probes consumed; source accounting defects have concrete pending owners.
-- blockers: none for Lua .1.5; ADR0118 admits the finite reading reserve. Source repairs and later verification retain their existing prerequisites.
+- in_flight_uncommitted: none; completed .1.5 is the clean intended handoff and .1.6 remains pending.
+- blockers: none for Lua .1.6; ADR0118 admits the finite reading reserve. Source repairs and later verification retain their existing prerequisites.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -53,8 +53,8 @@
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
 - current_engineering_notes_capacity: ADR0118 admits 34 files /33 manifest lines /19902 manifest bytes and 28000 aggregate lines for finite Lua reading.
   Current manifest remains 17454 bytes; root/segment/byte limits and all prior history remain unchanged. No rollover is required at admission.
-- current_change_history_capacity: ADR0118 admits 38 files /37 manifest lines /21071 manifest bytes; current collection uses 34 files /18767 manifest bytes.
+- current_change_history_capacity: ADR0118 admits 38 files /37 manifest lines /21071 manifest bytes; current collection uses 35 files /19343 manifest bytes.
   All earlier archive bytes and other history controls remain unchanged; the complete 57-unit Lua reserve is checked. Proportionate governance: ADR0115.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-12 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart/Julia reading closed; Lua reading 4/51 (5,445 fragments/228,546 bytes), plan 51 groups, 99 files / 71269 fragments / 2732450 bytes. Supporting code, formal book .4 and policy .5 remain.
+- latest_bootstrap_read: 2026-09-12 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart/Julia reading closed; Lua reading 5/51 (6,945 fragments/283,881 bytes), plan 51 groups, 99 files / 71269 fragments / 2732450 bytes. Supporting code, formal book .4 and policy .5 remain.

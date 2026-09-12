@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-12 — Lua nested dispatch must carry the parent remaining step budget
+
+- A parent with zero local steps left still enters a nested callback; both calls correctly charge the larger invocation.
+- The matched one-step-left control succeeds; .37.1 retains cross-runtime repair and independent boundary proof.
+- Pure compiled-state checks retain ordered rules, copied child regex and descriptor snapshots without native loading.
+- Keep reports factual and local per director request; no cause is inferred for the reported platform UI notice.
+
 ## 2026-09-12 — Lua must account for every authored aggregate and control member
 
 - Harray classification skips pairless comma members; switch contract traversal skips retained non-projected bodies.

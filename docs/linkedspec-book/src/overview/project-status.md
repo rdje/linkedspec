@@ -314,15 +314,15 @@ while preserving all repairs, normal hooks and later verification/push requireme
 Dependency build reuse remains separately owned. Lua and supporting-code reading,
 formal book reconciliation and policy prerequisites still follow.
 
-**Lua source reading is underway (4/51 groups):** the complete
+**Lua source reading is underway (5/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first four groups physically read 5,445 fragments /228,546 bytes,
+ownership. The first five groups physically read 6,945 fragments /283,881 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
-constructors, call names, contracts, the complete parser and the bounded-authority
-prefix. The remaining 47 groups require their own
+constructors, call names, contracts, the complete parser, bounded authority and compiled-state
+prefix. The remaining 46 groups require their own
 reading and verified commits; source reading does not close the limitations below.
 
 **Approved Lua evidence capacity:** the director explicitly approved the complete
@@ -353,10 +353,22 @@ The director also granted one containment `.14` exception for this bounded capac
 implementation before full codebase reading, using focused proof and normal hooks
 without canonical CI/receipt. Later milestone, repair and push requirements remain;
 dependency build-on-update implementation stays separately owned. Lua source reading
-is 4/51; the next group finishes bounded-child authority and enters compiled state.
+is 5/51; the next group finishes compiled state and reads corpus and facade sources.
 All known limitations below retain their repair owners.
 Exact admission and replay: `docs/knowledge/lua-reading-evidence-capacity-admission.md`.
 The historical proposal remains in `docs/knowledge/lua-reading-evidence-capacity-proposal.md`.
+
+**Known Lua limitation — nested parser step budget:** when a parent callback has
+consumed its one-step allowance, its nested callback can still run against the
+larger shared invocation budget. A matched two-step example with one step left
+works as expected, and both calls are charged to the shared invocation. Nested
+dispatch checks the new call and shared counter without carrying forward the
+parent request's narrower remaining budget. The September 12 pure-module check
+reproduces this on PUC5.5.1 and LuaJIT; it establishes no declared PUC5.4 result.
+Existing cross-runtime repair `SESSION-STARTUP-READING.37.1` now includes Lua.
+The same focused check confirms compiled rule ordering, copied child regex data
+and descriptor snapshot isolation. Exact replay and limits:
+`docs/knowledge/lua-authority-compiled-reading-and-nested-step-gap.md`.
 
 **Known Lua documentation limitation — obsolete gate status:** the backend README
 still presents an earlier `176/177` help failure as current. Dated admission records
