@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua projector reading and source/matcher repair ownership
+
+- Read two ranges /1,500 fragments /50,709 bytes; cumulative 18/51, 22,651 fragments /918,924 bytes.
+- Four unchanged suites pass 591 assertions per host; ten semantic cases retain three construction failures and three wrong-source cases.
+- Own mixed slots, regex-call source and explicit child-match divergence under .2.16/.2.17/.2.18; shared startup .70 gains Lua grouped evidence.
+- LUA-STARTUP-READING.1.18 preserves full two-host/native/reconstructed/reference proof and prior host failures; next .1.19.
+
 ## 2026-09-13 — Lua semantic query reading and qualified host proof
 
 - Read four ranges /1,500 fragments /53,106 bytes; cumulative17/51,21,151 fragments /868,215 bytes.

@@ -329,19 +329,20 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (17/51 groups):** the complete
+**Lua source reading is underway (18/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first seventeen groups physically read 21,151 fragments /868,215 bytes,
+ownership. The first eighteen groups physically read 22,651 fragments /918,924 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
 also cover the complete generated MCP module, contract runtime, decoded server,
 wire, primary CLI, private recognition transaction module and its runtime adapter,
 scoped binding, scalar numeric, compilation outcome, semantic index, observation
-and query, plus the runtime projection prefix. The remaining 34 groups require
+and query, the complete runtime projector and the static projector prefix. The
+remaining 33 groups require
 their own reading and verified
 commits; source reading does not close the limitations below.
 
@@ -381,6 +382,12 @@ assertions pass. The host-level cause and required declared 5.4 reruns remain
 under the toolchain limitation below. These results do not establish complete
 supported-runtime semantic conformance.
 
+**Lua projector verification:** all 64 static graph, 122 remaining-target,
+136 typed-call and 269 runtime-projection assertions pass on each installed host.
+Additional source and runtime probes reveal the limitations below. Passing these
+finite fixtures does not establish correct source correlation or matcher ownership
+for every valid spec, and the earlier PUC observation failures remain open.
+
 **Approved Lua evidence capacity:** the director explicitly approved the complete
 Lua proposal under ADR0118. Containment `.14` implements exactly these eleven
 controls for 51 reading groups plus six support slots:
@@ -409,8 +416,8 @@ The director also granted one containment `.14` exception for this bounded capac
 implementation before full codebase reading, using focused proof and normal hooks
 without canonical CI/receipt. Later milestone, repair and push requirements remain;
 dependency build-on-update implementation stays separately owned. Lua source reading
-is 17/51; the next group reads the runtime projection suffix and static projection
-prefix. The installed-host test failures below remain open.
+is 18/51; the next group reads the static projector suffix, SHA module and
+emitter prefix. The installed-host test failures below remain open.
 All known limitations below retain their repair owners.
 Exact admission and replay: `docs/knowledge/lua-reading-evidence-capacity-admission.md`.
 The historical proposal remains in `docs/knowledge/lua-reading-evidence-capacity-proposal.md`.
@@ -428,6 +435,53 @@ coordinates remain existing controls; a new public bounds policy is not implied.
 The observations use the private helper directly. They do not demonstrate an
 ordinary spec producing infinity or a parser running forever.
 Exact evidence: `docs/knowledge/lua-wire-cli-recognition-reading-and-finite-state-gap.md`.
+
+**Known Lua semantic limitation — mixed regex-slot order:** a Top rule containing
+`/a/ -> Child { return(match_text()) }` before a standalone `/b/` compiles and
+executes, but semantic index construction rejects its structural slot. Reversing
+those members permits construction and reports the exact `/b/` source. The
+projector removes parent matchers from authored slots before comparing against an
+unfiltered compiled prefix. Lua `.2.16.1/.2` own typed slot correlation and
+independent carrier proof; the runtime matcher limitation below is separate.
+
+**Known Lua semantic limitation — grouped selectors:** both
+`-> ChildLong | Child[1] { return(match_text()) }` and the same form with Other
+compile into two selector-1 edges and execute correctly, but semantic index
+construction fails. The source scanner requires a bracket adjacent to the first
+target even when that target inherits the shared selector. Separate explicitly
+indexed members succeed. Shared startup `.70.1/.70.3` owns this Lua recurrence
+alongside the earlier backend evidence.
+
+**Known Lua semantic limitation — call source can point into a matcher:** when an
+action assigns `value = trim(" x ")`, a preceding `/(trim(x))/`,
+`/(?:trim(x))/` or `/ trim(x)/` matcher can supply the reported call and binding
+source `trim(x)`. Execution returns x, but the semantic source identifies the
+wrong occurrence. The plain `/trim(x)/` control reports the actual action source.
+Lua `.2.17.1/.2` own lexical/typed occurrence repair and exact source-span proof.
+
+**Known Lua runtime limitation — same-line parent matcher overrides child slot:**
+with Child slots `/a/` and `/b/`, this source currently matches x in Lua:
+
+```spec
+Top::
+ /x/ -> Child[1] { return(match_text()) }
+Child::
+ /a/
+ /b/
+```
+
+The written `Child[1]` owns the selected match under the existing explicit-edge
+contract. The reference therefore returns b on input b and null on input x. Lua
+instead returns x on input x and null on input b, on both native and reconstructed
+routes. Removing the parent `/x/` gives the agreeing target-only control;
+`/x/ -> Top[0]` also agrees as a self-target control. Lua retains the correct child
+pattern in descriptor dependency metadata but uses the parent pattern at runtime.
+Lua `.2.18.1/.2` own compiler/runtime reconciliation and supported-carrier proof,
+coordinated with the separately owned semantic slot repair.
+
+Exact source ranges, complete queries, reference descriptor/generated handler and
+all four limitation replays:
+`docs/knowledge/lua-semantic-projector-reading-and-source-ownership-gaps.md`.
 
 **Known Lua query limitation — rejected false evidence becomes null:** a raw
 query with `contract=false` is rejected, but its diagnostic reports

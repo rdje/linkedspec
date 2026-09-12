@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `dce95cec24f66a2badf0746edf1b701f78ae15f8` — clean sixteenth Lua reading commit.
-- latest_completed_leaf: `LUA-STARTUP-READING.1.17 - read semantic queries and preserve budget and host failure ownership`; reading17/51; two PUC5.5 nil-error test failures remain .2.2-owned.
-- active_work_unit: `LUA-STARTUP-READING.1.18` — next exact runtime/static semantic reading child.
-- next_action: Read the runtime projection suffix and static projection prefix; reconcile owned repairs and host failures, verify, sync book/evidence and commit.
+- activation_commit: `cdf15066d507d5bced806dbee5139aeab203e270` — clean seventeenth Lua reading commit.
+- latest_completed_leaf: `LUA-STARTUP-READING.1.18 - read semantic projectors and own source and matcher repairs`; reading 18/51; 1,182 selected assertions pass; source/matcher repairs remain open.
+- active_work_unit: `LUA-STARTUP-READING.1.19` — next exact static/SHA/emitter reading child.
+- next_action: Read the static projector suffix, SHA module and emitter prefix; reconcile owned repairs, verify exact evidence, sync the book and commit.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; all selected runs and failure diagnosis consumed; next .1.18 activates from the clean committed handoff.
-- blockers: none for bounded .1.18 reading. PUC5.5 nil-error tests fail under .2.2; public-selector baseline fails under .28.7. All repair and supported-runtime prerequisites remain.
+- in_flight_uncommitted: none; all selected native, neutral and retained reference runs consumed; next .1.19 activates from the clean committed handoff.
+- blockers: none for bounded .1.19 reading. Prior PUC5.5 nil-error tests fail under .2.2; public-selector baseline fails under .28.7. All repair and supported-runtime prerequisites remain.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -57,4 +57,4 @@
   All earlier archive bytes and other history controls remain unchanged; the complete 57-unit Lua reserve is checked. Proportionate governance: ADR0115.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart/Julia reading closed; Lua reading17/51 (21,151 fragments/868,215 bytes), plan51 groups,99 files /71269 fragments /2732450 bytes. Supporting code, formal book .4 and policy .5 remain.
+- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart/Julia reading closed; Lua reading 18/51 (22,651 fragments/918,924 bytes), plan 51 groups, 99 files /71,269 fragments /2,732,450 bytes. Supporting code, formal book .4 and policy .5 remain.

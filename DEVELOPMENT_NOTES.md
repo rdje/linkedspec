@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Distinguish authored occurrence, compiled identity and runtime matcher
+
+- Filtered authored regex slots cannot be joined to an unfiltered compiled prefix; inherited grouped selectors cannot require per-target brackets.
+- Grouped/whitespace-prefixed regexes can steal an action call's semantic source even when the query schema and execution value are correct.
+- Reference descriptor/generated-handler proof shows that Lua's correct child dependency metadata can coexist with wrong parent-matcher execution.
+- LUA-STARTUP-READING.1.18 preserves exact observations and three pending Lua repair roots in docs/knowledge/lua-semantic-projector-reading-and-source-ownership-gaps.md.
+
 ## 2026-09-13 — Semantic evidence, logical budgets and host error identity
 
 - Successful scalar false copies must remain distinct from copy failures; the raw query evidence wrapper currently converts false to null.

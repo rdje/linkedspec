@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 17/51; .1.18 follows the seventeenth child; .2.1-.2.15 own fifteen concrete repairs, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 18/51; .1.19 follows the eighteenth child; .2.1-.2.18 own eighteen concrete repairs, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.17 completes semantic index, observation and query reading and reads the runtime projection prefix in twelve complete windows: 1,500 fragments /53,106 bytes; cumulative17/51,21,151 fragments /868,215 bytes. All99 Lua sources remain baseline-identical;31 files are fully read. Query571 and projection269 pass per host; LuaJIT observation121/generated80 pass. Installed PUC observation120/121 and generated79/80 retain two nil-error failures, root-caused to documented5.5 host coercion under existing .2.2. Fourteen two-host query responses match; twelve agree fully with neutral and two false-to-null evidence differences gain .2.15 ownership. Six shared budget cases gain bounded Lua repair/proof under startup .82.3.1. Neutral6/20/128 passes; no supported dual-host or full-gate pass is claimed. All fifteen Lua roots and startup .37.1/.28.7/.82 remain pending. Named arguments stay approved and parked. Next .1.18 reads the runtime projection suffix and static projection prefix under unchanged startup and ADR0118 prerequisites.
+  Verification: Lua .1.18 reads the runtime projector suffix and static prefix in six complete windows: 1,500 fragments /50,709 bytes; cumulative 18/51, 22,651 fragments /918,924 bytes. All 99 Lua sources remain baseline-identical; 32 files are fully read. Four selected suites pass 591 assertions per installed host, 1,182 total. Ten complete two-host semantic observations locate mixed-slot and regex-call source failures under .2.16/.2.17 and grouped-selector recurrence under shared startup .70. Sixteen native/reconstructed matcher rows per host plus eight reference Get executions locate explicit child-match divergence under .2.18; the initial ten reference cases retain nine agreements and one mismatch. Neutral 6/20/128 passes; prior PUC observation failures remain .2.2-owned. All eighteen Lua repair roots remain open. Next .1.19 reads the static projector suffix, SHA module and emitter prefix; approved named arguments and all startup/ADR0118 prerequisites remain unchanged.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -4298,6 +4298,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     Perl's second group edge also loses its source. Three paired Get/CLI controls still return b correctly.
   Dart .1.33: Both ChildLong | Child[1] and Other | Child[1] compile as two shared-selector index-1 edges and execute b, but public semantic index construction throws semantic_static_correlation_failed. The helper expects a bracket immediately after each target and loses the first target selector even without prefix overlap. Separate indexed members succeed. Existing grouped repair owns this Dart recurrence; regex-arrow variants are separately Dart .2.22.
   Commit: `pending`
+  Lua .1.18: Both installed hosts compile ChildLong | Child[1] and Other | Child[1] into two index-1 edges and execute b, but semantic construction fails the action-edge identity guard. explicit_target_index scans label occurrences for an adjacent bracket and cannot recover the first target's inherited shared selector. Separate indexed members and the tested regex-arrow control succeed. Preserve this exact Lua cause under the existing shared repair.
 
 - ID: `SESSION-STARTUP-READING.70.2`
   Status: `pending`
@@ -4320,6 +4321,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: `pending` — current neutral fixtures pass despite these additional grouped controls.
   Dart .1.33 recurrence: Preserve eight public native compiled/index/runtime controls: two grouped failures, two regex-arrow failures under Dart .2.22, and four successful controls. All eight execute expected inputs; do not infer emitted, reconstructed, other-backend or MCP reproduction from this checkpoint.
   Commit: `pending`
+  Lua .1.18 recurrence: Retain both complete grouped construction failures, successful separate-member and regex-arrow controls, typed compiled selectors and independent runtime values on both installed hosts. Further supported-PUC, reconstructed/generated, observation and MCP census remains pending; existing .2.2 owns primary identity.
 
 - ID: `SESSION-STARTUP-READING.71`
   Status: `pending`
@@ -4600,7 +4602,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.18` | `pending` | Read the runtime projection suffix and static projection prefix after clean .1.17; preserve all repair and host-failure evidence plus the parked named-argument direction. |
+| 1 | `LUA-STARTUP-READING.1.19` | `pending` | Read the static projector suffix, SHA module and emitter prefix after clean .1.18; preserve all source, matcher and host-failure repair evidence plus parked named arguments. |
 
 ## Reading Ledger
 
