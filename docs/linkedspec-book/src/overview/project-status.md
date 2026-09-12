@@ -314,15 +314,15 @@ while preserving all repairs, normal hooks and later verification/push requireme
 Dependency build reuse remains separately owned. Lua and supporting-code reading,
 formal book reconciliation and policy prerequisites still follow.
 
-**Lua source reading is underway (10/51 groups):** the complete
+**Lua source reading is underway (11/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first ten groups physically read 14,445 fragments /558,251 bytes,
+ownership. The first eleven groups physically read 15,149 fragments /580,277 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority, compiled state and corpus modules,
-the complete facade and interpreter, plus the JSON prefix. The remaining 41 groups require their own
+the complete facade, interpreter, JSON and matching, plus the MCP header. The remaining 40 groups require their own
 reading and verified commits; source reading does not close the limitations below.
 
 **Approved Lua evidence capacity:** the director explicitly approved the complete
@@ -353,10 +353,20 @@ The director also granted one containment `.14` exception for this bounded capac
 implementation before full codebase reading, using focused proof and normal hooks
 without canonical CI/receipt. Later milestone, repair and push requirements remain;
 dependency build-on-update implementation stays separately owned. Lua source reading
-is 10/51; the next group finishes JSON, reads matching and begins the MCP contract.
+is 11/51; the next two byte-range groups read the oversized generated MCP payload.
 All known limitations below retain their repair owners.
 Exact admission and replay: `docs/knowledge/lua-reading-evidence-capacity-admission.md`.
 The historical proposal remains in `docs/knowledge/lua-reading-evidence-capacity-proposal.md`.
+
+**Known Lua JSON limitation — exact PUC integers change during encoding:**
+PUC Lua holds `9007199254740993` exactly, but the JSON encoder emits
+`9007199254740992`. Signed near-limit integer cases also change. The integral
+number branch formats through floating point; an integer-specific comparison
+preserves the original decimal. LuaJIT has already rounded those inputs before
+encoding, so its representation limit is a separate boundary.
+Lua `.2.11.1` owns preserving already represented integers and `.2.11.2`
+independent container/carrier proof. This adds no arbitrary-precision promise.
+Exact evidence: `docs/knowledge/lua-json-matching-reading-and-integer-encoding-gap.md`.
 
 **Known Lua child-push limitation — whole false becomes null:**
 when `Child` returns `false`, `push(Child)` and `push(Child,items)` append
@@ -406,6 +416,12 @@ Lua `.2.8.3` owns nil-only table defaulting and `.2.8.4` independent caller/alia
 verification, separately from the iteration field. Existing typed errors and
 valid parse results must remain unchanged. Exact five-route proof:
 `docs/knowledge/lua-interpreter-json-reading-and-option-table-gap.md`.
+
+Matching has the same defaulting gap: false seek/consume/required-slot cursors,
+register cursors and register option tables silently become defaults. Other tested
+invalid values reject, and false capture-start positions already reject correctly.
+Lua `.2.8.5/.2.8.6` own matching correction and independent proof, preserving
+numeric clamping, Unicode boundaries, capture clearing and register identity.
 
 **Known Lua limitation — nested parser step budget:** when a parent callback has
 consumed its one-step allowance, its nested callback can still run against the

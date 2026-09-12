@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl, Rust, Dart and Julia reading are complete. Canonical capacity admission is complete at a67a18bf. Lua .1.10 reads the interpreter suffix and JSON prefix in ten complete windows: 1,500 fragments /51,687 bytes; cumulative 10/51, 14,445 fragments /558,251 bytes. All 99 Lua sources remain baseline-identical; interpreter reading is complete. Both installed hosts pass runtime/JSON 68, cursor 108 and observation 43 assertions, 438 total. Five false option-table acceptances per host extend existing .2.8 through separate repair/proof children .2.8.3/.4. Neutral cursor 60 and root 54 mutations pass. All ten local repair roots and startup .37.1/.28.7 remain pending; the earlier public-selector baseline failure stays open. No declared PUC 5.4, full gate or corpus pass is claimed. Next .1.11; startup prerequisites and ADR0118 remain. Dart reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl, Rust, Dart and Julia reading are complete. Canonical capacity admission is complete at a67a18bf. Lua .1.11 reads the JSON suffix, matching module and MCP header in six complete windows: 704 fragments /22,026 bytes; cumulative 11/51, 15,149 fragments /580,277 bytes. All 99 Lua sources remain baseline-identical; JSON and matching reading complete. Both installed hosts pass 60 focused and 112 duplicate-slot assertions, 344 total, plus three PUC integer-format comparisons. .2.11 owns exact represented-integer JSON encoding; .2.8.5/.6 own matching false defaults. Neutral duplicate-slot 59 mutations pass. All eleven local repair roots and startup .37.1/.28.7 remain pending; prior public-selector failure stays open. No declared PUC 5.4, full gate or corpus pass is claimed. Next .1.12; startup prerequisites and ADR0118 remain. Dart reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.82` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `LUA-STARTUP-READING.1.10 - finish interpreter reading and own option table validation` — Lua .1.10 reads the interpreter suffix and JSON prefix in ten complete windows: 1,500 fragments /51,687 bytes; cumulative 10/51, 14,445 fragments /558,251 bytes. All 99 Lua sources remain baseline-identical; interpreter reading is complete. Both installed hosts pass runtime/JSON 68, cursor 108 and observation 43 assertions, 438 total. Five false option-table acceptances per host extend existing .2.8 through separate repair/proof children .2.8.3/.4. Neutral cursor 60 and root 54 mutations pass. All ten local repair roots and startup .37.1/.28.7 remain pending; the earlier public-selector baseline failure stays open. No declared PUC 5.4, full gate or corpus pass is claimed. Next .1.11; startup prerequisites and ADR0118 remain.
+- `LUA-STARTUP-READING.1.11 - read JSON and matching and own integer encoding repair` — Lua .1.11 reads the JSON suffix, matching module and MCP header in six complete windows: 704 fragments /22,026 bytes; cumulative 11/51, 15,149 fragments /580,277 bytes. All 99 Lua sources remain baseline-identical; JSON and matching reading complete. Both installed hosts pass 60 focused and 112 duplicate-slot assertions, 344 total, plus three PUC integer-format comparisons. .2.11 owns exact represented-integer JSON encoding; .2.8.5/.6 own matching false defaults. Neutral duplicate-slot 59 mutations pass. All eleven local repair roots and startup .37.1/.28.7 remain pending; prior public-selector failure stays open. No declared PUC 5.4, full gate or corpus pass is claimed. Next .1.12; startup prerequisites and ADR0118 remain.
 
 ## Next Action
 
-- `LUA-STARTUP-READING.1.11` — Read exact JSON 283-480, matching 1-500 and MCP contract 1-6; preserve repair evidence, verify and commit.
+- `LUA-STARTUP-READING.1.12` — Read all generated MCP bytes261-65796 in bounded windows; preserve repair evidence, verify and commit.
 
 ## Recent Completions
+
+- `2026-09-12` — `LUA-STARTUP-READING.1.11` reads 704 fragments/22026 bytes; 344 native assertions plus 3 integer comparisons pass; .2.11/.2.8.5-.6 own confirmed repairs; next .1.12.
 
 - `2026-09-12` — `LUA-STARTUP-READING.1.10` reads 1,500 fragments/51,687 bytes and completes interpreter reading; 438 assertions pass; .2.8.3/.4 own false option-table repair; next .1.11.
 
@@ -48,8 +50,6 @@
 - `2026-09-12` — `JULIA-STARTUP-READING.3.2` closes verified Julia reading under explicit ADR0117 approval; all80 repair nodes remain unchanged; Lua .3.6 follows.
 
 - `2026-09-12` — `JULIA-STARTUP-READING.3.1` independently verifies52 reading commits/95 files/122 cards/80 repairs; full Julia12903/storage22-5/primary/105 passes; .3.2 decision pending.
-
-- `2026-09-11` — `JULIA-STARTUP-READING.1.52` finishes all95 Julia files/52 groups;678 assertions and neutral checks pass; .2.27 owns parent-state test coverage.
 
 ## History
 

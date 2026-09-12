@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-12 — LUA-STARTUP-READING.1.11: JSON/matching completion and integer encoding ownership
+
+- Read all three exact scopes /704 fragments /22026 bytes in six windows; cumulative11/51; all Lua source unchanged.
+- Corrected native probes pass60 per host and complete duplicate-slot consumers pass112 per host; three PUC integer comparisons pass.
+- Own represented-integer JSON loss under .2.11 and matching false defaults under .2.8.5/.6; preserve the LuaJIT representation distinction.
+- Neutral duplicate-slot59 mutations pass; retain all earlier evidence and synchronize book/frontiers to generated MCP range .1.12.
+
 ## 2026-09-12 — LUA-STARTUP-READING.1.10: interpreter completion and option-table validation
 
 - Read interpreter4417-5634 and JSON1-282 /1500 fragments /51687 bytes in ten windows; cumulative10/51; all Lua source unchanged.

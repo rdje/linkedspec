@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-12 — PUC JSON encoding must preserve an integer already represented exactly
+
+- The %.0f integral-number branch rounds three exact PUC integers; %d and host integer identity retain their original decimals.
+- LuaJIT already rounds these inputs at decode; do not conflate that representation limit with the measured PUC encoder loss.
+- False matching cursors/register options become defaults while other invalid inputs reject; .2.8.5/.6 own the bounded correction.
+- One initial Unicode-key fixture escape was fixed before passing60x2 controls;112x2 duplicate-slot proof and all cleanup outcomes pass.
+
 ## 2026-09-12 — Lua optional runtime tables must be checked before defaulting
 
 - Engine, parse and traced parse replace false with an empty table before validation; execute aliases inherit that behavior.

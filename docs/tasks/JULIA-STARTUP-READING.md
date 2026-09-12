@@ -1741,7 +1741,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.11` | `pending` | Read JSON 283-480, matching 1-500 and MCP contract 1-6 after clean .1.10; preserve ten Lua repairs and startup .37.1/.28.7. |
+| 1 | `LUA-STARTUP-READING.1.12` | `pending` | Read generated MCP bytes261-65796 in complete bounded windows after clean .1.11; preserve eleven Lua repairs and startup .37.1/.28.7. |
 
 ## Decisions
 

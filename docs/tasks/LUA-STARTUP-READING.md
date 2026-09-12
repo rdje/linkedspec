@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LUA-STARTUP-READING`
-- Status: `active` / approved capacity; source reading 10/51
+- Status: `active` / approved capacity; source reading 11/51
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.6`
 - Created: `2026-09-12`
 - Last updated: `2026-09-12`
@@ -228,14 +228,20 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `LUA-STARTUP-READING.1.10 - finish interpreter reading and own option table validation`
 
 - ID: `LUA-STARTUP-READING.1.11`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `adb79b644aa920d7b39403f140b0010f6c210063`.
+  Verification tier: `focused`
+  Focused checks: Exact complete reading and baseline/range reconstruction; canonical JSON/matching/MCP reconciliation and selected direct-dependent proof; memory, Knowledge, histories, rendered book and normal doctrines.
+  Canonical trigger: Ordinary source-reading evidence; no runtime/source change. Closeout and push retain existing prerequisites.
   Goal: Read and understand group 11: json.lua through mcp_contract.lua.
   Scope: `lua/src/linkedspec/json.lua` lines 283-480; `lua/src/linkedspec/matching.lua` lines 1-500; `lua/src/linkedspec/mcp_contract.lua` lines 1-6
   Baseline evidence: 704 fragments / 22026 bytes; ordered range SHA-256 `493407d9e0e434460bfe168384c2086a5cce4e67003aaea21a222c5aa28b1073`.
   Dependencies: .1.10 committed with clean handoff.
   Acceptance: Read every scoped byte without truncation; record comprehension, Knowledge and repair reconciliation, focused proof and a clean per-leaf commit.
-  Verification: `pending`
-  Commit: `pending`
+  Physical reading: All 704 scoped fragments /22,026 bytes read in six complete windows. JSON and matching finish; only the six-line generated MCP header is read here. Exact scope/digests, comprehension and both replay payloads: docs/knowledge/lua-json-matching-reading-and-integer-encoding-gap.md.
+  Findings: .2.11/.2.11.1/.2.11.2 own PUC represented-integer JSON loss with independent carrier proof; LuaJIT decode precision is qualified separately. Existing .2.8.5/.6 own false matching defaults and parent closeout waits for all six children. One initial fixture escape was corrected before the passing native runs; no source change.
+  Verification: Lua .1.11 reads the JSON suffix, matching module and MCP header in six complete windows: 704 fragments /22,026 bytes; cumulative 11/51, 15,149 fragments /580,277 bytes. All 99 Lua sources remain baseline-identical; JSON and matching reading complete. Both installed hosts pass 60 focused and 112 duplicate-slot assertions, 344 total, plus three PUC integer-format comparisons. .2.11 owns exact represented-integer JSON encoding; .2.8.5/.6 own matching false defaults. Neutral duplicate-slot 59 mutations pass. All eleven local repair roots and startup .37.1/.28.7 remain pending; prior public-selector failure stays open. No declared PUC 5.4, full gate or corpus pass is claimed. Next .1.12; startup prerequisites and ADR0118 remain. Independent reconstruction passes all 99 sources/51 groups/149 ranges and both exact replay payloads. Preservation retains 1,383 prior source/card/decision/history files, 2,462 unchanged prior task nodes and all 62 prior Known headings; exactly five pending repair nodes are added. Knowledge 1097/8810, memory 60, histories 291/438 (notes warning, no rollover) and rendered book pass. The existing 10,047,337-byte search-index warning retains startup .41.9 ownership; normal doctrine hooks govern landing.
+  Commit: `LUA-STARTUP-READING.1.11 - read JSON and matching and own integer encoding repair`
 
 - ID: `LUA-STARTUP-READING.1.12`
   Status: `pending`
@@ -640,7 +646,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - ID: `LUA-STARTUP-READING.2`
   Status: `pending`
   Goal: Own every newly confirmed Lua defect or coverage gap without losing existing shared repair ownership.
-  Children: `.2.1` owns README status; `.2.2` primary identity; `.2.3` native error safety; `.2.4` executable diagnostic teaching; `.2.5` complete quoted-literal parsing; `.2.6` harray pair completeness; `.2.7` complete switch contract diagnostics; `.2.8` iteration and option-table validation; `.2.9` false delimiter preservation; `.2.10` whole child-result false preservation.
+  Children: `.2.1` owns README status; `.2.2` primary identity; `.2.3` native error safety; `.2.4` executable diagnostic teaching; `.2.5` complete quoted-literal parsing; `.2.6` harray pair completeness; `.2.7` complete switch contract diagnostics; `.2.8` iteration/options/matching-cursor validation; `.2.9` false delimiter preservation; `.2.10` whole child-result false preservation; `.2.11` exact representable integer JSON encoding.
   Acceptance: Define concrete causal evidence, affected behavior and repair/verification children before implementing any finding; preserve startup prerequisites and all earlier owners.
   Verification: `pending`
   Commit: `pending`
@@ -842,11 +848,12 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 
 - ID: `LUA-STARTUP-READING.2.8`
   Status: `pending`
-  Goal: Reject explicitly invalid iteration counts and runtime option tables before applying absent-value defaults.
+  Goal: Reject explicitly invalid iteration counts, optional runtime/matching tables and matching cursors before applying absent-value defaults.
   Evidence: Reading .1.7 executes the real native facade on PUC 5.5.1 and LuaJIT. max_iterations=false creates an engine with 10000; omitted options also use 10000, positive 1/2 are retained, and true/0/-1/1.5/string "2" reject. interpreter.lua line 144 uses options.max_iterations or 10000 before the type/range check, so false is replaced before validation. This is an option-validation defect; no long-running parser failure is inferred.
-  Children: `.2.8.1`, `.2.8.2` own the iteration field; `.2.8.3`, `.2.8.4` own public optional-table boundaries.
+  Children: `.2.8.1`, `.2.8.2` own the iteration field; `.2.8.3`, `.2.8.4` own public runtime optional-table boundaries; `.2.8.5`, `.2.8.6` own matching defaults.
   Dependencies: Startup .3/.4/.5; preserve the declared PUC target and existing toolchain repair .2.2.
   Reading .1.10 extension: Native engine/parse/execute/traced-parse/traced-execute all accept false options while nil/empty tables pass and true/zero/string reject typed table errors. Three options or {} owners replace false before validation; the execution aliases inherit that behavior. Keep this additional surface decomposed under .2.8.3/.4, independently from the numeric field.
+  Reading .1.11 extension: Matching seek/consume/required-slot, register cursor construction and cursor setter accept false as zero; false register options become defaults. Other invalid cursors/options reject typed errors, and false capture_start_byte correctly rejects. Keep matching normalization isolated in new .2.8.5/.6; retain existing clamping and capture clearing semantics.
   Acceptance: Default only when the field or optional table is absent, retain positive integer behavior, reject explicitly invalid supplied values with the established typed error, and preserve source identity and successful parser behavior. Decompose any additional affected option surfaces before expanding scope.
   Verification: `pending`; .1.7 retains the exact native comparison in docs/knowledge/lua-interpreter-prefix-reading-and-iteration-option-gap.md.
   Commit: `pending`
@@ -881,7 +888,24 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Status: `pending`
   Goal: Independently verify nil-only runtime option-table defaults across supported public callers.
   Dependencies: .2.8.3 committed cleanly.
-  Acceptance: Exercise engine/parse/execute/traced entry points and applicable loaded/generated adapters with independent absent/false/invalid/valid option tables on supported PUC and LuaJIT. Assert unchanged typed diagnostics, input/caller-table preservation and successful result identity. Close parent .2.8 only after all four children and public/Knowledge evidence agree.
+  Acceptance: Exercise engine/parse/execute/traced entry points and applicable loaded/generated adapters with independent absent/false/invalid/valid option tables on supported PUC and LuaJIT. Assert unchanged typed diagnostics, input/caller-table preservation and successful result identity. Close parent .2.8 only after all six children and public/Knowledge evidence agree.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.8.5`
+  Status: `pending`
+  Goal: Validate supplied matching cursors and register option tables before defaulting.
+  Dependencies: Parent .2.8 startup/identity prerequisites; preserve the separate numeric-field and public-runtime table repairs.
+  Scope: seek_match, consume_match, match_runtime_regex_slot and runtime_match_registers defaults in lua/src/linkedspec/matching.lua, inherited runtime/alternation aliases and with_cursor_byte.
+  Acceptance: Default only nil; reject false using existing typed offset/table errors. Preserve omitted/zero/valid numeric cursors, negative/end clamping, Unicode boundary rejection, independent seek/consume policy, explicit null capture clearing, child/local register identity and caller inputs. Show all six observed false routes RED/GREEN without exercising the separately broken native invalid-pattern formatter.
+  Verification: `pending`; exact matching controls are in docs/knowledge/lua-json-matching-reading-and-integer-encoding-gap.md.
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.8.6`
+  Status: `pending`
+  Goal: Independently verify matching optional-value validation and unchanged register/cursor semantics.
+  Dependencies: .2.8.5 committed cleanly.
+  Acceptance: Cover direct functions and methods, required-slot and choice paths, register construction/update/child entry, omitted/false/other invalid options and UTF-8 boundaries on supported PUC and LuaJIT. Preserve matched/no-match/zero-width distinctions, typed failures and all prior runtime defaults. Close the matching children before parent .2.8 admission.
   Verification: `pending`
   Commit: `pending`
 
@@ -935,6 +959,33 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Goal: Independently verify child-push false preservation through supported Lua carriers and cached action edges.
   Dependencies: .2.10.1 committed cleanly.
   Acceptance: Exercise native/reconstructed/generated/emitted routes, implicit/explicit whole and indexed forms, false/null/aggregate values, repeated same-edge requests and unrelated direct calls. Assert once-only child effects, cached retv, detached accumulators and accurate public guidance on supported PUC and LuaJIT; retain all startup/identity prerequisites.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.11`
+  Status: `pending`
+  Goal: Preserve exactly represented PUC Lua integers when JSON encoding selects a decimal representation.
+  Evidence: Reading .1.11 confirms PUC5.5.1 decodes 9007199254740993 and signed near-limit integer examples exactly, but json.encode changes them through string.format("%.0f",value). Integer-format controls preserve the original decimal while the floating projection equals the erroneous encoded result. LuaJIT already rounds these inputs at decode; its encode/decode retains that represented number, so this is not a new LuaJIT encoder-loss claim.
+  Children: `.2.11.1`, `.2.11.2`
+  Dependencies: Startup .3/.4/.5 and .2.2 for declared supported PUC proof.
+  Acceptance: Preserve the host's already exact integer values without promising arbitrary-precision parsing or inventing recoverable LuaJIT bits. Retain finite floating-point behavior, negative-zero policy, deterministic JSON, Lua5.1-compatible source and exact typed container/Unicode/error semantics.
+  Verification: `pending`; exact native and pure-JSON projection recipes are in docs/knowledge/lua-json-matching-reading-and-integer-encoding-gap.md.
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.11.1`
+  Status: `pending`
+  Goal: Encode a represented integer without first rounding it through floating formatting.
+  Scope: Number formatting in lua/src/linkedspec/json.lua and focused codec/value-carrier regression with accurate public limits.
+  Dependencies: Parent .2.11 prerequisites.
+  Acceptance: Show positive/negative values beyond2^53 and supported integer limits RED/GREEN; retain small integers, representable integral floats, fractional/exponent values, nonfinite rejection and zero normalization. Keep the LuaJIT fallback loadable and behaviorally unchanged for its represented values.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.11.2`
+  Status: `pending`
+  Goal: Independently verify integer JSON roundtrip preservation through affected public and stored carriers.
+  Dependencies: .2.11.1 committed cleanly.
+  Acceptance: Compare exact decimal strings and integer identity independently on supported PUC; qualify LuaJIT representation limits. Exercise nested arrays/harrays and applicable AST/result/generated or MCP projections using a documented domain census; preserve canonical ordering and never claim arbitrary precision. Reconcile book/Knowledge limits and close only after required proof passes.
   Verification: `pending`
   Commit: `pending`
 
@@ -1020,7 +1071,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.11` | `pending` | Read JSON 283-480, matching 1-500 and MCP contract 1-6 after clean .1.10; preserve ten Lua repairs and startup .37.1/.28.7. |
+| 1 | `LUA-STARTUP-READING.1.12` | `pending` | Read generated MCP bytes261-65796 in complete bounded windows after clean .1.11; preserve eleven Lua repairs and startup .37.1/.28.7. |
 
 ## Decisions
 
@@ -1038,9 +1089,11 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Blockers
 
-- None for Lua .1.11 after the clean .1.10 commit. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
+- None for Lua .1.12 after the clean .1.11 commit. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
 
 ## Verification Log
+
+- `2026-09-12` .1.11: Lua .1.11 reads the JSON suffix, matching module and MCP header in six complete windows: 704 fragments /22,026 bytes; cumulative 11/51, 15,149 fragments /580,277 bytes. All 99 Lua sources remain baseline-identical; JSON and matching reading complete. Both installed hosts pass 60 focused and 112 duplicate-slot assertions, 344 total, plus three PUC integer-format comparisons. .2.11 owns exact represented-integer JSON encoding; .2.8.5/.6 own matching false defaults. Neutral duplicate-slot 59 mutations pass. All eleven local repair roots and startup .37.1/.28.7 remain pending; prior public-selector failure stays open. No declared PUC 5.4, full gate or corpus pass is claimed. Next .1.12; startup prerequisites and ADR0118 remain.
 
 - `2026-09-12` .1.10: Lua .1.10 reads the interpreter suffix and JSON prefix in ten complete windows: 1,500 fragments /51,687 bytes; cumulative 10/51, 14,445 fragments /558,251 bytes. All 99 Lua sources remain baseline-identical; interpreter reading is complete. Both installed hosts pass runtime/JSON 68, cursor 108 and observation 43 assertions, 438 total. Five false option-table acceptances per host extend existing .2.8 through separate repair/proof children .2.8.3/.4. Neutral cursor 60 and root 54 mutations pass. All ten local repair roots and startup .37.1/.28.7 remain pending; the earlier public-selector baseline failure stays open. No declared PUC 5.4, full gate or corpus pass is claimed. Next .1.11; startup prerequisites and ADR0118 remain.
 
@@ -1070,6 +1123,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Commit Log
 
+- `2026-09-12` .1.11: `LUA-STARTUP-READING.1.11 - read JSON and matching and own integer encoding repair`.
+
 - `2026-09-12` .1.10: `LUA-STARTUP-READING.1.10 - finish interpreter reading and own option table validation`.
 
 - `2026-09-12` .1.9: `LUA-STARTUP-READING.1.9 - read callable dispatch and own false child push repair`.
@@ -1097,6 +1152,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 - `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` owns creation of this plan.
 
 ## Changelog
+
+- `2026-09-12` .1.11: Finish JSON/matching reading and read the generated MCP header; own integer encoding and matching validation repairs, preserve earlier evidence and advance to .1.12.
 
 - `2026-09-12` .1.10: Finish interpreter reading and read JSON prefix; decompose option-table repair under existing .2.8, preserve prior evidence and advance to .1.11.
 
