@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-12 — Lua generated MCP first byte-range reading
+
+- Read bytes 261–65796 in eight complete windows; cumulative 12/51, 15,150 fragments /645,813 bytes.
+- Generated module byte-fresh at 83,166 bytes; both hosts pass 116 binding assertions each; admission rejects 141 mutations.
+- Correct stale current aggregate from completed-node sums; preserve eleven Lua repair roots, startup .37.1/.28.7 and all prior evidence.
+- Owner: LUA-STARTUP-READING.1.12; next .1.13; exact replay in docs/knowledge/lua-generated-mcp-first-byte-range-reading.md.
+
 ## 2026-09-12 — LUA-STARTUP-READING.1.11: JSON/matching completion and integer encoding ownership
 
 - Read all three exact scopes /704 fragments /22026 bytes in six windows; cumulative11/51; all Lua source unchanged.

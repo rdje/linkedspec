@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-12 — Generated binding proof and physical reading boundaries
+
+- The shared literal includes all backend identities, schemas and transport/semantic result examples intentionally.
+- Fresh binding proof covers 232 assertions; it grants no unread-source, full-server or declared-PUC-5.4 credit.
+- Own and correct the stale 7/51 current tree aggregate without rewriting historical nodes; twelve completed scopes sum independently.
+- LUA-STARTUP-READING.1.12 preserves existing repairs and canonical prerequisites; next .1.13 reads bytes 65797–83164.
+
 ## 2026-09-12 — PUC JSON encoding must preserve an integer already represented exactly
 
 - The %.0f integral-number branch rounds three exact PUC integers; %d and host integer identity retain their original decimals.

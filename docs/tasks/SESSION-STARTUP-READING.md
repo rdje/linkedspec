@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 11/51; .1.12 follows the eleventh child; .2.1-.2.11 own eleven concrete repairs; .28.7 owns the baseline public-check failure.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 12/51; .1.13 follows the twelfth child; .2.1-.2.11 own eleven concrete repairs; .28.7 owns the baseline public-check failure.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.11 reads the JSON suffix, matching module and MCP header in six complete windows: 704 fragments /22,026 bytes; cumulative 11/51, 15,149 fragments /580,277 bytes. All 99 Lua sources remain baseline-identical; JSON and matching reading complete. Both installed hosts pass 60 focused and 112 duplicate-slot assertions, 344 total, plus three PUC integer-format comparisons. .2.11 owns exact represented-integer JSON encoding; .2.8.5/.6 own matching false defaults. Neutral duplicate-slot 59 mutations pass. All eleven local repair roots and startup .37.1/.28.7 remain pending; prior public-selector failure stays open. No declared PUC 5.4, full gate or corpus pass is claimed. Next .1.12; startup prerequisites and ADR0118 remain.
+  Verification: Lua .1.12 reads generated MCP bytes 261–65796 in eight complete windows: one fragment /65,536 bytes; cumulative 12/51, 15,150 fragments /645,813 bytes. All 99 Lua sources remain baseline-identical. The 83,166-byte generated module is byte-fresh; both installed hosts pass 116 binding assertions each, 232 total. Admission governance rejects 141 mutations. The stale tree aggregate is corrected from completed-node totals. All eleven local repair roots and startup .37.1/.28.7 remain pending; the public-selector failure stays open. No declared PUC 5.4, full server, full gate or corpus pass is claimed. Next .1.13 reads the remaining generated payload bytes; startup prerequisites and ADR0118 remain.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -4569,7 +4569,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.12` | `pending` | Read generated MCP bytes261-65796 in complete bounded windows after clean .1.11; preserve eleven Lua repairs and startup .37.1/.28.7. |
+| 1 | `LUA-STARTUP-READING.1.13` | `pending` | Read generated MCP bytes 65797–83164 in complete bounded windows after clean .1.12; preserve eleven Lua repairs and startup .37.1/.28.7. |
 
 ## Reading Ledger
 

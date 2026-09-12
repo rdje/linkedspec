@@ -1568,7 +1568,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.12` | `pending` | Read generated MCP bytes261-65796 in complete bounded windows after clean .1.11; preserve eleven Lua repairs and startup .37.1/.28.7. |
+| 1 | `LUA-STARTUP-READING.1.13` | `pending` | Read generated MCP bytes 65797–83164 in complete bounded windows after clean .1.12; preserve eleven Lua repairs and startup .37.1/.28.7. |
 
 ## Decisions
 

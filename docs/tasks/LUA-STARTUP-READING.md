@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LUA-STARTUP-READING`
-- Status: `active` / approved capacity; source reading 11/51
+- Status: `active` / approved capacity; source reading 12/51
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.6`
 - Created: `2026-09-12`
 - Last updated: `2026-09-12`
@@ -45,7 +45,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - Ordered range SHA-256: `81c58b8319def28af518fb134a3787513fe746f0f0f73bcacb0e20b9ede1c9d6`.
 - Child-summary SHA-256: `f56ecac262800bd3cc1e6bba0cc25bfe22f095c3dfee41f1c6595d4200145290`.
 - Coordinates are one-based inclusive LF physical lines or absolute file bytes; both byte windows decode as UTF-8.
-- Current physical reading: 7/51 children, 9,945/71,269 fragments and 395,987/2,732,450 bytes.
+- Current physical reading: 12/51 children, 15,150/71,269 fragments and 645,813/2,732,450 bytes.
 - Exact independent replay and capacity evidence: `docs/knowledge/lua-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -244,14 +244,22 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `LUA-STARTUP-READING.1.11 - read JSON and matching and own integer encoding repair`
 
 - ID: `LUA-STARTUP-READING.1.12`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `a5304ec5804dffea9bb9f1c10c42362927069e0c`.
+  Verification tier: `focused`
+  Focused checks: Exact byte-range identity and complete bounded viewing, canonical MCP bundle reconciliation and focused generated-binding proof; memory, Knowledge, histories, rendered book and normal doctrines.
+  Canonical trigger: Ordinary generated-source reading evidence; no source, schema or runtime change. Closeout and push retain existing prerequisites.
   Goal: Read and understand group 12: mcp_contract.lua.
   Scope: `lua/src/linkedspec/mcp_contract.lua` bytes 261-65796
   Baseline evidence: 1 fragments / 65536 bytes; ordered range SHA-256 `a5985b6f4edc587dd10e3e963124c149cd97b4d42fe04a6e3e03f5755f86731c`.
   Dependencies: .1.11 committed with clean handoff.
   Acceptance: Read every scoped byte without truncation; record comprehension, Knowledge and repair reconciliation, focused proof and a clean per-leaf commit.
-  Verification: `pending`
-  Commit: `pending`
+  Continuity correction owner: This leaf corrects the stale Current physical reading aggregate (7/51 at activation despite eleven completed children) from an independent completed-node sum; preserve all historical leaf evidence and verify every current pointer.
+  Physical reading: Eight complete 8192-byte windows cover bytes 261–65796 once; 65536 bytes /one LF fragment, selected-content SHA-256 02df32c7810984fba47e18c2cdb729bf65a02fd4e24564c91c5118edcc6ce174. An interrupted fourth window was reread fully before credit.
+  Comprehension: Canonical frames and backend identities; semantic versus transport success; schemas, artifact digests, lowering-only policy, request limits and corpus lifecycle/input expectations. Exact window hashes, current-versus-dated counts and proof limits: docs/knowledge/lua-generated-mcp-first-byte-range-reading.md.
+  Findings: No new runtime repair. Current-summary drift is corrected from an independent completed-node sum; all eleven Lua repairs and startup .37.1/.28.7 remain open.
+  Verification: Lua .1.12 reads generated MCP bytes 261–65796 in eight complete windows: one fragment /65,536 bytes; cumulative 12/51, 15,150 fragments /645,813 bytes. All 99 Lua sources remain baseline-identical. The 83,166-byte generated module is byte-fresh; both installed hosts pass 116 binding assertions each, 232 total. Admission governance rejects 141 mutations. The stale tree aggregate is corrected from completed-node totals. All eleven local repair roots and startup .37.1/.28.7 remain pending; the public-selector failure stays open. No declared PUC 5.4, full server, full gate or corpus pass is claimed. Next .1.13 reads the remaining generated payload bytes; startup prerequisites and ADR0118 remain. Memory, Knowledge, histories, rendered book, preservation and normal doctrine hooks govern landing.
+  Commit: `LUA-STARTUP-READING.1.12 - read generated MCP bytes and reconcile binding proof`
 
 - ID: `LUA-STARTUP-READING.1.13`
   Status: `pending`
@@ -1071,7 +1079,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.12` | `pending` | Read generated MCP bytes261-65796 in complete bounded windows after clean .1.11; preserve eleven Lua repairs and startup .37.1/.28.7. |
+| 1 | `LUA-STARTUP-READING.1.13` | `pending` | Read generated MCP bytes 65797–83164 in complete bounded windows after clean .1.12; preserve eleven Lua repairs and startup .37.1/.28.7. |
 
 ## Decisions
 
@@ -1089,9 +1097,11 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Blockers
 
-- None for Lua .1.12 after the clean .1.11 commit. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
+- None for Lua .1.13 after the clean .1.12 commit. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
 
 ## Verification Log
+
+- `2026-09-12` .1.12: Lua .1.12 reads generated MCP bytes 261–65796 in eight complete windows: one fragment /65,536 bytes; cumulative 12/51, 15,150 fragments /645,813 bytes. All 99 Lua sources remain baseline-identical. The 83,166-byte generated module is byte-fresh; both installed hosts pass 116 binding assertions each, 232 total. Admission governance rejects 141 mutations. The stale tree aggregate is corrected from completed-node totals. All eleven local repair roots and startup .37.1/.28.7 remain pending; the public-selector failure stays open. No declared PUC 5.4, full server, full gate or corpus pass is claimed. Next .1.13 reads the remaining generated payload bytes; startup prerequisites and ADR0118 remain.
 
 - `2026-09-12` .1.11: Lua .1.11 reads the JSON suffix, matching module and MCP header in six complete windows: 704 fragments /22,026 bytes; cumulative 11/51, 15,149 fragments /580,277 bytes. All 99 Lua sources remain baseline-identical; JSON and matching reading complete. Both installed hosts pass 60 focused and 112 duplicate-slot assertions, 344 total, plus three PUC integer-format comparisons. .2.11 owns exact represented-integer JSON encoding; .2.8.5/.6 own matching false defaults. Neutral duplicate-slot 59 mutations pass. All eleven local repair roots and startup .37.1/.28.7 remain pending; prior public-selector failure stays open. No declared PUC 5.4, full gate or corpus pass is claimed. Next .1.12; startup prerequisites and ADR0118 remain.
 
@@ -1123,6 +1133,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Commit Log
 
+- `2026-09-12` .1.12: `LUA-STARTUP-READING.1.12 - read generated MCP bytes and reconcile binding proof`.
+
 - `2026-09-12` .1.11: `LUA-STARTUP-READING.1.11 - read JSON and matching and own integer encoding repair`.
 
 - `2026-09-12` .1.10: `LUA-STARTUP-READING.1.10 - finish interpreter reading and own option table validation`.
@@ -1152,6 +1164,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 - `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` owns creation of this plan.
 
 ## Changelog
+
+- `2026-09-12` .1.12: Read the first generated MCP byte range, reconcile fresh binding proof and correct the stale current aggregate; preserve prior evidence and advance to .1.13.
 
 - `2026-09-12` .1.11: Finish JSON/matching reading and read the generated MCP header; own integer encoding and matching validation repairs, preserve earlier evidence and advance to .1.12.
 
