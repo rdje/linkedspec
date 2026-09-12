@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 9/51; .1.10 follows the ninth child; .2.1-.2.10 own ten concrete repairs; .28.7 owns the baseline public-check failure.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 10/51; .1.11 follows the tenth child; .2.1-.2.10 own ten concrete repairs; .28.7 owns the baseline public-check failure.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.9 reads interpreter 2917–4416 in nine complete windows: 1,500 fragments /58,443 bytes; cumulative 9/51, 12,945 fragments /506,564 bytes. All 99 Lua sources remain baseline-identical. Both installed hosts pass 449 callable assertions plus 26 valid controls, 950 total; separate false whole-child push observations gain .2.10 repair/proof. Neutral callable23 mutations and uniform11/7/6/8 checks pass. Existing .2.1 gains stale explicit-callable guidance correction. All ten local repairs and startup .37.1/.28.7 remain pending; the earlier public-selector baseline failure is still open. No declared PUC 5.4, full gate or corpus pass is claimed. Next .1.10; startup prerequisites and ADR0118 remain.
+  Verification: Lua .1.10 reads the interpreter suffix and JSON prefix in ten complete windows: 1,500 fragments /51,687 bytes; cumulative 10/51, 14,445 fragments /558,251 bytes. All 99 Lua sources remain baseline-identical; interpreter reading is complete. Both installed hosts pass runtime/JSON 68, cursor 108 and observation 43 assertions, 438 total. Five false option-table acceptances per host extend existing .2.8 through separate repair/proof children .2.8.3/.4. Neutral cursor 60 and root 54 mutations pass. All ten local repair roots and startup .37.1/.28.7 remain pending; the earlier public-selector baseline failure stays open. No declared PUC 5.4, full gate or corpus pass is claimed. Next .1.11; startup prerequisites and ADR0118 remain.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -4569,7 +4569,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.10` | `pending` | Read interpreter 4417-5634 and JSON 1-282 after clean .1.9; preserve ten Lua repairs and startup .37.1/.28.7. |
+| 1 | `LUA-STARTUP-READING.1.11` | `pending` | Read JSON 283-480, matching 1-500 and MCP contract 1-6 after clean .1.10; preserve ten Lua repairs and startup .37.1/.28.7. |
 
 ## Reading Ledger
 

@@ -314,15 +314,15 @@ while preserving all repairs, normal hooks and later verification/push requireme
 Dependency build reuse remains separately owned. Lua and supporting-code reading,
 formal book reconciliation and policy prerequisites still follow.
 
-**Lua source reading is underway (9/51 groups):** the complete
+**Lua source reading is underway (10/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first nine groups physically read 12,945 fragments /506,564 bytes,
+ownership. The first ten groups physically read 14,445 fragments /558,251 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority, compiled state and corpus modules,
-the complete facade and the interpreter through callable/statement dispatch. The remaining 42 groups require their own
+the complete facade and interpreter, plus the JSON prefix. The remaining 41 groups require their own
 reading and verified commits; source reading does not close the limitations below.
 
 **Approved Lua evidence capacity:** the director explicitly approved the complete
@@ -353,7 +353,7 @@ The director also granted one containment `.14` exception for this bounded capac
 implementation before full codebase reading, using focused proof and normal hooks
 without canonical CI/receipt. Later milestone, repair and push requirements remain;
 dependency build-on-update implementation stays separately owned. Lua source reading
-is 9/51; the next group finishes interpreter reading and begins JSON.
+is 10/51; the next group finishes JSON, reads matching and begins the MCP contract.
 All known limitations below retain their repair owners.
 Exact admission and replay: `docs/knowledge/lua-reading-evidence-capacity-admission.md`.
 The historical proposal remains in `docs/knowledge/lua-reading-evidence-capacity-proposal.md`.
@@ -398,6 +398,14 @@ before the positive-integer check. Lua `.2.8.1` owns absence-only defaulting and
 semantics are unchanged; no long-running failure is inferred. Native controls
 pass on the installed PUC5.5.1 and LuaJIT hosts, without certifying PUC5.4.
 Exact proof: `docs/knowledge/lua-interpreter-prefix-reading-and-iteration-option-gap.md`.
+
+The same validation problem affects supplied runtime option tables. Engine,
+parse/execute and traced parse/execute accept `false` as default options while
+rejecting other tested non-table values. An omitted value or `{}` remains valid.
+Lua `.2.8.3` owns nil-only table defaulting and `.2.8.4` independent caller/alias
+verification, separately from the iteration field. Existing typed errors and
+valid parse results must remain unchanged. Exact five-route proof:
+`docs/knowledge/lua-interpreter-json-reading-and-option-table-gap.md`.
 
 **Known Lua limitation — nested parser step budget:** when a parent callback has
 consumed its one-step allowance, its nested callback can still run against the

@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-12 — LUA-STARTUP-READING.1.10: interpreter completion and option-table validation
+
+- Read interpreter4417-5634 and JSON1-282 /1500 fragments /51687 bytes in ten windows; cumulative10/51; all Lua source unchanged.
+- Both installed hosts pass runtime/JSON68, cursor108 and observation43;438 total assertions and all six native cleanup outcomes pass.
+- Existing .2.8 gains separate .3/.4 repair/proof for five public false option-table routes; numeric-field ownership remains intact.
+- Neutral cursor60/root54 mutations pass; preserve earlier evidence and public-check failure while syncing book/frontiers to .1.11.
+
 ## 2026-09-12 — LUA-STARTUP-READING.1.9: callable dispatch and child false preservation
 
 - Read exact interpreter 2917-4416 /1500 fragments /58443 bytes in nine windows; cumulative 9/51; all Lua source unchanged.

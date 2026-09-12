@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-12 — Lua optional runtime tables must be checked before defaulting
+
+- Engine, parse and traced parse replace false with an empty table before validation; execute aliases inherit that behavior.
+- Matched omitted/empty options pass while true/zero/string reject typed errors; .2.8.3/.4 own bounded correction and independent proof.
+- JSON string/number/UTF-8 controls and unchanged cursor/recursive-observation consumers pass on both installed hosts.
+- Interpreter reading is complete; JSON decoding suffix and encoder remain .1.11-owned despite public roundtrip execution.
+
 ## 2026-09-12 — Lua whole-child selection must not use result truthiness
 
 - Whole-result push selects indexing when child.value is false; scalar indexing then appends null to either target form.
