@@ -7,13 +7,13 @@ answers:
   - what verification blocks Julia reading parent closeout
   - does complete Julia reading close its runtime defects
 date: 2026-09-12
-status: independent source and complete component audits pass; reading closeout decision pending
+status: Julia reading closed under explicit ADR0117 approval; all repairs remain open
 tags: [julia, startup, reading, audit, continuity]
 evidence: "JULIA-STARTUP-READING.3.1; physical checkpoint2c70957a26a4ae6066bc8d80f2aa7a6791a3f953; source baselinebaeb984e36a94a15951cd23d4c52def5064cdaca."
 reverify: "Run JULIA_READING_COMMIT_AUDIT below; frozen checkpoint identities remain intentional and later legitimate changes require an explicit delta audit."
 ---
 
-# Independent committed-reading audit
+# Historical independent committed-reading audit
 
 All52 bounded source-reading children are committed at checkpoint2c70957a2.
 The independent audit below checks unique subjects, exact committed scope,
@@ -198,3 +198,21 @@ Filename and age establish no deletion eligibility. Retain current audit logs an
 reusable caches under [[repo-generated-artifact-cleanup-boundary]]; startup .7
 still owns stale-run liveness safety. No deletion, dead-process classification
 or off-volume scan occurred. Detailed census: .linkedspec-data/scratch/julia31/artifact-census.json.
+
+## September 12 explicit Julia reading closeout
+
+The director answers Granted to the exact .3.2 proposal committed at d62999c12.
+ADR0117 records that new one-time reading-only canonical CI/receipt exception.
+Both committed audit recipes reexecute from the clean audit commit: all 52 child
+records, 95 source trees, 122 fact cards and 80 pending repairs remain exact, with
+repair-record SHA 4f8bd3153a9f03e298ec46db4d2f913ac2f38cb5a17dd40af4518fde9cfa3505.
+The unchanged complete 12903/storage22-5/primary/105 proof is reused explicitly;
+no new component/canonical gate, receipt, dependency build or repair closure.
+Only Julia .1/.3/startup .3.5 close; Lua .3.6 decomposition follows.
+
+The startup tree's current frontier still named completed Julia .1.6 and described
+Dart reading as pending, despite correct MEMORY, index and child-tree pointers.
+This closeout corrects that current view and verifies all three current tree
+frontiers plus MEMORY/live status/index route to Lua .3.6. Historical node bodies
+and logs remain unchanged. This is a continuity-doc correction under .3.2, not
+new runtime behavior or a claim that existing gates detect every stale pointer.

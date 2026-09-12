@@ -128,7 +128,7 @@ This correction changes documentation only.
 
 Matching tests confirm authored alternative identity for seek/consume and duplicate
 slots, astral capture offsets and register separation. Physical reading is complete;
-the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia has read all 52 owned groups; its independent audit and complete component gate pass, with formal closeout pending. ADR0116 admits the finite evidence allowance; ADR0115 remains limited to history.
+the independent .3.1/.3.2 audit is complete and ADR0114 closes startup `.3.4` reading. Julia reading closes all 52 owned groups under explicit ADR0117 approval after the passing independent audit and complete component gate. ADR0116 admits the finite evidence allowance; ADR0115 remains limited to history.
 
 **Completed child 47 evidence:** matching now has complete physical
 coverage, including Unicode offsets, separate entry/local registers and bounded
@@ -297,24 +297,22 @@ for reading and review. No format migration is part of this capacity change.
 Implementation evidence: `docs/knowledge/julia-reading-history-capacity-admission.md`;
 decision and proportionality principle: `docs/decisions/0115-julia-reading-history-capacity.md`.
 
-**Julia reading is complete and independently audited; formal closeout is pending:**
-all 52 committed reading groups account for 95 files, 75,984 lines and 2,693,170
-bytes. Each commit preserves its exact source scope, comprehension, verification
-and first-parent activation. All 122 touched fact cards and 80 pending repair nodes
-remain intact. No source changed during this audit.
+**Julia reading is complete and independently verified:** all 52 committed groups
+account for 95 files, 75,984 lines and 2,693,170 bytes. The approved ADR0117 closeout
+reverifies each source scope, comprehension/result record and first-parent activation.
+All 122 touched fact cards and 80 pending repair nodes remain intact.
 
-The complete Julia component gate passes 12,903 assertions, storage checks for
+The unchanged complete Julia component gate passes 12,903 assertions, storage for
 22 Julia owners and five locked package trees, primary CLI process conformance,
-and all 105 corpus fixtures. These results validate the covered behavior; the
-known limitations below remain open. The private progressive authority consumer
-retains its separate focused proof and dormant discovery boundary.
+and all 105 corpus fixtures. This closeout rechecks its recorded evidence; it does
+not claim a new gate run or resolve the known limitations below. The private
+progressive authority consumer retains separate proof and dormant discovery.
 
-The remaining closeout issue is procedural: canonical CI still contains dependency
-builds that conflict with the required PGEN/RGX build-on-update lifecycle. Julia
-`.3.2` proposes accepting the committed audit and passing component gate for this
-reading-only closeout, while retaining all repairs and later verification/push
-requirements. That new, limited decision is pending. Lua and supporting-code
-reading, formal book reconciliation and policy prerequisites still follow.
+The director explicitly approved a one-time reading-only canonical CI/receipt
+exception. It closes only Julia reading and allows Lua decomposition to proceed,
+while preserving all repairs, normal hooks and later verification/push requirements.
+Dependency build reuse remains separately owned. Lua and supporting-code reading,
+formal book reconciliation and policy prerequisites still follow.
 
 **Approved Julia evidence capacity:** the director granted Knowledge lines
 72,000→79,000 and decision-record lines12,000→13,000 under ADR0116. The finite
@@ -762,7 +760,7 @@ own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran f
 this reading closure; normal commit hooks remain enabled.
 
 Julia has read all 52 exact groups across 95 baseline entries;
-its independent audit and complete component gate pass; formal closeout remains pending, with the remaining Lua/supporting
+its independent audit and complete component gate pass, and ADR0117 closes reading, with the remaining Lua/supporting
 code, book and policy prerequisites. This completes
 Dart reading without treating known failures as resolved. The decision and evidence
 live in `docs/decisions/0114-dart-reading-closeout-verification-exception.md`,

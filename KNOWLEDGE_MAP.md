@@ -11622,7 +11622,7 @@ _Julia packages, precompile state, scratch, generated output, and traces stay on
 _Julia independent reading audit preserves source commits and open repairs_
 
 - **answers:** have all 52 Julia reading commits been independently verified | which commit is the complete physical Julia reading checkpoint | what verification blocks Julia reading parent closeout | does complete Julia reading close its runtime defects
-- **date:** 2026-09-12 · **status:** independent source and complete component audits pass; reading closeout decision pending
+- **date:** 2026-09-12 · **status:** Julia reading closed under explicit ADR0117 approval; all repairs remain open
 - **evidence:** `JULIA-STARTUP-READING.3.1; physical checkpoint2c70957a26a4ae6066bc8d80f2aa7a6791a3f953; source baselinebaeb984e36a94a15951cd23d4c52def5064cdaca.`
 - **reverify:** `Run JULIA_READING_COMMIT_AUDIT below; frozen checkpoint identities remain intentional and later legitimate changes require an explicit delta audit.`
 - **source:** [`docs/knowledge/julia-reading-commit-closeout-audit.md`](docs/knowledge/julia-reading-commit-closeout-audit.md)

@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `JULIA-STARTUP-READING`
-- Status: `active` / reading 52/52; audit passed; closeout decision pending; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity, matching, staged, diagnostic, static, entry and selector-projection and member-suffix and literal-boundary and projection-metadata and selector/identifier repairs and diagnostic/isolation fixture corrections pending
+- Status: `active` / reading complete; repairs open; selector, switch, recognition, pattern, observer, token, callback, numeric, bounds, arity, matching, staged, diagnostic, static, entry and selector-projection and member-suffix and literal-boundary and projection-metadata and selector/identifier repairs and diagnostic/isolation fixture corrections pending
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.5`
 - Created: `2026-09-11`
 - Last updated: `2026-09-12`
@@ -54,13 +54,13 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Children: `.1`, `.2`, `.3`, `.4`, `.5`
 
 - ID: `JULIA-STARTUP-READING.1`
-  Status: `active`
+  Status: `done`
   Goal: Read and understand all 52 exact Julia groups in numeric order.
   Dependencies: Startup .3.5.0 decomposition committed; each child starts from a clean prior handoff.
   Children: `.1.1-.1.52`, with exact scopes below.
   Acceptance: Every child records physical coverage, comprehension, Knowledge reconciliation, findings and focused proof before its commit. Retain all current-delta and interrupted-range evidence.
-  Verification: Julia .1.52 completes write and dormant progressive-authority consumers: all52/52 groups, 75984 lines/2693170 bytes and95 files are physically read. Complete write406, authority210 and admitted carrier62 pass678 assertions; write105, progressive116/public60 and typed14/0/231 checks pass. Four parent-state fixture comparisons observe no dispatched state; new .2.27 owns actual-state coverage, with14 diagnostic/selection controls alongside184 existing assertions. Actual native cursor proof remains valid; no runtime corruption is reproduced. All repairs remain open; independent .3 closeout and Lua/supporting reading still follow.
-  Commit: `pending`
+  Verification: Julia .3.2 closes all 52 reading groups under explicit ADR0117 approval. Audit d62999c12 and its fresh replay verify 95 baseline-identical files (75,984 lines / 2,693,170 bytes), 52 committed scopes and activations, 122 fact cards and 80 pending repair nodes. Recorded component proof passes 12,903 assertions, storage checks for 22 owners and five package trees, primary CLI conformance and 105 corpus fixtures. All repairs and later verification requirements remain open. Lua startup .3.6 decomposition is next; full-codebase reading, formal book reconciliation and policy review remain incomplete.
+  Commit: `JULIA-STARTUP-READING.3.2 - close verified Julia reading under approved exception` (reading-closeout container)
 
 - ID: `JULIA-STARTUP-READING.1.1`
   Status: `done`
@@ -1533,13 +1533,13 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Additional evidence: Require .2.21.3 downstream lifecycle validation as well as .2.21.1 before supported-route closure.
 
 - ID: `JULIA-STARTUP-READING.3`
-  Status: `active`
+  Status: `done`
   Goal: Independently close Julia reading and route Lua startup reading.
   Dependencies: Every .1 child committed and every finding repair-owned.
   Acceptance: Independently verify exact baseline/current coverage, comprehension, unique child commits and activation boundaries; preserve all repairs, close only .1/startup .3.5 and route startup .3.6 Lua decomposition.
   Children: `.3.1` independent committed-reading/component audit; `.3.2` separate reading-parent closeout and explicit verification disposition.
-  Verification: .3.1 independently verifies all52 reading commits,95 files,122 cards and80 pending repairs; complete Julia component gate passes12903 assertions/storage22-5/primary/105. Separate .3.2 retains canonical milestone or a newly explicit director-approved exception; ADR0114/ADR0116 do not extend here. Reading parents remain open.
-  Commit: `pending`
+  Verification: Julia .3.2 closes all 52 reading groups under explicit ADR0117 approval. Audit d62999c12 and its fresh replay verify 95 baseline-identical files (75,984 lines / 2,693,170 bytes), 52 committed scopes and activations, 122 fact cards and 80 pending repair nodes. Recorded component proof passes 12,903 assertions, storage checks for 22 owners and five package trees, primary CLI conformance and 105 corpus fixtures. All repairs and later verification requirements remain open. Lua startup .3.6 decomposition is next; full-codebase reading, formal book reconciliation and policy review remain incomplete.
+  Commit: `JULIA-STARTUP-READING.3.2 - close verified Julia reading under approved exception` (reading-closeout container)
 
 - ID: `JULIA-STARTUP-READING.3.1`
   Status: `done`
@@ -1557,13 +1557,18 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Commit: `JULIA-STARTUP-READING.3.1 - audit complete Julia reading and component proof`
 
 - ID: `JULIA-STARTUP-READING.3.2`
-  Status: `pending`
+  Status: `done`
   Goal: Close independently verified Julia reading and route Lua startup decomposition.
   Dependencies: .3.1 committed and exact canonical milestone proof or newly explicit director-approved exception; earlier ADR0114/ADR0116 exceptions do not extend here.
+  Activation commit: `d62999c12e4ec545d49d01f26e4423ad684f5270`.
+  Decision authority: The director answered Granted on 2026-09-12 to the exact one-time Julia reading-only canonical CI/receipt exception, using committed .3.1 audit and complete passing component proof; ADR0117 records this new bounded approval.
+  Verification tier: `focused`
+  Focused checks: Reexecute committed source/reading/repair and component-log audits; preserve all 52 child records,80 pending repair nodes and prior evidence; normal doctrines, Knowledge/memory, both histories, mdBook rendering and all current frontier pointers.
+  Canonical trigger: Reading-parent closeout; explicit director approval on 2026-09-12 grants the one-time focused/no-canonical-receipt exception under ADR0117. No later admission, repair, push, policy or dependency-build waiver.
   Acceptance: Reverify the committed .3.1 audit, preserve all repairs and close only Julia .1/.3/startup .3.5; route startup .3.6 Lua. Synchronize task/memory/book, retain incomplete overall startup .3/.4/.5 and all later admission/push requirements. Do not rebuild PGEN/RGX contrary to the director's build-on-update directive.
   Proposal: The completed .3.1 audit passes52 committed records/95 sources/122 cards/80 preserved repairs; complete unchanged Julia proof passes12903 assertions,storage22/5,primary CLI and105/105 corpus. Request a one-time reading-only exception accepting the independent committed source/commit audit plus unchanged complete Julia component proof instead of canonical CI/receipt for this exact closeout. No source repair, gate change, defect closure, dormant admission, new capacity or future push/verification waiver is proposed. Alternative: authorize the prerequisite CI build-reuse implementation and dependency-compatible canonical verification before closing reading.
-  Verification: `pending` director decision; .3.1 evidence is complete and independently reproducible. Canonical milestone remains required unless newly explicitly waived. No exception is inferred from prior approvals.
-  Commit: `pending`
+  Verification: Explicit Granted approval on 2026-09-12 is recorded under ADR0117. Both committed .3.1 audit recipes pass again: all 52 child records/activations,95 baseline source trees, 122 touched fact cards and 80 pending repair nodes retain exact identity; ordered repair SHA 4f8bd3153a9f03e298ec46db4d2f913ac2f38cb5a17dd40af4518fde9cfa3505. Reuse the unchanged complete 12903-assertion/storage22-5/primary/105 Julia gate and separately committed 210 dormant authority proof; no new component/canonical run or receipt. Close only Julia .1/.3/startup .3.5. Correct the stale startup frontier .1.6 and Dart-pending sentence; check all current frontiers point to Lua .3.6. Preservation checks pass 609 unchanged task nodes, four intended reading closures, exact historical logs/decisions/audit recipes and all 27 rendered limitation headings. Knowledge generation (1083 facts / 8723 keys), explicit memory, both history checks, book build and diff check pass; all five evidence collections remain within unchanged limits. Normal doctrine hooks govern landing.
+  Commit: `JULIA-STARTUP-READING.3.2 - close verified Julia reading under approved exception`
 
 - ID: `JULIA-STARTUP-READING.4`
   Status: `done`
@@ -1736,9 +1741,11 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.3.2` | `pending` | Director decision on the exact reading-only canonical exception; independent audit and complete Julia component proof are committed first. |
+| 1 | `SESSION-STARTUP-READING.3.6` | `pending` | Define exact bounded Lua source-reading ownership from the clean approved Julia closeout. |
 
 ## Decisions
+
+- `2026-09-12` .3.2: The director answers Granted to the concrete one-time Julia reading-only canonical CI/receipt exception. ADR0117 records its exact scope; both .3.1 audits reexecute, only Julia reading parents close, all 80 repair nodes and later verification requirements remain.
 
 - `2026-09-11` .5 disposition: The director answered Granted to the complete .5.1 proposal. ADR0116 records both exact aggregate line limits and the .13-only focused exception; containment .13 implements and verifies the approved boundary. The historical proposal below remains unchanged.
 
@@ -1752,13 +1759,13 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Open Questions
 
-- `2026-09-12` .3.2: Approve the concrete one-time Julia reading-only canonical CI/receipt exception after the passing committed .3.1 audit/component gate, or authorize the alternative build-reuse prerequisite sequencing? Earlier approvals are explicitly narrower.
+- `2026-09-12` .3.2 resolved: explicit Granted approval authorizes only the recorded ADR0117 Julia reading closeout.
 
 - None for source ownership. Future history capacity belongs to .4 and has no automatic increase authorization.
 
 ## Blockers
 
-- `2026-09-12` .3.2: COMMIT.md requires canonical parent-closeout proof; unchanged CI dependency compilation conflicts with the director-required build-on-update lifecycle. .3.1 passes all source/component audits and closes no reading parent. The scoped exception proposal is ready for the director; no PGEN/RGX build or standing waiver is inferred.
+- `2026-09-12` .3.2 resolved under explicit ADR0117 approval. The dependency-build conflict remains .80-owned; it no longer blocks this approved reading-only closeout.
 
 - Current .5 blocker resolved by director-approved ADR0116 / containment .13. Julia .1.38 may resume after the clean commit; older capacity observations below are historical.
 
@@ -1771,6 +1778,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Source repairs retain startup prerequisites; those dependencies do not block source reading.
 
 ## Verification Log
+
+- `2026-09-12` .3.2: Julia .3.2 closes all 52 reading groups under explicit ADR0117 approval. Audit d62999c12 and its fresh replay verify 95 baseline-identical files (75,984 lines / 2,693,170 bytes), 52 committed scopes and activations, 122 fact cards and 80 pending repair nodes. Recorded component proof passes 12,903 assertions, storage checks for 22 owners and five package trees, primary CLI conformance and 105 corpus fixtures. All repairs and later verification requirements remain open. Lua startup .3.6 decomposition is next; full-codebase reading, formal book reconciliation and policy review remain incomplete.
 
 - `2026-09-12` .3.1: Julia .3.1 independently audits all52 committed reading records and first-parent activations,95 baseline-identical files/75984 lines/2693170 bytes,122 fact cards and27 repair roots/80 pending nodes. Complete unchanged Julia component proof passes12903 assertions,22/5 storage,primary CLI and105/105 corpus. No source, dependency or gate changes; all repairs remain open. Reading .1/.3/startup .3.5 stay open pending .3.2: canonical CI conflicts with the unimplemented PGEN/RGX build-on-update directive, so a concrete one-time reading-only exception awaits a new director decision.
 
@@ -1869,6 +1878,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Commit Log
 
+- `2026-09-12` .3.2: `JULIA-STARTUP-READING.3.2 - close verified Julia reading under approved exception`.
+
 - `2026-09-12` .3.1: `JULIA-STARTUP-READING.3.1 - audit complete Julia reading and component proof`.
 
 - `2026-09-11` .1.52: `JULIA-STARTUP-READING.1.52 - finish Julia source reading and own parent-state test gap`.
@@ -1955,6 +1966,8 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 - Decomposition: `SESSION-STARTUP-READING.3.5.0 - freeze exact bounded Julia reading plan`.
 
 ## Changelog
+
+- `2026-09-12` .3.2: Explicit ADR0117 approval closes only independently verified Julia reading; all 80 repair nodes remain open. Correct current startup frontier drift and route Lua .3.6 after clean commit.
 
 - `2026-09-12` .3.1: Independent52-commit/95-source/122-card/80-repair audit and full Julia component proof pass. Preserve all reading parents and repairs; .3.2 retains its newly required verification decision.
 

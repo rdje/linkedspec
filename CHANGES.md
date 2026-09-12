@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-12 — JULIA-STARTUP-READING.3.2 - close verified Julia reading under approved exception
+
+Explicit ADR0117 approval closes only Julia reading parents after exact audit
+replay; all 52 reading records, 95 source trees, 122 cards and 80 repairs remain.
+Reuse complete component proof; correct current startup frontier drift and route
+Lua .3.6. No canonical run, dependency build, source change or future waiver.
+
 ## 2026-09-12 — JULIA-STARTUP-READING.3.1 - audit complete Julia reading and component proof
 
 Independent audit passes52 reading commits,95 sources,122 fact cards and80

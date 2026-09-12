@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-12 — Explicit Julia reading approval preserves repair and verification boundaries
+
+ADR0117 accepts the committed audit and passing unchanged Julia component gate
+for this reading-only closeout. All80 repairs remain open. A stale startup-tree
+frontier still named Julia .1.6; the closeout aligns every current pointer to Lua
+.3.6 while preserving old node/log evidence and future canonical requirements.
+
 ## 2026-09-12 — Julia source continuity and complete component verification are independently green
 
 All52 committed scopes/results/activation boundaries and95 baseline source trees

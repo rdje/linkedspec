@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Session continuity prerequisite to RUST-MUTATION-TESTING.1`
 - Created: `2026-09-06`
-- Last updated: `2026-09-11`
+- Last updated: `2026-09-12`
 - Owner: repo-local workflow
 - Reading baseline: `baeb984e36a94a15951cd23d4c52def5064cdaca`
 
@@ -2228,13 +2228,13 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `DART-STARTUP-READING.3.2 - close verified Dart reading under delegated decision` (cross-tree reading closeout)
 
 - ID: `SESSION-STARTUP-READING.3.5`
-  Status: `active`
+  Status: `done`
   Goal: Split and read all 95 baseline Julia entries, including compiler/runtime, tests, commands, and package inputs.
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas.
   Children: `.3.5.0` owns decomposition; JULIA-STARTUP-READING.1 owns 52 reading children and .3 owns closeout.
   Reading owner: `docs/tasks/JULIA-STARTUP-READING.md` retains exact scope/digest, comprehension and repair evidence. This startup node remains the prerequisite owner.
-  Verification: Julia .3.1 independently audits all52 committed reading records and first-parent activations,95 baseline-identical files/75984 lines/2693170 bytes,122 fact cards and27 repair roots/80 pending nodes. Complete unchanged Julia component proof passes12903 assertions,22/5 storage,primary CLI and105/105 corpus. No source, dependency or gate changes; all repairs remain open. Reading .1/.3/startup .3.5 stay open pending .3.2: canonical CI conflicts with the unimplemented PGEN/RGX build-on-update directive, so a concrete one-time reading-only exception awaits a new director decision. Exact plan and all source identities remain frozen in the Julia owner.
-  Commit: `pending`
+  Verification: Julia .3.2 closes all 52 reading groups under explicit ADR0117 approval. Audit d62999c12 and its fresh replay verify 95 baseline-identical files (75,984 lines / 2,693,170 bytes), 52 committed scopes and activations, 122 fact cards and 80 pending repair nodes. Recorded component proof passes 12,903 assertions, storage checks for 22 owners and five package trees, primary CLI conformance and 105 corpus fixtures. All repairs and later verification requirements remain open. Lua startup .3.6 decomposition is next; full-codebase reading, formal book reconciliation and policy review remain incomplete. Exact plan and all source identities remain frozen in the Julia owner.
+  Commit: `JULIA-STARTUP-READING.3.2 - close verified Julia reading under approved exception` (Julia reading prerequisite closure)
 
 - ID: `SESSION-STARTUP-READING.3.5.0`
   Status: `done`
@@ -4524,14 +4524,13 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 ## Current Frontier
 
-Canonical capacity .10 is committed at `bef5dafd`; focused CI evidence intake `.80.0` owns the separate
-Cargo-reuse `.80` and newer-OS startup `.81` repairs. Their implementation remains behind startup .3/.4/.5.
-All earlier reading coverage, findings, history and rgx reading exclusion remain unchanged.
-Startup `.3.4` stays pending until complete Dart reading; the next executable reading leaf is below.
+Perl, Rust, Dart and Julia source reading are complete; ADR0117 closes Julia reading
+from the independent .3.1 audit and passing unchanged component proof. All repairs,
+startup implementation prerequisites and the rgx reading exclusion remain intact.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.1.6` | `pending` | Finish FunctionRegistry, read the primary CLI and begin CompiledSpec after clean .1.5. |
+| 1 | `SESSION-STARTUP-READING.3.6` | `pending` | Define and read all 99 baseline Lua entries through bounded committed source ranges. |
 
 ## Reading Ledger
 
@@ -4542,7 +4541,7 @@ remain unread; running a command that prints a file does not establish comprehen
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
-| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust reading is complete: all 412 baseline paths / 3,533,382 bytes; `.3.3.67` closes exact coverage, current deltas and durable repair/Knowledge reconciliation. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
+| Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust reading is complete: all 412 baseline paths / 3,533,382 bytes; `.3.3.67` closes exact coverage, current deltas and durable repair/Knowledge reconciliation. Dart closes under ADR0114; Julia closes 95 entries/75984 lines/2693170 bytes under ADR0117 with 52 committed reading groups and independent audit. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read at baseline; .3.2.42 preserves coverage, and c8759242 reviews/renders the approved parked-coverage delta. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
 
 The exact tracked file population and object identities are recoverable without an independently maintained

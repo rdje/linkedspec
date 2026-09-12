@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .3.1 independently audits all52 committed reading records and first-parent activations,95 baseline-identical files/75984 lines/2693170 bytes,122 fact cards and27 repair roots/80 pending nodes. Complete unchanged Julia component proof passes12903 assertions,22/5 storage,primary CLI and105/105 corpus. No source, dependency or gate changes; all repairs remain open. Reading .1/.3/startup .3.5 stay open pending .3.2: canonical CI conflicts with the unimplemented PGEN/RGX build-on-update directive, so a concrete one-time reading-only exception awaits a new director decision. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl and Rust reading are complete. Canonical capacity admission is complete at a67a18bf. Julia .3.2 closes all 52 reading groups under explicit ADR0117 approval. Audit d62999c12 and its fresh replay verify 95 baseline-identical files (75,984 lines / 2,693,170 bytes), 52 committed scopes and activations, 122 fact cards and 80 pending repair nodes. Recorded component proof passes 12,903 assertions, storage checks for 22 owners and five package trees, primary CLI conformance and 105 corpus fixtures. All repairs and later verification requirements remain open. Lua startup .3.6 decomposition is next; full-codebase reading, formal book reconciliation and policy review remain incomplete. Reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.82` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `JULIA-STARTUP-READING.3.1 - audit complete Julia reading and component proof` — Julia .3.1 independently audits all52 committed reading records and first-parent activations,95 baseline-identical files/75984 lines/2693170 bytes,122 fact cards and27 repair roots/80 pending nodes. Complete unchanged Julia component proof passes12903 assertions,22/5 storage,primary CLI and105/105 corpus. No source, dependency or gate changes; all repairs remain open. Reading .1/.3/startup .3.5 stay open pending .3.2: canonical CI conflicts with the unimplemented PGEN/RGX build-on-update directive, so a concrete one-time reading-only exception awaits a new director decision.
+- `JULIA-STARTUP-READING.3.2 - close verified Julia reading under approved exception` — Julia .3.2 closes all 52 reading groups under explicit ADR0117 approval. Audit d62999c12 and its fresh replay verify 95 baseline-identical files (75,984 lines / 2,693,170 bytes), 52 committed scopes and activations, 122 fact cards and 80 pending repair nodes. Recorded component proof passes 12,903 assertions, storage checks for 22 owners and five package trees, primary CLI conformance and 105 corpus fixtures. All repairs and later verification requirements remain open. Lua startup .3.6 decomposition is next; full-codebase reading, formal book reconciliation and policy review remain incomplete.
 
 ## Next Action
 
-- `JULIA-STARTUP-READING.3.2` — Resolve the exact one-time reading-only canonical CI/receipt exception from committed .3.1 proof; then close only Julia reading and route Lua .3.6.
+- `SESSION-STARTUP-READING.3.6` — Define exact bounded Lua source-reading ranges after the clean approved Julia closeout.
 
 ## Recent Completions
+
+- `2026-09-12` — `JULIA-STARTUP-READING.3.2` closes verified Julia reading under explicit ADR0117 approval; all80 repair nodes remain unchanged; Lua .3.6 follows.
 
 - `2026-09-12` — `JULIA-STARTUP-READING.3.1` independently verifies52 reading commits/95 files/122 cards/80 repairs; full Julia12903/storage22-5/primary/105 passes; .3.2 decision pending.
 
@@ -48,8 +50,6 @@
 - `2026-09-11` — `JULIA-STARTUP-READING.1.40` reads1500 fragments /52652 bytes;1463 existing assertions and root/cursor/generated checks pass; all repairs remain open.
 
 - `2026-09-11` — `JULIA-STARTUP-READING.1.39` reads1500 fragments /53180 bytes;663 existing assertions and four neutral checks pass; all repairs remain open.
-
-- `2026-09-11` — `JULIA-STARTUP-READING.1.38` reads1500 fragments /57682 bytes;494 existing assertions and four neutral checks pass; all repair owners remain.
 
 ## History
 
