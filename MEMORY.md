@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `a8834341b59d39b56b9de4fd24fa1db2e1959012` — clean twelfth Lua reading commit.
-- latest_completed_leaf: `LUA-STARTUP-READING.1.13 - finish generated MCP payload reading and reconciliation`; cumulative 13/51; independent bundle reconciliation and 76 transport mutations pass.
-- active_work_unit: `LUA-STARTUP-READING.1.14` — next exact MCP runtime/server reading child.
-- next_action: Read MCP final line, contract runtime, server and wire prefix in bounded windows; preserve all repairs, verify, sync book/evidence and commit.
-  Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
-- in_flight_uncommitted: none; all generated-data checks completed; the next exact reading action is durable.
-- blockers: none for Lua .1.14; ADR0118 admits finite reading. Public-selector baseline fails under .28.7; repairs and later verification retain prerequisites.
+- activation_commit: `722674ef9d199876153832f3db258bd39ef7ac88` — clean thirteenth Lua reading commit.
+- latest_completed_leaf: `LUA-STARTUP-READING.1.14 - read MCP runtime and preserve repair and named-call ownership`; cumulative 14/51; 992 native assertions and neutral checks pass.
+- active_work_unit: `LUA-STARTUP-READING.1.15` — next exact wire/CLI/recognition reading child.
+- next_action: Read wire suffix, primary CLI, recognition transaction and runtime prefix in bounded windows; preserve repairs, verify, sync book/evidence and commit.
+  Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
+- in_flight_uncommitted: none; six native runs and neutral checks consumed, repair/proposal ownership and next reading action durable.
+- blockers: none for Lua .1.15; ADR0118 admits finite reading. Public-selector baseline fails under .28.7; repairs and later verification retain prerequisites.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -57,4 +57,4 @@
   All earlier archive bytes and other history controls remain unchanged; the complete 57-unit Lua reserve is checked. Proportionate governance: ADR0115.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-12 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart/Julia reading closed; Lua reading 13/51 (15,151 fragments/663,181 bytes), plan 51 groups, 99 files / 71269 fragments / 2732450 bytes. Supporting code, formal book .4 and policy .5 remain.
+- latest_bootstrap_read: 2026-09-12 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart/Julia reading closed; Lua reading 14/51 (16,651 fragments/716,343 bytes), plan 51 groups, 99 files / 71269 fragments / 2732450 bytes. Supporting code, formal book .4 and policy .5 remain.

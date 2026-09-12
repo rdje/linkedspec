@@ -1568,7 +1568,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.14` | `pending` | Read the final generated module line, contract runtime, decoded server and wire prefix after clean .1.13; preserve all existing repair owners. |
+| 1 | `LUA-STARTUP-READING.1.15` | `pending` | Read wire suffix, primary CLI, recognition transaction and its runtime prefix after clean .1.14; preserve all repairs and the parked named-argument direction. |
 
 ## Decisions
 

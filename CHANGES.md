@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-12 — Lua MCP runtime reading and approved parked named arguments
+
+- Read four ranges /1,500 fragments /53,162 bytes; cumulative 14/51, 16,651 fragments /716,343 bytes.
+- Both hosts pass 216 decoded, 247 stdio and 33 valid boundary controls each; 992 assertions total, plus admission141 and callable3/9/7 checks.
+- Extend existing .2.8 through MCP option repair/proof .2.8.7/.8 and .2.11 with qualified integer-copy evidence; all repairs remain open.
+- LUA-STARTUP-READING.1.14 captures approved parked named arguments under PARSER-AUTHORING-APIS.4 and four design children; next reading .1.15.
+
 ## 2026-09-12 — Lua generated MCP payload completion
 
 - Read bytes 65797–83164 in three complete windows; cumulative 13/51, 15,151 fragments /663,181 bytes.

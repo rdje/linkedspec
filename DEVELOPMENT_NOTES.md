@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-12 — MCP copy fidelity, option validation and named-call compatibility
+
+- Two option constructors erase false before validation; existing nil-only registry/stdio entry handling remains a control.
+- MCP text and structured data can agree after both round an exact PUC integer; compare against the source value and preserve the bounded request-ID domain.
+- Director-approved named binding is parked: written evaluation order and strict fixed-parameter binding; defaults separate, parameter names become API.
+- LUA-STARTUP-READING.1.14 preserves reading/repair prerequisites and exact proposal ownership; evidence in docs/knowledge/lua-mcp-runtime-server-reading-and-validation-gaps.md.
+
 ## 2026-09-12 — Generated payload identity and bounded reading credit
 
 - The suffix completes tool and semantic schemas, four native/projected semantic fixtures and the source digest map.

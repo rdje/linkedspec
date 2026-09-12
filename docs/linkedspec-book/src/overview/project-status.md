@@ -314,15 +314,30 @@ while preserving all repairs, normal hooks and later verification/push requireme
 Dependency build reuse remains separately owned. Lua and supporting-code reading,
 formal book reconciliation and policy prerequisites still follow.
 
-**Lua source reading is underway (13/51 groups):** the complete
+**Approved direction — named user-function arguments (parked):** the director
+approved extending fixed parameters to accept names at call sites. The planned
+rules put positional arguments first, reject unknown names and duplicate bindings,
+and evaluate each supplied expression once in written order. Existing positional
+rest arrays keep their meaning. Parameter names consequently become part of the
+public API, so renaming them requires compatibility care.
+
+For a definition with parameters `(p1,p2,n1,n2)`, the proposed call
+`myfoofunc(a,b,n2=d,n1=c)` binds the same values as `myfoofunc(a,b,c,d)`, while
+evaluating its expressions in the written order `a,b,d,c`. This syntax is not yet
+implemented for user functions. Defaults in definitions remain a separate design
+step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
+representation compatibility and bounded implementation planning; these four
+children remain unactivated and current startup reading continues.
+
+**Lua source reading is underway (14/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first thirteen groups physically read 15,151 fragments /663,181 bytes,
+ownership. The first fourteen groups physically read 16,651 fragments /716,343 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority, compiled state and corpus modules,
-the complete facade, interpreter, JSON and matching, plus the MCP header and complete generated payload. The final module line and remaining 38 groups require their own
+the complete facade, interpreter, JSON and matching, plus the complete generated MCP module, contract runtime, decoded server and wire prefix. The remaining 37 groups require their own
 reading and verified commits; source reading does not close the limitations below.
 
 **Generated Lua MCP binding:** the current 83,166-byte module matches its neutral
@@ -336,7 +351,10 @@ does not widen that request domain.
 Independent reconciliation also matches all seven source-artifact digests, the
 complete 35-frame dictionary and four semantic payload digests. The neutral
 transport checker passes 76 rejection cases. These are data and contract checks;
-the two-host binding counts above remain the preceding leaf’s native results.
+the two-host binding counts above remain the earlier binding leaf’s native results.
+Current decoded-server and stdio consumers pass 216 and 247 checks per installed
+host, with 33 additional valid boundary controls each. Source reading of the wire
+suffix remains pending despite executing the full selected stdio consumer.
 
 **Approved Lua evidence capacity:** the director explicitly approved the complete
 Lua proposal under ADR0118. Containment `.14` implements exactly these eleven
@@ -366,7 +384,7 @@ The director also granted one containment `.14` exception for this bounded capac
 implementation before full codebase reading, using focused proof and normal hooks
 without canonical CI/receipt. Later milestone, repair and push requirements remain;
 dependency build-on-update implementation stays separately owned. Lua source reading
-is 13/51; the next group reads the module ending, contract runtime, server and wire prefix.
+is 14/51; the next group reads the wire suffix, CLI and recognition transaction sources.
 All known limitations below retain their repair owners.
 Exact admission and replay: `docs/knowledge/lua-reading-evidence-capacity-admission.md`.
 The historical proposal remains in `docs/knowledge/lua-reading-evidence-capacity-proposal.md`.
@@ -380,6 +398,12 @@ encoding, so its representation limit is a separate boundary.
 Lua `.2.11.1` owns preserving already represented integers and `.2.11.2`
 independent container/carrier proof. This adds no arbitrary-precision promise.
 Exact evidence: `docs/knowledge/lua-json-matching-reading-and-integer-encoding-gap.md`.
+The same encoder affects MCP data copies: a schema-admitted synthetic semantic
+record containing that exact PUC integer is rounded in both copied structured
+content and text. Their agreement therefore does not prove preservation of the
+original value. Request IDs retain their existing bounded domain; this fixture
+does not claim that a native query produced the synthetic record order. The
+existing integer repair owns this additional carrier evidence.
 
 **Known Lua child-push limitation — whole false becomes null:**
 when `Child` returns `false`, `push(Child)` and `push(Child,items)` append
@@ -435,6 +459,13 @@ register cursors and register option tables silently become defaults. Other test
 invalid values reject, and false capture-start positions already reject correctly.
 Lua `.2.8.5/.2.8.6` own matching correction and independent proof, preserving
 numeric clamping, Unicode boundaries, capture clearing and register identity.
+
+MCP deployment-policy and registration-option constructors also accept a whole
+`false` options argument as defaults. Omitted/empty tables are valid; other tested
+invalid tables and false individual fields reject. Lua `.2.8.7/.2.8.8` own these
+two constructor repairs and independent proof, preserving existing registry/stdio
+validation. This is an option-validation gap; no policy elevation is established.
+Exact MCP evidence: `docs/knowledge/lua-mcp-runtime-server-reading-and-validation-gaps.md`.
 
 **Known Lua limitation — nested parser step budget:** when a parent callback has
 consumed its one-step allowance, its nested callback can still run against the

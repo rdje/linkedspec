@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LUA-STARTUP-READING`
-- Status: `active` / approved capacity; source reading 13/51
+- Status: `active` / approved capacity; source reading 14/51
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.6`
 - Created: `2026-09-12`
 - Last updated: `2026-09-12`
@@ -45,7 +45,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - Ordered range SHA-256: `81c58b8319def28af518fb134a3787513fe746f0f0f73bcacb0e20b9ede1c9d6`.
 - Child-summary SHA-256: `f56ecac262800bd3cc1e6bba0cc25bfe22f095c3dfee41f1c6595d4200145290`.
 - Coordinates are one-based inclusive LF physical lines or absolute file bytes; both byte windows decode as UTF-8.
-- Current physical reading: 13/51 children, 15,151/71,269 fragments and 663,181/2,732,450 bytes.
+- Current physical reading: 14/51 children, 16,651/71,269 fragments and 716,343/2,732,450 bytes.
 - Exact independent replay and capacity evidence: `docs/knowledge/lua-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -279,14 +279,22 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `LUA-STARTUP-READING.1.13 - finish generated MCP payload reading and reconciliation`
 
 - ID: `LUA-STARTUP-READING.1.14`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `722674ef9d199876153832f3db258bd39ef7ac88`.
+  Verification tier: `focused`
+  Focused checks: Exact scoped reading/baseline identity, canonical MCP runtime/server/wire reconciliation and relevant component proof; DBINP proposal-only ownership, memory, Knowledge, histories, rendered book and normal doctrines.
+  Canonical trigger: Ordinary reading and parked discussion intake; no source, callable contract, transport or implementation activation. Later closeout and push retain their canonical prerequisites.
   Goal: Read and understand group 14: mcp_contract.lua through mcp_wire.lua.
   Scope: `lua/src/linkedspec/mcp_contract.lua` lines 8-8; `lua/src/linkedspec/mcp_contract_runtime.lua` lines 1-413; `lua/src/linkedspec/mcp_server.lua` lines 1-854; `lua/src/linkedspec/mcp_wire.lua` lines 1-232
   Baseline evidence: 1500 fragments / 53162 bytes; ordered range SHA-256 `d157ca1471a6078386594be0911d4d5e2d56fe29ead9d692ecf0053fec58ed67`.
   Dependencies: .1.13 committed with clean handoff.
   Acceptance: Read every scoped byte without truncation; record comprehension, Knowledge and repair reconciliation, focused proof and a clean per-leaf commit.
-  Verification: `pending`
-  Commit: `pending`
+  DBINP intake owner: Capture the director’s named function-argument discussion and subsequent approval as parked PARSER-AUTHORING-APIS.4 with bounded design follow-ups and explicit compatibility/default decisions. Preserve the active reading frontier; this is no syntax adoption or implementation authorization.
+  Physical reading: Twelve untruncated windows cover all four scopes exactly; 1500 fragments /53162 bytes. Runtime/server and generated module complete; wire 1–232 partial. Exact window coordinates and per-range hashes: docs/knowledge/lua-mcp-runtime-server-reading-and-validation-gaps.md.
+  Comprehension: Generated schema validation/copies, immutable constructor/registry state, native semantic dispatch and explicit policy projection, prepared response cancellation, and wire string/number/container scanning.
+  Findings: New pending .2.8.7/.8 own two false MCP option-table constructors; .2.11 gains measured direct/synthetic semantic copy loss with unchanged request-ID bounds. PARSER-AUTHORING-APIS.4 captures approved parked named-call direction and four unactivated children; all other repairs remain open.
+  Verification: Lua .1.14 reads the generated module ending, contract runtime, decoded server and wire prefix in twelve complete windows: 1,500 fragments /53,162 bytes; cumulative 14/51, 16,651 fragments /716,343 bytes. All 99 Lua sources remain baseline-identical; 21 files are fully read. Both installed hosts pass 216 decoded, 247 stdio and 33 valid boundary controls each, 992 assertions total. MCP constructor false defaults extend .2.8.7/.8; measured integer-copy loss extends .2.11 without widening request IDs. Admission141 and callable3/9/7 checks pass. Named-argument direction is approved and parked under PARSER-AUTHORING-APIS.4 with four unactivated design/planning children. All eleven Lua repair roots and startup .37.1/.28.7 remain pending; next .1.15 under unchanged startup and ADR0118 prerequisites. Memory, Knowledge, histories, rendered book, preservation and normal doctrine hooks govern landing.
+  Commit: `LUA-STARTUP-READING.1.14 - read MCP runtime and preserve repair and named-call ownership`
 
 - ID: `LUA-STARTUP-READING.1.15`
   Status: `pending`
@@ -863,12 +871,13 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 
 - ID: `LUA-STARTUP-READING.2.8`
   Status: `pending`
-  Goal: Reject explicitly invalid iteration counts, optional runtime/matching tables and matching cursors before applying absent-value defaults.
+  Goal: Reject explicitly invalid iteration counts, optional runtime/matching/MCP tables and matching cursors before applying absent-value defaults.
   Evidence: Reading .1.7 executes the real native facade on PUC 5.5.1 and LuaJIT. max_iterations=false creates an engine with 10000; omitted options also use 10000, positive 1/2 are retained, and true/0/-1/1.5/string "2" reject. interpreter.lua line 144 uses options.max_iterations or 10000 before the type/range check, so false is replaced before validation. This is an option-validation defect; no long-running parser failure is inferred.
-  Children: `.2.8.1`, `.2.8.2` own the iteration field; `.2.8.3`, `.2.8.4` own public runtime optional-table boundaries; `.2.8.5`, `.2.8.6` own matching defaults.
+  Children: `.2.8.1`, `.2.8.2` own the iteration field; `.2.8.3`, `.2.8.4` own public runtime optional-table boundaries; `.2.8.5`, `.2.8.6` own matching defaults; `.2.8.7`, `.2.8.8` own MCP constructor options.
   Dependencies: Startup .3/.4/.5; preserve the declared PUC target and existing toolchain repair .2.2.
   Reading .1.10 extension: Native engine/parse/execute/traced-parse/traced-execute all accept false options while nil/empty tables pass and true/zero/string reject typed table errors. Three options or {} owners replace false before validation; the execution aliases inherit that behavior. Keep this additional surface decomposed under .2.8.3/.4, independently from the numeric field.
   Reading .1.11 extension: Matching seek/consume/required-slot, register cursor construction and cursor setter accept false as zero; false register options become defaults. Other invalid cursors/options reject typed errors, and false capture_start_byte correctly rejects. Keep matching normalization isolated in new .2.8.5/.6; retain existing clamping and capture clearing semantics.
+  Reading .1.14 extension: deployment_policy(false) and registration_options(false) accept protected default objects on both installed hosts; nil/empty tables pass, other invalid table values and explicitly false named fields reject. mcp_server.lua 142/180 use options or {} before plain-table validation. Existing serve_stdio and register_index have explicit nil-only option handling and remain compatibility controls; do not infer a policy elevation or wire parsing failure.
   Acceptance: Default only when the field or optional table is absent, retain positive integer behavior, reject explicitly invalid supplied values with the established typed error, and preserve source identity and successful parser behavior. Decompose any additional affected option surfaces before expanding scope.
   Verification: `pending`; .1.7 retains the exact native comparison in docs/knowledge/lua-interpreter-prefix-reading-and-iteration-option-gap.md.
   Commit: `pending`
@@ -903,7 +912,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Status: `pending`
   Goal: Independently verify nil-only runtime option-table defaults across supported public callers.
   Dependencies: .2.8.3 committed cleanly.
-  Acceptance: Exercise engine/parse/execute/traced entry points and applicable loaded/generated adapters with independent absent/false/invalid/valid option tables on supported PUC and LuaJIT. Assert unchanged typed diagnostics, input/caller-table preservation and successful result identity. Close parent .2.8 only after all six children and public/Knowledge evidence agree.
+  Acceptance: Exercise engine/parse/execute/traced entry points and applicable loaded/generated adapters with independent absent/false/invalid/valid option tables on supported PUC and LuaJIT. Assert unchanged typed diagnostics, input/caller-table preservation and successful result identity. Close parent .2.8 only after all eight children and public/Knowledge evidence agree.
   Verification: `pending`
   Commit: `pending`
 
@@ -921,6 +930,22 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Goal: Independently verify matching optional-value validation and unchanged register/cursor semantics.
   Dependencies: .2.8.5 committed cleanly.
   Acceptance: Cover direct functions and methods, required-slot and choice paths, register construction/update/child entry, omitted/false/other invalid options and UTF-8 boundaries on supported PUC and LuaJIT. Preserve matched/no-match/zero-width distinctions, typed failures and all prior runtime defaults. Close the matching children before parent .2.8 admission.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.8.7`
+  Status: `pending`
+  Goal: Reject explicitly false MCP deployment-policy and registration constructor option tables.
+  Dependencies: Startup .3/.4/.5; retain .2.2 supported-PUC prerequisites and the other .2.8 surfaces.
+  Acceptance: Replace false-erasing defaults at mcp_server.lua 142/180 with absent-only handling, retaining established plain-table diagnostics, immutable object identities, valid field values and nil/empty defaults. Preserve correct false-field rejection and register_index/serve_stdio option validation. Inspect the separate package-private test dependency defaults as a documented scope census; decompose additional required changes before expanding this repair.
+  Verification: `pending`; .1.14 records two constructor observations and 33 valid controls per installed host.
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.8.8`
+  Status: `pending`
+  Goal: Independently verify MCP option-table validation and unchanged decoded/stdio behavior.
+  Dependencies: .2.8.7 committed cleanly.
+  Acceptance: Exercise root facade and module constructors with absent, false, other invalid and valid option tables on supported PUC and LuaJIT; distinguish invalid whole tables from false fields. Retain registry/stdio typed option boundaries, caller data and existing policy/capability behavior. Run relevant decoded/stdio consumers and synchronize public/Knowledge evidence before closing these children and parent .2.8.
   Verification: `pending`
   Commit: `pending`
 
@@ -983,6 +1008,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Evidence: Reading .1.11 confirms PUC5.5.1 decodes 9007199254740993 and signed near-limit integer examples exactly, but json.encode changes them through string.format("%.0f",value). Integer-format controls preserve the original decimal while the floating projection equals the erroneous encoded result. LuaJIT already rounds these inputs at decode; its encode/decode retains that represented number, so this is not a new LuaJIT encoder-loss claim.
   Children: `.2.11.1`, `.2.11.2`
   Dependencies: Startup .3/.4/.5 and .2.2 for declared supported PUC proof.
+  Reading .1.14 extension: On PUC5.5.1, runtime.clone_data(9007199254740993) and tool_success_response over a schema-admitted synthetic record.order produce 9007199254740992; text and structured payload agree on the changed number, while caller data remains intact. clone_data roundtrips through json.encode/decode (mcp_contract_runtime.lua 17–23; response use 341–342). LuaJIT already represents the rounded input and its clone preserves it. This is a measured data-copy carrier of the existing encoder defect, not a claim that a native semantic query produced that record order or that request ID bounds changed.
   Acceptance: Preserve the host's already exact integer values without promising arbitrary-precision parsing or inventing recoverable LuaJIT bits. Retain finite floating-point behavior, negative-zero policy, deterministic JSON, Lua5.1-compatible source and exact typed container/Unicode/error semantics.
   Verification: `pending`; exact native and pure-JSON projection recipes are in docs/knowledge/lua-json-matching-reading-and-integer-encoding-gap.md.
   Commit: `pending`
@@ -1001,6 +1027,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Goal: Independently verify integer JSON roundtrip preservation through affected public and stored carriers.
   Dependencies: .2.11.1 committed cleanly.
   Acceptance: Compare exact decimal strings and integer identity independently on supported PUC; qualify LuaJIT representation limits. Exercise nested arrays/harrays and applicable AST/result/generated or MCP projections using a documented domain census; preserve canonical ordering and never claim arbitrary precision. Reconcile book/Knowledge limits and close only after required proof passes.
+  Additional carrier evidence: Include .1.14’s direct clone and schema-admitted synthetic semantic response in the domain census; retain independent source-value versus encoded/structured comparisons and the unchanged ±9007199254740991 request-ID domain. Do not replace source identity with two equally rounded projections.
   Verification: `pending`
   Commit: `pending`
 
@@ -1086,7 +1113,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.14` | `pending` | Read the final generated module line, contract runtime, decoded server and wire prefix after clean .1.13; preserve all existing repair owners. |
+| 1 | `LUA-STARTUP-READING.1.15` | `pending` | Read wire suffix, primary CLI, recognition transaction and its runtime prefix after clean .1.14; preserve all repairs and the parked named-argument direction. |
 
 ## Decisions
 
@@ -1104,9 +1131,11 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Blockers
 
-- None for Lua .1.14 after the clean .1.13 commit. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
+- None for Lua .1.15 after the clean .1.14 commit. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
 
 ## Verification Log
+
+- `2026-09-12` .1.14: Lua .1.14 reads the generated module ending, contract runtime, decoded server and wire prefix in twelve complete windows: 1,500 fragments /53,162 bytes; cumulative 14/51, 16,651 fragments /716,343 bytes. All 99 Lua sources remain baseline-identical; 21 files are fully read. Both installed hosts pass 216 decoded, 247 stdio and 33 valid boundary controls each, 992 assertions total. MCP constructor false defaults extend .2.8.7/.8; measured integer-copy loss extends .2.11 without widening request IDs. Admission141 and callable3/9/7 checks pass. Named-argument direction is approved and parked under PARSER-AUTHORING-APIS.4 with four unactivated design/planning children. All eleven Lua repair roots and startup .37.1/.28.7 remain pending; next .1.15 under unchanged startup and ADR0118 prerequisites.
 
 - `2026-09-12` .1.13: Lua .1.13 reads generated MCP bytes 65797–83164 in three complete windows: one fragment /17,368 bytes; cumulative 13/51, 15,151 fragments /663,181 bytes. All 99 Lua sources remain baseline-identical. Independent reconciliation matches the canonical bundle, seven artifact digests, three embedded artifact values, 35 frames and four payload digests. Generator comparison and neutral transport validation pass, including 76 rejected mutations. The prior leaf retains the latest 232 native binding assertions; no new native run is counted. All eleven local repair roots and startup .37.1/.28.7 remain pending; the public-selector failure stays open. Next .1.14 reads the final module line, contract runtime, server and wire prefix; startup prerequisites and ADR0118 remain.
 
@@ -1142,6 +1171,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Commit Log
 
+- `2026-09-12` .1.14: `LUA-STARTUP-READING.1.14 - read MCP runtime and preserve repair and named-call ownership`.
+
 - `2026-09-12` .1.13: `LUA-STARTUP-READING.1.13 - finish generated MCP payload reading and reconciliation`.
 
 - `2026-09-12` .1.12: `LUA-STARTUP-READING.1.12 - read generated MCP bytes and reconcile binding proof`.
@@ -1175,6 +1206,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 - `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` owns creation of this plan.
 
 ## Changelog
+
+- `2026-09-12` .1.14: Read MCP runtime/server boundaries, extend existing option/integer repairs and durably capture approved parked named arguments; advance .1.15 without a product pivot.
 
 - `2026-09-12` .1.13: Finish reading the generated MCP literal and reconcile its neutral artifacts independently; preserve prior evidence and advance to .1.14.
 

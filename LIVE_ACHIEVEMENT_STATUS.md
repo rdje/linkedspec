@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl, Rust, Dart and Julia reading are complete. Canonical capacity admission is complete at a67a18bf. Lua .1.13 reads generated MCP bytes 65797–83164 in three complete windows: one fragment /17,368 bytes; cumulative 13/51, 15,151 fragments /663,181 bytes. All 99 Lua sources remain baseline-identical. Independent reconciliation matches the canonical bundle, seven artifact digests, three embedded artifact values, 35 frames and four payload digests. Generator comparison and neutral transport validation pass, including 76 rejected mutations. The prior leaf retains the latest 232 native binding assertions; no new native run is counted. All eleven local repair roots and startup .37.1/.28.7 remain pending; the public-selector failure stays open. Next .1.14 reads the final module line, contract runtime, server and wire prefix; startup prerequisites and ADR0118 remain. Dart reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl, Rust, Dart and Julia reading are complete. Canonical capacity admission is complete at a67a18bf. Lua .1.14 reads the generated module ending, contract runtime, decoded server and wire prefix in twelve complete windows: 1,500 fragments /53,162 bytes; cumulative 14/51, 16,651 fragments /716,343 bytes. All 99 Lua sources remain baseline-identical; 21 files are fully read. Both installed hosts pass 216 decoded, 247 stdio and 33 valid boundary controls each, 992 assertions total. MCP constructor false defaults extend .2.8.7/.8; measured integer-copy loss extends .2.11 without widening request IDs. Admission141 and callable3/9/7 checks pass. Named-argument direction is approved and parked under PARSER-AUTHORING-APIS.4 with four unactivated design/planning children. All eleven Lua repair roots and startup .37.1/.28.7 remain pending; next .1.15 under unchanged startup and ADR0118 prerequisites. Dart reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.82` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `LUA-STARTUP-READING.1.13 - finish generated MCP payload reading and reconciliation` — Lua .1.13 reads generated MCP bytes 65797–83164 in three complete windows: one fragment /17,368 bytes; cumulative 13/51, 15,151 fragments /663,181 bytes. All 99 Lua sources remain baseline-identical. Independent reconciliation matches the canonical bundle, seven artifact digests, three embedded artifact values, 35 frames and four payload digests. Generator comparison and neutral transport validation pass, including 76 rejected mutations. The prior leaf retains the latest 232 native binding assertions; no new native run is counted. All eleven local repair roots and startup .37.1/.28.7 remain pending; the public-selector failure stays open. Next .1.14 reads the final module line, contract runtime, server and wire prefix; startup prerequisites and ADR0118 remain.
+- `LUA-STARTUP-READING.1.14 - read MCP runtime and preserve repair and named-call ownership` — Lua .1.14 reads the generated module ending, contract runtime, decoded server and wire prefix in twelve complete windows: 1,500 fragments /53,162 bytes; cumulative 14/51, 16,651 fragments /716,343 bytes. All 99 Lua sources remain baseline-identical; 21 files are fully read. Both installed hosts pass 216 decoded, 247 stdio and 33 valid boundary controls each, 992 assertions total. MCP constructor false defaults extend .2.8.7/.8; measured integer-copy loss extends .2.11 without widening request IDs. Admission141 and callable3/9/7 checks pass. Named-argument direction is approved and parked under PARSER-AUTHORING-APIS.4 with four unactivated design/planning children. All eleven Lua repair roots and startup .37.1/.28.7 remain pending; next .1.15 under unchanged startup and ADR0118 prerequisites.
 
 ## Next Action
 
-- `LUA-STARTUP-READING.1.14` — Read the final generated line, contract runtime, decoded server and wire prefix in bounded windows; preserve repairs, verify and commit.
+- `LUA-STARTUP-READING.1.15` — Read wire suffix, primary CLI, recognition transaction and runtime prefix; preserve repairs and parked named-argument direction, verify and commit.
 
 ## Recent Completions
+
+- `2026-09-12` — `LUA-STARTUP-READING.1.14` reads 1,500 fragments/53,162 bytes; 992 native assertions pass; MCP repairs extended and named-argument direction approved/parked; next .1.15.
 
 - `2026-09-12` — `LUA-STARTUP-READING.1.13` reads 17,368 generated bytes; independent bundle/frame/payload reconciliation and 76 transport mutations pass; next .1.14.
 
@@ -48,8 +50,6 @@
 - `2026-09-12` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.14` admits the eleven approved Lua evidence controls under ADR0118; full reserve and preservation pass; source reading remains 0/51.
 
 - `2026-09-12` — `LUA-STARTUP-READING.4.1` completes the finite 57-unit capacity proposal with matching history models; eleven controls and .14-only exception await explicit disposition.
-
-- `2026-09-12` — `SESSION-STARTUP-READING.3.6.0` freezes 51 exact Lua children / 149 ranges; no source-reading credit; .4.1 owns coherent capacity disposition.
 
 ## History
 
