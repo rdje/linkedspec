@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LUA-STARTUP-READING`
-- Status: `active` / approved capacity; source reading 15/51
+- Status: `active` / approved capacity; source reading 16/51
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.6`
 - Created: `2026-09-12`
 - Last updated: `2026-09-12`
@@ -45,7 +45,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - Ordered range SHA-256: `81c58b8319def28af518fb134a3787513fe746f0f0f73bcacb0e20b9ede1c9d6`.
 - Child-summary SHA-256: `f56ecac262800bd3cc1e6bba0cc25bfe22f095c3dfee41f1c6595d4200145290`.
 - Coordinates are one-based inclusive LF physical lines or absolute file bytes; both byte windows decode as UTF-8.
-- Current physical reading: 15/51 children, 18,151/71,269 fragments and 768,251/2,732,450 bytes.
+- Current physical reading: 16/51 children, 19,651/71,269 fragments and 815,109/2,732,450 bytes.
 - Exact independent replay and capacity evidence: `docs/knowledge/lua-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -313,14 +313,19 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `LUA-STARTUP-READING.1.15 - read wire CLI and transactions and own finite state repair`
 
 - ID: `LUA-STARTUP-READING.1.16`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `1c74ad498b0e1448d43739e4c7cabf496a646ea9`.
+  Verification tier: `focused`
+  Focused checks: Exact bounded reading/baseline identity; recognition adapter, scalar and semantic Knowledge reconciliation and focused component proof; memory, Knowledge, histories, rendered book and normal doctrines.
+  Canonical trigger: Ordinary source-reading evidence; no runtime or contract change. Later closeout and push retain their canonical prerequisites.
   Goal: Read and understand group 16: recognition_transaction_runtime.lua through semantic_index.lua.
   Scope: `lua/src/linkedspec/recognition_transaction_runtime.lua` lines 142-501; `lua/src/linkedspec/runtime_scoped_binding.lua` lines 1-102; `lua/src/linkedspec/scalar_numeric.lua` lines 1-192; `lua/src/linkedspec/semantic_compilation_outcome.lua` lines 1-253; `lua/src/linkedspec/semantic_index.lua` lines 1-593
   Baseline evidence: 1500 fragments / 46858 bytes; ordered range SHA-256 `96a35519ffd3e49916b79e25a81b9e376cc3090aee62bc5a63293d947ad7a0d3`.
   Dependencies: .1.15 committed with clean handoff.
   Acceptance: Read every scoped byte without truncation; record comprehension, Knowledge and repair reconciliation, focused proof and a clean per-leaf commit.
-  Verification: `pending`
-  Commit: `pending`
+  Reading checkpoint: All five scopes consumed in twelve untruncated windows: adapter 142–291,292–441,442–501; scoped binding 1–102; scalar 1–150,151–192; outcome 1–150,151–253; semantic index 1–150,151–300,301–450,451–593. Reading and focused proof are complete; exact evidence and replay are in docs/knowledge/lua-recognition-numeric-semantic-reading-and-copy-gaps.md.
+  Verification: Lua .1.16 completes recognition adapter, scoped binding, scalar numeric and compilation outcome reading and reads the semantic index prefix in twelve complete windows: 1,500 fragments /46,858 bytes; cumulative 16/51, 19,651 fragments /815,109 bytes. All 99 Lua sources remain baseline-identical; 28 files are fully read. Both installed hosts pass source382, outcome122, scoped26 and boundary10 assertions each, 1,080 total. Nine native/reconstructed numeric cases per host and nine fresh Perl Get/lowering cases locate PUC arithmetic overflow under .2.13; isolated diagnostic null-to-object copies gain .2.14 repair/proof. Neutral numeric55/18 and semantic6/20/128 checks pass without fresh six-runtime admission. All fourteen Lua repair roots and startup .37.1/.28.7 remain pending. Named arguments remain approved and parked under PARSER-AUTHORING-APIS.4. Next .1.17 reads the semantic index suffix, observation, query and runtime projection prefix under unchanged startup and ADR0118 prerequisites. Independent preservation, memory, Knowledge, both histories, rendered book and normal hooks govern landing.
+  Commit: `LUA-STARTUP-READING.1.16 - read numeric and semantic modules and own value preservation repairs`
 
 - ID: `LUA-STARTUP-READING.1.17`
   Status: `pending`
@@ -675,7 +680,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - ID: `LUA-STARTUP-READING.2`
   Status: `pending`
   Goal: Own every newly confirmed Lua defect or coverage gap without losing existing shared repair ownership.
-  Children: `.2.1` owns README status; `.2.2` primary identity; `.2.3` native error safety; `.2.4` executable diagnostic teaching; `.2.5` complete quoted-literal parsing; `.2.6` harray pair completeness; `.2.7` complete switch contract diagnostics; `.2.8` iteration/options/matching-cursor validation; `.2.9` false delimiter preservation; `.2.10` whole child-result false preservation; `.2.11` exact representable integer JSON encoding; `.2.12` finite private recognition coordinates and progress.
+  Children: `.2.1` owns README status; `.2.2` primary identity; `.2.3` native error safety; `.2.4` executable diagnostic teaching; `.2.5` complete quoted-literal parsing; `.2.6` harray pair completeness; `.2.7` complete switch contract diagnostics; `.2.8` iteration/options/matching-cursor validation; `.2.9` false delimiter preservation; `.2.10` whole child-result false preservation; `.2.11` exact representable integer JSON encoding; `.2.12` finite private recognition coordinates and progress; `.2.13` scalar/reducer integer overflow; `.2.14` semantic diagnostic null preservation.
   Acceptance: Define concrete causal evidence, affected behavior and repair/verification children before implementing any finding; preserve startup prerequisites and all earlier owners.
   Verification: `pending`
   Commit: `pending`
@@ -1064,6 +1069,58 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Verification: `pending`
   Commit: `pending`
 
+- ID: `LUA-STARTUP-READING.2.13`
+  Status: `pending`
+  Goal: Prevent silent PUC integer overflow in scalar numeric helpers and reducers.
+  Evidence: Reading .1.16 observes native and SpecFile-reconstructed num_add(max-int,1) and num_sum([max-int,1]) return min-int; num_abs(min-int) remains negative; num_mul(2^62,4) returns zero; num_sub(min-int,1) returns max-int. Installed LuaJIT retains floating magnitudes/signs for those inputs instead of the PUC wraparound. Direct 1e20, adding zero to 1e20, small addition and invalid division controls behave as expected. Existing JSON integer repair .2.11 separately owns max-int decimal serialization.
+  Children: `.2.13.1`, `.2.13.2`
+  Dependencies: Startup .3/.4/.5 and .2.2 declared-PUC proof; preserve ADR0029 and existing startup .20/.55, Dart .2.12 and Julia .2.9 numeric owners.
+  Acceptance: Root-cause each observed native arithmetic operation, independently compare the reference engine, preserve finite sign/magnitude within the agreed numeric contract and reject invalid/non-finite operations. Census subtraction, multiplication, absolute value, reducers, modulo and rounding before closing; fixture parity does not prove all magnitude boundaries. No arbitrary-precision policy or text-spelling change is inferred.
+  Verification: `pending`; .1.16 records initial native/reconstructed observations and focused neutral proof.
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.13.1`
+  Status: `pending`
+  Goal: Repair host integer overflow through one coherent scalar/reducer numeric policy.
+  Dependencies: Parent .2.13 prerequisites and independent reference/domain evidence.
+  Acceptance: Preserve valid results and typed invalid-to-null behavior across scalar and reducer callers, prevent wrapping into the wrong sign or zero, and handle intermediate overflow before finite-result normalization. Preserve LuaJIT representation limits separately from PUC integer operations; do not silently discard representable finite magnitude or widen numeric-string syntax.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.13.2`
+  Status: `pending`
+  Goal: Independently verify numeric magnitude boundaries and supported carriers.
+  Dependencies: .2.13.1 committed cleanly.
+  Acceptance: Compare independently derived boundary expectations and reference Get output with both supported Lua hosts, native/reconstructed/generated/emitted routes, scalar aliases/receivers and reducers. Cover positive/negative overflow, ordinary controls, invalid/non-finite results and source-value versus JSON-output distinctions; update book/Knowledge and close only after required proof.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.14`
+  Status: `pending`
+  Goal: Preserve typed JSON null through semantic compilation diagnostic copies.
+  Evidence: Reading .1.16 isolates a recognized synthetic validation diagnostic with scalar and nested null/false fields. The outcome copier turns null into an empty harray; independently injecting the original typed fields into an otherwise valid failed outcome shows the semantic index copier repeats the loss in fields and to_json. Caller fields and false controls remain intact. The generic copy helpers in semantic_compilation_outcome.lua and semantic_index.lua branch on table kind without preserving json.null first. This is a synthetic diagnostic carrier observation, not evidence that an ordinary spec emits these fields.
+  Children: `.2.14.1`, `.2.14.2`
+  Dependencies: Startup .3/.4/.5 and .2.2 supported-PUC proof; retain .2.11 integer serialization as a separate mechanism.
+  Acceptance: Preserve typed null, boolean values and array/harray identity recursively through both diagnostic copy boundaries, maintain detachment and existing cycle/nonportable rejection, and census actual diagnostic producers before stronger public-reachability claims. Keep unknown-error identity and compiled/failed outcome selection unchanged.
+  Verification: `pending`; .1.16 owns isolated reproduction, valid controls and both-host proof.
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.14.1`
+  Status: `pending`
+  Goal: Repair both semantic diagnostic copy helpers without changing portable data meaning.
+  Dependencies: Parent .2.14 prerequisites and typed-field domain census.
+  Acceptance: Handle json.null before generic table copying, preserve recursive array/harray/null/false structure and caller isolation, and retain deterministic fields and recognized-versus-unrecognized error behavior. Split any newly required public schema or nonportable-domain change before broadening scope.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.14.2`
+  Status: `pending`
+  Goal: Independently verify semantic diagnostic field identity and public projections.
+  Dependencies: .2.14.1 committed cleanly.
+  Acceptance: Isolate the outcome and index copying seams on both supported hosts; verify scalar/nested null and false, empty arrays versus harrays, detached fields/to_json and unchanged typed failures. Census native producers, recompose applicable semantic/MCP carriers and update book/Knowledge before closing, with synthetic and ordinary-source evidence kept distinct.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `LUA-STARTUP-READING.3`
   Status: `pending`
   Goal: Independently close Lua reading and route the remaining supporting-code lanes.
@@ -1146,7 +1203,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.16` | `pending` | Read the recognition adapter suffix, scoped binding, scalar numeric, compilation outcome and semantic index prefix after clean .1.15; preserve all repairs and the parked named-argument direction. |
+| 1 | `LUA-STARTUP-READING.1.17` | `pending` | Read the semantic index suffix, observation, query and runtime projection prefix after clean .1.16; preserve all repairs and the parked named-argument direction. |
 
 ## Decisions
 
@@ -1164,9 +1221,11 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Blockers
 
-- None for Lua .1.16 after the clean .1.15 commit. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
+- None for Lua .1.17 after the clean .1.16 commit. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
 
 ## Verification Log
+
+- `2026-09-12` .1.16: Lua .1.16 completes recognition adapter, scoped binding, scalar numeric and compilation outcome reading and reads the semantic index prefix in twelve complete windows: 1,500 fragments /46,858 bytes; cumulative 16/51, 19,651 fragments /815,109 bytes. All 99 Lua sources remain baseline-identical; 28 files are fully read. Both installed hosts pass source382, outcome122, scoped26 and boundary10 assertions each, 1,080 total. Nine native/reconstructed numeric cases per host and nine fresh Perl Get/lowering cases locate PUC arithmetic overflow under .2.13; isolated diagnostic null-to-object copies gain .2.14 repair/proof. Neutral numeric55/18 and semantic6/20/128 checks pass without fresh six-runtime admission. All fourteen Lua repair roots and startup .37.1/.28.7 remain pending. Named arguments remain approved and parked under PARSER-AUTHORING-APIS.4. Next .1.17 reads the semantic index suffix, observation, query and runtime projection prefix under unchanged startup and ADR0118 prerequisites.
 
 - `2026-09-12` .1.15: Lua .1.15 completes wire, primary CLI and recognition transaction reading and reads the runtime adapter prefix in eleven complete windows: 1,500 fragments /51,908 bytes; cumulative 15/51, 18,151 fragments /768,251 bytes. All 99 Lua sources remain baseline-identical; 24 files are fully read. Both installed hosts pass 246 recognition assertions and 30 valid boundary controls each, 552 assertions total; default-environment CLI conformance separately passes 66 cases per host. Nine private non-finite observations per host gain .2.12 repair/proof ownership; stale transaction integration commentary extends .2.1. Neutral recognition validation passes 138 ActionIR rows, 250 calls and 58 mutations with existing governance checks. All twelve Lua repair roots and startup .37.1/.28.7 remain pending. Named-argument direction remains approved and parked under PARSER-AUTHORING-APIS.4. Next .1.16 reads the adapter suffix, scoped binding, scalar numeric, compilation outcome and semantic index prefix under unchanged startup and ADR0118 prerequisites.
 
@@ -1206,6 +1265,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Commit Log
 
+- `2026-09-12` .1.16: `LUA-STARTUP-READING.1.16 - read numeric and semantic modules and own value preservation repairs` closes the sixteenth reading child from clean 1c74ad498.
+
 - `2026-09-12`: `LUA-STARTUP-READING.1.15 - read wire CLI and transactions and own finite state repair` closes the fifteenth reading child from clean 400e3db44.
 
 - `2026-09-12` .1.14: `LUA-STARTUP-READING.1.14 - read MCP runtime and preserve repair and named-call ownership`.
@@ -1243,6 +1304,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 - `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` owns creation of this plan.
 
 ## Changelog
+
+- `2026-09-12`: .1.16 completes four modules and reads the semantic index prefix; .2.13 owns numeric overflow and .2.14 diagnostic null preservation. Reading is 16/51; next .1.17.
 
 - `2026-09-12`: .1.15 completes wire/CLI/transaction reading and reads the runtime prefix; .2.12 owns finite private state/progress and .2.1 the stale integration comment. Reading is 15/51; next .1.16.
 

@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 15/51; .1.16 follows the fifteenth child; .2.1-.2.12 own twelve concrete repairs; .28.7 owns the baseline public-check failure.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 16/51; .1.17 follows the sixteenth child; .2.1-.2.14 own fourteen concrete repairs; .28.7 owns the baseline public-check failure.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.15 completes wire, primary CLI and recognition transaction reading and reads the runtime adapter prefix in eleven complete windows: 1,500 fragments /51,908 bytes; cumulative 15/51, 18,151 fragments /768,251 bytes. All 99 Lua sources remain baseline-identical; 24 files are fully read. Both installed hosts pass 246 recognition assertions and 30 valid boundary controls each, 552 assertions total; default-environment CLI conformance separately passes 66 cases per host. Nine private non-finite observations per host gain .2.12 repair/proof ownership; stale transaction integration commentary extends .2.1. Neutral recognition validation passes 138 ActionIR rows, 250 calls and 58 mutations with existing governance checks. All twelve Lua repair roots and startup .37.1/.28.7 remain pending. Named-argument direction remains approved and parked under PARSER-AUTHORING-APIS.4. Next .1.16 reads the adapter suffix, scoped binding, scalar numeric, compilation outcome and semantic index prefix under unchanged startup and ADR0118 prerequisites.
+  Verification: Lua .1.16 completes recognition adapter, scoped binding, scalar numeric and compilation outcome reading and reads the semantic index prefix in twelve complete windows: 1,500 fragments /46,858 bytes; cumulative 16/51, 19,651 fragments /815,109 bytes. All 99 Lua sources remain baseline-identical; 28 files are fully read. Both installed hosts pass source382, outcome122, scoped26 and boundary10 assertions each, 1,080 total. Nine native/reconstructed numeric cases per host and nine fresh Perl Get/lowering cases locate PUC arithmetic overflow under .2.13; isolated diagnostic null-to-object copies gain .2.14 repair/proof. Neutral numeric55/18 and semantic6/20/128 checks pass without fresh six-runtime admission. All fourteen Lua repair roots and startup .37.1/.28.7 remain pending. Named arguments remain approved and parked under PARSER-AUTHORING-APIS.4. Next .1.17 reads the semantic index suffix, observation, query and runtime projection prefix under unchanged startup and ADR0118 prerequisites.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -4569,7 +4569,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.16` | `pending` | Read the recognition adapter suffix, scoped binding, scalar numeric, compilation outcome and semantic index prefix after clean .1.15; preserve all repairs and the parked named-argument direction. |
+| 1 | `LUA-STARTUP-READING.1.17` | `pending` | Read the semantic index suffix, observation, query and runtime projection prefix after clean .1.16; preserve all repairs and the parked named-argument direction. |
 
 ## Reading Ledger
 

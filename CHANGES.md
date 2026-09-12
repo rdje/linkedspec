@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-12 — Lua numeric and semantic source reading
+
+- Read five ranges /1,500 fragments /46,858 bytes; cumulative16/51,19,651 fragments /815,109 bytes.
+- Both hosts pass source382, outcome122, scoped26 and boundary10 assertions each;1,080 total; nine Perl Get/lowering cases agree on expected signs/magnitudes.
+- Own PUC scalar/reducer overflow under .2.13 and independently isolated semantic diagnostic null loss under .2.14; preserve synthetic-versus-source domains.
+- LUA-STARTUP-READING.1.16 preserves all earlier repairs, evidence and parked named arguments; neutral numeric55/18 and semantic6/20/128 pass; next .1.17.
+
 ## 2026-09-12 — Lua wire CLI and recognition reading
 
 - Read four ranges /1,500 fragments /51,908 bytes; cumulative 15/51, 18,151 fragments /768,251 bytes.

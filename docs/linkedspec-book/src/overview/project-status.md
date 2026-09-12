@@ -329,18 +329,19 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (15/51 groups):** the complete
+**Lua source reading is underway (16/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first fifteen groups physically read 18,151 fragments /768,251 bytes,
+ownership. The first sixteen groups physically read 19,651 fragments /815,109 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
 also cover the complete generated MCP module, contract runtime, decoded server,
-wire, primary CLI and private recognition transaction module, with its runtime
-adapter prefix. The remaining 36 groups require their own reading and verified
+wire, primary CLI, private recognition transaction module and its runtime adapter,
+scoped binding, scalar numeric and compilation outcome, plus the semantic index
+prefix. The remaining 35 groups require their own reading and verified
 commits; source reading does not close the limitations below.
 
 **Generated Lua MCP binding:** the current 83,166-byte module matches its neutral
@@ -363,6 +364,13 @@ complete; those native MCP counts remain the prior reading slice’s measured re
 246 checks per installed host, with 30 additional finite/type controls each. Primary
 CLI process conformance passes all 66 default-environment cases per host; the
 POSIX-specific leg and complete backend gate retain separate verification.
+
+**Lua semantic foundation verification:** source mapping and policy pass 382 checks
+per installed host; compilation outcomes pass 122 each. The selected scoped-binding
+consumer passes 26 each, preserving copied values and restoration after errors.
+The unchanged 55-case numeric fixture matches both native and reconstructed Lua
+routes. These finite fixtures leave the magnitude and diagnostic-copy limits below
+open; source reading and these checks do not close their repairs.
 
 **Approved Lua evidence capacity:** the director explicitly approved the complete
 Lua proposal under ADR0118. Containment `.14` implements exactly these eleven
@@ -392,8 +400,8 @@ The director also granted one containment `.14` exception for this bounded capac
 implementation before full codebase reading, using focused proof and normal hooks
 without canonical CI/receipt. Later milestone, repair and push requirements remain;
 dependency build-on-update implementation stays separately owned. Lua source reading
-is 15/51; the next group reads the recognition adapter suffix, scoped binding,
-scalar numeric, compilation outcome and semantic index prefix.
+is 16/51; the next group reads the semantic index suffix, observation, query
+and runtime projection prefix.
 All known limitations below retain their repair owners.
 Exact admission and replay: `docs/knowledge/lua-reading-evidence-capacity-admission.md`.
 The historical proposal remains in `docs/knowledge/lua-reading-evidence-capacity-proposal.md`.
@@ -411,6 +419,34 @@ coordinates remain existing controls; a new public bounds policy is not implied.
 The observations use the private helper directly. They do not demonstrate an
 ordinary spec producing infinity or a parser running forever.
 Exact evidence: `docs/knowledge/lua-wire-cli-recognition-reading-and-finite-state-gap.md`.
+
+**Known Lua numeric limitation — PUC integer arithmetic can wrap:** the installed
+PUC host returns the wrong sign or magnitude at some integer boundaries. Examples
+agree across native and reconstructed Lua parsers:
+
+| Expression | Observed PUC result | Expected sign or magnitude |
+| --- | --- | --- |
+| `num_add(9223372036854775807,1)` | `-9223372036854775808` | positive, near 2^63 |
+| `num_abs(-9223372036854775808)` | `-9223372036854775808` | positive, near 2^63 |
+| `num_mul(4611686018427387904,4)` | `0` | positive, near 2^64 |
+
+Subtraction and array summation also wrap in measured boundary cases. The wrong
+value exists before JSON encoding: native integer arithmetic runs before the
+finite-result check. LuaJIT and the Perl reference retain the tested signs and
+magnitudes, with floating precision limits; no arbitrary-precision promise follows.
+Lua `.2.13.1` owns correction and `.2.13.2` independent scalar/reducer/carrier proof.
+The observations use installed PUC5.5.1; declared PUC5.4 verification remains `.2.2`.
+
+**Known Lua semantic limitation — copied diagnostic null becomes an object:**
+a synthetic recognized diagnostic field `{"item":null,"flag":false}` becomes
+`{"item":{},"flag":false}`. The compilation-outcome copier and the independently
+isolated semantic-index copier both lose the typed null, including inside arrays
+and objects. The caller's original fields remain intact; accessor and JSON output
+agree on the changed copy. Lua `.2.14.1/.2` own preserving null, independent
+projection proof and a census of actual diagnostic producers. The synthetic
+fixture does not establish an ordinary spec that generates these fields.
+Exact numeric and diagnostic evidence:
+`docs/knowledge/lua-recognition-numeric-semantic-reading-and-copy-gaps.md`.
 
 **Known Lua JSON limitation — exact PUC integers change during encoding:**
 PUC Lua holds `9007199254740993` exactly, but the JSON encoder emits

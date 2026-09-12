@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-12 — Numeric normalization follows arithmetic; typed null needs identity
+
+- A finite-result check cannot detect a PUC integer that already wrapped into the wrong sign or zero; scalar and reducer arithmetic share this boundary.
+- Semantic outcome/index table copiers each convert json.null to an empty harray; independent synthetic injection preserves false and caller-state controls.
+- Source382, outcome122, scoped26 and boundary10 controls pass per host; reference numeric lowering and explicit floating tolerance distinguish magnitude from serialization.
+- LUA-STARTUP-READING.1.16 owns .2.13/.2.14 repair intake; exact replay and fixture corrections are in docs/knowledge/lua-recognition-numeric-semantic-reading-and-copy-gaps.md.
+
 ## 2026-09-12 — Finite recognition state and exact proof domains
 
 - Equality with math.floor admits both infinities; private transaction states can retain values that later fail snapshot JSON encoding.
