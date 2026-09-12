@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 16/51; .1.17 follows the sixteenth child; .2.1-.2.14 own fourteen concrete repairs; .28.7 owns the baseline public-check failure.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 17/51; .1.18 follows the seventeenth child; .2.1-.2.15 own fifteen concrete repairs, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.16 completes recognition adapter, scoped binding, scalar numeric and compilation outcome reading and reads the semantic index prefix in twelve complete windows: 1,500 fragments /46,858 bytes; cumulative 16/51, 19,651 fragments /815,109 bytes. All 99 Lua sources remain baseline-identical; 28 files are fully read. Both installed hosts pass source382, outcome122, scoped26 and boundary10 assertions each, 1,080 total. Nine native/reconstructed numeric cases per host and nine fresh Perl Get/lowering cases locate PUC arithmetic overflow under .2.13; isolated diagnostic null-to-object copies gain .2.14 repair/proof. Neutral numeric55/18 and semantic6/20/128 checks pass without fresh six-runtime admission. All fourteen Lua repair roots and startup .37.1/.28.7 remain pending. Named arguments remain approved and parked under PARSER-AUTHORING-APIS.4. Next .1.17 reads the semantic index suffix, observation, query and runtime projection prefix under unchanged startup and ADR0118 prerequisites.
+  Verification: Lua .1.17 completes semantic index, observation and query reading and reads the runtime projection prefix in twelve complete windows: 1,500 fragments /53,106 bytes; cumulative17/51,21,151 fragments /868,215 bytes. All99 Lua sources remain baseline-identical;31 files are fully read. Query571 and projection269 pass per host; LuaJIT observation121/generated80 pass. Installed PUC observation120/121 and generated79/80 retain two nil-error failures, root-caused to documented5.5 host coercion under existing .2.2. Fourteen two-host query responses match; twelve agree fully with neutral and two false-to-null evidence differences gain .2.15 ownership. Six shared budget cases gain bounded Lua repair/proof under startup .82.3.1. Neutral6/20/128 passes; no supported dual-host or full-gate pass is claimed. All fifteen Lua roots and startup .37.1/.28.7/.82 remain pending. Named arguments stay approved and parked. Next .1.18 reads the runtime projection suffix and static projection prefix under unchanged startup and ADR0118 prerequisites.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -4528,6 +4528,8 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Evidence: Julia and the neutral evaluator return identical six-control responses. Explain emits two relations under max_relations1 and depth1 under max_depth0, complete with no diagnostic. A list page of one record reports max_records reached despite a budget of two and emitted cost1. Exact mechanisms and replay belong to docs/knowledge/semantic-query-budget-contract-gaps.md.
   Children: `.82.1` contract and independent expectations; `.82.2` neutral evaluator repair; `.82.3` bounded backend repair decomposition; `.82.4` transport/carrier/public closeout.
   Acceptance: Resolve the conflict between reported logical costs, request maxima and page-only boundaries explicitly. Keep all source evidence and canonical hashes until an owned contract migration justifies changes. Every confirmed backend gets implementation ownership; no expectation refresh may merely ratify current wrong results.
+  Lua reading .1.17 extension: Both installed Lua hosts return the same six complete budget responses as the neutral evaluator and the prior Julia controls. semantic_query.lua page_stream computes budget limitation from the unpaged remaining stream; explain applies only max_records before reporting relation/depth costs. New .82.3.1 owns bounded Lua implementation/proof after the shared contract/neutral decisions.
+
 
 - ID: `SESSION-STARTUP-READING.82.1`
   Status: `pending`
@@ -4550,6 +4552,35 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Goal: Census all five native semantic evaluators and create bounded backend implementation children.
   Dependencies: .82.1; source implementations additionally depend on .82.2 and startup prerequisites.
   Acceptance: Reproduce each boundary through Perl, Rust, Dart, Julia, PUC Lua and LuaJIT without assuming parity. Before editing, create one safe implementation child per confirmed backend cause, with independent request/cost/selection evidence and direct-dependent proof. Julia source mechanisms are SemanticQuery906-961 and1049-1066; retain separate source-correlation owners.
+  Children: `.82.3.1` owns confirmed Lua implementation/proof; remaining native census and bounded child creation stay pending.
+  Verification: `pending`
+  Commit: `pending`
+  Lua reading .1.17 extension: Both installed Lua hosts return the same six complete budget responses as the neutral evaluator and the prior Julia controls. semantic_query.lua page_stream computes budget limitation from the unpaged remaining stream; explain applies only max_records before reporting relation/depth costs. New .82.3.1 owns bounded Lua implementation/proof after the shared contract/neutral decisions.
+
+
+- ID: `SESSION-STARTUP-READING.82.3.1`
+  Status: `pending`
+  Goal: Align Lua semantic budget enforcement and diagnostics with the resolved shared contract.
+  Children: `.82.3.1.1` implementation; `.82.3.1.2` independent proof.
+  Dependencies: .82.1/.82.2 and startup .3/.4/.5; supported Lua primary identity remains LUA-STARTUP-READING.2.2-owned.
+  Evidence: Lua .1.17 independently compares six full raw-neutral graph responses on PUC and LuaJIT to the neutral evaluator; relation/depth overruns and the premature record-budget warning match the existing shared finding.
+  Acceptance: Preserve canonical ordering, source ceilings, paging identity and typed/raw-neutral convergence while implementing the resolved applicable cost/budget boundaries. Keep query-evidence false preservation under LUA-STARTUP-READING.2.15 and all source-correlation repairs distinct.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.82.3.1.1`
+  Status: `pending`
+  Goal: Repair Lua explain limits and page-versus-budget boundary selection.
+  Dependencies: Parent .82.3.1 prerequisites and independently frozen expectations.
+  Acceptance: Apply each contract-required record/relation/depth bound to explain and select deterministic budget/page diagnostics from the boundary actually reached. Preserve after_id, decision/step/relation consistency, all unaffected query hashes and agreed logical costs across both supported host routes.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.82.3.1.2`
+  Status: `pending`
+  Goal: Independently verify Lua query budgets through public entrypoints and composed carriers.
+  Dependencies: .82.3.1.1 committed cleanly.
+  Acceptance: Cover simultaneous page/record/relation/depth limits, zero-depth explanations, cursor continuations and deterministic complete/incomplete response bodies against independent expectations on supported PUC and LuaJIT. Recompose typed/raw-neutral and applicable MCP proof; preserve source privacy and update book/Knowledge before closing the Lua container.
   Verification: `pending`
   Commit: `pending`
 
@@ -4569,7 +4600,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.17` | `pending` | Read the semantic index suffix, observation, query and runtime projection prefix after clean .1.16; preserve all repairs and the parked named-argument direction. |
+| 1 | `LUA-STARTUP-READING.1.18` | `pending` | Read the runtime projection suffix and static projection prefix after clean .1.17; preserve all repair and host-failure evidence plus the parked named-argument direction. |
 
 ## Reading Ledger
 

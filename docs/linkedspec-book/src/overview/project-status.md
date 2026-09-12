@@ -329,19 +329,20 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (16/51 groups):** the complete
+**Lua source reading is underway (17/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first sixteen groups physically read 19,651 fragments /815,109 bytes,
+ownership. The first seventeen groups physically read 21,151 fragments /868,215 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
 also cover the complete generated MCP module, contract runtime, decoded server,
 wire, primary CLI, private recognition transaction module and its runtime adapter,
-scoped binding, scalar numeric and compilation outcome, plus the semantic index
-prefix. The remaining 35 groups require their own reading and verified
+scoped binding, scalar numeric, compilation outcome, semantic index, observation
+and query, plus the runtime projection prefix. The remaining 34 groups require
+their own reading and verified
 commits; source reading does not close the limitations below.
 
 **Generated Lua MCP binding:** the current 83,166-byte module matches its neutral
@@ -372,6 +373,14 @@ The unchanged 55-case numeric fixture matches both native and reconstructed Lua
 routes. These finite fixtures leave the magnitude and diagnostic-copy limits below
 open; source reading and these checks do not close their repairs.
 
+**Lua query and observation verification:** all 571 query and 269 runtime
+projection assertions pass on each installed host. LuaJIT also passes all 121
+native observation and 80 generated observation assertions. Installed PUC 5.5
+fails one nil-callback assertion in each observation suite; the other 120 and 79
+assertions pass. The host-level cause and required declared 5.4 reruns remain
+under the toolchain limitation below. These results do not establish complete
+supported-runtime semantic conformance.
+
 **Approved Lua evidence capacity:** the director explicitly approved the complete
 Lua proposal under ADR0118. Containment `.14` implements exactly these eleven
 controls for 51 reading groups plus six support slots:
@@ -400,8 +409,8 @@ The director also granted one containment `.14` exception for this bounded capac
 implementation before full codebase reading, using focused proof and normal hooks
 without canonical CI/receipt. Later milestone, repair and push requirements remain;
 dependency build-on-update implementation stays separately owned. Lua source reading
-is 16/51; the next group reads the semantic index suffix, observation, query
-and runtime projection prefix.
+is 17/51; the next group reads the runtime projection suffix and static projection
+prefix. The installed-host test failures below remain open.
 All known limitations below retain their repair owners.
 Exact admission and replay: `docs/knowledge/lua-reading-evidence-capacity-admission.md`.
 The historical proposal remains in `docs/knowledge/lua-reading-evidence-capacity-proposal.md`.
@@ -419,6 +428,17 @@ coordinates remain existing controls; a new public bounds policy is not implied.
 The observations use the private helper directly. They do not demonstrate an
 ordinary spec producing infinity or a parser running forever.
 Exact evidence: `docs/knowledge/lua-wire-cli-recognition-reading-and-finite-state-gap.md`.
+
+**Known Lua query limitation — rejected false evidence becomes null:** a raw
+query with `contract=false` is rejected, but its diagnostic reports
+`requested=null`. A rejected `page.after_id=false` similarly echoes
+`page.after_id=null`. Both installed hosts retain true, zero, typed null and
+nested `[false,null]` controls. The evidence-copy wrapper treats a successful
+scalar false copy as failure; request rejection and zero-cost accounting remain
+correct. Lua `.2.15.1/.2` own explicit success/value handling and independent
+full-response, detachment and transport proof. This differs from the diagnostic
+null-to-object copying limitation below.
+Exact evidence: `docs/knowledge/lua-semantic-query-observation-reading-and-evidence-gaps.md`.
 
 **Known Lua numeric limitation — PUC integer arithmetic can wrap:** the installed
 PUC host returns the wrong sign or magnitude at some integer boundaries. Examples
@@ -561,6 +581,14 @@ select these independently without checking the declared target or an override's
 header compatibility. Current 5.5.1 observations establish no 5.4 conformance and
 do not change the supported target. Lua `.2.2.1` owns explicit selection/identity
 checks and `.2.2.2` the independent supported-runtime proof.
+The September 13 observation checks demonstrate a concrete consequence: PUC 5.5
+converts `error(nil,0)` into the string `<no error object>`, while LuaJIT preserves
+nil. A standalone probe reproduces this before LinkedSpec is imported. It matches
+the documented [Lua 5.5 error-object change](https://www.lua.org/manual/5.5/manual.html#2.3).
+The unchanged native and generated observation tests each fail one PUC assertion;
+`.2.2.2` now explicitly requires both complete suites on the restored declared 5.4
+runtime. Their expected nil behavior remains unchanged, and no string-to-nil
+workaround or supported-target upgrade is implied.
 
 **Known Lua native limitation — invalid-regex error formatting:** malformed native
 patterns can lose error detail on LuaJIT and crash the measured PUC 5.5.1 process.
@@ -740,15 +768,18 @@ The missing-rule and out-of-range-slot controls preserve distinct truthful
 failure diagnostics; these do not close the separate Perl failure repair.
 Exact sources and causal proof: `docs/knowledge/julia-semantic-static-correlation-gaps.md`.
 
-**Known shared limitation — semantic query budgets:** Julia and the neutral
-evaluator can return two explanation relations with `max_relations=1`, or
-explanation depth one with `max_depth=0`, while reporting completion without a
+**Known shared limitation — semantic query budgets:** Julia, both installed Lua
+hosts and the neutral evaluator can return two explanation relations with
+`max_relations=1`, or explanation depth one with `max_depth=0`, while reporting completion without a
 warning. A one-record list page can also report that a two-record budget was
 reached. Shared startup `.82.1-.4` own explicit contract expectations, neutral
 repair, bounded backend implementation and transport/public proof. Agreement
-with the neutral evaluator does not close these inconsistencies. This is fresh
-Julia/neutral evidence; the other native backends still require their own census.
-Exact requests and causal proof: `docs/knowledge/semantic-query-budget-contract-gaps.md`.
+with the neutral evaluator does not close these inconsistencies. Lua now matches
+all six complete responses independently; startup `.82.3.1.1/.2` own its bounded
+implementation and proof after the shared contract decision. Other native backends
+and MCP still require their own census. Exact requests and causal proof:
+`docs/knowledge/semantic-query-budget-contract-gaps.md` and
+`docs/knowledge/lua-semantic-query-observation-reading-and-evidence-gaps.md`.
 
 **Known Julia limitation — semantic call source correlation:** an action's
 `trim(" x ")` call can cite `trim(x)` inside a preceding grouped or

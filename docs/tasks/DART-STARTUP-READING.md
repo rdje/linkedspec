@@ -1568,7 +1568,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.17` | `pending` | Read the semantic index suffix, observation, query and runtime projection prefix after clean .1.16; preserve all repairs and the parked named-argument direction. |
+| 1 | `LUA-STARTUP-READING.1.18` | `pending` | Read the runtime projection suffix and static projection prefix after clean .1.17; preserve all repair and host-failure evidence plus the parked named-argument direction. |
 
 ## Decisions
 

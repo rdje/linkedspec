@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Semantic evidence, logical budgets and host error identity
+
+- Successful scalar false copies must remain distinct from copy failures; the raw query evidence wrapper currently converts false to null.
+- Lua repeats the shared explain/page-budget inconsistencies; neutral agreement is measured evidence, not authority to bless a wrong limit.
+- Bare PUC5.5 error(nil) becomes a string before LinkedSpec receives it; two unchanged observation tests fail, while LuaJIT passes and .2.2 retains declared5.4 repair.
+- LUA-STARTUP-READING.1.17 records exact passes/failures and official host references in docs/knowledge/lua-semantic-query-observation-reading-and-evidence-gaps.md.
+
 ## 2026-09-12 — Numeric normalization follows arithmetic; typed null needs identity
 
 - A finite-result check cannot detect a PUC integer that already wrapped into the wrong sign or zero; scalar and reducer arithmetic share this boundary.

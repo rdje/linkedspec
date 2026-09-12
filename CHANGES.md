@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua semantic query reading and qualified host proof
+
+- Read four ranges /1,500 fragments /53,106 bytes; cumulative17/51,21,151 fragments /868,215 bytes.
+- Query571/projection269 pass per host; LuaJIT observation121/generated80 pass; installed PUC retains one nil-error failure in each observation suite.
+- Own rejected false evidence under .2.15, shared Lua budgets under startup .82.3.1, and documented5.5 nil-error consequences under existing .2.2.
+- LUA-STARTUP-READING.1.17 preserves failures, evidence and parked features; fourteen two-host responses and neutral6/20/128 reconcile; next .1.18.
+
 ## 2026-09-12 — Lua numeric and semantic source reading
 
 - Read five ranges /1,500 fragments /46,858 bytes; cumulative16/51,19,651 fragments /815,109 bytes.
