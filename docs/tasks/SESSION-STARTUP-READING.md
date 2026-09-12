@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4.2 owns explicit disposition of the committed capacity proposal before reading.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact source reading begins at .1.1.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .4.1 proposes eleven finite evidence-limit changes for 51 reading leaves plus six support units. Exact 57-unit reserve and independent/production history models pass; each history needs four rollovers with only two slots available. The proposal preserves all source, evidence, controls and pending repairs. Explicit approval of the exact limits and containment .14-only focused/receipt exception is required before implementation; Lua .4.2 owns the decision. Source reading remains 0/51.
+  Verification: Explicit ADR0118 approval admits exactly eleven finite Lua evidence controls and the .14-only focused/receipt exception. The complete actual-plus-57-unit reserve fits; independent and production history models agree on four rollovers per collection. Actual routing functions pass 125 threshold and 54 authorization cases. Previous source, cards, decisions, task evidence and immutable history remain exact. Lua .4/.4.2 close; source reading remains 0/51 and .1.1 follows the clean commit. Later verification and startup repair prerequisites remain unchanged.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -4545,7 +4545,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.4.2` | `pending` | Record explicit disposition of the complete Lua capacity and .14-only verification proposal; prior repairs retain their owners. |
+| 1 | `LUA-STARTUP-READING.1.1` | `pending` | Begin exact Lua source reading after clean approved capacity admission; all previous repairs remain owned. |
 
 ## Reading Ledger
 

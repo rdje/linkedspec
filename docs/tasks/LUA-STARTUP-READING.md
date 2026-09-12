@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LUA-STARTUP-READING`
-- Status: `active` / plan frozen; capacity decision pending; source reading 0/51
+- Status: `active` / approved capacity; source reading 0/51
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.6`
 - Created: `2026-09-12`
 - Last updated: `2026-09-12`
@@ -590,12 +590,12 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `pending`
 
 - ID: `LUA-STARTUP-READING.4`
-  Status: `active`
+  Status: `done`
   Goal: Resolve coherent Lua reading evidence capacity before activating source-reading children.
   Children: `.4.1`, `.4.2`
   Acceptance: Preserve readable unique evidence and existing controls; measure the complete activity, record any exact proposal and authority, and verify an approved implementation before source reading needs that allowance.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Explicit ADR0118 approval admits exactly eleven finite Lua evidence controls and the .14-only focused/receipt exception. The complete actual-plus-57-unit reserve fits; independent and production history models agree on four rollovers per collection. Actual routing functions pass 125 threshold and 54 authorization cases. Previous source, cards, decisions, task evidence and immutable history remain exact. Lua .4/.4.2 close; source reading remains 0/51 and .1.1 follows the clean commit. Later verification and startup repair prerequisites remain unchanged.
+  Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.14 - admit approved Lua reading evidence capacity` (Lua capacity container)
 
 - ID: `LUA-STARTUP-READING.4.1`
   Status: `done`
@@ -610,12 +610,12 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `LUA-STARTUP-READING.4.1 - propose finite Lua evidence capacity and verification boundary`
 
 - ID: `LUA-STARTUP-READING.4.2`
-  Status: `pending`
+  Status: `done`
   Goal: Record the director's explicit disposition of the committed Lua capacity and verification proposal.
   Dependencies: .4.1 committed and a new explicit director decision; previous Julia approvals do not extend.
   Acceptance: Resolve the exact eleven controls and containment .14-only before-reading focused/canonical-receipt exception in Capacity proposal .4.1. If approved, record this disposition and a new accepted indexed ADR in the separately owned .14 implementation commit; no separate decision-only commit is required. If denied, preserve all evidence and identify another governed capacity/verification route. No source reading, control change or dependency build is authorized by this pending node.
-  Verification: `pending` director decision; exact proposal and all independent models are committed first.
-  Commit: `pending`
+  Verification: The director explicitly answered Granted on 2026-09-12 to all eleven proposed controls and the .14-only focused/canonical-receipt exception including before-reading execution. ADR0118 records acceptance in the .14 admission commit; all .4.1 proposal evidence remains exact. Explicit ADR0118 approval admits exactly eleven finite Lua evidence controls and the .14-only focused/receipt exception. The complete actual-plus-57-unit reserve fits; independent and production history models agree on four rollovers per collection. Actual routing functions pass 125 threshold and 54 authorization cases. Previous source, cards, decisions, task evidence and immutable history remain exact. Lua .4/.4.2 close; source reading remains 0/51 and .1.1 follows the clean commit. Later verification and startup repair prerequisites remain unchanged.
+  Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.14 - admit approved Lua reading evidence capacity` (approved disposition recorded with admission)
 
 ## Capacity proposal .4.1
 
@@ -663,9 +663,11 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.4.2` | `pending` | Director disposition of the concrete eleven-control proposal and .14-only verification exception; all evidence is committed first. |
+| 1 | `LUA-STARTUP-READING.1.1` | `pending` | Read the first exact Lua README range after clean ADR0118 capacity admission. |
 
 ## Decisions
+
+- `2026-09-12` .4.2: Explicit Granted approval closes .4.2 and admits the exact ADR0118 capacity under containment .14. The historical .4.1 proposal remains byte-exact.
 
 - `2026-09-12` .4.1: Propose a finite 57-unit Lua envelope using observed Julia maxima and two matching history models; no control, source or standing verification changes.
 
@@ -675,13 +677,15 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Open Questions
 
-- Approve the eleven exact controls and containment .14-only focused/receipt exception, including this bounded implementation before full codebase reading? Lua .4.2 owns the explicit director disposition; earlier approvals do not extend.
+- .4.2 resolved: explicit Granted approval is recorded under ADR0118; no further decision is needed for this bounded admission.
 
 ## Blockers
 
-- Containment .14 requires a newly accepted indexed capacity ADR and canonical infrastructure proof. The required PGEN/RGX build-on-update lifecycle remains unimplemented under startup .80, so the proposed .14-only focused/receipt exception needs explicit director approval. The proposal is complete; .4.2 records that decision before capacity implementation or Lua reading.
+- None for Lua .1.1 after clean admission. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
 
 ## Verification Log
+
+- `2026-09-12` .4.2: Explicit ADR0118 approval admits exactly eleven finite Lua evidence controls and the .14-only focused/receipt exception. The complete actual-plus-57-unit reserve fits; independent and production history models agree on four rollovers per collection. Actual routing functions pass 125 threshold and 54 authorization cases. Previous source, cards, decisions, task evidence and immutable history remain exact. Lua .4/.4.2 close; source reading remains 0/51 and .1.1 follows the clean commit. Later verification and startup repair prerequisites remain unchanged.
 
 - `2026-09-12` .4.1: Lua .4.1 proposes eleven finite evidence-limit changes for 51 reading leaves plus six support units. Exact 57-unit reserve and independent/production history models pass; each history needs four rollovers with only two slots available. The proposal preserves all source, evidence, controls and pending repairs. Explicit approval of the exact limits and containment .14-only focused/receipt exception is required before implementation; Lua .4.2 owns the decision. Source reading remains 0/51.
 
@@ -689,11 +693,15 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Commit Log
 
+- `2026-09-12` .4.2: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.14 - admit approved Lua reading evidence capacity` closes .4/.4.2 without source-reading credit.
+
 - `2026-09-12` .4.1: `LUA-STARTUP-READING.4.1 - propose finite Lua evidence capacity and verification boundary`.
 
 - `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` owns creation of this plan.
 
 ## Changelog
+
+- `2026-09-12` .4.2: Resolve approved capacity and route the first exact Lua reading child after clean admission.
 
 - `2026-09-12` .4.1: Complete the coherent Lua capacity proposal; retain 0/51 reading and all existing repairs while explicit disposition is pending.
 

@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `7f97cb630e7f5a64915df8febdab078b9d5be38e` — clean exact Lua reading decomposition.
-- latest_completed_leaf: `LUA-STARTUP-READING.4.1 - propose finite Lua evidence capacity and verification boundary`; complete models, reserve and preservation proof are durable.
-- active_work_unit: `LUA-STARTUP-READING.4.2` — explicit Lua capacity/verification disposition pending.
-- next_action: Record director approval or rejection of the eleven exact controls and containment .14-only focused/receipt exception; only then activate the authorized capacity route.
+- activation_commit: `b4ec6d39fb1e58bf3d8513f8c03d57b289ba15f6` — clean complete Lua capacity proposal.
+- latest_completed_leaf: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.14 - admit approved Lua reading evidence capacity`; exact authority, preservation and full reserve pass.
+- active_work_unit: `LUA-STARTUP-READING.1.1` — first exact Lua source-reading child.
+- next_action: Read every byte of Lua .1.1 in small untruncated windows; reconcile Knowledge, record comprehension and findings, run focused proof and commit the slice.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none; this pointer describes the intended clean committed handoff.
-- blockers: a new explicit decision is required for Lua capacity and .14-only before-reading verification; earlier Julia approvals do not extend. Source reading remains 0/51.
+- blockers: none for Lua .1.1; ADR0118 admits the finite reading reserve. Source repairs and later verification retain their existing prerequisites.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -51,10 +51,10 @@
 - standing_contracts: all durable paths are repo-relative; all project data stays on the repository filesystem;
   README remains bounded; ordinary leaves use focused proof and designated infrastructure/public/push boundaries
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
-- current_engineering_notes_capacity: ADR0115 admits 32 files /31 manifest lines /18678 manifest bytes for finite remaining Julia reading.
-  Current manifest is 17454 bytes after exact212-line segment4978 rollover; root/segment/aggregate limits and all prior history remain unchanged.
-- current_change_history_capacity: ADR0115 admits 36 files /35 manifest lines /19919 manifest bytes; current collection uses 34 files /18767 manifest bytes.
-  Segment 4979-6e4108166552 preserves 213 lines /12545 bytes; all other controls remain unchanged. Proportionate governance: ADR0115.
+- current_engineering_notes_capacity: ADR0118 admits 34 files /33 manifest lines /19902 manifest bytes and 28000 aggregate lines for finite Lua reading.
+  Current manifest remains 17454 bytes; root/segment/byte limits and all prior history remain unchanged. No rollover is required at admission.
+- current_change_history_capacity: ADR0118 admits 38 files /37 manifest lines /21071 manifest bytes; current collection uses 34 files /18767 manifest bytes.
+  All earlier archive bytes and other history controls remain unchanged; the complete 57-unit Lua reserve is checked. Proportionate governance: ADR0115.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
 - latest_bootstrap_read: 2026-09-12 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart/Julia reading closed; Lua plan 0/51, 99 files / 71269 fragments / 2732450 bytes. Supporting code, formal book .4 and policy .5 remain.

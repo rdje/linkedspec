@@ -139,6 +139,8 @@ changed* lives in git (layer D), not here.
 
 | [0117](0117-julia-reading-closeout-verification-exception.md) | Close independently verified Julia reading under explicit one-time approval; retain all repairs and later verification | 2026-09-12 | accepted | reading, verification, continuity |
 
+| [0118](0118-approved-lua-reading-evidence-capacity.md) | Admit eleven finite Lua reading evidence controls under explicit approval and a .14-only focused exception | 2026-09-12 | accepted | lua, capacity, knowledge, history, verification |
+
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /
    Decision / Consequences / Links`).

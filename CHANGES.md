@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-12 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.14 - admit approved Lua reading evidence capacity
+
+Implement exactly eleven director-approved Lua evidence controls under ADR0118.
+Reverify prior source/history, complete actual-plus-57-unit reserve and production
+threshold/authorization behavior. Close Lua capacity only; source reading remains
+0/51, with .1.1 next after clean commit. Normal hooks and later proof remain.
+
 ## 2026-09-12 — LUA-STARTUP-READING.4.1 - propose finite Lua evidence capacity and verification boundary
 
 Propose eleven exact Lua evidence controls for 51 reading and six support units.

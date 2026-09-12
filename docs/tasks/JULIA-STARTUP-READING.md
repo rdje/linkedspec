@@ -1741,7 +1741,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.4.2` | `pending` | Record explicit disposition of the complete Lua capacity and .14-only verification proposal; prior repairs retain their owners. |
+| 1 | `LUA-STARTUP-READING.1.1` | `pending` | Begin exact Lua source reading after clean approved capacity admission; all previous repairs remain owned. |
 
 ## Decisions
 

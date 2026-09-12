@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-12 — Approved Lua capacity preserves all prior evidence and scoped verification
+
+ADR0118 records explicit approval for the eleven controls and .14-only exception.
+Independent actual-candidate history and complete reserve checks govern admission.
+Production proof covers 125 thresholds, including eleven existing task overrides,
+and 54 authorization cases. The initial harness count omitted those 55 cases.
+
 ## 2026-09-12 — Plan the complete Lua evidence allowance with independently checked history
 
 The 57-unit maximum model uses committed Julia growth and counts complete new
