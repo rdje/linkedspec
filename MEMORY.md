@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `9824c097148235268964acbdf47984d9933753a8` — clean approved Julia reading closeout.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake`; independent exact-range and comparable-growth audits pass.
-- active_work_unit: `LUA-STARTUP-READING.4.1` — next coherent Lua evidence-capacity disposition.
-- next_action: Prepare the complete 51-child Lua capacity proposal from the frozen scopes and measured Julia reference; preserve all repairs and remaining startup prerequisites.
+- activation_commit: `7f97cb630e7f5a64915df8febdab078b9d5be38e` — clean exact Lua reading decomposition.
+- latest_completed_leaf: `LUA-STARTUP-READING.4.1 - propose finite Lua evidence capacity and verification boundary`; complete models, reserve and preservation proof are durable.
+- active_work_unit: `LUA-STARTUP-READING.4.2` — explicit Lua capacity/verification disposition pending.
+- next_action: Record director approval or rejection of the eleven exact controls and containment .14-only focused/receipt exception; only then activate the authorized capacity route.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
 - in_flight_uncommitted: none; this pointer describes the intended clean committed handoff.
-- blockers: none for Lua .4.1 assessment; source-reading activation awaits coherent capacity disposition, with no inferred increase or canonical exception.
+- blockers: a new explicit decision is required for Lua capacity and .14-only before-reading verification; earlier Julia approvals do not extend. Source reading remains 0/51.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

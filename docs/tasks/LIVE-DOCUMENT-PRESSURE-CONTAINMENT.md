@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-- Status: `done` / .13 approved finite Julia evidence capacity
+- Status: `active` / .0-.13 complete; proposed Lua .14 awaits explicit decision
 - Roadmap lane: `Repository architecture / documentation sustainability`
 - Created: `2026-08-09`
-- Last updated: `2026-09-11` (.13 approved implementation; prior leaves remain complete)
+- Last updated: `2026-09-12` (Lua .14 proposal owned; prior leaves remain complete)
 - Owner: repo-local workflow
 
 ## Goal
@@ -58,10 +58,10 @@ or the README `.4` adoption/closeout that installs the guard.
 ## Task Tree
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-  Status: `done` (.0-.13 complete; Julia reading37/52)
+  Status: `active` (.0-.13 complete; proposed Lua .14)
   Goal: Replace measured oversized routed destinations with bounded views over durable stores.
   Depends on: `README-STABILITY-POLICY.4.2`
-  Children: `.0-.13`
+  Children: `.0-.14`
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0`
   Status: `done` (2026-08-09; committed atomically at `dc8dd896` as 176/300; brief cleared; clean proof passed;
@@ -468,8 +468,20 @@ or the README `.4` adoption/closeout that installs the guard.
   Verification: Exact two-scalar registry transition;20 actual production threshold and24 authorization executions pass. Prior source/guard/card/decision/history bytes, old question rows and unrelated task nodes remain exact. The full current-plus-reserve census passes all four stores and unchanged member controls. Knowledge, memory, both history pressure checks, rendered book and all nine normal doctrines govern landing; no canonical CI or dependency build. Reproducible proof: docs/knowledge/julia-evidence-capacity-admission.md.
   Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.13 - admit approved Julia evidence capacity`
 
+- ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.14`
+  Status: `pending`
+  Goal: Implement only the explicitly approved finite Lua reading evidence capacity.
+  Dependencies: LUA-STARTUP-READING.4.1 committed; .4.2 explicit director disposition; clean handoff and newly accepted indexed execution ADR.
+  Scope: The exact eleven scalar changes in Lua Capacity proposal .4.1: Knowledge/task aggregate lines and bytes; both history collection file counts and manifest line/byte limits; engineering-note aggregate lines. Every other control and contract byte remains unchanged.
+  Acceptance: Record the exact approved old/new canonical limit and contract objects, then change only authorized scalars. Reexecute source/reading/history preservation, full actual-plus-57-unit reserve, actual production-validator inclusive/overflow and authorization controls, all nine doctrines, Knowledge/memory, both histories and rendered book. Apply any required rollover through the existing tool with exact preservation. Canonical CI/receipt remains required unless the director explicitly grants the proposed .14-only focused exception including before-reading execution. No PGEN/RGX build, source repair, later milestone or push waiver. Close only Lua .4 after verified admission and clear independent review; resume .1.1 from a clean commit.
+  Verification: `pending`; Lua .4.1 contains the concrete proposal and independently reproduced models. Earlier ADR0115/0116/0117 exceptions do not extend.
+  Commit: `pending`
+
 ## Current Frontier
 
+Lua .4.1 has prepared the exact .14 capacity proposal. Current decision owner is `LUA-STARTUP-READING.4.2`; .14 is not executable until explicit authorization and verification disposition are recorded.
+
+Historical .13 handoff (preserved):
 Complete through .13 under director-approved ADR0116. After the verified commit, empty brief and clean proof, resume `JULIA-STARTUP-READING.1.38` in its separate active reading tree.
 
 Historical .12 handoff (preserved):
@@ -479,6 +491,8 @@ resume `JULIA-STARTUP-READING.1.4` in its separate active reading tree.
 Historical .11 handoff (preserved): This tree closes through .11 under the director’s explicit one-time focused-verification exception. After the commit, empty brief and clean proof, resume `DART-STARTUP-READING.1.47`. Dart reading remains 46/55; all remaining reading, repair and future canonical gates remain in force.
 
 ## Decisions
+
+- `2026-09-12`: Lua .4.1 owns the complete eleven-scalar proposal; .14 awaits a new explicit capacity/verification decision, preserving earlier scoped approvals.
 
 - `2026-09-11` .13: Director answer Granted authorizes both exact line-limit increases and the .13-only focused exception. ADR0116 is the accepted indexed execution authority; no later or push waiver follows.
 
@@ -618,6 +632,8 @@ All files and transient proof stay on the repository filesystem; no off-volume c
 
 ## Verification Log
 
+- `2026-09-12`: Lua proposal models and preservation are recorded in its .4.1 owner; no .14 implementation or control change is claimed.
+
 - `2026-09-11` .13: Exact two-scalar scope,20 production threshold and24 authorization executions pass; prior evidence preservation and the full current-plus-reserve census are replayable from docs/knowledge/julia-evidence-capacity-admission.md. Normal doctrines/book/history/memory govern landing.
 
 - `2026-09-11` .12: Approved containment .12 / ADR0115 admits four extra archive slots per history through six exact limits. The governed change-history rollover preserves 217 lines /13,128 bytes from clean 107170da7; all prior history and unrelated controls remain exact. Production-validator proof passes 44 threshold and 22 authorization cases under the explicit one-time focused exception. Julia reading remains 3/52 groups and seven complete files; .1.4 is next. All parser repairs, startup prerequisites and future canonical/push requirements remain.
@@ -732,6 +748,8 @@ brief clearing, generated-residue census, post-pointer check, and clean proof re
 
 ## Commit Log
 
+- `2026-09-12`: `LUA-STARTUP-READING.4.1 - propose finite Lua evidence capacity and verification boundary` adds the pending .14 owner; it does not complete .14.
+
 - `2026-09-11` .13: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.13 - admit approved Julia evidence capacity`; clean activation 63523d44898f6831e7c450786d1ac5a3f0a64015.
 
 - `2026-09-11` .12: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.12 - admit approved Julia history capacity`.
@@ -759,6 +777,8 @@ brief clearing, generated-residue census, post-pointer check, and clean proof re
 - `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5`: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5 - compact duplicate startup chronology without losing evidence`.
 
 ## Changelog
+
+- `2026-09-12`: Own proposed Lua evidence capacity under .14 and retain all earlier completed leaves.
 
 - `2026-09-11` .13: Implement approved finite Julia Knowledge and decision line capacity under ADR0116; close Julia .5 and restore .1.38 after clean landing.
 

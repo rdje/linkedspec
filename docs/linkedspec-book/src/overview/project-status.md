@@ -321,11 +321,38 @@ Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
 ownership; each group still requires physical reading and its own verified commit.
 
-The plan fits current documentation limits. Comparable Julia reading growth exceeds
-remaining Knowledge capacity, so Lua `.4.1` prepares a coherent activity-sized
-capacity disposition before reading begins. This changes no parser behavior or
-verification policy. All known limitations below retain their repair owners.
-Exact source ownership and replay: `docs/knowledge/lua-startup-reading-coverage.md`.
+The plan fits current documentation limits. Lua `.4.1` has completed a measured
+capacity proposal for all 51 reading groups plus six support units. Both independent
+and production-function history models require four rollovers in each collection;
+only two archive slots remain in each. The complete reserve also exceeds current
+Knowledge, task and engineering-note aggregate limits. Lua `.4.2` owns the explicit
+director decision before capacity implementation or source-reading activation.
+Exact source ownership: `docs/knowledge/lua-startup-reading-coverage.md`.
+
+**Proposed Lua evidence capacity (approval pending):**
+
+| Control | Current | Proposed |
+| --- | ---: | ---: |
+| Knowledge aggregate lines | 79,000 | 93,000 |
+| Knowledge aggregate bytes | 6,291,456 | 7,340,032 |
+| Task aggregate lines | 88,000 | 92,000 |
+| Task aggregate bytes | 9,437,184 | 10,485,760 |
+| Change-history files | 36 | 38 |
+| Changes manifest lines | 35 | 37 |
+| Changes manifest bytes | 19,919 | 21,071 |
+| Engineering-note aggregate lines | 27,000 | 28,000 |
+| Engineering-note files | 32 | 34 |
+| Notes manifest lines | 31 | 33 |
+| Notes manifest bytes | 18,678 | 19,902 |
+
+The proposal preserves all current evidence, root/member limits and remaining
+controls. It also requests one containment `.14` exception to implement this bounded
+capacity change before full codebase reading using focused proof and normal hooks,
+without canonical CI/receipt. Current canonical dependency-build routes still conflict
+with the separately owned build-on-update directive. No capacity or verification
+change is implemented or approved here; later milestone and push requirements remain.
+Models and exact proposal: `docs/knowledge/lua-reading-evidence-capacity-proposal.md`.
+All known limitations below retain their repair owners.
 
 **Approved Julia evidence capacity:** the director granted Knowledge lines
 72,000→79,000 and decision-record lines12,000→13,000 under ADR0116. The finite

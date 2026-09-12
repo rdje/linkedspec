@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-12 — LUA-STARTUP-READING.4.1 - propose finite Lua evidence capacity and verification boundary
+
+Propose eleven exact Lua evidence controls for 51 reading and six support units.
+Independent and production history models agree; full reserve is measured.
+Preserve all source, evidence and current controls; own explicit .4.2 disposition
+and pending containment .14 before capacity implementation or source reading.
+
 ## 2026-09-12 — SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake
 
 Freeze 51 Lua reading children covering all 99 baseline files and 149 ranges.

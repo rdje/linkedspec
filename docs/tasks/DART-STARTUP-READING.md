@@ -1568,7 +1568,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.4.1` | `pending` | Exact Lua reading plan is frozen; resolve coherent evidence capacity next. All existing repairs retain their prerequisites. |
+| 1 | `LUA-STARTUP-READING.4.2` | `pending` | Record explicit disposition of the complete Lua capacity and .14-only verification proposal; prior repairs retain their owners. |
 
 ## Decisions
 

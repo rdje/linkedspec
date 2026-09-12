@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LUA-STARTUP-READING`
-- Status: `active` / plan frozen; source reading pending
+- Status: `active` / plan frozen; capacity decision pending; source reading 0/51
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.6`
 - Created: `2026-09-12`
 - Last updated: `2026-09-12`
@@ -592,26 +592,82 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - ID: `LUA-STARTUP-READING.4`
   Status: `active`
   Goal: Resolve coherent Lua reading evidence capacity before activating source-reading children.
-  Children: `.4.1`
+  Children: `.4.1`, `.4.2`
   Acceptance: Preserve readable unique evidence and existing controls; measure the complete activity, record any exact proposal and authority, and verify an approved implementation before source reading needs that allowance.
   Verification: `pending`
   Commit: `pending`
 
 - ID: `LUA-STARTUP-READING.4.1`
-  Status: `pending`
+  Status: `done`
   Goal: Prepare a concrete activity-sized Lua evidence-capacity disposition from the frozen 51-child plan.
+  Activation commit: `7f97cb630e7f5a64915df8febdab078b9d5be38e`.
   Dependencies: Startup .3.6.0 committed with clean handoff.
   Acceptance: Reverify the actual candidate and comparable Julia reading growth; project Knowledge/task/map/decision/history counts, lines, bytes and rollovers across all 51 children plus bounded support work. Evaluate lossless alternatives, identify exact necessary controls and verification sequencing, and record a reviewable proposal before any implementation. Existing Julia-only allowances do not authorize Lua increases or exceptions.
-  Verification: `pending`
+  Verification tier: `focused`
+  Focused checks: Frozen Lua scope and Julia growth replay; independent and production-function history models; exact current-plus-reserve metrics; previous source/task/card/decision/history/control preservation; Knowledge, memory, both histories, rendered book and normal doctrines.
+  Canonical trigger: `none` — a documentation-only capacity proposal. Implementation changes infrastructure and needs canonical proof or a new explicit exception; no registry or guard change belongs here.
+  Verification: Lua .4.1 proposes eleven finite evidence-limit changes for 51 reading leaves plus six support units. Exact 57-unit reserve and independent/production history models pass; each history needs four rollovers with only two slots available. The proposal preserves all source, evidence, controls and pending repairs. Explicit approval of the exact limits and containment .14-only focused/receipt exception is required before implementation; Lua .4.2 owns the decision. Source reading remains 0/51. Source/range and 52-commit growth replays remain exact. Both actual-function history legs match all 57 modeled records and four rollover boundaries; maximal manifest rows are 576 / 612 bytes. Preservation passes 2426 prior task nodes and 2206 source/card/decision/history/control files, exact history suffixes/question rows, five current decision pointers and all 27 rendered limitations. Eleven proposed scalars match exact objects while the registry remains unchanged. Knowledge generation (1085 facts / 8735 keys), explicit memory, both history checks, book build and diff check pass. All current controls and complete current-plus-57-unit proposed reserves pass; normal doctrine hooks govern landing.
+  Commit: `LUA-STARTUP-READING.4.1 - propose finite Lua evidence capacity and verification boundary`
+
+- ID: `LUA-STARTUP-READING.4.2`
+  Status: `pending`
+  Goal: Record the director's explicit disposition of the committed Lua capacity and verification proposal.
+  Dependencies: .4.1 committed and a new explicit director decision; previous Julia approvals do not extend.
+  Acceptance: Resolve the exact eleven controls and containment .14-only before-reading focused/canonical-receipt exception in Capacity proposal .4.1. If approved, record this disposition and a new accepted indexed ADR in the separately owned .14 implementation commit; no separate decision-only commit is required. If denied, preserve all evidence and identify another governed capacity/verification route. No source reading, control change or dependency build is authorized by this pending node.
+  Verification: `pending` director decision; exact proposal and all independent models are committed first.
   Commit: `pending`
+
+## Capacity proposal .4.1
+
+This is a proposed boundary, not an accepted ADR or an implemented allowance.
+The director decision must explicitly cover all eleven scalars and the .14-only
+focused/canonical-receipt exception before full codebase reading. Normal hooks
+and all later repair, milestone and final-push requirements remain unchanged.
+
+Finite envelope: 51 source-reading children plus proposal, capacity admission,
+independent capacity review, independent reading audit, reading closeout and one
+contingency. Models, reserve arithmetic, alternatives and exact source/history
+identity live in `docs/knowledge/lua-reading-evidence-capacity-proposal.md`.
+Use the full resulting-candidate-plus-reserve check at implementation, retaining
+all member limits and each actual leaf's checks. No unique evidence is discarded.
+
+### change_history
+
+- Previous routed limits: `{"max_bytes_per_file":524288,"max_files":36,"max_lines_per_file":4096,"max_total_bytes":4194304,"max_total_lines":55000}`
+- New routed limits: `{"max_bytes_per_file":524288,"max_files":38,"max_lines_per_file":4096,"max_total_bytes":4194304,"max_total_lines":55000}`
+- Stable responsibility: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3`.
+- Previous routed contract: `{"authority":"docs/decisions/0069-bounded-change-and-notes-history.md","control":"bounded_collection","lifecycle":"partitioned","member_limits":{"CHANGES.md":{"max_bytes":65536,"max_lines":512},"docs/history/changes/manifest.jsonl":{"max_bytes":19919,"max_lines":35}},"members":["CHANGES.md","docs/history/changes/*.md","docs/history/changes/manifest.jsonl"],"owner":"LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3","route_targets":["CHANGES.md","docs/history/changes/*.md","docs/history/changes/manifest.jsonl"],"state":"current","transition_owners":null,"verifier":"document_history"}`
+- New routed contract: `{"authority":"docs/decisions/0069-bounded-change-and-notes-history.md","control":"bounded_collection","lifecycle":"partitioned","member_limits":{"CHANGES.md":{"max_bytes":65536,"max_lines":512},"docs/history/changes/manifest.jsonl":{"max_bytes":21071,"max_lines":37}},"members":["CHANGES.md","docs/history/changes/*.md","docs/history/changes/manifest.jsonl"],"owner":"LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3","route_targets":["CHANGES.md","docs/history/changes/*.md","docs/history/changes/manifest.jsonl"],"state":"current","transition_owners":null,"verifier":"document_history"}`
+
+### engineering_notes
+
+- Previous routed limits: `{"max_bytes_per_file":524288,"max_files":32,"max_lines_per_file":4096,"max_total_bytes":3145728,"max_total_lines":27000}`
+- New routed limits: `{"max_bytes_per_file":524288,"max_files":34,"max_lines_per_file":4096,"max_total_bytes":3145728,"max_total_lines":28000}`
+- Stable responsibility: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3`.
+- Previous routed contract: `{"authority":"docs/decisions/0069-bounded-change-and-notes-history.md","control":"bounded_collection","lifecycle":"partitioned","member_limits":{"DEVELOPMENT_NOTES.md":{"max_bytes":65536,"max_lines":512},"docs/history/development-notes/manifest.jsonl":{"max_bytes":18678,"max_lines":31}},"members":["DEVELOPMENT_NOTES.md","docs/history/development-notes/*.md","docs/history/development-notes/manifest.jsonl"],"owner":"LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3","route_targets":["DEVELOPMENT_NOTES.md","docs/history/development-notes/*.md","docs/history/development-notes/manifest.jsonl"],"state":"current","transition_owners":null,"verifier":"document_history"}`
+- New routed contract: `{"authority":"docs/decisions/0069-bounded-change-and-notes-history.md","control":"bounded_collection","lifecycle":"partitioned","member_limits":{"DEVELOPMENT_NOTES.md":{"max_bytes":65536,"max_lines":512},"docs/history/development-notes/manifest.jsonl":{"max_bytes":19902,"max_lines":33}},"members":["DEVELOPMENT_NOTES.md","docs/history/development-notes/*.md","docs/history/development-notes/manifest.jsonl"],"owner":"LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3","route_targets":["DEVELOPMENT_NOTES.md","docs/history/development-notes/*.md","docs/history/development-notes/manifest.jsonl"],"state":"current","transition_owners":null,"verifier":"document_history"}`
+
+### knowledge_cards
+
+- Previous routed limits: `{"max_bytes_per_file":65536,"max_files":1152,"max_lines_per_file":512,"max_total_bytes":6291456,"max_total_lines":79000}`
+- New routed limits: `{"max_bytes_per_file":65536,"max_files":1152,"max_lines_per_file":512,"max_total_bytes":7340032,"max_total_lines":93000}`
+- Stable responsibility: `docs/knowledge/`.
+
+### task_evidence
+
+- Previous routed limits: `{"max_bytes_per_file":1048576,"max_files":128,"max_lines_per_file":8000,"max_total_bytes":9437184,"max_total_lines":88000}`
+- New routed limits: `{"max_bytes_per_file":1048576,"max_files":128,"max_lines_per_file":8000,"max_total_bytes":10485760,"max_total_lines":92000}`
+- Stable responsibility: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.2`.
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.4.1` | `pending` | The exact plan fits current limits, but comparable reading growth exceeds remaining Knowledge capacity; size the whole Lua activity before reading. |
+| 1 | `LUA-STARTUP-READING.4.2` | `pending` | Director disposition of the concrete eleven-control proposal and .14-only verification exception; all evidence is committed first. |
 
 ## Decisions
+
+- `2026-09-12` .4.1: Propose a finite 57-unit Lua envelope using observed Julia maxima and two matching history models; no control, source or standing verification changes.
 
 - `2026-09-12`: Freeze 51 exact children under startup .3.6.0. Separate bounded ownership avoids exhausting the startup member; all aggregate controls remain active.
 - `2026-09-12`: Keep the oversized generated MCP line as two independently UTF-8-decodable byte ranges; no sampling or generated-data exclusion.
@@ -619,20 +675,26 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 
 ## Open Questions
 
-- Exact future capacity and verification disposition belongs to .4.1; no increase or canonical exception is inferred.
+- Approve the eleven exact controls and containment .14-only focused/receipt exception, including this bounded implementation before full codebase reading? Lua .4.2 owns the explicit director disposition; earlier approvals do not extend.
 
 ## Blockers
 
-- None for .4.1's read-only assessment and documentation. Source-reading activation depends on the coherent .4 disposition; each later candidate remains subject to fresh checks.
+- Containment .14 requires a newly accepted indexed capacity ADR and canonical infrastructure proof. The required PGEN/RGX build-on-update lifecycle remains unimplemented under startup .80, so the proposed .14-only focused/receipt exception needs explicit director approval. The proposal is complete; .4.2 records that decision before capacity implementation or Lua reading.
 
 ## Verification Log
+
+- `2026-09-12` .4.1: Lua .4.1 proposes eleven finite evidence-limit changes for 51 reading leaves plus six support units. Exact 57-unit reserve and independent/production history models pass; each history needs four rollovers with only two slots available. The proposal preserves all source, evidence, controls and pending repairs. Explicit approval of the exact limits and containment .14-only focused/receipt exception is required before implementation; Lua .4.2 owns the decision. Source reading remains 0/51.
 
 - `2026-09-12`: Startup .3.6.0 independently verifies the frozen range plan before landing; detailed proof is retained in its startup node and the linked Knowledge card. No Lua source comprehension or new runtime gate result is claimed.
 
 ## Commit Log
 
+- `2026-09-12` .4.1: `LUA-STARTUP-READING.4.1 - propose finite Lua evidence capacity and verification boundary`.
+
 - `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` owns creation of this plan.
 
 ## Changelog
+
+- `2026-09-12` .4.1: Complete the coherent Lua capacity proposal; retain 0/51 reading and all existing repairs while explicit disposition is pending.
 
 - `2026-09-12`: Create exact bounded Lua reading, repair, closeout and capacity ownership under startup .3.6.0.

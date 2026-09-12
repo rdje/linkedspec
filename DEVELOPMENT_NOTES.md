@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-12 — Plan the complete Lua evidence allowance with independently checked history
+
+The 57-unit maximum model uses committed Julia growth and counts complete new
+history records. Four rollovers per collection exceed two remaining slots;
+Knowledge, task and engineering-note aggregates also need a bounded disposition.
+The .14-only before-reading focused/receipt exception requires new explicit approval.
+
 ## 2026-09-12 — Lua reading needs coherent evidence capacity before source activation
 
 The exact Lua plan fits current limits, but comparable Julia reading adds 6615
