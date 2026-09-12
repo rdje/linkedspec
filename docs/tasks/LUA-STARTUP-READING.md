@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LUA-STARTUP-READING`
-- Status: `active` / approved capacity; source reading 18/51
+- Status: `active` / approved capacity; source reading 19/51
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.6`
 - Created: `2026-09-12`
 - Last updated: `2026-09-13`
@@ -45,7 +45,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - Ordered range SHA-256: `81c58b8319def28af518fb134a3787513fe746f0f0f73bcacb0e20b9ede1c9d6`.
 - Child-summary SHA-256: `f56ecac262800bd3cc1e6bba0cc25bfe22f095c3dfee41f1c6595d4200145290`.
 - Coordinates are one-based inclusive LF physical lines or absolute file bytes; both byte windows decode as UTF-8.
-- Current physical reading: 18/51 children, 22,651/71,269 fragments and 918,924/2,732,450 bytes.
+- Current physical reading: 19/51 children, 24,151/71,269 fragments and 971,258/2,732,450 bytes.
 - Exact independent replay and capacity evidence: `docs/knowledge/lua-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -358,14 +358,19 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `LUA-STARTUP-READING.1.18 - read semantic projectors and own source and matcher repairs`
 
 - ID: `LUA-STARTUP-READING.1.19`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `1d569ea18c7256d6d0b4493e57373a84df86879d`.
+  Verification tier: `focused`
+  Focused checks: Exact bounded reading/baseline identity; static projection, SHA and emitter Knowledge reconciliation and selected native/neutral consumers; memory, Knowledge, both histories, rendered book and normal doctrines.
+  Canonical trigger: Ordinary source-reading evidence; no runtime or contract change. Later closeout and push retain canonical prerequisites.
   Goal: Read and understand group 19: semantic_static_projection.lua through source_emitter.lua.
   Scope: `lua/src/linkedspec/semantic_static_projection.lua` lines 1291-2438; `lua/src/linkedspec/sha256.lua` lines 1-187; `lua/src/linkedspec/source_emitter.lua` lines 1-165
   Baseline evidence: 1500 fragments / 52334 bytes; ordered range SHA-256 `69bb5c76b2bc703c39db1e27a4083c1f5658e33583d6abc9177d81ce668cda0c`.
   Dependencies: .1.18 committed with clean handoff.
   Acceptance: Read every scoped byte without truncation; record comprehension, Knowledge and repair reconciliation, focused proof and a clean per-leaf commit.
-  Verification: `pending`
-  Commit: `pending`
+  Reading checkpoint: Three ranges consumed in six untruncated windows: static1291–1590,1591–1890,1891–2190,2191–2438; SHA1–187; emitter1–165. Reading and causal reconciliation are complete; exact observations and proof are in docs/knowledge/lua-static-completion-sha-emitter-reading-and-conditional-gaps.md.
+  Verification: Lua .1.19 completes static projection and SHA reading and reads the emitter prefix in six complete windows: 1,500 fragments /52,334 bytes; cumulative 19/51, 24,151 fragments /971,258 bytes. All 99 Lua sources remain baseline-identical; 34 files are fully read. Source382, staged97 and remaining122 assertions pass per installed host, 1,202 total. Nine complete two-host observations and 18 query schemas retain the shared .22 call gate and .67.2 RHS-source omissions; Lua .2.19 owns conditional entry coverage and its impact/implementation/proof children. Missing-rule and slot-range controls retain distinct diagnostics. Neutral 6/20/128 and generated-source contract checks pass as qualified governance, not fresh runtime admission. All nineteen Lua repair roots and prior PUC observation failures remain open. Next .1.20 reads emitter, source-location and source-runtime ranges plus the spec AST prefix; named arguments and startup/ADR0118 prerequisites remain unchanged. Exact preservation, memory, Knowledge, both histories, rendered book and normal hooks govern this reading/evidence commit.
+  Commit: `LUA-STARTUP-READING.1.19 - complete static and SHA reading and own conditional entry repair`
 
 - ID: `LUA-STARTUP-READING.1.20`
   Status: `pending`
@@ -690,7 +695,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - ID: `LUA-STARTUP-READING.2`
   Status: `pending`
   Goal: Own every newly confirmed Lua defect or coverage gap without losing existing shared repair ownership.
-  Children: `.2.1` owns README status; `.2.2` primary identity; `.2.3` native error safety; `.2.4` executable diagnostic teaching; `.2.5` complete quoted-literal parsing; `.2.6` harray pair completeness; `.2.7` complete switch contract diagnostics; `.2.8` iteration/options/matching-cursor validation; `.2.9` false delimiter preservation; `.2.10` whole child-result false preservation; `.2.11` exact representable integer JSON encoding; `.2.12` finite private recognition coordinates and progress; `.2.13` scalar/reducer integer overflow; `.2.14` semantic diagnostic null preservation; `.2.15` rejected semantic query false evidence; `.2.16` mixed structural-slot correlation; `.2.17` regex-aware call source correlation; `.2.18` explicit child-slot runtime match ownership.
+  Children: `.2.1` owns README status; `.2.2` primary identity; `.2.3` native error safety; `.2.4` executable diagnostic teaching; `.2.5` complete quoted-literal parsing; `.2.6` harray pair completeness; `.2.7` complete switch contract diagnostics; `.2.8` iteration/options/matching-cursor validation; `.2.9` false delimiter preservation; `.2.10` whole child-result false preservation; `.2.11` exact representable integer JSON encoding; `.2.12` finite private recognition coordinates and progress; `.2.13` scalar/reducer integer overflow; `.2.14` semantic diagnostic null preservation; `.2.15` rejected semantic query false evidence; `.2.16` mixed structural-slot correlation; `.2.17` regex-aware call source correlation; `.2.18` explicit child-slot runtime match ownership; `.2.19` conditional entry-explanation coverage.
   Acceptance: Define concrete causal evidence, affected behavior and repair/verification children before implementing any finding; preserve startup prerequisites and all earlier owners.
   Verification: `pending`
   Commit: `pending`
@@ -1238,6 +1243,40 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Verification: `pending`
   Commit: `pending`
 
+- ID: `LUA-STARTUP-READING.2.19`
+  Status: `pending`
+  Goal: Make Lua entry-explanation coverage independent of unrelated function and rule counts.
+  Evidence: Reading .1.19 on both installed hosts retains selected entry Top and normal execution for single-rule, two-rule and two-rule-plus-unused-function sources. Only the function-free two-rule query returns an entry decision and two explanation steps; the others return semantic_query_invalid/not_explainable. semantic_static_projection.lua conditionally calls add_entry_explanation only when parsed.functions is empty and compiled rule count exceeds one.
+  Children: `.2.19.1` coordinated expectations/impact; `.2.19.2` implementation; `.2.19.3` independent proof.
+  Dependencies: Startup .3/.4/.5 and .2.2 supported-PUC proof; coordinate Julia .2.17.1 and shared startup .22 without merging their separate omissions.
+  Acceptance: Explicitly resolve entry-evidence coverage and frozen-model/hash implications, then retain truthful selection basis, selected rule and deterministic explanation records across the agreed supported cases. No current limitation is silently ratified or fixture silently refreshed.
+  Verification: `pending` repair; .1.19 retains three exact entry controls within nine complete two-host observations.
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.19.1`
+  Status: `pending`
+  Goal: Bound entry-explanation expectations and shared frozen-model impact before source repair.
+  Dependencies: Parent .2.19 prerequisites; retrieve Julia .2.17.1's coverage decision and current neutral authorities.
+  Acceptance: Enumerate single/multiple rules, unused/used functions, explicit selector, first marker and first authored rule; independently define expected decision/source/step topology and affected models, hashes, queries and carriers. Preserve existing evidence and coordinate one coherent contract disposition before implementation.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.19.2`
+  Status: `pending`
+  Goal: Implement the agreed Lua entry-explanation coverage without incidental registry gates.
+  Dependencies: .2.19.1 committed cleanly and any shared expectation prerequisite completed.
+  Acceptance: Produce the agreed deterministic evidence from retained entry/source authority; preserve compile-failure behavior, source ceilings and canonical ordering. Keep helper-only call projection under startup .22 separate and split any broader contract migration before editing.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.19.3`
+  Status: `pending`
+  Goal: Independently verify entry explanation and supported semantic carriers.
+  Dependencies: .2.19.2 committed cleanly.
+  Acceptance: Compare full list/explain responses and typed/raw parity across agreed entry cases on supported PUC and LuaJIT; verify privacy/no-execution and applicable MCP/reconstructed/generated carriers, update book/Knowledge and satisfy required canonical closeout before closing.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `LUA-STARTUP-READING.3`
   Status: `pending`
   Goal: Independently close Lua reading and route the remaining supporting-code lanes.
@@ -1320,7 +1359,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.19` | `pending` | Read the static projector suffix, SHA module and emitter prefix after clean .1.18; preserve all source, matcher and host-failure repair evidence plus parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.20` | `pending` | Read emitter/source-location ranges and the spec AST prefix after clean .1.19; preserve all conditional, source, matcher and host-failure repairs plus parked named arguments. |
 
 ## Decisions
 
@@ -1338,9 +1377,11 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Blockers
 
-- None for bounded Lua .1.19 reading after clean .1.18. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
+- None for bounded Lua .1.20 reading after clean .1.19. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
 
 ## Verification Log
+
+- `2026-09-13` .1.19: Lua .1.19 completes static projection and SHA reading and reads the emitter prefix in six complete windows: 1,500 fragments /52,334 bytes; cumulative 19/51, 24,151 fragments /971,258 bytes. All 99 Lua sources remain baseline-identical; 34 files are fully read. Source382, staged97 and remaining122 assertions pass per installed host, 1,202 total. Nine complete two-host observations and 18 query schemas retain the shared .22 call gate and .67.2 RHS-source omissions; Lua .2.19 owns conditional entry coverage and its impact/implementation/proof children. Missing-rule and slot-range controls retain distinct diagnostics. Neutral 6/20/128 and generated-source contract checks pass as qualified governance, not fresh runtime admission. All nineteen Lua repair roots and prior PUC observation failures remain open. Next .1.20 reads emitter, source-location and source-runtime ranges plus the spec AST prefix; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
 - `2026-09-13` .1.18: Lua .1.18 reads the runtime projector suffix and static prefix in six complete windows: 1,500 fragments /50,709 bytes; cumulative 18/51, 22,651 fragments /918,924 bytes. All 99 Lua sources remain baseline-identical; 32 files are fully read. Four selected suites pass 591 assertions per installed host, 1,182 total. Ten complete two-host semantic observations locate mixed-slot and regex-call source failures under .2.16/.2.17 and grouped-selector recurrence under shared startup .70. Sixteen native/reconstructed matcher rows per host plus eight reference Get executions locate explicit child-match divergence under .2.18; the initial ten reference cases retain nine agreements and one mismatch. Neutral 6/20/128 passes; prior PUC observation failures remain .2.2-owned. All eighteen Lua repair roots remain open. Next .1.19 reads the static projector suffix, SHA module and emitter prefix; approved named arguments and all startup/ADR0118 prerequisites remain unchanged.
 
@@ -1386,6 +1427,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Commit Log
 
+- `2026-09-13` .1.19: `LUA-STARTUP-READING.1.19 - complete static and SHA reading and own conditional entry repair` closes the nineteenth reading child from clean 1d569ea18.
+
 - `2026-09-13` .1.18: `LUA-STARTUP-READING.1.18 - read semantic projectors and own source and matcher repairs` closes the eighteenth reading child from clean cdf15066d.
 
 - `2026-09-13` .1.17: `LUA-STARTUP-READING.1.17 - read semantic queries and preserve budget and host failure ownership` closes the seventeenth reading child from clean dce95cec2.
@@ -1429,6 +1472,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 - `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` owns creation of this plan.
 
 ## Changelog
+
+- `2026-09-13`: .1.19 completes static and SHA reading, reads the emitter prefix, extends shared call/binding omissions and owns conditional entry coverage under .2.19. Reading is 19/51; next .1.20.
 
 - `2026-09-13`: .1.18 completes runtime projection reading and reads the static prefix; .2.16/.2.17/.2.18 own mixed slots, call source and runtime match ownership, with grouped recurrence under startup .70. Reading is 18/51; next .1.19.
 

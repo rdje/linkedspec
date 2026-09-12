@@ -329,22 +329,20 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (18/51 groups):** the complete
+**Lua source reading is underway (19/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first eighteen groups physically read 22,651 fragments /918,924 bytes,
+ownership. The first nineteen groups physically read 24,151 fragments /971,258 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
 also cover the complete generated MCP module, contract runtime, decoded server,
 wire, primary CLI, private recognition transaction module and its runtime adapter,
 scoped binding, scalar numeric, compilation outcome, semantic index, observation
-and query, the complete runtime projector and the static projector prefix. The
-remaining 33 groups require
-their own reading and verified
-commits; source reading does not close the limitations below.
+and query, both complete semantic projectors, SHA hashing and the emitter prefix.
+The remaining 32 groups require their own reading and verified commits; source reading does not close the limitations below.
 
 **Generated Lua MCP binding:** the current 83,166-byte module matches its neutral
 repository inputs. Both installed Lua hosts pass 116 focused binding checks each,
@@ -388,6 +386,12 @@ Additional source and runtime probes reveal the limitations below. Passing these
 finite fixtures does not establish correct source correlation or matcher ownership
 for every valid spec, and the earlier PUC observation failures remain open.
 
+**Lua static completion verification:** all 382 source-foundation, 97 staged/
+generated semantic and 122 remaining-static assertions pass on each installed host.
+These include the existing digest vectors and retained-plan provenance checks.
+They do not constitute fresh emitted execution or a supported-runtime admission;
+the earlier observation failures and semantic limitations remain open.
+
 **Approved Lua evidence capacity:** the director explicitly approved the complete
 Lua proposal under ADR0118. Containment `.14` implements exactly these eleven
 controls for 51 reading groups plus six support slots:
@@ -416,8 +420,8 @@ The director also granted one containment `.14` exception for this bounded capac
 implementation before full codebase reading, using focused proof and normal hooks
 without canonical CI/receipt. Later milestone, repair and push requirements remain;
 dependency build-on-update implementation stays separately owned. Lua source reading
-is 18/51; the next group reads the static projector suffix, SHA module and
-emitter prefix. The installed-host test failures below remain open.
+is 19/51; the next group reads the emitter suffix, source-location modules and
+spec AST prefix. The installed-host test failures below remain open.
 All known limitations below retain their repair owners.
 Exact admission and replay: `docs/knowledge/lua-reading-evidence-capacity-admission.md`.
 The historical proposal remains in `docs/knowledge/lua-reading-evidence-capacity-proposal.md`.
@@ -435,6 +439,31 @@ coordinates remain existing controls; a new public bounds policy is not implied.
 The observations use the private helper directly. They do not demonstrate an
 ordinary spec producing infinity or a parser running forever.
 Exact evidence: `docs/knowledge/lua-wire-cli-recognition-reading-and-finite-state-gap.md`.
+
+**Known Lua semantic limitation — conditional entry explanations:** a two-rule
+spec without functions exposes an entry decision and two explanation steps. A
+single-rule spec, or the same two-rule spec with an unused function, returns
+`not_explainable` for `explain(spec:0)` despite retaining its selected entry rule.
+Lua `.2.19.1-.3` own coordinated expectation/model review, implementation and
+independent proof, alongside Julia's separately owned entry-coverage repair.
+
+**Known Lua semantic limitations — call visibility and binding source:** a rule
+assigning `value = trim(" x ")` and returning value executes to x, but exposes no
+helper, binding or call records unless a function is defined. Adding an unused
+function produces the five expected records. Shared startup `.22` owns removal of
+that incidental registry condition and the associated model/carrier work.
+
+With a function present, `[trim(" x ")]` retains its nested trim call and executes
+to `["x"]`, but its binding has no source. A literal RHS `1` also loses its binding
+source; a direct trim RHS retains it. The binding builder currently depends on an
+emitted outer call to supply source evidence. Shared `.67.2` owns RHS source
+preservation independently of nested-call traversal. These omissions are separate
+from the regex matcher/source confusion below.
+
+The missing-rule and out-of-range-slot controls retain distinct diagnostics and
+exact authored sources. They do not close the broader failure-normalization audit.
+Exact nine-case public query, typed/runtime and diagnostic proof:
+`docs/knowledge/lua-static-completion-sha-emitter-reading-and-conditional-gaps.md`.
 
 **Known Lua semantic limitation — mixed regex-slot order:** a Top rule containing
 `/a/ -> Child { return(match_text()) }` before a standalone `/b/` compiles and

@@ -1741,7 +1741,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.19` | `pending` | Read the static projector suffix, SHA module and emitter prefix after clean .1.18; preserve all source, matcher and host-failure repair evidence plus parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.20` | `pending` | Read emitter/source-location ranges and the spec AST prefix after clean .1.19; preserve all conditional, source, matcher and host-failure repairs plus parked named arguments. |
 
 ## Decisions
 

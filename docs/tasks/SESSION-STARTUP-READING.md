@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 18/51; .1.19 follows the eighteenth child; .2.1-.2.18 own eighteen concrete repairs, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 19/51; .1.20 follows the nineteenth child; .2.1-.2.19 own nineteen concrete repairs, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.18 reads the runtime projector suffix and static prefix in six complete windows: 1,500 fragments /50,709 bytes; cumulative 18/51, 22,651 fragments /918,924 bytes. All 99 Lua sources remain baseline-identical; 32 files are fully read. Four selected suites pass 591 assertions per installed host, 1,182 total. Ten complete two-host semantic observations locate mixed-slot and regex-call source failures under .2.16/.2.17 and grouped-selector recurrence under shared startup .70. Sixteen native/reconstructed matcher rows per host plus eight reference Get executions locate explicit child-match divergence under .2.18; the initial ten reference cases retain nine agreements and one mismatch. Neutral 6/20/128 passes; prior PUC observation failures remain .2.2-owned. All eighteen Lua repair roots remain open. Next .1.19 reads the static projector suffix, SHA module and emitter prefix; approved named arguments and all startup/ADR0118 prerequisites remain unchanged.
+  Verification: Lua .1.19 completes static projection and SHA reading and reads the emitter prefix in six complete windows: 1,500 fragments /52,334 bytes; cumulative 19/51, 24,151 fragments /971,258 bytes. All 99 Lua sources remain baseline-identical; 34 files are fully read. Source382, staged97 and remaining122 assertions pass per installed host, 1,202 total. Nine complete two-host observations and 18 query schemas retain the shared .22 call gate and .67.2 RHS-source omissions; Lua .2.19 owns conditional entry coverage and its impact/implementation/proof children. Missing-rule and slot-range controls retain distinct diagnostics. Neutral 6/20/128 and generated-source contract checks pass as qualified governance, not fresh runtime admission. All nineteen Lua repair roots and prior PUC observation failures remain open. Next .1.20 reads emitter, source-location and source-runtime ranges plus the spec AST prefix; named arguments and startup/ADR0118 prerequisites remain unchanged.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -2667,6 +2667,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     coordinated repair boundary before changing exact expected data; do not silently adapt an oracle.
   Verification: `pending`
   Commit: `pending`
+  Lua .1.19: Fresh public raw queries on both installed hosts reproduce zero helper/binding/call records without a function versus five with an unused function; both independently execute x. The guard still precedes action-owner traversal. Preserve the earlier six-runtime census as dated evidence; these two new host observations do not refresh all backends.
 
 - ID: `SESSION-STARTUP-READING.22.2`
   Status: `pending`
@@ -4213,6 +4214,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Dart .1.30 recurrence: public query also omits trim inside [trim(" x ")] and returns null binding source, while typed ActionIR contains the call and direct runtime returns ["x"]. Direct/nested/string controls retain exact source; separate regex-decoy miscorrelation is owned by DART-STARTUP-READING.2.20.
   Julia .1.26 recurrence: public query retains trim inside [trim(" x ")] and separate runtime returns ["x"], but the binding source is null. Preserve binding RHS source independently of outer emitted calls. Exact92-assertion controls in docs/knowledge/julia-semantic-regex-call-source-gap.md do not reproduce wrong-arity acceptance or repeated-binding identity; distinct regex miscorrelation belongs to Julia .2.15.
   Commit: `pending`
+  Lua .1.19 recurrence: Public raw queries retain trim inside [trim(" x ")] and runtime returns ["x"], but the binding source is null; literal RHS 1 also has null binding source. The direct trim binding retains its exact RHS. call_emit_statement derives source only from an emitted outer call, while container/literal traversal returns no outer call. Own Lua RHS source independently of child-call emission; wrong regex source stays Lua .2.17-owned.
 
 - ID: `SESSION-STARTUP-READING.67.3`
   Status: `pending`
@@ -4602,7 +4604,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.19` | `pending` | Read the static projector suffix, SHA module and emitter prefix after clean .1.18; preserve all source, matcher and host-failure repair evidence plus parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.20` | `pending` | Read emitter/source-location ranges and the spec AST prefix after clean .1.19; preserve all conditional, source, matcher and host-failure repairs plus parked named arguments. |
 
 ## Reading Ledger
 

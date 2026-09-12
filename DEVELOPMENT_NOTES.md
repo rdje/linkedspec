@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Conditional semantic records and independent RHS source
+
+- An unused function enables rule-call projection but disables entry explanations; these are separate implementation guards with separate repair owners.
+- Composite traversal can retain a nested call while losing the binding RHS source; literal bindings expose the same dependence on outer call emission.
+- The completed SHA owner uses portable arithmetic; staged/generated semantic proof does not imply fresh emitted execution or supported-PUC admission.
+- LUA-STARTUP-READING.1.19 records nine complete public observations and retained diagnostics in docs/knowledge/lua-static-completion-sha-emitter-reading-and-conditional-gaps.md.
+
 ## 2026-09-13 — Distinguish authored occurrence, compiled identity and runtime matcher
 
 - Filtered authored regex slots cannot be joined to an unfiltered compiled prefix; inherited grouped selectors cannot require per-target brackets.
