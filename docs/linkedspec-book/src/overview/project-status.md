@@ -314,15 +314,15 @@ while preserving all repairs, normal hooks and later verification/push requireme
 Dependency build reuse remains separately owned. Lua and supporting-code reading,
 formal book reconciliation and policy prerequisites still follow.
 
-**Lua source reading is underway (6/51 groups):** the complete
+**Lua source reading is underway (7/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first six groups physically read 8,445 fragments /342,343 bytes,
+ownership. The first seven groups physically read 9,945 fragments /395,987 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority, compiled state and corpus modules,
-plus the facade prefix. The remaining 45 groups require their own
+the complete facade and the interpreter prefix. The remaining 44 groups require their own
 reading and verified commits; source reading does not close the limitations below.
 
 **Approved Lua evidence capacity:** the director explicitly approved the complete
@@ -353,10 +353,20 @@ The director also granted one containment `.14` exception for this bounded capac
 implementation before full codebase reading, using focused proof and normal hooks
 without canonical CI/receipt. Later milestone, repair and push requirements remain;
 dependency build-on-update implementation stays separately owned. Lua source reading
-is 6/51; the next group finishes the facade and begins interpreter reading.
+is 7/51; the next group continues interpreter reading.
 All known limitations below retain their repair owners.
 Exact admission and replay: `docs/knowledge/lua-reading-evidence-capacity-admission.md`.
 The historical proposal remains in `docs/knowledge/lua-reading-evidence-capacity-proposal.md`.
+
+**Known Lua option limitation — false iteration setting becomes the default:**
+`runtime_engine(compiled, {max_iterations=false})` silently chooses 10,000.
+Omitted settings also choose 10,000, positive integer values are retained, and
+other tested invalid values reject. Defaulting with Lua's `or` replaces false
+before the positive-integer check. Lua `.2.8.1` owns absence-only defaulting and
+`.2.8.2` independent supported-route verification. The default and iteration
+semantics are unchanged; no long-running failure is inferred. Native controls
+pass on the installed PUC5.5.1 and LuaJIT hosts, without certifying PUC5.4.
+Exact proof: `docs/knowledge/lua-interpreter-prefix-reading-and-iteration-option-gap.md`.
 
 **Known Lua limitation — nested parser step budget:** when a parent callback has
 consumed its one-step allowance, its nested callback can still run against the
@@ -382,6 +392,9 @@ The same repair now includes the canonical corpus IO card's obsolete statement
 that the primary command is a scaffold. The primary parser command is implemented;
 corpus validation/execution remains separate developer tooling. Exact reconciliation:
 `docs/knowledge/lua-compiled-corpus-facade-reading.md`.
+Older runtime cards also need their global-mode, missing-container and future-callable
+wording reconciled under .2.1. Current engines reject global cursor overrides;
+nested writes create typed missing containers and explicit callable literals are implemented.
 
 **Known Lua toolchain limitation — primary identity drift:** the declared primary
 is PUC Lua 5.4.8, while the September 12 unversioned runtime and development package

@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LUA-STARTUP-READING`
-- Status: `active` / approved capacity; source reading 6/51
+- Status: `active` / approved capacity; source reading 7/51
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.6`
 - Created: `2026-09-12`
 - Last updated: `2026-09-12`
@@ -45,7 +45,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - Ordered range SHA-256: `81c58b8319def28af518fb134a3787513fe746f0f0f73bcacb0e20b9ede1c9d6`.
 - Child-summary SHA-256: `f56ecac262800bd3cc1e6bba0cc25bfe22f095c3dfee41f1c6595d4200145290`.
 - Coordinates are one-based inclusive LF physical lines or absolute file bytes; both byte windows decode as UTF-8.
-- Current physical reading: 6/51 children, 8,445/71,269 fragments and 342,343/2,732,450 bytes.
+- Current physical reading: 7/51 children, 9,945/71,269 fragments and 395,987/2,732,450 bytes.
 - Exact independent replay and capacity evidence: `docs/knowledge/lua-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -164,14 +164,20 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `LUA-STARTUP-READING.1.6 - read compiled state corpus and facade boundaries`
 
 - ID: `LUA-STARTUP-READING.1.7`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `d337ed89c1dcf50d1326097f00f648a73a556707`.
+  Verification tier: `focused`
+  Focused checks: Exact complete reading and baseline/range reconstruction; canonical facade/interpreter reconciliation and selected direct-dependent proof; memory, Knowledge, histories, rendered book and normal doctrines.
+  Canonical trigger: Ordinary source-reading evidence; no runtime or source change. Closeout and push retain existing prerequisites.
   Goal: Read and understand group 7: init.lua through interpreter.lua.
   Scope: `lua/src/linkedspec/init.lua` lines 235-318; `lua/src/linkedspec/interpreter.lua` lines 1-1416
   Baseline evidence: 1500 fragments / 53644 bytes; ordered range SHA-256 `9617f765df2d7cbefd92c6990395f31b66134368269fd0df84395d9d08685dbe`.
   Dependencies: .1.6 committed with clean handoff.
   Acceptance: Read every scoped byte without truncation; record comprehension, Knowledge and repair reconciliation, focused proof and a clean per-leaf commit.
-  Verification: `pending`
-  Commit: `pending`
+  Physical reading: Both scoped ranges read in ten full untruncated windows; facade completes and interpreter prefix1416 ends at inline-if validation. Exact scope, comprehension and managed native replay: docs/knowledge/lua-interpreter-prefix-reading-and-iteration-option-gap.md.
+  Findings: .2.8/.2.8.1/.2.8.2 own explicit false iteration-option defaulting; matched omitted/positive/other-invalid cases isolate the existing or-default before type validation. .2.1 gains stale canonical runtime guidance; all prior source and repairs remain.
+  Verification: Lua .1.7 reads two exact ranges in ten windows: 1,500 fragments /53,644 bytes; cumulative 7/51, 9,945 fragments /395,987 bytes. All 99 Lua sources remain baseline-identical. Native facade/runtime controls pass 27 per installed host, 54 total; both managed runs and cleanup are consumed. Explicit false max_iterations silently selects 10000; .2.8 owns absence-only defaulting and independent route proof. .2.1 also owns stale runtime-card mode/write/callable guidance. Write 105 and logical 26 mutations pass. All eight local repair roots and startup .37.1 remain pending; no declared PUC 5.4, full gate or corpus pass is claimed. Next .1.8; startup prerequisites and ADR0118 remain. Independent reconstruction passes 99 sources/51 groups/149 ranges and exact runtime replay bytes. Preserve 1,379 prior source/card/decision/history files, 2,447 unchanged task nodes and all 58 prior Known headings; exactly 3 pending .2.8 nodes are added. Knowledge 1093/8785, memory 60, histories 263/410 (notes warning, no rollover) and rendered book pass; normal hooks enforce resulting-tree pressure at landing.
+  Commit: `LUA-STARTUP-READING.1.7 - read interpreter prefix and own iteration option validation`
 
 - ID: `LUA-STARTUP-READING.1.8`
   Status: `pending`
@@ -616,7 +622,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - ID: `LUA-STARTUP-READING.2`
   Status: `pending`
   Goal: Own every newly confirmed Lua defect or coverage gap without losing existing shared repair ownership.
-  Children: `.2.1` owns README status; `.2.2` primary identity; `.2.3` native error safety; `.2.4` executable diagnostic teaching; `.2.5` complete quoted-literal parsing; `.2.6` harray pair completeness; `.2.7` complete switch contract diagnostics.
+  Children: `.2.1` owns README status; `.2.2` primary identity; `.2.3` native error safety; `.2.4` executable diagnostic teaching; `.2.5` complete quoted-literal parsing; `.2.6` harray pair completeness; `.2.7` complete switch contract diagnostics; `.2.8` explicit iteration-option validation.
   Acceptance: Define concrete causal evidence, affected behavior and repair/verification children before implementing any finding; preserve startup prerequisites and all earlier owners.
   Verification: `pending`
   Commit: `pending`
@@ -627,6 +633,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Evidence: Reading .1.1 finds lua/README.md lines 656-657 still saying the complete gate remains at staged 176/177. Canonical lua-root-rule-selection-preflight records superseding July 19 admission at 177/177 per ABI, and lua-callable-codeblock-emitted-route-identity records later complete 177/177 with CLI 66x2. The current 139 root and 359 logical assertions per ABI pass; no new full-gate result or runtime failure is inferred.
   Reading .1.2 extension: The generated-source section repeats the obsolete current 176/177 claim, and the scalar-coercion section still calls explicit codeblock-call syntax future despite the already documented and admitted callable implementation. Reconcile all three exact current-tense statements under the same documentation repair.
   Reading .1.6 extension: docs/knowledge/lua-corpus-manifest-io.md still calls the primary parser a scaffold failure despite later .7.1-.7.3 admission and current facade status/exports. Correct that exact current-tense sentence with preserved dated corpus evidence under the same documentation repair; source and canonical reconciliation are in docs/knowledge/lua-compiled-corpus-facade-reading.md.
+  Reading .1.7 extension: lua-runtime-rule-interpreter still describes global seek/consume engine options; lua-runtime-core-value-capture-helpers still describes no intermediate creation and future explicit callable values. Current option rejection, nested-write creation and codeblock-kind probes plus their admitted canonical owners supersede those sentences. Include these exact runtime-card corrections without deleting historical proof.
   Source: docs/knowledge/lua-readme-reading-and-status-drift.md retains exact dated bytes, locations and commands.
   Children: `.2.1.1`, `.2.1.2`
   Dependencies: Startup .3/.4/.5 and the complete Lua README reading before source-document repair.
@@ -637,7 +644,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - ID: `LUA-STARTUP-READING.2.1.1`
   Status: `pending`
   Goal: Repair the exact stale Lua README status and reconcile nearby historical rollout wording.
-  Scope: lua/README.md logical/generated gate paragraphs, scalar-coercion callable-syntax sentence and docs/knowledge/lua-corpus-manifest-io.md primary-scaffold sentence; directly related current-versus-historical guidance; public book and canonical evidence pointers.
+  Scope: lua/README.md logical/generated gate paragraphs, scalar-coercion callable-syntax sentence and docs/knowledge/lua-corpus-manifest-io.md primary-scaffold sentence; stale global-engine-mode, nested-write and callable-current prose in docs/knowledge/lua-runtime-rule-interpreter.md and docs/knowledge/lua-runtime-core-value-capture-helpers.md; directly related current-versus-historical guidance; public book and canonical evidence pointers.
   Dependencies: Parent .2.1 prerequisites; .1.2 completes the README; current evidence retrieval before claiming any contemporary suite count.
   Acceptance: Replace the obsolete 176/177 current-failure statement with accurate dated evidence or stable command guidance. Audit nearby present-tense counts against their canonical owners without treating earlier passing counts as freshly measured signoff. Preserve source examples, distinct proof scope and unique history. Run changed-document public contract checks, book render and relevant two-ABI command proof.
   Verification: `pending`
@@ -647,7 +654,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Status: `pending`
   Goal: Independently verify and close the Lua README status correction.
   Dependencies: .2.1.1 committed cleanly.
-  Acceptance: Compare the original dated statement with the corrected rendered and canonical corpus guidance, confirm no stale failure is presented as current and no unsupported pass is substituted, preserve historical provenance and all other known limitations, verify applicable public contracts and close .2.1 only on evidence.
+  Acceptance: Compare the original dated statement with the corrected rendered and canonical corpus/runtime guidance, confirm no stale failure is presented as current and no unsupported pass is substituted, preserve historical provenance and all other known limitations, verify applicable public contracts and close .2.1 only on evidence.
   Verification: `pending`
   Commit: `pending`
 
@@ -813,6 +820,33 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Verification: `pending`
   Commit: `pending`
 
+- ID: `LUA-STARTUP-READING.2.8`
+  Status: `pending`
+  Goal: Reject an explicitly non-integer max_iterations option consistently instead of silently using the default.
+  Evidence: Reading .1.7 executes the real native facade on PUC 5.5.1 and LuaJIT. max_iterations=false creates an engine with 10000; omitted options also use 10000, positive 1/2 are retained, and true/0/-1/1.5/string "2" reject. interpreter.lua line 144 uses options.max_iterations or 10000 before the type/range check, so false is replaced before validation. This is an option-validation defect; no long-running parser failure is inferred.
+  Children: `.2.8.1`, `.2.8.2`
+  Dependencies: Startup .3/.4/.5; preserve the declared PUC target and existing toolchain repair .2.2.
+  Acceptance: Default only when the field is absent, retain positive integer behavior, reject explicitly invalid supplied values with the established typed error, and preserve source identity and successful parser behavior. Decompose any additional affected option surfaces before expanding scope.
+  Verification: `pending`; .1.7 retains the exact native comparison in docs/knowledge/lua-interpreter-prefix-reading-and-iteration-option-gap.md.
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.8.1`
+  Status: `pending`
+  Goal: Make runtime-engine iteration defaulting depend on absence and validate every supplied value.
+  Scope: The existing max_iterations default/validation in lua/src/linkedspec/interpreter.lua; focused API regression and current public guidance.
+  Dependencies: Parent .2.8 prerequisites.
+  Acceptance: Show false-default RED and typed-rejection GREEN with omitted/positive controls; retain invalid true/zero/negative/fraction/string handling, declared supported-runtime coverage and full interpreter syntax checks. Do not change the default or repetition/while semantics.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.8.2`
+  Status: `pending`
+  Goal: Independently verify explicit iteration-option validation through supported engine construction routes.
+  Dependencies: .2.8.1 committed cleanly.
+  Acceptance: Compare direct and loaded-engine option forwarding using independent valid/invalid tables on the supported PUC runtime and LuaJIT; preserve default/positive settings, typed errors and parse results. Confirm any generated route's option contract before including it and close .2.8 only with evidence.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `LUA-STARTUP-READING.3`
   Status: `pending`
   Goal: Independently close Lua reading and route the remaining supporting-code lanes.
@@ -895,7 +929,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.7` | `pending` | Read facade suffix and interpreter prefix after clean .1.6; preserve all seven Lua repairs and startup .37.1. |
+| 1 | `LUA-STARTUP-READING.1.8` | `pending` | Read interpreter1417-2916 after clean .1.7; preserve all eight Lua repairs and startup .37.1. |
 
 ## Decisions
 
@@ -913,9 +947,11 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Blockers
 
-- None for Lua .1.7 after the clean .1.6 commit. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
+- None for Lua .1.8 after the clean .1.7 commit. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
 
 ## Verification Log
+
+- `2026-09-12` .1.7: Lua .1.7 reads two exact ranges in ten windows: 1,500 fragments /53,644 bytes; cumulative 7/51, 9,945 fragments /395,987 bytes. All 99 Lua sources remain baseline-identical. Native facade/runtime controls pass 27 per installed host, 54 total; both managed runs and cleanup are consumed. Explicit false max_iterations silently selects 10000; .2.8 owns absence-only defaulting and independent route proof. .2.1 also owns stale runtime-card mode/write/callable guidance. Write 105 and logical 26 mutations pass. All eight local repair roots and startup .37.1 remain pending; no declared PUC 5.4, full gate or corpus pass is claimed. Next .1.8; startup prerequisites and ADR0118 remain.
 
 - `2026-09-12` .1.6: Lua .1.6 reads four exact ranges in ten windows: 1,500 fragments /58,462 bytes; cumulative 6/51, 8,445 fragments /342,343 bytes. All 99 Lua sources remain baseline-identical. Pure compiled-state controls pass 25 per installed runtime, 50 total; regex-slot59, cursor60 and signature3/9/7 checks pass. Independent census confirms 105 corpus directories and 315 UTF-8 files without Lua corpus execution. Existing .2.1 owns the stale corpus-card primary-scaffold sentence; all seven local repairs and startup .37.1 remain pending. No declared 5.4 conformance, native build or full gate is claimed. Next .1.7; startup prerequisites and ADR0118 remain.
 
@@ -937,6 +973,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Commit Log
 
+- `2026-09-12` .1.7: `LUA-STARTUP-READING.1.7 - read interpreter prefix and own iteration option validation`.
+
 - `2026-09-12` .1.6: `LUA-STARTUP-READING.1.6 - read compiled state corpus and facade boundaries`.
 
 - `2026-09-12` .1.5: `LUA-STARTUP-READING.1.5 - read authority and compiled state and record nested step gap`.
@@ -956,6 +994,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 - `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` owns creation of this plan.
 
 ## Changelog
+
+- `2026-09-12` .1.7: Complete facade and interpreter prefix reading; own explicit iteration-option validation with two children, extend stale canonical guidance ownership and advance .1.8.
 
 - `2026-09-12` .1.6: Complete compiled state and corpus reading, read facade prefix, extend existing documentation repair, preserve source/evidence and advance .1.7.
 

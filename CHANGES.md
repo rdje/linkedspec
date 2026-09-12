@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-12 — LUA-STARTUP-READING.1.7: interpreter prefix and iteration option ownership
+
+- Read both exact scopes /1,500 fragments /53,644 bytes in ten windows; cumulative 7/51 with all Lua source unchanged.
+- Native runtime/facade controls pass27 per installed host; explicit false iteration defaulting gains .2.8 repair/proof owners.
+- Write105 and logical26 mutations pass; both managed native runs and cleanup outcomes are consumed.
+- Extend .2.1 to stale runtime-card guidance, preserve prior evidence and synchronize book/frontiers to .1.8.
+
 ## 2026-09-12 — LUA-STARTUP-READING.1.6: compiled state, corpus and facade reading
 
 - Read four exact scopes /1,500 fragments /58,462 bytes in ten windows; cumulative 6/51; all Lua source unchanged.

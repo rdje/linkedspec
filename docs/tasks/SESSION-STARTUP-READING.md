@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 6/51; .1.7 follows the sixth child; .2.1-.2.7 own seven concrete repairs.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 7/51; .1.8 follows the seventh child; .2.1-.2.8 own eight concrete repairs.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.6 reads four exact ranges in ten windows: 1,500 fragments /58,462 bytes; cumulative 6/51, 8,445 fragments /342,343 bytes. All 99 Lua sources remain baseline-identical. Pure compiled-state controls pass 25 per installed runtime, 50 total; regex-slot59, cursor60 and signature3/9/7 checks pass. Independent census confirms 105 corpus directories and 315 UTF-8 files without Lua corpus execution. Existing .2.1 owns the stale corpus-card primary-scaffold sentence; all seven local repairs and startup .37.1 remain pending. No declared 5.4 conformance, native build or full gate is claimed. Next .1.7; startup prerequisites and ADR0118 remain.
+  Verification: Lua .1.7 reads two exact ranges in ten windows: 1,500 fragments /53,644 bytes; cumulative 7/51, 9,945 fragments /395,987 bytes. All 99 Lua sources remain baseline-identical. Native facade/runtime controls pass 27 per installed host, 54 total; both managed runs and cleanup are consumed. Explicit false max_iterations silently selects 10000; .2.8 owns absence-only defaulting and independent route proof. .2.1 also owns stale runtime-card mode/write/callable guidance. Write 105 and logical 26 mutations pass. All eight local repair roots and startup .37.1 remain pending; no declared PUC 5.4, full gate or corpus pass is claimed. Next .1.8; startup prerequisites and ADR0118 remain.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -4547,7 +4547,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.7` | `pending` | Read facade suffix and interpreter prefix after clean .1.6; preserve all seven Lua repairs and startup .37.1. |
+| 1 | `LUA-STARTUP-READING.1.8` | `pending` | Read interpreter1417-2916 after clean .1.7; preserve all eight Lua repairs and startup .37.1. |
 
 ## Reading Ledger
 

@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-12 — Lua iteration options must distinguish absent from explicitly false
+
+- The or-default precedes positive-integer validation: false becomes10000 while true/zero/negative/fraction/string reject.
+- Matched default/positive cases isolate option validation; .2.8 owns correction without changing loop semantics.
+- Native controls preserve four-kind/false values, typed source diagnostics, nested creation, logical/string output and facade status.
+- Older runtime cards retain dated evidence but need current mode/write/callable corrections under existing .2.1.
+
 ## 2026-09-12 — Lua corpus validation and compiled projection remain distinct proof boundaries
 
 - Read compiler final validations and projections, strict corpus loading/selection, fixture failure records and runner exits.

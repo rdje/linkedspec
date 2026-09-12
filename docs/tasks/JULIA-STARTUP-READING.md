@@ -1741,7 +1741,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.7` | `pending` | Read facade suffix and interpreter prefix after clean .1.6; preserve all seven Lua repairs and startup .37.1. |
+| 1 | `LUA-STARTUP-READING.1.8` | `pending` | Read interpreter1417-2916 after clean .1.7; preserve all eight Lua repairs and startup .37.1. |
 
 ## Decisions
 
