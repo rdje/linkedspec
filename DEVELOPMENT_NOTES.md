@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-12 — Lua corpus validation and compiled projection remain distinct proof boundaries
+
+- Read compiler final validations and projections, strict corpus loading/selection, fixture failure records and runner exits.
+- Fifty pure compiled controls preserve entry precedence, duplicate regex slot identity, normalized descriptors and typed errors.
+- Independent corpus census proves checked-in membership/UTF-8, not Lua execution; current primary CLI supersedes scaffold prose.
+- Existing .2.1 owns the stale canonical sentence while dated prior evidence and all source remain unchanged.
+
 ## 2026-09-12 — Lua nested dispatch must carry the parent remaining step budget
 
 - A parent with zero local steps left still enters a nested callback; both calls correctly charge the larger invocation.

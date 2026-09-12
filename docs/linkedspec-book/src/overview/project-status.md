@@ -314,15 +314,15 @@ while preserving all repairs, normal hooks and later verification/push requireme
 Dependency build reuse remains separately owned. Lua and supporting-code reading,
 formal book reconciliation and policy prerequisites still follow.
 
-**Lua source reading is underway (5/51 groups):** the complete
+**Lua source reading is underway (6/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first five groups physically read 6,945 fragments /283,881 bytes,
+ownership. The first six groups physically read 8,445 fragments /342,343 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
-constructors, call names, contracts, the complete parser, bounded authority and compiled-state
-prefix. The remaining 46 groups require their own
+constructors, call names, contracts, the complete parser, bounded authority, compiled state and corpus modules,
+plus the facade prefix. The remaining 45 groups require their own
 reading and verified commits; source reading does not close the limitations below.
 
 **Approved Lua evidence capacity:** the director explicitly approved the complete
@@ -353,7 +353,7 @@ The director also granted one containment `.14` exception for this bounded capac
 implementation before full codebase reading, using focused proof and normal hooks
 without canonical CI/receipt. Later milestone, repair and push requirements remain;
 dependency build-on-update implementation stays separately owned. Lua source reading
-is 5/51; the next group finishes compiled state and reads corpus and facade sources.
+is 6/51; the next group finishes the facade and begins interpreter reading.
 All known limitations below retain their repair owners.
 Exact admission and replay: `docs/knowledge/lua-reading-evidence-capacity-admission.md`.
 The historical proposal remains in `docs/knowledge/lua-reading-evidence-capacity-proposal.md`.
@@ -378,6 +378,10 @@ PUC 5.4 identity or claiming a new complete gate run. The second slice also find
 the stale count repeated and admitted callable syntax still described as future work.
 Lua `.2.1.1` owns the wording correction and `.2.1.2` independent verification after
 startup prerequisites. Exact evidence: `docs/knowledge/lua-readme-reading-and-status-drift.md`.
+The same repair now includes the canonical corpus IO card's obsolete statement
+that the primary command is a scaffold. The primary parser command is implemented;
+corpus validation/execution remains separate developer tooling. Exact reconciliation:
+`docs/knowledge/lua-compiled-corpus-facade-reading.md`.
 
 **Known Lua toolchain limitation — primary identity drift:** the declared primary
 is PUC Lua 5.4.8, while the September 12 unversioned runtime and development package

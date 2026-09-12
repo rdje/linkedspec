@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-12 — LUA-STARTUP-READING.1.6: compiled state, corpus and facade reading
+
+- Read four exact scopes /1,500 fragments /58,462 bytes in ten windows; cumulative 6/51; all Lua source unchanged.
+- Confirm typed entry and duplicate-slot identities with 25 pure compiler controls per installed runtime.
+- Regex-slot59/cursor60/signature3-9-7 and independent 105-directory/315-file corpus census pass; no corpus execution claim.
+- Extend existing .2.1 to canonical primary-scaffold wording, preserve evidence and sync book/frontiers to .1.7.
+
 ## 2026-09-12 — LUA-STARTUP-READING.1.5: authority completion and compiled-state prefix
 
 - Read two exact ranges /1,500 fragments /55,335 bytes in nine windows; cumulative 5/51; source baseline unchanged.

@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LUA-STARTUP-READING`
-- Status: `active` / approved capacity; source reading 5/51
+- Status: `active` / approved capacity; source reading 6/51
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.6`
 - Created: `2026-09-12`
 - Last updated: `2026-09-12`
@@ -45,7 +45,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - Ordered range SHA-256: `81c58b8319def28af518fb134a3787513fe746f0f0f73bcacb0e20b9ede1c9d6`.
 - Child-summary SHA-256: `f56ecac262800bd3cc1e6bba0cc25bfe22f095c3dfee41f1c6595d4200145290`.
 - Coordinates are one-based inclusive LF physical lines or absolute file bytes; both byte windows decode as UTF-8.
-- Current physical reading: 5/51 children, 6,945/71,269 fragments and 283,881/2,732,450 bytes.
+- Current physical reading: 6/51 children, 8,445/71,269 fragments and 342,343/2,732,450 bytes.
 - Exact independent replay and capacity evidence: `docs/knowledge/lua-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -148,14 +148,20 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `LUA-STARTUP-READING.1.5 - read authority and compiled state and record nested step gap`
 
 - ID: `LUA-STARTUP-READING.1.6`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `4fc58d3cd6c268ac26514984bfe0a1de92d42b2e`.
+  Verification tier: `focused`
+  Focused checks: Exact complete reading and baseline/range reconstruction; canonical compiled-state/corpus/facade reconciliation and selected direct-dependent proof; memory, Knowledge, histories, rendered book and normal doctrines.
+  Canonical trigger: Ordinary source-reading evidence; no runtime or source change. Closeout and push retain existing prerequisites.
   Goal: Read and understand group 6: compiled_spec.lua through init.lua.
   Scope: `lua/src/linkedspec/compiled_spec.lua` lines 890-1529; `lua/src/linkedspec/corpus.lua` lines 1-524; `lua/src/linkedspec/corpus_runner.lua` lines 1-102; `lua/src/linkedspec/init.lua` lines 1-234
   Baseline evidence: 1500 fragments / 58462 bytes; ordered range SHA-256 `682b3852a6e7ad6504ca42236a8b84f91d5eeb38d472836d4831100c5b661347`.
   Dependencies: .1.5 committed with clean handoff.
   Acceptance: Read every scoped byte without truncation; record comprehension, Knowledge and repair reconciliation, focused proof and a clean per-leaf commit.
-  Verification: `pending`
-  Commit: `pending`
+  Physical reading: All four exact scopes in ten complete untruncated windows. Compiled state and both corpus modules finish; facade suffix remains .1.7-owned. Full comprehension, canonical qualification and self-contained replay: docs/knowledge/lua-compiled-corpus-facade-reading.md.
+  Findings: Extend existing .2.1 and its repair/verification children to the stale corpus-card primary-scaffold sentence; preserve dated evidence and every earlier repair. No runtime defect is inferred.
+  Verification: Lua .1.6 reads four exact ranges in ten windows: 1,500 fragments /58,462 bytes; cumulative 6/51, 8,445 fragments /342,343 bytes. All 99 Lua sources remain baseline-identical. Pure compiled-state controls pass 25 per installed runtime, 50 total; regex-slot59, cursor60 and signature3/9/7 checks pass. Independent census confirms 105 corpus directories and 315 UTF-8 files without Lua corpus execution. Existing .2.1 owns the stale corpus-card primary-scaffold sentence; all seven local repairs and startup .37.1 remain pending. No declared 5.4 conformance, native build or full gate is claimed. Next .1.7; startup prerequisites and ADR0118 remain. Independent all-source/range reconstruction and exact replay bytes pass. Preserve 1,378 prior source/card/decision/history files, 2,448 unchanged task nodes, all 58 Known headings and exact history suffixes/preambles/query; no new node. Knowledge1092/8779, memory60, histories256/403 and rendered book pass; normal hooks enforce resulting-tree pressure at landing.
+  Commit: `LUA-STARTUP-READING.1.6 - read compiled state corpus and facade boundaries`
 
 - ID: `LUA-STARTUP-READING.1.7`
   Status: `pending`
@@ -617,9 +623,10 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 
 - ID: `LUA-STARTUP-READING.2.1`
   Status: `pending`
-  Goal: Correct the Lua README's stale present-tense staged gate claim while preserving historical evidence.
+  Goal: Correct stale present-tense Lua README and canonical corpus guidance while preserving historical evidence.
   Evidence: Reading .1.1 finds lua/README.md lines 656-657 still saying the complete gate remains at staged 176/177. Canonical lua-root-rule-selection-preflight records superseding July 19 admission at 177/177 per ABI, and lua-callable-codeblock-emitted-route-identity records later complete 177/177 with CLI 66x2. The current 139 root and 359 logical assertions per ABI pass; no new full-gate result or runtime failure is inferred.
   Reading .1.2 extension: The generated-source section repeats the obsolete current 176/177 claim, and the scalar-coercion section still calls explicit codeblock-call syntax future despite the already documented and admitted callable implementation. Reconcile all three exact current-tense statements under the same documentation repair.
+  Reading .1.6 extension: docs/knowledge/lua-corpus-manifest-io.md still calls the primary parser a scaffold failure despite later .7.1-.7.3 admission and current facade status/exports. Correct that exact current-tense sentence with preserved dated corpus evidence under the same documentation repair; source and canonical reconciliation are in docs/knowledge/lua-compiled-corpus-facade-reading.md.
   Source: docs/knowledge/lua-readme-reading-and-status-drift.md retains exact dated bytes, locations and commands.
   Children: `.2.1.1`, `.2.1.2`
   Dependencies: Startup .3/.4/.5 and the complete Lua README reading before source-document repair.
@@ -630,7 +637,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - ID: `LUA-STARTUP-READING.2.1.1`
   Status: `pending`
   Goal: Repair the exact stale Lua README status and reconcile nearby historical rollout wording.
-  Scope: lua/README.md logical/generated gate paragraphs, scalar-coercion callable-syntax sentence and directly related current-versus-historical guidance; public book and canonical evidence pointers.
+  Scope: lua/README.md logical/generated gate paragraphs, scalar-coercion callable-syntax sentence and docs/knowledge/lua-corpus-manifest-io.md primary-scaffold sentence; directly related current-versus-historical guidance; public book and canonical evidence pointers.
   Dependencies: Parent .2.1 prerequisites; .1.2 completes the README; current evidence retrieval before claiming any contemporary suite count.
   Acceptance: Replace the obsolete 176/177 current-failure statement with accurate dated evidence or stable command guidance. Audit nearby present-tense counts against their canonical owners without treating earlier passing counts as freshly measured signoff. Preserve source examples, distinct proof scope and unique history. Run changed-document public contract checks, book render and relevant two-ABI command proof.
   Verification: `pending`
@@ -640,7 +647,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Status: `pending`
   Goal: Independently verify and close the Lua README status correction.
   Dependencies: .2.1.1 committed cleanly.
-  Acceptance: Compare the original dated statement with the corrected rendered guidance, confirm no stale failure is presented as current and no unsupported pass is substituted, preserve historical provenance and all other known limitations, verify applicable public contracts and close .2.1 only on evidence.
+  Acceptance: Compare the original dated statement with the corrected rendered and canonical corpus guidance, confirm no stale failure is presented as current and no unsupported pass is substituted, preserve historical provenance and all other known limitations, verify applicable public contracts and close .2.1 only on evidence.
   Verification: `pending`
   Commit: `pending`
 
@@ -888,7 +895,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.6` | `pending` | Read compiled-state suffix, corpus modules and facade prefix after clean .1.5; preserve all seven Lua repairs and startup .37.1. |
+| 1 | `LUA-STARTUP-READING.1.7` | `pending` | Read facade suffix and interpreter prefix after clean .1.6; preserve all seven Lua repairs and startup .37.1. |
 
 ## Decisions
 
@@ -906,9 +913,11 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Blockers
 
-- None for Lua .1.6 after the clean .1.5 commit. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
+- None for Lua .1.7 after the clean .1.6 commit. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
 
 ## Verification Log
+
+- `2026-09-12` .1.6: Lua .1.6 reads four exact ranges in ten windows: 1,500 fragments /58,462 bytes; cumulative 6/51, 8,445 fragments /342,343 bytes. All 99 Lua sources remain baseline-identical. Pure compiled-state controls pass 25 per installed runtime, 50 total; regex-slot59, cursor60 and signature3/9/7 checks pass. Independent census confirms 105 corpus directories and 315 UTF-8 files without Lua corpus execution. Existing .2.1 owns the stale corpus-card primary-scaffold sentence; all seven local repairs and startup .37.1 remain pending. No declared 5.4 conformance, native build or full gate is claimed. Next .1.7; startup prerequisites and ADR0118 remain.
 
 - `2026-09-12` .1.5: Lua .1.5 reads two exact ranges in nine windows: 1,500 fragments /55,335 bytes; cumulative 5/51, 6,945 fragments /283,881 bytes. All 99 Lua sources remain baseline-identical. Selected authority 272 plus 17 valid controls pass per installed runtime, 578 total; the facade assertion is excluded. The zero-parent-step nested callback observation joins existing startup .37.1; the one-step control and compiled snapshots pass. Progressive 116/public60 and selector 0/20 pass. All seven Lua repair roots remain pending; no declared 5.4 conformance, native build or full gate is claimed. Next .1.6; startup prerequisites and ADR0118 remain.
 
@@ -928,6 +937,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Commit Log
 
+- `2026-09-12` .1.6: `LUA-STARTUP-READING.1.6 - read compiled state corpus and facade boundaries`.
+
 - `2026-09-12` .1.5: `LUA-STARTUP-READING.1.5 - read authority and compiled state and record nested step gap`.
 
 - `2026-09-12` .1.4: `LUA-STARTUP-READING.1.4 - read parser and authority and own member accounting gaps`.
@@ -945,6 +956,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 - `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` owns creation of this plan.
 
 ## Changelog
+
+- `2026-09-12` .1.6: Complete compiled state and corpus reading, read facade prefix, extend existing documentation repair, preserve source/evidence and advance .1.7.
 
 - `2026-09-12` .1.5: Complete authority reading and compiled-state prefix; extend existing .37.1 with measured Lua budget evidence, preserve all prior repairs and advance .1.6.
 

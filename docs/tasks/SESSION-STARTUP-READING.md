@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 5/51; .1.6 follows the fifth child; .2.1-.2.7 own seven concrete repairs.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 6/51; .1.7 follows the sixth child; .2.1-.2.7 own seven concrete repairs.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.5 reads two exact ranges in nine windows: 1,500 fragments /55,335 bytes; cumulative 5/51, 6,945 fragments /283,881 bytes. All 99 Lua sources remain baseline-identical. Selected authority 272 plus 17 valid controls pass per installed runtime, 578 total; the facade assertion is excluded. The zero-parent-step nested callback observation joins existing startup .37.1; the one-step control and compiled snapshots pass. Progressive 116/public60 and selector 0/20 pass. All seven Lua repair roots remain pending; no declared 5.4 conformance, native build or full gate is claimed. Next .1.6; startup prerequisites and ADR0118 remain.
+  Verification: Lua .1.6 reads four exact ranges in ten windows: 1,500 fragments /58,462 bytes; cumulative 6/51, 8,445 fragments /342,343 bytes. All 99 Lua sources remain baseline-identical. Pure compiled-state controls pass 25 per installed runtime, 50 total; regex-slot59, cursor60 and signature3/9/7 checks pass. Independent census confirms 105 corpus directories and 315 UTF-8 files without Lua corpus execution. Existing .2.1 owns the stale corpus-card primary-scaffold sentence; all seven local repairs and startup .37.1 remain pending. No declared 5.4 conformance, native build or full gate is claimed. Next .1.7; startup prerequisites and ADR0118 remain.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -4547,7 +4547,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.6` | `pending` | Read compiled-state suffix, corpus modules and facade prefix after clean .1.5; preserve all seven Lua repairs and startup .37.1. |
+| 1 | `LUA-STARTUP-READING.1.7` | `pending` | Read facade suffix and interpreter prefix after clean .1.6; preserve all seven Lua repairs and startup .37.1. |
 
 ## Reading Ledger
 
