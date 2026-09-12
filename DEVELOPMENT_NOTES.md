@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-12 — Julia source continuity and complete component verification are independently green
+
+All52 committed scopes/results/activation boundaries and95 baseline source trees
+match. Complete Julia passes12903 assertions/storage22-5/primary/105;80 repairs
+remain open. Canonical CI still conflicts with the required dependency build reuse.
+Commit audit evidence first; .3.2 requests only a one-time reading-closeout exception.
+
 ## 2026-09-11 — Progressive parent-state fixture copies are not execution observations
 
 Authority consumer348/380 copies and compares a fixture never supplied to dispatch.

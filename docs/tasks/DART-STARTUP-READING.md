@@ -6,7 +6,7 @@
 - Status: `active` / reading closed under .3.2 / ADR0114; 25 repair roots remain open
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
-- Last updated: `2026-09-11`
+- Last updated: `2026-09-12`
 - Owner: repo-local workflow
 
 ## Goal
@@ -1568,7 +1568,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `JULIA-STARTUP-READING.3` | `pending` | Independently close Julia reading after clean .1.52, then route Lua; Dart repairs retain their startup prerequisites. |
+| 1 | `JULIA-STARTUP-READING.3.2` | `pending` | Julia audit/component proof passes; decide the scoped reading closeout boundary before Lua. Dart repairs retain their startup prerequisites. |
 
 ## Decisions
 

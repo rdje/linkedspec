@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-12 — JULIA-STARTUP-READING.3.1 - audit complete Julia reading and component proof
+
+Independent audit passes52 reading commits,95 sources,122 fact cards and80
+pending repair nodes. Full Julia passes12903 assertions,storage22/5,primary CLI
+and105/105 corpus with no source change. Preserve reading parents and every
+repair; .3.2 owns the newly required scoped canonical-closeout decision.
+
 ## 2026-09-11 — JULIA-STARTUP-READING.1.52 - finish Julia source reading and own parent-state test gap
 
 Read final1059 fragments/41043 bytes: all52 groups and95 Julia files are complete.
