@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 1/51; .1.2 follows the first child; .2.1 owns README status correction.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 2/51; .1.3 follows the second child; .2.1-.2.4 own four concrete repairs.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.1 reads README lines 1–945 completely: 945 fragments /65,532 bytes across six exact windows. Root selection 139 and logical helpers 359 pass per ABI; neutral root 54 / logical 26 mutations pass. Reading is 1/51; .2.1 owns stale present-tense gate guidance with repair and independent-verification children. All 99 Lua files remain baseline-identical; .1.2 is next. ADR0118 capacity, startup prerequisites and all earlier repairs remain.
+  Verification: Lua .1.2 reads eight exact ranges in thirteen windows: 1,500 fragments /54,321 bytes; cumulative 2/51, 2,445 fragments /119,853 bytes. All 99 Lua sources remain baseline-identical. Selector 0/20, native resolution 14/9/4 and MCP 141 pass. Exact README diagnostic failure and positive control reproduce on measured PUC 5.5.1 and LuaJIT; unsupported native error formatting loses LuaJIT detail and crashes PUC 5.5.1 with a source-attributed stack. .2.2-.2.4 own primary identity, native error safety and executable teaching; .2.1 retains stale guidance and startup .81.1 owns loader diagnosis. All probes are consumed; no declared 5.4 conformance or repair completion is claimed. Next .1.3; startup prerequisites and ADR0118 remain.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -4485,6 +4485,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     measurements separate from stack samples; temporal order does not establish sampling as a remedy.
     Reconcile the recognition and relocation samples plus the failed compiler-sample attempt. Determine
     whether any remaining cause is repository-controlled before selecting a remedy or external limitation.
+  Related Lua observation: .1.2 samples both ABI probes on September 12 inside require/dlopen/mapSegments/fcntl while mapping project-local PCRE2 modules. Exact stacks and runtime identities live in docs/knowledge/lua-native-readme-and-action-ast-reading.md. Retain this cross-language comparison in the controlled newer-OS diagnosis; a loader location alone is not a cause or remedy.
 
 - ID: `SESSION-STARTUP-READING.81.2`
   Status: `pending; conditional on causal evidence`
@@ -4545,7 +4546,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.2` | `pending` | Continue exact Lua group 2 after clean .1.1; its documentation repair and all previous repairs remain owned. |
+| 1 | `LUA-STARTUP-READING.1.3` | `pending` | Continue exact Lua group 3 after clean .1.2; all four Lua repair owners and earlier repairs remain. |
 
 ## Reading Ledger
 

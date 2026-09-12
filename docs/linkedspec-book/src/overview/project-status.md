@@ -314,13 +314,15 @@ while preserving all repairs, normal hooks and later verification/push requireme
 Dependency build reuse remains separately owned. Lua and supporting-code reading,
 formal book reconciliation and policy prerequisites still follow.
 
-**Lua source reading is underway (1/51 groups):** the complete
+**Lua source reading is underway (2/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first group physically reads README lines 1–945 (945 fragments /65,532 bytes)
-in six complete windows; the remaining 50 groups still require their own reading and verified commits.
+ownership. The first two groups physically read 2,445 fragments /119,853 bytes,
+including the complete README, both commands, all three native C bindings, ActionIR
+constructors and the call-name prefix. The remaining 49 groups require their own
+reading and verified commits; source reading does not close the limitations below.
 
 **Approved Lua evidence capacity:** the director explicitly approved the complete
 Lua proposal under ADR0118. Containment `.14` implements exactly these eleven
@@ -350,7 +352,7 @@ The director also granted one containment `.14` exception for this bounded capac
 implementation before full codebase reading, using focused proof and normal hooks
 without canonical CI/receipt. Later milestone, repair and push requirements remain;
 dependency build-on-update implementation stays separately owned. Lua source reading
-is 1/51; the next group completes the README and enters the native/AST sources.
+is 2/51; the next group reads the call-name suffix, contracts and parser prefix.
 All known limitations below retain their repair owners.
 Exact admission and replay: `docs/knowledge/lua-reading-evidence-capacity-admission.md`.
 The historical proposal remains in `docs/knowledge/lua-reading-evidence-capacity-proposal.md`.
@@ -358,9 +360,45 @@ The historical proposal remains in `docs/knowledge/lua-reading-evidence-capacity
 **Known Lua documentation limitation — obsolete gate status:** the backend README
 still presents an earlier `176/177` help failure as current. Dated admission records
 already supersede that failure; the first reading slice freshly passes root 139 and
-logical 359 assertions on each ABI, without claiming a new complete gate run.
+logical 359 assertions per selected runtime invocation, without recording exact
+PUC 5.4 identity or claiming a new complete gate run. The second slice also finds
+the stale count repeated and admitted callable syntax still described as future work.
 Lua `.2.1.1` owns the wording correction and `.2.1.2` independent verification after
 startup prerequisites. Exact evidence: `docs/knowledge/lua-readme-reading-and-status-drift.md`.
+
+**Known Lua toolchain limitation — primary identity drift:** the declared primary
+is PUC Lua 5.4.8, while the September 12 unversioned runtime and development package
+both resolve to 5.5.1. LuaJIT resolves to 2.1.1788460057. The wrapper and native builder
+select these independently without checking the declared target or an override's
+header compatibility. Current 5.5.1 observations establish no 5.4 conformance and
+do not change the supported target. Lua `.2.2.1` owns explicit selection/identity
+checks and `.2.2.2` the independent supported-runtime proof.
+
+**Known Lua native limitation — invalid-regex error formatting:** malformed native
+patterns can lose error detail on LuaJIT and crash the measured PUC 5.5.1 process.
+The binding passes unsupported `%lu` formatting to `luaL_error`; the exact 5.5.1
+formatter then consumes the numeric offset as the following string argument.
+The captured stack confirms `strlen(1)` through the Lua formatter and native compile
+error path. A Lua `pcall` does not contain this memory fault. The unavailable
+declared 5.4.8 runtime has no crash or conformance result from this probe.
+Lua `.2.3.1` owns safe offset/provider formatting and `.2.3.2` independent raw/public
+valid and invalid controls on supported runtimes; the repair is still pending.
+
+**Known Lua example limitation — diagnostic sink without emission:** the backend
+README reuses an engine whose child only returns `"child"`, then asserts a diagnostic
+event exists. That source emits none, so the exact assertion fails. Adding
+`say("diagnostic")` before the return produces one typed event with helper `say`,
+rule `Child` and message `diagnostic` plus a newline, retaining the same parse value
+on both measured runtimes. Lua `.2.4.1` owns a complete executable example and
+`.2.4.2` independent verification; the sink implementation is not implicated.
+
+These three findings were root-caused during reading, with concrete pending repair
+and verification children. They do not grant source changes before startup
+prerequisites. Exact scope, runtime identities, safe example replay and crash-source
+references: `docs/knowledge/lua-native-readme-and-action-ast-reading.md`.
+Separately sampled native import waits stop in macOS `dlopen/mapSegments/fcntl`;
+startup `.81.1` retains controlled loader diagnosis. A stack location and concurrent
+system-service CPU use do not establish an operating-system cause or remedy.
 
 **Approved Julia evidence capacity:** the director granted Knowledge lines
 72,000→79,000 and decision-record lines12,000→13,000 under ADR0116. The finite

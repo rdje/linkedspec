@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-12 — LUA-STARTUP-READING.1.2: native and ActionIR reading
+
+- Read eight complete scopes /1,500 fragments /54,321 bytes; cumulative 2/51; preserve every Lua source.
+- Own primary identity, native formatter crash and missing README diagnostic operation under .2.2-.2.4.
+- Root-cause strlen(1) from unsupported Lua formatting; consume all probes and migrate the exact crash report.
+- Selected static contracts pass; record qualified runtime failures, sync book/frontiers and continue .1.3.
+
 ## 2026-09-12 — LUA-STARTUP-READING.1.1: exact README prefix reading
 
 - Read all 945 fragments/65,532 bytes in six untruncated windows; retain baseline/range identity and comprehension.

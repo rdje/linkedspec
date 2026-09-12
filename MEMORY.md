@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `0bf9218e359fda81ff5a4ed412ebe014546f12ee` — clean approved Lua capacity admission.
-- latest_completed_leaf: `LUA-STARTUP-READING.1.1 - read Lua README prefix and own stale gate guidance`; 945 fragments/65,532 bytes, 996 selected assertions.
-- active_work_unit: `LUA-STARTUP-READING.1.2` — next exact Lua README/native/AST reading child.
-- next_action: Read every exact .1.2 byte without truncation; reconcile Knowledge, preserve .2.1 documentation repair, verify and commit.
+- activation_commit: `af2ca27ed4a9bea0d4141121153240ced9e2eb3b` — clean first Lua reading commit.
+- latest_completed_leaf: `LUA-STARTUP-READING.1.2 - read native and AST sources and own confirmed Lua defects`; cumulative 2/51 and three new pending defect owners.
+- active_work_unit: `LUA-STARTUP-READING.1.3` — next exact call-name/contracts/parser reading child.
+- next_action: Read every exact .1.3 byte; preserve identity-qualified proof and all .2.1-.2.4 repairs; verify and commit.
   Authoring investigations remain proposed; approved format `.2.8`/`.12` remain parked.
-- in_flight_uncommitted: none; this pointer describes the intended clean committed handoff.
-- blockers: none for Lua .1.2; ADR0118 admits the finite reading reserve. Source repairs and later verification retain their existing prerequisites.
+- in_flight_uncommitted: none; all four Lua probes consumed, native crash root-caused, exact off-volume crash report migrated and residue checked.
+- blockers: none for Lua .1.3; ADR0118 admits the finite reading reserve. Source repairs and later verification retain their existing prerequisites.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -57,4 +57,4 @@
   All earlier archive bytes and other history controls remain unchanged; the complete 57-unit Lua reserve is checked. Proportionate governance: ADR0115.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-12 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart/Julia reading closed; Lua reading 1/51 (945 fragments/65,532 bytes), plan 51 groups, 99 files / 71269 fragments / 2732450 bytes. Supporting code, formal book .4 and policy .5 remain.
+- latest_bootstrap_read: 2026-09-12 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart/Julia reading closed; Lua reading 2/51 (2,445 fragments/119,853 bytes), plan 51 groups, 99 files / 71269 fragments / 2732450 bytes. Supporting code, formal book .4 and policy .5 remain.

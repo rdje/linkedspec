@@ -45,7 +45,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - Ordered range SHA-256: `81c58b8319def28af518fb134a3787513fe746f0f0f73bcacb0e20b9ede1c9d6`.
 - Child-summary SHA-256: `f56ecac262800bd3cc1e6bba0cc25bfe22f095c3dfee41f1c6595d4200145290`.
 - Coordinates are one-based inclusive LF physical lines or absolute file bytes; both byte windows decode as UTF-8.
-- Current physical reading: 1/51 children, 945/71,269 fragments and 65,532/2,732,450 bytes.
+- Current physical reading: 2/51 children, 2,445/71,269 fragments and 119,853/2,732,450 bytes.
 - Exact independent replay and capacity evidence: `docs/knowledge/lua-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -82,14 +82,21 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `LUA-STARTUP-READING.1.1 - read Lua README prefix and own stale gate guidance`
 
 - ID: `LUA-STARTUP-READING.1.2`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `af2ca27ed4a9bea0d4141121153240ced9e2eb3b`.
+  Verification tier: `focused`
+  Focused checks: Complete exact reading, scoped/native/API reconciliation and identity-qualified executable diagnostics; source/range identity, memory, Knowledge, history, book and normal doctrines.
+  Canonical trigger: Ordinary source-reading evidence only; no source or runtime changes. Later closeout and push retain existing prerequisites.
   Goal: Read and understand group 2: README.md through action_call_names.lua.
   Scope: `lua/README.md` lines 946-1377; `lua/bin/corpus_runner.lua` lines 1-17; `lua/bin/linkedspec-lua` lines 1-31; `lua/native/filesystem_native.c` lines 1-92; `lua/native/mcp_system.c` lines 1-85; `lua/native/regex_pcre2.c` lines 1-233; `lua/src/linkedspec/action_ast.lua` lines 1-371; `lua/src/linkedspec/action_call_names.lua` lines 1-239
   Baseline evidence: 1500 fragments / 54321 bytes; ordered range SHA-256 `edbc6d329884611882069b9d24de3a8f4eae4764b9f8f66306fab982cef67934`.
   Dependencies: .1.1 committed with clean handoff.
   Acceptance: Read every scoped byte without truncation; record comprehension, Knowledge and repair reconciliation, focused proof and a clean per-leaf commit.
-  Verification: `pending`
-  Commit: `pending`
+  Physical reading: All eight scoped ranges read in thirteen untruncated windows; 1,500 LF fragments /54,321 bytes; frozen range digest unchanged. README and seven cumulative files finish; the call-name suffix remains .1.3-owned. Exact scope and comprehension are in docs/knowledge/lua-native-readme-and-action-ast-reading.md.
+  Findings: .2.1 extends existing stale guidance ownership; .2.2 owns primary identity, .2.3 native error formatting and .2.4 the missing diagnostic operation. Startup .81.1 retains the related OS loader observation. Exact cause, measured runtime scope, public limitations and replay live in the new Knowledge card.
+  Diagnostic outcomes: Original PUC exits 139 with SIGSEGV at strlen(1) through luaO_pushvfstring/luaL_error/compile_regex; both LuaJIT probes exit 0 with lost offset/provider detail; duplicate host PUC is cancelled with exit 143. All results and cleanup are consumed. Exact OS crash report copy/verify/use/delete passes with zero matching-PID old-report residue.
+  Verification: Lua .1.2 reads eight exact ranges in thirteen windows: 1,500 fragments /54,321 bytes; cumulative 2/51, 2,445 fragments /119,853 bytes. All 99 Lua sources remain baseline-identical. Selector 0/20, native resolution 14/9/4 and MCP 141 pass. Exact README diagnostic failure and positive control reproduce on measured PUC 5.5.1 and LuaJIT; unsupported native error formatting loses LuaJIT detail and crashes PUC 5.5.1 with a source-attributed stack. .2.2-.2.4 own primary identity, native error safety and executable teaching; .2.1 retains stale guidance and startup .81.1 owns loader diagnosis. All probes are consumed; no declared 5.4 conformance or repair completion is claimed. Next .1.3; startup prerequisites and ADR0118 remain. Independent reconstruction passes all 99 sources/51 groups/149 ranges. Preservation retains 1,373 prior source/card/decision/history files, 2,429 unchanged task nodes, all 51 prior Known headings and exact history suffixes; exactly nine pending repair nodes are added. Knowledge is 1,088 facts/8,753 keys; memory 60 lines, histories 440/375 lines, public book and all 20 pressure surfaces pass. Normal hooks govern landing.
+  Commit: `LUA-STARTUP-READING.1.2 - read native and AST sources and own confirmed Lua defects`
 
 - ID: `LUA-STARTUP-READING.1.3`
   Status: `pending`
@@ -584,7 +591,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - ID: `LUA-STARTUP-READING.2`
   Status: `pending`
   Goal: Own every newly confirmed Lua defect or coverage gap without losing existing shared repair ownership.
-  Children: `.2.1` owns README current-versus-historical status correction.
+  Children: `.2.1` owns README status; `.2.2` primary identity; `.2.3` native error safety; `.2.4` executable diagnostic teaching.
   Acceptance: Define concrete causal evidence, affected behavior and repair/verification children before implementing any finding; preserve startup prerequisites and all earlier owners.
   Verification: `pending`
   Commit: `pending`
@@ -593,6 +600,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Status: `pending`
   Goal: Correct the Lua README's stale present-tense staged gate claim while preserving historical evidence.
   Evidence: Reading .1.1 finds lua/README.md lines 656-657 still saying the complete gate remains at staged 176/177. Canonical lua-root-rule-selection-preflight records superseding July 19 admission at 177/177 per ABI, and lua-callable-codeblock-emitted-route-identity records later complete 177/177 with CLI 66x2. The current 139 root and 359 logical assertions per ABI pass; no new full-gate result or runtime failure is inferred.
+  Reading .1.2 extension: The generated-source section repeats the obsolete current 176/177 claim, and the scalar-coercion section still calls explicit codeblock-call syntax future despite the already documented and admitted callable implementation. Reconcile all three exact current-tense statements under the same documentation repair.
   Source: docs/knowledge/lua-readme-reading-and-status-drift.md retains exact dated bytes, locations and commands.
   Children: `.2.1.1`, `.2.1.2`
   Dependencies: Startup .3/.4/.5 and the complete Lua README reading before source-document repair.
@@ -603,7 +611,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - ID: `LUA-STARTUP-READING.2.1.1`
   Status: `pending`
   Goal: Repair the exact stale Lua README status and reconcile nearby historical rollout wording.
-  Scope: lua/README.md logical-helper gate paragraph and directly related current-versus-historical status guidance; public book and canonical evidence pointers.
+  Scope: lua/README.md logical/generated gate paragraphs, scalar-coercion callable-syntax sentence and directly related current-versus-historical guidance; public book and canonical evidence pointers.
   Dependencies: Parent .2.1 prerequisites; .1.2 completes the README; current evidence retrieval before claiming any contemporary suite count.
   Acceptance: Replace the obsolete 176/177 current-failure statement with accurate dated evidence or stable command guidance. Audit nearby present-tense counts against their canonical owners without treating earlier passing counts as freshly measured signoff. Preserve source examples, distinct proof scope and unique history. Run changed-document public contract checks, book render and relevant two-ABI command proof.
   Verification: `pending`
@@ -614,6 +622,87 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Goal: Independently verify and close the Lua README status correction.
   Dependencies: .2.1.1 committed cleanly.
   Acceptance: Compare the original dated statement with the corrected rendered guidance, confirm no stale failure is presented as current and no unsupported pass is substituted, preserve historical provenance and all other known limitations, verify applicable public contracts and close .2.1 only on evidence.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.2`
+  Status: `pending`
+  Goal: Restore the declared PUC Lua 5.4 primary proof and make runtime/header identity explicit.
+  Evidence: September 12 .1.2 runtime census reports lua and pkg-config lua both 5.5.1, with LuaJIT 2.1.1788460057. The canonical lua-toolchain-package-policy declares PUC 5.4.8. The targeted wrapper selects unversioned lua and the builder independently selects pkg-config lua, with no target-version or header/runtime identity guard. No lua5.4/lua54 command, versioned pkg-config entry or installed Homebrew 5.4 tree was found in the inspected toolchain locations.
+  Children: `.2.2.1`, `.2.2.2`
+  Dependencies: Startup .3/.4/.5 before toolchain/gate implementation; preserve the declared 5.4 target unless a separate explicit policy decision changes it.
+  Acceptance: Establish a repository-local or explicitly documented read-only 5.4 runtime/development pair, bind and validate both identities before building, reject mismatch with precise diagnostics, and rerun required conformance on 5.4 plus LuaJIT. The measured .1.2 PUC process is 5.5.1; earlier unversioned passes did not record a 5.4 runtime identity and cannot establish it. Source reading itself grants no conformance admission.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.2.1`
+  Status: `pending`
+  Goal: Bind the PUC command and native headers to the declared primary version.
+  Scope: Lua toolchain preparation/selection and native builder identity checks, repository-local storage and stable command guidance.
+  Dependencies: Parent .2.2 prerequisites; retrieve actual toolchain availability and existing policy before implementation.
+  Acceptance: Select one supported 5.4 runtime/header pair with explicit repository-root-derived configuration, verify identity before compilation, and prove wrong runtime, wrong headers and mismatched selections fail before artifacts. Preserve LuaJIT selection and same-volume storage; no global install or silent policy upgrade.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.2.2`
+  Status: `pending`
+  Goal: Reverify primary Lua conformance and close the runtime-identity gap.
+  Dependencies: .2.2.1 committed cleanly and matching primary runtime/header availability.
+  Acceptance: Run the complete relevant primary and LuaJIT component proof with explicit version evidence, preserve prior 5.5.1 observations as such, update public claims accurately and satisfy canonical toolchain/admission requirements before parent closeout.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.3`
+  Status: `pending`
+  Goal: Repair the located native regex error-formatting crash and lost diagnostics.
+  Evidence: .1.2 raw valid-match control succeeds, then LuaJIT loses offset/provider detail for [, ( and (?<; PUC 5.5.1 crashes on [. regex_pcre2.c lines 55/62 pass unsupported %lu to luaL_error. Exact 5.5.1 formatter source leaves its numeric argument unconsumed, so the following %s reads offset 1 as a pointer. The captured stack confirms strlen(1) through luaO_pushvfstring/lua_pushvfstring/luaL_error/compile_regex. No declared 5.4 execution or crash is claimed; full cause and official references are in lua-native-readme-and-action-ast-reading.
+  Children: `.2.3.1`, `.2.3.2`
+  Dependencies: Startup .3/.4/.5 before repair; preserve .2.2 declared-primary identity ownership.
+  Acceptance: Locate the failure with an exact native stack and valid/malformed controls; preserve meaningful offset/provider detail through supported Lua error formatting and high-level typed wrappers; prove malformed caller patterns cannot crash supported runtimes. Keep observed 5.5 behavior distinct from declared 5.4 proof.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.3.1`
+  Status: `pending`
+  Goal: Correct the demonstrated C error-reporting mechanism with source-attributed controls.
+  Scope: lua/native/regex_pcre2.c diagnostic branches and directly affected matching/error tests; no regex semantic or global toolchain-policy change.
+  Dependencies: Parent .2.3 prerequisites and completed causal diagnosis; matching runtime/header identity.
+  Acceptance: Keep a failing control for the actual defective formatter/crash mechanism, preserve byte offsets and provider text for distinct invalid patterns, retain valid match/capture behavior and verify safe Lua errors through native plus public matching paths on declared PUC 5.4 and LuaJIT.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.3.2`
+  Status: `pending`
+  Goal: Independently verify native regex error safety and close its repair.
+  Dependencies: .2.3.1 committed cleanly; .2.2 primary identity available.
+  Acceptance: Reproduce the original malformed-pattern cases through raw and public entrypoints without process failure, verify exact useful diagnostics and valid controls on both supported runtimes, preserve scope-qualified 5.5 observations and run the applicable component/admission proof before closeout.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.4`
+  Status: `pending`
+  Goal: Repair the Lua README diagnostic example's missing event-producing operation.
+  Evidence: The exact README engine and sink block yield result child and zero events, so line 1208's typed-event assertion fails. Adding only say("diagnostic") before the child's existing return yields one RuntimeDiagnosticOutputEvent with helper_name say, rule_label Child and message diagnostic plus LF, preserving result child on measured PUC 5.5.1 and LuaJIT.
+  Children: `.2.4.1`, `.2.4.2`
+  Dependencies: Startup .3/.4/.5 before source-document repair; preserve runtime/version proof scope.
+  Acceptance: Teach an executable self-contained diagnostic example whose source actually emits the asserted event, preserve quiet and result behavior, and independently run the exact documented sequence.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.4.1`
+  Status: `pending`
+  Goal: Add the missing diagnostic emission to the documented native example.
+  Scope: lua/README.md native engine and diagnostic example context, corresponding book explanation and exact executable documentation proof.
+  Dependencies: Parent .2.4 prerequisites.
+  Acceptance: Use an explicit say/print operation in the demonstrated source or provide a complete dedicated engine. Assert exact typed event fields, stable parse value and quiet no-sink behavior; validate the exact documented bytes on both supported runtimes without mutating the runtime to satisfy an incorrect example.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.4.2`
+  Status: `pending`
+  Goal: Independently verify and close the diagnostic teaching repair.
+  Dependencies: .2.4.1 committed cleanly and declared-primary proof available.
+  Acceptance: Extract and execute the exact documented sequence, confirm its event count/type/fields and parse result, preserve the old failure as dated evidence and update the public limitation only after supported-runtime proof passes.
   Verification: `pending`
   Commit: `pending`
 
@@ -699,7 +788,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.2` | `pending` | Read README lines 946–1377, commands, three native modules and the next exact AST ranges after .1.1 commits cleanly. |
+| 1 | `LUA-STARTUP-READING.1.3` | `pending` | Read the call-name suffix, contracts and exact parser prefix after clean .1.2; preserve all four Lua repair owners. |
 
 ## Decisions
 
@@ -717,9 +806,11 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Blockers
 
-- None for Lua .1.2 after the clean .1.1 commit. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
+- None for Lua .1.3 after the clean .1.2 commit. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
 
 ## Verification Log
+
+- `2026-09-12` .1.2: Lua .1.2 reads eight exact ranges in thirteen windows: 1,500 fragments /54,321 bytes; cumulative 2/51, 2,445 fragments /119,853 bytes. All 99 Lua sources remain baseline-identical. Selector 0/20, native resolution 14/9/4 and MCP 141 pass. Exact README diagnostic failure and positive control reproduce on measured PUC 5.5.1 and LuaJIT; unsupported native error formatting loses LuaJIT detail and crashes PUC 5.5.1 with a source-attributed stack. .2.2-.2.4 own primary identity, native error safety and executable teaching; .2.1 retains stale guidance and startup .81.1 owns loader diagnosis. All probes are consumed; no declared 5.4 conformance or repair completion is claimed. Next .1.3; startup prerequisites and ADR0118 remain.
 
 - `2026-09-12` .1.1: Lua .1.1 reads README lines 1–945 completely: 945 fragments /65,532 bytes across six exact windows. Root selection 139 and logical helpers 359 pass per ABI; neutral root 54 / logical 26 mutations pass. Reading is 1/51; .2.1 owns stale present-tense gate guidance with repair and independent-verification children. All 99 Lua files remain baseline-identical; .1.2 is next. ADR0118 capacity, startup prerequisites and all earlier repairs remain.
 
@@ -731,6 +822,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Commit Log
 
+- `2026-09-12` .1.2: `LUA-STARTUP-READING.1.2 - read native and AST sources and own confirmed Lua defects`.
+
 - `2026-09-12` .1.1: `LUA-STARTUP-READING.1.1 - read Lua README prefix and own stale gate guidance`.
 
 - `2026-09-12` .4.2: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.14 - admit approved Lua reading evidence capacity` closes .4/.4.2 without source-reading credit.
@@ -740,6 +833,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 - `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` owns creation of this plan.
 
 ## Changelog
+
+- `2026-09-12` .1.2: Read exact README/native/AST ranges; own three confirmed defects, extend stale guidance ownership, root-cause the native crash and advance .1.3 without source changes.
 
 - `2026-09-12` .1.1: Read the first exact Lua group, own stale README gate guidance and advance .1.2 without source changes.
 

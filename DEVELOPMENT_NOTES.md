@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-12 — Lua native error formatting requires Lua API conversions
+
+- luaL_error uses Lua formatting: unsupported %lu leaves its numeric argument for a following %s on 5.5.1.
+- Exact native crash stack confirms strlen(1); LuaJIT instead loses error detail. .2.3 owns safe repair and proof.
+- Unversioned runtime/header selection measures 5.5.1, not declared 5.4.8; .2.2 owns identity restoration.
+- README sink receives no event without an emitting source operation; one say control succeeds; .2.4 owns teaching.
+
 ## 2026-09-12 — Lua README reading distinguishes dated proof from current status
 
 - Six exact windows cover lines 1–945; comprehension and replay live in lua-readme-reading-and-status-drift.
