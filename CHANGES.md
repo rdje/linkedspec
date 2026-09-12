@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua emitter and typed-source reading with boundary repair ownership
+
+- Read four ranges /1,500 fragments /54,002 bytes; cumulative 20/51, 25,651 fragments /1,025,260 bytes.
+- Typed240 and generated106 assertions pass per installed host; 112 complete observations and six Perl source/facade controls preserve exact outcomes.
+- Own generated options, explicit contract values, rejected-coordinate diagnostics and typed-slice overflow under .2.8/.2.13/.2.20/.2.21; shared .60.2 retains floating-count policy.
+- LUA-STARTUP-READING.1.20 records unchanged source and qualified neutral proof; all earlier repairs/failures remain; next .1.21.
+
 ## 2026-09-13 — Lua static completion, SHA and emitter-prefix reading
 
 - Read three ranges /1,500 fragments /52,334 bytes; cumulative 19/51, 24,151 fragments /971,258 bytes.

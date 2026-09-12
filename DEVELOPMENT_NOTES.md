@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Separate absent defaults, rejected coordinates and bounded slice arithmetic
+
+- False is a supplied value: generated options and optional contract parameters currently erase it before their established type checks.
+- Rejecting an invalid source position does not prove its typed diagnostic is serializable; non-finite fields survive the current error projection.
+- Typed input slicing must bound width before adding the start; PUC wraps before clipping while LuaJIT and the reference retain integer suffixes.
+- LUA-STARTUP-READING.1.20 preserves distinct Perl floating fallback ownership and exact replay in docs/knowledge/lua-emitter-source-location-reading-and-boundary-gaps.md.
+
 ## 2026-09-13 — Conditional semantic records and independent RHS source
 
 - An unused function enables rule-call projection but disables entry explanations; these are separate implementation guards with separate repair owners.

@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 19/51; .1.20 follows the nineteenth child; .2.1-.2.19 own nineteen concrete repairs, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 20/51; .1.21 follows the twentieth child; .2.1-.2.21 own twenty-one concrete repairs, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.19 completes static projection and SHA reading and reads the emitter prefix in six complete windows: 1,500 fragments /52,334 bytes; cumulative 19/51, 24,151 fragments /971,258 bytes. All 99 Lua sources remain baseline-identical; 34 files are fully read. Source382, staged97 and remaining122 assertions pass per installed host, 1,202 total. Nine complete two-host observations and 18 query schemas retain the shared .22 call gate and .67.2 RHS-source omissions; Lua .2.19 owns conditional entry coverage and its impact/implementation/proof children. Missing-rule and slot-range controls retain distinct diagnostics. Neutral 6/20/128 and generated-source contract checks pass as qualified governance, not fresh runtime admission. All nineteen Lua repair roots and prior PUC observation failures remain open. Next .1.20 reads emitter, source-location and source-runtime ranges plus the spec AST prefix; named arguments and startup/ADR0118 prerequisites remain unchanged.
+  Verification: Lua .1.20 completes emitter and typed-source reading and reads the spec AST prefix in eight complete windows: 1,500 fragments /54,002 bytes; cumulative 20/51, 25,651 fragments /1,025,260 bytes. All 99 Lua sources remain baseline-identical; 37 files are fully read. Typed240 and generated106 assertions pass per installed host, 692 total. The 112 complete observations and six fresh Perl facade/lowering/source controls locate generated false defaults, rejected-coordinate diagnostic serialization and PUC typed-slice overflow. Lua .2.8.9/.10 and .2.13.3/.4 extend existing owners; .2.20/.2.21 add contract and diagnostic repair/proof; shared .60.2 retains floating-count policy. Neutral typed14/0/231 and generated-source governance pass without fresh six-runtime admission. All twenty-one Lua repair roots and prior PUC observation failures remain open. Next .1.21 reads the spec AST suffix and loader prefix; named arguments and startup/ADR0118 prerequisites remain unchanged.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -3905,6 +3905,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     diagnostic source alone did not credit large-count Perl execution or structured carriers.
     Julia .1.17 adds native/reconstructed and executed Perl large-count controls: drop_front throws and slice/substr truncate incorrectly in Julia while the paired Perl controls succeed. Julia .2.10 owns repair; exact replay and carrier limitations live in docs/knowledge/julia-large-number-and-slice-boundaries.md.
     Julia .1.18 confirms safe typed clipping at Int maximum but conversion failure for Float64 1e20. Perl falls back to host substr and returns ab for input_slice(1,1e20) on xabc; its drop_front instead treats scientific spelling as invalid and leaves [1,2]. This owner must reconcile accepted count kinds/ranges and repair or explicitly reject unsafe fallback behavior; exact causal replay is in docs/knowledge/julia-input-slice-arity-and-count-boundaries.md. Julia .2.9 owns conversion, .2.11 arity.
+    Lua .1.20 repeats six fresh Perl facade/lowering/source controls: integral max-width clips correctly but floating 1e20 still yields ab; both Lua hosts yield abc for that floating case. Lua .2.13.3/.4 separately own PUC typed-slice integer overflow. Preserve this owner for accepted count policy and Perl fallback repair; no reference result is automatically normative. Exact replay: docs/knowledge/lua-emitter-source-location-reading-and-boundary-gaps.md.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.60.3`
@@ -4604,7 +4605,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.20` | `pending` | Read emitter/source-location ranges and the spec AST prefix after clean .1.19; preserve all conditional, source, matcher and host-failure repairs plus parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.21` | `pending` | Read the spec AST suffix and loader prefix after clean .1.20; preserve all generated, coordinate, slicing, semantic and host-failure repairs plus parked named arguments. |
 
 ## Reading Ledger
 

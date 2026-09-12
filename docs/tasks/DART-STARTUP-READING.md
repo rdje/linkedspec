@@ -1568,7 +1568,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.20` | `pending` | Read emitter/source-location ranges and the spec AST prefix after clean .1.19; preserve all conditional, source, matcher and host-failure repairs plus parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.21` | `pending` | Read the spec AST suffix and loader prefix after clean .1.20; preserve all generated, coordinate, slicing, semantic and host-failure repairs plus parked named arguments. |
 
 ## Decisions
 

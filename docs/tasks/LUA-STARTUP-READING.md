@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LUA-STARTUP-READING`
-- Status: `active` / approved capacity; source reading 19/51
+- Status: `active` / approved capacity; source reading 20/51
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.6`
 - Created: `2026-09-12`
 - Last updated: `2026-09-13`
@@ -45,7 +45,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - Ordered range SHA-256: `81c58b8319def28af518fb134a3787513fe746f0f0f73bcacb0e20b9ede1c9d6`.
 - Child-summary SHA-256: `f56ecac262800bd3cc1e6bba0cc25bfe22f095c3dfee41f1c6595d4200145290`.
 - Coordinates are one-based inclusive LF physical lines or absolute file bytes; both byte windows decode as UTF-8.
-- Current physical reading: 19/51 children, 24,151/71,269 fragments and 971,258/2,732,450 bytes.
+- Current physical reading: 20/51 children, 25,651/71,269 fragments and 1,025,260/2,732,450 bytes.
 - Exact independent replay and capacity evidence: `docs/knowledge/lua-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -373,14 +373,21 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `LUA-STARTUP-READING.1.19 - complete static and SHA reading and own conditional entry repair`
 
 - ID: `LUA-STARTUP-READING.1.20`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `028d4158ee753c7a678df2470ba0e07feb0dc730`.
+  Verification tier: `focused`
+  Focused checks: Exact bounded reading/baseline identity; emitter/source-location/spec AST Knowledge reconciliation and selected native/neutral consumers; memory, Knowledge, both histories, rendered book and normal doctrines.
+  Canonical trigger: Ordinary source-reading evidence; no runtime or contract change. Later closeout and push retain canonical prerequisites.
   Goal: Read and understand group 20: source_emitter.lua through spec_ast.lua.
   Scope: `lua/src/linkedspec/source_emitter.lua` lines 166-789; `lua/src/linkedspec/source_location.lua` lines 1-436; `lua/src/linkedspec/source_location_runtime.lua` lines 1-325; `lua/src/linkedspec/spec_ast.lua` lines 1-115
   Baseline evidence: 1500 fragments / 54002 bytes; ordered range SHA-256 `3dba5254dfc4c319bfccce1ea072eb313f8e4099934ee5717343d0b79ba60114`.
   Dependencies: .1.19 committed with clean handoff.
   Acceptance: Read every scoped byte without truncation; record comprehension, Knowledge and repair reconciliation, focused proof and a clean per-leaf commit.
-  Verification: `pending`
-  Commit: `pending`
+  Physical reading: Four ranges consumed in eight untruncated windows: emitter166–365,366–565,566–789; source location1–220,221–436; runtime1–170,171–325; spec AST1–115. All 1,500 fragments /54,002 bytes are consumed; exact scope and comprehension live in docs/knowledge/lua-emitter-source-location-reading-and-boundary-gaps.md.
+  Comprehension: Generated v2 contract/plan validation and effective-spec emission, private callback carriers, typed Unicode source snapshots/positions/spans/provenance, compatibility nil adapters and strict AST primitive/dense-list boundaries.
+  Findings: Existing .2.8 and .2.13 gain generated-options and typed-clipping children; new .2.20/.2.21 own explicit contract values and serializable rejected-coordinate errors. Shared startup .60.2 retains large floating-count policy. All repair nodes remain pending behind startup prerequisites.
+  Verification: Lua .1.20 completes emitter and typed-source reading and reads the spec AST prefix in eight complete windows: 1,500 fragments /54,002 bytes; cumulative 20/51, 25,651 fragments /1,025,260 bytes. All 99 Lua sources remain baseline-identical; 37 files are fully read. Typed240 and generated106 assertions pass per installed host, 692 total. The 112 complete observations and six fresh Perl facade/lowering/source controls locate generated false defaults, rejected-coordinate diagnostic serialization and PUC typed-slice overflow. Lua .2.8.9/.10 and .2.13.3/.4 extend existing owners; .2.20/.2.21 add contract and diagnostic repair/proof; shared .60.2 retains floating-count policy. Neutral typed14/0/231 and generated-source governance pass without fresh six-runtime admission. All twenty-one Lua repair roots and prior PUC observation failures remain open. Next .1.21 reads the spec AST suffix and loader prefix; named arguments and startup/ADR0118 prerequisites remain unchanged. Exact preservation, memory, Knowledge, both histories, rendered book and normal hooks govern this reading/evidence commit.
+  Commit: `LUA-STARTUP-READING.1.20 - read emitter and typed sources and own boundary repairs`
 
 - ID: `LUA-STARTUP-READING.1.21`
   Status: `pending`
@@ -695,7 +702,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - ID: `LUA-STARTUP-READING.2`
   Status: `pending`
   Goal: Own every newly confirmed Lua defect or coverage gap without losing existing shared repair ownership.
-  Children: `.2.1` owns README status; `.2.2` primary identity; `.2.3` native error safety; `.2.4` executable diagnostic teaching; `.2.5` complete quoted-literal parsing; `.2.6` harray pair completeness; `.2.7` complete switch contract diagnostics; `.2.8` iteration/options/matching-cursor validation; `.2.9` false delimiter preservation; `.2.10` whole child-result false preservation; `.2.11` exact representable integer JSON encoding; `.2.12` finite private recognition coordinates and progress; `.2.13` scalar/reducer integer overflow; `.2.14` semantic diagnostic null preservation; `.2.15` rejected semantic query false evidence; `.2.16` mixed structural-slot correlation; `.2.17` regex-aware call source correlation; `.2.18` explicit child-slot runtime match ownership; `.2.19` conditional entry-explanation coverage.
+  Children: `.2.1` owns README status; `.2.2` primary identity; `.2.3` native error safety; `.2.4` executable diagnostic teaching; `.2.5` complete quoted-literal parsing; `.2.6` harray pair completeness; `.2.7` complete switch contract diagnostics; `.2.8` iteration/options/matching-cursor validation; `.2.9` false delimiter preservation; `.2.10` whole child-result false preservation; `.2.11` exact representable integer JSON encoding; `.2.12` finite private recognition coordinates and progress; `.2.13` scalar/reducer and typed-slice integer overflow; `.2.14` semantic diagnostic null preservation; `.2.15` rejected semantic query false evidence; `.2.16` mixed structural-slot correlation; `.2.17` regex-aware call source correlation; `.2.18` explicit child-slot runtime match ownership; `.2.19` conditional entry-explanation coverage; `.2.20` explicit generated-contract validation; `.2.21` finite typed-source diagnostic coordinates.
   Acceptance: Define concrete causal evidence, affected behavior and repair/verification children before implementing any finding; preserve startup prerequisites and all earlier owners.
   Verification: `pending`
   Commit: `pending`
@@ -901,13 +908,14 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 
 - ID: `LUA-STARTUP-READING.2.8`
   Status: `pending`
-  Goal: Reject explicitly invalid iteration counts, optional runtime/matching/MCP tables and matching cursors before applying absent-value defaults.
+  Goal: Reject explicitly invalid iteration counts, optional runtime/matching/MCP/generated tables and matching cursors before applying absent-value defaults.
   Evidence: Reading .1.7 executes the real native facade on PUC 5.5.1 and LuaJIT. max_iterations=false creates an engine with 10000; omitted options also use 10000, positive 1/2 are retained, and true/0/-1/1.5/string "2" reject. interpreter.lua line 144 uses options.max_iterations or 10000 before the type/range check, so false is replaced before validation. This is an option-validation defect; no long-running parser failure is inferred.
-  Children: `.2.8.1`, `.2.8.2` own the iteration field; `.2.8.3`, `.2.8.4` own public runtime optional-table boundaries; `.2.8.5`, `.2.8.6` own matching defaults; `.2.8.7`, `.2.8.8` own MCP constructor options.
+  Children: `.2.8.1`, `.2.8.2` own the iteration field; `.2.8.3`, `.2.8.4` own public runtime optional-table boundaries; `.2.8.5`, `.2.8.6` own matching defaults; `.2.8.7`, `.2.8.8` own MCP constructor options; `.2.8.9`, `.2.8.10` own generated execution/failure options.
   Dependencies: Startup .3/.4/.5; preserve the declared PUC target and existing toolchain repair .2.2.
   Reading .1.10 extension: Native engine/parse/execute/traced-parse/traced-execute all accept false options while nil/empty tables pass and true/zero/string reject typed table errors. Three options or {} owners replace false before validation; the execution aliases inherit that behavior. Keep this additional surface decomposed under .2.8.3/.4, independently from the numeric field.
   Reading .1.11 extension: Matching seek/consume/required-slot, register cursor construction and cursor setter accept false as zero; false register options become defaults. Other invalid cursors/options reject typed errors, and false capture_start_byte correctly rejects. Keep matching normalization isolated in new .2.8.5/.6; retain existing clamping and capture clearing semantics.
   Reading .1.14 extension: deployment_policy(false) and registration_options(false) accept protected default objects on both installed hosts; nil/empty tables pass, other invalid table values and explicitly false named fields reject. mcp_server.lua 142/180 use options or {} before plain-table validation. Existing serve_stdio and register_index have explicit nil-only option handling and remain compatibility controls; do not infer a policy elevation or wire parsing failure.
+  Reading .1.20 extension: Five direct/traced/emitted/failure-constructor operations accept false options after defaulting; nil/empty tables pass and true/zero/text reject. source_emitter.lua 250/494 normalize before validation. Thirty observations per installed host retain existing successful values and diagnostics. Exact replay: docs/knowledge/lua-emitter-source-location-reading-and-boundary-gaps.md.
   Acceptance: Default only when the field or optional table is absent, retain positive integer behavior, reject explicitly invalid supplied values with the established typed error, and preserve source identity and successful parser behavior. Decompose any additional affected option surfaces before expanding scope.
   Verification: `pending`; .1.7 retains the exact native comparison in docs/knowledge/lua-interpreter-prefix-reading-and-iteration-option-gap.md.
   Commit: `pending`
@@ -1089,10 +1097,11 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 
 - ID: `LUA-STARTUP-READING.2.13`
   Status: `pending`
-  Goal: Prevent silent PUC integer overflow in scalar numeric helpers and reducers.
+  Goal: Prevent silent PUC integer overflow in scalar numeric helpers, reducers and typed input slicing.
   Evidence: Reading .1.16 observes native and SpecFile-reconstructed num_add(max-int,1) and num_sum([max-int,1]) return min-int; num_abs(min-int) remains negative; num_mul(2^62,4) returns zero; num_sub(min-int,1) returns max-int. Installed LuaJIT retains floating magnitudes/signs for those inputs instead of the PUC wraparound. Direct 1e20, adding zero to 1e20, small addition and invalid division controls behave as expected. Existing JSON integer repair .2.11 separately owns max-int decimal serialization.
-  Children: `.2.13.1`, `.2.13.2`
+  Children: `.2.13.1`, `.2.13.2` own scalar/reducer policy; `.2.13.3`, `.2.13.4` own bounded typed-source clipping.
   Dependencies: Startup .3/.4/.5 and .2.2 declared-PUC proof; preserve ADR0029 and existing startup .20/.55, Dart .2.12 and Julia .2.9 numeric owners.
+  Reading .1.20 extension: On xabc, native/reconstructed input_slice(start,9223372036854775807) returns null for start1/3/4 on installed PUC, while LuaJIT and fresh Perl Get return abc/c/empty. source_location_runtime.lua 316 adds start+width before clipping, so PUC wraps to a negative endpoint and the compatibility adapter returns nil. Start0, small width and finite floating controls distinguish this from JSON .2.11. Shared startup .60.2 separately retains Perl floating-count fallback differences; coordinate Dart .2.14 and Julia .2.9 without merging their distinct causes.
   Acceptance: Root-cause each observed native arithmetic operation, independently compare the reference engine, preserve finite sign/magnitude within the agreed numeric contract and reject invalid/non-finite operations. Census subtraction, multiplication, absolute value, reducers, modulo and rounding before closing; fixture parity does not prove all magnitude boundaries. No arbitrary-precision policy or text-spelling change is inferred.
   Verification: `pending`; .1.16 records initial native/reconstructed observations and focused neutral proof.
   Commit: `pending`
@@ -1277,6 +1286,86 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Verification: `pending`
   Commit: `pending`
 
+- ID: `LUA-STARTUP-READING.2.8.9`
+  Status: `pending`
+  Goal: Reject explicitly false generated execution and execution-failure option tables.
+  Dependencies: Startup .3/.4/.5; parent .2.8 and supported-PUC .2.2 prerequisites.
+  Acceptance: Use absent-only normalization at source_emitter.lua 250/494; preserve established typed errors, nil/empty defaults, valid option fields, direct/traced/emitted parser values and callback-error identity. Census generated aliases before closure; decompose additional surfaces before expansion.
+  Verification: .1.20 records thirty complete option observations per installed host; source remains unchanged.
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.8.10`
+  Status: `pending`
+  Goal: Independently verify generated option validation across supported execution routes.
+  Dependencies: .2.8.9 committed cleanly.
+  Acceptance: Exercise omitted/empty/false/other-invalid and valid options on declared PUC and LuaJIT through direct/traced APIs, freshly emitted modules and failure construction. Retain callbacks, source identity, plan validation and distinct contract-field repair .2.20; synchronize book/Knowledge before closing.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.13.3`
+  Status: `pending`
+  Goal: Clip typed input-slice widths before potentially overflowing endpoint arithmetic.
+  Dependencies: Startup .3/.4/.5; parent .2.13, supported-PUC .2.2 and shared count policy .60.2.
+  Acceptance: Bound nonnegative width to remaining source length before addition, preserving Unicode scalar positions, empty/end spans and established invalid-input handling. Independently verify max-integer behavior; do not copy Perl floating substr fallback or widen numeric-string acceptance. Coordinate Dart .2.14 and Julia count handling.
+  Verification: .1.20 retains twelve native/reconstructed rows per host and six fresh Perl facade/lowering/source controls.
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.13.4`
+  Status: `pending`
+  Goal: Independently verify typed input-slice boundaries and carriers.
+  Dependencies: .2.13.3 committed cleanly.
+  Acceptance: Cover zero/interior/end/outside starts, zero/small/max-integer and agreed floating widths, Unicode input and invalid values on declared PUC/LuaJIT through native/reconstructed/generated/emitted routes. Compare independent scalar expectations and reference behavior, preserving separately owned count-policy discrepancies and book/Knowledge limits.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.20`
+  Status: `pending`
+  Goal: Validate explicitly supplied generated-source contract values before applying omission defaults.
+  Dependencies: Startup .3/.4/.5 and supported-PUC .2.2.
+  Acceptance: Repair and independently verify only the plan-validator optional contract boundary under .2.20.1/.2.20.2; preserve strict emitted literal validation, generated format and valid absent/current contract behavior.
+  Verification: .1.20: validate_generated_rule_plan_v2 accepts false as current because source_emitter.lua 409 uses actual_contract or current; true/zero reject type, invalid string rejects mismatch. Six complete observations per host; no stale emitted literal acceptance is claimed.
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.20.1`
+  Status: `pending`
+  Goal: Use absence-only handling for the generated plan contract parameter.
+  Dependencies: Parent .2.20 prerequisites.
+  Acceptance: Preserve validate_generated_source_contract_v2 string and mismatch diagnostics, validate explicit false as an invalid value, and keep omitted/current values successful. Census callers without changing emitted v2 contract/version or unrelated options.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.20.2`
+  Status: `pending`
+  Goal: Independently verify generated contract value validation and emitted compatibility.
+  Dependencies: .2.20.1 committed cleanly.
+  Acceptance: Check absent/current/false/true/number/invalid-string parameters, valid plans and malformed plans on supported hosts. Execute newly emitted valid modules and preserve direct strict literal rejection; update book/Knowledge and run relevant generated consumers.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.21`
+  Status: `pending`
+  Goal: Keep rejected non-finite source coordinates out of typed diagnostic records.
+  Dependencies: Startup .3/.4/.5 and supported-PUC .2.2; coordinate private recognition repair .2.12.
+  Acceptance: Bound private position integer validation and verify it under .2.21.1/.2.21.2; preserve valid positions, finite range errors and compatibility nil behavior. No public Position/Span API or new diagnostic schema is admitted.
+  Verification: .1.20: scalar/byte constructors reject both infinities but floor-based integer acceptance lets them reach position_offset in SourceLocationException; to_json succeeds but json.encode fails. Eight complete observations per host retain finite end/outside controls; no infinite Position, ordinary-spec or MCP reachability is demonstrated.
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.21.1`
+  Status: `pending`
+  Goal: Reject non-finite typed-source coordinate inputs before constructing coordinate-bearing errors.
+  Dependencies: Parent .2.21 prerequisites.
+  Acceptance: Census scalar/byte positions, spans and related integer predicates; use finite integer validation without changing in-range Unicode semantics or finite out-of-range typed errors. Keep invalid compatibility calls returning nil; decompose any additional affected context fields before repair.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.21.2`
+  Status: `pending`
+  Goal: Independently verify typed-source coordinate rejection and serializable diagnostics.
+  Dependencies: .2.21.1 committed cleanly.
+  Acceptance: Exercise finite boundaries, both infinities, NaN, non-integer and wrong-type inputs through scalar/byte/private adapter routes on declared PUC and LuaJIT. Validate exact finite typed errors and JSON conversion; establish reachability before broader claims, retain core/projection consumers and synchronize book/Knowledge.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `LUA-STARTUP-READING.3`
   Status: `pending`
   Goal: Independently close Lua reading and route the remaining supporting-code lanes.
@@ -1359,7 +1448,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.20` | `pending` | Read emitter/source-location ranges and the spec AST prefix after clean .1.19; preserve all conditional, source, matcher and host-failure repairs plus parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.21` | `pending` | Read the spec AST suffix and loader prefix after clean .1.20; preserve all generated, coordinate, slicing, semantic and host-failure repairs plus parked named arguments. |
 
 ## Decisions
 
@@ -1377,9 +1466,11 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Blockers
 
-- None for bounded Lua .1.20 reading after clean .1.19. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
+- None for bounded Lua .1.21 reading after clean .1.20. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
 
 ## Verification Log
+
+- `2026-09-13` .1.20: Lua .1.20 completes emitter and typed-source reading and reads the spec AST prefix in eight complete windows: 1,500 fragments /54,002 bytes; cumulative 20/51, 25,651 fragments /1,025,260 bytes. All 99 Lua sources remain baseline-identical; 37 files are fully read. Typed240 and generated106 assertions pass per installed host, 692 total. The 112 complete observations and six fresh Perl facade/lowering/source controls locate generated false defaults, rejected-coordinate diagnostic serialization and PUC typed-slice overflow. Lua .2.8.9/.10 and .2.13.3/.4 extend existing owners; .2.20/.2.21 add contract and diagnostic repair/proof; shared .60.2 retains floating-count policy. Neutral typed14/0/231 and generated-source governance pass without fresh six-runtime admission. All twenty-one Lua repair roots and prior PUC observation failures remain open. Next .1.21 reads the spec AST suffix and loader prefix; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
 - `2026-09-13` .1.19: Lua .1.19 completes static projection and SHA reading and reads the emitter prefix in six complete windows: 1,500 fragments /52,334 bytes; cumulative 19/51, 24,151 fragments /971,258 bytes. All 99 Lua sources remain baseline-identical; 34 files are fully read. Source382, staged97 and remaining122 assertions pass per installed host, 1,202 total. Nine complete two-host observations and 18 query schemas retain the shared .22 call gate and .67.2 RHS-source omissions; Lua .2.19 owns conditional entry coverage and its impact/implementation/proof children. Missing-rule and slot-range controls retain distinct diagnostics. Neutral 6/20/128 and generated-source contract checks pass as qualified governance, not fresh runtime admission. All nineteen Lua repair roots and prior PUC observation failures remain open. Next .1.20 reads emitter, source-location and source-runtime ranges plus the spec AST prefix; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
@@ -1427,6 +1518,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Commit Log
 
+- `2026-09-13` .1.20: `LUA-STARTUP-READING.1.20 - read emitter and typed sources and own boundary repairs` closes the twentieth reading child from clean 028d4158e.
+
 - `2026-09-13` .1.19: `LUA-STARTUP-READING.1.19 - complete static and SHA reading and own conditional entry repair` closes the nineteenth reading child from clean 1d569ea18.
 
 - `2026-09-13` .1.18: `LUA-STARTUP-READING.1.18 - read semantic projectors and own source and matcher repairs` closes the eighteenth reading child from clean cdf15066d.
@@ -1472,6 +1565,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 - `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` owns creation of this plan.
 
 ## Changelog
+
+- `2026-09-13`: .1.20 completes emitter/typed-source reading, reads the AST prefix and owns generated/default, rejected-coordinate and typed-slice repairs. Reading is 20/51; next .1.21.
 
 - `2026-09-13`: .1.19 completes static and SHA reading, reads the emitter prefix, extends shared call/binding omissions and owns conditional entry coverage under .2.19. Reading is 19/51; next .1.20.
 

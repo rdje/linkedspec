@@ -329,20 +329,21 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (19/51 groups):** the complete
+**Lua source reading is underway (20/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first nineteen groups physically read 24,151 fragments /971,258 bytes,
+ownership. The first twenty groups physically read 25,651 fragments /1,025,260 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
 also cover the complete generated MCP module, contract runtime, decoded server,
 wire, primary CLI, private recognition transaction module and its runtime adapter,
 scoped binding, scalar numeric, compilation outcome, semantic index, observation
-and query, both complete semantic projectors, SHA hashing and the emitter prefix.
-The remaining 32 groups require their own reading and verified commits; source reading does not close the limitations below.
+and query, both complete semantic projectors, SHA hashing, the complete emitter and
+typed-source modules, plus the spec AST prefix. The remaining 31 groups require
+their own reading and verified commits; source reading does not close the limitations below.
 
 **Generated Lua MCP binding:** the current 83,166-byte module matches its neutral
 repository inputs. Both installed Lua hosts pass 116 focused binding checks each,
@@ -392,6 +393,15 @@ These include the existing digest vectors and retained-plan provenance checks.
 They do not constitute fresh emitted execution or a supported-runtime admission;
 the earlier observation failures and semantic limitations remain open.
 
+**Lua emitter and typed-source verification:** the unchanged typed-source suite
+passes 240 assertions and the rule-local generated suite passes 106 on each
+installed host, 692 total. Additional direct/traced and freshly loaded emitted
+option controls preserve successful parsing while exposing the explicit-false
+validation gap below. Six new input-slice cases run through native/reconstructed
+Lua routes and the independent Perl facade, with exact lowering captured in the
+reference generated source. These bounded results do not close the earlier PUC
+observation failures or establish declared PUC5.4 conformance.
+
 **Approved Lua evidence capacity:** the director explicitly approved the complete
 Lua proposal under ADR0118. Containment `.14` implements exactly these eleven
 controls for 51 reading groups plus six support slots:
@@ -420,11 +430,42 @@ The director also granted one containment `.14` exception for this bounded capac
 implementation before full codebase reading, using focused proof and normal hooks
 without canonical CI/receipt. Later milestone, repair and push requirements remain;
 dependency build-on-update implementation stays separately owned. Lua source reading
-is 19/51; the next group reads the emitter suffix, source-location modules and
-spec AST prefix. The installed-host test failures below remain open.
+is 20/51; the next group reads the spec AST suffix and loader prefix. The installed-host
+test failures below remain open.
 All known limitations below retain their repair owners.
 Exact admission and replay: `docs/knowledge/lua-reading-evidence-capacity-admission.md`.
 The historical proposal remains in `docs/knowledge/lua-reading-evidence-capacity-proposal.md`.
+
+**Known Lua generated validation limitation — false contract selects the default:**
+`validate_generated_rule_plan_v2(compiled, plan, identity, false)` accepts the
+current contract after defaulting. Omission and the actual current string are
+valid; true, zero and an invalid string reject. Lua `.2.20.1/.2.20.2` own
+absence-only handling and independent generated-route proof. The generated
+module's direct literal validator remains strict; stale emitted-contract acceptance
+has not been demonstrated.
+
+**Known Lua typed-source limitation — rejected coordinates can spoil diagnostics:**
+the private scalar and byte position constructors reject both infinities, but
+place the non-finite coordinate in the typed error's `position_offset` field.
+Converting that error to a record succeeds; encoding the record as JSON fails.
+For `abc`, position 3 remains valid and outside position 4 produces a serializable
+range error. The compatibility adapter returns nil for the invalid positions.
+Lua `.2.21.1/.2.21.2` own finite input validation and independent diagnostic proof.
+No infinite Position is created, and ordinary-spec or MCP propagation has not
+been demonstrated. This differs from the private recognition-state issue below.
+
+**Known Lua input-slice limitation — integer width can overflow before clipping:**
+on `xabc`, `input_slice(1,9223372036854775807)` returns null on installed PUC Lua
+in both native and reconstructed execution. LuaJIT and the reference return `abc`.
+Starting at 3 similarly loses `c`; starting at 4 loses the valid empty suffix.
+The adapter adds the start and width before clipping, so PUC integer arithmetic
+wraps the endpoint negative. Lua `.2.13.3/.2.13.4` own safe clipping and supported
+carrier proof, coordinated with the existing Dart typed-slice repair.
+A floating width of `100000000000000000000.0` returns `abc` on both Lua hosts but
+`ab` on Perl through its already known host fallback. Shared startup `.60.2`
+retains count-policy and reference-fallback repair; that output is not a newly
+selected portable rule. Exact evidence for these three limitations:
+`docs/knowledge/lua-emitter-source-location-reading-and-boundary-gaps.md`.
 
 **Known Lua recognition limitation — non-finite private positions are accepted:**
 a cursor is a byte offset into input: for `"abc"`, normal positions are `0` through
@@ -628,6 +669,13 @@ invalid tables and false individual fields reject. Lua `.2.8.7/.2.8.8` own these
 two constructor repairs and independent proof, preserving existing registry/stdio
 validation. This is an option-validation gap; no policy elevation is established.
 Exact MCP evidence: `docs/knowledge/lua-mcp-runtime-server-reading-and-validation-gaps.md`.
+
+Generated direct/traced execution, freshly loaded emitted direct/traced execution,
+and execution-failure construction also accept a whole `false` options argument.
+Omission and empty tables are valid; true, zero and text reject with the established
+table errors. Lua `.2.8.9/.2.8.10` own absent-only defaults and independent route
+proof, preserving successful parse values and callback identity. Exact evidence:
+`docs/knowledge/lua-emitter-source-location-reading-and-boundary-gaps.md`.
 
 **Known Lua limitation — nested parser step budget:** when a parent callback has
 consumed its one-step allowance, its nested callback can still run against the
