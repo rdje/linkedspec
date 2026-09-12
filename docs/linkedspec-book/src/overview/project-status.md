@@ -329,16 +329,19 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (14/51 groups):** the complete
+**Lua source reading is underway (15/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first fourteen groups physically read 16,651 fragments /716,343 bytes,
+ownership. The first fifteen groups physically read 18,151 fragments /768,251 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
-constructors, call names, contracts, the complete parser, bounded authority, compiled state and corpus modules,
-the complete facade, interpreter, JSON and matching, plus the complete generated MCP module, contract runtime, decoded server and wire prefix. The remaining 37 groups require their own
-reading and verified commits; source reading does not close the limitations below.
+constructors, call names, contracts, the complete parser, bounded authority,
+compiled state and corpus modules, facade, interpreter, JSON and matching. They
+also cover the complete generated MCP module, contract runtime, decoded server,
+wire, primary CLI and private recognition transaction module, with its runtime
+adapter prefix. The remaining 36 groups require their own reading and verified
+commits; source reading does not close the limitations below.
 
 **Generated Lua MCP binding:** the current 83,166-byte module matches its neutral
 repository inputs. Both installed Lua hosts pass 116 focused binding checks each,
@@ -353,8 +356,13 @@ complete 35-frame dictionary and four semantic payload digests. The neutral
 transport checker passes 76 rejection cases. These are data and contract checks;
 the two-host binding counts above remain the earlier binding leaf’s native results.
 Current decoded-server and stdio consumers pass 216 and 247 checks per installed
-host, with 33 additional valid boundary controls each. Source reading of the wire
-suffix remains pending despite executing the full selected stdio consumer.
+host, with 33 additional valid boundary controls each. Wire source reading is now
+complete; those native MCP counts remain the prior reading slice’s measured results.
+
+**Lua recognition and CLI verification:** the current recognition consumer passes
+246 checks per installed host, with 30 additional finite/type controls each. Primary
+CLI process conformance passes all 66 default-environment cases per host; the
+POSIX-specific leg and complete backend gate retain separate verification.
 
 **Approved Lua evidence capacity:** the director explicitly approved the complete
 Lua proposal under ADR0118. Containment `.14` implements exactly these eleven
@@ -384,10 +392,25 @@ The director also granted one containment `.14` exception for this bounded capac
 implementation before full codebase reading, using focused proof and normal hooks
 without canonical CI/receipt. Later milestone, repair and push requirements remain;
 dependency build-on-update implementation stays separately owned. Lua source reading
-is 14/51; the next group reads the wire suffix, CLI and recognition transaction sources.
+is 15/51; the next group reads the recognition adapter suffix, scoped binding,
+scalar numeric, compilation outcome and semantic index prefix.
 All known limitations below retain their repair owners.
 Exact admission and replay: `docs/knowledge/lua-reading-evidence-capacity-admission.md`.
 The historical proposal remains in `docs/knowledge/lua-reading-evidence-capacity-proposal.md`.
+
+**Known Lua recognition limitation — non-finite private positions are accepted:**
+a cursor is a byte offset into input: for `"abc"`, normal positions are `0` through
+`3`. The private transaction helper currently accepts numeric infinity in its
+cursor, boundary and named marks because its integer test also accepts infinity.
+Both installed Lua hosts preserve those invalid values in snapshots, which then
+fail JSON encoding. The mark setter also accepts both infinities, and the private
+progress check accepts an infinite end offset as forward progress.
+Lua `.2.12.1` owns finite validation and `.2.12.2` independent rejection,
+atomicity, serializable snapshots and carrier proof. Finite negative private
+coordinates remain existing controls; a new public bounds policy is not implied.
+The observations use the private helper directly. They do not demonstrate an
+ordinary spec producing infinity or a parser running forever.
+Exact evidence: `docs/knowledge/lua-wire-cli-recognition-reading-and-finite-state-gap.md`.
 
 **Known Lua JSON limitation — exact PUC integers change during encoding:**
 PUC Lua holds `9007199254740993` exactly, but the JSON encoder emits

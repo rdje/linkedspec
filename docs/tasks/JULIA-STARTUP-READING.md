@@ -1741,7 +1741,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.15` | `pending` | Read wire suffix, primary CLI, recognition transaction and its runtime prefix after clean .1.14; preserve all repairs and the parked named-argument direction. |
+| 1 | `LUA-STARTUP-READING.1.16` | `pending` | Read the recognition adapter suffix, scoped binding, scalar numeric, compilation outcome and semantic index prefix after clean .1.15; preserve all repairs and the parked named-argument direction. |
 
 ## Decisions
 

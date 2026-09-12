@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-12 — Lua wire CLI and recognition reading
+
+- Read four ranges /1,500 fragments /51,908 bytes; cumulative 15/51, 18,151 fragments /768,251 bytes.
+- Both hosts pass 246 recognition assertions and 30 valid controls each; 552 assertions total; CLI separately passes 66 default-environment cases each.
+- Own non-finite private coordinates/marks/progress under .2.12 with independent repair/proof; extend .2.1 for the stale integration header.
+- LUA-STARTUP-READING.1.15 preserves all prior evidence and parked named arguments, owns the required notes rollover and advances to .1.16.
+
 ## 2026-09-12 — Lua MCP runtime reading and approved parked named arguments
 
 - Read four ranges /1,500 fragments /53,162 bytes; cumulative 14/51, 16,651 fragments /716,343 bytes.

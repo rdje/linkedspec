@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LUA-STARTUP-READING`
-- Status: `active` / approved capacity; source reading 14/51
+- Status: `active` / approved capacity; source reading 15/51
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.6`
 - Created: `2026-09-12`
 - Last updated: `2026-09-12`
@@ -45,7 +45,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - Ordered range SHA-256: `81c58b8319def28af518fb134a3787513fe746f0f0f73bcacb0e20b9ede1c9d6`.
 - Child-summary SHA-256: `f56ecac262800bd3cc1e6bba0cc25bfe22f095c3dfee41f1c6595d4200145290`.
 - Coordinates are one-based inclusive LF physical lines or absolute file bytes; both byte windows decode as UTF-8.
-- Current physical reading: 14/51 children, 16,651/71,269 fragments and 716,343/2,732,450 bytes.
+- Current physical reading: 15/51 children, 18,151/71,269 fragments and 768,251/2,732,450 bytes.
 - Exact independent replay and capacity evidence: `docs/knowledge/lua-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -297,14 +297,20 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `LUA-STARTUP-READING.1.14 - read MCP runtime and preserve repair and named-call ownership`
 
 - ID: `LUA-STARTUP-READING.1.15`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `400e3db4418e04fe6514f2c34a083648244acaf5`.
+  Verification tier: `focused`
+  Focused checks: Exact bounded reading/baseline identity, wire/CLI/recognition Knowledge reconciliation and focused component proof; memory, Knowledge, histories including any required safe rollover, rendered book and normal doctrines.
+  Canonical trigger: Ordinary source-reading evidence; no runtime or contract change. Later closeout and push retain their canonical prerequisites.
   Goal: Read and understand group 15: mcp_wire.lua through recognition_transaction_runtime.lua.
   Scope: `lua/src/linkedspec/mcp_wire.lua` lines 233-511; `lua/src/linkedspec/primary_cli.lua` lines 1-381; `lua/src/linkedspec/recognition_transaction.lua` lines 1-699; `lua/src/linkedspec/recognition_transaction_runtime.lua` lines 1-141
   Baseline evidence: 1500 fragments / 51908 bytes; ordered range SHA-256 `8473f4c5be44a6cded592f0ab42146a777df62fd365b703324c8df741a8fce93`.
   Dependencies: .1.14 committed with clean handoff.
   Acceptance: Read every scoped byte without truncation; record comprehension, Knowledge and repair reconciliation, focused proof and a clean per-leaf commit.
-  Verification: `pending`
-  Commit: `pending`
+  History ownership: This leaf owns the expected engineering-notes rollover after its new record: preserve the clean activation suffix, exact prior archive bytes and manifest rows, stay within ADR0118 and verify reconstruction before committing.
+  Reading checkpoint: All four scopes consumed in eleven complete windows: wire 233–382,383–511; CLI 1–150,151–300,301–381; transaction 1–150,151–300,301–450,451–600,601–699; adapter 1–141. Reading is complete; exact reconciliation and executed replay are in docs/knowledge/lua-wire-cli-recognition-reading-and-finite-state-gap.md.
+  Verification: Lua .1.15 completes wire, primary CLI and recognition transaction reading and reads the runtime adapter prefix in eleven complete windows: 1,500 fragments /51,908 bytes; cumulative 15/51, 18,151 fragments /768,251 bytes. All 99 Lua sources remain baseline-identical; 24 files are fully read. Both installed hosts pass 246 recognition assertions and 30 valid boundary controls each, 552 assertions total; default-environment CLI conformance separately passes 66 cases per host. Nine private non-finite observations per host gain .2.12 repair/proof ownership; stale transaction integration commentary extends .2.1. Neutral recognition validation passes 138 ActionIR rows, 250 calls and 58 mutations with existing governance checks. All twelve Lua repair roots and startup .37.1/.28.7 remain pending. Named-argument direction remains approved and parked under PARSER-AUTHORING-APIS.4. Next .1.16 reads the adapter suffix, scoped binding, scalar numeric, compilation outcome and semantic index prefix under unchanged startup and ADR0118 prerequisites. Required engineering-notes rollover and independent preservation are recorded in the fact card; memory, Knowledge, history pressure, rendered book and normal hooks govern landing.
+  Commit: `LUA-STARTUP-READING.1.15 - read wire CLI and transactions and own finite state repair`
 
 - ID: `LUA-STARTUP-READING.1.16`
   Status: `pending`
@@ -669,19 +675,20 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - ID: `LUA-STARTUP-READING.2`
   Status: `pending`
   Goal: Own every newly confirmed Lua defect or coverage gap without losing existing shared repair ownership.
-  Children: `.2.1` owns README status; `.2.2` primary identity; `.2.3` native error safety; `.2.4` executable diagnostic teaching; `.2.5` complete quoted-literal parsing; `.2.6` harray pair completeness; `.2.7` complete switch contract diagnostics; `.2.8` iteration/options/matching-cursor validation; `.2.9` false delimiter preservation; `.2.10` whole child-result false preservation; `.2.11` exact representable integer JSON encoding.
+  Children: `.2.1` owns README status; `.2.2` primary identity; `.2.3` native error safety; `.2.4` executable diagnostic teaching; `.2.5` complete quoted-literal parsing; `.2.6` harray pair completeness; `.2.7` complete switch contract diagnostics; `.2.8` iteration/options/matching-cursor validation; `.2.9` false delimiter preservation; `.2.10` whole child-result false preservation; `.2.11` exact representable integer JSON encoding; `.2.12` finite private recognition coordinates and progress.
   Acceptance: Define concrete causal evidence, affected behavior and repair/verification children before implementing any finding; preserve startup prerequisites and all earlier owners.
   Verification: `pending`
   Commit: `pending`
 
 - ID: `LUA-STARTUP-READING.2.1`
   Status: `pending`
-  Goal: Correct stale present-tense Lua README and canonical corpus guidance while preserving historical evidence.
+  Goal: Correct stale present-tense Lua README, canonical guidance and stale source comments while preserving historical evidence.
   Evidence: Reading .1.1 finds lua/README.md lines 656-657 still saying the complete gate remains at staged 176/177. Canonical lua-root-rule-selection-preflight records superseding July 19 admission at 177/177 per ABI, and lua-callable-codeblock-emitted-route-identity records later complete 177/177 with CLI 66x2. The current 139 root and 359 logical assertions per ABI pass; no new full-gate result or runtime failure is inferred.
   Reading .1.2 extension: The generated-source section repeats the obsolete current 176/177 claim, and the scalar-coercion section still calls explicit codeblock-call syntax future despite the already documented and admitted callable implementation. Reconcile all three exact current-tense statements under the same documentation repair.
   Reading .1.6 extension: docs/knowledge/lua-corpus-manifest-io.md still calls the primary parser a scaffold failure despite later .7.1-.7.3 admission and current facade status/exports. Correct that exact current-tense sentence with preserved dated corpus evidence under the same documentation repair; source and canonical reconciliation are in docs/knowledge/lua-compiled-corpus-facade-reading.md.
   Reading .1.7 extension: lua-runtime-rule-interpreter still describes global seek/consume engine options; lua-runtime-core-value-capture-helpers still describes no intermediate creation and future explicit callable values. Current option rejection, nested-write creation and codeblock-kind probes plus their admitted canonical owners supersede those sentences. Include these exact runtime-card corrections without deleting historical proof.
   Reading .1.9 extension: lua-runtime-builtin-final-codeblocks-with and lua-runtime-eager-block-values retain future explicit-callable prose despite the current common executor and emitted-identity admission. Include these exact current-guidance corrections; keep the original dated implementation evidence intact.
+  Reading .1.15 extension: recognition_transaction.lua header lines 3–4 still describes future runtime consumption despite the integrated adapter and current 246-assertion admitted consumer on both hosts. Correct or explicitly date this source comment under the existing guidance repair; preserve the private facade boundary and historical integration evidence.
   Source: docs/knowledge/lua-readme-reading-and-status-drift.md retains exact dated bytes, locations and commands.
   Children: `.2.1.1`, `.2.1.2`
   Dependencies: Startup .3/.4/.5 and the complete Lua README reading before source-document repair.
@@ -692,7 +699,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - ID: `LUA-STARTUP-READING.2.1.1`
   Status: `pending`
   Goal: Repair the exact stale Lua README status and reconcile nearby historical rollout wording.
-  Scope: lua/README.md logical/generated gate paragraphs, scalar-coercion callable-syntax sentence and docs/knowledge/lua-corpus-manifest-io.md primary-scaffold sentence; stale global-engine-mode, nested-write and callable-current prose in docs/knowledge/lua-runtime-rule-interpreter.md and docs/knowledge/lua-runtime-core-value-capture-helpers.md; explicit-callable future prose in docs/knowledge/lua-runtime-builtin-final-codeblocks-with.md and docs/knowledge/lua-runtime-eager-block-values.md; directly related current-versus-historical guidance; public book and canonical evidence pointers.
+  Scope: lua/README.md logical/generated gate paragraphs, scalar-coercion callable-syntax sentence and docs/knowledge/lua-corpus-manifest-io.md primary-scaffold sentence; stale global-engine-mode, nested-write and callable-current prose in docs/knowledge/lua-runtime-rule-interpreter.md and docs/knowledge/lua-runtime-core-value-capture-helpers.md; explicit-callable future prose in docs/knowledge/lua-runtime-builtin-final-codeblocks-with.md and docs/knowledge/lua-runtime-eager-block-values.md; the stale future-integration header in lua/src/linkedspec/recognition_transaction.lua; directly related current-versus-historical guidance; public book and canonical evidence pointers.
   Dependencies: Parent .2.1 prerequisites; .1.2 completes the README; current evidence retrieval before claiming any contemporary suite count.
   Acceptance: Replace the obsolete 176/177 current-failure statement with accurate dated evidence or stable command guidance. Audit nearby present-tense counts against their canonical owners without treating earlier passing counts as freshly measured signoff. Preserve source examples, distinct proof scope and unique history. Run changed-document public contract checks, book render and relevant two-ABI command proof.
   Verification: `pending`
@@ -1031,6 +1038,32 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Verification: `pending`
   Commit: `pending`
 
+- ID: `LUA-STARTUP-READING.2.12`
+  Status: `pending`
+  Goal: Reject non-finite values at private recognition coordinate and progress validation boundaries.
+  Evidence: Reading .1.15 observes positive/negative infinity accepted for frame cursor, boundary and initial mark offsets on both installed hosts; all six resulting snapshots fail JSON encoding. write_mark accepts both infinities and validate_progress accepts an infinite end as forward progress. recognition_transaction.lua is_integer (63–65) checks value==math.floor(value), which is true for infinities. Thirty valid controls per host preserve finite zero/positive/negative integers and reject false/true/string/fraction/NaN frame values. These are private-module observations; no ordinary .spec path or parser nontermination is established.
+  Children: `.2.12.1`, `.2.12.2`
+  Dependencies: Startup .3/.4/.5 and existing .2.2 supported-PUC proof requirements.
+  Acceptance: Preserve private transaction identity, finite coordinate semantics, detached snapshots, rollback/unwind, false payloads and neutral diagnostics while rejecting non-finite coordinate/progress inputs before state or progress acceptance. Do not silently replace an invalid infinite operand with an advancing default. Census applicable private callers and supported carriers before claiming public reachability or broad parity.
+  Verification: `pending`; .1.15 records exact finite/non-finite controls and current admitted consumer results.
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.12.1`
+  Status: `pending`
+  Goal: Repair finite-number validation for private frame coordinates, marks and progress operands.
+  Dependencies: Parent .2.12 prerequisites and current private-call domain census.
+  Acceptance: Reject both infinities in frame_state cursor/boundary/marks, write_mark and each progress operand before mutation or acceptance. Retain omitted boundary behavior, finite negative/zero/positive integer storage already accepted by the private model, and established invalid-type errors. Preserve finite one-shot zero-width and required forward-progress behavior. Audit adapter-produced values and decompose any newly required contract or public behavior change before expanding this repair.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.12.2`
+  Status: `pending`
+  Goal: Independently verify private finite validation, serializable snapshots and unchanged recognition execution.
+  Dependencies: .2.12.1 committed cleanly.
+  Acceptance: Cover both signs of infinity and NaN versus valid coordinates, all constructor/setter fields, both progress operands, caller/state atomicity and actual snapshot encoding on supported PUC and LuaJIT. Preserve token lifecycle, rollback/unwind, marks, false payloads and native/reconstructed/generated/emitted consumer behavior. Record a source-to-public domain census; update book/Knowledge and close only after required proof without unmeasured parser-loop or reachability claims.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `LUA-STARTUP-READING.3`
   Status: `pending`
   Goal: Independently close Lua reading and route the remaining supporting-code lanes.
@@ -1113,7 +1146,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.15` | `pending` | Read wire suffix, primary CLI, recognition transaction and its runtime prefix after clean .1.14; preserve all repairs and the parked named-argument direction. |
+| 1 | `LUA-STARTUP-READING.1.16` | `pending` | Read the recognition adapter suffix, scoped binding, scalar numeric, compilation outcome and semantic index prefix after clean .1.15; preserve all repairs and the parked named-argument direction. |
 
 ## Decisions
 
@@ -1131,9 +1164,11 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Blockers
 
-- None for Lua .1.15 after the clean .1.14 commit. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
+- None for Lua .1.16 after the clean .1.15 commit. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
 
 ## Verification Log
+
+- `2026-09-12` .1.15: Lua .1.15 completes wire, primary CLI and recognition transaction reading and reads the runtime adapter prefix in eleven complete windows: 1,500 fragments /51,908 bytes; cumulative 15/51, 18,151 fragments /768,251 bytes. All 99 Lua sources remain baseline-identical; 24 files are fully read. Both installed hosts pass 246 recognition assertions and 30 valid boundary controls each, 552 assertions total; default-environment CLI conformance separately passes 66 cases per host. Nine private non-finite observations per host gain .2.12 repair/proof ownership; stale transaction integration commentary extends .2.1. Neutral recognition validation passes 138 ActionIR rows, 250 calls and 58 mutations with existing governance checks. All twelve Lua repair roots and startup .37.1/.28.7 remain pending. Named-argument direction remains approved and parked under PARSER-AUTHORING-APIS.4. Next .1.16 reads the adapter suffix, scoped binding, scalar numeric, compilation outcome and semantic index prefix under unchanged startup and ADR0118 prerequisites.
 
 - `2026-09-12` .1.14: Lua .1.14 reads the generated module ending, contract runtime, decoded server and wire prefix in twelve complete windows: 1,500 fragments /53,162 bytes; cumulative 14/51, 16,651 fragments /716,343 bytes. All 99 Lua sources remain baseline-identical; 21 files are fully read. Both installed hosts pass 216 decoded, 247 stdio and 33 valid boundary controls each, 992 assertions total. MCP constructor false defaults extend .2.8.7/.8; measured integer-copy loss extends .2.11 without widening request IDs. Admission141 and callable3/9/7 checks pass. Named-argument direction is approved and parked under PARSER-AUTHORING-APIS.4 with four unactivated design/planning children. All eleven Lua repair roots and startup .37.1/.28.7 remain pending; next .1.15 under unchanged startup and ADR0118 prerequisites.
 
@@ -1171,6 +1206,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Commit Log
 
+- `2026-09-12`: `LUA-STARTUP-READING.1.15 - read wire CLI and transactions and own finite state repair` closes the fifteenth reading child from clean 400e3db44.
+
 - `2026-09-12` .1.14: `LUA-STARTUP-READING.1.14 - read MCP runtime and preserve repair and named-call ownership`.
 
 - `2026-09-12` .1.13: `LUA-STARTUP-READING.1.13 - finish generated MCP payload reading and reconciliation`.
@@ -1206,6 +1243,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 - `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` owns creation of this plan.
 
 ## Changelog
+
+- `2026-09-12`: .1.15 completes wire/CLI/transaction reading and reads the runtime prefix; .2.12 owns finite private state/progress and .2.1 the stale integration comment. Reading is 15/51; next .1.16.
 
 - `2026-09-12` .1.14: Read MCP runtime/server boundaries, extend existing option/integer repairs and durably capture approved parked named arguments; advance .1.15 without a product pivot.
 
