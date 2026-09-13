@@ -1740,9 +1740,19 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 ## Current Frontier
 
+Current director update, September13: the former RGX/PGEN no-rebuild restriction
+is cancelled. Normal Cargo builds are authorized; startup .80 retains optional
+freshness/performance repair ownership. Earlier dated reading-closeout evidence
+and its separate verification exceptions remain historical.
+
+Integration .2.1 audits the public callable-selector limitation introduced by
+6308ff4e24. Its three retired-syntax references now join the exact public census,
+and its fenced example explicitly says it is invalid. The full example, measured
+outcomes and pending .2.1.1/.2.1.2 runtime repair remain unchanged.
+
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `BACKEND-INTEGRATION-GUIDES.2.1` | `pending` | Director-authorized temporary integration activity: inventory .0 complete; implement Rust first, then the other backend guides and final proof. Resume `CONFORMANCE-SOURCE-READING.1.35` at its unchanged Scope after .7. |
+| 1 | `BACKEND-INTEGRATION-GUIDES.2.2` | `pending` | Director-authorized integration activity: Rust setup/native consumer passes; add Lispish/deployment, then other guides and final .7. Normal RGX/PGEN builds are authorized. Resume conformance .1.35 afterward. |
 
 ## Decisions
 

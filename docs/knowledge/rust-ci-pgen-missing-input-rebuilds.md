@@ -2,6 +2,8 @@
 id: rust-ci-pgen-missing-input-rebuilds
 title: PGEN watches absent optional parser files during repeated Rust CI builds
 answers:
+  - "may Cargo rebuild RGX and PGEN now"
+  - "is the RGX PGEN no-rebuild requirement still active"
   - "why does PGEN rebuild when its source has not changed"
   - "can LinkedSpec skip RGX and PGEN builds until the submodule revision changes"
   - "which missing PGEN parser inputs cause repeated build-script invalidation"
@@ -10,28 +12,51 @@ answers:
   - "what task owns correct PGEN and RGX build reuse"
   - "what PGEN RGX build lifecycle did the director require"
   - "how much Rust build time was observed during containment 10"
-date: 2026-09-10
-status: director requires build-on-submodule-update lifecycle; implementation and measured reuse remain pending
+date: 2026-09-13
+status: no-rebuild requirement cancelled September13; normal Cargo builds authorized; optional freshness repair remains pending
 tags: [rust, pgen, rgx, cargo, ci, performance, startup]
 evidence: "SESSION-STARTUP-READING.80.0; clean capacity commit bef5dafd; exact build.rs bytes, saved Cargo metadata, eight file observations and eleven completed build stages"
 reverify: "Replay CI_BUILD_REUSE_OBSERVATION below for the dated source and retained evidence. New Cargo fingerprint tracing and controlled warm measurements belong to SESSION-STARTUP-READING.80.1."
 ---
 
-## Director-required build lifecycle — September 10
+## Current director instruction — September 13
 
-The director requires RGX and PGEN to be compiled once following a submodule
-update, with those products reused by ordinary LinkedSpec CI. A LinkedSpec-only
-source or test change must not rebuild either dependency. Startup .80.1-.4 now
-carry this explicit acceptance target; the earlier freshness diagnosis below is
-retained evidence, not the complete solution or an already implemented policy.
+The director explicitly cancels the prohibition on rebuilding RGX/PGEN and asks
+for normal dependency builds to resume. Cargo may compile either dependency when
+its ordinary freshness/configuration checks request it. Do not reject compilation
+or block application/CI work merely to meet the former zero-build requirement.
+Retain local caches and generated sources; unnecessary cleanup is still wasteful.
+This update authorizes builds, not incidental changes to pre-existing nested
+source work or unreviewed dependency pins.
 
-The implementation must separate initial/update preparation from ordinary CI,
-account for the supported artifact configurations and handle missing/incompatible
-products explicitly. Ordinary CI must not quietly fall back to rebuilding them.
-Exact negative compilation controls, update-then-reuse proof and preserved test
-coverage belong to .80.4. Existing nested source/generated work stays untouched.
-The simultaneous engineering-history approval is implemented separately by
-containment .11; it does not itself change Cargo or the CI drivers.
+The September10 build-on-update-only requirement below is historical and has been
+superseded. Startup .80 retains the optional-input freshness diagnosis and a
+potential performance repair, with its acceptance updated to ordinary correct
+Cargo behavior. It is no longer a prerequisite for the integration guides.
+
+## Historical directive — September 10 (superseded)
+
+The earlier instruction required builds once following a submodule update and no
+RGX/PGEN compilation during ordinary LinkedSpec-only CI. It assigned initial/update
+preparation, supported artifact configurations and negative compilation controls
+to startup .80.1-.4. Those mandatory zero-build controls are now cancelled; the
+measured costs and correctness constraints below remain useful evidence.
+
+## Fresh integration observation — September 13
+
+BACKEND-INTEGRATION-GUIDES.2.1 resolved the native example offline against the
+existing lock graph. Cargo1.95.0 fingerprint logging reported absent
+`rgx/subs/pgen/generated/json_parser.rs` as the stale build-script input, then
+propagated dirtiness through PGEN, RGX, core and runtime. A temporary rejecting
+compiler wrapper stopped the requested PGEN library compilation with exit90;
+Cargo exited101. This confirms that exact freshness trigger for this run, not
+every historical rebuild. The director then cancelled the restriction. Subsequent
+verification uses normal Cargo, without that guard. Both accepted integration
+build/run commands pass and compile the full PGEN/RGX/core/runtime/example chain
+in3m12s and4m02s respectively. The four native values match the reference on both
+runs; this is not a warm reuse claim. No nested source/pin edit
+was performed by the diagnosis. Evidence: integration21/build.log under the
+project-local scratch directory; durable task and guide record the result.
 
 ## Observed mechanism and limits
 

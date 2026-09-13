@@ -13,6 +13,14 @@ evidence: "JULIA-STARTUP-READING.3.1; physical checkpoint2c70957a26a4ae6066bc8d8
 reverify: "Run JULIA_READING_COMMIT_AUDIT below; frozen checkpoint identities remain intentional and later legitimate changes require an explicit delta audit."
 ---
 
+## Later director update — September13
+
+The director has cancelled the RGX/PGEN no-rebuild/build-on-update-only
+restriction recorded below. Normal Cargo dependency compilation is authorized;
+startup .80 retains optional freshness/performance repair ownership. The dated
+reading-only evidence and its separate CI exception below remain unchanged.
+
+
 # Historical independent committed-reading audit
 
 All52 bounded source-reading children are committed at checkpoint2c70957a2.

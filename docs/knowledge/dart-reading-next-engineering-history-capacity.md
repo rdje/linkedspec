@@ -13,6 +13,14 @@ evidence: "The required .1.46 engineering-notes draft is 461 lines / 40403 bytes
 reverify: "Historical draft: DART146_ENGINEERING_PROPOSAL. Approved implementation: ENGINEERING_HISTORY_11_ADMISSION and ENGINEERING_HISTORY_11_BOUNDARIES below. Use both roll_document_history.pl --check commands for later live pressure."
 ---
 
+## Later director update — September13
+
+The director has cancelled the RGX/PGEN no-rebuild/build-on-update-only
+restriction recorded below. Normal Cargo dependency compilation is authorized;
+startup .80 retains optional freshness/performance repair ownership. The dated
+reading-only evidence and its separate CI exception below remain unchanged.
+
+
 ## Exact pending proposal
 
 | Control | Current | Proposed |

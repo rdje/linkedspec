@@ -11,8 +11,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-EXPECTED_PUBLIC_FILE_COUNT = 62
-EXPECTED_CLASSIFIED_REFERENCE_COUNT = 32
+EXPECTED_PUBLIC_FILE_COUNT = 63
+EXPECTED_CLASSIFIED_REFERENCE_COUNT = 35
 MIGRATION_GUIDE = "docs/linkedspec-book/src/dsl/values-containers-and-flow-helpers.md"
 MIGRATION_SECTION_START = (
     "The retired aggregate-selector spellings are not current authoring:"

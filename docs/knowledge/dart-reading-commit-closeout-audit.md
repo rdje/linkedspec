@@ -14,6 +14,14 @@ evidence: "DART-STARTUP-READING.3.1 independently checks all 55 child commits at
 reverify: "Run DART_READING_COMMIT_AUDIT below; the frozen checkpoint is intentional, and later source or repair deltas must be reconciled explicitly."
 ---
 
+## Later director update — September13
+
+The director has cancelled the RGX/PGEN no-rebuild/build-on-update-only
+restriction recorded below. Normal Cargo dependency compilation is authorized;
+startup .80 retains optional freshness/performance repair ownership. The dated
+reading-only evidence and its separate CI exception below remain unchanged.
+
+
 # Independent committed-reading evidence
 
 The physical reading checkpoint is `1f8f226f0c34d77e21886ccfc3163c2992359deb`.

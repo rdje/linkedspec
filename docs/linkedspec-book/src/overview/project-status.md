@@ -24,7 +24,7 @@ contrasts. Every executable `.spec` input and every current authoring example re
 The public no-drift checker now requires that unique bounded section, the exact rejected examples, and five ordered
 non-identity mappings whose old side contains a removed one-identifier selector and whose replacement does not.
 Eleven in-memory mutations cover collapse, omission, wrong replacements, selector retention, and reordering. The
-composed proof reports 62 public files / 32 classified historical references / zero current examples, zero
+composed proof reports 63 public files / 35 classified historical references / zero current examples, zero
 executable positives, five backend rejection routes, and capability 90/0/0. This is documentation/governance only;
 the broader current-status audit and parent closeout remain owned by `.23.2`.
 
@@ -176,7 +176,8 @@ for the eight-case accepted subset; `.1.50` now completes the harness and fixtur
 All 12 selected tests and semantic, typed-source and generated-source neutral
 checks pass. Whole-test execution adds no unread source credit or other-backend
 execution claim. That leaf reached 49/55 children, 71,528 fragments / 2,202,029 bytes;
-prior defects and the separate PGEN/RGX build-workflow requirement remain open.
+prior defects remain open. The PGEN/RGX no-rebuild restriction recorded at that
+time was cancelled by the director on September13; normal Cargo builds are authorized.
 
 **Completed child 50 evidence:** emitter, AST,
 loader, parser and validator test files are fully read. The emitted eight-case
@@ -378,8 +379,8 @@ The director authorizes this reading-only closeout under ADR0119 and continued
 read-only startup work. Both exact audit recipes pass again; only the Lua reading
 containers close, and supporting-source reading continues. No canonical CI receipt
 or new full component pass is claimed. All defects and later executable checks
-remain open. The dependency requirement is to reuse compatible RGX/PGEN products
-and avoid unnecessary rebuilds; it does not restrict reading. Full-codebase
+remain open. The director cancelled the RGX/PGEN no-rebuild requirement on
+September13; normal dependency builds and read-only work are authorized. Full-codebase
 reading, formal book reconciliation and policy review remain incomplete.
 Exact evidence and scope: `docs/knowledge/lua-reading-commit-closeout-audit.md`.
 
@@ -511,8 +512,12 @@ and reuse, native APIs, results/errors and packaging. This temporary activity is
 owned by `docs/tasks/BACKEND-INTEGRATION-GUIDES.md`. Its inventory is complete:
 Rust requires RGX/PGEN preparation; Dart has no runtime package dependency; Julia
 uses JSON3 and standard libraries; Lua requires three ABI-matched native modules.
-The guides will distinguish initial setup, reusable products and native result
-values. Rust integration is next; no consumer example is claimed verified yet.
+The [Rust integration guide](../public-api/integration-rust.md) now supplies a
+locked native consumer. Two four-input runs match the reference values and four
+argument-rejection checks pass. Both Cargo commands rebuilt the dependency chain;
+the director has cancelled the no-rebuild restriction. Fresh-checkout preparation
+is not yet claimed. Lispish adaptation and deployment are the next Rust slice;
+the remaining backend guides and final verification stay open.
 Conformance .1.35 remains the return point after the complete guide activity. Existing runtime repairs and
 unread source remain open. The capability guide still has stale
 current census, governance/inventory/public counts and generic-callable wording.
@@ -686,7 +691,7 @@ the remaining descriptor bytes with inline compilation. It does not claim raw
 loaded and inline descriptors are identical.
 
 Fresh cursor governance reports all eight rollout rows complete, 60 rejected
-mutations, 30 public documents, 28 current-claim denials and 74 migration files.
+mutations, 30 public documents, 28 current-claim denials and 75 migration files.
 The prior root-neutral proof retains byte-identical inputs. Older count, source
 identity and staged-guidance statements remain owned for correction. Exact source
 scope, proof limits and reproduction: `docs/knowledge/lua-root-cursor-consumer-reading.md`.
@@ -1331,7 +1336,8 @@ Production validators pass 125 threshold and 54 authorization cases.
 The director also granted one containment `.14` exception for this bounded capacity
 implementation before full codebase reading, using focused proof and normal hooks
 without canonical CI/receipt. Later milestone, repair and push requirements remain;
-dependency build-on-update implementation stays separately owned. Lua source reading
+dependency freshness/performance repair stays separately owned; the earlier
+build-on-update-only restriction was cancelled on September13. Lua source reading
 is 30/51; the next group reads the diagnostic suffix and the owned duplicate-slot
 and gap-capture test ranges.
 The installed-host test failures below remain open.
@@ -2241,6 +2247,7 @@ an unused block. Native, reconstructed, generated-plan and separately included
 emitted modules all retain this gap. For example:
 
 ```text
+# Invalid authored syntax: the retired selector must be rejected.
 items = []
 callback = {|| return(array(items)) }
 return(callback())
@@ -2290,7 +2297,9 @@ and acceptance criteria. The Dart component gate remains failed.
 This one-time reading exception permits no runtime signoff, defect closure,
 dependency rebuild, weakened gate or future verification waiver. Formatting and
 SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` still
-own PGEN/RGX build-on-update behavior. No canonical CI or dependency build ran for
+own optional PGEN/RGX freshness/performance repair. The September13 director update
+separately authorizes normal dependency builds and cancels the former no-rebuild
+restriction. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
 
 Julia has read all 52 exact groups across 95 baseline entries;
@@ -3357,7 +3366,7 @@ entered. Complete Julia is 3,428, shared primary is 65/65 twice, corpus is 105/1
 67/5+3/44 at Julia admission. Lua/LuaJIT public-option removal and composed cursor admission are implemented. The
 cursor consumer passes 119/119 per ABI at its 69/6+2/49 admission boundary. Recurring cursor admission and public
 no-drift now compose Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, selected 5x2x5 primary cases, support ledgers, and
-the current public surface at 74 migration files / 8 complete + 0 pending / 60 rejected mutations after root
+the current public surface at 75 migration files / 8 complete + 0 pending / 60 rejected mutations after root
 README status detail moved to its canonical owners. Run
 `bash tools/check_rule_local_cursor_five_backend.sh` for the exact recurring proof. A separate shared-source root consumer
 executes its exact 15 roles on each ABI: topology RED 3/3x2 becomes 139/139x2, package 177/177x2, primary

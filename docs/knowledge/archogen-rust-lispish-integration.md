@@ -45,6 +45,9 @@ products and Cargo caches on the consumer repository volume. The documented
 bootstrap target is `regex_parser_bootstrap` in PGEN's Rust Makefile. This note
 does not run it or certify a clean consumer bootstrap. Repeated-build remediation
 remains owned by `SESSION-STARTUP-READING.80`; no automatic reuse guarantee is added.
+The September13 director update cancels the no-rebuild prohibition: normal Cargo
+compilation of RGX/PGEN is authorized. This performance repair does not block the
+integration guides, and existing dependency sources/pins remain untouched.
 The current local RGX/PGEN manifests declare Rust 1.95. The older README 1.85
 claim and actual compiler support proof remain owned by startup .41.7; see
 [[rust-build-requirements-documentation-gap]].

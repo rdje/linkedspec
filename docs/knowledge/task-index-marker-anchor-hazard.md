@@ -2,6 +2,7 @@
 id: task-index-marker-anchor-hazard
 title: Immutable closeout markers anchored in the mutable task-index row cause avoidable canonical restarts
 answers:
+  - "which checker mirrors the cursor migration census in the stable task index marker"
   - "why did the repeated-action checker fail after updating docs TASK_TREE"
   - "which marker must survive FUTURE-PARITY-BACKLOG active row rewrites"
   - "why does canonical CI keep losing the repeated-action closeout marker"
@@ -35,3 +36,16 @@ The paired historical handoff coupling is also removed from bounded memory. The 
 validates `FUTURE-PARITY-BACKLOG.10.1` as the durable next owner in its immutable task-tree evidence, but it no
 longer searches overwrite-only `MEMORY.md`. Earlier failures in `.10.5.3.1`, Julia `.14.4.5`, and
 `INTER-MATCH-GAP-CAPTURE.2.1` remain useful root-cause history; they no longer prescribe a current-memory guard.
+
+
+## Legitimate census growth — September13
+
+The closed cursor marker also contains the current migration-file census.
+BACKEND-INTEGRATION-GUIDES.2.1 adds its guide to that inventory, advancing 74 to 75.
+The same current count must change in the cursor contract/checker, the stable
+Task Tree marker and tools/check_task_tree_closed_capability_markers.py. Its
+second canonical attempt exposed the missed latter mirror before any commit.
+Update that one constant; do not remove the stable marker or move it into a
+mutable frontier. The eight families, twelve markers, fifteen consumers and
+closed rollout remain unchanged. Current fact and public census owners move
+together, while dated ADR0067 and architecture chronology retain their old counts.

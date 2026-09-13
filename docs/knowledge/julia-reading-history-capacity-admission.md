@@ -17,6 +17,14 @@ reverify:
   - "perl tools/roll_document_history.pl --surface engineering_notes --check"
 ---
 
+## Later director update — September13
+
+The director has cancelled the RGX/PGEN no-rebuild/build-on-update-only
+restriction recorded below. Normal Cargo dependency compilation is authorized;
+startup .80 retains optional freshness/performance repair ownership. The dated
+reading-only evidence and its separate CI exception below remain unchanged.
+
+
 # Approved finite allowance
 
 ADR0115 admits four archive slots per history: change_history files 32→36,

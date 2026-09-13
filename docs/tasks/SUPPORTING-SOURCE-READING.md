@@ -477,7 +477,7 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `BACKEND-INTEGRATION-GUIDES.2.1` | `pending` | Director-authorized temporary integration activity: inventory .0 complete; implement Rust first, then the other backend guides and final proof. Resume `CONFORMANCE-SOURCE-READING.1.35` at its unchanged Scope after .7. |
+| 1 | `BACKEND-INTEGRATION-GUIDES.2.2` | `pending` | Director-authorized integration activity: Rust setup/native consumer passes; add Lispish/deployment, then other guides and final .7. Normal RGX/PGEN builds are authorized. Resume conformance .1.35 afterward. |
 
 ## Decisions
 

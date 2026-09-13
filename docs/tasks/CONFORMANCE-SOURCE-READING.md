@@ -1806,9 +1806,19 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Current Frontier
 
+Integration .2.1 intentionally updates the already-read cursor contract inventory
+from74 to75 for its new public guide, plus current marker mirrors in the checker.
+Original reading windows and counters remain historical and unchanged; the
+post-activity source-delta audit must retain this explicit documentation-only delta.
+The same integration leaf updates the mutation public-file census63->64 and
+selector public-file census62->63. It classifies three existing Julia limitation
+references (32->35 total) with one invalid-example comment; runtime contracts and
+the existing Julia repair remain unchanged. Preserve these checker-only deltas
+in the later tooling/source audit without rewriting historical reading evidence.
+
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `BACKEND-INTEGRATION-GUIDES.2.1` | `pending` | Director-authorized temporary integration activity: inventory .0 complete; implement Rust first, then the other backend guides and final proof. Resume `CONFORMANCE-SOURCE-READING.1.35` at its unchanged Scope after .7. |
+| 1 | `BACKEND-INTEGRATION-GUIDES.2.2` | `pending` | Director-authorized integration activity: Rust setup/native consumer passes; add Lispish/deployment, then other guides and final .7. Normal RGX/PGEN builds are authorized. Resume conformance .1.35 afterward. |
 
 ## Decisions
 

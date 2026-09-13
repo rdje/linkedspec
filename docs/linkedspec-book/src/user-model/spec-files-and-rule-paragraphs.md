@@ -60,7 +60,7 @@ admission are now complete under `.9.1.7` and `.9.1.1.2.5.3`. One exact shared-s
 139/139 on each ABI, package 177/177x2, primary 65/65x4, and corpus 105/105x2. Markerless execution is implemented
 and final recurring/public no-drift closes rollout at 7 complete / 0 pending. Run
 `bash tools/check_root_rule_selection_five_backend.sh` for the composed six-runtime and selected-primary proof.
-Cursor public no-drift is separately closed at 74 migration files, 8 complete / 0 pending, and 60 rejected
+Cursor public no-drift is separately closed at 75 migration files, 8 complete / 0 pending, and 60 rejected
 mutations; rule-local cursor behavior is defined by authored family, not a caller option.
 
 ### Reading the match: `entry_*` versus `match_*` on a top rule

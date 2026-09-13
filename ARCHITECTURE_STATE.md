@@ -1,5 +1,9 @@
 # ARCHITECTURE STATE
 
+Current cursor inventory, September13: the Rust integration guide adds one public
+documentation path. The ledger is now 75 migration files / 8 complete + 0 pending / 60 mutations;
+runtime behavior and earlier dated admission evidence below remain unchanged.
+
 ## Nested-write and receiver-mutation capabilities are portable
 
 `FUTURE-PARITY-BACKLOG.19.7` admits `language.nested_write_vivification` and

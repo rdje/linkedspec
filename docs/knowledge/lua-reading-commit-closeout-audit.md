@@ -16,6 +16,14 @@ evidence: "LUA-STARTUP-READING.3.1; physical checkpoint 7ead9e003b2cfb1bb356f990
 reverify: "Run LUA_READING_COMMIT_AUDIT, then LUA_READING_VALIDATION_BOUNDARIES below. The second recipe checks retained artifacts; it runs no Lua tests, excluded native regex case, Cargo build or canonical gate."
 ---
 
+## Later director update — September13
+
+The director has cancelled the RGX/PGEN no-rebuild/build-on-update-only
+restriction recorded below. Normal Cargo dependency compilation is authorized;
+startup .80 retains optional freshness/performance repair ownership. The dated
+reading-only evidence and its separate CI exception below remain unchanged.
+
+
 ## September 13 director disposition
 
 After reviewing the exact proposal and its explanation, the director authorizes

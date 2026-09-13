@@ -17,6 +17,14 @@ reverify:
   - "Run both recipes in docs/knowledge/lua-startup-reading-coverage.md for source identity and exact comparable growth."
 ---
 
+## Later director update — September13
+
+The director has cancelled the RGX/PGEN no-rebuild/build-on-update-only
+restriction recorded below. Normal Cargo dependency compilation is authorized;
+startup .80 retains optional freshness/performance repair ownership. The dated
+reading-only evidence and its separate CI exception below remain unchanged.
+
+
 # Reviewable proposal
 
 Approve the following eleven scalar changes for the complete Lua source-reading

@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `00f9783a1e4b625bc251a3e260ef1eef60c35888` — clean integration-inventory activation.
-- latest_completed_leaf: `BACKEND-INTEGRATION-GUIDES.0 - inventory native integration setup and guide ownership`; five backend setup/API paths and canonical destinations; source/runtime bytes unchanged.
-- active_work_unit: `BACKEND-INTEGRATION-GUIDES.2.1` — Rust integration guide and native consumer.
-- next_action: Activate BACKEND-INTEGRATION-GUIDES.2.1 from clean HEAD. Implement and verify Rust submodule/Cargo/native-loader guidance and its runnable consumer, explicitly separating first preparation from compatible RGX/PGEN reuse. Follow the inventory card and task acceptance; commit each completed leaf. Complete all five guides and final .7, then resume CONFORMANCE-SOURCE-READING.1.35 at its unchanged Scope.
+- activation_commit: `4d32e895e08a9b1784f5ebcc384c72f577799338` — clean Rust integration activation.
+- latest_completed_leaf: `BACKEND-INTEGRATION-GUIDES.2.1 - document and verify native Rust integration`; native setup/example and normal Cargo builds verified.
+- active_work_unit: `BACKEND-INTEGRATION-GUIDES.2.2` — Rust Lispish, failures and deployment.
+- next_action: Activate BACKEND-INTEGRATION-GUIDES.2.2 from clean HEAD. Verify the complete Rust/Lispish file-integration guide, domain adapter, failures, clean pinned-source preparation and outside-cwd deployment. Normal RGX/PGEN builds are authorized. The director requests an early clean push of that verified Rust checkpoint and notification of its commit, then the other backend guides and final .7. Resume CONFORMANCE-SOURCE-READING.1.35 afterward.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; completed inventory and exact return point are committed at Git HEAD; no background result remains.
-- blockers: none for the authorized integration guide activity. Existing dependency-reuse/toolchain/ABI limits have owners; conformance .1.35 and remaining startup reading stay pending.
+- in_flight_uncommitted: none; completed Rust setup/example and director update are committed at Git HEAD; no background result remains.
+- blockers: none for the authorized integration guide activity. Normal RGX/PGEN builds are authorized; fresh-clone, other-backend and final canonical proof remain required at their owning leaves.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -42,7 +42,7 @@
 - current_map_leaves_scope_resolution: option A preserves pure functions. Helper-mediated rejection uses inline
   explicit-target `set(tree, ...)`; post-commit receiver-write proof uses caller-scoped `.with()`. No implicit
   caller capture or arbitrary user-defined bang method is admitted.
-- current_mutation_public_no_drift: `.19.9` closes 63 public Markdown files / 14 governed documents / eleven
+- current_mutation_public_no_drift: `.19.9` closes public no-drift; current inventory is 64 Markdown files / 14 governed documents / eleven
   authority-bound example classes / ten stale-current denials / 50 isolated public-checker mutations. Capability
   governance independently pins the owner and exact-one CI registration through four mutations.
 - current_core_state: typed source is 14/0/231; recognition 138/250/58; progressive 9/9/116 plus public
@@ -55,6 +55,6 @@
   Lua .1.46 rollover preserves exact history as segment4976-8f23f4b6bde6; current manifest is 18678 bytes /31 lines, collection 32 files including hot root; other limits remain unchanged.
 - current_change_history_capacity: ADR0118 admits 38 files /37 manifest lines /21071 manifest bytes; current collection uses 37 files /36 manifest lines /20495 manifest bytes.
   Conformance .1.4 preserves clean baaebc8e CHANGES242-457 as segment4976-6d1dd54d605a:216 lines/18973 bytes; all earlier archive records and controls remain exact. Proportionate governance: ADR0115.
-- current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
-  Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
+- current_ci_build_reuse: September13 director update cancels the RGX/PGEN no-rebuild requirement. Normal Cargo builds are authorized, including either dependency; retain caches.
+  Startup .80.1-.4 now own optional freshness/performance improvements, not a mandatory zero-build lifecycle or integration-guide prerequisite.
 - latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; five backend lanes and supporting .3.7 closed. Conformance34/143 reads45038 fragments/1353523 bytes;109 groups remain, including conformance tests and four decoded Unicode inputs. Later .3.9-.3.11, formal book .4 and policy .5 remain; no runtime repair closes.

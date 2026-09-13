@@ -10,6 +10,16 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — BACKEND-INTEGRATION-GUIDES.2.1 - document and verify native Rust integration
+
+The new examples/integration/rust application depends directly on the runtime crate and compiles the shared word grammar once. The direct-value API returns the grammar array without a legacy accumulator wrapper. The child regex supplies entry_group(0); a regex stored only on the entered root does not create a dispatch loop. Cargo owns the full native dependency graph.
+
+The director cancels the RGX/PGEN no-rebuild requirement. Current pointers, startup .80 acceptance and canonical Knowledge now authorize normal dependency compilation while retaining caches and protecting nested source/pins. Dated no-build evidence remains historical. The guarded missing-json watch diagnosis remains a performance finding; prepared-checkout success is not fresh-clone proof. PASS offline locked 200-package resolution with every manifest under the repository; Rust1.95.0 builds in3m12s and4m02s, both compiling PGEN/RGX/core/runtime/example. Two native four-value runs match the independent four-value Perl oracle; four usage/non-UTF-8 rejections exit1 with empty stdout. Rustfmt passes. Present generated EBNF/regex sources were retained; no fresh-clone/bootstrap proof is claimed. The new consumer Cargo.lock requires canonical tier; exact staged receipt-bound CI governs this commit. Earlier guard rejection and unsuccessful retained-library link are diagnostic failures, superseded by the successful normal Cargo builds.
+
+The canonical cursor check also requires registering the new guide link: one public migration path and current census74->75, preserving all behavior,8 rollout legs and60 mutations. Exact contract projection and the offline checker pass; dated history remains unchanged.
+
+Every new book page also changes the mutation and selector public inventories, which include different fixed root files. Their current counts are64 and63. Selector preflight exposes three already-present Julia limitation references from6308ff4e24; the fenced example needs its own invalid/retired label because the classifier stops at paragraph boundaries. Preserve that example and runtime repair, classify35 references, and keep all semantic authorities and checker logic unchanged. Focused checks pass mutation50, selector11, capability100/0/0 and the remaining documentation contracts; audit these census deltas after the integration activity without changing historical reading credit.
+
 ## 2026-09-13 — BACKEND-INTEGRATION-GUIDES.0 — native integration inventory
 
 Integration onboarding needs five distinct setup paths and one canonical content route. The inventory records Cargo/PGEN preparation, Dart package wiring, Julia depot/module setup, Lua ABI products and Perl native loading. Keep initial preparation separate from routine reuse; source/contract chapters remain canonical. Installed version identity does not prove minimum support or a consumer build. Guide and example destinations are explicit, Rust is next, and conformance .1.35 remains the return point.

@@ -10,6 +10,16 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — BACKEND-INTEGRATION-GUIDES.2.1 - document and verify native Rust integration
+
+Rust integration setup and native consumer .2.1 are verified: locked offline Cargo resolution, two native runs with four exact values each, an independent Perl oracle and four argument rejections pass. Normal Cargo rebuilt PGEN/RGX automatically; the director cancelled the no-rebuild requirement, so .80 remains performance repair rather than an integration prerequisite. The guide covers submodule/Cargo wiring and local storage; fresh-clone preparation remains unclaimed. Rust Lispish/deployment .2.2 is next. Complete all five guides and .7, then return to conformance .1.35; reading remains34/143 and84 complete files.
+
+PASS offline locked 200-package resolution with every manifest under the repository; Rust1.95.0 builds in3m12s and4m02s, both compiling PGEN/RGX/core/runtime/example. Two native four-value runs match the independent four-value Perl oracle; four usage/non-UTF-8 rejections exit1 with empty stdout. Rustfmt passes. Present generated EBNF/regex sources were retained; no fresh-clone/bootstrap proof is claimed. The new consumer Cargo.lock requires canonical tier; exact staged receipt-bound CI governs this commit. Earlier guard rejection and unsuccessful retained-library link are diagnostic failures, superseded by the successful normal Cargo builds.
+
+The canonical cursor check also requires registering the new guide link: one public migration path and current census74->75, preserving all behavior,8 rollout legs and60 mutations. Exact contract projection and the offline checker pass; dated history remains unchanged.
+
+The remaining public preflight reconciles the same page in mutation64-file and selector63-file inventories. Three existing Julia limitation references from6308ff4e24 raise the classified count32->35; an explicit invalid/retired comment preserves its full example and open repair. PASS mutation50 and selector11 contrast mutations, composed capability100/0/0, generated-source, native-resolution and language-coverage checks. All three mutation authorities and all classifier logic remain exact; canonical landing remains required.
+
 ## 2026-09-13 — BACKEND-INTEGRATION-GUIDES.0 — native integration inventory
 
 Integration guide inventory .0 is complete: five native setup/value paths, six complete storage/build wrappers and installed tool identities are reconciled without a consumer or dependency build. Common and five backend page/example destinations preserve one semantic owner. Rust .2.1 is next, followed by the remaining guide lanes and final verification. The director-authorized temporary activity returns to CONFORMANCE-SOURCE-READING.1.35; paused reading remains34/143,45038 fragments/1353523 bytes and84 complete files. Existing repairs and missing ABI proof remain open.

@@ -7,8 +7,9 @@ answers:
   - where will the integration guides and executable consumer examples live
   - how do native integration callers obtain direct parser values
   - which runtime versions were observed for integration guide preparation
+  - how was the standalone Rust integration example verified
 date: 2026-09-13
-status: integration inventory complete; guide and executable consumer delivery pending
+status: inventory and Rust setup/native consumer verified; Lispish/deployment and other guides pending
 tags: [integration, documentation, perl, rust, dart, julia, lua]
 evidence: "BACKEND-INTEGRATION-GUIDES.0, activation 00f9783a1e4b625bc251a3e260ef1eef60c35888. Canonical Knowledge, ADR0040, companion tree, manifests, six complete setup scripts and native loader/result seams inspected. Managed version commands and read-only pkg-config identities consumed with exit0; no compiler, dependency preparation or consumer execution ran."
 reverify: "Inspect the exact sources in the matrix below. Version-only commands: bash tools/run_cargo_local.sh --version; bash tools/run_dart_project_data.sh --version; bash tools/run_julia_project_data.sh --project=julia --version; bash tools/project_data_run.sh perl -e 'printf qq{Perl %vd\\n}, $^V'; bash tools/project_data_run.sh lua -v; bash tools/project_data_run.sh luajit -v; bash tools/project_data_run.sh pkg-config --modversion lua luajit libpcre2-8. These commands establish installed identity, not consumer support or a passing backend suite."
@@ -53,16 +54,18 @@ access; no toolchain installation or external project-data write occurred.
 
 Existing owners remain authoritative:
 
-- startup .80: RGX/PGEN ordinary-build reuse and required initial/update preparation;
+- startup .80: optional-file freshness/performance repair; former no-rebuild requirement cancelled September13;
 - startup .41.7: Rust README1.85 contradiction with required local Rust1.95 declarations;
 - Lua .2.2: declared PUC5.4 target versus measured PUC5.5.1/header selection;
 - Lua .2.3: invalid-regex formatter failure; no excluded malformed-regex or unfiltered Lua gate;
 - legacy Lispish facts: historical head/tail representation and dated Perl multi-form/no-progress findings.
 
 Rust-first delivery addresses the motivating ARCHOGEN question. A Cargo consumer
-must not silently rebuild unchanged RGX/PGEN to manufacture a warm-run claim.
-Measure or reject that boundary explicitly. A missing compatible product may
-require initial preparation; repeated-build defects keep their existing owner.
+must report actual Cargo behavior rather than manufacture a warm-run claim.
+The director cancelled the no-rebuild requirement on September13: ordinary
+RGX/PGEN builds are authorized and must not be blocked by a compiler guard.
+Retain caches; the optional-file freshness repair keeps its existing owner and
+is no longer a prerequisite for these guides.
 
 ## Exact content destinations and ownership
 
@@ -70,7 +73,8 @@ Create the common entry at
 `docs/linkedspec-book/src/public-api/integration.md` and backend guides at
 `docs/linkedspec-book/src/public-api/integration-perl.md`, `integration-rust.md`,
 `integration-dart.md`, `integration-julia.md`, and `integration-lua.md` in that
-same directory. These are planned paths, not currently delivered pages.
+same directory. The Rust page and native word consumer are delivered by .2.1;
+the other pages remain planned until their owning leaves land.
 Add navigation through SUMMARY.md and the existing backend landing pages.
 
 Runnable sources belong under `examples/integration/`, with shared grammar/input
@@ -114,3 +118,64 @@ Related facts: [[archogen-rust-lispish-integration]], [[backend-companion-book-a
 [[rust-native-spec-resolution]], [[rust-project-data-ssd-storage]],
 [[dart-project-data-ssd-storage]], [[julia-project-data-ssd-storage]],
 [[lua-project-data-ssd-storage]], [[lua-native-readme-and-action-ast-reading]].
+
+## Rust native consumer — September13, integration .2.1
+
+`examples/integration/rust/Cargo.toml` is a standalone application manifest with a
+path dependency on the real runtime crate and a checked-in lockfile. Cargo1.95.0
+resolves200 packages; all manifest paths, including registry packages, lie below
+the current repository root. Rustc1.95.0 compiles the consumer with its native
+loading pipeline and direct-value API. One engine parses four independent inputs.
+The word grammar dispatches to a regex-bearing child; entering a root alone does
+not match that root's stored regex. Native values match the independent
+LinkedSpec::Get reference: ["alpha"], ["Beta"], [], ["alpha","rest"].
+
+Both normal Cargo build/run commands pass. The first build reports3m12s and the
+repeat4m02s; each compiles PGEN, RGX, core, runtime and the example. This is actual
+rebuilding, not a warm dependency-reuse claim. The director explicitly cancelled
+the no-rebuild requirement during this leaf. The earlier guard rejected PGEN
+compilation, and a narrower retained-library link failed for a missing PGEN rlib;
+neither failed diagnostic is successful consumer evidence. The later normal
+Cargo-built binary and repeat command provide the accepted native proof.
+
+Four argument rejections pass: missing grammar, missing input, non-UTF-8 grammar
+path and non-UTF-8 input. Each returns exit1 with empty stdout and its expected
+message. The prepared checkout already had generated EBNF/regex inputs; this
+leaf does not verify fresh recursive clone/bootstrap, Lispish adaptation,
+outside-cwd deployment or other backends. Those remain explicit activity
+criteria. The checked-in Cargo.lock mechanically requires canonical verification;
+the exact staged CI receipt governs .2.1 landing, in addition to its native proof. No backend source, dependency source/pin or shared build
+wrapper was edited.
+
+Replay from the repository root, using the managed Cargo environment:
+
+```sh
+bash tools/run_cargo_local.sh metadata --offline --locked --format-version 1 \
+  --manifest-path examples/integration/rust/Cargo.toml
+bash tools/run_cargo_local.sh run --offline --locked \
+  --manifest-path examples/integration/rust/Cargo.toml -- \
+  examples/integration/word.spec alpha Beta 123 '123 alpha rest'
+```
+
+A second normal run must reproduce the four values; record whether Cargo rebuilds.
+Exact local evidence is under `.linkedspec-data/scratch/backend-integration21/`:
+`verification.json`, `build-authorized.log`, `repeat-cargo.log`, and native JSONL
+outputs. The runnable source and expected values are also in the public guide,
+so they remain reviewable without relying on retained scratch.
+
+The first canonical attempt rejected the new guide as an unowned cursor-inventory
+path because its chapter link contains a scanned migration token. The same .2.1
+leaf registers that path and the matching current census markers; the inventory
+is now 75 while 8 rollout legs and 60 mutations remain unchanged. Exact contract
+projection and the offline checker pass. Historical ADR/snapshots are preserved;
+this documentation delta gives no additional startup source-reading credit.
+
+Remaining public preflight also reviews this one page for mutation64-file and
+selector63-file inventories. The selector scan exposes three existing mentions
+in the Julia callable-validation limitation from6308ff4e24. Its fenced example
+now explicitly labels the retired syntax invalid, while the full example and
+open Julia repair remain intact. The reference census is35; the fourteen mutation
+documents, eleven semantic examples, fifty mutation cases, five selector contrasts
+and eleven contrast mutations remain unchanged. The generated-source, native
+resolution and language-coverage checks pass. Exact semantic contracts stay
+byte-identical; final receipt-bound canonical verification still governs landing.

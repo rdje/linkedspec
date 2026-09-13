@@ -23,6 +23,19 @@ evidence_update_2026_07_29_readme_routing: "README-STABILITY-POLICY.1 removes vo
 reverify: "bash tools/check_rule_local_cursor_five_backend.sh"
 ---
 
+## Current inventory update — September13
+
+BACKEND-INTEGRATION-GUIDES.2.1 adds the Rust integration guide, whose link to the
+parse-mode-named book chapter is itself a scanned migration token. Register that
+one path under public_no_drift: the current ledger is 75 migration files / 8 complete + 0 pending / 60 mutations.
+Ten current-document census markers and their exact contract/checker mirrors
+advance from 74 to 75. The dated ADR0067 snapshot and earlier evidence stay unchanged.
+The offline checker passes 36 family spellings, 18 edges, 8 parent/child cases,
+30 public documents, 28 forbidden claims and 60 drift mutations. The exact JSON
+delta preserves all non-census semantics, rollout rows and test cases. This is
+new documentation ownership, not a new runtime admission or source-reading credit.
+
+
 # Recurring rule-local cursor admission
 
 The final backend implementation already existed before this leaf. The recurring gate adds no cursor resolver,
@@ -34,7 +47,7 @@ The six runtime legs are Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. The selec
 `trace_stdout_medium`, run across all five commands with `POSIXLY_CORRECT` unset and set.
 
 `recurring_five_backend_gate` and `public_no_drift` are complete. The current cursor ledger is
-74 migration files / 8 complete + 0 pending / 60 mutations. Explicit repeated-OR action-result shape remains
+75 migration files / 8 complete + 0 pending / 60 mutations. Explicit repeated-OR action-result shape remains
 separately owned by `FUTURE-PARITY-BACKLOG.9.1.10` and does not reopen cursor admission.
 
 Related: [[rule-local-cursor-neutral-contract]], [[rule-local-cursor-and-bare-edge-contract]],

@@ -18,6 +18,19 @@ evidence_update_2026_08_30_mdbook_reconciliation: "FUTURE-PARITY-BACKLOG.23.2 ad
 reverify: "bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py; bash tools/check_rule_local_cursor_five_backend.sh"
 ---
 
+## Current inventory update — September13
+
+BACKEND-INTEGRATION-GUIDES.2.1 adds the Rust integration guide, whose link to the
+parse-mode-named book chapter is itself a scanned migration token. Register that
+one path under public_no_drift: the current ledger is 75 migration files / 8 complete + 0 pending / 60 mutations.
+Ten current-document census markers and their exact contract/checker mirrors
+advance from 74 to 75. The dated ADR0067 snapshot and earlier evidence stay unchanged.
+The offline checker passes 36 family spellings, 18 edges, 8 parent/child cases,
+30 public documents, 28 forbidden claims and 60 drift mutations. The exact JSON
+delta preserves all non-census semantics, rollout rows and test cases. This is
+new documentation ownership, not a new runtime admission or source-reading credit.
+
+
 Public no-drift is an executable documentation contract, not a prose-only signoff. Each governed current surface
 must carry its required rule-local markers, and exact obsolete guidance is denied so that removed caller-global
 cursor controls cannot silently return to examples, API lists, help guidance, status ledgers, or the mdBook.

@@ -4457,7 +4457,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Acceptance: Diagnose exact Cargo freshness reasons, repair unnecessary optional-input watches, assess recurring
     target retention, and measure unchanged warm runs plus valid rebuild controls. Preserve the required
     PGEN → RGX → LinkedSpec dependency chain and existing nested work. Startup latency is separately owned by .81.
-  Director direction (2026-09-10): RGX and its PGEN dependency are submodules; build them once following a submodule update and reuse those products during ordinary LinkedSpec CI. LinkedSpec-only source/test changes must not rebuild either dependency. This is the required target lifecycle, not an implemented property of the current gate. Preserve the existing PGEN→RGX→LinkedSpec chain and all nested work; .80.1-.4 own diagnosis, implementation and proof.
+  Current director direction (2026-09-13): The prior September10 build-on-update-only/no-rebuild requirement is cancelled. Resume normal Cargo builds, including RGX/PGEN compilation whenever Cargo requests it. Retain caches, preserve nested source/pin work and measure actual rebuild causes. This performance repair is no longer an integration-guide prerequisite; .80.1-.4 retain correctness and optimization work without a mandatory zero-build lifecycle.
 
 
 - ID: `SESSION-STARTUP-READING.80.0`
@@ -4494,7 +4494,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     distinguish ordinary/progressive graphs, fresh emitted callers, optional disposable targets and relocation.
     Measure build, compiler/loader wait, test startup and execution separately. Preserve all existing artifacts
     and nested source work; the observed missing watches are not proof that every rebuild has the same cause.
-  Direction refinement (2026-09-10): Identify every ordinary-CI dependency compilation and the exact prebuilt artifacts/configurations needed to eliminate it. Separate the explicit initial/update build from ordinary verification; record requirements for missing or incompatible prebuilt artifacts without silently adding dependency builds to ordinary CI.
+  Direction update (2026-09-13): Measure actual ordinary-CI dependency compilation and compatible artifact configurations. Normal missing/incompatible-product builds are authorized; the earlier mandatory prohibition is cancelled. Integration .2.1 provides a fresh exact optional-json-file fingerprint observation, without closing this broader baseline.
 
 
 - ID: `SESSION-STARTUP-READING.80.2`
@@ -4507,7 +4507,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     compiler/profile/features/flags invalidation and the normal dependency chain. Prove repeated warm reuse.
     Own upstream changes and pin integration explicitly; preserve pre-existing nested work without staging it
     incidentally. No fake parser stubs, warning suppression, hand-edited fingerprints or freshness bypass.
-  Direction refinement (2026-09-10): The acceptance target is one explicit PGEN/RGX build after the submodule update, then reuse during LinkedSpec-only work. Repair optional-input watches only if the measured mechanism requires it; do not equate watch repair with complete lifecycle enforcement. Any upstream source/pin change remains separately reviewed and preserves existing nested work.
+  Direction update (2026-09-13): Correct only measured unnecessary invalidation; normal Cargo builds remain permitted before and after repair. There is no mandatory build-on-update-only lifecycle to enforce. Any upstream source/pin change remains separately reviewed and preserves existing nested work.
 
 
 - ID: `SESSION-STARTUP-READING.80.3`
@@ -4518,7 +4518,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     If beneficial, retain compatible repository-derived dependency artifacts while keeping fresh caller fixtures
     and deliberate isolation/relocation proof exact. Preserve same-volume storage, ownership and cleanup safety.
     Close not-required only with evidence; do not attribute the main gate's rebuilds to these optional drivers.
-  Direction refinement (2026-09-10): Recurring caller/test work must reuse the prepared PGEN/RGX products instead of repeatedly creating dependency builds. Preserve intentional isolation tests with explicit preparation and clear ownership; ordinary CI must not silently rebuild a missing dependency cache.
+  Direction update (2026-09-13): Assess retention as a performance improvement while preserving intentional isolation, preparation and ownership. Normal dependency rebuilds, including recovery from a missing compatible cache, are authorized; no negative compiler guard is required.
 
 
 - ID: `SESSION-STARTUP-READING.80.4`
@@ -4529,7 +4529,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     staged canonical gate. Account for remaining compile/startup/test costs, all flags and intentional cold
     proofs; update book and operational guidance with measured results. Parent .80 closes only after its
     implementation and verification are complete; the independent .81 investigation keeps its own status.
-  Direction refinement (2026-09-10): Prove that repeated ordinary CI and a LinkedSpec-only edit compile neither PGEN nor RGX; prove an actual submodule update prepares the required dependency products once and the following run reuses them. Keep initial setup and incompatible-artifact handling explicit, maintain verification coverage, and document measured behavior before claiming the directive implemented.
+  Direction update (2026-09-13): Report measured cold/warm and valid-invalidation behavior with unchanged correctness coverage. The mandatory proof of zero RGX/PGEN compilation and build-on-update-only enforcement is cancelled. Ordinary Cargo rebuilds are authorized; do not claim reuse when compilation actually occurred.
 
 
 - ID: `SESSION-STARTUP-READING.81`
@@ -4641,7 +4641,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `BACKEND-INTEGRATION-GUIDES.2.1` | `pending` | Director-authorized temporary integration activity: inventory .0 complete; implement Rust first, then the other backend guides and final proof. Resume `CONFORMANCE-SOURCE-READING.1.35` at its unchanged Scope after .7. |
+| 1 | `BACKEND-INTEGRATION-GUIDES.2.2` | `pending` | Director-authorized integration activity: Rust setup/native consumer passes; add Lispish/deployment, then other guides and final .7. Normal RGX/PGEN builds are authorized. Resume conformance .1.35 afterward. |
 
 ## Reading Ledger
 

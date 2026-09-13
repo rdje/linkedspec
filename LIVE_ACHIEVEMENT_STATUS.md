@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl, Rust, Dart and Julia reading are complete. Canonical capacity admission is complete at a67a18bf. Integration guide inventory .0 is complete: five native setup/value paths, six complete storage/build wrappers and installed tool identities are reconciled without a consumer or dependency build. Common and five backend page/example destinations preserve one semantic owner. Rust .2.1 is next, followed by the remaining guide lanes and final verification. The director-authorized temporary activity returns to CONFORMANCE-SOURCE-READING.1.35; paused reading remains34/143,45038 fragments/1353523 bytes and84 complete files. Existing repairs and missing ABI proof remain open. Dart reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl, Rust, Dart and Julia reading are complete. Canonical capacity admission is complete at a67a18bf. Rust integration setup and native consumer .2.1 are verified: locked offline Cargo resolution, two native runs with four exact values each, an independent Perl oracle and four argument rejections pass. Normal Cargo rebuilt PGEN/RGX automatically; the director cancelled the no-rebuild requirement, so .80 remains performance repair rather than an integration prerequisite. The guide covers submodule/Cargo wiring and local storage; fresh-clone preparation remains unclaimed. Rust Lispish/deployment .2.2 is next. Complete all five guides and .7, then return to conformance .1.35; reading remains34/143 and84 complete files. Dart reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The September13 director update cancels the RGX/PGEN no-rebuild restriction; normal Cargo builds are authorized, while .80 retains performance repair ownership. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.82` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `BACKEND-INTEGRATION-GUIDES.0 - inventory native integration setup and guide ownership` — Integration guide inventory .0 is complete: five native setup/value paths, six complete storage/build wrappers and installed tool identities are reconciled without a consumer or dependency build. Common and five backend page/example destinations preserve one semantic owner. Rust .2.1 is next, followed by the remaining guide lanes and final verification. The director-authorized temporary activity returns to CONFORMANCE-SOURCE-READING.1.35; paused reading remains34/143,45038 fragments/1353523 bytes and84 complete files. Existing repairs and missing ABI proof remain open.
+- `BACKEND-INTEGRATION-GUIDES.2.1 - document and verify native Rust integration` — Rust integration setup and native consumer .2.1 are verified: locked offline Cargo resolution, two native runs with four exact values each, an independent Perl oracle and four argument rejections pass. Normal Cargo rebuilt PGEN/RGX automatically; the director cancelled the no-rebuild requirement, so .80 remains performance repair rather than an integration prerequisite. The guide covers submodule/Cargo wiring and local storage; fresh-clone preparation remains unclaimed. Rust Lispish/deployment .2.2 is next. Complete all five guides and .7, then return to conformance .1.35; reading remains34/143 and84 complete files.
 
 ## Next Action
 
-- `BACKEND-INTEGRATION-GUIDES.2.1` — Activate BACKEND-INTEGRATION-GUIDES.2.1 from clean HEAD. Implement and verify Rust submodule/Cargo/native-loader guidance and its runnable consumer, explicitly separating first preparation from compatible RGX/PGEN reuse. Follow the inventory card and task acceptance; commit each completed leaf. Complete all five guides and final .7, then resume CONFORMANCE-SOURCE-READING.1.35 at its unchanged Scope.
+- `BACKEND-INTEGRATION-GUIDES.2.2` — Verify the complete Rust/Lispish file-integration guide, domain adapter, failures, clean pinned-source preparation and outside-cwd deployment. Normal RGX/PGEN builds are authorized. The director requests an early clean push of that verified Rust checkpoint and notification of its commit, then the other backend guides and final .7. Resume CONFORMANCE-SOURCE-READING.1.35 afterward.
 
 ## Recent Completions
+
+- `2026-09-13` — `BACKEND-INTEGRATION-GUIDES.2.1` delivers Rust native setup/example; two exact four-value runs and four argument checks pass; normal dependency builds authorized.
 
 - `2026-09-13` — `BACKEND-INTEGRATION-GUIDES.0` completes setup/API/content routing for all five guides; exact17-source inventory and version-only proof; Rust .2.1 next.
 
@@ -48,8 +50,6 @@
 - `2026-09-13` — `CONFORMANCE-SOURCE-READING.1.22` reads 3 windows/1500 fragments/14510 bytes; 51 files complete. Unchanged generated-data proof retained; next .1.23.
 
 - `2026-09-13` — `CONFORMANCE-SOURCE-READING.1.21` reads 3 windows/1500 fragments/14528 bytes; 51 files complete. Unchanged generated-data proof retained; next .1.22.
-
-- `2026-09-13` — `CONFORMANCE-SOURCE-READING.1.20` reads 3 windows/1500 fragments/14781 bytes; 51 files complete. Unchanged generated-data proof retained; next .1.21.
 
 ## History
 
