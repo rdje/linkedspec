@@ -1571,7 +1571,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.41` | `pending` | Read the owned package-test lines 4853-6352 after clean .1.40; preserve all repair owners, prior failures and parked named arguments; do not repeat the known native malformed-regex probe. |
+| 1 | `LUA-STARTUP-READING.1.42` | `pending` | Read the owned package-test lines 6353-7852 after clean .1.41; preserve all repair owners, native-error exclusions, prior failures and parked named arguments. |
 
 ## Decisions
 

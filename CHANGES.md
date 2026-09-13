@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua generated-host, runtime and cursor package reading
+
+- Read package 4853-6352 in eight complete windows: 1,500 fragments /64,241 bytes; cumulative 41/51 and 2,170,080 bytes.
+- Both installed hosts pass 25 safe complete groups each, including fresh all-family and accepted-eight generated children plus runtime/matching/cursor/capture proof.
+- Entire native-error group 5193-5215 remains unexecuted under existing .2.3; indexed Knowledge explains the history null result without a new indexing defect.
+- LUA-STARTUP-READING.1.41 extends existing .2.1/.2.3 evidence, preserves all thirty-three repair roots and earlier failures, and hands off to .1.42.
+
 ## 2026-09-13 — Lua package function execution and generated-module reading
 
 - Read package 3353-4852 in eight complete windows: 1,500 fragments /62,438 bytes; cumulative 40/51 and 2,105,839 bytes.

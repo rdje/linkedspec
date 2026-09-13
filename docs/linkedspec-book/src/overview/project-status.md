@@ -329,12 +329,12 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (40/51 groups):** the complete
+**Lua source reading is underway (41/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first 40 groups physically read 55,540 fragments /2,105,839 bytes,
+ownership. The first 41 groups physically read 57,040 fragments /2,170,080 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
@@ -354,9 +354,9 @@ complete, as are stdio, progressive dispatch, storage and recognition transactio
 Recursive observation, repeated actions and root-selection admission are complete.
 Root core, root routes, cursor admission and cursor descriptor tests are complete.
 Cursor execution, generated source, normalization and option-removal tests are
-complete. The package runner is read through line 4852, including pipeline, corpus,
-frontend, registry, function execution, compiled and generated-module tests.
-Seventy-seven files are fully read. The remaining 11 groups require
+complete. The package runner is read through line 6352, including generated hosts,
+matching, runtime diagnostics, cursor views and anonymous captures. Seventy-seven
+files are fully read. The remaining 10 groups require
 their own reading and verified commits; source reading does not close the limitations below.
 
 **Lua Unicode casing and rule-label verification:** all property tables match the
@@ -618,8 +618,8 @@ completed in the next proof below. It does not claim the entire package gate. Ex
 replay and stale-guidance ownership:
 `docs/knowledge/lua-package-validation-function-registry-reading.md`.
 
-**Lua package function and generated execution verification:** 22 complete groups
-pass on each installed host, 44 total. Staged dispatch orders jobs by their paths,
+**Lua package function and generated execution verification:** `.1.40` records
+22 complete groups per installed host, 44 total. Staged dispatch orders jobs by their paths,
 retains exact cache/provider identity, copies stitched bodies, and reports distinct
 resolution, top-rule, sidecar and duplicate-job failures.
 
@@ -644,11 +644,45 @@ A fresh valid child on each host verifies Unicode identity, direct/traced result
 and a typed missing-entry failure. A separate malformed-payload child verifies
 the generated compile/load error. Both produce exact output and empty stderr;
 normal and intentionally failing cleanup paths leave no temporary directory.
-The later all-family child runner is partly read and remains outside this proof.
+The all-family child runner was outside that proof; it is completed below.
 Earlier invalid-identity and malformed-container limitations stay open.
 
 Exact reading, replay and existing guidance repair:
 `docs/knowledge/lua-package-function-generated-execution-reading.md`.
+
+**Lua generated-host, runtime and cursor verification:** 25 complete selected
+groups pass on each installed host, 50 total. Fresh children execute all ten
+generated families and the exact eight-module accepted subset. The latter validates
+the full corpus, proves native expected values before emission, and compares
+ordered values, metadata and plans after independent loading. Both child roles
+verify generated trace identity, empty stderr and removal of their temporary roots.
+
+Four matching groups cover the admitted PCRE dialect, earliest/source-order
+selection, anchored consumption, Unicode captures and distinct entry/local/zero-
+width registers. The entire separate native-error group at lines 5193–5215 remains
+unexecuted because of the already-located native formatter defect. Repair `.2.3`
+owns its re-admission after the fix; no new failure is induced by this reading.
+
+Runtime groups verify default repetition, per-rule seek/consume, action/blind
+dispatch, lifecycle order, zero-progress and recursion cutoffs, and typed unsupported
+helpers. Leading trivia follows the documented public-parser contract; the history
+fixture's null object name is expected, while ordinary indexed reads still work.
+Trace success, no-match and recursion paths preserve result JSON with healthy
+writers. Structured errors retain exact entry/input/lookup fields and the deepest
+failing child. Diagnostic events evaluate eagerly in order and stay outside parse
+output; immediate exit prevents later events.
+
+Typed stores preserve false values and copied snapshots. Nested writes select
+array/harray paths from evaluated values and create missing structure; the exact
+core fixture passes with cursor 6/6. Entry/match helpers distinguish absent values
+from empty collections and present zero-width matches. Cursor views, slicing,
+save/restore and rewinds retain Unicode coordinates. Anonymous capture variants
+share a rule-local boundary, advance it only on successful takes and preserve it
+after reversed spans. Existing numeric, malformed-container and writer limits stay
+open. The next boundary-capture group is only partly read here.
+
+Exact scope, exclusions and replay:
+`docs/knowledge/lua-package-generated-runtime-cursor-reading.md`.
 
 **Known Lua invocation limitation — nested array members can disappear:** a
 caller-supplied tagged array with an extra member or a sparse tail is accepted,

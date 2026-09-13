@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Preserve excluded native-error proof and exact runtime boundaries
+
+- Select complete groups 4863-6311 with original helpers, excluding all of 5193-5215 because its malformed native compile reaches the already-located formatter defect; no raw failure is repeated.
+- Fresh children execute all ten generated families and the contract-ordered eight-module subset after interpreter-first proof, preserving plans, metadata, trace and cleanup.
+- Matching, runtime diagnostics, typed output, nested writes and Unicode cursor/capture behavior pass; history null follows the existing Perl public-wrapper trivia contract.
+- LUA-STARTUP-READING.1.41 records exact replay in docs/knowledge/lua-package-generated-runtime-cursor-reading.md; .2.3 owns re-admission and .2.1 owns exact stale current guidance.
+
 ## 2026-09-13 — Distinguish in-process families from fresh generated children
 
 - Complete groups 3341-4818 use original helpers; all 22 pass per host, while the all-family child runner starts 4819 and remains partial.
