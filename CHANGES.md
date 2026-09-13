@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.25 — read Cherokee ligature and supplementary uppercase mappings
+
+Conformance .1.25 reads 3 complete windows, 1,500 fragments and 14,739 baseline-identical bytes. Physical reading is 25/143: 31,931 fragments, 1,024,983 bytes and 51 complete files. Uppercase reading covers further Latin and Cherokee rows, ordered Latin/Armenian ligature expansions, fullwidth pairs and supplementary scalars. Exact scalar sequences and encoded forms remain distinct. The bounded checkpoint is updated in place. Unchanged offline Unicode proof is retained. Next .1.26 owns the crossing 104F8-to-104D0 entry and continuation; all runtime repairs remain open.
+
+Retain the unchanged Unicode 17 generation, byte-equality and 12-fixture proof from CONFORMANCE-SOURCE-READING.1.14 at 704e261b. Fresh window replay, complete range inventory, cumulative coverage, source/task/history preservation, rendered book, memory and document-pressure checks govern this ordinary reading leaf. Native admission evidence remains separately scoped; normal commit doctrines remain required.
+
 ## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.24 — read numeral circled and extended uppercase mappings
 
 Conformance .1.24 reads 3 complete windows, 1,500 fragments and 14,500 baseline-identical bytes. Physical reading is 24/143: 30,431 fragments, 1,010,244 bytes and 51 complete files. Uppercase reading covers numeral, circled-letter, Glagolitic, Coptic, Georgian and extended Cyrillic/Latin mappings. Sparse entries and non-adjacent targets remain explicit, including the Georgian 2Dxx family. The bounded checkpoint is updated in place. Unchanged offline Unicode proof is retained. Next .1.25 starts after the closed A74F-to-A74E entry; all runtime repairs remain open.

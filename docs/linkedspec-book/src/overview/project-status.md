@@ -497,15 +497,16 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 decoded bytes. Twenty-four groups now account for
-30,431 fragments and 1,010,244 bytes, including 51 complete files. The Unicode
-lowercase mapping array is fully read; uppercase reading covers numerals, circled
-letters, Glagolitic, Coptic, Georgian and extended Cyrillic/Latin entries. Circled
-U+24D0 maps to U+24B6, preserving the encoded form. The Georgian range beginning at U+2D00
-retains sparse mappings such as U+2D27 to U+10C7 and U+2D2D to U+10CD. The
-unchanged offline generation proof is retained. Reading continues through later
-uppercase entries, with all runtime repair tasks open. Named-argument support
-remains an approved future direction. The capability guide still has stale
+143 bounded groups covering 8,257,059 decoded bytes. Twenty-five groups now account for
+31,931 fragments and 1,024,983 bytes, including 51 complete files. The Unicode
+lowercase mapping array is fully read; uppercase reading includes Cherokee, Latin
+and Armenian ligatures, fullwidth pairs and supplementary characters. U+FB03
+expands to U+0046, U+0046 and U+0049 (`FFI`); U+FB05 and U+FB06 both become
+U+0053 followed by U+0054 (`ST`). Fullwidth uppercase results preserve width.
+These full-case mappings do not imply blanket compatibility normalization. The
+unchanged offline generation proof is retained. Later entries and all runtime
+repair tasks remain open. Named-argument support remains an approved future
+direction. The capability guide still has stale
 current census, governance/inventory/public counts and generic-callable wording.
 Existing startup `.41.6` and `.41.7` now own these exact paragraphs and meaningful
 checks against recurrence. Their selected-marker guards currently miss the

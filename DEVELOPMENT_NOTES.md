@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.25 — preserve ligature expansions and fullwidth uppercase forms
+
+The range starts at A751-to-A750, reads further Latin pairs including non-adjacent A794-to-A7C4 and AB53-to-A7B3, and completes Cherokee AB70-to-13A0 through ABBF-to-13EF. Latin ligatures expand as FB00-to-0046+0046, FB01-to-0046+0049, FB02-to-0046+004C, FB03-to-0046+0046+0049, FB04-to-0046+0046+004C, with FB05/FB06 both mapping to 0053+0054. Armenian FB13 through FB17 retain their respective ordered two-scalar results. Fullwidth FF41-to-FF21 through FF5A-to-FF3A preserves width. Supplementary 10428-to-10400 through 1044F-to-10427 is followed by the 104D8-to-104B0 family, read through the 104F8-to-104D0 value at line 17638. Its closing delimiters and all later mappings remain .1.26-owned. Full casing can expand ligatures while preserving other encoded forms; it does not imply blanket compatibility normalization or new native admission.
+
+Retain the unchanged Unicode 17 generation, byte-equality and 12-fixture proof from CONFORMANCE-SOURCE-READING.1.14 at 704e261b. Fresh window replay, complete range inventory, cumulative coverage, source/task/history preservation, rendered book, memory and document-pressure checks govern this ordinary reading leaf. Native admission evidence remains separately scoped; normal commit doctrines remain required.
+
 ## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.24 — retain sparse Georgian and encoded uppercase forms
 
 The range begins at 2171-to-2161, completes numeral pairs through 217F-to-216F plus 2184-to-2183, and reads circled 24D0-to-24B6 through 24E9-to-24CF. Glagolitic 2C30-to-2C00 through 2C5F-to-2C2F precedes Latin rows including non-adjacent 2C65-to-023A and 2C66-to-023E. Coptic pairs preserve sparse 2CEC-to-2CEB, 2CEE-to-2CED and 2CF3-to-2CF2 entries. Georgian 2D00-to-10A0 through 2D25-to-10C5 plus 2D27-to-10C7 and 2D2D-to-10CD retains its own uppercase family and holes. Cyrillic extended A641 through A69B and Latin extended A723 through the fully closed A74F-to-A74E entry follow; line 16138 closes that entry. Encoded numeral and circled forms remain intact under casing. Later uppercase mappings remain .1.25-owned, with no normalization or native admission claim.

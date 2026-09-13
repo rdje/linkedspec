@@ -1571,7 +1571,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.25` | `pending` | `capability_conformance/unicode_case_contract.json` lines 16139-17638; 1500 fragments/14739 bytes. Preserve complete bounded windows, source identity and all repairs. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.26` | `pending` | `capability_conformance/unicode_case_contract.json` lines 17639-19138; 1500 fragments/14999 bytes. Preserve complete bounded windows, source identity and all repairs. |
 
 ## Decisions
 

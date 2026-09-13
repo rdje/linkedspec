@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl, Rust, Dart and Julia reading are complete. Canonical capacity admission is complete at a67a18bf. Conformance .1.24 reads 3 complete windows, 1,500 fragments and 14,500 baseline-identical bytes. Physical reading is 24/143: 30,431 fragments, 1,010,244 bytes and 51 complete files. Uppercase reading covers numeral, circled-letter, Glagolitic, Coptic, Georgian and extended Cyrillic/Latin mappings. Sparse entries and non-adjacent targets remain explicit, including the Georgian 2Dxx family. The bounded checkpoint is updated in place. Unchanged offline Unicode proof is retained. Next .1.25 starts after the closed A74F-to-A74E entry; all runtime repairs remain open. Dart reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl, Rust, Dart and Julia reading are complete. Canonical capacity admission is complete at a67a18bf. Conformance .1.25 reads 3 complete windows, 1,500 fragments and 14,739 baseline-identical bytes. Physical reading is 25/143: 31,931 fragments, 1,024,983 bytes and 51 complete files. Uppercase reading covers further Latin and Cherokee rows, ordered Latin/Armenian ligature expansions, fullwidth pairs and supplementary scalars. Exact scalar sequences and encoded forms remain distinct. The bounded checkpoint is updated in place. Unchanged offline Unicode proof is retained. Next .1.26 owns the crossing 104F8-to-104D0 entry and continuation; all runtime repairs remain open. Dart reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.82` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `CONFORMANCE-SOURCE-READING.1.24 - read numeral circled and extended uppercase mappings` — Conformance .1.24 reads 3 complete windows, 1,500 fragments and 14,500 baseline-identical bytes. Physical reading is 24/143: 30,431 fragments, 1,010,244 bytes and 51 complete files. Uppercase reading covers numeral, circled-letter, Glagolitic, Coptic, Georgian and extended Cyrillic/Latin mappings. Sparse entries and non-adjacent targets remain explicit, including the Georgian 2Dxx family. The bounded checkpoint is updated in place. Unchanged offline Unicode proof is retained. Next .1.25 starts after the closed A74F-to-A74E entry; all runtime repairs remain open.
+- `CONFORMANCE-SOURCE-READING.1.25 - read Cherokee ligature and supplementary uppercase mappings` — Conformance .1.25 reads 3 complete windows, 1,500 fragments and 14,739 baseline-identical bytes. Physical reading is 25/143: 31,931 fragments, 1,024,983 bytes and 51 complete files. Uppercase reading covers further Latin and Cherokee rows, ordered Latin/Armenian ligature expansions, fullwidth pairs and supplementary scalars. Exact scalar sequences and encoded forms remain distinct. The bounded checkpoint is updated in place. Unchanged offline Unicode proof is retained. Next .1.26 owns the crossing 104F8-to-104D0 entry and continuation; all runtime repairs remain open.
 
 ## Next Action
 
-- `CONFORMANCE-SOURCE-READING.1.25` — Read CONFORMANCE-SOURCE-READING.1.25 from clean HEAD: `capability_conformance/unicode_case_contract.json` lines 16139-17638. Total 1,500 fragments/14,739 bytes. Read every bounded window, preserve crossing mapping ownership, retain unchanged generated-data proof proportionately, update live records/book and commit before .1.26. Continue PNT.
+- `CONFORMANCE-SOURCE-READING.1.26` — Read CONFORMANCE-SOURCE-READING.1.26 from clean HEAD: `capability_conformance/unicode_case_contract.json` lines 17639-19138. Total 1,500 fragments/14,999 bytes. Read every bounded window, preserve crossing mapping ownership, retain unchanged generated-data proof proportionately, update live records/book and commit before .1.27. Continue PNT.
 
 ## Recent Completions
+
+- `2026-09-13` — `CONFORMANCE-SOURCE-READING.1.25` reads 3 windows/1500 fragments/14739 bytes; 51 files complete. Unchanged generated-data proof retained; next .1.26.
 
 - `2026-09-13` — `CONFORMANCE-SOURCE-READING.1.24` reads 3 windows/1500 fragments/14500 bytes; 51 files complete. Unchanged generated-data proof retained; next .1.25.
 
@@ -48,8 +50,6 @@
 - `2026-09-13` — `CONFORMANCE-SOURCE-READING.1.11` reads 12 windows/554 fragments/65425 bytes; 47 files complete. Semantic rollout/model reading preserves native evidence and qualifies staged-schema history; next .1.12.
 
 - `2026-09-13` — `CONFORMANCE-SOURCE-READING.1.10` reads18 windows/789 fragments/65489 bytes;46 files complete. Numeric55/18, Perl text7 and semantic neutral proof pass; next .1.11.
-
-- `2026-09-13` — `CONFORMANCE-SOURCE-READING.1.9` reads11 windows/1445 fragments/65519 bytes;37 files complete. Repetition54, root54 and cursor60 neutral mutations pass; next .1.10.
 
 ## History
 
