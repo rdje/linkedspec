@@ -329,12 +329,12 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (35/51 groups):** the complete
+**Lua source reading is underway (36/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first 35 groups physically read 48,151 fragments /1,797,379 bytes,
+ownership. The first 36 groups physically read 49,651 fragments /1,852,679 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
@@ -352,8 +352,9 @@ body-fluent, callable, diagnostic, duplicate-slot, gap-capture, logical-helper a
 map-leaves tests are read. The MCP-binding, admission and dispatch tests are
 complete, as are stdio, progressive dispatch, storage and recognition transactions.
 Recursive observation, repeated actions and root-selection admission are complete.
-Root core is read through line 204. Sixty-nine files are fully read.
-The remaining 16 groups require
+Root core, root routes, cursor admission and cursor descriptor tests are complete.
+Cursor execution is read through line 327. Seventy-three files are fully read.
+The remaining 15 groups require
 their own reading and verified commits; source reading does not close the limitations below.
 
 **Lua Unicode casing and rule-label verification:** all property tables match the
@@ -463,9 +464,10 @@ rows, 250 call rows and 58 mutations. Earlier private-stage and count statements
 retain their existing guidance-repair owner. Exact scope and reproduction:
 `docs/knowledge/lua-stdio-progressive-recognition-consumer-reading.md`.
 
-**Lua recursive observation, repeated actions and root selection:** both installed
-hosts pass 43 complete observation checks, 175 repeated-action admission checks,
-139 root-selection admission checks and 57 root-core prefix checks: 828 total.
+**Lua recursive observation, repeated actions and root selection:** `.1.35` records
+these checks on both installed hosts: 43 complete observation checks, 175 repeated-action
+admission checks, 139 root-selection admission checks and 57 root-core prefix checks:
+828 total.
 Observation preserves false independently from match success and returns detached
 records with Unicode-scalar coordinates. Failed, rejected and aborted child calls
 retain distinct outcomes; rejection and abort records bind before typed errors
@@ -480,8 +482,8 @@ ordered selected-slot traces, bounds, primary output and the shared corpus fixtu
 Root selection uses the explicit selector, then the first authored marker, then the
 first authored rule. Its fifteen-role consumer verifies default and explicit routes,
 immutable descriptors, typed failures, generated-v2 identity and exact request traces.
-The root-core prefix checks resolver and validation behavior through line 134; its
-later runtime/descriptor assertions remain in the next owned reading range. Both
+That root-core prefix checks resolver and validation behavior through line 134;
+the full core proof below now includes runtime and descriptor assertions. Both
 admission suites and observation execute freshly emitted source in the current host.
 They do not launch a separate emitted-code child process.
 
@@ -492,6 +494,37 @@ recursive public proof covers six documents, six denials and ten outward guards.
 present-tense pending-public guidance retains its existing repair owner. Exact
 source scope, limits and reproduction:
 `docs/knowledge/lua-recursive-repeated-root-consumer-reading.md`.
+
+**Lua root routes and rule-local cursor verification:** both installed hosts pass
+99 root-core checks, 106 root-route checks, 119 cursor-admission checks, 912 cursor
+descriptor checks and 95 execution-prefix checks: 2,662 total. Root routes preserve
+typed zero-rule and unknown-selector errors. Generated-plan validation happens
+before entry selection, and fresh emitted modules execute in the current host.
+
+Each entered rule derives its own seek/consume policy. The execution prefix checks
+all 36 family spellings, eight parent/child fixtures and two structural examples
+through live and normalized execution. An AND parent over seeking children finds
+ordered landmarks; an OR parent over consuming children makes an anchored choice.
+The prefix ends at line 322; later loading, trace and generated checks retain their
+next reading owner. The separate cursor admission verifies all fifteen declared
+roles and eight portable diagnostic outcomes. Its emitted role checks generated
+text; its generated-plan roles perform execution.
+
+Descriptors expose exact root, rule and resolved-edge fields, including cursor and
+slot identity. Direct and normalized state agree. A loaded descriptor retains its
+logical file source ID; the test checks that ID and then normalizes it to compare
+the remaining descriptor bytes with inline compilation. It does not claim raw
+loaded and inline descriptors are identical.
+
+Fresh cursor governance reports all eight rollout rows complete, 60 rejected
+mutations, 30 public documents, 28 current-claim denials and 74 migration files.
+The prior root-neutral proof retains byte-identical inputs. Older count, source
+identity and staged-guidance statements remain owned for correction. Exact source
+scope, proof limits and reproduction: `docs/knowledge/lua-root-cursor-consumer-reading.md`.
+
+The same reading slice performs the required change-history rollover. The retained
+249-line root and its new immutable segment reconstruct every pre-rollover byte
+with the original record separator; earlier history remains intact. This uses the existing bounded-history allowance.
 
 **Known Lua invocation limitation — nested array members can disappear:** a
 caller-supplied tagged array with an extra member or a sparse tail is accepted,

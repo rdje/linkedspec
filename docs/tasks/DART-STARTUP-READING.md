@@ -1571,7 +1571,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.36` | `pending` | Read the root-core suffix and owned root-routes/cursor contract/descriptor/execution ranges after clean .1.35; preserve all repair owners, prior failures and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.37` | `pending` | Read the cursor-execution suffix and owned generated/normalization/option-removal/package ranges after clean .1.36; preserve all repair owners, prior failures and parked named arguments. |
 
 ## Decisions
 

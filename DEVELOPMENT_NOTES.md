@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Keep cursor execution and descriptor evidence precise
+
+- Root routes validate generated plans before entry selection, preserve typed zero/unknown errors and execute fresh emitted modules in the current host.
+- Cursor admission checks emitted text and separately executes generated plans; descriptor comparison verifies loaded logical source identity before normalization.
+- The selected execution prefix covers all36 family spellings, eight parent/child and two structural fixtures on live and normalized routes; later loaded/trace/generated blocks remain owned.
+- LUA-STARTUP-READING.1.36 stores exact scope, 2,662-assertion proof and qualified current guidance in docs/knowledge/lua-root-cursor-consumer-reading.md.
+
 ## 2026-09-13 — Preserve observation, repetition and selection proof boundaries
 
 - Recursive observation preserves false payloads and detached Unicode-scalar records, distinguishes ordinary cutoff from explicit rejected recursion and binds before typed error propagation.
