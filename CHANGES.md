@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.22 — read Cyrillic Armenian and Georgian uppercase mappings
+
+Conformance .1.22 reads 3 complete windows, 1,500 fragments and 14,510 baseline-identical bytes. Physical reading is 22/143: 27,431 fragments, 980,636 bytes and 51 complete files. Uppercase reading continues through Cyrillic, Armenian, Georgian, short Cherokee and further Latin rows. Armenian 0587 expands to two ordered uppercase scalars; Cyrillic variants preserve shared target values. The bounded checkpoint is updated in place. Unchanged offline Unicode proof is retained. Next .1.23 starts after the closed 1E5B-to-1E5A entry; all runtime repairs remain open.
+
+Retain the unchanged Unicode 17 generation, byte-equality and 12-fixture proof from CONFORMANCE-SOURCE-READING.1.14 at 704e261b. Fresh window replay, complete range inventory, cumulative coverage, source/task/history preservation, rendered book, memory and document-pressure checks govern this ordinary reading leaf. Native admission evidence remains separately scoped; normal commit doctrines remain required.
+
 ## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.21 — read Latin Greek and Cyrillic uppercase mappings
 
 Conformance .1.21 reads 3 complete windows, 1,500 fragments and 14,528 baseline-identical bytes. Physical reading is 21/143: 25,931 fragments, 966,126 bytes and 51 complete files. Uppercase reading covers further Latin, Greek and Cyrillic mappings. Titlecase/lowercase pairs converge on common uppercase values, and Greek expansions retain ordered combining scalars. The existing bounded checkpoint is updated in place. Unchanged offline Unicode proof is retained. Next .1.22 owns the newly opened entry after 045F-to-040F; all runtime repairs remain open.

@@ -9589,7 +9589,7 @@ _Capability guide retains stale current census and callable claims behind passin
 _Conformance and Unicode reading has exact baseline ownership in 143 bounded groups_
 
 - **answers:** how are oversized source lines read without truncation | where is conformance test and Unicode source reading tracked | how many conformance source reading groups remain | does source reading include decompressed pinned Unicode inputs | how do I verify conformance reading source and range coverage | which conformance source reading file has the longest line
-- **date:** 2026-09-13 · **status:** exact decomposition preserved; physical reading 21/143, 51 files complete and 122 groups remain
+- **date:** 2026-09-13 · **status:** exact decomposition preserved; physical reading 22/143, 51 files complete and 121 groups remain
 - **evidence:** `Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory.`
 - **reverify:** `Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits.`
 - **source:** [`docs/knowledge/conformance-source-reading-coverage.md`](docs/knowledge/conformance-source-reading-coverage.md)
