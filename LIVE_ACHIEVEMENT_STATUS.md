@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl, Rust, Dart and Julia reading are complete. Canonical capacity admission is complete at a67a18bf. Lua .1.30 reads the registry suffix, complete body-fluent/callable tests and diagnostic prefix in eight complete windows: 1,500 fragments /60,799 bytes; cumulative 30/51, 40,651 fragments /1,503,281 bytes. All 99 Lua sources remain baseline-identical; 54 files are fully read. Both installed hosts pass 1,564 focused assertions and match 46 complete graph/default observations. New .2.33 owns nested runtime-array member loss; .2.8.27/.28 own active-name defaults, and existing function-option proof gains its ninth route. Prior neutral callable proof remains dated and input-identical. All thirty-three repair roots and earlier failures remain open. Next .1.31 reads remaining diagnostic and owned duplicate-slot/gap tests; named arguments and startup/ADR0118 prerequisites remain unchanged. Dart reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl, Rust, Dart and Julia reading are complete. Canonical capacity admission is complete at a67a18bf. Lua .1.31 completes diagnostic and duplicate-slot tests and reads gap-capture lines 1-947 in eight complete windows: 1,500 fragments /54,442 bytes; cumulative 31/51, 42,151 fragments /1,557,723 bytes. All 99 Lua sources remain baseline-identical; 56 files are fully read. Both installed hosts pass 832 focused assertions: diagnostic119, duplicate-slot112 and gap-prefix185 each. Neutral duplicate-slot7/0/59 and gap9/0/63 with public8/15/10/34 pass. Gap metadata checks span two source regions, so the prefix does not rerun the earlier full392 proof. Existing .2.1 owns precise private-stage guidance qualification; all thirty-three repair roots and earlier failures remain open. Next .1.32 completes gap tests and reads logical, map-leaves and MCP-binding ranges; named arguments and startup/ADR0118 prerequisites remain unchanged. Dart reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.82` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `LUA-STARTUP-READING.1.30 - read invocation consumers and own nested argument-copy repairs` — Lua .1.30 reads the registry suffix, complete body-fluent/callable tests and diagnostic prefix in eight complete windows: 1,500 fragments /60,799 bytes; cumulative 30/51, 40,651 fragments /1,503,281 bytes. All 99 Lua sources remain baseline-identical; 54 files are fully read. Both installed hosts pass 1,564 focused assertions and match 46 complete graph/default observations. New .2.33 owns nested runtime-array member loss; .2.8.27/.28 own active-name defaults, and existing function-option proof gains its ninth route. Prior neutral callable proof remains dated and input-identical. All thirty-three repair roots and earlier failures remain open. Next .1.31 reads remaining diagnostic and owned duplicate-slot/gap tests; named arguments and startup/ADR0118 prerequisites remain unchanged.
+- `LUA-STARTUP-READING.1.31 - read diagnostic and slot-gap consumers with scoped proof` — Lua .1.31 completes diagnostic and duplicate-slot tests and reads gap-capture lines 1-947 in eight complete windows: 1,500 fragments /54,442 bytes; cumulative 31/51, 42,151 fragments /1,557,723 bytes. All 99 Lua sources remain baseline-identical; 56 files are fully read. Both installed hosts pass 832 focused assertions: diagnostic119, duplicate-slot112 and gap-prefix185 each. Neutral duplicate-slot7/0/59 and gap9/0/63 with public8/15/10/34 pass. Gap metadata checks span two source regions, so the prefix does not rerun the earlier full392 proof. Existing .2.1 owns precise private-stage guidance qualification; all thirty-three repair roots and earlier failures remain open. Next .1.32 completes gap tests and reads logical, map-leaves and MCP-binding ranges; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
 ## Next Action
 
-- `LUA-STARTUP-READING.1.31` — Read diagnostic test lines 242-327, duplicate-slot test lines 1-467 and gap-capture test lines 1-947; reconcile Knowledge, verify focused evidence, sync the book and commit.
+- `LUA-STARTUP-READING.1.32` — Read gap-capture test lines 948-1462, logical-helper test lines 1-280, map-leaves test lines 1-696 and MCP-binding test lines 1-9; reconcile Knowledge, verify focused evidence, sync the book and commit.
 
 ## Recent Completions
+
+- `2026-09-13` — `LUA-STARTUP-READING.1.31` reads 1,500 fragments/54,442 bytes; 832 scoped assertions and current neutral slot/gap governance pass; .2.1 owns private-stage guidance qualification; next .1.32.
 
 - `2026-09-13` — `LUA-STARTUP-READING.1.30` reads 1,500 fragments/60,799 bytes; 1,564 focused assertions and 46 complete observations pass; .2.33 owns nested argument-copy loss and .2.8.27/.28 own active-name defaults; next .1.31.
 
@@ -48,8 +50,6 @@
 - `2026-09-13` — `LUA-STARTUP-READING.1.17` reads1,500 fragments/53,106 bytes; shared budgets and false evidence gain owners; two PUC5.5 nil-error test failures remain .2.2-owned; next .1.18.
 
 - `2026-09-12` — `LUA-STARTUP-READING.1.16` reads 1,500 fragments/46,858 bytes; 1,080 native assertions and nine Perl cases pass; .2.13/.2.14 own numeric overflow and diagnostic null preservation; next .1.17.
-
-- `2026-09-12` — `LUA-STARTUP-READING.1.15` reads 1,500 fragments/51,908 bytes; 552 native assertions total and CLI 66 cases per host pass; .2.12 owns finite private state/progress; next .1.16.
 
 ## History
 

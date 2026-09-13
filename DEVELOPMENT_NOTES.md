@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Distinguish test roles and source-region assertion counts
+
+- Duplicate-slot emitted-source proof checks structural emission; direct/traced generated execution and primary execution are separate actual runtime roles.
+- Gap native and reconstructed/generated prefix proof is complete at line810; independent emitted execution and final admission remain outside this fresh scoped run.
+- A 257-prefix expectation incorrectly included 72 diagnostic checks located after the emitted block; exact checkpoint counts establish 106+33+46=185, preserving historical full392 evidence.
+- LUA-STARTUP-READING.1.31 stores exact scope and replay in docs/knowledge/lua-diagnostic-slot-gap-consumer-reading.md; implementation, prior failures and parked named arguments remain unchanged.
+
 ## 2026-09-13 — Preserve every nested argument member before frame construction
 
 - Top-level invocation lists validate density, but the nested tagged-array copier walks only ipairs; four malformed shapes lose extra or sparse members, including an extra-key cycle.

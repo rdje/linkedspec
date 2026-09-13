@@ -1571,7 +1571,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.31` | `pending` | Read the diagnostic suffix and owned duplicate-slot/gap-capture test ranges after clean .1.30; preserve all repair owners, prior failures and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.32` | `pending` | Read the gap suffix and owned logical/map-leaves/MCP-binding test ranges after clean .1.31; preserve all repair owners, prior failures and parked named arguments. |
 
 ## Decisions
 

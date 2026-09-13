@@ -329,12 +329,12 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (30/51 groups):** the complete
+**Lua source reading is underway (31/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first 30 groups physically read 40,651 fragments /1,503,281 bytes,
+ownership. The first 31 groups physically read 42,151 fragments /1,557,723 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
@@ -347,10 +347,10 @@ AST enrichment, capture storage and parse-job declarations, the narrow staged
 registry and tracing. Unicode casing is completely read, including both mapping
 tables, all 158 `Cased` and 464 `Case_Ignorable` ranges, strict UTF-8 decoding and
 Final Sigma conversion. The Unicode rule-label table and classifier, automatic
-function parser, complete function shell and registry are read. Both complete
-body-fluent and callable tests, plus the diagnostic prefix through line 241, are
-also read. Fifty-four files are fully read.
-The remaining 21 groups require
+function parser, complete function shell and registry are read. The complete
+body-fluent, callable, diagnostic and duplicate-slot tests are read, along with
+the gap-capture test through line 947. Fifty-six files are fully read.
+The remaining 20 groups require
 their own reading and verified commits; source reading does not close the limitations below.
 
 **Lua Unicode casing and rule-label verification:** all property tables match the
@@ -383,13 +383,30 @@ supplied metadata, mutation and default-validation limitations below. Earlier
 classifier proof remains dated; current function reading does not add named
 arguments or close the pending PUC 5.4 verification.
 
-**Lua invocation and callable consumer verification:** both installed hosts pass
+**Lua invocation and callable consumer verification:** `.1.30` recorded
 166 body-fluent checks, 449 callable checks, 62 registry/invocation checks and 105
-checks from the complete diagnostic blocks read so far: 782 per host, 1,564 total.
+diagnostic-prefix checks: 782 per host, 1,564 total.
 Callable proof includes inert construction, ordered invocation, independently loaded
-emitted modules and workspace cleanup on success and injected failure. The remaining
-diagnostic blocks retain their own reading and verification owner. Prior neutral
+emitted modules and workspace cleanup on success and injected failure. Prior neutral
 callable checker results remain dated; their four inputs are unchanged.
+
+**Lua diagnostic, slot and gap verification:** both installed hosts now pass the
+complete diagnostic consumer (119 checks), complete duplicate-slot consumer
+(112), and complete gap-prefix blocks through line 810 (185): 832 checks total.
+Diagnostic events remain separate from tracing. Duplicate patterns retain their
+authored slot identity across ordered and choice matching; generated direct and
+traced execution preserve it. That consumer checks emitted source structurally.
+
+The gap prefix verifies Unicode and empty spans, child entry-slot identity,
+candidate visibility before `LS`, child-extended cursor commits, successful tails,
+nested isolation, rollback, detached descriptors and unchanged generated-v2 plans.
+Its 106 metadata, 33 native and 46 carrier checks precede independent emitted
+execution. The earlier full 392-check run remains dated evidence: another 72
+metadata checks occur later in the file. Fresh neutral governance passes all nine
+gap rollout rows, 63 semantic mutations and the current 8/15/10/34 public boundary;
+duplicate-slot governance remains 7/0/59. These checks preserve the current language
+and leave the existing runtime and caller-input limitations below open.
+Exact reading and reproduction: `docs/knowledge/lua-diagnostic-slot-gap-consumer-reading.md`.
 
 **Known Lua invocation limitation — nested array members can disappear:** a
 caller-supplied tagged array with an extra member or a sparse tail is accepted,

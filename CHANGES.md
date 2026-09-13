@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua diagnostic, duplicate-slot and gap-prefix reading
+
+- Read diagnostic242-327, duplicate-slot1-467 and gap1-947: 1,500 fragments /54,442 bytes; cumulative 31/51 and 1,557,723 bytes.
+- Both hosts pass diagnostic119, duplicate-slot112 and gap-prefix185: 832 assertions; current neutral slot and gap contracts pass.
+- Gap metadata checks occupy two source regions; the read prefix is 106 metadata +33 native +46 carrier, and prior full392 evidence remains dated.
+- LUA-STARTUP-READING.1.31 preserves all thirty-three repair roots; .2.1 gains precise private-stage guidance qualification; next .1.32.
+
 ## 2026-09-13 — Lua invocation registry and callable consumer reading
 
 - Read registry368-539, complete body-fluent/callable tests and diagnostic1-241: 1,500 fragments /60,799 bytes; cumulative 30/51 and 1,503,281 bytes.

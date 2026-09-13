@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LUA-STARTUP-READING`
-- Status: `active` / approved capacity; source reading 30/51
+- Status: `active` / approved capacity; source reading 31/51
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.6`
 - Created: `2026-09-12`
 - Last updated: `2026-09-13`
@@ -45,7 +45,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - Ordered range SHA-256: `81c58b8319def28af518fb134a3787513fe746f0f0f73bcacb0e20b9ede1c9d6`.
 - Child-summary SHA-256: `f56ecac262800bd3cc1e6bba0cc25bfe22f095c3dfee41f1c6595d4200145290`.
 - Coordinates are one-based inclusive LF physical lines or absolute file bytes; both byte windows decode as UTF-8.
-- Current physical reading: 30/51 children, 40,651/71,269 fragments and 1,503,281/2,732,450 bytes.
+- Current physical reading: 31/51 children, 42,151/71,269 fragments and 1,557,723/2,732,450 bytes.
 - Exact independent replay and capacity evidence: `docs/knowledge/lua-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -540,14 +540,18 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `LUA-STARTUP-READING.1.30 - read invocation consumers and own nested argument-copy repairs`.
 
 - ID: `LUA-STARTUP-READING.1.31`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `8878c8cb48b28386514e93c5cb0132e06eb5cac2`.
+  Verification tier: `focused`
+  Focused checks: Exact bounded source/baseline reading; diagnostic-output, duplicate-regex-slot and inter-match-gap Knowledge reconciliation; safe scoped native consumers and directly relevant neutral proof; memory, Knowledge, shared history, book and normal doctrines.
+  Canonical trigger: Ordinary test-source reading and bounded repair intake; no production change. Existing runtime/native-error limitations remain explicit; later closeout and push retain canonical prerequisites.
   Goal: Read and understand group 31: diagnostic_output_contract_test.lua through inter_match_gap_capture_contract_test.lua.
   Scope: `lua/test/diagnostic_output_contract_test.lua` lines 242-327; `lua/test/duplicate_regex_slot_identity_contract_test.lua` lines 1-467; `lua/test/inter_match_gap_capture_contract_test.lua` lines 1-947
   Baseline evidence: 1500 fragments / 54442 bytes; ordered range SHA-256 `3289093b514031c30ff31b742148da9b5276d643fab27c77daccdc0693d101fc`.
   Dependencies: .1.30 committed with clean handoff.
   Acceptance: Read every scoped byte without truncation; record comprehension, Knowledge and repair reconciliation, focused proof and a clean per-leaf commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Lua .1.31 completes diagnostic and duplicate-slot tests and reads gap-capture lines 1-947 in eight complete windows: 1,500 fragments /54,442 bytes; cumulative 31/51, 42,151 fragments /1,557,723 bytes. All 99 Lua sources remain baseline-identical; 56 files are fully read. Both installed hosts pass 832 focused assertions: diagnostic119, duplicate-slot112 and gap-prefix185 each. Neutral duplicate-slot7/0/59 and gap9/0/63 with public8/15/10/34 pass. Gap metadata checks span two source regions, so the prefix does not rerun the earlier full392 proof. Existing .2.1 owns precise private-stage guidance qualification; all thirty-three repair roots and earlier failures remain open. Next .1.32 completes gap tests and reads logical, map-leaves and MCP-binding ranges; named arguments and startup/ADR0118 prerequisites remain unchanged. Exact evidence: docs/knowledge/lua-diagnostic-slot-gap-consumer-reading.md.
+  Commit: `LUA-STARTUP-READING.1.31 - read diagnostic and slot-gap consumers with scoped proof`.
 
 - ID: `LUA-STARTUP-READING.1.32`
   Status: `pending`
@@ -778,6 +782,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Reading .1.28 extension: lua-unicode-rule-label-implementation-plan metadata line19 and final paragraph still describe source/outcome planning .10.7.2.0 as next despite the current admitted semantic owners. Date or qualify these two precise forward pointers under this existing repair; preserve the historical classifier, route, identity, negative-isolation and recomposition results, and the explicitly superseded preflight. Exact current reading and verification: docs/knowledge/lua-unicode-casing-properties-and-rule-label-reading.md.
   Reading .1.29 extension: lua-spec-defined-function-parser, lua-user-function-registry, lua-variadic-v2-signature-state and lua-final-codeblock-metadata retain future descriptor/generated/explicit-callable guidance despite admitted successors. Date those exact later-owner sentences and qualify lua-function-definition-shell-projection sidecar-copy wording against .2.32; preserve original milestones, runtime facts and historical counts.
   Reading .1.30 extension: lua-body-fluent-suffix-loss ends with source/outcome planning .10.7.2.0 as a future step despite later admitted semantic owners. Qualify that precise forward pointer while preserving the repaired suffix behavior, original milestone counts and current 166-assertion consumer proof.
+  Reading .1.31 extension: inter_match_gap_capture_contract_test.lua header lines6-7 and inter-match-gap-lua-implementation-plan metadata/lines77/110 retain private-stage recurring/public-pending guidance despite the explicitly current closed successor and neutral9/0/63/public8/15/10/34. Date or qualify these precise stage boundaries; preserve historical 392=178+33+46+105+30 proof. The metadata assertions span two regions, so the fresh prefix is 106+33+46=185, not a contradictory full-suite count.
   Acceptance: Remove the false current failure projection, distinguish historical counts from current guidance, preserve useful unique history through canonical pointers, and independently verify the resulting public wording and native command examples.
   Verification: `pending`
   Commit: `pending`
@@ -2071,7 +2076,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.31` | `pending` | Read the diagnostic suffix and owned duplicate-slot/gap-capture test ranges after clean .1.30; preserve all repair owners, prior failures and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.32` | `pending` | Read the gap suffix and owned logical/map-leaves/MCP-binding test ranges after clean .1.31; preserve all repair owners, prior failures and parked named arguments. |
 
 ## Decisions
 
@@ -2089,9 +2094,11 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Blockers
 
-- None for bounded Lua .1.31 reading after clean .1.30. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
+- None for bounded Lua .1.32 reading after clean .1.31. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
 
 ## Verification Log
+
+- `2026-09-13` .1.31: Lua .1.31 completes diagnostic and duplicate-slot tests and reads gap-capture lines 1-947 in eight complete windows: 1,500 fragments /54,442 bytes; cumulative 31/51, 42,151 fragments /1,557,723 bytes. All 99 Lua sources remain baseline-identical; 56 files are fully read. Both installed hosts pass 832 focused assertions: diagnostic119, duplicate-slot112 and gap-prefix185 each. Neutral duplicate-slot7/0/59 and gap9/0/63 with public8/15/10/34 pass. Gap metadata checks span two source regions, so the prefix does not rerun the earlier full392 proof. Existing .2.1 owns precise private-stage guidance qualification; all thirty-three repair roots and earlier failures remain open. Next .1.32 completes gap tests and reads logical, map-leaves and MCP-binding ranges; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
 - `2026-09-13` .1.30: Lua .1.30 reads the registry suffix, complete body-fluent/callable tests and diagnostic prefix in eight complete windows: 1,500 fragments /60,799 bytes; cumulative 30/51, 40,651 fragments /1,503,281 bytes. All 99 Lua sources remain baseline-identical; 54 files are fully read. Both installed hosts pass 1,564 focused assertions and match 46 complete graph/default observations. New .2.33 owns nested runtime-array member loss; .2.8.27/.28 own active-name defaults, and existing function-option proof gains its ninth route. Prior neutral callable proof remains dated and input-identical. All thirty-three repair roots and earlier failures remain open. Next .1.31 reads remaining diagnostic and owned duplicate-slot/gap tests; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
@@ -2161,6 +2168,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Commit Log
 
+- `2026-09-13` .1.31: `LUA-STARTUP-READING.1.31 - read diagnostic and slot-gap consumers with scoped proof`; activation 8878c8cb4; next .1.32 after clean proof and empty brief.
+
 - `2026-09-13` .1.30: `LUA-STARTUP-READING.1.30 - read invocation consumers and own nested argument-copy repairs`; activation 4a5feb8ff; next .1.31 after clean proof and empty brief.
 
 - `2026-09-13` .1.29: `LUA-STARTUP-READING.1.29 - read function projection and own metadata and caller-copy repairs`; activation e38ca0938; next .1.30 after clean proof and empty brief.
@@ -2228,6 +2237,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 - `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` owns creation of this plan.
 
 ## Changelog
+
+- `2026-09-13` .1.31: Complete diagnostic and duplicate-slot reading; verify the exact gap prefix, reconcile assertion placement and retain all earlier repair ownership.
 
 - `2026-09-13` .1.30: Complete the invocation registry and callable/body-fluent consumer reading; verify exact caller graphs, own nested array-copy and active-name admission, and preserve prior evidence.
 
