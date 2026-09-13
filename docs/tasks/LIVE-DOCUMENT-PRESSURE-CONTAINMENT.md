@@ -484,7 +484,7 @@ or the README `.4` adoption/closeout that installs the guard.
 
 ## Current Frontier
 
-Complete through .14 under director-approved ADR0118. After the verified commit, empty brief and clean proof, continue conformance .1.32 after .1.31 reads CLI manifest1-33; cumulative40657 fragments/1176512 bytes; startup .3.8.0 owns all160 inputs/143 groups; supporting .1/startup .3.7 close under ADR0120; .2.6 applies the granted checker correction without changing registry ceilings; Lua reading is closed under ADR0119. All source repairs and later canonical/push requirements remain.
+Complete through .14 under director-approved ADR0118. After the verified commit, empty brief and clean proof, continue conformance .1.33 after .1.32 reads ActionIR AST tests1-383; cumulative42157 fragments/1231747 bytes; startup .3.8.0 owns all160 inputs/143 groups; supporting .1/startup .3.7 close under ADR0120; .2.6 applies the granted checker correction without changing registry ceilings; Lua reading is closed under ADR0119. All source repairs and later canonical/push requirements remain.
 
 Historical .13 handoff (preserved):
 Complete through .13 under director-approved ADR0116. After the verified commit, empty brief and clean proof, resume `JULIA-STARTUP-READING.1.38` in its separate active reading tree.

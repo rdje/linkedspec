@@ -9,7 +9,7 @@ answers:
   - "how do I verify conformance reading source and range coverage"
   - "which conformance source reading file has the longest line"
 date: 2026-09-13
-status: exact decomposition preserved; physical reading 31/143, 77 files complete and 112 groups remain
+status: exact decomposition preserved; physical reading 32/143, 78 files complete and 111 groups remain
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -399,12 +399,12 @@ properties, context rules, fixtures or decoded upstream inputs. All repairs rema
 
 ## Conformance reading checkpoint
 
-`CONFORMANCE-SOURCE-READING.1.31` reads 32 windows, 1,226 fragments and 65,536 bytes.
-Cumulative reading is 31/143, 40,657 fragments, 1,176,512 bytes and 77 complete files.
-Binding/write contracts and CLI guide/output fixtures are complete; CLI manifest1-33
-remains partial. [[conformance-write-cli-reading]] records exact transaction and
-byte-contract comprehension, fresh neutral mutation proof and managed Perl help2/2.
-Frozen admission metadata remains intact; .2.2 owns the guide storage-setup repair.
+`CONFORMANCE-SOURCE-READING.1.32` reads 9 windows, 1,500 fragments and 55,235 bytes.
+Cumulative reading is 32/143, 42,157 fragments, 1,231,747 bytes and 78 complete files.
+The full66-case CLI manifest is read; ActionIR tests1-383 remain partial. Read and
+write path nodes keep their different roles; if-lowering checks typed fields against
+inconsistent source strings. [[neutral-cli-fixture-runner]] records fresh Perl66/66
+in both environments; the whole AST target passes23 top-level tests. Repairs remain.
 
 Lowercase table entries and Final Sigma context remain separate. Exact scalar
 sequences, sparse ranges, fullwidth forms and ligature identities are preserved;

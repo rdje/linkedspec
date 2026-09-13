@@ -2268,7 +2268,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.32` | `pending` | `cli_conformance/manifest.json` lines 34-1150; `t/actionir_ast_parser.t` lines 1-383; 1500 fragments/55235 bytes. Preserve complete bounded windows, source identity and all repairs. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.33` | `pending` | `t/actionir_ast_parser.t` lines 384-1419; `t/callable_codeblock_literal_contract.t` lines 1-345; 1381 fragments/65521 bytes. Preserve complete bounded windows, source identity and all repairs. |
 
 ## Decisions
 

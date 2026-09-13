@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.32 — complete CLI manifest and read ActionIR parser tests
+
+Conformance .1.32 reads 9 complete windows, 1,500 fragments and 55,235 baseline-identical bytes. Physical reading is 32/143: 42,157 fragments, 1,231,747 bytes and 78 complete files. All 66 CLI cases are read:2 help,20 usage,12 success,8 Unicode,4 operational failure and20 trace cases. The ActionIR test prefix distinguishes typed reads/writes, trailing blocks and control nodes, then checks if-lowering against deliberately inconsistent source text. Fresh Perl CLI default/POSIX and the complete AST test target pass within their separate scopes. Next .1.33 owns the crossing test body and continuation; all repairs remain open.
+
+Fresh managed Perl primary CLI passes all66 cases with POSIXLY_CORRECT unset and all66 with POSIXLY_CORRECT=1. The complete managed t/actionir_ast_parser.t target passes23 top-level tests. This is Perl evidence, not a new five-backend matrix or source-reading credit past383. Fresh complete-window replay, full baseline inventory, cumulative coverage, source/task/history preservation, rendered book, memory and document-pressure checks govern this focused leaf; normal commit doctrines remain required.
+
 ## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.31 — read write composition and CLI fixture contracts
 
 Conformance .1.31 reads 32 complete windows, 1,226 fragments and 65,536 baseline-identical bytes. Physical reading is 31/143: 40,657 fragments, 1,176,512 bytes and 77 complete files. Uniform binding and both write contracts are fully read, along with the CLI guide and selected exact output fixtures. Frozen mutation metadata is reconciled with later admitted owners. Neutral write/map checks and both managed Perl help cases pass. New .2.2 owns missing storage setup in the standalone guide example. The bounded reading checkpoint is named for its broader conformance scope. Next .1.32 owns later CLI manifest cases; existing repairs remain open.

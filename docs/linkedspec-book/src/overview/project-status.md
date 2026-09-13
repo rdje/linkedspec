@@ -497,21 +497,18 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 decoded bytes. Thirty-one groups now account for
-40,657 fragments and 1,176,512 bytes, including 77 complete files. The uniform-binding
-and nested-write contracts are fully read. A write such as
-`document["sections"][0]["title"] = "Intro"` creates missing containers from evaluated
-selector kinds while keeping arrays dense. Structural changes commit together;
-completed segment or right-hand-side effects remain if structural validation fails.
-The composed `map_leaves!` contract separately protects the active receiver,
-unrelated bindings, callback-local values and post-commit continuation. Its frozen
-metadata predates the later recorded implementation and admission. The CLI guide
-and selected output fixtures are read: help, errors and trace records are exact
-byte contracts. Fresh neutral mutation checks pass, as do both managed Perl help
-cases. The standalone guide example still needs explicit project-data setup; its
-correction and workspace-locality verification are task-owned. Later manifest
-cases and runtime repairs remain open. Named-argument support remains an approved
-future direction. The capability guide still has stale
+143 bounded groups covering 8,257,059 decoded bytes. Thirty-two groups now account for
+42,157 fragments and 1,231,747 bytes, including 78 complete files. The complete
+66-case CLI manifest is read and passes on Perl in both default and POSIX option
+environments. It fixes strict arguments, source/input selection, canonical JSON,
+UTF-8 preservation, phase-specific failures and exact trace behavior. For example,
+`--trace none --trace-reset` still empties an explicitly selected trace file.
+The ActionIR parser-test prefix covers typed values, trailing blocks, reads,
+writes and control nodes. Its if-lowering checks deliberately disagreeing source
+strings to verify use of typed condition/body fields. The whole AST test target
+passes 23 top-level tests; source reading continues within that test body.
+These checks retain the existing cross-backend evidence and open repair tasks.
+Named-argument support remains an approved future direction. The capability guide still has stale
 current census, governance/inventory/public counts and generic-callable wording.
 Existing startup `.41.6` and `.41.7` now own these exact paragraphs and meaningful
 checks against recurrence. Their selected-marker guards currently miss the

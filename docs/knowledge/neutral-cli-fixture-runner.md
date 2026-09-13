@@ -74,3 +74,30 @@ Related facts: [[user-observable-backend-cli-parity-contract]],
 [[rust-local-verification-gate]], [[dart-primary-cli-closeout]], [[julia-global-cli-61-audit]],
 [[julia-canonical-primary-cli-trace]], [[primary-cli-four-backend-matrix]],
 [[lua-primary-cli-recurring-admission]].
+
+
+## September 13 complete manifest reading
+
+`CONFORMANCE-SOURCE-READING.1.31/.1.32` reads the entire 1,150-line manifest,
+including all 66 cases: two help, 20 usage, 12 success, eight Unicode, four
+operational failure and 20 trace cases. Fresh managed Perl runs pass 66/66 with
+`POSIXLY_CORRECT` unset and 66/66 with it set to `1`. Both process exit statuses
+are zero. This includes exact reset/append behavior, quiet reset of a selected
+file, percent-escaped request fields and Unicode input/result byte counts.
+It does not rerun other backend legs or rebuild dependencies.
+
+```bash
+bash tools/project_data_run.sh env -u POSIXLY_CORRECT PERL5LIB= \
+  perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' \
+  -- perl -I'{{REPO_ROOT}}/perl' '{{REPO_ROOT}}/bin/linkedspec'
+bash tools/project_data_run.sh env POSIXLY_CORRECT=1 PERL5LIB= \
+  perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' \
+  -- perl -I'{{REPO_ROOT}}/perl' '{{REPO_ROOT}}/bin/linkedspec'
+```
+
+The same leaf reads `t/actionir_ast_parser.t` only through line 383. Its complete
+managed test target passes 23 top-level tests; execution grants no reading credit
+for the remaining source. [[perl-actionir-ast-parser-seam]] and
+[[perl-actionir-ast-if-control-lowering]] own the typed-field mechanisms.
+The guide's separate storage-setup correction remains `.2.2`-owned as documented
+in [[conformance-write-cli-reading]].
