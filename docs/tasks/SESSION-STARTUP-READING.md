@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 45/51; .1.46 follows child 45; .2.1-.2.33 own thirty-three concrete repair roots, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 46/51; .1.47 follows child 46; .2.1-.2.33 own thirty-three concrete repair roots, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.45 reads three exact ranges in nine complete windows: 1,500 fragments /59,366 bytes; cumulative 45/51, 63,040 fragments /2,401,656 bytes. All 99 Lua sources remain baseline-identical; 83 files are fully read. Query 571 and native-prefix 41 assertions pass per installed host; generated observation passes 80/80 on LuaJIT and remains FAIL 79/80, exit1, on PUC5.5 for the known nil-error identity difference. Total proof is 1,383/1,384, with the failure retained under .2.2. Existing .2.1 gains exact observation-stage/identity qualifications; no new repair node. All thirty-three repair roots and earlier exclusions/failures remain open. Next .1.46 reads the native-observation suffix and four semantic-test ranges, including the required notes rollover; named arguments and startup/ADR0118 prerequisites remain unchanged.
+  Verification: Lua .1.46 reads five exact ranges in eleven complete windows: 1,500 fragments /62,032 bytes; cumulative 46/51, 64,540 fragments /2,463,688 bytes. All 99 Lua sources remain baseline-identical; 87 files are fully read. Projection 269/source 382/graph 64 pass per host; native observation passes 121/121 on LuaJIT and remains PUC5.5 FAIL 120/121 exit1 for known nil identity. Full-suite proof totals 1,671/1,672. Complete static helper prefixes load without behavior assertions. Forty-eight exact observations confirm six table-valued missing-field fixtures and correct actual-absence rejection; new .2.34/.1/.2 owns the test repair. Existing .2.1/.2.2 gain qualifications; all thirty-four repair roots remain open. The required notes rollover preserves exact history. Next .1.47 reads remaining-static, admission, source-alias and staged-test ranges; named arguments and startup/ADR0118 prerequisites remain unchanged.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -4607,7 +4607,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.46` | `pending` | Read the owned native-observation suffix and semantic-test ranges after clean .1.45; retain known PUC5.5 failures, verify required notes rollover and preserve all repair owners and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.47` | `pending` | Read the owned remaining-static, admission, source-alias and staged-test ranges after clean .1.46; preserve all thirty-four repair roots, known runtime failures, native-error exclusions and parked named arguments. |
 
 ## Reading Ledger
 

@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `98c15b80597cff8fc25b52e93ff1f99a155c5598` — clean Lua reading child 45 activation.
-- latest_completed_leaf: `LUA-STARTUP-READING.1.45 - read semantic query and generated observation tests`; reading 45/51; query 571/native-prefix 41 pass per host; generated LuaJIT 80/80 and PUC5.5 FAIL 79/80 remain exact.
-- active_work_unit: `LUA-STARTUP-READING.1.46` — next exact semantic test-source reading child with required notes rollover.
-- next_action: Read the five exact .1.46 ranges: native observation 258-548, runtime projection 1-472, source foundation 1-438, static graph 1-226 and static remaining 1-73; preserve known PUC5.5 failures, own and verify the required notes rollover, sync focused evidence/book and commit.
+- activation_commit: `47bea50a5f05756eac9d117662aedd649e483c61` — clean Lua reading child 46 activation.
+- latest_completed_leaf: `LUA-STARTUP-READING.1.46 - read semantic foundations and track missing-field fixture gap`; reading 46/51; exact 1671/1672 suites retain known PUC nil failure; 48 observations own .2.34 fixture repair; notes rollover verified.
+- active_work_unit: `LUA-STARTUP-READING.1.47` — next exact semantic/staged test-source reading child.
+- next_action: Read the four exact .1.47 ranges: remaining static 74-337, semantic admission 1-659, source-boundary aliases 1-337 and staged enrichment 1-240; reconcile Knowledge and all repair owners, run safe focused proof, sync the book and commit.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; .1.45 reading and exact query/generated/native-prefix evidence, including known failure, are committed at the current Git HEAD.
-- blockers: none for bounded .1.46 reading. Prior PUC5.5 nil-error tests fail under .2.2; public-selector baseline fails under .28.7. All repair and supported-runtime prerequisites remain.
+- in_flight_uncommitted: none; .1.46 reading, exact known failure/fixture intake and verified notes rollover are committed at the current Git HEAD.
+- blockers: none for bounded .1.47 reading. Prior PUC5.5 nil-error tests fail under .2.2; public-selector baseline fails under .28.7. All repair and supported-runtime prerequisites remain.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -52,9 +52,9 @@
   README remains bounded; ordinary leaves use focused proof and designated infrastructure/public/push boundaries
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
 - current_engineering_notes_capacity: ADR0118 admits 34 files /33 manifest lines /19902 manifest bytes and 28000 aggregate lines for finite Lua reading.
-  Lua .1.15 rollover preserves prior history exactly; current manifest is 18066 bytes /30 lines and collection of 30 files; other limits remain unchanged.
+  Lua .1.46 rollover preserves exact history as segment4976-8f23f4b6bde6; current manifest is 18678 bytes /31 lines, collection 32 files including hot root; other limits remain unchanged.
 - current_change_history_capacity: ADR0118 admits 38 files /37 manifest lines /21071 manifest bytes; current collection uses 36 files /35 manifest lines /19919 manifest bytes.
   Lua .1.36 rollover preserves the exact clean-HEAD suffix as segment4977-65e8f007697e; earlier archive bytes and other history controls remain unchanged. Proportionate governance: ADR0115.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart/Julia reading closed; Lua reading 45/51 (63,040 fragments/2,401,656 bytes), plan 51 groups, 99 files /71,269 fragments /2,732,450 bytes. Supporting code, formal book .4 and policy .5 remain.
+- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart/Julia reading closed; Lua reading 46/51 (64,540 fragments/2,463,688 bytes), plan 51 groups, 99 files /71,269 fragments /2,732,450 bytes. Supporting code, formal book .4 and policy .5 remain.

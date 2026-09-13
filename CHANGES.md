@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua semantic foundation and observation-fixture reading
+
+- Read five ranges in eleven complete windows: 1,500 fragments /62,032 bytes; cumulative 46/51 and 2,463,688 bytes, with 87 complete files.
+- Projection 269/source 382/graph 64 pass per host; native LuaJIT 121 passes and PUC5.5 retains its known nil-identity failure at 120/121, exit1.
+- Forty-eight observations confirm six mislabeled missing-field fixtures; real absent fields already reject. New .2.34 and two children own exact fixture repair and proof.
+- LUA-STARTUP-READING.1.46 preserves source, prior repairs and exact history through the required notes rollover; .1.47 is the next reading frontier.
+
 ## 2026-09-13 — Lua query and generated-observation consumer reading
 
 - Read three exact ranges in nine windows: 1,500 fragments /59,366 bytes; cumulative 45/51 and 2,401,656 bytes, with 83 complete files.

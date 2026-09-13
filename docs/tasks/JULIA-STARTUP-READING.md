@@ -1742,7 +1742,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.46` | `pending` | Read the owned native-observation suffix and semantic-test ranges after clean .1.45; retain known PUC5.5 failures, verify required notes rollover and preserve all repair owners and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.47` | `pending` | Read the owned remaining-static, admission, source-alias and staged-test ranges after clean .1.46; preserve all thirty-four repair roots, known runtime failures, native-error exclusions and parked named arguments. |
 
 ## Decisions
 
