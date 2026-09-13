@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.30 — complete rule-label data and read uniform-binding contract
+
+Conformance .1.30 reads 5 complete windows, 1,500 fragments and 23,627 baseline-identical bytes. Physical reading is 30/143: 39,431 fragments, 1,110,976 bytes and 53 complete files. All 806 rule-label ranges and 9 positive/8 negative/2 distinct fixtures are read. The uniform-binding prefix specifies typed bare reads, mutation results, exact selector retirement and retained constructors. Fresh neutral binding proof passes; new .2.1 owns stale rollout guidance with repair and independent verification children. Next .1.31 owns the final fixture expectations and later contracts; runtime repairs remain open.
+
+Fresh managed tools/check_uniform_binding_contract.py passes 11 migrations, 7 executions, 6 invalid selectors and 8 constructors, including deterministic full fixture validation without granting reading credit beyond168. Retain unchanged offline rule-label generation/byte-comparison proof from .1.28 at ddbdbbc9a. Fresh window replay, complete inventory, cumulative coverage, source/task/history preservation, rendered book, memory and bounded-history checks govern this focused reading leaf. Normal doctrines remain required; no new native or admission result.
+
 ## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.29 — read rule-label ranges through supplementary scripts
 
 Conformance .1.29 reads 3 complete windows, 1,500 fragments and 15,123 baseline-identical bytes. Physical reading is 29/143: 37,931 fragments, 1,087,349 bytes and 52 complete files. Rule-label reading now covers 494 complete XID_Continue ranges, including Indic scripts, Hangul, compatibility forms and supplementary scalars, with every gap preserved. The next lower endpoint 10A3F remains .1.30-owned. Unchanged offline generation proof from .1.28 is retained; all runtime repairs remain open.

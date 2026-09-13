@@ -497,18 +497,20 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 decoded bytes. Twenty-nine groups now account for
-37,931 fragments and 1,087,349 bytes, including 52 complete files. The Unicode
-casing contract is fully read. Rule-label reading reaches 494 complete
-`XID_Continue` ranges, including Indic scripts, Hangul, compatibility forms,
-fullwidth forms and supplementary characters. Membership follows each exact
-interval and its gaps; it does not accept every character in a script or block.
-The same class applies at every label position, including the first. Case and
-exact scalar sequence remain unchanged, with no normalization or case mapping.
-The unchanged offline generation proof from the preceding slice is retained:
-806 ranges, 9 positive, 8 negative and 2 distinct fixtures. Later source ranges
-and runtime repair tasks remain open. Named-argument support remains an approved
-future direction. The capability guide still has stale
+143 bounded groups covering 8,257,059 decoded bytes. Thirty groups now account for
+39,431 fragments and 1,110,976 bytes, including 53 complete files. Both Unicode
+contracts are fully read, including all 806 rule-label ranges and their fixtures.
+The uniform-binding contract prefix defines one typed value per identifier:
+`items` reads that value, and `set(items, ["b", "a"])` yields the assigned array.
+This allows a following `.sorted().first()` to return `"a"`. Exact
+`array(items)` and `hash(meta)` selector forms are removed; `[items]` constructs
+a one-element array, while empty, quoted and computed constructor calls retain
+their separate meaning. Static rule names still take precedence in ambiguous
+`push` calls. Fresh neutral validation passes 11 migrations, 7 executions,
+6 invalid selectors and 8 constructor cases. The guidance still has a dated
+rollout statement to reconcile with completed backend rejection; that correction
+has its own repair and verification tasks. Later source ranges and runtime
+repairs remain open. Named-argument support remains an approved future direction. The capability guide still has stale
 current census, governance/inventory/public counts and generic-callable wording.
 Existing startup `.41.6` and `.41.7` now own these exact paragraphs and meaningful
 checks against recurrence. Their selected-marker guards currently miss the

@@ -2299,7 +2299,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
   Children: `.3.8.0` owns exact decomposition; `CONFORMANCE-SOURCE-READING.1` owns all143 reading groups; .2 findings and .3 independent closeout stay separate.
-  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; .3.8.0 preserves143 groups/302 exact ranges over160 baseline-identical inputs. Physical reading29/143: cumulative37931 fragments/1087349 bytes,52 complete files and Unicode-rule-label1-2017. Prior unchanged Unicode generation proof remains scoped; .1.30 owns the continuation. All repairs/prerequisites remain.
+  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; .3.8.0 preserves143 groups/302 exact ranges over160 baseline-identical inputs. Physical reading30/143: cumulative39431 fragments/1110976 bytes,53 complete files and rule-label through EOF and uniform-binding1-168. Prior unchanged Unicode generation proof remains scoped; .1.31 owns the continuation. All repairs/prerequisites remain.
   Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
     inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
   Verification: `pending`
@@ -4641,7 +4641,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.30` | `pending` | `capability_conformance/unicode_rule_label_contract.json` lines 2018-3349; `capability_conformance/uniform_binding_contract.json` lines 1-168; 1500 fragments/23627 bytes. Preserve complete bounded windows, source identity and all repairs. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.31` | `pending` | `capability_conformance/uniform_binding_contract.json` lines 169-179; `capability_conformance/write_map_leaves_composition_contract.json` lines 1-279; `capability_conformance/write_vivification_contract.json` lines 1-551; `cli_conformance/README.md` lines 1-136; `cli_conformance/cases/failure/stderr.txt` lines 1-1; `cli_conformance/cases/help/stdout.txt` lines 1-50; `cli_conformance/cases/success/input.txt` lines 1-1; `cli_conformance/cases/success/nested.spec` lines 1-5; `cli_conformance/cases/trace/appended_low.txt` lines 1-7; `cli_conformance/cases/trace/debug_emoji_stdout.txt` lines 1-12; `cli_conformance/cases/trace/failure_input_low.txt` lines 1-4; `cli_conformance/cases/trace/failure_invoke_escaped_medium.txt` lines 1-7; `cli_conformance/cases/trace/failure_invoke_low.txt` lines 1-6; `cli_conformance/cases/trace/failure_low.txt` lines 1-2; `cli_conformance/cases/trace/full.txt` lines 1-10; `cli_conformance/cases/trace/full_stdout.txt` lines 1-11; `cli_conformance/cases/trace/high_stdout.txt` lines 1-10; `cli_conformance/cases/trace/high_utf8_stdout.txt` lines 1-10; `cli_conformance/cases/trace/low.txt` lines 1-6; `cli_conformance/cases/trace/low_emoji.txt` lines 1-6; `cli_conformance/cases/trace/low_stdout.txt` lines 1-7; `cli_conformance/cases/trace/medium_stdout.txt` lines 1-8; `cli_conformance/cases/trace/stale.txt` lines 1-1; `cli_conformance/cases/usage/stderr.txt` lines 1-52; `cli_conformance/manifest.json` lines 1-33; 1226 fragments/65536 bytes. Preserve complete bounded windows, source identity and all repairs. |
 
 ## Reading Ledger
 

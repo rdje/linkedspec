@@ -9,7 +9,7 @@ answers:
   - "how do I verify conformance reading source and range coverage"
   - "which conformance source reading file has the longest line"
 date: 2026-09-13
-status: exact decomposition preserved; physical reading 29/143, 52 files complete and 114 groups remain
+status: exact decomposition preserved; physical reading 30/143, 53 files complete and 113 groups remain
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -399,12 +399,12 @@ properties, context rules, fixtures or decoded upstream inputs. All repairs rema
 
 ## Unicode reading checkpoint
 
-`CONFORMANCE-SOURCE-READING.1.29` reads 3 windows, 1,500 fragments and 15,123 bytes.
-Cumulative reading is 29/143, 37,931 fragments, 1,087,349 bytes and 52 complete files.
-Rule-label reading reaches494 complete ranges through10A38-10A3A, followed by
-lower endpoint10A3F. Indic, Hangul, compatibility/fullwidth and supplementary
-membership retains exact gaps and scalar identities. Existing [[unicode-rule-label-contract]]
-owns policy; unchanged806/9/8/2 generation proof is at ddbdbbc9a. Repairs remain open.
+`CONFORMANCE-SOURCE-READING.1.30` reads 5 windows, 1,500 fragments and 23,627 bytes.
+Cumulative reading is 30/143, 39,431 fragments, 1,110,976 bytes and 53 complete files.
+All rule-label ranges and fixtures are read. Uniform binding1-168 fixes typed bare
+reads, result-bearing mutations and exact selector retirement; final fixture results
+remain .1.31-owned. [[conformance-uniform-binding-reading]] records fresh neutral
+11/7/6/8 proof and the .2.1 guidance repair; unchanged label proof is at ddbdbbc9a.
 
 Lowercase table entries and Final Sigma context remain separate. Exact scalar
 sequences, sparse ranges, fullwidth forms and ligature identities are preserved;
