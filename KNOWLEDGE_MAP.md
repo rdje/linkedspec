@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1146** facts · **9142** question keys.
+> **1146** facts · **9144** question keys.
 
 ## Questions → fact
 
@@ -503,6 +503,7 @@
 - "can Rust progressive dispatch load parser paths" -> [rust-progressive-span-dispatch-authority](docs/knowledge/rust-progressive-span-dispatch-authority.md) · 2026-09-07
 - "can Rust staged enrichment run when total_calls and max_calls are u64 maximum" -> [rust-staged-call-counter-saturation](docs/knowledge/rust-staged-call-counter-saturation.md) · 2026-09-07
 - "can Rust staged parse_job access the filesystem or providers" -> [rust-staged-ast-enrichment-current-depth-authority](docs/knowledge/rust-staged-ast-enrichment-current-depth-authority.md) · 2026-09-08
+- "can Unicode Cased and Case_Ignorable properties overlap" -> [lua-unicode-casing-properties-and-rule-label-reading](docs/knowledge/lua-unicode-casing-properties-and-rule-label-reading.md) · 2026-09-13 · reverify: `Run LUA_UNICODE_PROPERTIES_READING_28 and all managed commands below; prior casing fixture and generation proof remains dated in lua-unicode-lower-completion-reading and lua-declaration-trace-reading-and-validation-gaps.`
 - "can a :: rule carry a regex" -> [top-rule-is-ordinary-rule-entered-first](docs/knowledge/top-rule-is-ordinary-rule-entered-first.md) · 2026-06-23 · reverify: `perl -Iperl -e 'use LinkedSpec; my %c; my $s=\"Pair::AND\\n /a/\\n /b/\\n\"; LinkedSpec::Get(\\$s, generate_only=>1, dump_parser_source=>1, runtime_ctx_ref=>\\%c); print ${$c{parser_source_chunks_ref}};'  # emits a standard `Pair => sub { ... while ($idx < 2) { LinkedRE::or(...) } ... }` AND handler -- a top rule compiled exactly like a body rule`
 - "can a Dart child retain nested dispatch authority" -> [dart-progressive-span-dispatch-authority](docs/knowledge/dart-progressive-span-dispatch-authority.md) · 2026-08-17
 - "can a Dart codeblock result feed key access or a receiver chain" -> [dart-callable-codeblock-dynamic-invocation](docs/knowledge/dart-callable-codeblock-dynamic-invocation.md) · 2026-07-30 · reverify: `bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && (cd dart && bash ../tools/run_dart_project_data.sh test test/callable_codeblock_literal_contract_test.dart test/action_ast_parser_test.dart test/variadic_user_function_contract_test.dart) && bash tools/run_dart_local.sh`
@@ -3749,6 +3750,7 @@
 - "how does LinkedSpec semantic_index normalize source" -> [perl-semantic-index-source-foundation](docs/knowledge/perl-semantic-index-source-foundation.md) · 2026-09-06 · reverify: `bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/semantic_index_perl_foundation.t`
 - "how does LinkedSpec.pm dispatch into owner modules" -> [linkedspec-pm-is-thin-facade](docs/knowledge/linkedspec-pm-is-thin-facade.md) · 2026-06-05 · reverify: `wc -l perl/LinkedSpec.pm; test -f perl/LinkedSpec/OwnerDispatch.pm`
 - "how does Lua AST payload copying preserve false and null" -> [lua-spec-ast-loader-reading-and-validation-gaps](docs/knowledge/lua-spec-ast-loader-reading-and-validation-gaps.md) · 2026-09-13
+- "how does Lua Final Sigma handle overlapping Unicode properties" -> [lua-unicode-casing-properties-and-rule-label-reading](docs/knowledge/lua-unicode-casing-properties-and-rule-label-reading.md) · 2026-09-13 · reverify: `Run LUA_UNICODE_PROPERTIES_READING_28 and all managed commands below; prior casing fixture and generation proof remains dated in lua-unicode-lower-completion-reading and lua-declaration-trace-reading-and-validation-gaps.`
 - "how does Lua MCP measure monotonic expiry" -> [lua-native-mcp-server-plan](docs/knowledge/lua-native-mcp-server-plan.md) · 2026-07-29
 - "how does Lua MCP obtain secure random bytes" -> [lua-native-mcp-server-plan](docs/knowledge/lua-native-mcp-server-plan.md) · 2026-07-29
 - "how does Lua MCP preserve JSON integer versus number kinds" -> [lua-native-mcp-server-plan](docs/knowledge/lua-native-mcp-server-plan.md) · 2026-07-29
@@ -9589,7 +9591,7 @@ _Capability guide retains stale current census and callable claims behind passin
 _Conformance and Unicode reading has exact baseline ownership in 143 bounded groups_
 
 - **answers:** how are oversized source lines read without truncation | where is conformance test and Unicode source reading tracked | how many conformance source reading groups remain | does source reading include decompressed pinned Unicode inputs | how do I verify conformance reading source and range coverage | which conformance source reading file has the longest line
-- **date:** 2026-09-13 · **status:** exact decomposition preserved; physical reading 26/143, 51 files complete and 117 groups remain
+- **date:** 2026-09-13 · **status:** exact decomposition preserved; physical reading 27/143, 51 files complete and 116 groups remain
 - **evidence:** `Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory.`
 - **reverify:** `Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits.`
 - **source:** [`docs/knowledge/conformance-source-reading-coverage.md`](docs/knowledge/conformance-source-reading-coverage.md)
@@ -14611,7 +14613,7 @@ _Lua typed source location is admitted through one shared dual-ABI consumer_
 ### lua-unicode-casing-properties-and-rule-label-reading
 _Lua casing properties and conversion complete with exact Unicode rule-label table reading_
 
-- **answers:** what exact Lua source did startup reading child 28 cover | do all Lua Cased and Case_Ignorable property ranges match neutral Unicode data | how was Lua Final Sigma checked at property boundaries in startup reading | does the Lua casing decoder reject malformed UTF-8 before returning output | are all 806 Lua Unicode rule-label ranges physically read and verified | which Lua Unicode rule-label next-step guidance remains stale
+- **answers:** can Unicode Cased and Case_Ignorable properties overlap | how does Lua Final Sigma handle overlapping Unicode properties | what exact Lua source did startup reading child 28 cover | do all Lua Cased and Case_Ignorable property ranges match neutral Unicode data | how was Lua Final Sigma checked at property boundaries in startup reading | does the Lua casing decoder reject malformed UTF-8 before returning output | are all 806 Lua Unicode rule-label ranges physically read and verified | which Lua Unicode rule-label next-step guidance remains stale
 - **date:** 2026-09-13 · **status:** exact scoped reading and focused verification complete; existing guidance repair extended
 - **evidence:** `LUA-STARTUP-READING.1.28 activates from e7ddb725afb966836f63574d3afe876bc315f729. All 1500 fragments /34274 bytes are read in seven complete windows. All casing properties and 806 XID_Continue ranges match neutral data. Both installed hosts pass 16276 complete valid casing observations, 136 complete malformed UTF-8 rejection observations and 3412 classifier assertions; offline rule-label regeneration passes. Source and older evidence remain exact; .2.1 gains a precise stale forward-pointer annotation.`
 - **reverify:** `Run LUA_UNICODE_PROPERTIES_READING_28 and all managed commands below; prior casing fixture and generation proof remains dated in lua-unicode-lower-completion-reading and lua-declaration-trace-reading-and-validation-gaps.`

@@ -9,7 +9,7 @@ answers:
   - "how do I verify conformance reading source and range coverage"
   - "which conformance source reading file has the longest line"
 date: 2026-09-13
-status: exact decomposition preserved; physical reading 26/143, 51 files complete and 117 groups remain
+status: exact decomposition preserved; physical reading 27/143, 51 files complete and 116 groups remain
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -399,12 +399,12 @@ properties, context rules, fixtures or decoded upstream inputs. All repairs rema
 
 ## Unicode reading checkpoint
 
-`CONFORMANCE-SOURCE-READING.1.26` reads 3 windows, 1,500 fragments and 14,999 bytes.
-Cumulative reading is 26/143, 33,431 fragments, 1,039,982 bytes and 51 complete files.
-Both case mapping arrays are read; upper closes at line 19045. The first 23 Cased
-range pairs reach 03A3-03F5 at line 19138. Classification ranges remain separate
-from mapping sequences. Unchanged Unicode proof remains at 704e261b; later
-properties, contexts, fixtures, upstream inputs and runtime repairs remain owned.
+`CONFORMANCE-SOURCE-READING.1.27` reads 3 windows, 1,500 fragments and 15,135 bytes.
+Cumulative reading is 27/143, 34,931 fragments, 1,055,117 bytes and 51 complete files.
+All 158 Cased ranges are read. Case_Ignorable reaches 239 complete pairs and the
+A82C lower endpoint at line 20638. Properties can overlap, including U+2071.
+[[lua-unicode-casing-properties-and-rule-label-reading]] owns the existing overlap
+and context evidence; unchanged generation proof and all repair limits remain.
 
 Lowercase table entries and Final Sigma context remain separate. Exact scalar
 sequences, sparse ranges, fullwidth forms and ligature identities are preserved;

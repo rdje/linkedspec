@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 26/143
+- Status: `active` / exact decomposition; physical reading 27/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-13`
@@ -501,14 +501,22 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.26 - complete case mapping arrays and begin property ranges`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.27`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `0660046fb9b9afdc2f6e8266c404139f261763b8`.
+  Verification tier: `focused`
+  Focused checks: Read exact baseline-identical scoped windows; reconcile canonical Knowledge and proportionate proof, preserve source/task/history, and verify memory, book and normal doctrines.
+  Canonical trigger: Ordinary bounded source-reading leaf; no source or public-contract change, admission or parent closeout. Later prerequisites remain.
   Goal: Read and understand conformance/test/Unicode group 27.
   Scope: `capability_conformance/unicode_case_contract.json` lines 19139-20638
   Baseline evidence: 1500 fragments / 15135 decoded bytes; ordered range SHA-256 `ee8c604e1d052100655a1374f5512223f967ae6dd1033dbd684e946dc0340f65`.
   Dependencies: .1.26 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Knowledge scope: Add direct overlap/context questions to the existing Lua property-audit card so its already-established Cased/Case_Ignorable overlap fact is discoverable. Preserve its entire dated narrative, native evidence and reproduction recipe exactly; no new native execution or defect claim is required.
+  Reading evidence: 3 complete windows / 1500 fragments / 15135 bytes; ordered window SHA-256 `62b0d78fd9dfd8d79b667c923038c2166421acad1d9e29a04784a761e90cd9e1`.
+  Comprehension: The range reads the remaining 135 Cased intervals from 03F7-0481 through 1F170-1F189, completing all 158 entries at line 19679. Exact holes, singleton entries and supplementary mathematical/letterlike ranges remain explicit. Case_Ignorable opens at 19680 and includes punctuation 0027/002E/003A, combining and modifier ranges, script-specific marks, format controls, and later ranges through the 239th complete pair A825-A826. Line 20638 gives the next lower endpoint A82C; its upper endpoint and closure remain .1.28-owned. Cased and Case_Ignorable are not disjoint: 2071 and 207F occur in both, as does 0345 through the broader ignorable interval. Knowledge retrieval resolves the existing Lua .1.28 audit, which already documents skipping overlapping ignorable scalars before testing surrounding Cased context and retains its dated property-boundary/native results. The initial card output truncated part of its embedded recipe; a complete bounded follow-up supplied those bytes, with no new source-reading credit or execution claimed. Current work adds direct retrieval questions only; later ranges, context-rule and fixture source remain unread.
+  Verification: Retain the unchanged Unicode 17 generation, byte-equality and 12-fixture proof from CONFORMANCE-SOURCE-READING.1.14 at 704e261b. Fresh window replay, complete range inventory, cumulative coverage, source/task/history preservation, rendered book, memory and document-pressure checks govern this ordinary reading leaf. Native admission evidence remains separately scoped; normal commit doctrines remain required.
+  Candidate proof: All three complete windows replay exactly. The 160-input/143-group/302-range inventory and cumulative 27 groups / 34,931 fragments / 1,055,117 bytes / 51 complete files pass. Scoped data assertions verify all 158 Cased ranges, the exact first 239 complete ignorable pairs, crossing lower endpoint A82C, and overlap examples 0345/2071/207F within read data. Preservation verifies 2,490 exact files, 2,774 prior task nodes, 94 book limitation headings and every prior recipe. The Lua card differs only by its two new retrieval questions; dated native evidence remains exact. The current checkpoint is bounded. Memory passes at 60 lines; rendered coverage and overlap example pass with the already-owned large search-index warning. History checks report changes OK at 162 lines / 32,666 bytes and notes WARN at 273 lines / 55,119 bytes, below required rollover. Whitespace is clean; unchanged generation and dated context proof are retained. Normal commit doctrines remain required.
+  Commit: `CONFORMANCE-SOURCE-READING.1.27 - complete Cased ranges and read Case Ignorable prefix`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.28`
   Status: `pending`
@@ -1691,7 +1699,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.27` | `pending` | `capability_conformance/unicode_case_contract.json` lines 19139-20638; 1500 fragments/15135 bytes. Preserve complete bounded windows, source identity and all repairs. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.28` | `pending` | `capability_conformance/unicode_case_contract.json` lines 20639-21621; `capability_conformance/unicode_rule_label_contract.json` lines 1-517; 1500 fragments/17109 bytes. Preserve complete bounded windows, source identity and all repairs. |
 
 ## Decisions
 
@@ -1704,6 +1712,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Verification Log
 
+- `2026-09-13` .1.27: Conformance .1.27 reads 3 complete windows, 1,500 fragments and 15,135 baseline-identical bytes. Physical reading is 27/143: 34,931 fragments, 1,055,117 bytes and 51 complete files. All Cased property ranges are read, followed by the first 239 complete Case_Ignorable ranges and the next lower endpoint. The separate property sets can overlap; the existing Lua audit already owns that fact and its scoped context proof. Two direct Knowledge questions improve retrieval without altering its historical evidence. The bounded checkpoint is updated in place; unchanged Unicode generation proof is retained. Next .1.28 owns the crossing A82C range and continuation; all runtime repairs remain open.
 - `2026-09-13` .1.26: Conformance .1.26 reads 3 complete windows, 1,500 fragments and 14,999 baseline-identical bytes. Physical reading is 26/143: 33,431 fragments, 1,039,982 bytes and 51 complete files. Both Unicode case mapping arrays are fully read. Supplementary uppercase rows close before the initial Cased property ranges, whose classification role remains distinct from conversion sequences. The required change-history rollover preserves exact committed suffix records and unchanged capacity limits. The bounded checkpoint is updated in place; unchanged offline Unicode proof is retained. Next .1.27 owns later property ranges and all runtime repairs remain open.
 - `2026-09-13` .1.25: Conformance .1.25 reads 3 complete windows, 1,500 fragments and 14,739 baseline-identical bytes. Physical reading is 25/143: 31,931 fragments, 1,024,983 bytes and 51 complete files. Uppercase reading covers further Latin and Cherokee rows, ordered Latin/Armenian ligature expansions, fullwidth pairs and supplementary scalars. Exact scalar sequences and encoded forms remain distinct. The bounded checkpoint is updated in place. Unchanged offline Unicode proof is retained. Next .1.26 owns the crossing 104F8-to-104D0 entry and continuation; all runtime repairs remain open.
 - `2026-09-13` .1.24: Conformance .1.24 reads 3 complete windows, 1,500 fragments and 14,500 baseline-identical bytes. Physical reading is 24/143: 30,431 fragments, 1,010,244 bytes and 51 complete files. Uppercase reading covers numeral, circled-letter, Glagolitic, Coptic, Georgian and extended Cyrillic/Latin mappings. Sparse entries and non-adjacent targets remain explicit, including the Georgian 2Dxx family. The bounded checkpoint is updated in place. Unchanged offline Unicode proof is retained. Next .1.25 starts after the closed A74F-to-A74E entry; all runtime repairs remain open.
@@ -1734,6 +1743,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Commit Log
 
+- `2026-09-13` .1.27: `CONFORMANCE-SOURCE-READING.1.27 - complete Cased ranges and read Case Ignorable prefix`; activation 0660046fb9b9afdc2f6e8266c404139f261763b8; next .1.28 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.26: `CONFORMANCE-SOURCE-READING.1.26 - complete case mapping arrays and begin property ranges`; activation 38c45c2883d9932f38ec4a511130c1f5bd94de1b; next .1.27 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.25: `CONFORMANCE-SOURCE-READING.1.25 - read Cherokee ligature and supplementary uppercase mappings`; activation 66c75ec5c83c00880cfaed4bb7ca4921b003a1a6; next .1.26 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.24: `CONFORMANCE-SOURCE-READING.1.24 - read numeral circled and extended uppercase mappings`; activation a4c9bd63e5127bff0b92d49dfd4bfdad15b04ebd; next .1.25 after clean handoff and zero-byte brief.
@@ -1764,6 +1774,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Changelog
 
+- `2026-09-13` .1.27: All Cased property ranges are read, followed by the first 239 complete Case_Ignorable ranges and the next lower endpoint. The separate property sets can overlap; the existing Lua audit already owns that fact and its scoped context proof. Two direct Knowledge questions improve retrieval without altering its historical evidence. The bounded checkpoint is updated in place; unchanged Unicode generation proof is retained. Next .1.28 owns the crossing A82C range and continuation; all runtime repairs remain open.
 - `2026-09-13` .1.26: Both Unicode case mapping arrays are fully read. Supplementary uppercase rows close before the initial Cased property ranges, whose classification role remains distinct from conversion sequences. The required change-history rollover preserves exact committed suffix records and unchanged capacity limits. The bounded checkpoint is updated in place; unchanged offline Unicode proof is retained. Next .1.27 owns later property ranges and all runtime repairs remain open.
 - `2026-09-13` .1.25: Uppercase reading covers further Latin and Cherokee rows, ordered Latin/Armenian ligature expansions, fullwidth pairs and supplementary scalars. Exact scalar sequences and encoded forms remain distinct. The bounded checkpoint is updated in place. Unchanged offline Unicode proof is retained. Next .1.26 owns the crossing 104F8-to-104D0 entry and continuation; all runtime repairs remain open.
 - `2026-09-13` .1.24: Uppercase reading covers numeral, circled-letter, Glagolitic, Coptic, Georgian and extended Cyrillic/Latin mappings. Sparse entries and non-adjacent targets remain explicit, including the Georgian 2Dxx family. The bounded checkpoint is updated in place. Unchanged offline Unicode proof is retained. Next .1.25 starts after the closed A74F-to-A74E entry; all runtime repairs remain open.

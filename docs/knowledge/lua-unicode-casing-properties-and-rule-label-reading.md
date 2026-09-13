@@ -2,6 +2,8 @@
 id: lua-unicode-casing-properties-and-rule-label-reading
 title: Lua casing properties and conversion complete with exact Unicode rule-label table reading
 answers:
+  - "can Unicode Cased and Case_Ignorable properties overlap"
+  - "how does Lua Final Sigma handle overlapping Unicode properties"
   - "what exact Lua source did startup reading child 28 cover"
   - "do all Lua Cased and Case_Ignorable property ranges match neutral Unicode data"
   - "how was Lua Final Sigma checked at property boundaries in startup reading"

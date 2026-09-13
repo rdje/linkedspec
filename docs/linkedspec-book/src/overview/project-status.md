@@ -497,14 +497,15 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 decoded bytes. Twenty-six groups now account for
-33,431 fragments and 1,039,982 bytes, including 51 complete files. Both Unicode
-case mapping arrays are fully read. Reading has begun on the `Cased` property
-ranges, which classify characters separately from the conversion sequences. The
-initial ranges include ASCII letters and singleton entries such as U+00AA and
-U+0345. The unchanged offline generation proof is retained. Later property ranges,
-context rules, fixtures and upstream inputs remain to be read; all runtime repair
-tasks stay open. Named-argument support remains an approved future direction. The capability guide still has stale
+143 bounded groups covering 8,257,059 decoded bytes. Twenty-seven groups now account for
+34,931 fragments and 1,055,117 bytes, including 51 complete files. Both case mapping
+arrays and all `Cased` ranges are fully read. Reading continues through the
+`Case_Ignorable` ranges, which include punctuation, combining marks, modifiers
+and format controls. These are separate properties that can overlap: U+2071,
+for example, appears in both sets. The unchanged offline generation proof is
+retained. Later ranges, context rules, fixtures and upstream inputs remain to be
+read; all runtime repair tasks stay open. Named-argument support remains an
+approved future direction. The capability guide still has stale
 current census, governance/inventory/public counts and generic-callable wording.
 Existing startup `.41.6` and `.41.7` now own these exact paragraphs and meaningful
 checks against recurrence. Their selected-marker guards currently miss the

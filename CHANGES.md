@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.27 — complete Cased ranges and read Case Ignorable prefix
+
+Conformance .1.27 reads 3 complete windows, 1,500 fragments and 15,135 baseline-identical bytes. Physical reading is 27/143: 34,931 fragments, 1,055,117 bytes and 51 complete files. All Cased property ranges are read, followed by the first 239 complete Case_Ignorable ranges and the next lower endpoint. The separate property sets can overlap; the existing Lua audit already owns that fact and its scoped context proof. Two direct Knowledge questions improve retrieval without altering its historical evidence. The bounded checkpoint is updated in place; unchanged Unicode generation proof is retained. Next .1.28 owns the crossing A82C range and continuation; all runtime repairs remain open.
+
+Retain the unchanged Unicode 17 generation, byte-equality and 12-fixture proof from CONFORMANCE-SOURCE-READING.1.14 at 704e261b. Fresh window replay, complete range inventory, cumulative coverage, source/task/history preservation, rendered book, memory and document-pressure checks govern this ordinary reading leaf. Native admission evidence remains separately scoped; normal commit doctrines remain required.
+
 ## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.26 — complete case mapping arrays and begin property ranges
 
 Conformance .1.26 reads 3 complete windows, 1,500 fragments and 14,999 baseline-identical bytes. Physical reading is 26/143: 33,431 fragments, 1,039,982 bytes and 51 complete files. Both Unicode case mapping arrays are fully read. Supplementary uppercase rows close before the initial Cased property ranges, whose classification role remains distinct from conversion sequences. The required change-history rollover preserves exact committed suffix records and unchanged capacity limits. The bounded checkpoint is updated in place; unchanged offline Unicode proof is retained. Next .1.27 owns later property ranges and all runtime repairs remain open.
