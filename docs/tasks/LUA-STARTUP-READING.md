@@ -2268,7 +2268,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.11` | `pending` | Read semantic contract364-716 and model1-201:554 fragments/65425 bytes. Preserve exact bounded presentation, crossing admission ownership and all repairs. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.12` | `pending` | Read semantic model202-217 and staged-enrichment contract1-996:1012 fragments/65472 bytes. Preserve exact bounded presentation, crossing snapshot ownership and all repairs. |
 
 ## Decisions
 

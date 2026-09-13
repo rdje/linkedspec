@@ -9,7 +9,7 @@ answers:
   - "how do I verify conformance reading source and range coverage"
   - "which conformance source reading file has the longest line"
 date: 2026-09-13
-status: exact decomposition preserved; physical reading 10/143, forty-six files complete and133 groups remain
+status: exact decomposition preserved; physical reading 11/143, forty-seven files complete and132 groups remain
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -332,3 +332,19 @@ remain. Fresh numeric55/18 and Perl text7 checks pass without broadening coverag
 deterministic budget prefixes and native source ceilings. The six exact inputs,
 twenty query cases and Perl/Rust roles are read; later model/rollout bytes remain
 unread. Fresh semantic neutral proof passes; no native matrix or repair closes.
+
+
+## September 13 semantic rollout and model reading
+
+`.1.11` reads 12 windows, 554 fragments and 65,425 baseline-identical bytes.
+The semantic contract reaches EOF; model1–201 completes graph, calls, failed,
+runtime and privacy snapshots, then enters the identity-limited source reference.
+Cumulative reading is11/143,12,078 fragments,699,655 bytes and47 complete files.
+[[semantic-introspection-public-no-drift]] owns28 surfaces/nine examples; the
+[[semantic-introspection-recurring-gate]] retains six twelve-role admissions and
+the selected30-leg primary projection. [[semantic-introspection-staged-artifact-schema]]
+now explicitly dates its private milestones against the existing9/9 public rollout.
+Duplicate slots, staged versus generated provenance, failed compilation and
+captured execution remain distinct. Unicode byte spans and scalar columns differ.
+The identity-limited model suffix remains unread. Existing semantic proof is
+retained and rechecked after governed public edits; no native matrix is claimed.

@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 10/143
+- Status: `active` / exact decomposition; physical reading 11/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-13`
@@ -222,14 +222,22 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.10 - read scalar contracts and semantic query prefix`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.11`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `388f09aec9b7fe4c71362bae29a3f9b39b78259b`.
+  Verification tier: `focused`
+  Focused checks: Read exact baseline-identical semantic windows; reconcile Knowledge and existing neutral proof, preserve source/task/history, and verify memory, book and normal doctrines.
+  Canonical trigger: Ordinary bounded source-reading leaf; no source or public-contract change, admission or parent closeout. Later prerequisites remain.
   Goal: Read and understand conformance/test/Unicode group 11.
   Scope: `capability_conformance/semantic_introspection_contract.json` lines 364-716; `capability_conformance/semantic_introspection_model.json` lines 1-201
   Baseline evidence: 554 fragments / 65425 decoded bytes; ordered range SHA-256 `ee919b4d20cab4af9531868f266b574053ceeaa3171c285db6567437f5e4ff1c`.
   Dependencies: .1.10 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 12 complete windows / 554 fragments / 65425 bytes; ordered window SHA-256 `f8479f2c2450ae6d7bcf5d7250c581a58363b088530564e8814c553f20bd2be4`.
+  Comprehension: The semantic contract finishes all six admitted twelve-role consumers, the selected three-case/five-command/two-environment primary projection, 28 public surfaces, nine worked example families, 9/9 rollout and 128 mutations. These records retain their existing admission evidence rather than claiming a new native run. The model graph keeps authored duplicate slots and indexed relations distinct, with lifecycle array shape and first-marker explanations. The calls model separates function-body payload, parse job and result from generated-source-v2 handler plans; helper resolution, binding reads/writes and directed provenance remain explicit. Failed compilation retains authored identity but no compiled rule order or selected entry. Runtime events describe caller-captured slot selections and final result; queries do not run the parser. Unicode names use escaped UTF-8 IDs while byte spans differ from scalar columns. Model line201 starts the identity-limited source reference; its remaining fields and records belong to .1.12.
+  Verification: reconstruct all 12 source windows and all 143 groups/302 ranges; verify cumulative reading, source/task/history preservation and prior Knowledge recipes. Recheck the semantic neutral contract after final governed documentation changes. Memory, Knowledge, both history checks, rendered book, git diff --check and normal doctrines govern focused landing. Any required engineering-history rollover preserves an exact clean-HEAD suffix under unchanged controls. No native matrix, dependency build or runtime repair is claimed.
+  History rollover: Engineering notes435 lines/60214 bytes required the existing --apply workflow; root177/31917, exact clean388f09ae lines172-429 archived as258 lines/28297 bytes in segment4975-47ec3018dc4a. All30 older manifest records and targets remain exact; collection33 files/32 manifest lines/19290 bytes fits unchanged limits. Combined current-plus-archive reconstruction equals prior2868764 bytes; immutable recipe is CONFORMANCE_NOTES_HISTORY_ROLLOVER in bounded-change-notes-history-contract.
+  Candidate proof: All12 windows reconstruct exactly; all160 baseline inputs/143 groups/302 ranges remain identical. Cumulative11/143,12078 fragments/699655 bytes,47 complete files. Preservation compares2486 files byte-for-byte,2774/2776 nodes unchanged, three cards retain prior recipes and all94 book limitation headings remain. Semantic6 groups/20 queries/128 mutations/9 complete rollout/6 complete admission passes after the governed edits. Memory60 lines and rendered book paragraph pass. History checks: CHANGES289 lines/42183 bytes; notes177/31917 after exact rollover. Notes collection includes the root:33 files/27121 lines/2889734 bytes, with32 manifest lines/19290 bytes, within unchanged caps. Plain diff check flags only the preserved notes177 record-separator blank at EOF; strict check of every other file and command-local blank-at-eof adjustment for DEVELOPMENT_NOTES.md preserve all historical bytes. No Git config, attributes or hooks change; normal doctrines remain required.
+  Commit: `CONFORMANCE-SOURCE-READING.1.11 - read semantic rollout and model identities`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.12`
   Status: `pending`
@@ -1572,7 +1580,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.11` | `pending` | Read semantic contract364-716 and model1-201:554 fragments/65425 bytes. Preserve exact bounded presentation, crossing admission ownership and all repairs. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.12` | `pending` | Read semantic model202-217 and staged-enrichment contract1-996:1012 fragments/65472 bytes. Preserve exact bounded presentation, crossing snapshot ownership and all repairs. |
 
 ## Decisions
 
@@ -1585,6 +1593,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Verification Log
 
+- `2026-09-13` .1.11: Conformance .1.11 reads 12 complete windows, 554 fragments and 65,425 baseline-identical bytes. The semantic-introspection contract reaches EOF; model reading reaches line 201, inside the identity-limited snapshot. Physical reading is 11/143: 12,078 fragments, 699,655 bytes and 47 complete files. The model separates duplicate slots, staged payload/job/result provenance, generated plans, compilation failure and captured runtime observation. The staged-schema card now explicitly dates its private implementation milestones and points to completed public rollout. Existing semantic neutral proof is retained and rechecked after governed documentation edits; no native admission or runtime repair is claimed.
 - `2026-09-13` .1.10: Conformance .1.10 reads 18 complete windows, 789 fragments and 65,489 baseline-identical bytes. Cursor ownership, numeric/text contracts and six semantic fixture inputs reach EOF; semantic-introspection contract reading reaches line 363. Physical reading is 10/143: 11,524 fragments, 634,230 bytes and 46 complete files. Numeric 55-case/18-helper, Perl scalar-text 7-test and semantic neutral proof pass. Numeric rejection of booleans remains distinct from scalar-text conversion; paging budgets and source-detail ceilings remain explicit. No source or runtime defect changes; .1.11 owns the crossing Dart admission consumer and semantic model prefix.
 - `2026-09-13` .1.9: Conformance .1.9 reads 11 complete windows, 1,445 fragments and 65,519 baseline-identical bytes. Repetition and root-selection contracts reach EOF; the cursor contract is read through line 160. Physical reading is 9/143: 10,735 fragments, 568,741 bytes and 37 complete files. Fresh repetition8/10/8-complete/54, root8/3/3/7-complete/54 and cursor36/18/8/74-files/8-complete/60 neutral proof passes. Repetition values, lifecycle exits, authored marker identity, execution selection, strict-unused edges and intrinsic child cursor policy remain distinct. Current root public24/18 and cursor public30/28 inventories reconcile their dated milestones. No source or runtime defect changes; .1.10 owns the crossing Rust cursor-role list and following scalar/semantic inputs.
 - `2026-09-13` .1.8: Conformance .1.8 reads 15 complete windows, 1,500 fragments and 65,525 baseline-identical bytes. Progressive dispatch, punctuation aliases, recognition transactions and three explicit-OR fixture files reach EOF; the repetition contract is read through line 157. Physical reading is 8/143: 9,290 fragments, 503,222 bytes and 35 complete files. Fresh punctuation6/4/6 and recognition138/250/58 plus public3/26/45 proof pass. The contracts separate parent recognition progress, bounded child dispatch, strict match booleans, staged payloads and per-hit repetition returns. The older punctuation fact card now qualifies its pre-emitter Lua milestone using existing generated-source admission. All runtime repairs remain open; .1.9 owns the crossing bounded-repetition case and following contracts.
@@ -1599,6 +1608,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Commit Log
 
+- `2026-09-13` .1.11: `CONFORMANCE-SOURCE-READING.1.11 - read semantic rollout and model identities`; activation 388f09aec9b7fe4c71362bae29a3f9b39b78259b; next .1.12 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.10: `CONFORMANCE-SOURCE-READING.1.10 - read scalar contracts and semantic query prefix`; activation d4ea5c63d7d87b7b113c9ebac846b58ab700654f; next .1.11 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.9: `CONFORMANCE-SOURCE-READING.1.9 - read repetition root selection and cursor ownership`; activation 445764d606459a8ff43ecb4c985b0a189593d3b3; next .1.10 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.8: `CONFORMANCE-SOURCE-READING.1.8 - read progressive recognition and repetition boundaries`; activation 708ecbff2b1741c666f4399986270f002b8a6162; next .1.9 after clean handoff and zero-byte brief.
@@ -1613,6 +1623,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Changelog
 
+- `2026-09-13` .1.11: Complete semantic rollout reading and five model snapshots; qualify dated private-projection milestones. Keep the identity-limited suffix, history controls and all repairs owned.
 - `2026-09-13` .1.10: Complete cursor/scalar and semantic fixture reading; read semantic schema/query prefix without changing source, historical evidence or repair state.
 - `2026-09-13` .1.9: Complete repetition/root-selection reading and cursor prefix; reconcile current public inventories without changing source, authority, historical evidence or repair state.
 - `2026-09-13` .1.8: Complete progressive, punctuation, recognition and repetition fixtures; qualify the dated no-emitter projection through existing Lua admission. Repetition suffix and all runtime repairs remain owned.

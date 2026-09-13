@@ -98,3 +98,37 @@ assert source.endswith(segment)
 print('PASS exact clean source suffix, immutable segment identity and all34 older manifest records.')
 CONFORMANCE_CHANGE_HISTORY_ROLLOVER
 ```
+
+
+## September 13 semantic-reading engineering-history rollover
+
+`CONFORMANCE-SOURCE-READING.1.11` requires rollover at 435 lines/60,214 bytes.
+The existing tool retains 177 lines/31,917 bytes and archives clean commit
+`388f09aec9b7fe4c71362bae29a3f9b39b78259b` lines 172–429: 258 lines/28,297 bytes
+as segment 4975-47ec3018dc4a. All 30 older records and target bytes remain exact.
+The resulting 33-file collection and 32-line/19,290-byte manifest fit unchanged limits.
+Combined current-plus-archive reconstruction, after removing only the new leaf
+entry, equals the prior 2,868,764 bytes exactly, SHA-256
+`edb1091c4532aa602103f7c23d5110ad7cb303ba6d7d29c4429c8b2e3b35dd23`. No history tool or capacity changes.
+
+```bash
+bash tools/project_data_run.sh python3 - <<'CONFORMANCE_NOTES_HISTORY_ROLLOVER'
+from pathlib import Path
+import hashlib,json,subprocess
+base='388f09aec9b7fe4c71362bae29a3f9b39b78259b'
+path='docs/history/development-notes/manifest.jsonl'
+old=subprocess.check_output(['git','show',base+':'+path]).splitlines(True)
+current=Path(path).read_bytes().splitlines(True)
+index=next(i for i,line in enumerate(current) if json.loads(line).get('segment_id')=='4975')
+row=json.loads(current[index]);assert current[index+1:]==old[1:]
+assert row['source_commit']==base and row['source_start_line']==172 and row['source_end_line']==429
+segment=Path(row['target_path']).read_bytes()
+source=subprocess.check_output(['git','show',base+':DEVELOPMENT_NOTES.md'])
+assert subprocess.check_output(['git','rev-parse',base+':DEVELOPMENT_NOTES.md'],text=True).strip()==row['source_blob']
+assert segment==b''.join(source.splitlines(True)[171:429])
+assert len(segment)==row['byte_count']==28297 and segment.count(b'\n')==row['line_count']==258
+assert hashlib.sha256(segment).hexdigest()==row['sha256']=='47ec3018dc4a9ac97af1c2cb5c95e37013778764b9102615f9ad50611eec9e89'
+assert source.endswith(segment)
+print('PASS exact clean source suffix, immutable segment identity and all30 older manifest records.')
+CONFORMANCE_NOTES_HISTORY_ROLLOVER
+```

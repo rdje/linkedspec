@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.11 — read semantic rollout and model identities
+
+Conformance .1.11 reads 12 complete windows, 554 fragments and 65,425 baseline-identical bytes. The semantic-introspection contract reaches EOF; model reading reaches line 201, inside the identity-limited snapshot. Physical reading is 11/143: 12,078 fragments, 699,655 bytes and 47 complete files. The model separates duplicate slots, staged payload/job/result provenance, generated plans, compilation failure and captured runtime observation. The staged-schema card now explicitly dates its private implementation milestones and points to completed public rollout. Existing semantic neutral proof is retained and rechecked after governed documentation edits; no native admission or runtime repair is claimed.
+
+Verification: reconstruct all 12 source windows and all 143 groups/302 ranges; verify cumulative reading, source/task/history preservation and prior Knowledge recipes. Recheck the semantic neutral contract after final governed documentation changes. Memory, Knowledge, both history checks, rendered book, git diff --check and normal doctrines govern focused landing. Any required engineering-history rollover preserves an exact clean-HEAD suffix under unchanged controls. No native matrix, dependency build or runtime repair is claimed.
+
 ## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.10 — read scalar contracts and semantic query prefix
 
 Conformance .1.10 reads 18 complete windows, 789 fragments and 65,489 baseline-identical bytes. Cursor ownership, numeric/text contracts and six semantic fixture inputs reach EOF; semantic-introspection contract reading reaches line 363. Physical reading is 10/143: 11,524 fragments, 634,230 bytes and 46 complete files. Numeric 55-case/18-helper, Perl scalar-text 7-test and semantic neutral proof pass. Numeric rejection of booleans remains distinct from scalar-text conversion; paging budgets and source-detail ceilings remain explicit. No source or runtime defect changes; .1.11 owns the crossing Dart admission consumer and semantic model prefix.
