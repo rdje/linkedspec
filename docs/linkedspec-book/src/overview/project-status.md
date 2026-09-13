@@ -329,12 +329,12 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (24/51 groups):** the complete
+**Lua source reading is underway (25/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first 24 groups physically read 31,651 fragments /1,234,956 bytes,
+ownership. The first 25 groups physically read 33,151 fragments /1,286,750 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
@@ -343,8 +343,10 @@ wire, primary CLI, private recognition transaction module and its runtime adapte
 scoped binding, scalar numeric, compilation outcome, semantic index, observation
 and query, both complete semantic projectors, SHA hashing, the complete emitter and
 typed-source modules, spec AST, loader, spec parser and validator, complete staged
-AST enrichment and capture storage, plus the parse-job declaration prefix.
-The remaining 27 groups require
+AST enrichment, capture storage and parse-job declarations, the narrow staged
+registry and tracing. The generated Unicode mapping is read through line 169,
+including the lower-case entry U+01CF → U+01D0. Forty-seven files are fully read.
+The remaining 26 groups require
 their own reading and verified commits; source reading does not close the limitations below.
 
 **Generated Lua MCP binding:** the current 83,166-byte module matches its neutral
@@ -438,6 +440,15 @@ counts reject before callbacks. A sparse snapshot array has different copy
 lengths on PUC and LuaJIT; the evidence preserves both outcomes. The following
 limitations retain implementation and independent verification owners.
 
+**Lua declaration and trace verification:** five selected tests covering trace
+controls, sinks, the full pipeline, narrow registry and runtime decisions pass
+134 assertions per installed host, 268 total. Separately, 164 complete observations
+retain malformed and valid provenance, option admission, error identity and trace
+event/line behavior on both hosts. Nineteen provenance cases are compared with the
+neutral validator. Unicode 17.0.0 regeneration matches 1,563 lower-case and 1,581
+upper-case entries and passes 12 neutral fixtures; this grants no unread-source
+credit. The provenance and tracing limitations below remain open.
+
 **Approved Lua evidence capacity:** the director explicitly approved the complete
 Lua proposal under ADR0118. Containment `.14` implements exactly these eleven
 controls for 51 reading groups plus six support slots:
@@ -466,12 +477,40 @@ The director also granted one containment `.14` exception for this bounded capac
 implementation before full codebase reading, using focused proof and normal hooks
 without canonical CI/receipt. Later milestone, repair and push requirements remain;
 dependency build-on-update implementation stays separately owned. Lua source reading
-is 24/51; the next group reads declarations, the narrow registry, tracing and the
-Unicode mapping prefix.
+is 25/51; the next group reads every generated Unicode mapping line 170–1669.
 The installed-host test failures below remain open.
 All known limitations below retain their repair owners.
 Exact admission and replay: `docs/knowledge/lua-reading-evidence-capacity-admission.md`.
 The historical proposal remains in `docs/knowledge/lua-reading-evidence-capacity-proposal.md`.
+
+**Known Lua provenance limitation — original fields can be replaced before validation:**
+private staged provenance validation currently accepts a null, numeric, object or
+false provenance label by replacing it with the string `<invalid>`. A malformed
+source ID can similarly select a caller-supplied source named `<runtime>`. For
+example, with caller sources `input = Aé🙂BC` and `<runtime> = R🙂ST`, a null source
+ID and span `[1,3)` returns `🙂S`; the neutral validator rejects that malformed
+field. Explicitly supplied string names `<runtime>` and `<invalid>` remain valid.
+Eight malformed type cases differ from the neutral result; eleven valid/rejected
+controls agree. Four additional host-created derived segment arrays lose an extra
+or sparse false member when copied. These are private host-record observations;
+ordinary authored-spec reachability is not established. Lua `.2.29.1-.3` own
+original-type validation, complete segment admission and independent carrier proof,
+coordinated with the separately recorded Dart `.2.19` mechanism.
+
+**Known Lua tracing limitation — secondary failures can replace primary errors:**
+when a trace writer throws while closing an error scope, its error currently
+replaces the operation's original error. This is reproduced through public
+`validate_spec`: an unrecognized body normally raises its typed validation error,
+but a writer failing on the exit event replaces that value. A separate host
+formatter returning false raises the expected formatter-type error without closing
+its scope, leaving the next trace line indented. Quiet and healthy-writer controls
+preserve the original error, and ordinary success returns the same result. Lua
+`.2.30.1-.3` own error precedence, cleanup and nested/public-caller verification.
+Registry and trace constructors also accept false option tables as absent; false
+trace level/sink fields become none/stdout. `.2.8.17-.20` own those admission
+repairs while preserving valid false `reset_file`/`emoji` settings and explicitly
+requested quiet file reset. Exact evidence and replay are in
+`docs/knowledge/lua-declaration-trace-reading-and-validation-gaps.md`.
 
 **Known Lua staged limitation — diagnostic fallbacks can exceed their allowance:**
 a 1-byte diagnostic allowance currently retains a 187-byte truncation record.

@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua declaration and trace reading preserves validation repairs
+
+- Read all five exact ranges: 1,500 fragments /51,794 bytes; cumulative 25/51 and 1,286,750 bytes; source unchanged.
+- Five selected tests pass 268 assertions across installed hosts; 164 complete observations retain neutral provenance comparisons and exact trace errors/events.
+- Own provenance field/segment validation and trace failure/cleanup under .2.29/.2.30; extend registry/trace option admission and shared Dart evidence.
+- LUA-STARTUP-READING.1.25 preserves every earlier repair and parked feature; next .1.26 reads generated Unicode lines 170-1669.
+
 ## 2026-09-13 — Lua staged completion reading and diagnostic/provenance repair ownership
 
 - Read three ranges /1,500 fragments /56,196 bytes; cumulative 24/51, 31,651 fragments /1,234,956 bytes.

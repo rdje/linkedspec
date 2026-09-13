@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Validate original provenance and preserve primary trace failures
+
+- Diagnostic fallback labels must not replace malformed original source fields before typed validation; literal placeholder strings remain valid inputs.
+- Validate complete derived segment membership before copying; downstream typed checks cannot recover fields omitted by prefix traversal.
+- Trace-exit writer failure can replace a primary typed error, and invalid formatter output can strand indentation; healthy-sink evidence remains valid within its scope.
+- LUA-STARTUP-READING.1.25 records 164 complete observations, 268 passing existing assertions and bounded repair owners in docs/knowledge/lua-declaration-trace-reading-and-validation-gaps.md.
+
 ## 2026-09-13 — Validate retained diagnostic bytes and special marker traversal
 
 - Measuring a fallback without rechecking its allowance permits retained bytes to exceed the limit while a saturated remainder reports zero.

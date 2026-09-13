@@ -1322,6 +1322,8 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Dependencies: Startup .3/.4/.5; reading .1.27; preserve existing staged .2.17/.2.18 and Rust startup .74 as separate owners.
   Children: `.2.19.1`, `.2.19.2`
   Evidence: docs/knowledge/dart-staged-provenance-type-validation-gap.md owns seventeen private validateAndMaterializeStagedProvenance controls compared with the neutral materialize_provenance evaluator. Six malformed records are accepted only by Dart: null/numeric/object provenance becomes the literal `<invalid>`, malformed source_id can select an existing caller source named `<runtime>`, and a derived segment repeats the provenance coercion. Eleven valid/rejected controls agree, including explicitly supplied string placeholder labels. _typedDirectSpan computes diagnostic fallback strings before validating original field types. All 33 selected runtime tests and Unicode regeneration/12 neutral fixtures pass; no authored-production or other-backend runtime failure is inferred.
+  Lua reading .1.25 extension: Independent current Lua evidence confirms the same original-field/diagnostic-placeholder mechanism. Lua .2.29 owns eight malformed type acceptances, eleven agreeing neutral controls and separate derived host-array membership repair. Original Dart seventeen-case evidence remains dated and unchanged; this is not a fresh Dart execution. Cross-link docs/knowledge/lua-declaration-trace-reading-and-validation-gaps.md for coordinated proof.
+
 
 - ID: `DART-STARTUP-READING.2.19.1`
   Status: `pending`
@@ -1569,7 +1571,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.25` | `pending` | Read the parse-job suffix, narrow registry, tracing and Unicode prefix after clean .1.24; preserve all diagnostic, marker, capture, earlier repairs and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.26` | `pending` | Read every Unicode mapping line 170-1669 after clean .1.25; preserve provenance, trace and all earlier repair owners plus parked named arguments. |
 
 ## Decisions
 

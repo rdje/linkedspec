@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 24/51; .1.25 follows child 24; .2.1-.2.28 own twenty-eight concrete repair roots, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 25/51; .1.26 follows child 25; .2.1-.2.30 own thirty concrete repair roots, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.24 completes staged enrichment and capture provenance and reads the parse-job prefix in nine complete windows: 1,500 fragments /56,196 bytes; cumulative 24/51, 31,651 fragments /1,234,956 bytes. All 99 Lua sources remain baseline-identical; 43 files are fully read. Existing staged consumers pass 890 assertions per installed host, 1,780 total. The 102 boundary observations measure retained diagnostic overruns, bounded marker cycle/null handling, private capture admission and seeded defaults; the sparse-seed host difference remains explicit. New .2.26/.2.27/.2.28 own bounded repair/proof, .2.8.15/.16 own seeded-call defaults and .2.25 retains copy-before-validation scope. Shared Dart .2.17.1 records independent Lua diagnostic confirmation. Neutral staged123/public129 and typed231 mutations pass as governance. All twenty-eight Lua repair roots and earlier failures remain open. Next .1.25 reads declarations, the narrow registry, tracing and Unicode prefix; named arguments and startup/ADR0118 prerequisites remain unchanged.
+  Verification: Lua .1.25 completes parse-job declarations, the narrow registry and tracing, and reads the Unicode prefix in nine complete windows: 1,500 fragments /51,794 bytes; cumulative 25/51, 33,151 fragments /1,286,750 bytes. All 99 Lua sources remain baseline-identical; 47 files are fully read. Five selected trace/registry tests pass 134 assertions per installed host, 268 total. The 164 complete observations confirm provenance type/segment admission, false options, trace error replacement and formatter cleanup gaps. New .2.29/.2.30 own provenance and trace repairs; .2.8.17-.20 own registry/trace admission and .2.1 retains guidance reconciliation. Dart .2.19 records independent Lua confirmation without new Dart execution. Neutral staged123/public129, typed231 and Unicode17/12 fixtures pass as governance. All thirty Lua repair roots and earlier failures remain open. Next .1.26 reads Unicode lines 170-1669; named arguments and startup/ADR0118 prerequisites remain unchanged.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -4607,7 +4607,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.25` | `pending` | Read the parse-job suffix, narrow registry, tracing and Unicode prefix after clean .1.24; preserve all diagnostic, marker, capture, earlier repairs and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.26` | `pending` | Read every Unicode mapping line 170-1669 after clean .1.25; preserve provenance, trace and all earlier repair owners plus parked named arguments. |
 
 ## Reading Ledger
 
