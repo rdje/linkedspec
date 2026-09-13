@@ -477,7 +477,7 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.24` | `pending` | `capability_conformance/unicode_case_contract.json` lines 14639-16138; 1500 fragments/14500 bytes. Preserve complete bounded windows, source identity and all repairs. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.25` | `pending` | `capability_conformance/unicode_case_contract.json` lines 16139-17638; 1500 fragments/14739 bytes. Preserve complete bounded windows, source identity and all repairs. |
 
 ## Decisions
 

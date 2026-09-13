@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 23/143
+- Status: `active` / exact decomposition; physical reading 24/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-13`
@@ -448,14 +448,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.23 - read Latin and Greek full uppercase expansions`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.24`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `a4c9bd63e5127bff0b92d49dfd4bfdad15b04ebd`.
+  Verification tier: `focused`
+  Focused checks: Read exact baseline-identical scoped windows; reconcile canonical Knowledge and proportionate proof, preserve source/task/history, and verify memory, book and normal doctrines.
+  Canonical trigger: Ordinary bounded source-reading leaf; no source or public-contract change, admission or parent closeout. Later prerequisites remain.
   Goal: Read and understand conformance/test/Unicode group 24.
   Scope: `capability_conformance/unicode_case_contract.json` lines 14639-16138
   Baseline evidence: 1500 fragments / 14500 decoded bytes; ordered range SHA-256 `26faa08194e1e3baf3ebe01eb0716ee4b3aac00bd6609c84cdc7cd76398956b8`.
   Dependencies: .1.23 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 3 complete windows / 1500 fragments / 14500 bytes; ordered window SHA-256 `da0f981a438d7c7498c1dd08b17bb18559b1a199f681901afc7661b15829ed56`.
+  Comprehension: The range begins at 2171-to-2161, completes numeral pairs through 217F-to-216F plus 2184-to-2183, and reads circled 24D0-to-24B6 through 24E9-to-24CF. Glagolitic 2C30-to-2C00 through 2C5F-to-2C2F precedes Latin rows including non-adjacent 2C65-to-023A and 2C66-to-023E. Coptic pairs preserve sparse 2CEC-to-2CEB, 2CEE-to-2CED and 2CF3-to-2CF2 entries. Georgian 2D00-to-10A0 through 2D25-to-10C5 plus 2D27-to-10C7 and 2D2D-to-10CD retains its own uppercase family and holes. Cyrillic extended A641 through A69B and Latin extended A723 through the fully closed A74F-to-A74E entry follow; line 16138 closes that entry. Encoded numeral and circled forms remain intact under casing. Later uppercase mappings remain .1.25-owned, with no normalization or native admission claim.
+  Verification: Retain the unchanged Unicode 17 generation, byte-equality and 12-fixture proof from CONFORMANCE-SOURCE-READING.1.14 at 704e261b. Fresh window replay, complete range inventory, cumulative coverage, source/task/history preservation, rendered book, memory and document-pressure checks govern this ordinary reading leaf. Native admission evidence remains separately scoped; normal commit doctrines remain required.
+  Candidate proof: Three complete windows replay exactly; full160-input/143-group/302-range inventory and cumulative24/30431 fragments/1010244 bytes/51 complete files pass. Preservation verifies2490 exact files,2774 prior nodes,94 book limitation headings and all prior recipes. The single current Unicode checkpoint preserves preceding text and the historical retrieval footer within24 lines. Memory passes at60 lines; actual rendered coverage and sparse Georgian examples pass with the already-owned large search-index warning. History checks report changes WARN at367 lines/57114 bytes, below required rollover, and notes OK at255 lines/50372 bytes. Whitespace is clean; unchanged .1.14 Unicode generation proof is retained. Normal commit doctrines remain required.
+  Commit: `CONFORMANCE-SOURCE-READING.1.24 - read numeral circled and extended uppercase mappings`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.25`
   Status: `pending`
@@ -1668,7 +1675,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.24` | `pending` | `capability_conformance/unicode_case_contract.json` lines 14639-16138; 1500 fragments/14500 bytes. Preserve complete bounded windows, source identity and all repairs. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.25` | `pending` | `capability_conformance/unicode_case_contract.json` lines 16139-17638; 1500 fragments/14739 bytes. Preserve complete bounded windows, source identity and all repairs. |
 
 ## Decisions
 
@@ -1681,6 +1688,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Verification Log
 
+- `2026-09-13` .1.24: Conformance .1.24 reads 3 complete windows, 1,500 fragments and 14,500 baseline-identical bytes. Physical reading is 24/143: 30,431 fragments, 1,010,244 bytes and 51 complete files. Uppercase reading covers numeral, circled-letter, Glagolitic, Coptic, Georgian and extended Cyrillic/Latin mappings. Sparse entries and non-adjacent targets remain explicit, including the Georgian 2Dxx family. The bounded checkpoint is updated in place. Unchanged offline Unicode proof is retained. Next .1.25 starts after the closed A74F-to-A74E entry; all runtime repairs remain open.
 - `2026-09-13` .1.23: Conformance .1.23 reads 3 complete windows, 1,500 fragments and 15,108 baseline-identical bytes. Physical reading is 23/143: 28,931 fragments, 995,744 bytes and 51 complete files. Uppercase reading completes the Latin additional and Greek extended rows in this range, including ordered two- and three-scalar expansions and shared titlecase/lowercase results. It then reaches the first Roman numeral uppercase entry. The bounded checkpoint is updated in place. Unchanged offline Unicode proof is retained. Next .1.24 starts after the closed 2170-to-2160 entry; all runtime repairs remain open.
 - `2026-09-13` .1.22: Conformance .1.22 reads 3 complete windows, 1,500 fragments and 14,510 baseline-identical bytes. Physical reading is 22/143: 27,431 fragments, 980,636 bytes and 51 complete files. Uppercase reading continues through Cyrillic, Armenian, Georgian, short Cherokee and further Latin rows. Armenian 0587 expands to two ordered uppercase scalars; Cyrillic variants preserve shared target values. The bounded checkpoint is updated in place. Unchanged offline Unicode proof is retained. Next .1.23 starts after the closed 1E5B-to-1E5A entry; all runtime repairs remain open.
 - `2026-09-13` .1.21: Conformance .1.21 reads 3 complete windows, 1,500 fragments and 14,528 baseline-identical bytes. Physical reading is 21/143: 25,931 fragments, 966,126 bytes and 51 complete files. Uppercase reading covers further Latin, Greek and Cyrillic mappings. Titlecase/lowercase pairs converge on common uppercase values, and Greek expansions retain ordered combining scalars. The existing bounded checkpoint is updated in place. Unchanged offline Unicode proof is retained. Next .1.22 owns the newly opened entry after 045F-to-040F; all runtime repairs remain open.
@@ -1708,6 +1716,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Commit Log
 
+- `2026-09-13` .1.24: `CONFORMANCE-SOURCE-READING.1.24 - read numeral circled and extended uppercase mappings`; activation a4c9bd63e5127bff0b92d49dfd4bfdad15b04ebd; next .1.25 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.23: `CONFORMANCE-SOURCE-READING.1.23 - read Latin and Greek full uppercase expansions`; activation f1c84738402881b281a897f33eb001c8c0111b3f; next .1.24 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.22: `CONFORMANCE-SOURCE-READING.1.22 - read Cyrillic Armenian and Georgian uppercase mappings`; activation 5a2d859875a8f2993a1de630aacdf5374e15f53d; next .1.23 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.21: `CONFORMANCE-SOURCE-READING.1.21 - read Latin Greek and Cyrillic uppercase mappings`; activation 93e5b62c4b6df38fb2812db47a52e05d20a91f7e; next .1.22 after clean handoff and zero-byte brief.
@@ -1735,6 +1744,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Changelog
 
+- `2026-09-13` .1.24: Uppercase reading covers numeral, circled-letter, Glagolitic, Coptic, Georgian and extended Cyrillic/Latin mappings. Sparse entries and non-adjacent targets remain explicit, including the Georgian 2Dxx family. The bounded checkpoint is updated in place. Unchanged offline Unicode proof is retained. Next .1.25 starts after the closed A74F-to-A74E entry; all runtime repairs remain open.
 - `2026-09-13` .1.23: Uppercase reading completes the Latin additional and Greek extended rows in this range, including ordered two- and three-scalar expansions and shared titlecase/lowercase results. It then reaches the first Roman numeral uppercase entry. The bounded checkpoint is updated in place. Unchanged offline Unicode proof is retained. Next .1.24 starts after the closed 2170-to-2160 entry; all runtime repairs remain open.
 - `2026-09-13` .1.22: Uppercase reading continues through Cyrillic, Armenian, Georgian, short Cherokee and further Latin rows. Armenian 0587 expands to two ordered uppercase scalars; Cyrillic variants preserve shared target values. The bounded checkpoint is updated in place. Unchanged offline Unicode proof is retained. Next .1.23 starts after the closed 1E5B-to-1E5A entry; all runtime repairs remain open.
 - `2026-09-13` .1.21: Uppercase reading covers further Latin, Greek and Cyrillic mappings. Titlecase/lowercase pairs converge on common uppercase values, and Greek expansions retain ordered combining scalars. The existing bounded checkpoint is updated in place. Unchanged offline Unicode proof is retained. Next .1.22 owns the newly opened entry after 045F-to-040F; all runtime repairs remain open.

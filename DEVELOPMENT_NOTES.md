@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.24 — retain sparse Georgian and encoded uppercase forms
+
+The range begins at 2171-to-2161, completes numeral pairs through 217F-to-216F plus 2184-to-2183, and reads circled 24D0-to-24B6 through 24E9-to-24CF. Glagolitic 2C30-to-2C00 through 2C5F-to-2C2F precedes Latin rows including non-adjacent 2C65-to-023A and 2C66-to-023E. Coptic pairs preserve sparse 2CEC-to-2CEB, 2CEE-to-2CED and 2CF3-to-2CF2 entries. Georgian 2D00-to-10A0 through 2D25-to-10C5 plus 2D27-to-10C7 and 2D2D-to-10CD retains its own uppercase family and holes. Cyrillic extended A641 through A69B and Latin extended A723 through the fully closed A74F-to-A74E entry follow; line 16138 closes that entry. Encoded numeral and circled forms remain intact under casing. Later uppercase mappings remain .1.25-owned, with no normalization or native admission claim.
+
+Retain the unchanged Unicode 17 generation, byte-equality and 12-fixture proof from CONFORMANCE-SOURCE-READING.1.14 at 704e261b. Fresh window replay, complete range inventory, cumulative coverage, source/task/history preservation, rendered book, memory and document-pressure checks govern this ordinary reading leaf. Native admission evidence remains separately scoped; normal commit doctrines remain required.
+
 ## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.23 — preserve Greek expansion order and shared full uppercase sequences
 
 The range starts with 1E5D-to-1E5C, reads Latin additional pairs and expansions 1E96-to-0048+0331, 1E97-to-0054+0308, 1E98-to-0057+030A, 1E99-to-0059+030A and 1E9A-to-0041+02BE, plus non-adjacent 1E9B-to-1E60. Greek extended rows retain single precomposed results alongside ordered expansions such as 1F52-to-03A5+0313+0300 and 1F56-to-03A5+0313+0342. Lowercase/titlecase families 1F80/1F88, 1F90/1F98 and 1FA0/1FA8 converge on the same uppercase sequences ending in 0399. Further examples include 1FB7-to-0391+0342+0399, 1FD7-to-0399+0308+0342 and 1FF7-to-03A9+0342+0399. Exact scalar order is part of the full mapping, not an inferred normalization pass. Letterlike 214E-to-2132 and the fully closed numeral 2170-to-2160 entry end the range at line 14638. All subsequent entries remain .1.24-owned; no new native admission or runtime repair is claimed.
