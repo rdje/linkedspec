@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.29 — read rule-label ranges through supplementary scripts
+
+Conformance .1.29 reads 3 complete windows, 1,500 fragments and 15,123 baseline-identical bytes. Physical reading is 29/143: 37,931 fragments, 1,087,349 bytes and 52 complete files. Rule-label reading now covers 494 complete XID_Continue ranges, including Indic scripts, Hangul, compatibility forms and supplementary scalars, with every gap preserved. The next lower endpoint 10A3F remains .1.30-owned. Unchanged offline generation proof from .1.28 is retained; all runtime repairs remain open.
+
+Retain the unchanged managed offline rule-label regeneration/byte-comparison proof from CONFORMANCE-SOURCE-READING.1.28 at ddbdbbc9a: Unicode17.0.0,806 ranges,9 positive,8 negative and2 distinct fixtures. Fresh complete-window replay, full source/range inventory, cumulative coverage, source/task/history preservation, rendered book, memory and bounded-history checks govern this ordinary reading leaf. Native evidence stays separately scoped; normal commit doctrines remain required.
+
 ## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.28 — complete casing contract and read rule-label policy
 
 Conformance .1.28 reads 3 complete windows, 1,500 fragments and 17,109 baseline-identical bytes. Physical reading is 28/143: 36,431 fragments, 1,072,226 bytes and 52 complete files. The casing contract is fully read: 464 Case_Ignorable ranges, the separate Final Sigma rule and all 12 fixtures. The rule-label prefix fixes exact scalar identity and admits XID_Continue at every position, with 119 complete ranges read. Fresh offline rule-label regeneration passes. Next .1.29 owns the crossing 0B8E range and continuation; runtime repairs remain open.

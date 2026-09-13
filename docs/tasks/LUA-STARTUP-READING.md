@@ -2268,7 +2268,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.29` | `pending` | `capability_conformance/unicode_rule_label_contract.json` lines 518-2017; 1500 fragments/15123 bytes. Preserve complete bounded windows, source identity and all repairs. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.30` | `pending` | `capability_conformance/unicode_rule_label_contract.json` lines 2018-3349; `capability_conformance/uniform_binding_contract.json` lines 1-168; 1500 fragments/23627 bytes. Preserve complete bounded windows, source identity and all repairs. |
 
 ## Decisions
 
