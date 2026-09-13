@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `SUPPORTING-SOURCE-READING`
-- Status: `active` / inventory complete; physical reading 0/21
+- Status: `active` / inventory complete; physical reading 1/21
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.7`
 - Created: `2026-09-13`
 - Last updated: `2026-09-13`
@@ -37,7 +37,16 @@ from runtime signoff. Existing startup and backend repairs remain open.
 - ID: `SUPPORTING-SOURCE-READING`
   Status: `active`
   Goal: Complete supporting-source reading and preserve all repair obligations.
-  Children: `.1`, `.2`, `.3`
+  Children: `.0`, `.1`, `.2`, `.3`
+
+- ID: `SUPPORTING-SOURCE-READING.0`
+  Status: `pending`
+  Goal: Apply the director’s historical-configuration reading boundary using current dependency evidence.
+  Dependencies: .1.1 committed clean; no further historical configuration reading before this audit.
+  Scope: Metadata and current spec/test/tool/core references to historical conf inputs, including transitive or default-extension loaders; existing retirement/quarantine decisions; scope disposition for remaining .1.2-.1.5 ranges and mixed .tk inputs.
+  Acceptance: Identify every demonstrated live dependency and read only necessary historical input ranges; otherwise exclude historical configuration from further mandatory reading without claiming it read, deleting files or altering runtime tests. Preserve original inventory/ranges and completed evidence; reconcile current tasks, Knowledge, roadmap and book.
+  Verification: `pending`
+  Commit: `pending`
 
 - ID: `SUPPORTING-SOURCE-READING.1`
   Status: `active`
@@ -49,14 +58,20 @@ from runtime signoff. Existing startup and backend repairs remain open.
   Commit: `pending`
 
 - ID: `SUPPORTING-SOURCE-READING.1.1`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `d806aa674f8b0ae8202b78e3f8b40a1b898ede2a`.
+  Verification tier: `focused`
+  Focused checks: Director-scope intake and dependency-audit ownership; full exact scoped reading and baseline/window identity; canonical configuration/path/legacy reconciliation and bounded non-executing controls; prior source/task/card/history preservation, memory, Knowledge, histories, book and normal doctrines.
+  Canonical trigger: Ordinary read-only source-comprehension evidence; no source/runtime/dependency change. Keep subsequent verification and repair prerequisites; no full CI or dependency compilation is needed for reading.
   Goal: Read and understand supporting conf group 1.
   Scope: `conf/ambitiming.conf` lines 1-13; `conf/cgi.conf` lines 1-53; `conf/dutycycled.conf` lines 1-82; `conf/easytk.conf` lines 1-173; `conf/encountiming.conf` lines 1-18; `conf/fake_memmodule.conf` lines 1-64; `conf/fsmgen.conf` lines 1-88; `conf/fv_check.conf` lines 1-31; `conf/fxstart.conf` lines 1-32; `conf/hold_scale_factors_to_qcmin.conf` lines 1-14; `conf/libview_table2ss.conf` lines 1-10; `conf/lighttpd.conf` lines 1-353; `conf/lispml.conf` lines 1-87; `conf/lstype_long.conf` lines 1-14; `conf/m2g.conf` lines 1-38; `conf/magmatiming.conf` lines 1-5; `conf/matrix.conf` lines 1-6; `conf/n3g_scaling_factors.conf` lines 1-18; `conf/network.conf` lines 1-9; `conf/nlc.conf` lines 1-34; `conf/pcsally_mem.conf` lines 1-187; `conf/peruser.conf` lines 1-4; `conf/postsyn.conf` lines 1-164; `conf/pt_cases_analysis.conf` lines 1-3
   Baseline evidence: 1500 fragments / 61165 bytes; ordered range SHA-256 `7d85ddd590a20f2681eb68cadac6fad5e9e87b51949ec998a289ac60e799166c`.
   Dependencies: startup .3.7.0 decomposition committed with clean handoff.
   Acceptance: Read all scoped bytes in complete bounded windows; preserve comprehension, canonical facts, owned findings, source identity, focused proof and clean per-leaf continuity.
-  Verification: `pending`
-  Commit: `pending`
+  Comprehension: Timing/report patterns and diagnosis callbacks, grouping/scaling/month tables, Tk/Tix and CGI/HTML configuration, VHDL/memory templates and historical Lighttpd settings are distinguished from modern runtime contracts. Exact per-source findings: docs/knowledge/legacy-configuration-source-contracts.md. No new defect demonstrated; no historical consumer or dependency build executed.
+  Verification: Physically read all 29 complete windows, 24 ranges, 1500 fragments/61165 bytes; 23 files reach EOF and case-analysis lines1–3 retain suffix ownership under .1.2. Window SHA-256 a9059071628ba48c22b57d9a2b2bc5715769288bcd74c6504c8af63038ff167d; exact range/window reconstruction passes. All 158 baseline/current sources and independent full plan coverage remain exact. Canonical legacy/path facts reconciled; structural portability, preservation, memory, Knowledge, both histories, rendered book and normal doctrine gates govern focused landing.
+  Candidate proof: Source/card/decision/history preservation passes 1590 prior files, 2613/2616 exact prior task nodes, only three intended current-node changes and the new .0 dependency-audit owner; all 92 earlier book limitation headings remain. Three original coverage recipes remain byte-exact; Knowledge generates 1140 facts/9096 keys, memory holds 60 lines, histories pass at 382/35165 and 312/34329 lines/bytes. Structural path controls pass 14 classifier cases/five anchors; rendered book and normal all-doctrine hooks complete focused landing.
+  Commit: `SUPPORTING-SOURCE-READING.1.1 - read legacy configuration data and templates`
 
 - ID: `SUPPORTING-SOURCE-READING.1.2`
   Status: `pending`
@@ -278,24 +293,32 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SUPPORTING-SOURCE-READING.1.1` | `pending` | After clean startup .3.7.0, read the first exact configuration ranges with Knowledge reconciliation; grant no implementation or remaining-source credit. |
+| 1 | `SUPPORTING-SOURCE-READING.0` | `pending` | Director identifies conf inputs as historical; audit current spec/test dependency reachability before further configuration reading. |
 
 ## Decisions
+
+- `2026-09-13` director clarification during .1.1: These configurations belong to historical Perl-only handwritten LinkedSpec and no longer apply to FSMGEN; further reading is warranted only where current LinkedSpec specs/tests require them. .0 owns dependency evidence and explicit scope disposition before remaining configuration reading. Existing .1.1 physical evidence remains valid.
 
 - `2026-09-13`: Freeze 21 groups/174 ranges within existing controls. Earlier startup records provide no exact completed baseline-range credit for these 158 files; all remain physically unread in this lane.
 
 ## Blockers
 
-- None for the first bounded reading slice. Existing failures, repair prerequisites, capacity controls and dependency reuse retain their owners.
+- None for the bounded dependency audit; pause further historical configuration reading until .0 records the applicable scope. Existing failures, repair prerequisites, capacity controls and dependency reuse retain their owners.
 
 ## Verification Log
+
+- `2026-09-13` .1.1: Supporting reading .1.1 completes 29 windows/24 configuration ranges: 1500 fragments/61165 bytes, 23 files through EOF and case-analysis lines 1–3 only. Exact baseline/current identity and independent 174-range coverage pass; physical reading is 1/21. Canonical path facts distinguish caller design inputs and historical templates from supported runtime proof. No new defect is demonstrated and every previous repair remains open. The director identifies these configurations as historical and limits further reading to current test/spec dependencies. Next .0 audits that reachability before remaining configuration reading; no dependency compilation or canonical gate is required for this ordinary reading slice.
 
 - `2026-09-13` decomposition: Exact baseline/current identity and disjoint range reconstruction pass; physical reading remains 0/21. Startup .3.7.0 owns independent candidate/continuity validation and commit.
 
 ## Commit Log
 
+- `2026-09-13` .1.1: `SUPPORTING-SOURCE-READING.1.1 - read legacy configuration data and templates`; activation d806aa674f8b0ae8202b78e3f8b40a1b898ede2a; next .0 dependency audit after clean proof and empty brief.
+
 - `2026-09-13`: Decomposition lands with `SESSION-STARTUP-READING.3.7.0`; current Git identifies its commit.
 
 ## Changelog
+
+- `2026-09-13` .1.1: Read first exact configuration group; preserve historical source, all repair nodes and remaining reading obligations.
 
 - `2026-09-13`: Define supporting-source reading ownership without changing source bytes or granting reading credit.

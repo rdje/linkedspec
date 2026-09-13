@@ -1742,7 +1742,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SUPPORTING-SOURCE-READING.1.1` | `pending` | After clean startup .3.7.0, read the first exact configuration ranges with Knowledge reconciliation; grant no implementation or remaining-source credit. |
+| 1 | `SUPPORTING-SOURCE-READING.0` | `pending` | Director identifies conf inputs as historical; audit current spec/test dependency reachability before further configuration reading. |
 
 ## Decisions
 

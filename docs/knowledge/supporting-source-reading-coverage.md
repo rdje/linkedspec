@@ -8,7 +8,7 @@ answers:
   - how much prior supporting-source reading credit is established
   - does supporting-source reading require rebuilding RGX or PGEN
 date: 2026-09-13
-status: exact inventory and decomposition complete; physical reading 0 of 21 groups
+status: exact inventory and decomposition complete; physical reading 1 of 21 groups
 tags: [startup, reading, supporting, inventory, continuity]
 evidence: "SESSION-STARTUP-READING.3.7.0; clean Lua closeout 735f0337883baef5ac4422976879d09725e0e8ea; baseline baeb984e36a94a15951cd23d4c52def5064cdaca."
 reverify: "Run SUPPORTING_SOURCE_INVENTORY, SUPPORTING_SOURCE_PLAN, then SUPPORTING_SOURCE_TREE below; these identity/range audits grant no additional physical reading credit."
@@ -57,6 +57,17 @@ source change requires an explicit delta audit, not rewriting historical evidenc
 | NUL-delimited Git mode/blob/path records | `e7845e3f7fa04a9929b20834fd0b799092063930ecb921b195cfe972c6a252b8` |
 | Ordered inventory path/mode/blob/count/hash records | `0bd5e398ef52c2de0f2389d8931b4543c112f43401842b74306310c80cdb9ec1` |
 | Ordered 21-group plan with 174 ranges | `2a4bd96b87345719946abad085eb7b2b934dcacd063ab421a2447ea036a4903c` |
+
+# Current reading progress — 2026-09-13
+
+`SUPPORTING-SOURCE-READING.1.1` reads the first 1,500 fragments /61,165 bytes
+through 29 complete windows: 23 complete files and case-analysis lines 1–3.
+Configuration comprehension and runtime boundaries are recorded in
+[[legacy-configuration-source-contracts]]. All later reading groups remain pending;
+the initial inventory evidence and recipes below are unchanged. The director
+subsequently identifies conf inputs as historical; `.0` audits current spec/test
+dependencies before any further configuration reading. This scope review grants
+no additional reading credit.
 
 # Verification and continuity boundaries
 

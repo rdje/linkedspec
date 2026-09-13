@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Configuration comprehension keeps historical consumers separate
+
+- Parenthesized legacy records combine textual regexes, host expressions and templates; Lighttpd has its own syntax, and neither establishes current function/named-argument semantics.
+- Canonical path facts explain caller-selected design roots and tool lookup; configuration intent is not current server, hardware or timing validation.
+- The group ends inside the case-analysis sections form after line3; .1.2 owns the body and closure, so only 23 of 24 touched files are complete.
+- SUPPORTING-SOURCE-READING.1.1 records coherent source understanding and the director’s historical-scope correction; .0 audits current spec/test needs before further conf reading. All prior repairs remain open.
+
 ## 2026-09-13 — Supporting inventory separates ownership from reading credit
 
 - The supporting lane is 964256 bytes across 158 unchanged UTF-8 files; the longest line is 11763 bytes, so no oversized single-line byte split is needed.

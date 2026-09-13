@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — First legacy configuration reading group
+
+- Read 24 exact ranges through 29 complete windows: 1500 fragments/61165 bytes, 23 files through EOF and case-analysis lines1–3 only.
+- Record report patterns/callbacks, GUI and HTML configuration, hardware templates and the historical server template without claiming consumer compatibility.
+- Preserve all 158 supporting sources and earlier repairs; exact range/current identity and structural path controls provide focused proof; no new defect is demonstrated.
+- SUPPORTING-SOURCE-READING.1.1 records the director’s historical-scope correction, owns .0 spec/test dependency audit and synchronizes Knowledge/book/current pointers without dependency compilation.
+
 ## 2026-09-13 — Exact supporting-source inventory and bounded ownership
 
 - Reconcile all 158 baseline/current files under conf, tablescript, noncore, specs and ebnf: 25612 LF delimiters, 25613 fragments and 964256 bytes, with zero source deltas.

@@ -376,7 +376,7 @@ focused results below.
 
 The director authorizes this reading-only closeout under ADR0119 and continued
 read-only startup work. Both exact audit recipes pass again; only the Lua reading
-containers close, and supporting-source inventory is next. No canonical CI receipt
+containers close, and supporting-source reading continues. No canonical CI receipt
 or new full component pass is claimed. All defects and later executable checks
 remain open. The dependency requirement is to reuse compatible RGX/PGEN products
 and avoid unnecessary rebuilds; it does not restrict reading. Full-codebase
@@ -387,12 +387,27 @@ Exact evidence and scope: `docs/knowledge/lua-reading-commit-closeout-audit.md`.
 158 unchanged files across configuration, TableScript data, legacy adapters and
 plugins, authored specifications and EBNF grammars. Twenty-one bounded groups
 cover 25,613 line fragments and 964,256 bytes through 174 disjoint ranges. The
-inventory and independent range audit are complete; physical reading is still
-0/21. Earlier isolated probes and source mirrors do not substitute for complete
-reading of these baseline files. This work requires no RGX/PGEN compilation and
+inventory and independent range audit are complete; physical reading is now
+1/21, covering 1,500 line fragments /61,165 bytes and 23 complete configuration
+files. The director identifies these configurations as historical material from
+the handwritten Perl-only era. The next audit checks current spec/test dependencies
+before deciding which remaining configuration inputs warrant reading. Earlier
+isolated probes and source mirrors do not substitute for complete reading of these baseline files. This work requires no RGX/PGEN compilation and
 changes no runtime behavior. Exact ownership and replay:
 `docs/tasks/SUPPORTING-SOURCE-READING.md` and
 `docs/knowledge/supporting-source-reading-coverage.md`.
+
+The first configuration group contains historical application data and templates.
+For example, `conf/network.conf` selects `design.ddc` relative to a caller-chosen
+design root; `conf/postsyn.conf` maps report diagnostics to callbacks and messages;
+`conf/fsmgen.conf` supplies VHDL naming and process templates. `conf/lighttpd.conf`
+is a historical server template with unresolved host/port placeholders. Reading
+these files does not launch their consumers or establish current compatibility.
+Their syntax does not define current LinkedSpec named-argument support. The
+structural path check passes; no new runtime defect is demonstrated by this group.
+Further configuration reading is limited to demonstrated current spec/test needs;
+no historical file is deleted by this scope change. Detailed source interpretation:
+`docs/knowledge/legacy-configuration-source-contracts.md`.
 
 **Lua Unicode casing and rule-label verification:** all property tables match the
 pinned Unicode 17 neutral data. Four Sigma contexts at 2,030 property endpoints
