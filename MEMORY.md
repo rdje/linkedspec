@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `3c7503a02e0c4560eef95dd0952c4fb0f76035f3` — clean Lua reading child 34 activation.
-- latest_completed_leaf: `LUA-STARTUP-READING.1.34 - read stdio dispatch storage and recognition consumers`; reading 34/51; 1352 scoped assertions, dual-ABI storage and neutral progressive/recognition proof pass; all repair roots stay open.
-- active_work_unit: `LUA-STARTUP-READING.1.35` — next exact recursive-observation, repeated-action and root-selection test-source reading child.
-- next_action: Read recursive-observation test lines 143-454, repeated-action test lines 1-416, root-selection admission lines 1-568 and root-selection core lines 1-204; reconcile Knowledge, verify focused evidence, sync the book and commit.
+- activation_commit: `a9aecff4891255be5a565ffc939242a6cbb96aaa` — clean Lua reading child 35 activation.
+- latest_completed_leaf: `LUA-STARTUP-READING.1.35 - read recursive repeated-action and root-selection consumers`; reading 35/51; 828 scoped assertions and current typed/repeated/root proof pass; all repair roots stay open.
+- active_work_unit: `LUA-STARTUP-READING.1.36` — next exact root-selection and rule-local cursor test-source reading child.
+- next_action: Read root-core lines 205-278, root-selection routes lines 1-353, cursor-contract lines 1-486, cursor-descriptor lines 1-260 and cursor-execution lines 1-327; reconcile Knowledge, verify focused evidence, sync the book and commit.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; .1.34 reading and exact stdio/progressive/storage/recognition evidence are committed at the current Git HEAD.
-- blockers: none for bounded .1.35 reading. Prior PUC5.5 nil-error tests fail under .2.2; public-selector baseline fails under .28.7. All repair and supported-runtime prerequisites remain.
+- in_flight_uncommitted: none; .1.35 reading and exact recursive/repeated/root evidence are committed at the current Git HEAD.
+- blockers: none for bounded .1.36 reading. Prior PUC5.5 nil-error tests fail under .2.2; public-selector baseline fails under .28.7. All repair and supported-runtime prerequisites remain.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -57,4 +57,4 @@
   All earlier archive bytes and other history controls remain unchanged; the complete 57-unit Lua reserve is checked. Proportionate governance: ADR0115.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart/Julia reading closed; Lua reading 34/51 (46,651 fragments/1,742,358 bytes), plan 51 groups, 99 files /71,269 fragments /2,732,450 bytes. Supporting code, formal book .4 and policy .5 remain.
+- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart/Julia reading closed; Lua reading 35/51 (48,151 fragments/1,797,379 bytes), plan 51 groups, 99 files /71,269 fragments /2,732,450 bytes. Supporting code, formal book .4 and policy .5 remain.

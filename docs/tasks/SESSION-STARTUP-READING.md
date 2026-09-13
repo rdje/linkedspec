@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 34/51; .1.35 follows child 34; .2.1-.2.33 own thirty-three concrete repair roots, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 35/51; .1.36 follows child 35; .2.1-.2.33 own thirty-three concrete repair roots, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.34 completes stdio, progressive-span, storage and recognition tests and reads recursive-observation lines 1-142 in ten complete windows: 1,500 fragments /59,616 bytes; cumulative 34/51, 46,651 fragments /1,742,358 bytes. All 99 Lua sources remain baseline-identical; 66 files are fully read. Both installed hosts pass 1,352 assertions: stdio247, progressive178, recognition246 and recursive-lowering5 each. Full stdio executes pre-emission cancellation; storage passes 19 owners and three native modules per ABI with exact cleanup. Neutral progressive9/9/116/public6/12/10/60 and recognition138/250/58 pass. Existing .2.1 owns precise stage/count/module guidance qualification; all thirty-three repair roots and earlier failures remain open. Next .1.35 completes recursive observation and reads repeated-action and root-selection ranges; named arguments and startup/ADR0118 prerequisites remain unchanged.
+  Verification: Lua .1.35 completes recursive-observation, repeated-action and root-selection admission tests and reads root-core lines 1-204 in eight complete windows: 1,500 fragments /55,021 bytes; cumulative 35/51, 48,151 fragments /1,797,379 bytes. All 99 Lua sources remain baseline-identical; 69 files are fully read. Both installed hosts pass 828 assertions: recursive43, repeated175, root-admission139 and root-core-prefix57 each. Loaded emitted modules execute in the current host; observation binds rejected/aborted records before propagating typed errors. Neutral typed14/0/231, repeated8/0/54 and root7/0/54 pass. Existing .2.1 owns precise public-closeout guidance qualification; all thirty-three repair roots and earlier failures remain open. Next .1.36 completes root core/routes and reads rule-local cursor ranges; named arguments and startup/ADR0118 prerequisites remain unchanged.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -4607,7 +4607,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.35` | `pending` | Read the recursive-observation suffix and owned repeated-action/root-selection ranges after clean .1.34; preserve all repair owners, prior failures and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.36` | `pending` | Read the root-core suffix and owned root-routes/cursor contract/descriptor/execution ranges after clean .1.35; preserve all repair owners, prior failures and parked named arguments. |
 
 ## Reading Ledger
 

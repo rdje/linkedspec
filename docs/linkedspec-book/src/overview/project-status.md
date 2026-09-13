@@ -329,12 +329,12 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (34/51 groups):** the complete
+**Lua source reading is underway (35/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first 34 groups physically read 46,651 fragments /1,742,358 bytes,
+ownership. The first 35 groups physically read 48,151 fragments /1,797,379 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
@@ -351,8 +351,9 @@ function parser, complete function shell and registry are read. The complete
 body-fluent, callable, diagnostic, duplicate-slot, gap-capture, logical-helper and
 map-leaves tests are read. The MCP-binding, admission and dispatch tests are
 complete, as are stdio, progressive dispatch, storage and recognition transactions.
-Recursive observation is read through line 142. Sixty-six files are fully read.
-The remaining 17 groups require
+Recursive observation, repeated actions and root-selection admission are complete.
+Root core is read through line 204. Sixty-nine files are fully read.
+The remaining 16 groups require
 their own reading and verified commits; source reading does not close the limitations below.
 
 **Lua Unicode casing and rule-label verification:** all property tables match the
@@ -437,9 +438,10 @@ runtime admissions, complete rollout and 141 rejected mutations. Earlier byte co
 and rollout stages remain historical evidence. Exact scope and reproduction:
 `docs/knowledge/lua-mcp-consumer-reading.md`.
 
-**Lua stdio, progressive dispatch and transaction verification:** both installed
-hosts pass 247 complete stdio checks, 178 progressive-dispatch checks, 246 recognition
-transaction checks and five recursive-observation lowering checks: 1,352 total.
+**Lua stdio, progressive dispatch and transaction verification:** `.1.34` records
+these suites on both installed hosts: 247 complete stdio checks, 178 progressive-dispatch
+checks, 246 recognition transaction checks and five recursive-observation lowering checks:
+1,352 total.
 Stdio verifies lexical integer identity, exact frame limits and recovery, suppression
 before emission, fixed I/O diagnostics, released state and caller-owned streams.
 
@@ -449,8 +451,8 @@ child results without advancing the parent cursor or serializing callbacks and
 registry state. Recognition tokens preserve match presence separately from payload,
 including successful false values. Invocation identity, isolated marks, rollback,
 single-attempt rules and forbidden token reuse retain their checked behavior.
-The five recursive checks establish dedicated lowering only; runtime observation
-and error-record behavior remain in the next owned source range.
+The five recursive checks establish dedicated lowering only; the full observation
+proof below now covers runtime records and error propagation.
 
 The focused storage oracle verifies 19 allocation owners and three native modules
 per ABI, builds in a path containing spaces, checks generated-source and trace output
@@ -460,6 +462,36 @@ at 9/9 with 116 contract mutations; recognition remains complete with 138 Action
 rows, 250 call rows and 58 mutations. Earlier private-stage and count statements
 retain their existing guidance-repair owner. Exact scope and reproduction:
 `docs/knowledge/lua-stdio-progressive-recognition-consumer-reading.md`.
+
+**Lua recursive observation, repeated actions and root selection:** both installed
+hosts pass 43 complete observation checks, 175 repeated-action admission checks,
+139 root-selection admission checks and 57 root-core prefix checks: 828 total.
+Observation preserves false independently from match success and returns detached
+records with Unicode-scalar coordinates. Failed, rejected and aborted child calls
+retain distinct outcomes; rejection and abort records bind before typed errors
+propagate. Ordinary nested recursion retains its existing cutoff behavior.
+
+Explicit repetition collects one action-edge value per hit, including a returned
+array or null as one outer element. Lifecycle returns keep whole-rule authority;
+single-choice pipe returns its selected value directly. Zero-width repetition
+retains one result before stopping. The exact fifteen-role consumer also verifies
+ordered selected-slot traces, bounds, primary output and the shared corpus fixture.
+
+Root selection uses the explicit selector, then the first authored marker, then the
+first authored rule. Its fifteen-role consumer verifies default and explicit routes,
+immutable descriptors, typed failures, generated-v2 identity and exact request traces.
+The root-core prefix checks resolver and validation behavior through line 134; its
+later runtime/descriptor assertions remain in the next owned reading range. Both
+admission suites and observation execute freshly emitted source in the current host.
+They do not launch a separate emitted-code child process.
+
+Fresh neutral checks confirm all 14 typed-source, eight repeated-action and seven
+root-selection rollout rows are complete, with 231, 54 and 54 rejected mutations
+respectively. Root public proof covers 24 documents and 18 current-claim denials;
+recursive public proof covers six documents, six denials and ten outward guards. Older
+present-tense pending-public guidance retains its existing repair owner. Exact
+source scope, limits and reproduction:
+`docs/knowledge/lua-recursive-repeated-root-consumer-reading.md`.
 
 **Known Lua invocation limitation — nested array members can disappear:** a
 caller-supplied tagged array with an extra member or a sparse tail is accepted,

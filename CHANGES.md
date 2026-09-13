@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua recursive observation, repeated actions and root admission reading
+
+- Read recursive143-454, repeated1-416, root-admission1-568 and root-core1-204: 1,500 fragments /55,021 bytes; cumulative 35/51 and 1,797,379 bytes.
+- Both hosts pass recursive43, repeated175, root-admission139 and root-core-prefix57: 828 assertions.
+- Current neutral typed14/0/231, repeated8/0/54 and root7/0/54 pass; emitted modules execute in the current host and typed observation records bind before error propagation.
+- LUA-STARTUP-READING.1.35 adds public-closeout guidance qualification to existing .2.1; all thirty-three repair roots remain open; next .1.36.
+
 ## 2026-09-13 — Lua stdio, progressive dispatch, storage and recognition reading
 
 - Read stdio194-468, progressive1-464, storage1-48, recognition1-571 and recursive1-142: 1,500 fragments /59,616 bytes; cumulative 34/51 and 1,742,358 bytes.

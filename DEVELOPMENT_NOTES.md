@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Preserve observation, repetition and selection proof boundaries
+
+- Recursive observation preserves false payloads and detached Unicode-scalar records, distinguishes ordinary cutoff from explicit rejected recursion and binds before typed error propagation.
+- Repeated actions collect one value per accepted hit while lifecycle returns retain whole-rule authority; root selection preserves authored order and marker identity.
+- Both exact fifteen-role admission maps execute current-host emitted code; the root-core prefix covers resolver and validation assertions through line134 only.
+- LUA-STARTUP-READING.1.35 stores exact scope and 828-assertion replay in docs/knowledge/lua-recursive-repeated-root-consumer-reading.md; current public-closeout prose remains owned by .2.1.
+
 ## 2026-09-13 — Keep private runtime and storage proof boundaries explicit
 
 - Full stdio verifies lexical number kinds, bounded framing recovery, cancellation before emission, fixed I/O diagnostics and release without closing caller streams.

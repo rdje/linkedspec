@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LUA-STARTUP-READING`
-- Status: `active` / approved capacity; source reading 34/51
+- Status: `active` / approved capacity; source reading 35/51
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.6`
 - Created: `2026-09-12`
 - Last updated: `2026-09-13`
@@ -45,7 +45,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - Ordered range SHA-256: `81c58b8319def28af518fb134a3787513fe746f0f0f73bcacb0e20b9ede1c9d6`.
 - Child-summary SHA-256: `f56ecac262800bd3cc1e6bba0cc25bfe22f095c3dfee41f1c6595d4200145290`.
 - Coordinates are one-based inclusive LF physical lines or absolute file bytes; both byte windows decode as UTF-8.
-- Current physical reading: 34/51 children, 46,651/71,269 fragments and 1,742,358/2,732,450 bytes.
+- Current physical reading: 35/51 children, 48,151/71,269 fragments and 1,797,379/2,732,450 bytes.
 - Exact independent replay and capacity evidence: `docs/knowledge/lua-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -596,14 +596,18 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `LUA-STARTUP-READING.1.34 - read stdio dispatch storage and recognition consumers`.
 
 - ID: `LUA-STARTUP-READING.1.35`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `a9aecff4891255be5a565ffc939242a6cbb96aaa`.
+  Verification tier: `focused`
+  Focused checks: Exact bounded source/baseline reading; recursive observation, repeated-action results and root-selection Knowledge reconciliation; complete read native consumers and directly relevant neutral proof; memory, Knowledge, shared history, book and normal doctrines.
+  Canonical trigger: Ordinary test-source reading and bounded repair intake; no production change. Existing runtime/native-error limitations remain explicit; later closeout and push retain canonical prerequisites.
   Goal: Read and understand group 35: recursive_observation_contract_test.lua through root_rule_selection_core_test.lua.
   Scope: `lua/test/recursive_observation_contract_test.lua` lines 143-454; `lua/test/repeated_action_result_contract_test.lua` lines 1-416; `lua/test/root_rule_selection_admission_test.lua` lines 1-568; `lua/test/root_rule_selection_core_test.lua` lines 1-204
   Baseline evidence: 1500 fragments / 55021 bytes; ordered range SHA-256 `eba36de062d16494d3302a19f1c53aa03481e8a55d287ef9c69b52f704cc47e8`.
   Dependencies: .1.34 committed with clean handoff.
   Acceptance: Read every scoped byte without truncation; record comprehension, Knowledge and repair reconciliation, focused proof and a clean per-leaf commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Lua .1.35 completes recursive-observation, repeated-action and root-selection admission tests and reads root-core lines 1-204 in eight complete windows: 1,500 fragments /55,021 bytes; cumulative 35/51, 48,151 fragments /1,797,379 bytes. All 99 Lua sources remain baseline-identical; 69 files are fully read. Both installed hosts pass 828 assertions: recursive43, repeated175, root-admission139 and root-core-prefix57 each. Loaded emitted modules execute in the current host; observation binds rejected/aborted records before propagating typed errors. Neutral typed14/0/231, repeated8/0/54 and root7/0/54 pass. Existing .2.1 owns precise public-closeout guidance qualification; all thirty-three repair roots and earlier failures remain open. Next .1.36 completes root core/routes and reads rule-local cursor ranges; named arguments and startup/ADR0118 prerequisites remain unchanged. Exact evidence: docs/knowledge/lua-recursive-repeated-root-consumer-reading.md.
+  Commit: `LUA-STARTUP-READING.1.35 - read recursive repeated-action and root-selection consumers`.
 
 - ID: `LUA-STARTUP-READING.1.36`
   Status: `pending`
@@ -797,6 +801,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Reading .1.31 extension: inter_match_gap_capture_contract_test.lua header lines6-7 and inter-match-gap-lua-implementation-plan metadata/lines77/110 retain private-stage recurring/public-pending guidance despite the explicitly current closed successor and neutral9/0/63/public8/15/10/34. Date or qualify these precise stage boundaries; preserve historical 392=178+33+46+105+30 proof. The metadata assertions span two regions, so the fresh prefix is 106+33+46=185, not a contradictory full-suite count.
   Reading .1.33 extension: lua-native-mcp-server-plan still says Lua will provide the implemented server and gives an unqualified exact 82,543-byte bundle; current binding is 83,166 bytes with an 82,882-byte canonical bundle. lua-mcp-implementation-admission retains shared-rollout-pending body guidance, while the decoded-server successor and fresh admission checker record complete 5/5 implementations, 6/6 runtimes and 141 mutations. Date or qualify these precise current-guidance sentences; preserve the earlier implementation and admission counts.
   Reading .1.34 extension: lua-progressive-span-dispatch-admission and lua-progressive-span-dispatch-carriers retain current pending-recurrence/public metadata despite the closed recomposition successor and fresh 9/9/116 plus public6/12/10/60. lua-recognition-transaction-integration retains a current 243-assertion consumer sentence, superseded by admitted 246 proof. lua-project-data-ssd-storage still describes a two-module build despite its current three-module oracle. Qualify these exact current-guidance statements while preserving their dated implementation counts and unchanged private interfaces.
+  Reading .1.35 extension: lua-recursive-observation-admission metadata and final current guidance still leave public closeout pending despite the completed observation-specific and program-wide successors (fresh typed14/0/231, observation-public6/6/10). lua-root-rule-selection-routes still leaves final public .6 pending despite the completed five-backend successor and fresh root7/0/54/public24/18. Qualify these precise current-guidance statements while preserving dated milestones, supported-runtime limits and unchanged private/selection behavior.
   Acceptance: Remove the false current failure projection, distinguish historical counts from current guidance, preserve useful unique history through canonical pointers, and independently verify the resulting public wording and native command examples.
   Verification: `pending`
   Commit: `pending`
@@ -2090,7 +2095,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.35` | `pending` | Read the recursive-observation suffix and owned repeated-action/root-selection ranges after clean .1.34; preserve all repair owners, prior failures and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.36` | `pending` | Read the root-core suffix and owned root-routes/cursor contract/descriptor/execution ranges after clean .1.35; preserve all repair owners, prior failures and parked named arguments. |
 
 ## Decisions
 
@@ -2108,9 +2113,11 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Blockers
 
-- None for bounded Lua .1.35 reading after clean .1.34. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
+- None for bounded Lua .1.36 reading after clean .1.35. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
 
 ## Verification Log
+
+- `2026-09-13` .1.35: Lua .1.35 completes recursive-observation, repeated-action and root-selection admission tests and reads root-core lines 1-204 in eight complete windows: 1,500 fragments /55,021 bytes; cumulative 35/51, 48,151 fragments /1,797,379 bytes. All 99 Lua sources remain baseline-identical; 69 files are fully read. Both installed hosts pass 828 assertions: recursive43, repeated175, root-admission139 and root-core-prefix57 each. Loaded emitted modules execute in the current host; observation binds rejected/aborted records before propagating typed errors. Neutral typed14/0/231, repeated8/0/54 and root7/0/54 pass. Existing .2.1 owns precise public-closeout guidance qualification; all thirty-three repair roots and earlier failures remain open. Next .1.36 completes root core/routes and reads rule-local cursor ranges; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
 - `2026-09-13` .1.34: Lua .1.34 completes stdio, progressive-span, storage and recognition tests and reads recursive-observation lines 1-142 in ten complete windows: 1,500 fragments /59,616 bytes; cumulative 34/51, 46,651 fragments /1,742,358 bytes. All 99 Lua sources remain baseline-identical; 66 files are fully read. Both installed hosts pass 1,352 assertions: stdio247, progressive178, recognition246 and recursive-lowering5 each. Full stdio executes pre-emission cancellation; storage passes 19 owners and three native modules per ABI with exact cleanup. Neutral progressive9/9/116/public6/12/10/60 and recognition138/250/58 pass. Existing .2.1 owns precise stage/count/module guidance qualification; all thirty-three repair roots and earlier failures remain open. Next .1.35 completes recursive observation and reads repeated-action and root-selection ranges; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
@@ -2188,6 +2195,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Commit Log
 
+- `2026-09-13` .1.35: `LUA-STARTUP-READING.1.35 - read recursive repeated-action and root-selection consumers`; activation a9aecff48; next .1.36 after clean proof and empty brief.
+
 - `2026-09-13` .1.34: `LUA-STARTUP-READING.1.34 - read stdio dispatch storage and recognition consumers`; activation 3c7503a02; next .1.35 after clean proof and empty brief.
 
 - `2026-09-13` .1.33: `LUA-STARTUP-READING.1.33 - read MCP consumers and reconcile exact execution evidence`; activation e8f630f33; next .1.34 after clean proof and empty brief.
@@ -2263,6 +2272,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 - `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` owns creation of this plan.
 
 ## Changelog
+
+- `2026-09-13` .1.35: Complete recursive-observation, repeated-action and root-admission reading; verify exact carrier/error/result/selection boundaries and owned root-core prefix; preserve public-closeout guidance repair ownership.
 
 - `2026-09-13` .1.34: Complete stdio, progressive, storage and recognition reading; verify pre-emission cancellation, private carriers and managed storage; retain exact recursive-prefix limits and existing guidance repair ownership.
 
