@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua package completion and semantic foundation reading
+
+- Read all five owned ranges in eight windows: 1,500 fragments /58,471 bytes; cumulative 44/51 and 2,342,290 bytes, with 81 complete files.
+- Each installed host passes seven package groups with the 392-assertion gap consumer, semantic suites at 136/97/122 assertions, and 12 independent SHA-prefix vectors.
+- Exact filtered core and full staged/generated projections remain distinct; compiler call-site scans do not become measured invocation counts or fresh full-query proof.
+- LUA-STARTUP-READING.1.44 extends existing .2.1 guidance, preserves all thirty-three repair roots and prior failures/exclusions, and hands off to .1.45.
+
 ## 2026-09-13 — Lua control numeric and collection package reading
 
 - Read package 7853-9352 in eight complete windows: 1,500 fragments /52,604 bytes; cumulative 43/51 and 2,283,819 bytes.

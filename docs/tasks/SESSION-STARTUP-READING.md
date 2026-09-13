@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 43/51; .1.44 follows child 43; .2.1-.2.33 own thirty-three concrete repair roots, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 44/51; .1.45 follows child 44; .2.1-.2.33 own thirty-three concrete repair roots, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.43 reads package lines 7853-9352 in eight complete windows: 1,500 fragments /52,604 bytes; cumulative 43/51, 60,040 fragments /2,283,819 bytes. All 99 Lua sources remain baseline-identical; 77 files are fully read. Both installed hosts pass 28 complete selected package groups each, 56 total: inline/statement/while controls, scalar numeric and logical contracts, selector rejection, uniform bindings, child push and copied collections. Existing .2.1 gains precise direct-write/numeric and historical control-stage qualifications; no new repair node. All thirty-three repair roots, native-error exclusions and earlier failures remain open. Next .1.44 completes the package runner and reads the four owned semantic-test ranges; named arguments and startup/ADR0118 prerequisites remain unchanged.
+  Verification: Lua .1.44 reads five exact ranges in eight complete windows: 1,500 fragments /58,471 bytes; cumulative 44/51, 61,540 fragments /2,342,290 bytes. All 99 Lua sources remain baseline-identical; 81 files are fully read, including the package runner. Each installed host passes seven package groups with the embedded 392 gap consumer, semantic core 136/staged 97/foundation 122 assertions, and 12 independent SHA-prefix vectors. These are 1,518 counted assertions/vectors plus 14 package groups with overlap explicit; no full-query claim. Existing .2.1 gains precise semantic-stage/count and prior-defect qualifications; no new repair node. All thirty-three repair roots, native-error exclusions and earlier failures remain open. Next .1.45 reads the query-kernel suffix, generated-observation test and native-observation prefix; named arguments and startup/ADR0118 prerequisites remain unchanged.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -4607,7 +4607,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.44` | `pending` | Complete the package runner and read the four owned semantic-test ranges after clean .1.43; preserve all repair owners, native-error exclusions, prior failures and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.45` | `pending` | Read the owned query suffix and observation-test ranges after clean .1.44; preserve prior PUC5.5 nil-error failures, all repair owners, native-error exclusions and parked named arguments. |
 
 ## Reading Ledger
 

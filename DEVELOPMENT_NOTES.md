@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Keep semantic authority and query-prefix proof bounded
+
+- Finish the package runner, call-core, staged/generated and compilation-foundation consumers; read only query-kernel 1-154, ending after its complete SHA helper.
+- All ten native jobs pass: seven package groups, embedded gap 392, core 136/staged 97/foundation 122 and SHA 12 per host; counted assertions overlap the gap package group explicitly.
+- Core materialization filters staged/generated roles to 18/16; full provenance deep-equals 22/25. Foundation distinguishes compiled/failed states, exact diagnostics, detachment and unknown table-error identity.
+- LUA-STARTUP-READING.1.44 records replay in docs/knowledge/lua-package-completion-semantic-foundation-reading.md; current/private/future semantic wording remains owned by .2.1.
+
 ## 2026-09-13 — Preserve exact control flow and collection mutation contracts
 
 - Select original helpers and all 28 complete groups 7805-9319; partial array transforms remain outside the proof and earlier native-error exclusions stay intact.

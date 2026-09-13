@@ -329,12 +329,12 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (43/51 groups):** the complete
+**Lua source reading is underway (44/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first 43 groups physically read 60,040 fragments /2,283,819 bytes,
+ownership. The first 44 groups physically read 61,540 fragments /2,342,290 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
@@ -354,10 +354,9 @@ complete, as are stdio, progressive dispatch, storage and recognition transactio
 Recursive observation, repeated actions and root-selection admission are complete.
 Root core, root routes, cursor admission and cursor descriptor tests are complete.
 Cursor execution, generated source, normalization and option-removal tests are
-complete. The package runner is read through line 9352, including generated hosts,
-matching, runtime diagnostics, captures, callbacks, controls, numeric contracts,
-bindings and copied collections. Seventy-seven files are fully read. The remaining
-eight groups require
+complete. The package runner is fully read, as are semantic call-core, staged/
+generated-provenance and compilation-foundation tests. Query-kernel reading covers
+its first 154 lines. Eighty-one files are fully read. The remaining seven groups require
 their own reading and verified commits; source reading does not close the limitations below.
 
 **Lua Unicode casing and rule-label verification:** all property tables match the
@@ -720,8 +719,8 @@ value controls were partly read in that leaf and are completed below.
 Exact reading, exclusions, replay and existing guidance repair:
 `docs/knowledge/lua-package-named-capture-scoped-callback-reading.md`.
 
-**Lua control, numeric and collection verification:** 28 complete selected groups
-pass on each installed host, 56 total. Inline and statement branches evaluate only
+**Lua control, numeric and collection verification:** `.1.43` records 28 complete
+selected groups per installed host, 56 total. Inline and statement branches evaluate only
 the selected payload; switch subjects run once and bare labels remain literal.
 Attached and marker structures preserve nested scope, action/local returns and
 attributed malformed-control errors. Attached while rechecks after the final
@@ -746,10 +745,40 @@ views preserve key/value correspondence and null-valued membership; copied
 transforms retain override, collision and invalid-input behavior. Array selection,
 ordering and uniqueness preserve the source and zero-based indexes. Existing
 cross-backend caveats and malformed-container/false-value defects remain open.
-The following array-transform group is only partly read here.
+Array transforms were partly read in that leaf and are completed below.
 
 Exact reading, replay and existing guidance repair:
 `docs/knowledge/lua-package-control-numeric-collection-reading.md`.
+
+**Lua package completion and semantic-foundation verification:** all ten focused
+jobs pass. Each host executes seven final package groups, including the full
+392-assertion gap consumer. Array transforms distinguish pure results from bare
+rebinding; tagged records copy carried fields and evaluate their inputs once.
+Wrong-kind mutation fields, value-returning `set` and all neutral Unicode casing
+fixtures pass. The embedded gap consumer also retains its existing generated-child
+proof. Earlier excluded native-error groups remain unexecuted.
+
+Semantic call-core passes 136 assertions, comparing a filtered 18-record/16-relation
+snapshot with staged/generated roles removed. It preserves authored order, typed
+calls/signatures/shapes, exact fixture source ranges and detached plain values.
+Full staged/generated provenance passes 97 assertions at 22 records, 25 relations
+and ten source references, including sidecar/plan corruption rejection. These
+projections describe retained state; they do not execute generated target code.
+
+Compilation foundation passes 122 assertions for compiled-or-failed state, entry
+selection, native/fallback diagnostics, immutable views and unknown table-error
+identity. Its source checks count the intended compiler call sites; they are not
+runtime invocation measurements. A target action that would fail stays unexecuted.
+Prior diagnostic-null and source-correlation defects remain separately owned.
+
+The read query-kernel prefix contains its complete SHA-256 helper. Twelve independent
+vectors per host cover empty, Unicode, NUL and padding/block boundaries. No later
+query-response tests are counted in this leaf. Across both hosts, the counted
+semantic/gap assertions and SHA vectors total 1,518; the fourteen package groups
+include the gap wrapper, so these totals overlap explicitly.
+
+Exact scope, replay, count boundaries and guidance ownership:
+`docs/knowledge/lua-package-completion-semantic-foundation-reading.md`.
 
 **Known Lua invocation limitation — nested array members can disappear:** a
 caller-supplied tagged array with an extra member or a sparse tail is accepted,
