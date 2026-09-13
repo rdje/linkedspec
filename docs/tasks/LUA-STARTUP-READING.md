@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LUA-STARTUP-READING`
-- Status: `active` / approved capacity; source reading 48/51
+- Status: `active` / approved capacity; source reading 49/51
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.6`
 - Created: `2026-09-12`
 - Last updated: `2026-09-13`
@@ -45,7 +45,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - Ordered range SHA-256: `81c58b8319def28af518fb134a3787513fe746f0f0f73bcacb0e20b9ede1c9d6`.
 - Child-summary SHA-256: `f56ecac262800bd3cc1e6bba0cc25bfe22f095c3dfee41f1c6595d4200145290`.
 - Coordinates are one-based inclusive LF physical lines or absolute file bytes; both byte windows decode as UTF-8.
-- Current physical reading: 48/51 children, 67,540/71,269 fragments and 2,584,712/2,732,450 bytes.
+- Current physical reading: 49/51 children, 69,040/71,269 fragments and 2,642,497/2,732,450 bytes.
 - Exact independent replay and capacity evidence: `docs/knowledge/lua-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -794,14 +794,18 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `LUA-STARTUP-READING.1.48 - read staged declaration depth and recursion tests`.
 
 - ID: `LUA-STARTUP-READING.1.49`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `0900d3451cf2a4f860bb416d4facffc7c7241412`.
+  Verification tier: `focused`
+  Focused checks: Exact five owned source ranges and unchanged Lua baseline; completely read staged/lifecycle/typed-source/Unicode checks on both installed hosts after Knowledge reconciliation; preserve every prior failure and repair owner, verify coverage and source/task/history preservation, render book, check explicit memory and all normal doctrines.
+  Canonical trigger: Ordinary bounded source reading and evidence intake without production or infrastructure change; supported-runtime repairs, complete-consumer admission, startup closeout and push retain canonical prerequisites.
   Goal: Read and understand group 49: staged_ast_enrichment_contract_test.lua through unicode_rule_label_identity_routes_test.lua.
   Scope: `lua/test/staged_ast_enrichment_contract_test.lua` lines 1741-2094; `lua/test/standalone_lifecycle_block_contract_test.lua` lines 1-228; `lua/test/typed_source_location_contract_test.lua` lines 1-435; `lua/test/unicode_rule_label_classifier_test.lua` lines 1-98; `lua/test/unicode_rule_label_identity_routes_test.lua` lines 1-385
   Baseline evidence: 1500 fragments / 57785 bytes; ordered range SHA-256 `625df2d24b896f1788c4dffc59193536acfece01368b90ff8a8cf670bf854b7d`.
   Dependencies: .1.48 committed with clean handoff.
   Acceptance: Read every scoped byte without truncation; record comprehension, Knowledge and repair reconciliation, focused proof and a clean per-leaf commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Lua .1.49 reads five exact ranges in eleven complete windows: 1,500 fragments /57,785 bytes; cumulative 49/51, 69,040 fragments /2,642,497 bytes. All 99 Lua sources remain baseline-identical; 94 files are fully read. Full staged 890/lifecycle 109/typed-source 240/classifier 1706 and exact identity prefix 341 pass per installed host, 6,572 assertions total. Staged production runs use fresh state in the current host; the identity prefix independently executes a fresh emitted process and both primary source forms, ending before later selector diagnostics. Lifecycle/typed/Unicode neutral checkers pass; current typed rollout is 14/0/231. Existing .2.1 gains a dated typed-admission guidance qualification; no new repair node. All 34 repair roots, known runtime failures and native-error exclusions remain open. Next .1.50 completes identity and reads Unicode negative/routes plus write-vivification ranges; named arguments and startup/ADR0118 prerequisites remain unchanged. Exact evidence: docs/knowledge/lua-staged-lifecycle-typed-unicode-consumer-reading.md.
+  Commit: `LUA-STARTUP-READING.1.49 - read staged completion and source identity consumers`.
 
 - ID: `LUA-STARTUP-READING.1.50`
   Status: `pending`
@@ -870,6 +874,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Reading .1.47 extension: lua-semantic-introspection-admission still presents rollout 6/9, 98 mutations and next recurring owner as current; the admitted recurring/public successor and fresh checker retain 9/9, 6/6, 128. lua-typed-source-compatibility-alias-gap still calls 246 names current and typed-source RED pending, despite current 250 and completed 14/0/231 typed rollout. Date these exact stage pointers, preserving original 408/638 fixture proof. Passing admission fixtures do not close .2.2/.2.34, raw-false .2.15 or shared-budget startup .82. Existing staged 888/890 guidance qualification remains unchanged; this leaf executes only staged helpers 1-222.
   Verification: `pending`
   Commit: `pending`
+  Reading .1.49 extension: lua-typed-source-location-dormant-red retains present-tense 8 complete /6 pending /42 mutation admission totals after its dated milestones; current neutral proof is 14/0/231 and the unchanged full Lua consumer remains 240 per host. Date that stage-specific conclusion without rewriting historical proof. Full staged 890 reconfirms the already-owned 888/890 qualification; Unicode source/outcome-next guidance remains owned by the existing .1.28 extension. The new identity prefix proves 341 assertions through fresh emitted execution and both primary source forms, not the full 359 or its later selector diagnostics. No existing runtime or fixture repair closes.
 
 - ID: `LUA-STARTUP-READING.2.1.1`
   Status: `pending`
@@ -2193,7 +2198,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.49` | `pending` | Complete staged reading and read the four owned lifecycle/source/Unicode ranges after clean .1.48; preserve all 34 repair roots, known failures, native-error exclusions and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.50` | `pending` | Complete Unicode identity and read negative/routes/write-vivification ranges after clean .1.49; preserve all 34 repair roots, known failures, native-error exclusions and parked named arguments. |
 
 ## Decisions
 
@@ -2211,9 +2216,11 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Blockers
 
-- None for bounded Lua .1.49 reading after clean .1.48. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
+- None for bounded Lua .1.50 reading after clean .1.49. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
 
 ## Verification Log
+
+- `2026-09-13` .1.49: Lua .1.49 reads five exact ranges in eleven complete windows: 1,500 fragments /57,785 bytes; cumulative 49/51, 69,040 fragments /2,642,497 bytes. All 99 Lua sources remain baseline-identical; 94 files are fully read. Full staged 890/lifecycle 109/typed-source 240/classifier 1706 and exact identity prefix 341 pass per installed host, 6,572 assertions total. Staged production runs use fresh state in the current host; the identity prefix independently executes a fresh emitted process and both primary source forms, ending before later selector diagnostics. Lifecycle/typed/Unicode neutral checkers pass; current typed rollout is 14/0/231. Existing .2.1 gains a dated typed-admission guidance qualification; no new repair node. All 34 repair roots, known runtime failures and native-error exclusions remain open. Next .1.50 completes identity and reads Unicode negative/routes plus write-vivification ranges; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
 - `2026-09-13` .1.48: Lua .1.48 reads staged-enrichment 241-1740 in eight complete windows: 1,500 fragments /62,275 bytes; cumulative 48/51, 67,540 fragments /2,584,712 bytes. All 99 Lua sources remain baseline-identical; 90 files remain fully read. The unchanged test prefix 1-1728, with its existing IIFE closed at that complete statement boundary, passes 704 assertions per host, 1408 total. This covers declaration/provenance, frozen current-depth policies and recursion through cumulative node limits; later rebasing and fresh production-carrier checks remain unexecuted. Neutral staged proof retains 9/9/123 plus public 6/17/10/129. No new defect or repair node; all 34 repair roots, known runtime failures and native-error exclusions remain open. Next .1.49 completes staged reading and reads lifecycle, typed-source and Unicode-label test ranges; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
@@ -2319,6 +2326,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Commit Log
 
+- `2026-09-13` .1.49: `LUA-STARTUP-READING.1.49 - read staged completion and source identity consumers`; activation 0900d3451; next .1.50 after clean proof and empty brief.
+
 - `2026-09-13` .1.48: `LUA-STARTUP-READING.1.48 - read staged declaration depth and recursion tests`; activation a4ccda13e; next .1.49 after clean proof and empty brief.
 
 - `2026-09-13` .1.47: `LUA-STARTUP-READING.1.47 - read semantic admission and source alias consumers`; activation 93b9ed32b; next .1.48 after clean proof and empty brief.
@@ -2422,6 +2431,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 - `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` owns creation of this plan.
 
 ## Changelog
+
+- `2026-09-13` .1.49: Complete staged/lifecycle/typed-source/classifier reading and bound Unicode identity proof through both primary source forms; preserve existing defects and date typed-admission guidance.
 
 - `2026-09-13` .1.48: Read staged declaration/current-depth/recursive test mechanisms and verify the exact bounded prefix; preserve prior defects and defer unread rebasing/production-carrier checks to the next leaf.
 

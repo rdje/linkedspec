@@ -329,12 +329,12 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (48/51 groups):** the complete
+**Lua source reading is underway (49/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first 48 groups physically read 67,540 fragments /2,584,712 bytes,
+ownership. The first 49 groups physically read 69,040 fragments /2,642,497 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
@@ -358,8 +358,9 @@ complete. The package runner is fully read, as are semantic call-core, staged/
 generated-provenance and compilation-foundation tests. Query-kernel and generated
 observation tests are fully read, as are native observation, runtime projection,
 source foundation and static graph. Remaining-static, semantic admission and
-source-alias tests are complete; staged-enrichment reading reaches line 1740.
-Ninety files are fully read. The remaining three groups require
+source-alias, staged-enrichment, standalone-lifecycle, typed-source and Unicode
+classifier tests are complete; Unicode identity reading reaches line 385.
+Ninety-four files are fully read. The remaining two groups require
 their own reading and verified commits; source reading does not close the limitations below.
 
 **Lua Unicode casing and rule-label verification:** all property tables match the
@@ -896,14 +897,47 @@ calls and result-node limits. Exact cycles and non-decreasing spans reject;
 settled callback contexts expire. The four-call fixture ends with twelve remaining
 steps and 116 remaining result nodes, without resetting resources at a new depth.
 
-Execution stops after the complete node-limit fixture at line 1728. Source rebasing
-and fresh production-seed carrier tests remain in the next range. The exact total
-is 1,408 assertions, with neutral 9/9/123 and public 6/17/10/129 checks passing.
+The child-48 execution stopped after the complete node-limit fixture at line 1728;
+child 49 now completes the source rebasing and production-seed tests below. That
+earlier prefix total is 1,408 assertions, with neutral 9/9/123 and public
+6/17/10/129 checks passing.
 Previously tracked malformed-container, provenance, marker-cycle, diagnostic-byte
 and runtime limitations remain open; this slice finds no new defect.
 
 Exact reading, prefix construction and proof limits:
 `docs/knowledge/lua-staged-declaration-depth-recursion-consumer-reading.md`.
+
+**Lua staged completion and source identity verification:** full staged tests
+pass 890 assertions per installed host. Direct and concatenated source spans rebase
+child diagnostics; invalid local ranges produce the documented projection marker.
+Callback safe points recheck cancellation and deadlines. Eight production calls
+through native, reconstructed, generated-plan and current-host emitted routes get
+fresh state and detached results. Parent failure starts no staged execution, and a
+transaction-denied execution token expires. These are fresh parse states within
+the host; the separate Unicode test below spawns a new process.
+
+The diagnostic truncation fixture checks its diagnostic code and exhausted resource
+counter. It does not measure serialized size, so the known diagnostic-byte ceiling
+repair remains open. Passing the full staged fixture closes no prior repair.
+
+Standalone lifecycle tests pass 109 assertions per host, including duplicate order
+through executed emitted Lua. Malformed twins compare error type and nonempty text;
+legacy plain payloads stay inert. Typed-source tests pass 240 per host, covering
+copied source ownership, scalar/byte coordinates, detached 92-row and seven-alias
+catalogs and named-mark/cursor/alias fixtures through three runtime carriers.
+
+Unicode classifier tests pass 1,706 per host, checking both endpoints of all 806
+ranges and malformed UTF-8 boundaries. The exact identity prefix passes 341 per host: ten
+distinct labels survive portable artifacts, reconstruction, generated execution,
+a fresh emitted process, strict loading and both primary source forms. The fresh
+process also preserves selected-rule trace identity. Later native selector and
+diagnostic checks remain in the next source range; the full identity suite is not
+claimed by this prefix.
+
+The combined focused total is 6,572 assertions. Lifecycle, typed-source and Unicode
+neutral checkers pass, retaining typed rollout 14/0/231. Exact reading, replay,
+carrier limits and the existing guidance-repair owner are recorded in
+`docs/knowledge/lua-staged-lifecycle-typed-unicode-consumer-reading.md`.
 
 **Known Lua test-coverage limitation — six missing fields are actually tables:**
 the observation-test helper retains its sentinel table when asked to remove a

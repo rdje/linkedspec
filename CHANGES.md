@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua staged completion and source identity reading
+
+- Read five exact ranges in eleven complete windows: 1500 fragments /57785 bytes; cumulative 49/51, 69040 fragments /2642497 bytes, 94 complete files.
+- Staged 890/lifecycle 109/typed-source 240/classifier 1706/identity prefix 341 pass per host, 6572 total; three neutral checkers pass.
+- Fresh staged state is distinct from a fresh process; the identity prefix executes a fresh emitted host and both primary source forms, stopping before later selector diagnostics.
+- LUA-STARTUP-READING.1.49 extends existing .2.1 guidance ownership, adds no repair node and preserves prior failures; .1.50 continues Unicode and write-vivification reading.
+
 ## 2026-09-13 — Lua staged declaration, depth and recursion reading
 
 - Read staged-test 241-1740 in eight complete windows: 1500 fragments /62275 bytes; cumulative 48/51, 2,584,712 bytes, 90 complete files.

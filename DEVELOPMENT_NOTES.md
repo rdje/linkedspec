@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Bound Lua carrier and source-identity evidence precisely
+
+- Staged direct/derived rebasing, safe-point cancellation/deadlines, fresh production seeds and expired transaction denial pass; the small diagnostic-byte test checks truncation identity and zero resources, not output size.
+- Lifecycle duplicate order executes emitted Lua in the current host; typed-source catalogs remain detached and its three fixtures cover native/reconstructed/generated-plan carriers.
+- Unicode classifier tests every range endpoint and malformed UTF-8 boundary; unchanged identity lines 1-357 preserve all ten labels through a fresh emitted process and both primary source forms.
+- LUA-STARTUP-READING.1.49 records replay in docs/knowledge/lua-staged-lifecycle-typed-unicode-consumer-reading.md; preserve .2.26 diagnostic-byte and all other repairs while dating typed-admission guidance.
+
 ## 2026-09-13 — Keep staged prefix and recursive resource proof bounded
 
 - Read and understand staged declarations, exact source provenance, complete-depth reservation, deterministic ordering, plan-only caching and all result/failure policies.
