@@ -2299,7 +2299,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
   Children: `.3.8.0` owns exact decomposition; `CONFORMANCE-SOURCE-READING.1` owns all143 reading groups; .2 findings and .3 independent closeout stay separate.
-  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; .3.8.0 preserves143 groups/302 exact ranges over160 baseline-identical inputs. Physical reading1/143: capability guide1-770,770 fragments/65485 bytes. Next .1.2 owns guide suffix and four contract ranges; .41.6/.41.7 own confirmed guide-current drift. All other repairs/prerequisites remain.
+  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; .3.8.0 preserves143 groups/302 exact ranges over160 baseline-identical inputs. Physical reading2/143: cumulative1578 fragments/130987 bytes, four complete files and diagnostic prefix1-268. Next .1.3 owns diagnostic suffix and following contracts/fixtures; .41.6/.41.7 retain exact guide-current repairs. All other repairs/prerequisites remain.
   Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
     inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
   Verification: `pending`
@@ -3359,6 +3359,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     Julia .1.1 adds exact bare corpus commands in julia/README.md lines 515 and 963; route them through tools/run_julia_project_data.sh. No unmanaged execution or off-volume write was performed or inferred by this reading. Preserve dated counts while repairing copyable current guidance.
     Julia .1.2 completes README reading and adds the same bare-command defect at lines 964–965; both managed help paths pass. See julia-facade-action-model-reading Knowledge.
     Conformance .1.1 adds capability_conformance/README.md lines330-336: current17/85 contradicts the same guide and exact20/100 manifest; its24 semantic-mutation claim contradicts the current19 exclusion mutations. The same prefix also says current72 cursor migration files versus actual74, repeated-action44 mutations versus54, and logical20 documents/13 denials versus19/14; retain explicitly historical milestones while correcting these present-tense mismatches. The unchanged capability checker passes both paragraphs because public validation checks selected markers/denials only. Correct or explicitly date these actual claims and add meaningful recurrence; exact evidence belongs to conformance-capability-guide-reading.
+    Conformance .1.2 finishes the guide and adds lines803-804 current-seventeenth wording and896-897 current80/0/0 wording to the same count repair and actual-paragraph recurrence. Preserve the explicitly dated16/80 callable-admission milestone. Reconcile the named-mark paragraph with its different-rule-label fixture and distinguish generated-plan execution from independently compiled emitted source using complete-named-mark-perl-rust-parity; do not infer a fresh runtime failure.
   Verification: `pending` — local-CI prose says full gate for every behavior change and default toolchain
     independence; current canonical gate runs mandatory backend admissions and reports 20 capabilities/100 states.
   Commit: `pending`
@@ -4640,7 +4641,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.2` | `pending` | Finish capability README771-897, read the three complete callable/signature/named-mark contracts and diagnostic prefix1-268 in exact bounded windows. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.3` | `pending` | Read diagnostic suffix, duplicate-slot contract, six capability fixtures, generated-source fixture/contract and gap prefix1-805:1500 fragments/52668 bytes. |
 
 ## Reading Ledger
 

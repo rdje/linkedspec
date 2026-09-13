@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 1/143
+- Status: `active` / exact decomposition; physical reading 2/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-13`
@@ -65,14 +65,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.1 - read capability guide prefix and own stale current claims`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.2`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `724185e83987bcd7597dae3840efd23af352859f`.
+  Verification tier: `focused`
+  Focused checks: Complete baseline-identical source windows; callable, signature, named-mark and diagnostic contract comprehension with canonical Knowledge reconciliation; relevant neutral checks, source/evidence preservation, memory, histories, book and normal doctrines.
+  Canonical trigger: Ordinary bounded reading leaf; no contract, runtime or infrastructure change and no parent closeout. Later repairs retain startup prerequisites.
   Goal: Read and understand conformance/test/Unicode group 2.
   Scope: `capability_conformance/README.md` lines 771-897; `capability_conformance/callable_codeblock_contract.json` lines 1-237; `capability_conformance/callable_signature_contract.json` lines 1-125; `capability_conformance/complete_named_mark_contract.json` lines 1-51; `capability_conformance/diagnostic_output_contract.json` lines 1-268
   Baseline evidence: 808 fragments / 65502 decoded bytes; ordered range SHA-256 `57a805392c2ad3942b7e69818bd3389acd38f5fdf6d73c225f2d094b14377cc4`.
   Dependencies: .1.1 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 12 complete windows / 808 fragments / 65502 bytes; ordered window SHA-256 `8b603c04dc5238991a0d757017dc1efd3d45cad79fc0d2b7f7507caade736f45`.
+  Comprehension: Callable literals are inert eight-field data without captured environments; invocation uses caller-time stores with copied/restored fixed/rest parameters, block-local return and static precedence. Final-only callback declarations govern contextual blocks. Signature v1 preserves fixed exact arity and variadic v2 descriptors with fresh unflattened rest arrays; named arguments stay a separately approved parked proposal. Named marks use symbolic names and character locations isolated by rule label, not recursive invocation. Diagnostic arity precedes eager arguments; typed synchronous sink events stay outside results/trace, with quiet absence and immediate failure/exit propagation. Full rollout suffix remains .1.3-owned.
+  Verification: exact12-window/source and143-group/302-range audits, suffix/current-metadata assertions, fresh named-mark7-helper/3-mutation and diagnostic3-helper/11-render/6-scenario/20-mutation checks; prior unchanged callable/signature evidence retained without a fresh runtime claim. Source/task/history preservation, memory, Knowledge, both histories, rendered book, git diff --check and normal doctrine hooks govern this focused reading leaf. Guide EOF confirms existing stale current census wording; .41.7 owns the exact suffix and recurrence. Four files are now complete and diagnostic reading stops at268; source identity checks do not grant unread suffix credit.
+  Candidate proof: Exact twelve-window reconstruction and all143-group/302-range ownership PASS. Preserve2486 prior files, all prior recipes,2772/2776 task nodes and all94 book limitation headings; only four intended reading/current-owner nodes change and no task ID is added. Memory60; histories 451/47932, 381/46567 lines/bytes. Normal doctrines govern focused landing.
+  Commit: `CONFORMANCE-SOURCE-READING.1.2 - complete guide and read callable mark and diagnostic contracts`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.3`
   Status: `pending`
@@ -1490,6 +1497,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Dependencies: Diagnose with the Toolbox; preserve existing repair owners and remaining startup prerequisites.
   Acceptance: Route each confirmed defect to its current owner or create a precise pending repair leaf before continuing. Do not invent a defect from an unexecuted fixture or silently close it through reading.
   Verification: .1.1 confirms current capability-guide census/governance and generic-callable status drift behind passing structural checkers. Existing startup .41.7 owns count/workflow guidance; .41.6 owns the callable-current paragraph and claim recurrence. No duplicate repair leaf or runtime defect is invented. Exact evidence: conformance-capability-guide-reading.
+  Reading continuation: .1.2 adds guide803-804 current-seventeenth and896-897 current80 claims to .41.7. Exact current diagnostic public metadata is15 documents/9 denials; its Knowledge card preserves the older dated16-document milestone and adds current evidence. No new runtime defect or duplicate repair root.
   Commit: `pending`
 
 - ID: `CONFORMANCE-SOURCE-READING.3`
@@ -1504,7 +1512,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.2` | `pending` | Finish capability README771-897, read the three complete callable/signature/named-mark contracts and diagnostic prefix1-268 in exact bounded windows. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.3` | `pending` | Read diagnostic suffix, duplicate-slot contract, six capability fixtures, generated-source fixture/contract and gap prefix1-805:1500 fragments/52668 bytes. |
 
 ## Decisions
 
@@ -1517,15 +1525,18 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Verification Log
 
+- `2026-09-13` .1.2: Conformance .1.2 reads12 complete windows/808 fragments/65,502 baseline-identical bytes: capability guide EOF, complete callable/signature/named-mark contracts and diagnostic lines1-268. Physical reading is2/143, cumulatively1,578 fragments/130,987 bytes and four complete files; diagnostic269-273 remains .1.3-owned. Current positional-only call contracts preserve the approved parked named-argument direction; mark isolation is by rule label, and diagnostics use a quiet per-invocation typed sink. Fresh named-mark and diagnostic neutral checks pass; prior unchanged callable/signature proof remains dated. Guide-suffix current17/80 claims extend existing startup .41.7, while current diagnostic metadata measures15 public documents/9 denials. Source, prior evidence, all repairs and capacity limits remain; no backend matrix, dependency build or parent closeout is claimed.
 - `2026-09-13` .1.1: Conformance .1.1 reads all 11 complete windows of capability_conformance/README.md lines1-770: 770 fragments/65,485 baseline-identical bytes. Physical conformance reading is1/143; the README suffix771-897 and later contracts remain .1.2-owned. Seven focused structural/neutral checks pass, while exact current census, mutation/inventory/public-count and generic-callable claims remain stale. Existing startup .41.7 and .41.6 now own those actual paragraphs and meaningful recurrence; the marker/denial-only cause is recorded without changing source or runtime. All143 groups/302 ranges, prior source/history, six supporting repair roots and existing capacity limits remain. No fresh backend matrix, dependency build or parent closeout is claimed.
 - `2026-09-13`: Startup .3.8.0 independently verifies all160 files/143 groups/302 ranges and four decoded hashes; Unicode casing and rule-label checks PASS. Source/task/history, actual capacity, memory, Knowledge, histories, rendered book and normal hooks govern planning. Physical reading remains0/143.
 
 ## Commit Log
 
+- `2026-09-13` .1.2: `CONFORMANCE-SOURCE-READING.1.2 - complete guide and read callable mark and diagnostic contracts`; activation 724185e83987bcd7597dae3840efd23af352859f; next .1.3 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.1: `CONFORMANCE-SOURCE-READING.1.1 - read capability guide prefix and own stale current claims`; activation d3cfa5973beed85de5ae58dc81798262cafe18ad; next .1.2 after clean handoff and zero-byte brief.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
 
+- `2026-09-13` .1.2: Complete guide and three contract files; preserve the diagnostic suffix boundary, current metadata and all existing repair ownership.
 - `2026-09-13` .1.1: Complete the first11 guide windows; retain clear suffix ownership and concrete repair acceptance for current-claim drift.
 - `2026-09-13`: Own every conformance/test/Unicode range before reading; preserve all existing source, history, repair and capacity obligations.

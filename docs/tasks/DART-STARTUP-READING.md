@@ -1571,7 +1571,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.2` | `pending` | Finish capability README771-897, read the three complete callable/signature/named-mark contracts and diagnostic prefix1-268 in exact bounded windows. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.3` | `pending` | Read diagnostic suffix, duplicate-slot contract, six capability fixtures, generated-source fixture/contract and gap prefix1-805:1500 fragments/52668 bytes. |
 
 ## Decisions
 

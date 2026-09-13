@@ -46,3 +46,14 @@ Related facts: [[perl-diagnostic-output-events]], [[rust-diagnostic-output-event
 [[dart-diagnostic-output-events]], [[julia-diagnostic-output-helpers]],
 [[cross-backend-diagnostic-output-drift]], [[lua-diagnostic-output-events]],
 [[trace-cross-variant-capability-contract]], [[scalar-to-text-coercion-cross-backend-gap]].
+
+
+## September 13 current inventory reconciliation
+
+`CONFORMANCE-SOURCE-READING.1.2` reads contract 1–268; rollout suffix 269–273 remains
+with `.1.3`. The current neutral checker passes 3 helpers/11 render rows/6 scenarios/
+8 complete legs/20 mutations. Current JSON contains 15 public documents and 9
+denials and omits root `README.md`; the earlier 16-document count above describes
+the dated rollout milestone, not today's inventory. The exact baseline-identical
+source and current metadata probe is `CONFORMANCE_SUFFIX_CLAIMS` in
+[[conformance-capability-guide-reading]]. No fresh six-runtime matrix is claimed.

@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.2 — separate callable signatures mark scope and diagnostic delivery
+
+Exact contract reading distinguishes deferred caller-time codeblocks from eager blocks, fixed/variadic signatures from approved future named arguments, rule-label marks from recursive invocation isolation, and typed diagnostic sinks from parse results and trace. Four sources are complete; diagnostic reading stops at268. The guide suffix extends existing stale current-census repair .41.7. Fresh neutral proof validates named marks and diagnostics; current diagnostic public metadata is15 documents/9 denials, with the older16-document milestone explicitly qualified. Prior source/runtime findings and all143-group ownership remain intact.
+
+Verification: exact12-window/source and143-group/302-range audits, suffix/current-metadata assertions, fresh named-mark7-helper/3-mutation and diagnostic3-helper/11-render/6-scenario/20-mutation checks; prior unchanged callable/signature evidence retained without a fresh runtime claim. Source/task/history preservation, memory, Knowledge, both histories, rendered book, git diff --check and normal doctrine hooks govern this focused reading leaf.
+
 ## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.1 — finite guide markers do not validate surrounding current claims
 
 The exact capability guide prefix contains current17/85 versus20/100, exclusion24 versus19, cursor72 versus74, repetition44 versus54 and logical20/13 versus19/14 count claims. Generic-callable future/first-class-until wording also conflicts with current five-backend admission. Seven unchanged structural/neutral checkers pass; their public readers require selected markers and exact denials, leaving these actual paragraphs untested. Existing startup .41.6/.41.7 now require correction or explicit historical qualification plus meaningful recurrence for these examples. All11 source windows/770 fragments are fully consumed; the callable-codeblock section begins at the last line and remains suffix-owned. No runtime defect is inferred from guide prose.

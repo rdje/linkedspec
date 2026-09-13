@@ -7,8 +7,10 @@ answers:
   - "why does the capability guide call generic callable codeblocks future"
   - "which tasks fix the capability guide current claim drift"
   - "what is covered by conformance source reading group 1"
+  - "what is covered by conformance source reading group 2"
+  - "what current census claims remain in the capability guide suffix"
 date: 2026-09-13
-status: guide prefix .1.1 read; confirmed guide defects remain owned by startup .41.6/.41.7
+status: guide complete through .1.2; exact current claims remain owned by startup .41.6/.41.7
 tags: [conformance, reading, capability, callable, documentation, verification]
 evidence: "CONFORMANCE-SOURCE-READING.1.1 reads the exact baseline-identical capability guide prefix. Its current17/85 census and24 semantic-mutation text survive capability conformance20/100/19; generic callable future wording survives callable23-governance and signature3/9/7 checks. Existing startup .41.7/.41.6 now explicitly own these exact paragraphs and recurrence. No runtime bug, source repair or new capability admission is claimed."
 reverify: "Run CONFORMANCE_GUIDE_CLAIMS below, then managed perl tools/check_capability_conformance.pl and tools/check_callable_codeblock_contract.py plus tools/check_callable_signature_contract.py. These are structural/neutral checks, not a new six-runtime matrix."
@@ -16,9 +18,9 @@ reverify: "Run CONFORMANCE_GUIDE_CLAIMS below, then managed perl tools/check_cap
 
 # Actual current-claim gap
 
-The completed reading covers lines1–770 in11 complete windows,770 fragments/
-65,485 bytes; lines771–897 and the following callable-codeblock section remain
-`.1.2`-owned. Ordered source-window SHA-256 is
+The .1.1 checkpoint covered lines1–770 in11 complete windows,770 fragments/
+65,485 bytes; lines771–897 and the following callable-codeblock section were
+then `.1.2`-owned and are now read as recorded below. Ordered source-window SHA-256 is
 `82c1b7aca6d2fd95e45a51c2b93fb7a50e3c19f1b2b42c77f90cfa8457e7f180`. Baseline scope SHA-256 is
 `15e215a231e1fbe97483ee8a318a5934b8ea8336483b4166bebc891590e821df`.
 
@@ -109,10 +111,85 @@ explicit public exclusions. Root selection is independent of regex-slot choice;
 duplicate identity and repeated-action result collection preserve their own
 contracts. Scalar rendering, strict numeric inputs, eager logical values and
 variadic signatures retain separate neutral authorities. The callable-codeblock
-section itself starts at the final line and is not yet fully read.
+section itself starts at the final line of .1.1; .1.2 completes it below.
 
 Commands in the guide include direct Cargo/Dart/Julia invocations. Existing
 startup `.41.7` already requires repository-root managed examples; no unmanaged
 command was executed and no off-volume effect is claimed by inspection. Known
 runtime defects stay with their existing backend/startup owners even where the
 guide describes a historically admitted contract.
+
+
+# September 13 guide suffix and contract reading
+
+`CONFORMANCE-SOURCE-READING.1.2` reads twelve complete windows,808 fragments/
+65,502 bytes: guide 771–897 EOF, callable-codeblock 1–237 EOF, signature 1–125 EOF,
+named-mark 1–51 EOF and diagnostic 1–268. Diagnostic269–273 remains `.1.3`-owned;
+parsing its JSON for structural checking gives no reading credit for those bytes.
+The exact ordered window digest is `8b603c04dc5238991a0d757017dc1efd3d45cad79fc0d2b7f7507caade736f45` and cumulative reading is
+1,578 fragments/130,987 bytes across four complete files and one partial file.
+
+The guide's current-seventeenth sentence at 803–804 and current80 census at 896–897
+extend startup `.41.7`'s existing actual-paragraph repair. The manifest remains 20
+capabilities/100 backend states. The explicitly dated16/80 callable admission
+milestone stays historical evidence. The named-mark narrative uses different
+Top/Child labels; same-label recursive isolation is outside v1 and remains
+`FUTURE-PARITY-BACKLOG.14.3`-owned. Its Rust contract consumer proves native,
+reconstructed and generated-plan execution; source-marker inspection alone is
+not independently compiled emitted execution, as the existing named-mark fact
+already records. `.41.7` owns precise guide qualification with these boundaries.
+
+The completed callable record separates inert eight-field data from execution.
+No environment is captured; invocation reads caller-time stores, temporarily
+copies/restores fixed/rest bindings, honors static precedence and local return,
+and preserves effects when a result is discarded. Final-only `name: codeblock`
+declarations govern contextual blocks. Fixed functions remain exact-arity v1;
+variadic v2 records carry a v1 signature and a fresh typed rest array. Keyword
+rejection is the current contract, while the approved named-argument proposal
+remains parked under `PARSER-AUTHORING-APIS.4`.
+
+Named marks resolve symbolic names, immediate-entry/current-match edges and
+character-based public positions; absent reads are undef, existence is zero,
+and clearing affects the current rule-label bucket. Diagnostic helpers validate
+arity before once-only ordered arguments. An absent caller sink is quiet;
+events never join parse results or trace. Wrong-kind/empty arrays still evaluate
+arguments; sink failure and typed exit stop subsequent work immediately.
+The diagnostic recurring topology declares six native/generated consumers and
+five primary commands in default/POSIX environments; that is contract reading,
+not a fresh execution of those routes. The final rollout rows await `.1.3`.
+
+Fresh neutral proof: named marks 7 helpers/exact Unicode fixture/3 mutations;
+diagnostics 3 helpers/11 render rows/6 scenarios/8 complete legs/20 mutations.
+Current diagnostic metadata contains 15 public documents and 9 denials; its older
+16-document Knowledge milestone is retained with this dated qualification.
+Callable/signature checks from `.1.1` remain unchanged-source dated proof.
+
+```bash
+bash tools/project_data_run.sh python3 - <<'CONFORMANCE_SUFFIX_CLAIMS'
+from pathlib import Path
+import hashlib,json,subprocess
+paths=['capability_conformance/README.md','capability_conformance/callable_codeblock_contract.json','capability_conformance/callable_signature_contract.json','capability_conformance/complete_named_mark_contract.json','capability_conformance/diagnostic_output_contract.json']
+source_hashes={}
+for path in paths:
+ raw=Path(path).read_bytes();assert raw==subprocess.check_output(['git','show','baeb984e36a94a15951cd23d4c52def5064cdaca:'+path]);source_hashes[path]=hashlib.sha256(raw).hexdigest()
+guide=' '.join(Path(paths[0]).read_text().split())
+claims=['Staged-AST recurrence later adds the current seventeenth all-pass private capability row.', 'The current census is 80 pass / zero partial / zero gap across five admitted backends']
+assert all(x in guide for x in claims)
+manifest=json.loads(Path('capability_conformance/manifest.json').read_text());assert len(manifest['capabilities'])==20 and len(manifest['backends'])==5
+callable=json.loads(Path(paths[1]).read_text());signature=json.loads(Path(paths[2]).read_text());marks=json.loads(Path(paths[3]).read_text());diagnostic=json.loads(Path(paths[4]).read_text())
+assert len(callable['public_contract']['documents'])==25 and callable['ast_schema']['captured_environment_field'] is None
+assert any(x.get('expected_error',{}).get('code')=='user_function_keyword_arguments_unsupported' for x in signature['call_cases'])
+assert marks['policy']['scope']=='named marks are isolated by rule label for the duration of one parser execution'
+assert len(diagnostic['public_contract']['documents'])==15 and len(diagnostic['public_contract']['forbidden_current_claims'])==9
+assert 'README.md' not in [x['path'] for x in diagnostic['public_contract']['documents']]
+report={'source_sha256':source_hashes,'suffix_current_claims':claims,'capabilities':20,'backend_states':100,'callable_public_documents':25,'named_mark_scope':'rule label','diagnostic_public_documents':15,'diagnostic_forbidden_claims':9,'diagnostic_reading_end':268,'diagnostic_unread_suffix':'269-273','repair_owner':'SESSION-STARTUP-READING.41.7'}
+s=Path('.linkedspec-data/scratch/conformance12');s.mkdir(parents=True,exist_ok=True);(s/'suffix_claims.json').write_text(json.dumps(report,indent=2)+'\n')
+print(json.dumps(report,indent=2))
+print('PASS exact source and current metadata reconciliation; no new runtime matrix or unread-source credit.')
+CONFORMANCE_SUFFIX_CLAIMS
+bash tools/run_python_project_data.sh tools/check_complete_named_mark_contract.py
+bash tools/run_python_project_data.sh tools/check_diagnostic_output_contract.py
+```
+
+Related: [[variadic-user-function-contract]], [[complete-named-mark-perl-rust-parity]],
+[[diagnostic-output-neutral-contract]].
