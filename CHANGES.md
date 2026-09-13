@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua Unicode completion and write failure-state coverage
+
+- Read four exact ranges in eleven complete windows: 1500 fragments /61835 bytes; cumulative 50/51, 70540 fragments /2704332 bytes, 97 complete files.
+- Unicode identity 359/negative 1542/routes 179/write prefix 408 pass per installed host, 4976 assertions total; two neutral checkers pass.
+- Nineteen individually wrong expected_binding records survive the unchanged write prefix on each host; new .2.35/.1/.2 own exact post-failure state assertions and mutation proof. No runtime-state defect is inferred.
+- LUA-STARTUP-READING.1.50 retains all 35 repair roots and prior failures, extends .2.1 guidance, and hands off the last source group .1.51.
+
 ## 2026-09-13 — Lua staged completion and source identity reading
 
 - Read five exact ranges in eleven complete windows: 1500 fragments /57785 bytes; cumulative 49/51, 69040 fragments /2642497 bytes, 94 complete files.

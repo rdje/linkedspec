@@ -1742,7 +1742,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.50` | `pending` | Complete Unicode identity and read negative/routes/write-vivification ranges after clean .1.49; preserve all 34 repair roots, known failures, native-error exclusions and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.51` | `pending` | Complete write tests and read dormant progressive dispatch after clean .1.50; preserve all 35 repair roots including the failure-state coverage gap, known failures, native-error exclusions and parked named arguments. |
 
 ## Decisions
 

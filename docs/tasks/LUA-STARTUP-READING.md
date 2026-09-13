@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LUA-STARTUP-READING`
-- Status: `active` / approved capacity; source reading 49/51
+- Status: `active` / approved capacity; source reading 50/51
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.6`
 - Created: `2026-09-12`
 - Last updated: `2026-09-13`
@@ -45,7 +45,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - Ordered range SHA-256: `81c58b8319def28af518fb134a3787513fe746f0f0f73bcacb0e20b9ede1c9d6`.
 - Child-summary SHA-256: `f56ecac262800bd3cc1e6bba0cc25bfe22f095c3dfee41f1c6595d4200145290`.
 - Coordinates are one-based inclusive LF physical lines or absolute file bytes; both byte windows decode as UTF-8.
-- Current physical reading: 49/51 children, 69,040/71,269 fragments and 2,642,497/2,732,450 bytes.
+- Current physical reading: 50/51 children, 70,540/71,269 fragments and 2,704,332/2,732,450 bytes.
 - Exact independent replay and capacity evidence: `docs/knowledge/lua-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -808,14 +808,18 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `LUA-STARTUP-READING.1.49 - read staged completion and source identity consumers`.
 
 - ID: `LUA-STARTUP-READING.1.50`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `204e60348bba50f5ef1ab18bd4c5a52709f03947`.
+  Verification tier: `focused`
+  Focused checks: Exact four owned source ranges and unchanged Lua baseline; completely read Unicode identity/negative/routes and bounded write-vivification checks on both installed hosts after Knowledge reconciliation; exclude the known malformed native regex failure path, retain all prior repairs, verify coverage and preservation, render book, check explicit memory and all normal doctrines.
+  Canonical trigger: Ordinary bounded source reading and evidence intake without production or infrastructure change; supported-runtime repairs, complete-consumer admission, startup closeout and push retain canonical prerequisites.
   Goal: Read and understand group 50: unicode_rule_label_identity_routes_test.lua through write_vivification_contract_test.lua.
   Scope: `lua/test/unicode_rule_label_identity_routes_test.lua` lines 386-474; `lua/test/unicode_rule_label_negative_isolation_test.lua` lines 1-746; `lua/test/unicode_rule_label_routes_test.lua` lines 1-266; `lua/test/write_vivification_contract_test.lua` lines 1-399
   Baseline evidence: 1500 fragments / 61835 bytes; ordered range SHA-256 `9ab4482b49acb20b3434666f2d1cd8001bd7bbb0054e6335ac93178a49d93421`.
   Dependencies: .1.49 committed with clean handoff.
   Acceptance: Read every scoped byte without truncation; record comprehension, Knowledge and repair reconciliation, focused proof and a clean per-leaf commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Lua .1.50 reads four exact ranges in eleven complete windows: 1,500 fragments /61,835 bytes; cumulative 50/51, 70,540 fragments /2,704,332 bytes. All 99 Lua sources remain baseline-identical; 97 files are fully read. Full Unicode identity 359/negative isolation 1542/routes 179 and exact write prefix 408 pass per installed host, 4,976 assertions total; Unicode and write neutral checkers pass. Nineteen individually changed expected_binding fixture records still pass that unchanged prefix on each host (38 surviving mutations), locating a post-failure state-oracle gap in the sixteen structural and three expression-failure loops. New .2.35/.1/.2 own assertion and mutation repairs; no runtime-state defect is inferred. Existing .2.1 gains precise write-admission and coverage qualifications. All 35 repair roots, earlier failures and native-error exclusions remain open. Next .1.51 completes write tests and reads the dormant progressive consumer; named arguments and startup/ADR0118 prerequisites remain unchanged. Exact evidence: docs/knowledge/lua-unicode-write-failure-state-consumer-reading.md.
+  Commit: `LUA-STARTUP-READING.1.50 - read Unicode consumers and track write failure-state gap`.
 
 - ID: `LUA-STARTUP-READING.1.51`
   Status: `pending`
@@ -830,7 +834,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - ID: `LUA-STARTUP-READING.2`
   Status: `pending`
   Goal: Own every newly confirmed Lua defect or coverage gap without losing existing shared repair ownership.
-  Children: `.2.1` owns README status; `.2.2` primary identity; `.2.3` native error safety; `.2.4` executable diagnostic teaching; `.2.5` complete quoted-literal parsing; `.2.6` harray pair completeness; `.2.7` complete switch contract diagnostics; `.2.8` iteration/options/matching-cursor validation; `.2.9` false delimiter preservation; `.2.10` whole child-result false preservation; `.2.11` exact representable integer JSON encoding; `.2.12` finite private recognition coordinates and progress; `.2.13` scalar/reducer and typed-slice integer overflow; `.2.14` semantic diagnostic null preservation; `.2.15` rejected semantic query false evidence; `.2.16` mixed structural-slot correlation; `.2.17` regex-aware call source correlation; `.2.18` explicit child-slot runtime match ownership; `.2.19` conditional entry-explanation coverage; `.2.20` explicit generated-contract validation; `.2.21` finite typed-source diagnostic coordinates; `.2.22` native AST false-field defaults; `.2.23` typed JSON array and payload validation; `.2.24` complete outer parser delimiters and lexical state; `.2.25` complete staged typed-array copying; `.2.26` retained staged diagnostic bytes; `.2.27` marker detachment cycle/null handling; `.2.28` private capture-range admission; `.2.29` original provenance and complete segments; `.2.30` trace error precedence and cleanup; `.2.31` source-bound function payload metadata; `.2.32` non-mutating codeblock function projection; `.2.33` complete nested runtime-argument array admission; `.2.34` actual absent-field observation fixtures and proof.
+  Children: `.2.1` owns README status; `.2.2` primary identity; `.2.3` native error safety; `.2.4` executable diagnostic teaching; `.2.5` complete quoted-literal parsing; `.2.6` harray pair completeness; `.2.7` complete switch contract diagnostics; `.2.8` iteration/options/matching-cursor validation; `.2.9` false delimiter preservation; `.2.10` whole child-result false preservation; `.2.11` exact representable integer JSON encoding; `.2.12` finite private recognition coordinates and progress; `.2.13` scalar/reducer and typed-slice integer overflow; `.2.14` semantic diagnostic null preservation; `.2.15` rejected semantic query false evidence; `.2.16` mixed structural-slot correlation; `.2.17` regex-aware call source correlation; `.2.18` explicit child-slot runtime match ownership; `.2.19` conditional entry-explanation coverage; `.2.20` explicit generated-contract validation; `.2.21` finite typed-source diagnostic coordinates; `.2.22` native AST false-field defaults; `.2.23` typed JSON array and payload validation; `.2.24` complete outer parser delimiters and lexical state; `.2.25` complete staged typed-array copying; `.2.26` retained staged diagnostic bytes; `.2.27` marker detachment cycle/null handling; `.2.28` private capture-range admission; `.2.29` original provenance and complete segments; `.2.30` trace error precedence and cleanup; `.2.31` source-bound function payload metadata; `.2.32` non-mutating codeblock function projection; `.2.33` complete nested runtime-argument array admission; `.2.34` actual absent-field observation fixtures and proof; `.2.35` failure-state write-vivification fixture coverage.
   Reading .1.25 owners: `.2.29` owns original provenance types and complete derived segment membership; `.2.30` owns trace failure precedence and scope cleanup.
   Acceptance: Define concrete causal evidence, affected behavior and repair/verification children before implementing any finding; preserve startup prerequisites and all earlier owners.
   Verification: `pending`
@@ -875,6 +879,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Verification: `pending`
   Commit: `pending`
   Reading .1.49 extension: lua-typed-source-location-dormant-red retains present-tense 8 complete /6 pending /42 mutation admission totals after its dated milestones; current neutral proof is 14/0/231 and the unchanged full Lua consumer remains 240 per host. Date that stage-specific conclusion without rewriting historical proof. Full staged 890 reconfirms the already-owned 888/890 qualification; Unicode source/outcome-next guidance remains owned by the existing .1.28 extension. The new identity prefix proves 341 assertions through fresh emitted execution and both primary source forms, not the full 359 or its later selector diagnostics. No existing runtime or fixture repair closes.
+  Reading .1.50 extension: write-vivification-lua-runtime retains a final portable/public-admission-future sentence despite .19.7-.9 completion recorded in the neutral owner. Date that stage pointer and qualify failure-state fixture claims against new .2.35: sixteen structural plus three expression rows omit expected_binding assertions in their complete loops. The exact 408 prefix passes while all nineteen individually wrong expected states survive on each host; no runtime-state defect follows. Unicode negative proof is the eight frozen labels, and loader diagnostics intentionally retain requested/resolved paths while detail omits them; do not generalize that boundary to every diagnostic field. Existing Unicode next-stage guidance remains owned.
 
 - ID: `LUA-STARTUP-READING.2.1.1`
   Status: `pending`
@@ -1855,6 +1860,35 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Verification: `pending`; intake in docs/knowledge/lua-semantic-foundation-observation-fixture-reading.md.
   Commit: `pending`
 
+- ID: `LUA-STARTUP-READING.2.35`
+  Status: `pending`
+  Goal: Prove the frozen post-failure binding state for every Lua nested-write structural and expression failure.
+  Scope: lua/test/write_vivification_contract_test.lua structural loop 273-311 and expression-failure loop 313-353; sixteen plus three neutral expected_binding records.
+  Evidence: Reading .1.50 finds that both complete failure loops check diagnostics and expression effects but never inspect fixture.expected_binding or the post-failure binding. The neutral rows require absent/present distinctions, unchanged null/scalar/container roots and the completed RHS update retained after an outer array gap. Nineteen independent scratch fixture-input mutations each change only one expected_binding to a contradictory present object; every unchanged 408-assertion read prefix passes on both installed hosts (38 survivors). Exact failure loops never read that field. This proves missing state oracles in those complete loops; it does not establish a runtime-state defect or execute unread suffix checks.
+  Dependencies: Startup .3/.4/.5 reading and policy prerequisites; preserve all prior runtime repairs and declared-PUC admission requirements.
+  Children: `.2.35.1`, `.2.35.2`
+  Acceptance: Each of the nineteen rows observes the same execution's post-failure binding, including presence separately from null; wrong expected state or forbidden partial publication must fail without undoing completed expression effects.
+  Verification: Reading .1.50 verifies 19 exact single-field mutations and 38 surviving prefix runs, retaining all original assertions and production bytes; replay in docs/knowledge/lua-unicode-write-failure-state-consumer-reading.md. Implementation remains gated.
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.35.1`
+  Status: `pending`
+  Goal: Add exact same-execution post-failure binding assertions to the nineteen Lua neutral cases.
+  Scope: Shared Lua write-vivification consumer; use a narrow existing internal test observation boundary, or task-own a minimal testability change if the current public execution lifetime cannot expose state after failure.
+  Dependencies: Startup .3/.4/.5; parent .2.35 evidence.
+  Acceptance: Check presence and detached value against every frozen expected_binding record after structural or expression failure; retain original diagnostics, failure identity, ordering and no source-format or ordinary runtime change.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.35.2`
+  Status: `pending`
+  Goal: Verify failure-state oracles reject wrong expected state and partial publication.
+  Scope: Focused mutation controls for absent versus bound null, unchanged roots, retained RHS effects, and forbidden structural partial writes, on declared supported PUC and LuaJIT.
+  Dependencies: .2.35.1; supported-runtime proof under .2.2.
+  Acceptance: All nineteen frozen states pass; independent state-oracle mutations fail, diagnostics and completed side effects remain exact, book and Knowledge reflect measured limits, and required focused/canonical boundaries pass before closing the parent.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `LUA-STARTUP-READING.3`
   Status: `pending`
   Goal: Independently close Lua reading and route the remaining supporting-code lanes.
@@ -2198,7 +2232,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.50` | `pending` | Complete Unicode identity and read negative/routes/write-vivification ranges after clean .1.49; preserve all 34 repair roots, known failures, native-error exclusions and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.51` | `pending` | Complete write tests and read dormant progressive dispatch after clean .1.50; preserve all 35 repair roots including the failure-state coverage gap, known failures, native-error exclusions and parked named arguments. |
 
 ## Decisions
 
@@ -2216,9 +2250,11 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Blockers
 
-- None for bounded Lua .1.50 reading after clean .1.49. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
+- None for bounded Lua .1.51 reading after clean .1.50. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
 
 ## Verification Log
+
+- `2026-09-13` .1.50: Lua .1.50 reads four exact ranges in eleven complete windows: 1,500 fragments /61,835 bytes; cumulative 50/51, 70,540 fragments /2,704,332 bytes. All 99 Lua sources remain baseline-identical; 97 files are fully read. Full Unicode identity 359/negative isolation 1542/routes 179 and exact write prefix 408 pass per installed host, 4,976 assertions total; Unicode and write neutral checkers pass. Nineteen individually changed expected_binding fixture records still pass that unchanged prefix on each host (38 surviving mutations), locating a post-failure state-oracle gap in the sixteen structural and three expression-failure loops. New .2.35/.1/.2 own assertion and mutation repairs; no runtime-state defect is inferred. Existing .2.1 gains precise write-admission and coverage qualifications. All 35 repair roots, earlier failures and native-error exclusions remain open. Next .1.51 completes write tests and reads the dormant progressive consumer; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
 - `2026-09-13` .1.49: Lua .1.49 reads five exact ranges in eleven complete windows: 1,500 fragments /57,785 bytes; cumulative 49/51, 69,040 fragments /2,642,497 bytes. All 99 Lua sources remain baseline-identical; 94 files are fully read. Full staged 890/lifecycle 109/typed-source 240/classifier 1706 and exact identity prefix 341 pass per installed host, 6,572 assertions total. Staged production runs use fresh state in the current host; the identity prefix independently executes a fresh emitted process and both primary source forms, ending before later selector diagnostics. Lifecycle/typed/Unicode neutral checkers pass; current typed rollout is 14/0/231. Existing .2.1 gains a dated typed-admission guidance qualification; no new repair node. All 34 repair roots, known runtime failures and native-error exclusions remain open. Next .1.50 completes identity and reads Unicode negative/routes plus write-vivification ranges; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
@@ -2326,6 +2362,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Commit Log
 
+- `2026-09-13` .1.50: `LUA-STARTUP-READING.1.50 - read Unicode consumers and track write failure-state gap`; activation 204e60348; next .1.51 after clean proof and empty brief.
+
 - `2026-09-13` .1.49: `LUA-STARTUP-READING.1.49 - read staged completion and source identity consumers`; activation 0900d3451; next .1.50 after clean proof and empty brief.
 
 - `2026-09-13` .1.48: `LUA-STARTUP-READING.1.48 - read staged declaration depth and recursion tests`; activation a4ccda13e; next .1.49 after clean proof and empty brief.
@@ -2431,6 +2469,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 - `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` owns creation of this plan.
 
 ## Changelog
+
+- `2026-09-13` .1.50: Complete Unicode consumer reading and bounded write prefix; own all nineteen missing failure-state oracles under .2.35 after 38 surviving mutations, without inferring a runtime-state defect.
 
 - `2026-09-13` .1.49: Complete staged/lifecycle/typed-source/classifier reading and bound Unicode identity proof through both primary source forms; preserve existing defects and date typed-admission guidance.
 

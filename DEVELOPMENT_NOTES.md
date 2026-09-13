@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Missing failure-state assertions despite passing write tests
+
+- The sixteen structural and three expression-failure loops inspect diagnostics and event order but never read expected_binding; 19 independent single-field input mutations survive on both hosts, 38 observations.
+- This establishes a bounded fixture-coverage gap, not incorrect runtime state. .2.35 owns same-execution presence/value observation, retained RHS effects and negative mutation proof after startup gates.
+- Full Unicode consumers preserve exact valid/invalid identities through fresh emitted processes and primary routes; loader context retains requested/resolved paths while detail excludes them.
+- LUA-STARTUP-READING.1.50 records source reading and exact replay in docs/knowledge/lua-unicode-write-failure-state-consumer-reading.md; write execution stops at line 384 before partially read function/carrier tests.
+
 ## 2026-09-13 — Bound Lua carrier and source-identity evidence precisely
 
 - Staged direct/derived rebasing, safe-point cancellation/deadlines, fresh production seeds and expired transaction denial pass; the small diagnostic-byte test checks truncation identity and zero resources, not output size.
