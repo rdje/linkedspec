@@ -1571,7 +1571,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.33` | `pending` | Read the MCP-binding suffix and owned admission/dispatch/stdio test ranges after clean .1.32; preserve all repair owners, prior failures and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.34` | `pending` | Read the stdio suffix and owned progressive-dispatch/storage/recognition/recursive-observation ranges after clean .1.33; preserve all repair owners, prior failures and parked named arguments. |
 
 ## Decisions
 

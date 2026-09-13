@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LUA-STARTUP-READING`
-- Status: `active` / approved capacity; source reading 32/51
+- Status: `active` / approved capacity; source reading 33/51
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.6`
 - Created: `2026-09-12`
 - Last updated: `2026-09-13`
@@ -45,7 +45,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - Ordered range SHA-256: `81c58b8319def28af518fb134a3787513fe746f0f0f73bcacb0e20b9ede1c9d6`.
 - Child-summary SHA-256: `f56ecac262800bd3cc1e6bba0cc25bfe22f095c3dfee41f1c6595d4200145290`.
 - Coordinates are one-based inclusive LF physical lines or absolute file bytes; both byte windows decode as UTF-8.
-- Current physical reading: 32/51 children, 43,651/71,269 fragments and 1,619,661/2,732,450 bytes.
+- Current physical reading: 33/51 children, 45,151/71,269 fragments and 1,682,742/2,732,450 bytes.
 - Exact independent replay and capacity evidence: `docs/knowledge/lua-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -568,14 +568,18 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `LUA-STARTUP-READING.1.32 - complete gap logical and map-leaves consumer reading`.
 
 - ID: `LUA-STARTUP-READING.1.33`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `e8f630f33581005524168bf3fa08e82d212ba0ea`.
+  Verification tier: `focused`
+  Focused checks: Exact bounded source/baseline reading; generated MCP binding, server admission, decoded dispatch and stdio Knowledge reconciliation; complete read native consumers and directly relevant neutral proof; memory, Knowledge, shared history, book and normal doctrines.
+  Canonical trigger: Ordinary test-source reading and bounded repair intake; no production change. Existing runtime/native-error limitations remain explicit; later closeout and push retain canonical prerequisites.
   Goal: Read and understand group 33: mcp_contract_lua_binding_test.lua through mcp_server_lua_stdio_test.lua.
   Scope: `lua/test/mcp_contract_lua_binding_test.lua` lines 10-169; `lua/test/mcp_server_lua_admission_test.lua` lines 1-663; `lua/test/mcp_server_lua_dispatch_test.lua` lines 1-484; `lua/test/mcp_server_lua_stdio_test.lua` lines 1-193
   Baseline evidence: 1500 fragments / 63081 bytes; ordered range SHA-256 `0138435828188c9efec0c835dc99756023ac610d54217bca56ee05e8d53e7412`.
   Dependencies: .1.32 committed with clean handoff.
   Acceptance: Read every scoped byte without truncation; record comprehension, Knowledge and repair reconciliation, focused proof and a clean per-leaf commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Lua .1.33 completes MCP binding, admission and dispatch tests and reads stdio lines 1-193 in nine complete windows: 1,500 fragments /63,081 bytes; cumulative 33/51, 45,151 fragments /1,682,742 bytes. All 99 Lua sources remain baseline-identical; 62 files are fully read. Both installed hosts pass 1,368 assertions: binding116, admission281, dispatch216 and stdio-prefix71 each. Generated binding remains byte-fresh at 83,166 bytes; neutral admission passes 5/5 implementations, 6/6 runtimes and 141 mutations with complete rollout. Admission marker checks are distinguished from private pre-emission execution owned by the later stdio range. Existing .2.1 gains precise bundle-size and rollout guidance qualification; all thirty-three repair roots and earlier failures remain open. Next .1.34 completes stdio and reads progressive dispatch, storage, recognition and recursive-observation ranges; named arguments and startup/ADR0118 prerequisites remain unchanged. Exact evidence: docs/knowledge/lua-mcp-consumer-reading.md.
+  Commit: `LUA-STARTUP-READING.1.33 - read MCP consumers and reconcile exact execution evidence`.
 
 - ID: `LUA-STARTUP-READING.1.34`
   Status: `pending`
@@ -787,6 +791,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Reading .1.29 extension: lua-spec-defined-function-parser, lua-user-function-registry, lua-variadic-v2-signature-state and lua-final-codeblock-metadata retain future descriptor/generated/explicit-callable guidance despite admitted successors. Date those exact later-owner sentences and qualify lua-function-definition-shell-projection sidecar-copy wording against .2.32; preserve original milestones, runtime facts and historical counts.
   Reading .1.30 extension: lua-body-fluent-suffix-loss ends with source/outcome planning .10.7.2.0 as a future step despite later admitted semantic owners. Qualify that precise forward pointer while preserving the repaired suffix behavior, original milestone counts and current 166-assertion consumer proof.
   Reading .1.31 extension: inter_match_gap_capture_contract_test.lua header lines6-7 and inter-match-gap-lua-implementation-plan metadata/lines77/110 retain private-stage recurring/public-pending guidance despite the explicitly current closed successor and neutral9/0/63/public8/15/10/34. Date or qualify these precise stage boundaries; preserve historical 392=178+33+46+105+30 proof. The metadata assertions span two regions, so the fresh prefix is 106+33+46=185, not a contradictory full-suite count.
+  Reading .1.33 extension: lua-native-mcp-server-plan still says Lua will provide the implemented server and gives an unqualified exact 82,543-byte bundle; current binding is 83,166 bytes with an 82,882-byte canonical bundle. lua-mcp-implementation-admission retains shared-rollout-pending body guidance, while the decoded-server successor and fresh admission checker record complete 5/5 implementations, 6/6 runtimes and 141 mutations. Date or qualify these precise current-guidance sentences; preserve the earlier implementation and admission counts.
   Acceptance: Remove the false current failure projection, distinguish historical counts from current guidance, preserve useful unique history through canonical pointers, and independently verify the resulting public wording and native command examples.
   Verification: `pending`
   Commit: `pending`
@@ -2080,7 +2085,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.33` | `pending` | Read the MCP-binding suffix and owned admission/dispatch/stdio test ranges after clean .1.32; preserve all repair owners, prior failures and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.34` | `pending` | Read the stdio suffix and owned progressive-dispatch/storage/recognition/recursive-observation ranges after clean .1.33; preserve all repair owners, prior failures and parked named arguments. |
 
 ## Decisions
 
@@ -2098,9 +2103,11 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Blockers
 
-- None for bounded Lua .1.33 reading after clean .1.32. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
+- None for bounded Lua .1.34 reading after clean .1.33. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
 
 ## Verification Log
+
+- `2026-09-13` .1.33: Lua .1.33 completes MCP binding, admission and dispatch tests and reads stdio lines 1-193 in nine complete windows: 1,500 fragments /63,081 bytes; cumulative 33/51, 45,151 fragments /1,682,742 bytes. All 99 Lua sources remain baseline-identical; 62 files are fully read. Both installed hosts pass 1,368 assertions: binding116, admission281, dispatch216 and stdio-prefix71 each. Generated binding remains byte-fresh at 83,166 bytes; neutral admission passes 5/5 implementations, 6/6 runtimes and 141 mutations with complete rollout. Admission marker checks are distinguished from private pre-emission execution owned by the later stdio range. Existing .2.1 gains precise bundle-size and rollout guidance qualification; all thirty-three repair roots and earlier failures remain open. Next .1.34 completes stdio and reads progressive dispatch, storage, recognition and recursive-observation ranges; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
 - `2026-09-13` .1.32: Lua .1.32 completes gap-capture, logical-helper and map-leaves tests and reads the MCP-binding header in ten complete windows: 1,500 fragments /61,938 bytes; cumulative 32/51, 43,651 fragments /1,619,661 bytes. All 99 Lua sources remain baseline-identical; 59 files are fully read. Both installed hosts pass 2,562 assertions: gap392, logical359 and map530 each. Fresh gap proof includes independent emitted children and all nine admitted roles; logical/map emitted modules execute in their current host. Neutral logical8/0/26 and mutation167+592 pass; prior gap governance remains dated and input-identical. No new repair is found; all thirty-three roots and earlier failures remain open. Next .1.33 completes binding and reads MCP admission, dispatch and stdio ranges; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
@@ -2174,6 +2181,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Commit Log
 
+- `2026-09-13` .1.33: `LUA-STARTUP-READING.1.33 - read MCP consumers and reconcile exact execution evidence`; activation e8f630f33; next .1.34 after clean proof and empty brief.
+
 - `2026-09-13` .1.32: `LUA-STARTUP-READING.1.32 - complete gap logical and map-leaves consumer reading`; activation 9109e20ab; next .1.33 after clean proof and empty brief.
 
 - `2026-09-13` .1.31: `LUA-STARTUP-READING.1.31 - read diagnostic and slot-gap consumers with scoped proof`; activation 8878c8cb4; next .1.32 after clean proof and empty brief.
@@ -2245,6 +2254,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 - `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` owns creation of this plan.
 
 ## Changelog
+
+- `2026-09-13` .1.33: Complete MCP binding/admission/dispatch reading and the bounded stdio prefix; distinguish actual execution from source-marker composition and qualify dated guidance under the existing repair.
 
 - `2026-09-13` .1.32: Complete gap, logical and map-leaves consumer reading and proof; distinguish emitted execution routes, retain prior governance evidence and all repair ownership.
 

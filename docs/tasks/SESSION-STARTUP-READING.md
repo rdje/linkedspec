@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 32/51; .1.33 follows child 32; .2.1-.2.33 own thirty-three concrete repair roots, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 33/51; .1.34 follows child 33; .2.1-.2.33 own thirty-three concrete repair roots, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.32 completes gap-capture, logical-helper and map-leaves tests and reads the MCP-binding header in ten complete windows: 1,500 fragments /61,938 bytes; cumulative 32/51, 43,651 fragments /1,619,661 bytes. All 99 Lua sources remain baseline-identical; 59 files are fully read. Both installed hosts pass 2,562 assertions: gap392, logical359 and map530 each. Fresh gap proof includes independent emitted children and all nine admitted roles; logical/map emitted modules execute in their current host. Neutral logical8/0/26 and mutation167+592 pass; prior gap governance remains dated and input-identical. No new repair is found; all thirty-three roots and earlier failures remain open. Next .1.33 completes binding and reads MCP admission, dispatch and stdio ranges; named arguments and startup/ADR0118 prerequisites remain unchanged.
+  Verification: Lua .1.33 completes MCP binding, admission and dispatch tests and reads stdio lines 1-193 in nine complete windows: 1,500 fragments /63,081 bytes; cumulative 33/51, 45,151 fragments /1,682,742 bytes. All 99 Lua sources remain baseline-identical; 62 files are fully read. Both installed hosts pass 1,368 assertions: binding116, admission281, dispatch216 and stdio-prefix71 each. Generated binding remains byte-fresh at 83,166 bytes; neutral admission passes 5/5 implementations, 6/6 runtimes and 141 mutations with complete rollout. Admission marker checks are distinguished from private pre-emission execution owned by the later stdio range. Existing .2.1 gains precise bundle-size and rollout guidance qualification; all thirty-three repair roots and earlier failures remain open. Next .1.34 completes stdio and reads progressive dispatch, storage, recognition and recursive-observation ranges; named arguments and startup/ADR0118 prerequisites remain unchanged.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -4607,7 +4607,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.33` | `pending` | Read the MCP-binding suffix and owned admission/dispatch/stdio test ranges after clean .1.32; preserve all repair owners, prior failures and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.34` | `pending` | Read the stdio suffix and owned progressive-dispatch/storage/recognition/recursive-observation ranges after clean .1.33; preserve all repair owners, prior failures and parked named arguments. |
 
 ## Reading Ledger
 

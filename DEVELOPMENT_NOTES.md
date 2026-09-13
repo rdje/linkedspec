@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — MCP composition requires precise execution claims
+
+- The admission consumer executes twelve roles and all twenty semantic response identities, while its private cancellation and native-failure references inspect focused-source markers.
+- Complete dispatch proof independently executes native failure and decoded cancellation; the scoped stdio block executes ten raw-input outcomes with exact output, silence, caller ownership and released state.
+- Current generated bundle and admission governance supersede unqualified earlier size/rollout wording; existing .2.1 owns qualification while preserving dated evidence.
+- LUA-STARTUP-READING.1.33 stores exact scope and 1,368-assertion replay in docs/knowledge/lua-mcp-consumer-reading.md; later stdio proof remains owned and no source is changed.
+
 ## 2026-09-13 — Preserve exact execution and mutation boundaries
 
 - Gap emitted proof loads ten value and two typed-error modules in a fresh child per host; all nine admission roles also execute, with managed cleanup.

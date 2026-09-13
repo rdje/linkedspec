@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua MCP consumer reading and bounded stdio proof
+
+- Read binding10-169, admission1-663, dispatch1-484 and stdio1-193: 1,500 fragments /63,081 bytes; cumulative 33/51 and 1,682,742 bytes.
+- Both hosts pass binding116, admission281, dispatch216 and stdio-prefix71: 1,368 assertions; generated binding is byte-fresh and neutral admission passes 5/5+6/6/141.
+- Separate admission source-marker checks from private pre-emission execution; decoded cancellation and native-failure paths execute in the complete dispatch consumer.
+- LUA-STARTUP-READING.1.33 adds bundle/rollout guidance to existing .2.1; all thirty-three repair roots remain open; next .1.34.
+
 ## 2026-09-13 — Lua gap, logical and map-leaves consumer completion
 
 - Read gap948-1462, logical1-280, map-leaves1-696 and MCP-binding1-9: 1,500 fragments /61,938 bytes; cumulative 32/51 and 1,619,661 bytes.

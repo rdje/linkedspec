@@ -329,12 +329,12 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (32/51 groups):** the complete
+**Lua source reading is underway (33/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first 32 groups physically read 43,651 fragments /1,619,661 bytes,
+ownership. The first 33 groups physically read 45,151 fragments /1,682,742 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
@@ -349,8 +349,9 @@ tables, all 158 `Cased` and 464 `Case_Ignorable` ranges, strict UTF-8 decoding a
 Final Sigma conversion. The Unicode rule-label table and classifier, automatic
 function parser, complete function shell and registry are read. The complete
 body-fluent, callable, diagnostic, duplicate-slot, gap-capture, logical-helper and
-map-leaves tests are read, along with the MCP-binding header through line 9.
-Fifty-nine files are fully read. The remaining 19 groups require
+map-leaves tests are read. The MCP-binding, admission and dispatch tests are
+complete; stdio is read through line 193. Sixty-two files are fully read.
+The remaining 18 groups require
 their own reading and verified commits; source reading does not close the limitations below.
 
 **Lua Unicode casing and rule-label verification:** all property tables match the
@@ -390,7 +391,7 @@ Callable proof includes inert construction, ordered invocation, independently lo
 emitted modules and workspace cleanup on success and injected failure. Prior neutral
 callable checker results remain dated; their four inputs are unchanged.
 
-**Lua consumer verification:** both installed hosts pass the complete gap-capture
+**Lua gap, logical and mutation verification:** `.1.32` records these suites on both hosts: gap-capture
 (392 checks), logical-helper (359) and map-leaves mutation (530) suites: 2,562 checks
 total. Gap proof includes ten value and two typed-error emitted modules loaded in
 a fresh child process per host, plus all nine admission roles. It preserves Unicode
@@ -408,13 +409,32 @@ tree. Copied frames and distinct function-parameter identities keep ordinary loc
 changes independent. Logical and mutation emitted modules execute in the current
 host; they are separate from the gap consumer's fresh process proof.
 
-Fresh neutral logical governance passes all eight rollout rows and 26 mutations;
+The same leaf records neutral logical governance at eight complete rows and 26 mutations;
 the frozen mutation oracle rejects 167 base and 592 composition mutations. The
 preceding diagnostic119, duplicate-slot112 and gap governance9/0/63/public8/15/10/34
 results remain dated evidence on unchanged inputs. Existing runtime and caller-input
 limitations below remain open; these are scoped checks on the installed hosts,
 with PUC5.4 verification still pending. Exact scope and reproduction:
 `docs/knowledge/lua-gap-logical-map-consumer-reading.md`.
+
+**Lua MCP consumer verification:** both installed hosts pass the complete binding
+(116 checks), admission (281) and decoded dispatch (216) consumers, plus the first
+complete stdio block (71): 1,368 checks total. The generated module matches all
+83,166 expected bytes and retains its 82,882-byte canonical bundle. Native semantic
+results agree with all twenty governed responses; caller requests and returned
+frames remain detached. Restricted deployment policy rejects excessive requests
+before native dispatch, while omitted or unrelated limits preserve native diagnostics.
+
+The consumers verify registration, expiry, revocation, capacity, shutdown, decoded
+cancellation, fixed error output and ownership of caller streams. All ten raw-input
+fixtures execute through stdio with exact output and released request/registry state.
+The admission suite also checks source markers for the dedicated pre-emission
+cancellation test; executing that specific stdio test remains in the next reading
+range. The complete dispatch consumer does execute injected native failures and
+decoded cancellation. Fresh neutral governance reports five implementations, six
+runtime admissions, complete rollout and 141 rejected mutations. Earlier byte counts
+and rollout stages remain historical evidence. Exact scope and reproduction:
+`docs/knowledge/lua-mcp-consumer-reading.md`.
 
 **Known Lua invocation limitation — nested array members can disappear:** a
 caller-supplied tagged array with an extra member or a sparse tail is accepted,
