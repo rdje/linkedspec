@@ -1571,7 +1571,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.8` | `pending` | Read progressive541-1540, punctuation/recognition contracts, three explicit-or fixtures and repeated-result1-157:1500 fragments/65525 bytes. Preserve crossing-case ownership and existing repairs. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.9` | `pending` | Read repeated-result158-847, root-selection1-595 and cursor1-160:1445 fragments/65519 bytes. Preserve complete windows, crossing-case ownership and all repairs. |
 
 ## Decisions
 

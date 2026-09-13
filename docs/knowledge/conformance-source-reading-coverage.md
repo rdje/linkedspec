@@ -9,7 +9,7 @@ answers:
   - "how do I verify conformance reading source and range coverage"
   - "which conformance source reading file has the longest line"
 date: 2026-09-13
-status: exact decomposition preserved; physical reading 7/143, twenty-nine files complete and136 groups remain
+status: exact decomposition preserved; physical reading 8/143, thirty-five files complete and135 groups remain
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -281,3 +281,22 @@ describe the admitted private contract, while [[perl-progressive-resource-ceilin
 retains the known combined-boundary exception. Fresh native14/9/4 and progressive
 9/9/116 plus public6/12/10/60 neutral checks pass without runtime repair or a matrix.
 MCP and callable/signature proof remain dated unchanged-source evidence.
+
+
+## September 13 progressive, recognition and repetition boundaries
+
+`.1.8` reads15 complete windows, 1,500 fragments and65,525 baseline-identical bytes.
+Progressive dispatch, punctuation aliases, recognition transactions and three
+explicit-OR fixtures reach EOF. Repeated-result1–157 stops inside a bounded case.
+Cumulative reading is8/143, 9,290 fragments, 503,222 bytes and35 complete files.
+
+[[progressive-span-dispatch-public-no-drift]] preserves private carrier/admission
+scope. [[recognition-transaction-neutral-contract]] distinguishes strict match
+booleans, staged falsey payloads and invocation-owned terminals from actual cursor
+progress. [[explicit-or-action-result-shape-parity-gap]] owns per-hit return
+collection and the separate zero-width accept-once rule. Known token/restoration
+and progressive resource/nesting defects remain open; these finite neutral fixtures
+do not close their combined boundaries. Fresh punctuation6/4/6 and recognition
+138/250/58/public3/26/45 proof passes. The punctuation card's historical no-emitter
+sentence is qualified against [[lua-generated-source-accepted-subset]] and existing
+Lua admission; its original dated evidence remains intact.

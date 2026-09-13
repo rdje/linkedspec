@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `421f22390a01faf444454f54951816be099f576c` — clean conformance resolution/descriptor/progressive reading activation.
-- latest_completed_leaf: `CONFORMANCE-SOURCE-READING.1.7 - read resolution descriptor and progressive dispatch contracts`; physical reading7/143,29 complete files and exact progressive prefix.
-- active_work_unit: `CONFORMANCE-SOURCE-READING.1.8` — progressive suffix, punctuation/recognition contracts and repetition fixture/prefix.
-- next_action: Read CONFORMANCE-SOURCE-READING.1.8 from clean HEAD: progressive_span_dispatch_contract.json541-1540, punctuation_light_zero_arg_contract.json1-67, recognition_transaction_contract.json1-271, all three repeated_action_result/explicit_or_distinct fixture files, and repeated_action_result_contract.json1-157 under capability_conformance. Total1,500 fragments/65,525 bytes. Read complete bounded windows, reconcile canonical facts and focused proof, preserve source/history, update live records/book and commit before .1.9. Continue PNT.
+- activation_commit: `708ecbff2b1741c666f4399986270f002b8a6162` — clean conformance progressive/recognition/repetition reading activation.
+- latest_completed_leaf: `CONFORMANCE-SOURCE-READING.1.8 - read progressive recognition and repetition boundaries`; physical reading8/143,35 complete files and exact repetition prefix.
+- active_work_unit: `CONFORMANCE-SOURCE-READING.1.9` — repetition suffix, root selection and cursor prefix.
+- next_action: Read CONFORMANCE-SOURCE-READING.1.9 from clean HEAD: repeated_action_result_contract.json158-847, root_rule_selection_contract.json1-595 and rule_local_cursor_contract.json1-160 under capability_conformance. Total1,445 fragments/65,519 bytes. Read complete bounded windows, reconcile Knowledge and focused proof, preserve source/history, update live records/book and commit before .1.10. Continue PNT.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
 - in_flight_uncommitted: none; reading evidence, exact claim/repair ownership and next action committed at Git HEAD; no background result remains.
-- blockers: none for authorized read-only PNT at conformance .1.8. Existing runtime/guide repairs, source prerequisites and later canonical boundaries remain; registry ceilings are unchanged.
+- blockers: none for authorized read-only PNT at conformance .1.9. Existing runtime/guide repairs, source prerequisites and later canonical boundaries remain; registry ceilings are unchanged.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -57,4 +57,4 @@
   Conformance .1.4 preserves clean baaebc8e CHANGES242-457 as segment4976-6d1dd54d605a:216 lines/18973 bytes; all earlier archive records and controls remain exact. Proportionate governance: ADR0115.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; five backend lanes and supporting .3.7 closed. Conformance7/143 reads7790 fragments/437697 bytes;136 groups remain, including progressive suffix and four decoded Unicode inputs. Later .3.9-.3.11, formal book .4 and policy .5 remain; no runtime repair closes.
+- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; five backend lanes and supporting .3.7 closed. Conformance8/143 reads9290 fragments/503222 bytes;135 groups remain, including repetition suffix and four decoded Unicode inputs. Later .3.9-.3.11, formal book .4 and policy .5 remain; no runtime repair closes.
