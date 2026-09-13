@@ -1571,7 +1571,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.6` | `pending` | Read canonical frames13-35, complete corpus/schema/semantic payloads and validator cases1-51:1500 fragments/63045 bytes. Preserve exact long-line presentation. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.7` | `pending` | Read validator cases52-343, transport/native-resolution/outward contracts and progressive dispatch1-540:1500 exact fragments; preserve complete windows and existing repairs. |
 
 ## Decisions
 

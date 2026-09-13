@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.6 — retain distinct transport and semantic outcomes
+
+Complete transport-source reading reconciles exact error layers, ordered tool schemas, native payload identity and lowering-only capability projection with their canonical fact cards. The corrected schema allows72 fact keys and bounded nonempty query-contract input; strict arguments/results coexist with extensible client metadata. Four handle states suppress native dispatch identically. Ten raw inputs and ten lifecycle cases cover their declared boundaries, leaving the known Rust combined EOF/size discrepancy open. Reuse the unchanged-source .1.5 structural proof; no redundant backend build or fresh runtime claim is needed.
+
+Verification: exact 12-window, all 143-group/302-range and cumulative reading audits; unchanged-source .1.5 MCP materialization35/10/10, transport76 and admission5/5+6/6 complete/141 evidence. No fresh native/server execution, matrix, dependency compilation or defect repair is claimed. Preserve source/task/history, check memory, Knowledge, both bounded histories, rendered book and git diff --check; normal doctrine hooks govern focused landing.
+
 ## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.5 — retain whole-line identity across bounded presentation
 
 The completed mutation cases preserve callback atomicity, unrelated effects, distinct shadow bindings, guard release, aggregate detachment and continuation after commit. MCP admission binds five source implementations and six runtime rows to one twelve-role contract and all-twenty recurring identity proof. Canonical frames1-12 contain discovery, tool schemas and semantic request/results. The14687-byte tools-list frame is fully consumed as6500+6500+1687 UTF-8 bytes; the original source-window identity and exact chunk hashes are both retained. Reading and structural validation remain distinct from executing native servers; all earlier repair obligations remain.

@@ -497,15 +497,15 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 decoded bytes. Five groups now account for
-4,790 fragments and 314,546 bytes, including 21 complete files and canonical MCP
-frames 1–12. Map-leaves and MCP admission reading is complete; one long frame was
-read in three exact byte chunks. The contracts distinguish callback rollback
-from post-commit continuation, five implementations from six runtime admissions,
-and semantic payload identity from transport envelopes. Fresh materialization,
-transport and admission checks pass; remaining frames and source groups retain
-explicit reading ownership. Known runtime defects remain open, and named-argument
-support remains an approved future direction. The capability guide still has stale
+143 bounded groups covering 8,257,059 decoded bytes. Six groups now account for
+6,290 fragments and 377,591 bytes, including 25 complete files. MCP transport
+frames, corpus, schema and semantic payloads are fully read. A native semantic
+failure (`ok: false`) remains a successful tool response (`isError: false`);
+handle and deployment-policy errors instead use the tool-error layer. Canonical
+semantic text matches structured content. Existing transport checks pass over
+unchanged sources, while known runtime boundary defects retain their repair tasks.
+Validator-case reading continues in the next group. Named-argument support remains
+an approved future direction. The capability guide still has stale
 current census, governance/inventory/public counts and generic-callable wording.
 Existing startup `.41.6` and `.41.7` now own these exact paragraphs and meaningful
 checks against recurrence. Their selected-marker guards currently miss the

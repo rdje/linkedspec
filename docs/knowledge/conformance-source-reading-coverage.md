@@ -9,7 +9,7 @@ answers:
   - "how do I verify conformance reading source and range coverage"
   - "which conformance source reading file has the longest line"
 date: 2026-09-13
-status: exact decomposition preserved; physical reading 5/143, twenty-one files complete and138 groups remain
+status: exact decomposition preserved; physical reading 6/143, twenty-five files complete and137 groups remain
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -244,3 +244,22 @@ for record in records:
 print('PASS exact recorded UTF-8 byte chunks; reconstruction grants no new physical-reading credit.')
 CONFORMANCE_LONG_LINE_WINDOWS
 ```
+
+
+## September 13 complete transport-input reading
+
+`.1.6` reads 12 complete windows: 1,500 fragments and 63,045 baseline-identical
+bytes. Canonical frames, corpus, schema and semantic payloads are now physically
+complete; validator cases1–51 are read and the definition list continues in `.1.7`.
+Cumulative coverage is6/143, 6,290 fragments, 377,591 bytes and25 complete files.
+
+The schema and corpus preserve three outcome layers: JSON-RPC errors, tool execution
+errors, and native semantic `ok:false` inside `isError:false`. The four payloads are
+three native responses plus a restricted capability projection. Canonical owners
+[[perl-mcp-decoded-server]], [[mcp-2026-07-28-stdio-contract]] and
+[[mcp-all-twenty-transport-blocker]] already explain these distinctions and the
+corrected fact-key/query-contract boundary. The `.1.5` transport/admission checks
+remain dated proof over identical sources. No native execution is repeated or
+inferred. [[rust-mcp-final-eof-byte-limit-gap]] remains open; separate raw and
+lifecycle cases do not establish its combined boundary. Startup `.36` competing
+validation precedence and `.5` historical ADR qualification also retain their owners.
