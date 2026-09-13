@@ -8,7 +8,7 @@ answers:
   - how much prior supporting-source reading credit is established
   - does supporting-source reading require rebuilding RGX or PGEN
 date: 2026-09-13
-status: original inventory preserved; one historical group read, six superseded, fourteen required code groups pending
+status: original inventory preserved; one historical group read, seventeen superseded, three current grammar groups pending
 tags: [startup, reading, supporting, inventory, continuity]
 evidence: "SESSION-STARTUP-READING.3.7.0; clean Lua closeout 735f0337883baef5ac4422976879d09725e0e8ea; baseline baeb984e36a94a15951cd23d4c52def5064cdaca."
 reverify: "Run SUPPORTING_SOURCE_INVENTORY, SUPPORTING_SOURCE_PLAN, then SUPPORTING_SOURCE_TREE below; these identity/range audits grant no additional physical reading credit."
@@ -61,20 +61,25 @@ source change requires an explicit delta audit, not rewriting historical evidenc
 # Current reading disposition — 2026-09-13
 
 `SUPPORTING-SOURCE-READING.1.1` retains its completed 1,500 fragments /61,165 bytes
-through 29 windows. The director supplies the historical Lispish provenance of
-conf/.tk/TableScript data and explains its limited current relevance. `.0` retires
-further manual fixture reading while preserving all inputs and the existing
-53-conf/23-TableScript smoke test. `.1.2-.1.7` are superseded without reading credit.
-Required code is now 77 files /88 ranges /17,291 fragments /673,899 bytes in
-fourteen pending groups. Current authored specs and EBNF precede the remaining
-legacy-code review. Exact provenance, reference census, focused corpus result and
-scope replay live in [[legacy-configuration-source-contracts]].
+through 29 windows. `.0` retired further conf/TableScript reading while retaining
+the exact focused 53-conf/23-TableScript/seven-EBNF corpus smoke. The director then
+clarified that whole historical spec/config/Perl application bundles are outside
+the current path. `.4` reconciles current grammar roles and quarantined code.
 
-Original inventory/plan recipes remain unchanged. The tree recipe below now
-permits explicit superseded nodes; it preserves all original Scope/digest coverage
-and counts only actually completed reading. The new dependency audit independently
-verifies the six exact omissions and current required groups. Earlier recipe bytes
-remain recoverable from the .1.1 commit; no historical source interval is rewritten.
+Three current grammar files remain required: `specs/spec.spec`,
+`specs/user_function_definition.spec` and the existing compatibility dependency
+`specs/pplugin.spec`. Exact Required reading scope overlays in `.1.17-.1.19`
+cover five ranges /629 fragments /96,781 bytes. Seventeen original groups are
+superseded; other intervals of the mixed specs groups are also explicit omissions.
+All original Scope/digests, completed historical reading, source/test bytes and
+repair owners remain exact. No omitted-byte reading is credited.
+
+Original inventory/plan/tree recipes below continue to reconstruct the frozen
+158-file/174-range inventory. They do not equate inventory with current required
+reading. Current dependency evidence and scope replay live in
+[[current-supporting-grammar-dependencies]]. The earlier .0 evidence remains in
+[[legacy-configuration-source-contracts]], with its task input pinned to its dated
+commit for honest historical replay.
 
 # Verification and continuity boundaries
 

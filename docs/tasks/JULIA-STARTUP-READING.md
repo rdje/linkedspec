@@ -1742,7 +1742,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SUPPORTING-SOURCE-READING.1.17` | `pending` | After clean .0, read current authored specs (1099 fragments/62580 bytes); historical conf/TableScript data and tests remain intact without further manual reading. |
+| 1 | `SUPPORTING-SOURCE-READING.1.17` | `pending` | After clean .4, read only pplugin.spec1–33 and spec.spec1–146 (179 fragments/26444 bytes); retained historical fixtures and quarantined code receive no new reading credit. |
 
 ## Decisions
 

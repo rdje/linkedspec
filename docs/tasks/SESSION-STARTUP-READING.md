@@ -2273,9 +2273,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 - ID: `SESSION-STARTUP-READING.3.7`
   Status: `active`
-  Goal: Split and read all 158 entries under specs, ebnf, noncore, conf, and tablescript.
+  Goal: Account for all 158 original supporting entries and read the current language/runtime dependencies required by the director’s clarified scope.
   Children: `.3.7.0` completes decomposition; SUPPORTING-SOURCE-READING.1 owns 21 reading groups, .2 new repair intake, .3 independent closeout.
-  Reading owner: `docs/tasks/SUPPORTING-SOURCE-READING.md`; .1.1 retains 1500 fragments/61165 bytes of completed historical reading. .0 supersedes further fixture-reading .1.2-.1.7 without credit; 14 code groups/77 files/17291 fragments/673899 bytes remain. Next .1.17 prioritizes authored specs, then EBNF and remaining legacy-code review.
+  Reading owner: `docs/tasks/SUPPORTING-SOURCE-READING.md`; .0/.4 preserve completed historical .1.1 and all original ranges, supersede seventeen groups without credit and retain three current grammar groups/five ranges/629 fragments/96781 bytes. Next .1.17 reads its Required reading scope only.
   Acceptance: Account for legacy adapters, plugins, authored grammars, configuration, and non-TypeScript `.ts` data;
     use LinkedSpec probes before investigating a spec's behavior, and do not infer defects from historical syntax alone.
   Verification: `pending`
@@ -4623,7 +4623,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SUPPORTING-SOURCE-READING.1.17` | `pending` | After clean .0, read current authored specs (1099 fragments/62580 bytes); historical conf/TableScript data and tests remain intact without further manual reading. |
+| 1 | `SUPPORTING-SOURCE-READING.1.17` | `pending` | After clean .4, read only pplugin.spec1–33 and spec.spec1–146 (179 fragments/26444 bytes); retained historical fixtures and quarantined code receive no new reading credit. |
 
 ## Reading Ledger
 

@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `0e3423a19addad30c8f932b1f23fb270e22f1677` — clean historical configuration dependency-audit activation.
-- latest_completed_leaf: `SUPPORTING-SOURCE-READING.0 - reconcile historical Lispish inputs with current corpus use`; six focused corpus assertions pass; further historical conf/TableScript reading retired with all fixtures/tests retained.
-- active_work_unit: `SUPPORTING-SOURCE-READING.1.17` — current authored-spec source reading.
-- next_action: Read SUPPORTING-SOURCE-READING.1.17: exact authored-spec ranges from BNF.spec line1 through spec.spec line146, 1099 fragments/62580 bytes. Retrieve canonical grammar/runtime facts, use LinkedSpec probes for behavior questions, preserve historical fixture exclusions and commit focused evidence before .1.18.
+- activation_commit: `5faaf61b9a5c56f18a01dde2c655f176b2828d19` — clean current supporting-dependency audit activation.
+- latest_completed_leaf: `SUPPORTING-SOURCE-READING.4 - focus supporting reading on current grammar dependencies`; exact three-grammar scope and historical exclusions verified; all sources/tests and repairs retained.
+- active_work_unit: `SUPPORTING-SOURCE-READING.1.17` — two required current grammar ranges.
+- next_action: Read SUPPORTING-SOURCE-READING.1.17 Required reading scope: pplugin.spec lines1–33 and spec.spec lines1–146, 179 fragments/26444 bytes. Retrieve canonical grammar/runtime facts, read complete bounded windows, reconcile findings and commit focused evidence before .1.18.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; supporting .0 dependency evidence, scope disposition, book and continuity are committed at current Git HEAD; no background result remains.
+- in_flight_uncommitted: none; supporting .4 role evidence, scope disposition, book and continuity are committed at current Git HEAD; no background result remains.
 - blockers: none for current authored-spec reading. Existing evidence controls remain; measure each candidate. Keep all known failures and repair prerequisites; dependency reuse is not a reading restriction.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -57,4 +57,4 @@
   Lua .1.36 rollover preserves the exact clean-HEAD suffix as segment4977-65e8f007697e; earlier archive bytes and other history controls remain unchanged. Proportionate governance: ADR0115.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart/Julia/Lua reading closed. Supporting retains .1.1 historical credit and six superseded fixture-reading groups; 14 code groups remain (77 files/17291 fragments/673899 bytes); .3.8-.3.11, formal book .4 and policy .5 remain.
+- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart/Julia/Lua reading closed. Supporting retains historical .1.1 credit and seventeen superseded groups; three required grammar groups remain (3 files/629 fragments/96781 bytes); .3.8-.3.11, formal book .4 and policy .5 remain.

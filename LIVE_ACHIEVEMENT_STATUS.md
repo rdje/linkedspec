@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl, Rust, Dart and Julia reading are complete. Canonical capacity admission is complete at a67a18bf. Supporting .0 records conf and TableScript as historical Lispish application data, retaining their existing narrow parser-corpus use. The exact focused Phase 0 subtest passes six assertions over 53 conf/23 TableScript/7 EBNF inputs; no obsolete application consumer or dependency build runs. Further manual reading of conf and TableScript data is retired under .1.2-.1.7, with no deletion or reading credit; completed .1.1 and the original 158-file/174-range inventory remain exact. Required supporting code is now 77 files/88 ranges/17291 fragments/673899 bytes in 14 pending groups. Next .1.17 reads shipped backend-neutral specs, followed by EBNF and the remaining legacy-code review. Every prior defect owner and later startup obligation remains. Dart reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl, Rust, Dart and Julia reading are complete. Canonical capacity admission is complete at a67a18bf. Supporting .4 applies the director’s current-project boundary to historical spec/config/Perl application bundles. Three grammar inputs retain current language or compatibility roles: spec.spec, user_function_definition.spec and pplugin.spec. Their descriptors compile with no blocked or compatibility rules and no legacy adapter load. Required reading is three groups/five ranges/629 fragments/96781 bytes; seventeen original groups are superseded without reading credit, and completed historical .1.1 remains exact. All 158 files, regression fixtures, original ranges and repair owners remain. Next .1.17 reads only its two required grammar ranges; no dependency build or canonical CI is claimed. Dart reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.82` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SUPPORTING-SOURCE-READING.0 - reconcile historical Lispish inputs with current corpus use` — Supporting .0 records conf and TableScript as historical Lispish application data, retaining their existing narrow parser-corpus use. The exact focused Phase 0 subtest passes six assertions over 53 conf/23 TableScript/7 EBNF inputs; no obsolete application consumer or dependency build runs. Further manual reading of conf and TableScript data is retired under .1.2-.1.7, with no deletion or reading credit; completed .1.1 and the original 158-file/174-range inventory remain exact. Required supporting code is now 77 files/88 ranges/17291 fragments/673899 bytes in 14 pending groups. Next .1.17 reads shipped backend-neutral specs, followed by EBNF and the remaining legacy-code review. Every prior defect owner and later startup obligation remains.
+- `SUPPORTING-SOURCE-READING.4 - focus supporting reading on current grammar dependencies` — Supporting .4 applies the director’s current-project boundary to historical spec/config/Perl application bundles. Three grammar inputs retain current language or compatibility roles: spec.spec, user_function_definition.spec and pplugin.spec. Their descriptors compile with no blocked or compatibility rules and no legacy adapter load. Required reading is three groups/five ranges/629 fragments/96781 bytes; seventeen original groups are superseded without reading credit, and completed historical .1.1 remains exact. All 158 files, regression fixtures, original ranges and repair owners remain. Next .1.17 reads only its two required grammar ranges; no dependency build or canonical CI is claimed.
 
 ## Next Action
 
-- `SUPPORTING-SOURCE-READING.1.17` — Read SUPPORTING-SOURCE-READING.1.17: exact authored-spec ranges from BNF.spec line1 through spec.spec line146, 1099 fragments/62580 bytes. Retrieve canonical grammar/runtime facts, use LinkedSpec probes for behavior questions, preserve historical fixture exclusions and commit focused evidence before .1.18.
+- `SUPPORTING-SOURCE-READING.1.17` — Read SUPPORTING-SOURCE-READING.1.17 Required reading scope: pplugin.spec lines1–33 and spec.spec lines1–146, 179 fragments/26444 bytes. Retrieve canonical grammar/runtime facts, read complete bounded windows, reconcile findings and commit focused evidence before .1.18.
 
 ## Recent Completions
+
+- `2026-09-13` — `SUPPORTING-SOURCE-READING.4` retains three current grammar inputs; seventeen groups superseded without credit, all 158 sources/tests and original evidence intact; descriptor-only probe passes; next .1.17 required ranges.
 
 - `2026-09-13` — `SUPPORTING-SOURCE-READING.0` retains the 53-conf/23-TableScript corpus smoke; retires further historical-data reading with no deletion or credit; original evidence and repairs intact; next .1.17 shipped specs.
 
@@ -48,8 +50,6 @@
 - `2026-09-13` — `LUA-STARTUP-READING.1.43` reads 1,500 fragments/52,604 bytes; 28 complete package groups per host pass, covering controls, numeric contracts, binding and copied collections; all repair owners remain; next .1.44.
 
 - `2026-09-13` — `LUA-STARTUP-READING.1.42` reads 1,500 fragments/61,135 bytes; 17 safe package groups per host pass, including named captures and scoped/tree callbacks; three native-error groups remain with .2.3; next .1.43.
-
-- `2026-09-13` — `LUA-STARTUP-READING.1.41` reads 1,500 fragments/64,241 bytes; 25 safe package groups per host pass, including fresh generated family/subset children; native-error group remains with .2.3; next .1.42.
 
 ## History
 

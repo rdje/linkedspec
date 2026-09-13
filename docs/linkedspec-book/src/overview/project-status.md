@@ -397,16 +397,34 @@ it does not compare application AST contents or require complete file consumptio
 Every fixture and test is retained, without an obsolete application consumer or
 dependency build.
 
-Further manual reading of historical conf/TableScript contents is retired. The
-first completed group remains honestly recorded; six remaining fixture-reading
-groups are superseded and receive no reading credit. The original 158-file /
-174-range inventory is preserved. Required supporting code now comprises 77 files /
-17,291 fragments /673,899 bytes in fourteen groups. Current authored specs and
-EBNF come next, followed by the remaining legacy-code review. No fixture is deleted
-and no parser assertion is weakened by this scope decision.
-Ownership and replay: `docs/tasks/SUPPORTING-SOURCE-READING.md`,
-`docs/knowledge/supporting-source-reading-coverage.md`, and
-`docs/knowledge/legacy-configuration-source-contracts.md`.
+The old application flow paired a `.spec`, optional Lispish configuration, and a
+separate Perl script that walked or executed the parsed AST. For example,
+`tclite.spec` described basic Tcl constructs; a now-absent Perl interpreter supplied
+execution. Those application bundles are historical, rather than current language
+feature requirements. Their fixtures and existing regression assertions remain.
+
+Current grammar dependencies are distinguished explicitly:
+
+| File | Current role |
+| --- | --- |
+| `specs/spec.spec` | Self-hosted language grammar owner and Perl bootstrap comparison input; canonical mirrors support other backends. |
+| `specs/user_function_definition.spec` | Grammar loaded by the Perl function-definition parser; other backends implement the corresponding language surface. |
+| `specs/pplugin.spec` | Small grammar retained for the shipped lazy legacy plugin adapter; this compatibility route is transition machinery. |
+
+A descriptor-only probe compiles all three with zero blocked or compatibility
+rules and leaves the legacy adapter unloaded. This proves descriptor readiness,
+not a backend-neutral plugin runtime or complete cross-backend execution parity.
+The parked domain modules under `noncore/` have no core dependency role. Historical
+`ebnf/*.ebnf` corpus inputs are separate from the accepted future EBNF-like frontend;
+retaining them does not claim that frontend is implemented.
+
+Further manual historical application reading is omitted. The current required
+supporting grammar scope is three files/five ranges/629 fragments/96,781 bytes.
+Seventeen original groups are superseded without reading credit; completed
+historical reading and the original 158-file/174-range inventory remain exact.
+No fixture or regression assertion is removed. Current dependency evidence and
+replay: `docs/knowledge/current-supporting-grammar-dependencies.md`;
+historical corpus proof: `docs/knowledge/legacy-configuration-source-contracts.md`.
 
 **Lua Unicode casing and rule-label verification:** all property tables match the
 pinned Unicode 17 neutral data. Four Sigma contexts at 2,030 property endpoints

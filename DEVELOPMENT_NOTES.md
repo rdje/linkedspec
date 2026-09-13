@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — SUPPORTING-SOURCE-READING.4 — application history versus grammar dependencies
+
+Historical application bundles do not define present feature obligations. Current spec.spec/function-definition loaders and the retained lazy pplugin compatibility grammar justify three precise reading inputs. Quarantined modules and example/EBNF corpora remain preserved regression/history material; the accepted future EBNF-like frontend is a separate direction. Exact initial/current quarantine membership resolves the old 36-module count as an overcount: both contain 35 modules, 13 plugins and the ledger. Scope overlays preserve original inventory without granting omitted-byte credit. Canonical role evidence and replay live in docs/knowledge/current-supporting-grammar-dependencies.md.
+
+Verification: exact original/current range/source and preservation audits; descriptor-only probe, Knowledge, memory, both histories, rendered book and all normal doctrine hooks. No source, test, dependency build, gate or feature-state change.
+
 ## 2026-09-13 — Historical parser samples are not application requirements
 
 - Directory/suffix discovery explains the live Lispish dependency on 53 conf and 23 TableScript inputs; their obsolete application semantics are outside current maintenance scope.

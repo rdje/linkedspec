@@ -14,7 +14,7 @@ date: 2026-09-13
 status: further historical conf and TableScript reading retired; existing corpus inputs and tests retained
 tags: [startup, reading, legacy, configuration]
 evidence: "SUPPORTING-SOURCE-READING.0 dependency/scope audit at activation 0e3423a19addad30c8f932b1f23fb270e22f1677; SUPPORTING-SOURCE-READING.1.1; activation d806aa674f8b0ae8202b78e3f8b40a1b898ede2a; exact Scope and baseline evidence in docs/tasks/SUPPORTING-SOURCE-READING.md."
-reverify: "Run the supporting-source coverage recipes, then CONF_DEPENDENCY_AUDIT and CONF_CORPUS_EXTRACT below, then the focused corpus invocation. The exact subtest checks 53 conf/23 TableScript/7 EBNF inputs; no legacy application or dependency build runs."
+reverify: "Current reading scope is in current-supporting-grammar-dependencies.md. Run the supporting-source coverage recipes, then the historical-checkpoint CONF_DEPENDENCY_AUDIT and CONF_CORPUS_EXTRACT below, then the focused corpus invocation. The exact subtest checks 53 conf/23 TableScript/7 EBNF inputs; no legacy application or dependency build runs."
 ---
 
 # Configuration group 1 — 2026-09-13
@@ -138,7 +138,18 @@ unchanged; the tree replay now accepts explicit superseded reading nodes and doe
 not count them as completed. The dependency replay below independently pins the
 six exact omissions, preserved completed group and fourteen current code groups.
 
-# Reproduce current dependency and reading disposition
+# Dated .0 checkpoint and current .4 disposition
+
+The preceding 77-file/fourteen-group state is the committed .0 checkpoint
+`5faaf61b9a5c56f18a01dde2c655f176b2828d19`. The director subsequently clarifies
+that whole historical application bundles are outside the current path. `.4`
+retains three current grammar dependencies and supersedes further noncore/EBNF
+fixture reading; see [[current-supporting-grammar-dependencies]]. The earlier
+source/reference evidence and corpus assertions remain valid. Only the task-tree
+input in the .0 replay below is pinned to that checkpoint, so it reconstructs
+its dated disposition rather than misreporting today’s required reading.
+
+# Reproduce the .0 checkpoint dependency and reading disposition
 
 First run the coverage recipes in
 `docs/knowledge/supporting-source-reading-coverage.md` to recover the frozen plan.
@@ -175,7 +186,7 @@ assert hashlib.sha256('\n'.join(scanned).encode()).hexdigest() == '00db120d8ef3e
 assert hashlib.sha256(json.dumps(records, separators=(',', ':')).encode()).hexdigest() == 'ba27ee5973570820dc9e8bc125f2f31d1c0ceb1848302ea2cd24fd34bf8b2e9c'
 assert len(records) == 14 and len({r['path'] for r in records}) == 5
 plan = json.loads(Path('.linkedspec-data/scratch/support370/plan.json').read_text())
-tree = Path('docs/tasks/SUPPORTING-SOURCE-READING.md').read_text()
+tree = subprocess.check_output(['git', 'show', '5faaf61b9a5c56f18a01dde2c655f176b2828d19:docs/tasks/SUPPORTING-SOURCE-READING.md'], text=True)
 nodes = dict(re.findall(r'^- ID: `([^`]+)`\n(.*?)(?=^- ID: |^## |\Z)', tree, re.M | re.S))
 historical, required = [], []
 for index, g in enumerate(plan, 1):

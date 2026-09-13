@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — SUPPORTING-SOURCE-READING.4 — current grammar dependency scope
+
+Supporting .4 applies the director’s current-project boundary to historical spec/config/Perl application bundles. Three grammar inputs retain current language or compatibility roles: spec.spec, user_function_definition.spec and pplugin.spec. Their descriptors compile with no blocked or compatibility rules and no legacy adapter load. Required reading is three groups/five ranges/629 fragments/96781 bytes; seventeen original groups are superseded without reading credit, and completed historical .1.1 remains exact. All 158 files, regression fixtures, original ranges and repair owners remain. Next .1.17 reads only its two required grammar ranges; no dependency build or canonical CI is claimed.
+
+Verification: exact original/current range/source and preservation audits; descriptor-only probe, Knowledge, memory, both histories, rendered book and all normal doctrine hooks. No source, test, dependency build, gate or feature-state change.
+
 ## 2026-09-13 — Historical Lispish data and current parser coverage
 
 - Record director background: conf, tk and TableScript ts were Lispish data for obsolete applications; their original Perl AST consumers are no longer in this repository.
