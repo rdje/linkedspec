@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua cursor completion and package-prefix reading
+
+- Read cursor-execution328-424, generated1-439, normalization1-225, option-removal1-276 and package1-463: 1,500 fragments /59,736 bytes; cumulative 37/51 and 1,912,415 bytes.
+- Both hosts pass execution108, generated106, normalization258 and removal96: 1,136 assertions, plus five package-prefix groups each.
+- Fresh child processes execute generated v2 and verify version-before-payload rejection; current generated ledger passes and prior cursor-neutral inputs remain exact.
+- LUA-STARTUP-READING.1.37 preserves all thirty-three repair roots and earlier failures without adding repair nodes or guidance extensions; next .1.38.
+
 ## 2026-09-13 — Lua root routes and rule-local cursor consumer reading
 
 - Read root-core205-278, root-routes1-353, cursor-admission1-486, cursor-descriptor1-260 and cursor-execution1-327: 1,500 fragments /55,300 bytes; cumulative 36/51 and 1,852,679 bytes.

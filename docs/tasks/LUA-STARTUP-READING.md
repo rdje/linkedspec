@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LUA-STARTUP-READING`
-- Status: `active` / approved capacity; source reading 36/51
+- Status: `active` / approved capacity; source reading 37/51
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.6`
 - Created: `2026-09-12`
 - Last updated: `2026-09-13`
@@ -45,7 +45,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - Ordered range SHA-256: `81c58b8319def28af518fb134a3787513fe746f0f0f73bcacb0e20b9ede1c9d6`.
 - Child-summary SHA-256: `f56ecac262800bd3cc1e6bba0cc25bfe22f095c3dfee41f1c6595d4200145290`.
 - Coordinates are one-based inclusive LF physical lines or absolute file bytes; both byte windows decode as UTF-8.
-- Current physical reading: 36/51 children, 49,651/71,269 fragments and 1,852,679/2,732,450 bytes.
+- Current physical reading: 37/51 children, 51,151/71,269 fragments and 1,912,415/2,732,450 bytes.
 - Exact independent replay and capacity evidence: `docs/knowledge/lua-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -625,14 +625,18 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `LUA-STARTUP-READING.1.36 - read root routes and rule-local cursor consumers`.
 
 - ID: `LUA-STARTUP-READING.1.37`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `968ebb99a14cbdedde87137d2a91988e95bdc400`.
+  Verification tier: `focused`
+  Focused checks: Exact bounded source/baseline reading; cursor execution/generated/normalization/removal and package-prefix Knowledge reconciliation; complete read consumers and explicitly bounded package proof; directly relevant neutral input evidence, memory, Knowledge, history, book and normal doctrines.
+  Canonical trigger: Ordinary test-source reading and bounded repair intake; no production change. Existing runtime/native-error limitations remain explicit; later closeout and push retain canonical prerequisites.
   Goal: Read and understand group 37: rule_local_cursor_execution_test.lua through run.lua.
   Scope: `lua/test/rule_local_cursor_execution_test.lua` lines 328-424; `lua/test/rule_local_cursor_generated_source_test.lua` lines 1-439; `lua/test/rule_local_cursor_normalization_test.lua` lines 1-225; `lua/test/rule_local_cursor_option_removal_test.lua` lines 1-276; `lua/test/run.lua` lines 1-463
   Baseline evidence: 1500 fragments / 59736 bytes; ordered range SHA-256 `5201d5604cd714055186fb76ae7c3b8f32576b3e0b6c08bcc96d8bed25c87a60`.
   Dependencies: .1.36 committed with clean handoff.
   Acceptance: Read every scoped byte without truncation; record comprehension, Knowledge and repair reconciliation, focused proof and a clean per-leaf commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Lua .1.37 completes cursor-execution, generated-source, normalization and option-removal tests and reads package lines 1-463 in eleven complete windows: 1,500 fragments /59,736 bytes; cumulative 37/51, 51,151 fragments /1,912,415 bytes. All 99 Lua sources remain baseline-identical; 77 files are fully read. Both installed hosts pass 1,136 assertions: execution108, generated106, normalization258 and removal96 each, plus five complete package-prefix groups each. Fresh child processes verify generated-v2 execution and version-before-payload rejection; current generated ledger passes and prior cursor-neutral inputs remain exact. No new repair node or guidance extension; all thirty-three repair roots and earlier failures remain open. Next .1.38 reads package lines 464-1955; named arguments and startup/ADR0118 prerequisites remain unchanged. Exact evidence: docs/knowledge/lua-cursor-completion-package-prefix-reading.md.
+  Commit: `LUA-STARTUP-READING.1.37 - complete cursor consumers and read package test prefix`.
 
 - ID: `LUA-STARTUP-READING.1.38`
   Status: `pending`
@@ -2101,7 +2105,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.37` | `pending` | Read the cursor-execution suffix and owned generated/normalization/option-removal/package ranges after clean .1.36; preserve all repair owners, prior failures and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.38` | `pending` | Read the owned package-test lines 464-1955 after clean .1.37; preserve all repair owners, prior failures and parked named arguments. |
 
 ## Decisions
 
@@ -2119,9 +2123,11 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Blockers
 
-- None for bounded Lua .1.37 reading after clean .1.36. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
+- None for bounded Lua .1.38 reading after clean .1.37. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
 
 ## Verification Log
+
+- `2026-09-13` .1.37: Lua .1.37 completes cursor-execution, generated-source, normalization and option-removal tests and reads package lines 1-463 in eleven complete windows: 1,500 fragments /59,736 bytes; cumulative 37/51, 51,151 fragments /1,912,415 bytes. All 99 Lua sources remain baseline-identical; 77 files are fully read. Both installed hosts pass 1,136 assertions: execution108, generated106, normalization258 and removal96 each, plus five complete package-prefix groups each. Fresh child processes verify generated-v2 execution and version-before-payload rejection; current generated ledger passes and prior cursor-neutral inputs remain exact. No new repair node or guidance extension; all thirty-three repair roots and earlier failures remain open. Next .1.38 reads package lines 464-1955; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
 - `2026-09-13` .1.36: Lua .1.36 completes root-core, root-routes, cursor-admission and cursor-descriptor tests and reads cursor-execution lines 1-327 in ten complete windows: 1,500 fragments /55,300 bytes; cumulative 36/51, 49,651 fragments /1,852,679 bytes. All 99 Lua sources remain baseline-identical; 73 files are fully read. Both installed hosts pass 2,662 assertions: root99, routes106, cursor119, descriptor912 and execution-prefix95 each. Root routes execute current-host emitted modules; cursor admission checks emitted text, and descriptor equivalence accounts for logical source identity. Fresh cursor8/0/60/public30/28 passes; prior root-neutral inputs remain byte-identical. Existing .2.1 owns precise count, identity and stage guidance qualification; all thirty-three repair roots and earlier failures remain open. Next .1.37 completes cursor execution and reads generated/normalization/removal/package ranges; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
@@ -2203,6 +2209,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Commit Log
 
+- `2026-09-13` .1.37: `LUA-STARTUP-READING.1.37 - complete cursor consumers and read package test prefix`; activation 968ebb99a; next .1.38 after clean proof and empty brief.
+
 - `2026-09-13` .1.36: `LUA-STARTUP-READING.1.36 - read root routes and rule-local cursor consumers`; activation 5e716ab1e; next .1.37 after clean proof and empty brief.
 
 - `2026-09-13` .1.35: `LUA-STARTUP-READING.1.35 - read recursive repeated-action and root-selection consumers`; activation a9aecff48; next .1.36 after clean proof and empty brief.
@@ -2282,6 +2290,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 - `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` owns creation of this plan.
 
 ## Changelog
+
+- `2026-09-13` .1.37: Complete cursor execution/generated/normalization/removal reading and the package prefix; verify fresh generated child execution and exact bounded package groups; preserve all repair ownership.
 
 - `2026-09-13` .1.36: Complete root core/routes and cursor admission/descriptor reading; verify exact plan/selection/identity and owned execution-prefix boundaries; retain precise existing guidance repair ownership.
 

@@ -329,12 +329,12 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (36/51 groups):** the complete
+**Lua source reading is underway (37/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first 36 groups physically read 49,651 fragments /1,852,679 bytes,
+ownership. The first 37 groups physically read 51,151 fragments /1,912,415 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
@@ -353,8 +353,9 @@ map-leaves tests are read. The MCP-binding, admission and dispatch tests are
 complete, as are stdio, progressive dispatch, storage and recognition transactions.
 Recursive observation, repeated actions and root-selection admission are complete.
 Root core, root routes, cursor admission and cursor descriptor tests are complete.
-Cursor execution is read through line 327. Seventy-three files are fully read.
-The remaining 15 groups require
+Cursor execution, generated source, normalization and option-removal tests are
+complete. The package runner is read through line 463. Seventy-seven files are
+fully read. The remaining 14 groups require
 their own reading and verified commits; source reading does not close the limitations below.
 
 **Lua Unicode casing and rule-label verification:** all property tables match the
@@ -495,8 +496,8 @@ present-tense pending-public guidance retains its existing repair owner. Exact
 source scope, limits and reproduction:
 `docs/knowledge/lua-recursive-repeated-root-consumer-reading.md`.
 
-**Lua root routes and rule-local cursor verification:** both installed hosts pass
-99 root-core checks, 106 root-route checks, 119 cursor-admission checks, 912 cursor
+**Lua root routes and rule-local cursor verification:** `.1.36` records these checks
+on both installed hosts: 99 root-core checks, 106 root-route checks, 119 cursor-admission checks, 912 cursor
 descriptor checks and 95 execution-prefix checks: 2,662 total. Root routes preserve
 typed zero-rule and unknown-selector errors. Generated-plan validation happens
 before entry selection, and fresh emitted modules execute in the current host.
@@ -505,8 +506,8 @@ Each entered rule derives its own seek/consume policy. The execution prefix chec
 all 36 family spellings, eight parent/child fixtures and two structural examples
 through live and normalized execution. An AND parent over seeking children finds
 ordered landmarks; an OR parent over consuming children makes an anchored choice.
-The prefix ends at line 322; later loading, trace and generated checks retain their
-next reading owner. The separate cursor admission verifies all fifteen declared
+That prefix ends at line 322; the full cursor execution proof below now includes
+loading, trace and generated checks. The separate admission verifies all fifteen declared
 roles and eight portable diagnostic outcomes. Its emitted role checks generated
 text; its generated-plan roles perform execution.
 
@@ -525,6 +526,32 @@ scope, proof limits and reproduction: `docs/knowledge/lua-root-cursor-consumer-r
 The same reading slice performs the required change-history rollover. The retained
 249-line root and its new immutable segment reconstruct every pre-rollover byte
 with the original record separator; earlier history remains intact. This uses the existing bounded-history allowance.
+
+**Lua cursor completion and package-prefix verification:** both installed hosts
+pass 108 cursor-execution checks, 106 generated-source checks, 258 normalization
+checks and 96 option-removal checks: 1,136 assertions. Five complete package-test
+groups also pass on each host. These are selected package groups, with the rest
+retaining its owned reading and verification work.
+
+Full cursor execution adds loaded behavior, separate parent and child trace policy,
+and generated-v2 agreement. The generated-source consumer checks all ten families,
+minimal plan fields, deterministic emission and version rejection. A fresh child
+process on each host loads valid emitted code and executes its direct and traced
+entry points. A stale version is rejected before a malformed payload is decoded;
+a malformed current-version payload retains its separate compile/load diagnostic.
+
+Normalization checks all 36 family spellings, 18 edge fixtures and six ownership
+sets, preserving typed bare edges, source-line boundaries and exact diagnostics.
+Retired outer cursor options reject across engine, parse, loaded, corpus and
+generated routes. CLI rejection precedes invalid source or missing input work;
+top-rule selection and low-level matching remain available.
+
+The five package groups verify module identity, detached backend status, immutable
+trace controls, routed/mirrored output and result-neutral runtime wrappers, plus
+exact help and argument errors. The trace fixtures use healthy writers; earlier
+writer-failure limitations remain open. The neutral generated ledger passes its
+existing inventory checks; prior cursor-neutral inputs remain byte-identical.
+Exact scope and replay: `docs/knowledge/lua-cursor-completion-package-prefix-reading.md`.
 
 **Known Lua invocation limitation — nested array members can disappear:** a
 caller-supplied tagged array with an extra member or a sparse tail is accepted,

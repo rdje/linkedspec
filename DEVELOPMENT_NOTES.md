@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Distinguish fresh generated execution from package-prefix proof
+
+- The generated-v2 consumer checks all ten family policies, native/generated outcomes and deterministic emitted bytes; its independent child runs direct/traced execution and typed load failures.
+- Option removal rejects before corpus/input work, preserves available identity and leaves low-level matchers intact; normalization retains typed bare-edge ownership and exact diagnostics.
+- Five package groups verify module/status identity, healthy trace configuration/sinks and exact CLI help/schema; later package groups remain unread and unexecuted by this prefix.
+- LUA-STARTUP-READING.1.37 records exact scope and 1,136 assertions plus ten package groups in docs/knowledge/lua-cursor-completion-package-prefix-reading.md; prior trace-writer and runtime limitations stay open.
+
 ## 2026-09-13 — Keep cursor execution and descriptor evidence precise
 
 - Root routes validate generated plans before entry selection, preserve typed zero/unknown errors and execute fresh emitted modules in the current host.
