@@ -329,12 +329,12 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (44/51 groups):** the complete
+**Lua source reading is underway (45/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first 44 groups physically read 61,540 fragments /2,342,290 bytes,
+ownership. The first 45 groups physically read 63,040 fragments /2,401,656 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
@@ -355,8 +355,9 @@ Recursive observation, repeated actions and root-selection admission are complet
 Root core, root routes, cursor admission and cursor descriptor tests are complete.
 Cursor execution, generated source, normalization and option-removal tests are
 complete. The package runner is fully read, as are semantic call-core, staged/
-generated-provenance and compilation-foundation tests. Query-kernel reading covers
-its first 154 lines. Eighty-one files are fully read. The remaining seven groups require
+generated-provenance and compilation-foundation tests. Query-kernel and generated
+observation tests are fully read; native observation is read through line 257.
+Eighty-three files are fully read. The remaining six groups require
 their own reading and verified commits; source reading does not close the limitations below.
 
 **Lua Unicode casing and rule-label verification:** all property tables match the
@@ -779,6 +780,38 @@ include the gap wrapper, so these totals overlap explicitly.
 
 Exact scope, replay, count boundaries and guidance ownership:
 `docs/knowledge/lua-package-completion-semantic-foundation-reading.md`.
+
+**Lua query and observation consumer verification:** the complete query suite
+passes 571 assertions on each installed host. Typed and raw requests match all
+nineteen static response digests; malformed requests retain exact diagnostics and
+zero work costs. Traversal, pages, record/relation/depth limits and source redaction
+preserve their fixture results. Public values and repeated responses stay detached.
+Source scans count intended call sites; they do not measure runtime invocation
+counts. The previously reported raw-false and shared explanation-budget defects
+remain open because these fixtures do not cover their failing cases.
+
+Generated observation retains canonical accepted-slot/final-result events, input
+digests and the twentieth derived-query digest through direct, traced and freshly
+loaded emitted routes. Replacing constructors and the hash function with throwing
+sentinels verifies that execution without a sink avoids those calls. Fresh child
+execution agrees on values, typed events, digests and trace presence. Reentrancy,
+diagnostic separation and omission of final results after exit/failure also pass.
+
+The unchanged generated suite passes 80/80 assertions on LuaJIT. Installed PUC Lua
+5.5 reports **79/80, FAIL, exit 1**: its host changes a thrown nil into the string
+`<no error object>`. This repeats the already-established runtime difference under
+`.2.2`; the expectation and declared Lua 5.4 target stay unchanged. Historical
+successful counts do not establish current Lua 5.4 runtime/header conformance.
+
+Only the complete native prefix through line 226 executes in this leaf, passing
+41 assertions per host for direct, loaded and reconstructed event identity.
+Later alias/callback tests are outside this prefix. Across all six jobs, the exact
+result is 1,383/1,384 assertions; verification preserves the one failure. The earlier
+complete native-suite results remain dated evidence, and arbitrary trace-writer
+failures retain their separate limitation.
+
+Exact source windows, replay and runtime/guidance ownership:
+`docs/knowledge/lua-query-generated-observation-consumer-reading.md`.
 
 **Known Lua invocation limitation — nested array members can disappear:** a
 caller-supplied tagged array with an extra member or a sparse tail is accepted,

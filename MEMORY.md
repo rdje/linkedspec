@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `b14726183ea41232e03a808e6dfab7921802e91e` — clean Lua reading child 44 activation.
-- latest_completed_leaf: `LUA-STARTUP-READING.1.44 - finish package reading and read semantic foundation tests`; reading 44/51; seven package groups, semantic core 136/staged 97/foundation 122 and SHA 12 pass per host; all prior limitations remain.
-- active_work_unit: `LUA-STARTUP-READING.1.45` — next exact query-kernel and observation test-source reading child.
-- next_action: Read the three exact .1.45 ranges: query-kernel 155-861, generated-observation routes 1-536 and native-observation 1-257; reconcile prior PUC5.5 nil-error failures and Knowledge before safe focused proof, sync the book and commit.
+- activation_commit: `98c15b80597cff8fc25b52e93ff1f99a155c5598` — clean Lua reading child 45 activation.
+- latest_completed_leaf: `LUA-STARTUP-READING.1.45 - read semantic query and generated observation tests`; reading 45/51; query 571/native-prefix 41 pass per host; generated LuaJIT 80/80 and PUC5.5 FAIL 79/80 remain exact.
+- active_work_unit: `LUA-STARTUP-READING.1.46` — next exact semantic test-source reading child with required notes rollover.
+- next_action: Read the five exact .1.46 ranges: native observation 258-548, runtime projection 1-472, source foundation 1-438, static graph 1-226 and static remaining 1-73; preserve known PUC5.5 failures, own and verify the required notes rollover, sync focused evidence/book and commit.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; .1.44 reading and exact package/semantic/SHA evidence are committed at the current Git HEAD.
-- blockers: none for bounded .1.45 reading. Prior PUC5.5 nil-error tests fail under .2.2; public-selector baseline fails under .28.7. All repair and supported-runtime prerequisites remain.
+- in_flight_uncommitted: none; .1.45 reading and exact query/generated/native-prefix evidence, including known failure, are committed at the current Git HEAD.
+- blockers: none for bounded .1.46 reading. Prior PUC5.5 nil-error tests fail under .2.2; public-selector baseline fails under .28.7. All repair and supported-runtime prerequisites remain.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -57,4 +57,4 @@
   Lua .1.36 rollover preserves the exact clean-HEAD suffix as segment4977-65e8f007697e; earlier archive bytes and other history controls remain unchanged. Proportionate governance: ADR0115.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart/Julia reading closed; Lua reading 44/51 (61,540 fragments/2,342,290 bytes), plan 51 groups, 99 files /71,269 fragments /2,732,450 bytes. Supporting code, formal book .4 and policy .5 remain.
+- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart/Julia reading closed; Lua reading 45/51 (63,040 fragments/2,401,656 bytes), plan 51 groups, 99 files /71,269 fragments /2,732,450 bytes. Supporting code, formal book .4 and policy .5 remain.

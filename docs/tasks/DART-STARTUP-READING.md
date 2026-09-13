@@ -1571,7 +1571,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.45` | `pending` | Read the owned query suffix and observation-test ranges after clean .1.44; preserve prior PUC5.5 nil-error failures, all repair owners, native-error exclusions and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.46` | `pending` | Read the owned native-observation suffix and semantic-test ranges after clean .1.45; retain known PUC5.5 failures, verify required notes rollover and preserve all repair owners and parked named arguments. |
 
 ## Decisions
 

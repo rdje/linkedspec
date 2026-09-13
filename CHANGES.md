@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua query and generated-observation consumer reading
+
+- Read three exact ranges in nine windows: 1,500 fragments /59,366 bytes; cumulative 45/51 and 2,401,656 bytes, with 83 complete files.
+- Query 571 and native-prefix 41 pass per installed host; generated observation passes 80/80 on LuaJIT and retains the known PUC5.5 nil-identity failure at 79/80, exit1.
+- Typed/raw static hashes, request boundaries, detached values and generated observation routes retain exact scope; runtime .2.2, query .2.15 and shared-budget .82 remain open.
+- LUA-STARTUP-READING.1.45 extends existing guidance evidence without production changes; .1.46 owns the next reading and required engineering-notes rollover.
+
 ## 2026-09-13 — Lua package completion and semantic foundation reading
 
 - Read all five owned ranges in eight windows: 1,500 fragments /58,471 bytes; cumulative 44/51 and 2,342,290 bytes, with 81 complete files.

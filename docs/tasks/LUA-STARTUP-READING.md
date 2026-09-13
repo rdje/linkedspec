@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LUA-STARTUP-READING`
-- Status: `active` / approved capacity; source reading 44/51
+- Status: `active` / approved capacity; source reading 45/51
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.6`
 - Created: `2026-09-12`
 - Last updated: `2026-09-13`
@@ -45,7 +45,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - Ordered range SHA-256: `81c58b8319def28af518fb134a3787513fe746f0f0f73bcacb0e20b9ede1c9d6`.
 - Child-summary SHA-256: `f56ecac262800bd3cc1e6bba0cc25bfe22f095c3dfee41f1c6595d4200145290`.
 - Coordinates are one-based inclusive LF physical lines or absolute file bytes; both byte windows decode as UTF-8.
-- Current physical reading: 44/51 children, 61,540/71,269 fragments and 2,342,290/2,732,450 bytes.
+- Current physical reading: 45/51 children, 63,040/71,269 fragments and 2,401,656/2,732,450 bytes.
 - Exact independent replay and capacity evidence: `docs/knowledge/lua-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -737,14 +737,18 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `LUA-STARTUP-READING.1.44 - finish package reading and read semantic foundation tests`.
 
 - ID: `LUA-STARTUP-READING.1.45`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `98c15b80597cff8fc25b52e93ff1f99a155c5598`.
+  Verification tier: `focused`
+  Focused checks: All three exact owned source ranges and unchanged baseline; complete read query/generated-observation tests and bounded native prefix on both installed hosts, preserving exact known PUC5.5 failures; Knowledge/repair reconciliation, source/history preservation, reconstructed coverage, book, explicit memory and normal doctrines.
+  Canonical trigger: Ordinary source reading and bounded repair intake without production changes; known runtime failures and native-error exclusions remain explicit, supported-runtime repair stays gated, and startup closeout/push retain canonical prerequisites.
   Goal: Read and understand group 45: semantic_index_query_kernel_test.lua through semantic_index_runtime_observation_native_test.lua.
   Scope: `lua/test/semantic_index_query_kernel_test.lua` lines 155-861; `lua/test/semantic_index_runtime_observation_generated_routes_test.lua` lines 1-536; `lua/test/semantic_index_runtime_observation_native_test.lua` lines 1-257
   Baseline evidence: 1500 fragments / 59366 bytes; ordered range SHA-256 `368dfb410954a394d22b374c7803e8bd27a15448f42e2d759121efcaf8bfdf5d`.
   Dependencies: .1.44 committed with clean handoff.
   Acceptance: Read every scoped byte without truncation; record comprehension, Knowledge and repair reconciliation, focused proof and a clean per-leaf commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Lua .1.45 reads three exact ranges in nine complete windows: 1,500 fragments /59,366 bytes; cumulative 45/51, 63,040 fragments /2,401,656 bytes. All 99 Lua sources remain baseline-identical; 83 files are fully read. Query 571 and native-prefix 41 assertions pass per installed host; generated observation passes 80/80 on LuaJIT and remains FAIL 79/80, exit1, on PUC5.5 for the known nil-error identity difference. Total proof is 1,383/1,384, with the failure retained under .2.2. Existing .2.1 gains exact observation-stage/identity qualifications; no new repair node. All thirty-three repair roots and earlier exclusions/failures remain open. Next .1.46 reads the native-observation suffix and four semantic-test ranges, including the required notes rollover; named arguments and startup/ADR0118 prerequisites remain unchanged. Exact evidence: docs/knowledge/lua-query-generated-observation-consumer-reading.md.
+  Commit: `LUA-STARTUP-READING.1.45 - read semantic query and generated observation tests`.
 
 - ID: `LUA-STARTUP-READING.1.46`
   Status: `pending`
@@ -848,6 +852,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Reading .1.43 extension: lua-runtime-named-harray-mutation still describes direct indexed writes through the earlier shared harray seam; current package proof distinguishes direct nested_write_kind_conflict with binding/integer fields from statement set_key binding_kind_mismatch. Qualify that direct-route description and the uniform-binding card generic wrong-kind wording against the nested-write owner, preserving valid copied snapshots. Qualify scalar-numeric broad portable-result wording against already-measured .2.13 finite integer arithmetic overflow; the exact 55-case neutral fixture remains valid evidence, not an all-integer proof. Date if/switch/while next-leaf links as historical sequencing; their current control behavior remains unchanged.
   Reading .1.44 extension: lua-semantic-compilation-foundation retains graph/query/observation/admission as later work despite admitted successors; lua-semantic-call-staged-projection-plan and lua-semantic-staged-generated-projection retain private-stage/no-public/next-query wording and the earlier128 core count, while current core136 and full97 tests pass. Date those stage statements and retain exact 18/16 versus22/25 scope. lua-semantic-query-kernel still calls runtime events future and its159 suite current despite already-recorded public/observed successors; this reading only executes its SHA prefix, so it adds no fresh full-query claim. Qualify blanket source-correlation and diagnostic-copy wording against existing .2.14/.2.17/.2.18 and startup .67.2 owners, and array-transform scalar-text wording against .2.9. No old card or production repair occurs here.
   Acceptance: Remove the false current failure projection, distinguish historical counts from current guidance, preserve useful unique history through canonical pointers, and independently verify the resulting public wording and native command examples.
+  Reading .1.45 extension: lua-semantic-runtime-observation-direct-capture and lua-semantic-runtime-observation-generated-routes retain unqualified nil-callback identity language; the generated card also leaves rollout/admission pending despite its admitted successors. Date the original 121/80 fixture proof and qualify current host identity with .2.2, preserving legitimate string/table controls and exact historical stage counts. Complete query proof now freshly passes 571 per host, while generated PUC5.5 remains FAIL79/80 and LuaJIT passes80/80; do not rewrite those test expectations or infer supported5.4 admission. Existing .2.15 and startup .82 query limitations remain outside the passing fixtures. Exact evidence: docs/knowledge/lua-query-generated-observation-consumer-reading.md.
   Verification: `pending`
   Commit: `pending`
 
@@ -877,6 +882,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Dependencies: Startup .3/.4/.5 before toolchain/gate implementation; preserve the declared 5.4 target unless a separate explicit policy decision changes it.
   Acceptance: Establish a repository-local or explicitly documented read-only 5.4 runtime/development pair, bind and validate both identities before building, reject mismatch with precise diagnostics, and rerun required conformance on 5.4 plus LuaJIT. The measured .1.2 PUC process is 5.5.1; earlier unversioned passes did not record a 5.4 runtime identity and cannot establish it. Source reading itself grants no conformance admission.
   Reading .1.17 extension: Installed PUC5.5 fails one native and one generated semantic-observation assertion because error(nil,0) becomes the string <no error object>; LuaJIT passes both. A bare pcall/error probe without importing LinkedSpec reproduces the difference, while false/string/table identity controls agree. Official Lua5.5 manual section2.3 and ldebug.c luaG_errormsg document/implement this host change. Keep the declared5.4 target and restore matching runtime/header proof; do not rewrite the 5.4 nil-error expectations or translate that legitimate string back into nil.
+  Reading .1.45 extension: Complete unchanged generated-observation tests again report exactly one of80 failures on installed PUC5.5, exit1: nil callback exact identity expected nil, got <no error object>. LuaJIT passes80/80. Query571 and the completely read/executed native prefix41 pass on both hosts; no fresh full-native or supported5.4 result is claimed. The existing child17 host-level cause applies unchanged; evidence verification preserves the failing exit and diagnostic, without another cause probe or oracle change.
   Verification: `pending`
   Commit: `pending`
 
@@ -2142,7 +2148,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.45` | `pending` | Read the owned query suffix and observation-test ranges after clean .1.44; preserve prior PUC5.5 nil-error failures, all repair owners, native-error exclusions and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.46` | `pending` | Read the owned native-observation suffix and semantic-test ranges after clean .1.45; retain known PUC5.5 failures, verify required notes rollover and preserve all repair owners and parked named arguments. |
 
 ## Decisions
 
@@ -2160,9 +2166,11 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Blockers
 
-- None for bounded Lua .1.45 reading after clean .1.44. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
+- None for bounded Lua .1.46 reading after clean .1.45. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
 
 ## Verification Log
+
+- `2026-09-13` .1.45: Lua .1.45 reads three exact ranges in nine complete windows: 1,500 fragments /59,366 bytes; cumulative 45/51, 63,040 fragments /2,401,656 bytes. All 99 Lua sources remain baseline-identical; 83 files are fully read. Query 571 and native-prefix 41 assertions pass per installed host; generated observation passes 80/80 on LuaJIT and remains FAIL 79/80, exit1, on PUC5.5 for the known nil-error identity difference. Total proof is 1,383/1,384, with the failure retained under .2.2. Existing .2.1 gains exact observation-stage/identity qualifications; no new repair node. All thirty-three repair roots and earlier exclusions/failures remain open. Next .1.46 reads the native-observation suffix and four semantic-test ranges, including the required notes rollover; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
 - `2026-09-13` .1.44: Lua .1.44 reads five exact ranges in eight complete windows: 1,500 fragments /58,471 bytes; cumulative 44/51, 61,540 fragments /2,342,290 bytes. All 99 Lua sources remain baseline-identical; 81 files are fully read, including the package runner. Each installed host passes seven package groups with the embedded 392 gap consumer, semantic core 136/staged 97/foundation 122 assertions, and 12 independent SHA-prefix vectors. These are 1,518 counted assertions/vectors plus 14 package groups with overlap explicit; no full-query claim. Existing .2.1 gains precise semantic-stage/count and prior-defect qualifications; no new repair node. All thirty-three repair roots, native-error exclusions and earlier failures remain open. Next .1.45 reads the query-kernel suffix, generated-observation test and native-observation prefix; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
@@ -2260,6 +2268,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Commit Log
 
+- `2026-09-13` .1.45: `LUA-STARTUP-READING.1.45 - read semantic query and generated observation tests`; activation 98c15b805; next .1.46 after clean proof and empty brief.
+
 - `2026-09-13` .1.44: `LUA-STARTUP-READING.1.44 - finish package reading and read semantic foundation tests`; activation b14726183; next .1.45 after clean proof and empty brief.
 
 - `2026-09-13` .1.43: `LUA-STARTUP-READING.1.43 - read control numeric and collection package tests`; activation f58aaef09; next .1.44 after clean proof and empty brief.
@@ -2355,6 +2365,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 - `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` owns creation of this plan.
 
 ## Changelog
+
+- `2026-09-13` .1.45: Complete query and generated-observation reading; verify both hosts and the native prefix, retain the exact known PUC5.5 failure and prepare the next owned notes rollover.
 
 - `2026-09-13` .1.44: Finish package reading and read semantic foundation consumers plus the query SHA prefix; verify exact dual-host proof and retain prior runtime/source/diagnostic limitations.
 

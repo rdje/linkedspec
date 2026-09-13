@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Preserve exact semantic-query and observation proof boundaries
+
+- Complete the query kernel and generated-observation test reading; native observation is read through 257 and executed only through the complete block at 226.
+- Six managed jobs finish with exact logs: 1,383/1,384 assertions; the sole failure remains generated nil-error identity on PUC5.5, with no oracle edit or supported 5.4 claim.
+- Static queries compare all 19 hashes; generated derivation checks the twentieth. No-sink probes replace constructors/hash functions, while kernel call-site counts remain source scans.
+- LUA-STARTUP-READING.1.45 records replay in docs/knowledge/lua-query-generated-observation-consumer-reading.md; existing .2.1/.2.2 gain dated qualifications, with all prior defects preserved.
+
 ## 2026-09-13 — Keep semantic authority and query-prefix proof bounded
 
 - Finish the package runner, call-core, staged/generated and compilation-foundation consumers; read only query-kernel 1-154, ending after its complete SHA helper.
