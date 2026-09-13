@@ -1741,7 +1741,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.24` | `pending` | Read the staged enrichment suffix, capture provenance and parse-job prefix after clean .1.23; preserve all staged, lexical, AST, semantic and process/runtime repairs plus parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.25` | `pending` | Read the parse-job suffix, narrow registry, tracing and Unicode prefix after clean .1.24; preserve all diagnostic, marker, capture, earlier repairs and parked named arguments. |
 
 ## Decisions
 

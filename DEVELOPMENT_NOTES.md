@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Validate retained diagnostic bytes and special marker traversal
+
+- Measuring a fallback without rechecking its allowance permits retained bytes to exceed the limit while a saturated remainder reports zero.
+- Marker-specific recursion must preserve ordinary cycle/null semantics; atomic node accounting remains an intentional separate invariant.
+- Copying a snapshot before shape validation can erase invalid host members, with sparse-array outcomes differing by host length; private range storage needs a producer/consumer invariant.
+- LUA-STARTUP-READING.1.24 records 102 bounded observations and repair/proof owners in docs/knowledge/lua-staged-completion-reading-and-boundary-gaps.md.
+
 ## 2026-09-13 — Tagged arrays still require complete membership validation
 
 - A declared JSON array kind does not prove dense one-based keys; copying only its selected length can erase malformed host input before validation or hashing.

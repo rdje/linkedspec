@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua staged completion reading and diagnostic/provenance repair ownership
+
+- Read three ranges /1,500 fragments /56,196 bytes; cumulative 24/51, 31,651 fragments /1,234,956 bytes.
+- Existing staged consumers pass 890 assertions per installed host; 102 boundary observations retain the exact sparse-seed host difference.
+- Own retained diagnostic bytes, marker cycle/null handling and capture admission under .2.26-.2.28; extend seeded defaults .2.8 and shared copy .2.25.
+- LUA-STARTUP-READING.1.24 preserves bounded guards, correct call exhaustion and shared Dart/Julia accounting evidence; next .1.25.
+
 ## 2026-09-13 — Lua validator and staged prefix reading with array validation ownership
 
 - Read two ranges /1,500 fragments /54,480 bytes; cumulative 23/51, 30,151 fragments /1,178,760 bytes.

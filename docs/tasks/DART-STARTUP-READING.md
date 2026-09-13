@@ -1273,6 +1273,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Dependencies: Startup gates; preserve exact measured .1.26 intake.
   Acceptance: Define the accounting unit and behavior when the governed sentinel itself cannot fit, including initial tiny positive limits, exhausted cumulative allowance, stage-chain growth, sidecar copies and diagnostic-node policy. Preserve authority narrowing; do not silently exempt unlimited fallback metadata. Audit the reference and other staged backend authorities with exact probes and route separately confirmed gaps before selecting the compatible repair.
   Additional evidence: Julia .1.22 independently confirms the same187/188/375-byte retained overruns and correct maximum-call rejection. Julia .2.14 depends on this shared accounting decision and owns its backend implementation/carrier proof; docs/knowledge/julia-staged-diagnostic-byte-boundaries.md preserves exact controls. Original Dart measurements and .2.18 call repair remain unchanged.
+  Additional Lua evidence: Lua .1.24 confirms the same 187/188/375-byte retained overruns with complete private recursive results and correct maximum-exact call exhaustion. Lua .2.26 depends on this shared accounting decision and owns backend repair/carrier proof; docs/knowledge/lua-staged-completion-reading-and-boundary-gaps.md preserves the independent observations. Original Dart/Julia evidence remains unchanged.
   Verification: `pending`
   Commit: `pending`
 
@@ -1568,7 +1569,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.24` | `pending` | Read the staged enrichment suffix, capture provenance and parse-job prefix after clean .1.23; preserve all staged, lexical, AST, semantic and process/runtime repairs plus parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.25` | `pending` | Read the parse-job suffix, narrow registry, tracing and Unicode prefix after clean .1.24; preserve all diagnostic, marker, capture, earlier repairs and parked named arguments. |
 
 ## Decisions
 

@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 23/51; .1.24 follows child 23; .2.1-.2.25 own twenty-five concrete repair roots, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 24/51; .1.25 follows child 24; .2.1-.2.28 own twenty-eight concrete repair roots, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.23 completes the validator and reads the staged AST enrichment prefix in eight complete windows: 1,500 fragments /54,480 bytes; cumulative 23/51, 30,151 fragments /1,178,760 bytes. All 99 Lua sources remain baseline-identical; 41 files are fully read. Staged890 and gap392 assertions pass per installed host, 2,564 total. The 52 exact observations confirm false validator options and staged tagged-array member omission through private job identity and parent detachment, with zero callbacks and preserved caller inputs. .2.8.13/.14 own validator options; .2.25 owns complete staged shape validation and independent proof; .2.1 retains dated/current guidance reconciliation. Neutral staged123/public129 and gap63/public34 mutations pass as governance. All twenty-five Lua repair roots and earlier failures remain open. Next .1.24 completes staged enrichment and reads capture provenance and the parse-job prefix; named arguments and startup/ADR0118 prerequisites remain unchanged.
+  Verification: Lua .1.24 completes staged enrichment and capture provenance and reads the parse-job prefix in nine complete windows: 1,500 fragments /56,196 bytes; cumulative 24/51, 31,651 fragments /1,234,956 bytes. All 99 Lua sources remain baseline-identical; 43 files are fully read. Existing staged consumers pass 890 assertions per installed host, 1,780 total. The 102 boundary observations measure retained diagnostic overruns, bounded marker cycle/null handling, private capture admission and seeded defaults; the sparse-seed host difference remains explicit. New .2.26/.2.27/.2.28 own bounded repair/proof, .2.8.15/.16 own seeded-call defaults and .2.25 retains copy-before-validation scope. Shared Dart .2.17.1 records independent Lua diagnostic confirmation. Neutral staged123/public129 and typed231 mutations pass as governance. All twenty-eight Lua repair roots and earlier failures remain open. Next .1.25 reads declarations, the narrow registry, tracing and Unicode prefix; named arguments and startup/ADR0118 prerequisites remain unchanged.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -4607,7 +4607,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.24` | `pending` | Read the staged enrichment suffix, capture provenance and parse-job prefix after clean .1.23; preserve all staged, lexical, AST, semantic and process/runtime repairs plus parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.25` | `pending` | Read the parse-job suffix, narrow registry, tracing and Unicode prefix after clean .1.24; preserve all diagnostic, marker, capture, earlier repairs and parked named arguments. |
 
 ## Reading Ledger
 
