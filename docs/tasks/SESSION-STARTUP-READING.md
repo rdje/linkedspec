@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 27/51; .1.28 follows child 27; .2.1-.2.30 own thirty concrete repair roots, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 28/51; .1.29 follows child 28; .2.1-.2.30 own thirty concrete repair roots, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.27 reads all Unicode mapping lines 1670-3169 in six complete windows: 1,500 fragments /35,947 bytes; cumulative 27/51, 36,151 fragments /1,357,777 bytes. All 99 Lua sources remain baseline-identical; 47 files are fully read. Every remaining uppercase entry and all fifteen Cased prefix ranges match the neutral contract. Both installed hosts pass 2,964 complete scoped uppercase observations, including 100 expansions. Prior .1.26 proof of 198 fixture assertions and .1.25 generation proof remain source-identical and are not recounted. No new defect is found in this range; all thirty repair roots and earlier failures remain open. Next .1.28 reads the casing suffix and rule-label prefix; named arguments and startup/ADR0118 prerequisites remain unchanged.
+  Verification: Lua .1.28 reads every casing suffix and rule-label table line in seven complete windows: 1,500 fragments /34,274 bytes; cumulative 28/51, 37,651 fragments /1,392,051 bytes. All 99 Lua sources remain baseline-identical; 48 files are fully read. All 158 Cased, 464 Case_Ignorable and 806 XID_Continue ranges match neutral data. Both installed hosts pass 16,276 complete valid casing observations, 136 malformed UTF-8 observations and 3,412 classifier assertions; offline rule-label regeneration passes. Prior casing fixtures and generation evidence remain dated and source-identical. No new runtime defect is found; .2.1 gains precise stale-guidance evidence. All thirty repair roots and earlier failures remain open. Next .1.29 reads the classifier suffix and function-definition modules; named arguments and startup/ADR0118 prerequisites remain unchanged.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -4607,7 +4607,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.28` | `pending` | Read the casing suffix 3170-3846 and rule-label prefix 1-823 after clean .1.27; preserve every repair owner, prior failure and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.29` | `pending` | Read the rule-label suffix, function-definition parser and shell, and registry prefix after clean .1.28; preserve every repair owner, prior failure and parked named arguments. |
 
 ## Reading Ledger
 

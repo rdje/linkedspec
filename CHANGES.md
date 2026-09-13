@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua casing algorithm and Unicode rule-label table reading
+
+- Read every casing line 3170-3846 and rule-label line 1-823: 1,500 fragments /34,274 bytes; cumulative 28/51 and 1,392,051 bytes.
+- All casing properties and 806 rule-label ranges match neutral data; both hosts pass 16,276 valid and 136 invalid casing observations plus 3,412 classifier assertions.
+- Offline rule-label regeneration passes; earlier casing generation and fixture proof remain dated, with exact source reuse.
+- LUA-STARTUP-READING.1.28 extends the existing stale-guidance repair and preserves all thirty repair roots; next .1.29 reads the classifier suffix and function definitions.
+
 ## 2026-09-13 — Lua uppercase table completion and complete scoped verification
 
 - Read every Unicode mapping line 1670-3169: 1,500 fragments /35,947 bytes; cumulative 27/51 and 1,357,777 bytes.

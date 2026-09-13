@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Verify Unicode property boundaries and strict scalar decoding
+
+- Four Final Sigma contexts cover 2,030 unique property endpoints and adjacent scalars; full strings agree with the neutral conversion algorithm on both installed hosts.
+- Valid width boundaries and overlapping Cased/Case_Ignorable controls pass; seventeen malformed UTF-8 byte sequences fail both casing directions before returning partial output.
+- Exact comparison covers all 158 Cased, 464 Case_Ignorable and 806 XID_Continue ranges; rule labels preserve scalar identity and do not adopt normalization or function-name grammar.
+- LUA-STARTUP-READING.1.28 retains exact payloads in docs/knowledge/lua-unicode-casing-properties-and-rule-label-reading.md; .2.1 owns the stale next-step pointer without erasing dated proof.
+
 ## 2026-09-13 — Preserve full uppercase expansions and exact property endpoints
 
 - The read uppercase suffix contains 84 two-scalar and sixteen three-scalar expansions; all ordered outputs remain exact, including Greek combining sequences and ligatures.

@@ -1741,7 +1741,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.28` | `pending` | Read the casing suffix 3170-3846 and rule-label prefix 1-823 after clean .1.27; preserve every repair owner, prior failure and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.29` | `pending` | Read the rule-label suffix, function-definition parser and shell, and registry prefix after clean .1.28; preserve every repair owner, prior failure and parked named arguments. |
 
 ## Decisions
 

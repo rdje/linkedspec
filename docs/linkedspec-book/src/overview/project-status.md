@@ -329,12 +329,12 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (27/51 groups):** the complete
+**Lua source reading is underway (28/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first 27 groups physically read 36,151 fragments /1,357,777 bytes,
+ownership. The first 28 groups physically read 37,651 fragments /1,392,051 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
@@ -344,22 +344,33 @@ scoped binding, scalar numeric, compilation outcome, semantic index, observation
 and query, both complete semantic projectors, SHA hashing, the complete emitter and
 typed-source modules, spec AST, loader, spec parser and validator, complete staged
 AST enrichment, capture storage and parse-job declarations, the narrow staged
-registry and tracing. The generated Unicode mapping is read through line 3169:
-both mapping tables are complete, followed by fifteen initial `Cased` ranges
-through U+0370–U+0373. Forty-seven files are fully read.
-The remaining 24 groups require
+registry and tracing. Unicode casing is completely read, including both mapping
+tables, all 158 `Cased` and 464 `Case_Ignorable` ranges, strict UTF-8 decoding and
+Final Sigma conversion. All 806 Unicode rule-label table ranges are also read;
+its classifier algorithm remains the next group. Forty-eight files are fully read.
+The remaining 23 groups require
 their own reading and verified commits; source reading does not close the limitations below.
 
-**Lua Unicode mapping verification:** every remaining uppercase entry and all
-fifteen read property ranges match the pinned neutral data. Both installed hosts
-produce all 1,482 exact uppercase results, including 84 two-scalar and 16
-three-scalar expansions. For example, U+FB03 becomes `FFI`, and U+0390 becomes
-U+0399 U+0308 U+0301. Earlier scoped proof covers 1,398 lower-case and 99 upper-case
-entries, including `ß → SS` and U+0149 → U+02BC U+004E. The existing twelve-fixture
-consumer's prior 99 assertions per host remain valid for direct, helper, receiver
-and array paths. Its source and all twelve offline generation inputs are unchanged;
-earlier runs are not counted again. Remaining property ranges and the conversion
-algorithm retain their own reading leaves.
+**Lua Unicode casing and rule-label verification:** all property tables match the
+pinned Unicode 17 neutral data. Four Sigma contexts at 2,030 property endpoints
+and adjacent scalars, plus valid width and expansion controls, produce 8,138 exact
+full-string results per installed host. Seventeen malformed UTF-8 sequences fail
+both casing directions, alone and after a valid prefix: 68 rejection observations
+per host. For example, `ΑΣ` becomes `ας`, `ΑΣΑ` becomes `ασα`, and isolated `Σ`
+becomes `σ`; ignorable combining marks preserve the surrounding cased context.
+Both hosts also pass 1,706 rule-label classifier assertions each. The 806 ranges
+cover 149,221 scalars; labels preserve exact spelling, including case and
+normalization differences. Digits and underscore are admitted at the first
+position as well as later positions. Function and method names retain their
+separate grammar. Offline rule-label regeneration passes with the pinned inputs.
+
+Earlier scoped lowercase and uppercase mapping results, including `ß → SS` and
+U+FB03 → `FFI`, remain dated proof. The twelve-fixture casing consumer's prior 99
+assertions per host and all twelve offline casing generation inputs remain source
+identical; earlier runs are not counted again. Current proof uses the installed
+PUC 5.5.1 and LuaJIT hosts; PUC 5.4 verification remains pending. Exact scope,
+complete-result digests and reproduction:
+`docs/knowledge/lua-unicode-casing-properties-and-rule-label-reading.md`.
 
 **Generated Lua MCP binding:** the current 83,166-byte module matches its neutral
 repository inputs. Both installed Lua hosts pass 116 focused binding checks each,
@@ -489,7 +500,8 @@ The director also granted one containment `.14` exception for this bounded capac
 implementation before full codebase reading, using focused proof and normal hooks
 without canonical CI/receipt. Later milestone, repair and push requirements remain;
 dependency build-on-update implementation stays separately owned. Lua source reading
-is 27/51; the next group reads the casing suffix 3170–3846 and rule-label prefix 1–823.
+is 28/51; the next group reads the rule-label classifier suffix, function-definition
+parser and shell, and the registry prefix.
 The installed-host test failures below remain open.
 All known limitations below retain their repair owners.
 Exact admission and replay: `docs/knowledge/lua-reading-evidence-capacity-admission.md`.
