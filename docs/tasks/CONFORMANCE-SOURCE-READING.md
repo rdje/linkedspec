@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 30/143
+- Status: `active` / exact decomposition; physical reading 31/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-13`
@@ -572,14 +572,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.30 - complete rule-label data and read uniform-binding contract`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.31`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `74ecae96ebe59e4d40856ea62ee6ba2f73eea4ff`.
+  Verification tier: `focused`
+  Focused checks: Read exact baseline-identical scoped windows; reconcile canonical Knowledge and proportionate proof, preserve source/task/history, and verify memory, book and normal doctrines.
+  Canonical trigger: Ordinary bounded source-reading leaf; no source or public-contract change, admission or parent closeout. Later prerequisites remain.
   Goal: Read and understand conformance/test/Unicode group 31.
   Scope: `capability_conformance/uniform_binding_contract.json` lines 169-179; `capability_conformance/write_map_leaves_composition_contract.json` lines 1-279; `capability_conformance/write_vivification_contract.json` lines 1-551; `cli_conformance/README.md` lines 1-136; `cli_conformance/cases/failure/stderr.txt` lines 1-1; `cli_conformance/cases/help/stdout.txt` lines 1-50; `cli_conformance/cases/success/input.txt` lines 1-1; `cli_conformance/cases/success/nested.spec` lines 1-5; `cli_conformance/cases/trace/appended_low.txt` lines 1-7; `cli_conformance/cases/trace/debug_emoji_stdout.txt` lines 1-12; `cli_conformance/cases/trace/failure_input_low.txt` lines 1-4; `cli_conformance/cases/trace/failure_invoke_escaped_medium.txt` lines 1-7; `cli_conformance/cases/trace/failure_invoke_low.txt` lines 1-6; `cli_conformance/cases/trace/failure_low.txt` lines 1-2; `cli_conformance/cases/trace/full.txt` lines 1-10; `cli_conformance/cases/trace/full_stdout.txt` lines 1-11; `cli_conformance/cases/trace/high_stdout.txt` lines 1-10; `cli_conformance/cases/trace/high_utf8_stdout.txt` lines 1-10; `cli_conformance/cases/trace/low.txt` lines 1-6; `cli_conformance/cases/trace/low_emoji.txt` lines 1-6; `cli_conformance/cases/trace/low_stdout.txt` lines 1-7; `cli_conformance/cases/trace/medium_stdout.txt` lines 1-8; `cli_conformance/cases/trace/stale.txt` lines 1-1; `cli_conformance/cases/usage/stderr.txt` lines 1-52; `cli_conformance/manifest.json` lines 1-33
   Baseline evidence: 1226 fragments / 65536 decoded bytes; ordered range SHA-256 `46bcea6e2c386c833619c7de753c78fac9d9d74b90b549cad7fde095626a6908`.
   Dependencies: .1.30 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 32 complete windows / 1226 fragments / 65536 bytes; ordered window SHA-256 `5367bdcaef3b98df9a837828a03650bbfc4f9eb853daadbf1e26883543e47912`.
+  Comprehension: Uniform-binding EOF fixes the final fixture output: ordered items b/a, split parts a/b, meta count2 and sorted first a. Write/map composition reads all six callbacks and one continuation: detached replacement is not revisited; unrelated writes survive later failure; receiver identity blocks nested writes before segment/RHS evaluation; distinct shadow bindings remain independent; continuation failure preserves the earlier receiver commit. Nested writes evaluate segments left to right then RHS before typed selector/structural validation, snapshot the resulting binding, build on an isolated copy, keep arrays dense, distinguish absent from bound null and preserve completed expression effects on structural failure. Every syntax, success, structural/evaluation failure, read exclusion and detachment fixture is read. Frozen future-neutral strings are intentionally retained by later admission and public owners. The CLI guide specifies strict schema/placeholders and raw byte comparison; help/errors and trace templates fix phase order, routing, escaping, emoji and UTF-8 byte counts. Manifest1-33 includes help/help_short and opens the next case; later cases remain .1.32-owned. Existing canonical facts own these mechanisms; new .2.2 tracks only the standalone example missing managed-storage setup. Targeted runner lines1-42/342-346 diagnose that documentation dependency without advancing tools-source reading.
+  Verification: Fresh managed write checker passes 5 valid/7 invalid syntax,11 success,16 structural and3 evaluation failures,3 read exclusions,8 composed writes and105 rejected mutations. Map checker passes4 valid/14 invalid syntax,5 exclusions,10 success,8 pre-commit failures,6 callback/1 continuation compositions and167+592 rejected mutations. Managed Perl help/help_short passes2/2. Retain unchanged uniform-binding proof from .1.30 at74ecae96e. Complete-window replay, inventory, cumulative coverage, preservation, book, memory and history checks govern this focused leaf; no full matrix or new cross-backend admission is claimed.
+  Candidate proof: All32 inventoried source windows consumed completely; replay confirms1226 fragments/65536 bytes. All160 baseline inputs/143 groups/302 ranges remain exact. Independent cumulative reading is31 groups/40657 fragments/1176512 bytes/77 complete files, with only CLI manifest partial. Preservation passes2493 exact prior files,2776 unchanged prior nodes, all94 book limitation headings and every prior Knowledge recipe/footer. Only this leaf, startup3.8 and finding parent2 change; exactly .2.2/.2.2.1/.2.2.2 are new. The single bounded checkpoint heading changes from Unicode to Conformance without losing prior text or exceeding24 lines. Fresh neutral write105 and map167+592 mutation rejection, Perl help2/2, rendered book and memory60lines/7380bytes pass. CHANGES186lines/37595bytes and notes144lines/34612bytes are OK; plain diff check passes. Known book-index warning remains startup41.9-owned. No unmanaged allocation, full matrix, canonical CI, dependency build or push.
+  Commit: `CONFORMANCE-SOURCE-READING.1.31 - read write composition and CLI fixture contracts`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.32`
   Status: `pending`
@@ -1709,6 +1716,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Verification: .1.1 confirms current capability-guide census/governance and generic-callable status drift behind passing structural checkers. Existing startup .41.7 owns count/workflow guidance; .41.6 owns the callable-current paragraph and claim recurrence. No duplicate repair leaf or runtime defect is invented. Exact evidence: conformance-capability-guide-reading.
   Reading continuation: .1.2 adds guide803-804 current-seventeenth and896-897 current80 claims to .41.7. Exact current diagnostic public metadata is15 documents/9 denials; its Knowledge card preserves the older dated16-document milestone and adds current evidence. No new runtime defect or duplicate repair root.
   Reading .1.30 extension: New .2.1 owns the exact stale neutral uniform-binding rollout guidance; its implementation and independent closeout remain prerequisite-gated. No runtime defect follows from the unchanged neutral cases.
+  Reading .1.31 extension: .2.2 owns the CLI guide standalone command missing its required managed-storage setup, with implementation and independent verification children. Frozen future-neutral mutation strings remain intentionally preserved under their admitted canonical authorities and are not new runtime defects.
   Commit: `pending`
 
 - ID: `CONFORMANCE-SOURCE-READING.2.1`
@@ -1738,6 +1746,33 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Verification: `pending`
   Commit: `pending`
 
+- ID: `CONFORMANCE-SOURCE-READING.2.2`
+  Status: `pending`
+  Goal: Make the standalone CLI fixture guide command establish required project-data storage.
+  Evidence: .1.31 reads cli_conformance/README.md lines7-13, which gives a direct Perl runner command without the initializer or managed wrapper. Canonical perl-project-data-ssd-storage requires one of those for direct low-level commands; neutral-cli-fixture-runner already shows the initializer. Targeted runner inspection at1-42 and342-346 confirms File::Temp with TMPDIR=>1 and no initializer at its entry. The example relies on an already-prepared shell. No unmanaged allocation was executed or claimed.
+  Scope: The standalone reference command in cli_conformance/README.md and a meaningful command/storage regression check; preserve runner behavior and all exact fixture bytes.
+  Children: `.2.2.1`, `.2.2.2`
+  Dependencies: Required startup reading/book/policy prerequisites before guidance repair; tools source reading remains independently owned by startup3.9.
+  Acceptance: Document the managed root-derived command or explicit initializer, verify the actual case workspace stays on the repository filesystem from a fresh launch environment, and preserve exact CLI results without RGX/PGEN rebuilds.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `CONFORMANCE-SOURCE-READING.2.2.1`
+  Status: `pending`
+  Goal: Correct the standalone CLI example's managed-storage setup and verify its execution.
+  Dependencies: Parent prerequisites.
+  Acceptance: Update the guide and applicable public pointer, use the existing project-data wrapper/initializer, run focused byte-exact CLI and actual workspace-locality checks, and commit before independent closeout.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `CONFORMANCE-SOURCE-READING.2.2.2`
+  Status: `pending`
+  Goal: Independently verify and close the CLI example storage correction.
+  Dependencies: `.2.2.1` committed with clean handoff.
+  Acceptance: Exercise the documented command in a fresh environment while keeping all generated data repository-local, verify actual child workspace locality and exact outputs, and preserve historical storage evidence and other repairs.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `CONFORMANCE-SOURCE-READING.3`
   Status: `pending`
   Goal: Independently reconcile all source/range/reading-commit/repair evidence and close only the required reading lane with applicable verification.
@@ -1750,7 +1785,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.31` | `pending` | `capability_conformance/uniform_binding_contract.json` lines 169-179; `capability_conformance/write_map_leaves_composition_contract.json` lines 1-279; `capability_conformance/write_vivification_contract.json` lines 1-551; `cli_conformance/README.md` lines 1-136; `cli_conformance/cases/failure/stderr.txt` lines 1-1; `cli_conformance/cases/help/stdout.txt` lines 1-50; `cli_conformance/cases/success/input.txt` lines 1-1; `cli_conformance/cases/success/nested.spec` lines 1-5; `cli_conformance/cases/trace/appended_low.txt` lines 1-7; `cli_conformance/cases/trace/debug_emoji_stdout.txt` lines 1-12; `cli_conformance/cases/trace/failure_input_low.txt` lines 1-4; `cli_conformance/cases/trace/failure_invoke_escaped_medium.txt` lines 1-7; `cli_conformance/cases/trace/failure_invoke_low.txt` lines 1-6; `cli_conformance/cases/trace/failure_low.txt` lines 1-2; `cli_conformance/cases/trace/full.txt` lines 1-10; `cli_conformance/cases/trace/full_stdout.txt` lines 1-11; `cli_conformance/cases/trace/high_stdout.txt` lines 1-10; `cli_conformance/cases/trace/high_utf8_stdout.txt` lines 1-10; `cli_conformance/cases/trace/low.txt` lines 1-6; `cli_conformance/cases/trace/low_emoji.txt` lines 1-6; `cli_conformance/cases/trace/low_stdout.txt` lines 1-7; `cli_conformance/cases/trace/medium_stdout.txt` lines 1-8; `cli_conformance/cases/trace/stale.txt` lines 1-1; `cli_conformance/cases/usage/stderr.txt` lines 1-52; `cli_conformance/manifest.json` lines 1-33; 1226 fragments/65536 bytes. Preserve complete bounded windows, source identity and all repairs. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.32` | `pending` | `cli_conformance/manifest.json` lines 34-1150; `t/actionir_ast_parser.t` lines 1-383; 1500 fragments/55235 bytes. Preserve complete bounded windows, source identity and all repairs. |
 
 ## Decisions
 
@@ -1763,6 +1798,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Verification Log
 
+- `2026-09-13` .1.31: Conformance .1.31 reads 32 complete windows, 1,226 fragments and 65,536 baseline-identical bytes. Physical reading is 31/143: 40,657 fragments, 1,176,512 bytes and 77 complete files. Uniform binding and both write contracts are fully read, along with the CLI guide and selected exact output fixtures. Frozen mutation metadata is reconciled with later admitted owners. Neutral write/map checks and both managed Perl help cases pass. New .2.2 owns missing storage setup in the standalone guide example. The bounded reading checkpoint is named for its broader conformance scope. Next .1.32 owns later CLI manifest cases; existing repairs remain open.
 - `2026-09-13` .1.30: Conformance .1.30 reads 5 complete windows, 1,500 fragments and 23,627 baseline-identical bytes. Physical reading is 30/143: 39,431 fragments, 1,110,976 bytes and 53 complete files. All 806 rule-label ranges and 9 positive/8 negative/2 distinct fixtures are read. The uniform-binding prefix specifies typed bare reads, mutation results, exact selector retirement and retained constructors. Fresh neutral binding proof passes; new .2.1 owns stale rollout guidance with repair and independent verification children. Next .1.31 owns the final fixture expectations and later contracts; runtime repairs remain open.
 - `2026-09-13` .1.29: Conformance .1.29 reads 3 complete windows, 1,500 fragments and 15,123 baseline-identical bytes. Physical reading is 29/143: 37,931 fragments, 1,087,349 bytes and 52 complete files. Rule-label reading now covers 494 complete XID_Continue ranges, including Indic scripts, Hangul, compatibility forms and supplementary scalars, with every gap preserved. The next lower endpoint 10A3F remains .1.30-owned. Unchanged offline generation proof from .1.28 is retained; all runtime repairs remain open.
 - `2026-09-13` .1.28: Conformance .1.28 reads 3 complete windows, 1,500 fragments and 17,109 baseline-identical bytes. Physical reading is 28/143: 36,431 fragments, 1,072,226 bytes and 52 complete files. The casing contract is fully read: 464 Case_Ignorable ranges, the separate Final Sigma rule and all 12 fixtures. The rule-label prefix fixes exact scalar identity and admits XID_Continue at every position, with 119 complete ranges read. Fresh offline rule-label regeneration passes. Next .1.29 owns the crossing 0B8E range and continuation; runtime repairs remain open.
@@ -1797,6 +1833,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Commit Log
 
+- `2026-09-13` .1.31: `CONFORMANCE-SOURCE-READING.1.31 - read write composition and CLI fixture contracts`; activation 74ecae96ebe59e4d40856ea62ee6ba2f73eea4ff; next .1.32 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.30: `CONFORMANCE-SOURCE-READING.1.30 - complete rule-label data and read uniform-binding contract`; activation 1fe980f972a650b77e7f1e55e18da67e4f12a8f5; next .1.31 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.29: `CONFORMANCE-SOURCE-READING.1.29 - read rule-label ranges through supplementary scripts`; activation ddbdbbc9a442d48ea150224d4ae45bfa1303b6cb; next .1.30 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.28: `CONFORMANCE-SOURCE-READING.1.28 - complete casing contract and read rule-label policy`; activation 7f0d7ffd3b40c0fed3f24088750e69f32615e30f; next .1.29 after clean handoff and zero-byte brief.
@@ -1831,6 +1868,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Changelog
 
+- `2026-09-13` .1.31: Uniform binding and both write contracts are fully read, along with the CLI guide and selected exact output fixtures. Frozen mutation metadata is reconciled with later admitted owners. Neutral write/map checks and both managed Perl help cases pass. New .2.2 owns missing storage setup in the standalone guide example. The bounded reading checkpoint is named for its broader conformance scope. Next .1.32 owns later CLI manifest cases; existing repairs remain open.
 - `2026-09-13` .1.30: All 806 rule-label ranges and 9 positive/8 negative/2 distinct fixtures are read. The uniform-binding prefix specifies typed bare reads, mutation results, exact selector retirement and retained constructors. Fresh neutral binding proof passes; new .2.1 owns stale rollout guidance with repair and independent verification children. Next .1.31 owns the final fixture expectations and later contracts; runtime repairs remain open.
 - `2026-09-13` .1.29: Rule-label reading now covers 494 complete XID_Continue ranges, including Indic scripts, Hangul, compatibility forms and supplementary scalars, with every gap preserved. The next lower endpoint 10A3F remains .1.30-owned. Unchanged offline generation proof from .1.28 is retained; all runtime repairs remain open.
 - `2026-09-13` .1.28: The casing contract is fully read: 464 Case_Ignorable ranges, the separate Final Sigma rule and all 12 fixtures. The rule-label prefix fixes exact scalar identity and admits XID_Continue at every position, with 119 complete ranges read. Fresh offline rule-label regeneration passes. Next .1.29 owns the crossing 0B8E range and continuation; runtime repairs remain open.

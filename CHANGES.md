@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.31 — read write composition and CLI fixture contracts
+
+Conformance .1.31 reads 32 complete windows, 1,226 fragments and 65,536 baseline-identical bytes. Physical reading is 31/143: 40,657 fragments, 1,176,512 bytes and 77 complete files. Uniform binding and both write contracts are fully read, along with the CLI guide and selected exact output fixtures. Frozen mutation metadata is reconciled with later admitted owners. Neutral write/map checks and both managed Perl help cases pass. New .2.2 owns missing storage setup in the standalone guide example. The bounded reading checkpoint is named for its broader conformance scope. Next .1.32 owns later CLI manifest cases; existing repairs remain open.
+
+Fresh managed write checker passes 5 valid/7 invalid syntax,11 success,16 structural and3 evaluation failures,3 read exclusions,8 composed writes and105 rejected mutations. Map checker passes4 valid/14 invalid syntax,5 exclusions,10 success,8 pre-commit failures,6 callback/1 continuation compositions and167+592 rejected mutations. Managed Perl help/help_short passes2/2. Retain unchanged uniform-binding proof from .1.30 at74ecae96e. Complete-window replay, inventory, cumulative coverage, preservation, book, memory and history checks govern this focused leaf; no full matrix or new cross-backend admission is claimed.
+
 ## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.30 — complete rule-label data and read uniform-binding contract
 
 Conformance .1.30 reads 5 complete windows, 1,500 fragments and 23,627 baseline-identical bytes. Physical reading is 30/143: 39,431 fragments, 1,110,976 bytes and 53 complete files. All 806 rule-label ranges and 9 positive/8 negative/2 distinct fixtures are read. The uniform-binding prefix specifies typed bare reads, mutation results, exact selector retirement and retained constructors. Fresh neutral binding proof passes; new .2.1 owns stale rollout guidance with repair and independent verification children. Next .1.31 owns the final fixture expectations and later contracts; runtime repairs remain open.

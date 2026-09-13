@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `1fe980f972a650b77e7f1e55e18da67e4f12a8f5` — clean Unicode table-reading activation.
-- latest_completed_leaf: `CONFORMANCE-SOURCE-READING.1.30 - complete rule-label data and read uniform-binding contract`; physical reading30/143,53 complete files and rule-label through EOF and uniform-binding1-168.
-- active_work_unit: `CONFORMANCE-SOURCE-READING.1.31` — Conformance source continuation.
-- next_action: Read CONFORMANCE-SOURCE-READING.1.31 from clean HEAD. Its exact25-path scope is in docs/tasks/CONFORMANCE-SOURCE-READING.md at that stable ID: uniform-binding169-179, write/map contracts and CLI guide/fixtures/manifest. Total1226 fragments/65536 bytes. Read every bounded window, reconcile scoped proof, update live records/book and commit before .1.32. Continue PNT.
+- activation_commit: `74ecae96ebe59e4d40856ea62ee6ba2f73eea4ff` — clean Unicode table-reading activation.
+- latest_completed_leaf: `CONFORMANCE-SOURCE-READING.1.31 - read write composition and CLI fixture contracts`; physical reading31/143,77 complete files and CLI manifest1-33.
+- active_work_unit: `CONFORMANCE-SOURCE-READING.1.32` — Conformance source continuation.
+- next_action: Read CONFORMANCE-SOURCE-READING.1.32 from clean HEAD using its exact Scope in docs/tasks/CONFORMANCE-SOURCE-READING.md. Total 1500 fragments/55235 bytes. Read complete bounded windows, reconcile scoped proof, update live records/book and commit before .1.33. Continue PNT.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
 - in_flight_uncommitted: none; reading evidence, exact claim/repair ownership and next action committed at Git HEAD; no background result remains.
-- blockers: none for authorized read-only PNT at conformance .1.31. Existing runtime/guide repairs, source prerequisites and later canonical boundaries remain; registry ceilings are unchanged.
+- blockers: none for authorized read-only PNT at conformance .1.32. Existing runtime/guide repairs, source prerequisites and later canonical boundaries remain; registry ceilings are unchanged.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -57,4 +57,4 @@
   Conformance .1.4 preserves clean baaebc8e CHANGES242-457 as segment4976-6d1dd54d605a:216 lines/18973 bytes; all earlier archive records and controls remain exact. Proportionate governance: ADR0115.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; five backend lanes and supporting .3.7 closed. Conformance30/143 reads39431 fragments/1110976 bytes;113 groups remain, including conformance tests and four decoded Unicode inputs. Later .3.9-.3.11, formal book .4 and policy .5 remain; no runtime repair closes.
+- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; five backend lanes and supporting .3.7 closed. Conformance31/143 reads40657 fragments/1176512 bytes;112 groups remain, including conformance tests and four decoded Unicode inputs. Later .3.9-.3.11, formal book .4 and policy .5 remain; no runtime repair closes.
