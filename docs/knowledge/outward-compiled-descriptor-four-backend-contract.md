@@ -8,7 +8,7 @@ answers:
   - "how is descriptor shape drift prevented"
   - "is compiled descriptor parity complete"
   - "which outward descriptor metadata variant does Perl use"
-date: 2026-07-18
+date: 2026-09-13
 status: current; Perl, Rust, Dart, Julia, and Lua use cursor v1
 tags: [descriptor, public-api, perl, rust, dart, julia, lua, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.6.2.3 adds capability_conformance/outward_descriptor_contract.json and focused consumers. All variants expose the same four top-level keys, model/order/count identities, and exact function record. FUTURE-PARITY-BACKLOG.9.1.3.3 adds explicit metadata variants; .9.1.4.4 migrates Rust, .9.1.5.3 migrates Dart, .9.1.6.3 migrates Julia, and .9.1.7.3 migrates Lua on both ABIs to rule_local_cursor_v1 with cursor_contract and no parse_mode."
@@ -19,7 +19,7 @@ reverify: "cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test 
 
 `capability_conformance/outward_descriptor_contract.json` is the executable public schema. It fixes the exact
 top-level keys to `spec`, `functions`, `dependency_regex_map`, and `meta`; requires the composing and nested model
-identities plus order/count metadata; and fixes each function record to:
+identities plus order/count metadata; and fixes the `fixed_v1` function record to:
 
 `index`, `kind`, `version`, `name`, `params`, `arity`, `source_text`, `source_span`, `body_span`, `body_source`,
 `body_payload`, `body_parse_job`, and `body_ast`.
@@ -36,3 +36,14 @@ Rust's typed projection already uses the canonical fields. Julia and Lua additio
 `SpecFile`-JSON, and loaded descriptor byte identity across all 36 cursor families and every normalized edge. Lua
 runs that proof on both PUC Lua and LuaJIT. This prevents any variant's internal serialization convention from
 silently redefining the shared user-facing API.
+
+
+## September 13 complete neutral descriptor reading
+
+`CONFORMANCE-SOURCE-READING.1.7` reads the complete127-line contract. Its
+`function_record_variants` is the existing three-way outward union: fixed-v1
+retains `params`/`arity`, variadic-v2 substitutes `signature`, and final-codeblock-v3
+adds exact `parameter_kinds` to the fixed fields. The general field list above
+describes fixed-v1 only; it does not remove the other variants. The exact policy
+and prior admission live in [[lua-outward-function-descriptor-union]]. No schema,
+backend behavior, cursor variant or prior admission evidence changes here.

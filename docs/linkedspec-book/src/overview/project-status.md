@@ -497,15 +497,15 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 decoded bytes. Six groups now account for
-6,290 fragments and 377,591 bytes, including 25 complete files. MCP transport
-frames, corpus, schema and semantic payloads are fully read. A native semantic
-failure (`ok: false`) remains a successful tool response (`isError: false`);
-handle and deployment-policy errors instead use the tool-error layer. Canonical
-semantic text matches structured content. Existing transport checks pass over
-unchanged sources, while known runtime boundary defects retain their repair tasks.
-Validator-case reading continues in the next group. Named-argument support remains
-an approved future direction. The capability guide still has stale
+143 bounded groups covering 8,257,059 decoded bytes. Seven groups now account for
+7,790 fragments and 437,697 bytes, including 29 complete files. Native file
+resolution preserves exact UTF-8 and searches explicit roots in order. Outward
+function descriptors have fixed, variadic and final-codeblock variants. The
+progressive-dispatch contract uses precompiled logical registry entries and
+same-source spans; it grants no file-loading authority during a parse. Neutral
+resolution and progressive checks pass. Known runtime resource and nested-dispatch
+defects retain their repair tasks, and the progressive suffix remains unread.
+Named-argument support remains an approved future direction. The capability guide still has stale
 current census, governance/inventory/public counts and generic-callable wording.
 Existing startup `.41.6` and `.41.7` now own these exact paragraphs and meaningful
 checks against recurrence. Their selected-marker guards currently miss the

@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 6/143
+- Status: `active` / exact decomposition; physical reading 7/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-13`
@@ -153,14 +153,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.6 - complete transport corpus schema and semantic payload reading`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.7`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `421f22390a01faf444454f54951816be099f576c`.
+  Verification tier: `focused`
+  Focused checks: Read exact baseline-identical validator and contract windows; reconcile Knowledge and relevant neutral proof, preserve source/task/history, and verify memory, book and normal doctrines.
+  Canonical trigger: Ordinary bounded source-reading leaf; no source or public-contract change, admission or parent closeout. Later prerequisites remain.
   Goal: Read and understand conformance/test/Unicode group 7.
   Scope: `capability_conformance/mcp_semantic_transport/validator_cases.json` lines 52-343; `capability_conformance/mcp_semantic_transport_contract.json` lines 1-230; `capability_conformance/native_spec_resolution_contract.json` lines 1-311; `capability_conformance/outward_descriptor_contract.json` lines 1-127; `capability_conformance/progressive_span_dispatch_contract.json` lines 1-540
   Baseline evidence: 1500 fragments / 60106 decoded bytes; ordered range SHA-256 `a9c824478084ba0d345cc6f750a131554c686936a48531859ba614196ec78343`.
   Dependencies: .1.6 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 12 complete windows / 1500 fragments / 60106 bytes; ordered window SHA-256 `16e2f33dfee846d4d30edb88eb6644974a9877f819f338b1e1b5f3252e88385c`.
+  Comprehension: Validator completion binds 28 accepted/seven rejected frames and all76 reason-classified mutations; the complete manifest fixes artifact digests, policy-component presence, canonical semantic text and lifecycle boundaries. Native resolution distinguishes exact paths from ordered nonrecursive named roots, selects the first regular file, and preserves strict UTF-8 including BOM/normalization/newlines. Outward metadata retains explicit historical/current cursor variants and fixed-v1, variadic-v2 and final-codeblock-v3 records. Progressive prefix fixes host-precompiled logical registry entries, direct same-source scalar spans, global rebasing, isolated parent state, detached results, intersected grants and stricter ceilings. Six authority cases and the cancellation prefix remain separate from known combined runtime gaps; token-replacement expectation and all later cases remain .1.8-owned.
+  Verification: complete12-window/source, all143-group/302-range and cumulative reading audits; fresh native resolution14/9/4 and progressive9/9/116 plus public6/12/10/60 neutral proof. MCP35/10/10/76 and admission complete/141 remain dated unchanged-source .1.5 evidence; callable/signature evidence remains dated .1.1 proof. Preserve source/task/history and prior recipes; memory, Knowledge, both history checks, rendered book, git diff --check and normal doctrines govern focused landing. No native matrix, dependency build or runtime repair is claimed.
+  Candidate proof: Recorded12-window, all143-group/302-range and cumulative7-group/7790-fragment/437697-byte/29-complete-file audits PASS. Preserve2488 prior files, prior recipe blocks,2774/2776 nodes and all94 book limitation headings; only this leaf/startup .3.8 change. Memory60, CHANGES265/36669 and notes411/53651 lines/bytes, rendered book and git diff --check PASS. Notes are at the advisory pressure threshold; no rollover is yet required and all collection limits remain unchanged. Native14/9/4 and progressive9/9/116/public6/12/10/60 results are fully consumed. Normal doctrines govern focused landing.
+  Commit: `CONFORMANCE-SOURCE-READING.1.7 - read resolution descriptor and progressive dispatch contracts`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.8`
   Status: `pending`
@@ -1543,7 +1550,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.7` | `pending` | Read validator cases52-343, transport/native-resolution/outward contracts and progressive dispatch1-540:1500 exact fragments; preserve complete windows and existing repairs. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.8` | `pending` | Read progressive541-1540, punctuation/recognition contracts, three explicit-or fixtures and repeated-result1-157:1500 fragments/65525 bytes. Preserve crossing-case ownership and existing repairs. |
 
 ## Decisions
 
@@ -1556,6 +1563,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Verification Log
 
+- `2026-09-13` .1.7: Conformance .1.7 reads 12 complete windows, 1,500 fragments and 60,106 baseline-identical bytes. Validator cases, transport manifest, native resolution and outward descriptors reach EOF; progressive dispatch is read through line 540. Physical reading is 7/143: 7,790 fragments, 437,697 bytes and 29 complete files. Fresh native-resolution14/9/4 and progressive9/9/116 plus public6/12/10/60 neutral checks pass. Exact paths, ordered named roots, preserved UTF-8, three outward function variants and bounded same-source child dispatch retain distinct authorities. The general descriptor fact card now explicitly qualifies its fixed-v1 field list. Existing progressive resource/nesting, MCP EOF/validation-order and other repair obligations remain open; .1.8 owns the crossing cancellation case and following contracts.
 - `2026-09-13` .1.6: Conformance .1.6 reads 12 complete windows covering 1,500 fragments and 63,045 baseline-identical bytes. Canonical frames, corpus, schema and four semantic payloads reach EOF; validator cases are read through line 51. Physical reading is 6/143, cumulatively 6,290 fragments and 377,591 bytes with 25 complete files. The contract separates JSON-RPC errors, tool errors and semantic ok:false results, retains canonical text/structured identity, and bounds policy projection and query input independently. The .1.5 materializer/transport/admission results remain dated unchanged-source proof; no redundant native or dependency build runs. Existing Rust EOF and validation-order defects remain owned and open. Next .1.7 completes validator cases and continues neutral contracts.
 - `2026-09-13` .1.5: Conformance .1.5 reads 11 complete source windows in 13 presentations, covering 690 fragments/65,516 baseline-identical bytes. Map-leaves and MCP admission reach EOF; canonical frames1-12 are read, including the complete14,687-byte tools-list line in three contiguous chunks. Physical reading is5/143, cumulatively4,790 fragments/314,546 bytes with21 complete files. MCP materialization matches35 frames/10 raw inputs/10 lifecycle cases; independent transport validation rejects76 mutations, and admission reports5/5 implementations plus6/6 runtimes with141 mutations. Prior mutation167+592 proof remains unchanged-source dated evidence. Receiver identity, callback atomicity and post-commit continuation remain distinct from runtime admission and transport payload identity. All existing repairs, source/history and capacity limits remain; frames13-35 and following sources belong to .1.6.
 - `2026-09-13` .1.4: Conformance .1.4 reads 13 complete windows, 1,022 fragments and 65,375 baseline-identical bytes. Gap, logical-helper and capability-manifest reading reaches EOF; map-leaves reading covers only lines1-33. Physical reading is 4/143, cumulatively 4,100 fragments/249,030 bytes and 19 complete files. Logical proof passes 17 truthiness/10 helper/3 effect/26 mutation cases; capability schema v2 records 20 capabilities/100 pass states/one legacy exclusion; map-leaves neutral proof rejects 167 base plus 592 composition mutations. Frozen mutation status and later external admission remain distinct, and current logical/gap public inventories reconcile with their dated milestones. Existing source, runtime repair and capacity obligations remain. The prescribed change-history rollover preserves exact clean-HEAD suffix records; next .1.5 owns map-leaves34-461 and subsequent MCP sources.
@@ -1566,6 +1574,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Commit Log
 
+- `2026-09-13` .1.7: `CONFORMANCE-SOURCE-READING.1.7 - read resolution descriptor and progressive dispatch contracts`; activation 421f22390a01faf444454f54951816be099f576c; next .1.8 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.6: `CONFORMANCE-SOURCE-READING.1.6 - complete transport corpus schema and semantic payload reading`; activation cc278a5c692aa7da1004d51a1d7a7bcc19c3dade; next .1.7 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.5: `CONFORMANCE-SOURCE-READING.1.5 - read mutation and MCP admission with complete transport chunks`; activation 24d3b9347d30254d4e3e2bc1a7b1df238aa3cad5; next .1.6 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.4: `CONFORMANCE-SOURCE-READING.1.4 - read gap logical and capability authorities with frozen mutation prefix`; activation baaebc8ef62baf84447767c2b361458c3ac57d9e; next .1.5 after clean handoff and zero-byte brief.
@@ -1576,6 +1585,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Changelog
 
+- `2026-09-13` .1.7: Complete validator/transport/native-resolution/outward sources; qualify the fixed-v1 fact-card list against the existing three-variant union. Progressive cancellation continues in .1.8; all repairs remain.
 - `2026-09-13` .1.6: Complete transport frames, corpus, schema and semantic payloads; preserve all previous source, reading and repair evidence. Validator suffix remains .1.7-owned.
 - `2026-09-13` .1.5: Complete mutation/MCP admission and twelve canonical frames, with independently replayable full long-line chunks; all repairs and later source scopes remain.
 - `2026-09-13` .1.4: Complete gap/logical/manifest sources and frozen mutation prefix; retain all existing repairs and apply the required exact history rollover.

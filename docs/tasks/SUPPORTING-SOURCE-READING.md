@@ -477,7 +477,7 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.7` | `pending` | Read validator cases52-343, transport/native-resolution/outward contracts and progressive dispatch1-540:1500 exact fragments; preserve complete windows and existing repairs. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.8` | `pending` | Read progressive541-1540, punctuation/recognition contracts, three explicit-or fixtures and repeated-result1-157:1500 fragments/65525 bytes. Preserve crossing-case ownership and existing repairs. |
 
 ## Decisions
 

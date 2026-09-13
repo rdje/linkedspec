@@ -9,7 +9,7 @@ answers:
   - "how do I verify conformance reading source and range coverage"
   - "which conformance source reading file has the longest line"
 date: 2026-09-13
-status: exact decomposition preserved; physical reading 6/143, twenty-five files complete and137 groups remain
+status: exact decomposition preserved; physical reading 7/143, twenty-nine files complete and136 groups remain
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -263,3 +263,21 @@ remain dated proof over identical sources. No native execution is repeated or
 inferred. [[rust-mcp-final-eof-byte-limit-gap]] remains open; separate raw and
 lifecycle cases do not establish its combined boundary. Startup `.36` competing
 validation precedence and `.5` historical ADR qualification also retain their owners.
+
+
+## September 13 resolution, descriptor and progressive-prefix reading
+
+`.1.7` reads12 complete windows, 1,500 fragments and60,106 baseline-identical bytes.
+Validator cases, transport manifest, native resolution and outward descriptors
+reach EOF; progressive dispatch1–540 stops inside the token-replacement case.
+Cumulative reading is7/143, 7,790 fragments, 437,697 bytes and29 complete files.
+
+[[native-spec-resolution-contract]] distinguishes exact paths from ordered named
+roots and preserved UTF-8. [[lua-outward-function-descriptor-union]] qualifies the
+fixed-v1 list in [[outward-compiled-descriptor-four-backend-contract]] with v2/v3;
+this checkpoint adds that explicit qualification to the older general card.
+[[progressive-span-dispatch-audit-plan]] and [[progressive-span-dispatch-recurring-gate]]
+describe the admitted private contract, while [[perl-progressive-resource-ceiling-enforcement-gap]]
+retains the known combined-boundary exception. Fresh native14/9/4 and progressive
+9/9/116 plus public6/12/10/60 neutral checks pass without runtime repair or a matrix.
+MCP and callable/signature proof remain dated unchanged-source evidence.
