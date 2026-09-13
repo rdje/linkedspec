@@ -9,7 +9,7 @@ answers:
   - "how do I verify conformance reading source and range coverage"
   - "which conformance source reading file has the longest line"
 date: 2026-09-13
-status: exact decomposition preserved; physical reading 8/143, thirty-five files complete and135 groups remain
+status: exact decomposition preserved; physical reading 9/143, thirty-seven files complete and134 groups remain
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -300,3 +300,20 @@ do not close their combined boundaries. Fresh punctuation6/4/6 and recognition
 138/250/58/public3/26/45 proof passes. The punctuation card's historical no-emitter
 sentence is qualified against [[lua-generated-source-accepted-subset]] and existing
 Lua admission; its original dated evidence remains intact.
+
+
+## September 13 repetition, root and cursor reading
+
+`.1.9` reads11 complete windows, 1,445 fragments and65,519 baseline-identical bytes.
+Repetition/root-selection reach EOF; cursor1–160 stops inside Rust admission roles.
+Cumulative reading is9/143, 10,735 fragments, 568,741 bytes and37 complete files.
+
+[[explicit-or-action-result-shape-parity-gap]] separates iteration values and
+lifecycle exits. [[root-rule-selection-precedence]] separates dynamic selection
+from authored marker bits and strict-unused references. [[rule-local-cursor-neutral-contract]]
+owns intrinsic child policy, bare ownership, removed overrides and generated-v2
+families. Fresh repetition8/10/8-complete/54, root8/3/3/7-complete/54 and cursor
+36/18/8/74-files/8-complete/60 proof passes. Current root24/18 and cursor30/28
+public inventories reconcile the dated README-routing/formal-grammar updates in
+[[root-rule-selection-five-backend-admission]] and [[rule-local-cursor-public-no-drift]].
+No native execution or runtime repair is inferred; all earlier obligations remain.

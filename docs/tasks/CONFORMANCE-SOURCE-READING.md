@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 8/143
+- Status: `active` / exact decomposition; physical reading 9/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-13`
@@ -187,14 +187,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.8 - read progressive recognition and repetition boundaries`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.9`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `445764d606459a8ff43ecb4c985b0a189593d3b3`.
+  Verification tier: `focused`
+  Focused checks: Read exact baseline-identical repetition, root-selection and cursor windows; reconcile Knowledge and neutral proof, preserve source/task/history, and verify memory, book and normal doctrines.
+  Canonical trigger: Ordinary bounded source-reading leaf; no source or public-contract change, admission or parent closeout. Later prerequisites remain.
   Goal: Read and understand conformance/test/Unicode group 9.
   Scope: `capability_conformance/repeated_action_result_contract.json` lines 158-847; `capability_conformance/root_rule_selection_contract.json` lines 1-595; `capability_conformance/rule_local_cursor_contract.json` lines 1-160
   Baseline evidence: 1445 fragments / 65519 decoded bytes; ordered range SHA-256 `135c54aa02b37554375ab204571cd6504dd495568402b442c3bed9e8babc32fa`.
   Dependencies: .1.8 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 1445 fragments / 65519 bytes; ordered window SHA-256 `efb42fa254acbed3659f9cf617be4be0ec7209de9bd814574dface3d87bd7a38`.
+  Comprehension: Repeated-result completion preserves first-authored duplicate-slot choice per hit, nested arrays and null elements, zero/below-minimum results, lifecycle whole-rule overrides, exact generated-v2 family validation and selected-slot trace identity. Its Perl ten-role and peer fifteen-role admissions remain distinct from the single selected primary case. Root selection runs after structural validation and before user code, uses explicit/first-marker/first-rule precedence, and never changes authored is_top or strict-unused graph edges. Six runtime routes and the 24-document/18-denial public inventory preserve that state. Cursor prefix derives seek/consume from each child family, normalizes bare ownership after forward resolution, rejects mixed ownership and global overrides, and fixes generated-v2 families without serialized cursor policy. Rust admission roles continue beyond line160 under .1.10.
+  Verification: complete11-window/source, all143-group/302-range and cumulative reading audits; fresh repetition8 modes/10 special/8 complete/54 mutations, root8 selections/3 failures/3 strict/7 complete/24 public/18 denials/54 mutations, cursor36 families/18 edges/8 parent-child/74 files/8 complete/30 public/28 denials/60 mutations. Preserve source/task/history and all prior recipes; memory, Knowledge, both history checks, rendered book, git diff --check and normal doctrines govern focused landing. No native matrix, dependency build or runtime repair is claimed.
+  Candidate proof: Recorded11-window, all143-group/302-range and cumulative9-group/10735-fragment/568741-byte/37-complete-file audits PASS. Preserve2489 prior files, prior recipe blocks,2774/2776 nodes and all94 book limitation headings; only this leaf/startup .3.8 change. Memory60, CHANGES277/39652 and notes423/56903 lines/bytes, rendered book and git diff --check PASS. Notes remain advisory-only with no required rollover. Final book/projection edits pass fresh repetition8/10/8/54, root8/3/3/7/24-public/18-denials/54 and cursor36/18/8/74-files/8-complete/30-public/28-denials/60 checks. All results consumed; normal doctrines govern focused landing.
+  Commit: `CONFORMANCE-SOURCE-READING.1.9 - read repetition root selection and cursor ownership`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.10`
   Status: `pending`
@@ -1557,7 +1564,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.9` | `pending` | Read repeated-result158-847, root-selection1-595 and cursor1-160:1445 fragments/65519 bytes. Preserve complete windows, crossing-case ownership and all repairs. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.10` | `pending` | Read cursor161-390, numeric/text contracts, six semantic fixtures and semantic contract1-363:789 fragments/65489 bytes. Preserve exact bounded presentation and all repairs. |
 
 ## Decisions
 
@@ -1570,6 +1577,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Verification Log
 
+- `2026-09-13` .1.9: Conformance .1.9 reads 11 complete windows, 1,445 fragments and 65,519 baseline-identical bytes. Repetition and root-selection contracts reach EOF; the cursor contract is read through line 160. Physical reading is 9/143: 10,735 fragments, 568,741 bytes and 37 complete files. Fresh repetition8/10/8-complete/54, root8/3/3/7-complete/54 and cursor36/18/8/74-files/8-complete/60 neutral proof passes. Repetition values, lifecycle exits, authored marker identity, execution selection, strict-unused edges and intrinsic child cursor policy remain distinct. Current root public24/18 and cursor public30/28 inventories reconcile their dated milestones. No source or runtime defect changes; .1.10 owns the crossing Rust cursor-role list and following scalar/semantic inputs.
 - `2026-09-13` .1.8: Conformance .1.8 reads 15 complete windows, 1,500 fragments and 65,525 baseline-identical bytes. Progressive dispatch, punctuation aliases, recognition transactions and three explicit-OR fixture files reach EOF; the repetition contract is read through line 157. Physical reading is 8/143: 9,290 fragments, 503,222 bytes and 35 complete files. Fresh punctuation6/4/6 and recognition138/250/58 plus public3/26/45 proof pass. The contracts separate parent recognition progress, bounded child dispatch, strict match booleans, staged payloads and per-hit repetition returns. The older punctuation fact card now qualifies its pre-emitter Lua milestone using existing generated-source admission. All runtime repairs remain open; .1.9 owns the crossing bounded-repetition case and following contracts.
 - `2026-09-13` .1.7: Conformance .1.7 reads 12 complete windows, 1,500 fragments and 60,106 baseline-identical bytes. Validator cases, transport manifest, native resolution and outward descriptors reach EOF; progressive dispatch is read through line 540. Physical reading is 7/143: 7,790 fragments, 437,697 bytes and 29 complete files. Fresh native-resolution14/9/4 and progressive9/9/116 plus public6/12/10/60 neutral checks pass. Exact paths, ordered named roots, preserved UTF-8, three outward function variants and bounded same-source child dispatch retain distinct authorities. The general descriptor fact card now explicitly qualifies its fixed-v1 field list. Existing progressive resource/nesting, MCP EOF/validation-order and other repair obligations remain open; .1.8 owns the crossing cancellation case and following contracts.
 - `2026-09-13` .1.6: Conformance .1.6 reads 12 complete windows covering 1,500 fragments and 63,045 baseline-identical bytes. Canonical frames, corpus, schema and four semantic payloads reach EOF; validator cases are read through line 51. Physical reading is 6/143, cumulatively 6,290 fragments and 377,591 bytes with 25 complete files. The contract separates JSON-RPC errors, tool errors and semantic ok:false results, retains canonical text/structured identity, and bounds policy projection and query input independently. The .1.5 materializer/transport/admission results remain dated unchanged-source proof; no redundant native or dependency build runs. Existing Rust EOF and validation-order defects remain owned and open. Next .1.7 completes validator cases and continues neutral contracts.
@@ -1582,6 +1590,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Commit Log
 
+- `2026-09-13` .1.9: `CONFORMANCE-SOURCE-READING.1.9 - read repetition root selection and cursor ownership`; activation 445764d606459a8ff43ecb4c985b0a189593d3b3; next .1.10 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.8: `CONFORMANCE-SOURCE-READING.1.8 - read progressive recognition and repetition boundaries`; activation 708ecbff2b1741c666f4399986270f002b8a6162; next .1.9 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.7: `CONFORMANCE-SOURCE-READING.1.7 - read resolution descriptor and progressive dispatch contracts`; activation 421f22390a01faf444454f54951816be099f576c; next .1.8 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.6: `CONFORMANCE-SOURCE-READING.1.6 - complete transport corpus schema and semantic payload reading`; activation cc278a5c692aa7da1004d51a1d7a7bcc19c3dade; next .1.7 after clean handoff and zero-byte brief.
@@ -1594,6 +1603,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Changelog
 
+- `2026-09-13` .1.9: Complete repetition/root-selection reading and cursor prefix; reconcile current public inventories without changing source, authority, historical evidence or repair state.
 - `2026-09-13` .1.8: Complete progressive, punctuation, recognition and repetition fixtures; qualify the dated no-emitter projection through existing Lua admission. Repetition suffix and all runtime repairs remain owned.
 - `2026-09-13` .1.7: Complete validator/transport/native-resolution/outward sources; qualify the fixed-v1 fact-card list against the existing three-variant union. Progressive cancellation continues in .1.8; all repairs remain.
 - `2026-09-13` .1.6: Complete transport frames, corpus, schema and semantic payloads; preserve all previous source, reading and repair evidence. Validator suffix remains .1.7-owned.

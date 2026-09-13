@@ -2268,7 +2268,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.9` | `pending` | Read repeated-result158-847, root-selection1-595 and cursor1-160:1445 fragments/65519 bytes. Preserve complete windows, crossing-case ownership and all repairs. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.10` | `pending` | Read cursor161-390, numeric/text contracts, six semantic fixtures and semantic contract1-363:789 fragments/65489 bytes. Preserve exact bounded presentation and all repairs. |
 
 ## Decisions
 
