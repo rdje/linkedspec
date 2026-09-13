@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 33/51; .1.34 follows child 33; .2.1-.2.33 own thirty-three concrete repair roots, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 34/51; .1.35 follows child 34; .2.1-.2.33 own thirty-three concrete repair roots, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.33 completes MCP binding, admission and dispatch tests and reads stdio lines 1-193 in nine complete windows: 1,500 fragments /63,081 bytes; cumulative 33/51, 45,151 fragments /1,682,742 bytes. All 99 Lua sources remain baseline-identical; 62 files are fully read. Both installed hosts pass 1,368 assertions: binding116, admission281, dispatch216 and stdio-prefix71 each. Generated binding remains byte-fresh at 83,166 bytes; neutral admission passes 5/5 implementations, 6/6 runtimes and 141 mutations with complete rollout. Admission marker checks are distinguished from private pre-emission execution owned by the later stdio range. Existing .2.1 gains precise bundle-size and rollout guidance qualification; all thirty-three repair roots and earlier failures remain open. Next .1.34 completes stdio and reads progressive dispatch, storage, recognition and recursive-observation ranges; named arguments and startup/ADR0118 prerequisites remain unchanged.
+  Verification: Lua .1.34 completes stdio, progressive-span, storage and recognition tests and reads recursive-observation lines 1-142 in ten complete windows: 1,500 fragments /59,616 bytes; cumulative 34/51, 46,651 fragments /1,742,358 bytes. All 99 Lua sources remain baseline-identical; 66 files are fully read. Both installed hosts pass 1,352 assertions: stdio247, progressive178, recognition246 and recursive-lowering5 each. Full stdio executes pre-emission cancellation; storage passes 19 owners and three native modules per ABI with exact cleanup. Neutral progressive9/9/116/public6/12/10/60 and recognition138/250/58 pass. Existing .2.1 owns precise stage/count/module guidance qualification; all thirty-three repair roots and earlier failures remain open. Next .1.35 completes recursive observation and reads repeated-action and root-selection ranges; named arguments and startup/ADR0118 prerequisites remain unchanged.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -4607,7 +4607,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.34` | `pending` | Read the stdio suffix and owned progressive-dispatch/storage/recognition/recursive-observation ranges after clean .1.33; preserve all repair owners, prior failures and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.35` | `pending` | Read the recursive-observation suffix and owned repeated-action/root-selection ranges after clean .1.34; preserve all repair owners, prior failures and parked named arguments. |
 
 ## Reading Ledger
 

@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua stdio, progressive dispatch, storage and recognition reading
+
+- Read stdio194-468, progressive1-464, storage1-48, recognition1-571 and recursive1-142: 1,500 fragments /59,616 bytes; cumulative 34/51 and 1,742,358 bytes.
+- Both hosts pass stdio247, progressive178, recognition246 and recursive-lowering5: 1,352 assertions; storage verifies 19 owners, three native modules per ABI and exact cleanup.
+- Full stdio executes pre-emission cancellation; current neutral progressive9/9/116/public6/12/10/60 and recognition138/250/58 pass.
+- LUA-STARTUP-READING.1.34 adds precise guidance qualification to existing .2.1; all thirty-three repair roots remain open; next .1.35.
+
 ## 2026-09-13 — Lua MCP consumer reading and bounded stdio proof
 
 - Read binding10-169, admission1-663, dispatch1-484 and stdio1-193: 1,500 fragments /63,081 bytes; cumulative 33/51 and 1,682,742 bytes.

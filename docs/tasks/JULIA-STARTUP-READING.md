@@ -1742,7 +1742,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.34` | `pending` | Read the stdio suffix and owned progressive-dispatch/storage/recognition/recursive-observation ranges after clean .1.33; preserve all repair owners, prior failures and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.35` | `pending` | Read the recursive-observation suffix and owned repeated-action/root-selection ranges after clean .1.34; preserve all repair owners, prior failures and parked named arguments. |
 
 ## Decisions
 

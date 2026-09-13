@@ -329,12 +329,12 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (33/51 groups):** the complete
+**Lua source reading is underway (34/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first 33 groups physically read 45,151 fragments /1,682,742 bytes,
+ownership. The first 34 groups physically read 46,651 fragments /1,742,358 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
@@ -350,8 +350,9 @@ Final Sigma conversion. The Unicode rule-label table and classifier, automatic
 function parser, complete function shell and registry are read. The complete
 body-fluent, callable, diagnostic, duplicate-slot, gap-capture, logical-helper and
 map-leaves tests are read. The MCP-binding, admission and dispatch tests are
-complete; stdio is read through line 193. Sixty-two files are fully read.
-The remaining 18 groups require
+complete, as are stdio, progressive dispatch, storage and recognition transactions.
+Recursive observation is read through line 142. Sixty-six files are fully read.
+The remaining 17 groups require
 their own reading and verified commits; source reading does not close the limitations below.
 
 **Lua Unicode casing and rule-label verification:** all property tables match the
@@ -417,7 +418,7 @@ limitations below remain open; these are scoped checks on the installed hosts,
 with PUC5.4 verification still pending. Exact scope and reproduction:
 `docs/knowledge/lua-gap-logical-map-consumer-reading.md`.
 
-**Lua MCP consumer verification:** both installed hosts pass the complete binding
+**Lua MCP consumer verification:** `.1.33` records these suites on both hosts: binding
 (116 checks), admission (281) and decoded dispatch (216) consumers, plus the first
 complete stdio block (71): 1,368 checks total. The generated module matches all
 83,166 expected bytes and retains its 82,882-byte canonical bundle. Native semantic
@@ -429,12 +430,36 @@ The consumers verify registration, expiry, revocation, capacity, shutdown, decod
 cancellation, fixed error output and ownership of caller streams. All ten raw-input
 fixtures execute through stdio with exact output and released request/registry state.
 The admission suite also checks source markers for the dedicated pre-emission
-cancellation test; executing that specific stdio test remains in the next reading
-range. The complete dispatch consumer does execute injected native failures and
-decoded cancellation. Fresh neutral governance reports five implementations, six
+cancellation test; the full stdio run below now executes that case. The complete
+dispatch consumer also executes injected native failures and
+decoded cancellation. That leaf records neutral governance at five implementations, six
 runtime admissions, complete rollout and 141 rejected mutations. Earlier byte counts
 and rollout stages remain historical evidence. Exact scope and reproduction:
 `docs/knowledge/lua-mcp-consumer-reading.md`.
+
+**Lua stdio, progressive dispatch and transaction verification:** both installed
+hosts pass 247 complete stdio checks, 178 progressive-dispatch checks, 246 recognition
+transaction checks and five recursive-observation lowering checks: 1,352 total.
+Stdio verifies lexical integer identity, exact frame limits and recovery, suppression
+before emission, fixed I/O diagnostics, released state and caller-owned streams.
+
+Private progressive execution accepts its host-supplied seed at the execution
+boundary. Native, reconstructed, generated and loaded emitted routes return detached
+child results without advancing the parent cursor or serializing callbacks and
+registry state. Recognition tokens preserve match presence separately from payload,
+including successful false values. Invocation identity, isolated marks, rollback,
+single-attempt rules and forbidden token reuse retain their checked behavior.
+The five recursive checks establish dedicated lowering only; runtime observation
+and error-record behavior remain in the next owned source range.
+
+The focused storage oracle verifies 19 allocation owners and three native modules
+per ABI, builds in a path containing spaces, checks generated-source and trace output
+on the repository filesystem, rejects an external destination before creation, and
+cleans its exact owned directories. Neutral progressive governance remains complete
+at 9/9 with 116 contract mutations; recognition remains complete with 138 ActionIR
+rows, 250 call rows and 58 mutations. Earlier private-stage and count statements
+retain their existing guidance-repair owner. Exact scope and reproduction:
+`docs/knowledge/lua-stdio-progressive-recognition-consumer-reading.md`.
 
 **Known Lua invocation limitation — nested array members can disappear:** a
 caller-supplied tagged array with an extra member or a sparse tail is accepted,

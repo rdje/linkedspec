@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Keep private runtime and storage proof boundaries explicit
+
+- Full stdio verifies lexical number kinds, bounded framing recovery, cancellation before emission, fixed I/O diagnostics and release without closing caller streams.
+- Progressive carriers accept a live host seed at execution without serializing callback/registry state; transaction carriers preserve false independently from match presence.
+- The storage oracle builds both three-module ABI sets in a path with spaces, checks devices and output identity, rejects an external destination before creation and cleans its exact owned directories.
+- LUA-STARTUP-READING.1.34 stores exact scope and 1,352-assertion replay in docs/knowledge/lua-stdio-progressive-recognition-consumer-reading.md; recursive proof covers lowering only, with its runtime suffix still owned.
+
 ## 2026-09-13 — MCP composition requires precise execution claims
 
 - The admission consumer executes twelve roles and all twenty semantic response identities, while its private cancellation and native-failure references inspect focused-source markers.
