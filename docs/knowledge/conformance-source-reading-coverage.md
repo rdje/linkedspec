@@ -9,7 +9,7 @@ answers:
   - "how do I verify conformance reading source and range coverage"
   - "which conformance source reading file has the longest line"
 date: 2026-09-13
-status: exact decomposition preserved; physical reading 13/143, fifty files complete and130 groups remain
+status: exact decomposition preserved; physical reading 14/143, fifty-one files complete and129 groups remain
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -380,3 +380,18 @@ remain explicit. Positions/spans, invocation-local state, one-terminal transacti
 and detached observations retain distinct roles. The92-helper/7-alias/2-internal-ID
 map and33 diagnostics are read; the public assertion suffix remains `.1.14`-owned.
 Existing lexical/resource/runtime repairs are unchanged; no native matrix is claimed.
+
+
+## September 13 typed completion and Unicode prefix reading
+
+`.1.14` reads six windows, 1,500 fragments and 33,332 baseline-identical bytes.
+Typed source reaches EOF; Unicode-case1–1138 stops inside the01EE lowercase entry.
+Cumulative reading is14/143,15,431 fragments,863,969 bytes and51 complete files.
+Typed composition preserves six behavior owners and all14 completed rollout rows.
+[[unicode-17-case-contract-data]] owns pinned offline generation and its12 fixtures;
+[[six-variant-unicode-17-case-parity]] owns existing native admissions.
+[[unicode-case-mapping-cross-backend-gap]] now labels its host probes as historical
+and routes current verification through LinkedSpec's generated-data checker.
+Read mappings include ASCII/Latin, dotted-I expansion and non-adjacent/titlecase
+convergence. Offline byte equality grants no reading credit for later mappings,
+properties, context rules, fixtures or decoded upstream inputs. All repairs remain.

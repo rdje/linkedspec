@@ -497,17 +497,16 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 decoded bytes. Thirteen groups now account for
-13,931 fragments and 830,637 bytes, including 50 complete files. Staged and
-standalone lifecycle contracts are fully read. Standalone blocks normalize to
-entry lifecycle `I`, preserving authored duplicate order and earlier brace owners.
-Typed-source reading separates immutable positions and spans from invocation-local
-state, one-terminal recognition transactions and detached recursive observations.
-Unicode-scalar offsets are authoritative; byte offsets and line/column coordinates
-are derived. Reading continues inside the typed public rollout assertions, followed
-by Unicode-case fixtures. Focused proof preserves the existing limits of backend
-carrier tests and all runtime repair tasks. Named-argument support remains an
-approved future direction. The capability guide still has stale
+143 bounded groups covering 8,257,059 decoded bytes. Fourteen groups now account for
+15,431 fragments and 863,969 bytes, including 51 complete files. The typed-source
+contract is fully read. Unicode-case reading covers the pinned input metadata and
+the start of the lowercase table, including dotted-I expansion to `i` plus a
+combining dot. LinkedSpec uses Unicode 17.0.0 full default case conversion, including
+Final Sigma, with no locale tailoring or implicit normalization. Its generated
+tables have an offline verification path; host-language case APIs retain historical
+comparison value. Reading continues through the lowercase mappings. Focused proof
+preserves all runtime repair tasks. Named-argument support remains an approved
+future direction. The capability guide still has stale
 current census, governance/inventory/public counts and generic-callable wording.
 Existing startup `.41.6` and `.41.7` now own these exact paragraphs and meaningful
 checks against recurrence. Their selected-marker guards currently miss the

@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.14 — read typed closeout and Unicode case prefix
+
+Conformance .1.14 reads six complete windows, 1,500 fragments and 33,332 baseline-identical bytes. The typed-source contract reaches EOF; Unicode-case reading reaches line 1138, inside the lowercase mapping table. Physical reading is 14/143: 15,431 fragments, 863,969 bytes and 51 complete files. Typed composition retains six distinct recurring authorities and all14 completed rollout rows. Unicode 17 full default conversion uses pinned offline data, Final Sigma and no locale tailoring or normalization. The casing card separates historical host probes from current generated-table verification. Focused Unicode and governed-book checks pass; all runtime repairs remain owned.
+
+Verification: reconstruct all six source windows and all 143 groups/302 ranges; verify cumulative reading, source/task/history preservation and prior Knowledge recipes. Run the offline Unicode regeneration/byte-equality/fixture checker and focused typed/lifecycle/staged/semantic checks for the changed governed book surface. Memory, Knowledge, both history checks, rendered book, git diff --check and normal doctrines govern focused landing. No native matrix, dependency build, Unicode update, normalization change or runtime repair is claimed.
+
 ## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.13 — read lifecycle normalization and typed source boundaries
 
 Conformance .1.13 reads 11 complete windows, 841 fragments and 65,510 baseline-identical bytes. Staged enrichment and standalone lifecycle contracts reach EOF; typed-source reading reaches line 452, inside public rollout assertions. Physical reading is 13/143: 13,931 fragments, 830,637 bytes and 50 complete files. Lifecycle normalization preserves authored order and earlier brace owners; typed positions, invocation state, transactions and detached recursive observations remain distinct. The typed Knowledge card explicitly qualifies its older 75-mutation narrative. Focused lifecycle/typed and governed-book checks pass without expanding native carrier evidence or closing runtime repairs.

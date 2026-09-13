@@ -2299,7 +2299,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
   Children: `.3.8.0` owns exact decomposition; `CONFORMANCE-SOURCE-READING.1` owns all143 reading groups; .2 findings and .3 independent closeout stay separate.
-  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; .3.8.0 preserves143 groups/302 exact ranges over160 baseline-identical inputs. Physical reading13/143: cumulative13931 fragments/830637 bytes,50 complete files and typed contract1-452. Focused lifecycle/typed and governed-book proof governs landing; .1.14 owns the public assertion suffix and Unicode-case prefix. All repairs/prerequisites remain.
+  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; .3.8.0 preserves143 groups/302 exact ranges over160 baseline-identical inputs. Physical reading14/143: cumulative15431 fragments/863969 bytes,51 complete files and Unicode-case1-1138. Offline Unicode and governed-book proof governs landing; .1.15 owns the crossing lowercase entry and following mappings. All repairs/prerequisites remain.
   Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
     inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
   Verification: `pending`
@@ -4641,7 +4641,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.14` | `pending` | Read typed-source453-814 and Unicode-case1-1138:1500 fragments/33332 bytes. Preserve bounded windows, crossing rollout ownership and all repairs. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.15` | `pending` | Read Unicode-case1139-2638:1500 fragments/14500 bytes. Preserve complete bounded mapping windows, source identity and all repairs; retain unchanged proof proportionately. |
 
 ## Reading Ledger
 

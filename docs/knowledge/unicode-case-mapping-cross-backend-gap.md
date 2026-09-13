@@ -16,10 +16,19 @@ evidence: "LUA-BACKEND-PARITY.4.3.2.1.0 ran direct host probes and inspected the
 evidence_update_2026_07_12: "Director authorized the expert signoff/SOTA route. ADR 0027 adopts Unicode 17.0.0 full Default Case Conversion, locale-independent, including standard context rules such as Final_Sigma and excluding locale tailoring or implicit normalization. `.4.3.2.1.2.1`-.4 own verified official data/generation, Perl+Rust, Dart+Julia, and Lua+six-variant admission."
 implementation_update_2026_07_12: "`.4.3.2.1.2.2` completes Perl/Rust generated-table consumption across scalar helper, receiver, value-array, and mutating-array paths. All 12 fixtures and full backend gates pass. The remaining observable gap is Dart/Julia/Lua until `.3` and `.4` close."
 implementation_update_dart_julia_2026_07_12: "`.4.3.2.1.2.3` completes Dart/Julia generated-table consumption across every scalar/receiver/array path. Twelve fixtures and full local gates pass. Only PUC Lua/LuaJIT remain before six-variant admission."
-reverify: "perl -CS -Mutf8 -e 'for my $s (\"é\", \"ß\", \"İ\", \"Σ\", \"ﬃ\") { print \"$s => \", lc($s), \" / \", uc($s), \"\\n\" }' && bash tools/run_julia_project_data.sh -e 'for s in [\"é\", \"ß\", \"İ\", \"Σ\", \"ﬃ\"] println(repr(s), \" => \", repr(lowercase(s)), \" / \", repr(uppercase(s))) end' && rg -n 'to_lowercase|to_uppercase|toLowerCase|toUpperCase|lowercase|uppercase' rust/linkedspec-runtime/src/engine.rs dart/lib/src/runtime/interpreter.dart julia/src/runtime/Interpreter.jl"
+historical_host_probe: "perl -CS -Mutf8 -e 'for my $s (\"é\", \"ß\", \"İ\", \"Σ\", \"ﬃ\") { print \"$s => \", lc($s), \" / \", uc($s), \"\\n\" }' && bash tools/run_julia_project_data.sh -e 'for s in [\"é\", \"ß\", \"İ\", \"Σ\", \"ﬃ\"] println(repr(s), \" => \", repr(lowercase(s)), \" / \", repr(uppercase(s))) end' && rg -n 'to_lowercase|to_uppercase|toLowerCase|toUpperCase|lowercase|uppercase' rust/linkedspec-runtime/src/engine.rs dart/lib/src/runtime/interpreter.dart julia/src/runtime/Interpreter.jl"
+reverify: "bash tools/run_python_project_data.sh tools/check_unicode_case_contract.py"
 ---
 
-## Fact
+## Current generated-table authority
+
+Current LinkedSpec casing uses the pinned generated Unicode 17.0.0 tables described by
+[[unicode-17-case-contract-data]], with all six runtime admissions recorded in
+[[six-variant-unicode-17-case-parity]]. The reverify command checks those generated
+bytes and the independent neutral fixtures; it does not claim fresh native execution.
+The exact original host probe remains in `historical_host_probe` for comparison.
+
+## Historical host-API audit and ordered rollout
 
 Historical host behavior did not define one identical result for every Unicode special-casing character. This was a
 semantic gap, not an encoding gap: a host may store the same Unicode scalar text as UTF-8, UTF-16, or another
@@ -27,7 +36,7 @@ encoding without changing which case mapping the DSL intends.
 
 Measured examples expose three different policies:
 
-| Input/operation | Perl and current Rust mechanism | Dart | Julia |
+| Input/operation | Perl/Rust host APIs (historical) | Dart | Julia |
 | --- | --- | --- | --- |
 | `uppercase("ß")` | `SS` | `ß` | `ẞ` |
 | `lowercase("İ")` | `i` + combining dot | `i` | `i` |

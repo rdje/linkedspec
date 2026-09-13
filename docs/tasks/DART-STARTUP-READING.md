@@ -1571,7 +1571,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.14` | `pending` | Read typed-source453-814 and Unicode-case1-1138:1500 fragments/33332 bytes. Preserve bounded windows, crossing rollout ownership and all repairs. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.15` | `pending` | Read Unicode-case1139-2638:1500 fragments/14500 bytes. Preserve complete bounded mapping windows, source identity and all repairs; retain unchanged proof proportionately. |
 
 ## Decisions
 
