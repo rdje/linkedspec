@@ -508,8 +508,12 @@ in the same process; that evidence does not establish fresh-process deployment.
 The director has requested integration guides and runnable consumer examples for
 Perl, Rust, Dart, Julia and Lua, covering recursive checkout, dependency preparation
 and reuse, native APIs, results/errors and packaging. This temporary activity is
-owned by `docs/tasks/BACKEND-INTEGRATION-GUIDES.md` and starts after the current
-clean handoff; conformance .1.35 is the return point. Existing runtime repairs and
+owned by `docs/tasks/BACKEND-INTEGRATION-GUIDES.md`. Its inventory is complete:
+Rust requires RGX/PGEN preparation; Dart has no runtime package dependency; Julia
+uses JSON3 and standard libraries; Lua requires three ABI-matched native modules.
+The guides will distinguish initial setup, reusable products and native result
+values. Rust integration is next; no consumer example is claimed verified yet.
+Conformance .1.35 remains the return point after the complete guide activity. Existing runtime repairs and
 unread source remain open. The capability guide still has stale
 current census, governance/inventory/public counts and generic-callable wording.
 Existing startup `.41.6` and `.41.7` now own these exact paragraphs and meaningful

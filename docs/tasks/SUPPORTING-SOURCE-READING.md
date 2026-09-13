@@ -477,7 +477,7 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `BACKEND-INTEGRATION-GUIDES.0` | `pending` | Director-authorized temporary documentation pivot after clean conformance .1.34; implement and verify all five backend integration guides, then resume `CONFORMANCE-SOURCE-READING.1.35` at its unchanged Scope. |
+| 1 | `BACKEND-INTEGRATION-GUIDES.2.1` | `pending` | Director-authorized temporary integration activity: inventory .0 complete; implement Rust first, then the other backend guides and final proof. Resume `CONFORMANCE-SOURCE-READING.1.35` at its unchanged Scope after .7. |
 
 ## Decisions
 

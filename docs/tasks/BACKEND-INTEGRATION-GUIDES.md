@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `BACKEND-INTEGRATION-GUIDES`
-- Status: `proposed` / director-requested implementation; pending activation
+- Status: `active` / director-authorized temporary documentation activity
 - Roadmap lane: `Phase 6 documentation and adoption / native backend integration`
 - Created: `2026-09-13`
 - Last updated: `2026-09-13`
@@ -53,7 +53,7 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
 ## Task Tree
 
 - ID: `BACKEND-INTEGRATION-GUIDES`
-  Status: `proposed`
+  Status: `active`
   Goal: Deliver tested native integration guidance for all five backends.
   Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`
   Acceptance: Every shared criterion has backend-specific evidence; navigation, examples and limits agree.
@@ -61,13 +61,19 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
   Commit: `pending`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.0`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `00f9783a1e4b625bc251a3e260ef1eef60c35888`.
+  Verification tier: `focused`
+  Focused checks: Canonical Knowledge and exact five-backend metadata/API/setup inventory; bounded content routing, example plan and dependency reuse evidence; source and prior task preservation, book render, memory/history and all normal doctrines.
+  Canonical trigger: Read-only inventory and documentation planning; no runtime, dependency, workflow or public contract change. Final guide activity .7 retains canonical closeout.
   Goal: Inventory existing integration APIs, setup commands, content owners and consumer requirements.
   Dependencies: CONFORMANCE-SOURCE-READING.1.34 committed clean. The director explicitly authorizes this temporary documentation activity before the remaining startup reading; this scoped exception does not close that reading or unrelated runtime repairs.
   Scope: Existing Knowledge, native loader/API book pages, five backend manifests/landing pages, wrappers, ADR0040 and BACKEND-COMPANION-BOOKS inventory; no dependency build.
   Acceptance: Publish an exact per-backend dependency/runtime/API/error/packaging matrix and canonical page/example destinations. Identify reusable proof and missing proof, including Rust bootstrap/reuse and declared toolchain discrepancies. Give any newly confirmed defect its own repair leaf before implementation. Refine an oversized child before activation.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: PASS17 baseline-identical metadata/API/setup sources; six complete wrappers513 lines; version-only commands exit0 for Cargo1.95.0,Dart3.13.3,Julia1.12.7,Perl5.34.1,Lua5.5.1,LuaJIT2.1.1788460057 and three pkg-config identities. No consumer execution, dependency preparation or build. Focused source/task/history preservation, memory, book and normal doctrines govern this inventory; .7 retains canonical closeout.
+  Outcome: docs/knowledge/backend-integration-inventory.md defines the five-path matrix and exact six book/example destinations. ADR0040 routing keeps current normative chapters intact and requires later companion governance before migration. Startup .80/.41.7 and Lua .2.2/.2.3 remain owned. Rust-first implementation is the next selected leaf; the return point remains conformance .1.35.
+  Candidate proof: Preserve2497 prior files byte-exact,2799 of2801 prior task nodes,all94 book limitation headings,previous reading checkpoints and historical recipes. Only this root and .0 node change. Rendered inventory/return text passes; memory60 passes; both histories are OK at210 lines/42693 bytes and168/41728. Whitespace is clean; the known large book search-index warning remains owned. No guide or consumer build is claimed. Normal doctrines and post-commit pointer check remain required.
+  Commit: `BACKEND-INTEGRATION-GUIDES.0 - inventory native integration setup and guide ownership`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.1`
   Status: `pending`
@@ -209,11 +215,11 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `BACKEND-INTEGRATION-GUIDES.0` | `pending` | Next after clean conformance .1.34: inventory canonical destinations and verified setup for all five backends under the director-authorized temporary pivot. |
+| 1 | `BACKEND-INTEGRATION-GUIDES.2.1` | `pending` | Rust-first guide and consumer from the completed five-backend inventory; preserve preparation/reuse boundaries. Return to conformance .1.35 after the full activity. |
 
 The director explicitly requests a temporary pivot at the next clean handoff.
-Complete and commit conformance .1.34 first, then activate .0 and deliver this
-activity. Ordinary guide/example work needs no further permission.
+Conformance .1.34 is committed at 00f9783a1 and inventory .0 is complete.
+Activate Rust .2.1 next and deliver this activity. Ordinary guide/example work needs no further permission.
 
 Return point: `CONFORMANCE-SOURCE-READING.1.35`, whose unchanged Scope is
 `t/generated_source_contract.t` lines154-506; `t/inspect_spec_codegen.t` lines1-121;
@@ -235,16 +241,20 @@ not declared complete by this scoped documentation authorization.
 
 ## Verification Log
 
+- `2026-09-13` .0: PASS17 baseline-identical metadata/API/setup sources; six complete wrappers513 lines; version-only commands exit0 for Cargo1.95.0,Dart3.13.3,Julia1.12.7,Perl5.34.1,Lua5.5.1,LuaJIT2.1.1788460057 and three pkg-config identities. No consumer execution, dependency preparation or build. Focused source/task/history preservation, memory, book and normal doctrines govern this inventory; .7 retains canonical closeout.
+
 - `2026-09-13`: Intake reads native Rust/Lispish and dependency authorities plus
   ADR0040 and the companion tree. Guide/example implementation and consumer proof
   are pending. CONFORMANCE-SOURCE-READING.1.34 owns intake validation and commit.
 
 ## Commit Log
 
+- `.0`: `BACKEND-INTEGRATION-GUIDES.0 - inventory native integration setup and guide ownership`; activation 00f9783a1e4b625bc251a3e260ef1eef60c35888; next .2.1 after clean handoff.
 - Intake: `CONFORMANCE-SOURCE-READING.1.34`; derive its commit from Git history.
 - Guide/example leaves: pending.
 
 ## Changelog
 
+- `2026-09-13` .0: Complete five-backend setup/API/content-routing inventory; choose Rust-first implementation and preserve the conformance return point.
 - `2026-09-13`: Track the director-requested five-backend integration guides,
   consumer examples, dependency reuse, deployment/error proof and canonical closeout.

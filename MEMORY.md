@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `d10305097eb502c0fe29309ec230437396e26d82` — clean conformance-reading activation.
-- latest_completed_leaf: `CONFORMANCE-SOURCE-READING.1.34 - read Perl conformance consumers and schedule integration guides`; physical reading34/143,84 complete files and generated-source tests1-153.
-- active_work_unit: `BACKEND-INTEGRATION-GUIDES.0` — director-authorized temporary integration-document activity.
-- next_action: Activate BACKEND-INTEGRATION-GUIDES.0 from clean HEAD; inventory canonical destinations and five native consumer setup paths, then implement and verify the complete guide activity. The director explicitly authorizes this temporary documentation pivot before remaining startup reading. Commit each leaf; reuse compatible RGX/PGEN products. After integration .7, resume CONFORMANCE-SOURCE-READING.1.35 at its unchanged exact Scope.
+- activation_commit: `00f9783a1e4b625bc251a3e260ef1eef60c35888` — clean integration-inventory activation.
+- latest_completed_leaf: `BACKEND-INTEGRATION-GUIDES.0 - inventory native integration setup and guide ownership`; five backend setup/API paths and canonical destinations; source/runtime bytes unchanged.
+- active_work_unit: `BACKEND-INTEGRATION-GUIDES.2.1` — Rust integration guide and native consumer.
+- next_action: Activate BACKEND-INTEGRATION-GUIDES.2.1 from clean HEAD. Implement and verify Rust submodule/Cargo/native-loader guidance and its runnable consumer, explicitly separating first preparation from compatible RGX/PGEN reuse. Follow the inventory card and task acceptance; commit each completed leaf. Complete all five guides and final .7, then resume CONFORMANCE-SOURCE-READING.1.35 at its unchanged Scope.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; reading evidence, exact claim/repair ownership and next action committed at Git HEAD; no background result remains.
-- blockers: none for the authorized temporary documentation pivot. Conformance .1.35 is the return point; incomplete startup reading and existing runtime repairs remain owned. Registry ceilings are unchanged.
+- in_flight_uncommitted: none; completed inventory and exact return point are committed at Git HEAD; no background result remains.
+- blockers: none for the authorized integration guide activity. Existing dependency-reuse/toolchain/ABI limits have owners; conformance .1.35 and remaining startup reading stay pending.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — BACKEND-INTEGRATION-GUIDES.0 — native integration inventory
+
+Integration guide inventory .0 is complete: five native setup/value paths, six complete storage/build wrappers and installed tool identities are reconciled without a consumer or dependency build. Common and five backend page/example destinations preserve one semantic owner. Rust .2.1 is next, followed by the remaining guide lanes and final verification. The director-authorized temporary activity returns to CONFORMANCE-SOURCE-READING.1.35; paused reading remains34/143,45038 fragments/1353523 bytes and84 complete files. Existing repairs and missing ABI proof remain open.
+
+PASS17 baseline-identical metadata/API/setup sources; six complete wrappers513 lines; version-only commands exit0 for Cargo1.95.0,Dart3.13.3,Julia1.12.7,Perl5.34.1,Lua5.5.1,LuaJIT2.1.1788460057 and three pkg-config identities. No consumer execution, dependency preparation or build. Focused source/task/history preservation, memory, book and normal doctrines govern this inventory; .7 retains canonical closeout.
+
 ## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.34 — read Perl conformance consumers and schedule integration guides
 
 Conformance .1.34 reads 11 complete windows, 1,500 fragments and 56,255 baseline-identical bytes. Physical reading is 34/143: 45,038 fragments, 1,353,523 bytes and 84 complete files. Five more test files are fully read; generated-source reading stops at153. Five managed Perl targets pass43 tests and three neutral contracts pass. Evidence distinguishes adapted diagnostic fixtures and in-process generated loading. The director requests a temporary clean-checkpoint pivot to BACKEND-INTEGRATION-GUIDES.0, covering all five backends; return to conformance .1.35 after that activity. Existing repairs remain open.
