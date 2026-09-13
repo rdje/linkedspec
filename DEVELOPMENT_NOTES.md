@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.17 — preserve identity rows and non-adjacent lowercase values
+
+The range closes the prior 1E3E entry and continues Latin additional pairs through 1EFE-to-1EFF, retaining identity rows 1E96 through 1E9A and the non-adjacent 1E9E-to-00DF mapping. Greek extended rows preserve scalar results, sparse groups and lower identity entries: for example 1F88-to-1F80, 1FBC-to-1FB3, 1FCC-to-1FC3, 1FEC-to-1FE5 and 1FFC-to-1FF3. Exact table casing preserves these precomposed results without implying normalization, reversibility or the unread uppercase expansion behavior. Letterlike mappings include 2126-to-03C9, 212A-to-006B, 212B-to-00E5 and 2132-to-214E. Line 5638 ends at the 2160-to-2170 value; its closing delimiters and later mappings remain .1.18-owned.
+
+Retain the unchanged Unicode 17 generation, byte-equality and 12-fixture proof from CONFORMANCE-SOURCE-READING.1.14 at 704e261b. Fresh window replay, complete range inventory, cumulative coverage, source/task/history preservation, rendered book, memory and document-pressure checks govern this ordinary reading leaf. Native admission evidence remains separately scoped; normal commit doctrines remain required.
+
 ## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.16 — preserve distinct lowercase mapping families
 
 The range closes the prior 0522 entry, finishes Cyrillic pairs through 052E-to-052F, reads Armenian 0531-to-0561 through 0556-to-0586 and the identity 0587 row, and then reads two distinct Georgian families: 10A0-to-2D00 through the sparse 10C7/10CD entries, and 1C90-to-10D0 through 1CBF-to-10FF. Cherokee 13A0-to-AB70 through 13EF-to-ABBF differs from the final 13F0-to-13F8 through 13F5-to-13FD group. Cyrillic 1C89-to-1C8A and Latin additional pairs follow. Exact mappings and omitted code points remain explicit, with no inferred universal offset or normalization. Line 4138 ends at the 1E3E-to-1E3F value; its closing delimiters and later mappings remain .1.17-owned.
