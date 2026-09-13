@@ -2299,7 +2299,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
   Children: `.3.8.0` owns exact decomposition; `CONFORMANCE-SOURCE-READING.1` owns all143 reading groups; .2 findings and .3 independent closeout stay separate.
-  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; .3.8.0 preserves143 groups/302 exact ranges over160 baseline-identical inputs. Physical reading9/143: cumulative10735 fragments/568741 bytes,37 complete files and cursor1-160. Fresh repetition/root/cursor neutral proof passes; .1.10 owns the crossing cursor-role list and following contracts. All repairs/prerequisites remain.
+  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; .3.8.0 preserves143 groups/302 exact ranges over160 baseline-identical inputs. Physical reading10/143: cumulative11524 fragments/634230 bytes,46 complete files and semantic contract1-363. Fresh numeric/text/semantic focused proof passes; .1.11 owns the crossing Dart admission and model prefix. All repairs/prerequisites remain.
   Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
     inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
   Verification: `pending`
@@ -4641,7 +4641,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.10` | `pending` | Read cursor161-390, numeric/text contracts, six semantic fixtures and semantic contract1-363:789 fragments/65489 bytes. Preserve exact bounded presentation and all repairs. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.11` | `pending` | Read semantic contract364-716 and model1-201:554 fragments/65425 bytes. Preserve exact bounded presentation, crossing admission ownership and all repairs. |
 
 ## Reading Ledger
 

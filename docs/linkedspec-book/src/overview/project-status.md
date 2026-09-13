@@ -497,15 +497,15 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 decoded bytes. Nine groups now account for
-10,735 fragments and 568,741 bytes, including 37 complete files. Repetition and
-root-selection contracts are fully read. Repetition collects each returned value
-while lifecycle returns retain whole-rule authority. Entry selection follows an
-explicit selector, then the first authored marker, then the first authored rule;
-it preserves marker metadata and does not add strict-unused graph references.
-Children apply their own family cursor policy. Fresh neutral checks pass, and
-cursor-contract reading continues next. Known runtime defects retain their repair
-tasks. Named-argument support remains an approved future direction. The capability guide still has stale
+143 bounded groups covering 8,257,059 decoded bytes. Ten groups now account for
+11,524 fragments and 634,230 bytes, including 46 complete files. Cursor ownership,
+scalar contracts and semantic fixture inputs are fully read. Numeric helpers
+reject booleans; scalar-text conversion spells them as `1` and `0`. Semantic
+queries page by stable IDs and return deterministic partial results when budgets
+are reached. Source-detail ceilings apply before native responses are returned.
+Focused numeric, Perl scalar-text and semantic checks pass. Reading continues
+with the semantic contract suffix and model prefix. Known runtime defects retain
+their repair tasks. Named-argument support remains an approved future direction. The capability guide still has stale
 current census, governance/inventory/public counts and generic-callable wording.
 Existing startup `.41.6` and `.41.7` now own these exact paragraphs and meaningful
 checks against recurrence. Their selected-marker guards currently miss the

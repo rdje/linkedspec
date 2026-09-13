@@ -9,7 +9,7 @@ answers:
   - "how do I verify conformance reading source and range coverage"
   - "which conformance source reading file has the longest line"
 date: 2026-09-13
-status: exact decomposition preserved; physical reading 9/143, thirty-seven files complete and134 groups remain
+status: exact decomposition preserved; physical reading 10/143, forty-six files complete and133 groups remain
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -317,3 +317,18 @@ families. Fresh repetition8/10/8-complete/54, root8/3/3/7-complete/54 and cursor
 public inventories reconcile the dated README-routing/formal-grammar updates in
 [[root-rule-selection-five-backend-admission]] and [[rule-local-cursor-public-no-drift]].
 No native execution or runtime repair is inferred; all earlier obligations remain.
+
+
+## September 13 scalar and semantic-query reading
+
+`.1.10` reads18 windows,789 fragments and65,489 baseline-identical bytes.
+Cursor, numeric/text and six semantic inputs reach EOF; semantic contract1–363
+ends at Dart's admission consumer. Cumulative reading is10/143,11,524 fragments,
+634,230 bytes and46 complete files. [[cross-backend-scalar-numeric-drift]] and
+[[scalar-to-text-coercion-cross-backend-gap]] distinguish boolean rejection from
+text conversion; their existing Unicode, unary-cat and large-number repair owners
+remain. Fresh numeric55/18 and Perl text7 checks pass without broadening coverage.
+[[semantic-introspection-neutral-contract]] owns stable IDs, ordered query results,
+deterministic budget prefixes and native source ceilings. The six exact inputs,
+twenty query cases and Perl/Rust roles are read; later model/rollout bytes remain
+unread. Fresh semantic neutral proof passes; no native matrix or repair closes.

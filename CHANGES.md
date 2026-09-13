@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.10 — read scalar contracts and semantic query prefix
+
+Conformance .1.10 reads 18 complete windows, 789 fragments and 65,489 baseline-identical bytes. Cursor ownership, numeric/text contracts and six semantic fixture inputs reach EOF; semantic-introspection contract reading reaches line 363. Physical reading is 10/143: 11,524 fragments, 634,230 bytes and 46 complete files. Numeric 55-case/18-helper, Perl scalar-text 7-test and semantic neutral proof pass. Numeric rejection of booleans remains distinct from scalar-text conversion; paging budgets and source-detail ceilings remain explicit. No source or runtime defect changes; .1.11 owns the crossing Dart admission consumer and semantic model prefix.
+
+Verification: complete 18-window/source, all 143-group/302-range and cumulative reading audits; fresh scalar-numeric 55 cases/18 helpers, Perl scalar-text 7 tests and semantic neutral checker. Preserve source/task/history and all prior recipes; memory, Knowledge, both history checks, rendered book, git diff --check and normal doctrines govern focused landing. No native matrix, dependency build or runtime repair is claimed.
+
 ## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.9 — read repetition, root selection and cursor ownership
 
 Conformance .1.9 reads 11 complete windows, 1,445 fragments and 65,519 baseline-identical bytes. Repetition and root-selection contracts reach EOF; the cursor contract is read through line 160. Physical reading is 9/143: 10,735 fragments, 568,741 bytes and 37 complete files. Fresh repetition8/10/8-complete/54, root8/3/3/7-complete/54 and cursor36/18/8/74-files/8-complete/60 neutral proof passes. Repetition values, lifecycle exits, authored marker identity, execution selection, strict-unused edges and intrinsic child cursor policy remain distinct. Current root public24/18 and cursor public30/28 inventories reconcile their dated milestones. No source or runtime defect changes; .1.10 owns the crossing Rust cursor-role list and following scalar/semantic inputs.

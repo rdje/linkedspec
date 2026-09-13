@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 9/143
+- Status: `active` / exact decomposition; physical reading 10/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-13`
@@ -204,14 +204,22 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.9 - read repetition root selection and cursor ownership`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.10`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `d4ea5c63d7d87b7b113c9ebac846b58ab700654f`.
+  Verification tier: `focused`
+  Focused checks: Read exact baseline-identical cursor, scalar and semantic windows; reconcile Knowledge and neutral proof, preserve source/task/history, and verify memory, book and normal doctrines.
+  Canonical trigger: Ordinary bounded source-reading leaf; no source or public-contract change, admission or parent closeout. Later prerequisites remain.
   Goal: Read and understand conformance/test/Unicode group 10.
   Scope: `capability_conformance/rule_local_cursor_contract.json` lines 161-390; `capability_conformance/scalar_numeric_contract.json` lines 1-134; `capability_conformance/scalar_text_contract.json` lines 1-36; `capability_conformance/semantic_introspection/calls_and_staging.spec` lines 1-10; `capability_conformance/semantic_introspection/failed.spec` lines 1-2; `capability_conformance/semantic_introspection/graph.spec` lines 1-8; `capability_conformance/semantic_introspection/privacy.spec` lines 1-2; `capability_conformance/semantic_introspection/runtime.input` lines 1-1; `capability_conformance/semantic_introspection/runtime.spec` lines 1-3; `capability_conformance/semantic_introspection_contract.json` lines 1-363
   Baseline evidence: 789 fragments / 65489 decoded bytes; ordered range SHA-256 `cddda076aaee26145267ab1dbe015f1dcfc87420d1a0b3dac5ee11c5ed338308`.
   Dependencies: .1.9 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 18 complete windows / 789 fragments / 65489 bytes; ordered window SHA-256 `33e7fe4473accc2d379f3358192b9bcbf5b402ea2579579dba59409d715bcddd`.
+  Comprehension: Cursor suffix completes Perl14/peer15 consumer roles, six routes, the 74-file migration inventory and eight complete rollout rows; dated pending marker strings retain historical meaning. Numeric helpers reject booleans and invalid values, enforce helper-specific arity, round halfway away from zero and use floor modulo; scalar-text instead spells booleans as 1/0 and normalizes finite numeric text. The fixed fixtures do not close Unicode-digit, unary-cat or large-number obligations. Six semantic inputs cover calls, duplicate regex identity, failed compilation, Unicode source identity and observed repetition. Semantic schema separates records, relations, shapes and signatures; canonical IDs escape strict UTF-8 bytes. Query paging uses the last primary ID, budget exhaustion returns a deterministic incomplete prefix, and source ceilings apply before native responses. All twenty exact query cases and Perl/Rust admission roles are read; Dart consumer fields continue under .1.11. The frozen scalar-text codeblock milestone is historical, not a reversal of current callable admission.
+  Verification: complete 18-window/source, all 143-group/302-range and cumulative reading audits; fresh scalar-numeric 55 cases/18 helpers, Perl scalar-text 7 tests and semantic neutral checker. Preserve source/task/history and all prior recipes; memory, Knowledge, both history checks, rendered book, git diff --check and normal doctrines govern focused landing. No native matrix, dependency build or runtime repair is claimed.
+  Capture recovery: Source windows14/15 were re-presented in full after a truncated tool response; only then credited. The scalar proof command was rerun to repository-local logs because its first result handle was not retained; the rerun exit and complete results were consumed.
+  Candidate proof: All 18 recorded windows reconstruct exactly; all160 baseline files/143 groups/302 ranges remain identical. Cumulative10/143,11524 fragments/634230 bytes,46 complete files. Preservation compares2489 files byte-for-byte,2774/2776 nodes unchanged and all94 book limitation headings retained. Numeric55/18, Perl text7 and semantic6 groups/20 queries/128 mutations/9 complete rollout/6 complete admission pass; semantic proof repeated after the governed book edit. Memory60 lines, rendered book paragraph and plain git diff --check pass. History checks: CHANGES283 lines/40836 bytes OK; notes429/58534 WARN only, below rollover. Existing search-index warning remains owned by startup41.9. Normal commit doctrines remain required.
+  Commit: `CONFORMANCE-SOURCE-READING.1.10 - read scalar contracts and semantic query prefix`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.11`
   Status: `pending`
@@ -1564,7 +1572,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.10` | `pending` | Read cursor161-390, numeric/text contracts, six semantic fixtures and semantic contract1-363:789 fragments/65489 bytes. Preserve exact bounded presentation and all repairs. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.11` | `pending` | Read semantic contract364-716 and model1-201:554 fragments/65425 bytes. Preserve exact bounded presentation, crossing admission ownership and all repairs. |
 
 ## Decisions
 
@@ -1577,6 +1585,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Verification Log
 
+- `2026-09-13` .1.10: Conformance .1.10 reads 18 complete windows, 789 fragments and 65,489 baseline-identical bytes. Cursor ownership, numeric/text contracts and six semantic fixture inputs reach EOF; semantic-introspection contract reading reaches line 363. Physical reading is 10/143: 11,524 fragments, 634,230 bytes and 46 complete files. Numeric 55-case/18-helper, Perl scalar-text 7-test and semantic neutral proof pass. Numeric rejection of booleans remains distinct from scalar-text conversion; paging budgets and source-detail ceilings remain explicit. No source or runtime defect changes; .1.11 owns the crossing Dart admission consumer and semantic model prefix.
 - `2026-09-13` .1.9: Conformance .1.9 reads 11 complete windows, 1,445 fragments and 65,519 baseline-identical bytes. Repetition and root-selection contracts reach EOF; the cursor contract is read through line 160. Physical reading is 9/143: 10,735 fragments, 568,741 bytes and 37 complete files. Fresh repetition8/10/8-complete/54, root8/3/3/7-complete/54 and cursor36/18/8/74-files/8-complete/60 neutral proof passes. Repetition values, lifecycle exits, authored marker identity, execution selection, strict-unused edges and intrinsic child cursor policy remain distinct. Current root public24/18 and cursor public30/28 inventories reconcile their dated milestones. No source or runtime defect changes; .1.10 owns the crossing Rust cursor-role list and following scalar/semantic inputs.
 - `2026-09-13` .1.8: Conformance .1.8 reads 15 complete windows, 1,500 fragments and 65,525 baseline-identical bytes. Progressive dispatch, punctuation aliases, recognition transactions and three explicit-OR fixture files reach EOF; the repetition contract is read through line 157. Physical reading is 8/143: 9,290 fragments, 503,222 bytes and 35 complete files. Fresh punctuation6/4/6 and recognition138/250/58 plus public3/26/45 proof pass. The contracts separate parent recognition progress, bounded child dispatch, strict match booleans, staged payloads and per-hit repetition returns. The older punctuation fact card now qualifies its pre-emitter Lua milestone using existing generated-source admission. All runtime repairs remain open; .1.9 owns the crossing bounded-repetition case and following contracts.
 - `2026-09-13` .1.7: Conformance .1.7 reads 12 complete windows, 1,500 fragments and 60,106 baseline-identical bytes. Validator cases, transport manifest, native resolution and outward descriptors reach EOF; progressive dispatch is read through line 540. Physical reading is 7/143: 7,790 fragments, 437,697 bytes and 29 complete files. Fresh native-resolution14/9/4 and progressive9/9/116 plus public6/12/10/60 neutral checks pass. Exact paths, ordered named roots, preserved UTF-8, three outward function variants and bounded same-source child dispatch retain distinct authorities. The general descriptor fact card now explicitly qualifies its fixed-v1 field list. Existing progressive resource/nesting, MCP EOF/validation-order and other repair obligations remain open; .1.8 owns the crossing cancellation case and following contracts.
@@ -1590,6 +1599,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Commit Log
 
+- `2026-09-13` .1.10: `CONFORMANCE-SOURCE-READING.1.10 - read scalar contracts and semantic query prefix`; activation d4ea5c63d7d87b7b113c9ebac846b58ab700654f; next .1.11 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.9: `CONFORMANCE-SOURCE-READING.1.9 - read repetition root selection and cursor ownership`; activation 445764d606459a8ff43ecb4c985b0a189593d3b3; next .1.10 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.8: `CONFORMANCE-SOURCE-READING.1.8 - read progressive recognition and repetition boundaries`; activation 708ecbff2b1741c666f4399986270f002b8a6162; next .1.9 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.7: `CONFORMANCE-SOURCE-READING.1.7 - read resolution descriptor and progressive dispatch contracts`; activation 421f22390a01faf444454f54951816be099f576c; next .1.8 after clean handoff and zero-byte brief.
@@ -1603,6 +1613,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Changelog
 
+- `2026-09-13` .1.10: Complete cursor/scalar and semantic fixture reading; read semantic schema/query prefix without changing source, historical evidence or repair state.
 - `2026-09-13` .1.9: Complete repetition/root-selection reading and cursor prefix; reconcile current public inventories without changing source, authority, historical evidence or repair state.
 - `2026-09-13` .1.8: Complete progressive, punctuation, recognition and repetition fixtures; qualify the dated no-emitter projection through existing Lua admission. Repetition suffix and all runtime repairs remain owned.
 - `2026-09-13` .1.7: Complete validator/transport/native-resolution/outward sources; qualify the fixed-v1 fact-card list against the existing three-variant union. Progressive cancellation continues in .1.8; all repairs remain.

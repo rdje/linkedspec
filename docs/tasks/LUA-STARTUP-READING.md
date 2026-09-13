@@ -2268,7 +2268,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.10` | `pending` | Read cursor161-390, numeric/text contracts, six semantic fixtures and semantic contract1-363:789 fragments/65489 bytes. Preserve exact bounded presentation and all repairs. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.11` | `pending` | Read semantic contract364-716 and model1-201:554 fragments/65425 bytes. Preserve exact bounded presentation, crossing admission ownership and all repairs. |
 
 ## Decisions
 
